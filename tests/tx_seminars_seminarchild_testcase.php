@@ -7273,5 +7273,973 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->fixture->isPublished()
 		);
 	}
+
+
+	//////////////////////////////////////////////
+	// Tests concerning canViewRegistrationsList
+	//////////////////////////////////////////////
+
+	/**
+	 * Data provider for testing the canViewRegistrationsList function
+	 * with default access and access only for attendees and managers.
+	 *
+	 * @return array test data for canViewRegistrationsList with each row
+	 *               having the following elements:
+	 *               [expected] boolean: expected value (TRUE or FALSE)
+	 *               [loggedIn] boolean: whether a user is logged in
+	 *               [isRegistered] boolean: whether the logged-in user is
+	 *                              registered for that event
+	 *               [isVip] boolean: whether the logged-in user is a VIP
+	 *                                that event
+	 *               [whichPlugin] string: value for that parameter
+	 *               [registrationsListPID] integer: value for that parameter
+	 *               [registrationsVipListPID] integer: value for that parameter
+	 *
+	 * @see canViewRegistrationsListWithNeedsRegistrationAndDefaultAccess
+	 * @see canViewRegistrationsListWithNeedsRegistrationAndAttendeesManagersAccess
+	 */
+	public function canViewRegistrationsListDataProvider() {
+		return array(
+			'seminarListWithNothingElse' => array(
+				'expected' => FALSE,
+				'loggedIn' => FALSE,
+				'isRegistered' => FALSE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListLoggedInWithListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListIsRegisteredWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListIsRegisteredWithoutListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListIsVipWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 1,
+			),
+			'seminarListIsVipWithoutListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'myEventsIsRegisteredWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'my_events',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 1,
+			),
+			'myEventsIsVipWithListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'my_events',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 1,
+			),
+			'myVipEventsIsRegisteredWithListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'my_vip_events',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 1,
+			),
+			'myVipEventsIsVipWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'my_vip_events',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 1,
+			),
+			'listRegistrationsIsRegistered' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'list_registrations',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'listRegistrationsIsVip' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'list_registrations',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'listVipRegistrationsIsRegistered' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'list_vip_registrations',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'listVipRegistrationsIsVip' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'list_vip_registrations',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+		);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @dataProvider canViewRegistrationsListDataProvider
+	 */
+	public function canViewRegistrationsListWithNeedsRegistrationAndDefaultAccess(
+		$expected, $loggedIn, $isRegistered, $isVip,
+		$whichPlugin, $registrationsListPID, $registrationsVipListPID,
+		$accessToFrontEndRegistrationLists
+	) {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration', 'isUserRegistered', 'isUserVip'),
+			array(),
+			'',
+			FALSE
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('isUserRegistered')
+			->will($this->returnValue($isRegistered));
+		$fixture->expects($this->any())->method('isUserVip')
+			->will($this->returnValue($isVip));
+
+		if ($loggedIn) {
+			$this->testingFramework->createFakeFrontEnd();
+			$this->testingFramework->createAndLoginFrontEndUser();
+		}
+
+		$this->assertEquals(
+			$expected,
+			$fixture->canViewRegistrationsList(
+				$whichPlugin, $registrationsListPID, $registrationsVipListPID
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 *
+	 * @dataProvider canViewRegistrationsListDataProvider
+	 */
+	public function canViewRegistrationsListWithNeedsRegistrationAndAttendeesManagersAccess(
+		$expected, $loggedIn, $isRegistered, $isVip,
+		$whichPlugin, $registrationsListPID, $registrationsVipListPID,
+		$accessToFrontEndRegistrationLists
+	) {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration', 'isUserRegistered', 'isUserVip'),
+			array(),
+			'',
+			FALSE
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('isUserRegistered')
+			->will($this->returnValue($isRegistered));
+		$fixture->expects($this->any())->method('isUserVip')
+			->will($this->returnValue($isVip));
+
+		if ($loggedIn) {
+			$this->testingFramework->createFakeFrontEnd();
+			$this->testingFramework->createAndLoginFrontEndUser();
+		}
+
+		$this->assertEquals(
+			$expected,
+			$fixture->canViewRegistrationsList(
+				$whichPlugin, $registrationsListPID, $registrationsVipListPID,
+				0, 'attendees_and_managers'
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * Data provider for the canViewRegistrationsForCsvExportListDataProvider
+	 * test.
+	 *
+	 * @return array test data for canViewRegistrationsList with each row
+	 *               having the following elements:
+	 *               [expected] boolean: expected value (TRUE or FALSE)
+	 *               [loggedIn] boolean: whether a user is logged in
+	 *               [isVip] boolean: whether the logged-in user is a VIP
+	 *                                that event
+	 *               [allowCsvExportForVips] boolean: that configuration value
+	 *
+	 * @see canViewRegistrationsListForCsvExport
+	 */
+	public function canViewRegistrationsForCsvExportListDataProvider() {
+		return array(
+			'notLoggedInButCsvExportAllowed' => array(
+				'expected' => FALSE,
+				'loggedIn' => FALSE,
+				'isVip' => FALSE,
+				'allowCsvExportForVips' => TRUE,
+			),
+			'loggedInAndCsvExportAllowedButNoVip' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isVip' => FALSE,
+				'allowCsvExportForVips' => TRUE,
+			),
+			'loggedInAndCsvExportAllowedAndVip' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isVip' => TRUE,
+				'allowCsvExportForVips' => TRUE,
+			),
+		);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @dataProvider canViewRegistrationsForCsvExportListDataProvider
+	 */
+	public function canViewRegistrationsListForCsvExport(
+		$expected, $loggedIn, $isVip, $allowCsvExportForVips
+	) {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration', 'isUserVip'),
+			array(),
+			'',
+			FALSE
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('isUserVip')
+			->will($this->returnValue($isVip));
+		$fixture->init(
+			array('allowCsvExportForVips' => $allowCsvExportForVips)
+		);
+
+		if ($loggedIn) {
+			$this->testingFramework->createFakeFrontEnd();
+			$this->testingFramework->createAndLoginFrontEndUser();
+		}
+
+		$this->assertEquals(
+			$expected,
+			$fixture->canViewRegistrationsList('csv_export')
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * Data provider for testing the canViewRegistrationsList function
+	 * with login access.
+	 *
+	 * @return array test data for canViewRegistrationsList with each row
+	 *               having the following elements:
+	 *               [expected] boolean: expected value (TRUE or FALSE)
+	 *               [loggedIn] boolean: whether a user is logged in
+	 *               [isRegistered] boolean: whether the logged-in user is
+	 *                              registered for that event
+	 *               [isVip] boolean: whether the logged-in user is a VIP
+	 *                                that event
+	 *               [whichPlugin] string: value for that parameter
+	 *               [registrationsListPID] integer: value for that parameter
+	 *               [registrationsVipListPID] integer: value for that parameter
+	 *
+	 * @see canViewRegistrationsListWithNeedsRegistrationAndLoginAccess
+	 */
+	public function canViewRegistrationsListDataProviderForLoggedIn() {
+		return array(
+			'seminarListWithNothingElse' => array(
+				'expected' => FALSE,
+				'loggedIn' => FALSE,
+				'isRegistered' => FALSE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListLoggedInWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListIsRegisteredWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListIsRegisteredWithoutListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListIsVipWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListIsVipWithVipListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 1,
+			),
+			'seminarListIsVipWithoutListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'myEventsIsRegisteredWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'my_events',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 1,
+			),
+			'myEventsIsVipWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'my_events',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 1,
+			),
+			'myVipEventsIsRegisteredWithListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'my_vip_events',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 1,
+			),
+			'myVipEventsIsVipWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'my_vip_events',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 1,
+			),
+			'listRegistrationsIsRegistered' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'list_registrations',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'listRegistrationsIsVip' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'list_registrations',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'listVipRegistrationsIsRegistered' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'list_vip_registrations',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'listVipRegistrationsIsVip' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'list_vip_registrations',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+		);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @dataProvider canViewRegistrationsListDataProviderForLoggedIn
+	 */
+	public function canViewRegistrationsListWithNeedsRegistrationAndLoginAccess(
+		$expected, $loggedIn, $isRegistered, $isVip,
+		$whichPlugin, $registrationsListPID, $registrationsVipListPID,
+		$accessToFrontEndRegistrationLists
+	) {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration', 'isUserRegistered', 'isUserVip'),
+			array(),
+			'',
+			FALSE
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('isUserRegistered')
+			->will($this->returnValue($isRegistered));
+		$fixture->expects($this->any())->method('isUserVip')
+			->will($this->returnValue($isVip));
+
+		if ($loggedIn) {
+			$this->testingFramework->createFakeFrontEnd();
+			$this->testingFramework->createAndLoginFrontEndUser();
+		}
+
+		$this->assertEquals(
+			$expected,
+			$fixture->canViewRegistrationsList(
+				$whichPlugin, $registrationsListPID, $registrationsVipListPID,
+				0, 'login'
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * Data provider for testing the canViewRegistrationsList function
+	 * with world access.
+	 *
+	 * @return array test data for canViewRegistrationsList with each row
+	 *               having the following elements:
+	 *               [expected] boolean: expected value (TRUE or FALSE)
+	 *               [loggedIn] boolean: whether a user is logged in
+	 *               [isRegistered] boolean: whether the logged-in user is
+	 *                              registered for that event
+	 *               [isVip] boolean: whether the logged-in user is a VIP
+	 *                                that event
+	 *               [whichPlugin] string: value for that parameter
+	 *               [registrationsListPID] integer: value for that parameter
+	 *               [registrationsVipListPID] integer: value for that parameter
+	 *
+	 * @see canViewRegistrationsListWithNeedsRegistrationAndWorldAccess
+	 */
+	public function canViewRegistrationsListDataProviderForWorld() {
+		return array(
+			'seminarListWithNothingElse' => array(
+				'expected' => FALSE,
+				'loggedIn' => FALSE,
+				'isRegistered' => FALSE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => FALSE,
+				'isRegistered' => FALSE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListLoggedInWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListIsRegisteredWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListIsRegisteredWithoutListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'seminarListIsVipWithListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 1,
+			),
+			'seminarListIsVipWithoutListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'seminar_list',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'myEventsIsRegisteredWithListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'my_events',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 1,
+			),
+			'myEventsIsVipWithVipListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'my_events',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 1,
+			),
+			'myVipEventsIsRegisteredWithVipListPid' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'my_vip_events',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 1,
+			),
+			'myVipEventsIsVipWithVipListPid' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'my_vip_events',
+				'registrationsListPID' => 1,
+				'registrationsVipListPID' => 1,
+			),
+			'listRegistrationsIsRegistered' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'list_registrations',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'listRegistrationsIsVip' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'list_registrations',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'listVipRegistrationsIsRegistered' => array(
+				'expected' => FALSE,
+				'loggedIn' => TRUE,
+				'isRegistered' => TRUE,
+				'isVip' => FALSE,
+				'whichPlugin' => 'list_vip_registrations',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+			'listVipRegistrationsIsVip' => array(
+				'expected' => TRUE,
+				'loggedIn' => TRUE,
+				'isRegistered' => FALSE,
+				'isVip' => TRUE,
+				'whichPlugin' => 'list_vip_registrations',
+				'registrationsListPID' => 0,
+				'registrationsVipListPID' => 0,
+			),
+		);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @dataProvider canViewRegistrationsListDataProviderForWorld
+	 */
+	public function canViewRegistrationsListWithNeedsRegistrationAndWorldAccess(
+		$expected, $loggedIn, $isRegistered, $isVip,
+		$whichPlugin, $registrationsListPID, $registrationsVipListPID,
+		$accessToFrontEndRegistrationLists
+	) {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration', 'isUserRegistered', 'isUserVip'),
+			array(),
+			'',
+			FALSE
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('isUserRegistered')
+			->will($this->returnValue($isRegistered));
+		$fixture->expects($this->any())->method('isUserVip')
+			->will($this->returnValue($isVip));
+
+		if ($loggedIn) {
+			$this->testingFramework->createFakeFrontEnd();
+			$this->testingFramework->createAndLoginFrontEndUser();
+		}
+
+		$this->assertEquals(
+			$expected,
+			$fixture->canViewRegistrationsList(
+				$whichPlugin, $registrationsListPID, $registrationsVipListPID,
+				0, 'world'
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+
+	/////////////////////////////////////////////////////
+	// Tests concerning canViewRegistrationsListMessage
+	/////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function canViewRegistrationsListMessageWithoutNeededRegistrationReturnsNoRegistrationMessage() {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration')
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(FALSE));
+		$fixture->init();
+
+		$this->assertEquals(
+			$fixture->translate('message_noRegistrationNecessary'),
+			$fixture->canViewRegistrationsListMessage('list_registrations')
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function canViewRegistrationsListMessageForListAndNoLoginAndAttendeesAccessReturnsPleaseLoginMessage() {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration')
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->init();
+
+		$this->assertEquals(
+			$fixture->translate('message_notLoggedIn'),
+			$fixture->canViewRegistrationsListMessage(
+				'list_registrations', 'attendees_and_managers'
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function canViewRegistrationsListMessageForListAndNoLoginAndLoginAccessReturnsPleaseLoginMessage() {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration')
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->init();
+
+		$this->assertEquals(
+			$fixture->translate('message_notLoggedIn'),
+			$fixture->canViewRegistrationsListMessage(
+				'list_registrations', 'login'
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function canViewRegistrationsListMessageForListAndNoLoginAndWorldAccessReturnsEmptyString() {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration')
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->init();
+
+		$this->assertEquals(
+			'',
+			$fixture->canViewRegistrationsListMessage(
+				'list_registrations', 'world'
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * Data provider that returns all possible access level codes for the
+	 * FE registration lists.
+	 *
+	 * @return array the possible access levels, will not be empty
+	 *
+	 * @see canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage
+	 */
+	public function registrationListAccessLevelsDataProvider() {
+		return array(
+			'attendeesAndManagers' => array('attendees_and_managers'),
+			'login' => array('login'),
+			'world' => array('world'),
+		);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @dataProvider registrationListAccessLevelsDataProvider
+	 */
+	public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage(
+		$accessLevel
+	) {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration')
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->init();
+
+		$this->assertEquals(
+			$fixture->translate('message_notLoggedIn'),
+			$fixture->canViewRegistrationsListMessage(
+				'list_vip_registrations', $accessLevel
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * Data provider that returns all possible parameter combinations for
+	 * canViewRegistrationsList as called from canViewRegistrationsListMessage.
+	 *
+	 * @return array the possible parameter combinations, will not be empty
+	 *
+	 * @see canViewRegistrationsListMessageWithLoginRoutesParameters
+	 */
+	public function registrationListParametersDataProvider() {
+		return array(
+			'attendeesAndManagers' => array(
+				'list_registrations', 'attendees_and_managers'
+			),
+			'login' => array(
+				'list_registrations', 'login'
+			),
+			'world' => array(
+				'list_registrations', 'world'
+			),
+			'attendeesAndManagersVip' => array(
+				'list_vip_registrations', 'attendees_and_managers'
+			),
+			'loginVip' => array(
+				'list_vip_registrations', 'login'
+			),
+			'worldVip' => array(
+				'list_vip_registrations', 'world'
+			),
+		);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @dataProvider registrationListParametersDataProvider
+	 */
+	public function canViewRegistrationsListMessageWithLoginRoutesParameters(
+		$whichPlugin, $accessLevel
+	) {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration', 'canViewRegistrationsList')
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->once())->method('canViewRegistrationsList')
+			->with($whichPlugin, $accessLevel)
+			->will($this->returnValue(TRUE));
+
+		$this->testingFramework->createFakeFrontEnd();
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$fixture->canViewRegistrationsListMessage($whichPlugin, $accessLevel);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function canViewRegistrationsListMessageWithLoginAndAccessGrantedReturnsEmptyString() {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration', 'canViewRegistrationsList')
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('canViewRegistrationsList')
+			->will($this->returnValue(TRUE));
+
+		$this->testingFramework->createFakeFrontEnd();
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->assertEquals(
+			'',
+			$fixture->canViewRegistrationsListMessage(
+				'list_registrations', 'world'
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function canViewRegistrationsListMessageWithoutLoginAndAccessGrantedReturnsEmptyString() {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration', 'canViewRegistrationsList')
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('canViewRegistrationsList')
+			->will($this->returnValue(TRUE));
+
+		$this->assertEquals(
+			'',
+			$fixture->canViewRegistrationsListMessage(
+				'list_registrations', 'world'
+			)
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function canViewRegistrationsListMessageWithLoginAndAccessDeniedReturnsAccessDeniedMessage() {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array('needsRegistration', 'canViewRegistrationsList')
+		);
+		$fixture->expects($this->any())->method('needsRegistration')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('canViewRegistrationsList')
+			->will($this->returnValue(FALSE));
+
+		$this->testingFramework->createFakeFrontEnd();
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$this->assertEquals(
+			$fixture->translate('message_accessDenied'),
+			$fixture->canViewRegistrationsListMessage(
+				'list_registrations', 'world'
+			)
+		);
+
+		$fixture->__destruct();
+	}
 }
 ?>

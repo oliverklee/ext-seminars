@@ -358,6 +358,10 @@ plugin.tx_seminars_pi1 {
 	# the maximum width of the owner picture in the single view
 	ownerPictureMaxWidth = 250
 
+	# who is allowed to view the list of registrations on the front end:
+	# "attendees_and_managers", "login" or "world"
+	accessToFrontEndRegistrationLists = attendees_and_managers
+
 	# whether to allow the CSV export in the "my VIP events" view
 	allowCsvExportOfRegistrationsInMyVipEventsView = 0
 

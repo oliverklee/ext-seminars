@@ -250,6 +250,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			$this->checkRegisterPid();
 			$this->checkLoginPid();
 		}
+		$this->checkAccessToFrontEndRegistrationLists();
 		$this->checkRegistrationsListPidOptional();
 		$this->checkRegistrationsVipListPidOptional();
 		$this->checkDefaultEventVipsFeGroupID();
@@ -957,6 +958,24 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				.'list view if it is the same as the previous item\'s. '
 				.'If this value is incorrect, the date might be omited '
 				.'although this is not intended (or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * accessToFrontEndRegistrationLists.
+	 */
+	private function checkAccessToFrontEndRegistrationLists() {
+		$this->checkIfSingleInSetNotEmpty(
+			'accessToFrontEndRegistrationLists',
+			FALSE,
+			'',
+			'This value specifies who is able to see the registered persons  ' .
+				'an event in the front end. ' .
+				'If this value is incorrect, persons may access the ' .
+				'registration lists although they should not be allowed to ' .
+				'(or vice versa).',
+			array('attendees_and_managers', 'login', 'world')
 		);
 	}
 

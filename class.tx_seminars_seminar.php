@@ -2585,69 +2585,258 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * c) the user is allowed to export the list of registrations as CSV
 	 *    ($whichPlugin = csv_export)
 	 *
-	 * @param string the 'what_to_display' value, specifying the type of
-	 *               plugin: (seminar_list|my_events|my_vip_events
-	 *               |list_registrations|list_vip_registrations)
-	 * @param integer the value of the registrationsListPID parameter
-	 *                (only relevant for (seminar_list|my_events|my_vip_events))
-	 * @param integer the value of the registrationsVipListPID parameter
-	 *                (only relevant for (seminar_list|my_events|my_vip_events))
-	 * @param integer the value of the defaultEventVipsGroupID parameter
-	 *                (only relevant for (list_vip_registration|my_vip_events))
+	 * @param string $whichPlugin
+	 *        the type of plugin: seminar_list, my_events, my_vip_events,
+	 *        list_registrations or list_vip_registrations
+	 * @param integer $registrationsListPID
+	 *        the value of the registrationsListPID parameter
+	 *        (only relevant for (seminar_list|my_events|my_vip_events))
+	 * @param integer $registrationsVipListPID
+	 *        the value of the registrationsVipListPID parameter
+	 *        (only relevant for (seminar_list|my_events|my_vip_events))
+	 * @param integer $defaultEventVipsFeGroupID
+	 *        the value of the defaultEventVipsGroupID parameter
+	 *        (only relevant for (list_vip_registration|my_vip_events))
+	 * @param string $accessLevel
+	 *        who is allowed to view the front-end registration lists:
+	 *        "attendees_and_managers", "login" or "world"
 	 *
-	 * @return boolean true if a FE user is logged in and the user may view
+	 * @return boolean TRUE if a FE user is logged in and the user may view
 	 *                 the registrations list or may see a link to that
-	 *                 page, false otherwise
+	 *                 page, FALSE otherwise
 	 */
 	public function canViewRegistrationsList(
 		$whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0,
+		$defaultEventVipsFeGroupID = 0, $accessLevel = 'attendees_and_managers'
+	) {
+		if (!$this->needsRegistration()) {
+			return FALSE;
+		}
+
+		switch ($accessLevel) {
+			case 'world':
+				$result = $this->canViewRegistrationsListForWorldAccess(
+					$whichPlugin, $registrationsListPID, $registrationsVipListPID,
+					$defaultEventVipsFeGroupID
+				);
+				break;
+			case 'login':
+				$result = $this->canViewRegistrationsListForLoginAccess(
+					$whichPlugin, $registrationsListPID, $registrationsVipListPID,
+					$defaultEventVipsFeGroupID
+				);
+				break;
+			case 'attendees_and_managers':
+				// The fall-through is intended.
+			default:
+				$result = $this->canViewRegistrationsListForAttendeesAndManagersAccess(
+					$whichPlugin, $registrationsListPID, $registrationsVipListPID,
+					$defaultEventVipsFeGroupID
+				);
+				break;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether a FE user is logged in and whether he/she may view this
+	 * seminar's registrations list or see a link to it.
+	 *
+	 * This function assumes that the access level for FE registration lists is
+	 * "attendees and managers".
+	 *
+	 * @param string $whichPlugin
+	 *        the type of plugin: seminar_list, my_events, my_vip_events,
+	 *        list_registrations or list_vip_registrations
+	 * @param integer $registrationsListPID
+	 *        the value of the registrationsListPID parameter
+	 *        (only relevant for (seminar_list|my_events|my_vip_events))
+	 * @param integer $registrationsVipListPID
+	 *        the value of the registrationsVipListPID parameter
+	 *        (only relevant for (seminar_list|my_events|my_vip_events))
+	 * @param integer $defaultEventVipsFeGroupID
+	 *        the value of the defaultEventVipsGroupID parameter
+	 *        (only relevant for (list_vip_registration|my_vip_events))
+	 *
+	 * @return boolean TRUE if a FE user is logged in and the user may view
+	 *                 the registrations list or may see a link to that
+	 *                 page, FALSE otherwise
+	 */
+	protected function canViewRegistrationsListForAttendeesAndManagersAccess(
+		$whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0,
 		$defaultEventVipsFeGroupID = 0
 	) {
-		$result = false;
+		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+			return FALSE;
+		}
 
-		if ($this->needsRegistration()
-			&& tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
-		) {
-			$currentUserUid = $this->getFeUserUid();
-			switch ($whichPlugin) {
-				case 'seminar_list':
-					// In the standard list view, we could have any kind of link.
-					$result = $this->canViewRegistrationsList(
-							'my_events',
-							$registrationsListPID)
-						|| $this->canViewRegistrationsList(
-							'my_vip_events',
-							0,
-							$registrationsVipListPID,
-							$defaultEventVipsFeGroupID);
-					break;
-				case 'my_events':
-					$result = $this->isUserRegistered($currentUserUid)
-						&& ((boolean) $registrationsListPID);
-					break;
-				case 'my_vip_events':
-					$result = $this->isUserVip(
-							$currentUserUid,
-							$defaultEventVipsFeGroupID)
-						&& ((boolean) $registrationsVipListPID);
-					break;
-				case 'list_registrations':
-					$result = $this->isUserRegistered($currentUserUid);
-					break;
-				case 'list_vip_registrations':
-					$result = $this->isUserVip(
-						$currentUserUid, $defaultEventVipsFeGroupID
-					);
-					break;
-				case 'csv_export':
-					$result = $this->isUserVip(
-						$currentUserUid, $defaultEventVipsFeGroupID
-					) && $this->getConfValueBoolean('allowCsvExportForVips');
-					break;
-				default:
-					// For all other plugins, we don't grant access.
-					break;
-			}
+		$hasListPid = ($registrationsListPID > 0);
+		$hasVipListPid = ($registrationsVipListPID > 0);
+
+		$currentUserUid = $this->getFeUserUid();
+
+		switch ($whichPlugin) {
+			case 'seminar_list':
+				// In the standard list view, we could have any kind of link.
+				$result = $this->canViewRegistrationsList(
+						'my_events',
+						$registrationsListPID)
+					|| $this->canViewRegistrationsList(
+						'my_vip_events',
+						0,
+						$registrationsVipListPID,
+						$defaultEventVipsFeGroupID);
+				break;
+			case 'my_events':
+				$result = $this->isUserRegistered($currentUserUid)
+					&& $hasListPid;
+				break;
+			case 'my_vip_events':
+				$result = $this->isUserVip(
+						$currentUserUid,
+						$defaultEventVipsFeGroupID)
+					&& $hasVipListPid;
+				break;
+			case 'list_registrations':
+				$result = $this->isUserRegistered($currentUserUid);
+				break;
+			case 'list_vip_registrations':
+				$result = $this->isUserVip(
+					$currentUserUid, $defaultEventVipsFeGroupID
+				);
+				break;
+			case 'csv_export':
+				$result = $this->isUserVip(
+					$currentUserUid, $defaultEventVipsFeGroupID
+				) && $this->getConfValueBoolean('allowCsvExportForVips');
+				break;
+			default:
+				$result = FALSE;
+				break;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether a FE user is logged in and whether he/she may view this
+	 * seminar's registrations list or see a link to it.
+	 *
+	 * This function assumes that the access level for FE registration lists is
+	 * "login".
+	 *
+	 * @param string $whichPlugin
+	 *        the type of plugin: seminar_list, my_events, my_vip_events,
+	 *        list_registrations or list_vip_registrations
+	 * @param integer $registrationsListPID
+	 *        the value of the registrationsListPID parameter
+	 *        (only relevant for (seminar_list|my_events|my_vip_events))
+	 * @param integer $registrationsVipListPID
+	 *        the value of the registrationsVipListPID parameter
+	 *        (only relevant for (seminar_list|my_events|my_vip_events))
+	 * @param integer $defaultEventVipsFeGroupID
+	 *        the value of the defaultEventVipsGroupID parameter
+	 *        (only relevant for (list_vip_registration|my_vip_events))
+	 *
+	 * @return boolean TRUE if a FE user is logged in and the user may view
+	 *                 the registrations list or may see a link to that
+	 *                 page, FALSE otherwise
+	 */
+	protected function canViewRegistrationsListForLoginAccess(
+		$whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0,
+		$defaultEventVipsFeGroupID = 0
+	) {
+		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+			return FALSE;
+		}
+
+		$hasListPid = ($registrationsListPID > 0);
+		$hasVipListPid = ($registrationsVipListPID > 0);
+
+		$currentUserUid = $this->getFeUserUid();
+		switch ($whichPlugin) {
+			case 'csv_export':
+				$result = $this->isUserVip(
+					$currentUserUid, $defaultEventVipsFeGroupID
+				) && $this->getConfValueBoolean('allowCsvExportForVips');
+				break;
+			case 'my_vip_events':
+				$result = $this->isUserVip(
+						$currentUserUid,
+						$defaultEventVipsFeGroupID)
+					&& $hasVipListPid;
+				break;
+			case 'list_vip_registrations':
+				$result = $this->isUserVip(
+					$currentUserUid, $defaultEventVipsFeGroupID
+				);
+				break;
+			case 'list_registrations':
+				$result = TRUE;
+				break;
+			default:
+				$result = $hasListPid;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether a FE user is logged in and whether he/she may view this
+	 * seminar's registrations list or see a link to it.
+	 *
+	 * This function assumes that the access level for FE registration lists is
+	 * "world".
+	 *
+	 * @param string $whichPlugin
+	 *        the type of plugin: seminar_list, my_events, my_vip_events,
+	 *        list_registrations or list_vip_registrations
+	 * @param integer $registrationsListPID
+	 *        the value of the registrationsListPID parameter
+	 *        (only relevant for (seminar_list|my_events|my_vip_events))
+	 * @param integer $registrationsVipListPID
+	 *        the value of the registrationsVipListPID parameter
+	 *        (only relevant for (seminar_list|my_events|my_vip_events))
+	 * @param integer $defaultEventVipsFeGroupID
+	 *        the value of the defaultEventVipsGroupID parameter
+	 *        (only relevant for (list_vip_registration|my_vip_events))
+	 *
+	 * @return boolean TRUE if a FE user is logged in and the user may view
+	 *                 the registrations list or may see a link to that
+	 *                 page, FALSE otherwise
+	 */
+	protected function canViewRegistrationsListForWorldAccess(
+		$whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0,
+		$defaultEventVipsFeGroupID = 0
+	) {
+		$isLoggedIn = tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
+
+		$hasListPid = ($registrationsListPID > 0);
+		$hasVipListPid = ($registrationsVipListPID > 0);
+
+		switch ($whichPlugin) {
+			case 'csv_export':
+				$result = $isLoggedIn && $this->isUserVip(
+					$this->getFeUserUid(), $defaultEventVipsFeGroupID
+				) && $this->getConfValueBoolean('allowCsvExportForVips');
+				break;
+			case 'my_vip_events':
+				$result = $isLoggedIn && $this->isUserVip(
+						$this->getFeUserUid(),
+						$defaultEventVipsFeGroupID)
+					&& $hasVipListPid;
+				break;
+			case 'list_vip_registrations':
+				$result = $isLoggedIn && $this->isUserVip(
+					$this->getFeUserUid(), $defaultEventVipsFeGroupID
+				);
+				break;
+			case 'list_registrations':
+				$result = TRUE;
+				break;
+			default:
+				$result = $hasListPid;
 		}
 
 		return $result;
@@ -2659,20 +2848,28 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * This function is intended to be used from the registrations list,
 	 * NOT to check whether a link to that list should be shown.
 	 *
-	 * @param string the 'what_to_display' value, specifying the type
-	 *               of plugin: (list_registrations|list_vip_registrations)
+	 * @param string $whichPlugin
+	 *        the type of plugin: list_registrations or list_vip_registrations
+	 * @param string $accessLevel
+	 *        who is allowed to view the front-end registration lists:
+	 *        "attendees_and_managers", "login" or "world"
 	 *
-	 * @return string empty string if everything is OK, otherwise a
-	 *                localized error message
+	 * @return string an empty string if everything is OK, a localized error
+	 *                error message otherwise
 	 */
-	public function canViewRegistrationsListMessage($whichPlugin) {
+	public function canViewRegistrationsListMessage(
+		$whichPlugin, $accessLevel = 'attendees_and_managers'
+	) {
 		$result = '';
 
 		if (!$this->needsRegistration()) {
 			$result = $this->translate('message_noRegistrationNecessary');
-		} elseif (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+		} elseif (
+			($accessLevel != 'world')
+				&& !tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
+		) {
 			$result = $this->translate('message_notLoggedIn');
-		} elseif (!$this->canViewRegistrationsList($whichPlugin)) {
+		} elseif (!$this->canViewRegistrationsList($whichPlugin, $accessLevel)) {
 			$result = $this->translate('message_accessDenied');
 		}
 
