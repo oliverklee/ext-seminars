@@ -1,4 +1,5 @@
 0.9.2 (currently working on)
+- [#3458] Fix: Unregistration is not possible if allowRegistrationForEventsWithoutDate = 1
 - [#3830] Fix: Number of vacancies is blank in the list view and single view for unlimited vacancies
 - [#3825] Fix: ###EVENT_TYPE###: ###TITLE###" are not correctly replaced in HTML confirmation mail for attendes
 - [#3831] Fix: Topic list is empty if a category is selected in the flexforms
