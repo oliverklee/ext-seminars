@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#3830] Fix: Number of vacancies is blank in the list view and single view for unlimited vacancies
 - [#3825] Fix: ###EVENT_TYPE###: ###TITLE###" are not correctly replaced in HTML confirmation mail for attendes
 - [#3831] Fix: Topic list is empty if a category is selected in the flexforms
 - [#3820] Feature: Make it configurable which place fields in the FE editor are required
