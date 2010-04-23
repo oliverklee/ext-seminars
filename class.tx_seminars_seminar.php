@@ -3991,35 +3991,36 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Returns true if unregistration is possible. That means the unregistration
-	 * deadline isn't already reached.
+	 * Returns TRUE if unregistration is possible. That means the unregistration
+	 * deadline hasn't been reached yet.
+	 *
 	 * If the unregistration deadline is not set globally via TypoScript and not
 	 * set in the current event record, the unregistration will not be possible
-	 * and this method returns false.
+	 * and this method returns FALSE.
 	 *
-	 * @return boolean true if unregistration is possible, false otherwise
+	 * @return boolean TRUE if unregistration is possible, FALSE otherwise
 	 */
 	public function isUnregistrationPossible() {
-		$result = false;
-
-		if ($this->needsRegistration()) {
-			if ($this->getUnregistrationDeadlineFromModelAndConfiguration()
-				> $GLOBALS['SIM_EXEC_TIME']
-			) {
-				$result = true;
-			}
-
-			if (!$this->getConfValueBoolean(
-				'allowUnregistrationWithEmptyWaitingList'
-			)) {
-				// We also need to check whether we have a waiting list and
-				// whether there is at least one person on it.
-				$result = $result && $this->hasRegistrationQueue()
-					&& $this->hasAttendancesOnRegistrationQueue();
-			}
+		if (!$this->needsRegistration()) {
+			return FALSE;
 		}
 
-		return $result;
+		$canUnregisterByQueue = $this->getConfValueBoolean(
+			'allowUnregistrationWithEmptyWaitingList'
+		) || (
+			$this->hasRegistrationQueue()
+				&& $this->hasAttendancesOnRegistrationQueue()
+		);
+
+		$deadline = $this->getUnregistrationDeadlineFromModelAndConfiguration();
+		if ($this->hasBeginDate() || ($deadline != 0)) {
+			$canUnregisterByDate = ($GLOBALS['SIM_EXEC_TIME'] < $deadline);
+		} else {
+			$canUnregisterByDate =
+				($this->getUnregistrationDeadlineFromConfiguration() != 0);
+		}
+
+		return $canUnregisterByQueue && $canUnregisterByDate;
 	}
 
 	/**
