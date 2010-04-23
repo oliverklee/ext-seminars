@@ -1782,20 +1782,23 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * Gets the number of vacancies for this seminar. If there are at least as
-	 * many vacancies as configured as "showVacanciesThreshold", a localized
-	 * string "enough" is returned instead. If there are no vacancies, a
-	 * localized string "fully booked" is returned instead of 0.
+	 * many vacancies as configured as "showVacanciesThreshold" or this event
+	 * has an unlimited number of vacancies, a localized string "enough" is
+	 * returned instead. If there are no vacancies, a localized string
+	 * "fully booked" is returned.
 	 *
-	 * If this seminar does not require a registration, is canceled or has
-	 * unlimited vacancies, an empty string is returned.
+	 * If this seminar does not require a registration or has been canceled, an
+	 * empty string is returned.
 	 *
 	 * @return string string showing the number of vacancies, may be empty
 	 */
 	public function getVacanciesString() {
-		if ($this->isCanceled() || !$this->needsRegistration()
-			|| $this->hasUnlimitedVacancies()
-		) {
+		if ($this->isCanceled() || !$this->needsRegistration()) {
 			return '';
+		}
+
+		if ($this->hasUnlimitedVacancies()) {
+			return $this->translate('message_enough');
 		}
 
 		$vacancies = $this->getVacancies();

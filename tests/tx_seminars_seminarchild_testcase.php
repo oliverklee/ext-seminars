@@ -5051,18 +5051,52 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	// Tests concerning getVacanciesString
 	////////////////////////////////////////
 
-	public function testGetVacanciesStringForNonZeroVacanciesBelowThresholdReturnsNumberOfVacancies() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesStringForCanceledEventWithVacanciesReturnsEmptyString() {
+		$this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
+		$this->fixture->setAttendancesMax(5);
+		$this->fixture->setNumberOfAttendances(0);
+		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CANCELED);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getVacanciesString()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getVacanciesStringWithoutRegistrationNeededReturnsEmptyString() {
+		$this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
+		$this->fixture->setNeedsRegistration(FALSE);
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getVacanciesString()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getVacanciesStringForNonZeroVacanciesBelowThresholdReturnsNumberOfVacancies() {
 		$this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
 		$this->fixture->setAttendancesMax(5);
 		$this->fixture->setNumberOfAttendances(0);
 
 		$this->assertEquals(
 			'5',
-		$this->fixture->getVacanciesString()
+			$this->fixture->getVacanciesString()
 		);
 	}
 
-	public function testGetVacanciesStringForNoVancanciesReturnsFullyBookedString() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesStringForNoVancanciesReturnsFullyBooked() {
 		$this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
 		$this->fixture->setAttendancesMax(5);
 		$this->fixture->setNumberOfAttendances(5);
@@ -5073,7 +5107,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetVacanciesStringForVacanciesGreaterThanThresholdReturnsEnoughString() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesStringForVacanciesGreaterThanThresholdReturnsEnough() {
 		$this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
 		$this->fixture->setAttendancesMax(42);
 		$this->fixture->setNumberOfAttendances(0);
@@ -5084,7 +5121,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetVacanciesStringForVacanciesEqualToThresholdReturnsEnoughString() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesStringForVacanciesEqualToThresholdReturnsEnough() {
 		$this->fixture->setConfigurationValue('showVacanciesThreshold', 42);
 		$this->fixture->setAttendancesMax(42);
 		$this->fixture->setNumberOfAttendances(0);
@@ -5095,22 +5135,28 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesString_ForUnlimitedVacanciesAndZeroAttendances_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesStringForUnlimitedVacanciesAndZeroRegistrationsReturnsEnough() {
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setNumberOfAttendances(0);
 
 		$this->assertEquals(
-			'',
+			$this->fixture->translate('message_enough'),
 			$this->fixture->getVacanciesString()
 		);
 	}
 
-	public function test_GetVacanciesString_ForUnlimitedVacanciesAndOneAttendance_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesStringForUnlimitedVacanciesAndOneRegistrationReturnsEnough() {
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setNumberOfAttendances(1);
 
 		$this->assertEquals(
-			'',
+			$this->fixture->translate('message_enough'),
 			$this->fixture->getVacanciesString()
 		);
 	}
