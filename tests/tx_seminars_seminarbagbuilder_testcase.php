@@ -151,7 +151,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	// Tests for limiting the bag to events in certain categories.
 	////////////////////////////////////////////////////////////////
 
-	public function testSkippingLimitToCategoriesResultsInAllEvents() {
+	/**
+	 * @test
+	 */
+	public function skippingLimitToCategoriesResultsInAllEvents() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
@@ -177,7 +180,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToEmptyCategoryUidResultsInAllEvents() {
+	/**
+	 * @test
+	 */
+	public function limitToEmptyCategoryUidResultsInAllEvents() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
@@ -205,7 +211,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToEmptyCategoryAfterLimitToNotEmptyCategoriesUidResultsInAllEvents() {
+	/**
+	 * @test
+	 */
+	public function limitToEmptyCategoryAfterLimitToNonEmptyCategoriesUidResultsInAllEvents() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
@@ -234,7 +243,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToCategoriesCanResultInOneEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToCategoriesCanResultInOneEvent() {
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
@@ -257,7 +269,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToCategoriesCanResultInTwoEvents() {
+	/**
+	 * @test
+	 */
+	public function limitToCategoriesCanResultInTwoEvents() {
 		$categoryUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES
 		);
@@ -289,7 +304,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToCategoriesWillExcludeUnassignedEvents() {
+	/**
+	 * @test
+	 */
+	public function limitToCategoriesExcludesUnassignedEvents() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
@@ -321,7 +339,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToCategoriesWillExcludeEventsOfOtherCategories() {
+	/**
+	 * @test
+	 */
+	public function limitToCategoriesExcludesEventsOfOtherCategories() {
 		$eventUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
@@ -359,7 +380,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToCategoriesResultsInAnEmptyBagIfThereAreNoMatches() {
+	/**
+	 * @test
+	 */
+	public function limitToCategoriesForNoMatchesResultsInEmptyBag() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
@@ -390,7 +414,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToCategoriesIgnoresTopicRecords() {
+	/**
+	 * @test
+	 */
+	public function limitToCategoriesCanFindTopicRecords() {
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
@@ -405,14 +432,18 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->limitToCategories($categoryUid);
 		$bag = $this->fixture->build();
 
-		$this->assertTrue(
-			$bag->isEmpty()
+		$this->assertEquals(
+			1,
+			$bag->count()
 		);
 
 		$bag->__destruct();
 	}
 
-	public function testLimitToCategoriesFindsDateRecordForTopic() {
+	/**
+	 * @test
+	 */
+	public function limitToCategoriesForMatchingTopicFindsDateRecordAndTopic() {
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
@@ -435,18 +466,25 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
-			1,
+			2,
 			$bag->count()
 		);
-		$this->assertEquals(
-			$dateUid,
-			$bag->current()->getUid()
+
+		$matchingUids = explode(',', $bag->getUids());
+		$this->assertTrue(
+			in_array($topicUid, $matchingUids)
+		);
+		$this->assertTrue(
+			in_array($dateUid, $matchingUids)
 		);
 
 		$bag->__destruct();
 	}
 
-	public function testLimitToCategoriesFindsDateRecordForSingle() {
+	/**
+	 * @test
+	 */
+	public function limitToCategoriesFindsDateRecordForSingle() {
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
@@ -476,7 +514,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToCategoriesIgnoresTopicOfDateRecord() {
+	/**
+	 * @test
+	 */
+	public function limitToCategoriesIgnoresTopicOfDateRecord() {
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
@@ -512,7 +553,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToCategoriesCanFindEventsFromMultipleCategories() {
+	/**
+	 * @test
+	 */
+	public function limitToCategoriesCanFindEventsFromMultipleCategories() {
 		$categoryUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES
 		);

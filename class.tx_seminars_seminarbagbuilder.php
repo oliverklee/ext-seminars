@@ -110,9 +110,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events from any of the categories with the UIDs
 	 * provided as the parameter $categoryUids.
 	 *
-	 * @param string comma-separated list of UIDs of the categories which
-	 *               the bag should be limited to, set to an empty string
-	 *               for no limitation
+	 * @param string $categoryUids
+	 *        comma-separated list of UIDs of the categories which the bag
+	 *        should be limited to, set to an empty string for no limitation
 	 */
 	public function limitToCategories($categoryUids) {
 		if ($categoryUids == '') {
@@ -120,25 +120,26 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			return;
 		}
 
-		$this->whereClauseParts['categories']
-			= '(' .
-			'(object_type=' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
-			'EXISTS (SELECT * FROM ' .
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . ' WHERE ' .
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . '.uid_local=' .
-			SEMINARS_TABLE_SEMINARS . '.uid AND ' .
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . '.uid_foreign IN(' . $categoryUids .
-			')' .
-			'))' .
+		$directMatchUids = tx_oelib_db::selectColumnForMultiple(
+			'uid_local',
+			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM,
+			'uid_foreign IN(' . $categoryUids . ')'
+		);
+		if (empty($directMatchUids)) {
+			$this->whereClauseParts['categories'] = '(1 = 0)';
+			return;
+		}
+
+		$uidMatcher = ' IN(' .
+			implode(',', $directMatchUids) . ')';
+
+		$this->whereClauseParts['categories'] =
+			'(' .
+			'(object_type != ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+			SEMINARS_TABLE_SEMINARS . '.uid' . $uidMatcher . ')' .
 			' OR ' .
-			'(object_type=' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
-			'EXISTS (SELECT * FROM ' .
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . ' WHERE ' .
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . '.uid_local=' .
-			SEMINARS_TABLE_SEMINARS . '.topic AND ' .
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM . '.uid_foreign IN(' . $categoryUids .
-			')' .
-			'))' .
+			'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+			SEMINARS_TABLE_SEMINARS . '.topic' . $uidMatcher . ')' .
 			')';
 	}
 
