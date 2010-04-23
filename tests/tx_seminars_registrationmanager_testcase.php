@@ -2132,6 +2132,51 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
+	public function notifyAttendeeForTextMailSetHasNoUnreplacedMarkers() {
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertNotContains(
+			'###',
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForHtmlMailHasNoUnreplacedMarkers() {
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setAsInteger(
+				'eMailFormatForAttendees',
+				tx_seminars_registrationmanager::SEND_HTML_MAIL
+			);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+
+		$this->assertNotContains(
+			'###',
+			tx_oelib_mailerFactory::getInstance()->getMailer()
+				->getLastBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function notifyAttendeeForMailSetToUserModeAndUserSetToHtmlMailsHasHtmlBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', true);
 		tx_oelib_configurationProxy::getInstance('seminars')
