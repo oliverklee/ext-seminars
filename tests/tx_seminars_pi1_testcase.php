@@ -7279,5 +7279,220 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$fixture->__destruct();
 	}
+
+
+	////////////////////////////////////////////////////////////
+	// Tests concerning hideListRegistrationsColumnIfNecessary
+	////////////////////////////////////////////////////////////
+
+	/**
+	 * Data provider for the tests concerning
+	 * hideListRegistrationsColumnIfNecessary.
+	 *
+	 * @return array nested array with the following inner keys:
+	 *               [getsHidden] boolean: whether the registration column is
+	 *                            expected to be hidden
+	 *               [whatToDisplay] string: the value for what_to_display
+	 *               [listPid] integer: the PID of the registration list page
+	 *               [vipListPid] integer: the PID of the VIP registration list
+	 *                            page
+	 */
+	public function hideListRegistrationsColumnIfNecessaryDataProvider() {
+		return array(
+			'notHiddenForListForBothPidsSet' => array(
+				'getsHidden' => FALSE,
+				'whatToDisplay' => 'seminar_list',
+				'listPid' => 1,
+				'vipListPid' => 1,
+			),
+			'hiddenForListForNoPidsSet' => array(
+				'getsHidden' => TRUE,
+				'whatToDisplay' => 'seminar_list',
+				'listPid' => 0,
+				'vipListPid' => 0,
+			),
+			'notHiddenForListForListPidSet' => array(
+				'getsHidden' => FALSE,
+				'whatToDisplay' => 'seminar_list',
+				'listPid' => 1,
+				'vipListPid' => 0,
+			),
+			'notHiddenForListForVipListPidSet' => array(
+				'getsHidden' => FALSE,
+				'whatToDisplay' => 'seminar_list',
+				'listPid' => 0,
+				'vipListPid' => 1,
+			),
+			'hiddenForOtherDatesForAndBothPidsSet' => array(
+				'getsHidden' => TRUE,
+				'whatToDisplay' => 'other_dates',
+				'listPid' => 1,
+				'vipListPid' => 1,
+			),
+			'hiddenForEventsNextDayForBothPidsSet' => array(
+				'getsHidden' => TRUE,
+				'whatToDisplay' => 'events_next_day',
+				'listPid' => 1,
+				'vipListPid' => 1,
+			),
+			'notHiddenForMyEventsForBothPidsSet' => array(
+				'getsHidden' => FALSE,
+				'whatToDisplay' => 'my_events',
+				'listPid' => 1,
+				'vipListPid' => 1,
+			),
+			'hiddenForMyEventsForNoPidsSet' => array(
+				'getsHidden' => TRUE,
+				'whatToDisplay' => 'my_events',
+				'listPid' => 0,
+				'vipListPid' => 0,
+			),
+			'notHiddenForMyEventsForListPidSet' => array(
+				'getsHidden' => FALSE,
+				'whatToDisplay' => 'my_events',
+				'listPid' => 1,
+				'vipListPid' => 0,
+			),
+			'hiddenForMyEventsForVipListPidSet' => array(
+				'getsHidden' => TRUE,
+				'whatToDisplay' => 'my_events',
+				'listPid' => 0,
+				'vipListPid' => 1,
+			),
+			'notHiddenForMyVipEventsForBothPidsSet' => array(
+				'getsHidden' => FALSE,
+				'whatToDisplay' => 'my_vip_events',
+				'listPid' => 1,
+				'vipListPid' => 1,
+			),
+			'hiddenForMyVipEventsForNoPidsSet' => array(
+				'getsHidden' => TRUE,
+				'whatToDisplay' => 'my_vip_events',
+				'listPid' => 0,
+				'vipListPid' => 0,
+			),
+			'hiddenForMyVipEventsForListPidSet' => array(
+				'getsHidden' => TRUE,
+				'whatToDisplay' => 'my_vip_events',
+				'listPid' => 1,
+				'vipListPid' => 0,
+			),
+			'notHiddenForMyVipEventsForVipListPidSet' => array(
+				'getsHidden' => FALSE,
+				'whatToDisplay' => 'my_vip_events',
+				'listPid' => 0,
+				'vipListPid' => 1,
+			),
+		);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @dataProvider hideListRegistrationsColumnIfNecessaryDataProvider
+	 *
+	 * @param boolean $getsHidden
+	 * @param string $whatToDisplay
+	 * @param integer $listPid
+	 * @param integer $vipListPid
+	 */
+	public function hideListRegistrationsColumnIfNecessaryWithRegistrationEnabledAndLoggedIn(
+		$getsHidden, $whatToDisplay, $listPid, $vipListPid
+	) {
+		$fixture = $this->getMock(
+			'tx_seminars_pi1',
+			array('isRegistrationEnabled', 'isLoggedIn', 'hideColumns')
+		);
+		$fixture->expects($this->any())->method('isRegistrationEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('isLoggedIn')
+			->will($this->returnValue(TRUE));
+
+		if ($getsHidden) {
+			$fixture->expects($this->once())->method('hideColumns')
+				->with(array('list_registrations'));
+		} else {
+			$fixture->expects($this->never())->method('hideColumns');
+		}
+
+		$fixture->init(array(
+			'registrationsListPID' => $listPid,
+			'registrationsVipListPID' => $vipListPid,
+		));
+
+		$fixture->hideListRegistrationsColumnIfNecessary($whatToDisplay);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 *
+	 * @dataProvider hideListRegistrationsColumnIfNecessaryDataProvider
+	 *
+	 * @param boolean $getsHidden (ignored)
+	 * @param string $whatToDisplay
+	 * @param integer $listPid
+	 * @param integer $vipListPid
+	 */
+	public function hideListRegistrationsColumnIfNecessaryWithRegistrationEnabledAndNotLoggedInAlwaysHidesColumn(
+		$getsHidden, $whatToDisplay, $listPid, $vipListPid
+	) {
+		$fixture = $this->getMock(
+			'tx_seminars_pi1',
+			array('isRegistrationEnabled', 'isLoggedIn', 'hideColumns')
+		);
+		$fixture->expects($this->any())->method('isRegistrationEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('isLoggedIn')
+			->will($this->returnValue(FALSE));
+
+		$fixture->expects($this->once())->method('hideColumns')
+			->with(array('list_registrations'));
+
+		$fixture->init(array(
+			'registrationsListPID' => $listPid,
+			'registrationsVipListPID' => $vipListPid,
+		));
+
+		$fixture->hideListRegistrationsColumnIfNecessary($whatToDisplay);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 *
+	 * @dataProvider hideListRegistrationsColumnIfNecessaryDataProvider
+	 *
+	 * @param boolean $getsHidden (ignored)
+	 * @param string $whatToDisplay
+	 * @param integer $listPid
+	 * @param integer $vipListPid
+	 */
+	public function hideListRegistrationsColumnIfNecessaryWithRegistrationDisabledAndLoggedInAlwaysHidesColumn(
+		$getsHidden, $whatToDisplay, $listPid, $vipListPid
+	) {
+		$fixture = $this->getMock(
+			'tx_seminars_pi1',
+			array('isRegistrationEnabled', 'isLoggedIn', 'hideColumns')
+		);
+		$fixture->expects($this->any())->method('isRegistrationEnabled')
+			->will($this->returnValue(FALSE));
+		$fixture->expects($this->any())->method('isLoggedIn')
+			->will($this->returnValue(TRUE));
+
+		$fixture->expects($this->once())->method('hideColumns')
+			->with(array('list_registrations'));
+
+		$fixture->init(array(
+			'registrationsListPID' => $listPid,
+			'registrationsVipListPID' => $vipListPid,
+		));
+
+		$fixture->hideListRegistrationsColumnIfNecessary($whatToDisplay);
+
+		$fixture->__destruct();
+	}
 }
 ?>
