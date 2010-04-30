@@ -690,7 +690,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function eventTakesPlaceReminderHasBeenSentWithSetEventTakesPlaceReminderSentReturnsTrue() {
-		$this->fixture->setData(array('event_takes_place_reminder_sent' => true));
+		$this->fixture->setData(array('event_takes_place_reminder_sent' => TRUE));
 
 		$this->assertTrue(
 			$this->fixture->eventTakesPlaceReminderHasBeenSent()
@@ -717,7 +717,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function cancelationDeadlineReminderHasBeenSentWithSetCancelationDeadlineReminderSentReturnsTrue() {
-		$this->fixture->setData(array('cancelation_deadline_reminder_sent' => true));
+		$this->fixture->setData(array('cancelation_deadline_reminder_sent' => TRUE));
 
 		$this->assertTrue(
 			$this->fixture->cancelationDeadlineReminderHasBeenSent()
@@ -744,7 +744,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function needsRegistrationWithSetNeedsRegistrationReturnsTrue() {
-		$this->fixture->setData(array('needs_registration' => true));
+		$this->fixture->setData(array('needs_registration' => TRUE));
 
 		$this->assertTrue(
 			$this->fixture->needsRegistration()
@@ -943,7 +943,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasRegistrationQueueWithRegistrationQueueReturnsTrue() {
-		$this->fixture->setData(array('queue_size' => true));
+		$this->fixture->setData(array('queue_size' => TRUE));
 
 		$this->assertTrue(
 			$this->fixture->hasRegistrationQueue()
@@ -970,7 +970,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function shouldSkipCollectionCheckWithSkipCollisionCheckReturnsTrue() {
-		$this->fixture->setData(array('skip_collision_check' => true));
+		$this->fixture->setData(array('skip_collision_check' => TRUE));
 
 		$this->assertTrue(
 			$this->fixture->shouldSkipCollisionCheck()

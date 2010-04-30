@@ -170,7 +170,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'displaySearchFormFields', 'event_type'
 		);
 		$this->fixture->setConfigurationValue(
-			'showEmptyEntryInOptionLists', true
+			'showEmptyEntryInOptionLists', TRUE
 		);
 
 		$this->assertContains(

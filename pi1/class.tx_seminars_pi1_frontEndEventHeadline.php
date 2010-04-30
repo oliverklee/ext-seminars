@@ -62,7 +62,7 @@ class tx_seminars_pi1_frontEndEventHeadline extends tx_seminars_pi1_frontEndView
 		$result = $this->getSubpart('VIEW_HEADLINE');
 
 		$this->setErrorMessage(
-			$seminar->checkConfiguration(true)
+			$seminar->checkConfiguration(TRUE)
 		);
 
 		$seminar->__destruct();

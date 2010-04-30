@@ -95,7 +95,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 				',',
 				$this->getFormCreator()->oDataHandler
 					->__aStoredData['attached_files'],
-				true
+				TRUE
 			);
 		} else {
 			$this->attachedFiles = array();
@@ -108,7 +108,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	private function declareDataHandler() {
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
 			['declaredobjects']['datahandlers']['DBMM'] = array(
-				'key' => 'dh_dbmm', 'base' => true
+				'key' => 'dh_dbmm', 'base' => TRUE
 			);
 	}
 
@@ -631,7 +631,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		if (($this->getObjectUid() > 0)
 			&& !tx_seminars_objectfromdb::recordExists(
-				$this->getObjectUid(), SEMINARS_TABLE_SEMINARS, true
+				$this->getObjectUid(), SEMINARS_TABLE_SEMINARS, TRUE
 			)
 		) {
 			return 'message_wrongSeminarNumber';
@@ -639,7 +639,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		if ($this->getObjectUid() > 0) {
 			$seminar = tx_oelib_ObjectFactory::make(
-				'tx_seminars_seminar', $this->getObjectUid(), false, true
+				'tx_seminars_seminar', $this->getObjectUid(), FALSE, TRUE
 			);
 			$isUserVip = $seminar->isUserVip(
 				$this->getFeUserUid(),
@@ -723,7 +723,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	private function processAttachments(array &$formData) {
 		$filesToDelete = t3lib_div::trimExplode(
-			',', $formData['delete_attached_files'], true
+			',', $formData['delete_attached_files'], TRUE
 		);
 
 		foreach ($filesToDelete as $fileName) {
@@ -832,11 +832,11 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$eventIsHidden = !$isNew
 			? tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 				->find($eventUid)->isHidden()
-			: false;
+			: FALSE;
 
 		if (($hideEditedObject || $hideNewObject) && !$eventIsHidden) {
 			$formData['hidden'] = 1;
-			$formData['publication_hash'] = uniqid('', true);
+			$formData['publication_hash'] = uniqid('', TRUE);
 			$this->publicationHash = $formData['publication_hash'];
 		} else {
 			$this->publicationHash = '';
@@ -878,7 +878,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *
 	 * @param array form data to check, must not be empty
 	 *
-	 * @return boolean true if the provided file is valid, false otherwise
+	 * @return boolean TRUE if the provided file is valid, FALSE otherwise
 	 */
 	public function checkFile(array $valueToCheck) {
 		$this->validationError = '';
@@ -886,11 +886,11 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		// If these values match, no files have been uploaded and we need no
 		// further check.
 		if ($valueToCheck['value'] == implode(',', $this->attachedFiles)) {
-			return true;
+			return TRUE;
 		}
 
 		$fileToCheck = array_pop(
-			t3lib_div::trimExplode(',', $valueToCheck['value'], true)
+			t3lib_div::trimExplode(',', $valueToCheck['value'], TRUE)
 		);
 
 		$this->checkFileSize($fileToCheck);
@@ -959,7 +959,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	private function purgeUploadedFile($fileName) {
 		@unlink(PATH_site . 'uploads/tx_seminars/' . $fileName);
 		$keyToPurge = array_search($fileName, $this->attachedFiles);
-		if ($keyToPurge !== false) {
+		if ($keyToPurge !== FALSE) {
 			unset($this->attachedFiles[$keyToPurge]);
 		}
 	}
@@ -1002,82 +1002,82 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	private function createTemplateStructure() {
 		return array(
-			'subtitle' => false,
+			'subtitle' => FALSE,
 			'title_right' => array(
-				'accreditation_number' => false,
-				'credit_points' => false,
+				'accreditation_number' => FALSE,
+				'credit_points' => FALSE,
 			),
 			'basic_information' => array(
-				'categories' => false,
-				'event_type' => false,
-				'cancelled' => false,
+				'categories' => FALSE,
+				'event_type' => FALSE,
+				'cancelled' => FALSE,
 			),
 			'text_blocks' => array(
-				'teaser' => false,
-				'description' => false,
-				'additional_information' => false,
+				'teaser' => FALSE,
+				'description' => FALSE,
+				'additional_information' => FALSE,
 			),
 			'registration_information' => array(
 				'dates' => array(
 					'events_dates' => array(
-						'begin_date' => false,
-						'end_date' => false,
+						'begin_date' => FALSE,
+						'end_date' => FALSE,
 					),
 					'registration_dates' => array(
-						'begin_date_registration' => false,
-						'deadline_early_bird' => false,
-						'deadline_registration' => false,
+						'begin_date_registration' => FALSE,
+						'deadline_early_bird' => FALSE,
+						'deadline_registration' => FALSE,
 					),
 				),
 				'attendance_information' => array(
 					'registration_and_queue' => array(
-						'needs_registration' => false,
-						'allows_multiple_registrations' => false,
-						'queue_size' => false,
+						'needs_registration' => FALSE,
+						'allows_multiple_registrations' => FALSE,
+						'queue_size' => FALSE,
 					),
 					'attendees_number' => array(
-						'attendees_min' => false,
-						'attendees_max' => false,
-						'offline_attendees' => false,
+						'attendees_min' => FALSE,
+						'attendees_max' => FALSE,
+						'offline_attendees' => FALSE,
 					),
 				),
-				'target_groups' => false,
+				'target_groups' => FALSE,
 				'prices' => array(
 					'regular_prices' => array(
-						'price_regular' => false,
-						'price_regular_early' => false,
-						'price_regular_board' => false,
-						'payment_methods' => false,
+						'price_regular' => FALSE,
+						'price_regular_early' => FALSE,
+						'price_regular_board' => FALSE,
+						'payment_methods' => FALSE,
 					),
 					'special_prices' => array(
-						'price_special' => false,
-						'price_special_early' => false,
-						'price_special_board' => false,
+						'price_special' => FALSE,
+						'price_special_early' => FALSE,
+						'price_special_board' => FALSE,
 					),
 				),
 			),
 			'place_information' => array(
 				'place_and_room' => array(
-					'place' => false,
-					'room' => false,
+					'place' => FALSE,
+					'room' => FALSE,
 				),
 				'lodging_and_food' => array(
-					'lodgings' => false,
-					'foods' => false,
+					'lodgings' => FALSE,
+					'foods' => FALSE,
 				),
 			),
-			'speakers' => false,
-			'leaders' => false,
+			'speakers' => FALSE,
+			'leaders' => FALSE,
 			'partner_tutor' => array(
-				'partners' => false,
-				'tutors' => false,
+				'partners' => FALSE,
+				'tutors' => FALSE,
 			),
 			'checkbox_options' => array(
-				'checkboxes' => false,
-				'uses_terms_2' => false,
+				'checkboxes' => FALSE,
+				'uses_terms_2' => FALSE,
 			),
-			'attached_file_box' => false,
-			'notes' => false,
+			'attached_file_box' => FALSE,
+			'notes' => FALSE,
 		);
 	}
 
@@ -1092,7 +1092,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			',',
 			$this->getConfValueString(
 				'displayFrontEndEditorFields', 's_fe_editing'),
-			true
+			TRUE
 		);
 		$this->removeCategoryIfNecessary($fieldsToShow);
 
@@ -1106,8 +1106,8 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 * @param array $parameters the contents of the "params" child of the
 	 *                          userobj node as key/value pairs
 	 *
-	 * @return boolean true if front-end editing of the given related record
-	 *                 type is allowed, false otherwise
+	 * @return boolean TRUE if front-end editing of the given related record
+	 *                 type is allowed, FALSE otherwise
 	 */
 	public function isFrontEndEditingOfRelatedRecordsAllowed(array $parameters) {
 		$relatedRecordType = $parameters['relatedRecordType'];
@@ -1169,7 +1169,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *        the field to check, the array must contain an element with the key
 	 *        'elementName' and a nonempty value for that key
 	 *
-	 * @return boolean true if the field is required, false otherwise
+	 * @return boolean TRUE if the field is required, FALSE otherwise
 	 */
 	private function isFieldRequired(array $field) {
 		if ($field['elementName'] == '') {
@@ -1188,12 +1188,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
 	 *
-	 * @return boolean true if this field is not empty or not required, false
+	 * @return boolean TRUE if this field is not empty or not required, FALSE
 	 *                 otherwise
 	 */
 	public function validateString(array $formData) {
 		if (!$this->isFieldRequired($formData)) {
-			return true;
+			return TRUE;
 		}
 
 		return (trim($formData['value']) != '');
@@ -1208,12 +1208,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
 	 *
-	 * @return boolean true if this field is not zero or not required, false
+	 * @return boolean TRUE if this field is not zero or not required, FALSE
 	 *                 otherwise
 	 */
 	public function validateInteger(array $formData) {
 		if (!$this->isFieldRequired($formData)) {
-			return true;
+			return TRUE;
 		}
 
 		return (intval($formData['value']) != 0);
@@ -1228,12 +1228,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
 	 *
-	 * @return boolean true if this field is not zero or not required, false
+	 * @return boolean TRUE if this field is not zero or not required, FALSE
 	 *                 otherwise
 	 */
 	public function validateCheckboxes(array $formData) {
 		if (!$this->isFieldRequired($formData)) {
-			return true;
+			return TRUE;
 		}
 
 		return is_array($formData['value']) && !empty($formData['value']);
@@ -1248,12 +1248,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
 	 *
-	 * @return boolean true if this field contains a valid date or if this field
-	 *                 is not required, false otherwise
+	 * @return boolean TRUE if this field contains a valid date or if this field
+	 *                 is not required, FALSE otherwise
 	 */
 	public function validateDate(array $formData) {
 		if (!$this->isFieldRequired($formData)) {
-			return true;
+			return TRUE;
 		}
 
 		return (preg_match('/^[\d:\-\/ ]+$/', $formData['value']) == 1);
@@ -1268,12 +1268,12 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
 	 *
-	 * @return boolean true if this field contains a valid price or if this
-	 *                 field is not required, false otherwise
+	 * @return boolean TRUE if this field contains a valid price or if this
+	 *                 field is not required, FALSE otherwise
 	 */
 	public function validatePrice(array $formData) {
 		if (!$this->isFieldRequired($formData)) {
-			return true;
+			return TRUE;
 		}
 
 		return (preg_match('/^\d+((,|.)\d{1,2})?$/', $formData['value']) == 1);
@@ -1321,7 +1321,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 *                empty
 	 */
 	private function createEMailContent(tx_seminars_Model_Event $event) {
-		$this->getTemplateCode(true);
+		$this->getTemplateCode(TRUE);
 		$this->setLabels();
 
 		$markerPrefix = 'publish_event';
@@ -1363,8 +1363,8 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 					'hash' => $this->publicationHash,
 				),
 				'',
-				false,
-				true
+				FALSE,
+				TRUE
 			),
 			'type' => $this->getConfValueInteger('typeNumForPublish'),
 		));
@@ -1615,9 +1615,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$formidable->aORenderlets['editPlace_' . $key]->setValue($value);
 		}
 
-		$formidable->oRenderer->_setDisplayLabels(true);
+		$formidable->oRenderer->_setDisplayLabels(TRUE);
 		$result = $formidable->aORenderlets['editPlaceModalBox']->majixShowBox();
-		$formidable->oRenderer->_setDisplayLabels(false);
+		$formidable->oRenderer->_setDisplayLabels(FALSE);
 
 		return $result;
 	}
@@ -1894,9 +1894,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		$result = array();
 
-		$formidable->oRenderer->_setDisplayLabels(true);
+		$formidable->oRenderer->_setDisplayLabels(TRUE);
 		$result[] = $formidable->aORenderlets['editSpeakerModalBox']->majixShowBox();
-		$formidable->oRenderer->_setDisplayLabels(false);
+		$formidable->oRenderer->_setDisplayLabels(FALSE);
 
 		$result[] = $formidable->aORenderlets['editSpeaker_skills']->majixCheckNone();
 
@@ -2103,9 +2103,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$formidable->aORenderlets['editCheckbox_' . $key]->setValue($value);
 		}
 
-		$formidable->oRenderer->_setDisplayLabels(true);
+		$formidable->oRenderer->_setDisplayLabels(TRUE);
 		$result = $formidable->aORenderlets['editCheckboxModalBox']->majixShowBox();
-		$formidable->oRenderer->_setDisplayLabels(false);
+		$formidable->oRenderer->_setDisplayLabels(FALSE);
 
 		return $result;
 	}
@@ -2350,9 +2350,9 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			$formidable->aORenderlets['editTargetGroup_' . $key]->setValue($value);
 		}
 
-		$formidable->oRenderer->_setDisplayLabels(true);
+		$formidable->oRenderer->_setDisplayLabels(TRUE);
 		$result = $formidable->aORenderlets['editTargetGroupModalBox']->majixShowBox();
-		$formidable->oRenderer->_setDisplayLabels(false);
+		$formidable->oRenderer->_setDisplayLabels(FALSE);
 
 		return $result;
 	}

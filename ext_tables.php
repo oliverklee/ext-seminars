@@ -69,8 +69,8 @@ $TCA['tx_seminars_seminars'] = array(
 			'2' => $extIconRelPath.'icon_tx_seminars_seminars_date.gif'
 		),
 		'dynamicConfigFile' => $tcaPath,
-		'dividers2tabs' => true,
-		'hideAtCopy' => true,
+		'dividers2tabs' => TRUE,
+		'hideAtCopy' => TRUE,
 		'requestUpdate' => 'needs_registration',
 	)
 );
@@ -114,7 +114,7 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 		'dynamicConfigFile' => $tcaPath,
 		'iconfile' => $extIconRelPath . 'icon_tx_seminars_attendances.gif',
-		'dividers2tabs' => true,
+		'dividers2tabs' => TRUE,
 	)
 );
 

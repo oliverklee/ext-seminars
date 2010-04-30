@@ -462,7 +462,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	/**
 	 * Generates linked up and/or down icons depending on the manual sorting.
 	 *
-	 * @param boolean if true the linked up and/or down icons get generated
+	 * @param boolean if TRUE the linked up and/or down icons get generated
 	 *                else they won't get generated
 	 * @param array An array which contains elements that have the record's
 	 *              UIDs as keys and an array with the two elements "previous"

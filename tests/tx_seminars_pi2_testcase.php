@@ -1314,13 +1314,13 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 	 */
 	public function createAndOutputListOfRegistrationsForEmailModeUsesRegistrationsOnQueueSettingFromEmailConfiguration() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
-			'showAttendancesOnRegistrationQueueInEmailCsv', true
+			'showAttendancesOnRegistrationQueueInEmailCsv', TRUE
 		);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForEmailCsv', 'uid'
 		);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
-			'showAttendancesOnRegistrationQueueInCsv', false
+			'showAttendancesOnRegistrationQueueInCsv', FALSE
 		);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'uid'
@@ -1355,13 +1355,13 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 	 */
 	public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationsOnQueueSettingFromEmailConfiguration() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
-			'showAttendancesOnRegistrationQueueInEmailCsv', true
+			'showAttendancesOnRegistrationQueueInEmailCsv', TRUE
 		);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForEmailCsv', 'uid'
 		);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
-			'showAttendancesOnRegistrationQueueInCsv', false
+			'showAttendancesOnRegistrationQueueInCsv', FALSE
 		);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'uid'

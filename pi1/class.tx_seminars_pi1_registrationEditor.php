@@ -76,15 +76,15 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * @var array
 	 */
 	private $fieldsInBillingAddress = array(
-		'company' => false,
-		'gender' => false,
-		'name' => false,
-		'address' => false,
-		'zip' => false,
-		'city' => false,
-		'country' => false,
-		'telephone' => true,
-		'email' => true
+		'company' => FALSE,
+		'gender' => FALSE,
+		'name' => FALSE,
+		'address' => FALSE,
+		'zip' => FALSE,
+		'city' => FALSE,
+		'country' => FALSE,
+		'telephone' => TRUE,
+		'email' => TRUE
 	);
 
 	/**
@@ -116,7 +116,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		$formFieldsToShow = t3lib_div::trimExplode(',',
 			$this->getConfValueString(
 				'showRegistrationFields', 's_template_special'
-			), true
+			), TRUE
 		);
 		foreach ($formFieldsToShow as $currentFormField) {
 			$this->formFieldsToShow[$currentFormField] = $currentFormField;
@@ -252,7 +252,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		}
 
 		foreach ($GLOBALS['TSFE']->additionalHeaderData as $key => $content) {
-			if (strpos($content, 'FORMIDABLE:') !== false) {
+			if (strpos($content, 'FORMIDABLE:') !== FALSE) {
 				unset($GLOBALS['TSFE']->additionalHeaderData[$key]);
 			}
 		}
@@ -273,7 +273,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * Checks whether we are on the last page of the registration form and we
 	 * can proceed to saving the registration.
 	 *
-	 * @return boolean true if we can proceed to saving the registration, false
+	 * @return boolean TRUE if we can proceed to saving the registration, FALSE
 	 *                 otherwise
 	 */
 	public function isLastPage() {
@@ -307,8 +307,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * @param array associative array with the element "value" in which
 	 *              the number of seats to check for is stored
 	 *
-	 * @return boolean true if there are at least $formData['value'] seats
-	 *                 available, false otherwise
+	 * @return boolean TRUE if there are at least $formData['value'] seats
+	 *                 available, FALSE otherwise
 	 */
 	public function canRegisterSeats(array $formData) {
 		return $this->getRegistrationManager()->canRegisterSeats(
@@ -323,8 +323,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * @param array associative array with the element "value" in which
 	 *              the current value of the checkbox (0 or 1) is stored
 	 *
-	 * @return boolean true if the checkbox is checked or we are not on the
-	 *                 confirmation page, false otherwise
+	 * @return boolean TRUE if the checkbox is checked or we are not on the
+	 *                 confirmation page, FALSE otherwise
 	 */
 	public function isTermsChecked(array $formData) {
 		return ((boolean) $formData['value'])
@@ -335,8 +335,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * Checks whether the "travelling terms" checkbox (ie. the second "terms"
 	 * checkbox) is enabled in the event record *and* via TS setup.
 	 *
-	 * @return boolean true if the "travelling terms" checkbox is enabled in the
-	 *                 event record *and* via TS setup, false otherwise
+	 * @return boolean TRUE if the "travelling terms" checkbox is enabled in the
+	 *                 event record *and* via TS setup, FALSE otherwise
 	 */
 	public function isTerms2Enabled() {
 		return $this->hasRegistrationFormField(array('elementname' => 'terms_2'))
@@ -346,15 +346,15 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	/**
 	 * Checks whether the "terms_2" checkbox is checked (if it is enabled in the
 	 * configuration). If the checkbox is disabled in the configuration, this
-	 * function always returns true. It also always returns true if the
+	 * function always returns TRUE. It also always returns TRUE if the
 	 * "finish registration" button hasn't just been clicked.
 	 *
 	 * @param array associative array with the element "value" in which
 	 *              the current value of the checkbox (0 or 1) is stored
 	 *
-	 * @return boolean true if the checkbox is checked or disabled in the
+	 * @return boolean TRUE if the checkbox is checked or disabled in the
 	 *                 configuration or if the "finish registration" button
-	 *                 hasn't just been clicked, false if it is not checked
+	 *                 hasn't just been clicked, FALSE if it is not checked
 	 *                 AND enabled in the configuration
 	 */
 	public function isTerms2CheckedAndEnabled(array $formData) {
@@ -373,9 +373,9 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *              the currently selected value (a positive integer or
 	 *              null if no radiobutton is selected) is stored
 	 *
-	 * @return boolean true if a method of payment is selected OR no method
+	 * @return boolean TRUE if a method of payment is selected OR no method
 	 *                 could have been selected at all OR this event has no
-	 *                 price, false if none is selected, but should have
+	 *                 price, FALSE if none is selected, but should have
 	 *                 been selected
 	 */
 	public function isMethodOfPaymentSelected(array $formData) {
@@ -391,7 +391,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * @param mixed the currently selected value (a positive integer) or
 	 *                  null if no button is selected
 	 *
-	 * @return boolean true if a radiobutton is selected, false if none is
+	 * @return boolean TRUE if a radiobutton is selected, FALSE if none is
 	 *                 selected
 	 */
 	private function isRadiobuttonSelected($radiogroupValue) {
@@ -407,8 +407,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *              node as key/value pairs (used for retrieving the
 	 *              current form field name)
 	 *
-	 * @return boolean true if the current form field should be displayed,
-	 *                 false otherwise
+	 * @return boolean TRUE if the current form field should be displayed,
+	 *                 FALSE otherwise
 	 */
 	public function hasRegistrationFormField(array $parameters) {
 		return isset($this->formFieldsToShow[$parameters['elementname']]);
@@ -429,8 +429,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *
 	 * @param string the key of the field to test, must not be empty
 	 *
-	 * @return boolean true if the current form field should be displayed,
-	 *                 false otherwise
+	 * @return boolean TRUE if the current form field should be displayed,
+	 *                 FALSE otherwise
 	 */
 	public function isFormFieldEnabled($key) {
 		// Some containers cannot be enabled or disabled via TS setup, but
@@ -544,16 +544,16 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * "showRegistrationFields" variable.
 	 *
 	 * This function also checks if the current event has a price set at all,
-	 * and returns only true if the event has a price (ie. is not completely for
+	 * and returns only TRUE if the event has a price (ie. is not completely for
 	 * free) and the current form field should be displayed.
 	 *
 	 * @param array the contents of the "params" child of the userobj
 	 *              node as key/value pairs (used for retrieving the
 	 *              current form field name)
 	 *
-	 * @return boolean true if the current form field should be displayed
+	 * @return boolean TRUE if the current form field should be displayed
 	 *                 AND the current event is not completely for free,
-	 *                 false otherwise
+	 *                 FALSE otherwise
 	 */
 	public function hasBankDataFormField(array $parameters) {
 		return $this->hasRegistrationFormField($parameters)
@@ -573,7 +573,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *                if the confirmation page has not been submitted yet)
 	 */
 	public function getThankYouAfterRegistrationUrl() {
-		$sendParameters = false;
+		$sendParameters = FALSE;
 		$pageId = $this->getConfValueInteger(
 			'thankYouAfterRegistrationPID', 's_registration'
 		);
@@ -590,7 +590,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			'sendParametersToThankYouAfterRegistrationPageUrl',
 			's_registration'
 		)) {
-			$sendParameters = true;
+			$sendParameters = TRUE;
 		}
 
 		return $this->createUrlForRedirection($pageId, $sendParameters);
@@ -604,7 +604,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *                if the confirmation page has not been submitted yet)
 	 */
 	public function getPageToShowAfterUnregistrationUrl() {
-		$sendParameters = false;
+		$sendParameters = FALSE;
 		$pageId = $this->getConfValueInteger(
 			'pageToShowAfterUnregistrationPID', 's_registration'
 		);
@@ -615,7 +615,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 				's_registration'
 			)
 		) {
-			$sendParameters = true;
+			$sendParameters = TRUE;
 		}
 
 		return $this->createUrlForRedirection($pageId, $sendParameters);
@@ -626,12 +626,12 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * getThankYouAfterRegistrationUrl() and getPageToShowAfterUnregistration().
 	 *
 	 * @param string the page UID
-	 * @param boolean true if GET parameters should be added to the URL,
-	 *                otherwise false
+	 * @param boolean TRUE if GET parameters should be added to the URL,
+	 *                otherwise FALSE
 	 *
 	 * @return string complete URL of the FE page with a message
 	 */
-	private function createUrlForRedirection($pageId, $sendParameters = true) {
+	private function createUrlForRedirection($pageId, $sendParameters = TRUE) {
 		// On freshly updated sites, the configuration value might not be set
 		// yet. To avoid breaking the site, we use the event list in this case.
 		if (!$pageId) {
@@ -646,8 +646,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 					'tx_seminars_pi1',
 					array('showUid' => $this->getSeminar()->getUid()),
 					'',
-					false,
-					true
+					FALSE,
+					TRUE
 				);
 		}
 
@@ -704,8 +704,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * ie. whether they are enable in the setup and the current event actually
 	 * has any payment methods assigned and has at least one price.
 	 *
-	 * @return boolean true if the payment methods should be displayed,
-	 *                 false otherwise
+	 * @return boolean TRUE if the payment methods should be displayed,
+	 *                 FALSE otherwise
 	 */
 	public function showMethodsOfPayment() {
 		return $this->getSeminar()->hasPaymentMethods()
@@ -728,14 +728,14 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		$userData = $GLOBALS['TSFE']->fe_user->user;
 
 		foreach (array(
-			'name' => false,
-			'company' => false,
-			'address' => false,
-			'zip' => false,
-			'city' => false,
-			'country' => false,
-			'telephone' => true,
-			'email' => true
+			'name' => FALSE,
+			'company' => FALSE,
+			'address' => FALSE,
+			'zip' => FALSE,
+			'city' => FALSE,
+			'country' => FALSE,
+			'telephone' => TRUE,
+			'email' => TRUE
 		) as $currentKey => $hasLabel) {
 			$value = htmlspecialchars($userData[$currentKey]);
 			// Only show a label if we have any data following it.
@@ -1056,16 +1056,16 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * Checks whether the current field is non-empty if the payment method
 	 * "bank transfer" is selected. If a different payment method is selected
 	 * (or none is defined as "bank transfer"), the check is always positive and
-	 * returns true.
+	 * returns TRUE.
 	 *
 	 * @param array associative array with the element "value" in which
 	 *              the value of the current field is provided
 	 *
-	 * @return boolean true if the field is non-empty or "bank transfer" is not
+	 * @return boolean TRUE if the field is non-empty or "bank transfer" is not
 	 *                 selected
 	 */
 	public function hasBankData(array $formData) {
-		$result = true;
+		$result = TRUE;
 
 		if (empty($formData['value'])) {
 			$bankTransferUid = $this->getConfValueInteger('bankTransferUID');
@@ -1073,7 +1073,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			$paymentMethod = intval($this->getFormValue('method_of_payment'));
 
 			if (($bankTransferUid > 0) && ($paymentMethod == $bankTransferUid)) {
-				$result = false;
+				$result = FALSE;
 			}
 		}
 
@@ -1113,7 +1113,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 						$static_info_country,
 						'',
 						'',
-						true
+						TRUE
 					);
 				} else {
 					$result = $this->getDefaultCountry();
@@ -1134,7 +1134,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	public function populateListCountries() {
 		$this->initStaticInfo();
 		$allCountries = $this->staticInfo->initCountries(
-			'ALL', $this->staticInfo->getCurrentLanguage(), true
+			'ALL', $this->staticInfo->getCurrentLanguage(), TRUE
 		);
 
 		$result = array();
@@ -1171,7 +1171,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 
 		return tx_staticinfotables_div::getTitleFromIsoCode(
 			'static_countries', $defaultCountryCode,
-			$this->staticInfo->getCurrentLanguage(), true
+			$this->staticInfo->getCurrentLanguage(), TRUE
 		);
 	}
 
@@ -1195,8 +1195,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * Checks whether our current event has any option checkboxes AND the
 	 * checkboxes should be displayed at all.
 	 *
-	 * @return boolean true if we have a non-empty list of checkboxes AND this
-	 *                 list should be displayed, false otherwise
+	 * @return boolean TRUE if we have a non-empty list of checkboxes AND this
+	 *                 list should be displayed, FALSE otherwise
 	 */
 	public function hasCheckboxes() {
 		return $this->getSeminar()->hasCheckboxes()
@@ -1229,7 +1229,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * @param array the value of the current field in an associative
 	 *              array witch the element "value"
 	 *
-	 * @return boolean true if at least one item is selected or no lodging
+	 * @return boolean TRUE if at least one item is selected or no lodging
 	 *                 options can be selected
 	 */
 	public function isLodgingSelected(array $formData) {
@@ -1240,8 +1240,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * Checks whether our current event has any lodging options and the
 	 * lodging options should be displayed at all.
 	 *
-	 * @return boolean true if we have a non-empty list of lodging options and
-	 *                 this list should be displayed, false otherwise
+	 * @return boolean TRUE if we have a non-empty list of lodging options and
+	 *                 this list should be displayed, FALSE otherwise
 	 */
 	public function hasLodgings() {
 		return $this->getSeminar()->hasLodgings()
@@ -1270,8 +1270,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * Checks whether our current event has any food options and the food
 	 * options should be displayed at all.
 	 *
-	 * @return boolean true if we have a non-empty list of food options and this
-	 *                 list should be displayed, false otherwise
+	 * @return boolean TRUE if we have a non-empty list of food options and this
+	 *                 list should be displayed, FALSE otherwise
 	 */
 	public function hasFoods() {
 		return $this->getSeminar()->hasFoods()
@@ -1286,7 +1286,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * @param array associative array with the element "value" in which
 	 *              the value of the current field is provided
 	 *
-	 * @return boolean true if at least one item is selected or no food
+	 * @return boolean TRUE if at least one item is selected or no food
 	 *                 options can be selected
 	 */
 	public function isFoodSelected(array $formData) {
@@ -1312,8 +1312,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 *              the currently selected value (a positive integer) or
 	 *              null if no radiobutton is selected is provided
 	 *
-	 * @return boolean true if a valid price is selected or the price field
-	 *                 is hidden, false if none is selected, but could have
+	 * @return boolean TRUE if a valid price is selected or the price field
+	 *                 is hidden, FALSE if none is selected, but could have
 	 *                 been selected
 	 */
 	public function isValidPriceSelected(array $formData) {
@@ -1632,7 +1632,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			$themselves = 1;
 		}
 		$names = t3lib_div::trimExplode(
-			LF, (string) $this->getFormValue('attendees_names'), true
+			LF, (string) $this->getFormValue('attendees_names'), TRUE
 		);
 		$namesCounter = count($names);
 
@@ -1644,15 +1644,15 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 * registered persons (from the "attendees names" text area and the
 	 * "myself" checkbox).
 	 *
-	 * @return boolean true if the number of seats matches the number of
-	 *                 registered persons, false otherwise
+	 * @return boolean TRUE if the number of seats matches the number of
+	 *                 registered persons, FALSE otherwise
 	 */
 	public function numberOfSeatsMatchesRegisteredPersons() {
 		if (intval($this->getFormValue('seats')) <= 0) {
-			return false;
+			return FALSE;
 		}
 		if (!$this->isFormFieldEnabled('attendees_names')) {
-			return true;
+			return TRUE;
 		}
 
 		return (intval($this->getFormValue('seats'))

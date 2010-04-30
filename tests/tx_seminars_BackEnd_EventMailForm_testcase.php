@@ -182,7 +182,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'cancelEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => '',
 			)
 		);
@@ -244,7 +244,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'messageBody' => '<test>',
 			)
 		);
@@ -270,7 +270,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => '',
 			)
 		);
@@ -285,7 +285,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'messageBody' => '',
 			)
 		);
@@ -300,7 +300,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'sendForm',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo bar',
 			)
 		);
@@ -316,7 +316,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'messageBody' => 'foo bar',
 			)
 		);
@@ -369,7 +369,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 			)
@@ -399,7 +399,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 			)
@@ -432,7 +432,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar %' .
 					$GLOBALS['LANG']->getLL('mailForm_salutation'),
@@ -468,7 +468,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar foo',
 			)
@@ -495,7 +495,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 				'sender' => $this->testingFramework->createRecord(
@@ -543,7 +543,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 				'sender' => $this->testingFramework->createRecord(
@@ -582,7 +582,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 				'sender' => $this->testingFramework->createRecord(
@@ -624,7 +624,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 				'sender' => $this->organizerUid
@@ -649,7 +649,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 			)

@@ -59,9 +59,9 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb implements tx_oelib
 	}
 
 	/**
-	 * Returns true if this organizer has a homepage set, false otherwise.
+	 * Returns TRUE if this organizer has a homepage set, FALSE otherwise.
 	 *
-	 * @return boolean true if this organizer has a homepage set, false
+	 * @return boolean TRUE if this organizer has a homepage set, FALSE
 	 *                 otherwise
 	 */
 	public function hasHomepage() {
@@ -100,7 +100,7 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb implements tx_oelib
 	/**
 	 * Checks whether this organizer has a description.
 	 *
-	 * @return boolean true if this organizer has a description, false otherwise
+	 * @return boolean TRUE if this organizer has a description, FALSE otherwise
 	 */
 	public function hasDescription() {
 		return $this->hasRecordPropertyString('description');

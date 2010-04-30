@@ -169,7 +169,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * Checks whether the timeslot has a entry date set.
 	 *
-	 * @return boolean true if we have a entry date, false otherwise
+	 * @return boolean TRUE if we have a entry date, FALSE otherwise
 	 */
 	public function hasEntryDate() {
 		return $this->hasRecordPropertyInteger('entry_date');

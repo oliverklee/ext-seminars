@@ -72,7 +72,7 @@ class tx_seminars_placebag extends tx_seminars_bag {
 	 * as a source. If the current item cannot be created, $this->currentItem
 	 * will be nulled out.
 	 *
-	 * $this->dbResult must be ensured to be not false when this function is
+	 * $this->dbResult must be ensured to be not FALSE when this function is
 	 * called.
 	 *
 	 * @access protected

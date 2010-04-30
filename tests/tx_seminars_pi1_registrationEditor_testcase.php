@@ -168,7 +168,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 	public function testGetThankYouAfterRegistrationUrlWithOneTimeAccountMarkerInUserSessionLogsOutUser() {
 		$this->testingFramework->createAndLoginFrontEndUser();
-		$this->session->setAsBoolean('onetimeaccount', true);
+		$this->session->setAsBoolean('onetimeaccount', TRUE);
 
 		$this->fixture->getThankYouAfterRegistrationUrl();
 

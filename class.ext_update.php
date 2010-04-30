@@ -69,21 +69,21 @@ class ext_update {
 	/**
 	 * Returns whether the update module may be accessed.
 	 *
-	 * @return boolean true if the update module may be accessed, false otherwise
+	 * @return boolean TRUE if the update module may be accessed, FALSE otherwise
 	 */
 	public function access() {
 		if (!t3lib_extMgm::isLoaded('oelib')
 			|| !t3lib_extMgm::isLoaded('seminars')
 		) {
-			return false;
+			return FALSE;
 		}
 		if (!tx_oelib_db::existsTable(SEMINARS_TABLE_SEMINARS)) {
-			return false;
+			return FALSE;
 		}
 		if (!tx_oelib_db::tableHasColumn(
 			SEMINARS_TABLE_SEMINARS, 'needs_registration'
 		)) {
-			return false;
+			return FALSE;
 		}
 
 		try {
@@ -92,7 +92,7 @@ class ext_update {
 				|| $this->needsToUpdateTypoScriptTemplates()
 			);
 		} catch (tx_oelib_Exception_Database $exception) {
-			$result = false;
+			$result = FALSE;
 		}
 
 		return $result;
@@ -105,7 +105,7 @@ class ext_update {
 	 * @param string the DB field to check for needing an update, must be
 	 *               'queueSize' or 'needsRegistration
 	 *
-	 * @return boolean true if any rows need to be updated, false otherwise
+	 * @return boolean TRUE if any rows need to be updated, FALSE otherwise
 	 */
 	private function needsToUpdateEventField($fieldToUpdate) {
 		switch ($fieldToUpdate) {
@@ -164,8 +164,8 @@ class ext_update {
 	 * Returns whether there are any TypoScript template records that need to be
 	 * updated.
 	 *
-	 * @return boolean true if there are any TypoScript template records that
-	 *                 need to be updated, false otherwise
+	 * @return boolean TRUE if there are any TypoScript template records that
+	 *                 need to be updated, FALSE otherwise
 	 */
 	private function needsToUpdateTypoScriptTemplates() {
 		$row = tx_oelib_db::selectSingle(

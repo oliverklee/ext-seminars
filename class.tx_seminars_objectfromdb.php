@@ -69,7 +69,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * @var boolean whether this record already is stored in the DB
 	 */
-	protected $isInDb = false;
+	protected $isInDb = FALSE;
 
 	/**
 	 * The constructor. Creates a test instance from a DB record.
@@ -81,7 +81,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 *                ignored.
 	 */
 	public function __construct(
-		$uid, $dbResult = null, $allowHiddenRecords = false
+		$uid, $dbResult = null, $allowHiddenRecords = FALSE
 	) {
 		$this->initializeCharsetConversion();
 		$this->retrieveRecordAndGetData($uid, $dbResult, $allowHiddenRecords);
@@ -108,7 +108,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 *                hidden record
 	 */
 	protected function retrieveRecordAndGetData(
-		$uid, $dbResult = false, $allowHiddenRecords = false
+		$uid, $dbResult = FALSE, $allowHiddenRecords = FALSE
 	) {
 		if (!$dbResult) {
 			$dbResult = $this->retrieveRecord($uid, $allowHiddenRecords);
@@ -131,7 +131,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Before this function may be called, $this->tableName must be set
 	 * to the correspondonding DB table name.
 	 *
-	 * If at least one element is taken, this function sets $this->isInDb to true.
+	 * If at least one element is taken, this function sets $this->isInDb to TRUE.
 	 *
 	 * Example:
 	 * $dbResultRow['name'] => $this->recordData['name']
@@ -141,7 +141,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	protected function getDataFromDbResult(array $dbResultRow) {
 		if (!empty($this->tableName) && !empty($dbResultRow)) {
 			$this->recordData = $dbResultRow;
-			$this->isInDb = true;
+			$this->isInDb = TRUE;
 		}
 	}
 
@@ -149,7 +149,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Checks whether this object has been properly initialized,
 	 * has a non-empty table name set and thus is basically usable.
 	 *
-	 * @return boolean true if the object has been initialized, false otherwise
+	 * @return boolean TRUE if the object has been initialized, FALSE otherwise
 	 */
 	public function isOk() {
 		return (!empty($this->recordData) && !empty($this->tableName));
@@ -193,7 +193,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 *
 	 * @param string key of the element to check
 	 *
-	 * @return boolean true if the corresponding string exists and is non-empty
+	 * @return boolean TRUE if the corresponding string exists and is non-empty
 	 */
 	public function hasRecordPropertyString($key) {
 		return ($this->getRecordPropertyString($key) != '');
@@ -205,7 +205,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 *
 	 * @param string key of the element to check
 	 *
-	 * @return boolean true if the corresponding value exists and is non-zero
+	 * @return boolean TRUE if the corresponding value exists and is non-zero
 	 */
 	public function hasRecordPropertyInteger($key) {
 		return (boolean) $this->getRecordPropertyInteger($key);
@@ -217,7 +217,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 *
 	 * @param string key of the element to check
 	 *
-	 * @return boolean true if the corresponding field exists and its value
+	 * @return boolean TRUE if the corresponding field exists and its value
 	 *                 is not "0.00".
 	 */
 	public function hasRecordPropertyDecimal($key) {
@@ -277,7 +277,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 
 	/**
 	 * Gets an element of the record data array, converted to a boolean.
-	 * If the array has not been initialized properly, false is returned.
+	 * If the array has not been initialized properly, FALSE is returned.
 	 *
 	 * @param string key of the element to return
 	 *
@@ -285,7 +285,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 */
 	public function getRecordPropertyBoolean($key) {
 		$result = $this->hasKey($key)
-			? ((boolean) $this->recordData[$key]) : false;
+			? ((boolean) $this->recordData[$key]) : FALSE;
 
 		return $result;
 	}
@@ -296,8 +296,8 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 *
 	 * @param string the array key to search for
 	 *
-	 * @return boolean true if $this->recordData has been initialized
-	 *                 and the array key exists, false otherwise
+	 * @return boolean TRUE if $this->recordData has been initialized
+	 *                 and the array key exists, FALSE otherwise
 	 */
 	private function hasKey($key) {
 		return ($this->isOk() && !empty($key) && isset($this->recordData[$key]));
@@ -309,11 +309,11 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * The UID of the parent page must be set in $this->recordData['pid'].
 	 * (otherwise the record will be created in the root page).
 	 *
-	 * @return boolean true if everything went OK, false otherwise
+	 * @return boolean TRUE if everything went OK, FALSE otherwise
 	 */
 	public function commitToDb() {
 		if (!$this->isOk()) {
-			return false;
+			return FALSE;
 		}
 
 		// Saves the current time so that tstamp and crdate will be the same.
@@ -333,8 +333,8 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 			);
 		}
 
-		$this->isInDb = true;
-		return true;
+		$this->isInDb = TRUE;
+		return TRUE;
 	}
 
 	/**
@@ -410,7 +410,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * Checks whether a non-deleted record with a given UID exists in the DB.
 	 *
-	 * If the parameter $allowHiddenRecords is set to true, hidden records will
+	 * If the parameter $allowHiddenRecords is set to TRUE, hidden records will
 	 * be selected, too.
 	 *
 	 * This method may be called statically.
@@ -421,10 +421,10 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 *               for
 	 * @param boolean whether hidden records should be found as well
 	 *
-	 * @return boolean true if a visible record with that UID exists, false
+	 * @return boolean TRUE if a visible record with that UID exists, FALSE
 	 *                 otherwise
 	 */
-	public function recordExists($uid, $tableName, $allowHiddenRecords = false) {
+	public function recordExists($uid, $tableName, $allowHiddenRecords = FALSE) {
 		$result = is_numeric($uid) && ($uid);
 
 		if ($result && !empty($tableName)) {
@@ -441,10 +441,10 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 				$result = ($dbResultAssoc['num'] == 1);
 				$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 			} else {
-				$result = false;
+				$result = FALSE;
 			}
 		} else {
-			$result = false;
+			$result = FALSE;
 		}
 
 		return (boolean) $result;
@@ -459,10 +459,10 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * @param integer The UID of the record to retrieve from the DB.
 	 * @param boolean whether to allow hidden records
 	 *
-	 * @return pointer MySQL result pointer (of SELECT query)/DBAL object, false
+	 * @return pointer MySQL result pointer (of SELECT query)/DBAL object, FALSE
 	 *                 if the UID is invalid
 	 */
-	protected function retrieveRecord($uid, $allowHiddenRecords = false) {
+	protected function retrieveRecord($uid, $allowHiddenRecords = FALSE) {
 		if ($this->recordExists($uid, $this->tableName, $allowHiddenRecords)) {
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
@@ -475,7 +475,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 				'1'
 			);
 		} else {
-			$result = false;
+			$result = FALSE;
 		}
 
 		return $result;
@@ -493,7 +493,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	/**
 	 * Checks whether this object has a UID.
 	 *
-	 * @return boolean true if this object has a UID, false otherwise
+	 * @return boolean TRUE if this object has a UID, FALSE otherwise
 	 */
 	public function hasUid() {
 		return $this->hasRecordPropertyInteger('uid');
@@ -587,7 +587,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	 * Marks this object as a dummy record (when it is written to the DB).
 	 */
 	public function enableTestMode() {
-		$this->setRecordPropertyBoolean('is_dummy_record', true);
+		$this->setRecordPropertyBoolean('is_dummy_record', TRUE);
 	}
 
 	/**

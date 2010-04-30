@@ -123,7 +123,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 			',',
 			$this->getConfValueString(
 				'displaySearchFormFields', 's_listView'),
-			true
+			TRUE
 		);
 
 		$this->instantiateStaticInfo();
@@ -134,7 +134,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 				$this->getConfValueString(
 					'limitListViewToEventTypes', 's_listView'
 				),
-				true
+				TRUE
 			)
 		);
 
@@ -221,7 +221,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 
 			// Preselects the option if it was selected by the user.
 			if (isset($this->piVars[$name])
-				&& (in_array((string) $key, $this->piVars[$name], true))
+				&& (in_array((string) $key, $this->piVars[$name], TRUE))
 			) {
 				$selected = ' selected="selected"';
 			} else {
@@ -286,8 +286,8 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 *
 	 * @param string the search field name to check, must not be empty
 	 *
-	 * @return boolean true if the given field should be displayed as per
-	 *                 configuration, false otherwise
+	 * @return boolean TRUE if the given field should be displayed as per
+	 *                 configuration, FALSE otherwise
 	 */
 	protected function hasSearchField($fieldToCheck) {
 		return in_array($fieldToCheck, $this->displaySearchFormFields);

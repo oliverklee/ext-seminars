@@ -762,7 +762,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_OtherDatesListInSingleViewForShowOnlyEventsWithVacanciesSet_HidesBookedOutEvents() {
 		$this->fixture->setConfigurationValue(
-			'showOnlyEventsWithVacancies', true
+			'showOnlyEventsWithVacancies', TRUE
 		);
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -811,7 +811,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'detailPID',
 			$this->testingFramework->createFrontEndPage()
 		);
-		$this->fixture->setConfigurationValue('showSpeakerDetails', true);
+		$this->fixture->setConfigurationValue('showSpeakerDetails', TRUE);
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$speakerUid = $this->testingFramework->createRecord(
@@ -2321,7 +2321,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_ListViewForShowOnlyEventsWithVacanciesSet_HidesBookedOutEvent() {
 		$this->fixture->setConfigurationValue(
-			'showOnlyEventsWithVacancies', true
+			'showOnlyEventsWithVacancies', TRUE
 		);
 
 		$this->testingFramework->createRecord(
@@ -4509,7 +4509,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	////////////////////////////////////////////////////////////
 
 	public function test_ListView_ForEventWithUnlimitedVacancies_ShowsRegistrationLink() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -4526,7 +4526,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_ListView_ForEventWithNoVacanciesAndQueue_ShowsRegisterOnQueueLink() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -4554,7 +4554,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_ListView_ForEventWithNoVacanciesAndNoQueue_DoesNotShowRegistrationLink() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -4582,7 +4582,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_ListView_ForEventWithVacanciesAndNoDate_ShowsPreebookNowString() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -4600,7 +4600,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_ListView_ForEventWithRegistrationBeginInFuture_HidesRegistrationLink() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -4620,7 +4620,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_ListView_ForEventWithRegistrationBeginInFuture_ShowsRegistrationOpenOnMessage() {
 		$registrationBegin = $GLOBALS['SIM_EXEC_TIME'] + 20;
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -4642,7 +4642,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_ListView_ForEventWithRegistrationBeginInPast_ShowsRegistrationLink() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -4661,7 +4661,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_ListView_ForEventWithoutRegistrationBegin_ShowsRegistrationLink() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -5544,7 +5544,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	//////////////////////////////////////////////////////////////
 
 	public function test_SingleView_ForEventWithUnlimitedVacancies_ShowsRegistrationLink() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -5562,7 +5562,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_SingleView_ForEventWithNoVacanciesAndQueue_ShowsRegisterOnQueueLink() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -5590,7 +5590,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_SingleView_ForEventWithNoVacanciesAndNoQueue_DoesNotShowRegistrationLink() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -5618,7 +5618,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_SingleView_ForEventWithVacanciesAndNoDate_ShowsPreebookNowString() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -5637,7 +5637,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_SingleView_ForEventWithRegistrationBeginInFuture_DoesNotShowRegistrationLink() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -5657,7 +5657,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_SingleView_ForEventWithRegistrationBeginInFuture_ShowsRegistrationOpensOnMessage() {
 		$registrationBegin = $GLOBALS['SIM_EXEC_TIME'] + 40;
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -5679,7 +5679,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_SingleView_ForEventWithRegistrationBeginInPast_ShowsRegistrationLink() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -5698,7 +5698,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_SingleView_ForEventWithoutRegistrationBegin_ShowsRegistrationLink() {
-		$this->fixture->setConfigurationValue('enableRegistration', true);
+		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
@@ -5894,7 +5894,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(0);
-		$event->setNeedsRegistration(true);
+		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
@@ -5910,7 +5910,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(9);
-		$event->setNeedsRegistration(true);
+		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
@@ -5926,7 +5926,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(8);
-		$event->setNeedsRegistration(true);
+		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
@@ -5942,7 +5942,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(10);
-		$event->setNeedsRegistration(true);
+		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
@@ -5998,7 +5998,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_GetVacanciesClasses_ForRegistrationDeadlineInPast_ReturnsDeadlineOverClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
-		$event->setNeedsRegistration(true);
+		$event->setNeedsRegistration(TRUE);
 		$event->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 45);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 
@@ -6013,7 +6013,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_GetVacanciesClasses_ForBeginDateInPast_ReturnsBeginDateOverClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
-		$event->setNeedsRegistration(true);
+		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
 
 		$output = $this->fixture->getVacanciesClasses($event);
@@ -6030,7 +6030,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function getVacanciesClasses_ForBeginDateInPastAndRegistrationForStartedEventsAllowed_ReturnsVacanciesAvailableClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
-		$event->setNeedsRegistration(true);
+		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'allowRegistrationForStartedEvents', 1
@@ -6047,7 +6047,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_GetVacanciesClasses_ForEventNotNeedingRegistration_ReturnsVacanciesBasicClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
-		$event->setNeedsRegistration(false);
+		$event->setNeedsRegistration(FALSE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
@@ -6061,7 +6061,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_GetVacanciesClasses_ForEventWithoutBeginDateAndAllowRegistrationForEventsWithoutDateFalse_ReturnsVacanciesBasicClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
-		$event->setNeedsRegistration(true);
+		$event->setNeedsRegistration(TRUE);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 0
 		);
@@ -6082,8 +6082,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(10);
-		$event->setNeedsRegistration(true);
-		$event->setRegistrationQueue(true);
+		$event->setNeedsRegistration(TRUE);
+		$event->setRegistrationQueue(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
@@ -6102,8 +6102,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(10);
-		$event->setNeedsRegistration(true);
-		$event->setRegistrationQueue(false);
+		$event->setNeedsRegistration(TRUE);
+		$event->setRegistrationQueue(FALSE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
@@ -6118,13 +6118,13 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	//////////////////////////////////////////////////////////////////////////
 	// Tests concerning getVacanciesClasses for events without date and with
-	// configuration variable 'allowRegistrationForEventsWithoutDate' true.
+	// configuration variable 'allowRegistrationForEventsWithoutDate' TRUE.
 	//////////////////////////////////////////////////////////////////////////
 
 	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithEnoughVacancies_ReturnsAvailableClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setAttendancesMax(10);
-		$event->setNeedsRegistration(true);
+		$event->setNeedsRegistration(TRUE);
 		$event->setNumberOfAttendances(0);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
@@ -6142,7 +6142,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithOneVacancy_ReturnsVacancyOneClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setAttendancesMax(10);
-		$event->setNeedsRegistration(true);
+		$event->setNeedsRegistration(TRUE);
 		$event->setNumberOfAttendances(9);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
@@ -6160,7 +6160,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithTwoVacancies_ReturnsVacancyTwoClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setAttendancesMax(10);
-		$event->setNeedsRegistration(true);
+		$event->setNeedsRegistration(TRUE);
 		$event->setNumberOfAttendances(8);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
@@ -6178,7 +6178,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithNoVacancies_ReturnsVacancyZeroClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setAttendancesMax(10);
-		$event->setNeedsRegistration(true);
+		$event->setNeedsRegistration(TRUE);
 		$event->setNumberOfAttendances(10);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1

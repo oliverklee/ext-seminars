@@ -1134,7 +1134,7 @@ class tx_seminars_Model_SingleEvent_testcase extends tx_phpunit_testcase {
 		$this->fixture->setData(
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
-				'allows_multiple_registrations' => true,
+				'allows_multiple_registrations' => TRUE,
 			)
 		);
 
@@ -1168,7 +1168,7 @@ class tx_seminars_Model_SingleEvent_testcase extends tx_phpunit_testcase {
 		$this->fixture->setData(
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
-				'use_terms_2' => true,
+				'use_terms_2' => TRUE,
 			)
 		);
 

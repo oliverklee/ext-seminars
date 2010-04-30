@@ -235,11 +235,11 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * Checks whether the user requested the form for confirming an event and
 	 * whether all pre-conditions for showing the form are met.
 	 *
-	 * @return boolean true if the form was requested and pre-conditions are met, false otherwise
+	 * @return boolean TRUE if the form was requested and pre-conditions are met, FALSE otherwise
 	 */
 	private function isConfirmEventFormRequested() {
 		if ((!intval(t3lib_div::_POST('eventUid')) > 0)) {
-			return false;
+			return FALSE;
 		}
 
 		return t3lib_div::_POST('action') == 'confirmEvent';
@@ -249,11 +249,11 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * Checks whether the user requested the form for canceling an event and
 	 * whether all pre-conditions for showing the form are met.
 	 *
-	 * @return boolean true if the form was requested and pre-conditions are met, false otherwise
+	 * @return boolean TRUE if the form was requested and pre-conditions are met, FALSE otherwise
 	 */
 	private function isCancelEventFormRequested() {
 		if (!(intval(t3lib_div::_POST('eventUid')) > 0)) {
-			return false;
+			return FALSE;
 		}
 
 		return t3lib_div::_POST('action') == 'cancelEvent';
@@ -299,7 +299,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * Checks whether this extension's static template is included on the
 	 * current page.
 	 *
-	 * @return boolean true if the static template has been included, false
+	 * @return boolean TRUE if the static template has been included, FALSE
 	 *                 otherwise
 	 */
 	private function hasStaticTemplate() {

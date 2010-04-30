@@ -60,7 +60,7 @@ class tx_seminars_Model_TimeSlot extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this time-slot has an entry date.
 	 *
-	 * @return boolean true if this time-slot has an entry date, false otherwise
+	 * @return boolean TRUE if this time-slot has an entry date, FALSE otherwise
 	 */
 	public function hasEntryDate() {
 		return $this->hasInteger('entry_date');

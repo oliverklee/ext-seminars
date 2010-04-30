@@ -65,7 +65,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 */
 	public function setEventData(array $eventData) {
 		$this->recordData = $eventData;
-		$this->isInDb = true;
+		$this->isInDb = TRUE;
 	}
 
 	/**
@@ -160,7 +160,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 */
 	public function setNumberOfAttendances($number) {
 		$this->numberOfAttendances = $number;
-		$this->statisticsHaveBeenCalculated = true;
+		$this->statisticsHaveBeenCalculated = TRUE;
 	}
 
 	/**
@@ -171,7 +171,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 */
 	public function setNumberOfAttendancesOnQueue($number) {
 		$this->numberOfAttendancesOnQueue = $number;
-		$this->statisticsHaveBeenCalculated = true;
+		$this->statisticsHaveBeenCalculated = TRUE;
 	}
 
 	/**
@@ -530,7 +530,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * to 1 and attendees_max to 0.
 	 */
 	public function setUnlimitedVacancies() {
-		$this->setNeedsRegistration(true);
+		$this->setNeedsRegistration(TRUE);
 		$this->setAttendancesMax(0);
 	}
 
@@ -566,7 +566,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 *
 	 * @param string key of the element to check
 	 *
-	 * @return boolean true if the corresponding integer exists and is non-empty
+	 * @return boolean TRUE if the corresponding integer exists and is non-empty
 	 */
 	public function hasTopicInteger($key) {
 		return parent::hasTopicInteger($key);

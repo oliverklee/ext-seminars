@@ -53,13 +53,13 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 *               safeguarded against SQL injection
 	 * @param integer If $showHiddenRecords is set (0/1), any hidden-
 	 *                fields in records are ignored.
-	 * @param boolean If $ignoreTimingOfRecords is true the timing of
+	 * @param boolean If $ignoreTimingOfRecords is TRUE the timing of
 	 *                records is ignored.
 	 */
 	public function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
 		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
-		$ignoreTimingOfRecords = false
+		$ignoreTimingOfRecords = FALSE
 	) {
 		parent::__construct(
 			SEMINARS_TABLE_SEMINARS,
@@ -78,7 +78,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 	 * as a source. If the current item cannot be created, $this->currentItem
 	 * will be nulled out.
 	 *
-	 * $this->dbResult must be ensured to be not false when this function is
+	 * $this->dbResult must be ensured to be not FALSE when this function is
 	 * called.
 	 */
 	protected function createItemFromDbResult() {

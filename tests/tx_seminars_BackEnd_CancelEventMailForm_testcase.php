@@ -397,7 +397,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		$this->fixture->setPostData(
 			array(
 				'action' => 'cancelEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 			)
@@ -436,7 +436,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => $messageBody,
 			)

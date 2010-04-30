@@ -462,7 +462,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->seminar->setBeginDate($GLOBALS['EXEC_SIM_TIME'] + 45);
 		$this->seminar->setNumberOfAttendances(5);
 		$this->seminar->setAttendancesMax(5);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertContains(
 			sprintf($this->pi1->translate('label_onlineRegistrationOnQueue'), 0),
@@ -477,7 +477,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->seminar->setBeginDate($GLOBALS['EXEC_SIM_TIME'] + 45);
 		$this->seminar->setNumberOfAttendances(5);
 		$this->seminar->setAttendancesMax(5);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertContains(
 			sprintf($this->pi1->translate('label_onlineRegistrationOnQueue'), 0),
@@ -622,10 +622,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_GetRegistrationLink_ForLoggedInUserAndFullyBookedSeminarWithQueueEnabled_ReturnsLinkWithSeminarUid() {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
-		$this->seminar->setNeedsRegistration(true);
+		$this->seminar->setNeedsRegistration(TRUE);
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertContains(
 			'[seminar]=' . $this->seminar->getUid(),
@@ -635,10 +635,10 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_GetRegistrationLink_ForLoggedOutUserAndFullyBookedSeminarWithQueueEnabled_ReturnsLoginLink() {
 		$this->createFrontEndPages();
-		$this->seminar->setNeedsRegistration(true);
+		$this->seminar->setNeedsRegistration(TRUE);
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertContains(
 			'?id=' . $this->loginPageUid,
@@ -680,7 +680,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCanRegisterIfLoggedInForLoggedInButAlreadyRegisteredUserAndSeminarWithMultipleRegistrationsAllowedReturnsTrue() {
-		$this->seminar->setAllowsMultipleRegistrations(true);
+		$this->seminar->setAllowsMultipleRegistrations(TRUE);
 
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
@@ -739,7 +739,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function testCanRegisterIfLoggedInForLoggedOutUserAndSeminarWithoutRegistrationReturnsFalse() {
 		$this->seminar->setAttendancesMax(0);
-		$this->seminar->setNeedsRegistration(false);
+		$this->seminar->setNeedsRegistration(FALSE);
 
 		$this->assertFalse(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
@@ -766,7 +766,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_CanRegisterIfLoggedIn_ForLoggedOutUserAndFullyBookedSeminarWithQueue_ReturnsTrue() {
 		$this->seminar->setAttendancesMax(5);
 		$this->seminar->setNumberOfAttendances(5);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
@@ -776,7 +776,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_CanRegisterIfLoggedIn_ForLoggedInUserAndFullyBookedSeminarWithQueue_ReturnsTrue() {
 		$this->seminar->setAttendancesMax(5);
 		$this->seminar->setNumberOfAttendances(5);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->assertTrue(
@@ -821,7 +821,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_CanRegisterIfLoggedInMessage_ForLoggedInButAlreadyRegisteredUserAndSeminarWithMultipleRegistrationsAllowed_ReturnsEmptyString() {
-		$this->seminar->setAllowsMultipleRegistrations(true);
+		$this->seminar->setAllowsMultipleRegistrations(TRUE);
 
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
@@ -884,7 +884,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndSeminarWithoutRegistration_ReturnsNoRegistrationNeededMessage() {
 		$this->seminar->setAttendancesMax(0);
-		$this->seminar->setNeedsRegistration(false);
+		$this->seminar->setNeedsRegistration(FALSE);
 
 		$this->assertEquals(
 			'message_noRegistrationNecessary',
@@ -914,7 +914,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_CanRegisterIfLoggedInMessage_ForLoggedOutUserAndFullyBookedSeminarWithQueue_ReturnsEmptyString() {
 		$this->seminar->setAttendancesMax(5);
 		$this->seminar->setNumberOfAttendances(5);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertEquals(
 			'',
@@ -925,7 +925,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_CanRegisterIfLoggedInMessage_ForLoggedInUserAndFullyBookedSeminarWithQueue_ReturnsEmptyString() {
 		$this->seminar->setAttendancesMax(5);
 		$this->seminar->setNumberOfAttendances(5);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->assertEquals(
@@ -1485,7 +1485,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_CanRegisterSeats_ForFullyBookedEventWithQueueAndZeroSeatsGiven_ReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 0)
@@ -1495,7 +1495,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_CanRegisterSeats_ForFullyBookedEventWithQueueAndOneSeatGiven_ReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 1)
@@ -1505,7 +1505,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_CanRegisterSeats_ForFullyBookedEventWithQueueAndTwoSeatsGiven_ReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 2)
@@ -1515,7 +1515,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_CanRegisterSeats_ForFullyBookedEventWithQueueAndEmptyStringGiven_ReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, '')
@@ -1524,7 +1524,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_CanRegisterSeats_ForEventWithTwoVacanciesAndWithQueueAndFortytwoSeatsGiven_ReturnsTrue() {
 		$this->seminar->setAttendancesMax(2);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 42)
@@ -1537,7 +1537,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	////////////////////////////////////
 
 	public function test_NotifyAttendee_SendsMailToAttendeesMailAdress() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
@@ -1557,7 +1557,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function notifyAttendeeForAttendeeWithoutMailAdressDoesNotSendEmail() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
@@ -1581,7 +1581,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_MailSubjectContainsConfirmationSubject() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
@@ -1598,7 +1598,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_MailBodyContainsEventTitle() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
@@ -1616,7 +1616,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_MailSubjectContainsEventTitle() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
@@ -1633,7 +1633,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_SetsOrganizerAsSender() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
@@ -1695,7 +1695,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForHtmlMailSet_HasHtmlBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
@@ -1717,7 +1717,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForTextMailSet_DoesNotHaveHtmlBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
@@ -1734,7 +1734,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForMailSetToUserModeAndUserSetToHtmlMails_HasHtmlBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
@@ -1743,7 +1743,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration = $this->createRegistration();
 		$registration->getFrontEndUser()->setData(
 			array(
-				'module_sys_dmail_html' => true,
+				'module_sys_dmail_html' => TRUE,
 				'email' => 'foo@bar.com',
 			)
 		);
@@ -1762,7 +1762,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForMailSetToUserModeAndUserSetToTextMails_DoesNotHaveHtmlBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
@@ -1771,7 +1771,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration = $this->createRegistration();
 		$registration->getFrontEndUser()->setData(
 			array(
-				'module_sys_dmail_html' => false,
+				'module_sys_dmail_html' => FALSE,
 				'email' => 'foo@bar.com',
 			)
 		);
@@ -1790,7 +1790,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForHtmlMails_ContainsNameOfUserInBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
@@ -1816,7 +1816,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForHtmlMails_HasLinkToSeminarInBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
@@ -1847,7 +1847,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function notifyAttendee_AppendsOrganizersFooterToMailBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
@@ -1865,7 +1865,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForConfirmedEvent_DoesNotHavePlannedDisclaimer() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$registration = $this->createRegistration();
 		$registration->getSeminarObject()->setStatus(
 			tx_seminars_seminar::STATUS_CONFIRMED
@@ -1888,7 +1888,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForCancelledEvent_DoesNotHavePlannedDisclaimer() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$registration = $this->createRegistration();
 		$registration->getSeminarObject()->setStatus(
 			tx_seminars_seminar::STATUS_CANCELED
@@ -1911,7 +1911,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlannedEvent_DisplaysPlannedDisclaimer() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$registration = $this->createRegistration();
 		$registration->getSeminarObject()->setStatus(
 			tx_seminars_seminar::STATUS_PLANNED
@@ -1933,7 +1933,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_hiddenDisclaimerFieldAndPlannedEvent_HidesPlannedDisclaimer() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$this->fixture->setConfigurationValue(
 			'hideFieldsInThankYouMail', 'planned_disclaimer'
 		);
@@ -1959,7 +1959,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForHtmlMails_HasCssStylesFromFile() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
@@ -1986,7 +1986,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_MailBodyCanContainAttendeesNames() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
@@ -2005,7 +2005,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlainTextMail_EnumeratesAttendeesNames() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
@@ -2024,7 +2024,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForHtmlMail_ReturnsAttendeesNamesInOrderedList() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
@@ -2051,7 +2051,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_CanSendPlaceTitleInMailBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES, array('title' => 'foo_place')
 		);
@@ -2076,7 +2076,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_CanSendPlaceAddressInMailBody() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES, array('address' => 'foo_street')
 		);
@@ -2101,7 +2101,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForEventWithNoPlace_SendsWillBeAnnouncedMessage() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_pi1();
 		$pi1->init();
 
@@ -2119,7 +2119,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlainTextMail_SeparatesPlacesTitleAndAddressWithLF() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
 			array('title' => 'place_title','address' => 'place_address')
@@ -2145,7 +2145,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForHtmlMail_SeparatesPlacesTitleAndAddressWithBreaks() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
@@ -2179,7 +2179,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_StripsHtmlTagsFromPlaceAddress() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
 			array('title' => 'place_title','address' => 'place<h2>_address</h2>')
@@ -2205,7 +2205,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddress_ReplacesLineFeedsWithSpaces() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
 			array('address' => 'address1' . LF . 'address2')
@@ -2231,7 +2231,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddress_ReplacesCarriageReturnsWithSpaces() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
 			array('address' => 'address1' . CR . 'address2')
@@ -2257,7 +2257,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddress_ReplacesCarriageReturnAndLineFeedWithOneSpace() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
 			array('address' => 'address1' . CRLF . 'address2')
@@ -2283,7 +2283,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddress_ReplacesMultipleCarriageReturnsWithOneSpace() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
 			array('address' => 'address1' . CR . CR . 'address2')
@@ -2309,7 +2309,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddressAndPlainTextMails_ReplacesMultipleLineFeedsWithSpaces() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
 			array('address' => 'address1' . LF . LF . 'address2')
@@ -2335,7 +2335,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddressAndHtmlMails_ReplacesMultipleLineFeedsWithSpaces() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
@@ -2369,7 +2369,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddress_ReplacesMultipleLineFeedAndCarriageReturnsWithSpaces() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
@@ -2403,7 +2403,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddressAndPlainTextMails_SendsCityOfPlace() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES, array('city' => 'footown')
 		);
@@ -2428,7 +2428,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddressAndPlainTextMails_SendsCountryOfPlace() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
@@ -2455,7 +2455,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddressAndPlainTextMails_SeparatesAddressAndCityWithNewline() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
 			array('address' => 'address', 'city' => 'footown')
@@ -2481,7 +2481,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddressAndHtmlMails_SeparatresAddressAndCityLineWithBreaks() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
@@ -2515,7 +2515,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddressWithCountryAndCity_SeparatesCountryAndCityWithComma() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
@@ -2546,7 +2546,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyAttendee_ForPlaceAddressWithCityAndNoCountry_DoesNotAddSurplusCommaAfterCity() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SITES,
 			array('address' => 'address', 'city' => 'footown')
@@ -2580,7 +2580,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function notifyAttendeeForInformalSalutationContainsInformalSalutation() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		tx_oelib_ConfigurationRegistry::getInstance()->get('seminars')
 			->setAsString('salutation', 'informal');
 		$registration = $this->createRegistration();
@@ -2615,7 +2615,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			);
 		}
 
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$this->fixture->setConfigurationValue('salutation', 'formal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
@@ -2649,7 +2649,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			);
 		}
 
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$this->fixture->setConfigurationValue('salutation', 'formal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
@@ -2683,7 +2683,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			);
 		}
 
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$this->fixture->setConfigurationValue('salutation', 'formal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
@@ -2710,7 +2710,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function notifyAttendeeForFormalSalutationAndConfirmationContainsFormalConfirmationText() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$this->fixture->setConfigurationValue('salutation', 'formal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
@@ -2739,7 +2739,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function notifyAttendeeForInformalSalutationAndConfirmationContainsInformalConfirmationText() {
-		$this->fixture->setConfigurationValue('sendConfirmation', true);
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$this->fixture->setConfigurationValue('salutation', 'informal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
@@ -2769,7 +2769,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForFormalSalutationAndUnregistrationContainsFormalUnregistrationText() {
 		$this->fixture->setConfigurationValue(
-			'sendConfirmationOnUnregistration', true
+			'sendConfirmationOnUnregistration', TRUE
 		);
 		$this->fixture->setConfigurationValue('salutation', 'formal');
 		$registration = $this->createRegistration();
@@ -2804,7 +2804,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForInformalSalutationAndUnregistrationContainsInformalUnregistrationText() {
 		$this->fixture->setConfigurationValue(
-			'sendConfirmationOnUnregistration', true
+			'sendConfirmationOnUnregistration', TRUE
 		);
 		$this->fixture->setConfigurationValue('salutation', 'informal');
 		$registration = $this->createRegistration();
@@ -2839,7 +2839,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForFormalSalutationAndQueueConfirmationContainsFormalQueueConfirmationText() {
 		$this->fixture->setConfigurationValue(
-			'sendConfirmationOnRegistrationForQueue', true
+			'sendConfirmationOnRegistrationForQueue', TRUE
 		);
 		$this->fixture->setConfigurationValue('salutation', 'formal');
 		$registration = $this->createRegistration();
@@ -2874,7 +2874,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForInformalSalutationAndQueueConfirmationContainsInformalQueueConfirmationText() {
 		$this->fixture->setConfigurationValue(
-			'sendConfirmationOnRegistrationForQueue', true
+			'sendConfirmationOnRegistrationForQueue', TRUE
 		);
 		$this->fixture->setConfigurationValue('salutation', 'informal');
 		$registration = $this->createRegistration();
@@ -2909,7 +2909,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForFormalSalutationAndQueueUpdateContainsFormalQueueUpdateText() {
 		$this->fixture->setConfigurationValue(
-			'sendConfirmationOnQueueUpdate', true
+			'sendConfirmationOnQueueUpdate', TRUE
 		);
 		$this->fixture->setConfigurationValue('salutation', 'formal');
 		$registration = $this->createRegistration();
@@ -2944,7 +2944,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForInformalSalutationAndQueueUpdateContainsInformalQueueUpdateText() {
 		$this->fixture->setConfigurationValue(
-			'sendConfirmationOnQueueUpdate', true
+			'sendConfirmationOnQueueUpdate', TRUE
 		);
 		$this->fixture->setConfigurationValue('salutation', 'informal');
 		$registration = $this->createRegistration();
@@ -3178,7 +3178,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_NotifyOrganizers_IncludesHelloIfNotHidden() {
 		$registration = $this->createRegistration();
-		$this->fixture->setConfigurationValue('sendNotification', true);
+		$this->fixture->setConfigurationValue('sendNotification', TRUE);
 		$this->fixture->setConfigurationValue(
 			'hideFieldsInNotificationMail', ''
 		);
@@ -3195,7 +3195,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyOrganizers_ForEventWithOneVacancy_ShowsVacanciesLabelWithVacancyNumber() {
-		$this->fixture->setConfigurationValue('sendNotification', true);
+		$this->fixture->setConfigurationValue('sendNotification', TRUE);
 		$this->fixture->setConfigurationValue(
 			'showSeminarFieldsInNotificationMail', 'vacancies'
 		);
@@ -3217,7 +3217,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyOrganizers_ForEventWithUnlimitedVacancies_ShowsVacanciesLabelWithUnlimtedLabel() {
-		$this->fixture->setConfigurationValue('sendNotification', true);
+		$this->fixture->setConfigurationValue('sendNotification', TRUE);
 		$this->fixture->setConfigurationValue(
 			'showSeminarFieldsInNotificationMail', 'vacancies'
 		);
@@ -3240,7 +3240,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyOrganizers_ForRegistrationWithCompany_ShowsLabelOfCompany() {
-		$this->fixture->setConfigurationValue('sendNotification', true);
+		$this->fixture->setConfigurationValue('sendNotification', TRUE);
 		$this->fixture->setConfigurationValue(
 			'showAttendanceFieldsInNotificationMail', 'company'
 		);
@@ -3269,7 +3269,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NotifyOrganizers_ForRegistrationWithCompany_ShowsCompanyOfRegistration() {
-		$this->fixture->setConfigurationValue('sendNotification', true);
+		$this->fixture->setConfigurationValue('sendNotification', TRUE);
 		$this->fixture->setConfigurationValue(
 			'showAttendanceFieldsInNotificationMail', 'company'
 		);
@@ -3652,7 +3652,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_allowsRegistrationBySeats_ForEventWithNoVacanciesAndNoQueue_ReturnsFalse() {
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setAttendancesMax(1);
-		$this->seminar->setRegistrationQueue(false);
+		$this->seminar->setRegistrationQueue(FALSE);
 
 		$this->assertFalse(
 			$this->fixture->allowsRegistrationBySeats($this->seminar)
@@ -3670,7 +3670,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_allowsRegistrationBySeats_ForEventWithRegistrationQueue_ReturnsTrue() {
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setAttendancesMax(1);
-		$this->seminar->setRegistrationQueue(true);
+		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertTrue(
 			$this->fixture->allowsRegistrationBySeats($this->seminar)
@@ -3680,7 +3680,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function test_allowsRegistrationBySeats_ForEventWithVacancies_ReturnsTrue() {
 		$this->seminar->setNumberOfAttendances(0);
 		$this->seminar->setAttendancesMax(1);
-		$this->seminar->setRegistrationQueue(false);
+		$this->seminar->setRegistrationQueue(FALSE);
 
 		$this->assertTrue(
 			$this->fixture->allowsRegistrationBySeats($this->seminar)

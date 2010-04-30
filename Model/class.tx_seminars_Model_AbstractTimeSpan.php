@@ -82,7 +82,7 @@ abstract class tx_seminars_Model_AbstractTimeSpan extends tx_oelib_Model {
 	/**
 	 * Returns whether this time-span has a begin date.
 	 *
-	 * @return boolean true if this time-span has a begin date, false otherwise
+	 * @return boolean TRUE if this time-span has a begin date, FALSE otherwise
 	 */
 	public function hasBeginDate() {
 		return $this->hasInteger('begin_date');
@@ -115,7 +115,7 @@ abstract class tx_seminars_Model_AbstractTimeSpan extends tx_oelib_Model {
 	/**
 	 * Returns whether this time-span has an end date.
 	 *
-	 * @return boolean true if this time-span has an end date, false otherwise
+	 * @return boolean TRUE if this time-span has an end date, FALSE otherwise
 	 */
 	public function hasEndDate() {
 		return $this->hasInteger('end_date');
@@ -152,7 +152,7 @@ abstract class tx_seminars_Model_AbstractTimeSpan extends tx_oelib_Model {
 	/**
 	 * Returns whether this time-span has a room.
 	 *
-	 * @return boolean true if this time-span has a room, false otherwise
+	 * @return boolean TRUE if this time-span has a room, FALSE otherwise
 	 */
 	public function hasRoom() {
 		return $this->hasString('room');

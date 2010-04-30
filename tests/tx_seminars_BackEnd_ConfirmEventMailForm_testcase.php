@@ -174,7 +174,7 @@ class tx_seminars_BackEnd_ConfirmEventMailForm_testcase extends tx_phpunit_testc
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 			)
@@ -214,7 +214,7 @@ class tx_seminars_BackEnd_ConfirmEventMailForm_testcase extends tx_phpunit_testc
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
-				'isSubmitted' => 'true',
+				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => $messageBody,
 			)
