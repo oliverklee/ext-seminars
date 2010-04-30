@@ -77,7 +77,7 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 	 * as a source. If the current item cannot be created, $this->currentItem
 	 * will be nulled out.
 	 *
-	 * $this->dbResult is ensured to be not false when this function is called.
+	 * $this->dbResult is ensured to be not FALSE when this function is called.
 	 */
 	protected function createItemFromDbResult() {
 		$this->currentItem = tx_oelib_ObjectFactory::make(

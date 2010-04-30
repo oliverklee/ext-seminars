@@ -57,7 +57,7 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
 	/**
 	 * @var boolean whether the class ist used in test mode
 	 */
-	private $isTestMode = false;
+	private $isTestMode = FALSE;
 
 	/**
 	 * @var array this is used to fake form values for testing
@@ -120,13 +120,13 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
 	 * will not be used at all, instead the faked form values will be taken.
 	 */
 	public function setTestMode() {
-		$this->isTestMode = true;
+		$this->isTestMode = TRUE;
 	}
 
 	/**
 	 * Checks whether the test mode is set.
 	 *
-	 * @return boolean true if the test mode is set, false otherwise
+	 * @return boolean TRUE if the test mode is set, FALSE otherwise
 	 */
 	public function isTestMode() {
 		return $this->isTestMode;
@@ -170,7 +170,7 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
 		$formCreator->initFromTs(
 			$this,
 			$this->formConfiguration,
-			($this->getObjectUid() > 0) ? $this->getObjectUid() : false
+			($this->getObjectUid() > 0) ? $this->getObjectUid() : FALSE
 		);
 
 		return $formCreator;

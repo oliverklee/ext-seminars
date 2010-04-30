@@ -239,7 +239,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testStatusIsRegularIfNotOnQueue() {
-		$this->fixture->setIsOnRegistrationQueue(false);
+		$this->fixture->setIsOnRegistrationQueue(FALSE);
 
 		$this->assertEquals(
 			'regular',
@@ -248,7 +248,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testStatusIsWaitingListIfOnQueue() {
-		$this->fixture->setIsOnRegistrationQueue(true);
+		$this->fixture->setIsOnRegistrationQueue(TRUE);
 
 		$this->assertEquals(
 			'waiting list',
@@ -1573,7 +1573,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'<ol><li>foo</li><li>bar</li></ol>',
-			$this->fixture->getEnumeratedAttendeeNames(true)
+			$this->fixture->getEnumeratedAttendeeNames(TRUE)
 		);
 
 		$seminar->__destruct();
@@ -1587,7 +1587,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'',
-			$this->fixture->getEnumeratedAttendeeNames(true)
+			$this->fixture->getEnumeratedAttendeeNames(TRUE)
 		);
 
 		$seminar->__destruct();

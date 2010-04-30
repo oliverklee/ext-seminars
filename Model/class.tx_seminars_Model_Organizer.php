@@ -78,7 +78,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	/**
 	 * Returns whether this organizer has a homepage.
 	 *
-	 * @return boolean true if this organizer has a homepage, false otherwise
+	 * @return boolean TRUE if this organizer has a homepage, FALSE otherwise
 	 */
 	public function hasHomepage() {
 		return $this->hasString('homepage');
@@ -129,7 +129,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	/**
 	 * Returns whether this organizer has an e-mail footer.
 	 *
-	 * @return boolean true if this organizer has an e-mail footer, false otherwise
+	 * @return boolean TRUE if this organizer has an e-mail footer, FALSE otherwise
 	 */
 	public function hasEMailFooter() {
 		return $this->hasString('email_footer');
@@ -160,7 +160,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	/**
 	 * Returns whether this organizer has an attendances PID.
 	 *
-	 * @return boolean true if this organizer has an attendances PID, false otherwise
+	 * @return boolean TRUE if this organizer has an attendances PID, FALSE otherwise
 	 */
 	public function hasAttendancesPID() {
 		return $this->hasInteger('attendances_pid');
@@ -169,7 +169,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	/**
 	 * Checks whether this organizer has a description.
 	 *
-	 * @return boolean true if this organizer has a description, false otherwise
+	 * @return boolean TRUE if this organizer has a description, FALSE otherwise
 	 */
 	public function hasDescription() {
 		return $this->hasString('description');

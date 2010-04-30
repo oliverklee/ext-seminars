@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#3434] Cleanup: Replace false/true with FALSE/TRUE
 - [#3458] Fix: Unregistration is not possible if allowRegistrationForEventsWithoutDate = 1
 - [#3830] Fix: Number of vacancies is blank in the list view and single view for unlimited vacancies
 - [#3825] Fix: ###EVENT_TYPE###: ###TITLE###" are not correctly replaced in HTML confirmation mail for attendes

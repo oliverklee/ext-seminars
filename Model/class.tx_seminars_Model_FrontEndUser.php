@@ -162,8 +162,8 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	/**
 	 * Checks whether this user's groups have any default categories.
 	 *
-	 * @return boolean true if at least one of the user's groups has a default
-	 *                 category, false otherwise
+	 * @return boolean TRUE if at least one of the user's groups has a default
+	 *                 category, FALSE otherwise
 	 */
 	public function hasDefaultCategories() {
 		return !$this->getDefaultCategoriesFromGroup()->isEmpty();

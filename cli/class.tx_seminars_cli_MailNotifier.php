@@ -321,7 +321,7 @@ class tx_seminars_cli_MailNotifier {
 	 *
 	 * @param tx_seminars_seminars $event the event to send the e-mail for
 	 *
-	 * @return boolean true if the CSV file should be added, false otherwise
+	 * @return boolean TRUE if the CSV file should be added, FALSE otherwise
 	 */
 	private function shouldCsvFileBeAdded(tx_seminars_seminar $event) {
 		return tx_oelib_ConfigurationRegistry::getInstance()->get(

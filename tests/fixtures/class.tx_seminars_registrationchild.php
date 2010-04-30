@@ -52,7 +52,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 				'uid = ' . $registrationUid
 			);
 		} else {
-			$dbResult = false;
+			$dbResult = FALSE;
 		}
 
 		$contentObject = t3lib_div::makeInstance('tslib_cObj');
@@ -64,8 +64,8 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Sets the "registration_queue" field of the registration record.
 	 *
-	 * @param boolean true if the registration should be on the waiting
-	 * list, false otherwise
+	 * @param boolean TRUE if the registration should be on the waiting
+	 * list, FALSE otherwise
 	 */
 	public function setIsOnRegistrationQueue($isOnRegistrationQueueValue) {
 		$this->setRecordPropertyInteger(

@@ -48,9 +48,9 @@ class tx_seminars_pi1_frontEndCountdown extends tx_seminars_pi1_frontEndView {
 	private $seminar = null;
 
 	/**
-	 * @var boolean true if the current object is in test mode, false otherwise
+	 * @var boolean TRUE if the current object is in test mode, FALSE otherwise
 	 */
-	private $testMode = false;
+	private $testMode = FALSE;
 
 	/**
 	 * The destructor.
@@ -110,7 +110,7 @@ class tx_seminars_pi1_frontEndCountdown extends tx_seminars_pi1_frontEndView {
 
 			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage(
-				$this->seminar->checkConfiguration(true)
+				$this->seminar->checkConfiguration(TRUE)
 			);
 
 			// Calculates the time left until the event starts.
@@ -187,7 +187,7 @@ class tx_seminars_pi1_frontEndCountdown extends tx_seminars_pi1_frontEndView {
 	 * Enables the test mode for the current object.
 	 */
 	public function setTestMode() {
-		$this->testMode = true;
+		$this->testMode = TRUE;
 	}
 }
 

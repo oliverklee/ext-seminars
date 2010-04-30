@@ -51,9 +51,9 @@ class tx_seminars_test extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Returns true if the test field of this record is set, false otherwise.
+	 * Returns TRUE if the test field of this record is set, FALSE otherwise.
 	 *
-	 * @return boolean true if the test field of this record is set, false
+	 * @return boolean TRUE if the test field of this record is set, FALSE
 	 *                 otherwise
 	 */
 	public function getBooleanTest() {

@@ -79,7 +79,7 @@ class tx_seminars_Model_Category extends tx_oelib_Model {
 	/**
 	 * Returns whether this category has an icon.
 	 *
-	 * @return boolean true if this category has an icon, false otherwise
+	 * @return boolean TRUE if this category has an icon, FALSE otherwise
 	 */
 	public function hasIcon() {
 		return $this->hasString('icon');

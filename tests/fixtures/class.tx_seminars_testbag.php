@@ -56,13 +56,13 @@ class tx_seminars_testbag extends tx_seminars_bag {
 	 * safeguarded against SQL injection
 	 * @param integer If $showHiddenRecords is set (0/1), any hidden-
 	 * fields in records are ignored.
-	 * @param boolean If $ignoreTimingOfRecords is true the timing of
+	 * @param boolean If $ignoreTimingOfRecords is TRUE the timing of
 	 * records is ignored.
 	 */
 	public function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
 		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
-		$ignoreTimingOfRecords = false
+		$ignoreTimingOfRecords = FALSE
 	) {
 		parent::__construct(
 			SEMINARS_TABLE_TEST,

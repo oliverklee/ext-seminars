@@ -61,7 +61,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		$configuration = new tx_oelib_Configuration();
 		$configuration->setData(array(
 			'sendEventTakesPlaceReminderDaysBeforeBeginDate' => 2,
-			'sendCancelationDeadlineReminder' => true,
+			'sendCancelationDeadlineReminder' => TRUE,
 			'filenameForRegistrationsCsv' => 'registrations.csv',
 			'dateFormatYMD' => '%d.%m.%Y',
 		));
@@ -653,7 +653,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'cancelled' => tx_seminars_seminar::STATUS_PLANNED,
 		)));
 		tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars')
-			->set('sendCancelationDeadlineReminder', false);
+			->set('sendCancelationDeadlineReminder', FALSE);
 
 		$this->fixture->sendCancelationDeadlineReminders();
 

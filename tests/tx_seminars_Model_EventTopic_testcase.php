@@ -1066,7 +1066,7 @@ class tx_seminars_Model_EventTopic_testcase extends tx_phpunit_testcase {
 		$this->fixture->setData(
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
-				'allows_multiple_registrations' => true,
+				'allows_multiple_registrations' => TRUE,
 			)
 		);
 
@@ -1100,7 +1100,7 @@ class tx_seminars_Model_EventTopic_testcase extends tx_phpunit_testcase {
 		$this->fixture->setData(
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
-				'use_terms_2' => true,
+				'use_terms_2' => TRUE,
 			)
 		);
 

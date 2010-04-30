@@ -47,7 +47,7 @@ class tx_seminars_pi1_frontEndRequirementsList extends tx_seminars_pi1_frontEndV
 	 * @var boolean whether to limit the requirements to the events the user
 	 *              still needs to register
 	 */
-	private $limitRequirementsToMissing = false;
+	private $limitRequirementsToMissing = FALSE;
 
 	/**
 	 * The destructor.
@@ -81,7 +81,7 @@ class tx_seminars_pi1_frontEndRequirementsList extends tx_seminars_pi1_frontEndV
 			'label_requirements',
 			$this->translate('label_registration_requirements')
 		);
-		$this->limitRequirementsToMissing = true;
+		$this->limitRequirementsToMissing = TRUE;
 	}
 
 	/**

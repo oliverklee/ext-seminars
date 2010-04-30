@@ -1315,7 +1315,7 @@ class tx_seminars_Model_EventDate_testcase extends tx_phpunit_testcase {
 	public function allowsMultipleRegistrationForEventDateWithSetAllowsMultipleRegistrationReturnsTrue() {
 		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(
-				array('allows_multiple_registrations' => true)
+				array('allows_multiple_registrations' => TRUE)
 			);
 		$this->fixture->setData(
 			array(
@@ -1357,7 +1357,7 @@ class tx_seminars_Model_EventDate_testcase extends tx_phpunit_testcase {
 	 */
 	public function usesTerms2ForEventDateWithSetUseTerms2ReturnsTrue() {
 		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(array('use_terms_2' => true));
+			->getLoadedTestingModel(array('use_terms_2' => TRUE));
 		$this->fixture->setData(
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,

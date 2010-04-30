@@ -159,7 +159,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_TEST, $this->fixtureUid, array('hidden' => 1)
 		);
 
-		$test = new tx_seminars_test($this->fixtureUid, null, true);
+		$test = new tx_seminars_test($this->fixtureUid, null, TRUE);
 
 		$this->assertTrue(
 			$test->isOk()
@@ -221,7 +221,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 			$this->fixture->getBooleanTest()
 		);
 
-		$this->fixture->setBooleanTest(true);
+		$this->fixture->setBooleanTest(TRUE);
 		$this->assertTrue(
 			$this->fixture->getBooleanTest()
 		);
@@ -435,7 +435,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 
 		$this->assertFalse(
 			$this->fixture->recordExists(
-				$this->fixtureUid, SEMINARS_TABLE_TEST, false
+				$this->fixtureUid, SEMINARS_TABLE_TEST, FALSE
 			)
 		);
 	}
@@ -447,7 +447,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->recordExists(
-				$this->fixtureUid, SEMINARS_TABLE_TEST, true
+				$this->fixtureUid, SEMINARS_TABLE_TEST, TRUE
 			)
 		);
 	}

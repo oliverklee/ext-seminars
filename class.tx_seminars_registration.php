@@ -58,7 +58,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * @var boolean whether the user data has already been retrieved
 	 */
-	private $userDataHasBeenRetrieved = false;
+	private $userDataHasBeenRetrieved = FALSE;
 
 	/**
 	 * This variable stores the data of the user as an array and makes it
@@ -93,11 +93,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 *
 	 * @param object content object
 	 * @param pointer MySQL result pointer (of SELECT query)/DBAL object.
-	 *                If this parameter is not provided or false,
+	 *                If this parameter is not provided or FALSE,
 	 *                setRegistrationData() needs to be called directly
 	 *                after construction or this object will not be usable.
 	 */
-	public function __construct(tslib_cObj $cObj, $dbResult = false) {
+	public function __construct(tslib_cObj $cObj, $dbResult = FALSE) {
 		$this->cObj = $cObj;
 		$this->initializeCharsetConversion();
 		$this->init();
@@ -277,7 +277,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Returns whether this registration has seats.
 	 *
-	 * @return boolean true if this registration has seats, false otherwise
+	 * @return boolean TRUE if this registration has seats, FALSE otherwise
 	 */
 	public function hasSeats() {
 		return $this->hasRecordPropertyInteger('seats');
@@ -338,7 +338,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		}
 
 		$this->userData = $userData;
-		$this->userDataHasBeenRetrieved = true;
+		$this->userDataHasBeenRetrieved = TRUE;
 	}
 
 	/**
@@ -506,7 +506,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @return string the values retrieved from $this->userData, may be empty
 	 */
 	public function getUserDataAsHtml($keys, tslib_pibase $plugin) {
-		$singleKeys = t3lib_div::trimExplode(',', $keys, true);
+		$singleKeys = t3lib_div::trimExplode(',', $keys, TRUE);
 		$singleValues = array();
 
 		foreach ($singleKeys as $currentKey) {
@@ -583,12 +583,12 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Returns whether the registration has an existing front-end user.
 	 *
-	 * @return boolean true if the registration has an existing front-end user,
-	 *                 false otherwise
+	 * @return boolean TRUE if the registration has an existing front-end user,
+	 *                 FALSE otherwise
 	 */
 	public function hasExistingFrontEndUser() {
 		if ($this->getUser() <= 0) {
-			return false;
+			return FALSE;
 		}
 
 		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')->
@@ -729,7 +729,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * Returns whether this registration has a saved price category name and
 	 * its single price.
 	 *
-	 * @return boolean true if this registration has a price, false otherwise
+	 * @return boolean TRUE if this registration has a price, FALSE otherwise
 	 */
 	public function hasPrice() {
 		return $this->hasRecordPropertyString('price');
@@ -764,7 +764,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Returns whether this registration has a total price.
 	 *
-	 * @return boolean true if this registration has a total price, false
+	 * @return boolean TRUE if this registration has a total price, FALSE
 	 *                 otherwise
 	 */
 	public function hasTotalPrice() {
@@ -782,7 +782,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @return string formatted output (may be empty)
 	 */
 	public function dumpUserValues($keysList) {
-		$keys = t3lib_div::trimExplode(',', $keysList, true);
+		$keys = t3lib_div::trimExplode(',', $keysList, TRUE);
 		$keysWithLabels = array();
 
 		$maxLength = 0;
@@ -835,7 +835,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @return string formatted output (may be empty)
 	 */
 	public function dumpAttendanceValues($keysList) {
-		$keys = t3lib_div::trimExplode(',', $keysList, true);
+		$keys = t3lib_div::trimExplode(',', $keysList, TRUE);
 		$keysWithLabels = array();
 
 		$maxLength = 0;
@@ -888,14 +888,14 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		 * the entry (instead of just a space)
 		 */
 		$billingAddressFields = array(
-			'gender' => false,
-			'name' => true,
-			'address' => true,
-			'zip' => false,
-			'city' => true,
-			'country' => true,
-			'telephone' => true,
-			'email' => true
+			'gender' => FALSE,
+			'name' => TRUE,
+			'address' => TRUE,
+			'zip' => FALSE,
+			'city' => TRUE,
+			'country' => TRUE,
+			'telephone' => TRUE,
+			'email' => TRUE
 		);
 
 		$result = '';
@@ -933,7 +933,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Checks whether there are any lodging options referenced by this record.
 	 *
-	 * @return boolean true if at least one lodging option is referenced by this record, false otherwise
+	 * @return boolean TRUE if at least one lodging option is referenced by this record, FALSE otherwise
 	 */
 	public function hasLodgings() {
 		return $this->hasRecordPropertyInteger('lodgings');
@@ -962,8 +962,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Checks whether there are any food options referenced by this record.
 	 *
-	 * @return boolean true if at least one food option is referenced by this
-	 *                 record, false otherwise
+	 * @return boolean TRUE if at least one food option is referenced by this
+	 *                 record, FALSE otherwise
 	 */
 	public function hasFoods() {
 		return $this->hasRecordPropertyInteger('foods');
@@ -992,8 +992,8 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Checks whether any option checkboxes are referenced by this record.
 	 *
-	 * @return boolean true if at least one option checkbox is referenced by
-	 *                 this record, false otherwise
+	 * @return boolean TRUE if at least one option checkbox is referenced by
+	 *                 this record, FALSE otherwise
 	 */
 	public function hasCheckboxes() {
 		return $this->hasRecordPropertyInteger('checkboxes');
@@ -1065,7 +1065,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * The UID of the parent page must be set in $this->recordData['pid'].
 	 * (otherwise the record will be created in the root page).
 	 *
-	 * @return boolean true if everything went OK, false otherwise
+	 * @return boolean TRUE if everything went OK, FALSE otherwise
 	 */
 	public function commitToDb() {
 		$result = parent::commitToDb();
@@ -1099,11 +1099,11 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Returns true if this registration is on the registration queue, false
+	 * Returns TRUE if this registration is on the registration queue, FALSE
 	 * otherwise.
 	 *
-	 * @return boolean true if this registration is on the registration
-	 *                 queue, false otherwise
+	 * @return boolean TRUE if this registration is on the registration
+	 *                 queue, FALSE otherwise
 	 */
 	public function isOnRegistrationQueue() {
 		return $this->getRecordPropertyBoolean('registration_queue');
@@ -1143,7 +1143,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Returns whether this registration has attendees names.
 	 *
-	 * @return boolean true if this registration has attendees names, false
+	 * @return boolean TRUE if this registration has attendees names, FALSE
 	 *                 otherwise
 	 */
 	public function hasAttendeesNames() {
@@ -1176,7 +1176,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Returns whether this registration has kids.
 	 *
-	 * @return boolean true if this registration has kids, false otherwise
+	 * @return boolean TRUE if this registration has kids, FALSE otherwise
 	 */
 	public function hasKids() {
 		return $this->hasRecordPropertyInteger('kids');
@@ -1208,7 +1208,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Returns whether this registration has a method of payment.
 	 *
-	 * @return boolean true if this event has a method of payment, false
+	 * @return boolean TRUE if this event has a method of payment, FALSE
 	 *                 otherwise
 	 */
 	public function hasMethodOfPayment() {
@@ -1227,13 +1227,13 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 * @return string the names stored in attendees_name enumerated, will be
 	 *                empty if this registration has no attendees names
 	 */
-	public function getEnumeratedAttendeeNames($useHtml = false) {
+	public function getEnumeratedAttendeeNames($useHtml = FALSE) {
 		if (!$this->hasAttendeesNames() && !$this->hasRegisteredMySelf()) {
 			return '';
 		}
 
 		$names = t3lib_div::trimExplode(
-			LF, $this->getAttendeesNames(), true
+			LF, $this->getAttendeesNames(), TRUE
 		);
 		if ($this->hasRegisteredMySelf()) {
 			$names = array_merge(
@@ -1259,7 +1259,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * Checks whether the user has registered themselves.
 	 *
-	 * @return boolean true if the user registered themselves, false otherwise
+	 * @return boolean TRUE if the user registered themselves, FALSE otherwise
 	 */
 	public function hasRegisteredMySelf() {
 		return $this->getRecordPropertyBoolean('registered_themselves');

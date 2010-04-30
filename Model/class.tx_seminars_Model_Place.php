@@ -77,7 +77,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	/**
 	 * Returns whether this place has an address.
 	 *
-	 * @return boolean true if this address has an address, false otherwise
+	 * @return boolean TRUE if this address has an address, FALSE otherwise
 	 */
 	public function hasAddress() {
 		return $this->hasString('address');
@@ -168,7 +168,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	/**
 	 * Returns whether this place has a country.
 	 *
-	 * @return boolean true if this place has a country, false otherwise
+	 * @return boolean TRUE if this place has a country, FALSE otherwise
 	 */
 	public function hasCountry() {
 		return ($this->getCountry() instanceof tx_oelib_Model_Country);
@@ -222,7 +222,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	/**
 	 * Returns whether this place has directions.
 	 *
-	 * @return boolean true if this place has directions, false otherwise
+	 * @return boolean TRUE if this place has directions, FALSE otherwise
 	 */
 	public function hasDirections() {
 		return $this->hasString('directions');

@@ -59,9 +59,9 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Returns true if this speaker has an organization, false otherwise.
+	 * Returns TRUE if this speaker has an organization, FALSE otherwise.
 	 *
-	 * @return boolean true if this speaker has an organization, false otherwise
+	 * @return boolean TRUE if this speaker has an organization, FALSE otherwise
 	 */
 	public function hasOrganization() {
 		return $this->hasRecordPropertyString('organization');
@@ -77,9 +77,9 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Returns true if this speaker has a homepage, false otherwise.
+	 * Returns TRUE if this speaker has a homepage, FALSE otherwise.
 	 *
-	 * @return boolean true if this speaker has a homepage, false otherwise
+	 * @return boolean TRUE if this speaker has a homepage, FALSE otherwise
 	 */
 	public function hasHomepage() {
 		return $this->hasRecordPropertyString('homepage');
@@ -108,9 +108,9 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Returns true if this speaker has a description, false otherwise.
+	 * Returns TRUE if this speaker has a description, FALSE otherwise.
 	 *
-	 * @return boolean true if this speaker has a description, false otherwise
+	 * @return boolean TRUE if this speaker has a description, FALSE otherwise
 	 */
 	public function hasDescription() {
 		return $this->hasRecordPropertyString('description');
@@ -119,8 +119,8 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * Checks whether we have any skills set.
 	 *
-	 * @return boolean true if we have any skills related to this speaker,
-	 *                 false otherwise
+	 * @return boolean TRUE if we have any skills related to this speaker,
+	 *                 FALSE otherwise
 	 */
 	public function hasSkills() {
 		return $this->hasRecordPropertyInteger('skills');
@@ -281,9 +281,9 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Returns true if this speaker has a cancelation period.
+	 * Returns TRUE if this speaker has a cancelation period.
 	 *
-	 * @return boolean true if the speaker has a cancelation period, false
+	 * @return boolean TRUE if the speaker has a cancelation period, FALSE
 	 *                 otherwise
 	 */
 	public function hasCancelationPeriod() {
@@ -336,9 +336,9 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	}
 
 	/**
-	 * Returns true if the speaker is hidden, otherwise false.
+	 * Returns TRUE if the speaker is hidden, otherwise FALSE.
 	 *
-	 * @return boolean true if the speaker is hidden, false otherwise
+	 * @return boolean TRUE if the speaker is hidden, FALSE otherwise
 	 */
 	public function isHidden() {
 		return $this->getRecordPropertyBoolean('hidden');

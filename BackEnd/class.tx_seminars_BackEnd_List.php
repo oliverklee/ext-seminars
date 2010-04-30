@@ -300,7 +300,7 @@ abstract class tx_seminars_BackEnd_List {
 	 * @param integer $uid the UID of the record, must be > 0
 	 * @param integer $pageUid the PID of the record, must be >= 0
 	 * @param boolean $hidden
-	 *        indicates whether the record is hidden (true) or is visible (false)
+	 *        indicates whether the record is hidden (TRUE) or is visible (FALSE)
 	 *
 	 * @return string the HTML source code of the linked hide or unhide icon
 	 */
@@ -342,7 +342,7 @@ abstract class tx_seminars_BackEnd_List {
 	 *
 	 * @param integer $pageUid the page to check the access for, must be >= 0
 	 *
-	 * @return boolean true if the user has access, false otherwise
+	 * @return boolean TRUE if the user has access, FALSE otherwise
 	 */
 	protected function doesUserHaveAccess($pageUid) {
 		if (!isset($this->accessRights[$pageUid])) {

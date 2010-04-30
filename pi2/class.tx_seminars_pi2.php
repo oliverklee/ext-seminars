@@ -306,7 +306,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 					);
 					break;
 				case 'FE':
-					$hasAccess = true;
+					$hasAccess = TRUE;
 					break;
 				default:
 					throw new Exception('You are trying to get a CSV list on a ' .
@@ -474,10 +474,10 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				$rawData = $dataSupplier->$supplierFunction($currentKey);
 				// Escapes double quotes and wraps the whole string in double
 				// quotes.
-				if (strpos($rawData, '"') !== false) {
+				if (strpos($rawData, '"') !== FALSE) {
 					$result[] = '"'.str_replace('"', '""', $rawData).'"';
-				} elseif ((strpos($rawData, ';') !== false) ||
-					(strpos($rawData, LF) !== false)
+				} elseif ((strpos($rawData, ';') !== FALSE) ||
+					(strpos($rawData, LF) !== FALSE)
 				){
 					$result[] = '"' . $rawData . '"';
 				} else {
@@ -503,12 +503,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * @param integer UID of the event record for which access should be
 	 *                checked, must be > 0
 	 *
-	 * @return boolean true if the list of registrations may be exported as CSV
+	 * @return boolean TRUE if the list of registrations may be exported as CSV
 	 */
 	public function canAccessListOfRegistrations($eventUid) {
 		// no need to check any special permissions if global access is granted
 		if ($this->configGetter->getConfValueBoolean('allowAccessToCsv')) {
-			return true;
+			return TRUE;
 		}
 
 		switch ($this->getTypo3Mode()) {
@@ -551,7 +551,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 					);
 				break;
 			default:
-				$result = false;
+				$result = FALSE;
 				break;
 		}
 
@@ -566,7 +566,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *        PID of the page with events for which to check access, must
 	 *        be >= 0
 	 *
-	 * @return boolean true if the list of events may be exported as CSV, false
+	 * @return boolean TRUE if the list of events may be exported as CSV, FALSE
 	 *                 otherwise
 	 */
 	public function canAccessListOfEvents($pid) {
@@ -678,8 +678,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *
 	 * @param integer $pid PID of the page to check the access for, must be >= 0
 	 *
-	 * @return booelan true if the currently logged-in BE-User is allowed to
-	 *                 access the registrations records, false if the user has
+	 * @return booelan TRUE if the currently logged-in BE-User is allowed to
+	 *                 access the registrations records, FALSE if the user has
 	 *                 no access or this function is called in FE mode
 	 */
 	private function canAccessRegistrationsOnPage($pid) {
@@ -696,12 +696,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *
 	 * @param integer $pid the page to check the access for, must be >= 0
 	 *
-	 * @return boolean true if the user has access to the given table and page,
-	 *                 false otherwise, will also return false if this function
+	 * @return boolean TRUE if the user has access to the given table and page,
+	 *                 FALSE otherwise, will also return FALSE if this function
 	 *                 is called in any other TYPO3 mode than BE
 	 */
 	private function canAccessTableAndPage($table, $pid) {
-		$result = false;
+		$result = FALSE;
 
 		if ($this->getTypo3Mode() == 'BE') {
 			// Checks read access to the given table.
@@ -793,12 +793,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *        the event to check the access for, must be >= 0 but not
 	 *        necessarily point to an existing event
 	 *
-	 * @return boolean true if the event record exists and the BE-User has
+	 * @return boolean TRUE if the event record exists and the BE-User has
 	 *                 access to the registrations belonging to the event,
-	 *                 false otherwise
+	 *                 FALSE otherwise
 	 */
 	private function hasAccessToEventAndItsRegistrations($eventUid) {
-		$result = false;
+		$result = FALSE;
 
 		if (!tx_seminars_objectfromdb::recordExists(
 			$eventUid, SEMINARS_TABLE_SEMINARS
@@ -807,7 +807,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		} elseif (!$this->canAccessListOfRegistrations($eventUid)) {
 			$this->errorType = self::ACCESS_DENIED;
 		} else {
-			$result = true;
+			$result = TRUE;
 		}
 
 		return $result;
@@ -870,8 +870,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * Returns whether the attendances on queue should also be exported in the
 	 * CSV file.
 	 *
-	 * @return boolean true if the attendances on queue should also be exported,
-	 *                 false otherwise
+	 * @return boolean TRUE if the attendances on queue should also be exported,
+	 *                 FALSE otherwise
 	 */
 	private function getRegistrationsOnQueueConfiguration() {
 		switch ($this->exportMode) {

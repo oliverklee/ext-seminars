@@ -76,8 +76,8 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	/**
 	 * Returns whether this user group has a PID for auxiliary records set.
 	 *
-	 * @return boolean true if this user group has PID for auxiliary records set,
-	 *                 false otherwise
+	 * @return boolean TRUE if this user group has PID for auxiliary records set,
+	 *                 FALSE otherwise
 	 */
 	public function hasAuxiliaryRecordsPid() {
 		return $this->hasInteger('tx_seminars_auxiliary_records_pid');
@@ -86,7 +86,7 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	/**
 	 * Checks whether this user group has a reviewer set.
 	 *
-	 * @return boolean true if a reviewer is set, false otherwise
+	 * @return boolean TRUE if a reviewer is set, FALSE otherwise
 	 */
 	public function hasReviewer() {
 		return $this->getReviewer() !== null;
@@ -105,7 +105,7 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	/**
 	 * Checks whether this user group has a storage PID for event records set.
 	 *
-	 * @return boolean true if this user group has a event storage PID, false
+	 * @return boolean TRUE if this user group has a event storage PID, FALSE
 	 *                  otherwise
 	 */
 	public function hasEventRecordPid() {
@@ -136,8 +136,8 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	/**
 	 * Checks whether this user group has default categories assigned.
 	 *
-	 * @return boolean true if this group has at least one default category,
-	 *                 false otherwise
+	 * @return boolean TRUE if this group has at least one default category,
+	 *                 FALSE otherwise
 	 */
 	public function hasDefaultCategories() {
 		return !$this->getDefaultCategories()->isEmpty();

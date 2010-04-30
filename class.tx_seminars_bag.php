@@ -70,7 +70,7 @@ abstract class tx_seminars_bag implements Iterator {
 	/**
 	 * @var boolean whether $this->count has been calculated
 	 */
-	private $hasCount = false;
+	private $hasCount = FALSE;
 
 	/**
 	 * @var integer how many objects this bag contains
@@ -80,7 +80,7 @@ abstract class tx_seminars_bag implements Iterator {
 	/**
 	 * @var boolean whether $this->$countWithoutLimit has been calculated
 	 */
-	private $hasCountWithoutLimit = false;
+	private $hasCountWithoutLimit = FALSE;
 
 	/**
 	 * @var integer how many objects this bag would hold without the LIMIT
@@ -90,13 +90,13 @@ abstract class tx_seminars_bag implements Iterator {
 	/**
 	 * @var boolean whether this bag is at the first element
 	 */
-	private $isRewound = false;
+	private $isRewound = FALSE;
 
 	/**
 	 * @var boolean an SQL query result (not converted to an associative array
 	 *              yet)
 	 */
-	protected $dbResult = false;
+	protected $dbResult = FALSE;
 
 	/**
 	 * @var tx_seminars_objectfromdb the current object (may be null)
@@ -136,13 +136,13 @@ abstract class tx_seminars_bag implements Iterator {
 	 *               safeguarded against SQL injection
 	 * @param integer If $showHiddenRecords is set (0/1), any hidden-
 	 *               fields in records are ignored.
-	 * @param boolean If $ignoreTimingOfRecords is true the timing of
+	 * @param boolean If $ignoreTimingOfRecords is TRUE the timing of
 	 *               records is ignored.
 	 */
 	public function __construct(
 		$dbTableName, $queryParameters = '1=1', $additionalTableNames = '',
 		$groupBy = '', $orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
-		$ignoreTimingOfRecords = false
+		$ignoreTimingOfRecords = FALSE
 	) {
 		$this->dbTableName = $dbTableName;
 		$this->queryParameters = trim($queryParameters);
@@ -177,18 +177,18 @@ abstract class tx_seminars_bag implements Iterator {
 	 *
 	 * @param integer If $showHiddenRecords is set (0/1), any hidden-
 	 *                fields in records are ignored.
-	 * @param boolean If $ignoreTimingOfRecords is true the timing of
+	 * @param boolean If $ignoreTimingOfRecords is TRUE the timing of
 	 *                records is ignored.
 	 */
 	private function createEnabledFieldsQuery(
-		$showHiddenRecords = -1, $ignoreTimingOfRecords = false
+		$showHiddenRecords = -1, $ignoreTimingOfRecords = FALSE
 	) {
 		$ignoreColumns = array();
 
 		if ($ignoreTimingOfRecords) {
 			$ignoreColumns = array(
-				'starttime' => true,
-				'endtime' => true
+				'starttime' => TRUE,
+				'endtime' => TRUE
 			);
 		}
 
@@ -238,7 +238,7 @@ abstract class tx_seminars_bag implements Iterator {
 
 		$this->createItemFromDbResult();
 
-		$this->isRewound = true;
+		$this->isRewound = TRUE;
 	}
 
 	/**
@@ -254,7 +254,7 @@ abstract class tx_seminars_bag implements Iterator {
 		}
 
 		$this->createItemFromDbResult();
-		$this->isRewound = false;
+		$this->isRewound = FALSE;
 
 		return $this->current();
 	}
@@ -264,7 +264,7 @@ abstract class tx_seminars_bag implements Iterator {
 	 * a source. If the current item cannot be created, $this->currentItem will
 	 * be nulled out.
 	 *
-	 * $this->dbResult is ensured to be not false when this function is called.
+	 * $this->dbResult is ensured to be not FALSE when this function is called.
 	 */
 	abstract protected function createItemFromDbResult();
 
@@ -283,17 +283,17 @@ abstract class tx_seminars_bag implements Iterator {
 	 * Checks isOk() and, in case of failure (e.g. there is no more data
 	 * from the DB), nulls out $this->currentItem.
 	 *
-	 * If the function isOk() returns true, nothing is changed.
+	 * If the function isOk() returns TRUE, nothing is changed.
 	 *
-	 * @return boolean true if the current item is valid, false otherwise
+	 * @return boolean TRUE if the current item is valid, FALSE otherwise
 	 */
 	public function valid() {
 		if (!$this->currentItem || !$this->currentItem->isOk()) {
 			$this->currentItem = null;
-			return false;
+			return FALSE;
 		}
 
-		return true;
+		return TRUE;
 	}
 
 	/**
@@ -325,7 +325,7 @@ abstract class tx_seminars_bag implements Iterator {
 		}
 
 		$this->count = $GLOBALS['TYPO3_DB']->sql_num_rows($this->dbResult);
-		$this->hasCount = true;
+		$this->hasCount = TRUE;
 
 		return $this->count;
 	}
@@ -349,7 +349,7 @@ abstract class tx_seminars_bag implements Iterator {
 		);
 
 		$this->countWithoutLimit = $dbResultRow['number'];
-		$this->hasCountWithoutLimit = true;
+		$this->hasCountWithoutLimit = TRUE;
 
 		return $this->countWithoutLimit;
 	}
@@ -359,7 +359,7 @@ abstract class tx_seminars_bag implements Iterator {
 	 *
 	 * Note: This function might rewind().
 	 *
-	 * @return boolean true if this bag is empty, false otherwise
+	 * @return boolean TRUE if this bag is empty, FALSE otherwise
 	 */
 	public function isEmpty() {
 		if ($this->hasCount) {
@@ -370,7 +370,7 @@ abstract class tx_seminars_bag implements Iterator {
 		$isEmpty = !is_object($this->current());
 		if ($isEmpty) {
 			$this->count = 0;
-			$this->hasCount = true;
+			$this->hasCount = TRUE;
 		}
 
 		return $isEmpty;
@@ -404,7 +404,7 @@ abstract class tx_seminars_bag implements Iterator {
 	 */
 	public function checkConfiguration() {
 		if ($this->current() && $this->current()->isOk()) {
-			return $this->current()->checkConfiguration(true);
+			return $this->current()->checkConfiguration(TRUE);
 		}
 
 		return '';

@@ -94,7 +94,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has an organization.
 	 *
-	 * @return boolean true if this speaker has an organization, false otherwise
+	 * @return boolean TRUE if this speaker has an organization, FALSE otherwise
 	 */
 	public function hasOrganization() {
 		return $this->hasString('organization');
@@ -121,7 +121,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a homepage.
 	 *
-	 * @return boolean true if this speaker has a homepage, false otherwise
+	 * @return boolean TRUE if this speaker has a homepage, FALSE otherwise
 	 */
 	public function hasHomepage() {
 		return $this->hasString('homepage');
@@ -149,7 +149,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a description.
 	 *
-	 * @return boolean true if this speaker has a description, false otherwise
+	 * @return boolean TRUE if this speaker has a description, FALSE otherwise
 	 */
 	public function hasDescription() {
 		return $this->hasString('description');
@@ -195,7 +195,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this place has an address.
 	 *
-	 * @return boolean true if this address has an address, false otherwise
+	 * @return boolean TRUE if this address has an address, FALSE otherwise
 	 */
 	public function hasAddress() {
 		return $this->hasString('address');
@@ -223,7 +223,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a work telephone number.
 	 *
-	 * @return boolean true if this speaker has a work telephone number, false
+	 * @return boolean TRUE if this speaker has a work telephone number, FALSE
 	 *                 otherwise
 	 */
 	public function hasPhoneWork() {
@@ -252,7 +252,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a home telephone number.
 	 *
-	 * @return boolean true if this speaker has a home telephone number, false
+	 * @return boolean TRUE if this speaker has a home telephone number, FALSE
 	 *                 otherwise
 	 */
 	public function hasPhoneHome() {
@@ -281,7 +281,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a mobile telephone number.
 	 *
-	 * @return boolean true if this speaker has a mobile telephone number, false
+	 * @return boolean TRUE if this speaker has a mobile telephone number, FALSE
 	 *                 otherwise
 	 */
 	public function hasPhoneMobile() {
@@ -309,7 +309,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a fax number.
 	 *
-	 * @return boolean true if this speaker has a fax number, false otherwise
+	 * @return boolean TRUE if this speaker has a fax number, FALSE otherwise
 	 */
 	public function hasFax() {
 		return $this->hasString('fax');
@@ -338,7 +338,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has an e-mail address.
 	 *
-	 * @return boolean true if this speaker has an e-mail address, false
+	 * @return boolean TRUE if this speaker has an e-mail address, FALSE
 	 *                 otherwise
 	 */
 	public function hasEMailAddress() {
@@ -370,7 +370,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a gender.
 	 *
-	 * @return boolean true if this speaker has a gender, false otherwise
+	 * @return boolean TRUE if this speaker has a gender, FALSE otherwise
 	 */
 	public function hasGender() {
 		return $this->hasInteger('gender');
@@ -401,7 +401,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a cancelation period set.
 	 *
-	 * @return boolean true if this speaker has a cancelation period set, false
+	 * @return boolean TRUE if this speaker has a cancelation period set, FALSE
 	 *                 otherwise
 	 */
 	public function hasCancelationPeriod() {

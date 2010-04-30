@@ -108,7 +108,7 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 	 */
 	public function render() {
 		$errorMessage = '';
-		$isOkay = false;
+		$isOkay = FALSE;
 
 		if ($this->seminar->isOk()) {
 			// Okay, at least the seminar UID is valid so we can show the
@@ -116,7 +116,7 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 			$this->setMarker('title', $this->seminar->getTitleAndDate());
 
 			// Lets warnings from the seminar bubble up to us.
-			$this->setErrorMessage($this->seminar->checkConfiguration(true));
+			$this->setErrorMessage($this->seminar->checkConfiguration(TRUE));
 
 			if ($this->seminar->canViewRegistrationsList(
 				$this->whatToDisplay,
@@ -126,7 +126,7 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 					'defaultEventVipsFeGroupID', 's_template_special'
 				)
 			)) {
-				$isOkay = true;
+				$isOkay = TRUE;
 			} else {
 				$errorMessage = $this->seminar->canViewRegistrationsListMessage(
 					$this->whatToDisplay
@@ -195,7 +195,7 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 					'showFeUserFieldsInRegistrationsList',
 					's_template_special'
 				),
-				true
+				TRUE
 			);
 
 			foreach ($frontEndUserFields as $field) {
@@ -214,7 +214,7 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 					'showRegistrationFieldsInRegistrationList',
 					's_template_special'
 				),
-				true
+				TRUE
 			);
 
 			foreach ($registrationsFields as $field) {
@@ -278,7 +278,7 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 		}
 
 		// Lets warnings from the registration bag bubble up to us.
-		$this->setErrorMessage($registrationBag->checkConfiguration(true));
+		$this->setErrorMessage($registrationBag->checkConfiguration(TRUE));
 
 		$registrationBag->__destruct();
 		unset($registrationBag, $builder);

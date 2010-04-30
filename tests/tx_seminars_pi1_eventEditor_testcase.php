@@ -51,7 +51,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		tx_oelib_MapperRegistry::getInstance()
 			->activateTestingMode($this->testingFramework);
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
-			'useStoragePid', false
+			'useStoragePid', FALSE
 		);
 		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
 			->set('createAuxiliaryRecordsPID', 0);
@@ -666,7 +666,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			0, array('storage_pid' => 42)
 		);
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
-			'useStoragePid', true
+			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
 		$this->testingFramework->createAndLoginFrontEndUser();
@@ -795,7 +795,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			0, array('storage_pid' => 42)
 		);
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
-			'useStoragePid', true
+			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
 		$this->testingFramework->createAndLoginFrontEndUser();
@@ -924,7 +924,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			0, array('storage_pid' => 42)
 		);
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
-			'useStoragePid', true
+			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
 		$this->testingFramework->createAndLoginFrontEndUser();
@@ -1053,7 +1053,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			0, array('storage_pid' => 42)
 		);
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
-			'useStoragePid', true
+			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
 		$this->testingFramework->createAndLoginFrontEndUser();
@@ -1182,7 +1182,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			0, array('storage_pid' => 42)
 		);
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
-			'useStoragePid', true
+			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
 		$this->testingFramework->createAndLoginFrontEndUser();
@@ -1311,7 +1311,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			0, array('storage_pid' => 42)
 		);
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
-			'useStoragePid', true
+			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
 		$this->testingFramework->createAndLoginFrontEndUser();
@@ -1514,7 +1514,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			0, array('storage_pid' => 42)
 		);
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
-			'useStoragePid', true
+			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
 		$this->testingFramework->createAndLoginFrontEndUser();
@@ -1701,7 +1701,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			0, array('storage_pid' => 42)
 		);
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
-			'useStoragePid', true
+			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
 		$this->testingFramework->createAndLoginFrontEndUser();
@@ -1887,7 +1887,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			0, array('storage_pid' => 42)
 		);
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
-			'useStoragePid', true
+			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
 		$this->testingFramework->createAndLoginFrontEndUser();
@@ -2073,7 +2073,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			0, array('storage_pid' => 42)
 		);
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
-			'useStoragePid', true
+			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
 		$this->testingFramework->createAndLoginFrontEndUser();
@@ -2530,7 +2530,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
 		$this->fixture->setConfigurationValue(
-			'allowFrontEndEditingOfTest', false
+			'allowFrontEndEditingOfTest', FALSE
 		);
 
 		$this->assertFalse(
@@ -2547,7 +2547,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
 		$this->fixture->setConfigurationValue(
-			'allowFrontEndEditingOfTest', true
+			'allowFrontEndEditingOfTest', TRUE
 		);
 
 		$this->assertFalse(
@@ -2566,7 +2566,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setConfigurationValue(
-			'allowFrontEndEditingOfTest', false
+			'allowFrontEndEditingOfTest', FALSE
 		);
 
 		$this->assertFalse(
@@ -2585,7 +2585,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setConfigurationValue(
-			'allowFrontEndEditingOfTest', true
+			'allowFrontEndEditingOfTest', TRUE
 		);
 
 		$this->assertTrue(
@@ -2602,7 +2602,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
 		$this->fixture->setConfigurationValue(
-			'allowFrontEndEditingOfTest', true
+			'allowFrontEndEditingOfTest', TRUE
 		);
 		$this->fixture->setConfigurationValue(
 			'createAuxiliaryRecordsPID', 42

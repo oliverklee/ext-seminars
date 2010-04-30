@@ -224,7 +224,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 			// Lets warnings from the registration manager bubble up to us.
 			$this->setErrorMessage(
-				$this->getRegistrationManager()->checkConfiguration(true)
+				$this->getRegistrationManager()->checkConfiguration(TRUE)
 			);
 
 
@@ -299,7 +299,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					);
 					$result = $eventHeadline->render();
 					$this->setErrorMessage(
-						$eventHeadline->checkConfiguration(true)
+						$eventHeadline->checkConfiguration(TRUE)
 					);
 					$eventHeadline->__destruct();
 					unset($eventHeadline);
@@ -364,7 +364,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Checks that we are properly initialized and that we have a config getter.
 	 *
-	 * @return boolean true if we are properly initialized, false otherwise
+	 * @return boolean TRUE if we are properly initialized, FALSE otherwise
 	 */
 	public function isInitialized() {
 		return ($this->isInitialized && is_object($this->configGetter));
@@ -386,16 +386,16 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Creates a seminar in $this->seminar.
 	 * If the seminar cannot be created, $this->seminar will be null, and
-	 * this function will return false.
+	 * this function will return FALSE.
 	 *
 	 * @param integer an event UID
 	 * @param booelan whether hidden records should be retrieved as well
 	 *
-	 * @return boolean true if the seminar UID is valid and the object has been
-	 *                 created, false otherwise
+	 * @return boolean TRUE if the seminar UID is valid and the object has been
+	 *                 created, FALSE otherwise
 	 */
-	public function createSeminar($seminarUid, $showHiddenRecords = false) {
-		$result = false;
+	public function createSeminar($seminarUid, $showHiddenRecords = FALSE) {
+		$result = FALSE;
 
 		if ($this->seminar) {
 			$this->seminar->__destruct();
@@ -407,12 +407,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			)
 		) {
 			$this->setSeminar(tx_oelib_ObjectFactory::make(
-				'tx_seminars_seminar', $seminarUid, false, $showHiddenRecords
+				'tx_seminars_seminar', $seminarUid, FALSE, $showHiddenRecords
 			));
 
 			$result = ($showHiddenRecords)
 				? $this->canShowCurrentEvent()
-				: true;
+				: TRUE;
 		} else {
 			$this->setSeminar(null);
 		}
@@ -433,15 +433,15 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Creates a registration in $this->registration from the database record
 	 * with the UID specified in the parameter $registrationUid.
 	 * If the registration cannot be created, $this->registration will be null,
-	 * and this function will return false.
+	 * and this function will return FALSE.
 	 *
 	 * @param integer a registration UID
 	 *
-	 * @return boolean true if the registration UID is valid and the object
-	 *                 has been created, false otherwise
+	 * @return boolean TRUE if the registration UID is valid and the object
+	 *                 has been created, FALSE otherwise
 	 */
 	public function createRegistration($registrationUid) {
-		$result = false;
+		$result = FALSE;
 
 		if ($this->registration) {
 			$this->registration->__destruct();
@@ -594,8 +594,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 						'action' => 'register',
 					),
 					'',
-					false,
-					true
+					FALSE,
+					TRUE
 				);
 		}
 
@@ -648,7 +648,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		if ($this->createSeminar($this->showUid, $feUserIsLoggedIn)) {
 			// Lets warnings from the seminar bubble up to us.
-			$this->setErrorMessage($this->seminar->checkConfiguration(true));
+			$this->setErrorMessage($this->seminar->checkConfiguration(TRUE));
 
 			// This sets the title of the page for use in indexed search results:
 			$GLOBALS['TSFE']->indexedDocTitle = $this->seminar->getTitle();
@@ -758,7 +758,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->pi_linkTP(
 				$this->translate('label_back', 'Back'),
 				array(),
-				true,
+				TRUE,
 				$this->getConfValueInteger('listPID')
 			)
 		);
@@ -1426,12 +1426,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		// Lets warnings from the seminar and the seminar bag bubble up to us.
-		$this->setErrorMessage($seminarBag->checkConfiguration(true));
+		$this->setErrorMessage($seminarBag->checkConfiguration(TRUE));
 		$seminarBag->__destruct();
 		unset($seminarBag);
 
 		// Let's also check the list view configuration..
-		$this->checkConfiguration(true, 'seminar_list');
+		$this->checkConfiguration(TRUE, 'seminar_list');
 
 		return $result;
 	}
@@ -1478,13 +1478,13 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		// Lets warnings from the seminar and the seminar bag bubble up to us.
-		$this->setErrorMessage($seminarBag->checkConfiguration(true));
+		$this->setErrorMessage($seminarBag->checkConfiguration(TRUE));
 
 		$seminarBag->__destruct();
 		unset($seminarBag);
 
 		// Let's also check the list view configuration..
-		$this->checkConfiguration(true, 'seminar_list');
+		$this->checkConfiguration(TRUE, 'seminar_list');
 
 		return $result;
 	}
@@ -1507,7 +1507,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 */
 	protected function createListView($whatToDisplay) {
 		$result = '';
-		$isOkay = true;
+		$isOkay = TRUE;
 		$this->ensureIntegerPiVars(
 			array(
 				'from_day', 'from_month', 'from_year', 'to_day', 'to_month',
@@ -1533,7 +1533,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 						$this->translate('message_pleaseLogIn'),
 						$GLOBALS['TSFE']->id
 					);
-					$isOkay = false;
+					$isOkay = FALSE;
 				}
 				break;
 			case 'my_vip_events':
@@ -1551,7 +1551,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 						$this->translate('message_pleaseLogIn'),
 						$GLOBALS['TSFE']->id
 					);
-					$isOkay = false;
+					$isOkay = FALSE;
 				}
 				break;
 			case 'my_entered_events':
@@ -1560,7 +1560,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 						'MESSAGE_MY_ENTERED_EVENTS'
 					);
 				} else {
-					$isOkay = false;
+					$isOkay = FALSE;
 				}
 				break;
 			case 'favorites_list':
@@ -1596,7 +1596,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 			// Lets warnings from the seminar and the seminar bag bubble up to us.
 			$this->setErrorMessage(
-				$seminarOrRegistrationBag->checkConfiguration(true)
+				$seminarOrRegistrationBag->checkConfiguration(TRUE)
 			);
 
 			$seminarOrRegistrationBag->__destruct();
@@ -2214,7 +2214,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					$this->getConfValueString(
 						'limitListViewToPlaces', 's_listView'
 					),
-					true
+					TRUE
 				)
 			);
 		}
@@ -2279,7 +2279,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					$this->getConfValueString(
 						'limitListViewToEventTypes', 's_listView'
 					),
-					true
+					TRUE
 				)
 			);
 		}
@@ -2481,7 +2481,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$permanentlyHiddenColumns = t3lib_div::trimExplode(
 			',',
 			$this->getConfValueString('hideColumns', 's_template_special'),
-			true
+			TRUE
 		);
 
 		$this->unhideSubpartsArray(
@@ -2625,7 +2625,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			t3lib_div::trimExplode(
 				',',
 				$this->getConfValueString('hideColumns', 's_template_special'),
-				true
+				TRUE
 			)
 		);
 	}
@@ -2669,13 +2669,13 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		$errorMessage = '';
 		$registrationForm = '';
-		$isOkay = false;
+		$isOkay = FALSE;
 
 		$this->toggleEventFieldsOnRegistrationPage();
 
 		if ($this->createSeminar($this->piVars['seminar'])) {
 			// Lets warnings from the seminar bubble up to us.
-			$this->setErrorMessage($this->seminar->checkConfiguration(true));
+			$this->setErrorMessage($this->seminar->checkConfiguration(TRUE));
 
 			if (!$this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)) {
 				$errorMessage
@@ -2684,7 +2684,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					);
 			} else {
 				if (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
-					$isOkay = true;
+					$isOkay = TRUE;
 				} else {
 					$errorMessage = $this->getLoginLink(
 						$this->translate('message_notLoggedIn'),
@@ -2698,7 +2698,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		)) {
 			if ($this->createSeminar($this->registration->getSeminar())) {
 				if ($this->seminar->isUnregistrationPossible()) {
-					$isOkay = true;
+					$isOkay = TRUE;
 				} else {
 					$errorMessage = $this->translate(
 						'message_unregistrationNotPossible'
@@ -2844,7 +2844,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				$this->getConfValueString(
 					'eventFieldsOnRegistrationPage',
 					's_template_special'
-				), true
+				), TRUE
 			);
 		}
 
@@ -2863,9 +2863,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		// of items to remove.
 		foreach ($fieldsToShow as $currentField) {
 			$key = array_search($currentField, $fieldsToRemove);
-			// $key will be false if the item has not been found.
+			// $key will be FALSE if the item has not been found.
 			// Zero, on the other hand, is a valid key.
-			if ($key !== false) {
+			if ($key !== FALSE) {
 				unset($fieldsToRemove[$key]);
 			}
 		}
@@ -3209,8 +3209,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Checks if the current user has permission to access the attached files of
 	 * an event.
 	 *
-	 * @return boolean true if the user is allowed to access the attached files,
-	 *                 false otherwise
+	 * @return boolean TRUE if the user is allowed to access the attached files,
+	 *                 FALSE otherwise
 	 */
 	private function mayUserAccessAttachedFiles() {
 		$limitToAttendees = $this->getConfValueBoolean(
@@ -3227,8 +3227,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Checks if the current FE user has access to the event editor and thus may
 	 * see the my entered events list.
 	 *
-	 * @return boolean true if the user is allowed to access the event editor,
-	 *                 false otherwise
+	 * @return boolean TRUE if the user is allowed to access the event editor,
+	 *                 FALSE otherwise
 	 */
 	private function hasEventEditorAccess() {
 		$eventEditor = $this->createEventEditorInstance();
@@ -3245,15 +3245,15 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * When this function is called, $this->seminar must contain a seminar, and
 	 * a user must be logged in at the front end.
 	 *
-	 * @return boolean true if the logged-in user can view the current seminar,
-	 *                 false otherwise
+	 * @return boolean TRUE if the logged-in user can view the current seminar,
+	 *                 FALSE otherwise
 	 */
 	private function canShowCurrentEvent() {
 		if (!$this->seminar->isHidden()) {
-			return true;
+			return TRUE;
 		}
 		if (!$this->seminar->hasOwner()) {
-			return false;
+			return FALSE;
 		}
 
 		return ($this->seminar->getOwner()->getUid() == $this->getFeUserUid());

@@ -41,7 +41,7 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	/**
 	 * @var boolean whether the form is complete
 	 */
-	private $isComplete = true;
+	private $isComplete = TRUE;
 
 	/**
 	 * @var array the array of error messages
@@ -125,16 +125,16 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 			'<p><input type="hidden" name="action" value="' . $this->action .
 			'" /><input type="hidden" name="eventUid" value="' .
 			$this->event->getUid() . '" /><input type="hidden" ' .
-			'name="isSubmitted" value="true" /></p></form></fieldset>';
+			'name="isSubmitted" value="1" /></p></form></fieldset>';
 	}
 
 	/**
 	 * Checks whether the form was already submitted by the user.
 	 *
-	 * @return boolean true if the form was submitted by the user, false otherwise
+	 * @return boolean TRUE if the form was submitted by the user, FALSE otherwise
 	 */
 	protected function isSubmitted() {
-		return $this->getPostData('isSubmitted') == 'true';
+		return $this->getPostData('isSubmitted') == '1';
 	}
 
 	/**
@@ -145,7 +145,7 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 * - subject
 	 * - messageBody
 	 *
-	 * @return boolean true if the form data is valid, false otherwise
+	 * @return boolean TRUE if the form data is valid, FALSE otherwise
 	 */
 	private function validateFormData() {
 		if ($this->getPostData('subject') == '') {
@@ -175,14 +175,14 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 * This method is public for testing only.
 	 */
 	public function markAsIncomplete() {
-		$this->isComplete = false;
+		$this->isComplete = FALSE;
 	}
 
 	/**
 	 * Checks whether the current back-end user has the needed permissions to
 	 * access this form.
 	 *
-	 * @return boolean true if the user is allowed to see/use the form, false otherwise
+	 * @return boolean TRUE if the user is allowed to see/use the form, FALSE otherwise
 	 */
 	public function checkAccess() {
 		return $GLOBALS['BE_USER']->check('tables_select', SEMINARS_TABLE_SEMINARS);
@@ -366,7 +366,7 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 *
 	 * @param string the key of the field to check for, must not be empty
 	 *
-	 * @return boolen true if the stored POST data contains an entry, false otherwise
+	 * @return boolen TRUE if the stored POST data contains an entry, FALSE otherwise
 	 */
 	protected function hasPostData($key) {
 		if ($key == '') {
@@ -582,8 +582,8 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 * @param string $fieldName
 	 *        the field to check the error message for, must not be empty
 	 *
-	 * @return boolean true if an error message has been stored for the given
-	 *                 fieldname, false otherwise
+	 * @return boolean TRUE if an error message has been stored for the given
+	 *                 fieldname, FALSE otherwise
 	 */
 	private function hasErrorMessage($fieldName) {
 		return isset($this->errorMessages[$fieldName]);

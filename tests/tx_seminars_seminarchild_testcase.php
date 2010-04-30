@@ -1031,7 +1031,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function test_CanSomebodyRegister_ForEventWithoutNeedeRegistration_ReturnsFalse() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
-		$this->fixture->setNeedsRegistration(false);
+		$this->fixture->setNeedsRegistration(FALSE);
 
 		$this->assertFalse(
 			$this->fixture->canSomebodyRegister()
@@ -1040,7 +1040,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function test_CanSomebodyRegister_ForFullyBookedEvent_ReturnsFalse() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(10);
 		$this->fixture->setNumberOfAttendances(10);
 
@@ -1051,10 +1051,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function test_CanSomebodyRegister_ForEventWithRegistrationQueueAndNoRegularVacancies_ReturnsTrue() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(10);
 		$this->fixture->setNumberOfAttendances(10);
-		$this->fixture->setRegistrationQueue(true);
+		$this->fixture->setRegistrationQueue(TRUE);
 
 		$this->assertTrue(
 			$this->fixture->canSomebodyRegister()
@@ -1063,10 +1063,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function test_CanSomebodyRegister_ForEventWithRegistrationQueueAndRegularVacancies_ReturnsTrue() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(10);
 		$this->fixture->setNumberOfAttendances(5);
-		$this->fixture->setRegistrationQueue(true);
+		$this->fixture->setRegistrationQueue(TRUE);
 
 		$this->assertTrue(
 			$this->fixture->canSomebodyRegister()
@@ -1207,7 +1207,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_CanSomebodyRegisterMessage_ForEventWithoutNeedeRegistration_ReturnsNoRegistrationNecessaryMessage() {
-		$this->fixture->setNeedsRegistration(false);
+		$this->fixture->setNeedsRegistration(FALSE);
 
 		$this->assertEquals(
 			$this->fixture->translate('message_noRegistrationNecessary'),
@@ -1217,7 +1217,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function test_CanSomebodyRegisterMessage_ForFullyBookedEvent_ReturnsNoVacanciesMessage() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(10);
 		$this->fixture->setNumberOfAttendances(10);
 
@@ -1229,10 +1229,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function test_CanSomebodyRegisterMessage_ForFullyBookedEventWithRegistrationQueue_ReturnsEmptyString() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(10);
 		$this->fixture->setNumberOfAttendances(10);
-		$this->fixture->setRegistrationQueue(true);
+		$this->fixture->setRegistrationQueue(TRUE);
 
 		$this->assertEquals(
 			'',
@@ -1485,7 +1485,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	//////////////////////////////////////
 
 	public function test_NeedsRegistration_forNeedsRegistrationTrue_ReturnsTrue() {
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 
 		$this->assertTrue(
 			$this->fixture->needsRegistration()
@@ -1493,7 +1493,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_NeedsRegistration_forNeedsRegistrationFalse_ReturnsFalse() {
-		$this->fixture->setNeedsRegistration(false);
+		$this->fixture->setNeedsRegistration(FALSE);
 
 		$this->assertFalse(
 			$this->fixture->needsRegistration()
@@ -1506,7 +1506,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////
 
 	public function test_HasUnlimitedVacancies_ForNeedsRegistrationTrueAndMaxAttendeesZero_ReturnsTrue() {
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(0);
 
 		$this->assertTrue(
@@ -1515,7 +1515,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_HasUnlimitedVacancies_ForNeedsRegistrationTrueAndMaxAttendeesOne_ReturnsFalse() {
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(1);
 
 		$this->assertFalse(
@@ -1524,7 +1524,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_HasUnlimitedVacancies_ForNeedsRegistrationFalseAndMaxAttendeesZero_ReturnsFalse() {
-		$this->fixture->setNeedsRegistration(false);
+		$this->fixture->setNeedsRegistration(FALSE);
 		$this->fixture->setAttendancesMax(0);
 
 		$this->assertFalse(
@@ -1533,7 +1533,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_HasUnlimitedVacancies_ForNeedsRegistrationFalseAndMaxAttendeesOne_ReturnsFalse() {
-		$this->fixture->setNeedsRegistration(false);
+		$this->fixture->setNeedsRegistration(FALSE);
 		$this->fixture->setAttendancesMax(1);
 
 		$this->assertFalse(
@@ -1565,7 +1565,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_IsFull_ForOneVacancyAndNoAttendances_ReturnsFalse() {
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(1);
 		$this->fixture->setNumberOfAttendances(0);
 
@@ -1575,7 +1575,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_IsFull_ForOneVacancyAndOneAttendance_ReturnsTrue() {
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(1);
 		$this->fixture->setNumberOfAttendances(1);
 
@@ -1585,7 +1585,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_IsFull_ForTwoVacanciesAndOneAttendance_ReturnsFalse() {
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(2);
 		$this->fixture->setNumberOfAttendances(1);
 
@@ -1595,7 +1595,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_IsFull_ForTwoVacanciesAndTwoAttendances_ReturnsTrue() {
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(2);
 		$this->fixture->setNumberOfAttendances(2);
 
@@ -2083,7 +2083,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	//////////////////////////////////////////
 
 	public function test_hasRegistrationQueue_WithQueue_ReturnsTrue() {
-		$this->fixture->setRegistrationQueue(true);
+		$this->fixture->setRegistrationQueue(TRUE);
 
 		$this->assertTrue(
 			$this->fixture->hasRegistrationQueue()
@@ -2091,7 +2091,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_hasRegistrationQueue_WithoutQueue_ReturnsFalse() {
-			$this->fixture->setRegistrationQueue(false);
+			$this->fixture->setRegistrationQueue(FALSE);
 
 		$this->assertFalse(
 			$this->fixture->hasRegistrationQueue()
@@ -2120,7 +2120,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testHasAttendancesOnRegistrationQueueIsFalseForNoRegistrations() {
 		$this->fixture->setAttendancesMax(1);
-		$this->fixture->setRegistrationQueue(false);
+		$this->fixture->setRegistrationQueue(FALSE);
 		$this->fixture->setNumberOfAttendances(0);
 		$this->fixture->setNumberOfAttendancesOnQueue(0);
 
@@ -2131,7 +2131,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testHasAttendancesOnRegistrationQueueIsFalseForRegularRegistrationsOnly() {
 		$this->fixture->setAttendancesMax(1);
-		$this->fixture->setRegistrationQueue(false);
+		$this->fixture->setRegistrationQueue(FALSE);
 		$this->fixture->setNumberOfAttendances(1);
 		$this->fixture->setNumberOfAttendancesOnQueue(0);
 
@@ -2142,7 +2142,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testHasAttendancesOnRegistrationQueueIsTrueForQueueRegistrations() {
 		$this->fixture->setAttendancesMax(1);
-		$this->fixture->setRegistrationQueue(true);
+		$this->fixture->setRegistrationQueue(TRUE);
 		$this->fixture->setNumberOfAttendances(1);
 		$this->fixture->setNumberOfAttendancesOnQueue(1);
 
@@ -2153,7 +2153,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testIsUnregistrationPossibleIsTrueWithNonEmptyQueueByDefault() {
 		$this->fixture->setAttendancesMax(1);
-		$this->fixture->setRegistrationQueue(true);
+		$this->fixture->setRegistrationQueue(TRUE);
 		$this->fixture->setNumberOfAttendances(1);
 		$this->fixture->setNumberOfAttendancesOnQueue(1);
 
@@ -2170,7 +2170,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testIsUnregistrationPossibleIsFalseWithEmptyQueueByDefault() {
 		$this->fixture->setAttendancesMax(1);
-		$this->fixture->setRegistrationQueue(true);
+		$this->fixture->setRegistrationQueue(TRUE);
 		$this->fixture->setNumberOfAttendances(1);
 		$this->fixture->setNumberOfAttendancesOnQueue(0);
 
@@ -2186,10 +2186,10 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testIsUnregistrationPossibleIsTrueWithEmptyQueueIfAllowedByConfiguration() {
-		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(true);
+		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(TRUE);
 
 		$this->fixture->setAttendancesMax(1);
-		$this->fixture->setRegistrationQueue(true);
+		$this->fixture->setRegistrationQueue(TRUE);
 		$this->fixture->setNumberOfAttendances(1);
 		$this->fixture->setNumberOfAttendancesOnQueue(0);
 
@@ -2318,7 +2318,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		// We expect a true even if the country code is invalid! See function's
+		// We expect a TRUE even if the country code is invalid! See function's
 		// comment on this.
 		$this->assertTrue(
 			$this->fixture->hasCountry()
@@ -4067,7 +4067,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setConfigurationValue(
-			'skipRegistrationCollisionCheck', true
+			'skipRegistrationCollisionCheck', TRUE
 		);
 
 		$this->assertFalse(
@@ -4083,7 +4083,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setBeginDate($begin);
 		$this->fixture->setEndDate($end);
-		$this->fixture->setSkipCollisionCheck(true);
+		$this->fixture->setSkipCollisionCheck(TRUE);
 
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -4171,7 +4171,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUsesCorrectIconForHiddenSingleEvent() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
-		$this->fixture->setHidden(true);
+		$this->fixture->setHidden(TRUE);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_complete__h.',
@@ -4181,7 +4181,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUsesCorrectIconForHiddenTopic() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_TOPIC);
-		$this->fixture->setHidden(true);
+		$this->fixture->setHidden(TRUE);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_topic__h.',
@@ -4191,7 +4191,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUsesCorrectIconForHiddenDate() {
 		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
-		$this->fixture->setHidden(true);
+		$this->fixture->setHidden(TRUE);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_date__h.',
@@ -4467,7 +4467,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertRegExp(
 			'/^http:\/\/./',
-			$this->fixture->getDetailedViewUrl($this->pi1, true)
+			$this->fixture->getDetailedViewUrl($this->pi1, TRUE)
 		);
 	}
 
@@ -4491,7 +4491,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'http://',
-			$this->fixture->getDetailedViewUrl($this->pi1, false)
+			$this->fixture->getDetailedViewUrl($this->pi1, FALSE)
 		);
 	}
 
@@ -4509,7 +4509,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'showUid',
-			$event->getDetailedViewUrl($this->pi1, false)
+			$event->getDetailedViewUrl($this->pi1, FALSE)
 		);
 
 		$event->__destruct();
@@ -4529,7 +4529,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'?id=' . $detailsPageUid,
-			$event->getDetailedViewUrl($this->pi1, false)
+			$event->getDetailedViewUrl($this->pi1, FALSE)
 		);
 
 		$event->__destruct();
@@ -4548,7 +4548,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'http://www.test.com',
-			$event->getDetailedViewUrl($this->pi1, false)
+			$event->getDetailedViewUrl($this->pi1, FALSE)
 		);
 
 		$event->__destruct();
@@ -4567,7 +4567,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'http://www.test.com',
-			$event->getDetailedViewUrl($this->pi1, false)
+			$event->getDetailedViewUrl($this->pi1, FALSE)
 		);
 
 		$event->__destruct();
@@ -6823,7 +6823,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function test_dumpSeminarValues_ForEventWithNoVacanciesAndVacanciesGiven_ReturnsVacanciesLabelWithNumber() {
 		$this->fixture->setNumberOfAttendances(2);
 		$this->fixture->setAttendancesMax(2);
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 
 		$this->assertEquals(
 			$this->fixture->translate('label_vacancies') . ': 0' . LF ,
@@ -6834,7 +6834,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function test_dumpSeminarValues_ForEventWithOneVacancyAndVacanciesGiven_ReturnsNumberOfVacancies() {
 		$this->fixture->setNumberOfAttendances(1);
 		$this->fixture->setAttendancesMax(2);
-		$this->fixture->setNeedsRegistration(true);
+		$this->fixture->setNeedsRegistration(TRUE);
 
 		$this->assertEquals(
 			$this->fixture->translate('label_vacancies') . ': 1' . LF ,

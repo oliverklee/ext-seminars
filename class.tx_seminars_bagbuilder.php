@@ -74,12 +74,12 @@ abstract class tx_seminars_bagbuilder {
 	/**
 	 * @var boolean whether the timing of records should be ignored
 	 */
-	protected $ignoreTimingOfRecords = false;
+	protected $ignoreTimingOfRecords = FALSE;
 
 	/**
 	 * @var boolean whether hidden records should be shown, too
 	 */
-	protected $showHiddenRecords = false;
+	protected $showHiddenRecords = FALSE;
 
 	/**
 	 * The constructor. Checks that $this->tableName is not empty.
@@ -116,7 +116,7 @@ abstract class tx_seminars_bagbuilder {
 	 */
 	public function setBackEndMode() {
 		$this->showHiddenRecords();
-		$this->ignoreTimingOfRecords = true;
+		$this->ignoreTimingOfRecords = TRUE;
 	}
 
 	/**
@@ -144,7 +144,7 @@ abstract class tx_seminars_bagbuilder {
 	/**
 	 * Checks whether some source pages have already been set.
 	 *
-	 * @return boolean true if source pages have already been set, false
+	 * @return boolean TRUE if source pages have already been set, FALSE
 	 *                 otherwise
 	 */
 	public function hasSourcePages() {
@@ -247,7 +247,7 @@ abstract class tx_seminars_bagbuilder {
 	 * Configures the bag to also contain hidden records.
 	 */
 	public function showHiddenRecords() {
-		$this->showHiddenRecords = true;
+		$this->showHiddenRecords = TRUE;
 	}
 }
 

@@ -147,7 +147,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 	 *        tx_seminars_BackEnd_RegistrationsList::REGISTRATIONS_ON_QUEUE or
 	 *        tx_seminars_BackEnd_RegistrationsList::REGULAR_REGISTRATIONS
 	 *
-	 * @return boolean true if the generated list is not empty, false otherwise
+	 * @return boolean TRUE if the generated list is not empty, FALSE otherwise
 	 */
 	private function setRegistrationTableMarkers($registrationsToShow) {
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_registrationBagBuilder');

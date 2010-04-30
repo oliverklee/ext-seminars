@@ -135,7 +135,7 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 		// Initializes a timeslot object to have all
 		// functions available.
 		$timeslot = tx_oelib_ObjectFactory::make(
-			'tx_seminars_timeslot', $uid, false
+			'tx_seminars_timeslot', $uid, FALSE
 		);
 
 		if ($timeslot->isOk()) {
@@ -157,7 +157,7 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 		// Initializes a seminar object to have all functions
 		// available.
 		$seminar = tx_oelib_ObjectFactory::make(
-			'tx_seminars_seminar', $uid, false, true
+			'tx_seminars_seminar', $uid, FALSE, TRUE
 		);
 
 		if ($seminar->isOk()) {
