@@ -643,10 +643,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->getConfValueString('hideFields', 's_template_special'),
 			'FIELD_WRAPPER'
 		);
-		$feUserIsLoggedIn
-			= tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
 
-		if ($this->createSeminar($this->showUid, $feUserIsLoggedIn)) {
+		if ($this->createSeminar($this->showUid, $this->isLoggedIn())) {
 			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(TRUE));
 
@@ -1344,11 +1342,29 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 
 	/**
+	 * Checks whether online registration is enabled at all by configuration.
+	 *
+	 * @return boolean TRUE if online registration is enabled, FALSE otherwise
+	 */
+	protected function isRegistrationEnabled() {
+		return $this->getConfValueBoolean('enableRegistration');
+	}
+
+	/**
+	 * Checkes whether a front-end user is logged in.
+	 *
+	 * @return boolean TRUE if a user is logged in, FALSE otherwise
+	 */
+	protected function isLoggedIn() {
+		return tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
+	}
+
+	/**
 	 * Fills in the matching marker for the link to the registration form or
 	 * hides the subpart if the registration is disabled.
 	 */
 	private function setRegistrationMarker() {
-		if (!$this->getConfValueBoolean('enableRegistration')) {
+		if (!$this->isRegistrationEnabled()) {
 			$this->hideSubparts('registration', 'field_wrapper');
 			return;
 		}
@@ -1521,7 +1537,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		switch ($whatToDisplay) {
 			case 'my_events':
-				if (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+				if ($this->isLoggedIn()) {
 					$result .= $this->getSubpart('MESSAGE_MY_EVENTS');
 				} else {
 					$this->setMarker(
@@ -1537,7 +1553,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				}
 				break;
 			case 'my_vip_events':
-				if (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+				if ($this->isLoggedIn()) {
 					$result .= $this->getSubpart(
 						'MESSAGE_MY_VIP_EVENTS'
 					);
@@ -2465,9 +2481,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Hides the columns specified in the first parameter $columnsToHide.
 	 *
-	 * @param array the columns to hide, may be empty
+	 * @param array $columnsToHide the columns to hide, may be empty
 	 */
-	private function hideColumns(array $columnsToHide) {
+	protected function hideColumns(array $columnsToHide) {
 		$this->hideSubpartsArray($columnsToHide, 'LISTHEADER_WRAPPER');
 		$this->hideSubpartsArray($columnsToHide, 'LISTITEM_WRAPPER');
 	}
@@ -2475,9 +2491,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Un-hides the columns specified in the first parameter $columnsToHide.
 	 *
-	 * @param array the columns to un-hide, may be empty
+	 * @param array $columnsToUnhide the columns to un-hide, may be empty
 	 */
-	private function unhideColumns(array $columnsToUnhide) {
+	protected function unhideColumns(array $columnsToUnhide) {
 		$permanentlyHiddenColumns = t3lib_div::trimExplode(
 			',',
 			$this->getConfValueString('hideColumns', 's_template_special'),
@@ -2519,25 +2535,38 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Hides the column with the link to the list of registrations if online
 	 * registration is disabled, no user is logged in or there is no page
 	 * specified to link to.
+	 *
 	 * Also hides it for the "other_dates" and "events_next_day" lists.
 	 *
-	 * @param string a string selecting the flavor of list view: either an empty
-	 *               string (for the default list view), the value from
-	 *               "what_to_display" or "other_dates"
+	 * @param string $whatToDisplay
+	 *        the flavor of list view: either an empty string (for the default
+	 *        list view), the value from "what_to_display", or "other_dates"
 	 */
-	private function hideListRegistrationsColumnIfNecessary($whatToDisplay) {
-		if (!$this->getConfValueBoolean('enableRegistration')
-			|| !tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
-			|| (($whatToDisplay == 'seminar_list')
-				&& !$this->hasConfValueInteger('registrationsListPID')
-				&& !$this->hasConfValueInteger('registrationsVipListPID'))
-			|| ($whatToDisplay == 'other_dates')
-			|| ($whatToDisplay == 'events_next_day')
-			|| (($whatToDisplay == 'my_events')
-				&& !$this->hasConfValueInteger('registrationsListPID'))
-			|| (($whatToDisplay == 'my_vip_events')
-				&& !$this->hasConfValueInteger('registrationsVipListPID'))
+	public function hideListRegistrationsColumnIfNecessary($whatToDisplay) {
+		$alwaysHideInViews = array('other_dates', 'events_next_day');
+		if (!$this->isRegistrationEnabled() || !$this->isLoggedIn()
+			|| in_array($whatToDisplay, $alwaysHideInViews)
 		) {
+			$this->hideColumns(array('list_registrations'));
+			return;
+		}
+
+		switch ($whatToDisplay) {
+			case 'seminar_list':
+				$hideIt = !$this->hasConfValueInteger('registrationsListPID')
+					&& !$this->hasConfValueInteger('registrationsVipListPID');
+				break;
+			case 'my_events':
+				$hideIt = !$this->hasConfValueInteger('registrationsListPID');
+				break;
+			case 'my_vip_events':
+				$hideIt = !$this->hasConfValueInteger('registrationsVipListPID');
+				break;
+			default:
+				break;
+		}
+
+		if ($hideIt) {
 			$this->hideColumns(array('list_registrations'));
 		}
 	}
@@ -2551,7 +2580,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *        "other_dates"
 	 */
 	private function hideRegisterColumnIfNecessary($whatToDisplay) {
-		if (!$this->getConfValueBoolean('enableRegistration')
+		if (!$this->isRegistrationEnabled()
 			|| ($whatToDisplay == 'my_vip_events')
 			|| ($whatToDisplay == 'my_entered_events')
 		) {
@@ -2683,7 +2712,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 						$this->seminar
 					);
 			} else {
-				if (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+				if ($this->isLoggedIn()) {
 					$isOkay = TRUE;
 				} else {
 					$errorMessage = $this->getLoginLink(
@@ -3166,9 +3195,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			'limitFileDownloadToAttendees', 'sDEF'
 		);
 
-		if ($limitToAttendees
-			&& !tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
-		) {
+		if ($limitToAttendees && !$this->isLoggedIn()) {
 			$this->hideColumns(array('attached_files'));
 		}
 	}
@@ -3217,10 +3244,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			'limitFileDownloadToAttendees', 'sDEF'
 		);
 
-		return !$limitToAttendees || (
-			tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
-				&& $this->seminar->isUserRegistered($this->getFeUserUid())
-			);
+		return !$limitToAttendees ||
+			($this->isLoggedIn() && $this->seminar->isUserRegistered(
+				$this->getFeUserUid()
+			));
 	}
 
 	/**
