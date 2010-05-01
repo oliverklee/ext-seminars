@@ -64,20 +64,6 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * parent class.
 	 */
 	public function init() {
-		/*
-		 * This is a workaround for the wrong generated links. The workaround
-		 * is needed to get the right values from the GET Parameter. This
-		 * workaround is from Elmar Hinz who also noted this in the bug tracker:
-		 * http://bugs.typo3.org/view.php?id=2178
-		 */
-		$matches = array();
-		foreach ($GLOBALS['_GET'] as $key => $value) {
-			if (preg_match('/amp;(.*)/', $key, $matches)) {
-				$GLOBALS['_GET'][$matches[1]] = $value;
-			}
-		}
-		/* --- END OF Workaround --- */
-
 		parent::init();
 
 		$this->id = intval($this->id);

@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#3277] Cleanup: Drop the workaround for Core bug 2178 from the seminars BE module
 - [#3743] Feature: Split the FE registration list in two lists
 - [#2842] Change: Require TYPO3 4.3 for oelib and seminars
 - [#3829] Cleanup: Refactor and unit-test pi1::hideListRegistrationsColumnIfNecessary
