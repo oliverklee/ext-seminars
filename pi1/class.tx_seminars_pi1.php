@@ -2543,7 +2543,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *        list view), the value from "what_to_display", or "other_dates"
 	 */
 	public function hideListRegistrationsColumnIfNecessary($whatToDisplay) {
-		$alwaysHideInViews = array('other_dates', 'events_next_day');
+		$alwaysHideInViews = array(
+			'topic_list', 'other_dates', 'events_next_day'
+		);
 		if (!$this->isRegistrationEnabled() || !$this->isLoggedIn()
 			|| in_array($whatToDisplay, $alwaysHideInViews)
 		) {

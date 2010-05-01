@@ -7383,6 +7383,12 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'listPid' => 0,
 				'vipListPid' => 1,
 			),
+			'hiddenForTopicListForBothPidsSet' => array(
+				'getsHidden' => TRUE,
+				'whatToDisplay' => 'topic_list',
+				'listPid' => 1,
+				'vipListPid' => 1,
+			),
 		);
 	}
 
