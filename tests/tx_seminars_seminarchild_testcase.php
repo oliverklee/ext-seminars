@@ -8439,5 +8439,173 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$fixture->__destruct();
 	}
+
+
+	/////////////////////////////////
+	// Tests concerning hasAnyPrice
+	/////////////////////////////////
+
+	/**
+	 * Data provider for hasAnyPriceWithDataProvider.
+	 *
+	 * @return array two-dimensional array with the following inner keys:
+	 *               [expectedHasAnyPrice] the expected return value of hasAnyPrice
+	 *               [hasPriceRegular] the return value of that function
+	 *               [hasPriceSpecial] the return value of that function
+	 *               [earlyBirdApplies] the return value of that function
+	 *               [hasEarlyBirdPriceRegular] the return value of that function
+	 *               [hasEarlyBirdPriceSpecial] the return value of that function
+	 *               [hasPriceRegularBoard] the return value of that function
+	 *               [hasPriceSpecialBoard] the return value of that function
+
+	 * @see hasAnyPriceWithDataProvider
+	 */
+	public function hasAnyPriceDataProvider() {
+		return array(
+			'noPriceAtAll' => array(
+				'expectedHasAnyPrice' => FALSE,
+				'hasPriceRegular' => FALSE,
+				'hasPriceSpecial' => FALSE,
+				'earlyBirdApplies' => FALSE,
+				'hasEarlyBirdPriceRegular' => FALSE,
+				'hasEarlyBirdPriceSpecial' => FALSE,
+				'hasPriceRegularBoard' => FALSE,
+				'hasPriceSpecialBoard' => FALSE,
+			),
+			'regularPrice' => array(
+				'expectedHasAnyPrice' => TRUE,
+				'hasPriceRegular' => TRUE,
+				'hasPriceSpecial' => FALSE,
+				'earlyBirdApplies' => FALSE,
+				'hasEarlyBirdPriceRegular' => FALSE,
+				'hasEarlyBirdPriceSpecial' => FALSE,
+				'hasPriceRegularBoard' => FALSE,
+				'hasPriceSpecialBoard' => FALSE,
+			),
+			'specialPrice' => array(
+				'expectedHasAnyPrice' => TRUE,
+				'hasPriceRegular' => FALSE,
+				'hasPriceSpecial' => TRUE,
+				'earlyBirdApplies' => FALSE,
+				'hasEarlyBirdPriceRegular' => FALSE,
+				'hasEarlyBirdPriceSpecial' => FALSE,
+				'hasPriceRegularBoard' => FALSE,
+				'hasPriceSpecialBoard' => FALSE,
+			),
+			'regularEarlyBirdApplies' => array(
+				'expectedHasAnyPrice' => TRUE,
+				'hasPriceRegular' => FALSE,
+				'hasPriceSpecial' => FALSE,
+				'earlyBirdApplies' => TRUE,
+				'hasEarlyBirdPriceRegular' => TRUE,
+				'hasEarlyBirdPriceSpecial' => FALSE,
+				'hasPriceRegularBoard' => FALSE,
+				'hasPriceSpecialBoard' => FALSE,
+			),
+			'regularEarlyBirdNotApplies' => array(
+				'expectedHasAnyPrice' => FALSE,
+				'hasPriceRegular' => FALSE,
+				'hasPriceSpecial' => FALSE,
+				'earlyBirdApplies' => FALSE,
+				'hasEarlyBirdPriceRegular' => TRUE,
+				'hasEarlyBirdPriceSpecial' => FALSE,
+				'hasPriceRegularBoard' => FALSE,
+				'hasPriceSpecialBoard' => FALSE,
+			),
+			'specialEarlyBirdApplies' => array(
+				'expectedHasAnyPrice' => TRUE,
+				'hasPriceRegular' => FALSE,
+				'hasPriceSpecial' => FALSE,
+				'earlyBirdApplies' => TRUE,
+				'hasEarlyBirdPriceRegular' => FALSE,
+				'hasEarlyBirdPriceSpecial' => TRUE,
+				'hasPriceRegularBoard' => FALSE,
+				'hasPriceSpecialBoard' => FALSE,
+			),
+			'specialEarlyBirdNotApplies' => array(
+				'expectedHasAnyPrice' => FALSE,
+				'hasPriceRegular' => FALSE,
+				'hasPriceSpecial' => FALSE,
+				'earlyBirdApplies' => FALSE,
+				'hasEarlyBirdPriceRegular' => FALSE,
+				'hasEarlyBirdPriceSpecial' => TRUE,
+				'hasPriceRegularBoard' => FALSE,
+				'hasPriceSpecialBoard' => FALSE,
+			),
+			'regularBoard' => array(
+				'expectedHasAnyPrice' => TRUE,
+				'hasPriceRegular' => FALSE,
+				'hasPriceSpecial' => FALSE,
+				'earlyBirdApplies' => FALSE,
+				'hasEarlyBirdPriceRegular' => FALSE,
+				'hasEarlyBirdPriceSpecial' => FALSE,
+				'hasPriceRegularBoard' => TRUE,
+				'hasPriceSpecialBoard' => FALSE,
+			),
+			'specialBoard' => array(
+				'expectedHasAnyPrice' => TRUE,
+				'hasPriceRegular' => FALSE,
+				'hasPriceSpecial' => FALSE,
+				'earlyBirdApplies' => FALSE,
+				'hasEarlyBirdPriceRegular' => FALSE,
+				'hasEarlyBirdPriceSpecial' => FALSE,
+				'hasPriceRegularBoard' => FALSE,
+				'hasPriceSpecialBoard' => TRUE,
+			),
+		);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @dataProvider hasAnyPriceDataProvider
+	 *
+	 * @param boolean $expectedHasAnyPrice
+	 *        the expected return value of hasAnyPrice
+	 * @param boolean $hasPriceRegular the return value of hasPriceRegular
+	 * @param boolean $hasPriceSpecial the return value of hasPriceRegular
+	 * @param boolean $earlyBirdApplies the return value of earlyBirdApplies
+	 * @param boolean $hasEarlyBirdPriceRegular the return value of earlyBirdApplies
+	 * @param boolean $hasEarlyBirdPriceSpecial
+	 *        the return value of hasEarlyBirdPriceSpecial
+	 * @param boolean $hasPriceRegularBoard
+	 *        the return value of hasPriceRegularBoard
+	 * @param boolean $hasPriceSpecialBoard
+	 *        the return value of hasPriceSpecialBoard
+	 */
+	public function hasAnyPriceWithDataProvider(
+		$expectedHasAnyPrice, $hasPriceRegular, $hasPriceSpecial,
+		$earlyBirdApplies, $hasEarlyBirdPriceRegular, $hasEarlyBirdPriceSpecial,
+		$hasPriceRegularBoard, $hasPriceSpecialBoard
+	) {
+		$fixture = $this->getMock(
+			'tx_seminars_seminar',
+			array(
+				'hasPriceRegular', 'hasPriceSpecial', 'earlyBirdApplies',
+				'hasEarlyBirdPriceRegular', 'hasEarlyBirdPriceSpecial',
+				'hasPriceRegularBoard', 'hasPriceSpecialBoard'
+			)
+		);
+
+		$fixture->expects($this->any())->method('hasPriceRegular')
+			->will($this->returnValue($hasPriceRegular));
+		$fixture->expects($this->any())->method('hasPriceSpecial')
+			->will($this->returnValue($hasPriceSpecial));
+		$fixture->expects($this->any())->method('earlyBirdApplies')
+			->will($this->returnValue($earlyBirdApplies));
+		$fixture->expects($this->any())->method('hasEarlyBirdPriceRegular')
+			->will($this->returnValue($hasEarlyBirdPriceRegular));
+		$fixture->expects($this->any())->method('hasEarlyBirdPriceSpecial')
+			->will($this->returnValue($hasEarlyBirdPriceSpecial));
+		$fixture->expects($this->any())->method('hasPriceRegularBoard')
+			->will($this->returnValue($hasPriceRegularBoard));
+		$fixture->expects($this->any())->method('hasPriceSpecialBoard')
+			->will($this->returnValue($hasPriceSpecialBoard));
+
+		$this->assertEquals(
+			$expectedHasAnyPrice,
+			$fixture->hasAnyPrice()
+		);
+	}
 }
 ?>
