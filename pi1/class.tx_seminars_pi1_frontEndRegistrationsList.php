@@ -70,6 +70,7 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 					'$whatToDisplay is not valid.'
 			);
 		}
+
 		$this->whatToDisplay = $whatToDisplay;
 
 		parent::__construct($configuration, $cObj);
@@ -104,7 +105,7 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 	 * Creates a list of registered participants for an event.
 	 * If there are no registrations yet, a localized message is displayed instead.
 	 *
-	 * @return string HTML code for the list
+	 * @return string HTML code for the list, will not be empty
 	 */
 	public function render() {
 		$errorMessage = '';
@@ -148,8 +149,7 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 			$this->createRegistrationsList();
 		} else {
 			$this->setMarker('error_text', $errorMessage);
-			$this->hideSubparts('registrations_list_message', 'wrapper');
-			$this->hideSubparts('registrations_list_table', 'wrapper');
+			$this->setMarker('registrations_list_view_content', '');
 		}
 
 		$this->setMarker('backlink',
@@ -176,112 +176,167 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 	 * is a valid seminar object.
 	 */
 	private function createRegistrationsList() {
-		$builder
-			= tx_oelib_ObjectFactory::make('tx_seminars_registrationBagBuilder');
-		$builder->limitToEvent($this->seminar->getUid());
+		$builder = $this->createRegistrationBagBuilder();
 		$builder->limitToRegular();
-		$builder->limitToExistingUsers();
-		$builder->setOrderBy('crdate');
 
-		$registrationBag = $builder->build();
-
-		if (!$registrationBag->isEmpty()) {
-			$tableHeader = '';
-			$tableBody = '';
-
-			$frontEndUserFields = t3lib_div::trimExplode(
-				',',
-				$this->getConfValueString(
-					'showFeUserFieldsInRegistrationsList',
-					's_template_special'
-				),
-				TRUE
-			);
-
-			foreach ($frontEndUserFields as $field) {
-				$this->setMarker(
-					'registrations_list_header',
-					$this->translate('label_' . $field)
-				);
-				$tableHeader .= $this->getSubpart(
-					'WRAPPER_REGISTRATIONS_LIST_TABLE_HEAD_ITEM'
-				);
-			}
-
-			$registrationsFields = t3lib_div::trimExplode(
-				',',
-				$this->getConfValueString(
-					'showRegistrationFieldsInRegistrationList',
-					's_template_special'
-				),
-				TRUE
-			);
-
-			foreach ($registrationsFields as $field) {
-				if ($field == 'uid') {
-					$field = 'registration_' . $field;
-				}
-				$this->setMarker(
-					'registrations_list_header',
-					$this->translate('label_' . $field)
-				);
-				$tableHeader .= $this->getSubpart(
-					'WRAPPER_REGISTRATIONS_LIST_TABLE_HEAD_ITEM'
-				);
-			}
-
+		$regularRegistrations = $builder->build();
+		if (!$regularRegistrations->isEmpty()) {
 			$this->setSubpart(
-				'registrations_list_table_head_item', $tableHeader, 'wrapper'
+				'registrations_list_table_head',
+				$this->createTableHeader(),
+				'wrapper'
 			);
 
-			foreach ($registrationBag as $registration) {
-				$tableColumns = '';
+			$this->createTableBody($regularRegistrations);
+			$content = $this->getSubpart('WRAPPER_REGISTRATIONS_LIST_TABLE');
 
-				foreach ($frontEndUserFields as $field) {
-					$this->setMarker(
-						'registrations_list_item',
-						$registration->getUserData($field)
-					);
-					$tableColumns .= $this->getSubpart(
-						'WRAPPER_REGISTRATIONS_LIST_TABLE_BODY_ITEM'
-					);
-				}
+			$builder = $this->createRegistrationBagBuilder();
+			$builder->limitToOnQueue();
 
-				foreach ($registrationsFields as $field) {
-					$this->setMarker(
-						'registrations_list_item',
-						$registration->getRegistrationData($field)
-					);
-					$tableColumns .= $this->getSubpart(
-						'WRAPPER_REGISTRATIONS_LIST_TABLE_BODY_ITEM'
-					);
-				}
+			$waitingListRegistrations = $builder->build();
+			if (!$waitingListRegistrations->isEmpty()) {
 				$this->setMarker(
-					'registrations_list_row',
-					$tableColumns
+					'registrations_list_table_row',
+					$this->createTableBody($waitingListRegistrations),
+					'wrapper'
 				);
-				$tableRows .= $this->getSubpart(
-					'WRAPPER_REGISTRATIONS_LIST_TABLE_BODY'
+				$content .= $this->getSubpart(
+					'WRAPPER_REGISTRATIONS_LIST_WAITING_LIST'
 				);
 			}
-
-			$this->setSubpart(
-				'registrations_list_table_body', $tableRows, 'wrapper'
-			);
-			$this->hideSubparts('registrations_list_message', 'wrapper');
 		} else {
-			$this->hideSubparts('registrations_list_table', 'wrapper');
 			$this->setMarker(
 				'message_no_registrations',
 				$this->translate('message_noRegistrations')
 			);
+			$content = $this->getSubpart('WRAPPER_REGISTRATIONS_LIST_MESSAGE');
 		}
 
-		// Lets warnings from the registration bag bubble up to us.
-		$this->setErrorMessage($registrationBag->checkConfiguration(TRUE));
+		$this->setMarker('registrations_list_view_content', $content);
 
-		$registrationBag->__destruct();
-		unset($registrationBag, $builder);
+		// Lets warnings from the registration bag bubble up to us.
+		$this->setErrorMessage($regularRegistrations->checkConfiguration(TRUE));
+
+		$regularRegistrations->__destruct();
+		unset($regularRegistrations, $builder);
+	}
+
+	/**
+	 * Creates a registration bag builder that will find all registrations
+	 * (regular and on the queue) for the event in $this->seminar, ordered by
+	 * creation date.
+	 *
+	 * @return tx_seminars_registrationBagBuilder the bag builder
+	 */
+	private function createRegistrationBagBuilder() {
+		$builder = tx_oelib_ObjectFactory::make(
+			'tx_seminars_registrationBagBuilder'
+		);
+		$builder->limitToEvent($this->seminar->getUid());
+		$builder->limitToExistingUsers();
+		$builder->setOrderBy('crdate');
+
+		return $builder;
+	}
+
+	/**
+	 * Creates the table header.
+	 *
+	 * @return string the table header HTML, will not be empty
+	 */
+	private function createTableHeader() {
+		$labelKeys = array();
+		foreach ($this->getFrontEndUserFields() as $field) {
+			$labelKeys[] = 'label_' . $field;
+		}
+		foreach ($this->getRegistrationFields() as $field) {
+			if ($field == 'uid') {
+				$field = 'registration_' . $field;
+			}
+			$labelKeys[] = 'label_' . $field;
+		}
+
+		$tableHeader = '';
+		foreach ($labelKeys as $labelKey) {
+			$this->setMarker(
+				'registrations_list_header',
+				$this->translate($labelKey)
+			);
+			$tableHeader .= $this->getSubpart(
+				'WRAPPER_REGISTRATIONS_LIST_TABLE_HEAD_CELL'
+			);
+		}
+
+		return $tableHeader;
+	}
+
+	/**
+	 * Creates the table body for a list of registrations and sets the subpart
+	 * in the template.
+	 *
+	 * @param tx_seminars_registrationbag $registrations
+	 *        the registrations to list, must not be empty
+	 */
+	private function createTableBody(tx_seminars_registrationbag $registrations) {
+		$tableBody = '';
+
+		foreach ($registrations as $registration) {
+			$cellContents = array();
+			foreach ($this->getFrontEndUserFields() as $field) {
+				$cellContents[] = $registration->getUserData($field);
+			}
+			foreach ($this->getRegistrationFields() as $field) {
+				$cellContents[] =  $registration->getRegistrationData($field);
+			}
+
+			$tableCells = '';
+			foreach ($cellContents as $cellContent) {
+				$this->setMarker(
+					'registrations_list_cell', htmlspecialchars($cellContent)
+				);
+				$tableCells .= $this->getSubpart(
+					'WRAPPER_REGISTRATIONS_LIST_CELL'
+				);
+			}
+			$this->setMarker('registrations_list_cells', $tableCells);
+			$tableBody .= $this->getSubpart(
+				'WRAPPER_REGISTRATIONS_LIST_ROW'
+			);
+		}
+
+		$this->setMarker('registrations_list_rows', $tableBody);
+	}
+
+	/**
+	 * Gets the keys of the front-end user fields that should be displayed in
+	 * the list.
+	 *
+	 * @return array keys of the front-end user fields to display, might be empty
+	 */
+	private function getFrontEndUserFields() {
+		return t3lib_div::trimExplode(
+			',',
+			$this->getConfValueString(
+				'showFeUserFieldsInRegistrationsList', 's_template_special'
+			),
+			TRUE
+		);
+	}
+
+	/**
+	 * Gets the keys of the registration fields that should be displayed in
+	 * the list.
+	 *
+	 * @return array keys of the registration fields to display, might be empty
+	 */
+	private function getRegistrationFields() {
+		return t3lib_div::trimExplode(
+			',',
+			$this->getConfValueString(
+				'showRegistrationFieldsInRegistrationList', 's_template_special'
+			),
+			TRUE
+		);
 	}
 }
 

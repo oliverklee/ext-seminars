@@ -290,6 +290,7 @@
 			<label index="label_owner">Event manager</label>
 			<label index="label_registration_requirements_formal">Please register for the following events first:</label>
 			<label index="label_registration_requirements_informal">Please register for the following events first:</label>
+			<label index="label_waiting_list">Waiting list</label>
 			<label index="message_file_too_large_formal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_file_too_large_informal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_invalid_type_formal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
@@ -897,6 +898,7 @@
 			<label index="label_owner">Verwalter dieser Veranstaltung</label>
 			<label index="label_registration_requirements_formal">Bitte melden Sie sich zuerst für folgende Veranstaltungen an:</label>
 			<label index="label_registration_requirements_informal">Bitte melde dich zuerst für folgende Veranstaltungen an:</label>
+			<label index="label_waiting_list">Warteliste</label>
 			<label index="message_file_too_large_formal">Die anzuhängende Datei ist zu groß. Bitte wählen Sie eine kleinere. Die maximal erlaubte Größe ist</label>
 			<label index="message_file_too_large_informal">Die anzuhängende Datei ist zu groß. Bitte wähle eine kleinere. Die maximal erlaubte Größe ist</label>
 			<label index="message_invalid_type_formal">Die hochzuladende Datei hat ein ungültiges Format. Bitte wählen Sie eine andere. Erlaubte Dateiformate sind</label>
@@ -2480,6 +2482,7 @@
 			<label index="label_leaders_multiple_female" type="integer">45784650</label>
 			<label index="label_requirements" type="integer">94563323</label>
 			<label index="label_dependencies" type="integer">257076868</label>
+			<label index="label_waiting_list" type="integer">15566702</label>
 			<label index="label_registration_requirements_formal" type="integer">48963476</label>
 			<label index="label_registration_requirements_informal" type="integer">48963476</label>
 			<label index="message_requirementsNotFulfilled_formal" type="integer">66387523</label>
@@ -3754,6 +3757,7 @@
 			<label index="label_leaders_multiple_female">Leaders</label>
 			<label index="label_requirements">Requirements</label>
 			<label index="label_dependencies">Required for</label>
+			<label index="label_waiting_list">Waiting list</label>
 			<label index="label_registration_requirements_formal">Please register for the following events first:</label>
 			<label index="label_registration_requirements_informal">Please register for the following events first:</label>
 			<label index="message_requirementsNotFulfilled_formal">You are not registered for all required events yet.</label>
