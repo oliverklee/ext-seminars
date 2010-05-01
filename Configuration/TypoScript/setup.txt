@@ -547,6 +547,10 @@ plugin.tx_seminars_pi1 {
 							field = target_groups
 							mmtable = tx_seminars_seminars_target_groups_mm
 						}
+						payment_methods {
+							field = payment_methods
+							mmtable = tx_seminars_seminars_payment_methods_mm
+						}
 						organizers {
 							field = organizers
 							mmtable = tx_seminars_seminars_organizers_mm
