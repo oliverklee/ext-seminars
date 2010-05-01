@@ -38,7 +38,7 @@
 - [#3450] Change: Mention in setup.txt that the admin should not copy'n'paste the complete template into the TS template
 - [#3733] Change: Improve the full-text search performance even more
 - [#3729] Change: Provide ext_autoload for our extensions
-- [#3718] Fix: CSV file displayed in the brower or saved with php suffix, original patch by Jörn Dost
+- [#3718] Fix: CSV file displayed in the brower or saved with php suffix, original patch by Joern Dost
 - [#3583] Change: Speed up our full-text search
 - [#3582] Change: Slim down our full-text search
 
