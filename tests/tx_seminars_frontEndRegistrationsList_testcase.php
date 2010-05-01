@@ -31,6 +31,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase {
 	/**
@@ -101,11 +102,11 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	 * Creates an FE user, registers them to the seminar with the UID in
 	 * $this->seminarUid and logs them in.
 	 *
-	 * Note: This creates a registration record.
+	 * Note: This function creates a registration record.
 	 */
 	private function createLogInAndRegisterFrontEndUser() {
-		$this->feUserUid = $this->testingFramework->createAndLogInFrontEndUser(
-			'', array('name' => 'John Doe')
+		$this->feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
+			'', array('name' => 'Tom & Jerry')
 		);
 		$this->registrationUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
@@ -121,7 +122,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	// Tests for the utility functions.
 	/////////////////////////////////////
 
-	public function testCreateLogInAndRegisterFrontEndUserLogsInFrontEndUser() {
+	/**
+	 * @test
+	 */
+	public function createLogInAndRegisterFrontEndUserLogsInFrontEndUser() {
 		$this->createLogInAndRegisterFrontEndUser();
 
 		$this->assertTrue(
@@ -129,12 +133,16 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testCreateLogInAndRegisterFrontEndUserCreatesRegistrationRecord() {
+	/**
+	 * @test
+	 */
+	public function createLogInAndRegisterFrontEndUserCreatesRegistrationRecord() {
 		$this->createLogInAndRegisterFrontEndUser();
 
-		$this->assertEquals(
-			1,
-			$this->testingFramework->countRecords(SEMINARS_TABLE_ATTENDANCES)
+		$this->assertTrue(
+			$this->testingFramework->existsExactlyOneRecord(
+				SEMINARS_TABLE_ATTENDANCES
+			)
 		);
 	}
 
@@ -143,7 +151,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	// Tests for creating the fixture.
 	////////////////////////////////////
 
-	public function testCreateFixtureWithInvalidWhatToDisplayThrowsException() {
+	/**
+	 * @test
+	 */
+	public function createFixtureWithInvalidWhatToDisplayThrowsException() {
 		$this->setExpectedException(
 			'Exception',
 			'The value "foo" of the first parameter $whatToDisplay is not valid.'
@@ -152,11 +163,13 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		new tx_seminars_pi1_frontEndRegistrationsList(
 			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
 			'foo', 0, $GLOBALS['TSFE']->cObj
-			);
-
+		);
 	}
 
-	public function testCreateFixtureWithListRegistrationsAsWhatToDisplayDoesNotThrowException() {
+	/**
+	 * @test
+	 */
+	public function createFixtureWithListRegistrationsAsWhatToDisplayDoesNotThrowException() {
 		$fixture = new tx_seminars_pi1_frontEndRegistrationsList(
 			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
 			'list_registrations', 0, $GLOBALS['TSFE']->cObj
@@ -164,7 +177,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		$fixture->__destruct();
 	}
 
-	public function testCreateFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException() {
+	/**
+	 * @test
+	 */
+	public function createFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException() {
 		$fixture = new tx_seminars_pi1_frontEndRegistrationsList(
 			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
 			'list_vip_registrations', 0, $GLOBALS['TSFE']->cObj
@@ -177,14 +193,20 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	// Tests for render()
 	///////////////////////
 
-	public function testRenderContainsEventTitle() {
+	/**
+	 * @test
+	 */
+	public function renderContainsEventTitle() {
 		$this->assertContains(
 			'Test event',
 			$this->fixture->render()
 		);
 	}
 
-	public function testRenderWithNegativeSeminarUidReturnsHeader404() {
+	/**
+	 * @test
+	 */
+	public function renderWithNegativeSeminarUidReturnsHeader404() {
 		$fixture = new tx_seminars_pi1_frontEndRegistrationsList(
 			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
 			'list_registrations', -1, $GLOBALS['TSFE']->cObj
@@ -198,7 +220,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithZeroSeminarUidReturnsHeader404() {
+	/**
+	 * @test
+	 */
+	public function renderWithZeroSeminarUidReturnsHeader404() {
 		$fixture = new tx_seminars_pi1_frontEndRegistrationsList(
 			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
 			'list_registrations', 0, $GLOBALS['TSFE']->cObj
@@ -212,7 +237,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithoutLoggedInFrontEndUserReturnsHeader403() {
+	/**
+	 * @test
+	 */
+	public function renderWithoutLoggedInFrontEndUserReturnsHeader403() {
 		$this->fixture->render();
 
 		$this->assertEquals(
@@ -221,8 +249,11 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithLoggedInAndNotRegisteredFrontEndUserReturnsHeader403() {
-		$this->testingFramework->createAndLogInFrontEndUser();
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndNotRegisteredFrontEndUserReturnsHeader403() {
+		$this->testingFramework->createFrontEndUser();
 		$this->fixture->render();
 
 		$this->assertEquals(
@@ -231,7 +262,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserDoesNotReturnHeader403() {
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserDoesNotReturnHeader403() {
 		$this->createLogInAndRegisterFrontEndUser();
 		$this->fixture->render();
 
@@ -241,7 +275,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUid() {
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUid() {
 		$this->fixture->setConfigurationValue(
 			'showFeUserFieldsInRegistrationsList', 'uid'
 		);
@@ -253,7 +290,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUid() {
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUid() {
 		$this->fixture->setConfigurationValue(
 			'showFeUserFieldsInRegistrationsList', 'uid'
 		);
@@ -265,7 +305,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserName() {
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserName() {
 		$this->fixture->setConfigurationValue(
 			'showFeUserFieldsInRegistrationsList', 'name'
 		);
@@ -277,19 +320,25 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserName() {
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserName() {
 		$this->fixture->setConfigurationValue(
 			'showFeUserFieldsInRegistrationsList', 'name'
 		);
 		$this->createLogInAndRegisterFrontEndUser();
 
 		$this->assertContains(
-			'<td>John Doe</td>',
+			'<td>Tom &amp; Jerry</td>',
 			$this->fixture->render()
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUidAndName() {
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUidAndName() {
 		$this->fixture->setConfigurationValue(
 			'showFeUserFieldsInRegistrationsList', 'uid,name'
 		);
@@ -306,7 +355,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUidAndName() {
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUidAndName() {
 		$this->fixture->setConfigurationValue(
 			'showFeUserFieldsInRegistrationsList', 'uid,name'
 		);
@@ -314,7 +366,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		$this->testingFramework->changeRecord(
 			'fe_users',
 			$this->feUserUid,
-			array('name' => 'John Doe')
+			array('name' => 'Tom & Jerry')
 		);
 		$result = $this->fixture->render();
 
@@ -323,12 +375,15 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 			$result
 		);
 		$this->assertContains(
-			'<td>John Doe</td>',
+			'<td>Tom &amp; Jerry</td>',
 			$result
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUid() {
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUid() {
 		$this->fixture->setConfigurationValue(
 			'showRegistrationFieldsInRegistrationList', 'uid'
 		);
@@ -340,7 +395,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUid() {
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUid() {
 		$this->fixture->setConfigurationValue(
 			'showRegistrationFieldsInRegistrationList', 'uid'
 		);
@@ -352,7 +410,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationSeats() {
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationSeats() {
 		$this->fixture->setConfigurationValue(
 			'showRegistrationFieldsInRegistrationList', 'seats'
 		);
@@ -364,7 +425,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationSeats() {
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationSeats() {
 		$this->fixture->setConfigurationValue(
 			'showRegistrationFieldsInRegistrationList', 'seats'
 		);
@@ -381,7 +445,30 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUidAndSeats() {
+	/**
+	 * @test
+	 */
+	public function renderCanContainTheRegistrationInterests() {
+		$this->fixture->setConfigurationValue(
+			'showRegistrationFieldsInRegistrationList', 'interests'
+		);
+		$this->createLogInAndRegisterFrontEndUser();
+		$this->testingFramework->changeRecord(
+			SEMINARS_TABLE_ATTENDANCES,
+			$this->registrationUid,
+			array('interests' => 'everything practical & theoretical',)
+		);
+
+		$this->assertContains(
+			'<td>everything practical &amp; theoretical</td>',
+			$this->fixture->render()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUidAndSeats() {
 		$this->fixture->setConfigurationValue(
 			'showRegistrationFieldsInRegistrationList', 'uid,seats'
 		);
@@ -397,7 +484,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUidAndSeats() {
+	/**
+	 * @test
+	 */
+	public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUidAndSeats() {
 		$this->fixture->setConfigurationValue(
 			'showRegistrationFieldsInRegistrationList', 'uid,seats'
 		);
@@ -418,7 +508,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithEmptyShowFeUserFieldsInRegistrationsListDoesNotContainUnresolvedLabel() {
+	/**
+	 * @test
+	 */
+	public function renderWithEmptyShowFeUserFieldsInRegistrationsListDoesNotContainUnresolvedLabel() {
 		$this->createLogInAndRegisterFrontEndUser();
 		$this->fixture->setConfigurationValue(
 			'showFeUserFieldsInRegistrationsList', ''
@@ -430,7 +523,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithEmptyShowRegistrationFieldsInRegistrationListDoesNotContainUnresolvedLabel() {
+	/**
+	 * @test
+	 */
+	public function renderWithEmptyShowRegistrationFieldsInRegistrationListDoesNotContainUnresolvedLabel() {
 		$this->createLogInAndRegisterFrontEndUser();
 		$this->fixture->setConfigurationValue(
 			'showRegistrationFieldsInRegistrationList', ''
@@ -442,7 +538,10 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderWithDeletedUserForRegistrationHidesUsersRegistration() {
+	/**
+	 * @test
+	 */
+	public function renderWithDeletedUserForRegistrationHidesUsersRegistration() {
 		$this->fixture->setConfigurationValue(
 			'showRegistrationFieldsInRegistrationList', 'uid'
 		);
@@ -459,13 +558,16 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 	}
 
-	public function testRenderSeparatesMultipleRegistrationsWithTableRows() {
+	/**
+	 * @test
+	 */
+	public function renderSeparatesMultipleRegistrationsWithTableRows() {
 		$this->fixture->setConfigurationValue(
 			'showRegistrationFieldsInRegistrationList', 'uid'
 		);
 		$this->createLogInAndRegisterFrontEndUser();
 
-		$feUserUid = $this->testingFramework->createAndLogInFrontEndUser();
+		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$secondRegistration = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(

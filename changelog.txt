@@ -1,4 +1,5 @@
 0.9.2 (currently working on)
+- [#3743] Cleanup: Clean up the FE registation list a bit
 - [#3829] Cleanup: Refactor and unit-test pi1::hideListRegistrationsColumnIfNecessary
 - [#3434] Cleanup: Replace false/true with FALSE/TRUE
 - [#3458] Fix: Unregistration is not possible if allowRegistrationForEventsWithoutDate = 1
