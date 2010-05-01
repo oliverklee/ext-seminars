@@ -1257,7 +1257,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return boolean TRUE if the seminar has a non-zero regular early
 	 *                 bird price, FALSE otherwise
 	 */
-	private function hasEarlyBirdPriceRegular() {
+	protected function hasEarlyBirdPriceRegular() {
 		return $this->hasTopicDecimal('price_regular_early');
 	}
 
@@ -1267,7 +1267,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return boolean TRUE if the seminar has a non-zero special early
 	 *                 bird price, FALSE otherwise
 	 */
-	private function hasEarlyBirdPriceSpecial() {
+	protected function hasEarlyBirdPriceSpecial() {
 		return $this->hasTopicDecimal('price_special_early');
 	}
 
@@ -1287,7 +1287,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return boolean TRUE if this event has an early bird dealine set and
 	 *                 this deadline is not over yet
 	 */
-	private function earlyBirdApplies() {
+	protected function earlyBirdApplies() {
 		return ($this->hasEarlyBirdPrice() && !$this->isEarlyBirdDeadlineOver());
 	}
 
@@ -3657,7 +3657,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		// There is no early-bird version of the prices that include full board.
-		$result |= $this->hasPriceRegularBoard()
+		$result = $result || $this->hasPriceRegularBoard()
 			|| $this->hasPriceSpecialBoard();
 
 		return $result;
