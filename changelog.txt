@@ -27,7 +27,7 @@
 - [#3710] Change: Use self:: for static calls within the same class
 - [#3450] Change: Mention in setup.txt that the admin should not copy'n'paste the complete template into the TS template
 - [#3729] Change: Provide ext_autoload for our extensions
-- [#3718] Fix: CSV file displayed in the browser or saved with php suffix, original patch by Jörn Dost
+- [#3718] Fix: CSV file displayed in the browser or saved with php suffix, original patch by Joern Dost
 
 0.9.0 (released 2010-03-01)
 - [#3712] Fix: Items in the search filter comboboxes should be sorted alphabetically
