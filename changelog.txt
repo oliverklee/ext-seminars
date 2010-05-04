@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#3847] Fix: Replace newRecordLinkPosition with levelLinksPosition in the TCA
 - [#3843] Fix: Payment methods set in the FE editor do not get saved
 - [#3814] Fix: The "list of registrations" column should be hidden in the topic list
 - [#3277] Cleanup: Drop the workaround for Core bug 2178 from the seminars BE module
