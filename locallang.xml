@@ -723,6 +723,7 @@ la registrazione di un partecipante è stata promossa a regolare per un evento:<
 			<label index="label_room">Salle</label>
 			<label index="label_seats">Places</label>
 			<label index="label_total_price">Prix total</label>
+			<label index="label_attendees_names">Personnes inscrites</label>
 			<label index="label_lodgings">Options d'hébergement choisies</label>
 			<label index="label_foods">Options de nourriture choisies</label>
 			<label index="label_kids">Nombre d'enfants</label>
@@ -746,6 +747,7 @@ la registrazione di un partecipante è stata promossa a regolare per un evento:<
 			<label index="label_country">Pays</label>
 			<label index="label_attendees">Participants</label>
 			<label index="label_vacancies">Places libres</label>
+			<label index="label_unlimited">illimité</label>
 			<label index="label_enough_attendees">Assez de participants</label>
 			<label index="label_is_full">Complet</label>
 			<label index="label_paymentmethod">Méthode de paiement sélectionnée</label>
@@ -790,12 +792,25 @@ la registrazione di un partecipante è stata promossa a regolare per un evento:<
 			<label index="message_willBeAnnounced">sera annoncé</label>
 			<label index="message_forFree">gratuit</label>
 			<label index="message_enough">suffisant</label>
+			<label index="message_fullyBooked">complet</label>
+			<label index="message_registrationOpensOn">commence le %s</label>
 			<label index="message_accessDenied_formal">Désolé, vous n'avez pas le droit d'accéder à cette partie du site.</label>
 			<label index="message_accessDenied_informal">Désolé, tu n'as pas le droit d'accéder à cette partie du site.</label>
 			<label index="email_confirmationSubject">Confirmation d'inscription</label>
+			<label index="email_confirmationHello_formal">nous vous remercions pour votre inscription à l'événement &quot;%s&quot;</label>
+			<label index="email_confirmationHello_informal">nous te remercions pour ton inscription à l'événement &quot;%s&quot;</label>
+			<label index="email_price">pour le prix total de %s</label>
 			<label index="email_confirmationOnUnregistrationSubject">Confirmation d'annulation d'inscription</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">nous vous confirmons votre désinscription pour l'événement &quot;%s&quot;</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">nous te confirmons ta désinscription pour l'événement &quot;%s&quot;</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject">Confirmation d'inscription sur liste d'attente</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal">merci pour votre inscription sur la liste d'attente pour l'événement &quot;%s&quot;</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal">merci pour ton inscription sur la liste d'attente pour l'événement &quot;%s&quot;</label>
 			<label index="email_confirmationOnQueueUpdateSubject">Confirmation de régularisation de votre inscription</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal">Votre inscription pour l'l'évènement  &quot;%s&quot; vient d'être confirmée</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal">Ton inscription pour l'l'évènement  &quot;%s&quot; vient d'être confirmée</label>
+			<label index="email_unregistrationNotice_formal">Vous avez la possibilité de vous désinscrire  gratuitement jusqu'au %s. Passé ce délais, vous devrez payer les frais d'inscription.</label>
+			<label index="email_unregistrationNotice_informal">Tu as la possibilité de te désinscrire  gratuitement jusqu'au %s. Passé ce délais, tu devras payer les frais d'inscription.</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Votre événement a reçu suffisamment d'inscriptions pour avoir lieu.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">L'événement compte assez d'inscriptions: %d - %s</label>
 			<label index="email_additionalNotificationIsFull">Votre événement est plein, il ne reste plus de place.</label>
@@ -803,19 +818,28 @@ la registrazione di un partecipante è stata promossa a regolare per un evento:<
 			<label index="email_notificationSubject">Avis d'inscription</label>
 			<label index="email_notificationHello">Bonjour,
 
-Quelqu'un vient de s'inscrire pour l'événement suivant:</label>
+Quelqu'un vient de s'inscrire pour l'événement suivant :</label>
 			<label index="email_notificationOnUnregistrationSubject">Avis d'annulation d'inscription</label>
 			<label index="email_notificationOnUnregistrationHello">Bonjour,
 
-Quelqu'un vient d'annuler son inscription pour l'événement suivant:</label>
+Quelqu'un vient d'annuler son inscription pour l'événement suivant :</label>
 			<label index="email_notificationOnRegistrationForQueueSubject">Avis d'inscription à la liste d'attente</label>
 			<label index="email_notificationOnRegistrationForQueueHello">Bonjour,
 
-Quelqu'un vient de s'inscrire sur la liste d'attente pour l'événement suivant:</label>
+Quelqu'un vient de s'inscrire sur la liste d'attente pour l'événement suivant :</label>
 			<label index="email_notificationOnQueueUpdateSubject">Avis de régularisation d'inscription</label>
 			<label index="email_notificationOnQueueUpdateHello">Bonjour,
 
-Une inscription vient d'être régularisée pour l'événement suivant:</label>
+Une inscription vient d'être régularisée pour l'événement suivant :</label>
+			<label index="email_eventTakesPlaceReminderSubject">&quot;%event&quot; débute dans %days jours</label>
+			<label index="email_eventTakesPlaceReminder">Bonjour %organizer,
+
+l'événement &quot;%event&quot; (Événement numéro : %uid) aura lieu dans %days jours. Actuellement, il y a %registrations inscriptions pour cet événement.</label>
+			<label index="email_cancelationDeadlineReminderSubject">Le délais d'annulation pour &quot;%event&quot; est dépassé.</label>
+			<label index="email_cancelationDeadlineReminder">Bonjour %organizer,
+
+L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&quot; vient d'être atteinte (Événement numéro : %uid, date de début : %begin_date). Actuellement l'événement n'est ni confirmé ni annulé et il y a %registrations inscriptions pour cet événement.</label>
+			<label index="label_planned_disclaimer">Pour que cet événement puisse avoir lieu, un nombre minimal d'inscriptions est nécessaire. Si ce nombre n'est pas atteint, l'événement sera annulé. Vous serez bien sûr avertis aussi vite que possible.</label>
 		</languageKey>
 	</data>
 	<orig_hash type="array">
@@ -1446,6 +1470,26 @@ Une inscription vient d'être régularisée pour l'événement suivant:</label>
 			<label index="label_registration_uid" type="integer">262691347</label>
 			<label index="label_regular" type="integer">183729416</label>
 			<label index="label_waiting_list" type="integer">128272059</label>
+			<label index="label_attendees_names" type="integer">112261279</label>
+			<label index="label_unlimited" type="integer">156824688</label>
+			<label index="message_fullyBooked" type="integer">65406827</label>
+			<label index="message_registrationOpensOn" type="integer">260849167</label>
+			<label index="email_confirmationHello_formal" type="integer">186378957</label>
+			<label index="email_confirmationHello_informal" type="integer">186378957</label>
+			<label index="email_price" type="integer">102789220</label>
+			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">225736015</label>
+			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">225736015</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal" type="integer">201582578</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal" type="integer">201582578</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal" type="integer">43196046</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal" type="integer">43196046</label>
+			<label index="email_unregistrationNotice_formal" type="integer">174712508</label>
+			<label index="email_unregistrationNotice_informal" type="integer">174712508</label>
+			<label index="email_eventTakesPlaceReminderSubject" type="integer">83496300</label>
+			<label index="email_eventTakesPlaceReminder" type="integer">57044606</label>
+			<label index="email_cancelationDeadlineReminderSubject" type="integer">74466469</label>
+			<label index="email_cancelationDeadlineReminder" type="integer">187860743</label>
+			<label index="label_planned_disclaimer" type="integer">65651058</label>
 		</languageKey>
 	</orig_hash>
 	<orig_text type="array">
@@ -2126,6 +2170,30 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_registration_uid">Ticket ID</label>
 			<label index="label_regular">regular</label>
 			<label index="label_waiting_list">waiting list</label>
+			<label index="label_attendees_names">Registered persons</label>
+			<label index="label_unlimited">unlimited</label>
+			<label index="message_fullyBooked">fully booked</label>
+			<label index="message_registrationOpensOn">starting %s</label>
+			<label index="email_confirmationHello_formal">thank you for registering for the event &quot;%s&quot;</label>
+			<label index="email_confirmationHello_informal">thank you for registering for the event &quot;%s&quot;</label>
+			<label index="email_price">at the total price of %s</label>
+			<label index="email_confirmationOnUnregistrationHello_formal">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnUnregistrationHello_informal">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_formal">thank you for registering for the waiting list of the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnRegistrationForQueueHello_informal">thank you for registering for the waiting list of the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnQueueUpdateHello_formal">your registration just has become a regular registration for the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnQueueUpdateHello_informal">your registration just has become a regular registration for the event &quot;%s&quot;</label>
+			<label index="email_unregistrationNotice_formal">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
+			<label index="email_unregistrationNotice_informal">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
+			<label index="email_eventTakesPlaceReminderSubject">&quot;%event&quot; begins in %days days</label>
+			<label index="email_eventTakesPlaceReminder">Hello %organizer,
+
+the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there are %registrations registrations for this event.</label>
+			<label index="email_cancelationDeadlineReminderSubject">Cancelation deadline for &quot;%event&quot; has just passed</label>
+			<label index="email_cancelationDeadlineReminder">Hello %organizer,
+
+the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number: %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are %registrations registrations for this event.</label>
+			<label index="label_planned_disclaimer">For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>
