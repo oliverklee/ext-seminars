@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildpath>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/phpunit"/>
 	<buildpathentry kind="src" path=""/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/oelib"/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/typo3_src"/>
