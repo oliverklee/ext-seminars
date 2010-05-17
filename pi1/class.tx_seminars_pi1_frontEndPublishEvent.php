@@ -62,31 +62,22 @@ class tx_seminars_pi1_frontEndPublishEvent extends tx_oelib_templatehelper {
 	 * @return string HTML code for the event publishing, will not be empty
 	 */
 	public function render() {
-		try {
-			$this->init(array());
+		$this->init(array());
 
-			if (!isset($this->piVars['hash']) || ($this->piVars['hash'] == '')) {
-				return $this->translate('message_publishingFailed');
-			}
+		if (!isset($this->piVars['hash']) || ($this->piVars['hash'] == '')) {
+			return $this->translate('message_publishingFailed');
+		}
 
-			$eventMapper = tx_oelib_ObjectFactory::make('tx_seminars_Mapper_Event');
-			$event = $eventMapper->findByPublicationHash($this->piVars['hash']);
+		$eventMapper = tx_oelib_ObjectFactory::make('tx_seminars_Mapper_Event');
+		$event = $eventMapper->findByPublicationHash($this->piVars['hash']);
 
-			if (($event !== null) && $event->isHidden()) {
-				$event->markAsVisible();
-				$event->purgePublicationHash();
-				$eventMapper->save($event);
-				$result = $this->translate('message_publishingSuccessful');
-			} else {
-				$result = $this->translate('message_publishingFailed');
-			}
-		} catch (Exception $exception) {
-			$result = '<p style="border: 2px solid red; padding: 1em; ' .
-				'font-weight: bold;">' . LF .
-				htmlspecialchars($exception->getMessage()) . LF .
-				'<br /><br />' . LF .
-				nl2br(htmlspecialchars($exception->getTraceAsString())) . LF .
-				'</p>' . LF;
+		if (($event !== null) && $event->isHidden()) {
+			$event->markAsVisible();
+			$event->purgePublicationHash();
+			$eventMapper->save($event);
+			$result = $this->translate('message_publishingSuccessful');
+		} else {
+			$result = $this->translate('message_publishingFailed');
 		}
 
 		return $result;

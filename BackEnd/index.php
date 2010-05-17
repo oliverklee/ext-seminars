@@ -88,132 +88,120 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		$this->content .= $this->doc->header($LANG->getLL('title'));
 		$this->content .= $this->doc->spacer(5);
 
-		try {
-			if ($this->id <= 0) {
-				echo $this->content . '<p class="errorMessage">' .
-					$GLOBALS['LANG']->getLL('message_noPageTypeSelected') . '</p>' .
-					$this->doc->endPage();
+		if ($this->id <= 0) {
+			echo $this->content . '<p class="errorMessage">' .
+				$GLOBALS['LANG']->getLL('message_noPageTypeSelected') . '</p>' .
+				$this->doc->endPage();
 
-				return;
-			}
-
-			$pageAccess = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
-			if (!is_array($pageAccess) && !$BE_USER->user['admin']) {
-				echo $this->content . $this->doc->endPage();
-
-				return;
-			}
-
-			if (!$this->hasStaticTemplate()) {
-				echo $this->content . '<p class="errorMessage">' .
-					$GLOBALS['LANG']->getLL('message_noStaticTemplateFound') .
-					'</p>' . $this->doc->endPage();
-
-				return;
-			}
-
-			$this->setPageData($pageAccess);
-
-			// JavaScript function called within getDeleteIcon()
-			$this->doc->JScode = '
-				<script type="text/javascript">/*<![CDATA[*/
-					function jumpToUrl(URL) {
-						document.location = URL;
-					}
-				/*]]>*/</script>
-			';
-
-			// define the sub modules that should be available in the tabmenu
-			$this->availableSubModules = array();
-
-			// only show the tabs if the back-end user has access to the
-			// corresponding tables
-			if ($BE_USER->check('tables_select', SEMINARS_TABLE_SEMINARS)) {
-				$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
-			}
-
-			if ($BE_USER->check('tables_select', SEMINARS_TABLE_ATTENDANCES)) {
-				$this->availableSubModules[2] = $LANG->getLL('subModuleTitle_registrations');
-			}
-
-			if ($BE_USER->check('tables_select', SEMINARS_TABLE_SPEAKERS)) {
-				$this->availableSubModules[3] = $LANG->getLL('subModuleTitle_speakers');
-			}
-
-			if ($BE_USER->check('tables_select', SEMINARS_TABLE_ORGANIZERS)) {
-				$this->availableSubModules[4] = $LANG->getLL('subModuleTitle_organizers');
-			}
-
-			// Read the selected sub module (from the tab menu) and make it available within this class.
-			$this->subModule = intval(t3lib_div::_GET('subModule'));
-
-			// If $this->subModule is not a key of $this->availableSubModules,
-			// set it to the key of the first element in $this->availableSubModules
-			// so the first tab is activated.
-			if (!array_key_exists($this->subModule, $this->availableSubModules)) {
-				reset($this->availableSubModules);
-				$this->subModule = key($this->availableSubModules);
-			}
-
-			// Only generate the tab menu if the current back-end user has the
-			// rights to show any of the tabs.
-			if ($this->subModule) {
-				$this->content .= $this->doc->getTabMenu(array('id' => $this->id),
-					'subModule',
-					$this->subModule,
-					$this->availableSubModules);
-				$this->content .= $this->doc->spacer(5);
-			}
-
-			// Select which sub module to display.
-			// If no sub module is specified, an empty page will be displayed.
-			switch ($this->subModule) {
-				case 2:
-					$registrationsList = tx_oelib_ObjectFactory::make(
-						'tx_seminars_BackEnd_RegistrationsList', $this
-					);
-					$this->content .= $registrationsList->show();
-					break;
-				case 3:
-					$speakersList = tx_oelib_ObjectFactory::make(
-						'tx_seminars_BackEnd_SpeakersList', $this
-					);
-					$this->content .= $speakersList->show();
-					break;
-				case 4:
-					$organizersList = tx_oelib_ObjectFactory::make(
-						'tx_seminars_BackEnd_OrganizersList', $this
-					);
-					$this->content .= $organizersList->show();
-					break;
-				case 1:
-					if ($this->isConfirmEventFormRequested()) {
-						$this->content .= $this->getConfirmEventMailForm();
-					} elseif ($this->isCancelEventFormRequested()) {
-						$this->content .= $this->getCancelEventMailForm();
-					} else {
-						$eventsList = tx_oelib_ObjectFactory::make(
-							'tx_seminars_BackEnd_EventsList', $this
-						);
-						$this->content .= $eventsList->show();
-						$eventsList->__destruct();
-					}
-				default:
-					$this->content .= '';
-					break;
-			}
-		} catch (Exception $exception) {
-			$this->doc = t3lib_div::makeInstance('mediumDoc');
-			$this->content .= $this->doc->spacer(5);
-			$this->content .= '<p style="border: 2px solid red; padding: 1em; ' .
-				'font-weight: bold;">' . LF	.
-				htmlspecialchars($exception->getMessage()) . LF .
-				'<br /><br />' . LF .
-				nl2br(htmlspecialchars($exception->getTraceAsString())) . LF .
-				'</p>' . LF;
+			return;
 		}
 
-		// Output the whole content.
+		$pageAccess = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
+		if (!is_array($pageAccess) && !$BE_USER->user['admin']) {
+			echo $this->content . $this->doc->endPage();
+
+			return;
+		}
+
+		if (!$this->hasStaticTemplate()) {
+			echo $this->content . '<p class="errorMessage">' .
+				$GLOBALS['LANG']->getLL('message_noStaticTemplateFound') .
+				'</p>' . $this->doc->endPage();
+
+			return;
+		}
+
+		$this->setPageData($pageAccess);
+
+		// JavaScript function called within getDeleteIcon()
+		$this->doc->JScode = '
+			<script type="text/javascript">/*<![CDATA[*/
+				function jumpToUrl(URL) {
+					document.location = URL;
+				}
+			/*]]>*/</script>
+		';
+
+		// define the sub modules that should be available in the tabmenu
+		$this->availableSubModules = array();
+
+		// only show the tabs if the back-end user has access to the
+		// corresponding tables
+		if ($BE_USER->check('tables_select', SEMINARS_TABLE_SEMINARS)) {
+			$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
+		}
+
+		if ($BE_USER->check('tables_select', SEMINARS_TABLE_ATTENDANCES)) {
+			$this->availableSubModules[2] = $LANG->getLL('subModuleTitle_registrations');
+		}
+
+		if ($BE_USER->check('tables_select', SEMINARS_TABLE_SPEAKERS)) {
+			$this->availableSubModules[3] = $LANG->getLL('subModuleTitle_speakers');
+		}
+
+		if ($BE_USER->check('tables_select', SEMINARS_TABLE_ORGANIZERS)) {
+			$this->availableSubModules[4] = $LANG->getLL('subModuleTitle_organizers');
+		}
+
+		// Read the selected sub module (from the tab menu) and make it available within this class.
+		$this->subModule = intval(t3lib_div::_GET('subModule'));
+
+		// If $this->subModule is not a key of $this->availableSubModules,
+		// set it to the key of the first element in $this->availableSubModules
+		// so the first tab is activated.
+		if (!array_key_exists($this->subModule, $this->availableSubModules)) {
+			reset($this->availableSubModules);
+			$this->subModule = key($this->availableSubModules);
+		}
+
+		// Only generate the tab menu if the current back-end user has the
+		// rights to show any of the tabs.
+		if ($this->subModule) {
+			$this->content .= $this->doc->getTabMenu(array('id' => $this->id),
+				'subModule',
+				$this->subModule,
+				$this->availableSubModules);
+			$this->content .= $this->doc->spacer(5);
+		}
+
+		// Select which sub module to display.
+		// If no sub module is specified, an empty page will be displayed.
+		switch ($this->subModule) {
+			case 2:
+				$registrationsList = tx_oelib_ObjectFactory::make(
+					'tx_seminars_BackEnd_RegistrationsList', $this
+				);
+				$this->content .= $registrationsList->show();
+				break;
+			case 3:
+				$speakersList = tx_oelib_ObjectFactory::make(
+					'tx_seminars_BackEnd_SpeakersList', $this
+				);
+				$this->content .= $speakersList->show();
+				break;
+			case 4:
+				$organizersList = tx_oelib_ObjectFactory::make(
+					'tx_seminars_BackEnd_OrganizersList', $this
+				);
+				$this->content .= $organizersList->show();
+				break;
+			case 1:
+				if ($this->isConfirmEventFormRequested()) {
+					$this->content .= $this->getConfirmEventMailForm();
+				} elseif ($this->isCancelEventFormRequested()) {
+					$this->content .= $this->getCancelEventMailForm();
+				} else {
+					$eventsList = tx_oelib_ObjectFactory::make(
+						'tx_seminars_BackEnd_EventsList', $this
+					);
+					$this->content .= $eventsList->show();
+					$eventsList->__destruct();
+				}
+			default:
+				$this->content .= '';
+				break;
+		}
+
 		echo $this->content . $this->doc->endPage();
 	}
 
