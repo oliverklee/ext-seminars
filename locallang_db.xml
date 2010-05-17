@@ -410,7 +410,7 @@
 			<label index="tx_seminars_categories.icon">Icon:</label>
 			<label index="tx_seminars_skills">Fähigkeiten</label>
 			<label index="tx_seminars_skills.title">Titel:</label>
-			<label index="tt_content.list_type_pi1">Seminar-Manager</label>
+			<label index="tt_content.list_type_pi1">Seminarmanager</label>
 			<label index="fe_groups.tx_seminars_publish_events">Im FE-Editor eingegebene Veranstaltungen</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.0">Veranstaltungen sofort veröffentlichen</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.1">nur neu erstellte Veranstaltungen verstecken</label>
