@@ -61,7 +61,7 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->fixture = new tx_seminars_EmailSalutation();
 		tx_oelib_ConfigurationRegistry::getInstance()->get(
-			'seminars')->setAsString('salutation', 'formal');
+			'plugin.tx_seminars')->setAsString('salutation', 'formal');
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
 	}
@@ -209,7 +209,7 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 	public function test_getSalutationForInformalSalutation_ReturnsInformalSalutation() {
 		$user = $this->createFrontEndUser();
 		tx_oelib_ConfigurationRegistry::getInstance()->get(
-			'seminars')->setAsString('salutation', 'informal');
+			'plugin.tx_seminars')->setAsString('salutation', 'informal');
 
 		$this->assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
@@ -221,7 +221,7 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 	public function test_getSalutationForInformalSalutation_ReturnsUsersName() {
 		$user = $this->createFrontEndUser();
 		tx_oelib_ConfigurationRegistry::getInstance()->get(
-			'seminars')->setAsString('salutation', 'informal');
+			'plugin.tx_seminars')->setAsString('salutation', 'informal');
 
 		$this->assertContains(
 			$user->getLastOrFullName(),
