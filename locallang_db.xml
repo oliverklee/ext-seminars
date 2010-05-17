@@ -432,7 +432,7 @@
 			<label index="tx_seminars_prices.including_tax">Inklusive/exklusive Steuern:</label>
 			<label index="tx_seminars_prices.including_tax.including">inklusive</label>
 			<label index="tx_seminars_prices.including_tax.excluding">exklusive</label>
-			<label index="tt_content.list_type_pi1">Seminar-Manager</label>
+			<label index="tt_content.list_type_pi1">Seminarmanager</label>
 			<label index="fe_groups.tx_seminars_publish_events">Im FE-Editor eingegebene Veranstaltungen</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.0">Veranstaltungen sofort veröffentlichen</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.1">nur neu erstellte Veranstaltungen verstecken</label>
