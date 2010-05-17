@@ -201,13 +201,13 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 			$this->template->setMarker(
 				'edit_button',
 				$this->getEditIcon(
-					$registration->getUid(), $registration->getPageUid
+					$registration->getUid(), $registration->getPageUid()
 				)
 			);
 			$this->template->setMarker(
 				'delete_button',
 				$this->getDeleteIcon(
-					$registration->getUid(), $registration->getPageUid
+					$registration->getUid(), $registration->getPageUid()
 				)
 			);
 
