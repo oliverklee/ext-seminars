@@ -27,6 +27,29 @@ if (!function_exists('tx_seminars_tableRelations')) {
 	}
 }
 
+
+t3lib_div::loadTCA('fe_users');
+t3lib_extMgm::addTCAcolumns(
+	'fe_users',
+	array(
+		'tx_seminars_registration' => array(
+			'exclude' => 1,
+			'label' => 'registration (not visible in the BE)',
+			'config' => array(
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_event_types',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+				'items' => array('' => ''),
+			),
+		),
+	),
+	1
+);
+
+
 t3lib_extMgm::addLLrefForTCAdescr(
 	'fe_groups',
 	'EXT:seminars/Resources/Private/Language/locallang_csh_fe_groups.xml'

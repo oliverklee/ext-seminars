@@ -317,5 +317,28 @@ class tx_seminars_Mapper_Registration_testcase extends tx_phpunit_testcase {
 			$this->fixture->find($uid)->getCheckboxes()->first()->getUid()
 		);
 	}
+
+
+	///////////////////////////////////////////////////////////////////////
+	// Tests concerning the relation to the additional registered persons
+	///////////////////////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function relationToAdditionalPersonsReturnsPersonsFromDatabase() {
+		$registrationUid = $this->testingFramework->createRecord(
+			'tx_seminars_attendances', array('additional_persons' => 1)
+		);
+		$personUid = $this->testingFramework->createFrontEndUser(
+			'', array('tx_seminars_registration' => $registrationUid)
+		);
+
+		$this->assertEquals(
+			(string) $personUid,
+			$this->fixture->find($registrationUid)
+				->getAdditionalPersons()->getUids()
+		);
+	}
 }
 ?>

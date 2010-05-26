@@ -255,6 +255,25 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	}
 
 	/**
+	 * Gets the additional persons (FE users) attached to this registration.
+	 *
+	 * @return tx_oelib_List additional persons, will be empty if there are none
+	 */
+	public function getAdditionalPersons() {
+		return $this->getAsList('additional_persons');
+	}
+
+	/**
+	 * Sets the additional persons attached to this registration.
+	 *
+	 * @param tx_oelib_List $persons
+	 *        the additional persons (FE users), may be empty
+	 */
+	public function setAdditionalPersons(tx_oelib_List $persons) {
+		$this->set('additional_persons', $persons);
+	}
+
+	/**
 	 * Returns whether this registration is paid.
 	 *
 	 * @return boolean TRUE if this registration has a payment date, FALSE

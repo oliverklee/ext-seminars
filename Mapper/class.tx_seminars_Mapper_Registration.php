@@ -55,6 +55,7 @@ class tx_seminars_Mapper_Registration extends tx_oelib_DataMapper {
 		'lodgings' => 'tx_seminars_Mapper_Lodging',
 		'foods' => 'tx_seminars_Mapper_Food',
 		'checkboxes' => 'tx_seminars_Mapper_Checkbox',
+		'additional_persons' => 'tx_seminars_Mapper_FrontEndUser',
 	);
 }
 

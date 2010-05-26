@@ -734,5 +734,49 @@ class tx_seminars_Model_FrontEndUser_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasDefaultCategories()
 		);
 	}
+
+
+	/////////////////////////////////////////////////////////
+	// Tests concerning getRegistration and setRegistration
+	/////////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationReturnsRegistration() {
+		$registration = new tx_seminars_Model_Registration();
+		$this->fixture->setData(
+			array('tx_seminars_registration' => $registration)
+		);
+
+		$this->assertSame(
+			$registration,
+			$this->fixture->getRegistration()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationSetsRegistration() {
+		$registration = new tx_seminars_Model_Registration();
+		$this->fixture->setRegistration($registration);
+
+		$this->assertSame(
+			$registration,
+			$this->fixture->getRegistration()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationWithNullIsAllowed() {
+		$this->fixture->setRegistration(null);
+
+		$this->assertNull(
+			$this->fixture->getRegistration()
+		);
+	}
 }
 ?>

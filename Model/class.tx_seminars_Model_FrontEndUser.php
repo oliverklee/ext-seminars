@@ -168,6 +168,30 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	public function hasDefaultCategories() {
 		return !$this->getDefaultCategoriesFromGroup()->isEmpty();
 	}
+
+	/**
+	 * Gets the registration record for which this user is related to as
+	 * "additional registered person".
+	 *
+	 * @return tx_seminars_Model_Registration the associated registration,
+	 *                                        might be null
+	 */
+	public function getRegistration() {
+		return $this->getAsModel('tx_seminars_registration');
+	}
+
+	/**
+	 * sets the registration record for which this user is related to as
+	 * "additional registered person".
+	 *
+	 * @param tx_seminars_Model_Registration $registration
+	 *        the associated registration, may be null
+	 */
+	public function setRegistration(
+		tx_seminars_Model_Registration $registration = null
+	) {
+		$this->set('tx_seminars_registration', $registration);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/class.tx_seminars_Model_FrontEndUser.php']) {

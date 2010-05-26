@@ -1494,5 +1494,38 @@ class tx_seminars_Model_Registration_testcase extends tx_phpunit_testcase {
 			$this->fixture->getKids()
 		);
 	}
+
+
+	///////////////////////////////////////////////////////
+	// Tests concerning the additional registered persons
+	///////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getAdditionalPersonsGetsAdditionalPersons() {
+		$additionalPersons = new tx_oelib_List();
+		$this->fixture->setData(
+			array('additional_persons' => $additionalPersons)
+		);
+
+		$this->assertSame(
+			$additionalPersons,
+			$this->fixture->getAdditionalPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setAdditionalPersonsSetsAdditionalPersons() {
+		$additionalPersons = new tx_oelib_List();
+		$this->fixture->setAdditionalPersons($additionalPersons);
+
+		$this->assertSame(
+			$additionalPersons,
+			$this->fixture->getAdditionalPersons()
+		);
+	}
 }
 ?>

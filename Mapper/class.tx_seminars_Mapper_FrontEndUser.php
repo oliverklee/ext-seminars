@@ -44,6 +44,7 @@ class tx_seminars_Mapper_FrontEndUser extends tx_oelib_Mapper_FrontEndUser {
 	 */
 	protected $relations = array(
 		'usergroup' => 'tx_seminars_Mapper_FrontEndUserGroup',
+		'tx_seminars_registration' => 'tx_seminars_Mapper_Registration',
 	);
 }
 

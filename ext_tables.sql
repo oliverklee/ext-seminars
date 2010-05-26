@@ -17,6 +17,14 @@ CREATE TABLE tx_partner_contact_info (
 
 
 #
+# Table structure for table 'fe_users'
+#
+CREATE TABLE fe_users (
+	tx_seminars_registration int(11) unsigned DEFAULT '0' NOT NULL,
+);
+
+
+#
 # Table structure for table 'fe_groups'
 #
 CREATE TABLE fe_groups (
@@ -26,6 +34,7 @@ CREATE TABLE fe_groups (
 	tx_seminars_reviewer int(11) unsigned DEFAULT '0' NOT NULL
 	tx_seminars_default_categories int(11) unsigned DEFAULT '0' NOT NULL,
 );
+
 
 #
 # Table structure for table 'be_groups'
@@ -399,6 +408,7 @@ CREATE TABLE tx_seminars_attendances (
 	tax int(11) unsigned DEFAULT '0' NOT NULL,
 	including_tax tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	attendees_names text,
+	additional_persons int(11) unsigned DEFAULT '0' NOT NULL,
 	datepaid int(11) unsigned DEFAULT '0' NOT NULL,
 	method_of_payment int(11) unsigned DEFAULT '0' NOT NULL,
 	account_number tinytext,

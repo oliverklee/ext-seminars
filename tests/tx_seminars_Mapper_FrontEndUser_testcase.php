@@ -57,10 +57,35 @@ class tx_seminars_Mapper_FrontEndUser_testcase extends tx_phpunit_testcase {
 	// Tests for the basic functionality
 	//////////////////////////////////////
 
-	public function test_Mapper_ForGhost_ReturnsSeminarsFrontEndUserInstance() {
+	/**
+	 * @test
+	 */
+	public function mapperForGhostReturnsSeminarsFrontEndUserInstance() {
 		$this->assertTrue(
 			$this->fixture->getNewGhost()
 				instanceof tx_seminars_Model_FrontEndUser
+		);
+	}
+
+
+	///////////////////////////////////
+	// Tests concerning the relations
+	///////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function relationToRegistrationIsReadFromRegistrationMapper() {
+		$registration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->getNewGhost();
+
+		$model = $this->fixture->getLoadedTestingModel(
+			array('tx_seminars_registration' => $registration->getUid())
+		);
+
+		$this->assertSame(
+			$registration,
+			$model->getRegistration()
 		);
 	}
 }
