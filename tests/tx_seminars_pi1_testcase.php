@@ -71,7 +71,24 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	private $numberOfOrganizers = 0;
 
+	/**
+	 * backed-up extension configuration of the TYPO3 configuration variables
+	 *
+	 * @var array
+	 */
+	private $extConfBackup = array();
+
+	/**
+	 * backed-up T3_VAR configuration
+	 *
+	 * @var array
+	 */
+	private $t3VarBackup = array();
+
 	public function setUp() {
+		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
+		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
+
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
@@ -123,6 +140,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->__destruct();
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework);
+
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
+		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
 	}
 
 
@@ -160,10 +180,12 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	/**
 	 * Creates a FE user, registers him/her to the seminar with the UID in
 	 * $this->seminarUid and logs him/her in.
+	 *
+	 * @return integer the UID of the created registration record, will be > 0
 	 */
 	private function createLogInAndRegisterFeUser() {
 		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$this->testingFramework->createRecord(
+		return $this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
 				'seminar' => $this->seminarUid,
@@ -7499,6 +7521,50 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$fixture->hideListRegistrationsColumnIfNecessary($whatToDisplay);
 
 		$fixture->__destruct();
+	}
+
+
+	///////////////////////////////////////////////////////
+	// Tests concerning the hook for the "my events" list
+	///////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function myEventsListCallsModifyMyEventsListRowHook() {
+		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
+
+		$registrationUid = $this->createLogInAndRegisterFeUser();
+		$registration = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Registration')->find($registrationUid);
+
+		$hookClass = uniqid('myEventsListRowHook');
+		$hook = $this->getMock($hookClass, array('modifyMyEventsListRow'));
+		$hook->expects($this->once())->method('modifyMyEventsListRow')
+			->with($registration);
+		// We don't test for the second parameter (the template instance here)
+		// because we cannot access it from the outside.
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView']
+			[$hookClass] = $hookClass;
+
+		$this->fixture->main('', array());
+	}
+
+	/**
+	 * @test
+	 */
+	public function seminarListNotCallsModifyMyEventsListRowHook() {
+		$hookClass = uniqid('myEventsListRowHook');
+		$hook = $this->getMock($hookClass, array('modifyMyEventsListRow'));
+		$hook->expects($this->never())->method('modifyMyEventsListRow');
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView']
+			[$hookClass] = $hookClass;
+
+		$this->fixture->main('', array());
 	}
 }
 ?>
