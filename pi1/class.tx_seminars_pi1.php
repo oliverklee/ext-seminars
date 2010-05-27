@@ -1355,7 +1355,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *
 	 * @return boolean TRUE if a user is logged in, FALSE otherwise
 	 */
-	protected function isLoggedIn() {
+	public function isLoggedIn() {
 		return tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
 	}
 
