@@ -181,6 +181,20 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	private $hookObjects = array();
 
 	/**
+	 * hook objects for the list view
+	 *
+	 * @var array
+	 */
+	private $listViewHooks = array();
+
+	/**
+	 * whether the hooks in $this->listViewHooks have been retrieved
+	 *
+	 * @var boolean
+	 */
+	private $listViewHooksHaveBeenRetrieved = FALSE;
+
+	/**
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
@@ -381,6 +395,27 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				$this->hookObjects[] = t3lib_div::getUserObj($classReference);
 			}
 		}
+	}
+
+	/**
+	 * Gets the hooks for the list view.
+	 *
+	 * @return array the hook objects, will be empty if no hooks have been set
+	 */
+	private function getListViewHooks() {
+		if (!$this->listViewHooksHaveBeenRetrieved) {
+			$hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']
+				['seminars']['listView'];
+			if (is_array($hookClasses)) {
+				foreach ($hookClasses as $hookClass) {
+					$this->listViewHooks[] = t3lib_div::getUserObj($hookClass);
+				}
+			}
+
+			$this->listViewHooksHaveBeenRetrieved = TRUE;
+		}
+
+		return $this->listViewHooks;
 	}
 
 	/**
@@ -1847,14 +1882,17 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 	/**
 	 * Returns a list row as a TR. Gets data from $this->seminar.
+	 *
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 * If $this->seminar is invalid, an empty string is returned.
 	 *
-	 * @param integer Row counter. Starts at 0 (zero). Used for alternating
-	 *                class values in the output rows.
-	 * @param string a string selecting the flavor of list view: either
-	 *               an empty string (for the default list view), the
-	 *               value from "what_to_display" or "other_dates"
+	 * @param integer $rowCounter
+	 *        Row counter. Starts at 0 (zero). Used for alternating class
+	 *        values in the output rows.
+	 * @param string $whatToDisplay
+	 *        a string selecting the flavor of list view: either an empty string
+	 *        (for the default list view), the value from "what_to_display",
+	 *        or "other_dates"
 	 *
 	 * @return string HTML output, a table row with a class attribute set
 	 *                (alternative based on odd/even rows)
@@ -2034,9 +2072,31 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->setMarker('registrations', $this->getCsvExportLink());
 
 			// Modifies the list item hook.
+			// @deprecated This hook will be removed and replace by another
+			// hook for seminars 1.0.0.
+			// @see https://bugs.oliverklee.com/show_bug.cgi?id=3873
 			foreach ($this->hookObjects as $hookObject) {
 				if (method_exists($hookObject, 'modifyListItem')) {
 					$hookObject->modifyListItem($this);
+				}
+			}
+
+			$listViewHooks = $this->getListViewHooks();
+			// @TODO This needs to modified when the list view hook gets
+			// modernized.
+			// @see https://bugs.oliverklee.com/show_bug.cgi?id=3873
+			if (!empty($listViewHooks) && ($whatToDisplay == 'my_events')) {
+				$registration = tx_oelib_MapperRegistry
+					::get('tx_seminars_Mapper_Registration')
+					->find($this->registration->getUid());
+				$template = $this->getTemplate();
+
+				foreach ($listViewHooks as $hook) {
+					if (method_exists($hook, 'modifyMyEventsListRow')) {
+						$hook->modifyMyEventsListRow(
+							$registration, $template
+						);
+					}
 				}
 			}
 
