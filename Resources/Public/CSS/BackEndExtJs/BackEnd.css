@@ -1,0 +1,45 @@
+.typo3-backend-seminars-events-tabpanel-icon {
+	background: url(../../../../icons/icon_tx_seminars_seminars_complete.gif) left center no-repeat !important;
+}
+.typo3-backend-seminars-registrations-tabpanel-icon {
+	background: url(../../../../icons/icon_tx_seminars_attendances.gif) left center no-repeat !important;
+}
+.typo3-backend-seminars-speakers-tabpanel-icon {
+	background: url(../../../../icons/icon_tx_seminars_speakers.gif) left center no-repeat !important;
+}
+.typo3-backend-seminars-organizers-tabpanel-icon {
+	background: url(../../../../icons/icon_tx_seminars_organizers.gif) left center no-repeat !important;
+}
+.confirm {
+	background: url(../../../../BackEnd/icon_confirmed.png) left center no-repeat !important;
+}
+.cancel {
+	background: url(../../../../BackEnd/icon_canceled.png) left center no-repeat !important;
+}
+.new {
+	background: url(../../../../../../../typo3/sysext/t3skin/icons/gfx/new_record.gif) left center no-repeat !important;
+}
+.edit {
+	background: url(../../../../../../../typo3/sysext/t3skin/icons/gfx/edit2.gif) left center no-repeat !important;
+}
+.delete {
+	background: url(../../../../../../../typo3/sysext/t3skin/icons/gfx/delete_record.gif) left center no-repeat !important;
+}
+.csv {
+	background: url(../../../../../../../typo3/sysext/t3skin/icons/gfx/csv.gif) left center no-repeat !important;
+}
+.hide {
+	background: url(../../../../../../../typo3/sysext/t3skin/icons/gfx/button_hide.gif) left center no-repeat !important;
+}
+.unhide {
+	background: url(../../../../../../../typo3/sysext/t3skin/icons/gfx/button_unhide.gif) left center no-repeat !important;
+}
+.typo3-backend-seminars-event-single-icon {
+	background: url(../../../../icons/icon_tx_seminars_seminars_complete.gif) center center no-repeat !important;
+}
+.typo3-backend-seminars-event-date-icon {
+	background: url(../../../../icons/icon_tx_seminars_seminars_date.gif) center center no-repeat !important;
+}
+.typo3-backend-seminars-event-topic-icon {
+	background: url(../../../../icons/icon_tx_seminars_seminars_topic.gif) center center no-repeat !important;
+}

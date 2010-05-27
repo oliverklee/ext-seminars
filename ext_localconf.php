@@ -61,4 +61,13 @@ t3lib_extMgm::addTypoScript($_EXTKEY, 'setup','
 $TYPO3_CONF_VARS['SC_OPTIONS']['GLOBAL']['cliKeys']['seminars'] = array(
 	'EXT:seminars/cli/tx_seminars_cli.php', '_CLI_seminars',
 );
+
+$TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getEvents'] = t3lib_extmgm::extPath($_EXTKEY) .
+	'BackEndExtJs/class.tx_seminars_BackEndExtJs_Ajax.php:tx_seminars_BackEndExtJs_Ajax->getEvents';
+$TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getRegistrations'] = t3lib_extmgm::extPath($_EXTKEY) .
+	'BackEndExtJs/class.tx_seminars_BackEndExtJs_Ajax.php:tx_seminars_BackEndExtJs_Ajax->getRegistrations';
+$TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getSpeakers'] = t3lib_extmgm::extPath($_EXTKEY) .
+	'BackEndExtJs/class.tx_seminars_BackEndExtJs_Ajax.php:tx_seminars_BackEndExtJs_Ajax->getSpeakers';
+$TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getOrganizers'] = t3lib_extmgm::extPath($_EXTKEY) .
+	'BackEndExtJs/class.tx_seminars_BackEndExtJs_Ajax.php:tx_seminars_BackEndExtJs_Ajax->getOrganizers';
 ?>
