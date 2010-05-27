@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#3874] Fix: Test failures in the registration manager testcase
 - [#3872] Feature: Add a hook for modifying the "my events" list row
 - [#3877] Fix: pi1::isLoggedIn must be public
 - [#3222] Feature: Model the "additional attendees" as a 1:n relation from registrations to FE users

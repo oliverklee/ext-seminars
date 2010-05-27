@@ -3143,7 +3143,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForInformalSalutationContainsInformalSalutation() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_ConfigurationRegistry::getInstance()->get('seminars')
+		tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars')
 			->setAsString('salutation', 'informal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
@@ -3178,7 +3178,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		}
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$this->fixture->setConfigurationValue('salutation', 'formal');
+		tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars')
+			->setAsString('salutation', 'formal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
 			'fe_users', $registration->getFrontEndUser()->getUid(),
@@ -3212,7 +3213,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		}
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$this->fixture->setConfigurationValue('salutation', 'formal');
+		tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars')
+			->setAsString('salutation', 'formal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
 			'fe_users', $registration->getFrontEndUser()->getUid(),
@@ -3246,7 +3248,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		}
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$this->fixture->setConfigurationValue('salutation', 'formal');
+		tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars')
+			->setAsString('salutation', 'formal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
 			'fe_users', $registration->getFrontEndUser()->getUid(),

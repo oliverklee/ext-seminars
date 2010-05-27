@@ -75,6 +75,7 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 		unset($this->testingFramework, $this->fixture);
 	}
 
+
 	//////////////////////
 	// Utility functions
 	//////////////////////
