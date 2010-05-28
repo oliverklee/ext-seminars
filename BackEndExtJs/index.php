@@ -55,6 +55,7 @@ class tx_seminars_module1 extends tx_seminars_BackEnd_Module {
 		'EXT:lang/locallang_mod_web_list.xml',
 		'EXT:seminars/BackEnd/locallang.xml',
 		'EXT:seminars/pi2/locallang.xml',
+		'EXT:lang/locallang_core.xml',
 	);
 
 	/**
@@ -178,6 +179,7 @@ class tx_seminars_module1 extends tx_seminars_BackEnd_Module {
 			'Backend.Seminars.URL',
 			array(
 				'alt_doc' => $GLOBALS['BACK_PATH'] . 'alt_doc.php',
+				'csv' => '../BackEnd/class.tx_seminars_BackEnd_CSV.php',
 			)
 		);
 	}

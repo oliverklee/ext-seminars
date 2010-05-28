@@ -50,7 +50,21 @@ TYPO3.Backend.Seminars.Events.Menu = {
 	}, {
 		id: 'typo3-backend-seminars-events-menu-csv',
 		iconCls: 'csv',
-		text: 'Teilnehmer als CSV',
+		text: TYPO3.lang['labels.csv'],
+		listeners: {
+			'click': {
+				fn: function() {
+					var uid = Ext.getCmp('typo3-backend-seminars-events-gridpanel').
+						getStore().getAt(TYPO3.Backend.Seminars.Events.rowIndex).
+						get('uid');
+					var url = TYPO3.settings.Backend.Seminars.URL.csv +
+						'?id=' + TYPO3.settings.PID +
+						'&tx_seminars_pi2[table]=tx_seminars_attendances' +
+						'&tx_seminars_pi2[eventUid]=' + uid;
+					window.location = url;
+				}
+			}
+		},
 	}, {
 		xtype: 'menuseparator',
 	}, {
@@ -177,7 +191,18 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 			},
 		}, {
 			iconCls: 'csv',
-			text: 'Event CSV',
+			text: TYPO3.lang['labels.csv'],
+			listeners: {
+				'click': {
+					fn: function() {
+						var url = TYPO3.settings.Backend.Seminars.URL.csv +
+							'?id=' + TYPO3.settings.PID +
+							'&tx_seminars_pi2[table]=tx_seminars_seminars' +
+							'&tx_seminars_pi2[pid]=' + TYPO3.settings.PID;
+						window.location = url;
+					}
+				}
+			},
 		}],
 	},
 	bbar: new Ext.PagingToolbar({
@@ -275,38 +300,72 @@ TYPO3.Backend.Seminars.Registrations.Menu = {
 	}],
 };
 
+TYPO3.Backend.Seminars.Registrations.GridPanel = {
+	id: 'typo3-backend-seminars-registrations-gridpanel',
+	xtype: 'grid',
+	region: 'center',
+	stripeRows: true,
+	loadMask: true,
+	store: new Ext.data.JsonStore({
+		id: 'typo3-backend-seminars-registrations-store',
+		url: TYPO3.settings.Backend.Seminars.Registrations.Store.autoLoadURL,
+		autoLoad: true,
+		root: 'rows',
+		idProperty: 'uid',
+		fields: [
+		    {name: 'uid'},
+		    {name: 'title'},
+		]
+	}),
+	columns: [
+		{header: TYPO3.lang.uid, dataIndex: 'uid'},
+		{header: TYPO3.lang.title, dataIndex: 'title'},
+	],
+	tbar: {
+		items: [{
+			iconCls: 'new',
+			text: TYPO3.lang.newRecordGeneral,
+			hidden: false,
+			listeners: {
+				'click': {
+					fn: function() {
+						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
+							'?returnUrl=' + window.location +
+							'&edit[tx_seminars_attendances][' +
+							TYPO3.settings.PID + ']=new';
+						window.location = url;
+					}
+				}
+			},
+		}, {
+			iconCls: 'csv',
+			text: TYPO3.lang['labels.csv'],
+			listeners: {
+				'click': {
+					fn: function() {
+						var url = TYPO3.settings.Backend.Seminars.URL.csv +
+							'?id=' + TYPO3.settings.PID +
+							'&tx_seminars_pi2[table]=tx_seminars_attendances' +
+							'&tx_seminars_pi2[pid]=' + TYPO3.settings.PID;
+						window.location = url;
+					}
+				}
+			},
+		}],
+	},
+	bbar: new Ext.PagingToolbar({
+		pageSize: 50,
+		store: Ext.StoreMgr.get('typo3-backend-seminars-registrations-store'),
+	}),
+};
+
 TYPO3.Backend.Seminars.Registrations.TabPanel = {
 	iconCls: 'typo3-backend-seminars-registrations-tabpanel-icon',
 	id: 'typo3-backend-seminars-registrations-tabpanel',
 	title: TYPO3.lang.subModuleTitle_registrations,
 	hidden: TYPO3.settings.Backend.Seminars.Registrations.TabPanel.hidden,
 	layout: 'border',
-	items: [{
-		id: 'typo3-backend-seminars-registrations-gridpanel',
-		xtype: 'grid',
-		region: 'center',
-		store: new Ext.data.JsonStore({
-			id: 'typo3-backend-seminars-registrations-store',
-			url: TYPO3.settings.Backend.Seminars.Registrations.Store.autoLoadURL,
-			autoLoad: true,
-			root: 'rows',
-			idProperty: 'uid',
-			fields: [
-			    {name: 'uid'},
-			    {name: 'title'},
-			]
-		}),
-		columns: [
-		      {header: TYPO3.lang.uid, dataIndex: 'uid'},
-	          {header: TYPO3.lang.title, dataIndex: 'title'},
-		],
-		stripeRows: true,
-		loadMask: true,
-		bbar: new Ext.PagingToolbar({
-			pageSize: 50,
-			store: Ext.StoreMgr.get('typo3-backend-seminars-registrations-store'),
-		}),
-	}],
+	items: [TYPO3.Backend.Seminars.Registrations.GridPanel],
 };
 
 TYPO3.Backend.Seminars.Speakers.TabPanel = {
