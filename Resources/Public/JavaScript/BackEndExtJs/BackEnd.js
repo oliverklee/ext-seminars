@@ -1,5 +1,6 @@
 Ext.ns(
 	'TYPO3.Backend.Seminars',
+	'TYPO3.Backend.Seminars.Default',
 	'TYPO3.Backend.Seminars.Events',
 	'TYPO3.Backend.Seminars.Registrations',
 	'TYPO3.Backend.Seminars.Speakers',
@@ -12,6 +13,7 @@ TYPO3.Backend.Seminars.Events.Menu = {
 		id: 'typo3-backend-seminars-events-menu-hide',
 		iconCls: 'hide',
 		text: TYPO3.lang.hide,
+		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.HideButton.hidden,
 		listener: {
 			'click': {
 				fn: function() {
@@ -23,6 +25,7 @@ TYPO3.Backend.Seminars.Events.Menu = {
 		id: 'typo3-backend-seminars-events-menu-unhide',
 		iconCls: 'unhide',
 		text: TYPO3.lang.unHide,
+		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.UnhideButton.hidden,
 		listener: {
 			'click': {
 				fn: function() {
@@ -34,10 +37,12 @@ TYPO3.Backend.Seminars.Events.Menu = {
 		id: 'typo3-backend-seminars-events-menu-confirm',
 		iconCls: 'confirm',
 		text: TYPO3.lang.eventlist_button_confirm,
+		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.ConfirmButton.hidden,
 	}, {
 		id: 'typo3-backend-seminars-events-menu-cancel',
 		iconCls: 'cancel',
 		text: TYPO3.lang.eventlist_button_cancel,
+		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.CancelButton.hidden,
 		listeners: {
 			'click': {
 				fn: function() {
@@ -67,10 +72,12 @@ TYPO3.Backend.Seminars.Events.Menu = {
 		},
 	}, {
 		xtype: 'menuseparator',
+		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.EditButton.hidden,
 	}, {
 		id: 'typo3-backend-seminars-events-menu-edit',
 		iconCls: 'edit',
 		text: TYPO3.lang.edit,
+		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.EditButton.hidden,
 		listeners: {
 			'click': {
 				fn: function() {
@@ -86,10 +93,12 @@ TYPO3.Backend.Seminars.Events.Menu = {
 		},
 	}, {
 		xtype: 'menuseparator',
+		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.DeleteButton.hidden,
 	}, {
 		id: 'typo3-backend-seminars-events-menu-delete',
 		iconCls: 'delete',
 		text: TYPO3.lang["delete"],
+		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.DeleteButton.hidden,
 		listeners: {
 			'click': {
 				fn: function() {
@@ -156,7 +165,7 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 	loadMask: true,
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-events-store',
-		url: TYPO3.settings.Backend.Seminars.Events.Store.autoLoadURL,
+		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getEvents',
 		autoLoad: true,
 		root: 'rows',
 		idProperty: 'uid',
@@ -249,6 +258,7 @@ TYPO3.Backend.Seminars.Events.TabPanel = {
 };
 
 TYPO3.Backend.Seminars.Registrations.Menu = {
+	id: 'typo3-backend-seminars-registrations-menu',
 	items: [{
 		iconCls: 'edit',
 		text: TYPO3.lang.edit,
@@ -308,7 +318,7 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 	loadMask: true,
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-registrations-store',
-		url: TYPO3.settings.Backend.Seminars.Registrations.Store.autoLoadURL,
+		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getRegistrations',
 		autoLoad: true,
 		root: 'rows',
 		idProperty: 'uid',
@@ -368,38 +378,32 @@ TYPO3.Backend.Seminars.Registrations.TabPanel = {
 	items: [TYPO3.Backend.Seminars.Registrations.GridPanel],
 };
 
-TYPO3.Backend.Seminars.Speakers.TabPanel = {
-	iconCls: 'typo3-backend-seminars-speakers-tabpanel-icon',
-	id: 'typo3-backend-seminars-speakers-tabpanel',
-	title: TYPO3.lang.subModuleTitle_speakers,
-	hidden: TYPO3.settings.Backend.Seminars.Speakers.TabPanel.hidden,
-	layout: 'border',
-	items: [{
-		id: 'typo3-backend-seminars-speakers-gridpanel',
-		xtype: 'grid',
-		region: 'center',
-		store: new Ext.data.JsonStore({
-			id: 'typo3-backend-seminars-speakers-store',
-			url: TYPO3.settings.Backend.Seminars.Speakers.Store.autoLoadURL,
-			autoLoad: true,
-			root: 'rows',
-			idProperty: 'uid',
-			fields: [
-			    {name: 'uid'},
-			    {name: 'title'},
-			]
-		}),
-		columns: [
-		      {header: TYPO3.lang.uid, dataIndex: 'uid'},
-	          {header: TYPO3.lang.title, dataIndex: 'title'},
-		],
-		stripeRows: true,
-		loadMask: true,
-		tbar: {
-			items:[{
-				iconCls: 'new',
-				text: TYPO3.lang.newRecordGeneral,
-				listeners: {
+TYPO3.Backend.Seminars.Speakers.GridPanel = {
+	id: 'typo3-backend-seminars-speakers-gridpanel',
+	xtype: 'grid',
+	region: 'center',
+	stripeRows: true,
+	loadMask: true,
+	store: new Ext.data.JsonStore({
+		id: 'typo3-backend-seminars-speakers-store',
+		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getSpeakers',
+		autoLoad: true,
+		root: 'rows',
+		idProperty: 'uid',
+		fields: [
+			{name: 'uid'},
+			{name: 'title'},
+		]
+	}),
+	columns: [
+		{header: TYPO3.lang.uid, dataIndex: 'uid'},
+		{header: TYPO3.lang.title, dataIndex: 'title'},
+	],
+	tbar: {
+		items:[{
+			iconCls: 'new',
+			text: TYPO3.lang.newRecordGeneral,
+			listeners: {
 				'click': {
 					fn: function() {
 						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
@@ -410,47 +414,49 @@ TYPO3.Backend.Seminars.Speakers.TabPanel = {
 					}
 				}
 			},
-			}],
-		},
-		bbar: new Ext.PagingToolbar({
-			pageSize: 50,
-			store: Ext.StoreMgr.get('typo3-backend-seminars-speakers-store'),
-		}),
-	}],
+		}],
+	},
+	bbar: new Ext.PagingToolbar({
+		pageSize: 50,
+		store: Ext.StoreMgr.get('typo3-backend-seminars-speakers-store'),
+	}),
 };
 
-TYPO3.Backend.Seminars.Organizers.TabPanel = {
-	iconCls: 'typo3-backend-seminars-organizers-tabpanel-icon',
-	id: 'typo3-backend-seminars-organizers-tabpanel',
-	title: TYPO3.lang.subModuleTitle_organizers,
-	hidden: TYPO3.settings.Backend.Seminars.Organizers.TabPanel.hidden,
+TYPO3.Backend.Seminars.Speakers.TabPanel = {
+	iconCls: 'typo3-backend-seminars-speakers-tabpanel-icon',
+	id: 'typo3-backend-seminars-speakers-tabpanel',
+	title: TYPO3.lang.subModuleTitle_speakers,
+	hidden: TYPO3.settings.Backend.Seminars.Speakers.TabPanel.hidden,
 	layout: 'border',
-	items: [{
-		id: 'typo3-backend-seminars-organizers-gridpanel',
-		xtype: 'grid',
-		region: 'center',
-		store: new Ext.data.JsonStore({
-			id: 'typo3-backend-seminars-organizers-store',
-			url: TYPO3.settings.Backend.Seminars.Organizers.Store.autoLoadURL,
-			autoLoad: true,
-			root: 'rows',
-			idProperty: 'uid',
-			fields: [
-			    {name: 'uid'},
-			    {name: 'title'},
-			]
-		}),
-		columns: [
-		      {header: TYPO3.lang.uid, dataIndex: 'uid'},
-	          {header: TYPO3.lang.title, dataIndex: 'title'},
-		],
-		stripeRows: true,
-		loadMask: true,
-		tbar: {
-			items:[{
-				iconCls: 'new',
-				text: TYPO3.lang.newRecordGeneral,
-				listeners: {
+	items: [TYPO3.Backend.Seminars.Speakers.GridPanel],
+};
+
+TYPO3.Backend.Seminars.Organizers.GridPanel = {
+	id: 'typo3-backend-seminars-organizers-gridpanel',
+	xtype: 'grid',
+	region: 'center',
+	stripeRows: true,
+	loadMask: true,
+	store: new Ext.data.JsonStore({
+		id: 'typo3-backend-seminars-organizers-store',
+		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getOrganizers',
+		autoLoad: true,
+		root: 'rows',
+		idProperty: 'uid',
+		fields: [
+			{name: 'uid'},
+			{name: 'title'},
+		]
+	}),
+	columns: [
+		{header: TYPO3.lang.uid, dataIndex: 'uid'},
+		{header: TYPO3.lang.title, dataIndex: 'title'},
+	],
+	tbar: {
+		items:[{
+			iconCls: 'new',
+			text: TYPO3.lang.newRecordGeneral,
+			listeners: {
 				'click': {
 					fn: function() {
 						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
@@ -461,30 +467,77 @@ TYPO3.Backend.Seminars.Organizers.TabPanel = {
 					}
 				}
 			},
-			}],
-		},
-		bbar: new Ext.PagingToolbar({
-			pageSize: 50,
-			store: Ext.StoreMgr.get('typo3-backend-seminars-organizers-store'),
-		}),
-	}],
+		}],
+	},
+	bbar: new Ext.PagingToolbar({
+		pageSize: 50,
+		store: Ext.StoreMgr.get('typo3-backend-seminars-organizers-store'),
+	}),
+};
+
+TYPO3.Backend.Seminars.Organizers.TabPanel = {
+	iconCls: 'typo3-backend-seminars-organizers-tabpanel-icon',
+	id: 'typo3-backend-seminars-organizers-tabpanel',
+	title: TYPO3.lang.subModuleTitle_organizers,
+	layout: 'border',
+	items: [TYPO3.Backend.Seminars.Organizers.GridPanel],
+};
+
+/**
+ * The default tab panel of the ExtJS back-end module. This is shown if no other
+ * tab panel is active.
+ */
+TYPO3.Backend.Seminars.Default.TabPanel = {
+	iconCls: 'typo3-backend-seminars-default-tabpanel-icon',
+	id: 'typo3-backend-seminars-default-tabpanel',
+	title: 'Default',
 };
 
 TYPO3.Backend.Seminars.TabPanel = {
+	id: 'typo3-backend-seminars-tabpanel',
 	region: 'center',
 	xtype: 'tabpanel',
 	activeTab: 0,
-	items: [
-	    TYPO3.Backend.Seminars.Events.TabPanel,
-	    TYPO3.Backend.Seminars.Registrations.TabPanel,
-	    TYPO3.Backend.Seminars.Speakers.TabPanel,
-	    TYPO3.Backend.Seminars.Organizers.TabPanel
-	]
+	items: [TYPO3.Backend.Seminars.Default.TabPanel]
 };
 
 Ext.onReady(function(){
+	new Ext.TabPanel(TYPO3.Backend.Seminars.TabPanel);
+
+	if (!TYPO3.settings.Backend.Seminars.Events.TabPanel.hidden) {
+		Ext.getCmp('typo3-backend-seminars-tabpanel').add(
+			TYPO3.Backend.Seminars.Events.TabPanel
+		);
+	}
+
+	if (!TYPO3.settings.Backend.Seminars.Registrations.TabPanel.hidden) {
+		Ext.getCmp('typo3-backend-seminars-tabpanel').add(
+			TYPO3.Backend.Seminars.Registrations.TabPanel
+		);
+	}
+
+	if (!TYPO3.settings.Backend.Seminars.Speakers.TabPanel.hidden) {
+		Ext.getCmp('typo3-backend-seminars-tabpanel').add(
+			TYPO3.Backend.Seminars.Speakers.TabPanel
+		);
+	}
+
+	if (!TYPO3.settings.Backend.Seminars.Organizers.TabPanel.hidden) {
+		Ext.getCmp('typo3-backend-seminars-tabpanel').add(
+			TYPO3.Backend.Seminars.Organizers.TabPanel
+		);
+	}
+
+	// Removes the default tab panel if there's at least one other tab panel
+	// active.
+	if (Ext.getCmp('typo3-backend-seminars-tabpanel').items.getCount() > 1) {
+		Ext.getCmp('typo3-backend-seminars-tabpanel').remove(
+			Ext.getCmp('typo3-backend-seminars-default-tabpanel')
+		);
+	}
+
 	TYPO3.Backend.Seminars.viewport = new Ext.Viewport({
 		layout: 'border',
-		items: TYPO3.Backend.Seminars.TabPanel,
+		items: Ext.getCmp('typo3-backend-seminars-tabpanel'),
 	});
 });
