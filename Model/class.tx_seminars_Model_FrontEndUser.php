@@ -152,7 +152,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 
 		foreach ($this->getUserGroups() as $group) {
 			if ($group->hasDefaultCategories()) {
-				$categories->appendUnique($group->getDefaultCategories());
+				$categories->append($group->getDefaultCategories());
 			}
 		}
 
