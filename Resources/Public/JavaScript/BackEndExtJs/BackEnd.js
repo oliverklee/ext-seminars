@@ -78,7 +78,7 @@ TYPO3.Backend.Seminars.Events.Menu = {
 						getStore().getAt(TYPO3.Backend.Seminars.Events.rowIndex).
 						get('uid');
 					var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
-						'?returnUrl=' + window.location +
+						'?returnUrl=' + encodeURIComponent(window.location) +
 						'&edit[tx_seminars_seminars][' + uid + ']=edit';
 					window.location = url;
 				}
@@ -182,7 +182,7 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 				'click': {
 					fn: function() {
 						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
-							'?returnUrl=' + window.location +
+							'?returnUrl=' + encodeURIComponent(window.location) +
 							'&edit[tx_seminars_seminars][' +
 							TYPO3.settings.PID + ']=new';
 						window.location = url;
@@ -259,7 +259,7 @@ TYPO3.Backend.Seminars.Registrations.Menu = {
 						getStore().getAt(TYPO3.Backend.Seminars.Registrations.rowIndex).
 						get('uid');
 					var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
-						'?returnUrl=' + window.location +
+						'?returnUrl=' + encodeURIComponent(window.location) +
 						'&edit[tx_seminars_attendances][' + uid + ']=edit';
 					window.location = url;
 				}
@@ -330,7 +330,7 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 				'click': {
 					fn: function() {
 						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
-							'?returnUrl=' + window.location +
+							'?returnUrl=' + encodeURIComponent(window.location) +
 							'&edit[tx_seminars_attendances][' +
 							TYPO3.settings.PID + ']=new';
 						window.location = url;
@@ -403,7 +403,7 @@ TYPO3.Backend.Seminars.Speakers.TabPanel = {
 				'click': {
 					fn: function() {
 						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
-							'?returnUrl=' + window.location +
+							'?returnUrl=' + encodeURIComponent(window.location) +
 							'&edit[tx_seminars_speakers][' +
 							TYPO3.settings.PID + ']=new';
 						window.location = url;
@@ -454,7 +454,7 @@ TYPO3.Backend.Seminars.Organizers.TabPanel = {
 				'click': {
 					fn: function() {
 						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
-							'?returnUrl=' + window.location +
+							'?returnUrl=' + encodeURIComponent(window.location) +
 							'&edit[tx_seminars_organizers][' +
 							TYPO3.settings.PID + ']=new';
 						window.location = url;
