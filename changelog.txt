@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#3851] Fix: CSV export for events from the BE ignores event record in subfolders
 - [#3882] Feature: Respect the back-end user rights in the ExtJS back-end module
 - [#3870] Change: tx_oelib_List should use an SplObjectStorage
 - [#3895] Change: Make the BE module testable
