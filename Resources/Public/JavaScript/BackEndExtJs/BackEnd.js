@@ -102,6 +102,7 @@ TYPO3.Backend.Seminars.Events.Menu = {
 		listeners: {
 			'click': {
 				fn: function() {
+					// @todo We need a confirmation message here.
 					Ext.Msg.confirm(
 						'Title',
 						'Message',
@@ -149,7 +150,7 @@ TYPO3.Backend.Seminars.Events.StatusRenderer = function(value, metaData, record,
 		default:
 			// fall-through is intended
 		case 0:
-			// TODO: invent a locallang label for the status "planned"
+			// @todo invent a locallang label for the status "planned"
 			value = 'planned';
 			break;
 	}
@@ -283,6 +284,7 @@ TYPO3.Backend.Seminars.Registrations.Menu = {
 		listeners: {
 			'click': {
 				fn: function() {
+					// @todo We need a confirmation message here.
 					Ext.Msg.confirm(
 						'Title',
 						'Message',
@@ -367,6 +369,19 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 		pageSize: 50,
 		store: Ext.StoreMgr.get('typo3-backend-seminars-registrations-store'),
 	}),
+	listeners: {
+		'rowcontextmenu': {
+			fn: function(grid, rowIndex, event) {
+				TYPO3.Backend.Seminars.Registrations.rowIndex = rowIndex;
+				var menu = Ext.getCmp('typo3-backend-seminars-registrations-menu');
+				if (!menu) {
+				    menu = new Ext.menu.Menu(TYPO3.Backend.Seminars.Registrations.Menu);
+				}
+			    menu.showAt(event.getXY());
+			    event.stopEvent();
+			}
+		}
+	}
 };
 
 TYPO3.Backend.Seminars.Registrations.TabPanel = {
