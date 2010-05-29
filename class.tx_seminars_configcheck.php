@@ -1057,7 +1057,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'notes',
 				'total_price',
 				'feuser_data',
-				'billing_address',
 				'registration_data',
 				'terms',
 				'terms_2'

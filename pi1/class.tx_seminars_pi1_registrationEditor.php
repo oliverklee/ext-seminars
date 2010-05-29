@@ -508,7 +508,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		// Some fields depend on the availability of their data.
 		switch ($key) {
 			case 'method_of_payment':
-				$result &= $this->showMethodsOfPayment();
+				$result = $result && $this->showMethodsOfPayment();
 				break;
 			case 'account_number':
 				// The fallthrough is intended.
@@ -517,19 +517,19 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 			case 'bank_name':
 				// The fallthrough is intended.
 			case 'account_owner':
-				$result &= $this->getSeminar()->hasAnyPrice();
+				$result = $result && $this->getSeminar()->hasAnyPrice();
 				break;
 			case 'lodgings':
-				$result &= $this->hasLodgings();
+				$result = $result && $this->hasLodgings();
 				break;
 			case 'foods':
-				$result &= $this->hasFoods();
+				$result = $result && $this->hasFoods();
 				break;
 			case 'checkboxes':
-				$result &= $this->hasCheckboxes();
+				$result = $result && $this->hasCheckboxes();
 				break;
 			case 'terms_2':
-				$result &= $this->isTerms2Enabled();
+				$result = $result && $this->isTerms2Enabled();
 				break;
 			default:
 				break;

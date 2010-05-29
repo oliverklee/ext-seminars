@@ -514,20 +514,185 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	// Tests concerning isFormFieldEnabled
 	////////////////////////////////////////
 
-	public function test_isFormFieldEnabled_ForEnabledRegisteredThemselvesField_ReturnsTrue() {
+	/**
+	 * Data provider that returns the keys of all available form fields.
+	 *
+	 * @return array two-dimensional array with the inner array being:
+	 *               [key] string: the form field key
+	 *               [self-contained] boolean: whether the field is visible
+	 *                                if no other fields are visible
+	 *
+	 * @see isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField
+	 * @see isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields
+	 */
+	public function formFieldsDataProvider() {
+		return array(
+			'step_counter' => array(
+				'key' => 'step_counter', 'self-contained' => TRUE
+			),
+			'price' => array(
+				'key' => 'price', 'self-contained' => TRUE
+			),
+			'method_of_payment' => array(
+				'key' => 'method_of_payment', 'self-contained' => FALSE
+			),
+			'account_number' => array(
+				'key' => 'account_number', 'self-contained' => FALSE
+			),
+			'bank_code' => array(
+				'key' => 'bank_code', 'self-contained' => FALSE
+			),
+			'bank_name' => array(
+				'key' => 'bank_name', 'self-contained' => FALSE
+			),
+			'account_owner' => array(
+				'key' => 'account_owner', 'self-contained' => FALSE
+			),
+			'billing_address' => array(
+				'key' => 'billing_address', 'self-contained' => FALSE
+			),
+			'company' => array(
+				'key' => 'company', 'self-contained' => TRUE
+			),
+			'gender' => array(
+				'key' => 'gender', 'self-contained' => TRUE
+			),
+			'name' => array(
+				'key' => 'name', 'self-contained' => TRUE
+			),
+			'address' => array(
+				'key' => 'address', 'self-contained' => TRUE
+			),
+			'zip' => array(
+				'key' => 'zip', 'self-contained' => TRUE
+			),
+			'city' => array(
+				'key' => 'city', 'self-contained' => TRUE
+			),
+			'country' => array(
+				'key' => 'country', 'self-contained' => TRUE
+			),
+			'telephone' => array(
+				'key' => 'telephone', 'self-contained' => TRUE
+			),
+			'email' => array(
+				'key' => 'email', 'self-contained' => TRUE
+			),
+			'interests' => array(
+				'key' => 'interests', 'self-contained' => TRUE
+			),
+			'expectations' => array(
+				'key' => 'expectations', 'self-contained' => TRUE
+			),
+			'background_knowledge' => array(
+				'key' => 'background_knowledge', 'self-contained' => TRUE
+			),
+			'accommodation' => array(
+				'key' => 'accommodation', 'self-contained' => TRUE
+			),
+			'food' => array(
+				'key' => 'food', 'self-contained' => TRUE
+			),
+			'known_from' => array(
+				'key' => 'known_from', 'self-contained' => TRUE
+			),
+			'seats' => array(
+				'key' => 'seats', 'self-contained' => TRUE
+			),
+			'registered_themselves' => array(
+				'key' => 'registered_themselves', 'self-contained' => TRUE
+			),
+			'attendees_names' => array(
+				'key' => 'attendees_names', 'self-contained' => TRUE
+			),
+			'kids' => array(
+				'key' => 'kids', 'self-contained' => TRUE
+			),
+			'lodgings' => array(
+				'key' => 'lodgings', 'self-contained' => FALSE
+			),
+			'foods' => array(
+				'key' => 'foods', 'self-contained' => FALSE
+			),
+			'checkboxes' => array(
+				'key' => 'checkboxes', 'self-contained' => FALSE
+			),
+			'notes' => array(
+				'key' => 'notes', 'self-contained' => TRUE
+			),
+			'total_price' => array(
+				'key' => 'total_price', 'self-contained' => TRUE
+			),
+			'feuser_data' => array(
+				'key' => 'feuser_data', 'self-contained' => TRUE
+			),
+			'registration_data' => array(
+				'key' => 'registration_data', 'self-contained' => TRUE
+			),
+			'terms' => array(
+				'key' => 'terms', 'self-contained' => TRUE
+			),
+			'terms_2' => array(
+				'key' => 'terms_2', 'self-contained' => FALSE
+			),
+		);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @param string $key the key of the field to check for, must not be empty
+	 *
+	 * @dataProvider formFieldsDataProvider
+	 */
+	public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField(
+		$key
+	) {
 		$fixture = new tx_seminars_pi1_registrationEditor(
-			array('showRegistrationFields' => 'registered_themselves'),
+			array('showRegistrationFields' => ''),
 			$GLOBALS['TSFE']->cObj
 		);
+		$fixture->setSeminar($this->getMock('tx_seminars_seminar'));
 
-		$this->assertTrue(
-			$fixture->isFormFieldEnabled('registered_themselves')
+		$this->assertFalse(
+			$fixture->isFormFieldEnabled($key)
 		);
 
 		$fixture->__destruct();
 	}
 
-	public function test_isFormFieldEnabled_ForEnabledRegisteredThemselvesFieldOnly_ReturnsFalseForMoreSeats() {
+	/**
+	 * @test
+	 *
+	 * @param string $key the key of the field to check for, must not be empty
+	 * @param boolean $isSelfContained
+	 *        whether the field will be visible if no other fields are enabled
+	 *        and the event has no special features enabled
+	 *
+	 *
+	 * @dataProvider formFieldsDataProvider
+	 */
+	public function isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields(
+		$key, $isSelfContained
+	) {
+		$fixture = new tx_seminars_pi1_registrationEditor(
+			array('showRegistrationFields' => $key),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setSeminar($this->getMock('tx_seminars_seminar'));
+
+		$this->assertEquals(
+			$isSelfContained,
+			$fixture->isFormFieldEnabled($key)
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function isFormFieldEnabled_ForEnabledRegisteredThemselvesFieldOnlyReturnsFalseForMoreSeats() {
 		$fixture = new tx_seminars_pi1_registrationEditor(
 			array('showRegistrationFields' => 'registered_themselves'),
 			$GLOBALS['TSFE']->cObj
@@ -540,46 +705,10 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_isFormFieldEnabled_NoEnabledRegistrationFields_ReturnsFalseForRegisteredThemselves() {
-		$fixture = new tx_seminars_pi1_registrationEditor(
-			array('showRegistrationFields' => ''),
-			$GLOBALS['TSFE']->cObj
-		);
-
-		$this->assertFalse(
-			$fixture->isFormFieldEnabled('registered_themselves')
-		);
-
-		$fixture->__destruct();
-	}
-
-	public function test_isFormFieldEnabled_ForEnabledCompanyField_ReturnsTrue() {
-		$fixture = new tx_seminars_pi1_registrationEditor(
-			array('showRegistrationFields' => 'company'),
-			$GLOBALS['TSFE']->cObj
-		);
-
-		$this->assertTrue(
-			$fixture->isFormFieldEnabled('company')
-		);
-
-		$fixture->__destruct();
-	}
-
-	public function test_isFormFieldEnabled_NoEnabledRegistrationFields_ReturnsFalseForCompany() {
-		$fixture = new tx_seminars_pi1_registrationEditor(
-			array('showRegistrationFields' => ''),
-			$GLOBALS['TSFE']->cObj
-		);
-
-		$this->assertFalse(
-			$fixture->isFormFieldEnabled('company')
-		);
-
-		$fixture->__destruct();
-	}
-
-	public function test_isFormFieldEnabled_ForEnabledCompanyField_ReturnsTrueForBillingAddress() {
+	/**
+	 * @test
+	 */
+	public function isFormFieldEnabled_ForEnabledCompanyFieldReturnsTrueForBillingAddress() {
 		$fixture = new tx_seminars_pi1_registrationEditor(
 			array('showRegistrationFields' => 'company, billing_address'),
 			$GLOBALS['TSFE']->cObj
