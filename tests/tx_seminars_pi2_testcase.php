@@ -54,7 +54,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 		$this->pid = $this->testingFramework->createSystemFolder();
 		$this->eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->pid,
 				'sorting' => 1,
@@ -122,8 +122,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertEquals(
-			$this->localizeAndRemoveColon(SEMINARS_TABLE_SEMINARS . '.uid') . ';' .
-				$this->localizeAndRemoveColon(SEMINARS_TABLE_SEMINARS . '.title') .
+			$this->localizeAndRemoveColon('tx_seminars_seminars' . '.uid') . ';' .
+				$this->localizeAndRemoveColon('tx_seminars_seminars' . '.title') .
 				CRLF,
 			$this->fixture->createListOfEvents($pid)
 		);
@@ -140,12 +140,35 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function testCreateListOfEventsCanContainEventFromSubFolder() {
+		$subFolderPid = $this->testingFramework->createSystemFolder($this->pid);
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $subFolderPid,
+				'title' => 'another event',
+			)
+		);
+
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'title'
+		);
+
+		$this->assertContains(
+			'another event',
+			$this->fixture->createListOfEvents($this->pid)
+		);
+	}
+
 	public function testMainCanExportOneEventUid() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'uid'
 		);
 
-		$this->fixture->piVars['table'] = SEMINARS_TABLE_SEMINARS;
+		$this->fixture->piVars['table'] = 'tx_seminars_seminars';
 		$this->fixture->piVars['pid'] = $this->pid;
 
 		$this->assertContains(
@@ -159,7 +182,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'uid'
 		);
 		$secondEventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->pid,
 				'sorting' => 2,
@@ -183,7 +206,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'uid'
 		);
 		$secondEventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->pid,
 				'sorting' => 2,
@@ -208,7 +231,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'uid'
 		);
 		$secondEventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->pid,
 				'sorting' => 2,
@@ -217,7 +240,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertEquals(
-			$this->localizeAndRemoveColon(SEMINARS_TABLE_SEMINARS . '.uid')
+			$this->localizeAndRemoveColon('tx_seminars_seminars' . '.uid')
 				. CRLF . $this->eventUid . CRLF . $secondEventUid . CRLF,
 			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
@@ -228,7 +251,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromEventsForCsv', 'uid'
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->pid,
 				'sorting' => 2,
@@ -244,7 +267,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 	public function testCreateAndOutputListOfEventsDoesNotWrapRegularValuesWithDoubleQuotes() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->eventUid,
+			'tx_seminars_seminars', $this->eventUid,
 			array('title' => 'bar')
 		);
 
@@ -260,7 +283,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 	public function testCreateAndOutputListOfEventsEscapesDoubleQuotes() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->eventUid,
+			'tx_seminars_seminars', $this->eventUid,
 			array('description' => 'foo " bar')
 		);
 
@@ -277,7 +300,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 	public function testCreateAndOutputListOfEventsDoesWrapValuesWithLineFeedsInDoubleQuotes() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->eventUid,
+			'tx_seminars_seminars', $this->eventUid,
 			array('title' => 'foo' . LF . 'bar')
 		);
 
@@ -293,7 +316,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 	public function testCreateAndOutputListOfEventsDoesWrapValuesWithDoubleQuotesInDoubleQuotes() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->eventUid,
+			'tx_seminars_seminars', $this->eventUid,
 			array('title' => 'foo " bar')
 		);
 
@@ -309,7 +332,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 	public function testCreateAndOutputListOfEventsDoesWrapValuesWithSemicolonsInDoubleQuotes() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->eventUid,
+			'tx_seminars_seminars', $this->eventUid,
 			array('title' => 'foo ; bar')
 		);
 
@@ -325,7 +348,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 	public function testCreateAndOutputListOfEventsSeparatesValuesWithSemicolons() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->eventUid,
+			'tx_seminars_seminars', $this->eventUid,
 			array('description' => 'foo', 'title' => 'bar')
 		);
 
@@ -345,7 +368,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 		$eventList = $this->fixture->createAndOutputListOfEvents($this->pid);
 		$description = $this->localizeAndRemoveColon(
-			SEMINARS_TABLE_SEMINARS . '.description'
+			'tx_seminars_seminars' . '.description'
 		);
 
 		$this->assertContains(
@@ -364,8 +387,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			$this->localizeAndRemoveColon(SEMINARS_TABLE_SEMINARS . '.description') .
-				';' . $this->localizeAndRemoveColon(SEMINARS_TABLE_SEMINARS . '.title'),
+			$this->localizeAndRemoveColon('tx_seminars_seminars' . '.description') .
+				';' . $this->localizeAndRemoveColon('tx_seminars_seminars' . '.title'),
 			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
@@ -1143,7 +1166,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 	 */
 	public function createAndOututListOfRegistrationsForNonExistingEventUidAddsNotFoundStatusToHeader() {
 		$this->fixture->createAndOutputListOfRegistrations(
-			$this->testingFramework->getAutoIncrement(SEMINARS_TABLE_SEMINARS)
+			$this->testingFramework->getAutoIncrement('tx_seminars_seminars')
 		);
 
 		$this->assertContains(

@@ -416,7 +416,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
 		$builder->setBackEndMode();
-		$builder->setSourcePages($pid);
+		$builder->setSourcePages($pid, 255);
 
 		foreach ($builder->build() as $seminar) {
 			$seminarData = $this->retrieveData(
