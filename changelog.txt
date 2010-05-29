@@ -1,4 +1,4 @@
-0.9.2 (currently working on)
+0.9.2 (released 2010-05-29)
 - [#1879] Fix: Don't use &= or |= for booleans
 - [#3851] Fix: CSV export for events from the BE ignores event record in subfolders
 - [#3874] Fix: Test failures in the registration manager testcase
