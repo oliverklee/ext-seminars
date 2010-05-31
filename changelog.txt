@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#3880] Feature: Add a context menu to the speakers grid
 - [#3894] Feature: Add a context menu to the registrations grid
 - [#1879] Fix: Don't use &= or |= for booleans
 - [#3851] Fix: CSV export for events from the BE ignores event record in subfolders
