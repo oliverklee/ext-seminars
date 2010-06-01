@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#3881] Feature: Add a context menu to the organizers grid
 - [#3880] Feature: Add a context menu to the speakers grid
 - [#3894] Feature: Add a context menu to the registrations grid
 - [#1879] Fix: Don't use &= or |= for booleans

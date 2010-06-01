@@ -513,6 +513,60 @@ TYPO3.Backend.Seminars.Speakers.TabPanel = {
 	items: [TYPO3.Backend.Seminars.Speakers.GridPanel],
 };
 
+TYPO3.Backend.Seminars.Organizers.Menu = {
+	id: 'typo3-backend-seminars-organizers-menu',
+	items: [{
+		iconCls: 'edit',
+		text: TYPO3.lang.edit,
+		listeners: {
+			'click': {
+				fn: function() {
+					var uid = Ext.getCmp('typo3-backend-seminars-organizers-gridpanel').
+						getStore().getAt(TYPO3.Backend.Seminars.Organizers.rowIndex).
+						get('uid');
+					var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
+						'?returnUrl=' + encodeURIComponent(window.location) +
+						'&edit[tx_seminars_organizers][' + uid + ']=edit';
+					window.location = url;
+				}
+			}
+		},
+	}, {
+		xtype: 'menuseparator',
+	}, {
+		iconCls: 'delete',
+		text: TYPO3.lang["delete"],
+		listeners: {
+			'click': {
+				fn: function() {
+					// @todo We need a confirmation message here.
+					Ext.Msg.confirm(
+						'Title',
+						'Message',
+						function(button) {
+							if (button == 'yes') {
+								var uid = Ext.getCmp('typo3-backend-seminars-organizers-gridpanel').
+									getStore().getAt(TYPO3.Backend.Seminars.Organizers.rowIndex).
+									get('uid');
+								var cmd = 'cmd[tx_seminars_organizers][' + uid + '][delete]';
+								var connection = new Ext.data.Connection();
+								connection.request({
+									url: TYPO3.settings.Backend.Seminars.URL.tce_db,
+									params: {
+										cmd: 1,
+										'prErr': 1,
+										'uPT': 0,
+									},
+								});
+							}
+						}
+					);
+				}
+			}
+		},
+	}],
+};
+
 TYPO3.Backend.Seminars.Organizers.GridPanel = {
 	id: 'typo3-backend-seminars-organizers-gridpanel',
 	xtype: 'grid',
@@ -555,6 +609,19 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 		pageSize: 50,
 		store: Ext.StoreMgr.get('typo3-backend-seminars-organizers-store'),
 	}),
+	listeners: {
+		'rowcontextmenu': {
+			fn: function(grid, rowIndex, event) {
+				TYPO3.Backend.Seminars.Organizers.rowIndex = rowIndex;
+				var menu = Ext.getCmp('typo3-backend-seminars-organizers-menu');
+				if (!menu) {
+				    menu = new Ext.menu.Menu(TYPO3.Backend.Seminars.Organizers.Menu);
+				}
+			    menu.showAt(event.getXY());
+			    event.stopEvent();
+			}
+		}
+	}
 };
 
 TYPO3.Backend.Seminars.Organizers.TabPanel = {
