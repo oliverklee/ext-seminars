@@ -167,7 +167,6 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-events-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getEvents',
-		autoLoad: true,
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
@@ -245,7 +244,12 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 			    menu.showAt(event.getXY());
 			    event.stopEvent();
 			}
-		}
+		},
+		'afterrender': {
+			fn: function() {
+				Ext.StoreMgr.get('typo3-backend-seminars-events-store').load();
+			}
+		},
 	}
 };
 
@@ -321,7 +325,6 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-registrations-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getRegistrations',
-		autoLoad: true,
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
@@ -380,7 +383,12 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 			    menu.showAt(event.getXY());
 			    event.stopEvent();
 			}
-		}
+		},
+		'afterrender': {
+			fn: function() {
+				Ext.StoreMgr.get('typo3-backend-seminars-registrations-store').load();
+			}
+		},
 	}
 };
 
@@ -456,7 +464,6 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-speakers-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getSpeakers',
-		autoLoad: true,
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
@@ -500,7 +507,12 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 			    menu.showAt(event.getXY());
 			    event.stopEvent();
 			}
-		}
+		},
+		'afterrender': {
+			fn: function() {
+				Ext.StoreMgr.get('typo3-backend-seminars-speakers-store').load();
+			}
+		},
 	}
 };
 
@@ -576,7 +588,6 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-organizers-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getOrganizers',
-		autoLoad: true,
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
@@ -620,7 +631,12 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 			    menu.showAt(event.getXY());
 			    event.stopEvent();
 			}
-		}
+		},
+		'afterrender': {
+			fn: function() {
+				Ext.StoreMgr.get('typo3-backend-seminars-organizers-store').load();
+			}
+		},
 	}
 };
 
