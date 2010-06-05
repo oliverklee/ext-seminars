@@ -622,6 +622,56 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	}
 
 	/**
+	 * Fills $registration with $formData (as submitted via the registration
+	 * form).
+	 *
+	 * This function sets all necessary registration data except for three
+	 * things:
+	 * - event
+	 * - user
+	 * - whether the registration is on the queue
+	 *
+	 * Note: This functions does not check whether registration is possible at
+	 * all.
+	 *
+	 * @param tx_seminars_Model_Registration $registration
+	 *        the registration to fill, must already have an event assigned
+	 * @param array $formData
+	 *        the raw data submitted via the form, may be empty
+	 */
+	protected function setRegistrationData(
+		tx_seminars_Model_Registration $registration, array $formData
+	) {
+		$event = $registration->getEvent();
+
+		$seats = isset($formData['seats']) ? intval($formData['seats']) : 1;
+		if ($seats < 1) {
+			$seats = 1;
+		}
+		$registration->setSeats($seats);
+
+		$registeredThemselves = isset($formData['registered_themselves'])
+			? ((boolean) $formData['registered_themselves']) : FALSE;
+		$registration->setRegisteredThemselves($registeredThemselves);
+
+		$availablePrices = $event->getAvailablePrices();
+		if (isset($formData['price'])
+			&& isset($availablePrices[$formData['price']])
+		) {
+			$priceCode = $formData['price'];
+		} else {
+			reset($availablePrices);
+			$priceCode = key($availablePrices);
+		}
+		$registration->setPrice($priceCode);
+		$registration->setTotalPrice($availablePrices[$priceCode] * $seats);
+
+		$attendeesNames = isset($formData['attendees_names'])
+			? strip_tags($formData['attendees_names']) : '';
+		$registration->setAttendeesNames($attendeesNames);
+	}
+
+	/**
 	 * Removes the given registration (if it exists and if it belongs to the
 	 * currently logged-in FE user).
 	 *

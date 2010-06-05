@@ -268,6 +268,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			eval(
 				'class ' . $testingClassName .
 					' extends tx_seminars_registrationmanager {' .
+				'public function setRegistrationData(' .
+				'  tx_seminars_Model_Registration $registration, array $formData' .
+				') {' .
+				'  parent::setRegistrationData($registration, $formData);' .
+				'}' .
 				'}'
 			);
 		}
@@ -4370,6 +4375,451 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		// @TODO Remove this delete once the registration is saved by the data
 		// mapper.
 		tx_oelib_db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning setRegistrationData()
+	///////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForPositiveSeatsSetsSeats() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('seats' => '3')
+		);
+
+		$this->assertEquals(
+			3,
+			$registration->getSeats()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingSeatsSetsOneSeat() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertEquals(
+			1,
+			$registration->getSeats()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForZeroSeatsSetsOneSeat() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('seats' => '0')
+		);
+
+		$this->assertEquals(
+			1,
+			$registration->getSeats()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNegativeSeatsSetsOneSeat() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('seats' => '-1')
+		);
+
+		$this->assertEquals(
+			1,
+			$registration->getSeats()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForRegisteredThemselvesOneSetsItToTrue() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('registered_themselves' => '1')
+		);
+
+		$this->assertTrue(
+			$registration->hasRegisteredThemselves()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForRegisteredThemselvesZeroSetsItToFalse() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('registered_themselves' => '0')
+		);
+
+		$this->assertFalse(
+			$registration->hasRegisteredThemselves()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForRegisteredThemselvesMissingSetsItToFalse() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertFalse(
+			$registration->hasRegisteredThemselves()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForSelectedAvailablePricePutsSelectedPriceCodeToPrice() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getAvailablePrices')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 12, 'special' => 3)));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('price' => 'special')
+		);
+
+		$this->assertEquals(
+			'special',
+			$registration->getPrice()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForSelectedNotAvailablePricePutsFirstPriceCodeToPrice() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getAvailablePrices')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 12)));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('price' => 'early_bird_regular')
+		);
+
+		$this->assertEquals(
+			'regular',
+			$registration->getPrice()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNoSelectedPricePutsFirstPriceCodeToPrice() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getAvailablePrices')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 12)));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertEquals(
+			'regular',
+			$registration->getPrice()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNoSelectedAndOnlyFreeRegularPriceAvailablePutsRegularPriceCodeToPrice() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getAvailablePrices')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 0)));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertEquals(
+			'regular',
+			$registration->getPrice()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForOneSeatsCalculatesTotalPriceFromSelectedPriceAndSeats() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getAvailablePrices')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 12)));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('price' => 'regular', 'seats' => '1')
+		);
+
+		$this->assertEquals(
+			12.0,
+			$registration->getTotalPrice()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForTwoSeatsCalculatesTotalPriceFromSelectedPriceAndSeats() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event', array('getAvailablePrices')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 12)));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('price' => 'regular', 'seats' => '2')
+		);
+
+		$this->assertEquals(
+			24.0,
+			$registration->getTotalPrice()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNonEmptyAttendeesNamesSetsAttendeesNames() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('attendees_names' => 'John Doe' . LF . 'Jane Doe')
+		);
+
+		$this->assertEquals(
+			'John Doe' . LF . 'Jane Doe',
+			$registration->getAttendeesNames()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataDropsHtmlsTagsFromAttendeesNames() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('attendees_names' => 'John <em>Doe</em>')
+		);
+
+		$this->assertEquals(
+			'John Doe',
+			$registration->getAttendeesNames()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForEmptyAttendeesNamesSetsEmptyAttendeesNames() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('attendees_names' => '')
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getAttendeesNames()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingAttendeesNamesSetsEmptyAttendeesNames() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getAttendeesNames()
+		);
+
+		$fixture->__destruct();
 	}
 }
 ?>
