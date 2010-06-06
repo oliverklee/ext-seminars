@@ -49,7 +49,7 @@ class tx_seminars_BackEndExtJs_Ajax {
 		$rows = array();
 		foreach ($events as $event) {
 			$rows[] = array(
-				'iconCls' => $this->getIconClass($event),
+				'record_type' => $event->getRecordType(),
 				'uid' => $event->getUid(),
 				'hidden' => $event->isHidden(),
 				'status' => $event->getStatus(),
@@ -64,30 +64,6 @@ class tx_seminars_BackEndExtJs_Ajax {
 			'rows' => $rows,
 		));
 		$ajaxObject->setContentFormat('json');
-	}
-
-	/**
-	 * Returns the CSS icon class name for the given event based on the type of
-	 * the event record, e.g.:
-	 * - "typo3-backend-seminars-event-topic-icon" for event topics
-	 * - "typo3-backend-seminars-event-single-icon" for single events
-	 * - "typo3-backend-seminars-event-date-icon" for event dates
-	 *
-	 * @param tx_seminars_Model_Event $event
-	 *        the event to get the CSS icon class name for
-	 *
-	 * @return string the CSS icon class name for the given event
-	 */
-	private function getIconClass(tx_seminars_Model_Event $event) {
-		$result = 'typo3-backend-seminars-event-topic-icon';
-
-		if ($event->isSingleEvent()) {
-			$result = 'typo3-backend-seminars-event-single-icon';
-		} elseif ($event->isEventDate()) {
-			$result = 'typo3-backend-seminars-event-date-icon';
-		}
-
-		return $result;
 	}
 
 	/**

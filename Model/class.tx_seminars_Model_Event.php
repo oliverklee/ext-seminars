@@ -83,6 +83,19 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
+	 * Returns the record type of this event, which will be one of the following:
+	 * - tx_seminars_Model_Event::TYPE_COMPLETE
+	 * - tx_seminars_Model_Event::TYPE_TOPIC
+	 * - tx_seminars_Model_Event::TYPE_DATE
+	 *
+	 * @return integer the record type of this event, will be one of the values
+	 *                 mentioned above, will be >= 0
+	 */
+	public function getRecordType() {
+		return $this->getAsInteger('object_type');
+	}
+
+	/**
 	 * Returns our topic.
 	 *
 	 * This method may only be called for date records.

@@ -130,8 +130,23 @@ TYPO3.Backend.Seminars.Events.Menu = {
 	}]
 };
 
-TYPO3.Backend.Seminars.IconRenderer = function(value, metaData, record, rowIndex, colIndex, store) {
-	metaData.css = value;
+TYPO3.Backend.Seminars.Events.IconRenderer = function(value, metaData, record, rowIndex, colIndex, store) {
+	var type = record.get('record_type');
+
+	switch (type) {
+		case 1:
+			metaData.css = 'typo3-backend-seminars-event-topic-icon';
+			break;
+		case 2:
+			metaData.css = 'typo3-backend-seminars-event-date-icon';
+			break;
+		default:
+			// fall-through is intended
+		case 0:
+			metaData.css = 'typo3-backend-seminars-event-single-icon';
+			break;
+	}
+
 	metaData.attr = ' title="id=' + record.get('uid') + '";'
 
 	return '';
@@ -170,14 +185,14 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
-		    {name: 'iconCls'},
+		    {name: 'record_type'},
 		    {name: 'uid'},
 		    {name: 'title'},
 		    {name: 'status'},
 		]
 	}),
 	columns: [
-	      {dataIndex: 'iconCls', renderer: TYPO3.Backend.Seminars.IconRenderer, width: 30},
+	      {header: '', renderer: TYPO3.Backend.Seminars.Events.IconRenderer, width: 30, hideable: false, menuDisabled: true, sortable: false, resizable: false},
 	      {header: '#', dataIndex: 'uid'},
           {header: TYPO3.lang['eventlist.title'], dataIndex: 'title'},
           {header: TYPO3.lang['eventlist_status'], dataIndex: 'status', renderer: TYPO3.Backend.Seminars.Events.StatusRenderer},
@@ -316,6 +331,13 @@ TYPO3.Backend.Seminars.Registrations.Menu = {
 	}],
 };
 
+TYPO3.Backend.Seminars.Registrations.IconRenderer = function(value, metaData, record, rowIndex, colIndex, store) {
+	metaData.css = 'typo3-backend-seminars-registration-icon';
+	metaData.attr = ' title="id=' + record.get('uid') + '";'
+
+	return '';
+};
+
 TYPO3.Backend.Seminars.Registrations.GridPanel = {
 	id: 'typo3-backend-seminars-registrations-gridpanel',
 	xtype: 'grid',
@@ -333,6 +355,7 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 		]
 	}),
 	columns: [
+		{header: '', renderer: TYPO3.Backend.Seminars.Registrations.IconRenderer, width: 30, hideable: false, menuDisabled: true, sortable: false, resizable: false},
 		{header: TYPO3.lang.uid, dataIndex: 'uid'},
 		{header: TYPO3.lang.title, dataIndex: 'title'},
 	],
@@ -455,6 +478,13 @@ TYPO3.Backend.Seminars.Speakers.Menu = {
 	}],
 };
 
+TYPO3.Backend.Seminars.Speakers.IconRenderer = function(value, metaData, record, rowIndex, colIndex, store) {
+	metaData.css = 'typo3-backend-seminars-speaker-icon';
+	metaData.attr = ' title="id=' + record.get('uid') + '";'
+
+	return '';
+};
+
 TYPO3.Backend.Seminars.Speakers.GridPanel = {
 	id: 'typo3-backend-seminars-speakers-gridpanel',
 	xtype: 'grid',
@@ -472,6 +502,7 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 		]
 	}),
 	columns: [
+		{header: '', renderer: TYPO3.Backend.Seminars.Speakers.IconRenderer, width: 30, hideable: false, menuDisabled: true, sortable: false, resizable: false},
 		{header: TYPO3.lang.uid, dataIndex: 'uid'},
 		{header: TYPO3.lang.title, dataIndex: 'title'},
 	],
@@ -579,6 +610,13 @@ TYPO3.Backend.Seminars.Organizers.Menu = {
 	}],
 };
 
+TYPO3.Backend.Seminars.Organizers.IconRenderer = function(value, metaData, record, rowIndex, colIndex, store) {
+	metaData.css = 'typo3-backend-seminars-organizer-icon';
+	metaData.attr = ' title="id=' + record.get('uid') + '";'
+
+	return '';
+};
+
 TYPO3.Backend.Seminars.Organizers.GridPanel = {
 	id: 'typo3-backend-seminars-organizers-gridpanel',
 	xtype: 'grid',
@@ -596,6 +634,7 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 		]
 	}),
 	columns: [
+		{header: '', renderer: TYPO3.Backend.Seminars.Organizers.IconRenderer, width: 30, hideable: false, menuDisabled: true, sortable: false, resizable: false},
 		{header: TYPO3.lang.uid, dataIndex: 'uid'},
 		{header: TYPO3.lang.title, dataIndex: 'title'},
 	],

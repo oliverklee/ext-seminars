@@ -137,6 +137,53 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	}
 
 
+	/////////////////////////////////////
+	// Tests regarding the record type.
+	/////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getRecordTypeWithRecordTypeCompleteReturnsRecordTypeComplete() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+		);
+
+		$this->assertEquals(
+			tx_seminars_Model_Event::TYPE_COMPLETE,
+			$this->fixture->getRecordType()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRecordTypeWithRecordTypeDateReturnsRecordTypeDate() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_DATE)
+		);
+
+		$this->assertEquals(
+			tx_seminars_Model_Event::TYPE_DATE,
+			$this->fixture->getRecordType()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRecordTypeWithRecordTypeTopicReturnsRecordTypeTopic() {
+		$this->fixture->setData(
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+		);
+
+		$this->assertEquals(
+			tx_seminars_Model_Event::TYPE_TOPIC,
+			$this->fixture->getRecordType()
+		);
+	}
+
+
 	//////////////////////////////////////////////
 	// Tests regarding the accreditation number.
 	//////////////////////////////////////////////

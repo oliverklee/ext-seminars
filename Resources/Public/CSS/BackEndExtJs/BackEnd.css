@@ -43,3 +43,12 @@
 .typo3-backend-seminars-event-topic-icon {
 	background: url(../../../../icons/icon_tx_seminars_seminars_topic.gif) center center no-repeat !important;
 }
+.typo3-backend-seminars-registration-icon {
+	background: url(../../../../icons/icon_tx_seminars_attendances.gif) center center no-repeat !important;
+}
+.typo3-backend-seminars-speaker-icon {
+	background: url(../../../../icons/icon_tx_seminars_speakers.gif) center center no-repeat !important;
+}
+.typo3-backend-seminars-organizer-icon {
+	background: url(../../../../icons/icon_tx_seminars_organizers.gif) center center no-repeat !important;
+}
