@@ -165,7 +165,7 @@ plugin.tx_seminars {
 	# The following variables don't have any default values provided.
 	# You need to set them yourself for this extension to work correctly.
 
-	# PID of the or sysfolder where event registrations (attendances) will be stored
+	# PID of the sysfolder where event registrations (attendances) will be stored
 	attendancesPID =
 }
 
@@ -402,7 +402,7 @@ plugin.tx_seminars_pi1 {
 	# The following variables don't have any default values provided.
 	# You need to set them yourself for this extension to work correctly.
 
-	# PID of the sysfolder that contains all the event records (e.g. the starting point)
+	# PID of the sysfolder that contains all the event records (e.g., the starting point)
 	pages =
 
 	# number of levels to recurse when accessing the starting point
