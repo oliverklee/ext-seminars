@@ -43,27 +43,44 @@ class tx_seminars_BackEndExtJs_Ajax {
 	 *        response of the AJAX call
 	 */
 	public function getEvents(array $parameters, TYPO3AJAX $ajaxObject) {
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
-		$events = $mapper->findByPageUid(intval($parameters['id']));
+		$events = $this->retrieveModels('tx_seminars_Mapper_Event', $ajaxObject);
+
+		if ($events === null) {
+			return;
+		}
 
 		$rows = array();
 		foreach ($events as $event) {
-			$rows[] = array(
-				'record_type' => $event->getRecordType(),
-				'uid' => $event->getUid(),
-				'hidden' => $event->isHidden(),
-				'status' => $event->getStatus(),
-				'title' => $event->getTitle(),
-				'begin_date' => $event->getBeginDateAsUnixTimeStamp(),
-				'end_date' => $event->getEndDateAsUnixTimeStamp(),
-			);
+			$rows[] = $this->getArrayFromEvent($event);
 		}
 
 		$ajaxObject->setContent(array(
 			'success' => TRUE,
 			'rows' => $rows,
 		));
-		$ajaxObject->setContentFormat('json');
+	}
+
+	/**
+	 * Returns the data of the given event in an array.
+	 *
+	 * Available array keys are: uid, record_type, hidden, status, title,
+	 * begin_date, end_date
+	 *
+	 * @param tx_seminars_Model_Event $event
+	 *        the event to return the data from in an array
+	 *
+	 * @return array the data of the given in event
+	 */
+	protected function getArrayFromEvent(tx_seminars_Model_Event $event) {
+		return array(
+			'uid' => $event->getUid(),
+			'record_type' => $event->getRecordType(),
+			'hidden' => $event->isHidden(),
+			'status' => $event->getStatus(),
+			'title' => $event->getTitle(),
+			'begin_date' => $event->getBeginDateAsUnixTimeStamp(),
+			'end_date' => $event->getEndDateAsUnixTimeStamp(),
+		);
 	}
 
 	/**
@@ -76,22 +93,38 @@ class tx_seminars_BackEndExtJs_Ajax {
 	 *        response of the AJAX call
 	 */
 	public function getRegistrations(array $parameters, TYPO3AJAX $ajaxObject) {
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration');
-		$registrations = $mapper->findByPageUid(intval($parameters['id']));
+		$registrations = $this->retrieveModels('tx_seminars_Mapper_Registration', $ajaxObject);
+
+		if ($registrations === null) {
+			return;
+		}
 
 		$rows = array();
 		foreach ($registrations as $registration) {
-			$rows[] = array(
-				'uid' => $registration->getUid(),
-				'title' => $registration->getTitle(),
-			);
+			$rows[] = $this->getArrayFromRegistration($registration);
 		}
 
 		$ajaxObject->setContent(array(
 			'success' => TRUE,
 			'rows' => $rows,
 		));
-		$ajaxObject->setContentFormat('json');
+	}
+
+	/**
+	 * Returns the data of the given registration in an array.
+	 *
+	 * Available array keys are: uid, title
+	 *
+	 * @param tx_seminars_Model_Registration $registration
+	 *        the registration to return the data from in an array
+	 *
+	 * @return array the data of the given registration
+	 */
+	protected function getArrayFromRegistration(tx_seminars_Model_Registration $registration) {
+		return array(
+			'uid' => $registration->getUid(),
+			'title' => $registration->getTitle(),
+		);
 	}
 
 	/**
@@ -104,22 +137,38 @@ class tx_seminars_BackEndExtJs_Ajax {
 	 *        response of the AJAX call
 	 */
 	public function getSpeakers(array $parameters, TYPO3AJAX $ajaxObject) {
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
-		$speakers = $mapper->findByPageUid(intval($parameters['id']));
+		$speakers = $this->retrieveModels('tx_seminars_Mapper_Speaker', $ajaxObject);
+
+		if ($speakers === null) {
+			return;
+		}
 
 		$rows = array();
 		foreach ($speakers as $speaker) {
-			$rows[] = array(
-				'uid' => $speaker->getUid(),
-				'title' => $speaker->getName(),
-			);
+			$rows[] = $this->getArrayFromSpeaker($speaker);
 		}
 
 		$ajaxObject->setContent(array(
 			'success' => TRUE,
 			'rows' => $rows,
 		));
-		$ajaxObject->setContentFormat('json');
+	}
+
+	/**
+	 * Returns the data of the given speaker in an array.
+	 *
+	 * Available array keys are: uid, title
+	 *
+	 * @param tx_seminars_Model_Speaker $speaker
+	 *        the speaker to return the data from in an array
+	 *
+	 * @return array the data of the given speaker
+	 */
+	protected function getArrayFromSpeaker(tx_seminars_Model_Speaker $speaker) {
+		return array(
+			'uid' => $speaker->getUid(),
+			'title' => $speaker->getName(),
+		);
 	}
 
 	/**
@@ -132,22 +181,93 @@ class tx_seminars_BackEndExtJs_Ajax {
 	 *        response of the AJAX call
 	 */
 	public function getOrganizers(array $parameters, TYPO3AJAX $ajaxObject) {
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer');
-		$organizers = $mapper->findByPageUid(intval($parameters['id']));
+		$organizers = $this->retrieveModels('tx_seminars_Mapper_Organizer', $ajaxObject);
+
+		if ($organizers === null) {
+			return;
+		}
 
 		$rows = array();
 		foreach ($organizers as $organizer) {
-			$rows[] = array(
-				'uid' => $organizer->getUid(),
-				'title' => $organizer->getName(),
-			);
+			$rows[] = $this->getArrayFromOrganizer($organizer);
 		}
 
 		$ajaxObject->setContent(array(
 			'success' => TRUE,
 			'rows' => $rows,
 		));
+	}
+
+	/**
+	 * Returns the data of the given organizer in an array.
+	 *
+	 * Available array keys are: uid, title
+	 *
+	 * @param tx_seminars_Model_Organizer $organizer
+	 *        the organizer to return the data from in an array
+	 *
+	 * @return array the data of the given organizer
+	 */
+	protected function getArrayFromOrganizer(tx_seminars_Model_Organizer $organizer) {
+		return array(
+			'uid' => $organizer->getUid(),
+			'title' => $organizer->getName(),
+		);
+	}
+
+	/**
+	 * Retrieves the models for a given mapper name.
+	 *
+	 * @param string $mapperName
+	 *        the name of the mapper to get the models from, must be a non-empty
+	 *        valid mapper class name
+	 * @param TYPO3AJAX $ajaxObject
+	 *        the AJAX object used to set the content and content-type of the
+	 *        response of the AJAX call
+	 *
+	 * @return tx_oelib_List will be a list of models in case of success, null
+	 *                       in case of failure
+	 */
+	protected function retrieveModels($mapperName, TYPO3AJAX $ajaxObject) {
 		$ajaxObject->setContentFormat('json');
+
+		if (!class_exists($mapperName)) {
+			throw new InvalidArgumentException(
+				'A mapper with the name "' . $mapperName .
+					'" could not be found.'
+			);
+		}
+
+		$pageUid = intval(t3lib_div::_POST('id'));
+		if (!$this->isPageUidValid($pageUid)) {
+			$ajaxObject->setContent(array('success' => FALSE));
+			return;
+		}
+
+		$mapper = tx_oelib_MapperRegistry::get($mapperName);
+		return $mapper->findByPageUid(
+			tx_oelib_db::createRecursivePageList($pageUid, 255)
+		);
+	}
+
+	/**
+	 * Checks whether the given page UID refers to a valid, existing system
+	 * folder.
+	 *
+	 * @param integer $pageUid the page UID to check, may also be 0 or negative
+	 *
+	 * @return boolean TRUE if $pageUid is a valid system folder, FALSE otherwise
+	 */
+	protected function isPageUidValid($pageUid) {
+		if ($pageUid <= 0) {
+			return FALSE;
+		}
+
+		return tx_oelib_db::existsRecordWithUid(
+			'pages',
+			$pageUid,
+			' AND doktype = 254' . tx_oelib_db::enableFields('pages', 1)
+		);
 	}
 }
 

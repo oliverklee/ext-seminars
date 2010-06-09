@@ -1,3 +1,26 @@
+/***************************************************************
+* Copyright notice
+*
+* (c) 2010 Niels Pardon (mail@niels-pardon.de)
+* All rights reserved
+*
+* This script is part of the TYPO3 project. The TYPO3 project is
+* free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* The GNU General Public License can be found at
+* http://www.gnu.org/copyleft/gpl.html.
+*
+* This script is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* This copyright notice MUST APPEAR in all copies of the script!
+***************************************************************/
+
 Ext.ns(
 	'TYPO3.Backend.Seminars',
 	'TYPO3.Backend.Seminars.Default',
@@ -182,6 +205,9 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-events-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getEvents',
+		baseParams: {
+			'id': TYPO3.settings.PID,
+		},
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
@@ -347,6 +373,9 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-registrations-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getRegistrations',
+		baseParams: {
+			'id': TYPO3.settings.PID,
+		},
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
@@ -494,6 +523,9 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-speakers-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getSpeakers',
+		baseParams: {
+			'id': TYPO3.settings.PID,
+		},
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
@@ -626,6 +658,9 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-organizers-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getOrganizers',
+		baseParams: {
+			'id': TYPO3.settings.PID,
+		},
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
