@@ -1723,5 +1723,25 @@ class tx_seminars_Model_EventTopic_testcase extends tx_phpunit_testcase {
 			$fixture->getAvailablePrices()
 		);
 	}
+
+
+	/////////////////////////////////////////
+	// Tests concerning the payment methods
+	/////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function setPaymentMethodsSetsPaymentMethods() {
+		$this->fixture->setData(array());
+
+		$paymentMethods = new tx_oelib_List();
+		$this->fixture->setPaymentMethods($paymentMethods);
+
+		$this->assertSame(
+			$paymentMethods,
+			$this->fixture->getPaymentMethods()
+		);
+	}
 }
 ?>

@@ -972,6 +972,26 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
+	 * Sets our payment methods.
+	 *
+	 * Note: This function should only be called on topic or single event
+	 * records, not on event dates.
+	 *
+	 * @param tx_oelib_List $paymentMethods
+	 *        our payment methods, can be empty
+	 */
+	public function setPaymentMethods(tx_oelib_List $paymentMethods) {
+		if ($this->isEventDate()) {
+			throw new BadMethodCallException(
+				'setPaymentMethods may only be called on single events and ' .
+					'event topics, but not on event dates.'
+			);
+		}
+
+		$this->set('payment_methods', $paymentMethods);
+	}
+
+	/**
 	 * Returns our organizers.
 	 *
 	 * @return tx_oelib_List our organizers, will be empty if this event has no

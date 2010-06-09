@@ -2076,5 +2076,40 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 			$registration->getEvent()
 		);
 	}
+
+
+	/////////////////////////////////////////
+	// Tests concerning the payment methods
+	/////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsReturnsPaymentMethods() {
+		$paymentMethods = new tx_oelib_List();
+		$this->fixture->setData(
+			array('payment_methods' => $paymentMethods)
+		);
+
+		$this->assertSame(
+			$paymentMethods,
+			$this->fixture->getPaymentMethods()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setPaymentMethodsSetsPaymentMethods() {
+		$this->fixture->setData(array());
+
+		$paymentMethods = new tx_oelib_List();
+		$this->fixture->setPaymentMethods($paymentMethods);
+
+		$this->assertSame(
+			$paymentMethods,
+			$this->fixture->getPaymentMethods()
+		);
+	}
 }
 ?>

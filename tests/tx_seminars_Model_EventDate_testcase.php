@@ -1567,5 +1567,51 @@ class tx_seminars_Model_EventDate_testcase extends tx_phpunit_testcase {
 			$this->fixture->hasImage()
 		);
 	}
+
+
+	/////////////////////////////////////////
+	// Tests concerning the payment methods
+	/////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsReturnsPaymentMethodsFromTopic() {
+		$paymentMethods = new tx_oelib_List();
+		$topic = new tx_seminars_Model_Event();
+		$topic->setData(array('payment_methods' => $paymentMethods));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertSame(
+			$paymentMethods,
+			$this->fixture->getPaymentMethods()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setPaymentMethodsThrowsException() {
+		$this->setExpectedException(
+			'BadMethodCallException',
+			'setPaymentMethods may only be called on single events and event ' .
+				'topics, but not on event dates.'
+		);
+
+		$topic = new tx_seminars_Model_Event();
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->fixture->setPaymentMethods(new tx_oelib_List());
+	}
 }
 ?>
