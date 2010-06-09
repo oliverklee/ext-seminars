@@ -1077,7 +1077,7 @@ $TCA['tx_seminars_seminars'] = array(
 		),
 		// Multiple event topic
 		'1' => array('showitem' =>
-			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, subtitle;;;;3-3-3, image, categories, requirements, dependencies, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, ' .
+			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, subtitle;;;;3-3-3, image, categories, requirements, dependencies, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, attached_files, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, target_groups, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPayment, prices, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelAccess, hidden;;1;;1-1-1, ',

@@ -4326,11 +4326,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Returns whether this event has at least one attached file.
 	 *
+	 * If this is an event date, this function will return true if the date
+	 * record or the topic record has at least one file.
+	 *
 	 * @return boolean TRUE if this event has at least one attached file,
 	 *                 FALSE otherwise
 	 */
 	public function hasAttachedFiles() {
-		return $this->hasRecordPropertyString('attached_files');
+		return $this->hasRecordPropertyString('attached_files')
+			|| $this->hasTopicString('attached_files');
 	}
 
 	/**
@@ -4346,6 +4350,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * The returned array will be sorted like the files are sorted in the back-
 	 * end form.
 	 *
+	 * If this event is an event date, this function will return both the
+	 * topic's file and the date's files (in that order).
+	 *
 	 * @param tslib_pibase a tslib_pibase object for a live page
 	 *
 	 * @return array an array of arrays with the elements "name" and
@@ -4357,7 +4364,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return array();
 		}
 
-		$result = array();
+		if ($this->isTopicOkay()) {
+			$filesFromTopic = $this->topic->getAttachedFiles($plugin);
+		} else {
+			$filesFromTopic = array();
+		}
+
+		$result = $filesFromTopic;
 		$uploadFolderPath = PATH_site . 'uploads/tx_seminars/';
 		$uploadFolderUrl = t3lib_div::getIndpEnv('TYPO3_SITE_URL') .
 			'uploads/tx_seminars/';

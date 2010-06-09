@@ -5058,6 +5058,62 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function hasAttachedFilesForDateWithoutFilesAndTopicWithOneFileReturnsTrue() {
+		$topicRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'attached_files' => 'test.file',
+			)
+		);
+		$dateRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'attached_files' => '',
+				'topic' => $topicRecordUid,
+			)
+		);
+		$eventDate = new tx_seminars_seminar($dateRecordUid);
+
+		$this->assertTrue(
+			$eventDate->hasAttachedFiles()
+		);
+
+		$eventDate->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAttachedFilesForDateWithoutFilesAndTopicWithoutFilesReturnsFalse() {
+		$topicRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'attached_files' => '',
+			)
+		);
+		$dateRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'attached_files' => '',
+				'topic' => $topicRecordUid,
+			)
+		);
+		$eventDate = new tx_seminars_seminar($dateRecordUid);
+
+		$this->assertFalse(
+			$eventDate->hasAttachedFiles()
+		);
+
+		$eventDate->__destruct();
+	}
+
 	public function testGetAttachedFilesInitiallyReturnsAnEmptyArray() {
 		$this->createPi1();
 
@@ -5085,6 +5141,122 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			t3lib_div::formatSize(filesize($dummyFile)),
 			$attachedFiles[0]['size']
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAttachedFilesForDateWithFileAndTopicWithoutFileReturnsFileFromDate() {
+		$this->createPi1();
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+
+		$topicRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'attached_files' => '',
+			)
+		);
+		$dateRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'attached_files' => $dummyFileName,
+				'topic' => $topicRecordUid,
+			)
+		);
+		$eventDate = new tx_seminars_seminar($dateRecordUid);
+
+		$attachedFiles = $eventDate->getAttachedFiles($this->pi1);
+
+		$this->assertContains(
+			$dummyFileName,
+			$attachedFiles[0]['name']
+		);
+
+		$eventDate->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAttachedFilesForDateWithoutFileAndTopicWithFileReturnsFileFromTopic() {
+		$this->createPi1();
+		$dummyFile = $this->testingFramework->createDummyFile();
+		$dummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+
+		$topicRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'attached_files' => $dummyFileName,
+			)
+		);
+		$dateRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'attached_files' => '',
+				'topic' => $topicRecordUid,
+			)
+		);
+		$eventDate = new tx_seminars_seminar($dateRecordUid);
+
+		$attachedFiles = $eventDate->getAttachedFiles($this->pi1);
+
+		$this->assertContains(
+			$dummyFileName,
+			$attachedFiles[0]['name']
+		);
+
+		$eventDate->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAttachedFilesForDateWithFileAndTopicWithFileReturnsFilesFromTopicAndThenDate() {
+		$this->createPi1();
+
+		$topicDummyFile = $this->testingFramework->createDummyFile();
+		$topicDummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($topicDummyFile);
+		$topicRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'attached_files' => $topicDummyFileName,
+			)
+		);
+
+		$dateDummyFile = $this->testingFramework->createDummyFile();
+		$dateDummyFileName =
+			$this->testingFramework->getPathRelativeToUploadDirectory($dateDummyFile);
+		$dateRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'attached_files' => $dateDummyFileName,
+				'topic' => $topicRecordUid,
+			)
+		);
+		$eventDate = new tx_seminars_seminar($dateRecordUid);
+
+		$attachedFiles = $eventDate->getAttachedFiles($this->pi1);
+
+		$this->assertContains(
+			$topicDummyFileName,
+			$attachedFiles[0]['name']
+		);
+		$this->assertContains(
+			$dateDummyFileName,
+			$attachedFiles[1]['name']
+		);
+
+		$eventDate->__destruct();
 	}
 
 	public function testGetAttachedFilesWithTwoSetAttachedFilesReturnsAttachedFilesAsArrayWithCorrectFileSize() {
