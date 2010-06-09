@@ -280,7 +280,7 @@ abstract class tx_seminars_bag implements Iterator {
 	}
 
 	/**
-	 * Checks isOk() and, in case of failure (e.g. there is no more data
+	 * Checks isOk() and, in case of failure (e.g., there is no more data
 	 * from the DB), nulls out $this->currentItem.
 	 *
 	 * If the function isOk() returns TRUE, nothing is changed.
