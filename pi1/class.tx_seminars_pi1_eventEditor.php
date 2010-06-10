@@ -25,7 +25,6 @@
 require_once(PATH_t3lib . 'class.t3lib_basicfilefunc.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-include_once(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
 
 /**
  * Class 'tx_seminars_pi1_eventEditor' for the 'seminars' extension.

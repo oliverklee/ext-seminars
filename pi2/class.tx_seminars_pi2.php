@@ -32,6 +32,7 @@ require_once(PATH_t3lib . 'class.t3lib_befunc.php');
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
+include_once(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
 
 /**
  * Plugin 'CSV export' for the 'seminars' extension.
