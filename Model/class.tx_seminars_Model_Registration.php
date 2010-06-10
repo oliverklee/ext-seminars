@@ -322,9 +322,12 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	 * Sets the payment method of this registration.
 	 *
 	 * @param tx_seminars_Model_PaymentMethod $paymentMethod
-	 *        the payment method of this registration to set
+	 *        the payment method of this registration to set, may be null to set
+	 *        no payment method
 	 */
-	public function setPaymentMethod(tx_seminars_Model_PaymentMethod $paymentMethod) {
+	public function setPaymentMethod(
+		tx_seminars_Model_PaymentMethod $paymentMethod = null
+	) {
 		$this->set('method_of_payment', $paymentMethod);
 	}
 

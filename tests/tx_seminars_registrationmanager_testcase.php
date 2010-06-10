@@ -4565,6 +4565,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$event = $this->getMock(
 			'tx_seminars_Model_Event', array('getAvailablePrices')
 		);
+		$event->setData(array('payment_methods' => new tx_oelib_List()));
 		$event->expects($this->any())->method('getAvailablePrices')
 			->will($this->returnValue(array('regular' => 12, 'special' => 3)));
 		$registration = new tx_seminars_Model_Registration();
@@ -4593,6 +4594,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$event = $this->getMock(
 			'tx_seminars_Model_Event', array('getAvailablePrices')
 		);
+		$event->setData(array('payment_methods' => new tx_oelib_List()));
 		$event->expects($this->any())->method('getAvailablePrices')
 			->will($this->returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
@@ -4621,6 +4623,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$event = $this->getMock(
 			'tx_seminars_Model_Event', array('getAvailablePrices')
 		);
+		$event->setData(array('payment_methods' => new tx_oelib_List()));
 		$event->expects($this->any())->method('getAvailablePrices')
 			->will($this->returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
@@ -4649,6 +4652,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$event = $this->getMock(
 			'tx_seminars_Model_Event', array('getAvailablePrices')
 		);
+		$event->setData(array('payment_methods' => new tx_oelib_List()));
 		$event->expects($this->any())->method('getAvailablePrices')
 			->will($this->returnValue(array('regular' => 0)));
 		$registration = new tx_seminars_Model_Registration();
@@ -4677,6 +4681,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$event = $this->getMock(
 			'tx_seminars_Model_Event', array('getAvailablePrices')
 		);
+		$event->setData(array('payment_methods' => new tx_oelib_List()));
 		$event->expects($this->any())->method('getAvailablePrices')
 			->will($this->returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
@@ -4705,6 +4710,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$event = $this->getMock(
 			'tx_seminars_Model_Event', array('getAvailablePrices')
 		);
+		$event->setData(array('payment_methods' => new tx_oelib_List()));
 		$event->expects($this->any())->method('getAvailablePrices')
 			->will($this->returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
@@ -4817,6 +4823,398 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'',
 			$registration->getAttendeesNames()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForPositiveKidsSetsNumberOfKids() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('kids' => '3')
+		);
+
+		$this->assertEquals(
+			3,
+			$registration->getKids()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingKidsSetsZeroKids() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertEquals(
+			0,
+			$registration->getKids()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForZeroKidsSetsZeroKids() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('kids' => '0')
+		);
+
+		$this->assertEquals(
+			0,
+			$registration->getKids()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNegativeKidsSetsZeroKids() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('kids' => '-1')
+		);
+
+		$this->assertEquals(
+			0,
+			$registration->getKids()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneSetsIt() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$paymentMethod = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
+		$paymentMethods = new tx_oelib_List();
+		$paymentMethods->add($paymentMethod);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event',
+			array('getAvailablePrices', 'getPaymentMethods')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 12)));
+		$event->expects($this->any())->method('getPaymentMethods')
+			->will($this->returnValue($paymentMethods));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('method_of_payment' => $paymentMethod->getUid())
+		);
+
+		$this->assertSame(
+			$paymentMethod,
+			$registration->getPaymentMethod()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForSelectedAvailablePaymentMethodFromTwoSetsIt() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$paymentMethod1 = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
+		$paymentMethod2 = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
+		$paymentMethods = new tx_oelib_List();
+		$paymentMethods->add($paymentMethod1);
+		$paymentMethods->add($paymentMethod2);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event',
+			array('getAvailablePrices', 'getPaymentMethods')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 12)));
+		$event->expects($this->any())->method('getPaymentMethods')
+			->will($this->returnValue($paymentMethods));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('method_of_payment' => $paymentMethod2->getUid())
+		);
+
+		$this->assertSame(
+			$paymentMethod2,
+			$registration->getPaymentMethod()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneForFreeEventsSetsNoPaymentMethod() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$paymentMethod = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
+		$paymentMethods = new tx_oelib_List();
+		$paymentMethods->add($paymentMethod);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event',
+			array('getAvailablePrices', 'getPaymentMethods')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 0)));
+		$event->expects($this->any())->method('getPaymentMethods')
+			->will($this->returnValue($paymentMethods));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('method_of_payment' => $paymentMethod->getUid())
+		);
+
+		$this->assertNull(
+			$registration->getPaymentMethod()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingPaymentMethodAndNoneAvailableSetsNone() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event',
+			array('getAvailablePrices', 'getPaymentMethods')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 0)));
+		$event->expects($this->any())->method('getPaymentMethods')
+			->will($this->returnValue(new tx_oelib_List()));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertNull(
+			$registration->getPaymentMethod()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingPaymentMethodAndTwoAvailableSetsNone() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$paymentMethod1 = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
+		$paymentMethod2 = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
+		$paymentMethods = new tx_oelib_List();
+		$paymentMethods->add($paymentMethod1);
+		$paymentMethods->add($paymentMethod2);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event',
+			array('getAvailablePrices', 'getPaymentMethods')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 12)));
+		$event->expects($this->any())->method('getPaymentMethods')
+			->will($this->returnValue($paymentMethods));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertNull(
+			$registration->getPaymentMethod()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingPaymentMethodAndOneAvailableSetsIt() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$paymentMethod = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
+		$paymentMethods = new tx_oelib_List();
+		$paymentMethods->add($paymentMethod);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event',
+			array('getAvailablePrices', 'getPaymentMethods')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 12)));
+		$event->expects($this->any())->method('getPaymentMethods')
+			->will($this->returnValue($paymentMethods));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertSame(
+			$paymentMethod,
+			$registration->getPaymentMethod()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForUnavailablePaymentMethodAndTwoAvailableSetsNone() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$paymentMethod1 = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
+		$paymentMethod2 = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
+		$paymentMethods = new tx_oelib_List();
+		$paymentMethods->add($paymentMethod1);
+		$paymentMethods->add($paymentMethod2);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event',
+			array('getAvailablePrices', 'getPaymentMethods')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 12)));
+		$event->expects($this->any())->method('getPaymentMethods')
+			->will($this->returnValue($paymentMethods));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration,
+			array('method_of_payment' =>
+				max($paymentMethod1->getUid(), $paymentMethod2->getUid()) + 1
+			)
+		);
+
+		$this->assertNull(
+			$registration->getPaymentMethod()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForUnavailablePaymentMethodAndOneAvailableSetsAvailable() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$paymentMethod = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
+		$paymentMethods = new tx_oelib_List();
+		$paymentMethods->add($paymentMethod);
+
+		$event = $this->getMock(
+			'tx_seminars_Model_Event',
+			array('getAvailablePrices', 'getPaymentMethods')
+		);
+		$event->expects($this->any())->method('getAvailablePrices')
+			->will($this->returnValue(array('regular' => 12)));
+		$event->expects($this->any())->method('getPaymentMethods')
+			->will($this->returnValue($paymentMethods));
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration,
+			array('method_of_payment' => $paymentMethod->getUid() + 1)
+		);
+
+		$this->assertSame(
+			$paymentMethod,
+			$registration->getPaymentMethod()
 		);
 
 		$fixture->__destruct();

@@ -664,11 +664,37 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$priceCode = key($availablePrices);
 		}
 		$registration->setPrice($priceCode);
-		$registration->setTotalPrice($availablePrices[$priceCode] * $seats);
+		$totalPrice = $availablePrices[$priceCode] * $seats;
+		$registration->setTotalPrice($totalPrice);
 
 		$attendeesNames = isset($formData['attendees_names'])
 			? strip_tags($formData['attendees_names']) : '';
 		$registration->setAttendeesNames($attendeesNames);
+
+		$kids = isset($formData['kids'])
+			? max(0, intval($formData['kids'])) : 0;
+		$registration->setKids($kids);
+
+		$paymentMethod = null;
+		if ($totalPrice > 0) {
+			$availablePaymentMethods = $event->getPaymentMethods();
+			if (!$availablePaymentMethods->isEmpty()) {
+				if ($availablePaymentMethods->count() == 1) {
+					$paymentMethod = $availablePaymentMethods->first();
+				} else {
+					$paymentMethodUid = isset($formData['method_of_payment'])
+						? max(0, intval($formData['method_of_payment'])) : 0;
+					if (($paymentMethodUid > 0)
+						&& $availablePaymentMethods->hasUid($paymentMethodUid)
+					) {
+						$paymentMethod = tx_oelib_MapperRegistry
+							::get('tx_seminars_Mapper_PaymentMethod')
+							->find($paymentMethodUid);
+					}
+				}
+			}
+		}
+		$registration->setPaymentMethod($paymentMethod);
 	}
 
 	/**

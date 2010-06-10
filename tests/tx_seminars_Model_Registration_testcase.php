@@ -552,6 +552,17 @@ class tx_seminars_Model_Registration_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function setPaymentMethodCanSetPaymentMethodToNull() {
+		$this->fixture->setPaymentMethod(null);
+
+		$this->assertNull(
+			$this->fixture->getPaymentMethod()
+		);
+	}
+
 
 	////////////////////////////////////////
 	// Tests regarding the account number.
