@@ -140,8 +140,8 @@
 			<label index="cancelMailForm_prefillField_messageBody">Leider musste diese Veranstaltung abgesagt werden.</label>
 			<label index="cancelMailForm_prefillField_introduction">Sie hatten sich für die Veranstaltung %s angemeldet.</label>
 			<label index="cancelMailForm_alternativeDate">Alternativtermine entnehmen Sie bitte unserer Homepage:</label>
-			<label index="message_noPageTypeSelected">Bitte wählen Sie einen SysFolder im Seitenbaum aus.</label>
-			<label index="message_noStaticTemplateFound">Kein statisches Template gefunden. Bitte binden Sie das statische seminars-template im TS-Setup dieses SysFolders ein.</label>
+			<label index="message_noPageTypeSelected">Bitte wählen Sie einen SysOrdner im Seitenbaum aus.</label>
+			<label index="message_noStaticTemplateFound">Kein statisches Template gefunden. Bitte binden Sie das statische Template der seminars-Extension im TS-Setup dieses SysOrdners ein.</label>
 			<label index="mailForm_salutation">Anrede</label>
 			<label index="testForm_prefillField_subject">Event getestet</label>
 			<label index="testForm_prefillField_messageBody">Dies ist der Nachrichtenkörper.</label>

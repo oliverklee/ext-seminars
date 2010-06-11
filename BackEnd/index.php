@@ -89,10 +89,13 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		$this->content .= $this->doc->spacer(5);
 
 		if ($this->id <= 0) {
-			echo $this->content . '<p class="errorMessage">' .
-				$GLOBALS['LANG']->getLL('message_noPageTypeSelected') . '</p>' .
-				$this->doc->endPage();
-
+			$message = t3lib_div::makeInstance(
+				't3lib_FlashMessage',
+				$GLOBALS['LANG']->getLL('message_noPageTypeSelected'),
+				'',
+				t3lib_FlashMessage::INFO
+			);
+			echo $this->content . $message->render() . $this->doc->endPage();
 			return;
 		}
 
@@ -104,10 +107,13 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		}
 
 		if (!$this->hasStaticTemplate()) {
-			echo $this->content . '<p class="errorMessage">' .
-				$GLOBALS['LANG']->getLL('message_noStaticTemplateFound') .
-				'</p>' . $this->doc->endPage();
-
+			$message = t3lib_div::makeInstance(
+				't3lib_FlashMessage',
+				$GLOBALS['LANG']->getLL('message_noStaticTemplateFound'),
+				'',
+				t3lib_FlashMessage::WARNING
+			);
+			echo $this->content . $message->render() . $this->doc->endPage();
 			return;
 		}
 

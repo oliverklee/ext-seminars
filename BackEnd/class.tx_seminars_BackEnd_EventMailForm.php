@@ -305,8 +305,13 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 		$result = '';
 
 		if ($this->hasErrorMessage($fieldName)) {
-			$result = '<span class="EventMailForm_error">' .
-				$this->errorMessages[$fieldName] . '</span>';
+			$message = t3lib_div::makeInstance(
+				't3lib_FlashMessage',
+				$this->errorMessages[$fieldName],
+				'',
+				t3lib_FlashMessage::WARNING
+			);
+			$result = $message->render();
 		}
 
 		return $result;
