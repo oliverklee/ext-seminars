@@ -227,10 +227,13 @@ abstract class tx_seminars_BackEnd_List {
 				'</a>' . LF .
 				TAB . TAB .
 				'</div>' . LF;
-			$result .= TAB . TAB .
-				'<div id="eventsList-clear"></div><div id="typo3-storageFolder">' . LF .
-				$storageLabel .
-				'</div>' . LF;
+			$message = t3lib_div::makeInstance(
+				't3lib_FlashMessage',
+				$storageLabel,
+				'',
+				t3lib_FlashMessage::INFO
+			);
+			$result .= '<div id="eventsList-clear"></div>' . $message->render();
 		}
 
 		return $result;
