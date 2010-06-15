@@ -63,11 +63,11 @@ $TYPO3_CONF_VARS['SC_OPTIONS']['GLOBAL']['cliKeys']['seminars'] = array(
 );
 
 $TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getEvents'] = t3lib_extmgm::extPath($_EXTKEY) .
-	'BackEndExtJs/Ajax/class.tx_seminars_BackEndExtJs_Ajax_Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
+	'BackEndExtJs/Ajax/Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
 $TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getRegistrations'] = t3lib_extmgm::extPath($_EXTKEY) .
-	'BackEndExtJs/Ajax/class.tx_seminars_BackEndExtJs_Ajax_Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
+	'BackEndExtJs/Ajax/Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
 $TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getSpeakers'] = t3lib_extmgm::extPath($_EXTKEY) .
-	'BackEndExtJs/Ajax/class.tx_seminars_BackEndExtJs_Ajax_Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
+	'BackEndExtJs/Ajax/Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
 $TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getOrganizers'] = t3lib_extmgm::extPath($_EXTKEY) .
-	'BackEndExtJs/Ajax/class.tx_seminars_BackEndExtJs_Ajax_Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
+	'BackEndExtJs/Ajax/Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
 ?>
