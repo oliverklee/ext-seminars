@@ -149,3 +149,9 @@ td.cancel_button button p {
 #EventMailForm .error {
 	border: 1px solid red;
 }
+
+#print-button {
+	margin-top: 32px;
+	float: right;
+}
+}

@@ -88,6 +88,9 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 			'csv_event_export_button',
 			(!$seminarBag->isEmpty() ? $this->getCsvIcon() : '')
 		);
+		$this->template->setMarker(
+			'label_print_button', $GLOBALS['LANG']->getLL('print')
+		);
 
 		$content .= $this->template->getSubpart('SEMINARS_EVENT_LIST');
 

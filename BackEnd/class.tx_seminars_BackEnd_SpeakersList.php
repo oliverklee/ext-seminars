@@ -124,6 +124,9 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_List {
 		}
 
 		$this->template->setSubpart('SPEAKER_ROW', $tableRows);
+		$this->template->setMarker(
+			'label_print_button', $GLOBALS['LANG']->getLL('print')
+		);
 		$content .= $this->template->getSubpart('SEMINARS_SPEAKER_LIST');
 
 		$content .= $speakerBag->checkConfiguration();

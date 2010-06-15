@@ -126,6 +126,9 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_List {
 			($areAnyRegularRegistrationsVisible ? $this->getCsvIcon() : '')
 		);
 		$this->template->setMarker('complete_table', $registrationTables);
+		$this->template->setMarker(
+			'label_print_button', $GLOBALS['LANG']->getLL('print')
+		);
 
 		$content .= $this->template->getSubpart('SEMINARS_REGISTRATION_LIST');
 		$content .= $this->configCheckWarnings;

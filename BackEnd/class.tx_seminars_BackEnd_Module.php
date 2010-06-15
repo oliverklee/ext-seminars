@@ -36,7 +36,9 @@ require_once(PATH_t3lib . 'class.t3lib_scbase.php');
  */
 class tx_seminars_BackEnd_Module extends t3lib_SCbase {
 	/**
-	 * @var array data of the current BE page
+	 * data of the current BE page
+	 *
+	 * @var array
 	 */
 	private $pageData = array();
 

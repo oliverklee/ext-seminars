@@ -36,6 +36,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
+$LANG->includeLLFile('EXT:lang/locallang_common.xml');
 $LANG->includeLLFile('EXT:lang/locallang_show_rechis.xml');
 $LANG->includeLLFile('EXT:lang/locallang_mod_web_list.xml');
 $LANG->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
@@ -49,14 +50,24 @@ $BE_USER->modAccess($MCONF, 1);
  *
  * @package TYPO3
  * @subpackage tx_seminars
+ *
  * @author Mario Rimann <typo3-coding@rimann.org>
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
-	/** an array of available sub modules */
+	/**
+	 * available sub modules
+	 *
+	 * @var array
+	 */
 	private $availableSubModules;
 
-	/** the currently selected sub module */
+	/**
+	 * the ID of the currently selected sub module
+	 *
+	 * @var integer
+	 */
 	private $subModule;
 
 	/**
@@ -81,7 +92,21 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		$this->doc = t3lib_div::makeInstance('bigDoc');
 		$this->doc->backPath = $BACK_PATH;
 		$this->doc->docType = 'xhtml_strict';
-		$this->doc->styleSheetFile2 = '../typo3conf/ext/seminars/BackEnd/BackEnd.css';
+
+		$this->doc->getPageRenderer()->addCssFile(
+			'BackEnd.css',
+			'stylesheet',
+			'all',
+			'',
+			FALSE
+		);
+		$this->doc->getPageRenderer()->addCssFile(
+			'../Resources/Public/CSS/BackEnd/Print.css',
+			'stylesheet',
+			'print',
+			'',
+			FALSE
+		);
 
 		// draw the header
 		$this->content = $this->doc->startPage($LANG->getLL('title'));

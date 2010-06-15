@@ -109,6 +109,9 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_List {
 			$tableRows .= $this->template->getSubpart('ORGANIZER_ROW');
 		}
 		$this->template->setSubpart('ORGANIZER_ROW', $tableRows);
+		$this->template->setMarker(
+			'label_print_button', $GLOBALS['LANG']->getLL('print')
+		);
 
 		$content .= $this->template->getSubpart('SEMINARS_ORGANIZER_LIST');
 
