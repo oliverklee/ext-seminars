@@ -40,11 +40,11 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 	 * @var array
 	 */
 	static private $locallangFiles = array(
+		'EXT:lang/locallang_core.xml',
 		'EXT:lang/locallang_show_rechis.xml',
 		'EXT:lang/locallang_mod_web_list.xml',
 		'EXT:seminars/BackEnd/locallang.xml',
 		'EXT:seminars/pi2/locallang.xml',
-		'EXT:lang/locallang_core.xml',
 	);
 
 	/**
@@ -122,14 +122,20 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 	 * outputs them as JSON in the page header.
 	 */
 	private function addInlineLanguageLabels() {
+		$language = $GLOBALS['LANG']->lang;
+		$charset = $GLOBALS['LANG']->charSet;
+
 		foreach (self::$locallangFiles as $file) {
-			$localizedLabels = t3lib_div::readLLfile(
-				$file,
-				$GLOBALS['LANG']->lang,
-				$GLOBALS['LANG']->charSet
-			);
+			$labelsInAllLanguages
+				= t3lib_div::readLLfile($file, $language, $charset);
+			$labelsToUse = $labelsInAllLanguages['default'];
+			if ($language !== 'default') {
+				$labelsToUse = array_replace(
+					$labelsToUse, $labelsInAllLanguages[$language]
+				);
+			}
 			$this->getPageRenderer()->addInlineLanguageLabelArray(
-				$localizedLabels[$GLOBALS['LANG']->lang]
+				$labelsToUse
 			);
 		}
 	}
