@@ -4340,6 +4340,83 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
+	public function createRegistrationReturnsRegistration() {
+		$this->createAndLogInFrontEndUser();
+
+		$plugin = new tx_seminars_pi1();
+		$plugin->cObj = $GLOBALS['TSFE']->cObj;
+		$fixture = $this->getMock(
+			'tx_seminars_registrationmanager',
+			array(
+				'notifyAttendee', 'notifyOrganizers',
+				'sendAdditionalNotification', 'setRegistrationData'
+			)
+		);
+
+		$registration = $fixture->createRegistration($this->seminar, array(), $plugin);
+
+		$uid = $fixture->getRegistration()->getUid();
+		// @TODO: This line needs to be removed once createRegistration uses
+		// the data mapper to save the registration.
+		tx_oelib_db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+
+		$this->assertTrue(
+			$registration instanceof tx_seminars_Model_Registration
+		);
+
+		$fixture->__destruct();
+		$plugin->__destruct();
+	}
+
+
+	/**
+	 * @TODO: This is just a transitional test that can be removed once
+	 * createRegistration does not use the old registration model anymore.
+	 *
+	 * @test
+	 */
+	public function createRegistrationCreatesOldAndNewRegistrationModelForTheSameUid() {
+		// Drops the non-saving mapper so that the registration mapper (once we
+		// use it) actually saves the registration.
+		tx_oelib_MapperRegistry::purgeInstance();
+		tx_oelib_MapperRegistry::getInstance()->activateTestingMode(
+			$this->testingFramework
+		);
+		$this->testingFramework->markTableAsDirty('tx_seminars_seminars');
+
+		$this->createAndLogInFrontEndUser();
+
+		$plugin = new tx_seminars_pi1();
+		$plugin->cObj = $GLOBALS['TSFE']->cObj;
+		$fixture = $this->getMock(
+			'tx_seminars_registrationmanager',
+			array(
+				'notifyAttendee', 'notifyOrganizers',
+				'sendAdditionalNotification', 'setRegistrationData'
+			)
+		);
+
+		$registration = $fixture->createRegistration(
+			$this->seminar, array(), $plugin
+		);
+
+		$uid = $fixture->getRegistration()->getUid();
+		// @TODO: This line needs to be removed once createRegistration uses
+		// the data mapper to save the registration.
+		tx_oelib_db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+
+		$this->assertEquals(
+			$registration->getUid(),
+			$fixture->getRegistration()->getUid()
+		);
+
+		$fixture->__destruct();
+		$plugin->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
 	public function createRegistrationCallsSeminarRegistrationCreatedHook() {
 		$this->createAndLoginFrontEndUser();
 

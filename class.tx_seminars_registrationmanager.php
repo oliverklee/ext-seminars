@@ -578,6 +578,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @param array $formData
 	 *        the raw registration data from the registration form
 	 * @param tslib_pibase $plugin live plugin object
+	 *
+	 * @return tx_seminars_Model_Registration the created, saved registration
 	 */
 	public function createRegistration(
 		tx_seminars_seminar $seminar, array $formData, tslib_pibase $plugin
@@ -619,6 +621,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
 			$this->sendAdditionalNotification($this->registration);
 		}
+
+		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+			->find($this->registration->getUid());
 	}
 
 	/**
