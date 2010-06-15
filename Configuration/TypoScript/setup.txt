@@ -124,8 +124,9 @@ plugin.tx_seminars {
 	# whether anyone can access the CSV export function without any checks (use this for testing purposes only!)
 	allowAccessToCsv = 0
 
-	# the charset provided in the HTTP header for CSV export
-	charsetForCsv = utf-8
+	# The charset for the CSV export, e.g., utf-8, iso-8859-1 or iso-8859-15.
+	# The default is iso-9959-15 because Excel has problems with importing utf-8.
+	charsetForCsv = iso-8859-15
 
 	# the filename proposed for CSV export of event lists
 	filenameForEventsCsv = events.csv

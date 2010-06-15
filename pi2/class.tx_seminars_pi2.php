@@ -160,6 +160,18 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 					);
 					break;
 			}
+
+			$dataCharset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
+				? strtolower($GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'])
+				: 'iso-8859-15';
+			$resultCharset = strtolower(
+				$this->configGetter->getConfValueString('charsetForCsv')
+			);
+			if ($dataCharset !== $resultCharset) {
+				$result = $this->getCharsetConversion()->conv(
+					$result, $dataCharset, $resultCharset
+				);
+			}
 		} catch (Exception $exception) {
 			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 				'Status: 500 Internal Server Error'
@@ -185,6 +197,25 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			);
 			$this->configGetter->init();
 		}
+	}
+
+	/**
+	 * Retrieves an active charset conversion instance.
+	 *
+	 * @return t3lib_cs a charset converstion instance
+	 */
+	protected function getCharsetConversion() {
+		if (isset($GLOBALS['TSFE'])) {
+			$instance = $GLOBALS['TSFE']->csConvObj;
+		} elseif (isset($GLOBALS['LANG'])) {
+			$instance = $GLOBALS['LANG']->csConvObj;
+		} else {
+			throw new Exception(
+				'There was neither a front end nor a back end detected.'
+			);
+		}
+
+		return $instance;
 	}
 
 	/**
