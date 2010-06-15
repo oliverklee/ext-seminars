@@ -37,15 +37,41 @@ require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
+	/**
+	 * @var tx_seminars_pi2
+	 */
 	private $fixture;
+
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
-	/** PID of the system folder in which we store our test data */
+	/**
+	 * a backup of $GLOBALS['TYPO3_CONF_VARS']['BE']
+	 *
+	 * @var array
+	 */
+	private $backEndConfigurationBackup;
+
+	/**
+	 * PID of the system folder in which we store our test data
+	 *
+	 * @var integer
+	 */
 	private $pid;
-	/** UID of a test event record */
+
+	/**
+	 * UID of a test event record
+	 *
+	 * @var integer
+	 */
 	private $eventUid;
 
 	public function setUp() {
+		$this->backEndConfigurationBackup = $GLOBALS['TYPO3_CONF_VARS']['BE'];
+		$GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] = 'utf-8';
+
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
 
@@ -64,6 +90,9 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 		$this->fixture = new tx_seminars_pi2();
 		$this->fixture->init(array());
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'charsetForCsv', 'utf-8'
+		);
 	}
 
 	public function tearDown() {
@@ -72,6 +101,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->fixture->__destruct();
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework);
+
+		$GLOBALS['TYPO3_CONF_VARS']['BE'] = $this->backEndConfigurationBackup;
 	}
 
 
@@ -163,7 +194,10 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testMainCanExportOneEventUid() {
+	/**
+	 * @test
+	 */
+	public function mainCanExportOneEventUid() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'uid'
 		);
@@ -634,6 +668,120 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			(string) $secondRegistrationUid,
 			$registrationsList
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function mainCanKeepEventDataInUtf8() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'title'
+		);
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->pid,
+				'title' => 'Schöne Bären führen',
+			)
+		);
+
+		$this->fixture->piVars['table'] = 'tx_seminars_seminars';
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		$this->assertContains(
+			'Schöne Bären führen',
+			$this->fixture->main(null, array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function mainCanChangeEventDataToIso885915() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromEventsForCsv', 'title'
+		);
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->pid,
+				'title' => 'Schöne Bären führen',
+			)
+		);
+
+		$this->fixture->piVars['table'] = 'tx_seminars_seminars';
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'charsetForCsv', 'iso-8859-15'
+		);
+
+		$this->assertContains(
+			'Sch' . chr(246) . 'ne B' . chr(228) . 'ren f' . chr(252) . 'hren',
+			$this->fixture->main(null, array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function mainCanKeepRegistrationDataInUtf8() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'title'
+		);
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'pid' => $this->pid,
+				'title' => 'Schöne Bären führen',
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+
+		$this->fixture->piVars['table'] = 'tx_seminars_attendances';
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		$this->assertContains(
+			'Schöne Bären führen',
+			$this->fixture->main(null, array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function mainCanChangeRegistrationDataToIso885915() {
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromFeUserForCsv', ''
+		);
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'fieldsFromAttendanceForCsv', 'title'
+		);
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'pid' => $this->pid,
+				'title' => 'Schöne Bären führen',
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(),
+			)
+		);
+
+		$this->fixture->piVars['table'] = 'tx_seminars_attendances';
+		$this->fixture->piVars['pid'] = $this->pid;
+
+		$this->fixture->getConfigGetter()->setConfigurationValue(
+			'charsetForCsv', 'iso-8859-15'
+		);
+
+		$this->assertContains(
+			'Sch' . chr(246) . 'ne B' . chr(228) . 'ren f' . chr(252) . 'hren',
+			$this->fixture->main(null, array())
 		);
 	}
 
@@ -1198,7 +1346,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			in_array(
-				'Content-type: text/csv; header=present; charset=',
+				'Content-type: text/csv; header=present; charset=utf-8',
 				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
 					->getAllAddedHeaders()
 			)
@@ -1214,7 +1362,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			in_array(
-				'Content-type: text/csv; header=present; charset=',
+				'Content-type: text/csv; header=present; charset=utf-8',
 				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
 					->getAllAddedHeaders()
 			)
