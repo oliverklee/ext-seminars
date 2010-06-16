@@ -713,6 +713,10 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$accountOwner = isset($formData['account_owner'])
 			? strip_tags($this->unifyWhitespace($formData['account_owner'])) : '';
 		$registration->setAccountOwner($accountOwner);
+
+		$company = isset($formData['company'])
+			? strip_tags($formData['company']) : '';
+		$registration->setCompany($company);
 	}
 
 	/**
