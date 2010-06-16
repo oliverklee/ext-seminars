@@ -700,6 +700,31 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			}
 		}
 		$registration->setPaymentMethod($paymentMethod);
+
+		$accountNumber = isset($formData['account_number'])
+			? strip_tags($this->unifyWhitespace($formData['account_number'])) : '';
+		$registration->setAccountNumber($accountNumber);
+		$bankCode = isset($formData['bank_code'])
+			? strip_tags($this->unifyWhitespace($formData['bank_code'])) : '';
+		$registration->setBankCode($bankCode);
+		$bankName = isset($formData['bank_name'])
+			? strip_tags($this->unifyWhitespace($formData['bank_name'])) : '';
+		$registration->setBankName($bankName);
+		$accountOwner = isset($formData['account_owner'])
+			? strip_tags($this->unifyWhitespace($formData['account_owner'])) : '';
+		$registration->setAccountOwner($accountOwner);
+	}
+
+	/**
+	 * Replaces all non-space whitespace in $rawString with single regular
+	 * spaces.
+	 *
+	 * @param string $rawString the string to unify, may be empty
+	 *
+	 * @return string $rawString with all whitespace changed to regular spaces
+	 */
+	private function unifyWhitespace($rawString) {
+		return preg_replace('/[\r\n\t ]+/', ' ', $rawString);
 	}
 
 	/**

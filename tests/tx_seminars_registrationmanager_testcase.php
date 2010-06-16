@@ -4833,7 +4833,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function setRegistrationDataDropsHtmlsTagsFromAttendeesNames() {
+	public function setRegistrationDataDropsHtmlTagsFromAttendeesNames() {
 		$fixture = tx_oelib_ObjectFactory::make(
 			$this->createAccessibleProxyClass()
 		);
@@ -5292,6 +5292,510 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->assertSame(
 			$paymentMethod,
 			$registration->getPaymentMethod()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNonEmptyAccountNumberSetsAccountNumber() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('account_number' => '123 455 ABC')
+		);
+
+		$this->assertEquals(
+			'123 455 ABC',
+			$registration->getAccountNumber()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataDropsHtmlTagsFromAccountNumber() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('account_number' => '123 <em>455</em> ABC')
+		);
+
+		$this->assertEquals(
+			'123 455 ABC',
+			$registration->getAccountNumber()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataChangesWhitespaceToSpaceInAccountNumber() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration,
+			array('account_number' => '123' . CRLF . '455'  . TAB . ' ABC')
+		);
+
+		$this->assertEquals(
+			'123 455 ABC',
+			$registration->getAccountNumber()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForEmptyAccountNumberSetsEmptyAccountNumber() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('account_number' => '')
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getAccountNumber()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingAccountNumberSetsEmptyAccountNumber() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getAccountNumber()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNonEmptyBankCodeSetsBankCode() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('bank_code' => '123 455 ABC')
+		);
+
+		$this->assertEquals(
+			'123 455 ABC',
+			$registration->getBankCode()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataDropsHtmlTagsFromBankCode() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('bank_code' => '123 <em>455</em> ABC')
+		);
+
+		$this->assertEquals(
+			'123 455 ABC',
+			$registration->getBankCode()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataChangesWhitespaceToSpaceInBankCode() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration,
+			array('bank_code' => '123' . CRLF . '455'  . TAB . ' ABC')
+		);
+
+		$this->assertEquals(
+			'123 455 ABC',
+			$registration->getBankCode()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForEmptyBankCodeSetsEmptyBankCode() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('bank_code' => '')
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getBankCode()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingBankCodeSetsEmptyBankCode() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getBankCode()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNonEmptyBankNameSetsBankName() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('bank_name' => 'Swiss Tax Protection')
+		);
+
+		$this->assertEquals(
+			'Swiss Tax Protection',
+			$registration->getBankName()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataDropsHtmlTagsFromBankName() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('bank_name' => 'Swiss <em>Tax</em> Protection')
+		);
+
+		$this->assertEquals(
+			'Swiss Tax Protection',
+			$registration->getBankName()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataChangesWhitespaceToSpaceInBankName() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration,
+			array('bank_name' => 'Swiss' . CRLF . 'Tax'  . TAB . ' Protection')
+		);
+
+		$this->assertEquals(
+			'Swiss Tax Protection',
+			$registration->getBankName()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForEmptyBankNameSetsEmptyBankName() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('bank_name' => '')
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getBankName()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingBankNameSetsEmptyBankName() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getBankName()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNonEmptyAccountOwnerSetsAccountOwner() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('account_owner' => 'John Doe')
+		);
+
+		$this->assertEquals(
+			'John Doe',
+			$registration->getAccountOwner()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataDropsHtmlTagsFromAccountOwner() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('account_owner' => 'John <em>Doe</em>')
+		);
+
+		$this->assertEquals(
+			'John Doe',
+			$registration->getAccountOwner()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataChangesWhitespaceToSpaceInAccountOwner() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration,
+			array('account_owner' => 'John' . CRLF . TAB . ' Doe')
+		);
+
+		$this->assertEquals(
+			'John Doe',
+			$registration->getAccountOwner()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForEmptyAccountOwnerSetsEmptyAccountOwner() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('account_owner' => '')
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getAccountOwner()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingAccountOwnerSetsEmptyAccountOwner() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getAccountOwner()
 		);
 
 		$fixture->__destruct();
