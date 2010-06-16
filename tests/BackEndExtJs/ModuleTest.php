@@ -32,6 +32,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 	/**
@@ -69,11 +70,31 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$pageRenderer->expects($this->at(0))
 			->method('addCssFile')
 			->with(
-				$this->equalTo('../Resources/Public/CSS/BackEndExtJs/BackEnd.css'),
-				$this->equalTo('stylesheet'),
-				$this->equalTo('all'),
-				$this->equalTo(''),
-				$this->equalTo(FALSE)
+				'../Resources/Public/CSS/BackEndExtJs/BackEnd.css',
+				'stylesheet',
+				'all',
+				'',
+				FALSE
+			);
+
+		$this->fixture->main();
+	}
+
+	/**
+	 * @test
+	 */
+	public function mainAddsPrintCssFileToPageRenderer() {
+		$pageRenderer = $this->getMock('t3lib_PageRenderer', array('addCssFile'));
+		$this->fixture->setPageRenderer($pageRenderer);
+
+		$pageRenderer->expects($this->at(1))
+			->method('addCssFile')
+			->with(
+				'../Resources/Public/CSS/BackEndExtJs/Print.css',
+				'stylesheet',
+				'print',
+				'',
+				FALSE
 			);
 
 		$this->fixture->main();
@@ -89,10 +110,10 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$pageRenderer->expects($this->at(0))
 			->method('addJsFile')
 			->with(
-				$this->equalTo('../Resources/Public/JavaScript/BackEndExtJs/BackEnd.js'),
-				$this->equalTo('text/javascript'),
-				$this->equalTo(FALSE),
-				$this->equalTo(TRUE)
+				'../Resources/Public/JavaScript/BackEndExtJs/BackEnd.js',
+				'text/javascript',
+				FALSE,
+				TRUE
 			);
 
 		$this->fixture->main();
@@ -120,7 +141,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setPageRenderer($pageRenderer);
 
-		$pageRenderer->expects($this->exactly(5))
+		$pageRenderer->expects($this->exactly(6))
 			->method('addInlineLanguageLabelArray');
 
 		$this->fixture->main();
@@ -137,7 +158,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$GLOBALS['BE_USER']
 			->expects($this->at(0))
 			->method('check')
-			->with($this->equalTo('tables_select'), $this->equalTo('tx_seminars_seminars'));
+			->with('tables_select', 'tx_seminars_seminars');
 
 		$this->fixture->main();
 	}
@@ -153,7 +174,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$GLOBALS['BE_USER']
 			->expects($this->at(2))
 			->method('check')
-			->with($this->equalTo('tables_select'), $this->equalTo('tx_seminars_attendances'));
+			->with('tables_select', 'tx_seminars_attendances');
 
 		$this->fixture->main();
 	}
@@ -169,7 +190,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$GLOBALS['BE_USER']
 			->expects($this->at(4))
 			->method('check')
-			->with($this->equalTo('tables_select'), $this->equalTo('tx_seminars_speakers'));
+			->with('tables_select', 'tx_seminars_speakers');
 
 		$this->fixture->main();
 	}
@@ -185,7 +206,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$GLOBALS['BE_USER']
 			->expects($this->at(6))
 			->method('check')
-			->with($this->equalTo('tables_select'), $this->equalTo('tx_seminars_organizers'));
+			->with('tables_select', 'tx_seminars_organizers');
 
 		$this->fixture->main();
 	}
@@ -201,7 +222,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$GLOBALS['BE_USER']
 			->expects($this->at(1))
 			->method('check')
-			->with($this->equalTo('tables_modify'), $this->equalTo('tx_seminars_seminars'));
+			->with('tables_modify', 'tx_seminars_seminars');
 
 		$this->fixture->main();
 	}
@@ -217,7 +238,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$GLOBALS['BE_USER']
 			->expects($this->at(3))
 			->method('check')
-			->with($this->equalTo('tables_modify'), $this->equalTo('tx_seminars_attendances'));
+			->with('tables_modify', 'tx_seminars_attendances');
 
 		$this->fixture->main();
 	}
@@ -233,7 +254,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$GLOBALS['BE_USER']
 			->expects($this->at(5))
 			->method('check')
-			->with($this->equalTo('tables_modify'), $this->equalTo('tx_seminars_speakers'));
+			->with('tables_modify', 'tx_seminars_speakers');
 
 		$this->fixture->main();
 	}
@@ -249,7 +270,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$GLOBALS['BE_USER']
 			->expects($this->at(7))
 			->method('check')
-			->with($this->equalTo('tables_modify'), $this->equalTo('tx_seminars_organizers'));
+			->with('tables_modify', 'tx_seminars_organizers');
 
 		$this->fixture->main();
 	}
@@ -265,10 +286,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 
 		$pageRenderer->expects($this->at(0))
 			->method('addInlineSetting')
-			->with(
-				$this->equalTo(FALSE),
-				$this->equalTo('PID')
-			);
+			->with(FALSE, 'PID');
 
 		$this->fixture->main();
 	}

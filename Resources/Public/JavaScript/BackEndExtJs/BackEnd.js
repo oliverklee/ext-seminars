@@ -258,6 +258,20 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 	bbar: new Ext.PagingToolbar({
 		pageSize: 50,
 		store: Ext.StoreMgr.get('typo3-backend-seminars-events-store'),
+		items: [
+			'->',
+			{
+				xtype: 'button',
+				text: TYPO3.lang.print,
+				listeners: {
+					'click': {
+						fn: function() {
+							window.print();
+						}
+					}
+				}
+			}
+		]
 	}),
 	listeners: {
 		'rowcontextmenu': {
@@ -423,6 +437,20 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 	bbar: new Ext.PagingToolbar({
 		pageSize: 50,
 		store: Ext.StoreMgr.get('typo3-backend-seminars-registrations-store'),
+		items: [
+			'->',
+			{
+				xtype: 'button',
+				text: TYPO3.lang.print,
+				listeners: {
+					'click': {
+						fn: function() {
+							window.print();
+						}
+					}
+				}
+			}
+		]
 	}),
 	listeners: {
 		'rowcontextmenu': {
@@ -558,6 +586,20 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 	bbar: new Ext.PagingToolbar({
 		pageSize: 50,
 		store: Ext.StoreMgr.get('typo3-backend-seminars-speakers-store'),
+		items: [
+			'->',
+			{
+				xtype: 'button',
+				text: TYPO3.lang.print,
+				listeners: {
+					'click': {
+						fn: function() {
+							window.print();
+						}
+					}
+				}
+			}
+		]
 	}),
 	listeners: {
 		'rowcontextmenu': {
@@ -693,6 +735,20 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 	bbar: new Ext.PagingToolbar({
 		pageSize: 50,
 		store: Ext.StoreMgr.get('typo3-backend-seminars-organizers-store'),
+		items: [
+			'->',
+			{
+				xtype: 'button',
+				text: TYPO3.lang.print,
+				listeners: {
+					'click': {
+						fn: function() {
+							window.print();
+						}
+					}
+				}
+			}
+		]
 	}),
 	listeners: {
 		'rowcontextmenu': {

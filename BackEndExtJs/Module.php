@@ -32,6 +32,7 @@ require_once($GLOBALS['BACK_PATH'] . 'template.php');
  *
  * @author Mario Rimann <typo3-coding@rimann.org>
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 	/**
@@ -40,6 +41,7 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 	 * @var array
 	 */
 	static private $locallangFiles = array(
+		'EXT:lang/locallang_common.xml',
 		'EXT:lang/locallang_core.xml',
 		'EXT:lang/locallang_show_rechis.xml',
 		'EXT:lang/locallang_mod_web_list.xml',
@@ -73,6 +75,13 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 			'../Resources/Public/CSS/BackEndExtJs/BackEnd.css',
 			'stylesheet',
 			'all',
+			'',
+			FALSE
+		);
+		$this->getPageRenderer()->addCssFile(
+			'../Resources/Public/CSS/BackEndExtJs/Print.css',
+			'stylesheet',
+			'print',
 			'',
 			FALSE
 		);
