@@ -982,7 +982,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if ($this->hasFoods()) {
 			$result = $this->getMmRecords(
 				SEMINARS_TABLE_FOODS,
-				SEMINARS_TABLE_ATTENDANCES_FOODS_MM
+				'tx_seminars_attendances_foods_mm'
 			);
 		}
 
@@ -1078,7 +1078,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 					$this->lodgings
 				);
 				$this->createMmRecords(
-					SEMINARS_TABLE_ATTENDANCES_FOODS_MM,
+					'tx_seminars_attendances_foods_mm',
 					$this->foods
 				);
 				$this->createMmRecords(

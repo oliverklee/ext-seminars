@@ -41,8 +41,6 @@ define('SEMINARS_TABLE_PARTNER_MAIN', 'tx_partner_main');
 define('SEMINARS_TABLE_PARTNER_CONTACT_INFO', 'tx_partner_contact_info');
 define('SEMINARS_TABLE_PRICES', 'tx_seminars_prices');
 
-define('SEMINARS_TABLE_SEMINARS_FOODS_MM', 'tx_seminars_seminars_foods_mm');
-define('SEMINARS_TABLE_ATTENDANCES_FOODS_MM', 'tx_seminars_attendances_foods_mm');
 define('SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM', 'tx_seminars_timeslots_speakers_mm');
 define('SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM', 'tx_seminars_seminars_target_groups_mm');
 define('SEMINARS_TABLE_SEMINARS_CATEGORIES_MM', 'tx_seminars_seminars_categories_mm');
