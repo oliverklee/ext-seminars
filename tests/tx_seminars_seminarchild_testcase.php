@@ -249,7 +249,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM,
+			'tx_seminars_seminars_categories_mm',
 			$this->fixture->getUid(), $uid, $sorting
 		);
 		$this->fixture->setNumberOfCategories(
@@ -522,7 +522,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			0,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_CATEGORIES_MM,
+				'tx_seminars_seminars_categories_mm',
 				'uid_local='.$this->fixture->getUid()
 			)
 		);
@@ -531,7 +531,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_CATEGORIES_MM,
+				'tx_seminars_seminars_categories_mm',
 				'uid_local='.$this->fixture->getUid()
 			)
 		);
@@ -540,7 +540,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			2,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_CATEGORIES_MM,
+				'tx_seminars_seminars_categories_mm',
 				'uid_local='.$this->fixture->getUid()
 			)
 		);
@@ -551,7 +551,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_CATEGORIES_MM,
+				'tx_seminars_seminars_categories_mm',
 				'uid_local=' . $this->fixture->getUid() . ' AND sorting=42'
 			)
 		);

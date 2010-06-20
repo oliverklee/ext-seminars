@@ -122,7 +122,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 
 		$directMatchUids = tx_oelib_db::selectColumnForMultiple(
 			'uid_local',
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM,
+			'tx_seminars_seminars_categories_mm',
 			'uid_foreign IN(' . $categoryUids . ')'
 		);
 		if (empty($directMatchUids)) {
@@ -711,7 +711,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			$searchWord,
 			'categories',
 			SEMINARS_TABLE_CATEGORIES,
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM
+			'tx_seminars_seminars_categories_mm'
 		);
 	}
 

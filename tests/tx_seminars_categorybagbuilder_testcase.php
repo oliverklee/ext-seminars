@@ -105,7 +105,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
+			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
 		);
 		$bag = $this->fixture->build();
 
@@ -127,7 +127,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
+			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
 		);
 
 		$this->fixture->limitToEvents('');
@@ -189,7 +189,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
+			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
 		);
 
 		$this->fixture->limitToEvents($eventUid);
@@ -214,14 +214,14 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid1
+			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid1
 		);
 
 		$categoryUid2 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_CATEGORIES
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid2
+			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid2
 		);
 
 		$this->fixture->limitToEvents($eventUid);
@@ -245,7 +245,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid1, $categoryUid1
+			'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid1
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
@@ -255,7 +255,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid2, $categoryUid2
+			'tx_seminars_seminars_categories_mm', $eventUid2, $categoryUid2
 		);
 
 		$this->fixture->limitToEvents($eventUid1.','.$eventUid2);
@@ -279,7 +279,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
+			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
 		);
 
 		$this->fixture->limitToEvents($eventUid);
@@ -304,7 +304,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid1, $categoryUid1
+			'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid1
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
@@ -314,7 +314,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid2, $categoryUid2
+			'tx_seminars_seminars_categories_mm', $eventUid2, $categoryUid2
 		);
 
 		$this->fixture->limitToEvents($eventUid1);
@@ -344,7 +344,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_CATEGORIES
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid1, $categoryUid
+			'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
