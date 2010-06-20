@@ -440,7 +440,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$registration->enableTestMode();
 		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_ATTENDANCES);
 		$this->testingFramework->markTableAsDirty(
-			SEMINARS_TABLE_ATTENDANCES_LODGINGS_MM
+			'tx_seminars_attendances_lodgings_mm'
 		);
 
 		$this->assertTrue(
@@ -460,7 +460,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_ATTENDANCES_LODGINGS_MM,
+				'tx_seminars_attendances_lodgings_mm',
 				'uid_local='.$registration->getUid()
 					.' AND uid_foreign='.$lodgingsUid
 			),

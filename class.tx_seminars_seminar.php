@@ -3321,7 +3321,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		if ($this->hasLodgings()) {
 			$result = $this->getMmRecords(
 				SEMINARS_TABLE_LODGINGS,
-				SEMINARS_TABLE_SEMINARS_LODGINGS_MM,
+				'tx_seminars_seminars_lodgings_mm',
 				FALSE
 			);
 		}

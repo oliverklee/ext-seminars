@@ -6705,7 +6705,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_LODGINGS, array('title' => 'foo')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LODGINGS_MM,
+			'tx_seminars_seminars_lodgings_mm',
 			$this->fixture->getUid(), $lodgingUid1
 		);
 
@@ -6713,7 +6713,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_LODGINGS, array('title' => 'bar')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LODGINGS_MM,
+			'tx_seminars_seminars_lodgings_mm',
 			$this->fixture->getUid(), $lodgingUid2
 		);
 
@@ -6733,7 +6733,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_LODGINGS, array('title' => 'foo')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LODGINGS_MM,
+			'tx_seminars_seminars_lodgings_mm',
 			$this->fixture->getUid(), $lodgingUid1
 		);
 
@@ -6741,7 +6741,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_LODGINGS, array('title' => 'bar')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LODGINGS_MM,
+			'tx_seminars_seminars_lodgings_mm',
 			$this->fixture->getUid(), $lodgingUid2
 		);
 

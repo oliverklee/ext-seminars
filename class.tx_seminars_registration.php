@@ -952,7 +952,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if ($this->hasLodgings()) {
 			$result = $this->getMmRecords(
 				SEMINARS_TABLE_LODGINGS,
-				SEMINARS_TABLE_ATTENDANCES_LODGINGS_MM
+				'tx_seminars_attendances_lodgings_mm'
 			);
 		}
 
@@ -1074,7 +1074,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			$this->recordData['uid'] = $GLOBALS['TYPO3_DB']->sql_insert_id();
 			if ($this->hasUid()) {
 				$this->createMmRecords(
-					SEMINARS_TABLE_ATTENDANCES_LODGINGS_MM,
+					'tx_seminars_attendances_lodgings_mm',
 					$this->lodgings
 				);
 				$this->createMmRecords(
