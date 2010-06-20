@@ -512,10 +512,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$countryData = tx_oelib_db::selectMultiple(
 			'country',
 			SEMINARS_TABLE_SITES . ' LEFT JOIN ' .
-				SEMINARS_TABLE_SEMINARS_SITES_MM . ' ON ' . SEMINARS_TABLE_SITES .
-				'.uid = ' . SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_foreign' .
+				'tx_seminars_seminars_place_mm ON ' . SEMINARS_TABLE_SITES .
+				'.uid = tx_seminars_seminars_place_mm.uid_foreign' .
 				' LEFT JOIN ' . SEMINARS_TABLE_SEMINARS . ' ON ' .
-				SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_local = ' .
+				'tx_seminars_seminars_place_mm.uid_local = ' .
 				SEMINARS_TABLE_SEMINARS . '.uid',
 			SEMINARS_TABLE_SEMINARS . '.uid = ' . $this->getUid() .
 				' AND ' . SEMINARS_TABLE_SITES . '.country != ""' .
@@ -611,9 +611,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		// Fetches the city name from the corresponding place record(s).
 		$cityData = tx_oelib_db::selectMultiple(
 			'city',
-			SEMINARS_TABLE_SITES . ' LEFT JOIN ' . SEMINARS_TABLE_SEMINARS_SITES_MM .
+			SEMINARS_TABLE_SITES . ' LEFT JOIN tx_seminars_seminars_place_mm' .
 				' ON ' . SEMINARS_TABLE_SITES . '.uid = ' .
-				SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_foreign',
+				'tx_seminars_seminars_place_mm.uid_foreign',
 			'uid_local = ' . $this->getUid(),
 			'uid_foreign'
 		);
@@ -721,7 +721,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	protected function getPlacesAsArray() {
 		return tx_oelib_db::selectMultiple(
 			'title, address, zip, city, country, homepage, directions',
-			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SEMINARS_SITES_MM,
+			SEMINARS_TABLE_SITES . ', tx_seminars_seminars_place_mm',
 			'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
@@ -743,7 +743,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$places = tx_oelib_db::selectMultiple(
 			'title',
-			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SEMINARS_SITES_MM,
+			SEMINARS_TABLE_SITES . ', tx_seminars_seminars_place_mm',
 			'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
@@ -4196,8 +4196,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		// Removes all place relations of the current event.
 		tx_oelib_db::delete(
-			SEMINARS_TABLE_SEMINARS_SITES_MM,
-			SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_local = ' . $this->getUid()
+			'tx_seminars_seminars_place_mm',
+			'tx_seminars_seminars_place_mm.uid_local = ' . $this->getUid()
 		);
 
 		// Creates an array with all place UIDs which should be related to this
@@ -4210,7 +4210,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		return $this->createMmRecords(
-			SEMINARS_TABLE_SEMINARS_SITES_MM, $placesOfTimeSlots
+			'tx_seminars_seminars_place_mm', $placesOfTimeSlots
 		);
 	}
 
@@ -4687,7 +4687,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$places = tx_oelib_db::selectMultiple(
 			'uid, title, address, zip, city, country, homepage, directions',
-			SEMINARS_TABLE_SITES . ', ' . SEMINARS_TABLE_SEMINARS_SITES_MM,
+			SEMINARS_TABLE_SITES . ', tx_seminars_seminars_place_mm',
 			'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);

@@ -149,7 +149,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SITES_MM,
+			'tx_seminars_seminars_place_mm',
 			$this->fixture->getUid(), $uid
 		);
 		$this->fixture->setNumberOfPlaces(
@@ -462,7 +462,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			0,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_SITES_MM,
+				'tx_seminars_seminars_place_mm',
 				'uid_local=' . $this->fixture->getUid()
 			)
 		);
@@ -471,7 +471,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_SITES_MM,
+				'tx_seminars_seminars_place_mm',
 				'uid_local=' . $this->fixture->getUid()
 			)
 		);
@@ -480,7 +480,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			2,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_SITES_MM,
+				'tx_seminars_seminars_place_mm',
 				'uid_local=' . $this->fixture->getUid()
 			)
 		);
@@ -2432,7 +2432,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function testGetRelatedMmRecordUidsWithNoPlace() {
 		$this->assertEquals(
 			array(),
-			$this->fixture->getRelatedMmRecordUids(SEMINARS_TABLE_SEMINARS_SITES_MM)
+			$this->fixture->getRelatedMmRecordUids('tx_seminars_seminars_place_mm')
 		);
 	}
 
@@ -2445,7 +2445,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			array($uid),
-			$this->fixture->getRelatedMmRecordUids(SEMINARS_TABLE_SEMINARS_SITES_MM)
+			$this->fixture->getRelatedMmRecordUids('tx_seminars_seminars_place_mm')
 		);
 	}
 
@@ -2462,7 +2462,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$result = $this->fixture->getRelatedMmRecordUids(
-			SEMINARS_TABLE_SEMINARS_SITES_MM
+			'tx_seminars_seminars_place_mm'
 		);
 		sort($result);
 		$this->assertEquals(

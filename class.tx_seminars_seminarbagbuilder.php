@@ -161,10 +161,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		);
 
 		$this->whereClauseParts['places'] = 'EXISTS (SELECT * FROM ' .
-			SEMINARS_TABLE_SEMINARS_SITES_MM . ' WHERE ' .
-			SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_local=' .
+			'tx_seminars_seminars_place_mm WHERE ' .
+			'tx_seminars_seminars_place_mm.uid_local = ' .
 			SEMINARS_TABLE_SEMINARS . '.uid AND ' .
-			SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_foreign IN(' . $safePlaceUids . ')' .
+			'tx_seminars_seminars_place_mm.uid_foreign IN(' . $safePlaceUids . ')' .
 		')';
 	}
 
@@ -368,11 +368,11 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['cities'] = SEMINARS_TABLE_SEMINARS . '.uid IN(' .
 			'SELECT ' . SEMINARS_TABLE_SEMINARS . '.uid' .
 			' FROM ' . SEMINARS_TABLE_SEMINARS .
-			' LEFT JOIN ' . SEMINARS_TABLE_SEMINARS_SITES_MM . ' ON ' .
+			' LEFT JOIN tx_seminars_seminars_place_mm ON ' .
 				SEMINARS_TABLE_SEMINARS . '.uid=' .
-				SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_local' .
+				'tx_seminars_seminars_place_mm.uid_local' .
 			' LEFT JOIN ' . SEMINARS_TABLE_SITES . ' ON ' .
-				SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_foreign=' .
+				'tx_seminars_seminars_place_mm.uid_foreign = ' .
 				SEMINARS_TABLE_SITES . '.uid' .
 			' WHERE ' . SEMINARS_TABLE_SITES .
 				'.city IN(' . $cityNames . ')' .
@@ -404,11 +404,11 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['countries'] = SEMINARS_TABLE_SEMINARS . '.uid IN(' .
 			'SELECT ' . SEMINARS_TABLE_SEMINARS . '.uid' .
 			' FROM ' . SEMINARS_TABLE_SEMINARS .
-			' LEFT JOIN ' . SEMINARS_TABLE_SEMINARS_SITES_MM . ' ON ' .
+			' LEFT JOIN tx_seminars_seminars_place_mm ON ' .
 				SEMINARS_TABLE_SEMINARS . '.uid=' .
-				SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_local' .
+				'tx_seminars_seminars_place_mm.uid_local' .
 			' LEFT JOIN ' . SEMINARS_TABLE_SITES . ' ON ' .
-				SEMINARS_TABLE_SEMINARS_SITES_MM . '.uid_foreign=' .
+				'tx_seminars_seminars_place_mm.uid_foreign = ' .
 				SEMINARS_TABLE_SITES . '.uid' .
 			' WHERE ' . SEMINARS_TABLE_SITES .
 				'.country IN(' . $countryCodes . ')' .
@@ -795,7 +795,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			$searchWord,
 			'places',
 			SEMINARS_TABLE_SITES,
-			SEMINARS_TABLE_SEMINARS_SITES_MM
+			'tx_seminars_seminars_place_mm'
 		);
 	}
 
