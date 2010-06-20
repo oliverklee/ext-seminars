@@ -136,9 +136,9 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 				= t3lib_div::readLLfile($file, $language, $charset);
 			$labelsToUse = $labelsInAllLanguages['default'];
 			if ($language !== 'default') {
-				$labelsToUse = array_replace(
-					$labelsToUse, $labelsInAllLanguages[$language]
-				);
+				foreach ($labelsInAllLanguages[$language] as $key => $value) {
+					$labelsToUse[$key] = $value;
+				}
 			}
 			$this->getPageRenderer()->addInlineLanguageLabelArray(
 				$labelsToUse
