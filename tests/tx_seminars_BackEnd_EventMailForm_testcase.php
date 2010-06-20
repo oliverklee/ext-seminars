@@ -94,9 +94,10 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array(
-				'organizers' => 0,
+				'organizers' => 1,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
 				'title' => 'Dummy Event',
+				'registrations' => 1,
 			)
 		);
 
@@ -348,14 +349,14 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////
-	// Tests for sendEmailToRegistrations
-	///////////////////////////////////////
+	///////////////////////////////////
+	// Tests for sendEmailToAttendees
+	///////////////////////////////////
 
 	/**
 	 * @test
 	 */
-	public function sendEmailToRegistrationsSendsEmailWithSubjectOnSubmitOfValidForm() {
+	public function sendEmailToAttendeesSendsEmailWithSubjectOnSubmitOfValidForm() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -370,6 +371,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 			array(
 				'action' => 'confirmEvent',
 				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 			)
@@ -382,11 +384,10 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-
 	/**
 	 * @test
 	 */
-	public function sendEmailToRegistrationsForAttendeeWithoutEMailAddressDoesNotSendMail() {
+	public function sendEmailToAttendeesForAttendeeWithoutEMailAddressDoesNotSendMail() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -400,6 +401,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 			array(
 				'action' => 'confirmEvent',
 				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 			)
@@ -415,7 +417,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function sendEmailToRegistrationsInsertsUserNameIntoMailText() {
+	public function sendEmailToAttendeesInsertsUserNameIntoMailText() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -433,6 +435,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 			array(
 				'action' => 'confirmEvent',
 				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
 				'subject' => 'foo',
 				'messageBody' => 'foo bar %' .
 					$GLOBALS['LANG']->getLL('mailForm_salutation'),
@@ -451,7 +454,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function sendEmailToRegistrationsWithoutReplacementMarkerInBodyDoesNotCrash() {
+	public function sendEmailToAttendeesWithoutReplacementMarkerInBodyDoesNotCrash() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -469,6 +472,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 			array(
 				'action' => 'confirmEvent',
 				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
 				'subject' => 'foo',
 				'messageBody' => 'foo bar foo',
 			)
@@ -480,7 +484,13 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function sendEmailToRegistrationsUsesSelectedOrganizerAsSender() {
+	public function sendEmailToAttendeesUsesSelectedOrganizerAsSender() {
+		$secondOrganizer = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Organizer')->getLoadedTestingModel(array(
+				'title' => 'Second Organizer',
+				'email' => 'bar@example.org',
+			));
+
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -498,13 +508,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
-				'sender' => $this->testingFramework->createRecord(
-					SEMINARS_TABLE_ORGANIZERS,
-					array(
-						'title' => 'Second Organizer',
-						'email' => 'bar@example.org',
-					)
-				)
+				'sender' => (string) $secondOrganizer->getUid(),
 			)
 		);
 		$this->fixture->render();
@@ -518,7 +522,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function sendEmailToRegistrationsForEventWithTwoRegistrationsSendsTwoEmails() {
+	public function sendEmailToAttendeesForEventWithTwoRegistrationsSendsTwoEmails() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -546,13 +550,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
-				'sender' => $this->testingFramework->createRecord(
-					SEMINARS_TABLE_ORGANIZERS,
-					array(
-						'title' => 'Second Organizer',
-						'email' => 'bar@example.org',
-					)
-				)
+				'sender' => $this->organizerUid,
 			)
 		);
 		$this->fixture->render();
@@ -566,7 +564,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function sendEmailToRegistrationsAppendsOrganizersFooterToMessageBodyIfSet() {
+	public function sendEmailToAttendeesAppendsOrganizersFooterToMessageBodyIfSet() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -577,7 +575,14 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 				)
 			)
 		);
+
 		$organizerFooter = 'organizer footer';
+		$secondOrganizer = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Organizer')->getLoadedTestingModel(array(
+				'title' => 'Second Organizer',
+				'email' => 'bar@example.org',
+				'email_footer' => $organizerFooter,
+			));
 
 		$this->fixture->setPostData(
 			array(
@@ -585,14 +590,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 				'isSubmitted' => '1',
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
-				'sender' => $this->testingFramework->createRecord(
-					SEMINARS_TABLE_ORGANIZERS,
-					array(
-						'title' => 'Second Organizer',
-						'email' => 'bar@example.org',
-						'email_footer' => $organizerFooter,
-					)
-				)
+				'sender' => (string) $secondOrganizer->getUid(),
 			)
 		);
 		$this->fixture->render();
@@ -608,7 +606,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function sendEmailToRegistrationsForOrganizerWithoutFooterDoesNotAppendFooterMarkersToMessageBody() {
+	public function sendEmailToAttendeesForOrganizerWithoutFooterDoesNotAppendFooterMarkersToMessageBody() {
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_ATTENDANCES,
 			array(
@@ -625,9 +623,9 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 			array(
 				'action' => 'confirmEvent',
 				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
-				'sender' => $this->organizerUid
 			)
 		);
 		$this->fixture->render();
@@ -650,6 +648,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 			array(
 				'action' => 'confirmEvent',
 				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 			)

@@ -385,15 +385,15 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 * Sends an e-mail to the attendees to inform about the changed event state.
 	 */
 	private function sendEmailToAttendees() {
-		$organizer = tx_oelib_ObjectFactory::make(
-			'tx_seminars_organizer', intval($this->getPostData('sender'))
-		);
+		$organizer = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer')
+			->find(intval($this->getPostData('sender')));
 
 		$registrationBagBuilder
 			= tx_oelib_ObjectFactory::make('tx_seminars_registrationBagBuilder');
 		$registrationBagBuilder->limitToEvent($this->getEvent()->getUid());
 		$registrations = $registrationBagBuilder->build();
 
+		$mailer = tx_oelib_mailerFactory::getInstance()->getMailer();
 		foreach ($registrations as $registration) {
 			if (!$registration->getFrontEndUser()->hasEMailAddress()) {
 				continue;
@@ -408,11 +408,10 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 				)
 			);
 
-			tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
+			$mailer->send($eMail);
 			$eMail->__destruct();
 		}
 
-		$organizer->__destruct();
 		$registrations->__destruct();
 	}
 
@@ -534,15 +533,16 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 * Creates the message body for the e-mail.
 	 *
 	 * @param tx_seminars_Model_FrontEndUser $user the recipient of the e-mail
-	 * @param tx_seminars_organizer $organizer
-	 *                              the organizer which is selected as sender
+	 * @param tx_seminars_Model_Organizer $organizer
+	 *        the organizer which is selected as sender
 	 *
 	 * @return string the messsage with the salutation replaced by the user's
 	 *                name, will be empty if no message has been set in the POST
 	 *                data
 	 */
 	private function createMessageBody(
-		tx_seminars_Model_FrontEndUser $user, tx_seminars_organizer $organizer
+		tx_seminars_Model_FrontEndUser $user,
+		tx_seminars_Model_Organizer $organizer
 	) {
 		$salutation = tx_oelib_ObjectFactory::make('tx_seminars_EmailSalutation');
 		$messageText = str_replace(
@@ -551,9 +551,8 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 			$this->getPostData('messageBody')
 		);
 		$salutation->__destruct();
-		$organizerFooter = $organizer->getEmailFooter();
-		$messageFooter = ($organizerFooter != '') ? LF . '-- ' . LF .
-			$organizerFooter : '';
+		$messageFooter = $organizer->hasEmailFooter()
+			? LF . '-- ' . LF . $organizer->getEmailFooter() : '';
 
 		return $messageText . $messageFooter;
 	}

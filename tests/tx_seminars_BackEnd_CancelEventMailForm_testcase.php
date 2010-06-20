@@ -398,6 +398,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 			array(
 				'action' => 'cancelEvent',
 				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
 				'subject' => 'foo',
 				'messageBody' => 'foo bar',
 			)
@@ -437,6 +438,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 			array(
 				'action' => 'confirmEvent',
 				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
 				'subject' => 'foo',
 				'messageBody' => $messageBody,
 			)
