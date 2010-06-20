@@ -1012,7 +1012,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 		if ($this->hasCheckboxes()) {
 			$result = $this->getMmRecords(
 				SEMINARS_TABLE_CHECKBOXES,
-				SEMINARS_TABLE_ATTENDANCES_CHECKBOXES_MM
+				'tx_seminars_attendances_checkboxes_mm'
 			);
 		}
 
@@ -1082,7 +1082,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 					$this->foods
 				);
 				$this->createMmRecords(
-					SEMINARS_TABLE_ATTENDANCES_CHECKBOXES_MM,
+					'tx_seminars_attendances_checkboxes_mm',
 					$this->checkboxes
 				);
 			}

@@ -3385,7 +3385,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		if ($this->hasCheckboxes()) {
 			$result = $this->getMmRecords(
 				SEMINARS_TABLE_CHECKBOXES,
-				SEMINARS_TABLE_SEMINARS_CHECKBOXES_MM,
+				'tx_seminars_seminars_checkboxes_mm',
 				TRUE
 			);
 		}
