@@ -133,7 +133,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM, $eventUid, $speakerUid
+			'tx_seminars_seminars_speakers_mm', $eventUid, $speakerUid
 		);
 	}
 
@@ -191,7 +191,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_SEMINARS_SPEAKERS_MM, '1=1'
+				'tx_seminars_seminars_speakers_mm', '1=1'
 			)
 		);
 	}

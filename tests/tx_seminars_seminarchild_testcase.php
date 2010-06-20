@@ -299,7 +299,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$this->fixture->getUid(), $uid
 		);
 		$this->fixture->setNumberOfSpeakers(
@@ -323,7 +323,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$this->fixture->getUid(), $uid
 		);
 		$this->fixture->setNumberOfPartners(
@@ -347,7 +347,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$this->fixture->getUid(), $uid
 		);
 		$this->fixture->setNumberOfTutors(
@@ -371,7 +371,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$this->fixture->getUid(), $uid
 		);
 		$this->fixture->setNumberOfLeaders(
@@ -751,7 +751,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			0,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+				'tx_seminars_seminars_speakers_mm',
 				'uid_local='.$this->fixture->getUid()
 			)
 
@@ -761,7 +761,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+				'tx_seminars_seminars_speakers_mm',
 				'uid_local='.$this->fixture->getUid()
 			)
 		);
@@ -770,7 +770,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			2,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+				'tx_seminars_seminars_speakers_mm',
 				'uid_local='.$this->fixture->getUid()
 			)
 		);
@@ -795,7 +795,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			0,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+				'tx_seminars_seminars_speakers_mm_partners',
 				'uid_local='.$this->fixture->getUid()
 			)
 
@@ -805,7 +805,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+				'tx_seminars_seminars_speakers_mm_partners',
 				'uid_local='.$this->fixture->getUid()
 			)
 		);
@@ -814,7 +814,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			2,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+				'tx_seminars_seminars_speakers_mm_partners',
 				'uid_local='.$this->fixture->getUid()
 			)
 		);
@@ -839,7 +839,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			0,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+				'tx_seminars_seminars_speakers_mm_tutors',
 				'uid_local='.$this->fixture->getUid()
 			)
 
@@ -849,7 +849,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+				'tx_seminars_seminars_speakers_mm_tutors',
 				'uid_local='.$this->fixture->getUid()
 			)
 		);
@@ -858,7 +858,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			2,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+				'tx_seminars_seminars_speakers_mm_tutors',
 				'uid_local='.$this->fixture->getUid()
 			)
 		);
@@ -883,7 +883,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			0,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+				'tx_seminars_seminars_speakers_mm_leaders',
 				'uid_local='.$this->fixture->getUid()
 			)
 
@@ -893,7 +893,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+				'tx_seminars_seminars_speakers_mm_leaders',
 				'uid_local='.$this->fixture->getUid()
 			)
 		);
@@ -902,7 +902,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			2,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+				'tx_seminars_seminars_speakers_mm_leaders',
 				'uid_local='.$this->fixture->getUid()
 			)
 		);

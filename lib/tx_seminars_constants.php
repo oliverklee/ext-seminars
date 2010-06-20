@@ -41,10 +41,6 @@ define('SEMINARS_TABLE_PARTNER_MAIN', 'tx_partner_main');
 define('SEMINARS_TABLE_PARTNER_CONTACT_INFO', 'tx_partner_contact_info');
 define('SEMINARS_TABLE_PRICES', 'tx_seminars_prices');
 
-define('SEMINARS_TABLE_SEMINARS_SPEAKERS_MM', 'tx_seminars_seminars_speakers_mm');
-define('SEMINARS_TABLE_SEMINARS_PARTNERS_MM', 'tx_seminars_seminars_speakers_mm_partners');
-define('SEMINARS_TABLE_SEMINARS_TUTORS_MM', 'tx_seminars_seminars_speakers_mm_tutors');
-define('SEMINARS_TABLE_SEMINARS_LEADERS_MM', 'tx_seminars_seminars_speakers_mm_leaders');
 define('SEMINARS_TABLE_SEMINARS_SITES_MM', 'tx_seminars_seminars_place_mm');
 define('SEMINARS_TABLE_SEMINARS_CHECKBOXES_MM', 'tx_seminars_seminars_checkboxes_mm');
 define('SEMINARS_TABLE_ATTENDANCES_CHECKBOXES_MM', 'tx_seminars_attendances_checkboxes_mm');

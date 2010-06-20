@@ -869,10 +869,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	private function getSearchWherePartForSpeakers($searchWord) {
 		$mmTables = array(
-			'speakers' => SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
-			'partners' => SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
-			'tutors' => SEMINARS_TABLE_SEMINARS_TUTORS_MM,
-			'leaders' => SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'speakers' => 'tx_seminars_seminars_speakers_mm',
+			'partners' => 'tx_seminars_seminars_speakers_mm_partners',
+			'tutors' => 'tx_seminars_seminars_speakers_mm_tutors',
+			'leaders' => 'tx_seminars_seminars_speakers_mm_leaders',
 		);
 
 		$result = array();

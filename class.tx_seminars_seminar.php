@@ -765,18 +765,18 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	private function getSpeakerBag($speakerRelation = 'speakers') {
 		switch ($speakerRelation) {
 			case 'partners':
-				$mmTable = SEMINARS_TABLE_SEMINARS_PARTNERS_MM;
+				$mmTable = 'tx_seminars_seminars_speakers_mm_partners';
 				break;
 			case 'tutors':
-				$mmTable = SEMINARS_TABLE_SEMINARS_TUTORS_MM;
+				$mmTable = 'tx_seminars_seminars_speakers_mm_tutors';
 				break;
 			case 'leaders':
-				$mmTable = SEMINARS_TABLE_SEMINARS_LEADERS_MM;
+				$mmTable = 'tx_seminars_seminars_speakers_mm_leaders';
 				break;
 			case 'speakers':
 				// The fallthrough is intended.
 			default:
-				$mmTable = SEMINARS_TABLE_SEMINARS_SPEAKERS_MM;
+				$mmTable = 'tx_seminars_seminars_speakers_mm';
 				break;
 		}
 

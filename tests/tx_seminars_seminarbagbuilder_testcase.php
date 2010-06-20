@@ -3872,7 +3872,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$eventUid,
 			$speakerUid
 		);
@@ -3900,7 +3900,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$eventUid,
 			$speakerUid
 		);
@@ -3927,7 +3927,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$eventUid,
 			$speakerUid
 		);
@@ -3955,7 +3955,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$eventUid,
 			$speakerUid
 		);
@@ -3982,7 +3982,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$eventUid,
 			$speakerUid
 		);
@@ -4010,7 +4010,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$eventUid,
 			$speakerUid
 		);
@@ -4037,7 +4037,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$eventUid,
 			$speakerUid
 		);
@@ -4065,7 +4065,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$eventUid,
 			$speakerUid
 		);
@@ -4092,7 +4092,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$eventUid,
 			$speakerUid
 		);
@@ -4120,7 +4120,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$eventUid,
 			$speakerUid
 		);
@@ -4147,7 +4147,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$eventUid,
 			$speakerUid
 		);
@@ -4175,7 +4175,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$eventUid,
 			$speakerUid
 		);
@@ -4202,7 +4202,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$eventUid,
 			$speakerUid
 		);
@@ -4230,7 +4230,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$eventUid,
 			$speakerUid
 		);
@@ -4257,7 +4257,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$eventUid,
 			$speakerUid
 		);
@@ -4285,7 +4285,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$eventUid,
 			$speakerUid
 		);
@@ -4312,7 +4312,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$eventUid,
 			$speakerUid
 		);
@@ -4340,7 +4340,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$eventUid,
 			$speakerUid
 		);
@@ -4367,7 +4367,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$eventUid,
 			$speakerUid
 		);
@@ -4395,7 +4395,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$eventUid,
 			$speakerUid
 		);
@@ -4422,7 +4422,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$eventUid,
 			$speakerUid
 		);
@@ -4450,7 +4450,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$eventUid,
 			$speakerUid
 		);
@@ -4477,7 +4477,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$eventUid,
 			$speakerUid
 		);
@@ -4505,7 +4505,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$eventUid,
 			$speakerUid
 		);
@@ -5403,7 +5403,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$eventUid,
 			$speakerUid
 		);
@@ -5431,7 +5431,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$eventUid,
 			$speakerUid
 		);
@@ -5458,7 +5458,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$eventUid,
 			$speakerUid
 		);
@@ -5486,7 +5486,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$eventUid,
 			$speakerUid
 		);
@@ -5513,7 +5513,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$eventUid,
 			$speakerUid
 		);
@@ -5541,7 +5541,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$eventUid,
 			$speakerUid
 		);
@@ -5568,7 +5568,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$eventUid,
 			$speakerUid
 		);
@@ -5596,7 +5596,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$eventUid,
 			$speakerUid
 		);
@@ -5623,7 +5623,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$eventUid,
 			$speakerUid
 		);
@@ -5651,7 +5651,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$eventUid,
 			$speakerUid
 		);
@@ -5678,7 +5678,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$eventUid,
 			$speakerUid
 		);
@@ -5706,7 +5706,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PARTNERS_MM,
+			'tx_seminars_seminars_speakers_mm_partners',
 			$eventUid,
 			$speakerUid
 		);
@@ -5733,7 +5733,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$eventUid,
 			$speakerUid
 		);
@@ -5761,7 +5761,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$eventUid,
 			$speakerUid
 		);
@@ -5788,7 +5788,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$eventUid,
 			$speakerUid
 		);
@@ -5816,7 +5816,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$eventUid,
 			$speakerUid
 		);
@@ -5843,7 +5843,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$eventUid,
 			$speakerUid
 		);
@@ -5871,7 +5871,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_TUTORS_MM,
+			'tx_seminars_seminars_speakers_mm_tutors',
 			$eventUid,
 			$speakerUid
 		);
@@ -5898,7 +5898,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$eventUid,
 			$speakerUid
 		);
@@ -5926,7 +5926,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$eventUid,
 			$speakerUid
 		);
@@ -5953,7 +5953,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$eventUid,
 			$speakerUid
 		);
@@ -5981,7 +5981,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$eventUid,
 			$speakerUid
 		);
@@ -6008,7 +6008,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$eventUid,
 			$speakerUid
 		);
@@ -6036,7 +6036,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_LEADERS_MM,
+			'tx_seminars_seminars_speakers_mm_leaders',
 			$eventUid,
 			$speakerUid
 		);
