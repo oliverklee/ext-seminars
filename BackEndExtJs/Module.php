@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once($GLOBALS['BACK_PATH'] . 'template.php');
-
 /**
  * Module 'Events' for the 'seminars' extension (the ExtJS version).
  *
@@ -59,7 +57,6 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 		$this->id = intval($this->id);
 
 		$this->doc = t3lib_div::makeInstance('bigDoc');
-		$this->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->doc->docType = 'xhtml_strict';
 
 		$this->content = '';
@@ -72,14 +69,14 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 	 */
 	public function main() {
 		$this->getPageRenderer()->addCssFile(
-			'../Resources/Public/CSS/BackEndExtJs/BackEnd.css',
+			t3lib_extMgm::extRelPath('seminars') . 'Resources/Public/CSS/BackEndExtJs/BackEnd.css',
 			'stylesheet',
 			'all',
 			'',
 			FALSE
 		);
 		$this->getPageRenderer()->addCssFile(
-			'../Resources/Public/CSS/BackEndExtJs/Print.css',
+			t3lib_extMgm::extRelPath('seminars') . 'Resources/Public/CSS/BackEndExtJs/Print.css',
 			'stylesheet',
 			'print',
 			'',
@@ -113,7 +110,7 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 		}
 
 		$this->getPageRenderer()->addJsFile(
-			'../Resources/Public/JavaScript/BackEndExtJs/BackEnd.js',
+			t3lib_extMgm::extRelPath('seminars') . 'Resources/Public/JavaScript/BackEndExtJs/BackEnd.js',
 			'text/javascript',
 			FALSE,
 			TRUE
@@ -161,8 +158,8 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 		$this->getPageRenderer()->addInlineSettingArray(
 			'Backend.Seminars.URL',
 			array(
-				'ajax' => $GLOBALS['BACK_PATH'] . 'ajax.php?ajaxID=',
-				'alt_doc' => $GLOBALS['BACK_PATH'] . 'alt_doc.php',
+				'ajax' => 'ajax.php?ajaxID=',
+				'alt_doc' => 'alt_doc.php',
 				'csv' => '../BackEnd/class.tx_seminars_BackEnd_CSV.php',
 			)
 		);

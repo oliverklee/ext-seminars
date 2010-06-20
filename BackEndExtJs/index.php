@@ -22,11 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-unset($MCONF);
-$MCONF = array();
-
-require_once('conf.php');
-require_once($BACK_PATH . 'init.php');
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 $LANG->includeLLFile('EXT:seminars/BackEnd/locallang.xml');

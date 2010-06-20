@@ -70,7 +70,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$pageRenderer->expects($this->at(0))
 			->method('addCssFile')
 			->with(
-				'../Resources/Public/CSS/BackEndExtJs/BackEnd.css',
+				t3lib_extMgm::extRelPath('seminars') . 'Resources/Public/CSS/BackEndExtJs/BackEnd.css',
 				'stylesheet',
 				'all',
 				'',
@@ -90,7 +90,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$pageRenderer->expects($this->at(1))
 			->method('addCssFile')
 			->with(
-				'../Resources/Public/CSS/BackEndExtJs/Print.css',
+				t3lib_extMgm::extRelPath('seminars') . 'Resources/Public/CSS/BackEndExtJs/Print.css',
 				'stylesheet',
 				'print',
 				'',
@@ -110,7 +110,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$pageRenderer->expects($this->at(0))
 			->method('addJsFile')
 			->with(
-				'../Resources/Public/JavaScript/BackEndExtJs/BackEnd.js',
+				t3lib_extMgm::extRelPath('seminars') . 'Resources/Public/JavaScript/BackEndExtJs/BackEnd.js',
 				'text/javascript',
 				FALSE,
 				TRUE
