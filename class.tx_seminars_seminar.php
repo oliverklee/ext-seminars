@@ -1878,13 +1878,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			SEMINARS_TABLE_TARGET_GROUPS . '.title',
-			SEMINARS_TABLE_TARGET_GROUPS . ', ' . SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM,
-			SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM . '.uid_local=' .
+			SEMINARS_TABLE_TARGET_GROUPS . ', tx_seminars_seminars_target_groups_mm',
+			'tx_seminars_seminars_target_groups_mm.uid_local = ' .
 				$this->getTopicUid() . ' AND ' . SEMINARS_TABLE_TARGET_GROUPS .
-				'.uid=' . SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM . '.uid_foreign' .
+				'.uid = tx_seminars_seminars_target_groups_mm.uid_foreign' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_TARGET_GROUPS),
 			'',
-			SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM . '.sorting'
+			'tx_seminars_seminars_target_groups_mm.sorting'
 		);
 
 		if ($dbResult) {
@@ -1911,14 +1911,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			SEMINARS_TABLE_TARGET_GROUPS . '.title',
-			SEMINARS_TABLE_TARGET_GROUPS . ', '.SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM,
-			SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM . '.uid_local=' .
+			SEMINARS_TABLE_TARGET_GROUPS . ', tx_seminars_seminars_target_groups_mm',
+			'tx_seminars_seminars_target_groups_mm.uid_local = ' .
 				$this->getTopicUid() . ' AND ' .
 				SEMINARS_TABLE_TARGET_GROUPS . '.uid=' .
-				SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM . '.uid_foreign' .
+				'tx_seminars_seminars_target_groups_mm.uid_foreign' .
 				tx_oelib_db::enableFields(SEMINARS_TABLE_TARGET_GROUPS),
 			'',
-			SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM . '.sorting'
+			'tx_seminars_seminars_target_groups_mm.sorting'
 		);
 
 		if ($dbResult) {

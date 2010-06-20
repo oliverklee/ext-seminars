@@ -729,7 +729,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			$searchWord,
 			'target_groups',
 			SEMINARS_TABLE_TARGET_GROUPS,
-			SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM
+			'tx_seminars_seminars_target_groups_mm'
 		);
 	}
 
@@ -1243,7 +1243,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			$eventsWithMatchingTargetGroup
 				= tx_oelib_db::selectColumnForMultiple(
 					'uid_local',
-					SEMINARS_TABLE_SEMINARS_TARGET_GROUPS_MM,
+					'tx_seminars_seminars_target_groups_mm',
 					'uid_foreign IN (' . $matchingTargetGroups . ')',
 					'uid_local'
 				);
