@@ -507,15 +507,15 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		}
 
 		if ($feUserUid == 0) {
-			$this->removeAdditionalTableName(SEMINARS_TABLE_SEMINARS_MANAGERS_MM);
+			$this->removeAdditionalTableName('tx_seminars_seminars_feusers_mm');
 			unset($this->whereClauseParts['vip']);
 			return;
 		}
 
-		$this->addAdditionalTableName(SEMINARS_TABLE_SEMINARS_MANAGERS_MM);
+		$this->addAdditionalTableName('tx_seminars_seminars_feusers_mm');
 		$this->whereClauseParts['vip'] = SEMINARS_TABLE_SEMINARS . '.uid=' .
-			SEMINARS_TABLE_SEMINARS_MANAGERS_MM . '.uid_local AND ' .
-			SEMINARS_TABLE_SEMINARS_MANAGERS_MM . '.uid_foreign=' . $feUserUid;
+			'tx_seminars_seminars_feusers_mm.uid_local AND ' .
+			'tx_seminars_seminars_feusers_mm.uid_foreign = ' . $feUserUid;
 	}
 
 	/**

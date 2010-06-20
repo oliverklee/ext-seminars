@@ -89,7 +89,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('vips' => 1)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_MANAGERS_MM,
+			'tx_seminars_seminars_feusers_mm',
 			$seminarUid, $this->testingFramework->createAndLoginFrontEndUser()
 		);
 		$this->fixture->setObjectUid($seminarUid);
