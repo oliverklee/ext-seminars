@@ -48,9 +48,9 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	private function getSpeakerBag() {
 		return tx_oelib_ObjectFactory::make(
 			'tx_seminars_speakerbag',
-			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM . '.uid_local = ' . $this->getUid()
+			'tx_seminars_timeslots_speakers_mm.uid_local = ' . $this->getUid()
 				.' AND uid = uid_foreign',
-			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM
+			'tx_seminars_timeslots_speakers_mm'
 		);
 	}
 
@@ -64,7 +64,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'uid_foreign',
-			SEMINARS_TABLE_TIME_SLOTS_SPEAKERS_MM,
+			'tx_seminars_timeslots_speakers_mm',
 			'uid_local='.$this->getUid()
 		);
 
