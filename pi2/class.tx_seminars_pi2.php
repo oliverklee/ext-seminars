@@ -27,8 +27,6 @@ if (is_object($LANG)) {
 	$LANG->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
 }
 
-require_once(PATH_t3lib . 'class.t3lib_befunc.php');
-
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
@@ -224,7 +222,6 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 */
 	private function loadLocallangFiles() {
 		if (is_object($GLOBALS['TSFE']) && is_array($this->LOCAL_LANG)) {
-			require_once(t3lib_extMgm::extPath('lang') . 'lang.php');
 			$this->language = tx_oelib_ObjectFactory::make('language');
 			if (!empty($this->LLkey)) {
 				$this->language->init($this->LLkey);

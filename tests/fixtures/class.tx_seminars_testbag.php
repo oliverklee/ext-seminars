@@ -23,8 +23,6 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_bag.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'tests/fixtures/class.tx_seminars_test.php');
 
 /**
  * Class 'tx_seminars_testbag' for the 'seminars' extension.

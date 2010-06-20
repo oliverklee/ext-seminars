@@ -28,13 +28,10 @@ $MCONF = array();
 require_once('conf.php');
 require_once($BACK_PATH . 'init.php');
 require_once($BACK_PATH . 'template.php');
-require_once(PATH_t3lib . 'class.t3lib_page.php');
-require_once(PATH_t3lib . 'class.t3lib_befunc.php');
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
 
 $LANG->includeLLFile('EXT:lang/locallang_common.xml');
 $LANG->includeLLFile('EXT:lang/locallang_show_rechis.xml');

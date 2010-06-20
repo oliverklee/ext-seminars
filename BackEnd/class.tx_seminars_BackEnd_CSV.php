@@ -26,8 +26,6 @@ unset($MCONF);
 require_once('conf.php');
 require_once($BACK_PATH . 'init.php');
 
-require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
-
 // This checks permissions and exits if the users has no access to this page.
 $BE_USER->modAccess($MCONF, 1);
 

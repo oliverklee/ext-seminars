@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars') . 'pi2/class.tx_seminars_pi2.php');
-
 /**
  * Class 'tx_seminars_cli_MailNotifier' for the 'seminars' extension.
  *

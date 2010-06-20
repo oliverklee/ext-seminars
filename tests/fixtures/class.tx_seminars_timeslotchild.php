@@ -23,7 +23,6 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-require_once(t3lib_extMgm::extPath('seminars') . 'class.tx_seminars_timeslot.php');
 
 /**
  * Class 'tx_seminars_timeslotchild' for the 'seminars' extension.
