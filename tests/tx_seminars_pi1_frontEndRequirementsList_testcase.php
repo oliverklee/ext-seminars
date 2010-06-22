@@ -91,12 +91,12 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 	public function testRenderShowsTitleOfOneRequirement() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$requiredEvent = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
@@ -119,12 +119,12 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 		);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$requiredEvent = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
@@ -143,12 +143,12 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 	public function testRenderShowsTitleOfTwoRequirements() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$requiredEvent1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
@@ -159,7 +159,7 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 		$requiredEvent2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'required_bar',
 			)
 		);
@@ -194,12 +194,12 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$requiredEvent1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
@@ -217,7 +217,7 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 		$requiredEvent2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'required_bar',
 			)
 		);

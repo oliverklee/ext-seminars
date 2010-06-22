@@ -650,7 +650,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'Test topic',
 			)
 		);
@@ -696,7 +696,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'Test topic',
 			)
 		);
@@ -741,7 +741,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'Test topic',
 			)
 		);
@@ -787,7 +787,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'Test topic',
 			)
 		);
@@ -1529,11 +1529,11 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function testSingleViewForSeminarWithOneRequirementDisplaysRequirementsSubpart() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$requiredEvent = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -1554,12 +1554,12 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$requiredEvent = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
@@ -1592,13 +1592,13 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'dependencies' => 1,
 			)
 		);
 		$dependingEventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_requirements_mm',
@@ -1616,14 +1616,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'dependencies' => 1,
 			)
 		);
 		$dependingEventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'depending_foo',
 			)
 		);
@@ -1647,14 +1647,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'dependencies' => 1,
 			)
 		);
 		$dependingEventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'depending_foo',
 			)
 		);
@@ -1674,14 +1674,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'dependencies' => 2,
 			)
 		);
 		$dependingEventUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'depending_foo',
 			)
 		);
@@ -1692,7 +1692,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$dependingEventUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'depending_bar',
 			)
 		);
@@ -2162,7 +2162,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'Test topic'
 			)
 		);
@@ -2226,7 +2226,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'Test topic'
 			)
 		);
@@ -2284,7 +2284,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'Test topic',
 				'image' => 'test_foo.gif',
 			)
@@ -5749,11 +5749,11 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$requiredTopic = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$topic = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$date = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -5784,11 +5784,11 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$requiredTopic = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$topic = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$date = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -5823,7 +5823,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$topic = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$date = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -5840,7 +5840,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$requiredTopic = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
@@ -5862,7 +5862,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$topic = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$date = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -5879,7 +5879,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$requiredTopic1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
@@ -5890,7 +5890,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$requiredTopic2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'required_bar',
 			)
 		);

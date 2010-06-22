@@ -443,7 +443,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToTopicRecords() {
 		$this->whereClauseParts['topic'] = 'tx_seminars_seminars' .
-			'.object_type = ' . SEMINARS_RECORD_TYPE_TOPIC;
+			'.object_type = ' . tx_seminars_Model_Event::TYPE_TOPIC;
 	}
 
 	/**
@@ -1232,7 +1232,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			'uid',
 			'tx_seminars_seminars',
 			'(object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ' OR ' .
-				'object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ') AND ' . 
+				'object_type = ' . tx_seminars_Model_Event::TYPE_TOPIC . ') AND ' . 
 				'(target_groups = 0)' .
 				tx_oelib_db::enableFields('tx_seminars_seminars')
 		);
@@ -1283,7 +1283,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$notZeroAndInRange = '(%1$s > 0 AND %1$s <= %2$u)';
 		$now = $GLOBALS['SIM_EXEC_TIME'];
 
-		$whereClause = '(object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ' OR ' .
+		$whereClause = '(object_type = ' . tx_seminars_Model_Event::TYPE_TOPIC . ' OR ' .
 			'object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ') AND ('.
 			'(deadline_early_bird < ' . $now . ' AND ' .
 				'(price_regular <= ' . $maximumPrice . ' OR ' .
@@ -1346,7 +1346,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		}
 
 		$now = $GLOBALS['SIM_EXEC_TIME'];
-		$whereClause = '(object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ' OR ' .
+		$whereClause = '(object_type = ' . tx_seminars_Model_Event::TYPE_TOPIC . ' OR ' .
 			'object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ') AND (' .
 			'(deadline_early_bird < ' . $now . ' ' .
 				'AND (price_regular >= ' . $minimumPrice . ' ' .

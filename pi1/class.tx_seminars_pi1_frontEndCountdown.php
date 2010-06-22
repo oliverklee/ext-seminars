@@ -89,7 +89,7 @@ class tx_seminars_pi1_frontEndCountdown extends tx_seminars_pi1_frontEndView {
 			tx_seminars_seminar::STATUS_CANCELED .
 			tx_oelib_db::enableFields('tx_seminars_seminars') .
 			' AND tx_seminars_seminars.object_type != ' .
-			SEMINARS_RECORD_TYPE_TOPIC . 
+			tx_seminars_Model_Event::TYPE_TOPIC . 
 			' AND tx_seminars_seminars.begin_date > ' . $now;
 
 		if ($this->testMode) {

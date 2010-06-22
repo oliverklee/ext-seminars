@@ -378,7 +378,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
 
@@ -490,7 +490,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
 

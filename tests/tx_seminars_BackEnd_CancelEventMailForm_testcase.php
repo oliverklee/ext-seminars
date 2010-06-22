@@ -186,7 +186,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 			'tx_seminars_seminars',
 			array(
 				'title' => 'Dummy event',
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
 		$dateUid = $this->testingFramework->createRecord(
@@ -232,7 +232,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 			'tx_seminars_seminars',
 			array(
 				'title' => 'Dummy event',
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
 		$dateUid = $this->testingFramework->createRecord(
@@ -271,7 +271,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 			'tx_seminars_seminars',
 			array(
 				'title' => 'Dummy event',
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
 		$dateUid = $this->testingFramework->createRecord(
@@ -319,7 +319,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 			'tx_seminars_seminars',
 			array(
 				'title' => 'Dummy event',
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
 		$dateUid = $this->testingFramework->createRecord(

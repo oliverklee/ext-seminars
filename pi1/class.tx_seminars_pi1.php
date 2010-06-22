@@ -1428,7 +1428,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Hides unneeded subparts for topic records.
 	 */
 	private function hideUnneededSubpartsForTopicRecords() {
-		if ($this->seminar->getRecordType() != SEMINARS_RECORD_TYPE_TOPIC) {
+		if ($this->seminar->getRecordType() != tx_seminars_Model_Event::TYPE_TOPIC) {
 			return;
 		}
 
@@ -1496,7 +1496,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			// If we are on a topic record, overwrite the label with an
 			// alternative text.
 			if (($this->seminar->getRecordType() == tx_seminars_Model_Event::TYPE_COMPLETE)
-				|| ($this->seminar->getRecordType() == SEMINARS_RECORD_TYPE_TOPIC)
+				|| ($this->seminar->getRecordType() == tx_seminars_Model_Event::TYPE_TOPIC)
 			) {
 				$this->setMarker(
 					'label_list_otherdates',
