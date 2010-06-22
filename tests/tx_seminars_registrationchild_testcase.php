@@ -510,7 +510,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	public function testCommitToDbCanCreateCheckboxesRelation() {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$checkboxesUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CHECKBOXES
+			'tx_seminars_checkboxes'
 		);
 
 		$registration = new tx_seminars_registrationchild(0);

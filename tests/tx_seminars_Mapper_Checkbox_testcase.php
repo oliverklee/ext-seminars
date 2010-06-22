@@ -75,7 +75,7 @@ class tx_seminars_Mapper_Checkbox_testcase extends tx_phpunit_testcase {
 	 */
 	public function findWithUidOfExistingRecordReturnsRecordAsModel() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CHECKBOXES, array('title' => 'I agree with the T&C.')
+			'tx_seminars_checkboxes', array('title' => 'I agree with the T&C.')
 		);
 
 		$this->assertEquals(

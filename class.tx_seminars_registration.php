@@ -1008,7 +1008,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		if ($this->hasCheckboxes()) {
 			$result = $this->getMmRecords(
-				SEMINARS_TABLE_CHECKBOXES,
+				'tx_seminars_checkboxes',
 				'tx_seminars_attendances_checkboxes_mm'
 			);
 		}
