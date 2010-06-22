@@ -1330,7 +1330,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('place' => 1)
 		);
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('title' => 'a place')
+			'tx_seminars_sites', array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_place_mm', $eventUid, $placeUid
@@ -4197,7 +4197,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToPlacesExcludesEventsWithoutPlace() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'a place')
 		);
 		$this->fixture->setConfigurationValue(
@@ -4221,7 +4221,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$placeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
@@ -4239,7 +4239,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
@@ -4273,7 +4273,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$placeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
@@ -4282,7 +4282,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'another place')
 		);
 		$this->fixture->setConfigurationValue(
@@ -4307,7 +4307,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
@@ -4338,7 +4338,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
@@ -4370,7 +4370,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$placeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('title' => 'a place')
+			'tx_seminars_sites', array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_place_mm', $eventUid1, $placeUid1
@@ -4386,7 +4386,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('title' => 'a place')
+			'tx_seminars_sites', array('title' => 'a place')
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_place_mm', $eventUid2, $placeUid2

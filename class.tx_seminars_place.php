@@ -39,7 +39,7 @@ class tx_seminars_place extends tx_seminars_objectfromdb {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
-	protected $tableName = SEMINARS_TABLE_SITES;
+	protected $tableName = 'tx_seminars_sites';
 
 	/**
 	 * Returns the ZIP code of this place.

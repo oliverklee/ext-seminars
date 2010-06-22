@@ -52,7 +52,7 @@ class tx_seminars_place_testcase extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array(
 				'title' => 'TEST Place 1',
 				'zip' => '13373',

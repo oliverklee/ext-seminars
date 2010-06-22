@@ -143,7 +143,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 */
 	private function addPlaceRelation(array $placeData = array()) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, $placeData
+			'tx_seminars_sites', $placeData
 		);
 
 		$this->testingFramework->createRelation(
@@ -5574,7 +5574,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUpdatePlaceRelationsForSeminarWithoutPlacesRelatesPlaceFromTimeslotToSeminar() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'my house')
 		);
 		$this->testingFramework->createRecord(
@@ -5594,7 +5594,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUpdatePlaceRelationsForTwoTimeslotsWithPlacesReturnsTwo() {
 		$placeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'my house')
 		);
 		$this->testingFramework->createRecord(
@@ -5605,7 +5605,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'your house')
 		);
 		$this->testingFramework->createRecord(
@@ -5625,7 +5625,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testUpdatePlaceRelationsForSeminarWithoutPlacesCanRelateTwoPlacesFromTimeslotsToSeminar() {
 		$placeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'my house')
 		);
 		$this->testingFramework->createRecord(
@@ -5636,7 +5636,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'your house')
 		);
 		$this->testingFramework->createRecord(
@@ -5664,7 +5664,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->addPlaceRelation(array('title' => 'your house'));
 
 		$placeUidInTimeSlot = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'my house')
 		);
 		$this->testingFramework->createRecord(

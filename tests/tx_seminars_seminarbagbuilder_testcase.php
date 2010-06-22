@@ -602,7 +602,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////////////////////
 
 	public function testLimitToPlacesFindsEventsInOnePlace() {
-		$siteUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('place' => 1)
 		);
@@ -623,7 +623,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToPlacesIgnoresEventsWithoutPlace() {
-		$siteUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
@@ -638,8 +638,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToPlacesFindsEventsInTwoPlaces() {
-		$siteUid1 = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
-		$siteUid2 = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$siteUid1 = $this->testingFramework->createRecord('tx_seminars_sites');
+		$siteUid2 = $this->testingFramework->createRecord('tx_seminars_sites');
 		$eventUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('place' => 1)
 		);
@@ -668,7 +668,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToPlacesWithEmptyPlacesArrayFindsAllEvents() {
-		$siteUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
 		);
@@ -685,8 +685,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToPlacesIgnoresEventsWithDifferentPlace() {
-		$siteUid1 = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
-		$siteUid2 = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$siteUid1 = $this->testingFramework->createRecord('tx_seminars_sites');
+		$siteUid2 = $this->testingFramework->createRecord('tx_seminars_sites');
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('place' => 1)
 		);
@@ -704,8 +704,8 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToPlacesWithOnePlaceFindsEventInTwoPlaces() {
-		$siteUid1 = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
-		$siteUid2 = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$siteUid1 = $this->testingFramework->createRecord('tx_seminars_sites');
+		$siteUid2 = $this->testingFramework->createRecord('tx_seminars_sites');
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('place' => 1)
 		);
@@ -2485,7 +2485,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCitiesFindsEventsInOneCity() {
 		$siteUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'test city 1')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -2510,7 +2510,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCitiesIgnoresEventsInOtherCity() {
 		$siteUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'test city 2')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -2534,11 +2534,11 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCitiesWithTwoCitiesFindsEventsEachInOneOfBothCities() {
 		$siteUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'test city 1')
 		);
 		$siteUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'test city 2')
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
@@ -2572,7 +2572,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCitiesWithEmptyCitiesArrayFindsEventsWithCities() {
 		$siteUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'test city 1')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -2598,7 +2598,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCitiesIgnoresEventsWithDifferentCity() {
 		$siteUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'test city 1')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -2621,7 +2621,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToCitiesIgnoresEventWithPlaceWithoutCity() {
-		$siteUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('place' => 1)
@@ -2643,11 +2643,11 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCitiesWithTwoCitiesFindsOneEventInBothCities() {
 		$siteUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'test city 1')
 		);
 		$siteUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'test city 2')
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
@@ -2677,11 +2677,11 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCitiesWithOneCityFindsEventInTwoCities() {
 		$siteUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'test city 1')
 		);
 		$siteUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'test city 2')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -2711,11 +2711,11 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCitiesWithTwoCitiesOneDifferentFindsEventInOneOfTheCities() {
 		$siteUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'test city 1')
 		);
 		$siteUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'test city 3')
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
@@ -2750,7 +2750,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCountriesFindsEventsInOneCountry() {
 		$siteUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('country' => 'DE')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -2775,7 +2775,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCountriesIgnoresEventsInOtherCountry() {
 		$siteUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('country' => 'DE')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -2799,11 +2799,11 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCountriesFindsEventsInTwoCountries() {
 		$siteUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('country' => 'US')
 		);
 		$siteUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('country' => 'DE')
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
@@ -2837,7 +2837,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCountriesWithEmptyCountriesArrayFindsAllEvents() {
 		$siteUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('country' => 'US')
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
@@ -2863,7 +2863,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCountriesIgnoresEventsWithDifferentCountry() {
 		$siteUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('country' => 'DE')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -2886,7 +2886,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testLimitToCountriesIgnoresEventsWithPlaceWithoutCountry() {
-		$siteUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
 			array('place' => 1)
@@ -2908,11 +2908,11 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToCountriesWithOneCountryFindsEventInTwoCountries() {
 		$siteUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('country' => 'US')
 		);
 		$siteUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('country' => 'DE')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4521,7 +4521,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceTitle() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'foo bar place')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4549,7 +4549,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceTitle() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'bar place')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4576,7 +4576,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceAddress() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'foo bar address')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4604,7 +4604,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceAddress() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'bar address')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4631,7 +4631,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceCity() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'foo bar city')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4659,7 +4659,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceCity() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'bar city')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -6052,7 +6052,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceTitle() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'foo bar place')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -6080,7 +6080,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceTitle() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'bar place')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -6107,7 +6107,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceAddress() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'foo bar address')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -6135,7 +6135,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceAddress() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'bar address')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -6162,7 +6162,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceCity() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'foo bar city')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -6190,7 +6190,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceCity() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'bar city')
 		);
 		$eventUid = $this->testingFramework->createRecord(

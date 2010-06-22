@@ -95,7 +95,7 @@ class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 
 	public function testGetPlaceReturnsUidOfPlaceSetViaSetPlace() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES
+			'tx_seminars_sites'
 		);
 		$this->fixture->setPlace($placeUid);
 
@@ -107,7 +107,7 @@ class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 
 	public function testHasPlaceReturnsTrueIfPlaceIsSet() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES
+			'tx_seminars_sites'
 		);
 		$this->fixture->setPlace($placeUid);
 
@@ -130,7 +130,7 @@ class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 
 	public function testGetPlaceShortReturnsPlaceNameForOnePlace() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'a place')
 		);
 		$this->fixture->setPlace($placeUid);
@@ -142,21 +142,21 @@ class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetPlaceShortThrowsExceptionForInexistentPlaceUid() {
-		$placeUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SITES);
+		$placeUid = $this->testingFramework->createRecord('tx_seminars_sites');
 		$this->setExpectedException(
 			'Exception', 'The related place with the UID ' . $placeUid .
 				' could not be found in the DB.'
 		);
 
 		$this->fixture->setPlace($placeUid);
-		$this->testingFramework->deleteRecord(SEMINARS_TABLE_SITES, $placeUid);
+		$this->testingFramework->deleteRecord('tx_seminars_sites', $placeUid);
 
 		$this->fixture->getPlaceShort();
 	}
 
 	public function testGetPlaceShortThrowsExceptionForDeletedPlace() {
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('deleted' => 1)
 		);
 		$this->setExpectedException(

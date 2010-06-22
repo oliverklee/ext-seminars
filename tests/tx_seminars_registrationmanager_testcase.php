@@ -2534,7 +2534,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeCanSendPlaceTitleInMailBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('title' => 'foo_place')
+			'tx_seminars_sites', array('title' => 'foo_place')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
@@ -2562,7 +2562,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeCanSendPlaceAddressInMailBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('address' => 'foo_street')
+			'tx_seminars_sites', array('address' => 'foo_street')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
@@ -2611,7 +2611,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeForPlainTextMailSeparatesPlacesTitleAndAddressWithLinefeed() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'place_title','address' => 'place_address')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -2650,7 +2650,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'place_title','address' => 'place_address')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -2677,7 +2677,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeStripsHtmlTagsFromPlaceAddress() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('title' => 'place_title','address' => 'place<h2>_address</h2>')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -2706,7 +2706,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeForPlaceAddressReplacesLineFeedsWithSpaces() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'address1' . LF . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -2735,7 +2735,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeForPlaceAddressReplacesCarriageReturnsWithSpaces() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'address1' . CR . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -2764,7 +2764,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeForPlaceAddressReplacesCarriageReturnAndLineFeedWithOneSpace() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'address1' . CRLF . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -2793,7 +2793,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeForPlaceAddressReplacesMultipleCarriageReturnsWithOneSpace() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'address1' . CR . CR . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -2822,7 +2822,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeForPlaceAddressAndPlainTextMailsReplacesMultipleLineFeedsWithSpaces() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'address1' . LF . LF . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -2861,7 +2861,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'address1' . LF . LF . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -2898,7 +2898,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'address1' . LF . 'address2' . CR . CRLF . 'address3')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -2925,7 +2925,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCityOfPlace() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('city' => 'footown')
+			'tx_seminars_sites', array('city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
@@ -2953,7 +2953,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsZipAndCityOfPlace() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('zip' => '12345', 'city' => 'footown')
+			'tx_seminars_sites', array('zip' => '12345', 'city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
@@ -2982,7 +2982,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('city' => 'footown', 'country' => $country->getIsoAlpha2Code())
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -3011,7 +3011,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeForPlaceAddressAndPlainTextMailsSeparatesAddressAndCityWithNewline() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'address', 'city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -3050,7 +3050,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'address', 'city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -3078,7 +3078,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array(
 				'address' => 'address',
 				'city' => 'footown',
@@ -3111,7 +3111,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function notifyAttendeeForPlaceAddressWithCityAndNoCountryNotAddsSurplusCommaAfterCity() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			array('address' => 'address', 'city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(

@@ -110,9 +110,9 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			'uid=' . $this->getPlace() .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
+				tx_oelib_db::enableFields('tx_seminars_sites')
 		);
 		if (!$dbResult) {
 			throw new Exception(DATABASE_QUERY_ERROR);

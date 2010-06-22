@@ -75,7 +75,7 @@ class tx_seminars_Mapper_Place_testcase extends tx_phpunit_testcase {
 	 */
 	public function findWithUidOfExistingRecordReturnsRecordAsModel() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('title' => 'Nice place')
+			'tx_seminars_sites', array('title' => 'Nice place')
 		);
 
 		$this->assertEquals(

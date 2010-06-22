@@ -361,7 +361,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			',',
 			$GLOBALS['TYPO3_DB']->fullQuoteArray(
 				$cities,
-				SEMINARS_TABLE_SITES
+				'tx_seminars_sites'
 			)
 		);
 
@@ -371,11 +371,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			' LEFT JOIN tx_seminars_seminars_place_mm ON ' .
 				SEMINARS_TABLE_SEMINARS . '.uid=' .
 				'tx_seminars_seminars_place_mm.uid_local' .
-			' LEFT JOIN ' . SEMINARS_TABLE_SITES . ' ON ' .
+			' LEFT JOIN tx_seminars_sites ON ' .
 				'tx_seminars_seminars_place_mm.uid_foreign = ' .
-				SEMINARS_TABLE_SITES . '.uid' .
-			' WHERE ' . SEMINARS_TABLE_SITES .
-				'.city IN(' . $cityNames . ')' .
+				'tx_seminars_sites.uid' .
+			' WHERE tx_seminars_sites.city IN(' . $cityNames . ')' .
 		')';
 	}
 
@@ -397,7 +396,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			',',
 			$GLOBALS['TYPO3_DB']->fullQuoteArray(
 				$countries,
-				SEMINARS_TABLE_SITES
+				'tx_seminars_sites'
 			)
 		);
 
@@ -407,11 +406,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			' LEFT JOIN tx_seminars_seminars_place_mm ON ' .
 				SEMINARS_TABLE_SEMINARS . '.uid=' .
 				'tx_seminars_seminars_place_mm.uid_local' .
-			' LEFT JOIN ' . SEMINARS_TABLE_SITES . ' ON ' .
+			' LEFT JOIN tx_seminars_sites ON ' .
 				'tx_seminars_seminars_place_mm.uid_foreign = ' .
-				SEMINARS_TABLE_SITES . '.uid' .
-			' WHERE ' . SEMINARS_TABLE_SITES .
-				'.country IN(' . $countryCodes . ')' .
+				'tx_seminars_sites.uid' .
+			' WHERE tx_seminars_sites.country IN(' . $countryCodes . ')' .
 		')';
 	}
 
@@ -433,7 +431,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			',',
 			$GLOBALS['TYPO3_DB']->fullQuoteArray(
 				$languages,
-				SEMINARS_TABLE_SITES
+				'tx_seminars_sites'
 			)
 		);
 
@@ -794,7 +792,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		return $this->getSearchWherePartForMmRelation(
 			$searchWord,
 			'places',
-			SEMINARS_TABLE_SITES,
+			'tx_seminars_sites',
 			'tx_seminars_seminars_place_mm'
 		);
 	}

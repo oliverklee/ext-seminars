@@ -562,7 +562,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 		$placeTitle = 'test place';
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('title' => $placeTitle)
+			'tx_seminars_sites', array('title' => $placeTitle)
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -583,7 +583,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 		$placeTitle = '<>';
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('title' => $placeTitle)
+			'tx_seminars_sites', array('title' => $placeTitle)
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -617,7 +617,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 		$placeTitle = 'test place';
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('title' => $placeTitle)
+			'tx_seminars_sites', array('title' => $placeTitle)
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -641,10 +641,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$placeTitle = 'foo';
 		$placeTitle2 = 'bar';
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('title' => $placeTitle)
+			'tx_seminars_sites', array('title' => $placeTitle)
 		);
 		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('title' => $placeTitle2)
+			'tx_seminars_sites', array('title' => $placeTitle2)
 		);
 
 		$eventUid = $this->testingFramework->createRecord(
@@ -696,7 +696,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$cityName = 'test city';
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('city' => $cityName)
+			'tx_seminars_sites', array('city' => $cityName)
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -717,7 +717,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$cityName2 = 'bar city';
 
 		$placeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('city' => $cityName1)
+			'tx_seminars_sites', array('city' => $cityName1)
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -727,7 +727,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('city' => $cityName2)
+			'tx_seminars_sites', array('city' => $cityName2)
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -752,7 +752,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
 		$cityTitle = 'test city';
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('city' => $cityTitle)
+			'tx_seminars_sites', array('city' => $cityTitle)
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -776,7 +776,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$cityTitle2 = 'foo city';
 
 		$placeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('city' => $cityTitle1)
+			'tx_seminars_sites', array('city' => $cityTitle1)
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -786,7 +786,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('city' => $cityTitle2)
+			'tx_seminars_sites', array('city' => $cityTitle2)
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -851,7 +851,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'COUNTRIES', $countryIsoCode
 		);
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode)
+			'tx_seminars_sites', array('country' => $countryIsoCode)
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -884,7 +884,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$placeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode1)
+			'tx_seminars_sites', array('country' => $countryIsoCode1)
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -895,7 +895,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode2)
+			'tx_seminars_sites', array('country' => $countryIsoCode2)
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -930,7 +930,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'COUNTRIES', $countryIsoCode
 		);
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode)
+			'tx_seminars_sites', array('country' => $countryIsoCode)
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -965,7 +965,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$placeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode1)
+			'tx_seminars_sites', array('country' => $countryIsoCode1)
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -976,7 +976,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$placeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('country' => $countryIsoCode2)
+			'tx_seminars_sites', array('country' => $countryIsoCode2)
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
