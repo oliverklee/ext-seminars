@@ -293,7 +293,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 	public function testPopulateListPaymentMethodsForEventWithOnePaymentMethodReturnsOneItem() {
 		$paymentMethodUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS
+			'tx_seminars_payment_methods'
 		);
 
 		$this->testingFramework->createRelation(
@@ -311,7 +311,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 	public function testPopulateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsTitle() {
 		$paymentMethodUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'foo')
+			'tx_seminars_payment_methods', array('title' => 'foo')
 		);
 
 		$this->testingFramework->createRelation(
@@ -331,7 +331,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 	public function testPopulateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsUid() {
 		$paymentMethodUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS
+			'tx_seminars_payment_methods'
 		);
 
 		$this->testingFramework->createRelation(
@@ -353,14 +353,14 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
-			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
+			$this->testingFramework->createRecord('tx_seminars_payment_methods'),
 			'payment_methods'
 		);
 
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
-			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
+			$this->testingFramework->createRecord('tx_seminars_payment_methods'),
 			'payment_methods'
 		);
 
@@ -1022,7 +1022,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 	public function test_getPreselectedPaymentMethodForOnePaymentMethod_ReturnsItsUid() {
 		$paymentMethodUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'foo')
+			'tx_seminars_payment_methods', array('title' => 'foo')
 		);
 
 		$this->testingFramework->createRelation(
@@ -1042,13 +1042,13 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
-			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
+			$this->testingFramework->createRecord('tx_seminars_payment_methods'),
 			'payment_methods'
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
-			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
+			$this->testingFramework->createRecord('tx_seminars_payment_methods'),
 			'payment_methods'
 		);
 
@@ -1062,11 +1062,11 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
-			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
+			$this->testingFramework->createRecord('tx_seminars_payment_methods'),
 			'payment_methods'
 		);
 		$selectedPaymentMethodUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS
+			'tx_seminars_payment_methods'
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_payment_methods_mm',
@@ -1095,7 +1095,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	 */
 	public function getRegistrationDataForDisabledPaymentMethodFieldReturnsEmptyString() {
 		$selectedPaymentMethodUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'payment foo')
+			'tx_seminars_payment_methods', array('title' => 'payment foo')
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_payment_methods_mm',

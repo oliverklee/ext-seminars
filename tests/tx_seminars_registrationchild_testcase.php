@@ -136,7 +136,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 */
 	private function setPaymentMethodRelation(array $paymentMethodData) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS, $paymentMethodData
+			'tx_seminars_payment_methods', $paymentMethodData
 		);
 
 		$this->fixture->setPaymentMethod($uid);
@@ -195,7 +195,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			array('price_regular' => 31.42)
 		);
 		$paymentMethodUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS
+			'tx_seminars_payment_methods'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid, $paymentMethodUid,

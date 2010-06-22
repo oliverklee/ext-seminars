@@ -75,7 +75,7 @@ class tx_seminars_Mapper_PaymentMethod_testcase extends tx_phpunit_testcase {
 	 */
 	public function findWithUidOfExistingRecordReturnsRecordAsModel() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'Cash')
+			'tx_seminars_payment_methods', array('title' => 'Cash')
 		);
 
 		$this->assertEquals(

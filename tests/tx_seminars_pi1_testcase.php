@@ -1909,7 +1909,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function singleViewForEventWithOnePaymentMethodContainsLabelForPaymentMethods() {
 		$paymentMethodUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'Payment Method')
+			'tx_seminars_payment_methods', array('title' => 'Payment Method')
 		);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
@@ -1932,7 +1932,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function singleViewForEventWithOnePaymentMethodContainsOnePaymentMethod() {
 		$paymentMethodUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'Payment Method')
+			'tx_seminars_payment_methods', array('title' => 'Payment Method')
 		);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
@@ -1955,10 +1955,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function singleViewForEventWithTwoPaymentMethodsContainsTwoPaymentMethods() {
 		$paymentMethodUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'Payment Method 1')
+			'tx_seminars_payment_methods', array('title' => 'Payment Method 1')
 		);
 		$paymentMethodUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'Payment Method 2')
+			'tx_seminars_payment_methods', array('title' => 'Payment Method 2')
 		);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
@@ -1992,7 +1992,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function singleViewForEventWithOnePaymentMethodContainsPaymentMethodTitleProcessedByHtmlspecialchars() {
 		$paymentMethodTitle = '<b>Payment & Method</b>';
 		$paymentMethodUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => $paymentMethodTitle)
+			'tx_seminars_payment_methods', array('title' => $paymentMethodTitle)
 		);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,

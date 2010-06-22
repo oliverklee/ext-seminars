@@ -1527,9 +1527,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, description',
-			SEMINARS_TABLE_PAYMENT_METHODS,
+			'tx_seminars_payment_methods',
 			'uid=' . $paymentMethodUid .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+				tx_oelib_db::enableFields('tx_seminars_payment_methods')
 		);
 
 		if (!$dbResultPaymentMethod) {
@@ -1565,9 +1565,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
-			SEMINARS_TABLE_PAYMENT_METHODS,
+			'tx_seminars_payment_methods',
 			'uid=' . $paymentMethodUid .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+				tx_oelib_db::enableFields('tx_seminars_payment_methods')
 		);
 
 		if (!$dbResultPaymentMethod) {
