@@ -60,7 +60,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 
 		$this->systemFolderPid = $this->testingFramework->createSystemFolder();
 		$this->seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Test event',
@@ -113,7 +113,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
@@ -141,7 +141,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array('title' => 'second category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
@@ -177,7 +177,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array('title' => 'category A')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
@@ -207,7 +207,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $systemSubFolderUid,
 				'title' => 'my title',
@@ -232,7 +232,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $otherSystemFolderUid,
 				'title' => 'my title',
@@ -259,7 +259,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $otherSystemFolderUid,
 				'title' => 'my title',
@@ -283,7 +283,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
@@ -308,7 +308,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my_title',
@@ -337,7 +337,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
@@ -366,7 +366,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
@@ -395,7 +395,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',

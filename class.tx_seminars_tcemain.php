@@ -86,7 +86,7 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 			$uid = $pObj->substNEWwithIDs[$uid];
 		}
 
-		if (($table == SEMINARS_TABLE_SEMINARS)
+		if (($table == 'tx_seminars_seminars')
 			|| ($table == 'tx_seminars_timeslots')
 		) {
 			$this->tceMainFieldArrays[$table][$uid] = $fieldArray;
@@ -113,7 +113,7 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	 * Processes all events.
 	 */
 	private function processEvents() {
-		$table = SEMINARS_TABLE_SEMINARS;
+		$table = 'tx_seminars_seminars';
 
 		if (
 			isset($this->tceMainFieldArrays[$table])

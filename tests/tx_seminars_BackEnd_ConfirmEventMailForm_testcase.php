@@ -92,7 +92,7 @@ class tx_seminars_BackEnd_ConfirmEventMailForm_testcase extends tx_phpunit_testc
 		);
 
 		$this->eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'Dummy event',
@@ -103,7 +103,7 @@ class tx_seminars_BackEnd_ConfirmEventMailForm_testcase extends tx_phpunit_testc
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->eventUid,
 			$this->organizerUid,
 			'organizers'
@@ -184,7 +184,7 @@ class tx_seminars_BackEnd_ConfirmEventMailForm_testcase extends tx_phpunit_testc
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				'uid = ' . $this->eventUid . ' AND cancelled = ' .
 					tx_seminars_seminar::STATUS_CONFIRMED
 			)

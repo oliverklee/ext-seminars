@@ -73,7 +73,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('organizers' => 1, 'title' => 'foo_event')
 		);
 
@@ -191,14 +191,14 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('currency', 'EUR');
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('price_regular' => 31.42)
 		);
 		$paymentMethodUid = $this->testingFramework->createRecord(
 			'tx_seminars_payment_methods'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid, $paymentMethodUid,
+			'tx_seminars_seminars', $this->seminarUid, $paymentMethodUid,
 			'payment_methods'
 		);
 
@@ -591,7 +591,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 	public function testPurgeCachedSeminarsResultsInDifferentDataForSameSeminarUid() {
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('title' => 'test title 1')
 		);
 
@@ -603,7 +603,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$seminarUid,
 			array('title' => 'test title 2')
 		);

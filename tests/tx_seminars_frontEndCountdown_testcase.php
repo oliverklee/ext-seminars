@@ -53,7 +53,7 @@ class tx_seminars_frontEndCountdown_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createFakeFrontEnd();
 
 		$this->seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'title' => 'Test event',
 			)
@@ -102,7 +102,7 @@ class tx_seminars_frontEndCountdown_testcase extends tx_phpunit_testcase {
 
 	public function testRenderForPastEventReturnsNoEventsFoundMessage() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
@@ -118,7 +118,7 @@ class tx_seminars_frontEndCountdown_testcase extends tx_phpunit_testcase {
 
 	public function testRenderForUpcomingEventReturnsCountdownMessage() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,

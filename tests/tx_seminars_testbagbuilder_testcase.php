@@ -114,7 +114,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testBuilderWithAdditionalTableNameDoesNotProduceSqlError() {
-		$this->fixture->addAdditionalTableName(SEMINARS_TABLE_SEMINARS);
+		$this->fixture->addAdditionalTableName('tx_seminars_seminars');
 
 		$bag = $this->fixture->build();
 		$bag->__destruct();
@@ -686,11 +686,11 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testAddAdditionalTableNameWithTableNameAddsAdditionalTableName() {
-		$this->fixture->addAdditionalTableName(SEMINARS_TABLE_SEMINARS);
+		$this->fixture->addAdditionalTableName('tx_seminars_seminars');
 
 		$this->assertTrue(
 			in_array(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				$this->fixture->getAdditionalTableNames()
 			)
 		);
@@ -716,16 +716,16 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 				'of additional table names.'
 		);
 
-		$this->fixture->removeAdditionalTableName(SEMINARS_TABLE_SEMINARS);
+		$this->fixture->removeAdditionalTableName('tx_seminars_seminars');
 	}
 
 	public function testRemoveAdditionalTableNameWithSetTableNameRemovesAdditionalTableName() {
-		$this->fixture->addAdditionalTableName(SEMINARS_TABLE_SEMINARS);
-		$this->fixture->removeAdditionalTableName(SEMINARS_TABLE_SEMINARS);
+		$this->fixture->addAdditionalTableName('tx_seminars_seminars');
+		$this->fixture->removeAdditionalTableName('tx_seminars_seminars');
 
 		$this->assertFalse(
 			in_array(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				$this->fixture->getAdditionalTableNames()
 			)
 		);

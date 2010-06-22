@@ -90,7 +90,7 @@ class tx_seminars_pi1_frontEndPublishEvent_testcase extends tx_phpunit_testcase 
 	public function test_RenderForValidPublicationHashAndVisibleEvent_ReturnsPublishFailedMessage() {
 		$this->fixture->init(array());
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('hidden' => 0, 'publication_hash' => '123456ABC')
 		);
 
@@ -105,7 +105,7 @@ class tx_seminars_pi1_frontEndPublishEvent_testcase extends tx_phpunit_testcase 
 	public function test_RenderForValidPublicationHashAndHiddenEvent_ReturnsPublishSuccessfulMessage() {
 		$this->fixture->init(array());
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('hidden' => 1, 'publication_hash' => '123456ABC')
 		);
 
@@ -120,7 +120,7 @@ class tx_seminars_pi1_frontEndPublishEvent_testcase extends tx_phpunit_testcase 
 	public function test_RenderForValidPublicationHash_UnhidesEventWithPublicationHash() {
 		$this->fixture->init(array());
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('hidden' => 1, 'publication_hash' => '123456ABC')
 		);
 		$this->fixture->piVars['hash'] = '123456ABC';
@@ -129,7 +129,7 @@ class tx_seminars_pi1_frontEndPublishEvent_testcase extends tx_phpunit_testcase 
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_SEMINARS, 'uid = ' . $eventUid . ' AND hidden = 0'
+				'tx_seminars_seminars', 'uid = ' . $eventUid . ' AND hidden = 0'
 			)
 		);
 	}
@@ -137,7 +137,7 @@ class tx_seminars_pi1_frontEndPublishEvent_testcase extends tx_phpunit_testcase 
 	public function test_RenderForValidPublicationHash_RemovesPublicationHashFromEvent() {
 		$this->fixture->init(array());
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('hidden' => 1, 'publication_hash' => '123456ABC')
 		);
 		$this->fixture->piVars['hash'] = '123456ABC';
@@ -146,7 +146,7 @@ class tx_seminars_pi1_frontEndPublishEvent_testcase extends tx_phpunit_testcase 
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_SEMINARS, 'uid = ' . $eventUid .
+				'tx_seminars_seminars', 'uid = ' . $eventUid .
 					' AND publication_hash = ""'
 			)
 		);

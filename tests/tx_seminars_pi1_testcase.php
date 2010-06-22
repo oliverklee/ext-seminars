@@ -95,7 +95,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->systemFolderPid = $this->testingFramework->createSystemFolder();
 		$this->seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Test event',
@@ -167,7 +167,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->numberOfTargetGroups++;
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('target_groups' => $this->numberOfTargetGroups)
 		);
 
@@ -203,7 +203,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$feUserUid
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('vips' => 1)
 		);
@@ -229,7 +229,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->numberOfCategories++;
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('categories' => $this->numberOfCategories)
 		);
 
@@ -254,7 +254,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->numberOfOrganizers++;
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('organizers' => $this->numberOfOrganizers)
 		);
 	}
@@ -426,7 +426,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				'uid=' . $this->seminarUid . ' AND vips=1'
 			)
 		);
@@ -647,7 +647,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createFrontEndPage()
 		);
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
@@ -655,7 +655,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$dateUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -666,7 +666,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$dateUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -693,7 +693,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'hideFields', 'eventsnextday'
 		);
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
@@ -701,7 +701,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$dateUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -712,7 +712,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$singleEventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
@@ -738,7 +738,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createFrontEndPage()
 		);
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
@@ -746,7 +746,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$dateUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -757,7 +757,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$dateUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -784,7 +784,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'showOnlyEventsWithVacancies', TRUE
 		);
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
@@ -792,7 +792,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$dateUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -803,7 +803,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$dateUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -846,7 +846,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->seminarUid, $speakerUid
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('speakers' => '1')
 		);
@@ -890,7 +890,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->testingFramework->createDummyFile('test_foo.gif');
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('image' => 'test_foo.gif')
 		);
@@ -921,7 +921,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->testingFramework->createDummyFile('test_foo.gif');
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('image' => 'test_foo.gif')
 		);
@@ -950,7 +950,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -970,7 +970,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -996,7 +996,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -1022,7 +1022,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
 		);
@@ -1050,7 +1050,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
 		);
@@ -1072,7 +1072,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -1093,7 +1093,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -1120,7 +1120,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -1147,7 +1147,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
 		);
@@ -1176,7 +1176,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
 		);
@@ -1197,7 +1197,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -1235,7 +1235,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -1254,7 +1254,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -1275,7 +1275,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -1295,7 +1295,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -1327,7 +1327,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function singleViewContainsTitleOfEventPlace() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('place' => 1)
+			'tx_seminars_seminars', array('place' => 1)
 		);
 		$placeUid = $this->testingFramework->createRecord(
 			'tx_seminars_sites', array('title' => 'a place')
@@ -1361,7 +1361,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_timeslots', array('seminar' => $this->seminarUid)
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('timeslots' => (string) $timeSlotUid)
 		);
 
@@ -1381,7 +1381,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('timeslots' => (string) $timeSlotUid)
 		);
 
@@ -1400,7 +1400,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_timeslots', array('seminar' => $this->seminarUid)
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('timeslots' => $timeSlotUid1.','.$timeSlotUid2)
 		);
 
@@ -1427,7 +1427,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('timeslots' => $timeSlotUid1.','.$timeSlotUid2)
 		);
 
@@ -1528,15 +1528,15 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewForSeminarWithOneRequirementDisplaysRequirementsSubpart() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$requiredEvent = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent, 'requirements'
 		);
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -1553,18 +1553,18 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createFrontEndPage()
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$requiredEvent = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent, 'requirements'
 		);
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -1590,14 +1590,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewForSeminarWithOneDependencyDisplaysDependenciesSubpart() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'dependencies' => 1,
 			)
 		);
 		$dependingEventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelation(
@@ -1614,14 +1614,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewForSeminarWithOneDependenciesShowsTitleOfDependency() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'dependencies' => 1,
 			)
 		);
 		$dependingEventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'depending_foo',
@@ -1645,14 +1645,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createFrontEndPage()
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'dependencies' => 1,
 			)
 		);
 		$dependingEventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'depending_foo',
@@ -1672,14 +1672,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewForSeminarWithTwoDependenciesShowsTitleOfBothDependencies() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'dependencies' => 2,
 			)
 		);
 		$dependingEventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'depending_foo',
@@ -1690,7 +1690,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$dependingEventUid1, $this->seminarUid
 		);
 		$dependingEventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'depending_bar',
@@ -1716,7 +1716,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewContainsEventTypeTitleAndColonIfEventHasEventType() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'event_type' => $this->testingFramework->createRecord(
 					'tx_seminars_event_types', array('title' => 'foo type')
@@ -1854,7 +1854,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewForDateRecordWithExpiryContainsExpiryDate() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $this->seminarUid,
@@ -1872,7 +1872,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewForDateRecordWithoutExpiryNotContainsExpiryLabel() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $this->seminarUid,
@@ -1912,7 +1912,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_payment_methods', array('title' => 'Payment Method')
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('payment_methods' => 1)
 		);
 		$this->testingFramework->createRelation(
@@ -1935,7 +1935,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_payment_methods', array('title' => 'Payment Method')
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('payment_methods' => 1)
 		);
 		$this->testingFramework->createRelation(
@@ -1961,7 +1961,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_payment_methods', array('title' => 'Payment Method 2')
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'payment_methods' => 2,
 			)
@@ -1995,7 +1995,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_payment_methods', array('title' => $paymentMethodTitle)
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('payment_methods' => 1)
 		);
 		$this->testingFramework->createRelation(
@@ -2101,7 +2101,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_SingleView_ForHiddenRecordAndNoLoggedInUser_ReturnsWrongSeminarNumberMessage() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid, array('hidden' => 1)
+			'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -2115,7 +2115,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_SingleView_ForHiddenRecordAndLoggedInUserNotOwnerOfHiddenRecord_ReturnsWrongSeminarNumberMessage() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid, array('hidden' => 1)
+			'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -2129,7 +2129,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_SingleView_ForHiddenRecordAndLoggedInUserOwnerOfHiddenRecord_ShowsHiddenEvent() {
 		$ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'hidden' => 1,
 				'title' => 'hidden event',
@@ -2159,7 +2159,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewContainsEventDatesUsingTopicTitle() {
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
@@ -2167,7 +2167,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -2189,7 +2189,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewHidesHiddenSingleEvents() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
@@ -2206,7 +2206,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewHidesDeletedSingleEvents() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
@@ -2223,7 +2223,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewHidesHiddenEventDates() {
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
@@ -2231,7 +2231,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -2251,7 +2251,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createDummyFile('test_foo.gif');
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('image' => 'test_foo.gif')
 		);
 		$listViewWithImage = $this->fixture->main('', array());
@@ -2281,7 +2281,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createDummyFile('test_foo.gif');
 
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
@@ -2290,7 +2290,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
@@ -2325,7 +2325,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_ListView_ShowsBookedOutEventByDefault() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event',
@@ -2347,7 +2347,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event',
@@ -2391,7 +2391,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testResultCounterIsTwoForTwoResultsOnOnePage() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Another event',
@@ -2408,7 +2408,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function testResultCounterIsSixForSixResultsOnTwoPages() {
 		for ($i = 0; $i < 5; $i++) {
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'pid' => $this->systemFolderPid,
 					'title' => 'Another event',
@@ -2437,7 +2437,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewContainsEventsWithCategoryByDefault() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
@@ -2475,7 +2475,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithCategoryContainsEventsWithSelectedCategory() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
@@ -2501,7 +2501,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithCategoryExcludesHiddenEventWithSelectedCategory() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
@@ -2528,7 +2528,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithCategoryExcludesDeletedEventWithSelectedCategory() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
@@ -2555,7 +2555,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithCategoryExcludesEventsWithNotSelectedCategory() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
@@ -2586,7 +2586,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithCategoryContainsEventsWithSelectedAndOtherCategory() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
@@ -2633,7 +2633,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewContainsEventsWithEventTypeByDefault() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
@@ -2669,7 +2669,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'foo type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
@@ -2690,7 +2690,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'foo type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type 1',
@@ -2702,7 +2702,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'foo type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type 2',
@@ -2731,7 +2731,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'foo type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
@@ -2753,7 +2753,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'foo type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
@@ -2775,7 +2775,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'foo type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
@@ -2804,7 +2804,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$fromTime = $simTime - 86400;
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event From',
@@ -2827,7 +2827,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$fromTime = $simTime + 86400;
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event From',
@@ -2849,7 +2849,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event From',
@@ -2871,7 +2871,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$fromTime = $simTime - 86400;
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event From',
@@ -2892,7 +2892,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event From',
@@ -2913,7 +2913,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event From',
@@ -2934,7 +2934,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$toTime = $simTime + 86400;
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event To',
@@ -2957,7 +2957,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$toTime = $simTime - 86400;
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event To',
@@ -2979,7 +2979,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event To',
@@ -3001,7 +3001,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$toTime = $simTime + 86400;
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event To',
@@ -3021,7 +3021,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_ListViewForGivenToDateWithMissingMonth_ShowsEventWithBeginDateOnDayOfLastMonthOfGivenYear() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event To',
@@ -3041,7 +3041,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_ListViewForGivenToDateWithMissingMonthAndDay_ShowsEventWithBeginDateOnEndOfGivenYear() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event To',
@@ -3063,7 +3063,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$toTime = $simTime + 86400;
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event To',
@@ -3090,7 +3090,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$toTime = $simTime + 86400;
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event To',
@@ -3098,7 +3098,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Bar Event To',
@@ -3130,7 +3130,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$toTime = $simTime + 86400;
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event',
@@ -3156,7 +3156,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$fromTime = $simTime - 86400;
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event',
@@ -3179,7 +3179,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_ListViewForSentDateButAllDatesZero_ShowsEventWithoutBeginDate() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event',
@@ -3210,7 +3210,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('minimum_age' => 5, 'maximum_age' => 20)
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event To',
@@ -3218,7 +3218,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+			'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
 		);
 
 		$this->fixture->piVars['age'] = 15;
@@ -3235,7 +3235,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('minimum_age' => 5, 'maximum_age' => 20)
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event To',
@@ -3243,7 +3243,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $targetGroupUid, 'target_groups'
+			'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
 		);
 
 		$this->fixture->piVars['age'] = 4;
@@ -3264,12 +3264,12 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_organizers'
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('title' => 'Foo Event', 'pid' => $this->systemFolderPid)
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+			'tx_seminars_seminars', $eventUid, $organizerUid, 'organizers'
 		);
 
 		$this->fixture->piVars['organizer'][] = $organizerUid;
@@ -3285,12 +3285,12 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_organizers'
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('title' => 'Foo Event', 'pid' => $this->systemFolderPid)
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+			'tx_seminars_seminars', $eventUid, $organizerUid, 'organizers'
 		);
 
 		$this->fixture->piVars['organizer'][]
@@ -3309,7 +3309,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_ListViewForGivenPriceFrom_ShowsEventWithRegularPriceHigherThanPriceFrom() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event',
@@ -3327,7 +3327,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_ListViewForGivenPriceTo_ShowsEventWithRegularPriceLowerThanPriceTo() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event',
@@ -3345,7 +3345,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_ListViewForGivenPriceRange_ShowsEventWithRegularPriceWithinRange() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event',
@@ -3364,7 +3364,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_ListViewForGivenPriceRange_HidesEventWithRegularPriceOutsideRange() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Foo Event',
@@ -3388,14 +3388,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewCanBeSortedByTitleAscending() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event A'
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event B'
@@ -3412,14 +3412,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewCanBeSortedByTitleDescending() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event A'
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event B'
@@ -3452,7 +3452,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				// the number of categories
@@ -3466,7 +3466,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				// the number of categories
@@ -3495,7 +3495,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				// the number of categories
@@ -3509,7 +3509,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				// the number of categories
@@ -3537,7 +3537,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'Category Y')
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				// the number of categories
@@ -3555,7 +3555,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'Category X')
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				// the number of categories
@@ -3584,7 +3584,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				// the number of categories
@@ -3598,7 +3598,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				// the number of categories
@@ -3629,7 +3629,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'Category Y')
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				// the number of categories
@@ -3647,7 +3647,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'Category X')
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				// the number of categories
@@ -3687,7 +3687,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with teaser',
@@ -3712,7 +3712,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('listPID', $frontEndPageUid);
 
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
@@ -3741,7 +3741,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'events_next_day');
 
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
@@ -3773,7 +3773,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testOmitDateIfSameAsPreviousOnDifferentDatesWithActiveConfig() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event title',
@@ -3782,7 +3782,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event title',
@@ -3809,7 +3809,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testOmitDateIfSameAsPreviousOnDifferentDatesWithInactiveConfig() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event title',
@@ -3818,7 +3818,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event title',
@@ -3851,10 +3851,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'end_date' => mktime(18, 0, 0, 1, 1, 2020)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, $eventData
+			'tx_seminars_seminars', $eventData
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, $eventData
+			'tx_seminars_seminars', $eventData
 		);
 
 		$this->fixture->piVars['sort'] = 'date:0';
@@ -3879,10 +3879,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'end_date' => mktime(18, 0, 0, 1, 1, 2020)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, $eventData
+			'tx_seminars_seminars', $eventData
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, $eventData
+			'tx_seminars_seminars', $eventData
 		);
 
 		$this->fixture->piVars['sort'] = 'date:0';
@@ -3925,7 +3925,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'an event type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
@@ -3938,7 +3938,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'an event type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with another type',
@@ -3967,7 +3967,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'an event type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
@@ -3995,7 +3995,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'an event type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
@@ -4008,7 +4008,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'an event type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with another type',
@@ -4054,7 +4054,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToCategoriesContainsEventsWithMultipleSelectedCategories() {
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
@@ -4072,7 +4072,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with another category',
@@ -4106,7 +4106,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToCategoriesIgnoresEventsWithNotSelectedCategory() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
@@ -4139,7 +4139,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewForSingleCategoryOverridesLimitToCategories() {
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
@@ -4157,7 +4157,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with another category',
@@ -4212,7 +4212,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToPlacesContainsEventsWithMultipleSelectedPlaces() {
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with place',
@@ -4230,7 +4230,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with another place',
@@ -4264,7 +4264,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToPlacesExcludesEventsWithNotSelectedPlace() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with place',
@@ -4297,7 +4297,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToPlacesExcludesHiddenEventWithSelectedPlace() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with place',
@@ -4328,7 +4328,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToPlacesExcludesDeletedEventWithSelectedPlace() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with place',
@@ -4361,7 +4361,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		// TODO: This needs to be changed when bug 2304 gets fixed.
 		// @see https://bugs.oliverklee.com/show_bug.cgi?id=2304
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with place',
@@ -4377,7 +4377,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with another place',
@@ -4418,14 +4418,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_organizers'
 			);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with organizer 1',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+			'tx_seminars_seminars', $eventUid, $organizerUid, 'organizers'
 		);
 
 		$this->fixture->setConfigurationValue(
@@ -4445,28 +4445,28 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_organizers'
 			);
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with organizer 1',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid1, $organizerUid1, 'organizers'
+			'tx_seminars_seminars', $eventUid1, $organizerUid1, 'organizers'
 		);
 
 		$organizerUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_organizers'
 			);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with organizer 2',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid2, $organizerUid2, 'organizers'
+			'tx_seminars_seminars', $eventUid2, $organizerUid2, 'organizers'
 		);
 
 		$this->fixture->setConfigurationValue(
@@ -4484,28 +4484,28 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_organizers'
 			);
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with organizer 1',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid1, $organizerUid1, 'organizers'
+			'tx_seminars_seminars', $eventUid1, $organizerUid1, 'organizers'
 		);
 
 		$organizerUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_organizers'
 			);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with organizer 2',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid2, $organizerUid2, 'organizers'
+			'tx_seminars_seminars', $eventUid2, $organizerUid2, 'organizers'
 		);
 
 		$this->fixture->setConfigurationValue(
@@ -4533,7 +4533,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_ListView_ForEventWithUnlimitedVacancies_ShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 0,
@@ -4550,7 +4550,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_ListView_ForEventWithNoVacanciesAndQueue_ShowsRegisterOnQueueLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 1,
@@ -4578,7 +4578,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_ListView_ForEventWithNoVacanciesAndNoQueue_DoesNotShowRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 1,
@@ -4606,7 +4606,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_ListView_ForEventWithVacanciesAndNoDate_ShowsPreebookNowString() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 1,
@@ -4624,7 +4624,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_ListView_ForEventWithRegistrationBeginInFuture_HidesRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 0,
@@ -4644,7 +4644,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$registrationBegin = $GLOBALS['SIM_EXEC_TIME'] + 20;
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 0,
@@ -4666,7 +4666,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_ListView_ForEventWithRegistrationBeginInPast_ShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 0,
@@ -4685,7 +4685,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_ListView_ForEventWithoutRegistrationBegin_ShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 0,
@@ -4728,7 +4728,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function testMyEventsContainsExpiryOfEventWithExpiryAndRegistrationForLoggedInUser() {
 		$this->createLogInAndRegisterFeUser();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('expiry' => mktime(0, 0, 0, 1, 1, 2008))
 		);
 		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
@@ -4865,7 +4865,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('title' => 'category_foo')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid, $categoryUid, 'categories'
 		);
 
@@ -4888,7 +4888,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 		$this->fixture->setConfigurationValue('timeframeInList', 'current');
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'title' => 'currentEvent',
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 20,
@@ -4910,7 +4910,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 		$this->fixture->setConfigurationValue('timeframeInList', 'current');
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'title' => 'futureEvent',
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 21,
@@ -5004,7 +5004,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testGetLoginLinkWithLoggedOutUserAddsUidPiVarToUrl() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'foo',
@@ -5033,7 +5033,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewCanContainOneItemOnTheFirstPage() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event A'
@@ -5048,14 +5048,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewCanContainTwoItemsOnTheFirstPage() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event A'
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event B'
@@ -5083,14 +5083,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event A'
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event B'
@@ -5113,14 +5113,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event A'
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event B'
@@ -5144,7 +5144,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event A'
@@ -5163,7 +5163,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event A'
@@ -5182,7 +5182,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event A'
@@ -5201,7 +5201,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event A'
@@ -5219,7 +5219,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event A'
@@ -5237,7 +5237,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event A'
@@ -5260,7 +5260,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -5284,7 +5284,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
 		);
@@ -5310,7 +5310,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -5330,7 +5330,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$dummyFileName =
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('attached_files' => $dummyFileName)
 		);
@@ -5376,7 +5376,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledContainsOwnerDataHeading() {
 		$ownerUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('owner_feuser' => $ownerUid)
 		);
@@ -5395,7 +5395,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledNotContainsEmptyLines() {
 		$ownerUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('owner_feuser' => $ownerUid)
 		);
@@ -5427,7 +5427,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function testSingleViewForSeminarWithOwnerAndOwnerDataDisabledNotContainsOwnerDataHeading() {
 		$ownerUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('owner_feuser' => $ownerUid)
 		);
@@ -5448,7 +5448,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'', array('name' => 'John Doe')
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('owner_feuser' => $ownerUid)
 		);
@@ -5469,7 +5469,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'', array('name' => 'Tom & Jerry')
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('owner_feuser' => $ownerUid)
 		);
@@ -5491,7 +5491,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('owner_feuser' => $ownerUid)
 		);
@@ -5512,7 +5512,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'', array('telephone' => '0123 4567')
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('owner_feuser' => $ownerUid)
 		);
@@ -5533,7 +5533,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'', array('email' => 'foo@bar.com')
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('owner_feuser' => $ownerUid)
 		);
@@ -5568,7 +5568,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_SingleView_ForEventWithUnlimitedVacancies_ShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 0,
@@ -5586,7 +5586,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_SingleView_ForEventWithNoVacanciesAndQueue_ShowsRegisterOnQueueLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 1,
@@ -5614,7 +5614,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_SingleView_ForEventWithNoVacanciesAndNoQueue_DoesNotShowRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 1,
@@ -5642,7 +5642,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_SingleView_ForEventWithVacanciesAndNoDate_ShowsPreebookNowString() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 1,
@@ -5661,7 +5661,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_SingleView_ForEventWithRegistrationBeginInFuture_DoesNotShowRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 0,
@@ -5681,7 +5681,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$registrationBegin = $GLOBALS['SIM_EXEC_TIME'] + 40;
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 0,
@@ -5703,7 +5703,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_SingleView_ForEventWithRegistrationBeginInPast_ShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 0,
@@ -5722,7 +5722,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function test_SingleView_ForEventWithoutRegistrationBegin_ShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'needs_registration' => 1,
 				'attendees_max' => 0,
@@ -5748,15 +5748,15 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
 
 		$requiredTopic = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$topic = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$date = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
@@ -5767,7 +5767,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topic, $requiredTopic, 'requirements'
 		);
 		$this->fixture->piVars['seminar'] = $date;
@@ -5783,15 +5783,15 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
 
 		$requiredTopic = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$topic = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$date = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
@@ -5802,7 +5802,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topic, $requiredTopic, 'requirements'
 		);
 		$this->fixture->piVars['seminar'] = $date;
@@ -5822,11 +5822,11 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$topic = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$date = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
@@ -5838,14 +5838,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$requiredTopic = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topic, $requiredTopic, 'requirements'
 		);
 		$this->fixture->piVars['seminar'] = $date;
@@ -5861,11 +5861,11 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
 
 		$topic = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$date = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
@@ -5877,25 +5877,25 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$requiredTopic1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topic, $requiredTopic1, 'requirements'
 		);
 		$requiredTopic2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'required_bar',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topic, $requiredTopic2, 'requirements'
 		);
 
@@ -6268,7 +6268,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$editorGroupUid
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'owner_feuser' => $feUserUid,
@@ -6297,7 +6297,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$editorGroupUid
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'owner_feuser' => $feUserUid,
@@ -6326,7 +6326,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$editorGroupUid
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'owner_feuser' => $feUserUid,
@@ -6353,7 +6353,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$editorGroupUid
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'owner_feuser' => $feUserUid,
@@ -6381,7 +6381,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$editorGroupUid
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'owner_feuser' => $feUserUid,

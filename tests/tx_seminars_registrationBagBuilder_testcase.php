@@ -99,7 +99,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuildWithoutLimitReturnsBagWithAllRegistrations() {
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
@@ -142,7 +142,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventWithValidEventUidFindsRegistrationOfEvent() {
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
@@ -161,10 +161,10 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventWithValidEventUidIgnoresRegistrationOfOtherEvent() {
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
@@ -486,7 +486,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToAttendeeWithPositiveFeUserUidFindsRegistrationsWithAttendee() {
 		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$registrationUid = $this->testingFramework->createRecord(
 			'tx_seminars_attendances',
@@ -506,7 +506,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToAttendeeWithPositiveFeUserUidIgnoresRegistrationsWithoutAttendee() {
 		$feUserUid = $this->testingFramework->createFrontEndUser();
-		$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		$this->testingFramework->createRecord('tx_seminars_seminars');
 
 		$this->fixture->limitToAttendee($feUserUid);
 		$bag = $this->fixture->build();
@@ -522,7 +522,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
 		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
 		$feUserUid2 = $this->testingFramework->createFrontEndUser($feUserGroupUid);
-		$eventUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		$registrationUid = $this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array('seminar' => $eventUid, 'user' => $feUserUid2)
@@ -547,10 +547,10 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testSetOrderByEventColumnCanSortAscendingByEventTitle() {
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('title' => 'test title 1')
+			'tx_seminars_seminars', array('title' => 'test title 1')
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('title' => 'test title 2')
+			'tx_seminars_seminars', array('title' => 'test title 2')
 		);
 		$registrationUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_attendances', array('seminar' => $eventUid1)
@@ -560,7 +560,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setOrderByEventColumn(
-			SEMINARS_TABLE_SEMINARS . '.title ASC'
+			'tx_seminars_seminars.title ASC'
 		);
 		$bag = $this->fixture->build();
 
@@ -578,10 +578,10 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testSetOrderByEventColumnCanSortDescendingByEventTitle() {
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('title' => 'test title 1')
+			'tx_seminars_seminars', array('title' => 'test title 1')
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('title' => 'test title 2')
+			'tx_seminars_seminars', array('title' => 'test title 2')
 		);
 		$registrationUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_attendances', array('seminar' => $eventUid1)
@@ -591,7 +591,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->setOrderByEventColumn(
-			SEMINARS_TABLE_SEMINARS . '.title DESC'
+			'tx_seminars_seminars.title DESC'
 		);
 		$bag = $this->fixture->build();
 

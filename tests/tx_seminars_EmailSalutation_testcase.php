@@ -284,7 +284,7 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 	public function createIntroductionForEventWithDateReturnsEventsDate() {
 		$dateFormatYMD = '%d.%m.%Y';
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
 		);
 
@@ -307,7 +307,7 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 		$dateFormatYMD = '%d.%m.%Y';
 		$dateFormatD = '%d';
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
 				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
@@ -336,7 +336,7 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 	public function createIntroductionForEventWithTimeReturnsEventsTime() {
 		$timeFormat = '%H:%M';
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
 			)
@@ -361,7 +361,7 @@ class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
 		$timeFormat = '%H:%M';
 		$endDate = $GLOBALS['SIM_EXEC_TIME'] + 3600;
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
 				'end_date' => $endDate,

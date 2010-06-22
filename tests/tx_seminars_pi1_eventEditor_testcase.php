@@ -86,7 +86,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	 */
 	private function createLogInAndAddFeUserAsVip() {
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('vips' => 1)
+			'tx_seminars_seminars', array('vips' => 1)
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_feusers_mm',
@@ -113,7 +113,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	 */
 	private function createLogInAndAddFeUserAsOwner() {
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('owner_feuser' => $this->testingFramework->createAndLoginFrontEndUser())
 		));
 	}
@@ -231,7 +231,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				'uid=' . $this->fixture->getObjectUid() . ' AND vips=1'
 			)
 		);
@@ -260,7 +260,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				'uid=' . $this->fixture->getObjectUid() . ' AND owner_feuser>0'
 			)
 		);
@@ -369,7 +369,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function testGetEventSuccessfullySavedUrlNotReturnsSeminarToEditAsLinkParameter() {
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		));
 		$this->fixture->setConfigurationValue(
 			'eventSuccessfullySavedPID', $this->testingFramework->createFrontEndPage()
@@ -406,7 +406,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function testHasAccessMessageWithNoLoggedInFeUserReturnsNotLoggedInMessage() {
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		));
 
 		$this->assertContains(
@@ -417,7 +417,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function testHasAccessMessageWithLoggedInFeUserWhoIsNeitherVipNorOwnerReturnsNoAccessMessage() {
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		));
 		$this->testingFramework->createAndLoginFrontEndUser();
 
@@ -438,7 +438,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function testHasAccessMessageWithLoggedInFeUserAsVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult() {
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		));
 		$this->fixture->setConfigurationValue('mayManagersEditTheirEvents' , 0);
 		$this->createLogInAndAddFeUserAsVip();
@@ -451,7 +451,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function testHasAccessMessageWithLoggedInFeUserAsVipAndVipsMayEditTheirEventsReturnsEmptyResult() {
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		));
 		$this->fixture->setConfigurationValue('mayManagersEditTheirEvents' , 1);
 		$this->createLogInAndAddFeUserAsVip();
@@ -464,7 +464,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function testHasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult() {
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		));
 		$this->fixture->setConfigurationValue('mayManagersEditTheirEvents' , 0);
 		$this->createLogInAndAddFeUserAsDefaultVip();
@@ -477,7 +477,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function testHasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayEditTheirEventsReturnsEmptyResult() {
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		));
 		$this->fixture->setConfigurationValue('mayManagersEditTheirEvents' , 1);
 		$this->createLogInAndAddFeUserAsDefaultVip();
@@ -519,7 +519,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setConfigurationValue('eventEditorFeGroupID', $groupUid);
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		));
 
 		$this->assertContains(
@@ -536,7 +536,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setConfigurationValue('eventEditorFeGroupID', $groupUid);
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('owner_feuser' => $userUid)
+			'tx_seminars_seminars', array('owner_feuser' => $userUid)
 		));
 
 		$this->assertEquals(
@@ -553,7 +553,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->setConfigurationValue('eventEditorFeGroupID', $groupUid);
 		$this->fixture->setObjectUid($this->testingFramework->getAutoIncrement(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		));
 
 		$this->assertContains(
@@ -569,7 +569,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createAndLoginFrontEndUser($groupUid);
 
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('deleted' => 1)
+			'tx_seminars_seminars', array('deleted' => 1)
 		));
 
 		$this->assertContains(
@@ -580,7 +580,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function testHasAccessMessageForHiddenSeminarUidAndUserLoggedInReturnsEmptyString() {
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'hidden' => 1,
 				'owner_feuser' => $this->testingFramework->createAndLoginFrontEndUser(),
@@ -2905,7 +2905,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function test_eventEditorForEventHiddenBeforeEditing_DoesNotSendMail() {
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('hidden' => 1)
+			'tx_seminars_seminars', array('hidden' => 1)
 		);
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -2922,7 +2922,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_eventEditorForEventHiddenByForm_DoesSendMail() {
-		$seminarUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
@@ -2930,7 +2930,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$formData = $this->fixture->modifyDataToInsert(array());
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			'tx_seminars_seminars', $seminarUid,
 			array(
 				'hidden' => 1,
 				'publication_hash' => $formData['publication_hash'],
@@ -2946,7 +2946,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_sendEMailToReviewer_SendsMailToReviewerMailAddress() {
-		$seminarUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
@@ -2954,7 +2954,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$formData = $this->fixture->modifyDataToInsert(array());
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			'tx_seminars_seminars', $seminarUid,
 			array(
 				'hidden' => 1,
 				'publication_hash' => $formData['publication_hash'],
@@ -2970,7 +2970,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_sendEMailToReviewer_SetsPublishEventSubjectInMail() {
-		$seminarUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
@@ -2978,7 +2978,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$formData = $this->fixture->modifyDataToInsert(array());
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			'tx_seminars_seminars', $seminarUid,
 			array(
 				'hidden' => 1,
 				'publication_hash' => $formData['publication_hash'],
@@ -2995,7 +2995,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function test_sendEMailToReviewer_SendsTheTitleOfTheEvent() {
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('title' => 'foo Event')
+			'tx_seminars_seminars', array('title' => 'foo Event')
 		);
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -3004,7 +3004,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$formData = $this->fixture->modifyDataToInsert(array());
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			'tx_seminars_seminars', $seminarUid,
 			array(
 				'hidden' => 1,
 				'publication_hash' => $formData['publication_hash'],
@@ -3024,7 +3024,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	public function test_sendEMailToReviewerForEventWithDate_SendsTheDateOfTheEvent() {
 		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
+			'tx_seminars_seminars', array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
 		);
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -3033,7 +3033,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$formData = $this->fixture->modifyDataToInsert(array());
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			'tx_seminars_seminars', $seminarUid,
 			array(
 				'hidden' => 1,
 				'publication_hash' => $formData['publication_hash'],
@@ -3056,7 +3056,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	public function test_sendEMailToReviewerForEventWithoutDate_HidesDateMarker() {
 		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -3065,7 +3065,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$formData = $this->fixture->modifyDataToInsert(array());
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			'tx_seminars_seminars', $seminarUid,
 			array(
 				'hidden' => 1,
 				'publication_hash' => $formData['publication_hash'],
@@ -3085,7 +3085,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	public function test_sendEMailToReviewerForEventWithoutDate_DoesNotSendDate() {
 		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -3094,7 +3094,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$formData = $this->fixture->modifyDataToInsert(array());
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			'tx_seminars_seminars', $seminarUid,
 			array(
 				'hidden' => 1,
 				'publication_hash' => $formData['publication_hash'],
@@ -3114,7 +3114,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function test_sendEMailToReviewer_SendsMailWithoutAnyUnreplacedMarkers() {
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -3123,7 +3123,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$formData = $this->fixture->modifyDataToInsert(array());
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			'tx_seminars_seminars', $seminarUid,
 			array(
 				'hidden' => 1,
 				'publication_hash' => $formData['publication_hash'],
@@ -3142,7 +3142,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function test_sendEMailToReviewerForEventWithDescription_ShowsDescriptionInMail() {
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('description' => 'Foo Description')
+			'tx_seminars_seminars', array('description' => 'Foo Description')
 		);
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -3151,7 +3151,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$formData = $this->fixture->modifyDataToInsert(array());
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			'tx_seminars_seminars', $seminarUid,
 			array(
 				'hidden' => 1,
 				'publication_hash' => $formData['publication_hash'],
@@ -3170,7 +3170,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 	public function test_sendEMailToReviewer_SendsPublicationLinkInMail() {
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -3179,7 +3179,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$formData = $this->fixture->modifyDataToInsert(array());
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			'tx_seminars_seminars', $seminarUid,
 			array(
 				'hidden' => 1,
 				'publication_hash' => $formData['publication_hash'],
@@ -3197,7 +3197,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_sendEMailToReviewer_UsesFrontEndUserNameAsFromNameForMail() {
-		$seminarUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
@@ -3205,7 +3205,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$formData = $this->fixture->modifyDataToInsert(array());
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			'tx_seminars_seminars', $seminarUid,
 			array(
 				'hidden' => 1,
 				'publication_hash' => $formData['publication_hash'],
@@ -3221,7 +3221,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function test_sendEMailToReviewer_UsesFrontEndUserMailAddressAsFromAddressForMail() {
-		$seminarUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
@@ -3229,7 +3229,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$formData = $this->fixture->modifyDataToInsert(array());
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $seminarUid,
+			'tx_seminars_seminars', $seminarUid,
 			array(
 				'hidden' => 1,
 				'publication_hash' => $formData['publication_hash'],

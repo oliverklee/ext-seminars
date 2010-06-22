@@ -99,7 +99,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord('tx_seminars_categories');
 
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -121,7 +121,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord('tx_seminars_categories');
 
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -183,7 +183,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventsCanResultInOneCategory() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -207,7 +207,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord('tx_seminars_categories');
 
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 
 		$categoryUid1 = $this->testingFramework->createRecord(
@@ -239,7 +239,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord('tx_seminars_categories');
 
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$categoryUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -249,7 +249,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$categoryUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -273,7 +273,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord('tx_seminars_categories');
 
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -298,7 +298,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventsWillExcludeCategoriesOfOtherEvents() {
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$categoryUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -308,7 +308,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$categoryUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -338,7 +338,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -348,7 +348,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 
 		$this->fixture->limitToEvents($eventUid2);

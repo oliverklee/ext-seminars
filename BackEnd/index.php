@@ -155,7 +155,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 
 		// only show the tabs if the back-end user has access to the
 		// corresponding tables
-		if ($BE_USER->check('tables_select', SEMINARS_TABLE_SEMINARS)) {
+		if ($BE_USER->check('tables_select', 'tx_seminars_seminars')) {
 			$this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
 		}
 

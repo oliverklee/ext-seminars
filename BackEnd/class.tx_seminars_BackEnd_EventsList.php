@@ -154,7 +154,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 
 		$useManualSorting = tx_oelib_configurationProxy::getInstance('seminars')
 			->getAsBoolean('useManualSorting')
-			&& $GLOBALS['BE_USER']->check('tables_modify', SEMINARS_TABLE_SEMINARS)
+			&& $GLOBALS['BE_USER']->check('tables_modify', 'tx_seminars_seminars')
 			&& $GLOBALS['BE_USER']->doesUserHaveAccess(
 				t3lib_BEfunc::getRecord(
 					'pages', $pageData['uid']

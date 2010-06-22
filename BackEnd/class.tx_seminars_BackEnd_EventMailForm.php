@@ -185,7 +185,7 @@ abstract class tx_seminars_BackEnd_EventMailForm {
 	 * @return boolean TRUE if the user is allowed to see/use the form, FALSE otherwise
 	 */
 	public function checkAccess() {
-		return $GLOBALS['BE_USER']->check('tables_select', SEMINARS_TABLE_SEMINARS);
+		return $GLOBALS['BE_USER']->check('tables_select', 'tx_seminars_seminars');
 	}
 
 	/**

@@ -628,7 +628,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 
 		if (($this->getObjectUid() > 0)
 			&& !tx_seminars_objectfromdb::recordExists(
-				$this->getObjectUid(), SEMINARS_TABLE_SEMINARS, TRUE
+				$this->getObjectUid(), 'tx_seminars_seminars', TRUE
 			)
 		) {
 			return 'message_wrongSeminarNumber';

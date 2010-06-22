@@ -42,7 +42,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	/**
 	 * @var string the table name of the bag to build
 	 */
-	protected $tableName = SEMINARS_TABLE_SEMINARS;
+	protected $tableName = 'tx_seminars_seminars';
 
 	/**
 	 * @var array list of the valid keys for time-frames
@@ -136,10 +136,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['categories'] =
 			'(' .
 			'(object_type != ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
-			SEMINARS_TABLE_SEMINARS . '.uid' . $uidMatcher . ')' .
+			'tx_seminars_seminars.uid' . $uidMatcher . ')' .
 			' OR ' .
 			'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
-			SEMINARS_TABLE_SEMINARS . '.topic' . $uidMatcher . ')' .
+			'tx_seminars_seminars.topic' . $uidMatcher . ')' .
 			')';
 	}
 
@@ -163,7 +163,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['places'] = 'EXISTS (SELECT * FROM ' .
 			'tx_seminars_seminars_place_mm WHERE ' .
 			'tx_seminars_seminars_place_mm.uid_local = ' .
-			SEMINARS_TABLE_SEMINARS . '.uid AND ' .
+			'tx_seminars_seminars.uid AND ' .
 			'tx_seminars_seminars_place_mm.uid_foreign IN(' . $safePlaceUids . ')' .
 		')';
 	}
@@ -210,32 +210,32 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				// 2. If the event has an end date, does it lie in the past?, OR
 				// 3. If the event has *no* end date, does the *begin* date lie
 				//    in the past?
-				$where = SEMINARS_TABLE_SEMINARS.'.begin_date != 0 '
-					.'AND ( ('.SEMINARS_TABLE_SEMINARS.'.end_date != 0 '
-							.'AND '.SEMINARS_TABLE_SEMINARS.'.end_date <= '.$now
-						.') OR ('
-							.SEMINARS_TABLE_SEMINARS.'.end_date = 0 '
-							.'AND '.SEMINARS_TABLE_SEMINARS.'.begin_date <= '.$now
-						.')'
-					.')';
+				$where = 'tx_seminars_seminars.begin_date != 0 ' .
+					'AND ( (tx_seminars_seminars.end_date != 0 ' .
+							'AND tx_seminars_seminars.end_date <= ' . $now .
+						') OR (' .
+							'tx_seminars_seminars.end_date = 0 ' .
+							'AND tx_seminars_seminars.begin_date <= ' . $now .
+						')' .
+					')';
 				break;
 			case 'pastAndCurrent':
 				// As past and current events, shows the following:
 				// 1. Generally, only events that have a begin date set, AND
 				// 2. the begin date lies in the past.
 				// (So events without a begin date won't be listed here.)
-				$where = SEMINARS_TABLE_SEMINARS.'.begin_date != 0 '
-					.'AND '.SEMINARS_TABLE_SEMINARS.'.begin_date <= '.$now;
+				$where = 'tx_seminars_seminars.begin_date != 0 ' .
+					'AND tx_seminars_seminars.begin_date <= ' . $now;
 				break;
 			case 'current':
 				// As current events, shows the following:
 				// 1. Events that have both a begin and end date, AND
 				// 2. The begin date lies in the past, AND
 				// 3. The end date lies in the future.
-				$where = SEMINARS_TABLE_SEMINARS.'.begin_date != 0 '
-					.'AND '.SEMINARS_TABLE_SEMINARS.'.begin_date <= '.$now.' '
+				$where = 'tx_seminars_seminars.begin_date != 0 ' .
+					'AND tx_seminars_seminars.begin_date <= ' . $now . ' ' .
 					// This implies that end_date is != 0.
-					.'AND '.SEMINARS_TABLE_SEMINARS.'.end_date > '.$now;
+					'AND tx_seminars_seminars.end_date > ' . $now;
 				break;
 			case 'currentAndUpcoming':
 				// As current and upcoming events, shows the following:
@@ -244,23 +244,23 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				//    in the future (open-ended events that have not started yet),
 				//    OR
 				// 3. Events that have no (begin) date set yet.
-				$where = SEMINARS_TABLE_SEMINARS.'.end_date > '.$now
-					.' OR ('
-						.SEMINARS_TABLE_SEMINARS.'.end_date = 0 '
-						.'AND '.SEMINARS_TABLE_SEMINARS.'.begin_date > '.$now
-					.') OR '
-						.SEMINARS_TABLE_SEMINARS.'.begin_date = 0';
+				$where = 'tx_seminars_seminars.end_date > ' . $now .
+					' OR (' .
+						'tx_seminars_seminars.end_date = 0 ' .
+						'AND tx_seminars_seminars.begin_date > ' . $now .
+					') OR ' .
+						'tx_seminars_seminars.begin_date = 0';
 				break;
 			case 'upcoming':
 				// As upcoming events, shows the following:
 				// 1. Events with an existing begin date in the future
 				//    (events that have not started yet), OR
 				// 3. Events that have no (begin) date set yet.
-				$where = SEMINARS_TABLE_SEMINARS.'.begin_date > '.$now
-					.' OR '.SEMINARS_TABLE_SEMINARS.'.begin_date = 0';
+				$where = 'tx_seminars_seminars.begin_date > ' . $now .
+					' OR tx_seminars_seminars.begin_date = 0';
 				break;
 			case 'upcomingWithBeginDate':
-				$where = SEMINARS_TABLE_SEMINARS . '.begin_date > ' . $now;
+				$where = 'tx_seminars_seminars.begin_date > ' . $now;
 				break;
 			case 'deadlineNotOver':
 				// As events for which the registration deadline is not over yet,
@@ -270,17 +270,16 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				//    with an existing begin date in the future
 				//    (events that have not started yet), OR
 				// 3. Events that have no (begin) date set yet.
-				$where = '('
-						.SEMINARS_TABLE_SEMINARS.'.deadline_registration != 0 '
-						.'AND '.SEMINARS_TABLE_SEMINARS
-							.'.deadline_registration > '.$now
-					.') OR ('
-						.SEMINARS_TABLE_SEMINARS.'.deadline_registration = 0 '
-						.'AND ('
-							.SEMINARS_TABLE_SEMINARS.'.begin_date > '.$now
-							.' OR '.SEMINARS_TABLE_SEMINARS.'.begin_date = 0'
-						.')'
-					.')';
+				$where = '(' .
+						'tx_seminars_seminars.deadline_registration != 0 ' .
+						'AND tx_seminars_seminars.deadline_registration > ' . $now .
+					') OR (' .
+						'tx_seminars_seminars.deadline_registration = 0 ' .
+						'AND (' .
+							'tx_seminars_seminars.begin_date > ' . $now .
+							' OR tx_seminars_seminars.begin_date = 0' .
+						')' .
+					')';
 				break;
 			case 'today':
 				$day = date('j', $now);
@@ -291,14 +290,14 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				$todayEnd = mktime(23, 59, 59, $month, $day, $year);
 
 				$where = '(' .
-					SEMINARS_TABLE_SEMINARS . '.begin_date BETWEEN ' .
+					'tx_seminars_seminars.begin_date BETWEEN ' .
 					$todayBegin . ' AND ' . $todayEnd .
 					') OR ( ' .
-					SEMINARS_TABLE_SEMINARS . '.end_date BETWEEN ' .
+					'tx_seminars_seminars.end_date BETWEEN ' .
 					$todayBegin . ' AND ' . $todayEnd .
 					') OR ( '.
-					SEMINARS_TABLE_SEMINARS . '.begin_date < ' . $todayBegin .
-					' AND ' . SEMINARS_TABLE_SEMINARS . '.end_date > ' . $todayEnd .
+					'tx_seminars_seminars.begin_date < ' . $todayBegin .
+					' AND tx_seminars_seminars.end_date > ' . $todayEnd .
 					')';
 					break;
 			case 'all':
@@ -331,14 +330,14 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		);
 
 		$this->whereClauseParts['eventTypes'] = '(' .
-			'(object_type=' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
+			'(object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
 			'event_type IN(' . $safeEventTypeUids . '))' .
 			' OR ' .
-			'(object_type=' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+			'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
 			'EXISTS (SELECT * FROM ' .
-			SEMINARS_TABLE_SEMINARS . ' AS topic WHERE ' .
-			'topic.uid=' .
-			SEMINARS_TABLE_SEMINARS . '.topic AND ' .
+			'tx_seminars_seminars AS topic WHERE ' .
+			'topic.uid = ' .
+			'tx_seminars_seminars.topic AND ' .
 			'topic.event_type IN(' . $safeEventTypeUids . ')' .
 			'))' .
 		')';
@@ -365,11 +364,11 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			)
 		);
 
-		$this->whereClauseParts['cities'] = SEMINARS_TABLE_SEMINARS . '.uid IN(' .
-			'SELECT ' . SEMINARS_TABLE_SEMINARS . '.uid' .
-			' FROM ' . SEMINARS_TABLE_SEMINARS .
+		$this->whereClauseParts['cities'] = 'tx_seminars_seminars.uid IN(' .
+			'SELECT tx_seminars_seminars.uid' .
+			' FROM tx_seminars_seminars' .
 			' LEFT JOIN tx_seminars_seminars_place_mm ON ' .
-				SEMINARS_TABLE_SEMINARS . '.uid=' .
+				'tx_seminars_seminars.uid=' .
 				'tx_seminars_seminars_place_mm.uid_local' .
 			' LEFT JOIN tx_seminars_sites ON ' .
 				'tx_seminars_seminars_place_mm.uid_foreign = ' .
@@ -400,11 +399,11 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			)
 		);
 
-		$this->whereClauseParts['countries'] = SEMINARS_TABLE_SEMINARS . '.uid IN(' .
-			'SELECT ' . SEMINARS_TABLE_SEMINARS . '.uid' .
-			' FROM ' . SEMINARS_TABLE_SEMINARS .
+		$this->whereClauseParts['countries'] = 'tx_seminars_seminars.uid IN(' .
+			'SELECT tx_seminars_seminars.uid' .
+			' FROM tx_seminars_seminars' .
 			' LEFT JOIN tx_seminars_seminars_place_mm ON ' .
-				SEMINARS_TABLE_SEMINARS . '.uid=' .
+				'tx_seminars_seminars.uid=' .
 				'tx_seminars_seminars_place_mm.uid_local' .
 			' LEFT JOIN tx_seminars_sites ON ' .
 				'tx_seminars_seminars_place_mm.uid_foreign = ' .
@@ -435,7 +434,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			)
 		);
 
-		$this->whereClauseParts['languages'] = SEMINARS_TABLE_SEMINARS .
+		$this->whereClauseParts['languages'] = 'tx_seminars_seminars' .
 			'.language IN (' . $languageCodes . ')';
 	}
 
@@ -443,8 +442,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to topic event records.
 	 */
 	public function limitToTopicRecords() {
-		$this->whereClauseParts['topic'] = SEMINARS_TABLE_SEMINARS .
-			'.object_type=' . SEMINARS_RECORD_TYPE_TOPIC;
+		$this->whereClauseParts['topic'] = 'tx_seminars_seminars' .
+			'.object_type = ' . SEMINARS_RECORD_TYPE_TOPIC;
 	}
 
 	/**
@@ -471,18 +470,18 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			return;
 		}
 
-		$this->whereClauseParts['owner'] = SEMINARS_TABLE_SEMINARS .
-			'.owner_feuser=' . $feUserUid;
+		$this->whereClauseParts['owner'] = 'tx_seminars_seminars' .
+			'.owner_feuser = ' . $feUserUid;
 	}
 
 	/**
 	 * Limits the bag to date and single records.
 	 */
 	public function limitToDateAndSingleRecords() {
-		$this->whereClauseParts['date_single'] = '(' . SEMINARS_TABLE_SEMINARS .
-			'.object_type=' . SEMINARS_RECORD_TYPE_DATE . ' OR ' .
-			SEMINARS_TABLE_SEMINARS . '.object_type=' .
-			SEMINARS_RECORD_TYPE_COMPLETE .')';
+		$this->whereClauseParts['date_single'] = '(tx_seminars_seminars' .
+			'.object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' OR ' .
+			'tx_seminars_seminars.object_type = ' .
+			SEMINARS_RECORD_TYPE_COMPLETE . ')';
 	}
 
 	/**
@@ -511,7 +510,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		}
 
 		$this->addAdditionalTableName('tx_seminars_seminars_feusers_mm');
-		$this->whereClauseParts['vip'] = SEMINARS_TABLE_SEMINARS . '.uid=' .
+		$this->whereClauseParts['vip'] = 'tx_seminars_seminars.uid = ' .
 			'tx_seminars_seminars_feusers_mm.uid_local AND ' .
 			'tx_seminars_seminars_feusers_mm.uid_foreign = ' . $feUserUid;
 	}
@@ -562,9 +561,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		}
 
 		$this->whereClauseParts['other_dates'] = '(' .
-			SEMINARS_TABLE_SEMINARS . '.topic=' . $event->getTopicUid() .
-			' AND ' . 'object_type=' . SEMINARS_RECORD_TYPE_DATE .
-			' AND ' . 'uid!=' . $event->getUid() .
+			'tx_seminars_seminars.topic = ' . $event->getTopicUid() .
+			' AND object_type = ' . SEMINARS_RECORD_TYPE_DATE .
+			' AND uid != ' . $event->getUid() .
 		')';
 	}
 
@@ -659,7 +658,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToCancelationDeadlineReminderNotSent() {
 		$this->whereClauseParts['cancelation_reminder_not_sent']
-			= SEMINARS_TABLE_SEMINARS . '.cancelation_deadline_reminder_sent = 0';
+			= 'tx_seminars_seminars.cancelation_deadline_reminder_sent = 0';
 	}
 
 	/**
@@ -668,7 +667,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToEventTakesPlaceReminderNotSent() {
 		$this->whereClauseParts['event_takes_place_reminder_not_sent']
-			= SEMINARS_TABLE_SEMINARS . '.event_takes_place_reminder_sent = 0';
+			= 'tx_seminars_seminars.event_takes_place_reminder_sent = 0';
 	}
 
 	/**
@@ -679,7 +678,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToStatus($status) {
 		$this->whereClauseParts['event_status']
-			= SEMINARS_TABLE_SEMINARS . '.cancelled = ' . $status;
+			= 'tx_seminars_seminars.cancelled = ' . $status;
 	}
 
 	/**
@@ -692,7 +691,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$nowPlusDays = ($GLOBALS['SIM_EXEC_TIME'] + ($days * ONE_DAY));
 
 		$this->whereClauseParts['days_before_begin_date'] =
-			SEMINARS_TABLE_SEMINARS . '.begin_date' . ' < ' . $nowPlusDays;
+			'tx_seminars_seminars.begin_date < ' . $nowPlusDays;
 	}
 
 	/**
@@ -764,16 +763,16 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		foreach (self::$searchFieldList['event_types'] as $field) {
 			$result[] = 'EXISTS (' .
 				'SELECT * FROM tx_seminars_event_types, ' .
-					SEMINARS_TABLE_SEMINARS . ' s1, ' .
-					SEMINARS_TABLE_SEMINARS . ' s2' .
+					'tx_seminars_seminars s1, ' .
+					'tx_seminars_seminars s2' .
 				' WHERE (tx_seminars_event_types.' . $field .
 					' LIKE ' . $searchWord .
 				' AND tx_seminars_event_types.uid = s1.event_type' .
-				' AND ((s1.uid=s2.topic AND s2.object_type=' .
+				' AND ((s1.uid = s2.topic AND s2.object_type = ' .
 						SEMINARS_RECORD_TYPE_DATE . ') ' .
-					'OR (s1.uid=s2.uid AND s1.object_type!=' .
+					'OR (s1.uid = s2.uid AND s1.object_type != ' .
 						SEMINARS_RECORD_TYPE_DATE . '))' .
-				' AND s2.uid=' . SEMINARS_TABLE_SEMINARS . '.uid)' .
+				' AND s2.uid=tx_seminars_seminars.uid)' .
 			')';
 		}
 
@@ -813,9 +812,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 
 		$matchingUids = tx_oelib_db::selectColumnForMultiple(
 			'uid',
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			'(' . implode(' OR ', $where) . ')' .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS)
+				tx_oelib_db::enableFields('tx_seminars_seminars')
 		);
 		if (empty($matchingUids)) {
 			return array();
@@ -825,10 +824,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			implode(',', $matchingUids) . ')';
 		return array(
 			'(object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE .
-				' AND ' . SEMINARS_TABLE_SEMINARS . '.uid' . $inUids . ')',
-			'(' . SEMINARS_TABLE_SEMINARS . '.object_type = ' .
+				' AND tx_seminars_seminars.uid' . $inUids . ')',
+			'(tx_seminars_seminars.object_type = ' .
 				SEMINARS_RECORD_TYPE_DATE . ' AND ' .
-				SEMINARS_TABLE_SEMINARS . '.topic' . $inUids . ')',
+				'tx_seminars_seminars.topic' . $inUids . ')',
 		);
 	}
 
@@ -849,7 +848,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$result = array();
 
 		foreach (self::$searchFieldList['seminars'] as $field) {
-			$result[] = SEMINARS_TABLE_SEMINARS . '.' . $field .
+			$result[] = 'tx_seminars_seminars.' . $field .
 				' LIKE ' . $searchWord;
 		}
 
@@ -918,18 +917,18 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		foreach (self::$searchFieldList[$searchFieldKey] as $field) {
 			$result[] = 'EXISTS ' .
 				'(SELECT * FROM ' .
-					SEMINARS_TABLE_SEMINARS . ' s1, ' .
+					'tx_seminars_seminars s1, ' .
 					$mmTable . ', ' .
 					$foreignTable .
-				' WHERE ((' . SEMINARS_TABLE_SEMINARS . '.object_type=' .
+				' WHERE ((tx_seminars_seminars.object_type = ' .
 						SEMINARS_RECORD_TYPE_DATE .
-						' AND s1.object_type!=' . SEMINARS_RECORD_TYPE_DATE .
-						' AND ' . SEMINARS_TABLE_SEMINARS . '.topic=s1.uid)' .
-					' OR (' . SEMINARS_TABLE_SEMINARS . '.object_type=' .
+						' AND s1.object_type != ' . SEMINARS_RECORD_TYPE_DATE .
+						' AND tx_seminars_seminars.topic = s1.uid)' .
+					' OR (tx_seminars_seminars.object_type = ' .
 						SEMINARS_RECORD_TYPE_COMPLETE .
-						' AND ' . SEMINARS_TABLE_SEMINARS . '.uid=s1.uid))' .
-					' AND ' . $mmTable . '.uid_local=s1.uid' .
-					' AND ' . $mmTable . '.uid_foreign=' .
+						' AND tx_seminars_seminars.uid = s1.uid))' .
+					' AND ' . $mmTable . '.uid_local = s1.uid' .
+					' AND ' . $mmTable . '.uid_foreign = ' .
 						$foreignTable . '.uid' .
 					' AND ' . $foreignTable . '.' . $field .
 						' LIKE ' . $searchWord .
@@ -992,7 +991,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			return array();
 		}
 
-		$result[] = SEMINARS_TABLE_SEMINARS . '.uid  IN (' .
+		$result[] = 'tx_seminars_seminars.uid IN (' .
 			implode(',', $localUids) . ')';
 
 		return $result;
@@ -1010,9 +1009,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		return $GLOBALS['TYPO3_DB']->escapeStrForLike(
 			$GLOBALS['TYPO3_DB']->quoteStr(
 				trim($searchWord, self::TRIM_CHARACTER_LIST),
-				SEMINARS_TABLE_SEMINARS
+				'tx_seminars_seminars'
 			),
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 	}
 
@@ -1071,7 +1070,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['requiredEventTopics'] =
 			'tx_seminars_seminars_requirements_mm.uid_local = ' . $eventUid .
 			' AND tx_seminars_seminars_requirements_mm.uid_foreign = ' .
-			SEMINARS_TABLE_SEMINARS . '.uid';
+			'tx_seminars_seminars.uid';
 		$this->addAdditionalTableName('tx_seminars_seminars_requirements_mm');
 		$this->setOrderBy('tx_seminars_seminars_requirements_mm.sorting');
 	}
@@ -1086,7 +1085,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['dependingEventTopics'] =
 			'tx_seminars_seminars_requirements_mm.uid_foreign = ' . $eventUid .
 			' AND tx_seminars_seminars_requirements_mm.uid_local = ' .
-			SEMINARS_TABLE_SEMINARS . '.uid';
+			'tx_seminars_seminars.uid';
 		$this->addAdditionalTableName('tx_seminars_seminars_requirements_mm');
 		$this->setOrderBy(
 			'tx_seminars_seminars_requirements_mm.sorting_foreign ASC'
@@ -1108,10 +1107,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['topicsWithoutUserRegistration'] =
 			'NOT EXISTS (' .
 				'SELECT * FROM tx_seminars_attendances, ' .
-					SEMINARS_TABLE_SEMINARS . ' dates ' .
+					'tx_seminars_seminars dates ' .
 				'WHERE tx_seminars_attendances.user = ' . $uid .
 				' AND tx_seminars_attendances.seminar = dates.uid' .
-				' AND dates.topic = ' . SEMINARS_TABLE_SEMINARS . '.uid' .
+				' AND dates.topic = tx_seminars_seminars.uid' .
 				' AND (dates.expiry = 0 OR dates.expiry > ' .
 					$GLOBALS['SIM_EXEC_TIME'] . ')' .
 			')';
@@ -1134,8 +1133,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		}
 
 		$this->whereClauseParts['earliestBeginDate'] = '(' .
-			SEMINARS_TABLE_SEMINARS . '.begin_date = 0 OR ' .
-			SEMINARS_TABLE_SEMINARS . '.begin_date >= '. $earliestBeginDate .
+			'tx_seminars_seminars.begin_date = 0 OR ' .
+			'tx_seminars_seminars.begin_date >= '. $earliestBeginDate .
 			')';
 	}
 
@@ -1156,8 +1155,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		}
 
 		$this->whereClauseParts['latestBeginDate'] =
-			SEMINARS_TABLE_SEMINARS . '.begin_date > 0 AND ' .
-			SEMINARS_TABLE_SEMINARS . '.begin_date <= ' . $latestBeginDate;
+			'tx_seminars_seminars.begin_date > 0 AND ' .
+			'tx_seminars_seminars.begin_date <= ' . $latestBeginDate;
 	}
 
 	/**
@@ -1165,7 +1164,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToEventsWithVacancies() {
 		$seats = '(SELECT COALESCE(SUM(seats),0) FROM tx_seminars_attendances ' .
-			'WHERE seminar = ' . SEMINARS_TABLE_SEMINARS . '.uid' .
+			'WHERE seminar = tx_seminars_seminars.uid' .
 			tx_oelib_db::enableFields('tx_seminars_attendances') . ')';
 		$hasVacancies = '(attendees_max > (' . $seats . ' + offline_attendees))';
 
@@ -1202,10 +1201,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 
 		$this->whereClauseParts['eventsWithOrganizers'] =
 			'((object_type = '. SEMINARS_RECORD_TYPE_COMPLETE . ') ' .
-				'AND (' . SEMINARS_TABLE_SEMINARS . '.uid IN (' . $eventUids .
-				')) OR ('.
-				'(object_type = '. SEMINARS_RECORD_TYPE_DATE .') AND (' .
-				SEMINARS_TABLE_SEMINARS . '.topic IN (' . $eventUids . ')))' .
+				'AND (tx_seminars_seminars.uid IN (' . $eventUids .
+				')) OR (' .
+				'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ') AND (' .
+				'tx_seminars_seminars.topic IN (' . $eventUids . ')))' .
 			')';
 	}
 
@@ -1231,11 +1230,11 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 
 		$eventsWithoutTargetGroup = tx_oelib_db::selectColumnForMultiple(
 			'uid',
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			'(object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ' OR ' .
-				'object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ') AND ' .'
-				(target_groups = 0)' .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS)
+				'object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ') AND ' . 
+				'(target_groups = 0)' .
+				tx_oelib_db::enableFields('tx_seminars_seminars')
 		);
 		if ($matchingTargetGroups != '') {
 			$eventsWithMatchingTargetGroup
@@ -1260,10 +1259,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			$matchingEventsUidList = implode(',', $matchingEventsUids);
 			$this->whereClauseParts['ageLimit'] =
 				'((object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
-					SEMINARS_TABLE_SEMINARS .'.uid IN (' . $matchingEventsUidList . ')) ' .
+					'tx_seminars_seminars.uid IN (' . $matchingEventsUidList . ')) ' .
 					'OR ' .
 					'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
-					'topic IN ' . '(' . $matchingEventsUidList . '))' .
+					'topic IN (' . $matchingEventsUidList . '))' .
 				')';
 		}
 	}
@@ -1312,12 +1311,12 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				sprintf(
 					$notZeroAndInRange, 'price_special_board', $maximumPrice
 				) .
-			')' . tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS);
+			')' . tx_oelib_db::enableFields('tx_seminars_seminars');
 
 		$foundUids = implode(
 			',',
 			tx_oelib_db::selectColumnForMultiple(
-				'uid', SEMINARS_TABLE_SEMINARS, $whereClause
+				'uid', 'tx_seminars_seminars', $whereClause
 			)
 		);
 
@@ -1326,7 +1325,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		} else {
 			$this->whereClauseParts['maximumPrice'] =
 				'((object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE. ' ' .
-				'AND ' . SEMINARS_TABLE_SEMINARS . '.uid IN (' . $foundUids .
+				'AND tx_seminars_seminars.uid IN (' . $foundUids .
 				')) OR ' .
 				'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
 				'topic IN (' . $foundUids . ')))';
@@ -1363,12 +1362,12 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				')) ' .
 			'OR price_regular_board >= ' . $minimumPrice . ' ' .
 			'OR price_special_board >= ' . $minimumPrice . ') ' .
-			tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS);
+			tx_oelib_db::enableFields('tx_seminars_seminars');
 
 		$foundUids = implode(
 			',',
 			tx_oelib_db::selectColumnForMultiple(
-				'uid', SEMINARS_TABLE_SEMINARS, $whereClause
+				'uid', 'tx_seminars_seminars', $whereClause
 			)
 		);
 
@@ -1377,7 +1376,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		} else {
 			$this->whereClauseParts['maximumPrice'] =
 				'((object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE. ' ' .
-				'AND ' . SEMINARS_TABLE_SEMINARS . '.uid IN (' . $foundUids .
+				'AND tx_seminars_seminars.uid IN (' . $foundUids .
 				')) OR ' .
 				'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
 				'topic IN (' . $foundUids . ')))';

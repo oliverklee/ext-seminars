@@ -160,9 +160,9 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	 * @param string the ORDER BY statement to set, may be empty
 	 */
 	public function setOrderByEventColumn($orderBy) {
-		$this->addAdditionalTableName(SEMINARS_TABLE_SEMINARS);
+		$this->addAdditionalTableName('tx_seminars_seminars');
 		$this->whereClauseParts['orderByEvent'] = 'tx_seminars_attendances' .
-			'.seminar=' . SEMINARS_TABLE_SEMINARS . '.uid';
+			'.seminar = tx_seminars_seminars.uid';
 		$this->setOrderBy($orderBy);
 	}
 

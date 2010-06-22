@@ -60,7 +60,7 @@ class tx_seminars_frontEndEventHeadline_testcase extends tx_phpunit_testcase {
 		// just picked some random date (2001-01-01 00:00:00)
 		$this->eventDate = 978303600;
 		$this->eventId = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => 0,
 				'title' => 'Test event',

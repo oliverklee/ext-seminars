@@ -92,7 +92,7 @@ class tx_seminars_OrganizerBagBuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_organizers'
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('organizers' => 1)
 		);
 		$this->testingFramework->createRelation(
@@ -114,7 +114,7 @@ class tx_seminars_OrganizerBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventFindsTwoOrganizersOfEvent() {
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('organizers' => 2)
 		);
 		$organizerUid1 = $this->testingFramework->createRecord(
@@ -147,7 +147,7 @@ class tx_seminars_OrganizerBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventIgnoresOrganizerOfOtherEvent() {
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('organizers' => 1)
 		);
 		$organizerUid = $this->testingFramework->createRecord(
@@ -159,7 +159,7 @@ class tx_seminars_OrganizerBagBuilder_testcase extends tx_phpunit_testcase {
 			$organizerUid
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 
 		$this->fixture->limitToEvent($eventUid2);

@@ -50,7 +50,7 @@ class tx_seminars_seminarbag_testcase extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('title' => 'test event')
 		);
 

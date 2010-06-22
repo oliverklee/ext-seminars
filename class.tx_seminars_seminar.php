@@ -46,7 +46,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
-	protected $tableName = SEMINARS_TABLE_SEMINARS;
+	protected $tableName = 'tx_seminars_seminars';
 
 	/** @var integer the number of all attendances */
 	protected $numberOfAttendances = 0;
@@ -514,10 +514,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'tx_seminars_sites LEFT JOIN ' .
 				'tx_seminars_seminars_place_mm ON tx_seminars_sites' .
 				'.uid = tx_seminars_seminars_place_mm.uid_foreign' .
-				' LEFT JOIN ' . SEMINARS_TABLE_SEMINARS . ' ON ' .
+				' LEFT JOIN tx_seminars_seminars ON ' .
 				'tx_seminars_seminars_place_mm.uid_local = ' .
-				SEMINARS_TABLE_SEMINARS . '.uid',
-			SEMINARS_TABLE_SEMINARS . '.uid = ' . $this->getUid() .
+				'tx_seminars_seminars.uid',
+			'tx_seminars_seminars.uid = ' . $this->getUid() .
 				' AND tx_seminars_sites.country != ""' .
 				tx_oelib_db::enableFields('tx_seminars_sites'),
 			'country'
@@ -3095,7 +3095,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		if ($this->hasRecordPropertyInteger('topic')) {
 			if (tx_seminars_objectfromdb::recordExists(
 				$this->getRecordPropertyInteger('topic'),
-				SEMINARS_TABLE_SEMINARS)
+				'tx_seminars_seminars')
 			) {
 				$result = tx_oelib_ObjectFactory::make(
 					'tx_seminars_seminar',
@@ -3888,7 +3888,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$additionalTables = 'tx_seminars_attendances';
 			$queryWhere = $this->getQueryForCollidingEvents();
 			// Filter to those events to which the given FE user is registered.
-			$queryWhere .= ' AND ' . SEMINARS_TABLE_SEMINARS . '.uid = ' .
+			$queryWhere .= ' AND tx_seminars_seminars.uid = ' .
 					'tx_seminars_attendances.seminar' .
 				' AND tx_seminars_attendances.user = ' . $feUserUid;
 
@@ -3930,26 +3930,26 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$beginDate = $this->getBeginDateAsTimestamp();
 		$endDate = $this->getEndDateAsTimestampEvenIfOpenEnded();
 
-		$result = SEMINARS_TABLE_SEMINARS.'.uid!='.$this->getUid()
-			.' AND allows_multiple_registrations=0'
-			.' AND skip_collision_check=0'
-			.' AND ('
-				.'('
+		$result = 'tx_seminars_seminars.uid != ' . $this->getUid() .
+			' AND allows_multiple_registrations = 0' .
+			' AND skip_collision_check = 0' .
+			' AND (' .
+				'(' .
 					// Check for events that have a begin date in our
 					// time-frame.
 					// This will automatically rule out events without a date.
-					.'begin_date>'.$beginDate.' AND begin_date<'.$endDate
-				.') OR ('
+					'begin_date > ' . $beginDate . ' AND begin_date < ' . $endDate .
+				') OR (' .
 					// Check for events that have an end date in our time-frame.
 					// This will automatically rule out events without a date.
-					.'end_date>'.$beginDate.' AND end_date<'.$endDate
-				.') OR ('
+					'end_date > ' . $beginDate . ' AND end_date < ' . $endDate .
+				') OR (' .
 					// Check for events that have a non-zero start date,
 					// start before this event and end after it.
-					.'begin_date>0 AND '
-					.'begin_date<='.$beginDate.' AND end_date>='.$endDate
-				.')'
-			.')';
+					'begin_date > 0 AND ' .
+					'begin_date <= ' . $beginDate . ' AND end_date >= ' . $endDate .
+				')' .
+			')';
 
 		return $result;
 	}

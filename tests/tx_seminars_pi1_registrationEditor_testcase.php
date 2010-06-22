@@ -70,7 +70,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 			->setAsString('currency', 'EUR');
 
 		$seminar = new tx_seminars_seminar($this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('payment_methods' => '1')
+			'tx_seminars_seminars', array('payment_methods' => '1')
 		));
 		$this->seminarUid = $seminar->getUid();
 
@@ -1127,7 +1127,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		$fixture->setTestMode();
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('price_regular' => 42)
 		);

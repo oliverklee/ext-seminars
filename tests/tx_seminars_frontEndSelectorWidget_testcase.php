@@ -270,7 +270,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_event_types', array('title' => $eventTypeTitle)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
+			'tx_seminars_seminars', array('event_type' => $eventTypeUid)
 		);
 
 		$this->assertContains(
@@ -290,7 +290,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_event_types', array('title' => $eventTypeTitle)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
+			'tx_seminars_seminars', array('event_type' => $eventTypeUid)
 		);
 
 		$this->assertContains(
@@ -311,7 +311,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_event_types', array('title' => $eventTypeTitle)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
+			'tx_seminars_seminars', array('event_type' => $eventTypeUid)
 		);
 
 		$this->fixture->piVars['event_type'][] = (string) $eventTypeUid;
@@ -334,14 +334,14 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_event_types', array('title' => $eventTypeTitle)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
+			'tx_seminars_seminars', array('event_type' => $eventTypeUid)
 		);
 
 		$eventTypeUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_event_types', array('title' => $eventTypeTitle2)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid2)
+			'tx_seminars_seminars', array('event_type' => $eventTypeUid2)
 		);
 
 		$this->fixture->piVars['event_type'][] = (string) $eventTypeUid;
@@ -454,7 +454,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'LANGUAGES', $languageIsoCode, '', '', 0
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('language' => $languageIsoCode)
+			'tx_seminars_seminars', array('language' => $languageIsoCode)
 		);
 
 		$this->assertContains(
@@ -488,7 +488,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'LANGUAGES', $languageIsoCode, '', '', 0
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('language' => $languageIsoCode)
+			'tx_seminars_seminars', array('language' => $languageIsoCode)
 		);
 
 		$this->fixture->piVars['language'][] = $languageIsoCode;
@@ -511,7 +511,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'LANGUAGES', $languageIsoCode, '', '', 0
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('language' => $languageIsoCode)
+			'tx_seminars_seminars', array('language' => $languageIsoCode)
 		);
 
 		$languageIsoCode2 = 'EN';
@@ -519,7 +519,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'LANGUAGES', $languageIsoCode2, '', '', 0
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('language' => $languageIsoCode2)
+			'tx_seminars_seminars', array('language' => $languageIsoCode2)
 		);
 
 		$this->fixture->piVars['language'][] = $languageIsoCode;
@@ -565,10 +565,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('title' => $placeTitle)
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+			'tx_seminars_seminars', $eventUid, $placeUid, 'place'
 		);
 
 		$this->assertContains(
@@ -586,10 +586,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('title' => $placeTitle)
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+			'tx_seminars_seminars', $eventUid, $placeUid, 'place'
 		);
 
 		$this->assertContains(
@@ -620,10 +620,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('title' => $placeTitle)
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+			'tx_seminars_seminars', $eventUid, $placeUid, 'place'
 		);
 
 		$this->fixture->piVars['place'][] = (string) $placeUid;
@@ -648,13 +648,13 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+			'tx_seminars_seminars', $eventUid, $placeUid, 'place'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid2, 'place'
+			'tx_seminars_seminars', $eventUid, $placeUid2, 'place'
 		);
 
 		$this->fixture->piVars['place'][] = (string) $placeUid;
@@ -699,10 +699,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('city' => $cityName)
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+			'tx_seminars_seminars', $eventUid, $placeUid, 'place'
 		);
 
 		$this->assertContains(
@@ -720,20 +720,20 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('city' => $cityName1)
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid1, $placeUid1, 'place'
+			'tx_seminars_seminars', $eventUid1, $placeUid1, 'place'
 		);
 
 		$placeUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_sites', array('city' => $cityName2)
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid2, $placeUid2, 'place'
+			'tx_seminars_seminars', $eventUid2, $placeUid2, 'place'
 		);
 
 		$output = $this->fixture->render();
@@ -755,10 +755,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('city' => $cityTitle)
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+			'tx_seminars_seminars', $eventUid, $placeUid, 'place'
 		);
 
 		$this->fixture->piVars['city'][] = $cityTitle;
@@ -779,20 +779,20 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('city' => $cityTitle1)
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid1, $placeUid1, 'place'
+			'tx_seminars_seminars', $eventUid1, $placeUid1, 'place'
 		);
 
 		$placeUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_sites', array('city' => $cityTitle2)
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid2, $placeUid2, 'place'
+			'tx_seminars_seminars', $eventUid2, $placeUid2, 'place'
 		);
 
 		$this->fixture->piVars['city'][] = $cityTitle1;
@@ -854,11 +854,11 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('country' => $countryIsoCode)
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+			'tx_seminars_seminars', $eventUid, $placeUid, 'place'
 		);
 
 		$this->assertContains(
@@ -887,22 +887,22 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('country' => $countryIsoCode1)
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid1, $placeUid1, 'place'
+			'tx_seminars_seminars', $eventUid1, $placeUid1, 'place'
 		);
 
 		$placeUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_sites', array('country' => $countryIsoCode2)
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid2, $placeUid2, 'place'
+			'tx_seminars_seminars', $eventUid2, $placeUid2, 'place'
 		);
 
 		$output = $this->fixture->render();
@@ -933,11 +933,11 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('country' => $countryIsoCode)
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $placeUid, 'place'
+			'tx_seminars_seminars', $eventUid, $placeUid, 'place'
 		);
 
 		$this->fixture->piVars['country'][] = $countryIsoCode;
@@ -968,22 +968,22 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('country' => $countryIsoCode1)
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid1, $placeUid1, 'place'
+			'tx_seminars_seminars', $eventUid1, $placeUid1, 'place'
 		);
 
 		$placeUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_sites', array('country' => $countryIsoCode2)
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid2, $placeUid2, 'place'
+			'tx_seminars_seminars', $eventUid2, $placeUid2, 'place'
 		);
 
 		$this->fixture->piVars['country'][] = $countryIsoCode1;
@@ -1277,7 +1277,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_event_types', array('title' => 'foo_type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('event_type' => $eventTypeUid)
 		);
 
@@ -1303,7 +1303,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_event_types', array('title' => 'bar_type')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('event_type' => $eventTypeUid2)
 		);
 
@@ -1331,8 +1331,8 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_organizers', array('title' => 'Organizer Foo')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
-			$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS),
+			'tx_seminars_seminars',
+			$this->testingFramework->createRecord('tx_seminars_seminars'),
 			$organizerUid,
 			'organizers'
 		);
@@ -1356,8 +1356,8 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_organizers', array('title' => 'Organizer Bar')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
-			$this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS),
+			'tx_seminars_seminars',
+			$this->testingFramework->createRecord('tx_seminars_seminars'),
 			$organizerUid1,
 			'organizers'
 		);
@@ -1474,10 +1474,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_organizers', array('title' => $organizerName)
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+			'tx_seminars_seminars', $eventUid, $organizerUid, 'organizers'
 		);
 
 		$this->assertContains(
@@ -1497,10 +1497,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_organizers', array('title' => $organizerName)
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+			'tx_seminars_seminars', $eventUid, $organizerUid, 'organizers'
 		);
 
 		$this->assertContains(
@@ -1521,10 +1521,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'tx_seminars_organizers', array('title' => $organizerName)
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
+			'tx_seminars_seminars', $eventUid, $organizerUid, 'organizers'
 		);
 
 		$this->fixture->piVars['organizer'][] = (string) $organizerUid;
@@ -1541,7 +1541,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 			'displaySearchFormFields', 'organizer'
 		);
 
-		$eventUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
 		$organizerName1 = 'Organizer 1';
 		$organizerUid1 = $this->testingFramework->createRecord(
@@ -1553,10 +1553,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid1, 'organizers'
+			'tx_seminars_seminars', $eventUid, $organizerUid1, 'organizers'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid2, 'organizers'
+			'tx_seminars_seminars', $eventUid, $organizerUid2, 'organizers'
 		);
 
 		$this->fixture->piVars['organizer'][] = (string) $organizerUid1;

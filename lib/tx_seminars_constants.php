@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-define('SEMINARS_TABLE_SEMINARS', 'tx_seminars_seminars');
-
 define('SEMINARS_RECORD_TYPE_COMPLETE', 0);
 define('SEMINARS_RECORD_TYPE_TOPIC', 1);
 define('SEMINARS_RECORD_TYPE_DATE', 2);

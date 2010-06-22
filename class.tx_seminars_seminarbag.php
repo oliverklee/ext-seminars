@@ -62,7 +62,7 @@ class tx_seminars_seminarbag extends tx_seminars_bag {
 		$ignoreTimingOfRecords = FALSE
 	) {
 		parent::__construct(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$queryParameters,
 			$additionalTableNames,
 			$groupBy,

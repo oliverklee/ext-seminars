@@ -92,7 +92,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		);
 
 		$this->eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'Dummy event',
@@ -103,7 +103,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->eventUid,
 			$this->organizerUid,
 			'organizers'
@@ -167,7 +167,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
 			->set('detailPID', $detailPid);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->eventUid,
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
 		);
@@ -183,28 +183,28 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 	 */
 	public function renderForDateWithOtherDatesInFutureAppendsSingleViewLink() {
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'title' => 'Dummy event',
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 			)
 		);
 		$dateUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$dateUid,
 			$this->testingFramework->createRecord('tx_seminars_organizers'),
 			'organizers'
@@ -229,21 +229,21 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 	 */
 	public function renderForDateWithoutOtherDatesNotAppendsSingleViewLink() {
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'title' => 'Dummy event',
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 			)
 		);
 		$dateUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$dateUid,
 			$this->testingFramework->createRecord('tx_seminars_organizers'),
 			'organizers'
@@ -268,21 +268,21 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 	 */
 	public function renderForDateWithOtherDatesInPastNotAppendsSingleViewLink() {
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'title' => 'Dummy event',
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 			)
 		);
 		$dateUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
@@ -291,7 +291,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$dateUid,
 			$this->testingFramework->createRecord('tx_seminars_organizers'),
 			'organizers'
@@ -316,21 +316,21 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 	 */
 	public function renderForDateWithoutSetDetailPidShowsErrorMessage() {
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'title' => 'Dummy event',
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 			)
 		);
 		$dateUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $topicUid,
@@ -339,7 +339,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$dateUid,
 			$this->testingFramework->createRecord('tx_seminars_organizers'),
 			'organizers'
@@ -365,7 +365,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
 			->set('detailPID', 0);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->eventUid,
 			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
 		);
@@ -407,7 +407,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				'uid = ' . $this->eventUid . ' AND cancelled = ' .
 					tx_seminars_seminar::STATUS_CANCELED
 			)

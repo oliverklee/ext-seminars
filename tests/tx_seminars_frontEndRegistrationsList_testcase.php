@@ -65,7 +65,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		$this->testingFramework->createFakeFrontEnd();
 
 		$this->seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
 				'title' => 'Test event',

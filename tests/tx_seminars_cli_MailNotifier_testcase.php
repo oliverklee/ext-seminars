@@ -104,7 +104,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array_merge($additionalSeminarData, array('organizers' => 1))
 		);
 
@@ -129,7 +129,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $eventUid, array('speakers' => 1)
+			'tx_seminars_seminars', $eventUid, array('speakers' => 1)
 		);
 
 		$this->testingFramework->createRelation(
@@ -146,7 +146,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		$this->createSeminarWithOrganizer();
 
 		$this->assertTrue(
-			$this->testingFramework->existsRecord(SEMINARS_TABLE_SEMINARS, '1=1')
+			$this->testingFramework->existsRecord('tx_seminars_seminars', '1=1')
 		);
 	}
 
@@ -155,7 +155,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_SEMINARS, 'title = "foo"'
+				'tx_seminars_seminars', 'title = "foo"'
 			)
 		);
 	}
@@ -201,7 +201,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_SEMINARS, 'speakers = 1'
+				'tx_seminars_seminars', 'speakers = 1'
 			)
 		);
 	}
@@ -367,7 +367,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $eventUid, array('organizers' => 2)
+			'tx_seminars_seminars', $eventUid, array('organizers' => 2)
 		);
 
 		$this->fixture->sendEventTakesPlaceReminders();
@@ -388,7 +388,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_SEMINARS, 'event_takes_place_reminder_sent = 1'
+				'tx_seminars_seminars', 'event_takes_place_reminder_sent = 1'
 			)
 		);
 	}
@@ -578,7 +578,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $eventUid, array('organizers' => 2)
+			'tx_seminars_seminars', $eventUid, array('organizers' => 2)
 		);
 
 		$this->fixture->sendCancelationDeadlineReminders();
@@ -599,7 +599,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_SEMINARS, 'cancelation_deadline_reminder_sent = 1'
+				'tx_seminars_seminars', 'cancelation_deadline_reminder_sent = 1'
 			)
 		);
 	}
@@ -739,7 +739,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $eventUid, array('organizers' => 2)
+			'tx_seminars_seminars', $eventUid, array('organizers' => 2)
 		);
 
 		$this->fixture->sendEventTakesPlaceReminders();

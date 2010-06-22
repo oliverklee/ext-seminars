@@ -53,7 +53,7 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 		$this->testingFramework->createFakeFrontEnd();
 
 		$this->seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Test event',
@@ -90,18 +90,18 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 
 	public function testRenderShowsTitleOfOneRequirement() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$requiredEvent = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent, 'requirements'
 		);
 		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));
@@ -118,18 +118,18 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 			$this->testingFramework->createFrontEndPage()
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$requiredEvent = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent, 'requirements'
 		);
 		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));
@@ -142,29 +142,29 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 
 	public function testRenderShowsTitleOfTwoRequirements() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$requiredEvent1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent1, 'requirements'
 		);
 		$requiredEvent2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'required_bar',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent2, 'requirements'
 		);
 		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));
@@ -193,43 +193,43 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 	public function testLimitToMissingRegistrationsLimitsOutputToMissingRegistrationsOnly() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$requiredEvent1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $requiredEvent1,
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent1, 'requirements'
 		);
 		$requiredEvent2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'title' => 'required_bar',
 			)
 		);
 		$requiredDate2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $requiredEvent2,
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent2, 'requirements'
 		);
 		$this->testingFramework->createRecord(

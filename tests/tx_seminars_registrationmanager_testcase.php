@@ -115,7 +115,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 
 		$seminarUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'title' => 'test event',
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
@@ -208,7 +208,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	private function createBookedOutSeminar() {
 		$this->fullyBookedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'title' => 'test event',
 					'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
@@ -607,7 +607,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'title' => 'test event',
 					'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 1000,
@@ -632,7 +632,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'title' => 'test event',
 					'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
@@ -774,7 +774,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 					'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
@@ -1030,7 +1030,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 					'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
@@ -1261,12 +1261,12 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createAndLogInFrontEndUser();
 
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
@@ -1281,11 +1281,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function testUserFulfillsRequirementsForEventWithOneFulfilledRequirementReturnsTrue() {
 		$requiredTopicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$requiredDateUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $requiredTopicUid,
@@ -1300,17 +1300,17 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topicUid, $requiredTopicUid, 'requirements'
 		);
 
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
@@ -1326,28 +1326,28 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function testUserFulfillsRequirementsForEventWithOneUnfulfilledRequirementReturnsFalse() {
 		$this->testingFramework->createAndLogInFrontEndUser();
 		$requiredTopicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $requiredTopicUid,
 			)
 		);
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topicUid, $requiredTopicUid, 'requirements'
 		);
 
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
@@ -1375,28 +1375,28 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function testGetMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsOneItem() {
 		$this->testingFramework->createAndLogInFrontEndUser();
 		$requiredTopicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $requiredTopicUid,
 			)
 		);
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topicUid, $requiredTopicUid, 'requirements'
 		);
 
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
@@ -1418,28 +1418,28 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function testGetMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsRequiredTopic() {
 		$this->testingFramework->createAndLogInFrontEndUser();
 		$requiredTopicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $requiredTopicUid,
 			)
 		);
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topicUid, $requiredTopicUid, 'requirements'
 		);
 
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
@@ -1461,45 +1461,45 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function testGetMissingRequiredTopicsForTopicWithOneTwoNotFulfilledRequirementReturnsTwoItems() {
 		$this->testingFramework->createAndLogInFrontEndUser();
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 
 		$requiredTopicUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $requiredTopicUid1,
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topicUid, $requiredTopicUid1, 'requirements'
 		);
 
 		$requiredTopicUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $requiredTopicUid2,
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topicUid, $requiredTopicUid2, 'requirements'
 		);
 
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
@@ -1521,23 +1521,23 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function testGetMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledReturnsUnfulfilledTopic() {
 		$userUid = $this->testingFramework->createAndLogInFrontEndUser();
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 
 		$requiredTopicUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$requiredDateUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $requiredTopicUid1,
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topicUid, $requiredTopicUid1, 'requirements'
 		);
 		$this->testingFramework->createRecord(
@@ -1546,17 +1546,17 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 
 		$requiredTopicUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topicUid, $requiredTopicUid2, 'requirements'
 		);
 
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
@@ -1578,23 +1578,23 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function testGetMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledDoesNotReturnFulfilledTopic() {
 		$userUid = $this->testingFramework->createAndLogInFrontEndUser();
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 
 		$requiredTopicUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$requiredDateUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_DATE,
 				'topic' => $requiredTopicUid1,
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topicUid, $requiredTopicUid1, 'requirements'
 		);
 		$this->testingFramework->createRecord(
@@ -1603,17 +1603,17 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 
 		$requiredTopicUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topicUid, $requiredTopicUid2, 'requirements'
 		);
 
 		$this->cachedSeminar = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_SEMINARS,
+				'tx_seminars_seminars',
 				array(
 					'object_type' => SEMINARS_RECORD_TYPE_DATE,
 					'topic' => $topicUid,
@@ -2537,7 +2537,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('title' => 'foo_place')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2565,7 +2565,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('address' => 'foo_street')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2615,7 +2615,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('title' => 'place_title','address' => 'place_address')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2654,7 +2654,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('title' => 'place_title','address' => 'place_address')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2681,7 +2681,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('title' => 'place_title','address' => 'place<h2>_address</h2>')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2710,7 +2710,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('address' => 'address1' . LF . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2739,7 +2739,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('address' => 'address1' . CR . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2768,7 +2768,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('address' => 'address1' . CRLF . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2797,7 +2797,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('address' => 'address1' . CR . CR . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2826,7 +2826,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('address' => 'address1' . LF . LF . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2865,7 +2865,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('address' => 'address1' . LF . LF . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2902,7 +2902,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('address' => 'address1' . LF . 'address2' . CR . CRLF . 'address3')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2928,7 +2928,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2956,7 +2956,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('zip' => '12345', 'city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -2986,7 +2986,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('city' => 'footown', 'country' => $country->getIsoAlpha2Code())
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -3015,7 +3015,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('address' => 'address', 'city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -3054,7 +3054,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('address' => 'address', 'city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -3086,7 +3086,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -3115,7 +3115,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('address' => 'address', 'city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_pi1();
@@ -3557,7 +3557,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$fixture->setConfigurationValue('sendConfirmationOnUnregistration', TRUE);
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), array(
+			'tx_seminars_seminars', $this->seminar->getUid(), array(
 				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 			)
 		);
@@ -3588,7 +3588,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), array(
+			'tx_seminars_seminars', $this->seminar->getUid(), array(
 				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 			)
 		);
@@ -3622,7 +3622,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('email' => 'foo@bar.com')
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), array(
+			'tx_seminars_seminars', $this->seminar->getUid(), array(
 				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 			)
 		);
@@ -3651,7 +3651,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$registration = $this->createRegistration();
 		$this->createRegistration();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), array(
+			'tx_seminars_seminars', $this->seminar->getUid(), array(
 				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 				'queue_size' => 1,
 			)
@@ -3684,7 +3684,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$fixture->setConfigurationValue('sendConfirmationOnQueueUpdate', TRUE);
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(), array(
+			'tx_seminars_seminars', $this->seminar->getUid(), array(
 				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 				'queue_size' => 1,
 			)
@@ -3766,7 +3766,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'showSeminarFieldsInNotificationMail', 'vacancies'
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('needs_registration' => 1, 'attendees_max' => 2)
 		);
 
@@ -3788,7 +3788,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'showSeminarFieldsInNotificationMail', 'vacancies'
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('needs_registration' => 1, 'attendees_max' => 0)
 		);
 
@@ -3893,7 +3893,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$organizerUid
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('organizers' => 2)
 		);
 
@@ -3923,7 +3923,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$organizerUid
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('organizers' => 2)
 		);
 
@@ -3946,7 +3946,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesSendsEnoughAttendancesMail() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('attendees_min' => 1, 'attendees_max' => 42)
 		);
 
@@ -3976,7 +3976,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_SendAdditionalNotification_ForEventWithZeroAttendeesMin_DoesNotSendAnyMail() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('attendees_min' => 0, 'attendees_max' => 42)
 		);
 
@@ -4000,7 +4000,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_SendAdditionalNotification_ForBookedOutEventSendsEmailWithBookedOutSubject() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('attendees_max' => 1)
 		);
 
@@ -4022,7 +4022,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_SendAdditionalNotification_ForBookedOutEventSendsEmailWithBookedOutMessage() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('attendees_max' => 1)
 		);
 		$registration = $this->createRegistration();
@@ -4039,7 +4039,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_SendAdditionalNotification_ForEventWithNotEnoughAttendancesAndNotBookedOutSendsNoEmail() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('attendees_min' => 5, 'attendees_max' => 5)
 		);
 
@@ -4064,7 +4064,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesAndUnlimitedVacancies_SendsEmail() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminar->getUid(),
 			array(
 				'attendees_min' => 1,
 				'attendees_max' => 0,
@@ -4085,7 +4085,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesAndOneVacancy_ShowsVacanciesLabelWithVacancyNumber() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminar->getUid(),
 			array(
 				'attendees_min' => 1,
 				'attendees_max' => 2,
@@ -4110,7 +4110,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesAndUnlimitedVacancies_ShowsVacanciesLabelWithUnlimitedLabel() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminar->getUid(),
 			array(
 				'attendees_min' => 1,
 				'attendees_max' => 0,

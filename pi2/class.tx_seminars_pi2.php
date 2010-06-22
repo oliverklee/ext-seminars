@@ -143,7 +143,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			$this->init($configuration);
 
 			switch ($this->piVars['table']) {
-				case SEMINARS_TABLE_SEMINARS:
+				case 'tx_seminars_seminars':
 					$result = $this->createAndOutputListOfEvents(
 						intval($this->piVars['pid'])
 					);
@@ -295,7 +295,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 */
 	public function createListOfRegistrations($eventUid) {
 		if (!tx_seminars_objectfromdb::recordExists(
-			$eventUid, SEMINARS_TABLE_SEMINARS
+			$eventUid, 'tx_seminars_seminars'
 		)) {
 			return '';
 		}
@@ -476,7 +476,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		);
 
 		return implode(
-			';', $this->localizeCsvHeadings($eventFields, SEMINARS_TABLE_SEMINARS)
+			';', $this->localizeCsvHeadings($eventFields, 'tx_seminars_seminars')
 		) . CRLF;
 	}
 
@@ -599,7 +599,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *                 otherwise
 	 */
 	public function canAccessListOfEvents($pid) {
-		return $this->canAccessTableAndPage(SEMINARS_TABLE_SEMINARS, $pid);
+		return $this->canAccessTableAndPage('tx_seminars_seminars', $pid);
 	}
 
 	/**
@@ -830,7 +830,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		$result = FALSE;
 
 		if (!tx_seminars_objectfromdb::recordExists(
-			$eventUid, SEMINARS_TABLE_SEMINARS
+			$eventUid, 'tx_seminars_seminars'
 		)) {
 			$this->errorType = self::NOT_FOUND;
 		} elseif (!$this->canAccessListOfRegistrations($eventUid)) {

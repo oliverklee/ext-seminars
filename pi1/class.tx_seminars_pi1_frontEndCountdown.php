@@ -87,17 +87,17 @@ class tx_seminars_pi1_frontEndCountdown extends tx_seminars_pi1_frontEndView {
 
 		$additionalWhere = 'tx_seminars_seminars.cancelled!=' .
 			tx_seminars_seminar::STATUS_CANCELED .
-			tx_oelib_db::enableFields(SEMINARS_TABLE_SEMINARS) .
-			' AND ' . SEMINARS_TABLE_SEMINARS . '.object_type!=' .
-			SEMINARS_RECORD_TYPE_TOPIC . ' AND ' . SEMINARS_TABLE_SEMINARS .
-			'.begin_date>' . $now;
+			tx_oelib_db::enableFields('tx_seminars_seminars') .
+			' AND tx_seminars_seminars.object_type != ' .
+			SEMINARS_RECORD_TYPE_TOPIC . 
+			' AND tx_seminars_seminars.begin_date > ' . $now;
 
 		if ($this->testMode) {
 			$additionalWhere .= ' AND is_dummy_record=1';
 		}
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'uid', SEMINARS_TABLE_SEMINARS, $additionalWhere,
+			'uid', 'tx_seminars_seminars', $additionalWhere,
 			'', 'begin_date ASC', '1'
 		);
 		if (!$dbResult) {

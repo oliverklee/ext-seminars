@@ -428,7 +428,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		if (tx_seminars_objectfromdb::recordExists(
-			$seminarUid, SEMINARS_TABLE_SEMINARS, $showHiddenRecords
+			$seminarUid, 'tx_seminars_seminars', $showHiddenRecords
 			)
 		) {
 			$this->setSeminar(tx_oelib_ObjectFactory::make(

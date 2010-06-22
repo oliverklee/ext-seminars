@@ -181,7 +181,7 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
 	 *
 	 * Note: In test mode, this function will return faked values.
 	 *
-	 * @param string column name of the SEMINARS_TABLE_SEMINARS table as key,
+	 * @param string column name of the 'tx_seminars_seminars' table as key,
 	 *               must not be empty
 	 *
 	 * @return string form value or an empty string if the value does not exist
@@ -200,7 +200,7 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
 	 *
 	 * This function is for testing purposes.
 	 *
-	 * @param string column name of the SEMINARS_TABLE_SEMINARS table as key,
+	 * @param string column name of the 'tx_seminars_seminars' table as key,
 	 *               must not be empty
 	 * @param mixed faked value
 	 */

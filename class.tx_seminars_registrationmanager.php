@@ -427,7 +427,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	public function existsSeminar($seminarUid) {
 		return tx_seminars_objectfromdb::recordExists(
 			$seminarUid,
-			SEMINARS_TABLE_SEMINARS
+			'tx_seminars_seminars'
 		);
 	}
 
@@ -448,7 +448,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		if (!tx_seminars_objectfromdb::recordExists(
 				$seminarUid,
-				SEMINARS_TABLE_SEMINARS
+				'tx_seminars_seminars'
 			)
 		) {
 			$message = $this->translate('message_wrongSeminarNumber');

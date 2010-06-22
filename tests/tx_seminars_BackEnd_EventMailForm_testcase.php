@@ -92,7 +92,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'organizers' => 1,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
@@ -102,7 +102,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->eventUid,
 			$this->organizerUid,
 			'organizers'
@@ -134,7 +134,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->setExpectedException('Exception', 'There is no event with this UID.');
 
 		new tx_seminars_tests_fixtures_TestingEventMailForm(
-			$this->testingFramework->getAutoIncrement(SEMINARS_TABLE_SEMINARS)
+			$this->testingFramework->getAutoIncrement('tx_seminars_seminars')
 		);
 	}
 
@@ -219,7 +219,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->eventUid,
 			$secondOrganizerUid,
 			'organizers'
@@ -671,7 +671,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 
 	public function test_getInitialValueForSubject_AppendsEventTitle() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->eventUid, array('title' => 'FooBar')
+			'tx_seminars_seminars', $this->eventUid, array('title' => 'FooBar')
 		);
 
 		$fixture = new tx_seminars_tests_fixtures_TestingEventMailForm(
