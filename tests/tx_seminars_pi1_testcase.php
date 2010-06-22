@@ -157,7 +157,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	private function addTargetGroupRelation(array $targetGroupData = array()) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TARGET_GROUPS, $targetGroupData
+			'tx_seminars_target_groups', $targetGroupData
 		);
 
 		$this->testingFramework->createRelation(
@@ -3206,7 +3206,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_ListViewForGivenAge_ShowsEventWithTargetgroupWithinAge() {
 		$targetGroupUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TARGET_GROUPS,
+			'tx_seminars_target_groups',
 			array('minimum_age' => 5, 'maximum_age' => 20)
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -3231,7 +3231,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_ListViewForGivenAgeAndEventAgespanHigherThanAge_DoesNotShowThisEvent() {
 		$targetGroupUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TARGET_GROUPS,
+			'tx_seminars_target_groups',
 			array('minimum_age' => 5, 'maximum_age' => 20)
 		);
 		$eventUid = $this->testingFramework->createRecord(

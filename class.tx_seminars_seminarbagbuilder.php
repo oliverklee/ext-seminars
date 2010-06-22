@@ -726,7 +726,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
 			$searchWord,
 			'target_groups',
-			SEMINARS_TABLE_TARGET_GROUPS,
+			'tx_seminars_target_groups',
 			'tx_seminars_seminars_target_groups_mm'
 		);
 	}
@@ -1223,7 +1223,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$matchingTargetGroups = implode(',',
 			tx_oelib_db::selectColumnForMultiple(
 				'uid',
-				SEMINARS_TABLE_TARGET_GROUPS,
+				'tx_seminars_target_groups',
 				'(minimum_age <= ' . $age . ' AND (maximum_age = 0 OR maximum_age >= ' .
 					$age . '))'
 			)

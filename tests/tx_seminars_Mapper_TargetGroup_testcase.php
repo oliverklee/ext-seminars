@@ -75,7 +75,7 @@ class tx_seminars_Mapper_TargetGroup_testcase extends tx_phpunit_testcase {
 	 */
 	public function findWithUidOfExistingRecordReturnsRecordAsModel() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TARGET_GROUPS, array('title' => 'Housewives')
+			'tx_seminars_target_groups', array('title' => 'Housewives')
 		);
 
 		$this->assertEquals(

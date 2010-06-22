@@ -167,7 +167,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 */
 	private function addTargetGroupRelation(array $targetGroupData = array()) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TARGET_GROUPS, $targetGroupData
+			'tx_seminars_target_groups', $targetGroupData
 		);
 
 		$this->testingFramework->createRelation(
