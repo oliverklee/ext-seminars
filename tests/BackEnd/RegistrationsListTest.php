@@ -32,7 +32,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase {
+class tx_seminars_BackEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_BackEnd_RegistrationsList
 	 */

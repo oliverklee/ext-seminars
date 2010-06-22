@@ -34,7 +34,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testcase {
+class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_BackEnd_CancelEventMailForm
 	 */
