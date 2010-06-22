@@ -38,7 +38,7 @@ class tx_seminars_test extends tx_seminars_objectfromdb {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
-	protected $tableName = SEMINARS_TABLE_TEST;
+	protected $tableName = 'tx_seminars_test';
 
 	/**
 	 * Sets the test field of this record to a boolean value.

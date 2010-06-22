@@ -92,8 +92,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testBuilderBuildsBagSortedAscendingByUid() {
-		$eventUid1 = $this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
-		$eventUid2 = $this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
+		$eventUid1 = $this->testingFramework->createRecord('tx_seminars_test');
+		$eventUid2 = $this->testingFramework->createRecord('tx_seminars_test');
 
 		$testBag = $this->fixture->build();
 		$this->assertEquals(
@@ -151,7 +151,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuilderHasNoSourcePagesWithEvilSql() {
 		$this->fixture->setSourcePages(
-			'; DROP TABLE '.SEMINARS_TABLE_TEST.';'
+			'; DROP TABLE tx_seminars_test;'
 		);
 
 		$this->assertFalse(
@@ -161,12 +161,12 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuilderSelectsRecordsFromAllPagesByDefault() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid)
 		);
 		// Puts this record on a non-existing page. This is intentional.
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
 		$bag = $this->fixture->build();
@@ -182,12 +182,12 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePages() {
 		$this->fixture->setSourcePages('');
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid)
 		);
 		// Puts this record on a non-existing page. This is intentional.
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
 		$bag = $this->fixture->build();
@@ -202,12 +202,12 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuilderSelectsRecordsFromAllPagesWithEmptyAfterNonEmptySourcePages() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid)
 		);
 		// Puts this record on a non-existing page. This is intentional.
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
 
@@ -228,12 +228,12 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			'', 0
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid)
 		);
 		// Puts this record on a non-existing page. This is intentional.
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
 		$bag = $this->fixture->build();
@@ -251,12 +251,12 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			'', 1
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid)
 		);
 		// Puts this record on a non-existing page. This is intentional.
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
 		$bag = $this->fixture->build();
@@ -271,12 +271,12 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuilderSelectsRecordsFromOnePage() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid)
 		);
 		// Puts this record on a non-existing page. This is intentional.
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
 
@@ -293,12 +293,12 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuilderSelectsRecordsFromTwoPages() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid)
 		);
 		// Puts this record on a non-existing page. This is intentional.
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $this->dummySysFolderPid + 1)
 		);
 
@@ -321,7 +321,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $subPagePid)
 		);
 
@@ -341,7 +341,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $subPagePid)
 		);
 
@@ -361,7 +361,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->dummySysFolderPid
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $subPagePid1)
 		);
 
@@ -369,7 +369,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->dummySysFolderPid
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $subPagePid2)
 		);
 
@@ -389,14 +389,14 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			$this->dummySysFolderPid
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $subPagePid1)
 		);
 
 		$parentPid2 = $this->testingFramework->createSystemFolder();
 		$subPagePid2 = $this->testingFramework->createSystemFolder($parentPid2);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $subPagePid2)
 		);
 
@@ -423,7 +423,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('pid' => $subSubPagePid)
 		);
 
@@ -444,7 +444,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuilderIgnoresHiddenRecordsByDefault() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('hidden' => 1)
 		);
 		$bag = $this->fixture->build();
@@ -458,7 +458,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuilderFindsHiddenRecordsInBackEndMode() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('hidden' => 1)
 		);
 
@@ -475,7 +475,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuilderIgnoresTimedRecordsByDefault() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000)
 		);
 		$bag = $this->fixture->build();
@@ -489,7 +489,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuilderFindsTimedRecordsInBackEndMode() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000)
 		);
 
@@ -506,7 +506,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuilderIgnoresDeletedRecordsByDefault() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('deleted' => 1)
 		);
 		$bag = $this->fixture->build();
@@ -520,7 +520,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuilderIgnoresDeletedRecordsInBackEndMode() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('deleted' => 1)
 		);
 
@@ -560,7 +560,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToTitleFindsRecordWithThatTitle() {
 		$this->fixture->limitToTitle('foo');
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('title' => 'foo')
 		);
 		$bag = $this->fixture->build();
@@ -576,7 +576,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToTitleIgnoresRecordWithOtherTitle() {
 		$this->fixture->limitToTitle('foo');
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('title' => 'bar')
 		);
 		$bag = $this->fixture->build();
@@ -597,7 +597,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->setSourcePages($this->dummySysFolderPid);
 		$this->fixture->limitToTitle('foo');
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('title' => 'foo', 'pid' => $this->dummySysFolderPid)
 		);
 		$bag = $this->fixture->build();
@@ -614,7 +614,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->setSourcePages($this->dummySysFolderPid);
 		$this->fixture->limitToTitle('foo');
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('title' => 'foo')
 		);
 		$bag = $this->fixture->build();
@@ -630,7 +630,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->fixture->setSourcePages($this->dummySysFolderPid);
 		$this->fixture->limitToTitle('foo');
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('title' => 'bar', 'pid' => $this->dummySysFolderPid)
 		);
 		$bag = $this->fixture->build();
@@ -645,7 +645,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToTitleStillExcludesHiddenRecords() {
 		$this->fixture->limitToTitle('foo');
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('title' => 'foo', 'hidden' => 1)
 		);
 		$bag = $this->fixture->build();
@@ -660,7 +660,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToTitleStillExcludesDeletedRecords() {
 		$this->fixture->limitToTitle('foo');
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('title' => 'foo', 'deleted' => 1)
 		);
 		$bag = $this->fixture->build();
@@ -756,8 +756,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testSetOrderByWithOrderByActuallySortsTheBag() {
 		$this->fixture->setOrderBy('uid DESC');
-		$eventUid1 = $this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
-		$eventUid2 = $this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
+		$eventUid1 = $this->testingFramework->createRecord('tx_seminars_test');
+		$eventUid2 = $this->testingFramework->createRecord('tx_seminars_test');
 
 		$testBag = $this->fixture->build();
 		$this->assertEquals(
@@ -801,8 +801,8 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testSetLimitWithLimitActuallyLimitsTheBag() {
-		$this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
-		$this->testingFramework->createRecord(SEMINARS_TABLE_TEST);
+		$this->testingFramework->createRecord('tx_seminars_test');
+		$this->testingFramework->createRecord('tx_seminars_test');
 		$this->fixture->setLimit('0, 1');
 		$bag = $this->fixture->build();
 
@@ -821,7 +821,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testSetTestModeAddsTheTableNameBeforeIsDummy() {
 		$this->assertContains(
-			SEMINARS_TABLE_TEST . '.is_dummy_record = 1',
+			'tx_seminars_test.is_dummy_record = 1',
 			$this->fixture->getWhereClause()
 		);
 	}

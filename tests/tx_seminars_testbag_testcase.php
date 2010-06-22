@@ -60,11 +60,11 @@ class tx_seminars_testbag_testcase extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->uidOfFirstRecord = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('title' => 'test 1')
 		);
 		$this->uidOfSecondRecord = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array('title' => 'test 2')
 		);
 

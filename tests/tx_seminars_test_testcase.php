@@ -66,7 +66,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->fixtureUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			array(
 				'pid' => $systemFolderUid,
 				'title' => 'Test',
@@ -116,7 +116,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 	public function testCreateFromDbResult() {
 		$dbResult = tx_oelib_db::select(
 			'*',
-			SEMINARS_TABLE_TEST,
+			'tx_seminars_test',
 			'uid = ' . $this->fixtureUid
 		);
 
@@ -141,7 +141,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 
 	public function test_CreateFromDbResult_FailsForHiddenRecord() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_TEST, $this->fixtureUid, array('hidden' => 1)
+			'tx_seminars_test', $this->fixtureUid, array('hidden' => 1)
 		);
 
 		$test = new tx_seminars_test($this->fixtureUid);
@@ -155,7 +155,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 
 	public function test_CreateFromDbResultWithAllowedHiddenRecords_GetsHiddenRecordFromDb() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_TEST, $this->fixtureUid, array('hidden' => 1)
+			'tx_seminars_test', $this->fixtureUid, array('hidden' => 1)
 		);
 
 		$test = new tx_seminars_test($this->fixtureUid, null, TRUE);
@@ -252,7 +252,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			0,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_TEST,
+				'tx_seminars_test',
 				'title = "' . $title . '"',
 				'Please make sure that no test record with the title "' .
 					$title . '" exists in the DB.'
@@ -262,7 +262,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		$virginFixture = new tx_seminars_test(0);
 		$virginFixture->setTitle($title);
 		$virginFixture->enableTestMode();
-		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_TEST);
+		$this->testingFramework->markTableAsDirty('tx_seminars_test');
 
 		$this->assertTrue(
 			$virginFixture->isOk(),
@@ -275,7 +275,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_TEST,
+				'tx_seminars_test',
 				'title = "' . $title . '"'
 			)
 		);
@@ -293,7 +293,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_TEST,
+				'tx_seminars_test',
 				'title = "' . $title . '"'
 			)
 		);
@@ -305,7 +305,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_TEST,
+				'tx_seminars_test',
 				'title = "new title"'
 			)
 		);
@@ -313,7 +313,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 
 	public function testCommitToDbWillNotWriteIncompleteRecords() {
 		$virginFixture = new tx_seminars_test(0);
-		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_TEST);
+		$this->testingFramework->markTableAsDirty('tx_seminars_test');
 
 		$this->assertFalse(
 			$virginFixture->isOk()
@@ -429,24 +429,24 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 
 	public function test_recordExists_ForHiddenRecordAndNoHiddenRecordsAllowed_ReturnsFalse() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_TEST, $this->fixtureUid, array('hidden' => 1)
+			'tx_seminars_test', $this->fixtureUid, array('hidden' => 1)
 		);
 
 		$this->assertFalse(
 			$this->fixture->recordExists(
-				$this->fixtureUid, SEMINARS_TABLE_TEST, FALSE
+				$this->fixtureUid, 'tx_seminars_test', FALSE
 			)
 		);
 	}
 
 	public function test_recordExists_ForHiddenRecordAndHiddenRecordsAllowed_ReturnsTrue() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_TEST, $this->fixtureUid, array('hidden' => 1)
+			'tx_seminars_test', $this->fixtureUid, array('hidden' => 1)
 		);
 
 		$this->assertTrue(
 			$this->fixture->recordExists(
-				$this->fixtureUid, SEMINARS_TABLE_TEST, TRUE
+				$this->fixtureUid, 'tx_seminars_test', TRUE
 			)
 		);
 	}
@@ -458,7 +458,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 
 	public function test_getPageUidCanReturnRecordsPageUid() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_TEST, $this->fixtureUid, array('pid' => 42)
+			'tx_seminars_test', $this->fixtureUid, array('pid' => 42)
 		);
 		$fixture = new tx_seminars_test($this->fixtureUid);
 
@@ -472,7 +472,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 
 	public function test_getPageUidForRecordWithPageUidZero_ReturnsZero() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_TEST, $this->fixtureUid, array('pid' => 0)
+			'tx_seminars_test', $this->fixtureUid, array('pid' => 0)
 		);
 		$fixture = new tx_seminars_test($this->fixtureUid);
 

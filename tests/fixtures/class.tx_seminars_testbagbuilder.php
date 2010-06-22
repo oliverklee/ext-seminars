@@ -42,7 +42,7 @@ class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
 	/**
 	 * @var string the table name of the bag to build
 	 */
-	protected $tableName = SEMINARS_TABLE_TEST;
+	protected $tableName = 'tx_seminars_test';
 
 	/**
 	 * Limits the bag to records with a particular title.
