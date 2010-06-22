@@ -30,6 +30,95 @@ Ext.ns(
 	'TYPO3.Backend.Seminars.Organizers'
 );
 
+TYPO3.Backend.Seminars.Events.ConfirmWindow = {
+	id: 'typo3-backend-seminars-events-confirm-window',
+	width: 500,
+	modal: true,
+	layout: 'form',
+	title: 'Confirm event',
+	items: {
+		id: 'typo3-backend-seminars-events-confirm-form',
+		xtype: 'form',
+		layout: 'form',
+		items: [{
+			xtype: 'displayfield',
+			fieldLabel: 'Sender',
+			value: 'test@test.de',
+		},{
+			xtype: 'textfield',
+			fieldLabel: 'Subject',
+			width: 350,
+		},{
+			xtype: 'textarea',
+			fieldLabel: 'Message',
+			width: 350,
+			height: 300,
+		}],
+		buttons: [{
+			text: 'Submit',
+			listeners: {
+				'click': {
+					fn: function() {
+						// @todo Submit the form and close the window.
+						Ext.getCmp('typo3-backend-seminars-events-confirm-form').getForm().submit({
+							url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::confirmEvent',
+							params: {
+								//id: ID of Event here,
+							},
+						});
+
+						Ext.getCmp('typo3-backend-seminars-events-confirm-window').close();
+					},
+				},
+			},
+		}],
+	},
+};
+
+TYPO3.Backend.Seminars.Events.CancelWindow = {
+	id: 'typo3-backend-seminars-events-cancel-window',
+	width: 500,
+	modal: true,
+	layout: 'form',
+	title: 'Cancel event',
+	items: {
+		id: 'typo3-backend-seminars-events-cancel-form',
+		xtype: 'form',
+		layout: 'form',
+		items: [{
+			xtype: 'displayfield',
+			fieldLabel: 'Sender',
+			value: 'test@test.de',
+		},{
+			xtype: 'textfield',
+			fieldLabel: 'Subject',
+			width: 350,
+		},{
+			xtype: 'textarea',
+			fieldLabel: 'Message',
+			width: 350,
+			height: 300,
+		}],
+		buttons: [{
+			text: 'Submit',
+			listeners: {
+				'click': {
+					fn: function() {
+						// @todo Submit the form and close the window.
+						Ext.getCmp('typo3-backend-seminars-events-cancel-form').getForm().submit({
+							url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::cancelEvent',
+							params: {
+								//id: ID of Event here,
+							},
+						});
+						Ext.getCmp('typo3-backend-seminars-events-cancel-window').close();
+					},
+				},
+			},
+		}],
+	},
+};
+
 TYPO3.Backend.Seminars.Events.Menu = {
 	id: 'typo3-backend-seminars-events-menu',
 	items: [{
@@ -61,6 +150,13 @@ TYPO3.Backend.Seminars.Events.Menu = {
 		iconCls: 'confirm',
 		text: TYPO3.lang.eventlist_button_confirm,
 		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.ConfirmButton.hidden,
+		listeners: {
+			'click': {
+				fn: function() {
+					new Ext.Window(TYPO3.Backend.Seminars.Events.ConfirmWindow).show();
+				}
+			},
+		},
 	}, {
 		id: 'typo3-backend-seminars-events-menu-cancel',
 		iconCls: 'cancel',
@@ -69,7 +165,7 @@ TYPO3.Backend.Seminars.Events.Menu = {
 		listeners: {
 			'click': {
 				fn: function() {
-					Ext.Msg.alert(window.location);
+					new Ext.Window(TYPO3.Backend.Seminars.Events.CancelWindow).show();
 				}
 			},
 		},
