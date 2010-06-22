@@ -3350,7 +3350,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		if ($this->hasFoods()) {
 			$result = $this->getMmRecords(
-				SEMINARS_TABLE_FOODS,
+				'tx_seminars_foods',
 				'tx_seminars_seminars_foods_mm',
 				FALSE
 			);
