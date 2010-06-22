@@ -96,7 +96,7 @@ class tx_seminars_BackEnd_ConfirmEventMailForm_testcase extends tx_phpunit_testc
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'Dummy event',
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 86400,
 				'organizers' => 0,
 			)

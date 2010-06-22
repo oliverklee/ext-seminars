@@ -1268,7 +1268,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -1287,7 +1287,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$requiredDateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $requiredTopicUid,
 			)
 		);
@@ -1312,7 +1312,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -1332,7 +1332,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $requiredTopicUid,
 			)
 		);
@@ -1349,7 +1349,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -1381,7 +1381,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $requiredTopicUid,
 			)
 		);
@@ -1398,7 +1398,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -1424,7 +1424,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $requiredTopicUid,
 			)
 		);
@@ -1441,7 +1441,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -1472,7 +1472,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $requiredTopicUid1,
 			)
 		);
@@ -1488,7 +1488,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $requiredTopicUid2,
 			)
 		);
@@ -1501,7 +1501,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -1532,7 +1532,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$requiredDateUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $requiredTopicUid1,
 			)
 		);
@@ -1558,7 +1558,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -1589,7 +1589,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$requiredDateUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $requiredTopicUid1,
 			)
 		);
@@ -1615,7 +1615,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)

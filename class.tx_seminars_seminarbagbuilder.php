@@ -135,10 +135,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 
 		$this->whereClauseParts['categories'] =
 			'(' .
-			'(object_type != ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+			'(object_type != ' . tx_seminars_Model_Event::TYPE_DATE . ' AND ' .
 			'tx_seminars_seminars.uid' . $uidMatcher . ')' .
 			' OR ' .
-			'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+			'(object_type = ' . tx_seminars_Model_Event::TYPE_DATE . ' AND ' .
 			'tx_seminars_seminars.topic' . $uidMatcher . ')' .
 			')';
 	}
@@ -333,7 +333,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			'(object_type=' . tx_seminars_Model_Event::TYPE_COMPLETE . ' AND ' .
 			'event_type IN(' . $safeEventTypeUids . '))' .
 			' OR ' .
-			'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+			'(object_type = ' . tx_seminars_Model_Event::TYPE_DATE . ' AND ' .
 			'EXISTS (SELECT * FROM ' .
 			'tx_seminars_seminars AS topic WHERE ' .
 			'topic.uid = ' .
@@ -479,7 +479,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToDateAndSingleRecords() {
 		$this->whereClauseParts['date_single'] = '(tx_seminars_seminars' .
-			'.object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' OR ' .
+			'.object_type = ' . tx_seminars_Model_Event::TYPE_DATE . ' OR ' .
 			'tx_seminars_seminars.object_type = ' .
 			tx_seminars_Model_Event::TYPE_COMPLETE .')';
 	}
@@ -562,7 +562,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 
 		$this->whereClauseParts['other_dates'] = '(' .
 			'tx_seminars_seminars.topic = ' . $event->getTopicUid() .
-			' AND object_type = ' . SEMINARS_RECORD_TYPE_DATE .
+			' AND object_type = ' . tx_seminars_Model_Event::TYPE_DATE .
 			' AND uid != ' . $event->getUid() .
 		')';
 	}
@@ -769,9 +769,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 					' LIKE ' . $searchWord .
 				' AND tx_seminars_event_types.uid = s1.event_type' .
 				' AND ((s1.uid = s2.topic AND s2.object_type = ' .
-						SEMINARS_RECORD_TYPE_DATE . ') ' .
+						tx_seminars_Model_Event::TYPE_DATE . ') ' .
 					'OR (s1.uid = s2.uid AND s1.object_type != ' .
-						SEMINARS_RECORD_TYPE_DATE . '))' .
+						tx_seminars_Model_Event::TYPE_DATE . '))' .
 				' AND s2.uid=tx_seminars_seminars.uid)' .
 			')';
 		}
@@ -826,7 +826,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			'(object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE .
 				' AND tx_seminars_seminars.uid' . $inUids . ')',
 			'(tx_seminars_seminars.object_type = ' .
-				SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+				tx_seminars_Model_Event::TYPE_DATE . ' AND ' .
 				'tx_seminars_seminars.topic' . $inUids . ')',
 		);
 	}
@@ -921,8 +921,8 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 					$mmTable . ', ' .
 					$foreignTable .
 				' WHERE ((tx_seminars_seminars.object_type = ' .
-						SEMINARS_RECORD_TYPE_DATE .
-						' AND s1.object_type != ' . SEMINARS_RECORD_TYPE_DATE .
+						tx_seminars_Model_Event::TYPE_DATE .
+						' AND s1.object_type != ' . tx_seminars_Model_Event::TYPE_DATE .
 						' AND tx_seminars_seminars.topic = s1.uid)' .
 					' OR (tx_seminars_seminars.object_type = ' .
 						tx_seminars_Model_Event::TYPE_COMPLETE .
@@ -1203,7 +1203,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			'((object_type = '. tx_seminars_Model_Event::TYPE_COMPLETE . ') ' .
 				'AND (tx_seminars_seminars.uid IN (' . $eventUids .
 				')) OR (' .
-				'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ') AND (' .
+				'(object_type = ' . tx_seminars_Model_Event::TYPE_DATE . ') AND (' .
 				'tx_seminars_seminars.topic IN (' . $eventUids . ')))' .
 			')';
 	}
@@ -1261,7 +1261,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				'((object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ' AND ' .
 					'tx_seminars_seminars.uid IN (' . $matchingEventsUidList . ')) ' .
 					'OR ' .
-					'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+					'(object_type = ' . tx_seminars_Model_Event::TYPE_DATE . ' AND ' .
 					'topic IN (' . $matchingEventsUidList . '))' .
 				')';
 		}
@@ -1327,7 +1327,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				'((object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ' ' .
 				'AND tx_seminars_seminars.uid IN (' . $foundUids .
 				')) OR ' .
-				'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+				'(object_type = ' . tx_seminars_Model_Event::TYPE_DATE . ' AND ' .
 				'topic IN (' . $foundUids . ')))';
 		}
 	}
@@ -1378,7 +1378,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				'((object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ' ' .
 				'AND tx_seminars_seminars.uid IN (' . $foundUids .
 				')) OR ' .
-				'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
+				'(object_type = ' . tx_seminars_Model_Event::TYPE_DATE . ' AND ' .
 				'topic IN (' . $foundUids . ')))';
 		}
 	}

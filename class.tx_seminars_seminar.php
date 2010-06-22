@@ -3113,7 +3113,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function isEventDate() {
 		return ($this->getRecordPropertyInteger('object_type')
-			== SEMINARS_RECORD_TYPE_DATE);
+			== tx_seminars_Model_Event::TYPE_DATE);
 	}
 
 	/**

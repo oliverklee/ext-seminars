@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-define('SEMINARS_RECORD_TYPE_DATE', 2);
-
 define('SEMINARS_UPLOAD_PATH', 'uploads/tx_seminars/');
 
 ?>

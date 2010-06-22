@@ -658,7 +658,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date',
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
@@ -669,7 +669,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date 2',
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 2*ONE_DAY,
@@ -704,7 +704,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date',
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
@@ -749,7 +749,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date',
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
@@ -760,7 +760,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date 2',
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 2*ONE_DAY,
@@ -795,7 +795,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date',
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
@@ -806,7 +806,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date 2',
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 2*ONE_DAY,
@@ -1856,7 +1856,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$uid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $this->seminarUid,
 				'expiry' => mktime(0, 0, 0, 1, 1, 2008),
 			)
@@ -1874,7 +1874,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$uid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $this->seminarUid,
 				'expiry' => 0,
 			)
@@ -2170,7 +2170,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date'
 			)
@@ -2234,7 +2234,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date',
 				'hidden' => 1
@@ -2293,7 +2293,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date'
 			)
@@ -5758,7 +5758,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$date = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
 				'attendees_max' => 10,
@@ -5793,7 +5793,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$date = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
 				'attendees_max' => 10,
@@ -5828,7 +5828,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$date = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
 				'attendees_max' => 10,
@@ -5867,7 +5867,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$date = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
 				'attendees_max' => 10,

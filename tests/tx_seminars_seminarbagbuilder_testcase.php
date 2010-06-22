@@ -457,7 +457,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid
 			)
 		);
@@ -498,7 +498,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid
 			)
 		);
@@ -538,7 +538,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid
 			)
 		);
@@ -2360,7 +2360,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -2394,7 +2394,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -2428,7 +2428,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'event_type' => $typeUid2,
 			)
@@ -3066,7 +3066,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToTopicRecordsIgnoresEventDateRecords() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_DATE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_DATE)
 		);
 		$this->fixture->limitToTopicRecords();
 		$bag = $this->fixture->build();
@@ -3103,7 +3103,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testRemoveLimitToTopicRecordsFindsEventDateRecords() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_DATE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_DATE)
 		);
 		$this->fixture->limitToTopicRecords();
 		$this->fixture->removeLimitToTopicRecords();
@@ -3221,7 +3221,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToDateAndSingleRecordsFindsDateRecords() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_DATE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_DATE)
 		);
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
@@ -3458,14 +3458,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
 		$dateUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -3490,14 +3490,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -3540,14 +3540,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid1,
 			)
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid2,
 			)
 		);
@@ -3571,7 +3571,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -3606,14 +3606,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid1,
 			)
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid2,
 			)
 		);
@@ -3639,7 +3639,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -4943,7 +4943,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -4970,7 +4970,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -4996,7 +4996,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -5023,7 +5023,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -5049,7 +5049,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -5076,7 +5076,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -5111,7 +5111,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -5147,7 +5147,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -5182,7 +5182,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -5218,7 +5218,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -5248,7 +5248,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -5279,7 +5279,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -5303,7 +5303,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'accreditation_number' => 'foo bar event',
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -5322,7 +5322,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'accreditation_number' => 'bar event',
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -5344,7 +5344,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'organizers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5372,7 +5372,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'organizers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5399,7 +5399,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'speakers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5427,7 +5427,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'speakers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5454,7 +5454,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'speakers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5482,7 +5482,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'speakers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5509,7 +5509,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'speakers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5537,7 +5537,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'speakers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5564,7 +5564,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'partners' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5592,7 +5592,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'partners' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5619,7 +5619,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'partners' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5647,7 +5647,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'partners' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5674,7 +5674,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'partners' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5702,7 +5702,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'partners' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5729,7 +5729,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'tutors' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5757,7 +5757,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'tutors' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5784,7 +5784,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'tutors' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5812,7 +5812,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'tutors' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5839,7 +5839,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'tutors' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5867,7 +5867,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'tutors' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5894,7 +5894,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'leaders' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5922,7 +5922,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'leaders' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5949,7 +5949,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'leaders' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -5977,7 +5977,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'leaders' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -6004,7 +6004,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'leaders' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -6032,7 +6032,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'leaders' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -6059,7 +6059,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'place' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -6087,7 +6087,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'place' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -6114,7 +6114,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'place' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -6142,7 +6142,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'place' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -6169,7 +6169,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'place' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -6197,7 +6197,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'place' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -6451,7 +6451,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -6477,7 +6477,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -6503,7 +6503,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -6536,7 +6536,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'expiry' => 0
 			)
@@ -6565,7 +6565,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'expiry' => $this->future
 			)
@@ -6594,7 +6594,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'expiry' => $this->past
 			)
@@ -6624,7 +6624,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -6659,7 +6659,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $requiredTopicUid,
 			)
 		);
@@ -7556,7 +7556,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -8109,7 +8109,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE
 			)
 		);
 
@@ -8136,7 +8136,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'topic' => $topicUid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE
 			)
 		);
 

@@ -206,7 +206,7 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $requiredEvent1,
 			)
 		);
@@ -224,7 +224,7 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 		$requiredDate2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $requiredEvent2,
 			)
 		);

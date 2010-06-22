@@ -96,7 +96,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'Dummy event',
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 86400,
 				'organizers' => 0,
 			)
@@ -192,14 +192,14 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -238,7 +238,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
@@ -277,14 +277,14 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
 			)
@@ -325,14 +325,14 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		$dateUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 			)
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 			)

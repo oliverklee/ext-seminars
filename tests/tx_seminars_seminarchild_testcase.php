@@ -1369,7 +1369,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 				'language' => 'it'
 			)
@@ -2831,7 +2831,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 			)
 		);
@@ -2873,7 +2873,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 				'event_type' => 199999
 			)
@@ -4159,7 +4159,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testUsesCorrectIconForDateRecord() {
-		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
+		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_date.',
@@ -4188,7 +4188,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testUsesCorrectIconForHiddenDate() {
-		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
+		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
 		$this->fixture->setHidden(TRUE);
 
 		$this->assertContains(
@@ -4218,7 +4218,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testUsesCorrectIconForVisibleTimedDate() {
-		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
+		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
@@ -4248,7 +4248,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testUsesCorrectIconForExpiredTimedDate() {
-		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
+		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
 		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
@@ -4278,7 +4278,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testUsesCorrectIconForStillInvisibleTimedDate() {
-		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_DATE);
+		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
 
 		$this->assertRegExp(
@@ -5922,7 +5922,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -5974,7 +5974,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -6052,7 +6052,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -6116,7 +6116,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -6233,7 +6233,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -6363,7 +6363,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => SEMINARS_RECORD_TYPE_DATE,
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -7479,7 +7479,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 			)
 		);
@@ -7546,7 +7546,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 			)
 		);
@@ -7574,7 +7574,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 			)
 		);

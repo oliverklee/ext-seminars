@@ -341,7 +341,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * @param integer the record type for this event record, must be either
 	 *                tx_seminars_Model_Event::TYPE_COMPLETE, 
 	 *                tx_seminars_Model_Event::TYPE_TOPIC
-	 *                or SEMINARS_RECORD_TYPE_DATE
+	 *                or tx_seminars_Model_Event::TYPE_DATE
 	 */
 	public function setRecordType($recordType) {
 		$this->setRecordPropertyInteger('object_type', $recordType);
