@@ -42,7 +42,7 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 	/**
 	 * @var string the table name of the bag to build
 	 */
-	protected $tableName = SEMINARS_TABLE_CATEGORIES;
+	protected $tableName = 'tx_seminars_categories';
 
 	/**
 	 * @var string the sorting field
@@ -83,8 +83,8 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['event'] = 'EXISTS (' .
 			'SELECT * FROM tx_seminars_seminars_categories_mm' .
 			' WHERE tx_seminars_seminars_categories_mm.uid_local IN(' .
-			$eventUids . ') AND ' . 'tx_seminars_seminars_categories_mm' .
-			'.uid_foreign=' . SEMINARS_TABLE_CATEGORIES . '.uid' . ')';
+			$eventUids . ') AND tx_seminars_seminars_categories_mm' .
+			'.uid_foreign = tx_seminars_categories.uid)';
 
 		$this->eventUids = $eventUids;
 	}
@@ -107,7 +107,7 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 		}
 
 		$this->addAdditionalTableName('tx_seminars_seminars_categories_mm');
-		$this->whereClauseParts['category'] = SEMINARS_TABLE_CATEGORIES . '.uid=' .
+		$this->whereClauseParts['category'] = 'tx_seminars_categories.uid = ' .
 			'tx_seminars_seminars_categories_mm.uid_foreign AND ' .
 			'tx_seminars_seminars_categories_mm.uid_local IN (' .
 			$this->eventUids . ')';

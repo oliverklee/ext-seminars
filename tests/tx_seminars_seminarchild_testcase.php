@@ -245,7 +245,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		array $categoryData = array(), $sorting = 0
 	) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES, $categoryData
+			'tx_seminars_categories', $categoryData
 		);
 
 		$this->testingFramework->createRelation(

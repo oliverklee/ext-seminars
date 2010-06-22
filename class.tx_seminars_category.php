@@ -38,7 +38,7 @@ class tx_seminars_category extends tx_seminars_objectfromdb {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
-	protected $tableName = SEMINARS_TABLE_CATEGORIES;
+	protected $tableName = 'tx_seminars_categories';
 
 	/**
 	 * Returns the icon of this category.

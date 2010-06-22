@@ -708,7 +708,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
 			$searchWord,
 			'categories',
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			'tx_seminars_seminars_categories_mm'
 		);
 	}

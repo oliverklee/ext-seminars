@@ -219,7 +219,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	private function addCategoryRelation(array $categoryData = array()) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES, $categoryData
+			'tx_seminars_categories', $categoryData
 		);
 
 		$this->testingFramework->createRelation(
@@ -2446,7 +2446,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -2462,7 +2462,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithCategoryExcludesEventsWithoutCategory() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->fixture->piVars['category'] = $categoryUid;
@@ -2484,7 +2484,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -2511,7 +2511,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -2538,7 +2538,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -2564,7 +2564,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -2573,7 +2573,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$categoryUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'another category')
 		);
 		$this->fixture->piVars['category'] = $categoryUid2;
@@ -2595,7 +2595,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -2604,7 +2604,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$categoryUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'another category')
 		);
 		$this->testingFramework->createRelation(
@@ -3447,7 +3447,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewCanBeSortedByTitleAscendingWithinOneCategory() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 
@@ -3490,7 +3490,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewCanBeSortedByTitleDescendingWithinOneCategory() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 
@@ -3533,7 +3533,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewCategorySortingComesBeforeSortingByTitle() {
 		$categoryUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'Category Y')
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
@@ -3551,7 +3551,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$categoryUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'Category X')
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
@@ -3579,7 +3579,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewCategorySortingHidesRepeatedCategoryNames() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'Category X')
 		);
 
@@ -3625,7 +3625,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewCategorySortingListsDifferentCategoryNames() {
 		$categoryUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'Category Y')
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
@@ -3643,7 +3643,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$categoryUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'Category X')
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
@@ -3721,7 +3721,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -3751,7 +3751,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -4039,7 +4039,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToCategoriesIgnoresEventsWithoutCategory() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->fixture->setConfigurationValue(
@@ -4063,7 +4063,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -4081,7 +4081,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -4115,7 +4115,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -4124,7 +4124,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$categoryUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'another category')
 		);
 		$this->fixture->setConfigurationValue(
@@ -4148,7 +4148,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -4166,7 +4166,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$categoryUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'a category')
 		);
 		$this->testingFramework->createRelation(
@@ -4861,7 +4861,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'category_foo')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(

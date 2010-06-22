@@ -109,7 +109,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 
 	public function testRenderCreatesCategoryListContainingOneCategoryTitle() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -133,11 +133,11 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 
 	public function testRenderCreatesCategoryListContainingTwoCategoryTitles() {
 		$categoryUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'first category')
 		);
 		$categoryUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'second category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -169,11 +169,11 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 
 	public function testRenderCreatesCategoryListWhichIsSortedAlphabetically() {
 		$categoryUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'category B')
 		);
 		$categoryUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'category A')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -203,7 +203,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			$this->systemFolderPid
 		);
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -228,7 +228,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 	public function testRenderIgnoresOtherSysFolders() {
 		$otherSystemFolderUid = $this->testingFramework->createSystemFolder();
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -255,7 +255,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 
 		$otherSystemFolderUid = $this->testingFramework->createSystemFolder();
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -279,7 +279,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 
 	public function testRenderIgnoresCanceledEvents() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -304,7 +304,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 
 	public function testRenderFindsConfirmedEvents() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -333,7 +333,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		);
 
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -362,7 +362,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		);
 
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -391,7 +391,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		);
 
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(

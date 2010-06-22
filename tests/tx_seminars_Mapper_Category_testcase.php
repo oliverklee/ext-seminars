@@ -75,7 +75,7 @@ class tx_seminars_Mapper_Category_testcase extends tx_phpunit_testcase {
 	 */
 	public function findWithUidOfExistingRecordReturnsRecordAsModel() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES, array('title' => 'Lecture')
+			'tx_seminars_categories', array('title' => 'Lecture')
 		);
 
 		$this->assertEquals(

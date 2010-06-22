@@ -44,7 +44,7 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->fixtureUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'Test category')
 		);
 	}
@@ -83,7 +83,7 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 	public function testCreateFromDbResult() {
 		$dbResult = tx_oelib_db::select(
 			'*',
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			'uid = '.$this->fixtureUid
 		);
 
@@ -114,7 +114,7 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 	public function testGetIconReturnsIcon() {
 		$this->fixture = new tx_seminars_category(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_CATEGORIES,
+				'tx_seminars_categories',
 				array(
 					'title' => 'Test category',
 					'icon' => 'foo.gif',

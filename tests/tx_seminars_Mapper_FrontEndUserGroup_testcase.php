@@ -91,7 +91,7 @@ class tx_seminars_Mapper_FrontEndUserGroup_testcase extends tx_phpunit_testcase 
 
 	public function test_FrontEndUserGroup_ReturnsListOfCategories() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES, array()
+			'tx_seminars_categories', array()
 		);
 		$frontEndUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
 
