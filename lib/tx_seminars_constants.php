@@ -41,8 +41,6 @@ define('SEMINARS_TABLE_PARTNER_MAIN', 'tx_partner_main');
 define('SEMINARS_TABLE_PARTNER_CONTACT_INFO', 'tx_partner_contact_info');
 define('SEMINARS_TABLE_PRICES', 'tx_seminars_prices');
 
-define('SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM', 'tx_seminars_seminars_payment_methods_mm');
-
 define('SEMINARS_RECORD_TYPE_COMPLETE', 0);
 define('SEMINARS_RECORD_TYPE_TOPIC', 1);
 define('SEMINARS_RECORD_TYPE_DATE', 2);

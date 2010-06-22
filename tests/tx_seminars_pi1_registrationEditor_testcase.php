@@ -297,7 +297,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
 			$paymentMethodUid,
 			'payment_methods'
@@ -315,7 +315,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
 			$paymentMethodUid,
 			'payment_methods'
@@ -335,7 +335,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
 			$paymentMethodUid,
 			'payment_methods'
@@ -351,14 +351,14 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 	public function testPopulateListPaymentMethodsForEventWithTwoPaymentMethodsReturnsBothPaymentMethods() {
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
 			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
 			'payment_methods'
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
 			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
 			'payment_methods'
@@ -1026,7 +1026,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
 			$paymentMethodUid,
 			'payment_methods'
@@ -1040,13 +1040,13 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 	public function test_getPreselectedPaymentMethodForTwoNotSelectedPaymentMethods_ReturnsZero() {
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
 			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
 			'payment_methods'
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
 			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
 			'payment_methods'
@@ -1060,7 +1060,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 
 	public function test_getPreselectedPaymentMethodForTwoPaymentMethodsOneSelectedOneNot_ReturnsUidOfSelectedRecord() {
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
 			$this->testingFramework->createRecord(SEMINARS_TABLE_PAYMENT_METHODS),
 			'payment_methods'
@@ -1069,7 +1069,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_PAYMENT_METHODS
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
 			$selectedPaymentMethodUid,
 			'payment_methods'
@@ -1098,7 +1098,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_PAYMENT_METHODS, array('title' => 'payment foo')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_PAYMENT_METHODS_MM,
+			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
 			$selectedPaymentMethodUid,
 			'payment_methods'
