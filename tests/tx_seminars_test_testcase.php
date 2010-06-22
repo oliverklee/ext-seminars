@@ -345,77 +345,77 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		);
 
 		$virginFixture = new tx_seminars_test(0);
-		$virginFixture->createMmRecords(SEMINARS_TABLE_TEST_TEST_MM, array());
+		$virginFixture->createMmRecords('tx_seminars_test_test_mm', array());
 	}
 
 	public function testCreateMmRecordsWithEmptyReferencesReturnsZero() {
 		$this->assertEquals(
 			0,
 			$this->fixture->createMmRecords(
-				SEMINARS_TABLE_TEST_TEST_MM, array()
+				'tx_seminars_test_test_mm', array()
 			)
 		);
 	}
 
 	public function testCreateMmRecordsWithOneReferenceReturnsOne() {
-		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_TEST_TEST_MM);
+		$this->testingFramework->markTableAsDirty('tx_seminars_test_test_mm');
 
 		$this->assertEquals(
 			1,
 			$this->fixture->createMmRecords(
-				SEMINARS_TABLE_TEST_TEST_MM, array(42)
+				'tx_seminars_test_test_mm', array(42)
 			)
 		);
 	}
 
 	public function testCreateMmRecordsWithTwoReferencesReturnsTwo() {
-		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_TEST_TEST_MM);
+		$this->testingFramework->markTableAsDirty('tx_seminars_test_test_mm');
 
 		$this->assertEquals(
 			2,
 			$this->fixture->createMmRecords(
-				SEMINARS_TABLE_TEST_TEST_MM, array(42, 31)
+				'tx_seminars_test_test_mm', array(42, 31)
 			)
 		);
 	}
 
 	public function testCreateMmRecordsWithOneReferenceCreatesMmRecord() {
-		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_TEST_TEST_MM);
+		$this->testingFramework->markTableAsDirty('tx_seminars_test_test_mm');
 		$this->fixture->createMmRecords(
-			SEMINARS_TABLE_TEST_TEST_MM, array(42)
+			'tx_seminars_test_test_mm', array(42)
 		);
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_TEST_TEST_MM,
+				'tx_seminars_test_test_mm',
 				'uid_local = ' . $this->fixtureUid . ' AND uid_foreign = 42'
 			)
 		);
 	}
 
 	public function testCreateMmRecordsWithCreatesFirstMmRecordWithSortingOne() {
-		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_TEST_TEST_MM);
+		$this->testingFramework->markTableAsDirty('tx_seminars_test_test_mm');
 		$this->fixture->createMmRecords(
-			SEMINARS_TABLE_TEST_TEST_MM, array(42)
+			'tx_seminars_test_test_mm', array(42)
 		);
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_TEST_TEST_MM,
+				'tx_seminars_test_test_mm',
 				'uid_local = ' . $this->fixtureUid . ' AND sorting = 1'
 			)
 		);
 	}
 
 	public function testCreateMmRecordsWithCreatesSecondMmRecordWithSortingTwo() {
-		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_TEST_TEST_MM);
+		$this->testingFramework->markTableAsDirty('tx_seminars_test_test_mm');
 		$this->fixture->createMmRecords(
-			SEMINARS_TABLE_TEST_TEST_MM, array(42, 31)
+			'tx_seminars_test_test_mm', array(42, 31)
 		);
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_TEST_TEST_MM,
+				'tx_seminars_test_test_mm',
 				'uid_local = ' . $this->fixtureUid . ' AND uid_foreign = 31 ' .
 					'AND sorting = 2'
 			)
