@@ -163,12 +163,12 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function skippingLimitToCategoriesResultsInAllEvents() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -192,12 +192,12 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function limitToEmptyCategoryUidResultsInAllEvents() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -223,12 +223,12 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function limitToEmptyCategoryAfterLimitToNonEmptyCategoriesUidResultsInAllEvents() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -255,7 +255,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function limitToCategoriesCanResultInOneEvent() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -285,7 +285,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$eventUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid
@@ -293,7 +293,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$eventUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_categories_mm', $eventUid2, $categoryUid
@@ -316,12 +316,12 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function limitToCategoriesExcludesUnassignedEvents() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -351,7 +351,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function limitToCategoriesExcludesEventsOfOtherCategories() {
 		$eventUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$categoryUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -362,7 +362,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$eventUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$categoryUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -392,12 +392,12 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function limitToCategoriesForNoMatchesResultsInEmptyBag() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		$eventUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$categoryUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_categories'
@@ -493,7 +493,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function limitToCategoriesFindsDateRecordForSingle() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -568,7 +568,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid1
@@ -579,7 +579,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$eventUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_categories_mm', $eventUid2, $categoryUid2
@@ -2090,7 +2090,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testSkippingLimitToEventTypesResultsInAllEvents() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		$typeUid = $this->testingFramework->createRecord(
@@ -2099,7 +2099,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid,
 			)
 		);
@@ -2116,7 +2116,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToEmptyTypeUidResultsInAllEvents() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		$typeUid = $this->testingFramework->createRecord(
@@ -2125,7 +2125,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid,
 			)
 		);
@@ -2144,7 +2144,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToEmptyTypeUidAfterLimitToNotEmptyTypesResultsInAllEvents() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		$typeUid = $this->testingFramework->createRecord(
@@ -2153,7 +2153,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid,
 			)
 		);
@@ -2177,7 +2177,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid,
 			)
 		);
@@ -2200,14 +2200,14 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid,
 			)
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid,
 			)
 		);
@@ -2226,7 +2226,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToEventTypesWillExcludeUnassignedEvents() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		$typeUid = $this->testingFramework->createRecord(
@@ -2235,7 +2235,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid,
 			)
 		);
@@ -2262,7 +2262,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$eventUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid1,
 			)
 		);
@@ -2273,7 +2273,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid2,
 			)
 		);
@@ -2296,7 +2296,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToEventTypesResultsInAnEmptyBagIfThereAreNoMatches() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		$typeUid1 = $this->testingFramework->createRecord(
@@ -2305,7 +2305,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid1,
 			)
 		);
@@ -2387,7 +2387,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid,
 			)
 		);
@@ -2417,7 +2417,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid1,
 			)
 		);
@@ -2451,7 +2451,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid1,
 			)
 		);
@@ -2462,7 +2462,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'event_type' => $typeUid2,
 			)
 		);
@@ -3051,7 +3051,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToTopicRecordsIgnoresSingleEventRecords() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$this->fixture->limitToTopicRecords();
 		$bag = $this->fixture->build();
@@ -3086,7 +3086,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testRemoveLimitToTopicRecordsFindsSingleEventRecords() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$this->fixture->limitToTopicRecords();
 		$this->fixture->removeLimitToTopicRecords();
@@ -3237,7 +3237,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 	public function testLimitToDateAndSingleRecordsFindsSingleRecords() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
@@ -3522,7 +3522,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 		$event = new tx_seminars_seminar($eventUid);
 		$this->fixture->limitToOtherDatesForTopic($event);
@@ -3578,7 +3578,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'topic' => $topicUid,
 			)
 		);
@@ -3646,7 +3646,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'topic' => $topicUid,
 			)
 		);
@@ -3734,7 +3734,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'accreditation_number' => 'foo bar event',
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -3753,7 +3753,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'accreditation_number' => 'bar event',
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -3868,7 +3868,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'speakers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -3896,7 +3896,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'speakers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -3923,7 +3923,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'speakers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -3951,7 +3951,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'speakers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -3978,7 +3978,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'speakers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4006,7 +4006,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'speakers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4033,7 +4033,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'partners' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4061,7 +4061,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'partners' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4088,7 +4088,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'partners' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4116,7 +4116,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'partners' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4143,7 +4143,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'partners' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4171,7 +4171,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'partners' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4198,7 +4198,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'tutors' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4226,7 +4226,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'tutors' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4253,7 +4253,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'tutors' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4281,7 +4281,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'tutors' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4308,7 +4308,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'tutors' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4336,7 +4336,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'tutors' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4363,7 +4363,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'leaders' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4391,7 +4391,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'leaders' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4418,7 +4418,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'leaders' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4446,7 +4446,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'leaders' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4473,7 +4473,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'leaders' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4501,7 +4501,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'leaders' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4528,7 +4528,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'place' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4556,7 +4556,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'place' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4583,7 +4583,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'place' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4611,7 +4611,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'place' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4638,7 +4638,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'place' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4666,7 +4666,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'place' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4693,7 +4693,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'event_type' => $eventTypeUid,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -4716,7 +4716,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'event_type' => $eventTypeUid,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->fixture->limitToFullTextSearch('foo');
@@ -4738,7 +4738,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'organizers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4766,7 +4766,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'organizers' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4793,7 +4793,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'target_groups' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4821,7 +4821,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'target_groups' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4848,7 +4848,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'categories' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(
@@ -4876,7 +4876,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'categories' => 1,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
 		$this->testingFramework->createRelation(

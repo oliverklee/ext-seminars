@@ -330,7 +330,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		);
 
 		$this->whereClauseParts['eventTypes'] = '(' .
-			'(object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
+			'(object_type=' . tx_seminars_Model_Event::TYPE_COMPLETE . ' AND ' .
 			'event_type IN(' . $safeEventTypeUids . '))' .
 			' OR ' .
 			'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
@@ -481,7 +481,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$this->whereClauseParts['date_single'] = '(tx_seminars_seminars' .
 			'.object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' OR ' .
 			'tx_seminars_seminars.object_type = ' .
-			SEMINARS_RECORD_TYPE_COMPLETE . ')';
+			tx_seminars_Model_Event::TYPE_COMPLETE .')';
 	}
 
 	/**
@@ -823,7 +823,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$inUids = ' IN (' .
 			implode(',', $matchingUids) . ')';
 		return array(
-			'(object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE .
+			'(object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE .
 				' AND tx_seminars_seminars.uid' . $inUids . ')',
 			'(tx_seminars_seminars.object_type = ' .
 				SEMINARS_RECORD_TYPE_DATE . ' AND ' .
@@ -925,7 +925,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 						' AND s1.object_type != ' . SEMINARS_RECORD_TYPE_DATE .
 						' AND tx_seminars_seminars.topic = s1.uid)' .
 					' OR (tx_seminars_seminars.object_type = ' .
-						SEMINARS_RECORD_TYPE_COMPLETE .
+						tx_seminars_Model_Event::TYPE_COMPLETE .
 						' AND tx_seminars_seminars.uid = s1.uid))' .
 					' AND ' . $mmTable . '.uid_local = s1.uid' .
 					' AND ' . $mmTable . '.uid_foreign = ' .
@@ -1200,7 +1200,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		}
 
 		$this->whereClauseParts['eventsWithOrganizers'] =
-			'((object_type = '. SEMINARS_RECORD_TYPE_COMPLETE . ') ' .
+			'((object_type = '. tx_seminars_Model_Event::TYPE_COMPLETE . ') ' .
 				'AND (tx_seminars_seminars.uid IN (' . $eventUids .
 				')) OR (' .
 				'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ') AND (' .
@@ -1231,7 +1231,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$eventsWithoutTargetGroup = tx_oelib_db::selectColumnForMultiple(
 			'uid',
 			'tx_seminars_seminars',
-			'(object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ' OR ' .
+			'(object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ' OR ' .
 				'object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ') AND ' . 
 				'(target_groups = 0)' .
 				tx_oelib_db::enableFields('tx_seminars_seminars')
@@ -1258,7 +1258,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		} else {
 			$matchingEventsUidList = implode(',', $matchingEventsUids);
 			$this->whereClauseParts['ageLimit'] =
-				'((object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ' AND ' .
+				'((object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ' AND ' .
 					'tx_seminars_seminars.uid IN (' . $matchingEventsUidList . ')) ' .
 					'OR ' .
 					'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
@@ -1284,7 +1284,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$now = $GLOBALS['SIM_EXEC_TIME'];
 
 		$whereClause = '(object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ' OR ' .
-			'object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ') AND ('.
+			'object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ') AND ('.
 			'(deadline_early_bird < ' . $now . ' AND ' .
 				'(price_regular <= ' . $maximumPrice . ' OR ' .
 					sprintf(
@@ -1324,7 +1324,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			$this->whereClauseParts['maximumPrice'] = '(0 = 1)';
 		} else {
 			$this->whereClauseParts['maximumPrice'] =
-				'((object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE. ' ' .
+				'((object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ' ' .
 				'AND tx_seminars_seminars.uid IN (' . $foundUids .
 				')) OR ' .
 				'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .
@@ -1347,7 +1347,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 
 		$now = $GLOBALS['SIM_EXEC_TIME'];
 		$whereClause = '(object_type = ' . SEMINARS_RECORD_TYPE_TOPIC . ' OR ' .
-			'object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE . ') AND (' .
+			'object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ') AND (' .
 			'(deadline_early_bird < ' . $now . ' ' .
 				'AND (price_regular >= ' . $minimumPrice . ' ' .
 				'OR price_special >= ' . $minimumPrice . ')' .
@@ -1375,7 +1375,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			$this->whereClauseParts['maximumPrice'] = '(0 = 1)';
 		} else {
 			$this->whereClauseParts['maximumPrice'] =
-				'((object_type = ' . SEMINARS_RECORD_TYPE_COMPLETE. ' ' .
+				'((object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ' ' .
 				'AND tx_seminars_seminars.uid IN (' . $foundUids .
 				')) OR ' .
 				'(object_type = ' . SEMINARS_RECORD_TYPE_DATE . ' AND ' .

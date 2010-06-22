@@ -715,7 +715,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'topic' => $topicUid,
 				'title' => 'Test single 2',
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 2*ONE_DAY,
@@ -2192,7 +2192,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'title' => 'Test single event',
 				'hidden' => 1
 			)
@@ -2209,7 +2209,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'title' => 'Test single event',
 				'deleted' => 1
 			)

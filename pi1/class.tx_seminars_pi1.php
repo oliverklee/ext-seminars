@@ -1495,7 +1495,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		if ($this->internal['res_count']) {
 			// If we are on a topic record, overwrite the label with an
 			// alternative text.
-			if (($this->seminar->getRecordType() == SEMINARS_RECORD_TYPE_COMPLETE)
+			if (($this->seminar->getRecordType() == tx_seminars_Model_Event::TYPE_COMPLETE)
 				|| ($this->seminar->getRecordType() == SEMINARS_RECORD_TYPE_TOPIC)
 			) {
 				$this->setMarker(

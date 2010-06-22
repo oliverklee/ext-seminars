@@ -169,7 +169,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars',
 			$this->eventUid,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		$this->assertNotContains(
@@ -367,7 +367,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars',
 			$this->eventUid,
-			array('object_type' => SEMINARS_RECORD_TYPE_COMPLETE)
+			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		$this->assertNotContains(

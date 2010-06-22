@@ -105,7 +105,7 @@ class tx_seminars_frontEndCountdown_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			$this->seminarUid,
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'begin_date' => $GLOBALS['SIM_ACCESS_TIME'] - 1000,
 			)
 		);
@@ -121,7 +121,7 @@ class tx_seminars_frontEndCountdown_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			$this->seminarUid,
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000,
 			)
 		);

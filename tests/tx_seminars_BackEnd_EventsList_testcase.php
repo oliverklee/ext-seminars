@@ -709,7 +709,7 @@ class tx_seminars_BackEnd_EventsList_testcase extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1',
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE
 			)
 		);
 

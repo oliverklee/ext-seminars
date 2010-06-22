@@ -1400,7 +1400,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$singleRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'topic' => $topicRecordUid,
 				'language' => 'it'
 			)
@@ -3089,7 +3089,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_COMPLETE,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'organizers' => 'foo',
 			)
 		);
@@ -4141,7 +4141,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	////////////////////////
 
 	public function testUsesCorrectIconForSingleEvent() {
-		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
+		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
 
 		$this->assertContains(
 			'icon_tx_seminars_seminars_complete.',
@@ -4168,7 +4168,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testUsesCorrectIconForHiddenSingleEvent() {
-		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
+		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
 		$this->fixture->setHidden(TRUE);
 
 		$this->assertContains(
@@ -4198,7 +4198,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testUsesCorrectIconForVisibleTimedSingleEvent() {
-		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
+		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
@@ -4228,7 +4228,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testUsesCorrectIconForExpiredSingleEvent() {
-		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
+		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
 		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
@@ -4258,7 +4258,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testUsesCorrectIconForStillInvisibleTimedSingleEvent() {
-		$this->fixture->setRecordType(SEMINARS_RECORD_TYPE_COMPLETE);
+		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
 
 		$this->assertRegExp(
