@@ -3889,7 +3889,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM, $this->seminar->getUid(),
+			'tx_seminars_seminars_organizers_mm', $this->seminar->getUid(),
 			$organizerUid
 		);
 		$this->testingFramework->changeRecord(
@@ -3919,7 +3919,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM, $this->seminar->getUid(),
+			'tx_seminars_seminars_organizers_mm', $this->seminar->getUid(),
 			$organizerUid
 		);
 		$this->testingFramework->changeRecord(

@@ -96,7 +96,7 @@ class tx_seminars_OrganizerBagBuilder_testcase extends tx_phpunit_testcase {
 			array('organizers' => 1)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			'tx_seminars_seminars_organizers_mm',
 			$eventUid,
 			$organizerUid
 		);
@@ -121,7 +121,7 @@ class tx_seminars_OrganizerBagBuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ORGANIZERS
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			'tx_seminars_seminars_organizers_mm',
 			$eventUid,
 			$organizerUid1
 		);
@@ -129,7 +129,7 @@ class tx_seminars_OrganizerBagBuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ORGANIZERS
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			'tx_seminars_seminars_organizers_mm',
 			$eventUid,
 			$organizerUid2
 		);
@@ -154,7 +154,7 @@ class tx_seminars_OrganizerBagBuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_ORGANIZERS
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			'tx_seminars_seminars_organizers_mm',
 			$eventUid1,
 			$organizerUid
 		);

@@ -747,7 +747,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 			$searchWord,
 			'organizers',
 			SEMINARS_TABLE_ORGANIZERS,
-			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM
+			'tx_seminars_seminars_organizers_mm'
 		);
 	}
 
@@ -1192,7 +1192,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		}
 		$eventUids = implode(',', tx_oelib_db::selectColumnForMultiple(
 			'uid_local',
-			SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM,
+			'tx_seminars_seminars_organizers_mm',
 			'uid_foreign IN (' . $organizerUids .')'
 		));
 
