@@ -1674,9 +1674,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			'uid = ' . $this->getTopicInteger('event_type') .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_EVENT_TYPES),
+				tx_oelib_db::enableFields('tx_seminars_event_types'),
 			'',
 			'',
 			'1'

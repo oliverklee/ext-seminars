@@ -763,12 +763,12 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 
 		foreach (self::$searchFieldList['event_types'] as $field) {
 			$result[] = 'EXISTS (' .
-				'SELECT * FROM ' . SEMINARS_TABLE_EVENT_TYPES . ', ' .
+				'SELECT * FROM tx_seminars_event_types, ' .
 					SEMINARS_TABLE_SEMINARS . ' s1, ' .
 					SEMINARS_TABLE_SEMINARS . ' s2' .
-				' WHERE (' . SEMINARS_TABLE_EVENT_TYPES . '.' . $field .
+				' WHERE (tx_seminars_event_types.' . $field .
 					' LIKE ' . $searchWord .
-				' AND ' . SEMINARS_TABLE_EVENT_TYPES . '.uid=s1.event_type' .
+				' AND tx_seminars_event_types.uid = s1.event_type' .
 				' AND ((s1.uid=s2.topic AND s2.object_type=' .
 						SEMINARS_RECORD_TYPE_DATE . ') ' .
 					'OR (s1.uid=s2.uid AND s1.object_type!=' .

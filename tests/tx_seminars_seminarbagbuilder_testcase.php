@@ -2094,7 +2094,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$typeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2120,7 +2120,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$typeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2148,7 +2148,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$typeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2172,7 +2172,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventTypesCanResultInOneEvent() {
 		$typeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2195,7 +2195,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventTypesCanResultInTwoEvents() {
 		$typeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2230,7 +2230,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$typeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2257,7 +2257,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventTypesWillExcludeEventsOfOtherTypes() {
 		$typeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$eventUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2268,7 +2268,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$typeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2300,7 +2300,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$typeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2311,7 +2311,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$typeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 
 		$this->fixture->limitToEventTypes(array($typeUid2));
@@ -2326,7 +2326,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventTypesIgnoresTopicRecords() {
 		$typeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2348,7 +2348,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventTypesFindsDateRecordForTopic() {
 		$typeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2382,7 +2382,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventTypesFindsDateRecordForSingle() {
 		$typeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2412,7 +2412,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventTypesIgnoresTopicOfDateRecord() {
 		$typeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$topicUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2423,7 +2423,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$typeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2446,7 +2446,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToEventTypesCanFindEventsFromMultipleTypes() {
 		$typeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -2457,7 +2457,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$typeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES
+			'tx_seminars_event_types'
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -4686,7 +4686,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInEventTypeTitle() {
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'foo bar event type')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4709,7 +4709,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInEventTypeTitle() {
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'bar event type')
 		);
 		$this->testingFramework->createRecord(
@@ -5234,7 +5234,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicEventTypeTitle() {
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'foo bar event type')
 		);
 		$topicUid = $this->testingFramework->createRecord(
@@ -5265,7 +5265,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicEventTypeTitle() {
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'bar event type')
 		);
 		$topicUid = $this->testingFramework->createRecord(

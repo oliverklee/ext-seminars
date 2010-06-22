@@ -267,7 +267,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$eventTypeTitle = 'test event type';
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES, array('title' => $eventTypeTitle)
+			'tx_seminars_event_types', array('title' => $eventTypeTitle)
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
@@ -287,7 +287,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$eventTypeTitle = '< Test >';
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES, array('title' => $eventTypeTitle)
+			'tx_seminars_event_types', array('title' => $eventTypeTitle)
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
@@ -308,7 +308,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$eventTypeTitle = 'test event type';
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES, array('title' => $eventTypeTitle)
+			'tx_seminars_event_types', array('title' => $eventTypeTitle)
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
@@ -331,14 +331,14 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$eventTypeTitle = 'foo';
 		$eventTypeTitle2 = 'bar';
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES, array('title' => $eventTypeTitle)
+			'tx_seminars_event_types', array('title' => $eventTypeTitle)
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid)
 		);
 
 		$eventTypeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES, array('title' => $eventTypeTitle2)
+			'tx_seminars_event_types', array('title' => $eventTypeTitle2)
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS, array('event_type' => $eventTypeUid2)
@@ -1274,7 +1274,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo_type')
+			'tx_seminars_event_types', array('title' => 'foo_type')
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -1297,10 +1297,10 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo_type')
+			'tx_seminars_event_types', array('title' => 'foo_type')
 		);
 		$eventTypeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES, array('title' => 'bar_type')
+			'tx_seminars_event_types', array('title' => 'bar_type')
 		);
 		$this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,

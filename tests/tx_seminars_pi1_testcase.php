@@ -1719,7 +1719,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array(
 				'event_type' => $this->testingFramework->createRecord(
-					SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo type')
+					'tx_seminars_event_types', array('title' => 'foo type')
 				)
 			)
 		);
@@ -2638,7 +2638,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
 				'event_type' => $this->testingFramework->createRecord(
-					SEMINARS_TABLE_EVENT_TYPES,
+					'tx_seminars_event_types',
 					array('title' => 'foo type')
 				),
 			)
@@ -2652,7 +2652,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithEventTypeExcludesEventsWithoutEventType() {
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'foo type')
 		);
 		$this->fixture->piVars['event_type'] = array($eventTypeUid);
@@ -2665,7 +2665,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithEventTypeCanContainOneEventWithSelectedEventType() {
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'foo type')
 		);
 		$this->testingFramework->createRecord(
@@ -2686,7 +2686,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithEventTypeCanContainTwoEventsWithTwoDifferentSelectedEventTypes() {
 		$eventTypeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'foo type')
 		);
 		$this->testingFramework->createRecord(
@@ -2698,7 +2698,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$eventTypeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'foo type')
 		);
 		$this->testingFramework->createRecord(
@@ -2727,7 +2727,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithEventTypeExcludesHiddenEventWithSelectedEventType() {
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'foo type')
 		);
 		$this->testingFramework->createRecord(
@@ -2749,7 +2749,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithEventTypeExcludesDeletedEventWithSelectedEventType() {
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'foo type')
 		);
 		$this->testingFramework->createRecord(
@@ -2771,7 +2771,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewWithEventTypeExcludesEventsWithNotSelectedEventType() {
 		$eventTypeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'foo type')
 		);
 		$this->testingFramework->createRecord(
@@ -2784,7 +2784,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventTypeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'another eventType')
 		);
 		$this->fixture->piVars['event_type'] = array($eventTypeUid2);
@@ -3906,7 +3906,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToEventTypesIgnoresEventsWithoutEventType() {
 		$eventTypeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'an event type')
 		);
 		$this->fixture->setConfigurationValue(
@@ -3921,7 +3921,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToEventTypesContainsEventsWithMultipleSelectedEventTypes() {
 		$eventTypeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'an event type')
 		);
 		$this->testingFramework->createRecord(
@@ -3934,7 +3934,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventTypeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'an event type')
 		);
 		$this->testingFramework->createRecord(
@@ -3963,7 +3963,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToEventTypesIgnoresEventsWithNotSelectedEventType() {
 		$eventTypeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'an event type')
 		);
 		$this->testingFramework->createRecord(
@@ -3976,7 +3976,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventTypeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'another eventType')
 		);
 		$this->fixture->setConfigurationValue(
@@ -3991,7 +3991,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewForSingleEventTypeOverridesLimitToEventTypes() {
 		$eventTypeUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'an event type')
 		);
 		$this->testingFramework->createRecord(
@@ -4004,7 +4004,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$eventTypeUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES,
+			'tx_seminars_event_types',
 			array('title' => 'an event type')
 		);
 		$this->testingFramework->createRecord(

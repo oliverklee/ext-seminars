@@ -75,7 +75,7 @@ class tx_seminars_Mapper_EventType_testcase extends tx_phpunit_testcase {
 	 */
 	public function findWithUidOfExistingRecordReturnsRecordAsModel() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES, array('title' => 'Workshop')
+			'tx_seminars_event_types', array('title' => 'Workshop')
 		);
 
 		$this->assertEquals(

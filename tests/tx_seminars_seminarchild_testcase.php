@@ -389,7 +389,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 */
 	private function addEventTypeRelation($eventTypeData) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_EVENT_TYPES, $eventTypeData
+			'tx_seminars_event_types', $eventTypeData
 		);
 
 		$this->fixture->setEventType($uid);
@@ -2790,7 +2790,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testHasEventTypeReturnsTrueIfSingleEventHasNonZeroEventType() {
 		$this->fixture->setEventType(
-			$this->testingFramework->createRecord(SEMINARS_TABLE_EVENT_TYPES)
+			$this->testingFramework->createRecord('tx_seminars_event_types')
 		);
 
 		$this->assertTrue(
@@ -2808,7 +2808,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function testGetEventTypeReturnsTitleOfRelatedEventTypeForSingleEvent() {
 		$this->fixture->setEventType(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo type')
+				'tx_seminars_event_types', array('title' => 'foo type')
 			)
 		);
 
@@ -2824,7 +2824,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'event_type' => $this->testingFramework->createRecord(
-					SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo type')
+					'tx_seminars_event_types', array('title' => 'foo type')
 				),
 			)
 		);
@@ -2849,7 +2849,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
 				'event_type' => $this->testingFramework->createRecord(
-					SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo type')
+					'tx_seminars_event_types', array('title' => 'foo type')
 				),
 			)
 		);
