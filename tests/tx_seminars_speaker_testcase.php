@@ -103,7 +103,7 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 	 */
 	private function addSkillRelation(array $skillData) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SKILLS, $skillData
+			'tx_seminars_skills', $skillData
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(

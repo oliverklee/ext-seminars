@@ -139,9 +139,9 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
-			SEMINARS_TABLE_SKILLS.', tx_seminars_speakers_skills_mm',
-			'uid_local=' . $this->getUid() . ' AND uid=uid_foreign' .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_SKILLS),
+			'tx_seminars_skills, tx_seminars_speakers_skills_mm',
+			'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
+				tx_oelib_db::enableFields('tx_seminars_skills'),
 			'',
 			'sorting ASC'
 		);

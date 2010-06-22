@@ -75,7 +75,7 @@ class tx_seminars_Mapper_Skill_testcase extends tx_phpunit_testcase {
 	 */
 	public function findWithUidOfExistingRecordReturnsRecordAsModel() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SKILLS, array('title' => 'Superhero')
+			'tx_seminars_skills', array('title' => 'Superhero')
 		);
 
 		$this->assertEquals(
