@@ -3047,7 +3047,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testGetTimeslotsAsArrayWithMarkersReturnsArraySortedByDate() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'seminar' => $this->fixture->getUid(),
 				'begin_date' => 200,
@@ -3055,7 +3055,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'seminar' => $this->fixture->getUid(),
 				'begin_date' => 100,
@@ -5578,7 +5578,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			array('title' => 'my house')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'place' => $placeUid,
 				'seminar' => $this->fixture->getUid(),
@@ -5598,7 +5598,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			array('title' => 'my house')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'place' => $placeUid1,
 				'seminar' => $this->fixture->getUid(),
@@ -5609,7 +5609,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			array('title' => 'your house')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'place' => $placeUid2,
 				'seminar' => $this->fixture->getUid(),
@@ -5629,7 +5629,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			array('title' => 'my house')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'place' => $placeUid1,
 				'seminar' => $this->fixture->getUid(),
@@ -5640,7 +5640,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			array('title' => 'your house')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'place' => $placeUid2,
 				'seminar' => $this->fixture->getUid(),
@@ -5668,7 +5668,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			array('title' => 'my house')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'place' => $placeUidInTimeSlot,
 				'seminar' => $this->fixture->getUid(),
@@ -5688,7 +5688,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->addPlaceRelation(array('title' => 'your house'));
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array('seminar' => $this->fixture->getUid())
 		);
 		$this->fixture->setNumberOfTimeSlots(1);
@@ -5703,7 +5703,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->addPlaceRelation(array('title' => 'your house'));
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array('seminar' => $this->fixture->getUid())
 		);
 		$this->fixture->setNumberOfTimeSlots(1);

@@ -1358,7 +1358,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testTimeSlotsSubpartIsVisibleInSingleViewWithOneTimeSlot() {
 		$timeSlotUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS, array('seminar' => $this->seminarUid)
+			'tx_seminars_timeslots', array('seminar' => $this->seminarUid)
 		);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
@@ -1374,7 +1374,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewCanContainOneTimeSlotRoom() {
 		$timeSlotUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'seminar' => $this->seminarUid,
 				'room' => 'room 1'
@@ -1394,10 +1394,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testTimeSlotsSubpartIsVisibleInSingleViewWithTwoTimeSlots() {
 		$timeSlotUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS, array('seminar' => $this->seminarUid)
+			'tx_seminars_timeslots', array('seminar' => $this->seminarUid)
 		);
 		$timeSlotUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS, array('seminar' => $this->seminarUid)
+			'tx_seminars_timeslots', array('seminar' => $this->seminarUid)
 		);
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
@@ -1413,14 +1413,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewCanContainTwoTimeSlotRooms() {
 		$timeSlotUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'seminar' => $this->seminarUid,
 				'room' => 'room 1'
 			)
 		);
 		$timeSlotUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'seminar' => $this->seminarUid,
 				'room' => 'room 2'

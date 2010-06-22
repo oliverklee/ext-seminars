@@ -57,7 +57,7 @@ class tx_seminars_timeslotbag extends tx_seminars_bag {
 		$orderBy = 'uid', $limit = ''
 	) {
 		parent::__construct(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			$queryParameters,
 			$additionalTableNames,
 			$groupBy,

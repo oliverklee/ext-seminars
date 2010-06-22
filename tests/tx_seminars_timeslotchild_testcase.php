@@ -46,7 +46,7 @@ class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$fixtureUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'seminar' => $seminarUid,
 				'entry_date' => 0,

@@ -38,7 +38,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
-	protected $tableName = SEMINARS_TABLE_TIME_SLOTS;
+	protected $tableName = 'tx_seminars_timeslots';
 
 	/**
 	 * Creates and returns a speakerbag object.

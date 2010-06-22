@@ -87,7 +87,7 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 		}
 
 		if (($table == SEMINARS_TABLE_SEMINARS)
-			|| ($table == SEMINARS_TABLE_TIME_SLOTS)
+			|| ($table == 'tx_seminars_timeslots')
 		) {
 			$this->tceMainFieldArrays[$table][$uid] = $fieldArray;
 		}
@@ -97,7 +97,7 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	 * Processes all time slots.
 	 */
 	private function processTimeSlots() {
-		$table = SEMINARS_TABLE_TIME_SLOTS;
+		$table = 'tx_seminars_timeslots';
 
 		if (
 			isset($this->tceMainFieldArrays[$table])

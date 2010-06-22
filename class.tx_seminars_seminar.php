@@ -4129,10 +4129,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = 0;
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'MIN('.SEMINARS_TABLE_TIME_SLOTS.'.begin_date) AS begin_date',
-			SEMINARS_TABLE_TIME_SLOTS,
-			SEMINARS_TABLE_TIME_SLOTS . '.seminar=' . $this->getUid() .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_TIME_SLOTS)
+			'MIN(tx_seminars_timeslots.begin_date) AS begin_date',
+			'tx_seminars_timeslots',
+			'tx_seminars_timeslots.seminar = ' . $this->getUid() .
+				tx_oelib_db::enableFields('tx_seminars_timeslots')
 		);
 
 		if ($dbResult) {
@@ -4158,12 +4158,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = 0;
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			SEMINARS_TABLE_TIME_SLOTS.'.end_date AS end_date',
-			SEMINARS_TABLE_TIME_SLOTS,
-			SEMINARS_TABLE_TIME_SLOTS . '.seminar=' . $this->getUid() .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_TIME_SLOTS),
+			'tx_seminars_timeslots.end_date AS end_date',
+			'tx_seminars_timeslots',
+			'tx_seminars_timeslots.seminar = ' . $this->getUid() .
+				tx_oelib_db::enableFields('tx_seminars_timeslots'),
 			'',
-			SEMINARS_TABLE_TIME_SLOTS.'.begin_date DESC',
+			'tx_seminars_timeslots.begin_date DESC',
 			'0,1'
 		);
 
@@ -4223,11 +4223,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	private function createTimeSlotBag() {
 		return tx_oelib_ObjectFactory::make(
 			'tx_seminars_timeslotbag',
-			SEMINARS_TABLE_TIME_SLOTS . '.seminar = ' . $this->getUid() .
-				' AND ' . SEMINARS_TABLE_TIME_SLOTS . '.place > 0',
+			'tx_seminars_timeslots.seminar = ' . $this->getUid() .
+				' AND tx_seminars_timeslots.place > 0',
 			'',
-			SEMINARS_TABLE_TIME_SLOTS . '.place',
-			SEMINARS_TABLE_TIME_SLOTS . '.begin_date ASC'
+			'tx_seminars_timeslots.place',
+			'tx_seminars_timeslots.begin_date ASC'
 		);
 	}
 
@@ -4250,10 +4250,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$timeSlotBag = tx_oelib_ObjectFactory::make(
 			'tx_seminars_timeslotbag',
-			SEMINARS_TABLE_TIME_SLOTS . '.seminar = ' . $this->getUid(),
+			'tx_seminars_timeslots.seminar = ' . $this->getUid(),
 			'',
 			'',
-			SEMINARS_TABLE_TIME_SLOTS . '.begin_date ASC'
+			'tx_seminars_timeslots.begin_date ASC'
 		);
 
 		foreach ($timeSlotBag as $timeSlot) {

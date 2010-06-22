@@ -77,7 +77,7 @@ class tx_seminars_Mapper_TimeSlot_testcase extends tx_phpunit_testcase {
 	 */
 	public function findWithUidOfExistingRecordReturnsRecordAsModel() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS, array('title' => '01.02.03 04:05')
+			'tx_seminars_timeslots', array('title' => '01.02.03 04:05')
 		);
 
 		$this->assertEquals(
@@ -95,7 +95,7 @@ class tx_seminars_Mapper_TimeSlot_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSpeakersReturnsListInstance() {
-		$uid = $this->testingFramework->createRecord(SEMINARS_TABLE_TIME_SLOTS);
+		$uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
 		$this->assertTrue(
 			$this->fixture->find($uid)->getSpeakers() instanceof tx_oelib_List
@@ -107,12 +107,12 @@ class tx_seminars_Mapper_TimeSlot_testcase extends tx_phpunit_testcase {
 	 */
 	public function getSpeakersWithOneSpeakerReturnsListOfSpeakers() {
 		$timeSlotUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS
+			'tx_seminars_timeslots'
 		);
 		$speaker = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker')
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_TIME_SLOTS, $timeSlotUid, $speaker->getUid(), 'speakers'
+			'tx_seminars_timeslots', $timeSlotUid, $speaker->getUid(), 'speakers'
 		);
 
 		$this->assertTrue(
@@ -126,12 +126,12 @@ class tx_seminars_Mapper_TimeSlot_testcase extends tx_phpunit_testcase {
 	 */
 	public function getSpeakersWithOneSpeakerReturnsOneSpeaker() {
 		$timeSlotUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS
+			'tx_seminars_timeslots'
 		);
 		$speaker = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker')
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_TIME_SLOTS, $timeSlotUid, $speaker->getUid(), 'speakers'
+			'tx_seminars_timeslots', $timeSlotUid, $speaker->getUid(), 'speakers'
 		);
 
 		$this->assertEquals(
@@ -149,7 +149,7 @@ class tx_seminars_Mapper_TimeSlot_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getPlaceWithoutPlaceReturnsNull() {
-		$uid = $this->testingFramework->createRecord(SEMINARS_TABLE_TIME_SLOTS);
+		$uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
 		$this->assertNull(
 			$this->fixture->find($uid)->getPlace()
@@ -162,7 +162,7 @@ class tx_seminars_Mapper_TimeSlot_testcase extends tx_phpunit_testcase {
 	public function getPlaceWithPlaceReturnsPlaceInstance() {
 		$place = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place')->getNewGhost();
 		$timeSlotUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS, array('place' => $place->getUid())
+			'tx_seminars_timeslots', array('place' => $place->getUid())
 		);
 
 		$this->assertTrue(
