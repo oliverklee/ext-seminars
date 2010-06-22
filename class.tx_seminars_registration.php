@@ -40,7 +40,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
-	protected $tableName = SEMINARS_TABLE_ATTENDANCES;
+	protected $tableName = 'tx_seminars_attendances';
 
 	/** Same as class name */
 	public $prefixId = 'tx_seminars_registration';
@@ -1087,7 +1087,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			// update the reference index
 			$referenceIndex = t3lib_div::makeInstance('t3lib_refindex');
 			$referenceIndex->updateRefIndexTable(
-				SEMINARS_TABLE_ATTENDANCES,
+				'tx_seminars_attendances',
 				$this->getUid()
 			);
 		}

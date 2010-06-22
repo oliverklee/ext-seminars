@@ -60,7 +60,7 @@ class tx_seminars_registrationbag extends tx_seminars_bag {
 		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
 
 		parent::__construct(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			$queryParameters,
 			$additionalTableNames,
 			$groupBy,

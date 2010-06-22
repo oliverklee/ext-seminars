@@ -198,7 +198,7 @@ class tx_seminars_BackEnd_ConfirmEventMailForm_testcase extends tx_phpunit_testc
 
 	public function testSendEmailToRegistrationsSendsEmailWithNameOfRegisteredUserOnSubmitOfValidForm() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $this->eventUid,

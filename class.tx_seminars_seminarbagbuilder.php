@@ -1107,10 +1107,10 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		$this->limitToTopicRecords();
 		$this->whereClauseParts['topicsWithoutUserRegistration'] =
 			'NOT EXISTS (' .
-				'SELECT * FROM ' . SEMINARS_TABLE_ATTENDANCES . ', ' .
+				'SELECT * FROM tx_seminars_attendances, ' .
 					SEMINARS_TABLE_SEMINARS . ' dates ' .
-				'WHERE ' . SEMINARS_TABLE_ATTENDANCES . '.user = ' . $uid .
-				' AND ' . SEMINARS_TABLE_ATTENDANCES . '.seminar = dates.uid' .
+				'WHERE tx_seminars_attendances.user = ' . $uid .
+				' AND tx_seminars_attendances.seminar = dates.uid' .
 				' AND dates.topic = ' . SEMINARS_TABLE_SEMINARS . '.uid' .
 				' AND (dates.expiry = 0 OR dates.expiry > ' .
 					$GLOBALS['SIM_EXEC_TIME'] . ')' .
@@ -1164,9 +1164,9 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to events which are not fully-booked yet (or have a queue).
 	 */
 	public function limitToEventsWithVacancies() {
-		$seats = '(SELECT COALESCE(SUM(seats),0) FROM ' . SEMINARS_TABLE_ATTENDANCES . ' ' .
+		$seats = '(SELECT COALESCE(SUM(seats),0) FROM tx_seminars_attendances ' .
 			'WHERE seminar = ' . SEMINARS_TABLE_SEMINARS . '.uid' .
-			tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES) . ')';
+			tx_oelib_db::enableFields('tx_seminars_attendances') . ')';
 		$hasVacancies = '(attendees_max > (' . $seats . ' + offline_attendees))';
 
 		$this->whereClauseParts['eventsWithVacancies'] =

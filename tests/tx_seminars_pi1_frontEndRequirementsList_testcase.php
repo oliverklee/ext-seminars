@@ -233,7 +233,7 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 			$requiredEvent2, 'requirements'
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $requiredDate2, 'user' => $userUid)
 		);
 		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));

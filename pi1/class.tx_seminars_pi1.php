@@ -474,13 +474,13 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		if (tx_seminars_objectfromdb::recordExists(
-			$registrationUid, SEMINARS_TABLE_ATTENDANCES)
+			$registrationUid, 'tx_seminars_attendances')
 		) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
-				SEMINARS_TABLE_ATTENDANCES,
-				SEMINARS_TABLE_ATTENDANCES.' . uid=' . $registrationUid .
-					tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
+				'tx_seminars_attendances',
+				'tx_seminars_attendances.uid = ' . $registrationUid .
+					tx_oelib_db::enableFields('tx_seminars_attendances')
 			);
 			$this->registration = tx_oelib_ObjectFactory::make(
 				'tx_seminars_registration', $this->cObj, $dbResult
@@ -2726,7 +2726,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 					array(
 						'type' => tx_seminars_pi2::getTypeNum(),
 						'tx_seminars_pi2' => array(
-							'table' => SEMINARS_TABLE_ATTENDANCES,
+							'table' => 'tx_seminars_attendances',
 							'eventUid' => $this->seminar->getUid(),
 						),
 					)

@@ -2515,9 +2515,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
-			SEMINARS_TABLE_ATTENDANCES,
-			'seminar=' . $this->getUid() . ' AND user=' . $feUserUid .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
+			'tx_seminars_attendances',
+			'seminar = ' . $this->getUid() . ' AND user = ' . $feUserUid .
+				tx_oelib_db::enableFields('tx_seminars_attendances')
 		);
 
 		if ($dbResult) {
@@ -3047,11 +3047,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResultSingleSeats = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS number',
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			$queryParameters .
-				' AND seminar=' . $this->getUid() .
-				' AND seats=0' .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
+				' AND seminar = ' . $this->getUid() .
+				' AND seats = 0' .
+				tx_oelib_db::enableFields('tx_seminars_attendances')
 		);
 
 		if ($dbResultSingleSeats) {
@@ -3063,11 +3063,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResultMultiSeats = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'SUM(seats) AS number',
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			$queryParameters .
-				' AND seminar=' . $this->getUid() .
-				' AND seats!=0' .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
+				' AND seminar = ' . $this->getUid() .
+				' AND seats != 0' .
+				tx_oelib_db::enableFields('tx_seminars_attendances')
 		);
 
 		if ($dbResultMultiSeats) {
@@ -3885,12 +3885,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		if (($feUserUid > 0) && !$this->allowsMultipleRegistrations()
 			&& $this->hasDate()  && !$this->skipCollisionCheck()) {
 
-			$additionalTables = SEMINARS_TABLE_ATTENDANCES;
+			$additionalTables = 'tx_seminars_attendances';
 			$queryWhere = $this->getQueryForCollidingEvents();
 			// Filter to those events to which the given FE user is registered.
-			$queryWhere .= ' AND '.SEMINARS_TABLE_SEMINARS.'.uid='
-					.SEMINARS_TABLE_ATTENDANCES.'.seminar'
-				.' AND '.SEMINARS_TABLE_ATTENDANCES.'.user='.$feUserUid;
+			$queryWhere .= ' AND ' . SEMINARS_TABLE_SEMINARS . '.uid = ' .
+					'tx_seminars_attendances.seminar' .
+				' AND tx_seminars_attendances.user = ' . $feUserUid;
 
 			$seminarBag = tx_oelib_ObjectFactory::make(
 				'tx_seminars_seminarbag', $queryWhere, $additionalTables

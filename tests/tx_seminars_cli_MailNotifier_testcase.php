@@ -791,7 +791,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
 		));
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array(
+			'tx_seminars_attendances', array(
 				'title' => 'test registration',
 				'seminar' => $eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -819,7 +819,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
 		));
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array(
+			'tx_seminars_attendances', array(
 				'title' => 'test registration',
 				'seminar' => $eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -847,7 +847,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
 		));
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array(
+			'tx_seminars_attendances', array(
 				'title' => 'test registration',
 				'seminar' => $eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -887,7 +887,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		));
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array(
+			'tx_seminars_attendances', array(
 				'title' => 'test registration',
 				'seminar' => $eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
@@ -925,14 +925,14 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		));
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array(
+			'tx_seminars_attendances', array(
 				'title' => 'real registration',
 				'seminar' => $eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array(
+			'tx_seminars_attendances', array(
 				'title' => 'on queue',
 				'seminar' => $eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -973,14 +973,14 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		));
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array(
+			'tx_seminars_attendances', array(
 				'title' => 'real registration',
 				'seminar' => $eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array(
+			'tx_seminars_attendances', array(
 				'title' => 'on queue',
 				'seminar' => $eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -1149,7 +1149,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
 		));
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array(
+			'tx_seminars_attendances', array(
 				'title' => 'test registration',
 				'seminar' => $eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),

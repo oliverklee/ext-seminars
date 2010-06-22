@@ -421,7 +421,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 
 	public function testSendEmailToRegistrationsSendsEmailWithNameOfRegisteredUserOnSubmitOfValidForm() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $this->eventUid,

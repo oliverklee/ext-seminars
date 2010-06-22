@@ -41,7 +41,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	/**
 	 * @var string the table name of the bag to build
 	 */
-	protected $tableName = SEMINARS_TABLE_ATTENDANCES;
+	protected $tableName = 'tx_seminars_attendances';
 
 	/**
 	 * @var string the sorting field
@@ -60,7 +60,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 			throw new Exception('The parameter $eventUid must be > 0.');
 		}
 
-		$this->whereClauseParts['event'] = SEMINARS_TABLE_ATTENDANCES .
+		$this->whereClauseParts['event'] = 'tx_seminars_attendances' .
 			'.seminar=' . $eventUid;
 	}
 
@@ -68,7 +68,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to paid registrations.
 	 */
 	public function limitToPaid() {
-		$this->whereClauseParts['paid'] = SEMINARS_TABLE_ATTENDANCES .
+		$this->whereClauseParts['paid'] = 'tx_seminars_attendances' .
 			'.datepaid != 0';
 	}
 
@@ -76,7 +76,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to unpaid registrations.
 	 */
 	public function limitToUnpaid() {
-		$this->whereClauseParts['paid'] = SEMINARS_TABLE_ATTENDANCES .
+		$this->whereClauseParts['paid'] = 'tx_seminars_attendances' .
 			'.datepaid = 0';
 	}
 
@@ -91,7 +91,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	 * Limits the bag to the registrations on the registration queue.
 	 */
 	public function limitToOnQueue() {
-		$this->whereClauseParts['queue'] = SEMINARS_TABLE_ATTENDANCES .
+		$this->whereClauseParts['queue'] = 'tx_seminars_attendances' .
 			'.registration_queue=1';
 	}
 
@@ -100,7 +100,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	 * registration queue).
 	 */
 	public function limitToRegular() {
-		$this->whereClauseParts['queue'] = SEMINARS_TABLE_ATTENDANCES .
+		$this->whereClauseParts['queue'] = 'tx_seminars_attendances' .
 			'.registration_queue=0';
 	}
 
@@ -128,7 +128,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 			return;
 		}
 
-		$this->whereClauseParts['seats'] = SEMINARS_TABLE_ATTENDANCES .
+		$this->whereClauseParts['seats'] = 'tx_seminars_attendances' .
 			'.seats<=' . $seats;
 	}
 
@@ -149,7 +149,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 			return;
 		}
 
-		$this->whereClauseParts['attendee'] = SEMINARS_TABLE_ATTENDANCES .
+		$this->whereClauseParts['attendee'] = 'tx_seminars_attendances' .
 			'.user=' . $frontEndUserUid;
 	}
 
@@ -161,7 +161,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	 */
 	public function setOrderByEventColumn($orderBy) {
 		$this->addAdditionalTableName(SEMINARS_TABLE_SEMINARS);
-		$this->whereClauseParts['orderByEvent'] = SEMINARS_TABLE_ATTENDANCES .
+		$this->whereClauseParts['orderByEvent'] = 'tx_seminars_attendances' .
 			'.seminar=' . SEMINARS_TABLE_SEMINARS . '.uid';
 		$this->setOrderBy($orderBy);
 	}
@@ -173,7 +173,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	public function limitToExistingUsers() {
 		$this->whereClauseParts['existingUsers'] = 'EXISTS (
 			SELECT * FROM fe_users WHERE ' .
-			' fe_users.uid='. SEMINARS_TABLE_ATTENDANCES . '.user' .
+			' fe_users.uid = tx_seminars_attendances.user' .
 			tx_oelib_db::enableFields('fe_users') . ')';
 	}
 }

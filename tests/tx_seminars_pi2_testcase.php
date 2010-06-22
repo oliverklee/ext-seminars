@@ -448,7 +448,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			$this->localizeAndRemoveColon('LGL.name') . ';' .
-				$this->localizeAndRemoveColon(SEMINARS_TABLE_ATTENDANCES . '.uid') .
+				$this->localizeAndRemoveColon('tx_seminars_attendances.uid') .
 				CRLF,
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
@@ -462,7 +462,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'uid'
 		);
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -483,7 +483,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'registered_themselves'
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -493,7 +493,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			$this->localizeAndRemoveColon(
-				SEMINARS_TABLE_ATTENDANCES . '.registered_themselves'
+				'tx_seminars_attendances.registered_themselves'
 			),
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
@@ -507,7 +507,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'company'
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -516,7 +516,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			$this->localizeAndRemoveColon(SEMINARS_TABLE_ATTENDANCES . '.company'),
+			$this->localizeAndRemoveColon('tx_seminars_attendances.company'),
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
 	}
@@ -529,7 +529,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'company'
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -555,7 +555,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'company'
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -592,7 +592,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'registered_themselves'
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -600,7 +600,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture->piVars['table'] = SEMINARS_TABLE_ATTENDANCES;
+		$this->fixture->piVars['table'] = 'tx_seminars_attendances';
 		$this->fixture->piVars['eventUid'] = $this->eventUid;
 
 		$this->assertContains(
@@ -617,14 +617,14 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'uid'
 		);
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
 
-		$this->fixture->piVars['table'] = SEMINARS_TABLE_ATTENDANCES;
+		$this->fixture->piVars['table'] = 'tx_seminars_attendances';
 		$this->fixture->piVars['eventUid'] = $this->eventUid;
 
 		$this->assertContains(
@@ -642,7 +642,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 		;
 		$firstRegistrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -650,7 +650,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$secondRegistrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + 1),
@@ -800,7 +800,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'uid'
 		);
 		$firstRegistrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -808,7 +808,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$secondRegistrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + 1),
@@ -842,7 +842,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'', array('name' => 'foo_user')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -870,7 +870,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'', array('deleted' => 1)
 		);
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -896,7 +896,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -922,7 +922,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$firstRegistrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => 1,
@@ -930,7 +930,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$secondRegistrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => 2,
@@ -957,7 +957,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -965,7 +965,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -988,7 +988,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -1012,7 +1012,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -1036,7 +1036,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -1060,7 +1060,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -1084,7 +1084,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -1108,7 +1108,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'crdate' => $GLOBALS['SIM_EXEC_TIME'],
@@ -1135,7 +1135,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		$registrationsList
 			= $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
 		$localizedAddress = $this->localizeAndRemoveColon(
-			SEMINARS_TABLE_ATTENDANCES . '.address'
+			'tx_seminars_attendances.address'
 		);
 
 		$this->assertContains(
@@ -1157,8 +1157,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			$this->localizeAndRemoveColon(SEMINARS_TABLE_ATTENDANCES . '.address') .
-				';' . $this->localizeAndRemoveColon(SEMINARS_TABLE_ATTENDANCES . '.title'),
+			$this->localizeAndRemoveColon('tx_seminars_attendances.address') .
+				';' . $this->localizeAndRemoveColon('tx_seminars_attendances.title'),
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
@@ -1210,7 +1210,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			$this->localizeAndRemoveColon('LGL.name') . ';' .
-				$this->localizeAndRemoveColon(SEMINARS_TABLE_ATTENDANCES . '.address'),
+				$this->localizeAndRemoveColon('tx_seminars_attendances.address'),
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
@@ -1242,7 +1242,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -1267,7 +1267,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -1293,7 +1293,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -1388,7 +1388,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'', array('email' => 'foo@bar.com')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $this->eventUid, 'user' => $frontEndUserUid)
 		);
 		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_EMAIL);
@@ -1414,7 +1414,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 			'', array('email' => 'foo@bar.com')
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $this->eventUid, 'user' => $frontEndUserUid)
 		);
 		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_WEB);
@@ -1437,7 +1437,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -1464,7 +1464,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -1497,14 +1497,14 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
 		$queueUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -1539,14 +1539,14 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
 		$queueUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(),

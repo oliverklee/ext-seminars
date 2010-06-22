@@ -754,7 +754,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 */
 	public function removeRegistration($uid, tslib_pibase $plugin) {
 		if (!tx_seminars_objectfromdb::recordExists(
-			$uid, SEMINARS_TABLE_ATTENDANCES
+			$uid, 'tx_seminars_attendances'
 		)) {
 			return;
 		}
@@ -763,9 +763,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$plugin->cObj,
 			tx_oelib_db::select(
 				'*',
-				SEMINARS_TABLE_ATTENDANCES,
+				'tx_seminars_attendances',
 				'uid = ' . $uid .
-					tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
+					tx_oelib_db::enableFields('tx_seminars_attendances')
 			)
 		);
 		if ($this->registration->getUser() !== $this->getFeUserUid()) {
@@ -781,7 +781,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		tx_oelib_db::update(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			'uid = ' . $uid,
 			array(
 				'hidden' => 1,
@@ -832,7 +832,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 			if ($registration->getSeats() <= $vacancies) {
 				tx_oelib_db::update(
-					SEMINARS_TABLE_ATTENDANCES,
+					'tx_seminars_attendances',
 					'uid = ' . $registration->getUid(),
 					array('registration_queue' => 0)
 				);

@@ -91,7 +91,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'title' => 'test title',
 				'seminar' => $this->seminarUid,
@@ -407,7 +407,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$registration = new tx_seminars_registrationchild(0);
 		$registration->setRegistrationData($seminar, 0, array());
 		$registration->enableTestMode();
-		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_ATTENDANCES);
+		$this->testingFramework->markTableAsDirty('tx_seminars_attendances');
 
 		$this->assertTrue(
 			$registration->isOk()
@@ -418,7 +418,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_ATTENDANCES,
+				'tx_seminars_attendances',
 				'uid='.$registration->getUid()
 			),
 			'The registration record cannot be found in the DB.'
@@ -436,7 +436,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$seminar, 0, array('lodgings' => array($lodgingsUid))
 		);
 		$registration->enableTestMode();
-		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_ATTENDANCES);
+		$this->testingFramework->markTableAsDirty('tx_seminars_attendances');
 		$this->testingFramework->markTableAsDirty(
 			'tx_seminars_attendances_lodgings_mm'
 		);
@@ -450,7 +450,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_ATTENDANCES,
+				'tx_seminars_attendances',
 				'uid='.$registration->getUid()
 			),
 			'The registration record cannot be found in the DB.'
@@ -477,7 +477,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$seminar, 0, array('foods' => array($foodsUid))
 		);
 		$registration->enableTestMode();
-		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_ATTENDANCES);
+		$this->testingFramework->markTableAsDirty('tx_seminars_attendances');
 		$this->testingFramework->markTableAsDirty(
 			'tx_seminars_attendances_foods_mm'
 		);
@@ -491,7 +491,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_ATTENDANCES,
+				'tx_seminars_attendances',
 				'uid='.$registration->getUid()
 			),
 			'The registration record cannot be found in the DB.'
@@ -518,7 +518,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 			$seminar, 0, array('checkboxes' => array($checkboxesUid))
 		);
 		$registration->enableTestMode();
-		$this->testingFramework->markTableAsDirty(SEMINARS_TABLE_ATTENDANCES);
+		$this->testingFramework->markTableAsDirty('tx_seminars_attendances');
 		$this->testingFramework->markTableAsDirty(
 			'tx_seminars_attendances_checkboxes_mm'
 		);
@@ -532,7 +532,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			1,
 			$this->testingFramework->countRecords(
-				SEMINARS_TABLE_ATTENDANCES,
+				'tx_seminars_attendances',
 				'uid='.$registration->getUid()
 			),
 			'The registration record cannot be found in the DB.'
@@ -561,7 +561,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 	public function testGetSeminarObjectForRegistrationWithoutSeminarReturnsSeminarInstance() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_ATTENDANCES, $this->registrationUid,
+			'tx_seminars_attendances', $this->registrationUid,
 			array(
 				'seminar' => 0,
 				'user' => 0,
@@ -596,7 +596,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $seminarUid)
 		);
 
@@ -627,7 +627,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 
 		new tx_seminars_registrationchild(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_ATTENDANCES,
+				'tx_seminars_attendances',
 				array('seminar' => $this->seminarUid)
 			)
 		);
@@ -1410,7 +1410,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 */
 	public function getBillingAddressWithGenderMaleContainsLabelForGenderMale() {
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('gender' => '0')
+			'tx_seminars_attendances', array('gender' => '0')
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
@@ -1427,7 +1427,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 */
 	public function getBillingAddressWithGenderFemaleContainsLabelForGenderFemale() {
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('gender' => '1')
+			'tx_seminars_attendances', array('gender' => '1')
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
@@ -1444,7 +1444,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 */
 	public function getBillingAddressWithNameContainsName() {
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('name' => 'John Doe')
+			'tx_seminars_attendances', array('name' => 'John Doe')
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
@@ -1461,7 +1461,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 */
 	public function getBillingAddressWithAddressContainsAddress() {
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('address' => 'Main Street 123')
+			'tx_seminars_attendances', array('address' => 'Main Street 123')
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
@@ -1478,7 +1478,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 */
 	public function getBillingAddressWithZipCodeContainsZipCode() {
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('zip' => '12345')
+			'tx_seminars_attendances', array('zip' => '12345')
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
@@ -1495,7 +1495,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 */
 	public function getBillingAddressWithCityContainsCity() {
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('city' => 'Big City')
+			'tx_seminars_attendances', array('city' => 'Big City')
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
@@ -1512,7 +1512,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 */
 	public function getBillingAddressWithCountryContainsCountry() {
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('country' => 'Takka-Tukka-Land')
+			'tx_seminars_attendances', array('country' => 'Takka-Tukka-Land')
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
@@ -1529,7 +1529,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 */
 	public function getBillingAddressWithTelephoneNumberContainsTelephoneNumber() {
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('telephone' => '01234-56789')
+			'tx_seminars_attendances', array('telephone' => '01234-56789')
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
@@ -1546,7 +1546,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	 */
 	public function getBillingAddressWithEMailAddressContainsEMailAddress() {
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('email' => 'john@doe.com')
+			'tx_seminars_attendances', array('email' => 'john@doe.com')
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 

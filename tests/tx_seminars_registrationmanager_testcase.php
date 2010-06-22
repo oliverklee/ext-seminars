@@ -729,7 +729,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function canRegisterIfLoggedInForLoggedInButAlreadyRegisteredUserReturnsFalse() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
 				'seminar' => $this->seminar->getUid(),
@@ -748,7 +748,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->seminar->setAllowsMultipleRegistrations(TRUE);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
 				'seminar' => $this->seminar->getUid(),
@@ -765,7 +765,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function canRegisterIfLoggedInForLoggedInButBlockedUserReturnsFalse() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
 				'seminar' => $this->seminar->getUid(),
@@ -983,7 +983,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function canRegisterIfLoggedInMessageForLoggedInButAlreadyRegisteredUserReturnsAlreadyRegisteredMessage() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
 				'seminar' => $this->seminar->getUid(),
@@ -1003,7 +1003,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->seminar->setAllowsMultipleRegistrations(TRUE);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
 				'seminar' => $this->seminar->getUid(),
@@ -1021,7 +1021,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function canRegisterIfLoggedInMessageForLoggedInButBlockedUserReturnsUserIsBlockedMessage() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
 				'seminar' => $this->seminar->getUid(),
@@ -1292,7 +1292,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $requiredDateUid,
 				'user' => $this->testingFramework->createAndLogInFrontEndUser(),
@@ -1541,7 +1541,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$topicUid, $requiredTopicUid1, 'requirements'
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $requiredDateUid1, 'user' => $userUid)
 		);
 
@@ -1598,7 +1598,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$topicUid, $requiredTopicUid1, 'requirements'
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $requiredDateUid1, 'user' => $userUid)
 		);
 
@@ -1646,7 +1646,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->createFrontEndPages();
 
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'user' => $userUid,
 				'seminar' => $seminarUid,
@@ -1658,7 +1658,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->testingFramework->existsRecord(
-				SEMINARS_TABLE_ATTENDANCES,
+				'tx_seminars_attendances',
 				'user = ' . $userUid . ' AND seminar = ' . $seminarUid .
 					' AND hidden = 1'
 			)
@@ -1684,7 +1684,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->createFrontEndPages();
 
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'user' => $userUid,
 				'seminar' => $seminarUid,
@@ -1703,14 +1703,14 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->createFrontEndPages();
 
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'user' => $userUid,
 				'seminar' => $seminarUid,
 			)
 		);
 		$queueRegistrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'user' => $userUid,
 				'seminar' => $seminarUid,
@@ -1722,7 +1722,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->fixture->removeRegistration($registrationUid, $this->pi1);
 
 		$this->testingFramework->existsRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			'registration_queue = 0 AND uid = ' . $queueRegistrationUid
 		);
 	}
@@ -1746,14 +1746,14 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->createFrontEndPages();
 
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'user' => $userUid,
 				'seminar' => $seminarUid,
 			)
 		);
 		$queueRegistrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'user' => $userUid,
 				'seminar' => $seminarUid,
@@ -3657,7 +3657,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_ATTENDANCES, $registration->getUid(),
+			'tx_seminars_attendances', $registration->getUid(),
 			array('registration_queue' => 1)
 		);
 
@@ -3690,7 +3690,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_ATTENDANCES, $registration->getUid(),
+			'tx_seminars_attendances', $registration->getUid(),
 			array('registration_queue' => 1)
 		);
 

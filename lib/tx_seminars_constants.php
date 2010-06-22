@@ -23,7 +23,6 @@
 ***************************************************************/
 
 define('SEMINARS_TABLE_SEMINARS', 'tx_seminars_seminars');
-define('SEMINARS_TABLE_ATTENDANCES', 'tx_seminars_attendances');
 
 define('SEMINARS_RECORD_TYPE_COMPLETE', 0);
 define('SEMINARS_RECORD_TYPE_TOPIC', 1);

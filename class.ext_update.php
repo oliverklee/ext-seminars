@@ -74,7 +74,7 @@ class ext_update {
 			return FALSE;
 		}
 		if (!tx_oelib_db::existsTable(SEMINARS_TABLE_SEMINARS)
-			|| !tx_oelib_db::existsTable(SEMINARS_TABLE_ATTENDANCES)
+			|| !tx_oelib_db::existsTable('tx_seminars_attendances')
 		) {
 			return FALSE;
 		}
@@ -106,9 +106,9 @@ class ext_update {
 		switch ($fieldToUpdate) {
 			case 'registrations':
 				$whereClause = 'registrations = 0 AND EXISTS (' .
-					'SELECT * FROM ' . SEMINARS_TABLE_ATTENDANCES .
+					'SELECT * FROM tx_seminars_attendances' .
 					' WHERE seminar = ' . SEMINARS_TABLE_SEMINARS . '.uid ' .
-					tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES) .
+					tx_oelib_db::enableFields('tx_seminars_attendances') .
 					')';
 				break;
 			default:
@@ -129,13 +129,13 @@ class ext_update {
 	 */
 	private function updateRegistrationsField() {
 		$query = 'UPDATE ' . SEMINARS_TABLE_SEMINARS . ' SET registrations = ' .
-				'(SELECT COUNT(*) FROM ' . SEMINARS_TABLE_ATTENDANCES .
+				'(SELECT COUNT(*) FROM tx_seminars_attendances' .
 				' WHERE seminar = ' . SEMINARS_TABLE_SEMINARS . '.uid ' .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES) . ')' .
+				tx_oelib_db::enableFields('tx_seminars_attendances') . ')' .
 			' WHERE registrations = 0 AND EXISTS (' .
-				'SELECT * FROM ' . SEMINARS_TABLE_ATTENDANCES .
+				'SELECT * FROM tx_seminars_attendances' .
 				' WHERE seminar = ' . SEMINARS_TABLE_SEMINARS . '.uid ' .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES) .
+				tx_oelib_db::enableFields('tx_seminars_attendances') .
 			')';
 		if (!$GLOBALS['TYPO3_DB']->sql_query($query)) {
 			throw new tx_oelib_Exception_Database();

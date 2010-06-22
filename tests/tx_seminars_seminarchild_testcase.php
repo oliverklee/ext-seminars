@@ -4027,7 +4027,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $eventUid,
 				'user' => $frontEndUserUid
@@ -4057,7 +4057,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $eventUid,
 				'user' => $frontEndUserUid,
@@ -4092,7 +4092,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $eventUid,
 				'user' => $frontEndUserUid
@@ -4123,7 +4123,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $eventUid,
 				'user' => $frontEndUserUid
@@ -7382,7 +7382,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	public function test_calculateStatistics_ForEventWithOfflineRegistrationsAndRegularRegistrations_CalculatesCumulatedAttendeeNumber() {
 		$this->fixture->setOfflineRegistrationNumber(1);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->fixture->getUid(),
 			)
@@ -7398,7 +7398,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function test_calculateStatistics_ForEventWithOnePaidRegistration_SetsOnePaidAttendance() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->fixture->getUid(),
 				'datepaid' => $GLOBALS['SIM_EXEC_TIME'],
@@ -7415,14 +7415,14 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function test_calculateStatistics_ForEventWithTwoAttendeesOnQueue_SetsTwoAttendanceOnQueue() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->fixture->getUid(),
 				'registration_queue' => 1,
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->fixture->getUid(),
 				'registration_queue' => 1,

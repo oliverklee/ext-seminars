@@ -358,7 +358,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	 */
 	public function sendEmailToAttendeesSendsEmailWithSubjectOnSubmitOfValidForm() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $this->eventUid,
@@ -389,7 +389,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	 */
 	public function sendEmailToAttendeesForAttendeeWithoutEMailAddressDoesNotSendMail() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $this->eventUid,
@@ -419,7 +419,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	 */
 	public function sendEmailToAttendeesInsertsUserNameIntoMailText() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $this->eventUid,
@@ -456,7 +456,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	 */
 	public function sendEmailToAttendeesWithoutReplacementMarkerInBodyDoesNotCrash() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $this->eventUid,
@@ -492,7 +492,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 			));
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $this->eventUid,
@@ -524,7 +524,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	 */
 	public function sendEmailToAttendeesForEventWithTwoRegistrationsSendsTwoEmails() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $this->eventUid,
@@ -534,7 +534,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $this->eventUid,
@@ -566,7 +566,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	 */
 	public function sendEmailToAttendeesAppendsOrganizersFooterToMessageBodyIfSet() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $this->eventUid,
@@ -608,7 +608,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	 */
 	public function sendEmailToAttendeesForOrganizerWithoutFooterDoesNotAppendFooterMarkersToMessageBody() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'seminar' => $this->eventUid,

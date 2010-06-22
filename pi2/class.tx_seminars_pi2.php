@@ -148,7 +148,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 						intval($this->piVars['pid'])
 					);
 					break;
-				case SEMINARS_TABLE_ATTENDANCES:
+				case 'tx_seminars_attendances':
 					$result = $this->createAndOutputListOfRegistrations(
 						intval($this->piVars['eventUid'])
 					);
@@ -386,7 +386,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			t3lib_div::trimExplode(
 				',', $this->getRegistrationFieldsConfiguration(), TRUE
 			),
-			SEMINARS_TABLE_ATTENDANCES
+			'tx_seminars_attendances'
 		);
 
 		$result = array_merge($fieldsFromFeUser, $fieldsFromAttendances);
@@ -545,15 +545,15 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				// Checks read access to the registrations table.
 				$result = $GLOBALS['BE_USER']->check(
 					'tables_select',
-					SEMINARS_TABLE_ATTENDANCES
+					'tx_seminars_attendances'
 				);
 				// Checks read access to all pages with registrations from the
 				// selected event.
 				$pidArray = tx_oelib_db::selectMultiple(
 					'DISTINCT pid',
-					SEMINARS_TABLE_ATTENDANCES,
+					'tx_seminars_attendances',
 					'seminar=' . $eventUid .
-						tx_oelib_db::enableFields(SEMINARS_TABLE_ATTENDANCES)
+						tx_oelib_db::enableFields('tx_seminars_attendances')
 				);
 				foreach ($pidArray as $pid) {
 					// Checks read access for the current page.
@@ -712,7 +712,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *                 no access or this function is called in FE mode
 	 */
 	private function canAccessRegistrationsOnPage($pid) {
-		return $this->canAccessTableAndPage(SEMINARS_TABLE_ATTENDANCES, $pid);
+		return $this->canAccessTableAndPage('tx_seminars_attendances', $pid);
 	}
 
 	/**

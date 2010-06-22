@@ -183,7 +183,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	private function createLogInAndRegisterFeUser() {
 		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser();
 		return $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->seminarUid,
 				'user' => $feUserUid,
@@ -610,7 +610,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function testGetRegistrationReturnsRegistrationIfSet() {
 		$this->fixture->createRegistration(
 			$this->testingFramework->createRecord(
-				SEMINARS_TABLE_ATTENDANCES,
+				'tx_seminars_attendances',
 				array('seminar' => $this->seminarUid)
 			)
 		);
@@ -4559,7 +4559,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->seminarUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -4587,7 +4587,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->seminarUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -4846,7 +4846,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
 		$this->assertContains(
-			'tx_seminars_pi2[table]=' . SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_pi2[table]=tx_seminars_attendances',
 			$this->fixture->main('', array())
 		);
 	}
@@ -5595,7 +5595,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->seminarUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
@@ -5623,7 +5623,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->seminarUid,
 				'user' => $this->testingFramework->createFrontEndUser(),

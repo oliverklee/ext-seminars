@@ -6508,7 +6508,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $dateUid,
 				'user' => $this->testingFramework->createFrontEndUser()
@@ -6543,7 +6543,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$userUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $dateUid, 'user' => $userUid)
 		);
 
@@ -6572,7 +6572,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$userUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $dateUid, 'user' => $userUid)
 		);
 
@@ -6601,7 +6601,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$userUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $dateUid, 'user' => $userUid)
 		);
 
@@ -6630,11 +6630,11 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 		$userUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $dateUid, 'user' => $userUid)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $dateUid,
 				'user' => $this->testingFramework->createFrontEndUser()
@@ -7252,7 +7252,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $eventUid, 'seats' => 1)
 		);
 
@@ -7273,7 +7273,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $eventUid, 'seats' => 1)
 		);
 
@@ -7295,7 +7295,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $eventUid, 'seats' => 1)
 		);
 
@@ -7339,7 +7339,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $eventUid, 'seats' => 10)
 		);
 
@@ -7364,7 +7364,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $eventUid, 'seats' => 5)
 		);
 

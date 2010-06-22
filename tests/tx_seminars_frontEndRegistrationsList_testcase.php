@@ -109,7 +109,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 			'', array('name' => 'Tom & Jerry')
 		);
 		$this->registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->seminarUid,
 				'user' => $this->feUserUid,
@@ -141,7 +141,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 
 		$this->assertTrue(
 			$this->testingFramework->existsExactlyOneRecord(
-				SEMINARS_TABLE_ATTENDANCES
+				'tx_seminars_attendances'
 			)
 		);
 	}
@@ -434,7 +434,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 		$this->createLogInAndRegisterFrontEndUser();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			$this->registrationUid,
 			array('seats' => 42)
 		);
@@ -454,7 +454,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 		$this->createLogInAndRegisterFrontEndUser();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			$this->registrationUid,
 			array('interests' => 'everything practical & theoretical',)
 		);
@@ -493,7 +493,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 		);
 		$this->createLogInAndRegisterFrontEndUser();
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			$this->registrationUid,
 			array('seats' => 42)
 		);
@@ -569,7 +569,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 
 		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$secondRegistration = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->seminarUid,
 				'user' => $feUserUid,
@@ -610,7 +610,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 
 		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->seminarUid,
 				'user' => $feUserUid,
@@ -635,7 +635,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 
 		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$secondRegistration = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array(
 				'seminar' => $this->seminarUid,
 				'user' => $feUserUid,

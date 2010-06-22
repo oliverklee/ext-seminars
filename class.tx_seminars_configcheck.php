@@ -1157,7 +1157,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			'These values specify the registration fields to show in the list ' .
 				'of registrations for an event. A mistyped field name will ' .
 				'cause the contents of the field to not get displayed.',
-			SEMINARS_TABLE_ATTENDANCES
+			'tx_seminars_attendances'
 		);
 	}
 
@@ -1635,7 +1635,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			'These values specify the registration fields to export via CSV in ' .
 				'web mode. A mistyped field name will cause the field to not get ' .
 				'included.',
-			SEMINARS_TABLE_ATTENDANCES
+			'tx_seminars_attendances'
 		);
 	}
 
@@ -1665,7 +1665,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			'These values specify the registration fields to export via CSV in ' .
 				'e-mail mode. A mistyped field name will cause the field to not ' .
 				'get included.',
-			SEMINARS_TABLE_ATTENDANCES
+			'tx_seminars_attendances'
 		);
 	}
 

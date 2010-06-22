@@ -71,11 +71,11 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBuildReturnsBagWhichIsSortedAscendingByCrDate() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('title' => 'Title 2', 'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + ONE_DAY))
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('title' => 'Title 1', 'crdate' => $GLOBALS['SIM_EXEC_TIME'])
 		);
 
@@ -102,11 +102,11 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('title' => 'Attendance 1', 'seminar' => $eventUid1)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('title' => 'Attendance 2', 'seminar' => $eventUid1)
 		);
 		$registrationBag = $this->fixture->build();
@@ -145,7 +145,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('title' => 'Attendance 1', 'seminar' => $eventUid1)
 		);
 		$this->fixture->limitToEvent($eventUid1);
@@ -167,7 +167,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('title' => 'Attendance 2', 'seminar' => $eventUid2)
 		);
 		$this->fixture->limitToEvent($eventUid1);
@@ -187,7 +187,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToPaidFindsPaidRegistration() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('title' => 'Attendance 2', 'datepaid' => $GLOBALS['SIM_EXEC_TIME'])
 		);
 		$this->fixture->limitToPaid();
@@ -202,7 +202,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToPaidIgnoresUnpaidRegistration() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('title' => 'Attendance 1', 'datepaid' => 0)
 		);
 		$this->fixture->limitToPaid();
@@ -222,7 +222,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToUnpaidFindsUnpaidRegistration() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('datepaid' => 0)
 		);
 		$this->fixture->limitToUnpaid();
@@ -237,7 +237,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToUnpaidIgnoresPaidRegistration() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('datepaid' => $GLOBALS['SIM_EXEC_TIME'])
 		);
 		$this->fixture->limitToUnpaid();
@@ -257,7 +257,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testRemovePaymentLimitationRemovesPaidLimit() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('datepaid' => 0)
 		);
 		$this->fixture->limitToPaid();
@@ -273,7 +273,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testRemovePaymentLimitationRemovesUnpaidLimit() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('datepaid' => $GLOBALS['SIM_EXEC_TIME'])
 		);
 		$this->fixture->limitToUnpaid();
@@ -294,7 +294,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToOnQueueFindsRegistrationOnQueue() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('registration_queue' => 1)
 		);
 		$this->fixture->limitToOnQueue();
@@ -309,7 +309,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToOnQueueIgnoresRegularRegistration() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('registration_queue' => 0)
 		);
 		$this->fixture->limitToOnQueue();
@@ -329,7 +329,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToRegularFindsRegularRegistration() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('registration_queue' => 0)
 		);
 		$this->fixture->limitToRegular();
@@ -344,7 +344,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToRegularIgnoresRegistrationOnQueue() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('registration_queue' => 1)
 		);
 		$this->fixture->limitToRegular();
@@ -364,7 +364,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testRemoveQueueLimitationRemovesOnQueueLimit() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('registration_queue' => 0)
 		);
 		$this->fixture->limitToOnQueue();
@@ -380,7 +380,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testRemoveQueueLimitationRemovesRegularLimit() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('registration_queue' => 1)
 		);
 		$this->fixture->limitToRegular();
@@ -409,7 +409,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToSeatsAtMostFindsRegistrationWithEqualSeats() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seats' => 2)
 		);
 		$this->fixture->limitToSeatsAtMost(2);
@@ -425,7 +425,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToSeatsAtMostFindsRegistrationWithLessSeats() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seats' => 1)
 		);
 		$this->fixture->limitToSeatsAtMost(2);
@@ -441,7 +441,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToSeatsAtMostIgnoresRegistrationWithMoreSeats() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seats' => 2)
 		);
 		$this->fixture->limitToSeatsAtMost(1);
@@ -456,7 +456,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToSeatsAtMostWithZeroSeatsFindsAllRegistrations() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seats' => 2)
 		);
 		$this->fixture->limitToSeatsAtMost(1);
@@ -489,7 +489,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $eventUid, 'user' => $feUserUid)
 		);
 
@@ -524,7 +524,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 		$feUserUid2 = $this->testingFramework->createFrontEndUser($feUserGroupUid);
 		$eventUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SEMINARS);
 		$registrationUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('seminar' => $eventUid, 'user' => $feUserUid2)
 		);
 
@@ -553,10 +553,10 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('title' => 'test title 2')
 		);
 		$registrationUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('seminar' => $eventUid1)
+			'tx_seminars_attendances', array('seminar' => $eventUid1)
 		);
 		$registrationUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('seminar' => $eventUid2)
+			'tx_seminars_attendances', array('seminar' => $eventUid2)
 		);
 
 		$this->fixture->setOrderByEventColumn(
@@ -584,10 +584,10 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS, array('title' => 'test title 2')
 		);
 		$registrationUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('seminar' => $eventUid1)
+			'tx_seminars_attendances', array('seminar' => $eventUid1)
 		);
 		$registrationUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES, array('seminar' => $eventUid2)
+			'tx_seminars_attendances', array('seminar' => $eventUid2)
 		);
 
 		$this->fixture->setOrderByEventColumn(
@@ -614,7 +614,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToExistingUsersFindsRegistrationWithExistingUser() {
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('user' => $this->testingFramework->createFrontEndUser())
 		);
 		$this->fixture->limitToExistingUsers();
@@ -634,7 +634,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 			'fe_users', $feUserUid, array('deleted' => 1)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_ATTENDANCES,
+			'tx_seminars_attendances',
 			array('user' => $feUserUid)
 		);
 		$this->fixture->limitToExistingUsers();
