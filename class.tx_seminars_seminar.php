@@ -2280,7 +2280,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'tx_seminars_seminars_organizing_partners_mm.uid_local = ' .
 				$this->getUid() . ' AND ' .
 				'tx_seminars_seminars_organizing_partners_mm.uid_foreign = ' .
-				SEMINARS_TABLE_ORGANIZERS . '.uid',
+				'tx_seminars_organizers.uid',
 			'tx_seminars_seminars_organizing_partners_mm'
 		);
 

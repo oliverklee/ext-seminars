@@ -43,7 +43,7 @@ class tx_seminars_OrganizerBagBuilder extends tx_seminars_bagbuilder {
 	/**
 	 * @var string the table name of the bag to build
 	 */
-	protected $tableName = SEMINARS_TABLE_ORGANIZERS;
+	protected $tableName = 'tx_seminars_organizers';
 
 	/**
 	 * Limits the bag to contain only organizers of the event given in the
@@ -59,8 +59,8 @@ class tx_seminars_OrganizerBagBuilder extends tx_seminars_bagbuilder {
 
 		$this->whereClauseParts['event'] = 'EXISTS (' .
 			'SELECT * FROM tx_seminars_seminars_organizers_mm' .
-			' WHERE uid_local=' . $eventUid . ' AND uid_foreign=' .
-			SEMINARS_TABLE_ORGANIZERS . '.uid)';
+			' WHERE uid_local = ' . $eventUid . ' AND uid_foreign = ' .
+			'tx_seminars_organizers.uid)';
 	}
 }
 

@@ -218,7 +218,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		array $organizerData = array()
 	) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, $organizerData
+			'tx_seminars_organizers', $organizerData
 		);
 
 		$this->testingFramework->createRelation(
@@ -269,7 +269,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 */
 	private function addOrganizerRelation(array $organizerData = array()) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, $organizerData
+			'tx_seminars_organizers', $organizerData
 		);
 
 		$this->testingFramework->createRelation(

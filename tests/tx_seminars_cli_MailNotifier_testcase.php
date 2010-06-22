@@ -99,7 +99,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	 */
 	private function createSeminarWithOrganizer(array $additionalSeminarData = array()) {
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array('title' => 'Mr. Test', 'email' => 'MrTest@valid-email.org')
 		);
 
@@ -164,7 +164,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		$this->createSeminarWithOrganizer();
 
 		$this->assertTrue(
-			$this->testingFramework->existsRecord(SEMINARS_TABLE_ORGANIZERS, '1=1')
+			$this->testingFramework->existsRecord('tx_seminars_organizers', '1=1')
 		);
 	}
 
@@ -360,7 +360,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
 		));
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array('title' => 'foo', 'email' => 'foo@valid-email.org')
 		);
 		$this->testingFramework->createRelation(
@@ -571,7 +571,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		));
 		$this->addSpeaker($eventUid);
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array('title' => 'foo', 'email' => 'foo@valid-email.org')
 		);
 		$this->testingFramework->createRelation(
@@ -732,7 +732,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
 		));
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array('title' => 'foo', 'email' => 'foo@valid-email.org')
 		);
 		$this->testingFramework->createRelation(

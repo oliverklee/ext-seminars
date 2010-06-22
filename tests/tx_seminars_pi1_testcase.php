@@ -244,7 +244,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	private function addOrganizerRelation(array $organizerData = array()) {
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, $organizerData
+			'tx_seminars_organizers', $organizerData
 		);
 
 		$this->testingFramework->createRelation(
@@ -3261,7 +3261,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_ListViewForGivenOrganizer_ShowsEventWithOrganizer() {
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -3282,7 +3282,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function test_ListViewForGivenOrganizer_DoesNotShowEventWithOtherOrganizer() {
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -3294,7 +3294,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->piVars['organizer'][]
-			= $this->testingFramework->createRecord(SEMINARS_TABLE_ORGANIZERS);
+			= $this->testingFramework->createRecord('tx_seminars_organizers');
 
 		$this->assertNotContains(
 			'Foo Event',
@@ -4415,7 +4415,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToOrganizersContainsEventsWithSelectedOrganizer() {
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 			);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -4442,7 +4442,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToOrganizerExcludesEventsWithNotSelectedOrganizer() {
 		$organizerUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 			);
 		$eventUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -4456,7 +4456,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$organizerUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 			);
 		$eventUid2 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -4481,7 +4481,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewLimitedToOrganizersFromSelectorWidgetIgnoresFlexFormsValues() {
 		$organizerUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 			);
 		$eventUid1 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,
@@ -4495,7 +4495,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$organizerUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 			);
 		$eventUid2 = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS,

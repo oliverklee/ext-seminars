@@ -75,7 +75,7 @@ class tx_seminars_Mapper_Organizer_testcase extends tx_phpunit_testcase {
 	 */
 	public function findWithUidOfExistingRecordReturnsRecordAsModel() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, array('title' => 'Fabulous organizer')
+			'tx_seminars_organizers', array('title' => 'Fabulous organizer')
 		);
 
 		$this->assertEquals(

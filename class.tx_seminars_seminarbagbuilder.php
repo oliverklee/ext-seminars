@@ -744,7 +744,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 		return $this->getSearchWherePartForMmRelation(
 			$searchWord,
 			'organizers',
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			'tx_seminars_seminars_organizers_mm'
 		);
 	}

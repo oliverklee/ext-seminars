@@ -1328,7 +1328,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, array('title' => 'Organizer Foo')
+			'tx_seminars_organizers', array('title' => 'Organizer Foo')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			SEMINARS_TABLE_SEMINARS,
@@ -1353,7 +1353,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$organizerUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, array('title' => 'Organizer Bar')
+			'tx_seminars_organizers', array('title' => 'Organizer Bar')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			SEMINARS_TABLE_SEMINARS,
@@ -1363,7 +1363,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		);
 
 		$organizerUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 		);
 
 		$this->fixture->setConfigurationValue(
@@ -1471,7 +1471,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$organizerName = 'test organizer';
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, array('title' => $organizerName)
+			'tx_seminars_organizers', array('title' => $organizerName)
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -1494,7 +1494,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$organizerName = '< Organizer Name >';
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, array('title' => $organizerName)
+			'tx_seminars_organizers', array('title' => $organizerName)
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -1518,7 +1518,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$organizerName = 'Organizer Name';
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, array('title' => $organizerName)
+			'tx_seminars_organizers', array('title' => $organizerName)
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			SEMINARS_TABLE_SEMINARS
@@ -1545,11 +1545,11 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 		$organizerName1 = 'Organizer 1';
 		$organizerUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, array('title' => $organizerName1)
+			'tx_seminars_organizers', array('title' => $organizerName1)
 		);
 		$organizerName2 = 'Organizer 2';
 		$organizerUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS, array('title' => $organizerName2)
+			'tx_seminars_organizers', array('title' => $organizerName2)
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(

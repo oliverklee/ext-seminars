@@ -38,7 +38,7 @@ class tx_seminars_organizer extends tx_seminars_objectfromdb implements tx_oelib
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
-	protected $tableName = SEMINARS_TABLE_ORGANIZERS;
+	protected $tableName = 'tx_seminars_organizers';
 
 	/**
 	 * Gets the organizer's real name.

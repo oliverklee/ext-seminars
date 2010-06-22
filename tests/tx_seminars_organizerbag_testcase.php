@@ -49,7 +49,7 @@ class tx_seminars_organizerbag_testcase extends tx_phpunit_testcase {
 	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$this->testingFramework->createRecord(SEMINARS_TABLE_ORGANIZERS);
+		$this->testingFramework->createRecord('tx_seminars_organizers');
 
 		$this->fixture = new tx_seminars_organizerbag('is_dummy_record=1');
 	}

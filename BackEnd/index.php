@@ -167,7 +167,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 			$this->availableSubModules[3] = $LANG->getLL('subModuleTitle_speakers');
 		}
 
-		if ($BE_USER->check('tables_select', SEMINARS_TABLE_ORGANIZERS)) {
+		if ($BE_USER->check('tables_select', 'tx_seminars_organizers')) {
 			$this->availableSubModules[4] = $LANG->getLL('subModuleTitle_organizers');
 		}
 

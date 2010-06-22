@@ -65,7 +65,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->createFakeFrontEnd();
 
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array(
 				'title' => 'test organizer',
 				'email' => 'mail@example.com',

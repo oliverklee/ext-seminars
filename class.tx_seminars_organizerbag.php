@@ -58,7 +58,7 @@ class tx_seminars_organizerbag extends tx_seminars_bag {
 		$orderBy = 'uid', $limit = ''
 	) {
 		parent::__construct(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			$queryParameters,
 			$additionalTableNames,
 			$groupBy,

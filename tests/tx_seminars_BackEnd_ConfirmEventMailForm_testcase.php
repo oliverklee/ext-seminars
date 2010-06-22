@@ -84,7 +84,7 @@ class tx_seminars_BackEnd_ConfirmEventMailForm_testcase extends tx_phpunit_testc
 		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderPid);
 
 		$this->organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array(
 				'title' => 'Dummy Organizer',
 				'email' => 'foo@example.org',

@@ -106,7 +106,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array(
 				'title' => 'test organizer',
 				'email' => 'mail@example.com',
@@ -3882,7 +3882,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_SendAdditionalNotification_CanSendEmailsToTwoOrganizers() {
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array(
 				'title' => 'test organizer 2',
 				'email' => 'mail2@example.com',
@@ -3912,7 +3912,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 	public function test_SendAdditionalNotification_UsesTheFirstOrganizerAsSenderIfEmailIsSentToTwoOrganizers() {
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array(
 				'title' => 'test organizer 2',
 				'email' => 'mail2@example.com',

@@ -4731,7 +4731,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInOrganizerTitle() {
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array('title' => 'foo bar organizer')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4759,7 +4759,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInOrganizerTitle() {
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array('title' => 'bar organizer')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5337,7 +5337,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInOrganizerTitle() {
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array('title' => 'foo bar organizer')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5365,7 +5365,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInOrganizerTitle() {
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array('title' => 'bar organizer')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -7426,7 +7426,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'
@@ -7448,7 +7448,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 		);
 
 		$this->fixture->limitToOrganizers($organizerUid);
@@ -7466,10 +7466,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$organizerUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 		);
 		$organizerUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid1, 'organizers'
@@ -7490,10 +7490,10 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$organizerUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 		);
 		$organizerUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -7519,7 +7519,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -7546,7 +7546,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -7577,7 +7577,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS
 		);
 		$organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS
+			'tx_seminars_organizers'
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			SEMINARS_TABLE_SEMINARS, $eventUid, $organizerUid, 'organizers'

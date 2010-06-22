@@ -48,7 +48,7 @@ class tx_seminars_flexForms_testcase extends tx_phpunit_testcase {
 	 * @var string name of the table which is used to test the flexforms
 	 *      settings
 	 */
-	private $testingTable = SEMINARS_TABLE_ORGANIZERS;
+	private $testingTable = 'tx_seminars_organizers';
 
 	/**
 	 * @var array a backup of the TCA setting for the testing table

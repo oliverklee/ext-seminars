@@ -84,7 +84,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderPid);
 
 		$this->organizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array(
 				'title' => 'Dummy Organizer',
 				'email' => 'foo@example.org',
@@ -212,7 +212,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 
 	public function testRenderContainsDropDownForSenderSelectionForEventWithMultipleOrganizers() {
 		$secondOrganizerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_ORGANIZERS,
+			'tx_seminars_organizers',
 			array(
 				'title' => 'Second Organizer',
 				'email' => 'bar@example.org',
