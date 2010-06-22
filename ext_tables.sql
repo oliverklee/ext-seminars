@@ -1,22 +1,4 @@
 #
-# Table structure for table 'tx_partner_main'
-#
-CREATE TABLE tx_partner_main (
-	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-
-	KEY dummy (is_dummy_record)
-);
-
-
-#
-# Table structure for table 'tx_partner_contact_info'
-#
-CREATE TABLE tx_partner_contact_info (
-	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL
-);
-
-
-#
 # Table structure for table 'fe_users'
 #
 CREATE TABLE fe_users (

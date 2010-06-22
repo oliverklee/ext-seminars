@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#3966] Change: Remove the partner integration for now
 - [#3915] Cleanup: Drop the SEMINARS_TABLE_SEMINARS_* and SEMINARS_RECORD_TYPE_* constants
 - [#3928] Cleanup: Drop all require_once that are covered by an autoloader
 - [#3963] Fix: Crash in PHP 5.2 due to PHP-5.3-only array_replace
