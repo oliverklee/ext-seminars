@@ -54,7 +54,7 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$fixtureUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array(
 				'title' => 'Test speaker',
 				'email' => 'foo@test.com'
@@ -63,7 +63,7 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_speaker($fixtureUid);
 
 		$maximalFixtureUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array(
 				'title' => 'Test speaker',
 				'organization' => 'Foo inc.',
@@ -107,7 +107,7 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			$this->fixture->getUid(), $uid, 'skills'
 		);
 

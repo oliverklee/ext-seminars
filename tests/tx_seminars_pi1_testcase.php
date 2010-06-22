@@ -834,7 +834,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array (
 				'title' => 'foo',
 				'organization' => 'bar',

@@ -883,7 +883,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 				$this->getSearchWherePartForMmRelation(
 					$searchWord,
 					$key,
-					SEMINARS_TABLE_SPEAKERS,
+					'tx_seminars_speakers',
 					$currentMmTable
 				)
 			);

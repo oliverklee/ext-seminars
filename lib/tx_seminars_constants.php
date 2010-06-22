@@ -23,7 +23,6 @@
 ***************************************************************/
 
 define('SEMINARS_TABLE_SEMINARS', 'tx_seminars_seminars');
-define('SEMINARS_TABLE_SPEAKERS', 'tx_seminars_speakers');
 define('SEMINARS_TABLE_SITES', 'tx_seminars_sites');
 define('SEMINARS_TABLE_ORGANIZERS', 'tx_seminars_organizers');
 define('SEMINARS_TABLE_ATTENDANCES', 'tx_seminars_attendances');

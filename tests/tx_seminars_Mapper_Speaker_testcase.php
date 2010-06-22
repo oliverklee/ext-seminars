@@ -65,7 +65,7 @@ class tx_seminars_Mapper_Speaker_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function findWithUidOfExistingRecordReturnsOrganizerInstance() {
-		$uid = $this->testingFramework->createRecord(SEMINARS_TABLE_SPEAKERS);
+		$uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
 		$this->assertTrue(
 			$this->fixture->find($uid) instanceof tx_seminars_Model_Speaker
@@ -77,7 +77,7 @@ class tx_seminars_Mapper_Speaker_testcase extends tx_phpunit_testcase {
 	 */
 	public function findWithUidOfExistingRecordReturnsRecordAsModel() {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS, array('title' => 'John Doe')
+			'tx_seminars_speakers', array('title' => 'John Doe')
 		);
 
 		$this->assertEquals(
@@ -95,7 +95,7 @@ class tx_seminars_Mapper_Speaker_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSkillsReturnsListInstance() {
-		$uid = $this->testingFramework->createRecord(SEMINARS_TABLE_SPEAKERS);
+		$uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
 		$this->assertTrue(
 			$this->fixture->find($uid)->getSkills() instanceof tx_oelib_List
@@ -106,7 +106,7 @@ class tx_seminars_Mapper_Speaker_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSkillsWithoutSkillsReturnsEmptyList() {
-		$uid = $this->testingFramework->createRecord(SEMINARS_TABLE_SPEAKERS);
+		$uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
 		$this->assertTrue(
 			$this->fixture->find($uid)->getSkills()->isEmpty()
@@ -117,11 +117,11 @@ class tx_seminars_Mapper_Speaker_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSkillsWithOneSkillReturnsNonEmptyList() {
-		$speakerUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SPEAKERS);
+		$speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
 		$skill = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill')
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SPEAKERS, $speakerUid, $skill->getUid(), 'skills'
+			'tx_seminars_speakers', $speakerUid, $skill->getUid(), 'skills'
 		);
 
 		$this->assertFalse(
@@ -133,11 +133,11 @@ class tx_seminars_Mapper_Speaker_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSkillsWithOneSkillReturnsOneSkill() {
-		$speakerUid = $this->testingFramework->createRecord(SEMINARS_TABLE_SPEAKERS);
+		$speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
 		$skill = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill')
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SPEAKERS, $speakerUid, $skill->getUid(), 'skills'
+			'tx_seminars_speakers', $speakerUid, $skill->getUid(), 'skills'
 		);
 
 		$this->assertEquals(

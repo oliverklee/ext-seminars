@@ -783,7 +783,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		return tx_oelib_ObjectFactory::make(
 			'tx_seminars_speakerbag',
 			$mmTable . '.uid_local = ' . $this->getUid() . ' AND ' .
-				SEMINARS_TABLE_SPEAKERS . '.uid = ' . $mmTable . '.uid_foreign',
+				'tx_seminars_speakers.uid = ' . $mmTable . '.uid_foreign',
 			$mmTable
 		);
 	}

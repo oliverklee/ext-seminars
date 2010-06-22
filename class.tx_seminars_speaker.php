@@ -47,7 +47,7 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
-	protected $tableName = SEMINARS_TABLE_SPEAKERS;
+	protected $tableName = 'tx_seminars_speakers';
 
 	/**
 	 * Gets our organization.

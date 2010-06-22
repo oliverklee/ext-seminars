@@ -60,7 +60,7 @@ class tx_seminars_speakerbag extends tx_seminars_bag {
 		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1
 	) {
 		parent::__construct(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			$queryParameters,
 			$additionalTableNames,
 			$groupBy,

@@ -3861,7 +3861,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -3889,7 +3889,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -3916,7 +3916,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -3944,7 +3944,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -3971,7 +3971,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -3999,7 +3999,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4026,7 +4026,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPartnerTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4054,7 +4054,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPartnerTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4081,7 +4081,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPartnerOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4109,7 +4109,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPartnerOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4136,7 +4136,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPartnerDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4164,7 +4164,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPartnerDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4191,7 +4191,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTutorTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4219,7 +4219,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTutorTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4246,7 +4246,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTutorOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4274,7 +4274,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTutorOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4301,7 +4301,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTutorDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4329,7 +4329,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTutorDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4356,7 +4356,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInLeaderTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4384,7 +4384,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInLeaderTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4411,7 +4411,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInLeaderOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4439,7 +4439,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInLeaderOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4466,7 +4466,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInLeaderDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -4494,7 +4494,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInLeaderDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5392,7 +5392,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5420,7 +5420,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5447,7 +5447,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5475,7 +5475,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5502,7 +5502,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5530,7 +5530,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5557,7 +5557,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPartnerTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5585,7 +5585,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPartnerTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5612,7 +5612,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPartnerOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5640,7 +5640,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPartnerOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5667,7 +5667,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPartnerDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5695,7 +5695,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPartnerDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5722,7 +5722,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInTutorTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5750,7 +5750,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInTutorTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5777,7 +5777,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInTutorOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5805,7 +5805,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInTutorOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5832,7 +5832,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInTutorDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5860,7 +5860,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInTutorDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5887,7 +5887,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInLeaderTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5915,7 +5915,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInLeaderTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('title' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5942,7 +5942,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInLeaderOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5970,7 +5970,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInLeaderOrganization() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('organization' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -5997,7 +5997,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInLeaderDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'foo bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
@@ -6025,7 +6025,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInLeaderDescription() {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('description' => 'bar speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(

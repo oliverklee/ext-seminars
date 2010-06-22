@@ -124,7 +124,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	 */
 	private function addSpeaker($eventUid) {
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array('cancelation_period' => 2)
 		);
 
@@ -182,7 +182,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 		$this->addSpeaker($this->createSeminarWithOrganizer());
 
 		$this->assertTrue(
-			$this->testingFramework->existsRecord(SEMINARS_TABLE_SPEAKERS, '1=1')
+			$this->testingFramework->existsRecord('tx_seminars_speakers', '1=1')
 		);
 	}
 

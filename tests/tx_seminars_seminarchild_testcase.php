@@ -293,7 +293,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 */
 	private function addSpeakerRelation($speakerData) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS, $speakerData
+			'tx_seminars_speakers', $speakerData
 		);
 
 		$this->testingFramework->createRelation(
@@ -317,7 +317,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 */
 	private function addPartnerRelation($speakerData) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS, $speakerData
+			'tx_seminars_speakers', $speakerData
 		);
 
 		$this->testingFramework->createRelation(
@@ -341,7 +341,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 */
 	private function addTutorRelation($speakerData) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS, $speakerData
+			'tx_seminars_speakers', $speakerData
 		);
 
 		$this->testingFramework->createRelation(
@@ -365,7 +365,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 */
 	private function addLeaderRelation($speakerData) {
 		$uid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS, $speakerData
+			'tx_seminars_speakers', $speakerData
 		);
 
 		$this->testingFramework->createRelation(
