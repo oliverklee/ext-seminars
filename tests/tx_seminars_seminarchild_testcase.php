@@ -6081,7 +6081,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependentTopicUid, $topicUid
 		);
 		$topic = new tx_seminars_seminarchild($topicUid);
@@ -6109,7 +6109,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependentTopicUid, $topicUid
 		);
 		$date = new tx_seminars_seminarchild(
@@ -6145,7 +6145,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependentTopicUid1, $topicUid
 		);
 		$dependentTopicUid2 = $this->testingFramework->createRecord(
@@ -6156,7 +6156,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependentTopicUid2, $topicUid
 		);
 		$topic = new tx_seminars_seminarchild($topicUid);
@@ -6320,7 +6320,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependentTopicUid, $topicUid
 		);
 		$topic = new tx_seminars_seminarchild($topicUid);
@@ -6356,7 +6356,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependentTopicUid, $topicUid
 		);
 		$date = new tx_seminars_seminarchild(
@@ -6400,7 +6400,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependentTopicUid1, $topicUid
 		);
 		$dependentTopicUid2 = $this->testingFramework->createRecord(
@@ -6411,7 +6411,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependentTopicUid2, $topicUid
 		);
 		$topic = new tx_seminars_seminarchild($topicUid);

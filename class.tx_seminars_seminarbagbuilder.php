@@ -1071,11 +1071,11 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToRequiredEventTopics($eventUid) {
 		$this->whereClauseParts['requiredEventTopics'] =
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM . '.uid_local=' . $eventUid .
-			' AND ' . SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM . '.uid_foreign=' .
+			'tx_seminars_seminars_requirements_mm.uid_local = ' . $eventUid .
+			' AND tx_seminars_seminars_requirements_mm.uid_foreign = ' .
 			SEMINARS_TABLE_SEMINARS . '.uid';
-		$this->addAdditionalTableName(SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM);
-		$this->setOrderBy(SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM . '.sorting');
+		$this->addAdditionalTableName('tx_seminars_seminars_requirements_mm');
+		$this->setOrderBy('tx_seminars_seminars_requirements_mm.sorting');
 	}
 
 	/**
@@ -1086,12 +1086,12 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToDependingEventTopics($eventUid) {
 		$this->whereClauseParts['dependingEventTopics'] =
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM . '.uid_foreign=' . $eventUid .
-			' AND '. SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM . '.uid_local=' .
+			'tx_seminars_seminars_requirements_mm.uid_foreign = ' . $eventUid .
+			' AND tx_seminars_seminars_requirements_mm.uid_local = ' .
 			SEMINARS_TABLE_SEMINARS . '.uid';
-		$this->addAdditionalTableName(SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM);
+		$this->addAdditionalTableName('tx_seminars_seminars_requirements_mm');
 		$this->setOrderBy(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM . '.sorting_foreign ASC'
+			'tx_seminars_seminars_requirements_mm.sorting_foreign ASC'
 		);
 	}
 

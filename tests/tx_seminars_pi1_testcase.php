@@ -1601,7 +1601,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependingEventUid, $this->seminarUid
 		);
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -1628,7 +1628,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependingEventUid, $this->seminarUid
 		);
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -1659,7 +1659,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependingEventUid, $this->seminarUid
 		);
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -1686,7 +1686,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependingEventUid1, $this->seminarUid
 		);
 		$dependingEventUid2 = $this->testingFramework->createRecord(
@@ -1697,7 +1697,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_REQUIREMENTS_MM,
+			'tx_seminars_seminars_requirements_mm',
 			$dependingEventUid2, $this->seminarUid
 		);
 
