@@ -428,7 +428,7 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 	public function testCommitToDbCanCreateLodgingsRelation() {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$lodgingsUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_LODGINGS
+			'tx_seminars_lodgings'
 		);
 
 		$registration = new tx_seminars_registrationchild(0);

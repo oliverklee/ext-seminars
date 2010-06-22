@@ -948,7 +948,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 
 		if ($this->hasLodgings()) {
 			$result = $this->getMmRecords(
-				SEMINARS_TABLE_LODGINGS,
+				'tx_seminars_lodgings',
 				'tx_seminars_attendances_lodgings_mm'
 			);
 		}

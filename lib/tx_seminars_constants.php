@@ -24,7 +24,6 @@
 
 define('SEMINARS_TABLE_SEMINARS', 'tx_seminars_seminars');
 define('SEMINARS_TABLE_ATTENDANCES', 'tx_seminars_attendances');
-define('SEMINARS_TABLE_LODGINGS', 'tx_seminars_lodgings');
 define('SEMINARS_TABLE_FOODS', 'tx_seminars_foods');
 define('SEMINARS_TABLE_TIME_SLOTS', 'tx_seminars_timeslots');
 define('SEMINARS_TABLE_TARGET_GROUPS', 'tx_seminars_target_groups');

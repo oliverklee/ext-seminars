@@ -6700,7 +6700,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 */
 	public function getEventDataForEventWithMultipleLodgingsSeparatesLodgingsWithLineFeeds() {
 		$lodgingUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_LODGINGS, array('title' => 'foo')
+			'tx_seminars_lodgings', array('title' => 'foo')
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_lodgings_mm',
@@ -6708,7 +6708,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$lodgingUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_LODGINGS, array('title' => 'bar')
+			'tx_seminars_lodgings', array('title' => 'bar')
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_lodgings_mm',
@@ -6728,7 +6728,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	 */
 	public function getEventDataForEventWithMultipleLodgingsDoesNotSeparateLodgingsWithCarriageReturnsAndLineFeeds() {
 		$lodgingUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_LODGINGS, array('title' => 'foo')
+			'tx_seminars_lodgings', array('title' => 'foo')
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_lodgings_mm',
@@ -6736,7 +6736,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 
 		$lodgingUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_LODGINGS, array('title' => 'bar')
+			'tx_seminars_lodgings', array('title' => 'bar')
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_lodgings_mm',
