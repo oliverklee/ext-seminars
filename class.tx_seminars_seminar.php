@@ -2277,11 +2277,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$organizerBag = tx_oelib_ObjectFactory::make(
 			'tx_seminars_organizerbag',
-			SEMINARS_TABLE_SEMINARS_ORGANIZING_PARTNERS_MM . '.uid_local=' .
+			'tx_seminars_seminars_organizing_partners_mm.uid_local = ' .
 				$this->getUid() . ' AND ' .
-				SEMINARS_TABLE_SEMINARS_ORGANIZING_PARTNERS_MM . '.uid_foreign=' .
+				'tx_seminars_seminars_organizing_partners_mm.uid_foreign = ' .
 				SEMINARS_TABLE_ORGANIZERS . '.uid',
-			SEMINARS_TABLE_SEMINARS_ORGANIZING_PARTNERS_MM
+			'tx_seminars_seminars_organizing_partners_mm'
 		);
 
 		foreach ($organizerBag as $organizer) {
