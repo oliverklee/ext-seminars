@@ -227,13 +227,17 @@ abstract class tx_seminars_BackEnd_List {
 				'</a>' . LF .
 				TAB . TAB .
 				'</div>' . LF;
+
 			$message = t3lib_div::makeInstance(
 				't3lib_FlashMessage',
 				$storageLabel,
 				'',
 				t3lib_FlashMessage::INFO
 			);
-			$result .= '<div id="eventsList-clear"></div>' . $message->render();
+			t3lib_FlashMessageQueue::addMessage($message);
+
+			$result .= '<div id="eventsList-clear"></div>' .
+				t3lib_FlashMessageQueue::renderFlashMessages();
 		}
 
 		return $result;

@@ -117,13 +117,17 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 				'',
 				t3lib_FlashMessage::INFO
 			);
-			echo $this->content . $message->render() . $this->doc->endPage();
+			t3lib_FlashMessageQueue::addMessage($message);
+
+			echo $this->content . t3lib_FlashMessageQueue::renderFlashMessages() .
+				$this->doc->endPage();
 			return;
 		}
 
 		$pageAccess = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
 		if (!is_array($pageAccess) && !$BE_USER->user['admin']) {
-			echo $this->content . $this->doc->endPage();
+			echo $this->content . t3lib_FlashMessageQueue::renderFlashMessages() .
+				$this->doc->endPage();
 
 			return;
 		}
@@ -135,7 +139,10 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 				'',
 				t3lib_FlashMessage::WARNING
 			);
-			echo $this->content . $message->render() . $this->doc->endPage();
+			t3lib_FlashMessageQueue::addMessage($message);
+
+			echo $this->content . t3lib_FlashMessageQueue::renderFlashMessages() .
+				$this->doc->endPage();
 			return;
 		}
 
