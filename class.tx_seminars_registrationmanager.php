@@ -910,7 +910,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Sends an e-mail to the attendee with a message concerning his/her
 	 * registration or unregistration.
 	 *
-	 * @param tx_seminars_registration $registration
+	 * @param tx_seminars_registration $oldRegistration
 	 *        the registration for which the notification should be sent
 	 * @param tslib_pibase $plugin a live plugin
 	 * @param string $helloSubjectPrefix
@@ -924,28 +924,28 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *        postfixed with "Hello" or "Subject".
 	 */
 	public function notifyAttendee(
-		tx_seminars_registration $registration,
+		tx_seminars_registration $oldRegistration,
 		tslib_pibase $plugin, $helloSubjectPrefix = 'confirmation'
 	) {
 		if (!$this->getConfValueBoolean('send' . ucfirst($helloSubjectPrefix))) {
 			return;
 		}
 
-		$event = $registration->getSeminarObject();
+		$event = $oldRegistration->getSeminarObject();
 		if (!$event->hasOrganizers()) {
 			return;
 		}
 
-		if (!$registration->hasExistingFrontEndUser()) {
+		if (!$oldRegistration->hasExistingFrontEndUser()) {
 			return;
 		}
 
-		if (!$registration->getFrontEndUser()->hasEMailAddress()) {
+		if (!$oldRegistration->getFrontEndUser()->hasEMailAddress()) {
 			return;
 		}
 
 		$eMailNotification = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
-		$eMailNotification->addRecipient($registration->getFrontEndUser());
+		$eMailNotification->addRecipient($oldRegistration->getFrontEndUser());
 		$eMailNotification->setSender($event->getOrganizerBag()->current());
 		$eMailNotification->setSubject(
 			$this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' .
@@ -958,21 +958,30 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			->getAsInteger('eMailFormatForAttendees');
 		if (($mailFormat == self::SEND_HTML_MAIL)
 			|| (($mailFormat == self::SEND_USER_MAIL)
-				&& $registration->getFrontEndUser()->wantsHtmlEMail())
+				&& $oldRegistration->getFrontEndUser()->wantsHtmlEMail())
 		) {
 			$eMailNotification->setCssFile(
 				$this->getConfValueString('cssFileForAttendeeMail')
 			);
 			$eMailNotification->setHTMLMessage(
 				$this->buildEmailContent(
-					$registration, $plugin, $helloSubjectPrefix, TRUE
+					$oldRegistration, $plugin, $helloSubjectPrefix, TRUE
 				)
 			);
 		}
 
 		$eMailNotification->setMessage(
-			$this->buildEmailContent($registration, $plugin, $helloSubjectPrefix)
+			$this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix)
 		);
+
+		$registration
+			= tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+			->find($oldRegistration->getUid());
+		foreach ($this->getHooks() as $hook) {
+			if (method_exists($hook, 'modifyThankYouEmail')) {
+				$hook->modifyThankYouEmail($eMailNotification, $registration);
+			}
+		}
 
 		tx_oelib_mailerFactory::getInstance()->getMailer()->send(
 			$eMailNotification

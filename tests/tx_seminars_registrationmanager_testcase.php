@@ -2007,6 +2007,50 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
+	public function notifyAttendeeForSendConfirmationTrueCallsModifyThankYouEmailHook() {
+		$hookClass = uniqid('tx_seminars_registrationHook');
+		$hook = $this->getMock($hookClass, array('modifyThankYouEmail'));
+		$hook->expects($this->once())->method('modifyThankYouEmail');
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass] = $hookClass;
+
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForSendConfirmationFalseNotCallsModifyThankYouEmailHook() {
+		$hookClass = uniqid('tx_seminars_registrationHook');
+		$hook = $this->getMock($hookClass, array('modifyThankYouEmail'));
+		$hook->expects($this->never())->method('modifyThankYouEmail');
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
+			[$hookClass] = $hookClass;
+
+		$this->fixture->setConfigurationValue('sendConfirmation', FALSE);
+		$pi1 = new tx_seminars_pi1();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+		$pi1->__destruct();
+		$registration->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
 	public function notifyAttendeeMailSubjectContainsConfirmationSubject() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_pi1();
