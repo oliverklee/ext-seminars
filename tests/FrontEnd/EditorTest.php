@@ -25,16 +25,17 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the tx_seminars_pi1_frontEndEditor class in the 'seminars' extension.
+ * Testcase for the tx_seminars_FrontEnd_Editor class in the "seminars"
+ * extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_frontEndEditor_testcase extends tx_phpunit_testcase {
+class tx_seminars_FrontEnd_EditorTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_pi1_frontEndEditor
+	 * @var tx_seminars_FrontEnd_Editor
 	 */
 	private $fixture;
 	/**
@@ -46,7 +47,7 @@ class tx_seminars_frontEndEditor_testcase extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
-		$this->fixture = new tx_seminars_pi1_frontEndEditor(
+		$this->fixture = new tx_seminars_FrontEnd_Editor(
 			array(), $GLOBALS['TSFE']->cObj
 		);
 		$this->fixture->setTestMode();
@@ -72,7 +73,7 @@ class tx_seminars_frontEndEditor_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testIsTestModeReturnsFalseForTestModeDisabled() {
-		$fixture = new tx_seminars_pi1_frontEndEditor(array(), $GLOBALS['TSFE']->cObj);
+		$fixture = new tx_seminars_FrontEnd_Editor(array(), $GLOBALS['TSFE']->cObj);
 
 		$this->assertFalse(
 			$fixture->isTestMode()

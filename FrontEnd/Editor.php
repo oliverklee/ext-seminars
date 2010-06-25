@@ -27,7 +27,7 @@ require_once(PATH_formidableapi);
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Class 'tx_seminars_pi1_frontEndEditor' for the 'seminars' extension.
+ * Class tx_seminars_FrontEnd_Editor for the "seminars" extension.
  *
  * This class is the base class for any kind of front-end editor, for example
  * the event editor or the registration editor.
@@ -37,7 +37,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_pi1_frontEndEditor extends tx_seminars_FrontEnd_AbstractView {
+class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * @var tx_ameosformidable object that creates the form
 	 */
@@ -209,7 +209,7 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_FrontEnd_AbstractView {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndEditor.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndEditor.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/Editor.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/Editor.php']);
 }
 ?>

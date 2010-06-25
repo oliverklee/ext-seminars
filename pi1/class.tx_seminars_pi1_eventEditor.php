@@ -35,7 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
+class tx_seminars_pi1_eventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * @var string stores a validation error message if there was one
 	 */

@@ -37,7 +37,7 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor {
+class tx_seminars_pi1_registrationEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * same as class name
 	 *
