@@ -27,7 +27,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Class 'frontEndPublishEvent' for the 'seminars' extension.
+ * Class tx_seminars_FrontEnd_PublishEvent for the "seminars" extension.
  *
  * This class publishes events which are hidden through editing or creation in
  * the FE-editor.
@@ -37,7 +37,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_pi1_frontEndPublishEvent extends tx_oelib_templatehelper {
+class tx_seminars_FrontEnd_PublishEvent extends tx_oelib_templatehelper {
 	/**
 	 * @var string the prefix used for the piVars
 	 */
@@ -79,7 +79,7 @@ class tx_seminars_pi1_frontEndPublishEvent extends tx_oelib_templatehelper {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndPublishEvent.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndPublishEvent.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/PublishEvent.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/PublishEvent.php']);
 }
 ?>

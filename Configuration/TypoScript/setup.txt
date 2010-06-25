@@ -3856,12 +3856,12 @@ tx_seminars_publication {
 		setJS_openPic = 0
 	}
 
-	includeLibs.tx_seminars_publication = EXT:seminars/pi1/class.tx_seminars_pi1_frontEndPublishEvent.php
+	includeLibs.tx_seminars_publication = EXT:seminars/FrontEnd/PublishEvent.php
 	stdWrap.wrap = <p>|</p>
 
 	10 = USER
 	10 {
-		userFunc = tx_seminars_pi1_frontEndPublishEvent->render
+		userFunc = tx_seminars_FrontEnd_PublishEvent->render
 		xhtml_cleaning = all
 	}
 }
