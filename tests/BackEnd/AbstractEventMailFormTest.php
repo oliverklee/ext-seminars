@@ -27,16 +27,16 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Testcase for the 'EventMailForm' class in the 'seminars' extension.
+ * Testcase for the AbstractEventMailForm class in the "seminars" extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class tx_seminars_BackEnd_EventMailFormTest extends tx_phpunit_testcase {
+class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_BackEnd_EventMailForm
+	 * @var tx_seminars_BackEnd_AbstractEventMailForm
 	 */
 	private $fixture;
 	/**
@@ -76,8 +76,7 @@ class tx_seminars_BackEnd_EventMailFormTest extends tx_phpunit_testcase {
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 
-		$this->testingFramework
-			= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->dummySysFolderPid
 			= $this->testingFramework->createSystemFolder();
@@ -108,7 +107,7 @@ class tx_seminars_BackEnd_EventMailFormTest extends tx_phpunit_testcase {
 			'organizers'
 		);
 
-		$this->fixture = new tx_seminars_tests_fixtures_TestingEventMailForm(
+		$this->fixture = new tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm(
 			$this->eventUid
 		);
 		$this->fixture->setDateFormat();
@@ -133,7 +132,7 @@ class tx_seminars_BackEnd_EventMailFormTest extends tx_phpunit_testcase {
 	public function testRenderThrowsExceptionForInvalidEventUid() {
 		$this->setExpectedException('Exception', 'There is no event with this UID.');
 
-		new tx_seminars_tests_fixtures_TestingEventMailForm(
+		new tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm(
 			$this->testingFramework->getAutoIncrement('tx_seminars_seminars')
 		);
 	}
@@ -674,7 +673,7 @@ class tx_seminars_BackEnd_EventMailFormTest extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->eventUid, array('title' => 'FooBar')
 		);
 
-		$fixture = new tx_seminars_tests_fixtures_TestingEventMailForm(
+		$fixture = new tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm(
 			$this->eventUid
 		);
 

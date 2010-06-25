@@ -32,7 +32,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class tx_seminars_BackEnd_ConfirmEventMailForm extends tx_seminars_BackEnd_EventMailForm  {
+class tx_seminars_BackEnd_ConfirmEventMailForm extends tx_seminars_BackEnd_AbstractEventMailForm  {
 	/**
 	 * @var string the action of this form
 	 */

@@ -25,14 +25,14 @@
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Class 'tx_seminars_BackEnd_EventMailForm' for the 'seminars' extension.
+ * Class tx_seminars_BackEnd_AbstractEventMailForm for the "seminars" extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-abstract class tx_seminars_BackEnd_EventMailForm {
+abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * @var tx_seminars_seminar the event which we want to list/show
 	 */
