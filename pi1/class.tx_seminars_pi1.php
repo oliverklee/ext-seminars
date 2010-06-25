@@ -2896,7 +2896,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 */
 	protected function createRegistrationForm() {
 		$registrationEditor = tx_oelib_ObjectFactory::make(
-			'tx_seminars_pi1_registrationEditor', $this->conf, $this->cObj
+			'tx_seminars_FrontEnd_RegistrationForm', $this->conf, $this->cObj
 		);
 		$registrationEditor->setSeminar($this->seminar);
 		$registrationEditor->setAction($this->piVars['action']);

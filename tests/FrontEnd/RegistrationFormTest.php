@@ -27,7 +27,8 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Testcase for the registrationEditor class in the 'seminars' extensions.
+ * Testcase for the tx_seminars_FrontEnd_RegistrationForm class in the
+ * "seminars" extensions.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -35,9 +36,9 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
+class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_pi1_registrationEditor
+	 * @var tx_seminars_FrontEnd_RegistrationForm
 	 */
 	private $fixture;
 
@@ -74,7 +75,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 		));
 		$this->seminarUid = $seminar->getUid();
 
-		$this->fixture = new tx_seminars_pi1_registrationEditor(
+		$this->fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
 				'pageToShowAfterUnregistrationPID' => $frontEndPageUid,
 				'sendParametersToThankYouAfterRegistrationPageUrl' => 1,
@@ -646,7 +647,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField(
 		$key
 	) {
-		$fixture = new tx_seminars_pi1_registrationEditor(
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array('showRegistrationFields' => ''),
 			$GLOBALS['TSFE']->cObj
 		);
@@ -673,7 +674,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	public function isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields(
 		$key, $isSelfContained
 	) {
-		$fixture = new tx_seminars_pi1_registrationEditor(
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array('showRegistrationFields' => $key),
 			$GLOBALS['TSFE']->cObj
 		);
@@ -691,7 +692,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function isFormFieldEnabled_ForEnabledRegisteredThemselvesFieldOnlyReturnsFalseForMoreSeats() {
-		$fixture = new tx_seminars_pi1_registrationEditor(
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array('showRegistrationFields' => 'registered_themselves'),
 			$GLOBALS['TSFE']->cObj
 		);
@@ -707,7 +708,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function isFormFieldEnabled_ForEnabledCompanyFieldReturnsTrueForBillingAddress() {
-		$fixture = new tx_seminars_pi1_registrationEditor(
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array('showRegistrationFields' => 'company, billing_address'),
 			$GLOBALS['TSFE']->cObj
 		);
@@ -750,7 +751,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getNumberOfEnteredPersonsForSelfRegistrationHiddenReturnsOne() {
-		$fixture = new tx_seminars_pi1_registrationEditor(
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
 				'showRegistrationFields' => 'seats',
 				'form.' => array(
@@ -991,7 +992,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function numberOfSeatsMatchesRegisteredPersonsForAttendeesNamesHiddenAndManySeatsReturnsTrue() {
-		$fixture = new tx_seminars_pi1_registrationEditor(
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
 				'showRegistrationFields' => 'seats',
 				'form.' => array(
@@ -1117,7 +1118,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getRegistrationDataForEnabledPriceFieldReturnsSelectedPriceValue() {
-		$fixture = new tx_seminars_pi1_registrationEditor(
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'showRegistrationFields' => 'price',
@@ -1148,7 +1149,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getRegistrationDataHtmlspecialcharsInterestsField() {
-		$fixture = new tx_seminars_pi1_registrationEditor(
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'showRegistrationFields' => 'interests',
@@ -1174,7 +1175,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getRegistrationDataReplacesCarriageReturnInInterestsFieldWithBr() {
-		$fixture = new tx_seminars_pi1_registrationEditor(
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'showRegistrationFields' => 'interests',
@@ -1200,7 +1201,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getRegistrationDataCanContainAttendeesNames() {
-		$fixture = new tx_seminars_pi1_registrationEditor(
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'showRegistrationFields' => 'attendees_names',
@@ -1230,7 +1231,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 			'', array('name' => 'Jane Doe')
 		);
 
-		$fixture = new tx_seminars_pi1_registrationEditor(
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1261,7 +1262,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 			'', array('name' => 'Jane Doe')
 		);
 
-		$fixture = new tx_seminars_pi1_registrationEditor(
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'showRegistrationFields' => 'attendees_names,registered_themselves',

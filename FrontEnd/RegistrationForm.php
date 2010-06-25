@@ -27,7 +27,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
 /**
- * Class 'tx_seminars_pi1_registrationEditor' for the 'seminars' extension.
+ * Class tx_seminars_FrontEnd_RegistrationForm for the "seminars" extension.
  *
  * This class is a controller which allows to create registrations on the FE.
  *
@@ -37,7 +37,7 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1_registrationEditor extends tx_seminars_FrontEnd_Editor {
+class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * same as class name
 	 *
@@ -1684,7 +1684,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_FrontEnd_Editor {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_registrationEditor.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_registrationEditor.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/RegistrationForm.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/RegistrationForm.php']);
 }
 ?>
