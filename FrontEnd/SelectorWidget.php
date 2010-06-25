@@ -27,7 +27,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
 /**
- * Class 'frontEndSelectorWidget' for the 'seminars' extension.
+ * Class tx_seminars_FrontEnd_SelectorWidget for the "seminars" extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -36,7 +36,7 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Mario Rimann <typo3-coding@rimann.org>
  */
-class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_FrontEnd_AbstractView {
+class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * @var tx_staticinfotables_pi1 needed for the list view to convert ISO
 	 *                              codes to country names and languages
@@ -662,7 +662,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_FrontEnd_Abstra
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndSelectorWidget.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndSelectorWidget.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/SelectorWidget.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/SelectorWidget.php']);
 }
 ?>

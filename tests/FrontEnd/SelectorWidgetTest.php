@@ -27,7 +27,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Testcase for the tx_seminars_pi1_frontEndSelectorWidget class in the
+ * Testcase for the tx_seminars_FrontEnd_SelectorWidget class in the
  * "seminars" extension.
  *
  * @package TYPO3
@@ -36,9 +36,9 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
+class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_pi1_frontEndSelectorWidget
+	 * @var tx_seminars_FrontEnd_SelectorWidget
 	 */
 	private $fixture;
 
@@ -57,7 +57,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
-		$this->fixture = new tx_seminars_pi1_frontEndSelectorWidget(
+		$this->fixture = new tx_seminars_FrontEnd_SelectorWidget(
 			array(
 				'isStaticTemplateLoaded' => 1,
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
@@ -112,7 +112,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 
 	public function testFixtureIsAFrontEndSelectorWidgetObject() {
 		$this->assertTrue(
-			$this->fixture instanceof tx_seminars_pi1_frontEndSelectorWidget
+			$this->fixture instanceof tx_seminars_FrontEnd_SelectorWidget
 		);
 	}
 
@@ -219,7 +219,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	public function testRemoveDummyOptionFromFormDataRemovesDummyOptionAtBeginningOfArray() {
 		$this->assertEquals(
 			array('CH', 'DE'),
-			tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
+			tx_seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
 				array(0, 'CH', 'DE')
 			)
 		);
@@ -228,7 +228,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	public function testRemoveDummyOptionFromFormDataRemovesDummyOptionInMiddleOfArray() {
 		$this->assertEquals(
 			array('CH', 'DE'),
-			tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
+			tx_seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
 				array('CH', 0, 'DE')
 			)
 		);
@@ -237,7 +237,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	public function testRemoveDummyOptionFromFormDataWithEmptyFormDataReturnsEmptyArray() {
 		$this->assertEquals(
 			array(),
-			tx_seminars_pi1_frontEndSelectorWidget::removeDummyOptionFromFormData(
+			tx_seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
 				array()
 			)
 		);
@@ -378,7 +378,7 @@ class tx_seminars_frontEndSelectorWidget_testcase extends tx_phpunit_testcase {
 	 */
 	public function itemsInSearchBoxAreSortedAlphabetically() {
 		$fixture = $this->getMock(
-			'tx_seminars_pi1_frontEndSelectorWidget',
+			'tx_seminars_FrontEnd_SelectorWidget',
 			array(
 				'initialize', 'hasSearchField', 'getEventTypeData',
 				'getLanguageData', 'getPlaceData', 'getCityData',
