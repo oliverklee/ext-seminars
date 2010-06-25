@@ -314,7 +314,7 @@ t3lib_extMgm::addPlugin(
 );
 
 if (TYPO3_MODE == 'BE') {
-	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_seminars_pi1_wizicon']
-		= t3lib_extMgm::extPath($_EXTKEY).'pi1/class.tx_seminars_pi1_wizicon.php';
+	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_seminars_FrontEnd_WizardIcon']
+		= t3lib_extMgm::extPath($_EXTKEY).'FrontEnd/WizardIcon.php';
 }
 ?>

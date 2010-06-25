@@ -101,7 +101,7 @@ return array(
 	'tx_seminars_pi1_frontendselectorwidget' => $extensionPath . 'pi1/class.tx_seminars_pi1_frontEndSelectorWidget.php',
 	'tx_seminars_frontend_abstractview' => $extensionPath . 'FrontEnd/AbstractView.php',
 	'tx_seminars_pi1_registrationeditor' => $extensionPath . 'pi1/class.tx_seminars_pi1_registrationEditor.php',
-	'tx_seminars_pi1_wizicon' => $extensionPath . 'pi1/class.tx_seminars_pi1_wizicon.php',
+	'tx_seminars_frontend_wizardicon' => $extensionPath . 'FrontEnd/WizardIcon.php',
 	'tx_seminars_pi2' => $extensionPath . 'pi2/class.tx_seminars_pi2.php',
 	'tx_seminars_backend_canceleventmailformtest' => $extensionPath . 'tests/BackEnd/CancelEventMailFormTest.php',
 	'tx_seminars_backend_confirmeventmailformtest' => $extensionPath . 'tests/BackEnd/ConfirmEventMailFormTest.php',
