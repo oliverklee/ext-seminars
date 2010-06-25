@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_pi1_frontEndRequirementsList' for the 'seminars' extension.
+ * Class tx_seminars_FrontEnd_RequirementsList for the "seminars" extension.
  *
  * This class is a view which creates the requirements lists for the front end.
  *
@@ -32,7 +32,7 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_pi1_frontEndRequirementsList extends tx_seminars_FrontEnd_AbstractView {
+class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * @var tx_seminars_seminar the event to build the requirements list for
 	 */
@@ -124,7 +124,7 @@ class tx_seminars_pi1_frontEndRequirementsList extends tx_seminars_FrontEnd_Abst
 		return $result;
 	}
 }
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndRequirementsList.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndRequirementsList.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/RequirementsList.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/RequirementsList.php']);
 }
 ?>

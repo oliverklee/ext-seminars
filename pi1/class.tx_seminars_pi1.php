@@ -2146,12 +2146,12 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Returns a pi1_frontEndRequirementsList object.
 	 *
-	 * @return tx_seminars_pi1_frontEndRequirementsList the object to build the
+	 * @return tx_seminars_FrontEnd_RequirementsList the object to build the
 	 *                                                  requirements list with
 	 */
 	private function createRequirementsList() {
 		return tx_oelib_ObjectFactory::make(
-			'tx_seminars_pi1_frontEndRequirementsList', $this->conf, $this->cObj
+			'tx_seminars_FrontEnd_RequirementsList', $this->conf, $this->cObj
 		);
 	}
 
