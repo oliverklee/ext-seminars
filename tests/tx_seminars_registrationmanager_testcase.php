@@ -63,7 +63,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	private $registrationPageUid = 0;
 
 	/**
-	 * @var tx_seminars_pi1 a front-end plugin
+	 * @var tx_seminars_FrontEnd_DefaultController a front-end plugin
 	 */
 	private $pi1 = null;
 
@@ -182,7 +182,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->registrationPageUid
 			= $this->testingFramework->createFrontEndPage();
 
-		$this->pi1 = new tx_seminars_pi1();
+		$this->pi1 = new tx_seminars_FrontEnd_DefaultController();
 
 		$this->pi1->init(
 			array(
@@ -306,7 +306,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			$this->pi1
 		);
 		$this->assertTrue(
-			$this->pi1 instanceof tx_seminars_pi1
+			$this->pi1 instanceof tx_seminars_FrontEnd_DefaultController
 		);
 	}
 
@@ -1962,7 +1962,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeSendsMailToAttendeesMailAdress() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -1982,7 +1982,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForAttendeeWithoutMailAdressNotSendsEmail() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registrationUid = $this->testingFramework->createRecord(
@@ -2017,7 +2017,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			[$hookClass] = $hookClass;
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2039,7 +2039,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			[$hookClass] = $hookClass;
 
 		$this->fixture->setConfigurationValue('sendConfirmation', FALSE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2053,7 +2053,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeMailSubjectContainsConfirmationSubject() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2073,7 +2073,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeMailBodyContainsEventTitle() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2094,7 +2094,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeMailSubjectContainsEventTitle() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2114,7 +2114,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeSetsOrganizerAsSender() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2139,7 +2139,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
 			);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2159,7 +2159,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForTextMailSetDoesNotHaveHtmlBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2179,7 +2179,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForTextMailSetHasNoUnreplacedMarkers() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2204,7 +2204,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
 			);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2236,7 +2236,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				'email' => 'foo@bar.com',
 			)
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -2267,7 +2267,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				'email' => 'foo@bar.com',
 			)
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -2296,7 +2296,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com')
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -2326,7 +2326,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				'email' => 'foo@bar.com',
 			)
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -2346,7 +2346,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeAppendsOrganizersFooterToMailBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2372,7 +2372,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			tx_seminars_seminar::STATUS_CONFIRMED
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -2398,7 +2398,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			tx_seminars_seminar::STATUS_CANCELED
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -2424,7 +2424,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			tx_seminars_seminar::STATUS_PLANNED
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -2452,7 +2452,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			tx_seminars_seminar::STATUS_PLANNED
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -2483,7 +2483,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2503,7 +2503,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeMailBodyCanContainAttendeesNames() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2525,7 +2525,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForPlainTextMailEnumeratesAttendeesNames() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2557,7 +2557,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2584,7 +2584,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2612,7 +2612,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2633,7 +2633,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForEventWithNoPlaceSendsWillBeAnnouncedMessage() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2662,7 +2662,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2701,7 +2701,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2728,7 +2728,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2757,7 +2757,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2786,7 +2786,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2815,7 +2815,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2844,7 +2844,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2873,7 +2873,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2912,7 +2912,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2949,7 +2949,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -2975,7 +2975,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -3003,7 +3003,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -3033,7 +3033,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -3062,7 +3062,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -3101,7 +3101,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -3133,7 +3133,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -3162,7 +3162,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
@@ -3195,7 +3195,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com')
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -3230,7 +3230,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com')
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -3265,7 +3265,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com', 'gender' => 0)
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -3300,7 +3300,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com', 'gender' => 1)
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -3327,7 +3327,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com')
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -3356,7 +3356,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com')
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
@@ -3387,7 +3387,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com')
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee(
@@ -3422,7 +3422,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com')
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee(
@@ -3457,7 +3457,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com')
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee(
@@ -3492,7 +3492,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com')
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee(
@@ -3527,7 +3527,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com')
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee(
@@ -3562,7 +3562,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			'fe_users', $registration->getFrontEndUser()->getUid(),
 			array('email' => 'foo@bar.com')
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee(
@@ -3605,7 +3605,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 			)
 		);
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$fixture->notifyAttendee(
@@ -3637,7 +3637,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$fixture->notifyAttendee($registration, $pi1);
@@ -3671,7 +3671,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$fixture->notifyAttendee($registration, $pi1);
@@ -3705,7 +3705,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('registration_queue' => 1)
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$fixture->notifyAttendee(
@@ -3738,7 +3738,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			array('registration_queue' => 1)
 		);
 
-		$pi1 = new tx_seminars_pi1();
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$fixture->notifyAttendee(
@@ -4345,7 +4345,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function createRegistrationSavesRegistration() {
 		$this->createAndLogInFrontEndUser();
 
-		$plugin = new tx_seminars_pi1();
+		$plugin = new tx_seminars_FrontEnd_DefaultController();
 		$plugin->cObj = $GLOBALS['TSFE']->cObj;
 		$fixture = $this->getMock(
 			'tx_seminars_registrationmanager',
@@ -4383,7 +4383,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function createRegistrationReturnsRegistration() {
 		$this->createAndLogInFrontEndUser();
 
-		$plugin = new tx_seminars_pi1();
+		$plugin = new tx_seminars_FrontEnd_DefaultController();
 		$plugin->cObj = $GLOBALS['TSFE']->cObj;
 		$fixture = $this->getMock(
 			'tx_seminars_registrationmanager',
@@ -4426,7 +4426,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->createAndLogInFrontEndUser();
 
-		$plugin = new tx_seminars_pi1();
+		$plugin = new tx_seminars_FrontEnd_DefaultController();
 		$plugin->cObj = $GLOBALS['TSFE']->cObj;
 		$fixture = $this->getMock(
 			'tx_seminars_registrationmanager',
@@ -4470,7 +4470,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
 			[$hookClass] = $hookClass;
 
-		$plugin = new tx_seminars_pi1();
+		$plugin = new tx_seminars_FrontEnd_DefaultController();
 		$plugin->cObj = $GLOBALS['TSFE']->cObj;
 		$fixture = $this->getMock(
 			'tx_seminars_registrationmanager',

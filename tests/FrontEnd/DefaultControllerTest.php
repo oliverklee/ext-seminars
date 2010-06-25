@@ -25,7 +25,8 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the pi1 class in the 'seminars' extension.
+ * Testcase for the tx_seminars_FrontEnd_DefaultController class in the
+ * "seminars" extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -33,9 +34,9 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
+class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_pi1
+	 * @var tx_seminars_FrontEnd_DefaultController
 	 */
 	private $fixture;
 	/**
@@ -102,7 +103,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture = new tx_seminars_pi1();
+		$this->fixture = new tx_seminars_FrontEnd_DefaultController();
 		$this->fixture->init(
 			array(
 				'isStaticTemplateLoaded' => 1,
@@ -266,11 +267,11 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 * @return string the class name of the subclass, will not be empty
 	 */
 	private function createAccessibleProxyClass() {
-		$testingClassName = 'tx_seminars_pi1_Testing';
+		$testingClassName = 'tx_seminars_FrontEnd_TestingDefaultController';
 
 		if (!class_exists($testingClassName)) {
 			eval(
-				'class ' . $testingClassName . ' extends tx_seminars_pi1 {' .
+				'class ' . $testingClassName . ' extends tx_seminars_FrontEnd_DefaultController {' .
 				'public function setSeminar(tx_seminars_seminar $seminar = null) {' .
 				'  parent::setSeminar($seminar);' .
 				'}' .
@@ -501,7 +502,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$instance = new $className();
 
 		$this->assertTrue(
-			$instance instanceof tx_seminars_pi1
+			$instance instanceof tx_seminars_FrontEnd_DefaultController
 		);
 	}
 
@@ -3435,7 +3436,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testListViewSortedByCategoryWithoutStaticTemplateDoesNotCrash() {
-		$fixture = new tx_seminars_pi1();
+		$fixture = new tx_seminars_FrontEnd_DefaultController();
 		$fixture->init(
 			array('sortListViewByCategory' => 1)
 		);
@@ -6742,7 +6743,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function eventsListNotCallsProcessHideUnhide() {
 		$fixture = $this->getMock(
-			'tx_seminars_pi1', array('processHideUnhide')
+			'tx_seminars_FrontEnd_DefaultController', array('processHideUnhide')
 		);
 		$fixture->expects($this->never())->method('processHideUnhide');
 
@@ -6759,7 +6760,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function myEnteredEventsListCallsProcessHideUnhide() {
 		$fixture = $this->getMock(
-			'tx_seminars_pi1', array('processHideUnhide')
+			'tx_seminars_FrontEnd_DefaultController', array('processHideUnhide')
 		);
 		$fixture->expects($this->once())->method('processHideUnhide');
 
@@ -6776,7 +6777,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function myManagedEventsListCallsProcessHideUnhide() {
 		$fixture = $this->getMock(
-			'tx_seminars_pi1', array('processHideUnhide')
+			'tx_seminars_FrontEnd_DefaultController', array('processHideUnhide')
 		);
 		$fixture->expects($this->once())->method('processHideUnhide');
 
@@ -7262,7 +7263,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function initListViewForDefaultListLimitsListByAdditionalParameters() {
 		$fixture = $this->getMock(
-			'tx_seminars_pi1', array('limitForAdditionalParameters')
+			'tx_seminars_FrontEnd_DefaultController', array('limitForAdditionalParameters')
 		);
 		$fixture->expects($this->once())->method('limitForAdditionalParameters');
 
@@ -7276,7 +7277,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function initListViewForTopicListLimitsListByAdditionalParameters() {
 		$fixture = $this->getMock(
-			'tx_seminars_pi1', array('limitForAdditionalParameters')
+			'tx_seminars_FrontEnd_DefaultController', array('limitForAdditionalParameters')
 		);
 		$fixture->expects($this->once())->method('limitForAdditionalParameters');
 
@@ -7290,7 +7291,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function initListViewForMyEventsListNotLimitsListByAdditionalParameters() {
 		$fixture = $this->getMock(
-			'tx_seminars_pi1', array('limitForAdditionalParameters')
+			'tx_seminars_FrontEnd_DefaultController', array('limitForAdditionalParameters')
 		);
 		$fixture->expects($this->never())->method('limitForAdditionalParameters');
 
@@ -7425,7 +7426,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$getsHidden, $whatToDisplay, $listPid, $vipListPid
 	) {
 		$fixture = $this->getMock(
-			'tx_seminars_pi1',
+			'tx_seminars_FrontEnd_DefaultController',
 			array('isRegistrationEnabled', 'isLoggedIn', 'hideColumns')
 		);
 		$fixture->expects($this->any())->method('isRegistrationEnabled')
@@ -7464,7 +7465,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$getsHidden, $whatToDisplay, $listPid, $vipListPid
 	) {
 		$fixture = $this->getMock(
-			'tx_seminars_pi1',
+			'tx_seminars_FrontEnd_DefaultController',
 			array('isRegistrationEnabled', 'isLoggedIn', 'hideColumns')
 		);
 		$fixture->expects($this->any())->method('isRegistrationEnabled')
@@ -7499,7 +7500,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$getsHidden, $whatToDisplay, $listPid, $vipListPid
 	) {
 		$fixture = $this->getMock(
-			'tx_seminars_pi1',
+			'tx_seminars_FrontEnd_DefaultController',
 			array('isRegistrationEnabled', 'isLoggedIn', 'hideColumns')
 		);
 		$fixture->expects($this->any())->method('isRegistrationEnabled')

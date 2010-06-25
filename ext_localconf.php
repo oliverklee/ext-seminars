@@ -49,9 +49,11 @@ t3lib_extMgm::addUserTSConfig('
 $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:seminars/class.tx_seminars_tcemain.php:tx_seminars_tcemainprocdm';
 
 t3lib_extMgm::addPItoST43(
-	$_EXTKEY, 'pi1/class.tx_seminars_pi1.php', '_pi1', 'list_type', 0
+	$_EXTKEY, 'FrontEnd/DefaultController.php', '_pi1', 'list_type', 0
 );
-
+t3lib_extMgm::addTypoScript($_EXTKEY, 'setup', '
+	plugin.' . t3lib_extMgm::getCN($_EXTKEY) . '_pi1.userFunc = tx_seminars_FrontEnd_DefaultController->main
+', 43);
 t3lib_extMgm::addTypoScript($_EXTKEY, 'setup','
 	tt_content.shortcut.20.0.conf.tx_seminars_seminars = < plugin.'.t3lib_extMgm::getCN($_EXTKEY).'_pi1
 	tt_content.shortcut.20.0.conf.tx_seminars_seminars.CMD = singleView

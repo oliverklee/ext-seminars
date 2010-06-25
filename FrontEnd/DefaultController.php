@@ -36,7 +36,7 @@ include_once(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTabl
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1 extends tx_oelib_templatehelper {
+class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * @var string same as class name
 	 */
@@ -3445,7 +3445,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/DefaultController.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/DefaultController.php']);
 }
 ?>

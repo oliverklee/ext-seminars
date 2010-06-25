@@ -253,7 +253,7 @@ class tx_seminars_speaker_testcase extends tx_phpunit_testcase {
 	 *
 
 	public function testGetDescription() {
-		$plugin = new tx_seminars_pi1();
+		$plugin = new tx_seminars_FrontEnd_DefaultController();
 		$plugin->init(array());
 
 		$this->assertEquals(

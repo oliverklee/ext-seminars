@@ -36,7 +36,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_pi1
+	 * @var tx_seminars_registrationBagBuilder
 	 */
 	private $fixture;
 	/**

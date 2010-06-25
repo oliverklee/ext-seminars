@@ -59,7 +59,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	private $now;
 
 	/**
-	 * @var tx_seminars_pi1
+	 * @var tx_seminars_FrontEnd_DefaultController
 	 */
 	private $pi1;
 
@@ -122,7 +122,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	private function createPi1($detailPageUid = 0) {
 		$this->testingFramework->createFakeFrontEnd();
 
-		$this->pi1 = new tx_seminars_pi1();
+		$this->pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$this->pi1->init(
 			array(
 				'isStaticTemplateLoaded' => 1,
@@ -418,7 +418,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->createPi1();
 
 		$this->assertTrue(
-			$this->pi1 instanceof tx_seminars_pi1
+			$this->pi1 instanceof tx_seminars_FrontEnd_DefaultController
 		);
 	}
 
