@@ -37,11 +37,6 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	/**
-	 * @var string path to this script relative to the extension directory
-	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_eventEditor.php';
-
-	/**
 	 * @var string stores a validation error message if there was one
 	 */
 	private $validationError = '';
@@ -1525,7 +1520,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			if ((trim($formData[$key]) == '') && self::isPlaceFieldRequired($key)
 			) {
 				$validationErrors[] = $formidable->getLLLabel(
-					'LLL:EXT:seminars/pi1/locallang.xml:message_empty' .
+					'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_empty' .
 						ucfirst($key)
 				);
 			}
@@ -1535,7 +1530,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			&& self::isPlaceFieldRequired($key)
 		) {
 			$validationErrors[] = $formidable->getLLLabel(
-				'LLL:EXT:seminars/pi1/locallang.xml:message_empty' . ucfirst($key)
+				'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_empty' . ucfirst($key)
 			);
 		}
 
@@ -1833,7 +1828,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$validationErrors = array();
 		if (trim($formData['title']) == '') {
 			$validationErrors[] = $formidable->getLLLabel(
-				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyName'
+				'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_emptyName'
 			);
 		}
 
@@ -2082,7 +2077,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$validationErrors = array();
 		if (trim($formData['title']) == '') {
 			$validationErrors[] = $formidable->getLLLabel(
-				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyTitle'
+				'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_emptyTitle'
 			);
 		}
 
@@ -2294,7 +2289,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 		$validationErrors = array();
 		if (trim($formData['title']) == '') {
 			$validationErrors[] = $formidable->getLLLabel(
-				'LLL:EXT:seminars/pi1/locallang.xml:message_emptyTitle'
+				'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_emptyTitle'
 			);
 		}
 		if (preg_match('/^(\d*)$/', trim($formData['minimum_age']))
@@ -2306,14 +2301,14 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 			if (($minimumAge > 0) && ($maximumAge > 0)) {
 				if ($minimumAge > $maximumAge) {
 					$validationErrors[] = $formidable->getLLLabel(
-						'LLL:EXT:seminars/pi1/locallang.xml:' .
+						'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:' .
 							'message_targetGroupMaximumAgeSmallerThanMinimumAge'
 					);
 				}
 			}
 		} else {
 			$validationErrors[] = $formidable->getLLLabel(
-				'LLL:EXT:seminars/pi1/locallang.xml:message_noTargetGroupAgeNumber'
+				'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_noTargetGroupAgeNumber'
 			);
 		}
 

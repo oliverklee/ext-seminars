@@ -37,11 +37,6 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_pi1_frontEndEventHeadline extends tx_seminars_pi1_frontEndView {
 	/**
-	 * @var string path to this script relative to the extension dir
-	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_frontEndEventHeadline.php';
-
-	/**
 	 * Creates the event headline, consisting of the event title and date.
 	 *
 	 * @return string HTML code of the event headline, will be empty if

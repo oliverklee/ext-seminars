@@ -3,7 +3,7 @@
 	<meta type="array">
 		<description>Locallang labels for tx_seminars/pi1</description>
 		<type>module</type>
-		<fileId>EXT:seminars/pi1/locallang.xml</fileId>
+		<fileId>EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml</fileId>
 		<labelContext type="array">
 		</labelContext>
 	</meta>

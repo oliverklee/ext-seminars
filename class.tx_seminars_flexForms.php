@@ -49,7 +49,7 @@ class tx_seminars_flexForms {
 	public function __construct() {
 		$this->language = t3lib_div::makeInstance('language');
 		$this->language->init($GLOBALS['BE_USER']->uc['lang']);
-		$this->language->includeLLFile('EXT:seminars/pi1/locallang.xml');
+		$this->language->includeLLFile('EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml');
 	}
 
 	/**

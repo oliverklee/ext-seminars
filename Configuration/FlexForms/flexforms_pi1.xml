@@ -6,62 +6,62 @@
 		<sDEF>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_general</sheetTitle>
+					<sheetTitle>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.sheet_general</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<what_to_display>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.what_to_display</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.what_to_display</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.seminar_list</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.seminar_list</numIndex>
 										<numIndex index="1">seminar_list</numIndex>
 									</numIndex>
 									<numIndex index="6" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.topic_list</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.topic_list</numIndex>
 										<numIndex index="1">topic_list</numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.my_events</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.my_events</numIndex>
 										<numIndex index="1">my_events</numIndex>
 									</numIndex>
 									<numIndex index="5" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.my_vip_events</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.my_vip_events</numIndex>
 										<numIndex index="1">my_vip_events</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.seminar_registration</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.seminar_registration</numIndex>
 										<numIndex index="1">seminar_registration</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.list_registrations</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.list_registrations</numIndex>
 										<numIndex index="1">list_registrations</numIndex>
 									</numIndex>
 									<numIndex index="4" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.list_vip_registrations</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.list_vip_registrations</numIndex>
 										<numIndex index="1">list_vip_registrations</numIndex>
 									</numIndex>
 									<numIndex index="7" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.event_editor</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.event_editor</numIndex>
 										<numIndex index="1">edit_event</numIndex>
 									</numIndex>
 									<numIndex index="8" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.my_entered_events</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.my_entered_events</numIndex>
 										<numIndex index="1">my_entered_events</numIndex>
 									</numIndex>
 									<numIndex index="9" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.countdown</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.countdown</numIndex>
 										<numIndex index="1">countdown</numIndex>
 									</numIndex>
 									<numIndex index="10" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.category_list</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.category_list</numIndex>
 										<numIndex index="1">category_list</numIndex>
 									</numIndex>
 									<numIndex index="11" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.event_headline</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.event_headline</numIndex>
 										<numIndex index="1">event_headline</numIndex>
 									</numIndex>
 								</items>
@@ -73,7 +73,7 @@
 					<listPID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.listPID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.listPID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -88,7 +88,7 @@
 					<detailPID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.detailPID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.detailPID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -103,7 +103,7 @@
 					<myEventsPID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.myEventsPID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.myEventsPID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -118,7 +118,7 @@
 					<registerPID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.registerPID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.registerPID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -133,7 +133,7 @@
 					<loginPID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.loginPID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.loginPID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -148,7 +148,7 @@
 					<registrationsListPID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.registrationsListPID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.registrationsListPID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -163,7 +163,7 @@
 					<registrationsVipListPID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.registrationsVipListPID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.registrationsVipListPID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -178,7 +178,7 @@
 					<salutation>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.salutation</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.salutation</label>
 							<config>
 								<type>select</type>
 								<items type="array">
@@ -187,11 +187,11 @@
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.formal</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.formal</numIndex>
 										<numIndex index="1">formal</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.informal</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.informal</numIndex>
 										<numIndex index="1">informal</numIndex>
 									</numIndex>
 								</items>
@@ -202,7 +202,7 @@
 					</salutation>
 					<limitFileDownloadToAttendees>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitFileDownloadToAttendees</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.limitFileDownloadToAttendees</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -266,54 +266,54 @@
 		<s_listView>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_list_view</sheetTitle>
+					<sheetTitle>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.sheet_list_view</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<displaySearchFormFields>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.displaySearchFormFields</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.displaySearchFormFields</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.type</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.type</numIndex>
 										<numIndex index="1">event_type</numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.language</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.language</numIndex>
 										<numIndex index="1">language</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.country</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.country</numIndex>
 										<numIndex index="1">country</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.city</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.city</numIndex>
 										<numIndex index="1">city</numIndex>
 									</numIndex>
 									<numIndex index="4" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.place</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.place</numIndex>
 										<numIndex index="1">place</numIndex>
 									</numIndex>
 									<numIndex index="5" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.organizer</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.organizer</numIndex>
 										<numIndex index="1">organizer</numIndex>
 									</numIndex>
 									<numIndex index="6" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.date</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.date</numIndex>
 										<numIndex index="1">date</numIndex>
 									</numIndex>
 									<numIndex index="7" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.age</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.age</numIndex>
 										<numIndex index="1">age</numIndex>
 									</numIndex>
 									<numIndex index="8" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.price</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.price</numIndex>
 										<numIndex index="1">price</numIndex>
 									</numIndex>
 									<numIndex index="9" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.searchForm.textField</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.textField</numIndex>
 										<numIndex index="1">full_text_search</numIndex>
 									</numIndex>
 								</items>
@@ -325,12 +325,12 @@
 					</displaySearchFormFields>
 					<numberOfYearsInDateFilter>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.numberOfYearsInDateFilter</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.numberOfYearsInDateFilter</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.fromTsSetup</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.fromTsSetup</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
@@ -361,7 +361,7 @@
 					</numberOfYearsInDateFilter>
 					<limitListViewToEventTypes>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToEventTypes</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.limitListViewToEventTypes</label>
 							<config>
 								<type>select</type>
 								<itemTable>tx_seminars_event_types</itemTable>
@@ -373,7 +373,7 @@
 					</limitListViewToEventTypes>
 					<limitListViewToCategories>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToCategories</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.limitListViewToCategories</label>
 							<config>
 								<type>select</type>
 								<itemTable>tx_seminars_categories</itemTable>
@@ -385,7 +385,7 @@
 					</limitListViewToCategories>
 					<limitListViewToPlaces>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToPlaces</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.limitListViewToPlaces</label>
 							<config>
 								<type>select</type>
 								<itemTable>tx_seminars_sites</itemTable>
@@ -397,7 +397,7 @@
 					</limitListViewToPlaces>
 					<limitListViewToOrganizers>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.limitListViewToOrganizers</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.limitListViewToOrganizers</label>
 							<config>
 								<type>select</type>
 								<itemTable>tx_seminars_organizers</itemTable>
@@ -409,7 +409,7 @@
 					</limitListViewToOrganizers>
 					<showOnlyEventsWithVacancies>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showOnlyEventsWithVacancies</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.showOnlyEventsWithVacancies</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -417,7 +417,7 @@
 					</showOnlyEventsWithVacancies>
 					<mayManagersEditTheirEvents>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.mayManagersEditTheirEvents</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.mayManagersEditTheirEvents</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -426,24 +426,24 @@
 					<categoriesInListView>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.categoriesInListView</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.categoriesInListView</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.fromTsSetup</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.fromTsSetup</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.iconAndText</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.iconAndText</numIndex>
 										<numIndex index="1">both</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.iconOnly</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.iconOnly</numIndex>
 										<numIndex index="1">icon</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.textOnly</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.textOnly</numIndex>
 										<numIndex index="1">text</numIndex>
 									</numIndex>
 								</items>
@@ -458,13 +458,13 @@
 		<s_singleView>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_single_view</sheetTitle>
+					<sheetTitle>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.sheet_single_view</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<showOwnerDataInSingleView>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showOwnerDataInSingleView</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.showOwnerDataInSingleView</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -476,13 +476,13 @@
 		<s_template_special>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_template_and_special</sheetTitle>
+					<sheetTitle>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.sheet_template_and_special</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<templateFile>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.templateFile</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.templateFile</label>
 							<config>
 								<type>group</type>
 								<internal_type>file</internal_type>
@@ -498,7 +498,7 @@
 					<showSingleEvent>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showSingleEvent</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.showSingleEvent</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -512,7 +512,7 @@
 					</showSingleEvent>
 					<timeframeInList>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.timeframeInList</label>
 							<config>
 								<type>select</type>
 								<items type="array">
@@ -521,35 +521,35 @@
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList1</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.timeframeInList1</numIndex>
 										<numIndex index="1">all</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList2</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.timeframeInList2</numIndex>
 										<numIndex index="1">past</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList3</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.timeframeInList3</numIndex>
 										<numIndex index="1">pastAndCurrent</numIndex>
 									</numIndex>
 									<numIndex index="4" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList4</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.timeframeInList4</numIndex>
 										<numIndex index="1">current</numIndex>
 									</numIndex>
 									<numIndex index="5" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList5</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.timeframeInList5</numIndex>
 										<numIndex index="1">currentAndUpcoming</numIndex>
 									</numIndex>
 									<numIndex index="6" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList6</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.timeframeInList6</numIndex>
 										<numIndex index="1">upcoming</numIndex>
 									</numIndex>
 									<numIndex index="7" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList7</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.timeframeInList7</numIndex>
 										<numIndex index="1">deadlineNotOver</numIndex>
 									</numIndex>
 									<numIndex index="8" type="array">
-										<numIndex index="0">LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.timeframeInList8</numIndex>
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.timeframeInList8</numIndex>
 										<numIndex index="1">today</numIndex>
 									</numIndex>
 								</items>
@@ -561,7 +561,7 @@
 					<defaultEventVipsFeGroupID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.defaultEventVipsFeGroupID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.defaultEventVipsFeGroupID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -575,7 +575,7 @@
 					</defaultEventVipsFeGroupID>
 					<hideColumns>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hideColumns</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.hideColumns</label>
 							<config>
 								<type>input</type>
 								<size>45</size>
@@ -584,7 +584,7 @@
 					</hideColumns>
 					<hideFields>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hideFields</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.hideFields</label>
 							<config>
 								<type>input</type>
 								<size>45</size>
@@ -593,7 +593,7 @@
 					</hideFields>
 					<showEmptyEntryInOptionLists>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showEmptyEntryInOptionLists</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.showEmptyEntryInOptionLists</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -601,7 +601,7 @@
 					</showEmptyEntryInOptionLists>
 					<hidePageBrowser>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hidePageBrowser</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.hidePageBrowser</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -609,7 +609,7 @@
 					</hidePageBrowser>
 					<hideCanceledEvents>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.hideCanceledEvents</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.hideCanceledEvents</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -617,7 +617,7 @@
 					</hideCanceledEvents>
 					<sortListViewByCategory>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sortListViewByCategory</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.sortListViewByCategory</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -625,7 +625,7 @@
 					</sortListViewByCategory>
 					<generalPriceInList>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.generalPriceInList</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.generalPriceInList</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -633,7 +633,7 @@
 					</generalPriceInList>
 					<generalPriceInSingle>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.generalPriceInSingle</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.generalPriceInSingle</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -641,7 +641,7 @@
 					</generalPriceInSingle>
 					<omitDateIfSameAsPrevious>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.omitDateIfSameAsPrevious</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.omitDateIfSameAsPrevious</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -649,7 +649,7 @@
 					</omitDateIfSameAsPrevious>
 					<eventFieldsOnRegistrationPage>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.eventFieldsOnRegistrationPage</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.eventFieldsOnRegistrationPage</label>
 							<config>
 								<type>select</type>
 								<items type="array">
@@ -687,7 +687,7 @@
 					</eventFieldsOnRegistrationPage>
 					<showRegistrationFields>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showRegistrationFields</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.showRegistrationFields</label>
 							<config>
 								<type>input</type>
 								<size>45</size>
@@ -697,7 +697,7 @@
 					</showRegistrationFields>
 					<showSpeakerDetails>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showSpeakerDetails</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.showSpeakerDetails</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -705,7 +705,7 @@
 					</showSpeakerDetails>
 					<showSiteDetails>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showSiteDetails</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.showSiteDetails</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -717,12 +717,12 @@
 		<s_registrationsListView>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_registrationsListView</sheetTitle>
+					<sheetTitle>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.sheet_registrationsListView</sheetTitle>
 				</TCEforms>
 				<el>
 					<showFeUserFieldsInRegistrationsList>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showFeUserFieldsInRegistrationsList</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.showFeUserFieldsInRegistrationsList</label>
 							<config>
 								<type>select</type>
 								<renderMode>checkbox</renderMode>
@@ -733,7 +733,7 @@
 					</showFeUserFieldsInRegistrationsList>
 					<showRegistrationFieldsInRegistrationList>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.showRegistrationFieldsInRegistrationList</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.showRegistrationFieldsInRegistrationList</label>
 							<config>
 								<type>select</type>
 								<renderMode>checkbox</renderMode>
@@ -748,14 +748,14 @@
 		<s_registration>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_registration</sheetTitle>
+					<sheetTitle>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.sheet_registration</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<numberOfClicksForRegistration>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.numberOfClicksForRegistration</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.numberOfClicksForRegistration</label>
 							<config>
 								<type>select</type>
 								<items type="array">
@@ -780,7 +780,7 @@
 					<thankYouAfterRegistrationPID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.thankYouAfterRegistrationPID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.thankYouAfterRegistrationPID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -794,7 +794,7 @@
 					</thankYouAfterRegistrationPID>
 					<sendParametersToThankYouAfterRegistrationPageUrl>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -817,7 +817,7 @@
 					</pageToShowAfterUnregistrationPID>
 					<sendParametersToPageToShowAfterUnregistrationUrl>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -829,14 +829,14 @@
 		<s_fe_editing>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.sheet_fe_editing</sheetTitle>
+					<sheetTitle>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.sheet_fe_editing</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<eventEditorFeGroupID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.eventEditorFeGroupID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.eventEditorFeGroupID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -851,7 +851,7 @@
 					<eventEditorPID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.eventEditorPID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.eventEditorPID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -866,7 +866,7 @@
 					<createEventsPID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.createEventsPID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.createEventsPID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -881,7 +881,7 @@
 					<eventSuccessfullySavedPID>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.eventSuccessfullySavedPID</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.eventSuccessfullySavedPID</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -895,7 +895,7 @@
 					</eventSuccessfullySavedPID>
 					<allowedExtensionsForUpload>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowedExtensionsForUpload</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.allowedExtensionsForUpload</label>
 							<config>
 								<type>input</type>
 								<size>100</size>
@@ -906,7 +906,7 @@
 					<displayFrontEndEditorFields>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.displayFrontEndEditorFields</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.displayFrontEndEditorFields</label>
 							<config>
 								<type>select</type>
 								<items type="array">
@@ -1080,7 +1080,7 @@
 					<requiredFrontEndEditorFields>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.requiredFrontEndEditorFields</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.requiredFrontEndEditorFields</label>
 							<config>
 								<type>select</type>
 								<items type="array">
@@ -1253,7 +1253,7 @@
 					</requiredFrontEndEditorFields>
 					<allowFrontEndEditingOfSpeakers>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfSpeakers</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfSpeakers</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -1261,7 +1261,7 @@
 					</allowFrontEndEditingOfSpeakers>
 					<allowFrontEndEditingOfPlaces>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfPlaces</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfPlaces</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -1269,7 +1269,7 @@
 					</allowFrontEndEditingOfPlaces>
 					<allowFrontEndEditingOfCheckboxes>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfCheckboxes</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfCheckboxes</label>
 							<config>
 								<type>check</type>
 							</config>
@@ -1277,7 +1277,7 @@
 					</allowFrontEndEditingOfCheckboxes>
 					<allowFrontEndEditingOfTargetGroups>
 						<TCEforms>
-							<label>LLL:EXT:seminars/pi1/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfTargetGroups</label>
+							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.allowFrontEndEditingOfTargetGroups</label>
 							<config>
 								<type>check</type>
 							</config>

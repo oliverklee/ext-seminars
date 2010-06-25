@@ -37,11 +37,6 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_pi1_frontEndCountdown extends tx_seminars_pi1_frontEndView {
 	/**
-	 * @var string path to this script relative to the extension dir
-	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_frontEndCountdown.php';
-
-	/**
 	 * @var tx_seminars_seminar the seminar for which we want to show the
 	 *                          countdown
 	 */
@@ -89,7 +84,7 @@ class tx_seminars_pi1_frontEndCountdown extends tx_seminars_pi1_frontEndView {
 			tx_seminars_seminar::STATUS_CANCELED .
 			tx_oelib_db::enableFields('tx_seminars_seminars') .
 			' AND tx_seminars_seminars.object_type != ' .
-			tx_seminars_Model_Event::TYPE_TOPIC . 
+			tx_seminars_Model_Event::TYPE_TOPIC .
 			' AND tx_seminars_seminars.begin_date > ' . $now;
 
 		if ($this->testMode) {

@@ -37,11 +37,6 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEndView {
 	/**
-	 * @var string path to this script relative to the extension dir
-	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_frontEndRegistrationsList.php';
-
-	/**
 	 * @var tx_seminars_seminar the seminar of which we want to list the
 	 *                          registrations
 	 */

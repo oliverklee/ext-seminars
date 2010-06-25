@@ -44,11 +44,6 @@ class tx_seminars_pi1_frontEndPublishEvent extends tx_oelib_templatehelper {
 	public $prefixId = 'tx_seminars_publication';
 
 	/**
-	 * @var string path to this script relative to the extension dir
-	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_frontEndPublishEvent.php';
-
-	/**
 	 * @var string the extension key
 	 */
 	public $extKey = 'seminars';

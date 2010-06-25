@@ -46,13 +46,6 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	public $prefixId = 'tx_seminars_registration_editor';
 
 	/**
-	 * path to this script relative to the extension dir
-	 *
-	 * @var string
-	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_registrationEditor.php';
-
-	/**
 	 * the names of the form fields to show (with the keys being the same as
 	 * the values for performance reasons)
 	 *

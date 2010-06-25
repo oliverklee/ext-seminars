@@ -34,11 +34,6 @@
  */
 class tx_seminars_pi1_frontEndRequirementsList extends tx_seminars_pi1_frontEndView {
 	/**
-	 * @var string the path to this script relative to the extension dir
-	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_frontEndRequirementsList.php';
-
-	/**
 	 * @var tx_seminars_seminar the event to build the requirements list for
 	 */
 	private $event = null;

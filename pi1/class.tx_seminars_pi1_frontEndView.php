@@ -39,6 +39,13 @@ abstract class tx_seminars_pi1_frontEndView extends tx_oelib_templatehelper {
 	public $prefixId = 'tx_seminars_pi1';
 
 	/**
+	 * faking $this->scriptRelPath so the locallang.xml file is found
+	 *
+	 * @var string
+	 */
+	public $scriptRelPath = 'Resources/Private/Language/FrontEnd/locallang.xml';
+
+	/**
 	 * @var string the extension key
 	 */
 	public $extKey = 'seminars';

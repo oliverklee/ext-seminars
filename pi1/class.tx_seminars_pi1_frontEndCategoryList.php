@@ -35,11 +35,6 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  */
 class tx_seminars_pi1_frontEndCategoryList extends tx_seminars_pi1_frontEndView {
 	/**
-	 * @var string path to this script relative to the extension dir
-	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_pi1_frontEndCategoryList.php';
-
-	/**
 	 * Creates a HTML list of categories.
 	 *
 	 * This list is limited to categories for which there are events in the

@@ -41,10 +41,14 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * @var string same as class name
 	 */
 	public $prefixId = 'tx_seminars_pi1';
+
 	/**
-	 * @var string path to this script relative to the extension dir
+	 * faking $this->scriptRelPath so the locallang.xml file is found
+	 *
+	 * @var string
 	 */
-	public $scriptRelPath = 'pi1/class.tx_seminars_pi1.php';
+	public $scriptRelPath = 'Resources/Private/Language/FrontEnd/locallang.xml';
+
 	/**
 	 * @var string the extension key
 	 */
