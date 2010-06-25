@@ -25,16 +25,17 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the 'frontEndEventHeadline' class in the 'seminars' extension.
+ * Testcase for the tx_seminars_FrontEnd_EventHeadline class in the "seminars"
+ * extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_frontEndEventHeadline_testcase extends tx_phpunit_testcase {
+class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_pi1_frontEndEventHeadline
+	 * @var tx_seminars_FrontEnd_EventHeadline
 	 */
 	private $fixture;
 
@@ -68,7 +69,7 @@ class tx_seminars_frontEndEventHeadline_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture = new tx_seminars_pi1_frontEndEventHeadline(
+		$this->fixture = new tx_seminars_FrontEnd_EventHeadline(
 			array(
 				'isStaticTemplateLoaded' => 1,
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',

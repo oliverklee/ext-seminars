@@ -311,7 +311,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				break;
 			case 'event_headline':
 				$eventHeadline = tx_oelib_ObjectFactory::make(
-					'tx_seminars_pi1_frontEndEventHeadline',
+					'tx_seminars_FrontEnd_EventHeadline',
 					$this->conf, $this->cObj
 				);
 				$result = $eventHeadline->render();

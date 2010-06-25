@@ -25,7 +25,7 @@
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Class 'eventHeadline' for the 'seminars' extension.
+ * Class tx_seminars_FrontEnd_EventHeadline for the "seminars" extension.
  *
  * This class displayes an event headline consisting of the event title and
  * date.
@@ -35,7 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_pi1_frontEndEventHeadline extends tx_seminars_FrontEnd_AbstractView {
+class tx_seminars_FrontEnd_EventHeadline extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Creates the event headline, consisting of the event title and date.
 	 *
@@ -67,7 +67,7 @@ class tx_seminars_pi1_frontEndEventHeadline extends tx_seminars_FrontEnd_Abstrac
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndEventHeadline.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndEventHeadline.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/EventHeadline.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/FrontEnd/EventHeadline.php']);
 }
 ?>
