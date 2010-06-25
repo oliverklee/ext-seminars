@@ -90,7 +90,9 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 				'',
 				t3lib_FlashMessage::INFO
 			);
-			$this->content = $message->render();
+			t3lib_FlashMessageQueue::addMessage($message);
+
+			$this->content = t3lib_FlashMessageQueue::renderFlashMessages();
 			return $this->outputContent();
 		}
 
@@ -105,12 +107,15 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 				'',
 				t3lib_FlashMessage::WARNING
 			);
-			$this->content = $message->render();
+			t3lib_FlashMessageQueue::addMessage($message);
+
+			$this->content = t3lib_FlashMessageQueue::renderFlashMessages();
 			return $this->outputContent();
 		}
 
 		$this->getPageRenderer()->addJsFile(
-			t3lib_extMgm::extRelPath('seminars') . 'Resources/Public/JavaScript/BackEndExtJs/BackEnd.js',
+			t3lib_extMgm::extRelPath('seminars') .
+				'Resources/Public/JavaScript/BackEndExtJs/BackEnd.js',
 			'text/javascript',
 			FALSE,
 			TRUE
