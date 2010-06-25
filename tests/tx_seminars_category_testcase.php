@@ -136,38 +136,5 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 			$this->fixture->getIcon()
 		);
 	}
-
-
-	///////////////////////////////
-	// Tests regarding the owner.
-	///////////////////////////////
-
-	/**
-	 * @test
-	 */
-	public function getOwnerWithoutOwnerReturnsNull() {
-		$this->fixture = new tx_seminars_category($this->fixtureUid);
-
-		$this->assertNull(
-			$this->fixture->getOwner()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getOwnerWithOwnerReturnsOwner() {
-		$this->fixture = new tx_seminars_category($this->fixtureUid);
-
-		$frontEndUser = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_FrontEndUser'
-		)->getNewGhost();
-		$this->fixture->setOwner($frontEndUser);
-
-		$this->assertSame(
-			$frontEndUser,
-			$this->fixture->getOwner()
-		);
-	}
 }
 ?>
