@@ -25,7 +25,8 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the 'frontEndCategoryList' class in the 'seminars' extension.
+ * Testcase for the tx_seminars_FrontEnd_CategoryList class in the "seminars"
+ * extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -33,9 +34,9 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
+class tx_seminars_FrontEnd_CategoryListTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_pi1_frontEndCategoryList
+	 * @var tx_seminars_FrontEnd_CategoryList
 	 */
 	private $fixture;
 
@@ -67,7 +68,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->fixture = new tx_seminars_pi1_frontEndCategoryList(
+		$this->fixture = new tx_seminars_FrontEnd_CategoryList(
 			array(
 				'isStaticTemplateLoaded' => 1,
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
