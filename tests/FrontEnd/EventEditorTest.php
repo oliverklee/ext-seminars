@@ -27,16 +27,17 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Testcase for the eventEditor class in the 'seminars' extensions.
+ * Testcase for the tx_seminars_FrontEnd_EventEditor class in the "seminars"
+ * extensions.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
+class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_pi1_eventEditor
+	 * @var tx_seminars_FrontEnd_EventEditor
 	 */
 	private $fixture;
 
@@ -56,7 +57,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
 			->set('createAuxiliaryRecordsPID', 0);
 
-		$this->fixture = new tx_seminars_pi1_eventEditor(
+		$this->fixture = new tx_seminars_FrontEnd_EventEditor(
 			array(
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'form.' => array('eventEditor.' => array()),
@@ -191,7 +192,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	 */
 	private function getFixtureWithRequiredField($requiredField) {
 		$result = tx_oelib_ObjectFactory::make(
-			'tx_seminars_pi1_eventEditor',
+			'tx_seminars_FrontEnd_EventEditor',
 			array(
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'form.' => array('eventEditor.' => array()),
@@ -3256,7 +3257,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			in_array(
 				array('caption' => 'Deutschland', 'value' => 54),
-				tx_seminars_pi1_eventEditor::populateListCountries()
+				tx_seminars_FrontEnd_EventEditor::populateListCountries()
 			)
 		);
 	}
@@ -3265,7 +3266,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListCountriesSortsResultsByLocalCountryName() {
-		$countries = tx_seminars_pi1_eventEditor::populateListCountries();
+		$countries = tx_seminars_FrontEnd_EventEditor::populateListCountries();
 		$positionGermany = array_search(
 			array('caption' => 'Deutschland', 'value' => 54), $countries
 		);
@@ -3294,7 +3295,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			in_array(
 				array('caption' => 'Juggling', 'value' => $uid),
-				tx_seminars_pi1_eventEditor::populateListSkills()
+				tx_seminars_FrontEnd_EventEditor::populateListSkills()
 			)
 		);
 	}
@@ -3307,7 +3308,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 	public function test_makeListToFormidableList_ForEmptyListGiven_ReturnsEmptyArray() {
 		$this->assertEquals(
 			array(),
-			tx_seminars_pi1_eventEditor::makeListToFormidableList(new tx_oelib_List())
+			tx_seminars_FrontEnd_EventEditor::makeListToFormidableList(new tx_oelib_List())
 		);
 	}
 
@@ -3323,7 +3324,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		$this->assertTrue(
 			in_array(
 				array('caption' => 'foo', 'value' => $targetGroup->getUid()),
-				tx_seminars_pi1_eventEditor::makeListToFormidableList($list)
+				tx_seminars_FrontEnd_EventEditor::makeListToFormidableList($list)
 			)
 		);
 	}
@@ -3340,7 +3341,7 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			2,
-			count(tx_seminars_pi1_eventEditor::makeListToFormidableList($list))
+			count(tx_seminars_FrontEnd_EventEditor::makeListToFormidableList($list))
 		);
 	}
 

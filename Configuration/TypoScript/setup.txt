@@ -973,7 +973,7 @@ plugin.tx_seminars_pi1 {
 								}
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-									return tx_seminars_pi1_eventEditor::populateListCountries();
+									return tx_seminars_FrontEnd_EventEditor::populateListCountries();
 								)
 							}
 						}
@@ -1023,7 +1023,7 @@ plugin.tx_seminars_pi1 {
 								params = newPlace_title, newPlace_address, newPlace_zip, newPlace_city, newPlace_country, newPlace_homepage, newPlace_directions, newPlace_notes
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-									return tx_seminars_pi1_eventEditor::createNewPlace($this);
+									return tx_seminars_FrontEnd_EventEditor::createNewPlace($this);
 								)
 							}
 						}
@@ -1040,7 +1040,7 @@ plugin.tx_seminars_pi1 {
 						cache = false
 						userobj.php (
 							require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-							return tx_seminars_pi1_eventEditor::showEditPlaceModalBox($this);
+							return tx_seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this);
 						)
 					}
 				}
@@ -1089,7 +1089,7 @@ plugin.tx_seminars_pi1 {
 								}
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-									return tx_seminars_pi1_eventEditor::populateListCountries();
+									return tx_seminars_FrontEnd_EventEditor::populateListCountries();
 								)
 							}
 						}
@@ -1144,7 +1144,7 @@ plugin.tx_seminars_pi1 {
 								params = editPlace_title, editPlace_address, editPlace_zip, editPlace_city, editPlace_country, editPlace_homepage, editPlace_directions, editPlace_notes, editPlace_uid
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-									return tx_seminars_pi1_eventEditor::updatePlace($this);
+									return tx_seminars_FrontEnd_EventEditor::updatePlace($this);
 								)
 							}
 						}
@@ -1334,7 +1334,7 @@ plugin.tx_seminars_pi1 {
 							wrap = <div class="formidable-rdrstd-rdtwrap formidable-checkboxes">|</div></div>
 							data.userobj.php (
 								require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-								return tx_seminars_pi1_eventEditor::populateListSkills();
+								return tx_seminars_FrontEnd_EventEditor::populateListSkills();
 							)
 						}
 
@@ -1417,7 +1417,7 @@ plugin.tx_seminars_pi1 {
 								params = newSpeaker_title, newSpeaker_gender, newSpeaker_organization, newSpeaker_homepage, newSpeaker_description, newSpeaker_skills, newSpeaker_notes, newSpeaker_address, newSpeaker_phone_work, newSpeaker_phone_home, newSpeaker_phone_mobile, newSpeaker_fax, newSpeaker_email, newSpeaker_cancelation_period
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-									return tx_seminars_pi1_eventEditor::createNewSpeaker($this);
+									return tx_seminars_FrontEnd_EventEditor::createNewSpeaker($this);
 								)
 							}
 						}
@@ -1434,7 +1434,7 @@ plugin.tx_seminars_pi1 {
 						cache = false
 						userobj.php (
 							require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-							return tx_seminars_pi1_eventEditor::showEditSpeakerModalBox($this);
+							return tx_seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this);
 						)
 					}
 				}
@@ -1496,7 +1496,7 @@ plugin.tx_seminars_pi1 {
 							wrap = <div class="formidable-rdrstd-rdtwrap formidable-checkboxes">|</div></div>
 							data.userobj.php (
 								require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-								return tx_seminars_pi1_eventEditor::populateListSkills();
+								return tx_seminars_FrontEnd_EventEditor::populateListSkills();
 							)
 						}
 
@@ -1584,7 +1584,7 @@ plugin.tx_seminars_pi1 {
 								params = editSpeaker_title, editSpeaker_gender, editSpeaker_organization, editSpeaker_homepage, editSpeaker_description, editSpeaker_skills, editSpeaker_notes, editSpeaker_address, editSpeaker_phone_work, editSpeaker_phone_home, editSpeaker_phone_mobile, editSpeaker_fax, editSpeaker_email, editSpeaker_cancelation_period, editSpeaker_uid
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-									return tx_seminars_pi1_eventEditor::updateSpeaker($this);
+									return tx_seminars_FrontEnd_EventEditor::updateSpeaker($this);
 								)
 							}
 						}
@@ -1892,7 +1892,7 @@ plugin.tx_seminars_pi1 {
 								params = newCheckbox_title
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-									return tx_seminars_pi1_eventEditor::createNewCheckbox($this);
+									return tx_seminars_FrontEnd_EventEditor::createNewCheckbox($this);
 								)
 							}
 						}
@@ -1909,7 +1909,7 @@ plugin.tx_seminars_pi1 {
 						cache = false
 						userobj.php (
 							require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-							return tx_seminars_pi1_eventEditor::showEditCheckboxModalBox($this);
+							return tx_seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this);
 						)
 					}
 				}
@@ -1954,7 +1954,7 @@ plugin.tx_seminars_pi1 {
 								params = editCheckbox_title, editCheckbox_uid
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-									return tx_seminars_pi1_eventEditor::updateCheckbox($this);
+									return tx_seminars_FrontEnd_EventEditor::updateCheckbox($this);
 								)
 							}
 						}
@@ -2180,7 +2180,7 @@ plugin.tx_seminars_pi1 {
 								params = newTargetGroup_title, newTargetGroup_minimum_age, newTargetGroup_maximum_age
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-									return tx_seminars_pi1_eventEditor::createNewTargetGroup($this);
+									return tx_seminars_FrontEnd_EventEditor::createNewTargetGroup($this);
 								)
 							}
 						}
@@ -2197,7 +2197,7 @@ plugin.tx_seminars_pi1 {
 						cache = false
 						userobj.php (
 							require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-							return tx_seminars_pi1_eventEditor::showEditTargetGroupModalBox($this);
+							return tx_seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this);
 						)
 					}
 				}
@@ -2256,7 +2256,7 @@ plugin.tx_seminars_pi1 {
 								params = editTargetGroup_title, editTargetGroup_uid, editTargetGroup_minimum_age, editTargetGroup_maximum_age
 								userobj.php (
 									require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-									return tx_seminars_pi1_eventEditor::updateTargetGroup($this);
+									return tx_seminars_FrontEnd_EventEditor::updateTargetGroup($this);
 								)
 							}
 						}

@@ -2998,11 +2998,11 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	/**
 	 * Creates an event editor instance and returns it.
 	 *
-	 * @return tx_seminars_pi1_eventEditor the initialized event editor
+	 * @return tx_seminars_FrontEnd_EventEditor the initialized event editor
 	 */
 	protected function createEventEditorInstance() {
 		$eventEditor = tx_oelib_ObjectFactory::make(
-			'tx_seminars_pi1_eventEditor', $this->conf, $this->cObj
+			'tx_seminars_FrontEnd_EventEditor', $this->conf, $this->cObj
 		);
 		$eventEditor->setObjectUid(intval($this->piVars['seminar']));
 

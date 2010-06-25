@@ -6846,7 +6846,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		tx_oelib_MapperRegistry::denyDatabaseAccess();
 
 		$eventEditor = $this->getMock(
-			'tx_seminars_pi1_eventEditor', array('hasAccessMessage'),
+			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
 			array(), '', FALSE
 		);
 
@@ -6870,7 +6870,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		tx_oelib_MapperRegistry::denyDatabaseAccess();
 
 		$eventEditor = $this->getMock(
-			'tx_seminars_pi1_eventEditor', array('hasAccessMessage'),
+			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
 			array(), '', FALSE
 		);
 		$eventEditor->expects($this->once())->method('hasAccessMessage');
@@ -6895,7 +6895,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function processHideUnhideForHideActionWithAccessGrantedCallsHideEvent() {
 		$eventEditor = $this->getMock(
-			'tx_seminars_pi1_eventEditor', array('hasAccessMessage'),
+			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
 			array(), '', FALSE
 		);
 		$eventEditor->expects($this->atLeastOnce())->method('hasAccessMessage')
@@ -6925,7 +6925,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function processHideUnhideForHideActionWithUnpublishedEventAndAccessGrantedNotCallsHideEvent() {
 		$eventEditor = $this->getMock(
-			'tx_seminars_pi1_eventEditor', array('hasAccessMessage'),
+			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
 			array(), '', FALSE
 		);
 		$eventEditor->expects($this->atLeastOnce())->method('hasAccessMessage')
@@ -6955,7 +6955,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function processHideUnhideForHideActionWithAccessDeniedNotCallsHideEvent() {
 		$eventEditor = $this->getMock(
-			'tx_seminars_pi1_eventEditor', array('hasAccessMessage'),
+			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
 			array(), '', FALSE
 		);
 		$eventEditor->expects($this->atLeastOnce())->method('hasAccessMessage')
@@ -6985,7 +6985,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function processHideUnhideForUnhideActionWithAccessGrantedCallsUnhideEvent() {
 		$eventEditor = $this->getMock(
-			'tx_seminars_pi1_eventEditor', array('hasAccessMessage'),
+			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
 			array(), '', FALSE
 		);
 		$eventEditor->expects($this->once())->method('hasAccessMessage')
@@ -7015,7 +7015,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function processHideUnhideForUnhideActionWithUnpublishedEventAccessGrantedNotCallsUnhideEvent() {
 		$eventEditor = $this->getMock(
-			'tx_seminars_pi1_eventEditor', array('hasAccessMessage'),
+			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
 			array(), '', FALSE
 		);
 		$eventEditor->expects($this->once())->method('hasAccessMessage')
@@ -7045,7 +7045,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function processHideUnhideForUnhideActionWithAccessDeniedNotCallsUnhideEvent() {
 		$eventEditor = $this->getMock(
-			'tx_seminars_pi1_eventEditor', array('hasAccessMessage'),
+			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
 			array(), '', FALSE
 		);
 		$eventEditor->expects($this->once())->method('hasAccessMessage')
@@ -7075,7 +7075,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function processHideUnhideForEmptyActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent() {
 		$eventEditor = $this->getMock(
-			'tx_seminars_pi1_eventEditor', array('hasAccessMessage'),
+			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
 			array(), '', FALSE
 		);
 		$eventEditor->expects($this->once())->method('hasAccessMessage')
@@ -7106,7 +7106,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 */
 	public function processHideUnhideForInvalidActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent() {
 		$eventEditor = $this->getMock(
-			'tx_seminars_pi1_eventEditor', array('hasAccessMessage'),
+			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
 			array(), '', FALSE
 		);
 		$eventEditor->expects($this->once())->method('hasAccessMessage')

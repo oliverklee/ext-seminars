@@ -25,7 +25,7 @@
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Class 'tx_seminars_pi1_eventEditor' for the 'seminars' extension.
+ * Class tx_seminars_FrontEnd_EventEditor for the "seminars" extension.
  *
  * This class is a controller which allows to create and edit events on the FE.
  *
@@ -35,7 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1_eventEditor extends tx_seminars_FrontEnd_Editor {
+class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * @var string stores a validation error message if there was one
 	 */
@@ -322,7 +322,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_FrontEnd_Editor {
 				$editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
 				$editButtonConfiguration['onclick']['userobj']['php'] = '
 					require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-					return tx_seminars_pi1_eventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
+					return tx_seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
 					';
 				$editButton = $formidable->_makeRenderlet(
 					$editButtonConfiguration,
@@ -397,7 +397,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_FrontEnd_Editor {
 				$editButtonConfiguration['name'] = 'edit' . $type . 'Button_' . $speaker->getUid();
 				$editButtonConfiguration['onclick']['userobj']['php'] = '
 					require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-					return tx_seminars_pi1_eventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');
+					return tx_seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');
 					';
 				$editButton = $formidable->_makeRenderlet(
 					$editButtonConfiguration,
@@ -471,7 +471,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_FrontEnd_Editor {
 				$editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
 				$editButtonConfiguration['onclick']['userobj']['php'] = '
 					require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-					return tx_seminars_pi1_eventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
+					return tx_seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
 					';
 				$editButton = $formidable->_makeRenderlet(
 					$editButtonConfiguration,
@@ -547,7 +547,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_FrontEnd_Editor {
 					$targetGroup->getUid();
 				$editButtonConfiguration['onclick']['userobj']['php'] = '
 					require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-					return tx_seminars_pi1_eventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
+					return tx_seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
 					';
 				$editButton = $formidable->_makeRenderlet(
 					$editButtonConfiguration,
@@ -1411,7 +1411,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_FrontEnd_Editor {
 		$editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
 		$editButtonConfiguration['onclick']['userobj']['php'] = '
 			require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-			return tx_seminars_pi1_eventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
+			return tx_seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
 			';
 		$editButton = $formidable->_makeRenderlet(
 			$editButtonConfiguration,
@@ -1719,7 +1719,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_FrontEnd_Editor {
 		$editButtonConfiguration['name'] = 'editSpeakerButton_' . $speaker->getUid();
 		$editButtonConfiguration['onclick']['userobj']['php'] = '
 			require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-			return tx_seminars_pi1_eventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');
+			return tx_seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');
 			';
 		$editButton = $formidable->_makeRenderlet(
 			$editButtonConfiguration,
@@ -1982,7 +1982,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_FrontEnd_Editor {
 		$editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
 		$editButtonConfiguration['onclick']['userobj']['php'] = '
 			require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-			return tx_seminars_pi1_eventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
+			return tx_seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
 			';
 		$editButton = $formidable->_makeRenderlet(
 			$editButtonConfiguration,
@@ -2190,7 +2190,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_FrontEnd_Editor {
 			$targetGroup->getUid();
 		$editButtonConfiguration['onclick']['userobj']['php'] = '
 			require_once(t3lib_extMgm::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-			return tx_seminars_pi1_eventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
+			return tx_seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
 			';
 		$editButton = $formidable->_makeRenderlet(
 			$editButtonConfiguration,
@@ -2549,7 +2549,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_FrontEnd_Editor {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_eventEditor.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_eventEditor.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/EventEditor.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/EventEditor.php']);
 }
 ?>
