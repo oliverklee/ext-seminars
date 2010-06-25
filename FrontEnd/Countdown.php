@@ -25,7 +25,7 @@
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Class 'frontEndCountdown' for the 'seminars' extension.
+ * Class tx_seminars_FrontEnd_Countdown for the "seminars" extension.
  *
  * This class represents a countdown to the next upcoming event.
  *
@@ -35,7 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Mario Rimann <typo3-coding@rimann.org>
  */
-class tx_seminars_pi1_frontEndCountdown extends tx_seminars_FrontEnd_AbstractView {
+class tx_seminars_FrontEnd_Countdown extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * @var tx_seminars_seminar the seminar for which we want to show the
 	 *                          countdown
@@ -186,7 +186,7 @@ class tx_seminars_pi1_frontEndCountdown extends tx_seminars_FrontEnd_AbstractVie
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndCountdown.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndCountdown.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/Countdown.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/Countdown.php']);
 }
 ?>

@@ -267,9 +267,9 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_pi1_frontEndCountdown.
+	 * Checks the configuration for: tx_seminars_FrontEnd_Countdown.
 	 */
-	protected function check_tx_seminars_pi1_frontEndCountdown() {
+	protected function check_tx_seminars_FrontEnd_Countdown() {
 		$this->checkCommonFrontEndSettings();
 		$this->checkPages();
 	}
@@ -336,9 +336,9 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_pi1_frontEndCategoryList.
+	 * Checks the configuration for: tx_seminars_FrontEnd_CategoryList.
 	 */
-	protected function check_tx_seminars_pi1_frontEndCategoryList() {
+	protected function check_tx_seminars_FrontEnd_CategoryList() {
 		$this->checkCommonFrontEndSettings();
 
 		$this->checkPagesForCategoryList();

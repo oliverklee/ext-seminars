@@ -79,7 +79,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	private $previousDate = '';
 
 	/**
-	 * @var tx_seminars_pi1_frontEndCategoryList
+	 * @var tx_seminars_FrontEnd_CategoryList
 	 */
 	private $categoryList = null;
 
@@ -292,7 +292,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				break;
 			case 'countdown':
 				$countdown = tx_oelib_ObjectFactory::make(
-					'tx_seminars_pi1_frontEndCountdown',
+					'tx_seminars_FrontEnd_Countdown',
 					$this->conf,
 					$this->cObj
 				);
@@ -302,7 +302,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				break;
 			case 'category_list':
 				$categoryList = tx_oelib_ObjectFactory::make(
-					'tx_seminars_pi1_frontEndCategoryList',
+					'tx_seminars_FrontEnd_CategoryList',
 					$this->conf, $this->cObj
 				);
 				$result = $categoryList->render();
@@ -1946,7 +1946,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->setMarker('image', $image);
 
 			$categoryList = tx_oelib_ObjectFactory::make(
-				'tx_seminars_pi1_frontEndCategoryList', $this->conf, $this->cObj
+				'tx_seminars_FrontEnd_CategoryList', $this->conf, $this->cObj
 			);
 			$listOfCategories = $categoryList->createCategoryList(
 				$this->seminar->getCategories()
