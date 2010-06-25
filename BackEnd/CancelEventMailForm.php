@@ -39,11 +39,6 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 	protected $action = 'cancelEvent';
 
 	/**
-	 * @var integer the status to set when submitting the form
-	 */
-	protected $statusToSet = tx_seminars_seminar::STATUS_CANCELED;
-
-	/**
 	 * @var the prefix for all locallang keys for prefilling the form,
 	 *      must not be empty
 	 */
@@ -155,6 +150,24 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 				array('/\[/', '/\]/'), array('%5B', '%5D'), $rawUrl[1]
 			)
 		);
+	}
+
+	/**
+	 * Marks an event according to the status to set and commits the change to
+	 * the database.
+	 */
+	protected function setEventStatus() {
+		$this->getEvent()->setStatus(tx_seminars_seminar::STATUS_CANCELED);
+		$this->getEvent()->commitToDb();
+
+		$message = t3lib_div::makeInstance(
+			't3lib_FlashMessage',
+			$GLOBALS['LANG']->getLL('message_eventCanceled'),
+			'',
+			t3lib_FlashMessage::OK,
+			TRUE
+		);
+		t3lib_FlashMessageQueue::addMessage($message);
 	}
 }
 

@@ -65,6 +65,9 @@
 			<label index="testForm_prefillField_messageBody">This is the message body.</label>
 			<label index="testForm_prefillField_introduction">This is the introduction: %s</label>
 			<label index="label_show_event_registrations">show</label>
+			<label index="message_emailToAttendeesSent">The e-mail to the attendees has been sent.</label>
+			<label index="message_eventCanceled">The event has been canceled.</label>
+			<label index="message_eventConfirmed">The event has been confirmed.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="title">Arrangementer</label>
@@ -147,6 +150,9 @@
 			<label index="testForm_prefillField_messageBody">Dies ist der Nachrichtenkörper.</label>
 			<label index="testForm_prefillField_introduction">Dies ist die Einleitung: %s</label>
 			<label index="label_show_event_registrations">zeigen</label>
+			<label index="message_emailToAttendeesSent">Die E-Mail an die TeilnehmerInnen wurde verschickt.</label>
+			<label index="message_eventCanceled">Die Veranstaltung wurde abgesagt.</label>
+			<label index="message_eventConfirmed">Die Veranstaltung wurde fest zugesagt.</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Evenementen</label>
@@ -337,6 +343,9 @@
 			<label index="testForm_prefillField_messageBody" type="integer">10500938</label>
 			<label index="testForm_prefillField_introduction" type="integer">150623124</label>
 			<label index="label_show_event_registrations" type="integer">176017707</label>
+			<label index="message_emailToAttendeesSent" type="integer">162643703</label>
+			<label index="message_eventCanceled" type="integer">171207213</label>
+			<label index="message_eventConfirmed" type="integer">74661680</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title" type="integer">142581619</label>
@@ -527,6 +536,9 @@
 			<label index="testForm_prefillField_messageBody">This is the message body.</label>
 			<label index="testForm_prefillField_introduction">This is the introduction: %s</label>
 			<label index="label_show_event_registrations">show</label>
+			<label index="message_emailToAttendeesSent">The e-mail to the attendees has been sent.</label>
+			<label index="message_eventCanceled">The event has been canceled.</label>
+			<label index="message_eventConfirmed">The event has been confirmed.</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="title">Events</label>

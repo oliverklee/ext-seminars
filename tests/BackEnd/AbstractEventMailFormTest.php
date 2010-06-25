@@ -122,6 +122,8 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 
 		$this->fixture->__destruct();
 		unset($this->fixture, $this->testingFramework);
+
+		t3lib_FlashMessageQueue::getAllMessagesAndFlush();
 	}
 
 
@@ -634,6 +636,63 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendEmailToAttendeesForExistingRegistrationAddsEmailSentFlashMessage() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'',
+					array('email' => 'foo@valid-email.org')
+				)
+			)
+		);
+
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
+				'subject' => 'foo',
+				'messageBody' => 'foo bar',
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertContains(
+			$GLOBALS['LANG']->getLL('message_emailToAttendeesSent'),
+			t3lib_FlashMessageQueue::renderFlashMessages()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendEmailToAttendeesForNoRegistrationsNotAddsEmailSentFlashMessage() {
+		$messageBody = '%' . $GLOBALS['LANG']->getLL('mailForm_salutation') .
+			$GLOBALS['LANG']->getLL('cancelMailForm_prefillField_messageBody');
+
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
+				'subject' => 'foo',
+				'messageBody' => 'foo bar',
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertNotContains(
+			$GLOBALS['LANG']->getLL('message_emailToAttendeesSent'),
+			t3lib_FlashMessageQueue::renderFlashMessages()
 		);
 	}
 

@@ -123,6 +123,8 @@ class tx_seminars_BackEnd_ConfirmEventMailFormTest extends tx_phpunit_testcase {
 		$this->testingFramework->cleanUp();
 
 		unset($this->fixture, $this->testingFramework);
+
+		t3lib_FlashMessageQueue::getAllMessagesAndFlush();
 	}
 
 
@@ -191,12 +193,36 @@ class tx_seminars_BackEnd_ConfirmEventMailFormTest extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function setEventStateCreatesFlashMessage() {
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
+				'subject' => 'foo',
+				'messageBody' => 'foo bar',
+			)
+		);
+		$this->fixture->render();
+
+		$this->assertContains(
+			$GLOBALS['LANG']->getLL('message_eventConfirmed'),
+			t3lib_FlashMessageQueue::renderFlashMessages()
+		);
+	}
+
 
 	/////////////////////////////////
 	// Tests concerning the e-mails
 	/////////////////////////////////
 
-	public function testSendEmailToRegistrationsSendsEmailWithNameOfRegisteredUserOnSubmitOfValidForm() {
+	/**
+	 * @test
+	 */
+	public function sendEmailToAttendeesSendsEmailWithNameOfRegisteredUserOnSubmitOfValidForm() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(

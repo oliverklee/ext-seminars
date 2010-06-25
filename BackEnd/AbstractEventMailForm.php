@@ -56,18 +56,13 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * @var string the action of this form
 	 */
-	protected $action;
+	protected $action = '';
 
 	/**
 	 * @var string the prefix for all locallang keys for prefilling the form,
 	 *             must not be empty
 	 */
-	protected $formFieldPrefix;
-
-	/**
-	 * @var integer the status to set when submitting the form
-	 */
-	protected $statusToSet = tx_seminars_seminar::STATUS_PLANNED;
+	protected $formFieldPrefix = '';
 
 	/**
 	 * The constructor of this class. Instantiates an event object.
@@ -393,36 +388,45 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		$registrationBagBuilder->limitToEvent($this->getEvent()->getUid());
 		$registrations = $registrationBagBuilder->build();
 
-		$mailer = tx_oelib_mailerFactory::getInstance()->getMailer();
-		foreach ($registrations as $registration) {
-			if (!$registration->getFrontEndUser()->hasEMailAddress()) {
-				continue;
-			}
-			$eMail = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
-			$eMail->setSender($organizer);
-			$eMail->setSubject($this->getPostData('subject'));
-			$eMail->addRecipient($registration->getFrontEndUser());
-			$eMail->setMessage(
-				$this->createMessageBody(
-					$registration->getFrontEndUser(), $organizer
-				)
-			);
+		if (!$registrations->isEmpty()) {
+			$mailer = tx_oelib_mailerFactory::getInstance()->getMailer();
 
-			$mailer->send($eMail);
-			$eMail->__destruct();
+			foreach ($registrations as $registration) {
+				if (!$registration->getFrontEndUser()->hasEMailAddress()) {
+					continue;
+				}
+				$eMail = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
+				$eMail->setSender($organizer);
+				$eMail->setSubject($this->getPostData('subject'));
+				$eMail->addRecipient($registration->getFrontEndUser());
+				$eMail->setMessage(
+					$this->createMessageBody(
+						$registration->getFrontEndUser(), $organizer
+					)
+				);
+
+				$mailer->send($eMail);
+				$eMail->__destruct();
+			}
+
+			$message = t3lib_div::makeInstance(
+				't3lib_FlashMessage',
+				$GLOBALS['LANG']->getLL('message_emailToAttendeesSent'),
+				'',
+				t3lib_FlashMessage::OK,
+				TRUE
+			);
+			t3lib_FlashMessageQueue::addMessage($message);
 		}
 
 		$registrations->__destruct();
 	}
 
 	/**
-	 * Marks an event according to the status to set and commits the change to
-	 * the database.
+	 * Marks an event according to the status to set (if any) and commits the
+	 * change to the database.
 	 */
-	private function setEventStatus() {
-		$this->getEvent()->setStatus($this->statusToSet);
-		$this->getEvent()->commitToDb();
-	}
+	protected function setEventStatus() {}
 
 	/**
 	 * Redirects to the list view.
