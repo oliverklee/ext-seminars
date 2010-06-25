@@ -32,7 +32,7 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_pi1_frontEndRequirementsList extends tx_seminars_pi1_frontEndView {
+class tx_seminars_pi1_frontEndRequirementsList extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * @var tx_seminars_seminar the event to build the requirements list for
 	 */

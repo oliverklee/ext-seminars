@@ -37,7 +37,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
+class tx_seminars_pi1_frontEndEditor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * @var tx_ameosformidable object that creates the form
 	 */

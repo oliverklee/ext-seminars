@@ -36,7 +36,7 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Mario Rimann <typo3-coding@rimann.org>
  */
-class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndView {
+class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * @var tx_staticinfotables_pi1 needed for the list view to convert ISO
 	 *                              codes to country names and languages

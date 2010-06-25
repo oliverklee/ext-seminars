@@ -35,7 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Mario Rimann <typo3-coding@rimann.org>
  */
-class tx_seminars_pi1_frontEndCountdown extends tx_seminars_pi1_frontEndView {
+class tx_seminars_pi1_frontEndCountdown extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * @var tx_seminars_seminar the seminar for which we want to show the
 	 *                          countdown

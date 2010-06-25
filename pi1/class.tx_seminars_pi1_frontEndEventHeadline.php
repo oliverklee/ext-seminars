@@ -35,7 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_pi1_frontEndEventHeadline extends tx_seminars_pi1_frontEndView {
+class tx_seminars_pi1_frontEndEventHeadline extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Creates the event headline, consisting of the event title and date.
 	 *

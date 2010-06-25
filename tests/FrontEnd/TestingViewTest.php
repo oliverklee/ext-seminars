@@ -22,24 +22,51 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
+
 /**
- * Class 'testingFrontEndView' for the 'seminars' extension.
- *
- * This class represents a view for testing purposes.
+ * Testcase for the tx_seminars_FrontEnd_AbstractView class in the "seminars"
+ * extensions.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_testingFrontEndView extends tx_seminars_pi1_frontEndView {
+class tx_seminars_FrontEnd_TestingViewTest extends tx_phpunit_testcase {
 	/**
-	 * Renders the view and returns its content.
+	 * the fixture to test
 	 *
-	 * @return string the view's content
+	 * @var tx_seminars_tests_fixtures_FrontEnd_TestingView
 	 */
-	public function render() {
-		return 'Hi, I am the testingFrontEndView!';
+	private $fixture;
+
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
+	private $testingFramework;
+
+	public function setUp() {
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework->createFakeFrontEnd();
+		$this->fixture = new tx_seminars_tests_fixtures_FrontEnd_TestingView(
+			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			$GLOBALS['TSFE']->cObj
+		);
+	}
+
+	public function tearDown() {
+		$this->testingFramework->cleanUp();
+		$this->fixture->__destruct();
+
+		unset($this->fixture, $this->testingFramework);
+	}
+
+	public function testRenderCanReturnAViewsContent() {
+		$this->assertEquals(
+			'Hi, I am the testingFrontEndView!',
+			$this->fixture->render()
+		);
 	}
 }
 ?>

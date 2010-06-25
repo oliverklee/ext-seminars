@@ -33,7 +33,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1_frontEndCategoryList extends tx_seminars_pi1_frontEndView {
+class tx_seminars_pi1_frontEndCategoryList extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Creates a HTML list of categories.
 	 *
