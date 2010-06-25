@@ -133,9 +133,9 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_pi1_frontEndRegistrationsList/.
+	 * Checks the configuration for: tx_seminars_FrontEnd_RegistrationsList/.
 	 */
-	protected function check_tx_seminars_pi1_frontEndRegistrationsList() {
+	protected function check_tx_seminars_FrontEnd_RegistrationsList() {
 		$this->checkCommonFrontEndSettings();
 
 		$this->checkShowFeUserFieldsInRegistrationsList();

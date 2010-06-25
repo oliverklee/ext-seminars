@@ -25,7 +25,8 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the front end registrations list class in the 'seminars' extension.
+ * Testcase for the tx_seminars_FrontEnd_RegistrationsList class in the
+ * "seminars" extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -33,9 +34,9 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase {
+class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_pi1_frontEndRegistrationsList
+	 * @var tx_seminars_FrontEnd_RegistrationsList
 	 */
 	private $fixture;
 	/**
@@ -74,7 +75,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 			)
 		);
 
-		$this->fixture = new tx_seminars_pi1_frontEndRegistrationsList(
+		$this->fixture = new tx_seminars_FrontEnd_RegistrationsList(
 			array(
 				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
 				'enableRegistration' => 1,
@@ -160,7 +161,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 			'The value "foo" of the first parameter $whatToDisplay is not valid.'
 		);
 
-		new tx_seminars_pi1_frontEndRegistrationsList(
+		new tx_seminars_FrontEnd_RegistrationsList(
 			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
 			'foo', 0, $GLOBALS['TSFE']->cObj
 		);
@@ -170,7 +171,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	 * @test
 	 */
 	public function createFixtureWithListRegistrationsAsWhatToDisplayDoesNotThrowException() {
-		$fixture = new tx_seminars_pi1_frontEndRegistrationsList(
+		$fixture = new tx_seminars_FrontEnd_RegistrationsList(
 			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
 			'list_registrations', 0, $GLOBALS['TSFE']->cObj
 		);
@@ -181,7 +182,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	 * @test
 	 */
 	public function createFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException() {
-		$fixture = new tx_seminars_pi1_frontEndRegistrationsList(
+		$fixture = new tx_seminars_FrontEnd_RegistrationsList(
 			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
 			'list_vip_registrations', 0, $GLOBALS['TSFE']->cObj
 		);
@@ -207,7 +208,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	 * @test
 	 */
 	public function renderWithNegativeSeminarUidReturnsHeader404() {
-		$fixture = new tx_seminars_pi1_frontEndRegistrationsList(
+		$fixture = new tx_seminars_FrontEnd_RegistrationsList(
 			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
 			'list_registrations', -1, $GLOBALS['TSFE']->cObj
 		);
@@ -224,7 +225,7 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	 * @test
 	 */
 	public function renderWithZeroSeminarUidReturnsHeader404() {
-		$fixture = new tx_seminars_pi1_frontEndRegistrationsList(
+		$fixture = new tx_seminars_FrontEnd_RegistrationsList(
 			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
 			'list_registrations', 0, $GLOBALS['TSFE']->cObj
 		);

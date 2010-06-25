@@ -282,7 +282,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				// because createRegistrationsListPage() will differentiate later.
 			case 'list_registrations':
 				$registrationsList = tx_oelib_ObjectFactory::make(
-					'tx_seminars_pi1_frontEndRegistrationsList', $this->conf,
+					'tx_seminars_FrontEnd_RegistrationsList', $this->conf,
 					$this->whatToDisplay, intval($this->piVars['seminar']),
 					$this->cObj
 				);

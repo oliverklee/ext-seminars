@@ -25,7 +25,7 @@
 require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
 
 /**
- * Class 'frontEndRegistrationsList' for the 'seminars' extension.
+ * Class tx_seminars_FrontEnd_RegistrationsList for the "seminars" extension.
  *
  * This class represents a list of registrations for the front-end.
  *
@@ -35,7 +35,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php'
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_FrontEnd_AbstractView {
+class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * @var tx_seminars_seminar the seminar of which we want to list the
 	 *                          registrations
@@ -333,7 +333,7 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_FrontEnd_Abs
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndRegistrationsList.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/pi1/class.tx_seminars_pi1_frontEndRegistrationsList.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/RegistrationsList.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/RegistrationsList.php']);
 }
 ?>
