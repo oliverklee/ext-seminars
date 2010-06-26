@@ -43,9 +43,11 @@ class tx_seminars_BackEnd_ConfirmEventMailFormTest extends tx_phpunit_testcase {
 	private $testingFramework;
 
 	/**
-	 * @var string the original language of the BE user
+	 * backup of the BE user's language
+	 *
+	 * @var string
 	 */
-	private $originalLanguage;
+	private $languageBackup;
 
 	/**
 	 * @var integer PID of a dummy system folder
@@ -63,9 +65,7 @@ class tx_seminars_BackEnd_ConfirmEventMailFormTest extends tx_phpunit_testcase {
 	private $eventUid;
 
 	public function setUp() {
-		// Set's the localization to the default language so that all tests can
-		// run, even if the BE user has it's interface set to another language.
-		$this->originalLanguage = $GLOBALS['LANG']->lang;
+		$this->languageBackup = $GLOBALS['LANG']->lang;
 		$GLOBALS['LANG']->lang = 'default';
 
 		// Loads the locallang file for properly working localization in the tests.
@@ -74,11 +74,9 @@ class tx_seminars_BackEnd_ConfirmEventMailFormTest extends tx_phpunit_testcase {
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 
-		$this->testingFramework
-			= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$this->dummySysFolderPid
-			= $this->testingFramework->createSystemFolder();
+		$this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderPid);
 
 		$this->organizerUid = $this->testingFramework->createRecord(
@@ -113,9 +111,7 @@ class tx_seminars_BackEnd_ConfirmEventMailFormTest extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		// Resets the language of the interface to the value it had before
-		// we set it to "default" for testing.
-		$GLOBALS['LANG']->lang = $this->originalLanguage;
+		$GLOBALS['LANG']->lang = $this->languageBackup;
 
 		$this->fixture->__destruct();
 		$this->testingFramework->cleanUp();
