@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_BackEnd_List' for the 'seminars' extension.
+ * Class tx_seminars_BackEnd_AbstractList for the "seminars" extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -31,7 +31,7 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-abstract class tx_seminars_BackEnd_List {
+abstract class tx_seminars_BackEnd_AbstractList {
 	/**
 	 * @var string the name of the table we're working on
 	 */

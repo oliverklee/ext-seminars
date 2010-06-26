@@ -78,7 +78,7 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 		$this->backEndModule->id = $this->dummySysFolderPid;
 		$this->backEndModule->setPageData(array(
 			'uid' => $this->dummySysFolderPid,
-			'doktype' => tx_seminars_BackEnd_List::SYSFOLDER_TYPE,
+			'doktype' => tx_seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
 		));
 
 		$this->backEndModule->doc = t3lib_div::makeInstance('bigDoc');
