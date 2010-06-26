@@ -338,15 +338,16 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 		}
 
 		if ($event->isConfirmed()) {
-			$icon = 'icon_confirmed.png';
+			$icon = 'Confirmed.png';
 			$labelKey = 'eventlist_status_confirmed';
 		} elseif ($event->isCanceled()) {
-			$icon = 'icon_canceled.png';
+			$icon = 'Canceled.png';
 			$labelKey = 'eventlist_status_canceled';
 		}
 		$label = $GLOBALS['LANG']->getLL($labelKey);
 
-		return '<img src="' . $icon . '" title="' . $label . '" alt="' . $label . '" />';
+		return '<img src="../Resources/Public/Icons/' . $icon . '" title="' .
+			$label . '" alt="' . $label . '" />';
 	}
 
 	/**

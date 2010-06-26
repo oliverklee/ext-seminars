@@ -4142,7 +4142,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_complete.',
+			'EventComplete.',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4151,7 +4151,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_TOPIC);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_topic.',
+			'EventTopic.',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4160,7 +4160,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_date.',
+			'EventDate.',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4170,7 +4170,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setHidden(TRUE);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_complete__h.',
+			'EventComplete__h.',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4180,7 +4180,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setHidden(TRUE);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_topic__h.',
+			'EventTopic__h.',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4190,7 +4190,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setHidden(TRUE);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_date__h.',
+			'EventDate__h.',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4200,7 +4200,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_complete.',
+			'EventComplete.',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4210,7 +4210,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_topic.',
+			'EventTopic.',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4220,7 +4220,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_date.',
+			'EventDate.',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4230,7 +4230,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_complete__t.',
+			'EventComplete__t.',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4240,7 +4240,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_topic__t.',
+			'EventTopic__t.',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4250,7 +4250,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_date__t.',
+			'EventDate__t.',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4260,7 +4260,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
 
 		$this->assertRegExp(
-			'/icon_tx_seminars_seminars_complete__tf?\./',
+			'/EventComplete__tf?\./',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4270,7 +4270,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
 
 		$this->assertRegExp(
-			'/icon_tx_seminars_seminars_topic__tf?\./',
+			'/EventTopic__tf?\./',
 			$this->fixture->getRecordIcon()
 		);
 	}
@@ -4280,7 +4280,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
 
 		$this->assertRegExp(
-			'/icon_tx_seminars_seminars_date__tf?\./',
+			'/EventDate__tf?\./',
 			$this->fixture->getRecordIcon()
 		);
 	}

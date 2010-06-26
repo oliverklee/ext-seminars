@@ -268,7 +268,7 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<img src="icon_canceled.png" title="canceled" alt="canceled" />',
+			'<img src="../Resources/Public/Icons/Canceled.png" title="canceled" alt="canceled" />',
 			$this->fixture->show()
 		);
 	}
@@ -283,7 +283,7 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<img src="icon_confirmed.png" title="confirmed" alt="confirmed" />',
+			'<img src="../Resources/Public/Icons/Confirmed.png" title="confirmed" alt="confirmed" />',
 			$this->fixture->show()
 		);
 	}
@@ -298,12 +298,12 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'<img src="icon_canceled.png" title="canceled" alt="canceled" />',
+			'<img src="../Resources/Public/Icons/Canceled.png" title="canceled" alt="canceled" />',
 			$this->fixture->show()
 		);
 
 		$this->assertNotContains(
-			'<img src="icon_confirmed.png" title="confirmed" alt="confirmed" />',
+			'<img src="../Resources/Public/Icons/Confirmed.png" title="confirmed" alt="confirmed" />',
 			$this->fixture->show()
 		);
 	}
@@ -714,7 +714,7 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'icon_tx_seminars_seminars_',
+			'EventComplete.gif',
 			$this->fixture->show()
 		);
 	}

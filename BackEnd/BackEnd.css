@@ -99,12 +99,12 @@ button:hover {
 }
 
 td.confirm_button button p {
-	background: transparent url(icon_confirmed.png) no-repeat  top left;
+	background: transparent url(../Resources/Public/Icons/Confirmed.png) no-repeat  top left;
 	padding: 0px 0px 0px 17px;
 }
 
 td.cancel_button button p {
-	background: transparent url(icon_canceled.png) no-repeat top left;
+	background: transparent url(../Resources/Public/Icons/Canceled.png) no-repeat top left;
 	padding: 0px 0px 0px 17px;
 }
 
@@ -132,11 +132,11 @@ td.cancel_button button p {
 }
 
 #EventMailForm .confirmEvent p {
-	background: transparent url("icon_confirmed.png") no-repeat top left;
+	background: transparent url(../Resources/Public/Icons/Confirmed.png) no-repeat top left;
 }
 
 #EventMailForm .cancelEvent p {
-	background: transparent url("icon_canceled.png") no-repeat top left;
+	background: transparent url(../Resources/Public/Icons/Canceled.png) no-repeat top left;
 }
 
 #EventMailForm .backButton {

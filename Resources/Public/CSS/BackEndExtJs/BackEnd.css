@@ -1,20 +1,20 @@
 .typo3-backend-seminars-events-tabpanel-icon {
-	background: url(../../../../icons/icon_tx_seminars_seminars_complete.gif) left center no-repeat !important;
+	background: url(../../Icons/EventComplete.gif) left center no-repeat !important;
 }
 .typo3-backend-seminars-registrations-tabpanel-icon {
-	background: url(../../../../icons/icon_tx_seminars_attendances.gif) left center no-repeat !important;
+	background: url(../../Icons/Registration.gif) left center no-repeat !important;
 }
 .typo3-backend-seminars-speakers-tabpanel-icon {
-	background: url(../../../../icons/icon_tx_seminars_speakers.gif) left center no-repeat !important;
+	background: url(../../Icons/Speaker.gif) left center no-repeat !important;
 }
 .typo3-backend-seminars-organizers-tabpanel-icon {
-	background: url(../../../../icons/icon_tx_seminars_organizers.gif) left center no-repeat !important;
+	background: url(../../Icons/Organizer.gif) left center no-repeat !important;
 }
 .confirm {
-	background: url(../../../../BackEnd/icon_confirmed.png) left center no-repeat !important;
+	background: url(../../Icons/Confirmed.png) left center no-repeat !important;
 }
 .cancel {
-	background: url(../../../../BackEnd/icon_canceled.png) left center no-repeat !important;
+	background: url(../../Icons/Canceled.png) left center no-repeat !important;
 }
 .new {
 	background: url(../../../../../../../typo3/sysext/t3skin/icons/gfx/new_record.gif) left center no-repeat !important;
@@ -35,20 +35,20 @@
 	background: url(../../../../../../../typo3/sysext/t3skin/icons/gfx/button_unhide.gif) left center no-repeat !important;
 }
 .typo3-backend-seminars-event-single-icon {
-	background: url(../../../../icons/icon_tx_seminars_seminars_complete.gif) center center no-repeat !important;
+	background: url(../../Icons/EventComplete.gif) center center no-repeat !important;
 }
 .typo3-backend-seminars-event-date-icon {
-	background: url(../../../../icons/icon_tx_seminars_seminars_date.gif) center center no-repeat !important;
+	background: url(../../Icons/EventDate.gif) center center no-repeat !important;
 }
 .typo3-backend-seminars-event-topic-icon {
-	background: url(../../../../icons/icon_tx_seminars_seminars_topic.gif) center center no-repeat !important;
+	background: url(../../Icons/EventTopic.gif) center center no-repeat !important;
 }
 .typo3-backend-seminars-registration-icon {
-	background: url(../../../../icons/icon_tx_seminars_attendances.gif) center center no-repeat !important;
+	background: url(../../Icons/Registration.gif) center center no-repeat !important;
 }
 .typo3-backend-seminars-speaker-icon {
-	background: url(../../../../icons/icon_tx_seminars_speakers.gif) center center no-repeat !important;
+	background: url(../../Icons/Speaker.gif) center center no-repeat !important;
 }
 .typo3-backend-seminars-organizer-icon {
-	background: url(../../../../icons/icon_tx_seminars_organizers.gif) center center no-repeat !important;
+	background: url(../../Icons/Organizer.gif) center center no-repeat !important;
 }

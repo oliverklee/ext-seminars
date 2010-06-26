@@ -45,7 +45,7 @@ class tx_seminars_FrontEnd_WizardIcon {
 
 		$wizardItems['plugins_tx_seminars_pi1'] = array(
 			'icon' => t3lib_extMgm::extRelPath('seminars') .
-				'Resources/Public/Images/ContentWizardIcon.gif',
+				'Resources/Public/Icons/ContentWizard.gif',
 			'title' => $LANG->getLLL('pi1_title', $LL),
 			'description' => $LANG->getLLL('pi1_description', $LL),
 			'params' => '&defVals[tt_content][CType]=list' .
