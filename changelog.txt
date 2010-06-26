@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#3967] Cleanup: Drop SEMINARS_UPLOAD_PATH and tx_seminars_constants.php
 - [#3933] Feature: Display flash messages after an e-mail has been sent and an event has been confirmed or canceled
 - [#3974] Cleanup: Remove getter and setter for the owner in the old organizer and category models
 - [#3970] Cleanup: Move pi1/locallang.xml to Resources/Private/Language/FrontEnd/locallang.xml

@@ -24,8 +24,7 @@
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-include_once(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
 
 /**
  * Plugin 'Seminar Manager' for the 'seminars' extension.
@@ -1933,7 +1932,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 			if ($this->seminar->hasImage()) {
 				$image = $this->createRestrictedImage(
-					SEMINARS_UPLOAD_PATH . $this->seminar->getImage(),
+					tx_seminars_FrontEnd_AbstractView::UPLOAD_PATH .
+						$this->seminar->getImage(),
 					$this->seminar->getTitle(),
 					$this->getConfValueInteger('seminarImageListViewWidth'),
 					$this->getConfValueInteger('seminarImageListViewHeight'),
@@ -3027,7 +3027,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 		return $this->cObj->IMAGE(
 			array(
-				'file' => SEMINARS_UPLOAD_PATH . $iconData['icon'],
+				'file' => tx_seminars_FrontEnd_AbstractView::UPLOAD_PATH . $iconData['icon'],
 				'titleText' => $iconData['title'],
 			)
 		);

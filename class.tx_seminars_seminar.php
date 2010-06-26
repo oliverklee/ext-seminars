@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
 /**
@@ -4446,7 +4444,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$imageHeight = array();
 		$imageUrl = array();
 		$imageWithTag = $this->createRestrictedImage(
-			SEMINARS_UPLOAD_PATH . $this->getImage(),
+			tx_seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->getImage(),
 			'',
 			$maxImageWidth,
 			$maxImageHeight

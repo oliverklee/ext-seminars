@@ -24,8 +24,6 @@
 
 require_once(PATH_formidableapi);
 
-require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-
 /**
  * Class tx_seminars_FrontEnd_Editor for the "seminars" extension.
  *

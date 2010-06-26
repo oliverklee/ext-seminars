@@ -23,7 +23,6 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-require_once(t3lib_extMgm::extPath('oelib') . 'tests/fixtures/class.tx_oelib_dummyObjectToCheck.php');
 
 /**
  * Testcase for the 'configcheck' class in the 'seminars' extension.

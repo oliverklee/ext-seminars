@@ -25,9 +25,6 @@
 if (t3lib_extMgm::isLoaded('oelib')) {
 	require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 }
-if (t3lib_extMgm::isLoaded('seminars')) {
-	require_once(t3lib_extMgm::extPath('seminars') . 'lib/tx_seminars_constants.php');
-}
 
 /**
  * Class 'ext_update' for the 'seminars' extension.

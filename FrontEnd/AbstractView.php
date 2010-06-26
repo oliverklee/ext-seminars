@@ -51,6 +51,13 @@ abstract class tx_seminars_FrontEnd_AbstractView extends tx_oelib_templatehelper
 	public $extKey = 'seminars';
 
 	/**
+	 * the relative path to the uploaded files
+	 *
+	 * @var string
+	 */
+	const UPLOAD_PATH = 'uploads/tx_seminars/';
+
+	/**
 	 * The constructor. Initializes the TypoScript configuration, initializes
 	 * the flex forms, gets the template HTML code, sets the localized labels
 	 * and set the CSS classes from TypoScript.
