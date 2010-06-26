@@ -44,7 +44,8 @@ class tx_seminars_FrontEnd_WizardIcon {
 		$LL = $this->includeLocalLang();
 
 		$wizardItems['plugins_tx_seminars_pi1'] = array(
-			'icon' => t3lib_extMgm::extRelPath('seminars') . 'pi1/ce_wiz.gif',
+			'icon' => t3lib_extMgm::extRelPath('seminars') .
+				'Resources/Public/Images/ContentWizardIcon.gif',
 			'title' => $LANG->getLLL('pi1_title', $LL),
 			'description' => $LANG->getLLL('pi1_description', $LL),
 			'params' => '&defVals[tt_content][CType]=list' .
