@@ -43,19 +43,25 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 	private $testingFramework;
 
 	/**
-	 * @var integer PID of a dummy system folder
+	 * UID of a dummy system folder
+	 *
+	 * @var integer
 	 */
-	private $dummySysFolderPid;
+	private $dummySysFolderUid;
 
 	/**
-	 * @var integer UID of a dummy event record
-	 */
-	private $eventUid;
-
-	/**
-	 * @var integer UID of a dummy organizer record
+	 * UID of a dummy organizer record
+	 *
+	 * @var integer
 	 */
 	private $organizerUid;
+
+	/**
+	 * UID of a dummy event record
+	 *
+	 * @var integer
+	 */
+	private $eventUid;
 
 	/**
 	 * backup of the BE user's language
@@ -76,8 +82,8 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
-		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderPid);
+		$this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
+		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
 
 		$this->organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
@@ -86,7 +92,6 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 				'email' => 'foo@example.org',
 			)
 		);
-
 		$this->eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -96,7 +101,6 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 				'registrations' => 1,
 			)
 		);
-
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars',
 			$this->eventUid,
@@ -126,7 +130,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 	// Tests regarding the error handling of the form
 	///////////////////////////////////////////////////
 
-	public function testRenderThrowsExceptionForInvalidEventUid() {
+	/**
+	 * @test
+	 */
+	public function renderThrowsExceptionForInvalidEventUid() {
 		$this->setExpectedException('Exception', 'There is no event with this UID.');
 
 		new tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm(
@@ -139,7 +146,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 	// Tests regarding the rendering of the form
 	//////////////////////////////////////////////
 
-	public function testFormActionContainsCurrentPage() {
+	/**
+	 * @test
+	 */
+	public function formActionContainsCurrentPage() {
 		tx_oelib_PageFinder::getInstance()->setPageUid(42);
 
 		$this->assertContains(
@@ -148,14 +158,20 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 
-	public function testRenderContainsEventTitleInSubjectFieldForNewForm() {
+	/**
+	 * @test
+	 */
+	public function renderContainsEventTitleInSubjectFieldForNewForm() {
 		$this->assertContains(
 			'Dummy Event',
 			$this->fixture->render()
 		);
 	}
 
-	public function testRenderContainsPrefilledBodyField() {
+	/**
+	 * @test
+	 */
+	public function renderContainsPrefilledBodyField() {
 		$this->assertContains(
 			$GLOBALS['LANG']->getLL('testForm_prefillField_messageBody'),
 			$this->fixture->render()
@@ -175,7 +191,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 
-	public function testRenderDoesNotPrefillSubjectFieldIfEmptyStringWasSentViaPost() {
+	/**
+	 * @test
+	 */
+	public function renderNotPrefillsSubjectFieldIfEmptyStringWasSentViaPost() {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'cancelEvent',
@@ -190,7 +209,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 
-	public function testRenderContainsOrganizerNameAsSenderForEventWithOneOrganizer() {
+	/**
+	 * @test
+	 */
+	public function renderContainsOrganizerNameAsSenderForEventWithOneOrganizer() {
 		$this->assertContains(
 			'<input type="hidden" id="sender" name="sender" value="' .
 				$this->organizerUid . '" />' .
@@ -199,14 +221,20 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 
-	public function testRenderContainsEventDateInSubjectFieldForNewFormAndEventWithBeginDate() {
+	/**
+	 * @test
+	 */
+	public function renderContainsEventDateInSubjectFieldForNewFormAndEventWithBeginDate() {
 		$this->assertContains(
 			strftime('%d.%m.%Y', $GLOBALS['SIM_EXEC_TIME'] + 42),
 			$this->fixture->render()
 		);
 	}
 
-	public function testRenderContainsDropDownForSenderSelectionForEventWithMultipleOrganizers() {
+	/**
+	 * @test
+	 */
+	public function renderContainsDropDownForSenderSelectionForEventWithMultipleOrganizers() {
 		$secondOrganizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
 			array(
@@ -237,7 +265,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 
-	public function testRenderSanitizesPostDataWhenPreFillingAFormField() {
+	/**
+	 * @test
+	 */
+	public function renderSanitizesPostDataWhenPreFillingAFormField() {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
@@ -253,7 +284,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 
-	public function testRenderFormContainsCancelButton() {
+	/**
+	 * @test
+	 */
+	public function renderFormContainsCancelButton() {
 		$this->assertContains(
 			'<input type="button" value="' .
 				$GLOBALS['LANG']->getLL('eventMailForm_backButton') .
@@ -263,7 +297,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 
-	public function testRenderContainsErrorMessageIfFormWasSubmittedWithEmptySubjectField() {
+	/**
+	 * @test
+	 */
+	public function renderContainsErrorMessageIfFormWasSubmittedWithEmptySubjectField() {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
@@ -278,7 +315,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 
-	public function testRenderContainsErrorMessageIfFormWasSubmittedWithEmptyMessageField() {
+	/**
+	 * @test
+	 */
+	public function renderContainsErrorMessageIfFormWasSubmittedWithEmptyMessageField() {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
@@ -293,7 +333,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 
-	public function testRenderContainsSubjectFieldPrefilledByUserInputIfFormIsReRendered() {
+	/**
+	 * @test
+	 */
+	public function renderContainsSubjectFieldPrefilledByUserInputIfFormIsReRendered() {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'sendForm',
@@ -309,7 +352,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 
-	public function testRenderContainsMessageFieldPrefilledByUserInputIfFormIsReRendered() {
+	/**
+	 * @test
+	 */
+	public function renderContainsMessageFieldPrefilledByUserInputIfFormIsReRendered() {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
@@ -325,7 +371,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 
-	public function testRenderContainsHiddenFieldWithVariableEventUid() {
+	/**
+	 * @test
+	 */
+	public function renderContainsHiddenFieldWithVariableEventUid() {
 		$this->assertContains(
 			'<input type="hidden" name="eventUid" value="' . $this->eventUid . '" />',
 			$this->fixture->render()
@@ -337,7 +386,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 	// Tests for the localization.
 	////////////////////////////////
 
-	public function testLocalizationReturnsLocalizedStringForExistingKey() {
+	/**
+	 * @test
+	 */
+	public function localizationReturnsLocalizedStringForExistingKey() {
 		$this->assertEquals(
 			'Events',
 			$GLOBALS['LANG']->getLL('title')
@@ -356,7 +408,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'', array('email' => 'foo@valid-email.org'))
@@ -387,7 +439,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser()
 			)
@@ -417,7 +469,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'', array(
@@ -454,7 +506,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'', array(
@@ -490,7 +542,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'', array('email' => 'foo@valid-email.org')
@@ -522,7 +574,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'', array('email' => 'foo@valid-email.org')
@@ -532,7 +584,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'', array('email' => 'foo@valid-email.org')
@@ -564,7 +616,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'', array('email' => 'foo@valid-email.org')
@@ -606,7 +658,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'', array('email' => 'foo@valid-email.org')
@@ -641,7 +693,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'',
@@ -696,7 +748,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 	// Tests for redirectToListView
 	/////////////////////////////////
 
-	public function testRedirectToListViewSendsTheRedirectHeader() {
+	/**
+	 * @test
+	 */
+	public function redirectToListViewSendsTheRedirectHeader() {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',
@@ -722,7 +777,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 	// Tests concerning getInitialValue
 	/////////////////////////////////////
 
-	public function test_getInitialValueForSubject_AppendsEventTitle() {
+	/**
+	 * @test
+	 */
+	public function getInitialValueForSubjectAppendsEventTitle() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->eventUid, array('title' => 'FooBar')
 		);
@@ -739,7 +797,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$fixture->__destruct();
 	}
 
-	public function test_getInitialValueForSubject_AppendsEventDate() {
+	/**
+	 * @test
+	 */
+	public function getInitialValueForSubjectAppendsEventDate() {
 		$beginDate = strftime('%d.%m.%Y', $GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$this->assertContains(
@@ -748,7 +809,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 
-	public function test_getInitialValueForFoo_ThrowsException() {
+	/**
+	 * @test
+	 */
+	public function getInitialValueForFooThrowsException() {
 		$this->setExpectedException(
 			'Exception',
 			'There is no initial value for the field "foo" defined.'

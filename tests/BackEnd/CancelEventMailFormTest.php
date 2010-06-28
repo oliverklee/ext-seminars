@@ -43,19 +43,25 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 	private $testingFramework;
 
 	/**
-	 * @var integer PID of a dummy system folder
+	 * UID of a dummy system folder
+	 *
+	 * @var integer
 	 */
-	private $dummySysFolderPid;
+	private $dummySysFolderUid;
 
 	/**
-	 * @var integer UID of a dummy event record
-	 */
-	private $eventUid;
-
-	/**
-	 * @var integer UID of a dummy organizer record
+	 * UID of a dummy organizer record
+	 *
+	 * @var integer
 	 */
 	private $organizerUid;
+
+	/**
+	 * UID of a dummy event record
+	 *
+	 * @var integer
+	 */
+	private $eventUid;
 
 	/**
 	 * backup of the BE user's language
@@ -76,8 +82,8 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
-		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderPid);
+		$this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
+		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
 
 		$this->organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
@@ -86,18 +92,16 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 				'email' => 'foo@example.org',
 			)
 		);
-
 		$this->eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'title' => 'Dummy event',
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 86400,
 				'organizers' => 0,
 			)
 		);
-
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars',
 			$this->eventUid,
@@ -127,7 +131,10 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 	// Tests regarding the rendering of the form.
 	///////////////////////////////////////////////
 
-	public function testRenderContainsSubmitButton() {
+	/**
+	 * @test
+	 */
+	public function renderContainsSubmitButton() {
 		$this->assertContains(
 			'<button class="submitButton cancelEvent"><p>' .
 			$GLOBALS['LANG']->getLL('cancelMailForm_sendButton') .
@@ -136,14 +143,20 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderContainsPrefilledBodyFieldWithLocalizedSalutation() {
+	/**
+	 * @test
+	 */
+	public function renderContainsPrefilledBodyFieldWithLocalizedSalutation() {
 		$this->assertContains(
 			$GLOBALS['LANG']->getLL('mailForm_salutation'),
 			$this->fixture->render()
 		);
 	}
 
-	public function testRenderContainsTheCancelEventActionForThisForm() {
+	/**
+	 * @test
+	 */
+	public function renderContainsTheCancelEventActionForThisForm() {
 		$this->assertContains(
 			'<input type="hidden" name="action" value="cancelEvent" />',
 			$this->fixture->render()
@@ -377,7 +390,10 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 	// Tests for the localization.
 	////////////////////////////////
 
-	public function testLocalizationReturnsLocalizedStringForExistingKey() {
+	/**
+	 * @test
+	 */
+	public function localizationReturnsLocalizedStringForExistingKey() {
 		$this->assertEquals(
 			'Events',
 			$GLOBALS['LANG']->getLL('title')
@@ -389,7 +405,10 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 	// Tests for setEventState
 	////////////////////////////
 
-	public function testSetEventStateSetsStatusToCanceled() {
+	/**
+	 * @test
+	 */
+	public function setEventStateSetsStatusToCanceled() {
 		$this->fixture->setPostData(
 			array(
 				'action' => 'cancelEvent',
@@ -443,7 +462,7 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'',
