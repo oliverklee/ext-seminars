@@ -57,7 +57,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->fixture = new tx_seminars_FrontEnd_EventEditor(
 			array(
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'form.' => array('eventEditor.' => array()),
 			),
 			$GLOBALS['TSFE']->cObj
@@ -192,7 +192,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$result = tx_oelib_ObjectFactory::make(
 			'tx_seminars_FrontEnd_EventEditor',
 			array(
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'form.' => array('eventEditor.' => array()),
 				'requiredFrontEndEditorFields' => $requiredField,
 			),

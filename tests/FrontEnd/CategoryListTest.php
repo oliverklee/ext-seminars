@@ -71,7 +71,7 @@ class tx_seminars_FrontEnd_CategoryListTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_FrontEnd_CategoryList(
 			array(
 				'isStaticTemplateLoaded' => 1,
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'pages' => $this->systemFolderPid,
 				'pidList' => $this->systemFolderPid,
 				'recursive' => 1,

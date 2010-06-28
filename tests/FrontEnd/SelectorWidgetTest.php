@@ -58,7 +58,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_FrontEnd_SelectorWidget(
 			array(
 				'isStaticTemplateLoaded' => 1,
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 			),
 			$GLOBALS['TSFE']->cObj
 		);
@@ -385,7 +385,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 			array(
 				array(
 					'isStaticTemplateLoaded' => 1,
-					'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+					'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 					'displaySearchFormFields' => 'event_type',
 				),
 				$GLOBALS['TSFE']->cObj

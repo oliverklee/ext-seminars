@@ -181,7 +181,7 @@ plugin.tx_seminars_pi1 {
 	numberOfClicksForRegistration = 3
 
 	# location of the HTML template file
-	templateFile = EXT:seminars/pi1/seminars_pi1.tmpl
+	templateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html
 
 	# location of the front-end event editor template file
 	eventEditorTemplateFile = EXT:seminars/Resources/Private/Templates/FrontEnd/EventEditor.html

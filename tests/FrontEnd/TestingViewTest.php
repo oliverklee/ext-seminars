@@ -50,7 +50,7 @@ class tx_seminars_FrontEnd_TestingViewTest extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 		$this->fixture = new tx_seminars_tests_fixtures_FrontEnd_TestingView(
-			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
 			$GLOBALS['TSFE']->cObj
 		);
 	}

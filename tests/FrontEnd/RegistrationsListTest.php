@@ -77,7 +77,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 
 		$this->fixture = new tx_seminars_FrontEnd_RegistrationsList(
 			array(
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'enableRegistration' => 1,
 			),
 			'list_registrations',
@@ -162,7 +162,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 		);
 
 		new tx_seminars_FrontEnd_RegistrationsList(
-			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
 			'foo', 0, $GLOBALS['TSFE']->cObj
 		);
 	}
@@ -172,7 +172,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	 */
 	public function createFixtureWithListRegistrationsAsWhatToDisplayDoesNotThrowException() {
 		$fixture = new tx_seminars_FrontEnd_RegistrationsList(
-			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
 			'list_registrations', 0, $GLOBALS['TSFE']->cObj
 		);
 		$fixture->__destruct();
@@ -183,7 +183,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	 */
 	public function createFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException() {
 		$fixture = new tx_seminars_FrontEnd_RegistrationsList(
-			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
 			'list_vip_registrations', 0, $GLOBALS['TSFE']->cObj
 		);
 		$fixture->__destruct();
@@ -209,7 +209,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	 */
 	public function renderWithNegativeSeminarUidReturnsHeader404() {
 		$fixture = new tx_seminars_FrontEnd_RegistrationsList(
-			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
 			'list_registrations', -1, $GLOBALS['TSFE']->cObj
 		);
 		$fixture->render();
@@ -226,7 +226,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	 */
 	public function renderWithZeroSeminarUidReturnsHeader404() {
 		$fixture = new tx_seminars_FrontEnd_RegistrationsList(
-			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
 			'list_registrations', 0, $GLOBALS['TSFE']->cObj
 		);
 		$fixture->render();

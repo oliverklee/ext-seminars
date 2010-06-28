@@ -124,7 +124,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		$this->pi1->init(
 			array(
 				'isStaticTemplateLoaded' => 1,
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'detailPID' => $detailPageUid,
 			)
 		);

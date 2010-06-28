@@ -62,7 +62,7 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 		);
 
 		$this->fixture = new tx_seminars_FrontEnd_RequirementsList(
-			array('templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl'),
+			array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
 			$GLOBALS['TSFE']->cObj
 		);
 	}

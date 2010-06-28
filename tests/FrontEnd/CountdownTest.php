@@ -63,7 +63,7 @@ class tx_seminars_FrontEnd_CountdownTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_FrontEnd_Countdown(
 			array(
 				'isStaticTemplateLoaded' => 1,
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 			),
 			$GLOBALS['TSFE']->cObj
 		);

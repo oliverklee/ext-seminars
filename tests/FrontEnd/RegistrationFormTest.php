@@ -79,7 +79,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 				'sendParametersToThankYouAfterRegistrationPageUrl' => 1,
 				'thankYouAfterRegistrationPID' => $frontEndPageUid,
 				'sendParametersToPageToShowAfterUnregistrationUrl' => 1,
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'logOutOneTimeAccountsAfterRegistration' => 1,
 				'showRegistrationFields' => 'registered_themselves,attendees_names',
 				'form.' => array(
@@ -1118,7 +1118,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	public function getRegistrationDataForEnabledPriceFieldReturnsSelectedPriceValue() {
 		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'price',
 			),
 			$GLOBALS['TSFE']->cObj
@@ -1149,7 +1149,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	public function getRegistrationDataHtmlspecialcharsInterestsField() {
 		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'interests',
 			),
 			$GLOBALS['TSFE']->cObj
@@ -1175,7 +1175,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	public function getRegistrationDataReplacesCarriageReturnInInterestsFieldWithBr() {
 		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'interests',
 			),
 			$GLOBALS['TSFE']->cObj
@@ -1201,7 +1201,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	public function getRegistrationDataCanContainAttendeesNames() {
 		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'attendees_names',
 			),
 			$GLOBALS['TSFE']->cObj
@@ -1231,7 +1231,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'attendees_names,registered_themselves',
 			),
 			$GLOBALS['TSFE']->cObj
@@ -1262,7 +1262,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
-				'templateFile' => 'EXT:seminars/pi1/seminars_pi1.tmpl',
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'attendees_names,registered_themselves',
 			),
 			$GLOBALS['TSFE']->cObj
