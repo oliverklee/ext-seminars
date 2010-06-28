@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#3985] Change: Move the print button to the top toolbar
 - [#3982] Fix: Text overlaps canceled/confirmed icons in grid
 - [#3885] Feature: Save the current active tab in the BE user settings BE_USER->uc
 - [#3971] Feature: Display flash messages in the ExtJS BE module
