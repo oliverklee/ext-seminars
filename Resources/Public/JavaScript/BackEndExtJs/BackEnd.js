@@ -259,7 +259,7 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 		},
 		'->',
 		{
-			xtype: 'button',
+			iconCls: 'print',
 			text: TYPO3.lang.print,
 			listeners: {
 				'click': {
@@ -437,7 +437,7 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 		},
 		'->',
 		{
-			xtype: 'button',
+			iconCls: 'print',
 			text: TYPO3.lang.print,
 			listeners: {
 				'click': {
@@ -585,7 +585,7 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 		},
 		'->',
 		{
-			xtype: 'button',
+			iconCls: 'print',
 			text: TYPO3.lang.print,
 			listeners: {
 				'click': {
@@ -733,7 +733,7 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 		},
 		'->',
 		{
-			xtype: 'button',
+			iconCls: 'print',
 			text: TYPO3.lang.print,
 			listeners: {
 				'click': {

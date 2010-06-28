@@ -33,6 +33,9 @@ td.confirm div.x-grid3-cell-inner {
 .csv {
 	background: url(../../../../../../../typo3/sysext/t3skin/icons/gfx/csv.gif) left center no-repeat !important;
 }
+.print {
+	background: url(../../Icons/Print.png) left center no-repeat !important;
+}
 .hide {
 	background: url(../../../../../../../typo3/sysext/t3skin/icons/gfx/button_hide.gif) left center no-repeat !important;
 }
