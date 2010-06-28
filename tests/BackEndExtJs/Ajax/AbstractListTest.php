@@ -71,14 +71,94 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 	/**
 	 * @test
 	 */
-	public function createListWithRetrieveModelsReturningNullReturnsSuccessFalse() {
+	public function createListWithoutIdPostParameterCallsIsPageUidValidWithZero() {
 		$fixture = $this->getMock(
 			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
-			array('retrieveModels')
+			array('isPageUidValid')
 		);
 		$fixture->expects($this->any())
-			->method('retrieveModels')
-			->will($this->returnValue(null));
+			->method('isPageUidValid')
+			->with(0);
+
+		unset($_POST['id']);
+		$fixture->createList();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createListWithNegativeIdPostParameterCallsIsPageUidValidWithNegativePageUid() {
+		$fixture = $this->getMock(
+			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
+			array('isPageUidValid')
+		);
+		$fixture->expects($this->any())
+			->method('isPageUidValid')
+			->with(-1);
+
+		$_POST['id'] = -1;
+		$fixture->createList();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createListWithZeroIdPostParameterCallsIsPageUidValidWithZeroPageUid() {
+		$fixture = $this->getMock(
+			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
+			array('isPageUidValid')
+		);
+		$fixture->expects($this->any())
+			->method('isPageUidValid')
+			->with(0);
+
+		$_POST['id'] = 0;
+		$fixture->createList();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createListWithPositiveIdPostParameterCallsIsPageUidValidWithPositivePageUid() {
+		$fixture = $this->getMock(
+			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
+			array('isPageUidValid')
+		);
+		$fixture->expects($this->any())
+			->method('isPageUidValid')
+			->with(42);
+
+		$_POST['id'] = 42;
+		$fixture->createList();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createListWithNonIntegerPostParameterCallsIsPageUidValidWithZeroPageUid() {
+		$fixture = $this->getMock(
+			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
+			array('isPageUidValid')
+		);
+		$fixture->expects($this->any())
+			->method('isPageUidValid')
+			->with(0);
+
+		$_POST['id'] = 'foo';
+		$fixture->createList();
+	}
+
+	/**
+	 * @test
+	 */
+	public function createListWithInvalidPageUidReturnsSuccessFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
+			array('isPageUidValid')
+		);
+		$fixture->expects($this->any())
+			->method('isPageUidValid')
+			->will($this->returnValue(FALSE));
 
 		$this->assertEquals(
 			array('success' => FALSE),
@@ -90,16 +170,28 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 	 * @test
 	 */
 	public function createListWithRetrieveModelsReturningEmptyListReturnsSuccessTrueAndEmptyRows() {
+		$mapper = $this->getMock(
+			'tx_oelib_tests_fixtures_TestingMapper',
+			array('countByPageUid')
+		);
+		$mapper->expects($this->any())
+			->method('countByPageUid')
+			->will($this->returnValue(0));
+		tx_oelib_MapperRegistry::set('tx_oelib_tests_fixtures_TestingMapper', $mapper);
+
 		$fixture = $this->getMock(
 			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
-			array('retrieveModels')
+			array('retrieveModels', 'isPageUidValid')
 		);
+		$fixture->expects($this->any())
+			->method('isPageUidValid')
+			->will($this->returnValue(TRUE));
 		$fixture->expects($this->atLeastOnce())
 			->method('retrieveModels')
 			->will($this->returnValue(new tx_oelib_List()));
 
 		$this->assertEquals(
-			array('success' => TRUE, 'rows' => array()),
+			array('success' => TRUE, 'total' => 0, 'rows' => array()),
 			$fixture->createList()
 		);
 	}
@@ -110,17 +202,25 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 	public function createListWithRetrieveModelsReturningOneModelReturnsSuccessTrueAndOneRow() {
 		$list = new tx_oelib_List();
 
-		$mapper = tx_oelib_MapperRegistry::get(
-			'tx_oelib_tests_fixtures_TestingMapper'
+		$mapper = $this->getMock(
+			'tx_oelib_tests_fixtures_TestingMapper',
+			array('countByPageUid')
 		);
+		$mapper->expects($this->any())
+			->method('countByPageUid')
+			->will($this->returnValue(1));
+		tx_oelib_MapperRegistry::set('tx_oelib_tests_fixtures_TestingMapper', $mapper);
 
 		$model = $mapper->getLoadedTestingModel(array());
 		$list->add($model);
 
 		$fixture = $this->getMock(
 			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
-			array('retrieveModels')
+			array('retrieveModels', 'isPageUidValid')
 		);
+		$fixture->expects($this->any())
+			->method('isPageUidValid')
+			->will($this->returnValue(TRUE));
 		$fixture->expects($this->atLeastOnce())
 			->method('retrieveModels')
 			->will($this->returnValue($list));
@@ -128,6 +228,7 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 		$this->assertEquals(
 			array(
 				'success' => TRUE,
+				'total' => 1,
 				'rows' => array(array('uid' => $model->getUid()))
 			),
 			$fixture->createList()
@@ -140,9 +241,14 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 	public function createListWithRetrieveModelsReturningTwoModelsReturnsSuccessTrueAndTwoRows() {
 		$list = new tx_oelib_List();
 
-		$mapper = tx_oelib_MapperRegistry::get(
-			'tx_oelib_tests_fixtures_TestingMapper'
+		$mapper = $this->getMock(
+			'tx_oelib_tests_fixtures_TestingMapper',
+			array('countByPageUid')
 		);
+		$mapper->expects($this->any())
+			->method('countByPageUid')
+			->will($this->returnValue(2));
+		tx_oelib_MapperRegistry::set('tx_oelib_tests_fixtures_TestingMapper', $mapper);
 
 		$model1 = $mapper->getLoadedTestingModel(array());
 		$list->add($model1);
@@ -152,8 +258,11 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 
 		$fixture = $this->getMock(
 			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
-			array('retrieveModels')
+			array('retrieveModels', 'isPageUidValid')
 		);
+		$fixture->expects($this->any())
+			->method('isPageUidValid')
+			->will($this->returnValue(TRUE));
 		$fixture->expects($this->atLeastOnce())
 			->method('retrieveModels')
 			->will($this->returnValue($list));
@@ -161,6 +270,7 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 		$this->assertEquals(
 			array(
 				'success' => TRUE,
+				'total' => 2,
 				'rows' => array(
 					array('uid' => $model1->getUid()),
 					array('uid' => $model2->getUid()),
@@ -234,112 +344,7 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 	/**
 	 * @test
 	 */
-	public function retrieveModelsWithoutIdPostParameterCallsIsPageUidValidWithZero() {
-		$fixture = $this->getMock(
-			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
-			array('isPageUidValid')
-		);
-		$fixture->expects($this->any())
-			->method('isPageUidValid')
-			->with(0);
-
-		unset($_POST['id']);
-		$fixture->retrieveModels();
-	}
-
-	/**
-	 * @test
-	 */
-	public function retrieveModelsWithNegativeIdPostParameterCallsIsPageUidValidWithNegativePageUid() {
-		$fixture = $this->getMock(
-			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
-			array('isPageUidValid')
-		);
-		$fixture->expects($this->any())
-			->method('isPageUidValid')
-			->with(-1);
-
-		$_POST['id'] = -1;
-		$fixture->retrieveModels();
-	}
-
-	/**
-	 * @test
-	 */
-	public function retrieveModelsWithZeroIdPostParameterCallsIsPageUidValidWithZeroPageUid() {
-		$fixture = $this->getMock(
-			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
-			array('isPageUidValid')
-		);
-		$fixture->expects($this->any())
-			->method('isPageUidValid')
-			->with(0);
-
-		$_POST['id'] = 0;
-		$fixture->retrieveModels();
-	}
-
-	/**
-	 * @test
-	 */
-	public function retrieveModelsWithPositiveIdPostParameterCallsIsPageUidValidWithPositivePageUid() {
-		$fixture = $this->getMock(
-			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
-			array('isPageUidValid')
-		);
-		$fixture->expects($this->any())
-			->method('isPageUidValid')
-			->with(42);
-
-		$_POST['id'] = 42;
-		$fixture->retrieveModels();
-	}
-
-	/**
-	 * @test
-	 */
-	public function retrieveModelsWithNonIntegerPostParameterCallsIsPageUidValidWithZeroPageUid() {
-		$fixture = $this->getMock(
-			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
-			array('isPageUidValid')
-		);
-		$fixture->expects($this->any())
-			->method('isPageUidValid')
-			->with(0);
-
-		$_POST['id'] = 'foo';
-		$fixture->retrieveModels();
-	}
-
-	/**
-	 * @test
-	 */
-	public function retrieveModelsWithInvalidPageUidReturnsNull() {
-		$fixture = $this->getMock(
-			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
-			array('isPageUidValid')
-		);
-		$fixture->expects($this->atLeastOnce())
-			->method('isPageUidValid')
-			->will($this->returnValue(FALSE));
-
-		$this->assertNull(
-			$fixture->retrieveModels()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function retrieveModelsWithValidPageUidReturnsListReturnedByMapper() {
-		$fixture = $this->getMock(
-			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
-			array('isPageUidValid')
-		);
-		$fixture->expects($this->atLeastOnce())
-			->method('isPageUidValid')
-			->will($this->returnValue(TRUE));
-
+	public function retrieveModelsReturnsListReturnedByMapper() {
 		$mapper = $this->getMock(
 			'tx_oelib_tests_fixtures_TestingMapper',
 			array('findByPageUid')
@@ -355,14 +360,14 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 
 		$this->assertSame(
 			$list,
-			$fixture->retrieveModels()
+			$this->fixture->retrieveModels()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function retrieveModelsWithValidPageUidWithSubFolderCallsMapperFindByPageUidWithRecursivePageList() {
+	public function retrieveModelsWithPageUidWithSubFolderCallsMapperFindByPageUidWithRecursivePageList() {
 		$parent = $this->testingFramework->createSystemFolder();
 		$child = $this->testingFramework->createSystemFolder($parent);
 
@@ -381,6 +386,35 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 		);
 
 		$_POST['id'] = $parent;
+		$this->fixture->retrieveModels();
+	}
+
+	/**
+	 * @test
+	 */
+	public function retrieveModelsWithStartAndLimitPostParametersCallsFindByPageUidWithCombinedStartAndLimit() {
+		$fixture = $this->getMock(
+			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
+			array('getRecursivePageList')
+		);
+		$fixture->expects($this->any())
+			->method('getRecursivePageList')
+			->will($this->returnValue(''));
+
+		$mapper = $this->getMock(
+			'tx_oelib_tests_fixtures_TestingMapper',
+			array('findByPageUid')
+		);
+		$mapper->expects($this->atLeastOnce())
+			->method('findByPageUid')
+			->with('', '', '1,2');
+
+		tx_oelib_MapperRegistry::set(
+			'tx_oelib_tests_fixtures_TestingMapper', $mapper
+		);
+
+		$_POST['start'] = 1;
+		$_POST['limit'] = 2;
 		$this->fixture->retrieveModels();
 	}
 }

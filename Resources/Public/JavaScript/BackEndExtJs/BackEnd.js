@@ -272,6 +272,7 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 	},
 	bbar: new Ext.PagingToolbar({
 		pageSize: 50,
+		displayInfo: true,
 		store: Ext.StoreMgr.get('typo3-backend-seminars-events-store')
 	}),
 	listeners: {
@@ -303,7 +304,12 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 		},
 		'afterrender': {
 			fn: function() {
-				Ext.StoreMgr.get('typo3-backend-seminars-events-store').load();
+				Ext.StoreMgr.get('typo3-backend-seminars-events-store').load({
+					params: {
+						start: 0,
+						limit: 50
+					}
+				});
 			}
 		},
 	}
@@ -450,6 +456,7 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 	},
 	bbar: new Ext.PagingToolbar({
 		pageSize: 50,
+		displayInfo: true,
 		store: Ext.StoreMgr.get('typo3-backend-seminars-registrations-store')
 	}),
 	listeners: {
@@ -466,7 +473,12 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 		},
 		'afterrender': {
 			fn: function() {
-				Ext.StoreMgr.get('typo3-backend-seminars-registrations-store').load();
+				Ext.StoreMgr.get('typo3-backend-seminars-registrations-store').load({
+					params: {
+						start: 0,
+						limit: 50
+					}
+				});
 			}
 		},
 	}
@@ -598,6 +610,7 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 	},
 	bbar: new Ext.PagingToolbar({
 		pageSize: 50,
+		displayInfo: true,
 		store: Ext.StoreMgr.get('typo3-backend-seminars-speakers-store')
 	}),
 	listeners: {
@@ -614,7 +627,12 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 		},
 		'afterrender': {
 			fn: function() {
-				Ext.StoreMgr.get('typo3-backend-seminars-speakers-store').load();
+				Ext.StoreMgr.get('typo3-backend-seminars-speakers-store').load({
+					params: {
+						start: 0,
+						limit: 50
+					}
+				});
 			}
 		},
 	}
@@ -746,6 +764,7 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 	},
 	bbar: new Ext.PagingToolbar({
 		pageSize: 50,
+		displayInfo: true,
 		store: Ext.StoreMgr.get('typo3-backend-seminars-organizers-store')
 	}),
 	listeners: {
@@ -762,7 +781,12 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 		},
 		'afterrender': {
 			fn: function() {
-				Ext.StoreMgr.get('typo3-backend-seminars-organizers-store').load();
+				Ext.StoreMgr.get('typo3-backend-seminars-organizers-store').load({
+					params: {
+						start: 0,
+						limit: 50
+					}
+				});
 			}
 		},
 	}

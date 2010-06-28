@@ -57,19 +57,20 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 	 *               or "success" => FALSE in case of an error
 	 */
 	public function createList() {
-		$models = $this->retrieveModels();
-
-		if ($models === null) {
+		if (!$this->isPageUidValid($this->getPageUid())) {
 			return array('success' => FALSE);
 		}
 
 		$rows = array();
+		$models = $this->retrieveModels();
 		foreach ($models as $model) {
 			$rows[] = $this->getAsArray($model);
 		}
 
 		return array(
 			'success' => TRUE,
+			'total' => tx_oelib_MapperRegistry::get($this->getMapperName())
+				->countByPageUid($this->getRecursivePageList()),
 			'rows' => $rows,
 		);
 	}
@@ -105,20 +106,22 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 	abstract protected function getAdditionalFields(tx_oelib_Model $model);
 
 	/**
-	 * Retrieves the models that get listed by this list.
+	 * Retrieves the models that get listed by this list. Takes the value in
+	 * $_POST['start'] as the number of the first model and the value in
+	 * $_POST['limit'] as the number of models to retrieve.
 	 *
 	 * @return tx_oelib_List will be a list of models in case of success, null
 	 *                       in case of failure
 	 */
 	protected function retrieveModels() {
-		$pageUid = intval(t3lib_div::_POST('id'));
-		if (!$this->isPageUidValid($pageUid)) {
-			return;
-		}
+		$start = intval(t3lib_div::_POST('start'));
+		$limit = intval(t3lib_div::_POST('limit'));
 
 		return tx_oelib_MapperRegistry::get($this->getMapperName())
 			->findByPageUid(
-				tx_oelib_db::createRecursivePageList($pageUid, 255)
+				$this->getRecursivePageList(),
+				'',
+				$start . ',' . $limit
 			);
 	}
 
@@ -149,6 +152,26 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 	 */
 	public function getMapperName() {
 		return $this->mapperName;
+	}
+
+	/**
+	 * Returns the page UID in $_POST['id'].
+	 *
+	 * @return integer the page UID in $_POST['id'], might be negative
+	 */
+	protected function getPageUid() {
+		return intval(t3lib_div::_POST('id'));
+	}
+
+	/**
+	 * Returns the recursive page list based on the page UID returned by
+	 * $this->getPageUid().
+	 *
+	 * @return string comma-separated list of subpage UIDs including the
+	 *                UID provided by $this->getPageUid()
+	 */
+	protected function getRecursivePageList() {
+		return tx_oelib_db::createRecursivePageList($this->getPageUid(), 255);
 	}
 }
 
