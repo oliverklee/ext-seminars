@@ -190,6 +190,7 @@ TYPO3.Backend.Seminars.Events.StatusRenderer = function(value, metaData, record,
 			// fall-through is intended
 		case 0:
 			// @todo invent a locallang label for the status "planned"
+			metaData.css = 'planned';
 			value = 'planned';
 			break;
 	}

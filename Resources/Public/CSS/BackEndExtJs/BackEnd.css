@@ -16,6 +16,11 @@
 .cancel {
 	background: url(../../Icons/Canceled.png) left center no-repeat !important;
 }
+td.planned div.x-grid3-cell-inner,
+td.cancel div.x-grid3-cell-inner,
+td.confirm div.x-grid3-cell-inner {
+	padding-left: 18px;
+}
 .new {
 	background: url(../../../../../../../typo3/sysext/t3skin/icons/gfx/new_record.gif) left center no-repeat !important;
 }
