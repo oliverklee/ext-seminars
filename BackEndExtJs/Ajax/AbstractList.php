@@ -42,6 +42,14 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 	protected $mapperName = '';
 
 	/**
+	 * comma-separated list of subpage UIDs including the UID provided by
+	 * $this->getPageUid()
+	 *
+	 * @var string
+	 */
+	private $recursivePageList = '';
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {
@@ -165,13 +173,19 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 
 	/**
 	 * Returns the recursive page list based on the page UID returned by
-	 * $this->getPageUid().
+	 * $this->getPageUid() (which must not change during the current request).
 	 *
 	 * @return string comma-separated list of subpage UIDs including the
 	 *                UID provided by $this->getPageUid()
 	 */
 	protected function getRecursivePageList() {
-		return tx_oelib_db::createRecursivePageList($this->getPageUid(), 255);
+		if ($this->recursivePageList == '') {
+			$this->recursivePageList = tx_oelib_db::createRecursivePageList(
+				$this->getPageUid(), 255
+			);
+		}
+
+		return $this->recursivePageList;
 	}
 }
 
