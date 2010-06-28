@@ -251,6 +251,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 				'status', $this->getStatusIcon($event)
 			);
 
+			$this->setEmailButtonMarkers($event);
 			$this->setCancelButtonMarkers($event);
 			$this->setConfirmButtonMarkers($event);
 
@@ -391,6 +392,34 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Sets the markers of a button for sending an e-mail to the attendees of an
+	 * event.
+	 *
+	 * The button will only be visible if the event has at least one registration.
+	 *
+	 * @param tx_seminars_seminar $event the event to get the e-mail button for
+	 */
+	private function setEmailButtonMarkers(tx_seminars_seminar $event) {
+		if (!$event->hasAttendances()) {
+			$this->template->hideSubpartsArray(array('EMAIL_BUTTON'));
+			return;
+		}
+
+		$this->template->unhideSubpartsArray(array('EMAIL_BUTTON'));
+		$pageData = $this->page->getPageData();
+
+		$this->template->setMarker('uid', $event->getUid());
+		$this->template->setMarker(
+			'email_button_url',
+			'index.php?id=' . $pageData['uid'] . '&amp;subModule=1'
+		);
+		$this->template->setMarker(
+			'label_email_button',
+			$GLOBALS['LANG']->getLL('eventlist_button_email')
+			);
 	}
 
 	/**

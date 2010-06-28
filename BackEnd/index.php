@@ -219,7 +219,9 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 				$this->content .= $organizersList->show();
 				break;
 			case 1:
-				if ($this->isConfirmEventFormRequested()) {
+				if ($this->isGeneralEmailFormRequested()) {
+					$this->content .= $this->getGeneralMailForm();
+				} elseif ($this->isConfirmEventFormRequested()) {
 					$this->content .= $this->getConfirmEventMailForm();
 				} elseif ($this->isCancelEventFormRequested()) {
 					$this->content .= $this->getCancelEventMailForm();
@@ -239,10 +241,26 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	}
 
 	/**
+	 * Checks whether the user requested the form for sending an e-mail and
+	 * whether all pre-conditions for showing the form are met.
+	 *
+	 * @return boolean TRUE if the form was requested and pre-conditions are
+	 *                 met, FALSE otherwise
+	 */
+	private function isGeneralEmailFormRequested() {
+		if (!(intval(t3lib_div::_POST('eventUid')) > 0)) {
+			return FALSE;
+		}
+
+		return t3lib_div::_POST('action') == 'sendEmail';
+	}
+
+	/**
 	 * Checks whether the user requested the form for confirming an event and
 	 * whether all pre-conditions for showing the form are met.
 	 *
-	 * @return boolean TRUE if the form was requested and pre-conditions are met, FALSE otherwise
+	 * @return boolean TRUE if the form was requested and pre-conditions are
+	 *                 met, FALSE otherwise
 	 */
 	private function isConfirmEventFormRequested() {
 		if ((!intval(t3lib_div::_POST('eventUid')) > 0)) {
@@ -256,7 +274,8 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * Checks whether the user requested the form for canceling an event and
 	 * whether all pre-conditions for showing the form are met.
 	 *
-	 * @return boolean TRUE if the form was requested and pre-conditions are met, FALSE otherwise
+	 * @return boolean TRUE if the form was requested and pre-conditions are
+	 *                 met, FALSE otherwise
 	 */
 	private function isCancelEventFormRequested() {
 		if (!(intval(t3lib_div::_POST('eventUid')) > 0)) {
@@ -264,6 +283,24 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		}
 
 		return t3lib_div::_POST('action') == 'cancelEvent';
+	}
+
+	/**
+	 * Returns the form to send an e-mail.
+	 *
+	 * @return string the HTML source for the form
+	 */
+	private function getGeneralMailForm() {
+		$form = tx_oelib_ObjectFactory::make(
+			'tx_seminars_BackEnd_GeneralEventMailForm',
+			intval(t3lib_div::_GP('eventUid'))
+		);
+		$form->setPostData(t3lib_div::_POST());
+
+		$result = $form->render();
+		$form->__destruct();
+
+		return $result;
 	}
 
 	/**

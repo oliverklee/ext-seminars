@@ -26,6 +26,7 @@
 			<label index="eventlist_status">Status</label>
 			<label index="eventlist_status_canceled">canceled</label>
 			<label index="eventlist_status_confirmed">confirmed</label>
+			<label index="eventlist_button_email">E-mail</label>
 			<label index="eventlist_button_confirm">Confirm</label>
 			<label index="eventlist_button_cancel">Cancel</label>
 			<label index="speakerlist.title">Name</label>
@@ -58,6 +59,9 @@
 			<label index="cancelMailForm_prefillField_messageBody">Unfortunately, we had to cancel this event.</label>
 			<label index="cancelMailForm_prefillField_introduction">you registered for the event %s.</label>
 			<label index="cancelMailForm_alternativeDate">Alternative dates can be found at our website:</label>
+			<label index="generalMailForm_sendButton">Send e-mail</label>
+			<label index="generalMailForm_prefillField_subject">Event</label>
+			<label index="generalMailForm_prefillField_introduction">you registered for the event %s.</label>
 			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
 			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
 			<label index="mailForm_salutation">salutation</label>
@@ -111,6 +115,7 @@
 			<label index="eventlist_status">Status</label>
 			<label index="eventlist_status_canceled">abgesagt</label>
 			<label index="eventlist_status_confirmed">bestätigt</label>
+			<label index="eventlist_button_email">E-Mail</label>
 			<label index="eventlist_button_confirm">Bestätigen</label>
 			<label index="eventlist_button_cancel">Absagen</label>
 			<label index="speakerlist.title">Name</label>
@@ -143,6 +148,9 @@
 			<label index="cancelMailForm_prefillField_messageBody">Leider musste diese Veranstaltung abgesagt werden.</label>
 			<label index="cancelMailForm_prefillField_introduction">Sie hatten sich für die Veranstaltung %s angemeldet.</label>
 			<label index="cancelMailForm_alternativeDate">Alternativtermine entnehmen Sie bitte unserer Homepage:</label>
+			<label index="generalMailForm_sendButton">E-Mail senden</label>
+			<label index="generalMailForm_prefillField_subject">Veranstaltung</label>
+			<label index="generalMailForm_prefillField_introduction">Sie hatten sich für die Veranstaltung %s angemeldet.</label>
 			<label index="message_noPageTypeSelected">Bitte wählen Sie einen SysOrdner im Seitenbaum aus.</label>
 			<label index="message_noStaticTemplateFound">Kein statisches Template gefunden. Bitte binden Sie das statische Template der seminars-Extension im TS-Setup dieses SysOrdners ein.</label>
 			<label index="mailForm_salutation">Anrede</label>
@@ -315,6 +323,7 @@
 			<label index="eventlist_status" type="integer">247806604</label>
 			<label index="eventlist_status_canceled" type="integer">224147873</label>
 			<label index="eventlist_status_confirmed" type="integer">249197084</label>
+			<label index="eventlist_button_email" type="integer">32015587</label>
 			<label index="eventlist_button_confirm" type="integer">118332393</label>
 			<label index="registrationlist.deleted" type="integer">244968423</label>
 			<label index="eventlist_button_cancel" type="integer">245659783</label>
@@ -336,6 +345,9 @@
 			<label index="cancelMailForm_prefillField_messageBody" type="integer">121602317</label>
 			<label index="cancelMailForm_prefillField_introduction" type="integer">115928722</label>
 			<label index="cancelMailForm_alternativeDate" type="integer">231667710</label>
+			<label index="generalMailForm_sendButton" type="integer">238141636</label>
+			<label index="generalMailForm_prefillField_subject" type="integer">172937159</label>
+			<label index="generalMailForm_prefillField_introduction" type="integer">115928722</label>
 			<label index="message_noPageTypeSelected" type="integer">217321592</label>
 			<label index="message_noStaticTemplateFound" type="integer">236035033</label>
 			<label index="mailForm_salutation" type="integer">128380848</label>
@@ -508,6 +520,7 @@
 			<label index="eventlist_status">Status</label>
 			<label index="eventlist_status_canceled">canceled</label>
 			<label index="eventlist_status_confirmed">confirmed</label>
+			<label index="eventlist_button_email">E-mail</label>
 			<label index="eventlist_button_confirm">Confirm</label>
 			<label index="registrationlist.deleted">(deleted)</label>
 			<label index="eventlist_button_cancel">Cancel</label>
@@ -529,6 +542,9 @@
 			<label index="cancelMailForm_prefillField_messageBody">Unfortunately, we had to cancel this event.</label>
 			<label index="cancelMailForm_prefillField_introduction">you registered for the event %s.</label>
 			<label index="cancelMailForm_alternativeDate">Alternative dates can be found at our website:</label>
+			<label index="generalMailForm_sendButton">Send e-mail</label>
+			<label index="generalMailForm_prefillField_subject">Event</label>
+			<label index="generalMailForm_prefillField_introduction">you registered for the event %s.</label>
 			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
 			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
 			<label index="mailForm_salutation">salutation</label>

@@ -288,7 +288,7 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testShowDoesNotContainCanceledORConfirmedStatusIconForPlannedEvent() {
+	public function testShowDoesNotContainCanceledOrConfirmedStatusIconForPlannedEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -308,7 +308,48 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function showForEventWithRegistrationsContainsEmailButton() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'registrations' => 1,
+			)
+		);
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'seminar' => $eventUid,
+			)
+		);
 
+		$this->assertContains(
+			'<button><p>E-mail</p></button>',
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showForEventWithoutRegistrationsNotContainsEmailButton() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'registrations' => 0,
+			)
+		);
+
+		$this->assertNotContains(
+			'<button><p>E-mail</p></button>',
+			$this->fixture->show()
+		);
+	}
 
 	public function testShowDoesNotContainConfirmButtonForEventThatIsAlreadyConfirmed() {
 		$this->testingFramework->createRecord(

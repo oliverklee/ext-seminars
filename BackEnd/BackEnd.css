@@ -98,14 +98,18 @@ button:hover {
 	color: #000000;
 }
 
+td.email_button button p {
+	padding: 0;
+}
+
 td.confirm_button button p {
 	background: transparent url(../Resources/Public/Icons/Confirmed.png) no-repeat  top left;
-	padding: 0px 0px 0px 17px;
+	padding: 0 0 0 17px;
 }
 
 td.cancel_button button p {
 	background: transparent url(../Resources/Public/Icons/Canceled.png) no-repeat top left;
-	padding: 0px 0px 0px 17px;
+	padding: 0 0 0 17px;
 }
 
 #EventMailForm label {
