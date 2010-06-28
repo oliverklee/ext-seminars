@@ -23,7 +23,6 @@
 ***************************************************************/
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-require_once(PATH_typo3 . 'classes/class.typo3ajax.php');
 
 /**
  * Testcase for the tx_seminars_BackEndExtJs_Ajax_EventsList class in the

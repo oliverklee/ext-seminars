@@ -27,7 +27,8 @@ Ext.ns(
 	'TYPO3.Backend.Seminars.Events',
 	'TYPO3.Backend.Seminars.Registrations',
 	'TYPO3.Backend.Seminars.Speakers',
-	'TYPO3.Backend.Seminars.Organizers'
+	'TYPO3.Backend.Seminars.Organizers',
+	'TYPO3.Backend.Seminars.state'
 );
 
 TYPO3.Backend.Seminars.Events.Menu = {
@@ -202,6 +203,7 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 	region: 'center',
 	stripeRows: true,
 	loadMask: true,
+	stateful: true,
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-events-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getEvents',
@@ -211,17 +213,17 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
-		    {name: 'record_type'},
-		    {name: 'uid'},
-		    {name: 'title'},
-		    {name: 'status'},
+			{name: 'record_type'},
+			{name: 'uid'},
+			{name: 'title'},
+			{name: 'status'}
 		]
 	}),
 	columns: [
-	      {header: '', renderer: TYPO3.Backend.Seminars.Events.IconRenderer, width: 30, hideable: false, menuDisabled: true, sortable: false, resizable: false},
-	      {header: '#', dataIndex: 'uid'},
-          {header: TYPO3.lang['eventlist.title'], dataIndex: 'title'},
-          {header: TYPO3.lang['eventlist_status'], dataIndex: 'status', renderer: TYPO3.Backend.Seminars.Events.StatusRenderer},
+		{header: '', renderer: TYPO3.Backend.Seminars.Events.IconRenderer, width: 30, hideable: false, menuDisabled: true, sortable: false, resizable: false},
+		{header: '#', dataIndex: 'uid'},
+		{header: TYPO3.lang['eventlist.title'], dataIndex: 'title'},
+		{header: TYPO3.lang['eventlist_status'], dataIndex: 'status', renderer: TYPO3.Backend.Seminars.Events.StatusRenderer}
 	],
 	tbar: {
 		items: [{
@@ -279,25 +281,25 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 				TYPO3.Backend.Seminars.Events.rowIndex = rowIndex;
 				var menu = Ext.getCmp('typo3-backend-seminars-events-menu');
 				if (!menu) {
-				    menu = new Ext.menu.Menu(TYPO3.Backend.Seminars.Events.Menu);
+					menu = new Ext.menu.Menu(TYPO3.Backend.Seminars.Events.Menu);
 				}
 				var row = grid.getStore().getAt(rowIndex);
-			    if (row.get('hidden')) {
-			    	Ext.getCmp('typo3-backend-seminars-events-menu-unhide').show();
-			    	Ext.getCmp('typo3-backend-seminars-events-menu-hide').hide();
-			    } else {
-			    	Ext.getCmp('typo3-backend-seminars-events-menu-hide').show();
-			    	Ext.getCmp('typo3-backend-seminars-events-menu-unhide').hide();
-			    }
-			    if (row.get('status') > 0) {
-			    	Ext.getCmp('typo3-backend-seminars-events-menu-confirm').hide();
-			    	Ext.getCmp('typo3-backend-seminars-events-menu-cancel').hide();
-			    } else {
-			    	Ext.getCmp('typo3-backend-seminars-events-menu-confirm').show();
-			    	Ext.getCmp('typo3-backend-seminars-events-menu-cancel').show();
-			    }
-			    menu.showAt(event.getXY());
-			    event.stopEvent();
+				if (row.get('hidden')) {
+					Ext.getCmp('typo3-backend-seminars-events-menu-unhide').show();
+					Ext.getCmp('typo3-backend-seminars-events-menu-hide').hide();
+				} else {
+					Ext.getCmp('typo3-backend-seminars-events-menu-hide').show();
+					Ext.getCmp('typo3-backend-seminars-events-menu-unhide').hide();
+				}
+				if (row.get('status') > 0) {
+					Ext.getCmp('typo3-backend-seminars-events-menu-confirm').hide();
+					Ext.getCmp('typo3-backend-seminars-events-menu-cancel').hide();
+				} else {
+					Ext.getCmp('typo3-backend-seminars-events-menu-confirm').show();
+					Ext.getCmp('typo3-backend-seminars-events-menu-cancel').show();
+				}
+				menu.showAt(event.getXY());
+				event.stopEvent();
 			}
 		},
 		'afterrender': {
@@ -384,6 +386,7 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 	region: 'center',
 	stripeRows: true,
 	loadMask: true,
+	stateful: true,
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-registrations-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getRegistrations',
@@ -393,8 +396,8 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
-		    {name: 'uid'},
-		    {name: 'title'},
+			{name: 'uid'},
+			{name: 'title'}
 		]
 	}),
 	columns: [
@@ -458,10 +461,10 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 				TYPO3.Backend.Seminars.Registrations.rowIndex = rowIndex;
 				var menu = Ext.getCmp('typo3-backend-seminars-registrations-menu');
 				if (!menu) {
-				    menu = new Ext.menu.Menu(TYPO3.Backend.Seminars.Registrations.Menu);
+					menu = new Ext.menu.Menu(TYPO3.Backend.Seminars.Registrations.Menu);
 				}
-			    menu.showAt(event.getXY());
-			    event.stopEvent();
+				menu.showAt(event.getXY());
+				event.stopEvent();
 			}
 		},
 		'afterrender': {
@@ -548,6 +551,7 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 	region: 'center',
 	stripeRows: true,
 	loadMask: true,
+	stateful: true,
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-speakers-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getSpeakers',
@@ -697,6 +701,7 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 	region: 'center',
 	stripeRows: true,
 	loadMask: true,
+	stateful: true,
 	store: new Ext.data.JsonStore({
 		id: 'typo3-backend-seminars-organizers-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getOrganizers',
@@ -793,10 +798,81 @@ TYPO3.Backend.Seminars.TabPanel = {
 	region: 'center',
 	xtype: 'tabpanel',
 	activeTab: 0,
-	items: [TYPO3.Backend.Seminars.Default.TabPanel]
+	items: [TYPO3.Backend.Seminars.Default.TabPanel],
+	getState: function() {
+		return {
+			activeTab: this.getActiveTab().getId(),
+		};
+	},
+	stateEvents: ['tabchange'],
+	stateful: true
 };
 
-Ext.onReady(function(){
+/**
+ * TYPO3 back-end user session state provider for ExtJS.
+ */
+TYPO3.Backend.Seminars.state.SessionProvider = function(config) {
+	this.addEvents('readsuccess', 'readfailure', 'savesuccess', 'savefailure');
+	TYPO3.Backend.Seminars.state.SessionProvider.superclass.constructor.call(this);
+	Ext.apply(this, config, {
+		readUrl: '.',
+		saveUrl: '.'
+	});
+}
+
+Ext.extend(TYPO3.Backend.Seminars.state.SessionProvider, Ext.state.Provider, {
+	set: function(name, value) {
+		if(!name) {
+			return;
+		}
+
+		Ext.Ajax.request({
+			url: this.saveUrl,
+			params: {
+				'name': name,
+				'value': Ext.encode(this.encodeValue(value)),
+			},
+			scope: this,
+			success: this.onSaveSuccess,
+			failure: this.onSaveFailure
+		});
+
+		TYPO3.Backend.Seminars.state.SessionProvider.superclass.set.call(this, name, value);
+	},
+	onReadSuccess: function(response) {
+		var stateData = Ext.decode(response.responseText);
+		Ext.each(stateData.data, function(item) {
+			this.state[item['name']] = this.decodeValue(item['value']);
+		}, this);
+		this.fireEvent('readsuccess', this);
+	},
+	onReadFailure: function() {
+		this.fireEvent('readfailure', this);
+	},
+	onSaveSuccess: function() {
+		this.fireEvent('savesuccess', this);
+	},
+	onSaveFailure: function() {
+		this.fireEvent('savefailure', this);
+	},
+	/**
+	 * Reads the state information from the server.
+	 */
+	readState: function() {
+		Ext.Ajax.request({
+			url: this.readUrl,
+			scope: this,
+			success: this.onReadSuccess,
+			failure: this.onReadFailure
+		});
+	}
+});
+
+/**
+ * Starts the ExtJS application by creating the basic TabPanel and adding it to
+ * the viewport.
+ */
+TYPO3.Backend.Seminars.start = function() {
 	new Ext.TabPanel(TYPO3.Backend.Seminars.TabPanel);
 
 	if (!TYPO3.settings.Backend.Seminars.Events.TabPanel.hidden) {
@@ -835,4 +911,41 @@ Ext.onReady(function(){
 		layout: 'border',
 		items: Ext.getCmp('typo3-backend-seminars-tabpanel'),
 	});
+};
+
+/**
+ * Adds an event listener on the onDocumentReady event which is fired just
+ * before onload and before images are loaded by ExtJS.
+ *
+ * The listener loads the ExtJS state data via AJAX and starts the application
+ * if this is successful or shows an error message if this fails.
+ *
+ * @see http://www.extjs.com/deploy/dev/docs/?class=Ext
+ */
+Ext.onReady(function() {
+	var stateProvider = new TYPO3.Backend.Seminars.state.SessionProvider({
+		readUrl: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getState',
+		saveUrl: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::setState'
+	});
+	stateProvider.on('readsuccess', TYPO3.Backend.Seminars.start);
+	stateProvider.on('readfailure', function() {
+		// @todo Localize the error message.
+		TYPO3.Flashmessage.display(
+			4,
+			'ExtJS state information could not be fetched via AJAX.',
+			'<p>(This message will disappear in 60 seconds.)</p>',
+			60
+		);
+	});
+	stateProvider.on('savefailure', function() {
+		// @todo Localize the error message.
+		TYPO3.Flashmessage.display(
+			4,
+			'ExtJS state information could not be saved via AJAX.',
+			'<p>(This message will disappear in 5 seconds.)</p>',
+			5
+		);
+	});
+	Ext.state.Manager.setProvider(stateProvider);
+	stateProvider.readState();
 });

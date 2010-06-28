@@ -66,6 +66,16 @@ class tx_seminars_BackEndExtJs_Ajax_Dispatcher {
 					'tx_seminars_BackEndExtJs_Ajax_OrganizersList'
 				)->createList();
 				break;
+			case 'Seminars::getState':
+				$result = tx_oelib_ObjectFactory::make(
+					'tx_seminars_BackEndExtJs_Ajax_StateProvider'
+				)->getState();
+				break;
+			case 'Seminars::setState':
+				$result = tx_oelib_ObjectFactory::make(
+					'tx_seminars_BackEndExtJs_Ajax_StateProvider'
+				)->setState();
+				break;
 			default:
 				$result = array('success' => FALSE);
 				break;
