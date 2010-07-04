@@ -389,19 +389,19 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		if (!$registrations->isEmpty()) {
 			$mailer = tx_oelib_mailerFactory::getInstance()->getMailer();
 
-			foreach ($registrations as $registration) {
-				if (!$registration->getFrontEndUser()->hasEMailAddress()) {
+			foreach ($registrations as $oldRegistration) {
+				$registration = tx_oelib_MapperRegistry
+					::get('tx_seminars_Mapper_Registration')
+					->find($oldRegistration->getUid());
+				$user = $registration->getFrontEndUser();
+				if (!$user->hasEMailAddress()) {
 					continue;
 				}
 				$eMail = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
 				$eMail->setSender($organizer);
 				$eMail->setSubject($this->getPostData('subject'));
 				$eMail->addRecipient($registration->getFrontEndUser());
-				$eMail->setMessage(
-					$this->createMessageBody(
-						$registration->getFrontEndUser(), $organizer
-					)
-				);
+				$eMail->setMessage($this->createMessageBody($user, $organizer));
 
 				$mailer->send($eMail);
 				$eMail->__destruct();
