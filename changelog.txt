@@ -1,5 +1,4 @@
 1.0.0 (currently working on)
-- [#3951] Feature: Add a hook for sending the confirmation e-mail (from the BE module)
 - [#3931] Fix: Prices greater 9999.999 are not possible, thanks to Philipp Gampe
 - [#3909] Feature: Allow paging for the grids
 - [#3955] Change: Add icon to the print button
