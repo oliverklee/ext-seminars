@@ -1,4 +1,5 @@
 0.9.3 (currently working on)
+- [#3931] Fix: Prices greater 9999.999 are not possible, thanks to Philipp Gampe
 - [#3856] Change: Make ISO8859-15 the charset for the CSV for the CSV export and convert the data
 - [#3839] Fix: Clarify the label for the organizer footer (thanks to Philipp Gampe)
 - [#3930] Fix: Typo in the reference: boh -> both
