@@ -741,6 +741,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$city = isset($formData['city'])
 			? strip_tags($this->unifyWhitespace($formData['city'])) : '';
 		$registration->setCity($city);
+		$country = isset($formData['country'])
+			? strip_tags($this->unifyWhitespace($formData['country'])) : '';
+		$registration->setCountry($country);
 	}
 
 	/**

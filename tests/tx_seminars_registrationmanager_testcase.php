@@ -6575,5 +6575,131 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$fixture->__destruct();
 	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNonEmptyCountrySetsCountry() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('country' => 'Brazil')
+		);
+
+		$this->assertEquals(
+			'Brazil',
+			$registration->getCountry()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataDropsHtmlTagsFromCountry() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('country' => 'South <em>Africa</em>')
+		);
+
+		$this->assertEquals(
+			'South Africa',
+			$registration->getCountry()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataChangesWhitespaceToSpaceInCountry() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration,
+			array('country' => 'South' . CRLF . TAB . ' Africa')
+		);
+
+		$this->assertEquals(
+			'South Africa',
+			$registration->getCountry()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForEmptyCountrySetsEmptyCountry() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('country' => '')
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getCountry()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingCountrySetsEmptyCountry() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getCountry()
+		);
+
+		$fixture->__destruct();
+	}
 }
 ?>
