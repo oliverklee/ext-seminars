@@ -5942,9 +5942,6 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-
-
-
 	/**
 	 * @test
 	 */
@@ -6221,6 +6218,107 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'',
 			$registration->getName()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNonEmptyAddressSetsAddress() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration,
+			array('address' => 'Back Road 42' . LF . '(second door)')
+		);
+
+		$this->assertEquals(
+			'Back Road 42' . LF . '(second door)',
+			$registration->getAddress()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataDropsHtmlTagsFromAddress() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('address' => 'Back <em>Road</em> 42')
+		);
+
+		$this->assertEquals(
+			'Back Road 42',
+			$registration->getAddress()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForEmptyAddressSetsEmptyAddress() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('address' => '')
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getAddress()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingAddressSetsEmptyAddress() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getAddress()
 		);
 
 		$fixture->__destruct();
