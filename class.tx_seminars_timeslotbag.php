@@ -33,7 +33,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_timeslotbag extends tx_seminars_bag {
+class tx_seminars_timeslotbag extends tx_seminars_Bag_Abstract {
 	/**
 	 * The constructor. Creates a timeslot bag that contains timeslot
 	 * records and allows to iterate over them.

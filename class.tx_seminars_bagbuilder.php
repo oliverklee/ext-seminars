@@ -95,7 +95,7 @@ abstract class tx_seminars_bagbuilder {
 	/**
 	 * Creates and returns the customized bag.
 	 *
-	 * @return tx_seminars_bag customized, newly-created bag
+	 * @return tx_seminars_Bag_Abstract customized, newly-created bag
 	 */
 	public function build() {
 		return tx_oelib_ObjectFactory::make(

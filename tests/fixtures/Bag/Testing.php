@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_testbag' for the 'seminars' extension.
+ * Class tx_seminars_tests_fixtures_Bag_Testing for the "seminars" extension.
  *
  * This aggregate class holds a bunch of test objects and allows to iterate over
  * them.
@@ -33,7 +33,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_testbag extends tx_seminars_bag {
+class tx_seminars_tests_fixtures_Bag_Testing extends tx_seminars_Bag_Abstract {
 	/**
 	 * The constructor. Creates a bag that contains test records and allows to
 	 * iterate over them.

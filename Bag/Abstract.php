@@ -23,13 +23,10 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_bag' for the 'seminars' extension.
+ * Class tx_seminars_Bag_Abstract for the "seminars" extension.
  *
  * This aggregate class holds a bunch of objects that are created from
  * the result of an SQL query and allows to iterate over them.
- *
- * When inheriting from this class, make sure to implement the function
- * createItemFromDbResult.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -37,7 +34,7 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class tx_seminars_bag implements Iterator {
+abstract class tx_seminars_Bag_Abstract implements Iterator {
 	/**
 	 * @var string the name of the main DB table from which we get the records
 	 *             for this bag
@@ -409,7 +406,7 @@ abstract class tx_seminars_bag implements Iterator {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_bag.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_bag.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Bag/Abstract.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Bag/Abstract.php']);
 }
 ?>

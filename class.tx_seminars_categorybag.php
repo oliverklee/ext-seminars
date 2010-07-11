@@ -33,7 +33,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_categorybag extends tx_seminars_bag {
+class tx_seminars_categorybag extends tx_seminars_Bag_Abstract {
 	/**
 	 * The constructor. Creates a category bag that contains category
 	 * records and allows to iterate over them.

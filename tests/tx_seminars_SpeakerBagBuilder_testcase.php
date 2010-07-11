@@ -60,9 +60,9 @@ class tx_seminars_SpeakerBagBuilder_testcase extends tx_phpunit_testcase {
 	// Tests for the basic builder functions.
 	///////////////////////////////////////////
 
-	public function testBuilderBuildsABagInstance() {
+	public function testBuilderBuildsABag() {
 		$this->assertTrue(
-			$this->fixture->build() instanceof tx_seminars_bag
+			$this->fixture->build() instanceof tx_seminars_Bag_Abstract
 		);
 	}
 }

@@ -1659,8 +1659,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *        the flavor of list view: either an empty string (for the default
 	 *        list view), the value from "what_to_display", or "other_dates"
 	 *
-	 * @return tx_seminars_bag a seminar bag or a registration bag containing the
-	 *                         the seminars or registrations for the list view
+	 * @return tx_seminars_Bag_Abstract a seminar bag or a registration bag
+	 *                                  containing the seminars or registrations
+	 *                                  for the list view
 	 */
 	public function initListView($whatToDisplay = '') {
 		if (strstr($this->cObj->currentRecord, 'tt_content')) {
@@ -1787,7 +1788,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * This function should only be called when there are actually any list
 	 * items.
 	 *
-	 * @param object initialized seminar or registration bag
+	 * @param tx_seminars_Bag_Abstract initialized seminar or registration bag
 	 * @param string a string selecting the flavor of list view: either
 	 *               an empty string (for the default list view), the
 	 *               value from "what_to_display" or "other_dates"
@@ -1795,7 +1796,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @return string HTML for the table (will not be empty)
 	 */
 	protected function createListTable(
-		tx_seminars_bag $seminarOrRegistrationBag, $whatToDisplay
+		tx_seminars_Bag_Abstract $seminarOrRegistrationBag, $whatToDisplay
 	) {
 		$result = $this->createListHeader();
 		$rowCounter = 0;

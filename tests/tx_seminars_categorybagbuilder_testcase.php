@@ -54,9 +54,9 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 	// Tests for the basic builder functions.
 	///////////////////////////////////////////
 
-	public function testBuilderBuildsABagChildObject() {
+	public function testBuilderBuildsABag() {
 		$this->assertTrue(
-			is_subclass_of($this->fixture->build(), 'tx_seminars_bag')
+			is_subclass_of($this->fixture->build(), 'tx_seminars_Bag_Abstract')
 		);
 	}
 

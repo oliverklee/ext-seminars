@@ -33,7 +33,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_speakerbag extends tx_seminars_bag {
+class tx_seminars_speakerbag extends tx_seminars_Bag_Abstract {
 	/**
 	 * The constructor. Creates a speaker bag that contains speaker
 	 * records and allows to iterate over them.
