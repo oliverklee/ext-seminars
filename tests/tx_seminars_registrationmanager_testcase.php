@@ -6323,5 +6323,131 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$fixture->__destruct();
 	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForNonEmptyZipSetsZip() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('zip' => '12345 ABC')
+		);
+
+		$this->assertEquals(
+			'12345 ABC',
+			$registration->getZip()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataDropsHtmlTagsFromZip() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('zip' => '12345 <em>ABC</em>')
+		);
+
+		$this->assertEquals(
+			'12345 ABC',
+			$registration->getZip()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataChangesWhitespaceToSpaceInZip() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration,
+			array('zip' => '12345' . CRLF . TAB . ' ABC')
+		);
+
+		$this->assertEquals(
+			'12345 ABC',
+			$registration->getZip()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForEmptyZipSetsEmptyZip() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array('zip' => '')
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getZip()
+		);
+
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForMissingZipSetsEmptyZip() {
+		$fixture = tx_oelib_ObjectFactory::make(
+			$this->createAccessibleProxyClass()
+		);
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = new tx_seminars_Model_Registration();
+		$registration->setEvent($event);
+
+		$fixture->setRegistrationData(
+			$registration, array()
+		);
+
+		$this->assertEquals(
+			'',
+			$registration->getZip()
+		);
+
+		$fixture->__destruct();
+	}
 }
 ?>

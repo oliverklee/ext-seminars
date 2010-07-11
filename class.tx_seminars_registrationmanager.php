@@ -735,6 +735,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$address = isset($formData['address'])
 			? strip_tags($formData['address']) : '';
 		$registration->setAddress($address);
+		$zip = isset($formData['zip'])
+			? strip_tags($this->unifyWhitespace($formData['zip'])) : '';
+		$registration->setZip($zip);
 	}
 
 	/**
