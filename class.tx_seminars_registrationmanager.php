@@ -729,6 +729,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 		$registration->setGender($gender);
 
+		$name = isset($formData['name'])
+			? strip_tags($this->unifyWhitespace($formData['name'])) : '';
+		$registration->setName($name);
 	}
 
 	/**
