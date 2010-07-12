@@ -227,10 +227,10 @@ class tx_seminars_cli_MailNotifier {
 	 * @param integer status to limit the builder to, either
 	 *                tx_seminars_seminar::STATUS_PLANNED or ::CONFIRMED
 	 *
-	 * @return tx_seminars_seminarbagbuilder builder for the seminar bag
+	 * @return tx_seminars_BagBuilder_Event builder for the seminar bag
 	 */
 	private function getSeminarBagBuilder($status) {
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Event');
 		$builder->setTimeFrame('upcomingWithBeginDate');
 		$builder->limitToStatus($status);
 

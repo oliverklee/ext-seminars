@@ -23,9 +23,9 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_seminarbagbuilder' for the 'seminars' extension.
+ * Class tx_seminars_BagBuilder_Event for the "seminars" extension.
  *
- * This builder class creates customized seminarbag objects.
+ * This builder class creates customized event bag objects.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -33,7 +33,7 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_seminarbagbuilder extends tx_seminars_BagBuilder_Abstract {
+class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * @var string class name of the bag class that will be built
 	 */
@@ -1232,7 +1232,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_BagBuilder_Abstract {
 			'uid',
 			'tx_seminars_seminars',
 			'(object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ' OR ' .
-				'object_type = ' . tx_seminars_Model_Event::TYPE_TOPIC . ') AND ' . 
+				'object_type = ' . tx_seminars_Model_Event::TYPE_TOPIC . ') AND ' .
 				'(target_groups = 0)' .
 				tx_oelib_db::enableFields('tx_seminars_seminars')
 		);
@@ -1384,7 +1384,7 @@ class tx_seminars_seminarbagbuilder extends tx_seminars_BagBuilder_Abstract {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_seminarbagbuilder.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BagBuilder/Event.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BagBuilder/Event.php']);
 }
 ?>

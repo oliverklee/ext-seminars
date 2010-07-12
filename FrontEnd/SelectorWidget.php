@@ -120,7 +120,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 		);
 
 		$this->instantiateStaticInfo();
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Event');
 		$builder->limitToEventTypes(
 			t3lib_div::trimExplode(
 				',',

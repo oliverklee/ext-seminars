@@ -4491,7 +4491,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                               event has no required events
 	 */
 	public function getRequirements() {
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Event');
 		$builder->limitToRequiredEventTopics($this->getTopicUid());
 
 		return $builder->build();
@@ -4505,7 +4505,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                               this event has no depending events
 	 */
 	public function getDependencies() {
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Event');
 		$builder->limitToDependingEventTopics($this->getTopicUid());
 
 		return $builder->build();

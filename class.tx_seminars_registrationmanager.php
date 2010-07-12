@@ -912,7 +912,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *                               users registration, may be empty
 	 */
 	public function getMissingRequiredTopics(tx_seminars_seminar $event) {
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Event');
 		$builder->limitToRequiredEventTopics($event->getTopicUid());
 		$builder->limitToTopicsWithoutRegistrationByUser($this->getFeUserUid());
 

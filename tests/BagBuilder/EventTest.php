@@ -25,7 +25,8 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the seminar bag builder class in the 'seminars' extension.
+ * Testcase for the tx_seminars_BagBuilder_Event class in the "seminars"
+ * extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -33,9 +34,9 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
+class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_seminarbagbuilder
+	 * @var tx_seminars_BagBuilder_Event
 	 */
 	private $fixture;
 	/**
@@ -57,7 +58,7 @@ class tx_seminars_seminarbagbuilder_testcase extends tx_phpunit_testcase {
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_seminarbagbuilder();
+		$this->fixture = new tx_seminars_BagBuilder_Event();
 		$this->fixture->setTestMode();
 		$this->future = $GLOBALS['EXEC_TIME'] + 50;
 		$this->past = $GLOBALS['EXEC_TIME'] - 50;

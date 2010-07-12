@@ -44,7 +44,7 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 	 */
 	public function render() {
 		$seminarBagBuilder = tx_oelib_ObjectFactory::make(
-			'tx_seminars_seminarbagbuilder'
+			'tx_seminars_BagBuilder_Event'
 		);
 		$seminarBagBuilder->setSourcePages(
 			$this->getConfValueString('pages'),
