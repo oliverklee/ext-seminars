@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_brokenTestingBagBuilder' for the 'seminars' extension.
+ * Class tx_seminars_tests_fixtures_BagBuilder_BrokenTesting for the "seminars" extension.
  *
  * This builder class creates customized testbag objects.
  *
@@ -32,7 +32,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_brokenTestingBagBuilder extends tx_seminars_bagbuilder {
+class tx_seminars_tests_fixtures_BagBuilder_BrokenTesting extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * @var string class name of the bag class that will be built
 	 */

@@ -32,7 +32,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_OrganizerBagBuilder extends tx_seminars_bagbuilder {
+class tx_seminars_OrganizerBagBuilder extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * @var string class name of the bag class that will be built
 	 */

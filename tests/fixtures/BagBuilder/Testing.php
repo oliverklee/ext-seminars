@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_testbagbuilder' for the 'seminars' extension.
+ * Class 'tx_seminars_tests_fixtures_BagBuilder_Testing' for the 'seminars' extension.
  *
  * This builder class creates customized testbag objects.
  *
@@ -33,7 +33,7 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_testbagbuilder extends tx_seminars_bagbuilder {
+class tx_seminars_tests_fixtures_BagBuilder_Testing extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * @var string class name of the bag class that will be built
 	 */

@@ -25,7 +25,7 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the seminar bag builder class in the 'seminars' extension.
+ * Testcase for the tx_seminars_BagBuilder_Abstract class in the "seminars" extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -33,22 +33,26 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
+class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
+	/**
+	 * @var tx_seminars_tests_fixtures_BagBuilder_Testing
+	 */
 	private $fixture;
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
 
 	/** PID of a dummy system folder */
 	private $dummySysFolderPid = 0;
 
 	public function setUp() {
-		$this->testingFramework
-			= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_testbagbuilder();
+		$this->fixture = new tx_seminars_tests_fixtures_BagBuilder_Testing();
 		$this->fixture->setTestMode();
 
-		$this->dummySysFolderPid
-			= $this->testingFramework->createSystemFolder();
+		$this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 	}
 
 	public function tearDown() {
@@ -66,7 +70,7 @@ class tx_seminars_testbagbuilder_testcase extends tx_phpunit_testcase {
 			'Exception', 'The attribute $this->tableName must not be empty.'
 		);
 
-		new tx_seminars_brokenTestingBagBuilder();
+		new tx_seminars_tests_fixtures_BagBuilder_BrokenTesting();
 	}
 
 	public function testBuilderBuildsAnObject() {
