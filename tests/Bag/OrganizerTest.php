@@ -25,16 +25,16 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the organizerbag class in the 'seminars' extensions.
+ * Testcase for the tx_seminars_Bag_Organizer class in the "seminars" extensions.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_organizerbag_testcase extends tx_phpunit_testcase {
+class tx_seminars_Bag_OrganizerTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_organizerbag
+	 * @var tx_seminars_Bag_Organizer
 	 */
 	private $fixture;
 
@@ -49,7 +49,7 @@ class tx_seminars_organizerbag_testcase extends tx_phpunit_testcase {
 
 		$this->testingFramework->createRecord('tx_seminars_organizers');
 
-		$this->fixture = new tx_seminars_organizerbag('is_dummy_record=1');
+		$this->fixture = new tx_seminars_Bag_Organizer('is_dummy_record=1');
 	}
 
 	protected function tearDown() {

@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_organizerbag' for the 'seminars' extension.
+ * Class tx_seminars_Bag_Organizer for the "seminars" extension.
  *
  * This aggregate class holds a bunch of organizer objects and allows
  * to iterate over them.
@@ -33,7 +33,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_organizerbag extends tx_seminars_Bag_Abstract {
+class tx_seminars_Bag_Organizer extends tx_seminars_Bag_Abstract {
 	/**
 	 * The constructor. Creates a organizer bag that contains organizer
 	 * records and allows to iterate over them.
@@ -81,7 +81,7 @@ class tx_seminars_organizerbag extends tx_seminars_Bag_Abstract {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_organizerbag.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_organizerbag.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Bag/Organizer.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Bag/Organizer.php']);
 }
 ?>

@@ -2098,7 +2098,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Creates an organizerbag object and returns it.
 	 * Throws an exception if there are no organizers related to this event.
 	 *
-	 * @return tx_seminars_organizerbag an organizerbag object
+	 * @return tx_seminars_Bag_Organizer an organizerbag object
 	 */
 	public function getOrganizerBag() {
 		if (!$this->hasOrganizers()) {
@@ -2274,7 +2274,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$organizerBag = tx_oelib_ObjectFactory::make(
-			'tx_seminars_organizerbag',
+			'tx_seminars_Bag_Organizer',
 			'tx_seminars_seminars_organizing_partners_mm.uid_local = ' .
 				$this->getUid() . ' AND ' .
 				'tx_seminars_seminars_organizing_partners_mm.uid_foreign = ' .
