@@ -37,7 +37,7 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 	/**
 	 * @var string class name of the bag class that will be built
 	 */
-	protected $bagClassName = 'tx_seminars_categorybag';
+	protected $bagClassName = 'tx_seminars_Bag_Category';
 
 	/**
 	 * @var string the table name of the bag to build

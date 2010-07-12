@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_categorybag' for the 'seminars' extension.
+ * Class tx_seminars_Bag_Category for the "seminars" extension.
  *
  * This aggregate class holds a bunch of category objects and allows
  * to iterate over them.
@@ -33,7 +33,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_categorybag extends tx_seminars_Bag_Abstract {
+class tx_seminars_Bag_Category extends tx_seminars_Bag_Abstract {
 	/**
 	 * The constructor. Creates a category bag that contains category
 	 * records and allows to iterate over them.
@@ -81,7 +81,7 @@ class tx_seminars_categorybag extends tx_seminars_Bag_Abstract {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_categorybag.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_categorybag.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Bag/Category.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Bag/Category.php']);
 }
 ?>
