@@ -382,7 +382,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			->find(intval($this->getPostData('sender')));
 
 		$registrationBagBuilder
-			= tx_oelib_ObjectFactory::make('tx_seminars_registrationBagBuilder');
+			= tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Registration');
 		$registrationBagBuilder->limitToEvent($this->getEvent()->getUid());
 		$registrations = $registrationBagBuilder->build();
 

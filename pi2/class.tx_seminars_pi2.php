@@ -311,7 +311,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *
 	 * The fields are separated by semicolons and the lines by CRLF.
 	 *
-	 * @param tx_seminars_registrationBagBuilder $builder
+	 * @param tx_seminars_BagBuilder_Registration $builder
 	 *        the bag builder already limited to the registrations which should
 	 *        be returned
 	 *
@@ -319,7 +319,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *                registrations have been given
 	 */
 	private function getRegistrationsCsvList(
-		tx_seminars_registrationBagBuilder $builder
+		tx_seminars_BagBuilder_Registration $builder
 	) {
 		$result = '';
 		$bag = $builder->build();
@@ -767,13 +767,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Creates a registrationBagBuilder with some preset limitations.
 	 *
-	 * @return tx_seminars_registrationBagBuilder the bag builder with some
-	 *                                            preset limitations, will not
-	 *                                            be null
+	 * @return tx_seminars_BagBuilder_Registration the bag builder with some
+	 *                                             preset limitations
 	 */
 	private function createRegistrationBagBuilder() {
 		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
-			'tx_seminars_registrationBagBuilder'
+			'tx_seminars_BagBuilder_Registration'
 		);
 
 		if (!$this->getRegistrationsOnQueueConfiguration()) {

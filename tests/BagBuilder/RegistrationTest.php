@@ -25,16 +25,17 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the registration bag builder class in the 'seminars' extension.
+ * Testcase for the tx_seminars_BagBuilder_Registration class in the "seminars"
+ * extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
+class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_registrationBagBuilder
+	 * @var tx_seminars_BagBuilder_Registration
 	 */
 	private $fixture;
 	/**
@@ -45,7 +46,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_registrationBagBuilder();
+		$this->fixture = new tx_seminars_BagBuilder_Registration();
 		$this->fixture->setTestMode();
 	}
 

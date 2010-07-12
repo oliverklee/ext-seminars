@@ -217,11 +217,11 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * (regular and on the queue) for the event in $this->seminar, ordered by
 	 * creation date.
 	 *
-	 * @return tx_seminars_registrationBagBuilder the bag builder
+	 * @return tx_seminars_BagBuilder_Registration the bag builder
 	 */
 	private function createRegistrationBagBuilder() {
 		$builder = tx_oelib_ObjectFactory::make(
-			'tx_seminars_registrationBagBuilder'
+			'tx_seminars_BagBuilder_Registration'
 		);
 		$builder->limitToEvent($this->seminar->getUid());
 		$builder->limitToExistingUsers();

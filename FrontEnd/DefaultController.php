@@ -2127,13 +2127,12 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * currently logged in front-end user as attendee for the "my events" list
 	 * view.
 	 *
-	 * @return tx_seminars_registrationBagBuilder the registrationBagBuilder
-	 *                                            object for the "my events"
-	 *                                            list view
+	 * @return tx_seminars_BagBuilder_Registration the registrations for the
+	 *                                             "my events" list
 	 */
 	private function createRegistrationBagBuilder() {
 		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
-			'tx_seminars_registrationBagBuilder'
+			'tx_seminars_BagBuilder_Registration'
 		);
 
 		$registrationBagBuilder->limitToAttendee($this->getFeUserUid());

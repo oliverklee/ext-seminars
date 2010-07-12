@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_registrationBagBuilder' for the 'seminars' extension.
+ * Class tx_seminars_BagBuilder_Registration for the "seminars" extension.
  *
  * This builder class creates customized registrationbag objects.
  *
@@ -32,7 +32,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_registrationBagBuilder extends tx_seminars_BagBuilder_Abstract {
+class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * @var string class name of the bag class that will be built
 	 */
@@ -178,7 +178,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_BagBuilder_Abstract
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationBagBuilder.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationBagBuilder.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BagBuilder/Registration.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BagBuilder/Registration.php']);
 }
 ?>

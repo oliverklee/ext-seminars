@@ -831,7 +831,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$vacancies = $seminar->getVacancies();
 
 		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
-			'tx_seminars_registrationBagBuilder'
+			'tx_seminars_BagBuilder_Registration'
 		);
 		$registrationBagBuilder->limitToEvent($seminar->getUid());
 		$registrationBagBuilder->limitToOnQueue();
