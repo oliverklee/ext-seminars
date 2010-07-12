@@ -16,7 +16,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'category' => 'plugin',
 	'shy' => 0,
 	'dependencies' => 'cms,css_styled_content,oelib,ameos_formidable,static_info_tables,static_info_tables_taxes',
-	'conflicts' => 'dbal',
+	'conflicts' => 'dbal,sourceopt',
 	'priority' => '',
 	'loadOrder' => '',
 	'module' => 'BackEnd,BackEndExtJs',
@@ -47,6 +47,7 @@ $EM_CONF[$_EXTKEY] = array(
 		),
 		'conflicts' => array(
 			'dbal' => '',
+			'sourceopt' => '',
 		),
 		'suggests' => array(
 			'onetimeaccount' => '',
