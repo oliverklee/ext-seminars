@@ -2105,7 +2105,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			throw new Exception('There are no organizers related to this event.');
 		}
 
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_OrganizerBagBuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Organizer');
 		$builder->limitToEvent($this->getUid());
 
 		return $builder->build();

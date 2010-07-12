@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_OrganizerBagBuilder' for the 'seminars' extension.
+ * Class tx_seminars_BagBuilder_Organizer for the "seminars" extension.
  *
  * This builder class creates customized organizerbag objects.
  *
@@ -32,7 +32,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_OrganizerBagBuilder extends tx_seminars_BagBuilder_Abstract {
+class tx_seminars_BagBuilder_Organizer extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * @var string class name of the bag class that will be built
 	 */
@@ -62,7 +62,7 @@ class tx_seminars_OrganizerBagBuilder extends tx_seminars_BagBuilder_Abstract {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_OrganizerBagBuilder.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_OrganizerBagBuilder.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BagBuilder/Organizer.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BagBuilder/Organizer.php']);
 }
 ?>
