@@ -25,16 +25,16 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the speakerbag class in the 'seminars' extensions.
+ * Testcase for the speakerbag class in the "seminars" extensions.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_speakerbag_testcase extends tx_phpunit_testcase {
+class tx_seminars_Bag_SpeakerTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_speakerbag
+	 * @var tx_seminars_Bag_Speaker
 	 */
 	private $fixture;
 
@@ -62,7 +62,7 @@ class tx_seminars_speakerbag_testcase extends tx_phpunit_testcase {
 	public function testBagCanHaveAtLeastOneElement() {
 		$this->testingFramework->createRecord('tx_seminars_speakers');
 
-		$this->fixture = new tx_seminars_speakerbag('is_dummy_record=1');
+		$this->fixture = new tx_seminars_Bag_Speaker('is_dummy_record=1');
 
 		$this->assertEquals(
 			1,
@@ -76,7 +76,7 @@ class tx_seminars_speakerbag_testcase extends tx_phpunit_testcase {
 	public function bagContainsVisibleSpeakers() {
 		$this->testingFramework->createRecord('tx_seminars_speakers');
 
-		$this->fixture = new tx_seminars_speakerbag('is_dummy_record=1');
+		$this->fixture = new tx_seminars_Bag_Speaker('is_dummy_record=1');
 
 		$this->assertFalse(
 			$this->fixture->current()->isHidden()
@@ -92,7 +92,7 @@ class tx_seminars_speakerbag_testcase extends tx_phpunit_testcase {
 			array('hidden' => 1)
 		);
 
-		$this->fixture = new tx_seminars_speakerbag('is_dummy_record=1');
+		$this->fixture = new tx_seminars_Bag_Speaker('is_dummy_record=1');
 
 		$this->assertTrue(
 			$this->fixture->isEmpty()
@@ -108,7 +108,7 @@ class tx_seminars_speakerbag_testcase extends tx_phpunit_testcase {
 			array('hidden' => 1)
 		);
 
-		$this->fixture = new tx_seminars_speakerbag(
+		$this->fixture = new tx_seminars_Bag_Speaker(
 			'is_dummy_record=1',
 			'',
 			'',
@@ -131,7 +131,7 @@ class tx_seminars_speakerbag_testcase extends tx_phpunit_testcase {
 			array('hidden' => 1)
 		);
 
-		$this->fixture = new tx_seminars_speakerbag(
+		$this->fixture = new tx_seminars_Bag_Speaker(
 			'is_dummy_record=1',
 			'',
 			'',

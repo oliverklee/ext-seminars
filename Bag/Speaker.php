@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_speakerbag' for the 'seminars' extension.
+ * Class tx_seminars_Bag_Speaker for the "seminars" extension.
  *
  * This aggregate class holds a bunch of speaker objects and allows
  * to iterate over them.
@@ -33,7 +33,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_speakerbag extends tx_seminars_Bag_Abstract {
+class tx_seminars_Bag_Speaker extends tx_seminars_Bag_Abstract {
 	/**
 	 * The constructor. Creates a speaker bag that contains speaker
 	 * records and allows to iterate over them.
@@ -84,7 +84,7 @@ class tx_seminars_speakerbag extends tx_seminars_Bag_Abstract {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_speakerbag.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_speakerbag.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Bag/Speaker.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Bag/Speaker.php']);
 }
 ?>

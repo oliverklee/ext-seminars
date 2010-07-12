@@ -41,11 +41,11 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * Creates and returns a speakerbag object.
 	 *
-	 * @return tx_seminars_speakerbag a speakerbag object
+	 * @return tx_seminars_Bag_Speaker a speakerbag object
 	 */
 	private function getSpeakerBag() {
 		return tx_oelib_ObjectFactory::make(
-			'tx_seminars_speakerbag',
+			'tx_seminars_Bag_Speaker',
 			'tx_seminars_timeslots_speakers_mm.uid_local = ' . $this->getUid()
 				.' AND uid = uid_foreign',
 			'tx_seminars_timeslots_speakers_mm'

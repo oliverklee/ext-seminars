@@ -758,7 +758,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @param string the relation in which the speakers stand to this event:
 	 *               "speakers" (default), "partners", "tutors" or "leaders"
 	 *
-	 * @return tx_seminars_speakerbag a speakerbag object
+	 * @return tx_seminars_Bag_Speaker a speakerbag object
 	 */
 	private function getSpeakerBag($speakerRelation = 'speakers') {
 		switch ($speakerRelation) {
@@ -779,7 +779,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		return tx_oelib_ObjectFactory::make(
-			'tx_seminars_speakerbag',
+			'tx_seminars_Bag_Speaker',
 			$mmTable . '.uid_local = ' . $this->getUid() . ' AND ' .
 				'tx_seminars_speakers.uid = ' . $mmTable . '.uid_foreign',
 			$mmTable
