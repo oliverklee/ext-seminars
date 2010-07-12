@@ -23,9 +23,9 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_timeslotbag' for the 'seminars' extension.
+ * Class tx_seminars_Bag_TimeSlot for the "seminars" extension.
  *
- * This aggregate class holds a bunch of timeslot objects and allows
+ * This aggregate class holds a bunch of TimeSlot objects and allows
  * to iterate over them.
  *
  * @package TYPO3
@@ -33,7 +33,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_timeslotbag extends tx_seminars_Bag_Abstract {
+class tx_seminars_Bag_TimeSlot extends tx_seminars_Bag_Abstract {
 	/**
 	 * The constructor. Creates a timeslot bag that contains timeslot
 	 * records and allows to iterate over them.
@@ -81,7 +81,7 @@ class tx_seminars_timeslotbag extends tx_seminars_Bag_Abstract {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_timeslotbag.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_timeslotbag.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Bag/TimeSlot.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Bag/TimeSlot.php']);
 }
 ?>
