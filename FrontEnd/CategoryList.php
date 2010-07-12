@@ -68,7 +68,7 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 		$bag->__destruct();
 
 		$categoryBagBuilder = tx_oelib_ObjectFactory::make(
-			'tx_seminars_categorybagbuilder'
+			'tx_seminars_BagBuilder_Category'
 		);
 		$categoryBagBuilder->limitToEvents($eventUids);
 		$categoryBag = $categoryBagBuilder->build();

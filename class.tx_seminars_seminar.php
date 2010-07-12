@@ -4303,7 +4303,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return array();
 		}
 
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_categorybagbuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Category');
 		$builder->limitToEvents($this->getTopicUid());
 		$builder->sortByRelationOrder();
 		$bag = $builder->build();
