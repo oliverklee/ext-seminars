@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_SpeakerBagBuilder' for the 'seminars' extension.
+ * Class tx_seminars_BagBuilder_Speaker for the "seminars" extension.
  *
  * This builder class creates customized speakerbag objects.
  *
@@ -32,7 +32,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_SpeakerBagBuilder extends tx_seminars_BagBuilder_Abstract {
+class tx_seminars_BagBuilder_Speaker extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * @var string class name of the bag class that will be built
 	 */
@@ -44,7 +44,7 @@ class tx_seminars_SpeakerBagBuilder extends tx_seminars_BagBuilder_Abstract {
 	protected $tableName = 'tx_seminars_speakers';
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_SpeakerBagBuilder.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_SpeakerBagBuilder.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BagBuilder/Speaker.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BagBuilder/Speaker.php']);
 }
 ?>

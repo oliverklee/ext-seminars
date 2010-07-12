@@ -25,19 +25,19 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the speaker bag builder class in the 'seminars' extension.
+ * Testcase for the tx_seminars_BagBuilder_Speaker class in the "seminars"
+ * extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_SpeakerBagBuilder_testcase extends tx_phpunit_testcase {
+class tx_seminars_BagBuilder_SpeakerTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_SpeakerBagBuilder
+	 * @var tx_seminars_BagBuilder_Speaker
 	 */
 	private $fixture;
-
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
@@ -46,7 +46,7 @@ class tx_seminars_SpeakerBagBuilder_testcase extends tx_phpunit_testcase {
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_SpeakerBagBuilder();
+		$this->fixture = new tx_seminars_BagBuilder_Speaker();
 		$this->fixture->setTestMode();
 	}
 

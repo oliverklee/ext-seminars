@@ -80,7 +80,7 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_AbstractList 
 			'label_skills', $GLOBALS['LANG']->getLL('speakerlist.skills')
 		);
 
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_SpeakerBagBuilder');
+		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Speaker');
 		$builder->showHiddenRecords();
 
 		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
