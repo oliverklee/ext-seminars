@@ -82,7 +82,7 @@ class tx_seminars_tests_fixtures_Bag_Testing extends tx_seminars_Bag_Abstract {
 	 */
 	protected function createItemFromDbResult() {
 		$this->currentItem = tx_oelib_ObjectFactory::make(
-			'tx_seminars_test', 0, $this->dbResult
+			'tx_seminars_tests_fixtures_OldModel_Testing', 0, $this->dbResult
 		);
 		$this->valid();
 	}

@@ -34,7 +34,7 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_registration extends tx_seminars_objectfromdb {
+class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */

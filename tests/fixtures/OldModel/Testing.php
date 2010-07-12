@@ -23,7 +23,8 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_test' for the 'seminars' extension.
+ * Class tx_seminars_tests_fixtures_OldModel_Testing for the "seminars"
+ * extension.
  *
  * This class represents a test object from the database.
  *
@@ -32,7 +33,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_test extends tx_seminars_objectfromdb {
+class tx_seminars_tests_fixtures_OldModel_Testing extends tx_seminars_OldModel_Abstract {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */

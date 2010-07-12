@@ -28,7 +28,7 @@ if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
 }
 
 /**
- * Class 'tx_seminars_objectfromdb' for the 'seminars' extension.
+ * Class tx_seminars_OldModel_Abstract for the "seminars" extension.
  *
  * This class represents an object that is created from a DB record
  * or can be written to a DB record.
@@ -40,7 +40,7 @@ if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
+abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * @var string the extension key
 	 */
@@ -618,7 +618,7 @@ abstract class tx_seminars_objectfromdb extends tx_oelib_templatehelper {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_objectfromdb.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_objectfromdb.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/OldModel/Abstract.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/OldModel/Abstract.php']);
 }
 ?>

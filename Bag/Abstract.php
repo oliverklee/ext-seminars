@@ -94,7 +94,9 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	protected $dbResult = FALSE;
 
 	/**
-	 * @var tx_seminars_objectfromdb the current object (may be null)
+	 * the current object (may be null)
+	 *
+	 * @var tx_seminars_OldModel_Abstract
 	 */
 	protected $currentItem = null;
 
@@ -239,8 +241,8 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	/**
 	 * Advances to the next record and returns a reference to that object.
 	 *
-	 * @return tx_seminars_objectfromdb the now current object, will be null if
-	 *                                  there is no next object
+	 * @return tx_seminars_OldModel_Abstract the now current object, will be
+	 *                                       null if there is no next object
 	 */
 	public function next() {
 		if (!$this->dbResult) {
@@ -266,9 +268,9 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	/**
 	 * Returns the current object (which may be null).
 	 *
-	 * @return tx_seminars_objectfromdb a reference to the current object,
-	 * will be null if there is no current
-	 * object
+	 * @return tx_seminars_OldModel_Abstract a reference to the current object,
+	 *                                       will be null if there is no current
+	 *                                       object
 	 */
 	public function current() {
 		return $this->currentItem;

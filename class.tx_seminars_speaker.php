@@ -32,7 +32,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_speaker extends tx_seminars_objectfromdb {
+class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/** @var integer the gender type for speakers without gender */
 	const GENDER_UNKNOWN = 0;
 

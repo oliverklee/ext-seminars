@@ -423,7 +423,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @return boolean TRUE the UID is valid, FALSE otherwise
 	 */
 	public function existsSeminar($seminarUid) {
-		return tx_seminars_objectfromdb::recordExists(
+		return tx_seminars_OldModel_Abstract::recordExists(
 			$seminarUid,
 			'tx_seminars_seminars'
 		);
@@ -444,7 +444,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		/** This is empty as long as no error has occured. */
 		$message = '';
 
-		if (!tx_seminars_objectfromdb::recordExists(
+		if (!tx_seminars_OldModel_Abstract::recordExists(
 				$seminarUid,
 				'tx_seminars_seminars'
 			)
@@ -766,7 +766,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @param tslib_pibase $plugin a live plugin object
 	 */
 	public function removeRegistration($uid, tslib_pibase $plugin) {
-		if (!tx_seminars_objectfromdb::recordExists(
+		if (!tx_seminars_OldModel_Abstract::recordExists(
 			$uid, 'tx_seminars_attendances'
 		)) {
 			return;

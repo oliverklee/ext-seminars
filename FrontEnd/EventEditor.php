@@ -620,7 +620,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		}
 
 		if (($this->getObjectUid() > 0)
-			&& !tx_seminars_objectfromdb::recordExists(
+			&& !tx_seminars_OldModel_Abstract::recordExists(
 				$this->getObjectUid(), 'tx_seminars_seminars', TRUE
 			)
 		) {

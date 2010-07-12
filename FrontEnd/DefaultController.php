@@ -430,7 +430,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			unset($this->seminar);
 		}
 
-		if (tx_seminars_objectfromdb::recordExists(
+		if (tx_seminars_OldModel_Abstract::recordExists(
 			$seminarUid, 'tx_seminars_seminars', $showHiddenRecords
 			)
 		) {
@@ -476,7 +476,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			unset($this->registration);
 		}
 
-		if (tx_seminars_objectfromdb::recordExists(
+		if (tx_seminars_OldModel_Abstract::recordExists(
 			$registrationUid, 'tx_seminars_attendances')
 		) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(

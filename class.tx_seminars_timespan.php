@@ -34,7 +34,7 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class tx_seminars_timespan extends tx_seminars_objectfromdb {
+abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	/** @var string same as class name */
 	public $prefixId = 'tx_seminars_timespan';
 	/** @var string path to this script relative to the extension dir */

@@ -293,7 +293,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *                empty string if there is not event with the provided UID
 	 */
 	public function createListOfRegistrations($eventUid) {
-		if (!tx_seminars_objectfromdb::recordExists(
+		if (!tx_seminars_OldModel_Abstract::recordExists(
 			$eventUid, 'tx_seminars_seminars'
 		)) {
 			return '';
@@ -827,7 +827,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	private function hasAccessToEventAndItsRegistrations($eventUid) {
 		$result = FALSE;
 
-		if (!tx_seminars_objectfromdb::recordExists(
+		if (!tx_seminars_OldModel_Abstract::recordExists(
 			$eventUid, 'tx_seminars_seminars'
 		)) {
 			$this->errorType = self::NOT_FOUND;

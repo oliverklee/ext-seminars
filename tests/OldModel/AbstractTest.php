@@ -25,16 +25,17 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the test class in the 'seminars' extensions.
+ * Testcase for the tx_seminars_OldModel_Abstract class in the "seminars"
+ * extensions.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_test_testcase extends tx_phpunit_testcase {
+class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_seminars_test
+	 * @var tx_seminars_tests_fixtures_OldModel_Testing
 	 */
 	private $fixture;
 	/**
@@ -70,7 +71,9 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 				'title' => 'Test',
 			)
 		);
-		$this->fixture = new tx_seminars_test($this->fixtureUid);
+		$this->fixture = new tx_seminars_tests_fixtures_OldModel_Testing(
+			$this->fixtureUid
+		);
 	}
 
 	public function tearDown() {
@@ -92,7 +95,9 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCreateFromUidFailsForInvalidUid() {
-		$test = new tx_seminars_test($this->fixtureUid + 99);
+		$test = new tx_seminars_tests_fixtures_OldModel_Testing(
+			$this->fixtureUid + 99
+		);
 
 		$this->assertFalse(
 			$test->isOk()
@@ -102,7 +107,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCreateFromUidFailsForZeroUid() {
-		$test = new tx_seminars_test(0);
+		$test = new tx_seminars_tests_fixtures_OldModel_Testing(0);
 
 		$this->assertFalse(
 			$test->isOk()
@@ -118,7 +123,9 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 			'uid = ' . $this->fixtureUid
 		);
 
-		$test = new tx_seminars_test(0, $dbResult);
+		$test = new tx_seminars_tests_fixtures_OldModel_Testing(
+			0, $dbResult
+		);
 
 		$this->assertTrue(
 			$test->isOk()
@@ -128,7 +135,9 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCreateFromDbResultFailsForNull() {
-		$test = new tx_seminars_test(0, null);
+		$test = new tx_seminars_tests_fixtures_OldModel_Testing(
+			0, null
+		);
 
 		$this->assertFalse(
 			$test->isOk()
@@ -142,7 +151,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 			'tx_seminars_test', $this->fixtureUid, array('hidden' => 1)
 		);
 
-		$test = new tx_seminars_test($this->fixtureUid);
+		$test = new tx_seminars_tests_fixtures_OldModel_Testing($this->fixtureUid);
 
 		$this->assertFalse(
 			$test->isOk()
@@ -156,7 +165,9 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 			'tx_seminars_test', $this->fixtureUid, array('hidden' => 1)
 		);
 
-		$test = new tx_seminars_test($this->fixtureUid, null, TRUE);
+		$test = new tx_seminars_tests_fixtures_OldModel_Testing(
+			$this->fixtureUid, null, TRUE
+		);
 
 		$this->assertTrue(
 			$test->isOk()
@@ -188,7 +199,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testHasUidIsFalseForObjectsWithoutUid() {
-		$virginFixture = new tx_seminars_test(0);
+		$virginFixture = new tx_seminars_tests_fixtures_OldModel_Testing(0);
 
 		$this->assertEquals(
 			0,
@@ -257,7 +268,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 			)
 		);
 
-		$virginFixture = new tx_seminars_test(0);
+		$virginFixture = new tx_seminars_tests_fixtures_OldModel_Testing(0);
 		$virginFixture->setTitle($title);
 		$virginFixture->enableTestMode();
 		$this->testingFramework->markTableAsDirty('tx_seminars_test');
@@ -310,7 +321,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCommitToDbWillNotWriteIncompleteRecords() {
-		$virginFixture = new tx_seminars_test(0);
+		$virginFixture = new tx_seminars_tests_fixtures_OldModel_Testing(0);
 		$this->testingFramework->markTableAsDirty('tx_seminars_test');
 
 		$this->assertFalse(
@@ -342,7 +353,7 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 			'createMmRecords may only be called on objects that have a UID.'
 		);
 
-		$virginFixture = new tx_seminars_test(0);
+		$virginFixture = new tx_seminars_tests_fixtures_OldModel_Testing(0);
 		$virginFixture->createMmRecords('tx_seminars_test_test_mm', array());
 	}
 
@@ -458,7 +469,9 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_test', $this->fixtureUid, array('pid' => 42)
 		);
-		$fixture = new tx_seminars_test($this->fixtureUid);
+		$fixture = new tx_seminars_tests_fixtures_OldModel_Testing(
+			$this->fixtureUid
+		);
 
 		$this->assertEquals(
 			42,
@@ -472,7 +485,9 @@ class tx_seminars_test_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_test', $this->fixtureUid, array('pid' => 0)
 		);
-		$fixture = new tx_seminars_test($this->fixtureUid);
+		$fixture = new tx_seminars_tests_fixtures_OldModel_Testing(
+			$this->fixtureUid
+		);
 
 		$this->assertEquals(
 			0,
