@@ -63,7 +63,7 @@ class tx_seminars_registrationBagBuilder_testcase extends tx_phpunit_testcase {
 
 	public function testBagBuilderBuildsARegistrationBag() {
 		$this->assertTrue(
-			$this->fixture->build() instanceof tx_seminars_registrationbag
+			$this->fixture->build() instanceof tx_seminars_Bag_Registration
 		);
 	}
 

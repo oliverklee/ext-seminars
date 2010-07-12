@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_registrationbag' for the 'seminars' extension.
+ * Class tx_seminars_Bag_Registration for the "seminars" extension.
  *
  * This aggregate class holds a bunch of registration objects and allows
  * to iterate over them.
@@ -33,7 +33,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_registrationbag extends tx_seminars_Bag_Abstract {
+class tx_seminars_Bag_Registration extends tx_seminars_Bag_Abstract {
 	/**
 	 * The constructor. Creates a registration bag that contains registration
 	 * records and allows to iterate over them.
@@ -83,7 +83,7 @@ class tx_seminars_registrationbag extends tx_seminars_Bag_Abstract {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationbag.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_registrationbag.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Bag/Registration.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Bag/Registration.php']);
 }
 ?>
