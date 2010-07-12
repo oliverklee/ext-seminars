@@ -16,7 +16,6 @@ return array(
 	'tx_seminars_objectfromdb' => $extensionPath . 'class.tx_seminars_objectfromdb.php',
 	'tx_seminars_organizer' => $extensionPath . 'class.tx_seminars_organizer.php',
 	'tx_seminars_place' => $extensionPath . 'class.tx_seminars_place.php',
-	'tx_seminars_placebag' => $extensionPath . 'class.tx_seminars_placebag.php',
 	'tx_seminars_registration' => $extensionPath . 'class.tx_seminars_registration.php',
 	'tx_seminars_registrationbagbuilder' => $extensionPath . 'class.tx_seminars_registrationBagBuilder.php',
 	'tx_seminars_registrationbag' => $extensionPath . 'class.tx_seminars_registrationbag.php',
