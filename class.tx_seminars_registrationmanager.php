@@ -908,8 +908,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @param tx_seminars_seminar the event to check
 	 *
-	 * @return tx_seminars_seminarbag the event topics which still need the
-	 *                                users registration, may be empty
+	 * @return tx_seminars_Bag_Event the event topics which still need the
+	 *                               users registration, may be empty
 	 */
 	public function getMissingRequiredTopics(tx_seminars_seminar $event) {
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');

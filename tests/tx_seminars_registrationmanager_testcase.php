@@ -1368,7 +1368,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	public function testGetMissingRequiredTopicsReturnsSeminarBag() {
 		$this->assertTrue(
 			$this->fixture->getMissingRequiredTopics($this->seminar)
-				instanceof tx_seminars_seminarbag
+				instanceof tx_seminars_Bag_Event
 		);
 	}
 

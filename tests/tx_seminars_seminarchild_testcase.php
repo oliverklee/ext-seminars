@@ -6174,7 +6174,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testGetRequirementsReturnsSeminarBag() {
 		$this->assertTrue(
-			$this->fixture->getRequirements() instanceof tx_seminars_seminarbag
+			$this->fixture->getRequirements() instanceof tx_seminars_Bag_Event
 		);
 	}
 
@@ -6292,7 +6292,7 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 
 	public function testGetDependenciesReturnsSeminarBag() {
 		$this->assertTrue(
-			$this->fixture->getDependencies() instanceof tx_seminars_seminarbag
+			$this->fixture->getDependencies() instanceof tx_seminars_Bag_Event
 		);
 	}
 

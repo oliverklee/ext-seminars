@@ -110,8 +110,8 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 	/**
 	 * Returns the requirements which should be displayed.
 	 *
-	 * @return tx_seminars_seminarbag the requirements still to be displayed,
-	 *                                may be empty
+	 * @return tx_seminars_Bag_Event the requirements still to be displayed,
+	 *                               might be empty
 	 */
 	private function getRequirements() {
 		if ($this->limitRequirementsToMissing) {

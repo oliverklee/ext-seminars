@@ -3891,7 +3891,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				' AND tx_seminars_attendances.user = ' . $feUserUid;
 
 			$seminarBag = tx_oelib_ObjectFactory::make(
-				'tx_seminars_seminarbag', $queryWhere, $additionalTables
+				'tx_seminars_Bag_Event', $queryWhere, $additionalTables
 			);
 
 			// One blocking event is enough.
@@ -4487,8 +4487,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns the required events for the current event topic, ie. topics that
 	 * are prerequisites for this event.
 	 *
-	 * @return tx_seminars_seminarbag the required events, will be empty if this
-	 *                                event has no required events
+	 * @return tx_seminars_Bag_Event the required events, will be empty if this
+	 *                               event has no required events
 	 */
 	public function getRequirements() {
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');
@@ -4501,8 +4501,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns the depending events for the current event topic, ie. topics for
 	 * which this event is a prerequisite.
 	 *
-	 * @return tx_seminars_seminarbag the depending events, will be empty if
-	 *                                this event has no depending events
+	 * @return tx_seminars_Bag_Event the depending events, will be empty if
+	 *                               this event has no depending events
 	 */
 	public function getDependencies() {
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_seminarbagbuilder');

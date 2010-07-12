@@ -1480,7 +1480,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the CSV-related settings.
 	 */
-	protected function check_tx_seminars_seminarbag_csv() {
+	protected function check_tx_seminars_Bag_Event_csv() {
 		$this->checkAllowAccessToCsv();
 		$this->checkCharsetForCsv();
 		$this->checkFilenameForEventsCsv();

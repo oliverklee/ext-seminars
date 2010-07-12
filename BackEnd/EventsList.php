@@ -147,9 +147,9 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	 *
 	 * The table rows are set directly in the template, so nothing is returned.
 	 *
-	 * @param tx_seminars_seminarbag $events the events to list
+	 * @param tx_seminars_Bag_Event $events the events to list
 	 */
-	private function createListBody(tx_seminars_seminarbag $events) {
+	private function createListBody(tx_seminars_Bag_Event $events) {
 		$tableRows = '';
 
 		$useManualSorting = tx_oelib_configurationProxy::getInstance('seminars')
@@ -264,14 +264,14 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	/**
 	 * Creates the sort list for the displayed events.
 	 *
-	 * @param tx_seminars_seminarbag $events the events to get the sorting for
+	 * @param tx_seminars_Bag_Event $events the events to get the sorting for
 	 *
 	 * @return array the sort list in a multidimensional array with the event's
 	 *               UID as first-level key, the keywords "previous" and
 	 *               "next" as second level keys and the event UID's as values,
 	 *               will be empty if an empty bag has been given
 	 */
-	private function createSortList(tx_seminars_seminarbag $events) {
+	private function createSortList(tx_seminars_Bag_Event $events) {
 		$sortList = array();
 		$pageData = $this->page->getPageData();
 
