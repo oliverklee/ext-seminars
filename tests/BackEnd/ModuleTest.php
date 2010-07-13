@@ -24,7 +24,7 @@
 
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 /**
- * Testcase for the tx_seminars_BackEnd_Module class in the 'seminars' extensions.
+ * Testcase for the tx_seminars_BackEnd_Module class in the 'seminars' extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars

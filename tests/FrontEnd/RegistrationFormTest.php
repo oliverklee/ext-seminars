@@ -26,7 +26,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
  * Testcase for the tx_seminars_FrontEnd_RegistrationForm class in the
- * "seminars" extensions.
+ * "seminars" extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
