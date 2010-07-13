@@ -103,13 +103,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_place/.
-	 */
-	protected function check_tx_seminars_place() {
-		$this->checkStaticIncluded();
-	}
-
-	/**
 	 * Checks the configuration for: tx_seminars_timeslot/.
 	 */
 	protected function check_tx_seminars_timeslot() {
