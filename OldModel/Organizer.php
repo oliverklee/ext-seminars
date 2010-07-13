@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_organizer' for the 'seminars' extension.
+ * Class tx_seminars_OldModel_Organizer for the "seminars" extension.
  *
  * This class represents an organizer.
  *
@@ -32,7 +32,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_organizer extends tx_seminars_OldModel_Abstract implements tx_oelib_Interface_MailRole {
+class tx_seminars_OldModel_Organizer extends tx_seminars_OldModel_Abstract implements tx_oelib_Interface_MailRole {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
@@ -115,7 +115,7 @@ class tx_seminars_organizer extends tx_seminars_OldModel_Abstract implements tx_
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_organizer.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_organizer.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/OldModel/Organizer.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/OldModel/Organizer.php']);
 }
 ?>

@@ -25,18 +25,28 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the organizer class in the 'seminars' extensions.
+ * Testcase for the tx_seminars_OldModel_Organizer class in the "seminars"
+ * extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_organizer_testcase extends tx_phpunit_testcase {
+class tx_seminars_OldModel_OrganizerTest extends tx_phpunit_testcase {
+	/**
+	 * @var tx_seminars_OldModel_Organizer
+	 */
 	private $fixture;
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
-
-	/** a maximal filled organizer */
+	/**
+	 * a maximal filled organizer
+	 *
+	 * @var tx_seminars_OldModel_Organizer
+	 */
 	private $maximalFixture;
 
 	public function setUp() {
@@ -48,7 +58,7 @@ class tx_seminars_organizer_testcase extends tx_phpunit_testcase {
 				'email' => 'foo@test.com'
 			)
 		);
-		$this->fixture = new tx_seminars_organizer($fixtureUid);
+		$this->fixture = new tx_seminars_OldModel_Organizer($fixtureUid);
 
 		$maximalFixtureUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
@@ -61,7 +71,7 @@ class tx_seminars_organizer_testcase extends tx_phpunit_testcase {
 				'description' => 'foo',
 			)
 		);
-		$this->maximalFixture = new tx_seminars_organizer($maximalFixtureUid);
+		$this->maximalFixture = new tx_seminars_OldModel_Organizer($maximalFixtureUid);
 	}
 
 	public function tearDown() {

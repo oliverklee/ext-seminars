@@ -96,9 +96,9 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_organizer/.
+	 * Checks the configuration for: tx_seminars_OldModel_Organizer/.
 	 */
-	protected function check_tx_seminars_organizer() {
+	protected function check_tx_seminars_OldModel_Organizer() {
 		$this->checkStaticIncluded();
 	}
 

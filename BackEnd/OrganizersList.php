@@ -38,7 +38,7 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_AbstractLis
 	protected $tableName = 'tx_seminars_organizers';
 
 	/**
-	 * @var tx_seminars_organizer the organizer which we want to list
+	 * @var tx_seminars_OldModel_Organizer the organizer which we want to list
 	 */
 	private $organizer = null;
 

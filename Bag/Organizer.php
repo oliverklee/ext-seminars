@@ -75,7 +75,7 @@ class tx_seminars_Bag_Organizer extends tx_seminars_Bag_Abstract {
 	 */
 	protected function createItemFromDbResult() {
 		$this->currentItem = tx_oelib_ObjectFactory::make(
-			'tx_seminars_organizer', 0, $this->dbResult
+			'tx_seminars_OldModel_Organizer', 0, $this->dbResult
 		);
 		$this->valid();
 	}
