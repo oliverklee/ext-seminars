@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_category' for the 'seminars' extension.
+ * Class tx_seminars_OldModel_Category for the "seminars" extension.
  *
  * This class represents an event category.
  *
@@ -32,7 +32,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_category extends tx_seminars_OldModel_Abstract {
+class tx_seminars_OldModel_Category extends tx_seminars_OldModel_Abstract {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
@@ -50,7 +50,7 @@ class tx_seminars_category extends tx_seminars_OldModel_Abstract {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_category.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_category.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/OldModel/Category.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/OldModel/Category.php']);
 }
 ?>

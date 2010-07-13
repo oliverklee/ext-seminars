@@ -25,18 +25,28 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the category class in the 'seminars' extensions.
+ * Testcase for the tx_seminars_OldModel_Category class in the "seminars"
+ * extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_category_testcase extends tx_phpunit_testcase {
+class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
+	/**
+	 * @var tx_seminars_OldModel_Category
+	 */
 	private $fixture;
+	/**
+	 * @var tx_oelib_testingFramework
+	 */
 	private $testingFramework;
-
-	/** UID of the fixture's data in the DB */
+	/**
+	 * UID of the fixture's data in the DB
+	 *
+	 * @var integer
+	 */
 	private $fixtureUid = 0;
 
 	public function setUp() {
@@ -55,7 +65,7 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCreateFromUid() {
-		$this->fixture = new tx_seminars_category($this->fixtureUid);
+		$this->fixture = new tx_seminars_OldModel_Category($this->fixtureUid);
 
 		$this->assertTrue(
 			$this->fixture->isOk()
@@ -63,7 +73,7 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCreateFromUidFailsForInvalidUid() {
-		$this->fixture = new tx_seminars_category($this->fixtureUid + 99);
+		$this->fixture = new tx_seminars_OldModel_Category($this->fixtureUid + 99);
 
 		$this->assertFalse(
 			$this->fixture->isOk()
@@ -71,7 +81,7 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCreateFromUidFailsForZeroUid() {
-		$this->fixture = new tx_seminars_category(0);
+		$this->fixture = new tx_seminars_OldModel_Category(0);
 
 		$this->assertFalse(
 			$this->fixture->isOk()
@@ -85,7 +95,7 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 			'uid = '.$this->fixtureUid
 		);
 
-		$this->fixture = new tx_seminars_category(0, $dbResult);
+		$this->fixture = new tx_seminars_OldModel_Category(0, $dbResult);
 
 		$this->assertTrue(
 			$this->fixture->isOk()
@@ -93,7 +103,7 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testCreateFromDbResultFailsForNull() {
-		$this->fixture = new tx_seminars_category(0, null);
+		$this->fixture = new tx_seminars_OldModel_Category(0, null);
 
 		$this->assertFalse(
 			$this->fixture->isOk()
@@ -101,7 +111,7 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetTitle() {
-		$this->fixture = new tx_seminars_category($this->fixtureUid);
+		$this->fixture = new tx_seminars_OldModel_Category($this->fixtureUid);
 
 		$this->assertEquals(
 			'Test category',
@@ -110,7 +120,7 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetIconReturnsIcon() {
-		$this->fixture = new tx_seminars_category(
+		$this->fixture = new tx_seminars_OldModel_Category(
 			$this->testingFramework->createRecord(
 				'tx_seminars_categories',
 				array(
@@ -127,7 +137,7 @@ class tx_seminars_category_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testGetIconReturnsEmptyStringIfCategoryHasNoIcon() {
-		$this->fixture = new tx_seminars_category($this->fixtureUid);
+		$this->fixture = new tx_seminars_OldModel_Category($this->fixtureUid);
 
 		$this->assertEquals(
 			'',

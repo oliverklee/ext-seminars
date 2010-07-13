@@ -75,7 +75,7 @@ class tx_seminars_Bag_Category extends tx_seminars_Bag_Abstract {
 	 */
 	protected function createItemFromDbResult() {
 		$this->currentItem = tx_oelib_ObjectFactory::make(
-			'tx_seminars_category', 0, $this->dbResult
+			'tx_seminars_OldModel_Category', 0, $this->dbResult
 		);
 		$this->valid();
 	}
