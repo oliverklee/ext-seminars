@@ -1250,7 +1250,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function populateListOrganizersShowsOrganizer() {
+	public function populateListOrganizersShowsOrganizerFromDatabase() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers'
@@ -1391,6 +1391,57 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			in_array(
 				array('caption' => '', 'value' => $organizerUid),
+				$this->fixture->populateListOrganizers(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListOrganizersShowsDefaultOrganizerFromUserGroup() {
+		$organizerUid = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer')
+			->getLoadedTestingModel(array())->getUid();
+		$frontEndUserGroupUid = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_FrontEndUserGroup')->getLoadedTestingModel(
+				array('tx_seminars_default_organizer' => $organizerUid)
+			)->getUid();
+
+		$this->testingFramework
+			->createAndLoginFrontEndUser($frontEndUserGroupUid);
+
+		$this->assertTrue(
+			in_array(
+				array('caption' => '', 'value' => $organizerUid),
+				$this->fixture->populateListOrganizers(array())
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateListOrganizersForDefaultOrganizerInUserGroupNotIncludesOtherOrganizer() {
+		$organizerMapper = tx_oelib_MapperRegistry::get(
+			'tx_seminars_Mapper_Organizer'
+		);
+		$organizerUidFromDatabase = $this->testingFramework->createRecord(
+			'tx_seminars_organizers'
+		);
+		// makes sure the mapper knows that UID
+		$organizerMapper->find($organizerUidFromDatabase);
+
+		$organizerUid = $organizerMapper->getLoadedTestingModel(array())->getUid();
+		$frontEndUserGroupUid = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_FrontEndUserGroup')->getLoadedTestingModel(
+				array('tx_seminars_default_organizer' => $organizerUid)
+			)->getUid();
+		$this->testingFramework
+			->createAndLoginFrontEndUser($frontEndUserGroupUid);
+
+		$this->assertFalse(
+			in_array(
+				array('caption' => '', 'value' => $organizerUidFromDatabase),
 				$this->fixture->populateListOrganizers(array())
 			)
 		);

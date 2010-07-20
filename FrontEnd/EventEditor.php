@@ -205,10 +205,10 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *               title) and "value" (for the UID)
 	 */
 	public function populateListEventTypes() {
-		$eventTypes = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_EventType')->findByPageUid(
+		$eventTypes = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_EventType')->findByPageUid(
 				$this->getPidsForAuxiliaryRecords(), 'title ASC'
-		);
+			);
 
 		return self::makeListToFormidableList($eventTypes);
 	}
@@ -249,10 +249,10 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *               title) and "value" (for the UID)
 	 */
 	public function populateListPaymentMethods() {
-		$paymentMethods = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_PaymentMethod')->findByPageUid(
+		$paymentMethods = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_PaymentMethod')->findByPageUid(
 				$this->getPidsForAuxiliaryRecords(), 'title ASC'
-		);
+			);
 
 		return self::makeListToFormidableList($paymentMethods);
 	}
@@ -265,10 +265,17 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *               title) and "value" (for the UID)
 	 */
 	public function populateListOrganizers() {
-		$organizers = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_Organizer')->findByPageUid(
-				$this->getPidsForAuxiliaryRecords(), 'title ASC'
-		);
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
+			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+
+		if ($frontEndUser->hasDefaultOrganizers()) {
+			$organizers = $frontEndUser->getDefaultOrganizers();
+		} else {
+			$organizers = tx_oelib_MapperRegistry
+				::get('tx_seminars_Mapper_Organizer')->findByPageUid(
+					$this->getPidsForAuxiliaryRecords(), 'title ASC'
+				);
+		}
 
 		return self::makeListToFormidableList($organizers);
 	}
