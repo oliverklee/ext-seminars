@@ -27,6 +27,9 @@ if (!function_exists('tx_seminars_tableRelations')) {
 	}
 }
 
+$globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
+$usePageBrowser = (boolean) $globalConfiguration['usePageBrowser'];
+$selectType = $usePageBrowser ? 'group' : 'select';
 
 t3lib_div::loadTCA('fe_users');
 t3lib_extMgm::addTCAcolumns(
@@ -112,7 +115,7 @@ t3lib_extMgm::addTCAcolumns(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_default_categories',
 			'config' => array(
-				'type' => 'select',
+				'type' => $selectType,
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_categories',
 				'foreign_table' => 'tx_seminars_categories',
@@ -139,6 +142,25 @@ t3lib_extMgm::addTCAcolumns(
 				),
 			),
 		),
+		'tx_seminars_default_organizer' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_default_organizer',
+			'config' => array(
+				'type' => $selectType,
+				'internal_type' => 'db',
+				'allowed' => 'tx_seminars_organizers',
+				'foreign_table' => 'tx_seminars_organizers',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+				'foreign_table_where' => tx_seminars_tableRelations(
+					'tx_seminars_organizers'
+				),
+				'items' => array(
+					'' => '',
+				),
+			),
+		),
 	),
 	1
 );
@@ -148,7 +170,7 @@ t3lib_extMgm::addToAllTCAtypes(
 	'--div--;LLL:EXT:seminars/locallang_db.xml:fe_groups.tab_event_management,' .
 		'tx_seminars_publish_events;;;;1-1-1,tx_seminars_events_pid,' .
 		'tx_seminars_auxiliary_records_pid,tx_seminars_reviewer,' .
-		'tx_seminars_default_categories'
+		'tx_seminars_default_categories, tx_seminars_default_organizer'
 );
 
 t3lib_div::loadTCA('be_groups');

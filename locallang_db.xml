@@ -182,6 +182,7 @@
 			<label index="tx_seminars_payment_methods.description">Detailed description for e-mails:</label>
 			<label index="tx_seminars_event_types">Event types</label>
 			<label index="tx_seminars_event_types.title">Title:</label>
+			<label index="tx_seminars_event_types.single_view_page">Single view page for events of this type:</label>
 			<label index="tx_seminars_checkboxes">Registration options with checkbox</label>
 			<label index="tx_seminars_checkboxes.title">Title:</label>
 			<label index="tx_seminars_lodgings">Lodging options</label>
@@ -203,6 +204,7 @@
 			<label index="tx_seminars_categories">Categories</label>
 			<label index="tx_seminars_categories.title">Title:</label>
 			<label index="tx_seminars_categories.icon">Icon:</label>
+			<label index="tx_seminars_categories.single_view_page">Single view page for events in this category:</label>
 			<label index="tx_seminars_skills">Skills</label>
 			<label index="tx_seminars_skills.title">Title:</label>
 			<label index="tx_seminars_prices">Prices</label>
@@ -222,7 +224,8 @@
 			<label index="fe_groups.tx_seminars_auxiliary_records_pid">Store auxiliary records for seminars in page:</label>
 			<label index="fe_groups.tx_seminars_reviewer">BE user to receive the publication e-mail for FE-edited events:</label>
 			<label index="fe_groups.tx_seminars_events_pid">Store events created in the FE-editor in this page:</label>
-			<label index="fe_groups.tx_seminars_default_categories">Default categories:</label>
+			<label index="fe_groups.tx_seminars_default_categories">Default categories for the FE editor:</label>
+			<label index="fe_groups.tx_seminars_default_organizer">Default organizer for the FE editor:</label>
 			<label index="owner_feuser">Front-end user who has created this record:</label>
 			<label index="be_groups.tab_event_management">Event management</label>
 			<label index="be_groups.tx_seminars_events_folder">Sysfolder for new events</label>
@@ -403,6 +406,7 @@
 			<label index="tx_seminars_payment_methods.description">Detaillierte Beschreibung für E-Mails:</label>
 			<label index="tx_seminars_event_types">Veranstaltungsarten</label>
 			<label index="tx_seminars_event_types.title">Titel:</label>
+			<label index="tx_seminars_event_types.single_view_page">Seite mit der Einzelansicht für Veranstaltungen dieses Typs:</label>
 			<label index="tx_seminars_checkboxes">Anmeldeoptionen mit Checkbox</label>
 			<label index="tx_seminars_checkboxes.title">Titel:</label>
 			<label index="tx_seminars_lodgings">Unterbringungsmöglichkeiten</label>
@@ -424,6 +428,7 @@
 			<label index="tx_seminars_categories">Kategorien</label>
 			<label index="tx_seminars_categories.title">Titel:</label>
 			<label index="tx_seminars_categories.icon">Icon:</label>
+			<label index="tx_seminars_categories.single_view_page">Seite mit der Einzelansicht für Veranstaltungen in dieser Kategorie:</label>
 			<label index="tx_seminars_skills">Fähigkeiten</label>
 			<label index="tx_seminars_skills.title">Titel:</label>
 			<label index="tx_seminars_prices">Preise</label>
@@ -443,7 +448,8 @@
 			<label index="fe_groups.tx_seminars_auxiliary_records_pid">Speichere Hilfsdatensätze für seminars in Seite:</label>
 			<label index="fe_groups.tx_seminars_reviewer">BE-Benutzer, der die Freischaltmail für im FE bearbeitete Veranstaltungen bekommt:</label>
 			<label index="fe_groups.tx_seminars_events_pid">Speichere im FE-Editor erstellte Veranstaltungen in Seite:</label>
-			<label index="fe_groups.tx_seminars_default_categories">Default-Kategorien:</label>
+			<label index="fe_groups.tx_seminars_default_categories">Default-Kategorien für den FE-Editor:</label>
+			<label index="fe_groups.tx_seminars_default_organizer">Default-Veranstalter für den FE-Editor:</label>
 			<label index="owner_feuser">Frontend-User, der diesen Datensatz eingetragen hat:</label>
 			<label index="be_groups.tab_event_management">Veranstaltungsverwaltung</label>
 			<label index="be_groups.tx_seminars_events_folder">SysOrdner für neue Veranstaltungen</label>
@@ -1432,6 +1438,7 @@
 			<label index="tx_seminars_payment_methods.description" type="integer">189468887</label>
 			<label index="tx_seminars_event_types" type="integer">143373196</label>
 			<label index="tx_seminars_event_types.title" type="integer">85903807</label>
+			<label index="tx_seminars_event_types.single_view_page" type="integer">91444955</label>
 			<label index="tx_seminars_checkboxes" type="integer">25823877</label>
 			<label index="tx_seminars_checkboxes.title" type="integer">85903807</label>
 			<label index="tx_seminars_lodgings" type="integer">226619047</label>
@@ -1467,6 +1474,7 @@
 			<label index="tx_seminars_seminars.details_page" type="integer">196341936</label>
 			<label index="tx_seminars_seminars.divLabelAccess" type="integer">200750040</label>
 			<label index="tx_seminars_categories.icon" type="integer">57819822</label>
+			<label index="tx_seminars_categories.single_view_page" type="integer">25600025</label>
 			<label index="tx_seminars_seminars.image" type="integer">73502731</label>
 			<label index="tx_seminars_speakers.gender" type="integer">212491130</label>
 			<label index="tx_seminars_speakers.gender_male" type="integer">8189176</label>
@@ -1484,7 +1492,8 @@
 			<label index="fe_groups.tx_seminars_auxiliary_records_pid" type="integer">86039397</label>
 			<label index="fe_groups.tx_seminars_reviewer" type="integer">14025609</label>
 			<label index="fe_groups.tx_seminars_events_pid" type="integer">197101199</label>
-			<label index="fe_groups.tx_seminars_default_categories" type="integer">208530763</label>
+			<label index="fe_groups.tx_seminars_default_categories" type="integer">134880840</label>
+			<label index="fe_groups.tx_seminars_default_organizer" type="integer">131199210</label>
 			<label index="owner_feuser" type="integer">36410852</label>
 			<label index="be_groups.tab_event_management" type="integer">136062963</label>
 			<label index="be_groups.tx_seminars_events_folder" type="integer">177662722</label>
@@ -2458,6 +2467,7 @@
 			<label index="tx_seminars_payment_methods.description">Detailed description for e-mails:</label>
 			<label index="tx_seminars_event_types">Event types</label>
 			<label index="tx_seminars_event_types.title">Title:</label>
+			<label index="tx_seminars_event_types.single_view_page">Single view page for events of this type:</label>
 			<label index="tx_seminars_checkboxes">Registration options with checkbox</label>
 			<label index="tx_seminars_checkboxes.title">Title:</label>
 			<label index="tx_seminars_lodgings">Lodging options</label>
@@ -2509,6 +2519,7 @@
 			<label index="tx_seminars_seminars.details_page">Page with the details view:</label>
 			<label index="tx_seminars_seminars.divLabelAccess">Access</label>
 			<label index="tx_seminars_categories.icon">Icon:</label>
+			<label index="tx_seminars_categories.single_view_page">Single view page for events in this category:</label>
 			<label index="tx_seminars_seminars.image">Image:</label>
 			<label index="tx_seminars_speakers.gender">Gender:</label>
 			<label index="tx_seminars_speakers.gender_male">male</label>
@@ -2526,7 +2537,8 @@
 			<label index="fe_groups.tx_seminars_auxiliary_records_pid">Store auxiliary records for seminars in page:</label>
 			<label index="fe_groups.tx_seminars_reviewer">BE user to receive the publication e-mail for FE-edited events:</label>
 			<label index="fe_groups.tx_seminars_events_pid">Store events created in the FE-editor in this page:</label>
-			<label index="fe_groups.tx_seminars_default_categories">Default categories:</label>
+			<label index="fe_groups.tx_seminars_default_categories">Default categories for the FE editor:</label>
+			<label index="fe_groups.tx_seminars_default_organizer">Default organizer for the FE editor:</label>
 			<label index="owner_feuser">Front-end user who has created this record:</label>
 			<label index="be_groups.tab_event_management">Event management</label>
 			<label index="be_groups.tx_seminars_events_folder">Sysfolder for new events</label>

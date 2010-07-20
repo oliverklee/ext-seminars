@@ -15,6 +15,7 @@ CREATE TABLE fe_groups (
 	tx_seminars_auxiliary_records_pid int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_seminars_reviewer int(11) unsigned DEFAULT '0' NOT NULL
 	tx_seminars_default_categories int(11) unsigned DEFAULT '0' NOT NULL,
+	tx_seminars_default_organizer int(11) unsigned DEFAULT '0' NOT NULL,
 );
 
 
@@ -510,6 +511,7 @@ CREATE TABLE tx_seminars_event_types (
 	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
+	single_view_page int(11) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
@@ -743,6 +745,7 @@ CREATE TABLE tx_seminars_categories (
 	is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	title tinytext,
 	icon tinytext,
+	single_view_page int(11) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),

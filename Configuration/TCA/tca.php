@@ -2024,7 +2024,7 @@ $TCA['tx_seminars_payment_methods'] = array(
 $TCA['tx_seminars_event_types'] = array(
 	'ctrl' => $TCA['tx_seminars_event_types']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title',
+		'showRecordFieldList' => 'title, single_view_page',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2036,9 +2036,21 @@ $TCA['tx_seminars_event_types'] = array(
 				'eval' => 'required,trim',
 			),
 		),
+		'single_view_page' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_event_types.single_view_page',
+			'config' => array(
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'pages',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+			),
+		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title;;;;2-2-2'),
+		'0' => array('showitem' => 'title;;;;2-2-2, single_view_page'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -2303,7 +2315,7 @@ $TCA['tx_seminars_target_groups'] = array(
 $TCA['tx_seminars_categories'] = array(
 	'ctrl' => $TCA['tx_seminars_categories']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title, icon',
+		'showRecordFieldList' => 'title, icon, single_view_page',
 	),
 	'columns' => array(
 		'title' => array(
@@ -2330,9 +2342,21 @@ $TCA['tx_seminars_categories'] = array(
 				'maxitems' => 1,
 			),
 		),
+		'single_view_page' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_categories.single_view_page',
+			'config' => array(
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'pages',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+			),
+		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'title, icon;;;;2-2-2'),
+		'0' => array('showitem' => 'title, icon;;;;2-2-2, single_view_page'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
