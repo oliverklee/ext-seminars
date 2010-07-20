@@ -729,5 +729,153 @@ class tx_seminars_Mapper_EventTest extends tx_phpunit_testcase {
 			$this->fixture->find($eventUid)->getRegistrations()->getUids()
 		);
 	}
+
+
+	////////////////////////////////////////
+	// Tests concerning findAllByBeginDate
+	////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function findAllByBeginDateForPositiveSameMinimumAndMaximumNotThrowsException() {
+		$this->fixture->findAllByBeginDate(42, 42);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findAllByBeginDateForZeroMinimumAndPositiveMaximumNotThrowsException() {
+		$this->fixture->findAllByBeginDate(0, 1);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @expectedException InvalidArgumentException
+	 */
+	public function findAllByBeginDateForZeroMinimumAndZeroMaximumThrowsException() {
+		$this->fixture->findAllByBeginDate(0, 0);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findAllByBeginDateForMinimumSmallerThanMaximumNotThrowsException() {
+		$this->fixture->findAllByBeginDate(1, 2);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @expectedException InvalidArgumentException
+	 */
+	public function findAllByBeginDateForNegativeMinimumSmallerThanMaximumThrowsException() {
+		$this->fixture->findAllByBeginDate(-1, 1);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @expectedException InvalidArgumentException
+	 */
+	public function findAllByBeginDateForMinimumGreaterThanMaximumThrowsException() {
+		$this->fixture->findAllByBeginDate(2, 1);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findAllByBeginDateNotFindsEventWithBeginDateSmallerThanMinimum() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('begin_date' => 41)
+		);
+
+		$this->assertTrue(
+			$this->fixture->findAllByBeginDate(42, 91)->isEmpty()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findAllByBeginDateFindsEventWithBeginDateEqualToMinimum() {
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('begin_date' => 42)
+		);
+
+		$this->assertTrue(
+			$this->fixture->findAllByBeginDate(42, 91)->hasUid($uid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findAllByBeginDateFindsEventWithBeginDateBetweenMinimumAndMaximum() {
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('begin_date' => 2)
+		);
+
+		$this->assertTrue(
+			$this->fixture->findAllByBeginDate(1, 3)->hasUid($uid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findAllByBeginDateFindsEventWithBeginDateEqualToMaximum() {
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('begin_date' => 91)
+		);
+
+		$this->assertTrue(
+			$this->fixture->findAllByBeginDate(42, 91)->hasUid($uid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findAllByBeginDateNotFindsEventWithBeginDateGreaterThanMaximum() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('begin_date' => 92)
+		);
+
+		$this->assertTrue(
+			$this->fixture->findAllByBeginDate(42, 91)->isEmpty()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findAllByBeginDateCanFindEventWithZeroBeginDate() {
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('begin_date' => 0)
+		);
+
+		$this->assertTrue(
+			$this->fixture->findAllByBeginDate(0, 1)->hasUid($uid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findAllByBeginDateCanFindTwoEvents() {
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('begin_date' => 42)
+		);
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('begin_date' => 43)
+		);
+
+		$this->assertEquals(
+			2,
+			$this->fixture->findAllByBeginDate(42, 91)->count()
+		);
+	}
 }
 ?>

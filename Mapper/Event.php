@@ -97,6 +97,37 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 
 		return $result;
 	}
+
+	/**
+	 * Retrieves all events that have a begin date of at least $minimum up to
+	 * $maximum.
+	 *
+	 * These boundaries are inclusive, i.e., events with a begin date of
+	 * exactly $minimum or $maximum will also be retrieved.
+	 *
+	 * @param integer $minimum
+	 *        minimum begin date as a UNIX timestamp, must be >= 0
+	 * @param integer $maximum
+	 *        maximum begin date as a UNIX timestamp, must be >= $minimum
+	 *
+	 * @return tx_oelib_List the found tx_seminars_Model_Event models, will be
+	 *                       empty if there are no matches
+	 */
+	public function findAllByBeginDate($minimum, $maximum) {
+		if ($minimum < 0) {
+			throw new InvalidArgumentException('$minimum must be >= 0.');
+		}
+		if ($maximum <= 0) {
+			throw new InvalidArgumentException('$maximum must be > 0.');
+		}
+		if ($minimum > $maximum) {
+			throw new InvalidArgumentException('$minimum must be <= $maximum.');
+		}
+
+		return $this->findByWhereClause(
+			'begin_date BETWEEN ' . $minimum . ' AND ' . $maximum
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/Event.php']) {
