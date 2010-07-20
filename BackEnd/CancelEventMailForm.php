@@ -57,21 +57,20 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 	 * @return string the content for the message body, will not be empty
 	 */
 	protected function getMessageBodyFormContent() {
-		$event = $this->getEvent();
 		$result = $this->localizeSalutationPlaceholder($this->formFieldPrefix);
 
-		if (!$event->isEventDate()) {
+		if (!$this->getEvent()->isEventDate()) {
 			return $result;
 		}
 
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Event');
 		$builder->limitToEarliestBeginDate($GLOBALS['SIM_EXEC_TIME']);
-		$builder->limitToOtherDatesForTopic($event);
+		$builder->limitToOtherDatesForTopic($this->getOldEvent());
 
 		$otherDateBag = $builder->build();
 
 		if (!$otherDateBag->isEmpty()) {
-			$singleViewUrl = $this->getSingleViewUrl($event);
+			$singleViewUrl = $this->getSingleViewUrl();
 
 			if ($singleViewUrl != '') {
 				$result .= LF . LF .
@@ -85,25 +84,23 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 	}
 
 	/**
-	 * Gets the full URL to the single view of the given event.
-	 *
-	 * @param tx_seminars_seminar $event
-	 *        the event to get the single view link for
+	 * Gets the full URL to the single view of the current event.
 	 *
 	 * @return string the URL to the single view of the given event, will be
 	 *                empty if no single view URL could be determined
 	 */
-	private function getSingleViewUrl(tx_seminars_seminar $event) {
-		if (!$event->hasSeparateDetailsPage()) {
+	private function getSingleViewUrl() {
+		$event = $this->getEvent();
+
+		if (!$event->hasDetailsPage()) {
 			$result = $this->getUrlForPid(
 				tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
-					->getAsInteger('detailPID'),
-				$event
+					->getAsInteger('detailPID')
 			);
 		} else {
 			$separatePage = $event->getDetailsPage();
 			if (intval($separatePage) > 0) {
-				$result = $this->getUrlForPid($separatePage, $event);
+				$result = $this->getUrlForPid($separatePage);
 			} else {
 				$result = $separatePage;
 			}
@@ -122,13 +119,13 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 	/**
 	 * Creates the URL to the given page ID.
 	 *
-	 * @param integer $pageId the UID of the page to get the URL for, must be >= 0
-	 * @param tx_seminars_seminar $event the event to show on the single view page
+	 * @param integer $pageId
+	 *        the UID of the page to get the URL for, must be >= 0
 	 *
 	 * @return string the URL to the single view page, will be empty if 0 has
 	 *                been given as page ID
 	 */
-	private function getUrlForPid($pageId, tx_seminars_seminar $event) {
+	private function getUrlForPid($pageId) {
 		if ($pageId == 0) {
 			return '';
 		}
@@ -138,7 +135,7 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 			'/\.\.([^\'"]*)(\'|")/',
 			t3lib_BEfunc::viewOnClick(
 				$pageId, '' ,'' ,'' ,'' ,
-				'&tx_seminars_pi1[showUid]=' . $event->getUid()
+				'&tx_seminars_pi1[showUid]=' . $this->getEvent()->getUid()
 			),
 			$rawUrl
 		);
@@ -155,8 +152,9 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 	 * the database.
 	 */
 	protected function setEventStatus() {
-		$this->getEvent()->setStatus(tx_seminars_seminar::STATUS_CANCELED);
-		$this->getEvent()->commitToDb();
+		$this->getEvent()->setStatus(tx_seminars_Model_Event::STATUS_CANCELED);
+		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->save($this->getEvent());
 
 		$message = t3lib_div::makeInstance(
 			't3lib_FlashMessage',

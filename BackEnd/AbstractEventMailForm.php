@@ -32,7 +32,12 @@
  */
 abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
-	 * @var tx_seminars_seminar the event which we want to list/show
+	 * @var tx_seminars_seminar the event which this e-mail form refers to
+	 */
+	private $oldEvent = null;
+
+	/**
+	 * @var tx_seminars_Model_Event the event which this e-mail form refers to
 	 */
 	private $event = null;
 
@@ -70,23 +75,31 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * @param integer UID of an event, must be > 0
 	 */
 	public function __construct($eventUid) {
-		$this->event = tx_oelib_ObjectFactory::make(
+		if ($eventUid <= 0) {
+			throw new InvalidArgumentException('$eventUid must be > 0.');
+		}
+
+		$this->oldEvent = tx_oelib_ObjectFactory::make(
 			'tx_seminars_seminar', $eventUid
 		);
 
-		if (!$this->event->isOk()) {
+		if (!$this->oldEvent->isOk()) {
 			throw new Exception('There is no event with this UID.');
 		}
+
+		$this->event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->find($eventUid);
 	}
 
 	/**
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		if ($this->event) {
-			$this->event->__destruct();
-			unset($this->event);
+		if ($this->oldEvent) {
+			$this->oldEvent->__destruct();
+			unset($this->oldEvent);
 		}
+		unset($this->event);
 	}
 
 	/**
@@ -117,7 +130,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			$this->createSubmitButton() .
 			'<p><input type="hidden" name="action" value="' . $this->action .
 			'" /><input type="hidden" name="eventUid" value="' .
-			$this->event->getUid() . '" /><input type="hidden" ' .
+			$this->getEvent()->getUid() . '" /><input type="hidden" ' .
 			'name="isSubmitted" value="1" /></p></form></fieldset>';
 	}
 
@@ -192,7 +205,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		$result = '<p><label for="sender">' .
 			$GLOBALS['LANG']->getLL('eventMailForm_sender') . '</label>';
 
-		$organizers = $this->event->getOrganizerBag();
+		$organizers = $this->getOldEvent()->getOrganizerBag();
 		$multipleOrganizers = $organizers->count() > 1;
 
 		if ($multipleOrganizers) {
@@ -274,6 +287,15 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * Returns the event object.
 	 *
 	 * @return tx_seminars_seminar the event object
+	 */
+	protected function getOldEvent() {
+		return $this->oldEvent;
+	}
+
+	/**
+	 * Returns the event this e-mail form refers to.
+	 *
+	 * @return tx_seminars_Model_Event the event
 	 */
 	protected function getEvent() {
 		return $this->event;
@@ -496,7 +518,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 */
 	private function appendTitleAndDate($prefix) {
 		return $GLOBALS['LANG']->getLL($prefix . 'subject') . ' ' .
-			$this->getEvent()->getTitleAndDate();
+			$this->getOldEvent()->getTitleAndDate();
 	}
 
 	/**
@@ -519,7 +541,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		);
 		$eventDetails = $salutation->createIntroduction(
 			'"%s"',
-			$this->getEvent()
+			$this->getOldEvent()
 		);
 		$introduction = sprintf(
 			$GLOBALS['LANG']->getLL($prefix . 'introduction'),

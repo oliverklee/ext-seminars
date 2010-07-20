@@ -62,7 +62,6 @@ class tx_seminars_BackEnd_GeneralEventMailForm extends tx_seminars_BackEnd_Abstr
 	 * @return string the content for the message body, will not be empty
 	 */
 	protected function getMessageBodyFormContent() {
-		$event = $this->getEvent();
 		return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
 	}
 }

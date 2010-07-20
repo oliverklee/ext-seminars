@@ -68,7 +68,7 @@ class tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm extends tx_seminar
 	 * Sets the date format for the event.
 	 */
 	public function setDateFormat() {
-		$this->getEvent()->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
+		$this->getOldEvent()->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
 	}
 
 	/**

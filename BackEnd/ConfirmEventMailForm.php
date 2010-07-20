@@ -65,8 +65,9 @@ class tx_seminars_BackEnd_ConfirmEventMailForm extends tx_seminars_BackEnd_Abstr
 	 * the database.
 	 */
 	protected function setEventStatus() {
-		$this->getEvent()->setStatus(tx_seminars_seminar::STATUS_CONFIRMED);
-		$this->getEvent()->commitToDb();
+		$this->getEvent()->setStatus(tx_seminars_Model_Event::STATUS_CONFIRMED);
+		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->save($this->getEvent());
 
 		$message = t3lib_div::makeInstance(
 			't3lib_FlashMessage',
