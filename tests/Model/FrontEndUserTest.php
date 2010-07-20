@@ -31,6 +31,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 	/**
@@ -776,6 +777,119 @@ class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 
 		$this->assertNull(
 			$this->fixture->getRegistration()
+		);
+	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning getDefaultOrganizers
+	//////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getDefaultOrganizersForGroupWithoutDefaultOrganizersReturnsEmptyList() {
+		$userGroup = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(array('tx_seminars_default_organizer' => null));
+		$groups = new tx_oelib_List();
+		$groups->add($userGroup);
+		$this->fixture->setData(array('usergroup' => $groups));
+
+		$this->assertTrue(
+			$this->fixture->getDefaultOrganizers()->isEmpty()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getDefaultOrganizerForGroupWithDefaultOrganizerReturnsThatOrganizer() {
+		$organizer = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Organizer')->getNewGhost();
+		$userGroup = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup->setData(array('tx_seminars_default_organizer' => $organizer));
+		$groups = new tx_oelib_List();
+		$groups->add($userGroup);
+		$this->fixture->setData(array('usergroup' => $groups));
+
+		$this->assertSame(
+			$organizer,
+			$this->fixture->getDefaultOrganizers()->first()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getDefaultOrganizersForTwoGroupsWithDefaultOrganizersReturnsBothOrganizers() {
+		$organizer1 = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Organizer')->getNewGhost();
+		$userGroup1 = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup1->setData(array('tx_seminars_default_organizer' => $organizer1));
+
+		$organizer2 = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Organizer')->getNewGhost();
+		$userGroup2 = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
+		$userGroup2->setData(array('tx_seminars_default_organizer' => $organizer2));
+
+		$groups = new tx_oelib_List();
+		$groups->add($userGroup1);
+		$groups->add($userGroup2);
+		$this->fixture->setData(array('usergroup' => $groups));
+
+		$defaultOrganizers = $this->fixture->getDefaultOrganizers();
+
+		$this->assertTrue(
+			$defaultOrganizers->hasUid($organizer1->getUid()),
+			'The first organizer is missing.'
+		);
+		$this->assertTrue(
+			$defaultOrganizers->hasUid($organizer2->getUid()),
+			'The second organizer is missing.'
+		);
+	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning hasDefaultOrganizers
+	//////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function hasDefaultOrganizersForEmptyDefaultOrganizersReturnsFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_FrontEndUser', array('getDefaultOrganizers')
+		);
+		$fixture->expects($this->any())->method('getDefaultOrganizers')
+			->will($this->returnValue(new tx_oelib_List()));
+
+		$this->assertFalse(
+			$fixture->hasDefaultOrganizers()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasDefaultOrganizersForNonEmptyDefaultOrganizersReturnsTrue() {
+		$organizer = tx_oelib_MapperRegistry
+			::get('tx_seminars_Mapper_Organizer')->getNewGhost();
+		$organizers = new tx_oelib_List();
+		$organizers->add($organizer);
+
+			$fixture = $this->getMock(
+			'tx_seminars_Model_FrontEndUser', array('getDefaultOrganizers')
+		);
+		$fixture->expects($this->any())->method('getDefaultOrganizers')
+			->will($this->returnValue($organizers));
+
+		$this->assertTrue(
+			$fixture->hasDefaultOrganizers()
 		);
 	}
 }

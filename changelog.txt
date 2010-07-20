@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#4003] Feature: Add a getter for the default organizer
 - [#4001] Feature: Add some fields
 - [#3995] Change: Add a conflict with the "sourceopt" extension, thanks to Philipp Gampe
 - [#3992] Change: Increase the size of the hideFields and hideColumns fields in the flexforms

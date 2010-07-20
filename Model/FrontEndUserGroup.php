@@ -32,6 +32,7 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGroup {
 	/**
@@ -141,6 +142,27 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	 */
 	public function hasDefaultCategories() {
 		return !$this->getDefaultCategories()->isEmpty();
+	}
+
+	/**
+	 * Returns this user group's default organizer for the FE editor.
+	 *
+	 * @return tx_seminars_Model_Organizer this group's default organizer, will
+	 *                                     be null if no organizer has been set
+	 */
+	public function getDefaultOrganizer() {
+		return $this->getAsModel('tx_seminars_default_organizer');
+	}
+
+	/**
+	 * Checks whether this user group has a default organizer set.
+	 *
+	 * @return boolean TRUE if this group has a default organizer, FALSE
+	 *                 otherwise
+	 */
+	public function hasDefaultOrganizer() {
+		return ($this->getDefaultOrganizer()
+			instanceof tx_seminars_Model_Organizer);
 	}
 }
 

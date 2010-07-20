@@ -31,6 +31,7 @@
  * @subpackage tx_seminars
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Mapper_FrontEndUserGroup extends tx_oelib_Mapper_FrontEndUserGroup {
 	/**
@@ -45,6 +46,7 @@ class tx_seminars_Mapper_FrontEndUserGroup extends tx_oelib_Mapper_FrontEndUserG
 	protected $relations = array(
 		'tx_seminars_reviewer' => 'tx_oelib_Mapper_BackEndUser',
 		'tx_seminars_default_categories' => 'tx_seminars_Mapper_Category',
+		'tx_seminars_default_organizer' => 'tx_seminars_Mapper_Organizer',
 	);
 }
 

@@ -31,6 +31,7 @@
  * @subpackage tx_seminars
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	/**
@@ -167,6 +168,35 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 */
 	public function hasDefaultCategories() {
 		return !$this->getDefaultCategoriesFromGroup()->isEmpty();
+	}
+
+	/**
+	 * Returns all default organizers assigned to this user's groups.
+	 *
+	 * @return tx_oelib_List the organizers assigned to this user's groups, will
+	 *                       be empty if no default organizers have been assigned
+	 *                       to any of the user's groups
+	 */
+	public function getDefaultOrganizers() {
+		$organizers = tx_oelib_ObjectFactory::make('tx_oelib_List');
+
+		foreach ($this->getUserGroups() as $group) {
+			if ($group->hasDefaultOrganizer()) {
+				$organizers->add($group->getDefaultOrganizer());
+			}
+		}
+
+		return $organizers;
+	}
+
+	/**
+	 * Checks whether this user's groups have any default organizers.
+	 *
+	 * @return boolean TRUE if at least one of the user's groups has a default
+	 *                 organizer, FALSE otherwise
+	 */
+	public function hasDefaultOrganizers() {
+		return !$this->getDefaultOrganizers()->isEmpty();
 	}
 
 	/**

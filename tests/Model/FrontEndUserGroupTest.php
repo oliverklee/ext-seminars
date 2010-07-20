@@ -32,6 +32,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	/**
@@ -281,6 +282,49 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->hasDefaultCategories()
+		);
+	}
+
+
+	/////////////////////////////////////////////////////////////////
+	// Tests concerning getDefaultOrganizer and hasDefaultOrganizer
+	/////////////////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getDefaultOrganizerForSetOrganizerReturnsIt() {
+		$organizer = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer')
+			->getNewGhost();
+		$this->fixture->setData(array('tx_seminars_default_organizer' => $organizer));
+
+		$this->assertSame(
+			$organizer,
+			$this->fixture->getDefaultOrganizer()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasDefaultOrganizerForSetOrganizerReturnsTrue() {
+		$organizer = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer')
+			->getNewGhost();
+		$this->fixture->setData(array('tx_seminars_default_organizer' => $organizer));
+
+		$this->assertTrue(
+			$this->fixture->hasDefaultOrganizer()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasDefaultOrganizerForNotSetOrganizerReturnsFalse() {
+		$this->fixture->setData(array('tx_seminars_default_organizer' => null));
+
+		$this->assertFalse(
+			$this->fixture->hasDefaultOrganizer()
 		);
 	}
 }

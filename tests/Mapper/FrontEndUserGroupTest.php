@@ -31,6 +31,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Mapper_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	/**
@@ -102,6 +103,28 @@ class tx_seminars_Mapper_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$this->fixture->find($frontEndUserGroupUid)->getDefaultCategories()->first()
 				instanceof tx_seminars_Model_Category
+		);
+	}
+
+
+	///////////////////////////////////////////
+	// Tests concerning the default organizer
+	///////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getDefaultOrganizerForExistingOrganizerReturnsOrganizer() {
+		$organizerUid = $this->testingFramework->createRecord(
+			'tx_seminars_organizers'
+		);
+		$groupUid = $this->testingFramework->createFrontEndUserGroup(
+			array('tx_seminars_default_organizer' => $organizerUid)
+		);
+
+		$this->assertTrue(
+			$this->fixture->find($groupUid)->getDefaultOrganizer()
+				instanceof tx_seminars_Model_Organizer
 		);
 	}
 }
