@@ -673,6 +673,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		);
 
 		if ($this->createSeminar($this->showUid, $this->isLoggedIn())) {
+			$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+				->find($this->showUid);
+
 			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(TRUE));
 
@@ -1895,6 +1898,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		$result = '';
 
 		if ($this->seminar->isOk()) {
+			$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+				->find($this->getSeminar()->getUid());
+
 			$cssClasses = array();
 
 			if ($rowCounter % 2) {
