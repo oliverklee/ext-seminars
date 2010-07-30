@@ -40,6 +40,14 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 */
 	protected $tableName = 'tx_seminars_attendances';
 
+	/**
+	 * the class name of the mapper responsible for creating the new model
+	 * that corresponds to this old model
+	 *
+	 * @var string
+	 */
+	protected $mapperName = 'tx_seminars_Mapper_Registration';
+
 	/** Same as class name */
 	public $prefixId = 'tx_seminars_registration';
 	/**  Path to this script relative to the extension dir. */

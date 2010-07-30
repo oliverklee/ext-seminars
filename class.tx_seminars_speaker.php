@@ -48,6 +48,14 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	protected $tableName = 'tx_seminars_speakers';
 
 	/**
+	 * the class name of the mapper responsible for creating the new model
+	 * that corresponds to this old model
+	 *
+	 * @var string
+	 */
+	protected $mapperName = 'tx_seminars_Mapper_Speaker';
+
+	/**
 	 * Gets our organization.
 	 *
 	 * @return string our organization (or '' if there is an error)

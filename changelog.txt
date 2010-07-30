@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#4009] Change: The OldModels should provide the Mapper with the data to reduce double DB requests
 - [#4007] Change: Provide the new event model in places where single view links get created
 - [#4002] Feature: Add a method "find by begin date" to the event mapper
 - [#4004] Feature: Use the default organizers in the FE editor

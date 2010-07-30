@@ -39,6 +39,14 @@ class tx_seminars_OldModel_Organizer extends tx_seminars_OldModel_Abstract imple
 	protected $tableName = 'tx_seminars_organizers';
 
 	/**
+	 * the class name of the mapper responsible for creating the new model
+	 * that corresponds to this old model
+	 *
+	 * @var string
+	 */
+	protected $mapperName = 'tx_seminars_Mapper_Organizer';
+
+	/**
 	 * Gets the organizer's real name.
 	 *
 	 * @return string the organizer's real name, will not be empty for valid records
