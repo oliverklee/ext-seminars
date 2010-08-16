@@ -491,6 +491,106 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
+	 * Gets a separate single view page UID (or full URL) for this event,
+	 * combined from the event itself, the event type and the categories.
+	 *
+	 * Note: This function does not take the TS setup configuration or flexform
+	 * settings into account.
+	 *
+	 * @return string
+	 *         the single view page UID/URL, will be an empty string if none
+	 *         has been set
+	 */
+	public function getCombinedSingleViewPage() {
+		$result = '';
+
+		if ($this->hasDetailsPage()) {
+			$result = $this->getDetailsPage();
+		} elseif ($this->hasSingleViewPageUidFromEventType()) {
+			$result = (string) $this->getSingleViewPageUidFromEventType();
+		} elseif ($this->hasSingleViewPageUidFromCategories()) {
+			$result = (string) $this->getSingleViewPageUidFromCategories();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether this event has a separate single view page (combined
+	 * from the event itself, the event type and the categories).
+	 *
+	 * @return boolean
+	 *         TRUE if this event has a single view page set, FALSE otherwise
+	 */
+	public function hasCombinedSingleViewPage() {
+		return ($this->getCombinedSingleViewPage() != '');
+	}
+
+	/**
+	 * Gets the single view page from the event type.
+	 *
+	 * @return integer
+	 *         the single view page UID from the event type, will be > 0 if
+	 *         this event has an event type and a that type has a single view
+	 *         page UID, will be 0 otherwise
+	 */
+	protected function getSingleViewPageUidFromEventType() {
+		if (!$this->hasSingleViewPageUidFromEventType()) {
+			return 0;
+		}
+
+		return $this->getEventType()->getSingleViewPageUid();
+	}
+
+	/**
+	 * Checks whether this event has an event type with a non-zero single view
+	 * page UID.
+	 *
+	 * @return boolean
+	 *         TRUE if this event has an event type and if that event type has
+	 *         a non-zero single view page, FALSE otherwise
+	 */
+	protected function hasSingleViewPageUidFromEventType() {
+		return (($this->getEventType() !== null)
+			&& $this->getEventType()->hasSingleViewPageUid());
+	}
+
+	/**
+	 * Gets the single view page UID from the categories.
+	 *
+	 * This function returns the first found UID from the event categories.
+	 *
+	 * @return integer
+	 *         the single view page UID from the categories, will be > 0 if
+	 *         this event has at least one category with a single view page
+	 *         UID, will be 0 otherwise
+	 */
+	protected function getSingleViewPageUidFromCategories() {
+		$result = 0;
+
+		foreach ($this->getCategories() as $category) {
+			if ($category->hasSingleViewPageUid()) {
+				$result = $category->getSingleViewPageUid();
+				break;
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Checks whether this event has at least one category with a single view
+	 * page UID.
+	 *
+	 * @return boolean
+	 *         TRUE if this event has at least one category with a single view
+	 *         page UID, FALSE otherwise
+	 */
+	protected function hasSingleViewPageUidFromCategories() {
+		return ($this->getSingleViewPageUidFromCategories() > 0);
+	}
+
+	/**
 	 * Returns our places.
 	 *
 	 * @return tx_oelib_List our places, will be empty if this event has no

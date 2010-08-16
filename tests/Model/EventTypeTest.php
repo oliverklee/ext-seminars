@@ -31,6 +31,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_EventTypeTest extends tx_phpunit_testcase {
 	/**
@@ -80,6 +81,45 @@ class tx_seminars_Model_EventTypeTest extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'Workshop',
 			$this->fixture->getTitle()
+		);
+	}
+
+
+	//////////////////////////////////////////////
+	// Tests concerning the single view page UID
+	//////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getSingleViewPageUidReturnsSingleViewPageUid() {
+		$this->fixture->setData(array('single_view_page' => 42));
+
+		$this->assertEquals(
+			42,
+			$this->fixture->getSingleViewPageUid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSingleViewPageUidForZeroPageUidReturnsFalse() {
+		$this->fixture->setData(array('single_view_page' => 0));
+
+		$this->assertFalse(
+			$this->fixture->hasSingleViewPageUid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasSingleViewPageUidForNonZeroPageUidReturnsTrue() {
+		$this->fixture->setData(array('single_view_page' => 42));
+
+		$this->assertTrue(
+			$this->fixture->hasSingleViewPageUid()
 		);
 	}
 }

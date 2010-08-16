@@ -31,6 +31,7 @@
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_EventType extends tx_oelib_Model {
 	/**
@@ -53,6 +54,26 @@ class tx_seminars_Model_EventType extends tx_oelib_Model {
 		}
 
 		$this->setAsString('title', $title);
+	}
+
+	/**
+	 * Gets the UID of the single view page for events of this type.
+	 *
+	 * @return integer the single view page, will be 0 if none has been set
+	 */
+	public function getSingleViewPageUid() {
+		return $this->getAsInteger('single_view_page');
+	}
+
+	/**
+	 * Checks whether this event type has a single view page UID set.
+	 *
+	 * @return boolean
+	 *         TRUE if this event type has a single view page set, FALSE
+	 *         otherwise
+	 */
+	public function hasSingleViewPageUid() {
+		return $this->hasInteger('single_view_page');
 	}
 }
 

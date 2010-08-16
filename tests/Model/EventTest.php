@@ -652,6 +652,205 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 	}
 
 
+	///////////////////////////////////////////////////
+	// Tests concerning the combined single view page
+	///////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getCombinedSingleViewPageInitiallyReturnsEmptyString() {
+		$this->fixture->setData(array('categories' => new tx_oelib_List()));
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getCombinedSingleViewPage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCombinedSingleViewPageForAvailableDetailsPageUidReturnsTheDetailsPageUid() {
+		$this->fixture->setData(array(
+			'details_page' => '5', 'categories' => new tx_oelib_List()
+		));
+
+		$this->assertEquals(
+			'5',
+			$this->fixture->getCombinedSingleViewPage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCombinedSingleViewPageForAvailableDetailsPageUrlReturnsTheDetailsPageUrl() {
+		$this->fixture->setData(array(
+			'details_page' => 'www.example.com', 'categories' => new tx_oelib_List()
+		));
+
+		$this->assertEquals(
+			'www.example.com',
+			$this->fixture->getCombinedSingleViewPage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCombinedSingleViewPageForAvailableEventTypeWithoutSingleViewPageReturnsEmptyString() {
+		$eventType = new tx_seminars_Model_EventType();
+		$eventType->setData(array());
+		$this->fixture->setData(array(
+			'event_type' => $eventType, 'categories' => new tx_oelib_List()
+		));
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getCombinedSingleViewPage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCombinedSingleViewPageForAvailableEventTypeWithSingleViewPageReturnsSingleViewPageFromEventType() {
+		$eventType = new tx_seminars_Model_EventType();
+		$eventType->setData(array('single_view_page' => 42));
+		$this->fixture->setData(array(
+			'event_type' => $eventType, 'categories' => new tx_oelib_List()
+		));
+
+		$this->assertEquals(
+			'42',
+			$this->fixture->getCombinedSingleViewPage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCombinedSingleViewPageForAvailableCategoryWithoutSingleViewPageReturnsEmptyString() {
+		$category = new tx_seminars_Model_Category();
+		$category->setData(array());
+		$categories = new tx_oelib_List();
+		$categories->add($category);
+		$this->fixture->setData(array('categories' => $categories));
+
+		$this->assertEquals(
+			'',
+			$this->fixture->getCombinedSingleViewPage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCombinedSingleViewPageForAvailableCategoryTypeWithSingleViewPageReturnsSingleViewPageFromCategory() {
+		$category = new tx_seminars_Model_Category();
+		$category->setData(array('single_view_page' => 42));
+		$categories = new tx_oelib_List();
+		$categories->add($category);
+		$this->fixture->setData(array('categories' => $categories));
+
+		$this->assertEquals(
+			'42',
+			$this->fixture->getCombinedSingleViewPage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCombinedSingleViewPageForTwoAvailableCategoriesWithSingleViewPageReturnsSingleViewPageFromFirstCategory() {
+		$category1 = new tx_seminars_Model_Category();
+		$category1->setData(array('single_view_page' => 42));
+		$category2 = new tx_seminars_Model_Category();
+		$category2->setData(array('single_view_page' => 12));
+		$categories = new tx_oelib_List();
+		$categories->add($category1);
+		$categories->add($category2);
+		$this->fixture->setData(array('categories' => $categories));
+
+		$this->assertEquals(
+			'42',
+			$this->fixture->getCombinedSingleViewPage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasCombinedSingleViewPageForEmptySingleViewPageReturnsFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event', array('getCombinedSingleViewPage')
+		);
+		$fixture->expects($this->atLeastOnce())
+			->method('getCombinedSingleViewPage')->will($this->returnValue(''));
+
+		$this->assertFalse(
+			$fixture->hasCombinedSingleViewPage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasCombinedSingleViewPageForNonEmptySingleViewPageReturnsTrue() {
+		$fixture = $this->getMock(
+			'tx_seminars_Model_Event', array('getCombinedSingleViewPage')
+		);
+		$fixture->expects($this->atLeastOnce())
+			->method('getCombinedSingleViewPage')->will($this->returnValue(42));
+
+		$this->assertTrue(
+			$fixture->hasCombinedSingleViewPage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCombinedSingleViewPageUsesDetailsPageInsteadOfEventTypeIfBothAreAvailable() {
+		$eventType = new tx_seminars_Model_EventType();
+		$eventType->setData(array('single_view_page' => 42));
+
+		$this->fixture->setData(array(
+			'details_page' => '5',
+			'event_type' => $eventType,
+			'categories' => new tx_oelib_List(),
+		));
+
+		$this->assertEquals(
+			'5',
+			$this->fixture->getCombinedSingleViewPage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCombinedSingleViewPageUsesEventTypeInsteadOfCategoriesIfBothAreAvailable() {
+		$eventType = new tx_seminars_Model_EventType();
+		$eventType->setData(array('single_view_page' => 42));
+		$category = new tx_seminars_Model_Category();
+		$category->setData(array('single_view_page' => 91));
+		$categories = new tx_oelib_List();
+		$categories->add($category);
+
+		$this->fixture->setData(array(
+			'event_type' => $eventType,
+			'categories' => $categories,
+		));
+
+		$this->assertEquals(
+			'42',
+			$this->fixture->getCombinedSingleViewPage()
+		);
+	}
+
+
 	//////////////////////////////////
 	// Tests regarding our language.
 	//////////////////////////////////
