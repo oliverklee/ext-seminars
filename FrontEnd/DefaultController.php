@@ -198,6 +198,13 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	private $listViewHooksHaveBeenRetrieved = FALSE;
 
 	/**
+	 * a link builder instance
+	 *
+	 * @var tx_seminars_Service_SingleViewLinkBuilder
+	 */
+	private $linkBuilder = null;
+
+	/**
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
@@ -209,6 +216,10 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		}
 		if ($this->registration) {
 			$this->registration->__destruct();
+		}
+		if ($this->linkBuilder !== null) {
+			$this->linkBuilder->__destruct();
+			unset($this->linkBuilder);
 		}
 
 		unset(
@@ -1261,11 +1272,15 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		}
 
 		$output = '';
+
+		$eventMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+
 		$dependencies = $this->seminar->getDependencies();
 		foreach ($dependencies as $dependency) {
+			$event = $eventMapper->find($dependency->getUid());
 			$this->setMarker(
 				'dependency_title',
-				$dependency->getLinkedFieldValue($this, 'title')
+				$this->createSingleViewLink($event, $event->getTitle())
 			);
 			$output .= $this->getSubpart('SINGLE_DEPENDENCY');
 		}
@@ -1976,7 +1991,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 			$this->setMarker(
 				'title_link',
-				$this->seminar->getLinkedFieldValue($this, 'title')
+				$this->createSingleViewLink($event, $this->seminar->getTitle())
 			);
 			$this->setMarker('subtitle', $this->seminar->getSubtitle());
 			$this->setMarker('uid', $this->seminar->getUid($this));
@@ -1990,7 +2005,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				$this->seminar->getCreditPoints()
 			);
 			$this->setMarker(
-				'teaser', $this->seminar->getLinkedFieldValue($this, 'teaser')
+				'teaser',
+				$this->createSingleViewLink($event, $event->getTeaser())
 			);
 			$this->setMarker(
 				'speakers', $this->seminar->getSpeakersShort($this)
@@ -2006,8 +2022,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				$dateToShow = '';
 			} else {
 				if ($whatToDisplay == 'other_dates') {
-					$dateToShow = $this->seminar->getLinkedFieldValue(
-						$this, 'date'
+					$dateToShow = $this->createSingleViewLink(
+						$event, $this->seminar->getDate()
 					);
 				} else {
 					$dateToShow = $currentDate;
@@ -3448,6 +3464,51 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	protected function unhideEvent(tx_seminars_Model_Event $event) {
 		$event->markAsVisible();
 		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->save($event);
+	}
+
+	/**
+	 * Creates a hyperlink to the single view page of the event $event.
+	 *
+	 * @param tx_seminars_Model_Event $event
+	 *        the event which to link to
+	 * @param string $linkText the link text, must not be empty
+	 *
+	 * @return string HTML code for the link to the event's single view page
+	 */
+	public function createSingleViewLink(
+		tx_seminars_Model_Event $event, $linkText
+	) {
+
+		$url = $this->getLinkBuilder()->createRelativeUrlForEvent($event);
+
+		return '<a href="' . htmlspecialchars($url) . '">' .
+			htmlspecialchars($linkText) . '</a>';
+	}
+
+	/**
+	 * Returns a link builder instance.
+	 */
+	protected function getLinkBuilder() {
+		if ($this->linkBuilder == null) {
+			$this->injectLinkBuilder(tx_oelib_ObjectFactory::make(
+				'tx_seminars_Service_SingleViewLinkBuilder'
+			));
+		}
+		$this->linkBuilder->setPlugin($this);
+
+		return $this->linkBuilder;
+	}
+
+	/**
+	 * Injects a link builder.
+	 *
+	 * @param tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
+	 *        the link builder instance to use
+	 */
+	public function injectLinkBuilder(
+		tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
+	) {
+		$this->linkBuilder = $linkBuilder;
 	}
 }
 

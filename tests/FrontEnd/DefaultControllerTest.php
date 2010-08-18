@@ -83,6 +83,11 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 */
 	private $t3VarBackup = array();
 
+	/**
+	 * @var tx_seminars_Service_SingleViewLinkBuilder
+	 */
+	private $linkBuilder = null;
+
 	public function setUp() {
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
@@ -130,6 +135,17 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		tx_oelib_templatehelper::setCachedConfigurationValue(
 			'timeFormat', '%H:%M'
 		);
+
+		$this->linkBuilder = $this->getMock(
+			'tx_seminars_Service_SingleViewLinkBuilder',
+			array('createRelativeUrlForEvent')
+		);
+		$this->linkBuilder->expects($this->any())
+			->method('createRelativeUrlForEvent')
+			->will($this->returnValue(
+				'index.php?id=42&tx_seminars_pi1%5BshowUid%5D=1337'
+			));
+		$this->fixture->injectLinkBuilder($this->linkBuilder);
 	}
 
 	public function tearDown() {
@@ -137,7 +153,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$this->fixture->__destruct();
 		tx_seminars_registrationmanager::purgeInstance();
-		unset($this->fixture, $this->testingFramework);
+		unset($this->fixture, $this->testingFramework, $this->linkBuilder);
 
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
@@ -642,11 +658,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testOtherDatesListInSingleViewContainsOtherDateWithDateLinkedToSingleViewOfOtherDate() {
-		$this->fixture->setConfigurationValue(
-			'detailPID',
-			$this->testingFramework->createFrontEndPage()
-		);
+	/**
+	 * @test
+	 */
+	public function otherDatesListInSingleViewContainsOtherDateWithDateLinkedToSingleView() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -666,7 +681,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + ONE_DAY,
 			)
 		);
-		$dateUid2 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
@@ -679,10 +694,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->piVars['showUid'] = $dateUid1;
-		$result = $this->fixture->main('', array());
 		$this->assertContains(
-			'tx_seminars_pi1%5BshowUid%5D=' . $dateUid2,
-			$result
+			'tx_seminars_pi1%5BshowUid%5D=1337',
+			$this->fixture->main('', array())
 		);
 	}
 
@@ -733,11 +747,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_OtherDatesListInSingleView_ShowsBookedOutEventsByDefault() {
-		$this->fixture->setConfigurationValue(
-			'detailPID',
-			$this->testingFramework->createFrontEndPage()
-		);
+	/**
+	 * @test
+	 */
+	public function otherDatesListInSingleViewByDefaultShowsBookedOutEvents() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -757,7 +770,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + ONE_DAY,
 			)
 		);
-		$dateUid2 = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
@@ -775,7 +788,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $dateUid1;
 
 		$this->assertContains(
-			'tx_seminars_pi1%5BshowUid%5D=' . $dateUid2,
+			'tx_seminars_pi1%5BshowUid%5D=1337',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1640,11 +1653,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewForSeminarWithOneDependencyLinksDependencyToItsSingleView() {
-		$this->fixture->setConfigurationValue(
-			'detailPID',
-			$this->testingFramework->createFrontEndPage()
-		);
+	/**
+	 * @test
+	 */
+	public function singleViewForSeminarWithOneDependencyContainsLinkToDependency() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
 			array(
@@ -1665,8 +1677,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
-		$this->assertRegExp(
-			'/<a href=.*' . $dependingEventUid . '.*>depending_foo<\/a>/',
+		$this->assertContains(
+			'>depending_foo</a>',
 			$this->fixture->main('', array())
 		);
 	}
@@ -2158,7 +2170,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testListViewContainsEventDatesUsingTopicTitle() {
+	/**
+	 * @test
+	 */
+	public function listViewContainsEventDatesUsingTopicTitle() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -3680,12 +3695,11 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning the links to the single view in the list view.
 	////////////////////////////////////////////////////////////////////
 
-	public function testTeaserGetsLinkedToSingleView() {
+	/**
+	 * @test
+	 */
+	public function teaserGetsLinkedToSingleView() {
 		$this->fixture->setConfigurationValue('hideColumns', '');
-		$this->fixture->setConfigurationValue(
-			'detailPID',
-			$this->testingFramework->createFrontEndPage()
-		);
 
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3696,9 +3710,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertRegExp(
-			'/' . rawurlencode('tx_seminars_pi1[showUid]') . '=' .
-				$eventUid . '" >Test Teaser<\/a>/',
+		$this->assertContains(
+			'>Test Teaser</a>',
 			$this->fixture->main('', array())
 		);
 	}
@@ -7563,6 +7576,50 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			[$hookClass] = $hookClass;
 
 		$this->fixture->main('', array());
+	}
+
+
+	//////////////////////////////////////////
+	// Tests concerning createSingleViewLink
+	//////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function createSingleViewLinkCreatesLinkToSingleViewPage() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+
+		$this->assertContains(
+			'href="index.php?id=42&amp;tx_seminars_pi1%5BshowUid%5D=1337"',
+			$this->fixture->createSingleViewLink($event, 'foo')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createSingleViewLinkUsesLinkText() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+
+		$this->assertContains(
+			'>foo</a>',
+			$this->fixture->createSingleViewLink($event, 'foo')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createSingleViewLinkHtmlSpecialCharsLinkText() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+
+		$this->assertContains(
+			'Chaos &amp; Confusion',
+			$this->fixture->createSingleViewLink($event, 'Chaos & Confusion')
+		);
 	}
 }
 ?>
