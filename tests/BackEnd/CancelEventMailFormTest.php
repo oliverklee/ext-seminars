@@ -70,6 +70,11 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 	 */
 	private $languageBackup;
 
+	/**
+	 * @var tx_seminars_Service_SingleViewLinkBuilder
+	 */
+	private $linkBuilder = null;
+
 	public function setUp() {
 		$this->languageBackup = $GLOBALS['LANG']->lang;
 		$GLOBALS['LANG']->lang = 'default';
@@ -112,6 +117,15 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_BackEnd_CancelEventMailForm(
 			$this->eventUid
 		);
+
+		$this->linkBuilder = $this->getMock(
+			'tx_seminars_Service_SingleViewLinkBuilder',
+			array('createAbsoluteUrlForEvent')
+		);
+		$this->linkBuilder->expects($this->any())
+			->method('createAbsoluteUrlForEvent')
+			->will($this->returnValue('http://singleview.example.com/'));
+		$this->fixture->injectLinkBuilder($this->linkBuilder);
 	}
 
 	public function tearDown() {
@@ -120,7 +134,7 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 		$this->fixture->__destruct();
 		$this->testingFramework->cleanUp();
 
-		unset($this->fixture, $this->testingFramework);
+		unset($this->linkBuilder, $this->fixture, $this->testingFramework);
 
 		t3lib_FlashMessageQueue::getAllMessagesAndFlush();
 	}
@@ -172,9 +186,6 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function renderForSingleEventDoesNotAppendSingleViewLink() {
-		$detailPid = $this->testingFramework->createFrontEndPage();
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
-			->set('detailPID', $detailPid);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars',
 			$this->eventUid,
@@ -182,7 +193,7 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			(string) $detailPid,
+			'http://singleview.example.com/',
 			$this->fixture->render()
 		);
 	}
@@ -220,13 +231,10 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 		);
 
 		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
-
-		$detailPid = $this->testingFramework->createFrontEndPage();
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
-			->set('detailPID', $detailPid);
+		$fixture->injectLinkBuilder($this->linkBuilder);
 
 		$this->assertContains(
-			$GLOBALS['LANG']->getLL('cancelMailForm_alternativeDate'),
+			'http://singleview.example.com/',
 			$fixture->render()
 		);
 
@@ -259,13 +267,10 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 		);
 
 		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
-
-		$detailPid = $this->testingFramework->createFrontEndPage();
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
-			->set('detailPID', $detailPid);
+		$fixture->injectLinkBuilder($this->linkBuilder);
 
 		$this->assertNotContains(
-			(string) $detailPid,
+			'http://singleview.example.com/',
 			$fixture->render()
 		);
 
@@ -307,13 +312,10 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 		);
 
 		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
-
-		$detailPid = $this->testingFramework->createFrontEndPage();
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
-			->set('detailPID', $detailPid);
+		$fixture->injectLinkBuilder($this->linkBuilder);
 
 		$this->assertNotContains(
-			(string) $detailPid,
+			'http://singleview.example.com/',
 			$fixture->render()
 		);
 
@@ -323,7 +325,7 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function renderForDateWithoutSetDetailPidShowsErrorMessage() {
+	public function renderForEmptyLinkShowsErrorMessage() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -356,8 +358,13 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 
 		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
 
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
-			->set('detailPID', 0);
+		$linkBuilder = $this->getMock(
+			'tx_seminars_Service_SingleViewLinkBuilder',
+			array('createAbsoluteUrlForEvent')
+		);
+		$linkBuilder->expects($this->any())
+			->method('createAbsoluteUrlForEvent')->will($this->returnValue(''));
+		$fixture->injectLinkBuilder($linkBuilder);
 
 		$this->assertContains(
 			$GLOBALS['LANG']->getLL('eventMailForm_error_noDetailsPageFound'),
@@ -370,14 +377,21 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function renderForSingleEventAndNoSetDetailPidNotShowsErrorMessage() {
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
-			->set('detailPID', 0);
+	public function renderForSingleEventEmptyLinkNotShowsErrorMessage() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars',
 			$this->eventUid,
 			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
+
+		$linkBuilder = $this->getMock(
+			'tx_seminars_Service_SingleViewLinkBuilder',
+			array('createAbsoluteUrlForEvent')
+		);
+		$linkBuilder->expects($this->any())
+			->method('createAbsoluteUrlForEvent')->will($this->returnValue(''));
+		$this->fixture->injectLinkBuilder($linkBuilder);
+
 
 		$this->assertNotContains(
 			$GLOBALS['LANG']->getLL('eventMailForm_error_noDetailsPageFound'),

@@ -43,6 +43,25 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 	protected $formFieldPrefix = 'cancelMailForm_prefillField_';
 
 	/**
+	 * a link builder instance
+	 *
+	 * @var tx_seminars_Service_SingleViewLinkBuilder
+	 */
+	private $linkBuilder = null;
+
+	/**
+	 * The destructor.
+	 */
+	public function __destruct() {
+		if ($this->linkBuilder !== null) {
+			$this->linkBuilder->__destruct();
+			unset($this->linkBuilder);
+		}
+
+		parent::__destruct();
+	}
+
+	/**
 	 * Returns the label for the submit button.
 	 *
 	 * @return string label for the submit button, will not be empty
@@ -67,17 +86,10 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 		$builder->limitToEarliestBeginDate($GLOBALS['SIM_EXEC_TIME']);
 		$builder->limitToOtherDatesForTopic($this->getOldEvent());
 
-		$otherDateBag = $builder->build();
-
-		if (!$otherDateBag->isEmpty()) {
-			$singleViewUrl = $this->getSingleViewUrl();
-
-			if ($singleViewUrl != '') {
-				$result .= LF . LF .
-					$GLOBALS['LANG']->getLL('cancelMailForm_alternativeDate') .
-					' <' . $singleViewUrl . '>';
-
-			}
+		if (!$builder->build()->isEmpty()) {
+			$result .= LF . LF .
+				$GLOBALS['LANG']->getLL('cancelMailForm_alternativeDate') .
+				' <' . $this->getSingleViewUrl() . '>';
 		}
 
 		return $result;
@@ -90,21 +102,12 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 	 *                empty if no single view URL could be determined
 	 */
 	private function getSingleViewUrl() {
-		$event = $this->getEvent();
-
-		if (!$event->hasDetailsPage()) {
-			$result = $this->getUrlForPid(
-				tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
-					->getAsInteger('detailPID')
-			);
-		} else {
-			$separatePage = $event->getDetailsPage();
-			if (intval($separatePage) > 0) {
-				$result = $this->getUrlForPid($separatePage);
-			} else {
-				$result = $separatePage;
-			}
+		if ($this->linkBuilder == null) {
+			$this->injectLinkBuilder(tx_oelib_ObjectFactory::make(
+				'tx_seminars_Service_SingleViewLinkBuilder'
+			));
 		}
+		$result = $this->linkBuilder->createAbsoluteUrlForEvent($this->getEvent());
 
 		if ($result == '') {
 			$this->setErrorMessage(
@@ -114,37 +117,6 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Creates the URL to the given page ID.
-	 *
-	 * @param integer $pageId
-	 *        the UID of the page to get the URL for, must be >= 0
-	 *
-	 * @return string the URL to the single view page, will be empty if 0 has
-	 *                been given as page ID
-	 */
-	private function getUrlForPid($pageId) {
-		if ($pageId == 0) {
-			return '';
-		}
-
-		$rawUrl = array();
-		preg_match(
-			'/\.\.([^\'"]*)(\'|")/',
-			t3lib_BEfunc::viewOnClick(
-				$pageId, '' ,'' ,'' ,'' ,
-				'&tx_seminars_pi1[showUid]=' . $this->getEvent()->getUid()
-			),
-			$rawUrl
-		);
-
-		return t3lib_div::locationHeaderUrl(
-			preg_replace(
-				array('/\[/', '/\]/'), array('%5B', '%5D'), $rawUrl[1]
-			)
-		);
 	}
 
 	/**
@@ -164,6 +136,18 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 			TRUE
 		);
 		t3lib_FlashMessageQueue::addMessage($message);
+	}
+
+	/**
+	 * Injects a link builder.
+	 *
+	 * @param tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
+	 *        the link builder instance to use
+	 */
+	public function injectLinkBuilder(
+		tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
+	) {
+		$this->linkBuilder = $linkBuilder;
 	}
 }
 
