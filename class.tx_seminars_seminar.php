@@ -228,40 +228,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Creates a hyperlink to this seminar details page. The content of the
-	 * provided fieldname will be fetched from the event record, wrapped with
-	 * link tags and returned as a link to the detailed page.
-	 *
-	 * If $this->conf['detailPID'] (and the corresponding flexforms value) is
-	 * not set or 0, the link will point to the list view page.
-	 *
-	 * @param object a tslib_pibase object for a live page
-	 * @param string the name of the field to retrieve and wrap, must not
-	 *               be empty
-	 *
-	 * @return string HTML code for the link to the event details page
-	 */
-	public function getLinkedFieldValue(tslib_pibase $plugin, $fieldName) {
-		$linkedText = '';
-
-		// Certain fields can be retrieved 1:1 from the database, some need
-		// to be fetched by a special getter function.
-		switch ($fieldName) {
-			case 'date':
-				$linkedText = $this->getDate();
-				break;
-			default:
-				$linkedText = $this->getTopicString($fieldName);
-				break;
-		}
-
-		return $plugin->cObj->typoLink(
-			$linkedText,
-			$this->getDetailedViewLinkConfiguration($plugin)
-		);
-	}
-
-	/**
 	 * Gets our topic's title. For date records, this will return the
 	 * corresponding topic record's title.
 	 *
@@ -2320,68 +2286,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function getNumberOfOrganizingPartners() {
 		return $this->getRecordPropertyInteger('organizing_partners');
-	}
-
-	/**
-	 * Gets the URL to the detailed view of this seminar.
-	 *
-	 * If $this->conf['detailPID'] (and the corresponding flexforms value) is
-	 * not set or 0, the link will use the current page's PID.
-	 *
-	 * @param tslib_pibase a plugin object for a live page
-	 * @param boolean TRUE to create a full URL including the host instead
-	 *                of just a URI without the host
-	 *
-	 * @return string URL of the seminar details page
-	 */
-	public function getDetailedViewUrl(
-		tslib_pibase $plugin, $createFullUrl = TRUE
-	) {
-		$result = $plugin->cObj->typoLink_URL(
-			$this->getDetailedViewLinkConfiguration($plugin)
-		);
-
-		// XXX We need to do this workaround of manually encoding brackets in
-		// the URL due to a bug in the TYPO3 core:
-		// http://bugs.typo3.org/view.php?id=3808
-		$result = preg_replace(
-			array('/\[/', '/\]/'),
-			array('%5B', '%5D'),
-			$result
-		);
-
-		if ($createFullUrl) {
-			$result = t3lib_div::locationHeaderUrl($result);
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Gets the TYPO3 link configuration for this event's detail page. This will
-	 * be either the general details page or the separate details page for this
-	 * event.
-	 *
-	 * @param tslib_pibase a plugin object for a live page
-	 *
-	 * @return array configuration for cObj->typoLink/typoLink_URL,
-	 *               will not be empty
-	 */
-	public function getDetailedViewLinkConfiguration(tslib_pibase $plugin) {
-		return ($this->hasSeparateDetailsPage())
-			? array(
-				'parameter' => $this->getDetailsPage()
-			)
-			: array(
-				'parameter' => $plugin->getConfValueInteger('detailPID'),
-				'additionalParams' => t3lib_div::implodeArrayForUrl(
-					'tx_seminars_pi1',
-					array('showUid' => $this->getUid()),
-					'',
-					FALSE,
-					TRUE
-				)
-			);
 	}
 
 	/**
