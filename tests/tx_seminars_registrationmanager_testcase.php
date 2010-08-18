@@ -91,6 +91,11 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	private $t3VarBackup = array();
 
+	/**
+	 * @var tx_seminars_Service_SingleViewLinkBuilder
+	 */
+	private $linkBuilder = null;
+
 	protected function setUp() {
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
@@ -138,6 +143,15 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		$this->seminar = new tx_seminars_seminarchild($seminarUid);
 		$this->fixture = tx_seminars_registrationmanager::getInstance();
+
+		$this->linkBuilder = $this->getMock(
+			'tx_seminars_Service_SingleViewLinkBuilder',
+			array('createAbsoluteUrlForEvent')
+		);
+		$this->linkBuilder->expects($this->any())
+			->method('createAbsoluteUrlForEvent')
+			->will($this->returnValue('http://singleview.example.com/'));
+		$this->fixture->injectLinkBuilder($this->linkBuilder);
 	}
 
 	protected function tearDown() {
@@ -159,7 +173,8 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 
 		tx_seminars_registrationmanager::purgeInstance();
 		unset(
-			$this->seminar, $this->pi1, $this->fixture, $this->testingFramework
+			$this->seminar, $this->pi1, $this->fixture, $this->testingFramework,
+			$this->linkBuilder
 		);
 
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
@@ -2322,22 +2337,19 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 			);
 		$registration = $this->createRegistration();
 		$registration->getFrontEndUser()->setData(
-			array(
-				'email' => 'foo@bar.com',
-			)
+			array('email' => 'foo@bar.com')
 		);
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$this->fixture->notifyAttendee($registration, $pi1);
-		$seminarLink = $registration->getSeminarObject()->getDetailedViewUrl($pi1);
+		$seminarLink = 'http://singleview.example.com/';
 		$pi1->__destruct();
 		$registration->__destruct();
 
 		$this->assertContains(
 			'<a href=3D"' . $seminarLink,
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
+			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 		);
 	}
 

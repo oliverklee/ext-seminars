@@ -97,6 +97,13 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	const SEND_USER_MAIL = 2;
 
 	/**
+	 * a link builder instance
+	 *
+	 * @var tx_seminars_Service_SingleViewLinkBuilder
+	 */
+	private $linkBuilder = null;
+
+	/**
 	 * The constructor.
 	 *
 	 * It still is public due to the templatehelper base class. Nevertheless,
@@ -113,6 +120,10 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		if ($this->registration) {
 			$this->registration->__destruct();
 			unset($this->registration);
+		}
+		if ($this->linkBuilder !== null) {
+			$this->linkBuilder->__destruct();
+			unset($this->linkBuilder);
 		}
 		$this->hooks = array();
 
@@ -304,18 +315,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	) {
 		$label = $this->getRegistrationLabel($plugin, $seminar);
 
-		if ($seminar->hasSeparateDetailsPage()) {
-			$result = $plugin->cObj->typolink(
-				$label,
-				$seminar->getDetailedViewLinkConfiguration($plugin)
-			);
-		} else {
-			$result = $this->getLinkToStandardRegistrationOrLoginPage(
-				$plugin, $seminar, $label
-			);
-		}
-
-		return $result;
+		return $this->getLinkToStandardRegistrationOrLoginPage(
+			$plugin, $seminar, $label
+		);
 	}
 
 	/**
@@ -1254,6 +1256,13 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		tx_seminars_registration $registration,
 		tslib_pibase $plugin, $helloSubjectPrefix , $useHtml = FALSE
 	) {
+		if ($this->linkBuilder == null) {
+			$this->injectLinkBuilder(tx_oelib_ObjectFactory::make(
+				'tx_seminars_Service_SingleViewLinkBuilder'
+			));
+		}
+		$this->linkBuilder->setPlugin($plugin);
+
 		$wrapperPrefix = (($useHtml) ? 'html_' : '') . 'field_wrapper';
 
 		$this->setMarker('html_mail_charset', (
@@ -1374,12 +1383,13 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		$this->setMarker('billing_address', $registration->getBillingAddress());
 
+		$singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent(
+			tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+				->find($event->getUid())
+		);
 		$this->setMarker(
 			'url',
-			(($useHtml)
-				? htmlspecialchars($event->getDetailedViewUrl($plugin))
-				: $event->getDetailedViewUrl($plugin)
-			)
+			($useHtml ? htmlspecialchars($singleViewUrl) : $singleViewUrl)
 		);
 
 		if ($event->isPlanned()) {
@@ -1662,6 +1672,18 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		return $this->hooks;
+	}
+
+	/**
+	 * Injects a link builder.
+	 *
+	 * @param tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
+	 *        the link builder instance to use
+	 */
+	public function injectLinkBuilder(
+		tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
+	) {
+		$this->linkBuilder = $linkBuilder;
 	}
 }
 
