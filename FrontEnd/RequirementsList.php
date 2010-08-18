@@ -31,6 +31,7 @@
  * @subpackage tx_seminars
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_AbstractView {
 	/**
@@ -45,9 +46,20 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 	private $limitRequirementsToMissing = FALSE;
 
 	/**
+	 * a link builder instance
+	 *
+	 * @var tx_seminars_Service_SingleViewLinkBuilder
+	 */
+	private $linkBuilder = null;
+
+	/**
 	 * The destructor.
 	 */
 	public function __destruct() {
+		if ($this->linkBuilder !== null) {
+			$this->linkBuilder->__destruct();
+			unset($this->linkBuilder);
+		}
 		unset($this->event);
 		parent::__destruct();
 	}
@@ -91,13 +103,29 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 			);
 		}
 
+		if ($this->linkBuilder == null) {
+			$this->injectLinkBuilder(tx_oelib_ObjectFactory::make(
+				'tx_seminars_Service_SingleViewLinkBuilder'
+			));
+		}
+		$this->linkBuilder->setPlugin($this);
+
 		$output = '';
 
+		$eventMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
 		$requirements = $this->getRequirements();
 		foreach ($requirements as $requirement) {
+			$event = $eventMapper->find($requirement->getUid());
+
+			$singleViewUrl = $this->linkBuilder->createRelativeUrlForEvent(
+				$event
+			);
 			$this->setMarker(
-				'requirement_title',
-				$requirement->getLinkedFieldValue($this, 'title')
+				'requirement_url', htmlspecialchars($singleViewUrl)
+			);
+
+			$this->setMarker(
+				'requirement_title', htmlspecialchars($event->getTitle())
 			);
 			$output .= $this->getSubpart('SINGLE_REQUIREMENT');
 		}
@@ -122,6 +150,18 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Injects a link builder.
+	 *
+	 * @param tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
+	 *        the link builder instance to use
+	 */
+	public function injectLinkBuilder(
+		tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
+	) {
+		$this->linkBuilder = $linkBuilder;
 	}
 }
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/RequirementsList.php']) {
