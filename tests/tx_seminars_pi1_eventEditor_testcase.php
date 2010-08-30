@@ -53,8 +53,11 @@ class tx_seminars_pi1_eventEditor_testcase extends tx_phpunit_testcase {
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
 			'useStoragePid', FALSE
 		);
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
-			->set('createAuxiliaryRecordsPID', 0);
+
+		$configuration = new tx_oelib_Configuration();
+		$configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
+		tx_oelib_ConfigurationRegistry::getInstance()
+			->set('plugin.tx_seminars_pi1', $configuration);
 
 		$this->fixture = new tx_seminars_pi1_eventEditor(
 			array(

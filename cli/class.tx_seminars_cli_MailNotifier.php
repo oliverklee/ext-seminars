@@ -182,10 +182,8 @@ class tx_seminars_cli_MailNotifier {
 	 *               organizers, will be empty if there are none
 	 */
 	private function getEventsToSendCancelationDeadlineReminderFor() {
-		if (!tx_oelib_ConfigurationRegistry::getInstance()
-			->get('plugin.tx_seminars')->getAsBoolean(
-				'sendCancelationDeadlineReminder'
-			)
+		if (!tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+			->getAsBoolean('sendCancelationDeadlineReminder')
 		) {
 			return array();
 		}
@@ -217,8 +215,7 @@ class tx_seminars_cli_MailNotifier {
 	 *                 enabled, zero disables sending the reminder
 	 */
 	private function getDaysBeforeBeginDate() {
-		return tx_oelib_ConfigurationRegistry::getInstance()
-			->get('plugin.tx_seminars')
+		return tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->getAsInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate');
 	}
 
@@ -310,8 +307,8 @@ class tx_seminars_cli_MailNotifier {
 	 */
 	private function getDate($timestamp) {
 		return strftime(
-			tx_oelib_ConfigurationRegistry::getInstance()
-				->get('plugin.tx_seminars')->getAsString('dateFormatYMD'),
+			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+				->getAsString('dateFormatYMD'),
 			$timestamp
 		);
 	}
@@ -324,9 +321,8 @@ class tx_seminars_cli_MailNotifier {
 	 * @return boolean TRUE if the CSV file should be added, FALSE otherwise
 	 */
 	private function shouldCsvFileBeAdded(tx_seminars_seminar $event) {
-		return tx_oelib_ConfigurationRegistry::getInstance()->get(
-			'plugin.tx_seminars')->getAsBoolean(
-				'addRegistrationCsvToOrganizerReminderMail')
+		return tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+			->getAsBoolean('addRegistrationCsvToOrganizerReminderMail')
 			&& ($event->getAttendances() > 0);
 	}
 }

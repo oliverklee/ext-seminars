@@ -79,6 +79,9 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
+		tx_oelib_ConfigurationRegistry::getInstance()
+			->set('plugin.tx_seminars', new tx_oelib_Configuration());
+
 		$this->dummySysFolderPid
 			= $this->testingFramework->createSystemFolder();
 		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderPid);

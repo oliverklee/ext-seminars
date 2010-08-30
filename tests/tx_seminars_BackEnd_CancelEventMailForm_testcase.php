@@ -79,6 +79,14 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
+		$configurationRegistry = tx_oelib_ConfigurationRegistry::getInstance();
+		$configurationRegistry->set(
+			'plugin.tx_seminars', new tx_oelib_Configuration()
+		);
+		$configurationRegistry->set(
+			'plugin.tx_seminars_pi1', new tx_oelib_Configuration()
+		);
+
 		$this->dummySysFolderPid
 			= $this->testingFramework->createSystemFolder();
 		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderPid);
