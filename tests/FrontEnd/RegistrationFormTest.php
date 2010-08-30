@@ -65,8 +65,13 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			tx_oelib_Session::TYPE_USER, $this->session
 		);
 
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
-			->setAsString('currency', 'EUR');
+		$configurationRegistry = tx_oelib_ConfigurationRegistry::getInstance();
+		$configuration = new tx_oelib_Configuration();
+		$configuration->setAsString('currency', 'EUR');
+		$configurationRegistry->set('plugin.tx_seminars', $configuration);
+		$configurationRegistry->set(
+			'plugin.tx_staticinfotables_pi1', new tx_oelib_Configuration()
+		);
 
 		$seminar = new tx_seminars_seminar($this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('payment_methods' => '1')

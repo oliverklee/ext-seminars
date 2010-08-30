@@ -67,6 +67,9 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 		$this->postBackup = $_POST;
 		$this->getBackup = $_GET;
 		$this->typo3confVarsBackup = $GLOBALS['TYPO3_CONF_VARS'];
+
+		tx_oelib_ConfigurationRegistry::getInstance()
+			->set('plugin.tx_seminars_pi1', new tx_oelib_Configuration());
 	}
 
 	public function tearDown() {

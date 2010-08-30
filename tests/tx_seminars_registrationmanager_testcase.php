@@ -109,6 +109,19 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_TEXT_MAIL
 		);
+		$configurationRegistry = tx_oelib_ConfigurationRegistry::getInstance();
+		$configurationRegistry->set(
+			'plugin.tx_seminars', new tx_oelib_Configuration()
+		);
+		$configurationRegistry->set(
+			'plugin.tx_seminars._LOCAL_LANG.de', new tx_oelib_Configuration()
+		);
+		$configurationRegistry->set(
+			'plugin.tx_seminars._LOCAL_LANG.default', new tx_oelib_Configuration()
+		);
+		$configurationRegistry->set(
+			'config', new tx_oelib_Configuration()
+		);
 
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
@@ -3200,7 +3213,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 	 */
 	public function notifyAttendeeForInformalSalutationContainsInformalSalutation() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars')
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('salutation', 'informal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
@@ -3235,7 +3248,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		}
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars')
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('salutation', 'formal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
@@ -3270,7 +3283,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		}
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars')
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('salutation', 'formal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
@@ -3305,7 +3318,7 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		}
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars')
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('salutation', 'formal');
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(

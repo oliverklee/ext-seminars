@@ -96,8 +96,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->testingFramework->createFakeFrontEnd();
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
 
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
-			->setAsString('currency', 'EUR');
+		$configuration = new tx_oelib_Configuration();
+		$configuration->setAsString('currency', 'EUR');
+		tx_oelib_ConfigurationRegistry::getInstance()
+			->set('plugin.tx_seminars', $configuration);
 
 		$this->systemFolderPid = $this->testingFramework->createSystemFolder();
 		$this->seminarUid = $this->testingFramework->createRecord(

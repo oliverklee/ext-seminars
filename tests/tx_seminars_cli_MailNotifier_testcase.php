@@ -439,7 +439,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 			'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
 		));
-		tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars')
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->set('sendEventTakesPlaceReminderDaysBeforeBeginDate', 0);
 
 		$this->fixture->sendEventTakesPlaceReminders();
@@ -650,7 +650,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
 			'cancelled' => tx_seminars_seminar::STATUS_PLANNED,
 		)));
-		tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars')
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->set('sendCancelationDeadlineReminder', FALSE);
 
 		$this->fixture->sendCancelationDeadlineReminders();
@@ -757,8 +757,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function sendRemindersToOrganizersForEventWithNoAttendancesAndAttachCsvFileTrueNotAttachesRegistrationsCsv() {
-		tx_oelib_ConfigurationRegistry::getInstance()
-			->get('plugin.tx_seminars')->set(
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->set(
 				'addRegistrationCsvToOrganizerReminderMail', TRUE
 		);
 
@@ -779,8 +778,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function sendRemindersToOrganizersForEventWithAttendancesAndAttachCsvFileTrueAttachesRegistrationsCsv() {
-		tx_oelib_ConfigurationRegistry::getInstance()
-			->get('plugin.tx_seminars')->set(
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->set(
 				'addRegistrationCsvToOrganizerReminderMail', TRUE
 		);
 
@@ -808,8 +806,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function sendRemindersToOrganizersForEventWithAttendancesAndAttachCsvFileFalseNotAttachesRegistrationsCsv() {
-		tx_oelib_ConfigurationRegistry::getInstance()
-			->get('plugin.tx_seminars')->set(
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->set(
 				'addRegistrationCsvToOrganizerReminderMail', FALSE
 		);
 		$eventUid = $this->createSeminarWithOrganizer(array(
@@ -836,8 +833,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function sendRemindersToOrganizersSendsEmailWithCsvFileWhichContainsRegistration() {
-		tx_oelib_ConfigurationRegistry::getInstance()
-			->get('plugin.tx_seminars')->set(
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->set(
 				'addRegistrationCsvToOrganizerReminderMail', TRUE
 		);
 		$eventUid = $this->createSeminarWithOrganizer(array(
@@ -871,8 +867,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function sendRemindersToOrganizersSendsEmailWithCsvFileWithOfFrontEndUserData() {
-		tx_oelib_ConfigurationRegistry::getInstance()
-			->get('plugin.tx_seminars')->set(
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->set(
 				'addRegistrationCsvToOrganizerReminderMail', TRUE
 		);
 		tx_oelib_templatehelper::setCachedConfigurationValue(
@@ -913,9 +908,8 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvSendsEmailWithCsvWithRegistrationsOnQueue() {
-		tx_oelib_ConfigurationRegistry::getInstance()
-			->get('plugin.tx_seminars')->set(
-				'addRegistrationCsvToOrganizerReminderMail', TRUE
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->set(
+			'addRegistrationCsvToOrganizerReminderMail', TRUE
 		);
 		$eventUid = $this->createSeminarWithOrganizer(array(
 			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
@@ -957,9 +951,8 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvFalseSendsEmailWithCsvFileWhichDoesNotContainDataOfAttendanceOnQueue() {
-		tx_oelib_ConfigurationRegistry::getInstance()
-			->get('plugin.tx_seminars')->set(
-				'addRegistrationCsvToOrganizerReminderMail', TRUE
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->set(
+			'addRegistrationCsvToOrganizerReminderMail', TRUE
 		);
 		tx_oelib_templatehelper::setCachedConfigurationValue(
 			'showAttendancesOnRegistrationQueueInEmailCsv', 0
@@ -1115,8 +1108,8 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			strftime(
-				tx_oelib_ConfigurationRegistry::getInstance()
-					->get('plugin.tx_seminars')->getAsString('dateFormatYMD'),
+				tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+					->getAsString('dateFormatYMD'),
 				$GLOBALS['SIM_EXEC_TIME'] + ONE_DAY
 			),
 			quoted_printable_decode(

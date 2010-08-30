@@ -67,8 +67,8 @@ class tx_seminars_EmailSalutation {
 	public function getSalutation(tx_seminars_Model_FrontEndUser $user) {
 		$salutationParts = array();
 
-		$salutationMode = tx_oelib_ConfigurationRegistry::getInstance()->get(
-			'plugin.tx_seminars')->getAsString('salutation');
+		$salutationMode = tx_oelib_ConfigurationRegistry
+			::get('plugin.tx_seminars')->getAsString('salutation');
 		switch ($salutationMode) {
 			case 'informal':
 				$salutationParts['dear'] = $this->translator->translate(
