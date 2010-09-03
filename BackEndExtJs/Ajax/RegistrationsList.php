@@ -53,9 +53,27 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsList extends tx_seminars_BackEn
 	 *               field as the key
 	 */
 	protected function getAdditionalFields(tx_oelib_Model $registration) {
-		return array(
-			'title' => $registration->getTitle(),
-		);
+		$result = array();
+
+		try {
+			$result['name'] = $registration->getFrontEndUser()->getName();
+		} catch (Exception $exception) {
+			$result['name'] = '';
+		}
+
+		try {
+			$result['event_accreditation_number'] = $registration->getEvent()->getAccreditationNumber();
+			$result['event_title'] = $registration->getEvent()->getTitle();
+			$result['event_begin_date'] = date('r', $registration->getEvent()->getBeginDateAsUnixTimeStamp());
+			$result['event_end_date'] = date('r', $registration->getEvent()->getEndDateAsUnixTimeStamp());
+		} catch (Exeption $exception) {
+			$result['event_accreditation_number'] = '';
+			$result['event_title'] = '';
+			$result['event_begin_date'] = '';
+			$result['event_end_date'] = '';
+		}
+
+		return $result;
 	}
 }
 

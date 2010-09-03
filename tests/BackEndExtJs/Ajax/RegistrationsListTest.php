@@ -68,8 +68,14 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsListTest extends tx_phpunit_tes
 	 * @test
 	 */
 	public function getAsArrayReturnsArrayContainingRegistrationUid() {
-		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+		$frontEndUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
 			->getLoadedTestingModel(array());
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array(
+				'user' => $frontEndUser, 'seminar' => $event,
+			));
 
 		$result = $this->fixture->getAsArray($registration);
 
@@ -82,15 +88,113 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsListTest extends tx_phpunit_tes
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingRegistrationTitle() {
+	public function getAsArrayReturnsArrayContainingFrontEndUserName() {
+		$frontEndUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->getLoadedTestingModel(array('name' => 'John Doe'));
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
 		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
-			->getLoadedTestingModel(array('title' => 'testing registration'));
+			->getLoadedTestingModel(array(
+				'user' => $frontEndUser, 'seminar' => $event,
+			));
 
 		$result = $this->fixture->getAsArray($registration);
 
 		$this->assertEquals(
-			$registration->getTitle(),
-			$result['title']
+			'John Doe',
+			$result['name']
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAsArrayReturnsArrayContainingEventAccreditationNumber() {
+		$frontEndUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->getLoadedTestingModel(array());
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array(
+				'accreditation_number' => '42',
+			));
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array(
+				'user' => $frontEndUser, 'seminar' => $event,
+			));
+
+		$result = $this->fixture->getAsArray($registration);
+
+		$this->assertEquals(
+			'42',
+			$result['event_accreditation_number']
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAsArrayReturnsArrayContainingEventTitle() {
+		$frontEndUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->getLoadedTestingModel(array());
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array(
+				'title' => 'testing event',
+			));
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array(
+				'user' => $frontEndUser, 'seminar' => $event,
+			));
+
+		$result = $this->fixture->getAsArray($registration);
+
+		$this->assertEquals(
+			'testing event',
+			$result['event_title']
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAsArrayReturnsArrayContainingEventBeginDate() {
+		$frontEndUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->getLoadedTestingModel(array());
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array(
+				'begin_date' => $GLOBALS['SIM_ACCESS_TIME'],
+			));
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array(
+				'user' => $frontEndUser, 'seminar' => $event,
+			));
+
+		$result = $this->fixture->getAsArray($registration);
+
+		$this->assertEquals(
+			date('r', $GLOBALS['SIM_ACCESS_TIME']),
+			$result['event_begin_date']
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAsArrayReturnsArrayContainingEventEndDate() {
+		$frontEndUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->getLoadedTestingModel(array());
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array(
+				'end_date' => $GLOBALS['SIM_ACCESS_TIME'],
+			));
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array(
+				'user' => $frontEndUser, 'seminar' => $event,
+			));
+
+		$result = $this->fixture->getAsArray($registration);
+
+		$this->assertEquals(
+			date('r', $GLOBALS['SIM_ACCESS_TIME']),
+			$result['event_end_date']
 		);
 	}
 }

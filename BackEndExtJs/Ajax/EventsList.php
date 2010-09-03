@@ -58,10 +58,17 @@ class tx_seminars_BackEndExtJs_Ajax_EventsList extends tx_seminars_BackEndExtJs_
 		return array(
 			'record_type' => $event->getRecordType(),
 			'hidden' => $event->isHidden(),
-			'status' => $event->getStatus(),
+			'accreditation_number' => $event->getAccreditationNumber(),
 			'title' => $event->getTitle(),
-			'begin_date' => $event->getBeginDateAsUnixTimeStamp(),
-			'end_date' => $event->getEndDateAsUnixTimeStamp(),
+			'begin_date' => date('r', $event->getBeginDateAsUnixTimeStamp()),
+			'end_date' => date('r', $event->getEndDateAsUnixTimeStamp()),
+			'registrations_regular' => $event->getRegularRegistrations()->count(),
+			'registrations_queue' => $event->getQueueRegistrations()->count(),
+			'attendees_minimum' => $event->getMinimumAttendees(),
+			'attendees_maximum' => $event->getMaximumAttendees(),
+			'enough_attendees' => $event->hasEnoughRegistrations(),
+			'is_full' => $event->isFull(),
+			'status' => $event->getStatus(),
 		);
 	}
 }

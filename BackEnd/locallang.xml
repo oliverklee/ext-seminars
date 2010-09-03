@@ -14,8 +14,10 @@
 			<label index="subModuleTitle_events">Events</label>
 			<label index="subModuleTitle_speakers">Speakers</label>
 			<label index="subModuleTitle_organizers">Organizers</label>
-			<label index="eventlist.accreditation_number">Number</label>
+			<label index="eventlist.accreditation_number">Accreditation number</label>
 			<label index="eventlist.date">Date</label>
+			<label index="eventlist.begin_date">Begin date and time</label>
+			<label index="eventlist.end_date">End date and time</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
 			<label index="eventlist.attendeesOnRegistrationQueue">Waiting</label>
@@ -103,8 +105,10 @@
 			<label index="subModuleTitle_events">Veranstaltungen</label>
 			<label index="subModuleTitle_speakers">ReferentInnen</label>
 			<label index="subModuleTitle_organizers">Veranstalter</label>
-			<label index="eventlist.accreditation_number">Nummer</label>
+			<label index="eventlist.accreditation_number">Akkreditierungsnummer</label>
 			<label index="eventlist.date">Datum</label>
+			<label index="eventlist.begin_date">Anfangsdatum und -zeit</label>
+			<label index="eventlist.end_date">Enddatum und -zeit</label>
 			<label index="eventlist.title">Titel</label>
 			<label index="eventlist.attendees">Akt.</label>
 			<label index="eventlist.attendeesOnRegistrationQueue">Wartend</label>
@@ -300,8 +304,10 @@
 			<label index="subModuleTitle_events" type="integer">142581619</label>
 			<label index="subModuleTitle_speakers" type="integer">258305227</label>
 			<label index="subModuleTitle_organizers" type="integer">68798680</label>
-			<label index="eventlist.accreditation_number" type="integer">187623698</label>
+			<label index="eventlist.accreditation_number" type="integer">251981191</label>
 			<label index="eventlist.date" type="integer">71780721</label>
+			<label index="eventlist.begin_date" type="integer">8171481</label>
+			<label index="eventlist.end_date" type="integer">215068451</label>
 			<label index="eventlist.title" type="integer">192455458</label>
 			<label index="eventlist.attendees" type="integer">95736411</label>
 			<label index="eventlist.attendeesOnRegistrationQueue" type="integer">91254249</label>
@@ -495,8 +501,10 @@
 			<label index="title">Events</label>
 			<label index="subModuleTitle_registrations">Registrations</label>
 			<label index="subModuleTitle_events">Events</label>
-			<label index="eventlist.accreditation_number">Number</label>
+			<label index="eventlist.accreditation_number">Accreditation number</label>
 			<label index="eventlist.date">Date</label>
+			<label index="eventlist.begin_date">Begin date and time</label>
+			<label index="eventlist.end_date">End date and time</label>
 			<label index="eventlist.title">Title</label>
 			<label index="eventlist.attendees">Cur.</label>
 			<label index="eventlist.attendeesOnRegistrationQueue">Waiting</label>

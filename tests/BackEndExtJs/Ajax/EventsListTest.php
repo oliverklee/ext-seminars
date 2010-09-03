@@ -67,13 +67,11 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingTheEventUid() {
-		$fixture = new tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingEventsList();
-
+	public function getAsArrayReturnsArrayContainingEventUid() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(array());
 
-		$result = $fixture->getAsArray($event);
+		$result = $this->fixture->getAsArray($event);
 
 		$this->assertEquals(
 			$event->getUid(),
@@ -84,18 +82,16 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingTheEventRecordType() {
-		$fixture = new tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingEventsList();
-
+	public function getAsArrayReturnsArrayContainingRecordType() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(
 				array('object_type' => tx_seminars_Model_Event::TYPE_DATE)
 			);
 
-		$result = $fixture->getAsArray($event);
+		$result = $this->fixture->getAsArray($event);
 
 		$this->assertEquals(
-			$event->getRecordType(),
+			tx_seminars_Model_Event::TYPE_DATE,
 			$result['record_type']
 		);
 	}
@@ -103,16 +99,14 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingWetherTheEventIsHidden() {
-		$fixture = new tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingEventsList();
-
+	public function getAsArrayReturnsArrayContainingWetherEventIsHidden() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(array('hidden' => 1));
 
-		$result = $fixture->getAsArray($event);
+		$result = $this->fixture->getAsArray($event);
 
 		$this->assertEquals(
-			$event->isHidden(),
+			TRUE,
 			$result['hidden']
 		);
 	}
@@ -120,35 +114,29 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingTheEventStatus() {
-		$fixture = new tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingEventsList();
-
+	public function getAsArrayReturnsArrayContainingAccreditationNumber() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(
-				array('status' => tx_seminars_Model_Event::STATUS_CANCELED)
-			);
+			->getLoadedTestingModel(array('accreditation_number' => '42'));
 
-		$result = $fixture->getAsArray($event);
+		$result = $this->fixture->getAsArray($event);
 
 		$this->assertEquals(
-			$event->getStatus(),
-			$result['status']
+			'42',
+			$result['accreditation_number']
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingTheEventTitle() {
-		$fixture = new tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingEventsList();
-
+	public function getAsArrayReturnsArrayContainingTitle() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(array('title' => 'testing event'));
 
-		$result = $fixture->getAsArray($event);
+		$result = $this->fixture->getAsArray($event);
 
 		$this->assertEquals(
-			$event->getTitle(),
+			'testing event',
 			$result['title']
 		);
 	}
@@ -156,16 +144,16 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingTheEventBeginDate() {
-		$fixture = new tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingEventsList();
-
+	public function getAsArrayReturnsArrayContainingBeginDate() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(array('begin_date' => 42));
+			->getLoadedTestingModel(array(
+				'begin_date' => $GLOBALS['SIM_ACCESS_TIME']
+			));
 
-		$result = $fixture->getAsArray($event);
+		$result = $this->fixture->getAsArray($event);
 
 		$this->assertEquals(
-			$event->getBeginDateAsUnixTimeStamp(),
+			date('r', $GLOBALS['SIM_ACCESS_TIME']),
 			$result['begin_date']
 		);
 	}
@@ -173,17 +161,136 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingTheEventEndDate() {
-		$fixture = new tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingEventsList();
-
+	public function getAsArrayReturnsArrayContainingEndDate() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(array('end_date' => 42));
+			->getLoadedTestingModel(array(
+				'end_date' => $GLOBALS['SIM_ACCESS_TIME']
+			));
 
-		$result = $fixture->getAsArray($event);
+		$result = $this->fixture->getAsArray($event);
 
 		$this->assertEquals(
-			$event->getEndDateAsUnixTimeStamp(),
+			date('r', $GLOBALS['SIM_ACCESS_TIME']),
 			$result['end_date']
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAsArrayReturnsArrayContainingNumberOfRegularRegistrations() {
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array());
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$event->attachRegistration($registration);
+
+		$result = $this->fixture->getAsArray($event);
+
+		$this->assertEquals(
+			1,
+			$result['registrations_regular']
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAsArrayReturnsArrayContainingNumberOfRegistrationsOnQueue() {
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array('registration_queue' => 1));
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$event->attachRegistration($registration);
+
+		$result = $this->fixture->getAsArray($event);
+
+		$this->assertEquals(
+			1,
+			$result['registrations_queue']
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAsArrayReturnsArrayContainingMinimumNumberOfAttendees() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('attendees_min' => 1));
+
+		$result = $this->fixture->getAsArray($event);
+
+		$this->assertEquals(
+			1,
+			$result['attendees_minimum']
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAsArrayReturnsArrayContainingMaximumNumberOfAttendees() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('attendees_max' => 1));
+
+		$result = $this->fixture->getAsArray($event);
+
+		$this->assertEquals(
+			1,
+			$result['attendees_maximum']
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAsArrayReturnsArrayContainingWhetherEventHasEnoughAttendees() {
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array('seats' => 1));
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('attendees_min' => 1));
+		$event->attachRegistration($registration);
+
+		$result = $this->fixture->getAsArray($event);
+
+		$this->assertEquals(
+			TRUE,
+			$result['enough_attendees']
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAsArrayReturnsArrayContainingWhetherEventIsFull() {
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array('seats' => 1));
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('attendees_max' => 1));
+		$event->attachRegistration($registration);
+
+		$result = $this->fixture->getAsArray($event);
+
+		$this->assertEquals(
+			TRUE,
+			$result['is_full']
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAsArrayReturnsArrayContainingStatus() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(
+				array('cancelled' => tx_seminars_Model_Event::STATUS_CANCELED)
+			);
+
+		$result = $this->fixture->getAsArray($event);
+
+		$this->assertEquals(
+			tx_seminars_Model_Event::STATUS_CANCELED,
+			$result['status']
 		);
 	}
 }

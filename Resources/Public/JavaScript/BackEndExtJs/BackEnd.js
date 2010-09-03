@@ -21,6 +21,23 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+/**
+ * @see http://dev.sencha.com/deploy/dev/docs/?class=Date
+ */
+Date.patterns = {
+    ISO8601Long: "Y-m-d H:i:s",
+    ISO8601Short: "Y-m-d",
+    ShortDate: "n/j/Y",
+    LongDate: "l, F d, Y",
+    FullDateTime: "l, F d, Y g:i:s A",
+    MonthDay: "F d",
+    ShortTime: "g:i A",
+    LongTime: "g:i:s A",
+    SortableDateTime: "Y-m-d\\TH:i:s",
+    UniversalSortableDateTime: "Y-m-d H:i:sO",
+    YearMonth: "F, Y"
+};
+
 Ext.ns(
 	'TYPO3.Backend.Seminars',
 	'TYPO3.Backend.Seminars.Default',
@@ -214,16 +231,35 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
-			{name: 'record_type'},
 			{name: 'uid'},
+			{name: 'record_type'},
+			{name: 'hidden'},
+			{name: 'accreditation_number'},
 			{name: 'title'},
+			{name: 'begin_date'},
+			{name: 'end_date'},
+			{name: 'registrations_regular'},
+			{name: 'registrations_queue'},
+			{name: 'attendees_minimum'},
+			{name: 'attendees_maximum'},
+			{name: 'enough_attendees'},
+			{name: 'is_full'},
 			{name: 'status'}
 		]
 	}),
 	columns: [
 		{header: '', renderer: TYPO3.Backend.Seminars.Events.IconRenderer, width: 30, hideable: false, menuDisabled: true, sortable: false, resizable: false},
 		{header: '#', dataIndex: 'uid'},
+		{header: TYPO3.lang['eventlist.accreditation_number'], dataIndex: 'accreditation_number'},
 		{header: TYPO3.lang['eventlist.title'], dataIndex: 'title'},
+		{header: TYPO3.lang['eventlist.begin_date'], dataIndex: 'begin_date', xtype: 'datecolumn', format: Date.patterns.UniversalSortableDateTime},
+		{header: TYPO3.lang['eventlist.end_date'], dataIndex: 'end_date', xtype: 'datecolumn', format: Date.patterns.UniversalSortableDateTime},
+		{header: TYPO3.lang['eventlist.attendees'], dataIndex: 'registrations_regular'},
+		{header: TYPO3.lang['eventlist.attendeesOnRegistrationQueue'], dataIndex: 'registrations_queue'},
+		{header: TYPO3.lang['eventlist.attendees_min'], dataIndex: 'attendees_minimum'},
+		{header: TYPO3.lang['eventlist.attendees_max'], dataIndex: 'attendees_maximum'},
+		{header: TYPO3.lang['eventlist.enough_attendees'], dataIndex: 'enough_attendees'},
+		{header: TYPO3.lang['eventlist.is_full'], dataIndex: 'is_full'},
 		{header: TYPO3.lang['eventlist_status'], dataIndex: 'status', renderer: TYPO3.Backend.Seminars.Events.StatusRenderer}
 	],
 	tbar: {
@@ -402,13 +438,21 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 		idProperty: 'uid',
 		fields: [
 			{name: 'uid'},
-			{name: 'title'}
+			{name: 'name'},
+			{name: 'event_accreditation_number'},
+			{name: 'event_title'},
+			{name: 'event_begin_date'},
+			{name: 'event_end_date'}
 		]
 	}),
 	columns: [
 		{header: '', renderer: TYPO3.Backend.Seminars.Registrations.IconRenderer, width: 30, hideable: false, menuDisabled: true, sortable: false, resizable: false},
-		{header: TYPO3.lang.uid, dataIndex: 'uid'},
-		{header: TYPO3.lang.title, dataIndex: 'title'},
+		{header: '#', dataIndex: 'uid'},
+		{header: TYPO3.lang['registrationlist.feuser.name'], dataIndex: 'name'},
+		{header: TYPO3.lang['registrationlist.seminar.accreditation_number'], dataIndex: 'event_accreditation_number'},
+		{header: TYPO3.lang['registrationlist.seminar.title'], dataIndex: 'event_title'},
+		{header: TYPO3.lang['eventlist.begin_date'], dataIndex: 'event_begin_date', xtype: 'datecolumn', format: Date.patterns.UniversalSortableDateTime},
+		{header: TYPO3.lang['eventlist.end_date'], dataIndex: 'event_end_date', xtype: 'datecolumn', format: Date.patterns.UniversalSortableDateTime}
 	],
 	tbar: {
 		items: [{
@@ -576,8 +620,8 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 	}),
 	columns: [
 		{header: '', renderer: TYPO3.Backend.Seminars.Speakers.IconRenderer, width: 30, hideable: false, menuDisabled: true, sortable: false, resizable: false},
-		{header: TYPO3.lang.uid, dataIndex: 'uid'},
-		{header: TYPO3.lang.title, dataIndex: 'title'},
+		{header: '#', dataIndex: 'uid'},
+		{header: TYPO3.lang['speakerlist.title'], dataIndex: 'title'},
 	],
 	tbar: {
 		items:[{
@@ -730,8 +774,8 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 	}),
 	columns: [
 		{header: '', renderer: TYPO3.Backend.Seminars.Organizers.IconRenderer, width: 30, hideable: false, menuDisabled: true, sortable: false, resizable: false},
-		{header: TYPO3.lang.uid, dataIndex: 'uid'},
-		{header: TYPO3.lang.title, dataIndex: 'title'},
+		{header: '#', dataIndex: 'uid'},
+		{header: TYPO3.lang['organizerlist.title'], dataIndex: 'title'},
 	],
 	tbar: {
 		items:[{
