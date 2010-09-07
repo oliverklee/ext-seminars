@@ -270,10 +270,15 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 			listeners: {
 				'click': {
 					fn: function() {
+						var pid = TYPO3.settings.Backend.Seminars.EventsFolder;
+
+						if (pid == 0) {
+							pid = TYPO3.settings.PID;
+						}
+
 						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
 							'?returnUrl=' + encodeURIComponent(window.location) +
-							'&edit[tx_seminars_seminars][' +
-							TYPO3.settings.PID + ']=new';
+							'&edit[tx_seminars_seminars][' + pid + ']=new';
 						window.location = url;
 					}
 				}
@@ -462,10 +467,15 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 			listeners: {
 				'click': {
 					fn: function() {
+						var pid = TYPO3.settings.Backend.Seminars.RegistrationsFolder;
+
+						if (pid == 0) {
+							pid = TYPO3.settings.PID;
+						}
+
 						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
 							'?returnUrl=' + encodeURIComponent(window.location) +
-							'&edit[tx_seminars_attendances][' +
-							TYPO3.settings.PID + ']=new';
+							'&edit[tx_seminars_attendances][' + pid + ']=new';
 						window.location = url;
 					}
 				}
@@ -630,10 +640,15 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 			listeners: {
 				'click': {
 					fn: function() {
+						var pid = TYPO3.settings.Backend.Seminars.AuxiliaryRecordsFolder;
+
+						if (pid == 0) {
+							pid = TYPO3.settings.PID;
+						}
+
 						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
 							'?returnUrl=' + encodeURIComponent(window.location) +
-							'&edit[tx_seminars_speakers][' +
-							TYPO3.settings.PID + ']=new';
+							'&edit[tx_seminars_speakers][' + pid + ']=new';
 						window.location = url;
 					}
 				}
@@ -784,10 +799,15 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 			listeners: {
 				'click': {
 					fn: function() {
+						var pid = TYPO3.settings.Backend.Seminars.AuxiliaryRecordsFolder;
+
+						if (pid == 0) {
+							pid = TYPO3.settings.PID;
+						}
+
 						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
 							'?returnUrl=' + encodeURIComponent(window.location) +
-							'&edit[tx_seminars_organizers][' +
-							TYPO3.settings.PID + ']=new';
+							'&edit[tx_seminars_organizers][' + pid + ']=new';
 						window.location = url;
 					}
 				}

@@ -180,6 +180,18 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 				'csv' => '../BackEnd/class.tx_seminars_BackEnd_CSV.php',
 			)
 		);
+
+		$backEndUser = tx_oelib_BackEndLoginManager::getInstance()->getLoggedInUser(
+			'tx_seminars_Mapper_BackEndUser'
+		);
+		$this->getPageRenderer()->addInlineSettingArray(
+			'Backend.Seminars',
+			array(
+				'EventsFolder' => $backEndUser->getEventFolderFromGroup(),
+				'RegistrationsFolder' => $backEndUser->getRegistrationFolderFromGroup(),
+				'AuxiliaryRecordsFolder' => $backEndUser->getAuxiliaryRecordsFolder(),
+			)
+		);
 	}
 
 	/**

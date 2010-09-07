@@ -180,26 +180,12 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function mainAddsInlineLanguageLabelsViaPageRenderer() {
-		$pageRenderer = $this->getMock(
-			't3lib_PageRenderer', array('addInlineLanguageLabelArray')
-		);
-		$this->fixture->setPageRenderer($pageRenderer);
-
-		$pageRenderer->expects($this->exactly(6))
-			->method('addInlineLanguageLabelArray');
-
-		$this->fixture->main();
-	}
-
-	/**
-	 * @test
-	 */
 	public function mainCallsBackEndUserCheckWithTablesSelectAndSeminarsTableName() {
 		$GLOBALS['BE_USER'] = $this->getMock(
 			't3lib_beUserAuth',
 			array('check')
 		);
+		$GLOBALS['BE_USER']->user = $this->backEndUserBackUp->user;
 		$GLOBALS['BE_USER']
 			->expects($this->at(0))
 			->method('check')
@@ -216,6 +202,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 			't3lib_beUserAuth',
 			array('check')
 		);
+		$GLOBALS['BE_USER']->user = $this->backEndUserBackUp->user;
 		$GLOBALS['BE_USER']
 			->expects($this->at(2))
 			->method('check')
@@ -232,6 +219,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 			't3lib_beUserAuth',
 			array('check')
 		);
+		$GLOBALS['BE_USER']->user = $this->backEndUserBackUp->user;
 		$GLOBALS['BE_USER']
 			->expects($this->at(4))
 			->method('check')
@@ -248,6 +236,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 			't3lib_beUserAuth',
 			array('check')
 		);
+		$GLOBALS['BE_USER']->user = $this->backEndUserBackUp->user;
 		$GLOBALS['BE_USER']
 			->expects($this->at(6))
 			->method('check')
@@ -264,6 +253,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 			't3lib_beUserAuth',
 			array('check')
 		);
+		$GLOBALS['BE_USER']->user = $this->backEndUserBackUp->user;
 		$GLOBALS['BE_USER']
 			->expects($this->at(1))
 			->method('check')
@@ -280,6 +270,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 			't3lib_beUserAuth',
 			array('check')
 		);
+		$GLOBALS['BE_USER']->user = $this->backEndUserBackUp->user;
 		$GLOBALS['BE_USER']
 			->expects($this->at(3))
 			->method('check')
@@ -296,6 +287,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 			't3lib_beUserAuth',
 			array('check')
 		);
+		$GLOBALS['BE_USER']->user = $this->backEndUserBackUp->user;
 		$GLOBALS['BE_USER']
 			->expects($this->at(5))
 			->method('check')
@@ -312,6 +304,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 			't3lib_beUserAuth',
 			array('check')
 		);
+		$GLOBALS['BE_USER']->user = $this->backEndUserBackUp->user;
 		$GLOBALS['BE_USER']
 			->expects($this->at(7))
 			->method('check')
@@ -347,6 +340,41 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 
 		$pageRenderer->expects($this->at(0))
 			->method('addInlineSettingArray');
+
+		$this->fixture->main();
+	}
+
+	/**
+	 * @test
+	 */
+	public function mainAddsFoldersFromBackEndUserGroupInlineSettingViaPageRenderer() {
+		$backEndUserGroup = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_BackEndUserGroup')
+			->getLoadedTestingModel(array(
+				'tx_seminars_events_folder' => 1,
+				'tx_seminars_registrations_folder' => 2,
+				'tx_seminars_auxiliaries_folder' => 3,
+			));
+		$backEndUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_BackEndUser')
+			->getLoadedTestingModel(array(
+				'usergroup' => $backEndUserGroup->getUid()
+			));
+		tx_oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
+
+		$pageRenderer = $this->getMock(
+			't3lib_PageRenderer', array('addInlineSettingArray')
+		);
+		$this->fixture->setPageRenderer($pageRenderer);
+
+		$pageRenderer->expects($this->at(5))
+			->method('addInlineSettingArray')
+			->with(
+				'Backend.Seminars',
+				array(
+					'EventsFolder' => 1,
+					'RegistrationsFolder' => 2,
+					'AuxiliaryRecordsFolder' => 3,
+				)
+			);
 
 		$this->fixture->main();
 	}
