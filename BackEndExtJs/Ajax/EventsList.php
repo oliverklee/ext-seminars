@@ -71,6 +71,19 @@ class tx_seminars_BackEndExtJs_Ajax_EventsList extends tx_seminars_BackEndExtJs_
 			'status' => $event->getStatus(),
 		);
 	}
+
+	/**
+	 * Returns whether the currently logged in back-end user is allowed to view
+	 * the list.
+	 *
+	 * @return boolean TRUE if the currently logged in back-end user is allowed
+	 *                 to view the list, FALSE otherwise
+	 */
+	protected function hasAccess() {
+		return $GLOBALS['BE_USER']->check(
+			'tables_select', 'tx_seminars_seminars'
+		);
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEndExtJs/Ajax/EventsList.php']) {

@@ -65,7 +65,10 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 	 *               or "success" => FALSE in case of an error
 	 */
 	public function createList() {
-		if (!$this->isPageUidValid($this->getPageUid())) {
+		if (
+			!$this->isPageUidValid($this->getPageUid())
+			|| !$this->hasAccess()
+		) {
 			return array('success' => FALSE);
 		}
 
@@ -152,6 +155,15 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 			' AND doktype = 254' . tx_oelib_db::enableFields('pages', 1)
 		);
 	}
+
+	/**
+	 * Returns whether the currently logged in back-end user is allowed to view
+	 * the list.
+	 *
+	 * @return boolean TRUE if the currently logged in back-end user is allowed
+	 *                 to view the list, FALSE otherwise
+	 */
+	abstract protected function hasAccess();
 
 	/**
 	 * Returns the mapper name in $this->mapperName.

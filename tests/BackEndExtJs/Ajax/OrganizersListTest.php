@@ -39,13 +39,23 @@ class tx_seminars_BackEndExtJs_Ajax_OrganizersListTest extends tx_phpunit_testca
 	 */
 	private $fixture;
 
+	/**
+	 * back-up of $GLOBALS['BE_USER']
+	 *
+	 * @var t3lib_beUserAuth
+	 */
+	private $backEndUserBackUp;
+
 	public function setUp() {
 		$this->fixture = new tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingOrganizersList();
+
+		$this->backEndUserBackUp = $GLOBALS['BE_USER'];
 	}
 
 	public function tearDown() {
+		$GLOBALS['BE_USER'] = $this->backEndUserBackUp;
 		tx_oelib_MapperRegistry::purgeInstance();
-		unset($this->fixture);
+		unset($this->fixture, $this->backEndUserBackUp);
 	}
 
 
@@ -91,6 +101,47 @@ class tx_seminars_BackEndExtJs_Ajax_OrganizersListTest extends tx_phpunit_testca
 		$this->assertEquals(
 			$organizer->getName(),
 			$result['title']
+		);
+	}
+
+
+	///////////////////////////////////////////
+	// Tests regarding isAllowedToListView().
+	///////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function hasAccessWithBackEndUserIsAllowedReturnsTrue() {
+		$GLOBALS['BE_USER'] = $this->getMock(
+			't3lib_beUserAuth',
+			array('check')
+		);
+		$GLOBALS['BE_USER']->expects($this->once())
+			->method('check')
+			->with('tables_select', 'tx_seminars_organizers')
+			->will($this->returnValue(TRUE));
+
+		$this->assertTrue(
+			$this->fixture->hasAccess()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAccessWithBackEndUserIsNotAllowedReturnsFalse() {
+		$GLOBALS['BE_USER'] = $this->getMock(
+			't3lib_beUserAuth',
+			array('check')
+		);
+		$GLOBALS['BE_USER']->expects($this->once())
+			->method('check')
+			->with('tables_select', 'tx_seminars_organizers')
+			->will($this->returnValue(FALSE));
+
+		$this->assertFalse(
+			$this->fixture->hasAccess()
 		);
 	}
 }

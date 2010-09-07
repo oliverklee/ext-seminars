@@ -84,5 +84,14 @@ class tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList extends t
 	public function isPageUidValid($pageUid) {
 		return parent::isPageUidValid($pageUid);
 	}
+
+	/**
+	 * Returns always TRUE.
+	 *
+	 * @return boolean always TRUE
+	 */
+	protected function hasAccess() {
+		return TRUE;
+	}
 }
 ?>

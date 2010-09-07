@@ -169,6 +169,47 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 	/**
 	 * @test
 	 */
+	public function createListWithHasAccessNotReturnsSuccessFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
+			array('hasAccess', 'isPageUidValid')
+		);
+		$fixture->expects($this->any())
+			->method('isPageUidValid')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->once())
+			->method('hasAccess')
+			->will($this->returnValue(TRUE));
+
+		$result = $fixture->createList();
+
+		$this->assertTrue($result['success']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createListWithDoesNotHaveAccessListReturnsSuccessFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList',
+			array('hasAccess', 'isPageUidValid')
+		);
+		$fixture->expects($this->any())
+			->method('isPageUidValid')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->once())
+			->method('hasAccess')
+			->will($this->returnValue(FALSE));
+
+		$this->assertEquals(
+			array('success' => FALSE),
+			$fixture->createList()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function createListWithRetrieveModelsReturningEmptyListReturnsSuccessTrueAndEmptyRows() {
 		$mapper = $this->getMock(
 			'tx_oelib_tests_fixtures_TestingMapper',

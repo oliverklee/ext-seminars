@@ -47,5 +47,16 @@ class tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingSpeakersList extends t
 	public function getAsArray(tx_oelib_Model $model) {
 		return parent::getAsArray($model);
 	}
+
+	/**
+	 * Returns whether the currently logged in back-end user is allowed to view
+	 * the list.
+	 *
+	 * @return boolean TRUE if the currently logged in back-end user is allowed
+	 *                 to view the list, FALSE otherwise
+	 */
+	public function hasAccess() {
+		return parent::hasAccess();
+	}
 }
 ?>
