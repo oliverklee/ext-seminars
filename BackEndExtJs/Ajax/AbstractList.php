@@ -101,7 +101,10 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 	 */
 	protected function getAsArray(tx_oelib_Model $model) {
 		return array_merge(
-			array('uid' => $model->getUid()),
+			array(
+				'uid' => $model->getUid(),
+				'pid' => $model->getPageUid(),
+			),
 			$this->getAdditionalFields($model)
 		);
 	}

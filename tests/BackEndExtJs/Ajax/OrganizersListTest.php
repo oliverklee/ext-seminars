@@ -92,6 +92,21 @@ class tx_seminars_BackEndExtJs_Ajax_OrganizersListTest extends tx_phpunit_testca
 	/**
 	 * @test
 	 */
+	public function getAsArrayReturnsArrayContainingOrganizerPageUid() {
+		$organizer = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer')
+			->getLoadedTestingModel(array('pid' => 42));
+
+		$result = $this->fixture->getAsArray($organizer);
+
+		$this->assertEquals(
+			42,
+			$result['pid']
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getAsArrayReturnsArrayContainingOrganizerName() {
 		$organizer = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer')
 			->getLoadedTestingModel(array('title' => 'testing organizer'));

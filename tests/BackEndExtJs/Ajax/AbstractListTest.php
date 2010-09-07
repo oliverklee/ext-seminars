@@ -270,7 +270,10 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 			array(
 				'success' => TRUE,
 				'total' => 1,
-				'rows' => array(array('uid' => $model->getUid()))
+				'rows' => array(array(
+					'uid' => $model->getUid(),
+					'pid' => $model->getPageUid(),
+				))
 			),
 			$fixture->createList()
 		);
@@ -313,8 +316,14 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 				'success' => TRUE,
 				'total' => 2,
 				'rows' => array(
-					array('uid' => $model1->getUid()),
-					array('uid' => $model2->getUid()),
+					array(
+						'uid' => $model1->getUid(),
+						'pid' => $model1->getPageUid(),
+					),
+					array(
+						'uid' => $model2->getUid(),
+						'pid' => $model2->getPageUid(),
+					),
 				)
 			),
 			$fixture->createList()

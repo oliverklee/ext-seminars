@@ -92,6 +92,21 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
+	public function getAsArrayReturnsArrayContainingEventPageUid() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('pid' => 42));
+
+		$result = $this->fixture->getAsArray($event);
+
+		$this->assertEquals(
+			42,
+			$result['pid']
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getAsArrayReturnsArrayContainingRecordType() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(

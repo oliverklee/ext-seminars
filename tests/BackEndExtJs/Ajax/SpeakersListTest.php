@@ -92,6 +92,21 @@ class tx_seminars_BackEndExtJs_Ajax_SpeakersListTest extends tx_phpunit_testcase
 	/**
 	 * @test
 	 */
+	public function getAsArrayReturnsArrayContainingSpeakerPageUid() {
+		$speaker = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker')
+			->getLoadedTestingModel(array('pid' => 42));
+
+		$result = $this->fixture->getAsArray($speaker);
+
+		$this->assertEquals(
+			42,
+			$result['pid']
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getAsArrayReturnsArrayContainingSpeakerName() {
 		$speaker = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker')
 			->getLoadedTestingModel(array('title' => 'testing speaker'));

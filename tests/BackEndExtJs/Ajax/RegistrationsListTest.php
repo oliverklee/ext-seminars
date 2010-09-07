@@ -98,6 +98,27 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsListTest extends tx_phpunit_tes
 	/**
 	 * @test
 	 */
+	public function getAsArrayReturnsArrayContainingRegistrationPageUid() {
+		$frontEndUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->getLoadedTestingModel(array());
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+			->getLoadedTestingModel(array(
+				'user' => $frontEndUser, 'seminar' => $event, 'pid' => 42,
+			));
+
+		$result = $this->fixture->getAsArray($registration);
+
+		$this->assertEquals(
+			42,
+			$result['pid']
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getAsArrayReturnsArrayContainingFrontEndUserName() {
 		$frontEndUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
 			->getLoadedTestingModel(array('name' => 'John Doe'));
