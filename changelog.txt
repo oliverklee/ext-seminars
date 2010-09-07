@@ -1,4 +1,5 @@
 0.9.3 (currently working on)
+- [#3968] Fix: "Manual sorting of events"-feature is not available for non-admin-users
 - [#4094] Fix: Use empty configurations in the unit tests
 - [#3995] Change: Add a conflict with the "sourceopt" extension, thanks to Philipp Gampe
 - [#3992] Change: Increase the size of the hideFields and hideColumns fields in the flexforms

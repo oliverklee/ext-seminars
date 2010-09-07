@@ -151,6 +151,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_List {
 	private function createListBody(tx_seminars_seminarbag $events) {
 		$tableRows = '';
 
+		$pageData = $this->page->getPageData();
 		$useManualSorting = tx_oelib_configurationProxy::getInstance('seminars')
 			->getAsBoolean('useManualSorting')
 			&& $GLOBALS['BE_USER']->check('tables_modify', SEMINARS_TABLE_SEMINARS)
