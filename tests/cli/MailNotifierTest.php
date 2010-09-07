@@ -25,7 +25,7 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the tx_seminars_cli_MailNotifier in the 'seminars' extension.
+ * Testcase for the tx_seminars_cli_MailNotifier in the "seminars" extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -33,7 +33,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @author Saskia Metzler <saskia@merlin.owl.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
+class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_cli_MailNotifier
 	 */

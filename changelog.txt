@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#4047] Cleanup: Rename all test classes from *_testcase to *Test
 - [#3889] Change: Disable the CSV export button in the events menu if there are no registrations for that event
 - [#4116] Change: Drop the option for the manual sorting of event records in the BE
 - [#3901] Change: The AJAX module needs to check the BE user rights

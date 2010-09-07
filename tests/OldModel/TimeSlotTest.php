@@ -25,14 +25,14 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the timeslot class in the 'seminars' extension.
+ * Testcase for the tx_seminars_timeslot class in the "seminars" extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_timeslotchild_testcase extends tx_phpunit_testcase {
+class tx_seminars_OldModel_TimeSlotTest extends tx_phpunit_testcase {
 	private $fixture;
 	private $testingFramework;
 
