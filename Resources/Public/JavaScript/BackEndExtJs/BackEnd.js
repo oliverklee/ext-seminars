@@ -92,7 +92,7 @@ TYPO3.Backend.Seminars.Events.Menu = {
 			},
 		},
 	}, {
-		xtype: 'menuseparator',
+		xtype: 'menuseparator'
 	}, {
 		id: 'typo3-backend-seminars-events-menu-csv',
 		iconCls: 'csv',
@@ -333,11 +333,16 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 					Ext.getCmp('typo3-backend-seminars-events-menu-unhide').hide();
 				}
 				if (row.get('status') > 0) {
-					Ext.getCmp('typo3-backend-seminars-events-menu-confirm').hide();
-					Ext.getCmp('typo3-backend-seminars-events-menu-cancel').hide();
+					Ext.getCmp('typo3-backend-seminars-events-menu-confirm').disable();
+					Ext.getCmp('typo3-backend-seminars-events-menu-cancel').disable();
 				} else {
-					Ext.getCmp('typo3-backend-seminars-events-menu-confirm').show();
-					Ext.getCmp('typo3-backend-seminars-events-menu-cancel').show();
+					Ext.getCmp('typo3-backend-seminars-events-menu-confirm').enable();
+					Ext.getCmp('typo3-backend-seminars-events-menu-cancel').enable();
+				}
+				if (row.get('registrations_regular') > 0) {
+					Ext.getCmp('typo3-backend-seminars-events-menu-csv').enable();
+				} else {
+					Ext.getCmp('typo3-backend-seminars-events-menu-csv').disable();
 				}
 				menu.showAt(event.getXY());
 				event.stopEvent();
