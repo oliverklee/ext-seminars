@@ -25,14 +25,15 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the EmailSalutation class in the 'seminars' extension.
+ * Testcase for the tx_seminars_EmailSalutation class in the "seminars"
+ * extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_EmailSalutation_testcase extends tx_phpunit_testcase {
+class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_oelib_testingFramework the testing framework
 	 */

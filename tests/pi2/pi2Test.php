@@ -25,7 +25,8 @@
 require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 /**
- * Testcase for the pi2 class (CSV export) in the 'seminars' extension.
+ * Testcase for the tx_seminars_pi2 class (CSV export) in the "seminars"
+ * extension.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -33,7 +34,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
+class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_pi2
 	 */
