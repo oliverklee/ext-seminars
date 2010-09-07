@@ -98,12 +98,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Sets the sorting to be the same as in the BE.
 	 */
 	private function useBackEndSorting() {
-		// unserializes the configuration array
-		$globalConfiguration = unserialize(
-			$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']
-		);
-		$this->orderBy = ($globalConfiguration['useManualSorting'])
-			? 'sorting' : 'begin_date DESC';
+		$this->orderBy = 'begin_date DESC';
 	}
 
 	/**

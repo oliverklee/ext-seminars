@@ -75,14 +75,6 @@ $TCA['tx_seminars_seminars'] = array(
 	)
 );
 
-// unserialize the configuration array
-$globalConfiguration = unserialize(
-	$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]
-);
-if ($globalConfiguration['useManualSorting']) {
-	$TCA['tx_seminars_seminars']['ctrl']['sortby'] = 'sorting';
-}
-
 $TCA['tx_seminars_speakers'] = array(
 	'ctrl' => array(
 		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers',

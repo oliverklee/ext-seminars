@@ -152,18 +152,6 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	private function createListBody(tx_seminars_Bag_Event $events) {
 		$tableRows = '';
 
-		$useManualSorting = tx_oelib_configurationProxy::getInstance('seminars')
-			->getAsBoolean('useManualSorting')
-			&& $GLOBALS['BE_USER']->check('tables_modify', 'tx_seminars_seminars')
-			&& $GLOBALS['BE_USER']->doesUserHaveAccess(
-				t3lib_BEfunc::getRecord(
-					'pages', $pageData['uid']
-				),
-				16
-		);
-
-		$sortList = ($useManualSorting) ? $this->createSortList($events) : array();
-
 		foreach ($events as $event) {
 			$this->template->setMarker('uid', $event->getUid());
 			$this->template->setMarker('icon', $event->getRecordIcon());
@@ -195,12 +183,6 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 				'hide_unhide_button',
 				$this->getHideUnhideIcon(
 					$event->getUid(), $event->getPageUid(), $event->isHidden()
-				)
-			);
-			$this->template->setMarker(
-				'up_down_buttons',
-				$this->getUpDownIcons(
-					$useManualSorting, $sortList, $event->getUid()
 				)
 			);
 			$this->template->setMarker(
@@ -259,69 +241,6 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 		}
 
 		$this->template->setSubpart('EVENT_ROW', $tableRows);
-	}
-
-	/**
-	 * Creates the sort list for the displayed events.
-	 *
-	 * @param tx_seminars_Bag_Event $events the events to get the sorting for
-	 *
-	 * @return array the sort list in a multidimensional array with the event's
-	 *               UID as first-level key, the keywords "previous" and
-	 *               "next" as second level keys and the event UID's as values,
-	 *               will be empty if an empty bag has been given
-	 */
-	private function createSortList(tx_seminars_Bag_Event $events) {
-		$sortList = array();
-		$pageData = $this->page->getPageData();
-
-		// Initializes the array which holds the two previous records' UIDs.
-		$previousUids = array(
-			// contains the UID of the predecessor of the current record
-			0,
-			// contains the negative UID of the predecessor's predecessor
-			// or the current PID
-			0
-		);
-
-		foreach ($events as $event) {
-			$uid = $event->getUid();
-
-			// Sets the "previous" and "next" elements in the $sortList
-			// array only if we already got the predecessor of the
-			// current record in $previousUids[0]. This will be the case
-			// after the first iteration.
-			if ($previousUids[0]) {
-				// Sets the "previous" element of the current record to the
-				// predecessor of the previous record.
-				// This means when clicking on the "up" button the current
-				// record will be moved after the predecessor of the previous
-				// record.
-				$sortList[$uid]['previous'] = $previousUids[1];
-
-				// Sets the "next" element of the previous record to the
-				// negative UID of the current record.
-				// This means when clicking on the "down" button the previous
-				// record will be moved after the current record.
-				$sortList[$previousUids[0]]['next'] = -$uid;
-			}
-
-			// Sets the predecessor of the previous record to the negative
-			// UID of the previous record if the previous record of the
-			// current record is set already. Else set the predecessor of
-			// the previous record to the PID.
-			// That means if no predecessor of the previous record exists
-			// than move the current record to top of the current page.
-			$previousUids[1] = isset($sortList[$uid]['previous'])
-				? -$previousUids[0] : $pageData['uid'];
-
-			// Sets previous record to the current record's UID.
-			$previousUids[0] = $uid;
-
-			// Gets the next record and go to the start of the loop.
-		}
-
-		return $sortList;
 	}
 
 	/**
@@ -488,78 +407,6 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 		} else {
 			$this->template->hideSubpartsArray(array('CONFIRM_BUTTON'));
 		}
-	}
-
-	/**
-	 * Generates linked up and/or down icons depending on the manual sorting.
-	 *
-	 * @param boolean if TRUE the linked up and/or down icons get generated
-	 *                else they won't get generated
-	 * @param array An array which contains elements that have the record's
-	 *              UIDs as keys and an array with the two elements "previous"
-	 *              and "next" as values. The two elements' values are the
-	 *              negative UIDs of the records they should be moved after
-	 *              when the up (previous) or down (next) button is clicked.
-	 *              Except the second record's "previous" entry will be the
-	 *              PID of the current page so the record will be moved to
-	 *              the top of the current page when the up button is clicked.
-	 * @param integer the UID of the current record, must be > 0
-	 *
-	 * @return string the HTML source code of the linked up and/or down icons
-	 *                (or an empty string if manual sorting is deactivated)
-	 */
-	protected function getUpDownIcons($useManualSorting, array &$sortList, $uid) {
-		$result = '';
-
-		if ($useManualSorting) {
-			$params = '&cmd[' . $this->tableName . '][' . $uid . '][move]=';
-
-			$result = $this->getSingleUpOrDownIcon(
-					'up',
-					$params . $sortList[$uid]['previous'],
-					$sortList[$uid]['previous']
-				) .
-				$this->getSingleUpOrDownIcon(
-					'down',
-					$params . $sortList[$uid]['next'],
-					$sortList[$uid]['next']
-				);
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Generates a single linked up or down icon depending on the type parameter.
-	 *
-	 * @param string the type of the icon ("up" or "down")
-	 * @param string the command for TCEmain
-	 * @param integer the negative UID of the record where the current record
-	 *                will be moved after if the button was clicked or the
-	 *                positive PID if the current icon is the second in the
-	 *                list and we should generate an up button
-	 *
-	 * @return string the HTML source code of a single linked up or down icon
-	 */
-	protected function getSingleUpOrDownIcon($type, $params, $moveToUid) {
-		$result = '';
-
-		if (isset($moveToUid)) {
-			$result = '<a href="' . htmlspecialchars(
-					$this->page->doc->issueCommand($params)
-				) . '">' .
-				'<img'.t3lib_iconWorks::skinImg(
-					$GLOBALS['BACK_PATH'],
-					'gfx/button_' . $type . '.gif',
-					'width="11" height="10"'
-				) . ' title="' . $GLOBALS['LANG']->getLL('move' . ucfirst($type), 1) . '"' .
-				' alt="' . $GLOBALS['LANG']->getLL('move' . ucfirst($type), 1) . '" />' .
-				'</a>';
-		} else {
-			$result = '<span class="clearUpDownButton"></span>';
-		}
-
-		return $result;
 	}
 
 	/**
