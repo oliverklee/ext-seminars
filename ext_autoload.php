@@ -27,6 +27,7 @@ return array(
 	'tx_seminars_backend_registrationslist' => $extensionPath . 'BackEnd/RegistrationsList.php',
 	'tx_seminars_backend_speakerslist' => $extensionPath . 'BackEnd/SpeakersList.php',
 	'tx_seminars_module2' => $extensionPath . 'BackEnd/index.php',
+	'tx_seminars_backendextjs_clearcache' => $extensionPath . 'BackEndExtJs/ClearCache.php',
 	'tx_seminars_backendextjs_module' => $extensionPath . 'BackEndExtJs/Module.php',
 	'tx_seminars_backendextjs_ajax_abstractlist' => $extensionPath . 'BackEndExtJs/Ajax/AbstractList.php',
 	'tx_seminars_backendextjs_ajax_dispatcher' => $extensionPath . 'BackEndExtJs/Ajax/Dispatcher.php',

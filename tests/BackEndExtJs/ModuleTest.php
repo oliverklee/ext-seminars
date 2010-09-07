@@ -378,5 +378,26 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 
 		$this->fixture->main();
 	}
+
+	/**
+	 * @test
+	 */
+	public function mainAddsLanguageLabelsFileViaPageRenderer() {
+		$pageRenderer = $this->getMock('t3lib_PageRenderer', array('addJsFile'));
+		$this->fixture->setPageRenderer($pageRenderer);
+
+		$pageRenderer->expects($this->at(2))
+			->method('addJsFile')
+			->with(
+				t3lib_div::getIndpEnv('TYPO3_SITE_PATH') .
+					tx_seminars_BackEndExtJs_Module::LANGUAGE_LABELS_CACHE_PATH .
+					'seminars_' . $GLOBALS['LANG']->lang . '.js',
+				'text/javascript',
+				FALSE,
+				TRUE
+			);
+
+		$this->fixture->main();
+	}
 }
 ?>
