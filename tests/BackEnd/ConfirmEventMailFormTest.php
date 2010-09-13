@@ -81,6 +81,7 @@ class tx_seminars_BackEnd_ConfirmEventMailFormTest extends tx_phpunit_testcase {
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		tx_oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
 		$this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
 		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
