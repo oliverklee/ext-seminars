@@ -78,6 +78,7 @@ class tx_seminars_BackEnd_CancelEventMailForm_testcase extends tx_phpunit_testca
 
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
+		tx_oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
 		$configurationRegistry = tx_oelib_ConfigurationRegistry::getInstance();
 		$configurationRegistry->set(
