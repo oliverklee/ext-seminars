@@ -289,7 +289,7 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	private function createAccessibleProxyClass() {
 		$testingClassName = 'tx_seminars_registrationmanager' . uniqid();
 
-		if (!class_exists($testingClassName)) {
+		if (!class_exists($testingClassName, FALSE)) {
 			eval(
 				'class ' . $testingClassName .
 					' extends tx_seminars_registrationmanager {' .

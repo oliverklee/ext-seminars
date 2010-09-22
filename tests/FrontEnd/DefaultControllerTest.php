@@ -287,7 +287,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	private function createAccessibleProxyClass() {
 		$testingClassName = 'tx_seminars_FrontEnd_TestingDefaultController';
 
-		if (!class_exists($testingClassName)) {
+		if (!class_exists($testingClassName, FALSE)) {
 			eval(
 				'class ' . $testingClassName . ' extends tx_seminars_FrontEnd_DefaultController {' .
 				'public function setSeminar(tx_seminars_seminar $seminar = null) {' .
