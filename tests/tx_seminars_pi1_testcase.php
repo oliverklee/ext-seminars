@@ -273,7 +273,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	private function createAccessibleProxyClass() {
 		$testingClassName = 'tx_seminars_pi1_Testing';
 
-		if (!class_exists($testingClassName)) {
+		if (!class_exists($testingClassName, FALSE)) {
 			eval(
 				'class ' . $testingClassName . ' extends tx_seminars_pi1 {' .
 				'public function setSeminar(tx_seminars_seminar $seminar = null) {' .
