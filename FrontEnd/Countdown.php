@@ -141,7 +141,7 @@ class tx_seminars_FrontEnd_Countdown extends tx_seminars_FrontEnd_AbstractView {
 	private function createCountdownMessage($seconds) {
 		if ($seconds > 82800) {
 			// more than 23 hours left, show the time in days
-			$countdownValue = round($seconds / ONE_DAY);
+			$countdownValue = round($seconds / tx_oelib_Time::SECONDS_PER_DAY);
 			if ($countdownValue > 1) {
 				$countdownText = $this->translate('countdown_days_plural');
 			} else {

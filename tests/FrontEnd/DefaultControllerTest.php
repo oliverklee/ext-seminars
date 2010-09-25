@@ -679,8 +679,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date',
-				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
-				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK + tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 		$this->testingFramework->createRecord(
@@ -690,8 +690,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date 2',
-				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 2*ONE_DAY,
-				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 3*ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK + 2*tx_oelib_Time::SECONDS_PER_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK + 3*tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 
@@ -724,8 +724,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date',
-				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
-				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK + tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 		$singleEventUid = $this->testingFramework->createRecord(
@@ -735,8 +735,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 				'topic' => $topicUid,
 				'title' => 'Test single 2',
-				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 2*ONE_DAY,
-				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 3*ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK + 2*tx_oelib_Time::SECONDS_PER_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK + 3*tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 
@@ -768,8 +768,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date',
-				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
-				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK + tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 		$this->testingFramework->createRecord(
@@ -779,8 +779,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date 2',
-				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 2*ONE_DAY,
-				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 3*ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK + 2*tx_oelib_Time::SECONDS_PER_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK + 3*tx_oelib_Time::SECONDS_PER_DAY,
 				'needs_registration' => 1,
 				'attendees_max' => 5,
 				'offline_attendees' => 5,
@@ -814,8 +814,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date',
-				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK,
-				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK + tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 		$dateUid2 = $this->testingFramework->createRecord(
@@ -825,8 +825,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'title' => 'Test date 2',
-				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 2*ONE_DAY,
-				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_WEEK + 3*ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK + 2*tx_oelib_Time::SECONDS_PER_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_WEEK + 3*tx_oelib_Time::SECONDS_PER_DAY,
 				'needs_registration' => 1,
 				'attendees_max' => 5,
 				'offline_attendees' => 5,
@@ -3761,7 +3761,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with category',
-				'end_date' => ONE_WEEK,
+				'end_date' => tx_oelib_Time::SECONDS_PER_WEEK,
 				// the number of categories
 				'categories' => 1
 			)

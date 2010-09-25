@@ -301,7 +301,8 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
-				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME']
+					- tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 
@@ -346,7 +347,8 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
-				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME']
+					+ tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 

@@ -4643,7 +4643,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return 0;
 		}
 
-		$secondsForUnregistration = ONE_DAY * $this->getConfValueInteger(
+		$secondsForUnregistration = tx_oelib_Time::SECONDS_PER_DAY * $this->getConfValueInteger(
 			'unregistrationDeadlineDaysBeforeBeginDate'
 		);
 

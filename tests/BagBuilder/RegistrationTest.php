@@ -71,7 +71,7 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 	public function testBuildReturnsBagWhichIsSortedAscendingByCrDate() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
-			array('title' => 'Title 2', 'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + ONE_DAY))
+			array('title' => 'Title 2', 'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY))
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',

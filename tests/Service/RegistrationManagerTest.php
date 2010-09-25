@@ -3628,7 +3628,7 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(), array(
-				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -3659,7 +3659,7 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(), array(
-				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 
@@ -3693,7 +3693,7 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(), array(
-				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 
@@ -3722,7 +3722,7 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		$this->createRegistration();
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(), array(
-				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
 				'queue_size' => 1,
 			)
 		);
@@ -3755,7 +3755,7 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(), array(
-				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + ONE_DAY,
+				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
 				'queue_size' => 1,
 			)
 		);

@@ -526,8 +526,10 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 		}
 
 		$endDate = $event->getEndDateAsTimestamp();
-		$midnightBeforeEndDate = $endDate - ($endDate % ONE_DAY);
-		$secondMidnightAfterEndDate = $midnightBeforeEndDate + 2 * ONE_DAY;
+		$midnightBeforeEndDate = $endDate
+			- ($endDate % tx_oelib_Time::SECONDS_PER_DAY);
+		$secondMidnightAfterEndDate = $midnightBeforeEndDate
+			+ 2 * tx_oelib_Time::SECONDS_PER_DAY;
 
 		$this->whereClauseParts['next_day'] = 'begin_date>=' . $endDate .
 			' AND begin_date<' . $secondMidnightAfterEndDate;
@@ -683,7 +685,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * @param integer days before the begin date, must be > 0
 	 */
 	public function limitToDaysBeforeBeginDate($days) {
-		$nowPlusDays = ($GLOBALS['SIM_EXEC_TIME'] + ($days * ONE_DAY));
+		$nowPlusDays = ($GLOBALS['SIM_EXEC_TIME']
+			+ ($days * tx_oelib_Time::SECONDS_PER_DAY));
 
 		$this->whereClauseParts['days_before_begin_date'] =
 			'tx_seminars_seminars.begin_date < ' . $nowPlusDays;
