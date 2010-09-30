@@ -81,7 +81,6 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->pid,
-				'sorting' => 1,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
 			)
 		);
@@ -217,7 +216,6 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->pid,
-				'sorting' => 2,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
 			)
 		);
@@ -241,7 +239,6 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->pid,
-				'sorting' => 2,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
 			)
 		);
@@ -266,7 +263,6 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->pid,
-				'sorting' => 2,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
 			)
 		);
@@ -286,7 +282,6 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->pid,
-				'sorting' => 2,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
 			)
 		);
