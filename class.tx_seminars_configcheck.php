@@ -171,6 +171,15 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkSendParametersToThankYouAfterRegistrationPageUrl();
 		$this->checkPageToShowAfterUnregistrationPID();
 		$this->checkSendParametersToPageToShowAfterUnregistrationUrl();
+
+		$this->checkCreateAdditionalAttendeesAsFrontEndUsers();
+		if ($this->objectToCheck->getConfValueBoolean(
+			'createAdditionalAttendeesAsFrontEndUsers', 's_registration'
+		)) {
+			$this->checkSysFolderForAdditionalAttendeeUsersPID();
+			$this->checkUserGroupUidsForAdditionalAttendeesFrontEndUsers();
+		}
+
 		$this->checkListPid();
 		$this->checkLoginPid();
 		$this->checkBankTransferUid();
@@ -1809,6 +1818,53 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				.'which is shown after an unregistration should be enabled or '
 				.'not. If this value is incorrect the sending of parameters '
 				.'will not be enabled or disabled correctly.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * createAdditionalAttendeesAsFrontEndUsers.
+	 */
+	private function checkCreateAdditionalAttendeesAsFrontEndUsers() {
+		$this->checkIfBoolean(
+			'createAdditionalAttendeesAsFrontEndUsers',
+			TRUE,
+			's_registration',
+			'This value specifies whether additional attendees will be ' .
+				'stored as FE user record . If this value is incorrect, ' .
+				'those records will no be created, and the registration ' .
+				'form will look different than intended.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * sysFolderForAdditionalAttendeeUsersPID.
+	 */
+	private function checkSysFolderForAdditionalAttendeeUsersPID() {
+		$this->checkIfSingleSysFolderNotEmpty(
+			'sysFolderForAdditionalAttendeeUsersPID',
+			TRUE,
+			's_registration',
+			'This value specifies the system folder in which the FE user ' .
+				'records for additional attendees will be stored. If this ' .
+				'value is not set correctly, those records will be dumped ' .
+				'in the TYPO3 root page.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * userGroupUidsForAdditionalAttendeesFrontEndUsers.
+	 */
+	private function checkUserGroupUidsForAdditionalAttendeesFrontEndUsers() {
+		$this->checkIfPidListNotEmpty(
+			'userGroupUidsForAdditionalAttendeesFrontEndUsers',
+			TRUE,
+			's_registration',
+			'This value specifies the FE user groups for the FE users ' .
+				'created for additional attendees. If this value is not set ' .
+				'correctly, those FE users might not be able to log in.'
 		);
 	}
 
