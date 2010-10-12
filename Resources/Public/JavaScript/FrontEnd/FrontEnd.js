@@ -68,8 +68,14 @@ function compileNames() {
 		 return;
 	}
 
-	var firstNames = $$(".tx_seminars_pi1_registration_editor_first_name");
-	var lastNames = $$(".tx_seminars_pi1_registration_editor_last_name");
+	var firstNames = $$("#tx_seminars_pi1_registration_editor_separate_names "
+		+ ".tx_seminars_pi1_registration_editor_first_name");
+	var lastNames = $$("#tx_seminars_pi1_registration_editor_separate_names "
+		+ ".tx_seminars_pi1_registration_editor_last_name");
+	var positions = $$("#tx_seminars_pi1_registration_editor_separate_names "
+		+ ".tx_seminars_pi1_registration_editor_position");
+	var eMailAddresses = $$("#tx_seminars_pi1_registration_editor_separate_names "
+		+ ".tx_seminars_pi1_registration_editor_attendee_email");
 
 	if (firstNames.length != lastNames.length) {
 		return;
@@ -77,12 +83,25 @@ function compileNames() {
 
 	var humanReadableNames = "";
 	var machineReadableNames = [];
-	for (var i = 0; i < firstNames.length; i++) {
+
+	var numberOfLines = firstNames.length;
+
+	for (var i = 0; i < numberOfLines; i++) {
 		var firstName = firstNames[i].value.strip();
 		var lastName = lastNames[i].value.strip();
 
 		if ((firstName.empty()) && (lastName.empty())) {
 			continue;
+		}
+
+		var position = "";
+		if (i < positions.length) {
+			position = positions[i].value.strip();
+		}
+
+		var eMailAddress = "";
+		if (i < eMailAddresses.length) {
+			eMailAddress = eMailAddresses[i].value.strip();
 		}
 
 		var fullName = (firstName + " " + lastName).strip();
@@ -91,7 +110,14 @@ function compileNames() {
 		}
 		humanReadableNames += fullName;
 
-		machineReadableNames[i] = [firstName, lastName];
+		if (!position.empty()) {
+			humanReadableNames += ", " + position;
+		}
+		if (!eMailAddress.empty()) {
+			humanReadableNames += ", " + eMailAddress;
+		}
+
+		machineReadableNames[i] = [firstName, lastName, position, eMailAddress];
 	}
 
 	humanReadableField.value = humanReadableNames;
@@ -114,6 +140,10 @@ function restoreSeparateNameFields() {
 		+ ".tx_seminars_pi1_registration_editor_first_name");
 	var lastNames = $$("#tx_seminars_pi1_registration_editor_separate_names "
 		+ ".tx_seminars_pi1_registration_editor_last_name");
+	var positions = $$("#tx_seminars_pi1_registration_editor_separate_names "
+		+ ".tx_seminars_pi1_registration_editor_position");
+	var eMailAddresses = $$("#tx_seminars_pi1_registration_editor_separate_names "
+		+ ".tx_seminars_pi1_registration_editor_attendee_email");
 
 	if (firstNames.length != lastNames.length) {
 		return;
@@ -125,6 +155,12 @@ function restoreSeparateNameFields() {
 	for (var i = 0; i < numberOfNames; i++) {
 		firstNames[i].value = allNames[i][0];
 		lastNames[i].value = allNames[i][1];
+		if (positions[i]) {
+			positions[i].value = allNames[i][2];
+		}
+		if (eMailAddresses[i]) {
+			eMailAddresses[i].value = allNames[i][3];
+		}
 	}
 }
 

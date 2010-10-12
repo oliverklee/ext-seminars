@@ -231,6 +231,7 @@
 			<label index="label_registered_themselves">myself</label>
 			<label index="label_firstname">First name:</label>
 			<label index="label_lastname">Last name:</label>
+			<label index="label_position">Position:</label>
 			<label index="label_register_seats">Seats to book:</label>
 			<label index="label_attendees_names">Names of the persons to register:</label>
 			<label index="label_kids">Number of kids:</label>
@@ -843,6 +844,7 @@
 			<label index="label_registered_themselves">ich selbst</label>
 			<label index="label_firstname">Vorname:</label>
 			<label index="label_lastname">Nachname:</label>
+			<label index="label_position">Position:</label>
 			<label index="label_register_seats">Zu buchende Plätze:</label>
 			<label index="label_attendees_names">Namen der anzumeldenden Personen:</label>
 			<label index="label_kids">Anzahl Kinder:</label>
@@ -862,7 +864,7 @@
 			<label index="label_city">Stadt</label>
 			<label index="label_country">Land</label>
 			<label index="label_telephone">Telefon:</label>
-			<label index="label_email">E-Mail:</label>
+			<label index="label_email">E-Mail-Adresse:</label>
 			<label index="label_lodgings">Art der Unterbringung:</label>
 			<label index="label_foods">Art der Verpflegung:</label>
 			<label index="label_register_entered_data_formal">Ihre Anmeldungsdaten</label>
@@ -2475,6 +2477,7 @@
 			<label index="label_registered_themselves" type="integer">12551043</label>
 			<label index="label_firstname" type="integer">107522264</label>
 			<label index="label_lastname" type="integer">199614645</label>
+			<label index="label_position" type="integer">247557776</label>
 			<label index="label_register_seats" type="integer">13486143</label>
 			<label index="label_attendees_names" type="integer">57835729</label>
 			<label index="label_kids" type="integer">7953511</label>
@@ -3913,6 +3916,7 @@
 			<label index="label_registered_themselves">myself</label>
 			<label index="label_firstname">First name:</label>
 			<label index="label_lastname">Last name:</label>
+			<label index="label_position">Position:</label>
 			<label index="label_register_seats">Seats to book:</label>
 			<label index="label_attendees_names">Names of the persons to register:</label>
 			<label index="label_kids">Number of kids:</label>

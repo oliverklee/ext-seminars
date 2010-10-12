@@ -227,6 +227,12 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 		$this->setLabels();
 		$this->hideUnusedFormFields();
 
+		if (!$this->getConfValueBoolean(
+			'createAdditionalAttendeesAsFrontEndUsers', 's_registration'
+		)) {
+			$this->hideSubparts('attendees_position_and_email');
+		}
+
 		return $this->getSubpart('', 2);
 	}
 

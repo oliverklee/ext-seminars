@@ -559,13 +559,33 @@ table.tx-seminars-pi1-timeslots td {
 	list-style: none;
 }
 
-#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
-	input.tx_seminars_pi1_registration_editor_first_name {
-	width: 12em;
+#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names fieldset {
+	margin: 0 0 .5em;
+	padding: 0;
+}
+
+#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names p {
+	margin: 0;
+	padding: .5em;
+}
+
+#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names label {
+	width: 8em;
+	display: inline-table;
 }
 
 #tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
-	input.tx_seminars_pi1_registration_editor_last_name {
+	input.tx_seminars_pi1_registration_editor_first_name,
+#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
+	input.tx_seminars_pi1_registration_editor_position {
+		width: 12em;
+		margin-right: 2em;
+}
+
+#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
+	input.tx_seminars_pi1_registration_editor_last_name,
+#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
+	input.tx_seminars_pi1_registration_editor_attendee_email {
 	width: 16em;
 }
 
