@@ -353,11 +353,12 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * payment or the gender), this function will already return the clear text
 	 * version.
 	 *
-	 * @param string the key of the data to retrieve (the key doesn't need to be
-	 *               trimmed)
+	 * @param string $key
+	 *        the key of the data to retrieve, need not be trimmed
 	 *
-	 * @return string the trimmed value retrieved from $this->recordData, may be
-	 *                empty
+	 * @return string
+	 *         the trimmed value retrieved from $this->recordData with CR
+	 *         replaced by LF, may be empty empty
 	 */
 	public function getRegistrationData($key) {
 		$result = '';
@@ -425,7 +426,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 
 		$carriageReturnRemoved = str_replace(CR, LF, (string) $result);
 
-		return preg_replace('/\\x0a{2,}/', LF, $carriageReturnRemoved);
+		return trim(preg_replace('/\\x0a{2,}/', LF, $carriageReturnRemoved));
 	}
 
 	/**
@@ -493,7 +494,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			}
 		}
 
-		return (string) $result;
+		return trim((string) $result);
 	}
 
 	/**
@@ -863,18 +864,17 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		$result = '';
 		foreach ($keysWithLabels as $currentKey => $currentLabel) {
 			$value = $this->getRegistrationData($currentKey);
-
-			// Check whether there is a value to display. If not, we don't use
-			// the padding and break the line directly after the label.
-			if ($value != '') {
-				$result .= str_pad(
-					$currentLabel . ': ',
-					$maxLength + 2,
-					' '
-				) . $value . LF;
-			} else {
+			if ($value == '') {
 				$result .= $currentLabel . ':' . LF;
+				continue;
 			}
+
+			if (strpos($value, LF) !== FALSE) {
+				$result .= $currentLabel . ': ' . LF;
+			} else {
+				$result .= str_pad($currentLabel . ': ', $maxLength + 2, ' ');
+			}
+			$result .= $value . LF;
 		}
 
 		return $result;
