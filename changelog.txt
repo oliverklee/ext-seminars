@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#4165] Cleanup: Change BagBuilder_Registration::limitToAttendee to expect an FE user model
 - [#4159] Fix: In the notification e-mail to the organizers, add a LF before the field data if the field data contains a LF or CR
 - [#4151] Feature: Display the e-mail address and position of the FE user on the second registration page
 - [#4150] Feature: Add two fields "e-mail" and "position" for additional attendees

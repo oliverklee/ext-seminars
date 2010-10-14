@@ -133,24 +133,24 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	}
 
 	/**
-	 * Limits the bag to registrations to the front-end user with the UID
-	 * $feUserUid.
+	 * Limits the bag to registrations to the front-end user $user.
 	 *
-	 * @param integer the front-end user UID to limit the bag for, must be >= 0,
-	 *                set to 0 to remove the limitation
+	 * @param tx_seminars_Model_FrontEndUser $user
+	 *        the front-end user to limit the bag for, set to NULL to remove the
+	 *        limitation
+	 *
+	 * @return void
 	 */
-	public function limitToAttendee($frontEndUserUid) {
-		if ($frontEndUserUid < 0) {
-			throw new Exception('The parameter $frontEndUserUid must be >= 0.');
-		}
-
-		if ($frontEndUserUid == 0) {
+	public function limitToAttendee(
+		tx_seminars_Model_FrontEndUser $user = NULL
+	) {
+		if ($user === NULL) {
 			unset($this->whereClauseParts['attendee']);
 			return;
 		}
 
 		$this->whereClauseParts['attendee'] = 'tx_seminars_attendances' .
-			'.user=' . $frontEndUserUid;
+			'.user = ' . $user->getUid();
 	}
 
 	/**

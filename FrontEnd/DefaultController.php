@@ -1741,7 +1741,10 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				$this->hideColumnsForTheTopicListView();
 				break;
 			case 'my_events':
-				$builder->limitToAttendee($this->getFeUserUid());
+				$builder->limitToAttendee(
+					tx_oelib_FrontEndLoginManager::getInstance()
+						->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')
+				);
 				break;
 			case 'my_vip_events':
 				$groupForDefaultVips = $this->getConfValueInteger(
@@ -2157,7 +2160,10 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			'tx_seminars_BagBuilder_Registration'
 		);
 
-		$registrationBagBuilder->limitToAttendee($this->getFeUserUid());
+		$registrationBagBuilder->limitToAttendee(
+			tx_oelib_FrontEndLoginManager::getInstance()
+				->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')
+		);
 		$registrationBagBuilder->setOrderByEventColumn(
 			$this->getOrderByForListView()
 		);
@@ -2168,8 +2174,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Returns a pi1_frontEndRequirementsList object.
 	 *
-	 * @return tx_seminars_FrontEnd_RequirementsList the object to build the
-	 *                                                  requirements list with
+	 * @return tx_seminars_FrontEnd_RequirementsList
+	 *         the object to build the requirements list with
 	 */
 	private function createRequirementsList() {
 		return tx_oelib_ObjectFactory::make(

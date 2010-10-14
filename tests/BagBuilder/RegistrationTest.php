@@ -470,19 +470,14 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////
-	// Tests for limitToAttendee()
-	////////////////////////////////
+	//////////////////////////////
+	// Tests for limitToAttendee
+	//////////////////////////////
 
-	public function testLimitToAttendeeWithNegativeFeUserUidThrowsException() {
-		$this->setExpectedException(
-			'Exception', 'The parameter $frontEndUserUid must be >= 0.'
-		);
-
-		$this->fixture->limitToAttendee(-1);
-	}
-
-	public function testLimitToAttendeeWithPositiveFeUserUidFindsRegistrationsWithAttendee() {
+	/**
+	 * @test
+	 */
+	public function testLimitToAttendeeWithUserFindsRegistrationsWithAttendee() {
 		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
@@ -492,7 +487,9 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 			array('seminar' => $eventUid, 'user' => $feUserUid)
 		);
 
-		$this->fixture->limitToAttendee($feUserUid);
+		$user = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->find($feUserUid);
+		$this->fixture->limitToAttendee($user);
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -503,11 +500,16 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToAttendeeWithPositiveFeUserUidIgnoresRegistrationsWithoutAttendee() {
+	/**
+	 * @test
+	 */
+	public function testLimitToAttendeeWithUserIgnoresRegistrationsWithoutAttendee() {
 		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord('tx_seminars_seminars');
 
-		$this->fixture->limitToAttendee($feUserUid);
+		$user = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->find($feUserUid);
+		$this->fixture->limitToAttendee($user);
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -517,7 +519,10 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function testLimitToAttendeeWithZeroFeUserUidFindsRegistrationsWithOtherAttendee() {
+	/**
+	 * @test
+	 */
+	public function testLimitToAttendeeWithNullFindsRegistrationsWithOtherAttendee() {
 		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
 		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
 		$feUserUid2 = $this->testingFramework->createFrontEndUser($feUserGroupUid);
@@ -527,8 +532,10 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 			array('seminar' => $eventUid, 'user' => $feUserUid2)
 		);
 
-		$this->fixture->limitToAttendee($feUserUid);
-		$this->fixture->limitToAttendee(0);
+		$user = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->find($feUserUid);
+		$this->fixture->limitToAttendee($user);
+		$this->fixture->limitToAttendee(NULL);
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
