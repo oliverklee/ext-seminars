@@ -102,6 +102,8 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 				'seminar' => $this->seminarUid,
 				'interests' => 'nothing',
 				'expectations' => '',
+				'background_knowledge' => 'foo' . LF . 'bar',
+				'known_from' => 'foo' . CR . 'bar',
 				'user' => $this->feUserUid,
 			)
 		);
@@ -399,6 +401,26 @@ class tx_seminars_registrationchild_testcase extends tx_phpunit_testcase {
 		$this->assertContains(
 			$this->fixture->translate('label_interests'),
 			$this->fixture->dumpAttendanceValues('interests ,expectations')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function dumpAttendanceValuesForDataWithLineFeedStartsDataOnNewLine() {
+		$this->assertContains(
+			LF . 'foo' . LF . 'bar',
+			$this->fixture->dumpAttendanceValues('background_knowledge')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function dumpAttendanceValuesForDataWithCarriageReturnStartsDataOnNewLine() {
+		$this->assertContains(
+			LF . 'foo' . LF . 'bar',
+			$this->fixture->dumpAttendanceValues('known_from')
 		);
 	}
 
