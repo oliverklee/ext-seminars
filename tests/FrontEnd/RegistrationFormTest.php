@@ -897,58 +897,110 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function numberOfSeatsMatchesRegisteredPersonsForZeroSeatsReturnsFalse() {
+	public function validateNumberRegisteredPersonsForZeroSeatsReturnsFalse() {
 		$this->fixture->setFakedFormValue('seats', 0);
 
 		$this->assertFalse(
-			$this->fixture->numberOfSeatsMatchesRegisteredPersons()
+			$this->fixture->validateNumberRegisteredPersons()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function numberOfSeatsMatchesRegisteredPersonsForNegativeSeatsReturnsFalse() {
-		$this->fixture->setFakedFormValue('seats', -4);
+	public function validateNumberRegisteredPersonsForNegativeSeatsReturnsFalse() {
+		$this->fixture->setFakedFormValue('seats', -1);
 
 		$this->assertFalse(
-			$this->fixture->numberOfSeatsMatchesRegisteredPersons()
+			$this->fixture->validateNumberRegisteredPersons()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function numberOfSeatsMatchesRegisteredPersonsForOnePersonAndOneSeatReturnsTrue() {
-		$this->fixture->setFakedFormValue('attendees_names', 'John Doe');
-		$this->fixture->setFakedFormValue('seats', 1);
+	public function validateNumberRegisteredPersonsForOnePersonAndOneSeatReturnsTrue() {
+		$fixture = $this->getMock(
+			'tx_seminars_FrontEnd_RegistrationForm',
+			array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
+			array(), '', FALSE
+		);
+		$fixture->expects($this->any())->method('isFormFieldEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('getNumberOfEnteredPersons')
+			->will($this->returnValue(1));
+		$fixture->setTestMode();
+
+		$fixture->setFakedFormValue('seats', 1);
 
 		$this->assertTrue(
-			$this->fixture->numberOfSeatsMatchesRegisteredPersons()
+			$fixture->validateNumberRegisteredPersons()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function numberOfSeatsMatchesRegisteredPersonsForOnePersonAndTwoSeatsReturnsFalse() {
-		$this->fixture->setFakedFormValue('attendees_names', 'John Doe');
-		$this->fixture->setFakedFormValue('seats', 2);
+	public function validateNumberRegisteredPersonsForOnePersonAndTwoSeatsReturnsFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_FrontEnd_RegistrationForm',
+			array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
+			array(), '', FALSE
+		);
+		$fixture->expects($this->any())->method('isFormFieldEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('getNumberOfEnteredPersons')
+			->will($this->returnValue(1));
+		$fixture->setTestMode();
+
+		$fixture->setFakedFormValue('seats', 2);
 
 		$this->assertFalse(
-			$this->fixture->numberOfSeatsMatchesRegisteredPersons()
+			$fixture->validateNumberRegisteredPersons()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function numberOfSeatsMatchesRegisteredPersonsForTwoPersonsAndOneSeatReturnsFalse() {
-		$this->fixture->setFakedFormValue('attendees_names', 'John' . LF . 'Jane');
-		$this->fixture->setFakedFormValue('seats', 1);
+	public function validateNumberRegisteredPersonsForTwoPersonsAndOneSeatReturnsFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_FrontEnd_RegistrationForm',
+			array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
+			array(), '', FALSE
+		);
+		$fixture->expects($this->any())->method('isFormFieldEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('getNumberOfEnteredPersons')
+			->will($this->returnValue(2));
+		$fixture->setTestMode();
+
+		$fixture->setFakedFormValue('seats', 1);
 
 		$this->assertFalse(
-			$this->fixture->numberOfSeatsMatchesRegisteredPersons()
+			$fixture->validateNumberRegisteredPersons()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function validateNumberRegisteredPersonsForTwoPersonsAndTwoSeatsReturnsTrue() {
+		$fixture = $this->getMock(
+			'tx_seminars_FrontEnd_RegistrationForm',
+			array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
+			array(), '', FALSE
+		);
+		$fixture->expects($this->any())->method('isFormFieldEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('getNumberOfEnteredPersons')
+			->will($this->returnValue(2));
+		$fixture->setTestMode();
+
+		$fixture->setFakedFormValue('seats', 2);
+
+		$this->assertTrue(
+			$fixture->validateNumberRegisteredPersons()
 		);
 	}
 
@@ -994,7 +1046,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function numberOfSeatsMatchesRegisteredPersonsForAttendeesNamesHiddenAndManySeatsReturnsTrue() {
+	public function validateNumberRegisteredPersonsForAttendeesNamesHiddenAndManySeatsReturnsTrue() {
 		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
 				'showRegistrationFields' => 'seats',
@@ -1013,7 +1065,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$fixture->setFakedFormValue('seats', 8);
 
 		$this->assertTrue(
-			$fixture->numberOfSeatsMatchesRegisteredPersons()
+			$fixture->validateNumberRegisteredPersons()
 		);
 
 		$fixture->__destruct();

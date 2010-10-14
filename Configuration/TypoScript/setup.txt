@@ -2891,7 +2891,7 @@ plugin.tx_seminars_pi1 {
 							30 = validator:STANDARD
 							30.userobj {
 								extension = this
-								method = numberOfSeatsMatchesRegisteredPersons
+								method = validateNumberRegisteredPersons
 								message.userobj {
 									extension = this
 									method = getMessageForSeatsNotMatchingRegisteredPersons
@@ -3536,7 +3536,7 @@ plugin.tx_seminars_pi1 {
 							30 = validator:STANDARD
 							30.userobj {
 								extension = this
-								method = numberOfSeatsMatchesRegisteredPersons
+								method = validateNumberRegisteredPersons
 								message.userobj {
 									extension = this
 									method = getMessageForSeatsNotMatchingRegisteredPersons

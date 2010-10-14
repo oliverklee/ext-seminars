@@ -1649,13 +1649,14 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 
 	/**
 	 * Checks whether the number of selected seats matches the number of
-	 * registered persons (from the "attendees names" text area and the
-	 * "myself" checkbox).
+	 * registered persons (including the FE user themselves as well as the
+	 * additional attendees).
 	 *
-	 * @return boolean TRUE if the number of seats matches the number of
-	 *                 registered persons, FALSE otherwise
+	 * @return boolean
+	 *         TRUE if the number of seats matches the number of registered
+	 *         persons, FALSE otherwise
 	 */
-	public function numberOfSeatsMatchesRegisteredPersons() {
+	public function validateNumberRegisteredPersons() {
 		if (intval($this->getFormValue('seats')) <= 0) {
 			return FALSE;
 		}
