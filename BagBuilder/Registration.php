@@ -25,12 +25,13 @@
 /**
  * Class tx_seminars_BagBuilder_Registration for the "seminars" extension.
  *
- * This builder class creates customized registrationbag objects.
+ * This builder class creates customized tx_seminars_Bag_Registration objects.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstract {
 	/**
@@ -135,6 +136,10 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	/**
 	 * Limits the bag to registrations to the front-end user $user.
 	 *
+	 * These registration will either be those for which $user has signed up
+	 * himself, or for which they have been entered as "additional registered
+	 * persons".
+	 *
 	 * @param tx_seminars_Model_FrontEndUser $user
 	 *        the front-end user to limit the bag for, set to NULL to remove the
 	 *        limitation
@@ -149,8 +154,13 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 			return;
 		}
 
-		$this->whereClauseParts['attendee'] = 'tx_seminars_attendances' .
-			'.user = ' . $user->getUid();
+		$whereClause = 'tx_seminars_attendances.user = ' . $user->getUid();
+		if ($user->getRegistration() !== NULL) {
+			$whereClause .= ' OR tx_seminars_attendances.uid = ' .
+				$user->getRegistration()->getUid();
+		}
+
+		$this->whereClauseParts['attendee'] = $whereClause;
 	}
 
 	/**

@@ -504,9 +504,62 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
+	public function limitToAttendeeWithUserFindsRegistrationsWithUserAsAdditionalRegisteredPerson() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars'
+		);
+		$registrationUid = $this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array('seminar' => $eventUid, 'additional_persons' => 1)
+		);
+		$feUserUid = $this->testingFramework->createFrontEndUser(
+			'', array('tx_seminars_registration' => $registrationUid)
+		);
+
+		$user = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->find($feUserUid);
+		$this->fixture->limitToAttendee($user);
+		$bag = $this->fixture->build();
+
+		$this->assertEquals(
+			$registrationUid,
+			$bag->current()->getUid()
+		);
+
+		$bag->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
 	public function limitToAttendeeWithUserIgnoresRegistrationsWithoutAttendee() {
 		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord('tx_seminars_seminars');
+
+		$user = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->find($feUserUid);
+		$this->fixture->limitToAttendee($user);
+		$bag = $this->fixture->build();
+
+		$this->assertTrue(
+			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function limitToAttendeeWithUserIgnoresRegistrationsWithOtherAttendee() {
+		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
+		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$feUserUid2 = $this->testingFramework->createFrontEndUser($feUserGroupUid);
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+		$registrationUid = $this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array('seminar' => $eventUid, 'user' => $feUserUid2)
+		);
 
 		$user = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
 			->find($feUserUid);
