@@ -2891,7 +2891,7 @@ plugin.tx_seminars_pi1 {
 							30 = validator:STANDARD
 							30.userobj {
 								extension = this
-								method = validateNumberRegisteredPersons
+								method = validateNumberOfRegisteredPersons
 								message.userobj {
 									extension = this
 									method = getMessageForSeatsNotMatchingRegisteredPersons
@@ -2939,6 +2939,14 @@ plugin.tx_seminars_pi1 {
 					structured_attendees_names = renderlet:HIDDEN
 					structured_attendees_names {
 						name = structured_attendees_names
+						validators {
+							10 = validator:STANDARD
+							10.userobj {
+								extension = this
+								method = validateAdditionalPersonsEMailAddresses
+								message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_invalidEMailAddress
+							}
+						}
 					}
 
 					kids = renderlet:LISTBOX
@@ -3536,7 +3544,7 @@ plugin.tx_seminars_pi1 {
 							30 = validator:STANDARD
 							30.userobj {
 								extension = this
-								method = validateNumberRegisteredPersons
+								method = validateNumberOfRegisteredPersons
 								message.userobj {
 									extension = this
 									method = getMessageForSeatsNotMatchingRegisteredPersons
@@ -3582,6 +3590,14 @@ plugin.tx_seminars_pi1 {
 					structured_attendees_names = renderlet:HIDDEN
 					structured_attendees_names {
 						name = structured_attendees_names
+						validators {
+							10 = validator:STANDARD
+							10.userobj {
+								extension = this
+								method = validateAdditionalPersonsEMailAddresses
+								message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_invalidEMailAddress
+							}
+						}
 					}
 
 					kids = renderlet:HIDDEN

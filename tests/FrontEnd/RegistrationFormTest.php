@@ -724,9 +724,9 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////////////////////////////////////////
-	// Tests concerning the validation of the number of persons to register
-	/////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////
+	// Tests concerning getAdditionalRegisteredPersonsData
+	////////////////////////////////////////////////////////
 
 	/**
 	 * @test
@@ -824,6 +824,11 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			$this->fixture->getAdditionalRegisteredPersonsData()
 		);
 	}
+
+
+	/////////////////////////////////////////////////////////////////////////
+	// Tests concerning the validation of the number of persons to register
+	/////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * @test
@@ -936,29 +941,29 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function validateNumberRegisteredPersonsForZeroSeatsReturnsFalse() {
+	public function validateNumberOfRegisteredPersonsForZeroSeatsReturnsFalse() {
 		$this->fixture->setFakedFormValue('seats', 0);
 
 		$this->assertFalse(
-			$this->fixture->validateNumberRegisteredPersons()
+			$this->fixture->validateNumberOfRegisteredPersons()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function validateNumberRegisteredPersonsForNegativeSeatsReturnsFalse() {
+	public function validateNumberOfRegisteredPersonsForNegativeSeatsReturnsFalse() {
 		$this->fixture->setFakedFormValue('seats', -1);
 
 		$this->assertFalse(
-			$this->fixture->validateNumberRegisteredPersons()
+			$this->fixture->validateNumberOfRegisteredPersons()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function validateNumberRegisteredPersonsForOnePersonAndOneSeatReturnsTrue() {
+	public function validateNumberOfRegisteredPersonsForOnePersonAndOneSeatReturnsTrue() {
 		$fixture = $this->getMock(
 			'tx_seminars_FrontEnd_RegistrationForm',
 			array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
@@ -973,14 +978,14 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$fixture->setFakedFormValue('seats', 1);
 
 		$this->assertTrue(
-			$fixture->validateNumberRegisteredPersons()
+			$fixture->validateNumberOfRegisteredPersons()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function validateNumberRegisteredPersonsForOnePersonAndTwoSeatsReturnsFalse() {
+	public function validateNumberOfRegisteredPersonsForOnePersonAndTwoSeatsReturnsFalse() {
 		$fixture = $this->getMock(
 			'tx_seminars_FrontEnd_RegistrationForm',
 			array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
@@ -995,14 +1000,14 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$fixture->setFakedFormValue('seats', 2);
 
 		$this->assertFalse(
-			$fixture->validateNumberRegisteredPersons()
+			$fixture->validateNumberOfRegisteredPersons()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function validateNumberRegisteredPersonsForTwoPersonsAndOneSeatReturnsFalse() {
+	public function validateNumberOfRegisteredPersonsForTwoPersonsAndOneSeatReturnsFalse() {
 		$fixture = $this->getMock(
 			'tx_seminars_FrontEnd_RegistrationForm',
 			array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
@@ -1017,14 +1022,14 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$fixture->setFakedFormValue('seats', 1);
 
 		$this->assertFalse(
-			$fixture->validateNumberRegisteredPersons()
+			$fixture->validateNumberOfRegisteredPersons()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function validateNumberRegisteredPersonsForTwoPersonsAndTwoSeatsReturnsTrue() {
+	public function validateNumberOfRegisteredPersonsForTwoPersonsAndTwoSeatsReturnsTrue() {
 		$fixture = $this->getMock(
 			'tx_seminars_FrontEnd_RegistrationForm',
 			array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
@@ -1039,7 +1044,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$fixture->setFakedFormValue('seats', 2);
 
 		$this->assertTrue(
-			$fixture->validateNumberRegisteredPersons()
+			$fixture->validateNumberOfRegisteredPersons()
 		);
 	}
 
@@ -1095,7 +1100,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function validateNumberRegisteredPersonsForAttendeesNamesHiddenAndManySeatsReturnsTrue() {
+	public function validateNumberOfRegisteredPersonsForAttendeesNamesHiddenAndManySeatsReturnsTrue() {
 		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
 				'showRegistrationFields' => 'seats',
@@ -1114,10 +1119,212 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$fixture->setFakedFormValue('seats', 8);
 
 		$this->assertTrue(
-			$fixture->validateNumberRegisteredPersons()
+			$fixture->validateNumberOfRegisteredPersons()
 		);
 
 		$fixture->__destruct();
+	}
+
+
+	/////////////////////////////////////////////////////////////
+	// Tests concerning validateAdditionalPersonsEMailAddresses
+	/////////////////////////////////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function validateAdditionalPersonsEMailAddressesForDisabledFrontEndUserCreationReturnsTrue() {
+		$fixture = $this->getMock(
+			'tx_seminars_FrontEnd_RegistrationForm',
+			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
+			array(), '', FALSE
+		);
+		$fixture->expects($this->any())->method('isFormFieldEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('getAdditionalRegisteredPersonsData')
+			->will($this->returnValue(array()));
+		$fixture->setTestMode();
+		$fixture->setConfigurationValue(
+			'createAdditionalAttendeesAsFrontEndUsers', FALSE
+		);
+
+		$this->assertTrue(
+			$fixture->validateAdditionalPersonsEMailAddresses()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function validateAdditionalPersonsEMailAddressesForDisabledFormFieldReturnsTrue() {
+		$fixture = $this->getMock(
+			'tx_seminars_FrontEnd_RegistrationForm',
+			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
+			array(), '', FALSE
+		);
+		$fixture->expects($this->any())->method('isFormFieldEnabled')
+			->will($this->returnValue(FALSE));
+		$fixture->expects($this->any())->method('getAdditionalRegisteredPersonsData')
+			->will($this->returnValue(array()));
+		$fixture->setTestMode();
+		$fixture->setConfigurationValue(
+			'createAdditionalAttendeesAsFrontEndUsers', TRUE
+		);
+
+		$this->assertTrue(
+			$fixture->validateAdditionalPersonsEMailAddresses()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function validateAdditionalPersonsEMailAddressesForNoPersonsReturnsTrue() {
+		$fixture = $this->getMock(
+			'tx_seminars_FrontEnd_RegistrationForm',
+			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
+			array(), '', FALSE
+		);
+		$fixture->expects($this->any())->method('isFormFieldEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('getAdditionalRegisteredPersonsData')
+			->will($this->returnValue(array()));
+		$fixture->setTestMode();
+		$fixture->setConfigurationValue(
+			'createAdditionalAttendeesAsFrontEndUsers', TRUE
+		);
+
+		$this->assertTrue(
+			$fixture->validateAdditionalPersonsEMailAddresses()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function validateAdditionalPersonsEMailAddressesForOneValidEMailAddressReturnsTrue() {
+		$fixture = $this->getMock(
+			'tx_seminars_FrontEnd_RegistrationForm',
+			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
+			array(), '', FALSE
+		);
+		$fixture->expects($this->any())->method('isFormFieldEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('getAdditionalRegisteredPersonsData')
+			->will($this->returnValue(
+				array(array('John', 'Doe', '', 'john@example.com'))
+			));
+		$fixture->setTestMode();
+		$fixture->setConfigurationValue(
+			'createAdditionalAttendeesAsFrontEndUsers', TRUE
+		);
+
+		$this->assertTrue(
+			$fixture->validateAdditionalPersonsEMailAddresses()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function validateAdditionalPersonsEMailAddressesForOneInvalidEMailAddressReturnsFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_FrontEnd_RegistrationForm',
+			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
+			array(), '', FALSE
+		);
+		$fixture->expects($this->any())->method('isFormFieldEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('getAdditionalRegisteredPersonsData')
+			->will($this->returnValue(
+				array(array('John', 'Doe', '', 'potato salad!'))
+			));
+		$fixture->setTestMode();
+		$fixture->setConfigurationValue(
+			'createAdditionalAttendeesAsFrontEndUsers', TRUE
+		);
+
+		$this->assertFalse(
+			$fixture->validateAdditionalPersonsEMailAddresses()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function validateAdditionalPersonsEMailAddressesForOneEmptyAddressReturnsFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_FrontEnd_RegistrationForm',
+			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
+			array(), '', FALSE
+		);
+		$fixture->expects($this->any())->method('isFormFieldEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('getAdditionalRegisteredPersonsData')
+			->will($this->returnValue(
+				array(array('John', 'Doe', '', ''))
+			));
+		$fixture->setTestMode();
+		$fixture->setConfigurationValue(
+			'createAdditionalAttendeesAsFrontEndUsers', TRUE
+		);
+
+		$this->assertFalse(
+			$fixture->validateAdditionalPersonsEMailAddresses()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function validateAdditionalPersonsEMailAddressesForOneMissingAddressReturnsFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_FrontEnd_RegistrationForm',
+			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
+			array(), '', FALSE
+		);
+		$fixture->expects($this->any())->method('isFormFieldEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('getAdditionalRegisteredPersonsData')
+			->will($this->returnValue(
+				array(array('John', 'Doe', ''))
+			));
+		$fixture->setTestMode();
+		$fixture->setConfigurationValue(
+			'createAdditionalAttendeesAsFrontEndUsers', TRUE
+		);
+
+		$this->assertFalse(
+			$fixture->validateAdditionalPersonsEMailAddresses()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function validateAdditionalPersonsEMailAddressesForOneValidAndOneInvalidEMailAddressReturnsFalse() {
+		$fixture = $this->getMock(
+			'tx_seminars_FrontEnd_RegistrationForm',
+			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
+			array(), '', FALSE
+		);
+		$fixture->expects($this->any())->method('isFormFieldEnabled')
+			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('getAdditionalRegisteredPersonsData')
+			->will($this->returnValue(
+				array(
+					array('John', 'Doe', '', 'john@example.com'),
+					array('Jane', 'Doe', '', 'tomato salad!'),
+				)
+			));
+		$fixture->setTestMode();
+		$fixture->setConfigurationValue(
+			'createAdditionalAttendeesAsFrontEndUsers', TRUE
+		);
+
+		$this->assertFalse(
+			$fixture->validateAdditionalPersonsEMailAddresses()
+		);
 	}
 
 

@@ -1679,7 +1679,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *         TRUE if the number of seats matches the number of registered
 	 *         persons, FALSE otherwise
 	 */
-	public function validateNumberRegisteredPersons() {
+	public function validateNumberOfRegisteredPersons() {
 		if (intval($this->getFormValue('seats')) <= 0) {
 			return FALSE;
 		}
@@ -1689,6 +1689,43 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 
 		return (intval($this->getFormValue('seats'))
 			== $this->getNumberOfEnteredPersons());
+	}
+
+	/**
+	 * Validates the e-mail addresses of additional persons for non-emptiness
+	 * and validity.
+	 *
+	 * If the entering of additional persons as FE user records is disabled,
+	 * this function will always return TRUE.
+	 *
+	 * @return boolean
+	 *         TRUE if either additional persons as FE users are disabled or
+	 *         all entered e-mail addresses are non-empty and valid,
+	 *         FALSE otherwise
+	 */
+	public function validateAdditionalPersonsEMailAddresses() {
+		if (!$this->isFormFieldEnabled('attendees_names')) {
+			return TRUE;
+		}
+		if (!$this->getConfValueBoolean(
+			'createAdditionalAttendeesAsFrontEndUsers', 's_registration'
+		)) {
+			return TRUE;
+		}
+
+		$isValid = TRUE;
+		$allPersonsData = $this->getAdditionalRegisteredPersonsData();
+
+		foreach ($allPersonsData as $onePersonData) {
+			if (!isset($onePersonData[3])
+				|| !t3lib_div::validEmail($onePersonData[3])
+			) {
+				$isValid = FALSE;
+				break;
+			}
+		}
+
+		return $isValid;
 	}
 
 	/**

@@ -361,6 +361,7 @@
 			<label index="message_moreAttendeesThanSeats_informal">Please register only as many persons as you are booking seats.</label>
 			<label index="message_lessAttendeesThanSeats_formal">Please provide the names of all persons to register.</label>
 			<label index="message_lessAttendeesThanSeats_informal">Please provide the names of all persons to register.</label>
+			<label index="message_invalidEMailAddress">Please enter a valid e-mail address for each person.</label>
 			<label index="message_noKidsNumber">Please enter only numbers for the number of kids.</label>
 			<label index="message_choosePrice">Please select a price.</label>
 			<label index="message_chooseMethodOfPayment">Please select a method of payment.</label>
@@ -974,6 +975,7 @@
 			<label index="message_moreAttendeesThanSeats_informal">Bitte melde nur so viele Personen an, wie du Plätze buchst.</label>
 			<label index="message_lessAttendeesThanSeats_formal">Bitte geben Sie die Namen aller anzumeldenden Personen an.</label>
 			<label index="message_lessAttendeesThanSeats_informal">Bitte gib die Namen aller anzumeldenden Personen an.</label>
+			<label index="message_invalidEMailAddress">Bitte geben Sie für alle angemeldeten Personen eine gültige E-Mail-Adresse an.</label>
 			<label index="message_noKidsNumber">Bitte geben Sie nur Zahlen für die Anzahl der Kinder ein.</label>
 			<label index="message_choosePrice">Bitte wählen Sie einen Preis aus.</label>
 			<label index="message_chooseMethodOfPayment">Bitte wählen Sie eine Zahlungsart aus.</label>
@@ -2604,6 +2606,7 @@
 			<label index="message_moreAttendeesThanSeats_informal" type="integer">187630531</label>
 			<label index="message_lessAttendeesThanSeats_formal" type="integer">54745285</label>
 			<label index="message_lessAttendeesThanSeats_informal" type="integer">54745285</label>
+			<label index="message_invalidEMailAddress" type="integer">163118308</label>
 			<label index="message_noKidsNumber" type="integer">211979974</label>
 			<label index="message_choosePrice" type="integer">38008569</label>
 			<label index="message_chooseMethodOfPayment" type="integer">209557761</label>
@@ -4045,6 +4048,7 @@
 			<label index="message_moreAttendeesThanSeats_informal">Please register only as many persons as you are booking seats.</label>
 			<label index="message_lessAttendeesThanSeats_formal">Please provide the names of all persons to register.</label>
 			<label index="message_lessAttendeesThanSeats_informal">Please provide the names of all persons to register.</label>
+			<label index="message_invalidEMailAddress">Please enter a valid e-mail address for each person.</label>
 			<label index="message_noKidsNumber">Please enter only numbers for the number of kids.</label>
 			<label index="message_choosePrice">Please select a price.</label>
 			<label index="message_chooseMethodOfPayment">Please select a method of payment.</label>
