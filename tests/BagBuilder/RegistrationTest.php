@@ -32,6 +32,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 	/**
@@ -477,7 +478,7 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function testLimitToAttendeeWithUserFindsRegistrationsWithAttendee() {
+	public function limitToAttendeeWithUserFindsRegistrationsWithAttendee() {
 		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
@@ -503,7 +504,7 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function testLimitToAttendeeWithUserIgnoresRegistrationsWithoutAttendee() {
+	public function limitToAttendeeWithUserIgnoresRegistrationsWithoutAttendee() {
 		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord('tx_seminars_seminars');
 
@@ -522,7 +523,7 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function testLimitToAttendeeWithNullFindsRegistrationsWithOtherAttendee() {
+	public function limitToAttendeeWithNullFindsRegistrationsWithOtherAttendee() {
 		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
 		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
 		$feUserUid2 = $this->testingFramework->createFrontEndUser($feUserGroupUid);
