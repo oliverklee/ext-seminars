@@ -1287,5 +1287,133 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$event->__destruct();
 		$fixture->__destruct();
 	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsDisabledNotContainsTitle() {
+		$this->testingFramework->createAndLoginFrontEndUser(
+			'',
+			array('name' => 'Jane Doe', 'title' => 'facility manager')
+		);
+
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+			array(
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
+				'showRegistrationFields' => 'attendees_names,registered_themselves',
+				'createAdditionalAttendeesAsFrontEndUsers' => FALSE,
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setTestMode();
+
+		$event = new tx_seminars_seminar($this->seminarUid);
+		$fixture->setSeminar($event);
+		$fixture->setFakedFormValue('registered_themselves', '1');
+
+		$this->assertNotContains(
+			'facility manager',
+			$fixture->getRegistrationData()
+		);
+
+		$event->__destruct();
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsEnabledContainsTitle() {
+		$this->testingFramework->createAndLoginFrontEndUser(
+			'',
+			array('name' => 'Jane Doe', 'title' => 'facility manager')
+		);
+
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+			array(
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
+				'showRegistrationFields' => 'attendees_names,registered_themselves',
+				'createAdditionalAttendeesAsFrontEndUsers' => TRUE,
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setTestMode();
+
+		$event = new tx_seminars_seminar($this->seminarUid);
+		$fixture->setSeminar($event);
+		$fixture->setFakedFormValue('registered_themselves', '1');
+
+		$this->assertContains(
+			'facility manager',
+			$fixture->getRegistrationData()
+		);
+
+		$event->__destruct();
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsDisabledNotContainsEMailAddress() {
+		$this->testingFramework->createAndLoginFrontEndUser(
+			'',
+			array('name' => 'Jane Doe', 'email' => 'jane@example.com')
+		);
+
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+			array(
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
+				'showRegistrationFields' => 'attendees_names,registered_themselves',
+				'createAdditionalAttendeesAsFrontEndUsers' => FALSE,
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setTestMode();
+
+		$event = new tx_seminars_seminar($this->seminarUid);
+		$fixture->setSeminar($event);
+		$fixture->setFakedFormValue('registered_themselves', '1');
+
+		$this->assertNotContains(
+			'jane@example.com',
+			$fixture->getRegistrationData()
+		);
+
+		$event->__destruct();
+		$fixture->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsEnabledContainsEMailAddress() {
+		$this->testingFramework->createAndLoginFrontEndUser(
+			'',
+			array('name' => 'Jane Doe', 'email' => 'jane@example.com')
+		);
+
+		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+			array(
+				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
+				'showRegistrationFields' => 'attendees_names,registered_themselves',
+				'createAdditionalAttendeesAsFrontEndUsers' => TRUE,
+			),
+			$GLOBALS['TSFE']->cObj
+		);
+		$fixture->setTestMode();
+
+		$event = new tx_seminars_seminar($this->seminarUid);
+		$fixture->setSeminar($event);
+		$fixture->setFakedFormValue('registered_themselves', '1');
+
+		$this->assertContains(
+			'jane@example.com',
+			$fixture->getRegistrationData()
+		);
+
+		$event->__destruct();
+		$fixture->__destruct();
+	}
 }
 ?>

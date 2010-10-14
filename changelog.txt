@@ -1,4 +1,5 @@
 1.0.0 (currently working on)
+- [#4151] Feature: Display the e-mail address and position of the FE user on the second registration page
 - [#4150] Feature: Add two fields "e-mail" and "position" for additional attendees
 - [#4149] Feature: Add some configuration to TS Setup and the flexforms
 - [#4144] Fix: Test crash and SQL error in the pi2 test

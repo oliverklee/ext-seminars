@@ -233,7 +233,7 @@
 			<label index="label_lastname">Last name:</label>
 			<label index="label_position">Position:</label>
 			<label index="label_register_seats">Seats to book:</label>
-			<label index="label_attendees_names">Names of the persons to register:</label>
+			<label index="label_attendees_names">Registered persons:</label>
 			<label index="label_kids">Number of kids:</label>
 			<label index="label_legend_payment">Payment</label>
 			<label index="label_account_number">Account number:</label>
@@ -846,7 +846,7 @@
 			<label index="label_lastname">Nachname:</label>
 			<label index="label_position">Position:</label>
 			<label index="label_register_seats">Zu buchende Plätze:</label>
-			<label index="label_attendees_names">Namen der anzumeldenden Personen:</label>
+			<label index="label_attendees_names">Angemeldete Personen:</label>
 			<label index="label_kids">Anzahl Kinder:</label>
 			<label index="label_legend_payment">Bezahlung</label>
 			<label index="label_account_number">Kontonummer:</label>
@@ -2479,7 +2479,7 @@
 			<label index="label_lastname" type="integer">199614645</label>
 			<label index="label_position" type="integer">247557776</label>
 			<label index="label_register_seats" type="integer">13486143</label>
-			<label index="label_attendees_names" type="integer">57835729</label>
+			<label index="label_attendees_names" type="integer">231379527</label>
 			<label index="label_kids" type="integer">7953511</label>
 			<label index="label_legend_payment" type="integer">205863499</label>
 			<label index="label_account_number" type="integer">15650306</label>
@@ -3918,7 +3918,7 @@
 			<label index="label_lastname">Last name:</label>
 			<label index="label_position">Position:</label>
 			<label index="label_register_seats">Seats to book:</label>
-			<label index="label_attendees_names">Names of the persons to register:</label>
+			<label index="label_attendees_names">Registered persons:</label>
 			<label index="label_kids">Number of kids:</label>
 			<label index="label_legend_payment">Payment</label>
 			<label index="label_account_number">Account number:</label>

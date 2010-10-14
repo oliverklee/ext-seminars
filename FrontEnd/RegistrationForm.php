@@ -778,11 +778,9 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 			'background_knowledge',
 			'known_from',
 			'notes'
-		) as $currentKey) {
-			if ($this->isFormFieldEnabled($currentKey)) {
-				$result .= $this->getFormDataItemForConfirmation(
-					$currentKey
-				);
+		) as $key) {
+			if ($this->isFormFieldEnabled($key)) {
+				$result .= $this->getFormDataItemForConfirmation($key);
 			}
 		}
 
@@ -844,10 +842,23 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 				if ($this->isFormFieldEnabled('registered_themselves')
 					&& ($this->getFormValue('registered_themselves') == '1')
 				) {
-					$name = tx_oelib_FrontEndLoginManager::getInstance()
-						->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')
-						->getName();
-					$currentFormData = $name . CR . $currentFormData;
+					$user = tx_oelib_FrontEndLoginManager::getInstance()
+						->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+					$userData = $user->getName();
+
+					if ($this->getConfValueBoolean(
+						'createAdditionalAttendeesAsFrontEndUsers',
+						's_registration'
+					)) {
+						if ($user->hasJobTitle()) {
+							$userData .= ', ' . $user->getJobTitle();
+						}
+						if ($user->hasEMailAddress()) {
+							$userData .= ', ' . $user->getEMailAddress();
+						}
+					}
+
+					$currentFormData = $userData . CR . $currentFormData;
 				}
 				break;
 			default:
