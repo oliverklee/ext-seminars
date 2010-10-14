@@ -1626,6 +1626,33 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	}
 
 	/**
+	 * Returns the data of the additional registered persons.
+	 *
+	 * The inner array will have the following format:
+	 * 0 => first name
+	 * 1 => last name
+	 * 2 => job title
+	 * 3 => e-mail address
+	 *
+	 * @return array<array>
+	 *         the entered person's data, will be empty if no additional
+	 *         persons have been registered
+	 */
+	public function getAdditionalRegisteredPersonsData() {
+		$jsonEncodedData = $this->getFormValue('structured_attendees_names');
+		if (!is_string($jsonEncodedData) || empty($jsonEncodedData)) {
+			return array();
+		}
+
+		$result = json_decode($jsonEncodedData, TRUE);
+		if (!is_array($result)) {
+			$result = array();
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Gets the number of entered persons in the form by counting the lines
 	 * in the "additional attendees names" field and the state of the
 	 * "register myself" checkbox.
@@ -1639,12 +1666,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 		} else {
 			$themselves = 1;
 		}
-		$names = t3lib_div::trimExplode(
-			LF, (string) $this->getFormValue('attendees_names'), TRUE
-		);
-		$namesCounter = count($names);
 
-		return $themselves + $namesCounter;
+		return $themselves + count($this->getAdditionalRegisteredPersonsData());
 	}
 
 	/**

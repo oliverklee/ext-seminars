@@ -731,6 +731,103 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
+	public function getAdditionalRegisteredPersonsDataForNoDataReturnsEmptyArray() {
+		$this->assertEquals(
+			array(),
+			$this->fixture->getAdditionalRegisteredPersonsData()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAdditionalRegisteredPersonsDataForNoEmptyReturnsEmptyArray() {
+		$this->fixture->setFakedFormValue('structured_attendees_names', '');
+
+		$this->assertEquals(
+			array(),
+			$this->fixture->getAdditionalRegisteredPersonsData()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAdditionalRegisteredPersonsDataCanReturnDataOfOnePerson() {
+		$this->fixture->setFakedFormValue(
+			'structured_attendees_names',
+			'[["John", "Doe", "Key account", "john@example.com"]]'
+		);
+
+		$this->assertEquals(
+			array(
+				array(
+					0 => 'John',
+					1 => 'Doe',
+					2 => 'Key account',
+					3 => 'john@example.com',
+				),
+			),
+			$this->fixture->getAdditionalRegisteredPersonsData()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAdditionalRegisteredPersonsDataCanReturnDataOfTwoPersons() {
+		$this->fixture->setFakedFormValue(
+			'structured_attendees_names',
+			'[["John", "Doe", "Key account", "john@example.com"],' .
+				'["Jane", "Doe", "Sales", "jane@example.com"]]'
+		);
+
+		$this->assertEquals(
+			array(
+				array(
+					0 => 'John',
+					1 => 'Doe',
+					2 => 'Key account',
+					3 => 'john@example.com',
+				),
+				array(
+					0 => 'Jane',
+					1 => 'Doe',
+					2 => 'Sales',
+					3 => 'jane@example.com',
+				),
+			),
+			$this->fixture->getAdditionalRegisteredPersonsData()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAdditionalRegisteredPersonsDataForNonArrayDataReturnsEmptyArray() {
+		$this->fixture->setFakedFormValue('structured_attendees_names', '"Foo"');
+
+		$this->assertEquals(
+			array(),
+			$this->fixture->getAdditionalRegisteredPersonsData()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAdditionalRegisteredPersonsDataForInvalidJsonReturnsEmptyArray() {
+		$this->fixture->setFakedFormValue('structured_attendees_names', 'argh');
+
+		$this->assertEquals(
+			array(),
+			$this->fixture->getAdditionalRegisteredPersonsData()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getNumberOfEnteredPersonsForEmptyFormDataReturnsZero() {
 		$this->assertEquals(
 			0,
@@ -792,45 +889,10 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getNumberOfEnteredPersonsForOneWordAsNamesReturnsOne() {
-		$this->fixture->setFakedFormValue('attendees_names', 'John');
-
-		$this->assertEquals(
-			1,
-			$this->fixture->getNumberOfEnteredPersons()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getNumberOfEnteredPersonsForOneWordWithLeadingLfAsNamesReturnsOne() {
-		$this->fixture->setFakedFormValue('attendees_names', LF . 'John');
-
-		$this->assertEquals(
-			1,
-			$this->fixture->getNumberOfEnteredPersons()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getNumberOfEnteredPersonsForOneWordWithTrailingLfAsNamesReturnsOne() {
-		$this->fixture->setFakedFormValue('attendees_names', 'John' . LF);
-
-		$this->assertEquals(
-			1,
-			$this->fixture->getNumberOfEnteredPersons()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getNumberOfEnteredPersonsForOneWordWithTrailingSpaceLineAsNamesReturnsOne() {
+	public function getNumberOfEnteredPersonsForOneAdditionalPersonReturnsOne() {
 		$this->fixture->setFakedFormValue(
-			'attendees_names', 'John' . LF . '  ' . LF
+			'structured_attendees_names',
+			'[["John", "Doe", "Key account", "john@example.com"]]'
 		);
 
 		$this->assertEquals(
@@ -842,21 +904,11 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getNumberOfEnteredPersonsForTwoWordsAsNamesReturnsOne() {
-		$this->fixture->setFakedFormValue('attendees_names', 'John Doe');
-
-		$this->assertEquals(
-			1,
-			$this->fixture->getNumberOfEnteredPersons()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getNumberOfEnteredPersonsForTwoLinesSeparatedByLfAsNamesReturnsTwo() {
+	public function getNumberOfEnteredPersonsForTwoAdditionalPersonsReturnsTwo() {
 		$this->fixture->setFakedFormValue(
-			'attendees_names', 'John Doe' . LF . 'Jane Doe'
+			'structured_attendees_names',
+			'[["John", "Doe", "Key account", "john@example.com"],' .
+				'["Jane", "Doe", "Sales", "jane@example.com"]]'
 		);
 
 		$this->assertEquals(
@@ -868,23 +920,10 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getNumberOfEnteredPersonsForTwoLinesSeparatedByCrLfAsNamesReturnsTwo() {
+	public function getNumberOfEnteredPersonsForSelfRegistrationAndOneAdditionalPersonReturnsTwo() {
 		$this->fixture->setFakedFormValue(
-			'attendees_names', 'John Doe' . CRLF . 'Jane Doe'
-		);
-
-		$this->assertEquals(
-			2,
-			$this->fixture->getNumberOfEnteredPersons()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getNumberOfEnteredPersonsForSelfRegistrationAndOneNameReturnsTwo() {
-		$this->fixture->setFakedFormValue(
-			'attendees_names', 'John Doe' . LF . '  ' . LF
+			'structured_attendees_names',
+			'[["John", "Doe", "Key account", "john@example.com"]]'
 		);
 		$this->fixture->setFakedFormValue('registered_themselves', 1);
 
@@ -1008,7 +1047,10 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getMessageForSeatsNotMatchingRegisteredPersonsForOnePersonAndOneSeatReturnsEmptyString() {
-		$this->fixture->setFakedFormValue('attendees_names', 'John Doe');
+		$this->fixture->setFakedFormValue(
+			'structured_attendees_names',
+			'[["John", "Doe", "Key account", "john@example.com"]]'
+		);
 		$this->fixture->setFakedFormValue('seats', 1);
 
 		$this->assertEquals(
@@ -1021,7 +1063,10 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getMessageForSeatsNotMatchingRegisteredPersonsForOnePersonAndTwoSeatsReturnsMessage() {
-		$this->fixture->setFakedFormValue('attendees_names', 'John Doe');
+		$this->fixture->setFakedFormValue(
+			'structured_attendees_names',
+			'[["John", "Doe", "Key account", "john@example.com"]]'
+		);
 		$this->fixture->setFakedFormValue('seats', 2);
 
 		$this->assertEquals(
@@ -1034,7 +1079,11 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getMessageForSeatsNotMatchingRegisteredPersonsForTwoPersonsAndOneSeatReturnsMessage() {
-		$this->fixture->setFakedFormValue('attendees_names', 'John' . LF . 'Jane');
+		$this->fixture->setFakedFormValue(
+			'structured_attendees_names',
+			'[["John", "Doe", "Key account", "john@example.com"],' .
+				'["Jane", "Doe", "Sales", "jane@example.com"]]'
+		);
 		$this->fixture->setFakedFormValue('seats', 1);
 
 		$this->assertEquals(
