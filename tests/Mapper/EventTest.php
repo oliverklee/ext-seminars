@@ -540,11 +540,9 @@ class tx_seminars_Mapper_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getOrganizingPartnersReturnsListInstance() {
-		$uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-
 		$this->assertTrue(
 			$this->fixture->getLoadedTestingModel(array())->getOrganizingPartners()
-			instanceof tx_oelib_List
+				instanceof tx_oelib_List
 		);
 	}
 

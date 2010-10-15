@@ -1781,7 +1781,7 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 				'seminar' => $seminarUid,
 			)
 		);
-		$queueRegistrationUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
 				'user' => $userUid,

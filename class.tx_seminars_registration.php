@@ -554,16 +554,6 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	}
 
 	/**
-	 * Gets the attendee's e-mail address in the format
-	 * "john.doe@example.com".
-	 *
-	 * @return string the attendee's e-mail address
-	 */
-	private function getUserEmail() {
-		return $this->getUserData('email');
-	}
-
-	/**
 	 * Gets the attendee's name and e-mail address in the format
 	 * '"John Doe" <john.doe@example.com>'.
 	 *
@@ -579,9 +569,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @return tx_seminars_Model_FrontEndUser the front-end user of the registration
 	 */
 	public function getFrontEndUser() {
-		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')->find(
-			$this->getUser()
-		);
+		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+			->find($this->getUser());
 	}
 
 	/**

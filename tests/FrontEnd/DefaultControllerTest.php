@@ -340,13 +340,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @param integer $pageId the page ID to link to, must be >= 0
 	 * @param array $urlParameters
 	 *        URL parameters to set as key/value pairs, not URL-encoded yet
-	 * @param string $target link target (not used yet)
 	 *
 	 * @return string faked link tag, will not be empty
 	 */
-	public function getTypoLink(
-		$label, $pageId, array $urlParameters = array(), $target = ''
-	) {
+	public function getTypoLink($label, $pageId, array $urlParameters = array()) {
 		$encodedParameters = '';
 		foreach ($urlParameters as $key => $value) {
 			$encodedParameters .= '&amp;' . $key . '=' .$value;
@@ -3703,7 +3700,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	public function teaserGetsLinkedToSingleView() {
 		$this->fixture->setConfigurationValue('hideColumns', '');
 
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,

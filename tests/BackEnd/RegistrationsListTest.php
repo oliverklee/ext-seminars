@@ -177,6 +177,10 @@ class tx_seminars_BackEnd_RegistrationsListTest extends tx_phpunit_testcase {
 		$userUid = $this->testingFramework->createFrontEndUser(
 			'', array('name' => 'foo_user', 'deleted' => 1)
 		);
+		$seminarUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array('pid' => $this->dummySysFolderPid)
+		);
 
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
@@ -338,7 +342,7 @@ class tx_seminars_BackEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	}
 
 	public function testShowForEmptyRegularRegistrationsListContainsCsvExportButton() {
-		$seminarUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,

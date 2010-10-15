@@ -112,7 +112,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	 * Initializes some variables needed for further processing.
 	 */
 	private function initialize() {
-		$this->displaySearchFormFields = t3lib_div::trimExplode(
+		$this->displayedSearchFields = t3lib_div::trimExplode(
 			',',
 			$this->getConfValueString(
 				'displaySearchFormFields', 's_listView'),
@@ -283,7 +283,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	 *                 configuration, FALSE otherwise
 	 */
 	protected function hasSearchField($fieldToCheck) {
-		return in_array($fieldToCheck, $this->displaySearchFormFields);
+		return in_array($fieldToCheck, $this->displayedSearchFields);
 	}
 
 	/**

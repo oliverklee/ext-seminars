@@ -665,7 +665,6 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 				)
 			)
 		);
-		$organizerFooter = 'organizer footer';
 
 		$this->fixture->setPostData(
 			array(
@@ -723,9 +722,6 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 	 * @test
 	 */
 	public function sendEmailToAttendeesForNoRegistrationsNotAddsEmailSentFlashMessage() {
-		$messageBody = '%' . $GLOBALS['LANG']->getLL('mailForm_salutation') .
-			$GLOBALS['LANG']->getLL('cancelMailForm_prefillField_messageBody');
-
 		$this->fixture->setPostData(
 			array(
 				'action' => 'confirmEvent',

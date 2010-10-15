@@ -337,7 +337,7 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function showForEventWithoutRegistrationsNotContainsEmailButton() {
-		$eventUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,

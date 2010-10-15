@@ -419,7 +419,7 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 	 */
 	public function retrieveModelsWithPageUidWithSubFolderCallsMapperFindByPageUidWithRecursivePageList() {
 		$parent = $this->testingFramework->createSystemFolder();
-		$child = $this->testingFramework->createSystemFolder($parent);
+		$this->testingFramework->createSystemFolder($parent);
 
 		$recursivePageList = tx_oelib_db::createRecursivePageList($parent, 255);
 

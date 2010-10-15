@@ -7510,8 +7510,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 */
 	public function canViewRegistrationsListWithNeedsRegistrationAndDefaultAccess(
 		$expected, $loggedIn, $isRegistered, $isVip,
-		$whichPlugin, $registrationsListPID, $registrationsVipListPID,
-		$accessToFrontEndRegistrationLists
+		$whichPlugin, $registrationsListPID, $registrationsVipListPID
 	) {
 		$fixture = $this->getMock(
 			'tx_seminars_seminar',
@@ -7549,8 +7548,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 */
 	public function canViewRegistrationsListWithNeedsRegistrationAndAttendeesManagersAccess(
 		$expected, $loggedIn, $isRegistered, $isVip,
-		$whichPlugin, $registrationsListPID, $registrationsVipListPID,
-		$accessToFrontEndRegistrationLists
+		$whichPlugin, $registrationsListPID, $registrationsVipListPID
 	) {
 		$fixture = $this->getMock(
 			'tx_seminars_seminar',
@@ -7820,8 +7818,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 */
 	public function canViewRegistrationsListWithNeedsRegistrationAndLoginAccess(
 		$expected, $loggedIn, $isRegistered, $isVip,
-		$whichPlugin, $registrationsListPID, $registrationsVipListPID,
-		$accessToFrontEndRegistrationLists
+		$whichPlugin, $registrationsListPID, $registrationsVipListPID
 	) {
 		$fixture = $this->getMock(
 			'tx_seminars_seminar',
@@ -8018,8 +8015,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 */
 	public function canViewRegistrationsListWithNeedsRegistrationAndWorldAccess(
 		$expected, $loggedIn, $isRegistered, $isVip,
-		$whichPlugin, $registrationsListPID, $registrationsVipListPID,
-		$accessToFrontEndRegistrationLists
+		$whichPlugin, $registrationsListPID, $registrationsVipListPID
 	) {
 		$fixture = $this->getMock(
 			'tx_seminars_seminar',

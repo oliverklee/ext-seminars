@@ -556,7 +556,7 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 		$feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
 		$feUserUid2 = $this->testingFramework->createFrontEndUser($feUserGroupUid);
 		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		$registrationUid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array('seminar' => $eventUid, 'user' => $feUserUid2)
 		);

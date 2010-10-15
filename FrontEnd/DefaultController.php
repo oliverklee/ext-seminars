@@ -78,11 +78,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	private $previousDate = '';
 
 	/**
-	 * @var tx_seminars_FrontEnd_CategoryList
-	 */
-	private $categoryList = null;
-
-	/**
 	 * @var array List of field names (as keys) by which we can sort plus
 	 *            the corresponding SQL sort criteria (as value).
 	 *
