@@ -61,6 +61,10 @@ class tx_seminars_OrganizerBagBuilder extends tx_seminars_bagbuilder {
 			'SELECT * FROM ' . SEMINARS_TABLE_SEMINARS_ORGANIZERS_MM .
 			' WHERE uid_local=' . $eventUid . ' AND uid_foreign=' .
 			SEMINARS_TABLE_ORGANIZERS . '.uid)';
+
+		$this->orderBy = '(SELECT sorting ' .
+			'FROM tx_seminars_seminars_organizers_mm WHERE uid_local = ' .
+			$eventUid . ' AND uid_foreign = tx_seminars_organizers.uid)';
 	}
 }
 

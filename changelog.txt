@@ -1,4 +1,5 @@
 0.9.3 (currently working on)
+- [#4170] Fix: tx_seminars_seminar::getOrganizerBag needs to sort the organizers by the relation sorting
 - [#4159] Fix: In the notification e-mail to the organizers, add a LF before the field data if the field data contains a LF or CR
 - [#4130] Fix: Set the numeric locale in our CLI scripts
 - [#4125] Fix: Check all class_exists for the correct use of the autoload flag
