@@ -32,6 +32,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_BagBuilder_OrganizerTest extends tx_phpunit_testcase {
 	/**
@@ -167,6 +168,44 @@ class tx_seminars_BagBuilder_OrganizerTest extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$bag->isEmpty()
+		);
+
+		$bag->__destruct();
+	}
+
+	/**
+	 * @test
+	 */
+	public function limitToEventSortsByRelationSorting() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array('organizers' => 2)
+		);
+		$organizerUid1 = $this->testingFramework->createRecord(
+			'tx_seminars_organizers'
+		);
+		$organizerUid2 = $this->testingFramework->createRecord(
+			'tx_seminars_organizers'
+		);
+
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_organizers_mm',
+			$eventUid,
+			$organizerUid2
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_organizers_mm',
+			$eventUid,
+			$organizerUid1
+		);
+
+		$this->fixture->limitToEvent($eventUid);
+		$bag = $this->fixture->build();
+		$bag->rewind();
+
+		$this->assertEquals(
+			$organizerUid2,
+			$bag->current()->getUid()
 		);
 
 		$bag->__destruct();
