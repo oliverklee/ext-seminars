@@ -114,6 +114,17 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
+	 * Returns our title.
+	 *
+	 * @return string our title, will be empty if this event has no title
+	 */
+	public function getTitle() {
+		return ($this->isEventDate())
+			? $this->getTopic()->getTitle()
+			: $this->getAsString('title');
+	}
+
+	/**
 	 * Returns our subtitle.
 	 *
 	 * @return string our subtitle, will be empty if this event has no subtitle

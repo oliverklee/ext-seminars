@@ -51,6 +51,23 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 	}
 
 
+	////////////////////////////////
+	// Tests concerning the title.
+	////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getTitleWithNonEmptyTitleReturnsTitle() {
+		$this->fixture->setData(array('title' => 'Superhero'));
+
+		$this->assertSame(
+			'Superhero',
+			$this->fixture->getTitle()
+		);
+	}
+
+
 	//////////////////////////////////
 	// Tests regarding the subtitle.
 	//////////////////////////////////

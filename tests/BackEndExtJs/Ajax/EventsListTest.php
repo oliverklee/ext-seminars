@@ -32,6 +32,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	/**
@@ -108,12 +109,21 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getAsArrayReturnsArrayContainingRecordType() {
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(
-				array('object_type' => tx_seminars_Model_Event::TYPE_DATE)
+				array(
+					'object_type' => tx_seminars_Model_Event::TYPE_TOPIC
+				)
+			);
+		$date = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(
+				array(
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+					'topic' => $topic->getUid(),
+				)
 			);
 
-		$result = $this->fixture->getAsArray($event);
+		$result = $this->fixture->getAsArray($date);
 
 		$this->assertEquals(
 			tx_seminars_Model_Event::TYPE_DATE,
