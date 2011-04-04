@@ -119,9 +119,20 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @return string our title, will be empty if this event has no title
 	 */
 	public function getTitle() {
-		return ($this->isEventDate())
-			? $this->getTopic()->getTitle()
-			: $this->getAsString('title');
+		return ($this->isEventDate()) ? $this->getTopic()->getTitle() : $this->getRawTitle();
+	}
+
+	/**
+	 * Returns our direct title, i.e. for date records the date's title, not
+	 * the topic's title.
+	 *
+	 * For single events and dates, this function will return the same as
+	 * getTitle.
+	 *
+	 * @return string our title, will be empty if this event has no title
+	 */
+	public function getRawTitle() {
+		return $this->getAsString('title');
 	}
 
 	/**

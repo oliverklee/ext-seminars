@@ -59,7 +59,7 @@ class tx_seminars_BackEndExtJs_Ajax_EventsList extends tx_seminars_BackEndExtJs_
 			'record_type' => $event->getRecordType(),
 			'hidden' => $event->isHidden(),
 			'accreditation_number' => $event->getAccreditationNumber(),
-			'title' => $event->getTitle(),
+			'title' => $event->getRawTitle(),
 			'begin_date' => date('r', $event->getBeginDateAsUnixTimeStamp()),
 			'end_date' => date('r', $event->getEndDateAsUnixTimeStamp()),
 			'registrations_regular' => $event->getRegularRegistrations()->count(),

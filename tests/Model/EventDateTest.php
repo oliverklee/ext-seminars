@@ -65,12 +65,33 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
+				'title' => 'Supervillain',
 			)
 		);
 
 		$this->assertSame(
 			'Superhero',
 			$this->fixture->getTitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRawTitleWithNonEmptyTopicTitleReturnsDateTitle() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('title' => 'Superhero'));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+				'title' => 'Supervillain',
+			)
+		);
+
+		$this->assertSame(
+			'Supervillain',
+			$this->fixture->getRawTitle()
 		);
 	}
 

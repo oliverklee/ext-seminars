@@ -200,6 +200,18 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function getRawTitleWithNonEmptyTitleReturnsTitle() {
+		$this->fixture->setData(array('title' => 'Superhero'));
+
+		$this->assertSame(
+			'Superhero',
+			$this->fixture->getRawTitle()
+		);
+	}
+
 
 	//////////////////////////////////////////////
 	// Tests regarding the accreditation number.

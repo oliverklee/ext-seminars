@@ -111,9 +111,7 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	public function getAsArrayReturnsArrayContainingRecordType() {
 		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(
-				array(
-					'object_type' => tx_seminars_Model_Event::TYPE_TOPIC
-				)
+				array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 			);
 		$date = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(
@@ -175,6 +173,35 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 			$result['title']
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function getAsArrayReturnsArrayContainingDateTitleForDateRecord() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(
+				array(
+					'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+					'title' => 'topic title',
+				)
+			);
+		$date = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(
+				array(
+					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+					'topic' => $topic->getUid(),
+					'title' => 'date title',
+				)
+			);
+
+		$result = $this->fixture->getAsArray($date);
+
+		$this->assertSame(
+			'date title',
+			$result['title']
+		);
+	}
+
 
 	/**
 	 * @test
