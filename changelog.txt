@@ -1,4 +1,5 @@
 0.9.3 (currently working on)
+- [#3873] Feature: Modernize the modifyListView hook
 - [#4045] Fix: Always use the display title of events
 - [#4042] Fix: Table headings in mod2 are invisible (white on white) in TYPO3 4.4
 - [#4170] Fix: tx_seminars_seminar::getOrganizerBag needs to sort the organizers by the relation sorting

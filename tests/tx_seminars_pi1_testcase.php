@@ -7523,30 +7523,24 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////////
-	// Tests concerning the hook for the "my events" list
-	///////////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	// Tests concerning the hooks for the event lists
+	///////////////////////////////////////////////////
 
 	/**
 	 * @test
 	 */
-	public function myEventsListCallsModifyMyEventsListRowHook() {
-		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
+	public function eventsListCallsModifyListRowHookWithInterface() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
 
-		$registrationUid = $this->createLogInAndRegisterFeUser();
-		$registration = tx_oelib_MapperRegistry
-			::get('tx_seminars_Mapper_Registration')->find($registrationUid);
-
-		$hookClass = uniqid('myEventsListRowHook');
-		$hook = $this->getMock($hookClass, array('modifyMyEventsListRow'));
-		$hook->expects($this->once())->method('modifyMyEventsListRow')
-			->with($registration);
+		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
+		$hook->expects($this->once())->method('modifyListRow')->with($event);
 		// We don't test for the second parameter (the template instance here)
 		// because we cannot access it from the outside.
 
+		$hookClass = get_class($hook);
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
-		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView']
-			[$hookClass] = $hookClass;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
 
 		$this->fixture->main('', array());
 	}
@@ -7554,14 +7548,93 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function seminarListNotCallsModifyMyEventsListRowHook() {
-		$hookClass = uniqid('myEventsListRowHook');
-		$hook = $this->getMock($hookClass, array('modifyMyEventsListRow'));
-		$hook->expects($this->never())->method('modifyMyEventsListRow');
+	public function eventsListCallsModifyListRowHookWithoutInterface() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
+
+		$hookClass = uniqid('listRowHook');
+		$hook = $this->getMock($hookClass, array('modifyListRow'));
+		$hook->expects($this->once())->method('modifyListRow')->with($event);
+		// We don't test for the second parameter (the template instance here)
+		// because we cannot access it from the outside.
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
-		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView']
-			[$hookClass] = $hookClass;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
+
+		$this->fixture->main('', array());
+	}
+
+	/**
+	 * @test
+	 */
+	public function myEventsListCallsModifyMyEventsListRowHookWithInterface() {
+		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
+
+		$registrationUid = $this->createLogInAndRegisterFeUser();
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($registrationUid);
+
+		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
+		$hook->expects($this->once())->method('modifyMyEventsListRow')->with($registration);
+		// We don't test for the second parameter (the template instance here)
+		// because we cannot access it from the outside.
+
+		$hookClass = get_class($hook);
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
+
+		$this->fixture->main('', array());
+	}
+
+	/**
+	 * @test
+	 */
+	public function myEventsListCallsModifyMyEventsListRowHookWithoutInterface() {
+		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
+
+		$registrationUid = $this->createLogInAndRegisterFeUser();
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($registrationUid);
+
+		$hookClass = uniqid('myEventsListRowHook');
+		$hook = $this->getMock($hookClass, array('modifyMyEventsListRow'));
+		$hook->expects($this->once())->method('modifyMyEventsListRow')->with($registration);
+		// We don't test for the second parameter (the template instance here)
+		// because we cannot access it from the outside.
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
+
+		$this->fixture->main('', array());
+	}
+
+	/**
+	 * @test
+	 */
+	public function myEventsListCallsModifyListRowHook() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
+
+		$this->testingFramework->createAndLoginFrontEndUser();
+
+		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
+		$hook->expects($this->once())->method('modifyListRow')->with($event);
+		// We don't test for the second parameter (the template instance here)
+		// because we cannot access it from the outside.
+
+		$hookClass = get_class($hook);
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
+
+		$this->fixture->main('', array());
+	}
+
+	/**
+	 * @test
+	 */
+	public function eventListNotCallsModifyMyEventsListRowHook() {
+		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
+		$hook->expects($this->never())->method('modifyMyEventsListRow');
+
+		$hookClass = get_class($hook);
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
 
 		$this->fixture->main('', array());
 	}

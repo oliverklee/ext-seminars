@@ -402,10 +402,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 *
 	 * @return array the hook objects, will be empty if no hooks have been set
 	 */
-	private function getListViewHooks() {
+	protected function getListViewHooks() {
 		if (!$this->listViewHooksHaveBeenRetrieved) {
-			$hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']
-				['seminars']['listView'];
+			$hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'];
 			if (is_array($hookClasses)) {
 				foreach ($hookClasses as $hookClass) {
 					$this->listViewHooks[] = t3lib_div::getUserObj($hookClass);
@@ -1901,6 +1900,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$result = '';
 
 		if ($this->seminar->isOk()) {
+			$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+				->find($this->getSeminar()->getUid());
+
 			$cssClasses = array();
 
 			if ($rowCounter % 2) {
@@ -2081,21 +2083,19 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				}
 			}
 
-			$listViewHooks = $this->getListViewHooks();
-			// @TODO This needs to modified when the list view hook gets
-			// modernized.
-			// @see https://bugs.oliverklee.com/show_bug.cgi?id=3873
-			if (!empty($listViewHooks) && ($whatToDisplay == 'my_events')) {
-				$registration = tx_oelib_MapperRegistry
-					::get('tx_seminars_Mapper_Registration')
-					->find($this->registration->getUid());
-				$template = $this->getTemplate();
+			foreach ($this->getListViewHooks() as $hook) {
+				if (method_exists($hook, 'modifyListRow')) {
+					$hook->modifyListRow($event, $this->getTemplate());
+				}
+			}
 
-				foreach ($listViewHooks as $hook) {
+			if ($whatToDisplay === 'my_events') {
+				$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
+					->find($this->registration->getUid());
+
+				foreach ($this->getListViewHooks() as $hook) {
 					if (method_exists($hook, 'modifyMyEventsListRow')) {
-						$hook->modifyMyEventsListRow(
-							$registration, $template
-						);
+						$hook->modifyMyEventsListRow($registration, $this->getTemplate());
 					}
 				}
 			}

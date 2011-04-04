@@ -43,6 +43,7 @@ return array(
 	'tx_seminars_backend_organizerslist' => $extensionPath . 'BackEnd/class.tx_seminars_BackEnd_OrganizersList.php',
 	'tx_seminars_backend_registrationslist' => $extensionPath . 'BackEnd/class.tx_seminars_BackEnd_RegistrationsList.php',
 	'tx_seminars_backend_speakerslist' => $extensionPath . 'BackEnd/class.tx_seminars_BackEnd_SpeakersList.php',
+	'tx_seminars_interface_hook_eventlistview' => $extensionPath . 'Interface/Hook/EventListView.php',
 	'tx_seminars_module2' => $extensionPath . 'BackEnd/index.php',
 	'tx_seminars_mapper_backenduser' => $extensionPath . 'Mapper/class.tx_seminars_Mapper_BackEndUser.php',
 	'tx_seminars_mapper_backendusergroup' => $extensionPath . 'Mapper/class.tx_seminars_Mapper_BackEndUserGroup.php',
