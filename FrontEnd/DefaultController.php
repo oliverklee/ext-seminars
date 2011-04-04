@@ -399,15 +399,27 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Gets the hooks for the list view.
 	 *
-	 * @return array the hook objects, will be empty if no hooks have been set
+	 * @throws t3lib_exception
+	 *         if there are registered hook classes that do not implement the
+	 *         tx_seminars_Interface_Hook_EventListView interface
+	 *
+	 * @return array<tx_seminars_Interface_Hook_EventListView>
+	 *         the hook objects, will be empty if no hooks have been set
 	 */
-	private function getListViewHooks() {
+	protected function getListViewHooks() {
 		if (!$this->listViewHooksHaveBeenRetrieved) {
-			$hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']
-				['seminars']['listView'];
+			$hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'];
 			if (is_array($hookClasses)) {
 				foreach ($hookClasses as $hookClass) {
-					$this->listViewHooks[] = t3lib_div::getUserObj($hookClass);
+					$hookInstance = t3lib_div::getUserObj($hookClass);
+					if (!($hookInstance instanceof tx_seminars_Interface_Hook_EventListView)) {
+						throw new t3lib_exception(
+							'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .
+								'but does not implement the tx_seminars_Interface_Hook_EventListView interface.',
+								1301928334
+						);
+					}
+					$this->listViewHooks[] = $hookInstance;
 				}
 			}
 
@@ -2086,32 +2098,16 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 			$this->setMarker('registrations', $this->getCsvExportLink());
 
-			// Modifies the list item hook.
-			// @deprecated This hook will be removed and replace by another
-			// hook for seminars 1.0.0.
-			// @see https://bugs.oliverklee.com/show_bug.cgi?id=3873
-			foreach ($this->hookObjects as $hookObject) {
-				if (method_exists($hookObject, 'modifyListItem')) {
-					$hookObject->modifyListItem($this);
-				}
+			foreach ($this->getListViewHooks() as $hook) {
+				$hook->modifyListRow($event, $this->getTemplate());
 			}
 
-			$listViewHooks = $this->getListViewHooks();
-			// @TODO This needs to modified when the list view hook gets
-			// modernized.
-			// @see https://bugs.oliverklee.com/show_bug.cgi?id=3873
-			if (!empty($listViewHooks) && ($whatToDisplay == 'my_events')) {
-				$registration = tx_oelib_MapperRegistry
-					::get('tx_seminars_Mapper_Registration')
+			if ($whatToDisplay === 'my_events') {
+				$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
 					->find($this->registration->getUid());
-				$template = $this->getTemplate();
 
-				foreach ($listViewHooks as $hook) {
-					if (method_exists($hook, 'modifyMyEventsListRow')) {
-						$hook->modifyMyEventsListRow(
-							$registration, $template
-						);
-					}
+				foreach ($this->getListViewHooks() as $hook) {
+					$hook->modifyMyEventsListRow($registration, $this->getTemplate());
 				}
 			}
 
