@@ -31,6 +31,7 @@
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
@@ -97,6 +98,17 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 		}
 
 		return $this->getAsModel('topic');
+	}
+
+	/**
+	 * Returns our title.
+	 *
+	 * @return string our title, will be empty if this event has no title
+	 */
+	public function getTitle() {
+		return ($this->isEventDate())
+			? $this->getTopic()->getTitle()
+			: $this->getAsString('title');
 	}
 
 	/**

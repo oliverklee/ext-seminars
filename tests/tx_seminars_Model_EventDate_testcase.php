@@ -33,6 +33,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_EventDate_testcase extends tx_phpunit_testcase {
 	/**
@@ -47,6 +48,30 @@ class tx_seminars_Model_EventDate_testcase extends tx_phpunit_testcase {
 	public function tearDown() {
 		$this->fixture->__destruct();
 		unset($this->fixture);
+	}
+
+
+	////////////////////////////////
+	// Tests concerning the title.
+	////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getTitleWithNonEmptyTopicTitleReturnsTopicTitle() {
+		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array('title' => 'Superhero'));
+		$this->fixture->setData(
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topic,
+			)
+		);
+
+		$this->assertSame(
+			'Superhero',
+			$this->fixture->getTitle()
+		);
 	}
 
 

@@ -31,6 +31,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	/**
@@ -132,6 +133,23 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->isEventDate()
+		);
+	}
+
+
+	////////////////////////////////
+	// Tests concerning the title.
+	////////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getTitleWithNonEmptyTitleReturnsTitle() {
+		$this->fixture->setData(array('title' => 'Superhero'));
+
+		$this->assertSame(
+			'Superhero',
+			$this->fixture->getTitle()
 		);
 	}
 

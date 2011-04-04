@@ -935,6 +935,67 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 	}
 
 
+	//////////////////////////////
+	// Tests concerning getTitle
+	//////////////////////////////
+
+	/**
+	 * @test
+	 */
+	public function getTitleForSingleEventReturnsTitle() {
+		$this->assertSame(
+			'a test event',
+			$this->fixture->getTitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getTitleForTopicReturnsTitle() {
+		$topicRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'title' => 'a test topic',
+			)
+		);
+		$topic = new tx_seminars_seminar($topicRecordUid);
+
+		$this->assertSame(
+			'a test topic',
+			$topic->getTitle()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getTitleForDateReturnsTopicTitle() {
+		$topicRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'title' => 'a test topic',
+			)
+		);
+		$dateRecordUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'topic' => $topicRecordUid,
+				'title' => 'a test date',
+			)
+		);
+		$date = new tx_seminars_seminar($dateRecordUid);
+
+		$this->assertSame(
+			'a test topic',
+			$date->getTitle()
+		);
+	}
+
+
 	/////////////////////////////////////////////////////////
 	// Tests regarding the ability to register for an event
 	/////////////////////////////////////////////////////////
