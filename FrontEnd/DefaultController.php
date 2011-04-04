@@ -197,7 +197,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * @var tx_seminars_Service_SingleViewLinkBuilder
 	 */
-	private $linkBuilder = null;
+	private $linkBuilder = NULL;
 
 	/**
 	 * Frees as much memory that has been used by this object as possible.
@@ -3476,24 +3476,18 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * @return string HTML code for the link to the event's single view page
 	 */
-	public function createSingleViewLink(
-		tx_seminars_Model_Event $event, $linkText
-	) {
-
+	public function createSingleViewLink(tx_seminars_Model_Event $event, $linkText) {
 		$url = $this->getLinkBuilder()->createRelativeUrlForEvent($event);
 
-		return '<a href="' . htmlspecialchars($url) . '">' .
-			htmlspecialchars($linkText) . '</a>';
+		return '<a href="' . htmlspecialchars($url) . '">' . htmlspecialchars($linkText) . '</a>';
 	}
 
 	/**
 	 * Returns a link builder instance.
 	 */
 	protected function getLinkBuilder() {
-		if ($this->linkBuilder == null) {
-			$this->injectLinkBuilder(tx_oelib_ObjectFactory::make(
-				'tx_seminars_Service_SingleViewLinkBuilder'
-			));
+		if ($this->linkBuilder === NULL) {
+			$this->injectLinkBuilder(tx_oelib_ObjectFactory::make('tx_seminars_Service_SingleViewLinkBuilder'));
 		}
 		$this->linkBuilder->setPlugin($this);
 
@@ -3506,9 +3500,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @param tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
 	 *        the link builder instance to use
 	 */
-	public function injectLinkBuilder(
-		tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
-	) {
+	public function injectLinkBuilder(tx_seminars_Service_SingleViewLinkBuilder $linkBuilder) {
 		$this->linkBuilder = $linkBuilder;
 	}
 }
