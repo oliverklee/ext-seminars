@@ -763,7 +763,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			// Caches $this->seminar because the list view will overwrite
 			// $this->seminar.
 			// TODO: This needs to be removed as soon as the list view is moved
-			// to it's own class.
+			// to its own class.
 			// @see https://bugs.oliverklee.com/show_bug.cgi?id=290
 			$seminar = clone $this->seminar;
 			if ($this->seminar->hasEndDate()) {
