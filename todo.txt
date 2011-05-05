@@ -1,6 +1,8 @@
 To-do list and milestone plan for tx_seminars
 =============================================
 
+NOTE: This to-do list is extremely outdated and is not used anymore. It is being kept only so that the ideas in it do not get lost.
+
 For this extension, there are still many unimplemented feature ideas. Help is very welcome! Contact the author if you want to help in any way.
 
 If you find any bugs in this extension, please report them in the bugtracker at <https://bugs.oliverklee.com/> under the project "Seminar Manager".
