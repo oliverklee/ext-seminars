@@ -112,8 +112,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @return tx_seminars_registrationmanager the current Singleton instance
 	 */
 	public static function getInstance() {
-		if (self::$instance === null) {
-			self::$instance = new tx_seminars_registrationmanager();
+		if (self::$instance === NULL) {
+			self::$instance = tx_oelib_ObjectFactory::make('tx_seminars_registrationmanager');
 		}
 
 		return self::$instance;

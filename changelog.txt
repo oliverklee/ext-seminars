@@ -1,4 +1,5 @@
 0.9.3 (currently working on)
+- [#4198] Fix: The registrationManager cannot be XCLASSed
 - [#3873] Feature: Modernize the modifyListView hook
 - [#4045] Fix: Always use the display title of events
 - [#4042] Fix: Table headings in mod2 are invisible (white on white) in TYPO3 4.4
