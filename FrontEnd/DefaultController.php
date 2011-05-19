@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2005-2010 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2005-2011 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -27,7 +27,7 @@ require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 require_once(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
 
 /**
- * Plugin 'Seminar Manager' for the 'seminars' extension.
+ * Plugin "Seminar Manager".
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -248,7 +248,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		$this->setErrorMessage(
 			$this->getRegistrationManager()->checkConfiguration(TRUE)
 		);
-
 
 		// Sets the UID of a single event that is requested (either by the
 		// configuration in the flexform or by a parameter in the URL).
