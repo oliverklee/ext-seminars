@@ -13,6 +13,7 @@
 			<label index="seminars.pi_flexform.what_to_display">What should be displayed:</label>
 			<label index="seminars.pi_flexform.sheet_template_and_special">Templates and special properties</label>
 			<label index="seminars.pi_flexform.seminar_list">Event List</label>
+			<label index="seminars.pi_flexform.single_view">Event Single View</label>
 			<label index="seminars.pi_flexform.topic_list">Topic List</label>
 			<label index="seminars.pi_flexform.my_events">My Events</label>
 			<label index="seminars.pi_flexform.my_vip_events">My Managed Events</label>
@@ -627,6 +628,7 @@
 			<label index="seminars.pi_flexform.what_to_display">Was soll angezeigt werden:</label>
 			<label index="seminars.pi_flexform.sheet_template_and_special">Templates und spezielle Einstellungen</label>
 			<label index="seminars.pi_flexform.seminar_list">Veranstaltungsliste</label>
+			<label index="seminars.pi_flexform.single_view">Veranstaltungs-Einzelansicht</label>
 			<label index="seminars.pi_flexform.topic_list">Themenliste</label>
 			<label index="seminars.pi_flexform.my_events">Meine Veranstaltungen</label>
 			<label index="seminars.pi_flexform.my_vip_events">Meine verwalteten Veranstaltungen</label>
@@ -2289,6 +2291,7 @@
 			<label index="seminars.pi_flexform.what_to_display" type="integer">97910403</label>
 			<label index="seminars.pi_flexform.sheet_template_and_special" type="integer">251016915</label>
 			<label index="seminars.pi_flexform.seminar_list" type="integer">98496595</label>
+			<label index="seminars.pi_flexform.single_view" type="integer">232253426</label>
 			<label index="seminars.pi_flexform.topic_list" type="integer">105969965</label>
 			<label index="seminars.pi_flexform.my_events" type="integer">25497076</label>
 			<label index="seminars.pi_flexform.my_vip_events" type="integer">232664083</label>
@@ -3729,6 +3732,7 @@
 			<label index="seminars.pi_flexform.what_to_display">What should be displayed:</label>
 			<label index="seminars.pi_flexform.sheet_template_and_special">Templates and special properties</label>
 			<label index="seminars.pi_flexform.seminar_list">Event List</label>
+			<label index="seminars.pi_flexform.single_view">Event Single View</label>
 			<label index="seminars.pi_flexform.topic_list">Topic List</label>
 			<label index="seminars.pi_flexform.my_events">My Events</label>
 			<label index="seminars.pi_flexform.my_vip_events">My Managed Events</label>

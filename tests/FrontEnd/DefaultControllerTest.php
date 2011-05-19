@@ -649,8 +649,67 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning the single view.
 	//////////////////////////////////////
 
+	/**
+	 * @test
+	 */
+	public function singleViewFlavorWithUidCreatesSingleView() {
+		$controller = $this->getMock(
+			'tx_seminars_FrontEnd_DefaultController',
+			array(
+				'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
+				'setCSS', 'getHookObjects', 'createHelperObjects', 'setErrorMessage'
+			)
+		);
+		$controller->expects($this->once())->method('createSingleView');
+		$controller->expects($this->never())->method('createListView');
+
+		$controller->piVars = array('showUid' => 42);
+
+		$controller->main('', array('what_to_display' => 'single_view'));
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewFlavorWithUidFromShowSingleEventConfigurationCreatesSingleView() {
+		$controller = $this->getMock(
+			'tx_seminars_FrontEnd_DefaultController',
+			array(
+				'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
+				'setCSS', 'getHookObjects', 'createHelperObjects', 'setErrorMessage'
+			)
+		);
+		$controller->expects($this->once())->method('createSingleView');
+		$controller->expects($this->never())->method('createListView');
+
+		$controller->piVars = array();
+
+		$controller->main('', array('what_to_display' => 'single_view', 'showSingleEvent' => 42));
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewFlavorWithoutUidCreatesSingleView() {
+		$controller = $this->getMock(
+			'tx_seminars_FrontEnd_DefaultController',
+			array(
+				'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
+				'setCSS', 'getHookObjects', 'createHelperObjects', 'setErrorMessage'
+			)
+		);
+		$controller->expects($this->once())->method('createSingleView');
+		$controller->expects($this->never())->method('createListView');
+
+		$controller->piVars = array();
+
+		$controller->main('', array('what_to_display' => 'single_view'));
+	}
+
 	public function testSingleViewContainsEventTitle() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
 		$this->assertContains(
 			'Test event',
 			$this->fixture->main('', array())
@@ -692,7 +751,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			)
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $dateUid1;
+
 		$this->assertContains(
 			'tx_seminars_pi1%5BshowUid%5D=1337',
 			$this->fixture->main('', array())
@@ -737,7 +798,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			)
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $dateUid;
+
 		$result = $this->fixture->main('', array());
 
 		$this->assertNotContains(
@@ -784,6 +847,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			)
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $dateUid1;
 
 		$this->assertContains(
@@ -796,6 +860,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'showOnlyEventsWithVacancies', TRUE
 		);
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -844,6 +909,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			$this->testingFramework->createFrontEndPage()
 		);
 		$this->fixture->setConfigurationValue('showSpeakerDetails', TRUE);
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$speakerUid = $this->testingFramework->createRecord(
@@ -871,6 +937,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewForSeminarWithoutImageDoesNotDisplayImage() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue(
 			'detailPID',
 			$this->testingFramework->createFrontEndPage()
@@ -890,6 +957,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewDisplaysSeminarImage() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue(
 			'detailPID',
 			$this->testingFramework->createFrontEndPage()
@@ -920,6 +988,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewForHideFieldsContainingImageHidesSeminarImage() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue(
 			'detailPID',
 			$this->testingFramework->createFrontEndPage()
@@ -956,6 +1025,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	///////////////////////////////////////////////////////
 
 	public function testSingleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFile() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
 		$dummyFile = $this->testingFramework->createDummyFile();
@@ -976,6 +1046,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFileLinkedToFile() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
 		$dummyFile = $this->testingFramework->createDummyFile();
@@ -997,6 +1068,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewWithOneAttachedFileInSubfolderOfUploadFolderAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFileLinkedToFile() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
 		$dummyFolder = $this->testingFramework->createDummyFolder('test_folder');
@@ -1024,6 +1096,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewWithTwoAttachedFilesAndDisabledLimitFileDownloadToAttendeesContainsBothFileNames() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
 		$dummyFile = $this->testingFramework->createDummyFile();
@@ -1041,17 +1114,19 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$result = $this->fixture->main('', array());
 		$this->assertContains(
 			$dummyFileName,
-			$this->fixture->main('', array())
+			$result
 		);
 		$this->assertContains(
 			$dummyFileName2,
-			$this->fixture->main('', array())
+			$result
 		);
 	}
 
 	public function testSingleViewWithTwoAttachedFilesAndDisabledLimitFileDownloadToAttendeesContainsTwoAttachedFilesWithSortingSetInBackEnd() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
 		$dummyFile = $this->testingFramework->createDummyFile();
@@ -1077,6 +1152,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewWithOneAttachedFileAndLoggedInFeUserAndRegisteredContainsFileNameOfFile() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->createLogInAndRegisterFeUser();
 
@@ -1098,6 +1174,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewWithOneAttachedFileAndLoggedInFeUserAndRegisteredContainsFileNameOfFileLinkedToFile() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->createLogInAndRegisterFeUser();
 
@@ -1120,6 +1197,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewWithOneAttachedFileInSubfolderOfUploadFolderAndLoggedInFeUserAndRegisteredContainsFileNameOfFileLinkedToFile() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->createLogInAndRegisterFeUser();
 
@@ -1148,6 +1226,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewWithTwoAttachedFilesAndLoggedInFeUserAndRegisteredContainsBothFileNames() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->createLogInAndRegisterFeUser();
 
@@ -1166,17 +1245,19 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$result = $this->fixture->main('', array());
 		$this->assertContains(
 			$dummyFileName,
-			$this->fixture->main('', array())
+			$result
 		);
 		$this->assertContains(
 			$dummyFileName2,
-			$this->fixture->main('', array())
+			$result
 		);
 	}
 
 	public function testSingleViewWithTwoAttachedFilesAndLoggedInFeUserAndRegisteredContainsTwoAttachedFilesWithSortingSetInBackEnd() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->createLogInAndRegisterFeUser();
 
@@ -1203,6 +1284,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsCSSClassWithFileType() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
 		$dummyFile = $this->testingFramework->createDummyFile();
@@ -1229,6 +1311,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testAttachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFilesAndWithLoggedInAndRegisteredFeUser() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->createLogInAndRegisterFeUser();
 
@@ -1240,6 +1323,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testAttachedFilesSubpartIsHiddenInSingleViewWithAttachedFilesAndLoggedInAndUnregisteredFeUser() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->testingFramework->createAndLoginFrontEndUser();
 
@@ -1261,6 +1345,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testAttachedFilesSubpartIsHiddenInSingleViewWithAttachedFilesAndNoLoggedInFeUser() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
@@ -1280,6 +1365,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testAttachedFilesSubpartIsVisibleInSingleViewWithAttachedFilesAndLoggedInAndRegisteredFeUser() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->createLogInAndRegisterFeUser();
 
@@ -1301,6 +1387,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testAttachedFilesSubpartIsVisibleInSingleViewWithAttachedFilesAndDisabledLimitFileDownloadToAttendees() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
 		$dummyFile = $this->testingFramework->createDummyFile();
@@ -1321,6 +1408,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testAttachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFilesAndWithDisabledLimitFileDownloadToAttendees() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -1339,6 +1427,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function singleViewContainsTitleOfEventPlace() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
+
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('place' => 1)
 		);
@@ -1362,6 +1452,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	////////////////////////////////////////////////////
 
 	public function testTimeSlotsSubpartIsHiddenInSingleViewWithoutTimeSlots() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->fixture->main('', array());
 		$this->assertFalse(
@@ -1370,6 +1461,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testTimeSlotsSubpartIsVisibleInSingleViewWithOneTimeSlot() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$timeSlotUid = $this->testingFramework->createRecord(
 			'tx_seminars_timeslots', array('seminar' => $this->seminarUid)
 		);
@@ -1386,6 +1478,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewCanContainOneTimeSlotRoom() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$timeSlotUid = $this->testingFramework->createRecord(
 			'tx_seminars_timeslots',
 			array(
@@ -1406,6 +1499,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testTimeSlotsSubpartIsVisibleInSingleViewWithTwoTimeSlots() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$timeSlotUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_timeslots', array('seminar' => $this->seminarUid)
 		);
@@ -1425,6 +1519,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewCanContainTwoTimeSlotRooms() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$timeSlotUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_timeslots',
 			array(
@@ -1445,13 +1540,14 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$result = $this->fixture->main('', array());
 		$this->assertContains(
 			'room 1',
-			$this->fixture->main('', array())
+			$result
 		);
 		$this->assertContains(
 			'room 2',
-			$this->fixture->main('', array())
+			$result
 		);
 	}
 
@@ -1461,6 +1557,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	///////////////////////////////////////////////////////
 
 	public function testTargetGroupsSubpartIsHiddenInSingleViewWithoutTargetGroups() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->fixture->main('', array());
 		$this->assertFalse(
@@ -1471,6 +1568,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	public function testTargetGroupsSubpartIsVisibleInSingleViewWithOneTargetGroup() {
 		$this->addTargetGroupRelation();
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->fixture->main('', array());
 		$this->assertTrue(
@@ -1483,6 +1581,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			array('title' => 'group 1')
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertContains(
 			'group 1',
@@ -1498,6 +1597,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			array('title' => 'group 2')
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->fixture->main('', array());
 		$this->assertTrue(
@@ -1513,6 +1613,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			array('title' => 'group 2')
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$result = $this->fixture->main('', array());
 
@@ -1532,6 +1633,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	///////////////////////////////////////////////////////
 
 	public function testSingleViewForSeminarWithoutRequirementsHidesRequirementsSubpart() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->fixture->main('', array());
 		$this->assertFalse(
@@ -1552,6 +1654,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent, 'requirements'
 		);
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->fixture->main('', array());
 
@@ -1580,6 +1683,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent, 'requirements'
 		);
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertRegExp(
@@ -1594,6 +1698,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	///////////////////////////////////////////////////////
 
 	public function testSingleViewForSeminarWithoutDependenciesHidesDependenciesSubpart() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->fixture->main('', array());
 		$this->assertFalse(
@@ -1617,6 +1722,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'tx_seminars_seminars_requirements_mm',
 			$dependingEventUid, $this->seminarUid
 		);
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->fixture->main('', array());
 
@@ -1644,6 +1750,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'tx_seminars_seminars_requirements_mm',
 			$dependingEventUid, $this->seminarUid
 		);
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -1674,6 +1781,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'tx_seminars_seminars_requirements_mm',
 			$dependingEventUid, $this->seminarUid
 		);
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -1713,6 +1821,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			$dependingEventUid2, $this->seminarUid
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertRegExp(
@@ -1736,6 +1845,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			)
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -1745,6 +1855,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewNotContainsColonBeforeEventTitleIfEventHasNoEventType() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertNotRegExp(
@@ -1763,6 +1874,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			array('title' => 'category 1')
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertContains(
 			'category 1',
@@ -1778,6 +1890,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			array('title' => 'category 2')
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$result = $this->fixture->main('', array());
 
@@ -1800,6 +1913,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			)
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$singleCategoryWithIcon = $this->fixture->main('', array());
@@ -1828,6 +1942,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			)
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$multipleCategoriesWithIcons = $this->fixture->main('', array());
@@ -1851,6 +1966,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			array('title' => 'category 1')
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertNotContains(
@@ -1874,6 +1990,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			)
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $uid;
 
 		$this->assertContains(
@@ -1892,6 +2009,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			)
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $uid;
 
 		$this->assertNotContains(
@@ -1909,7 +2027,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function singleViewForEventWithoutPaymentMethodsNotContainsLabelForPaymentMethods() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
 		$this->assertNotContains(
 			$this->fixture->translate('label_paymentmethods'),
 			$this->fixture->main('', array())
@@ -1932,7 +2052,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			$paymentMethodUid
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
 		$this->assertContains(
 			$this->fixture->translate('label_paymentmethods'),
 			$this->fixture->main('', array())
@@ -1955,7 +2077,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			$paymentMethodUid
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
 		$this->assertContains(
 			'Payment Method',
 			$this->fixture->main('', array())
@@ -1987,14 +2111,17 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			$paymentMethodUid2
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$result = $this->fixture->main('', array());
 		$this->assertContains(
 			'Payment Method 1',
-			$this->fixture->main('', array())
+			$result
 		);
 		$this->assertContains(
 			'Payment Method 2',
-			$this->fixture->main('', array())
+			$result
 		);
 	}
 
@@ -2015,7 +2142,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			$paymentMethodUid
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
 		$this->assertContains(
 			htmlspecialchars($paymentMethodTitle),
 			$this->fixture->main('', array())
@@ -2023,12 +2152,14 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////////////////////
-	// Tests concerning the organizers in the list view
-	/////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////
+	// Tests concerning the organizers in the single view
+	///////////////////////////////////////////////////////
 
 	public function test_SingleView_ForEventWithOrganzier_ShowsOrganizerTitle() {
 		$this->addOrganizerRelation(array('title' => 'foo organizer'));
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -2041,6 +2172,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->addOrganizerRelation(
 			array('title' => 'foo', 'description' => 'organizer description')
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -2053,6 +2186,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->addOrganizerRelation(
 			array('title' => 'foo', 'homepage' => 'http://www.orgabar.com')
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -2063,6 +2198,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 	public function test_SingleView_DoesNotHaveUnreplacedMarkers() {
 		$this->addOrganizerRelation(array('title' => 'foo organizer'));
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertNotContains(
@@ -2074,6 +2211,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	public function test_SingleView_ForEventWithTwoOrganizers_ShowsBothOrganizers() {
 		$this->addOrganizerRelation(array('title' => 'organizer 1'));
 		$this->addOrganizerRelation(array('title' => 'organizer 2'));
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertRegExp(
@@ -2086,6 +2225,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->addOrganizerRelation(
 			array('title' => 'foo<bar')
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -2098,6 +2239,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->addOrganizerRelation(
 			array('title' => 'foo<bar')
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -2116,6 +2259,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -2130,6 +2274,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -2149,6 +2294,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			)
 		);
 
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -2162,7 +2308,48 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning the basic functions of the list view
 	//////////////////////////////////////////////////////////
 
-	public function testListViewShowsSingleEvents() {
+	/**
+	 * @test
+	 */
+	public function eventListFlavorWithoutUidCreatesListView() {
+		$controller = $this->getMock(
+			'tx_seminars_FrontEnd_DefaultController',
+			array(
+				'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
+				'setCSS', 'getHookObjects', 'createHelperObjects', 'setErrorMessage'
+			)
+		);
+		$controller->expects($this->once())->method('createListView')->with('seminar_list');
+		$controller->expects($this->never())->method('createSingleView');
+
+		$controller->piVars = array();
+
+		$controller->main('', array('what_to_display' => 'seminar_list'));
+	}
+
+	/**
+	 * @test
+	 */
+	public function eventListFlavorWithUidCreatesListView() {
+		$controller = $this->getMock(
+			'tx_seminars_FrontEnd_DefaultController',
+			array(
+				'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
+				'setCSS', 'getHookObjects', 'createHelperObjects', 'setErrorMessage'
+			)
+		);
+		$controller->expects($this->once())->method('createListView')->with('seminar_list');
+		$controller->expects($this->never())->method('createSingleView');
+
+		$controller->piVars = array('showUid' => 42);
+
+		$controller->main('', array('what_to_display' => 'seminar_list'));
+	}
+
+	/**
+	 * @test
+	 */
+	public function listViewShowsSingleEventTitle() {
 		$this->assertContains(
 			'Test event',
 			$this->fixture->main('', array())
@@ -5397,6 +5584,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'showOwnerDataInSingleView', 1
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -5416,6 +5605,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'showOwnerDataInSingleView', 1
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertNotRegexp(
@@ -5428,6 +5619,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'showOwnerDataInSingleView', 1
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertNotContains(
@@ -5448,6 +5641,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'showOwnerDataInSingleView', 0
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertNotContains(
@@ -5469,6 +5664,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'showOwnerDataInSingleView', 1
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -5490,6 +5687,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'showOwnerDataInSingleView', 1
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -5512,6 +5711,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'showOwnerDataInSingleView', 0
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertNotContains(
@@ -5533,6 +5734,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'showOwnerDataInSingleView', 1
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -5554,6 +5757,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue(
 			'showOwnerDataInSingleView', 1
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -5588,6 +5793,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
 			)
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -5614,6 +5821,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -5642,6 +5851,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertNotContains(
@@ -5663,6 +5874,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'begin_date' => '',
 			)
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertNotContains(
@@ -5682,6 +5895,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] + 40,
 			)
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertNotContains(
@@ -5702,6 +5917,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'begin_date_registration' => $registrationBegin,
 			)
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -5724,6 +5941,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] - 42,
 			)
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
@@ -5743,6 +5962,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'begin_date_registration' => 0,
 			)
 		);
+
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(

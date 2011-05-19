@@ -453,6 +453,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				.'type of plug-in will be displayed.',
 			array(
 				'seminar_list',
+				'single_view',
 				'topic_list',
 				'my_events',
 				'my_vip_events',

@@ -20,6 +20,10 @@
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.seminar_list</numIndex>
 										<numIndex index="1">seminar_list</numIndex>
 									</numIndex>
+									<numIndex index="12" type="array">
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.single_view</numIndex>
+										<numIndex index="1">single_view</numIndex>
+									</numIndex>
 									<numIndex index="6" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.topic_list</numIndex>
 										<numIndex index="1">topic_list</numIndex>

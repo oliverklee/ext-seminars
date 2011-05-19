@@ -275,6 +275,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		}
 
 		switch ($this->whatToDisplay) {
+			case 'single_view':
+				$result = $this->createSingleView();
+				break;
 			case 'edit_event':
 				$result = $this->createEventEditorHtml();
 				break;
@@ -346,16 +349,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				// The fallthrough is intended
 				// because createListView() will differentiate later.
 			default:
-				// Show the single view if a 'showUid' variable is set.
-				if ($this->showUid) {
-					// Intentionally overwrite the previously set flavor.
-					$this->setFlavor('single_view');
-					$this->whatToDisplay = 'seminar_list';
-					$result = $this->createSingleView();
-				} else {
-					$result = $this->createListView($this->whatToDisplay);
-				}
-				break;
+				$result = $this->createListView($this->whatToDisplay);
 		}
 
 		// Let's check the configuration and display any errors.
@@ -683,7 +677,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * @return string HTML for the plugin
 	 */
-	private function createSingleView() {
+	protected function createSingleView() {
 		$this->hideSubparts(
 			$this->getConfValueString('hideFields', 's_template_special'),
 			'FIELD_WRAPPER'
