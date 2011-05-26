@@ -4057,6 +4057,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		foreach ($timeSlotBag as $timeSlot) {
 			$result[] = array(
+				'uid' => $timeSlot->getUid(),
 				'date' => $timeSlot->getDate(),
 				'time' => $timeSlot->getTime(),
 				'entry_date' => $timeSlot->getEntryDate(),
