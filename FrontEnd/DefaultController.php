@@ -193,6 +193,20 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	private $listViewHooksHaveBeenRetrieved = FALSE;
 
 	/**
+	 * hook objects for the single view
+	 *
+	 * @var array
+	 */
+	private $singleViewHooks = array();
+
+	/**
+	 * whether the hooks in $this->singleViewHooks have been retrieved
+	 *
+	 * @var boolean
+	 */
+	private $singleViewHooksHaveBeenRetrieved = FALSE;
+
+	/**
 	 * a link builder instance
 	 *
 	 * @var tx_seminars_Service_SingleViewLinkBuilder
@@ -219,8 +233,10 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 		unset(
 			$this->configGetter, $this->seminar, $this->registration,
-			$this->hookObjects, $this->feuser
+			$this->hookObjects, $this->listViewHooks, $this->singleViewHooks, $this->feuser
 		);
+		$this->listViewHooksHaveBeenRetrieved = FALSE;
+		$this->singleViewHooksHaveBeenRetrieved = FALSE;
 		parent::__destruct();
 	}
 
@@ -420,6 +436,39 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		}
 
 		return $this->listViewHooks;
+	}
+
+	/**
+	 * Gets the hooks for the single view.
+	 *
+	 * @throws t3lib_exception
+	 *         if there are registered hook classes that do not implement the
+	 *         tx_seminars_Interface_Hook_EventSingleView interface
+	 *
+	 * @return array<tx_seminars_Interface_Hook_EventSingleView>
+	 *         the hook objects, will be empty if no hooks have been set
+	 */
+	protected function getSingleViewHooks() {
+		if (!$this->singleViewHooksHaveBeenRetrieved) {
+			$hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'];
+			if (is_array($hookClasses)) {
+				foreach ($hookClasses as $hookClass) {
+					$hookInstance = t3lib_div::getUserObj($hookClass);
+					if (!($hookInstance instanceof tx_seminars_Interface_Hook_EventSingleView)) {
+						throw new t3lib_exception(
+							'The class ' . get_class($hookInstance) . ' is used for the event single view hook, ' .
+								'but does not implement the tx_seminars_Interface_Hook_EventSingleView interface.',
+								1306432026
+						);
+					}
+					$this->singleViewHooks[] = $hookInstance;
+				}
+			}
+
+			$this->singleViewHooksHaveBeenRetrieved = TRUE;
+		}
+
+		return $this->singleViewHooks;
 	}
 
 	/**
@@ -929,20 +978,28 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Fills in the matching markers for the time slots or hides the subpart
 	 * if there are no time slots.
 	 */
-	private function setTimeSlotsMarkers() {
+	protected function setTimeSlotsMarkers() {
 		if (!$this->seminar->hasTimeslots()) {
 			$this->hideSubparts('timeslots', 'field_wrapper');
 			return;
 		}
 
 		$this->hideSubparts('date,time', 'field_wrapper');
-		$timeSlotsOutput = '';
 
+		$timeSlotMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TimeSlot');
+
+		$timeSlotsOutput = '';
 		$timeSlots = $this->seminar->getTimeSlotsAsArrayWithMarkers();
-		foreach ($timeSlots as $timeSlot) {
-			foreach ($timeSlot as $key => $value) {
+		foreach ($timeSlots as $timeSlotData) {
+			foreach ($timeSlotData as $key => $value) {
 				$this->setMarker($key, $value, 'timeslot');
 			}
+
+			$timeSlot = $timeSlotMapper->find($timeSlotData['uid']);
+			foreach ($this->getSingleViewHooks() as $hook) {
+				$hook->modifyTimeSlotListRow($timeSlot, $this->getTemplate());
+			}
+
 			$timeSlotsOutput .= $this->getSubpart('SINGLE_TIMESLOT');
 		}
 

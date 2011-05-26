@@ -1551,6 +1551,90 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function timeSlotHookForEventWithoutTimeslotsNotGetsCalled() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
+
+		$hook = $this->getMock('tx_seminars_Interface_Hook_EventSingleView');
+		$hook->expects($this->never())->method('modifyTimeSlotListRow');
+
+		$hookClass = get_class($hook);
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+	}
+
+	/**
+	 * @test
+	 */
+	public function timeSlotHookForEventWithOneTimeslotGetsCalledOnceWithTimeSlot() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
+		$timeSlotUid = $this->testingFramework->createRecord(
+			'tx_seminars_timeslots',
+			array(
+				'seminar' => $this->seminarUid,
+				'room' => 'room 1'
+			)
+		);
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid,
+			array('timeslots' => $timeSlotUid)
+		);
+
+		$timeSlot = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TimeSlot')->find($timeSlotUid);
+		$hook = $this->getMock('tx_seminars_Interface_Hook_EventSingleView');
+		$hook->expects($this->once())->method('modifyTimeSlotListRow')
+			->with($timeSlot, $this->anything());
+		// We don't test for the second parameter (the template instance here)
+		// because we cannot access it from the outside.
+
+		$hookClass = get_class($hook);
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+	}
+
+	/**
+	 * @test
+	 */
+	public function timeSlotHookForEventWithTwoTimeslotGetsCalledTwice() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
+		$timeSlotUid1 = $this->testingFramework->createRecord(
+			'tx_seminars_timeslots',
+			array(
+				'seminar' => $this->seminarUid,
+				'room' => 'room 1'
+			)
+		);
+		$timeSlotUid2 = $this->testingFramework->createRecord(
+			'tx_seminars_timeslots',
+			array(
+				'seminar' => $this->seminarUid,
+				'room' => 'room 2'
+			)
+		);
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid,
+			array('timeslots' => $timeSlotUid1 . ',' . $timeSlotUid2)
+		);
+
+		$hook = $this->getMock('tx_seminars_Interface_Hook_EventSingleView');
+		$hook->expects($this->exactly(2))->method('modifyTimeSlotListRow');
+
+		$hookClass = get_class($hook);
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
+	}
+
 
 	///////////////////////////////////////////////////////
 	// Tests concerning target groups in the single view.
@@ -7766,7 +7850,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
 
 		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
-		$hook->expects($this->once())->method('modifyListRow')->with($event);
+		$hook->expects($this->once())->method('modifyListRow')->with($event, $this->anything());
 		// We don't test for the second parameter (the template instance here)
 		// because we cannot access it from the outside.
 
@@ -7802,7 +7886,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($registrationUid);
 
 		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
-		$hook->expects($this->once())->method('modifyMyEventsListRow')->with($registration);
+		$hook->expects($this->once())->method('modifyMyEventsListRow')->with($registration, $this->anything());
 		// We don't test for the second parameter (the template instance here)
 		// because we cannot access it from the outside.
 
@@ -7822,7 +7906,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
-		$hook->expects($this->once())->method('modifyListRow')->with($event);
+		$hook->expects($this->once())->method('modifyListRow')->with($event, $this->anything());
 		// We don't test for the second parameter (the template instance here)
 		// because we cannot access it from the outside.
 

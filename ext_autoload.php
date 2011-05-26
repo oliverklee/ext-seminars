@@ -63,6 +63,7 @@ return array(
 	'tx_seminars_frontend_selectorwidget' => $extensionPath . 'FrontEnd/SelectorWidget.php',
 	'tx_seminars_frontend_wizardicon' => $extensionPath . 'FrontEnd/WizardIcon.php',
 	'tx_seminars_interface_hook_eventlistview' => $extensionPath . 'Interface/Hook/EventListView.php',
+	'tx_seminars_interface_hook_eventsingleview' => $extensionPath . 'Interface/Hook/EventSingleView.php',
 	'tx_seminars_mapper_backenduser' => $extensionPath . 'Mapper/BackEndUser.php',
 	'tx_seminars_mapper_backendusergroup' => $extensionPath . 'Mapper/BackEndUserGroup.php',
 	'tx_seminars_mapper_category' => $extensionPath . 'Mapper/Category.php',
