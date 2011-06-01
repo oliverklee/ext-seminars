@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2009-2010 Mario Rimann (mario@screenteam.com)
+* (c) 2009-2011 Mario Rimann (mario@screenteam.com)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,6 +29,7 @@
  * @subpackage tx_seminars
  *
  * @author Mario Rimann <mario@screenteam.com>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_BackEnd_ConfirmEventMailForm extends tx_seminars_BackEnd_AbstractEventMailForm  {
 	/**
@@ -58,6 +59,24 @@ class tx_seminars_BackEnd_ConfirmEventMailForm extends tx_seminars_BackEnd_Abstr
 	 */
 	protected function getMessageBodyFormContent() {
 		return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
+	}
+
+	/**
+	 * Calls all registered hooks for modifying the e-mail.
+	 *
+	 * @param tx_seminars_Model_Registration $registration
+	 *        the registration to which the e-mail refers
+	 * @param tx_oelib_Mail $eMail
+	 *        the e-mail to be sent
+	 *
+	 * @return void
+	 */
+	protected function modifyEmailWithHook(
+		tx_seminars_Model_Registration $registration, tx_oelib_Mail $eMail
+	) {
+		foreach ($this->getHooks() as $hook) {
+			$hook->modifyConfirmEmail($registration, $eMail);
+		}
 	}
 
 	/**

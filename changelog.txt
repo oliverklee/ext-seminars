@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#3951] Feature: Add a hook for sending the confirmation e-mail (from the BE module)
 - [#4210] Feature: Modernize the modifySingleView hook
 - [#4104] Feature: Add a hook for modifying the time frame list rows in the single view
 - [#4199] Feature: Add a separate flavor for the single view

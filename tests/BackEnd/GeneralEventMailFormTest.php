@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2010 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2010-2011 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -45,6 +45,20 @@ class tx_seminars_BackEnd_GeneralEventMailFormTest extends tx_phpunit_testcase {
 	private $testingFramework;
 
 	/**
+	 * backed-up extension configuration of the TYPO3 configuration variables
+	 *
+	 * @var array
+	 */
+	private $extConfBackup = array();
+
+	/**
+	 * backed-up T3_VAR configuration
+	 *
+	 * @var array
+	 */
+	private $t3VarBackup = array();
+
+	/**
 	 * backup of the BE user's language
 	 *
 	 * @var string
@@ -66,6 +80,10 @@ class tx_seminars_BackEnd_GeneralEventMailFormTest extends tx_phpunit_testcase {
 	private $eventUid;
 
 	public function setUp() {
+		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
+		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = array();
+
 		$this->languageBackup = $GLOBALS['LANG']->lang;
 		$GLOBALS['LANG']->lang = 'default';
 
@@ -114,6 +132,9 @@ class tx_seminars_BackEnd_GeneralEventMailFormTest extends tx_phpunit_testcase {
 		unset($this->fixture, $this->testingFramework);
 
 		t3lib_FlashMessageQueue::getAllMessagesAndFlush();
+
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
+		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
 	}
 
 
@@ -191,6 +212,86 @@ class tx_seminars_BackEnd_GeneralEventMailFormTest extends tx_phpunit_testcase {
 			'foo User',
 			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendEmailCallsHookWithRegistration() {
+		$registrationUid = $this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'pid' => $this->dummySysFolderUid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array('email' => 'foo@example.com', 'name' => 'foo User')
+				),
+			)
+		);
+
+		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($registrationUid);
+		$hook = $this->getMock('tx_seminars_Interface_Hook_BackEndModule');
+		$hook->expects($this->once())->method('modifyGeneralEmail')
+			->with($registration, $this->anything());
+
+		$hookClass = get_class($hook);
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][$hookClass] = $hookClass;
+
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
+				'subject' => 'foo',
+				'messageBody' => 'some message body',
+			)
+		);
+		$this->fixture->render();
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendEmailForTwoRegistrationsCallsHookTwice() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'pid' => $this->dummySysFolderUid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array('email' => 'foo@example.com', 'name' => 'foo User')
+				),
+			)
+		);
+		$this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array(
+				'pid' => $this->dummySysFolderUid,
+				'seminar' => $this->eventUid,
+				'user' => $this->testingFramework->createFrontEndUser(
+					'', array('email' => 'bar@example.com', 'name' => 'foo User')
+				),
+			)
+		);
+
+		$hook = $this->getMock('tx_seminars_Interface_Hook_BackEndModule');
+		$hook->expects($this->exactly(2))->method('modifyGeneralEmail');
+
+		$hookClass = get_class($hook);
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][$hookClass] = $hookClass;
+
+		$this->fixture->setPostData(
+			array(
+				'action' => 'confirmEvent',
+				'isSubmitted' => '1',
+				'sender' => $this->organizerUid,
+				'subject' => 'foo',
+				'messageBody' => 'some message body',
+			)
+		);
+		$this->fixture->render();
 	}
 }
 ?>

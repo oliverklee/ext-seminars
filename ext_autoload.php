@@ -62,6 +62,7 @@ return array(
 	'tx_seminars_frontend_requirementslist' => $extensionPath . 'FrontEnd/RequirementsList.php',
 	'tx_seminars_frontend_selectorwidget' => $extensionPath . 'FrontEnd/SelectorWidget.php',
 	'tx_seminars_frontend_wizardicon' => $extensionPath . 'FrontEnd/WizardIcon.php',
+	'tx_seminars_interface_hook_backendmodule' => $extensionPath . 'Interface/Hook/BackEndModule.php',
 	'tx_seminars_interface_hook_eventlistview' => $extensionPath . 'Interface/Hook/EventListView.php',
 	'tx_seminars_interface_hook_eventsingleview' => $extensionPath . 'Interface/Hook/EventSingleView.php',
 	'tx_seminars_mapper_backenduser' => $extensionPath . 'Mapper/BackEndUser.php',

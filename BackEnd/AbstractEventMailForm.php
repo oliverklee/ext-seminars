@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2009-2010 Mario Rimann (mario@screenteam.com)
+* (c) 2009-2011 Mario Rimann (mario@screenteam.com)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,6 +29,7 @@
  * @subpackage tx_seminars
  *
  * @author Mario Rimann <mario@screenteam.com>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
@@ -68,6 +69,21 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	protected $formFieldPrefix = '';
 
 	/**
+	 * hook objects for the list view
+	 *
+	 * @var array
+	 */
+	private $hooks = array();
+
+	/**
+	 * whether the hooks in $this->hooks have been retrieved
+	 *
+	 * @var boolean
+	 */
+	private $hooksHaveBeenRetrieved = FALSE;
+
+
+	/**
 	 * The constructor of this class. Instantiates an event object.
 	 *
 	 * @throws Exception if event could not be instantiated
@@ -100,6 +116,8 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			unset($this->oldEvent);
 		}
 		unset($this->event);
+		$this->hooks = array();
+		$this->hooksHaveBeenRetrieved = FALSE;
 	}
 
 	/**
@@ -403,8 +421,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		$organizer = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer')
 			->find(intval($this->getPostData('sender')));
 
-		$registrationBagBuilder
-			= tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Registration');
+		$registrationBagBuilder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Registration');
 		$registrationBagBuilder->limitToEvent($this->getEvent()->getUid());
 		$registrations = $registrationBagBuilder->build();
 
@@ -412,8 +429,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			$mailer = tx_oelib_mailerFactory::getInstance()->getMailer();
 
 			foreach ($registrations as $oldRegistration) {
-				$registration = tx_oelib_MapperRegistry
-					::get('tx_seminars_Mapper_Registration')
+				$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
 					->find($oldRegistration->getUid());
 				$user = $registration->getFrontEndUser();
 				if (!$user->hasEMailAddress()) {
@@ -424,6 +440,8 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 				$eMail->setSubject($this->getPostData('subject'));
 				$eMail->addRecipient($registration->getFrontEndUser());
 				$eMail->setMessage($this->createMessageBody($user, $organizer));
+
+				$this->modifyEmailWithHook($registration, $eMail);
 
 				$mailer->send($eMail);
 				$eMail->__destruct();
@@ -441,6 +459,20 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 
 		$registrations->__destruct();
 	}
+
+	/**
+	 * Calls all registered hooks for modifying the e-mail.
+	 *
+	 * @param tx_seminars_Model_Registration $registration
+	 *        the registration to which the e-mail refers
+	 * @param tx_oelib_Mail $eMail
+	 *        the e-mail to be sent
+	 *
+	 * @return void
+	 */
+	protected function modifyEmailWithHook(
+		tx_seminars_Model_Registration $registration, tx_oelib_Mail $eMail
+	) {}
 
 	/**
 	 * Marks an event according to the status to set (if any) and commits the
@@ -615,6 +647,39 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 */
 	private function hasErrorMessage($fieldName) {
 		return isset($this->errorMessages[$fieldName]);
+	}
+
+	/**
+	 * Gets the hooks.
+	 *
+	 * @throws t3lib_exception
+	 *         if there are registered hook classes that do not implement the
+	 *         tx_seminars_Interface_Hook_BackEndModule interface
+	 *
+	 * @return array<tx_seminars_Interface_Hook_BackEndModule>
+	 *         the hook objects, will be empty if no hooks have been set
+	 */
+	protected function getHooks() {
+		if (!$this->hooksHaveBeenRetrieved) {
+			$hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'];
+			if (is_array($hookClasses)) {
+				foreach ($hookClasses as $hookClass) {
+					$hookInstance = t3lib_div::getUserObj($hookClass);
+					if (!($hookInstance instanceof tx_seminars_Interface_Hook_BackEndModule)) {
+						throw new t3lib_exception(
+							'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .
+								'but does not implement the tx_seminars_Interface_Hook_BackEndModule interface.',
+								1301928334
+						);
+					}
+					$this->hooks[] = $hookInstance;
+				}
+			}
+
+			$this->hooksHaveBeenRetrieved = TRUE;
+		}
+
+		return $this->hooks;
 	}
 }
 
