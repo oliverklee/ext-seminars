@@ -411,7 +411,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
-					'', array('email' => 'foo@valid-email.org'))
+					'', array('email' => 'foo@example.com'))
 			)
 		);
 
@@ -473,7 +473,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'', array(
-						'email' => 'foo@valid-email.org', 'name' => 'test user'
+						'email' => 'foo@example.com', 'name' => 'test user'
 					)
 				)
 			)
@@ -510,7 +510,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'', array(
-						'email' => 'foo@valid-email.org', 'name' => 'test user'
+						'email' => 'foo@example.com', 'name' => 'test user'
 					)
 				)
 			)
@@ -545,7 +545,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
-					'', array('email' => 'foo@valid-email.org')
+					'', array('email' => 'foo@example.com')
 				)
 			)
 		);
@@ -577,7 +577,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
-					'', array('email' => 'foo@valid-email.org')
+					'', array('email' => 'foo@example.com')
 				)
 			)
 		);
@@ -587,7 +587,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
-					'', array('email' => 'foo@valid-email.org')
+					'', array('email' => 'foo@example.com')
 				)
 			)
 		);
@@ -619,7 +619,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
-					'', array('email' => 'foo@valid-email.org')
+					'', array('email' => 'foo@example.com')
 				)
 			)
 		);
@@ -661,7 +661,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
-					'', array('email' => 'foo@valid-email.org')
+					'', array('email' => 'foo@example.com')
 				)
 			)
 		);
@@ -696,7 +696,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'',
-					array('email' => 'foo@valid-email.org')
+					array('email' => 'foo@example.com')
 				)
 			)
 		);

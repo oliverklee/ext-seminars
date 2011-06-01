@@ -505,7 +505,7 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'',
-					array('email' => 'foo@valid-email.org', 'name' => 'foo User')
+					array('email' => 'foo@example.com', 'name' => 'foo User')
 				)
 			)
 		);

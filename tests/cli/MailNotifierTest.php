@@ -98,7 +98,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 	private function createSeminarWithOrganizer(array $additionalSeminarData = array()) {
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
-			array('title' => 'Mr. Test', 'email' => 'MrTest@valid-email.org')
+			array('title' => 'Mr. Test', 'email' => 'MrTest@example.com')
 		);
 
 		$eventUid = $this->testingFramework->createRecord(
@@ -359,7 +359,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 		));
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
-			array('title' => 'foo', 'email' => 'foo@valid-email.org')
+			array('title' => 'foo', 'email' => 'foo@example.com')
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid
@@ -570,7 +570,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 		$this->addSpeaker($eventUid);
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
-			array('title' => 'foo', 'email' => 'foo@valid-email.org')
+			array('title' => 'foo', 'email' => 'foo@example.com')
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid
@@ -705,7 +705,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 		$this->fixture->sendEventTakesPlaceReminders();
 
 		$this->assertContains(
-			'MrTest@valid-email.org',
+			'MrTest@example.com',
 			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastRecipient()
 		);
 	}
@@ -719,7 +719,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 		$this->fixture->sendEventTakesPlaceReminders();
 
 		$this->assertContains(
-			'MrTest@valid-email.org',
+			'MrTest@example.com',
 			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastHeaders()
 		);
 	}
@@ -731,7 +731,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 		));
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
-			array('title' => 'foo', 'email' => 'foo@valid-email.org')
+			array('title' => 'foo', 'email' => 'foo@example.com')
 		);
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid
@@ -743,7 +743,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 		$this->fixture->sendEventTakesPlaceReminders();
 
 		$this->assertContains(
-			'MrTest@valid-email.org',
+			'MrTest@example.com',
 			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastHeaders()
 		);
 	}
