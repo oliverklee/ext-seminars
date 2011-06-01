@@ -1745,7 +1745,7 @@ $TCA['tx_seminars_attendances'] = array(
 		),
 		'telephone' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.phone',
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances.telephone',
 			'config' => array(
 				'type' => 'input',
 				'size' => '20',
