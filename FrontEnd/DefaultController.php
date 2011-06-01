@@ -174,11 +174,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	);
 
 	/**
-	 * @var array hook objects for this class
-	 */
-	private $hookObjects = array();
-
-	/**
 	 * hook objects for the list view
 	 *
 	 * @var array
@@ -233,7 +228,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 		unset(
 			$this->configGetter, $this->seminar, $this->registration,
-			$this->hookObjects, $this->listViewHooks, $this->singleViewHooks, $this->feuser
+			$this->listViewHooks, $this->singleViewHooks, $this->feuser
 		);
 		$this->listViewHooksHaveBeenRetrieved = FALSE;
 		$this->singleViewHooksHaveBeenRetrieved = FALSE;
@@ -257,7 +252,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		$this->getTemplateCode();
 		$this->setLabels();
 		$this->setCSS();
-		$this->getHookObjects();
 		$this->createHelperObjects();
 
 		// Lets warnings from the registration manager bubble up to us.
@@ -390,19 +384,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 */
 	public function isInitialized() {
 		return ($this->isInitialized && is_object($this->configGetter));
-	}
-
-	/**
-	 * Gets all hook objects for this class.
-	 */
-	private function getHookObjects() {
-		$extensionConfiguration =& $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
-		$hooks =& $extensionConfiguration['seminars/pi1/class.tx_seminars_pi1.php']['hooks'];
-		if (is_array($hooks)) {
-			foreach ($hooks as $classReference) {
-				$this->hookObjects[] = t3lib_div::getUserObj($classReference);
-			}
-		}
 	}
 
 	/**
@@ -733,8 +714,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		);
 
 		if ($this->createSeminar($this->showUid, $this->isLoggedIn())) {
-			$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-				->find($this->showUid);
+			$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->showUid);
 
 			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(TRUE));
@@ -808,11 +788,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 			$this->hideUnneededSubpartsForTopicRecords();
 
-			// Modifies the single view hook.
-			foreach ($this->hookObjects as $hookObject) {
-				if (method_exists($hookObject, 'modifySingleView')) {
-					$hookObject->modifySingleView($this);
-				}
+			foreach ($this->getSingleViewHooks() as $hook) {
+				$hook->modifyEventSingleView($event, $this->getTemplate());
 			}
 
 			$result = $this->getSubpart('SINGLE_VIEW');

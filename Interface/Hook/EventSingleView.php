@@ -34,9 +34,6 @@ interface tx_seminars_Interface_Hook_EventSingleView {
 	/**
 	 * Modifies the event single view.
 	 *
-	 * Note: This hook is not called yet. This method is just here to make this
-	 * interface more complete.
-	 *
 	 * @param tx_seminars_Model_Event $event
 	 *        the event to display in the single view
 	 * @param tx_oelib_Template $template
