@@ -728,6 +728,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		);
 
 		if ($this->createSeminar($this->showUid, $this->isLoggedIn())) {
+			$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->showUid);
+
 			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(TRUE));
 
@@ -805,6 +807,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				if (method_exists($hookObject, 'modifySingleView')) {
 					$hookObject->modifySingleView($this);
 				}
+			}
+			foreach ($this->getSingleViewHooks() as $hook) {
+				$hook->modifyEventSingleView($event, $this->getTemplate());
 			}
 
 			$result = $this->getSubpart('SINGLE_VIEW');

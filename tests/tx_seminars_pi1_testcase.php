@@ -88,6 +88,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	public function setUp() {
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = array();
 
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
@@ -940,6 +941,27 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'style="background-image:',
 			$seminarWithImage
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewCallsModifyEventSingleViewHook() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
+
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
+		$hook = $this->getMock('tx_seminars_Interface_Hook_EventSingleView');
+		$hook->expects($this->once())->method('modifyEventSingleView')
+			->with($event, $this->anything());
+		// We don't test for the second parameter (the template instance here)
+		// because we cannot access it from the outside.
+
+		$hookClass = get_class($hook);
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->fixture->main('', array());
 	}
 
 

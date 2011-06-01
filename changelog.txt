@@ -1,4 +1,5 @@
 0.9.3 (currently working on)
+- [#4210] Feature: Modernize the modifySingleView hook
 
 0.9.3 (released 2011-05-26)
 - [#4104] Feature: Add a hook for modifying the time frame list rows in the single view
