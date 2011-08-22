@@ -631,7 +631,7 @@ $TCA['tx_seminars_seminars'] = array(
 					'upper' => '999999.999',
 					'lower' => '0.000',
 				),
-				'default' => '0.00',
+				'default' => '0.000',
 			),
 		),
 		'price_regular_board' => array(
