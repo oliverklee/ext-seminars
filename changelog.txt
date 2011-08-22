@@ -1,4 +1,4 @@
-0.9.3 (currently working on)
+0.9.4 (currently working on)
 - [#3988] Fix: Field in the registration TCE forms has no label
 - [#4210] Feature: Modernize the modifySingleView hook
 
