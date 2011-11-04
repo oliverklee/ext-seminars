@@ -158,8 +158,4 @@ abstract class tx_seminars_Model_AbstractTimeSpan extends tx_oelib_Model {
 		return $this->hasString('room');
 	}
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/AbstractTimeSpan.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/Model/AbstractTimeSpan.php']);
-}
 ?>

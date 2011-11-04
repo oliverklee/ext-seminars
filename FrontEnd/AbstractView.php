@@ -89,8 +89,4 @@ abstract class tx_seminars_FrontEnd_AbstractView extends tx_oelib_templatehelper
 	 */
 	abstract public function render();
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/AbstractView.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/AbstractView.php']);
-}
 ?>

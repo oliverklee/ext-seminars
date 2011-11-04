@@ -203,8 +203,4 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 		return $this->recursivePageList;
 	}
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEndExtJs/Ajax/AbstractList.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEndExtJs/Ajax/AbstractList.php']);
-}
 ?>

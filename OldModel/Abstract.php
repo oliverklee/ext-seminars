@@ -630,8 +630,4 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 		return $this->getRecordPropertyInteger('pid');
 	}
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/OldModel/Abstract.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/OldModel/Abstract.php']);
-}
 ?>

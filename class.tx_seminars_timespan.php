@@ -365,8 +365,4 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	 */
 	public abstract function getPlaceShort();
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_timespan.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/class.tx_seminars_timespan.php']);
-}
 ?>

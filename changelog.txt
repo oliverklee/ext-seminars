@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4268] Cleanup: Drop the XCLASS code from abstract classes
 - [#4233] Fix: The default value for price_regular_early is missing a decimal (thanks to Eric Chavaillaz)
 - [#3988] Fix: Field in the registration TCE forms has no label
 - [#3951] Feature: Add a hook for sending the confirmation e-mail (from the BE module)

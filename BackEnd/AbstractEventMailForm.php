@@ -682,8 +682,4 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		return $this->hooks;
 	}
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/AbstractEventMailForm.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/AbstractEventMailForm.php']);
-}
 ?>
