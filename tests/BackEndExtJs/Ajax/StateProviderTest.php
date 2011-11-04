@@ -42,7 +42,7 @@ class tx_seminars_BackEndExtJs_Ajax_StateProviderTest extends tx_phpunit_testcas
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
-	private $testingFramework = null;
+	private $testingFramework = NULL;
 
 	/**
 	 * back-up of $_POST
@@ -56,7 +56,7 @@ class tx_seminars_BackEndExtJs_Ajax_StateProviderTest extends tx_phpunit_testcas
 	 *
 	 * @var t3lib_beUserAuth
 	 */
-	private $backEndUserBackUp = null;
+	private $backEndUserBackUp = NULL;
 
 	public function setUp() {
 		$this->backEndUserBackUp = $GLOBALS['BE_USER'];

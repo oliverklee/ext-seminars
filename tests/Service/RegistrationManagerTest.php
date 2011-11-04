@@ -46,7 +46,7 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_seminarchild a seminar to which the fixture relates
 	 */
-	private $seminar = null;
+	private $seminar = NULL;
 
 	/**
 	 * @var integer the UID of a fake front-end user
@@ -66,17 +66,17 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_FrontEnd_DefaultController a front-end plugin
 	 */
-	private $pi1 = null;
+	private $pi1 = NULL;
 
 	/**
 	 * @var tx_seminars_seminarchild a fully booked seminar
 	 */
-	private $fullyBookedSeminar = null;
+	private $fullyBookedSeminar = NULL;
 
 	/**
 	 * @var tx_seminars_seminarchild a seminar
 	 */
-	private $cachedSeminar = null;
+	private $cachedSeminar = NULL;
 
 	/**
 	 * backed-up extension configuration of the TYPO3 configuration variables
@@ -95,7 +95,7 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_Service_SingleViewLinkBuilder
 	 */
-	private $linkBuilder = null;
+	private $linkBuilder = NULL;
 
 	protected function setUp() {
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];

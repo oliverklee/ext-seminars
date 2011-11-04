@@ -67,7 +67,7 @@ class tx_seminars_BackEndExtJs_Ajax_StateProvider {
 		}
 
 		$value = json_decode(t3lib_div::_POST('value'));
-		if ($value === null) {
+		if ($value === NULL) {
 			return array('success' => FALSE);
 		}
 

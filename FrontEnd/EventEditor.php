@@ -292,7 +292,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *               and "value" (for the UID)
 	 */
 	public function populateListPlaces(
-		array $items, $unused = null, tx_ameosformidable $formidable = null
+		array $items, $unused = NULL, tx_ameosformidable $formidable = NULL
 	) {
 		$result = $items;
 
@@ -365,7 +365,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *               and "value" (for the UID)
 	 */
 	public function populateListSpeakers(
-		array $items, $parameters = array(), tx_ameosformidable $formidable = null
+		array $items, $parameters = array(), tx_ameosformidable $formidable = NULL
 	) {
 		$result = $items;
 
@@ -441,7 +441,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *               title) and "value" (for the UID)
 	 */
 	public function populateListCheckboxes(
-		array $items, $unused = null, tx_ameosformidable $formidable = null
+		array $items, $unused = NULL, tx_ameosformidable $formidable = NULL
 	) {
 		$result = $items;
 
@@ -514,7 +514,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *               title) and "value" (for the UID)
 	 */
 	public function populateListTargetGroups(
-		array $items, $unused = null, tx_ameosformidable $formidable = null
+		array $items, $unused = NULL, tx_ameosformidable $formidable = NULL
 	) {
 		$result = $items;
 
@@ -1580,10 +1580,10 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 				$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
 					->find($countryUid);
 			} catch (Exception $exception) {
-				$country = null;
+				$country = NULL;
 			}
 		} else {
-			$country = null;
+			$country = NULL;
 		}
 
 		$place->setTitle(trim(strip_tags($formData[$prefix . 'title'])));

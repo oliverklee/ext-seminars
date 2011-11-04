@@ -79,7 +79,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 	 *        the publication hash to find the event for, must not be empty
 	 *
 	 * @return tx_seminars_Model_Event the event with the publication hash
-	 *                                 provided, will be null if no event could
+	 *                                 provided, will be NULL if no event could
 	 *                                 be found
 	 */
 	public function findByPublicationHash($publicationHash) {
@@ -92,7 +92,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 				array('publication_hash' => $publicationHash)
 			);
 		} catch (tx_oelib_Exception_NotFound $exception) {
-			$result = null;
+			$result = NULL;
 		}
 
 		return $result;

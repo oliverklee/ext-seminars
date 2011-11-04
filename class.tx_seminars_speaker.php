@@ -318,12 +318,12 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns our owner.
 	 *
-	 * @return tx_seminars_Model_FrontEndUser the owner of this model, will be null
+	 * @return tx_seminars_Model_FrontEndUser the owner of this model, will be NULL
 	 *                                     if this model has no owner
 	 */
 	public function getOwner() {
 		if (!$this->hasRecordPropertyInteger('owner')) {
-			return null;
+			return NULL;
 		}
 
 		return tx_oelib_MapperRegistry::get(

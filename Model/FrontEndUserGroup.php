@@ -90,14 +90,14 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	 * @return boolean TRUE if a reviewer is set, FALSE otherwise
 	 */
 	public function hasReviewer() {
-		return $this->getReviewer() !== null;
+		return $this->getReviewer() !== NULL;
 	}
 
 	/**
 	 * Returns the BE user which is stored as reviewer for this group.
 	 *
 	 * @return tx_oelib_Model_BackEndUser the reviewer for this group, will be
-	 *                                    null if no reviewer has been set
+	 *                                    NULL if no reviewer has been set
 	 */
 	public function getReviewer() {
 		return $this->getAsModel('tx_seminars_reviewer');
@@ -148,7 +148,7 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	 * Returns this user group's default organizer for the FE editor.
 	 *
 	 * @return tx_seminars_Model_Organizer this group's default organizer, will
-	 *                                     be null if no organizer has been set
+	 *                                     be NULL if no organizer has been set
 	 */
 	public function getDefaultOrganizer() {
 		return $this->getAsModel('tx_seminars_default_organizer');

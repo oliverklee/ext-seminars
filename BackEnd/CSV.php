@@ -44,7 +44,7 @@ class tx_seminars_BackEnd_CSV extends tx_seminars_BackEnd_Module {
 	 */
 	public function printContent() {
 		$pi2 = tx_oelib_ObjectFactory::make('tx_seminars_pi2');
-		echo $pi2->main(null, array());
+		echo $pi2->main(NULL, array());
 		$pi2->__destruct();
 		unset($pi2);
 	}

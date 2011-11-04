@@ -37,7 +37,7 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 	/**
 	 * @var tx_seminars_seminar the event to build the requirements list for
 	 */
-	private $event = null;
+	private $event = NULL;
 
 	/**
 	 * @var boolean whether to limit the requirements to the events the user
@@ -50,13 +50,13 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 	 *
 	 * @var tx_seminars_Service_SingleViewLinkBuilder
 	 */
-	private $linkBuilder = null;
+	private $linkBuilder = NULL;
 
 	/**
 	 * The destructor.
 	 */
 	public function __destruct() {
-		if ($this->linkBuilder !== null) {
+		if ($this->linkBuilder !== NULL) {
 			$this->linkBuilder->__destruct();
 			unset($this->linkBuilder);
 		}
@@ -103,7 +103,7 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 			);
 		}
 
-		if ($this->linkBuilder == null) {
+		if ($this->linkBuilder == NULL) {
 			$this->injectLinkBuilder(tx_oelib_ObjectFactory::make(
 				'tx_seminars_Service_SingleViewLinkBuilder'
 			));

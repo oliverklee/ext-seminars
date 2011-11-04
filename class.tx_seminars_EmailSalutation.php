@@ -36,7 +36,7 @@ class tx_seminars_EmailSalutation {
 	/**
 	 * @var tx_oelib_Translator the translator for the localized salutation
 	 */
-	private $translator = null;
+	private $translator = NULL;
 
 	/**
 	 * the constructor

@@ -54,12 +54,12 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/**
 	 * @var tx_seminars_registrationmanager the Singleton instance
 	 */
-	private static $instance = null;
+	private static $instance = NULL;
 
 	/**
 	 * @var tx_seminars_registration the current registration
 	 */
-	private $registration = null;
+	private $registration = NULL;
 
 	/**
 	 * @var boolean whether we have already initialized the templates
@@ -101,7 +101,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @var tx_seminars_Service_SingleViewLinkBuilder
 	 */
-	private $linkBuilder = null;
+	private $linkBuilder = NULL;
 
 	/**
 	 * The constructor.
@@ -121,7 +121,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$this->registration->__destruct();
 			unset($this->registration);
 		}
-		if ($this->linkBuilder !== null) {
+		if ($this->linkBuilder !== NULL) {
 			$this->linkBuilder->__destruct();
 			unset($this->linkBuilder);
 		}
@@ -151,7 +151,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		if (self::$instance) {
 			self::$instance->__destruct();
 		}
-		self::$instance = null;
+		self::$instance = NULL;
 	}
 
 	/**
@@ -514,7 +514,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * checks.
 	 *
 	 * @param object the seminar object (that's the seminar we would like to
-	 *               register for), must not be null
+	 *               register for), must not be NULL
 	 * @param array associative array with the registration data the user has
 	 *              just entered
 	 *
@@ -680,7 +680,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			? max(0, intval($formData['kids'])) : 0;
 		$registration->setKids($kids);
 
-		$paymentMethod = null;
+		$paymentMethod = NULL;
 		if ($totalPrice > 0) {
 			$availablePaymentMethods = $event->getPaymentMethods();
 			if (!$availablePaymentMethods->isEmpty()) {
@@ -1256,7 +1256,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		tx_seminars_registration $registration,
 		tslib_pibase $plugin, $helloSubjectPrefix , $useHtml = FALSE
 	) {
-		if ($this->linkBuilder == null) {
+		if ($this->linkBuilder == NULL) {
 			$this->injectLinkBuilder(tx_oelib_ObjectFactory::make(
 				'tx_seminars_Service_SingleViewLinkBuilder'
 			));
@@ -1646,7 +1646,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @TODO: This is just a transitional helper function that can be removed
 	 * once createRegistration does not use the old registration class anymore.
 	 *
-	 * @return tx_seminars_registration the created registration, will be null
+	 * @return tx_seminars_registration the created registration, will be NULL
 	 *                                  if no registration has been created
 	 */
 	public function getRegistration() {

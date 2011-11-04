@@ -54,7 +54,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * @var t3lib_cs helper for charset conversion
 	 */
-	protected $charsetConversion = null;
+	protected $charsetConversion = NULL;
 
 	/**
 	 * @var string the name of the SQL table this class corresponds to
@@ -89,7 +89,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *                ignored.
 	 */
 	public function __construct(
-		$uid, $dbResult = null, $allowHiddenRecords = FALSE
+		$uid, $dbResult = NULL, $allowHiddenRecords = FALSE
 	) {
 		$this->initializeCharsetConversion();
 		$this->retrieveRecordAndGetData($uid, $dbResult, $allowHiddenRecords);

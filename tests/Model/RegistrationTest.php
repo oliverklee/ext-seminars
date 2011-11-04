@@ -556,7 +556,7 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setPaymentMethodCanSetPaymentMethodToNull() {
-		$this->fixture->setPaymentMethod(null);
+		$this->fixture->setPaymentMethod(NULL);
 
 		$this->assertNull(
 			$this->fixture->getPaymentMethod()

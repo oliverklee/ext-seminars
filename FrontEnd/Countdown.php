@@ -38,7 +38,7 @@ class tx_seminars_FrontEnd_Countdown extends tx_seminars_FrontEnd_AbstractView {
 	 * @var tx_seminars_seminar the seminar for which we want to show the
 	 *                          countdown
 	 */
-	private $seminar = null;
+	private $seminar = NULL;
 
 	/**
 	 * @var boolean TRUE if the current object is in test mode, FALSE otherwise

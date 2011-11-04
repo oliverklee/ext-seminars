@@ -124,7 +124,7 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 	 * $_POST['start'] as the number of the first model and the value in
 	 * $_POST['limit'] as the number of models to retrieve.
 	 *
-	 * @return tx_oelib_List will be a list of models in case of success, null
+	 * @return tx_oelib_List will be a list of models in case of success, NULL
 	 *                       in case of failure
 	 */
 	protected function retrieveModels() {

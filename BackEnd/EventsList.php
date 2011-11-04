@@ -40,7 +40,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	/**
 	 * @var tx_seminars_seminar the seminar which we want to list
 	 */
-	private $seminar = null;
+	private $seminar = NULL;
 
 	/**
 	 * @var string the path to the template file of this list
@@ -282,7 +282,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	 *                space) or an empty string
 	 */
 	public function getRegistrationsCsvIcon(tx_seminars_seminar $event) {
-		static $accessChecker = null;
+		static $accessChecker = NULL;
 		if (!$accessChecker) {
 			$accessChecker = tx_oelib_ObjectFactory::make('tx_seminars_pi2');
 			$accessChecker->init();

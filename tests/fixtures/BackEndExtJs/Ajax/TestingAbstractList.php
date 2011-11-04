@@ -66,7 +66,7 @@ class tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingAbstractList extends t
 	/**
 	 * Retrieves the models.
 	 *
-	 * @return tx_oelib_List will be a list of models in case of success, null
+	 * @return tx_oelib_List will be a list of models in case of success, NULL
 	 *                       in case of failure
 	 */
 	public function retrieveModels() {

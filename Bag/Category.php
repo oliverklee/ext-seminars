@@ -70,7 +70,7 @@ class tx_seminars_Bag_Category extends tx_seminars_Bag_Abstract {
 	 * as a source. If the current item cannot be created, $this->currentItem
 	 * will be nulled out.
 	 *
-	 * $this->dbResult must be ensured to be non-null when this function is
+	 * $this->dbResult must be ensured to be non-NULL when this function is
 	 * called.
 	 */
 	protected function createItemFromDbResult() {

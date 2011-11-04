@@ -57,19 +57,19 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @var tx_seminars_configgetter a config getter that gets us the
 	 *                               configuration in plugin.tx_seminars
 	 */
-	private $configGetter = null;
+	private $configGetter = NULL;
 
 	/**
 	 * @var tx_seminars_seminar the seminar which we want to list/show or
 	 *                          for which the user wants to register
 	 */
-	private $seminar = null;
+	private $seminar = NULL;
 
 	/**
 	 * @var tx_seminars_registration the registration which we want to
 	 *                               list/show in the "my events" view
 	 */
-	private $registration = null;
+	private $registration = NULL;
 
 	/** @var string the previous event's category (used for the list view) */
 	private $previousCategory = '';
@@ -221,7 +221,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		if ($this->registration) {
 			$this->registration->__destruct();
 		}
-		if ($this->linkBuilder !== null) {
+		if ($this->linkBuilder !== NULL) {
 			$this->linkBuilder->__destruct();
 			unset($this->linkBuilder);
 		}
@@ -454,7 +454,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 	/**
 	 * Creates a seminar in $this->seminar.
-	 * If the seminar cannot be created, $this->seminar will be null, and
+	 * If the seminar cannot be created, $this->seminar will be NULL, and
 	 * this function will return FALSE.
 	 *
 	 * @param integer an event UID
@@ -483,7 +483,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				? $this->canShowCurrentEvent()
 				: TRUE;
 		} else {
-			$this->setSeminar(null);
+			$this->setSeminar(NULL);
 		}
 
 		return $result;
@@ -494,14 +494,14 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * @param tx_seminars_seminar $seminar the current seminar
 	 */
-	protected function setSeminar(tx_seminars_seminar $seminar = null) {
+	protected function setSeminar(tx_seminars_seminar $seminar = NULL) {
 		$this->seminar = $seminar;
 	}
 
 	/**
 	 * Creates a registration in $this->registration from the database record
 	 * with the UID specified in the parameter $registrationUid.
-	 * If the registration cannot be created, $this->registration will be null,
+	 * If the registration cannot be created, $this->registration will be NULL,
 	 * and this function will return FALSE.
 	 *
 	 * @param integer a registration UID
@@ -534,10 +534,10 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			}
 			$result = $this->registration->isOk();
 			if (!$result) {
-				$this->registration = null;
+				$this->registration = NULL;
 			}
 		} else {
-			$this->registration = null;
+			$this->registration = NULL;
 		}
 
 		return $result;
@@ -547,7 +547,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Creates the config getter and the registration manager.
 	 */
 	public function createHelperObjects() {
-		if ($this->configGetter === null) {
+		if ($this->configGetter === NULL) {
 			$this->configGetter = tx_oelib_ObjectFactory::make(
 				'tx_seminars_configgetter'
 			);
@@ -582,12 +582,12 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Returns our config getter (which might be null if we aren't initialized
+	 * Returns our config getter (which might be NULL if we aren't initialized
 	 * properly yet).
 	 *
 	 * This function is intended for testing purposes only.
 	 *
-	 * @return object our config getter, might be null
+	 * @return object our config getter, might be NULL
 	 */
 	public function getConfigGetter() {
 		return $this->configGetter;
@@ -2882,7 +2882,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Creates the registration page title and (if applicable) any error
 	 * messages. Data from the event will only be displayed if $this->seminar
-	 * is non-null.
+	 * is non-NULL.
 	 *
 	 * @param string error message to be displayed (may be empty if there is no
 	 *               error)

@@ -311,7 +311,7 @@ class tx_seminars_Model_PlaceTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function countryCanBeSetToNull() {
-		$this->fixture->setCountry(null);
+		$this->fixture->setCountry(NULL);
 
 		$this->assertNull(
 			$this->fixture->getCountry()

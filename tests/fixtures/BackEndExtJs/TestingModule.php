@@ -37,7 +37,7 @@ class tx_seminars_tests_fixtures_BackEndExtJs_TestingModule extends tx_seminars_
 	/**
 	 * @var t3lib_PageRenderer
 	 */
-	private $pageRenderer = null;
+	private $pageRenderer = NULL;
 
 	public function init() {
 		parent::init();

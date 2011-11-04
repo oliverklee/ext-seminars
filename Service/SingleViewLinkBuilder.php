@@ -39,7 +39,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	 *
 	 * @var tx_oelib_templatehelper
 	 */
-	private $plugin = null;
+	private $plugin = NULL;
 
 	/**
 	 * whether this class has created a fake front end which needs to get
@@ -75,8 +75,8 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 			$GLOBALS['TSFE']->csConvObj, $GLOBALS['TSFE']->pagesection_lockObj,
 			$GLOBALS['TSFE']->pages_lockObj
 		);
-		$GLOBALS['TSFE'] = null;
-		$GLOBALS['TT'] = null;
+		$GLOBALS['TSFE'] = NULL;
+		$GLOBALS['TT'] = NULL;
 
 		$this->hasFakeFrontEnd = FALSE;
 	}
@@ -94,7 +94,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	 * Returns the plugin used for accessing the flexforms plugin settings.
 	 *
 	 * @return tx_oelib_templatehelper
-	 *         the plugin, will be null if non has been set via setPlugin
+	 *         the plugin, will be NULL if non has been set via setPlugin
 	 *
 	 * @see setPlugin
 	 */
@@ -233,7 +233,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	 *         page UID has been set
 	 */
 	protected function getSingleViewPageFromConfiguration() {
-		if ($this->plugin !== null) {
+		if ($this->plugin !== NULL) {
 			$result = $this->getPlugin()->getConfValueInteger('detailPID');
 		} else {
 			$result = tx_oelib_ConfigurationRegistry

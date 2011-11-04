@@ -339,7 +339,7 @@ class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 
 	public function test_getReviewerFromGroupForUserWithGroupWithNoReviewer_ReturnsNull() {
 		$userGroup = tx_oelib_ObjectFactory::make('tx_seminars_Model_FrontEndUserGroup');
-		$userGroup->setData(array('tx_seminars_reviewer' => null));
+		$userGroup->setData(array('tx_seminars_reviewer' => NULL));
 
 		$list = new tx_oelib_List();
 		$list->add($userGroup);
@@ -380,7 +380,7 @@ class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 			'tx_seminars_Model_FrontEndUserGroup'
 		);
 
-		$userGroup1->setData(array('tx_seminars_reviewer' => null));
+		$userGroup1->setData(array('tx_seminars_reviewer' => NULL));
 		$userGroup2->setData(array('tx_seminars_reviewer' => $backEndUser));
 
 		$list = new tx_oelib_List();
@@ -773,7 +773,7 @@ class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setRegistrationWithNullIsAllowed() {
-		$this->fixture->setRegistration(null);
+		$this->fixture->setRegistration(NULL);
 
 		$this->assertNull(
 			$this->fixture->getRegistration()
@@ -791,7 +791,7 @@ class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 	public function getDefaultOrganizersForGroupWithoutDefaultOrganizersReturnsEmptyList() {
 		$userGroup = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_FrontEndUserGroup')->getNewGhost();
-		$userGroup->setData(array('tx_seminars_default_organizer' => null));
+		$userGroup->setData(array('tx_seminars_default_organizer' => NULL));
 		$groups = new tx_oelib_List();
 		$groups->add($userGroup);
 		$this->fixture->setData(array('usergroup' => $groups));

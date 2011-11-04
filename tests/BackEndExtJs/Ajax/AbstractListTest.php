@@ -42,7 +42,7 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
-	private $testingFramework = null;
+	private $testingFramework = NULL;
 
 	/**
 	 * back-up of $_POST

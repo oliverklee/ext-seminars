@@ -38,7 +38,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * @var tx_seminars_seminar the seminar of which we want to list the
 	 *                          registrations
 	 */
-	private $seminar = null;
+	private $seminar = NULL;
 
 	/**
 	 * The constructor.

@@ -114,7 +114,7 @@ class tx_seminars_cli_MailNotifier {
 		tx_seminars_seminar $event, $messageKey
 	) {
 		$organizerBag = $event->getOrganizerBag();
-		$attachment = null;
+		$attachment = NULL;
 
 		// The first organizer is taken as sender.
 		$sender = $organizerBag->current();

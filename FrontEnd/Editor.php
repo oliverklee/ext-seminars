@@ -39,7 +39,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * @var tx_ameosformidable object that creates the form
 	 */
-	private $formCreator = null;
+	private $formCreator = NULL;
 
 	/**
 	 * @var integer UID of the currently edited object, zero if the object is
@@ -102,7 +102,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Returns the FORMidable instance.
 	 *
-	 * @return tx_ameosformidable FORMidable instance or null if the test mode
+	 * @return tx_ameosformidable FORMidable instance or NULL if the test mode
 	 *                            is set
 	 */
 	public function getFormCreator() {
@@ -149,12 +149,12 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	 *
 	 * This function does nothing if this instance is running in test mode.
 	 *
-	 * @return tx_ameosformidable FORMidable instance or null if the test mode
+	 * @return tx_ameosformidable FORMidable instance or NULL if the test mode
 	 *                            is set
 	 */
 	protected function makeFormCreator() {
 		if ($this->isTestMode()) {
-			return null;
+			return NULL;
 		}
 
 		if (empty($this->formConfiguration)) {

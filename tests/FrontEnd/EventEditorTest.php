@@ -189,7 +189,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 *        the field which should be required, may be empty
 	 *
 	 * @return tx_seminars_pi_eventEditor event editor fixture with the given
-	 *         field as required field, will not be null.
+	 *         field as required field, will not be NULL.
 	 */
 	private function getFixtureWithRequiredField($requiredField) {
 		$result = tx_oelib_ObjectFactory::make(

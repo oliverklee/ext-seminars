@@ -103,7 +103,7 @@ class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
 	}
 
 	public function testCreateFromDbResultFailsForNull() {
-		$this->fixture = new tx_seminars_OldModel_Category(0, null);
+		$this->fixture = new tx_seminars_OldModel_Category(0, NULL);
 
 		$this->assertFalse(
 			$this->fixture->isOk()

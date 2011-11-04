@@ -85,7 +85,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * @var tx_seminars_configgetter This object provides access to config
 	 * values in plugin.tx_seminars.
 	 */
-	private $configGetter = null;
+	private $configGetter = NULL;
 
 	/**
 	 * @var string the TYPO3 mode set for testing purposes
@@ -106,7 +106,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * @var language the language object for translating the CSV headings
 	 */
-	private $language = null;
+	private $language = NULL;
 
 	/**
 	 * The constructor.
@@ -189,7 +189,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	public function init(array $configuration = array()) {
 		parent::init($configuration);
 
-		if ($this->configGetter === null) {
+		if ($this->configGetter === NULL) {
 			$this->configGetter = tx_oelib_ObjectFactory::make(
 				'tx_seminars_configgetter'
 			);
@@ -644,12 +644,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Returns our config getter (which might be null if we aren't initialized
+	 * Returns our config getter (which might be NULL if we aren't initialized
 	 * properly yet).
 	 *
 	 * This function is intended for testing purposes only.
 	 *
-	 * @return object our config getter, might be null
+	 * @return object our config getter, might be NULL
 	 */
 	public function getConfigGetter() {
 		return $this->configGetter;

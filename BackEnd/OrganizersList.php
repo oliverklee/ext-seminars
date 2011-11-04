@@ -40,7 +40,7 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_AbstractLis
 	/**
 	 * @var tx_seminars_OldModel_Organizer the organizer which we want to list
 	 */
-	private $organizer = null;
+	private $organizer = NULL;
 
 	/**
 	 * @var string the path to the template file of this list

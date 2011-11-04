@@ -204,7 +204,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			(string) $this->eventUid,
-			$this->fixture->main(null, array())
+			$this->fixture->main(NULL, array())
 		);
 	}
 
@@ -540,7 +540,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	public function test_createListOfRegistrationsForFrontEndMode_CanExportRegistrationsBelongingToAnEvent() {
 		$this->fixture->setTypo3Mode('FE');
 		$globalBackEndUser = $GLOBALS['BE_USER'];
-		$GLOBALS['BE_USER'] = null;
+		$GLOBALS['BE_USER'] = NULL;
 
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
@@ -599,7 +599,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			$this->fixture->translate('label_yes'),
-			$this->fixture->main(null, array())
+			$this->fixture->main(NULL, array())
 		);
 	}
 
@@ -623,7 +623,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			(string) $registrationUid,
-			$this->fixture->main(null, array())
+			$this->fixture->main(NULL, array())
 		);
 	}
 
@@ -684,7 +684,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Schöne Bären führen',
-			$this->fixture->main(null, array())
+			$this->fixture->main(NULL, array())
 		);
 	}
 
@@ -712,7 +712,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Sch' . chr(246) . 'ne B' . chr(228) . 'ren f' . chr(252) . 'hren',
-			$this->fixture->main(null, array())
+			$this->fixture->main(NULL, array())
 		);
 	}
 
@@ -741,7 +741,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Schöne Bären führen',
-			$this->fixture->main(null, array())
+			$this->fixture->main(NULL, array())
 		);
 	}
 
@@ -774,7 +774,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Sch' . chr(246) . 'ne B' . chr(228) . 'ren f' . chr(252) . 'hren',
-			$this->fixture->main(null, array())
+			$this->fixture->main(NULL, array())
 		);
 	}
 

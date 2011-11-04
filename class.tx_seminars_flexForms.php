@@ -39,7 +39,7 @@ class tx_seminars_flexForms {
 	/**
 	 * @var language the back-end language object
 	 */
-	private $language = null;
+	private $language = NULL;
 
 	/**
 	 * The constructor.

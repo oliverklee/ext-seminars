@@ -136,7 +136,7 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 
 	public function testCreateFromDbResultFailsForNull() {
 		$test = new tx_seminars_tests_fixtures_OldModel_Testing(
-			0, null
+			0, NULL
 		);
 
 		$this->assertFalse(
@@ -166,7 +166,7 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		);
 
 		$test = new tx_seminars_tests_fixtures_OldModel_Testing(
-			$this->fixtureUid, null, TRUE
+			$this->fixtureUid, NULL, TRUE
 		);
 
 		$this->assertTrue(

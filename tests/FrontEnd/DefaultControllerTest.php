@@ -86,7 +86,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_Service_SingleViewLinkBuilder
 	 */
-	private $linkBuilder = null;
+	private $linkBuilder = NULL;
 
 	public function setUp() {
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
@@ -291,7 +291,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		if (!class_exists($testingClassName, FALSE)) {
 			eval(
 				'class ' . $testingClassName . ' extends tx_seminars_FrontEnd_DefaultController {' .
-				'public function setSeminar(tx_seminars_seminar $seminar = null) {' .
+				'public function setSeminar(tx_seminars_seminar $seminar = NULL) {' .
 				'  parent::setSeminar($seminar);' .
 				'}' .
 				'public function createAllEditorLinks() {' .

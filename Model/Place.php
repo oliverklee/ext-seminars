@@ -140,14 +140,14 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	public function getCountry() {
 		$countryCode = $this->getAsString('country');
 		if ($countryCode == '') {
-			return null;
+			return NULL;
 		}
 
 		try {
 			$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
 				->findByIsoAlpha2Code($countryCode);
 		} catch (tx_oelib_Exception_NotFound $exception) {
-			$country = null;
+			$country = NULL;
 		}
 
 		return $country;
@@ -157,10 +157,10 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	 * Sets the country of this place.
 	 *
 	 * @param tx_oelib_Model_Country $country
-	 *        the country to set for this place, can be null for "no country"
+	 *        the country to set for this place, can be NULL for "no country"
 	 */
-	public function setCountry(tx_oelib_Model_Country $country = null) {
-		$countryCode = ($country !== null) ? $country->getIsoAlpha2Code() : '';
+	public function setCountry(tx_oelib_Model_Country $country = NULL) {
+		$countryCode = ($country !== NULL) ? $country->getIsoAlpha2Code() : '';
 
 		$this->setAsString('country', $countryCode);
 	}
@@ -231,7 +231,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	/**
 	 * Returns our owner.
 	 *
-	 * @return tx_seminars_Model_FrontEndUser the owner of this model, will be null
+	 * @return tx_seminars_Model_FrontEndUser the owner of this model, will be NULL
 	 *                                     if this model has no owner
 	 */
 	public function getOwner() {

@@ -35,12 +35,12 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * @var tx_seminars_seminar the event which this e-mail form refers to
 	 */
-	private $oldEvent = null;
+	private $oldEvent = NULL;
 
 	/**
 	 * @var tx_seminars_Model_Event the event which this e-mail form refers to
 	 */
-	private $event = null;
+	private $event = NULL;
 
 	/**
 	 * @var boolean whether the form is complete

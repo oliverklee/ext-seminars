@@ -100,7 +100,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *
 	 * This method may only be called for date records.
 	 *
-	 * @return tx_seminars_Model_Event our topic, will be null if this event has
+	 * @return tx_seminars_Model_Event our topic, will be NULL if this event has
 	 *                                 no topic
 	 */
 	public function getTopic() {
@@ -254,7 +254,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our event type.
 	 *
-	 * @return tx_seminars_Model_EventType our event type, will be null if this
+	 * @return tx_seminars_Model_EventType our event type, will be NULL if this
 	 *                                     event has no event type
 	 */
 	public function getEventType() {
@@ -573,7 +573,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *         a non-zero single view page, FALSE otherwise
 	 */
 	protected function hasSingleViewPageUidFromEventType() {
-		return (($this->getEventType() !== null)
+		return (($this->getEventType() !== NULL)
 			&& $this->getEventType()->hasSingleViewPageUid());
 	}
 
@@ -675,12 +675,12 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our language.
 	 *
-	 * @return tx_oelib_Model_Language our language, will be null if this event
+	 * @return tx_oelib_Model_Language our language, will be NULL if this event
 	 *                                 has no language set
 	 */
 	public function getLanguage() {
 		if (!$this->hasLanguage()) {
-			return null;
+			return NULL;
 		}
 
 		return tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Language')
@@ -1320,7 +1320,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our owner.
 	 *
-	 * @return tx_oelib_Model_FrontEndUser our owner, will be null if this event
+	 * @return tx_oelib_Model_FrontEndUser our owner, will be NULL if this event
 	 *                                     has no owner
 	 */
 	public function getOwner() {

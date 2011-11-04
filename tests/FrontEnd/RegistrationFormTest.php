@@ -479,7 +479,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'Deutschland',
-			$this->fixture->getFeUserData(null, array('key' => 'country'))
+			$this->fixture->getFeUserData(NULL, array('key' => 'country'))
 		);
 	}
 
@@ -493,7 +493,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'United Kingdom',
-			$this->fixture->getFeUserData(null, array('key' => 'country'))
+			$this->fixture->getFeUserData(NULL, array('key' => 'country'))
 		);
 	}
 
@@ -507,7 +507,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'Taka-Tuka-Land',
-			$this->fixture->getFeUserData(null, array('key' => 'country'))
+			$this->fixture->getFeUserData(NULL, array('key' => 'country'))
 		);
 	}
 

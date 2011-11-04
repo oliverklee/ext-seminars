@@ -39,7 +39,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	 * @var tx_staticinfotables_pi1 needed for the list view to convert ISO
 	 *                              codes to country names and languages
 	 */
-	protected $staticInfo = null;
+	protected $staticInfo = NULL;
 
 	/**
 	 * @var array the keys of the search fields which should be displayed in the
@@ -55,12 +55,12 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	/**
 	 * @var tx_seminars_Bag_Event all seminars to show in the list view
 	 */
-	private $seminarBag = null;
+	private $seminarBag = NULL;
 
 	/**
 	 * @var tx_oelib_List all places which are assigned to at least one event
 	 */
-	private $places = null;
+	private $places = NULL;
 
 	/**
 	 * Frees as much memory that has been used by this object as possible.
@@ -72,7 +72,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 		}
 		if ($this->places) {
 			$this->places->__destruct();
-			$this->places = null;
+			$this->places = NULL;
 		}
 		unset($this->staticInfo);
 

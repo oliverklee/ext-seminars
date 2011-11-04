@@ -88,7 +88,7 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_Service_SingleViewLinkBuilder
 	 */
-	private $linkBuilder = null;
+	private $linkBuilder = NULL;
 
 	public function setUp() {
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];

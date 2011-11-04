@@ -411,7 +411,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns our owner.
 	 *
-	 * @return tx_seminars_Model_FrontEndUser the owner of this model, will be null
+	 * @return tx_seminars_Model_FrontEndUser the owner of this model, will be NULL
 	 *                                     if this model has no owner
 	 */
 	public function getOwner() {

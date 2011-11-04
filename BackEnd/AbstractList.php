@@ -40,12 +40,12 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	/**
 	 * @var tx_seminars_BackEnd_Module the back-end module
 	 */
-	protected $page = null;
+	protected $page = NULL;
 
 	/**
 	 * @var tx_oelib_Template the template object
 	 */
-	protected $template = null;
+	protected $template = NULL;
 
 	/**
 	 * @var string the path to the template file of this list

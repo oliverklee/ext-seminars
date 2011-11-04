@@ -40,7 +40,7 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_AbstractList 
 	/**
 	 * @var tx_seminars_speaker the speaker which we want to list
 	 */
-	private $speaker = null;
+	private $speaker = NULL;
 
 	/**
 	 * @var string the path to the template file of this list

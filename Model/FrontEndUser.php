@@ -99,11 +99,11 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 * Will return the first reviewer found.
 	 *
 	 * @return tx_oelib_Model_BackEndUser the reviewer set in the user's group,
-	 *                                    will be null if no reviewer has been
+	 *                                    will be NULL if no reviewer has been
 	 *                                    set or the user has no groups
 	 */
 	public function getReviewerFromGroup() {
-		$result = null;
+		$result = NULL;
 
 		foreach ($this->getUserGroups() as $userGroup) {
 			if ($userGroup->hasReviewer()) {
@@ -204,7 +204,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 * "additional registered person".
 	 *
 	 * @return tx_seminars_Model_Registration the associated registration,
-	 *                                        might be null
+	 *                                        might be NULL
 	 */
 	public function getRegistration() {
 		return $this->getAsModel('tx_seminars_registration');
@@ -215,10 +215,10 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 * "additional registered person".
 	 *
 	 * @param tx_seminars_Model_Registration $registration
-	 *        the associated registration, may be null
+	 *        the associated registration, may be NULL
 	 */
 	public function setRegistration(
-		tx_seminars_Model_Registration $registration = null
+		tx_seminars_Model_Registration $registration = NULL
 	) {
 		$this->set('tx_seminars_registration', $registration);
 	}

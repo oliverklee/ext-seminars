@@ -56,7 +56,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * @var tx_seminars_seminar the event to which this registration relates
 	 */
-	private $seminar = null;
+	private $seminar = NULL;
 
 	/**
 	 * @var boolean whether the user data has already been retrieved
@@ -303,12 +303,12 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * The attendee's user data (from fe_users) will be written to
 	 * $this->userData.
 	 *
-	 * $this->userData will be null if retrieving the user data fails.
+	 * $this->userData will be NULL if retrieving the user data fails.
 	 */
 	private function retrieveUserData() {
 		$uid = $this->getUser();
 		if ($uid == 0) {
-			$this->userData = null;
+			$this->userData = NULL;
 			return;
 		}
 

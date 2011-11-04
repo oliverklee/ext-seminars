@@ -81,12 +81,12 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * @var tx_staticinfotables_pi1
 	 */
-	private $staticInfo = null;
+	private $staticInfo = NULL;
 
 	/**
 	 * @var tx_seminars_seminar seminar object
 	 */
-	private $seminar = null;
+	private $seminar = NULL;
 
 	/**
 	 * The constructor.
@@ -368,7 +368,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * @param array associative array with the element "value" in which
 	 *              the currently selected value (a positive integer or
-	 *              null if no radiobutton is selected) is stored
+	 *              NULL if no radiobutton is selected) is stored
 	 *
 	 * @return boolean TRUE if a method of payment is selected OR no method
 	 *                 could have been selected at all OR this event has no
@@ -386,7 +386,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Checks whether a radiobutton in a radiobutton group is selected.
 	 *
 	 * @param mixed the currently selected value (a positive integer) or
-	 *                  null if no button is selected
+	 *                  NULL if no button is selected
 	 *
 	 * @return boolean TRUE if a radiobutton is selected, FALSE if none is
 	 *                 selected
@@ -566,7 +566,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * checkLogOutOneTimeAccountsAfterRegistration is enabled in the TS setup,
 	 * the FE user will be automatically logged out.
 	 *
-	 * @return string complete URL of the FE page with a message (or null
+	 * @return string complete URL of the FE page with a message (or NULL
 	 *                if the confirmation page has not been submitted yet)
 	 */
 	public function getThankYouAfterRegistrationUrl() {
@@ -597,7 +597,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Gets the URL of the page that should be displayed after a user has
 	 * unregistered from an event.
 	 *
-	 * @return string complete URL of the FE page with a message (or null
+	 * @return string complete URL of the FE page with a message (or NULL
 	 *                if the confirmation page has not been submitted yet)
 	 */
 	public function getPageToShowAfterUnregistrationUrl() {
@@ -664,7 +664,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Provides data items for the list of available payment methods.
 	 *
 	 * @param array array that contains any pre-filled data (may be
-	 *              empty, but not null, unused)
+	 *              empty, but not NULL, unused)
 	 *
 	 * @return array items from the payment methods table as an array
 	 *               with the keys "caption" (for the title) and "value"
@@ -996,9 +996,9 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *              array, the outer array having the UIDs of the options as
 	 *              keys, the inner array having the keys "caption" (for the
 	 *              visible captions) and "value" (the UID again), may be empty,
-	 *              must not be null
+	 *              must not be NULL
 	 * @param array the selected options with the array values being the UIDs of
-	 *              the corresponding options, may be empty or even null
+	 *              the corresponding options, may be empty or even NULL
 	 *
 	 * @return string the captions of the selected options, separated by CR
 	 */
@@ -1104,7 +1104,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @return string the contents of the element
 	 */
 	public function getFeUserData($unused, array $params) {
-		$result = $this->retrieveDataFromSession(null, $params);
+		$result = $this->retrieveDataFromSession(NULL, $params);
 
 		if (empty($result)) {
 			$key = $params['key'];
@@ -1318,7 +1318,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * @param array associative array with the element "value" in which
 	 *              the currently selected value (a positive integer) or
-	 *              null if no radiobutton is selected is provided
+	 *              NULL if no radiobutton is selected is provided
 	 *
 	 * @return boolean TRUE if a valid price is selected or the price field
 	 *                 is hidden, FALSE if none is selected, but could have
@@ -1421,7 +1421,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	private function retrieveSavedMethodOfPayment() {
 		return intval(
 			$this->retrieveDataFromSession(
-				null,
+				NULL,
 				array('key' => 'method_of_payment')
 			)
 		);
@@ -1453,13 +1453,13 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 */
 	public function prefillAccountOwner() {
 		$result = $this->retrieveDataFromSession(
-			null,
+			NULL,
 			array('key' => 'account_owner')
 		);
 
 		if (empty($result)) {
 			$result = $this->getFeUserData(
-				null,
+				NULL,
 				array('key' => 'name')
 			);
 		}

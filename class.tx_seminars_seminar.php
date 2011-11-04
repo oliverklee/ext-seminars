@@ -70,9 +70,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @var tx_seminars_seminar The related topic record as a reference
 	 * to the object.
 	 *
-	 * This will be null if we are not a date record.
+	 * This will be NULL if we are not a date record.
 	 */
-	private $topic = null;
+	private $topic = NULL;
 
 	/**
 	 * @var integer the different statuses of an event.
@@ -107,10 +107,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			// record, too. Date records that fail the check isTopicOkay()
 			// are used as a complete event record.
 			if ($this->isTopicOkay() && $this->topic->isEventDate()) {
-				$this->topic = null;
+				$this->topic = NULL;
 			}
 		} else {
-			$this->topic = null;
+			$this->topic = NULL;
 		}
 	}
 
@@ -194,7 +194,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * in the TYPO3 back end. It is called through a hook in the TCE class.
 	 *
 	 * @param array associative array containing the values entered in the TCE
-	 *              form (as a reference, may not be null)
+	 *              form (as a reference, may not be NULL)
 	 *
 	 * @return array associative array containing data to update the database
 	 *               entry of this event, may be empty
@@ -2993,13 +2993,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Retrieves the topic from the DB and returns it as an object.
 	 *
-	 * In case of an error, the return value will be null.
+	 * In case of an error, the return value will be NULL.
 	 *
-	 * @return tx_seminars_seminar the topic object (will be null if an error
+	 * @return tx_seminars_seminar the topic object (will be NULL if an error
 	 *                             has occured)
 	 */
 	private function retrieveTopic() {
-		$result = null;
+		$result = NULL;
 
 		// Check whether this event has an topic set.
 		if ($this->hasRecordPropertyInteger('topic')) {
@@ -3410,12 +3410,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets this event's owner (the FE user who has created this event).
 	 *
-	 * @return tx_oelib_Model_FrontEndUser the owner, will be null if the event
+	 * @return tx_oelib_Model_FrontEndUser the owner, will be NULL if the event
 	 *                                     has no owner
 	 */
 	public function getOwner() {
 		if (!$this->hasRecordPropertyInteger('owner_feuser')) {
-			return null;
+			return NULL;
 		}
 
 		return tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser')
@@ -3740,7 +3740,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * special, special_early, special_board
 	 *
 	 * @param string code for the price category to check, may be empty
-	 *               or null
+	 *               or NULL
 	 *
 	 * @return boolean TRUE if $priceCode matches a currently available
 	 *                 price, FALSE otherwise
@@ -4237,7 +4237,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Returns whether this event has at least one attached file.
 	 *
-	 * If this is an event date, this function will return true if the date
+	 * If this is an event date, this function will return TRUE if the date
 	 * record or the topic record has at least one file.
 	 *
 	 * @return boolean TRUE if this event has at least one attached file,

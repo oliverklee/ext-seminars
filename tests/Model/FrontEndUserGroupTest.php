@@ -152,7 +152,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	//////////////////////////////////
 
 	public function test_hasReviewerForGroupWithoutReviewer_ReturnsFalse() {
-		$this->fixture->setData(array('tx_seminars_reviewer' => null));
+		$this->fixture->setData(array('tx_seminars_reviewer' => NULL));
 
 		$this->assertFalse(
 			$this->fixture->hasReviewer()
@@ -170,7 +170,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	}
 
 	public function test_getReviewerForGroupWithoutReviewer_ReturnsNull() {
-		$this->fixture->setData(array('tx_seminars_reviewer' => null));
+		$this->fixture->setData(array('tx_seminars_reviewer' => NULL));
 
 		$this->assertNull(
 			$this->fixture->getReviewer()
@@ -321,7 +321,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasDefaultOrganizerForNotSetOrganizerReturnsFalse() {
-		$this->fixture->setData(array('tx_seminars_default_organizer' => null));
+		$this->fixture->setData(array('tx_seminars_default_organizer' => NULL));
 
 		$this->assertFalse(
 			$this->fixture->hasDefaultOrganizer()

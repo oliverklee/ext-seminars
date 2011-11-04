@@ -94,11 +94,11 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	protected $dbResult = FALSE;
 
 	/**
-	 * the current object (may be null)
+	 * the current object (may be NULL)
 	 *
 	 * @var tx_seminars_OldModel_Abstract
 	 */
-	protected $currentItem = null;
+	protected $currentItem = NULL;
 
 	/**
 	 * @var string will be prepended to the WHERE clause using AND, e.g. 'pid=42'
@@ -242,12 +242,12 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	 * Advances to the next record and returns a reference to that object.
 	 *
 	 * @return tx_seminars_OldModel_Abstract the now current object, will be
-	 *                                       null if there is no next object
+	 *                                       NULL if there is no next object
 	 */
 	public function next() {
 		if (!$this->dbResult) {
-			$this->currentItem = null;
-			return null;
+			$this->currentItem = NULL;
+			return NULL;
 		}
 
 		$this->createItemFromDbResult();
@@ -266,10 +266,10 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	abstract protected function createItemFromDbResult();
 
 	/**
-	 * Returns the current object (which may be null).
+	 * Returns the current object (which may be NULL).
 	 *
 	 * @return tx_seminars_OldModel_Abstract a reference to the current object,
-	 *                                       will be null if there is no current
+	 *                                       will be NULL if there is no current
 	 *                                       object
 	 */
 	public function current() {
@@ -286,7 +286,7 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	 */
 	public function valid() {
 		if (!$this->currentItem || !$this->currentItem->isOk()) {
-			$this->currentItem = null;
+			$this->currentItem = NULL;
 			return FALSE;
 		}
 

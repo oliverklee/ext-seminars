@@ -401,7 +401,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	////////////////////////////////////
 
 	public function testCreatePi1CreatesFakeFrontEnd() {
-		$GLOBALS['TSFE'] = null;
+		$GLOBALS['TSFE'] = NULL;
 
 		$this->createPi1();
 
@@ -411,7 +411,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 	public function testCreatePi1CreatesPi1Instance() {
-		$this->pi1 = null;
+		$this->pi1 = NULL;
 
 		$this->createPi1();
 
