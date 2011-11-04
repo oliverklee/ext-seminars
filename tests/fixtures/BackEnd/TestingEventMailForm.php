@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2009-2010 Mario Rimann (mario@screenteam.com)
+* (c) 2009-2011 Mario Rimann (mario@screenteam.com)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is

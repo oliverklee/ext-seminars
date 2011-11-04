@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext "seminars".
 #
-# Auto generated 14-10-2010 21:55
+# Auto generated 14-10-2011 21:55
 #
 # Manual updates:
 # Only the data in the array - everything else is removed by next
