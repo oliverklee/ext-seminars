@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4269] Cleanup: Convert the XCLASS code to use $GLOBALS
 - [#4177] Cleanup: Update the copyright to 2011
 - [#4268] Cleanup: Drop the XCLASS code from abstract classes
 - [#4233] Fix: The default value for price_regular_early is missing a decimal (thanks to Eric Chavaillaz)
