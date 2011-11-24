@@ -895,9 +895,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 
 		// If there is a validation error, the upload has to be done again.
 		if (($this->validationError == '')
-			&& ($this->isTestMode
-				|| $this->getFormCreator()->oDataHandler->_allIsValid()
-			)
+			&& ($this->isTestMode() || $this->getFormCreator()->oDataHandler->_allIsValid())
 		) {
 			array_push($this->attachedFiles, $fileToCheck);
 		} else {
