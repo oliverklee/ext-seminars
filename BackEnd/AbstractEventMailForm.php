@@ -266,7 +266,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		return '<p><label for="subject">' .
 			$GLOBALS['LANG']->getLL('eventMailForm_subject') . '</label>' .
 			'<input type="text" id="subject" name="subject" value="' .
-			$this->fillFormElement('subject') . '" ' .
+			htmlspecialchars($this->fillFormElement('subject'), ENT_QUOTES, 'utf-8') . '" ' .
 			$classMarker . '/>' . $this->getErrorMessage('subject') . '</p>';
 	}
 

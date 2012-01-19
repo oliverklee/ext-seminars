@@ -355,6 +355,24 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 	/**
 	 * @test
 	 */
+	public function renderEncodesHtmlSpecialCharsInSubjectField() {
+		$this->fixture->setPostData(
+			array(
+				'action' => 'sendForm',
+				'isSubmitted' => '1',
+				'subject' => '<foo> & "bar"',
+			)
+		);
+		$this->fixture->markAsIncomplete();
+		$this->assertContains(
+			'&lt;foo&gt; &amp; &quot;bar&quot;',
+			$this->fixture->render()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function renderContainsMessageFieldPrefilledByUserInputIfFormIsReRendered() {
 		$this->fixture->setPostData(
 			array(
