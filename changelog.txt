@@ -1,9 +1,11 @@
-0.9.4 (currently working on)
+0.9.5 (currently working on)
 - [#3905] Fix: Exception in the FE editor the first time after clearing the cache
 - [#4286] Fix: pi1_eventEditor accesses a private variable isTestMode instead of calling the function
 - [#4233] Fix: The default value for price_regular_early is missing a decimal (thanks to Eric Chavaillaz)
 - [#3988] Fix: Field in the registration TCE forms has no label
 - [#4210] Feature: Modernize the modifySingleView hook
+
+0.9.4 (currently working on)
 
 0.9.3 (released 2011-05-26)
 - [#4104] Feature: Add a hook for modifying the time frame list rows in the single view
