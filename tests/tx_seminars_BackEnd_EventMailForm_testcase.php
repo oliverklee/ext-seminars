@@ -315,6 +315,25 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function renderEncodesHtmlSpecialCharsInSubjectField() {
+		$this->fixture->setPostData(
+			array(
+				'action' => 'sendForm',
+				'isSubmitted' => '1',
+				'subject' => '<foo> & "bar"',
+			)
+		);
+		$this->fixture->markAsIncomplete();
+
+		$this->assertContains(
+			'&lt;foo&gt; &amp; &quot;bar&quot;',
+			$this->fixture->render()
+		);
+	}
+
 	public function testRenderContainsMessageFieldPrefilledByUserInputIfFormIsReRendered() {
 		$this->fixture->setPostData(
 			array(

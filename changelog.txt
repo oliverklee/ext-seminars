@@ -6,6 +6,7 @@
 - [#4210] Feature: Modernize the modifySingleView hook
 
 0.9.4 (currently working on)
+- [#4189] Fix: Replace double quotes in subject-field of cancel/confirm-form
 
 0.9.3 (released 2011-05-26)
 - [#4104] Feature: Add a hook for modifying the time frame list rows in the single view
