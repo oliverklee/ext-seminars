@@ -1,4 +1,5 @@
 0.9.5 (currently working on)
+- [#4307] Fix: mod1/index.php uses the deprecated t3lib_div::fixed_lgd_pre
 - [#3905] Fix: Exception in the FE editor the first time after clearing the cache
 - [#4286] Fix: pi1_eventEditor accesses a private variable isTestMode instead of calling the function
 - [#4233] Fix: The default value for price_regular_early is missing a decimal (thanks to Eric Chavaillaz)
