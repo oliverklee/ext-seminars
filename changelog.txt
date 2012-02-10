@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4296] Fix: Fix all deprecation log warnings and version-specific unit test failures when running the unit tests on the current Core master
 - [#3987] Change: Require TYPO3 4.4
 - [#4326] Cleanup: Remove the Zend Studio metadata from all projects
 - [#4189] Fix: Replace double quotes in subject-field of cancel/confirm-form

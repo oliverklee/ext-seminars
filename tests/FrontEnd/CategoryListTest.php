@@ -482,7 +482,7 @@ class tx_seminars_FrontEnd_CategoryListTest extends tx_phpunit_testcase {
 		$this->testingFramework->createDummyFile('foo.gif');
 
 		$this->assertRegExp(
-			'/<img.*title="test"*.\/>/',
+			'/<img[^>]+title="test"/',
 			$this->fixture->createCategoryList($singleCategory)
 		);
 	}
@@ -501,12 +501,15 @@ class tx_seminars_FrontEnd_CategoryListTest extends tx_phpunit_testcase {
 
 
 		$this->assertNotRegExp(
-			'/<img.*\/>.*test/',
+			'/<img[^>]*>.*test/',
 			$this->fixture->createCategoryList($singleCategory)
 		);
 	}
 
-	public function testCreateCategoryListWithConfigurationValueSetToIconCanReturnMutlpileIcons() {
+	/**
+	 * @test
+	 */
+	public function createCategoryListWithConfigurationValueSetToIconCanReturnMultipleIcons() {
 		$this->fixture->setConfigurationValue('categoriesInListView', 'icon');
 		$multipleCategories =
 			array(
@@ -524,7 +527,7 @@ class tx_seminars_FrontEnd_CategoryListTest extends tx_phpunit_testcase {
 		$this->testingFramework->createDummyFile('foo2.gif');
 
 		$this->assertRegExp(
-			'/<img.*title="test"*.\/>.*<img.*title="new_test"*.\/>/',
+			'/<img[^>]+title="test"[^>]*>.*<img[^>]+title="new_test"[^>]*>/',
 			$this->fixture->createCategoryList($multipleCategories)
 		);
 	}
