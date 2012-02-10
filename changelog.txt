@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#3987] Change: Require TYPO3 4.4
 - [#4326] Cleanup: Remove the Zend Studio metadata from all projects
 - [#4189] Fix: Replace double quotes in subject-field of cancel/confirm-form
 - [#3905] Fix: Exception in the FE editor the first time after clearing the cache

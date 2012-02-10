@@ -121,18 +121,8 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 			return $this->outputContent();
 		}
 
-		$version = class_exists('t3lib_utility_VersionNumber')
-			? t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version)
-			: t3lib_div::int_from_ver(TYPO3_version);
-		if ($version < 4004000) {
-			$pathToFlashMessageJavaScript = t3lib_extMgm::extRelPath('seminars') .
-				'Resources/Public/JavaScript/BackEndExtJs/flashmessages.js';
-		} else {
-			$pathToFlashMessageJavaScript = t3lib_div::getIndpEnv('TYPO3_SITE_PATH') .
-				't3lib/js/extjs/ux/flashmessages.js';
-		}
 		$this->getPageRenderer()->addJsFile(
-			$pathToFlashMessageJavaScript,
+			t3lib_div::getIndpEnv('TYPO3_SITE_PATH') . 't3lib/js/extjs/ux/flashmessages.js',
 			'text/javascript',
 			FALSE
 		);

@@ -103,40 +103,7 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function mainAddsFlashMessagesJavaScriptFileFromSeminarsToPageRendererIfCoreFileNotAvailable() {
-		$version = class_exists('t3lib_utility_VersionNumber')
-			? t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version)
-			: t3lib_div::int_from_ver(TYPO3_version);
-		if ($version >= 4004000) {
-			$this->markTestSkipped();
-		}
-
-		$pageRenderer = $this->getMock('t3lib_PageRenderer', array('addJsFile'));
-		$this->fixture->setPageRenderer($pageRenderer);
-
-		$pageRenderer->expects($this->at(0))
-			->method('addJsFile')
-			->with(
-				t3lib_extMgm::extRelPath('seminars') .
-					'Resources/Public/JavaScript/BackEndExtJs/flashmessages.js',
-				'text/javascript',
-				FALSE
-			);
-
-		$this->fixture->main();
-	}
-
-	/**
-	 * @test
-	 */
 	public function mainAddsFlashMessagesJavaScriptFileFromCoreToPageRendererIfAvailable() {
-		$version = class_exists('t3lib_utility_VersionNumber')
-			? t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version)
-			: t3lib_div::int_from_ver(TYPO3_version);
-		if ($version < 4004000) {
-			$this->markTestSkipped();
-		}
-
 		$pageRenderer = $this->getMock('t3lib_PageRenderer', array('addJsFile'));
 		$this->fixture->setPageRenderer($pageRenderer);
 
