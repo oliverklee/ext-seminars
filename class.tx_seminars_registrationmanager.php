@@ -1190,6 +1190,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *                                 notification should be send
 	 * @param string reason for the notification, must be either "IsFull" or
 	 *               "EnoughRegistrations", must not be empty
+	 *
+	 * @return string the message, will not be empty
 	 */
 	private function getMessageForNotification(
 		tx_seminars_registration $registration, $reasonForNotification

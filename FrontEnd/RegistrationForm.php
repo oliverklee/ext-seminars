@@ -89,6 +89,11 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	private $seminar = NULL;
 
 	/**
+	 * @var tx_seminars_registration
+	 */
+	protected $registration = NULL;
+
+	/**
 	 * The constructor.
 	 *
 	 * This class may only be instantiated after is has already been made sure
@@ -143,6 +148,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 
 	/**
 	 * Returns the configured seminar object.
+	 *
+	 * @return tx_seminars_seminar the seminar instance
 	 */
 	private function getSeminar() {
 		if (!is_object($this->seminar)) {
@@ -163,6 +170,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 
 	/**
 	 * Returns the current registration object.
+	 *
+	 * @return tx_seminars_registration the registration, will be NULL if none has been set
 	 */
 	private function getRegistration() {
 		return $this->registration;

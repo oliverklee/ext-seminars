@@ -3518,6 +3518,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 	/**
 	 * Returns a link builder instance.
+	 *
+	 * @return tx_seminars_Service_SingleViewLinkBuilder the link builder instance
 	 */
 	protected function getLinkBuilder() {
 		if ($this->linkBuilder === NULL) {

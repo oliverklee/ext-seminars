@@ -270,6 +270,8 @@ class tx_seminars_cli_MailNotifier {
 	 * @param tx_seminars_seminar event for which to customize the text
 	 * @param string name of the organizer, may be empty if no organizer name
 	 *               needs to be inserted in the text
+	 *
+	 * @return string the localized e-mail content, will not be empty
 	 */
 	private function customizeMessage(
 		$locallangKey, tx_seminars_seminar $event, $organizerName = ''

@@ -271,6 +271,8 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 	/**
 	 * Wraps the content in $this->content with the HTML for the page start and
 	 * the page end and echos it.
+	 *
+	 * @return string the wrapped content, will not be empty
 	 */
 	private function outputContent() {
 		return $this->doc->startPage($GLOBALS['LANG']->getLL('title')) .
