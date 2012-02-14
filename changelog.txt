@@ -1,4 +1,5 @@
 0.9.5 (currently working on)
+- [#4347] Fix: Fix missing/incorrect @return and return values
 - [#4296] Fix: Fix all deprecation log warnings and version-specific unit test failures when running the unit tests on the current Core master
 - [#4326] Cleanup: Remove the Zend Studio metadata from all projects
 - [#4307] Fix: mod1/index.php uses the deprecated t3lib_div::fixed_lgd_pre

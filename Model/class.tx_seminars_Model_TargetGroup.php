@@ -93,7 +93,7 @@ class tx_seminars_Model_TargetGroup extends tx_oelib_Model {
 	 *        the minimum age
 	 */
 	public function setMinimumAge($minimumAge) {
-		return $this->setAsInteger('minimum_age', $minimumAge);
+		$this->setAsInteger('minimum_age', $minimumAge);
 	}
 
 	/**
@@ -114,7 +114,7 @@ class tx_seminars_Model_TargetGroup extends tx_oelib_Model {
 	 *        the maximum age
 	 */
 	public function setMaximumAge($maximumAge) {
-		return $this->setAsInteger('maximum_age', $maximumAge);
+		$this->setAsInteger('maximum_age', $maximumAge);
 	}
 }
 

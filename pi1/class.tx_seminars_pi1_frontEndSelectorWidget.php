@@ -301,6 +301,8 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 *              be empty
 	 * @param string the HTML name of the drop-down, must be not empty and
 	 *               unique
+	 *
+	 * @return string the generated HTML, will not be empty
 	 */
 	private function createDropDown($options, $name) {
 		$this->setMarker('dropdown_name', $this->prefixId . '[' . $name . ']');
