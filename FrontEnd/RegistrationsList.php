@@ -43,12 +43,14 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	/**
 	 * The constructor.
 	 *
-	 * @param array TypoScript configuration for the plugin, may be empty
-	 * @param string a string selecting the flavor of the list view, either
-	 *               "list_registrations" or "list_vip_registrations"
-	 * @param integer the UID of the seminar of which we want to list the
-	 *                registrations, invalid UIDs will be handled later
-	 * @param tslib_cObj the parent cObj, needed for the flexforms
+	 * @param array $configuration
+	 *        TypoScript configuration for the plugin, may be empty
+	 * @param string $whatToDisplay
+	 *        a string selecting the flavor of the list view, either "list_registrations" or "list_vip_registrations"
+	 * @param integer $seminarUid
+	 *        UID of the seminar of which we want to list the registrations, invalid UIDs will be handled later
+	 * @param tslib_cObj $cObj
+	 *        the parent cObj, needed for the flexforms
 	 */
 	public function __construct(
 		array $configuration, $whatToDisplay, $seminarUid, tslib_cObj $cObj
@@ -84,7 +86,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	/**
 	 * Creates a seminar in $this->seminar.
 	 *
-	 * @param integer an event UID, invalid UIDs will be handled later
+	 * @param integer $seminarUid an event UID, invalid UIDs will be handled later
 	 */
 	private function createSeminar($seminarUid) {
 		$this->seminar = tx_oelib_ObjectFactory::make(

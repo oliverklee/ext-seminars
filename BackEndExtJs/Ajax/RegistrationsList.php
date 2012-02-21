@@ -66,7 +66,7 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsList extends tx_seminars_BackEn
 			$result['event_title'] = $registration->getEvent()->getTitle();
 			$result['event_begin_date'] = date('r', $registration->getEvent()->getBeginDateAsUnixTimeStamp());
 			$result['event_end_date'] = date('r', $registration->getEvent()->getEndDateAsUnixTimeStamp());
-		} catch (Exeption $exception) {
+		} catch (Exception $exception) {
 			$result['event_accreditation_number'] = '';
 			$result['event_title'] = '';
 			$result['event_begin_date'] = '';

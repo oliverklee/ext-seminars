@@ -37,7 +37,7 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	/**
 	 * Sets the place field of the time slot.
 	 *
-	 * @param integer the UID of the place (has to be > 0)
+	 * @param integer $place the UID of the place (has to be > 0)
 	 */
 	public function setPlace($place) {
 		$this->setRecordPropertyInteger('place', $place);
@@ -46,8 +46,7 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	/**
 	 * Sets the entry date.
 	 *
-	 * @param integer the entry date as a UNIX timestamp (has to be >= 0,
-	 * 0 will unset the entry date)
+	 * @param integer $entryDate the entry date as a UNIX timestamp (has to be >= 0, 0 will unset the entry date)
 	 */
 	 public function setEntryDate($entryDate) {
 		$this->setRecordPropertyInteger('entry_date', $entryDate);
@@ -56,8 +55,7 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	/**
 	 * Sets the begin date and time.
 	 *
-	 * @param integer the begin date as a UNIX timestamp (has to be >= 0, 0 will
-	 *                unset the begin date)
+	 * @param integer $beginDate the begin date as a UNIX timestamp (has to be >= 0, 0 will unset the begin date)
 	 */
 	 public function setBeginDate($beginDate) {
 		$this->setRecordPropertyInteger('begin_date', $beginDate);

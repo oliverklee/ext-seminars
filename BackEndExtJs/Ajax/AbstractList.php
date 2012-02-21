@@ -112,6 +112,8 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 	/**
 	 * Returns additional fields of the given model as an array.
 	 *
+	 * @param tx_oelib_Model $model the model
+	 *
 	 * @return array additional fields of the given model with the name of the
 	 *               field as the key
 	 *

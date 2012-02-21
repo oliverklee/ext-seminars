@@ -115,7 +115,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	/**
 	 * Creates a fake front end and a pi1 instance in $this->pi1.
 	 *
-	 * @param integer UID of the detail view page
+	 * @param integer $detailPageUid UID of the detail view page
 	 */
 	private function createPi1($detailPageUid = 0) {
 		$this->testingFramework->createFakeFrontEnd();
@@ -135,7 +135,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Inserts a place record into the database and creates a relation to it
 	 * from the fixture.
 	 *
-	 * @param array data of the place to add, may be empty
+	 * @param array $placeData data of the place to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -159,7 +159,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Inserts a target group record into the database and creates a relation to
 	 * it from the fixture.
 	 *
-	 * @param array data of the target group to add, may be empty
+	 * @param array $targetGroupData data of the target group to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -183,7 +183,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Inserts a payment method record into the database and creates a relation
 	 * to it from the fixture.
 	 *
-	 * @param array data of the payment method to add, may be empty
+	 * @param array $paymentMethodData data of the payment method to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -208,7 +208,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Inserts an organizer record into the database and creates a relation to
 	 * it from the fixture as a organizing partner.
 	 *
-	 * @param array data of the organizer to add, may be empty
+	 * @param array $organizerData data of the organizer to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -234,8 +234,8 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Inserts a category record into the database and creates a relation to it
 	 * from the fixture.
 	 *
-	 * @param array data of the category to add, may be empty
-	 * @param integer the sorting index of the category to add, must be >= 0
+	 * @param array $categoryData data of the category to add, may be empty
+	 * @param integer $sorting the sorting index of the category to add, must be >= 0
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -261,7 +261,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Inserts a organizer record into the database and creates a relation to it
 	 * from the fixture.
 	 *
-	 * @param array data of the organizer to add, may be empty
+	 * @param array $organizerData data of the organizer to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -285,7 +285,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Inserts a speaker record into the database and creates a relation to it
 	 * from the fixture.
 	 *
-	 * @param array data of the speaker to add, may be empty
+	 * @param array $speakerData data of the speaker to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -309,7 +309,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Inserts a speaker record into the database and creates a relation to it
 	 * from the fixture as partner.
 	 *
-	 * @param array data of the speaker to add, may be empty
+	 * @param array $speakerData data of the speaker to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -333,7 +333,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Inserts a speaker record into the database and creates a relation to it
 	 * from the fixture as tutor.
 	 *
-	 * @param array data of the speaker to add, may be empty
+	 * @param array $speakerData data of the speaker to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -357,7 +357,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Inserts a speaker record into the database and creates a relation to it
 	 * from the fixture as leader.
 	 *
-	 * @param array data of the speaker to add, may be empty
+	 * @param array $speakerData data of the speaker to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -381,7 +381,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Inserts an event type record into the database and creates a relation to
 	 * it from the fixture.
 	 *
-	 * @param array data of the event type to add, may be empty
+	 * @param array $eventTypeData data of the event type to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -7568,6 +7568,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 *
 	 * @dataProvider canViewRegistrationsListDataProvider
+	 *
+	 * @param string $expected
+	 * @param boolean $loggedIn
+	 * @param boolean $isRegistered
+	 * @param boolean  $isVip
+	 * @param string $whichPlugin
+	 * @param integer $registrationsListPID
+	 * @param integer $registrationsVipListPID
+	 *
+	 * @return void
 	 */
 	public function canViewRegistrationsListWithNeedsRegistrationAndDefaultAccess(
 		$expected, $loggedIn, $isRegistered, $isVip,
@@ -7606,6 +7616,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 *
 	 * @dataProvider canViewRegistrationsListDataProvider
+	 *
+	 * @param boolean $expected
+	 * @param boolean $loggedIn
+	 * @param boolean $isRegistered
+	 * @param boolean $isVip
+	 * @param string $whichPlugin
+	 * @param integer $registrationsListPID
+	 * @param integer $registrationsVipListPID
+	 *
+	 * @return void
 	 */
 	public function canViewRegistrationsListWithNeedsRegistrationAndAttendeesManagersAccess(
 		$expected, $loggedIn, $isRegistered, $isVip,
@@ -7682,6 +7702,13 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 *
 	 * @dataProvider canViewRegistrationsForCsvExportListDataProvider
+	 *
+	 * @param boolean $expected
+	 * @param boolean $loggedIn
+	 * @param boolean $isVip
+	 * @param boolean $allowCsvExportForVips
+	 *
+	 * @return void
 	 */
 	public function canViewRegistrationsListForCsvExport(
 		$expected, $loggedIn, $isVip, $allowCsvExportForVips
@@ -7876,6 +7903,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 *
 	 * @dataProvider canViewRegistrationsListDataProviderForLoggedIn
+	 *
+	 * @param boolean $expected
+	 * @param boolean $loggedIn
+	 * @param boolean $isRegistered
+	 * @param boolean $isVip
+	 * @param string $whichPlugin
+	 * @param integer $registrationsListPID
+	 * @param integer $registrationsVipListPID
+	 *
+	 * @return void
 	 */
 	public function canViewRegistrationsListWithNeedsRegistrationAndLoginAccess(
 		$expected, $loggedIn, $isRegistered, $isVip,
@@ -8073,6 +8110,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 *
 	 * @dataProvider canViewRegistrationsListDataProviderForWorld
+	 *
+	 * @param boolean $expected
+	 * @param boolean $loggedIn
+	 * @param boolean $isRegistered
+	 * @param boolean $isVip
+	 * @param string $whichPlugin
+	 * @param integer $registrationsListPID
+	 * @param integer $registrationsVipListPID
+	 *
+	 * @return void
 	 */
 	public function canViewRegistrationsListWithNeedsRegistrationAndWorldAccess(
 		$expected, $loggedIn, $isRegistered, $isVip,
@@ -8219,6 +8266,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 *
 	 * @dataProvider registrationListAccessLevelsDataProvider
+	 *
+	 * @param string $accessLevel
+	 *
+	 * @return void
 	 */
 	public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage(
 		$accessLevel
@@ -8276,6 +8327,11 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 *
 	 * @dataProvider registrationListParametersDataProvider
+	 *
+	 * @param string $whichPlugin
+	 * @param string $accessLevel
+	 *
+	 * @return void
 	 */
 	public function canViewRegistrationsListMessageWithLoginRoutesParameters(
 		$whichPlugin, $accessLevel

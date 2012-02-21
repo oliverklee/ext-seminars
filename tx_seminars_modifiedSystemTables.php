@@ -9,7 +9,7 @@ if (!function_exists('tx_seminars_tableRelations')) {
 	 * Returns the WHERE clause part to limit the entries to the records stored
 	 * with the general record storage PID.
 	 *
-	 * @param string table name as prefix for the PID column, must not be empty
+	 * @param string $tableName table name as prefix for the PID column, must not be empty
 	 *
 	 * @return string WHERE clause for the foreignTable WHERE part, will be
 	 *                empty if the storage PID should not be used to filter the

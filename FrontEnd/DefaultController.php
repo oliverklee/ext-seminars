@@ -238,8 +238,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Displays the seminar manager HTML.
 	 *
-	 * @param string (unused)
-	 * @param array TypoScript configuration for the plugin
+	 * @param string $unused (unused)
+	 * @param array $conf TypoScript configuration for the plugin
 	 *
 	 * @return string HTML for the plugin
 	 */
@@ -457,8 +457,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * If the seminar cannot be created, $this->seminar will be NULL, and
 	 * this function will return FALSE.
 	 *
-	 * @param integer an event UID
-	 * @param booelan whether hidden records should be retrieved as well
+	 * @param integer $seminarUid an event UID
+	 * @param boolean $showHiddenRecords whether hidden records should be retrieved as well
 	 *
 	 * @return boolean TRUE if the seminar UID is valid and the object has been
 	 *                 created, FALSE otherwise
@@ -504,7 +504,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * If the registration cannot be created, $this->registration will be NULL,
 	 * and this function will return FALSE.
 	 *
-	 * @param integer a registration UID
+	 * @param integer $registrationUid a registration UID
 	 *
 	 * @return boolean TRUE if the registration UID is valid and the object
 	 *                 has been created, FALSE otherwise
@@ -587,7 +587,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * This function is intended for testing purposes only.
 	 *
-	 * @return object our config getter, might be NULL
+	 * @return tx_seminars_configgetter our config getter, might be NULL
 	 */
 	public function getConfigGetter() {
 		return $this->configGetter;
@@ -644,10 +644,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * If an event uid is provided, the return parameter will contain a showUid
 	 * parameter with this UID.
 	 *
-	 * @param string the label to wrap into a link
-	 * @param integer the PID of the page to redirect to after login (must not
-	 *                be empty)
-	 * @param integer the UID of the event (may be empty)
+	 * @param string $label the label to wrap into a link
+	 * @param integer $pageId the PID of the page to redirect to after login (must not be empty)
+	 * @param integer $eventId the UID of the event (may be empty)
 	 *
 	 * @return string the wrapped label
 	 */
@@ -1054,9 +1053,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * @throws Exception if the given speaker type is not allowed
 	 *
-	 * @param string the speaker type to set the markers for, must not be
-	 *               empty, must be one of the following: "speakers",
-	 *               "partners", "tutors" or "leaders"
+	 * @param string $speakerType
+	 *        the speaker type to set the markers for, must not be empty, must be one of the following:
+	 *        "speakers", "partners", "tutors" or "leaders"
 	 */
 	private function setSpeakersMarkerWithoutCheck($speakerType) {
 		if (!in_array(
@@ -1595,9 +1594,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * This function is used for the normal event list as well as the
 	 * "my events" and the "my VIP events" list.
 	 *
-	 * @param string a string selecting the flavor of list view: either
-	 *               an empty string (for the default list view), the
-	 *               value from "what_to_display" or "other_dates"
+	 * @param string $whatToDisplay
+	 *        a string selecting the flavor of list view: either an empty string (for the default list view),
+	 *        the value from "what_to_display" or "other_dates"
 	 *
 	 * @return string HTML code with the event list
 	 */
@@ -1854,10 +1853,11 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * This function should only be called when there are actually any list
 	 * items.
 	 *
-	 * @param tx_seminars_Bag_Abstract initialized seminar or registration bag
-	 * @param string a string selecting the flavor of list view: either
-	 *               an empty string (for the default list view), the
-	 *               value from "what_to_display" or "other_dates"
+	 * @param tx_seminars_Bag_Abstract $seminarOrRegistrationBag
+	 *        initialized seminar or registration bag
+	 * @param string $whatToDisplay
+	 *        a string selecting the flavor of list view: either an empty string (for the default list view),
+	 *        the value from "what_to_display" or "other_dates"
 	 *
 	 * @return string HTML for the table (will not be empty)
 	 */
@@ -2247,8 +2247,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Gets the heading for a field type, automatically wrapped in a hyperlink
 	 * that sorts by that column if sorting by that column is available.
 	 *
-	 * @param string key of the field type for which the heading should
-	 *               be retrieved, must not be empty
+	 * @param string $fieldName key of the field type for which the heading should be retrieved, must not be empty
 	 *
 	 * @return string the heading label, may be completely wrapped in a
 	 *                hyperlink for sorting
@@ -2282,9 +2281,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Returns the selector widget for the "seminars_list" view.
 	 *
-	 * @param string a string selecting the flavor of list view: either an empty
-	 *               string (for the default list view), the value from
-	 *               "what_to_display" or "other_dates"
+	 * @param string $whatToDisplay
+	 *        a string selecting the flavor of list view: either an empty string (for the default list view),
+	 *        the value from "what_to_display" or "other_dates"
 	 *
 	 * @return string the HTML code of the selector widget, may be empty
 	 */
@@ -2440,7 +2439,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Gets the CSS classes (space-separated) for the Vacancies TD.
 	 *
-	 * @param object the current seminar object
+	 * @param tx_seminars_seminar $seminar the current seminar object
 	 *
 	 * @return string class attribute filled with a list a space-separated
 	 *                CSS classes, plus a leading space
@@ -2626,9 +2625,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * entered" list and is not the "my vip events" list and VIPs are not
 	 * allowed to edit their events.
 	 *
-	 * @param string a string selecting the flavor of list view: either
-	 *               an empty string (for the default list view), the
-	 *               value from "what_to_display" or "other_dates"
+	 * @param string $whatToDisplay
+	 *        a string selecting the flavor of list view: either an empty string (for the default list view),
+	 *       the value from "what_to_display" or "other_dates"
 	 */
 	private function hideEditColumnIfNecessary($whatToDisplay) {
 		$mayManagersEditTheirEvents = $this->getConfValueBoolean(
@@ -2706,9 +2705,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * or the CSV export of registrations is not allowed on the "my_vip_events"
 	 * view.
 	 *
-	 * @param string a string selecting the flavor of list view: either an empty
-	 *               string (for the default list view), the value from
-	 *               "what_to_display" or "other_dates"
+	 * @param string $whatToDisplay
+	 *        a string selecting the flavor of list view: either an empty string (for the default list view),
+	 *        the value from "what_to_display" or "other_dates"
 	 */
 	private function hideCsvExportOfRegistrationsColumnIfNecessary($whatToDisplay) {
 		$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
@@ -2746,9 +2745,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Hides the number of seats, the total price and the registration status
 	 * columns when we're not on the "my_events" list view.
 	 *
-	 * @param string a string selecting the flavor of list view: either an empty
-	 *               string (for the default list view), the value from
-	 *               "what_to_display" or "other_dates"
+	 * @param string $whatToDisplay
+	 *        a string selecting the flavor of list view: either an empty string (for the default list view),
+	 *        the value from "what_to_display" or "other_dates"
 	 */
 	private function hideColumnsForAllViewsExceptMyEvents($whatToDisplay) {
 		if ($whatToDisplay != 'my_events') {
@@ -2895,8 +2894,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * messages. Data from the event will only be displayed if $this->seminar
 	 * is non-NULL.
 	 *
-	 * @param string error message to be displayed (may be empty if there is no
-	 *               error)
+	 * @param string $errorMessage error message to be displayed (may be empty if there is no error)
 	 *
 	 * @return string HTML code including the title and error message
 	 */
@@ -3069,10 +3067,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Creates the category icon IMG tag with the icon title as title attribute.
 	 *
-	 * @param array the filename and title of the icon in an associative array
-	 *              with "icon" as key for the filename and "title" as key for
-	 *              the icon title, the values for "title" and "icon" may be
-	 *              empty
+	 * @param array $iconData
+	 *        the filename and title of the icon in an associative array with "icon" as key for the filename and "title" as key
+	 *        for the icon title, the values for "title" and "icon" may be empty
 	 *
 	 * @return string the icon IMG tag with the given icon, will be empty if the
 	 *                category has no icon
@@ -3095,8 +3092,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * depending on the speakers, tutors, leaders or partners belonging to the
 	 * current seminar.
 	 *
-	 * @param string type of gender specific heading, must be 'speaker', 'tutors',
-	 *               'leaders' or 'partners'
+	 * @param string $speakerType type of gender specific heading, must be 'speaker', 'tutors', 'leaders' or 'partners'
 	 */
 	private function setGenderSpecificHeading($speakerType) {
 		if (!in_array(
@@ -3167,7 +3163,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Sets the marker for the registration link in the list view.
 	 *
-	 * @param string the list type which should be shown, must not be empty
+	 * @param string $whatToDisplay the list type which should be shown, must not be empty
 	 */
 	private function setRegistrationLinkMarker($whatToDisplay) {
 		if ($whatToDisplay == 'my_events') {
@@ -3206,7 +3202,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Filters the given seminar bag builder to the date set in piVars.
 	 *
-	 * @param tx_seminars_BagBuilder_Event the bag builder to limit by date
+	 * @param tx_seminars_BagBuilder_Event $builder the bag builder to limit by date
 	 */
 	private function filterByDate(tx_seminars_BagBuilder_Event $builder) {
 		$dateFrom = $this->getTimestampFromDatePiVars('from');
@@ -3223,8 +3219,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Retrieves the date which was sent via piVars and returns it as timestamp.
 	 *
-	 * @param string must be "from" or "to", depending on the date part which
-	 *               should be retrieved.
+	 * @param string $fromOrTo must be "from" or "to", depending on the date part which should be retrieved.
 	 *
 	 * @return integer the timestamp for the date set in piVars, will be 0 if no
 	 *                 date was set

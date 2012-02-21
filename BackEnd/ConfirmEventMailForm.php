@@ -38,8 +38,9 @@ class tx_seminars_BackEnd_ConfirmEventMailForm extends tx_seminars_BackEnd_Abstr
 	protected $action = 'confirmEvent';
 
 	/**
-	 * @var the prefix for all locallang keys for prefilling the form,
-	 *      must not be empty
+	 * the prefix for all locallang keys for prefilling the form, must not be empty
+	 *
+	 * @var string
 	 */
 	protected $formFieldPrefix = 'confirmMailForm_prefillField_';
 

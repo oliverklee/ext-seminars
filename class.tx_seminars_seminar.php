@@ -88,12 +88,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * fails. If we need the seminar object although it's hidden, the parameter
 	 * $allowHiddenRecords should be set to TRUE.
 	 *
-	 * @param integer The UID of the seminar to retrieve from the DB.
-	 *                This parameter will be ignored if $dbResult is provided.
-	 * @param pointer MySQL result pointer (of SELECT query)/DBAL object.
-	 *                If this parameter is provided, $uid will be ignored.
-	 * @param boolean whether it is possible to create a seminar object from
-	 *                a hidden record
+	 * @param integer $uid UID of the seminar to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
+	 * @param resource|boolean $dbResult MySQL result pointer (of SELECT query). If this parameter is provided, $uid will be ignored.
+	 * @param boolean $allowHiddenRecords whether it is possible to create a seminar object from a hidden record
 	 */
 	public function __construct(
 		$uid, $dbResult = FALSE, $allowHiddenRecords = FALSE
@@ -129,9 +126,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * This function is used in order to check values entered in the TCE forms
 	 * in the TYPO3 back end.
 	 *
-	 * @param string the name of the field to check
-	 * @param string the value that was entered in the TCE form that
-	 *               needs to be validated
+	 * @param string $fieldName the name of the field to check
+	 * @param string $value the value that was entered in the TCE form that needs to be validated
 	 *
 	 * @return array associative array containing the field "status" and
 	 *               "newValue" (if needed)
@@ -193,8 +189,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * This function is used in order to check values entered in the TCE forms
 	 * in the TYPO3 back end. It is called through a hook in the TCE class.
 	 *
-	 * @param array associative array containing the values entered in the TCE
-	 *              form (as a reference, may not be NULL)
+	 * @param array &$fieldArray
+	 *        associative array containing the values entered in the TCE form (as a reference)
 	 *
 	 * @return array associative array containing data to update the database
 	 *               entry of this event, may be empty
@@ -278,7 +274,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Sets the description of the event.
 	 *
-	 * @param string the description for this event, may be empty
+	 * @param string $description the description for this event, may be empty
 	 */
 	public function setDescription($description) {
 		$this->setRecordPropertyString('description', $description);
@@ -306,7 +302,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Sets our additional information.
 	 *
-	 * @param string our additional information, may be empty
+	 * @param string $additionalInformation our additional information, may be empty
 	 */
 	public function setAdditionalInformation($additionalInformation) {
 		$this->setRecordPropertyString(
@@ -330,8 +326,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * If the seminar has no date, just the title is returned.
 	 *
-	 * @param string the character or HTML entity used to separate start date
-	 *               and end date
+	 * @param string $dash the character or HTML entity used to separate start date and end date
 	 *
 	 * @return string the unique seminar title (or '' if there is an error)
 	 */
@@ -602,8 +597,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If the country with this ISO code could not be found in the database,
 	 * an empty string is returned instead.
 	 *
-	 * @param string the ISO 3166-1 alpha-2 code of the country, must
-	 *               not be empty
+	 * @param string $isoCode the ISO 3166-1 alpha-2 code of the country, must not be empty
 	 *
 	 * @return string the short local name of the country or an empty
 	 *                string if the country could not be found
@@ -729,8 +723,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Creates and returns a speakerbag object.
 	 *
-	 * @param string the relation in which the speakers stand to this event:
-	 *               "speakers" (default), "partners", "tutors" or "leaders"
+	 * @param string $speakerRelation
+	 *        the relation in which the speakers stand to this event: "speakers" (default), "partners", "tutors" or "leaders"
 	 *
 	 * @return tx_seminars_Bag_Speaker a speakerbag object
 	 */
@@ -768,9 +762,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * As speakers can be related to this event as speakers, partners, tutors or
 	 * leaders, the type relation can be specified. The default is "speakers".
 	 *
-	 * @param tslib_pibase the live pibase object
-	 * @param string the relation in which the speakers stand to this event:
-	 *               "speakers" (default), "partners", "tutors" or "leaders"
+	 * @param tslib_pibase $plugin
+	 *        the live pibase object
+	 * @param string $speakerRelation
+	 *        the relation in which the speakers stand to this event:
+	 *        "speakers" (default), "partners", "tutors" or "leaders"
 	 *
 	 * @return string our speakers (or '' if there is an error)
 	 */
@@ -815,8 +811,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * As speakers can be related to this event as speakers, partners, tutors or
 	 * leaders, the type relation can be specified. The default is "speakers".
 	 *
-	 * @param string the relation in which the speakers stand to this event:
-	 *               "speakers" (default), "partners", "tutors" or "leaders"
+	 * @param string $speakerRelation
+	 *        the relation in which the speakers stand to this event:
+	 *        "speakers" (default), "partners", "tutors" or "leaders"
 	 *
 	 * @return string our speakers (or '' if there is an error)
 	 */
@@ -853,9 +850,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * As speakers can be related to this event as speakers, partners, tutors or
 	 * leaders, the type relation can be specified. The default is "speakers".
 	 *
-	 * @param tx_oelib_templatehelper the live pibase object
-	 * @param string the relation in which the speakers stand to this event:
-	 *               "speakers" (default), "partners", "tutors" or "leaders"
+	 * @param tx_oelib_templatehelper $plugin the live pibase object
+	 * @param string $speakerRelation
+	 *        the relation in which the speakers stand to this event:
+	 *        "speakers" (default), "partners", "tutors" or "leaders"
 	 *
 	 * @return string our speakers list, will be empty if an error occurred
 	 *                during processing
@@ -920,8 +918,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Checks whether we have speaker relations of the specified type set.
 	 *
-	 * @param string the relation in which the speakers stand to this event:
-	 *               "speakers" (default), "partners", "tutors" or "leaders"
+	 * @param string $speakerRelation
+	 *        the relation in which the speakers stand to this event:
+	 *        "speakers" (default), "partners", "tutors" or "leaders"
 	 *
 	 * @return boolean TRUE if we have any speakers of the specified type
 	 *                 related to this event, FALSE otherwise.
@@ -992,8 +991,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Returns the language key suffix for the speaker headings.
 	 *
-	 * @param string the type to determine the gender and number of, must be
-	 *               'speakers', 'tutors', 'leaders' or 'partners'
+	 * @param string $speakerType
+	 *        the type to determine the gender and number of, must be
+	 *        'speakers', 'tutors', 'leaders' or 'partners'
 	 *
 	 * @return string header marker for speaker heading will be
 	 *                'type_number_gender'. Number will be 'single' or
@@ -1089,8 +1089,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Sets the language ISO code for this event.
 	 *
-	 * @param string the ISO code of the language for this event to set,
-	 *               may be empty
+	 * @param string $language
+	 *        the ISO code of the language for this event to set, may be empty
 	 */
 	public function setLanguage($language) {
 		$this->setRecordPropertyString('language', $language);
@@ -1119,7 +1119,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets our regular price as a decimal.
 	 *
-	 * @return decimal the regular event price
+	 * @return float the regular event price
 	 */
 	private function getPriceRegularAmount() {
 		return $this->getTopicDecimal('price_regular');
@@ -1129,7 +1129,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns the price, formatted as configured in TS.
 	 * The price must be supplied as integer or floating point value.
 	 *
-	 * @param string the price
+	 * @param string $value the price
 	 *
 	 * @return string the price, formatted as in configured in TS
 	 */
@@ -1188,7 +1188,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * If there is no regular early bird price, this function returns "0.00".
 	 *
-	 * @return decimal the regular early bird event price
+	 * @return float the regular early bird event price
 	 */
 	private function getEarlyBirdPriceRegularAmount() {
 		return $this->getTopicDecimal('price_regular_early');
@@ -1211,7 +1211,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If there is no special price during the early bird phase, this function
 	 * returns "0.00".
 	 *
-	 * @return decimal the special event price during the early bird phase
+	 * @return float the special event price during the early bird phase
 	 */
 	private function getEarlyBirdPriceSpecialAmount() {
 		return $this->getTopicDecimal('price_special_early');
@@ -1312,7 +1312,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * If there is no special price, this function returns "0.00".
 	 *
-	 * @return decimal the special event price
+	 * @return float the special event price
 	 */
 	private function getPriceSpecialAmount() {
 		return $this->getTopicDecimal('price_special');
@@ -1346,7 +1346,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If there is no regular price (including full board), this function
 	 * returns "0.00".
 	 *
-	 * @return decimal the regular event price (including full board)
+	 * @return float the regular event price (including full board)
 	 */
 	private function getPriceRegularBoardAmount() {
 		return $this->getTopicDecimal('price_regular_board');
@@ -1381,7 +1381,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If there is no special price (including full board), this function
 	 * returns "0.00".
 	 *
-	 * @return decimal the special event price (including full board)
+	 * @return float the special event price (including full board)
 	 */
 	private function getPriceSpecialBoardAmount() {
 		return $this->getTopicDecimal('price_special_board');
@@ -1487,7 +1487,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns an empty string if the corresponding payment method could not
 	 * be retrieved.
 	 *
-	 * @param integer the UID of a single payment method, must not be zero
+	 * @param integer $paymentMethodUid the UID of a single payment method, must not be zero
 	 *
 	 * @return string the selected payment method as plain text (or ''
 	 *                if there is an error)
@@ -1525,7 +1525,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns an empty string if the corresponding payment method could not
 	 * be retrieved.
 	 *
-	 * @param integer the UID of a single payment method, must not be zero
+	 * @param integer $paymentMethodUid the UID of a single payment method, must not be zero
 	 *
 	 * @return string the selected payment method as plain text (or '' if
 	 *                there is an error)
@@ -1578,7 +1578,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If no language with this ISO code could not be found in the database,
 	 * an empty string is returned instead.
 	 *
-	 * @param string the ISO 639 alpha-2 code of the language
+	 * @param string $isoCode the ISO 639 alpha-2 code of the language
 	 *
 	 * @return string the short local name of the language or an empty string
 	 *                if the language couldn't be found
@@ -1668,7 +1668,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Sets the event type for this event.
 	 *
-	 * @param integer the UID of the event type to set, must be >= 0
+	 * @param integer $eventType the UID of the event type to set, must be >= 0
 	 */
 	public function setEventType($eventType) {
 		if ($eventType < 0) {
@@ -2089,7 +2089,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets our organizers (as HTML code with hyperlinks to their homepage, if
 	 * they have any).
 	 *
-	 * @param tslib_pibase a tslib_pibase object for a live page
+	 * @param tslib_pibase $plugin a tslib_pibase object for a live page
 	 *
 	 * @return string the hyperlinked names of our organizers
 	 */
@@ -2236,7 +2236,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns an empty string if this event has no organizing partners or
 	 * something went wrong with the database query.
 	 *
-	 * @param tslib_pibase a tslib_pibase object for a live page
+	 * @param tslib_pibase $plugin a tslib_pibase object for a live page
 	 *
 	 * @return string the hyperlinked names of our organizing partners,
 	 *                or an empty string
@@ -2316,7 +2316,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * key1: value1
 	 *
-	 * @param string comma-separated list of key names
+	 * @param string $keysList comma-separated list of key names
 	 *
 	 * @return string formatted output (may be empty)
 	 */
@@ -2416,7 +2416,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Checks whether a certain user already is registered for this seminar.
 	 *
-	 * @param integer UID of the FE user to check, must be > 0
+	 * @param integer $feUserUid UID of the FE user to check, must be > 0
 	 *
 	 * @return boolean TRUE if the user already is registered, FALSE otherwise
 	 */
@@ -2441,7 +2441,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Checks whether a certain user already is registered for this seminar.
 	 *
-	 * @param integer UID of the FE user to check, must be > 0
+	 * @param integer $feUserUid UID of the FE user to check, must be > 0
 	 *
 	 * @return string empty string if everything is OK, else a localized
 	 *                error message
@@ -2456,8 +2456,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * but also checks whether this user is entered as a VIP for this event,
 	 * ie. he/she is allowed to view the list of registrations for this event.
 	 *
-	 * @param integer UID of the FE user to check, must be > 0
-	 * @param integer UID of the default event VIP front-end user group
+	 * @param integer $feUserUid UID of the FE user to check, must be > 0
+	 * @param integer $defaultEventVipsFeGroupID UID of the default event VIP front-end user group
 	 *
 	 * @return boolean TRUE if the user is a VIP for this seminar,
 	 *                 FALSE otherwise
@@ -2946,9 +2946,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Note that this does not write the values back to the seminar record yet.
 	 * This needs to be done in an additional step after this.
 	 *
-	 * @param string string that will be prepended to the WHERE clause
-	 *               using AND, e.g. 'pid=42' (the AND and the enclosing
-	 *               spaces are not necessary for this parameter)
+	 * @param string $queryParameters
+	 *        string that will be prepended to the WHERE clause using AND, e.g. 'pid=42'
+	 *        (the AND and the enclosing spaces are not necessary for this parameter)
 	 *
 	 * @return integer the number of attendances, will be >= 0
 	 */
@@ -3066,7 +3066,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * non-emptiness. If we are a date record, it'll be retrieved from the
 	 * corresponding topic record.
 	 *
-	 * @param string key of the element to check
+	 * @param string $key key of the element to check
 	 *
 	 * @return boolean TRUE if the corresponding integer exists and is non-empty
 	 */
@@ -3088,7 +3088,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If we are a date record, it'll be retrieved from the corresponding
 	 * topic record.
 	 *
-	 * @param string the name of the field to retrieve
+	 * @param string $key the name of the field to retrieve
 	 *
 	 * @return integer the corresponding element from the record data array
 	 */
@@ -3109,7 +3109,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * non-emptiness. If we are a date record, it'll be retrieved from the
 	 * corresponding topic record.
 	 *
-	 * @param string key of the element to check
+	 * @param string $key key of the element to check
 	 *
 	 * @return boolean TRUE if the corresponding string exists and is non-empty
 	 */
@@ -3131,7 +3131,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * returned instead. If we are a date record, it'll be retrieved from the
 	 * corresponding topic record.
 	 *
-	 * @param string the name of the field to retrieve
+	 * @param string $key the name of the field to retrieve
 	 *
 	 * @return string the corresponding element from the record data array
 	 */
@@ -3152,7 +3152,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * value != 0.00. If we are a date record, it'll be retrieved from the
 	 * corresponding topic record.
 	 *
-	 * @param string key of the element to check
+	 * @param string $key key of the element to check
 	 *
 	 * @return boolean TRUE if the corresponding decimal value exists
 	 *                 and is not 0.00
@@ -3175,7 +3175,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * returned instead. If we are a date record, it'll be retrieved from the
 	 * corresponding topic record.
 	 *
-	 * @param string the name of the field to retrieve
+	 * @param string $key the name of the field to retrieve
 	 *
 	 * @return string the corresponding element from the record data array
 	 */
@@ -3198,7 +3198,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If we are a date record, it'll be retrieved from the corresponding topic
 	 * record.
 	 *
-	 * @param string the name of the field to retrieve
+	 * @param string $key the name of the field to retrieve
 	 *
 	 * @return boolean the corresponding element from the record data array
 	 */
@@ -3308,12 +3308,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * a date record and $useTopicRecord is TRUE, the referenced records of the
 	 * corresponding topic record will be retrieved.
 	 *
-	 * @param string the name of the foreign table (must not be empty),
-	 *               must have the fields uid and title
-	 * @param string the name of the m:m table, having the fields uid_local,
-	 *               uid_foreign and sorting, must not be empty
-	 * @param boolean TRUE if the referenced records of the corresponding
-	 *                topic record should be retrieved, FALSE otherwise
+	 * @param string $foreignTable
+	 *        the name of the foreign table (must not be empty), must have the fields uid and title
+	 * @param string $mmTable
+	 *        the name of the m:m table, having the fields uid_local, uid_foreign and sorting, must not be empty
+	 * @param boolean $useTopicRecord
+	 *        TRUE if the referenced records of the corresponding topic record should be retrieved, FALSE otherwise
 	 *
 	 * @return array an array of referenced records, consisting each of a nested
 	 *               array with the keys "caption" (for the title) and "value"
@@ -3352,8 +3352,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Converts an array m:m records (each having a "value" and a "caption"
 	 * element) to a LF-separated string.
 	 *
-	 * @param array m:n elements, each having a "value" and "caption"
-	 *              element, may be empty
+	 * @param array $records m:n elements, each having a "value" and "caption" element, may be empty
 	 *
 	 * @return string the captions of the array contents separated by
 	 *                LF, will be empty if the array is empty
@@ -3492,8 +3491,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * payment or the gender), this function will already return the clear text
 	 * version.
 	 *
-	 * @param string the key of the data to retrieve (the key doesn't
-	 *               need to be trimmed)
+	 * @param string $key the key of the data to retrieve (the key doesn't need to be trimmed)
 	 *
 	 * @return string the data retrieved from $this->recordData, may be empty
 	 */
@@ -3739,8 +3737,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * regular, regular_early, regular_board,
 	 * special, special_early, special_board
 	 *
-	 * @param string code for the price category to check, may be empty
-	 *               or NULL
+	 * @param string $priceCode code for the price category to check, may be empty or NULL
 	 *
 	 * @return boolean TRUE if $priceCode matches a currently available
 	 *                 price, FALSE otherwise
@@ -3780,7 +3777,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * For this, only events that forbid multiple registrations are checked.
 	 *
-	 * @param integer UID of the FE user to check, must be > 0
+	 * @param integer $feUserUid UID of the FE user to check, must be > 0
 	 *
 	 * @return boolean TRUE if user is blocked by another registration,
 	 *                 FALSE otherwise
@@ -3873,8 +3870,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns just one day if we take place on only one day.
 	 * Returns a date range if we take several days.
 	 *
-	 * @param string the character or HTML entity used to separate
-	 *               start date and end date
+	 * @param string $dash the character or HTML entity used to separate start date and end date
 	 *
 	 * @return string the seminar date (or an empty string or a
 	 *                localized message)
@@ -3975,7 +3971,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * is an array that contains the UIDs of all the places that are related to
 	 * this event.
 	 *
-	 * @param string the name of the m:n table to query, must not be empty
+	 * @param string $tableName the name of the m:n table to query, must not be empty
 	 *
 	 * @return array array of foreign record's UIDs, ordered by the field
 	 *               uid_foreign in the m:n table, may be empty
@@ -4264,7 +4260,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If this event is an event date, this function will return both the
 	 * topic's file and the date's files (in that order).
 	 *
-	 * @param tslib_pibase a tslib_pibase object for a live page
+	 * @param tslib_pibase $plugin a tslib_pibase object for a live page
 	 *
 	 * @return array an array of arrays with the elements "name" and
 	 *               "size" of the attached file, will be empty if
@@ -4312,8 +4308,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Sets our attached files.
 	 *
-	 * @param string a comma-separated list of the names of attached files
-	 *               which have to exist in "uploads/tx_seminars/"
+	 * @param string $attachedFiles
+	 *        a comma-separated list of the names of attached files which have to exist in "uploads/tx_seminars/"
 	 */
 	public function setAttachedFiles($attachedFiles) {
 		$this->setRecordPropertyString('attached_files', $attachedFiles);
@@ -4341,8 +4337,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Creates the style for the title of the seminar.
 	 *
-	 * @param integer maximum width of the image, must be > 0
-	 * @param integer maximum height of the image, must be > 0
+	 * @param integer $maxImageWidth maximum width of the image, must be > 0
+	 * @param integer $maxImageHeight maximum height of the image, must be > 0
 	 *
 	 * @return string the complete style attribute for the seminar title
 	 *                containing the seminar image starting with a space, will
@@ -4454,7 +4450,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Sets whether this event is planned, canceled or confirmed.
 	 *
-	 * @param integer STATUS_PLANNED, STATUS_CONFIRMED or STATUS_CANCELED
+	 * @param integer $status STATUS_PLANNED, STATUS_CONFIRMED or STATUS_CANCELED
 	 */
 	public function setStatus($status) {
 		$this->setRecordPropertyInteger('cancelled', $status);

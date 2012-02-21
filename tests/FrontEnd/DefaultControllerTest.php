@@ -171,7 +171,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * Inserts a target group record into the database and creates a relation to
 	 * it from the event with the UID store in $this->seminarUid.
 	 *
-	 * @param array data of the target group to add, may be empty
+	 * @param array $targetGroupData data of the target group to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -233,7 +233,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * Inserts a category record into the database and creates a relation to
 	 * it from the event with the UID stored in $this->seminarUid.
 	 *
-	 * @param array data of the category to add, may be empty
+	 * @param array $categoryData data of the category to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will be > 0
 	 */
@@ -260,7 +260,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * Inserts an organizer record into the database and creates a relation to
 	 * to the seminar with the UID stored in $this->seminarUid.
 	 *
-	 * @param array data of the organizer to add, may be empty
+	 * @param array $organizerData data of the organizer to add, may be empty
 	 */
 	private function addOrganizerRelation(array $organizerData = array()) {
 		$organizerUid = $this->testingFramework->createRecord(

@@ -36,8 +36,9 @@
  */
 class tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm extends tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
-	 * @var the prefix for all locallang keys for prefilling the form,
-	 *      must not be empty
+	 * the prefix for all locallang keys for prefilling the form, must not be empty
+	 *
+	 * @var string
 	 */
 	protected $formFieldPrefix = 'testForm_prefillField_';
 

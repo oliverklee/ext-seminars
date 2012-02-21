@@ -52,7 +52,7 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	/**
 	 * The constructor.
 	 *
-	 * @param array TS setup configuration array, may be empty
+	 * @param array $configuration TS setup configuration array, may be empty
 	 */
 	public function __construct(array $configuration) {
 		parent::init($configuration);
@@ -61,7 +61,7 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	/**
 	 * Sets this time span's begin date and time.
 	 *
-	 * @param integer begin date and time as a UNIX timestamp, may be zero
+	 * @param integer $beginDate begin date and time as a UNIX timestamp, may be zero
 	 */
 	public function setBeginDateAndTime($beginDate) {
 		$this->setRecordPropertyInteger('begin_date', $beginDate);
@@ -70,7 +70,7 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	/**
 	 * Sets this time span's end date and time.
 	 *
-	 * @param integer end date and time as a UNIX timestamp, may be zero
+	 * @param integer $endDate end date and time as a UNIX timestamp, may be zero
 	 */
 	public function setEndDateAndTime($endDate) {
 		$this->setRecordPropertyInteger('end_date', $endDate);
@@ -79,7 +79,7 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	/**
 	 * Sets this time span's room.
 	 *
-	 * @param string room name
+	 * @param string $room room name
 	 */
 	public function setRoom($room) {
 		$this->setRecordPropertyString('room', $room);
@@ -88,8 +88,7 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	/**
 	 * Sets the number of places for this time span.
 	 *
-	 * @param integer the number of places that are associated with this
-	 * time span
+	 * @param integer $places the number of places that are associated with this time span
 	 */
 	public function setNumberOfPlaces($places) {
 		$this->setRecordPropertyInteger('place', $places);

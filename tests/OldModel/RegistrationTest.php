@@ -135,7 +135,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * Inserts a payment method record into the database and creates a relation
 	 * to it from the fixture.
 	 *
-	 * @param array data of the payment method to add, may be empty
+	 * @param array $paymentMethodData data of the payment method to add, may be empty
 	 *
 	 * @return integer the UID of the created record, will always be > 0
 	 */

@@ -105,10 +105,8 @@ class tx_seminars_cli_MailNotifier {
 	/**
 	 * Sends an e-mail to the organizers of the provided event.
 	 *
-	 * @param tx_seminars_seminar event for which to send the reminder to its
-	 *                            organizers
-	 * @param string locallang key for the message content and the subject for
-	 *               the e-mail to send, must not be empty
+	 * @param tx_seminars_seminar $event event for which to send the reminder to its organizers
+	 * @param string $messageKey locallang key for the message content and the subject for the e-mail to send, must not be empty
 	 */
 	private function sendRemindersToOrganizers(
 		tx_seminars_seminar $event, $messageKey
@@ -221,8 +219,7 @@ class tx_seminars_cli_MailNotifier {
 	 * Returns a seminar bag builder already limited to upcoming events with a
 	 * begin date and status $status.
 	 *
-	 * @param integer status to limit the builder to, either
-	 *                tx_seminars_seminar::STATUS_PLANNED or ::CONFIRMED
+	 * @param integer $status status to limit the builder to, must be either tx_seminars_seminar::STATUS_PLANNED or ::CONFIRMED
 	 *
 	 * @return tx_seminars_BagBuilder_Event builder for the seminar bag
 	 */
@@ -238,7 +235,7 @@ class tx_seminars_cli_MailNotifier {
 	 * Returns the CSV output for the list of registrations for the event with
 	 * the provided UID.
 	 *
-	 * @param integer UID of the event to create the output for, must be > 0
+	 * @param integer $uid UID of the event to create the output for, must be > 0
 	 *
 	 * @return tx_oelib_Attachment CSV list of registrations for the given
 	 *                             seminar
@@ -265,11 +262,12 @@ class tx_seminars_cli_MailNotifier {
 	 * Returns localized e-mail content customized for the provided event and
 	 * the provided organizer.
 	 *
-	 * @param string locallang key for the text in which to replace key words
-	 *               beginning with "%" by the event's data, must not be empty
-	 * @param tx_seminars_seminar event for which to customize the text
-	 * @param string name of the organizer, may be empty if no organizer name
-	 *               needs to be inserted in the text
+	 * @param string $locallangKey
+	 *        locallang key for the text in which to replace key words beginning with "%" by the event's data, must not be empty
+	 * @param tx_seminars_seminar $event
+	 *        event for which to customize the text
+	 * @param string $organizerName
+	 *        name of the organizer, may be empty if no organizer name needs to be inserted in the text
 	 *
 	 * @return string the localized e-mail content, will not be empty
 	 */
@@ -300,7 +298,7 @@ class tx_seminars_cli_MailNotifier {
 	/**
 	 * Returns a timestamp formatted according to the current configuration.
 	 *
-	 * @param integer timestamp, must not be empty
+	 * @param integer $timestamp timestamp, must be >= 0
 	 *
 	 * @return string formatted date according to the TS setup configuration for
 	 *                'dateFormatYMD', will not be empty
@@ -316,7 +314,7 @@ class tx_seminars_cli_MailNotifier {
 	/**
 	 * Checks whether the CSV file should be added to the e-mail.
 	 *
-	 * @param tx_seminars_seminars $event the event to send the e-mail for
+	 * @param tx_seminars_seminar $event the event to send the e-mail for
 	 *
 	 * @return boolean TRUE if the CSV file should be added, FALSE otherwise
 	 */

@@ -36,9 +36,9 @@
 /**
  * Marks the current attachment as deleted if the confirm becomes submitted.
  *
- * @param string listItemId
+ * @param {string} listItemId
  *        ID of the list item with the attachment to delete, must not be empty
- * @param string confirmMessage
+ * @param {string} confirmMessage
  *        localized confirm message for whether really to mark an attachment for
  *        deletion
  */
@@ -192,7 +192,7 @@ function fixNameFieldsNumber() {
 /**
  * Gets the number of needed name fields.
  *
- * @return integer the number of needed name fields, will be >= 0
+ * @return {integer} the number of needed name fields, will be >= 0
  */
 function getNumberOfNeededNameFields() {
 	var seatsSelector = $("tx_seminars_pi1_registration_editor_seats");
@@ -217,10 +217,10 @@ function getNumberOfNeededNameFields() {
 /**
  * Updates an auxiliary record after it has been edited in the FE editor.
  *
- * @param string htmlId
+ * @param {string} htmlId
  *        the HTML ID of the auxiliary record checkbox label to update, must not
  *        be empty
- * @param string title the title of the auxiliary record, must not be empty
+ * @param {string} title the title of the auxiliary record, must not be empty
  */
 function updateAuxiliaryRecordInEditor(htmlId, title) {
 	var label = $(htmlId);
@@ -235,12 +235,12 @@ function updateAuxiliaryRecordInEditor(htmlId, title) {
  * Appends an auxiliary record as a checkbox so that it is available for
  * selection in the FE editor.
  *
- * @param integer uid the UID of the record to add, must be > 0
- * @param string title the title of the record, must not be empty
- * @param string htmlName
+ * @param [integer} uid the UID of the record to add, must be > 0
+ * @param [string} title the title of the record, must not be empty
+ * @param [string} htmlName
  *        the relevant part of the IDs and names for the selection elements,
  *        e.g. "place", "speaker" or "tutor".
- * @param array buttonData the data of the edit button of the record
+ * @param [array} buttonData the data of the edit button of the record
  */
 function appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonData) {
 	var container = $$("#tx_seminars_pi1_seminars_" + htmlName + " tbody")[0];
@@ -288,9 +288,9 @@ function appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonData) {
 /**
  * Appends a place so that it is available for selection in the FE editor.
  *
- * @param integer uid the UID of the place to add, must be > 0
- * @param string title the title of the place, must not be empty
- * @param array buttonData the data of the edit button of the place
+ * @param {integer} uid the UID of the place to add, must be > 0
+ * @param {string} title the title of the place, must not be empty
+ * @param {array} buttonData the data of the edit button of the place
  */
 function appendPlaceInEditor(uid, title, buttonData) {
 	appendAuxiliaryRecordInEditor(uid, title, "place", buttonData);
@@ -299,9 +299,9 @@ function appendPlaceInEditor(uid, title, buttonData) {
 /**
  * Appends a speaker so that it is available for selection in the FE editor.
  *
- * @param integer uid the UID of the speaker to add, must be > 0
- * @param string title the name of the speaker, must not be empty
- * @param string buttonData the data of the edit button of the speaker
+ * @param {integer} uid the UID of the speaker to add, must be > 0
+ * @param {string} title the name of the speaker, must not be empty
+ * @param {string} buttonData the data of the edit button of the speaker
  */
 function appendSpeakerInEditor(uid, title, buttonData) {
 	appendAuxiliaryRecordInEditor(uid, title, "speakers", buttonData);
@@ -313,9 +313,9 @@ function appendSpeakerInEditor(uid, title, buttonData) {
 /**
  * Appends a checkbox so that it is available for selection in the FE editor.
  *
- * @param integer uid the UID of the checkbox to add, must be > 0
- * @param string title the title of the checkbox, must not be empty
- * @param string buttonData the data of the edit button of the checkbox
+ * @param {integer} uid the UID of the checkbox to add, must be > 0
+ * @param {string} title the title of the checkbox, must not be empty
+ * @param {string} buttonData the data of the edit button of the checkbox
  */
 function appendCheckboxInEditor(uid, title, buttonData) {
 	appendAuxiliaryRecordInEditor(uid, title, "checkboxes", buttonData);
@@ -324,9 +324,9 @@ function appendCheckboxInEditor(uid, title, buttonData) {
 /**
  * Appends a target group so that it is available for selection in the FE editor.
  *
- * @param integer uid the UID of the target group to add, must be > 0
- * @param string title the title of the target group, must not be empty
- * @param string buttonData the data of the edit button of the target group
+ * @param {integer} uid the UID of the target group to add, must be > 0
+ * @param {string} title the title of the target group, must not be empty
+ * @param {string} buttonData the data of the edit button of the target group
  */
 function appendTargetGroupInEditor(uid, title, buttonData) {
 	appendAuxiliaryRecordInEditor(uid, title, "target_groups", buttonData);

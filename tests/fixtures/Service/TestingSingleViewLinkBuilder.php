@@ -58,7 +58,7 @@ class tx_seminars_tests_fixtures_Service_TestingSingleViewLinkBuilder extends tx
 	 * Gets the single view page UID/URL from $event (if any single view page is set for
 	 * the event) or from the configuration.
 	 *
-	 * @param $event the event for which to get the single view page
+	 * @param tx_seminars_Model_Event $event the event for which to get the single view page
 	 *
 	 * @return string
 	 *         the single view page UID/URL for $event, will be empty if neither

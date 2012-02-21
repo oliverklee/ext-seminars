@@ -46,9 +46,8 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * The constructor.
 	 *
-	 * @param integer the UID of the event to retrieve from the DB, must
-	 *                be > 0
-	 * @param array TS setup configuration array, may be empty
+	 * @param integer $uid the UID of the event to retrieve from the DB, must be > 0
+	 * @param array $configuration TS setup configuration array, may be empty
 	 */
 	public function __construct($uid, array $configuration = array()) {
 		parent::__construct($uid);
@@ -59,7 +58,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the event data.
 	 *
-	 * @param array event data array
+	 * @param array $eventData event data array
 	 */
 	public function setEventData(array $eventData) {
 		$this->recordData = $eventData;
@@ -69,7 +68,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the event's unregistration deadline.
 	 *
-	 * @param integer unregistration deadline as UNIX timestamp
+	 * @param integer $unregistrationDeadline unregistration deadline as UNIX timestamp
 	 */
 	public function setUnregistrationDeadline($unregistrationDeadline) {
 		$this->setRecordPropertyInteger(
@@ -80,8 +79,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the configuration value "allowRegistrationForEventsWithoutDate".
 	 *
-	 * @param integer whether this option is enabled or not, value must be
-	 * either 0 or 1
+	 * @param integer $value whether this option is enabled or not, value must be either 0 or 1
 	 */
 	public function setAllowRegistrationForEventsWithoutDate($value) {
 		$this->setConfigurationValue(
@@ -92,8 +90,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the event's begin date.
 	 *
-	 * @param integer begin date as UNIX timestamp (has to be >= 0, 0 will
-	 * unset the begin date)
+	 * @param integer $beginDate begin date as UNIX timestamp (has to be >= 0, 0 will unset the begin date)
 	 */
 	public function setBeginDate($beginDate) {
 		$this->setRecordPropertyInteger('begin_date', $beginDate);
@@ -102,8 +99,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the event's end date.
 	 *
-	 * @param integer end date as UNIX timestamp (has to be >= 0, 0 will
-	 * unset the end date)
+	 * @param integer $endDate end date as UNIX timestamp (has to be >= 0, 0 will unset the end date)
 	 */
 	public function setEndDate($endDate) {
 		$this->setRecordPropertyInteger('end_date', $endDate);
@@ -112,7 +108,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the event's maximum number of attendances.
 	 *
-	 * @param integer maximum attendances number
+	 * @param integer $attendancesMax maximum attendances number
 	 */
 	public function setAttendancesMax($attendancesMax) {
 		$this->setRecordPropertyInteger('attendees_max', $attendancesMax);
@@ -121,7 +117,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the configuration for showTimeOfUnregistrationDeadline.
 	 *
-	 * @param integer value for showTimeOfUnregistrationDeadline (0 or 1)
+	 * @param integer $value value for showTimeOfUnregistrationDeadline (0 or 1)
 	 */
 	public function setShowTimeOfUnregistrationDeadline($value) {
 		$this->setConfigurationValue(
@@ -133,8 +129,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * Sets the TypoScript configuration for the parameter
 	 * unregistrationDeadlineDaysBeforeBeginDate.
 	 *
-	 * @param integer days before the begin date until unregistration
-	 * should be possible
+	 * @param integer $days days before the begin date until unregistration should be possible
 	 */
 	public function setGlobalUnregistrationDeadline($days) {
 		$this->setConfigurationValue(
@@ -145,7 +140,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets whether the event has a registration queue.
 	 *
-	 * @param boolean whether the event should have a registration queue
+	 * @param boolean $hasRegistrationQueue whether the event should have a registration queue
 	 */
 	public function setRegistrationQueue($hasRegistrationQueue) {
 		$this->setRecordPropertyBoolean('queue_size', $hasRegistrationQueue);
@@ -154,7 +149,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the number of attendances.
 	 *
-	 * @param integer the number of attendances, must be >= 0
+	 * @param integer $number the number of attendances, must be >= 0
 	 */
 	public function setNumberOfAttendances($number) {
 		$this->numberOfAttendances = $number;
@@ -164,8 +159,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the number of attendances on the registration queue.
 	 *
-	 * @param integer the number of attendances on the registration queue, must
-	 *                be >= 0
+	 * @param integer $number the number of attendances on the registration queue, must be >= 0
 	 */
 	public function setNumberOfAttendancesOnQueue($number) {
 		$this->numberOfAttendancesOnQueue = $number;
@@ -175,13 +169,11 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the number of places for this record.
 	 *
-	 * TODO: This function needs to be removed once the testing framework
-	 * can update the counter for the number of places.
+	 * TODO: This function needs to be removed once the testing framework can update the counter for the number of places.
 	 *
 	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
 	 *
-	 * @param integer the number of places that are associated with this event,
-	 *                must be >= 0
+	 * @param integer $places the number of places that are associated with this event, must be >= 0
 	 */
 	public function setNumberOfPlaces($places) {
 		$this->setRecordPropertyInteger('place', $places);
@@ -190,13 +182,11 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the number of target groups for this record.
 	 *
-	 * TODO: This function needs to be removed once the testing framework
-	 * can update the counter for the number of target groups.
+	 * TODO: This function needs to be removed once the testing framework can update the counter for the number of target groups.
 	 *
 	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
 	 *
-	 * @param integer the number of target groups that are associated with this
-	 *                event, must be >= 0
+	 * @param integer $targetGroups the number of target groups that are associated with this event, must be >= 0
 	 */
 	public function setNumberOfTargetGroups($targetGroups) {
 		$this->setRecordPropertyInteger('target_groups', $targetGroups);
@@ -211,8 +201,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 *
 	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=2948
 	 *
-	 * @param integer the number of payment methods that are associated with
-	 *                this event, must be >= 0
+	 * @param integer $paymentMethods the number of payment methods that are associated with this event, must be >= 0
 	 */
 	public function setNumberOfPaymentMethods($paymentMethods) {
 		$this->setRecordPropertyInteger('payment_methods', $paymentMethods);
@@ -226,8 +215,8 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 *
 	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
 	 *
-	 * @param integer the number of organizing partners that are associated
-	 *                with this event, must be >= 0
+	 * @param integer $numberOfOrganizingPartners
+	 *        the number of organizing partners that are associated with this event, must be >= 0
 	 */
 	public function setNumberOfOrganizingPartners($numberOfOrganizingPartners) {
 		$this->setRecordPropertyInteger(
@@ -238,13 +227,11 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the number of categories for this record.
 	 *
-	 * TODO: This function needs to be removed once the testing framework
-	 * can update the counter for the number of categories.
+	 * TODO: This function needs to be removed once the testing framework can update the counter for the number of categories.
 	 *
 	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
 	 *
-	 * @param integer the number of categories that are associated with this
-	 *                event, must be >= 0
+	 * @param integer $number the number of categories that are associated with this event, must be >= 0
 	 */
 	public function setNumberOfCategories($number) {
 		$this->setRecordPropertyInteger('categories', $number);
@@ -258,8 +245,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 *
 	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
 	 *
-	 * @param integer the number of organizers that are associated with this
-	 *                event, must be >= 0
+	 * @param integer $number the number of organizers that are associated with this event, must be >= 0
 	 */
 	public function setNumberOfOrganizers($number) {
 		$this->setRecordPropertyInteger('organizers', $number);
@@ -273,8 +259,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 *
 	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
 	 *
-	 * @param integer the number of speakers that are associated with this
-	 *                event, must be >= 0
+	 * @param integer $number the number of speakers that are associated with this event, must be >= 0
 	 */
 	public function setNumberOfSpeakers($number) {
 		$this->setRecordPropertyInteger('speakers', $number);
@@ -288,8 +273,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 *
 	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
 	 *
-	 * @param integer the number of partners that are associated with this
-	 *                event, must be >= 0
+	 * @param integer $number the number of partners that are associated with this event, must be >= 0
 	 */
 	public function setNumberOfPartners($number) {
 		$this->setRecordPropertyInteger('partners', $number);
@@ -303,8 +287,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 *
 	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
 	 *
-	 * @param integer the number of tutors that are associated with this event,
-	 *                must be >= 0
+	 * @param integer $number the number of tutors that are associated with this event, must be >= 0
 	 */
 	public function setNumberOfTutors($number) {
 		$this->setRecordPropertyInteger('tutors', $number);
@@ -318,8 +301,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 *
 	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
 	 *
-	 * @param integer the number of leaders that are associated with this event,
-	 *                must be >= 0
+	 * @param integer $number the number of leaders that are associated with this event, must be >= 0
 	 */
 	public function setNumberOfLeaders($number) {
 		$this->setRecordPropertyInteger('leaders', $number);
@@ -328,8 +310,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets whether the collision check should be skipped for this event.
 	 *
-	 * @param boolean whether the collision check should be skipped for this
-	 *                event
+	 * @param boolean $skipIt whether the collision check should be skipped for this event
 	 */
 	public function setSkipCollisionCheck($skipIt) {
 		$this->setRecordPropertyBoolean('skip_collision_check', $skipIt);
@@ -338,10 +319,9 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the record type for this event record.
 	 *
-	 * @param integer the record type for this event record, must be either
-	 *                tx_seminars_Model_Event::TYPE_COMPLETE, 
-	 *                tx_seminars_Model_Event::TYPE_TOPIC
-	 *                or tx_seminars_Model_Event::TYPE_DATE
+	 * @param integer $recordType
+	 *        the record type for this event record, must be either tx_seminars_Model_Event::TYPE_COMPLETE,
+	 *        tx_seminars_Model_Event::TYPE_TOPIC or tx_seminars_Model_Event::TYPE_DATE
 	 */
 	public function setRecordType($recordType) {
 		$this->setRecordPropertyInteger('object_type', $recordType);
@@ -351,7 +331,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * Sets the "hidden" flag of this record (concerning the visibility in
 	 * TYPO3).
 	 *
-	 * @param boolean whether this record should be marked as hidden
+	 * @param boolean $hidden whether this record should be marked as hidden
 	 */
 	public function setHidden($hidden) {
 		$this->setRecordPropertyBoolean('hidden', $hidden);
@@ -360,8 +340,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets this record's start timestamp (concerning the visibility in TYPO3).
 	 *
-	 * @param integer this record's start time as a UNIX timestamp, set to 0 to
-	 *                set no start time
+	 * @param integer $timeStamp this record's start time as a UNIX timestamp, set to 0 to set no start time
 	 */
 	public function setRecordStartTime($timeStamp) {
 		$this->setRecordPropertyInteger('starttime', $timeStamp);
@@ -370,8 +349,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets this record's end timestamp (concerning the visibility in TYPO3).
 	 *
-	 * @param integer this record's end time as a UNIX timestamp, set to 0 to
-	 *                set no start time
+	 * @param integer $timeStamp this record's end time as a UNIX timestamp, set to 0 to set no start time
 	 */
 	public function setRecordEndTime($timeStamp) {
 		$this->setRecordPropertyInteger('endtime', $timeStamp);
@@ -381,8 +359,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * Sets the TypoScript configuration for the parameter
 	 * allowUnregistrationWithEmptyWaitingList.
 	 *
-	 * @param boolean whether unregistration is possible even when the waiting
-	 *                list is empty
+	 * @param boolean $isAllowed whether unregistration is possible even when the waiting list is empty
 	 */
 	public function setAllowUnregistrationWithEmptyWaitingList($isAllowed) {
 		$this->setConfigurationValue(
@@ -393,7 +370,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the UID of the owner FE user.
 	 *
-	 * @param integer the UID of the owner FE user, must be >= 0
+	 * @param integer $ownerUid the UID of the owner FE user, must be >= 0
 	 */
 	public function setOwnerUid($ownerUid) {
 		$this->setRecordPropertyInteger('owner_feuser', $ownerUid);
@@ -402,7 +379,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the number of time slots.
 	 *
-	 * @param integer the number of time slots for this event, must be >= 0
+	 * @param integer $numberOfTimeSlots the number of time slots for this event, must be >= 0
 	 */
 	public function setNumberOfTimeSlots($numberOfTimeSlots) {
 		$this->setRecordPropertyInteger('timeslots', $numberOfTimeSlots);
@@ -411,7 +388,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the file name of the image.
 	 *
-	 * @param string the name of the image, must not be empty
+	 * @param string $fileName the name of the image, must not be empty
 	 */
 	public function setImage($fileName) {
 		$this->setRecordPropertyString('image', $fileName);
@@ -420,7 +397,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets whether multiple registrations are allowed.
 	 *
-	 * @param boolean whether multiple registrations should be allowed
+	 * @param boolean $allowMultipleRegistrations whether multiple registrations should be allowed
 	 */
 	public function setAllowsMultipleRegistrations($allowMultipleRegistrations) {
 		$this->setRecordPropertyBoolean(
@@ -432,7 +409,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets this event's license expiry.
 	 *
-	 * @param integer the license expiry as a timestamp, may be 0
+	 * @param integer $expiry the license expiry as a timestamp, may be 0
 	 */
 	public function setExpiry($expiry) {
 		$this->setRecordPropertyInteger('expiry', $expiry);
@@ -454,8 +431,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the number of lodgings for this record.
 	 *
-	 * @param integer the number of lodgings that are associated with this event,
-	 *                must be >= 0
+	 * @param integer $lodgings the number of lodgings that are associated with this event, must be >= 0
 	 */
 	public function setNumberOfLodgings($lodgings) {
 		$this->setRecordPropertyInteger('lodgings', $lodgings);
@@ -469,8 +445,8 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * As speakers can be related to this event as speakers, partners, tutors or
 	 * leaders, the type relation can be specified. The default is "speakers".
 	 *
-	 * @param string the relation in which the speakers stand to this event:
-	 *               "speakers" (default), "partners", "tutors" or "leaders"
+	 * @param string $speakerRelation
+	 *        the relation in which the speakers stand to this event: "speakers" (default), "partners", "tutors" or "leaders"
 	 *
 	 * @return string our speakers (or '' if there is an error)
 	 */
@@ -504,7 +480,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets whether registration is needed.
 	 *
-	 * @param boolean whether registration is needed
+	 * @param boolean $needsRegistration whether registration is needed
 	 */
 	public function setNeedsRegistration($needsRegistration) {
 		$this->setRecordPropertyBoolean(
@@ -515,8 +491,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the registration deadline.
 	 *
-	 * @param integer the registration deadline as timestamp, set to 0 to unset
-	 *                the registration deadline
+	 * @param integer $registrationDeadline the registration deadline as timestamp, set to 0 to unset the registration deadline
 	 */
 	public function setRegistrationDeadline($registrationDeadline) {
 		$this->setRecordPropertyInteger(
@@ -536,7 +511,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets the registration begin date.
 	 *
-	 * @param integer the registration begin date as time-stamp, set to 0 to
+	 * @param integer $registrationBeginDate the registration begin date as time-stamp, set to 0 to
 	 *                unset the registration begin date
 	 */
 	public function setRegistrationBeginDate($registrationBeginDate) {
@@ -563,7 +538,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * non-emptiness. If we are a date record, it'll be retrieved from the
 	 * corresponding topic record.
 	 *
-	 * @param string key of the element to check
+	 * @param string $key key of the element to check
 	 *
 	 * @return boolean TRUE if the corresponding integer exists and is non-empty
 	 */
@@ -577,7 +552,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * If we are a date record, it'll be retrieved from the corresponding
 	 * topic record.
 	 *
-	 * @param string the name of the field to retrieve
+	 * @param string $key the name of the field to retrieve
 	 *
 	 * @return integer the corresponding element from the record data array
 	 */
@@ -588,8 +563,8 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * Sets an integer element of the record data array (and intvals it).
 	 *
-	 * @param string key of the element to set (must be non-empty)
-	 * @param integer the value that will be written into the element
+	 * @param string $key key of the element to set (must be non-empty)
+	 * @param integer $value the value that will be written into the element
 	 */
 	public function setRecordPropertyInteger($key, $value) {
 		parent::setRecordPropertyInteger($key, $value);

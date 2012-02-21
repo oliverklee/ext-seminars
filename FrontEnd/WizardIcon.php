@@ -35,7 +35,7 @@ class tx_seminars_FrontEnd_WizardIcon {
 	/**
 	 * Processes the wizard items array.
 	 *
-	 * @param array the wizard items, may be empty
+	 * @param array $wizardItems the wizard items, may be empty
 	 *
 	 * @return array modified array with wizard items
 	 */

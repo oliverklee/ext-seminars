@@ -45,7 +45,7 @@ class tx_seminars_Model_Checkbox extends tx_oelib_Model {
 	/**
 	 * Sets our title.
 	 *
-	 * @param string our title to set, must not be empty
+	 * @param string $title our title to set, must not be empty
 	 */
 	public function setTitle($title) {
 		if ($title == '') {
@@ -67,7 +67,7 @@ class tx_seminars_Model_Checkbox extends tx_oelib_Model {
 	/**
 	 * Sets our description.
 	 *
-	 * @param string our description to set, may be empty
+	 * @param string $description our description to set, may be empty
 	 */
 	public function setDescription($description) {
 		$this->setAsString('description', $description);

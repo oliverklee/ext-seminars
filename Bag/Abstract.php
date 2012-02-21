@@ -114,27 +114,25 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	private $enabledFieldsQuery = '';
 
 	/**
-	 * The constructor. Sets the iterator to the first result of a query
+	 * The constructor. Creates a bag that contains test records and allows to iterate over them.
 	 *
-	 * @param string the name of the main DB table to query (comma-
-	 *               separated), may not be empty
-	 * @param string string that will be prepended to the WHERE clause
-	 *               using AND, e.g. 'pid=42' (the AND and the enclosing
-	 *               spaces are not necessary for this parameter)
-	 *               the table name must be used as a prefix if more than
-	 *               one table is queried
-	 * @param string comma-separated names of additional DB tables used
-	 *               for JOINs, may be empty
-	 * @param string GROUP BY clause (may be empty), must already be
-	 *               safeguarded against SQL injection
-	 * @param string ORDER BY clause (may be empty), must already be
-	 *               safeguarded against SQL injection
-	 * @param string LIMIT clause (may be empty), must already be
-	 *               safeguarded against SQL injection
-	 * @param integer If $showHiddenRecords is set (0/1), any hidden-
-	 *               fields in records are ignored.
-	 * @param boolean If $ignoreTimingOfRecords is TRUE the timing of
-	 *               records is ignored.
+	 * @param string $dbTableName
+	 *        the name of the DB table, must not be empty
+	 * @param string $queryParameters
+	 *        string that will be prepended to the WHERE clause using AND, e.g. 'pid=42'
+	 *        (the AND and the enclosing spaces are not necessary for this parameter)
+	 * @param string $additionalTableNames
+	 *        comma-separated names of additional DB tables used for JOINs, may be empty
+	 * @param string $groupBy
+	 *        GROUP BY clause (may be empty), must already be safeguarded against SQL injection
+	 * @param string $orderBy
+	 *        ORDER BY clause (may be empty), must already be safeguarded against SQL injection
+	 * @param string $limit
+	 *        LIMIT clause (may be empty), must already be safeguarded against SQL injection
+	 * @param integer $showHiddenRecords
+	 *        If $showHiddenRecords is set (0/1), any hidden fields in records are ignored.
+	 * @param boolean $ignoreTimingOfRecords
+	 *        If $ignoreTimingOfRecords is TRUE the timing of records is ignored.
 	 */
 	public function __construct(
 		$dbTableName, $queryParameters = '1=1', $additionalTableNames = '',
@@ -172,10 +170,8 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	 * concatenated output from tx_oelib_db::enableFields into
 	 * $this->enabledFieldsQuery.
 	 *
-	 * @param integer If $showHiddenRecords is set (0/1), any hidden-
-	 *                fields in records are ignored.
-	 * @param boolean If $ignoreTimingOfRecords is TRUE the timing of
-	 *                records is ignored.
+	 * @param integer $showHiddenRecords If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
+	 * @param boolean $ignoreTimingOfRecords If $ignoreTimingOfRecords is TRUE the timing of records is ignored.
 	 */
 	private function createEnabledFieldsQuery(
 		$showHiddenRecords = -1, $ignoreTimingOfRecords = FALSE

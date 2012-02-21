@@ -65,8 +65,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * After the constructor has been called, hasAccessMessage() must be called
 	 * to ensure that the logged-in user is allowed to edit a given seminar.
 	 *
-	 * @param array TypoScript configuration for the plugin
-	 * @param tslib_cObj the parent cObj content, needed for the flexforms
+	 * @param array $configuration TypoScript configuration for the plugin
+	 * @param tslib_cObj $cObj the parent cObj content, needed for the flexforms
 	 */
 	public function __construct(array $configuration, tslib_cObj $cObj) {
 		parent::__construct($configuration, $cObj);
@@ -140,8 +140,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * our own formatted list to ensure correctly displayed attachments, even if
 	 * there was a validation error.
 	 *
-	 * @param tx_oelib_Template holds the raw HTML output, must be already
-	 *                          processed by FORMidable
+	 * @param tx_oelib_Template $template holds the raw HTML output, must be already processed by FORMidable
 	 *
 	 * @return string HTML for the FE editor with the formatted attachment
 	 *                list if there are attached files, will not be empty
@@ -356,7 +355,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of available speakers.
 	 *
-	 * @param array any pre-filled data (may be empty)
+	 * @param array $items any pre-filled data (may be empty)
 	 * @param array $parameters the parameters sent to this function by FORMidable
 	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
@@ -505,7 +504,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of available target groups.
 	 *
-	 * @param array any pre-filled data (may be empty)
+	 * @param array $items array any pre-filled data (may be empty)
 	 * @param array $unused unused
 	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
@@ -690,8 +689,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Changes all potential decimal separators (commas and dots) in price
 	 * fields to dots.
 	 *
-	 * @param array all entered form data with the field names as keys,
-	 *              will be modified, must not be empty
+	 * @param array &$formData all entered form data with the field names as keys, will be modified, must not be empty
 	 */
 	private function unifyDecimalSeparators(array &$formData) {
 		$priceFields = array(
@@ -716,7 +714,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * FORMidable, it is possible to store the name of an invalid file in the
 	 * list of attachments.
 	 *
-	 * @param array form data, will be modified, must not be empty
+	 * @param array &$formData form data, will be modified, must not be empty
 	 */
 	private function processAttachments(array &$formData) {
 		$filesToDelete = t3lib_div::trimExplode(
@@ -736,7 +734,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Removes all form data elements that are no fields in the seminars table.
 	 *
-	 * @param array form data, will be modified, must not be empty
+	 * @param array &$formData form data, will be modified, must not be empty
 	 */
 	private function purgeNonSeminarsFields(array &$formData) {
 		$fieldsToUnset = array(
@@ -783,7 +781,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * 'owner_feuser'.
 	 * For objects to update, just the 'tstamp' will be refreshed.
 	 *
-	 * @param array form data, will be modified, must not be empty
+	 * @param array &$formData form data, will be modified, must not be empty
 	 */
 	private function addAdministrativeData(array &$formData) {
 		$formData['tstamp'] = $GLOBALS['SIM_EXEC_TIME'];
@@ -806,9 +804,9 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Checks the publish settings of the user and hides the event record if
 	 * necessary.
 	 *
-	 * @param array form data, will be modified if the seminar must be hidden
-	 *              corresponding to the publish settings of the user, must not
-	 *              be empty
+	 * @param array &$formData
+	 *        form data, will be modified if the seminar must be hidden corresponding to the publish settings of the user,
+	 *        must not be empty
 	 */
 	private function checkPublishSettings(array &$formData) {
 		$publishSetting	= tx_oelib_FrontEndLoginManager::getInstance()
@@ -847,7 +845,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @see unifyDecimalSeparators(), processAttachments(),
 	 *      purgeNonSeminarsFields(), addAdministrativeData()
 	 *
-	 * @param array form data, must not be empty
+	 * @param array $formData form data, must not be empty
 	 *
 	 * @return array modified form data, will not be empty
 	 */
@@ -873,7 +871,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * This check is done here because the FORMidable validators do not allow
 	 * multiple error messages.
 	 *
-	 * @param array form data to check, must not be empty
+	 * @param array $valueToCheck form data to check, must not be empty
 	 *
 	 * @return boolean TRUE if the provided file is valid, FALSE otherwise
 	 */
@@ -908,7 +906,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Checks whether an uploaded file is of a valid type.
 	 *
-	 * @param string file name, must match an uploaded file, must not be empty
+	 * @param string $fileName file name, must match an uploaded file, must not be empty
 	 */
 	private function checkFileType($fileName) {
 		$allowedExtensions = $this->getConfValueString(
@@ -928,7 +926,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Checks whether an uploaded file is not too large.
 	 *
-	 * @param string file name, must match an uploaded file, must not be empty
+	 * @param string $fileName file name, must match an uploaded file, must not be empty
 	 */
 	private function checkFileSize($fileName) {
 		$maximumFileSize = $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'];
@@ -946,7 +944,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Deletes a file in the seminars upload directory and removes it from the
 	 * list of currently attached files.
 	 *
-	 * @param string file name, must match an uploaded file, must not be empty
+	 * @param string $fileName file name, must match an uploaded file, must not be empty
 	 *
 	 * @return string comma-separated list with the still attached files,
 	 *                will be empty if the last attachment was removed
@@ -1441,7 +1439,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * This function is intended to be called via an AJAX FORMidable event.
 	 *
-	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
 	 * @return array calls to be executed on the client
 	 */
@@ -1597,7 +1595,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Shows a modalbox containing a form for editing an existing place record.
 	 *
-	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 * @param tx_ameosformidable $formidable the FORMidable object
 	 * @param integer $placeUid the UID of the place to edit, must be > 0
 	 *
 	 * @return array calls to be executed on the client
@@ -1749,7 +1747,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * This function is intended to be called via an AJAX FORMidable event.
 	 *
-	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
 	 * @return array calls to be executed on the client
 	 */
@@ -1880,7 +1878,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Shows a modalbox containing a form for editing an existing speaker record.
 	 *
-	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 * @param tx_ameosformidable $formidable the FORMidable object
 	 * @param integer $speakerUid the UID of the speaker to edit, must be > 0
 	 *
 	 * @return array calls to be executed on the client
@@ -2012,7 +2010,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * This function is intended to be called via an AJAX FORMidable event.
 	 *
-	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
 	 * @return array calls to be executed on the client
 	 */
@@ -2103,7 +2101,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Shows a modalbox containing a form for editing an existing checkbox record.
 	 *
-	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 * @param tx_ameosformidable $formidable the FORMidable object
 	 * @param integer $checkboxUid the UID of the checkbox to edit, must be > 0
 	 *
 	 * @return array calls to be executed on the client
@@ -2220,7 +2218,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * This function is intended to be called via an AJAX FORMidable event.
 	 *
-	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
 	 * @return array calls to be executed on the client
 	 */
@@ -2340,7 +2338,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Shows a modalbox containing a form for editing an existing target group
 	 * record.
 	 *
-	 * @param tx_ameos_formidable $formidable the FORMidable object
+	 * @param tx_ameosformidable $formidable the FORMidable object
 	 * @param integer $targetGroupUid
 	 *        the UID of the target group to edit, must be > 0
 	 *

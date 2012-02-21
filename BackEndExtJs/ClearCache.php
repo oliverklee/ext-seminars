@@ -42,7 +42,7 @@ class tx_seminars_BackEndExtJs_ClearCache {
 	 * This method is called by the clearCachePostProc hook in
 	 * t3lib_tcemain->clear_cacheCmd().
 	 *
-	 * @param string $cacheCmd the cache command from t3lib_tcemain->clear_cacheCmd()
+	 * @param array $parameters the cache command from t3lib_tcemain->clear_cacheCmd() in the key "cacheCmd"
 	 *
 	 * @see t3lib_tcemain->clear_cacheCmd()
 	 */

@@ -62,7 +62,7 @@ class tx_seminars_flexForms {
 	 * "showFeUserFieldsInRegistrationsList" with the selectable database
 	 * columns.
 	 *
-	 * @param array the flex forms configuration
+	 * @param array $configuration the flex forms configuration
 	 *
 	 * @return array the modified flex forms configuration including the
 	 *               selectable database columns
@@ -86,7 +86,7 @@ class tx_seminars_flexForms {
 	 * "showRegistrationFieldsInRegistrationList" with the selectable database
 	 * columns.
 	 *
-	 * @param array the flex forms configuration
+	 * @param array $configuration the flex forms configuration
 	 *
 	 * @return array the modified flex forms configuration including the
 	 *               selectable database columns
@@ -111,7 +111,7 @@ class tx_seminars_flexForms {
 	 * Returns the column names of the table given in the first parameter
 	 * $tableName.
 	 *
-	 * @param string the table name to get the columns for, must not be empty
+	 * @param string $tableName the table name to get the columns for, must not be empty
 	 *
 	 * @return array the column names of the given table name, may not be empty
 	 */

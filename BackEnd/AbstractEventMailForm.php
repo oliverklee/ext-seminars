@@ -86,9 +86,9 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * The constructor of this class. Instantiates an event object.
 	 *
-	 * @throws Exception if event could not be instantiated
+	 * @param integer $eventUid UID of an event, must be > 0
 	 *
-	 * @param integer UID of an event, must be > 0
+	 * @throws Exception if event could not be instantiated
 	 */
 	public function __construct($eventUid) {
 		if ($eventUid <= 0) {
@@ -357,7 +357,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * For the subject field, we fill in the event's title and date after the
 	 * default subject for confirming an event.
 	 *
-	 * @param string the field name, must not be empty
+	 * @param string $fieldName the field name, must not be empty
 	 *
 	 * @return string either the data from POST array or a default value for
 	 *                this field
@@ -375,7 +375,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * Sets the POST data.
 	 *
-	 * @param array associative array with the POST data, may be empty
+	 * @param array $postData associative array with the POST data, may be empty
 	 */
 	public function setPostData(array $postData) {
 		$this->postData = $postData;
@@ -385,7 +385,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * Returns an entry from the stored POST data or an empty string if that
 	 * key is not set.
 	 *
-	 * @param string the key of the field to return, must not be empty
+	 * @param string $key the key of the field to return, must not be empty
 	 *
 	 * @return string the value of the field, may be empty
 	 */
@@ -400,11 +400,11 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * Checks whether the stored POST data contains data for a certain field.
 	 *
+	 * @param string $key the key of the field to check for, must not be empty
+	 *
 	 * @throws Exception if key is empty
 	 *
-	 * @param string the key of the field to check for, must not be empty
-	 *
-	 * @return boolen TRUE if the stored POST data contains an entry, FALSE otherwise
+	 * @return boolean TRUE if the stored POST data contains an entry, FALSE otherwise
 	 */
 	protected function hasPostData($key) {
 		if ($key == '') {

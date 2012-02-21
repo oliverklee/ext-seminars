@@ -73,8 +73,8 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Sets the current UID.
 	 *
-	 * @param integer UID of the currently edited object. For creating a new
-	 *                database record, $uid must be zero. $uid must not be < 0.
+	 * @param integer $uid
+	 *        UID of the currently edited object. For creating a new database record, $uid must be zero. $uid must not be < 0.
 	 */
 	public function setObjectUid($uid) {
 		$this->objectUid = $uid;
@@ -93,7 +93,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Sets the FORMidable form configuration.
 	 *
-	 * @param array the FORMidable form configuration, must not be empty
+	 * @param array $formConfiguration the FORMidable form configuration, must not be empty
 	 */
 	public function setFormConfiguration(array $formConfiguration) {
 		$this->formConfiguration = $formConfiguration;
@@ -179,8 +179,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	 *
 	 * Note: In test mode, this function will return faked values.
 	 *
-	 * @param string column name of the 'tx_seminars_seminars' table as key,
-	 *               must not be empty
+	 * @param string $key column name of the 'tx_seminars_seminars' table as key, must not be empty
 	 *
 	 * @return string form value or an empty string if the value does not exist
 	 */
@@ -198,9 +197,8 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	 *
 	 * This function is for testing purposes.
 	 *
-	 * @param string column name of the 'tx_seminars_seminars' table as key,
-	 *               must not be empty
-	 * @param mixed faked value
+	 * @param string $key column name of the 'tx_seminars_seminars' table as key, must not be empty
+	 * @param mixed $value faked value
 	 */
 	public function setFakedFormValue($key, $value) {
 		$this->fakedFormValues[$key] = $value;

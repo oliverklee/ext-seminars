@@ -42,7 +42,7 @@ class tx_seminars_tests_fixtures_OldModel_Testing extends tx_seminars_OldModel_A
 	/**
 	 * Sets the test field of this record to a boolean value.
 	 *
-	 * @param boolean the boolean value to set
+	 * @param boolean $test the boolean value to set
 	 */
 	public function setBooleanTest($test) {
 		$this->setRecordPropertyBoolean('test', $test);
@@ -64,10 +64,8 @@ class tx_seminars_tests_fixtures_OldModel_Testing extends tx_seminars_OldModel_A
 	 * Before this function may be called, $this->recordData['uid'] must be set
 	 * correctly.
 	 *
-	 * @param string the name of the m:n table, having the fields
-	 *               uid_local, uid_foreign and sorting, must not be empty
-	 * @param array array of uids of records from the foreign table to
-	 *              which we should create references, may be empty
+	 * @param string $mmTable the name of the m:n table, having the fields uid_local, uid_foreign and sorting, must not be empty
+	 * @param array $references array of uids of records from the foreign table to which we should create references, may be empty
 	 *
 	 * @return integer the number of created m:n records
 	 */

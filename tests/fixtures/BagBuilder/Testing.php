@@ -47,8 +47,7 @@ class tx_seminars_tests_fixtures_BagBuilder_Testing extends tx_seminars_BagBuild
 	/**
 	 * Limits the bag to records with a particular title.
 	 *
-	 * @param string title which the bag elements must match, may be
-	 * empty, must already be SQL-safe
+	 * @param string $title title which the bag elements must match, may be empty, must already be SQL-safe
 	 */
 	public function limitToTitle($title) {
 		$this->whereClauseParts['title'] = 'title = "' . $title . '"';
@@ -84,7 +83,7 @@ class tx_seminars_tests_fixtures_BagBuilder_Testing extends tx_seminars_BagBuild
 	/**
 	 * Sets $this->tableName with the value in the parameter $tableName.
 	 *
-	 * @param string the table name to set, may be empty for testing
+	 * @param string $tableName the table name to set, may be empty for testing
 	 */
 	public function setTableName($tableName) {
 		$this->tableName = $tableName;

@@ -53,8 +53,7 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	 * Limits the bag to the registrations of the events provided by the
 	 * parameter $eventUids.
 	 *
-	 * @param integer the UID of the event to which the registration
-	 *                selection should be limited, must be > 0
+	 * @param integer $eventUid the UID of the event to which the registration selection should be limited, must be > 0
 	 */
 	public function limitToEvent($eventUid) {
 		if ($eventUid <= 0) {
@@ -116,8 +115,7 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	 * Limits the bag to contain only registrations with seats equal or less
 	 * than the seats given in the parameter $seats.
 	 *
-	 * @param integer the number of seats to filter for, set to 0 to remove the
-	 *                limitation, must be >= 0
+	 * @param integer $seats the number of seats to filter for, set to 0 to remove the limitation, must be >= 0
 	 */
 	public function limitToSeatsAtMost($seats = 0) {
 		if ($seats < 0) {
@@ -167,7 +165,7 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	 * Sets the ORDER BY by statement for the bag to build and joins the
 	 * registration results with the corresponding events.
 	 *
-	 * @param string the ORDER BY statement to set, may be empty
+	 * @param string $orderBy the ORDER BY statement to set, may be empty
 	 */
 	public function setOrderByEventColumn($orderBy) {
 		$this->addAdditionalTableName('tx_seminars_seminars');

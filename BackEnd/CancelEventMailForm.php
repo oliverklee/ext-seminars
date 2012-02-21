@@ -38,8 +38,9 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 	protected $action = 'cancelEvent';
 
 	/**
-	 * @var the prefix for all locallang keys for prefilling the form,
-	 *      must not be empty
+	 * the prefix for all locallang keys for prefilling the form, must not be empty
+	 *
+	 * @var string
 	 */
 	protected $formFieldPrefix = 'cancelMailForm_prefillField_';
 

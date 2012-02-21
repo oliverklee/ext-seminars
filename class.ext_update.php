@@ -94,8 +94,7 @@ class ext_update {
 	 * Checks whether there are events which need to be updated concerning a
 	 * given DB field.
 	 *
-	 * @param string the DB field to check for needing an update, must be
-	 *               'registrations'
+	 * @param string $fieldToUpdate the DB field to check for needing an update, must be 'registrations'
 	 *
 	 * @return boolean TRUE if any rows need to be updated, FALSE otherwise
 	 */

@@ -207,8 +207,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Note: This function does not check whether a logged-in front-end user
 	 * fulfills all requirements for an event.
 	 *
-	 * @param object a seminar for which we'll check if it is possible to
-	 *               register
+	 * @param tx_seminars_seminar $event a seminar for which we'll check if it is possible to register
 	 *
 	 * @return string error message or empty string
 	 */
@@ -252,8 +251,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Note: This function does not check whether a logged-in front-end user
 	 * fulfills all requirements for an event.
 	 *
-	 * @param object a seminar for which we'll check if it is possible to
-	 *               register
+	 * @param tx_seminars_seminar $seminar a seminar for which we'll check if it is possible to register
 	 *
 	 * @return boolean TRUE if the user could register for the given event,
 	 *                 FALSE otherwise
@@ -271,9 +269,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/**
 	 * Creates an HTML link to the registration or login page.
 	 *
-	 * @param tx_oelib_templatehelper the pi1 object with configuration data
-	 * @param tx_seminars_seminar the seminar to create the registration link
-	 *                            for
+	 * @param tx_oelib_templatehelper $plugin the pi1 object with configuration data
+	 * @param tx_seminars_seminar $event the seminar to create the registration link for
 	 *
 	 * @return string the HTML tag, will be empty if the event needs no
 	 *                registration, nobody can register to this event or the
@@ -304,9 +301,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * makes sense (ie. the seminar still has vacancies, the user hasn't
 	 * registered for this seminar etc.).
 	 *
-	 * @param tx_oelib_templatehelper an object for a live page
-	 * @param tx_seminars_seminar a seminar for which we'll check if it is
-	 *                            possible to register
+	 * @param tx_oelib_templatehelper $plugin an object for a live page
+	 * @param tx_seminars_seminar $seminar a seminar for which we'll check if it is possible to register
 	 *
 	 * @return string HTML code with the link
 	 */
@@ -323,9 +319,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/**
 	 * Creates the label for the registration link.
 	 *
-	 * @param tx_oelib_templatehelper an object for a live page
-	 * @param tx_seminars_seminar a seminar to which the registration
-	 *                            should relate
+	 * @param tx_oelib_templatehelper $plugin an object for a live page
+	 * @param tx_seminars_seminar $seminar a seminar to which the registration should relate
 	 *
 	 * @return string label for the registration link, will not be empty
 	 */
@@ -359,10 +354,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * This function only creates the link to the standard registration or login
 	 * page; it should not be used if the seminar has a separate details page.
 	 *
-	 * @param tx_oelib_templatehelper an object for a live page
-	 * @param tx_seminars_seminar a seminar for which we'll check if it is
-	 *                            possible to register
-	 * @param string label for the link, will not be empty
+	 * @param tx_oelib_templatehelper $plugin an object for a live page
+	 * @param tx_seminars_seminar $seminar a seminar for which we'll check if it is possible to register
+	 * @param string $label label for the link, will not be empty
 	 *
 	 * @return string HTML code with the link
 	 */
@@ -394,9 +388,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/**
 	 * Creates an HTML link to the unregistration page (if a user is logged in).
 	 *
-	 * @param object a tslib_pibase object for a live page
-	 * @param object a registration from which we'll get the UID for our
-	 *               GET parameters
+	 * @param tslib_pibase $plugin an object for a live page
+	 * @param tx_seminars_registration $registration a registration from which we'll get the UID for our GET parameters
 	 *
 	 * @return string HTML code with the link
 	 */
@@ -420,7 +413,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * This function can be called even if no seminar object exists.
 	 *
-	 * @param string a given seminar UID (may not neccessarily be an integer)
+	 * @param string $seminarUid a given seminar UID (needs not neccessarily be an integer)
 	 *
 	 * @return boolean TRUE the UID is valid, FALSE otherwise
 	 */
@@ -437,7 +430,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * This function can be called even if no seminar object exists.
 	 *
-	 * @param string a given seminar UID (may not neccessarily be an integer)
+	 * @param string $seminarUid a given seminar UID (needs not neccessarily be an integer)
 	 *
 	 * @return string empty string if the UID is valid, else a localized error
 	 *                message
@@ -465,8 +458,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * This method must not be called when no front-end user is logged in!
 	 *
-	 * @param object a seminar for which we'll check if it is possible to
-	 *               register
+	 * @param tx_seminars_seminar $seminar a seminar for which we'll check if it is possible to register
 	 *
 	 * @return boolean TRUE if user is already registered, FALSE otherwise.
 	 */
@@ -479,8 +471,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * This method must not be called when no front-end user is logged in!
 	 *
-	 * @param object a seminar for which we'll check if it is possible to
-	 *               register
+	 * @param tx_seminars_seminar $seminar a seminar for which we'll check if it is possible to register
 	 *
 	 * @return string empty string if everything is OK, else a localized error
 	 *                message
@@ -495,8 +486,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * For this, only events that forbid multiple registrations are checked.
 	 *
-	 * @param object a seminar for which we'll check whether the user already is
-	 *               blocked by an other seminars
+	 * @param tx_seminars_seminar $seminar a seminar for which we'll check whether the user already is blocked by an other seminars
 	 *
 	 * @return boolean TRUE if user is blocked by another registration, FALSE
 	 *                 otherwise
@@ -513,10 +503,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Please note that this function doesn't create a registration - it just
 	 * checks.
 	 *
-	 * @param object the seminar object (that's the seminar we would like to
-	 *               register for), must not be NULL
-	 * @param array associative array with the registration data the user has
-	 *              just entered
+	 * @param tx_seminars_seminar $seminar the seminar object (that's the seminar we would like to register for)
+	 * @param array $registrationData associative array with the registration data the user has just entered
 	 *
 	 * @return boolean TRUE if the data is okay, FALSE otherwise
 	 */
@@ -531,10 +519,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * created, ie. an actual number is given and there are at least that many
 	 * vacancies.
 	 *
-	 * @param object the seminar object (that's the seminar we would like to
-	 *               register for)
-	 * @param string the number of seats to check (should be an integer, but we
-	 *               can't be sure of this)
+	 * @param tx_seminars_seminar $seminar the seminar object (that's the seminar we would like to register for)
+	 * @param integer $numberOfSeats the number of seats to check (should be an integer, but we can't be sure of this)
 	 *
 	 * @return boolean TRUE if there are at least that many vacancies, FALSE
 	 *                 otherwise
@@ -887,7 +873,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * A front-end user needs to be logged in when this function is called.
 	 *
-	 * @param tx_seminars_seminar the event to check
+	 * @param tx_seminars_seminar $event the event to check
 	 *
 	 * @return boolean TRUE if the user fulfills all requirements, FALSE
 	 *                 otherwise
@@ -908,7 +894,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * to be able to register for $event.
 	 *
 	 *
-	 * @param tx_seminars_seminar the event to check
+	 * @param tx_seminars_seminar $event the event to check
 	 *
 	 * @return tx_seminars_Bag_Event the event topics which still need the
 	 *                               users registration, may be empty
@@ -1009,16 +995,15 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Sends an e-mail to all organizers with a message about a registration or
 	 * unregistration.
 	 *
-	 * @param tx_seminars_registration the registration for which the
-	 *                                 notification should be send
-	 * @param string prefix for the locallang key of the localized hello
-	 *               and subject string, allowed values are:
-	 *               - notification
-	 *               - notificationOnUnregistration
-	 *               - notificationOnRegistrationForQueue
-	 *               - notificationOnQueueUpdate
-	 *               In the following the parameter is prefixed with
-	 *               "email_" and postfixed with "Hello" or "Subject".
+	 * @param tx_seminars_registration $registration
+	 *        the registration for which the notification should be send
+	 * @param string $helloSubjectPrefix
+	 *        prefix for the locallang key of the localized hello and subject string, Allowed values are:
+	 *        - notification
+	 *        - notificationOnUnregistration
+	 *        - notificationOnRegistrationForQueue
+	 *        - notificationOnQueueUpdate
+	 *        In the following, the parameter is prefixed with "email_" and postfixed with "Hello" or "Subject".
 	 */
 	public function notifyOrganizers(
 		tx_seminars_registration $registration,
@@ -1117,8 +1102,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * If both things happen at the same time (minimum and maximum count of
 	 * attendees are the same), only the "event is full" message will be sent.
 	 *
-	 * @param tx_seminars_registration the registration for which the
-	 *                                 notification should be send
+	 * @param tx_seminars_registration $registration the registration for which the notification should be send
 	 */
 	public function sendAdditionalNotification(
 		tx_seminars_registration $registration
@@ -1157,8 +1141,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/**
 	 * Returns the topic for the additional notification e-mail.
 	 *
-	 * @param tx_seminars_registration the registration for which the
-	 *                                 notification should be send
+	 * @param tx_seminars_registration $registration the registration for which the notification should be send
 	 *
 	 * @return string "EnoughRegistrations" if the event has enough attendances,
 	 *                "IsFull" if the event is fully booked, otherwise an empty
@@ -1186,10 +1169,10 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Returns the message for an e-mail according to the reason
 	 * $reasonForNotification provided.
 	 *
-	 * @param tx_seminars_registration the registration for which the
-	 *                                 notification should be send
-	 * @param string reason for the notification, must be either "IsFull" or
-	 *               "EnoughRegistrations", must not be empty
+	 * @param tx_seminars_registration $registration
+	 *        the registration for which the notification should be send
+	 * @param string $reasonForNotification
+	 *        reason for the notification, must be either "IsFull" or "EnoughRegistrations", must not be empty
 	 *
 	 * @return string the message, will not be empty
 	 */
@@ -1238,8 +1221,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/**
 	 * Builds the e-mail body for an e-mail to the attendee.
 	 *
-	 * @param tx_seminars_registration the registration for which the
-	 *                                 notification should be send
+	 * @param tx_seminars_registration $registration
+	 *        the registration for which the notification should be send
 	 * @param tslib_pibase $plugin a live plugin
 	 * @param string $helloSubjectPrefix
 	 *        prefix for the locallang key of the localized hello and subject
@@ -1248,8 +1231,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *        - confirmationOnUnregistration
 	 *        - confirmationOnRegistrationForQueue
 	 *        - confirmationOnQueueUpdate
-	 *        In the following the parameter is prefixed with "email_" and
-	 *        postfixed with "Hello" or "Subject".
+	 *        In the following, the parameter is prefixed with "email_" and postfixed with "Hello" or "Subject".
 	 * @param boolean $useHtml whether to create HTML instead of plain text
 	 *
 	 * @return string the e-mail body for the attendee e-mail, will not be empty
@@ -1415,7 +1397,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Checks whether the given event allows registration, as far as its date
 	 * is concerned.
 	 *
-	 * @param tx_seminars_seminar the event to check the registration for
+	 * @param tx_seminars_seminar $event the event to check the registration for
 	 *
 	 * @return boolean TRUE if the event allows registration by date, FALSE
 	 *                 otherwise
@@ -1436,7 +1418,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Checks whether the given event allows registration as far as the
 	 * number of vacancies are concerned.
 	 *
-	 * @param tx_seminars_seminar the event to check the registration for
+	 * @param tx_seminars_seminar $event the event to check the registration for
 	 *
 	 * @return boolean TRUE if the event has enough seats for registration,
 	 *                 FALSE otherwise
@@ -1449,7 +1431,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/**
 	 * Checks whether the registration for this event has started.
 	 *
-	 * @param tx_seminars_seminar the event to check the registration for
+	 * @param tx_seminars_seminar $event the event to check the registration for
 	 *
 	 * @return boolean TRUE if registration for this event already has
 	 *                 started, FALSE otherwise
@@ -1516,9 +1498,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/**
 	 * Formats a place for the thank-you e-mail.
 	 *
-	 * @param $place the place to format
-	 * @param $newline
-	 *        the newline to use in formatting, must be either LF or '<br />'
+	 * @param tx_seminars_Model_Place $place the place to format
+	 * @param string $newline the newline to use in formatting, must be either LF or '<br />'
 	 *
 	 * @return string the formatted place, will not be empty
 	 */

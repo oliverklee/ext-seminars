@@ -61,7 +61,7 @@ class tx_seminars_FrontEnd_Countdown extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Creates a seminar in $this->seminar.
 	 *
-	 * @param integer an event UID, must be >= 0
+	 * @param integer $seminarUid an event UID, must be >= 0
 	 */
 	private function createSeminar($seminarUid) {
 		$this->seminar = tx_oelib_ObjectFactory::make(
@@ -133,7 +133,7 @@ class tx_seminars_FrontEnd_Countdown extends tx_seminars_FrontEnd_AbstractView {
 	 * The function uses localized strings and also looks for proper usage of
 	 * singular/plural.
 	 *
-	 * @param integer the amount of seconds to rewrite into words
+	 * @param integer $seconds the amount of seconds to rewrite into words
 	 *
 	 * @return string a localized string representing the time left until the
 	 *                event starts

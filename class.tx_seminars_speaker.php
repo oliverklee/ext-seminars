@@ -94,7 +94,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Gets our description.
 	 *
-	 * @param tslib_pibase the live pibase object
+	 * @param tslib_pibase $plugin the live pibase object
 	 *
 	 * @return string our description (or '' if there is an error)
 	 */
@@ -240,8 +240,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Creates a link to this speaker's homepage, with the title as link text.
 	 *
-	 * @param tx_oelib_templatehelper templatehelper object with current
-	 *                                configuration values
+	 * @param tx_oelib_templatehelper $plugin templatehelper object with current configuration values
 	 *
 	 * @return string this speaker's title wrapped in an link tag, or if the
 	 *                speaker has no homepage just the speaker name, will not
@@ -277,10 +276,9 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets the gender of this speaker.
 	 *
-	 * @param integer the gender of the speaker, must be one of
-	 *                tx_seminars_speaker::GENDER_FEMALE,
-	 *                tx_seminars_speaker::GENDER_MALE
-	 *                or tx_seminars_speaker::GENDER_UNKNOWN
+	 * @param integer $gender
+	 *        the gender of the speaker, must be one of tx_seminars_speaker::GENDER_FEMALE, tx_seminars_speaker::GENDER_MALE
+	 *        or tx_seminars_speaker::GENDER_UNKNOWN
 	 */
 	public function setGender($gender) {
 		$this->setRecordPropertyInteger('gender', $gender);
@@ -308,8 +306,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets the gender cancelation period of this speaker
 	 *
-	 * @param integer the cancelation period of this speaker in days,
-	 *                must be > 0
+	 * @param integer $cancelationPeriod the cancelation period of this speaker in days, must be > 0
 	 */
 	public function setCancelationPeriod($cancelationPeriod) {
 		$this->setRecordPropertyInteger('cancelation_period', $cancelationPeriod);

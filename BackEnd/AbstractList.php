@@ -70,7 +70,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	/**
 	 * The constructor. Sets the table name and the back-end page object.
 	 *
-	 * @param tx_seminars_BackEnd_Module the current back-end module
+	 * @param tx_seminars_BackEnd_Module $module the current back-end module
 	 */
 	public function __construct(tx_seminars_BackEnd_Module $module) {
 		$this->page = $module;
@@ -169,7 +169,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	/**
 	 * Returns a "create new record" image tag that is linked to the new record view.
 	 *
-	 * @param integer the page ID where the record should be stored, must be > 0
+	 * @param integer $pid the page ID where the record should be stored, must be > 0
 	 *
 	 * @return string the HTML source code to return
 	 */
@@ -246,8 +246,8 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	/**
 	 * Returns the url for the "create new record" link and the "edit record" link.
 	 *
-	 * @param string the parameters for TCE
-	 * @param string the back path to the /typo3 directory
+	 * @param string $params the parameters for TCE
+	 * @param string $backPath the back path to the /typo3 directory
 	 *
 	 * @return string the URL to return
 	 */
@@ -263,9 +263,6 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 * corresponding to the list that is visible in the BE.
 	 *
 	 * This icon is intended to be used next to the "create new record" icon.
-	 *
-	 * @param string the name of the table from which the records should be
-	 *               exported, eg. "tx_seminars_seminars"
 	 *
 	 * @return string the HTML source code of the linked CSV icon
 	 */

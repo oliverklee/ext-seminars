@@ -156,7 +156,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	 * dummy option will always be the first one in the array and thus shown
 	 * first in the drop-down.
 	 *
-	 * @param array array of options, may be empty
+	 * @param array &$options options, may be empty
 	 */
 	private function addEmptyOptionIfNeeded(array &$options) {
 		if (!$this->getConfValueBoolean(
@@ -173,7 +173,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	/**
 	 * Removes the dummy option from the submitted form data.
 	 *
-	 * @param array the POST data submitted from the form, may be empty
+	 * @param array $formData the POST data submitted from the form, may be empty
 	 *
 	 * @return array the POST data without the dummy option
 	 */
@@ -192,11 +192,11 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	/**
 	 * Creates the HTML code for a single option box of the selector widget.
 	 *
-	 * @param string the name of the option box to generate, must be one of the
-	 *               following: 'event_type', 'language', 'country', 'city',
-	 *               'places'
-	 * @param array the options for the option box with the option value as key
-	 *              and the option label as value, may be empty
+	 * @param string $name
+	 *        the name of the option box to generate, must be one of the following:
+	 *        'event_type', 'language', 'country', 'city', 'places'
+	 * @param array $options
+	 *        the options for the option box with the option value as key and the option label as value, may be empty
 	 *
 	 * @return string the HTML content for the select, will not be empty
 	 */
@@ -277,7 +277,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	/**
 	 * Checks whether a given search field key should be displayed.
 	 *
-	 * @param string the search field name to check, must not be empty
+	 * @param string $fieldToCheck the search field name to check, must not be empty
 	 *
 	 * @return boolean TRUE if the given field should be displayed as per
 	 *                 configuration, FALSE otherwise
@@ -289,11 +289,11 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	/**
 	 * Creates a drop-down, including an empty option at the top.
 	 *
-	 * @param array the options for the drop-down, the keys will be used as
-	 *              values and the array values as labels for the options, may
-	 *              be empty
-	 * @param string the HTML name of the drop-down, must be not empty and
-	 *               unique
+	 * @param array $options
+	 *        the options for the drop-down, the keys will be used as values and the array values as labels for the options,
+	 *        may be empty
+	 * @param string $name
+	 *        the HTML name of the drop-down, must be not empty and must be unique
 	 *
 	 * @return string the generated HTML, will not be empty
 	 */
@@ -334,9 +334,9 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	/**
 	 * Fills or hides the subpart for the given search field.
 	 *
-	 * @param string the key of the search field, must be one of the following:
-	 *               "event_type", "language", "country", "city", "places",
-	 *               "organizer"
+	 * @param string $searchField
+	 *        the key of the search field, must be one of the following:
+	 *        "event_type", "language", "country", "city", "places", "organizer"
 	 */
 	private function fillOrHideSearchSubpart($searchField) {
 		if (!$this->hasSearchField($searchField)) {

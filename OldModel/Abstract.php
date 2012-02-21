@@ -82,11 +82,12 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * The constructor. Creates a test instance from a DB record.
 	 *
-	 * @param integer The UID of the record to retrieve from the DB. This
-	 *                parameter will be ignored if $dbResult is provided.
-	 * @param pointer MySQL result pointer (of SELECT query)/DBAL object.
-	 *                If this parameter is provided, $uid will be
-	 *                ignored.
+	 * @param integer $uid
+	 *        The UID of the record to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
+	 * @param resource $dbResult
+	 *        MySQL result pointer (of SELECT query) object. If this parameter is provided, $uid will be ignored.
+	 * @param boolean $allowHiddenRecords
+	 *        whether it is possible to create an object from a hidden record
 	 */
 	public function __construct(
 		$uid, $dbResult = NULL, $allowHiddenRecords = FALSE
@@ -108,12 +109,12 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Retrieves this record's data from the DB (if it has not been retrieved
 	 * yet) and gets the record data from the DB result.
 	 *
-	 * @param integer The UID of the record to retrieve from the DB. This
-	 *                parameter will be ignored if $dbResult is provided.
-	 * @param pointer MySQL result pointer (of SELECT query)/DBAL object.
-	 *                If this parameter is provided, $uid will be ignored.
-	 * @param boolean whether it is possible to create an object from a
-	 *                hidden record
+	 * @param integer $uid
+	 *        The UID of the record to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
+	 * @param resource|boolean $dbResult
+	 *        MySQL result pointer (of SELECT query) object. If this parameter is provided, $uid will be ignored.
+	 * @param boolean $allowHiddenRecords
+	 *        whether it is possible to create an object from a hidden record
 	 */
 	protected function retrieveRecordAndGetData(
 		$uid, $dbResult = FALSE, $allowHiddenRecords = FALSE
@@ -144,7 +145,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Example:
 	 * $dbResultRow['name'] => $this->recordData['name']
 	 *
-	 * @param array associative array of a DB query result
+	 * @param array $dbResultRow associative array of a DB query result
 	 */
 	protected function getDataFromDbResult(array $dbResultRow) {
 		if (!empty($this->tableName) && !empty($dbResultRow)) {
@@ -173,7 +174,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * If the array has not been initialized properly, an empty string is
 	 * returned instead.
 	 *
-	 * @param string key of the element to return
+	 * @param string $key key of the element to return
 	 *
 	 * @return string the corresponding element from the record data array
 	 */
@@ -189,7 +190,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * If the array has not been initialized properly, '0.00' is returned
 	 * instead.
 	 *
-	 * @param string key of the element to return
+	 * @param string $key key of the element to return
 	 *
 	 * @return string the corresponding element from the record data array
 	 */
@@ -204,7 +205,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Checks a string element of the record data array for existence and
 	 * non-emptiness.
 	 *
-	 * @param string key of the element to check
+	 * @param string $key key of the element to check
 	 *
 	 * @return boolean TRUE if the corresponding string exists and is non-empty
 	 */
@@ -216,7 +217,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Checks an integer element of the record data array for existence and
 	 * non-zeroness.
 	 *
-	 * @param string key of the element to check
+	 * @param string $key key of the element to check
 	 *
 	 * @return boolean TRUE if the corresponding value exists and is non-zero
 	 */
@@ -228,7 +229,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Checks a decimal element of the record data array for existence and
 	 * value != 0.00.
 	 *
-	 * @param string key of the element to check
+	 * @param string $key key of the element to check
 	 *
 	 * @return boolean TRUE if the corresponding field exists and its value
 	 *                 is not "0.00".
@@ -241,7 +242,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Gets an (intval'ed) integer element of the record data array.
 	 * If the array has not been initialized properly, 0 is returned instead.
 	 *
-	 * @param string key of the element to return
+	 * @param string $key key of the element to return
 	 *
 	 * @return integer the corresponding element from the record data array
 	 */
@@ -255,8 +256,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * Sets an integer element of the record data array (and intvals it).
 	 *
-	 * @param string key of the element to set (must be non-empty)
-	 * @param integer the value that will be written into the element
+	 * @param string $key key of the element to set (must be non-empty)
+	 * @param integer $value the value that will be written into the element
 	 */
 	protected function setRecordPropertyInteger($key, $value) {
 		if (!empty($key)) {
@@ -279,8 +280,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * Sets a boolean element of the record data array.
 	 *
-	 * @param string key of the element to set (must be non-empty)
-	 * @param boolean the value that will be written into the element
+	 * @param string $key key of the element to set (must be non-empty)
+	 * @param boolean $value the value that will be written into the element
 	 */
 	protected function setRecordPropertyBoolean($key, $value) {
 		if (!empty($key)) {
@@ -292,7 +293,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Gets an element of the record data array, converted to a boolean.
 	 * If the array has not been initialized properly, FALSE is returned.
 	 *
-	 * @param string key of the element to return
+	 * @param string $key key of the element to return
 	 *
 	 * @return boolean the corresponding element from the record data array
 	 */
@@ -307,7 +308,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Checks whether $this->recordData is initialized at all and
 	 * whether a given key exists.
 	 *
-	 * @param string the array key to search for
+	 * @param string $key the array key to search for
 	 *
 	 * @return boolean TRUE if $this->recordData has been initialized
 	 *                 and the array key exists, FALSE otherwise
@@ -353,8 +354,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * Commits the changes of an record to the database.
 	 *
-	 * @param array an associative array with the keys being the field names
-	 *              and the value being the field values, may be empty
+	 * @param array $updateArray
+	 *        an associative array with the keys being the field names and the value being the field values, may be empty
 	 */
 	public function saveToDatabase(array $updateArray) {
 		if (empty($updateArray)) {
@@ -374,10 +375,10 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Before this function may be called, $this->recordData['uid'] must be set
 	 * correctly.
 	 *
-	 * @param string the name of the m:n table, having the fields
-	 *               uid_local, uid_foreign and sorting, must not be empty
-	 * @param array array of uids of records from the foreign table to
-	 *              which we should create references, may be empty
+	 * @param string $mmTable
+	 *        the name of the m:n table, having the fields uid_local, uid_foreign and sorting, must not be empty
+	 * @param array $references
+	 *        uids of records from the foreign table to which we should create references, may be empty
 	 *
 	 * @return integer the number of created m:n records
 	 */
@@ -423,19 +424,15 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * Checks whether a non-deleted record with a given UID exists in the DB.
 	 *
-	 * If the parameter $allowHiddenRecords is set to TRUE, hidden records will
-	 * be selected, too.
+	 * If the parameter $allowHiddenRecords is set to TRUE, hidden records will be selected, too.
 	 *
 	 * This method may be called statically.
 	 *
-	 * @param string string with a UID (need not necessarily be escaped, will be
-	 *               intvaled)
-	 * @param string string with the tablename where the UID should be searched
-	 *               for
-	 * @param boolean whether hidden records should be found as well
+	 * @param string $uid string with a UID (need not necessarily be escaped, will be intvaled)
+	 * @param string $tableName string with the tablename where the UID should be searched for
+	 * @param boolean $allowHiddenRecords whether hidden records should be found as well
 	 *
-	 * @return boolean TRUE if a visible record with that UID exists, FALSE
-	 *                 otherwise
+	 * @return boolean TRUE if a visible record with that UID exists, FALSE otherwise
 	 */
 	public function recordExists($uid, $tableName, $allowHiddenRecords = FALSE) {
 		$result = is_numeric($uid) && ($uid);
@@ -469,10 +466,10 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * The record is retrieved from $this->tableName. Therefore $this->tableName
 	 * has to be set before calling this method.
 	 *
-	 * @param integer The UID of the record to retrieve from the DB.
-	 * @param boolean whether to allow hidden records
+	 * @param integer $uid the UID of the record to retrieve from the DB
+	 * @param boolean $allowHiddenRecords whether to allow hidden records
 	 *
-	 * @return pointer MySQL result pointer (of SELECT query)/DBAL object, FALSE
+	 * @return resource MySQL result pointer (of SELECT query)/DBAL object, FALSE
 	 *                 if the UID is invalid
 	 */
 	protected function retrieveRecord($uid, $allowHiddenRecords = FALSE) {
@@ -524,7 +521,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * Sets the title element of the record data array.
 	 *
-	 * @param string the value that will be written into the title element
+	 * @param string $title the value that will be written into the title element
 	 */
 	public function setTitle($title) {
 		$this->setRecordPropertyString('title', $title);

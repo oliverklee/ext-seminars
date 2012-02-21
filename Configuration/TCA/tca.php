@@ -11,8 +11,9 @@ if (!function_exists('tx_seminars_tableReplace')) {
 	 * table name. It's mainly used to simplify the maintaining of the wizard
 	 * code (equals in more than 90%) and to get some flexibility.
 	 *
-	 * @param array wizards array with the table markers
-	 * @param string name of the real database table (e.g. tx_seminars_seminars)
+	 * @param array $array wizards array with the table markers
+	 * @param string $table name of the real database table (e.g. "tx_seminars_seminars")
+	 *
 	 * @return array wizards array with replaced table markers
 	 */
 	function tx_seminars_tableReplace(array $array, $table) {
@@ -30,7 +31,7 @@ if (!function_exists('tx_seminars_tableRelations')) {
 	 * Returns the WHERE clause part to limit the entries to the records stored
 	 * with the general record storage PID.
 	 *
-	 * @param string table name as prefix for the PID column, must not be empty
+	 * @param string $tableName table name as prefix for the PID column, must not be empty
 	 *
 	 * @return string WHERE clause for the foreignTable WHERE part, will be
 	 *                empty if the storage PID should not be used to filter the

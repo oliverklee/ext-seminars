@@ -94,11 +94,11 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * The constructor.
 	 *
-	 * @param object content object
-	 * @param pointer MySQL result pointer (of SELECT query)/DBAL object.
-	 *                If this parameter is not provided or FALSE,
-	 *                setRegistrationData() needs to be called directly
-	 *                after construction or this object will not be usable.
+	 * @param tslib_cObj $cObj
+	          content object
+	 * @param resource|boolean $dbResult
+	 *        MySQL result pointer (of SELECT query)/DBAL object. If this parameter is not provided or FALSE,
+	 *        setRegistrationData() needs to be called directly after construction or this object will not be usable.
 	 */
 	public function __construct(tslib_cObj $cObj, $dbResult = FALSE) {
 		$this->cObj = $cObj;
@@ -138,11 +138,12 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * This function must be called directly after construction or this object
 	 * will not be usable.
 	 *
-	 * @param tx_seminars_seminar the seminar object (that's the seminar
-	 *                            we would like to register for)
-	 * @param integer the UID of the FE user who wants to sign up
-	 * @param array associative array with the registration data the user has
-	 *              just entered, may be empty
+	 * @param tx_seminars_seminar $seminar
+	 *        the seminar object (that's the seminar we would like to register for)
+	 * @param integer $userUid
+	 *        UID of the FE user who wants to sign up
+	 * @param array $registrationData
+	 *        associative array with the registration data the user has just entered, may be empty
 	 */
 	public function setRegistrationData(
 		tx_seminars_seminar $seminar, $userUid, array $registrationData
@@ -267,7 +268,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets our number of seats.
 	 *
-	 * @param integer the number of seats, must be >= 0
+	 * @param integer $seats the number of seats, must be >= 0
 	 */
 	public function setSeats($seats) {
 		if ($seats < 0) {
@@ -333,7 +334,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets the data of the FE user of this registration.
 	 *
-	 * @param array data of the front-end user, must not be empty
+	 * @param array $userData data of the front-end user, must not be empty
 	 */
 	protected function setUserData(array $userData) {
 		if (empty($userData)) {
@@ -437,8 +438,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * of birth or the status), this function will already return the clear text
 	 * version.
 	 *
-	 * @param string the key of the data to retrieve, may contain leading
-	 *               or trailing spaces, must not be empty
+	 * @param string $key key of the data to retrieve, may contain leading or trailing spaces, must not be empty
 	 *
 	 * @return string the trimmed value retrieved from $this->userData,
 	 *                may be empty
@@ -504,8 +504,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * by a comma and a space.
 	 * Empty values will be removed from the output.
 	 *
-	 * @param string comma-separated list of keys to retrieve
-	 * @param object a tslib_pibase object for a live page
+	 * @param string $keys comma-separated list of keys to retrieve
+	 * @param tslib_pibase $plugin a tslib_pibase object for a live page
 	 *
 	 * @return string the values retrieved from $this->userData, may be empty
 	 */
@@ -593,7 +593,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets the front-end user UID of the registration.
 	 *
-	 * @param integer the front-end user UID of the attendee, must be > 0
+	 * @param integer $frontEndUserUID the front-end user UID of the attendee, must be > 0
 	 */
 	public function setFrontEndUserUID($frontEndUserUID) {
 		$this->setRecordPropertyInteger('user', $frontEndUserUID);
@@ -611,7 +611,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Gets the seminar to which this registration belongs.
 	 *
-	 * @return object the seminar to which this registration belongs
+	 * @return tx_seminars_seminar the seminar to which this registration belongs
 	 */
 	public function getSeminarObject() {
 		if (!$this->seminar && $this->isOk()) {
@@ -712,7 +712,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets our price category name and its single price.
 	 *
-	 * @param string the price category name and its single price, may be empty
+	 * @param string $price the price category name and its single price, may be empty
 	 */
 	public function setPrice($price) {
 		$this->setRecordPropertyString('price', $price);
@@ -748,7 +748,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets our total price.
 	 *
-	 * @param string the total price, may be empty
+	 * @param string $price the total price, may be empty
 	 */
 	public function setTotalPrice($price) {
 		$this->setRecordPropertyString('total_price', $price);
@@ -770,7 +770,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 *
 	 * key1: value1
 	 *
-	 * @param string comma-separated list of key names
+	 * @param string $keysList comma-separated list of key names
 	 *
 	 * @return string formatted output (may be empty)
 	 */
@@ -823,7 +823,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 *
 	 * key1: value1
 	 *
-	 * @param string comma-separated list of key names
+	 * @param string $keysList comma-separated list of key names
 	 *
 	 * @return string formatted output (may be empty)
 	 */
@@ -1015,10 +1015,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Gets a LF-separated list of the titles of records referenced by this
 	 * record.
 	 *
-	 * @param string the name of the foreign table (must not be empty), must
-	 *               have the fields uid and title
-	 * @param string the name of the m:m table, having the fields uid_local,
-	 *               uid_foreign and sorting, must not be empty
+	 * @param string $foreignTable the name of the foreign table (must not be empty), must have the fields uid and title
+	 * @param string $mmTable the name of the m:m table, having the fields uid_local, uid_foreign and sorting, must not be empty
 	 *
 	 * @return string the titles of the referenced records separated by LF,
 	 *                might be empty if no records are referenced
@@ -1126,7 +1124,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets our attendees names.
 	 *
-	 * @param string our attendees names, may be empty
+	 * @param string $attendeesNames our attendees names, may be empty
 	 */
 	public function setAttendeesNames($attendeesNames) {
 		$this->setRecordPropertyString('attendees_names', $attendeesNames);
@@ -1155,7 +1153,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets the number of kids.
 	 *
-	 * @param integer the number of kids, must be >= 0
+	 * @param integer $numberOfKids the number of kids, must be >= 0
 	 */
 	public function setNumberOfKids($numberOfKids) {
 		if ($numberOfKids < 0) {
@@ -1187,7 +1185,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets our method of payment UID.
 	 *
-	 * @param integer our method of payment UID, must be >= 0
+	 * @param integer $uid our method of payment UID, must be >= 0
 	 */
 	public function setMethodOfPaymentUid($uid) {
 		if ($uid < 0) {

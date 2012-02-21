@@ -37,7 +37,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * The constructor.
 	 *
-	 * @param integer UID of the registration record, must be > 0
+	 * @param integer $registrationUid UID of the registration record, must be > 0
 	 */
 	public function __construct($registrationUid = 0) {
 		if ($registrationUid > 0) {
@@ -59,8 +59,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Sets the "registration_queue" field of the registration record.
 	 *
-	 * @param boolean TRUE if the registration should be on the waiting
-	 * list, FALSE otherwise
+	 * @param boolean $isOnRegistrationQueueValue TRUE if the registration should be on the waiting list, FALSE otherwise
 	 */
 	public function setIsOnRegistrationQueue($isOnRegistrationQueueValue) {
 		$this->setRecordPropertyInteger(
@@ -72,7 +71,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Sets the payment method of this registration.
 	 *
-	 * @param integer the UID of the payment method to set
+	 * @param integer $uid the UID of the payment method to set
 	 */
 	public function setPaymentMethod($uid) {
 		if ($uid <= 0) {
@@ -88,7 +87,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Sets the data of the FE user of this registration.
 	 *
-	 * @param array data of the front-end user, may be empty
+	 * @param array $userData data of the front-end user, may be empty
 	 */
 	public function setUserData(array $userData) {
 		parent::setUserData($userData);

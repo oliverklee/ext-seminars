@@ -70,11 +70,11 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	 * translate it to the real uid of the inserted record using the
 	 * $pObj->substNEWwithIDs array.
 	 *
-	 * @param string the status of this record (new/update)
-	 * @param string the affected table name
-	 * @param integer the UID of the affected record (may be 0)
-	 * @param array an array of all fields that got changed (as reference)
-	 * @param t3lib_TCEmain reference to calling object
+	 * @param string $status the status of this record (new/update)
+	 * @param string $table the affected table name
+	 * @param integer $uid the UID of the affected record (may be 0)
+	 * @param array &$fieldArray an array of all fields that got changed (as reference)
+	 * @param t3lib_TCEmain $pObj reference to calling object
 	 */
 	public function processDatamap_afterDatabaseOperations(
 		$status, $table, $uid, array &$fieldArray, t3lib_TCEmain $pObj
@@ -126,8 +126,8 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	/**
 	 * Processes a single time slot.
 	 *
-	 * @param integer the UID of the affected record (may be 0)
-	 * @param array an array of all fields that got changed
+	 * @param integer $uid the UID of the affected record (may be 0)
+	 * @param array $fieldArray an array of all fields that got changed
 	 */
 	private function processSingleTimeSlot($uid, array $fieldArray) {
 		// Initializes a timeslot object to have all
@@ -148,8 +148,8 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	/**
 	 * Processes a single event.
 	 *
-	 * @param integer the UID of the affected record (may be 0)
-	 * @param array an array of all fields that got changed
+	 * @param integer $uid the UID of the affected record (may be 0)
+	 * @param array $fieldArray an array of all fields that got changed
 	 */
 	private function processSingleEvent($uid, array $fieldArray) {
 		// Initializes a seminar object to have all functions

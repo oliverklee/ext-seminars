@@ -106,9 +106,8 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 	 * Creates a hyperlink with the title $title to the current list view,
 	 * limited to the category provided by the parameter $categoryUid.
 	 *
-	 * @param integer UID of the category to which the list view should be
-	 *                limited, must be > 0
-	 * @param string title of the link, must not be empty
+	 * @param integer $categoryUid UID of the category to which the list view should be limited, must be > 0
+	 * @param string $title title of the link, must not be empty
 	 *
 	 * @return string link to the list view limited to the given category or an
 	 *                empty string if there is an error
@@ -137,10 +136,8 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 	 * either only the titles as comma-separated list, only the icons with the
 	 * title as title attribute or both.
 	 *
-	 * @param array the categories in an associative array, with the UID as key
-	 *              and "title", and "icon" as second level keys
-	 * @param boolean wether the categories should be linked to the
-	 *                category list page
+	 * @param array $categoriesToDisplay
+	 *        the categories in an associative array, with the UID as key and "title", and "icon" as second level keys
 	 *
 	 * @return string the HTML output, will be empty if $categoriesToDisplay
 	 *                is empty
@@ -188,10 +185,9 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 	/**
 	 * Creates the category icon with the icon title as alt text.
 	 *
-	 * @param array the filename and title of the icon in an associative array
-	 *              with "icon" as key for the filename and "title" as key for
-	 *              the icon title, the values for "title" and "icon" may be
-	 *              empty
+	 * @param array $iconData
+	 *        the filename and title of the icon in an associative array with "icon" as key for the filename and "title" as key
+	 *        for the icon title, the values for "title" and "icon" may be empty
 	 *
 	 * @return string the icon tag with the given icon, will be empty if no
 	 *                icon was given

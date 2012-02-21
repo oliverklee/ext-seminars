@@ -767,7 +767,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	/**
 	 * Returns the number of kids of this registration.
 	 *
-	 * @return interger the number of kids of this registration, will be >= 0
+	 * @return integer the number of kids of this registration, will be >= 0
 	 */
 	public function getKids() {
 		return $this->getAsInteger('kids');

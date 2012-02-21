@@ -91,7 +91,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 	 * Creates a seminar record and an organizer record and the relation
 	 * between them.
 	 *
-	 * @param array additional data for the seminar record, may be empty
+	 * @param array $additionalSeminarData additional data for the seminar record, may be empty
 	 *
 	 * @return integer UID of the added event, will be > 0
 	 */
@@ -118,7 +118,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 	 *
 	 * Note: This function must only be called once per test.
 	 *
-	 * @param integer event UID, must be > 0
+	 * @param integer $eventUid event UID, must be > 0
 	 */
 	private function addSpeaker($eventUid) {
 		$speakerUid = $this->testingFramework->createRecord(
@@ -211,7 +211,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 	public function testSetConfigurationPageThrowsExceptionIfNoPidIsProvided() {
 		$this->setExpectedException(
-			Exception,
+			'Exception',
 			'Please provide the UID for the page with the configuration ' .
 				'for the CLI module.'
 		);

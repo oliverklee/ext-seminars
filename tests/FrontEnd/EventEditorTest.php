@@ -124,11 +124,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * Creates a front end user testing model which has a group with the given
 	 * publish settings.
 	 *
-	 * @param integer the publish settings for the user, must be one of the
-	 *                following:
-	 *                tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
-	 *                tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW, or
-	 *                tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+	 * @param integer $publishSetting
+	 *        the publish settings for the user, must be one of the following:
+	 *        tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY, tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW, or
+	 *        tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 	 */
 	private function createAndLoginUserWithPublishSetting($publishSetting) {
 		$userGroup = tx_oelib_MapperRegistry::get(
@@ -188,7 +187,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @param string $requiredField
 	 *        the field which should be required, may be empty
 	 *
-	 * @return tx_seminars_pi_eventEditor event editor fixture with the given
+	 * @return tx_seminars_FrontEnd_EventEditor event editor fixture with the given
 	 *         field as required field, will not be NULL.
 	 */
 	private function getFixtureWithRequiredField($requiredField) {

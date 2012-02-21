@@ -35,21 +35,21 @@
  */
 class tx_seminars_Bag_Registration extends tx_seminars_Bag_Abstract {
 	/**
-	 * The constructor. Creates a registration bag that contains registration
-	 * records and allows to iterate over them.
+	 * The constructor. Creates a bag that contains test records and allows to iterate over them.
 	 *
-	 * @param string string that will be prepended to the WHERE
-	 *               clause using AND, e.g. 'pid=42' (the AND and the
-	 *               enclosing spaces are not necessary for this
-	 *               parameter)
-	 * @param string comma-separated names of additional DB tables used
-	 *               for JOINs, may be empty
-	 * @param string GROUP BY clause (may be empty), must already be
-	 *               safeguarded against SQL injection
-	 * @param string ORDER BY clause (may be empty), must already be
-	 *               safeguarded against SQL injection
-	 * @param string LIMIT clause (may be empty), must already be
-	 *               safeguarded against SQL injection
+	 * @param string $queryParameters
+	 *        string that will be prepended to the WHERE clause using AND, e.g. 'pid=42'
+	 *        (the AND and the enclosing spaces are not necessary for this parameter)
+	 * @param string $additionalTableNames
+	 *        comma-separated names of additional DB tables used for JOINs, may be empty
+	 * @param string $groupBy
+	 *        GROUP BY clause (may be empty), must already be safeguarded against SQL injection
+	 * @param string $orderBy
+	 *        ORDER BY clause (may be empty), must already be safeguarded against SQL injection
+	 * @param string $limit
+	 *        LIMIT clause (may be empty), must already be safeguarded against SQL injection
+	 * @param integer $showHiddenRecords
+	 *        If $showHiddenRecords is set (0/1), any hidden fields in records are ignored.
 	 */
 	public function __construct(
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',

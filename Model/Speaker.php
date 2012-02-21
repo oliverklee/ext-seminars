@@ -62,7 +62,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our name.
 	 *
-	 * @param string our name to set, must not be empty
+	 * @param string $name our name to set, must not be empty
 	 */
 	public function setName($name) {
 		if ($name == '') {
@@ -85,7 +85,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our organization.
 	 *
-	 * @param string our organization, may be empty
+	 * @param string $organization our organization, may be empty
 	 */
 	public function setOrganization($organization) {
 		$this->setAsString('organization', $organization);
@@ -112,7 +112,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our homepage.
 	 *
-	 * @param string our homepage, may be empty
+	 * @param string $homepage our homepage, may be empty
 	 */
 	public function setHomepage($homepage) {
 		$this->setAsString('homepage', $homepage);
@@ -140,7 +140,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our description.
 	 *
-	 * @param string our description to set, may be empty
+	 * @param string $description our description to set, may be empty
 	 */
 	public function setDescription($description) {
 		$this->setAsString('description', $description);
@@ -186,7 +186,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our address.
 	 *
-	 * @param string our address to set, may be empty
+	 * @param string $address our address to set, may be empty
 	 */
 	public function setAddress($address) {
 		$this->setAsString('address', $address);
@@ -214,7 +214,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our work telephone number.
 	 *
-	 * @param string our work telephone number to set, may be empty
+	 * @param string $phoneWork our work telephone number to set, may be empty
 	 */
 	public function setPhoneWork($phoneWork) {
 		$this->setAsString('phone_work', $phoneWork);
@@ -243,7 +243,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our home telephone number.
 	 *
-	 * @param string our home telephone number to set, may be empty
+	 * @param string $phoneHome our home telephone number to set, may be empty
 	 */
 	public function setPhoneHome($phoneHome) {
 		$this->setAsString('phone_home', $phoneHome);
@@ -272,7 +272,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our mobile telephone number.
 	 *
-	 * @param string our mobile telephone number to set, may be empty
+	 * @param string $phoneMobile our mobile telephone number to set, may be empty
 	 */
 	public function setPhoneMobile($phoneMobile) {
 		$this->setAsString('phone_mobile', $phoneMobile);
@@ -300,7 +300,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our fax number.
 	 *
-	 * @param string our fax number to set, may be empty
+	 * @param string $fax our fax number to set, may be empty
 	 */
 	public function setFax($fax) {
 		$this->setAsString('fax', $fax);
@@ -329,7 +329,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets out e-mail address.
 	 *
-	 * @param string our e-mail address, may be empty
+	 * @param string $eMailAddress our e-mail address, may be empty
 	 */
 	public function setEMailAddress($eMailAddress) {
 		$this->setAsString('email', $eMailAddress);
@@ -358,10 +358,9 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our gender.
 	 *
-	 * @param integer our gender to set, must be one of
-	 *                tx_seminars_Model_Speaker::GENDER_FEMALE,
-	 *                tx_seminars_Model_Speaker::GENDER_MALE
-	 *                or tx_seminars_Model_Speaker::GENDER_UNKNOWN
+	 * @param integer $gender
+	 *        our gender to set, must be one of tx_seminars_Model_Speaker::GENDER_FEMALE, tx_seminars_Model_Speaker::GENDER_MALE
+	 *        or tx_seminars_Model_Speaker::GENDER_UNKNOWN
 	 */
 	public function setGender($gender) {
 		$this->setAsInteger('gender', $gender);
@@ -388,7 +387,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our cancelation period in days.
 	 *
-	 * @param integer our cancelation period in days to set, must be >= 0
+	 * @param integer $cancelationPeriod our cancelation period in days to set, must be >= 0
 	 */
 	public function setCancelationPeriod($cancelationPeriod) {
 		if ($cancelationPeriod < 0) {

@@ -122,10 +122,11 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	/**
 	 * Sets the PIDs of the system folders that contain the records.
 	 *
-	 * @param string comma-separated list of PIDs of the system folders
-	 *               with the records; must not be empty; need not be
-	 *               safeguarded against SQL injection
-	 * @param integer recursion depth, must be >= 0
+	 * @param string $sourcePagePids
+	 *        comma-separated list of PIDs of the system folders with the records;
+	 *        must not be empty; need not be safeguarded against SQL injection
+	 * @param integer $recursionDepth
+	 *        recursion depth, must be >= 0
 	 */
 	public function setSourcePages($sourcePagePids, $recursionDepth = 0) {
 		if (!preg_match('/^([\d+,] *)*\d+$/', $sourcePagePids)) {
@@ -183,8 +184,7 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	 * Adds the table name given in the parameter $additionalTableName to
 	 * $this->additionalTableNames.
 	 *
-	 * @param string the table name to add to the additional table names
-	 *               array, must not be empty
+	 * @param string $additionalTableName the table name to add to the additional table names array, must not be empty
 	 */
 	public function addAdditionalTableName($additionalTableName) {
 		if ($additionalTableName == '') {
@@ -200,8 +200,7 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	 * Removes the table name given in the parameter $additionalTableName from
 	 * $this->additionalTableNames.
 	 *
-	 * @param string the table name to remove from the additional table
-	 *               names array, must not be empty
+	 * @param string $additionalTableName the table name to remove from the additional table names array, must not be empty
 	 */
 	public function removeAdditionalTableName($additionalTableName) {
 		if ($additionalTableName == '') {
@@ -223,7 +222,7 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	/**
 	 * Sets the ORDER BY statement for the bag to build.
 	 *
-	 * @param string the ORDER BY statement to set, may be empty
+	 * @param string $orderBy the ORDER BY statement to set, may be empty
 	 */
 	public function setOrderBy($orderBy) {
 		$this->orderBy = $orderBy;
@@ -237,7 +236,7 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	 * - "10, 10" to limit the bag to 10 records, starting from the 11th record
 	 * - "10" to limit the bag to the first 10 records
 	 *
-	 * @param string the LIMIT statement to set, may be empty
+	 * @param string $limit the LIMIT statement to set, may be empty
 	 */
 	public function setLimit($limit) {
 		$this->limit = $limit;

@@ -67,7 +67,7 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 	/**
 	 * Sets the event to which this view relates.
 	 *
-	 * @param tx_seminars_seminar the event to build the requirements list for
+	 * @param tx_seminars_seminar $event the event to build the requirements list for
 	 */
 	public function setEvent(tx_seminars_seminar $event) {
 		$this->event = $event;

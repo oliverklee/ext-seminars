@@ -121,8 +121,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	 * Returns just one day if the timespan takes place on only one day.
 	 * Returns a date range if the timespan takes several days.
 	 *
-	 * @param string the character or HTML entity used to separate start
-	 *               date and end date
+	 * @param string $dash the character or HTML entity used to separate start date and end date
 	 *
 	 * @return string the seminar date
 	 */
@@ -204,8 +203,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	 * (i.e. both begin time and end time are 00:00).
 	 * Returns only the begin time if begin time and end time are the same.
 	 *
-	 * @param string the character or HTML entity used to separate begin
-	 *               time and end time
+	 * @param string $dash the character or HTML entity used to separate begin time and end time
 	 *
 	 * @return string the time
 	 */

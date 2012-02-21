@@ -132,8 +132,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Creates a CSV export.
 	 *
-	 * @param string (unused)
-	 * @param array TypoScript configuration for the plugin, may be empty
+	 * @param string $unused (unused)
+	 * @param array $configuration TypoScript configuration for the plugin, may be empty
 	 *
 	 * @return string HTML for the plugin, might be empty
 	 */
@@ -184,7 +184,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Initializes this object and its configuration getter.
 	 *
-	 * @param array TypoScript configuration for the plugin, may be empty
+	 * @param array $configuration TypoScript configuration for the plugin, may be empty
 	 */
 	public function init(array $configuration = array()) {
 		parent::init($configuration);
@@ -251,7 +251,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * If access is denied, an error message is returned, and an error 403 is
 	 * set.
 	 *
-	 * @param integer UID of the event for which to create the CSV list, must be >= 0
+	 * @param integer $eventUid UID of the event for which to create the CSV list, must be >= 0
 	 *
 	 * @return string CSV list of registrations for the given seminar or
 	 *                an error message in case of an error
@@ -286,8 +286,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *
 	 * This function does not do any access checks.
 	 *
-	 * @param integer UID of the event for which the registration list
-	 *                should be created, must be > 0
+	 * @param integer $eventUid UID of the event for which the registration list should be created, must be > 0
 	 *
 	 * @return string CSV list of registrations for the given seminar or an
 	 *                empty string if there is not event with the provided UID
@@ -402,8 +401,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * If access is denied, an error message is returned, and an error 403 is
 	 * set.
 	 *
-	 * @param integer PID of the page with events for which to create the CSV
-	 *                list, must be > 0
+	 * @param integer $pid PID of the page with events for which to create the CSV list, must be > 0
 	 *
 	 * @return string CSV list of events for the given page or an error
 	 *                message in case of an error
@@ -430,8 +428,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *
 	 * This function does not do any access checks.
 	 *
-	 * @param integer PID of the system folder from which the event
-	 * records should be exported, must be > 0
+	 * @param integer $pid PID of the system folder from which the event records should be exported, must be > 0
 	 *
 	 * @return string CSV export of the event records on that page
 	 */
@@ -484,16 +481,18 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * values. The individual values are already wrapped in double quotes, with
 	 * the contents having all quotes escaped.
 	 *
-	 * @param object object that will deliver the data
-	 * @param string name of a function of the given object that expects
-	 * a key as a parameter and returns the value for that
-	 * key as a string
-	 * @param string comma-separated list of keys to retrieve
+	 * @param tx_seminars_OldModel_Abstract $dataSupplier
+	 *        object that will deliver the data
+	 * @param string $supplierFunction
+	 *        name of a function of the given object that expects a key as a parameter and returns the value for that
+	 *        key as a string
+	 * @param string $keys
+	 *        comma-separated list of keys to retrieve
 	 *
 	 * @return array the data for the keys provided in $keys
 	 * (may be empty)
 	 */
-	protected function retrieveData($dataSupplier, $supplierFunction, $keys) {
+	protected function retrieveData(tx_seminars_OldModel_Abstract $dataSupplier, $supplierFunction, $keys) {
 		$result = array();
 
 		if (($keys != '') && method_exists($dataSupplier, $supplierFunction)) {
@@ -528,8 +527,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * links), the corresponding access checks need to be added to this
 	 * function.
 	 *
-	 * @param integer UID of the event record for which access should be
-	 *                checked, must be > 0
+	 * @param integer $eventUid UID of the event record for which access should be checked, must be > 0
 	 *
 	 * @return boolean TRUE if the list of registrations may be exported as CSV
 	 */
@@ -649,7 +647,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *
 	 * This function is intended for testing purposes only.
 	 *
-	 * @return object our config getter, might be NULL
+	 * @return tx_seminars_configgetter our config getter, might be NULL
 	 */
 	public function getConfigGetter() {
 		return $this->configGetter;
@@ -706,9 +704,9 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *
 	 * @param integer $pid PID of the page to check the access for, must be >= 0
 	 *
-	 * @return booelan TRUE if the currently logged-in BE-User is allowed to
-	 *                 access the registrations records, FALSE if the user has
-	 *                 no access or this function is called in FE mode
+	 * @return boolean
+	 *         TRUE if the currently logged-in BE-User is allowed to access the registrations records,
+	 *         FALSE if the user has no access or this function is called in FE mode
 	 */
 	private function canAccessRegistrationsOnPage($pid) {
 		return $this->canAccessTableAndPage('tx_seminars_attendances', $pid);

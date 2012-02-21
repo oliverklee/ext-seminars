@@ -46,7 +46,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	/**
 	 * Sets our title.
 	 *
-	 * @param string our title to set, must not be empty
+	 * @param string $title our title to set, must not be empty
 	 */
 	public function setTitle($title) {
 		if ($title == '') {
@@ -68,7 +68,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	/**
 	 * Sets our address.
 	 *
-	 * @param string our address to set, may be empty
+	 * @param string $address our address to set, may be empty
 	 */
 	public function setAddress($address) {
 		$this->setAsString('address', $address);
@@ -95,7 +95,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	/**
 	 * Sets our ZIP code.
 	 *
-	 * @param string our ZIP code, may be empty
+	 * @param string $zip our ZIP code, may be empty
 	 */
 	public function setZip($zip) {
 		$this->setAsString('zip', $zip);
@@ -122,7 +122,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	/**
 	 * Sets our city name.
 	 *
-	 * @param string our city name, must not be empty
+	 * @param string $city our city name, must not be empty
 	 */
 	public function setCity($city) {
 		if ($city == '') {
@@ -186,7 +186,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	/**
 	 * Sets our homepage.
 	 *
-	 * @param string our homepage, may be empty
+	 * @param string $homepage our homepage, may be empty
 	 */
 	public function setHomepage($homepage) {
 		$this->setAsString('homepage', $homepage);
@@ -213,7 +213,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	/**
 	 * Sets our directions.
 	 *
-	 * @param string our directions to set, may be empty
+	 * @param string $directions our directions to set, may be empty
 	 */
 	public function setDirections($directions) {
 		$this->setAsString('directions', $directions);

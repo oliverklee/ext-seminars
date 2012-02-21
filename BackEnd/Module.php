@@ -59,7 +59,7 @@ class tx_seminars_BackEnd_Module extends t3lib_SCbase {
 	/**
 	 * Sets the data for the current BE page.
 	 *
-	 * @param array page data, may be empty
+	 * @param array $pageData page data, may be empty
 	 */
 	public function setPageData(array $pageData) {
 		$this->pageData = $pageData;

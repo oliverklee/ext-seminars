@@ -63,9 +63,9 @@ class tx_seminars_BagBuilder_Category extends tx_seminars_BagBuilder_Abstract {
 	 * So the bag will be limited to categories 9 and 12 (plus any additional
 	 * limits).
 	 *
-	 * @param string comma-separated list of UID of the events to which
-	 *               the category selection should be limited, may be
-	 *               empty, all UIDs must be > 0
+	 * @param string $eventUids
+	 *        comma-separated list of UID of the events to which the category selection should be limited, may be empty,
+	 *        all UIDs must be > 0
 	 */
 	public function limitToEvents($eventUids) {
 		if ($eventUids == '') {
