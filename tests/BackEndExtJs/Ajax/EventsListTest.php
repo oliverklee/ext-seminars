@@ -132,7 +132,7 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingWetherEventIsHidden() {
+	public function getAsArrayReturnsArrayContainingWhetherEventIsHidden() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(array('hidden' => 1));
 
