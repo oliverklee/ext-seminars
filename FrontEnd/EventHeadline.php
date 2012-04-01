@@ -23,22 +23,19 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_FrontEnd_EventHeadline for the "seminars" extension.
- *
- * This class displayes an event headline consisting of the event title and
- * date.
+ * This class displays an event headline consisting of the event title and date.
  *
  * @package TYPO3
  * @subpackage tx_seminars
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
+ * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_FrontEnd_EventHeadline extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Creates the event headline, consisting of the event title and date.
 	 *
-	 * @return string HTML code of the event headline, will be empty if
-	 *                an invalid or no event ID was set in piVar 'uid'
+	 * @return string HTML code of the event headline, will be empty if an invalid or no event ID was set in piVar 'uid'
 	 */
 	public function render() {
 		$eventId = intval($this->piVars['uid']);
@@ -46,22 +43,39 @@ class tx_seminars_FrontEnd_EventHeadline extends tx_seminars_FrontEnd_AbstractVi
 			return '';
 		}
 
-		$seminar = tx_oelib_ObjectFactory::make('tx_seminars_seminar', $eventId);
-		if (!$seminar->isOk()) {
+		$mapper = tx_oelib_ObjectFactory::make('tx_seminars_Mapper_Event');
+		$event = $mapper->find($eventId);
+
+		if (!$mapper->existsModel($eventId)) {
 			return '';
 		}
 
-		$this->setMarker('title_and_date', $seminar->getTitleAndDate());
+		$this->setMarker('title_and_date', $this->getTitleAndDate($event));
 		$result = $this->getSubpart('VIEW_HEADLINE');
 
-		$this->setErrorMessage(
-			$seminar->checkConfiguration(TRUE)
-		);
-
-		$seminar->__destruct();
-		unset($seminar);
+		$this->setErrorMessage($this->checkConfiguration(TRUE));
 
 		return $result;
+	}
+
+	/**
+	 * Gets the unique event title, consisting of the event title and the date (comma-separated).
+	 *
+	 * If the event has no date, just the title is returned.
+	 *
+	 * @param tx_seminars_Model_Event $event the event to get the unique event title for
+	 *
+	 * @return string the unique event title (or '' if there is an error)
+	 */
+	protected function getTitleAndDate(tx_seminars_Model_Event $event) {
+		$result = $event->getTitle();
+		if (!$event->hasBeginDate()) {
+			return $result;
+		}
+
+		$dateRangeViewHelper = tx_oelib_ObjectFactory::make('tx_seminars_ViewHelper_DateRange');
+
+		return $result . ', ' . $dateRangeViewHelper->render($event);
 	}
 }
 
