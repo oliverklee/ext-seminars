@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4419] Feature: Add a view helper for rendering the date of an event
 - [#4316] Fix: TCA: Fields with displayCond depend on inverted needs_registration (thanks to Philipp Kitzberger)
 - [#4270] Cleanup: Add the parameter name to all @param
 - [#4347] Fix: Fix missing/incorrect @return and return values
