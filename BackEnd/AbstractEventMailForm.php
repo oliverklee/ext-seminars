@@ -88,7 +88,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 *
 	 * @param integer $eventUid UID of an event, must be > 0
 	 *
-	 * @throws Exception if event could not be instantiated
+	 * @throws tx_oelib_Exception_NotFound if event could not be instantiated
 	 */
 	public function __construct($eventUid) {
 		if ($eventUid <= 0) {
@@ -100,7 +100,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		);
 
 		if (!$this->oldEvent->isOk()) {
-			throw new Exception('There is no event with this UID.');
+			throw new tx_oelib_Exception_NotFound('There is no event with this UID.', 1333292164);
 		}
 
 		$this->event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
@@ -332,7 +332,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 */
 	protected function getErrorMessage($fieldName) {
 		if ($fieldName == '') {
-			throw new Exception('$fieldName must not be empty.');
+			throw new InvalidArgumentException('$fieldName must not be empty.', 1333292174);
 		}
 
 		$result = '';
@@ -402,13 +402,11 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 *
 	 * @param string $key the key of the field to check for, must not be empty
 	 *
-	 * @throws Exception if key is empty
-	 *
 	 * @return boolean TRUE if the stored POST data contains an entry, FALSE otherwise
 	 */
 	protected function hasPostData($key) {
 		if ($key == '') {
-			throw new Exception('$key must not be empty.');
+			throw new InvalidArgumentException('$key must not be empty.', 1333292184);
 		}
 
 		return isset($this->postData[$key]);
@@ -527,8 +525,8 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 				$result = $this->getMessageBodyFormContent();
 				break;
 			default:
-				throw new Exception('There is no initial value for the field "' .
-					$fieldName . '" defined.'
+				throw new InvalidArgumentException(
+					'There is no initial value for the field "' . $fieldName . '" defined.', 1333292199
 				);
 		}
 

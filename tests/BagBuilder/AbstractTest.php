@@ -67,7 +67,8 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 
 	public function testBuilderThrowsExceptionForEmptyTableName() {
 		$this->setExpectedException(
-			'Exception', 'The attribute $this->tableName must not be empty.'
+			'RuntimeException',
+			'The attribute $this->tableName must not be empty.'
 		);
 
 		new tx_seminars_tests_fixtures_BagBuilder_BrokenTesting();
@@ -681,7 +682,8 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 
 	public function testAddAdditionalTableNameWithEmptyTableNameThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $additionalTableName must not be empty.'
+			'InvalidArgumentException',
+			'The parameter $additionalTableName must not be empty.'
 		);
 
 		$this->fixture->addAdditionalTableName('');
@@ -705,7 +707,8 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 
 	public function testRemoveAdditionalTableNameWithEmptyTableNameThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $additionalTableName must not be empty.'
+			'InvalidArgumentException',
+			'The parameter $additionalTableName must not be empty.'
 		);
 
 		$this->fixture->removeAdditionalTableName('');
@@ -713,7 +716,7 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 
 	public function testRemoveAdditionalTableNameWithNotSetTableNameThrowsException() {
 		$this->setExpectedException(
-			'Exception',
+			'InvalidArgumentException',
 			'The given additional table name does not exist in the list ' .
 				'of additional table names.'
 		);

@@ -58,9 +58,8 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 		if (($whatToDisplay != 'list_registrations')
 			&& ($whatToDisplay != 'list_vip_registrations')
 		) {
-			throw new Exception(
-				'The value "' . $whatToDisplay . '" of the first parameter ' .
-					'$whatToDisplay is not valid.'
+			throw new InvalidArgumentException(
+				'The value "' . $whatToDisplay . '" of the first parameter $whatToDisplay is not valid.', 1333293210
 			);
 		}
 

@@ -296,7 +296,7 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	 */
 	public function key() {
 		if (!$this->valid()) {
-			throw new Exception('The current item is not valid.');
+			throw new RuntimeException('The current item is not valid.', 1333292257);
 		}
 
 		return $this->current()->getUid();

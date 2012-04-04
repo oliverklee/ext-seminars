@@ -101,10 +101,7 @@ class tx_seminars_Model_BackEndUser extends tx_oelib_Model_BackEndUser {
 					$recordFolderPid = $group->getAuxiliaryRecordFolder();
 					break;
 				default:
-					throw new Exception(
-						'The given record folder type "' . $type .
-							'" was not valid.'
-					);
+					throw new InvalidArgumentException('The given record folder type "' . $type . '" was not valid.', 1333296088);
 			}
 
 			if ($recordFolderPid > 0) {

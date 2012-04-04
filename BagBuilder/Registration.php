@@ -57,7 +57,7 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	 */
 	public function limitToEvent($eventUid) {
 		if ($eventUid <= 0) {
-			throw new Exception('The parameter $eventUid must be > 0.');
+			throw new InvalidArgumentException('The parameter $eventUid must be > 0.', 1333292912);
 		}
 
 		$this->whereClauseParts['event'] = 'tx_seminars_attendances' .
@@ -119,7 +119,7 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	 */
 	public function limitToSeatsAtMost($seats = 0) {
 		if ($seats < 0) {
-			throw new Exception('The parameter $seats must be >= 0.');
+			throw new InvalidArgumentException('The parameter $seats must be >= 0.', 1333292923);
 		}
 
 		if ($seats == 0) {

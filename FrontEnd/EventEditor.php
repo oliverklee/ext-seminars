@@ -1166,7 +1166,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	private function isFieldRequired(array $field) {
 		if ($field['elementName'] == '') {
-			throw new Exception('The given field name was empty.');
+			throw new InvalidArgumentException('The given field name was empty.', 1333293167);
 		}
 
 		return in_array($field['elementName'], $this->requiredFormFields);

@@ -57,7 +57,8 @@ class tx_seminars_Model_SpeakerTest extends tx_phpunit_testcase {
 	 */
 	public function setNameWithEmptyNameThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $name must not be empty.'
+			'InvalidArgumentException',
+			'The parameter $name must not be empty.'
 		);
 
 		$this->fixture->setName('');

@@ -1655,11 +1655,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		);
 
 		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
+			throw new tx_oelib_Exception_Database(DATABASE_QUERY_ERROR, 1333291814);
 		}
 		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 		if (!$dbResultRow) {
-			throw new Exception(DATABASE_RESULT_ERROR);
+			throw new tx_oelib_Exception_Database(DATABASE_RESULT_ERROR, 1333291826);
 		}
 
 		return $dbResultRow['title'];
@@ -1672,7 +1672,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function setEventType($eventType) {
 		if ($eventType < 0) {
-			throw new Exception('$eventType must be >= 0.');
+			throw new InvalidArgumentException('$eventType must be >= 0.', 1333291840);
 		}
 
 		$this->setRecordPropertyInteger('event_type', $eventType);
@@ -2076,7 +2076,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function getOrganizerBag() {
 		if (!$this->hasOrganizers()) {
-			throw new Exception('There are no organizers related to this event.');
+			throw new BadMethodCallException('There are no organizers related to this event.', 1333291857);
 		}
 
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Organizer');
@@ -4467,8 +4467,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function getCancelationDeadline() {
 		if (!$this->hasBeginDate()) {
-			throw new Exception('The event has no begin date. Please call ' .
-				'this function only if the event has a begin date.'
+			throw new BadMethodCallException(
+				'The event has no begin date. Please call this function only if the event has a begin date.', 1333291877
 			);
 		}
 		if (!$this->hasSpeakers()) {

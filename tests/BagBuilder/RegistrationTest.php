@@ -126,7 +126,8 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 
 	public function testLimitToEventWithNegativeEventUidThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $eventUid must be > 0.'
+			'InvalidArgumentException',
+			'The parameter $eventUid must be > 0.'
 		);
 
 		$this->fixture->limitToEvent(-1);
@@ -134,7 +135,8 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 
 	public function testLimitToEventWithZeroEventUidThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $eventUid must be > 0.'
+			'InvalidArgumentException',
+			'The parameter $eventUid must be > 0.'
 		);
 
 		$this->fixture->limitToEvent(0);
@@ -401,7 +403,8 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 
 	public function testLimitToSeatsAtMostWithNegativeVacanciesThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $seats must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $seats must be >= 0.'
 		);
 
 		$this->fixture->limitToSeatsAtMost(-1);

@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#3815] Fix: Throw more meaningful Exceptions
 - [#4335] Change: Use the new models in the event headline
 - [#4419] Feature: Add a view helper for rendering the date of an event
 - [#4316] Fix: TCA: Fields with displayCond depend on inverted needs_registration (thanks to Philipp Kitzberger)

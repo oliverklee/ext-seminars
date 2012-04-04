@@ -66,7 +66,8 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 */
 	public function setTitleWithEmptyTitleThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $title must not be empty.'
+			'InvalidArgumentException',
+			'The parameter $title must not be empty.'
 		);
 
 		$this->fixture->setTitle('');
@@ -316,7 +317,8 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 */
 	public function setSeatsWithNegativeSeatsThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $seats must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $seats must be >= 0.'
 		);
 
 		$this->fixture->setSeats(-1);
@@ -394,7 +396,8 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 */
 	public function setTotalPriceForNegativePriceThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $price must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $price must be >= 0.'
 		);
 
 		$this->fixture->setTotalPrice(-1);
@@ -526,7 +529,8 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 */
 	public function setPaymentDateAsUnixTimestampWithNegativeTimestampThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $timestamp must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $timestamp must be >= 0.'
 		);
 
 		$this->fixture->setPaymentDateAsUnixTimestamp(-1);
@@ -859,11 +863,9 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 */
 	public function setGenderWithUnsupportedGenderThrowsException() {
 		$this->setExpectedException(
-			'Exception',
-			'The parameter $gender must be one of the following: ' .
-				'tx_oelib_Model_FrontEndUser::GENDER_MALE, ' .
-				'tx_oelib_Model_FrontEndUser::GENDER_FEMALE,' .
-				'tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN'
+			'InvalidArgumentException',
+			'The parameter $gender must be one of the following: tx_oelib_Model_FrontEndUser::GENDER_MALE, ' .
+				'tx_oelib_Model_FrontEndUser::GENDER_FEMALE, tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN'
 		);
 
 		$this->fixture->setGender(-1);
@@ -1489,7 +1491,10 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setKidsWithNegativeKidsThrowsException() {
-		$this->setExpectedException('Exception', 'The parameter $kids must be >= 0.');
+		$this->setExpectedException(
+			'InvalidArgumentException',
+			'The parameter $kids must be >= 0.'
+		);
 
 		$this->fixture->setKids(-1);
 	}

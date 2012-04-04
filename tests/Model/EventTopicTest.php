@@ -549,7 +549,8 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 	 */
 	public function setRegularEarlyBirdPriceForEventTopicWithNegativeRegularEarlyBirdPriceThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $price must be >= 0.00.'
+			'InvalidArgumentException',
+			'The parameter $price must be >= 0.00.'
 		);
 
 		$this->fixture->setRegularEarlyBirdPrice(-1.00);

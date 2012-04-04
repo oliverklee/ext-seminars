@@ -660,7 +660,8 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 
 	public function testSetUserDataThrowsExceptionForEmptyUserData() {
 		$this->setExpectedException(
-			'Exception', '$userData must not be empty.'
+			'InvalidArgumentException',
+			'$userData must not be empty.'
 		);
 
 		$this->fixture->setUserData(array());
@@ -1092,7 +1093,8 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 */
 	public function setSeatsWithNegativeSeatsThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $seats must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $seats must be >= 0.'
 		);
 
 		$this->fixture->setSeats(-1);
@@ -1209,7 +1211,8 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 */
 	public function setNumberOfKidsWithNegativeNumberOfKidsThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $numberOfKids must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $numberOfKids must be >= 0.'
 		);
 
 		$this->fixture->setNumberOfKids(-1);
@@ -1375,7 +1378,8 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 */
 	public function setMethodOfPaymentUidWithNegativeUidThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $uid must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $uid must be >= 0.'
 		);
 
 		$this->fixture->setMethodOfPaymentUid(-1);

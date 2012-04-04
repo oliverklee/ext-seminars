@@ -108,9 +108,11 @@ class ext_update {
 					')';
 				break;
 			default:
-				throw new Exception('needsToUpdateEventField was called with ' .
-					'"' . $fieldToUpdate . '" but the allowed value is only ' .
-					'"registrations"');
+				throw new InvalidArgumentException(
+					'needsToUpdateEventField was called with "' . $fieldToUpdate .
+						'", but the allowed value is only "registrations"',
+					1333291685
+				);
 				break;
 		}
 

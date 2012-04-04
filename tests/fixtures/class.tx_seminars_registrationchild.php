@@ -75,7 +75,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	 */
 	public function setPaymentMethod($uid) {
 		if ($uid <= 0) {
-			throw new Exception('Invalid payment method UID.');
+			throw new InvalidArgumentException('Invalid payment method UID.', 1333293343);
 		}
 
 		$this->setRecordPropertyInteger(

@@ -384,12 +384,10 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 */
 	protected function createMmRecords($mmTable, array $references) {
 		if ($mmTable == '') {
-			throw new Exception('$mmTable must not be empty.');
+			throw new InvalidArgumentException('$mmTable must not be empty.', 1333292359);
 		}
 		if (!$this->hasUid()) {
-			throw new Exception(
-				'createMmRecords may only be called on objects that have a UID.'
-			);
+			throw new BadMethodCallException('createMmRecords may only be called on objects that have a UID.', 1333292371);
 		}
 		if (empty($references)) {
 			return 0;
@@ -612,9 +610,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 			$this->renderCharset = $GLOBALS['LANG']->charset;
 			$this->charsetConversion = $GLOBALS['LANG']->csConvObj;
 		} else {
-			throw new Exception(
-				'There was neither a front end nor a back end detected.'
-			);
+			throw new RuntimeException('There was neither a front end nor a back end detected.', 1333292389);
 		}
 	}
 

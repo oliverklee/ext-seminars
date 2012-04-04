@@ -142,8 +142,8 @@ class tx_seminars_OldModel_TimeSlotTest extends tx_phpunit_testcase {
 	public function testGetPlaceShortThrowsExceptionForInexistentPlaceUid() {
 		$placeUid = $this->testingFramework->createRecord('tx_seminars_sites');
 		$this->setExpectedException(
-			'Exception', 'The related place with the UID ' . $placeUid .
-				' could not be found in the DB.'
+			'tx_oelib_Exception_NotFound',
+			'The related place with the UID ' . $placeUid . ' could not be found in the DB.'
 		);
 
 		$this->fixture->setPlace($placeUid);
@@ -158,8 +158,8 @@ class tx_seminars_OldModel_TimeSlotTest extends tx_phpunit_testcase {
 			array('deleted' => 1)
 		);
 		$this->setExpectedException(
-			'Exception', 'The related place with the UID ' . $placeUid .
-				' could not be found in the DB.'
+			'tx_oelib_Exception_NotFound',
+			'The related place with the UID ' . $placeUid . ' could not be found in the DB.'
 		);
 
 		$this->fixture->setPlace($placeUid);

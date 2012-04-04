@@ -54,7 +54,7 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 	 */
 	public function __construct() {
 		if ($this->mapperName == '') {
-			throw new Exception('No mapper class name set.');
+			throw new RuntimeException('No mapper class name set.', 1333292233);
 		}
 	}
 

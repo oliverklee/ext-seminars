@@ -48,13 +48,12 @@ class tx_seminars_cli_MailNotifier {
 	 * valid, defines this UID as the one where to take the configuration from,
 	 * otherwise throws an exception.
 	 *
-	 * @throws Exception if no page UID or an invalid UID was provided
+	 * @throws InvalidArgumentException if no page UID or an invalid UID was provided
 	 */
 	public function setConfigurationPage() {
 		if (!isset($_SERVER['argv'][1])) {
-			throw new Exception(
-				'Please provide the UID for the page with the configuration ' .
-				'for the CLI module.'
+			throw new InvalidArgumentException(
+				'Please provide the UID for the page with the configuration for the CLI module.', 1333292959
 			);
 		}
 
@@ -64,10 +63,10 @@ class tx_seminars_cli_MailNotifier {
 				'COUNT(*) AS number', 'pages', 'uid = ' . $uid
 			) != array('number' => 1))
 		) {
-			throw new Exception(
-				'The provided UID for the page with the configuration was ' .
-				$_SERVER['argv'][1] . ', which was not found to be a UID of ' .
-				'an existing page. Please provide the UID of an existing page.'
+			throw new InvalidArgumentException(
+				'The provided UID for the page with the configuration was ' . $_SERVER['argv'][1] .
+					', which was not found to be a UID of an existing page. Please provide the UID of an existing page.',
+				1333292966
 			);
 		}
 

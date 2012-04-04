@@ -51,7 +51,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	 */
 	public function setName($name) {
 		if ($name == '') {
-			throw new Exception('The parameter $name must not be empty.');
+			throw new InvalidArgumentException('The parameter $name must not be empty.', 1333296852);
 		}
 
 		$this->setAsString('title', $name);
@@ -102,7 +102,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	 */
 	public function setEMailAddress($eMailAddress) {
 		if ($eMailAddress == '') {
-			throw new Exception('The parameter $eMailAddress must not be empty.');
+			throw new InvalidArgumentException('The parameter $eMailAddress must not be empty.', 1333296861);
 		}
 
 		$this->setAsString('email', $eMailAddress);
@@ -151,7 +151,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	 */
 	public function setAttendancesPID($attendancesPID) {
 		if ($attendancesPID < 0) {
-			throw new Exception('The parameter $attendancesPID must not be < 0.');
+			throw new InvalidArgumentException('The parameter $attendancesPID must not be < 0.', 1333296869);
 		}
 
 		$this->setAsInteger('attendances_pid', $attendancesPID);

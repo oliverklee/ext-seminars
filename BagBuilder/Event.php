@@ -186,9 +186,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 */
 	public function setTimeFrame($timeFrameKey) {
 		if (!in_array($timeFrameKey, self::$validTimeFrames)) {
-			throw new Exception(
-				'The time-frame key '.$timeFrameKey.' is not valid.'
-			);
+			throw new InvalidArgumentException('The time-frame key ' . $timeFrameKey . ' is not valid.', 1333292705);
 		}
 
 		$now = $GLOBALS['SIM_EXEC_TIME'];
@@ -452,7 +450,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 */
 	public function limitToOwner($feUserUid) {
 		if ($feUserUid < 0) {
-			throw new Exception('The parameter $feUserUid must be >= 0.');
+			throw new InvalidArgumentException('The parameter $feUserUid must be >= 0.', 1333292720);
 		}
 
 		if ($feUserUid == 0) {
@@ -490,7 +488,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 */
 	public function limitToEventManager($feUserUid) {
 		if ($feUserUid < 0) {
-			throw new Exception('The parameter $feUserUid must be >= 0.');
+			throw new InvalidArgumentException('The parameter $feUserUid must be >= 0.', 1333292729);
 		}
 
 		if ($feUserUid == 0) {
@@ -513,9 +511,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 */
 	public function limitToEventsNextDay(tx_seminars_seminar $event) {
 		if (!$event->hasEndDate()) {
-			throw new Exception(
-				'The event object given in the first parameter $event must ' .
-					'have an end date set.'
+			throw new InvalidArgumentException(
+				'The event object given in the first parameter $event must have an end date set.', 1333292744
 			);
 		}
 
@@ -544,10 +541,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 */
 	public function limitToOtherDatesForTopic(tx_seminars_seminar $event) {
 		if (!$event->isEventDate() && !$event->isEventTopic()) {
-			throw new Exception(
-				'The first parameter $event must be either a date or a topic ' .
-					'record.'
-			);
+			throw new InvalidArgumentException('The first parameter $event must be either a date or a topic record.', 1333292764);
 		}
 
 		$this->whereClauseParts['other_dates'] = '(' .
@@ -1015,34 +1009,21 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 */
 	private function checkParametersForMmSearchFunctions($searchWord, $searchFieldKey, $foreignTable, $mmTable) {
 		if (trim($searchWord, self::TRIM_CHARACTER_LIST . '\'%') == '') {
-			throw new Exception(
-				'The first parameter $searchWord must no be empty.'
-			);
+			throw new InvalidArgumentException('The first parameter $searchWord must no be empty.', 1333292804);
 		}
-
 		if ($searchFieldKey == '') {
-			throw new Exception(
-				'The second parameter $searchFieldKey must not be empty.'
-			);
+			throw new InvalidArgumentException('The second parameter $searchFieldKey must not be empty.', 1333292809);
 		}
-
 		if (!array_key_exists($searchFieldKey, self::$searchFieldList)) {
-			throw new Exception(
-				'The second parameter $searchFieldKey must be a valid key of ' .
-					'self::$searchFieldList.'
+			throw new InvalidArgumentException(
+				'The second parameter $searchFieldKey must be a valid key of self::$searchFieldList.', 1333292815
 			);
 		}
-
 		if ($foreignTable == '') {
-			throw new Exception(
-				'The third parameter $foreignTable must not be empty.'
-			);
+			throw new InvalidArgumentException('The third parameter $foreignTable must not be empty.', 1333292820);
 		}
-
 		if ($mmTable == '') {
-			throw new Exception(
-				'The fourth parameter $mmTable must not be empty.'
-			);
+			throw new InvalidArgumentException('The fourth parameter $mmTable must not be empty.', 1333292829);
 		}
 	}
 

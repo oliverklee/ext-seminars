@@ -50,7 +50,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	 */
 	public function setTitle($title) {
 		if ($title == '') {
-			throw new Exception('The parameter $title must not be empty.');
+			throw new InvalidArgumentException('The parameter $title must not be empty.', 1333296917);
 		}
 
 		$this->setAsString('title', $title);
@@ -185,7 +185,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	 */
 	public function setSeats($seats) {
 		if ($seats < 0) {
-			throw new Exception('The parameter $seats must be >= 0.');
+			throw new InvalidArgumentException('The parameter $seats must be >= 0.', 1333296926);
 		}
 
 		$this->setAsInteger('seats', $seats);
@@ -227,7 +227,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	 */
 	public function setTotalPrice($price) {
 		if ($price < 0) {
-			throw new Exception('The parameter $price must be >= 0.');
+			throw new InvalidArgumentException('The parameter $price must be >= 0.', 1333296931);
 		}
 
 		$this->setAsFloat('total_price', $price);
@@ -302,7 +302,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	 */
 	public function setPaymentDateAsUnixTimestamp($timestamp) {
 		if ($timestamp < 0) {
-			throw new Exception('The parameter $timestamp must be >= 0.');
+			throw new InvalidArgumentException('The parameter $timestamp must be >= 0.', 1333296945);
 		}
 
 		$this->setAsInteger('datepaid', $timestamp);
@@ -478,11 +478,10 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 		);
 
 		if (!in_array($gender, $allowedGenders)) {
-			throw new Exception(
-				'The parameter $gender must be one of the following: ' .
-				'tx_oelib_Model_FrontEndUser::GENDER_MALE, ' .
-				'tx_oelib_Model_FrontEndUser::GENDER_FEMALE,' .
-				'tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN'
+			throw new InvalidArgumentException(
+				'The parameter $gender must be one of the following: tx_oelib_Model_FrontEndUser::GENDER_MALE, ' .
+					'tx_oelib_Model_FrontEndUser::GENDER_FEMALE, tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN',
+				1333296957
 			);
 		}
 
@@ -781,7 +780,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model {
 	 */
 	public function setKids($kids) {
 		if ($kids < 0) {
-			throw new Exception('The parameter $kids must be >= 0.');
+			throw new InvalidArgumentException('The parameter $kids must be >= 0.', 1333296998);
 		}
 
 		$this->setAsString('kids', $kids);

@@ -81,7 +81,8 @@ class tx_seminars_Model_TimeSlotTest extends tx_phpunit_testcase {
 	 */
 	public function setEntryDateAsUnixTimeStampWithNegativeTimeStampThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $entryDate must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $entryDate must be >= 0.'
 		);
 
 		$this->fixture->setEntryDateAsUnixTimeStamp(-1);

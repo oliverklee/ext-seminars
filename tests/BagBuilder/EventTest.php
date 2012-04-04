@@ -839,7 +839,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 
 	public function testSetTimeFrameFailsWithEmptyKey() {
 		$this->setExpectedException(
-			'Exception',
+			'InvalidArgumentException',
 			'The time-frame key  is not valid.'
 		);
 		$this->fixture->setTimeFrame('');
@@ -847,7 +847,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 
 	public function testSetTimeFrameFailsWithInvalidKey() {
 		$this->setExpectedException(
-			'Exception',
+			'InvalidArgumentException',
 			'The time-frame key foo is not valid.'
 		);
 		$this->fixture->setTimeFrame('foo');
@@ -3123,7 +3123,8 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 
 	public function testLimitToOwnerWithNegativeFeUserUidThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $feUserUid must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $feUserUid must be >= 0.'
 		);
 
 		$this->fixture->limitToOwner(-1);
@@ -3288,7 +3289,8 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 
 	public function testLimitToEventManagerWithNegativeFeUserUidThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $feUserUid must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $feUserUid must be >= 0.'
 		);
 
 		$this->fixture->limitToEventManager(-1);
@@ -3431,7 +3433,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 
 	public function testLimitToEventsNextDayWithEventWithEmptyEndDateThrowsException() {
 		$this->setExpectedException(
-			'Exception',
+			'InvalidArgumentException',
 			'The event object given in the first parameter $event must ' .
 				'have an end date set.'
 		);
@@ -3515,7 +3517,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 
 	public function testLimitToOtherDatesForTopicWithSingleEventRecordThrowsException() {
 		$this->setExpectedException(
-			'Exception',
+			'InvalidArgumentException',
 			'The first parameter $event must be either a date or a topic record.'
 		);
 

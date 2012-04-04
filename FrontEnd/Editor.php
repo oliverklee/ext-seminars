@@ -158,9 +158,8 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 		}
 
 		if (empty($this->formConfiguration)) {
-			throw new Exception(
-				'Please define the FORMidable form configuration to use via ' .
-				'$this->setFormConfiguration().'
+			throw new BadMethodCallException(
+				'Please define the FORMidable form configuration to use via $this->setFormConfiguration().', 1333293139
 			);
 		}
 
