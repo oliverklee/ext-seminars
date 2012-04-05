@@ -54,6 +54,11 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	public $extKey = 'seminars';
 
 	/**
+	 * @var tx_seminars_Mapper_Event an event mapper used to retrieve event models
+	 */
+	protected $eventMapper = NULL;
+
+	/**
 	 * @var tx_seminars_configgetter a config getter that gets us the
 	 *                               configuration in plugin.tx_seminars
 	 */
@@ -331,6 +336,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 					'tx_seminars_FrontEnd_EventHeadline',
 					$this->conf, $this->cObj
 				);
+				$eventHeadline->injectEventMapper($this->eventMapper);
 				$result = $eventHeadline->render();
 				$this->setErrorMessage(
 					$eventHeadline->checkConfiguration(TRUE)
@@ -551,6 +557,10 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			$this->configGetter = tx_oelib_ObjectFactory::make(
 				'tx_seminars_configgetter'
 			);
+		}
+
+		if ($this->eventMapper === NULL) {
+			$this->eventMapper = tx_oelib_ObjectFactory::make('tx_seminars_Mapper_Event');
 		}
 	}
 

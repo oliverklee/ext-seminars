@@ -33,20 +33,37 @@
  */
 class tx_seminars_FrontEnd_EventHeadline extends tx_seminars_FrontEnd_AbstractView {
 	/**
+	 * @var tx_seminars_Mapper_Event
+	 */
+	protected $mapper = NULL;
+
+	/**
+	 * Injects an Event Mapper for this View.
+	 *
+	 * @param tx_seminars_Mapper_Event $mapper
+	 */
+	public function injectEventMapper($mapper) {
+		$this->mapper = $mapper;
+	}
+
+	/**
 	 * Creates the event headline, consisting of the event title and date.
 	 *
 	 * @return string HTML code of the event headline, will be empty if an invalid or no event ID was set in piVar 'uid'
 	 */
 	public function render() {
+		if ($this->mapper === NULL) {
+			throw new BadMethodCallException("The method injectEventMapper() needs to be called first.", 1333614794);
+		}
+
 		$eventId = intval($this->piVars['uid']);
 		if ($eventId <= 0) {
 			return '';
 		}
 
-		$mapper = tx_oelib_ObjectFactory::make('tx_seminars_Mapper_Event');
-		$event = $mapper->find($eventId);
+		$event = $this->mapper->find($eventId);
 
-		if (!$mapper->existsModel($eventId)) {
+		if (!$this->mapper->existsModel($eventId)) {
 			return '';
 		}
 
@@ -68,7 +85,7 @@ class tx_seminars_FrontEnd_EventHeadline extends tx_seminars_FrontEnd_AbstractVi
 	 * @return string the unique event title (or '' if there is an error)
 	 */
 	protected function getTitleAndDate(tx_seminars_Model_Event $event) {
-		$result = $event->getTitle();
+		$result = htmlspecialchars($event->getTitle());
 		if (!$event->hasBeginDate()) {
 			return $result;
 		}

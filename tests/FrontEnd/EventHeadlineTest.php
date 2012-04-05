@@ -43,6 +43,11 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 	private $testingFramework;
 
 	/**
+	 * @var tx_seminars_Mapper_Event
+	 */
+	private $mapper;
+
+	/**
 	 * @var integer event begin date
 	 */
 	private $eventDate = 0;
@@ -58,14 +63,14 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 
 		// just picked some random date (2001-01-01 00:00:00)
 		$this->eventDate = 978303600;
-		$this->eventId = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'pid' => 0,
-				'title' => 'Test event',
-				'begin_date' => $this->eventDate,
-			)
-		);
+
+		$this->mapper = new tx_seminars_Mapper_Event();
+		$event = $this->mapper->getLoadedTestingModel(array(
+			'pid' => 0,
+			'title' => 'Test event',
+			'begin_date' => $this->eventDate,
+		));
+		$this->eventId = $event->getUid();
 
 		$this->fixture = new tx_seminars_FrontEnd_EventHeadline(
 			array(
@@ -74,14 +79,16 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 			),
 			$GLOBALS['TSFE']->cObj
 		);
+		$this->fixture->injectEventMapper($this->mapper);
 	}
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		$this->fixture->__destruct();
+		$this->mapper->__destruct();
 		tx_seminars_registrationmanager::purgeInstance();
-		unset($this->fixture, $this->testingFramework);
+		unset($this->fixture, $this->mapper, $this->testingFramework);
 	}
 
 
@@ -91,12 +98,36 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 
 	/**
 	 * @test
+	 * @expectedException BadMethodCallException
+	 * @expectedExceptionMessage The method injectEventMapper() needs to be called first.
+	 * @expectedExceptionCode 1333614794
+	 */
+	public function renderWithoutCallingInjectEventMapperFirstThrowsBadMethodCallException() {
+		$this->fixture->injectEventMapper(NULL);
+		$this->fixture->render();
+	}
+
+	/**
+	 * @test
 	 */
 	public function renderWithUidOfExistingEventReturnsTitleOfSelectedEvent() {
 		$this->fixture->piVars['uid'] = $this->eventId;
 
 		$this->assertContains(
 			'Test event',
+			$this->fixture->render()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderWithUidOfExistingEventReturnsHtmlSpecialCharedTitleOfSelectedEvent() {
+		$this->mapper->find($this->eventId)->setTitle('<test>Test event</test>');
+		$this->fixture->piVars['uid'] = $this->eventId;
+
+		$this->assertContains(
+			htmlspecialchars('<test>Test event</test>'),
 			$this->fixture->render()
 		);
 	}
