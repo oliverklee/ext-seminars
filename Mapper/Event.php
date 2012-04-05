@@ -128,6 +128,34 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 			'begin_date BETWEEN ' . $minimum . ' AND ' . $maximum
 		);
 	}
+
+	/**
+	 * Returns the next upcoming event.
+	 *
+	 * @return tx_seminars_Model_Event the next upcoming event
+	 *
+	 * @throws tx_oelib_Exception_NotFound
+	 */
+	public function findNextUpcoming() {
+		$whereClause = 'cancelled!=' . tx_seminars_seminar::STATUS_CANCELED .
+			tx_oelib_db::enableFields('tx_seminars_seminars') .
+			' AND object_type <> ' . tx_seminars_Model_Event::TYPE_TOPIC .
+			' AND begin_date > ' . $GLOBALS['SIM_ACCESS_TIME'];
+
+		try {
+			$row = tx_oelib_db::selectSingle(
+				$this->columns,
+				$this->tableName,
+				$whereClause,
+				'',
+				'begin_date ASC'
+			);
+		} catch (tx_oelib_Exception_EmptyQueryResult $exception) {
+			throw new tx_oelib_Exception_NotFound();
+		}
+
+		return $this->getModel($row);
+	}
 }
 
 if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/Event.php']) {

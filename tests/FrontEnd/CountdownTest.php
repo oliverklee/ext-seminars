@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2008-2011 Niels Pardon (mail@niels-pardon.de)
+* (c) 2008-2012 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -22,11 +22,8 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-
 /**
- * Testcase for the tx_seminars_FrontEnd_Countdown class in the "seminars"
- * extension.
+ * Testcase for the tx_seminars_FrontEnd_Countdown class.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -39,26 +36,27 @@ class tx_seminars_FrontEnd_CountdownTest extends tx_phpunit_testcase {
 	 * @var tx_seminars_FrontEnd_Countdown
 	 */
 	private $fixture;
+
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
 	private $testingFramework;
 
 	/**
-	 * @var integer the UID of a seminar to which the fixture relates
+	 * @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject
 	 */
-	private $seminarUid;
+	private $mapper;
+
+	/**
+	 * @var tx_seminars_ViewHelper_Countdown|PHPUnit_Framework_MockObject_MockObject
+	 */
+	private $viewHelper;
 
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
-		$this->seminarUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'title' => 'Test event',
-			)
-		);
+		$this->mapper = $this->getMock('tx_seminars_Mapper_Event', array('findNextUpcoming'));
 
 		$this->fixture = new tx_seminars_FrontEnd_Countdown(
 			array(
@@ -67,15 +65,19 @@ class tx_seminars_FrontEnd_CountdownTest extends tx_phpunit_testcase {
 			),
 			$GLOBALS['TSFE']->cObj
 		);
-		$this->fixture->setTestMode();
 	}
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 		$this->fixture->__destruct();
+		$this->mapper->__destruct();
+
+		if ($this->viewHelper !== NULL) {
+			$this->viewHelper->__destruct();
+		}
 
 		tx_seminars_registrationmanager::purgeInstance();
-		unset($this->fixture, $this->testingFramework);
+		unset($this->fixture, $this->viewHelper, $this->mapper, $this->testingFramework);
 	}
 
 
@@ -83,7 +85,10 @@ class tx_seminars_FrontEnd_CountdownTest extends tx_phpunit_testcase {
 	// General tests concerning the fixture.
 	//////////////////////////////////////////
 
-	public function testFixtureIsAFrontEndCountdownObject() {
+	/**
+	 * @test
+	 */
+	public function fixtureIsAFrontEndCountdownObject() {
 		$this->assertTrue(
 			$this->fixture instanceof tx_seminars_FrontEnd_Countdown
 		);
@@ -94,43 +99,55 @@ class tx_seminars_FrontEnd_CountdownTest extends tx_phpunit_testcase {
 	// Tests for render()
 	////////////////////////////////
 
-	public function testRenderInitiallyReturnsNoEventsFoundMessage() {
+	/**
+	 * @test
+	 * @expectedException BadMethodCallException
+	 * @expectedExceptionMessage The method injectEventMapper() needs to be called first.
+	 * @expectedExceptionCode 1333617194
+	 */
+	public function renderWithoutCallingInjectEventMapperFirstThrowsBadMethodCallException() {
+		$this->fixture->render();
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderWithMapperFindNextUpcomingThrowingEmptyQueryResultExceptionReturnsNoEventsFoundMessage() {
+		$this->fixture->injectEventMapper($this->mapper);
+		$this->mapper->expects($this->once())
+			->method('findNextUpcoming')
+			->will($this->throwException(new tx_oelib_Exception_NotFound()));
+
 		$this->assertContains(
 			'There are no upcoming events. Please come back later.',
 			$this->fixture->render()
 		);
 	}
 
-	public function testRenderForPastEventReturnsNoEventsFoundMessage() {
-		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars',
-			$this->seminarUid,
-			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
-				'begin_date' => $GLOBALS['SIM_ACCESS_TIME'] - 1000,
-			)
-		);
+	/**
+	 * @test
+	 */
+	public function renderCallsRenderMethodOfCountdownViewHelperWithNextUpcomingEventsBeginDateAsUnixTimeStamp() {
+		$this->fixture->injectEventMapper($this->mapper);
+		$event = $this->mapper->getLoadedTestingModel(array(
+			'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+			'pid' => 0,
+			'title' => 'Test event',
+			'begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000,
+		));
 
-		$this->assertContains(
-			'There are no upcoming events. Please come back later.',
-			$this->fixture->render()
-		);
-	}
+		$this->mapper->expects($this->once())
+			->method('findNextUpcoming')
+			->will($this->returnValue($event));
 
-	public function testRenderForUpcomingEventReturnsCountdownMessage() {
-		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars',
-			$this->seminarUid,
-			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
-				'begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000,
-			)
-		);
+		$this->viewHelper = $this->getMock('tx_seminars_ViewHelper_Countdown', array('render'));
+		$this->viewHelper->expects($this->once())
+			->method('render')
+			->with($this->equalTo($event->getBeginDateAsUnixTimeStamp()));
 
-		$this->assertContains(
-			'left until the next event starts',
-			$this->fixture->render()
-		);
+		$this->fixture->injectCountDownViewHelper($this->viewHelper);
+
+		$this->fixture->render();
 	}
 }
 ?>

@@ -318,6 +318,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 					$this->conf,
 					$this->cObj
 				);
+				$countdown->injectEventMapper($this->eventMapper);
 				$result = $countdown->render();
 				$countdown->__destruct();
 				unset($countdown);

@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2008-2011 Niels Pardon (mail@niels-pardon.de)
+* (c) 2008-2012 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_FrontEnd_Countdown for the "seminars" extension.
- *
  * This class represents a countdown to the next upcoming event.
  *
  * @package TYPO3
@@ -35,152 +33,67 @@
  */
 class tx_seminars_FrontEnd_Countdown extends tx_seminars_FrontEnd_AbstractView {
 	/**
-	 * @var tx_seminars_seminar the seminar for which we want to show the
-	 *                          countdown
+	 * @var tx_seminars_Mapper_Event
 	 */
-	private $seminar = NULL;
+	protected $mapper = NULL;
 
 	/**
-	 * @var boolean TRUE if the current object is in test mode, FALSE otherwise
+	 * @var tx_seminars_ViewHelper_Countdown
 	 */
-	private $testMode = FALSE;
+	protected $viewHelper = NULL;
 
 	/**
-	 * The destructor.
+	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		if ($this->seminar) {
-			$this->seminar->__destruct();
-			unset($this->seminar);
-		}
-
 		parent::__destruct();
-
+		unset($this->mapper, $this->viewHelper);
 	}
 
 	/**
-	 * Creates a seminar in $this->seminar.
+	 * Injects an Event Mapper for this View.
 	 *
-	 * @param integer $seminarUid an event UID, must be >= 0
+	 * @param tx_seminars_Mapper_Event $mapper
 	 */
-	private function createSeminar($seminarUid) {
-		$this->seminar = tx_oelib_ObjectFactory::make(
-			'tx_seminars_seminar', $seminarUid
-		);
+	public function injectEventMapper(tx_seminars_Mapper_Event $mapper) {
+		$this->mapper = $mapper;
+	}
+
+	/**
+	 * Injects an Countdown View Helper.
+	 *
+	 * @param tx_seminars_ViewHelper_Countdown $viewHelper
+	 */
+	public function injectCountDownViewHelper(tx_seminars_ViewHelper_Countdown $viewHelper) {
+		$this->viewHelper = $viewHelper;
 	}
 
 	/**
 	 * Creates a countdown to the next upcoming event.
 	 *
-	 * @return string HTML code of the countdown or a message if no upcoming
-	 *                event found
+	 * @return string HTML code of the countdown or a message if no upcoming event has been found
 	 */
 	public function render() {
-		$now = $GLOBALS['SIM_ACCESS_TIME'];
-
-		$additionalWhere = 'tx_seminars_seminars.cancelled!=' .
-			tx_seminars_seminar::STATUS_CANCELED .
-			tx_oelib_db::enableFields('tx_seminars_seminars') .
-			' AND tx_seminars_seminars.object_type != ' .
-			tx_seminars_Model_Event::TYPE_TOPIC .
-			' AND tx_seminars_seminars.begin_date > ' . $now;
-
-		if ($this->testMode) {
-			$additionalWhere .= ' AND is_dummy_record=1';
+		if ($this->mapper === NULL) {
+			throw new BadMethodCallException('The method injectEventMapper() needs to be called first.', 1333617194);
+		}
+		if ($this->viewHelper === NULL) {
+			$this->injectCountDownViewHelper(tx_oelib_ObjectFactory::make('tx_seminars_ViewHelper_Countdown'));
 		}
 
-		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'uid', 'tx_seminars_seminars', $additionalWhere,
-			'', 'begin_date ASC', '1'
-		);
-		if (!$dbResult) {
-			throw new tx_oelib_Exception_Database(DATABASE_QUERY_ERROR, 1333293060);
-		}
-		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+		$this->setErrorMessage($this->checkConfiguration(TRUE));
 
-		if ($dbResultRow) {
-			$this->createSeminar($dbResultRow['uid']);
+		try {
+			$event = $this->mapper->findNextUpcoming();
 
-			// Lets warnings from the seminar bubble up to us.
-			$this->setErrorMessage(
-				$this->seminar->checkConfiguration(TRUE)
-			);
-
-			// Calculates the time left until the event starts.
-			$eventStartTime = $this->seminar->getBeginDateAsTimestamp();
-			$timeLeft = $eventStartTime - $now;
-
-			$message = $this->createCountdownMessage($timeLeft);
-		} else {
+			$message = $this->viewHelper->render($event->getBeginDateAsUnixTimestamp());
+		} catch (tx_oelib_Exception_NotFound $exception) {
 			$message = $this->translate('message_countdown_noEventFound');
 		}
 
 		$this->setMarker('count_down_message', $message);
-		$result = $this->getSubpart('COUNTDOWN');
 
-		$this->checkConfiguration();
-		$result .= $this->getWrappedConfigCheckMessage();
-
-		return $result;
-	}
-
-	/**
-	 * Returns a localized string representing an amount of seconds in words.
-	 * For example:
-	 * 150000 seconds -> "1 day"
-	 * 200000 seconds -> "2 days"
-	 * 50000 seconds -> "13 hours"
-	 * The function uses localized strings and also looks for proper usage of
-	 * singular/plural.
-	 *
-	 * @param integer $seconds the amount of seconds to rewrite into words
-	 *
-	 * @return string a localized string representing the time left until the
-	 *                event starts
-	 */
-	private function createCountdownMessage($seconds) {
-		if ($seconds > 82800) {
-			// more than 23 hours left, show the time in days
-			$countdownValue = round($seconds / tx_oelib_Time::SECONDS_PER_DAY);
-			if ($countdownValue > 1) {
-				$countdownText = $this->translate('countdown_days_plural');
-			} else {
-				$countdownText = $this->translate('countdown_days_singular');
-			}
-		} elseif ($seconds > 3540) {
-			// more than 59 minutes left, show the time in hours
-			$countdownValue = round($seconds / 3600);
-			if ($countdownValue > 1) {
-				$countdownText = $this->translate('countdown_hours_plural');
-			} else {
-				$countdownText = $this->translate('countdown_hours_singular');
-			}
-		} elseif ($seconds > 59) {
-			// more than 59 seconds left, show the time in minutes
-			$countdownValue = round($seconds / 60);
-			if ($countdownValue > 1) {
-				$countdownText = $this->translate('countdown_minutes_plural');
-			} else {
-				$countdownText = $this->translate('countdown_minutes_singular');
-			}
-		} else {
-			// less than 60 seconds left, show the time in seconds
-			$countdownValue = $seconds;
-			$countdownText = $this->translate('countdown_seconds_plural');
-		}
-
-		return sprintf(
-			$this->translate('message_countdown'),
-			$countdownValue,
-			$countdownText
-		);
-	}
-
-	/**
-	 * Enables the test mode for the current object.
-	 */
-	public function setTestMode() {
-		$this->testMode = TRUE;
+		return $this->getSubpart('COUNTDOWN');
 	}
 }
 

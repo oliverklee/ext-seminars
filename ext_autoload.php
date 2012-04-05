@@ -224,6 +224,7 @@ return array(
 	'tx_seminars_tests_fixtures_oldmodel_testing' => $extensionPath . 'tests/fixtures/OldModel/Testing.php',
 	'tx_seminars_tests_fixtures_service_testingsingleviewlinkbuilder' => $extensionPath . 'tests/fixtures/Service/TestingSingleViewLinkBuilder.php',
 	'tx_seminars_pi2_pi2test' => $extensionPath . 'tests/pi2/pi2Test.php',
+	'tx_seminars_viewhelper_countdown' => $extensionPath . 'ViewHelper/Countdown.php',
 	'tx_seminars_viewhelper_daterange' => $extensionPath . 'ViewHelper/DateRange.php',
 );
 ?>

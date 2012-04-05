@@ -876,5 +876,65 @@ class tx_seminars_Mapper_EventTest extends tx_phpunit_testcase {
 			$this->fixture->findAllByBeginDate(42, 91)->count()
 		);
 	}
+
+
+	//////////////////////////////////////
+	// Tests concerning findNextUpcoming
+	//////////////////////////////////////
+
+	/**
+	 * @test
+	 * @expectedException tx_oelib_Exception_NotFound
+	 */
+	public function findNextUpcomingWithNoEventsThrowsEmptyQueryResultException() {
+		$this->fixture->findNextUpcoming();
+	}
+
+	/**
+	 * @test
+	 * @expectedException tx_oelib_Exception_NotFound
+	 */
+	public function findNextUpcomingWithPastEventThrowsEmptyQueryResultException() {
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array('begin_date' => $GLOBALS['SIM_ACCESS_TIME'] - 1000)
+		);
+
+		$this->fixture->findNextUpcoming();
+	}
+
+	/**
+	 * @test
+	 */
+	public function findNextUpcomingWithUpcomingEventReturnsModelOfUpcomingEvent() {
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array('begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000)
+		);
+
+		$this->assertSame(
+			$uid,
+			$this->fixture->findNextUpcoming()->getUid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findNextUpcomingWithTwoUpcomingEventsReturnsOnlyModelOfNextUpcomingEvent() {
+		$this->testingFramework->createRecord(
+				'tx_seminars_seminars',
+				array('begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 2000)
+		);
+		$uid = $this->testingFramework->createRecord(
+				'tx_seminars_seminars',
+				array('begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000)
+		);
+
+		$this->assertSame(
+			$uid,
+			$this->fixture->findNextUpcoming()->getUid()
+		);
+	}
 }
 ?>
