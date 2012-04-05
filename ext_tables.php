@@ -42,7 +42,8 @@ $TCA['tx_seminars_test'] = array(
 			'endtime' => 'endtime'
 		),
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'Test.gif'
+		'iconfile' => $extIconRelPath . 'Test.gif',
+		'searchFields' => 'title'
 	)
 );
 
@@ -72,6 +73,7 @@ $TCA['tx_seminars_seminars'] = array(
 		'dividers2tabs' => TRUE,
 		'hideAtCopy' => TRUE,
 		'requestUpdate' => 'needs_registration',
+		'searchFields' => 'title,accreditation_number'
 	)
 );
 
@@ -88,7 +90,8 @@ $TCA['tx_seminars_speakers'] = array(
 			'disabled' => 'hidden',
 		),
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'Speaker.gif'
+		'iconfile' => $extIconRelPath . 'Speaker.gif',
+		'searchFields' => 'title'
 	)
 );
 
@@ -107,6 +110,7 @@ $TCA['tx_seminars_attendances'] = array(
 		'dynamicConfigFile' => $tcaPath,
 		'iconfile' => $extIconRelPath . 'Registration.gif',
 		'dividers2tabs' => TRUE,
+		'searchFields' => 'title'
 	)
 );
 
@@ -120,7 +124,8 @@ $TCA['tx_seminars_sites'] = array(
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'Place.gif'
+		'iconfile' => $extIconRelPath . 'Place.gif',
+		'searchFields' => 'title'
 	)
 );
 
@@ -134,7 +139,8 @@ $TCA['tx_seminars_organizers'] = array(
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'Organizer.gif'
+		'iconfile' => $extIconRelPath . 'Organizer.gif',
+		'searchFields' => 'title'
 	)
 );
 
@@ -148,7 +154,8 @@ $TCA['tx_seminars_payment_methods'] = array(
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'PaymentMethod.gif'
+		'iconfile' => $extIconRelPath . 'PaymentMethod.gif',
+		'searchFields' => 'title'
 	)
 );
 
@@ -162,7 +169,8 @@ $TCA['tx_seminars_event_types'] = array(
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'EventType.gif'
+		'iconfile' => $extIconRelPath . 'EventType.gif',
+		'searchFields' => 'title'
 	)
 );
 
@@ -176,7 +184,8 @@ $TCA['tx_seminars_checkboxes'] = array(
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'Checkbox.gif'
+		'iconfile' => $extIconRelPath . 'Checkbox.gif',
+		'searchFields' => 'title'
 	)
 );
 
@@ -190,7 +199,8 @@ $TCA['tx_seminars_lodgings'] = array(
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'Lodging.gif'
+		'iconfile' => $extIconRelPath . 'Lodging.gif',
+		'searchFields' => 'title'
 	)
 );
 
@@ -204,7 +214,8 @@ $TCA['tx_seminars_foods'] = array(
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'Food.gif'
+		'iconfile' => $extIconRelPath . 'Food.gif',
+		'searchFields' => 'title'
 	)
 );
 
@@ -217,7 +228,8 @@ $TCA['tx_seminars_timeslots'] = array(
 		'cruser_id' => 'cruser_id',
 		'delete' => 'deleted',
 		'iconfile' => $extIconRelPath.'TimeSlot.gif',
-		'dynamicConfigFile' => $tcaPath
+		'dynamicConfigFile' => $tcaPath,
+		'searchFields' => 'title'
 	)
 );
 
@@ -231,7 +243,8 @@ $TCA['tx_seminars_target_groups'] = array(
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'TargetGroup.gif'
+		'iconfile' => $extIconRelPath . 'TargetGroup.gif',
+		'searchFields' => 'title'
 	)
 );
 
@@ -245,7 +258,8 @@ $TCA['tx_seminars_categories'] = array(
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'Category.gif'
+		'iconfile' => $extIconRelPath . 'Category.gif',
+		'searchFields' => 'title'
 	)
 );
 
@@ -259,7 +273,8 @@ $TCA['tx_seminars_skills'] = array(
 		'default_sortby' => 'ORDER BY title',
 		'delete' => 'deleted',
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'Skill.gif'
+		'iconfile' => $extIconRelPath . 'Skill.gif',
+		'searchFields' => 'title'
 	)
 );
 
@@ -278,7 +293,8 @@ $TCA['tx_seminars_prices'] = array(
 			'fe_group' => 'fe_group'
 		),
 		'dynamicConfigFile' => $tcaPath,
-		'iconfile' => $extIconRelPath.'Price.gif'
+		'iconfile' => $extIconRelPath . 'Price.gif',
+		'searchFields' => 'title'
 	)
 );
 
