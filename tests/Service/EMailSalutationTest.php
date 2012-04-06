@@ -189,7 +189,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
-				->translate('email_hello_formal_2'),
+				->translate('email_hello_formal_99'),
 			$this->fixture->getSalutation($user)
 		);
 	}
@@ -201,7 +201,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
-				->translate('email_salutation_title_2') . ' ' .
+				->translate('email_salutation_title_99') . ' ' .
 				$user->getLastOrFullName(),
 			$this->fixture->getSalutation($user)
 		);
