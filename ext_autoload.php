@@ -226,5 +226,6 @@ return array(
 	'tx_seminars_pi2_pi2test' => $extensionPath . 'tests/pi2/pi2Test.php',
 	'tx_seminars_viewhelper_countdown' => $extensionPath . 'ViewHelper/Countdown.php',
 	'tx_seminars_viewhelper_daterange' => $extensionPath . 'ViewHelper/DateRange.php',
+	'tx_seminars_viewhelper_timerange' => $extensionPath . 'ViewHelper/TimeRange.php',
 );
 ?>
