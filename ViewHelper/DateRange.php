@@ -45,7 +45,7 @@ class tx_seminars_ViewHelper_DateRange {
 	 * The constructor.
 	 */
 	public function __construct() {
-		$this->configuration = tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars_seminars');
+		$this->configuration = tx_oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars');
 		$this->translator = tx_oelib_TranslatorRegistry::getInstance()->get('seminars');
 	}
 

@@ -52,7 +52,7 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 	private $translator;
 
 	/**
-	 * @var integer
+	 * @var integer some random date (2001-01-01 00:00:00)
 	 */
 	const BEGIN_DATE = 978303600;
 
@@ -75,7 +75,7 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 		$this->configuration->setAsString('dateFormatMD', self::DATE_FORMAT_MD);
 		$this->configuration->setAsString('dateFormatD', self::DATE_FORMAT_D);
 
-		tx_oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_seminars', $this->configuration);
+		tx_oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
 		$this->translator = tx_oelib_TranslatorRegistry::getInstance()->get('seminars');
 
