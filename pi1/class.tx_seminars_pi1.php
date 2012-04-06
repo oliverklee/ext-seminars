@@ -1072,8 +1072,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Sets the speaker markers for the type given in $speakerType without
 	 * checking whether the current event has any speakers of the given type.
 	 *
-	 * @throws Exception if the given speaker type is not allowed
-	 *
 	 * @param string the speaker type to set the markers for, must not be
 	 *               empty, must be one of the following: "speakers",
 	 *               "partners", "tutors" or "leaders"
@@ -1083,9 +1081,8 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				$speakerType,
 				array('speakers', 'partners', 'tutors', 'leaders')
 		)) {
-			throw new Exception(
-				'The speaker type given in the parameter $speakerType is not ' .
-					'an allowed type.'
+			throw new InvalidArgumentException(
+				'The speaker type given in the parameter $speakerType is not an allowed type.', 1333293083
 			);
 		}
 
@@ -3125,10 +3122,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				$speakerType,
 				array('speakers', 'partners', 'tutors', 'leaders')
 		)) {
-			throw new Exception(
-				'The given speaker type "' .  $speakerType . '" is not ' .
-					'an allowed type. Allowed types are "speakers", ' .
-					'"partners", "tutors" or "leaders"'
+			throw new InvalidArgumentException(
+				'The given speaker type "' .  $speakerType .
+					'" is not an allowed type. Allowed types are "speakers", "partners", "tutors" or "leaders".',
+				1333293103
 			);
 		}
 

@@ -81,7 +81,7 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 
 	public function testRenderWithoutSetSeminarThrowsException() {
 		$this->setExpectedException(
-			'Exception',
+			'BadMethodCallException',
 			'No event was set, please set an event before calling render'
 		);
 
@@ -182,9 +182,8 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 
 	public function testtLimitToMissingRegistrationsWithNoLoggedInFeUserThrowsException() {
 		$this->setExpectedException(
-			'Exception',
-			'No FE user is currently logged in. Please call ' .
-				'this function only when a FE user is logged in.'
+			'BadMethodCallException',
+			'No FE user is currently logged in. Please call this function only when a FE user is logged in.'
 		);
 
 		$this->fixture->limitToMissingRegistrations();

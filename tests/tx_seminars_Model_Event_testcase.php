@@ -250,7 +250,8 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 */
 	public function setRegistrationDeadlineAsUnixTimeStampWithNegativeRegistrationDeadlineThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $registrationDeadline must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $registrationDeadline must be >= 0.'
 		);
 
 		$this->fixture->setRegistrationDeadlineAsUnixTimeStamp(-1);
@@ -336,7 +337,8 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 */
 	public function setEarlyBirdDeadlineAsUnixTimeStampWithNegativeEarlyBirdDeadlineThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $earlyBirdDeadline must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $earlyBirdDeadline must be >= 0.'
 		);
 
 		$this->fixture->setEarlyBirdDeadlineAsUnixTimeStamp(-1);
@@ -422,7 +424,8 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 */
 	public function setUnregistrationDeadlineAsUnixTimeStampWithNegativeUnregistrationDeadlineThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $unregistrationDeadline must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $unregistrationDeadline must be >= 0.'
 		);
 
 		$this->fixture->setUnregistrationDeadlineAsUnixTimeStamp(-1);
@@ -507,7 +510,7 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setExpiryAsUnixTimeStampWithNegativeExpiryThrowsException() {
-		$this->setExpectedException('Exception', '');
+		$this->setExpectedException('InvalidArgumentException');
 
 		$this->fixture->setExpiryAsUnixTimeStamp(-1);
 	}
@@ -803,7 +806,8 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 */
 	public function setMinimumAttendeesWithNegativeMinimumAttendeesThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $minimumAttendees must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $minimumAttendees must be >= 0.'
 		);
 
 		$this->fixture->setMinimumAttendees(-1);
@@ -889,7 +893,8 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 */
 	public function setMaximumAttendeesWithNegativeMaximumAttendeesThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $maximumAttendees must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $maximumAttendees must be >= 0.'
 		);
 
 		$this->fixture->setMaximumAttendees(-1);
@@ -1059,9 +1064,8 @@ class tx_seminars_Model_Event_testcase extends tx_phpunit_testcase {
 	 */
 	public function setStatusWithInvalidStatusThrowsException() {
 		$this->setExpectedException(
-			'Exception',
-			'The parameter $status must be either STATUS_PLANNED, ' .
-				'STATUS_CANCELED or STATUS_CONFIRMED'
+			'InvalidArgumentException',
+			'The parameter $status must be either STATUS_PLANNED, STATUS_CANCELED or STATUS_CONFIRMED'
 		);
 
 		$this->fixture->setStatus(-1);

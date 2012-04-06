@@ -82,7 +82,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 	 */
 	public function findByPublicationHash($publicationHash) {
 		if ($publicationHash == '') {
-			throw new Exception('The given publication hash was empty.');
+			throw new InvalidArgumentException('The given publication hash was empty.', 1333292411);
 		}
 
 		try {

@@ -248,9 +248,7 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 	 */
 	private function collectPlaces() {
 		if ($this->seminarBag->isEmpty()) {
-			throw new Exception('The seminar bag must not be empty when ' .
-				'calling this function.'
-			);
+			throw new BadMethodCallException('The seminar bag must not be empty when calling this function.', 1333293276);
 		}
 		if ($this->places) {
 			return;
@@ -375,10 +373,10 @@ class tx_seminars_pi1_frontEndSelectorWidget extends tx_seminars_pi1_frontEndVie
 				$optionData = $this->getOrganizerData();
 				break;
 			default:
-				throw new Exception('The given search field .
-					"' . $searchField . '" was not an allowed value. ' .
-					'Allowed values are: "event_type", "language", "country", ' .
-					'"city", "place" or "organizer".'
+				throw new InvalidArgumentException(
+					'The given search field . "' . $searchField . '" was not an allowed value. ' .
+						'Allowed values are: "event_type", "language", "country", "city", "place" or "organizer".',
+					1333293298
 				);
 				break;
 		}

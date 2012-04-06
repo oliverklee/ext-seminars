@@ -49,7 +49,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	 */
 	public function setTitle($title) {
 		if ($title == '') {
-			throw new Exception('The parameter $title must not be empty.');
+			throw new InvalidArgumentException('The parameter $title must not be empty.', 1333296894);
 		}
 
 		$this->setAsString('title', $title);
@@ -98,7 +98,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model {
 	 */
 	public function setCity($city) {
 		if ($city == '') {
-			throw new Exception('The parameter $city must not be empty.');
+			throw new InvalidArgumentException('The parameter $city must not be empty.', 1333296904);
 		}
 
 		$this->setAsString('city', $city);

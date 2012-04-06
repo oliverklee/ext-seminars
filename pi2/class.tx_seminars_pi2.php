@@ -210,9 +210,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		} elseif (isset($GLOBALS['LANG'])) {
 			$instance = $GLOBALS['LANG']->csConvObj;
 		} else {
-			throw new Exception(
-				'There was neither a front end nor a back end detected.'
-			);
+			throw new RuntimeException('There was neither a front end nor a back end detected.', 1333292438);
 		}
 
 		return $instance;
@@ -231,9 +229,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		} elseif (is_object($GLOBALS['LANG'])) {
 			$this->language = $GLOBALS['LANG'];
 		} else {
-			throw new Exception(
-				'The language could not be loaded. Please check your installation.'
-			);
+			throw new RuntimeException('The language could not be loaded. Please check your installation.', 1333292453);
 		}
 
 		$this->language->includeLLFile(
@@ -340,9 +336,10 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 					$hasAccess = TRUE;
 					break;
 				default:
-					throw new Exception('You are trying to get a CSV list on a ' .
-						'non supported mode. Currently only BackEnd and ' .
-						'FrontEnd mode are allowed.'
+					throw new RuntimeException(
+						'You are trying to get a CSV list in an unsupported mode. Currently, only back end and front end mode ' .
+							'are allowed.',
+						1333292478
 					);
 			}
 
@@ -694,10 +691,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				$result = $this->translate('message_404');
 				break;
 			default:
-				throw new Exception(
-					'"' . $errorCode . '" is no legal error code.'
-				);
-				break;
+				throw new InvalidArgumentException('"' . $errorCode . '" is no legal error code.', 1333292523);
 		}
 
 		return $result;

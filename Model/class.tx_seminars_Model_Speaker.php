@@ -66,7 +66,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 */
 	public function setName($name) {
 		if ($name == '') {
-			throw new Exception('The parameter $name must not be empty.');
+			throw new InvalidArgumentException('The parameter $name must not be empty.', 1333297036);
 		}
 
 		$this->setAsString('title', $name);
@@ -392,7 +392,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 */
 	public function setCancelationPeriod($cancelationPeriod) {
 		if ($cancelationPeriod < 0) {
-			throw new Exception('The parameter $cancelationPeriod must be >= 0.');
+			throw new InvalidArgumentException('The parameter $cancelationPeriod must be >= 0.', 1333297044);
 		}
 
 		$this->setAsInteger('cancelation_period', $cancelationPeriod);

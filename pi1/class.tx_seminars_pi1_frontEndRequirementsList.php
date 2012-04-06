@@ -72,9 +72,8 @@ class tx_seminars_pi1_frontEndRequirementsList extends tx_seminars_pi1_frontEndV
 	 */
 	public function limitToMissingRegistrations() {
 		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
-			throw new Exception(
-				'No FE user is currently logged in. Please call ' .
-				'this function only when a FE user is logged in.'
+			throw new BadMethodCallException(
+				'No FE user is currently logged in. Please call this function only when a FE user is logged in.', 1333293236
 			);
 		}
 		$this->setMarker(
@@ -91,9 +90,7 @@ class tx_seminars_pi1_frontEndRequirementsList extends tx_seminars_pi1_frontEndV
 	 */
 	public function render() {
 		if (!$this->event) {
-			throw new Exception(
-				'No event was set, please set an event before calling render.'
-			);
+			throw new BadMethodCallException('No event was set, please set an event before calling render.', 1333293250);
 		}
 
 		$output = '';

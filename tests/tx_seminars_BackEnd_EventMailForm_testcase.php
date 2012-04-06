@@ -133,7 +133,10 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 	///////////////////////////////////////////////////
 
 	public function testRenderThrowsExceptionForInvalidEventUid() {
-		$this->setExpectedException('Exception', 'There is no event with this UID.');
+		$this->setExpectedException(
+			'tx_oelib_Exception_NotFound',
+			'There is no event with this UID.'
+		);
 
 		new tx_seminars_tests_fixtures_TestingEventMailForm(
 			$this->testingFramework->getAutoIncrement(SEMINARS_TABLE_SEMINARS)
@@ -720,7 +723,7 @@ class tx_seminars_BackEnd_EventMailForm_testcase extends tx_phpunit_testcase {
 
 	public function test_getInitialValueForFoo_ThrowsException() {
 		$this->setExpectedException(
-			'Exception',
+			'InvalidArgumentException',
 			'There is no initial value for the field "foo" defined.'
 		);
 

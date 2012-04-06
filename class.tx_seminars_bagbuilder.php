@@ -86,9 +86,7 @@ abstract class tx_seminars_bagbuilder {
 	 */
 	public function __construct() {
 		if ($this->tableName == '') {
-			throw new Exception(
-				'The attribute $this->tableName must not be empty.'
-			);
+			throw new RuntimeException('The attribute $this->tableName must not be empty.', 1333292618);
 		}
 	}
 
@@ -188,9 +186,7 @@ abstract class tx_seminars_bagbuilder {
 	 */
 	public function addAdditionalTableName($additionalTableName) {
 		if ($additionalTableName == '') {
-			throw new Exception(
-				'The parameter $additionalTableName must not be empty.'
-			);
+			throw new InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292599);
 		}
 
 		$this->additionalTableNames[$additionalTableName] = $additionalTableName;
@@ -205,15 +201,12 @@ abstract class tx_seminars_bagbuilder {
 	 */
 	public function removeAdditionalTableName($additionalTableName) {
 		if ($additionalTableName == '') {
-			throw new Exception(
-				'The parameter $additionalTableName must not be empty.'
-			);
+			throw new InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292576);
 		}
 
 		if (!isset($this->additionalTableNames[$additionalTableName])) {
-			throw new Exception(
-				'The given additional table name does not exist in the list ' .
-					'of additional table names.'
+			throw new InvalidArgumentException(
+				'The given additional table name does not exist in the list of additional table names.', 1333292582
 			);
 		}
 

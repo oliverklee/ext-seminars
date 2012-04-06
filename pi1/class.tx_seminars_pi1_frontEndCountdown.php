@@ -101,7 +101,7 @@ class tx_seminars_pi1_frontEndCountdown extends tx_seminars_pi1_frontEndView {
 			'', 'begin_date ASC', '1'
 		);
 		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
+			throw new tx_oelib_Exception_Database(DATABASE_QUERY_ERROR, 1333293060);
 		}
 		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 

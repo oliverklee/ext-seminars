@@ -65,9 +65,8 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 		if (($whatToDisplay != 'list_registrations')
 			&& ($whatToDisplay != 'list_vip_registrations')
 		) {
-			throw new Exception(
-				'The value "' . $whatToDisplay . '" of the first parameter ' .
-					'$whatToDisplay is not valid.'
+			throw new InvalidArgumentException(
+				'The value "' . $whatToDisplay . '" of the first parameter $whatToDisplay is not valid.', 1333293210
 			);
 		}
 		$this->whatToDisplay = $whatToDisplay;

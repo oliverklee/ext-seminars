@@ -54,7 +54,7 @@ class tx_seminars_OrganizerBagBuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToEvent($eventUid) {
 		if ($eventUid <= 0) {
-			throw new Exception('The parameter $eventUid must be > 0.');
+			throw new InvalidArgumentException('The parameter $eventUid must be > 0.', 1333292898);
 		}
 
 		$this->whereClauseParts['event'] = 'EXISTS (' .

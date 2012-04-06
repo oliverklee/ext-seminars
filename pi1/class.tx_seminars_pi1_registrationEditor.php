@@ -162,9 +162,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 	 */
 	private function getSeminar() {
 		if (!is_object($this->seminar)) {
-			throw new Exception(
-				'Please set a proper seminar object via $this->setSeminar().'
-			);
+			throw new BadMethodCallException('Please set a proper seminar object via $this->setSeminar().', 1333293187);
 		}
 
 		return $this->seminar;

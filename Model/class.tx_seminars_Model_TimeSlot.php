@@ -51,7 +51,7 @@ class tx_seminars_Model_TimeSlot extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setEntryDateAsUnixTimeStamp($entryDate) {
 		if ($entryDate < 0) {
-			throw new Exception('The parameter $entryDate must be >= 0.');
+			throw new InvalidArgumentException('The parameter $entryDate must be >= 0.', 1333297074);
 		}
 
 		$this->setAsInteger('entry_date', $entryDate);

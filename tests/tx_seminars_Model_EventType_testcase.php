@@ -53,7 +53,8 @@ class tx_seminars_Model_EventType_testcase extends tx_phpunit_testcase {
 	 */
 	public function setTitleWithEmptyTitleThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $title must not be empty.'
+			'InvalidArgumentException',
+			'The parameter $title must not be empty.'
 		);
 
 		$this->fixture->setTitle('');

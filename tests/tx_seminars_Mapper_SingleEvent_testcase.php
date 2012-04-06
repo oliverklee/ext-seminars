@@ -67,7 +67,8 @@ class tx_seminars_Mapper_SingleEvent_testcase extends tx_phpunit_testcase {
 	 */
 	public function getTopicForSingleRecordThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'This function may only be called for date records.'
+			'BadMethodCallException',
+			'This function may only be called for date records.'
 		);
 
 		$this->fixture->getLoadedTestingModel(

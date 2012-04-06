@@ -115,15 +115,14 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 				tx_oelib_db::enableFields(SEMINARS_TABLE_SITES)
 		);
 		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
+			throw new tx_oelib_Exception_Database(DATABASE_QUERY_ERROR, 1333291894);
 		}
 
 		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 		if (!$dbResultRow) {
-			throw new Exception(
-				'The related place with the UID ' . $this->getPlace() .
-					' could not be found in the DB.'
+			throw new tx_oelib_Exception_NotFound(
+				'The related place with the UID ' . $this->getPlace() . ' could not be found in the DB.', 1333291925
 			);
 		}
 

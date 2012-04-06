@@ -667,7 +667,8 @@ class tx_seminars_Mapper_Event_testcase extends tx_phpunit_testcase {
 
 	public function test_findByPublicationHashForEmptyPublicationHashGiven_ThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The given publication hash was empty.'
+			'InvalidArgumentException',
+			'The given publication hash was empty.'
 		);
 
 		$this->fixture->findByPublicationHash('');

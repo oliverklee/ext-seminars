@@ -53,7 +53,8 @@ class tx_seminars_Model_AbstractTimeSpan_testcase extends tx_phpunit_testcase {
 	 */
 	public function setTitleWithEmptyTitleThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $title must not be empty.'
+			'InvalidArgumentException',
+			'The parameter $title must not be empty.'
 		);
 
 		$this->fixture->setTitle('');
@@ -117,7 +118,8 @@ class tx_seminars_Model_AbstractTimeSpan_testcase extends tx_phpunit_testcase {
 	 */
 	public function setBeginDateAsUnixTimeStampWithNegativeTimeStampThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $beginDate must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $beginDate must be >= 0.'
 		);
 
 		$this->fixture->setBeginDateAsUnixTimeStamp(-1);
@@ -203,7 +205,8 @@ class tx_seminars_Model_AbstractTimeSpan_testcase extends tx_phpunit_testcase {
 	 */
 	public function setEndDateAsUnixTimeStampWithNegativeTimeStampThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $endDate must be >= 0.'
+			'InvalidArgumentException',
+			'The parameter $endDate must be >= 0.'
 		);
 
 		$this->fixture->setEndDateAsUnixTimeStamp(-1);

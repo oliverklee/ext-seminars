@@ -143,7 +143,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToZeroEventUidFails() {
 		$this->setExpectedException(
-			'Exception',
+			'InvalidArgumentException',
 			'$eventUids must be a comma-separated list of positive integers.'
 		);
 		$this->fixture->limitToEvents('0');
@@ -151,7 +151,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToNegativeEventUidFails() {
 		$this->setExpectedException(
-			'Exception',
+			'InvalidArgumentException',
 			'$eventUids must be a comma-separated list of positive integers.'
 		);
 		$this->fixture->limitToEvents('-2');
@@ -159,7 +159,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToInvalidEventUidAtTheStartFails() {
 		$this->setExpectedException(
-			'Exception',
+			'InvalidArgumentException',
 			'$eventUids must be a comma-separated list of positive integers.'
 		);
 		$this->fixture->limitToEvents('0,1');
@@ -167,7 +167,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToInvalidEventUidAtTheEndFails() {
 		$this->setExpectedException(
-			'Exception',
+			'InvalidArgumentException',
 			'$eventUids must be a comma-separated list of positive integers.'
 		);
 		$this->fixture->limitToEvents('1,0');
@@ -175,7 +175,7 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testLimitToInvalidEventUidInTheMiddleFails() {
 		$this->setExpectedException(
-			'Exception',
+			'InvalidArgumentException',
 			'$eventUids must be a comma-separated list of positive integers.'
 		);
 		$this->fixture->limitToEvents('1,0,2');
@@ -368,10 +368,9 @@ class tx_seminars_categorybagbuilder_testcase extends tx_phpunit_testcase {
 
 	public function testSortByRelationOrderThrowsExceptionIfLimitToEventsHasNotBeenCalledBefore() {
 		$this->setExpectedException(
-			'Exception',
-			'The event UIDs were empty. This means limitToEvents has not ' .
-				'been called. LimitToEvents has to be called before calling ' .
-				'this function.'
+			'BadMethodCallException',
+			'The event UIDs were empty. This means limitToEvents has not been called. LimitToEvents has to be called before ' .
+				'calling this function.'
 		);
 
 		$this->fixture->sortByRelationOrder();

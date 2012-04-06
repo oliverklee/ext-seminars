@@ -57,7 +57,8 @@ class tx_seminars_Model_Place_testcase extends tx_phpunit_testcase {
 	 */
 	public function setTitleWithEmptyTitleThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $title must not be empty.'
+			'InvalidArgumentException',
+			'The parameter $title must not be empty.'
 		);
 
 		$this->fixture->setTitle('');
@@ -160,7 +161,8 @@ class tx_seminars_Model_Place_testcase extends tx_phpunit_testcase {
 	 */
 	public function setCityWithEmptyCityThrowsException() {
 		$this->setExpectedException(
-			'Exception', 'The parameter $city must not be empty.'
+			'InvalidArgumentException',
+			'The parameter $city must not be empty.'
 		);
 
 		$this->fixture->setCity('');

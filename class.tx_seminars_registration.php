@@ -268,7 +268,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 */
 	public function setSeats($seats) {
 		if ($seats < 0) {
-			throw new Exception('The parameter $seats must be >= 0.');
+			throw new InvalidArgumentException('The parameter $seats must be >= 0.', 1333291732);
 		}
 
 		$this->setRecordPropertyInteger('seats', $seats);
@@ -315,7 +315,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 			'uid=' . $uid . tx_oelib_db::enableFields('fe_users')
 		);
 		if (!$dbResult) {
-			throw new Exception(DATABASE_QUERY_ERROR);
+			throw new tx_oelib_Exception_Database(DATABASE_QUERY_ERROR, 1333291752);
 		}
 		$userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 		if (!$userData) {
@@ -334,7 +334,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 */
 	protected function setUserData(array $userData) {
 		if (empty($userData)) {
-			throw new Exception('$userData must not be empty.');
+			throw new InvalidArgumentException('$userData must not be empty.', 1333291766);
 		}
 
 		$this->userData = $userData;
@@ -1167,7 +1167,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 */
 	public function setNumberOfKids($numberOfKids) {
 		if ($numberOfKids < 0) {
-			throw new Exception('The parameter $numberOfKids must be >= 0.');
+			throw new InvalidArgumentException('The parameter $numberOfKids must be >= 0.', 1333291776);
 		}
 
 		$this->setRecordPropertyInteger('kids', $numberOfKids);
@@ -1199,7 +1199,7 @@ class tx_seminars_registration extends tx_seminars_objectfromdb {
 	 */
 	public function setMethodOfPaymentUid($uid) {
 		if ($uid < 0) {
-			throw new Exception('The parameter $uid must be >= 0.');
+			throw new InvalidArgumentException('The parameter $uid must be >= 0.', 1333291786);
 		}
 
 		$this->setRecordPropertyInteger('method_of_payment', $uid);

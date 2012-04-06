@@ -124,10 +124,10 @@ class tx_seminars_pi1_frontEndCategoryList extends tx_seminars_pi1_frontEndView 
 		$categoryUid, $title
 	) {
 		if ($categoryUid <= 0) {
-			throw new Exception('$categoryUid must be > 0.');
+			throw new InvalidArgumentException('$categoryUid must be > 0.', 1333293037);
 		}
 		if ($title == '') {
-			throw new Exception('$title must not be empty.');
+			throw new InvalidArgumentException('$title must not be empty.', 1333293044);
 		}
 
 		return $this->cObj->getTypoLink(

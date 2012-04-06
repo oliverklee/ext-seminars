@@ -116,10 +116,11 @@ class ext_update {
 				$whereClause = 'queue_size > 1';
 				break;
 			default:
-				throw new Exception('needsToUpdateEventField was called with ' .
-				'"' . $fieldToUpdate . '" but allowed values are only ' .
-					'\'needsRegistration\' and \'queueSize\'.');
-				break;
+				throw new InvalidArgumentException(
+					'needsToUpdateEventField was called with "' . $fieldToUpdate .
+						'", but allowed values are only '\'needsRegistration\' and \'queueSize\'.',
+					1333291685
+				);
 		}
 
 		$row = tx_oelib_db::selectSingle(

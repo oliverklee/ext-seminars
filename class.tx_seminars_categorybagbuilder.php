@@ -75,9 +75,7 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 		if (!preg_match('/^(\d+,)*\d+$/', $eventUids)
 			|| preg_match('/(^|,)0+(,|$)/', $eventUids)
 		) {
-			throw new Exception(
-				'$eventUids must be a comma-separated list of positive integers.'
-			);
+			throw new InvalidArgumentException('$eventUids must be a comma-separated list of positive integers.', 1333292640);
 		}
 
 		$this->whereClauseParts['event'] = 'EXISTS (' .
@@ -99,10 +97,10 @@ class tx_seminars_categorybagbuilder extends tx_seminars_bagbuilder {
 	 */
 	public function sortByRelationOrder() {
 		if ($this->eventUids == '') {
-			throw new Exception(
-				'The event UIDs were empty. This means limitToEvents has not ' .
-				'been called. LimitToEvents has to be called before calling ' .
-				'this function.'
+			throw new BadMethodCallException(
+				'The event UIDs were empty. This means limitToEvents has not been called. LimitToEvents has to be called ' .
+					'before calling this function.',
+				1333292662
 			);
 		}
 

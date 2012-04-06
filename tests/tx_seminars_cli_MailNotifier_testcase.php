@@ -213,7 +213,7 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 	public function testSetConfigurationPageThrowsExceptionIfNoPidIsProvided() {
 		$this->setExpectedException(
-			Exception,
+			'InvalidArgumentException',
 			'Please provide the UID for the page with the configuration ' .
 				'for the CLI module.'
 		);
@@ -225,10 +225,9 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 
 	public function testSetConfigurationPageThrowsExceptionIfZeroIsProvidedAsPid() {
 		$this->setExpectedException(
-			Exception,
-			'The provided UID for the page with the configuration was 0, ' .
-				'which was not found to be a UID of an existing page. Please ' .
-				'provide the UID of an existing page.'
+			'InvalidArgumentException',
+			'The provided UID for the page with the configuration was 0, which was not found to be a UID of an existing page. ' .
+				'Please provide the UID of an existing page.'
 		);
 
 		$_SERVER['argv'][1] = 0;
@@ -239,10 +238,9 @@ class tx_seminars_cli_MailNotifier_testcase extends tx_phpunit_testcase {
 	public function testSetConfigurationPageThrowsExceptionIfANonExistingPidIsProvided() {
 		$invalidPid = $this->testingFramework->getAutoIncrement('pages');
 		$this->setExpectedException(
-			Exception,
-			'The provided UID for the page with the configuration was ' .
-				$invalidPid.', which was not found to be a UID of an existing ' .
-				'page. Please provide the UID of an existing page.'
+			'InvalidArgumentException',
+			'The provided UID for the page with the configuration was ' . $invalidPid.
+				', which was not found to be a UID of an existing page. Please provide the UID of an existing page.'
 		);
 
 		$_SERVER['argv'][1] = $invalidPid;

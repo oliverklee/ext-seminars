@@ -92,9 +92,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function getTopic() {
 		if (!$this->isEventDate()) {
-			throw new Exception(
-				'This function may only be called for date records.'
-			);
+			throw new BadMethodCallException('This function may only be called for date records.', 1333296324);
 		}
 
 		return $this->getAsModel('topic');
@@ -287,7 +285,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setCreditPoints($creditPoints) {
 		if ($creditPoints < 0) {
-			throw new Exception('The parameter $creditPoints must be >= 0.');
+			throw new InvalidArgumentException('The parameter $creditPoints must be >= 0.', 1333296336);
 		}
 
 		if ($this->isEventDate()) {
@@ -337,9 +335,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setRegistrationDeadlineAsUnixTimeStamp($registrationDeadline) {
 		if ($registrationDeadline < 0) {
-			throw new Exception(
-				'The parameter $registrationDeadline must be >= 0.'
-			);
+			throw new InvalidArgumentException('The parameter $registrationDeadline must be >= 0.', 1333296347);
 		}
 
 		$this->setAsInteger('deadline_registration', $registrationDeadline);
@@ -373,7 +369,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setEarlyBirdDeadlineAsUnixTimeStamp($earlyBirdDeadline) {
 		if ($earlyBirdDeadline < 0) {
-			throw new Exception('The parameter $earlyBirdDeadline must be >= 0.');
+			throw new InvalidArgumentException('The parameter $earlyBirdDeadline must be >= 0.', 1333296359);
 		}
 
 		$this->setAsInteger('deadline_early_bird', $earlyBirdDeadline);
@@ -408,9 +404,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setUnregistrationDeadlineAsUnixTimeStamp($unregistrationDeadline) {
 		if ($unregistrationDeadline < 0) {
-			throw new Exception(
-				'The parameter $unregistrationDeadline must be >= 0.'
-			);
+			throw new InvalidArgumentException('The parameter $unregistrationDeadline must be >= 0.', 1333296369);
 		}
 
 		$this->setAsInteger('deadline_unregistration', $unregistrationDeadline);
@@ -444,7 +438,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setExpiryAsUnixTimeStamp($expiry) {
 		if ($expiry < 0) {
-			throw new Exception('The parameter $expiry must be >= 0.');
+			throw new InvalidArgumentException('The parameter $expiry must be >= 0.', 1333296380);
 		}
 
 		$this->setAsInteger('expiry', $expiry);
@@ -600,7 +594,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setRegularPrice($price) {
 		if ($price < 0.00) {
-			throw new Exception('The parameter $price must be >= 0.00.');
+			throw new InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296688);
 		}
 
 		if ($this->isEventDate()) {
@@ -640,7 +634,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setRegularEarlyBirdPrice($price) {
 		if ($price < 0.00) {
-			throw new Exception('The parameter $price must be >= 0.00.');
+			throw new InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296677);
 		}
 
 		if ($this->isEventDate()) {
@@ -681,7 +675,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setRegularBoardPrice($price) {
 		if ($price < 0.00) {
-			throw new Exception('The parameter $price must be >= 0.00.');
+			throw new InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296604);
 		}
 
 		if ($this->isEventDate()) {
@@ -722,7 +716,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setSpecialPrice($price) {
 		if ($price < 0.00) {
-			throw new Exception('The parameter $price must be >= 0.00.');
+			throw new InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296391);
 		}
 
 		if ($this->isEventDate()) {
@@ -762,7 +756,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setSpecialEarlyBirdPrice($price) {
 		if ($price < 0.00) {
-			throw new Exception('The parameter $price must be >= 0.00.');
+			throw new InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296479);
 		}
 
 		if ($this->isEventDate()) {
@@ -803,7 +797,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setSpecialBoardPrice($price) {
 		if ($price < 0.00) {
-			throw new Exception('The parameter $price must be >= 0.00.');
+			throw new InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296667);
 		}
 
 		if ($this->isEventDate()) {
@@ -952,7 +946,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setMinimumAttendees($minimumAttendees) {
 		if ($minimumAttendees < 0) {
-			throw new Exception('The parameter $minimumAttendees must be >= 0.');
+			throw new InvalidArgumentException('The parameter $minimumAttendees must be >= 0.', 1333296697);
 		}
 
 		$this->setAsInteger('attendees_min', $minimumAttendees);
@@ -986,7 +980,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function setMaximumAttendees($maximumAttendees) {
 		if ($maximumAttendees < 0) {
-			throw new Exception('The parameter $maximumAttendees must be >= 0.');
+			throw new InvalidArgumentException('The parameter $maximumAttendees must be >= 0.', 1333296708);
 		}
 
 		$this->setAsInteger('attendees_max', $maximumAttendees);
@@ -1051,17 +1045,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                STATUS_CONFIRMED
 	 */
 	public function setStatus($status) {
-		if (!in_array(
-			$status,
-			array(
-				self::STATUS_PLANNED,
-				self::STATUS_CANCELED,
-				self::STATUS_CONFIRMED,
-			)
-		)) {
-			throw new Exception(
-				'The parameter $status must be either STATUS_PLANNED, ' .
-					'STATUS_CANCELED or STATUS_CONFIRMED'
+		if (!in_array($status, array(self::STATUS_PLANNED, self::STATUS_CANCELED, self::STATUS_CONFIRMED))) {
+			throw new InvalidArgumentException(
+				'The parameter $status must be either STATUS_PLANNED, STATUS_CANCELED or STATUS_CONFIRMED', 1333296722
 			);
 		}
 

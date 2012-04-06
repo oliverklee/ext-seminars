@@ -49,7 +49,7 @@ class tx_seminars_Model_EventType extends tx_oelib_Model {
 	 */
 	public function setTitle($title) {
 		if ($title == '') {
-			throw new Exception('The parameter $title must not be empty.');
+			throw new InvalidArgumentException('The parameter $title must not be empty.', 1333296812);
 		}
 
 		$this->setAsString('title', $title);

@@ -57,7 +57,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToEvent($eventUid) {
 		if ($eventUid <= 0) {
-			throw new Exception('The parameter $eventUid must be > 0.');
+			throw new InvalidArgumentException('The parameter $eventUid must be > 0.', 1333292912);
 		}
 
 		$this->whereClauseParts['event'] = SEMINARS_TABLE_ATTENDANCES .
@@ -120,7 +120,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToSeatsAtMost($seats = 0) {
 		if ($seats < 0) {
-			throw new Exception('The parameter $seats must be >= 0.');
+			throw new InvalidArgumentException('The parameter $seats must be >= 0.', 1333292923);
 		}
 
 		if ($seats == 0) {
@@ -141,7 +141,7 @@ class tx_seminars_registrationBagBuilder extends tx_seminars_bagbuilder {
 	 */
 	public function limitToAttendee($frontEndUserUid) {
 		if ($frontEndUserUid < 0) {
-			throw new Exception('The parameter $frontEndUserUid must be >= 0.');
+			throw new InvalidArgumentException('The parameter $frontEndUserUid must be >= 0.', 1333740128);
 		}
 
 		if ($frontEndUserUid == 0) {

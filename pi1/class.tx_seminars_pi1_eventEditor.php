@@ -1171,7 +1171,7 @@ class tx_seminars_pi1_eventEditor extends tx_seminars_pi1_frontEndEditor {
 	 */
 	private function isFieldRequired(array $field) {
 		if ($field['elementName'] == '') {
-			throw new Exception('The given field name was empty.');
+			throw new InvalidArgumentException('The given field name was empty.', 1333293167);
 		}
 
 		return in_array($field['elementName'], $this->requiredFormFields);
