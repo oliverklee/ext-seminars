@@ -32,7 +32,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Interface_MailRole {
+class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Interface_MailRole, tx_seminars_Interface_Titled {
 	/**
 	 * Returns our name.
 	 *
