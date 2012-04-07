@@ -147,14 +147,14 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingAccreditationNumber() {
+	public function getAsArrayReturnsArrayContainingHtmlspecialcharedAccreditationNumber() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(array('accreditation_number' => '42'));
+			->getLoadedTestingModel(array('accreditation_number' => '42 & 1'));
 
 		$result = $this->fixture->getAsArray($event);
 
-		$this->assertEquals(
-			'42',
+		$this->assertSame(
+			'42 &amp; 1',
 			$result['accreditation_number']
 		);
 	}
@@ -162,14 +162,14 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingTitle() {
+	public function getAsArrayReturnsArrayContainingHtmlspecialcharedTitle() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(array('title' => 'testing event'));
+			->getLoadedTestingModel(array('title' => 'testing & event'));
 
 		$result = $this->fixture->getAsArray($event);
 
-		$this->assertEquals(
-			'testing event',
+		$this->assertSame(
+			'testing &amp; event',
 			$result['title']
 		);
 	}
@@ -177,12 +177,12 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingDateTitleForDateRecord() {
+	public function getAsArrayReturnsArrayContainingHtmlspecialcharedDateTitleForDateRecord() {
 		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(
 				array(
 					'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
-					'title' => 'topic title',
+					'title' => 'topic & title',
 				)
 			);
 		$date = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
@@ -190,14 +190,14 @@ class tx_seminars_BackEndExtJs_Ajax_EventsListTest extends tx_phpunit_testcase {
 				array(
 					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topic->getUid(),
-					'title' => 'date title',
+					'title' => 'date & title',
 				)
 			);
 
 		$result = $this->fixture->getAsArray($date);
 
 		$this->assertSame(
-			'date title',
+			'date &amp; title',
 			$result['title']
 		);
 	}

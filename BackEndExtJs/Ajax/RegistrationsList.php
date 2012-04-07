@@ -56,14 +56,14 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsList extends tx_seminars_BackEn
 		$result = array();
 
 		try {
-			$result['name'] = $registration->getFrontEndUser()->getName();
+			$result['name'] = htmlspecialchars($registration->getFrontEndUser()->getName());
 		} catch (Exception $exception) {
 			$result['name'] = '';
 		}
 
 		try {
-			$result['event_accreditation_number'] = $registration->getEvent()->getAccreditationNumber();
-			$result['event_title'] = $registration->getEvent()->getTitle();
+			$result['event_accreditation_number'] = htmlspecialchars($registration->getEvent()->getAccreditationNumber());
+			$result['event_title'] = htmlspecialchars($registration->getEvent()->getTitle());
 			$result['event_begin_date'] = date('r', $registration->getEvent()->getBeginDateAsUnixTimeStamp());
 			$result['event_end_date'] = date('r', $registration->getEvent()->getEndDateAsUnixTimeStamp());
 		} catch (Exception $exception) {

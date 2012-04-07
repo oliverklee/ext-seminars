@@ -119,9 +119,9 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsListTest extends tx_phpunit_tes
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingFrontEndUserName() {
+	public function getAsArrayReturnsArrayContainingHtmlspecialcharedFrontEndUserName() {
 		$frontEndUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
-			->getLoadedTestingModel(array('name' => 'John Doe'));
+			->getLoadedTestingModel(array('name' => 'John & Doe'));
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(array());
 		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
@@ -131,8 +131,8 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsListTest extends tx_phpunit_tes
 
 		$result = $this->fixture->getAsArray($registration);
 
-		$this->assertEquals(
-			'John Doe',
+		$this->assertSame(
+			'John &amp; Doe',
 			$result['name']
 		);
 	}
@@ -140,12 +140,12 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsListTest extends tx_phpunit_tes
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingEventAccreditationNumber() {
+	public function getAsArrayReturnsArrayContainingHtmlspecialcharedEventAccreditationNumber() {
 		$frontEndUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
 			->getLoadedTestingModel(array());
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(array(
-				'accreditation_number' => '42',
+				'accreditation_number' => '42 & 3',
 			));
 		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
 			->getLoadedTestingModel(array(
@@ -154,8 +154,8 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsListTest extends tx_phpunit_tes
 
 		$result = $this->fixture->getAsArray($registration);
 
-		$this->assertEquals(
-			'42',
+		$this->assertSame(
+			'42 &amp; 3',
 			$result['event_accreditation_number']
 		);
 	}
@@ -163,12 +163,12 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsListTest extends tx_phpunit_tes
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingEventTitle() {
+	public function getAsArrayReturnsArrayContainingHtmlspecialcharedEventTitle() {
 		$frontEndUser = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
 			->getLoadedTestingModel(array());
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(array(
-				'title' => 'testing event',
+				'title' => 'testing & event',
 			));
 		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
 			->getLoadedTestingModel(array(
@@ -177,8 +177,8 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsListTest extends tx_phpunit_tes
 
 		$result = $this->fixture->getAsArray($registration);
 
-		$this->assertEquals(
-			'testing event',
+		$this->assertSame(
+			'testing &amp; event',
 			$result['event_title']
 		);
 	}

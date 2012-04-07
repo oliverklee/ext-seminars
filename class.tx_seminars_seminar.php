@@ -326,11 +326,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * If the seminar has no date, just the title is returned.
 	 *
-	 * @param string $dash the character or HTML entity used to separate start date and end date
+	 * Note: This function does not htmlspecialchar its return value.
+	 *
+	 * @param string $dash the character used to separate start date and end date
 	 *
 	 * @return string the unique seminar title (or '' if there is an error)
 	 */
-	public function getTitleAndDate($dash = '&#8211;') {
+	public function getTitleAndDate($dash = '–') {
 		$date = $this->hasDate() ? ', '.$this->getDate($dash) : '';
 
 		return $this->getTitle().$date;
@@ -399,7 +401,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = '';
 
 		foreach ($this->getPlacesAsArray() as $place) {
-			$name = $place['title'];
+			$name = htmlspecialchars($place['title']);
 			if ($place['homepage'] != '') {
 				$name = $plugin->cObj->getTypoLink(
 					$name,
@@ -412,11 +414,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 			$descriptionParts = array();
 			if ($place['address'] != '') {
-				$descriptionParts[] = str_replace(CR, ',', $place['address']);
+				$descriptionParts[] = htmlspecialchars(str_replace(CR, ',', $place['address']));
 			}
 			if ($place['city'] != '') {
 				$descriptionParts[] = trim(
-					$place['zip'] . ' ' . $place['city']
+					htmlspecialchars($place['zip'] . ' ' . $place['city'])
 				);
 			}
 			if ($place['country'] != '') {
@@ -424,7 +426,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					$place['country']
 				);
 				if ($countryName != '') {
-					$descriptionParts[] = $countryName;
+					$descriptionParts[] = htmlspecialchars($countryName);
 				}
 			}
 
@@ -698,6 +700,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns a localized string "will be announced" if the seminar has no
 	 * places set.
 	 *
+	 * Note: This function does not htmlspecialchar the place titles.
+	 *
 	 * @return string our places list (or '' if there is an error)
 	 */
 	public function getPlaceShort() {
@@ -782,7 +786,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
 			$name = $speaker->getLinkedTitle($plugin);
 			if ($speaker->hasOrganization()) {
-				$name .= ', ' . $speaker->getOrganization();
+				$name .= ', ' . htmlspecialchars($speaker->getOrganization());
 			}
 			$plugin->setMarker('speaker_item_title', $name);
 
@@ -2103,7 +2107,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$organizers = $this->getOrganizerBag();
 		foreach ($organizers as $organizer) {
 			$result[] = $plugin->cObj->getTypoLink(
-				$organizer->getName(),
+				htmlspecialchars($organizer->getName()),
 				$organizer->getHomepage(),
 				array(),
 				$plugin->getConfValueString('externalLinkTarget')
@@ -4260,6 +4264,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If this event is an event date, this function will return both the
 	 * topic's file and the date's files (in that order).
 	 *
+	 * Note: This functions' return values already are htmlspecialchared.
+	 *
 	 * @param tslib_pibase $plugin a tslib_pibase object for a live page
 	 *
 	 * @return array an array of arrays with the elements "name" and
@@ -4292,13 +4298,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 			$result[] = array(
 				'name' => $plugin->cObj->typoLink(
-					basename($attachedFile),
+					htmlspecialchars(basename($attachedFile)),
 					array('parameter' => $uploadFolderUrl . $attachedFile)
 				),
-				'type' => (isset($matches[1]) ? $matches[1] : 'none'),
-				'size' => t3lib_div::formatSize(
-					filesize($uploadFolderPath . $attachedFile)
-				),
+				'type' => htmlspecialchars((isset($matches[1]) ? $matches[1] : 'none')),
+				'size' => t3lib_div::formatSize(filesize($uploadFolderPath . $attachedFile)),
 			);
 		}
 

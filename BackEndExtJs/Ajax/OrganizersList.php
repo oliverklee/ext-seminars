@@ -54,7 +54,7 @@ class tx_seminars_BackEndExtJs_Ajax_OrganizersList extends tx_seminars_BackEndEx
 	 */
 	protected function getAdditionalFields(tx_oelib_Model $organizer) {
 		return array(
-			'title' => $organizer->getName(),
+			'title' => htmlspecialchars($organizer->getName()),
 		);
 	}
 

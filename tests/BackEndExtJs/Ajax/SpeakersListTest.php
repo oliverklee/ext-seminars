@@ -107,14 +107,14 @@ class tx_seminars_BackEndExtJs_Ajax_SpeakersListTest extends tx_phpunit_testcase
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingSpeakerName() {
+	public function getAsArrayReturnsArrayContainingHtmlspecialcharedSpeakerName() {
 		$speaker = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker')
-			->getLoadedTestingModel(array('title' => 'testing speaker'));
+			->getLoadedTestingModel(array('title' => 'Ben & Jerry'));
 
 		$result = $this->fixture->getAsArray($speaker);
 
-		$this->assertEquals(
-			$speaker->getName(),
+		$this->assertSame(
+			'Ben &amp; Jerry',
 			$result['title']
 		);
 	}

@@ -69,7 +69,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
-				'title' => 'Test event',
+				'title' => 'Test event & more',
 				'attendees_max' => 10,
 				'needs_registration' => 1,
 			)
@@ -197,9 +197,9 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function renderContainsEventTitle() {
+	public function renderContainsHtmlspecialcharedEventTitle() {
 		$this->assertContains(
-			'Test event',
+			'Test event &amp; more',
 			$this->fixture->render()
 		);
 	}

@@ -54,7 +54,7 @@ class tx_seminars_BackEndExtJs_Ajax_SpeakersList extends tx_seminars_BackEndExtJ
 	 */
 	protected function getAdditionalFields(tx_oelib_Model $speaker) {
 		return array(
-			'title' => $speaker->getName(),
+			'title' => htmlspecialchars($speaker->getName()),
 		);
 	}
 

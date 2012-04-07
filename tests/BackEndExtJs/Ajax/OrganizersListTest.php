@@ -107,14 +107,14 @@ class tx_seminars_BackEndExtJs_Ajax_OrganizersListTest extends tx_phpunit_testca
 	/**
 	 * @test
 	 */
-	public function getAsArrayReturnsArrayContainingOrganizerName() {
+	public function getAsArrayReturnsArrayContainingHtmlspecialcharedOrganizerName() {
 		$organizer = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer')
-			->getLoadedTestingModel(array('title' => 'testing organizer'));
+			->getLoadedTestingModel(array('title' => 'Tom & Jerry'));
 
 		$result = $this->fixture->getAsArray($organizer);
 
-		$this->assertEquals(
-			$organizer->getName(),
+		$this->assertSame(
+			'Tom &amp; Jerry',
 			$result['title']
 		);
 	}
