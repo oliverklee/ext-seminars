@@ -32,7 +32,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Interface_MailRole, tx_seminars_Interface_Titled {
+class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Interface_MailRole {
 	/**
 	 * @var integer the gender type for speakers without gender
 	 */

@@ -32,7 +32,7 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_Model_BackEndUser extends tx_oelib_Model_BackEndUser implements tx_seminars_Interface_Titled {
+class tx_seminars_Model_BackEndUser extends tx_oelib_Model_BackEndUser {
 	/**
 	 * Returns the PID for newly created event records.
 	 *
