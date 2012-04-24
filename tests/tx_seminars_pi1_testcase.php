@@ -1004,8 +1004,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertRegExp(
-			'/<a href="http:\/\/[\w\d_\-\/]*' . $dummyFileName . '" >' .
-				$dummyFileName . '<\/a>/',
+			'/<a href="https?:\/\/[\w\d_\-\/\.]+' . $dummyFileName . '" >' . $dummyFileName . '<\/a>/',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1030,8 +1029,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertRegExp(
-			'/<a href="http:\/\/[\w\d_\-\/]*' .
-				str_replace('/', '\/', $dummyFileName) . '" >' .
+			'/<a href="https?:\/\/[\w\d_\-\/\.]+' . preg_quote($dummyFileName, '/') . '" >' .
 				basename($dummyFile) . '<\/a>/',
 			$this->fixture->main('', array())
 		);
@@ -1084,8 +1082,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertRegExp(
-			'/.*(' . preg_quote($dummyFileName) . ').*\s*' .
-				'.*(' . preg_quote($dummyFileName2) . ').*/',
+			'/.*(' . preg_quote($dummyFileName, '/') . ').*\s*' .
+				'.*(' . preg_quote($dummyFileName2, '/') . ').*/',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1127,8 +1125,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertRegExp(
-			'/<a href="http:\/\/[\w\d_\-\/]*' . $dummyFileName . '" >' .
-				$dummyFileName . '<\/a>/',
+			'/<a href="https?:\/\/[\w\d_\-\/\.]+' . $dummyFileName . '" >' . $dummyFileName . '<\/a>/',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1154,8 +1151,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertRegExp(
-			'/<a href="http:\/\/[\w\d_\-\/]*' .
-				str_replace('/', '\/', $dummyFileName) . '" >' .
+			'/<a href="https?:\/\/[\w\d_\-\/\.]+' . preg_quote($dummyFileName, '/') . '" >' .
 				basename($dummyFile) . '<\/a>/',
 			$this->fixture->main('', array())
 		);
@@ -1210,8 +1206,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertRegExp(
-			'/.*(' . preg_quote($dummyFileName) . ').*\s*' .
-				'.*(' . preg_quote($dummyFileName2) . ').*/',
+			'/.*(' . preg_quote($dummyFileName, '/') . ').*\s*' .
+				'.*(' . preg_quote($dummyFileName2, '/') . ').*/',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1234,10 +1230,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertRegExp(
-			'/class="filetype-' . $matches[1] . '">' .
-				'<a href="http:\/\/[\w\d_\-\/]*' .
-				str_replace('/', '\/', $dummyFileName) . '" >' .
-				basename($dummyFile) . '<\/a>/',
+			'/class="filetype-' . $matches[1] . '">' . '<a href="https?:\/\/[\w\d_\-\/\.]+' .
+				preg_quote($dummyFileName, '/') . '" >' . basename($dummyFile) . '<\/a>/',
 			$this->fixture->main('', array())
 		);
 	}
