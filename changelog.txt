@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4437] Fix: Test failures in the DefaultController tests when the test are run on a typo3.local host
 - [#4429] Fix: Escape the output in more places
 - [#4427] Feature: Create a comma-separated titles view helper
 - [#4426] Feature: Create a time range view helper
