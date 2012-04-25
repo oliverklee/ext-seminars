@@ -471,13 +471,13 @@ class tx_seminars_FrontEnd_CategoryListTest extends tx_phpunit_testcase {
 		$singleCategory =
 			array(
 				99 => array(
-					'title' => 'test',
+					'title' => 'test & more',
 					'icon' => '',
 				)
 		);
 
 		$this->assertEquals(
-			'test',
+			'test &amp; more',
 			$this->fixture->createCategoryList($singleCategory)
 		);
 	}
