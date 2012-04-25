@@ -1064,17 +1064,12 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	) {
 		$wrapperPrefix = (($useHtml) ? 'html_' : '') . 'field_wrapper';
 
-		$version = class_exists('t3lib_utility_VersionNumber')
-			? t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version)
-			: t3lib_div::int_from_ver(TYPO3_version);
-		if ($version >= 4007000) {
-			$charset = 'utf-8';
-		} else {
-			$charset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
-				? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] : 'ISO-8859-1';
-		}
-
-		$this->setMarker('html_mail_charset', $charset);
+		$this->setMarker('html_mail_charset', (
+			$GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
+				? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
+				: 'ISO-8859-1'
+			)
+		);
 		$this->hideSubparts(
 			$this->getConfValueString('hideFieldsInThankYouMail'),
 			$wrapperPrefix

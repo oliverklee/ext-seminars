@@ -69,13 +69,8 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 	private $eventUid;
 
 	public function setUp() {
-		$version = class_exists('t3lib_utility_VersionNumber')
-			? t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version)
-			: t3lib_div::int_from_ver(TYPO3_version);
-		if ($version < 4007000) {
-			$this->backEndConfigurationBackup = $GLOBALS['TYPO3_CONF_VARS']['BE'];
-			$GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] = 'utf-8';
-		}
+		$this->backEndConfigurationBackup = $GLOBALS['TYPO3_CONF_VARS']['BE'];
+		$GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] = 'utf-8';
 
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
@@ -107,12 +102,7 @@ class tx_seminars_pi2_testcase extends tx_phpunit_testcase {
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework);
 
-		$version = class_exists('t3lib_utility_VersionNumber')
-			? t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version)
-			: t3lib_div::int_from_ver(TYPO3_version);
-		if ($version < 4007000) {
-			$GLOBALS['TYPO3_CONF_VARS']['BE'] = $this->backEndConfigurationBackup;
-		}
+		$GLOBALS['TYPO3_CONF_VARS']['BE'] = $this->backEndConfigurationBackup;
 	}
 
 

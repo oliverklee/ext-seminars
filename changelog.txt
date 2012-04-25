@@ -1,5 +1,4 @@
 0.9.5 (currently working on)
-- [#4440] Fix: Only use forceCharset for TYPO3 < 4.7
 - [#4437] Fix: Test failures in the DefaultController tests when the test are run on a typo3.local host
 - [#3815] Fix: Throw more meaningful Exceptions
 - [#4428] Fix: Test failure in tx_seminars_EmailSalutation_testcase with latest oelib
