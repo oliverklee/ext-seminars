@@ -184,9 +184,15 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	public function getUpdateArray() {
 		$updateArray = array();
 
-		$charset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] ?
-			$GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] :
-			'iso-8859-1';
+		$version = class_exists('t3lib_utility_VersionNumber')
+			? t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version)
+			: t3lib_div::int_from_ver(TYPO3_version);
+		if ($version >= 4007000) {
+			$charset = 'utf-8';
+		} else {
+			$charset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
+				? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] : 'ISO-8859-1';
+		}
 
 		$updateArray['title'] = html_entity_decode(
 			$this->getDate(),
