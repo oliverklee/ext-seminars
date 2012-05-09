@@ -67,8 +67,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	private $eventUid;
 
 	public function setUp() {
-		$this->backEndConfigurationBackup = $GLOBALS['TYPO3_CONF_VARS']['BE'];
-		$GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] = 'utf-8';
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4007000) {
+			$this->backEndConfigurationBackup = $GLOBALS['TYPO3_CONF_VARS']['BE'];
+			$GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] = 'utf-8';
+		}
 
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
@@ -99,7 +101,9 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework);
 
-		$GLOBALS['TYPO3_CONF_VARS']['BE'] = $this->backEndConfigurationBackup;
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4007000) {
+			$GLOBALS['TYPO3_CONF_VARS']['BE'] = $this->backEndConfigurationBackup;
+		}
 	}
 
 

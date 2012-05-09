@@ -159,9 +159,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 					break;
 			}
 
-			$dataCharset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
-				? strtolower($GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'])
-				: 'iso-8859-15';
+			if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4007000) {
+				$dataCharset = 'utf-8';
+			} else {
+				$dataCharset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
+					? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] : 'ISO-8859-1';
+			}
 			$resultCharset = strtolower(
 				$this->configGetter->getConfValueString('charsetForCsv')
 			);
