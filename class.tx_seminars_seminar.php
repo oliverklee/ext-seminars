@@ -1659,11 +1659,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		);
 
 		if (!$dbResult) {
-			throw new tx_oelib_Exception_Database(DATABASE_QUERY_ERROR, 1333291814);
+			throw new tx_oelib_Exception_Database();
 		}
 		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 		if (!$dbResultRow) {
-			throw new tx_oelib_Exception_Database(DATABASE_RESULT_ERROR, 1333291826);
+			throw new tx_oelib_Exception_Database();
 		}
 
 		return $dbResultRow['title'];

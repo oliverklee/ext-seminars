@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4452] Cleanup: Stop using the DATABASE_QUERY_ERROR and DATABASE_RESULT_ERROR constants
 - [#4352] Change: Require PHP 5.3
 - [#4440] Fix: In pi2, only use forceCharset for TYPO3 < 4.7
 - [#4140] Change: Require TYPO3 4.5

@@ -319,7 +319,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			'uid=' . $uid . tx_oelib_db::enableFields('fe_users')
 		);
 		if (!$dbResult) {
-			throw new tx_oelib_Exception_Database(DATABASE_QUERY_ERROR, 1333291752);
+			throw new tx_oelib_Exception_Database();
 		}
 		$userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 		if (!$userData) {
