@@ -88,7 +88,10 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 		$this->fixture->render();
 	}
 
-	public function testRenderShowsTitleOfOneRequirement() {
+	/**
+	 * @test
+	 */
+	public function renderShowsHtmlspecialcharedTitleOfOneRequirement() {
 		$this->testingFramework->changeRecord(
 			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
 			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
@@ -97,7 +100,7 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-				'title' => 'required_foo',
+				'title' => 'required & foo',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -107,7 +110,7 @@ class tx_seminars_pi1_frontEndRequirementsList_testcase extends tx_phpunit_testc
 		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));
 
 		$this->assertContains(
-			'required_foo',
+			'required &amp; foo',
 			$this->fixture->render()
 		);
 	}

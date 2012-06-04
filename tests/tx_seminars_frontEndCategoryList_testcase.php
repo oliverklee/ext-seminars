@@ -87,9 +87,9 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////
-	// Tests for createCategoryList()
-	///////////////////////////////////
+	/*
+	 * Tests for render
+	 */
 
 	public function testRenderCreatesEmptyCategoryList() {
 		$otherSystemFolderUid = $this->testingFramework->createSystemFolder();
@@ -107,13 +107,16 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderCreatesCategoryListContainingOneCategoryTitle() {
+	/**
+	 * @test
+	 */
+	public function renderCreatesCategoryListContainingOneHtmlspecialcharedCategoryTitle() {
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
-			array('title' => 'one category')
+			'tx_seminars_categories',
+			array('title' => 'one & category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'title' => 'my title',
@@ -122,12 +125,13 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
+			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
 		);
 
+		$result = $this->fixture->render();
 		$this->assertContains(
-			'one category',
-			$this->fixture->render()
+			'one &amp; category',
+			$result
 		);
 	}
 
@@ -203,11 +207,11 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			$this->systemFolderPid
 		);
 		$categoryUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_CATEGORIES,
+			'tx_seminars_categories',
 			array('title' => 'one category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $systemSubFolderUid,
 				'title' => 'my title',
@@ -216,7 +220,7 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_CATEGORIES_MM, $eventUid, $categoryUid
+			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
 		);
 
 		$this->assertContains(
@@ -413,6 +417,11 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+
+	/*
+	 * Tests concerning createCategoryList
+	 */
+
 	public function testCreateCategoryListWithNoGivenCategoriesReturnsEmptyString() {
 		$this->assertEquals(
 			'',
@@ -453,35 +462,83 @@ class tx_seminars_frontEndCategoryList_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateCategoryListWithInvalidConfigurationValueReturnsCategoryTitle() {
+	/**
+	 * @test
+	 */
+	public function createCategoryListWithInvalidConfigurationValueReturnsHtmlspecialcharedCategoryTitle() {
 		$this->fixture->setConfigurationValue('categoriesInListView', 'foo');
 		$singleCategory =
 			array(
 				99 => array(
-					'title' => 'test',
+					'title' => 'test & more',
 					'icon' => '',
 				)
 		);
 
 		$this->assertEquals(
-			'test',
+			'test &amp; more',
 			$this->fixture->createCategoryList($singleCategory)
 		);
 	}
 
-	public function testCreateCategoryListWithConfigurationValueSetToIconSetsCategoryTitleAsImageTitle() {
+	/**
+	 * @test
+	 */
+	public function createCategoryListWithBothAsDisplayModeCreatesHtmlspecialcharedCategoryTitle() {
+		$this->fixture->setConfigurationValue('categoriesInListView', 'both');
+		$singleCategory =
+			array(
+				99 => array(
+					'title' => 'test & more',
+					'icon' => '',
+				)
+			);
+
+		$this->assertContains(
+			'test &amp; more',
+			$this->fixture->createCategoryList($singleCategory)
+		);
+		$this->assertNotContains(
+			'test & more',
+			$this->fixture->createCategoryList($singleCategory)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createCategoryListWithTextAsDisplayModeCreatesHtmlspecialcharedCategoryTitle() {
+		$this->fixture->setConfigurationValue('categoriesInListView', 'text');
+		$singleCategory =
+			array(
+				99 => array(
+					'title' => 'test & more',
+					'icon' => '',
+				)
+			);
+
+		$this->assertSame(
+			'test &amp; more',
+			$this->fixture->createCategoryList($singleCategory)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createCategoryListWithConfigurationValueSetToIconSetsHtmlSpecialcharedCategoryTitleAsImageTitle() {
 		$this->fixture->setConfigurationValue('categoriesInListView', 'icon');
 		$singleCategory =
 			array(
 				99 => array(
-					'title' => 'test',
+					'title' => 'te & st',
 					'icon' => 'foo.gif',
 				)
 		);
 		$this->testingFramework->createDummyFile('foo.gif');
 
 		$this->assertRegExp(
-			'/<img[^>]+title="test"/',
+			'/<img[^>]+title="te &amp; st"/',
 			$this->fixture->createCategoryList($singleCategory)
 		);
 	}

@@ -112,7 +112,7 @@ class tx_seminars_pi1_frontEndRegistrationsList extends tx_seminars_pi1_frontEnd
 		if ($this->seminar->isOk()) {
 			// Okay, at least the seminar UID is valid so we can show the
 			// seminar title and date.
-			$this->setMarker('title', $this->seminar->getTitleAndDate());
+			$this->setMarker('title', htmlspecialchars($this->seminar->getTitleAndDate()));
 
 			// Lets warnings from the seminar bubble up to us.
 			$this->setErrorMessage($this->seminar->checkConfiguration(TRUE));

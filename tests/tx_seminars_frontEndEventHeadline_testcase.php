@@ -63,7 +63,7 @@ class tx_seminars_frontEndEventHeadline_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'pid' => 0,
-				'title' => 'Test event',
+				'title' => 'Test event & more',
 				'begin_date' => $this->eventDate,
 			)
 		);
@@ -90,11 +90,14 @@ class tx_seminars_frontEndEventHeadline_testcase extends tx_phpunit_testcase {
 	// Tests for the render function
 	//////////////////////////////////
 
-	public function testRenderWithUidOfExistingEventReturnsTitleOfSelectedEvent() {
+	/**
+	 * @test
+	 */
+	public function renderWithUidOfExistingEventReturnsHtmlSpecialcharedTitleOfSelectedEvent() {
 		$this->fixture->piVars['uid'] = $this->eventId;
 
 		$this->assertContains(
-			'Test event',
+			'Test event &amp; more',
 			$this->fixture->render()
 		);
 	}

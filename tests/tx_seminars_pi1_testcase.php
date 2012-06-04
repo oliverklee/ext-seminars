@@ -104,7 +104,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'pid' => $this->systemFolderPid,
-				'title' => 'Test event',
+				'title' => 'Test & event',
+				'subtitle' => 'Something for you & me',
+				'accreditation_number' => '1 & 1',
+				'room' => 'Rooms 2 & 3',
 			)
 		);
 
@@ -124,6 +127,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 					'results_at_a_time' => 5,
 					'maxPages' => 5,
 				),
+				'eventFieldsOnRegistrationPage' => 'title,price_regular,price_special,vacancies,accreditation_number',
 			)
 		);
 		$this->fixture->getTemplateCode();
@@ -141,8 +145,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->testingFramework->cleanUp();
 
 		$this->fixture->__destruct();
-		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework);
+
+		tx_seminars_registrationmanager::purgeInstance();
 
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
@@ -339,8 +344,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			$encodedParameters .= '&amp;' . $key . '=' .$value;
 		}
 
-		return '<a href="index.php?id=' . $pageId . $encodedParameters . '">' .
-			htmlspecialchars($label) . '</a>';
+		return '<a href="index.php?id=' . $pageId . $encodedParameters . '">' . $label . '</a>';
 	}
 
 
@@ -547,12 +551,12 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function createTypoLinkInContentMockHtmlspecialcharsLinkTitle() {
+	public function createTypoLinkInContentMockNotHtmlspecialcharsLinkTitle() {
 		$contentMock = $this->createContentMock();
 
 		$this->assertContains(
-			'>foo &amp; bar</a>',
-			$contentMock->getTypoLink('foo & bar'), 42
+			'>foo & bar</a>',
+			$contentMock->getTypoLink('foo & bar', array()), 42
 		);
 	}
 
@@ -639,10 +643,14 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Tests concerning the single view.
 	//////////////////////////////////////
 
-	public function testSingleViewContainsEventTitle() {
+	/**
+	 * @test
+	 */
+	public function singleViewContainsHtmlspecialcharedEventTitle() {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
 		$this->assertContains(
-			'Test event',
+			'Test &amp; event',
 			$this->fixture->main('', array())
 		);
 	}
@@ -831,7 +839,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewDisplaysAndLinksSpeakersNameButNotCompany() {
+	/**
+	 * @test
+	 */
+	public function singleViewForSpeakerWithoutHomepageContainsHtmlspecialcharedSpeakerName() {
 		$this->fixture->setConfigurationValue(
 			'detailPID',
 			$this->testingFramework->createFrontEndPage()
@@ -840,25 +851,128 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$speakerUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SPEAKERS,
+			'tx_seminars_speakers',
 			array (
-				'title' => 'foo',
-				'organization' => 'bar',
+				'title' => 'foo & bar',
+				'organization' => 'baz',
+			)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_speakers_mm',
+			$this->seminarUid, $speakerUid
+		);
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars',
+			$this->seminarUid,
+			array('speakers' => '1')
+		);
+
+		$this->assertContains(
+			'foo &amp; bar',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewForContainsHtmlspecialcharedSpeakerOrganization() {
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+		$this->fixture->setConfigurationValue('showSpeakerDetails', TRUE);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$speakerUid = $this->testingFramework->createRecord(
+			'tx_seminars_speakers',
+			array (
+				'title' => 'John Doe',
+				'organization' => 'foo & bar',
+			)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_speakers_mm',
+			$this->seminarUid, $speakerUid
+		);
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars',
+			$this->seminarUid,
+			array('speakers' => '1')
+		);
+
+		$this->assertContains(
+			'foo &amp; bar',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewWithSpeakerDetailsLinksHtmlspecialcharedSpeakersName() {
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+		$this->fixture->setConfigurationValue('showSpeakerDetails', TRUE);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$speakerUid = $this->testingFramework->createRecord(
+			'tx_seminars_speakers',
+			array (
+				'title' => 'foo & bar',
+				'organization' => 'baz',
 				'homepage' => 'www.foo.com',
 			)
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SPEAKERS_MM,
+			'tx_seminars_seminars_speakers_mm',
 			$this->seminarUid, $speakerUid
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$this->seminarUid,
 			array('speakers' => '1')
 		);
 
 		$this->assertRegExp(
-			'/<a href="http:\/\/www.foo.com".*>foo<\/a>, bar/',
+			'#<a href="http://www.foo.com".*>foo &amp; bar</a>#',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewWithoutSpeakerDetailsLinksHtmlspecialcharedSpeakersName() {
+		$this->fixture->setConfigurationValue(
+			'detailPID',
+			$this->testingFramework->createFrontEndPage()
+		);
+		$this->fixture->setConfigurationValue('showSpeakerDetails', FALSE);
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$speakerUid = $this->testingFramework->createRecord(
+			'tx_seminars_speakers',
+			array (
+				'title' => 'foo & bar',
+				'organization' => 'baz',
+				'homepage' => 'www.foo.com',
+			)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_speakers_mm',
+			$this->seminarUid, $speakerUid
+		);
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars',
+			$this->seminarUid,
+			array('speakers' => '1')
+		);
+
+		$this->assertRegExp(
+			'#<a href="http://www.foo.com".*>foo &amp; bar</a>#',
 			$this->fixture->main('', array())
 		);
 	}
@@ -947,8 +1061,6 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function singleViewCallsModifyEventSingleViewHook() {
-		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
-
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
 		$hook = $this->getMock('tx_seminars_Interface_Hook_EventSingleView');
 		$hook->expects($this->once())->method('modifyEventSingleView')
@@ -1343,20 +1455,94 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Tests concerning places in the single view
 	///////////////////////////////////////////////
 
-	public function testSingleViewContainsTitleOfEventPlace() {
+	/**
+	 * @test
+	 */
+	public function singleViewForNoSiteDetailsContainsHtmlSpecialcharedTitleOfEventPlace() {
+		$this->fixture->setConfigurationValue('showSiteDetails', FALSE);
+
 		$eventUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS, array('place' => 1)
+			'tx_seminars_seminars', array('place' => 1)
 		);
 		$placeUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SITES, array('title' => 'a place')
+			'tx_seminars_sites', array('title' => 'a & place')
 		);
 		$this->testingFramework->createRelation(
-			SEMINARS_TABLE_SEMINARS_SITES_MM, $eventUid, $placeUid
+			'tx_seminars_seminars_place_mm', $eventUid, $placeUid
 		);
 		$this->fixture->piVars['showUid'] = $eventUid;
 
 		$this->assertContains(
-			'a place',
+			'a &amp; place',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewForSiteDetailsContainsHtmlSpecialcharedTitleOfEventPlace() {
+		$this->fixture->setConfigurationValue('showSiteDetails', TRUE);
+
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('place' => 1)
+		);
+		$placeUid = $this->testingFramework->createRecord(
+			'tx_seminars_sites', array('title' => 'a & place')
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_place_mm', $eventUid, $placeUid
+		);
+		$this->fixture->piVars['showUid'] = $eventUid;
+
+		$this->assertContains(
+			'a &amp; place',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewForSiteDetailsContainsHtmlSpecialcharedAddressOfEventPlace() {
+		$this->fixture->setConfigurationValue('showSiteDetails', TRUE);
+
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('place' => 1)
+		);
+		$placeUid = $this->testingFramework->createRecord(
+			'tx_seminars_sites', array('address' => 'over & the rainbow')
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_place_mm', $eventUid, $placeUid
+		);
+		$this->fixture->piVars['showUid'] = $eventUid;
+
+		$this->assertContains(
+			'over &amp; the rainbow',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewForSiteDetailsContainsHtmlSpecialcharedCityOfEventPlace() {
+		$this->fixture->setConfigurationValue('showSiteDetails', TRUE);
+
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('place' => 1)
+		);
+		$placeUid = $this->testingFramework->createRecord(
+			'tx_seminars_sites', array('city' => 'Knödlingen & Großwürsteling')
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_place_mm', $eventUid, $placeUid
+		);
+		$this->fixture->piVars['showUid'] = $eventUid;
+
+		$this->assertContains(
+			'Knödlingen &amp; Großwürsteling',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1390,22 +1576,25 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewCanContainOneTimeSlotRoom() {
+	/**
+	 * @test
+	 */
+	public function testSingleViewCanContainOneHtmlspecialcharedTimeSlotRoom() {
 		$timeSlotUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'seminar' => $this->seminarUid,
-				'room' => 'room 1'
+				'room' => 'room & 1'
 			)
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('timeslots' => (string) $timeSlotUid)
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertContains(
-			'room 1',
+			'room &amp; 1',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1430,32 +1619,70 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	}
 
 	public function testSingleViewCanContainTwoTimeSlotRooms() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$timeSlotUid1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'seminar' => $this->seminarUid,
 				'room' => 'room 1'
 			)
 		);
 		$timeSlotUid2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_TIME_SLOTS,
+			'tx_seminars_timeslots',
 			array(
 				'seminar' => $this->seminarUid,
 				'room' => 'room 2'
 			)
 		);
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array('timeslots' => $timeSlotUid1.','.$timeSlotUid2)
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$result = $this->fixture->main('', array());
 		$this->assertContains(
 			'room 1',
-			$this->fixture->main('', array())
+			$result
 		);
 		$this->assertContains(
 			'room 2',
+			$result
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewContainsHtmlspecialcharedEventSubtitle() {
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'Something for you &amp; me',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewContainsHtmlspecialcharedEventRoom() {
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'Rooms 2 &amp; 3',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function singleViewContainsHtmlspecialcharedAccreditationNumber() {
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
+		$this->assertContains(
+			'1 &amp; 1',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1483,7 +1710,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'tx_seminars_timeslots',
 			array(
 				'seminar' => $this->seminarUid,
-				'room' => 'room 1'
+				'room' => 'room & 1'
 			)
 		);
 		$this->testingFramework->changeRecord(
@@ -1563,14 +1790,18 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewCanContainOneTargetGroupTitle() {
+	/**
+	 * @test
+	 */
+	public function singleViewCanContainOneHtmlSpecialcharedTargetGroupTitle() {
 		$this->addTargetGroupRelation(
-			array('title' => 'group 1')
+			array('title' => 'group 1 & 2')
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
 		$this->assertContains(
-			'group 1',
+			'group 1 &amp; 2',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1592,7 +1823,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testSingleViewCanContainTwoTargetGroupTitles() {
 		$this->addTargetGroupRelation(
-			array('title' => 'group 1')
+			array('title' => 'group 1 & 2')
 		);
 		$this->addTargetGroupRelation(
 			array('title' => 'group 2')
@@ -1602,7 +1833,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$result = $this->fixture->main('', array());
 
 		$this->assertContains(
-			'group 1',
+			'group 1 &amp; 2',
 			$result
 		);
 		$this->assertContains(
@@ -1812,12 +2043,15 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Test concerning the event type in the single view
 	//////////////////////////////////////////////////////
 
-	public function testSingleViewContainsEventTypeTitleAndColonIfEventHasEventType() {
+	/**
+	 * @test
+	 */
+	public function testSingleViewContainsHtmlspecialcharedEventTypeTitleAndColonIfEventHasEventType() {
 		$this->testingFramework->changeRecord(
-			SEMINARS_TABLE_SEMINARS, $this->seminarUid,
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'event_type' => $this->testingFramework->createRecord(
-					SEMINARS_TABLE_EVENT_TYPES, array('title' => 'foo type')
+					'tx_seminars_event_types', array('title' => 'foo & type')
 				)
 			)
 		);
@@ -1825,7 +2059,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
-			'foo type:',
+			'foo &amp; type:',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1834,7 +2068,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertNotRegExp(
-			'/: *Test event/',
+			'/: *Test &amp; event/',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1844,14 +2078,17 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Test concerning the categories in the single view
 	//////////////////////////////////////////////////////
 
-	public function testSingleViewCanContainOneCategory() {
+	/**
+	 * @test
+	 */
+	public function singleViewCanContainOneHtmlSpecialcharedCategoryTitle() {
 		$this->addCategoryRelation(
-			array('title' => 'category 1')
+			array('title' => 'category & 1')
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertContains(
-			'category 1',
+			'category &amp; 1',
 			$this->fixture->main('', array())
 		);
 	}
@@ -2113,12 +2350,16 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Tests concerning the organizers in the list view
 	/////////////////////////////////////////////////////
 
-	public function test_SingleView_ForEventWithOrganzier_ShowsOrganizerTitle() {
-		$this->addOrganizerRelation(array('title' => 'foo organizer'));
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithOrganzierShowsHtmlspecialcharedOrganizerTitle() {
+		$this->addOrganizerRelation(array('title' => 'foo & organizer'));
+
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
-			'foo organizer',
+			'foo &amp; organizer',
 			$this->fixture->main('', array())
 		);
 	}
@@ -2135,14 +2376,18 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForEventWithOrganizerWithHomepage_LinksOrganizerToItsHomepage() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithOrganizerWithHomepageLinksHtmlSpecialcharedOrganizerNameToTheirHomepage() {
 		$this->addOrganizerRelation(
-			array('title' => 'foo', 'homepage' => 'http://www.orgabar.com')
+			array('title' => 'foo & bar', 'homepage' => 'http://www.orgabar.com')
 		);
+
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
-		$this->assertContains(
-			'http://www.orgabar.com',
+		$this->assertRegexp(
+			'#<a href="http://www.orgabar.com".*>foo &amp; bar</a>#',
 			$this->fixture->main('', array())
 		);
 	}
@@ -2168,14 +2413,18 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForEventWithOrganizerWithHomepage_HtmlSpecialcharsTitleOfOrganizer() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithOrganizerWithHomepageHtmlSpecialcharsTitleOfOrganizer() {
 		$this->addOrganizerRelation(
 			array('title' => 'foo<bar')
 		);
+
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
-			htmlspecialchars('foo<bar'),
+			'foo&lt;bar',
 			$this->fixture->main('', array())
 		);
 	}
@@ -2187,7 +2436,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
 		$this->assertContains(
-			htmlspecialchars('foo<bar'),
+			'foo&lt;bar',
 			$this->fixture->main('', array())
 		);
 	}
@@ -2248,9 +2497,117 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Tests concerning the basic functions of the list view
 	//////////////////////////////////////////////////////////
 
-	public function testListViewShowsSingleEvents() {
+	/**
+	 * @test
+	 */
+	public function listViewShowsHtmlspecialcharedSingleEventTitle() {
 		$this->assertContains(
-			'Test event',
+			'Test &amp; event',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function listViewShowsHtmlspecialcharedEventSubtitle() {
+		$this->assertContains(
+			'Something for you &amp; me',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function listViewShowsHtmlspecialcharedEventTypeTitle() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid,
+			array(
+				'event_type' => $this->testingFramework->createRecord(
+					'tx_seminars_event_types', array('title' => 'foo & type')
+				)
+			)
+		);
+
+		$this->assertContains(
+			'foo &amp; type',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function listViewShowsHtmlspecialcharedAccreditationNumber() {
+		$this->assertContains(
+			'1 &amp; 1',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function listViewShowsHtmlspecialcharedPlaceTitle() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid, array('place' => 1)
+		);
+		$placeUid = $this->testingFramework->createRecord(
+			'tx_seminars_sites', array('title' => 'a & place')
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_place_mm', $this->seminarUid, $placeUid
+		);
+
+		$this->assertContains(
+			'a &amp; place',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function listViewShowsHtmlspecialcharedCityTitle() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid, array('place' => 1)
+		);
+		$placeUid = $this->testingFramework->createRecord(
+			'tx_seminars_sites', array('city' => 'Bonn & Köln')
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_place_mm', $this->seminarUid, $placeUid
+		);
+
+		$this->assertContains(
+			'Bonn &amp; Köln',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function listViewShowsHtmlspecialcharedOrganizerTitle() {
+		$this->addOrganizerRelation(array('title' => 'foo & organizer'));
+
+		$this->assertContains(
+			'foo &amp; organizer',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function listViewShowsHtmlSpecialcharedTargetGroupTitle() {
+		$this->addTargetGroupRelation(
+			array('title' => 'group 1 & 2')
+		);
+
+		$this->assertContains(
+			'group 1 &amp; 2',
 			$this->fixture->main('', array())
 		);
 	}
@@ -2528,7 +2885,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewContainsEventsWithoutCategoryByDefault() {
 		$this->assertContains(
-			'Test event',
+			'Test &amp; event',
 			$this->fixture->main('', array())
 		);
 	}
@@ -2566,7 +2923,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['category'] = $categoryUid;
 
 		$this->assertNotContains(
-			'Test event',
+			'Test &amp; event',
 			$this->fixture->main('', array())
 		);
 	}
@@ -2724,7 +3081,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 
 	public function testListViewContainsEventsWithoutEventTypeByDefault() {
 		$this->assertContains(
-			'Test event',
+			'Test &amp; event',
 			$this->fixture->main('', array())
 		);
 	}
@@ -2736,8 +3093,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 				'pid' => $this->systemFolderPid,
 				'title' => 'Event with type',
 				'event_type' => $this->testingFramework->createRecord(
-					SEMINARS_TABLE_EVENT_TYPES,
-					array('title' => 'foo type')
+					'tx_seminars_event_types', array('title' => 'foo & type')
 				),
 			)
 		);
@@ -2756,7 +3112,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['event_type'] = array($eventTypeUid);
 
 		$this->assertNotContains(
-			'Test event',
+			'Test &amp; event',
 			$this->fixture->main('', array())
 		);
 	}
@@ -4012,7 +4368,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'Test event',
+			'Test &amp; event',
 			$this->fixture->main('', array())
 		);
 	}
@@ -4145,7 +4501,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'Test event',
+			'Test &amp; event',
 			$this->fixture->main('', array())
 		);
 	}
@@ -4303,7 +4659,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'Test event',
+			'Test &amp; event',
 			$this->fixture->main('', array())
 		);
 	}
@@ -4808,7 +5164,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
 
 		$this->assertContains(
-			'Test event',
+			'Test &amp; event',
 			$this->fixture->main('', array())
 		);
 	}
@@ -4818,7 +5174,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
 
 		$this->assertNotContains(
-			'Test event',
+			'Test &amp; event',
 			$this->fixture->main('', array())
 		);
 	}
@@ -5841,6 +6197,66 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 	// Tests concerning the registration form
 	///////////////////////////////////////////
 
+	/**
+	 * @test
+	 */
+	public function registrationFormHtmlspecialcharsEventTitle() {
+		$registrationFormMock = $this->getMock('tx_seminars_pi1_registrationEditor', array(), array(), '', FALSE);
+		t3lib_div::addInstance('tx_seminars_pi1_registrationEditor', $registrationFormMock);
+
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
+
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'title' => 'foo & bar',
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+				'needs_registration' => 1,
+				'attendees_max' => 10,
+			)
+		);
+
+		$this->fixture->piVars['seminar'] = $eventUid;
+
+		$this->assertContains(
+			'foo &amp; bar',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function registrationFormHtmlspecialcharsEventAccreditationNumber() {
+		$registrationFormMock = $this->getMock('tx_seminars_pi1_registrationEditor', array(), array(), '', FALSE);
+		t3lib_div::addInstance('tx_seminars_pi1_registrationEditor', $registrationFormMock);
+
+		$this->testingFramework->createAndLoginFrontEndUser();
+		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
+
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'accreditation_number' => 'foo & bar',
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+				'needs_registration' => 1,
+				'attendees_max' => 10,
+			)
+		);
+
+		$this->fixture->piVars['seminar'] = $eventUid;
+
+		$this->assertContains(
+			'foo &amp; bar',
+			$this->fixture->main('', array())
+		);
+	}
+
 	public function testRegistrationFormForEventWithOneNotFullfilledRequirementIsHidden() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
@@ -5911,7 +6327,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testListOfRequirementsForEventWithOneNotFulfilledRequirementLinksTitleOfRequirement() {
+	/**
+	 * @test
+	 */
+	public function listOfRequirementsForEventWithOneNotFulfilledRequirementLinksHtmlspecialcharedTitleOfRequirement() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
 		$this->fixture->setConfigurationValue(
@@ -5939,7 +6358,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			SEMINARS_TABLE_SEMINARS,
 			array(
 				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-				'title' => 'required_foo',
+				'title' => 'required & foo',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
@@ -5949,7 +6368,7 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->piVars['seminar'] = $date;
 
 		$this->assertRegExp(
-			'/<a href=.*' . $requiredTopic . '.*>required_foo<\/a>/',
+			'/<a href=.*' . $requiredTopic . '.*>required &amp; foo<\/a>/',
 			$this->fixture->main('', array())
 		);
 	}
@@ -5959,13 +6378,13 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
 
 		$topic = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
-			array('object_type' => SEMINARS_RECORD_TYPE_TOPIC)
+			'tx_seminars_seminars',
+			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$date = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
 				'attendees_max' => 10,
@@ -5975,25 +6394,25 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 
 		$requiredTopic1 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'required_foo',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topic, $requiredTopic1, 'requirements'
 		);
 		$requiredTopic2 = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'required_bar',
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			$topic, $requiredTopic2, 'requirements'
 		);
 

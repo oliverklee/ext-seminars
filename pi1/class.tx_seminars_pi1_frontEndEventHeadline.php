@@ -58,7 +58,7 @@ class tx_seminars_pi1_frontEndEventHeadline extends tx_seminars_pi1_frontEndView
 			return '';
 		}
 
-		$this->setMarker('title_and_date', $seminar->getTitleAndDate());
+		$this->setMarker('title_and_date', htmlspecialchars($seminar->getTitleAndDate()));
 		$result = $this->getSubpart('VIEW_HEADLINE');
 
 		$this->setErrorMessage(

@@ -746,7 +746,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				)
 			);
 
-			$this->setMarker('title', $this->seminar->getTitle());
+			$this->setMarker('title', htmlspecialchars($this->seminar->getTitle()));
 			$this->setMarker('uid', $this->seminar->getUid());
 
 			$this->setSubtitleMarker();
@@ -863,7 +863,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			return;
 		}
 
-		$this->setMarker('event_type', $this->seminar->getEventType());
+		$this->setMarker('event_type', htmlspecialchars($this->seminar->getEventType()));
 	}
 
 	/**
@@ -876,7 +876,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			return;
 		}
 
-		$this->setMarker('subtitle', $this->seminar->getSubtitle());
+		$this->setMarker('subtitle', htmlspecialchars($this->seminar->getSubtitle()));
 	}
 
 	/**
@@ -906,7 +906,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		}
 
 		$this->setMarker(
-			'accreditation_number', $this->seminar->getAccreditationNumber()
+			'accreditation_number', htmlspecialchars($this->seminar->getAccreditationNumber())
 		);
 	}
 
@@ -937,7 +937,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$allCategories = $this->seminar->getCategories();
 
 		foreach ($allCategories as $category) {
-			$this->setMarker('category_title', $category['title']);
+			$this->setMarker('category_title', htmlspecialchars($category['title']));
 			$this->setMarker(
 				'category_icon', $this->createCategoryIcon($category)
 			);
@@ -954,7 +954,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			'place',
 			$this->getConfValueBoolean('showSiteDetails', 's_template_special')
 				? $this->seminar->getPlaceWithDetails($this)
-				: $this->seminar->getPlaceShort()
+				: htmlspecialchars($this->seminar->getPlaceShort())
 		);
 	}
 
@@ -968,7 +968,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			return;
 		}
 
-		$this->setMarker('room', $this->seminar->getRoom());
+		$this->setMarker('room', htmlspecialchars($this->seminar->getRoom()));
 	}
 
 	/**
@@ -989,7 +989,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$timeSlots = $this->seminar->getTimeSlotsAsArrayWithMarkers();
 		foreach ($timeSlots as $timeSlotData) {
 			foreach ($timeSlotData as $key => $value) {
-				$this->setMarker($key, $value, 'timeslot');
+				$this->setMarker($key, htmlspecialchars($value), 'timeslot');
 			}
 
 			$timeSlot = $timeSlotMapper->find($timeSlotData['uid']);
@@ -1104,7 +1104,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			return;
 		}
 
-		$this->setMarker('language', $this->seminar->getLanguageName());
+		$this->setMarker('language', htmlspecialchars($this->seminar->getLanguageName()));
 	}
 
 	/**
@@ -1284,7 +1284,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		$targetGroups = $this->seminar->getTargetGroupsAsArray();
 		foreach ($targetGroups as $targetGroup) {
-			$this->setMarker('target_group', $targetGroup);
+			$this->setMarker('target_group', htmlspecialchars($targetGroup));
 			$targetGroupsOutput .= $this->getSubpart('SINGLE_TARGET_GROUP');
 		}
 
@@ -2049,13 +2049,10 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				'title_link',
 				$this->seminar->getLinkedFieldValue($this, 'title')
 			);
-			$this->setMarker('subtitle', $this->seminar->getSubtitle());
+			$this->setMarker('subtitle', htmlspecialchars($this->seminar->getSubtitle()));
 			$this->setMarker('uid', $this->seminar->getUid($this));
-			$this->setMarker('event_type', $this->seminar->getEventType());
-			$this->setMarker(
-				'accreditation_number',
-				$this->seminar->getAccreditationNumber()
-			);
+			$this->setMarker('event_type', htmlspecialchars($this->seminar->getEventType()));
+			$this->setMarker('accreditation_number', htmlspecialchars($this->seminar->getAccreditationNumber()));
 			$this->setMarker(
 				'credit_points',
 				$this->seminar->getCreditPoints()
@@ -2066,7 +2063,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->setMarker(
 				'speakers', $this->seminar->getSpeakersShort($this)
 			);
-			$this->setMarker('language', $this->seminar->getLanguageName());
+			$this->setMarker('language', htmlspecialchars($this->seminar->getLanguageName()));
 
 			$currentDate = $this->seminar->getDate();
 			if (($currentDate == $this->previousDate)
@@ -2090,15 +2087,9 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$this->setMarker('time', $this->seminar->getTime());
 			$this->setMarker('expiry', $this->seminar->getExpiry());
 
-			$this->setMarker('place', $this->seminar->getPlaceShort());
-			$this->setMarker(
-				'country',
-				$this->seminar->getCountry()
-			);
-			$this->setMarker(
-				'city',
-				$this->seminar->getCities()
-			);
+			$this->setMarker('place', htmlspecialchars($this->seminar->getPlaceShort()));
+			$this->setMarker('country', htmlspecialchars($this->seminar->getCountry()));
+			$this->setMarker('city', htmlspecialchars($this->seminar->getCities()));
 			$this->setMarker('seats', $attendanceData['seats']);
 			$this->setMarker(
 				'price_regular',
@@ -2113,10 +2104,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 				'organizers',
 				$this->seminar->getOrganizers($this)
 			);
-			$this->setMarker(
-				'target_groups',
-				$this->seminar->getTargetGroupNames()
-			);
+			$this->setMarker('target_groups', htmlspecialchars($this->seminar->getTargetGroupNames()));
 			$this->setMarker(
 				'attached_files',
 				$this->getAttachedFilesListMarkerContent()
@@ -2926,7 +2914,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		);
 		$this->setMarker(
 			'title',
-			($this->seminar) ? $this->seminar->getTitle() : ''
+			($this->seminar) ? htmlspecialchars($this->seminar->getTitle()) : ''
 		);
 
 		if ($this->seminar && $this->seminar->hasDate()) {
@@ -2943,7 +2931,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		if ($this->seminar && $this->seminar->hasAccreditationNumber()) {
 			$this->setMarker(
 				'accreditation_number',
-				($this->seminar) ? $this->seminar->getAccreditationNumber() : ''
+				($this->seminar) ? htmlspecialchars($this->seminar->getAccreditationNumber()) : ''
 			);
 		} else {
 			$this->hideSubparts(
@@ -3154,7 +3142,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		foreach ($organizers as $organizer) {
 			if ($organizer->hasHomepage()) {
 				$organizerTitle = $this->cObj->getTypoLink(
-					$organizer->getName(),
+					htmlspecialchars($organizer->getName()),
 					$organizer->getHomepage(),
 					array(),
 					$this->getConfValueString('externalLinkTarget')
@@ -3350,9 +3338,7 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 
 		$attachedFiles = '';
 		foreach ($this->seminar->getAttachedFiles($this) as $attachedFile) {
-			$this->setMarker(
-				'attached_files_single_title', $attachedFile['name']
-			);
+			$this->setMarker('attached_files_single_title', htmlspecialchars($attachedFile['name']));
 
 			$attachedFiles .= $this->getSubpart('ATTACHED_FILES_SINGLE_ITEM');
 		}

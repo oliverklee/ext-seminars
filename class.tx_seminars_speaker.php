@@ -242,15 +242,17 @@ class tx_seminars_speaker extends tx_seminars_objectfromdb {
 	 *                be empty
 	 */
 	public function getLinkedTitle(tx_oelib_templatehelper $plugin) {
+		$safeTitle = htmlspecialchars($this->getTitle());
+
 		if ($this->hasHomepage()) {
 			$result = $plugin->cObj->getTypoLink(
-				$this->getTitle(),
+				$safeTitle,
 				$this->getHomepage(),
 				array(),
 				$plugin->getConfValueString('externalLinkTarget')
 			);
 		} else {
-			$result = $this->getTitle();
+			$result = $safeTitle;
 		}
 
 		return $result;
