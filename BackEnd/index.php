@@ -29,8 +29,6 @@ require_once('conf.php');
 require_once($BACK_PATH . 'init.php');
 require_once($BACK_PATH . 'template.php');
 
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-
 $LANG->includeLLFile('EXT:lang/locallang_common.xml');
 $LANG->includeLLFile('EXT:lang/locallang_show_rechis.xml');
 $LANG->includeLLFile('EXT:lang/locallang_mod_web_list.xml');

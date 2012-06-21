@@ -22,8 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-
 $LANG->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
 
 // This checks permissions and exits if the users has no permission for entry.

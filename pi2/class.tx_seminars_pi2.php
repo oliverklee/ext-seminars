@@ -27,8 +27,6 @@ if (is_object($LANG)) {
 	$LANG->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
 }
 
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-
 require_once(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
 
 /**

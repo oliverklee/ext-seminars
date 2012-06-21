@@ -22,10 +22,6 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-if (t3lib_extMgm::isLoaded('oelib')) {
-	require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-}
-
 /**
  * Class 'ext_update' for the 'seminars' extension.
  *

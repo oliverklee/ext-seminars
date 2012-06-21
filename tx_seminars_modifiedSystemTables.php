@@ -2,7 +2,6 @@
 if (!defined ('TYPO3_MODE')) {
 	die('Access denied.');
 }
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
 
 if (!function_exists('tx_seminars_tableRelations')) {
 	/**

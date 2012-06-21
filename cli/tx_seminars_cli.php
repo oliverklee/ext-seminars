@@ -43,8 +43,6 @@ if (!defined('TYPO3_cliMode')) {
 
 setlocale(LC_NUMERIC, 'C');
 
-require_once(t3lib_extMgm::extPath('oelib') . 'class.tx_oelib_Autoloader.php');
-
 try {
 	tx_oelib_ObjectFactory::make('tx_seminars_cli_MailNotifier')->start();
 } catch (Exception $exception) {
