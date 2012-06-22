@@ -274,7 +274,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 		$result = TAB . TAB .
 			'<div id="typo3-csvLink">' . LF .
 			TAB . TAB . TAB .
-			'<a href="class.tx_seminars_BackEnd_CSV.php?id=' . $pageData['uid'] .
+			'<a href="CSV.php?id=' . $pageData['uid'] .
 			'&amp;tx_seminars_pi2[table]=' . $this->tableName .
 			$this->getAdditionalCsvParameters() . '">' . LF .
 			TAB . TAB . TAB . TAB .

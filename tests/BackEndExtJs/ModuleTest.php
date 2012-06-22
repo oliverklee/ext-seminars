@@ -309,8 +309,15 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setPageRenderer($pageRenderer);
 
-		$pageRenderer->expects($this->at(0))
-			->method('addInlineSettingArray');
+		$pageRenderer->expects($this->at(4))->method('addInlineSettingArray')
+			->with(
+				'Backend.Seminars.URL',
+				array(
+					'ajax' => 'ajax.php?ajaxID=',
+					'alt_doc' => 'alt_doc.php',
+					'csv' => '../BackEnd/CSV.php',
+				)
+			);
 
 		$this->fixture->main();
 	}

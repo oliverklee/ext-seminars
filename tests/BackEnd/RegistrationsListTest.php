@@ -334,7 +334,7 @@ class tx_seminars_BackEnd_RegistrationsListTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'class.tx_seminars_BackEnd_CSV',
+			'CSV.php',
 			$this->fixture->show()
 		);
 	}
@@ -349,7 +349,7 @@ class tx_seminars_BackEnd_RegistrationsListTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'class.tx_seminars_BackEnd_CSV',
+			'CSV.php',
 			$this->fixture->show()
 		);
 	}

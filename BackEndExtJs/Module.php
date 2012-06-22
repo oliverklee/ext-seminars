@@ -221,7 +221,7 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 			array(
 				'ajax' => 'ajax.php?ajaxID=',
 				'alt_doc' => 'alt_doc.php',
-				'csv' => '../BackEnd/class.tx_seminars_BackEnd_CSV.php',
+				'csv' => '../BackEnd/CSV.php',
 			)
 		);
 

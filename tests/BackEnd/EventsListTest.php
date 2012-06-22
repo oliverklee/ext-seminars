@@ -594,7 +594,7 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'<a href="class.tx_seminars_BackEnd_CSV.php?id=' .
+			'<a href="CSV.php?id=' .
 				$this->dummySysFolderPid .
 				'&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
 				'&amp;tx_seminars_pi2[eventUid]=' . $eventUid . '">',
@@ -624,7 +624,7 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'<a href="class.tx_seminars_BackEnd_CSV.php?id=' .
+			'<a href="CSV.php?id=' .
 				$this->dummySysFolderPid .
 				'&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
 				'&amp;tx_seminars_pi2[eventUid]=' . $eventUid . '">',

@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4464] Fix: CSV export links lead to 404 error
 - [#4443] Cleanup: Use UTF-8 by default
 - [#4366] Fix: Tab headings and all other labels are missing with the current TYPO3 master (4.7)
 - [#4465] Fix: Fix JavaScript code inspection warnings
