@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4465] Fix: Fix JavaScript code inspection warnings
 - [#3451] Cleanup: Use TYPO3's autoloader instead of oelib's autoloader
 - [#4278] Cleanup: Update the copyright to 2012
 - [#4452] Cleanup: Stop using the DATABASE_QUERY_ERROR and DATABASE_RESULT_ERROR constants

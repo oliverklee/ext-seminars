@@ -59,9 +59,9 @@ TYPO3.Backend.Seminars.Events.Menu = {
 			'click': {
 				fn: function() {
 					// hide
-				},
+				}
 			}
-		},
+		}
 	}, {
 		id: 'typo3-backend-seminars-events-menu-unhide',
 		iconCls: 'unhide',
@@ -71,14 +71,14 @@ TYPO3.Backend.Seminars.Events.Menu = {
 			'click': {
 				fn: function() {
 					// unhide
-				},
+				}
 			}
-		},
+		}
 	}, {
 		id: 'typo3-backend-seminars-events-menu-confirm',
 		iconCls: 'confirm',
 		text: TYPO3.lang.eventlist_button_confirm,
-		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.ConfirmButton.hidden,
+		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.ConfirmButton.hidden
 	}, {
 		id: 'typo3-backend-seminars-events-menu-cancel',
 		iconCls: 'cancel',
@@ -89,8 +89,8 @@ TYPO3.Backend.Seminars.Events.Menu = {
 				fn: function() {
 					Ext.Msg.alert(window.location);
 				}
-			},
-		},
+			}
+		}
 	}, {
 		xtype: 'menuseparator'
 	}, {
@@ -103,17 +103,16 @@ TYPO3.Backend.Seminars.Events.Menu = {
 					var uid = Ext.getCmp('typo3-backend-seminars-events-gridpanel').
 						getStore().getAt(TYPO3.Backend.Seminars.Events.rowIndex).
 						get('uid');
-					var url = TYPO3.settings.Backend.Seminars.URL.csv +
+					window.location = TYPO3.settings.Backend.Seminars.URL.csv +
 						'?id=' + TYPO3.settings.PID +
 						'&tx_seminars_pi2[table]=tx_seminars_attendances' +
 						'&tx_seminars_pi2[eventUid]=' + uid;
-					window.location = url;
 				}
 			}
-		},
+		}
 	}, {
 		xtype: 'menuseparator',
-		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.EditButton.hidden,
+		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.EditButton.hidden
 	}, {
 		id: 'typo3-backend-seminars-events-menu-edit',
 		iconCls: 'edit',
@@ -125,16 +124,15 @@ TYPO3.Backend.Seminars.Events.Menu = {
 					var uid = Ext.getCmp('typo3-backend-seminars-events-gridpanel').
 						getStore().getAt(TYPO3.Backend.Seminars.Events.rowIndex).
 						get('uid');
-					var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
+					window.location = TYPO3.settings.Backend.Seminars.URL.alt_doc +
 						'?returnUrl=' + encodeURIComponent(window.location) +
 						'&edit[tx_seminars_seminars][' + uid + ']=edit';
-					window.location = url;
 				}
 			}
-		},
+		}
 	}, {
 		xtype: 'menuseparator',
-		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.DeleteButton.hidden,
+		hidden: TYPO3.settings.Backend.Seminars.Events.Menu.DeleteButton.hidden
 	}, {
 		id: 'typo3-backend-seminars-events-menu-delete',
 		iconCls: 'delete',
@@ -159,15 +157,15 @@ TYPO3.Backend.Seminars.Events.Menu = {
 									params: {
 										cmd: 1,
 										'prErr': 1,
-										'uPT': 0,
-									},
+										'uPT': 0
+									}
 								});
 							}
 						}
 					);
 				}
 			}
-		},
+		}
 	}]
 };
 
@@ -188,7 +186,7 @@ TYPO3.Backend.Seminars.Events.IconRenderer = function(value, metaData, record, r
 			break;
 	}
 
-	metaData.attr = ' title="id=' + record.get('uid') + '";'
+	metaData.attr = ' title="id=' + record.get('uid') + '";';
 
 	return '';
 };
@@ -213,7 +211,7 @@ TYPO3.Backend.Seminars.Events.StatusRenderer = function(value, metaData, record,
 	}
 
 	return value;
-}
+};
 
 TYPO3.Backend.Seminars.Events.GridPanel = {
 	id: 'typo3-backend-seminars-events-gridpanel',
@@ -226,7 +224,7 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 		id: 'typo3-backend-seminars-events-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getEvents',
 		baseParams: {
-			'id': TYPO3.settings.PID,
+			'id': TYPO3.settings.PID
 		},
 		root: 'rows',
 		idProperty: 'uid',
@@ -276,27 +274,25 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 							pid = TYPO3.settings.PID;
 						}
 
-						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
+						window.location = TYPO3.settings.Backend.Seminars.URL.alt_doc +
 							'?returnUrl=' + encodeURIComponent(window.location) +
 							'&edit[tx_seminars_seminars][' + pid + ']=new';
-						window.location = url;
 					}
 				}
-			},
+			}
 		}, {
 			iconCls: 'csv',
 			text: TYPO3.lang['labels.csv'],
 			listeners: {
 				'click': {
 					fn: function() {
-						var url = TYPO3.settings.Backend.Seminars.URL.csv +
+						window.location = TYPO3.settings.Backend.Seminars.URL.csv +
 							'?id=' + TYPO3.settings.PID +
 							'&tx_seminars_pi2[table]=tx_seminars_seminars' +
 							'&tx_seminars_pi2[pid]=' + TYPO3.settings.PID;
-						window.location = url;
 					}
 				}
-			},
+			}
 		},
 		'->',
 		{
@@ -309,7 +305,7 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 					}
 				}
 			}
-		}],
+		}]
 	},
 	bbar: new Ext.PagingToolbar({
 		pageSize: 50,
@@ -357,7 +353,7 @@ TYPO3.Backend.Seminars.Events.GridPanel = {
 					}
 				});
 			}
-		},
+		}
 	}
 };
 
@@ -367,7 +363,7 @@ TYPO3.Backend.Seminars.Events.TabPanel = {
 	title: TYPO3.lang.subModuleTitle_events,
 	layout: 'border',
 	hidden: TYPO3.settings.Backend.Seminars.Events.TabPanel.hidden,
-	items: [TYPO3.Backend.Seminars.Events.GridPanel],
+	items: [TYPO3.Backend.Seminars.Events.GridPanel]
 };
 
 TYPO3.Backend.Seminars.Registrations.Menu = {
@@ -381,15 +377,14 @@ TYPO3.Backend.Seminars.Registrations.Menu = {
 					var uid = Ext.getCmp('typo3-backend-seminars-registrations-gridpanel').
 						getStore().getAt(TYPO3.Backend.Seminars.Registrations.rowIndex).
 						get('uid');
-					var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
+					window.location = TYPO3.settings.Backend.Seminars.URL.alt_doc +
 						'?returnUrl=' + encodeURIComponent(window.location) +
 						'&edit[tx_seminars_attendances][' + uid + ']=edit';
-					window.location = url;
 				}
 			}
-		},
+		}
 	}, {
-		xtype: 'menuseparator',
+		xtype: 'menuseparator'
 	}, {
 		iconCls: 'delete',
 		text: TYPO3.lang["delete"],
@@ -412,21 +407,21 @@ TYPO3.Backend.Seminars.Registrations.Menu = {
 									params: {
 										cmd: 1,
 										'prErr': 1,
-										'uPT': 0,
-									},
+										'uPT': 0
+									}
 								});
 							}
 						}
 					);
 				}
 			}
-		},
-	}],
+		}
+	}]
 };
 
 TYPO3.Backend.Seminars.Registrations.IconRenderer = function(value, metaData, record, rowIndex, colIndex, store) {
 	metaData.css = 'typo3-backend-seminars-registration-icon';
-	metaData.attr = ' title="id=' + record.get('uid') + '";'
+	metaData.attr = ' title="id=' + record.get('uid') + '";';
 
 	return '';
 };
@@ -442,7 +437,7 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 		id: 'typo3-backend-seminars-registrations-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getRegistrations',
 		baseParams: {
-			'id': TYPO3.settings.PID,
+			'id': TYPO3.settings.PID
 		},
 		root: 'rows',
 		idProperty: 'uid',
@@ -478,27 +473,25 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 							pid = TYPO3.settings.PID;
 						}
 
-						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
+						window.location = TYPO3.settings.Backend.Seminars.URL.alt_doc +
 							'?returnUrl=' + encodeURIComponent(window.location) +
 							'&edit[tx_seminars_attendances][' + pid + ']=new';
-						window.location = url;
 					}
 				}
-			},
+			}
 		}, {
 			iconCls: 'csv',
 			text: TYPO3.lang['labels.csv'],
 			listeners: {
 				'click': {
 					fn: function() {
-						var url = TYPO3.settings.Backend.Seminars.URL.csv +
+						window.location = TYPO3.settings.Backend.Seminars.URL.csv +
 							'?id=' + TYPO3.settings.PID +
 							'&tx_seminars_pi2[table]=tx_seminars_attendances' +
 							'&tx_seminars_pi2[pid]=' + TYPO3.settings.PID;
-						window.location = url;
 					}
 				}
-			},
+			}
 		},
 		'->',
 		{
@@ -511,7 +504,7 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 					}
 				}
 			}
-		}],
+		}]
 	},
 	bbar: new Ext.PagingToolbar({
 		pageSize: 50,
@@ -539,7 +532,7 @@ TYPO3.Backend.Seminars.Registrations.GridPanel = {
 					}
 				});
 			}
-		},
+		}
 	}
 };
 
@@ -549,7 +542,7 @@ TYPO3.Backend.Seminars.Registrations.TabPanel = {
 	title: TYPO3.lang.subModuleTitle_registrations,
 	hidden: TYPO3.settings.Backend.Seminars.Registrations.TabPanel.hidden,
 	layout: 'border',
-	items: [TYPO3.Backend.Seminars.Registrations.GridPanel],
+	items: [TYPO3.Backend.Seminars.Registrations.GridPanel]
 };
 
 TYPO3.Backend.Seminars.Speakers.Menu = {
@@ -563,15 +556,14 @@ TYPO3.Backend.Seminars.Speakers.Menu = {
 					var uid = Ext.getCmp('typo3-backend-seminars-speakers-gridpanel').
 						getStore().getAt(TYPO3.Backend.Seminars.Speakers.rowIndex).
 						get('uid');
-					var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
+					window.location = TYPO3.settings.Backend.Seminars.URL.alt_doc +
 						'?returnUrl=' + encodeURIComponent(window.location) +
 						'&edit[tx_seminars_speakers][' + uid + ']=edit';
-					window.location = url;
 				}
 			}
-		},
+		}
 	}, {
-		xtype: 'menuseparator',
+		xtype: 'menuseparator'
 	}, {
 		iconCls: 'delete',
 		text: TYPO3.lang["delete"],
@@ -594,21 +586,21 @@ TYPO3.Backend.Seminars.Speakers.Menu = {
 									params: {
 										cmd: 1,
 										'prErr': 1,
-										'uPT': 0,
-									},
+										'uPT': 0
+									}
 								});
 							}
 						}
 					);
 				}
 			}
-		},
-	}],
+		}
+	}]
 };
 
 TYPO3.Backend.Seminars.Speakers.IconRenderer = function(value, metaData, record, rowIndex, colIndex, store) {
 	metaData.css = 'typo3-backend-seminars-speaker-icon';
-	metaData.attr = ' title="id=' + record.get('uid') + '";'
+	metaData.attr = ' title="id=' + record.get('uid') + '";';
 
 	return '';
 };
@@ -624,19 +616,19 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 		id: 'typo3-backend-seminars-speakers-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getSpeakers',
 		baseParams: {
-			'id': TYPO3.settings.PID,
+			'id': TYPO3.settings.PID
 		},
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
 			{name: 'uid'},
-			{name: 'title'},
+			{name: 'title'}
 		]
 	}),
 	columns: [
 		{header: '', renderer: TYPO3.Backend.Seminars.Speakers.IconRenderer, width: 30, hideable: false, menuDisabled: true, sortable: false, resizable: false},
 		{header: '#', dataIndex: 'uid'},
-		{header: TYPO3.lang['speakerlist.title'], dataIndex: 'title'},
+		{header: TYPO3.lang['speakerlist.title'], dataIndex: 'title'}
 	],
 	tbar: {
 		items:[{
@@ -651,13 +643,12 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 							pid = TYPO3.settings.PID;
 						}
 
-						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
+						window.location = TYPO3.settings.Backend.Seminars.URL.alt_doc +
 							'?returnUrl=' + encodeURIComponent(window.location) +
 							'&edit[tx_seminars_speakers][' + pid + ']=new';
-						window.location = url;
 					}
 				}
-			},
+			}
 		},
 		'->',
 		{
@@ -670,7 +661,7 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 					}
 				}
 			}
-		}],
+		}]
 	},
 	bbar: new Ext.PagingToolbar({
 		pageSize: 50,
@@ -698,7 +689,7 @@ TYPO3.Backend.Seminars.Speakers.GridPanel = {
 					}
 				});
 			}
-		},
+		}
 	}
 };
 
@@ -708,7 +699,7 @@ TYPO3.Backend.Seminars.Speakers.TabPanel = {
 	title: TYPO3.lang.subModuleTitle_speakers,
 	hidden: TYPO3.settings.Backend.Seminars.Speakers.TabPanel.hidden,
 	layout: 'border',
-	items: [TYPO3.Backend.Seminars.Speakers.GridPanel],
+	items: [TYPO3.Backend.Seminars.Speakers.GridPanel]
 };
 
 TYPO3.Backend.Seminars.Organizers.Menu = {
@@ -722,15 +713,14 @@ TYPO3.Backend.Seminars.Organizers.Menu = {
 					var uid = Ext.getCmp('typo3-backend-seminars-organizers-gridpanel').
 						getStore().getAt(TYPO3.Backend.Seminars.Organizers.rowIndex).
 						get('uid');
-					var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
+					window.location = TYPO3.settings.Backend.Seminars.URL.alt_doc +
 						'?returnUrl=' + encodeURIComponent(window.location) +
 						'&edit[tx_seminars_organizers][' + uid + ']=edit';
-					window.location = url;
 				}
 			}
-		},
+		}
 	}, {
-		xtype: 'menuseparator',
+		xtype: 'menuseparator'
 	}, {
 		iconCls: 'delete',
 		text: TYPO3.lang["delete"],
@@ -753,21 +743,21 @@ TYPO3.Backend.Seminars.Organizers.Menu = {
 									params: {
 										cmd: 1,
 										'prErr': 1,
-										'uPT': 0,
-									},
+										'uPT': 0
+									}
 								});
 							}
 						}
 					);
 				}
 			}
-		},
-	}],
+		}
+	}]
 };
 
 TYPO3.Backend.Seminars.Organizers.IconRenderer = function(value, metaData, record, rowIndex, colIndex, store) {
 	metaData.css = 'typo3-backend-seminars-organizer-icon';
-	metaData.attr = ' title="id=' + record.get('uid') + '";'
+	metaData.attr = ' title="id=' + record.get('uid') + '";';
 
 	return '';
 };
@@ -783,19 +773,19 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 		id: 'typo3-backend-seminars-organizers-store',
 		url: TYPO3.settings.Backend.Seminars.URL.ajax + 'Seminars::getOrganizers',
 		baseParams: {
-			'id': TYPO3.settings.PID,
+			'id': TYPO3.settings.PID
 		},
 		root: 'rows',
 		idProperty: 'uid',
 		fields: [
 			{name: 'uid'},
-			{name: 'title'},
+			{name: 'title'}
 		]
 	}),
 	columns: [
 		{header: '', renderer: TYPO3.Backend.Seminars.Organizers.IconRenderer, width: 30, hideable: false, menuDisabled: true, sortable: false, resizable: false},
 		{header: '#', dataIndex: 'uid'},
-		{header: TYPO3.lang['organizerlist.title'], dataIndex: 'title'},
+		{header: TYPO3.lang['organizerlist.title'], dataIndex: 'title'}
 	],
 	tbar: {
 		items:[{
@@ -810,13 +800,12 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 							pid = TYPO3.settings.PID;
 						}
 
-						var url = TYPO3.settings.Backend.Seminars.URL.alt_doc +
+						window.location = TYPO3.settings.Backend.Seminars.URL.alt_doc +
 							'?returnUrl=' + encodeURIComponent(window.location) +
 							'&edit[tx_seminars_organizers][' + pid + ']=new';
-						window.location = url;
 					}
 				}
-			},
+			}
 		},
 		'->',
 		{
@@ -829,7 +818,7 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 					}
 				}
 			}
-		}],
+		}]
 	},
 	bbar: new Ext.PagingToolbar({
 		pageSize: 50,
@@ -857,7 +846,7 @@ TYPO3.Backend.Seminars.Organizers.GridPanel = {
 					}
 				});
 			}
-		},
+		}
 	}
 };
 
@@ -866,7 +855,7 @@ TYPO3.Backend.Seminars.Organizers.TabPanel = {
 	id: 'typo3-backend-seminars-organizers-tabpanel',
 	title: TYPO3.lang.subModuleTitle_organizers,
 	layout: 'border',
-	items: [TYPO3.Backend.Seminars.Organizers.GridPanel],
+	items: [TYPO3.Backend.Seminars.Organizers.GridPanel]
 };
 
 /**
@@ -876,7 +865,7 @@ TYPO3.Backend.Seminars.Organizers.TabPanel = {
 TYPO3.Backend.Seminars.Default.TabPanel = {
 	iconCls: 'typo3-backend-seminars-default-tabpanel-icon',
 	id: 'typo3-backend-seminars-default-tabpanel',
-	title: 'Default',
+	title: 'Default'
 };
 
 TYPO3.Backend.Seminars.TabPanel = {
@@ -887,7 +876,7 @@ TYPO3.Backend.Seminars.TabPanel = {
 	items: [TYPO3.Backend.Seminars.Default.TabPanel],
 	getState: function() {
 		return {
-			activeTab: this.getActiveTab().getId(),
+			activeTab: this.getActiveTab().getId()
 		};
 	},
 	stateEvents: ['tabchange'],
@@ -904,7 +893,7 @@ TYPO3.Backend.Seminars.state.SessionProvider = function(config) {
 		readUrl: '.',
 		saveUrl: '.'
 	});
-}
+};
 
 Ext.extend(TYPO3.Backend.Seminars.state.SessionProvider, Ext.state.Provider, {
 	set: function(name, value) {
@@ -916,7 +905,7 @@ Ext.extend(TYPO3.Backend.Seminars.state.SessionProvider, Ext.state.Provider, {
 			url: this.saveUrl,
 			params: {
 				'name': name,
-				'value': Ext.encode(this.encodeValue(value)),
+				'value': Ext.encode(this.encodeValue(value))
 			},
 			scope: this,
 			success: this.onSaveSuccess,
@@ -995,7 +984,7 @@ TYPO3.Backend.Seminars.start = function() {
 
 	TYPO3.Backend.Seminars.viewport = new Ext.Viewport({
 		layout: 'border',
-		items: Ext.getCmp('typo3-backend-seminars-tabpanel'),
+		items: Ext.getCmp('typo3-backend-seminars-tabpanel')
 	});
 };
 
