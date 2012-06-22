@@ -1,4 +1,5 @@
 0.9.5 (currently working on)
+- [#4467] Fix: Test failures and crashes in current Core master in tx_seminars_FrontEnd_DefaultControllerTest, tx_seminars_OldModel_RegistrationTest, tx_seminars_Service_RegistrationManagerTest
 - [#4371] Fix: Empty labels in the FE editor and the registration form need be just a space instead of &nbsp;
 - [#4440] Fix: Only use forceCharset for TYPO3 < 4.7
 - [#4437] Fix: Test failures in the DefaultController tests when the test are run on a typo3.local host

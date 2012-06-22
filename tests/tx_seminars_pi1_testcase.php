@@ -139,6 +139,11 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		tx_oelib_templatehelper::setCachedConfigurationValue(
 			'timeFormat', '%H:%M'
 		);
+
+		/** @var $content tslib_cObj|PHPUnit_Framework_MockObject_MockObject */
+		$content = $this->getMock('tslib_cObj', array('IMAGE'));
+		$content->expects($this->any())->method('IMAGE')->will($this->returnValue('<img src="foo.jpg" alt="bar"/>'));
+		$this->fixture->cObj = $content;
 	}
 
 	public function tearDown() {
@@ -2732,34 +2737,45 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testListViewUsesTopicImage() {
-		$this->testingFramework->createDummyFile('test_foo.gif');
+	/**
+	 * @test
+	 */
+	public function listViewUsesTopicImage() {
+		$fileName = 'test_foo.gif';
+		$topicTitle = 'Test topic';
 
 		$topicUid = $this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_TOPIC,
-				'title' => 'Test topic',
-				'image' => 'test_foo.gif',
+				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'title' => $topicTitle,
+				'image' => $fileName,
 			)
 		);
 		$this->testingFramework->createRecord(
-			SEMINARS_TABLE_SEMINARS,
+			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
-				'object_type' => SEMINARS_RECORD_TYPE_DATE,
+				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
-				'title' => 'Test date'
+				'title' => 'Test date',
 			)
 		);
 
-		$listViewWithImage = $this->fixture->main('', array());
-		$this->testingFramework->deleteDummyFile('test_foo.gif');
+		/** @var $content tslib_cObj|PHPUnit_Framework_MockObject_MockObject */
+		$content = $this->getMock('tslib_cObj', array('IMAGE'));
+		$content->expects($this->any())->method('IMAGE')
+			->with(array(
+			'file' => 'uploads/tx_seminars/' . $fileName, 'file.' => array(),
+			'altText' => $topicTitle, 'titleText' => $topicTitle
+		))
+			->will($this->returnValue('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>'));
+		$this->fixture->cObj = $content;
 
 		$this->assertRegExp(
-			'/<img src=".*title="Test topic"/',
-			$listViewWithImage
+			'/<img src="[^"]*"[^>]*title="' . $topicTitle . '"/',
+			$this->fixture->main('', array())
 		);
 	}
 
