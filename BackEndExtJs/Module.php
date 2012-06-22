@@ -154,17 +154,18 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 
 		if (!file_exists($languageCacheFileAbsolute)) {
 			$content = 'Ext.ns("TYPO3");';
-			$content .= 'TYPO3.lang = ' .
-				json_encode($this->getLanguageLabels($language)) . ';';
+			$content .= 'TYPO3.lang = ' . json_encode($this->getLanguageLabels($language)) . ';';
 			t3lib_div::writeFileToTypo3tempDir(
 				$languageCacheFileAbsolute, $content
 			);
 		}
 
 		$this->getPageRenderer()->addJsFile(
-			t3lib_div::getIndpEnv('TYPO3_SITE_PATH') . $languageCacheFile,
+			'../' . $languageCacheFile,
 			'text/javascript',
 			FALSE,
+			TRUE,
+			'',
 			TRUE
 		);
 	}
@@ -179,7 +180,7 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 	 *               $this->locallangFiles
 	 */
 	private function getLanguageLabels($language) {
-		$result = array();
+		$rawLabels = array();
 
 		foreach (self::$locallangFiles as $file) {
 			$labelsInAllLanguages
@@ -191,10 +192,19 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 				}
 			}
 
-			$result = array_merge($result, $labelsToUse);
+			$rawLabels = array_merge($rawLabels, $labelsToUse);
 		}
 
-		return $result;
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4006000) {
+			$unifiedLabels = array();
+			foreach ($rawLabels as $key => $label) {
+				$unifiedLabels[$key] = $label[0]['target'];
+			}
+		} else {
+			$unifiedLabels = $rawLabels;
+		}
+
+		return $unifiedLabels;
 	}
 
 	/**
