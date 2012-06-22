@@ -151,6 +151,11 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'index.php?id=42&tx_seminars_pi1%5BshowUid%5D=1337'
 			));
 		$this->fixture->injectLinkBuilder($this->linkBuilder);
+
+		/** @var $content tslib_cObj|PHPUnit_Framework_MockObject_MockObject */
+		$content = $this->getMock('tslib_cObj', array('IMAGE'));
+		$content->expects($this->any())->method('IMAGE')->will($this->returnValue('<img src="foo.jpg" alt="bar"/>'));
+		$this->fixture->cObj = $content;
 	}
 
 	public function tearDown() {
@@ -2957,16 +2962,20 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testListViewUsesTopicImage() {
-		$this->testingFramework->createDummyFile('test_foo.gif');
+	/**
+	 * @test
+	 */
+	public function listViewUsesTopicImage() {
+		$fileName = 'test_foo.gif';
+		$topicTitle = 'Test topic';
 
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->systemFolderPid,
 				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
-				'title' => 'Test topic',
-				'image' => 'test_foo.gif',
+				'title' => $topicTitle,
+				'image' => $fileName,
 			)
 		);
 		$this->testingFramework->createRecord(
@@ -2975,16 +2984,23 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'pid' => $this->systemFolderPid,
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
-				'title' => 'Test date'
+				'title' => 'Test date',
 			)
 		);
 
-		$listViewWithImage = $this->fixture->main('', array());
-		$this->testingFramework->deleteDummyFile('test_foo.gif');
+		/** @var $content tslib_cObj|PHPUnit_Framework_MockObject_MockObject */
+		$content = $this->getMock('tslib_cObj', array('IMAGE'));
+		$content->expects($this->any())->method('IMAGE')
+			->with(array(
+				'file' => 'uploads/tx_seminars/' . $fileName, 'file.' => array(),
+				'altText' => $topicTitle, 'titleText' => $topicTitle
+			))
+			->will($this->returnValue('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>'));
+		$this->fixture->cObj = $content;
 
 		$this->assertRegExp(
-			'/<img src=".*title="Test topic"/',
-			$listViewWithImage
+			'/<img src="[^"]*"[^>]*title="' . $topicTitle . '"/',
+			$this->fixture->main('', array())
 		);
 	}
 
