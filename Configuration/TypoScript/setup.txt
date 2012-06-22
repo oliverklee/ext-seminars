@@ -672,7 +672,7 @@ plugin.tx_seminars_pi1 {
 					data {
 						items {
 							item {
-								caption = &nbsp;
+								caption =
 								value = 0
 							}
 						}
@@ -957,7 +957,7 @@ plugin.tx_seminars_pi1 {
 							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
 							data {
 								items {
-									10.caption = &nbsp;
+									10.caption =
 									10.value = 0
 								}
 								userobj.php (
@@ -1066,7 +1066,7 @@ plugin.tx_seminars_pi1 {
 							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
 							data {
 								items {
-									10.caption = &nbsp;
+									10.caption =
 									10.value = 0
 								}
 								userobj.php (
@@ -1277,7 +1277,7 @@ plugin.tx_seminars_pi1 {
 							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
 							data {
 								items {
-									10.caption = &nbsp;
+									10.caption =
 									10.value = 0
 									20.caption = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.gender_male
 									20.value = 1
@@ -1439,7 +1439,7 @@ plugin.tx_seminars_pi1 {
 							wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
 							data {
 								items {
-									10.caption = &nbsp;
+									10.caption =
 									10.value = 0
 									20.caption = LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers.gender_male
 									20.value = 1
@@ -2923,7 +2923,7 @@ plugin.tx_seminars_pi1 {
 						name = kids
 						data.items {
 							blank {
-								caption = &nbsp;
+								caption =
 								value = 0
 							}
 							1 {
