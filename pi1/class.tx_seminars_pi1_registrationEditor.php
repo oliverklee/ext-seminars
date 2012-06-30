@@ -243,6 +243,10 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		$this->setLabels();
 		$this->hideUnusedFormFields();
 
+		$this->setMarker('feuser_data', $this->getAllFeUserData());
+		$this->setMarker('billing_address', $this->getBillingAddress());
+		$this->setMarker('registration_data', $this->getRegistrationData());
+
 		return $this->getSubpart('', 2);
 	}
 
@@ -698,7 +702,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		$result = array();
 		foreach ($rows as $row) {
 			$result[] = array(
-				'caption' => $row['title'] . '<br />',
+				'caption' => $row['title'],
 				'value' => $row['uid'],
 			);
 		}
@@ -1145,12 +1149,8 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 		);
 
 		$result = array();
-		// Add an empty item at the top so we won't have Afghanistan (the first
-		// entry) pre-selected for empty values.
-		$result[] = array(
-			'caption' => '&nbsp;',
-			'value' => '',
-		);
+		// Puts an empty item at the top so we won't have Afghanistan (the first entry) pre-selected for empty values.
+		$result[] = array('caption' => '', 'value' => '');
 
 		foreach ($allCountries as $currentCountryName) {
 			$result[] = array(
