@@ -2379,15 +2379,6 @@ plugin.tx_seminars_pi1 {
 						}
 					}
 
-					feuser_data = renderlet:LABEL
-					feuser_data {
-						name = feuser_data
-						data.value.userobj {
-							extension = this
-							method = getAllFeUserData
-						}
-					}
-
 					price = renderlet:LISTBOX
 					price {
 						name = price
@@ -2426,6 +2417,7 @@ plugin.tx_seminars_pi1 {
 								method = getPreselectedPaymentMethod
 							}
 						}
+						wrapitem = |<br/>
 						validators {
 							10 = validator:STANDARD
 							10.userobj {
@@ -3192,24 +3184,6 @@ plugin.tx_seminars_pi1 {
 						data.value.userobj {
 							extension = this
 							method = getStepCounter
-						}
-					}
-
-					billing_address = renderlet:LABEL
-					billing_address {
-						name = billing_address
-						data.value.userobj {
-							extension = this
-							method = getBillingAddress
-						}
-					}
-
-					registration_data = renderlet:LABEL
-					registration_data {
-						name = registration_data
-						data.value.userobj {
-							extension = this
-							method = getRegistrationData
 						}
 					}
 
