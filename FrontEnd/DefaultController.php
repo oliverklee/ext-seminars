@@ -2073,9 +2073,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				$dateToShow = '';
 			} else {
 				if ($whatToDisplay == 'other_dates') {
-					$dateToShow = $this->createSingleViewLink(
-						$event, $this->seminar->getDate()
-					);
+					$dateToShow = $this->createSingleViewLink($event, $this->seminar->getDate(), FALSE);
 				} else {
 					$dateToShow = $currentDate;
 				}
@@ -3494,13 +3492,15 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @param tx_seminars_Model_Event $event
 	 *        the event which to link to
 	 * @param string $linkText the link text, must not be empty
+	 * @param boolean $htmlspecialcharLinkText whether to htmlspecialchar the link text
 	 *
 	 * @return string HTML code for the link to the event's single view page
 	 */
-	public function createSingleViewLink(tx_seminars_Model_Event $event, $linkText) {
+	public function createSingleViewLink(tx_seminars_Model_Event $event, $linkText, $htmlspecialcharLinkText = TRUE) {
 		$url = $this->getLinkBuilder()->createRelativeUrlForEvent($event);
+		$processedLinkText = $htmlspecialcharLinkText ? htmlspecialchars($linkText) : $linkText;
 
-		return '<a href="' . htmlspecialchars($url) . '">' . htmlspecialchars($linkText) . '</a>';
+		return '<a href="' . htmlspecialchars($url) . '">' . $processedLinkText . '</a>';
 	}
 
 	/**

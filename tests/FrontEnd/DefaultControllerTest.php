@@ -8457,13 +8457,39 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function createSingleViewLinkHtmlSpecialCharsLinkText() {
+	public function createSingleViewLinkByDefaultHtmlSpecialCharsLinkText() {
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(array());
 
 		$this->assertContains(
 			'Chaos &amp; Confusion',
 			$this->fixture->createSingleViewLink($event, 'Chaos & Confusion')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createSingleViewLinkByWithHtmlSpecialCharsTrueHtmlSpecialCharsLinkText() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+
+		$this->assertContains(
+			'Chaos &amp; Confusion',
+			$this->fixture->createSingleViewLink($event, 'Chaos & Confusion', TRUE)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createSingleViewLinkByWithHtmlSpecialCharsFalseNotHtmlSpecialCharsLinkText() {
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
+			->getLoadedTestingModel(array());
+
+		$this->assertContains(
+			'Chaos & Confusion',
+			$this->fixture->createSingleViewLink($event, 'Chaos & Confusion', FALSE)
 		);
 	}
 }
