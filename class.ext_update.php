@@ -118,7 +118,7 @@ class ext_update {
 			default:
 				throw new InvalidArgumentException(
 					'needsToUpdateEventField was called with "' . $fieldToUpdate .
-						'", but allowed values are only '\'needsRegistration\' and \'queueSize\'.',
+						'", but allowed values are only "needsRegistration" and "queueSize".',
 					1333291685
 				);
 		}

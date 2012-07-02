@@ -1,4 +1,5 @@
 0.9.4 (currently working on)
+- [#4482] Fix: PHP error in class.ext_update.php
 - [#4462] Fix: HTML tags are visible in the forms when using ameos_formidable 1.1.549
 - [#4467] Fix: Test failures and crashes in current Core master in tx_seminars_FrontEnd_DefaultControllerTest, tx_seminars_OldModel_RegistrationTest, tx_seminars_Service_RegistrationManagerTest
 - [#4371] Fix: Empty labels in the FE editor and the registration form need be just a space instead of &nbsp;
