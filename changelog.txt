@@ -1,3 +1,5 @@
+0.9.5 (currently working on)
+
 0.9.4 (released 2012-07-03)
 - [#4482] Fix: PHP error in class.ext_update.php
 - [#4462] Fix: HTML tags are visible in the forms when using ameos_formidable 1.1.549
