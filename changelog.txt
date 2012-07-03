@@ -1,4 +1,5 @@
 0.9.5 (currently working on)
+- [#4481] Fix: Failing unit tests in tx_seminars_EmailSalutation_testcase
 
 0.9.4 (released 2012-07-03)
 - [#4482] Fix: PHP error in class.ext_update.php
