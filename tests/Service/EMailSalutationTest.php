@@ -99,6 +99,16 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * Checks whether the sr_feuser_register is installed ans marks the test as skipped if that extension is not installed.
+	 *
+	 * @return void
+	 */
+	protected function skipWithoutSrFeuserRegister() {
+		if (!t3lib_extMgm::isLoaded('sr_feuser_register')) {
+			$this->markTestSkipped('This test is skipped because it requires the sr_feuser_register extension to be installed.');
+		}
+	}
 
 	///////////////////////////////////////////
 	// Tests concerning the utility functions
@@ -110,11 +120,15 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_createFrontEndUserForGivenGender_AssignesGenderToFrontEndUser() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function createFrontEndUserForGivenGenderAssignsGenderToFrontEndUser() {
+		$this->skipWithoutSrFeuserRegister();
+
+		$this->assertSame(
 			tx_oelib_Model_FrontEndUser::GENDER_FEMALE,
-			$this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE)
-				->getGender()
+			$this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE)->getGender()
 		);
 	}
 
@@ -130,35 +144,42 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getSalutationForMaleUser_ReturnsMaleSalutation() {
-		$user = $this->createFrontEndUser(
-			tx_oelib_Model_FrontEndUser::GENDER_MALE
-		);
+	/**
+	 * @test
+	 */
+	public function getSalutationForMaleUserReturnsMaleSalutation() {
+		$this->skipWithoutSrFeuserRegister();
+
+		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_MALE);
 
 		$this->assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
-				->translate('email_hello_formal_0'),
+			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_0'),
 			$this->fixture->getSalutation($user)
 		);
 	}
 
-	public function test_getSalutationForMaleUser_ReturnsUsersNameWithGenderSpecificTitle() {
-		$user = $this->createFrontEndUser(
-			tx_oelib_Model_FrontEndUser::GENDER_MALE
-		);
+	/**
+	 * @test
+	 */
+	public function getSalutationForMaleUserReturnsUsersNameWithGenderSpecificTitle() {
+		$this->skipWithoutSrFeuserRegister();
+
+		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_MALE);
 
 		$this->assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
-				->translate('email_salutation_title_0') . ' ' .
-				$user->getLastOrFullName(),
+			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_0') .
+				' ' . $user->getLastOrFullName(),
 			$this->fixture->getSalutation($user)
 		);
 	}
 
-	public function test_getSalutationForFemaleUser_ReturnsFemaleSalutation() {
-		$user = $this->createFrontEndUser(
-			tx_oelib_Model_FrontEndUser::GENDER_FEMALE
-		);
+	/**
+	 * @test
+	 */
+	public function getSalutationForFemaleUserReturnsFemaleSalutation() {
+		$this->skipWithoutSrFeuserRegister();
+
+		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE);
 
 		$this->assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
@@ -167,15 +188,17 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getSalutationForFemaleUser_ReturnsUsersNameWithGenderSpecificTitle() {
-		$user = $this->createFrontEndUser(
-			tx_oelib_Model_FrontEndUser::GENDER_FEMALE
-		);
+	/**
+	 * @test
+	 */
+	public function getSalutationForFemaleUserReturnsUsersNameWithGenderSpecificTitle() {
+		$this->skipWithoutSrFeuserRegister();
+
+		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE);
 
 		$this->assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
-				->translate('email_salutation_title_1') . ' ' .
-				$user->getLastOrFullName(),
+			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_1') .
+				' ' . $user->getLastOrFullName(),
 			$this->fixture->getSalutation($user)
 		);
 	}

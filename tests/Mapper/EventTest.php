@@ -44,6 +44,7 @@ class tx_seminars_Mapper_EventTest extends tx_phpunit_testcase {
 
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		tx_oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
 		$this->fixture = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
 	}
@@ -893,7 +894,7 @@ class tx_seminars_Mapper_EventTest extends tx_phpunit_testcase {
 	 * @expectedException tx_oelib_Exception_NotFound
 	 */
 	public function findNextUpcomingWithPastEventThrowsEmptyQueryResultException() {
-		$uid = $this->testingFramework->createRecord(
+		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('begin_date' => $GLOBALS['SIM_ACCESS_TIME'] - 1000)
 		);

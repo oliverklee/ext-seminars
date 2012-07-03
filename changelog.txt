@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4481] Fix: Failing unit tests in tx_seminars_Mapper_EventTest and tx_seminars_Service_EMailSalutationTest
 - [#4462] Fix: HTML tags are visible in the forms when using ameos_formidable 1.1.549
 - [#4471] Fix: Double escape of date in "other dates" table in single view
 - [#4467] Fix: Test failures and crashes in current Core master in tx_seminars_FrontEnd_DefaultControllerTest, tx_seminars_OldModel_RegistrationTest, tx_seminars_Service_RegistrationManagerTest

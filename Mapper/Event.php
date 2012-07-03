@@ -137,10 +137,8 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 	 * @throws tx_oelib_Exception_NotFound
 	 */
 	public function findNextUpcoming() {
-		$whereClause = 'cancelled!=' . tx_seminars_seminar::STATUS_CANCELED .
-			tx_oelib_db::enableFields('tx_seminars_seminars') .
-			' AND object_type <> ' . tx_seminars_Model_Event::TYPE_TOPIC .
-			' AND begin_date > ' . $GLOBALS['SIM_ACCESS_TIME'];
+		$whereClause = $this->getUniversalWhereClause() . ' AND cancelled <> ' . tx_seminars_seminar::STATUS_CANCELED .
+			' AND object_type <> ' . tx_seminars_Model_Event::TYPE_TOPIC . ' AND begin_date > ' . $GLOBALS['SIM_ACCESS_TIME'];
 
 		try {
 			$row = tx_oelib_db::selectSingle(
