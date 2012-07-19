@@ -856,7 +856,7 @@
 			<label index="label_register_all_terms">Anmeldebedingungen</label>
 			<label index="label_terms">Ich akzeptiere die allgemeinen Geschäftsbedingungen.</label>
 			<label index="label_terms_2">Ich akzeptiere die Reisebedingungen.</label>
-			<label index="label_submit_registration">Anmeldung abschicken</label>
+			<label index="label_submit_registration">Zahlungspflichtig anmelden</label>
 			<label index="label_proceed_registration">Weiter</label>
 			<label index="label_back_registration">Zurück</label>
 			<label index="label_your_user_data_formal">Ihre Adressdaten</label>
