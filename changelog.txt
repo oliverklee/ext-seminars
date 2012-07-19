@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4497] Change: Adapt the German label for the submit button to § 312g Abs. 3 BGB
 - [#4485] Fix: Add TYPO3 maximum version to ext_emconf.php
 - [#4481] Fix: Failing unit tests in tx_seminars_Mapper_EventTest and tx_seminars_Service_EMailSalutationTest
 - [#4462] Fix: HTML tags are visible in the forms when using ameos_formidable 1.1.549
