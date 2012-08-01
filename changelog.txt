@@ -1,4 +1,5 @@
 0.9.5 (currently working on)
+- [#4483] Fix: Dash gets escaped twice in the time-slot list in the single view
 - [#4497] Change: Adapt the German label for the submit button to § 312g Abs. 3 BGB
 - [#4485] Fix: Add TYPO3 maximum version to ext_emconf.php
 - [#4481] Fix: Failing unit tests in tx_seminars_EmailSalutation_testcase
