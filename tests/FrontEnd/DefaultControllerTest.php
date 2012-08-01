@@ -1751,6 +1751,33 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 	/**
 	 * @test
+	 *
+	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=4483
+	 */
+	public function testSingleViewDisplaysTimeslotTimesWithDash() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
+		$timeSlotUid = $this->testingFramework->createRecord(
+			'tx_seminars_timeslots',
+			array(
+				'seminar' => $this->seminarUid,
+				'begin_date' => mktime(9, 45, 0, 4, 2, 2020),
+				'end_date' => mktime(18, 30, 0, 4, 2, 2020),
+			)
+		);
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid,
+			array('timeslots' => (string) $timeSlotUid)
+		);
+
+		$this->fixture->piVars['showUid'] = $this->seminarUid;
+		$this->assertContains(
+			'9:45&#8211;18:30',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
 	 */
 	public function testSingleViewCanContainOneHtmlspecialcharedTimeSlotRoom() {
 		$this->fixture->setConfigurationValue('what_to_display', 'single_view');

@@ -976,11 +976,16 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		$timeSlotsOutput = '';
 		$timeSlots = $this->seminar->getTimeSlotsAsArrayWithMarkers();
 		foreach ($timeSlots as $timeSlotData) {
-			foreach ($timeSlotData as $key => $value) {
-				$this->setMarker($key, htmlspecialchars($value), 'timeslot');
-			}
+			$this->setMarker('timeslot_date', $timeSlotData['date']);
+			$this->setMarker('timeslot_time', $timeSlotData['time']);
+			$this->setMarker('timeslot_entry_date', $timeSlotData['entry_date']);
+			$this->setMarker('timeslot_room', htmlspecialchars($timeSlotData['room']));
+			$this->setMarker('timeslot_place', htmlspecialchars($timeSlotData['place']));
+			$this->setMarker('timeslot_speakers', htmlspecialchars($timeSlotData['speakers']));
 
+			/** @var $timeSlot tx_seminars_Model_TimeSlot */
 			$timeSlot = $timeSlotMapper->find($timeSlotData['uid']);
+
 			foreach ($this->getSingleViewHooks() as $hook) {
 				$hook->modifyTimeSlotListRow($timeSlot, $this->getTemplate());
 			}
