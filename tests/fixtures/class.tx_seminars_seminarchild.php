@@ -605,5 +605,16 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	public function setRecordPropertyString($key, $value) {
 		parent::setRecordPropertyString($key, $value);
 	}
+
+	/**
+	 * Sets the ID of the separate details page for this event.
+	 *
+	 * @param string $pageId the page UID or alias, may also be empty
+	 *
+	 * @return void
+	 */
+	public function setDetailsPage($pageId) {
+		$this->setRecordPropertyString('details_page', $pageId);
+	}
 }
 ?>

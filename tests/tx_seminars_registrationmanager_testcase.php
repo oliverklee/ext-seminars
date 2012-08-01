@@ -429,6 +429,25 @@ class tx_seminars_registrationmanager_testcase extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 *
+	 * @see https://bugs.oliverklee.com/show_bug.cgi?id=4504
+	 */
+	public function testGetLinkToRegistrationOrLoginPageWithLoggedInUserAndSeparateDetailsPageCreatesLinkToRegistrationPage() {
+		$this->createFrontEndPages();
+
+		$detailsPageUid = $this->testingFramework->createFrontEndPage();
+		$this->seminar->setDetailsPage($detailsPageUid);
+
+		$this->createAndLogInFrontEndUser();
+
+		$this->assertContains(
+			'?id=' . $this->registrationPageUid,
+			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+		);
+	}
+
 	public function testGetLinkToRegistrationOrLoginPageWithLoggedInUserDoesNotContainRedirect() {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();

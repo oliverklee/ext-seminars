@@ -256,9 +256,6 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Creates an HTML link to either the registration page (if a user is
 	 * logged in) or the login page (if no user is logged in).
 	 *
-	 * If $seminar has a separate details page, the link to that details page
-	 * will be returned instead.
-	 *
 	 * Before you can call this function, you should make sure that the link
 	 * makes sense (ie. the seminar still has vacancies, the user hasn't
 	 * registered for this seminar etc.).
@@ -272,20 +269,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	public function getLinkToRegistrationOrLoginPage(
 		tx_oelib_templatehelper $plugin, tx_seminars_seminar $seminar
 	) {
-		$label = $this->getRegistrationLabel($plugin, $seminar);
-
-		if ($seminar->hasSeparateDetailsPage()) {
-			$result = $plugin->cObj->typolink(
-				$label,
-				$seminar->getDetailedViewLinkConfiguration($plugin)
-			);
-		} else {
-			$result = $this->getLinkToStandardRegistrationOrLoginPage(
-				$plugin, $seminar, $label
-			);
-		}
-
-		return $result;
+		return $this->getLinkToStandardRegistrationOrLoginPage($plugin, $seminar, $this->getRegistrationLabel($plugin, $seminar));
 	}
 
 	/**
