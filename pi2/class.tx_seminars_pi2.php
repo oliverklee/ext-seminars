@@ -161,7 +161,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				$dataCharset = 'utf-8';
 			} else {
 				$dataCharset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
-					? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] : 'ISO-8859-1';
+					? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] : 'iso-8859-1';
 			}
 			$resultCharset = strtolower(
 				$this->configGetter->getConfValueString('charsetForCsv')

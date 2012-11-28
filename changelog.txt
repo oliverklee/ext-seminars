@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4603] Fix: Download CSV file is empty, thanks to Ton Tersteeg
 - [#4504] Fix: Fix the function comment for registrationmanager::getLinkToRegistrationOrLoginPage and add a unit test
 - [#4483] Fix: Dash gets escaped twice in the time-slot list in the single view
 - [#4497] Change: Adapt the German label for the submit button to § 312g Abs. 3 BGB
