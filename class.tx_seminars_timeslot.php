@@ -191,7 +191,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 			$charset = 'utf-8';
 		} else {
 			$charset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
-				? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] : 'ISO-8859-1';
+				? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] : 'iso-8859-1';
 		}
 
 		$updateArray['title'] = html_entity_decode(
