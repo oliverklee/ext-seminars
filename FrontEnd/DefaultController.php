@@ -2032,7 +2032,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			$listOfCategories = $categoryList->createCategoryList(
 				$this->seminar->getCategories()
 			);
-			$categoryList->__destruct();
 
 			if (($listOfCategories === $this->previousCategory)
 				&& $this->getConfValueBoolean(
