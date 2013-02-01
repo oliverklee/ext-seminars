@@ -2034,7 +2034,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 			$listOfCategories = $categoryList->createCategoryList(
 				$this->seminar->getCategories()
 			);
-			$categoryList->__destruct();
 
 			if (($listOfCategories === $this->previousCategory)
 				&& $this->getConfValueBoolean(
