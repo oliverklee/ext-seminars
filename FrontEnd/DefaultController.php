@@ -811,11 +811,10 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			// TODO: This needs to be removed as soon as the list view is moved
 			// to its own class.
 			// @see https://bugs.oliverklee.com/show_bug.cgi?id=290
-			$seminar = clone $this->seminar;
+			$seminar = $this->seminar;
 			if ($this->seminar->hasEndDate()) {
 				$result .= $this->createEventsOnNextDayList();
 			}
-			$this->seminar->__destruct();
 			$this->setSeminar($seminar);
 			if ($this->seminar->isEventTopic() || $this->seminar->isEventDate()) {
 				$result .= $this->createOtherDatesList();
