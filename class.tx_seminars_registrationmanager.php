@@ -862,7 +862,6 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 				}
 			}
 		}
-		$bag->__destruct();
 	}
 
 	/**
@@ -882,7 +881,6 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 		$missingTopics = $this->getMissingRequiredTopics($event);
 		$result = $missingTopics->isEmpty();
-		$missingTopics->__destruct();
 
 		return $result;
 	}
@@ -986,8 +984,6 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		tx_oelib_mailerFactory::getInstance()->getMailer()->send(
 			$eMailNotification
 		);
-
-		$eMailNotification->__destruct();
 	}
 
 	/**
@@ -1089,8 +1085,6 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		tx_oelib_mailerFactory::getInstance()->getMailer()->send(
 			$eMailNotification
 		);
-
-		$eMailNotification->__destruct();
 	}
 
 	/**
@@ -1137,8 +1131,6 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
-
-		$eMail->__destruct();
 	}
 
 	/**
@@ -1574,8 +1566,6 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			'introduction',
 			$introduction . '.'
 		);
-
-		$salutation->__destruct();
 	}
 
 	/**

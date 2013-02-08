@@ -1,5 +1,6 @@
 0.10.0 (currently working on)
-- [#4622] Fix: Unit test crash with in the DefaultControllerTest PHP 5.4.6
+- [#4645] Fix: Crash when running the RegistrationManager unit tests in PHP 5.4.6
+- [#4622] Fix: Unit test crash in the DefaultControllerTest PHP 5.4.6
 - [#4631] Cleanup: Drop useless class comments
 - [#4630] Cleanup: Update the copyright to 2013
 - [#4623] Cleanup: Fix all instances of "Missing @return tag in function comment"
