@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4631] Cleanup: Drop useless class comments
 - [#4630] Cleanup: Update the copyright to 2013
 - [#4623] Cleanup: Fix all instances of "Missing @return tag in function comment"
 - [#4621] Fix: Event list crashes with PHP 5.4.6

@@ -23,10 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BackEndExtJs_Ajax_RegistrationsList for the "seminars" extension.
- *
- * This class provides functionality for creating a list of events for usage in
- * an AJAX call.
+ * This class provides functionality for creating a list of events for usage in an AJAX call.
  *
  * @package TYPO3
  * @subpackage tx_seminars

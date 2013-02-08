@@ -30,7 +30,7 @@ require_once($BACK_PATH . 'init.php');
 $BE_USER->modAccess($MCONF, 1);
 
 /**
- * BE CSV export module for the 'seminars' extension.
+ * BE CSV export module.
  *
  * @package TYPO3
  * @subpackage tx_seminars

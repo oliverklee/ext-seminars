@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BagBuilder_Event for the "seminars" extension.
- *
  * This builder class creates customized event bag objects.
  *
  * @package TYPO3

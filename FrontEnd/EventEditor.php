@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_FrontEnd_EventEditor for the "seminars" extension.
- *
  * This class is a controller which allows to create and edit events on the FE.
  *
  * @package TYPO3

@@ -23,10 +23,9 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_registrationchild' for the 'seminars' extension.
+ * Test case.
  *
- * This is mere a class used for unit tests of the 'seminars' extension. Don't
- * use it for any other purpose.
+ * This is mere a class used for unit tests. Don't use it for any other purpose.
  *
  * @package TYPO3
  * @subpackage tx_seminars

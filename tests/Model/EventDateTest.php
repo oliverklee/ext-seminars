@@ -23,9 +23,7 @@
 ***************************************************************/
 
 /**
- * Testcase for the 'event model' class in the 'seminars' extension.
- *
- * This testcase holds all tests specific to event dates.
+ * This test case holds all tests specific to event dates.
  *
  * @package TYPO3
  * @subpackage tx_seminars

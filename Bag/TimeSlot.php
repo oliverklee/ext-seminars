@@ -23,10 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_Bag_TimeSlot for the "seminars" extension.
- *
- * This aggregate class holds a bunch of TimeSlot objects and allows
- * to iterate over them.
+ * This aggregate class holds a bunch of TimeSlot objects and allows to iterate over them.
  *
  * @package TYPO3
  * @subpackage tx_seminars

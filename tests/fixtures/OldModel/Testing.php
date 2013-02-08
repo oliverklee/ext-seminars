@@ -23,9 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_tests_fixtures_OldModel_Testing for the "seminars"
- * extension.
- *
  * This class represents a test object from the database.
  *
  * @package TYPO3

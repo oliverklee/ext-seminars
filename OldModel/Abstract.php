@@ -28,10 +28,7 @@ if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
 }
 
 /**
- * Class tx_seminars_OldModel_Abstract for the "seminars" extension.
- *
- * This class represents an object that is created from a DB record
- * or can be written to a DB record.
+ * This class represents an object that is created from a DB record or can be written to a DB record.
  *
  * It will hold the corresponding data and can commit that data to the DB.
  *

@@ -23,9 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BagBuilder_Registration for the "seminars" extension.
- *
- * This builder class creates customized tx_seminars_Bag_Registration objects.
+ * This builder class creates customized registration bag objects.
  *
  * @package TYPO3
  * @subpackage tx_seminars

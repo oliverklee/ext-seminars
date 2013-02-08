@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_Food' for the 'seminars' extension.
- *
  * This class represents a food.
  *
  * @package TYPO3

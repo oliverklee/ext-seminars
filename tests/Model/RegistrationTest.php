@@ -23,8 +23,7 @@
 ***************************************************************/
 
 /**
- * Testcase for the tx_seminars_Model_Registration class in the "seminars"
- * extension.
+ * Test case.
  *
  * @package TYPO3
  * @subpackage tx_seminars

@@ -25,8 +25,7 @@
 require_once(PATH_typo3 . 'classes/class.typo3ajax.php');
 
 /**
- * Testcase for the tx_seminars_BackEndExtJs_Ajax_Dispatcher class in the "seminars"
- * extension.
+ * Test case.
  *
  * @package TYPO3
  * @subpackage tx_seminars

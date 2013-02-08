@@ -23,9 +23,8 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_registration' for the 'seminars' extension.
- *
  * This class represents a registration/attendance.
+ *
  * It will hold the corresponding data and can commit that data to the DB.
  *
  * @package TYPO3

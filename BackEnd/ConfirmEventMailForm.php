@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_BackEnd_ConfirmEventMailForm' for the 'seminars' extension.
+ * This class creates back-end e-mail form for confirming an event.
  *
  * @package TYPO3
  * @subpackage tx_seminars

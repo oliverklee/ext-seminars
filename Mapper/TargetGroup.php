@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Mapper_TargetGroup' for the 'seminars' extension.
- *
  * This class represents a mapper for target groups.
  *
  * @package TYPO3

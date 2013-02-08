@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'events list' for the 'seminars' extension.
+ * This class creates an events list in the back end.
  *
  * @package TYPO3
  * @subpackage tx_seminars

@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Mapper_Skill' for the 'seminars' extension.
- *
  * This class represents a mapper for skills.
  *
  * @package TYPO3

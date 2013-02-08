@@ -23,11 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm for the
- * "seminars" extension.
- *
- * This class represents a testing implementation of the AbstractEventMailForm
- * class.
+ * This class represents a testing implementation of the AbstractEventMailForm class.
  *
  * @package TYPO3
  * @subpackage tx_seminars

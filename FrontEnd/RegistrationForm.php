@@ -25,8 +25,6 @@
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
 /**
- * Class tx_seminars_FrontEnd_RegistrationForm for the "seminars" extension.
- *
  * This class is a controller which allows to create registrations on the FE.
  *
  * @package TYPO3

@@ -23,9 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BagBuilder_Category for the "seminars" extension.
- *
- * This builder class creates customized categorybag objects.
+ * This builder class creates customized category bag objects.
  *
  * @package TYPO3
  * @subpackage tx_seminars

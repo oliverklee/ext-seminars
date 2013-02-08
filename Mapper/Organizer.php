@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Mapper_Organizer' for the 'seminars' extension.
- *
  * This class represents a mapper for organizers.
  *
  * @package TYPO3

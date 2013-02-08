@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Mapper_Food' for the 'seminars' extension.
- *
  * This class represents a mapper for food.
  *
  * @package TYPO3

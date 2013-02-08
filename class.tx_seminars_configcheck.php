@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_confcheck' for the 'seminars' extension.
- *
  * This class checks the Seminar Manager configuration for basic sanity.
  *
  * The correct functioning of this class does not rely on any HTML templates or

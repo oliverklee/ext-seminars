@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BackEndExtJs_ClearCache for the "seminars" extension.
- *
  * This class is called by the clearCachePostProc hook in
  * t3lib_tcemain->clear_cacheCmd() and removes the cached language labels files
  * in typo3temp/tx_seminars_BackEndExtJS/ if the cache gets cleared.

@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Mapper_BackEndUser' for the 'seminars' extension.
- *
  * This class represents a mapper for back-end users.
  *
  * @package TYPO3

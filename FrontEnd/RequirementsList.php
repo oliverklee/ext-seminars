@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_FrontEnd_RequirementsList for the "seminars" extension.
- *
  * This class is a view which creates the requirements lists for the front end.
  *
  * @package TYPO3

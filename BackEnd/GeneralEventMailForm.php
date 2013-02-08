@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BackEnd_GeneralEventMailForm for the "seminars" extension.
- *
  * This class represents an e-mail form that does not change the event's status.
  *
  * @package TYPO3

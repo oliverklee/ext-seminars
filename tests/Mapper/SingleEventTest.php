@@ -23,9 +23,7 @@
 ***************************************************************/
 
 /**
- * Testcase for the 'event mapper' class in the 'seminars' extension.
- *
- * This testcase holds tests which are specific to single events.
+ * This test case holds tests which are specific to single events.
  *
  * @package TYPO3
  * @subpackage tx_seminars

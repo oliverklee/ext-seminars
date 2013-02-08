@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Mapper_TimeSlot' for the 'seminars' extension.
- *
  * This class represents a mapper for time-slots.
  *
  * @package TYPO3

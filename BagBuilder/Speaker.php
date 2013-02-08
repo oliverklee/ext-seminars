@@ -23,9 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BagBuilder_Speaker for the "seminars" extension.
- *
- * This builder class creates customized speakerbag objects.
+ * This builder class creates customized speaker bag objects.
  *
  * @package TYPO3
  * @subpackage tx_seminars

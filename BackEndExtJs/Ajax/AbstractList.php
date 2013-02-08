@@ -23,10 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BackEndExtJs_Ajax_AbstractList for the "seminars" extension.
- *
- * This class provides basic functionality for creating a list of models for
- * usage in an AJAX call.
+ * This class provides basic functionality for creating a list of models for usage in an AJAX call.
  *
  * @package TYPO3
  * @subpackage tx_seminars

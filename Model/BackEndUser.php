@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_BackEndUser' for the 'seminars' extension.
- *
  * This class represents a back-end user.
  *
  * @package TYPO3

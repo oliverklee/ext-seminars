@@ -23,11 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_tests_fixtures_Service_TestingSingleViewLinkBuilder for the "seminars"
- * extension.
- *
- * This class just makes some functions from the class
- * tx_seminars_Service_SingleViewLinkBuilder public for testing purposes.
+ * This class just makes some functions public for testing purposes.
  *
  * @package TYPO3
  * @subpackage tx_seminars

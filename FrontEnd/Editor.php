@@ -25,10 +25,7 @@
 require_once(PATH_formidableapi);
 
 /**
- * Class tx_seminars_FrontEnd_Editor for the "seminars" extension.
- *
- * This class is the base class for any kind of front-end editor, for example
- * the event editor or the registration editor.
+ * This class is the base class for any kind of front-end editor, for example the event editor or the registration editor.
  *
  * @package TYPO3
  * @subpackage tx_seminars

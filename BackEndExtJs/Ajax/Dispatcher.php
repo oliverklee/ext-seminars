@@ -23,9 +23,8 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BackEndExtJs_Ajax_Dispatcher for the "seminars" extension.
- *
  * This class is called by the ExtJS back-end module via AJAX using ajax.php.
+ *
  * It dispatches the AJAX call according to the given AJAX ID.
  *
  * @package TYPO3

@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Testcase for the 'food mapper' class in the 'seminars' extension.
+ * Test case.
  *
  * @package TYPO3
  * @subpackage tx_seminars

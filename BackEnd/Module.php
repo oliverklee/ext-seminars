@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Module 'tx_seminars_BackEnd_Module' for the 'seminars' extension.
- *
  * This class is the base class for a back-end module.
  *
  * @package TYPO3

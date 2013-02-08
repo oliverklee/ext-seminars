@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_Bag_Abstract for the "seminars" extension.
- *
  * This aggregate class holds a bunch of objects that are created from
  * the result of an SQL query and allows to iterate over them.
  *

@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_PaymentMethod' for the 'seminars' extension.
- *
  * This class represents a payment method.
  *
  * @package TYPO3

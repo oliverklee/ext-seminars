@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BagBuilder_Abstract for the "seminars" extension.
- *
  * This builder class creates customized bag objects.
  *
  * @package TYPO3

@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Testcase for the tx_seminars_Model_BackEndUser class in the 'seminars' extension.
+ * Test case.
  *
  * @package TYPO3
  * @subpackage seminars

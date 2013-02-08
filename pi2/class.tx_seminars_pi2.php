@@ -30,7 +30,7 @@ if (is_object($LANG)) {
 require_once(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
 
 /**
- * Plugin 'CSV export' for the 'seminars' extension.
+ * Plugin "CSV export".
  *
  * @package TYPO3
  * @subpackage tx_seminars

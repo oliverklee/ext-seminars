@@ -23,8 +23,7 @@
 ***************************************************************/
 
 /**
- * Testcase for the tx_seminars_BagBuilder_Event class in the "seminars"
- * extension.
+ * Test case.
  *
  * @package TYPO3
  * @subpackage tx_seminars

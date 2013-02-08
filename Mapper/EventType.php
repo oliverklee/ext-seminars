@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Mapper_EventType' for the 'seminars' extension.
- *
  * This class represents a mapper for event types.
  *
  * @package TYPO3

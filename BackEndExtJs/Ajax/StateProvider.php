@@ -23,10 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BackEndExtJs_Ajax_StateProvider for the "seminars" extension.
- *
- * This class provides functionality for saving the state of ExtJS components
- * via AJAX in the back-end user configuration.
+ * This class provides functionality for saving the state of ExtJS components via AJAX in the back-end user configuration.
  *
  * @package TYPO3
  * @subpackage tx_seminars

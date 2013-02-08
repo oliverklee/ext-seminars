@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_TargetGroup' for the 'seminars' extension.
- *
  * This class represents a target group.
  *
  * @package TYPO3

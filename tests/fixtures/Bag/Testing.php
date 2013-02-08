@@ -23,10 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_tests_fixtures_Bag_Testing for the "seminars" extension.
- *
- * This aggregate class holds a bunch of test objects and allows to iterate over
- * them.
+ * This aggregate class holds a bunch of test objects and allows to iterate over them.
  *
  * @package TYPO3
  * @subpackage tx_seminars

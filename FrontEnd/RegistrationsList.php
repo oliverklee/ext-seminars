@@ -23,9 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_FrontEnd_RegistrationsList for the "seminars" extension.
- *
- * This class represents a list of registrations for the front-end.
+ * This class represents a list of registrations for the front end.
  *
  * @package TYPO3
  * @subpackage tx_seminars

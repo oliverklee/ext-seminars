@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Testcase for the 'target group mapper' class in the 'seminars' extension.
+ * Test case.
  *
  * @package TYPO3
  * @subpackage tx_seminars

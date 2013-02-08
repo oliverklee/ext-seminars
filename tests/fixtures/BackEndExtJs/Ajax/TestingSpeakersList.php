@@ -23,11 +23,7 @@
 ***************************************************************/
 
 /**
- * Testing version of tx_seminars_BackEndExtJs_AjaxSpeakersList for the
- * "seminars" extension.
- *
- * Fixture for testing purposes. Makes some protected functions public so we can
- * test them.
+ * Fixture for testing purposes. Makes some protected functions public so we can test them.
  *
  * @package TYPO3
  * @subpackage tx_seminars

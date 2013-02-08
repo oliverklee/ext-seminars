@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Mapper_Speaker' for the 'seminars' extension.
- *
  * This class represents a mapper for speakers.
  *
  * @package TYPO3

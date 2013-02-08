@@ -23,9 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_tests_fixtures_BagBuilder_BrokenTesting for the "seminars" extension.
- *
- * This builder class creates customized testbag objects.
+ * This builder class creates customized test bag objects.
  *
  * @package TYPO3
  * @subpackage tx_seminars

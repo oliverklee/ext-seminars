@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_Mapper_Registration for the "seminars" extension.
- *
  * This class represents a mapper for registrations.
  *
  * @package TYPO3

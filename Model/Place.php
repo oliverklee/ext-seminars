@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_Place' for the 'seminars' extension.
- *
  * This class represents a place.
  *
  * @package TYPO3

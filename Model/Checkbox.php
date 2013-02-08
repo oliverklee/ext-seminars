@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_Checkbox' for the 'seminars' extension.
- *
  * This class represents a checkbox.
  *
  * @package TYPO3

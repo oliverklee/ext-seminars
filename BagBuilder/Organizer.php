@@ -23,9 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BagBuilder_Organizer for the "seminars" extension.
- *
- * This builder class creates customized organizerbag objects.
+ * This builder class creates customized organizer bag objects.
  *
  * @package TYPO3
  * @subpackage tx_seminars

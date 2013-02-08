@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_Model_Registration for the "seminars" extension.
- *
  * This class represents a registration for an event.
  *
  * @package TYPO3

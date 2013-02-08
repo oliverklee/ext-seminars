@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_Lodging' for the 'seminars' extension.
- *
  * This class represents a lodging.
  *
  * @package TYPO3

@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_Speaker' for the 'seminars' extension.
- *
  * This class represents an speaker.
  *
  * @package TYPO3

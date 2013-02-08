@@ -23,8 +23,7 @@
 ***************************************************************/
 
 /**
- * Testcase for the tx_seminars_BackEndExtJs_Ajax_AbstractList class in the
- * "seminars" extension.
+ * Test case.
  *
  * @package TYPO3
  * @subpackage tx_seminars

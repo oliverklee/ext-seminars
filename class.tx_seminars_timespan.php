@@ -23,10 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_timespan' for the 'seminars' extension.
- *
- * This class offers timespan-related methods for the timeslot and seminar
- * classes.
+ * This class offers timespan-related methods for the time slot and seminar classes.
  *
  * @package TYPO3
  * @subpackage tx_seminars

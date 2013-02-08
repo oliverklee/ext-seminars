@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'registrations list' for the 'seminars' extension.
+ * This class creates a registration list in the back end.
  *
  * @package TYPO3
  * @subpackage tx_seminars

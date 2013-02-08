@@ -25,7 +25,7 @@
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
 /**
- * Class tx_seminars_FrontEnd_SelectorWidget for the "seminars" extension.
+ * This class creates a selector widget.
  *
  * @package TYPO3
  * @subpackage tx_seminars

@@ -26,8 +26,6 @@
 // already does that.
 
 /**
- * Class 'tx_seminars_registrationmanager' for the 'seminars' extension.
- *
  * This utility class checks and creates registrations for seminars.
  *
  * @package TYPO3

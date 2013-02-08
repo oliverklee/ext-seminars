@@ -23,10 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_FrontEnd_PublishEvent for the "seminars" extension.
- *
- * This class publishes events which are hidden through editing or creation in
- * the FE-editor.
+ * This class publishes events which are hidden through editing or creation in the FE-editor.
  *
  * @package TYPO3
  * @subpackage tx_seminars

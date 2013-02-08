@@ -23,10 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'ext_update' for the 'seminars' extension.
- *
- * This class offers functions to update the database from one version to
- * another.
+ * This class offers functions to update the database from one version to another.
  *
  * @package TYPO3
  * @subpackage tx_seminars

@@ -23,9 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_FrontEndUserGroup' for the 'seminars' extension.
- *
- * This class represents a front-end usergroup.
+ * This class represents a front-end user group.
  *
  * @package TYPO3
  * @subpackage tx_seminars

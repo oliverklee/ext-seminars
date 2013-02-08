@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'organizers list' for the 'seminars' extension.
+ * This class creates an organizer list in the back end.
  *
  * @package TYPO3
  * @subpackage tx_seminars

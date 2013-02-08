@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_AbstractTimeSpan' for the 'seminars' extension.
- *
  * This abstract class represents a time span.
  *
  * @package TYPO3

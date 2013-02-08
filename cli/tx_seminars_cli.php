@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * CLI script for the 'seminars' extension.
+ * CLI script.
  *
  * Any functionality is supposed to be provided by foreign classes because this
  * script is not testable as it must not be called in any other than the

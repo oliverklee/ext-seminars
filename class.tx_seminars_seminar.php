@@ -25,8 +25,6 @@
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
 /**
- * Class 'tx_seminars_seminar' for the 'seminars' extension.
- *
  * This class represents a seminar (or similar event).
  *
  * @package TYPO3

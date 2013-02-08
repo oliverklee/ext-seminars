@@ -23,9 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_tests_fixtures_FrontEnd_TestingView for the "seminars"
- * extension.
- *
  * This class represents a view for testing purposes.
  *
  * @package TYPO3

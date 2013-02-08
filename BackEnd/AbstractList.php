@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BackEnd_AbstractList for the "seminars" extension.
+ * This is the base class for lists in the back end.
  *
  * @package TYPO3
  * @subpackage tx_seminars

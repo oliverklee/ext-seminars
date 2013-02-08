@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_cli_MailNotifier' for the 'seminars' extension.
- *
  * This class sends reminders to the organizers.
  *
  * @package TYPO3

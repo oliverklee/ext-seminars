@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Mapper_Lodging' for the 'seminars' extension.
- *
  * This class represents a mapper for lodgings.
  *
  * @package TYPO3

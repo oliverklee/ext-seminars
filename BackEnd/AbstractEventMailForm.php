@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_BackEnd_AbstractEventMailForm for the "seminars" extension.
+ * This is the base class for e-mail forms in the back end.
  *
  * @package TYPO3
  * @subpackage tx_seminars

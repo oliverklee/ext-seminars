@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_OldModel_Category for the "seminars" extension.
- *
  * This class represents an event category.
  *
  * @package TYPO3

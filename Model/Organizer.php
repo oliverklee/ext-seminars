@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_Organizer' for the 'seminars' extension.
- *
  * This class represents an organizer.
  *
  * @package TYPO3

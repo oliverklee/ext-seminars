@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_Skill' for the 'seminars' extension.
- *
  * This class represents a skill.
  *
  * @package TYPO3

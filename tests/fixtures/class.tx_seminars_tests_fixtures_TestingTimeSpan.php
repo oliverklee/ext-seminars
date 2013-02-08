@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_tests_fixtures_TestingTimeSpan' for the 'seminars' extension.
- *
  * This class represents a time span for testing purposes.
  *
  * @package TYPO3

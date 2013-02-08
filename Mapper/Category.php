@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Mapper_Category' for the 'seminars' extension.
- *
  * This class represents a mapper for categories.
  *
  * @package TYPO3

@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Mapper_Checkbox' for the 'seminars' extension.
- *
  * This class represents a mapper for checkboxes.
  *
  * @package TYPO3

@@ -23,9 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_Model_EventType' for the 'seminars' extension.
- *
- * This class represents a event type.
+ * This class represents an event type.
  *
  * @package TYPO3
  * @subpackage tx_seminars

@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_FrontEnd_AbstractView for the "seminars" extension.
- *
  * This class represents a basic view.
  *
  * @package TYPO3

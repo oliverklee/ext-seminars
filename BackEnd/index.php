@@ -39,7 +39,7 @@ $LANG->includeLLFile('EXT:seminars/pi2/locallang.xml');
 $BE_USER->modAccess($MCONF, 1);
 
 /**
- * Module 'Events' for the 'seminars' extension.
+ * Back-end module "Events".
  *
  * @package TYPO3
  * @subpackage tx_seminars

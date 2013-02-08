@@ -23,10 +23,7 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_configgetter' for the 'seminars' extension.
- *
- * This class provides a way to access config values from plugin.tx_seminars to
- * classes within pi1.
+ * This class provides a way to access config values from plugin.tx_seminars to classes within FrontEnd/.
  *
  * @package TYPO3
  * @subpackage tx_seminars

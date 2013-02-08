@@ -23,10 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_Service_SingleViewLinkBuilder for the "seminars" extension.
- *
- * This class provides functions for creating the link/URL to the single view
- * page of an event.
+ * This class provides functions for creating the link/URL to the single view page of an event.
  *
  * @package TYPO3
  * @subpackage tx_seminars

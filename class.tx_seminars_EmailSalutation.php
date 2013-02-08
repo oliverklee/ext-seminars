@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_EmailSalutation' for the 'seminars' extension.
- *
  * This class creates a salutation for e-mails.
  *
  * @package TYPO3

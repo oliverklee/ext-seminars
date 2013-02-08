@@ -23,7 +23,7 @@
 ***************************************************************/
 
 /**
- * Class tx_seminars_FrontEnd_CategoryList for the "seminars" extension.
+ * This class creates a category list.
  *
  * @package TYPO3
  * @subpackage tx_seminars

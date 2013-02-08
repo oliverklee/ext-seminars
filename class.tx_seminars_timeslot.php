@@ -23,8 +23,6 @@
 ***************************************************************/
 
 /**
- * Class 'tx_seminars_timeslot' for the 'seminars' extension.
- *
  * This class represents a time slot.
  *
  * @package TYPO3
