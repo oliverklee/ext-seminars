@@ -88,6 +88,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * Configures the seminar bag to work like a BE list: It will use the
 	 * default sorting in the BE, and hidden records will be shown.
+	 *
+	 * @return void
 	 */
 	public function setBackEndMode() {
 		$this->useBackEndSorting();
@@ -96,6 +98,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Sets the sorting to be the same as in the BE.
+	 *
+	 * @return void
 	 */
 	private function useBackEndSorting() {
 		$this->orderBy = 'begin_date DESC';
@@ -108,6 +112,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * @param string $categoryUids
 	 *        comma-separated list of UIDs of the categories which the bag
 	 *        should be limited to, set to an empty string for no limitation
+	 *
+	 * @return void
 	 */
 	public function limitToCategories($categoryUids) {
 		if ($categoryUids == '') {
@@ -143,6 +149,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * the parameter $placeUids.
 	 *
 	 * @param array $placeUids place UIDs, set to an empty array for no limitation, need not be SQL-safe
+	 *
+	 * @return void
 	 */
 	public function limitToPlaces(array $placeUids = array()) {
 		if (empty($placeUids)) {
@@ -164,6 +172,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Sets the bag to ignore canceled events.
+	 *
+	 * @return void
 	 */
 	public function ignoreCanceledEvents() {
 		$this->whereClauseParts['hideCanceledEvents'] = 'cancelled!=' .
@@ -172,6 +182,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Allows the bag to include canceled events again.
+	 *
+	 * @return void
 	 */
 	public function allowCanceledEvents() {
 		unset($this->whereClauseParts['hideCanceledEvents']);
@@ -183,6 +195,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * @param string $timeFrameKey
 	 *        key for the selected time-frame, must not be empty, must be one of the following:
 	 *        past, pastAndCurrent, current, currentAndUpcoming, upcoming, deadlineNotOver, all
+	 *
+	 * @return void
 	 */
 	public function setTimeFrame($timeFrameKey) {
 		if (!in_array($timeFrameKey, self::$validTimeFrames)) {
@@ -308,6 +322,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * provided as the parameter $eventTypeUids.
 	 *
 	 * @param array $eventTypeUids event type UIDs, set to an empty array for no limitation, need not be SQL-safe
+	 *
+	 * @return void
 	 */
 	public function limitToEventTypes(array $eventTypeUids = array()) {
 		if (empty($eventTypeUids)) {
@@ -338,6 +354,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * $cities.
 	 *
 	 * @param array $cities array of city names, set to an empty array for no limitation, may not be SQL-safe
+	 *
+	 * @return void
 	 */
 	public function limitToCities(array $cities = array()) {
 		if (empty($cities)) {
@@ -373,6 +391,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * @param array $countries
 	 *        ISO 3166-2 (alpha2) country codes, invalid country codes are allowed, set to an empty array for no limitation,
 	 *        need not be SQL-safe
+	 *
+	 * @return void
 	 */
 	public function limitToCountries(array $countries = array()) {
 		if (empty($countries)) {
@@ -408,6 +428,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * @param array $languages
 	 *        ISO 639-1 (alpha2) language codes, invalid language codes are allowed, set to an empty array for no limitation,
 	 *        need not be SQL-safe
+	 *
+	 * @return void
 	 */
 	public function limitToLanguages(array $languages = array()) {
 		if (empty($languages)) {
@@ -429,6 +451,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Limits the bag to topic event records.
+	 *
+	 * @return void
 	 */
 	public function limitToTopicRecords() {
 		$this->whereClauseParts['topic'] = 'tx_seminars_seminars' .
@@ -437,6 +461,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Removes the limitation for topic event records.
+	 *
+	 * @return void
 	 */
 	public function removeLimitToTopicRecords() {
 		unset($this->whereClauseParts['topic']);
@@ -447,6 +473,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * $feUserUid is the owner.
 	 *
 	 * @param integer $feUserUid the FE user UID of the owner to limit for, set to 0 to remove the limitation, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function limitToOwner($feUserUid) {
 		if ($feUserUid < 0) {
@@ -464,6 +492,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Limits the bag to date and single records.
+	 *
+	 * @return void
 	 */
 	public function limitToDateAndSingleRecords() {
 		$this->whereClauseParts['date_single'] = '(tx_seminars_seminars' .
@@ -474,6 +504,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Removes the limitation for date and single records.
+	 *
+	 * @return void
 	 */
 	public function removeLimitToDateAndSingleRecords() {
 		unset($this->whereClauseParts['date_single']);
@@ -485,6 +517,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 *
 	 * @param integer $feUserUid
 	 *        the FE user UID of the event manager to limit for, set to 0 to remove the limitation, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function limitToEventManager($feUserUid) {
 		if ($feUserUid < 0) {
@@ -508,6 +542,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * event in the first parameter $event.
 	 *
 	 * @param tx_seminars_seminar $event the event object with the end date to limit for, must have an end date
+	 *
+	 * @return void
 	 */
 	public function limitToEventsNextDay(tx_seminars_seminar $event) {
 		if (!$event->hasEndDate()) {
@@ -528,6 +564,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Removes the limitation to events on the next day.
+	 *
+	 * @return void
 	 */
 	public function removeLimitToEventsNextDay() {
 		unset($this->whereClauseParts['next_day']);
@@ -538,6 +576,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * given in the first parameter $event.
 	 *
 	 * @param tx_seminars_seminar $event the date or topic object to find other dates of the same topic for
+	 *
+	 * @return void
 	 */
 	public function limitToOtherDatesForTopic(tx_seminars_seminar $event) {
 		if (!$event->isEventDate() && !$event->isEventTopic()) {
@@ -553,6 +593,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Removes the limitation for other dates of this topic.
+	 *
+	 * @return void
 	 */
 	public function removeLimitToOtherDatesForTopic() {
 		unset($this->whereClauseParts['other_dates']);
@@ -568,6 +610,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * AND (bodytext LIKE "%system%" OR header LIKE "%system%")'.
 	 *
 	 * @param string $searchWords the search words, separated by spaces or commas, may be empty, need not be SQL-safe
+	 *
+	 * @return void
 	 */
 	public function limitToFullTextSearch($searchWords) {
 		$searchWords = trim($searchWords, self::TRIM_CHARACTER_LIST);
@@ -638,6 +682,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * Limits the bag to future events for which the cancelation deadline
 	 * reminder has not been sent yet.
+	 *
+	 * @return void
 	 */
 	public function limitToCancelationDeadlineReminderNotSent() {
 		$this->whereClauseParts['cancelation_reminder_not_sent']
@@ -647,6 +693,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * Limits the bag to future events for which the reminder that an event is
 	 * about to take place has not been sent yet.
+	 *
+	 * @return void
 	 */
 	public function limitToEventTakesPlaceReminderNotSent() {
 		$this->whereClauseParts['event_takes_place_reminder_not_sent']
@@ -657,6 +705,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Limits the bag to events in status $status.
 	 *
 	 * @param integer $status tx_seminars_seminar::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
+	 *
+	 * @return void
 	 */
 	public function limitToStatus($status) {
 		$this->whereClauseParts['event_status']
@@ -668,6 +718,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * begin date.
 	 *
 	 * @param integer $days days before the begin date, must be > 0
+	 *
+	 * @return void
 	 */
 	public function limitToDaysBeforeBeginDate($days) {
 		$nowPlusDays = ($GLOBALS['SIM_EXEC_TIME']
@@ -1006,6 +1058,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 *        the foreign table to search in, must not be empty
 	 * @param string $mmTable
 	 *        the m:n relation table, must not be empty
+	 *
+	 * @return void
 	 */
 	private function checkParametersForMmSearchFunctions($searchWord, $searchFieldKey, $foreignTable, $mmTable) {
 		if (trim($searchWord, self::TRIM_CHARACTER_LIST . '\'%') == '') {
@@ -1032,6 +1086,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * given topic.
 	 *
 	 * @param integer $eventUid the UID of the topic event for which the requirements should be found, must be > 0
+	 *
+	 * @return void
 	 */
 	public function limitToRequiredEventTopics($eventUid) {
 		$this->whereClauseParts['requiredEventTopics'] =
@@ -1046,6 +1102,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Limits the search result to topics which depend on the given topic.
 	 *
 	 * @param integer $eventUid the UID of the topic event which the searched events depend on, must be > 0
+	 *
+	 * @return void
 	 */
 	public function limitToDependingEventTopics($eventUid) {
 		$this->whereClauseParts['dependingEventTopics'] =
@@ -1066,6 +1124,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * be counted as not existing.
 	 *
 	 * @param integer $uid the UID of the front-end user whose registered events should be removed from the bag, must be > 0
+	 *
+	 * @return void
 	 */
 	public function limitToTopicsWithoutRegistrationByUser($uid) {
 		$this->limitToTopicRecords();
@@ -1088,6 +1148,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * A $earliestBeginDate of 0 will remove the filter.
 	 *
 	 * @param integer $earliestBeginDate the earliest begin date as UNIX time-stamp, 0 will remove the limit
+	 *
+	 * @return void
 	 */
 	public function limitToEarliestBeginDate($earliestBeginDate) {
 		if ($earliestBeginDate == 0) {
@@ -1109,6 +1171,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * A $latestBeginDate of 0 will remove the filter.
 	 *
 	 * @param integer $latestBeginDate the latest begin date as UNIX time-stamp, 0 will remove the limit
+	 *
+	 * @return void
 	 */
 	public function limitToLatestBeginDate($latestBeginDate) {
 		if ($latestBeginDate == 0) {
@@ -1124,6 +1188,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Limits the bag to events which are not fully-booked yet (or have a queue).
+	 *
+	 * @return void
 	 */
 	public function limitToEventsWithVacancies() {
 		$seats = '(SELECT COALESCE(SUM(seats),0) FROM tx_seminars_attendances ' .
@@ -1145,6 +1211,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * @param string $organizerUids
 	 *               comma-separated list of organizer UIDs to limit the bag to,
 	 *               may be empty
+	 *
+	 * @return void
 	 */
 	public function limitToOrganizers($organizerUids) {
 		if ($organizerUids == '') {
@@ -1176,6 +1244,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * the provided age.
 	 *
 	 * @param integer $age the age to limit the bag to, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function limitToAge($age) {
 		if ($age == 0) {
@@ -1237,6 +1307,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * @param integer $maximumPrice
 	 *                the maximum price an event is allowed to cost, must
 	 *                be >= 0
+	 *
+	 * @return void
 	 */
 	public function limitToMaximumPrice($maximumPrice) {
 		if ($maximumPrice == 0) {
@@ -1302,6 +1374,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * @param integer $minimumPrice
 	 *                the minimum price an event is allowed to cost, must
 	 *                be >= 0
+	 *
+	 * @return void
 	 */
 	public function limitToMinimumPrice($minimumPrice) {
 		if ($minimumPrice == 0) {

@@ -114,6 +114,8 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Creates a fake front end and a pi1 instance in $this->pi1.
 	 *
 	 * @param integer $detailPageUid UID of the detail view page
+	 *
+	 * @return void
 	 */
 	private function createPi1($detailPageUid = 0) {
 		$this->testingFramework->createFakeFrontEnd();

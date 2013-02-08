@@ -39,6 +39,8 @@
 class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the configuration for: tx_seminars_registrationmanager/.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_registrationmanager() {
 		// The registration manager needs to be able to create registration
@@ -49,6 +51,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_seminar/.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_seminar() {
 		$this->checkStaticIncluded();
@@ -69,6 +73,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_registration/.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_registration() {
 		$this->checkStaticIncluded();
@@ -90,6 +96,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_speaker/.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_speaker() {
 		$this->checkStaticIncluded();
@@ -97,6 +105,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_OldModel_Organizer/.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_OldModel_Organizer() {
 		$this->checkStaticIncluded();
@@ -104,6 +114,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_timeslot/.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_timeslot() {
 		$this->checkStaticIncluded();
@@ -111,6 +123,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_test/.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_test() {
 		$this->checkStaticIncluded();
@@ -118,6 +132,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_OldModel_Category/.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_OldModel_Category() {
 		$this->checkStaticIncluded();
@@ -125,6 +141,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_FrontEnd_RegistrationsList/.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_RegistrationsList() {
 		$this->checkCommonFrontEndSettings();
@@ -136,12 +154,16 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Does nothing.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_DefaultController() {
 	}
 
 	/**
 	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/seminar_registration.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_DefaultController_seminar_registration() {
 		$this->checkCommonFrontEndSettings();
@@ -190,6 +212,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/single_view.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_DefaultController_single_view() {
 		$this->checkCommonFrontEndSettings();
@@ -223,6 +247,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/seminar_list.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_DefaultController_seminar_list() {
 		$this->checkCommonFrontEndSettings();
@@ -268,6 +294,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_FrontEnd_Countdown.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_Countdown() {
 		$this->checkCommonFrontEndSettings();
@@ -276,6 +304,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/my_vip_events.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_DefaultController_my_vip_events() {
 		$this->check_tx_seminars_FrontEnd_DefaultController_seminar_list();
@@ -293,6 +323,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/topic_list.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_DefaultController_topic_list() {
 		$this->check_tx_seminars_FrontEnd_DefaultController_seminar_list();
@@ -300,6 +332,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/my_events.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_DefaultController_my_events() {
 		$this->check_tx_seminars_FrontEnd_DefaultController_seminar_list();
@@ -307,6 +341,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: check_tx_seminars_FrontEnd_DefaultController/edit_event.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_DefaultController_edit_event() {
 		$this->checkCommonFrontEndSettings();
@@ -328,6 +364,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: check_tx_seminars_FrontEnd_DefaultController/my_entered_events.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_DefaultController_my_entered_events() {
 		$this->check_tx_seminars_FrontEnd_DefaultController_seminar_list();
@@ -337,6 +375,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_FrontEnd_CategoryList.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_CategoryList() {
 		$this->checkCommonFrontEndSettings();
@@ -350,6 +390,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/favorites_list
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_DefaultController_favorites_list() {
 		$this->check_tx_seminars_FrontEnd_DefaultController_seminar_list();
@@ -357,11 +399,15 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * This check isn't actually used. It is merely needed for the unit tests.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_DefaultController_events_next_day() {}
 
 	/**
 	 * Checks if the common frontend settings are set.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_EventHeadline() {
 		$this->checkCommonFrontEndSettings();
@@ -370,12 +416,16 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * This check isn't actually used. It is merely needed for the unit tests.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_FrontEnd_DefaultController_event_headline() {
 	}
 
 	/**
 	 * Checks the configuration related to thank-you e-mails.
+	 *
+	 * @return void
 	 */
 	private function checkThankYouMail() {
 		$this->checkHideFieldsInThankYouMail();
@@ -387,6 +437,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration related to notification e-mails.
+	 *
+	 * @return void
 	 */
 	private function checkNotificationMail() {
 		$this->checkHideFieldsInNotificationMail();
@@ -402,6 +454,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the settings for time and date format.
+	 *
+	 * @return void
 	 */
 	private function checkTimeAndDate() {
 		$explanation = 'This determines the way dates and times are '
@@ -429,6 +483,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value enableRegistration.
+	 *
+	 * @return void
 	 */
 	private function checkRegistrationFlag() {
 		$this->checkIfBoolean(
@@ -443,6 +499,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value what_to_display.
+	 *
+	 * @return void
 	 */
 	private function checkWhatToDisplay() {
 		$this->checkIfSingleInSetNotEmpty(
@@ -472,6 +530,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showTimeOfRegistrationDeadline.
+	 *
+	 * @return void
 	 */
 	private function checkShowTimeOfRegistrationDeadline() {
 		$this->checkIfBoolean(
@@ -487,6 +547,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showTimeOfEarlyBirdDeadline.
+	 *
+	 * @return void
 	 */
 	private function checkShowTimeOfEarlyBirdDeadline() {
 		$this->checkIfBoolean(
@@ -502,6 +564,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showVacanciesThreshold.
+	 *
+	 * @return void
 	 */
 	private function checkShowVacanciesThreshold() {
 		$this->checkIfInteger(
@@ -517,6 +581,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value generalPriceInMail.
+	 *
+	 * @return void
 	 */
 	private function checkGeneralPriceInMail() {
 		$this->checkIfBoolean(
@@ -531,6 +597,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value attendancesPID.
+	 *
+	 * @return void
 	 */
 	private function checkAttendancesPid() {
 		$this->checkIfSingleSysFolderNotEmpty(
@@ -550,6 +618,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value hideFields.
+	 *
+	 * @return void
 	 */
 	private function checkHideFields() {
 		$this->checkIfMultiInSetOrEmpty(
@@ -605,6 +675,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value hideColumns.
+	 *
+	 * @return void
 	 */
 	private function checkHideColumns() {
 		$this->checkIfMultiInSetOrEmpty(
@@ -650,6 +722,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value timeframeInList.
+	 *
+	 * @return void
 	 */
 	private function checkTimeframeInList() {
 		$this->checkIfSingleInSetNotEmpty(
@@ -675,6 +749,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showEmptyEntryInOptionLists.
+	 *
+	 * @return void
 	 */
 	private function checkShowEmptyEntryInOptionLists() {
 		$this->checkIfBoolean(
@@ -691,6 +767,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value hidePageBrowser.
+	 *
+	 * @return void
 	 */
 	private function checkHidePageBrowser() {
 		$this->checkIfBoolean(
@@ -706,6 +784,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value hideCanceledEvents.
+	 *
+	 * @return void
 	 */
 	private function checkHideCanceledEvents() {
 		$this->checkIfBoolean(
@@ -721,6 +801,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value sortListViewByCategory.
+	 *
+	 * @return void
 	 */
 	private function checkSortListViewByCategory() {
 		$this->checkIfBoolean(
@@ -736,6 +818,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value hideFieldsInThankYouMail.
+	 *
+	 * @return void
 	 */
 	private function checkHideFieldsInThankYouMail() {
 		$this->checkIfMultiInSetOrEmpty(
@@ -775,6 +859,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value hideFieldsInNotificationMail.
+	 *
+	 * @return void
 	 */
 	protected function checkHideFieldsInNotificationMail() {
 		$this->checkIfMultiInSetOrEmpty(
@@ -795,6 +881,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showSeminarFieldsInNotificationMail.
+	 *
+	 * @return void
 	 */
 	private function checkShowSeminarFieldsInNotificationMail() {
 		$this->checkIfMultiInSetOrEmpty(
@@ -835,6 +923,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showFeUserFieldsInNotificationMail.
+	 *
+	 * @return void
 	 */
 	private function checkShowFeUserFieldsInNotificationMail() {
 		$this->checkIfMultiInTableOrEmpty(
@@ -850,6 +940,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showAttendanceFieldsInNotificationMail.
+	 *
+	 * @return void
 	 */
 	private function checkShowAttendanceFieldsInNotificationMail() {
 		$this->checkIfMultiInSetOrEmpty(
@@ -892,6 +984,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value sendAdditionalNotificationEmails.
+	 *
+	 * @return void
 	 */
 	private function checkSendAdditionalNotificationEmails() {
 		$this->checkIfBoolean(
@@ -906,6 +1000,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value abbreviateDateRanges.
+	 *
+	 * @return void
 	 */
 	private function checkAbbreviateDateRanges() {
 		$this->checkIfBoolean(
@@ -920,6 +1016,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value generalPriceInList.
+	 *
+	 * @return void
 	 */
 	private function checkGeneralPriceInList() {
 		$this->checkIfBoolean(
@@ -935,6 +1033,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value generalPriceInSingle.
+	 *
+	 * @return void
 	 */
 	private function checkGeneralPriceInSingle() {
 		$this->checkIfBoolean(
@@ -950,6 +1050,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value omitDateIfSameAsPrevious.
+	 *
+	 * @return void
 	 */
 	private function checkOmitDateIfSameAsPrevious() {
 		$this->checkIfBoolean(
@@ -966,6 +1068,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * accessToFrontEndRegistrationLists.
+	 *
+	 * @return void
 	 */
 	private function checkAccessToFrontEndRegistrationLists() {
 		$this->checkIfSingleInSetNotEmpty(
@@ -984,6 +1088,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * allowCsvExportOfRegistrationsInMyVipEventsView.
+	 *
+	 * @return void
 	 */
 	private function checkAllowCsvExportOfRegistrationsInMyVipEventsView() {
 		$this->checkIfBoolean(
@@ -1000,6 +1106,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value mayManagersEditTheirEvents.
+	 *
+	 * @return void
 	 */
 	private function checkMayManagersEditTheirEvents() {
 		$this->checkIfBoolean(
@@ -1014,6 +1122,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value eventFieldsOnRegistrationPage.
+	 *
+	 * @return void
 	 */
 	private function checkEventFieldsOnRegistrationPage() {
 		$this->checkIfMultiInSetNotEmpty(
@@ -1036,6 +1146,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showRegistrationFields.
+	 *
+	 * @return void
 	 */
 	private function checkShowRegistrationFields() {
 		$this->checkIfMultiInSetNotEmpty(
@@ -1088,6 +1200,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showSpeakerDetails.
+	 *
+	 * @return void
 	 */
 	private function checkShowSpeakerDetails() {
 		$this->checkIfBoolean(
@@ -1103,6 +1217,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showSiteDetails.
+	 *
+	 * @return void
 	 */
 	private function checkShowSiteDetails() {
 		$this->checkIfBoolean(
@@ -1118,6 +1234,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value limitFileDownloadToAttendees.
+	 *
+	 * @return void
 	 */
 	private function checkLimitFileDownloadToAttendees() {
 		$this->checkIfBoolean(
@@ -1134,6 +1252,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showFeUserFieldsInRegistrationsList.
+	 *
+	 * @return void
 	 */
 	private function checkShowFeUserFieldsInRegistrationsList() {
 		$this->checkIfMultiInTableOrEmpty(
@@ -1150,6 +1270,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * showRegistrationFieldsInRegistrationList.
+	 *
+	 * @return void
 	 */
 	private function checkShowRegistrationFieldsInRegistrationsList() {
 		$this->checkIfMultiInTableOrEmpty(
@@ -1165,6 +1287,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value listPID.
+	 *
+	 * @return void
 	 */
 	private function checkListPid() {
 		$this->checkIfSingleFePageNotEmpty(
@@ -1180,6 +1304,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value detailPID.
+	 *
+	 * @return void
 	 */
 	private function checkDetailPid() {
 		$this->checkIfSingleFePageNotEmpty(
@@ -1194,6 +1320,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value myEventsPID.
+	 *
+	 * @return void
 	 */
 	private function checkMyEventsPid() {
 		$this->checkIfSingleFePageNotEmpty(
@@ -1209,6 +1337,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value registerPID.
+	 *
+	 * @return void
 	 */
 	private function checkRegisterPid() {
 		$this->checkIfSingleFePageNotEmpty(
@@ -1228,6 +1358,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value loginPID.
+	 *
+	 * @return void
 	 */
 	private function checkLoginPid() {
 		$this->checkIfSingleFePageNotEmpty(
@@ -1247,6 +1379,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value registrationsListPID.
+	 *
+	 * @return void
 	 */
 	private function checkRegistrationsListPidOptional() {
 		$this->checkIfSingleFePageOrEmpty(
@@ -1261,6 +1395,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value registrationsVipListPID.
+	 *
+	 * @return void
 	 */
 	private function checkRegistrationsVipListPid() {
 		$this->checkIfSingleFePageNotEmpty(
@@ -1276,6 +1412,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value registrationsVipListPID,
 	 * but also allows empty values.
+	 *
+	 * @return void
 	 */
 	private function checkRegistrationsVipListPidOptional() {
 		$this->checkIfSingleFePageOrEmpty(
@@ -1290,6 +1428,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value pages.
+	 *
+	 * @return void
 	 */
 	private function checkPages() {
 		$this->checkIfSysFoldersNotEmpty(
@@ -1304,8 +1444,9 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	}
 
 	/**
-	 * Checks the setting of the configuration value pages for the category
-	 * list.
+	 * Checks the setting of the configuration value pages for the category list.
+	 *
+	 * @return void
 	 */
 	private function checkPagesForCategoryList() {
 		$this->checkIfSysFoldersOrEmpty(
@@ -1322,6 +1463,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value recursive,
 	 * but also allows empty values.
+	 *
+	 * @return void
 	 */
 	private function checkRecursive() {
 		$this->checkIfInteger(
@@ -1340,6 +1483,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	 * extension: CSS styled content, static TypoScript template included,
 	 * template file, css file, salutation mode, CSS class names, and what to
 	 * display.
+	 *
+	 * @return void
 	 */
 	private function checkCommonFrontEndSettings() {
 		$this->checkCssStyledContent();
@@ -1353,6 +1498,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value eventEditorFeGroupID.
+	 *
+	 * @return void
 	 */
 	private function checkEventEditorFeGroupID() {
 		$this->checkIfPositiveInteger(
@@ -1367,6 +1514,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value defaultEventVipsFeGroupID.
+	 *
+	 * @return void
 	 */
 	private function checkDefaultEventVipsFeGroupID() {
 		$this->checkIfPositiveIntegerOrEmpty(
@@ -1383,6 +1532,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value createEventsPID.
+	 *
+	 * @return void
 	 */
 	private function checkCreateEventsPID() {
 		$this->checkIfSingleSysFolderNotEmpty(
@@ -1397,6 +1548,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value eventSuccessfullySavedPID.
+	 *
+	 * @return void
 	 */
 	private function checkEventSuccessfullySavedPID() {
 		$this->checkIfSingleFePageNotEmpty(
@@ -1411,6 +1564,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value allowedExtensionsForUpload.
+	 *
+	 * @return void
 	 */
 	private function checkAllowedExtensionsForUpload() {
 		$this->checkForNonEmptyString(
@@ -1425,6 +1580,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value eventEditorPID.
+	 *
+	 * @return void
 	 */
 	private function checkEventEditorPID() {
 		$this->checkIfSingleFePageNotEmpty(
@@ -1440,6 +1597,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value thankYouAfterRegistrationPID.
+	 *
+	 * @return void
 	 */
 	private function checkThankYouAfterRegistrationPID() {
 		$this->checkIfSingleFePageNotEmpty(
@@ -1454,6 +1613,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value pageToShowAfterUnregistrationPID.
+	 *
+	 * @return void
 	 */
 	private function checkPageToShowAfterUnregistrationPID() {
 		$this->checkIfSingleFePageNotEmpty(
@@ -1468,6 +1629,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value bankTransferUID.
+	 *
+	 * @return void
 	 */
 	private function checkBankTransferUid() {
 		$this->checkIfPositiveIntegerOrEmpty(
@@ -1483,6 +1646,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the CSV-related settings.
+	 *
+	 * @return void
 	 */
 	protected function check_tx_seminars_Bag_Event_csv() {
 		$this->checkAllowAccessToCsv();
@@ -1499,6 +1664,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value allowAccessToCsv.
+	 *
+	 * @return void
 	 */
 	private function checkAllowAccessToCsv() {
 		$this->checkIfBoolean(
@@ -1514,6 +1681,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value charsetForCsv.
+	 *
+	 * @return void
 	 */
 	private function checkCharsetForCsv() {
 		$this->checkForNonEmptyString(
@@ -1528,6 +1697,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value filenameForEventsCsv.
+	 *
+	 * @return void
 	 */
 	private function checkFilenameForEventsCsv() {
 		$this->checkForNonEmptyString(
@@ -1543,6 +1714,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value filenameForRegistrationsCsv.
+	 *
+	 * @return void
 	 */
 	private function checkFilenameForRegistrationsCsv() {
 		$this->checkForNonEmptyString(
@@ -1558,6 +1731,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value fieldsFromEventsForCsv.
+	 *
+	 * @return void
 	 */
 	private function checkFieldsFromEventsForCsv() {
 		$this->checkIfMultiInSetNotEmpty(
@@ -1613,6 +1788,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value fieldsFromFeUserForCsv.
+	 *
+	 * @return void
 	 */
 	private function checkFieldsFromFeUserForCsv() {
 		$this->checkIfMultiInTableOrEmpty(
@@ -1628,6 +1805,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value fieldsFromAttendanceForCsv.
+	 *
+	 * @return void
 	 */
 	private function checkFieldsFromAttendanceForCsv() {
 		$this->checkIfMultiInTableOrEmpty(
@@ -1643,6 +1822,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value fieldsFromFeUserForEmailCsv.
+	 *
+	 * @return void
 	 */
 	private function checkFieldsFromFeUserForEmailCsv() {
 		$this->checkIfMultiInTableOrEmpty(
@@ -1658,6 +1839,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value fieldsFromAttendanceForEmailCsv.
+	 *
+	 * @return void
 	 */
 	private function checkFieldsFromAttendanceForEmailCsv() {
 		$this->checkIfMultiInTableOrEmpty(
@@ -1673,6 +1856,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showToBeAnnouncedForEmptyPrice.
+	 *
+	 * @return void
 	 */
 	private function checkShowToBeAnnouncedForEmptyPrice() {
 		$this->checkIfBoolean(
@@ -1690,6 +1875,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks whether the HTML template for the registration form is provided
 	 * and the file exists.
+	 *
+	 * @return void
 	 */
 	private function checkRegistrationEditorTemplateFile() {
 		$errorMessage = 'This specifies the HTML template for the registration '.
@@ -1725,6 +1912,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * logOutOneTimeAccountsAfterRegistration.
+	 *
+	 * @return void
 	 */
 	private function checkLogOutOneTimeAccountsAfterRegistration() {
 		$this->checkIfBoolean(
@@ -1740,6 +1929,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * numberOfFirstRegistrationPage.
+	 *
+	 * @return void
 	 */
 	private function checkNumberOfFirstRegistrationPage() {
 		$this->checkIfPositiveInteger(
@@ -1756,6 +1947,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * numberOfLastRegistrationPage.
+	 *
+	 * @return void
 	 */
 	private function checkNumberOfLastRegistrationPage() {
 		$this->checkIfPositiveInteger(
@@ -1772,6 +1965,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * numberOfClicksForRegistration.
+	 *
+	 * @return void
 	 */
 	private function checkNumberOfClicksForRegistration() {
 		$this->checkIfInteger(
@@ -1794,6 +1989,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * sendParametersToThankYouAfterRegistrationPageUrl.
+	 *
+	 * @return void
 	 */
 	private function checkSendParametersToThankYouAfterRegistrationPageUrl() {
 		$this->checkIfBoolean(
@@ -1810,6 +2007,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * sendParametersToPageToShowAfterUnregistrationUrl.
+	 *
+	 * @return void
 	 */
 	private function checkSendParametersToPageToShowAfterUnregistrationUrl() {
 		$this->checkIfBoolean(
@@ -1826,6 +2025,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * createAdditionalAttendeesAsFrontEndUsers.
+	 *
+	 * @return void
 	 */
 	private function checkCreateAdditionalAttendeesAsFrontEndUsers() {
 		$this->checkIfBoolean(
@@ -1842,6 +2043,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * sysFolderForAdditionalAttendeeUsersPID.
+	 *
+	 * @return void
 	 */
 	private function checkSysFolderForAdditionalAttendeeUsersPID() {
 		$this->checkIfSingleSysFolderNotEmpty(
@@ -1858,6 +2061,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * userGroupUidsForAdditionalAttendeesFrontEndUsers.
+	 *
+	 * @return void
 	 */
 	private function checkUserGroupUidsForAdditionalAttendeesFrontEndUsers() {
 		$this->checkIfPidListNotEmpty(
@@ -1873,6 +2078,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * unregistrationDeadlineDaysBeforeBeginDate.
+	 *
+	 * @return void
 	 */
 	private function checkUnregistrationDeadlineDaysBeforeBeginDate() {
 		$this->checkIfPositiveIntegerOrEmpty(
@@ -1890,6 +2097,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value sendNotification.
+	 *
+	 * @return void
 	 */
 	private function checkSendNotification() {
 		$this->checkIfBoolean(
@@ -1906,6 +2115,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * sendNotificationOnUnregistration.
+	 *
+	 * @return void
 	 */
 	private function checkSendNotificationOnUnregistration() {
 		$this->checkIfBoolean(
@@ -1922,6 +2133,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * sendNotificationOnRegistrationForQueue.
+	 *
+	 * @return void
 	 */
 	private function checkSendNotificationOnRegistrationForQueue() {
 		$this->checkIfBoolean(
@@ -1938,6 +2151,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * sendNotificationOnQueueUpdate.
+	 *
+	 * @return void
 	 */
 	private function checkSendNotificationOnQueueUpdate() {
 		$this->checkIfBoolean(
@@ -1953,6 +2168,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value sendConfirmation.
+	 *
+	 * @return void
 	 */
 	private function checkSendConfirmation() {
 		$this->checkIfBoolean(
@@ -1969,6 +2186,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * sendConfirmationOnUnregistration.
+	 *
+	 * @return void
 	 */
 	private function checkSendConfirmationOnUnregistration() {
 		$this->checkIfBoolean(
@@ -1985,6 +2204,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * sendConfirmationOnRegistrationForQueue.
+	 *
+	 * @return void
 	 */
 	private function checkSendConfirmationOnRegistrationForQueue() {
 		$this->checkIfBoolean(
@@ -2001,6 +2222,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * sendConfirmationOnQueueUpdate.
+	 *
+	 * @return void
 	 */
 	private function checkSendConfirmationOnQueueUpdate() {
 		$this->checkIfBoolean(
@@ -2017,6 +2240,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * allowRegistrationForStartedEvents.
+	 *
+	 * @return void
 	 */
 	private function checkAllowRegistrationForStartedEvents() {
 		$this->checkIfBoolean(
@@ -2033,6 +2258,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * allowRegistrationForEventsWithoutDate.
+	 *
+	 * @return void
 	 */
 	private function checkAllowRegistrationForEventsWithoutDate() {
 		$this->checkIfBoolean(
@@ -2049,6 +2276,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * allowUnregistrationWithEmptyWaitingList.
+	 *
+	 * @return void
 	 */
 	private function checkAllowUnregistrationWithEmptyWaitingList() {
 		$this->checkIfBoolean(
@@ -2064,8 +2293,9 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value externalLinkTarget.
-	 * But currently does nothing as we don't think there's something to check
-	 * for.
+	 * But currently does nothing as we don't think there's something to check for.
+	 *
+	 * @return void
 	 */
 	private function checkExternalLinkTarget() {
 		// Does nothing.
@@ -2074,6 +2304,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * showSingleEvent.
+	 *
+	 * @return void
 	 */
 	private function checkShowSingleEvent() {
 		$this->checkIfPositiveIntegerOrEmpty(
@@ -2089,6 +2321,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * limitListViewToEventTypes.
+	 *
+	 * @return void
 	 */
 	private function checkLimitListViewToEventTypes() {
 		$this->checkIfPidListOrEmpty(
@@ -2104,6 +2338,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * limitListViewToCategories.
+	 *
+	 * @return void
 	 */
 	private function checkLimitListViewToCategories() {
 		$this->checkIfPidListOrEmpty(
@@ -2119,6 +2355,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * limitListViewToPlaces.
+	 *
+	 * @return void
 	 */
 	private function checkLimitListViewToPlaces() {
 		$this->checkIfPidListOrEmpty(
@@ -2134,6 +2372,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks the setting of the configuration value
 	 * limitListViewToOrganizers.
+	 *
+	 * @return void
 	 */
 	private function checkLimitListViewToOrganizers() {
 		$this->checkIfPidListOrEmpty(
@@ -2148,6 +2388,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value skipRegistrationCollisionCheck.
+	 *
+	 * @return void
 	 */
 	private function checkSkipRegistrationCollisionCheck() {
 		$this->checkIfBoolean(
@@ -2163,6 +2405,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value categoriesInListView.
+	 *
+	 * @return void
 	 */
 	private function checkCategoryIconDisplay() {
 		$this->checkIfSingleInSetNotEmpty(
@@ -2182,6 +2426,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the settings for the image width, and height in the list view.
+	 *
+	 * @return void
 	 */
 	private function checkSeminarImageSizes() {
 		$this->checkListViewImageWidth();
@@ -2190,6 +2436,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the settings for seminarImageListViewWidth.
+	 *
+	 * @return void
 	 */
 	private function checkListViewImageWidth() {
 		$this->checkIfPositiveInteger(
@@ -2204,6 +2452,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the settings for seminarImageListViewHeight.
+	 *
+	 * @return void
 	 */
 	private function checkListViewImageHeight() {
 		$this->checkIfPositiveInteger(
@@ -2217,6 +2467,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the settings for the image width, and height in the single view.
+	 *
+	 * @return void
 	 */
 	private function checkSingleViewImageSizes() {
 		$this->checkSingleViewImageWidth();
@@ -2225,6 +2477,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the settings for seminarImageSingleViewWidth.
+	 *
+	 * @return void
 	 */
 	private function checkSingleViewImageWidth() {
 		$this->checkIfPositiveInteger(
@@ -2238,6 +2492,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the settings for seminarImageSingleViewHeight.
+	 *
+	 * @return void
 	 */
 	private function checkSingleViewImageHeight() {
 		$this->checkIfPositiveInteger(
@@ -2252,6 +2508,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showOwnerDataInSingleView.
+	 *
+	 * @return void
 	 */
 	private function checkShowOwnerDataInSingleView() {
 		$this->checkIfBoolean(
@@ -2267,6 +2525,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value ownerPictureMaxWidth.
+	 *
+	 * @return void
 	 */
 	private function checkOwnerPictureMaxWidth() {
 		$this->checkIfPositiveInteger(
@@ -2282,6 +2542,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting for displaySearchFormFields.
+	 *
+	 * @return void
 	 */
 	private function checkDisplaySearchFormFields() {
 		$this->checkIfMultiInSetOrEmpty(
@@ -2300,6 +2562,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the settings for numberOfYearsInDateFilter.
+	 *
+	 * @return void
 	 */
 	private function checkNumberOfYearsInDateFilter() {
 		$this->checkIfPositiveInteger(
@@ -2315,6 +2579,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value displayFrontEndEditorFields.
+	 *
+	 * @return void
 	 */
 	private function checkDisplayFrontEndEditorFields() {
 		$this->checkIfMultiInSetOrEmpty(
@@ -2371,6 +2637,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting for allowFrontEndEditingOfSpeakers.
+	 *
+	 * @return void
 	 */
 	private function checkAllowFrontEndEditingOfSpeakers() {
 		$this->checkIfBoolean(
@@ -2386,6 +2654,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting for allowFrontEndEditingOfPlaces.
+	 *
+	 * @return void
 	 */
 	private function checkAllowFrontEndEditingOfPlaces() {
 		$this->checkIfBoolean(
@@ -2401,6 +2671,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting for allowFrontEndEditingOfCheckboxes.
+	 *
+	 * @return void
 	 */
 	private function checkAllowFrontEndEditingOfCheckboxes() {
 		$this->checkIfBoolean(
@@ -2416,6 +2688,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting for allowFrontEndEditingOfTargetGroups.
+	 *
+	 * @return void
 	 */
 	private function checkAllowFrontEndEditingOfTargetGroups() {
 		$this->checkIfBoolean(
@@ -2431,6 +2705,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for requiredFrontEndEditorFields.
+	 *
+	 * @return void
 	 */
 	private function checkRequiredFrontEndEditorFields() {
 		$this->checkIfMultiInSetOrEmpty(
@@ -2505,6 +2781,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the configuration for requiredFrontEndEditorPlaceFields.
+	 *
+	 * @return void
 	 */
 	private function checkRequiredFrontEndEditorPlaceFields() {
 		$this->checkIfMultiInSetOrEmpty(
@@ -2528,6 +2806,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks whether the HTML template for the event editor is provided and the
 	 * file exists.
+	 *
+	 * @return void
 	 */
 	private function checkEventEditorTemplateFile() {
 		$errorMessage = 'This specifies the HTML template for the event editor. '.
@@ -2561,6 +2841,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of the configuration value showOnlyEventsWithVacancies.
+	 *
+	 * @return void
 	 */
 	private function checkShowOnlyEventsWithVacancies() {
 		$this->checkIfBoolean(
@@ -2576,6 +2858,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the relation between last and first page and the number of clicks.
+	 *
+	 * @return void
 	 */
 	private function checkRegistrationPageNumbers() {
 		$clicks = $this->objectToCheck->getConfValueInteger(
@@ -2605,6 +2889,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	/**
 	 * Checks whether plugin.tx_seminars.currency is not empty and a valid ISO
 	 * 4217 alpha 3.
+	 *
+	 * @return void
 	 */
 	public function checkCurrency() {
 		$this->checkIfSingleInSetNotEmpty(
@@ -2620,6 +2906,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 
 	/**
 	 * Checks the setting of showAttendancesOnRegistrationQueueInEmailCsv
+	 *
+	 * @return void
 	 */
 	public function checkShowAttendancesOnRegistrationQueueInEmailCsv() {
 		$this->checkIfBoolean(

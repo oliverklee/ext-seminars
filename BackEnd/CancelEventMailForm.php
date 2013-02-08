@@ -124,6 +124,8 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 	/**
 	 * Marks an event according to the status to set and commits the change to
 	 * the database.
+	 *
+	 * @return void
 	 */
 	protected function setEventStatus() {
 		$this->getEvent()->setStatus(tx_seminars_Model_Event::STATUS_CANCELED);
@@ -145,6 +147,8 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 	 *
 	 * @param tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
 	 *        the link builder instance to use
+	 *
+	 * @return void
 	 */
 	public function injectLinkBuilder(
 		tx_seminars_Service_SingleViewLinkBuilder $linkBuilder

@@ -186,6 +186,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * Initializes this object and its configuration getter.
 	 *
 	 * @param array $configuration TypoScript configuration for the plugin, may be empty
+	 *
+	 * @return void
 	 */
 	public function init(array $configuration = array()) {
 		parent::init($configuration);
@@ -217,6 +219,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 
 	/**
 	 * Loads the locallang files needed to translate the CSV headings.
+	 *
+	 * @return void
 	 */
 	private function loadLocallangFiles() {
 		if (is_object($GLOBALS['TSFE']) && is_array($this->LOCAL_LANG)) {
@@ -600,6 +604,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Sets the HTTP header: the content type and filename (content disposition)
 	 * for registration lists.
+	 *
+	 * @return void
 	 */
 	private function setContentTypeForRegistrationLists() {
 		$this->setPageTypeAndDisposition(
@@ -612,6 +618,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Sets the HTTP header: the content type and filename (content disposition)
 	 * for event lists.
+	 *
+	 * @return void
 	 */
 	private function setContentTypeForEventLists() {
 		$this->setPageTypeAndDisposition(
@@ -628,6 +636,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * @param string $csvFileName
 	 *        the name for the page which is used as storage name, must not be
 	 *        empty
+	 *
+	 * @return void
 	 */
 	private function setPageTypeAndDisposition($csvFileName) {
 		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
@@ -798,6 +808,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * This function is for testing purposes only!
 	 *
 	 * @param string $typo3Mode the TYPO3_MODE to set, must be "BE" or "FE"
+	 *
+	 * @return void
 	 */
 	public function setTypo3Mode($typo3Mode) {
 		$this->typo3Mode = $typo3Mode;
@@ -839,6 +851,8 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * @param string $exportMode
 	 *        the export mode, must be either tx_seminars_pi2::EXPORT_MODE_WEB or
 	 *        tx_seminars_pi2::EXPORT_MODE_EMAIL
+	 *
+	 * @return void
 	 */
 	public function setExportMode($exportMode) {
 		$this->exportMode = ($exportMode == self::EXPORT_MODE_EMAIL)

@@ -82,6 +82,8 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	/**
 	 * Creates and initializes an instance of tx_staticinfotables_pi1 in
 	 * $this->staticInfo.
+	 *
+	 * @return void
 	 */
 	private function instantiateStaticInfo() {
 		$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');

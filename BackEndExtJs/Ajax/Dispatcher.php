@@ -43,6 +43,8 @@ class tx_seminars_BackEndExtJs_Ajax_Dispatcher {
 	 * @param TYPO3AJAX $ajaxObject
 	 *        the AJAX object used to set the content and content-type of the
 	 *        response of the AJAX call
+	 *
+	 * @return void
 	 */
 	public function dispatch(array $parameters, TYPO3AJAX $ajaxObject) {
 		switch ($ajaxObject->getAjaxID()) {

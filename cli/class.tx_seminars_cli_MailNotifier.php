@@ -35,6 +35,8 @@
 class tx_seminars_cli_MailNotifier {
 	/**
 	 * Starts the CLI module.
+	 *
+	 * @return void
 	 */
 	public function start() {
 		$this->setConfigurationPage();
@@ -49,6 +51,8 @@ class tx_seminars_cli_MailNotifier {
 	 * otherwise throws an exception.
 	 *
 	 * @throws InvalidArgumentException if no page UID or an invalid UID was provided
+	 *
+	 * @return void
 	 */
 	public function setConfigurationPage() {
 		if (!isset($_SERVER['argv'][1])) {
@@ -76,6 +80,8 @@ class tx_seminars_cli_MailNotifier {
 	/**
 	 * Sends event-takes-place reminders to the corresponding organizers and
 	 * commits the flag for this reminder being sent to the database.
+	 *
+	 * @return void
 	 */
 	public function sendEventTakesPlaceReminders() {
 		foreach ($this->getEventsToSendEventTakesPlaceReminderFor() as $event) {
@@ -90,6 +96,8 @@ class tx_seminars_cli_MailNotifier {
 	/**
 	 * Sends cancelation deadline reminders to the corresponding organizers and
 	 * commits the flag for this reminder being sent to the database.
+	 *
+	 * @return void
 	 */
 	public function sendCancelationDeadlineReminders() {
 		foreach ($this->getEventsToSendCancelationDeadlineReminderFor() as $event) {
@@ -106,6 +114,8 @@ class tx_seminars_cli_MailNotifier {
 	 *
 	 * @param tx_seminars_seminar $event event for which to send the reminder to its organizers
 	 * @param string $messageKey locallang key for the message content and the subject for the e-mail to send, must not be empty
+	 *
+	 * @return void
 	 */
 	private function sendRemindersToOrganizers(
 		tx_seminars_seminar $event, $messageKey

@@ -70,6 +70,8 @@ class tx_seminars_Bag_Category extends tx_seminars_Bag_Abstract {
 	 *
 	 * $this->dbResult must be ensured to be non-NULL when this function is
 	 * called.
+	 *
+	 * @return void
 	 */
 	protected function createItemFromDbResult() {
 		$this->currentItem = tx_oelib_ObjectFactory::make(

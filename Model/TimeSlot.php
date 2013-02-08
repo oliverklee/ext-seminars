@@ -47,6 +47,8 @@ class tx_seminars_Model_TimeSlot extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our entry date as UNIX time-stamp.
 	 *
 	 * @param integer $entryDate our entry date as UNIX time-stamp, will be >= 0, 0 means "no entry date"
+	 *
+	 * @return void
 	 */
 	public function setEntryDateAsUnixTimeStamp($entryDate) {
 		if ($entryDate < 0) {

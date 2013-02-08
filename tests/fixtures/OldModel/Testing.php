@@ -43,6 +43,8 @@ class tx_seminars_tests_fixtures_OldModel_Testing extends tx_seminars_OldModel_A
 	 * Sets the test field of this record to a boolean value.
 	 *
 	 * @param boolean $test the boolean value to set
+	 *
+	 * @return void
 	 */
 	public function setBooleanTest($test) {
 		$this->setRecordPropertyBoolean('test', $test);

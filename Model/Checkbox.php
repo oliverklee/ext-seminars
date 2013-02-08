@@ -46,6 +46,8 @@ class tx_seminars_Model_Checkbox extends tx_oelib_Model implements tx_seminars_I
 	 * Sets our title.
 	 *
 	 * @param string $title our title to set, must not be empty
+	 *
+	 * @return void
 	 */
 	public function setTitle($title) {
 		if ($title == '') {
@@ -68,6 +70,8 @@ class tx_seminars_Model_Checkbox extends tx_oelib_Model implements tx_seminars_I
 	 * Sets our description.
 	 *
 	 * @param string $description our description to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setDescription($description) {
 		$this->setAsString('description', $description);
@@ -96,8 +100,9 @@ class tx_seminars_Model_Checkbox extends tx_oelib_Model implements tx_seminars_I
 	/**
 	 * Sets our owner.
 	 *
-	 * @param tx_seminars_Model_FrontEndUser $frontEndUser the owner of this model
-	 *                                                  to set
+	 * @param tx_seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
+	 *
+	 * @return void
 	 */
 	public function setOwner(tx_seminars_Model_FrontEndUser $frontEndUser) {
 		$this->set('owner', $frontEndUser);

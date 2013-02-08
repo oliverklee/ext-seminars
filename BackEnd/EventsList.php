@@ -103,6 +103,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	 * Sets the labels for the heading for the events table.
 	 *
 	 * The labels are set directly in the template, so nothing is returned.
+	 *
+	 * @return void
 	 */
 	private function createTableHeading() {
 		$this->template->setMarker(
@@ -148,6 +150,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	 * The table rows are set directly in the template, so nothing is returned.
 	 *
 	 * @param tx_seminars_Bag_Event $events the events to list
+	 *
+	 * @return void
 	 */
 	private function createListBody(tx_seminars_Bag_Event $events) {
 		$tableRows = '';
@@ -319,6 +323,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	 * The button will only be visible if the event has at least one registration.
 	 *
 	 * @param tx_seminars_seminar $event the event to get the e-mail button for
+	 *
+	 * @return void
 	 */
 	private function setEmailButtonMarkers(tx_seminars_seminar $event) {
 		if (!$event->hasAttendances()) {
@@ -349,6 +355,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	 * In all other cases the corresponding subpart is hidden.
 	 *
 	 * @param tx_seminars_seminar $event the event to get the cancel button for
+	 *
+	 * @return void
 	 */
 	private function setCancelButtonMarkers(tx_seminars_seminar $event) {
 		$this->template->unhideSubpartsArray(array('CANCEL_BUTTON'));
@@ -383,6 +391,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	 * In all other cases the corresponding subpart is hidden.
 	 *
 	 * @param tx_seminars_seminar $event the event to get the confirm button for
+	 *
+	 * @return void
 	 */
 	private function setConfirmButtonMarkers(tx_seminars_seminar $event) {
 		$this->template->unhideSubpartsArray(array('CONFIRM_BUTTON'));

@@ -47,6 +47,8 @@ class tx_seminars_Model_Category extends tx_oelib_Model implements tx_seminars_I
 	 * Sets our title.
 	 *
 	 * @param string $title our title to set, must not be empty
+	 *
+	 * @return void
 	 */
 	public function setTitle($title) {
 		if ($title == '') {
@@ -71,6 +73,8 @@ class tx_seminars_Model_Category extends tx_oelib_Model implements tx_seminars_I
 	 * Sets the icon of this category.
 	 *
 	 * @param string $icon the file name of the icon (relative to the extension upload path) of the category, may be empty
+	 *
+	 * @return void
 	 */
 	public function setIcon($icon) {
 		$this->setAsString('icon', $icon);

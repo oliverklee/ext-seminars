@@ -197,6 +197,8 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * mail and do any further processing with the event.
 	 *
 	 * This method is public for testing only.
+	 *
+	 * @return void
 	 */
 	public function markAsIncomplete() {
 		$this->isComplete = FALSE;
@@ -376,6 +378,8 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * Sets the POST data.
 	 *
 	 * @param array $postData associative array with the POST data, may be empty
+	 *
+	 * @return void
 	 */
 	public function setPostData(array $postData) {
 		$this->postData = $postData;
@@ -414,6 +418,8 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 
 	/**
 	 * Sends an e-mail to the attendees to inform about the changed event state.
+	 *
+	 * @return void
 	 */
 	private function sendEmailToAttendees() {
 		$organizer = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer')
@@ -475,11 +481,15 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * Marks an event according to the status to set (if any) and commits the
 	 * change to the database.
+	 *
+	 * @return void
 	 */
 	protected function setEventStatus() {}
 
 	/**
 	 * Redirects to the list view.
+	 *
+	 * @return void
 	 */
 	private function redirectToListView() {
 		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
@@ -625,6 +635,8 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 *        the field name to set the error message for, must be "messageBody"
 	 *        or "subject"
 	 * @param string $message the error message to set, may be empty
+	 *
+	 * @return void
 	 */
 	protected function setErrorMessage($fieldName, $message) {
 		if ($this->hasErrorMessage($fieldName)) {

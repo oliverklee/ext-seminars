@@ -57,6 +57,8 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 	/**
 	 * Initializes some variables and also starts the initialization of the
 	 * parent class.
+	 *
+	 * @return void
 	 */
 	public function init() {
 		parent::init();
@@ -144,6 +146,8 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 	 * Adds the language labels file to the page renderer. Creates the language
 	 * labels file in typo3temp/tx_seminars_BackEndExtJs/ if it doesn't exist
 	 * already.
+	 *
+	 * @return void
 	 */
 	private function addLanguageLabelsFile() {
 		$language = $GLOBALS['LANG']->lang;
@@ -210,6 +214,8 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 	/**
 	 * Adds some inline settings to the page renderer which outputs them as
 	 * JSON in the page header.
+	 *
+	 * @return void
 	 */
 	private function addInlineSettings() {
 		$this->addSubmoduleAccessInlineSettings();
@@ -241,6 +247,8 @@ class tx_seminars_BackEndExtJs_Module extends t3lib_SCbase {
 	/**
 	 * Adds the sub-module access settings as inline setting to the page
 	 * renderer which outputs them as JSON in the page header.
+	 *
+	 * @return void
 	 */
 	private function addSubmoduleAccessInlineSettings() {
 		$tables = array(

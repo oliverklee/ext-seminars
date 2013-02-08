@@ -144,8 +144,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Purges the current instance so that getInstance will create a new
-	 * instance.
+	 * Purges the current instance so that getInstance will create a new instance.
+	 *
+	 * @return void
 	 */
 	public static function purgeInstance() {
 		if (self::$instance) {
@@ -622,6 +623,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *        the registration to fill, must already have an event assigned
 	 * @param array $formData
 	 *        the raw data submitted via the form, may be empty
+	 *
+	 * @return void
 	 */
 	protected function setRegistrationData(
 		tx_seminars_Model_Registration $registration, array $formData
@@ -745,6 +748,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @param integer $uid the UID of the registration that should be removed
 	 * @param tslib_pibase $plugin a live plugin object
+	 *
+	 * @return void
 	 */
 	public function removeRegistration($uid, tslib_pibase $plugin) {
 		if (!tx_seminars_OldModel_Abstract::recordExists(
@@ -801,6 +806,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * registration queue.
 	 *
 	 * @param tslib_pibase $plugin live plugin object
+	 *
+	 * @return void
 	 */
 	private function fillVacancies(tslib_pibase $plugin) {
 		$seminar = $this->registration->getSeminarObject();
@@ -886,7 +893,6 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Returns the event topics the user still needs to register for in order
 	 * to be able to register for $event.
 	 *
-	 *
 	 * @param tx_seminars_seminar $event the event to check
 	 *
 	 * @return tx_seminars_Bag_Event the event topics which still need the
@@ -916,6 +922,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *        - confirmationOnQueueUpdate
 	 *        In the following the parameter is prefixed with "email_" and
 	 *        postfixed with "Hello" or "Subject".
+	 *
+	 * @return void
 	 */
 	public function notifyAttendee(
 		tx_seminars_registration $oldRegistration,
@@ -997,6 +1005,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *        - notificationOnRegistrationForQueue
 	 *        - notificationOnQueueUpdate
 	 *        In the following, the parameter is prefixed with "email_" and postfixed with "Hello" or "Subject".
+	 *
+	 * @return void
 	 */
 	public function notifyOrganizers(
 		tx_seminars_registration $registration,
@@ -1096,6 +1106,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * attendees are the same), only the "event is full" message will be sent.
 	 *
 	 * @param tx_seminars_registration $registration the registration for which the notification should be send
+	 *
+	 * @return void
 	 */
 	public function sendAdditionalNotification(
 		tx_seminars_registration $registration
@@ -1201,6 +1213,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * This function will read the template file as it is set in the TypoScript
 	 * setup. If there is a template file set in the flexform of pi1, this will
 	 * be ignored!
+	 *
+	 * @return void
 	 */
 	private function initializeTemplate() {
 		if (!$this->isTemplateInitialized) {
@@ -1445,6 +1459,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @param tx_seminars_registration $registration the current registration
 	 * @param boolean $useHtml whether to create HTML instead of plain text
+	 *
+	 * @return void
 	 */
 	private function fillOrHideAttendeeMarker(
 		tx_seminars_registration $registration, $useHtml
@@ -1468,6 +1484,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @param tx_seminars_seminar $event event of this registration
 	 * @param boolean $useHtml whether to create HTML instead of plain text
+	 *
+	 * @return void
 	 */
 	private function fillPlacesMarker(tx_seminars_seminar $event, $useHtml) {
 		if (!$event->hasPlace()) {
@@ -1528,6 +1546,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *          "email_" and postfixed with "Hello".
 	 * @param tx_seminars_registration $registration
 	 *        the registration the introduction should be created for
+	 *
+	 * @return void
 	 */
 	private function setEMailIntroduction(
 		$helloSubjectPrefix, tx_seminars_registration $registration
@@ -1574,6 +1594,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @param tx_seminars_registration $registration
 	 *        the registration the introduction should be created for
 	 * @param boolean $useHtml whether to send HTML instead of plain text e-mail
+	 *
+	 * @return void
 	 */
 	private function fillOrHideUnregistrationNotice(
 		$helloSubjectPrefix, tx_seminars_registration $registration, $useHtml
@@ -1657,6 +1679,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @param tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
 	 *        the link builder instance to use
+	 *
+	 * @return void
 	 */
 	public function injectLinkBuilder(
 		tx_seminars_Service_SingleViewLinkBuilder $linkBuilder

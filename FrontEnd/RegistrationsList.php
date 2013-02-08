@@ -86,6 +86,8 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * Creates a seminar in $this->seminar.
 	 *
 	 * @param integer $seminarUid an event UID, invalid UIDs will be handled later
+	 *
+	 * @return void
 	 */
 	private function createSeminar($seminarUid) {
 		$this->seminar = tx_oelib_ObjectFactory::make(
@@ -166,6 +168,8 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 *
 	 * Before this function can be called, it must be ensured that $this->seminar
 	 * is a valid seminar object.
+	 *
+	 * @return void
 	 */
 	private function createRegistrationsList() {
 		$builder = $this->createRegistrationBagBuilder();
@@ -268,6 +272,8 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 *
 	 * @param tx_seminars_Bag_Registration $registrations
 	 *        the registrations to list, must not be empty
+	 *
+	 * @return void
 	 */
 	private function createTableBody(tx_seminars_Bag_Registration $registrations) {
 		$tableBody = '';

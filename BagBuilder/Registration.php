@@ -54,6 +54,8 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	 * parameter $eventUids.
 	 *
 	 * @param integer $eventUid the UID of the event to which the registration selection should be limited, must be > 0
+	 *
+	 * @return void
 	 */
 	public function limitToEvent($eventUid) {
 		if ($eventUid <= 0) {
@@ -66,6 +68,8 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 
 	/**
 	 * Limits the bag to paid registrations.
+	 *
+	 * @return void
 	 */
 	public function limitToPaid() {
 		$this->whereClauseParts['paid'] = 'tx_seminars_attendances' .
@@ -74,6 +78,8 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 
 	/**
 	 * Limits the bag to unpaid registrations.
+	 *
+	 * @return void
 	 */
 	public function limitToUnpaid() {
 		$this->whereClauseParts['paid'] = 'tx_seminars_attendances' .
@@ -82,6 +88,8 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 
 	/**
 	 * Removes the limitation for paid or unpaid registrations.
+	 *
+	 * @return void
 	 */
 	public function removePaymentLimitation() {
 		unset($this->whereClauseParts['paid']);
@@ -89,6 +97,8 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 
 	/**
 	 * Limits the bag to the registrations on the registration queue.
+	 *
+	 * @return void
 	 */
 	public function limitToOnQueue() {
 		$this->whereClauseParts['queue'] = 'tx_seminars_attendances' .
@@ -98,6 +108,8 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	/**
 	 * Limits the bag to the regular registrations (which are not on the
 	 * registration queue).
+	 *
+	 * @return void
 	 */
 	public function limitToRegular() {
 		$this->whereClauseParts['queue'] = 'tx_seminars_attendances' .
@@ -106,6 +118,8 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 
 	/**
 	 * Removes the limitation for regular or on queue registrations.
+	 *
+	 * @return void
 	 */
 	public function removeQueueLimitation() {
 		unset($this->whereClauseParts['queue']);
@@ -116,6 +130,8 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	 * than the seats given in the parameter $seats.
 	 *
 	 * @param integer $seats the number of seats to filter for, set to 0 to remove the limitation, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function limitToSeatsAtMost($seats = 0) {
 		if ($seats < 0) {
@@ -166,6 +182,8 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	 * registration results with the corresponding events.
 	 *
 	 * @param string $orderBy the ORDER BY statement to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setOrderByEventColumn($orderBy) {
 		$this->addAdditionalTableName('tx_seminars_seminars');
@@ -177,6 +195,8 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	/**
 	 * Limits the bag to registrations to which a non-deleted FE user record
 	 * exists.
+	 *
+	 * @return void
 	 */
 	public function limitToExistingUsers() {
 		$this->whereClauseParts['existingUsers'] = 'EXISTS (

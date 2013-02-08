@@ -46,6 +46,8 @@ abstract class tx_seminars_Model_AbstractTimeSpan extends tx_oelib_Model impleme
 	 * Sets our title.
 	 *
 	 * @param string $title our title to set, must not be empty
+	 *
+	 * @return void
 	 */
 	public function setTitle($title) {
 		if ($title == '') {
@@ -69,6 +71,8 @@ abstract class tx_seminars_Model_AbstractTimeSpan extends tx_oelib_Model impleme
 	 * Sets our begin date as UNIX time-stamp.
 	 *
 	 * @param integer $beginDate our begin date as UNIX time-stamp, must be >= 0, 0 means "no begin date"
+	 *
+	 * @return void
 	 */
 	public function setBeginDateAsUnixTimeStamp($beginDate) {
 		if ($beginDate < 0) {
@@ -101,6 +105,8 @@ abstract class tx_seminars_Model_AbstractTimeSpan extends tx_oelib_Model impleme
 	 * Sets our end date as UNIX time-stamp.
 	 *
 	 * @param integer $endDate our end date as UNIX time-stamp, must be >= 0, 0 means "no end date"
+	 *
+	 * @return void
 	 */
 	public function setEndDateAsUnixTimeStamp($endDate) {
 		if ($endDate < 0) {
@@ -142,6 +148,8 @@ abstract class tx_seminars_Model_AbstractTimeSpan extends tx_oelib_Model impleme
 	 * Sets our room.
 	 *
 	 * @param string $room our room, may be empty
+	 *
+	 * @return void
 	 */
 	public function setRoom($room) {
 		$this->setAsString('room', $room);

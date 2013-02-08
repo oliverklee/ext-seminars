@@ -41,6 +41,8 @@ class tx_seminars_BackEnd_CSV extends tx_seminars_BackEnd_Module {
 	/**
 	 * Creates the CSV export content and outputs it directly on the page (in
 	 * this case, for download).
+	 *
+	 * @return void
 	 */
 	public function printContent() {
 		$pi2 = tx_oelib_ObjectFactory::make('tx_seminars_pi2');

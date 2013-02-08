@@ -102,6 +102,8 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	 * $this->seminarUid and logs them in.
 	 *
 	 * Note: This function creates a registration record.
+	 *
+	 * @return void
 	 */
 	private function createLogInAndRegisterFrontEndUser() {
 		$this->feUserUid = $this->testingFramework->createAndLoginFrontEndUser(

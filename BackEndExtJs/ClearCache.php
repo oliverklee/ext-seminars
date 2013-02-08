@@ -45,6 +45,8 @@ class tx_seminars_BackEndExtJs_ClearCache {
 	 * @param array $parameters the cache command from t3lib_tcemain->clear_cacheCmd() in the key "cacheCmd"
 	 *
 	 * @see t3lib_tcemain->clear_cacheCmd()
+	 *
+	 * @return void
 	 */
 	public function clearCachePostProcess($parameters) {
 		if ($parameters['cacheCmd'] != 'all') {

@@ -48,6 +48,8 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	 * Sets our name.
 	 *
 	 * @param string $name our name to set, must not be empty
+	 *
+	 * @return void
 	 */
 	public function setName($name) {
 		if ($name == '') {
@@ -70,6 +72,8 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	 * Sets our homepage.
 	 *
 	 * @param string $homepage our homepage, may be empty
+	 *
+	 * @return void
 	 */
 	public function setHomepage($homepage) {
 		$this->setAsString('homepage', $homepage);
@@ -99,6 +103,8 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	 * Sets out e-mail address.
 	 *
 	 * @param string $eMailAddress our e-mail address, must not be empty
+	 *
+	 * @return void
 	 */
 	public function setEMailAddress($eMailAddress) {
 		if ($eMailAddress == '') {
@@ -121,6 +127,8 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	 * Sets our e-mail footer.
 	 *
 	 * @param string $eMailFooter our e-mail footer, may be empty
+	 *
+	 * @return void
 	 */
 	public function setEMailFooter($eMailFooter) {
 		$this->setAsString('email_footer', $eMailFooter);
@@ -148,6 +156,8 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	 * Sets our attendances PID.
 	 *
 	 * @param integer $attendancesPID our attendances PID, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function setAttendancesPID($attendancesPID) {
 		if ($attendancesPID < 0) {

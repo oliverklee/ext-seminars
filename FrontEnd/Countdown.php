@@ -54,6 +54,8 @@ class tx_seminars_FrontEnd_Countdown extends tx_seminars_FrontEnd_AbstractView {
 	 * Injects an Event Mapper for this View.
 	 *
 	 * @param tx_seminars_Mapper_Event $mapper
+	 *
+	 * @return void
 	 */
 	public function injectEventMapper(tx_seminars_Mapper_Event $mapper) {
 		$this->mapper = $mapper;
@@ -63,6 +65,8 @@ class tx_seminars_FrontEnd_Countdown extends tx_seminars_FrontEnd_AbstractView {
 	 * Injects an Countdown View Helper.
 	 *
 	 * @param tx_seminars_ViewHelper_Countdown $viewHelper
+	 *
+	 * @return void
 	 */
 	public function injectCountDownViewHelper(tx_seminars_ViewHelper_Countdown $viewHelper) {
 		$this->viewHelper = $viewHelper;

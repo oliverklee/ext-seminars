@@ -117,6 +117,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 	 * Note: This function must only be called once per test.
 	 *
 	 * @param integer $eventUid event UID, must be > 0
+	 *
+	 * @return void
 	 */
 	private function addSpeaker($eventUid) {
 		$speakerUid = $this->testingFramework->createRecord(

@@ -67,6 +67,8 @@ class tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm extends tx_seminar
 
 	/**
 	 * Sets the date format for the event.
+	 *
+	 * @return void
 	 */
 	public function setDateFormat() {
 		$this->getOldEvent()->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
@@ -88,6 +90,8 @@ class tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm extends tx_seminar
 	 *        the field name to set the error message for, must be "messageBody"
 	 *        or "subject"
 	 * @param string $message the error message to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setErrorMessage($fieldName, $message) {
 		parent::setErrorMessage($fieldName, $message);

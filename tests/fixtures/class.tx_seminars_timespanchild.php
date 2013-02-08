@@ -62,6 +62,8 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	 * Sets this time span's begin date and time.
 	 *
 	 * @param integer $beginDate begin date and time as a UNIX timestamp, may be zero
+	 *
+	 * @return void
 	 */
 	public function setBeginDateAndTime($beginDate) {
 		$this->setRecordPropertyInteger('begin_date', $beginDate);
@@ -71,6 +73,8 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	 * Sets this time span's end date and time.
 	 *
 	 * @param integer $endDate end date and time as a UNIX timestamp, may be zero
+	 *
+	 * @return void
 	 */
 	public function setEndDateAndTime($endDate) {
 		$this->setRecordPropertyInteger('end_date', $endDate);
@@ -80,6 +84,8 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	 * Sets this time span's room.
 	 *
 	 * @param string $room room name
+	 *
+	 * @return void
 	 */
 	public function setRoom($room) {
 		$this->setRecordPropertyString('room', $room);
@@ -89,6 +95,8 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	 * Sets the number of places for this time span.
 	 *
 	 * @param integer $places the number of places that are associated with this time span
+	 *
+	 * @return void
 	 */
 	public function setNumberOfPlaces($places) {
 		$this->setRecordPropertyInteger('place', $places);

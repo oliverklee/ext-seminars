@@ -203,6 +203,8 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	 * in $this->loginPageUid and $this->registrationPageUid.
 	 *
 	 * In addition, it provides the fixture's configuration with the UIDs.
+	 *
+	 * @return void
 	 */
 	private function createFrontEndPages() {
 		$this->loginPageUid = $this->testingFramework->createFrontEndPage();
@@ -221,8 +223,9 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	}
 
 	/**
-	 * Creates a FE user, stores it UID in $this->frontEndUserUid and logs it
-	 * in.
+	 * Creates a FE user, stores it UID in $this->frontEndUserUid and logs it in.
+	 *
+	 * @return void
 	 */
 	private function createAndLogInFrontEndUser() {
 		$this->frontEndUserUid
@@ -231,6 +234,8 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 
 	/**
 	 * Creates a seminar which is booked out.
+	 *
+	 * @return void
 	 */
 	private function createBookedOutSeminar() {
 		$this->fullyBookedSeminar = new tx_seminars_seminarchild(

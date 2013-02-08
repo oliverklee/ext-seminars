@@ -74,6 +74,8 @@ class tx_seminars_Bag_Registration extends tx_seminars_Bag_Abstract {
 	 * will be nulled out.
 	 *
 	 * $this->dbResult is ensured to be not FALSE when this function is called.
+	 *
+	 * @return void
 	 */
 	protected function createItemFromDbResult() {
 		$this->currentItem = tx_oelib_ObjectFactory::make(

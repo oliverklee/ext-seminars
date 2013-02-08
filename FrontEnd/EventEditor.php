@@ -78,6 +78,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * Attached files are stored in a member variable and added to the form data
 	 * afterwards, as the FORMidable renderlet is not usable for this.
+	 *
+	 * @return void
 	 */
 	private function storeAttachedFiles() {
 		if (!$this->isTestMode()) {
@@ -94,6 +96,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 
 	/**
 	 * Declares the additional data handler for m:n relations.
+	 *
+	 * @return void
 	 */
 	private function declareDataHandler() {
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
@@ -690,6 +694,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * fields to dots.
 	 *
 	 * @param array &$formData all entered form data with the field names as keys, will be modified, must not be empty
+	 *
+	 * @return void
 	 */
 	private function unifyDecimalSeparators(array &$formData) {
 		$priceFields = array(
@@ -715,6 +721,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * list of attachments.
 	 *
 	 * @param array &$formData form data, will be modified, must not be empty
+	 *
+	 * @return void
 	 */
 	private function processAttachments(array &$formData) {
 		$filesToDelete = t3lib_div::trimExplode(
@@ -735,6 +743,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Removes all form data elements that are no fields in the seminars table.
 	 *
 	 * @param array &$formData form data, will be modified, must not be empty
+	 *
+	 * @return void
 	 */
 	private function purgeNonSeminarsFields(array &$formData) {
 		$fieldsToUnset = array(
@@ -782,6 +792,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * For objects to update, just the 'tstamp' will be refreshed.
 	 *
 	 * @param array &$formData form data, will be modified, must not be empty
+	 *
+	 * @return void
 	 */
 	private function addAdministrativeData(array &$formData) {
 		$formData['tstamp'] = $GLOBALS['SIM_EXEC_TIME'];
@@ -807,6 +819,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @param array &$formData
 	 *        form data, will be modified if the seminar must be hidden corresponding to the publish settings of the user,
 	 *        must not be empty
+	 *
+	 * @return void
 	 */
 	private function checkPublishSettings(array &$formData) {
 		$publishSetting	= tx_oelib_FrontEndLoginManager::getInstance()
@@ -907,6 +921,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Checks whether an uploaded file is of a valid type.
 	 *
 	 * @param string $fileName file name, must match an uploaded file, must not be empty
+	 *
+	 * @return void
 	 */
 	private function checkFileType($fileName) {
 		$allowedExtensions = $this->getConfValueString(
@@ -927,6 +943,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Checks whether an uploaded file is not too large.
 	 *
 	 * @param string $fileName file name, must match an uploaded file, must not be empty
+	 *
+	 * @return void
 	 */
 	private function checkFileSize($fileName) {
 		$maximumFileSize = $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'];
@@ -1124,6 +1142,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Reads the list of required form fields from the configuration and stores
 	 * it in $this->requiredFormFields.
+	 *
+	 * @return void
 	 */
 	private function setRequiredFormFields() {
 		$this->requiredFormFields = t3lib_div::trimExplode(
@@ -1141,6 +1161,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * @param tx_oelib_template $template the template in which the required
 	 *        markers should be set.
+	 *
+	 * @return void
 	 */
 	private function setRequiredFieldLabels(tx_oelib_template $template) {
 		$formFieldsToCheck = $this->getFieldsToShow();
@@ -1274,6 +1296,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 
 	/**
 	 * Sends the publishing e-mail to the reviewer if necessary.
+	 *
+	 * @return void
 	 */
 	public function sendEMailToReviewer() {
 		if ($this->publicationHash == '') {
@@ -1566,6 +1590,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @param tx_seminars_Model_Place $place the place model to set the data
 	 * @param string $prefix the prefix of the form fields in $formData
 	 * @param array $formData the form data to use for setting the place data
+	 *
+	 * @return void
 	 */
 	private static function setPlaceData(
 		tx_seminars_Model_Place $place, $prefix, array $formData
@@ -1843,6 +1869,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *        the speaker model to set the data for
 	 * @param string $prefix the prefix of the form fields in $formData
 	 * @param array $formData the form data to use for setting the speaker data
+	 *
+	 * @return void
 	 */
 	private static function setSpeakerData(tx_seminars_Model_Speaker $speaker, $prefix, array $formData) {
 		$skillMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill');
@@ -2091,6 +2119,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @param tx_seminars_Model_Checkbox $checkbox the checkbox model to set the data
 	 * @param string $prefix the prefix of the form fields in $formData
 	 * @param array $formData the form data to use for setting the checkbox data
+	 *
+	 * @return void
 	 */
 	private static function setCheckboxData(
 		tx_seminars_Model_Checkbox $checkbox, $prefix, array $formData
@@ -2325,6 +2355,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @param string $prefix the prefix of the form fields in $formData
 	 * @param array $formData
 	 *        the form data to use for setting the target group data
+	 *
+	 * @return void
 	 */
 	private static function setTargetGroupData(
 		tx_seminars_Model_TargetGroup $targetGroup, $prefix, array $formData
@@ -2512,6 +2544,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @param array $formData
 	 *        all entered form data with the field names as keys, will be
 	 *        modified, must not be empty
+	 *
+	 * @return void
 	 */
 	private function addCategoriesOfUser(array &$formData) {
 		$eventUid = $this->getObjectUid();
@@ -2532,8 +2566,9 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Removes the category field if the user has default categories set.
 	 *
 	 * @param array $formFields
-	 *        the fields which should be checked for category, will be modified,
-	 *        may be empty
+	 *        the fields which should be checked for category, will be modified, may be empty
+	 *
+	 * @return void
 	 */
 	private function removeCategoryIfNecessary(array &$formFields) {
 		if (!in_array('categories', $formFields)) {

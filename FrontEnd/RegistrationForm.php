@@ -131,6 +131,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Sets the action.
 	 *
 	 * @param string $action action for which to create the form, must be either "register" or "unregister", must not be empty
+	 *
+	 * @return void
 	 */
 	public function setAction($action) {
 		$this->setFormConfiguration($action);
@@ -140,6 +142,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Sets the seminar for which to create the form.
 	 *
 	 * @param tx_seminars_seminar $event the event for which to create the form
+	 *
+	 * @return void
 	 */
 	public function setSeminar(tx_seminars_seminar $event) {
 		$this->seminar = $event;
@@ -182,6 +186,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Sets the form configuration to use.
 	 *
 	 * @param string $action action to perform, may be either "register" or "unregister", must not be empty
+	 *
+	 * @return void
 	 */
 	public function setFormConfiguration($action = 'register') {
 		switch ($action) {
@@ -250,8 +256,9 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	}
 
 	/**
-	 * Discards the rendered FORMIdable form from the page, including any header
-	 * data.
+	 * Discards the rendered FORMIdable form from the page, including any header data.
+	 *
+	 * @return void
 	 */
 	private function discardRenderedForm() {
 		// A mayday would be returned without unsetting the form ID.
@@ -273,6 +280,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * for display. This affects $this->render().
 	 *
 	 * @param array $parameters the entered form data with the field names as array keys (including the submit button)
+	 *
+	 * @return void
 	 */
 	public function setPage(array $parameters) {
 		$this->currentPageNumber = $parameters['next_page'];
@@ -295,6 +304,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * In addition, the entered payment data is stored in the FE user session.
 	 *
 	 * @param array $parameters the entered form data with the field names as array keys (including the submit button ...)
+	 *
+	 * @return void
 	 */
 	public function processRegistration(array $parameters) {
 		$this->saveDataToSession($parameters);
@@ -895,6 +906,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * be changed to an empty array.
 	 *
 	 * @param mixed &$data variable that should be ensured to be an array
+	 *
+	 * @return void
 	 */
 	private function ensureArray(&$data) {
 		if (!is_array($data)) {
@@ -1377,6 +1390,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * - email
 	 *
 	 * @param array $parameters the form data (may be empty)
+	 *
+	 * @return void
 	 */
 	private function saveDataToSession(array $parameters) {
 		if (!empty($parameters)) {
@@ -1467,6 +1482,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 
 	/**
 	 * Creates and initializes $this->staticInfo (if that hasn't been done yet).
+	 *
+	 * @return void
 	 */
 	private function initStaticInfo() {
 		if (!$this->staticInfo) {
@@ -1480,6 +1497,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Hides form fields that are either disabled via TS setup or that have
 	 * nothing to select (e.g. if there are no payment methods) from the
 	 * templating process.
+	 *
+	 * @return void
 	 */
 	private function hideUnusedFormFields() {
 		static $availableFormFields = array(
@@ -1602,6 +1621,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 
 	/**
 	 * Processes the registration that should be removed.
+	 *
+	 * @return void
 	 */
 	public function processUnregistration() {
 		if (

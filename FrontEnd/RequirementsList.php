@@ -68,14 +68,17 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 	 * Sets the event to which this view relates.
 	 *
 	 * @param tx_seminars_seminar $event the event to build the requirements list for
+	 *
+	 * @return void
 	 */
 	public function setEvent(tx_seminars_seminar $event) {
 		$this->event = $event;
 	}
 
 	/**
-	 * Limits the requirements list to the requirements the user still needs to
-	 * register to.
+	 * Limits the requirements list to the requirements the user still needs to register to.
+	 *
+	 * @return void
 	 */
 	public function limitToMissingRegistrations() {
 		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
@@ -154,6 +157,8 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 	 *
 	 * @param tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
 	 *        the link builder instance to use
+	 *
+	 * @return void
 	 */
 	public function injectLinkBuilder(
 		tx_seminars_Service_SingleViewLinkBuilder $linkBuilder

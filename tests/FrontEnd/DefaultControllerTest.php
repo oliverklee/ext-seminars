@@ -223,6 +223,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * Creates a FE user, adds him/her as a VIP to the seminar with the UID in
 	 * $this->seminarUid and logs him/her in.
+	 *
+	 * @return void
 	 */
 	private function createLogInAndAddFeUserAsVip() {
 		$feUserUid = $this->testingFramework->createAndLoginFrontEndUser();
@@ -270,6 +272,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * to the seminar with the UID stored in $this->seminarUid.
 	 *
 	 * @param array $organizerData data of the organizer to add, may be empty
+	 *
+	 * @return void
 	 */
 	private function addOrganizerRelation(array $organizerData = array()) {
 		$organizerUid = $this->testingFramework->createRecord(

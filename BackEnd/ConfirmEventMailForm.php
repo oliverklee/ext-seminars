@@ -83,6 +83,8 @@ class tx_seminars_BackEnd_ConfirmEventMailForm extends tx_seminars_BackEnd_Abstr
 	/**
 	 * Marks an event according to the status to set and commits the change to
 	 * the database.
+	 *
+	 * @return void
 	 */
 	protected function setEventStatus() {
 		$this->getEvent()->setStatus(tx_seminars_Model_Event::STATUS_CONFIRMED);

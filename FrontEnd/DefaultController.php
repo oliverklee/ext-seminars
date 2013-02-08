@@ -498,6 +498,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Sets the current seminar for the list view.
 	 *
 	 * @param tx_seminars_seminar $seminar the current seminar
+	 *
+	 * @return void
 	 */
 	protected function setSeminar(tx_seminars_seminar $seminar = NULL) {
 		$this->seminar = $seminar;
@@ -550,6 +552,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 	/**
 	 * Creates the config getter and the registration manager.
+	 *
+	 * @return void
 	 */
 	public function createHelperObjects() {
 		if ($this->configGetter === NULL) {
@@ -844,6 +848,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the event type or hides the subpart
 	 * if there is no event type.
+	 *
+	 * @return void
 	 */
 	private function setEventTypeMarker() {
 		if (!$this->seminar->hasEventType()) {
@@ -857,6 +863,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the subtitle or hides the subpart
 	 * if there is no subtitle.
+	 *
+	 * @return void
 	 */
 	private function setSubtitleMarker() {
 		if (!$this->seminar->hasSubtitle()) {
@@ -870,6 +878,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the desription or hides the subpart
 	 * if there is no description.
+	 *
+	 * @return void
 	 */
 	private function setDescriptionMarker() {
 		if (!$this->seminar->hasDescription()) {
@@ -886,6 +896,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the accreditation number or hides the
 	 * subpart if there is no accreditation number.
+	 *
+	 * @return void
 	 */
 	private function setAccreditationNumberMarker() {
 		if (!$this->seminar->hasAccreditationNumber()) {
@@ -901,6 +913,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the credit points or hides the subpart
 	 * if there are no credit points.
+	 *
+	 * @return void
 	 */
 	private function setCreditPointsMarker() {
 		if (!$this->seminar->hasCreditPoints()) {
@@ -914,6 +928,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the categories or hides the subpart
 	 * if there are no categories.
+	 *
+	 * @return void
 	 */
 	private function setCategoriesMarker() {
 		if (!$this->seminar->hasCategories()) {
@@ -936,6 +952,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 	/**
 	 * Fills in the matching marker for the place.
+	 *
+	 * @return void
 	 */
 	private function setPlaceMarker() {
 		$this->setMarker(
@@ -949,6 +967,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the room or hides the subpart if there
 	 * is no room.
+	 *
+	 * @return void
 	 */
 	private function setRoomMarker() {
 		if (!$this->seminar->hasRoom()) {
@@ -962,6 +982,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching markers for the time slots or hides the subpart
 	 * if there are no time slots.
+	 *
+	 * @return void
 	 */
 	protected function setTimeSlotsMarkers() {
 		if (!$this->seminar->hasTimeslots()) {
@@ -999,6 +1021,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the expiry or hides the subpart if there
 	 * is no expiry.
+	 *
+	 * @return void
 	 */
 	private function setExpiryMarker() {
 		if (!$this->seminar->hasExpiry()) {
@@ -1012,6 +1036,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching markers for the speakers or hides the subpart if
 	 * there are no speakers.
+	 *
+	 * @return void
 	 */
 	private function setSpeakersMarker() {
 		if (!$this->seminar->hasSpeakers()) {
@@ -1025,6 +1051,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching markers for the partners or hides the subpart if
 	 * there are no partners.
+	 *
+	 * @return void
 	 */
 	private function setPartnersMarker() {
 		if (!$this->seminar->hasPartners()) {
@@ -1038,6 +1066,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching markers for the tutors or hides the subpart if
 	 * there are no tutors.
+	 *
+	 * @return void
 	 */
 	private function setTutorsMarker() {
 		if (!$this->seminar->hasTutors()) {
@@ -1051,6 +1081,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching markers for the leaders or hides the subpart if
 	 * there are no leaders.
+	 *
+	 * @return void
 	 */
 	private function setLeadersMarker() {
 		if (!$this->seminar->hasLeaders()) {
@@ -1068,6 +1100,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @param string $speakerType
 	 *        the speaker type to set the markers for, must not be empty, must be one of the following:
 	 *        "speakers", "partners", "tutors" or "leaders"
+	 *
+	 * @return void
 	 */
 	private function setSpeakersMarkerWithoutCheck($speakerType) {
 		if (!in_array(
@@ -1090,6 +1124,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the language or hides the unused
 	 * subpart.
+	 *
+	 * @return void
 	 */
 	private function setLanguageMarker() {
 		if (!$this->seminar->hasLanguage()) {
@@ -1103,6 +1139,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching markers for the prices or hides the unused
 	 * subparts.
+	 *
+	 * @return void
 	 */
 	private function setPriceMarkers() {
 		// set the regular price (with or without early bird rebate)
@@ -1200,6 +1238,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the payment methods or hides the subpart
 	 * if there are no payment methods.
+	 *
+	 * @return void
 	 */
 	private function setPaymentMethodsMarker() {
 		if (!$this->seminar->hasPaymentMethods()) {
@@ -1221,6 +1261,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the additional information or hides the
 	 * subpart if there is no additional information.
+	 *
+	 * @return void
 	 */
 	private function setAdditionalInformationMarker() {
 		if (!$this->seminar->hasAdditionalInformation()) {
@@ -1237,6 +1279,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching markers for the attached files or hides the subpart
 	 * if there are no attached files.
+	 *
+	 * @return void
 	 */
 	private function setAttachedFilesMarkers() {
 		if (!$this->seminar->hasAttachedFiles()
@@ -1266,6 +1310,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the target groups or hides the subpart
 	 * if there are no target groups.
+	 *
+	 * @return void
 	 */
 	private function setTargetGroupsMarkers() {
 		if (!$this->seminar->hasTargetGroups()) {
@@ -1287,6 +1333,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills the matching marker for the requirements or hides the subpart
 	 * if there are no requirements for the current event.
+	 *
+	 * @return void
 	 */
 	private function setRequirementsMarker() {
 		if (!$this->seminar->hasRequirements()) {
@@ -1308,6 +1356,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills the matching marker for the dependencies or hides the subpart
 	 * if there are no dependencies for the current event.
+	 *
+	 * @return void
 	 */
 	private function setDependenciesMarker() {
 		if (!$this->seminar->hasDependencies()) {
@@ -1336,6 +1386,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the organizing partners or hides the
 	 * subpart if there are no organizing partners.
+	 *
+	 * @return void
 	 */
 	private function setOrganizingPartnersMarker() {
 		if (!$this->seminar->hasOrganizingPartners()) {
@@ -1351,6 +1403,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the owner data or hides the subpart if
 	 * the event has no owner or the owner data should not be displayed.
+	 *
+	 * @return void
 	 */
 	private function setOwnerDataMarker() {
 		if (
@@ -1406,6 +1460,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the vacancies or hides the subpart if
 	 * the seminar does not need a registration or was canceled.
+	 *
+	 * @return void
 	 */
 	private function setVacanciesMarker() {
 		if (!$this->seminar->needsRegistration() || $this->seminar->isCanceled()) {
@@ -1419,6 +1475,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the registration deadline or hides the
 	 * subpart if there is no registration deadline.
+	 *
+	 * @return void
 	 */
 	private function setRegistrationDeadlineMarker() {
 		if (!$this->seminar->hasRegistrationDeadline()) {
@@ -1452,6 +1510,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Fills in the matching marker for the link to the registration form or
 	 * hides the subpart if the registration is disabled.
+	 *
+	 * @return void
 	 */
 	private function setRegistrationMarker() {
 		if (!$this->isRegistrationEnabled()) {
@@ -1473,6 +1533,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Fills in the matching marker for the link to the list of registrations
 	 * or hides the subpart if the currently logged in FE user is not allowed
 	 * to view the list of registrations.
+	 *
+	 * @return void
 	 */
 	private function setListOfRegistrationMarker() {
 		$canViewListOfRegistrations = $this->seminar->canViewRegistrationsList(
@@ -1491,6 +1553,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 	/**
 	 * Hides unneeded subparts for topic records.
+	 *
+	 * @return void
 	 */
 	private function hideUnneededSubpartsForTopicRecords() {
 		if ($this->seminar->getRecordType() != tx_seminars_Model_Event::TYPE_TOPIC) {
@@ -2306,6 +2370,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * @param tx_seminars_BagBuilder_Event $builder
 	 *        the seminarbagbuilder to limit for additional parameters
+	 *
+	 * @return void
 	 */
 	protected function limitForAdditionalParameters(tx_seminars_BagBuilder_Event $builder) {
 		// Adds the query parameter that result from the user selection in the
@@ -2588,6 +2654,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Hides the columns specified in the first parameter $columnsToHide.
 	 *
 	 * @param array $columnsToHide the columns to hide, may be empty
+	 *
+	 * @return void
 	 */
 	protected function hideColumns(array $columnsToHide) {
 		$this->hideSubpartsArray($columnsToHide, 'LISTHEADER_WRAPPER');
@@ -2598,6 +2666,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Un-hides the columns specified in the first parameter $columnsToHide.
 	 *
 	 * @param array $columnsToUnhide the columns to un-hide, may be empty
+	 *
+	 * @return void
 	 */
 	protected function unhideColumns(array $columnsToUnhide) {
 		$permanentlyHiddenColumns = t3lib_div::trimExplode(
@@ -2624,6 +2694,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @param string $whatToDisplay
 	 *        a string selecting the flavor of list view: either an empty string (for the default list view),
 	 *       the value from "what_to_display" or "other_dates"
+	 *
+	 * @return void
 	 */
 	private function hideEditColumnIfNecessary($whatToDisplay) {
 		$mayManagersEditTheirEvents = $this->getConfValueBoolean(
@@ -2647,6 +2719,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @param string $whatToDisplay
 	 *        the flavor of list view: either an empty string (for the default
 	 *        list view), the value from "what_to_display", or "other_dates"
+	 *
+	 * @return void
 	 */
 	public function hideListRegistrationsColumnIfNecessary($whatToDisplay) {
 		$alwaysHideInViews = array(
@@ -2686,6 +2760,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *        a string selecting the flavor of list view: either an empty string
 	 *        (for the default list view), the value from "what_to_display" or
 	 *        "other_dates"
+	 *
+	 * @return void
 	 */
 	private function hideRegisterColumnIfNecessary($whatToDisplay) {
 		if (!$this->isRegistrationEnabled()
@@ -2704,6 +2780,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @param string $whatToDisplay
 	 *        a string selecting the flavor of list view: either an empty string (for the default list view),
 	 *        the value from "what_to_display" or "other_dates"
+	 *
+	 * @return void
 	 */
 	private function hideCsvExportOfRegistrationsColumnIfNecessary($whatToDisplay) {
 		$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
@@ -2720,6 +2798,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 	/**
 	 * Hides columns which are not needed for the "topic_list" view.
+	 *
+	 * @return void
 	 */
 	private function hideColumnsForTheTopicListView() {
 		$this->hideColumns(
@@ -2744,6 +2824,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @param string $whatToDisplay
 	 *        a string selecting the flavor of list view: either an empty string (for the default list view),
 	 *        the value from "what_to_display" or "other_dates"
+	 *
+	 * @return void
 	 */
 	private function hideColumnsForAllViewsExceptMyEvents($whatToDisplay) {
 		if ($whatToDisplay != 'my_events') {
@@ -2756,6 +2838,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Hides the columns which are listed in the TypoScript setup variable
 	 * "hideColumns".
+	 *
+	 * @return void
 	 */
 	private function hideColumnsForAllViewsFromTypoScriptSetup() {
 		$this->hideColumns(
@@ -2967,6 +3051,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Enables/disables the display of data from event records on the
 	 * registration page depending on the config variable
 	 * "eventFieldsOnRegistrationPage".
+	 *
+	 * @return void
 	 */
 	protected function toggleEventFieldsOnRegistrationPage() {
 		$fieldsToShow = array();
@@ -3089,6 +3175,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * current seminar.
 	 *
 	 * @param string $speakerType type of gender specific heading, must be 'speaker', 'tutors', 'leaders' or 'partners'
+	 *
+	 * @return void
 	 */
 	private function setGenderSpecificHeading($speakerType) {
 		if (!in_array(
@@ -3160,6 +3248,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Sets the marker for the registration link in the list view.
 	 *
 	 * @param string $whatToDisplay the list type which should be shown, must not be empty
+	 *
+	 * @return void
 	 */
 	private function setRegistrationLinkMarker($whatToDisplay) {
 		if ($whatToDisplay == 'my_events') {
@@ -3199,6 +3289,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Filters the given seminar bag builder to the date set in piVars.
 	 *
 	 * @param tx_seminars_BagBuilder_Event $builder the bag builder to limit by date
+	 *
+	 * @return void
 	 */
 	private function filterByDate(tx_seminars_BagBuilder_Event $builder) {
 		$dateFrom = $this->getTimestampFromDatePiVars('from');
@@ -3293,6 +3385,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Hides the list view subparts for the attached files if the user is not
 	 * allowed to access the attached files.
+	 *
+	 * @return void
 	 */
 	private function hideFilesColumnIfUserCannotAccessFiles() {
 		$limitToAttendees = $this->getConfValueBoolean(
@@ -3392,6 +3486,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Hides the status column for all views where it is not applicable.
 	 *
 	 * @param string $whatToDisplay the current list view, may be empty
+	 *
+	 * @return void
 	 */
 	private function hideStatusColumnIfNotUsed($whatToDisplay) {
 		if (($whatToDisplay == 'my_entered_events')
@@ -3405,6 +3501,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 	/**
 	 * Sets the visibility status marker.
+	 *
+	 * @return void
 	 */
 	private function setVisibilityStatusMarker() {
 		$visibilityMarker = ($this->seminar->isHidden())
@@ -3422,6 +3520,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * @param tx_seminars_BagBuilder_Event $builder
 	 *        the seminarbagbuilder to limit by time frame
+	 *
+	 * @return void
 	 */
 	private function limitToTimeFrameSetting($builder) {
 		try {
@@ -3438,6 +3538,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 	/**
 	 * Processes hide/unhide events for the FE-editable events.
+	 *
+	 * @return void
 	 */
 	protected function processHideUnhide() {
 		$this->ensureIntegerPiVars(array('seminar'));
@@ -3474,6 +3576,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Marks $event as hidden and saves it.
 	 *
 	 * @param tx_seminars_Model_Event $event the event to hide
+	 *
+	 * @return void
 	 */
 	protected function hideEvent(tx_seminars_Model_Event $event) {
 		$event->markAsHidden();
@@ -3484,6 +3588,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Marks $event as visible and saves it.
 	 *
 	 * @param tx_seminars_Model_Event $event the event to unhide
+	 *
+	 * @return void
 	 */
 	protected function unhideEvent(tx_seminars_Model_Event $event) {
 		$event->markAsVisible();
@@ -3526,6 +3632,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * @param tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
 	 *        the link builder instance to use
+	 *
+	 * @return void
 	 */
 	public function injectLinkBuilder(tx_seminars_Service_SingleViewLinkBuilder $linkBuilder) {
 		$this->linkBuilder = $linkBuilder;

@@ -49,6 +49,8 @@ class tx_seminars_BagBuilder_Organizer extends tx_seminars_BagBuilder_Abstract {
 	 * have any organizers).
 	 *
 	 * @param integer $eventUid the event UID to limit the organizers for, must be > 0
+	 *
+	 * @return void
 	 */
 	public function limitToEvent($eventUid) {
 		if ($eventUid <= 0) {

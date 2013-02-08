@@ -111,6 +111,8 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	/**
 	 * Configures the bag to work like a BE list: It will use the default
 	 * sorting in the BE, and hidden records will be shown.
+	 *
+	 * @return void
 	 */
 	public function setBackEndMode() {
 		$this->showHiddenRecords();
@@ -125,6 +127,8 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	 *        must not be empty; need not be safeguarded against SQL injection
 	 * @param integer $recursionDepth
 	 *        recursion depth, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function setSourcePages($sourcePagePids, $recursionDepth = 0) {
 		if (!preg_match('/^([\d+,] *)*\d+$/', $sourcePagePids)) {
@@ -153,6 +157,8 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	/**
 	 * Sets the created bag to only take records into account that have been
 	 * created with the oelib testing framework.
+	 *
+	 * @return void
 	 */
 	public function setTestMode() {
 		$this->whereClauseParts['tests'] = $this->tableName .
@@ -183,6 +189,8 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	 * $this->additionalTableNames.
 	 *
 	 * @param string $additionalTableName the table name to add to the additional table names array, must not be empty
+	 *
+	 * @return void
 	 */
 	public function addAdditionalTableName($additionalTableName) {
 		if ($additionalTableName == '') {
@@ -197,6 +205,8 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	 * $this->additionalTableNames.
 	 *
 	 * @param string $additionalTableName the table name to remove from the additional table names array, must not be empty
+	 *
+	 * @return void
 	 */
 	public function removeAdditionalTableName($additionalTableName) {
 		if ($additionalTableName == '') {
@@ -216,6 +226,8 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	 * Sets the ORDER BY statement for the bag to build.
 	 *
 	 * @param string $orderBy the ORDER BY statement to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setOrderBy($orderBy) {
 		$this->orderBy = $orderBy;
@@ -230,6 +242,8 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	 * - "10" to limit the bag to the first 10 records
 	 *
 	 * @param string $limit the LIMIT statement to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setLimit($limit) {
 		$this->limit = $limit;
@@ -237,6 +251,8 @@ abstract class tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Configures the bag to also contain hidden records.
+	 *
+	 * @return void
 	 */
 	public function showHiddenRecords() {
 		$this->showHiddenRecords = TRUE;

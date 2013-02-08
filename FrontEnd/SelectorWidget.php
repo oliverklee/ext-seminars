@@ -110,6 +110,8 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 
 	/**
 	 * Initializes some variables needed for further processing.
+	 *
+	 * @return void
 	 */
 	private function initialize() {
 		$this->displayedSearchFields = t3lib_div::trimExplode(
@@ -157,6 +159,8 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	 * first in the drop-down.
 	 *
 	 * @param array &$options options, may be empty
+	 *
+	 * @return void
 	 */
 	private function addEmptyOptionIfNeeded(array &$options) {
 		if (!$this->getConfValueBoolean(
@@ -238,6 +242,8 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	 *
 	 * Before this function is called, it must be assured that the seminar bag
 	 * is not empty.
+	 *
+	 * @return void
 	 */
 	private function collectPlaces() {
 		if ($this->seminarBag->isEmpty()) {
@@ -260,8 +266,9 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	}
 
 	/**
-	 * Creates an instance of tx_staticinfotables_pi1 if that has not happened
-	 * yet.
+	 * Creates an instance of tx_staticinfotables_pi1 if that has not happened yet.
+	 *
+	 * @return void
 	 */
 	protected function instantiateStaticInfo() {
 		if ($this->staticInfo instanceof tx_staticinfotables_pi1) {
@@ -335,6 +342,8 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	 * @param string $searchField
 	 *        the key of the search field, must be one of the following:
 	 *        "event_type", "language", "country", "city", "places", "organizer"
+	 *
+	 * @return void
 	 */
 	private function fillOrHideSearchSubpart($searchField) {
 		if (!$this->hasSearchField($searchField)) {
@@ -383,6 +392,8 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 
 	/**
 	 * Fills or hides the full text search subpart.
+	 *
+	 * @return void
 	 */
 	private function fillOrHideFullTextSearch() {
 		if (!$this->hasSearchField('full_text_search')) {
@@ -398,6 +409,8 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 
 	/**
 	 * Fills or hides the date search subpart.
+	 *
+	 * @return void
 	 */
 	private function fillOrHideDateSearch() {
 		if (!$this->hasSearchField('date')) {
@@ -423,6 +436,8 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 
 	/**
 	 * Fills or hides the age search subpart.
+	 *
+	 * @return void
 	 */
 	private function fillOrHideAgeSearch() {
 		if (!$this->hasSearchField('age')) {
@@ -441,6 +456,8 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 
 	/**
 	 * Fills or hides the price search subpart.
+	 *
+	 * @return void
 	 */
 	private function fillOrHidePriceSearch() {
 		if (!$this->hasSearchField('price')) {

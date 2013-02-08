@@ -61,6 +61,8 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	 * Sets the "registration_queue" field of the registration record.
 	 *
 	 * @param boolean $isOnRegistrationQueueValue TRUE if the registration should be on the waiting list, FALSE otherwise
+	 *
+	 * @return void
 	 */
 	public function setIsOnRegistrationQueue($isOnRegistrationQueueValue) {
 		$this->setRecordPropertyInteger(
@@ -73,6 +75,8 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	 * Sets the payment method of this registration.
 	 *
 	 * @param integer $uid the UID of the payment method to set
+	 *
+	 * @return void
 	 */
 	public function setPaymentMethod($uid) {
 		if ($uid <= 0) {
@@ -89,6 +93,8 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	 * Sets the data of the FE user of this registration.
 	 *
 	 * @param array $userData data of the front-end user, may be empty
+	 *
+	 * @return void
 	 */
 	public function setUserData(array $userData) {
 		parent::setUserData($userData);
@@ -127,8 +133,9 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Sets the value for 'registered_themselves'.
 	 *
-	 * @param boolean $registeredThemselves the value for the registered_themselves
-	 *                property
+	 * @param boolean $registeredThemselves the value for the registered_themselves property
+	 *
+	 * @return void
 	 */
 	public function setRegisteredThemselves($registeredThemselves) {
 		$this->setRecordPropertyBoolean('registered_themselves', $registeredThemselves);

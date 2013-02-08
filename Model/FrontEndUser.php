@@ -216,6 +216,8 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 *
 	 * @param tx_seminars_Model_Registration $registration
 	 *        the associated registration, may be NULL
+	 *
+	 * @return void
 	 */
 	public function setRegistration(
 		tx_seminars_Model_Registration $registration = NULL

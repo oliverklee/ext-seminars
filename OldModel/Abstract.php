@@ -115,6 +115,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *        MySQL result pointer (of SELECT query) object. If this parameter is provided, $uid will be ignored.
 	 * @param boolean $allowHiddenRecords
 	 *        whether it is possible to create an object from a hidden record
+	 *
+	 * @return void
 	 */
 	protected function retrieveRecordAndGetData(
 		$uid, $dbResult = FALSE, $allowHiddenRecords = FALSE
@@ -146,6 +148,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * $dbResultRow['name'] => $this->recordData['name']
 	 *
 	 * @param array $dbResultRow associative array of a DB query result
+	 *
+	 * @return void
 	 */
 	protected function getDataFromDbResult(array $dbResultRow) {
 		if (!empty($this->tableName) && !empty($dbResultRow)) {
@@ -258,6 +262,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param string $key key of the element to set (must be non-empty)
 	 * @param integer $value the value that will be written into the element
+	 *
+	 * @return void
 	 */
 	protected function setRecordPropertyInteger($key, $value) {
 		if (!empty($key)) {
@@ -270,6 +276,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param string $key key of the element to set (must be non-empty)
 	 * @param string $value the value that will be written into the element
+	 *
+	 * @return void
 	 */
 	protected function setRecordPropertyString($key, $value) {
 		if (!empty($key)) {
@@ -282,6 +290,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param string $key key of the element to set (must be non-empty)
 	 * @param boolean $value the value that will be written into the element
+	 *
+	 * @return void
 	 */
 	protected function setRecordPropertyBoolean($key, $value) {
 		if (!empty($key)) {
@@ -356,6 +366,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param array $updateArray
 	 *        an associative array with the keys being the field names and the value being the field values, may be empty
+	 *
+	 * @return void
 	 */
 	public function saveToDatabase(array $updateArray) {
 		if (empty($updateArray)) {
@@ -520,6 +532,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Sets the title element of the record data array.
 	 *
 	 * @param string $title the value that will be written into the title element
+	 *
+	 * @return void
 	 */
 	public function setTitle($title) {
 		$this->setRecordPropertyString('title', $title);
@@ -593,6 +607,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 
 	/**
 	 * Marks this object as a dummy record (when it is written to the DB).
+	 *
+	 * @return void
 	 */
 	public function enableTestMode() {
 		$this->setRecordPropertyBoolean('is_dummy_record', TRUE);
@@ -601,6 +617,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * Sets the current charset in $this->renderCharset and the charset
 	 * conversion instance in $this->$charsetConversion.
+	 *
+	 * @return void
 	 */
 	protected function initializeCharsetConversion() {
 		if (isset($GLOBALS['TSFE'])) {

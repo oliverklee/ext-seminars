@@ -275,6 +275,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Sets the description of the event.
 	 *
 	 * @param string $description the description for this event, may be empty
+	 *
+	 * @return void
 	 */
 	public function setDescription($description) {
 		$this->setRecordPropertyString('description', $description);
@@ -303,6 +305,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Sets our additional information.
 	 *
 	 * @param string $additionalInformation our additional information, may be empty
+	 *
+	 * @return void
 	 */
 	public function setAdditionalInformation($additionalInformation) {
 		$this->setRecordPropertyString(
@@ -1095,6 +1099,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @param string $language
 	 *        the ISO code of the language for this event to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setLanguage($language) {
 		$this->setRecordPropertyString('language', $language);
@@ -1673,6 +1679,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Sets the event type for this event.
 	 *
 	 * @param integer $eventType the UID of the event type to set, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function setEventType($eventType) {
 		if ($eventType < 0) {
@@ -2923,6 +2931,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * (Re-)calculates the number of participants for this seminar.
+	 *
+	 * @return void
 	 */
 	public function calculateStatistics() {
 		$this->numberOfAttendances = $this->countAttendances(
@@ -4314,6 +4324,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @param string $attachedFiles
 	 *        a comma-separated list of the names of attached files which have to exist in "uploads/tx_seminars/"
+	 *
+	 * @return void
 	 */
 	public function setAttachedFiles($attachedFiles) {
 		$this->setRecordPropertyString('attached_files', $attachedFiles);
@@ -4455,6 +4467,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Sets whether this event is planned, canceled or confirmed.
 	 *
 	 * @param integer $status STATUS_PLANNED, STATUS_CONFIRMED or STATUS_CANCELED
+	 *
+	 * @return void
 	 */
 	public function setStatus($status) {
 		$this->setRecordPropertyInteger('cancelled', $status);
@@ -4498,6 +4512,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * Sets the "cancelation_deadline_reminder_sent" flag.
+	 *
+	 * @return void
 	 */
 	public function setCancelationDeadlineReminderSentFlag() {
 		$this->setRecordPropertyBoolean(
@@ -4507,6 +4523,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * Sets the "event_takes_place_reminder_sent" flag.
+	 *
+	 * @return void
 	 */
 	public function setEventTakesPlaceReminderSentFlag() {
 		$this->setRecordPropertyBoolean(
@@ -4693,6 +4711,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *        the publication hash, use a non-empty string to mark an event as
 	 *        "not published yet" and an empty string to mark an event as
 	 *        published
+	 *
+	 * @return void
 	 */
 	public function setPublicationHash($hash) {
 		$this->setRecordPropertyString('publication_hash', $hash);

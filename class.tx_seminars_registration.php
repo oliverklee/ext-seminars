@@ -127,6 +127,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Purges our cached seminars array.
 	 *
 	 * This function is intended for testing purposes only.
+	 *
+	 * @return void
 	 */
 	public static function purgeCachedSeminars() {
 		self::$cachedSeminars = array();
@@ -144,6 +146,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 *        UID of the FE user who wants to sign up
 	 * @param array $registrationData
 	 *        associative array with the registration data the user has just entered, may be empty
+	 *
+	 * @return void
 	 */
 	public function setRegistrationData(
 		tx_seminars_seminar $seminar, $userUid, array $registrationData
@@ -269,6 +273,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Sets our number of seats.
 	 *
 	 * @param integer $seats the number of seats, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function setSeats($seats) {
 		if ($seats < 0) {
@@ -292,6 +298,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 *
 	 * The title is constructed like this:
 	 *   Name of Attendee / Title of Seminar seminardate
+	 *
+	 * @return void
 	 */
 	private function createTitle() {
 		$this->recordData['title'] = $this->getUserName() .
@@ -305,6 +313,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * $this->userData.
 	 *
 	 * $this->userData will be NULL if retrieving the user data fails.
+	 *
+	 * @return void
 	 */
 	private function retrieveUserData() {
 		$uid = $this->getUser();
@@ -335,6 +345,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Sets the data of the FE user of this registration.
 	 *
 	 * @param array $userData data of the front-end user, must not be empty
+	 *
+	 * @return void
 	 */
 	protected function setUserData(array $userData) {
 		if (empty($userData)) {
@@ -594,6 +606,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Sets the front-end user UID of the registration.
 	 *
 	 * @param integer $frontEndUserUID the front-end user UID of the attendee, must be > 0
+	 *
+	 * @return void
 	 */
 	public function setFrontEndUserUID($frontEndUserUID) {
 		$this->setRecordPropertyInteger('user', $frontEndUserUID);
@@ -643,6 +657,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 *
 	 * @param integer $paymentDate
 	 *        the date of the payment as UNIX timestamp, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function setPaymentDateAsUnixTimestamp($paymentDate) {
 		$this->setRecordPropertyInteger('datepaid', $paymentDate);
@@ -713,6 +729,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Sets our price category name and its single price.
 	 *
 	 * @param string $price the price category name and its single price, may be empty
+	 *
+	 * @return void
 	 */
 	public function setPrice($price) {
 		$this->setRecordPropertyString('price', $price);
@@ -749,6 +767,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Sets our total price.
 	 *
 	 * @param string $price the total price, may be empty
+	 *
+	 * @return void
 	 */
 	public function setTotalPrice($price) {
 		$this->setRecordPropertyString('total_price', $price);
@@ -1125,6 +1145,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Sets our attendees names.
 	 *
 	 * @param string $attendeesNames our attendees names, may be empty
+	 *
+	 * @return void
 	 */
 	public function setAttendeesNames($attendeesNames) {
 		$this->setRecordPropertyString('attendees_names', $attendeesNames);
@@ -1154,6 +1176,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Sets the number of kids.
 	 *
 	 * @param integer $numberOfKids the number of kids, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function setNumberOfKids($numberOfKids) {
 		if ($numberOfKids < 0) {
@@ -1186,6 +1210,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Sets our method of payment UID.
 	 *
 	 * @param integer $uid our method of payment UID, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function setMethodOfPaymentUid($uid) {
 		if ($uid < 0) {

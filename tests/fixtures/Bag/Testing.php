@@ -75,8 +75,9 @@ class tx_seminars_tests_fixtures_Bag_Testing extends tx_seminars_Bag_Abstract {
 	 * as a source. If the current item cannot be created, $this->currentItem
 	 * will be nulled out.
 	 *
-	 * $this->dbResult must be ensured to be non-NULL when this function is
-	 * called.
+	 * $this->dbResult must be ensured to be non-NULL when this function is called.
+	 *
+	 * @return void
 	 */
 	protected function createItemFromDbResult() {
 		$this->currentItem = tx_oelib_ObjectFactory::make(

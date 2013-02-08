@@ -47,6 +47,8 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	 * Sets our title.
 	 *
 	 * @param string $title our title to set, must not be empty
+	 *
+	 * @return void
 	 */
 	public function setTitle($title) {
 		if ($title == '') {
@@ -69,6 +71,8 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	 * Sets our address.
 	 *
 	 * @param string $address our address to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setAddress($address) {
 		$this->setAsString('address', $address);
@@ -96,6 +100,8 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	 * Sets our ZIP code.
 	 *
 	 * @param string $zip our ZIP code, may be empty
+	 *
+	 * @return void
 	 */
 	public function setZip($zip) {
 		$this->setAsString('zip', $zip);
@@ -123,6 +129,8 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	 * Sets our city name.
 	 *
 	 * @param string $city our city name, must not be empty
+	 *
+	 * @return void
 	 */
 	public function setCity($city) {
 		if ($city == '') {
@@ -158,6 +166,8 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	 *
 	 * @param tx_oelib_Model_Country $country
 	 *        the country to set for this place, can be NULL for "no country"
+	 *
+	 * @return void
 	 */
 	public function setCountry(tx_oelib_Model_Country $country = NULL) {
 		$countryCode = ($country !== NULL) ? $country->getIsoAlpha2Code() : '';
@@ -187,6 +197,8 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	 * Sets our homepage.
 	 *
 	 * @param string $homepage our homepage, may be empty
+	 *
+	 * @return void
 	 */
 	public function setHomepage($homepage) {
 		$this->setAsString('homepage', $homepage);
@@ -214,6 +226,8 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	 * Sets our directions.
 	 *
 	 * @param string $directions our directions to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setDirections($directions) {
 		$this->setAsString('directions', $directions);
@@ -241,8 +255,9 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	/**
 	 * Sets our owner.
 	 *
-	 * @param tx_seminars_Model_FrontEndUser $frontEndUser the owner of this model
-	 *                                                  to set
+	 * @param tx_seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
+	 *
+	 * @return void
 	 */
 	public function setOwner(tx_seminars_Model_FrontEndUser $frontEndUser) {
 		$this->set('owner', $frontEndUser);
@@ -261,6 +276,8 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	 * Sets our notes.
 	 *
 	 * @param string $notes our notes to set, might be empty
+	 *
+	 * @return void
 	 */
 	public function setNotes($notes) {
 		$this->setAsString('notes', $notes);

@@ -46,6 +46,8 @@ class tx_seminars_Model_Food extends tx_oelib_Model implements tx_seminars_Inter
 	 * Sets our title.
 	 *
 	 * @param string $title our title to set, must not be empty
+	 *
+	 * @return void
 	 */
 	public function setTitle($title) {
 		if ($title == '') {

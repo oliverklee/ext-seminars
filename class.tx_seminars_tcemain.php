@@ -51,6 +51,8 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 
 	/**
 	 * Handles data after everything had been written to the database.
+	 *
+	 * @return void
 	 */
 	public function processDatamap_afterAllOperations() {
 		$this->processTimeSlots();
@@ -73,6 +75,8 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	 * @param integer $uid the UID of the affected record (may be 0)
 	 * @param array &$fieldArray an array of all fields that got changed (as reference)
 	 * @param t3lib_TCEmain $pObj reference to calling object
+	 *
+	 * @return void
 	 */
 	public function processDatamap_afterDatabaseOperations(
 		$status, $table, $uid, array &$fieldArray, t3lib_TCEmain $pObj
@@ -91,6 +95,8 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 
 	/**
 	 * Processes all time slots.
+	 *
+	 * @return void
 	 */
 	private function processTimeSlots() {
 		$table = 'tx_seminars_timeslots';
@@ -107,6 +113,8 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 
 	/**
 	 * Processes all events.
+	 *
+	 * @return void
 	 */
 	private function processEvents() {
 		$table = 'tx_seminars_seminars';
@@ -126,6 +134,8 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	 *
 	 * @param integer $uid the UID of the affected record (may be 0)
 	 * @param array $fieldArray an array of all fields that got changed
+	 *
+	 * @return void
 	 */
 	private function processSingleTimeSlot($uid, array $fieldArray) {
 		// Initializes a timeslot object to have all
@@ -148,6 +158,8 @@ class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
 	 *
 	 * @param integer $uid the UID of the affected record (may be 0)
 	 * @param array $fieldArray an array of all fields that got changed
+	 *
+	 * @return void
 	 */
 	private function processSingleEvent($uid, array $fieldArray) {
 		// Initializes a seminar object to have all functions

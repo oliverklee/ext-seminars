@@ -63,6 +63,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets our name.
 	 *
 	 * @param string $name our name to set, must not be empty
+	 *
+	 * @return void
 	 */
 	public function setName($name) {
 		if ($name == '') {
@@ -86,6 +88,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets our organization.
 	 *
 	 * @param string $organization our organization, may be empty
+	 *
+	 * @return void
 	 */
 	public function setOrganization($organization) {
 		$this->setAsString('organization', $organization);
@@ -113,6 +117,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets our homepage.
 	 *
 	 * @param string $homepage our homepage, may be empty
+	 *
+	 * @return void
 	 */
 	public function setHomepage($homepage) {
 		$this->setAsString('homepage', $homepage);
@@ -141,6 +147,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets our description.
 	 *
 	 * @param string $description our description to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setDescription($description) {
 		$this->setAsString('description', $description);
@@ -169,6 +177,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets this speaker's skills.
 	 *
 	 * @param tx_oelib_List $skills this speaker's skills, may be empty
+	 *
+	 * @return void
 	 */
 	public function setSkills(tx_oelib_List $skills) {
 		$this->set('skills', $skills);
@@ -187,6 +197,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets our address.
 	 *
 	 * @param string $address our address to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setAddress($address) {
 		$this->setAsString('address', $address);
@@ -215,6 +227,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets our work telephone number.
 	 *
 	 * @param string $phoneWork our work telephone number to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setPhoneWork($phoneWork) {
 		$this->setAsString('phone_work', $phoneWork);
@@ -244,6 +258,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets our home telephone number.
 	 *
 	 * @param string $phoneHome our home telephone number to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setPhoneHome($phoneHome) {
 		$this->setAsString('phone_home', $phoneHome);
@@ -273,6 +289,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets our mobile telephone number.
 	 *
 	 * @param string $phoneMobile our mobile telephone number to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setPhoneMobile($phoneMobile) {
 		$this->setAsString('phone_mobile', $phoneMobile);
@@ -301,6 +319,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets our fax number.
 	 *
 	 * @param string $fax our fax number to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setFax($fax) {
 		$this->setAsString('fax', $fax);
@@ -330,6 +350,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets out e-mail address.
 	 *
 	 * @param string $eMailAddress our e-mail address, may be empty
+	 *
+	 * @return void
 	 */
 	public function setEMailAddress($eMailAddress) {
 		$this->setAsString('email', $eMailAddress);
@@ -361,6 +383,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * @param integer $gender
 	 *        our gender to set, must be one of tx_seminars_Model_Speaker::GENDER_FEMALE, tx_seminars_Model_Speaker::GENDER_MALE
 	 *        or tx_seminars_Model_Speaker::GENDER_UNKNOWN
+	 *
+	 * @return void
 	 */
 	public function setGender($gender) {
 		$this->setAsInteger('gender', $gender);
@@ -388,6 +412,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets our cancelation period in days.
 	 *
 	 * @param integer $cancelationPeriod our cancelation period in days to set, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function setCancelationPeriod($cancelationPeriod) {
 		if ($cancelationPeriod < 0) {
@@ -420,8 +446,9 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our owner.
 	 *
-	 * @param tx_seminars_Model_FrontEndUser $frontEndUser the owner of this model
-	 *                                                  to set
+	 * @param tx_seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
+	 *
+	 * @return void
 	 */
 	public function setOwner(tx_seminars_Model_FrontEndUser $frontEndUser) {
 		$this->set('owner', $frontEndUser);
@@ -440,6 +467,8 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	 * Sets our notes.
 	 *
 	 * @param string $notes our notes to set, might be empty
+	 *
+	 * @return void
 	 */
 	public function setNotes($notes) {
 		$this->setAsString('notes', $notes);

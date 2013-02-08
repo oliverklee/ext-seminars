@@ -281,6 +281,8 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	 * @param integer $gender
 	 *        the gender of the speaker, must be one of tx_seminars_speaker::GENDER_FEMALE, tx_seminars_speaker::GENDER_MALE
 	 *        or tx_seminars_speaker::GENDER_UNKNOWN
+	 *
+	 * @return void
 	 */
 	public function setGender($gender) {
 		$this->setRecordPropertyInteger('gender', $gender);
@@ -309,6 +311,8 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	 * Sets the gender cancelation period of this speaker
 	 *
 	 * @param integer $cancelationPeriod the cancelation period of this speaker in days, must be > 0
+	 *
+	 * @return void
 	 */
 	public function setCancelationPeriod($cancelationPeriod) {
 		$this->setRecordPropertyInteger('cancelation_period', $cancelationPeriod);
@@ -333,8 +337,9 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets our owner.
 	 *
-	 * @param tx_seminars_Model_FrontEndUser $frontEndUser the owner of this model
-	 *                                                  to set
+	 * @param tx_seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
+	 *
+	 * @return void
 	 */
 	public function setOwner(tx_seminars_Model_FrontEndUser $frontEndUser) {
 		$this->setRecordPropertyInteger('owner', $frontEndUser->getUid());

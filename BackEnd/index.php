@@ -64,8 +64,9 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	private $subModule;
 
 	/**
-	 * Initializes some variables and also starts the initialization of the
-	 * parent class.
+	 * Initializes some variables and also starts the initialization of the parent class.
+	 *
+	 * @return void
 	 */
 	public function init() {
 		parent::init();
@@ -77,6 +78,8 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * Main function of the module. Writes the content to $this->content.
 	 *
 	 * No return value; output is directly written to the page.
+	 *
+	 * @return void
 	 */
 	public function main() {
 		global $LANG, $BACK_PATH, $BE_USER;

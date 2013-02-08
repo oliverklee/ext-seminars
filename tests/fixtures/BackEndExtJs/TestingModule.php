@@ -77,6 +77,8 @@ class tx_seminars_tests_fixtures_BackEndExtJs_TestingModule extends tx_seminars_
 	 *
 	 * @param t3lib_PageRenderer $pageRenderer
 	 *        the page renderer for testing purposes
+	 *
+	 * @return void
 	 */
 	public function setPageRenderer(t3lib_PageRenderer $pageRenderer) {
 		$this->pageRenderer = $pageRenderer;

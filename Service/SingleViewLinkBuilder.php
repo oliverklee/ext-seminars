@@ -65,6 +65,8 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	 *
 	 * This function nulls out $GLOBALS['TSFE'] and $GLOBALS['TT']. In addition,
 	 * any logged-in front-end user will be logged out.
+	 *
+	 * @return void
 	 */
 	protected function discardFakeFrontEnd() {
 		unset(
@@ -85,6 +87,8 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	 * Sets the plugin used accessing to the flexforms plugin settings.
 	 *
 	 * @param tx_oelib_templatehelper $plugin a seminars plugin instance
+	 *
+	 * @return void
 	 */
 	public function setPlugin(tx_oelib_templatehelper $plugin) {
 		$this->plugin = $plugin;
@@ -155,6 +159,8 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	/**
 	 * Creates an artificial front end (which is necessary for creating
 	 * typolinks).
+	 *
+	 * @return void
 	 */
 	protected function createFakeFrontEnd() {
 		$this->suppressFrontEndCookies();
@@ -184,6 +190,8 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 
 	/**
 	 * Makes sure that no FE login cookies will be sent.
+	 *
+	 * @return void
 	 */
 	private function suppressFrontEndCookies() {
 		$_POST['FE_SESSION_KEY'] = '';

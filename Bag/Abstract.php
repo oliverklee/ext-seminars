@@ -172,6 +172,8 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	 *
 	 * @param integer $showHiddenRecords If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
 	 * @param boolean $ignoreTimingOfRecords If $ignoreTimingOfRecords is TRUE the timing of records is ignored.
+	 *
+	 * @return void
 	 */
 	private function createEnabledFieldsQuery(
 		$showHiddenRecords = -1, $ignoreTimingOfRecords = FALSE
@@ -207,6 +209,8 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	 * query parameters from $this->queryParameters for the DB query.
 	 * The query works so that the column names are *not*
 	 * prefixed with the table name.
+	 *
+	 * @return void
 	 */
 	public function rewind() {
 		if ($this->isRewound) {
@@ -258,6 +262,8 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	 * be nulled out.
 	 *
 	 * $this->dbResult is ensured to be not FALSE when this function is called.
+	 *
+	 * @return void
 	 */
 	abstract protected function createItemFromDbResult();
 

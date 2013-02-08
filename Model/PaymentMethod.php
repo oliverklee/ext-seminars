@@ -46,6 +46,8 @@ class tx_seminars_Model_PaymentMethod extends tx_oelib_Model implements tx_semin
 	 * Sets our title.
 	 *
 	 * @param string $title our title to set, must not be empty
+	 *
+	 * @return void
 	 */
 	public function setTitle($title) {
 		if ($title == '') {
@@ -68,6 +70,8 @@ class tx_seminars_Model_PaymentMethod extends tx_oelib_Model implements tx_semin
 	 * Sets our description.
 	 *
 	 * @param string $description our description to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setDescription($description) {
 		$this->setAsString('description', $description);

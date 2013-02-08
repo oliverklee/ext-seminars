@@ -46,6 +46,8 @@ class tx_seminars_Model_TargetGroup extends tx_oelib_Model implements tx_seminar
 	 * Sets our title.
 	 *
 	 * @param string $title our title to set, must not be empty
+	 *
+	 * @return void
 	 */
 	public function setTitle($title) {
 		if ($title == '') {
@@ -68,8 +70,9 @@ class tx_seminars_Model_TargetGroup extends tx_oelib_Model implements tx_seminar
 	/**
 	 * Sets our owner.
 	 *
-	 * @param tx_seminars_Model_FrontEndUser $frontEndUser the owner of this model
-	 *                                                  to set
+	 * @param tx_seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
+	 *
+	 * @return void
 	 */
 	public function setOwner(tx_seminars_Model_FrontEndUser $frontEndUser) {
 		$this->set('owner', $frontEndUser);
@@ -89,8 +92,9 @@ class tx_seminars_Model_TargetGroup extends tx_oelib_Model implements tx_seminar
 	 * Sets this target group's minimum age.
 	 *
 	 * @param integer $minimumAge
-	 *        this target group's minimum age, must be >= 0; set to 0 to unset
-	 *        the minimum age
+	 *        this target group's minimum age, must be >= 0; set to 0 to unset the minimum age
+	 *
+	 * @return void
 	 */
 	public function setMinimumAge($minimumAge) {
 		$this->setAsInteger('minimum_age', $minimumAge);
@@ -110,8 +114,9 @@ class tx_seminars_Model_TargetGroup extends tx_oelib_Model implements tx_seminar
 	 * Sets this target group's maximum age.
 	 *
 	 * @param integer $maximumAge
-	 *        this target group's maximum age, must be >= 0; set to 0 to unset
-	 *        the maximum age
+	 *        this target group's maximum age, must be >= 0; set to 0 to unset the maximum age
+	 *
+	 * @return void
 	 */
 	public function setMaximumAge($maximumAge) {
 		$this->setAsInteger('maximum_age', $maximumAge);

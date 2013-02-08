@@ -83,6 +83,8 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	/**
 	 * Creates a FE user, adds him/her as a VIP to the seminar with the UID in
 	 * $this->seminarUid and logs him/her in.
+	 *
+	 * @return void
 	 */
 	private function createLogInAndAddFeUserAsVip() {
 		$seminarUid = $this->testingFramework->createRecord(
@@ -98,6 +100,8 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	/**
 	 * Creates a FE user, adds his/her FE user group as a default VIP group via
 	 * TS setup and logs him/her in.
+	 *
+	 * @return void
 	 */
 	private function createLogInAndAddFeUserAsDefaultVip() {
 		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
@@ -110,6 +114,8 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	/**
 	 * Creates a FE user, adds him/her as a owner to the seminar with the UID in
 	 * $this->seminarUid and logs him/her in.
+	 *
+	 * @return void
 	 */
 	private function createLogInAndAddFeUserAsOwner() {
 		$this->fixture->setObjectUid($this->testingFramework->createRecord(
@@ -126,6 +132,8 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 *        the publish settings for the user, must be one of the following:
 	 *        tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY, tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW, or
 	 *        tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+	 *
+	 * @return void
 	 */
 	private function createAndLoginUserWithPublishSetting($publishSetting) {
 		$userGroup = tx_oelib_MapperRegistry::get(
@@ -143,6 +151,8 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	/**
 	 * Creates a front-end user which has a group with the publish setting
 	 * tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED and a reviewer.
+	 *
+	 * @return void
 	 */
 	private function createAndLoginUserWithReviewer() {
 		$backendUserUid = $this->testingFramework->createBackEndUser(
@@ -166,6 +176,8 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 *
 	 * @param array $frontEndUserGroupData front-end user group data to set, may
 	 *                                     be empty
+	 *
+	 * @return void
 	 */
 	private function createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
 		array $frontEndUserGroupData = array()

@@ -148,6 +148,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our subtitle.
 	 *
 	 * @param string $subtitle our subtitle to set, may be empty
+	 *
+	 * @return void
 	 */
 	public function setSubtitle($subtitle) {
 		if ($this->isEventDate()) {
@@ -194,6 +196,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our teaser.
 	 *
 	 * @param string $teaser our teaser, may be empty
+	 *
+	 * @return void
 	 */
 	public function setTeaser($teaser) {
 		if ($this->isEventDate()) {
@@ -229,6 +233,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our description.
 	 *
 	 * @param string $description our description, may be empty
+	 *
+	 * @return void
 	 */
 	public function setDescription($description) {
 		if ($this->isEventDate()) {
@@ -275,6 +281,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our accreditation number.
 	 *
 	 * @param string $accreditationNumber our accreditation number, may be empty
+	 *
+	 * @return void
 	 */
 	public function setAccreditationNumber($accreditationNumber) {
 		$this->setAsString('accreditation_number', $accreditationNumber);
@@ -306,6 +314,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our credit points.
 	 *
 	 * @param integer $creditPoints our credit points, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function setCreditPoints($creditPoints) {
 		if ($creditPoints < 0) {
@@ -356,6 +366,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *
 	 * @param integer $registrationDeadline
 	 *        our registration deadline as UNIX time-stamp, must be >= 0, 0 unsets the registration deadline
+	 *
+	 * @return void
 	 */
 	public function setRegistrationDeadlineAsUnixTimeStamp($registrationDeadline) {
 		if ($registrationDeadline < 0) {
@@ -390,6 +402,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *
 	 * @param integer $earlyBirdDeadline
 	 *        our early bird deadline as UNIX time-stamp, must be >= 0, 0 unsets the early bird deadline
+	 *
+	 * @return void
 	 */
 	public function setEarlyBirdDeadlineAsUnixTimeStamp($earlyBirdDeadline) {
 		if ($earlyBirdDeadline < 0) {
@@ -425,6 +439,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *
 	 * @param integer $unregistrationDeadline
 	 *        our unregistration deadline as UNIX time-stamp, must be >= 0, 0 unsets the unregistration deadline
+	 *
+	 * @return void
 	 */
 	public function setUnregistrationDeadlineAsUnixTimeStamp($unregistrationDeadline) {
 		if ($unregistrationDeadline < 0) {
@@ -458,6 +474,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our expiry as UNIX time-stamp.
 	 *
 	 * @param integer $expiry our expiry as UNIX time-stamp, must be >= 0, 0 unsets the expiry
+	 *
+	 * @return void
 	 */
 	public function setExpiryAsUnixTimeStamp($expiry) {
 		if ($expiry < 0) {
@@ -490,6 +508,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our separate details page.
 	 *
 	 * @param string $detailsPage our separate details page
+	 *
+	 * @return void
 	 */
 	public function setDetailsPage($detailsPage) {
 		$this->setAsString('details_page', $detailsPage);
@@ -684,6 +704,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our language.
 	 *
 	 * @param tx_oelib_Model_Language $language our language
+	 *
+	 * @return void
 	 */
 	public function setLanguage(tx_oelib_Model_Language $language) {
 		$this->setAsString('language', $language->getIsoAlpha2Code());
@@ -714,6 +736,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our regular price.
 	 *
 	 * @param float $price our regular price, must be >= 0.00
+	 *
+	 * @return void
 	 */
 	public function setRegularPrice($price) {
 		if ($price < 0.00) {
@@ -754,6 +778,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our regular early bird price.
 	 *
 	 * @param float $price our regular early bird price, must be >= 0.00
+	 *
+	 * @return void
 	 */
 	public function setRegularEarlyBirdPrice($price) {
 		if ($price < 0.00) {
@@ -795,6 +821,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our regular board price.
 	 *
 	 * @param float $price our regular board price, must be >= 0.00
+	 *
+	 * @return void
 	 */
 	public function setRegularBoardPrice($price) {
 		if ($price < 0.00) {
@@ -836,6 +864,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our special price.
 	 *
 	 * @param float $price our special price, must be >= 0.00
+	 *
+	 * @return void
 	 */
 	public function setSpecialPrice($price) {
 		if ($price < 0.00) {
@@ -876,6 +906,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our special early bird price.
 	 *
 	 * @param float $price our special early bird price, must be >= 0.00
+	 *
+	 * @return void
 	 */
 	public function setSpecialEarlyBirdPrice($price) {
 		if ($price < 0.00) {
@@ -917,6 +949,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our special board price.
 	 *
 	 * @param float $price our special board price, must be >= 0.00
+	 *
+	 * @return void
 	 */
 	public function setSpecialBoardPrice($price) {
 		if ($price < 0.00) {
@@ -1053,6 +1087,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our additional information.
 	 *
 	 * @param string $additionalInformation our additional information, may be empty
+	 *
+	 * @return void
 	 */
 	public function setAdditionalInformation($additionalInformation) {
 		if ($this->isEventDate()) {
@@ -1094,6 +1130,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *
 	 * @param tx_oelib_List $paymentMethods
 	 *        our payment methods, can be empty
+	 *
+	 * @return void
 	 */
 	public function setPaymentMethods(tx_oelib_List $paymentMethods) {
 		if ($this->isEventDate()) {
@@ -1181,6 +1219,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our minimum attendees.
 	 *
 	 * @param integer $minimumAttendees our minimum attendees, must be >= 0
+	 *
+	 * @return void
 	 */
 	public function setMinimumAttendees($minimumAttendees) {
 		if ($minimumAttendees < 0) {
@@ -1214,6 +1254,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our maximum attendees.
 	 *
 	 * @param integer $maximumAttendees our maximum attendees, must be >= 0, 0 means an unlimited number of attendees
+	 *
+	 * @return void
 	 */
 	public function setMaximumAttendees($maximumAttendees) {
 		if ($maximumAttendees < 0) {
@@ -1289,6 +1331,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our status.
 	 *
 	 * @param integer $status our status, must be one of STATUS_PLANNED, STATUS_CANCELED, STATUS_CONFIRMED
+	 *
+	 * @return void
 	 */
 	public function setStatus($status) {
 		if (!in_array($status, array(self::STATUS_PLANNED, self::STATUS_CANCELED, self::STATUS_CONFIRMED))) {
@@ -1359,6 +1403,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our notes.
 	 *
 	 * @param string $notes our notes, may be empty
+	 *
+	 * @return void
 	 */
 	public function setNotes($notes) {
 		if ($this->isEventDate()) {
@@ -1397,6 +1443,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *
 	 * @param array $attachedFiles
 	 *        our attached file names, file names must be relative to the seminars upload directory, may be empty
+	 *
+	 * @return void
 	 */
 	public function setAttachedFiles(array $attachedFiles) {
 		$this->setAsArray('attached_files', $attachedFiles);
@@ -1427,6 +1475,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Sets our image.
 	 *
 	 * @param string $image our image file name, must be relative to the seminars upload directory, may be empty
+	 *
+	 * @return void
 	 */
 	public function setImage($image) {
 		if ($this->isEventDate()) {
@@ -1520,6 +1570,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *        the publication hash, use a non-empty string to mark an event as
 	 *        "not published yet" and an empty string to mark an event as
 	 *        published
+	 *
+	 * @return void
 	 */
 	public function setPublicationHash($hash) {
 		$this->setAsString('publication_hash', $hash);
@@ -1527,6 +1579,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 
 	/**
 	 * Purges the publication hash of this event.
+	 *
+	 * @return void
 	 */
 	public function purgePublicationHash() {
 		$this->setPublicationHash('');
@@ -1581,6 +1635,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * @param tx_oelib_List $registrations
 	 *       the registrations for this event (both regular and on the waiting
 	 *       list), may be empty
+	 *
+	 * @return void
 	 */
 	public function setRegistrations(tx_oelib_List $registrations) {
 		$this->set('registrations', $registrations);
@@ -1591,6 +1647,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *
 	 * @param tx_seminars_Model_Registration $registration
 	 *        the registration to attach
+	 *
+	 * @return void
 	 */
 	public function attachRegistration(
 		tx_seminars_Model_Registration $registration
@@ -1702,7 +1760,6 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *
 	 * If this event has an unlimited number of possible registrations, this
 	 * function will always return TRUE.
-	 *
 	 *
 	 * @return boolean TRUE if this event has at least one vacancy
 	 *                 FALSE otherwise

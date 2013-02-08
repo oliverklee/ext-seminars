@@ -50,6 +50,8 @@ class tx_seminars_FrontEnd_EventHeadline extends tx_seminars_FrontEnd_AbstractVi
 	 * Injects an Event Mapper for this View.
 	 *
 	 * @param tx_seminars_Mapper_Event $mapper
+	 *
+	 * @return void
 	 */
 	public function injectEventMapper($mapper) {
 		$this->mapper = $mapper;

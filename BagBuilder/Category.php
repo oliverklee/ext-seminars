@@ -66,6 +66,8 @@ class tx_seminars_BagBuilder_Category extends tx_seminars_BagBuilder_Abstract {
 	 * @param string $eventUids
 	 *        comma-separated list of UID of the events to which the category selection should be limited, may be empty,
 	 *        all UIDs must be > 0
+	 *
+	 * @return void
 	 */
 	public function limitToEvents($eventUids) {
 		if ($eventUids == '') {
@@ -94,6 +96,8 @@ class tx_seminars_BagBuilder_Category extends tx_seminars_BagBuilder_Abstract {
 	 * sorting set in the back end.
 	 *
 	 * Before this function can be called, limitToEvents has to be called.
+	 *
+	 * @return void
 	 */
 	public function sortByRelationOrder() {
 		if ($this->eventUids == '') {
