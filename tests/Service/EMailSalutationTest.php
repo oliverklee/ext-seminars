@@ -113,7 +113,10 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	// Tests concerning the utility functions
 	///////////////////////////////////////////
 
-	public function test_createFrontEndUser_ReturnsFeUserModel() {
+	/**
+	 * @test
+	 */
+	public function createFrontEndUserReturnsFeUserModel() {
 		$this->assertTrue(
 			$this->createFrontEndUser() instanceof tx_seminars_Model_FrontEndUser
 		);
@@ -136,7 +139,10 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	// Tests concerning getSalutation
 	///////////////////////////////////
 
-	public function test_getSalutation_ReturnsUsernameOfRegistration() {
+	/**
+	 * @test
+	 */
+	public function getSalutationReturnsUsernameOfRegistration() {
 		$this->assertContains(
 			'Foo',
 			$this->fixture->getSalutation($this->createFrontEndUser())
@@ -202,7 +208,10 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getSalutationForUnknownUser_ReturnsUnknownSalutation() {
+	/**
+	 * @test
+	 */
+	public function getSalutationForUnknownUserReturnsUnknownSalutation() {
 		$user = $this->createFrontEndUser(
 			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN
 		);
@@ -214,7 +223,10 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getSalutationForUnknownUser_ReturnsUsersNameWithGenderSpecificTitle() {
+	/**
+	 * @test
+	 */
+	public function getSalutationForUnknownUserReturnsUsersNameWithGenderSpecificTitle() {
 		$user = $this->createFrontEndUser(
 			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN
 		);
@@ -227,7 +239,10 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getSalutationForInformalSalutation_ReturnsInformalSalutation() {
+	/**
+	 * @test
+	 */
+	public function getSalutationForInformalSalutationReturnsInformalSalutation() {
 		$user = $this->createFrontEndUser();
 		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('salutation', 'informal');
@@ -239,7 +254,10 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getSalutationForInformalSalutation_ReturnsUsersName() {
+	/**
+	 * @test
+	 */
+	public function getSalutationForInformalSalutationReturnsUsersName() {
 		$user = $this->createFrontEndUser();
 		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('salutation', 'informal');
@@ -255,7 +273,10 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	// Tests concerning the hooks
 	///////////////////////////////
 
-	public function test_getSalutationForHookSetInConfigurationCallsThisHook() {
+	/**
+	 * @test
+	 */
+	public function getSalutationForHookSetInConfigurationCallsThisHook() {
 		$hookClassName = uniqid('tx_salutationHook');
 		$salutationHookMock = $this->getMock(
 			$hookClassName, array('modifySalutation')
@@ -270,7 +291,10 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		$this->fixture->getSalutation($this->createFrontEndUser());
 	}
 
-	public function test_getSalutationCanCallMultipleSetHooks() {
+	/**
+	 * @test
+	 */
+	public function getSalutationCanCallMultipleSetHooks() {
 		$hookClassName1 = uniqid('tx_salutationHook1');
 		$salutationHookMock1 = $this->getMock(
 			$hookClassName1, array('modifySalutation')

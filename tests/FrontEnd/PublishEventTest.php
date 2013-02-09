@@ -59,14 +59,20 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 	// Tests concerning the rendering
 	///////////////////////////////////
 
-	public function test_RenderForNoPublicationHashSetInPiVars_ReturnsPublishFailedMessage() {
+	/**
+	 * @test
+	 */
+	public function renderForNoPublicationHashSetInPiVarsReturnsPublishFailedMessage() {
 		$this->assertEquals(
 			$this->fixture->translate('message_publishingFailed'),
 			$this->fixture->render()
 		);
 	}
 
-	public function test_RenderForEmptyPublicationHashSetInPiVars_ReturnsPublishFailedMessage() {
+	/**
+	 * @test
+	 */
+	public function renderForEmptyPublicationHashSetInPiVarsReturnsPublishFailedMessage() {
 		$this->fixture->piVars['hash'] = '';
 
 		$this->assertEquals(
@@ -75,7 +81,10 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_RenderForInvalidPublicationHashSetInPiVars_ReturnsPublishFailedMessage() {
+	/**
+	 * @test
+	 */
+	public function renderForInvalidPublicationHashSetInPiVarsReturnsPublishFailedMessage() {
 		$this->fixture->piVars['hash'] = 'foo';
 
 		$this->assertEquals(
@@ -84,7 +93,10 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_RenderForValidPublicationHashAndVisibleEvent_ReturnsPublishFailedMessage() {
+	/**
+	 * @test
+	 */
+	public function renderForValidPublicationHashAndVisibleEventReturnsPublishFailedMessage() {
 		$this->fixture->init(array());
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -99,7 +111,10 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_RenderForValidPublicationHashAndHiddenEvent_ReturnsPublishSuccessfulMessage() {
+	/**
+	 * @test
+	 */
+	public function renderForValidPublicationHashAndHiddenEventReturnsPublishSuccessfulMessage() {
 		$this->fixture->init(array());
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -114,7 +129,10 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_RenderForValidPublicationHash_UnhidesEventWithPublicationHash() {
+	/**
+	 * @test
+	 */
+	public function renderForValidPublicationHashUnhidesEventWithPublicationHash() {
 		$this->fixture->init(array());
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -131,7 +149,10 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_RenderForValidPublicationHash_RemovesPublicationHashFromEvent() {
+	/**
+	 * @test
+	 */
+	public function renderForValidPublicationHashRemovesPublicationHashFromEvent() {
 		$this->fixture->init(array());
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',

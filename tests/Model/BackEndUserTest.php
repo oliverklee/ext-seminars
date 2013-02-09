@@ -50,7 +50,10 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 	// Tests concerning getEventFolderFromGroup
 	/////////////////////////////////////////////
 
-	public function test_getEventFolderFromGroupForNoGroups_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getEventFolderFromGroupForNoGroupsReturnsZero() {
 		$this->fixture->setData(array('usergroup' => new tx_oelib_List()));
 
 		$this->assertEquals(
@@ -59,7 +62,10 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getEventFolderFromGroupForOneGroupWithoutEventPid_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getEventFolderFromGroupForOneGroupWithoutEventPidReturnsZero() {
 		$group = tx_oelib_MapperRegistry::
 			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(array());
 		$groups = new tx_oelib_List();
@@ -72,7 +78,10 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getEventFolderFromGroupForOneGroupWithEventPid_ReturnsThisPid() {
+	/**
+	 * @test
+	 */
+	public function getEventFolderFromGroupForOneGroupWithEventPidReturnsThisPid() {
 		$group = tx_oelib_MapperRegistry::
 			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
 				array('tx_seminars_events_folder' => 42)
@@ -90,7 +99,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function test_getEventFolderFromGroupForTwoGroupsBothWithDifferentEventPids_ReturnsOnlyOneOfThePids() {
+	public function getEventFolderFromGroupForTwoGroupsBothWithDifferentEventPidsReturnsOnlyOneOfThePids() {
 		$group1 = tx_oelib_MapperRegistry::
 			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
 				array('tx_seminars_events_folder' => 23)
@@ -115,7 +124,10 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 	// Tests concerning getRegistrationFolderFromGroup
 	////////////////////////////////////////////////////
 
-	public function test_getRegistrationFolderFromGroupForNoGroups_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationFolderFromGroupForNoGroupsReturnsZero() {
 		$this->fixture->setData(array('usergroup' => new tx_oelib_List()));
 
 		$this->assertEquals(
@@ -124,7 +136,10 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationFolderFromGroupForOneGroupWithoutRegistrationPid_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationFolderFromGroupForOneGroupWithoutRegistrationPidReturnsZero() {
 		$group = tx_oelib_MapperRegistry::
 			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(array());
 		$groups = new tx_oelib_List();
@@ -137,7 +152,10 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationFolderFromGroupForOneGroupWithRegistrationPid_ReturnsThisPid() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationFolderFromGroupForOneGroupWithRegistrationPidReturnsThisPid() {
 		$group = tx_oelib_MapperRegistry::
 			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
 				array('tx_seminars_registrations_folder' => 42)
@@ -155,7 +173,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function test_getRegistrationFolderFromGroupForTwoGroupsBothWithDifferentRegistrationPids_ReturnsOnlyOneOfThePids() {
+	public function getRegistrationFolderFromGroupForTwoGroupsBothWithDifferentRegistrationPidsReturnsOnlyOneOfThePids() {
 		$group1 = tx_oelib_MapperRegistry::
 			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
 				array('tx_seminars_registrations_folder' => 23)
@@ -180,7 +198,10 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 	// Tests concerning getAuxiliaryRecordsFolder
 	///////////////////////////////////////////////
 
-	public function test_getAuxiliaryRecordsFolderForNoGroups_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getAuxiliaryRecordsFolderForNoGroupsReturnsZero() {
 		$this->fixture->setData(array('usergroup' => new tx_oelib_List()));
 
 		$this->assertEquals(
@@ -189,7 +210,10 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getAuxiliaryRecordsFolderForOneGroupWithoutAuxiliaryRecordPid_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getAuxiliaryRecordsFolderForOneGroupWithoutAuxiliaryRecordPidReturnsZero() {
 		$group = tx_oelib_MapperRegistry::
 			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(array());
 		$groups = new tx_oelib_List();
@@ -202,7 +226,10 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getAuxiliaryRecordsFolderForOneGroupWithAuxiliaryRecordsPid_ReturnsThisPid() {
+	/**
+	 * @test
+	 */
+	public function getAuxiliaryRecordsFolderForOneGroupWithAuxiliaryRecordsPidReturnsThisPid() {
 		$group = tx_oelib_MapperRegistry::
 			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
 				array('tx_seminars_auxiliaries_folder' => 42)
@@ -220,7 +247,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function test_getAuxiliaryRecordsFolderForTwoGroupsBothWithDifferentAuxiliaryRecordPids_ReturnsOnlyOneOfThePids() {
+	public function getAuxiliaryRecordsFolderForTwoGroupsBothWithDifferentAuxiliaryRecordPidsReturnsOnlyOneOfThePids() {
 		$group1 = tx_oelib_MapperRegistry::
 			get('tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
 				array('tx_seminars_auxiliaries_folder' => 23)

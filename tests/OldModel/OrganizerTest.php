@@ -176,26 +176,38 @@ class tx_seminars_OldModel_OrganizerTest extends tx_phpunit_testcase {
 	// Tests concerning the description
 	/////////////////////////////////////
 
-	public function test_hasDescription_ForOrganizerWithoutDescription_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasDescriptionForOrganizerWithoutDescriptionReturnsFalse() {
 		$this->assertFalse(
 			$this->fixture->hasDescription()
 		);
 	}
 
-	public function test_hasDescription_ForOrganizerWithDescription_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasDescriptionForOrganizerWithDescriptionReturnsTrue() {
 		$this->assertTrue(
 			$this->maximalFixture->hasDescription()
 		);
 	}
 
-	public function test_getDescription_ForOrganizerWithoutDescription_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getDescriptionForOrganizerWithoutDescriptionReturnsEmptyString() {
 		$this->assertEquals(
 			'',
 			$this->fixture->getDescription()
 		);
 	}
 
-	public function test_getDescription_ForOrganizerWithDescription_ReturnsDescription() {
+	/**
+	 * @test
+	 */
+	public function getDescriptionForOrganizerWithDescriptionReturnsDescription() {
 		$this->assertEquals(
 			'foo',
 			$this->maximalFixture->getDescription()

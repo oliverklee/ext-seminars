@@ -1444,7 +1444,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 	// Tests regarding the registration begin date
 	////////////////////////////////////////////////
 
-	public function test_hasRegistrationBegin_ForNoRegistrationBegin_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasRegistrationBeginForNoRegistrationBeginReturnsFalse() {
 		$this->fixture->setData(array('begin_date_registration' => 0));
 
 		$this->assertFalse(
@@ -1452,7 +1455,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_hasRegistrationBegin_ForEventWithRegistrationBegin_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasRegistrationBeginForEventWithRegistrationBeginReturnsTrue() {
 		$this->fixture->setData(array('begin_date_registration' => 42));
 
 		$this->assertTrue(
@@ -1460,7 +1466,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationBeginAsUnixTimestamp_ForEventWithoutRegistrationBegin_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationBeginAsUnixTimestampForEventWithoutRegistrationBeginReturnsZero() {
 		$this->fixture->setData(array('begin_date_registration' => 0));
 
 		$this->assertEquals(
@@ -1469,7 +1478,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationBeginAsUnixTimestamp_ForEventWithRegistrationBegin_ReturnsRegistrationBeginAsUnixTimestamp() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationBeginAsUnixTimestampForEventWithRegistrationBeginReturnsRegistrationBeginAsUnixTimestamp() {
 		$this->fixture->setData(array('begin_date_registration' => 42));
 
 		$this->assertEquals(
@@ -1483,7 +1495,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 	// Tests concerning the publication hash
 	//////////////////////////////////////////
 
-	public function test_hasPublicationHashForNoPublicationHashSet_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasPublicationHashForNoPublicationHashSetReturnsFalse() {
 		$this->fixture->setData(array('publication_hash' => ''));
 
 		$this->assertFalse(
@@ -1491,7 +1506,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_hasPublicationHashForPublicationHashSet_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasPublicationHashForPublicationHashSetReturnsTrue() {
 		$this->fixture->setData(array('publication_hash' => 'fooo'));
 
 		$this->assertTrue(
@@ -1499,7 +1517,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getPublicationHashForNoPublicationHashSet_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getPublicationHashForNoPublicationHashSetReturnsEmptyString() {
 		$this->fixture->setData(array('publication_hash' => ''));
 
 		$this->assertEquals(
@@ -1508,7 +1529,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getPublicationHashForPublicationHashSet_ReturnsPublicationHash() {
+	/**
+	 * @test
+	 */
+	public function getPublicationHashForPublicationHashSetReturnsPublicationHash() {
 		$this->fixture->setData(array('publication_hash' => 'fooo'));
 
 		$this->assertEquals(
@@ -1543,7 +1567,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_purgePublicationHashForPublicationHashSetInModel_PurgesPublicationHash() {
+	/**
+	 * @test
+	 */
+	public function purgePublicationHashForPublicationHashSetInModelPurgesPublicationHash() {
 		$this->fixture->setData(array('publication_hash' => 'fooo'));
 
 		$this->fixture->purgePublicationHash();
@@ -1553,7 +1580,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_purgePublicationHashForNoPublicationHashSetInModel_PurgesPublicationHash() {
+	/**
+	 * @test
+	 */
+	public function purgePublicationHashForNoPublicationHashSetInModelPurgesPublicationHash() {
 		$this->fixture->setData(array('publication_hash' => ''));
 
 		$this->fixture->purgePublicationHash();
@@ -1590,7 +1620,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 	// Tests concerning hasOfflineRegistrations
 	/////////////////////////////////////////////
 
-	public function test_hasOfflineRegistrations_ForEventWithoutOfflineRegistrations_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasOfflineRegistrationsForEventWithoutOfflineRegistrationsReturnsFalse() {
 		$this->fixture->setData(array('offline_attendees' => 0));
 
 		$this->assertFalse(
@@ -1598,7 +1631,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_hasOfflineRegistrations_ForEventWithTwoOfflineRegistrations_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasOfflineRegistrationsForEventWithTwoOfflineRegistrationsReturnsTrue() {
 		$this->fixture->setData(array('offline_attendees' => 2));
 
 		$this->assertTrue(
@@ -1611,7 +1647,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 	// Tests concerning getOfflineRegistrations
 	/////////////////////////////////////////////
 
-	public function test_getOfflineRegistrations_ForEventWithoutOfflineRegistrations_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getOfflineRegistrationsForEventWithoutOfflineRegistrationsReturnsZero() {
 		$this->fixture->setData(array('offline_attendees' => 0));
 
 		$this->assertEquals(
@@ -1620,7 +1659,10 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getOfflineRegistrations_ForEventWithTwoOfflineRegistrations_ReturnsTwo() {
+	/**
+	 * @test
+	 */
+	public function getOfflineRegistrationsForEventWithTwoOfflineRegistrationsReturnsTwo() {
 		$this->fixture->setData(array('offline_attendees' => 2));
 
 		$this->assertEquals(

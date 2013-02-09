@@ -7013,7 +7013,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	// Tests concerning limitToEarliestBeginDate
 	//////////////////////////////////////////////
 
-	public function test_limitToEarliestBeginDate_ForEventWithoutBeginDate_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEarliestBeginDateForEventWithoutBeginDateFindsThisEvent() {
 		$this->testingFramework->createRecord('tx_seminars_seminars');
 		$this->fixture->limitToEarliestBeginDate(42);
 		$bag = $this->fixture->build();
@@ -7026,7 +7029,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToEarliestBeginDate_ForEventWithBeginDateEqualToGivenTimestamp_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEarliestBeginDateForEventWithBeginDateEqualToGivenTimestampFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 42)
 		);
@@ -7041,7 +7047,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToEarliestBeginDate_ForEventWithGreaterBeginDateThanGivenTimestamp_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEarliestBeginDateForEventWithGreaterBeginDateThanGivenTimestampFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 42)
 		);
@@ -7056,7 +7065,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToEarliestBeginDate_ForEventWithBeginDateLowerThanGivenTimestamp_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEarliestBeginDateForEventWithBeginDateLowerThanGivenTimestampDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 42)
 		);
@@ -7070,7 +7082,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToEarliestBeginDate_ForZeroGivenAsTimestamp_UnsetsFilter() {
+	/**
+	 * @test
+	 */
+	public function limitToEarliestBeginDateForZeroGivenAsTimestampUnsetsFilter() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 21)
 		);
@@ -7093,7 +7108,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	// Tests concerning limitToLatestBeginDate
 	////////////////////////////////////////////
 
-	public function test_limitToLatestBeginDate_ForEventWithoutDate_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToLatestBeginDateForEventWithoutDateDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord('tx_seminars_seminars');
 		$this->fixture->limitToLatestBeginDate(42);
 		$bag = $this->fixture->build();
@@ -7105,7 +7123,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToLatestBeginDate_ForEventBeginDateEqualToGivenTimestamp_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToLatestBeginDateForEventBeginDateEqualToGivenTimestampFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 42)
 		);
@@ -7120,7 +7141,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToLatestBeginDate_ForEventWithBeginDateAfterGivenTimestamp_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToLatestBeginDateForEventWithBeginDateAfterGivenTimestampDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 42)
 		);
@@ -7134,7 +7158,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToLatestBeginDate_ForEventBeginDateBeforeGivenTimestamp_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToLatestBeginDateForEventBeginDateBeforeGivenTimestampFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 42)
 		);
@@ -7149,7 +7176,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToLatestBeginDate_ForZeroGiven_UnsetsTheFilter() {
+	/**
+	 * @test
+	 */
+	public function limitToLatestBeginDateForZeroGivenUnsetsTheFilter() {
 		$this->testingFramework->createRecord('tx_seminars_seminars');
 
 		$this->fixture->limitToLatestBeginDate(42);
@@ -7169,7 +7199,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	// Tests concerning showHiddenRecords
 	///////////////////////////////////////
 
-	public function test_showHiddenRecords_ForHiddenEvent_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function showHiddenRecordsForHiddenEventFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('hidden' => 1)
 		);
@@ -7185,7 +7218,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_showHiddenRecords_ForVisibleEvent_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function showHiddenRecordsForVisibleEventFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('hidden' => 0)
 		);
@@ -7206,7 +7242,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	// Tests concerning limitToEventsWithVacancies
 	////////////////////////////////////////////////
 
-	public function test_LimitToEventsWithVacancies_ForEventWithNoRegistrationNeeded_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEventsWithVacanciesForEventWithNoRegistrationNeededFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('needs_registration' => 0)
 		);
@@ -7222,7 +7261,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_LimitToEventsWithVacancies_ForEventWithUnlimitedVacancies_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEventsWithVacanciesForEventWithUnlimitedVacanciesFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('needs_registration' => 1, 'attendees_max' => 0)
@@ -7239,7 +7281,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_LimitToEventsWithVacancies_ForEventNoVacanciesAndQueue_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEventsWithVacanciesForEventNoVacanciesAndQueueDoesNotFindThisEvent() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -7264,7 +7309,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_LimitToEventsWithVacancies_ForEventWithOneVacancy_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEventsWithVacanciesForEventWithOneVacancyFindsThisEvent() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('needs_registration' => 1, 'attendees_max' => 2)
@@ -7286,7 +7334,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_LimitToEventsWithVacancies_ForEventWithNoVacancies_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEventsWithVacanciesForEventWithNoVacanciesDoesNotFindThisEvent() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('needs_registration' => 1, 'attendees_max' => 1)
@@ -7307,7 +7358,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_LimitToEventsWithVacancies_ForEventWithNoVacanciesThroughOfflineRegistrations_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEventsWithVacanciesForEventWithNoVacanciesThroughOfflineRegistrationsDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -7327,7 +7381,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_LimitToEventsWithVacancies_ForEventWithNoVacanciesThroughRegistrationsWithMultipleSeats_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEventsWithVacanciesForEventWithNoVacanciesThroughRegistrationsWithMultipleSeatsDoesNotFindThisEvent() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -7351,7 +7408,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_LimitToEventsWithVacancies_ForEventWithNoVacanciesThroughRegularAndOfflineRegistrations_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEventsWithVacanciesForEventWithNoVacanciesThroughRegularAndOfflineRegistrationsDoesNotFindThisEvent() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -7376,7 +7436,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToEventsWithVacanciesForEventWithVacanciesAndNoAttendees_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEventsWithVacanciesForEventWithVacanciesAndNoAttendeesFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('needs_registration' => 1, 'attendees_max' => 10)
@@ -7393,7 +7456,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToEventsWithVacanciesForEventWithVacanciesAndOnlyOfflineAttendees_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToEventsWithVacanciesForEventWithVacanciesAndOnlyOfflineAttendeesFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -7419,7 +7485,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	// Tests concerning limitToOrganizers
 	///////////////////////////////////////
 
-	public function test_limitToOrganizers_ForOneProvidedOrganizerAndEventWithThisOrganizer_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToOrganizersForOneProvidedOrganizerAndEventWithThisOrganizerFindsThisEvent() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
@@ -7441,7 +7510,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToOrganizers_ForOneProvidedOrganizerAndEventWithoutOrganizer_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToOrganizersForOneProvidedOrganizerAndEventWithoutOrganizerDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
@@ -7459,7 +7531,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToOrganizers_ForOneProvidedOrganizerAndEventWithOtherOrganizer_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToOrganizersForOneProvidedOrganizerAndEventWithOtherOrganizerDoesNotFindThisEvent() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
@@ -7483,7 +7558,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToOrganizers_ForTwoProvidedOrganizersAndEventWithFirstOrganizer_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToOrganizersForTwoProvidedOrganizersAndEventWithFirstOrganizerFindsThisEvent() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
@@ -7509,7 +7587,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToOrganizers_ForProvidedOrganizerAndTwoEventsWithThisOrganizer_FindsTheseEvents() {
+	/**
+	 * @test
+	 */
+	public function limitToOrganizersForProvidedOrganizerAndTwoEventsWithThisOrganizerFindsTheseEvents() {
 		$eventUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
@@ -7538,7 +7619,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToOrganizers_ForProvidedOrganizerAndTopicWithOrganizer_ReturnsTheTopicsDate() {
+	/**
+	 * @test
+	 */
+	public function limitToOrganizersForProvidedOrganizerAndTopicWithOrganizerReturnsTheTopicsDate() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
@@ -7570,7 +7654,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToOrganizers_ForNoProvidedOrganizer_FindsEventWithOrganizer() {
+	/**
+	 * @test
+	 */
+	public function limitToOrganizersForNoProvidedOrganizerFindsEventWithOrganizer() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
@@ -7597,7 +7684,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	// Tests concerning limitToAge
 	////////////////////////////////
 
-	public function test_limitToAge_ForAgeWithinEventsAgeRange_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToAgeForAgeWithinEventsAgeRangeFindsThisEvent() {
 		$targetGroupUid = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups',
 			array('minimum_age' => 5, 'maximum_age' => 50)
@@ -7620,7 +7710,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToAge_ForAgeEqualToLowerLimitOfAgeRange_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToAgeForAgeEqualToLowerLimitOfAgeRangeFindsThisEvent() {
 		$targetGroupUid = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups',
 			array('minimum_age' => 15, 'maximum_age' => 50)
@@ -7643,7 +7736,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToAge_ForAgeEqualToHigherLimitOfAgeRange_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToAgeForAgeEqualToHigherLimitOfAgeRangeFindsThisEvent() {
 		$targetGroupUid = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups',
 			array('minimum_age' => 5, 'maximum_age' => 15)
@@ -7666,7 +7762,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToAge_ForNoLowerLimitAndAgeLowerThanMaximumAge_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToAgeForNoLowerLimitAndAgeLowerThanMaximumAgeFindsThisEvent() {
 		$targetGroupUid = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups',
 			array('minimum_age' => 0, 'maximum_age' => 50)
@@ -7689,7 +7788,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToAge_ForAgeHigherThanMaximumAge_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToAgeForAgeHigherThanMaximumAgeDoesNotFindThisEvent() {
 		$targetGroupUid = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups',
 			array('minimum_age' => 0, 'maximum_age' => 50)
@@ -7711,7 +7813,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToAge_ForNoHigherLimitAndAgeHigherThanMinimumAge_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToAgeForNoHigherLimitAndAgeHigherThanMinimumAgeFindsThisEvent() {
 		$targetGroupUid = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups',
 			array('minimum_age' => 5, 'maximum_age' => 0)
@@ -7734,7 +7839,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToAge_ForAgeLowerThanMinimumAge_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToAgeForAgeLowerThanMinimumAgeFindsThisEvent() {
 		$targetGroupUid = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups',
 			array('minimum_age' => 5, 'maximum_age' => 0)
@@ -7756,7 +7864,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToAge_ForEventWithoutTargetGroupAndAgeProvided_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToAgeForEventWithoutTargetGroupAndAgeProvidedFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
@@ -7772,7 +7883,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToAge_ForEventWithTargetGroupWithNoLimits_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToAgeForEventWithTargetGroupWithNoLimitsFindsThisEvent() {
 		$targetGroupUid = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups'
 		);
@@ -7794,7 +7908,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToAge_ForEventWithTwoTargetGroupOneWithMatchingRangeAndOneWithoutMatchingRange_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToAgeForEventWithTwoTargetGroupOneWithMatchingRangeAndOneWithoutMatchingRangeFindsThisEvent() {
 		$targetGroupUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups',
 			array('minimum_age' => 20, 'maximum_age' => 50)
@@ -7824,7 +7941,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToAge_ForEventWithTwoTargetGroupBothWithMatchingRanges_FindsThisEventOnlyOnce() {
+	/**
+	 * @test
+	 */
+	public function limitToAgeForEventWithTwoTargetGroupBothWithMatchingRangesFindsThisEventOnlyOnce() {
 		$targetGroupUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups',
 			array('minimum_age' => 5, 'maximum_age' => 50)
@@ -7854,7 +7974,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToAge_ForAgeZeroGiven_FindsEventWithAgeLimits() {
+	/**
+	 * @test
+	 */
+	public function limitToAgeForAgeZeroGivenFindsEventWithAgeLimits() {
 		$targetGroupUid = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups',
 			array('minimum_age' => 5, 'maximum_age' => 15)
@@ -7882,7 +8005,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	// Tests concerning limitToMaximumPrice
 	/////////////////////////////////////////
 
-	public function test_limitToMaximumPrice_ForEventWithRegularPriceLowerThanMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithRegularPriceLowerThanMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_regular' => 42)
 		);
@@ -7898,7 +8024,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithRegularPriceZero_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithRegularPriceZeroFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_regular' => 0)
 		);
@@ -7914,7 +8043,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithRegularPriceEqualToMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithRegularPriceEqualToMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_regular' => 50)
 		);
@@ -7930,7 +8062,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithRegularPriceHigherThanMaximum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithRegularPriceHigherThanMaximumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_regular' => 51)
 		);
@@ -7945,7 +8080,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithSpecialPriceLowerThanMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithSpecialPriceLowerThanMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('price_regular' => 51, 'price_special' => 49)
@@ -7962,7 +8100,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithSpecialPriceEqualToMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithSpecialPriceEqualToMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('price_regular' => 43, 'price_special' => 42)
@@ -7979,7 +8120,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithSpecialPriceHigherThanMaximum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithSpecialPriceHigherThanMaximumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('price_regular' => 43, 'price_special' => 43)
@@ -7995,7 +8139,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithRegularBoardPriceLowerThanMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithRegularBoardPriceLowerThanMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('price_regular' => 51, 'price_regular_board' => 49)
@@ -8012,7 +8159,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithRegularBoardPriceEqualToMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithRegularBoardPriceEqualToMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('price_regular' => 51, 'price_regular_board' => 50)
@@ -8029,7 +8179,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithRegularBoardPriceHigherThanMaximum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithRegularBoardPriceHigherThanMaximumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('price_regular' => 51, 'price_regular_board' => 51)
@@ -8045,7 +8198,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithSpecialBoardPriceLowerThanMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithSpecialBoardPriceLowerThanMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('price_regular' => 51, 'price_special_board' => 49)
@@ -8062,7 +8218,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithSpecialBoardPriceEqualToMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithSpecialBoardPriceEqualToMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('price_regular' => 51, 'price_special_board' => 50)
@@ -8079,7 +8238,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithSpecialBoardPriceHigherThanMaximum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithSpecialBoardPriceHigherThanMaximumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('price_regular' => 51, 'price_special_board' => 51)
@@ -8095,7 +8257,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForTopicWithRegularPriceLowerThanMaximum_FindsTheDateForThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForTopicWithRegularPriceLowerThanMaximumFindsTheDateForThisEvent() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8122,7 +8287,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForTopicWithRegularPriceHigherThanMaximum_DoesNotFindTheDateForThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForTopicWithRegularPriceHigherThanMaximumDoesNotFindTheDateForThisEvent() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8148,7 +8316,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithEarlyBirdDeadlineInFutureAndRegularEarlyPriceLowerThanMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndRegularEarlyPriceLowerThanMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8169,7 +8340,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithEarlyBirdDeadlineInFutureAndRegularEarlyPriceEqualToMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndRegularEarlyPriceEqualToMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8190,7 +8364,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithEarlyBirdDeadlineInFutureAndRegularEarlyPriceHigherThanMaximum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndRegularEarlyPriceHigherThanMaximumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8210,7 +8387,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithEarlyBirdDeadlineInPastAndRegularEarlyPriceLowerThanMaximum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInPastAndRegularEarlyPriceLowerThanMaximumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8230,7 +8410,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithEarlyBirdDeadlineInFutureAndSpecialEarlyPriceLowerThanMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndSpecialEarlyPriceLowerThanMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8251,7 +8434,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithEarlyBirdDeadlineInFutureAndSpecialEarlyPriceEqualToMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndSpecialEarlyPriceEqualToMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8272,7 +8458,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithEarlyBirdDeadlineInFutureAndSpecialEarlyPriceHigherThanMaximum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndSpecialEarlyPriceHigherThanMaximumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8292,7 +8481,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForFutureEarlyBirdDeadlineAndNoEarlyBirdPrice_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForFutureEarlyBirdDeadlineAndNoEarlyBirdPriceDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8311,7 +8503,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithEarlyBirdDeadlineInPastAndSpecialEarlyPriceLowerThanMaximum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInPastAndSpecialEarlyPriceLowerThanMaximumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8331,7 +8526,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithEarlyBirdDeadlineInFutureAndRegularEarlyPriceHigherThanAndRegularPriceLowerThanMaximum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndRegularEarlyPriceHigherThanAndRegularPriceLowerThanMaximumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8351,7 +8549,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithEarlyBirdDeadlineInFutureAndNoSpecialEarlyPriceAndRegularPriceLowerThanMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndNoSpecialEarlyPriceAndRegularPriceLowerThanMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8371,7 +8572,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithEarlyBirdDeadlineInFutureAndNoEarlySpecialPriceAndSpecialPriceLowerThanMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndNoEarlySpecialPriceAndSpecialPriceLowerThanMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8392,7 +8596,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForEventWithEarlyBirdDeadlineInFutureAndNoRegularEarlyPriceAndRegularPriceLowerThanMaximum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndNoRegularEarlyPriceAndRegularPriceLowerThanMaximumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8412,7 +8619,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMaximumPrice_ForZeroGiven_FindsEventWithNonZeroPrice() {
+	/**
+	 * @test
+	 */
+	public function limitToMaximumPriceForZeroGivenFindsEventWithNonZeroPrice() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8436,7 +8646,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	// Tests concerning limitToMinimumPrice
 	/////////////////////////////////////////
 
-	public function test_limitToMinimumPrice_ForEventWithRegularPriceLowerThanMinimum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEventWithRegularPriceLowerThanMinimumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_regular' => 14)
 		);
@@ -8451,7 +8664,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForPriceGivenAndEventWithoutPrices_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForPriceGivenAndEventWithoutPricesDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord('tx_seminars_seminars');
 
 		$this->fixture->limitToMinimumPrice(16);
@@ -8462,7 +8678,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_limitToMinimumPrice_ForEventWithRegularPriceEqualToMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEventWithRegularPriceEqualToMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_regular' => 15)
 		);
@@ -8478,7 +8697,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEventWithRegularPriceGreaterThanMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEventWithRegularPriceGreaterThanMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_regular' => 16)
 		);
@@ -8494,7 +8716,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEventWithRegularBoardPriceGreaterThanMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEventWithRegularBoardPriceGreaterThanMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_regular_board' => 16)
 		);
@@ -8510,7 +8735,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEventWithRegularBoardPriceEqualToMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEventWithRegularBoardPriceEqualToMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_regular_board' => 15)
 		);
@@ -8526,7 +8754,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEventWithRegularBoardPriceLowerThanMinimum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEventWithRegularBoardPriceLowerThanMinimumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_regular_board' => 14)
 		);
@@ -8541,7 +8772,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEventWithSpecialBoardPriceGreaterThanMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEventWithSpecialBoardPriceGreaterThanMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_special_board' => 16)
 		);
@@ -8557,7 +8791,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEventWithSpecialBoardPriceEqualToMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEventWithSpecialBoardPriceEqualToMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_special_board' => 15)
 		);
@@ -8573,7 +8810,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEventWithSpecialBoardPriceLowerThanMinimum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEventWithSpecialBoardPriceLowerThanMinimumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_special_board' => 14)
 		);
@@ -8588,7 +8828,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEventWithSpecialPriceGreaterThanMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEventWithSpecialPriceGreaterThanMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_special' => 16)
 		);
@@ -8604,7 +8847,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEventWithSpecialPriceEqualToMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEventWithSpecialPriceEqualToMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_special' => 15)
 		);
@@ -8620,7 +8866,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEventWithSpecialPriceLowerThanMinimum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEventWithSpecialPriceLowerThanMinimumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_special' => 14)
 		);
@@ -8635,7 +8884,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndRegularEarlyPriceZeroAndRegularPriceHigherThanMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndRegularEarlyPriceZeroAndRegularPriceHigherThanMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8655,7 +8907,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureNoPriceSet_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEarlyBirdDeadlineInFutureNoPriceSetDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('deadline_early_bird' => $this->future)
@@ -8671,7 +8926,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndRegularEarlyPriceLowerThanMinimum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndRegularEarlyPriceLowerThanMinimumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8690,7 +8948,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndRegularEarlyPriceEqualToMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndRegularEarlyPriceEqualToMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8710,7 +8971,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndRegularEarlyPriceHigherThanMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndRegularEarlyPriceHigherThanMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8730,7 +8994,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceZeroAndSpecialPriceHigherThanMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceZeroAndSpecialPriceHigherThanMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8750,7 +9017,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceLowerThanMinimum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceLowerThanMinimumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8769,7 +9039,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceEqualToMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceEqualToMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8789,7 +9062,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceHigherThanMinimum_FindsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceHigherThanMinimumFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8809,7 +9085,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInPastAndRegularEarlyPriceHigherThanMinimum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEarlyBirdDeadlineInPastAndRegularEarlyPriceHigherThanMinimumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8828,7 +9107,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForEarlyBirdDeadlineInPastAndSpecialEarlyPriceHigherThanMinimum_DoesNotFindThisEvent() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForEarlyBirdDeadlineInPastAndSpecialEarlyPriceHigherThanMinimumDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -8847,7 +9129,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 
-	public function test_limitToMinimumPrice_ForMinimumPriceZero_FindsEventWithRegularPrice() {
+	/**
+	 * @test
+	 */
+	public function limitToMinimumPriceForMinimumPriceZeroFindsEventWithRegularPrice() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('price_regular' => 16)
 		);

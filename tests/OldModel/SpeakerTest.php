@@ -282,7 +282,10 @@ class tx_seminars_OldModel_SpeakerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanHaveOneSkill() {
+	/**
+	 * @test
+	 */
+	public function canHaveOneSkill() {
 		$this->addSkillRelation(array());
 		$this->assertTrue(
 			$this->fixture->hasSkills()

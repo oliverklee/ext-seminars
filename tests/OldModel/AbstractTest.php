@@ -143,7 +143,10 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$test->__destruct();
 	}
 
-	public function test_CreateFromDbResult_FailsForHiddenRecord() {
+	/**
+	 * @test
+	 */
+	public function createFromDbResultFailsForHiddenRecord() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_test', $this->fixtureUid, array('hidden' => 1)
 		);
@@ -157,7 +160,10 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$test->__destruct();
 	}
 
-	public function test_CreateFromDbResultWithAllowedHiddenRecords_GetsHiddenRecordFromDb() {
+	/**
+	 * @test
+	 */
+	public function createFromDbResultWithAllowedHiddenRecordsGetsHiddenRecordFromDb() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_test', $this->fixtureUid, array('hidden' => 1)
 		);
@@ -434,7 +440,10 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 	// Tests concerning recordExists
 	//////////////////////////////////
 
-	public function test_recordExists_ForHiddenRecordAndNoHiddenRecordsAllowed_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function recordExistsForHiddenRecordAndNoHiddenRecordsAllowedReturnsFalse() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_test', $this->fixtureUid, array('hidden' => 1)
 		);
@@ -446,7 +455,10 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_recordExists_ForHiddenRecordAndHiddenRecordsAllowed_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function recordExistsForHiddenRecordAndHiddenRecordsAllowedReturnsTrue() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_test', $this->fixtureUid, array('hidden' => 1)
 		);
@@ -463,7 +475,10 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 	// Tests concerning getPageUid
 	////////////////////////////////
 
-	public function test_getPageUidCanReturnRecordsPageUid() {
+	/**
+	 * @test
+	 */
+	public function getPageUidCanReturnRecordsPageUid() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_test', $this->fixtureUid, array('pid' => 42)
 		);
@@ -479,7 +494,10 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_getPageUidForRecordWithPageUidZero_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getPageUidForRecordWithPageUidZeroReturnsZero() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_test', $this->fixtureUid, array('pid' => 0)
 		);

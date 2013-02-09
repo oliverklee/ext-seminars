@@ -238,7 +238,10 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SaveDataToSession_CanStoreCompanyInSession() {
+	/**
+	 * @test
+	 */
+	public function saveDataToSessionCanStoreCompanyInSession() {
 		$this->fixture->processRegistration(array('company' => 'foo inc.'));
 
 		$this->assertEquals(
@@ -249,7 +252,10 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SaveDataToSession_CanStoreNameInSession() {
+	/**
+	 * @test
+	 */
+	public function saveDataToSessionCanStoreNameInSession() {
 		$this->fixture->processRegistration(array('name' => 'foo'));
 
 		$this->assertEquals(
@@ -691,7 +697,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function isFormFieldEnabled_ForEnabledRegisteredThemselvesFieldOnlyReturnsFalseForMoreSeats() {
+	public function isFormFieldEnabledForEnabledRegisteredThemselvesFieldOnlyReturnsFalseForMoreSeats() {
 		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array('showRegistrationFields' => 'registered_themselves'),
 			$GLOBALS['TSFE']->cObj
@@ -707,7 +713,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function isFormFieldEnabled_ForEnabledCompanyFieldReturnsTrueForBillingAddress() {
+	public function isFormFieldEnabledForEnabledCompanyFieldReturnsTrueForBillingAddress() {
 		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array('showRegistrationFields' => 'company, billing_address'),
 			$GLOBALS['TSFE']->cObj
@@ -1329,7 +1335,10 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	// Tests concerning getPreselectedPaymentMethod
 	/////////////////////////////////////////////////
 
-	public function test_getPreselectedPaymentMethodForOnePaymentMethod_ReturnsItsUid() {
+	/**
+	 * @test
+	 */
+	public function getPreselectedPaymentMethodForOnePaymentMethodReturnsItsUid() {
 		$paymentMethodUid = $this->testingFramework->createRecord(
 			'tx_seminars_payment_methods', array('title' => 'foo')
 		);
@@ -1347,7 +1356,10 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getPreselectedPaymentMethodForTwoNotSelectedPaymentMethods_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getPreselectedPaymentMethodForTwoNotSelectedPaymentMethodsReturnsZero() {
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,
@@ -1367,7 +1379,10 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getPreselectedPaymentMethodForTwoPaymentMethodsOneSelectedOneNot_ReturnsUidOfSelectedRecord() {
+	/**
+	 * @test
+	 */
+	public function getPreselectedPaymentMethodForTwoPaymentMethodsOneSelectedOneNotReturnsUidOfSelectedRecord() {
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_payment_methods_mm',
 			$this->seminarUid,

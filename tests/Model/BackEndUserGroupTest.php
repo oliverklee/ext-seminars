@@ -50,7 +50,10 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 	// Tests concerning getTitle()
 	////////////////////////////////
 
-	public function test_GetTitle_ForNonEmptyGroupTitle_ReturnsGroupTitle() {
+	/**
+	 * @test
+	 */
+	public function getTitleForNonEmptyGroupTitleReturnsGroupTitle() {
 		$this->fixture->setData(array('title' => 'foo'));
 
 		$this->assertEquals(
@@ -59,7 +62,10 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetTitle_ForEmptyGroupTitle_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getTitleForEmptyGroupTitleReturnsEmptyString() {
 		$this->fixture->setData(array('title' => ''));
 
 		$this->assertEquals(
@@ -72,7 +78,10 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 	// Tests concerning getEventFolder
 	////////////////////////////////////
 
-	public function test_getEventFolderForNoSetEventFolder_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getEventFolderForNoSetEventFolderReturnsZero() {
 		$this->fixture->setData(array());
 
 		$this->assertEquals(
@@ -81,7 +90,10 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getEventFolderForSetEventFolder_ReturnsEventFolderPid() {
+	/**
+	 * @test
+	 */
+	public function getEventFolderForSetEventFolderReturnsEventFolderPid() {
 		$this->fixture->setData(array('tx_seminars_events_folder' => 42));
 
 		$this->assertEquals(
@@ -96,7 +108,10 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 	///////////////////////////////////////////
 
 
-	public function test_getRegistrationFolderForNoSetRegistrationFolder_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationFolderForNoSetRegistrationFolderReturnsZero() {
 		$this->fixture->setData(array());
 
 		$this->assertEquals(
@@ -105,7 +120,10 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationFolderForSetRegistrationFolder_ReturnsRegistrationFolderPid() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationFolderForSetRegistrationFolderReturnsRegistrationFolderPid() {
 		$this->fixture->setData(array('tx_seminars_registrations_folder' => 42));
 
 		$this->assertEquals(
@@ -120,7 +138,10 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 	///////////////////////////////////////////////
 
 
-	public function test_getAuxiliaryRecordsFolderForNoSetAuxiliaryRecordsFolder_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getAuxiliaryRecordsFolderForNoSetAuxiliaryRecordsFolderReturnsZero() {
 		$this->fixture->setData(array());
 
 		$this->assertEquals(
@@ -129,7 +150,10 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getAuxiliaryRecordsFolderForSetAuxiliaryRecordsFolder_ReturnsAuxiliaryRecordsFolderPid() {
+	/**
+	 * @test
+	 */
+	public function getAuxiliaryRecordsFolderForSetAuxiliaryRecordsFolderReturnsAuxiliaryRecordsFolderPid() {
 		$this->fixture->setData(array('tx_seminars_auxiliaries_folder' => 42));
 
 		$this->assertEquals(

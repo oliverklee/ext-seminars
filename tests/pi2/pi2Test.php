@@ -470,7 +470,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CreateListOfRegistrations_CanContainLocalizedRegisteredThemselves() {
+	/**
+	 * @test
+	 */
+	public function createListOfRegistrationsCanContainLocalizedRegisteredThemselves() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -494,7 +497,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_createListOfRegistrations_CanContainLocalizedCompanyHeading() {
+	/**
+	 * @test
+	 */
+	public function createListOfRegistrationsCanContainLocalizedCompanyHeading() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -516,7 +522,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_createListOfRegistrations_CanContainCompanyContent() {
+	/**
+	 * @test
+	 */
+	public function createListOfRegistrationsCanContainCompanyContent() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -538,7 +547,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_createListOfRegistrationsForFrontEndMode_CanExportRegistrationsBelongingToAnEvent() {
+	/**
+	 * @test
+	 */
+	public function createListOfRegistrationsForFrontEndModeCanExportRegistrationsBelongingToAnEvent() {
 		$this->fixture->setTypo3Mode('FE');
 		$globalBackEndUser = $GLOBALS['BE_USER'];
 		$GLOBALS['BE_USER'] = NULL;

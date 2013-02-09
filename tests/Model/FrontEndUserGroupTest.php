@@ -52,7 +52,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	// Tests concerning getPublishSetting
 	///////////////////////////////////////
 
-	public function test_getPublishSetting_WithoutPublishSetting_ReturnsPublishAll() {
+	/**
+	 * @test
+	 */
+	public function getPublishSettingWithoutPublishSettingReturnsPublishAll() {
 		$this->fixture->setData(array());
 
 		$this->assertEquals(
@@ -61,7 +64,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getPublishSetting_WithPublishSettingSetToZero_ReturnsPublishAll() {
+	/**
+	 * @test
+	 */
+	public function getPublishSettingWithPublishSettingSetToZeroReturnsPublishAll() {
 		$this->fixture->setData(array('tx_seminars_publish_events' => 0));
 
 		$this->assertEquals(
@@ -70,7 +76,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getPublishSetting_WithPublishSettingSetToOne_ReturnsHideNew() {
+	/**
+	 * @test
+	 */
+	public function getPublishSettingWithPublishSettingSetToOneReturnsHideNew() {
 		$this->fixture->setData(array('tx_seminars_publish_events' => 1));
 
 		$this->assertEquals(
@@ -79,7 +88,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getPublishSetting_WithPublishSettingSetToTwo_ReturnsHideEdited() {
+	/**
+	 * @test
+	 */
+	public function getPublishSettingWithPublishSettingSetToTwoReturnsHideEdited() {
 		$this->fixture->setData(array('tx_seminars_publish_events' => 2));
 
 		$this->assertEquals(
@@ -149,7 +161,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	// Tests concerning the reviewer
 	//////////////////////////////////
 
-	public function test_hasReviewerForGroupWithoutReviewer_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasReviewerForGroupWithoutReviewerReturnsFalse() {
 		$this->fixture->setData(array('tx_seminars_reviewer' => NULL));
 
 		$this->assertFalse(
@@ -157,7 +172,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_hasReviewerForGroupWithReviewer_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasReviewerForGroupWithReviewerReturnsTrue() {
 		$backEndUser = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
 
 		$this->fixture->setData(array('tx_seminars_reviewer' => $backEndUser));
@@ -167,7 +185,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getReviewerForGroupWithoutReviewer_ReturnsNull() {
+	/**
+	 * @test
+	 */
+	public function getReviewerForGroupWithoutReviewerReturnsNull() {
 		$this->fixture->setData(array('tx_seminars_reviewer' => NULL));
 
 		$this->assertNull(
@@ -175,7 +196,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getReviewerForGroupWithReviewer_ReturnsReviewer() {
+	/**
+	 * @test
+	 */
+	public function getReviewerForGroupWithReviewerReturnsReviewer() {
 		$backEndUser = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
 
 		$this->fixture->setData(array('tx_seminars_reviewer' => $backEndUser));
@@ -191,7 +215,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	// Tests concerning the event record storage PID
 	//////////////////////////////////////////////////
 
-	public function test_hasEventRecordPidForNoPidSet_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasEventRecordPidForNoPidSetReturnsFalse() {
 		$this->fixture->setData(array());
 
 		$this->assertFalse(
@@ -199,7 +226,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_hasEventRecordPidForPidSet_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasEventRecordPidForPidSetReturnsTrue() {
 		$this->fixture->setData(array('tx_seminars_events_pid' => 42));
 
 		$this->assertTrue(
@@ -207,7 +237,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getEventRecordPidForNoPidSet_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getEventRecordPidForNoPidSetReturnsZero() {
 		$this->fixture->setData(array());
 
 		$this->assertEquals(
@@ -216,7 +249,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getEventRecordPidForPidSet_ReturnsThisPid() {
+	/**
+	 * @test
+	 */
+	public function getEventRecordPidForPidSetReturnsThisPid() {
 		$this->fixture->setData(array('tx_seminars_events_pid' => 42));
 
 		$this->assertEquals(
@@ -229,7 +265,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	// Tests concerning getDefaultCategories
 	//////////////////////////////////////////
 
-	public function test_getDefaultCategoriesForNoCategories_ReturnsAList() {
+	/**
+	 * @test
+	 */
+	public function getDefaultCategoriesForNoCategoriesReturnsAList() {
 		$this->fixture->setData(array(
 			'tx_seminars_default_categories' => tx_oelib_ObjectFactory::make('tx_oelib_List'))
 		);
@@ -239,7 +278,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getDefaultCategoriesForOneAssignedCategory_ReturnsThisCategoryInList() {
+	/**
+	 * @test
+	 */
+	public function getDefaultCategoriesForOneAssignedCategoryReturnsThisCategoryInList() {
 		$list = tx_oelib_ObjectFactory::make('tx_oelib_List');
 		$category = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
 			->getNewGhost();
@@ -258,7 +300,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	// Tests concerning hasDefaultCategories
 	//////////////////////////////////////////
 
-	public function test_hasDefaultCategoriesForNoAssignedCategories_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasDefaultCategoriesForNoAssignedCategoriesReturnsFalse() {
 		$this->fixture->setData(array(
 			'tx_seminars_default_categories'
 				=> tx_oelib_ObjectFactory::make('tx_oelib_List'))
@@ -269,7 +314,10 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_hasDefaultCategoriesForOneAssignedCategory_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasDefaultCategoriesForOneAssignedCategoryReturnsTrue() {
 		$list = tx_oelib_ObjectFactory::make('tx_oelib_List');
 		$list->add(
 			tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')

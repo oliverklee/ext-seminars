@@ -3,7 +3,7 @@ if (!defined('TYPO3_MODE')) {
 	die('Access denied.');
 }
 
-if (!function_exists('tx_seminars_tableReplace')) {
+if (!function_exists('txSeminarsReplaceTables')) {
 	/**
 	 * Replaces the tables markers for the add and list wizard with the given
 	 * table name. It's mainly used to simplify the maintaining of the wizard
@@ -14,7 +14,7 @@ if (!function_exists('tx_seminars_tableReplace')) {
 	 *
 	 * @return array wizards array with replaced table markers
 	 */
-	function tx_seminars_tableReplace(array $array, $table) {
+	function txSeminarsReplaceTables(array $array, $table) {
 		$array['add']['params']['table'] =
 			str_replace('###TABLE###', $table, $array['add']['params']['table']);
 		$array['list']['params']['table'] =
@@ -24,7 +24,7 @@ if (!function_exists('tx_seminars_tableReplace')) {
 	}
 }
 
-if (!function_exists('tx_seminars_tableRelations')) {
+if (!function_exists('txSeminarsGetTableRelationsClause')) {
 	/**
 	 * Returns the WHERE clause part to limit the entries to the records stored
 	 * with the general record storage PID.
@@ -35,7 +35,7 @@ if (!function_exists('tx_seminars_tableRelations')) {
 	 *                empty if the storage PID should not be used to filter the
 	 *                select options
 	 */
-	function tx_seminars_tableRelations($tableName) {
+	function txSeminarsGetTableRelationsClause($tableName) {
 		if (!tx_oelib_configurationProxy::getInstance('seminars')
 			->getAsBoolean('useStoragePid')
 		) {
@@ -217,14 +217,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_categories',
 				'foreign_table' => 'tx_seminars_categories',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_categories'
 				),
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_categories_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_categories'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_categories'),
 			),
 		),
 		'requirements' => array(
@@ -285,7 +285,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_event_types',
 				'foreign_table' => 'tx_seminars_event_types',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_event_types'
 				),
 				'size' => 1,
@@ -294,7 +294,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'items' => array(
 					'' => '',
 				),
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_event_types'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_event_types'),
 			),
 		),
 		'accreditation_number' => array(
@@ -454,14 +454,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_sites',
 				'foreign_table' => 'tx_seminars_sites',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_sites'
 				),
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_place_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_sites'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_sites'),
 			),
 		),
 		'room' => array(
@@ -481,14 +481,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_lodgings',
 				'foreign_table' => 'tx_seminars_lodgings',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_lodgings'
 				) . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_lodgings_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_lodgings'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_lodgings'),
 			),
 		),
 		'foods' => array(
@@ -499,14 +499,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_foods',
 				'foreign_table' => 'tx_seminars_foods',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_foods'
 				) . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_foods_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_foods'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_foods'),
 			),
 		),
 		'speakers' => array(
@@ -517,14 +517,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_speakers',
 				'foreign_table' => 'tx_seminars_speakers',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_speakers'
 				),
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_speakers_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_speakers'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_speakers'),
 			),
 		),
 		'partners' => array(
@@ -535,14 +535,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_speakers',
 				'foreign_table' => 'tx_seminars_speakers',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_speakers'
 				),
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_speakers_mm_partners',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_speakers'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_speakers'),
 			),
 		),
 		'tutors' => array(
@@ -553,14 +553,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_speakers',
 				'foreign_table' => 'tx_seminars_speakers',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_speakers'
 				),
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_speakers_mm_tutors',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_speakers'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_speakers'),
 			),
 		),
 		'leaders' => array(
@@ -571,14 +571,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_speakers',
 				'foreign_table' => 'tx_seminars_speakers',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_speakers'
 				),
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_speakers_mm_leaders',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_speakers'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_speakers'),
 			),
 		),
 		'language' => array(
@@ -726,14 +726,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_checkboxes',
 				'foreign_table' => 'tx_seminars_checkboxes',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_checkboxes'
 				) . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_checkboxes_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_checkboxes'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_checkboxes'),
 			),
 		),
 		'uses_terms_2' => array(
@@ -753,14 +753,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_payment_methods',
 				'foreign_table' => 'tx_seminars_payment_methods',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_payment_methods'
 				) . ' ORDER BY title',
 				'size' => 5,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_payment_methods_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_payment_methods'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_payment_methods'),
 			),
 		),
 		'organizers' => array(
@@ -771,14 +771,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_organizers',
 				'foreign_table' => 'tx_seminars_organizers',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_organizers'
 				),
 				'size' => 5,
 				'minitems' => 1,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_organizers_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_organizers'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_organizers'),
 			),
 		),
 		'organizing_partners' => array(
@@ -789,14 +789,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_organizers',
 				'foreign_table' => 'tx_seminars_organizers',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_organizers'
 				),
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_organizing_partners_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_organizers'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_organizers'),
 			),
 		),
 		'event_takes_place_reminder_sent' => array(
@@ -900,14 +900,14 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_target_groups',
 				'foreign_table' => 'tx_seminars_target_groups',
-				'foreign_table_where' => tx_seminars_tableRelations(
+				'foreign_table_where' => txSeminarsGetTableRelationsClause(
 					'tx_seminars_target_groups'
 				),
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_seminars_target_groups_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_target_groups'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_target_groups'),
 			),
 		),
 		'skip_collision_check' => array(
@@ -1188,7 +1188,7 @@ $TCA['tx_seminars_speakers'] = array(
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_speakers_skills_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_skills'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_skills'),
 			),
 		),
 		'notes' => array(
@@ -1461,7 +1461,7 @@ $TCA['tx_seminars_attendances'] = array(
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_attendances_foods_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_foods'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_foods'),
 			),
 		),
 		'food' => array(
@@ -1486,7 +1486,7 @@ $TCA['tx_seminars_attendances'] = array(
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_attendances_lodgings_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_lodgings'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_lodgings'),
 			),
 		),
 		'accommodation' => array(
@@ -1511,7 +1511,7 @@ $TCA['tx_seminars_attendances'] = array(
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_attendances_checkboxes_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_checkboxes'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_checkboxes'),
 			),
 		),
 		'interests' => array(
@@ -1632,7 +1632,7 @@ $TCA['tx_seminars_attendances'] = array(
 				'items' => array(
 					'' => '',
 				),
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_payment_methods'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_payment_methods'),
 			),
 		),
 		'account_number' => array(
@@ -2209,7 +2209,7 @@ $TCA['tx_seminars_timeslots'] = array(
 				'minitems' => 0,
 				'maxitems' => 999,
 				'MM' => 'tx_seminars_timeslots_speakers_mm',
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_speakers'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_speakers'),
 			),
 		),
 		'place' => array(
@@ -2226,7 +2226,7 @@ $TCA['tx_seminars_timeslots'] = array(
 				'items' => array(
 					'' => '',
 				),
-				'wizards' => tx_seminars_tableReplace($tempWizard, 'tx_seminars_sites'),
+				'wizards' => txSeminarsReplaceTables($tempWizard, 'tx_seminars_sites'),
 			),
 		),
 		'room' => array(

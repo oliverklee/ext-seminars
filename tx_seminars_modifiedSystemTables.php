@@ -3,7 +3,7 @@ if (!defined ('TYPO3_MODE')) {
 	die('Access denied.');
 }
 
-if (!function_exists('tx_seminars_tableRelations')) {
+if (!function_exists('txSeminarsGetTableRelationsClause')) {
 	/**
 	 * Returns the WHERE clause part to limit the entries to the records stored
 	 * with the general record storage PID.
@@ -14,7 +14,7 @@ if (!function_exists('tx_seminars_tableRelations')) {
 	 *                empty if the storage PID should not be used to filter the
 	 *                select options
 	 */
-	function tx_seminars_tableRelations($tableName) {
+	function txSeminarsGetTableRelationsClause($tableName) {
 		if (!tx_oelib_configurationProxy::getInstance('seminars')
 			->getAsBoolean('useStoragePid')
 		) {
@@ -120,7 +120,7 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 					'internal_type' => 'db',
 					'allowed' => 'tx_seminars_categories',
 					'foreign_table' => 'tx_seminars_categories',
-					'foreign_table_where' => tx_seminars_tableRelations(
+					'foreign_table_where' => txSeminarsGetTableRelationsClause(
 						'tx_seminars_categories'
 					),
 					'size' => 10,
@@ -154,7 +154,7 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 					'size' => 1,
 					'minitems' => 0,
 					'maxitems' => 1,
-					'foreign_table_where' => tx_seminars_tableRelations(
+					'foreign_table_where' => txSeminarsGetTableRelationsClause(
 						'tx_seminars_organizers'
 					),
 					'items' => array(

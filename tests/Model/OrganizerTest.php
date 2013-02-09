@@ -354,7 +354,10 @@ class tx_seminars_Model_OrganizerTest extends tx_phpunit_testcase {
 	// Tests concerning the description
 	/////////////////////////////////////
 
-	public function test_hasDescription_ForOrganizerWithoutDescription_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasDescriptionForOrganizerWithoutDescriptionReturnsFalse() {
 		$this->fixture->setData(array('description' => ''));
 
 		$this->assertFalse(
@@ -362,7 +365,10 @@ class tx_seminars_Model_OrganizerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_hasDescription_ForOrganizerWithDescription_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasDescriptionForOrganizerWithDescriptionReturnsTrue() {
 		$this->fixture->setData(array('description' => 'foo'));
 
 		$this->assertTrue(
@@ -370,7 +376,10 @@ class tx_seminars_Model_OrganizerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getDescription_ForOrganizerWithoutDescription_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getDescriptionForOrganizerWithoutDescriptionReturnsEmptyString() {
 		$this->fixture->setData(array('description' => ''));
 
 		$this->assertEquals(
@@ -379,7 +388,10 @@ class tx_seminars_Model_OrganizerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getDescription_ForOrganizerWithDescription_ReturnsDescription() {
+	/**
+	 * @test
+	 */
+	public function getDescriptionForOrganizerWithDescriptionReturnsDescription() {
 		$this->fixture->setData(array('description' => 'foo'));
 
 		$this->assertEquals(

@@ -312,7 +312,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	// Tests for the utility functions
 	////////////////////////////////////
 
-	public function testCreateFrontEndPagesCreatesNonZeroLoginPageUid() {
+	/**
+	 * @test
+	 */
+	public function createFrontEndPagesCreatesNonZeroLoginPageUid() {
 		$this->createFrontEndPages();
 
 		$this->assertGreaterThan(
@@ -531,7 +534,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetLinkToRegistrationOrLoginPage_WithLoggedInUserAndSeminarWithoutDate_HasLinkWithPrebookLabel() {
+	/**
+	 * @test
+	 */
+	public function getLinkToRegistrationOrLoginPageWithLoggedInUserAndSeminarWithoutDateHasLinkWithPrebookingLabel() {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 		$this->seminar->setBeginDate(0);
@@ -544,7 +550,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetLinkToRegistrationOrLoginPage_WithLoggedInUserSeminarWithoutDateAndNoVacancies_ContainsRegistrationLabel() {
+	/**
+	 * @test
+	 */
+	public function getLinkToRegistrationOrLoginPageWithLoggedInUserSeminarWithoutDateAndNoVacanciesContainsRegistrationLabel() {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 		$this->seminar->setBeginDate(0);
@@ -559,7 +568,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetLinkToRegistrationOrLoginPage_WithLoggedInUserAndFullyBookedSeminarWithQueue_ContainsQueueRegistrationLabel() {
+	/**
+	 * @test
+	 */
+	public function getLinkToRegistrationOrLoginPageWithLoggedInUserAndFullyBookedSeminarWithQueueContainsQueueRegistrationLabel() {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 		$this->seminar->setBeginDate($GLOBALS['EXEC_SIM_TIME'] + 45);
@@ -575,7 +587,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetLinkToRegistrationOrLoginPage_WithLoggedOutUserAndFullyBookedSeminarWithQueue_ContainsQueueRegistrationLabel() {
+	/**
+	 * @test
+	 */
+	public function getLinkToRegistrationOrLoginPageWithLoggedOutUserAndFullyBookedSeminarWithQueueContainsQueueRegistrationLabel() {
 		$this->createFrontEndPages();
 		$this->seminar->setBeginDate($GLOBALS['EXEC_SIM_TIME'] + 45);
 		$this->seminar->setNumberOfAttendances(5);
@@ -624,7 +639,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetRegistrationLink_ForLoggedInUserAndFullyBookedSeminar_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationLinkForLoggedInUserAndFullyBookedSeminarReturnsEmptyString() {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 
@@ -638,7 +656,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetRegistrationLink_ForLoggedOutUserAndFullyBookedSeminar_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationLinkForLoggedOutUserAndFullyBookedSeminarReturnsEmptyString() {
 		$this->createFrontEndPages();
 
 		$this->createBookedOutSeminar();
@@ -701,7 +722,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetRegistrationLink_ForLoggedInUserAndSeminarWithUnlimitedVacancies_ReturnsLinkWithSeminarUid() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationLinkForLoggedInUserAndSeminarWithUnlimitedVacanciesReturnsLinkWithSeminarUid() {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 		$this->seminar->setUnlimitedVacancies();
@@ -712,7 +736,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetRegistrationLink_ForLoggedOutUserAndSeminarWithUnlimitedVacancies_ReturnsLoginLink() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationLinkForLoggedOutUserAndSeminarWithUnlimitedVacanciesReturnsLoginLink() {
 		$this->createFrontEndPages();
 		$this->seminar->setUnlimitedVacancies();
 
@@ -722,7 +749,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetRegistrationLink_ForLoggedInUserAndFullyBookedSeminarWithQueueEnabled_ReturnsLinkWithSeminarUid() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationLinkForLoggedInUserAndFullyBookedSeminarWithQueueEnabledReturnsLinkWithSeminarUid() {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 		$this->seminar->setNeedsRegistration(TRUE);
@@ -736,7 +766,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetRegistrationLink_ForLoggedOutUserAndFullyBookedSeminarWithQueueEnabled_ReturnsLoginLink() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationLinkForLoggedOutUserAndFullyBookedSeminarWithQueueEnabledReturnsLoginLink() {
 		$this->createFrontEndPages();
 		$this->seminar->setNeedsRegistration(TRUE);
 		$this->seminar->setAttendancesMax(1);
@@ -1820,7 +1853,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	// Tests concerning canRegisterSeats
 	//////////////////////////////////////
 
-	public function test_CanRegisterSeats_ForFullyBookedEventAndZeroSeatsGiven_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForFullyBookedEventAndZeroSeatsGivenReturnsFalse() {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
 
@@ -1829,7 +1865,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForFullyBookedEventAndOneSeatGiven_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForFullyBookedEventAndOneSeatGivenReturnsFalse() {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
 
@@ -1838,7 +1877,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForFullyBookedEventAndEmptyStringGiven_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForFullyBookedEventAndEmptyStringGivenReturnsFalse() {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
 
@@ -1847,7 +1889,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForFullyBookedEventAndInvalidStringGiven_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForFullyBookedEventAndInvalidStringGivenReturnsFalse() {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
 
@@ -1856,7 +1901,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForEventWithOneVacancyAndZeroSeatsGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithOneVacancyAndZeroSeatsGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 
 		$this->assertTrue(
@@ -1865,7 +1913,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	}
 
 
-	public function test_CanRegisterSeats_ForEventWithOneVacancyAndOneSeatGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithOneVacancyAndOneSeatGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 
 		$this->assertTrue(
@@ -1873,7 +1924,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForEventWithOneVacancyAndTwoSeatsGiven_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithOneVacancyAndTwoSeatsGivenReturnsFalse() {
 		$this->seminar->setAttendancesMax(1);
 
 		$this->assertFalse(
@@ -1881,7 +1935,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForEventWithOneVacancyAndEmptyStringGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithOneVacancyAndEmptyStringGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 
 		$this->assertTrue(
@@ -1889,7 +1946,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForEventWithOneVacancyAndInvalidStringGiven_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithOneVacancyAndInvalidStringGivenReturnsFalse() {
 		$this->seminar->setAttendancesMax(1);
 
 		$this->assertFalse(
@@ -1897,7 +1957,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForEventWithTwoVacanciesAndOneSeatGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithTwoVacanciesAndOneSeatGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(2);
 
 		$this->assertTrue(
@@ -1905,7 +1968,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForEventWithTwoVacanciesAndTwoSeatsGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithTwoVacanciesAndTwoSeatsGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(2);
 
 		$this->assertTrue(
@@ -1913,7 +1979,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForEventWithTwoVacanciesAndThreeSeatsGiven_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithTwoVacanciesAndThreeSeatsGivenReturnsFalse() {
 		$this->seminar->setAttendancesMax(2);
 
 		$this->assertFalse(
@@ -1921,7 +1990,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForEventWithUnlimitedVacanciesAndZeroSeatsGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithUnlimitedVacanciesAndZeroSeatsGivenReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 
 		$this->assertTrue(
@@ -1929,7 +2001,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForEventWithUnlimitedVacanciesAndOneSeatGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithUnlimitedVacanciesAndOneSeatGivenReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 
 		$this->assertTrue(
@@ -1937,7 +2012,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForEventWithUnlimitedVacanciesAndTwoSeatsGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithUnlimitedVacanciesAndTwoSeatsGivenReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 
 		$this->assertTrue(
@@ -1945,7 +2023,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForEventWithUnlimitedVacanciesAndFortytwoSeatsGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithUnlimitedVacanciesAndFortytwoSeatsGivenReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 
 		$this->assertTrue(
@@ -1953,7 +2034,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForFullyBookedEventWithQueueAndZeroSeatsGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForFullyBookedEventWithQueueAndZeroSeatsGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setRegistrationQueue(TRUE);
@@ -1963,7 +2047,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForFullyBookedEventWithQueueAndOneSeatGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForFullyBookedEventWithQueueAndOneSeatGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setRegistrationQueue(TRUE);
@@ -1973,7 +2060,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForFullyBookedEventWithQueueAndTwoSeatsGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForFullyBookedEventWithQueueAndTwoSeatsGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setRegistrationQueue(TRUE);
@@ -1983,7 +2073,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForFullyBookedEventWithQueueAndEmptyStringGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForFullyBookedEventWithQueueAndEmptyStringGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setRegistrationQueue(TRUE);
@@ -1993,7 +2086,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanRegisterSeats_ForEventWithTwoVacanciesAndWithQueueAndFortytwoSeatsGiven_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canRegisterSeatsForEventWithTwoVacanciesAndWithQueueAndFortytwoSeatsGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(2);
 		$this->seminar->setRegistrationQueue(TRUE);
 
@@ -3833,7 +3929,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyOrganizers_IncludesHelloIfNotHidden() {
+	/**
+	 * @test
+	 */
+	public function notifyOrganizersIncludesHelloIfNotHidden() {
 		$registration = $this->createRegistration();
 		$this->fixture->setConfigurationValue('sendNotification', TRUE);
 		$this->fixture->setConfigurationValue(
@@ -3851,7 +3950,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyOrganizers_ForEventWithOneVacancy_ShowsVacanciesLabelWithVacancyNumber() {
+	/**
+	 * @test
+	 */
+	public function notifyOrganizersForEventWithOneVacancyShowsVacanciesLabelWithVacancyNumber() {
 		$this->fixture->setConfigurationValue('sendNotification', TRUE);
 		$this->fixture->setConfigurationValue(
 			'showSeminarFieldsInNotificationMail', 'vacancies'
@@ -3873,7 +3975,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyOrganizers_ForEventWithUnlimitedVacancies_ShowsVacanciesLabelWithUnlimtedLabel() {
+	/**
+	 * @test
+	 */
+	public function notifyOrganizersForEventWithUnlimitedVacanciesShowsVacanciesLabelWithUnlimtedLabel() {
 		$this->fixture->setConfigurationValue('sendNotification', TRUE);
 		$this->fixture->setConfigurationValue(
 			'showSeminarFieldsInNotificationMail', 'vacancies'
@@ -3896,7 +4001,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyOrganizers_ForRegistrationWithCompany_ShowsLabelOfCompany() {
+	/**
+	 * @test
+	 */
+	public function notifyOrganizersForRegistrationWithCompanyShowsLabelOfCompany() {
 		$this->fixture->setConfigurationValue('sendNotification', TRUE);
 		$this->fixture->setConfigurationValue(
 			'showAttendanceFieldsInNotificationMail', 'company'
@@ -3925,7 +4033,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NotifyOrganizers_ForRegistrationWithCompany_ShowsCompanyOfRegistration() {
+	/**
+	 * @test
+	 */
+	public function notifyOrganizersForRegistrationWithCompanyShowsCompanyOfRegistration() {
 		$this->fixture->setConfigurationValue('sendNotification', TRUE);
 		$this->fixture->setConfigurationValue(
 			'showAttendanceFieldsInNotificationMail', 'company'
@@ -3959,7 +4070,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	// Tests concerning sendAdditionalNotification
 	////////////////////////////////////////////////
 
-	public function test_SendAdditionalNotification_CanSendEmailToOneOrganizer() {
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationCanSendEmailToOneOrganizer() {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 		$registration->__destruct();
@@ -3971,7 +4085,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SendAdditionalNotification_CanSendEmailsToTwoOrganizers() {
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationCanSendEmailsToTwoOrganizers() {
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
 			array(
@@ -4001,7 +4118,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SendAdditionalNotification_UsesTheFirstOrganizerAsSenderIfEmailIsSentToTwoOrganizers() {
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationUsesTheFirstOrganizerAsSenderIfEmailIsSentToTwoOrganizers() {
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
 			array(
@@ -4035,7 +4155,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesSendsEnoughAttendancesMail() {
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForEventWithEnoughAttendancesSendsEnoughAttendancesMail() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('attendees_min' => 1, 'attendees_max' => 42)
@@ -4065,7 +4188,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SendAdditionalNotification_ForEventWithZeroAttendeesMin_DoesNotSendAnyMail() {
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForEventWithZeroAttendeesMinDoesNotSendAnyMail() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('attendees_min' => 0, 'attendees_max' => 42)
@@ -4089,7 +4215,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SendAdditionalNotification_ForBookedOutEventSendsEmailWithBookedOutSubject() {
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutSubject() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('attendees_max' => 1)
@@ -4111,7 +4240,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SendAdditionalNotification_ForBookedOutEventSendsEmailWithBookedOutMessage() {
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutMessage() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('attendees_max' => 1)
@@ -4128,7 +4260,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SendAdditionalNotification_ForEventWithNotEnoughAttendancesAndNotBookedOutSendsNoEmail() {
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForEventWithNotEnoughAttendancesAndNotBookedOutSendsNoEmail() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(),
 			array('attendees_min' => 5, 'attendees_max' => 5)
@@ -4153,7 +4288,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesAndUnlimitedVacancies_SendsEmail() {
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForEventWithEnoughAttendancesAndUnlimitedVacanciesSendsEmail() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(),
 			array(
@@ -4174,7 +4312,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesAndOneVacancy_ShowsVacanciesLabelWithVacancyNumber() {
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForEventWithEnoughAttendancesAndOneVacancyShowsVacanciesLabelWithVacancyNumber() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(),
 			array(
@@ -4199,7 +4340,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SendAdditionalNotification_ForEventWithEnoughAttendancesAndUnlimitedVacancies_ShowsVacanciesLabelWithUnlimitedLabel() {
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForEventWithEnoughAttendancesAndUnlimitedVacanciesShowsVacanciesLabelWithUnlimitedLabel() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminar->getUid(),
 			array(
@@ -4230,7 +4374,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	// Tests concerning allowsRegistrationByDate
 	//////////////////////////////////////////////
 
-	public function test_allowsRegistrationByDate_ForEventWithoutDateAndRegistrationForEventsWithoutDateAllowed_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function allowsRegistrationByDateForEventWithoutDateAndRegistrationForEventsWithoutDateAllowedReturnsTrue() {
 		$this->seminar->setAllowRegistrationForEventsWithoutDate(1);
 		$this->seminar->setBeginDate(0);
 
@@ -4239,7 +4386,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_allowsRegistrationByDate_ForEventWithoutDateAndRegistrationForEventsWithoutDateNotAllowed_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function allowsRegistrationByDateForEventWithoutDateAndRegistrationForEventsWithoutDateNotAllowedReturnsFalse() {
 		$this->seminar->setAllowRegistrationForEventsWithoutDate(0);
 		$this->seminar->setBeginDate(0);
 
@@ -4248,7 +4398,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_allowsRegistrationByDate_ForBeginDateAndRegistrationDeadlineOver_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function allowsRegistrationByDateForBeginDateAndRegistrationDeadlineOverReturnsFalse() {
 		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 		$this->seminar->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 42);
 
@@ -4257,7 +4410,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_allowsRegistrationByDate_ForBeginDateAndRegistrationDeadlineInFuture_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function allowsRegistrationByDateForBeginDateAndRegistrationDeadlineInFutureReturnsTrue() {
 		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 		$this->seminar->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] + 42);
 
@@ -4266,7 +4422,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_allowsRegistrationByDateForRegistrationBeginInFuture_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function allowsRegistrationByDateForRegistrationBeginInFutureReturnsFalse() {
 		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 		$this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] + 10);
 
@@ -4275,7 +4434,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_allowsRegistrationByDate_ForRegistrationBeginInPast_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function allowsRegistrationByDateForRegistrationBeginInPastReturnsTrue() {
 		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 		$this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] - 42);
 
@@ -4284,7 +4446,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_allowsRegistrationByDate_ForNoRegistrationBegin_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function allowsRegistrationByDateForNoRegistrationBeginReturnsTrue() {
 		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 		$this->seminar->setRegistrationBeginDate(0);
 
@@ -4293,7 +4458,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_allowsRegistrationByDate_ForBeginDateInPastAndRegistrationBeginInPast_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function allowsRegistrationByDateForBeginDateInPastAndRegistrationBeginInPastReturnsFalse() {
 		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 42);
 		$this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] - 50);
 
@@ -4307,7 +4475,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	// Tests concerning allowsRegistrationBySeats
 	///////////////////////////////////////////////
 
-	public function test_allowsRegistrationBySeats_ForEventWithNoVacanciesAndNoQueue_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function allowsRegistrationBySeatsForEventWithNoVacanciesAndNoQueueReturnsFalse() {
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setRegistrationQueue(FALSE);
@@ -4317,7 +4488,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_allowsRegistrationBySeats_ForEventWithUnlimitedVacancies_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function allowsRegistrationBySeatsForEventWithUnlimitedVacanciesReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 
 		$this->assertTrue(
@@ -4325,7 +4499,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_allowsRegistrationBySeats_ForEventWithRegistrationQueue_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function allowsRegistrationBySeatsForEventWithRegistrationQueueReturnsTrue() {
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setRegistrationQueue(TRUE);
@@ -4335,7 +4512,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_allowsRegistrationBySeats_ForEventWithVacancies_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function allowsRegistrationBySeatsForEventWithVacanciesReturnsTrue() {
 		$this->seminar->setNumberOfAttendances(0);
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setRegistrationQueue(FALSE);
@@ -4350,7 +4530,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 	// Tests concerning registrationHasStarted
 	////////////////////////////////////////////
 
-	public function test_registrationHasStarted_ForEventWithoutRegistrationBegin_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function registrationHasStartedForEventWithoutRegistrationBeginReturnsTrue() {
 		$this->seminar->setRegistrationBeginDate(0);
 
 		$this->assertTrue(
@@ -4358,7 +4541,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_registrationHasStarted_ForEventWithRegistrationBeginInPast_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function registrationHasStartedForEventWithRegistrationBeginInPastReturnsTrue() {
 		$this->seminar->setRegistrationBeginDate(
 			$GLOBALS['SIM_EXEC_TIME'] - 42
 		);
@@ -4368,7 +4554,10 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_registrationHasStarted_ForEventWithRegistrationBeginInFuture_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function registrationHasStartedForEventWithRegistrationBeginInFutureReturnsFalse() {
 		$this->seminar->setRegistrationBeginDate(
 			$GLOBALS['SIM_EXEC_TIME'] + 42
 		);

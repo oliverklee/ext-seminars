@@ -74,7 +74,10 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 	// Tests concerning getEntriesFromGeneralStoragePage
 	//////////////////////////////////////////////////////
 
-	public function test_getEntriesFromGeneralStoragePageForUseStoragePidAndStoragePidSet_FindsRecordWithThisPid() {
+	/**
+	 * @test
+	 */
+	public function getEntriesFromGeneralStoragePageForUseStoragePidAndStoragePidSetFindsRecordWithThisPid() {
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsBoolean('useStoragePid', TRUE);
 
@@ -104,7 +107,10 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getEntriesFromGeneralStoragePageForUseStoragePidAndStoragePidSet_DoesNotFindRecordWithOtherPid() {
+	/**
+	 * @test
+	 */
+	public function getEntriesFromGeneralStoragePageForUseStoragePidAndStoragePidSetDoesNotFindRecordWithOtherPid() {
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsBoolean('useStoragePid', TRUE);
 
@@ -133,7 +139,10 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getEntriesFromGeneralStoragePageForUseStoragePidSetAndStoragePidSetOnParentPage_FindsRecordWithThisPid() {
+	/**
+	 * @test
+	 */
+	public function getEntriesFromGeneralStoragePageForUseStoragePidSetAndStoragePidSetOnParentPageFindsRecordWithThisPid() {
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsBoolean('useStoragePid', TRUE);
 
@@ -165,7 +174,10 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getEntriesFromGeneralStoragePageForUseStoragePidSetAndNoStoragePidSet_FindsRecordWithAnyPid() {
+	/**
+	 * @test
+	 */
+	public function getEntriesFromGeneralStoragePageForUseStoragePidSetAndNoStoragePidSetFindsRecordWithAnyPid() {
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsBoolean('useStoragePid', TRUE);
 
@@ -191,7 +203,10 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getEntriesFromGeneralStoragePageForUseStoragePidNotAndStoragePidSet_FindsRecordWithPidOtherThanStoragePid() {
+	/**
+	 * @test
+	 */
+	public function getEntriesFromGeneralStoragePageForUseStoragePidNotAndStoragePidSetFindsRecordWithPidOtherThanStoragePid() {
 		$sysFolderUid = $this->testingFramework->createSystemFolder(
 			0,
 			array('storage_pid' => $this->testingFramework->createSystemFolder())

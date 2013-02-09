@@ -286,7 +286,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationData_ForRegisteredThemselvesZero_ReturnsLabelNo() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForRegisteredThemselvesZeroReturnsLabelNo() {
 		$this->fixture->setRegisteredThemselves(0);
 
 		$this->assertEquals(
@@ -295,7 +298,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationData_ForRegisteredThemselvesOne_ReturnsLabelYes() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForRegisteredThemselvesOneReturnsLabelYes() {
 		$this->fixture->setRegisteredThemselves(1);
 
 		$this->assertEquals(
@@ -304,7 +310,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationDataForNotesWithCarriageReturn_RemovesCarriageReturnFromNotes() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForNotesWithCarriageReturnRemovesCarriageReturnFromNotes() {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData(
 			$seminar, 0, array('notes' => 'foo' . CRLF . 'bar')
@@ -318,7 +327,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar->__destruct();
 	}
 
-	public function test_getRegistrationDataForNotesWithCarriageReturnAndLineFeed_ReturnsNotesWithLinefeedAndNoCarriageReturn() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForNotesWithCarriageReturnAndLineFeedReturnsNotesWithLinefeedAndNoCarriageReturn() {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData(
 			$seminar, 0, array('notes' => 'foo' . CRLF . 'bar')
@@ -332,7 +344,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar->__destruct();
 	}
 
-	public function test_getRegistrationDataForMultipleAttendeeNames_ReturnsAttendeeNamesWithEnumeration() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationDataForMultipleAttendeeNamesReturnsAttendeeNamesWithEnumeration() {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData(
 			$seminar, 0, array('attendees_names' => 'foo' . LF . 'bar')
@@ -703,14 +718,20 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getUserData_ForUserWithName_ReturnsUsersName() {
+	/**
+	 * @test
+	 */
+	public function getUserDataForUserWithNameReturnsUsersName() {
 		$this->assertEquals(
 			'foo_user',
 			$this->fixture->getUserData('name')
 		);
 	}
 
-	public function test_getUserData_ForUserWithOutNameButFirstName_ReturnsFirstName() {
+	/**
+	 * @test
+	 */
+	public function getUserDataForUserWithOutNameButFirstNameReturnsFirstName() {
 		$this->testingFramework->changeRecord(
 			'fe_users', $this->feUserUid,
 			array('name' => '', 'first_name' => 'first_foo')
@@ -722,7 +743,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getUserData_ForUserWithOutNameButLastName_ReturnsLastName() {
+	/**
+	 * @test
+	 */
+	public function getUserDataForUserWithOutNameButLastNameReturnsLastName() {
 		$this->testingFramework->changeRecord(
 			'fe_users', $this->feUserUid,
 			array('name' => '', 'last_name' => 'last_foo')
@@ -734,7 +758,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getUserData_ForUserWithOutNameButFirstAndLastName_ReturnsFirstAndLastName() {
+	/**
+	 * @test
+	 */
+	public function getUserDataForUserWithOutNameButFirstAndLastNameReturnsFirstAndLastName() {
 		$this->testingFramework->changeRecord(
 			'fe_users', $this->feUserUid,
 			array('name' => '', 'first_name' => 'first', 'last_name' => 'last')
@@ -925,7 +952,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	// Tests concerning setRegistrationData
 	/////////////////////////////////////////
 
-	public function test_SetRegistrationData_WithNoFoodOptions_InitializesFoodOptionsAsArray() {
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataWithNoFoodOptionsInitializesFoodOptionsAsArray() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->fixture->setRegistrationData(
@@ -937,7 +967,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SetRegistrationData_FoodOptions_StoresFoodOptionsInFoodsVariable() {
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataForFoodOptionsStoresFoodOptionsInFoodsVariable() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
 		$foods = array('foo' => 'foo', 'bar' => 'bar');
@@ -953,7 +986,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SetRegistrationData_WithEmptyFoodOptions_InitializesFoodOptionsAsArray() {
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataWithEmptyFoodOptionsInitializesFoodOptionsAsArray() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->fixture->setRegistrationData(
@@ -965,7 +1001,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SetRegistrationData_WithNoLodgingOptions_InitializesLodgingOptionsAsArray() {
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataWithNoLodgingOptionsInitializesLodgingOptionsAsArray() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->fixture->setRegistrationData(
@@ -977,7 +1016,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SetRegistrationData_WithLodgingOptions_StoresLodgingOptionsInLodgingVariable() {
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataWithLodgingOptionsStoresLodgingOptionsInLodgingVariable() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
 		$lodgings = array('foo' => 'foo', 'bar' => 'bar');
@@ -993,7 +1035,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SetRegistrationData_WithEmptyLodgingOptions_InitializesLodgingOptionsAsArray() {
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataWithEmptyLodgingOptionsInitializesLodgingOptionsAsArray() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->fixture->setRegistrationData(
@@ -1005,7 +1050,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SetRegistrationData_WithNoCheckboxOptions_InitializesCheckboxOptionsAsArray() {
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataWithNoCheckboxOptionsInitializesCheckboxOptionsAsArray() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->fixture->setRegistrationData(
@@ -1017,7 +1065,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SetRegistrationData_WithCheckboxOptions_StoresCheckboxOptionsInCheckboxVariable() {
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataWithCheckboxOptionsStoresCheckboxOptionsInCheckboxVariable() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
 		$checkboxes = array('foo' => 'foo', 'bar' => 'bar');
@@ -1033,7 +1084,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SetRegistrationData_WithEmptyCheckboxOptions_InitializesCheckboxOptionsAsArray() {
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataWithEmptyCheckboxOptionsInitializesCheckboxOptionsAsArray() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->fixture->setRegistrationData(
@@ -1045,7 +1099,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SetRegistrationData_WithRegisteredThemselvesGiven_StoresRegisteredThemselvesIntoTheObject() {
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataWithRegisteredThemselvesGivenStoresRegisteredThemselvesIntoTheObject() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setRegistrationData(
 			$this->fixture->getSeminarObject(), $userUid,
@@ -1058,7 +1115,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SetRegistrationData_WithCompanyGiven_StoresCompanyIntoTheObject() {
+	/**
+	 * @test
+	 */
+	public function setRegistrationDataWithCompanyGivenStoresCompanyIntoTheObject() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setRegistrationData(
 			$this->fixture->getSeminarObject(), $userUid,
@@ -1590,7 +1650,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	// Tests concerning getEnumeratedAttendeeNames
 	////////////////////////////////////////////////
 
-	public function test_getEnumeratedAttendeeNames_WithUseHtml_SeparatesAttendeesNamesWithListItems() {
+	/**
+	 * @test
+	 */
+	public function getEnumeratedAttendeeNamesWithUseHtmlSeparatesAttendeesNamesWithListItems() {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData(
 			$seminar, 0, array('attendees_names' => 'foo' . LF . 'bar')
@@ -1604,7 +1667,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar->__destruct();
 	}
 
-	public function test_getEnumeratedAttendeeNames_WithUseHtmlAndEmptyAttendeesNames_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getEnumeratedAttendeeNamesWithUseHtmlAndEmptyAttendeesNamesReturnsEmptyString() {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData(
 			$seminar, 0, array('attendees_names' => '')
@@ -1618,7 +1684,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar->__destruct();
 	}
 
-	public function test_getEnumeratedAttendeeNames_WithUsePlainText_SeparatesAttendeesNamesWithLineFeed() {
+	/**
+	 * @test
+	 */
+	public function getEnumeratedAttendeeNamesWithUsePlainTextSeparatesAttendeesNamesWithLineFeed() {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData(
 			$seminar, 0, array('attendees_names' => 'foo' . LF . 'bar')
@@ -1632,7 +1701,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar->__destruct();
 	}
 
-	public function test_getEnumeratedAttendeeNames_WithUsePlainTextAndEmptyAttendeesNames_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getEnumeratedAttendeeNamesWithUsePlainTextAndEmptyAttendeesNamesReturnsEmptyString() {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData(
 			$seminar, 0, array('attendees_names' => '')
@@ -1646,7 +1718,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar->__destruct();
 	}
 
-	public function test_getEnumeratedAttendeeNames_ForSelfRegisteredUserAndNoAttendeeNames_ReturnsUsersName() {
+	/**
+	 * @test
+	 */
+	public function getEnumeratedAttendeeNamesForSelfRegisteredUserAndNoAttendeeNamesReturnsUsersName() {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData(
 			$seminar, $this->feUserUid, array('attendees_names' => '')
@@ -1661,7 +1736,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar->__destruct();
 	}
 
-	public function test_getEnumeratedAttendeeNames_ForSelfRegisteredUserAndAttendeeNames_ReturnsUserInFirstPosition() {
+	/**
+	 * @test
+	 */
+	public function getEnumeratedAttendeeNamesForSelfRegisteredUserAndAttendeeNamesReturnsUserInFirstPosition() {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData(
 			$seminar, $this->feUserUid, array('attendees_names' => 'foo')
@@ -1681,7 +1759,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	// Tests concerning hasRegisteredMySelf
 	/////////////////////////////////////////
 
-	public function test_hasRegisteredMySelf_ForRegisteredThemselvesFalse_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasRegisteredMySelfForRegisteredThemselvesFalseReturnsFalse() {
 		$this->fixture->setRegisteredThemselves(0);
 
 		$this->assertFalse(
@@ -1689,7 +1770,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_hasRegisteredMySelf_ForRegisteredThemselvesTrue_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasRegisteredMySelfForRegisteredThemselvesTrueReturnsTrue() {
 		$this->fixture->setRegisteredThemselves(1);
 
 		$this->assertTrue(

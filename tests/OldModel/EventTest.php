@@ -996,14 +996,20 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	// Tests regarding the ability to register for an event
 	/////////////////////////////////////////////////////////
 
-	public function testCanSomebodyRegisterIsTrueForEventWithFutureDate() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterIsTrueForEventWithFutureDate() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->assertTrue(
 			$this->fixture->canSomebodyRegister()
 		);
 	}
 
-	public function testCanSomebodyRegisterIsTrueForEventWithFutureDateAndRegistrationWithoutDateActivated() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterIsTrueForEventWithFutureDateAndRegistrationWithoutDateActivated() {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
@@ -1013,7 +1019,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanSomebodyRegisterIsFalseForPastEvent() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterIsFalseForPastEvent() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
 		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 		$this->assertFalse(
@@ -1021,7 +1030,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanSomebodyRegisterIsFalseForPastEventWithRegistrationWithoutDateActivated() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterIsFalseForPastEventWithRegistrationWithoutDateActivated() {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
@@ -1032,7 +1044,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanSomebodyRegisterIsFalseForCurrentlyRunningEvent() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterIsFalseForCurrentlyRunningEvent() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->assertFalse(
@@ -1040,7 +1055,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanSomebodyRegisterIsFalseForCurrentlyRunningEventWithRegistrationWithoutDateActivated() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterIsFalseForCurrentlyRunningEventWithRegistrationWithoutDateActivated() {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
@@ -1051,13 +1069,19 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanSomebodyRegisterIsFalseForEventWithoutDate() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterIsFalseForEventWithoutDate() {
 		$this->assertFalse(
 			$this->fixture->canSomebodyRegister()
 		);
 	}
 
-	public function testCanSomebodyRegisterIsTrueForEventWithoutDateAndRegistrationWithoutDateActivated() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterIsTrueForEventWithoutDateAndRegistrationWithoutDateActivated() {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
@@ -1066,7 +1090,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegister_ForEventWithUnlimitedVacanvies_IsTrue() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterForEventWithUnlimitedVacanciesReturnsTrue() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->fixture->setUnlimitedVacancies();
 
@@ -1075,7 +1102,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegister_ForCancelledEvent_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterForCancelledEventReturnsFalse() {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
@@ -1086,7 +1116,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegister_ForEventWithoutNeedeRegistration_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterForEventWithoutNeedeRegistrationReturnsFalse() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 		$this->fixture->setNeedsRegistration(FALSE);
 
@@ -1095,7 +1128,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegister_ForFullyBookedEvent_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterForFullyBookedEventReturnsFalse() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(10);
@@ -1106,7 +1142,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegister_ForEventWithRegistrationQueueAndNoRegularVacancies_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterForEventWithRegistrationQueueAndNoRegularVacanciesReturnsTrue() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(10);
@@ -1118,7 +1157,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegister_ForEventWithRegistrationQueueAndRegularVacancies_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterForEventWithRegistrationQueueAndRegularVacanciesReturnsTrue() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(10);
@@ -1130,7 +1172,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegister_ForEventWithRegistrationBeginInFuture_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterForEventWithRegistrationBeginInFutureReturnsFalse() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setRegistrationBeginDate(
@@ -1142,7 +1187,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegister_ForEventWithRegistrationBeginInPast_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterForEventWithRegistrationBeginInPastReturnsTrue() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setRegistrationBeginDate(
@@ -1154,7 +1202,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegister_ForEventWithoutRegistrationBegin_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterForEventWithoutRegistrationBeginReturnsTrue() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setRegistrationBeginDate(0);
@@ -1170,7 +1221,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	////////////////////////////////////////////////
 
 
-	public function test_CanSomebodyRegisterMessage_EventWithFutureDate_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForEventWithFutureDateReturnsEmptyString() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
 		$this->assertEquals(
@@ -1179,7 +1233,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForPastEvent_ReturnsSeminarRegistrationClosedMessage() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForPastEventReturnsSeminarRegistrationClosedMessage() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
 		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 
@@ -1189,7 +1246,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForPastEventWithRegistrationWithoutDateActivated_ReturnsRegistrationDeadlineOverMessage() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForPastEventWithRegistrationWithoutDateActivatedReturnsRegistrationDeadlineOverMessage() {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
@@ -1202,7 +1262,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForCurrentlyRunningEvent_ReturnsSeminarRegistrationClosesMessage() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForCurrentlyRunningEventReturnsSeminarRegistrationClosesMessage() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
@@ -1212,7 +1275,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForCurrentlyRunningEventWithRegistrationWithoutDateActivated_ReturnsSeminarRegistrationClosesMessage() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForCurrentlyRunningEventWithRegistrationWithoutDateActivatedReturnsSeminarRegistrationClosesMessage() {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
@@ -1225,14 +1291,20 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForEventWithoutDate_ReturnsNoDateMessage() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForEventWithoutDateReturnsNoDateMessage() {
 		$this->assertEquals(
 			$this->fixture->translate('message_noDate'),
 			$this->fixture->canSomebodyRegisterMessage()
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForEventWithoutDateAndRegistrationWithoutDateActivated_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForEventWithoutDateAndRegistrationWithoutDateActivatedReturnsEmptyString() {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 		$this->fixture->setBeginDate(0);
@@ -1244,7 +1316,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForEventWithUnlimitedVacanvies_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForEventWithUnlimitedVacanviesReturnsEmptyString() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->fixture->setUnlimitedVacancies();
 
@@ -1254,7 +1329,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForCancelledEvent_ReturnsSeminarCancelledMessage() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForCancelledEventReturnsSeminarCancelledMessage() {
 		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CANCELED);
 
 		$this->assertEquals(
@@ -1263,7 +1341,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForEventWithoutNeedeRegistration_ReturnsNoRegistrationNecessaryMessage() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForEventWithoutNeedeRegistrationReturnsNoRegistrationNecessaryMessage() {
 		$this->fixture->setNeedsRegistration(FALSE);
 
 		$this->assertEquals(
@@ -1272,7 +1353,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForFullyBookedEvent_ReturnsNoVacanciesMessage() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForFullyBookedEventReturnsNoVacanciesMessage() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(10);
@@ -1284,7 +1368,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForFullyBookedEventWithRegistrationQueue_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForFullyBookedEventWithRegistrationQueueReturnsEmptyString() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(10);
@@ -1297,7 +1384,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForEventWithRegistrationBeginInFuture_ReturnsRegistrationOpensOnMessage() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForEventWithRegistrationBeginInFutureReturnsRegistrationOpensOnMessage() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setRegistrationBeginDate(
@@ -1313,7 +1403,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForEventWithRegistrationBeginInPast_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForEventWithRegistrationBeginInPastReturnsEmptyString() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setRegistrationBeginDate(
@@ -1326,7 +1419,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_CanSomebodyRegisterMessage_ForEventWithoutRegistrationBegin_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function canSomebodyRegisterMessageForEventWithoutRegistrationBeginReturnsEmptyString() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setRegistrationBeginDate(0);
@@ -1541,7 +1637,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	// Tests regarding the registration.
 	//////////////////////////////////////
 
-	public function test_NeedsRegistration_forNeedsRegistrationTrue_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function needsRegistrationForNeedsRegistrationTrueReturnsTrue() {
 		$this->fixture->setNeedsRegistration(TRUE);
 
 		$this->assertTrue(
@@ -1549,7 +1648,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_NeedsRegistration_forNeedsRegistrationFalse_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function needsRegistrationForNeedsRegistrationFalseReturnsFalse() {
 		$this->fixture->setNeedsRegistration(FALSE);
 
 		$this->assertFalse(
@@ -1562,7 +1664,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	// Tests concerning hasUnlimitedVacancies
 	///////////////////////////////////////////
 
-	public function test_HasUnlimitedVacancies_ForNeedsRegistrationTrueAndMaxAttendeesZero_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasUnlimitedVacanciesForNeedsRegistrationTrueAndMaxAttendeesZeroReturnsTrue() {
 		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(0);
 
@@ -1571,7 +1676,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_HasUnlimitedVacancies_ForNeedsRegistrationTrueAndMaxAttendeesOne_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasUnlimitedVacanciesForNeedsRegistrationTrueAndMaxAttendeesOneReturnsFalse() {
 		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(1);
 
@@ -1580,7 +1688,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_HasUnlimitedVacancies_ForNeedsRegistrationFalseAndMaxAttendeesZero_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasUnlimitedVacanciesForNeedsRegistrationFalseAndMaxAttendeesZeroReturnsFalse() {
 		$this->fixture->setNeedsRegistration(FALSE);
 		$this->fixture->setAttendancesMax(0);
 
@@ -1589,7 +1700,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_HasUnlimitedVacancies_ForNeedsRegistrationFalseAndMaxAttendeesOne_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasUnlimitedVacanciesForNeedsRegistrationFalseAndMaxAttendeesOneReturnsFalse() {
 		$this->fixture->setNeedsRegistration(FALSE);
 		$this->fixture->setAttendancesMax(1);
 
@@ -1603,7 +1717,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	// Tests concerning isFull
 	////////////////////////////
 
-	public function test_IsFull_ForUnlimitedVacanciesAndZeroAttendances_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function isFullForUnlimitedVacanciesAndZeroAttendancesReturnsFalse() {
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setNumberOfAttendances(0);
 
@@ -1612,7 +1729,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_IsFull_ForUnlimitedVacanciesAndOneAttendance_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function isFullForUnlimitedVacanciesAndOneAttendanceReturnsFalse() {
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setNumberOfAttendances(1);
 
@@ -1621,7 +1741,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_IsFull_ForOneVacancyAndNoAttendances_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function isFullForOneVacancyAndNoAttendancesReturnsFalse() {
 		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(1);
 		$this->fixture->setNumberOfAttendances(0);
@@ -1631,7 +1754,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_IsFull_ForOneVacancyAndOneAttendance_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function isFullForOneVacancyAndOneAttendanceReturnsTrue() {
 		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(1);
 		$this->fixture->setNumberOfAttendances(1);
@@ -1641,7 +1767,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_IsFull_ForTwoVacanciesAndOneAttendance_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function isFullForTwoVacanciesAndOneAttendanceReturnsFalse() {
 		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(2);
 		$this->fixture->setNumberOfAttendances(1);
@@ -1651,7 +1780,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_IsFull_ForTwoVacanciesAndTwoAttendances_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function isFullForTwoVacanciesAndTwoAttendancesReturnsTrue() {
 		$this->fixture->setNeedsRegistration(TRUE);
 		$this->fixture->setAttendancesMax(2);
 		$this->fixture->setNumberOfAttendances(2);
@@ -2139,7 +2271,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	// Tests concerning hasRegistrationQueue
 	//////////////////////////////////////////
 
-	public function test_hasRegistrationQueue_WithQueue_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasRegistrationQueueWithQueueReturnsTrue() {
 		$this->fixture->setRegistrationQueue(TRUE);
 
 		$this->assertTrue(
@@ -2147,7 +2282,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_hasRegistrationQueue_WithoutQueue_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasRegistrationQueueWithoutQueueReturnsFalse() {
 			$this->fixture->setRegistrationQueue(FALSE);
 
 		$this->assertFalse(
@@ -2618,7 +2756,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanHaveOnePaymentMethod() {
+	/**
+	 * @test
+	 */
+	public function canHaveOnePaymentMethod() {
 		$this->addPaymentMethodRelation(array());
 
 		$this->assertTrue(
@@ -2972,7 +3113,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanHaveOneOrganizingPartner() {
+	/**
+	 * @test
+	 */
+	public function canHaveOneOrganizingPartner() {
 		$this->addOrganizingPartnerRelation(array());
 
 		$this->assertTrue(
@@ -3039,7 +3183,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanHaveTwoCategories() {
+	/**
+	 * @test
+	 */
+	public function canHaveTwoCategories() {
 		$categoryUid1 = $this->addCategoryRelation(array('title' => 'Test 1'));
 		$categoryUid2 = $this->addCategoryRelation(array('title' => 'Test 2'));
 
@@ -3162,7 +3309,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanHaveOneOrganizer() {
+	/**
+	 * @test
+	 */
+	public function canHaveOneOrganizer() {
 		$this->addOrganizerRelation(array());
 
 		$this->assertTrue(
@@ -3689,7 +3839,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanHaveOneSpeaker() {
+	/**
+	 * @test
+	 */
+	public function canHaveOneSpeaker() {
 		$this->addSpeakerRelation(array());
 		$this->assertTrue(
 			$this->fixture->hasSpeakers()
@@ -3702,7 +3855,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanHaveOnePartner() {
+	/**
+	 * @test
+	 */
+	public function canHaveOnePartner() {
 		$this->addPartnerRelation(array());
 		$this->assertTrue(
 			$this->fixture->hasPartners()
@@ -3715,7 +3871,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanHaveOneTutor() {
+	/**
+	 * @test
+	 */
+	public function canHaveOneTutor() {
 		$this->addTutorRelation(array());
 		$this->assertTrue(
 			$this->fixture->hasTutors()
@@ -3728,7 +3887,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCanHaveOneLeader() {
+	/**
+	 * @test
+	 */
+	public function canHaveOneLeader() {
 		$this->addLeaderRelation(array());
 		$this->assertTrue(
 			$this->fixture->hasLeaders()
@@ -4775,13 +4937,19 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	// Tests concerning getPlaces
 	///////////////////////////////
 
-	public function test_getPlacesForEventWithNoPlaces_ReturnsEmptyList() {
+	/**
+	 * @test
+	 */
+	public function getPlacesForEventWithNoPlacesReturnsEmptyList() {
 		$this->assertTrue(
 			$this->fixture->getPlaces() instanceof tx_oelib_List
 		);
 	}
 
-	public function test_getPlaces_ForSeminarWithOnePlaces_ReturnsListWithPlaceModel() {
+	/**
+	 * @test
+	 */
+	public function getPlacesForSeminarWithOnePlacesReturnsListWithPlaceModel() {
 		$this->addPlaceRelation();
 
 		$this->assertTrue(
@@ -4789,7 +4957,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getPlaces_ForSeminarWithOnePlaces_ReturnsListWithOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlacesForSeminarWithOnePlacesReturnsListWithOnePlace() {
 		$this->addPlaceRelation();
 
 		$this->assertEquals(
@@ -6718,28 +6889,40 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	// Tests concerning dumpSeminarValues
 	///////////////////////////////////////
 
-	public function test_dumpSeminarValues_ForTitleGiven_ReturnsTitle() {
+	/**
+	 * @test
+	 */
+	public function dumpSeminarValuesForTitleGivenReturnsTitle() {
 		$this->assertContains(
 			$this->fixture->getTitle(),
 			$this->fixture->dumpSeminarValues('title')
 		);
 	}
 
-	public function test_dumpSeminarValues_ForTitleGiven_ReturnsLabelForTitle() {
+	/**
+	 * @test
+	 */
+	public function dumpSeminarValuesForTitleGivenReturnsLabelForTitle() {
 		$this->assertContains(
 			$this->fixture->translate('label_title'),
 			$this->fixture->dumpSeminarValues('title')
 		);
 	}
 
-	public function test_dumpSeminarValues_ForTitleGiven_ReturnsTitleWithLineFeedAtEndOfLine() {
+	/**
+	 * @test
+	 */
+	public function dumpSeminarValuesForTitleGivenReturnsTitleWithLineFeedAtEndOfLine() {
 		$this->assertRegexp(
 			'/\n$/',
 			$this->fixture->dumpSeminarValues('title')
 		);
 	}
 
-	public function test_dumpSeminarValues_ForTitleAndDescriptionGiven_ReturnsTitleAndDescription() {
+	/**
+	 * @test
+	 */
+	public function dumpSeminarValuesForTitleAndDescriptionGivenReturnsTitleAndDescription() {
 		$this->fixture->setDescription('foo bar');
 
 		$this->assertRegexp(
@@ -6749,7 +6932,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_dumpSeminarValues_ForEventWithoutDescriptionAndDescriptionGiven_ReturnsDescriptionLabelWithColonsAndLineFeed() {
+	/**
+	 * @test
+	 */
+	public function dumpSeminarValuesForEventWithoutDescriptionAndDescriptionGivenReturnsDescriptionLabelWithColonsAndLineFeed() {
 		$this->fixture->setDescription('');
 
 		$this->assertEquals(
@@ -6758,7 +6944,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_dumpSeminarValues_ForEventWithNoVacanciesAndVacanciesGiven_ReturnsVacanciesLabelWithNumber() {
+	/**
+	 * @test
+	 */
+	public function dumpSeminarValuesForEventWithNoVacanciesAndVacanciesGivenReturnsVacanciesLabelWithNumber() {
 		$this->fixture->setNumberOfAttendances(2);
 		$this->fixture->setAttendancesMax(2);
 		$this->fixture->setNeedsRegistration(TRUE);
@@ -6769,7 +6958,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_dumpSeminarValues_ForEventWithOneVacancyAndVacanciesGiven_ReturnsNumberOfVacancies() {
+	/**
+	 * @test
+	 */
+	public function dumpSeminarValuesForEventWithOneVacancyAndVacanciesGivenReturnsNumberOfVacancies() {
 		$this->fixture->setNumberOfAttendances(1);
 		$this->fixture->setAttendancesMax(2);
 		$this->fixture->setNeedsRegistration(TRUE);
@@ -6780,7 +6972,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_dumpSeminarValues_ForEventWithUnlimitedVacanciesAndVacanciesGiven_ReturnsVacanciesUnlimitedString() {
+	/**
+	 * @test
+	 */
+	public function dumpSeminarValuesForEventWithUnlimitedVacanciesAndVacanciesGivenReturnsVacanciesUnlimitedString() {
 		$this->fixture->setUnlimitedVacancies();
 
 		$this->assertEquals(
@@ -6795,7 +6990,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	// Tests regarding the registration begin date
 	////////////////////////////////////////////////
 
-	public function test_hasRegistrationBegin_ForNoRegistrationBegin_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasRegistrationBeginForNoRegistrationBeginReturnsFalse() {
 		$this->fixture->setRegistrationBeginDate(0);
 
 		$this->assertFalse(
@@ -6803,7 +7001,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_hasRegistrationBegin_ForEventWithRegistrationBegin_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasRegistrationBeginForEventWithRegistrationBeginReturnsTrue() {
 		$this->fixture->setRegistrationBeginDate(42);
 
 		$this->assertTrue(
@@ -6811,7 +7012,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationBeginAsUnixTimestamp_ForEventWithoutRegistrationBegin_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationBeginAsUnixTimestampForEventWithoutRegistrationBeginReturnsZero() {
 		$this->fixture->setRegistrationBeginDate(0);
 
 		$this->assertEquals(
@@ -6820,7 +7024,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationBeginAsUnixTimestamp_ForEventWithRegistrationBegin_ReturnsRegistrationBeginAsUnixTimestamp() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationBeginAsUnixTimestampForEventWithRegistrationBeginReturnsRegistrationBeginAsUnixTimestamp() {
 		$this->fixture->setRegistrationBeginDate(42);
 
 		$this->assertEquals(
@@ -6829,7 +7036,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationBegin_ForEventWithoutRegistrationBegin_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationBeginForEventWithoutRegistrationBeginReturnsEmptyString() {
 		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
 		$this->fixture->setConfigurationValue('timeFormat', '%H:%M');
 
@@ -6841,7 +7051,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getRegistrationBegin_ForEventWithRegistrationBegin_ReturnsFormattedRegistrationBegin() {
+	/**
+	 * @test
+	 */
+	public function getRegistrationBeginForEventWithRegistrationBeginReturnsFormattedRegistrationBegin() {
 		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
 		$this->fixture->setConfigurationValue('timeFormat', '%H:%M');
 
@@ -7107,13 +7320,19 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	// Tests concerning hasOfflineRegistrations
 	/////////////////////////////////////////////
 
-	public function test_hasOfflineRegistrations_ForEventWithoutOfflineRegistrations_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasOfflineRegistrationsForEventWithoutOfflineRegistrationsReturnsFalse() {
 		$this->assertFalse(
 			$this->fixture->hasOfflineRegistrations()
 		);
 	}
 
-	public function test_hasOfflineRegistrations_ForEventWithTwoOfflineRegistrations_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasOfflineRegistrationsForEventWithTwoOfflineRegistrationsReturnsTrue() {
 		$this->fixture->setOfflineRegistrationNumber(2);
 
 		$this->assertTrue(
@@ -7126,14 +7345,20 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	// Tests concerning getOfflineRegistrations
 	/////////////////////////////////////////////
 
-	public function test_getOfflineRegistrations_ForEventWithoutOfflineRegistrations_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getOfflineRegistrationsForEventWithoutOfflineRegistrationsReturnsZero() {
 		$this->assertEquals(
 			0,
 			$this->fixture->getOfflineRegistrations()
 		);
 	}
 
-	public function test_getOfflineRegistrations_ForEventWithTwoOfflineRegistrations_ReturnsTwo() {
+	/**
+	 * @test
+	 */
+	public function getOfflineRegistrationsForEventWithTwoOfflineRegistrationsReturnsTwo() {
 		$this->fixture->setOfflineRegistrationNumber(2);
 
 		$this->assertEquals(
@@ -7147,7 +7372,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	// Tests concerning calculateStatistics
 	/////////////////////////////////////////
 
-	public function test_calculateStatistics_ForEventWithOfflineRegistrationsAndRegularRegistrations_CalculatesCumulatedAttendeeNumber() {
+	/**
+	 * @test
+	 */
+	public function calculateStatisticsForEventWithOfflineRegistrationsAndRegularRegistrationsCalculatesCumulatedAttendeeNumber() {
 		$this->fixture->setOfflineRegistrationNumber(1);
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
@@ -7164,7 +7392,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_calculateStatistics_ForEventWithOnePaidRegistration_SetsOnePaidAttendance() {
+	/**
+	 * @test
+	 */
+	public function calculateStatisticsForEventWithOnePaidRegistrationSetsOnePaidAttendance() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
@@ -7181,7 +7412,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_calculateStatistics_ForEventWithTwoAttendeesOnQueue_SetsTwoAttendanceOnQueue() {
+	/**
+	 * @test
+	 */
+	public function calculateStatisticsForEventWithTwoAttendeesOnQueueSetsTwoAttendanceOnQueue() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
@@ -7205,7 +7439,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_calculateStatistics_ForEventWithOneOfflineRegistration_SetsAttendancesToOne() {
+	/**
+	 * @test
+	 */
+	public function calculateStatisticsForEventWithOneOfflineRegistrationSetsAttendancesToOne() {
 		$this->fixture->setOfflineRegistrationNumber(1);
 
 		$this->fixture->calculateStatistics();

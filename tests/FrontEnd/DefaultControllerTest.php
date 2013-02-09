@@ -910,7 +910,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_OtherDatesListInSingleViewForShowOnlyEventsWithVacanciesSet_HidesBookedOutEvents() {
+	/**
+	 * @test
+	 */
+	public function otherDatesListInSingleViewForShowOnlyEventsWithVacanciesSetHidesBookedOutEvents() {
 		$this->fixture->setConfigurationValue(
 			'showOnlyEventsWithVacancies', TRUE
 		);
@@ -2570,7 +2573,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForEventWithOrganizerWithDescription_ShowsOrganizerDescription() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithOrganizerWithDescriptionShowsOrganizerDescription() {
 		$this->addOrganizerRelation(
 			array('title' => 'foo', 'description' => 'organizer description')
 		);
@@ -2601,7 +2607,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_DoesNotHaveUnreplacedMarkers() {
+	/**
+	 * @test
+	 */
+	public function singleViewDoesNotHaveUnreplacedMarkers() {
 		$this->addOrganizerRelation(array('title' => 'foo organizer'));
 
 		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2613,7 +2622,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForEventWithTwoOrganizers_ShowsBothOrganizers() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithTwoOrganizersShowsBothOrganizers() {
 		$this->addOrganizerRelation(array('title' => 'organizer 1'));
 		$this->addOrganizerRelation(array('title' => 'organizer 2'));
 
@@ -2643,7 +2655,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForEventWithOrganizerWithoutHomepage_HtmlSpecialcharsTitleOfOrganizer() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithOrganizerWithoutHomepageHtmlSpecialCharsTitleOfOrganizer() {
 		$this->addOrganizerRelation(
 			array('title' => 'foo<bar')
 		);
@@ -2662,7 +2677,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning hidden events in single view
 	//////////////////////////////////////////////////
 
-	public function test_SingleView_ForHiddenRecordAndNoLoggedInUser_ReturnsWrongSeminarNumberMessage() {
+	/**
+	 * @test
+	 */
+	public function singleViewForHiddenRecordAndNoLoggedInUserReturnsWrongSeminarNumberMessage() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)
 		);
@@ -2676,7 +2694,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForHiddenRecordAndLoggedInUserNotOwnerOfHiddenRecord_ReturnsWrongSeminarNumberMessage() {
+	/**
+	 * @test
+	 */
+	public function singleViewForHiddenRecordAndLoggedInUserNotOwnerOfHiddenRecordReturnsWrongSeminarNumberMessage() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)
@@ -2691,7 +2712,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForHiddenRecordAndLoggedInUserOwnerOfHiddenRecord_ShowsHiddenEvent() {
+	/**
+	 * @test
+	 */
+	public function singleViewForHiddenRecordAndLoggedInUserOwnerOfHiddenRecordShowsHiddenEvent() {
 		$ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -3041,7 +3065,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_HidesStatusColumnByDefault() {
+	/**
+	 * @test
+	 */
+	public function listViewHidesStatusColumnByDefault() {
 		$this->fixture->main('', array());
 
 		$this->assertFalse(
@@ -3049,7 +3076,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ShowsBookedOutEventByDefault() {
+	/**
+	 * @test
+	 */
+	public function listViewShowsBookedOutEventByDefault() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -3067,7 +3097,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForShowOnlyEventsWithVacanciesSet_HidesBookedOutEvent() {
+	/**
+	 * @test
+	 */
+	public function listViewForShowOnlyEventsWithVacanciesSetHidesBookedOutEvent() {
 		$this->fixture->setConfigurationValue(
 			'showOnlyEventsWithVacancies', TRUE
 		);
@@ -3526,7 +3559,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning the the list view, filtered by date
 	/////////////////////////////////////////////////////////
 
-	public function test_ListViewForGivenFromDate_ShowsEventWithBeginDateAfterFromDate() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenFromDateShowsEventWithBeginDateAfterFromDate() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$fromTime = $simTime - 86400;
 		$this->testingFramework->createRecord(
@@ -3548,7 +3584,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenFromDate_DoesNotShowEventWithBeginDateBeforeFromDate() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenFromDateDoesNotShowEventWithBeginDateBeforeFromDate() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$fromTime = $simTime + 86400;
 
@@ -3571,7 +3610,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenFromDateWithMissingDay_ShowsEventWithBeginDateOnFirstDayOfMonth() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenFromDateWithMissingDayShowsEventWithBeginDateOnFirstDayOfMonth() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 
 		$this->testingFramework->createRecord(
@@ -3592,7 +3634,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenFromDateWithMissingYear_ShowsEventWithBeginDateInCurrentYearAfterFromDate() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenFromDateWithMissingYearShowsEventWithBeginDateInCurrentYearAfterFromDate() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$fromTime = $simTime - 86400;
 
@@ -3614,7 +3659,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenFromDateWithMissingMonth_ShowsEventWithBeginDateOnFirstMonthOfYear() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenFromDateWithMissingMonthShowsEventWithBeginDateOnFirstMonthOfYear() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 
 		$this->testingFramework->createRecord(
@@ -3635,7 +3683,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenFromDateWithMissingMonthAndDay_ShowsEventWithBeginDateOnFirstDayOfGivenYear() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenFromDateWithMissingMonthAndDayShowsEventWithBeginDateOnFirstDayOfGivenYear() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 
 		$this->testingFramework->createRecord(
@@ -3655,7 +3706,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenToDate_ShowsEventWithBeginDateBeforeToDate() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenToDateShowsEventWithBeginDateBeforeToDate() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$toTime = $simTime + 86400;
 
@@ -3678,7 +3732,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenToDate_HidesEventWithBeginDateAfterToDate() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenToDateHidesEventWithBeginDateAfterToDate() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$toTime = $simTime - 86400;
 
@@ -3701,7 +3758,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenToDateWithMissingDay_ShowsEventWithBeginDateOnEndOfGivenMonth() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenToDateWithMissingDayShowsEventWithBeginDateOnEndOfGivenMonth() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 
 		$this->testingFramework->createRecord(
@@ -3722,7 +3782,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenToDateWithMissingYear_ShowsEventWithBeginDateOnThisYearBeforeToDate() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenToDateWithMissingYearShowsEventWithBeginDateOnThisYearBeforeToDate() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$toTime = $simTime + 86400;
 
@@ -3744,7 +3807,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenToDateWithMissingMonth_ShowsEventWithBeginDateOnDayOfLastMonthOfGivenYear() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenToDateWithMissingMonthShowsEventWithBeginDateOnDayOfLastMonthOfGivenYear() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3764,7 +3830,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenToDateWithMissingMonthAndDay_ShowsEventWithBeginDateOnEndOfGivenYear() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenToDateWithMissingMonthAndDayShowsEventWithBeginDateOnEndOfGivenYear() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3783,7 +3852,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenFromAndToDates_ShowsEventWithBeginDateWithinTimespan() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenFromAndToDatesShowsEventWithBeginDateWithinTimespan() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$fromTime = $simTime - 86400;
 		$toTime = $simTime + 86400;
@@ -3810,7 +3882,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenFromAndToDates_CanShowTwoEventsWithBeginDateWithinTimespan() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenFromAndToDatesCanShowTwoEventsWithBeginDateWithinTimespan() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$fromTime = $simTime - 86400;
 		$toTime = $simTime + 86400;
@@ -3851,7 +3926,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenFromAndToDates_DoesNotShowEventWithBeginDateBeforeTimespan() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenFromAndToDatesDoesNotShowEventWithBeginDateBeforeTimespan() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$toTime = $simTime + 86400;
 
@@ -3877,7 +3955,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenFromAndToDates_DoesNotShowEventWithBeginDateAfterTimespan() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenFromAndToDatesDoesNotShowEventWithBeginDateAfterTimespan() {
 		$simTime = $GLOBALS['SIM_EXEC_TIME'];
 		$fromTime = $simTime - 86400;
 
@@ -3903,7 +3984,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForSentDateButAllDatesZero_ShowsEventWithoutBeginDate() {
+	/**
+	 * @test
+	 */
+	public function listViewForSentDateButAllDatesZeroShowsEventWithoutBeginDate() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -3930,7 +4014,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning the filtering by age in the list view
 	///////////////////////////////////////////////////////////
 
-	public function test_ListViewForGivenAge_ShowsEventWithTargetgroupWithinAge() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenAgeShowsEventWithTargetgroupWithinAge() {
 		$targetGroupUid = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups',
 			array('minimum_age' => 5, 'maximum_age' => 20)
@@ -3955,7 +4042,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenAgeAndEventAgespanHigherThanAge_DoesNotShowThisEvent() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenAgeAndEventAgespanHigherThanAgeDoesNotShowThisEvent() {
 		$targetGroupUid = $this->testingFramework->createRecord(
 			'tx_seminars_target_groups',
 			array('minimum_age' => 5, 'maximum_age' => 20)
@@ -3985,7 +4075,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning the filtering by organizer in the list view
 	/////////////////////////////////////////////////////////////////
 
-	public function test_ListViewForGivenOrganizer_ShowsEventWithOrganizer() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenOrganizerShowsEventWithOrganizer() {
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers'
 		);
@@ -4006,7 +4099,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenOrganizer_DoesNotShowEventWithOtherOrganizer() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenOrganizerDoesNotShowEventWithOtherOrganizer() {
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers'
 		);
@@ -4033,7 +4129,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning the filtering by price in the list view
 	/////////////////////////////////////////////////////////////
 
-	public function test_ListViewForGivenPriceFrom_ShowsEventWithRegularPriceHigherThanPriceFrom() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenPriceFromShowsEventWithRegularPriceHigherThanPriceFrom() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -4051,7 +4150,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenPriceTo_ShowsEventWithRegularPriceLowerThanPriceTo() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenPriceToShowsEventWithRegularPriceLowerThanPriceTo() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -4069,7 +4171,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenPriceRange_ShowsEventWithRegularPriceWithinRange() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenPriceRangeShowsEventWithRegularPriceWithinRange() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -4088,7 +4193,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListViewForGivenPriceRange_HidesEventWithRegularPriceOutsideRange() {
+	/**
+	 * @test
+	 */
+	public function listViewForGivenPriceRangeHidesEventWithRegularPriceOutsideRange() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -5254,7 +5362,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning the registration link in the list view
 	////////////////////////////////////////////////////////////
 
-	public function test_ListView_ForEventWithUnlimitedVacancies_ShowsRegistrationLink() {
+	/**
+	 * @test
+	 */
+	public function listViewForEventWithUnlimitedVacanciesShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -5271,7 +5382,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForEventWithNoVacanciesAndQueue_ShowsRegisterOnQueueLink() {
+	/**
+	 * @test
+	 */
+	public function listViewForEventWithNoVacanciesAndQueueShowsRegisterOnQueueLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -5299,7 +5413,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForEventWithNoVacanciesAndNoQueue_DoesNotShowRegistrationLink() {
+	/**
+	 * @test
+	 */
+	public function listViewForEventWithNoVacanciesAndNoQueueDoesNotShowRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -5327,7 +5444,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForEventWithVacanciesAndNoDate_ShowsPreebookNowString() {
+	/**
+	 * @test
+	 */
+	public function listViewForEventWithVacanciesAndNoDateShowsPreebookNowString() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -5345,7 +5465,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForEventWithRegistrationBeginInFuture_HidesRegistrationLink() {
+	/**
+	 * @test
+	 */
+	public function listViewForEventWithRegistrationBeginInFutureHidesRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -5364,7 +5487,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForEventWithRegistrationBeginInFuture_ShowsRegistrationOpenOnMessage() {
+	/**
+	 * @test
+	 */
+	public function listViewForEventWithRegistrationBeginInFutureShowsRegistrationOpenOnMessage() {
 		$registrationBegin = $GLOBALS['SIM_EXEC_TIME'] + 20;
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
@@ -5387,7 +5513,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForEventWithRegistrationBeginInPast_ShowsRegistrationLink() {
+	/**
+	 * @test
+	 */
+	public function listViewForEventWithRegistrationBeginInPastShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -5406,7 +5535,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForEventWithoutRegistrationBegin_ShowsRegistrationLink() {
+	/**
+	 * @test
+	 */
+	public function listViewForEventWithoutRegistrationBeginShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -5648,7 +5780,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_MyVipEvents_ShowsStatusColumnByDefault() {
+	/**
+	 * @test
+	 */
+	public function myVipEventsShowsStatusColumnByDefault() {
 		$this->createLogInAndAddFeUserAsVip();
 		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
@@ -5659,7 +5794,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_MyVipEventsForStatusColumnHiddenByTsSetup_HidesStatusColumn() {
+	/**
+	 * @test
+	 */
+	public function myVipEventsForStatusColumnHiddenByTsSetupHidesStatusColumn() {
 		$this->createLogInAndAddFeUserAsVip();
 		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 		$this->fixture->setConfigurationValue('hideColumns', 'status');
@@ -5671,7 +5809,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_MyVipEventsForVisibleEvent_ShowsPublishedStatus() {
+	/**
+	 * @test
+	 */
+	public function myVipEventsForVisibleEventShowsPublishedStatus() {
 		$this->createLogInAndAddFeUserAsVip();
 		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
@@ -5863,7 +6004,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning the attached files column in the list view
 	////////////////////////////////////////////////////////////////
 
-	public function test_ListView_ForLoggedOutUserAndLimitFileDownloadToAttendeesTrue_HidesAttachedFilesHeader() {
+	/**
+	 * @test
+	 */
+	public function listViewForLoggedOutUserAndLimitFileDownloadToAttendeesTrueHidesAttachedFilesHeader() {
 		$this->testingFramework->logoutFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
@@ -5882,7 +6026,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForLoggedOutUserAndLimitFileDownloadToAttendeesFalse_ShowsAttachedFilesHeader() {
+	/**
+	 * @test
+	 */
+	public function listViewForLoggedOutUserAndLimitFileDownloadToAttendeesFalseShowsAttachedFilesHeader() {
 		$this->testingFramework->logoutFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
@@ -5901,7 +6048,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForLoggedOutUserAndLimitFileDownloadToAttendeesTrue_HidesAttachedFilesListRowItem() {
+	/**
+	 * @test
+	 */
+	public function listViewForLoggedOutUserAndLimitFileDownloadToAttendeesTrueHidesAttachedFilesListRowItem() {
 		$this->testingFramework->logoutFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
@@ -5920,7 +6070,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForLoggedOutUserAndLimitFileDownloadToAttendeesFalse_ShowsAttachedFilesListRowItem() {
+	/**
+	 * @test
+	 */
+	public function listViewForLoggedOutUserAndLimitFileDownloadToAttendeesFalseShowsAttachedFilesListRowItem() {
 		$this->testingFramework->logoutFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
@@ -5939,7 +6092,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForLoggedInUser_ShowsAttachedFilesHeader() {
+	/**
+	 * @test
+	 */
+	public function listViewForLoggedInUserShowsAttachedFilesHeader() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->testingFramework->createRecord(
@@ -5957,7 +6113,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForLoggedInUser_ShowsAttachedFilesListRowItem() {
+	/**
+	 * @test
+	 */
+	public function listViewForLoggedInUserShowsAttachedFilesListRowItem() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->testingFramework->createRecord(
@@ -5975,7 +6134,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForLoggedInUserAndLimitFileDownloadToAttendeesFalse_ShowsAttachedFile() {
+	/**
+	 * @test
+	 */
+	public function listViewForLoggedInUserAndLimitFileDownloadToAttendeesFalseShowsAttachedFile() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
@@ -5995,7 +6157,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForLoggedInUserAndLimitFileDownloadToAttendeesFalse_ShowsMultipleAttachedFiles() {
+	/**
+	 * @test
+	 */
+	public function listViewForLoggedInUserAndLimitFileDownloadToAttendeesFalseShowsMultipleAttachedFiles() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
@@ -6025,7 +6190,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForLoggedInUserAndLimitFileDownloadToAttendeesTrueAndUserNotAttendee_HidesAttachedFile() {
+	/**
+	 * @test
+	 */
+	public function listViewForLoggedInUserAndLimitFileDownloadToAttendeesTrueAndUserNotAttendeeHidesAttachedFile() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
@@ -6045,7 +6213,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_ListView_ForLoggedInUserAndLimitFileDownloadToAttendeesTrueAndUserAttendee_ShowsAttachedFile() {
+	/**
+	 * @test
+	 */
+	public function listViewForLoggedInUserAndLimitFileDownloadToAttendeesTrueAndUserAttendeeShowsAttachedFile() {
 		$this->fixture->setConfigurationValue('hideColumns', '');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->createLogInAndRegisterFeUser();
@@ -6307,7 +6478,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning the registration link in the single view
 	//////////////////////////////////////////////////////////////
 
-	public function test_SingleView_ForEventWithUnlimitedVacancies_ShowsRegistrationLink() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithUnlimitedVacanciesShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -6327,7 +6501,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForEventWithNoVacanciesAndQueue_ShowsRegisterOnQueueLink() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithNoVacanciesAndQueueShowsRegisterOnQueueLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -6357,7 +6534,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForEventWithNoVacanciesAndNoQueue_DoesNotShowRegistrationLink() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithNoVacanciesAndNoQueueDoesNotShowRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -6387,7 +6567,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForEventWithVacanciesAndNoDate_ShowsPreebookNowString() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithVacanciesAndNoDateShowsPreebookNowString() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -6408,7 +6591,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForEventWithRegistrationBeginInFuture_DoesNotShowRegistrationLink() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithRegistrationBeginInFutureDoesNotShowRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -6429,7 +6615,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForEventWithRegistrationBeginInFuture_ShowsRegistrationOpensOnMessage() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithRegistrationBeginInFutureShowsRegistrationOpensOnMessage() {
 		$registrationBegin = $GLOBALS['SIM_EXEC_TIME'] + 40;
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
@@ -6454,7 +6643,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForEventWithRegistrationBeginInPast_ShowsRegistrationLink() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithRegistrationBeginInPastShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -6475,7 +6667,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_SingleView_ForEventWithoutRegistrationBegin_ShowsRegistrationLink() {
+	/**
+	 * @test
+	 */
+	public function singleViewForEventWithoutRegistrationBeginShowsRegistrationLink() {
 		$this->fixture->setConfigurationValue('enableRegistration', TRUE);
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -6733,7 +6928,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning getVacanciesClasses
 	/////////////////////////////////////////
 
-	public function test_GetVacanciesClasses_ForEventWithEnoughVacancies_ReturnsAvailableClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithEnoughVacanciesReturnsAvailableClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(0);
@@ -6749,7 +6947,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithOneVacancy_ReturnsVacancyOneClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithOneVacancyReturnsVacancyOneClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(9);
@@ -6765,7 +6966,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithTwoVacancies_ReturnsVacancyTwoClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithTwoVacanciesReturnsVacancyTwoClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(8);
@@ -6781,7 +6985,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithNoVacancies_ReturnsVacancyZeroClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithNoVacanciesReturnsVacancyZeroClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(10);
@@ -6797,7 +7004,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithUnlimitedVacancies_ReturnsVacanciesAvailableClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithUnlimitedVacanciesReturnsVacanciesAvailableClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setUnlimitedVacancies();
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
@@ -6811,7 +7021,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithUnlimitedVacancies_DoesNotReturnZeroVacancyClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithUnlimitedVacanciesDoesNotReturnZeroVacancyClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setUnlimitedVacancies();
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
@@ -6825,7 +7038,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithUnlimitedVacancies_ReturnsVacanciesUnlimitedClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithUnlimitedVacanciesReturnsVacanciesUnlimitedClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setUnlimitedVacancies();
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
@@ -6839,7 +7055,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForRegistrationDeadlineInPast_ReturnsDeadlineOverClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForRegistrationDeadlineInPastReturnsDeadlineOverClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(TRUE);
 		$event->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 45);
@@ -6854,7 +7073,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForBeginDateInPast_ReturnsBeginDateOverClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForBeginDateInPastReturnsBeginDateOverClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
@@ -6871,7 +7093,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getVacanciesClasses_ForBeginDateInPastAndRegistrationForStartedEventsAllowed_ReturnsVacanciesAvailableClass() {
+	public function getVacanciesClassesForBeginDateInPastAndRegistrationForStartedEventsAllowedReturnsVacanciesAvailableClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
@@ -6888,7 +7110,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventNotNeedingRegistration_ReturnsVacanciesBasicClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventNotNeedingRegistrationReturnsVacanciesBasicClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(FALSE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
@@ -6902,7 +7127,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithoutBeginDateAndAllowRegistrationForEventsWithoutDateFalse_ReturnsVacanciesBasicClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithoutBeginDateAndAllowRegistrationForEventsWithoutDateFalseReturnsVacanciesBasicClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(TRUE);
 		$this->fixture->getConfigGetter()->setConfigurationValue(
@@ -6921,7 +7149,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getVacanciesClasses_ForEventWithNoVacanciesAndRegistrationQueueReturnsRegistrationQueueClass() {
+	public function getVacanciesClassesForEventWithNoVacanciesAndRegistrationQueueReturnsRegistrationQueueClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(10);
@@ -6941,7 +7169,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function getVacanciesClasses_ForEventWithNoVacanciesAndNoRegistrationQueueDoesNotReturnRegistrationQueueClass() {
+	public function getVacanciesClassesForEventWithNoVacanciesAndNoRegistrationQueueDoesNotReturnRegistrationQueueClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid, array());
 		$event->setAttendancesMax(10);
 		$event->setNumberOfAttendances(10);
@@ -6964,7 +7192,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// configuration variable 'allowRegistrationForEventsWithoutDate' TRUE.
 	//////////////////////////////////////////////////////////////////////////
 
-	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithEnoughVacancies_ReturnsAvailableClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithoutDateAndWithEnoughVacanciesReturnsAvailableClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setAttendancesMax(10);
 		$event->setNeedsRegistration(TRUE);
@@ -6982,7 +7213,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithOneVacancy_ReturnsVacancyOneClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithoutDateAndWithOneVacancyReturnsVacancyOneClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setAttendancesMax(10);
 		$event->setNeedsRegistration(TRUE);
@@ -7000,7 +7234,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithTwoVacancies_ReturnsVacancyTwoClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithoutDateAndWithTwoVacanciesReturnsVacancyTwoClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setAttendancesMax(10);
 		$event->setNeedsRegistration(TRUE);
@@ -7018,7 +7255,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithNoVacancies_ReturnsVacancyZeroClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithoutDateAndWithNoVacanciesReturnsVacancyZeroClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setAttendancesMax(10);
 		$event->setNeedsRegistration(TRUE);
@@ -7036,7 +7276,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithUnlimitedVacancies_ReturnsAvailableClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithoutDateAndWithUnlimitedVacanciesReturnsAvailableClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setUnlimitedVacancies();
 		$event->setNumberOfAttendances(0);
@@ -7053,7 +7296,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_GetVacanciesClasses_ForEventWithoutDateAndWithUnlimitedVacancies_DoesNotReturnDeadlineOverClass() {
+	/**
+	 * @test
+	 */
+	public function getVacanciesClassesForEventWithoutDateAndWithUnlimitedVacanciesDoesNotReturnDeadlineOverClass() {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setUnlimitedVacancies();
 		$event->setNumberOfAttendances(0);
@@ -7075,7 +7321,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	// Tests concerning my_entered_events view
 	////////////////////////////////////////////
 
-	public function test_MyEnteredEventView_ShowsHiddenRecords() {
+	/**
+	 * @test
+	 */
+	public function myEnteredEventViewShowsHiddenRecords() {
 		$editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
 
 		$this->fixture->setConfigurationValue(
@@ -7104,7 +7353,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_MyEnteredEventView_ShowsStatusColumnByDefault() {
+	/**
+	 * @test
+	 */
+	public function myEnteredEventViewShowsStatusColumnByDefault() {
 		$editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
 
 		$this->fixture->setConfigurationValue(
@@ -7134,7 +7386,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_MyEnteredEventViewForHiddenEvent_ShowsStatusPendingLabel() {
+	/**
+	 * @test
+	 */
+	public function myEnteredEventViewForHiddenEventShowsStatusPendingLabel() {
 		$editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
 
 		$this->fixture->setConfigurationValue(
@@ -7161,7 +7416,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_MyEnteredEventViewForVisibleEvent_ShowsStatusPublishedLabel() {
+	/**
+	 * @test
+	 */
+	public function myEnteredEventViewForVisibleEventShowsStatusPublishedLabel() {
 		$editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
 
 		$this->fixture->setConfigurationValue(
@@ -7187,7 +7445,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_MyEnteredEventViewForTimeframeSetToCurrent_ShowsEventEndedInPast() {
+	/**
+	 * @test
+	 */
+	public function myEnteredEventViewForTimeFrameSetToCurrentShowsEventEndedInPast() {
 		$editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
 
 		$this->fixture->setConfigurationValue(

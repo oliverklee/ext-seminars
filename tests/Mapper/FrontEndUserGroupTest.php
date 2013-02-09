@@ -58,7 +58,10 @@ class tx_seminars_Mapper_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	// Tests for the basic functionality
 	//////////////////////////////////////
 
-	public function test_Mapper_ForGhost_ReturnsSeminarsFrontEndUserGroupInstance() {
+	/**
+	 * @test
+	 */
+	public function mapperForGhostReturnsSeminarsFrontEndUserGroupInstance() {
 		$this->assertTrue(
 			$this->fixture->getNewGhost()
 				instanceof tx_seminars_Model_FrontEndUserGroup
@@ -70,7 +73,10 @@ class tx_seminars_Mapper_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	// Tests concerning the reviewer
 	//////////////////////////////////
 
-	public function test_FrontEndUserGroup_CanReturnBackEndUserModel() {
+	/**
+	 * @test
+	 */
+	public function frontEndUserGroupCanReturnBackEndUserModel() {
 		$backEndUser = tx_oelib_MapperRegistry::get(
 			'tx_oelib_Mapper_BackEndUser')->getNewGhost();
 		$frontEndUserGroup = $this->fixture->getLoadedTestingModel(
@@ -88,7 +94,10 @@ class tx_seminars_Mapper_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	// Tests concerning the default categories
 	////////////////////////////////////////////
 
-	public function test_FrontEndUserGroup_ReturnsListOfCategories() {
+	/**
+	 * @test
+	 */
+	public function frontEndUserGroupReturnsListOfCategories() {
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories', array()
 		);

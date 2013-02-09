@@ -498,7 +498,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasAccessForLoggedInUserInUnauthorizedUsergroupReturnsNonEmptyResult() {
+	/**
+	 * @test
+	 */
+	public function hasAccessForLoggedInUserInUnauthorizedUserGroupReturnsNonEmptyResult() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->assertContains(
@@ -507,8 +510,11 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasAccessForLoggedInUserInAuthorizedUsergroupAndNoUidSetReturnsEmptyResult() {
-		$groupUid = $this->testingFramework->createFrontEndUsergroup(
+	/**
+	 * @test
+	 */
+	public function hasAccessForLoggedInUserInAuthorizedUserGroupAndNoUidSetReturnsEmptyResult() {
+		$groupUid = $this->testingFramework->createFrontEndUserGroup(
 			array('title' => 'test')
 		);
 		$this->testingFramework->createAndLoginFrontEndUser($groupUid);
@@ -521,8 +527,11 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasAccessForLoggedInNonOwnerInAuthorizedUsergroupReturnsNoAccessMessage() {
-		$groupUid = $this->testingFramework->createFrontEndUsergroup(
+	/**
+	 * @test
+	 */
+	public function hasAccessForLoggedInNonOwnerInAuthorizedUserGroupReturnsNoAccessMessage() {
+		$groupUid = $this->testingFramework->createFrontEndUserGroup(
 			array('title' => 'test')
 		);
 		$this->testingFramework->createAndLoginFrontEndUser($groupUid);
@@ -538,8 +547,11 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasAccessForLoggedInOwnerInAuthorizedUsergroupReturnsEmptyResult() {
-		$groupUid = $this->testingFramework->createFrontEndUsergroup(
+	/**
+	 * @test
+	 */
+	public function hasAccessForLoggedInOwnerInAuthorizedUserGroupReturnsEmptyResult() {
+		$groupUid = $this->testingFramework->createFrontEndUserGroup(
 			array('title' => 'test')
 		);
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser($groupUid);
@@ -556,7 +568,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	}
 
 	public function testHasAccessForLoggedInUserAndInvalidSeminarUidReturnsWrongSeminarMessage() {
-		$groupUid = $this->testingFramework->createFrontEndUsergroup(
+		$groupUid = $this->testingFramework->createFrontEndUserGroup(
 			array('title' => 'test')
 		);
 		$this->testingFramework->createAndLoginFrontEndUser($groupUid);
@@ -572,8 +584,11 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasAccessMessageForDeletedSeminarUidAndUserLoggedInReturnsWrongSeminaMessage() {
-		$groupUid = $this->testingFramework->createFrontEndUsergroup(
+	/**
+	 * @test
+	 */
+	public function hasAccessMessageForDeletedSeminarUidAndUserLoggedInReturnsWrongSeminarMessage() {
+		$groupUid = $this->testingFramework->createFrontEndUserGroup(
 			array('title' => 'test')
 		);
 		$this->testingFramework->createAndLoginFrontEndUser($groupUid);
@@ -2208,7 +2223,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	// Tests concerning modifyDataToInsert
 	////////////////////////////////////////
 
-	public function test_modifyDataToInsert_ForPublishSettingPublishImmediately_DoesNotHideCreatedEvent() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForPublishSettingPublishImmediatelyDoesNotHideCreatedEvent() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
@@ -2220,7 +2238,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsert_ForPublishSettingPublishImmediately_DoesNotHideEditedEvent() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForPublishSettingPublishImmediatelyDoesNotHideEditedEvent() {
 		$event = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$this->fixture->setObjectUid($event->getUid());
@@ -2235,7 +2256,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsert_ForPublishSettingHideNew_HidesCreatedEvent() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForPublishSettingHideNewHidesCreatedEvent() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		);
@@ -2248,7 +2272,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsert_ForPublishSettingHideEdited_HidesCreatedEvent() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForPublishSettingHideEditedHidesCreatedEvent() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 		);
@@ -2261,7 +2288,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsert_ForPublishSettingHideEdited_HidesEditedEvent() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForPublishSettingHideEditedHidesEditedEvent() {
 		$event = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$this->fixture->setObjectUid($event->getUid());
@@ -2277,7 +2307,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsert_ForPublishSettingHideNew_DoesNotHideEditedEvent() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForPublishSettingHideNewDoesNotHideEditedEvent() {
 		$event = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$this->fixture->setObjectUid($event->getUid());
@@ -2292,7 +2325,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsertForEventHiddenOnEditing_AddsPublicationHashToEvent() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForEventHiddenOnEditingAddsPublicationHashToEvent() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 		);
@@ -2305,7 +2341,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsertForEventHiddenOnCreation_AddsPublicationHashToEvent() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForEventHiddenOnCreationAddsPublicationHashToEvent() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		);
@@ -2318,7 +2357,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsertForEventNotHiddenOnEditing_DoesNotAddPublicationHashToEvent() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForEventNotHiddenOnEditingDoesNotAddPublicationHashToEvent() {
 		$event = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$this->fixture->setObjectUid($event->getUid());
@@ -2333,7 +2375,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsertForEventNotHiddenOnCreation_DoesNotAddPublicationHashToEvent() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForEventNotHiddenOnCreationDoesNotAddPublicationHashToEvent() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
@@ -2345,7 +2390,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsertForHiddenEvent_DoesNotAddPublicationHashToEvent() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForHiddenEventDoesNotAddPublicationHashToEvent() {
 		$event = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_Event')->getLoadedTestingModel(
 			array('hidden' => 1)
@@ -2361,7 +2409,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsert_AddsTimestampToFormData() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertAddsTimestampToFormData() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
@@ -2372,7 +2423,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsert_setsTimestampToCurrentExecutionTime() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertSetsTimestampToCurrentExecutionTime() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
@@ -2384,7 +2438,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsert_AddsCreationDateToFormData() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertAddsCreationDateToFormData() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
@@ -2395,7 +2452,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsert_SetsCreationDateToCurrentExecutionTime() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertsetsCreationDateToCurrentExecutionTime() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
@@ -2407,7 +2467,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsert_AddsOwnerFeUserToFormData() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertAddsOwnerFeUserToFormData() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
@@ -2418,7 +2481,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsert_SetsOwnerFeUserToCurrentlyLoggedInUser() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertsetsOwnerFeUserToCurrentlyLoggedInUser() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
@@ -2430,7 +2496,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsert_AddsEventsPidToFormData() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertAddsEventsPidToFormData() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
@@ -2441,7 +2510,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsertForNoUsergroupSpecificEventPid_SetsPidFromTsSetupAsEventPid() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForNoUserGroupSpecificEventPidSetsPidFromTsSetupAsEventPid() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
@@ -2455,7 +2527,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsertForUsergroupSpecificEventPid_SetsPidFromUsergroupAsEventPid() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForUserGroupSpecificEventPidSetsPidFromUserGroupAsEventPid() {
 		$this->fixture->setConfigurationValue('createEventsPID', 42);
 
 		$userGroup = tx_oelib_MapperRegistry::get(
@@ -2477,7 +2552,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsertForNewEventAndUserWithoutDefaultCategories_DoesNotAddAnyCategories() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForNewEventAndUserWithoutDefaultCategoriesDoesNotAddAnyCategories() {
 		$this->createAndLoginUserWithPublishSetting(
 			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
@@ -2489,7 +2567,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsertForNewEventAndUserWithOneDefaultCategory_AddsThisCategory() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForNewEventAndUserWithOneDefaultCategoryAddsThisCategory() {
 		$categories = new tx_oelib_List();
 		$category = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
 			->getNewGhost();
@@ -2517,7 +2598,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsertForNewEventAndUserWithTwoDefaultCategories_AddsTheseCategories() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForNewEventAndUserWithTwoDefaultCategoriesAddsTheseCategories() {
 		$categoryMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category');
 		$category1 = $categoryMapper->getNewGhost();
 		$category2 = $categoryMapper->getNewGhost();
@@ -2548,7 +2632,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_modifyDataToInsertForEditedEventAndUserWithOneDefaultCategory_DoesNotAddTheUsersCategory() {
+	/**
+	 * @test
+	 */
+	public function modifyDataToInsertForEditedEventAndUserWithOneDefaultCategoryDoesNotAddTheUsersCategory() {
 		$categories = new tx_oelib_List();
 		$category = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
 			->getNewGhost();
@@ -2659,7 +2746,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithPidSetInSetupButNotUsergroupReturnsTrue() {
+	public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithPidSetInSetupButNotUserGroupReturnsTrue() {
 		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
 		$this->fixture->setConfigurationValue(
@@ -2681,7 +2768,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	// Tests concerning validateStringField
 	/////////////////////////////////////////
 
-	public function test_validateStringFieldForNonRequiredFieldAndEmptyString_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function validateStringFieldForNonRequiredFieldAndEmptyStringReturnsTrue() {
 		$this->assertTrue(
 			$this->fixture->validateString(
 				array('elementName' => 'teaser', 'value' => '')
@@ -2689,7 +2779,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_validateStringFieldForRequiredFieldAndEmptyString_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function validateStringFieldForRequiredFieldAndEmptyStringReturnsFalse() {
 		$fixture = $this->getFixtureWithRequiredField('teaser');
 
 		$this->assertFalse(
@@ -2701,7 +2794,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_validateStringFieldForRequiredFieldAndNonEmptyString_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function validateStringFieldForRequiredFieldAndNonEmptyStringReturnsTrue() {
 		$fixture = $this->getFixtureWithRequiredField('teaser');
 
 		$this->assertTrue(
@@ -2718,7 +2814,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	// Tests concerning validateIntegerField
 	//////////////////////////////////////////
 
-	public function test_validateIntegerFieldForNonRequiredFieldAndValueZero_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function validateIntegerFieldForNonRequiredFieldAndValueZeroReturnsTrue() {
 		$this->assertTrue(
 			$this->fixture->validateInteger(
 				array('elementName' => 'attendees_max', 'value' => 0)
@@ -2726,7 +2825,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_validateIntegerFieldForRequiredFieldAndValueZero_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function validateIntegerFieldForRequiredFieldAndValueZeroReturnsFalse() {
 		$fixture = $this->getFixtureWithRequiredField('attendees_max');
 
 		$this->assertFalse(
@@ -2738,7 +2840,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_validateIntegerFieldForRequiredFieldAndValueNonZero_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function validateIntegerFieldForRequiredFieldAndValueNonZeroReturnsTrue() {
 		$fixture = $this->getFixtureWithRequiredField('attendees_max');
 
 		$this->assertTrue(
@@ -2755,7 +2860,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	// Tests concerning validateCheckboxes
 	////////////////////////////////////////
 
-	public function test_validateCheckboxesForNonRequiredFieldAndEmptyValue_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function validateCheckboxesForNonRequiredFieldAndEmptyValueReturnsTrue() {
 		$this->testingFramework->createAndLogInFrontEndUser();
 		$this->assertTrue(
 			$this->fixture->validateCheckboxes(
@@ -2764,7 +2872,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_validateCheckboxesForRequiredFieldAndValueNotArray_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function validateCheckboxesForRequiredFieldAndValueNotArrayReturnsFalse() {
 		$this->testingFramework->createAndLogInFrontEndUser();
 		$fixture = $this->getFixtureWithRequiredField('categories');
 
@@ -2777,7 +2888,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_validateCheckboxesForRequiredFieldAndValueEmptyArray_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function validateCheckboxesForRequiredFieldAndValueEmptyArrayReturnsFalse() {
 		$this->testingFramework->createAndLogInFrontEndUser();
 		$fixture = $this->getFixtureWithRequiredField('categories');
 
@@ -2790,7 +2904,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_validateCheckboxesForRequiredFieldAndValueNonEmptyArray_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function validateCheckboxesForRequiredFieldAndValueNonEmptyArrayReturnsTrue() {
 		$this->testingFramework->createAndLogInFrontEndUser();
 		$fixture = $this->getFixtureWithRequiredField('categories');
 
@@ -2803,7 +2920,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_validateCheckboxesForUserWithDefaultCategoriesAndCategoriesRequiredAndEmpty_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function validateCheckboxesForUserWithDefaultCategoriesAndCategoriesRequiredAndEmptyReturnsTrue() {
 		$categories = new tx_oelib_List();
 		$categories->add(
 			tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
@@ -2831,7 +2951,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_validateCheckboxesForUserWithoutDefaultCategoriesAndCategoriesRequiredAndEmpty_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function validateCheckboxesForUserWithoutDefaultCategoriesAndCategoriesRequiredAndEmptyReturnsFalse() {
 		$this->testingFramework->createAndLogInFrontEndUser();
 		$fixture = $this->getFixtureWithRequiredField('categories');
 
@@ -2849,7 +2972,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	// Tests concerning validateDate
 	//////////////////////////////////
 
-	public function test_validateDateForNonRequiredFieldAndEmptyString_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function validateDateForNonRequiredFieldAndEmptyStringReturnsTrue() {
 		$this->assertTrue(
 			$this->fixture->validateDate(
 				array('elementName' => 'begin_date', 'value' => '')
@@ -2857,7 +2983,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_validateDateForRequiredFieldAndEmptyString_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function validateDateForRequiredFieldAndEmptyStringReturnsFalse() {
 		$fixture = $this->getFixtureWithRequiredField('begin_date');
 
 		$this->assertFalse(
@@ -2869,7 +2998,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_validateDateForRequiredFieldAndValidDate_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function validateDateForRequiredFieldAndValidDateReturnsTrue() {
 		$fixture = $this->getFixtureWithRequiredField('begin_date');
 
 		$this->assertTrue(
@@ -2884,7 +3016,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_validateDateForRequiredFieldAndNonValidDate_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function validateDateForRequiredFieldAndNonValidDateReturnsFalse() {
 		$fixture = $this->getFixtureWithRequiredField('begin_date');
 
 		$this->assertFalse(
@@ -2904,7 +3039,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	// Tests concerning validatePrice
 	///////////////////////////////////
 
-	public function test_validatePriceForNonRequiredFieldAndEmptyString_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function validatePriceForNonRequiredFieldAndEmptyStringReturnsTrue() {
 		$this->assertTrue(
 			$this->fixture->validatePrice(
 				array('elementName' => 'price_regular', 'value' => '')
@@ -2912,7 +3050,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_validatePriceForRequiredFieldAndEmptyString_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function validatePriceForRequiredFieldAndEmptyStringReturnsFalse() {
 		$fixture = $this->getFixtureWithRequiredField('price_regular');
 
 		$this->assertFalse(
@@ -2924,7 +3065,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_validatePriceForRequiredFieldAndValidPrice_ReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function validatePriceForRequiredFieldAndValidPriceReturnsTrue() {
 		$fixture = $this->getFixtureWithRequiredField('price_regular');
 
 		$this->assertTrue(
@@ -2936,7 +3080,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 
-	public function test_validatePriceForRequiredFieldAndInvalidPrice_ReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function validatePriceForRequiredFieldAndInvalidPriceReturnsFalse() {
 		$fixture = $this->getFixtureWithRequiredField('price_regular');
 
 		$this->assertFalse(
@@ -2953,7 +3100,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	// Tests concerning the publishing emails
 	///////////////////////////////////////////
 
-	public function test_eventEditorForNonHiddenEvent_DoesNotSendMail() {
+	/**
+	 * @test
+	 */
+	public function eventEditorForNonHiddenEventDoesNotSendMail() {
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 
 		$this->fixture->sendEMailToReviewer();
@@ -2964,7 +3114,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_eventEditorForEventHiddenBeforeEditing_DoesNotSendMail() {
+	/**
+	 * @test
+	 */
+	public function eventEditorForEventHiddenBeforeEditingDoesNotSendMail() {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('hidden' => 1)
 		);
@@ -2982,7 +3135,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_eventEditorForEventHiddenByForm_DoesSendMail() {
+	/**
+	 * @test
+	 */
+	public function eventEditorForEventHiddenByFormDoesSendMail() {
 		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -3006,7 +3162,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_sendEMailToReviewer_SendsMailToReviewerMailAddress() {
+	/**
+	 * @test
+	 */
+	public function sendEMailToReviewerSendsMailToReviewerMailAddress() {
 		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -3030,7 +3189,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_sendEMailToReviewer_SetsPublishEventSubjectInMail() {
+	/**
+	 * @test
+	 */
+	public function sendEMailToReviewerSetsPublishEventSubjectInMail() {
 		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -3054,7 +3216,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_sendEMailToReviewer_SendsTheTitleOfTheEvent() {
+	/**
+	 * @test
+	 */
+	public function sendEMailToReviewerSendsTheTitleOfTheEvent() {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('title' => 'foo Event')
 		);
@@ -3082,7 +3247,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_sendEMailToReviewerForEventWithDate_SendsTheDateOfTheEvent() {
+	/**
+	 * @test
+	 */
+	public function sendEMailToReviewerForEventWithDateSendsTheDateOfTheEvent() {
 		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
@@ -3114,7 +3282,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_sendEMailToReviewerForEventWithoutDate_HidesDateMarker() {
+	/**
+	 * @test
+	 */
+	public function sendEMailToReviewerForEventWithoutDateHidesDateMarker() {
 		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
@@ -3143,7 +3314,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_sendEMailToReviewerForEventWithoutDate_DoesNotSendDate() {
+	/**
+	 * @test
+	 */
+	public function sendEMailToReviewerForEventWithoutDateDoesNotSendDate() {
 		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
@@ -3173,7 +3347,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_sendEMailToReviewer_SendsMailWithoutAnyUnreplacedMarkers() {
+	/**
+	 * @test
+	 */
+	public function sendEMailToReviewerSendsMailWithoutAnyUnreplacedMarkers() {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
@@ -3201,7 +3378,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_sendEMailToReviewerForEventWithDescription_ShowsDescriptionInMail() {
+	/**
+	 * @test
+	 */
+	public function sendEMailToReviewerForEventWithDescriptionShowsDescriptionInMail() {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('description' => 'Foo Description')
 		);
@@ -3229,7 +3409,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_sendEMailToReviewer_SendsPublicationLinkInMail() {
+	/**
+	 * @test
+	 */
+	public function sendEMailToReviewerSendsPublicationLinkInMail() {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
@@ -3257,7 +3440,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_sendEMailToReviewer_UsesFrontEndUserNameAsFromNameForMail() {
+	/**
+	 * @test
+	 */
+	public function sendEMailToReviewerUsesFrontEndUserNameAsFromNameForMail() {
 		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -3281,7 +3467,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_sendEMailToReviewer_UsesFrontEndUserMailAddressAsFromAddressForMail() {
+	/**
+	 * @test
+	 */
+	public function sendEMailToReviewerUsesFrontEndUserMailAddressAsFromAddressForMail() {
 		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
@@ -3365,14 +3554,20 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	// Tests concerning makeListToFormidableList
 	//////////////////////////////////////////////
 
-	public function test_makeListToFormidableList_ForEmptyListGiven_ReturnsEmptyArray() {
+	/**
+	 * @test
+	 */
+	public function makeListToFormidableListForEmptyListGivenReturnsEmptyArray() {
 		$this->assertEquals(
 			array(),
 			tx_seminars_FrontEnd_EventEditor::makeListToFormidableList(new tx_oelib_List())
 		);
 	}
 
-	public function test_makeListToFormidableList_ForListWithOneElement_ReturnsModelDataInArray() {
+	/**
+	 * @test
+	 */
+	public function makeListToFormidableListForListWithOneElementReturnsModelDataInArray() {
 		$targetGroup = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_TargetGroup')->getLoadedTestingModel(
 				array('title' => 'foo')
@@ -3389,7 +3584,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_makeListToFormidableList_ForListWithTwoElements_ReturnsArrayWithTwoModels() {
+	/**
+	 * @test
+	 */
+	public function makeListToFormidableListForListWithTwoElementsReturnsArrayWithTwoModels() {
 		$targetGroup1 = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_TargetGroup')->getLoadedTestingModel(array());
 		$targetGroup2 = tx_oelib_MapperRegistry::get(
@@ -3410,7 +3608,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	// Tests concerning getPreselectedOrganizer
 	/////////////////////////////////////////////
 
-	public function test_getPreselectedOrganizerForNoAvailableOrganizer_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getPreselectedOrganizerForNoAvailableOrganizerReturnsZero() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$this->assertEquals(
@@ -3419,7 +3620,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getPreselectedOrganizerForOneAvailableOrganizer_ReturnsTheOrganizersUid() {
+	/**
+	 * @test
+	 */
+	public function getPreselectedOrganizerForOneAvailableOrganizerReturnsTheOrganizersUid() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$organizerUid = $this->testingFramework->createRecord('tx_seminars_organizers');
 
@@ -3429,7 +3633,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_getPreselectedOrganizerForTwoAvailableOrganizers_ReturnsZero() {
+	/**
+	 * @test
+	 */
+	public function getPreselectedOrganizerForTwoAvailableOrganizersReturnsZero() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->createRecord('tx_seminars_organizers');
 		$this->testingFramework->createRecord('tx_seminars_organizers');

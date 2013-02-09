@@ -663,7 +663,10 @@ class tx_seminars_Mapper_EventTest extends tx_phpunit_testcase {
 	// Tests concerning findByPublicationHash
 	///////////////////////////////////////////
 
-	public function test_findByPublicationHashForEmptyPublicationHashGiven_ThrowsException() {
+	/**
+	 * @test
+	 */
+	public function findByPublicationHashForEmptyPublicationHashGivenThrowsException() {
 		$this->setExpectedException(
 			'InvalidArgumentException',
 			'The given publication hash was empty.'
@@ -672,7 +675,10 @@ class tx_seminars_Mapper_EventTest extends tx_phpunit_testcase {
 		$this->fixture->findByPublicationHash('');
 	}
 
-	public function test_findByPublicationForEventWithProvidedPublicationHash_ReturnsThisEvent() {
+	/**
+	 * @test
+	 */
+	public function findByPublicationForEventWithProvidedPublicationHashReturnsThisEvent() {
 		$publicationHash = 'blubb';
 
 		$eventUid = $this->testingFramework->createRecord(
@@ -685,7 +691,10 @@ class tx_seminars_Mapper_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_findByPublicationForNoEventWithProvidedPublicationHash_ReturnsNull() {
+	/**
+	 * @test
+	 */
+	public function findByPublicationForNoEventWithProvidedPublicationHashReturnsNull() {
 		$this->testingFramework->createRecord('tx_seminars_seminars');
 
 		$this->assertNull(
@@ -693,7 +702,10 @@ class tx_seminars_Mapper_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_findByPublicationForEventWithProvidedPublicationHash_ReturnsEventModel() {
+	/**
+	 * @test
+	 */
+	public function findByPublicationForEventWithProvidedPublicationHashReturnsEventModel() {
 		$publicationHash = 'blubb';
 
 		$this->testingFramework->createRecord(

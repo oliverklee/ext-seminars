@@ -118,7 +118,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests for render()
 	///////////////////////
 
-	public function test_Render_WithAllSearchOptionsHidden_ReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function renderWithAllSearchOptionsHiddenReturnsEmptyString() {
 		$this->fixture->setConfigurationValue('displaySearchFormFields', '');
 
 		$this->assertEquals(
@@ -127,7 +130,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledSearchWidget_ContainsSearchingHints() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledSearchWidgetContainsSearchingHints() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -138,7 +144,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledSearchWidget_ContainsSubmitButton() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledSearchWidgetContainsSubmitButton() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -150,7 +159,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledSearchWidget_ContainsResetButton() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledSearchWidgetContainsResetButton() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -162,7 +174,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledShowEmptyEntryInOptionLists_ContainsEmptyOption() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledShowEmptyEntryInOptionListsContainsEmptyOption() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'event_type'
 		);
@@ -178,7 +193,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForTwoEnabledSearchParts_RendersBothSearchParts() {
+	/**
+	 * @test
+	 */
+	public function renderForTwoEnabledSearchPartsRendersBothSearchParts() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'event_type,language'
 		);
@@ -195,7 +213,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledSearchWidget_DoesNotHaveUnreplacedMarkers() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledSearchWidgetDoesNotHaveUnreplacedMarkers() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields',
 			'event_type,language,country,city,place,full_text_search,date,' .
@@ -245,7 +266,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests concerning the rendering of the event_type option box
 	////////////////////////////////////////////////////////////////
 
-	public function test_Render_ForEventTypeHiddenInConfiguration_HidesEventTypeSubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForEventTypeHiddenInConfigurationHidesEventTypeSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -257,7 +281,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledEventType_CanContainEventTypeOption() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledEventTypeCanContainEventTypeOption() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'event_type'
 		);
@@ -277,7 +304,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledEventType_HtmlSpecialCharsTheEventTypeTitle() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledEventTypeHtmlSpecialCharsTheEventTypeTitle() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'event_type'
 		);
@@ -298,7 +328,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledEventType_PreselectsSelectedValue() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledEventTypePreselectsSelectedValue() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'event_type'
 		);
@@ -320,7 +353,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledEventType_CanPreselectTwoValues() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledEventTypeCanPreselectTwoValues() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'event_type'
 		);
@@ -358,7 +394,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledEventType_ContainsSelectorForEventTypes() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledEventTypeContainsSelectorForEventTypes() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'event_type'
 		);
@@ -416,7 +455,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests concerning the rendering of the language option box
 	//////////////////////////////////////////////////////////////
 
-	public function test_Render_ForLanguageOptionsHiddenInConfiguration_HidesLanguageSubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForLanguageOptionsHiddenInConfigurationHidesLanguageSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -428,7 +470,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForLanguageOptionsHiddenInConfiguration_DoesNotShowLanguageOptionsMarker() {
+	/**
+	 * @test
+	 */
+	public function renderForLanguageOptionsHiddenInConfigurationDoesNotShowLanguageOptionsMarker() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -439,7 +484,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledLanguageOptions_ContainsLanguageOption() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledLanguageOptionsContainsLanguageOption() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'language'
 		);
@@ -461,7 +509,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledLanguageOptions_ContainsSelectorForLanguages() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledLanguageOptionsContainsSelectorForLanguages() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'language'
 		);
@@ -473,7 +524,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledLanguageOptions_CanPreselectSelectedLanguage() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledLanguageOptionsCanPreselectSelectedLanguage() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'language'
 		);
@@ -497,7 +551,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledLanguageOptions_CanPreselectMultipleLanguages() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledLanguageOptionsCanPreselectMultipleLanguages() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'language'
 		);
@@ -541,7 +598,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests concerning the rendering of the place option box
 	///////////////////////////////////////////////////////////
 
-	public function test_Render_ForDisabledPlaceOptions_HidesPlaceSubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForDisabledPlaceOptionsHidesPlaceSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -553,7 +613,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledPlaceOptions_ContainsPlaceOptions() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledPlaceOptionsContainsPlaceOptions() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'place'
 		);
@@ -574,7 +637,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledPlaceOptions_HtmlSpecialCharsThePlaceTitle() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledPlaceOptionsHtmlSpecialCharsThePlaceTitle() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'place'
 		);
@@ -596,7 +662,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledPlaceOptions_ContainsSelectorForPlaces() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledPlaceOptionsContainsSelectorForPlaces() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'place'
 		);
@@ -608,7 +677,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledPlaceOptions_CanPreselectPlaceOption() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledPlaceOptionsCanPreselectPlaceOption() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'place'
 		);
@@ -631,7 +703,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledPlaceOptions_CanPreselectMultiplePlaceOptions() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledPlaceOptionsCanPreselectMultiplePlaceOptions() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'place'
 		);
@@ -676,7 +751,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests concerning the rendering of the city option box
 	//////////////////////////////////////////////////////////
 
-	public function test_Render_ForDisabledCityOptions_HidesCitySubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForDisabledCityOptionsHidesCitySubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'country'
 		);
@@ -688,7 +766,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledCityOptions_CanContainCityOption() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCityOptionsCanContainCityOption() {
 		$this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
 
 		$cityName = 'test city';
@@ -708,7 +789,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledCityOptions_CanContainTwoCityOptiona() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCityOptionsCanContainTwoCityOptiona() {
 		$this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
 		$cityName1 = 'foo city';
 		$cityName2 = 'bar city';
@@ -745,7 +829,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledCityOptions_CanPreselectCityOption() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCityOptionsCanPreselectCityOption() {
 		$this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
 		$cityTitle = 'test city';
 		$placeUid = $this->testingFramework->createRecord(
@@ -767,7 +854,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledCityOptions_CanPreselectMultipleCityOptions() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCityOptionsCanPreselectMultipleCityOptions() {
 		$this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
 		$cityTitle1 = 'bar city';
 		$cityTitle2 = 'foo city';
@@ -814,7 +904,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests concerning the rendering of the country option box
 	/////////////////////////////////////////////////////////////
 
-	public function test_Render_ForDisabledCountryOptions_HidesCountrySubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForDisabledCountryOptionsHidesCountrySubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -826,7 +919,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForDisabledCountryOptions_DoesNotShowCountryOptionsMarker() {
+	/**
+	 * @test
+	 */
+	public function renderForDisabledCountryOptionsDoesNotShowCountryOptionsMarker() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -837,7 +933,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledCountryOptions_CanContainCountryOption() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCountryOptionsCanContainCountryOption() {
 		$this->instantiateStaticInfo();
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'country'
@@ -865,7 +964,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledCountryOptions_CanContainMultipleCountryOptions() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCountryOptionsCanContainMultipleCountryOptions() {
 		$this->instantiateStaticInfo();
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'country'
@@ -916,7 +1018,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledCountryOptions_CanPreselectOneCountryOption() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCountryOptionsCanPreselectOneCountryOption() {
 		$this->instantiateStaticInfo();
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'country'
@@ -946,7 +1051,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledCountryOptions_CanPreselectMultipleCountryOptions() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCountryOptionsCanPreselectMultipleCountryOptions() {
 		$this->instantiateStaticInfo();
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'country'
@@ -1005,7 +1113,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests concerning the full text search input
 	////////////////////////////////////////////////
 
-	public function test_Render_ForDisabledFullTextSearch_HidesFullTextSearchSubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForDisabledFullTextSearchHidesFullTextSearchSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -1017,7 +1128,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledFullTextSearch_ContainsFullTextSearchSubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledFullTextSearchContainsFullTextSearchSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'full_text_search'
 		);
@@ -1029,7 +1143,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledFullTextSearch_CanFillSearchedWordIntoTextbox() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledFullTextSearchCanFillSearchedWordIntoTextbox() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'full_text_search'
 		);
@@ -1043,7 +1160,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledFullTextSearch_htmlSpecialcharsSearchedWord() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledFullTextSearchHtmlSpecialCharsSearchedWord() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'full_text_search'
 		);
@@ -1062,7 +1182,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests concerning the date search
 	/////////////////////////////////////
 
-	public function test_Render_ForDisabledDateSearch_HidesDateSearchSubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForDisabledDateSearchHidesDateSearchSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'country'
 		);
@@ -1074,7 +1197,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledDateSearch_ContainsDayFromDropdown() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledDateSearchContainsDayFromDropDown() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'date'
 		);
@@ -1085,7 +1211,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledDateSearch_ContainsMonthFromDropdown() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledDateSearchContainsMonthFromDropDown() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'date'
 		);
@@ -1096,7 +1225,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledDateSearch_ContainsYearFromDropdown() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledDateSearchContainsYearFromDropDown() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'date'
 		);
@@ -1107,7 +1239,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledDateSearch_ContainsDayToDropdown() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledDateSearchContainsDayToDropDown() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'date'
 		);
@@ -1118,7 +1253,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledDateSearch_ContainsMonthToDropdown() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledDateSearchContainsMonthToDropDown() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'date'
 		);
@@ -1129,7 +1267,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledDateSearch_ContainsYearToDropdown() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledDateSearchContainsYearToDropDown() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'date'
 		);
@@ -1140,7 +1281,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledDateSearchAndNumberOfYearsInDateFilterSetToTwo_ContainsThreeYearsInDropdown() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledDateSearchAndNumberOfYearsInDateFilterSetToTwoContainsThreeYearsInDropDown() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'date'
 		);
@@ -1167,7 +1311,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledDateSearch_AddsAnEmptyOptionToTheDropDown() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledDateSearchAddsAnEmptyOptionToTheDropDown() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'date'
 		);
@@ -1178,7 +1325,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForSentToMonthValue_PreselectsToMonthValue() {
+	/**
+	 * @test
+	 */
+	public function renderForSentToMonthValuePreselectsToMonthValue() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'date'
 		);
@@ -1225,7 +1375,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForNoSentDate_PreselectsNoDateValues() {
+	/**
+	 * @test
+	 */
+	public function renderForNoSentDatePreselectsNoDateValues() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'date'
 		);
@@ -1239,7 +1392,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForBothSentDatesZero_PreselectsNoDateValues() {
+	/**
+	 * @test
+	 */
+	public function renderForBothSentDatesZeroPreselectsNoDateValues() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'date'
 		);
@@ -1265,7 +1421,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests concerning the event type limitation
 	///////////////////////////////////////////////
 
-	public function test_Render_ForEventTypeLimitedAndEventTypeDisplayed_ShowsTheLimitedEventType() {
+	/**
+	 * @test
+	 */
+	public function renderForEventTypeLimitedAndEventTypeDisplayedShowsTheLimitedEventType() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'event_type'
 		);
@@ -1288,7 +1447,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEventTypeLimitedAndEventTypeDisplayed_hidesEventTypeNotLimited() {
+	/**
+	 * @test
+	 */
+	public function renderForEventTypeLimitedAndEventTypeDisplayedHidesEventTypeNotLimited() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'event_type'
 		);
@@ -1319,7 +1481,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests concerning the organizer search widget
 	////////////////////////////////////////////////
 
-	public function test_Render_ForOrganizersLimitedAndOrganizerDisplayed_ShowsTheLimitedOrganizers() {
+	/**
+	 * @test
+	 */
+	public function renderForOrganizersLimitedAndOrganizerDisplayedShowsTheLimitedOrganizers() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'organizer'
 		);
@@ -1344,7 +1509,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForOrganizerLimitedAndOrganizersDisplayed_hidesTheOrganizersWhichAreNotTheLimitedOnes() {
+	/**
+	 * @test
+	 */
+	public function renderForOrganizerLimitedAndOrganizersDisplayedHidesTheOrganizersWhichAreNotTheLimitedOnes() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'organizer'
 		);
@@ -1378,7 +1546,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests concerning the age search input
 	//////////////////////////////////////////
 
-	public function test_Render_ForDisabledAgeSearch_HidesAgeSearchSubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForDisabledAgeSearchHidesAgeSearchSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -1390,7 +1561,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledAgeSearch_ContainsAgeSearchSubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledAgeSearchContainsAgeSearchSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'age'
 		);
@@ -1402,7 +1576,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledAgeSearch_CanFillSearchedAgeIntoTextbox() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledAgeSearchCanFillSearchedAgeIntoTextbox() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'age'
 		);
@@ -1416,7 +1593,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledAgeSearchAndAgeValueZero_DoesNotShowAgeValueZero() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledAgeSearchAndAgeValueZeroDoesNotShowAgeValueZero() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'age'
 		);
@@ -1430,7 +1610,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledAgeSearch_DoesNotIncludeNonIntegerAgeAsValue() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledAgeSearchDoesNotIncludeNonIntegerAgeAsValue() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'age'
 		);
@@ -1449,7 +1632,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests concerning the rendering of the organizer option box
 	////////////////////////////////////////////////////////////////
 
-	public function test_Render_ForOrganizerHiddenInConfiguration_HidesOrganizerSubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForOrganizerHiddenInConfigurationHidesOrganizerSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -1461,7 +1647,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledOrganizer_ContainsOrganizerOption() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledOrganizerContainsOrganizerOption() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'organizer'
 		);
@@ -1484,7 +1673,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledOrganizer_HtmlSpecialCharsTheOrganizersName() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledOrganizerHtmlSpecialCharsTheOrganizersName() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'organizer'
 		);
@@ -1508,7 +1700,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledOrganizer_PreselectsSelectedValue() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledOrganizerPreselectsSelectedValue() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'organizer'
 		);
@@ -1533,7 +1728,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledOrganizer_CanPreselectTwoValues() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledOrganizerCanPreselectTwoValues() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'organizer'
 		);
@@ -1573,7 +1771,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledOrganizer_ContainsOrganizersSubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledOrganizerContainsOrganizersSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'organizer'
 		);
@@ -1590,7 +1791,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	// Tests concerning the price search input
 	////////////////////////////////////////////
 
-	public function test_Render_ForDisabledPriceSearch_HidesPriceSearchSubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForDisabledPriceSearchHidesPriceSearchSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'city'
 		);
@@ -1602,7 +1806,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledPriceSearch_ContainsPriceSearchSubpart() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledPriceSearchContainsPriceSearchSubpart() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'price'
 		);
@@ -1614,7 +1821,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledPriceSearch_CanFillSearchedPriceFromIntoTextbox() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledPriceSearchCanFillSearchedPriceFromIntoTextbox() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'price'
 		);
@@ -1628,7 +1838,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledPriceSearch_CanFillSearchedPriceToIntoTextbox() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledPriceSearchCanFillSearchedPriceToIntoTextbox() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'price'
 		);
@@ -1642,7 +1855,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledPriceSearchAndPriceFromZero_DoesNotShowZeroForPriceFrom() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledPriceSearchAndPriceFromZeroDoesNotShowZeroForPriceFrom() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'price'
 		);
@@ -1656,7 +1872,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledPriceSearchAndPriceToZero_DoesNotShowZeroForPriceTo() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledPriceSearchAndPriceToZeroDoesNotShowZeroForPriceTo() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'price'
 		);
@@ -1670,7 +1889,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledPriceSearch_DoesNotIncludeNonIntegerPriceFromAsValue() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledPriceSearchDoesNotIncludeNonIntegerPriceFromAsValue() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'price'
 		);
@@ -1684,7 +1906,10 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_Render_ForEnabledPriceSearch_DoesNotIncludeNonIntegerPriceToAsValue() {
+	/**
+	 * @test
+	 */
+	public function renderForEnabledPriceSearchDoesNotIncludeNonIntegerPriceToAsValue() {
 		$this->fixture->setConfigurationValue(
 			'displaySearchFormFields', 'price'
 		);

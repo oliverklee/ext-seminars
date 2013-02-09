@@ -58,7 +58,10 @@ class tx_seminars_Mapper_BackEndUserGroupTest extends tx_phpunit_testcase {
 	// Tests concerning the basic functions
 	/////////////////////////////////////////
 
-	public function test_Find_ReturnsBackEndUserGroupInstance() {
+	/**
+	 * @test
+	 */
+	public function findReturnsBackEndUserGroupInstance() {
 		$uid = $this->fixture->getNewGhost()->getUid();
 
 		$this->assertTrue(
@@ -67,7 +70,10 @@ class tx_seminars_Mapper_BackEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function test_load_ForExistingUserGroup_CanLoadUserGroupData() {
+	/**
+	 * @test
+	 */
+	public function loadForExistingUserGroupCanLoadUserGroupData() {
 		$userGroup = $this->fixture->find(
 			$this->testingFramework->createBackEndUserGroup(
 				array('title' => 'foo')
