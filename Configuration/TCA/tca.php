@@ -192,9 +192,8 @@ $TCA['tx_seminars_seminars'] = array(
 				'allowed' => 'tx_seminars_seminars',
 				'foreign_table' => 'tx_seminars_seminars',
 				// only allow for topic records and complete event records, but not for date records
-				'foreign_table_where' => 'AND (tx_seminars_seminars.object_type=0 '
-					.'OR tx_seminars_seminars.object_type=1)'.$selectWhereForTopics
-					.' ORDER BY title',
+				'foreign_table_where' => 'AND (tx_seminars_seminars.object_type = 0 OR tx_seminars_seminars.object_type = 1)' .
+					$selectWhereForTopics . ' ORDER BY title',
 				'size' => 1,
 				'minitems' => 1,
 				'maxitems' => 1,
@@ -217,9 +216,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_categories',
 				'foreign_table' => 'tx_seminars_categories',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_categories'
-				),
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_categories') . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -235,8 +232,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_seminars',
 				'foreign_table' => 'tx_seminars_seminars',
-				'foreign_table_where' => 'AND tx_seminars_seminars.uid!=###THIS_UID###' .
-					' AND object_type=1',
+				'foreign_table_where' => 'AND tx_seminars_seminars.uid != ###THIS_UID### AND object_type = 1 ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -250,8 +246,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'type' => $selectType,
 				'internal_type' => 'db',
 				'foreign_table' => 'tx_seminars_seminars',
-				'foreign_table_where' => 'AND tx_seminars_seminars.uid!=###THIS_UID###' .
-					' AND object_type=1',
+				'foreign_table_where' => 'AND tx_seminars_seminars.uid != ###THIS_UID### AND object_type = 1 ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -285,9 +280,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_event_types',
 				'foreign_table' => 'tx_seminars_event_types',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_event_types'
-				),
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_event_types') . ' ORDER BY title',
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
@@ -454,9 +447,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_sites',
 				'foreign_table' => 'tx_seminars_sites',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_sites'
-				),
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_sites') . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -481,9 +472,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_lodgings',
 				'foreign_table' => 'tx_seminars_lodgings',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_lodgings'
-				) . ' ORDER BY title',
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_lodgings') . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -499,9 +488,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_foods',
 				'foreign_table' => 'tx_seminars_foods',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_foods'
-				) . ' ORDER BY title',
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_foods') . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -517,9 +504,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_speakers',
 				'foreign_table' => 'tx_seminars_speakers',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_speakers'
-				),
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_speakers')  . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -535,9 +520,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_speakers',
 				'foreign_table' => 'tx_seminars_speakers',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_speakers'
-				),
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_speakers') . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -553,9 +536,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_speakers',
 				'foreign_table' => 'tx_seminars_speakers',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_speakers'
-				),
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_speakers') . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -571,9 +552,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_speakers',
 				'foreign_table' => 'tx_seminars_speakers',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_speakers'
-				),
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_speakers') . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -726,9 +705,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_checkboxes',
 				'foreign_table' => 'tx_seminars_checkboxes',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_checkboxes'
-				) . ' ORDER BY title',
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_checkboxes') . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -753,9 +730,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_payment_methods',
 				'foreign_table' => 'tx_seminars_payment_methods',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_payment_methods'
-				) . ' ORDER BY title',
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_payment_methods') . ' ORDER BY title',
 				'size' => 5,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -771,9 +746,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_organizers',
 				'foreign_table' => 'tx_seminars_organizers',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_organizers'
-				),
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_organizers') . ' ORDER BY title',
 				'size' => 5,
 				'minitems' => 1,
 				'maxitems' => 999,
@@ -789,9 +762,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_organizers',
 				'foreign_table' => 'tx_seminars_organizers',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_organizers'
-				),
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_organizers') . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -900,9 +871,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_target_groups',
 				'foreign_table' => 'tx_seminars_target_groups',
-				'foreign_table_where' => txSeminarsGetTableRelationsClause(
-					'tx_seminars_target_groups'
-				),
+				'foreign_table_where' => txSeminarsGetTableRelationsClause('tx_seminars_target_groups') . ' ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -1184,6 +1153,7 @@ $TCA['tx_seminars_speakers'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_skills',
 				'foreign_table' => 'tx_seminars_skills',
+				'foreign_table_where' => 'ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -1626,6 +1596,7 @@ $TCA['tx_seminars_attendances'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_payment_methods',
 				'foreign_table' => 'tx_seminars_payment_methods',
+				'foreign_table_where' => 'ORDER BY title',
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
@@ -2205,6 +2176,7 @@ $TCA['tx_seminars_timeslots'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_speakers',
 				'foreign_table' => 'tx_seminars_speakers',
+				'foreign_table_where' => 'ORDER BY title',
 				'size' => 10,
 				'minitems' => 0,
 				'maxitems' => 999,
@@ -2220,6 +2192,7 @@ $TCA['tx_seminars_timeslots'] = array(
 				'internal_type' => 'db',
 				'allowed' => 'tx_seminars_sites',
 				'foreign_table' => 'tx_seminars_sites',
+				'foreign_table_where' => 'ORDER BY title',
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,

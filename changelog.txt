@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4661] Change: Sort speakers, places, organizers, etc. by title in the backend
 - [#4653] Fix: Crash in BE in TYPO3 CMS 6.0.x
 - [#4625] Cleanup: Fix all instances of "Underscores are not allowed in method names"
 - [#4645] Fix: Crash when running the RegistrationManager unit tests in PHP 5.4.6
