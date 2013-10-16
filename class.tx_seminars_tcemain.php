@@ -33,20 +33,16 @@
  * @author Mario Rimann <typo3-coding@rimann.org>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_tcemainprocdm extends tx_oelib_templatehelper {
+class tx_seminars_tcemainprocdm {
+	/**
+	 * @var array
+	 */
 	private $tceMainFieldArrays = array();
 
 	/**
 	 * @var string the extension key
 	 */
 	public $extKey = 'seminars';
-
-	/**
-	 * The constructor.
-	 */
-	public function __construct() {
-		parent::init();
-	}
 
 	/**
 	 * Handles data after everything had been written to the database.
