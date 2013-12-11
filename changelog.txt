@@ -1,4 +1,5 @@
 0.9.6 (currently working on)
+- [#4512] Fix: HTML entities of field ###attached_files### are displayed only as plain text
 - [#4610] Fix: PHP/Apache crash/SIGSEV when running the unit tests on PHP 5.4
 - [#4844] Fix: Crash in the single view and on the registration page on PHP 5.4.22
 - [#4817] Change: Drop the new prices
