@@ -59,6 +59,8 @@ class tx_seminars_frontEndRegistrationsList_testcase extends tx_phpunit_testcase
 	private $registrationUid = 0;
 
 	public function setUp() {
+		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
+
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
 
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');

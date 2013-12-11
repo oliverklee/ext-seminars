@@ -58,6 +58,8 @@ class tx_seminars_BackEnd_RegistrationsList_testcase extends tx_phpunit_testcase
 	private $backEndLanguageBackup;
 
 	public function setUp() {
+		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
+
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
