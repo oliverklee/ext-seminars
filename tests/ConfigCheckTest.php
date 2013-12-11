@@ -98,4 +98,3 @@ class tx_seminars_ConfigCheckTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

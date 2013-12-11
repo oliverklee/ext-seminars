@@ -202,4 +202,3 @@ abstract class tx_seminars_BackEndExtJs_Ajax_AbstractList {
 		return $this->recursivePageList;
 	}
 }
-?>

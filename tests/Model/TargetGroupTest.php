@@ -164,4 +164,3 @@ class tx_seminars_Model_TargetGroupTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

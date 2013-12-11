@@ -2493,5 +2493,3 @@ $TCA['tx_seminars_prices'] = array(
 		'1' => array('showitem' => 'starttime, endtime, fe_group'),
 	),
 );
-
-?>

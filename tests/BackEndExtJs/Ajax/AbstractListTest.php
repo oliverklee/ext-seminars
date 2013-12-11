@@ -465,4 +465,3 @@ class tx_seminars_BackEndExtJs_Ajax_AbstractListTest extends tx_phpunit_testcase
 		$this->fixture->retrieveModels();
 	}
 }
-?>

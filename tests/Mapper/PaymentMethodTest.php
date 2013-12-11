@@ -82,4 +82,3 @@ class tx_seminars_Mapper_PaymentMethodTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

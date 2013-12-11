@@ -146,4 +146,3 @@ class tx_seminars_BackEnd_OrganizersListTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

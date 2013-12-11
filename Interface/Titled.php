@@ -38,4 +38,3 @@ interface tx_seminars_Interface_Titled {
 	 */
 	public function getTitle();
 }
-?>

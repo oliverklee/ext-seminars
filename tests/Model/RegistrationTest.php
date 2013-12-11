@@ -1541,4 +1541,3 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

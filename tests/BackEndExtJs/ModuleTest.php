@@ -378,4 +378,3 @@ class tx_seminars_BackEndExtJs_ModuleTest extends tx_phpunit_testcase {
 		$this->fixture->main();
 	}
 }
-?>

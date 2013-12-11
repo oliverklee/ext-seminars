@@ -32,4 +32,3 @@
  */
 class tx_seminars_tests_fixtures_Model_UntitledTestingModel extends tx_oelib_Model {
 }
-?>

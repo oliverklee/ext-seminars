@@ -143,7 +143,7 @@ class tx_seminars_ViewHelper_TimeRangeTest extends tx_phpunit_testcase {
 		$timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + 2 * tx_oelib_Time::SECONDS_PER_HOUR);
 
 		$this->assertSame(
-			strftime(self::TIME_FORMAT, self::BEGIN_DATE + tx_oelib_Time::SECONDS_PER_HOUR) . '&#8211;' . 
+			strftime(self::TIME_FORMAT, self::BEGIN_DATE + tx_oelib_Time::SECONDS_PER_HOUR) . '&#8211;' .
 				strftime(self::TIME_FORMAT, self::BEGIN_DATE + 2 * tx_oelib_Time::SECONDS_PER_HOUR),
 			$this->fixture->render($timeSpan)
 		);
@@ -159,10 +159,9 @@ class tx_seminars_ViewHelper_TimeRangeTest extends tx_phpunit_testcase {
 		$timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + 2 * tx_oelib_Time::SECONDS_PER_HOUR);
 
 		$this->assertSame(
-			strftime(self::TIME_FORMAT, self::BEGIN_DATE + tx_oelib_Time::SECONDS_PER_HOUR) . $dash . 
+			strftime(self::TIME_FORMAT, self::BEGIN_DATE + tx_oelib_Time::SECONDS_PER_HOUR) . $dash .
 				strftime(self::TIME_FORMAT, self::BEGIN_DATE + 2 * tx_oelib_Time::SECONDS_PER_HOUR),
 			$this->fixture->render($timeSpan, $dash)
 		);
 	}
 }
-?>

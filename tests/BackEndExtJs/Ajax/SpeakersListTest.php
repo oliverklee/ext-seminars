@@ -157,4 +157,3 @@ class tx_seminars_BackEndExtJs_Ajax_SpeakersListTest extends tx_phpunit_testcase
 		);
 	}
 }
-?>

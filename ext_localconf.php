@@ -80,4 +80,3 @@ $TYPO3_CONF_VARS['BE']['AJAX']['Seminars::setState'] = t3lib_extmgm::extPath($_E
 $TYPO3_CONF_VARS['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc'][]
 	= t3lib_extmgm::extPath($_EXTKEY) .
 		'BackEndExtJs/ClearCache.php:tx_seminars_BackEndExtJs_ClearCache->clearCachePostProcess';
-?>

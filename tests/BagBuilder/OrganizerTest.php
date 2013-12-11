@@ -210,4 +210,3 @@ class tx_seminars_BagBuilder_OrganizerTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 }
-?>

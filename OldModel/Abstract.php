@@ -638,4 +638,3 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 		return $this->getRecordPropertyInteger('pid');
 	}
 }
-?>

@@ -45,4 +45,3 @@ class tx_seminars_Mapper_Organizer extends tx_oelib_DataMapper {
 if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/Organizer.php']) {
 	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/Organizer.php']);
 }
-?>

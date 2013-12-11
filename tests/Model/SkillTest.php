@@ -82,4 +82,3 @@ class tx_seminars_Model_SkillTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

@@ -72,4 +72,3 @@ class tx_seminars_tests_fixtures_OldModel_Testing extends tx_seminars_OldModel_A
 		return parent::createMmRecords($mmTable, $references);
 	}
 }
-?>

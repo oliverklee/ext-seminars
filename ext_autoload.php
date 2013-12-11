@@ -232,4 +232,3 @@ return array(
 	'tx_seminars_viewhelper_daterange' => $extensionPath . 'ViewHelper/DateRange.php',
 	'tx_seminars_viewhelper_timerange' => $extensionPath . 'ViewHelper/TimeRange.php',
 );
-?>

@@ -87,4 +87,3 @@ class tx_seminars_tests_fixtures_Service_TestingSingleViewLinkBuilder extends tx
 		return parent::getSingleViewPageFromConfiguration();
 	}
 }
-?>

@@ -400,4 +400,3 @@ class tx_seminars_Model_OrganizerTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

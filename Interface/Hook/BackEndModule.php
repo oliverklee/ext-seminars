@@ -73,4 +73,3 @@ interface tx_seminars_Interface_Hook_BackEndModule {
 	 */
 	public function modifyCancelEmail(tx_seminars_Model_Registration $registration, tx_oelib_Mail $eMail);
 }
-?>

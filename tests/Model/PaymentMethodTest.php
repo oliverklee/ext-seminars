@@ -145,4 +145,3 @@ class tx_seminars_Model_PaymentMethodTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

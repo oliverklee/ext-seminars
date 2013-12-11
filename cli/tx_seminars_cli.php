@@ -48,4 +48,3 @@ try {
 } catch (Exception $exception) {
 	echo $exception->getMessage();
 }
-?>

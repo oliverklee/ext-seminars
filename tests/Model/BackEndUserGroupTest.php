@@ -162,4 +162,3 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

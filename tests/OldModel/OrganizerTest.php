@@ -214,4 +214,3 @@ class tx_seminars_OldModel_OrganizerTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

@@ -377,4 +377,3 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 		$this->fixture->sortByRelationOrder();
 	}
 }
-?>

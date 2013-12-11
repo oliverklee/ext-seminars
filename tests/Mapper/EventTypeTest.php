@@ -82,4 +82,3 @@ class tx_seminars_Mapper_EventTypeTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

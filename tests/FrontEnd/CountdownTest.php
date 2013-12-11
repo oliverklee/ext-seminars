@@ -150,4 +150,3 @@ class tx_seminars_FrontEnd_CountdownTest extends tx_phpunit_testcase {
 		$this->fixture->render();
 	}
 }
-?>

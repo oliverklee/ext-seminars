@@ -36,4 +36,3 @@ class tx_seminars_tests_fixtures_BagBuilder_BrokenTesting extends tx_seminars_Ba
 	 */
 	protected $bagClassName = 'tx_seminars_tests_fixtures_Bag_Testing';
 }
-?>

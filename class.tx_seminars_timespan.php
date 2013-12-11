@@ -360,4 +360,3 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	 */
 	public abstract function getPlaceShort();
 }
-?>

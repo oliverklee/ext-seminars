@@ -72,4 +72,3 @@ class tx_seminars_Bag_EventTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

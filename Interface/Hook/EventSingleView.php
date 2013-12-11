@@ -56,4 +56,3 @@ interface tx_seminars_Interface_Hook_EventSingleView {
 	 */
 	public function modifyTimeSlotListRow(tx_seminars_Model_TimeSlot $timeSlot, tx_oelib_Template $template);
 }
-?>

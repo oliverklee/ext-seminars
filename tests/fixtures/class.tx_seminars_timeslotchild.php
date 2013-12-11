@@ -64,4 +64,3 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 		$this->setRecordPropertyInteger('begin_date', $beginDate);
 	 }
 }
-?>

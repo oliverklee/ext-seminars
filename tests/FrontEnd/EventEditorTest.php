@@ -3647,4 +3647,3 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

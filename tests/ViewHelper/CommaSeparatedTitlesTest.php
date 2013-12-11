@@ -137,4 +137,3 @@ class tx_seminars_ViewHelper_CommaSeparatedTitlesTest extends tx_phpunit_testcas
 		);
 	}
 }
-?>

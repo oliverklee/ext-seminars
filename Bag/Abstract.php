@@ -407,4 +407,3 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 		return '';
 	}
 }
-?>

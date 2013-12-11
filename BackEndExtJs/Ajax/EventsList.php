@@ -86,4 +86,3 @@ class tx_seminars_BackEndExtJs_Ajax_EventsList extends tx_seminars_BackEndExtJs_
 if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/BackEndExtJs/Ajax/EventsList.php']) {
 	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/BackEndExtJs/Ajax/EventsList.php']);
 }
-?>

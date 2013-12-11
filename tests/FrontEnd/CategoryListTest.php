@@ -690,4 +690,3 @@ class tx_seminars_FrontEnd_CategoryListTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

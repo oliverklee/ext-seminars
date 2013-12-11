@@ -1736,4 +1736,3 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 }
-?>

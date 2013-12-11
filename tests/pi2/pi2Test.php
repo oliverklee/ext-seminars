@@ -1569,4 +1569,3 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

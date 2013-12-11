@@ -91,4 +91,3 @@ class tx_seminars_tests_fixtures_BagBuilder_Testing extends tx_seminars_BagBuild
 		$this->tableName = $tableName;
 	}
 }
-?>

@@ -838,4 +838,3 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

@@ -108,4 +108,3 @@ class tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm extends tx_seminar
 		return parent::getErrorMessage($fieldName);
 	}
 }
-?>

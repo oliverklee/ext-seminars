@@ -157,4 +157,3 @@ class tx_seminars_BackEndExtJs_Ajax_OrganizersListTest extends tx_phpunit_testca
 		);
 	}
 }
-?>

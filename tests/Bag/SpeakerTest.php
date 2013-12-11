@@ -143,4 +143,3 @@ class tx_seminars_Bag_SpeakerTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

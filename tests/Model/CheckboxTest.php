@@ -145,4 +145,3 @@ class tx_seminars_Model_CheckboxTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

@@ -31,4 +31,3 @@ $BE_USER->modAccess($MCONF, 1);
 $SOBE = tx_oelib_ObjectFactory::make('tx_seminars_BackEndExtJs_Module');
 $SOBE->init();
 echo $SOBE->main();
-?>

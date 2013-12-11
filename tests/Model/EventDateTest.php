@@ -1656,4 +1656,3 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		$this->fixture->setPaymentMethods(new tx_oelib_List());
 	}
 }
-?>

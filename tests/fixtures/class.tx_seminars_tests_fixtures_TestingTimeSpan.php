@@ -32,4 +32,3 @@
  */
 class tx_seminars_tests_fixtures_TestingTimeSpan extends tx_seminars_Model_AbstractTimeSpan {
 }
-?>

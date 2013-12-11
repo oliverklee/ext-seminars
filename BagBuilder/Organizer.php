@@ -69,4 +69,3 @@ class tx_seminars_BagBuilder_Organizer extends tx_seminars_BagBuilder_Abstract {
 if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/BagBuilder/Organizer.php']) {
 	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/BagBuilder/Organizer.php']);
 }
-?>

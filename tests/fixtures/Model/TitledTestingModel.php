@@ -40,4 +40,3 @@ class tx_seminars_tests_fixtures_Model_TitledTestingModel extends tx_oelib_Model
 		return $this->getAsString('title');
 	}
 }
-?>

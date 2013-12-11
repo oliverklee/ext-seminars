@@ -1340,4 +1340,3 @@ class tx_seminars_Model_SingleEventTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

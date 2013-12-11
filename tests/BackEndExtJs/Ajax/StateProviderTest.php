@@ -186,4 +186,3 @@ class tx_seminars_BackEndExtJs_Ajax_StateProviderTest extends tx_phpunit_testcas
 		);
 	}
 }
-?>

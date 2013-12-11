@@ -649,4 +649,3 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

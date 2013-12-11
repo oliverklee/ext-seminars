@@ -69,7 +69,7 @@ class tx_seminars_ViewHelper_CountdownTest extends tx_phpunit_testcase {
 
 		$this->assertSame(
 			sprintf(
-				$this->translator->translate('message_countdown'), 
+				$this->translator->translate('message_countdown'),
 				$offset,
 				$this->translator->translate('countdown_seconds_plural')
 			),
@@ -173,4 +173,3 @@ class tx_seminars_ViewHelper_CountdownTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

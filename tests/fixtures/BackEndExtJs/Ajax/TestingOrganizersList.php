@@ -55,4 +55,3 @@ class tx_seminars_tests_fixtures_BackEndExtJs_Ajax_TestingOrganizersList extends
 		return parent::hasAccess();
 	}
 }
-?>

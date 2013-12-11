@@ -182,4 +182,3 @@ class tx_seminars_BackEnd_SpeakersListTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

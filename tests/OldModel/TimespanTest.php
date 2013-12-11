@@ -345,4 +345,3 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

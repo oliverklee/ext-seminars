@@ -668,4 +668,3 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 		$this->setRecordPropertyString('details_page', $pageId);
 	}
 }
-?>

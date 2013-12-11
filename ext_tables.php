@@ -325,4 +325,3 @@ if (TYPO3_MODE == 'BE') {
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_seminars_FrontEnd_WizardIcon']
 		= t3lib_extMgm::extPath($_EXTKEY).'FrontEnd/WizardIcon.php';
 }
-?>

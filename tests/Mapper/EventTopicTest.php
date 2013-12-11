@@ -449,4 +449,3 @@ class tx_seminars_Mapper_EventTopicTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

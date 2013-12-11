@@ -1206,4 +1206,3 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

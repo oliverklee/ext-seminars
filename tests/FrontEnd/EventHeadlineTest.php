@@ -185,4 +185,3 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

@@ -432,4 +432,3 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		$event->__destruct();
 	}
 }
-?>

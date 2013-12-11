@@ -82,4 +82,3 @@ class tx_seminars_Mapper_LodgingTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

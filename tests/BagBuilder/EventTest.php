@@ -9148,4 +9148,3 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 }
-?>

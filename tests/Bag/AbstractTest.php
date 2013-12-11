@@ -281,4 +281,3 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

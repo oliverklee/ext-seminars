@@ -93,4 +93,3 @@ class tx_seminars_tests_fixtures_BackEndExtJs_TestingModule extends tx_seminars_
 		return $this->pageRenderer;
 	}
 }
-?>

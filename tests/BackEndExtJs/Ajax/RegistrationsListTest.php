@@ -267,4 +267,3 @@ class tx_seminars_BackEndExtJs_Ajax_RegistrationsListTest extends tx_phpunit_tes
 		);
 	}
 }
-?>

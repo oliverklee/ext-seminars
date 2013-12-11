@@ -140,4 +140,3 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 		$this->setRecordPropertyBoolean('registered_themselves', $registeredThemselves);
 	}
 }
-?>

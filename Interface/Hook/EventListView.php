@@ -59,4 +59,3 @@ interface tx_seminars_Interface_Hook_EventListView {
 		tx_seminars_Model_Registration $registration, tx_oelib_Template $template
 	);
 }
-?>

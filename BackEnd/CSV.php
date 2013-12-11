@@ -60,4 +60,3 @@ if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['
 $SOBE = tx_oelib_ObjectFactory::make('tx_seminars_BackEnd_CSV');
 $SOBE->init();
 $SOBE->printContent();
-?>

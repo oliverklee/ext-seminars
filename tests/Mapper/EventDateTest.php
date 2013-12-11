@@ -568,4 +568,3 @@ class tx_seminars_Mapper_EventDateTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

@@ -87,4 +87,3 @@ class tx_seminars_Mapper_FrontEndUserTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

@@ -535,4 +535,3 @@ class tx_seminars_BackEnd_RegistrationsListTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

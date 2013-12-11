@@ -319,4 +319,3 @@ class tx_seminars_Model_AbstractTimeSpanTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

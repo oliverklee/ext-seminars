@@ -692,4 +692,3 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		return $this->hooks;
 	}
 }
-?>

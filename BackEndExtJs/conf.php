@@ -6,4 +6,3 @@ $MCONF['script'] = '_DISPATCH';
 
 $MLANG['default']['tabs_images']['tab'] = '../BackEnd/moduleicon.gif';
 $MLANG['default']['ll_ref'] = 'LLL:EXT:seminars/BackEnd/locallang_mod.xml';
-?>

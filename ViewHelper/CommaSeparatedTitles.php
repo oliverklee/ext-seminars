@@ -60,4 +60,3 @@ class tx_seminars_ViewHelper_CommaSeparatedTitles {
 if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/ViewHelper/CommaSeparatedTitles.php']) {
 	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/ViewHelper/CommaSeparatedTitles.php']);
 }
-?>

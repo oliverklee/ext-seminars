@@ -802,4 +802,3 @@ class tx_seminars_Model_SpeakerTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

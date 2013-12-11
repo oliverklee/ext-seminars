@@ -82,4 +82,3 @@ class tx_seminars_Model_LodgingTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

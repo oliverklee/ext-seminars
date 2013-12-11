@@ -519,4 +519,3 @@ class tx_seminars_Model_PlaceTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

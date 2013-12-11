@@ -521,4 +521,3 @@ class tx_seminars_OldModel_SpeakerTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

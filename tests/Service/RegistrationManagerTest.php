@@ -6938,4 +6938,3 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 }
-?>

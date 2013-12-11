@@ -232,4 +232,3 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

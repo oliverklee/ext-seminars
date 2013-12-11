@@ -256,4 +256,3 @@ abstract class tx_seminars_BagBuilder_Abstract {
 		$this->showHiddenRecords = TRUE;
 	}
 }
-?>

@@ -142,4 +142,3 @@ class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

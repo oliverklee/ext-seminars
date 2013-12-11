@@ -465,4 +465,3 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 		$fixture->__destruct();
 	}
 }
-?>

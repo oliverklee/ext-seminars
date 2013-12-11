@@ -162,4 +162,3 @@ abstract class tx_seminars_Model_AbstractTimeSpan extends tx_oelib_Model impleme
 		return $this->hasString('room');
 	}
 }
-?>

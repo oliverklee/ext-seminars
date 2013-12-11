@@ -76,4 +76,3 @@ class tx_seminars_BackEndExtJs_Ajax_DispatcherTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

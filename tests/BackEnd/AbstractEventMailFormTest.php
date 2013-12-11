@@ -897,4 +897,3 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 	}
 }
-?>

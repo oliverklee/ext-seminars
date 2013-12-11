@@ -111,4 +111,3 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 		return '';
 	}
 }
-?>

@@ -1923,4 +1923,3 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

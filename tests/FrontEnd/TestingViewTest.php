@@ -66,4 +66,3 @@ class tx_seminars_FrontEnd_TestingViewTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

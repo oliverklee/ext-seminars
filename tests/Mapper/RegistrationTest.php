@@ -338,4 +338,3 @@ class tx_seminars_Mapper_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

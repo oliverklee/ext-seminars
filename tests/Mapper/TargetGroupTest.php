@@ -111,4 +111,3 @@ class tx_seminars_Mapper_TargetGroupTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

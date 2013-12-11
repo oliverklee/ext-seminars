@@ -707,4 +707,3 @@ class tx_seminars_BagBuilder_RegistrationTest extends tx_phpunit_testcase {
 		$bag->__destruct();
 	}
 }
-?>

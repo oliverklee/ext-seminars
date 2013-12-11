@@ -513,4 +513,3 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$fixture->__destruct();
 	}
 }
-?>

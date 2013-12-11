@@ -267,4 +267,3 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

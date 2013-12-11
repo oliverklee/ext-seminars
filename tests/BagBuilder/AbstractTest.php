@@ -829,4 +829,3 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

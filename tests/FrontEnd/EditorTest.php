@@ -124,4 +124,3 @@ class tx_seminars_FrontEnd_EditorTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

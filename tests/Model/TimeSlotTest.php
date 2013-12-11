@@ -132,4 +132,3 @@ class tx_seminars_Model_TimeSlotTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

@@ -45,4 +45,3 @@ class tx_seminars_Mapper_Category extends tx_oelib_DataMapper {
 if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/Category.php']) {
 	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/Category.php']);
 }
-?>

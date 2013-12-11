@@ -40,4 +40,3 @@ class tx_seminars_tests_fixtures_FrontEnd_TestingView extends tx_seminars_FrontE
 		return 'Hi, I am the testingFrontEndView!';
 	}
 }
-?>

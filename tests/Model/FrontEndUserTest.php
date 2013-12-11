@@ -954,4 +954,3 @@ class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

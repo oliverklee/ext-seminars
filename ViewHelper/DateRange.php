@@ -154,7 +154,7 @@ class tx_seminars_ViewHelper_DateRange {
 	 *
 	 * @param integer $timestamp the UNIX timestamp to render
 	 *
-	 * @return string the UNIX timestamp rendered using the strftime format in plugin.tx_seminars_seminars.dateFormatYMD 
+	 * @return string the UNIX timestamp rendered using the strftime format in plugin.tx_seminars_seminars.dateFormatYMD
 	 */
 	protected function getAsDateFormatYmd($timestamp) {
 		return strftime($this->configuration->getAsString('dateFormatYMD'), $timestamp);
@@ -208,4 +208,3 @@ class tx_seminars_ViewHelper_DateRange {
 if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/ViewHelper/DateRange.php']) {
 	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/ViewHelper/DateRange.php']);
 }
-?>

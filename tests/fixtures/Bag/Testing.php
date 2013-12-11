@@ -83,4 +83,3 @@ class tx_seminars_tests_fixtures_Bag_Testing extends tx_seminars_Bag_Abstract {
 		$this->valid();
 	}
 }
-?>

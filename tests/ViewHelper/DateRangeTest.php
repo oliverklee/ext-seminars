@@ -229,4 +229,3 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

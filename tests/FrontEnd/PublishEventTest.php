@@ -170,4 +170,3 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

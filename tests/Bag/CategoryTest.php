@@ -68,4 +68,3 @@ class tx_seminars_Bag_CategoryTest extends tx_phpunit_testcase {
 		);
 	}
 }
-?>

@@ -607,4 +607,3 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 		$this->fixture->render();
 	}
 }
-?>

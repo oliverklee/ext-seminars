@@ -394,4 +394,3 @@ abstract class tx_seminars_BackEnd_AbstractList {
 		return '&amp;tx_seminars_pi2[pid]=' . $pageData['uid'];
 	}
 }
-?>

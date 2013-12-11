@@ -227,4 +227,3 @@ if (!isset($GLOBALS['TCA']['be_groups']['columns']['tx_seminars_events_folder'])
 			'tx_seminars_auxiliaries_folder,'
 	);
 }
-?>
