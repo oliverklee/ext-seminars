@@ -1,4 +1,5 @@
 0.9.6 (currently working on)
+- [#4817] Change: Drop the new prices
 - [#4849] Fix: Unit test errors about missing constructor parameters
 - [#4362] Fix: Skip the configuration check in the unit tests
 - [#4361] Fix: Hide the time slot records in the BE lists
