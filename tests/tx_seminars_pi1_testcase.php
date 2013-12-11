@@ -6996,13 +6996,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 		$fixture->cObj = $this->createContentMock();
 		$fixture->conf = array();
-		$event = $this->getMock(
-			'tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser')
-		);
-		$event->expects($this->any())->method('isUserVip')
-			->will($this->returnValue(FALSE));
-		$event->expects($this->any())->method('isOwnerFeUser')
-			->will($this->returnValue(TRUE));
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
+		$event->expects($this->any())->method('isUserVip')->will($this->returnValue(FALSE));
+		$event->expects($this->any())->method('isOwnerFeUser')->will($this->returnValue(TRUE));
 		$fixture->setSeminar($event);
 
 		$this->assertTrue(
@@ -7021,13 +7017,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 		$fixture->cObj = $this->createContentMock();
 		$fixture->conf = array('mayManagersEditTheirEvents' => TRUE);
-		$event = $this->getMock(
-			'tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser')
-		);
-		$event->expects($this->any())->method('isUserVip')
-			->will($this->returnValue(TRUE));
-		$event->expects($this->any())->method('isOwnerFeUser')
-			->will($this->returnValue(FALSE));
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
+		$event->expects($this->any())->method('isUserVip')->will($this->returnValue(TRUE));
+		$event->expects($this->any())->method('isOwnerFeUser')->will($this->returnValue(FALSE));
 		$fixture->setSeminar($event);
 
 		$this->assertTrue(
@@ -7046,13 +7038,9 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		);
 		$fixture->cObj = $this->createContentMock();
 		$fixture->conf = array('mayManagersEditTheirEvents' => FALSE);
-		$event = $this->getMock(
-			'tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser')
-		);
-		$event->expects($this->any())->method('isUserVip')
-			->will($this->returnValue(TRUE));
-		$event->expects($this->any())->method('isOwnerFeUser')
-			->will($this->returnValue(FALSE));
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
+		$event->expects($this->any())->method('isUserVip')->will($this->returnValue(TRUE));
+		$event->expects($this->any())->method('isOwnerFeUser')->will($this->returnValue(FALSE));
 		$fixture->setSeminar($event);
 
 		$this->assertFalse(
@@ -7074,15 +7062,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 			'eventEditorPID' => 42,
 			'mayManagersEditTheirEvents' => TRUE,
 		);
-		$event = $this->getMock(
-			'tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser')
-		);
-		$event->expects($this->any())->method('getUid')
-			->will($this->returnValue(91));
-		$event->expects($this->any())->method('isUserVip')
-			->will($this->returnValue(FALSE));
-		$event->expects($this->any())->method('isOwnerFeUser')
-			->will($this->returnValue(FALSE));
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
+		$event->expects($this->any())->method('getUid')->will($this->returnValue(91));
+		$event->expects($this->any())->method('isUserVip')->will($this->returnValue(FALSE));
+		$event->expects($this->any())->method('isOwnerFeUser')->will($this->returnValue(FALSE));
 		$fixture->setSeminar($event);
 
 		$this->assertFalse(
@@ -7110,11 +7093,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
 			->will($this->returnValue(FALSE));
 
-		$event = $this->getMock(
-			'tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden')
-		);
-		$event->expects($this->any())->method('getUid')
-			->will($this->returnValue(91));
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event->expects($this->any())->method('getUid')->will($this->returnValue(91));
 		$fixture->setSeminar($event);
 
 		$this->assertEquals(
@@ -7140,11 +7120,8 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
 			->will($this->returnValue(TRUE));
 
-		$event = $this->getMock(
-			'tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden')
-		);
-		$event->expects($this->any())->method('getUid')
-			->will($this->returnValue(91));
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event->expects($this->any())->method('getUid')->will($this->returnValue(91));
 		$fixture->setSeminar($event);
 
 		$this->assertContains(
@@ -7169,15 +7146,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
 			->will($this->returnValue(TRUE));
 
-		$event = $this->getMock(
-			'tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden')
-		);
-		$event->expects($this->any())->method('getUid')
-			->will($this->returnValue(91));
-		$event->expects($this->any())->method('isPublished')
-			->will($this->returnValue(TRUE));
-		$event->expects($this->any())->method('isHidden')
-			->will($this->returnValue(FALSE));
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event->expects($this->any())->method('getUid')->will($this->returnValue(91));
+		$event->expects($this->any())->method('isPublished')->will($this->returnValue(TRUE));
+		$event->expects($this->any())->method('isHidden')->will($this->returnValue(FALSE));
 		$fixture->setSeminar($event);
 
 		$currentPageId = $GLOBALS['TSFE']->id;
@@ -7206,15 +7178,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
 			->will($this->returnValue(TRUE));
 
-		$event = $this->getMock(
-			'tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden')
-		);
-		$event->expects($this->any())->method('getUid')
-			->will($this->returnValue(91));
-		$event->expects($this->any())->method('isPublished')
-			->will($this->returnValue(TRUE));
-		$event->expects($this->any())->method('isHidden')
-			->will($this->returnValue(TRUE));
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event->expects($this->any())->method('getUid')->will($this->returnValue(91));
+		$event->expects($this->any())->method('isPublished')->will($this->returnValue(TRUE));
+		$event->expects($this->any())->method('isHidden')->will($this->returnValue(TRUE));
 		$fixture->setSeminar($event);
 
 		$currentPageId = $GLOBALS['TSFE']->id;
@@ -7243,15 +7210,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
 			->will($this->returnValue(TRUE));
 
-		$event = $this->getMock(
-			'tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden')
-		);
-		$event->expects($this->any())->method('getUid')
-			->will($this->returnValue(91));
-		$event->expects($this->any())->method('isPublished')
-			->will($this->returnValue(FALSE));
-		$event->expects($this->any())->method('isHidden')
-			->will($this->returnValue(FALSE));
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event->expects($this->any())->method('getUid')->will($this->returnValue(91));
+		$event->expects($this->any())->method('isPublished')->will($this->returnValue(FALSE));
+		$event->expects($this->any())->method('isHidden')->will($this->returnValue(FALSE));
 		$fixture->setSeminar($event);
 
 		$this->assertNotContains(
@@ -7275,15 +7237,10 @@ class tx_seminars_pi1_testcase extends tx_phpunit_testcase {
 		$fixture->expects($this->once())->method('mayCurrentUserEditCurrentEvent')
 			->will($this->returnValue(TRUE));
 
-		$event = $this->getMock(
-			'tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden')
-		);
-		$event->expects($this->any())->method('getUid')
-			->will($this->returnValue(91));
-		$event->expects($this->any())->method('isPublished')
-			->will($this->returnValue(FALSE));
-		$event->expects($this->any())->method('isHidden')
-			->will($this->returnValue(TRUE));
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event->expects($this->any())->method('getUid')->will($this->returnValue(91));
+		$event->expects($this->any())->method('isPublished')->will($this->returnValue(FALSE));
+		$event->expects($this->any())->method('isHidden')->will($this->returnValue(TRUE));
 		$fixture->setSeminar($event);
 
 		$this->assertNotContains(

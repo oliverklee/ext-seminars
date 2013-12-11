@@ -657,7 +657,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 			array('showRegistrationFields' => ''),
 			$GLOBALS['TSFE']->cObj
 		);
-		$fixture->setSeminar($this->getMock('tx_seminars_seminar'));
+		$fixture->setSeminar($this->getMock('tx_seminars_seminar', array(), array(), '', FALSE));
 
 		$this->assertFalse(
 			$fixture->isFormFieldEnabled($key)
@@ -684,7 +684,7 @@ class tx_seminars_pi1_registrationEditor_testcase extends tx_phpunit_testcase {
 			array('showRegistrationFields' => $key),
 			$GLOBALS['TSFE']->cObj
 		);
-		$fixture->setSeminar($this->getMock('tx_seminars_seminar'));
+		$fixture->setSeminar($this->getMock('tx_seminars_seminar', array(), array(), '', FALSE));
 
 		$this->assertEquals(
 			$isSelfContained,

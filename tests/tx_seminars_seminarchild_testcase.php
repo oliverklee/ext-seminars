@@ -6647,13 +6647,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			'directions' => '',
 		);
 
-		$fixture = $this->getMock(
-			'tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace')
-		);
-		$fixture->expects($this->any())->method('getPlacesAsArray')
-			->will($this->returnValue(array($place)));
-		$fixture->expects($this->any())->method('hasPlace')
-			->will($this->returnValue(TRUE));
+		$fixture = $this->getMock('tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace'), array(), '', FALSE);
+		$fixture->expects($this->any())->method('getPlacesAsArray')->will($this->returnValue(array($place)));
+		$fixture->expects($this->any())->method('hasPlace')->will($this->returnValue(TRUE));
 
 		$this->assertEquals(
 			'Hotel Ibis, Kaiser-Karl-Ring 91, Bonn',
@@ -6684,13 +6680,9 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 			'directions' => '',
 		);
 
-		$fixture = $this->getMock(
-			'tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace')
-		);
-		$fixture->expects($this->any())->method('getPlacesAsArray')
-			->will($this->returnValue(array($place1, $place2)));
-		$fixture->expects($this->any())->method('hasPlace')
-			->will($this->returnValue(TRUE));
+		$fixture = $this->getMock('tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace'), array(), '', FALSE);
+		$fixture->expects($this->any())->method('getPlacesAsArray')->will($this->returnValue(array($place1, $place2)));
+		$fixture->expects($this->any())->method('hasPlace')->will($this->returnValue(TRUE));
 
 		$this->assertEquals(
 			'Hotel Ibis' . LF . 'Wasserwerk',
@@ -7541,7 +7533,8 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 				'hasPriceRegular', 'hasPriceSpecial', 'earlyBirdApplies',
 				'hasEarlyBirdPriceRegular', 'hasEarlyBirdPriceSpecial',
 				'hasPriceRegularBoard', 'hasPriceSpecialBoard'
-			)
+			),
+			array(), '', FALSE
 		);
 
 		$fixture->expects($this->any())->method('hasPriceRegular')
