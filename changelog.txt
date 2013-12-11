@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4761] Fix: Speaker sorting should obey backend order
 - [#3571] Feature: Add listrow-even and listrow-odd for the list view (thanks to Dimitri König)
 - [#4610] Fix: PHP/Apache crash/SIGSEV when running the unit tests on PHP 5.4
 - [#4844] Fix: Crash in the single view and on the registration page on PHP 5.4.22
