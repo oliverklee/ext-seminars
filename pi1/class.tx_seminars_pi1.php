@@ -212,16 +212,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		if ($this->configGetter) {
-			$this->configGetter->__destruct();
-		}
-		if ($this->seminar) {
-			$this->seminar->__destruct();
-		}
-		if ($this->registration) {
-			$this->registration->__destruct();
-		}
-
 		unset(
 			$this->configGetter, $this->seminar, $this->registration,
 			$this->hookObjects, $this->listViewHooks, $this->singleViewHooks, $this->feuser
@@ -481,7 +471,6 @@ class tx_seminars_pi1 extends tx_oelib_templatehelper {
 		$result = FALSE;
 
 		if ($this->seminar) {
-			$this->seminar->__destruct();
 			unset($this->seminar);
 		}
 
