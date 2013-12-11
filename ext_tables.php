@@ -235,6 +235,7 @@ $TCA['tx_seminars_timeslots'] = array(
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
 		'delete' => 'deleted',
+		'hideTable' => TRUE,
 		'iconfile' => $extIconRelPath . 'icon_tx_seminars_timeslots.gif',
 		'dynamicConfigFile' => $tcaPath,
 		'searchFields' => 'title'

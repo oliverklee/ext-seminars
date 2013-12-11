@@ -1,4 +1,5 @@
 0.9.6 (currently working on)
+- [#4361] Fix: Hide the time slot records in the BE lists
 - [#4653] Fix: Crash in BE in TYPO3 CMS 6.0.x
 - [#4645] Fix: Crash when running the RegistrationManager unit tests in PHP 5.4.6
 - [#4622] Fix: Unit test crash with in the DefaultControllerTest PHP 5.4.6
