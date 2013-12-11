@@ -2025,9 +2025,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 			$cssClasses = array();
 
-			if ($rowCounter % 2) {
-				$cssClasses[] = 'listrow-odd';
-			}
+			$cssClasses[] = ($rowCounter % 2) ? 'listrow-odd' : 'listrow-even';
 			if ($this->seminar->isCanceled()) {
 				$cssClasses[] = $this->pi_getClassName('canceled');
 			}
