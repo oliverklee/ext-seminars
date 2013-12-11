@@ -80,7 +80,6 @@
 			<label index="tx_seminars_seminars.enough_attendees">Has enough registrations:</label>
 			<label index="tx_seminars_seminars.is_full">Is full:</label>
 			<label index="tx_seminars_seminars.divLabelPayment">Payment</label>
-			<label index="tx_seminars_seminars.prices">Prices:</label>
 			<label index="tx_seminars_seminars.price_regular">Regular price:</label>
 			<label index="tx_seminars_seminars.price_regular_early">Regular price (early bird):</label>
 			<label index="tx_seminars_seminars.price_regular_board">Regular price including full board:</label>
@@ -207,14 +206,6 @@
 			<label index="tx_seminars_categories.single_view_page">Single view page for events in this category:</label>
 			<label index="tx_seminars_skills">Skills</label>
 			<label index="tx_seminars_skills.title">Title:</label>
-			<label index="tx_seminars_prices">Prices</label>
-			<label index="tx_seminars_prices.title">Title:</label>
-			<label index="tx_seminars_prices.value">Value:</label>
-			<label index="tx_seminars_prices.currency">Currency:</label>
-			<label index="tx_seminars_prices.tax">Tax:</label>
-			<label index="tx_seminars_prices.including_tax">Including/excluding Tax:</label>
-			<label index="tx_seminars_prices.including_tax.including">including</label>
-			<label index="tx_seminars_prices.including_tax.excluding">excluding</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 			<label index="fe_groups.tx_seminars_publish_events">Publish FE-edited events</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.0">publish immediately</label>
@@ -304,7 +295,6 @@
 			<label index="tx_seminars_seminars.enough_attendees">Hat genug Anmeldungen:</label>
 			<label index="tx_seminars_seminars.is_full">Ist voll:</label>
 			<label index="tx_seminars_seminars.divLabelPayment">Bezahlung</label>
-			<label index="tx_seminars_seminars.prices">Preise:</label>
 			<label index="tx_seminars_seminars.price_regular">Standardpreis:</label>
 			<label index="tx_seminars_seminars.price_regular_early">Standardpreis für Frühbucher:</label>
 			<label index="tx_seminars_seminars.price_regular_board">Standardpreis inklusive Vollpension:</label>
@@ -431,14 +421,6 @@
 			<label index="tx_seminars_categories.single_view_page">Seite mit der Einzelansicht für Veranstaltungen in dieser Kategorie:</label>
 			<label index="tx_seminars_skills">Fähigkeiten</label>
 			<label index="tx_seminars_skills.title">Titel:</label>
-			<label index="tx_seminars_prices">Preise</label>
-			<label index="tx_seminars_prices.title">Titel:</label>
-			<label index="tx_seminars_prices.value">Wert:</label>
-			<label index="tx_seminars_prices.currency">Währung:</label>
-			<label index="tx_seminars_prices.tax">Steuer:</label>
-			<label index="tx_seminars_prices.including_tax">Inklusive/exklusive Steuern:</label>
-			<label index="tx_seminars_prices.including_tax.including">inklusive</label>
-			<label index="tx_seminars_prices.including_tax.excluding">exklusive</label>
 			<label index="tt_content.list_type_pi1">Seminarmanager</label>
 			<label index="fe_groups.tx_seminars_publish_events">Im FE-Editor eingegebene Veranstaltungen</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.0">Veranstaltungen sofort veröffentlichen</label>
@@ -1126,7 +1108,6 @@
 			<label index="tx_seminars_seminars.enough_attendees">Compte suffisamment d'inscriptions :</label>
 			<label index="tx_seminars_seminars.is_full">Est complet :</label>
 			<label index="tx_seminars_seminars.divLabelPayment">Paiement</label>
-			<label index="tx_seminars_seminars.prices">Prix :</label>
 			<label index="tx_seminars_seminars.price_regular">Prix normal:</label>
 			<label index="tx_seminars_seminars.price_regular_early">Prix normal (précommande):</label>
 			<label index="tx_seminars_seminars.price_regular_board">Prix normal avec pension complète:</label>
@@ -1250,14 +1231,6 @@
 			<label index="tx_seminars_categories.icon">Icône :</label>
 			<label index="tx_seminars_skills">Compétences</label>
 			<label index="tx_seminars_skills.title">Titre :</label>
-			<label index="tx_seminars_prices">Prix</label>
-			<label index="tx_seminars_prices.title">Titre :</label>
-			<label index="tx_seminars_prices.value">Valeur :</label>
-			<label index="tx_seminars_prices.currency">Monnaie :</label>
-			<label index="tx_seminars_prices.tax">Taxe :</label>
-			<label index="tx_seminars_prices.including_tax">Taxes inclues/exclues :</label>
-			<label index="tx_seminars_prices.including_tax.including">inclus</label>
-			<label index="tx_seminars_prices.including_tax.excluding">exclu</label>
 			<label index="tt_content.list_type_pi1">Gestionnaire de séminaires</label>
 			<label index="fe_groups.tx_seminars_publish_events">Publier les événements édités en front end</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.0">publier immédiatement</label>
@@ -1345,7 +1318,6 @@
 			<label index="tx_seminars_seminars.enough_attendees" type="integer">219975728</label>
 			<label index="tx_seminars_seminars.is_full" type="integer">74563993</label>
 			<label index="tx_seminars_seminars.divLabelPayment" type="integer">205863499</label>
-			<label index="tx_seminars_seminars.prices" type="integer">18679445</label>
 			<label index="tx_seminars_seminars.price_regular" type="integer">240409527</label>
 			<label index="tx_seminars_seminars.price_regular_early" type="integer">216978206</label>
 			<label index="tx_seminars_seminars.price_regular_board" type="integer">76600225</label>
@@ -1461,14 +1433,6 @@
 			<label index="tx_seminars_categories.title" type="integer">85903807</label>
 			<label index="tx_seminars_skills" type="integer">178756701</label>
 			<label index="tx_seminars_skills.title" type="integer">85903807</label>
-			<label index="tx_seminars_prices" type="integer">236379502</label>
-			<label index="tx_seminars_prices.title" type="integer">85903807</label>
-			<label index="tx_seminars_prices.value" type="integer">181254146</label>
-			<label index="tx_seminars_prices.currency" type="integer">124949959</label>
-			<label index="tx_seminars_prices.tax" type="integer">99791745</label>
-			<label index="tx_seminars_prices.including_tax" type="integer">222008293</label>
-			<label index="tx_seminars_prices.including_tax.including" type="integer">129466687</label>
-			<label index="tx_seminars_prices.including_tax.excluding" type="integer">195388725</label>
 			<label index="tt_content.list_type_pi1" type="integer">144163361</label>
 			<label index="tx_seminars_seminars.attached_files" type="integer">62695314</label>
 			<label index="tx_seminars_seminars.details_page" type="integer">196341936</label>
@@ -2262,7 +2226,6 @@
 			<label index="tx_seminars_seminars.expiry" type="integer">159970035</label>
 			<label index="tx_seminars_seminars.queue_size" type="integer">161296272</label>
 			<label index="tx_seminars_seminars.offline_attendees" type="integer">238405249</label>
-			<label index="tx_seminars_seminars.prices" type="integer">18679445</label>
 			<label index="tx_seminars_seminars.divLabelAccess" type="integer">200750040</label>
 			<label index="tx_seminars_seminars.image" type="integer">73502731</label>
 			<label index="tx_seminars_seminars.requirements" type="integer">62069823</label>
@@ -2295,14 +2258,6 @@
 			<label index="tx_seminars_target_groups.minimum_age" type="integer">101482881</label>
 			<label index="tx_seminars_target_groups.maximum_age" type="integer">156105337</label>
 			<label index="tx_seminars_categories.icon" type="integer">57819822</label>
-			<label index="tx_seminars_prices" type="integer">236379502</label>
-			<label index="tx_seminars_prices.title" type="integer">85903807</label>
-			<label index="tx_seminars_prices.value" type="integer">181254146</label>
-			<label index="tx_seminars_prices.currency" type="integer">124949959</label>
-			<label index="tx_seminars_prices.tax" type="integer">99791745</label>
-			<label index="tx_seminars_prices.including_tax" type="integer">222008293</label>
-			<label index="tx_seminars_prices.including_tax.including" type="integer">129466687</label>
-			<label index="tx_seminars_prices.including_tax.excluding" type="integer">195388725</label>
 			<label index="fe_groups.tx_seminars_publish_events" type="integer">23104619</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.0" type="integer">10643789</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.1" type="integer">154538316</label>
@@ -2348,7 +2303,6 @@
 			<label index="tx_seminars_seminars.partners">Partners:</label>
 			<label index="tx_seminars_seminars.tutors">Tutors:</label>
 			<label index="tx_seminars_seminars.leaders">Leaders:</label>
-			<label index="tx_seminars_seminars.prices">Prices:</label>
 			<label index="tx_seminars_seminars.price_regular">Regular price:</label>
 			<label index="tx_seminars_seminars.price_regular_early">Regular price (early bird):</label>
 			<label index="tx_seminars_seminars.price_regular_board">Regular price including full board:</label>
@@ -2506,14 +2460,6 @@
 			<label index="tx_seminars_categories.title">Title:</label>
 			<label index="tx_seminars_skills">Skills</label>
 			<label index="tx_seminars_skills.title">Title:</label>
-			<label index="tx_seminars_prices">Prices</label>
-			<label index="tx_seminars_prices.title">Title:</label>
-			<label index="tx_seminars_prices.value">Value:</label>
-			<label index="tx_seminars_prices.currency">Currency:</label>
-			<label index="tx_seminars_prices.tax">Tax:</label>
-			<label index="tx_seminars_prices.including_tax">Including/excluding Tax:</label>
-			<label index="tx_seminars_prices.including_tax.including">including</label>
-			<label index="tx_seminars_prices.including_tax.excluding">excluding</label>
 			<label index="tt_content.list_type_pi1">Seminar Manager</label>
 			<label index="tx_seminars_seminars.attached_files">Attached files:</label>
 			<label index="tx_seminars_seminars.details_page">Page with the details view:</label>
@@ -3307,7 +3253,6 @@
 			<label index="tx_seminars_seminars.expiry">License expiry:</label>
 			<label index="tx_seminars_seminars.queue_size">Registration queue</label>
 			<label index="tx_seminars_seminars.offline_attendees">Number of offline-registered attendees:</label>
-			<label index="tx_seminars_seminars.prices">Prices:</label>
 			<label index="tx_seminars_seminars.divLabelAccess">Access</label>
 			<label index="tx_seminars_seminars.image">Image:</label>
 			<label index="tx_seminars_seminars.requirements">Requirements:</label>
@@ -3340,14 +3285,6 @@
 			<label index="tx_seminars_target_groups.minimum_age">Minimum age:</label>
 			<label index="tx_seminars_target_groups.maximum_age">Maximum age:</label>
 			<label index="tx_seminars_categories.icon">Icon:</label>
-			<label index="tx_seminars_prices">Prices</label>
-			<label index="tx_seminars_prices.title">Title:</label>
-			<label index="tx_seminars_prices.value">Value:</label>
-			<label index="tx_seminars_prices.currency">Currency:</label>
-			<label index="tx_seminars_prices.tax">Tax:</label>
-			<label index="tx_seminars_prices.including_tax">Including/excluding Tax:</label>
-			<label index="tx_seminars_prices.including_tax.including">including</label>
-			<label index="tx_seminars_prices.including_tax.excluding">excluding</label>
 			<label index="fe_groups.tx_seminars_publish_events">Publish FE-edited events</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.0">publish immediately</label>
 			<label index="fe_groups.tx_seminars_publish_events.I.1">only newly created events are hidden</label>
