@@ -63,20 +63,3 @@ t3lib_extMgm::addTypoScript($_EXTKEY, 'setup','
 $TYPO3_CONF_VARS['SC_OPTIONS']['GLOBAL']['cliKeys']['seminars'] = array(
 	'EXT:seminars/cli/tx_seminars_cli.php', '_CLI_seminars',
 );
-
-$TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getEvents'] = t3lib_extmgm::extPath($_EXTKEY) .
-	'BackEndExtJs/Ajax/Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
-$TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getRegistrations'] = t3lib_extmgm::extPath($_EXTKEY) .
-	'BackEndExtJs/Ajax/Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
-$TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getSpeakers'] = t3lib_extmgm::extPath($_EXTKEY) .
-	'BackEndExtJs/Ajax/Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
-$TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getOrganizers'] = t3lib_extmgm::extPath($_EXTKEY) .
-	'BackEndExtJs/Ajax/Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
-$TYPO3_CONF_VARS['BE']['AJAX']['Seminars::getState'] = t3lib_extmgm::extPath($_EXTKEY) .
-	'BackEndExtJs/Ajax/Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
-$TYPO3_CONF_VARS['BE']['AJAX']['Seminars::setState'] = t3lib_extmgm::extPath($_EXTKEY) .
-	'BackEndExtJs/Ajax/Dispatcher.php:tx_seminars_BackEndExtJs_Ajax_Dispatcher->dispatch';
-
-$TYPO3_CONF_VARS['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc'][]
-	= t3lib_extmgm::extPath($_EXTKEY) .
-		'BackEndExtJs/ClearCache.php:tx_seminars_BackEndExtJs_ClearCache->clearCachePostProcess';
