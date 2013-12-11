@@ -56,6 +56,8 @@ class tx_seminars_BackEnd_SpeakersListTest extends tx_phpunit_testcase {
 	private $originalLanguage;
 
 	public function setUp() {
+		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
+
 		// Sets the localization to the default language so that all tests can
 		// run even if the BE user has its interface set to another language.
 		$this->originalLanguage = $GLOBALS['LANG']->lang;

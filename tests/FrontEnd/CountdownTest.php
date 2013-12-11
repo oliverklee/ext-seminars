@@ -53,6 +53,8 @@ class tx_seminars_FrontEnd_CountdownTest extends tx_phpunit_testcase {
 	private $viewHelper;
 
 	public function setUp() {
+		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
+
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 

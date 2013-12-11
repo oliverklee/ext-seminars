@@ -86,6 +86,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	private $linkBuilder = NULL;
 
 	public function setUp() {
+		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
+
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = array();
