@@ -3398,7 +3398,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 		$attachedFiles = '';
 		foreach ($this->seminar->getAttachedFiles($this) as $attachedFile) {
-			$this->setMarker('attached_files_single_title', htmlspecialchars($attachedFile['name']));
+			$this->setMarker('attached_files_single_title', $attachedFile['name']);
 
 			$attachedFiles .= $this->getSubpart('ATTACHED_FILES_SINGLE_ITEM');
 		}
