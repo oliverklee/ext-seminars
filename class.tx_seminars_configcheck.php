@@ -1134,7 +1134,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			array(
 				'uid',
 				'title',
-				'accreditation_number',
 				'price_regular',
 				'price_special',
 				'vacancies'

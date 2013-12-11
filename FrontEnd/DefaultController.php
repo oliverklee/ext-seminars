@@ -2981,18 +2981,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			($this->seminar) ? $this->seminar->getUid() : ''
 		);
 
-		if ($this->seminar && $this->seminar->hasAccreditationNumber()) {
-			$this->setMarker(
-				'accreditation_number',
-				($this->seminar) ? htmlspecialchars($this->seminar->getAccreditationNumber()) : ''
-			);
-		} else {
-			$this->hideSubparts(
-				'accreditation_number',
-				'registration_wrapper'
-			);
-		}
-
 		if (empty($errorMessage)) {
 			$this->hideSubparts('error', 'wrapper');
 		} else {
@@ -3056,7 +3044,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		$fieldsToRemove = array(
 			'uid',
 			'title',
-			'accreditation_number',
 			'price_regular',
 			'price_special',
 			'vacancies',

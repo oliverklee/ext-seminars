@@ -667,10 +667,6 @@
 										<numIndex index="0">LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.title</numIndex>
 										<numIndex index="1">title</numIndex>
 									</numIndex>
-									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.accreditation_number</numIndex>
-										<numIndex index="1">accreditation_number</numIndex>
-									</numIndex>
 									<numIndex index="3" type="array">
 										<numIndex index="0">LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.price_regular</numIndex>
 										<numIndex index="1">price_regular</numIndex>
