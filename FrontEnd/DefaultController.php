@@ -215,23 +215,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		if ($this->configGetter) {
-			$this->configGetter->__destruct();
-		}
-		if ($this->seminar) {
-			$this->seminar->__destruct();
-		}
-		if ($this->registration) {
-			$this->registration->__destruct();
-		}
-		if ($this->linkBuilder !== NULL) {
-			$this->linkBuilder->__destruct();
-			unset($this->linkBuilder);
-		}
-
 		unset(
 			$this->configGetter, $this->seminar, $this->registration,
-			$this->listViewHooks, $this->singleViewHooks, $this->feuser
+			$this->listViewHooks, $this->singleViewHooks, $this->feuser, $this->linkBuilder
 		);
 		$this->listViewHooksHaveBeenRetrieved = FALSE;
 		$this->singleViewHooksHaveBeenRetrieved = FALSE;
@@ -472,7 +458,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		$result = FALSE;
 
 		if ($this->seminar) {
-			$this->seminar->__destruct();
 			unset($this->seminar);
 		}
 

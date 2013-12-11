@@ -1,4 +1,6 @@
 0.10.0 (currently working on)
+- [#4610] Fix: PHP/Apache crash/SIGSEV when running the unit tests on PHP 5.4
+- [#4844] Fix: Crash in the single view and on the registration page on PHP 5.4.22
 - [#4817] Change: Drop the new prices
 - [#4850] Fix: Test failures in DefaultControllerTest
 - [#4849] Fix: Unit test errors about missing constructor parameters
