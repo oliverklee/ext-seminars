@@ -3,7 +3,7 @@
 - [#4849] Fix: Unit test errors about missing constructor parameters
 - [#4362] Fix: Skip the configuration check in the unit tests
 - [#4361] Fix: Hide the time slot records in the BE lists
-- [#4846] Bugfix: Crash in tx_seminars_ViewHelper_CommaSeparatedTitlesTest
+- [#4846] Fix: Crash in tx_seminars_ViewHelper_CommaSeparatedTitlesTest
 - [#4818] Change: Drop the ExtJS back-end module
 - [#4843] Cleanup: Drop the todo.txt file
 - [#4833] Cleanup: Remove the closing PHP tags
