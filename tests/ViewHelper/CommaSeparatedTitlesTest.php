@@ -107,7 +107,6 @@ class tx_seminars_ViewHelper_CommaSeparatedTitlesTest extends tx_phpunit_testcas
 	 * @test
 	 */
 	public function renderWithTwoElementsListReturnsTwoElementTitlesSeparatedByComma() {
-		$mapper = new tx_oelib_tests_fixtures_TestingMapper();
 		$firstModel = new tx_seminars_tests_fixtures_Model_TitledTestingModel();
 		$firstModel->setData(array('title' => 'First testing model'));
 		$secondModel = new tx_seminars_tests_fixtures_Model_TitledTestingModel();
