@@ -6777,13 +6777,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			'directions' => '',
 		);
 
-		$fixture = $this->getMock(
-			'tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace')
-		);
-		$fixture->expects($this->any())->method('getPlacesAsArray')
-			->will($this->returnValue(array($place)));
-		$fixture->expects($this->any())->method('hasPlace')
-			->will($this->returnValue(TRUE));
+		$fixture = $this->getMock('tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace'), array(), '', FALSE);
+		$fixture->expects($this->any())->method('getPlacesAsArray')->will($this->returnValue(array($place)));
+		$fixture->expects($this->any())->method('hasPlace')->will($this->returnValue(TRUE));
 
 		$this->assertEquals(
 			'Hotel Ibis, Kaiser-Karl-Ring 91, Bonn',
@@ -6814,13 +6810,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			'directions' => '',
 		);
 
-		$fixture = $this->getMock(
-			'tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace')
-		);
-		$fixture->expects($this->any())->method('getPlacesAsArray')
-			->will($this->returnValue(array($place1, $place2)));
-		$fixture->expects($this->any())->method('hasPlace')
-			->will($this->returnValue(TRUE));
+		$fixture = $this->getMock('tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace'), array(), '', FALSE);
+		$fixture->expects($this->any())->method('getPlacesAsArray')->will($this->returnValue(array($place1, $place2)));
+		$fixture->expects($this->any())->method('hasPlace')->will($this->returnValue(TRUE));
 
 		$this->assertEquals(
 			'Hotel Ibis' . LF . 'Wasserwerk',
@@ -6841,13 +6833,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			'city' => 'Bonn',
 		);
 
-		$fixture = $this->getMock(
-			'tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace')
-		);
-		$fixture->expects($this->any())->method('getPlacesAsArray')
-			->will($this->returnValue(array($place)));
-		$fixture->expects($this->any())->method('hasPlace')
-			->will($this->returnValue(TRUE));
+		$fixture = $this->getMock('tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace'), array(), '', FALSE);
+		$fixture->expects($this->any())->method('getPlacesAsArray')->will($this->returnValue(array($place)));
+		$fixture->expects($this->any())->method('hasPlace')->will($this->returnValue(TRUE));
 
 		$this->assertEquals(
 			'Hotel Ibis, Kaiser-Karl-Ring 91, Bonn',
@@ -6868,13 +6856,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			'city' => 'Bonn',
 		);
 
-		$fixture = $this->getMock(
-			'tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace')
-		);
-		$fixture->expects($this->any())->method('getPlacesAsArray')
-			->will($this->returnValue(array($place)));
-		$fixture->expects($this->any())->method('hasPlace')
-			->will($this->returnValue(TRUE));
+		$fixture = $this->getMock('tx_seminars_seminar', array('getPlacesAsArray', 'hasPlace'), array(), '', FALSE);
+		$fixture->expects($this->any())->method('getPlacesAsArray')->will($this->returnValue(array($place)));
+		$fixture->expects($this->any())->method('hasPlace')->will($this->returnValue(TRUE));
 
 		$this->assertEquals(
 			'Hotel Ibis, Kaiser-Karl-Ring 91, 53111 Bonn',
@@ -8402,12 +8386,8 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function canViewRegistrationsListMessageWithoutNeededRegistrationReturnsNoRegistrationMessage() {
-		$fixture = $this->getMock(
-			'tx_seminars_seminar',
-			array('needsRegistration')
-		);
-		$fixture->expects($this->any())->method('needsRegistration')
-			->will($this->returnValue(FALSE));
+		$fixture = $this->getMock('tx_seminars_seminar', array('needsRegistration'), array(), '', FALSE);
+		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(FALSE));
 		$fixture->init();
 
 		$this->assertEquals(
@@ -8422,12 +8402,8 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function canViewRegistrationsListMessageForListAndNoLoginAndAttendeesAccessReturnsPleaseLoginMessage() {
-		$fixture = $this->getMock(
-			'tx_seminars_seminar',
-			array('needsRegistration')
-		);
-		$fixture->expects($this->any())->method('needsRegistration')
-			->will($this->returnValue(TRUE));
+		$fixture = $this->getMock('tx_seminars_seminar', array('needsRegistration'), array(), '', FALSE);
+		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
 		$fixture->init();
 
 		$this->assertEquals(
@@ -8444,12 +8420,8 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function canViewRegistrationsListMessageForListAndNoLoginAndLoginAccessReturnsPleaseLoginMessage() {
-		$fixture = $this->getMock(
-			'tx_seminars_seminar',
-			array('needsRegistration')
-		);
-		$fixture->expects($this->any())->method('needsRegistration')
-			->will($this->returnValue(TRUE));
+		$fixture = $this->getMock('tx_seminars_seminar', array('needsRegistration'), array(), '', FALSE);
+		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
 		$fixture->init();
 
 		$this->assertEquals(
@@ -8466,12 +8438,8 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function canViewRegistrationsListMessageForListAndNoLoginAndWorldAccessReturnsEmptyString() {
-		$fixture = $this->getMock(
-			'tx_seminars_seminar',
-			array('needsRegistration')
-		);
-		$fixture->expects($this->any())->method('needsRegistration')
-			->will($this->returnValue(TRUE));
+		$fixture = $this->getMock('tx_seminars_seminar', array('needsRegistration'), array(), '', FALSE);
+		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
 		$fixture->init();
 
 		$this->assertEquals(
@@ -8512,12 +8480,8 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage(
 		$accessLevel
 	) {
-		$fixture = $this->getMock(
-			'tx_seminars_seminar',
-			array('needsRegistration')
-		);
-		$fixture->expects($this->any())->method('needsRegistration')
-			->will($this->returnValue(TRUE));
+		$fixture = $this->getMock('tx_seminars_seminar', array('needsRegistration'), array(), '', FALSE);
+		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
 		$fixture->init();
 
 		$this->assertEquals(
@@ -8576,10 +8540,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	) {
 		$fixture = $this->getMock(
 			'tx_seminars_seminar',
-			array('needsRegistration', 'canViewRegistrationsList')
+			array('needsRegistration', 'canViewRegistrationsList'),
+			array(), '', FALSE
 		);
-		$fixture->expects($this->any())->method('needsRegistration')
-			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
 		$fixture->expects($this->once())->method('canViewRegistrationsList')
 			->with($whichPlugin, $accessLevel)
 			->will($this->returnValue(TRUE));
@@ -8598,12 +8562,11 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function canViewRegistrationsListMessageWithLoginAndAccessGrantedReturnsEmptyString() {
 		$fixture = $this->getMock(
 			'tx_seminars_seminar',
-			array('needsRegistration', 'canViewRegistrationsList')
+			array('needsRegistration', 'canViewRegistrationsList'),
+			array(), '', FALSE
 		);
-		$fixture->expects($this->any())->method('needsRegistration')
-			->will($this->returnValue(TRUE));
-		$fixture->expects($this->any())->method('canViewRegistrationsList')
-			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('canViewRegistrationsList')->will($this->returnValue(TRUE));
 
 		$this->testingFramework->createFakeFrontEnd();
 		$this->testingFramework->createAndLoginFrontEndUser();
@@ -8624,12 +8587,11 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function canViewRegistrationsListMessageWithoutLoginAndAccessGrantedReturnsEmptyString() {
 		$fixture = $this->getMock(
 			'tx_seminars_seminar',
-			array('needsRegistration', 'canViewRegistrationsList')
+			array('needsRegistration', 'canViewRegistrationsList'),
+			array(), '', FALSE
 		);
-		$fixture->expects($this->any())->method('needsRegistration')
-			->will($this->returnValue(TRUE));
-		$fixture->expects($this->any())->method('canViewRegistrationsList')
-			->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('canViewRegistrationsList')->will($this->returnValue(TRUE));
 
 		$this->assertEquals(
 			'',
@@ -8647,12 +8609,11 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function canViewRegistrationsListMessageWithLoginAndAccessDeniedReturnsAccessDeniedMessage() {
 		$fixture = $this->getMock(
 			'tx_seminars_seminar',
-			array('needsRegistration', 'canViewRegistrationsList')
+			array('needsRegistration', 'canViewRegistrationsList'),
+			array(), '', FALSE
 		);
-		$fixture->expects($this->any())->method('needsRegistration')
-			->will($this->returnValue(TRUE));
-		$fixture->expects($this->any())->method('canViewRegistrationsList')
-			->will($this->returnValue(FALSE));
+		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
+		$fixture->expects($this->any())->method('canViewRegistrationsList')->will($this->returnValue(FALSE));
 
 		$this->testingFramework->createFakeFrontEnd();
 		$this->testingFramework->createAndLoginFrontEndUser();
@@ -8811,7 +8772,8 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 				'hasPriceRegular', 'hasPriceSpecial', 'earlyBirdApplies',
 				'hasEarlyBirdPriceRegular', 'hasEarlyBirdPriceSpecial',
 				'hasPriceRegularBoard', 'hasPriceSpecialBoard'
-			)
+			),
+			array(), '', FALSE
 		);
 
 		$fixture->expects($this->any())->method('hasPriceRegular')
