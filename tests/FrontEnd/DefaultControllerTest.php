@@ -6728,36 +6728,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	/**
-	 * @test
-	 */
-	public function registrationFormHtmlspecialcharsEventAccreditationNumber() {
-		$registrationFormMock = $this->getMock('tx_seminars_FrontEnd_RegistrationForm', array(), array(), '', FALSE);
-		t3lib_div::addInstance('tx_seminars_FrontEnd_RegistrationForm', $registrationFormMock);
-
-		$this->testingFramework->createAndLoginFrontEndUser();
-		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
-
-		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
-				'accreditation_number' => 'foo & bar',
-				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
-				'needs_registration' => 1,
-				'attendees_max' => 10,
-			)
-		);
-
-		$this->fixture->piVars['seminar'] = $eventUid;
-
-		$this->assertContains(
-			'foo &amp; bar',
-			$this->fixture->main('', array())
-		);
-	}
-
 	public function testRegistrationFormForEventWithOneNotFullfilledRequirementIsHidden() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
