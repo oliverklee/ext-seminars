@@ -307,14 +307,93 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 */
 	public function processRegistration(array $parameters) {
 		$this->saveDataToSession($parameters);
-
-		if ($this->getRegistrationManager()->canCreateRegistration(
+		if (!$this->getRegistrationManager()->canCreateRegistration(
 			$this->getSeminar(), $parameters
 		)) {
-			$this->getRegistrationManager()->createRegistration(
-				$this->getSeminar(), $parameters, $this
-			);
+			return;
 		}
+
+		$registration = $this->getRegistrationManager()->createRegistration(
+			$this->getSeminar(), $parameters, $this
+		);
+		if ($this->getConfValueBoolean(
+			'createAdditionalAttendeesAsFrontEndUsers', 's_registration'
+		)) {
+			$this->createAdditionalAttendees($registration);
+		}
+	}
+
+	/**
+	 * Creates additional attendees as FE users and adds them to $registration.
+	 *
+	 * @param tx_seminars_Model_Registration $registration
+	 *
+	 * @return void
+	 */
+	protected function createAdditionalAttendees(tx_seminars_Model_Registration $registration) {
+		$allPersonsData = $this->getAdditionalRegisteredPersonsData();
+		if (empty($allPersonsData)) {
+			return;
+		}
+
+		/** @var $userMapper tx_seminars_Mapper_FrontEndUser */
+		$userMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser');
+		$pageUid = $this->getConfValueInteger('sysFolderForAdditionalAttendeeUsersPID', 's_registration');
+
+		/** @var $userGroupMapper tx_seminars_Mapper_FrontEndUserGroup */
+		$userGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup');
+		/** @var $userGroups Tx_Oelib_List */
+		$userGroups = t3lib_div::makeInstance('Tx_Oelib_List');
+		$userGroupUids = t3lib_div::intExplode(
+			',',
+			$this->getConfValueString('userGroupUidsForAdditionalAttendeesFrontEndUsers', 's_registration'),
+			TRUE
+		);
+		foreach ($userGroupUids as $uid) {
+			$userGroups->add($userGroupMapper->find($uid));
+		}
+
+		/** @var $additionalPersons Tx_Oelib_List */
+		$additionalPersons = t3lib_div::makeInstance('Tx_Oelib_List');
+		/** @var $personData array */
+		foreach ($allPersonsData as $personData) {
+			/** @var $user tx_seminars_Model_FrontEndUser */
+			$user = t3lib_div::makeInstance('tx_seminars_Model_FrontEndUser');
+			$user->setPageUid($pageUid);
+			$user->setPassword(t3lib_div::getRandomHexString(8));
+			$eMailAddress = $personData[3];
+			$user->setEMailAddress($eMailAddress);
+
+			$isUnique = FALSE;
+			$suffixCounter = 0;
+			do {
+				$userName = $eMailAddress;
+				if ($suffixCounter > 0) {
+					$userName .= '-' . $suffixCounter;
+				}
+				try {
+					$userMapper->findByUserName($userName);
+				} catch (tx_oelib_Exception_NotFound $exception) {
+					$isUnique = TRUE;
+				}
+
+				$suffixCounter++;
+			} while (!$isUnique);
+
+			$user->setUserName($userName);
+			$user->setUserGroups($userGroups);
+
+			$user->setFirstName($personData[0]);
+			$user->setLastName($personData[1]);
+			$user->setName($personData[0] . ' ' . $personData[1]);
+			$user->setJobTitle($personData[2]);
+
+			$userMapper->save($user);
+			$additionalPersons->add($user);
+		}
+
+		$registration->setAdditionalPersons($additionalPersons);
+		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->save($registration);
 	}
 
 	/**
