@@ -1002,14 +1002,10 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @return void
 	 */
-	public function notifyOrganizers(
-		tx_seminars_registration $registration,
-		$helloSubjectPrefix = 'notification'
-	) {
+	public function notifyOrganizers(tx_seminars_registration $registration, $helloSubjectPrefix = 'notification') {
 		if (!$this->getConfValueBoolean('send' . ucfirst($helloSubjectPrefix))) {
 			return;
 		}
-
 		if (!$registration->hasExistingFrontEndUser()) {
 			return;
 		}
@@ -1019,38 +1015,28 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		$organizers = $event->getOrganizerBag();
+		/** @var $eMailNotification tx_oelib_Mail */
 		$eMailNotification = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
 		$eMailNotification->setSender($organizers->current());
 
+		/** @var $organizer tx_seminars_OldModel_Organizer */
 		foreach ($organizers as $organizer) {
 			$eMailNotification->addRecipient($organizer);
 		}
 
 		$eMailNotification->setSubject(
-			$this->translate('email_' . $helloSubjectPrefix . 'Subject') .
-				': ' . $registration->getTitle()
+			$this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $registration->getTitle()
 		);
 
 		$this->initializeTemplate();
-		$this->hideSubparts(
-			$this->getConfValueString('hideFieldsInNotificationMail'),
-			'field_wrapper'
-		);
+		$this->hideSubparts($this->getConfValueString('hideFieldsInNotificationMail'), 'field_wrapper');
 
-		$this->setMarker(
-			'hello',
-			$this->translate('email_' . $helloSubjectPrefix . 'Hello')
-		);
+		$this->setMarker('hello', $this->translate('email_' . $helloSubjectPrefix . 'Hello'));
 		$this->setMarker('summary', $registration->getTitle());
 
 		if ($this->hasConfValueString('showSeminarFieldsInNotificationMail')) {
 			$this->setMarker(
-				'seminardata',
-				$event->dumpSeminarValues(
-					$this->getConfValueString(
-						'showSeminarFieldsInNotificationMail'
-					)
-				)
+				'seminardata', $event->dumpSeminarValues($this->getConfValueString('showSeminarFieldsInNotificationMail'))
 			);
 		} else {
 			$this->hideSubparts('seminardata', 'field_wrapper');
@@ -1058,10 +1044,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		if ($this->hasConfValueString('showFeUserFieldsInNotificationMail')) {
 			$this->setMarker(
-				'feuserdata',
-				$registration->dumpUserValues(
-					$this->getConfValueString('showFeUserFieldsInNotificationMail')
-				)
+				'feuserdata', $registration->dumpUserValues($this->getConfValueString('showFeUserFieldsInNotificationMail'))
 			);
 		} else {
 			$this->hideSubparts('feuserdata', 'field_wrapper');
@@ -1070,21 +1053,35 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		if ($this->hasConfValueString('showAttendanceFieldsInNotificationMail')) {
 			$this->setMarker(
 				'attendancedata',
-				$registration->dumpAttendanceValues(
-					$this->getConfValueString(
-						'showAttendanceFieldsInNotificationMail'
-					)
-				)
+				$registration->dumpAttendanceValues($this->getConfValueString('showAttendanceFieldsInNotificationMail'))
 			);
 		} else {
 			$this->hideSubparts('attendancedata', 'field_wrapper');
 		}
 
-		$eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
+		$this->callModifyOrganizerNotificationEmailHooks($registration, $this->getTemplate());
 
-		tx_oelib_mailerFactory::getInstance()->getMailer()->send(
-			$eMailNotification
-		);
+		$eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
+		Tx_Oelib_MailerFactory::getInstance()->getMailer()->send($eMailNotification);
+	}
+
+	/**
+	 * Calls the modifyOrganizerNotificationEmail hooks.
+	 *
+	 * @param tx_seminars_registration $registration
+	 * @param Tx_Oelib_Template $emailTemplate
+	 *
+	 * @return void
+	 */
+	protected function callModifyOrganizerNotificationEmailHooks(
+		tx_seminars_registration $registration, Tx_Oelib_Template $emailTemplate
+	) {
+		foreach ($this->getHooks() as $hook) {
+			if ($hook instanceof tx_seminars_Interface_Hook_Registration) {
+				/** @var $hook tx_seminars_Interface_Hook_Registration */
+				$hook->modifyOrganizerNotificationEmail($registration, $emailTemplate);
+			}
+		}
 	}
 
 	/**
@@ -1648,8 +1645,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 */
 	private function getHooks() {
 		if (!$this->hooksHaveBeenRetrieved) {
-			$hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']
-				['seminars']['registration'];
+			$hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'];
 			if (is_array($hookClasses)) {
 				foreach ($hookClasses as $hookClass) {
 					$this->hooks[] = t3lib_div::getUserObj($hookClass);

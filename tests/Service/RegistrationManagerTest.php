@@ -30,15 +30,15 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
+class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_registrationmanager
 	 */
-	private $fixture;
+	private $fixture = NULL;
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
-	private $testingFramework;
+	private $testingFramework = NULL;
 
 	/**
 	 * @var tx_seminars_seminarchild a seminar to which the fixture relates
@@ -4063,6 +4063,51 @@ class tx_seminars_Service_RegistrationManagerTest extends tx_phpunit_testcase {
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyOrganizersCallsModifyOrganizerNotificationEmailHookWithRegistration() {
+		$this->fixture->setConfigurationValue('sendNotification', TRUE);
+
+		$registrationUid = $this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array('seminar' => $this->seminar->getUid(), 'user' => $this->testingFramework->createFrontEndUser())
+		);
+		$registration = new tx_seminars_registrationchild($registrationUid);
+
+		$hook = $this->getMock('tx_seminars_Interface_Hook_Registration', array('modifyOrganizerNotificationEmail'));
+		$hookClassName = get_class($hook);
+		$hook->expects($this->once())->method('modifyOrganizerNotificationEmail')->with($registration, $this->anything());
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClassName] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
+
+		$this->fixture->notifyOrganizers($registration);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyOrganizersCallsModifyOrganizerNotificationEmailHookWithTemplate() {
+		$this->fixture->setConfigurationValue('sendNotification', TRUE);
+
+		$registrationUid = $this->testingFramework->createRecord(
+			'tx_seminars_attendances',
+			array('seminar' => $this->seminar->getUid(), 'user' => $this->testingFramework->createFrontEndUser())
+		);
+		$registration = new tx_seminars_registrationchild($registrationUid);
+
+		$hook = $this->getMock('tx_seminars_Interface_Hook_Registration', array('modifyOrganizerNotificationEmail'));
+		$hookClassName = get_class($hook);
+		$hook->expects($this->once())->method('modifyOrganizerNotificationEmail')
+			->with($this->anything(), $this->isInstanceOf('Tx_Oelib_Template'));
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClassName] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
+
+		$this->fixture->notifyOrganizers($registration);
 	}
 
 
