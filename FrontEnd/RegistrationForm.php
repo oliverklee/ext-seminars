@@ -151,9 +151,11 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Returns the configured seminar object.
 	 *
 	 * @return tx_seminars_seminar the seminar instance
+	 *
+	 * @throws BadMethodCallException if no seminar has been set yet
 	 */
-	private function getSeminar() {
-		if (!is_object($this->seminar)) {
+	protected  function getSeminar() {
+		if ($this->seminar === NULL) {
 			throw new BadMethodCallException('Please set a proper seminar object via $this->setSeminar().', 1333293187);
 		}
 
