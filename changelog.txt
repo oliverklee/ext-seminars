@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#3866] Fix: Path to changed registration form HTML template not used
 - [#4364] Change: Drop the accreditation number from the registration form heading
 - [#4512] Fix: HTML entities of field ###attached_files### are displayed only as plain text
 - [#4761] Fix: Speaker sorting should obey backend order
