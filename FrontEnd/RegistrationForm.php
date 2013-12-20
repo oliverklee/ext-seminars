@@ -154,12 +154,24 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * @throws BadMethodCallException if no seminar has been set yet
 	 */
-	protected  function getSeminar() {
+	public function getSeminar() {
 		if ($this->seminar === NULL) {
 			throw new BadMethodCallException('Please set a proper seminar object via $this->setSeminar().', 1333293187);
 		}
 
 		return $this->seminar;
+	}
+
+	/**
+	 * Returns the event for this registration form.
+	 *
+	 * @return tx_seminars_Model_Event
+	 */
+	public function getEvent() {
+		/** @var $eventMapper tx_seminars_Mapper_Event */
+		$eventMapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+
+		return $eventMapper->find($this->getSeminar()->getUid());
 	}
 
 	/**
@@ -939,8 +951,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 				if ($this->isFormFieldEnabled('registered_themselves')
 					&& ($this->getFormValue('registered_themselves') == '1')
 				) {
-					$user = tx_oelib_FrontEndLoginManager::getInstance()
-						->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+					$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 					$userData = $user->getName();
 
 					if ($this->getConfValueBoolean(

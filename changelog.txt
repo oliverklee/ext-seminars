@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4872] Feature: Make RegistrationForm.getSeminar public and add .getEvent
 - [#4852] Feature: Add a hook for notifying the administrator after a user has registered
 - [#4220] Change: Change tx_seminars_pi1_registrationEditor::getSeminar from private to protected
 - [#4166] Feature: Create additional registered persons as FE user records

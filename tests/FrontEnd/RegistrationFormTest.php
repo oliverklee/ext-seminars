@@ -35,22 +35,27 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_FrontEnd_RegistrationForm
 	 */
-	private $fixture;
+	private $fixture = NULL;
 
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
-	private $testingFramework;
+	private $testingFramework = NULL;
 
 	/**
 	 * @var tx_oelib_FakeSession a fake session
 	 */
-	private $session;
+	private $session = NULL;
 
 	/**
 	 * @var integer the UID of the event the fixture relates to
 	 */
 	private $seminarUid = 0;
+
+	/**
+	 * @var tx_seminars_seminars
+	 */
+	protected $seminar = NULL;
 
 	public function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
@@ -58,9 +63,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$this->testingFramework->createFakeFrontEnd($frontEndPageUid);
 
 		$this->session = new tx_oelib_FakeSession();
-		tx_oelib_Session::setInstance(
-			tx_oelib_Session::TYPE_USER, $this->session
-		);
+		tx_oelib_Session::setInstance(tx_oelib_Session::TYPE_USER, $this->session);
 
 		$configurationRegistry = tx_oelib_ConfigurationRegistry::getInstance();
 		$configuration = new tx_oelib_Configuration();
@@ -70,10 +73,10 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			'plugin.tx_staticinfotables_pi1', new tx_oelib_Configuration()
 		);
 
-		$seminar = new tx_seminars_seminar($this->testingFramework->createRecord(
+		$this->seminar = new tx_seminars_seminar($this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('payment_methods' => '1')
 		));
-		$this->seminarUid = $seminar->getUid();
+		$this->seminarUid = $this->seminar->getUid();
 
 		$this->fixture = new tx_seminars_FrontEnd_RegistrationForm(
 			array(
@@ -89,22 +92,21 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 					'registration.'	=> array(
 						'step1.' => array(),
 						'step2.' => array(),
-					)
+					),
 				),
 			),
 			$GLOBALS['TSFE']->cObj
 		);
 		$this->fixture->setAction('register');
-		$this->fixture->setSeminar($seminar);
+		$this->fixture->setSeminar($this->seminar);
 		$this->fixture->setTestMode();
 	}
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		$this->fixture->__destruct();
 		tx_seminars_registrationmanager::purgeInstance();
-		unset($this->fixture, $this->session, $this->testingFramework);
+		unset($this->fixture, $this->session, $this->testingFramework, $this->seminar);
 	}
 
 
@@ -662,8 +664,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$fixture->isFormFieldEnabled($key)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -690,8 +690,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			$isSelfContained,
 			$fixture->isFormFieldEnabled($key)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -706,8 +704,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$fixture->isFormFieldEnabled('more_seats')
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -722,8 +718,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$fixture->isFormFieldEnabled('billing_address')
 		);
-
-		$fixture->__destruct();
 	}
 
 
@@ -878,8 +872,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			1,
 			$fixture->getNumberOfEnteredPersons()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -1124,8 +1116,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$fixture->validateNumberOfRegisteredPersons()
 		);
-
-		$fixture->__destruct();
 	}
 
 
@@ -1463,9 +1453,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			'42',
 			$fixture->getRegistrationData()
 		);
-
-		$event->__destruct();
-		$fixture->__destruct();
 	}
 
 	/**
@@ -1489,9 +1476,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			'A, B &amp; C',
 			$fixture->getRegistrationData()
 		);
-
-		$event->__destruct();
-		$fixture->__destruct();
 	}
 
 	/**
@@ -1515,9 +1499,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			'Love<br />Peace',
 			$fixture->getRegistrationData()
 		);
-
-		$event->__destruct();
-		$fixture->__destruct();
 	}
 
 	/**
@@ -1541,9 +1522,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			'John Doe',
 			$fixture->getRegistrationData()
 		);
-
-		$event->__destruct();
-		$fixture->__destruct();
 	}
 
 	/**
@@ -1572,9 +1550,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			'Jane Doe',
 			$fixture->getRegistrationData()
 		);
-
-		$event->__destruct();
-		$fixture->__destruct();
 	}
 
 	/**
@@ -1603,9 +1578,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			'Jane Doe',
 			$fixture->getRegistrationData()
 		);
-
-		$event->__destruct();
-		$fixture->__destruct();
 	}
 
 	/**
@@ -1635,9 +1607,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			'facility manager',
 			$fixture->getRegistrationData()
 		);
-
-		$event->__destruct();
-		$fixture->__destruct();
 	}
 
 	/**
@@ -1667,9 +1636,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			'facility manager',
 			$fixture->getRegistrationData()
 		);
-
-		$event->__destruct();
-		$fixture->__destruct();
 	}
 
 	/**
@@ -1699,9 +1665,6 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			'jane@example.com',
 			$fixture->getRegistrationData()
 		);
-
-		$event->__destruct();
-		$fixture->__destruct();
 	}
 
 	/**
@@ -1731,8 +1694,37 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 			'jane@example.com',
 			$fixture->getRegistrationData()
 		);
+	}
 
-		$event->__destruct();
-		$fixture->__destruct();
+
+	/*
+	 * Tests concerning getSeminar and getEvent
+	 */
+
+	/**
+	 * @test
+	 */
+	public function getSeminarReturnsSeminarFromSetSeminar() {
+		$this->assertSame(
+			$this->seminar,
+			$this->fixture->getSeminar()
+		);
+	}
+
+
+	/**
+	 * @test
+	 */
+	public function getEventReturnsEventWithSeminarUid() {
+		$event = $this->fixture->getEvent();
+		$this->assertInstanceOf(
+			'tx_seminars_Model_Event',
+			$event
+		);
+
+		$this->assertSame(
+			$this->seminarUid,
+			$event->getUid()
+		);
 	}
 }
