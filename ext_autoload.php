@@ -56,6 +56,7 @@ return array(
 	'tx_seminars_interface_hook_backendmodule' => $extensionPath . 'Interface/Hook/BackEndModule.php',
 	'tx_seminars_interface_hook_eventlistview' => $extensionPath . 'Interface/Hook/EventListView.php',
 	'tx_seminars_interface_hook_eventsingleview' => $extensionPath . 'Interface/Hook/EventSingleView.php',
+	'tx_seminars_interface_hook_registration' => $extensionPath . 'Interface/Hook/Registration.php',
 	'tx_seminars_interface_titled' => $extensionPath . 'Interface/Titled.php',
 	'tx_seminars_mapper_backenduser' => $extensionPath . 'Mapper/BackEndUser.php',
 	'tx_seminars_mapper_backendusergroup' => $extensionPath . 'Mapper/BackEndUserGroup.php',
