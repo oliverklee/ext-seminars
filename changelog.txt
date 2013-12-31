@@ -1,3 +1,5 @@
+0.9.7 (currently working on)
+
 0.9.6 (released 2013-12-31)
 - [#4512] Fix: HTML entities of field ###attached_files### are displayed only as plain text
 - [#4610] Fix: PHP/Apache crash/SIGSEV when running the unit tests on PHP 5.4
