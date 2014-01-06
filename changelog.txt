@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4908] Cleanup: Drop plugin.tx_seminars.allowAccessToCsv
 - [#4907] Cleanup: Make OldModel_Abstract::recordExists static
 - [#4878] Fix: tx_seminars_Interface_Hook_Registration is missing in ext_autoload.php
 - [#4872] Feature: Make RegistrationForm.getSeminar public and add .getEvent

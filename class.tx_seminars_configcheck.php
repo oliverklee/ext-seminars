@@ -1647,7 +1647,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	 * @return void
 	 */
 	protected function check_tx_seminars_Bag_Event_csv() {
-		$this->checkAllowAccessToCsv();
 		$this->checkCharsetForCsv();
 		$this->checkFilenameForEventsCsv();
 		$this->checkFilenameForRegistrationsCsv();
@@ -1657,23 +1656,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkFieldsFromFeUserForEmailCsv();
 		$this->checkFieldsFromAttendanceForEmailCsv();
 		$this->checkShowAttendancesOnRegistrationQueueInEmailCsv();
-	}
-
-	/**
-	 * Checks the setting of the configuration value allowAccessToCsv.
-	 *
-	 * @return void
-	 */
-	private function checkAllowAccessToCsv() {
-		$this->checkIfBoolean(
-			'allowAccessToCsv',
-			FALSE,
-			'',
-			'This value specifies whether the access check for the CSV export '
-				.'will be overridden. '
-				.'If this value is not set correctly, anyone could use the CSV '
-				.'export, gaining access to sensitive data.'
-		);
 	}
 
 	/**

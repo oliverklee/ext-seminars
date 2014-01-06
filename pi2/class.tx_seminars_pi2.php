@@ -534,11 +534,6 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * @return boolean TRUE if the list of registrations may be exported as CSV
 	 */
 	public function canAccessListOfRegistrations($eventUid) {
-		// no need to check any special permissions if global access is granted
-		if ($this->configGetter->getConfValueBoolean('allowAccessToCsv')) {
-			return TRUE;
-		}
-
 		switch ($this->getTypo3Mode()) {
 			case 'BE':
 				// Checks read access to the registrations table.
