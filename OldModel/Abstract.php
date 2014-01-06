@@ -445,13 +445,14 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * @return boolean TRUE if a visible record with that UID exists, FALSE otherwise
 	 */
 	public static function recordExists($uid, $tableName, $allowHiddenRecords = FALSE) {
-		if (!is_int($uid) || (intval($uid) <= 0) || $tableName === '') {
+		if ((intval($uid) <= 0) || ($tableName === '')) {
 			return FALSE;
 		}
+
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
 			$tableName,
-			'uid=' . intval($uid) . tx_oelib_db::enableFields($tableName, intval($allowHiddenRecords))
+			'uid = ' . intval($uid) . tx_oelib_db::enableFields($tableName, intval($allowHiddenRecords))
 		);
 
 		if ($dbResult) {
