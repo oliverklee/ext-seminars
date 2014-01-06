@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007-2013 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2007-2014 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -34,11 +34,11 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_tests_fixtures_OldModel_Testing
 	 */
-	private $fixture;
+	protected $fixture = NULL;
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
-	private $testingFramework;
+	protected $testingFramework = NULL;
 
 	/**
 	 * @var integer UID of the minimal fixture's data in the DB
@@ -68,9 +68,7 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 				'title' => 'Test',
 			)
 		);
-		$this->fixture = new tx_seminars_tests_fixtures_OldModel_Testing(
-			$this->fixtureUid
-		);
+		$this->fixture = new tx_seminars_tests_fixtures_OldModel_Testing($this->fixtureUid);
 	}
 
 	public function tearDown() {
@@ -436,9 +434,9 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////
-	// Tests concerning recordExists
-	//////////////////////////////////
+	/*
+	 * Tests concerning recordExists
+	 */
 
 	/**
 	 * @test
@@ -449,9 +447,7 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertFalse(
-			$this->fixture->recordExists(
-				$this->fixtureUid, 'tx_seminars_test', FALSE
-			)
+			tx_seminars_tests_fixtures_OldModel_Testing::recordExists($this->fixtureUid, 'tx_seminars_test', FALSE)
 		);
 	}
 
@@ -464,9 +460,7 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertTrue(
-			$this->fixture->recordExists(
-				$this->fixtureUid, 'tx_seminars_test', TRUE
-			)
+			tx_seminars_tests_fixtures_OldModel_Testing::recordExists($this->fixtureUid, 'tx_seminars_test', TRUE)
 		);
 	}
 

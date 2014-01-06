@@ -137,7 +137,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * The column names must *not* be prefixed with the table name.
 	 *
 	 * Before this function may be called, $this->tableName must be set
-	 * to the correspondonding DB table name.
+	 * to the corresponding DB table name.
 	 *
 	 * If at least one element is taken, this function sets $this->isInDb to TRUE.
 	 *
@@ -390,6 +390,9 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *        uids of records from the foreign table to which we should create references, may be empty
 	 *
 	 * @return integer the number of created m:n records
+	 *
+	 * @throws InvalidArgumentException
+	 * @throws BadMethodCallException
 	 */
 	protected function createMmRecords($mmTable, array $references) {
 		if ($mmTable == '') {
@@ -436,35 +439,30 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * This method may be called statically.
 	 *
 	 * @param string $uid string with a UID (need not necessarily be escaped, will be intvaled)
-	 * @param string $tableName string with the tablename where the UID should be searched for
+	 * @param string $tableName string with the table name where the UID should be searched for
 	 * @param boolean $allowHiddenRecords whether hidden records should be found as well
 	 *
 	 * @return boolean TRUE if a visible record with that UID exists, FALSE otherwise
 	 */
-	public function recordExists($uid, $tableName, $allowHiddenRecords = FALSE) {
-		$result = is_numeric($uid) && ($uid);
+	public static function recordExists($uid, $tableName, $allowHiddenRecords = FALSE) {
+		if (!is_int($uid) || (intval($uid) <= 0) || $tableName === '') {
+			return FALSE;
+		}
+		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'COUNT(*) AS num',
+			$tableName,
+			'uid=' . intval($uid) . tx_oelib_db::enableFields($tableName, intval($allowHiddenRecords))
+		);
 
-		if ($result && !empty($tableName)) {
-			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'COUNT(*) AS num',
-				$tableName,
-				'uid=' . intval($uid) . tx_oelib_db::enableFields(
-					$tableName, intval($allowHiddenRecords)
-				)
-			);
-
-			if ($dbResult) {
-				$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-				$result = ($dbResultAssoc['num'] == 1);
-				$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
-			} else {
-				$result = FALSE;
-			}
+		if ($dbResult) {
+			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+			$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
+			$result = (intval($dbResultAssoc['num']) === 1);
 		} else {
 			$result = FALSE;
 		}
 
-		return (boolean) $result;
+		return $result;
 	}
 
 	/**
@@ -476,26 +474,21 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * @param integer $uid the UID of the record to retrieve from the DB
 	 * @param boolean $allowHiddenRecords whether to allow hidden records
 	 *
-	 * @return resource MySQL result pointer (of SELECT query)/DBAL object, FALSE
-	 *                 if the UID is invalid
+	 * @return resource MySQL result pointer (of SELECT query) object, will be FALSE if the UID is invalid
 	 */
 	protected function retrieveRecord($uid, $allowHiddenRecords = FALSE) {
-		if ($this->recordExists($uid, $this->tableName, $allowHiddenRecords)) {
-			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-				'*',
-				$this->tableName,
-				'uid=' . intval($uid) . tx_oelib_db::enableFields(
-					$this->tableName, $allowHiddenRecords
-				),
-				'',
-				'',
-				'1'
-			);
-		} else {
-			$result = FALSE;
+		if (!self::recordExists($uid, $this->tableName, $allowHiddenRecords)) {
+			return FALSE;
 		}
 
-		return $result;
+		return $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			'*',
+			$this->tableName,
+			'uid=' . intval($uid) . tx_oelib_db::enableFields($this->tableName, $allowHiddenRecords),
+			'',
+			'',
+			'1'
+		);
 	}
 
 	/**
@@ -560,7 +553,6 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *                for this record
 	 */
 	public function getRecordIcon() {
-		$imageURL = '';
 		$iconProperties = array();
 
 		t3lib_div::loadTCA($this->tableName);
@@ -598,8 +590,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 			$this->tableName, $iconProperties
 		);
 
-		return '<img src="'.$imageURL.'" title="id='.$this->getUid()
-			.'" alt="'.$this->getUid().'" />';
+		return '<img src="' . $imageURL . '" title="id=' . $this->getUid() . '" alt="' . $this->getUid() . '" />';
 	}
 
 	/**
@@ -616,6 +607,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * conversion instance in $this->$charsetConversion.
 	 *
 	 * @return void
+	 *
+	 * @throws RuntimeException
 	 */
 	protected function initializeCharsetConversion() {
 		if (isset($GLOBALS['TSFE'])) {
