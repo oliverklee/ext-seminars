@@ -32,32 +32,32 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
+class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_BackEnd_EventsList
 	 */
-	private $fixture;
+	protected $fixture = NULL;
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
-	private $testingFramework;
+	protected $testingFramework = NULL;
 
 	/**
 	 * @var integer PID of a dummy system folder
 	 */
-	private $dummySysFolderPid = 0;
+	protected $dummySysFolderPid = 0;
 
 	/**
 	 * @var tx_seminars_BackEnd_Module a dummy BE module
 	 */
-	private $backEndModule;
+	protected $backEndModule = NULL;
 
 	/**
 	* @var string the original language of the back-end module
 	*/
-	private $originalLanguage;
+	protected $originalLanguage = '';
 
-	public function setUp() {
+	protected function setUp() {
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
 
 		// Sets the localization to the default language so that all tests can
@@ -68,11 +68,9 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 		// Loads the locallang file for properly working localization in the tests.
 		$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
 
-		$this->testingFramework
-			= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->dummySysFolderPid
-			= $this->testingFramework->createSystemFolder();
+		$this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 
 		$this->backEndModule = new tx_seminars_BackEnd_Module();
 		$this->backEndModule->id = $this->dummySysFolderPid;
@@ -85,9 +83,7 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 		$this->backEndModule->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->backEndModule->doc->docType = 'xhtml_strict';
 
-		$this->fixture = new tx_seminars_BackEnd_EventsList(
-			$this->backEndModule
-		);
+		$this->fixture = new tx_seminars_BackEnd_EventsList($this->backEndModule);
 
 		$backEndGroup = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
@@ -97,12 +93,10 @@ class tx_seminars_BackEnd_EventsListTest extends tx_phpunit_testcase {
 			'tx_seminars_Mapper_BackEndUser')->getLoadedTestingModel(
 			array('usergroup' => $backEndGroup->getUid())
 		);
-		tx_oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
-			$backEndUser
-		);
+		tx_oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		// Resets the language of the interface to the value it had before
 		// we set it to "default" for testing.
 		$GLOBALS['LANG']->lang = $this->originalLanguage;

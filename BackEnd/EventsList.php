@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007-2013 Niels Pardon (mail@niels-pardon.de)
+* (c) 2007-2014 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -30,6 +30,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	/**
@@ -40,7 +41,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	/**
 	 * @var tx_seminars_seminar the seminar which we want to list
 	 */
-	private $seminar = NULL;
+	protected $seminar = NULL;
 
 	/**
 	 * @var string the path to the template file of this list
@@ -48,13 +49,15 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	protected $templateFile = 'EXT:seminars/Resources/Private/Templates/BackEnd/EventsList.html';
 
 	/**
+	 * @var Tx_Seminars_Csv_BackEndRegistrationAccessCheck
+	 */
+	protected $accessCheck = NULL;
+
+	/**
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		if ($this->seminar) {
-			$this->seminar->__destruct();
-			unset($this->seminar);
-		}
+		unset($this->seminar, $this->accessCheck);
 
 		parent::__destruct();
 	}
@@ -94,7 +97,6 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 
 		// Checks the BE configuration and the CSV export configuration.
 		$content .= $seminarBag->checkConfiguration();
-		$seminarBag->__destruct();
 
 		return $content;
 	}
@@ -275,45 +277,42 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	}
 
 	/**
-	 * Generates a linked CSV export icon for registrations from $this->seminar
-	 * if that event has at least one registration and access to all involved
-	 * registration records is granted.
+	 * Generates a linked CSV export icon for registrations from $event if that event has at least one registration and access to
+	 * the registration records is granted.
 	 *
-	 * @param tx_seminars_seminar $event
-	 *        the event to get the registrations CSV icon for
+	 * @param tx_seminars_seminar $event the event to get the registrations CSV icon for
 	 *
-	 * @return string the HTML for the linked image (followed by a non-breaking
-	 *                space) or an empty string
+	 * @return string the HTML for the linked image (followed by a non-breaking space) or an empty string
 	 */
 	public function getRegistrationsCsvIcon(tx_seminars_seminar $event) {
-		static $accessChecker = NULL;
-		if (!$accessChecker) {
-			$accessChecker = tx_oelib_ObjectFactory::make('tx_seminars_pi2');
-			$accessChecker->init();
+		if (!$this->getAccessCheck()->hasAccess() || !$event->hasAttendances()) {
+			return '';
 		}
 
-		$result = '';
+		$pageData = $this->page->getPageData();
+		$langCsv = $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
 
-		$eventUid = $event->getUid();
+		$imageTag = '<img' .
+			t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'], 'gfx/csv.gif', 'width="27" height="14"') .
+				' title="' . $langCsv . '" alt="' . $langCsv . '" class="icon" />';
 
-		if ($event->hasAttendances()
-			&& $accessChecker->canAccessListOfRegistrations($eventUid)) {
-			$pageData = $this->page->getPageData();
-			$langCsv = $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
-			$result = '<a href="CSV.php?id=' . $pageData['uid'] .
-				'&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
-				'&amp;tx_seminars_pi2[eventUid]=' . $eventUid . '">' .
-				'<img' .
-				t3lib_iconWorks::skinImg(
-					$GLOBALS['BACK_PATH'],
-					'gfx/csv.gif',
-					'width="27" height="14"'
-				) .
-				' title="' . $langCsv . '" alt="' . $langCsv . '" class="icon" />' .
-				'</a>&nbsp;';
+		return '<a href="CSV.php?id=' . $pageData['uid'] .
+			'&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
+			'&amp;tx_seminars_pi2[eventUid]=' . $event->getUid() . '">' .
+			$imageTag . '</a>&nbsp;';
+	}
+
+	/**
+	 * Gets the access check instance (and creates it if needed).
+	 *
+	 * @return Tx_Seminars_Csv_BackEndRegistrationAccessCheck
+	 */
+	protected function getAccessCheck() {
+		if ($this->accessCheck === NULL) {
+			$this->accessCheck = t3lib_div::makeInstance('Tx_Seminars_Csv_BackEndRegistrationAccessCheck');
 		}
 
-		return $result;
+		return $this->accessCheck;
 	}
 
 	/**

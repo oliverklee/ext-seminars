@@ -45,10 +45,9 @@ class tx_seminars_BackEnd_CSV extends tx_seminars_BackEnd_Module {
 	 * @return void
 	 */
 	public function printContent() {
-		$pi2 = tx_oelib_ObjectFactory::make('tx_seminars_pi2');
+		/** @var $pi2 tx_seminars_pi2 */
+		$pi2 = t3lib_div::makeInstance('tx_seminars_pi2');
 		echo $pi2->main(NULL, array());
-		$pi2->__destruct();
-		unset($pi2);
 	}
 }
 
@@ -56,7 +55,6 @@ if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['
 	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/CSV.php']);
 }
 
-// Make instance:
 $SOBE = tx_oelib_ObjectFactory::make('tx_seminars_BackEnd_CSV');
 $SOBE->init();
 $SOBE->printContent();

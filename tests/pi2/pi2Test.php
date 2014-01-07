@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2008-2013 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2008-2014 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -31,37 +31,37 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
+class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_pi2
 	 */
-	private $fixture;
+	protected $fixture = NULL;
 
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
-	private $testingFramework;
+	protected $testingFramework = NULL;
 
 	/**
 	 * a backup of $GLOBALS['TYPO3_CONF_VARS']['BE']
 	 *
 	 * @var array
 	 */
-	private $backEndConfigurationBackup;
+	protected $backEndConfigurationBackup = array();
 
 	/**
 	 * PID of the system folder in which we store our test data
 	 *
 	 * @var integer
 	 */
-	private $pid;
+	protected $pid = 0;
 
 	/**
 	 * UID of a test event record
 	 *
 	 * @var integer
 	 */
-	private $eventUid;
+	protected $eventUid = 0;
 
 	public function setUp() {
 		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4007000) {
@@ -73,7 +73,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
 
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
 		$this->pid = $this->testingFramework->createSystemFolder();
 		$this->eventUid = $this->testingFramework->createRecord(
@@ -94,7 +94,6 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		$this->fixture->__destruct();
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework);
 
@@ -104,9 +103,9 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////
-	// Utility functions
-	//////////////////////
+	/*
+	 * Utility functions
+	 */
 
 	/*
 	 * Retrieves the localization for the given locallang key and then strips
@@ -125,32 +124,38 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////
-	// Tests for the CSV export of events.
-	////////////////////////////////////////
+	/*
+	 * Tests for the CSV export of events.
+	 */
 
-	public function testCreateListOfEventsIsEmptyForZeroPid() {
-		$this->assertEquals(
+	public function createListOfEventsIsEmptyForZeroPid() {
+		$this->assertSame(
 			'',
 			$this->fixture->createListOfEvents(0)
 		);
 	}
 
-	public function testCreateListOfEventsIsEmptyForNegativePid() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function createListOfEventsIsEmptyForNegativePid() {
+		$this->assertSame(
 			'',
 			$this->fixture->createListOfEvents(-2)
 		);
 	}
 
-	public function testCreateListOfEventsHasOnlyHeaderLineForZeroRecords() {
+	/**
+	 * @test
+	 */
+	public function createListOfEventsHasOnlyHeaderLineForZeroRecords() {
 		$pid = $this->testingFramework->createSystemFolder();
 
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'uid,title'
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->localizeAndRemoveColon('tx_seminars_seminars' . '.uid') . ';' .
 				$this->localizeAndRemoveColon('tx_seminars_seminars' . '.title') .
 				CRLF,
@@ -158,7 +163,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateListOfEventsCanContainOneEventUid() {
+	/**
+	 * @test
+	 */
+	public function createListOfEventsCanContainOneEventUid() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'uid'
 		);
@@ -172,7 +180,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function testCreateListOfEventsCanContainEventFromSubFolder() {
+	public function createListOfEventsCanContainEventFromSubFolder() {
 		$subFolderPid = $this->testingFramework->createSystemFolder($this->pid);
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -209,7 +217,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateListOfEventsCanContainTwoEventUids() {
+	/**
+	 * @test
+	 */
+	public function createListOfEventsCanContainTwoEventUids() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'uid'
 		);
@@ -232,7 +243,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfEventsCanContainTwoEventUids() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfEventsCanContainTwoEventUids() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'uid'
 		);
@@ -256,7 +270,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfEventsSeparatesLinesWithCarriageReturnsAndLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfEventsSeparatesLinesWithCarriageReturnsAndLineFeeds() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'uid'
 		);
@@ -268,14 +285,17 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->localizeAndRemoveColon('tx_seminars_seminars' . '.uid')
 				. CRLF . $this->eventUid . CRLF . $secondEventUid . CRLF,
 			$this->fixture->createAndOutputListOfEvents($this->pid)
 		);
 	}
 
-	public function testCreateAndOutputListOfEventsHasResultEndingWithCariageReturnAndLineFeed() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfEventsHasResultEndingWithCariageReturnAndLineFeed() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'uid'
 		);
@@ -293,7 +313,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfEventsDoesNotWrapRegularValuesWithDoubleQuotes() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfEventsDoesNotWrapRegularValuesWithDoubleQuotes() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->eventUid,
 			array('title' => 'bar')
@@ -309,7 +332,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfEventsEscapesDoubleQuotes() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfEventsEscapesDoubleQuotes() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->eventUid,
 			array('description' => 'foo " bar')
@@ -326,7 +352,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	}
 
 
-	public function testCreateAndOutputListOfEventsDoesWrapValuesWithLineFeedsInDoubleQuotes() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfEventsDoesWrapValuesWithLineFeedsInDoubleQuotes() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->eventUid,
 			array('title' => 'foo' . LF . 'bar')
@@ -342,7 +371,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfEventsDoesWrapValuesWithDoubleQuotesInDoubleQuotes() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfEventsDoesWrapValuesWithDoubleQuotesInDoubleQuotes() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->eventUid,
 			array('title' => 'foo " bar')
@@ -358,7 +390,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfEventsDoesWrapValuesWithSemicolonsInDoubleQuotes() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfEventsDoesWrapValuesWithSemicolonsInDoubleQuotes() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->eventUid,
 			array('title' => 'foo ; bar')
@@ -374,7 +409,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfEventsSeparatesValuesWithSemicolons() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfEventsSeparatesValuesWithSemicolons() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->eventUid,
 			array('description' => 'foo', 'title' => 'bar')
@@ -390,7 +428,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfEventsDoesNotWrapHeadlineFieldsInDoubleQuotes() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfEventsDoesNotWrapHeadlineFieldsInDoubleQuotes() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'description,title'
 		);
@@ -409,7 +450,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateAndOutputListOfEventsSeparatesHeadlineFieldsWithSemicolons() {
+	/**
+	 * @test
+	 */
+	public function createAndOutputListOfEventsSeparatesHeadlineFieldsWithSemicolons() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromEventsForCsv', 'description,title'
 		);
@@ -422,18 +466,24 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////
-	// Tests for the CSV export of registrations.
-	///////////////////////////////////////////////
+	/*
+	 * Tests for the CSV export of registrations.
+	 */
 
-	public function testCreateListOfRegistrationsIsEmptyForNonExistentEvent() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function createListOfRegistrationsIsEmptyForNonExistentEvent() {
+		$this->assertSame(
 			'',
 			$this->fixture->createListOfRegistrations($this->eventUid + 9999)
 		);
 	}
 
-	public function testCreateListOfRegistrationsHasOnlyHeaderLineForZeroRecords() {
+	/**
+	 * @test
+	 */
+	public function createListOfRegistrationsHasOnlyHeaderLineForZeroRecords() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', 'name'
 		);
@@ -441,7 +491,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 			'fieldsFromAttendanceForCsv', 'uid'
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->localizeAndRemoveColon('LGL.name') . ';' .
 				$this->localizeAndRemoveColon('tx_seminars_attendances.uid') .
 				CRLF,
@@ -449,7 +499,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateListOfRegistrationsCanContainOneRegistrationUid() {
+	/**
+	 * @test
+	 */
+	public function createListOfRegistrationsCanContainOneRegistrationUid() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -581,11 +634,14 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////////
-	// Tests concernin the main function
-	//////////////////////////////////////
+	/*
+	 * Tests concerning the main function
+	 */
 
-	public function testMainCanExportValueOfSignedThemseles() {
+	/**
+	 * @test
+	 */
+	public function mainCanExportValueOfSignedThemselves() {
 		$this->markTestIncomplete(
 			'For this test to run, we need to provide a language file to the ' .
 				'registration class @see ' .
@@ -616,7 +672,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testMainCanExportOneRegistrationUid() {
+	/**
+	 * @test
+	 */
+	public function mainCanExportOneRegistrationUid() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -640,7 +699,10 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreateListOfRegistrationsCanContainTwoRegistrationUids() {
+	/**
+	 * @test
+	 */
+	public function createListOfRegistrationsCanContainTwoRegistrationUids() {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromFeUserForCsv', ''
 		);
@@ -792,9 +854,9 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////////////////////
-	// Tests concerning createAndOutputListOfRegistrations
-	////////////////////////////////////////////////////////
+	/*
+	 * Tests concerning createAndOutputListOfRegistrations
+	 */
 
 	/**
 	 * @test
@@ -1233,7 +1295,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 			'fieldsFromFeUserForCsv', ''
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			CRLF,
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
@@ -1318,7 +1380,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function createAndOututListOfRegistrationsForNonExistingEventUidAddsNotFoundStatusToHeader() {
+	public function createAndOutputListOfRegistrationsForNonExistingEventUidAddsNotFoundStatusToHeader() {
 		$this->fixture->createAndOutputListOfRegistrations(
 			$this->testingFramework->getAutoIncrement('tx_seminars_seminars')
 		);
@@ -1333,7 +1395,7 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function createAndOututListOfRegistrationsForNoGivenEventUidAndFeModeAddsAccessForbiddenStatusToHeader() {
+	public function createAndOutputListOfRegistrationsForNoGivenEventUidAndFeModeAddsAccessForbiddenStatusToHeader() {
 		$this->fixture->setTypo3Mode('FE');
 		$this->fixture->createAndOutputListOfRegistrations();
 
@@ -1376,9 +1438,9 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////////////
-	// Tests concerning the export mode and the configuration
-	///////////////////////////////////////////////////////////
+	/*
+	 * Tests concerning the export mode and the configuration
+	 */
 
 	/**
 	 * @test
@@ -1543,7 +1605,6 @@ class tx_seminars_pi2_pi2Test extends tx_phpunit_testcase {
 		$this->fixture->getConfigGetter()->setConfigurationValue(
 			'fieldsFromAttendanceForCsv', 'uid'
 		);
-
 
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',

@@ -1,26 +1,26 @@
 <?php
 /***************************************************************
-* Copyright notice
-*
-* (c) 2007-2013 Oliver Klee (typo3-coding@oliverklee.de)
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+ * Copyright notice
+ *
+ * (c) 2007-2014 Oliver Klee (typo3-coding@oliverklee.de)
+ * All rights reserved
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is
+ * free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
 
 require_once(PATH_typo3 . 'template.php');
 if (is_object($LANG)) {
@@ -39,7 +39,7 @@ require_once(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTabl
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_pi2 extends tx_oelib_templatehelper {
+class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	/**
 	 * @var integer HTTP status code for "page not found"
 	 */
@@ -80,15 +80,14 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	public $extKey = 'seminars';
 
 	/**
-	 * @var tx_seminars_configgetter This object provides access to config
-	 * values in plugin.tx_seminars.
+	 * @var tx_seminars_configgetter This object provides access to configuration values in plugin.tx_seminars.
 	 */
 	private $configGetter = NULL;
 
 	/**
 	 * @var string the TYPO3 mode set for testing purposes
 	 */
-	private $typo3Mode;
+	private $typo3Mode = '';
 
 	/**
 	 * @var integer the HTTP status code of error
@@ -118,11 +117,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		if ($this->configGetter) {
-			$this->configGetter->__destruct();
-			unset($this->configGetter);
-		}
-		unset($this->language);
+		unset($this->configGetter, $this->language);
 
 		parent::__destruct();
 	}
@@ -141,20 +136,13 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 
 			switch ($this->piVars['table']) {
 				case 'tx_seminars_seminars':
-					$result = $this->createAndOutputListOfEvents(
-						intval($this->piVars['pid'])
-					);
+					$result = $this->createAndOutputListOfEvents(intval($this->piVars['pid']));
 					break;
 				case 'tx_seminars_attendances':
-					$result = $this->createAndOutputListOfRegistrations(
-						intval($this->piVars['eventUid'])
-					);
+					$result = $this->createAndOutputListOfRegistrations(intval($this->piVars['eventUid']));
 					break;
 				default:
-					$result = $this->addErrorHeaderAndReturnMessage(
-						self::NOT_FOUND
-					);
-					break;
+					$result = $this->addErrorHeaderAndReturnMessage(self::NOT_FOUND);
 			}
 
 			if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4007000) {
@@ -163,20 +151,13 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				$dataCharset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
 					? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] : 'iso-8859-1';
 			}
-			$resultCharset = strtolower(
-				$this->configGetter->getConfValueString('charsetForCsv')
-			);
+			$resultCharset = strtolower($this->configGetter->getConfValueString('charsetForCsv'));
 			if ($dataCharset !== $resultCharset) {
-				$result = $this->getCharsetConversion()->conv(
-					$result, $dataCharset, $resultCharset
-				);
+				$result = $this->getCharsetConversion()->conv($result, $dataCharset, $resultCharset);
 			}
 		} catch (Exception $exception) {
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-				'Status: 500 Internal Server Error'
-			);
-			$result = $exception->getMessage() . LF . LF .
-				$exception->getTraceAsString() . LF . LF;
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 500 Internal Server Error');
+			$result = $exception->getMessage() . LF . LF . $exception->getTraceAsString() . LF . LF;
 		}
 
 		return $result;
@@ -193,9 +174,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		parent::init($configuration);
 
 		if ($this->configGetter === NULL) {
-			$this->configGetter = tx_oelib_ObjectFactory::make(
-				'tx_seminars_configgetter'
-			);
+			$this->configGetter = t3lib_div::makeInstance('tx_seminars_configgetter');
 			$this->configGetter->init();
 		}
 	}
@@ -203,7 +182,9 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Retrieves an active charset conversion instance.
 	 *
-	 * @return t3lib_cs a charset converstion instance
+	 * @return t3lib_cs a charset conversion instance
+	 *
+	 * @throws RuntimeException
 	 */
 	protected function getCharsetConversion() {
 		if (isset($GLOBALS['TSFE'])) {
@@ -221,10 +202,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * Loads the locallang files needed to translate the CSV headings.
 	 *
 	 * @return void
+	 *
+	 * @throws RuntimeException
 	 */
 	private function loadLocallangFiles() {
 		if (is_object($GLOBALS['TSFE']) && is_array($this->LOCAL_LANG)) {
-			$this->language = tx_oelib_ObjectFactory::make('language');
+			$this->language = t3lib_div::makeInstance('language');
 			if (!empty($this->LLkey)) {
 				$this->language->init($this->LLkey);
 			}
@@ -234,28 +217,20 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			throw new RuntimeException('The language could not be loaded. Please check your installation.', 1333292453);
 		}
 
-		$this->language->includeLLFile(
-			t3lib_extMgm::extPath('seminars') . 'locallang_db.xml'
-		);
-		$this->language->includeLLFile(
-			t3lib_extMgm::extPath('lang') . 'locallang_general.xml'
-		);
+		$this->language->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
+		$this->language->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
 	}
 
 	/**
-	 * Creates a CSV list of registrations for the event given in $eventUid,
-	 * including a heading line.
+	 * Creates a CSV list of registrations for the event given in $eventUid, including a heading line.
 	 *
-	 * If the seminar does not exist, an error message is returned, and an error
-	 * 404 is set.
+	 * If the seminar does not exist, an error message is returned, and an error 404 is set.
 	 *
-	 * If access is denied, an error message is returned, and an error 403 is
-	 * set.
+	 * If access is denied, an error message is returned, and an error 403 is set.
 	 *
 	 * @param integer $eventUid UID of the event for which to create the CSV list, must be >= 0
 	 *
-	 * @return string CSV list of registrations for the given seminar or
-	 *                an error message in case of an error
+	 * @return string CSV list of registrations for the given seminar or an error message in case of an error
 	 */
 	public function createAndOutputListOfRegistrations($eventUid = 0) {
 		$pid = intval($this->piVars['pid']);
@@ -265,14 +240,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 			}
 		} else {
 			if (!$this->canAccessRegistrationsOnPage($pid)) {
-				return $this->addErrorHeaderAndReturnMessage(
-					self::ACCESS_DENIED
-				);
+				return $this->addErrorHeaderAndReturnMessage(self::ACCESS_DENIED);
 			}
 		}
 
 		$this->setContentTypeForRegistrationLists();
-		if ($eventUid == 0) {
+		if ($eventUid === 0) {
 			$result = $this->createListOfRegistrationsOnPage($pid);
 		} else {
 			$result = $this->createListOfRegistrations($eventUid);
@@ -293,17 +266,14 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *                empty string if there is not event with the provided UID
 	 */
 	public function createListOfRegistrations($eventUid) {
-		if (!tx_seminars_OldModel_Abstract::recordExists(
-			$eventUid, 'tx_seminars_seminars'
-		)) {
+		if (!tx_seminars_OldModel_Abstract::recordExists($eventUid, 'tx_seminars_seminars')) {
 			return '';
 		}
 
 		$registrationBagBuilder = $this->createRegistrationBagBuilder();
 		$registrationBagBuilder->limitToEvent($eventUid);
 
-		return $this->createRegistrationsHeading() .
-			$this->getRegistrationsCsvList($registrationBagBuilder);
+		return $this->createRegistrationsHeading() . $this->getRegistrationsCsvList($registrationBagBuilder);
 	}
 
 	/**
@@ -312,25 +282,23 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * The fields are separated by semicolons and the lines by CRLF.
 	 *
 	 * @param tx_seminars_BagBuilder_Registration $builder
-	 *        the bag builder already limited to the registrations which should
-	 *        be returned
+	 *        the bag builder already limited to the registrations which should be returned
 	 *
-	 * @return string the list of registrations, will be empty if no
-	 *                registrations have been given
+	 * @return string the list of registrations, will be empty if no registrations have been given
+	 *
+	 * @throws RuntimeException
 	 */
-	private function getRegistrationsCsvList(
-		tx_seminars_BagBuilder_Registration $builder
-	) {
+	private function getRegistrationsCsvList(tx_seminars_BagBuilder_Registration $builder) {
 		$result = '';
+		/** @var $bag tx_seminars_Bag_Registration */
 		$bag = $builder->build();
 
+		/** @var $registration tx_seminars_registration */
 		foreach ($bag as $registration) {
 			switch ($this->getTypo3Mode()) {
 				case 'BE':
 					$hasAccess = $GLOBALS['BE_USER']->doesUserHaveAccess(
-						t3lib_BEfunc::getRecord(
-							'pages', $registration->getPageUid()),
-						1
+						t3lib_BEfunc::getRecord('pages', $registration->getPageUid()), 1
 					);
 					break;
 				case 'FE':
@@ -338,55 +306,37 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 					break;
 				default:
 					throw new RuntimeException(
-						'You are trying to get a CSV list in an unsupported mode. Currently, only back end and front end mode ' .
+						'You are trying to get a CSV list in an unsupported mode. Currently, only back-end and front-end mode ' .
 							'are allowed.',
 						1333292478
 					);
 			}
 
 			if ($hasAccess) {
-				$userData = $this->retrieveData(
-					$registration,
-					'getUserData',
-					$this->getFrontEndUserFieldsConfiguration()
-				);
+				$userData = $this->retrieveData($registration, 'getUserData', $this->getFrontEndUserFieldsConfiguration());
 				$registrationData = $this->retrieveData(
-					$registration,
-					'getRegistrationData',
-					$this->getRegistrationFieldsConfiguration()
+					$registration, 'getRegistrationData', $this->getRegistrationFieldsConfiguration()
 				);
 				// Combines the arrays with the user and registration data
 				// and creates a list of semicolon-separated values from them.
-				$result .= implode(
-					';', array_merge($userData, $registrationData)
-				) . CRLF;
+				$result .= implode(';', array_merge($userData, $registrationData)) . CRLF;
 			}
 		}
-
-		$bag->__destruct();
 
 		return $result;
 	}
 
 	/**
-	 * Creates the heading line for the list of registrations (including a CRLF
-	 * at the end).
+	 * Creates the heading line for the list of registrations (including a CRLF at the end).
 	 *
-	 * @return string the heading line for the list of registrations, will
-	 *                not be empty
+	 * @return string the heading line for the list of registrations, will not be empty
 	 */
 	protected function createRegistrationsHeading() {
 		$fieldsFromFeUser = $this->localizeCsvHeadings(
-			t3lib_div::trimExplode(
-				',', $this->getFrontEndUserFieldsConfiguration(), TRUE
-			),
-			'LGL'
+			t3lib_div::trimExplode(',', $this->getFrontEndUserFieldsConfiguration(), TRUE), 'LGL'
 		);
 		$fieldsFromAttendances = $this->localizeCsvHeadings(
-			t3lib_div::trimExplode(
-				',', $this->getRegistrationFieldsConfiguration(), TRUE
-			),
-			'tx_seminars_attendances'
+			t3lib_div::trimExplode(',', $this->getRegistrationFieldsConfiguration(), TRUE), 'tx_seminars_attendances'
 		);
 
 		$result = array_merge($fieldsFromFeUser, $fieldsFromAttendances);
@@ -397,16 +347,13 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Creates a CSV list of events for the page given in $pid.
 	 *
-	 * If the page does not exist, an error message is returned, and an error
-	 * 404 is set.
+	 * If the page does not exist, an error message is returned, and an error 404 is set.
 	 *
-	 * If access is denied, an error message is returned, and an error 403 is
-	 * set.
+	 * If access is denied, an error message is returned, and an error 403 is set.
 	 *
 	 * @param integer $pid PID of the page with events for which to create the CSV list, must be > 0
 	 *
-	 * @return string CSV list of events for the given page or an error
-	 *                message in case of an error
+	 * @return string CSV list of events for the given page or an error message in case of an error
 	 */
 	public function createAndOutputListOfEvents($pid) {
 		if ($pid > 0) {
@@ -414,9 +361,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				$this->setContentTypeForEventLists();
 				$result = $this->createListOfEvents($pid);
 			} else {
-				$result = $this->addErrorHeaderAndReturnMessage(
-					self::ACCESS_DENIED
-				);
+				$result = $this->addErrorHeaderAndReturnMessage(self::ACCESS_DENIED);
 			}
 		} else {
 			$result = $this->addErrorHeaderAndReturnMessage(self::NOT_FOUND);
@@ -441,17 +386,14 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 
 		$result = $this->createEventsHeading();
 
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Event');
+		/** @var $builder tx_seminars_BagBuilder_Event */
+		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->setBackEndMode();
 		$builder->setSourcePages($pid, 255);
 
 		foreach ($builder->build() as $seminar) {
 			$seminarData = $this->retrieveData(
-				$seminar,
-				'getEventData',
-				$this->configGetter->getConfValueString(
-					'fieldsFromEventsForCsv'
-				)
+				$seminar, 'getEventData', $this->configGetter->getConfValueString('fieldsFromEventsForCsv')
 			);
 			// Creates a list of comma-separated values of the event data.
 			$result .= implode(';', $seminarData) . CRLF;
@@ -463,19 +405,12 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	/**
 	 * Creates the heading line for a CSV event list.
 	 *
-	 * @return string header list, will not be empty if the CSV export has been
-	 *                configured correctly
+	 * @return string header list, will not be empty if the CSV export has been configured correctly
 	 */
 	private function createEventsHeading() {
-		$eventFields = t3lib_div::trimExplode(
-			',',
-			$this->configGetter->getConfValueString('fieldsFromEventsForCsv'),
-			TRUE
-		);
+		$eventFields = t3lib_div::trimExplode(',', $this->configGetter->getConfValueString('fieldsFromEventsForCsv'), TRUE);
 
-		return implode(
-			';', $this->localizeCsvHeadings($eventFields, 'tx_seminars_seminars')
-		) . CRLF;
+		return implode(';', $this->localizeCsvHeadings($eventFields, 'tx_seminars_seminars')) . CRLF;
 	}
 
 	/**
@@ -491,23 +426,19 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * @param string $keys
 	 *        comma-separated list of keys to retrieve
 	 *
-	 * @return array the data for the keys provided in $keys
-	 * (may be empty)
+	 * @return array the data for the keys provided in $keys (may be empty)
 	 */
 	protected function retrieveData(tx_seminars_OldModel_Abstract $dataSupplier, $supplierFunction, $keys) {
 		$result = array();
 
-		if (($keys != '') && method_exists($dataSupplier, $supplierFunction)) {
+		if (($keys !== '') && method_exists($dataSupplier, $supplierFunction)) {
 			$allKeys = t3lib_div::trimExplode(',', $keys);
 			foreach ($allKeys as $currentKey) {
 				$rawData = $dataSupplier->$supplierFunction($currentKey);
-				// Escapes double quotes and wraps the whole string in double
-				// quotes.
+				// Escapes double quotes and wraps the whole string in double quotes.
 				if (strpos($rawData, '"') !== FALSE) {
-					$result[] = '"'.str_replace('"', '""', $rawData).'"';
-				} elseif ((strpos($rawData, ';') !== FALSE) ||
-					(strpos($rawData, LF) !== FALSE)
-				){
+					$result[] = '"' . str_replace('"', '""', $rawData) . '"';
+				} elseif ((strpos($rawData, ';') !== FALSE) || (strpos($rawData, LF) !== FALSE)) {
 					$result[] = '"' . $rawData . '"';
 				} else {
 					$result[] = $rawData;
@@ -525,119 +456,80 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 *    read access to *all* pages where the registration records of the
 	 *    selected event are stored.
 	 *
-	 * TODO: When additional ways to access the CSV data are added (e.g. FE
-	 * links), the corresponding access checks need to be added to this
-	 * function.
-	 *
 	 * @param integer $eventUid UID of the event record for which access should be checked, must be > 0
 	 *
 	 * @return boolean TRUE if the list of registrations may be exported as CSV
 	 */
-	public function canAccessListOfRegistrations($eventUid) {
+	protected function canAccessListOfRegistrations($eventUid) {
 		switch ($this->getTypo3Mode()) {
 			case 'BE':
-				// Checks read access to the registrations table.
-				$result = $GLOBALS['BE_USER']->check(
-					'tables_select',
-					'tx_seminars_attendances'
-				);
-				// Checks read access to all pages with registrations from the
-				// selected event.
-				$pidArray = tx_oelib_db::selectMultiple(
-					'DISTINCT pid',
-					'tx_seminars_attendances',
-					'seminar=' . $eventUid .
-						tx_oelib_db::enableFields('tx_seminars_attendances')
-				);
-				foreach ($pidArray as $pid) {
-					// Checks read access for the current page.
-					$result = $result && $GLOBALS['BE_USER']->doesUserHaveAccess(
-						t3lib_BEfunc::getRecord('pages', $pid['pid']), 1
-					);
-				}
+				/** @var $accessCheck Tx_Seminars_Csv_BackEndRegistrationAccessCheck */
+				$accessCheck = t3lib_div::makeInstance('Tx_Seminars_Csv_BackEndRegistrationAccessCheck');
+				$result = $accessCheck->hasAccess();
 				break;
 			case 'FE':
-				$seminar = tx_oelib_ObjectFactory::make(
-					'tx_seminars_seminar', $eventUid
-				);
+				/** @var $accessCheck Tx_Seminars_Csv_FrontEndRegistrationAccessCheck */
+				$accessCheck = t3lib_div::makeInstance('Tx_Seminars_Csv_FrontEndRegistrationAccessCheck');
 
-				$pi1TypoScriptSetup
-					=& $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_seminars_pi1.'];
+				/** @var $seminar tx_seminars_seminar */
+				$seminar = t3lib_div::makeInstance('tx_seminars_seminar', $eventUid);
+				$accessCheck->setEvent($seminar);
 
-				$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
-					= (boolean) $pi1TypoScriptSetup['allowCsvExportOfRegistrationsInMyVipEventsView'];
-
-				$result = $isCsvExportOfRegistrationsInMyVipEventsViewAllowed
-					&& $seminar->isUserVip(
-						$this->getFeUserUid(),
-						$pi1TypoScriptSetup['defaultEventVipsFeGroupID']
-					);
+				$result = $accessCheck->hasAccess();
 				break;
 			default:
 				$result = FALSE;
-				break;
 		}
 
 		return $result;
 	}
 
 	/**
-	 * Checks whether the logged-in BE user has read access to the events table
-	 * and read access to the page with the given PID.
+	 * Checks whether the logged-in BE user has access to the event list.
 	 *
-	 * @param integer $pid
-	 *        PID of the page with events for which to check access, must
-	 *        be >= 0
+	 * @param integer $pageUid PID of the page with events for which to check access, must be >= 0
 	 *
-	 * @return boolean TRUE if the list of events may be exported as CSV, FALSE
-	 *                 otherwise
+	 * @return boolean TRUE if the list of events may be exported as CSV, FALSE otherwise
 	 */
-	public function canAccessListOfEvents($pid) {
-		return $this->canAccessTableAndPage('tx_seminars_seminars', $pid);
+	protected function canAccessListOfEvents($pageUid) {
+		/** @var $accessCheck Tx_Seminars_Csv_BackEndEventAccessCheck */
+		$accessCheck = t3lib_div::makeInstance('Tx_Seminars_Csv_BackEndEventAccessCheck');
+		$accessCheck->setPageUid($pageUid);
+
+		return $accessCheck->hasAccess();
 	}
 
 	/**
-	 * Sets the HTTP header: the content type and filename (content disposition)
-	 * for registration lists.
+	 * Sets the HTTP header: the content type and filename (content disposition) for registration lists.
 	 *
 	 * @return void
 	 */
 	private function setContentTypeForRegistrationLists() {
-		$this->setPageTypeAndDisposition(
-			$this->configGetter->getConfValueString(
-				'filenameForRegistrationsCsv'
-			)
-		);
+		$this->setPageTypeAndDisposition($this->configGetter->getConfValueString('filenameForRegistrationsCsv'));
 	}
 
 	/**
-	 * Sets the HTTP header: the content type and filename (content disposition)
-	 * for event lists.
+	 * Sets the HTTP header: the content type and filename (content disposition) for event lists.
 	 *
 	 * @return void
 	 */
 	private function setContentTypeForEventLists() {
-		$this->setPageTypeAndDisposition(
-			$this->configGetter->getConfValueString('filenameForEventsCsv')
-		);
+		$this->setPageTypeAndDisposition($this->configGetter->getConfValueString('filenameForEventsCsv'));
 	}
 
 	/**
-	 * Sets the page's content type to CSV and the page's content disposition to
-	 * the given filename.
+	 * Sets the page's content type to CSV and the page's content disposition to the given filename.
 	 *
 	 * Adds the data directly to the page header.
 	 *
-	 * @param string $csvFileName
-	 *        the name for the page which is used as storage name, must not be
-	 *        empty
+	 * @param string $csvFileName the name for the page which is used as storage name, must not be empty
 	 *
 	 * @return void
 	 */
 	private function setPageTypeAndDisposition($csvFileName) {
 		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 			'Content-type: text/csv; header=present; charset=' .
-				$this->configGetter->getConfValueString('charsetForCsv')
+			$this->configGetter->getConfValueString('charsetForCsv')
 		);
 		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 			'Content-disposition: attachment; filename=' . $csvFileName
@@ -662,33 +554,27 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * @return integer the typeNum in tx_seminars_pi2.typeNum
 	 */
 	public static function getTypeNum() {
-		return intval(
-			$GLOBALS['TSFE']->tmpl->setup['tx_seminars_pi2.']['typeNum']
-		);
+		return intval($GLOBALS['TSFE']->tmpl->setup['tx_seminars_pi2.']['typeNum']);
 	}
 
 	/**
 	 * Adds a status header and returns an error message.
 	 *
 	 * @param integer $errorCode
-	 *        the type of error message, must be tx_seminars_pi2::ACCESS_DENIED
-	 *        or tx_seminars_pi2::NOT_FOUND
+	 *        the type of error message, must be tx_seminars_pi2::ACCESS_DENIED or tx_seminars_pi2::NOT_FOUND
 	 *
-	 * @return string the error message belonging to the error code, will not be
-	 *                empty
+	 * @return string the error message belonging to the error code, will not be empty
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	private function addErrorHeaderAndReturnMessage($errorCode) {
 		switch ($errorCode) {
 			case self::ACCESS_DENIED:
-				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-					'Status: 403 Forbidden'
-				);
+				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
 				$result = $this->translate('message_403');
 				break;
 			case self::NOT_FOUND:
-				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-					'Status: 404 Not Found'
-				);
+				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
 				$result = $this->translate('message_404');
 				break;
 			default:
@@ -699,45 +585,26 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Checks whether the currently logged-in BE-User is allowed to access the
-	 * registrations records on the given page.
+	 * Checks whether the currently logged-in BE-User is allowed to access the registrations records on the given page.
 	 *
-	 * @param integer $pid PID of the page to check the access for, must be >= 0
+	 * @param integer $pageUid PID of the page to check the access for, must be >= 0
 	 *
 	 * @return boolean
 	 *         TRUE if the currently logged-in BE-User is allowed to access the registrations records,
 	 *         FALSE if the user has no access or this function is called in FE mode
 	 */
-	private function canAccessRegistrationsOnPage($pid) {
-		return $this->canAccessTableAndPage('tx_seminars_attendances', $pid);
-	}
-
-	/**
-	 * Checks whether the currently logged-in BE-User is allowed to access the
-	 * given table and page.
-	 *
-	 * @param string $table
-	 *        the name of the table to check the read access for, must not be
-	 *        empty
-	 *
-	 * @param integer $pid the page to check the access for, must be >= 0
-	 *
-	 * @return boolean TRUE if the user has access to the given table and page,
-	 *                 FALSE otherwise, will also return FALSE if this function
-	 *                 is called in any other TYPO3 mode than BE
-	 */
-	private function canAccessTableAndPage($table, $pid) {
-		$result = FALSE;
-
-		if ($this->getTypo3Mode() == 'BE') {
-			// Checks read access to the given table.
-			$result = $GLOBALS['BE_USER']->check(
-				'tables_select', $table
-			);
-			// Checks read access to the given page.
-			$result = $result && $GLOBALS['BE_USER']->doesUserHaveAccess(
-				t3lib_BEfunc::getRecord('pages', $pid), 1
-			);
+	private function canAccessRegistrationsOnPage($pageUid) {
+		switch ($this->getTypo3Mode()) {
+			case 'BE':
+				/** @var $accessCheck Tx_Seminars_Csv_BackEndRegistrationAccessCheck */
+				$accessCheck = t3lib_div::makeInstance('Tx_Seminars_Csv_BackEndRegistrationAccessCheck');
+				$accessCheck->setPageUid($pageUid);
+				$result = $accessCheck->hasAccess();;
+				break;
+			case 'FE':
+				// The fall-through is intentional.
+			default:
+				$result = FALSE;
 		}
 
 		return $result;
@@ -758,20 +625,17 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 		$registrationsBagBuilder = $this->createRegistrationBagBuilder();
 		$registrationsBagBuilder->setSourcePages($pid, self::RECURSION_DEPTH);
 
-		return $this->createRegistrationsHeading() .
-			$this->getRegistrationsCsvList($registrationsBagBuilder);
+		return $this->createRegistrationsHeading() . $this->getRegistrationsCsvList($registrationsBagBuilder);
 	}
 
 	/**
 	 * Creates a registrationBagBuilder with some preset limitations.
 	 *
-	 * @return tx_seminars_BagBuilder_Registration the bag builder with some
-	 *                                             preset limitations
+	 * @return tx_seminars_BagBuilder_Registration the bag builder with some preset limitations
 	 */
 	private function createRegistrationBagBuilder() {
-		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
-			'tx_seminars_BagBuilder_Registration'
-		);
+		/** @var $registrationBagBuilder tx_seminars_BagBuilder_Registration */
+		$registrationBagBuilder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Registration');
 
 		if (!$this->getRegistrationsOnQueueConfiguration()) {
 			$registrationBagBuilder->limitToRegular();
@@ -788,7 +652,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * @return string either "FE" or "BE" representing the TYPO3 mode
 	 */
 	private function getTypo3Mode() {
-		if ($this->typo3Mode != '') {
+		if ($this->typo3Mode !== '') {
 			return $this->typo3Mode;
 		}
 
@@ -827,9 +691,7 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	private function hasAccessToEventAndItsRegistrations($eventUid) {
 		$result = FALSE;
 
-		if (!tx_seminars_OldModel_Abstract::recordExists(
-			$eventUid, 'tx_seminars_seminars'
-		)) {
+		if (!tx_seminars_OldModel_Abstract::recordExists($eventUid, 'tx_seminars_seminars')) {
 			$this->errorType = self::NOT_FOUND;
 		} elseif (!$this->canAccessListOfRegistrations($eventUid)) {
 			$this->errorType = self::ACCESS_DENIED;
@@ -844,23 +706,18 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * Sets the mode of the CSV export.
 	 *
 	 * @param string $exportMode
-	 *        the export mode, must be either tx_seminars_pi2::EXPORT_MODE_WEB or
-	 *        tx_seminars_pi2::EXPORT_MODE_EMAIL
+	 *        the export mode, must be either tx_seminars_pi2::EXPORT_MODE_WEB or tx_seminars_pi2::EXPORT_MODE_EMAIL
 	 *
 	 * @return void
 	 */
 	public function setExportMode($exportMode) {
-		$this->exportMode = ($exportMode == self::EXPORT_MODE_EMAIL)
-			? self::EXPORT_MODE_EMAIL
-			: self::EXPORT_MODE_WEB;
+		$this->exportMode = ($exportMode === self::EXPORT_MODE_EMAIL) ? self::EXPORT_MODE_EMAIL : self::EXPORT_MODE_WEB;
 	}
 
 	/**
-	 * Gets the fields which should be used from the fe_users table for the CSV
-	 * files.
+	 * Gets the fields which should be used from the fe_users table for the CSV files.
 	 *
-	 * @return string the fe_user table fields to use in the CSV file, will be
-	 *                empty if no fields were set.
+	 * @return string the fe_user table fields to use in the CSV file, will be empty if no fields were set.
 	 */
 	private function getFrontEndUserFieldsConfiguration() {
 		switch ($this->exportMode) {
@@ -869,7 +726,6 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				break;
 			default:
 				$configurationVariable = 'fieldsFromFeUserForCsv';
-				break;
 		}
 
 		return $this->configGetter->getConfValueString($configurationVariable);
@@ -889,7 +745,6 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				break;
 			default:
 				$configurationVariable = 'fieldsFromAttendanceForCsv';
-				break;
 		}
 
 		return $this->configGetter->getConfValueString($configurationVariable);
@@ -909,7 +764,6 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 				break;
 			default:
 				$configurationVariable = 'showAttendancesOnRegistrationQueueInCSV';
-				break;
 		}
 
 		return $this->configGetter->getConfValueBoolean($configurationVariable);
@@ -921,19 +775,18 @@ class tx_seminars_pi2 extends tx_oelib_templatehelper {
 	 * @param array $fieldNames the field names to translate, may be empty
 	 * @param string $tableName the table to which the fields belong to
 	 *
-	 * @return array the translated field names in an array, will be empty if no
-	 *               field names were given
+	 * @return array the translated field names in an array, will be empty if no field names were given
 	 */
 	private function localizeCsvHeadings(array $fieldNames, $tableName) {
 		if (empty($fieldNames)) {
 			return array();
 		}
-		$result = array();
 
+		$result = array();
 		foreach ($fieldNames as $fieldName) {
 			$translation = trim($this->language->getLL($tableName . '.' . $fieldName));
 
-			if (substr($translation, -1) == ':') {
+			if (substr($translation, -1) === ':') {
 				$translation = substr($translation, 0, -1);
 			}
 
