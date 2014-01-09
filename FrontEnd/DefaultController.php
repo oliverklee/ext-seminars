@@ -2846,7 +2846,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				'additionalParams' => t3lib_div::implodeArrayForUrl(
 					'',
 					array(
-						'type' => tx_seminars_pi2::getTypeNum(),
+						'type' => tx_seminars_pi2::CSV_TYPE_NUMBER,
 						'tx_seminars_pi2' => array(
 							'table' => 'tx_seminars_attendances',
 							'eventUid' => $this->seminar->getUid(),

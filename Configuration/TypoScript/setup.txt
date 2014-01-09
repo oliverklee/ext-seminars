@@ -3806,8 +3806,8 @@ plugin.tx_seminars_pi1.listView {
 
 tx_seminars_pi2 = PAGE
 tx_seminars_pi2 {
-	# Just some random non-zero number.
-	typeNum = {$plugin.tx_seminars_pi2.typeNumForCsv}
+	# The type number for the CSV export. Do not change this!
+	typeNum = 736
 
 	config {
 		disableCharsetHeader = 1

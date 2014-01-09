@@ -41,6 +41,11 @@ require_once(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTabl
  */
 class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	/**
+	 * @var integer
+	 */
+	const CSV_TYPE_NUMBER = 736;
+
+	/**
 	 * @var integer HTTP status code for "page not found"
 	 */
 	const NOT_FOUND = 404;
@@ -546,15 +551,6 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 */
 	public function getConfigGetter() {
 		return $this->configGetter;
-	}
-
-	/**
-	 * Returns the typeNum from the TypoScript setup in tx_seminars_pi2.typeNum.
-	 *
-	 * @return integer the typeNum in tx_seminars_pi2.typeNum
-	 */
-	static public function getTypeNum() {
-		return intval($GLOBALS['TSFE']->tmpl->setup['tx_seminars_pi2.']['typeNum']);
 	}
 
 	/**
