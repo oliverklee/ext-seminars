@@ -85,9 +85,9 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	public $extKey = 'seminars';
 
 	/**
-	 * @var tx_seminars_configgetter This object provides access to configuration values in plugin.tx_seminars.
+	 * @var Tx_Oelib_Configuration
 	 */
-	private $configGetter = NULL;
+	protected $configuration = NULL;
 
 	/**
 	 * @var string the TYPO3 mode set for testing purposes
@@ -116,13 +116,14 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	public function __construct() {
 		parent::__construct();
 		$this->loadLocallangFiles();
+		$this->configuration = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
 	}
 
 	/**
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		unset($this->configGetter, $this->language);
+		unset($this->configuration, $this->language);
 
 		parent::__destruct();
 	}
@@ -130,14 +131,11 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	/**
 	 * Creates a CSV export.
 	 *
-	 * @param string $unused (unused)
-	 * @param array $configuration TypoScript configuration for the plugin, may be empty
-	 *
 	 * @return string HTML for the plugin, might be empty
 	 */
-	public function main($unused, array $configuration) {
+	public function main() {
 		try {
-			$this->init($configuration);
+			$this->init(array());
 
 			switch ($this->piVars['table']) {
 				case 'tx_seminars_seminars':
@@ -156,7 +154,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 				$dataCharset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
 					? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] : 'iso-8859-1';
 			}
-			$resultCharset = strtolower($this->configGetter->getConfValueString('charsetForCsv'));
+			$resultCharset = strtolower($this->configuration->getAsString('charsetForCsv'));
 			if ($dataCharset !== $resultCharset) {
 				$result = $this->getCharsetConversion()->conv($result, $dataCharset, $resultCharset);
 			}
@@ -166,22 +164,6 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Initializes this object and its configuration getter.
-	 *
-	 * @param array $configuration TypoScript configuration for the plugin, may be empty
-	 *
-	 * @return void
-	 */
-	public function init(array $configuration = array()) {
-		parent::init($configuration);
-
-		if ($this->configGetter === NULL) {
-			$this->configGetter = t3lib_div::makeInstance('tx_seminars_configgetter');
-			$this->configGetter->init();
-		}
 	}
 
 	/**
@@ -398,9 +380,9 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 
 		foreach ($builder->build() as $seminar) {
 			$seminarData = $this->retrieveData(
-				$seminar, 'getEventData', $this->configGetter->getConfValueString('fieldsFromEventsForCsv')
+				$seminar, 'getEventData', $this->configuration->getAsString('fieldsFromEventsForCsv')
 			);
-			// Creates a list of comma-separated values of the event data.
+			// Creates a list of semicolon-separated values of the event data.
 			$result .= implode(';', $seminarData) . CRLF;
 		}
 
@@ -413,7 +395,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 * @return string header list, will not be empty if the CSV export has been configured correctly
 	 */
 	private function createEventsHeading() {
-		$eventFields = t3lib_div::trimExplode(',', $this->configGetter->getConfValueString('fieldsFromEventsForCsv'), TRUE);
+		$eventFields = $this->configuration->getAsTrimmedArray('fieldsFromEventsForCsv');
 
 		return implode(';', $this->localizeCsvHeadings($eventFields, 'tx_seminars_seminars')) . CRLF;
 	}
@@ -510,7 +492,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 * @return void
 	 */
 	private function setContentTypeForRegistrationLists() {
-		$this->setPageTypeAndDisposition($this->configGetter->getConfValueString('filenameForRegistrationsCsv'));
+		$this->setPageTypeAndDisposition($this->configuration->getAsString('filenameForRegistrationsCsv'));
 	}
 
 	/**
@@ -519,7 +501,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 * @return void
 	 */
 	private function setContentTypeForEventLists() {
-		$this->setPageTypeAndDisposition($this->configGetter->getConfValueString('filenameForEventsCsv'));
+		$this->setPageTypeAndDisposition($this->configuration->getAsString('filenameForEventsCsv'));
 	}
 
 	/**
@@ -533,24 +515,11 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 */
 	private function setPageTypeAndDisposition($csvFileName) {
 		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-			'Content-type: text/csv; header=present; charset=' .
-			$this->configGetter->getConfValueString('charsetForCsv')
+			'Content-type: text/csv; header=present; charset=' . $this->configuration->getAsString('charsetForCsv')
 		);
 		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 			'Content-disposition: attachment; filename=' . $csvFileName
 		);
-	}
-
-	/**
-	 * Returns our config getter (which might be NULL if we aren't initialized
-	 * properly yet).
-	 *
-	 * This function is intended for testing purposes only.
-	 *
-	 * @return tx_seminars_configgetter our config getter, might be NULL
-	 */
-	public function getConfigGetter() {
-		return $this->configGetter;
 	}
 
 	/**
@@ -724,7 +693,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 				$configurationVariable = 'fieldsFromFeUserForCsv';
 		}
 
-		return $this->configGetter->getConfValueString($configurationVariable);
+		return $this->configuration->getAsString($configurationVariable);
 	}
 
 	/**
@@ -743,7 +712,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 				$configurationVariable = 'fieldsFromAttendanceForCsv';
 		}
 
-		return $this->configGetter->getConfValueString($configurationVariable);
+		return $this->configuration->getAsString($configurationVariable);
 	}
 
 	/**
@@ -762,7 +731,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 				$configurationVariable = 'showAttendancesOnRegistrationQueueInCSV';
 		}
 
-		return $this->configGetter->getConfValueBoolean($configurationVariable);
+		return $this->configuration->getAsBoolean($configurationVariable);
 	}
 
 	/**

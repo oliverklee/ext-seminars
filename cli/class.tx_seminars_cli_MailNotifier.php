@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2009-2013 Saskia Metzler <saskia@merlin.owl.de>
+* (c) 2009-2014 Saskia Metzler <saskia@merlin.owl.de>
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -39,7 +39,7 @@ class tx_seminars_cli_MailNotifier {
 	public function start() {
 		$this->setConfigurationPage();
 		$this->sendEventTakesPlaceReminders();
-		$this->sendCancelationDeadlineReminders();
+		$this->sendCancellationDeadlineReminders();
 	}
 
 	/**
@@ -60,11 +60,7 @@ class tx_seminars_cli_MailNotifier {
 		}
 
 		$uid = intval($_SERVER['argv'][1]);
-		if (($uid == 0) ||
-			(tx_oelib_db::selectSingle(
-				'COUNT(*) AS number', 'pages', 'uid = ' . $uid
-			) != array('number' => 1))
-		) {
+		if (($uid == 0) || (tx_oelib_db::selectSingle('COUNT(*) AS number', 'pages', 'uid = ' . $uid) != array('number' => 1))) {
 			throw new InvalidArgumentException(
 				'The provided UID for the page with the configuration was ' . $_SERVER['argv'][1] .
 					', which was not found to be a UID of an existing page. Please provide the UID of an existing page.',
@@ -92,13 +88,13 @@ class tx_seminars_cli_MailNotifier {
 	}
 
 	/**
-	 * Sends cancelation deadline reminders to the corresponding organizers and
+	 * Sends cancellation deadline reminders to the corresponding organizers and
 	 * commits the flag for this reminder being sent to the database.
 	 *
 	 * @return void
 	 */
-	public function sendCancelationDeadlineReminders() {
-		foreach ($this->getEventsToSendCancelationDeadlineReminderFor() as $event) {
+	public function sendCancellationDeadlineReminders() {
+		foreach ($this->getEventsToSendCancellationDeadlineReminderFor() as $event) {
 			$this->sendRemindersToOrganizers(
 				$event, 'email_cancelationDeadlineReminder'
 			);
@@ -133,18 +129,13 @@ class tx_seminars_cli_MailNotifier {
 			$eMail->setSender($sender);
 			$eMail->setSubject($subject);
 			$eMail->addRecipient($organizer);
-			$eMail->setMessage($this->customizeMessage(
-				$messageKey, $event, $organizer->getName()
-			));
-			if ($attachment) {
+			$eMail->setMessage($this->customizeMessage($messageKey, $event, $organizer->getName()));
+			if ($attachment !== NULL) {
 				$eMail->addAttachment($attachment);
 			}
 
 			tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
-			$eMail->__destruct();
 		}
-
-		$organizerBag->__destruct();
 	}
 
 	/**
@@ -162,8 +153,7 @@ class tx_seminars_cli_MailNotifier {
 
 		$result = array();
 
-		$builder
-			= $this->getSeminarBagBuilder(tx_seminars_seminar::STATUS_CONFIRMED);
+		$builder = $this->getSeminarBagBuilder(tx_seminars_seminar::STATUS_CONFIRMED);
 		$builder->limitToEventTakesPlaceReminderNotSent();
 		$builder->limitToDaysBeforeBeginDate($days);
 		$bag = $builder->build();
@@ -172,29 +162,24 @@ class tx_seminars_cli_MailNotifier {
 			$result[] = $event;
 		}
 
-		$bag->__destruct();
-
 		return $result;
 	}
 
 	/**
-	 * Returns events in planned state for which the cancelation deadline has
+	 * Returns events in planned state for which the cancellation deadline has
 	 * just passed and for which no reminder has been sent yet.
 	 *
-	 * @return array events for which to send the cancelation reminder to their
+	 * @return array events for which to send the cancellation reminder to their
 	 *               organizers, will be empty if there are none
 	 */
-	private function getEventsToSendCancelationDeadlineReminderFor() {
-		if (!tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
-			->getAsBoolean('sendCancelationDeadlineReminder')
-		) {
+	private function getEventsToSendCancellationDeadlineReminderFor() {
+		if (!tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsBoolean('sendCancelationDeadlineReminder')) {
 			return array();
 		}
 
 		$result = array();
 
-		$builder
-			= $this->getSeminarBagBuilder(tx_seminars_seminar::STATUS_PLANNED);
+		$builder = $this->getSeminarBagBuilder(tx_seminars_seminar::STATUS_PLANNED);
 		$builder->limitToCancelationDeadlineReminderNotSent();
 		$bag = $builder->build();
 
@@ -203,8 +188,6 @@ class tx_seminars_cli_MailNotifier {
 				$result[] = $event;
 			}
 		}
-
-		$bag->__destruct();
 
 		return $result;
 	}
@@ -252,14 +235,12 @@ class tx_seminars_cli_MailNotifier {
 		$csvCreator->init();
 		$csvCreator->setExportMode(tx_seminars_pi2::EXPORT_MODE_EMAIL);
 		$csvString = $csvCreator->createListOfRegistrations($uid);
-		$csvCreator->__destruct();
 
 		$attachment = tx_oelib_ObjectFactory::make('tx_oelib_Attachment');
 		$attachment->setContent($csvString);
 		$attachment->setContentType('text/csv');
 		$attachment->setFileName(
-			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
-				->getAsString('filenameForRegistrationsCsv')
+			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('filenameForRegistrationsCsv')
 		);
 
 		return $attachment;
@@ -281,11 +262,8 @@ class tx_seminars_cli_MailNotifier {
 	private function customizeMessage(
 		$locallangKey, tx_seminars_seminar $event, $organizerName = ''
 	) {
-		$GLOBALS['LANG']->lang = tx_oelib_MapperRegistry
-			::get('tx_oelib_Mapper_BackEndUser')->findByCliKey()->getLanguage();
-		$GLOBALS['LANG']->includeLLFile(
-			t3lib_extMgm::extPath('seminars') . 'locallang.xml'
-		);
+		$GLOBALS['LANG']->lang = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_BackEndUser')->findByCliKey()->getLanguage();
+		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
 		$result = $GLOBALS['LANG']->getLL($locallangKey);
 
 		foreach (array(
@@ -312,8 +290,7 @@ class tx_seminars_cli_MailNotifier {
 	 */
 	private function getDate($timestamp) {
 		return strftime(
-			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
-				->getAsString('dateFormatYMD'),
+			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('dateFormatYMD'),
 			$timestamp
 		);
 	}

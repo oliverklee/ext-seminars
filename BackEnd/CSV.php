@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007-2013 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2007-2014 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -47,7 +47,7 @@ class tx_seminars_BackEnd_CSV extends tx_seminars_BackEnd_Module {
 	public function printContent() {
 		/** @var $pi2 tx_seminars_pi2 */
 		$pi2 = t3lib_div::makeInstance('tx_seminars_pi2');
-		echo $pi2->main(NULL, array());
+		echo $pi2->main();
 	}
 }
 
@@ -55,6 +55,7 @@ if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['
 	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/CSV.php']);
 }
 
-$SOBE = tx_oelib_ObjectFactory::make('tx_seminars_BackEnd_CSV');
+/** @var $SOBE tx_seminars_BackEnd_CSV */
+$SOBE = t3lib_div::makeInstance('tx_seminars_BackEnd_CSV');
 $SOBE->init();
 $SOBE->printContent();
