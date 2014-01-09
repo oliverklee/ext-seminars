@@ -17,7 +17,6 @@ return array(
 	'tx_seminars_timespan' => $extensionPath . 'class.tx_seminars_timespan.php',
 	'tx_seminars_backend_abstracteventmailform' => $extensionPath . 'BackEnd/AbstractEventMailForm.php',
 	'tx_seminars_backend_abstractlist' => $extensionPath . 'BackEnd/AbstractList.php',
-	'tx_seminars_backend_csv' => $extensionPath . 'BackEnd/CSV.php',
 	'tx_seminars_backend_canceleventmailform' => $extensionPath . 'BackEnd/CancelEventMailForm.php',
 	'tx_seminars_backend_confirmeventmailform' => $extensionPath . 'BackEnd/ConfirmEventMailForm.php',
 	'tx_seminars_backend_eventslist' => $extensionPath . 'BackEnd/EventsList.php',
