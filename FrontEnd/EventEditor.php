@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2006-2013 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2006-2014 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -1370,25 +1370,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	private function createReviewUrl() {
 		$url = $this->cObj->typoLink_URL(array(
-			'parameter' => $GLOBALS['TSFE']->id . ',' .
-				$this->getConfValueInteger('typeNumForPublish'),
+			'parameter' => $GLOBALS['TSFE']->id . ',' . tx_seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
 			'additionalParams' => t3lib_div::implodeArrayForUrl(
-				'tx_seminars_publication',
-				array(
-					'hash' => $this->publicationHash,
-				),
-				'',
-				FALSE,
-				TRUE
+				'tx_seminars_publication', array('hash' => $this->publicationHash), '', FALSE, TRUE
 			),
-			'type' => $this->getConfValueInteger('typeNumForPublish'),
+			'type' => tx_seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
 		));
 
-		return t3lib_div::locationHeaderUrl(preg_replace(
-			array('/\[/', '/\]/'),
-			array('%5B', '%5D'),
-			$url
-		));
+		return t3lib_div::locationHeaderUrl(preg_replace(array('/\[/', '/\]/'), array('%5B', '%5D'), $url));
 	}
 
 	/**

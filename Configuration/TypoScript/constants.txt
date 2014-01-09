@@ -2,8 +2,3 @@ plugin.tx_seminars_pi1 {
 	# cat=plugin.tx_seminars_pi1//; type=string; label=Path to CSS file: location of the CSS file (leave empty to include no CSS file)
 	cssFile = EXT:seminars/Resources/Public/CSS/FrontEnd/FrontEnd.css
 }
-
-plugin.tx_seminars_publication {
-	# cat=plugin.tx_seminars_publication//; type=int+; label=The page type used for the publishing of events.
-	typeNum = 737
-}

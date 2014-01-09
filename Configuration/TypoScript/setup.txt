@@ -189,9 +189,6 @@ plugin.tx_seminars_pi1 {
 	# the strftime format code for the full date
 	dateFormatYMD < plugin.tx_seminars.dateFormatYMD
 
-	# The page type for the publishing links
-	typeNumForPublish = {$plugin.tx_seminars_publication.typeNum}
-
 	# whether to use formal or informal language
 	salutation = formal
 
@@ -3806,7 +3803,7 @@ plugin.tx_seminars_pi1.listView {
 
 tx_seminars_pi2 = PAGE
 tx_seminars_pi2 {
-	# The type number for the CSV export. Do not change this!
+	# The page type number for the CSV export. Do not change this!
 	typeNum = 736
 
 	config {
@@ -3832,8 +3829,8 @@ tx_seminars_pi2 {
 
 tx_seminars_publication = PAGE
 tx_seminars_publication {
-	# Just some random non-zero number.
-	typeNum = {$plugin.tx_seminars_publication.typeNum}
+	# The page type number for the publish links. Do not change this!
+	typeNum = 737
 
 	config {
 		enableContentLengthHeader = 1

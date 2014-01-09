@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2009-2013 Bernd Schönbach <bernd@oliverklee.de>
+* (c) 2009-2014 Bernd Schönbach <bernd@oliverklee.de>
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -31,6 +31,11 @@
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class tx_seminars_FrontEnd_PublishEvent extends tx_oelib_templatehelper {
+	/**
+	 * @var integer
+	 */
+	const PUBLICATION_TYPE_NUMBER = 737;
+
 	/**
 	 * @var string the prefix used for the piVars
 	 */

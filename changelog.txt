@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4909] Cleanup: Drop the constant for the type number for the publication plugin
 - [#4908] Cleanup: Drop plugin.tx_seminars.allowAccessToCsv
 - [#4907] Cleanup: Make OldModel_Abstract::recordExists static
 - [#4878] Fix: tx_seminars_Interface_Hook_Registration is missing in ext_autoload.php
