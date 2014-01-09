@@ -553,7 +553,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 *
 	 * @return integer the typeNum in tx_seminars_pi2.typeNum
 	 */
-	public static function getTypeNum() {
+	static public function getTypeNum() {
 		return intval($GLOBALS['TSFE']->tmpl->setup['tx_seminars_pi2.']['typeNum']);
 	}
 
@@ -599,7 +599,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 				/** @var $accessCheck Tx_Seminars_Csv_BackEndRegistrationAccessCheck */
 				$accessCheck = t3lib_div::makeInstance('Tx_Seminars_Csv_BackEndRegistrationAccessCheck');
 				$accessCheck->setPageUid($pageUid);
-				$result = $accessCheck->hasAccess();;
+				$result = $accessCheck->hasAccess();
 				break;
 			case 'FE':
 				// The fall-through is intentional.
