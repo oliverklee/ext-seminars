@@ -42,8 +42,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	public $prefixId = 'tx_seminars_registration_editor';
 
 	/**
-	 * the names of the form fields to show (with the keys being the same as
-	 * the values for performance reasons)
+	 * the names of the form fields to show (with the keys being the same as the values for performance reasons)
 	 *
 	 * @var array
 	 */
@@ -73,7 +72,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 		'city' => FALSE,
 		'country' => FALSE,
 		'telephone' => TRUE,
-		'email' => TRUE
+		'email' => TRUE,
 	);
 
 	/**
@@ -92,6 +91,38 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	protected $registration = NULL;
 
 	/**
+	 * @var array<string>
+	 */
+	protected $registrationFieldsOnConfirmationPage = array(
+		'price',
+		'seats',
+		'total_price',
+		'method_of_payment',
+		'account_number',
+		'bank_code',
+		'bank_name',
+		'account_owner',
+		'attendees_names',
+		'lodgings',
+		'accommodation',
+		'foods',
+		'food',
+		'checkboxes',
+		'interests',
+		'expectations',
+		'background_knowledge',
+		'known_from',
+		'notes',
+	);
+
+	/**
+	 * Overwrite this in an XClass with the keys of additional keys that should always be displayed.
+	 *
+	 * @var array<string>
+	 */
+	protected $newFormFields = array();
+
+	/**
 	 * The constructor.
 	 *
 	 * This class may only be instantiated after is has already been made sure
@@ -107,9 +138,10 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	public function __construct(array $configuration, tslib_cObj $cObj) {
 		parent::__construct($configuration, $cObj);
 
-		$formFieldsToShow = t3lib_div::trimExplode(',',
-			$this->getConfValueString('showRegistrationFields', 's_template_special'), TRUE
+		$formFieldsToShow = t3lib_div::trimExplode(
+			',', $this->getConfValueString('showRegistrationFields', 's_template_special'), TRUE
 		);
+
 		foreach ($formFieldsToShow as $currentFormField) {
 			$this->formFieldsToShow[$currentFormField] = $currentFormField;
 		}
@@ -254,7 +286,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 
 		$this->setMarker('feuser_data', $this->getAllFeUserData());
 		$this->setMarker('billing_address', $this->getBillingAddress());
-		$this->setMarker('registration_data', $this->getRegistrationData());
+		$this->setMarker('registration_data', $this->getAllRegistrationDataForConfirmation());
 
 		return $this->getSubpart('', 2);
 	}
@@ -494,15 +526,18 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Example: The payment methods field will be disabled if the current event
 	 * does not have any payment methods.
 	 *
-	 * After some refactoring, this function will replace the function
-	 * hasRegistrationFormField.
+	 * After some refactoring, this function will replace the function hasRegistrationFormField.
 	 *
 	 * @param string $key the key of the field to test, must not be empty
 	 *
-	 * @return boolean TRUE if the current form field should be displayed,
-	 *                 FALSE otherwise
+	 * @return boolean TRUE if the current form field should be displayed, FALSE otherwise
 	 */
 	public function isFormFieldEnabled($key) {
+		$isFormFieldAlwaysEnabled = in_array($key, $this->newFormFields, TRUE);
+		if ($isFormFieldAlwaysEnabled) {
+			return TRUE;
+		}
+
 		// Some containers cannot be enabled or disabled via TS setup, but
 		// are containers and depend on their content being displayed.
 		switch ($key) {
@@ -771,7 +806,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 			'city' => FALSE,
 			'country' => FALSE,
 			'telephone' => TRUE,
-			'email' => TRUE
+			'email' => TRUE,
 		) as $currentKey => $hasLabel) {
 			$value = htmlspecialchars($userData[$currentKey]);
 			// Only show a label if we have any data following it.
@@ -793,32 +828,12 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * @return string the entered registration data, nicely formatted as HTML
 	 */
-	public function getRegistrationData() {
+	public function getAllRegistrationDataForConfirmation() {
 		$result = '';
 
-		foreach (array(
-			'price',
-			'seats',
-			'total_price',
-			'method_of_payment',
-			'account_number',
-			'bank_code',
-			'bank_name',
-			'account_owner',
-			'attendees_names',
-			'lodgings',
-			'accommodation',
-			'foods',
-			'food',
-			'checkboxes',
-			'interests',
-			'expectations',
-			'background_knowledge',
-			'known_from',
-			'notes'
-		) as $key) {
+		foreach ($this->getAllFieldKeysForConfirmationPage() as $key) {
 			if ($this->isFormFieldEnabled($key)) {
-				$result .= $this->getFormDataItemForConfirmation($key);
+				$result .= $this->getFormDataItemAndLabelForConfirmation($key);
 			}
 		}
 
@@ -827,22 +842,55 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 
 	/**
 	 * Formats one data item from the form as HTML, including a heading.
-	 * If the entered data is empty, an empty string will be returned (so the
-	 * heading will only be included for non-empty data).
+	 * If the entered data is empty, an empty string will be returned (so the heading will only be included for non-empty data).
 	 *
-	 * @param string $key
-	 *        the key of the field for which the data should be displayed
+	 * @param string $key the key of the field for which the data should be displayed
 	 *
-	 * @return string the data from the corresponding form field formatted in
-	 *                HTML with a heading (or an empty string if the form data
-	 *                is empty)
+	 * @return string
+	 *         the data from the corresponding form field formatted in HTML with a heading (or an empty string if the form data
+	 *         is empty)
 	 */
-	private function getFormDataItemForConfirmation($key) {
-		$result = '';
+	protected function getFormDataItemAndLabelForConfirmation($key) {
+		$currentFormData = $this->getFormDataItemForConfirmationPage($key);
+		if ($currentFormData === '') {
+			return '';
+		}
 
-		// The "total_price" field doesn't exist as an actual renderlet and
-		// so cannot be read.
-		$currentFormData = ($key != 'total_price') ? $this->getFormValue($key) : '';
+		$this->setMarker('registration_data_heading', $this->translate('label_' . $key));
+		$fieldContent = str_replace(CR, '<br />', htmlspecialchars($currentFormData));
+		$this->setMarker('registration_data_body', $fieldContent);
+		return $this->getSubpart('REGISTRATION_CONFIRMATION_DATA');
+	}
+
+	/**
+	 * Returns all the keys of all registration fields for the confirmation page.
+	 *
+	 * @return array<string>
+	 */
+	protected function getAllFieldKeysForConfirmationPage() {
+		return array_merge($this->registrationFieldsOnConfirmationPage, $this->newFormFields);
+	}
+
+	/**
+	 * Retrieves (and converts, if necessary) the form data item with the key $key.
+	 *
+	 * @param string $key the key of the field for which the data should be retrieved
+	 *
+	 * @return string the formatted data item, will not be htmlspecialchared yet, might be empty
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	protected function getFormDataItemForConfirmationPage($key) {
+		if (!in_array($key, $this->getAllFieldKeysForConfirmationPage(), TRUE)) {
+			throw new InvalidArgumentException(
+				'The form data item ' . $key . ' is not valid on the confirmation page. Valid items are: ' .
+					implode(', ', $this->getAllFieldKeysForConfirmationPage()),
+				1389813109
+			);
+		}
+
+		// The "total_price" field doesn't exist as an actual renderlet and so cannot be read.
+		$currentFormData = ($key !== 'total_price') ? $this->getFormValue($key) : '';
 
 		switch ($key) {
 			case 'price':
@@ -868,36 +916,25 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 				break;
 			case 'attendees_names':
 				if ($this->isFormFieldEnabled('registered_themselves') && ($this->getFormValue('registered_themselves') == '1')) {
+					/** @var $user tx_seminars_Model_FrontEndUser */
 					$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-					$userData = $user->getName();
-
+					$userData = array($user->getName());
 					if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
 						if ($user->hasJobTitle()) {
-							$userData .= ', ' . $user->getJobTitle();
+							$userData[] = $user->getJobTitle();
 						}
 						if ($user->hasEMailAddress()) {
-							$userData .= ', ' . $user->getEMailAddress();
+							$userData[] = $user->getEMailAddress();
 						}
 					}
 
-					$currentFormData = $userData . CR . $currentFormData;
+					$currentFormData = implode(', ', $userData) . CR . $currentFormData;
 				}
 				break;
 			default:
 		}
 
-		if (!is_string($currentFormData)) {
-			$currentFormData = (string) $currentFormData;
-		}
-
-		if ($currentFormData != '') {
-			$this->setMarker('registration_data_heading', $this->translate('label_' . $key));
-			$fieldContent = str_replace(CR, '<br />', htmlspecialchars($currentFormData));
-			$this->setMarker('registration_data_body', $fieldContent);
-			$result = $this->getSubpart('REGISTRATION_CONFIRMATION_DATA');
-		}
-
-		return $result;
+		return (string) $currentFormData;
 	}
 
 	/**
@@ -907,7 +944,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * @return void
 	 */
-	private function ensureArray(&$data) {
+	protected function ensureArray(&$data) {
 		if (!is_array($data)) {
 			$data = array();
 		}

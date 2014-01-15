@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4919] Feature: Make the fields on the confirmation page extensible
 - [#4909] Cleanup: Drop the constant for the type number for the publication plugin
 - [#4908] Cleanup: Drop plugin.tx_seminars.allowAccessToCsv
 - [#4907] Cleanup: Make OldModel_Abstract::recordExists static

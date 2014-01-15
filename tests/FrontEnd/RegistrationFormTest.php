@@ -1423,7 +1423,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'',
-			$this->fixture->getRegistrationData()
+			$this->fixture->getAllRegistrationDataForConfirmation()
 		);
 	}
 
@@ -1451,7 +1451,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'42',
-			$fixture->getRegistrationData()
+			$fixture->getAllRegistrationDataForConfirmation()
 		);
 	}
 
@@ -1474,7 +1474,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'A, B &amp; C',
-			$fixture->getRegistrationData()
+			$fixture->getAllRegistrationDataForConfirmation()
 		);
 	}
 
@@ -1497,7 +1497,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Love<br />Peace',
-			$fixture->getRegistrationData()
+			$fixture->getAllRegistrationDataForConfirmation()
 		);
 	}
 
@@ -1520,7 +1520,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'John Doe',
-			$fixture->getRegistrationData()
+			$fixture->getAllRegistrationDataForConfirmation()
 		);
 	}
 
@@ -1548,7 +1548,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Jane Doe',
-			$fixture->getRegistrationData()
+			$fixture->getAllRegistrationDataForConfirmation()
 		);
 	}
 
@@ -1576,7 +1576,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'Jane Doe',
-			$fixture->getRegistrationData()
+			$fixture->getAllRegistrationDataForConfirmation()
 		);
 	}
 
@@ -1605,7 +1605,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'facility manager',
-			$fixture->getRegistrationData()
+			$fixture->getAllRegistrationDataForConfirmation()
 		);
 	}
 
@@ -1634,7 +1634,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'facility manager',
-			$fixture->getRegistrationData()
+			$fixture->getAllRegistrationDataForConfirmation()
 		);
 	}
 
@@ -1663,7 +1663,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'jane@example.com',
-			$fixture->getRegistrationData()
+			$fixture->getAllRegistrationDataForConfirmation()
 		);
 	}
 
@@ -1692,7 +1692,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'jane@example.com',
-			$fixture->getRegistrationData()
+			$fixture->getAllRegistrationDataForConfirmation()
 		);
 	}
 
