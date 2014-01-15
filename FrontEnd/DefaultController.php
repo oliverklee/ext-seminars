@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2005-2013 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2005-2014 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -212,11 +212,16 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	private $linkBuilder = NULL;
 
 	/**
+	 * @var tslib_feUserAuth
+	 */
+	protected $feuser = NULL;
+
+	/**
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
 		unset(
-			$this->configGetter, $this->seminar, $this->registration,
+			$this->configGetter, $this->seminar, $this->registration, $this->feuser,
 			$this->listViewHooks, $this->singleViewHooks, $this->feuser, $this->linkBuilder
 		);
 		$this->listViewHooksHaveBeenRetrieved = FALSE;
@@ -498,30 +503,19 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * @param integer $registrationUid a registration UID
 	 *
-	 * @return boolean TRUE if the registration UID is valid and the object
-	 *                 has been created, FALSE otherwise
+	 * @return boolean TRUE if the registration UID is valid and the object has been created, FALSE otherwise
 	 */
 	public function createRegistration($registrationUid) {
 		$result = FALSE;
 
-		if ($this->registration) {
-			$this->registration->__destruct();
-			unset($this->registration);
-		}
-
-		if (tx_seminars_OldModel_Abstract::recordExists(
-			$registrationUid, 'tx_seminars_attendances')
-		) {
+		if (tx_seminars_OldModel_Abstract::recordExists($registrationUid, 'tx_seminars_attendances')) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
 				'tx_seminars_attendances',
-				'tx_seminars_attendances.uid = ' . $registrationUid .
-					tx_oelib_db::enableFields('tx_seminars_attendances')
+				'tx_seminars_attendances.uid = ' . $registrationUid . tx_oelib_db::enableFields('tx_seminars_attendances')
 			);
-			$this->registration = tx_oelib_ObjectFactory::make(
-				'tx_seminars_registration', $this->cObj, $dbResult
-			);
-			if ($dbResult) {
+			$this->registration = t3lib_div::makeInstance('tx_seminars_registration', $this->cObj, $dbResult);
+			if ($dbResult !== FALSE) {
 				$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 			}
 			$result = $this->registration->isOk();
@@ -542,13 +536,11 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 */
 	public function createHelperObjects() {
 		if ($this->configGetter === NULL) {
-			$this->configGetter = tx_oelib_ObjectFactory::make(
-				'tx_seminars_configgetter'
-			);
+			$this->configGetter = t3lib_div::makeInstance('tx_seminars_configgetter');
 		}
 
 		if ($this->eventMapper === NULL) {
-			$this->eventMapper = tx_oelib_ObjectFactory::make('tx_seminars_Mapper_Event');
+			$this->eventMapper = t3lib_div::makeInstance('tx_seminars_Mapper_Event');
 		}
 	}
 
@@ -2858,9 +2850,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	}
 
 
-	/////////////////////////////////
-	// Registration view functions.
-	/////////////////////////////////
+	/*
+	 * Registration view functions.
+	 */
 
 	/**
 	 * Creates the HTML for the registration page.
@@ -2881,66 +2873,47 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			$this->setErrorMessage($this->seminar->checkConfiguration(TRUE));
 
 			if (!$this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)) {
-				$errorMessage
-					= $this->getRegistrationManager()->canRegisterIfLoggedInMessage(
-						$this->seminar
-					);
+				$errorMessage = $this->getRegistrationManager()->canRegisterIfLoggedInMessage($this->seminar);
 			} else {
 				if ($this->isLoggedIn()) {
 					$isOkay = TRUE;
 				} else {
 					$errorMessage = $this->getLoginLink(
-						$this->translate('message_notLoggedIn'),
-						$GLOBALS['TSFE']->id,
-						$this->seminar->getUid()
+						$this->translate('message_notLoggedIn'), $GLOBALS['TSFE']->id, $this->seminar->getUid()
 					);
 				}
 			}
-		} elseif ($this->createRegistration(
-			intval($this->piVars['registration'])
-		)) {
+		} elseif ($this->createRegistration(intval($this->piVars['registration']))) {
 			if ($this->createSeminar($this->registration->getSeminar())) {
 				if ($this->seminar->isUnregistrationPossible()) {
 					$isOkay = TRUE;
 				} else {
-					$errorMessage = $this->translate(
-						'message_unregistrationNotPossible'
-					);
+					$errorMessage = $this->translate('message_unregistrationNotPossible');
 				}
 			}
 		} else {
 			switch ($this->piVars['action']) {
 				case 'unregister':
-					$errorMessage = $this->translate(
-						'message_notRegisteredForThisEvent'
-					);
+					$errorMessage = $this->translate('message_notRegisteredForThisEvent');
 					break;
 				case 'register':
 					// The fall-through is intended.
 				default:
-					$errorMessage = $this->getRegistrationManager()->existsSeminarMessage(
-						$this->piVars['seminar']
-					);
-					break;
+					$errorMessage = $this->getRegistrationManager()->existsSeminarMessage($this->piVars['seminar']);
 			}
 		}
 
 		if ($isOkay) {
 			if (($this->piVars['action'] == 'unregister')
-				|| $this->getRegistrationManager()->userFulfillsRequirements(
-					$this->seminar
-				)
+				|| $this->getRegistrationManager()->userFulfillsRequirements($this->seminar)
 			) {
 				$registrationForm = $this->createRegistrationForm();
 			} else {
-				$errorMessage = $this->translate(
-					'message_requirementsNotFulfilled'
-				);
+				$errorMessage = $this->translate('message_requirementsNotFulfilled');
 				$requirementsList = $this->createRequirementsList();
 				$requirementsList->setEvent($this->seminar);
 				$requirementsList->limitToMissingRegistrations();
 				$registrationForm = $requirementsList->render();
-				$requirementsList->__destruct();
 			}
 		}
 
@@ -2952,23 +2925,16 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Creates the registration page title and (if applicable) any error
-	 * messages. Data from the event will only be displayed if $this->seminar
-	 * is non-NULL.
+	 * Creates the registration page title and (if applicable) any error messages.
+	 * Data from the event will only be displayed if $this->seminar is non-NULL.
 	 *
 	 * @param string $errorMessage error message to be displayed (may be empty if there is no error)
 	 *
 	 * @return string HTML code including the title and error message
 	 */
 	protected function createRegistrationHeading($errorMessage) {
-		$this->setMarker(
-			'registration',
-			$this->translate('label_registration')
-		);
-		$this->setMarker(
-			'title',
-			($this->seminar) ? htmlspecialchars($this->seminar->getTitle()) : ''
-		);
+		$this->setMarker('registration', $this->translate('label_registration'));
+		$this->setMarker('title', ($this->seminar) ? htmlspecialchars($this->seminar->getTitle()) : '');
 
 		if ($this->seminar && $this->seminar->hasDate()) {
 			$this->setMarker('date', $this->seminar->getDate());
@@ -2976,10 +2942,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			$this->hideSubparts('date', 'registration_wrapper');
 		}
 
-		$this->setMarker(
-			'uid',
-			($this->seminar) ? $this->seminar->getUid() : ''
-		);
+		$this->setMarker('uid', ($this->seminar) ? $this->seminar->getUid() : '');
 
 		if (empty($errorMessage)) {
 			$this->hideSubparts('error', 'wrapper');
@@ -2993,50 +2956,34 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Creates the registration form.
 	 *
-	 * Note that $this->seminar must be set before calling this function and if
-	 * "unregister" is the action to perform, $this->registration must also be
-	 * set.
+	 * Note that $this->seminar must be set before calling this function and if "unregister" is the action to perform,
+	 * $this->registration must also be set.
 	 *
 	 * @return string HTML code for the form
 	 */
 	protected function createRegistrationForm() {
-		$registrationEditor = tx_oelib_ObjectFactory::make(
-			'tx_seminars_FrontEnd_RegistrationForm', $this->conf, $this->cObj
-		);
+		/** @var $registrationEditor tx_seminars_FrontEnd_RegistrationForm */
+		$registrationEditor = t3lib_div::makeInstance('tx_seminars_FrontEnd_RegistrationForm', $this->conf, $this->cObj);
 		$registrationEditor->setSeminar($this->seminar);
 		$registrationEditor->setAction($this->piVars['action']);
 		if ($this->piVars['action'] == 'unregister') {
 			$registrationEditor->setRegistration($this->registration);
 		}
 
-		$output = $registrationEditor->render();
-
-		$registrationEditor->__destruct();
-		unset($registrationEditor);
-
-		return $output;
+		return $registrationEditor->render();
 	}
 
 	/**
-	 * Enables/disables the display of data from event records on the
-	 * registration page depending on the config variable
+	 * Enables/disables the display of data from event records on the registration page depending on the config variable
 	 * "eventFieldsOnRegistrationPage".
 	 *
 	 * @return void
 	 */
 	protected function toggleEventFieldsOnRegistrationPage() {
 		$fieldsToShow = array();
-		if ($this->hasConfValueString(
-				'eventFieldsOnRegistrationPage',
-				's_template_special'
-			)
-		) {
+		if ($this->hasConfValueString('eventFieldsOnRegistrationPage', 's_template_special')) {
 			$fieldsToShow = t3lib_div::trimExplode(
-				',',
-				$this->getConfValueString(
-					'eventFieldsOnRegistrationPage',
-					's_template_special'
-				), TRUE
+				',', $this->getConfValueString('eventFieldsOnRegistrationPage', 's_template_special'), TRUE
 			);
 		}
 
@@ -3062,10 +3009,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		}
 
 		if (!empty($fieldsToRemove)) {
-			$this->hideSubparts(
-				implode(',', $fieldsToRemove),
-				'registration_wrapper'
-			);
+			$this->hideSubparts(implode(',', $fieldsToRemove), 'registration_wrapper');
 		}
 	}
 
