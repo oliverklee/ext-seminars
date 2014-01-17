@@ -228,7 +228,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		$this->recordData['pid'] = $this->seminar->hasAttendancesPid()
 			? $this->seminar->getAttendancesPid() : $this->getConfValueInteger('attendancesPID');
 
-		$this->processAdditionalRegistrationData($seminar, $userUid, $registrationData);
+		$this->processAdditionalRegistrationData($registrationData);
 
 		if ($this->isOk()) {
 			// Stores the user data in $this->userData.
@@ -242,13 +242,11 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 *
 	 * This function is intended to be overwritten in subclasses.
 	 *
-	 * @param tx_seminars_seminar $seminar the seminar object (that's the seminar we would like to register for)
-	 * @param integer $userUid UID of the FE user who wants to sign up
 	 * @param array $registrationData associative array with the registration data the user has just entered, may be empty
 	 *
 	 * @return void
 	 */
-	protected function processAdditionalRegistrationData(tx_seminars_seminar $seminar, $userUid, array $registrationData) {
+	protected function processAdditionalRegistrationData(array $registrationData) {
 	}
 
 	/**
