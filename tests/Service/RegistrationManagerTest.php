@@ -2016,7 +2016,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function notifyAttendeeSendsMailToAttendeesMailAdress() {
+	public function notifyAttendeeSendsMailToAttendeesMailAddress() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
@@ -2034,7 +2034,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function notifyAttendeeForAttendeeWithoutMailAdressNotSendsEmail() {
+	public function notifyAttendeeForAttendeeWithoutMailAddressNotSendsEmail() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
