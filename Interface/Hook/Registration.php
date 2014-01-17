@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2013 Oliver Klee <typo3-coding@oliverklee.de>
+* (c) 2013-2014 Oliver Klee <typo3-coding@oliverklee.de>
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -40,4 +40,14 @@ interface tx_seminars_Interface_Hook_Registration {
 	 * @return void
 	 */
 	public function modifyOrganizerNotificationEmail(tx_seminars_registration $registration, tx_oelib_Template $emailTemplate);
+
+	/**
+	 * Modifies the registration or unregistration e-mail to an attendee.
+	 *
+	 * @param tx_seminars_registration $registration
+	 * @param tx_oelib_Template $emailTemplate
+	 *
+	 * @return void
+	 */
+	public function modifyAttendeeEmailText(tx_seminars_registration $registration, tx_oelib_Template $emailTemplate);
 }

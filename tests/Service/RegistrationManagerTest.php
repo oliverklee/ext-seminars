@@ -2065,8 +2065,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$hook->expects($this->once())->method('modifyThankYouEmail');
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
-		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
-			[$hookClass] = $hookClass;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -2085,14 +2084,59 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$hook->expects($this->never())->method('modifyThankYouEmail');
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
-		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
-			[$hookClass] = $hookClass;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
 
 		$this->fixture->setConfigurationValue('sendConfirmation', FALSE);
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
 		$pi1->init();
 
 		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForSendConfirmationTrueAndPlainTextEmailCallsModifyAttendeeEmailTextHookOnce() {
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setAsInteger('eMailFormatForAttendees', tx_seminars_registrationmanager::SEND_TEXT_MAIL);
+
+		$registration = $this->createRegistration();
+
+		$hook = $this->getMock('tx_seminars_Interface_Hook_Registration', array());
+		$hookClass = get_class($hook);
+		$hook->expects($this->once())->method('modifyAttendeeEmailText')->with($registration, $this->anything());
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForSendConfirmationTrueAndHtmlEmailCallsModifyAttendeeEmailTextHookTwice() {
+		tx_oelib_configurationProxy::getInstance('seminars')
+			->setAsInteger('eMailFormatForAttendees', tx_seminars_registrationmanager::SEND_HTML_MAIL);
+
+		$registration = $this->createRegistration();
+
+		$hook = $this->getMock('tx_seminars_Interface_Hook_Registration', array());
+		$hookClass = get_class($hook);
+		$hook->expects($this->exactly(2))->method('modifyAttendeeEmailText')->with($registration, $this->anything());;
+
+		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
+		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
 		$this->fixture->notifyAttendee($registration, $pi1);
 	}
 

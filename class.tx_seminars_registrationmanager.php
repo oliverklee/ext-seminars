@@ -812,6 +812,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		$eMailNotification->setMessage($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
 
+		/** @var $registration tx_seminars_Model_Registration */
 		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($oldRegistration->getUid());
 		foreach ($this->getHooks() as $hook) {
 			if (method_exists($hook, 'modifyThankYouEmail')) {
@@ -916,6 +917,23 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			if ($hook instanceof tx_seminars_Interface_Hook_Registration) {
 				/** @var $hook tx_seminars_Interface_Hook_Registration */
 				$hook->modifyOrganizerNotificationEmail($registration, $emailTemplate);
+			}
+		}
+	}
+
+	/**
+	 * Calls the modifyAttendeeEmailText hooks.
+	 *
+	 * @param tx_seminars_registration $registration
+	 * @param Tx_Oelib_Template $emailTemplate
+	 *
+	 * @return void
+	 */
+	protected function callModifyAttendeeEmailTextHooks(tx_seminars_registration $registration, Tx_Oelib_Template $emailTemplate) {
+		foreach ($this->getHooks() as $hook) {
+			if ($hook instanceof tx_seminars_Interface_Hook_Registration) {
+				/** @var $hook tx_seminars_Interface_Hook_Registration */
+				$hook->modifyAttendeeEmailText($registration, $emailTemplate);
 			}
 		}
 	}
@@ -1063,7 +1081,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 		$this->linkBuilder->setPlugin($plugin);
 
-		$wrapperPrefix = (($useHtml) ? 'html_' : '') . 'field_wrapper';
+		$wrapperPrefix = ($useHtml ? 'html_' : '') . 'field_wrapper';
 
 		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4007000) {
 			$charset = 'utf-8';
@@ -1173,9 +1191,11 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		$footers = $event->getOrganizersFooter();
-		$this->setMarker('footer', (!empty($footers)) ? LF . '-- ' . LF . $footers[0] : '');
+		$this->setMarker('footer', !empty($footers) ? LF . '-- ' . LF . $footers[0] : '');
 
-		return $this->getSubpart(($useHtml ? 'MAIL_THANKYOU_HTML' : 'MAIL_THANKYOU'));
+		$this->callModifyAttendeeEmailTextHooks($registration, $this->getTemplate());
+
+		return $this->getSubpart($useHtml ? 'MAIL_THANKYOU_HTML' : 'MAIL_THANKYOU');
 	}
 
 	/**
@@ -1328,8 +1348,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 */
 	private function fillOrHideUnregistrationNotice($helloSubjectPrefix, tx_seminars_registration $registration, $useHtml) {
 		$event = $registration->getSeminarObject();
-		if (($helloSubjectPrefix == 'confirmationOnUnregistration') || !$event->isUnregistrationPossible()) {
-			$this->hideSubparts('unregistration_notice', (($useHtml) ? 'html_' : '') . 'field_wrapper');
+		if (($helloSubjectPrefix === 'confirmationOnUnregistration') || !$event->isUnregistrationPossible()) {
+			$this->hideSubparts('unregistration_notice', ($useHtml ? 'html_' : '') . 'field_wrapper');
 			return;
 		}
 

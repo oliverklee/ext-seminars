@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4888] Feature: Add a hook for modifying the thank-you e-mail texts
 - [#4886] Feature: Add a hook for saving additional fields in the registration form
 - [#4919] Feature: Make the fields on the confirmation page extensible
 - [#4909] Cleanup: Drop the constant for the type number for the publication plugin
