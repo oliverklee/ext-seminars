@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2005-2013 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2005-2014 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -134,49 +134,39 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	}
 
 	/**
-	 * Sets this registration's data if this registration is newly created
-	 * instead of from a DB query.
-	 * This function must be called directly after construction or this object
-	 * will not be usable.
+	 * Sets this registration's data if this registration is newly created instead of from a DB query.
 	 *
-	 * @param tx_seminars_seminar $seminar
-	 *        the seminar object (that's the seminar we would like to register for)
-	 * @param integer $userUid
-	 *        UID of the FE user who wants to sign up
-	 * @param array $registrationData
-	 *        associative array with the registration data the user has just entered, may be empty
+	 * This function must be called directly after construction or this object will not be usable.
+	 *
+	 * @param tx_seminars_seminar $seminar the seminar object (that's the seminar we would like to register for)
+	 * @param integer $userUid UID of the FE user who wants to sign up
+	 * @param array $registrationData associative array with the registration data the user has just entered, may be empty
 	 *
 	 * @return void
 	 */
-	public function setRegistrationData(
-		tx_seminars_seminar $seminar, $userUid, array $registrationData
-	) {
+	public function setRegistrationData(tx_seminars_seminar $seminar, $userUid, array $registrationData) {
 		$this->seminar = $seminar;
 
 		$this->recordData = array();
 
 		$this->recordData['seminar'] = $seminar->getUid();
 		$this->recordData['user'] = $userUid;
-		$this->recordData['registration_queue']
-			= (!$seminar->hasVacancies()) ? 1 : 0;
+		$this->recordData['registration_queue'] = (!$seminar->hasVacancies()) ? 1 : 0;
 
 		$seats = intval($registrationData['seats']);
 		if ($seats < 1) {
 			$seats = 1;
 		}
 		$this->recordData['seats'] = $seats;
-		$this->recordData['registered_themselves'] =
-			($registrationData['registered_themselves']) ? 1 : 0;
+		$this->recordData['registered_themselves'] = ($registrationData['registered_themselves']) ? 1 : 0;
 
 		$availablePrices = $seminar->getAvailablePrices();
 		// If no (available) price is selected, use the first price by default.
-		$selectedPrice = (isset($registrationData['price'])
-			&& $seminar->isPriceAvailable($registrationData['price']))
+		$selectedPrice = (isset($registrationData['price']) && $seminar->isPriceAvailable($registrationData['price']))
 			? $registrationData['price'] : key($availablePrices);
 		$this->recordData['price'] = $availablePrices[$selectedPrice]['caption'];
 
-		$this->recordData['total_price'] =
-			$seats * $availablePrices[$selectedPrice]['amount'];
+		$this->recordData['total_price'] = $seats * $availablePrices[$selectedPrice]['amount'];
 
 		$this->recordData['attendees_names'] = $registrationData['attendees_names'];
 
@@ -186,20 +176,17 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		// Auto-select the only payment method if no payment method has been
 		// selected, there actually is anything to pay and only one payment
 		// method is provided.
-		if (!$methodOfPayment && ($this->recordData['total_price'] > 0.00)
-			&& ($seminar->getNumberOfPaymentMethods() == 1)) {
-				$rows = tx_oelib_db::selectMultiple(
-					'uid',
-					'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
-					'tx_seminars_payment_methods.uid = ' .
-						'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
-						'AND tx_seminars_seminars_payment_methods_mm.uid_local=' .
-						$seminar->getTopicUid() .
-						tx_oelib_db::enableFields('tx_seminars_payment_methods'),
-					'',
-					'tx_seminars_seminars_payment_methods_mm.sorting'
-				);
-				$methodOfPayment = $rows[0]['uid'];
+		if (!$methodOfPayment && ($this->recordData['total_price'] > 0.00) && ($seminar->getNumberOfPaymentMethods() == 1)) {
+			$rows = tx_oelib_db::selectMultiple(
+				'uid',
+				'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
+				'tx_seminars_payment_methods.uid = tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
+					'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' . $seminar->getTopicUid() .
+					tx_oelib_db::enableFields('tx_seminars_payment_methods'),
+				'',
+				'tx_seminars_seminars_payment_methods_mm.sorting'
+			);
+			$methodOfPayment = $rows[0]['uid'];
 		}
 		$this->recordData['method_of_payment'] = $methodOfPayment;
 
@@ -218,18 +205,15 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		$this->recordData['telephone'] = $registrationData['telephone'];
 		$this->recordData['email'] = $registrationData['email'];
 
-		$this->lodgings = (isset($registrationData['lodgings'])
-			&& is_array($registrationData['lodgings']))
+		$this->lodgings = (isset($registrationData['lodgings']) && is_array($registrationData['lodgings']))
 			? $registrationData['lodgings'] : array();
 		$this->recordData['lodgings'] = count($this->lodgings);
 
-		$this->foods = (isset($registrationData['foods'])
-			&& is_array($registrationData['foods']))
+		$this->foods = (isset($registrationData['foods']) && is_array($registrationData['foods']))
 			? $registrationData['foods'] : array();
 		$this->recordData['foods'] = count($this->foods);
 
-		$this->checkboxes = (isset($registrationData['checkboxes'])
-			&& is_array($registrationData['checkboxes']))
+		$this->checkboxes = (isset($registrationData['checkboxes']) && is_array($registrationData['checkboxes']))
 			? $registrationData['checkboxes'] : array();
 		$this->recordData['checkboxes'] = count($this->checkboxes);
 
@@ -242,8 +226,9 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		$this->recordData['notes'] = $registrationData['notes'];
 
 		$this->recordData['pid'] = $this->seminar->hasAttendancesPid()
-			? $this->seminar->getAttendancesPid()
-			: $this->getConfValueInteger('attendancesPID');
+			? $this->seminar->getAttendancesPid() : $this->getConfValueInteger('attendancesPID');
+
+		$this->processAdditionalRegistrationData($seminar, $userUid, $registrationData);
 
 		if ($this->isOk()) {
 			// Stores the user data in $this->userData.
@@ -253,7 +238,22 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	}
 
 	/**
+	 * Processes additional registration data.
+	 *
+	 * This function is intended to be overwritten in subclasses.
+	 *
+	 * @param tx_seminars_seminar $seminar the seminar object (that's the seminar we would like to register for)
+	 * @param integer $userUid UID of the FE user who wants to sign up
+	 * @param array $registrationData associative array with the registration data the user has just entered, may be empty
+	 *
+	 * @return void
+	 */
+	protected function processAdditionalRegistrationData(tx_seminars_seminar $seminar, $userUid, array $registrationData) {
+	}
+
+	/**
 	 * Gets the number of seats that are registered with this registration.
+	 *
 	 * If no value is saved in the record, 1 will be returned.
 	 *
 	 * @return integer the number of seats
@@ -274,6 +274,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @param integer $seats the number of seats, must be >= 0
 	 *
 	 * @return void
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setSeats($seats) {
 		if ($seats < 0) {
