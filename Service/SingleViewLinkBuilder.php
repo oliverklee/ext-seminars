@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2010-2013 Oliver Klee <typo3-coding@oliverklee.de>
+* (c) 2010-2014 Oliver Klee <typo3-coding@oliverklee.de>
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -34,7 +34,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	/**
 	 * a plugin instance that provides access to the flexforms plugin settings
 	 *
-	 * @var tx_oelib_templatehelper
+	 * @var tslib_pibase
 	 */
 	private $plugin = NULL;
 
@@ -83,11 +83,11 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	/**
 	 * Sets the plugin used accessing to the flexforms plugin settings.
 	 *
-	 * @param tx_oelib_templatehelper $plugin a seminars plugin instance
+	 * @param tslib_pibase $plugin a seminars plugin instance
 	 *
 	 * @return void
 	 */
-	public function setPlugin(tx_oelib_templatehelper $plugin) {
+	public function setPlugin(tslib_pibase $plugin) {
 		$this->plugin = $plugin;
 	}
 
