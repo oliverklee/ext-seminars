@@ -795,31 +795,31 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 */
 	public function dumpUserValues($keysList) {
 		$keys = t3lib_div::trimExplode(',', $keysList, TRUE);
-		$keysWithLabels = array();
+		$labels = array();
+		$result = '';
 
-		$maxLength = 0;
-		foreach ($keys as $currentKey) {
-			$loweredKey = strtolower($currentKey);
-			$labelKey = 'label_' . $loweredKey;
+		$maximumLabelLength = 0;
+		foreach ($keys as $key) {
+			$labelKey = 'label_' . $key;
 
-			$currentLabel = $this->translate($labelKey);
-			if (($currentLabel === '') || ($currentLabel === $labelKey)) {
-				$currentLabel = ucfirst($loweredKey);
+			$label = $this->translate($labelKey);
+			if (($label === '') || ($label === $labelKey)) {
+				$label = ucfirst($key);
 			}
 
-			$keysWithLabels[$loweredKey] = $currentLabel;
-			$maxLength = max($maxLength, $this->charsetConversion->strlen($this->renderCharset, $currentLabel));
+			$labels[$key] = $label;
+			$maximumLabelLength = max($maximumLabelLength, $this->charsetConversion->strlen($this->renderCharset, $label));
 		}
 
-		$result = '';
-		foreach ($keysWithLabels as $currentKey => $currentLabel) {
-			$value = $this->getUserData($currentKey);
+		foreach ($keys as $key) {
+			$label = $labels[$key];
+			$value = $this->getUserData($key);
 			// Checks whether there is a value to display. If not, we don't use
 			// the padding and break the line directly after the label.
 			if ($value !== '') {
-				$result .= str_pad($currentLabel . ': ', $maxLength + 2, ' ') . $value . LF;
+				$result .= str_pad($label . ': ', $maximumLabelLength + 2, ' ') . $value . LF;
 			} else {
-				$result .= $currentLabel . ':' . LF;
+				$result .= $label . ':' . LF;
 			}
 		}
 
@@ -838,25 +838,24 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 */
 	public function dumpAttendanceValues($keysList) {
 		$keys = t3lib_div::trimExplode(',', $keysList, TRUE);
-		$keysWithLabels = array();
+		$labels = array();
 
-		$maxLength = 0;
-		foreach ($keys as $currentKey) {
-			$loweredKey = strtolower($currentKey);
-			if ($loweredKey == 'uid') {
+		$maximumLabelLength = 0;
+		foreach ($keys as $key) {
+			if ($key === 'uid') {
 				// The UID label is a special case as we also have a UID label for events.
 				$currentLabel = $this->translate('label_registration_uid');
 			} else {
-				$currentLabel = $this->translate('label_' . $loweredKey);
+				$currentLabel = $this->translate('label_' . $key);
 			}
-			$keysWithLabels[$loweredKey] = $currentLabel;
-			$maxLength = max($maxLength, $this->charsetConversion->strlen($this->renderCharset, $currentLabel));
+			$labels[$key] = $currentLabel;
+			$maximumLabelLength = max($maximumLabelLength, $this->charsetConversion->strlen($this->renderCharset, $currentLabel));
 		}
 
 		$result = '';
-		foreach ($keysWithLabels as $currentKey => $currentLabel) {
-			$value = $this->getRegistrationData($currentKey);
-			if ($value == '') {
+		foreach ($labels as $key => $currentLabel) {
+			$value = $this->getRegistrationData($key);
+			if ($value === '') {
 				$result .= $currentLabel . ':' . LF;
 				continue;
 			}
@@ -864,7 +863,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			if (strpos($value, LF) !== FALSE) {
 				$result .= $currentLabel . ': ' . LF;
 			} else {
-				$result .= str_pad($currentLabel . ': ', $maxLength + 2, ' ');
+				$result .= str_pad($currentLabel . ': ', $maximumLabelLength + 2, ' ');
 			}
 			$result .= $value . LF;
 		}

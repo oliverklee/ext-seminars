@@ -980,6 +980,18 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function dumpUserValuesCanContainNonRegisteredField() {
+		$this->fixture->setUserData(array('is_dummy_record' => TRUE));
+
+		$this->assertContains(
+			'Is_dummy_record: 1',
+			$this->fixture->dumpUserValues('is_dummy_record')
+		);
+	}
+
 
 	/*
 	 * Tests for isPaid()
