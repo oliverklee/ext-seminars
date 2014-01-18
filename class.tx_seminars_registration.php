@@ -76,9 +76,9 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * available without further database queries. It will get filled with data
 	 * in the constructor.
 	 *
-	 * @var array
+	 * @var array|NULL
 	 */
-	private $userData = array();
+	private $userData = NULL;
 
 	/**
 	 * UIDs of lodging options associated with this record
@@ -325,8 +325,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 
 	/**
 	 * Gets the complete FE user data as an array.
-	 * The attendee's user data (from fe_users) will be written to
-	 * $this->userData.
+	 *
+	 * The attendee's user data (from fe_users) will be written to $this->userData.
 	 *
 	 * $this->userData will be NULL if retrieving the user data fails.
 	 *
@@ -337,24 +337,20 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 */
 	private function retrieveUserData() {
 		$uid = $this->getUser();
-		if ($uid == 0) {
+		if ($uid === 0) {
 			$this->userData = NULL;
 			return;
 		}
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'*',
-			'fe_users',
-			'uid=' . $uid . tx_oelib_db::enableFields('fe_users')
+			'*', 'fe_users', 'uid = ' . $uid . tx_oelib_db::enableFields('fe_users')
 		);
-		if (!$dbResult) {
+		if ($dbResult === FALSE) {
 			throw new tx_oelib_Exception_Database();
 		}
 		$userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-		if (!$userData) {
-			throw new tx_oelib_Exception_NotFound(
-				'The FE user with the UID ' . $uid . ' could not be retrieved.'
-			);
+		if ($userData === FALSE) {
+			throw new tx_oelib_Exception_NotFound('The FE user with the UID ' . $uid . ' could not be retrieved.', 1390065114);
 		}
 
 		$this->setUserData($userData);
@@ -467,8 +463,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * empty string if the key is not defined in the $this->userData array.
 	 *
 	 * If the data needs to be decoded to be readable (eg. the gender, the date
-	 * of birth or the status), this function will already return the clear text
-	 * version.
+	 * of birth or the status), this function will already return the clear text version.
 	 *
 	 * @param string $key key of the data to retrieve, may contain leading or trailing spaces, must not be empty
 	 *
@@ -478,6 +473,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		if (!$this->userDataHasBeenRetrieved) {
 			$this->retrieveUserData();
 		}
+
 		$result = '';
 		$trimmedKey = trim($key);
 
@@ -486,36 +482,27 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		}
 
 		$rawData = trim($this->userData[$trimmedKey]);
-
-		// deal with special cases
 		switch ($trimmedKey) {
 			case 'gender':
-				$result = $this->translate('label_gender.I.'.$rawData);
+				$result = $this->translate('label_gender.I.' . $rawData);
 				break;
 			case 'status':
-				if ($rawData) {
-					$result = $this->translate('label_status.I.'.$rawData);
+				if ((boolean) $rawData) {
+					$result = $this->translate('label_status.I.' . $rawData);
 				}
 				break;
 			case 'wheelchair':
-				$result = ($rawData)
-					? $this->translate('label_yes')
-					: $this->translate('label_no');
+				$result = ((boolean) $rawData) ? $this->translate('label_yes') : $this->translate('label_no');
 				break;
 			case 'crdate':
 				// The fallthrough is intended.
 			case 'tstamp':
 				$result = strftime(
-					$this->getConfValueString('dateFormatYMD').' '
-						.$this->getConfValueString('timeFormat'),
-					$rawData
+					$this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat'), $rawData
 				);
 				break;
 			case 'date_of_birth':
-				$result = strftime(
-					$this->getConfValueString('dateFormatYMD'),
-					$rawData
-				);
+				$result = strftime($this->getConfValueString('dateFormatYMD'), $rawData);
 				break;
 			case 'name':
 				$result = $this->getFrontEndUser()->getName();
@@ -816,17 +803,12 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			$labelKey = 'label_' . $loweredKey;
 
 			$currentLabel = $this->translate($labelKey);
-			if (($currentLabel == '') || ($currentLabel == $labelKey)) {
+			if (($currentLabel === '') || ($currentLabel === $labelKey)) {
 				$currentLabel = ucfirst($loweredKey);
 			}
 
 			$keysWithLabels[$loweredKey] = $currentLabel;
-			$maxLength = max(
-				$maxLength,
-				$this->charsetConversion->strlen(
-					$this->renderCharset, $currentLabel
-				)
-			);
+			$maxLength = max($maxLength, $this->charsetConversion->strlen($this->renderCharset, $currentLabel));
 		}
 
 		$result = '';
@@ -834,7 +816,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			$value = $this->getUserData($currentKey);
 			// Checks whether there is a value to display. If not, we don't use
 			// the padding and break the line directly after the label.
-			if ($value != '') {
+			if ($value !== '') {
 				$result .= str_pad($currentLabel . ': ', $maxLength + 2, ' ') . $value . LF;
 			} else {
 				$result .= $currentLabel . ':' . LF;
