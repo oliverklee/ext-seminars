@@ -474,6 +474,16 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function dumpAttendanceValuesCanContainNonRegisteredField() {
+		$this->assertContains(
+			'label_is_dummy_record: 1',
+			$this->fixture->dumpAttendanceValues('is_dummy_record')
+		);
+	}
+
 
 	/*
 	 * Tests regarding committing registrations to the database.
