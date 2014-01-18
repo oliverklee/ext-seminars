@@ -47,9 +47,18 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 */
 	protected $mapperName = 'tx_seminars_Mapper_Registration';
 
-	/** Same as class name */
+	/**
+	 * the same as the class name
+	 *
+	 * @var string
+	 */
 	public $prefixId = 'tx_seminars_registration';
-	/**  Path to this script relative to the extension dir. */
+
+	/**
+	 * the path to this script relative to the extension directory
+	 *
+	 * @var string
+	 */
 	public $scriptRelPath = 'class.tx_seminars_registration.php';
 
 	/**
@@ -66,35 +75,43 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * This variable stores the data of the user as an array and makes it
 	 * available without further database queries. It will get filled with data
 	 * in the constructor.
+	 *
+	 * @var array
 	 */
-	private $userData;
+	private $userData = array();
 
 	/**
-	 * An array of UIDs of lodging options associated with this record.
+	 * UIDs of lodging options associated with this record
+	 *
+	 * @var array
 	 */
 	protected $lodgings = array();
 
 	/**
-	 * An array of UIDs of food options associated with this record.
+	 * UIDs of food options associated with this record
+	 *
+	 * @var array
 	 */
 	protected $foods = array();
 
 	/**
-	 * An array of UIDs of option checkboxes associated with this record.
+	 * UIDs of option checkboxes associated with this record
+	 *
+	 * @var array
 	 */
 	protected $checkboxes = array();
 
 	/**
-	 * An array of cached seminar objects with the seminar UIDs as keys and the
-	 * objects as values.
+	 * cached seminar objects with the seminar UIDs as keys and the objects as values
+	 *
+	 * @var array
 	 */
 	private static $cachedSeminars = array();
 
 	/**
 	 * The constructor.
 	 *
-	 * @param tslib_cObj $cObj
-	          content object
+	 * @param tslib_cObj $cObj content object
 	 * @param resource|boolean $dbResult
 	 *        MySQL result pointer (of SELECT query)/DBAL object. If this parameter is not provided or FALSE,
 	 *        setRegistrationData() needs to be called directly after construction or this object will not be usable.
@@ -104,7 +121,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		$this->initializeCharsetConversion();
 		$this->init();
 
-		if (!$dbResult) {
+		if ($dbResult === FALSE) {
 			return;
 		}
 
@@ -314,6 +331,9 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * $this->userData will be NULL if retrieving the user data fails.
 	 *
 	 * @return void
+	 *
+	 * @throws tx_oelib_Exception_Database
+	 * @throws tx_oelib_Exception_NotFound
 	 */
 	private function retrieveUserData() {
 		$uid = $this->getUser();
@@ -346,6 +366,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @param array $userData data of the front-end user, must not be empty
 	 *
 	 * @return void
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	protected function setUserData(array $userData) {
 		if (empty($userData)) {
@@ -373,7 +395,6 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 *         replaced by LF, may be empty empty
 	 */
 	public function getRegistrationData($key) {
-		$result = '';
 		$trimmedKey = trim($key);
 
 		switch ($trimmedKey) {
@@ -451,8 +472,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 *
 	 * @param string $key key of the data to retrieve, may contain leading or trailing spaces, must not be empty
 	 *
-	 * @return string the trimmed value retrieved from $this->userData,
-	 *                may be empty
+	 * @return string the trimmed value retrieved from $this->userData, may be empty
 	 */
 	public function getUserData($key) {
 		if (!$this->userDataHasBeenRetrieved) {
@@ -461,48 +481,47 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		$result = '';
 		$trimmedKey = trim($key);
 
-		if (is_array($this->userData) && !empty($trimmedKey)) {
-			if (array_key_exists($trimmedKey, $this->userData)) {
-				$rawData = trim($this->userData[$trimmedKey]);
+		if (!is_array($this->userData) || ($trimmedKey === '') || !array_key_exists($trimmedKey, $this->userData)) {
+			return '';
+		}
 
-				// deal with special cases
-				switch ($trimmedKey) {
-					case 'gender':
-						$result = $this->translate('label_gender.I.'.$rawData);
-						break;
-					case 'status':
-						if ($rawData) {
-							$result = $this->translate('label_status.I.'.$rawData);
-						}
-						break;
-					case 'wheelchair':
-						$result = ($rawData)
-							? $this->translate('label_yes')
-							: $this->translate('label_no');
-						break;
-					case 'crdate':
-						// The fallthrough is intended.
-					case 'tstamp':
-						$result = strftime(
-							$this->getConfValueString('dateFormatYMD').' '
-								.$this->getConfValueString('timeFormat'),
-							$rawData
-						);
-						break;
-					case 'date_of_birth':
-						$result = strftime(
-							$this->getConfValueString('dateFormatYMD'),
-							$rawData
-						);
-						break;
-					case 'name':
-						$result = $this->getFrontEndUser()->getName();
-						break;
-					default:
-						$result = $rawData;
-						break;
+		$rawData = trim($this->userData[$trimmedKey]);
+
+		// deal with special cases
+		switch ($trimmedKey) {
+			case 'gender':
+				$result = $this->translate('label_gender.I.'.$rawData);
+				break;
+			case 'status':
+				if ($rawData) {
+					$result = $this->translate('label_status.I.'.$rawData);
 				}
-			}
+				break;
+			case 'wheelchair':
+				$result = ($rawData)
+					? $this->translate('label_yes')
+					: $this->translate('label_no');
+				break;
+			case 'crdate':
+				// The fallthrough is intended.
+			case 'tstamp':
+				$result = strftime(
+					$this->getConfValueString('dateFormatYMD').' '
+						.$this->getConfValueString('timeFormat'),
+					$rawData
+				);
+				break;
+			case 'date_of_birth':
+				$result = strftime(
+					$this->getConfValueString('dateFormatYMD'),
+					$rawData
+				);
+				break;
+			case 'name':
+				$result = $this->getFrontEndUser()->getName();
+				break;
+			default:
+				$result = $rawData;
 		}
 
 		return trim((string) $result);
@@ -516,7 +535,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Empty values will be removed from the output.
 	 *
 	 * @param string $keys comma-separated list of keys to retrieve
-	 * @param tslib_pibase $plugin a tslib_pibase object for a live page
+	 * @param tslib_pibase $plugin an object for a live page
 	 *
 	 * @return string the values retrieved from $this->userData, may be empty
 	 */
@@ -580,25 +599,20 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @return tx_seminars_Model_FrontEndUser the front-end user of the registration
 	 */
 	public function getFrontEndUser() {
-		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
-			->find($this->getUser());
+		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')->find($this->getUser());
 	}
 
 	/**
 	 * Returns whether the registration has an existing front-end user.
 	 *
-	 * @return boolean TRUE if the registration has an existing front-end user,
-	 *                 FALSE otherwise
+	 * @return boolean TRUE if the registration has an existing front-end user, FALSE otherwise
 	 */
 	public function hasExistingFrontEndUser() {
 		if ($this->getUser() <= 0) {
 			return FALSE;
 		}
 
-		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')->
-			existsModel(
-				$this->getUser()
-			);
+		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')->existsModel($this->getUser());
 	}
 
 	/**
@@ -736,8 +750,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	}
 
 	/**
-	 * Returns whether this registration has a saved price category name and
-	 * its single price.
+	 * Returns whether this registration has a saved price category name and its single price.
 	 *
 	 * @return boolean TRUE if this registration has a price, FALSE otherwise
 	 */
@@ -747,6 +760,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 
 	/**
 	 * Gets the saved total price and the currency.
+	 *
 	 * An empty string will be returned if no total price could be calculated.
 	 *
 	 * @return string the total price and the currency or an empty string
@@ -776,8 +790,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns whether this registration has a total price.
 	 *
-	 * @return boolean TRUE if this registration has a total price, FALSE
-	 *                 otherwise
+	 * @return boolean TRUE if this registration has a total price, FALSE otherwise
 	 */
 	public function hasTotalPrice() {
 		return $this->hasRecordPropertyDecimal('total_price');
@@ -822,11 +835,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			// Checks whether there is a value to display. If not, we don't use
 			// the padding and break the line directly after the label.
 			if ($value != '') {
-				$result .= str_pad(
-					$currentLabel . ': ',
-					$maxLength + 2,
-					' '
-				).$value.LF;
+				$result .= str_pad($currentLabel . ': ', $maxLength + 2, ' ') . $value . LF;
 			} else {
 				$result .= $currentLabel . ':' . LF;
 			}
@@ -836,9 +845,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	}
 
 	/**
-	 * Gets a plain text list of attendance (registration) property values
-	 * (if they exist), formatted as strings (and nicely lined up) in the
-	 * following format:
+	 * Gets a plain text list of attendance (registration) property values (if they exist), formatted as strings (and nicely
+	 * lined up) in the following format:
 	 *
 	 * key1: value1
 	 *
@@ -854,19 +862,13 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		foreach ($keys as $currentKey) {
 			$loweredKey = strtolower($currentKey);
 			if ($loweredKey == 'uid') {
-				// The UID label is a special case as we also have a UID label
-				// for events.
+				// The UID label is a special case as we also have a UID label for events.
 				$currentLabel = $this->translate('label_registration_uid');
 			} else {
 				$currentLabel = $this->translate('label_' . $loweredKey);
 			}
 			$keysWithLabels[$loweredKey] = $currentLabel;
-			$maxLength = max(
-				$maxLength,
-				$this->charsetConversion->strlen(
-					$this->renderCharset, $currentLabel
-				)
-			);
+			$maxLength = max($maxLength, $this->charsetConversion->strlen($this->renderCharset, $currentLabel));
 		}
 
 		$result = '';
@@ -906,7 +908,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			'city' => TRUE,
 			'country' => TRUE,
 			'telephone' => TRUE,
-			'email' => TRUE
+			'email' => TRUE,
 		);
 
 		$result = '';
@@ -930,15 +932,12 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	}
 
 	/**
-	 * Retrieves the localized string corresponding to the key in the "gender"
-	 * field.
+	 * Retrieves the localized string corresponding to the key in the "gender" field.
 	 *
-	 * @return string the localized gender as entered for the billing address
-	 *                (Mr. or Mrs.)
+	 * @return string the localized gender as entered for the billing address (Mr. or Mrs.)
 	 */
 	public function getGender() {
-		return $this->translate('label_gender.I.'
-			.$this->getRecordPropertyInteger('gender'));
+		return $this->translate('label_gender.I.' . $this->getRecordPropertyInteger('gender'));
 	}
 
 	/**
@@ -954,27 +953,21 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Gets the selected lodging options separated by LF. If there is no
 	 * lodging option selected, this function will return an empty string.
 	 *
-	 * @return string the titles of the selected loding options separated by
+	 * @return string the titles of the selected lodging options separated by
 	 *                LF or an empty string if no lodging option is selected
 	 */
 	public function getLodgings() {
-		$result = '';
-
-		if ($this->hasLodgings()) {
-			$result = $this->getMmRecords(
-				'tx_seminars_lodgings',
-				'tx_seminars_attendances_lodgings_mm'
-			);
+		if (!$this->hasLodgings()) {
+			return '';
 		}
 
-		return $result;
+		return $this->getMmRecords('tx_seminars_lodgings', 'tx_seminars_attendances_lodgings_mm');
 	}
 
 	/**
 	 * Checks whether there are any food options referenced by this record.
 	 *
-	 * @return boolean TRUE if at least one food option is referenced by this
-	 *                 record, FALSE otherwise
+	 * @return boolean TRUE if at least one food option is referenced by this record, FALSE otherwise
 	 */
 	public function hasFoods() {
 		return $this->hasRecordPropertyInteger('foods');
@@ -984,27 +977,20 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Gets the selected food options separated by LF. If there is no
 	 * food option selected, this function will return an empty string.
 	 *
-	 * @return string the titles of the selected loding options separated by
-	 *                LF or an empty string if no food option is selected
+	 * @return string the titles of the selected lodging options separated by LF or an empty string if no food option is selected
 	 */
 	public function getFoods() {
-		$result = '';
-
-		if ($this->hasFoods()) {
-			$result = $this->getMmRecords(
-				'tx_seminars_foods',
-				'tx_seminars_attendances_foods_mm'
-			);
+		if (!$this->hasFoods()) {
+			return '';
 		}
 
-		return $result;
+		return $this->getMmRecords('tx_seminars_foods', 'tx_seminars_attendances_foods_mm');
 	}
 
 	/**
 	 * Checks whether any option checkboxes are referenced by this record.
 	 *
-	 * @return boolean TRUE if at least one option checkbox is referenced by
-	 *                 this record, FALSE otherwise
+	 * @return boolean TRUE if at least one option checkbox is referenced by this record, FALSE otherwise
 	 */
 	public function hasCheckboxes() {
 		return $this->hasRecordPropertyInteger('checkboxes');
@@ -1018,21 +1004,15 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 *                LF or an empty string if no option checkbox is selected
 	 */
 	public function getCheckboxes() {
-		$result = '';
-
-		if ($this->hasCheckboxes()) {
-			$result = $this->getMmRecords(
-				'tx_seminars_checkboxes',
-				'tx_seminars_attendances_checkboxes_mm'
-			);
+		if (!$this->hasCheckboxes()) {
+			return '';
 		}
 
-		return $result;
+		return $this->getMmRecords('tx_seminars_checkboxes', 'tx_seminars_attendances_checkboxes_mm');
 	}
 
 	/**
-	 * Gets a LF-separated list of the titles of records referenced by this
-	 * record.
+	 * Gets a LF-separated list of the titles of records referenced by this record.
 	 *
 	 * @param string $foreignTable the name of the foreign table (must not be empty), must have the fields uid and title
 	 * @param string $mmTable the name of the m:m table, having the fields uid_local, uid_foreign and sorting, must not be empty
@@ -1045,16 +1025,15 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, sorting',
-			$foreignTable.', '.$mmTable,
-			'uid_local=' . $this->getUid() . ' AND uid_foreign=uid' .
-				tx_oelib_db::enableFields($foreignTable),
+			$foreignTable . ', ' . $mmTable,
+			'uid_local=' . $this->getUid() . ' AND uid_foreign=uid' . tx_oelib_db::enableFields($foreignTable),
 			'',
 			'sorting'
 		);
 
 		if ($dbResult) {
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-				if (!empty($result)) {
+				if ($result !== '') {
 					$result .= LF;
 				}
 				$result .= $row['title'];
@@ -1067,9 +1046,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Writes this record to the DB and adds any needed m:n records.
 	 *
-	 * This function actually calles the same method in the parent class
-	 * (which saves the record to the DB) and then adds any necessary m:n
-	 * relations.
+	 * This function actually calls the same method in the parent class
+	 * (which saves the record to the DB) and then adds any necessary m:n relations.
 	 *
 	 * The UID of the parent page must be set in $this->recordData['pid'].
 	 * (otherwise the record will be created in the root page).
@@ -1077,42 +1055,28 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @return boolean TRUE if everything went OK, FALSE otherwise
 	 */
 	public function commitToDb() {
-		$result = parent::commitToDb();
-
-		if ($result) {
-			$this->recordData['uid'] = $GLOBALS['TYPO3_DB']->sql_insert_id();
-			if ($this->hasUid()) {
-				$this->createMmRecords(
-					'tx_seminars_attendances_lodgings_mm',
-					$this->lodgings
-				);
-				$this->createMmRecords(
-					'tx_seminars_attendances_foods_mm',
-					$this->foods
-				);
-				$this->createMmRecords(
-					'tx_seminars_attendances_checkboxes_mm',
-					$this->checkboxes
-				);
-			}
-
-			// update the reference index
-			$referenceIndex = t3lib_div::makeInstance('t3lib_refindex');
-			$referenceIndex->updateRefIndexTable(
-				'tx_seminars_attendances',
-				$this->getUid()
-			);
+		if (!parent::commitToDb()) {
+			return FALSE;
 		}
 
-		return $result;
+		$this->recordData['uid'] = $GLOBALS['TYPO3_DB']->sql_insert_id();
+		if ($this->hasUid()) {
+			$this->createMmRecords('tx_seminars_attendances_lodgings_mm', $this->lodgings);
+			$this->createMmRecords('tx_seminars_attendances_foods_mm', $this->foods);
+			$this->createMmRecords('tx_seminars_attendances_checkboxes_mm', $this->checkboxes);
+		}
+
+		// update the reference index
+		$referenceIndex = t3lib_div::makeInstance('t3lib_refindex');
+		$referenceIndex->updateRefIndexTable('tx_seminars_attendances', $this->getUid());
+
+		return TRUE;
 	}
 
 	/**
-	 * Returns TRUE if this registration is on the registration queue, FALSE
-	 * otherwise.
+	 * Returns TRUE if this registration is on the registration queue, FALSE otherwise.
 	 *
-	 * @return boolean TRUE if this registration is on the registration
-	 *                 queue, FALSE otherwise
+	 * @return boolean TRUE if this registration is on the registration queue, FALSE otherwise
 	 */
 	public function isOnRegistrationQueue() {
 		return $this->getRecordPropertyBoolean('registration_queue');
@@ -1121,20 +1085,18 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Gets this registration's status as a localized string.
 	 *
-	 * @return string a localized version of either "waiting list" or
-	 *                "regular", will not be empty
+	 * @return string a localized version of either "waiting list" or "regular", will not be empty
 	 */
 	public function getStatus() {
-		$languageKey = 'label_' .
-			($this->isOnRegistrationQueue() ? 'waiting_list' : 'regular');
+		$languageKey = 'label_' . ($this->isOnRegistrationQueue() ? 'waiting_list' : 'regular');
+
 		return $this->translate($languageKey);
 	}
 
 	/**
 	 * Returns our attendees names.
 	 *
-	 * @return string our attendees names, will be empty if this registration
-	 *                has no attendees names
+	 * @return string our attendees names, will be empty if this registration has no attendees names
 	 */
 	public function getAttendeesNames() {
 		return $this->getRecordPropertyString('attendees_names');
@@ -1154,8 +1116,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns whether this registration has attendees names.
 	 *
-	 * @return boolean TRUE if this registration has attendees names, FALSE
-	 *                 otherwise
+	 * @return boolean TRUE if this registration has attendees names, FALSE otherwise
 	 */
 	public function hasAttendeesNames() {
 		return $this->hasRecordPropertyString('attendees_names');
@@ -1164,8 +1125,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns our number of kids.
 	 *
-	 * @return integer the number of kids, will be >= 0, will be 0 if this
-	 *                 registration has no kids
+	 * @return integer the number of kids, will be >= 0, will be 0 if this registration has no kids
 	 */
 	public function getNumberOfKids() {
 		return $this->getRecordPropertyInteger('kids');
@@ -1177,6 +1137,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @param integer $numberOfKids the number of kids, must be >= 0
 	 *
 	 * @return void
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setNumberOfKids($numberOfKids) {
 		if ($numberOfKids < 0) {
@@ -1198,8 +1160,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns our method of payment UID.
 	 *
-	 * @return integer our method of payment UID, will be >= 0, will be 0 if
-	 *                 this registration has no method of payment
+	 * @return integer our method of payment UID, will be >= 0, will be 0 if this registration has no method of payment
 	 */
 	public function getMethodOfPaymentUid() {
 		return $this->getRecordPropertyInteger('method_of_payment');
@@ -1211,6 +1172,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @param integer $uid our method of payment UID, must be >= 0
 	 *
 	 * @return void
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setMethodOfPaymentUid($uid) {
 		if ($uid < 0) {
@@ -1223,8 +1186,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns whether this registration has a method of payment.
 	 *
-	 * @return boolean TRUE if this event has a method of payment, FALSE
-	 *                 otherwise
+	 * @return boolean TRUE if this event has a method of payment, FALSE otherwise
 	 */
 	public function hasMethodOfPayment() {
 		return $this->hasRecordPropertyInteger('method_of_payment');
@@ -1247,13 +1209,9 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			return '';
 		}
 
-		$names = t3lib_div::trimExplode(
-			LF, $this->getAttendeesNames(), TRUE
-		);
+		$names = t3lib_div::trimExplode(LF, $this->getAttendeesNames(), TRUE);
 		if ($this->hasRegisteredMySelf()) {
-			$names = array_merge(
-				array($this->getFrontEndUser()->getName()), $names
-			);
+			$names = array_merge(array($this->getFrontEndUser()->getName()), $names);
 		}
 
 		if ($useHtml) {

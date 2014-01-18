@@ -824,8 +824,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Sends an e-mail to all organizers with a message about a registration or
-	 * unregistration.
+	 * Sends an e-mail to all organizers with a message about a registration or unregistration.
 	 *
 	 * @param tx_seminars_registration $registration
 	 *        the registration for which the notification should be send
