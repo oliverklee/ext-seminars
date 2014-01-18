@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2008-2013 Niels Pardon (mail@niels-pardon.de)
+* (c) 2008-2014 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -30,34 +30,35 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Philipp Kitzberger <philipp@cron-it.de>
  */
 class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_FrontEnd_RegistrationForm
 	 */
-	private $fixture = NULL;
+	protected $fixture = NULL;
 
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
-	private $testingFramework = NULL;
+	protected $testingFramework = NULL;
 
 	/**
 	 * @var tx_oelib_FakeSession a fake session
 	 */
-	private $session = NULL;
+	protected $session = NULL;
 
 	/**
 	 * @var integer the UID of the event the fixture relates to
 	 */
-	private $seminarUid = 0;
+	protected $seminarUid = 0;
 
 	/**
 	 * @var tx_seminars_seminars
 	 */
 	protected $seminar = NULL;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$frontEndPageUid = $this->testingFramework->createFrontEndPage();
 		$this->testingFramework->createFakeFrontEnd($frontEndPageUid);
@@ -87,6 +88,8 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'logOutOneTimeAccountsAfterRegistration' => 1,
 				'showRegistrationFields' => 'registered_themselves,attendees_names',
+				'showFeUserFieldsInRegistrationForm' => 'name,email',
+				'showFeUserFieldsInRegistrationFormWithLabel' => 'email',
 				'form.' => array(
 					'unregistration.' => array(),
 					'registration.'	=> array(
@@ -102,7 +105,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$this->fixture->setTestMode();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();
@@ -179,14 +182,15 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////
-	// Test concerning getAllFeUserData
-	/////////////////////////////////////
+	/*
+	 * Test concerning getAllFeUserData
+	 */
 
-	public function testGetAllFeUserContainsNonEmptyNameOfFrontEndUser() {
-		$this->testingFramework->createAndLoginFrontEndUser(
-			'', array('name' => 'John Doe')
-		);
+	/**
+	 * @test
+	 */
+	public function getAllFeUserContainsNonEmptyNameOfFrontEndUser() {
+		$this->testingFramework->createAndLoginFrontEndUser('', array('name' => 'John Doe'));
 
 		$this->assertContains(
 			'John Doe',
@@ -194,10 +198,23 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetAllFeUserDoesNotContainEmptyLinesForMissingCompanyName() {
-		$this->testingFramework->createAndLoginFrontEndUser(
-			'', array('name' => 'John Doe')
+	/**
+	 * @test
+	 */
+	public function getAllFeUserContainsLabelForNonEmptyEmailOfFrontEndUser() {
+			$this->testingFramework->createAndLoginFrontEndUser('', array('email' => 'john@example.com'));
+
+		$this->assertContains(
+			'mail',
+			$this->fixture->getAllFeUserData()
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAllFeUserDoesNotContainEmptyLinesForMissingCompanyName() {
+		$this->testingFramework->createAndLoginFrontEndUser('', array('name' => 'John Doe'));
 
 		$this->assertNotRegExp(
 			'/<br \/>\s*<br \/>/',

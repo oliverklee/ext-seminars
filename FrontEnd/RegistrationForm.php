@@ -32,10 +32,11 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Philipp Kitzberger <philipp@cron-it.de>
  */
 class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor {
 	/**
-	 * same as class name
+	 * the same as the class name
 	 *
 	 * @var string
 	 */
@@ -49,8 +50,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	private $formFieldsToShow = array();
 
 	/**
-	 * the number of the current page of the form (starting with 0 for the first
-	 * page)
+	 * the number of the current page of the form (starting with 0 for the first page)
 	 *
 	 * @var integer
 	 */
@@ -788,38 +788,37 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	}
 
 	/**
-	 * Gets the currently logged-in FE user's data nicely formatted as HTML so
-	 * that it can be directly included on the confirmation page.
+	 * Gets the currently logged-in FE user's data nicely formatted as HTML so that it can be directly included on the
+	 * confirmation page.
 	 *
 	 * The telephone number and the e-mail address will have labels in front of them.
 	 *
 	 * @return string the currently logged-in FE user's data
 	 */
 	public function getAllFeUserData() {
+		/** @var $userData array */
 		$userData = $GLOBALS['TSFE']->fe_user->user;
 
-		foreach (array(
-			'name' => FALSE,
-			'company' => FALSE,
-			'address' => FALSE,
-			'zip' => FALSE,
-			'city' => FALSE,
-			'country' => FALSE,
-			'telephone' => TRUE,
-			'email' => TRUE,
-		) as $currentKey => $hasLabel) {
-			$value = htmlspecialchars($userData[$currentKey]);
+		$fields = t3lib_div::trimExplode(',', $this->getConfValueString('showFeUserFieldsInRegistrationForm'));
+		$fieldsWithLabels = t3lib_div::trimExplode(',', $this->getConfValueString('showFeUserFieldsInRegistrationFormWithLabel'));
+
+		foreach ($fields as $fieldKey) {
+			$hasLabel = in_array($fieldKey, $fieldsWithLabels, TRUE);
+			$fieldValue = isset($userData[$fieldKey]) ? htmlspecialchars((string) $userData[$fieldKey]) : '';
 			// Only show a label if we have any data following it.
-			if ($hasLabel && !empty($value)) {
-				$value = $this->translate('label_' . $currentKey) . ' ' . $value;
+			if ($hasLabel && ($fieldValue !== '')) {
+				$displayValue = $this->translate('label_' . $fieldKey) . ' ' . $fieldValue;
+			}  else {
+				$displayValue = $fieldValue;
 			}
-			$this->setMarker('user_' . $currentKey, $value);
+
+			$this->setMarker('user_' . $fieldKey, $displayValue);
 		}
 
 		$rawOutput = $this->getSubpart('REGISTRATION_CONFIRMATION_FEUSER');
 
 		// drops empty lines
-		return preg_replace('/[\n\r]\s*<br \/>/', '', $rawOutput);
+		return preg_replace('/[\n\r]\\s*<br \\/>/', '', $rawOutput);
 	}
 
 	/**

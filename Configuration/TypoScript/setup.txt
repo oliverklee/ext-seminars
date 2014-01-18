@@ -369,6 +369,12 @@ plugin.tx_seminars_pi1 {
 	# list of tx_seminars_attendances DB fields to show for the online registration (must not be empty)
 	showRegistrationFields = step_counter,price,method_of_payment,lodgings,foods,checkboxes,interests,expectations,background_knowledge,known_from,notes,total_price,feuser_data,billing_address,registration_data,terms_2
 
+	# fe_users DB fields to show for in the registration form
+	showFeUserFieldsInRegistrationForm = name,company,address,zip,city,country,telephone,email
+
+	# fe_users DB fields on the registration form that should be displayed with a label
+	showFeUserFieldsInRegistrationFormWithLabel = telephone,email
+
 	# the displayed number of the first registration page (for "step x of y")
 	numberOfFirstRegistrationPage = 1
 

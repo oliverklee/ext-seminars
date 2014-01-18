@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2006-2013 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2006-2014 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -187,6 +187,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkGeneralPriceInSingle();
 		$this->checkEventFieldsOnRegistrationPage();
 		$this->checkShowRegistrationFields();
+		$this->checkShowFeUserFieldsInRegistrationForm();
+		$this->checkShowFeUserFieldsInRegistrationFormWithLabel();
 		$this->checkThankYouAfterRegistrationPID();
 		$this->checkSendParametersToThankYouAfterRegistrationPageUrl();
 		$this->checkPageToShowAfterUnregistrationPID();
@@ -1192,6 +1194,38 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'terms',
 				'terms_2'
 			)
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value showFeUserFieldsInRegistrationForm.
+	 *
+	 * @return void
+	 */
+	private function checkShowFeUserFieldsInRegistrationForm() {
+		$this->checkIfMultiInTableOrEmpty(
+			'showFeUserFieldsInRegistrationFormMail',
+			FALSE,
+			'',
+			'These values specify the FE user fields to show in the registration form. ' .
+				'A mistyped field name will cause the field to not get included.',
+			'fe_users'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value showFeUserFieldsInRegistrationFormWithLabel.
+	 *
+	 * @return void
+	 */
+	private function checkShowFeUserFieldsInRegistrationFormWithLabel() {
+		$this->checkIfMultiInTableOrEmpty(
+			'showFeUserFieldsInRegistrationFormWithLabel',
+			FALSE,
+			'',
+			'These values specify the FE user labels to show in the registration form. ' .
+				'A mistyped field name will cause the label to not get displayed.',
+			'fe_users'
 		);
 	}
 
