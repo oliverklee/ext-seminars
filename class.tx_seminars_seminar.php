@@ -1511,15 +1511,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Get a single payment method, just as plain text, including the detailed
-	 * description.
-	 * Returns an empty string if the corresponding payment method could not
-	 * be retrieved.
+	 * Get a single payment method, just as plain text, including the detailed description.
 	 *
-	 * @param integer the UID of a single payment method, must not be zero
+	 * Returns an empty string if the corresponding payment method could not be retrieved.
 	 *
-	 * @return string the selected payment method as plain text (or ''
-	 *                if there is an error)
+	 * @param integer $paymentMethodUid the UID of a single payment method, must not be zero
+	 *
+	 * @return string the selected payment method as plain text (or '' if there is an error)
 	 */
 	public function getSinglePaymentMethodPlain($paymentMethodUid) {
 		if ($paymentMethodUid <= 0) {
@@ -1528,36 +1526,39 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, description',
-			SEMINARS_TABLE_PAYMENT_METHODS,
-			'uid=' . $paymentMethodUid .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+			'tx_seminars_payment_methods',
+			'uid = ' . $paymentMethodUid . tx_oelib_db::enableFields('tx_seminars_payment_methods')
 		);
-
-		if (!$dbResultPaymentMethod) {
+		if ($dbResultPaymentMethod === FALSE) {
 			return '';
 		}
 
 		// We expect just one result.
-		if (!$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod)) {
+		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
+		if ($row === FALSE) {
 			return '';
 		}
 
-		$result = $row['title'].': ';
-		$result .= $row['description'].LF.LF;
+		$title = (string) $row['title'];
+		$description = (string) $row['description'];
+
+		$result = $title;
+		if ($description !== '') {
+			$result .= ': ' . $description;
+		}
+		$result .= LF . LF;
 
 		return $result;
 	}
 
 	/**
-	 * Get a single payment method, just as plain text, without the detailed
-	 * description.
-	 * Returns an empty string if the corresponding payment method could not
-	 * be retrieved.
+	 * Get a single payment method, just as plain text, without the detailed description.
 	 *
-	 * @param integer the UID of a single payment method, must not be zero
+	 * Returns an empty string if the corresponding payment method could not be retrieved.
 	 *
-	 * @return string the selected payment method as plain text (or '' if
-	 *                there is an error)
+	 * @param integer $paymentMethodUid the UID of a single payment method, must not be zero
+	 *
+	 * @return string the selected payment method as plain text (or '' if there is an error)
 	 */
 	public function getSinglePaymentMethodShort($paymentMethodUid) {
 		if ($paymentMethodUid <= 0) {
@@ -1566,17 +1567,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
-			SEMINARS_TABLE_PAYMENT_METHODS,
-			'uid=' . $paymentMethodUid .
-				tx_oelib_db::enableFields(SEMINARS_TABLE_PAYMENT_METHODS)
+			'tx_seminars_payment_methods',
+			'uid = ' . $paymentMethodUid . tx_oelib_db::enableFields('tx_seminars_payment_methods')
 		);
-
-		if (!$dbResultPaymentMethod) {
+		if ($dbResultPaymentMethod === FALSE) {
 			return '';
 		}
 
 		// We expect just one result.
-		if (!$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod)) {
+		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
+		if ($row === FALSE) {
 			return '';
 		}
 
@@ -1607,10 +1607,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If no language with this ISO code could not be found in the database,
 	 * an empty string is returned instead.
 	 *
-	 * @param string the ISO 639 alpha-2 code of the language
+	 * @param string $isoCode the ISO 639 alpha-2 code of the language
 	 *
-	 * @return string the short local name of the language or an empty string
-	 *                if the language couldn't be found
+	 * @return string the short local name of the language or an empty string if the language could not be found
 	 */
 	public function getLanguageNameFromIsoCode($isoCode) {
 		$languageName = '';
@@ -1619,9 +1618,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'static_languages',
 			'lg_iso_2="'.$isoCode.'"'
 		);
-		if ($dbResult) {
+		if ($dbResult !== FALSE) {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-			$languageName = $row['lg_name_local'];
+			$languageName = (string) $row['lg_name_local'];
 		}
 
 		return $languageName;

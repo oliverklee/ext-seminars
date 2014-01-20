@@ -2779,12 +2779,29 @@ class tx_seminars_seminarchild_testcase extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSinglePaymentMethodPlainWithValidPaymentMethodUidReturnsTheTitleOfThePaymentMethod() {
+	/**
+	 * @test
+	 */
+	public function getSinglePaymentMethodPlainWithValidPaymentMethodUidWithoutDescriptionReturnsTitle() {
 		$title = 'Test payment method';
 		$uid = $this->addPaymentMethodRelation(array('title' => $title));
 
-		$this->assertContains(
-			$title,
+		$this->assertSame(
+				$title . LF . LF,
+			$this->fixture->getSinglePaymentMethodPlain($uid)
+		);
+	}
+
+ 	/**
+	 * @test
+	 */
+	public function getSinglePaymentMethodPlainWithValidPaymentMethodUidWithDescriptionReturnsTitleAndDescription() {
+		$title = 'Test payment method';
+		$description = 'some description';
+		$uid = $this->addPaymentMethodRelation(array('title' => $title, 'description' => $description));
+
+		$this->assertSame(
+			$title . ': ' . $description  . LF . LF,
 			$this->fixture->getSinglePaymentMethodPlain($uid)
 		);
 	}
