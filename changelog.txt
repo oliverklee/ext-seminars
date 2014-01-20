@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4935] Bugfix: Drop the colon after the payment method in the e-mail to the attendee
 - [#4300] Feature: Make the FE user data in the registration form configurable (thanks to Philipp Kitzberger)
 - [#4928] Feature: Allow adding arbitrary FE user fields into the notification e-mail to the organizer
 - [#4896] Feature: Add a test for new attendance fields in the e-mail to the organizer

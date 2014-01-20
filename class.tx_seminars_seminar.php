@@ -1443,7 +1443,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
 			'tx_seminars_payment_methods.uid = ' .
 				'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
-				'AND tx_seminars_seminars_payment_methods_mm.uid_local=' .
+				'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' .
 				$this->getTopicUid() .
 				tx_oelib_db::enableFields('tx_seminars_payment_methods'),
 			'',
@@ -1460,12 +1460,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets our allowed payment methods, just as plain text,
-	 * including the detailed description.
-	 * Returns an empty string if this seminar doesn't have any payment methods.
+	 * Gets our allowed payment methods, just as plain text, including the detailed description.
+	 * Returns an empty string if this seminar does not have any payment methods.
 	 *
-	 * @return string our payment methods as plain text (or '' if
-	 *                there is an error)
+	 * @return string our payment methods as plain text (or '' if there is an error)
 	 */
 	public function getPaymentMethodsPlain() {
 		if (!$this->hasPaymentMethods()) {
@@ -1477,7 +1475,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
 			'tx_seminars_payment_methods.uid = ' .
 				'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
-				'AND tx_seminars_seminars_payment_methods_mm.uid_local=' .
+				'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' .
 				$this->getTopicUid() .
 				tx_oelib_db::enableFields('tx_seminars_payment_methods'),
 			'',
@@ -1487,20 +1485,19 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = '';
 
 		foreach ($rows as $row) {
-			$result .= $row['title'].': ';
-			$result .= $row['description'].LF.LF;
+			$result .= $row['title'] . ': ';
+			$result .= $row['description'] . LF . LF;
 		}
 
 		return $result;
 	}
 
 	/**
-	 * Gets our allowed payment methods, just as plain text separated by LF,
-	 * without the detailed description.
-	 * Returns an empty string if this seminar doesn't have any payment methods.
+	 * Gets our allowed payment methods, just as plain text separated by LF, without the detailed description.
 	 *
-	 * @return string our payment methods as plain text (or '' if there
-	 *                is an error)
+	 * Returns an empty string if this seminar does not have any payment methods.
+	 *
+	 * @return string our payment methods as plain text (or '' if there is an error)
 	 */
 	protected function getPaymentMethodsPlainShort() {
 		if (!$this->hasPaymentMethods()) {
@@ -1539,8 +1536,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return '';
 		}
 
-		$result = $row['title'] . ': ';
-		$result .= $row['description'] . LF . LF;
+		$title = (string) $row['title'];
+		$description = (string) $row['description'];
+
+		$result = $title;
+		if ($description !== '') {
+			$result .= ': ' . $description;
+		}
+		$result .= LF . LF;
 
 		return $result;
 	}
@@ -4490,8 +4493,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * Before this function is called assure that this event has a begin date.
 	 *
-	 * @return integer the cancelation deadline of this event as timestamp,
-	 *                 will be >= 0
+	 * @return integer the cancelation deadline of this event as timestamp, will be >= 0
+	 *
+	 * @throws BadMethodCallException
 	 */
 	public function getCancelationDeadline() {
 		if (!$this->hasBeginDate()) {

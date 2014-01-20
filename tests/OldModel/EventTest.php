@@ -3235,7 +3235,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 */
 
 	/**
-	 * @ŧest
+	 * @test
 	 */
 	public function getSinglePaymentMethodPlainWithInvalidPaymentMethodUidReturnsAnEmptyString() {
 		$this->assertSame(
@@ -3245,20 +3245,34 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 	/**
-	 * @ŧest
+	 * @test
 	 */
-	public function getSinglePaymentMethodPlainWithValidPaymentMethodUidReturnsTheTitleOfThePaymentMethod() {
+	public function getSinglePaymentMethodPlainWithValidPaymentMethodUidWithoutDescriptionReturnsTitle() {
 		$title = 'Test payment method';
 		$uid = $this->addPaymentMethodRelation(array('title' => $title));
 
-		$this->assertContains(
-			$title,
+		$this->assertSame(
+			$title . LF . LF,
 			$this->fixture->getSinglePaymentMethodPlain($uid)
 		);
 	}
 
 	/**
-	 * @ŧest
+	 * @test
+	 */
+	public function getSinglePaymentMethodPlainWithValidPaymentMethodUidWithDescriptionReturnsTitleAndDescription() {
+		$title = 'Test payment method';
+		$description = 'some description';
+		$uid = $this->addPaymentMethodRelation(array('title' => $title, 'description' => $description));
+
+		$this->assertSame(
+			$title . ': ' . $description  . LF . LF,
+			$this->fixture->getSinglePaymentMethodPlain($uid)
+		);
+	}
+
+	/**
+	 * @test
 	 */
 	public function getSinglePaymentMethodPlainWithNonExistentPaymentMethodUidReturnsAnEmptyString() {
 		$uid = $this->addPaymentMethodRelation(array());
@@ -3270,7 +3284,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 	/**
-	 * @ŧest
+	 * @test
 	 */
 	public function getSinglePaymentMethodShortWithInvalidPaymentMethodUidReturnsAnEmptyString() {
 		$this->assertSame(
@@ -3280,7 +3294,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 	/**
-	 * @ŧest
+	 * @test
 	 */
 	public function getSinglePaymentMethodShortWithValidPaymentMethodUidReturnsTheTitleOfThePaymentMethod() {
 		$title = 'Test payment method';
@@ -3293,7 +3307,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 	/**
-	 * @ŧest
+	 * @test
 	 */
 	public function getSinglePaymentMethodShortWithNonExistentPaymentMethodUidReturnsAnEmptyString() {
 		$uid = $this->addPaymentMethodRelation(array());
