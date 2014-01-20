@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007-2013 Niels Pardon (mail@niels-pardon.de)
+* (c) 2007-2014 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -35,36 +35,36 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_seminarchild
 	 */
-	private $fixture;
+	protected $fixture = NULL;
+
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
-	private $testingFramework;
+	protected $testingFramework = NULL;
 
 	/**
 	 * @var integer
 	 */
-	private $beginDate;
+	protected $beginDate = 0;
+
 	/**
 	 * @var integer
 	 */
-	private $unregistrationDeadline;
+	protected $unregistrationDeadline = 0;
+
 	/**
 	 * @var integer
 	 */
-	private $now;
+	protected $now = 0;
 
 	/**
 	 * @var tx_seminars_FrontEnd_DefaultController
 	 */
-	private $pi1;
+	protected $pi1 = NULL;
 
-	public function setUp() {
-		$GLOBALS['LANG']->includeLLFile(
-			t3lib_extMgm::extPath('seminars') . 'locallang.xml'
-		);
-		$this->testingFramework
-			= new tx_oelib_testingFramework('tx_seminars');
+	protected function setUp() {
+		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->now = $GLOBALS['SIM_EXEC_TIME'];
 		$this->beginDate = ($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
@@ -94,21 +94,17 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		if ($this->pi1) {
-			$this->pi1->__destruct();
-		}
-		$this->fixture->__destruct();
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->pi1, $this->testingFramework);
 	}
 
 
-	//////////////////////
-	// Utility functions
-	//////////////////////
+	/*
+	 * Utility functions
+	 */
 
 	/**
 	 * Creates a fake front end and a pi1 instance in $this->pi1.
@@ -396,11 +392,14 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////
-	// Tests for the utility functions
-	////////////////////////////////////
+	/*
+	 * Tests for the utility functions
+	 */
 
-	public function testCreatePi1CreatesFakeFrontEnd() {
+	/**
+	 * @test
+	 */
+	public function createPi1CreatesFakeFrontEnd() {
 		$GLOBALS['TSFE'] = NULL;
 
 		$this->createPi1();
@@ -410,7 +409,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCreatePi1CreatesPi1Instance() {
+	/**
+	 * @test
+	 */
+	public function createPi1CreatesPi1Instance() {
 		$this->pi1 = NULL;
 
 		$this->createPi1();
@@ -420,7 +422,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddPlaceRelationReturnsUid() {
+	/**
+	 * @test
+	 */
+	public function addPlaceRelationReturnsUid() {
 		$uid = $this->addPlaceRelation(array());
 
 		$this->assertTrue(
@@ -428,34 +433,43 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddPlaceRelationCreatesNewUids() {
-		$this->assertNotEquals(
+	/**
+	 * @test
+	 */
+	public function addPlaceRelationCreatesNewUids() {
+		$this->assertNotSame(
 			$this->addPlaceRelation(array()),
 			$this->addPlaceRelation(array())
 		);
 	}
 
-	public function testAddPlaceRelationIncreasesTheNumberOfPlaces() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addPlaceRelationIncreasesTheNumberOfPlaces() {
+		$this->assertSame(
 			0,
 			$this->fixture->getNumberOfPlaces()
 		);
 
 		$this->addPlaceRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getNumberOfPlaces()
 		);
 
 		$this->addPlaceRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getNumberOfPlaces()
 		);
 	}
 
-	public function testAddPlaceRelationCreatesRelations() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addPlaceRelationCreatesRelations() {
+		$this->assertSame(
 			0,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_place_mm',
@@ -464,7 +478,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addPlaceRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_place_mm',
@@ -473,7 +487,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addPlaceRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_place_mm',
@@ -482,7 +496,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddCategoryRelationReturnsUid() {
+	/**
+	 * @test
+	 */
+	public function addCategoryRelationReturnsUid() {
 		$uid = $this->addCategoryRelation(array());
 
 		$this->assertTrue(
@@ -490,34 +507,43 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddCategoryRelationCreatesNewUids() {
-		$this->assertNotEquals(
+	/**
+	 * @test
+	 */
+	public function addCategoryRelationCreatesNewUids() {
+		$this->assertNotSame(
 			$this->addCategoryRelation(array()),
 			$this->addCategoryRelation(array())
 		);
 	}
 
-	public function testAddCategoryRelationIncreasesTheNumberOfCategories() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addCategoryRelationIncreasesTheNumberOfCategories() {
+		$this->assertSame(
 			0,
 			$this->fixture->getNumberOfCategories()
 		);
 
 		$this->addCategoryRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getNumberOfCategories()
 		);
 
 		$this->addCategoryRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getNumberOfCategories()
 		);
 	}
 
-	public function testAddCategoryRelationCreatesRelations() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addCategoryRelationCreatesRelations() {
+		$this->assertSame(
 			0,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_categories_mm',
@@ -526,7 +552,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addCategoryRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_categories_mm',
@@ -535,7 +561,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addCategoryRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_categories_mm',
@@ -544,9 +570,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddCategoryRelationCanSetSortingInRelationTable() {
+	/**
+	 * @test
+	 */
+	public function addCategoryRelationCanSetSortingInRelationTable() {
 		$this->addCategoryRelation(array(), 42);
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_categories_mm',
@@ -555,40 +584,52 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddTargetGroupRelationReturnsUid() {
+	/**
+	 * @test
+	 */
+	public function addTargetGroupRelationReturnsUid() {
 		$this->assertTrue(
 			$this->addTargetGroupRelation(array()) > 0
 		);
 	}
 
-	public function testAddTargetGroupRelationCreatesNewUids() {
-		$this->assertNotEquals(
+	/**
+	 * @test
+	 */
+	public function addTargetGroupRelationCreatesNewUids() {
+		$this->assertNotSame(
 			$this->addTargetGroupRelation(array()),
 			$this->addTargetGroupRelation(array())
 		);
 	}
 
-	public function testAddTargetGroupRelationIncreasesTheNumberOfTargetGroups() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addTargetGroupRelationIncreasesTheNumberOfTargetGroups() {
+		$this->assertSame(
 			0,
 			$this->fixture->getNumberOfTargetGroups()
 		);
 
 		$this->addTargetGroupRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getNumberOfTargetGroups()
 		);
 
 		$this->addTargetGroupRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getNumberOfTargetGroups()
 		);
 	}
 
-	public function testAddTargetGroupRelationCreatesRelations() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addTargetGroupRelationCreatesRelations() {
+		$this->assertSame(
 			0,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_target_groups_mm',
@@ -598,7 +639,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addTargetGroupRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_target_groups_mm',
@@ -607,7 +648,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addTargetGroupRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_target_groups_mm',
@@ -616,7 +657,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddPaymentMethodRelationReturnsUid() {
+	/**
+	 * @test
+	 */
+	public function addPaymentMethodRelationReturnsUid() {
 		$uid = $this->addPaymentMethodRelation(array());
 
 		$this->assertTrue(
@@ -624,33 +668,42 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddPaymentMethodRelationCreatesNewUids() {
-		$this->assertNotEquals(
+	/**
+	 * @test
+	 */
+	public function addPaymentMethodRelationCreatesNewUids() {
+		$this->assertNotSame(
 			$this->addPaymentMethodRelation(array()),
 			$this->addPaymentMethodRelation(array())
 		);
 	}
 
-	public function testAddPaymentMethodRelationIncreasesTheNumberOfPaymentMethods() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addPaymentMethodRelationIncreasesTheNumberOfPaymentMethods() {
+		$this->assertSame(
 			0,
 			$this->fixture->getNumberOfPaymentMethods()
 		);
 
 		$this->addPaymentMethodRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getNumberOfPaymentMethods()
 		);
 
 		$this->addPaymentMethodRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getNumberOfPaymentMethods()
 		);
 	}
 
-	public function testAddOrganizingPartnerRelationReturnsUid() {
+	/**
+	 * @test
+	 */
+	public function addOrganizingPartnerRelationReturnsUid() {
 		$uid = $this->addOrganizingPartnerRelation(array());
 
 		$this->assertTrue(
@@ -658,15 +711,21 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddOrganizingPartnerRelationCreatesNewUids() {
-		$this->assertNotEquals(
+	/**
+	 * @test
+	 */
+	public function addOrganizingPartnerRelationCreatesNewUids() {
+		$this->assertNotSame(
 			$this->addOrganizingPartnerRelation(array()),
 			$this->addOrganizingPartnerRelation(array())
 		);
 	}
 
-	public function testAddOrganizingPartnerRelationCreatesRelations() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addOrganizingPartnerRelationCreatesRelations() {
+		$this->assertSame(
 			0,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_organizing_partners_mm',
@@ -676,7 +735,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addOrganizingPartnerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_organizing_partners_mm',
@@ -685,7 +744,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addOrganizingPartnerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_organizing_partners_mm',
@@ -694,7 +753,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddOrganizerRelationReturnsUid() {
+	/**
+	 * @test
+	 */
+	public function addOrganizerRelationReturnsUid() {
 		$uid = $this->addOrganizerRelation(array());
 
 		$this->assertTrue(
@@ -702,33 +764,42 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddOrganizerRelationCreatesNewUids() {
-		$this->assertNotEquals(
+	/**
+	 * @test
+	 */
+	public function addOrganizerRelationCreatesNewUids() {
+		$this->assertNotSame(
 			$this->addOrganizerRelation(array()),
 			$this->addOrganizerRelation(array())
 		);
 	}
 
-	public function testAddOrganizerRelationIncreasesTheNumberOfOrganizers() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addOrganizerRelationIncreasesTheNumberOfOrganizers() {
+		$this->assertSame(
 			0,
 			$this->fixture->getNumberOfOrganizers()
 		);
 
 		$this->addOrganizerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getNumberOfOrganizers()
 		);
 
 		$this->addOrganizerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getNumberOfOrganizers()
 		);
 	}
 
-	public function testAddSpeakerRelationReturnsUid() {
+	/**
+	 * @test
+	 */
+	public function addSpeakerRelationReturnsUid() {
 		$uid = $this->addSpeakerRelation(array());
 
 		$this->assertTrue(
@@ -736,15 +807,21 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddSpeakerRelationCreatesNewUids() {
-		$this->assertNotEquals(
+	/**
+	 * @test
+	 */
+	public function addSpeakerRelationCreatesNewUids() {
+		$this->assertNotSame(
 			$this->addSpeakerRelation(array()),
 			$this->addSpeakerRelation(array())
 		);
 	}
 
-	public function testAddSpeakerRelationCreatesRelations() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addSpeakerRelationCreatesRelations() {
+		$this->assertSame(
 			0,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_speakers_mm',
@@ -754,7 +831,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addSpeakerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_speakers_mm',
@@ -763,7 +840,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addSpeakerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_speakers_mm',
@@ -772,7 +849,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddPartnerRelationReturnsUid() {
+	/**
+	 * @test
+	 */
+	public function addPartnerRelationReturnsUid() {
 		$uid = $this->addPartnerRelation(array());
 
 		$this->assertTrue(
@@ -780,15 +860,21 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddPartnerRelationCreatesNewUids() {
-		$this->assertNotEquals(
+	/**
+	 * @test
+	 */
+	public function addPartnerRelationCreatesNewUids() {
+		$this->assertNotSame(
 			$this->addPartnerRelation(array()),
 			$this->addPartnerRelation(array())
 		);
 	}
 
-	public function testAddPartnerRelationCreatesRelations() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addPartnerRelationCreatesRelations() {
+		$this->assertSame(
 			0,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_speakers_mm_partners',
@@ -798,7 +884,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addPartnerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_speakers_mm_partners',
@@ -807,7 +893,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addPartnerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_speakers_mm_partners',
@@ -816,7 +902,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddTutorRelationReturnsUid() {
+	/**
+	 * @test
+	 */
+	public function addTutorRelationReturnsUid() {
 		$uid = $this->addTutorRelation(array());
 
 		$this->assertTrue(
@@ -824,15 +913,21 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddTutorRelationCreatesNewUids() {
-		$this->assertNotEquals(
+	/**
+	 * @test
+	 */
+	public function addTutorRelationCreatesNewUids() {
+		$this->assertNotSame(
 			$this->addTutorRelation(array()),
 			$this->addTutorRelation(array())
 		);
 	}
 
-	public function testAddTutorRelationCreatesRelations() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addTutorRelationCreatesRelations() {
+		$this->assertSame(
 			0,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_speakers_mm_tutors',
@@ -842,7 +937,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addTutorRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_speakers_mm_tutors',
@@ -851,7 +946,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addTutorRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_speakers_mm_tutors',
@@ -860,7 +955,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddLeaderRelationReturnsUid() {
+	/**
+	 * @test
+	 */
+	public function addLeaderRelationReturnsUid() {
 		$uid = $this->addLeaderRelation(array());
 
 		$this->assertTrue(
@@ -868,15 +966,21 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddLeaderRelationCreatesNewUids() {
-		$this->assertNotEquals(
+	/**
+	 * @test
+	 */
+	public function addLeaderRelationCreatesNewUids() {
+		$this->assertNotSame(
 			$this->addLeaderRelation(array()),
 			$this->addLeaderRelation(array())
 		);
 	}
 
-	public function testAddLeaderRelationCreatesRelations() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function addLeaderRelationCreatesRelations() {
+		$this->assertSame(
 			0,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_speakers_mm_leaders',
@@ -886,7 +990,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addLeaderRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_speakers_mm_leaders',
@@ -895,7 +999,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$this->addLeaderRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->testingFramework->countRecords(
 				'tx_seminars_seminars_speakers_mm_leaders',
@@ -904,7 +1008,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddEventTypeRelationReturnsUid() {
+	/**
+	 * @test
+	 */
+	public function addEventTypeRelationReturnsUid() {
 		$uid = $this->addEventTypeRelation(array());
 
 		$this->assertTrue(
@@ -912,28 +1019,34 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testAddEventTypeRelationCreatesNewUids() {
-		$this->assertNotEquals(
+	/**
+	 * @test
+	 */
+	public function addEventTypeRelationCreatesNewUids() {
+		$this->assertNotSame(
 			$this->addLeaderRelation(array()),
 			$this->addLeaderRelation(array())
 		);
 	}
 
 
-	///////////////////////////////////////
-	// Tests for some basic functionality
-	///////////////////////////////////////
+	/*
+	 * Tests for some basic functionality
+	 */
 
-	public function testIsOk() {
+	/**
+	 * @test
+	 */
+	public function isOk() {
 		$this->assertTrue(
 			$this->fixture->isOk()
 		);
 	}
 
 
-	//////////////////////////////
-	// Tests concerning getTitle
-	//////////////////////////////
+	/*
+	 * Tests concerning getTitle
+	 */
 
 	/**
 	 * @test
@@ -992,9 +1105,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////////////////////////
-	// Tests regarding the ability to register for an event
-	/////////////////////////////////////////////////////////
+	/*
+	 * Tests regarding the ability to register for an event
+	 */
 
 	/**
 	 * @test
@@ -1216,9 +1329,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////////////
-	// Tests concerning canSomebodyRegisterMessage
-	////////////////////////////////////////////////
+	/*
+	 * Tests concerning canSomebodyRegisterMessage
+	 */
 
 
 	/**
@@ -1227,7 +1340,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function canSomebodyRegisterMessageForEventWithFutureDateReturnsEmptyString() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1240,7 +1353,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
 		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_seminarRegistrationIsClosed'),
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1256,7 +1369,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
 		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_seminarRegistrationIsClosed'),
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1269,7 +1382,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_seminarRegistrationIsClosed'),
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1285,7 +1398,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_seminarRegistrationIsClosed'),
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1295,7 +1408,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function canSomebodyRegisterMessageForEventWithoutDateReturnsNoDateMessage() {
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_noDate'),
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1310,7 +1423,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setBeginDate(0);
 		$this->fixture->setRegistrationDeadline(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1323,7 +1436,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 		$this->fixture->setUnlimitedVacancies();
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1335,7 +1448,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function canSomebodyRegisterMessageForCancelledEventReturnsSeminarCancelledMessage() {
 		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CANCELED);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_seminarCancelled'),
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1347,7 +1460,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function canSomebodyRegisterMessageForEventWithoutNeedeRegistrationReturnsNoRegistrationNecessaryMessage() {
 		$this->fixture->setNeedsRegistration(FALSE);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_noRegistrationNecessary'),
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1362,7 +1475,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setAttendancesMax(10);
 		$this->fixture->setNumberOfAttendances(10);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_noVacancies'),
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1378,7 +1491,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setNumberOfAttendances(10);
 		$this->fixture->setRegistrationQueue(TRUE);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1394,7 +1507,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$GLOBALS['SIM_EXEC_TIME'] + 20
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			sprintf(
 				$this->fixture->translate('message_registrationOpensOn'),
 				$this->fixture->getRegistrationBegin()
@@ -1413,7 +1526,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$GLOBALS['SIM_EXEC_TIME'] - 20
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->canSomebodyRegisterMessage()
 		);
@@ -1427,92 +1540,125 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setRegistrationBeginDate(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->canSomebodyRegisterMessage()
 		);
 	}
 
 
-	/////////////////////////////////////////////
-	// Tests regarding the language of an event
-	/////////////////////////////////////////////
+	/*
+	 * Tests regarding the language of an event
+	 */
 
-	public function testGetLanguageFromIsoCodeWithValidLanguage() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getLanguageFromIsoCodeWithValidLanguage() {
+		$this->assertSame(
 			'Deutsch',
 			$this->fixture->getLanguageNameFromIsoCode('de')
 		);
 	}
 
-	public function testGetLanguageFromIsoCodeWithInvalidLanguage() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getLanguageFromIsoCodeWithInvalidLanguage() {
+		$this->assertSame(
 			'',
 			$this->fixture->getLanguageNameFromIsoCode('xy')
 		);
 	}
 
-	public function testGetLanguageFromIsoCodeWithVeryInvalidLanguage() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getLanguageFromIsoCodeWithVeryInvalidLanguage() {
+		$this->assertSame(
 			'',
 			$this->fixture->getLanguageNameFromIsoCode('foobar')
 		);
 	}
 
-	public function testGetLanguageFromIsoCodeWithEmptyLanguage() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getLanguageFromIsoCodeWithEmptyLanguage() {
+		$this->assertSame(
 			'',
 			$this->fixture->getLanguageNameFromIsoCode('')
 		);
 	}
 
-	public function testHasLanguageWithLanguageReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasLanguageWithLanguageReturnsTrue() {
 		$this->fixture->setLanguage('de');
 		$this->assertTrue(
 			$this->fixture->hasLanguage()
 		);
 	}
 
-	public function testHasLanguageWithNoLanguageReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasLanguageWithNoLanguageReturnsFalse() {
 		$this->fixture->setLanguage('');
 		$this->assertFalse(
 			$this->fixture->hasLanguage()
 		);
 	}
 
-	public function testGetLanguageNameWithDefaultLanguageOnSingleEvent() {
+	/**
+	 * @test
+	 */
+	public function getLanguageNameWithDefaultLanguageOnSingleEvent() {
 		$this->fixture->setLanguage('de');
-		$this->assertEquals(
+		$this->assertSame(
 			'Deutsch',
 			$this->fixture->getLanguageName()
 		);
 	}
 
-	public function testGetLanguageNameWithValidLanguageOnSingleEvent() {
+	/**
+	 * @test
+	 */
+	public function getLanguageNameWithValidLanguageOnSingleEvent() {
 		$this->fixture->setLanguage('en');
-		$this->assertEquals(
+		$this->assertSame(
 			'English',
 			$this->fixture->getLanguageName()
 		);
 	}
 
-	public function testGetLanguageNameWithInvalidLanguageOnSingleEvent() {
+	/**
+	 * @test
+	 */
+	public function getLanguageNameWithInvalidLanguageOnSingleEvent() {
 		$this->fixture->setLanguage('xy');
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getLanguageName()
 		);
 	}
 
-	public function testGetLanguageNameWithNoLanguageOnSingleEvent() {
+	/**
+	 * @test
+	 */
+	public function getLanguageNameWithNoLanguageOnSingleEvent() {
 		$this->fixture->setLanguage('');
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getLanguageName()
 		);
 	}
 
-	public function testGetLanguageNameOnDateRecord() {
+	/**
+	 * @test
+	 */
+	public function getLanguageNameOnDateRecord() {
 		// This was an issue with bug #1518 and #1517.
 		// The method getLanguage() needs to return the language from the date
 		// record instead of the topic record.
@@ -1532,15 +1678,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$seminar = new tx_seminars_seminar($dateRecordUid);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Italiano',
 			$seminar->getLanguageName()
 		);
-
-		$seminar->__destruct();
 	}
 
-	public function testGetLanguageOnSingleRecordThatWasADateRecord() {
+	/**
+	 * @test
+	 */
+	public function getLanguageOnSingleRecordThatWasADateRecord() {
 		// This test comes from bug 1518 and covers the following situation:
 		// We have an event record that has the topic field set as it was a
 		// date record. But then it was switched to be a single event record.
@@ -1563,69 +1710,91 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$seminar = new tx_seminars_seminar($singleRecordUid);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Italiano',
 			$seminar->getLanguageName()
 		);
-
-		$seminar->__destruct();
 	}
 
 
-	////////////////////////////////////////////////
-	// Tests regarding the date fields of an event
-	////////////////////////////////////////////////
+	/*
+	 * Tests regarding the date fields of an event
+	 */
 
-	public function testGetBeginDateAsTimestampIsInitiallyZero() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getBeginDateAsTimestampIsInitiallyZero() {
+		$this->assertSame(
 			0,
 			$this->fixture->getBeginDateAsTimestamp()
 		);
 	}
 
-	public function testGetBeginDateAsTimestamp() {
+	/**
+	 * @test
+	 */
+	public function getBeginDateAsTimestamp() {
 		$this->fixture->setBeginDate($this->beginDate);
-		$this->assertEquals(
+		$this->assertSame(
 			$this->beginDate,
 			$this->fixture->getBeginDateAsTimestamp()
 		);
 	}
 
-	public function testHasBeginDateIsInitiallyFalse() {
+	/**
+	 * @test
+	 */
+	public function hasBeginDateIsInitiallyFalse() {
 		$this->assertFalse(
 			$this->fixture->hasBeginDate()
 		);
 	}
 
-	public function testHasBeginDate() {
+	/**
+	 * @test
+	 */
+	public function hasBeginDate() {
 		$this->fixture->setBeginDate($this->beginDate);
 		$this->assertTrue(
 			$this->fixture->hasBeginDate()
 		);
 	}
 
-	public function testGetEndDateAsTimestampIsInitiallyZero() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getEndDateAsTimestampIsInitiallyZero() {
+		$this->assertSame(
 			0,
 			$this->fixture->getEndDateAsTimestamp()
 		);
 	}
 
-	public function testGetEndDateAsTimestamp () {
+	/**
+	 * @test
+	 */
+	public function getEndDateAsTimestamp () {
 		$this->fixture->setEndDate($this->beginDate);
-		$this->assertEquals(
+		$this->assertSame(
 			$this->beginDate,
 			$this->fixture->getEndDateAsTimestamp()
 		);
 	}
 
-	public function testHasEndDateIsInitiallyFalse() {
+	/**
+	 * @test
+	 */
+	public function hasEndDateIsInitiallyFalse() {
 		$this->assertFalse(
 			$this->fixture->hasEndDate()
 		);
 	}
 
-	public function testHasEndDate () {
+	/**
+	 * @test
+	 */
+	public function hasEndDate () {
 		$this->fixture->setEndDate($this->beginDate);
 		$this->assertTrue(
 			$this->fixture->hasEndDate()
@@ -1633,9 +1802,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////////
-	// Tests regarding the registration.
-	//////////////////////////////////////
+	/*
+	 * Tests regarding the registration.
+	 */
 
 	/**
 	 * @test
@@ -1660,9 +1829,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////
-	// Tests concerning hasUnlimitedVacancies
-	///////////////////////////////////////////
+	/*
+	 * Tests concerning hasUnlimitedVacancies
+	 */
 
 	/**
 	 * @test
@@ -1713,9 +1882,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////
-	// Tests concerning isFull
-	////////////////////////////
+	/*
+	 * Tests concerning isFull
+	 */
 
 	/**
 	 * @test
@@ -1794,57 +1963,75 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////////////////////
-	// Tests regarding the unregistration and the queue
-	/////////////////////////////////////////////////////
+	/*
+	 * Tests regarding the unregistration and the queue
+	 */
 
-	public function testGetUnregistrationDeadlineAsTimestampForNonZero() {
+	/**
+	 * @test
+	 */
+	public function getUnregistrationDeadlineAsTimestampForNonZero() {
 		$this->fixture->setUnregistrationDeadline($this->unregistrationDeadline);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->unregistrationDeadline,
 			$this->fixture->getUnregistrationDeadlineAsTimestamp()
 		);
 	}
 
-	public function testGetUnregistrationDeadlineAsTimestampForZero() {
+	/**
+	 * @test
+	 */
+	public function getUnregistrationDeadlineAsTimestampForZero() {
 		$this->fixture->setUnregistrationDeadline(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			0,
 			$this->fixture->getUnregistrationDeadlineAsTimestamp()
 		);
 	}
 
-	public function testGetUnregistrationDeadlineWithoutTimeForNonZero() {
+	/**
+	 * @test
+	 */
+	public function getUnregistrationDeadlineWithoutTimeForNonZero() {
 		$this->fixture->setUnregistrationDeadline(1893488400);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'01.01.2030',
 			$this->fixture->getUnregistrationDeadline()
 		);
 	}
 
-	public function testGetNonUnregistrationDeadlineWithTimeForZero() {
+	/**
+	 * @test
+	 */
+	public function getNonUnregistrationDeadlineWithTimeForZero() {
 		$this->fixture->setUnregistrationDeadline(1893488400);
 		$this->fixture->setShowTimeOfUnregistrationDeadline(1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'01.01.2030 10:00',
 			$this->fixture->getUnregistrationDeadline()
 		);
 	}
 
-	public function testGetUnregistrationDeadlineIsEmptyForZero() {
+	/**
+	 * @test
+	 */
+	public function getUnregistrationDeadlineIsEmptyForZero() {
 		$this->fixture->setUnregistrationDeadline(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getUnregistrationDeadline()
 		);
 	}
 
-	public function testHasUnregistrationDeadlineIsTrueForNonZeroDeadline() {
+	/**
+	 * @test
+	 */
+	public function hasUnregistrationDeadlineIsTrueForNonZeroDeadline() {
 		$this->fixture->setUnregistrationDeadline($this->unregistrationDeadline);
 
 		$this->assertTrue(
@@ -1852,7 +2039,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasUnregistrationDeadlineIsFalseForZeroDeadline() {
+	/**
+	 * @test
+	 */
+	public function hasUnregistrationDeadlineIsFalseForZeroDeadline() {
 		$this->fixture->setUnregistrationDeadline(0);
 
 		$this->assertFalse(
@@ -1861,9 +2051,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////////////
-	// Tests concerning isUnregistrationPossible()
-	////////////////////////////////////////////////
+	/*
+	 * Tests concerning isUnregistrationPossible()
+	 */
 
 	/**
 	 * @test
@@ -2164,9 +2354,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////////////////////////////////////
-	// Tests concerning getUnregistrationDeadlineFromModelAndConfiguration
-	////////////////////////////////////////////////////////////////////////
+	/*
+	 * Tests concerning getUnregistrationDeadlineFromModelAndConfiguration
+	 */
 
 	/**
 	 * @test
@@ -2176,7 +2366,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setUnregistrationDeadline(0);
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			0,
 			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
 		);
@@ -2190,7 +2380,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setUnregistrationDeadline($this->now);
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->now,
 			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
 		);
@@ -2204,7 +2394,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setUnregistrationDeadline(0);
 		$this->fixture->setGlobalUnregistrationDeadline($this->now);
 
-		$this->assertEquals(
+		$this->assertSame(
 			0,
 			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
 		);
@@ -2218,7 +2408,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setUnregistrationDeadline($this->now);
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->now,
 			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
 		);
@@ -2232,7 +2422,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setUnregistrationDeadline(0);
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			0,
 			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
 		);
@@ -2246,7 +2436,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setUnregistrationDeadline(0);
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->now + tx_oelib_Time::SECONDS_PER_WEEK - tx_oelib_Time::SECONDS_PER_DAY,
 			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
 		);
@@ -2260,16 +2450,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setUnregistrationDeadline($this->now);
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->now,
 			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
 		);
 	}
 
 
-	//////////////////////////////////////////
-	// Tests concerning hasRegistrationQueue
-	//////////////////////////////////////////
+	/*
+	 * Tests concerning hasRegistrationQueue
+	 */
 
 	/**
 	 * @test
@@ -2294,26 +2484,35 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////////
-	// Tests concerning getAttendancesOnRegistrationQueue
-	///////////////////////////////////////////////////////
+	/*
+	 * Tests concerning getAttendancesOnRegistrationQueue
+	 */
 
-	public function testGetAttendancesOnRegistrationQueueIsInitiallyZero() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getAttendancesOnRegistrationQueueIsInitiallyZero() {
+		$this->assertSame(
 			0,
 			$this->fixture->getAttendancesOnRegistrationQueue()
 		);
 	}
 
-	public function testGetAttendancesOnRegistrationQueueForNonEmptyRegistrationQueue() {
+	/**
+	 * @test
+	 */
+	public function getAttendancesOnRegistrationQueueForNonEmptyRegistrationQueue() {
 		$this->fixture->setNumberOfAttendancesOnQueue(4);
-		$this->assertEquals(
+		$this->assertSame(
 			4,
 			$this->fixture->getAttendancesOnRegistrationQueue()
 		);
 	}
 
-	public function testHasAttendancesOnRegistrationQueueIsFalseForNoRegistrations() {
+	/**
+	 * @test
+	 */
+	public function hasAttendancesOnRegistrationQueueIsFalseForNoRegistrations() {
 		$this->fixture->setAttendancesMax(1);
 		$this->fixture->setRegistrationQueue(FALSE);
 		$this->fixture->setNumberOfAttendances(0);
@@ -2324,7 +2523,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasAttendancesOnRegistrationQueueIsFalseForRegularRegistrationsOnly() {
+	/**
+	 * @test
+	 */
+	public function hasAttendancesOnRegistrationQueueIsFalseForRegularRegistrationsOnly() {
 		$this->fixture->setAttendancesMax(1);
 		$this->fixture->setRegistrationQueue(FALSE);
 		$this->fixture->setNumberOfAttendances(1);
@@ -2335,7 +2537,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasAttendancesOnRegistrationQueueIsTrueForQueueRegistrations() {
+	/**
+	 * @test
+	 */
+	public function hasAttendancesOnRegistrationQueueIsTrueForQueueRegistrations() {
 		$this->fixture->setAttendancesMax(1);
 		$this->fixture->setRegistrationQueue(TRUE);
 		$this->fixture->setNumberOfAttendances(1);
@@ -2346,7 +2551,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsUnregistrationPossibleIsTrueWithNonEmptyQueueByDefault() {
+	/**
+	 * @test
+	 */
+	public function isUnregistrationPossibleIsTrueWithNonEmptyQueueByDefault() {
 		$this->fixture->setAttendancesMax(1);
 		$this->fixture->setRegistrationQueue(TRUE);
 		$this->fixture->setNumberOfAttendances(1);
@@ -2363,7 +2571,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsUnregistrationPossibleIsFalseWithEmptyQueueByDefault() {
+	/**
+	 * @test
+	 */
+	public function isUnregistrationPossibleIsFalseWithEmptyQueueByDefault() {
 		$this->fixture->setAttendancesMax(1);
 		$this->fixture->setRegistrationQueue(TRUE);
 		$this->fixture->setNumberOfAttendances(1);
@@ -2380,7 +2591,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsUnregistrationPossibleIsTrueWithEmptyQueueIfAllowedByConfiguration() {
+	/**
+	 * @test
+	 */
+	public function isUnregistrationPossibleIsTrueWithEmptyQueueIfAllowedByConfiguration() {
 		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(TRUE);
 
 		$this->fixture->setAttendancesMax(1);
@@ -2400,57 +2614,72 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////////////
-	// Tests regarding the country field of the place records
-	///////////////////////////////////////////////////////////
+	/*
+	 * Tests regarding the country field of the place records
+	 */
 
-	public function testGetPlacesWithCountry() {
+	/**
+	 * @test
+	 */
+	public function getPlacesWithCountry() {
 		$this->addPlaceRelation(
 			array(
 				'country' => 'ch'
 			)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			array('ch'),
 			$this->fixture->getPlacesWithCountry()
 		);
 	}
 
-	public function testGetPlacesWithCountryWithNoCountry() {
+	/**
+	 * @test
+	 */
+	public function getPlacesWithCountryWithNoCountry() {
 		$this->addPlaceRelation(
 			array(
 				'country' => ''
 			)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			array(),
 			$this->fixture->getPlacesWithCountry()
 		);
 	}
 
-	public function testGetPlacesWithCountryWithInvalidCountry() {
+	/**
+	 * @test
+	 */
+	public function getPlacesWithCountryWithInvalidCountry() {
 		$this->addPlaceRelation(
 			array(
 				'country' => 'xy'
 			)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			array('xy'),
 			$this->fixture->getPlacesWithCountry()
 		);
 	}
 
-	public function testGetPlacesWithCountryWithNoPlace() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getPlacesWithCountryWithNoPlace() {
+		$this->assertSame(
 			array(),
 			$this->fixture->getPlacesWithCountry()
 		);
 	}
 
-	public function testGetPlacesWithCountryWithDeletedPlace() {
+	/**
+	 * @test
+	 */
+	public function getPlacesWithCountryWithDeletedPlace() {
 		$this->addPlaceRelation(
 			array(
 				'country' => 'at',
@@ -2458,13 +2687,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			array(),
 			$this->fixture->getPlacesWithCountry()
 		);
 	}
 
-	public function testGetPlacesWithCountryWithMultipleCountries() {
+	/**
+	 * @test
+	 */
+	public function getPlacesWithCountryWithMultipleCountries() {
 		$this->addPlaceRelation(
 			array(
 				'country' => 'ch'
@@ -2476,13 +2708,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			array('ch', 'de'),
 			$this->fixture->getPlacesWithCountry()
 		);
 	}
 
-	public function testHasCountry() {
+	/**
+	 * @test
+	 */
+	public function hasCountry() {
 		$this->addPlaceRelation(
 			array(
 				'country' => 'ch'
@@ -2494,7 +2729,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasCountryWithNoCountry() {
+	/**
+	 * @test
+	 */
+	public function hasCountryWithNoCountry() {
 		$this->addPlaceRelation(
 			array(
 				'country' => ''
@@ -2506,7 +2744,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasCountryWithInvalicCountry() {
+	/**
+	 * @test
+	 */
+	public function hasCountryWithInvalicCountry() {
 		$this->addPlaceRelation(
 			array(
 				'country' => 'xy'
@@ -2520,13 +2761,19 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasCountryWithNoPlace() {
+	/**
+	 * @test
+	 */
+	public function hasCountryWithNoPlace() {
 		$this->assertFalse(
 			$this->fixture->hasCountry()
 		);
 	}
 
-	public function testHasCountryWithMultipleCountries() {
+	/**
+	 * @test
+	 */
+	public function hasCountryWithMultipleCountries() {
 		$this->addPlaceRelation(
 			array(
 				'country' => 'ch'
@@ -2543,46 +2790,58 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetCountry() {
+	/**
+	 * @test
+	 */
+	public function getCountry() {
 		$this->addPlaceRelation(
 			array(
 				'country' => 'ch'
 			)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Schweiz',
 			$this->fixture->getCountry()
 		);
 	}
 
-	public function testGetCountryWithNoCountry() {
+	/**
+	 * @test
+	 */
+	public function getCountryWithNoCountry() {
 		$this->addPlaceRelation(
 			array(
 				'country' => ''
 			)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getCountry()
 		);
 	}
 
-	public function testGetCountryWithInvalidCountry() {
+	/**
+	 * @test
+	 */
+	public function getCountryWithInvalidCountry() {
 		$this->addPlaceRelation(
 			array(
 				'country' => 'xy'
 			)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getCountry()
 		);
 	}
 
-	public function testGetCountryWithMultipleCountries() {
+	/**
+	 * @test
+	 */
+	public function getCountryWithMultipleCountries() {
 		$this->addPlaceRelation(
 			array(
 				'country' => 'ch'
@@ -2594,57 +2853,72 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Schweiz, Deutschland',
 			$this->fixture->getCountry()
 		);
 	}
 
-	public function testGetCountryWithNoPlace() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getCountryWithNoPlace() {
+		$this->assertSame(
 			'',
 			$this->fixture->getCountry()
 		);
 	}
 
-	public function testGetCountryNameFromIsoCode() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getCountryNameFromIsoCode() {
+		$this->assertSame(
 			'Schweiz',
 			$this->fixture->getCountryNameFromIsoCode('ch')
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getCountryNameFromIsoCode('xy')
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getCountryNameFromIsoCode('')
 		);
 	}
 
-	public function testGetRelatedMmRecordUidsWithNoPlace() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getRelatedMmRecordUidsWithNoPlace() {
+		$this->assertSame(
 			array(),
 			$this->fixture->getRelatedMmRecordUids('tx_seminars_seminars_place_mm')
 		);
 	}
 
-	public function testGetRelatedMmRecordUidsWithOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getRelatedMmRecordUidsWithOnePlace() {
 		$uid = $this->addPlaceRelation(
 			array(
 				'country' => 'ch'
 			)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			array($uid),
 			$this->fixture->getRelatedMmRecordUids('tx_seminars_seminars_place_mm')
 		);
 	}
 
-	public function testGetRelatedMmRecordUidsWithTwoPlaces() {
+	/**
+	 * @test
+	 */
+	public function getRelatedMmRecordUidsWithTwoPlaces() {
 		$uid1 = $this->addPlaceRelation(
 			array(
 				'country' => 'ch'
@@ -2660,24 +2934,30 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			'tx_seminars_seminars_place_mm'
 		);
 		sort($result);
-		$this->assertEquals(
+		$this->assertSame(
 			array($uid1, $uid2),
 			$result
 		);
 	}
 
 
-	//////////////////////////////////////
-	// Tests regarding the target groups
-	//////////////////////////////////////
+	/*
+	 * Tests regarding the target groups
+	 */
 
-	public function testHasTargetGroupsIsInitiallyFalse() {
+	/**
+	 * @test
+	 */
+	public function hasTargetGroupsIsInitiallyFalse() {
 		$this->assertFalse(
 			$this->fixture->hasTargetGroups()
 		);
 	}
 
-	public function testHasTargetGroups() {
+	/**
+	 * @test
+	 */
+	public function hasTargetGroups() {
 		$this->addTargetGroupRelation(array());
 
 		$this->assertTrue(
@@ -2685,72 +2965,93 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetTargetGroupNamesWithNoTargetGroup() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getTargetGroupNamesWithNoTargetGroup() {
+		$this->assertSame(
 			'',
 			$this->fixture->getTargetGroupNames()
 		);
 	}
 
-	public function testGetTargetGroupNamesWithSingleTargetGroup() {
+	/**
+	 * @test
+	 */
+	public function getTargetGroupNamesWithSingleTargetGroup() {
 		$title = 'TEST target group 1';
 		$this->addTargetGroupRelation(array('title' => $title));
 
-		$this->assertEquals(
+		$this->assertSame(
 			$title,
 			$this->fixture->getTargetGroupNames()
 		);
 	}
 
-	public function testGetTargetGroupNamesWithMultipleTargetGroups() {
+	/**
+	 * @test
+	 */
+	public function getTargetGroupNamesWithMultipleTargetGroups() {
 		$titleTargetGroup1 = 'TEST target group 1';
 		$this->addTargetGroupRelation(array('title' => $titleTargetGroup1));
 
 		$titleTargetGroup2 = 'TEST target group 2';
 		$this->addTargetGroupRelation(array('title' => $titleTargetGroup2));
 
-		$this->assertEquals(
+		$this->assertSame(
 			$titleTargetGroup1.', '.$titleTargetGroup2,
 			$this->fixture->getTargetGroupNames()
 		);
 	}
 
-	public function testGetTargetGroupsAsArrayWithNoTargetGroups() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getTargetGroupsAsArrayWithNoTargetGroups() {
+		$this->assertSame(
 			array(),
 			$this->fixture->getTargetGroupsAsArray()
 		);
 	}
 
-	public function testGetTargetGroupsAsArrayWithSingleTargetGroup() {
+	/**
+	 * @test
+	 */
+	public function getTargetGroupsAsArrayWithSingleTargetGroup() {
 		$title = 'TEST target group 1';
 		$this->addTargetGroupRelation(array('title' => $title));
 
-		$this->assertEquals(
+		$this->assertSame(
 			array($title),
 			$this->fixture->getTargetGroupsAsArray()
 		);
 	}
 
-	public function testGetTargetGroupsAsArrayWithMultipleTargetGroups() {
+	/**
+	 * @test
+	 */
+	public function getTargetGroupsAsArrayWithMultipleTargetGroups() {
 		$titleTargetGroup1 = 'TEST target group 1';
 		$this->addTargetGroupRelation(array('title' => $titleTargetGroup1));
 
 		$titleTargetGroup2 = 'TEST target group 2';
 		$this->addTargetGroupRelation(array('title' => $titleTargetGroup2));
 
-		$this->assertEquals(
+		$this->assertSame(
 			array($titleTargetGroup1, $titleTargetGroup2),
 			$this->fixture->getTargetGroupsAsArray()
 		);
 	}
 
 
-	////////////////////////////////////////
-	// Tests regarding the payment methods
-	////////////////////////////////////////
+	/*
+	 * Tests regarding the payment methods
+	 */
 
-	public function testHasPaymentMethodsReturnsInitiallyFalse() {
+	/**
+	 * @test
+	 */
+	public function hasPaymentMethodsReturnsInitiallyFalse() {
 		$this->assertFalse(
 			$this->fixture->hasPaymentMethods()
 		);
@@ -2767,14 +3068,20 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPaymentMethodsPlainWithNoPaymentMethodReturnsAnEmptyString() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsPlainWithNoPaymentMethodReturnsAnEmptyString() {
+		$this->assertSame(
 			'',
 			$this->fixture->getPaymentMethodsPlain()
 		);
 	}
 
-	public function testGetPaymentMethodsPlainWithSinglePaymentMethodReturnsASinglePaymentMethod() {
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsPlainWithSinglePaymentMethodReturnsASinglePaymentMethod() {
 		$title = 'Test title';
 		$this->addPaymentMethodRelation(array('title' => $title));
 
@@ -2784,7 +3091,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPaymentMethodsPlainWithMultiplePaymentMethodsReturnsMultiplePaymentMethods() {
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsPlainWithMultiplePaymentMethodsReturnsMultiplePaymentMethods() {
 		$firstTitle = 'Payment Method 1';
 		$secondTitle = 'Payment Method 2';
 		$this->addPaymentMethodRelation(array('title' => $firstTitle));
@@ -2804,7 +3114,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getPaymentMethodsWithoutPaymentMethodsReturnsAnEmptyArray() {
-		$this->assertEquals(
+		$this->assertSame(
 			array(),
 			$this->fixture->getPaymentMethods()
 		);
@@ -2816,7 +3126,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function getPaymentMethodsWithOnePaymentMethodReturnsOnePaymentMethod() {
 		$this->addPaymentMethodRelation(array('title' => 'Payment Method'));
 
-		$this->assertEquals(
+		$this->assertSame(
 			array('Payment Method'),
 			$this->fixture->getPaymentMethods()
 		);
@@ -2829,7 +3139,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->addPaymentMethodRelation(array('title' => 'Payment Method 1'));
 		$this->addPaymentMethodRelation(array('title' => 'Payment Method 2'));
 
-		$this->assertEquals(
+		$this->assertSame(
 			array('Payment Method 1', 'Payment Method 2'),
 			$this->fixture->getPaymentMethods()
 		);
@@ -2842,25 +3152,31 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->addPaymentMethodRelation(array('title' => 'Payment Method 2'));
 		$this->addPaymentMethodRelation(array('title' => 'Payment Method 1'));
 
-		$this->assertEquals(
+		$this->assertSame(
 			array('Payment Method 2', 'Payment Method 1'),
 			$this->fixture->getPaymentMethods()
 		);
 	}
 
 
-	/////////////////////////////////////////////////
-	// Tests concerning getPaymentMethodsPlainShort
-	/////////////////////////////////////////////////
+	/*
+	 * Tests concerning getPaymentMethodsPlainShort
+	 */
 
-	public function testGetPaymentMethodsPlainShortWithNoPaymentMethodReturnsAnEmptyString() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsPlainShortWithNoPaymentMethodReturnsAnEmptyString() {
+		$this->assertSame(
 			'',
 			$this->fixture->getPaymentMethodsPlainShort()
 		);
 	}
 
-	public function testGetPaymentMethodsPlainShortWithSinglePaymentMethodReturnsASinglePaymentMethod() {
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsPlainShortWithSinglePaymentMethodReturnsASinglePaymentMethod() {
 		$title = 'Test title';
 		$this->addPaymentMethodRelation(array('title' => $title));
 
@@ -2870,7 +3186,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPaymentMethodsPlainShortWithMultiplePaymentMethodsReturnsMultiplePaymentMethods() {
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsPlainShortWithMultiplePaymentMethodsReturnsMultiplePaymentMethods() {
 		$this->addPaymentMethodRelation(array('title' => 'Payment Method 1'));
 		$this->addPaymentMethodRelation(array('title' => 'Payment Method 2'));
 
@@ -2884,7 +3203,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPaymentMethodsPlainShortSeparatesMultiplePaymentMethodsWithLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsPlainShortSeparatesMultiplePaymentMethodsWithLineFeeds() {
 		$this->addPaymentMethodRelation(array('title' => 'Payment Method 1'));
 		$this->addPaymentMethodRelation(array('title' => 'Payment Method 2'));
 
@@ -2894,7 +3216,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetPaymentMethodsPlainShortDoesNotSeparateMultiplePaymentMethodsWithCarriageReturnsAndLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function getPaymentMethodsPlainShortDoesNotSeparateMultiplePaymentMethodsWithCarriageReturnsAndLineFeeds() {
 		$this->addPaymentMethodRelation(array('title' => 'Payment Method 1'));
 		$this->addPaymentMethodRelation(array('title' => 'Payment Method 2'));
 
@@ -2905,18 +3230,24 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////////////////
-	// Tests concerning getSinglePaymentMethodPlain
-	/////////////////////////////////////////////////
+	/*
+	 * Tests concerning getSinglePaymentMethodPlain
+	 */
 
-	public function testGetSinglePaymentMethodPlainWithInvalidPaymentMethodUidReturnsAnEmptyString() {
-		$this->assertEquals(
+	/**
+	 * @ŧest
+	 */
+	public function getSinglePaymentMethodPlainWithInvalidPaymentMethodUidReturnsAnEmptyString() {
+		$this->assertSame(
 			'',
 			$this->fixture->getSinglePaymentMethodPlain(0)
 		);
 	}
 
-	public function testGetSinglePaymentMethodPlainWithValidPaymentMethodUidReturnsTheTitleOfThePaymentMethod() {
+	/**
+	 * @ŧest
+	 */
+	public function getSinglePaymentMethodPlainWithValidPaymentMethodUidReturnsTheTitleOfThePaymentMethod() {
 		$title = 'Test payment method';
 		$uid = $this->addPaymentMethodRelation(array('title' => $title));
 
@@ -2926,23 +3257,32 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSinglePaymentMethodPlainWithNonExistentPaymentMethodUidReturnsAnEmptyString() {
+	/**
+	 * @ŧest
+	 */
+	public function getSinglePaymentMethodPlainWithNonExistentPaymentMethodUidReturnsAnEmptyString() {
 		$uid = $this->addPaymentMethodRelation(array());
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getSinglePaymentMethodPlain($uid + 1)
 		);
 	}
 
-	public function testGetSinglePaymentMethodShortWithInvalidPaymentMethodUidReturnsAnEmptyString() {
-		$this->assertEquals(
+	/**
+	 * @ŧest
+	 */
+	public function getSinglePaymentMethodShortWithInvalidPaymentMethodUidReturnsAnEmptyString() {
+		$this->assertSame(
 			'',
 			$this->fixture->getSinglePaymentMethodShort(0)
 		);
 	}
 
-	public function testGetSinglePaymentMethodShortWithValidPaymentMethodUidReturnsTheTitleOfThePaymentMethod() {
+	/**
+	 * @ŧest
+	 */
+	public function getSinglePaymentMethodShortWithValidPaymentMethodUidReturnsTheTitleOfThePaymentMethod() {
 		$title = 'Test payment method';
 		$uid = $this->addPaymentMethodRelation(array('title' => $title));
 
@@ -2952,21 +3292,27 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSinglePaymentMethodShortWithNonExistentPaymentMethodUidReturnsAnEmptyString() {
+	/**
+	 * @ŧest
+	 */
+	public function getSinglePaymentMethodShortWithNonExistentPaymentMethodUidReturnsAnEmptyString() {
 		$uid = $this->addPaymentMethodRelation(array());
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getSinglePaymentMethodShort($uid + 1)
 		);
 	}
 
 
-	///////////////////////////////////
-	// Tests regarding the event type
-	///////////////////////////////////
+	/*
+	 * Tests regarding the event type
+	 */
 
-	public function testSetEventTypeThrowsExceptionForNegativeArgument() {
+	/**
+	 * @test
+	 */
+	public function setEventTypeThrowsExceptionForNegativeArgument() {
 		$this->setExpectedException(
 			'InvalidArgumentException',
 			'$eventType must be >= 0.'
@@ -2975,21 +3321,33 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setEventType(-1);
 	}
 
-	public function testSetEventTypeIsAllowedWithZero() {
+	/**
+	 * @test
+	 */
+	public function setEventTypeIsAllowedWithZero() {
 		$this->fixture->setEventType(0);
 	}
 
-	public function testSetEventTypeIsAllowedWithPositiveInteger() {
+	/**
+	 * @test
+	 */
+	public function setEventTypeIsAllowedWithPositiveInteger() {
 		$this->fixture->setEventType(1);
 	}
 
-	public function testHasEventTypeInitiallyReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasEventTypeInitiallyReturnsFalse() {
 		$this->assertFalse(
 			$this->fixture->hasEventType()
 		);
 	}
 
-	public function testHasEventTypeReturnsTrueIfSingleEventHasNonZeroEventType() {
+	/**
+	 * @test
+	 */
+	public function hasEventTypeReturnsTrueIfSingleEventHasNonZeroEventType() {
 		$this->fixture->setEventType(
 			$this->testingFramework->createRecord('tx_seminars_event_types')
 		);
@@ -2999,27 +3357,36 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetEventTypeReturnsEmptyStringForSingleEventWithoutType() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getEventTypeReturnsEmptyStringForSingleEventWithoutType() {
+		$this->assertSame(
 			'',
 			$this->fixture->getEventType()
 		);
 	}
 
-	public function testGetEventTypeReturnsTitleOfRelatedEventTypeForSingleEvent() {
+	/**
+	 * @test
+	 */
+	public function getEventTypeReturnsTitleOfRelatedEventTypeForSingleEvent() {
 		$this->fixture->setEventType(
 			$this->testingFramework->createRecord(
 				'tx_seminars_event_types', array('title' => 'foo type')
 			)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'foo type',
 			$this->fixture->getEventType()
 		);
 	}
 
-	public function testGetEventTypeForDateRecordReturnsTitleOfEventTypeFromTopicRecord() {
+	/**
+	 * @test
+	 */
+	public function getEventTypeForDateRecordReturnsTitleOfEventTypeFromTopicRecord() {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -3038,13 +3405,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$seminar = new tx_seminars_seminar($dateRecordUid);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'foo type',
 			$seminar->getEventType()
 		);
 	}
 
-	public function testGetEventTypeForTopicRecordReturnsTitleOfRelatedEventType() {
+	/**
+	 * @test
+	 */
+	public function getEventTypeForTopicRecordReturnsTitleOfRelatedEventType() {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -3056,13 +3426,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$seminar = new tx_seminars_seminar($topicRecordUid);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'foo type',
 			$seminar->getEventType()
 		);
 	}
 
-	public function testGetEventTypeUidReturnsUidFromTopicRecord() {
+	/**
+	 * @test
+	 */
+	public function getEventTypeUidReturnsUidFromTopicRecord() {
 		// This test comes from bug #1515.
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3081,33 +3454,42 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$seminar = new tx_seminars_seminar($dateRecordUid);
 
-		$this->assertEquals(
+		$this->assertSame(
 			99999,
 			$seminar->getEventTypeUid()
 		);
 	}
 
-	public function testGetEventTypeUidInitiallyReturnsZero() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getEventTypeUidInitiallyReturnsZero() {
+		$this->assertSame(
 			0,
 			$this->fixture->getEventTypeUid()
 		);
 	}
 
-	public function testGetEventTypeUidWithEventTypeReturnsEventTypeUid() {
+	/**
+	 * @test
+	 */
+	public function getEventTypeUidWithEventTypeReturnsEventTypeUid() {
 		$eventTypeUid = $this->addEventTypeRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			$eventTypeUid,
 			$this->fixture->getEventTypeUid()
 		);
 	}
 
 
-	////////////////////////////////////////////
-	// Tests regarding the organizing partners
-	////////////////////////////////////////////
+	/*
+	 * Tests regarding the organizing partners
+	 */
 
-	public function testHasOrganizingPartnersReturnsInitiallyFalse() {
+	/**
+	 * @test
+	 */
+	public function hasOrganizingPartnersReturnsInitiallyFalse() {
 		$this->assertFalse(
 			$this->fixture->hasOrganizingPartners()
 		);
@@ -3124,60 +3506,75 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetNumberOfOrganizingPartnersWithNoOrganizingPartnerReturnsZero() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getNumberOfOrganizingPartnersWithNoOrganizingPartnerReturnsZero() {
+		$this->assertSame(
 			0,
 			$this->fixture->getNumberOfOrganizingPartners()
 		);
 	}
 
-	public function testGetNumberOfOrganizingPartnersWithSingleOrganizingPartnerReturnsOne() {
+	/**
+	 * @test
+	 */
+	public function getNumberOfOrganizingPartnersWithSingleOrganizingPartnerReturnsOne() {
 		$this->addOrganizingPartnerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getNumberOfOrganizingPartners()
 		);
 	}
 
-	public function testGetNumberOfOrganizingPartnersWithMultipleOrganizingPartnersReturnsTwo() {
+	/**
+	 * @test
+	 */
+	public function getNumberOfOrganizingPartnersWithMultipleOrganizingPartnersReturnsTwo() {
 		$this->addOrganizingPartnerRelation(array());
 		$this->addOrganizingPartnerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getNumberOfOrganizingPartners()
 		);
 	}
 
 
-	///////////////////////////////////
-	// Tests regarding the categories
-	///////////////////////////////////
+	/*
+	 * Tests regarding the categories
+	 */
 
-	public function testInitiallyHasNoCategories() {
+	/**
+	 * @test
+	 */
+	public function initiallyHasNoCategories() {
 		$this->assertFalse(
 			$this->fixture->hasCategories()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			0,
 			$this->fixture->getNumberOfCategories()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			array(),
 			$this->fixture->getCategories()
 		);
 	}
 
-	public function testGetCategoriesCanReturnOneCategory() {
+	/**
+	 * @test
+	 */
+	public function getCategoriesCanReturnOneCategory() {
 		$categoryUid = $this->addCategoryRelation(array('title' => 'Test'));
 
 		$this->assertTrue(
 			$this->fixture->hasCategories()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getNumberOfCategories()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			array($categoryUid => array('title' => 'Test', 'icon' => '')),
 			$this->fixture->getCategories()
 		);
@@ -3193,28 +3590,31 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$this->fixture->hasCategories()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getNumberOfCategories()
 		);
 
 		$categories = $this->fixture->getCategories();
 
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			count($categories)
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			'Test 1',
 			$categories[$categoryUid1]['title']
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			'Test 2',
 			$categories[$categoryUid2]['title']
 		);
 	}
 
-	public function testGetCategoriesReturnsIconOfCategory() {
+	/**
+	 * @test
+	 */
+	public function getCategoriesReturnsIconOfCategory() {
 		$categoryUid = $this->addCategoryRelation(
 			array(
 				'title' => 'Test 1',
@@ -3224,13 +3624,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$categories = $this->fixture->getCategories();
 
-		$this->assertEquals(
+		$this->assertSame(
 			'foo.gif',
 			$categories[$categoryUid]['icon']
 		);
 	}
 
-	public function testGetCategoriesReturnsCategoriesOrderedBySorting() {
+	/**
+	 * @test
+	 */
+	public function getCategoriesReturnsCategoriesOrderedBySorting() {
 		$categoryUid1 = $this->addCategoryRelation(array('title' => 'Test 1'), 2);
 		$categoryUid2 = $this->addCategoryRelation(array('title' => 'Test 2'), 1);
 
@@ -3238,7 +3641,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$this->fixture->hasCategories()
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			array(
 				$categoryUid2 => array('title' => 'Test 2', 'icon' => ''),
 				$categoryUid1 => array('title' => 'Test 1', 'icon' => ''),
@@ -3248,11 +3651,14 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////
-	// Tests regarding the time slots
-	///////////////////////////////////
+	/*
+	 * Tests regarding the time slots
+	 */
 
-	public function testGetTimeslotsAsArrayWithMarkersReturnsArraySortedByDate() {
+	/**
+	 * @test
+	 */
+	public function getTimeslotsAsArrayWithMarkersReturnsArraySortedByDate() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_timeslots',
 			array(
@@ -3271,28 +3677,34 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$timeSlotsWithMarkers = $this->fixture->getTimeslotsAsArrayWithMarkers();
-		$this->assertEquals(
+		$this->assertSame(
 			$timeSlotsWithMarkers[0]['room'],
 			'Room2'
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$timeSlotsWithMarkers[1]['room'],
 			'Room1'
 		);
 	}
 
 
-	///////////////////////////////////
-	// Tests regarding the organizers
-	///////////////////////////////////
+	/*
+	 * Tests regarding the organizers
+	 */
 
-	public function testHasOrganizersReturnsInitiallyFalse() {
+	/**
+	 * @test
+	 */
+	public function hasOrganizersReturnsInitiallyFalse() {
 		$this->assertFalse(
 			$this->fixture->hasOrganizers()
 		);
 	}
 
-	public function testHasOrganizersReturnsFalseForStringInOrganizersField() {
+	/**
+	 * @test
+	 */
+	public function hasOrganizersReturnsFalseForStringInOrganizersField() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -3302,7 +3714,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_seminarchild($eventUid);
 		$hasOrganizers = $fixture->hasOrganizers();
-		$fixture->__destruct();
 
 		$this->assertFalse(
 			$hasOrganizers
@@ -3320,45 +3731,60 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetNumberOfOrganizersWithNoOrganizerReturnsZero() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getNumberOfOrganizersWithNoOrganizerReturnsZero() {
+		$this->assertSame(
 			0,
 			$this->fixture->getNumberOfOrganizers()
 		);
 	}
 
-	public function testGetNumberOfOrganizersWithSingleOrganizerReturnsOne() {
+	/**
+	 * @test
+	 */
+	public function getNumberOfOrganizersWithSingleOrganizerReturnsOne() {
 		$this->addOrganizerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getNumberOfOrganizers()
 		);
 	}
 
-	public function testGetNumberOfOrganizersWithMultipleOrganizersReturnsTwo() {
+	/**
+	 * @test
+	 */
+	public function getNumberOfOrganizersWithMultipleOrganizersReturnsTwo() {
 		$this->addOrganizerRelation(array());
 		$this->addOrganizerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getNumberOfOrganizers()
 		);
 	}
 
 
-	///////////////////////////////////
-	// Tests concerning getOrganizers
-	///////////////////////////////////
+	/*
+	 * Tests concerning getOrganizers
+	 */
 
-	public function testGetOrganizersWithNoOrganizersReturnsEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersWithNoOrganizersReturnsEmptyString() {
 		$this->createPi1();
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getOrganizers($this->pi1)
 		);
 	}
 
-	public function testGetOrganizersForOneOrganizerReturnsOrganizerName() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersForOneOrganizerReturnsOrganizerName() {
 		$this->createPi1();
 		$this->addOrganizerRelation(array('title' => 'foo'));
 
@@ -3368,7 +3794,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetOrganizersForOneOrganizerWithHomepageReturnsOrganizerLinkedToOrganizersHomepage() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersForOneOrganizerWithHomepageReturnsOrganizerLinkedToOrganizersHomepage() {
 		$this->createPi1();
 		$this->addOrganizerRelation(
 			array(
@@ -3383,7 +3812,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetOrganizersWithTwoOrganizersReturnsBothOrganizerNames() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersWithTwoOrganizersReturnsBothOrganizerNames() {
 		$this->createPi1();
 		$this->addOrganizerRelation(array('title' => 'foo'));
 		$this->addOrganizerRelation(array('title' => 'bar'));
@@ -3401,42 +3833,54 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////////
-	// Tests concerning getOrganizersRaw
-	//////////////////////////////////////
+	/*
+	 * Tests concerning getOrganizersRaw
+	 */
 
-	public function testGetOrganizersRawWithNoOrganizersReturnsEmptyString() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getOrganizersRawWithNoOrganizersReturnsEmptyString() {
+		$this->assertSame(
 			'',
 			$this->fixture->getOrganizersRaw()
 		);
 	}
 
-	public function testGetOrganizersRawWithSingleOrganizerWithoutHomepageReturnsSingleOrganizer() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersRawWithSingleOrganizerWithoutHomepageReturnsSingleOrganizer() {
 		$organizer = array(
 			'title' => 'test organizer 1',
 			'homepage' => ''
 		);
 		$this->addOrganizerRelation($organizer);
-		$this->assertEquals(
+		$this->assertSame(
 			$organizer['title'],
 			$this->fixture->getOrganizersRaw()
 		);
 	}
 
-	public function testGetOrganizersRawWithSingleOrganizerWithHomepageReturnsSingleOrganizerWithHomepage() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersRawWithSingleOrganizerWithHomepageReturnsSingleOrganizerWithHomepage() {
 		$organizer = array(
 			'title' => 'test organizer 1',
 			'homepage' => 'test homepage 1'
 		);
 		$this->addOrganizerRelation($organizer);
-		$this->assertEquals(
+		$this->assertSame(
 			$organizer['title'].', '.$organizer['homepage'],
 			$this->fixture->getOrganizersRaw()
 		);
 	}
 
-	public function testGetOrganizersRawForTwoOrganizersWithoutHomepageReturnsTwoOrganizers() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersRawForTwoOrganizersWithoutHomepageReturnsTwoOrganizers() {
 		$this->addOrganizerRelation(
 			array('title' => 'test organizer 1','homepage' => '')
 		);
@@ -3454,7 +3898,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetOrganizersRawForTwoOrganizersWithHomepageReturnsTwoOrganizersWithHomepage() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersRawForTwoOrganizersWithHomepageReturnsTwoOrganizersWithHomepage() {
 		$this->addOrganizerRelation(
 			array(
 				'title' => 'test organizer 1',
@@ -3478,7 +3925,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetOrganizersRawSeparatesMultipleOrganizersWithLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersRawSeparatesMultipleOrganizersWithLineFeeds() {
 		$this->addOrganizerRelation(array('title' => 'test organizer 1'));
 		$this->addOrganizerRelation(array('title' => 'test organizer 2'));
 
@@ -3488,7 +3938,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetOrganizersRawDoesNotSeparateMultipleOrganizersWithCarriageReturnsAndLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersRawDoesNotSeparateMultipleOrganizersWithCarriageReturnsAndLineFeeds() {
 		$this->addOrganizerRelation(array('title' => 'test organizer 1'));
 		$this->addOrganizerRelation(array('title' => 'test organizer 2'));
 
@@ -3499,30 +3952,39 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////
-	// Tests concerning getOrganizersNameAndEmail
-	///////////////////////////////////////////////
+	/*
+	 * Tests concerning getOrganizersNameAndEmail
+	 */
 
-	public function testGetOrganizersNameAndEmailWithNoOrganizersReturnsEmptyString() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getOrganizersNameAndEmailWithNoOrganizersReturnsEmptyString() {
+		$this->assertSame(
 			array(),
 			$this->fixture->getOrganizersNameAndEmail()
 		);
 	}
 
-	public function testGetOrganizersNameAndEmailWithSingleOrganizerReturnsSingleOrganizer() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersNameAndEmailWithSingleOrganizerReturnsSingleOrganizer() {
 		$organizer = array(
 			'title' => 'test organizer',
 			'email' => 'test@organizer.org'
 		);
 		$this->addOrganizerRelation($organizer);
-		$this->assertEquals(
+		$this->assertSame(
 			array('"'.$organizer['title'].'" <'.$organizer['email'].'>'),
 			$this->fixture->getOrganizersNameAndEmail()
 		);
 	}
 
-	public function testGetOrganizersNameAndEmailWithMultipleOrganizersReturnsTwoOrganizers() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersNameAndEmailWithMultipleOrganizersReturnsTwoOrganizers() {
 		$firstOrganizer = array(
 			'title' => 'test organizer 1',
 			'email' => 'test1@organizer.org'
@@ -3533,7 +3995,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$this->addOrganizerRelation($firstOrganizer);
 		$this->addOrganizerRelation($secondOrganizer);
-		$this->assertEquals(
+		$this->assertSame(
 			array(
 				'"'.$firstOrganizer['title'].'" <'.$firstOrganizer['email'].'>',
 				'"'.$secondOrganizer['title'].'" <'.$secondOrganizer['email'].'>'
@@ -3542,43 +4004,52 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetOrganizersEmailWithNoOrganizersReturnsEmptyString() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getOrganizersEmailWithNoOrganizersReturnsEmptyString() {
+		$this->assertSame(
 			array(),
 			$this->fixture->getOrganizersEmail()
 		);
 	}
 
-	public function testGetOrganizersEmailWithSingleOrganizerReturnsSingleOrganizer() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersEmailWithSingleOrganizerReturnsSingleOrganizer() {
 		$organizer = array('email' => 'test@organizer.org');
 		$this->addOrganizerRelation($organizer);
-		$this->assertEquals(
+		$this->assertSame(
 			array($organizer['email']),
 			$this->fixture->getOrganizersEmail()
 		);
 	}
 
-	public function testGetOrganizersEmailWithMultipleOrganizersReturnsTwoOrganizers() {
+	/**
+	 * @test
+	 */
+	public function getOrganizersEmailWithMultipleOrganizersReturnsTwoOrganizers() {
 		$firstOrganizer = array('email' => 'test1@organizer.org');
 		$secondOrganizer = array('email' => 'test2@organizer.org');
 		$this->addOrganizerRelation($firstOrganizer);
 		$this->addOrganizerRelation($secondOrganizer);
-		$this->assertEquals(
+		$this->assertSame(
 			array($firstOrganizer['email'], $secondOrganizer['email']),
 			$this->fixture->getOrganizersEmail()
 		);
 	}
 
 
-	/////////////////////////////////////////
-	// Tests concerning getOrganizersFooter
-	/////////////////////////////////////////
+	/*
+	 * Tests concerning getOrganizersFooter
+	 */
 
 	/**
 	 * @test
 	 */
 	public function getOrganizersFootersWithNoOrganizersReturnsEmptyArray() {
-		$this->assertEquals(
+		$this->assertSame(
 			array(),
 			$this->fixture->getOrganizersFooter()
 		);
@@ -3590,7 +4061,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function getOrganizersFootersWithSingleOrganizerReturnsSingleOrganizerFooter() {
 		$organizer = array('email_footer' => 'test email footer');
 		$this->addOrganizerRelation($organizer);
-		$this->assertEquals(
+		$this->assertSame(
 			array($organizer['email_footer']),
 			$this->fixture->getOrganizersFooter()
 		);
@@ -3604,7 +4075,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$secondOrganizer = array('email_footer' => 'test email footer');
 		$this->addOrganizerRelation($firstOrganizer);
 		$this->addOrganizerRelation($secondOrganizer);
-		$this->assertEquals(
+		$this->assertSame(
 			array(
 				$firstOrganizer['email_footer'],
 				$secondOrganizer['email_footer']
@@ -3619,7 +4090,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function getOrganizersFootersWithSingleOrganizerWithoutEMailFooterReturnsEmptyArray() {
 		$this->addOrganizerRelation();
 
-		$this->assertEquals(
+		$this->assertSame(
 			array(),
 			$this->fixture->getOrganizersFooter()
 		);
@@ -3632,45 +4103,54 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$secondOrganizer = array('email_footer' => 'test email footer');
 		$this->addOrganizerRelation();
 		$this->addOrganizerRelation($secondOrganizer);
-		$this->assertEquals(
+		$this->assertSame(
 			array($secondOrganizer['email_footer']),
 			$this->fixture->getOrganizersFooter()
 		);
 	}
 
 
-	///////////////////////////////////////
-	// Tests concerning getAttendancesPid
-	///////////////////////////////////////
+	/*
+	 * Tests concerning getAttendancesPid
+	 */
 
-	public function testGetAttendancesPidWithNoOrganizerReturnsZero() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getAttendancesPidWithNoOrganizerReturnsZero() {
+		$this->assertSame(
 			0,
 			$this->fixture->getAttendancesPid()
 		);
 	}
 
-	public function testGetAttendancesPidWithSingleOrganizerReturnsPid() {
+	/**
+	 * @test
+	 */
+	public function getAttendancesPidWithSingleOrganizerReturnsPid() {
 		$this->addOrganizerRelation(array('attendances_pid' => 99));
-		$this->assertEquals(
+		$this->assertSame(
 			99,
 			$this->fixture->getAttendancesPid()
 		);
 	}
 
-	public function testGetAttendancesPidWithMultipleOrganizerReturnsFirstPid() {
+	/**
+	 * @test
+	 */
+	public function getAttendancesPidWithMultipleOrganizerReturnsFirstPid() {
 		$this->addOrganizerRelation(array('attendances_pid' => 99));
 		$this->addOrganizerRelation(array('attendances_pid' => 66));
-		$this->assertEquals(
+		$this->assertSame(
 			99,
 			$this->fixture->getAttendancesPid()
 		);
 	}
 
 
-	///////////////////////////////////////
-	// Tests regarding getOrganizerBag().
-	///////////////////////////////////////
+	/*
+	 * Tests regarding getOrganizerBag().
+	 */
 
 	/**
 	 * @test
@@ -3696,107 +4176,146 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////
-	// Tests regarding the speakers
-	/////////////////////////////////
+	/*
+	 * Tests regarding the speakers
+	 */
 
-	public function testGetNumberOfSpeakersWithNoSpeakerReturnsZero() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getNumberOfSpeakersWithNoSpeakerReturnsZero() {
+		$this->assertSame(
 			0,
 			$this->fixture->getNumberOfSpeakers()
 		);
 	}
 
-	public function testGetNumberOfSpeakersWithSingleSpeakerReturnsOne() {
+	/**
+	 * @test
+	 */
+	public function getNumberOfSpeakersWithSingleSpeakerReturnsOne() {
 		$this->addSpeakerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getNumberOfSpeakers()
 		);
 	}
 
-	public function testGetNumberOfSpeakersWithMultipleSpeakersReturnsTwo() {
+	/**
+	 * @test
+	 */
+	public function getNumberOfSpeakersWithMultipleSpeakersReturnsTwo() {
 		$this->addSpeakerRelation(array());
 		$this->addSpeakerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getNumberOfSpeakers()
 		);
 	}
 
-	public function testGetNumberOfPartnersWithNoPartnerReturnsZero() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getNumberOfPartnersWithNoPartnerReturnsZero() {
+		$this->assertSame(
 			0,
 			$this->fixture->getNumberOfPartners()
 		);
 	}
 
-	public function testGetNumberOfPartnersWithSinglePartnerReturnsOne() {
+	/**
+	 * @test
+	 */
+	public function getNumberOfPartnersWithSinglePartnerReturnsOne() {
 		$this->addPartnerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getNumberOfPartners()
 		);
 	}
 
-	public function testGetNumberOfPartnersWithMultiplePartnersReturnsTwo() {
+	/**
+	 * @test
+	 */
+	public function getNumberOfPartnersWithMultiplePartnersReturnsTwo() {
 		$this->addPartnerRelation(array());
 		$this->addPartnerRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getNumberOfPartners()
 		);
 	}
 
-	public function testGetNumberOfTutorsWithNoTutorReturnsZero() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getNumberOfTutorsWithNoTutorReturnsZero() {
+		$this->assertSame(
 			0,
 			$this->fixture->getNumberOfTutors()
 		);
 	}
 
-	public function testGetNumberOfTutorsWithSingleTutorReturnsOne() {
+	/**
+	 * @test
+	 */
+	public function getNumberOfTutorsWithSingleTutorReturnsOne() {
 		$this->addTutorRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getNumberOfTutors()
 		);
 	}
 
-	public function testGetNumberOfTutorsWithMultipleTutorsReturnsTwo() {
+	/**
+	 * @test
+	 */
+	public function getNumberOfTutorsWithMultipleTutorsReturnsTwo() {
 		$this->addTutorRelation(array());
 		$this->addTutorRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getNumberOfTutors()
 		);
 	}
 
-	public function testGetNumberOfLeadersWithNoLeaderReturnsZero() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getNumberOfLeadersWithNoLeaderReturnsZero() {
+		$this->assertSame(
 			0,
 			$this->fixture->getNumberOfLeaders()
 		);
 	}
 
-	public function testGetNumberOfLeadersWithSingleLeaderReturnsOne() {
+	/**
+	 * @test
+	 */
+	public function getNumberOfLeadersWithSingleLeaderReturnsOne() {
 		$this->addLeaderRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getNumberOfLeaders()
 		);
 	}
 
-	public function testGetNumberOfLeadersWithMultipleLeadersReturnsTwo() {
+	/**
+	 * @test
+	 */
+	public function getNumberOfLeadersWithMultipleLeadersReturnsTwo() {
 		$this->addLeaderRelation(array());
 		$this->addLeaderRelation(array());
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getNumberOfLeaders()
 		);
 	}
 
-	public function testHasSpeakersOfTypeIsInitiallyFalse() {
+	/**
+	 * @test
+	 */
+	public function hasSpeakersOfTypeIsInitiallyFalse() {
 		$this->assertFalse(
 			$this->fixture->hasSpeakersOfType('speakers')
 		);
@@ -3811,7 +4330,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasSpeakersOfTypeWithSingleSpeakerOfTypeReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasSpeakersOfTypeWithSingleSpeakerOfTypeReturnsTrue() {
 		$this->addSpeakerRelation(array());
 		$this->assertTrue(
 			$this->fixture->hasSpeakersOfType('speakers')
@@ -3833,7 +4355,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasSpeakersIsInitiallyFalse() {
+	/**
+	 * @test
+	 */
+	public function hasSpeakersIsInitiallyFalse() {
 		$this->assertFalse(
 			$this->fixture->hasSpeakers()
 		);
@@ -3849,7 +4374,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasPartnersIsInitiallyFalse() {
+	/**
+	 * @test
+	 */
+	public function hasPartnersIsInitiallyFalse() {
 		$this->assertFalse(
 			$this->fixture->hasPartners()
 		);
@@ -3865,7 +4393,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasTutorsIsInitiallyFalse() {
+	/**
+	 * @test
+	 */
+	public function hasTutorsIsInitiallyFalse() {
 		$this->assertFalse(
 			$this->fixture->hasTutors()
 		);
@@ -3881,7 +4412,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasLeadersIsInitiallyFalse() {
+	/**
+	 * @test
+	 */
+	public function hasLeadersIsInitiallyFalse() {
 		$this->assertFalse(
 			$this->fixture->hasLeaders()
 		);
@@ -3898,18 +4432,24 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////
-	// Tests concerning getSpeakersWithDescriptionRaw
-	///////////////////////////////////////////////////
+	/*
+	 * Tests concerning getSpeakersWithDescriptionRaw
+	 */
 
-	public function testGetSpeakersWithDescriptionRawWithNoSpeakersReturnsAnEmptyString() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawWithNoSpeakersReturnsAnEmptyString() {
+		$this->assertSame(
 			'',
 			$this->fixture->getSpeakersWithDescriptionRaw('speakers')
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawReturnsTitleOfSpeaker() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawReturnsTitleOfSpeaker() {
 		$this->addSpeakerRelation(array('title' => 'test speaker'));
 
 		$this->assertContains(
@@ -3918,7 +4458,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawForSpeakerWithOrganizationReturnsSpeakerWithOrganization() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawForSpeakerWithOrganizationReturnsSpeakerWithOrganization() {
 		$this->addSpeakerRelation(array('organization' => 'test organization'));
 
 		$this->assertContains(
@@ -3927,7 +4470,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawForSpeakerWithHomepageReturnsSpeakerWithHomepage() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawForSpeakerWithHomepageReturnsSpeakerWithHomepage() {
 		$this->addSpeakerRelation(array('homepage' => 'test homepage'));
 
 		$this->assertContains(
@@ -3936,7 +4482,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawForSpeakerWithOrganizationAndHomepageReturnsSpeakerWithOrganizationAndHomepage() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawForSpeakerWithOrganizationAndHomepageReturnsSpeakerWithOrganizationAndHomepage() {
 		$this->addSpeakerRelation(
 			array(
 				'organization' => 'test organization',
@@ -3950,7 +4499,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawForSpeakerWithDescriptionReturnsSpeakerWithDescription() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawForSpeakerWithDescriptionReturnsSpeakerWithDescription() {
 		$this->addSpeakerRelation(array('description' => 'test description'));
 
 		$this->assertContains(
@@ -3959,7 +4511,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawForSpeakerWithOrganizationAndDescriptionReturnsOrganizationAndDescription() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawForSpeakerWithOrganizationAndDescriptionReturnsOrganizationAndDescription() {
 		$this->addSpeakerRelation(
 			array(
 				'organization' => 'foo',
@@ -3972,7 +4527,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawForSpeakerWithHomepageAndDescriptionReturnsHomepageAndDescription() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawForSpeakerWithHomepageAndDescriptionReturnsHomepageAndDescription() {
 		$this->addSpeakerRelation(
 			array(
 				'homepage' => 'test homepage',
@@ -3986,7 +4544,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawForTwoSpeakersReturnsTwoSpeakers() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawForTwoSpeakersReturnsTwoSpeakers() {
 		$this->addSpeakerRelation(array('title' => 'test speaker 1'));
 		$this->addSpeakerRelation(array('title' => 'test speaker 2'));
 
@@ -4000,7 +4561,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawForTwoSpeakersWithOrganizationReturnsTwoSpeakersWithOrganization() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawForTwoSpeakersWithOrganizationReturnsTwoSpeakersWithOrganization() {
 		$this->addSpeakerRelation(
 			array('organization' => 'test organization 1')
 		);
@@ -4018,7 +4582,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawOnlyReturnsSpeakersOfGivenType() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawOnlyReturnsSpeakersOfGivenType() {
 		$this->addSpeakerRelation(array('title' => 'test speaker'));
 		$this->addPartnerRelation(array('title' => 'test partner'));
 
@@ -4028,7 +4595,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawCanReturnSpeakersOfTypePartner() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawCanReturnSpeakersOfTypePartner() {
 		$this->addPartnerRelation(array('title' => 'test partner'));
 
 		$this->assertContains(
@@ -4037,7 +4607,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawCanReturnSpeakersOfTypeLeaders() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawCanReturnSpeakersOfTypeLeaders() {
 		$this->addLeaderRelation(array('title' => 'test leader'));
 
 		$this->assertContains(
@@ -4046,7 +4619,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawCanReturnSpeakersOfTypeTutors() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawCanReturnSpeakersOfTypeTutors() {
 		$this->addTutorRelation(array('title' => 'test tutor'));
 
 		$this->assertContains(
@@ -4055,7 +4631,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawSeparatesMultipleSpeakersWithLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawSeparatesMultipleSpeakersWithLineFeeds() {
 		$this->addSpeakerRelation(array('title' => 'foo'));
 		$this->addSpeakerRelation(array('title' => 'bar'));
 
@@ -4065,7 +4644,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawDoesNotSeparateMultipleSpeakersWithCarriageReturnsAndLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawDoesNotSeparateMultipleSpeakersWithCarriageReturnsAndLineFeeds() {
 		$this->addSpeakerRelation(array('title' => 'foo'));
 		$this->addSpeakerRelation(array('title' => 'bar'));
 
@@ -4075,7 +4657,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawDoesNotSeparateSpeakersDescriptionAndTitleWithCarriageReturnsAndLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawDoesNotSeparateSpeakersDescriptionAndTitleWithCarriageReturnsAndLineFeeds() {
 		$this->addSpeakerRelation(
 			array(
 				'title' => 'foo',
@@ -4089,7 +4674,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersWithDescriptionRawSeparatesSpeakersDescriptionAndTitleWithLineFeeds() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersWithDescriptionRawSeparatesSpeakersDescriptionAndTitleWithLineFeeds() {
 		$this->addSpeakerRelation(
 			array(
 				'title' => 'foo',
@@ -4104,95 +4692,107 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////////
-	// Tests concerning getSpeakersShort
-	//////////////////////////////////////
+	/*
+	 * Tests concerning getSpeakersShort
+	 */
 
-	public function testGetSpeakersShortWithNoSpeakersReturnsAnEmptyString() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersShortWithNoSpeakersReturnsAnEmptyString() {
 		$this->createPi1();
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getSpeakersShort($this->pi1, 'speakers')
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getSpeakersShort($this->pi1, 'partners')
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getSpeakersShort($this->pi1, 'tutors')
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getSpeakersShort($this->pi1, 'leaders')
 		);
 	}
 
-	public function testGetSpeakersShortWithSingleSpeakersReturnsSingleSpeaker() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersShortWithSingleSpeakersReturnsSingleSpeaker() {
 		$this->createPi1();
 		$speaker = array('title' => 'test speaker');
 
 		$this->addSpeakerRelation($speaker);
-		$this->assertEquals(
+		$this->assertSame(
 			$speaker['title'],
 			$this->fixture->getSpeakersShort($this->pi1, 'speakers')
 		);
 
 		$this->addPartnerRelation($speaker);
-		$this->assertEquals(
+		$this->assertSame(
 			$speaker['title'],
 			$this->fixture->getSpeakersShort($this->pi1, 'partners')
 		);
 
 		$this->addTutorRelation($speaker);
-		$this->assertEquals(
+		$this->assertSame(
 			$speaker['title'],
 			$this->fixture->getSpeakersShort($this->pi1, 'tutors')
 		);
 
 		$this->addLeaderRelation($speaker);
-		$this->assertEquals(
+		$this->assertSame(
 			$speaker['title'],
 			$this->fixture->getSpeakersShort($this->pi1, 'leaders')
 		);
 	}
 
-	public function testGetSpeakersShortWithMultipleSpeakersReturnsTwoSpeakers() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersShortWithMultipleSpeakersReturnsTwoSpeakers() {
 		$firstSpeaker = array('title' => 'test speaker 1');
 		$secondSpeaker = array('title' => 'test speaker 2');
 
 		$this->addSpeakerRelation($firstSpeaker);
 		$this->addSpeakerRelation($secondSpeaker);
 		$this->createPi1();
-		$this->assertEquals(
+		$this->assertSame(
 			$firstSpeaker['title'].', '.$secondSpeaker['title'],
 			$this->fixture->getSpeakersShort($this->pi1, 'speakers')
 		);
 
 		$this->addPartnerRelation($firstSpeaker);
 		$this->addPartnerRelation($secondSpeaker);
-		$this->assertEquals(
+		$this->assertSame(
 			$firstSpeaker['title'].', '.$secondSpeaker['title'],
 			$this->fixture->getSpeakersShort($this->pi1, 'partners')
 		);
 
 		$this->addTutorRelation($firstSpeaker);
 		$this->addTutorRelation($secondSpeaker);
-		$this->assertEquals(
+		$this->assertSame(
 			$firstSpeaker['title'].', '.$secondSpeaker['title'],
 			$this->fixture->getSpeakersShort($this->pi1, 'tutors')
 		);
 
 		$this->addLeaderRelation($firstSpeaker);
 		$this->addLeaderRelation($secondSpeaker);
-		$this->assertEquals(
+		$this->assertSame(
 			$firstSpeaker['title'].', '.$secondSpeaker['title'],
 			$this->fixture->getSpeakersShort($this->pi1, 'leaders')
 		);
 	}
 
-	public function testGetSpeakersShortReturnsSpeakerLinkedToSpeakerHomepage() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersShortReturnsSpeakerLinkedToSpeakerHomepage() {
 		$speakerWithLink = array(
 			'title' => 'test speaker',
 			'homepage' => 'http://www.foo.com',
@@ -4206,7 +4806,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetSpeakersForSpeakerWithoutHomepageReturnsSpeakerNameWithoutLinkTag() {
+	/**
+	 * @test
+	 */
+	public function getSpeakersForSpeakerWithoutHomepageReturnsSpeakerNameWithoutLinkTag() {
 		$speaker = array(
 			'title' => 'test speaker',
 		);
@@ -4228,11 +4831,14 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////
-	// Test concerning the collision check
-	////////////////////////////////////////
+	/*
+	 * Test concerning the collision check
+	 */
 
-	public function testEventsWithTheExactSameDateCollide() {
+	/**
+	 * @test
+	 */
+	public function eventsWithTheExactSameDateCollide() {
 		$frontEndUserUid = $this->testingFramework->createFrontEndUser();
 
 		$begin = $GLOBALS['SIM_EXEC_TIME'];
@@ -4262,7 +4868,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCollidingEventsDoNotCollideIfCollisionSkipIsEnabledForAllEvents() {
+	/**
+	 * @test
+	 */
+	public function collidingEventsDoNotCollideIfCollisionSkipIsEnabledForAllEvents() {
 		$frontEndUserUid = $this->testingFramework->createFrontEndUser();
 
 		$begin = $GLOBALS['SIM_EXEC_TIME'];
@@ -4296,7 +4905,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCollidingEventsDoNoCollideIfCollisionSkipIsEnabledForThisEvent() {
+	/**
+	 * @test
+	 */
+	public function collidingEventsDoNoCollideIfCollisionSkipIsEnabledForThisEvent() {
 		$frontEndUserUid = $this->testingFramework->createFrontEndUser();
 
 		$begin = $GLOBALS['SIM_EXEC_TIME'];
@@ -4327,7 +4939,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testCollidingEventsDoNoCollideIfCollisionSkipIsEnabledForAnotherEvent() {
+	/**
+	 * @test
+	 */
+	public function collidingEventsDoNoCollideIfCollisionSkipIsEnabledForAnotherEvent() {
 		$frontEndUserUid = $this->testingFramework->createFrontEndUser();
 
 		$begin = $GLOBALS['SIM_EXEC_TIME'];
@@ -4359,11 +4974,14 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////
-	// Tests for the icons
-	////////////////////////
+	/*
+	 * Tests for the icons
+	 */
 
-	public function testUsesCorrectIconForSingleEvent() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForSingleEvent() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
 
 		$this->assertContains(
@@ -4372,7 +4990,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForTopic() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForTopic() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_TOPIC);
 
 		$this->assertContains(
@@ -4381,7 +5002,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForDateRecord() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForDateRecord() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
 
 		$this->assertContains(
@@ -4390,7 +5014,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForHiddenSingleEvent() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForHiddenSingleEvent() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
 		$this->fixture->setHidden(TRUE);
 
@@ -4400,7 +5027,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForHiddenTopic() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForHiddenTopic() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_TOPIC);
 		$this->fixture->setHidden(TRUE);
 
@@ -4410,7 +5040,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForHiddenDate() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForHiddenDate() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
 		$this->fixture->setHidden(TRUE);
 
@@ -4420,7 +5053,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForVisibleTimedSingleEvent() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForVisibleTimedSingleEvent() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
@@ -4430,7 +5066,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForVisibleTimedTopic() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForVisibleTimedTopic() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_TOPIC);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
@@ -4440,7 +5079,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForVisibleTimedDate() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForVisibleTimedDate() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
@@ -4450,7 +5092,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForExpiredSingleEvent() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForExpiredSingleEvent() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
 		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
@@ -4460,7 +5105,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForExpiredTimedTopic() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForExpiredTimedTopic() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_TOPIC);
 		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
@@ -4470,7 +5118,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForExpiredTimedDate() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForExpiredTimedDate() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
 		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
@@ -4480,7 +5131,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForStillInvisibleTimedSingleEvent() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForStillInvisibleTimedSingleEvent() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
 
@@ -4490,7 +5144,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForStillInvisibleTimedTopic() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForStillInvisibleTimedTopic() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_TOPIC);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
 
@@ -4500,7 +5157,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUsesCorrectIconForStillInvisibleTimedDate() {
+	/**
+	 * @test
+	 */
+	public function usesCorrectIconForStillInvisibleTimedDate() {
 		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
 
@@ -4511,17 +5171,23 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////
-	// Tests for hasSeparateDetailsPage
-	/////////////////////////////////////
+	/*
+	 * Tests for hasSeparateDetailsPage
+	 */
 
-	public function testHasSeparateDetailsPageIsFalseByDefault() {
+	/**
+	 * @test
+	 */
+	public function hasSeparateDetailsPageIsFalseByDefault() {
 		$this->assertFalse(
 			$this->fixture->hasSeparateDetailsPage()
 		);
 	}
 
-	public function testHasSeparateDetailsPageReturnsTrueForInternalSeparateDetailsPage() {
+	/**
+	 * @test
+	 */
+	public function hasSeparateDetailsPageReturnsTrueForInternalSeparateDetailsPage() {
 		$detailsPageUid = $this->testingFramework->createFrontEndPage();
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -4535,11 +5201,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$event->hasSeparateDetailsPage()
 		);
-
-		$event->__destruct();
 	}
 
-	public function testHasSeparateDetailsPageReturnsTrueForExternalSeparateDetailsPage() {
+	/**
+	 * @test
+	 */
+	public function hasSeparateDetailsPageReturnsTrueForExternalSeparateDetailsPage() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -4552,20 +5219,18 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$event->hasSeparateDetailsPage()
 		);
-
-		$event->__destruct();
 	}
 
 
-	/////////////////////////////
-	// Tests for getDetailsPage
-	/////////////////////////////
+	/*
+	 * Tests for getDetailsPage
+	 */
 
 	/**
 	 * @test
 	 */
 	public function getDetailsPageForNoSeparateDetailsPageSetReturnsEmptyString() {
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getDetailsPage()
 		);
@@ -4585,12 +5250,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$event = new tx_seminars_seminarchild($eventUid);
 
-		$this->assertEquals(
-			$detailsPageUid,
+		$this->assertSame(
+			(string) $detailsPageUid,
 			$event->getDetailsPage()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -4607,18 +5270,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$event = new tx_seminars_seminarchild($eventUid);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$externalUrl,
 			$event->getDetailsPage()
 		);
-
-		$event->__destruct();
 	}
 
 
-	/////////////////////////////////////////
-	// Tests concerning getPlaceWithDetails
-	/////////////////////////////////////////
+	/*
+	 * Tests concerning getPlaceWithDetails
+	 */
 
 	/**
 	 * @test
@@ -4760,9 +5421,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////////
-	// Tests concerning getPlaceWithDetailsRaw
-	////////////////////////////////////////////
+	/*
+	 * Tests concerning getPlaceWithDetailsRaw
+	 */
 
 	/**
 	 * @test
@@ -4894,27 +5555,36 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////
-	// Tests for getPlaceShort
-	////////////////////////////
+	/*
+	 * Tests for getPlaceShort
+	 */
 
-	public function testGetPlaceShortReturnsWillBeAnnouncedForNoPlaces() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getPlaceShortReturnsWillBeAnnouncedForNoPlaces() {
+		$this->assertSame(
 			$this->fixture->translate('message_willBeAnnounced'),
 			$this->fixture->getPlaceShort()
 		);
 	}
 
-	public function testGetPlaceShortReturnsPlaceNameForOnePlace() {
+	/**
+	 * @test
+	 */
+	public function getPlaceShortReturnsPlaceNameForOnePlace() {
 		$this->addPlaceRelation(array('title' => 'a place'));
 
-		$this->assertEquals(
+		$this->assertSame(
 			'a place',
 			$this->fixture->getPlaceShort()
 		);
 	}
 
-	public function testGetPlaceShortReturnsPlaceNamesWithCommaForTwoPlaces() {
+	/**
+	 * @test
+	 */
+	public function getPlaceShortReturnsPlaceNamesWithCommaForTwoPlaces() {
 		$this->addPlaceRelation(array('title' => 'a place'));
 		$this->addPlaceRelation(array('title' => 'another place'));
 
@@ -4933,9 +5603,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////
-	// Tests concerning getPlaces
-	///////////////////////////////
+	/*
+	 * Tests concerning getPlaces
+	 */
 
 	/**
 	 * @test
@@ -4963,24 +5633,30 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function getPlacesForSeminarWithOnePlacesReturnsListWithOnePlace() {
 		$this->addPlaceRelation();
 
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getPlaces()->count()
 		);
 	}
 
 
-	/////////////////////////////
-	// Tests for attached files
-	/////////////////////////////
+	/*
+	 * Tests for attached files
+	 */
 
-	public function testHasAttachedFilesInitiallyReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasAttachedFilesInitiallyReturnsFalse() {
 		$this->assertFalse(
 			$this->fixture->hasAttachedFiles()
 		);
 	}
 
-	public function testHasAttachedFilesWithOneAttachedFileReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasAttachedFilesWithOneAttachedFileReturnsTrue() {
 		$this->fixture->setAttachedFiles('test.file');
 
 		$this->assertTrue(
@@ -4988,7 +5664,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasAttachedFilesWithTwoAttachedFilesReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasAttachedFilesWithTwoAttachedFilesReturnsTrue() {
 		$this->fixture->setAttachedFiles('test.file,test_02.file');
 
 		$this->assertTrue(
@@ -5020,8 +5699,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$eventDate->hasAttachedFiles()
 		);
-
-		$eventDate->__destruct();
 	}
 
 	/**
@@ -5048,20 +5725,24 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$eventDate->hasAttachedFiles()
 		);
-
-		$eventDate->__destruct();
 	}
 
-	public function testGetAttachedFilesInitiallyReturnsAnEmptyArray() {
+	/**
+	 * @test
+	 */
+	public function getAttachedFilesInitiallyReturnsAnEmptyArray() {
 		$this->createPi1();
 
-		$this->assertEquals(
+		$this->assertSame(
 			array(),
 			$this->fixture->getAttachedFiles($this->pi1)
 		);
 	}
 
-	public function testGetAttachedFilesWithOneSetAttachedFileReturnsAttachedFileAsArrayWithCorrectFileSize() {
+	/**
+	 * @test
+	 */
+	public function getAttachedFilesWithOneSetAttachedFileReturnsAttachedFileAsArrayWithCorrectFileSize() {
 		$this->createPi1();
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
@@ -5075,7 +5756,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$attachedFiles[0]['name']
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			t3lib_div::formatSize(filesize($dummyFile)),
 			$attachedFiles[0]['size']
 		);
@@ -5113,8 +5794,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$dummyFileName,
 			$attachedFiles[0]['name']
 		);
-
-		$eventDate->__destruct();
 	}
 
 	/**
@@ -5149,8 +5828,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$dummyFileName,
 			$attachedFiles[0]['name']
 		);
-
-		$eventDate->__destruct();
 	}
 
 	/**
@@ -5193,11 +5870,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$dateDummyFileName,
 			$attachedFiles[1]['name']
 		);
-
-		$eventDate->__destruct();
 	}
 
-	public function testGetAttachedFilesWithTwoSetAttachedFilesReturnsAttachedFilesAsArrayWithCorrectFileSize() {
+	/**
+	 * @test
+	 */
+	public function getAttachedFilesWithTwoSetAttachedFilesReturnsAttachedFilesAsArrayWithCorrectFileSize() {
 		$this->createPi1();
 		$dummyFile1 = $this->testingFramework->createDummyFile();
 		$dummyFileName1 =
@@ -5216,7 +5894,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$attachedFiles[0]['name']
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			t3lib_div::formatSize(filesize($dummyFile1)),
 			$attachedFiles[0]['size']
 		);
@@ -5226,13 +5904,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$attachedFiles[1]['name']
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			t3lib_div::formatSize(filesize($dummyFile2)),
 			$attachedFiles[1]['size']
 		);
 	}
 
-	public function testGetAttachedFilesWithAttachedFileWithFileEndingReturnsFileType() {
+	/**
+	 * @test
+	 */
+	public function getAttachedFilesWithAttachedFileWithFileEndingReturnsFileType() {
 		$this->createPi1();
 		$dummyFile = $this->testingFramework->createDummyFile();
 		$dummyFileName =
@@ -5241,13 +5922,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'txt',
 			$attachedFiles[0]['type']
 		);
 	}
 
-	public function testGetAttachedFilesWithAttachedFileWithoutFileEndingReturnsFileTypeNone() {
+	/**
+	 * @test
+	 */
+	public function getAttachedFilesWithAttachedFileWithoutFileEndingReturnsFileTypeNone() {
 		$this->createPi1();
 		$dummyFile = $this->testingFramework->createDummyFile('test');
 		$dummyFileName =
@@ -5256,13 +5940,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'none',
 			$attachedFiles[0]['type']
 		);
 	}
 
-	public function testGetAttachedFilesWithAttachedFileWithDotInFileNameReturnsCorrectFileType() {
+	/**
+	 * @test
+	 */
+	public function getAttachedFilesWithAttachedFileWithDotInFileNameReturnsCorrectFileType() {
 		$this->createPi1();
 		$dummyFile = $this->testingFramework->createDummyFile('test.test.txt');
 		$dummyFileName =
@@ -5271,13 +5958,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'txt',
 			$attachedFiles[0]['type']
 		);
 	}
 
-	public function testGetAttachedFilesWithAttachedFileWithFileNameStartingWithADotReturnsFileType() {
+	/**
+	 * @test
+	 */
+	public function getAttachedFilesWithAttachedFileWithFileNameStartingWithADotReturnsFileType() {
 		$this->createPi1();
 		$dummyFile = $this->testingFramework->createDummyFile('.txt');
 		$dummyFileName =
@@ -5286,13 +5976,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'txt',
 			$attachedFiles[0]['type']
 		);
 	}
 
-	public function testGetAttachedFilesWithAttachedFileWithFileNameEndingWithADotReturnsFileTypeNone() {
+	/**
+	 * @test
+	 */
+	public function getAttachedFilesWithAttachedFileWithFileNameEndingWithADotReturnsFileTypeNone() {
 		$this->createPi1();
 		$dummyFile = $this->testingFramework->createDummyFile('test.');
 		$dummyFileName =
@@ -5301,24 +5994,30 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'none',
 			$attachedFiles[0]['type']
 		);
 	}
 
 
-	///////////////////////////////////
-	// Tests concerning isOwnerFeUser
-	///////////////////////////////////
+	/*
+	 * Tests concerning isOwnerFeUser
+	 */
 
-	public function testIsOwnerFeUserForNoOwnerReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function isOwnerFeUserForNoOwnerReturnsFalse() {
 		$this->assertFalse(
 			$this->fixture->isOwnerFeUser()
 		);
 	}
 
-	public function testIsOwnerFeUserForLoggedInUserOtherThanOwnerReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function isOwnerFeUserForLoggedInUserOtherThanOwnerReturnsFalse() {
 		$this->testingFramework->createFakeFrontEnd();
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -5329,7 +6028,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsOwnerFeUserForLoggedInUserOtherThanOwnerReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function isOwnerFeUserForLoggedInUserOtherThanOwnerReturnsTrue() {
 		$this->testingFramework->createFakeFrontEnd();
 		$ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setOwnerUid($ownerUid);
@@ -5340,11 +6042,14 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////
-	// Tests concerning getOwner
-	//////////////////////////////
+	/*
+	 * Tests concerning getOwner
+	 */
 
-	public function testGetOwnerForExistingOwnerReturnsFrontEndUserInstance() {
+	/**
+	 * @test
+	 */
+	public function getOwnerForExistingOwnerReturnsFrontEndUserInstance() {
 		$this->testingFramework->createFakeFrontEnd();
 		$ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setOwnerUid($ownerUid);
@@ -5354,29 +6059,38 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetOwnerForExistingOwnerReturnsUserWithOwnersUid() {
+	/**
+	 * @test
+	 */
+	public function getOwnerForExistingOwnerReturnsUserWithOwnersUid() {
 		$this->testingFramework->createFakeFrontEnd();
 		$ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setOwnerUid($ownerUid);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$ownerUid,
 			$this->fixture->getOwner()->getUid()
 		);
 	}
 
-	public function testGetOwnerForNoOwnerReturnsNull() {
+	/**
+	 * @test
+	 */
+	public function getOwnerForNoOwnerReturnsNull() {
 		$this->assertNull(
 			$this->fixture->getOwner()
 		);
 	}
 
 
-	//////////////////////////////
-	// Tests concerning hasOwner
-	//////////////////////////////
+	/*
+	 * Tests concerning hasOwner
+	 */
 
-	public function testHasOwnerForExistingOwnerReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasOwnerForExistingOwnerReturnsTrue() {
 		$this->testingFramework->createFakeFrontEnd();
 		$ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setOwnerUid($ownerUid);
@@ -5386,16 +6100,19 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasOwnerForNoOwnerReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasOwnerForNoOwnerReturnsFalse() {
 		$this->assertFalse(
 			$this->fixture->hasOwner()
 		);
 	}
 
 
-	////////////////////////////////////////
-	// Tests concerning getVacanciesString
-	////////////////////////////////////////
+	/*
+	 * Tests concerning getVacanciesString
+	 */
 
 	/**
 	 * @test
@@ -5406,7 +6123,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setNumberOfAttendances(0);
 		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CANCELED);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getVacanciesString()
 		);
@@ -5419,7 +6136,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
 		$this->fixture->setNeedsRegistration(FALSE);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getVacanciesString()
 		);
@@ -5433,7 +6150,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setAttendancesMax(5);
 		$this->fixture->setNumberOfAttendances(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'5',
 			$this->fixture->getVacanciesString()
 		);
@@ -5447,7 +6164,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setAttendancesMax(5);
 		$this->fixture->setNumberOfAttendances(5);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_fullyBooked'),
 			$this->fixture->getVacanciesString()
 		);
@@ -5461,7 +6178,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setAttendancesMax(42);
 		$this->fixture->setNumberOfAttendances(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_enough'),
 			$this->fixture->getVacanciesString()
 		);
@@ -5475,7 +6192,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setAttendancesMax(42);
 		$this->fixture->setNumberOfAttendances(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_enough'),
 			$this->fixture->getVacanciesString()
 		);
@@ -5488,7 +6205,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setNumberOfAttendances(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_enough'),
 			$this->fixture->getVacanciesString()
 		);
@@ -5501,18 +6218,21 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setUnlimitedVacancies();
 		$this->fixture->setNumberOfAttendances(1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('message_enough'),
 			$this->fixture->getVacanciesString()
 		);
 	}
 
 
-	///////////////////////////////////////////////////////
-	// Tests concerning updatePlaceRelationsFromTimeSlots
-	///////////////////////////////////////////////////////
+	/*
+	 * Tests concerning updatePlaceRelationsFromTimeSlots
+	 */
 
-	public function testUpdatePlaceRelationsForSeminarWithoutPlacesRelatesPlaceFromTimeslotToSeminar() {
+	/**
+	 * @test
+	 */
+	public function updatePlaceRelationsForSeminarWithoutPlacesRelatesPlaceFromTimeslotToSeminar() {
 		$placeUid = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
 			array('title' => 'my house')
@@ -5526,13 +6246,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setNumberOfTimeSlots(1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->updatePlaceRelationsFromTimeSlots()
 		);
 	}
 
-	public function testUpdatePlaceRelationsForTwoTimeslotsWithPlacesReturnsTwo() {
+	/**
+	 * @test
+	 */
+	public function updatePlaceRelationsForTwoTimeslotsWithPlacesReturnsTwo() {
 		$placeUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
 			array('title' => 'my house')
@@ -5557,13 +6280,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setNumberOfTimeSlots(2);
 
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->updatePlaceRelationsFromTimeSlots()
 		);
 	}
 
-	public function testUpdatePlaceRelationsForSeminarWithoutPlacesCanRelateTwoPlacesFromTimeslotsToSeminar() {
+	/**
+	 * @test
+	 */
+	public function updatePlaceRelationsForSeminarWithoutPlacesCanRelateTwoPlacesFromTimeslotsToSeminar() {
 		$placeUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
 			array('title' => 'my house')
@@ -5600,7 +6326,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testUpdatePlaceRelationsOverwritesSeminarPlaceWithNonEmptyPlaceFromTimeslot() {
+	/**
+	 * @test
+	 */
+	public function updatePlaceRelationsOverwritesSeminarPlaceWithNonEmptyPlaceFromTimeslot() {
 		$this->addPlaceRelation(array('title' => 'your house'));
 
 		$placeUidInTimeSlot = $this->testingFramework->createRecord(
@@ -5618,13 +6347,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->updatePlaceRelationsFromTimeSlots();
 
-		$this->assertEquals(
+		$this->assertSame(
 			'my house',
 			$this->fixture->getPlaceShort()
 		);
 	}
 
-	public function testUpdatePlaceRelationsForSeminarWithOnePlaceAndTimeSlotWithNoPlaceReturnsOne() {
+	/**
+	 * @test
+	 */
+	public function updatePlaceRelationsForSeminarWithOnePlaceAndTimeSlotWithNoPlaceReturnsOne() {
 		$this->addPlaceRelation(array('title' => 'your house'));
 
 		$this->testingFramework->createRecord(
@@ -5633,13 +6365,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setNumberOfTimeSlots(1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->updatePlaceRelationsFromTimeSlots()
 		);
 	}
 
-	public function testUpdatePlaceRelationsForTimeSlotsWithNoPlaceNotOverwritesSeminarPlace() {
+	/**
+	 * @test
+	 */
+	public function updatePlaceRelationsForTimeSlotsWithNoPlaceNotOverwritesSeminarPlace() {
 		$this->addPlaceRelation(array('title' => 'your house'));
 
 		$this->testingFramework->createRecord(
@@ -5648,39 +6383,48 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setNumberOfTimeSlots(1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'your house',
 			$this->fixture->getPlaceShort()
 		);
 	}
 
 
-	////////////////////////////////////
-	// Tests for the getImage function
-	////////////////////////////////////
+	/*
+	 * Tests for the getImage function
+	 */
 
-	public function testGetImageForNonEmptyImageReturnsImageFileName() {
+	/**
+	 * @test
+	 */
+	public function getImageForNonEmptyImageReturnsImageFileName() {
 		$this->fixture->setImage('foo.gif');
 
-		$this->assertEquals(
+		$this->assertSame(
 			'foo.gif',
 			$this->fixture->getImage()
 		);
 	}
 
-	public function testGetImageForEmptyImageReturnsEmptyString() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getImageForEmptyImageReturnsEmptyString() {
+		$this->assertSame(
 			'',
 			$this->fixture->getImage()
 		);
 	}
 
 
-	////////////////////////////////////
-	// Tests for the hasImage function
-	////////////////////////////////////
+	/*
+	 * Tests for the hasImage function
+	 */
 
-	public function testHasImageForNonEmptyImageReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasImageForNonEmptyImageReturnsTrue() {
 		$this->fixture->setImage('foo.gif');
 
 		$this->assertTrue(
@@ -5688,18 +6432,24 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testHasImageForEmptyImageReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasImageForEmptyImageReturnsFalse() {
 		$this->assertFalse(
 			$this->fixture->hasImage()
 		);
 	}
 
 
-	//////////////////////////////////////////
-	// Tests for getLanguageKeySuffixForType
-	//////////////////////////////////////////
+	/*
+	 * Tests for getLanguageKeySuffixForType
+	 */
 
-	public function testGetLanguageKeySuffixForTypeReturnsSpeakerType() {
+	/**
+	 * @test
+	 */
+	public function getLanguageKeySuffixForTypeReturnsSpeakerType() {
 		$this->addLeaderRelation(array());
 
 		$this->assertContains(
@@ -5708,7 +6458,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetLanguageKeySuffixForTypeForMaleSpeakerReturnsMaleMarkerPart() {
+	/**
+	 * @test
+	 */
+	public function getLanguageKeySuffixForTypeForMaleSpeakerReturnsMaleMarkerPart() {
 		$this->addLeaderRelation(
 			array('gender' => tx_seminars_speaker::GENDER_MALE)
 		);
@@ -5719,7 +6472,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetLanguageKeySuffixForTypeForFemaleSpeakerReturnsFemaleMarkerPart() {
+	/**
+	 * @test
+	 */
+	public function getLanguageKeySuffixForTypeForFemaleSpeakerReturnsFemaleMarkerPart() {
 		$this->addLeaderRelation(
 			array('gender' => tx_seminars_speaker::GENDER_FEMALE)
 		);
@@ -5730,7 +6486,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetLanguageKeySuffixForTypeForSingleSpeakerWithoutGenderReturnsUnknownMarkerPart() {
+	/**
+	 * @test
+	 */
+	public function getLanguageKeySuffixForTypeForSingleSpeakerWithoutGenderReturnsUnknownMarkerPart() {
 		$this->addLeaderRelation(
 			array('gender' => tx_seminars_speaker::GENDER_UNKNOWN)
 		);
@@ -5741,7 +6500,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetLanguageKeySuffixForTypeForSingleSpeakerReturnsSingleMarkerPart() {
+	/**
+	 * @test
+	 */
+	public function getLanguageKeySuffixForTypeForSingleSpeakerReturnsSingleMarkerPart() {
 		$this->addSpeakerRelation(array());
 
 		$this->assertContains(
@@ -5750,7 +6512,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetLanguageKeySuffixForTypeForMultipleSpeakersWithoutGenderReturnsSpeakerType() {
+	/**
+	 * @test
+	 */
+	public function getLanguageKeySuffixForTypeForMultipleSpeakersWithoutGenderReturnsSpeakerType() {
 		$this->addSpeakerRelation(array());
 		$this->addSpeakerRelation(array());
 
@@ -5760,7 +6525,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetLanguageKeySuffixForTypeForMultipleMaleSpeakerReturnsMultipleAndMaleMarkerPart() {
+	/**
+	 * @test
+	 */
+	public function getLanguageKeySuffixForTypeForMultipleMaleSpeakerReturnsMultipleAndMaleMarkerPart() {
 		$this->addSpeakerRelation(
 			array('gender' => tx_seminars_speaker::GENDER_MALE)
 		);
@@ -5774,7 +6542,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetLanguageKeySuffixForTypeForMultipleFemaleSpeakerReturnsMultipleAndFemaleMarkerPart() {
+	/**
+	 * @test
+	 */
+	public function getLanguageKeySuffixForTypeForMultipleFemaleSpeakerReturnsMultipleAndFemaleMarkerPart() {
 		$this->addSpeakerRelation(
 			array('gender' => tx_seminars_speaker::GENDER_FEMALE)
 		);
@@ -5788,7 +6559,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetLanguageKeySuffixForTypeForMultipleSpeakersWithMixedGendersReturnsSpeakerType() {
+	/**
+	 * @test
+	 */
+	public function getLanguageKeySuffixForTypeForMultipleSpeakersWithMixedGendersReturnsSpeakerType() {
 		$this->addSpeakerRelation(
 			array('gender' => tx_seminars_speaker::GENDER_MALE)
 		);
@@ -5802,7 +6576,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetLanguageKeySuffixForTypeForOneSpeakerWithoutGenderAndOneWithGenderReturnsSpeakerType() {
+	/**
+	 * @test
+	 */
+	public function getLanguageKeySuffixForTypeForOneSpeakerWithoutGenderAndOneWithGenderReturnsSpeakerType() {
 		$this->addLeaderRelation(
 			array('gender' => tx_seminars_speaker::GENDER_UNKNOWN)
 		);
@@ -5816,23 +6593,29 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetLanguageKeySuffixForTypeForSingleMaleTutorReturnsCorrespondingMarkerPart() {
+	/**
+	 * @test
+	 */
+	public function getLanguageKeySuffixForTypeForSingleMaleTutorReturnsCorrespondingMarkerPart() {
 		$this->addTutorRelation(
 			array('gender' => tx_seminars_speaker::GENDER_MALE)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'tutors_single_male',
 			$this->fixture->getLanguageKeySuffixForType('tutors')
 		);
 	}
 
 
-	/////////////////////////////////////
-	// Tests concerning hasRequirements
-	/////////////////////////////////////
+	/*
+	 * Tests concerning hasRequirements
+	 */
 
-	public function testHasRequirementsForTopicWithoutRequirementsReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasRequirementsForTopicWithoutRequirementsReturnsFalse() {
 		$topic = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
@@ -5846,11 +6629,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$topic->hasRequirements()
 		);
-
-		$topic->__destruct();
 	}
 
-	public function testHasRequirementsForDateOfTopicWithoutRequirementsReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasRequirementsForDateOfTopicWithoutRequirementsReturnsFalse() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -5871,11 +6655,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$date->hasRequirements()
 		);
-
-		$date->__destruct();
 	}
 
-	public function testHasRequirementsForTopicWithOneRequirementReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasRequirementsForTopicWithOneRequirementReturnsTrue() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
@@ -5893,11 +6678,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$topic->hasRequirements()
 		);
-
-		$topic->__destruct();
 	}
 
-	public function testHasRequirementsForDateOfTopicWithOneRequirementReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasRequirementsForDateOfTopicWithOneRequirementReturnsTrue() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
@@ -5923,11 +6709,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$date->hasRequirements()
 		);
-
-		$date->__destruct();
 	}
 
-	public function testHasRequirementsForTopicWithTwoRequirementsReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasRequirementsForTopicWithTwoRequirementsReturnsTrue() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
@@ -5953,16 +6740,17 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$topic->hasRequirements()
 		);
-
-		$topic->__destruct();
 	}
 
 
-	/////////////////////////////////////
-	// Tests concerning hasDependencies
-	/////////////////////////////////////
+	/*
+	 * Tests concerning hasDependencies
+	 */
 
-	public function testHasDependenciesForTopicWithoutDependenciesReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasDependenciesForTopicWithoutDependenciesReturnsFalse() {
 		$topic = new tx_seminars_seminarchild(
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
@@ -5976,11 +6764,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$topic->hasDependencies()
 		);
-
-		$topic->__destruct();
 	}
 
-	public function testHasDependenciesForDateOfTopicWithoutDependenciesReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasDependenciesForDateOfTopicWithoutDependenciesReturnsFalse() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -6001,11 +6790,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$date->hasDependencies()
 		);
-
-		$date->__destruct();
 	}
 
-	public function testHasDependenciesForTopicWithOneDependencyReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasDependenciesForTopicWithOneDependencyReturnsTrue() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -6029,11 +6819,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$topic->hasDependencies()
 		);
-
-		$topic->__destruct();
 	}
 
-	public function testHasDependenciesForDateOfTopicWithOneDependencyReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasDependenciesForDateOfTopicWithOneDependencyReturnsTrue() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -6065,11 +6856,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$date->hasDependencies()
 		);
-
-		$date->__destruct();
 	}
 
-	public function testHasDependenciesForTopicWithTwoDependenciesReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasDependenciesForTopicWithTwoDependenciesReturnsTrue() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -6102,7 +6894,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$topic = new tx_seminars_seminarchild($topicUid);
 
 		$result = $topic->hasDependencies();
-		$topic->__destruct();
 
 		$this->assertTrue(
 			$result
@@ -6110,23 +6901,32 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////
-	// Tests concerning getRequirements
-	/////////////////////////////////////
+	/*
+	 * Tests concerning getRequirements
+	 */
 
-	public function testGetRequirementsReturnsSeminarBag() {
+	/**
+	 * @test
+	 */
+	public function getRequirementsReturnsSeminarBag() {
 		$this->assertTrue(
 			$this->fixture->getRequirements() instanceof tx_seminars_Bag_Event
 		);
 	}
 
-	public function testGetRequirementsForNoRequirementsReturnsEmptyBag() {
+	/**
+	 * @test
+	 */
+	public function getRequirementsForNoRequirementsReturnsEmptyBag() {
 		$this->assertTrue(
 			$this->fixture->getRequirements()->isEmpty()
 		);
 	}
 
-	public function testGetRequirementsForOneRequirementReturnsBagWithOneTopic() {
+	/**
+	 * @test
+	 */
+	public function getRequirementsForOneRequirementReturnsBagWithOneTopic() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
@@ -6142,21 +6942,21 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$topic = new tx_seminars_seminarchild($topicUid);
 
 		$result = $topic->getRequirements();
-		$topic->__destruct();
 
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$result->count()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$requiredTopicUid,
 			$result->current()->getUid()
 		);
-
-		$result->__destruct();
 	}
 
-	public function testGetRequirementsForDateOfTopicWithOneRequirementReturnsBagWithOneTopic() {
+	/**
+	 * @test
+	 */
+	public function getRequirementsForDateOfTopicWithOneRequirementReturnsBagWithOneTopic() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
@@ -6180,21 +6980,21 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$result = $date->getRequirements();
-		$date->__destruct();
 
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$result->count()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$requiredTopicUid,
 			$result->current()->getUid()
 		);
-
-		$result->__destruct();
 	}
 
-	public function testGetRequirementsForTwoRequirementsReturnsBagWithTwoItems() {
+	/**
+	 * @test
+	 */
+	public function getRequirementsForTwoRequirementsReturnsBagWithTwoItems() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
@@ -6217,34 +7017,40 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$topic = new tx_seminars_seminarchild($topicUid);
 		$requirements = $topic->getRequirements();
-		$topic->__destruct();
 
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$requirements->count()
 		);
-
-		$requirements->__destruct();
 	}
 
 
-	/////////////////////////////////////
-	// Tests concerning getDependencies
-	/////////////////////////////////////
+	/*
+	 * Tests concerning getDependencies
+	 */
 
-	public function testGetDependenciesReturnsSeminarBag() {
+	/**
+	 * @test
+	 */
+	public function getDependenciesReturnsSeminarBag() {
 		$this->assertTrue(
 			$this->fixture->getDependencies() instanceof tx_seminars_Bag_Event
 		);
 	}
 
-	public function testGetDependenciesForNoDependenciesReturnsEmptyBag() {
+	/**
+	 * @test
+	 */
+	public function getDependenciesForNoDependenciesReturnsEmptyBag() {
 		$this->assertTrue(
 			$this->fixture->getDependencies()->isEmpty()
 		);
 	}
 
-	public function testGetDependenciesForOneDependencyReturnsBagWithOneTopic() {
+	/**
+	 * @test
+	 */
+	public function getDependenciesForOneDependencyReturnsBagWithOneTopic() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -6266,21 +7072,21 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$topic = new tx_seminars_seminarchild($topicUid);
 
 		$result = $topic->getDependencies();
-		$topic->__destruct();
 
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$result->count()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$dependentTopicUid,
 			$result->current()->getUid()
 		);
-
-		$result->__destruct();
 	}
 
-	public function testGetDependenciesForDateOfTopicWithOneDependencyReturnsBagWithOneTopic() {
+	/**
+	 * @test
+	 */
+	public function getDependenciesForDateOfTopicWithOneDependencyReturnsBagWithOneTopic() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -6310,21 +7116,21 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		$result = $date->getDependencies();
-		$date->__destruct();
 
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$result->count()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$dependentTopicUid,
 			$result->current()->getUid()
 		);
-
-		$result->__destruct();
 	}
 
-	public function testGetDependenciesForTwoDependenciesReturnsBagWithTwoItems() {
+	/**
+	 * @test
+	 */
+	public function getDependenciesForTwoDependenciesReturnsBagWithTwoItems() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -6356,22 +7162,22 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$topic = new tx_seminars_seminarchild($topicUid);
 		$dependencies = $topic->getDependencies();
-		$topic->__destruct();
 
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$dependencies->count()
 		);
-
-		$dependencies->__destruct();
 	}
 
 
-	/////////////////////////////////
-	// Tests concerning isConfirmed
-	/////////////////////////////////
+	/*
+	 * Tests concerning isConfirmed
+	 */
 
-	public function testIsConfirmedForStatusPlannedReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function isConfirmedForStatusPlannedReturnsFalse() {
 		$this->fixture->setStatus(tx_seminars_seminar::STATUS_PLANNED);
 
 		$this->assertFalse(
@@ -6379,7 +7185,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsConfirmedForStatusConfirmedReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function isConfirmedForStatusConfirmedReturnsTrue() {
 		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CONFIRMED);
 
 		$this->assertTrue(
@@ -6387,7 +7196,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsConfirmedForStatusCanceledReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function isConfirmedForStatusCanceledReturnsFalse() {
 		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CANCELED);
 
 		$this->assertFalse(
@@ -6396,11 +7208,14 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////
-	// Tests concerning isCanceled
-	////////////////////////////////
+	/*
+	 * Tests concerning isCanceled
+	 */
 
-	public function testIsCanceledForPlannedEventReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function isCanceledForPlannedEventReturnsFalse() {
 	$this->fixture->setStatus(tx_seminars_seminar::STATUS_PLANNED);
 
 	$this->assertFalse(
@@ -6408,7 +7223,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsCanceledForCanceledEventReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function isCanceledForCanceledEventReturnsTrue() {
 		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CANCELED);
 
 		$this->assertTrue(
@@ -6416,7 +7234,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsCanceledForConfirmedEventReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function isCanceledForConfirmedEventReturnsFalse() {
 		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CONFIRMED);
 
 		$this->assertFalse(
@@ -6424,11 +7245,15 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	/////////////////////////////////
-	// Tests concerning isPlanned
-	/////////////////////////////////
 
-	public function testIsPlannedForStatusPlannedReturnsTrue() {
+	/*
+	 * Tests concerning isPlanned
+	 */
+
+	/**
+	 * @test
+	 */
+	public function isPlannedForStatusPlannedReturnsTrue() {
 		$this->fixture->setStatus(tx_seminars_seminar::STATUS_PLANNED);
 
 		$this->assertTrue(
@@ -6436,7 +7261,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testiIsPlannedForStatusConfirmedReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function isPlannedForStatusConfirmedReturnsFalse() {
 		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CONFIRMED);
 
 		$this->assertFalse(
@@ -6444,7 +7272,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testIsPlannedForStatusCanceledReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function isPlannedForStatusCanceledReturnsFalse() {
 		$this->fixture->setStatus(tx_seminars_seminar::STATUS_CANCELED);
 
 		$this->assertFalse(
@@ -6453,11 +7284,14 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////////////////////
-	// Tests concerning setEventTakesPlaceReminderSentFlag
-	////////////////////////////////////////////////////////
+	/*
+	 * Tests concerning setEventTakesPlaceReminderSentFlag
+	 */
 
-	public function testSetEventTakesPlaceReminderSentFlagSetsFlagToTrue() {
+	/**
+	 * @test
+	 */
+	public function setEventTakesPlaceReminderSentFlagSetsFlagToTrue() {
 		$this->fixture->setEventTakesPlaceReminderSentFlag();
 
 		$this->assertTrue(
@@ -6468,11 +7302,14 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////////////////////////
-	// Tests concerning setCancelationDeadlineReminderSentFlag
-	////////////////////////////////////////////////////////////
+	/*
+	 * Tests concerning setCancelationDeadlineReminderSentFlag
+	 */
 
-	public function testSetCancelationDeadlineReminderSentFlagToTrue() {
+	/**
+	 * @test
+	 */
+	public function setCancellationDeadlineReminderSentFlagToTrue() {
 		$this->fixture->setCancelationDeadlineReminderSentFlag();
 
 		$this->assertTrue(
@@ -6483,63 +7320,81 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////////
-	// Tests concerning getCancelationDeadline
-	////////////////////////////////////////////
+	/*
+	 * Tests concerning getCancelationDeadline
+	 */
 
-	public function testGetCancelationDeadlineForEventWithoutSpeakerReturnsBeginDateOfEvent() {
+	/**
+	 * @test
+	 */
+	public function getCancellationDeadlineForEventWithoutSpeakerReturnsBeginDateOfEvent() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->getBeginDateAsTimestamp(),
 			$this->fixture->getCancelationDeadline()
 		);
 	}
 
-	public function testGetCancelationDeadlineForEventWithSpeakerWithoutCancelationPeriodReturnsBeginDateOfEvent() {
+	/**
+	 * @test
+	 */
+	public function getCancellationDeadlineForEventWithSpeakerWithoutCancellationPeriodReturnsBeginDateOfEvent() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
 		$this->addSpeakerRelation(array('cancelation_period' => 0));
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->getBeginDateAsTimestamp(),
 			$this->fixture->getCancelationDeadline()
 		);
 	}
 
-	public function testGetCancelationDeadlineForEventWithTwoSpeakersWithoutCancelationPeriodReturnsBeginDateOfEvent() {
+	/**
+	 * @test
+	 */
+	public function getCancellationDeadlineForEventWithTwoSpeakersWithoutCancellationPeriodReturnsBeginDateOfEvent() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
 		$this->addSpeakerRelation(array('cancelation_period' => 0));
 		$this->addSpeakerRelation(array('cancelation_period' => 0));
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->getBeginDateAsTimestamp(),
 			$this->fixture->getCancelationDeadline()
 		);
 	}
 
-	public function testGetCancelationDeadlineForEventWithOneSpeakersWithCancelationPeriodReturnsBeginDateMinusCancelationPeriod() {
+	/**
+	 * @test
+	 */
+	public function getCancellationDeadlineForEventWithOneSpeakersWithCancellationPeriodReturnsBeginDateMinusCancelationPeriod() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
 		$this->addSpeakerRelation(array('cancelation_period' => 1));
 
-		$this->assertEquals(
+		$this->assertSame(
 			$GLOBALS['SIM_EXEC_TIME'] - tx_seminars_timespan::SECONDS_PER_DAY,
 			$this->fixture->getCancelationDeadline()
 		);
 	}
 
-	public function testGetCancelationDeadlineForEventWithTwoSpeakersWithCancelationPeriodsReturnsBeginDateMinusBiggestCancelationPeriod() {
+	/**
+	 * @test
+	 */
+	public function getCancellationDeadlineForEventWithTwoSpeakersWithCancellationPeriodsReturnsBeginDateMinusBiggestCancelationPeriod() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
 		$this->addSpeakerRelation(array('cancelation_period' => 21));
 		$this->addSpeakerRelation(array('cancelation_period' => 42));
 
-		$this->assertEquals(
+		$this->assertSame(
 			$GLOBALS['SIM_EXEC_TIME']
 				- (42 * tx_seminars_timespan::SECONDS_PER_DAY),
 			$this->fixture->getCancelationDeadline()
 		);
 	}
 
-	public function testGetCancelationDeadlineForEventWithoutBeginDateThrowsException() {
+	/**
+	 * @test
+	 */
+	public function getCancellationDeadlineForEventWithoutBeginDateThrowsException() {
 		$this->fixture->setBeginDate(0);
 
 		$this->setExpectedException(
@@ -6551,17 +7406,23 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////
-	// Tests concerning the license expiry
-	///////////////////////////////////////
+	/*
+	 * Tests concerning the license expiry
+	 */
 
-	public function testHasExpiryForNoExpiryReturnsFalse() {
+	/**
+	 * @test
+	 */
+	public function hasExpiryForNoExpiryReturnsFalse() {
 		$this->assertFalse(
 			$this->fixture->hasExpiry()
 		);
 	}
 
-	public function testHasExpiryForNonZeroExpiryReturnsTrue() {
+	/**
+	 * @test
+	 */
+	public function hasExpiryForNonZeroExpiryReturnsTrue() {
 		$this->fixture->setExpiry(42);
 
 		$this->assertTrue(
@@ -6569,34 +7430,32 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testGetExpiryForNoExpiryReturnsEmptyString() {
-		$this->assertEquals(
+	/**
+	 * @test
+	 */
+	public function getExpiryForNoExpiryReturnsEmptyString() {
+		$this->assertSame(
 			'',
 			$this->fixture->getExpiry()
 		);
 	}
 
-	public function testGetExpiryForNonZeroExpiryReturnsFormattedDate() {
+	/**
+	 * @test
+	 */
+	public function getExpiryForNonZeroExpiryReturnsFormattedDate() {
 		$this->fixture->setExpiry(mktime(0, 0, 0, 12, 31, 2000));
 
-		$this->assertEquals(
+		$this->assertSame(
 			'31.12.2000',
 			$this->fixture->getExpiry()
 		);
 	}
 
 
-	////////////////////////////////////
-	// Tests concerning setDescription
-	////////////////////////////////////
-
-	// TODO: Add an rte_css function to the fake front end to be able to run
-	// the function pi_RTEcssText
-
-
-	//////////////////////////////////
-	// Tests concerning getEventData
-	//////////////////////////////////
+	/*
+	 * Tests concerning getEventData
+	 */
 
 	/**
 	 * @test
@@ -6604,7 +7463,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function getEventDataReturnsFormattedUnregistrationDeadline() {
 		$this->fixture->setUnregistrationDeadline(1893488400);
 		$this->fixture->setShowTimeOfUnregistrationDeadline(0);
-		$this->assertEquals(
+		$this->assertSame(
 			'01.01.2030',
 			$this->fixture->getEventData('deadline_unregistration')
 		);
@@ -6617,7 +7476,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setUnregistrationDeadline(1893488400);
 		$this->fixture->setShowTimeOfUnregistrationDeadline(1);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'01.01.2030 10:00',
 			$this->fixture->getEventData('deadline_unregistration')
 		);
@@ -6628,7 +7487,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 */
 	public function getEventDataForUnregistrationDeadlineZeroReturnsEmptyString () {
 		$this->fixture->setUnregistrationDeadline(0);
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getEventData('deadline_unregistration')
 		);
@@ -6781,12 +7640,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$fixture->expects($this->any())->method('getPlacesAsArray')->will($this->returnValue(array($place)));
 		$fixture->expects($this->any())->method('hasPlace')->will($this->returnValue(TRUE));
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Hotel Ibis, Kaiser-Karl-Ring 91, Bonn',
 			$fixture->getEventData('place')
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -6814,12 +7671,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$fixture->expects($this->any())->method('getPlacesAsArray')->will($this->returnValue(array($place1, $place2)));
 		$fixture->expects($this->any())->method('hasPlace')->will($this->returnValue(TRUE));
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Hotel Ibis' . LF . 'Wasserwerk',
 			$fixture->getEventData('place')
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -6837,12 +7692,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$fixture->expects($this->any())->method('getPlacesAsArray')->will($this->returnValue(array($place)));
 		$fixture->expects($this->any())->method('hasPlace')->will($this->returnValue(TRUE));
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Hotel Ibis, Kaiser-Karl-Ring 91, Bonn',
 			$fixture->getEventData('place')
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -6860,18 +7713,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$fixture->expects($this->any())->method('getPlacesAsArray')->will($this->returnValue(array($place)));
 		$fixture->expects($this->any())->method('hasPlace')->will($this->returnValue(TRUE));
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Hotel Ibis, Kaiser-Karl-Ring 91, 53111 Bonn',
 			$fixture->getEventData('place')
 		);
-
-		$fixture->__destruct();
 	}
 
 
-	///////////////////////////////////////
-	// Tests concerning dumpSeminarValues
-	///////////////////////////////////////
+	/*
+	 * Tests concerning dumpSeminarValues
+	 */
 
 	/**
 	 * @test
@@ -6922,7 +7773,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function dumpSeminarValuesForEventWithoutDescriptionAndDescriptionGivenReturnsDescriptionLabelWithColonsAndLineFeed() {
 		$this->fixture->setDescription('');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('label_description') . ':' . LF,
 			$this->fixture->dumpSeminarValues('description')
 		);
@@ -6936,7 +7787,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setAttendancesMax(2);
 		$this->fixture->setNeedsRegistration(TRUE);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('label_vacancies') . ': 0' . LF ,
 			$this->fixture->dumpSeminarValues('vacancies')
 		);
@@ -6950,7 +7801,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setAttendancesMax(2);
 		$this->fixture->setNeedsRegistration(TRUE);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('label_vacancies') . ': 1' . LF ,
 			$this->fixture->dumpSeminarValues('vacancies')
 		);
@@ -6962,7 +7813,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function dumpSeminarValuesForEventWithUnlimitedVacanciesAndVacanciesGivenReturnsVacanciesUnlimitedString() {
 		$this->fixture->setUnlimitedVacancies();
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('label_vacancies') . ': ' .
 				$this->fixture->translate('label_unlimited') . LF ,
 			$this->fixture->dumpSeminarValues('vacancies')
@@ -6970,9 +7821,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////////////
-	// Tests regarding the registration begin date
-	////////////////////////////////////////////////
+	/*
+	 * Tests regarding the registration begin date
+	 */
 
 	/**
 	 * @test
@@ -7002,7 +7853,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function getRegistrationBeginAsUnixTimestampForEventWithoutRegistrationBeginReturnsZero() {
 		$this->fixture->setRegistrationBeginDate(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			0,
 			$this->fixture->getRegistrationBeginAsUnixTimestamp()
 		);
@@ -7014,7 +7865,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function getRegistrationBeginAsUnixTimestampForEventWithRegistrationBeginReturnsRegistrationBeginAsUnixTimestamp() {
 		$this->fixture->setRegistrationBeginDate(42);
 
-		$this->assertEquals(
+		$this->assertSame(
 			42,
 			$this->fixture->getRegistrationBeginAsUnixTimestamp()
 		);
@@ -7029,7 +7880,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setRegistrationBeginDate(0);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getRegistrationBegin()
 		);
@@ -7044,22 +7895,22 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME']);
 
-		$this->assertEquals(
+		$this->assertSame(
 			strftime('%d.%m.%Y %H:%M', $GLOBALS['SIM_EXEC_TIME']),
 			$this->fixture->getRegistrationBegin()
 		);
 	}
 
 
-	/////////////////////////////////////
-	// Tests regarding the description.
-	/////////////////////////////////////
+	/*
+	 * Tests regarding the description.
+	 */
 
 	/**
 	 * @test
 	 */
 	public function getDescriptionWithoutDescriptionReturnEmptyString() {
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getDescription()
 		);
@@ -7071,7 +7922,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function setDescriptionSetsDescription() {
 		$this->fixture->setDescription('this is a great event.');
 
-		$this->assertEquals(
+		$this->assertSame(
 			'this is a great event.',
 			$this->fixture->getDescription()
 		);
@@ -7098,15 +7949,15 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////////////
-	// Tests regarding the additional information.
-	////////////////////////////////////////////////
+	/*
+	 * Tests regarding the additional information.
+	 */
 
 	/**
 	 * @test
 	 */
 	public function getAdditionalInformationWithoutAdditionalInformationReturnsEmptyString() {
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$this->fixture->getAdditionalInformation()
 		);
@@ -7118,7 +7969,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function setAdditionalInformationSetsAdditionalInformation() {
 		$this->fixture->setAdditionalInformation('this is good to know');
 
-		$this->assertEquals(
+		$this->assertSame(
 			'this is good to know',
 			$this->fixture->getAdditionalInformation()
 		);
@@ -7145,9 +7996,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////////
-	// Tests concerning getLatestPossibleRegistrationTime
-	///////////////////////////////////////////////////////
+	/*
+	 * Tests concerning getLatestPossibleRegistrationTime
+	 */
 
 	/**
 	 * @test
@@ -7165,12 +8016,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_seminarchild($uid, array());
 
-		$this->assertEquals(
+		$this->assertSame(
 			0,
 			$fixture->getLatestPossibleRegistrationTime()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7189,12 +8038,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_seminarchild($uid, array());
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->now,
 			$fixture->getLatestPossibleRegistrationTime()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7213,12 +8060,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_seminarchild($uid, array());
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->now,
 			$fixture->getLatestPossibleRegistrationTime()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7239,12 +8084,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$uid, array('allowRegistrationForStartedEvents' => 1)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->now + 1000,
 			$fixture->getLatestPossibleRegistrationTime()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7265,12 +8108,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$uid, array('allowRegistrationForStartedEvents' => 1)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->now - 1000,
 			$fixture->getLatestPossibleRegistrationTime()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7291,18 +8132,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$uid, array('allowRegistrationForStartedEvents' => 1)
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->now,
 			$fixture->getLatestPossibleRegistrationTime()
 		);
-
-		$fixture->__destruct();
 	}
 
 
-	/////////////////////////////////////////////
-	// Tests concerning hasOfflineRegistrations
-	/////////////////////////////////////////////
+	/*
+	 * Tests concerning hasOfflineRegistrations
+	 */
 
 	/**
 	 * @test
@@ -7325,15 +8164,15 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////////////
-	// Tests concerning getOfflineRegistrations
-	/////////////////////////////////////////////
+	/*
+	 * Tests concerning getOfflineRegistrations
+	 */
 
 	/**
 	 * @test
 	 */
 	public function getOfflineRegistrationsForEventWithoutOfflineRegistrationsReturnsZero() {
-		$this->assertEquals(
+		$this->assertSame(
 			0,
 			$this->fixture->getOfflineRegistrations()
 		);
@@ -7345,16 +8184,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function getOfflineRegistrationsForEventWithTwoOfflineRegistrationsReturnsTwo() {
 		$this->fixture->setOfflineRegistrationNumber(2);
 
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getOfflineRegistrations()
 		);
 	}
 
 
-	/////////////////////////////////////////
-	// Tests concerning calculateStatistics
-	/////////////////////////////////////////
+	/*
+	 * Tests concerning calculateStatistics
+	 */
 
 	/**
 	 * @test
@@ -7370,7 +8209,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->calculateStatistics();
 
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getAttendances()
 		);
@@ -7390,7 +8229,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->calculateStatistics();
 
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getAttendancesPaid()
 		);
@@ -7417,7 +8256,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->calculateStatistics();
 
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			$this->fixture->getAttendancesOnRegistrationQueue()
 		);
@@ -7431,16 +8270,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->calculateStatistics();
 
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->fixture->getAttendances()
 		);
 	}
 
 
-	/////////////////////////////////////
-	// Tests concerning getTopicInteger
-	/////////////////////////////////////
+	/*
+	 * Tests concerning getTopicInteger
+	 */
 
 	/**
 	 * @test
@@ -7448,7 +8287,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function getTopicIntegerForSingleEventReturnsDataFromRecord() {
 		$this->fixture->setRecordPropertyInteger('credit_points', 42);
 
-		$this->assertEquals(
+		$this->assertSame(
 			42,
 			$this->fixture->getTopicInteger('credit_points')
 		);
@@ -7475,18 +8314,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$date = new tx_seminars_seminarchild($dateRecordUid);
 
-		$this->assertEquals(
+		$this->assertSame(
 			42,
 			$date->getTopicInteger('credit_points')
 		);
-
-		$date->__destruct();
 	}
 
 
-	/////////////////////////////////////
-	// Tests concerning hasTopicInteger
-	/////////////////////////////////////
+	/*
+	 * Tests concerning hasTopicInteger
+	 */
 
 	/**
 	 * @test
@@ -7545,8 +8382,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$date->hasTopicInteger('credit_points')
 		);
-
-		$date->__destruct();
 	}
 
 	/**
@@ -7573,14 +8408,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$date->hasTopicInteger('credit_points')
 		);
-
-		$date->__destruct();
 	}
 
 
-	///////////////////////////////////////////
-	// Tests concerning the publication state
-	///////////////////////////////////////////
+	/*
+	 * Tests concerning the publication state
+	 */
 
 	/**
 	 * @test
@@ -7591,7 +8424,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			'5318761asdf35as5sad35asd35asd'
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'5318761asdf35as5sad35asd35asd',
 			$this->fixture->getPublicationHash()
 		);
@@ -7603,7 +8436,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	public function setPublicationHashSetsPublicationHash() {
 		$this->fixture->setPublicationHash('5318761asdf35as5sad35asd35asd');
 
-		$this->assertEquals(
+		$this->assertSame(
 			'5318761asdf35as5sad35asd35asd',
 			$this->fixture->getPublicationHash()
 		);
@@ -7632,9 +8465,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////////////////
-	// Tests concerning canViewRegistrationsList
-	//////////////////////////////////////////////
+	/*
+	 * Tests concerning canViewRegistrationsList
+	 */
 
 	/**
 	 * Data provider for testing the canViewRegistrationsList function
@@ -7824,14 +8657,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$this->testingFramework->createAndLoginFrontEndUser();
 		}
 
-		$this->assertEquals(
+		$this->assertSame(
 			$expected,
 			$fixture->canViewRegistrationsList(
 				$whichPlugin, $registrationsListPID, $registrationsVipListPID
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7872,15 +8703,13 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$this->testingFramework->createAndLoginFrontEndUser();
 		}
 
-		$this->assertEquals(
+		$this->assertSame(
 			$expected,
 			$fixture->canViewRegistrationsList(
 				$whichPlugin, $registrationsListPID, $registrationsVipListPID,
 				0, 'attendees_and_managers'
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7955,12 +8784,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$this->testingFramework->createAndLoginFrontEndUser();
 		}
 
-		$this->assertEquals(
+		$this->assertSame(
 			$expected,
 			$fixture->canViewRegistrationsList('csv_export')
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8159,15 +8986,13 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$this->testingFramework->createAndLoginFrontEndUser();
 		}
 
-		$this->assertEquals(
+		$this->assertSame(
 			$expected,
 			$fixture->canViewRegistrationsList(
 				$whichPlugin, $registrationsListPID, $registrationsVipListPID,
 				0, 'login'
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8366,21 +9191,19 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$this->testingFramework->createAndLoginFrontEndUser();
 		}
 
-		$this->assertEquals(
+		$this->assertSame(
 			$expected,
 			$fixture->canViewRegistrationsList(
 				$whichPlugin, $registrationsListPID, $registrationsVipListPID,
 				0, 'world'
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 
-	/////////////////////////////////////////////////////
-	// Tests concerning canViewRegistrationsListMessage
-	/////////////////////////////////////////////////////
+	/*
+	 * Tests concerning canViewRegistrationsListMessage
+	 */
 
 	/**
 	 * @test
@@ -8390,12 +9213,10 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(FALSE));
 		$fixture->init();
 
-		$this->assertEquals(
+		$this->assertSame(
 			$fixture->translate('message_noRegistrationNecessary'),
 			$fixture->canViewRegistrationsListMessage('list_registrations')
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8406,14 +9227,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
 		$fixture->init();
 
-		$this->assertEquals(
+		$this->assertSame(
 			$fixture->translate('message_notLoggedIn'),
 			$fixture->canViewRegistrationsListMessage(
 				'list_registrations', 'attendees_and_managers'
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8424,14 +9243,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
 		$fixture->init();
 
-		$this->assertEquals(
+		$this->assertSame(
 			$fixture->translate('message_notLoggedIn'),
 			$fixture->canViewRegistrationsListMessage(
 				'list_registrations', 'login'
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8442,14 +9259,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
 		$fixture->init();
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$fixture->canViewRegistrationsListMessage(
 				'list_registrations', 'world'
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8484,14 +9299,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
 		$fixture->init();
 
-		$this->assertEquals(
+		$this->assertSame(
 			$fixture->translate('message_notLoggedIn'),
 			$fixture->canViewRegistrationsListMessage(
 				'list_vip_registrations', $accessLevel
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8552,8 +9365,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$fixture->canViewRegistrationsListMessage($whichPlugin, $accessLevel);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8571,14 +9382,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->testingFramework->createFakeFrontEnd();
 		$this->testingFramework->createAndLoginFrontEndUser();
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$fixture->canViewRegistrationsListMessage(
 				'list_registrations', 'world'
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8593,14 +9402,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$fixture->expects($this->any())->method('needsRegistration')->will($this->returnValue(TRUE));
 		$fixture->expects($this->any())->method('canViewRegistrationsList')->will($this->returnValue(TRUE));
 
-		$this->assertEquals(
+		$this->assertSame(
 			'',
 			$fixture->canViewRegistrationsListMessage(
 				'list_registrations', 'world'
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8618,20 +9425,18 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->testingFramework->createFakeFrontEnd();
 		$this->testingFramework->createAndLoginFrontEndUser();
 
-		$this->assertEquals(
+		$this->assertSame(
 			$fixture->translate('message_accessDenied'),
 			$fixture->canViewRegistrationsListMessage(
 				'list_registrations', 'world'
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 
-	/////////////////////////////////
-	// Tests concerning hasAnyPrice
-	/////////////////////////////////
+	/*
+	 * Tests concerning hasAnyPrice
+	 */
 
 	/**
 	 * Data provider for hasAnyPriceWithDataProvider.
@@ -8791,7 +9596,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$fixture->expects($this->any())->method('hasPriceSpecialBoard')
 			->will($this->returnValue($hasPriceSpecialBoard));
 
-		$this->assertEquals(
+		$this->assertSame(
 			$expectedHasAnyPrice,
 			$fixture->hasAnyPrice()
 		);

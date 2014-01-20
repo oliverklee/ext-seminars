@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2005-2013 Oliver Klee (typo3-coding@oliverklee.de)
+* (c) 2005-2014 Oliver Klee (typo3-coding@oliverklee.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -34,9 +34,17 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_seminar extends tx_seminars_timespan {
-	/** @var string same as class name */
+	/**
+	 * the same as the class name
+	 *
+	 * @var string
+	 */
 	public $prefixId = 'tx_seminars_seminar';
-	/**  @var string path to this script relative to the extension dir */
+	/**
+	 * the path to this script relative to the extension directory
+	 *
+	 * @var string
+	 */
 	public $scriptRelPath = 'class.tx_seminars_seminar.php';
 
 	/**
@@ -52,23 +60,40 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	protected $mapperName = 'tx_seminars_Mapper_Event';
 
-	/** @var integer the number of all attendances */
+	/**
+	 * the number of all attendances
+	 *
+	 * @var integer
+	 */
 	protected $numberOfAttendances = 0;
 
-	/** @var integer the number of paid attendances */
+	/**
+	 * the number of paid attendances
+	 *
+	 * @var integer
+	 */
 	protected $numberOfAttendancesPaid = 0;
 
-	/** @var integer the number of attendances on the registration queue */
+	/**
+	 * the number of attendances on the registration queue
+	 *
+	 * @var integer
+	 */
 	protected $numberOfAttendancesOnQueue = 0;
 
-	/** @var boolean if the statistics have been already calculated */
+	/**
+	 * whether the statistics have been already calculate
+	 *
+	 * @var boolean
+	 */
 	protected $statisticsHaveBeenCalculated = FALSE;
 
 	/**
-	 * @var tx_seminars_seminar The related topic record as a reference
-	 * to the object.
+	 * the related topic record as a reference to the object
 	 *
 	 * This will be NULL if we are not a date record.
+
+	 * @var tx_seminars_seminar
 	 */
 	private $topic = NULL;
 
@@ -90,9 +115,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @param resource|boolean $dbResult MySQL result pointer (of SELECT query). If this parameter is provided, $uid will be ignored.
 	 * @param boolean $allowHiddenRecords whether it is possible to create a seminar object from a hidden record
 	 */
-	public function __construct(
-		$uid, $dbResult = FALSE, $allowHiddenRecords = FALSE
-	) {
+	public function __construct($uid, $dbResult = FALSE, $allowHiddenRecords = FALSE) {
 		parent::__construct($uid, $dbResult, $allowHiddenRecords);
 
 		// For date records: Create a reference to the topic record.
@@ -118,7 +141,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Checks certain fields to contain pausible values. Example: The registration
+	 * Checks certain fields to contain plausible values. Example: The registration
 	 * deadline must not be later than the event's starting time.
 	 *
 	 * This function is used in order to check values entered in the TCE forms
@@ -131,9 +154,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *               "newValue" (if needed)
 	 */
 	private function validateTceValues($fieldName, $value) {
-		$result = array(
-			'status' => TRUE
-		);
+		$result = array('status' => TRUE);
 
 		switch($fieldName) {
 			case 'deadline_registration':
@@ -1490,15 +1511,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Get a single payment method, just as plain text, including the detailed
-	 * description.
-	 * Returns an empty string if the corresponding payment method could not
-	 * be retrieved.
+	 * Get a single payment method, just as plain text, including the detailed description.
+	 *
+	 * Returns an empty string if the corresponding payment method could not be retrieved.
 	 *
 	 * @param integer $paymentMethodUid the UID of a single payment method, must not be zero
 	 *
-	 * @return string the selected payment method as plain text (or ''
-	 *                if there is an error)
+	 * @return string the selected payment method as plain text (or '' if there is an error)
 	 */
 	public function getSinglePaymentMethodPlain($paymentMethodUid) {
 		if ($paymentMethodUid <= 0) {
@@ -1508,35 +1527,32 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, description',
 			'tx_seminars_payment_methods',
-			'uid=' . $paymentMethodUid .
-				tx_oelib_db::enableFields('tx_seminars_payment_methods')
+			'uid = ' . $paymentMethodUid . tx_oelib_db::enableFields('tx_seminars_payment_methods')
 		);
-
-		if (!$dbResultPaymentMethod) {
+		if ($dbResultPaymentMethod === FALSE) {
 			return '';
 		}
 
 		// We expect just one result.
-		if (!$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod)) {
+		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
+		if ($row === FALSE) {
 			return '';
 		}
 
-		$result = $row['title'].': ';
-		$result .= $row['description'].LF.LF;
+		$result = $row['title'] . ': ';
+		$result .= $row['description'] . LF . LF;
 
 		return $result;
 	}
 
 	/**
-	 * Get a single payment method, just as plain text, without the detailed
-	 * description.
-	 * Returns an empty string if the corresponding payment method could not
-	 * be retrieved.
+	 * Get a single payment method, just as plain text, without the detailed description.
+	 *
+	 * Returns an empty string if the corresponding payment method could not be retrieved.
 	 *
 	 * @param integer $paymentMethodUid the UID of a single payment method, must not be zero
 	 *
-	 * @return string the selected payment method as plain text (or '' if
-	 *                there is an error)
+	 * @return string the selected payment method as plain text (or '' if there is an error)
 	 */
 	public function getSinglePaymentMethodShort($paymentMethodUid) {
 		if ($paymentMethodUid <= 0) {
@@ -1546,16 +1562,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title',
 			'tx_seminars_payment_methods',
-			'uid=' . $paymentMethodUid .
-				tx_oelib_db::enableFields('tx_seminars_payment_methods')
+			'uid = ' . $paymentMethodUid . tx_oelib_db::enableFields('tx_seminars_payment_methods')
 		);
-
-		if (!$dbResultPaymentMethod) {
+		if ($dbResultPaymentMethod === FALSE) {
 			return '';
 		}
 
 		// We expect just one result.
-		if (!$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod)) {
+		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
+		if ($row === FALSE) {
 			return '';
 		}
 
@@ -1588,8 +1603,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @param string $isoCode the ISO 639 alpha-2 code of the language
 	 *
-	 * @return string the short local name of the language or an empty string
-	 *                if the language couldn't be found
+	 * @return string the short local name of the language or an empty string if the language could not be found
 	 */
 	public function getLanguageNameFromIsoCode($isoCode) {
 		$languageName = '';
@@ -1598,9 +1612,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'static_languages',
 			'lg_iso_2="'.$isoCode.'"'
 		);
-		if ($dbResult) {
+		if ($dbResult !== FALSE) {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-			$languageName = $row['lg_name_local'];
+			$languageName = (string) $row['lg_name_local'];
 		}
 
 		return $languageName;
@@ -1788,15 +1802,14 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		$vacancies = $this->getVacancies();
-		$vacanciesTreshold
-			= $this->getConfValueInteger('showVacanciesThreshold');
+		$vacanciesThreshold = $this->getConfValueInteger('showVacanciesThreshold');
 
-		if ($vacancies == 0) {
+		if ($vacancies === 0) {
 			$result = $this->translate('message_fullyBooked');
-		} elseif ($vacancies >= $vacanciesTreshold) {
+		} elseif ($vacancies >= $vacanciesThreshold) {
 			$result = $this->translate('message_enough');
 		} else {
-			$result = $vacancies;
+			$result = (string) $vacancies;
 		}
 
 		return $result;
@@ -4005,7 +4018,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		// one entry.
 		if ($dbResult) {
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-				$result[] = $row['uid_foreign'];
+				$result[] = (integer) $row['uid_foreign'];
 			}
 		}
 
@@ -4237,7 +4250,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					'icon'  => $category->getIcon(),
 				);
 		}
-		$bag->__destruct();
 
 		return $result;
 	}
@@ -4502,8 +4514,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				);
 			$deadline = min($speakerDeadline, $deadline);
 		}
-
-		$speakers->__destruct();
 
 		return $deadline;
 	}
