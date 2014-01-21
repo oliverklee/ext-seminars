@@ -800,6 +800,21 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
+	public function createAndOutputListOfRegistrationsForInexistentEventUidReturn404() {
+		$this->fixture->createAndOutputListOfRegistrations(
+			$this->testingFramework->getAutoIncrement('tx_seminars_attendances')
+		);
+
+		$this->assertContains(
+			'404',
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+				->getLastAddedHeader()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function createAndOutputListOfRegistrationsCanContainTwoRegistrationUids() {
 		$this->configuration->setAsString('fieldsFromFeUserForCsv', '');
 		$this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
@@ -821,8 +836,7 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$registrationsList
-			= $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
+		$registrationsList = $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
 		$this->assertContains(
 			(string) $firstRegistrationUid,
 			$registrationsList

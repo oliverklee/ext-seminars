@@ -30,22 +30,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Csv_EventListView  {
-	/**
-	 * @var string
-	 */
-	const COLUMN_SEPARATOR = ';';
-
-	/**
-	 * @var string
-	 */
-	const LINE_SEPARATOR = CRLF;
-
-	/**
-	 * @var integer
-	 */
-	protected $pageUid = 0;
-
+class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView {
 	/**
 	 * @var string
 	 */
@@ -57,28 +42,9 @@ class Tx_Seminars_Csv_EventListView  {
 	protected $configuration = NULL;
 
 	/**
-	 * @var language
-	 */
-	protected $translator = NULL;
-
-	/**
-	 * The constructor.
-	 */
-	public function __construct() {
-		$this->configuration = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
-	}
-
-	/**
-	 * The destructor.
-	 */
-	public function __destruct() {
-		unset($this->configuration, $this->translator);
-	}
-
-	/**
 	 * Sets the page UID of the records to retrieve.
 	 *
-	 * @param integer $pageUid the page UID of the records, must be >= 0
+	 * @param integer $pageUid the page UID of the records, must be > 0
 	 *
 	 * @return void
 	 *
@@ -86,53 +52,10 @@ class Tx_Seminars_Csv_EventListView  {
 	 */
 	public function setPageUid($pageUid) {
 		if ($pageUid <= 0) {
-			throw new InvalidArgumentException('$pageUid must be > 0, but actually is: ' . $pageUid, 1390307753);
+			throw new InvalidArgumentException('$pageUid must be > 0, but actually is: ' . $pageUid, 1390329634);
 		}
 
 		$this->pageUid = $pageUid;
-	}
-
-	/**
-	 * Returns the page UID of the records to check.
-	 *
-	 * @return integer the page UID, will be >= 0
-	 */
-	protected function getPageUid() {
-		return $this->pageUid;
-	}
-
-	/**
-	 * Returns the name of the main table for this CSV export.
-	 *
-	 * @return string
-	 */
-	protected function getTableName() {
-		return $this->tableName;
-	}
-
-	/**
-	 * Loads the language data and returns the corresponding translator instance.
-	 *
-	 * @return language
-	 */
-	protected function getInitializedTranslator() {
-		if ($this->translator === NULL) {
-			if (isset($GLOBALS['LANG'])) {
-				$this->translator = $GLOBALS['LANG'];
-			} else {
-				$this->translator = t3lib_div::makeInstance('language');
-				if (isset($GLOBALS['BE_USER'])) {
-					$this->translator->init($GLOBALS['BE_USER']->uc['lang']);
-				} else {
-					$this->translator->init('default');
-				}
-			}
-
-			$this->translator->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
-			$this->translator->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
-		}
-
-		return $this->translator;
 	}
 
 	/**
@@ -150,7 +73,7 @@ class Tx_Seminars_Csv_EventListView  {
 	 * @return string
 	 */
 	public function render() {
-		if ($this->getPageUid() <= 0) {
+		if (!$this->hasPageUid()) {
 			return '';
 		}
 
@@ -160,24 +83,16 @@ class Tx_Seminars_Csv_EventListView  {
 	}
 
 	/**
-	 * Creates the heading line for a CSV event list.
-	 *
-	 * @return string header list, will not be empty if the CSV export has been configured correctly
-	 */
-	protected function createCsvHeading() {
-		return implode(self::COLUMN_SEPARATOR, $this->localizeCsvHeadings());
-	}
-
-	/**
 	 * Returns the localized field names.
 	 *
 	 * @return array<string> the translated field names in an array, will be empty if no fields should be exported
 	 */
-	protected function localizeCsvHeadings() {
+	protected function getLocalizedCsvHeadings() {
 		$translations = array();
+		$translator = $this->getInitializedTranslator();
 
 		foreach ($this->getFieldKeys() as $fieldName) {
-			$translations[] = rtrim($this->getInitializedTranslator()->getLL($this->getTableName() . '.' . $fieldName), ':');
+			$translations[] = rtrim($translator->getLL($this->getTableName() . '.' . $fieldName), ':');
 		}
 
 		return $translations;
@@ -192,12 +107,12 @@ class Tx_Seminars_Csv_EventListView  {
 		/** @var $builder tx_seminars_BagBuilder_Event */
 		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->setBackEndMode();
-		$builder->setSourcePages($this->pageUid, 255);
+		$builder->setSourcePages($this->getPageUid(), self::RECURSION_DEPTH);
 
 		$csvLines = array();
 		/** @var $seminar tx_seminars_seminar */
 		foreach ($builder->build() as $seminar) {
-			$csvLines[] = implode(self::COLUMN_SEPARATOR, $this->createCsvColumnsForModel($seminar));
+			$csvLines[] = implode(self::COLUMN_SEPARATOR, $this->createCsvColumnsForEvent($seminar));
 		}
 
 		return $csvLines;
@@ -207,36 +122,17 @@ class Tx_Seminars_Csv_EventListView  {
 	 * Retrieves data from an object and returns that data as an array of values. The individual values are already wrapped in
 	 * double quotes, with the contents having all quotes escaped.
 	 *
-	 * @param tx_seminars_seminar $model object that will deliver the data
+	 * @param tx_seminars_seminar $event object that will deliver the data
 	 *
 	 * @return array<string> the data for the keys provided in $keys (may be empty)
 	 */
-	protected function createCsvColumnsForModel(tx_seminars_seminar $model) {
+	protected function createCsvColumnsForEvent(tx_seminars_seminar $event) {
 		$csvLines = array();
 
 		foreach ($this->getFieldKeys() as $key) {
-			$csvLines[] = $this->escapeFieldForCsv($model->getEventData($key));
+			$csvLines[] = $this->escapeFieldForCsv($event->getEventData($key));
 		}
 
 		return $csvLines;
-	}
-
-	/**
-	 * Escapes a single field for CSV.
-	 *
-	 * @param string $fieldContent
-	 *
-	 * @return string
-	 */
-	protected function escapeFieldForCsv($fieldContent) {
-		if (strpos($fieldContent, '"') !== FALSE) {
-			$escapedFieldValue = '"' . str_replace('"', '""', $fieldContent) . '"';
-		} elseif ((strpos($fieldContent, ';') !== FALSE) || (strpos($fieldContent, LF) !== FALSE)) {
-			$escapedFieldValue = '"' . $fieldContent . '"';
-		} else {
-			$escapedFieldValue = $fieldContent;
-		}
-
-		return $escapedFieldValue;
 	}
 }

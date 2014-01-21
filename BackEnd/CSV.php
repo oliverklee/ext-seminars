@@ -34,6 +34,7 @@
 unset($MCONF);
 require_once('conf.php');
 require_once($BACK_PATH . 'init.php');
+require_once(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
 
 // This checks permissions and exits if the users has no access to this page.
 $GLOBALS['BE_USER']->modAccess($MCONF, 1);

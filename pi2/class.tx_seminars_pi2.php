@@ -555,8 +555,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 *        the PID of the page to export the registrations for, must be >= 0
 	 *
 	 * @return string CSV list of registrations for the given page, will be
-	 *                empty if no registrations could be found on the given page
-	 *                and its subpages
+	 *                empty if no registrations could be found on the given page and its subpages
 	 */
 	private function createListOfRegistrationsOnPage($pid) {
 		$registrationsBagBuilder = $this->createRegistrationBagBuilder();
@@ -618,8 +617,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 * Stores the type of the error in $this->errorType
 	 *
 	 * @param integer $eventUid
-	 *        the event to check the access for, must be >= 0 but not
-	 *        necessarily point to an existing event
+	 *        the event to check the access for, must be >= 0 but not necessarily point to an existing event
 	 *
 	 * @return boolean TRUE if the event record exists and the BE-User has
 	 *                 access to the registrations belonging to the event,
@@ -691,8 +689,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 * Returns whether the attendances on queue should also be exported in the
 	 * CSV file.
 	 *
-	 * @return boolean TRUE if the attendances on queue should also be exported,
-	 *                 FALSE otherwise
+	 * @return boolean TRUE if the attendances on queue should also be exported, FALSE otherwise
 	 */
 	private function getRegistrationsOnQueueConfiguration() {
 		switch ($this->exportMode) {
