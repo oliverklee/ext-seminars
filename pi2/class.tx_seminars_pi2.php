@@ -338,23 +338,21 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 *
 	 * If access is denied, an error message is returned, and an error 403 is set.
 	 *
-	 * @param integer $pid PID of the page with events for which to create the CSV list, must be > 0
+	 * @param integer $pageUid PID of the page with events for which to create the CSV list, must be > 0
 	 *
 	 * @return string CSV list of events for the given page or an error message in case of an error
 	 */
-	public function createAndOutputListOfEvents($pid) {
-		if ($pid > 0) {
-			if ($this->canAccessListOfEvents($pid)) {
-				$this->setContentTypeForEventLists();
-				$result = $this->createListOfEvents($pid);
-			} else {
-				$result = $this->addErrorHeaderAndReturnMessage(self::ACCESS_DENIED);
-			}
-		} else {
-			$result = $this->addErrorHeaderAndReturnMessage(self::NOT_FOUND);
+	public function createAndOutputListOfEvents($pageUid) {
+		if ($pageUid <= 0) {
+			return $this->addErrorHeaderAndReturnMessage(self::NOT_FOUND);
+		}
+		if (!$this->canAccessListOfEvents($pageUid)) {
+			return $this->addErrorHeaderAndReturnMessage(self::ACCESS_DENIED);
 		}
 
-		return $result;
+		$this->setContentTypeForEventLists();
+
+		return $this->createListOfEvents($pageUid);
 	}
 
 	/**
@@ -362,42 +360,16 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 *
 	 * This function does not do any access checks.
 	 *
-	 * @param integer $pid PID of the system folder from which the event records should be exported, must be > 0
+	 * @param integer $pageUid PID of the system folder from which the event records should be exported, must be > 0
 	 *
 	 * @return string CSV export of the event records on that page
 	 */
-	public function createListOfEvents($pid) {
-		if ($pid <= 0) {
-			return '';
-		}
+	public function createListOfEvents($pageUid) {
+		/** @var $eventListView Tx_Seminars_Csv_EventListView */
+		$eventListView = t3lib_div::makeInstance('Tx_Seminars_Csv_EventListView');
+		$eventListView->setPageUid($pageUid);
 
-		$result = $this->createEventsHeading();
-
-		/** @var $builder tx_seminars_BagBuilder_Event */
-		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
-		$builder->setBackEndMode();
-		$builder->setSourcePages($pid, 255);
-
-		foreach ($builder->build() as $seminar) {
-			$seminarData = $this->retrieveData(
-				$seminar, 'getEventData', $this->configuration->getAsString('fieldsFromEventsForCsv')
-			);
-			// Creates a list of semicolon-separated values of the event data.
-			$result .= implode(';', $seminarData) . CRLF;
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Creates the heading line for a CSV event list.
-	 *
-	 * @return string header list, will not be empty if the CSV export has been configured correctly
-	 */
-	private function createEventsHeading() {
-		$eventFields = $this->configuration->getAsTrimmedArray('fieldsFromEventsForCsv');
-
-		return implode(';', $this->localizeCsvHeadings($eventFields, 'tx_seminars_seminars')) . CRLF;
+		return $eventListView->render();
 	}
 
 	/**

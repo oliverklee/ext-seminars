@@ -42,6 +42,7 @@ return array(
 	'tx_seminars_csv_abstractbackendaccesscheck' => $extensionPath . 'Csv/AbstractBackEndAccessCheck.php',
 	'tx_seminars_csv_backendregistrationaccesscheck' => $extensionPath . 'Csv/BackEndRegistrationAccessCheck.php',
 	'tx_seminars_csv_backendeventaccesscheck' => $extensionPath . 'Csv/BackEndEventAccessCheck.php',
+	'tx_seminars_csv_eventlistview' => $extensionPath . 'Csv/EventListView.php',
 	'tx_seminars_csv_frontendregistrationaccesscheck' => $extensionPath . 'Csv/FrontEndRegistrationAccessCheck.php',
 	'tx_seminars_frontend_abstractview' => $extensionPath . 'FrontEnd/AbstractView.php',
 	'tx_seminars_frontend_categorylist' => $extensionPath . 'FrontEnd/CategoryList.php',

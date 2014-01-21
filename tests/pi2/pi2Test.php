@@ -138,22 +138,20 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 
 	/**
 	 * @test
+	 *
+	 * @expectedException InvalidArgumentException
 	 */
-	public function createListOfEventsIsEmptyForZeroPid() {
-		$this->assertSame(
-			'',
-			$this->fixture->createListOfEvents(0)
-		);
+	public function createListOfEventsForZeroPidThrowsException() {
+		$this->fixture->createListOfEvents(0);
 	}
 
 	/**
 	 * @test
+	 *
+	 * @expectedException InvalidArgumentException
 	 */
-	public function createListOfEventsIsEmptyForNegativePid() {
-		$this->assertSame(
-			'',
-			$this->fixture->createListOfEvents(-2)
-		);
+	public function createListOfEventsForNegativePidThrowsException() {
+		$this->fixture->createListOfEvents(-2);
 	}
 
 	/**
