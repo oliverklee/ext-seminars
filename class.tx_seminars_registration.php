@@ -382,12 +382,9 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * payment or the gender), this function will already return the clear text
 	 * version.
 	 *
-	 * @param string $key
-	 *        the key of the data to retrieve, need not be trimmed
+	 * @param string $key the key of the data to retrieve, need not be trimmed
 	 *
-	 * @return string
-	 *         the trimmed value retrieved from $this->recordData with CR
-	 *         replaced by LF, may be empty empty
+	 * @return string the trimmed value retrieved from $this->recordData with CR replaced by LF, may be empty empty
 	 */
 	public function getRegistrationData($key) {
 		$trimmedKey = trim($key);
@@ -397,8 +394,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 				// The fallthrough is intended.
 			case 'tstamp':
 				$result = strftime(
-					$this->getConfValueString('dateFormatYMD').' '
-						.$this->getConfValueString('timeFormat'),
+					$this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat'),
 					$this->getRecordPropertyInteger($trimmedKey)
 				);
 				break;
