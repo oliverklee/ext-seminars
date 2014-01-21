@@ -78,8 +78,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			is_object($bag)
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderBuildsABag() {
@@ -88,8 +86,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			is_subclass_of($bag, 'tx_seminars_Bag_Abstract')
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderBuildsBagSortedAscendingByUid() {
@@ -110,15 +106,12 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			$eventUid2,
 			$testBag->next()->getUid()
 		);
-
-		$testBag->__destruct();
 	}
 
 	public function testBuilderWithAdditionalTableNameDoesNotProduceSqlError() {
 		$this->fixture->addAdditionalTableName('tx_seminars_seminars');
 
 		$bag = $this->fixture->build();
-		$bag->__destruct();
 	}
 
 
@@ -176,8 +169,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePages() {
@@ -197,8 +188,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsFromAllPagesWithEmptyAfterNonEmptySourcePages() {
@@ -220,8 +209,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePagesAndZeroRecursion() {
@@ -243,8 +230,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePagesAndNonZeroRecursion() {
@@ -266,8 +251,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsFromOnePage() {
@@ -288,8 +271,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsFromTwoPages() {
@@ -312,8 +293,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresRecordsOnSubpageWithoutRecursion() {
@@ -332,8 +311,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsOnSubpageWithRecursion() {
@@ -353,8 +330,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsOnTwoSubpagesWithRecursion() {
@@ -381,8 +356,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderSelectsRecordsOnSubpageFromTwoParentsWithRecursion() {
@@ -411,8 +384,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresRecordsOnSubpageWithTooShallowRecursion() {
@@ -434,8 +405,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -453,8 +422,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderFindsHiddenRecordsInBackEndMode() {
@@ -470,8 +437,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresTimedRecordsByDefault() {
@@ -484,8 +449,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderFindsTimedRecordsInBackEndMode() {
@@ -501,8 +464,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresDeletedRecordsByDefault() {
@@ -515,8 +476,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresDeletedRecordsInBackEndMode() {
@@ -531,8 +490,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testWhereClauseInitiallyIsNotEmpty() {
@@ -570,8 +527,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToTitleIgnoresRecordWithOtherTitle() {
@@ -585,8 +540,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -607,8 +560,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToTitleAndPagesExcludesRecordThatMatchesOnlyTheTitle() {
@@ -623,8 +574,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToTitleAndPagesExcludesRecordThatMatchesOnlyThePage() {
@@ -639,8 +588,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToTitleStillExcludesHiddenRecords() {
@@ -654,8 +601,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToTitleStillExcludesDeletedRecords() {
@@ -669,8 +614,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -776,8 +719,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			$eventUid1,
 			$testBag->next()->getUid()
 		);
-
-		$testBag->__destruct();
 	}
 
 
@@ -813,8 +754,6 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 

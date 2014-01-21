@@ -81,8 +81,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			is_subclass_of($bag, 'tx_seminars_Bag_Abstract')
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresHiddenEventsByDefault() {
@@ -95,8 +93,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderFindsHiddenEventsInBackEndMode() {
@@ -112,8 +108,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresTimedEventsByDefault() {
@@ -127,8 +121,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderFindsTimedEventsInBackEndMode() {
@@ -144,8 +136,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -178,8 +168,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -209,8 +197,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -241,8 +227,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -267,8 +251,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -302,8 +284,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -337,8 +317,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -378,8 +356,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid1,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -412,8 +388,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -438,8 +412,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -479,8 +451,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			in_array($dateUid, $matchingUids)
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -512,8 +482,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -551,8 +519,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -588,8 +554,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -614,8 +578,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToPlacesIgnoresEventsWithoutPlace() {
@@ -629,8 +591,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToPlacesFindsEventsInTwoPlaces() {
@@ -659,8 +619,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToPlacesWithEmptyPlacesArrayFindsAllEvents() {
@@ -676,8 +634,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToPlacesIgnoresEventsWithDifferentPlace() {
@@ -695,8 +651,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToPlacesWithOnePlaceFindsEventInTwoPlaces() {
@@ -718,8 +672,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -738,8 +690,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresCanceledEventsWithHideCanceledEvents() {
@@ -754,8 +704,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderFindsConfirmedEventsWithHideCanceledEvents() {
@@ -771,8 +719,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderFindsCanceledEventsWithHideCanceledEventsDisabled() {
@@ -788,8 +734,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderFindsCanceledEventsWithHideCanceledEventsEnabledThenDisabled() {
@@ -806,8 +750,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBuilderIgnoresCanceledEventsWithHideCanceledDisabledThenEnabled() {
@@ -823,8 +765,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -873,8 +813,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastFindsOpenEndedPastEvents() {
@@ -893,8 +831,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastIgnoresCurrentEvents() {
@@ -912,8 +848,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastIgnoresUpcomingEvents() {
@@ -931,8 +865,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastIgnoresUpcomingOpenEndedEvents() {
@@ -950,8 +882,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastIgnoresEventsWithoutDate() {
@@ -970,8 +900,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -997,8 +925,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastAndCurrentFindsOpenEndedPastEvents() {
@@ -1017,8 +943,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastAndCurrentFindsCurrentEvents() {
@@ -1037,8 +961,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastAndCurrentIgnoresUpcomingEvents() {
@@ -1056,8 +978,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastAndCurrentIgnoresUpcomingOpenEndedEvents() {
@@ -1075,8 +995,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFramePastAndCurrentIgnoresEventsWithoutDate() {
@@ -1094,8 +1012,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -1120,8 +1036,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentIgnoresOpenEndedPastEvents() {
@@ -1139,8 +1053,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentFindsCurrentEvents() {
@@ -1159,8 +1071,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentIgnoresUpcomingEvents() {
@@ -1178,8 +1088,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentIgnoresUpcomingOpenEndedEvents() {
@@ -1197,8 +1105,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentIgnoresEventsWithoutDate() {
@@ -1216,8 +1122,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -1242,8 +1146,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentAndUpcomingIgnoresOpenEndedPastEvents() {
@@ -1261,8 +1163,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentAndUpcomingFindsCurrentEvents() {
@@ -1281,8 +1181,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentAndUpcomingFindsUpcomingEvents() {
@@ -1301,8 +1199,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentAndUpcomingFindsUpcomingOpenEndedEvents() {
@@ -1321,8 +1217,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameCurrentAndUpcomingFindsEventsWithoutDate() {
@@ -1341,8 +1235,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -1367,8 +1259,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingIgnoresOpenEndedPastEvents() {
@@ -1386,8 +1276,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingIgnoresCurrentEvents() {
@@ -1405,8 +1293,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingFindsUpcomingEvents() {
@@ -1425,8 +1311,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingFindsUpcomingOpenEndedEvents() {
@@ -1445,8 +1329,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingFindsEventsWithoutDate() {
@@ -1465,8 +1347,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -1491,8 +1371,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingWithBeginDateIgnoresOpenEndedPastEvents() {
@@ -1510,8 +1388,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingWithBeginDateIgnoresCurrentEvents() {
@@ -1529,8 +1405,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingWithBeginDateFindsUpcomingEvents() {
@@ -1549,8 +1423,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingWithBeginDateFindsUpcomingOpenEndedEvents() {
@@ -1569,8 +1441,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameUpcomingWithBeginDateNotFindsEventsWithoutDate() {
@@ -1589,8 +1459,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			0,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -1616,8 +1484,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverIgnoresOpenEndedPastEvents() {
@@ -1636,8 +1502,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverIgnoresCurrentEvents() {
@@ -1656,8 +1520,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverFindsUpcomingEvents() {
@@ -1677,8 +1539,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverFindsUpcomingEventsWithUpcomingDeadline() {
@@ -1698,8 +1558,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverIgnoresUpcomingEventsWithPassedDeadline() {
@@ -1718,8 +1576,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverFindsUpcomingOpenEndedEvents() {
@@ -1739,8 +1595,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameDeadlineNotOverFindsEventsWithoutDate() {
@@ -1760,8 +1614,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -1790,8 +1642,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -1812,8 +1662,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -1835,8 +1683,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -1858,8 +1704,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -1881,8 +1725,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -1903,8 +1745,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -1925,8 +1765,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -1947,8 +1785,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -1974,8 +1810,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameAllFindsOpenEndedPastEvents() {
@@ -1994,8 +1828,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameAllFindsCurrentEvents() {
@@ -2014,8 +1846,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameAllFindsUpcomingEvents() {
@@ -2034,8 +1864,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameAllFindsUpcomingOpenEndedEvents() {
@@ -2054,8 +1882,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testSetTimeFrameAllFindsEventsWithoutDate() {
@@ -2074,8 +1900,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -2105,8 +1929,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEmptyTypeUidResultsInAllEvents() {
@@ -2133,8 +1955,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEmptyTypeUidAfterLimitToNotEmptyTypesResultsInAllEvents() {
@@ -2162,8 +1982,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesCanResultInOneEvent() {
@@ -2185,8 +2003,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesCanResultInTwoEvents() {
@@ -2215,8 +2031,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesWillExcludeUnassignedEvents() {
@@ -2247,8 +2061,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesWillExcludeEventsOfOtherTypes() {
@@ -2285,8 +2097,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid1,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesResultsInAnEmptyBagIfThereAreNoMatches() {
@@ -2316,8 +2126,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesIgnoresTopicRecords() {
@@ -2338,8 +2146,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesFindsDateRecordForTopic() {
@@ -2372,8 +2178,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$dateUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesFindsDateRecordForSingle() {
@@ -2402,8 +2206,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesIgnoresTopicOfDateRecord() {
@@ -2436,8 +2238,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventTypesCanFindEventsFromMultipleTypes() {
@@ -2470,8 +2270,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -2500,8 +2298,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesIgnoresEventsInOtherCity() {
@@ -2524,8 +2320,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesWithTwoCitiesFindsEventsEachInOneOfBothCities() {
@@ -2562,8 +2356,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesWithEmptyCitiesArrayFindsEventsWithCities() {
@@ -2588,8 +2380,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesIgnoresEventsWithDifferentCity() {
@@ -2612,8 +2402,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesIgnoresEventWithPlaceWithoutCity() {
@@ -2633,8 +2421,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesWithTwoCitiesFindsOneEventInBothCities() {
@@ -2667,8 +2453,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesWithOneCityFindsEventInTwoCities() {
@@ -2701,8 +2485,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCitiesWithTwoCitiesOneDifferentFindsEventInOneOfTheCities() {
@@ -2735,8 +2517,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -2765,8 +2545,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCountriesIgnoresEventsInOtherCountry() {
@@ -2789,8 +2567,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCountriesFindsEventsInTwoCountries() {
@@ -2827,8 +2603,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCountriesWithEmptyCountriesArrayFindsAllEvents() {
@@ -2853,8 +2627,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCountriesIgnoresEventsWithDifferentCountry() {
@@ -2877,8 +2649,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCountriesIgnoresEventsWithPlaceWithoutCountry() {
@@ -2898,8 +2668,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCountriesWithOneCountryFindsEventInTwoCountries() {
@@ -2932,8 +2700,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -2953,8 +2719,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToLanguagesFindsEventsInTwoLanguages() {
@@ -2973,8 +2737,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToLanguagesWithEmptyLanguagesArrayFindsAllEvents() {
@@ -2990,8 +2752,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToLanguagesIgnoresEventsWithDifferentLanguage() {
@@ -3005,8 +2765,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToLanguagesIgnoresEventsWithoutLanguage() {
@@ -3019,8 +2777,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -3040,8 +2796,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToTopicRecordsIgnoresSingleEventRecords() {
@@ -3055,8 +2809,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToTopicRecordsIgnoresEventDateRecords() {
@@ -3070,8 +2822,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -3092,8 +2842,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testRemoveLimitToTopicRecordsFindsEventDateRecords() {
@@ -3109,8 +2857,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -3140,8 +2886,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToOwnerWithPositiveFeUserUidIgnoresEventsWithoutOwner() {
@@ -3155,8 +2899,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToOwnerWithPositiveFeUserUidIgnoresEventsWithDifferentOwner() {
@@ -3171,8 +2913,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToOwnerWithZeroFeUserUidFindsEventsWithoutOwner() {
@@ -3188,8 +2928,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToOwnerWithZeroFeUserUidFindsEventsWithOwner() {
@@ -3206,8 +2944,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -3227,8 +2963,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToDateAndSingleRecordsFindsSingleRecords() {
@@ -3243,8 +2977,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToDateAndSingleRecordsIgnoresTopicRecords() {
@@ -3258,8 +2990,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testRemoveLimitToDateAndSingleRecordsFindsTopicRecords() {
@@ -3275,8 +3005,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -3312,8 +3040,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventManagerWithPositiveFeUserUidIgnoresEventsWithoutEventManager() {
@@ -3328,8 +3054,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventManagerWithZeroFeUserUidFindsEventsWithoutEventManager() {
@@ -3346,8 +3070,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -3370,14 +3092,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$event = new tx_seminars_seminar($eventUid1);
 		$this->fixture->limitToEventsNextDay($event);
 		$bag = $this->fixture->build();
-		$event->__destruct();
 
 		$this->assertEquals(
 			$eventUid2,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventsNextDayIgnoresEarlierEvents() {
@@ -3395,13 +3114,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$event = new tx_seminars_seminar($eventUid);
 		$this->fixture->limitToEventsNextDay($event);
 		$bag = $this->fixture->build();
-		$event->__destruct();
 
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventsNextDayIgnoresEventsLaterThanOneDay() {
@@ -3419,13 +3135,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$event = new tx_seminars_seminar($eventUid);
 		$this->fixture->limitToEventsNextDay($event);
 		$bag = $this->fixture->build();
-		$event->__destruct();
 
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventsNextDayWithEventWithEmptyEndDateThrowsException() {
@@ -3470,14 +3183,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$date = new tx_seminars_seminar($dateUid1);
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$bag = $this->fixture->build();
-		$date->__destruct();
 
 		$this->assertEquals(
 			$dateUid2,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToOtherDatesForTopicWithTopicRecordFindsAllDatesForTopic() {
@@ -3502,14 +3212,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$topic = new tx_seminars_seminar($topicUid);
 		$this->fixture->limitToOtherDatesForTopic($topic);
 		$bag = $this->fixture->build();
-		$topic->__destruct();
 
 		$this->assertEquals(
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToOtherDatesForTopicWithSingleEventRecordThrowsException() {
@@ -3552,13 +3259,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$date = new tx_seminars_seminar($dateUid1);
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$bag = $this->fixture->build();
-		$date->__destruct();
 
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToOtherDatesForTopicIgnoresSingleEventRecordWithTopic() {
@@ -3583,13 +3287,10 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$date = new tx_seminars_seminar($dateUid);
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$bag = $this->fixture->build();
-		$date->__destruct();
 
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testRemoveLimitToOtherDatesForTopicRemovesLimitAndFindsAllDateAndTopicRecords() {
@@ -3619,14 +3320,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$this->fixture->removeLimitToOtherDatesForTopic();
 		$bag = $this->fixture->build();
-		$date->__destruct();
 
 		$this->assertEquals(
 			4,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testRemoveLimitToOtherDatesForTopicFindsSingleEventRecords() {
@@ -3652,14 +3350,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$this->fixture->removeLimitToOtherDatesForTopic();
 		$bag = $this->fixture->build();
-		$date->__destruct();
 
 		$this->assertEquals(
 			3,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -3678,8 +3373,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedByTwoSpacesFindsEvents() {
@@ -3693,8 +3386,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchWithTwoCommasSeparatedByTwoSpacesFindsAllEvents() {
@@ -3708,8 +3399,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchWithTooShortSearchWordFindsAllEvents() {
@@ -3723,8 +3412,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInAccreditationNumber() {
@@ -3742,8 +3429,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInAccreditationNumber() {
@@ -3760,8 +3445,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTitle() {
@@ -3776,8 +3459,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTitle() {
@@ -3791,8 +3472,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSubtitle() {
@@ -3807,8 +3486,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSubtitle() {
@@ -3822,8 +3499,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInDescription() {
@@ -3838,8 +3513,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInDescription() {
@@ -3853,8 +3526,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerTitle() {
@@ -3881,8 +3552,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerTitle() {
@@ -3908,8 +3577,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerOrganization() {
@@ -3936,8 +3603,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerOrganization() {
@@ -3963,8 +3628,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerDescription() {
@@ -3991,8 +3654,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerDescription() {
@@ -4018,8 +3679,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPartnerTitle() {
@@ -4046,8 +3705,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPartnerTitle() {
@@ -4073,8 +3730,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPartnerOrganization() {
@@ -4101,8 +3756,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPartnerOrganization() {
@@ -4128,8 +3781,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPartnerDescription() {
@@ -4156,8 +3807,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPartnerDescription() {
@@ -4183,8 +3832,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTutorTitle() {
@@ -4211,8 +3858,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTutorTitle() {
@@ -4238,8 +3883,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTutorOrganization() {
@@ -4266,8 +3909,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTutorOrganization() {
@@ -4293,8 +3934,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTutorDescription() {
@@ -4321,8 +3960,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTutorDescription() {
@@ -4348,8 +3985,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInLeaderTitle() {
@@ -4376,8 +4011,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInLeaderTitle() {
@@ -4403,8 +4036,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInLeaderOrganization() {
@@ -4431,8 +4062,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInLeaderOrganization() {
@@ -4458,8 +4087,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInLeaderDescription() {
@@ -4486,8 +4113,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInLeaderDescription() {
@@ -4513,8 +4138,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceTitle() {
@@ -4541,8 +4164,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceTitle() {
@@ -4568,8 +4189,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceAddress() {
@@ -4596,8 +4215,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceAddress() {
@@ -4623,8 +4240,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceCity() {
@@ -4651,8 +4266,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceCity() {
@@ -4678,8 +4291,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInEventTypeTitle() {
@@ -4701,8 +4312,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInEventTypeTitle() {
@@ -4723,8 +4332,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInOrganizerTitle() {
@@ -4751,8 +4358,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInOrganizerTitle() {
@@ -4778,8 +4383,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTargetGroupTitle() {
@@ -4806,8 +4409,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTargetGroupTitle() {
@@ -4833,8 +4434,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInCategoryTitle() {
@@ -4861,8 +4460,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInCategoryTitle() {
@@ -4888,8 +4485,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedBySpaceFindsTwoEventsWithSearchWordsInTitle() {
@@ -4904,8 +4499,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedByCommaFindsTwoEventsWithSearchWordsInTitle() {
@@ -4920,8 +4513,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -4952,8 +4543,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$dateUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicTitle() {
@@ -4978,8 +4567,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicSubtitle() {
@@ -5005,8 +4592,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$dateUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicSubtitle() {
@@ -5031,8 +4616,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicDescription() {
@@ -5058,8 +4641,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$dateUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicDescription() {
@@ -5084,8 +4665,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicCategoryTitle() {
@@ -5120,8 +4699,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$dateUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicCategoryTitle() {
@@ -5155,8 +4732,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicTargetGroupTitle() {
@@ -5191,8 +4766,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$dateUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicTargetGroupTitle() {
@@ -5226,8 +4799,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicEventTypeTitle() {
@@ -5257,8 +4828,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$dateUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicEventTypeTitle() {
@@ -5287,8 +4856,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -5311,8 +4878,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInAccreditationNumber() {
@@ -5329,8 +4894,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInOrganizerTitle() {
@@ -5357,8 +4920,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInOrganizerTitle() {
@@ -5384,8 +4945,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerTitle() {
@@ -5412,8 +4971,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerTitle() {
@@ -5439,8 +4996,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerOrganization() {
@@ -5467,8 +5022,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerOrganization() {
@@ -5494,8 +5047,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerDescription() {
@@ -5522,8 +5073,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerDescription() {
@@ -5549,8 +5098,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPartnerTitle() {
@@ -5577,8 +5124,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPartnerTitle() {
@@ -5604,8 +5149,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPartnerOrganization() {
@@ -5632,8 +5175,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPartnerOrganization() {
@@ -5659,8 +5200,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPartnerDescription() {
@@ -5687,8 +5226,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPartnerDescription() {
@@ -5714,8 +5251,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInTutorTitle() {
@@ -5742,8 +5277,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInTutorTitle() {
@@ -5769,8 +5302,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInTutorOrganization() {
@@ -5797,8 +5328,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInTutorOrganization() {
@@ -5824,8 +5353,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInTutorDescription() {
@@ -5852,8 +5379,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInTutorDescription() {
@@ -5879,8 +5404,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInLeaderTitle() {
@@ -5907,8 +5430,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInLeaderTitle() {
@@ -5934,8 +5455,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInLeaderOrganization() {
@@ -5962,8 +5481,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInLeaderOrganization() {
@@ -5989,8 +5506,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInLeaderDescription() {
@@ -6017,8 +5532,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInLeaderDescription() {
@@ -6044,8 +5557,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceTitle() {
@@ -6072,8 +5583,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceTitle() {
@@ -6099,8 +5608,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceAddress() {
@@ -6127,8 +5634,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceAddress() {
@@ -6154,8 +5659,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceCity() {
@@ -6182,8 +5685,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceCity() {
@@ -6209,8 +5710,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -6239,8 +5738,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToRequiredEventsCanFindTwoRequiredEvents() {
@@ -6273,8 +5770,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToRequiredEventsFindsOnlyRequiredEvents() {
@@ -6311,8 +5806,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$dependingEventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -6341,8 +5834,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToDependingEventsCanFindTwoDependingEvents() {
@@ -6375,8 +5866,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToDependingEventsFindsOnlyDependingEvents() {
@@ -6413,8 +5902,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$requiredEventUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -6437,8 +5924,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$topicUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToTopicsWithoutRegistrationByUserFindsTopicWithDate() {
@@ -6463,8 +5948,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$topicUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToTopicsWithoutRegistrationByUserNotFindsDate() {
@@ -6489,8 +5972,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToTopicsWithoutRegistrationByUserFindsTopicWithDateWithRegistrationByOtherUser() {
@@ -6522,8 +6003,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$topicUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserWithoutExpiry() {
@@ -6551,8 +6030,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserWithFutureExpiry() {
@@ -6580,8 +6057,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToWithoutRegistrationByUserFindsTopicWithDateRegistrationByTheUserWithPastExpiry() {
@@ -6610,8 +6085,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserAndOtherUser() {
@@ -6645,8 +6118,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToTopicsWithoutRegistrationByUserAndLimitToRequiredEventTopicsCanReturnOneEntry() {
@@ -6685,8 +6156,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -6706,8 +6175,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToCancelationDeadlineReminderNotSentNotFindsEventWithCancelationReminderSentFlagTrue() {
@@ -6722,8 +6189,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			0,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -6743,8 +6208,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventTakesPlaceReminderNotSentNotFindsEventWithConfirmationInformationSentFlagTrue() {
@@ -6759,8 +6222,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			0,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -6781,8 +6242,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToStatusNotFindsEventWithStatusPlannedIfLimitIsStatusCanceled() {
@@ -6798,8 +6257,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			0,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToStatusNotFindsEventWithStatusConfirmedIfLimitIsStatusCanceled() {
@@ -6815,8 +6272,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			0,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToStatusFindsEventWithStatusConfirmedIfLimitIsStatusConfirmed() {
@@ -6832,8 +6287,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToStatusNotFindsEventWithStatusPlannedIfLimitIsStatusConfirmed() {
@@ -6849,8 +6302,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			0,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToStatusNotFindsEventWithStatusCanceledIfLimitIsStatusConfirmed() {
@@ -6866,8 +6317,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			0,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToStatusFindsEventWithStatusPlannedIfLimitIsStatusPlanned() {
@@ -6883,8 +6332,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToStatusNotFindsEventWithStatusConfirmedIfLimitIsStatusPlanned() {
@@ -6900,8 +6347,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			0,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToStatusNotFindsEventWithStatusCanceledIfLimitIsStatusPlanned() {
@@ -6917,8 +6362,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			0,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -6939,8 +6382,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testlimitToDaysBeforeBeginDateFindsEventWithPastBeginDateWithinProvidedDays() {
@@ -6956,8 +6397,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testlimitToDaysBeforeBeginDateNotFindsEventWithFutureBeginDateOutOfProvidedDays() {
@@ -6973,8 +6412,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			0,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testlimitToDaysBeforeBeginDateFindsEventWithPastBeginDate() {
@@ -6990,8 +6427,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testlimitToDaysBeforeBeginDateFindsEventWithNoBeginDate() {
@@ -7004,8 +6439,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -7025,8 +6458,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7043,8 +6474,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7061,8 +6490,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7078,8 +6505,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7099,8 +6524,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -7119,8 +6542,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7137,8 +6558,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7154,8 +6573,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7172,8 +6589,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7190,8 +6605,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -7214,8 +6627,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7233,8 +6644,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -7257,8 +6666,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7277,8 +6684,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7305,8 +6710,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7330,8 +6733,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7354,8 +6755,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7377,8 +6776,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7404,8 +6801,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7432,8 +6827,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7452,8 +6845,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7476,8 +6867,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -7506,8 +6895,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7527,8 +6914,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7554,8 +6939,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7583,8 +6966,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7615,8 +6996,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7650,8 +7029,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$dateUid,
 			$bag->getUids()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7675,8 +7052,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -7706,8 +7081,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7732,8 +7105,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7758,8 +7129,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7784,8 +7153,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7809,8 +7176,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7835,8 +7200,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7860,8 +7223,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7879,8 +7240,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7904,8 +7263,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7937,8 +7294,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7970,8 +7325,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -7996,8 +7349,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -8020,8 +7371,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8039,8 +7388,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8058,8 +7405,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8076,8 +7421,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8096,8 +7439,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8116,8 +7457,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8135,8 +7474,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8155,8 +7492,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8175,8 +7510,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8194,8 +7527,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8214,8 +7545,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8234,8 +7563,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8253,8 +7580,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8283,8 +7608,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$dateUid,
 			$bag->getUids()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8312,8 +7635,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8336,8 +7657,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8360,8 +7679,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8383,8 +7700,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8406,8 +7721,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8430,8 +7743,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8454,8 +7765,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8477,8 +7786,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8499,8 +7806,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8522,8 +7827,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8545,8 +7848,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8568,8 +7869,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8592,8 +7891,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8615,8 +7912,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8637,8 +7932,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -8660,8 +7953,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8693,8 +7984,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8712,8 +8001,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8731,8 +8018,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8750,8 +8035,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8768,8 +8051,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8787,8 +8068,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8806,8 +8085,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8824,8 +8101,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8843,8 +8118,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8862,8 +8135,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8880,8 +8151,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8903,8 +8172,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8922,8 +8189,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8944,8 +8209,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8967,8 +8230,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -8990,8 +8251,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -9013,8 +8272,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -9035,8 +8292,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -9058,8 +8313,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -9081,8 +8334,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -9103,8 +8354,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -9125,8 +8374,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -9144,7 +8391,5 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 }

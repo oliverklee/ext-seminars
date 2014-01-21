@@ -149,7 +149,6 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 	public function tearDown() {
 		$GLOBALS['LANG']->lang = $this->languageBackup;
 
-		$this->fixture->__destruct();
 		$this->testingFramework->cleanUp();
 
 		unset($this->linkBuilder, $this->fixture, $this->testingFramework);
@@ -258,8 +257,6 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 			'http://singleview.example.com/',
 			$fixture->render()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -294,8 +291,6 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 			'http://singleview.example.com/',
 			$fixture->render()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -340,8 +335,6 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 			'http://singleview.example.com/',
 			$fixture->render()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -393,8 +386,6 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 			$GLOBALS['LANG']->getLL('eventMailForm_error_noDetailsPageFound'),
 			$fixture->render()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**

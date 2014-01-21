@@ -42,7 +42,6 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		$this->fixture->__destruct();
 		unset($this->fixture);
 	}
 
@@ -1483,8 +1482,6 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$fixture->earlyBirdApplies()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -1503,8 +1500,6 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$fixture->earlyBirdApplies()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -1523,8 +1518,6 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$fixture->earlyBirdApplies()
 		);
-
-		$fixture->__destruct();
 	}
 
 

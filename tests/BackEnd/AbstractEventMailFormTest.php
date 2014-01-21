@@ -117,7 +117,6 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 
 		$this->testingFramework->cleanUp();
 
-		$this->fixture->__destruct();
 		unset($this->fixture, $this->testingFramework);
 
 		t3lib_FlashMessageQueue::getAllMessagesAndFlush();
@@ -808,8 +807,6 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 			'FooBar',
 			$fixture->getInitialValue('subject')
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**

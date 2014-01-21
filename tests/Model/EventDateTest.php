@@ -42,7 +42,6 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		$this->fixture->__destruct();
 		unset($this->fixture);
 	}
 

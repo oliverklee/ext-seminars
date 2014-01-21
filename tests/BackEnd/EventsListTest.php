@@ -103,11 +103,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 
 		$this->testingFramework->cleanUp();
 
-		$this->fixture->__destruct();
-		$this->backEndModule->__destruct();
-		unset(
-			$this->backEndModule, $this->fixture, $this->testingFramework
-		);
+		unset($this->backEndModule, $this->fixture, $this->testingFramework);
 	}
 
 

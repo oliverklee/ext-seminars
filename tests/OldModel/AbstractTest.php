@@ -74,7 +74,6 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		$this->fixture->__destruct();
 		unset($this->fixture, $this->testingFramework);
 	}
 
@@ -97,8 +96,6 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$test->isOk()
 		);
-
-		$test->__destruct();
 	}
 
 	public function testCreateFromUidFailsForZeroUid() {
@@ -107,8 +104,6 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$test->isOk()
 		);
-
-		$test->__destruct();
 	}
 
 	public function testCreateFromDbResult() {
@@ -125,8 +120,6 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$test->isOk()
 		);
-
-		$test->__destruct();
 	}
 
 	public function testCreateFromDbResultFailsForNull() {
@@ -137,8 +130,6 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$test->isOk()
 		);
-
-		$test->__destruct();
 	}
 
 	/**
@@ -154,8 +145,6 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$test->isOk()
 		);
-
-		$test->__destruct();
 	}
 
 	/**
@@ -173,8 +162,6 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$test->isOk()
 		);
-
-		$test->__destruct();
 	}
 
 
@@ -209,8 +196,6 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$virginFixture->hasUid()
 		);
-
-		$virginFixture->__destruct();
 	}
 
 	public function testGetTitle() {
@@ -289,8 +274,6 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 				'title = "' . $title . '"'
 			)
 		);
-
-		$virginFixture->__destruct();
 	}
 
 	public function testCommitToDbCanUpdateExistingRecord() {
@@ -331,8 +314,6 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$virginFixture->commitToDb()
 		);
-
-		$virginFixture->__destruct();
 	}
 
 
@@ -484,8 +465,6 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 			42,
 			$fixture->getPageUid()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -503,7 +482,5 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 			0,
 			$fixture->getPageUid()
 		);
-
-		$fixture->__destruct();
 	}
 }

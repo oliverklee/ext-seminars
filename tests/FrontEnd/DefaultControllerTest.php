@@ -162,7 +162,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		$this->fixture->__destruct();
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework, $this->linkBuilder);
 
@@ -4277,8 +4276,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$fixture->main('', array());
-
-		$fixture->__destruct();
 	}
 
 	public function testListViewCanBeSortedByTitleAscendingWithinOneCategory() {
@@ -6911,7 +6908,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('vacancies-available'),
@@ -6930,7 +6926,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('vacancies-1'),
@@ -6949,7 +6944,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('vacancies-2'),
@@ -6968,7 +6962,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('vacancies-0'),
@@ -6985,7 +6978,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('vacancies-available'),
@@ -7002,7 +6994,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertNotContains(
 			$this->fixture->pi_getClassName('vacancies-0'),
@@ -7019,7 +7010,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('vacancies-unlimited'),
@@ -7037,7 +7027,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('registration-deadline-over'),
@@ -7054,7 +7043,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('event-begin-date-over'),
@@ -7074,7 +7062,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('vacancies-available'),
@@ -7091,7 +7078,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertEquals(
 			' class="' . $this->fixture->pi_getClassName('vacancies') . '"',
@@ -7110,7 +7096,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertEquals(
 			' class="' . $this->fixture->pi_getClassName('vacancies') . '"',
@@ -7130,7 +7115,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('has-registration-queue'),
@@ -7150,7 +7134,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertNotContains(
 			$this->fixture->pi_getClassName('has-registration-queue'),
@@ -7177,7 +7160,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('vacancies-available'),
@@ -7198,7 +7180,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('vacancies-1'),
@@ -7219,7 +7200,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('vacancies-2'),
@@ -7240,7 +7220,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('vacancies-0'),
@@ -7260,7 +7239,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertContains(
 			$this->fixture->pi_getClassName('vacancies-available'),
@@ -7280,7 +7258,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$output = $this->fixture->getVacanciesClasses($event);
-		$event->__destruct();
 
 		$this->assertNotContains(
 			$this->fixture->pi_getClassName('registration-deadline-over'),
@@ -7498,8 +7475,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$fixture->mayCurrentUserEditCurrentEvent()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7521,8 +7496,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$fixture->mayCurrentUserEditCurrentEvent()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7544,8 +7517,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$fixture->mayCurrentUserEditCurrentEvent()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7572,8 +7543,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$fixture->mayCurrentUserEditCurrentEvent()
 		);
-
-		$fixture->__destruct();
 	}
 
 
@@ -7602,8 +7571,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'',
 			$fixture->createAllEditorLinks()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7630,8 +7597,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				$fixture->translate('label_edit') . '</a>',
 			$fixture->createAllEditorLinks()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7662,8 +7627,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				$fixture->translate('label_hide') . '</a>',
 			$fixture->createAllEditorLinks()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7694,8 +7657,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				$fixture->translate('label_unhide') . '</a>',
 			$fixture->createAllEditorLinks()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7721,8 +7682,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'tx_seminars_pi1[action]=hide',
 			$fixture->createAllEditorLinks()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7748,8 +7707,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'tx_seminars_pi1[action]=unhide',
 			$fixture->createAllEditorLinks()
 		);
-
-		$fixture->__destruct();
 	}
 
 
@@ -7770,8 +7727,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'',
 			array('what_to_display' => 'seminar_list')
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7787,8 +7742,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'',
 			array('what_to_display' => 'my_entered_events')
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7804,8 +7757,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'',
 			array('what_to_display' => 'my_vip_events')
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7823,8 +7774,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			->with(array('seminar'));
 
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7839,8 +7788,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$fixture->piVars['seminar'] = 0;
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7855,8 +7802,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$fixture->piVars['seminar'] = -1;
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7879,8 +7824,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$fixture->piVars['seminar'] = 1;
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7906,8 +7849,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			::get('tx_seminars_Mapper_Event')->getNewGhost()->getUid();
 
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7936,8 +7877,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->piVars['action'] = 'hide';
 
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7966,8 +7905,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->piVars['action'] = 'hide';
 
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -7996,8 +7933,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->piVars['action'] = 'hide';
 
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8026,8 +7961,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->piVars['action'] = 'unhide';
 
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8056,8 +7989,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->piVars['action'] = 'unhide';
 
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8086,8 +8017,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->piVars['action'] = 'unhide';
 
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8117,8 +8046,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->piVars['action'] = '';
 
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8148,8 +8075,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->piVars['action'] = 'foo';
 
 		$fixture->processHideUnhide();
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8169,8 +8094,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$event->isHidden()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8190,8 +8113,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$event->isHidden()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8208,8 +8129,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			$this->createAccessibleProxyClass()
 		);
 		$fixture->hideEvent($event);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8229,8 +8148,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$event->isHidden()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8250,8 +8167,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$event->isHidden()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8268,8 +8183,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			$this->createAccessibleProxyClass()
 		);
 		$fixture->unhideEvent($event);
-
-		$fixture->__destruct();
 	}
 
 
@@ -8287,8 +8200,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->expects($this->once())->method('limitForAdditionalParameters');
 
 		$fixture->initListView('');
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8301,8 +8212,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->expects($this->once())->method('limitForAdditionalParameters');
 
 		$fixture->initListView('topic_list');
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8315,8 +8224,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->expects($this->never())->method('limitForAdditionalParameters');
 
 		$fixture->initListView('my_events');
-
-		$fixture->__destruct();
 	}
 
 
@@ -8466,8 +8373,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		));
 
 		$fixture->hideListRegistrationsColumnIfNecessary($whatToDisplay);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8501,8 +8406,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		));
 
 		$fixture->hideListRegistrationsColumnIfNecessary($whatToDisplay);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -8536,8 +8439,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		));
 
 		$fixture->hideListRegistrationsColumnIfNecessary($whatToDisplay);
-
-		$fixture->__destruct();
 	}
 
 

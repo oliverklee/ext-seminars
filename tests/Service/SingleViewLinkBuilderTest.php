@@ -113,8 +113,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			'42',
 			$fixture->getSingleViewPageForEvent($event)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -147,8 +145,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			'91',
 			$fixture->getSingleViewPageForEvent($event)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -181,8 +177,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			'42',
 			$fixture->getSingleViewPageForEvent($event)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -215,8 +209,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			'',
 			$fixture->getSingleViewPageForEvent($event)
 		);
-
-		$fixture->__destruct();
 	}
 
 
@@ -239,8 +231,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 		$this->assertFalse(
 			$fixture->configurationHasSingleViewPage()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -258,8 +248,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 		$this->assertTrue(
 			$fixture->configurationHasSingleViewPage()
 		);
-
-		$fixture->__destruct();
 	}
 
 
@@ -287,8 +275,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			42,
 			$fixture->getSingleViewPageFromConfiguration()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -304,8 +290,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			91,
 			$fixture->getSingleViewPageFromConfiguration()
 		);
-
-		$fixture->__destruct();
 	}
 
 
@@ -331,8 +315,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			t3lib_div::locationHeaderUrl($relativeUrl),
 			$fixture->createAbsoluteUrlForEvent($event)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -364,8 +346,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			->will($this->returnValue($singleViewPageUid));
 
 		$fixture->createRelativeUrlForEvent($event);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -391,8 +371,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			$relativeUrl,
 			$fixture->createRelativeUrlForEvent($event)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -408,8 +386,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			'http://www.example.com',
 			$fixture->createAbsoluteUrlForEvent($event)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -427,8 +403,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			'?id=' . $pageUid . '&tx_seminars_pi1%5BshowUid%5D=' . $event->getUid(),
 			$fixture->createAbsoluteUrlForEvent($event)
 		);
-
-		$fixture->__destruct();
 	}
 
 
@@ -448,8 +422,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			$GLOBALS['TSFE']->cObj,
 			$fixture->getContentObject()
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -461,7 +433,5 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 		$this->assertTrue(
 			$fixture->getContentObject() instanceof tslib_cObj
 		);
-
-		$fixture->__destruct();
 	}
 }

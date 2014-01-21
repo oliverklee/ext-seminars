@@ -43,7 +43,6 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		$this->fixture->__destruct();
 		unset($this->fixture);
 	}
 

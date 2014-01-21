@@ -135,7 +135,6 @@ class tx_seminars_BackEnd_ConfirmEventMailFormTest extends tx_phpunit_testcase {
 	public function tearDown() {
 		$GLOBALS['LANG']->lang = $this->languageBackup;
 
-		$this->fixture->__destruct();
 		$this->testingFramework->cleanUp();
 
 		unset($this->fixture, $this->testingFramework);

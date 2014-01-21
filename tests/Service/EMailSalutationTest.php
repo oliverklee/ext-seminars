@@ -64,7 +64,6 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		$this->fixture->__destruct();
 		$this->testingFramework->cleanUp();
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
@@ -341,8 +340,6 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME']),
 			$this->fixture->createIntroduction('%s', $event)
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -371,8 +368,6 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 				strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY),
 			$this->fixture->createIntroduction('%s', $event)
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -395,8 +390,6 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']),
 			$this->fixture->createIntroduction('%s', $event)
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -428,7 +421,5 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			),
 			$this->fixture->createIntroduction('%s', $event)
 		);
-
-		$event->__destruct();
 	}
 }

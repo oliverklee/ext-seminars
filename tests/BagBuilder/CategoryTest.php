@@ -87,8 +87,6 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 			'Title 2',
 			$categoryBag->next()->getTitle()
 		);
-
-		$categoryBag->__destruct();
 	}
 
 
@@ -114,8 +112,6 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testToLimitEmptyEventUidsResultsInAllCategories() {
@@ -138,8 +134,6 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToZeroEventUidFails() {
@@ -200,8 +194,6 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventsCanResultInTwoCategoriesForOneEvent() {
@@ -232,8 +224,6 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventsCanResultInTwoCategoriesForTwoEvents() {
@@ -266,8 +256,6 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 			2,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventsWillExcludeUnassignedCategories() {
@@ -293,8 +281,6 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 			$categoryUid,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventsWillExcludeCategoriesOfOtherEvents() {
@@ -329,8 +315,6 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 			$categoryUid1,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventsResultsInAnEmptyBagIfThereAreNoMatches() {
@@ -358,8 +342,6 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 

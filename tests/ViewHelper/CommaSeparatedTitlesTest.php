@@ -59,7 +59,6 @@ class tx_seminars_ViewHelper_CommaSeparatedTitlesTest extends tx_phpunit_testcas
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
-		$this->list->__destruct();
 		unset($this->fixture, $this->list, $this->testingFramework);
 	}
 

@@ -48,7 +48,6 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		$this->fixture->__destruct();
 		$this->testingFramework->cleanUp();
 		unset($this->fixture, $this->testingFramework);
 	}

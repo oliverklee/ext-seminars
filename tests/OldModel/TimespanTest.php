@@ -38,7 +38,6 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	}
 
 	protected function tearDown() {
-		$this->fixture->__destruct();
 		unset($this->fixture);
 	}
 

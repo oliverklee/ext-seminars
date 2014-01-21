@@ -108,8 +108,6 @@ class tx_seminars_BagBuilder_OrganizerTest extends tx_phpunit_testcase {
 			1,
 			$bag->countWithoutLimit()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventFindsTwoOrganizersOfEvent() {
@@ -141,8 +139,6 @@ class tx_seminars_BagBuilder_OrganizerTest extends tx_phpunit_testcase {
 			2,
 			$bag->countWithoutLimit()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testLimitToEventIgnoresOrganizerOfOtherEvent() {
@@ -168,8 +164,6 @@ class tx_seminars_BagBuilder_OrganizerTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	/**
@@ -206,7 +200,5 @@ class tx_seminars_BagBuilder_OrganizerTest extends tx_phpunit_testcase {
 			$organizerUid2,
 			$bag->current()->getUid()
 		);
-
-		$bag->__destruct();
 	}
 }

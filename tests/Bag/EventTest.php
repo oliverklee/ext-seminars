@@ -56,7 +56,6 @@ class tx_seminars_Bag_EventTest extends tx_phpunit_testcase {
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		$this->fixture->__destruct();
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework);
 	}

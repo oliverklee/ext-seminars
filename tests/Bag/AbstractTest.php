@@ -70,7 +70,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		$this->fixture->__destruct();
 		unset($this->fixture, $this->testingFramework);
 	}
 
@@ -85,8 +84,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 		$this->assertEquals(
 			'', $bag->getUids()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBagCanHaveOneUid() {
@@ -95,8 +92,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 		$this->assertEquals(
 			(string) $this->uidOfFirstRecord, $bag->getUids()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testBagCanHaveTwoUids() {
@@ -130,8 +125,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 			0,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testCountForBagWithOneElementReturnsOne() {
@@ -141,8 +134,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testCountForBagWithTwoElementsReturnsTwo() {
@@ -169,8 +160,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 			1,
 			$bag->count()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -185,8 +174,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 			0,
 			$bag->countWithoutLimit()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testCountWithoutLimitForBagWithOneElementReturnsOne() {
@@ -196,8 +183,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 			1,
 			$bag->countWithoutLimit()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testCountWithoutLimitForBagWithTwoElementsReturnsTwo() {
@@ -224,8 +209,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 			2,
 			$bag->countWithoutLimit()
 		);
-
-		$bag->__destruct();
 	}
 
 
@@ -239,8 +222,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testIsEmptyForEmptyBagAfterIteratingReturnsTrue() {
@@ -250,8 +231,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testIsEmptyForBagWithOneElementReturnsFalse() {
@@ -260,8 +239,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testIsEmptyForBagWithOneElementAfterIteratingReturnsFalse() {
@@ -271,8 +248,6 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$bag->isEmpty()
 		);
-
-		$bag->__destruct();
 	}
 
 	public function testIsEmptyForBagWithTwoElementsReturnsFalse() {

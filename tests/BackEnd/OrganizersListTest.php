@@ -95,11 +95,7 @@ class tx_seminars_BackEnd_OrganizersListTest extends tx_phpunit_testcase {
 
 		$this->testingFramework->cleanUp();
 
-		$this->fixture->__destruct();
-		$this->backEndModule->__destruct();
-		unset(
-			$this->backEndModule, $this->fixture, $this->testingFramework
-		);
+		unset($this->backEndModule, $this->fixture, $this->testingFramework);
 	}
 
 	/**

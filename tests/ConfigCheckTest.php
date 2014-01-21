@@ -50,9 +50,7 @@ class tx_seminars_ConfigCheckTest extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		$this->fixture->__destruct();
-		$this->objectToCheck->__destruct();
-		unset($this->fixture);
+		unset($this->fixture, $this->objectToCheck);
 	}
 
 

@@ -42,7 +42,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 	}
 
 	public function tearDown() {
-		$this->fixture->__destruct();
 		unset($this->fixture);
 	}
 
@@ -1793,8 +1792,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$event->hasQueueRegistrations()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -1810,8 +1807,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$event->hasQueueRegistrations()
 		);
-
-		$event->__destruct();
 	}
 
 
@@ -1861,8 +1856,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 			0,
 			$event->getRegisteredSeats()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -1886,8 +1879,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 			1,
 			$event->getRegisteredSeats()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -1911,8 +1902,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 			2,
 			$event->getRegisteredSeats()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -1939,8 +1928,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 			0,
 			$event->getRegisteredSeats()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -1958,8 +1945,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 			2,
 			$event->getRegisteredSeats()
 		);
-
-		$event->__destruct();
 	}
 
 
@@ -1981,8 +1966,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$event->hasEnoughRegistrations()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -1999,8 +1982,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$event->hasEnoughRegistrations()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -2017,8 +1998,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$event->hasEnoughRegistrations()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -2035,8 +2014,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$event->hasEnoughRegistrations()
 		);
-
-		$event->__destruct();
 	}
 
 
@@ -2059,8 +2036,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 			1,
 			$event->getVacancies()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -2078,8 +2053,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 			0,
 			$event->getVacancies()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -2097,8 +2070,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 			0,
 			$event->getVacancies()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -2116,8 +2087,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 			0,
 			$event->getVacancies()
 		);
-
-		$event->__destruct();
 	}
 
 
@@ -2139,8 +2108,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$event->hasVacancies()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -2157,8 +2124,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$event->hasVacancies()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -2175,8 +2140,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$event->hasVacancies()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -2193,8 +2156,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$event->hasVacancies()
 		);
-
-		$event->__destruct();
 	}
 
 
@@ -2216,8 +2177,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$event->isFull()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -2234,8 +2193,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$event->isFull()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -2252,8 +2209,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			$event->isFull()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -2270,8 +2225,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$event->isFull()
 		);
-
-		$event->__destruct();
 	}
 
 	/**
@@ -2288,8 +2241,6 @@ class tx_seminars_Model_EventTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$event->isFull()
 		);
-
-		$event->__destruct();
 	}
 
 
