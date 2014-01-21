@@ -71,12 +71,6 @@ class tx_seminars_FrontEnd_CountdownTest extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
-		$this->fixture->__destruct();
-		$this->mapper->__destruct();
-
-		if ($this->viewHelper !== NULL) {
-			$this->viewHelper->__destruct();
-		}
 
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->viewHelper, $this->mapper, $this->testingFramework);

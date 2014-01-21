@@ -67,7 +67,6 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		}
 
 		$this->testingFramework->cleanUp();
-		$this->fixture->__destruct();
 
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework);
@@ -446,8 +445,6 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		$this->assertTrue(
 			strpos($output, 'Bar') < strpos($output, 'Foo')
 		);
-
-		$fixture->__destruct();
 	}
 
 

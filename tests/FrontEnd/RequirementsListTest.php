@@ -67,7 +67,6 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		$this->fixture->__destruct();
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework);
 	}

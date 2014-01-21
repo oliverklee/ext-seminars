@@ -87,8 +87,6 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		$this->fixture->__destruct();
-		$this->mapper->__destruct();
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->mapper, $this->testingFramework);
 	}

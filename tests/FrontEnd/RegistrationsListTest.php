@@ -87,7 +87,6 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
-		$this->fixture->__destruct();
 
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework);
@@ -176,7 +175,6 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 			array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
 			'list_registrations', 0, $GLOBALS['TSFE']->cObj
 		);
-		$fixture->__destruct();
 	}
 
 	/**
@@ -187,7 +185,6 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 			array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
 			'list_vip_registrations', 0, $GLOBALS['TSFE']->cObj
 		);
-		$fixture->__destruct();
 	}
 
 
@@ -214,7 +211,6 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 			'list_registrations', -1, $GLOBALS['TSFE']->cObj
 		);
 		$fixture->render();
-		$fixture->__destruct();
 
 		$this->assertEquals(
 			'Status: 404 Not Found',
@@ -231,7 +227,6 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 			'list_registrations', 0, $GLOBALS['TSFE']->cObj
 		);
 		$fixture->render();
-		$fixture->__destruct();
 
 		$this->assertEquals(
 			'Status: 404 Not Found',

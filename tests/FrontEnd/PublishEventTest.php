@@ -49,7 +49,6 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
-		$this->fixture->__destruct();
 
 		unset($this->fixture, $this->testingFramework);
 	}

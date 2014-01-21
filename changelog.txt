@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4648] Cleanup: Drop some early __destruct calls
 - [#4935] Bugfix: Drop the colon after the payment method in the e-mail to the attendee
 - [#4300] Feature: Make the FE user data in the registration form configurable (thanks to Philipp Kitzberger)
 - [#4928] Feature: Allow adding arbitrary FE user fields into the notification e-mail to the organizer

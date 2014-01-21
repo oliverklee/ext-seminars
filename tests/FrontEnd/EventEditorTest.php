@@ -67,7 +67,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
-		$this->fixture->__destruct();
 
 		tx_seminars_registrationmanager::purgeInstance();
 		tx_oelib_configurationProxy::purgeInstances();
@@ -2790,8 +2789,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'teaser', 'value' => '')
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -2805,8 +2802,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'teaser', 'value' => 'foo')
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 
@@ -2836,8 +2831,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'attendees_max', 'value' => 0)
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -2851,8 +2844,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'attendees_max', 'value' => 15)
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 
@@ -2884,8 +2875,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'categories', 'value' => '')
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -2900,8 +2889,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'categories', 'value' => array())
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -2916,8 +2903,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'categories', 'value' => array(42))
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -2947,8 +2932,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'categories', 'value' => '')
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -2963,8 +2946,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'categories', 'value' => '')
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 
@@ -2994,8 +2975,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'begin_date', 'value' => '')
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -3012,8 +2991,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				)
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -3030,8 +3007,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				)
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 
@@ -3061,8 +3036,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'price_regular', 'value' => '')
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -3076,8 +3049,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'price_regular', 'value' => '20,08')
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 	/**
@@ -3091,8 +3062,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				array('elementName' => 'price_regular', 'value' => 'foo')
 			)
 		);
-
-		$fixture->__destruct();
 	}
 
 

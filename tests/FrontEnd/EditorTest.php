@@ -44,16 +44,13 @@ class tx_seminars_FrontEnd_EditorTest extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
-		$this->fixture = new tx_seminars_FrontEnd_Editor(
-			array(), $GLOBALS['TSFE']->cObj
-		);
+		$this->fixture = new tx_seminars_FrontEnd_Editor(array(), $GLOBALS['TSFE']->cObj);
 		$this->fixture->setTestMode();
 	}
 
 	public function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		$this->fixture->__destruct();
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework);
 	}
@@ -75,8 +72,6 @@ class tx_seminars_FrontEnd_EditorTest extends tx_phpunit_testcase {
 		$this->assertFalse(
 			$fixture->isTestMode()
 		);
-
-		$fixture->__destruct();
 	}
 
 
