@@ -56,16 +56,6 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	const ACCESS_DENIED = 403;
 
 	/**
-	 * @var string export mode for attachments created from back end
-	 */
-	const EXPORT_MODE_WEB = 'web';
-
-	/**
-	 * @var string export mode for attachments send via e-mail
-	 */
-	const EXPORT_MODE_EMAIL = 'e-mail';
-
-	/**
 	 * @var string same as class name
 	 */
 	public $prefixId = 'tx_seminars_pi2';
@@ -94,13 +84,6 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 * @var integer the HTTP status code of error
 	 */
 	private $errorType = 0;
-
-	/**
-	 * the export mode for the CSV file possible values are EXPORT_MODE_WEB and EXPORT_MODE_WEB
-	 *
-	 * @var string
-	 */
-	private $exportMode = self::EXPORT_MODE_WEB;
 
 	/**
 	 * The constructor.
@@ -188,15 +171,9 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 * @return string CSV list of registrations for the given seminar or an error message in case of an error
 	 */
 	public function createAndOutputListOfRegistrations($eventUid = 0) {
-		if ($this->isInEmailExportMode()) {
-			/** @var $listView Tx_Seminars_Csv_EmailRegistrationListView */
-			$listView = t3lib_div::makeInstance('Tx_Seminars_Csv_EmailRegistrationListView');
-		} else {
-			/** @var $listView Tx_Seminars_Csv_EmailRegistrationListView */
-			$listView = t3lib_div::makeInstance('Tx_Seminars_Csv_DownloadRegistrationListView');
-		}
+		/** @var $listView Tx_Seminars_Csv_EmailRegistrationListView */
+		$listView = t3lib_div::makeInstance('Tx_Seminars_Csv_DownloadRegistrationListView');
 
-		/** @var $listView Tx_Seminars_Csv_AbstractRegistrationListView */
 		$pageUid = (integer) $this->piVars['pid'];
 		if ($eventUid > 0) {
 			if (!$this->hasAccessToEventAndItsRegistrations($eventUid)) {
@@ -471,36 +448,6 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Sets the mode of the CSV export.
-	 *
-	 * @param string $exportMode
-	 *        the export mode, must be either tx_seminars_pi2::EXPORT_MODE_WEB or tx_seminars_pi2::EXPORT_MODE_EMAIL
-	 *
-	 * @return void
-	 */
-	public function setExportMode($exportMode) {
-		$this->exportMode = ($exportMode === self::EXPORT_MODE_EMAIL) ? self::EXPORT_MODE_EMAIL : self::EXPORT_MODE_WEB;
-	}
-
-	/**
-	 * Checks whether the CSV export is in web export mode.
-	 *
-	 * @return boolean
-	 */
-	protected function isInWebExportMode() {
-		return $this->exportMode === self::EXPORT_MODE_WEB;
-	}
-
-	/**
-	 * Checks whether the CSV export is in e-mail export mode.
-	 *
-	 * @return boolean
-	 */
-	protected function isInEmailExportMode() {
-		return $this->exportMode === self::EXPORT_MODE_EMAIL;
 	}
 }
 

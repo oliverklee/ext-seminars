@@ -1331,26 +1331,6 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function createAndOutputListOfRegistrationsForEmailModeUsesFeUserFieldsFromEmailConfiguration() {
-		$this->configuration->setAsString('fieldsFromFeUserForEmailCsv', 'email');
-		$this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
-
-		$frontEndUserUid = $this->testingFramework->createFrontEndUser('', array('email' => 'foo@bar.com'));
-		$this->testingFramework->createRecord(
-			'tx_seminars_attendances',
-			array('seminar' => $this->eventUid, 'user' => $frontEndUserUid)
-		);
-		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_EMAIL);
-
-		$this->assertContains(
-			'foo@bar.com',
-			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
-		);
-	}
-
-	/**
-	 * @test
-	 */
 	public function createAndOutputListOfRegistrationsForWebModeNotUsesFeUserFieldsFromEmailConfiguration() {
 		$this->configuration->setAsString('fieldsFromFeUserForEmailCsv', 'email');
 		$this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
@@ -1360,33 +1340,9 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 			'tx_seminars_attendances',
 			array('seminar' => $this->eventUid, 'user' => $frontEndUserUid)
 		);
-		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_WEB);
 
 		$this->assertNotContains(
 			'foo@bar.com',
-			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function createAndOutputListOfRegistrationsForEmailModeUsesRegistrationFieldsFromEmailConfiguration() {
-		$this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'bank_name');
-		$this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
-
-		$this->testingFramework->createRecord(
-			'tx_seminars_attendances',
-			array(
-				'seminar' => $this->eventUid,
-				'user' => $this->testingFramework->createFrontEndUser(),
-				'bank_name' => 'foo bank'
-			)
-		);
-		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_EMAIL);
-
-		$this->assertContains(
-			'foo bank',
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
@@ -1406,43 +1362,9 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 				'bank_name' => 'foo bank'
 			)
 		);
-		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_WEB);
 
 		$this->assertNotContains(
 			'foo bank',
-			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function createAndOutputListOfRegistrationsForEmailModeUsesRegistrationsOnQueueSettingFromEmailConfiguration() {
-		$this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', TRUE);
-		$this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'uid');
-		$this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInCsv', FALSE);
-		$this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
-
-		$this->testingFramework->createRecord(
-			'tx_seminars_attendances',
-			array(
-				'seminar' => $this->eventUid,
-				'user' => $this->testingFramework->createFrontEndUser(),
-			)
-		);
-		$queueUid = $this->testingFramework->createRecord(
-			'tx_seminars_attendances',
-			array(
-				'seminar' => $this->eventUid,
-				'user' => $this->testingFramework->createFrontEndUser(),
-				'bank_name' => 'foo bank',
-				'registration_queue' => 1,
-			)
-		);
-		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_EMAIL);
-
-		$this->assertContains(
-			(string) $queueUid,
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
@@ -1472,7 +1394,6 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 				'registration_queue' => 1,
 			)
 		);
-		$this->fixture->setExportMode(tx_seminars_pi2::EXPORT_MODE_WEB);
 
 		$this->assertNotContains(
 			(string) $queueUid,
