@@ -126,7 +126,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		}
 
 		$data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-		if ($data) {
+		if ($data !== FALSE) {
 			$this->getDataFromDbResult($data);
 		}
 	}
@@ -319,8 +319,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 */
 	private function createTitle() {
 		$this->recordData['title'] = $this->getUserName() .
-			' / ' . $this->getSeminarObject()->getTitle() .
-			', ' . $this->getSeminarObject()->getDate('-');
+			' / ' . $this->getSeminarObject()->getTitle() . ', ' . $this->getSeminarObject()->getDate('-');
 	}
 
 	/**
@@ -415,20 +414,14 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			case 'registered_themselves':
 				// The fallthrough is intended.
 			case 'been_there':
-				$result = ($this->getRecordPropertyBoolean($trimmedKey))
-					? $this->translate('label_yes')
-					: $this->translate('label_no');
+				$result = $this->getRecordPropertyBoolean($trimmedKey)
+					? $this->translate('label_yes') : $this->translate('label_no');
 				break;
 			case 'datepaid':
-				$result = strftime(
-					$this->getConfValueString('dateFormatYMD'),
-					$this->getRecordPropertyInteger($trimmedKey)
-				);
+				$result = strftime($this->getConfValueString('dateFormatYMD'), $this->getRecordPropertyInteger($trimmedKey));
 				break;
 			case 'method_of_payment':
-				$result = $this->getSeminarObject()->getSinglePaymentMethodShort(
-					$this->getRecordPropertyInteger($trimmedKey)
-				);
+				$result = $this->getSeminarObject()->getSinglePaymentMethodShort($this->getRecordPropertyInteger($trimmedKey));
 				break;
 			case 'gender':
 				$result = $this->getGender();
@@ -487,7 +480,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 				$result = $this->translate('label_gender.I.' . $rawData);
 				break;
 			case 'status':
-				if ((boolean) $rawData) {
+				if ((integer) $rawData !== 0) {
 					$result = $this->translate('label_status.I.' . $rawData);
 				}
 				break;
@@ -530,22 +523,14 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		$singleKeys = t3lib_div::trimExplode(',', $keys, TRUE);
 		$singleValues = array();
 
-		foreach ($singleKeys as $currentKey) {
-			$rawValue = $this->getUserData($currentKey);
-			if (!empty($rawValue)) {
-				switch ($currentKey) {
-					case 'email':
-						$singleValues[$currentKey]
-							= $plugin->cObj->mailto_makelinks(
-								'mailto:'.$rawValue,
-								array()
-							);
-						break;
-					default:
-						$singleValues[$currentKey] = htmlspecialchars($rawValue);
-						break;
-				}
+		foreach ($singleKeys as $key) {
+			$rawValue = $this->getUserData($key);
+			if ($rawValue === '') {
+				continue;
 			}
+
+			$singleValues[$key] = ($key === 'email')
+				? $plugin->cObj->mailto_makelinks('mailto:' . $rawValue, array()) : htmlspecialchars($rawValue);
 		}
 
 		// And now: Everything separated by a comma and a space!
@@ -577,7 +562,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @return string the attendee's name and e-mail address
 	 */
 	public function getUserNameAndEmail() {
-		return '"'.$this->getUserData('name').'" <'.$this->getUserData('email').'>';
+		return '"' . $this->getUserData('name') . '" <' . $this->getUserData('email') . '>';
 	}
 
 	/**
@@ -718,8 +703,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Gets the saved price category name and its single price, all in one long
 	 * string.
 	 *
-	 * @return string the saved price category name and its single price
-	 *                or an empty string if no price had been saved
+	 * @return string the saved price category name and its single price or an empty string if no price had been saved
 	 */
 	public function getPrice() {
 		return $this->getRecordPropertyString('price');
@@ -750,8 +734,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 *
 	 * An empty string will be returned if no total price could be calculated.
 	 *
-	 * @return string the total price and the currency or an empty string
-	 *                if no total price could be calculated
+	 * @return string the total price and the currency or an empty string if no total price could be calculated
 	 */
 	public function getTotalPrice() {
 		$result = '';
@@ -897,7 +880,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		foreach ($billingAddressFields as $key => $useLf) {
 			if ($this->hasRecordPropertyString($key)) {
 				// Add labels before the phone number and the e-mail address.
-				if (($key == 'telephone') || ($key == 'email')) {
+				if (($key === 'telephone') || ($key === 'email')) {
 					$result .= $this->translate('label_'.$key).': ';
 				}
 				$result .= $this->getRegistrationData($key);
@@ -1007,7 +990,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, sorting',
 			$foreignTable . ', ' . $mmTable,
-			'uid_local=' . $this->getUid() . ' AND uid_foreign=uid' . tx_oelib_db::enableFields($foreignTable),
+			'uid_local = ' . $this->getUid() . ' AND uid_foreign = uid' . tx_oelib_db::enableFields($foreignTable),
 			'',
 			'sorting'
 		);
@@ -1048,6 +1031,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		}
 
 		// update the reference index
+		/** @var $referenceIndex t3lib_refindex */
 		$referenceIndex = t3lib_div::makeInstance('t3lib_refindex');
 		$referenceIndex->updateRefIndexTable('tx_seminars_attendances', $this->getUid());
 
