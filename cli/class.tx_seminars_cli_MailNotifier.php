@@ -118,6 +118,7 @@ class tx_seminars_cli_MailNotifier {
 		$attachment = NULL;
 
 		// The first organizer is taken as sender.
+		/** @var $sender tx_seminars_OldModel_Organizer */
 		$sender = $organizerBag->current();
 		$subject = $this->customizeMessage($messageKey . 'Subject', $event);
 		if ($this->shouldCsvFileBeAdded($event)) {
@@ -125,7 +126,8 @@ class tx_seminars_cli_MailNotifier {
 		}
 
 		foreach ($organizerBag as $organizer) {
-			$eMail = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
+			/** @var $eMail Tx_Oelib_Mail */
+			$eMail = t3lib_div::makeInstance('Tx_Oelib_Mail');
 			$eMail->setSender($sender);
 			$eMail->setSubject($subject);
 			$eMail->addRecipient($organizer);
@@ -179,10 +181,13 @@ class tx_seminars_cli_MailNotifier {
 
 		$result = array();
 
+		/** @var $builder tx_seminars_BagBuilder_Event */
 		$builder = $this->getSeminarBagBuilder(tx_seminars_seminar::STATUS_PLANNED);
 		$builder->limitToCancelationDeadlineReminderNotSent();
+		/** @var $bag tx_seminars_Bag_Event */
 		$bag = $builder->build();
 
+		/** @var $event tx_seminars_seminar */
 		foreach ($bag as $event) {
 			if ($event->getCancelationDeadline() < $GLOBALS['SIM_EXEC_TIME']) {
 				$result[] = $event;
@@ -214,7 +219,8 @@ class tx_seminars_cli_MailNotifier {
 	 * @return tx_seminars_BagBuilder_Event builder for the seminar bag
 	 */
 	private function getSeminarBagBuilder($status) {
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Event');
+		/** @var $builder tx_seminars_BagBuilder_Event */
+		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->setTimeFrame('upcomingWithBeginDate');
 		$builder->limitToStatus($status);
 
@@ -222,21 +228,20 @@ class tx_seminars_cli_MailNotifier {
 	}
 
 	/**
-	 * Returns the CSV output for the list of registrations for the event with
-	 * the provided UID.
+	 * Returns the CSV output for the list of registrations for the event with the provided UID.
 	 *
-	 * @param integer $uid UID of the event to create the output for, must be > 0
+	 * @param integer $eventUid UID of the event to create the output for, must be > 0
 	 *
-	 * @return tx_oelib_Attachment CSV list of registrations for the given
-	 *                             seminar
+	 * @return Tx_Oelib_Attachment CSV list of registrations for the given event
 	 */
-	private function getCsv($uid) {
-		$csvCreator = tx_oelib_ObjectFactory::make('tx_seminars_pi2');
-		$csvCreator->init();
-		$csvCreator->setExportMode(tx_seminars_pi2::EXPORT_MODE_EMAIL);
-		$csvString = $csvCreator->createListOfRegistrations($uid);
+	private function getCsv($eventUid) {
+		/** @var $csvCreator Tx_Seminars_Csv_EmailRegistrationListView */
+		$csvCreator = t3lib_div::makeInstance('Tx_Seminars_Csv_EmailRegistrationListView');
+		$csvCreator->setEventUid($eventUid);
+		$csvString = $csvCreator->render();
 
-		$attachment = tx_oelib_ObjectFactory::make('tx_oelib_Attachment');
+		/** @var $attachment Tx_Oelib_Attachment */
+		$attachment = t3lib_div::makeInstance('Tx_Oelib_Attachment');
 		$attachment->setContent($csvString);
 		$attachment->setContentType('text/csv');
 		$attachment->setFileName(
@@ -259,9 +264,7 @@ class tx_seminars_cli_MailNotifier {
 	 *
 	 * @return string the localized e-mail content, will not be empty
 	 */
-	private function customizeMessage(
-		$locallangKey, tx_seminars_seminar $event, $organizerName = ''
-	) {
+	private function customizeMessage($locallangKey, tx_seminars_seminar $event, $organizerName = '') {
 		$GLOBALS['LANG']->lang = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_BackEndUser')->findByCliKey()->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
 		$result = $GLOBALS['LANG']->getLL($locallangKey);
@@ -290,8 +293,7 @@ class tx_seminars_cli_MailNotifier {
 	 */
 	private function getDate($timestamp) {
 		return strftime(
-			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('dateFormatYMD'),
-			$timestamp
+			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('dateFormatYMD'), $timestamp
 		);
 	}
 

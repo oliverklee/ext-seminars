@@ -56,11 +56,6 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	const ACCESS_DENIED = 403;
 
 	/**
-	 * @var integer the depth of the recursion for the back-end pages
-	 */
-	const RECURSION_DEPTH = 250;
-
-	/**
 	 * @var string export mode for attachments created from back end
 	 */
 	const EXPORT_MODE_WEB = 'web';
@@ -74,6 +69,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 * @var string same as class name
 	 */
 	public $prefixId = 'tx_seminars_pi2';
+
 	/**
 	 * @var string path to this script relative to the extension dir
 	 */
@@ -100,22 +96,17 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	private $errorType = 0;
 
 	/**
-	 * @var string the export mode for the CSV file possible values are
-	 *             EXPORT_MODE_WEB and EXPORT_MODE_WEB
+	 * the export mode for the CSV file possible values are EXPORT_MODE_WEB and EXPORT_MODE_WEB
+	 *
+	 * @var string
 	 */
 	private $exportMode = self::EXPORT_MODE_WEB;
-
-	/**
-	 * @var language the language object for translating the CSV headings
-	 */
-	private $language = NULL;
 
 	/**
 	 * The constructor.
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->loadLocallangFiles();
 		$this->configuration = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
 	}
 
@@ -123,7 +114,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		unset($this->configuration, $this->language);
+		unset($this->configuration);
 
 		parent::__destruct();
 	}
@@ -186,29 +177,6 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	}
 
 	/**
-	 * Loads the locallang files needed to translate the CSV headings.
-	 *
-	 * @return void
-	 *
-	 * @throws RuntimeException
-	 */
-	private function loadLocallangFiles() {
-		if (is_object($GLOBALS['TSFE']) && is_array($this->LOCAL_LANG)) {
-			$this->language = t3lib_div::makeInstance('language');
-			if (!empty($this->LLkey)) {
-				$this->language->init($this->LLkey);
-			}
-		} elseif (is_object($GLOBALS['LANG'])) {
-			$this->language = $GLOBALS['LANG'];
-		} else {
-			throw new RuntimeException('The language could not be loaded. Please check your installation.', 1333292453);
-		}
-
-		$this->language->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
-		$this->language->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
-	}
-
-	/**
 	 * Creates a CSV list of registrations for the event given in $eventUid, including a heading line.
 	 *
 	 * If the seminar does not exist, an error message is returned, and an error 404 is set.
@@ -220,25 +188,31 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 * @return string CSV list of registrations for the given seminar or an error message in case of an error
 	 */
 	public function createAndOutputListOfRegistrations($eventUid = 0) {
-		$pid = intval($this->piVars['pid']);
+		if ($this->isInEmailExportMode()) {
+			/** @var $listView Tx_Seminars_Csv_EmailRegistrationListView */
+			$listView = t3lib_div::makeInstance('Tx_Seminars_Csv_EmailRegistrationListView');
+		} else {
+			/** @var $listView Tx_Seminars_Csv_EmailRegistrationListView */
+			$listView = t3lib_div::makeInstance('Tx_Seminars_Csv_DownloadRegistrationListView');
+		}
+
+		/** @var $listView Tx_Seminars_Csv_AbstractRegistrationListView */
+		$pageUid = (integer) $this->piVars['pid'];
 		if ($eventUid > 0) {
 			if (!$this->hasAccessToEventAndItsRegistrations($eventUid)) {
 				return $this->addErrorHeaderAndReturnMessage($this->errorType);
 			}
+			$listView->setEventUid($eventUid);
 		} else {
-			if (!$this->canAccessRegistrationsOnPage($pid)) {
+			if (!$this->canAccessRegistrationsOnPage($pageUid)) {
 				return $this->addErrorHeaderAndReturnMessage(self::ACCESS_DENIED);
 			}
+			$listView->setPageUid($pageUid);
 		}
 
 		$this->setContentTypeForRegistrationLists();
-		if ($eventUid === 0) {
-			$result = $this->createListOfRegistrationsOnPage($pid);
-		} else {
-			$result = $this->createListOfRegistrations($eventUid);
-		}
 
-		return $result;
+		return $listView->render();
 	}
 
 	/**
@@ -257,78 +231,11 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 			return '';
 		}
 
-		$registrationBagBuilder = $this->createRegistrationBagBuilder();
-		$registrationBagBuilder->limitToEvent($eventUid);
+		/** @var $listView Tx_Seminars_Csv_EmailRegistrationListView */
+		$listView = t3lib_div::makeInstance('Tx_Seminars_Csv_DownloadRegistrationListView');
+		$listView->setEventUid($eventUid);
 
-		return $this->createRegistrationsHeading() . $this->getRegistrationsCsvList($registrationBagBuilder);
-	}
-
-	/**
-	 * Returns the list of registrations as CSV separated values.
-	 *
-	 * The fields are separated by semicolons and the lines by CRLF.
-	 *
-	 * @param tx_seminars_BagBuilder_Registration $builder
-	 *        the bag builder already limited to the registrations which should be returned
-	 *
-	 * @return string the list of registrations, will be empty if no registrations have been given
-	 *
-	 * @throws RuntimeException
-	 */
-	private function getRegistrationsCsvList(tx_seminars_BagBuilder_Registration $builder) {
-		$result = '';
-		/** @var $bag tx_seminars_Bag_Registration */
-		$bag = $builder->build();
-
-		/** @var $registration tx_seminars_registration */
-		foreach ($bag as $registration) {
-			switch ($this->getTypo3Mode()) {
-				case 'BE':
-					$hasAccess = $GLOBALS['BE_USER']->doesUserHaveAccess(
-						t3lib_BEfunc::getRecord('pages', $registration->getPageUid()), 1
-					);
-					break;
-				case 'FE':
-					$hasAccess = TRUE;
-					break;
-				default:
-					throw new RuntimeException(
-						'You are trying to get a CSV list in an unsupported mode. Currently, only back-end and front-end mode ' .
-							'are allowed.',
-						1333292478
-					);
-			}
-
-			if ($hasAccess) {
-				$userData = $this->retrieveData($registration, 'getUserData', $this->getFrontEndUserFieldsConfiguration());
-				$registrationData = $this->retrieveData(
-					$registration, 'getRegistrationData', $this->getRegistrationFieldsConfiguration()
-				);
-				// Combines the arrays with the user and registration data
-				// and creates a list of semicolon-separated values from them.
-				$result .= implode(';', array_merge($userData, $registrationData)) . CRLF;
-			}
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Creates the heading line for the list of registrations (including a CRLF at the end).
-	 *
-	 * @return string the heading line for the list of registrations, will not be empty
-	 */
-	protected function createRegistrationsHeading() {
-		$fieldsFromFeUser = $this->localizeCsvHeadings(
-			t3lib_div::trimExplode(',', $this->getFrontEndUserFieldsConfiguration(), TRUE), 'LGL'
-		);
-		$fieldsFromAttendances = $this->localizeCsvHeadings(
-			t3lib_div::trimExplode(',', $this->getRegistrationFieldsConfiguration(), TRUE), 'tx_seminars_attendances'
-		);
-
-		$result = array_merge($fieldsFromFeUser, $fieldsFromAttendances);
-
-		return implode(';', $result) . CRLF;
+		return $listView->render();
 	}
 
 	/**
@@ -370,42 +277,6 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 		$eventListView->setPageUid($pageUid);
 
 		return $eventListView->render();
-	}
-
-	/**
-	 * Retrieves data from an object and returns that data as an array of
-	 * values. The individual values are already wrapped in double quotes, with
-	 * the contents having all quotes escaped.
-	 *
-	 * @param tx_seminars_OldModel_Abstract $dataSupplier
-	 *        object that will deliver the data
-	 * @param string $supplierFunction
-	 *        name of a function of the given object that expects a key as a parameter and returns the value for that
-	 *        key as a string
-	 * @param string $keys
-	 *        comma-separated list of keys to retrieve
-	 *
-	 * @return array the data for the keys provided in $keys (may be empty)
-	 */
-	protected function retrieveData(tx_seminars_OldModel_Abstract $dataSupplier, $supplierFunction, $keys) {
-		$result = array();
-
-		if (($keys !== '') && method_exists($dataSupplier, $supplierFunction)) {
-			$allKeys = t3lib_div::trimExplode(',', $keys);
-			foreach ($allKeys as $currentKey) {
-				$rawData = $dataSupplier->$supplierFunction($currentKey);
-				// Escapes double quotes and wraps the whole string in double quotes.
-				if (strpos($rawData, '"') !== FALSE) {
-					$result[] = '"' . str_replace('"', '""', $rawData) . '"';
-				} elseif ((strpos($rawData, ';') !== FALSE) || (strpos($rawData, LF) !== FALSE)) {
-					$result[] = '"' . $rawData . '"';
-				} else {
-					$result[] = $rawData;
-				}
-			}
-		}
-
-		return $result;
 	}
 
 	/**
@@ -548,41 +419,6 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	}
 
 	/**
-	 * Creates a CSV list of registrations for the given page and its subpages,
-	 * including a heading line.
-	 *
-	 * @param integer $pid
-	 *        the PID of the page to export the registrations for, must be >= 0
-	 *
-	 * @return string CSV list of registrations for the given page, will be
-	 *                empty if no registrations could be found on the given page and its subpages
-	 */
-	private function createListOfRegistrationsOnPage($pid) {
-		$registrationsBagBuilder = $this->createRegistrationBagBuilder();
-		$registrationsBagBuilder->setSourcePages($pid, self::RECURSION_DEPTH);
-
-		return $this->createRegistrationsHeading() . $this->getRegistrationsCsvList($registrationsBagBuilder);
-	}
-
-	/**
-	 * Creates a registrationBagBuilder with some preset limitations.
-	 *
-	 * @return tx_seminars_BagBuilder_Registration the bag builder with some preset limitations
-	 */
-	private function createRegistrationBagBuilder() {
-		/** @var $registrationBagBuilder tx_seminars_BagBuilder_Registration */
-		$registrationBagBuilder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Registration');
-
-		if (!$this->getRegistrationsOnQueueConfiguration()) {
-			$registrationBagBuilder->limitToRegular();
-		}
-
-		$registrationBagBuilder->limitToExistingUsers();
-
-		return $registrationBagBuilder;
-	}
-
-	/**
 	 * Returns the mode currently set in TYPO3_MODE.
 	 *
 	 * @return string either "FE" or "BE" representing the TYPO3 mode
@@ -650,84 +486,21 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	}
 
 	/**
-	 * Gets the fields which should be used from the fe_users table for the CSV files.
+	 * Checks whether the CSV export is in web export mode.
 	 *
-	 * @return string the fe_user table fields to use in the CSV file, will be empty if no fields were set.
+	 * @return boolean
 	 */
-	private function getFrontEndUserFieldsConfiguration() {
-		switch ($this->exportMode) {
-			case self::EXPORT_MODE_EMAIL:
-				$configurationVariable = 'fieldsFromFeUserForEmailCsv';
-				break;
-			default:
-				$configurationVariable = 'fieldsFromFeUserForCsv';
-		}
-
-		return $this->configuration->getAsString($configurationVariable);
+	protected function isInWebExportMode() {
+		return $this->exportMode === self::EXPORT_MODE_WEB;
 	}
 
 	/**
-	 * Returns the fields which should be used from the attendances table for
-	 * the CSV attachment.
+	 * Checks whether the CSV export is in e-mail export mode.
 	 *
-	 * @return string the attendance table fields to use in the CSV attachment,
-	 *                will be empty if no fields were set.
+	 * @return boolean
 	 */
-	private function getRegistrationFieldsConfiguration() {
-		switch ($this->exportMode) {
-			case self::EXPORT_MODE_EMAIL:
-				$configurationVariable = 'fieldsFromAttendanceForEmailCsv';
-				break;
-			default:
-				$configurationVariable = 'fieldsFromAttendanceForCsv';
-		}
-
-		return $this->configuration->getAsString($configurationVariable);
-	}
-
-	/**
-	 * Returns whether the attendances on queue should also be exported in the
-	 * CSV file.
-	 *
-	 * @return boolean TRUE if the attendances on queue should also be exported, FALSE otherwise
-	 */
-	private function getRegistrationsOnQueueConfiguration() {
-		switch ($this->exportMode) {
-			case self::EXPORT_MODE_EMAIL:
-				$configurationVariable = 'showAttendancesOnRegistrationQueueInEmailCsv';
-				break;
-			default:
-				$configurationVariable = 'showAttendancesOnRegistrationQueueInCSV';
-		}
-
-		return $this->configuration->getAsBoolean($configurationVariable);
-	}
-
-	/**
-	 * Returns the localized field names.
-	 *
-	 * @param array $fieldNames the field names to translate, may be empty
-	 * @param string $tableName the table to which the fields belong to
-	 *
-	 * @return array the translated field names in an array, will be empty if no field names were given
-	 */
-	private function localizeCsvHeadings(array $fieldNames, $tableName) {
-		if (empty($fieldNames)) {
-			return array();
-		}
-
-		$result = array();
-		foreach ($fieldNames as $fieldName) {
-			$translation = trim($this->language->getLL($tableName . '.' . $fieldName));
-
-			if (substr($translation, -1) === ':') {
-				$translation = substr($translation, 0, -1);
-			}
-
-			$result[] = $translation;
-		}
-
-		return $result;
+	protected function isInEmailExportMode() {
+		return $this->exportMode === self::EXPORT_MODE_EMAIL;
 	}
 }
 
