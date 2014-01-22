@@ -869,7 +869,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @return string
 	 */
 	protected function createLabelForRegistrationElementOnConfirmationPage($key) {
-		return $this->translate('label_' . $key);
+		return rtrim($this->translate('label_' . $key), ':');
 	}
 
 	/**

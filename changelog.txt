@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4948] Bugfix: Drop the colon after the labels on the confirmation page
 - [#4947] Bugfix: Foods and lodgings are missing on the confirmation page
 - [#4929] Feature: Add the fields "food" and "accommodation" to the thank-you e-mail
 - [#4938] Change: Use labels for all billing address fields on the confirmation page
