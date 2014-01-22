@@ -648,11 +648,19 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Gets the attendee's special interests in the subject.
 	 *
-	 * @return string a description of the attendee's special interests
-	 *                (may be empty)
+	 * @return string a description of the attendee's special interests (may be empty)
 	 */
 	public function getInterests() {
 		return $this->getRecordPropertyString('interests');
+	}
+
+	/**
+	 * Checks whether the attendee has stated any special interests.
+	 *
+	 * @return boolean
+	 */
+	public function hasInterests() {
+		return $this->hasRecordPropertyString('interests');
 	}
 
 	/**

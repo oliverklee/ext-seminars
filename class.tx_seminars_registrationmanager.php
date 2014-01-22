@@ -1189,6 +1189,13 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		$this->setMarker('billing_address', $registration->getBillingAddress());
 
+		if ($registration->hasInterests()) {
+			$this->setMarker('interests', $registration->getInterests());
+		} else {
+			$this->hideSubparts('interests', $wrapperPrefix);
+		}
+
+
 		/** @var $newEvent tx_seminars_Model_Event */
 		$newEvent = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($event->getUid());
 		$singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);

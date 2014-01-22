@@ -1887,7 +1887,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 
 
 	/*
-	 * Tests concerning the food and the accommodation
+	 * Tests concerning the food
 	 */
 
 	/**
@@ -1929,6 +1929,11 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 	}
 
+
+	/*
+	 * Tests concerning the accommodation
+	 */
+
 	/**
 	 * @test
 	 */
@@ -1965,6 +1970,50 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 
 		$this->assertTrue(
 			$this->fixture->hasAccommodation()
+		);
+	}
+
+
+	/*
+	 * Tests concerning the interests
+	 */
+
+	/**
+	 * @test
+	 */
+	public function getInterestsReturnsInterests() {
+		$interests = 'new experiences';
+
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('interests' => $interests));
+
+		$this->assertSame(
+			$interests,
+			$this->fixture->getInterests()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasInterestsForEmptyInterestsReturnsFalse() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('interests' => ''));
+
+		$this->assertFalse(
+			$this->fixture->hasInterests()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasInterestsForNonEmptyInterestsReturnsTrue() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('interests' => 'meeting people'));
+
+		$this->assertTrue(
+			$this->fixture->hasInterests()
 		);
 	}
 }

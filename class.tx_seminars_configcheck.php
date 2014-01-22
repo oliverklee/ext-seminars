@@ -826,9 +826,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 			'hideFieldsInThankYouMail',
 			FALSE,
 			'',
-			'These values specify the sections to hide in e-mails to '
-				.'participants. A mistyped field name will cause the field to '
-				.'be included nonetheless.',
+			'These values specify the sections to hide in e-mails to  participants. A mistyped field name will cause the field ' .
+				'to be included nonetheless.',
 			array(
 				'hello',
 				'title',
@@ -852,6 +851,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'room',
 				'paymentmethod',
 				'billing_address',
+				'interests',
 				'url',
 				'planned_disclaimer',
 				'footer',
