@@ -86,9 +86,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * @param boolean $allowHiddenRecords
 	 *        whether it is possible to create an object from a hidden record
 	 */
-	public function __construct(
-		$uid, $dbResult = NULL, $allowHiddenRecords = FALSE
-	) {
+	public function __construct($uid, $dbResult = NULL, $allowHiddenRecords = FALSE) {
 		$this->initializeCharsetConversion();
 		$this->retrieveRecordAndGetData($uid, $dbResult, $allowHiddenRecords);
 		$this->init();
@@ -167,7 +165,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * @return boolean TRUE if the object has been initialized, FALSE otherwise
 	 */
 	public function isOk() {
-		return (!empty($this->recordData) && !empty($this->tableName));
+		return (!empty($this->recordData) && ($this->tableName !== ''));
 	}
 
 	/**

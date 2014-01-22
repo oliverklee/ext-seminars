@@ -95,9 +95,20 @@ abstract class Tx_Seminars_Csv_AbstractListView {
 
 			$this->translator->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
 			$this->translator->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
+			$this->includeAdditionalLanguageFiles();
 		}
 
 		return $this->translator;
+	}
+
+	/**
+	 * Includes additional language files for $this->translator.
+	 *
+	 * This function is intended to be overwritten in subclasses.
+	 *
+	 * @return void
+	 */
+	protected function includeAdditionalLanguageFiles() {
 	}
 
 	/**
