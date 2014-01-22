@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4923] Feature: Make the labels on the confirmation page changeable
 - [#4889] Feature: Make the CSV classes extensible
 - [#4863] Cleanup: Clean up the CSV class
 - [#4648] Cleanup: Drop some early __destruct calls

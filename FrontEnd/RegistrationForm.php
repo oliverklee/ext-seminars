@@ -855,10 +855,23 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 			return '';
 		}
 
-		$this->setMarker('registration_data_heading', $this->translate('label_' . $key));
+		$this->setMarker('registration_data_heading', $this->createLabelForRegistrationElementOnConfirmationPage($key));
+
 		$fieldContent = str_replace(CR, '<br />', htmlspecialchars($currentFormData));
 		$this->setMarker('registration_data_body', $fieldContent);
+
 		return $this->getSubpart('REGISTRATION_CONFIRMATION_DATA');
+	}
+
+	/**
+	 * Creates the label text for an element on the confirmation page.
+	 *
+	 * @param string $key
+	 *
+	 * @return string
+	 */
+	protected function createLabelForRegistrationElementOnConfirmationPage($key) {
+		return $this->translate('label_' . $key);
 	}
 
 	/**
