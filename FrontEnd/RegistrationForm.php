@@ -1079,8 +1079,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Gets the already entered billing address nicely formatted as HTML so
 	 * that it can be directly included on the confirmation page.
 	 *
-	 * @return string the already entered registration data, nicely formatted as
-	 *                HTML
+	 * @return string the already entered registration data, nicely formatted as HTML
 	 */
 	public function getBillingAddress() {
 		$result = '';
