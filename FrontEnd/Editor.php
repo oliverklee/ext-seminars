@@ -182,12 +182,12 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	 *
 	 * @param string $key column name of the 'tx_seminars_seminars' table as key, must not be empty
 	 *
-	 * @return string form value or an empty string if the value does not exist
+	 * @return string|array form value or an empty string if the value does not exist
 	 */
 	public function getFormValue($key) {
 		$dataSource = ($this->isTestMode) ? $this->fakedFormValues : $this->getFormCreator()->oDataHandler->__aFormData;
 
-		return isset($dataSource[$key]) ? (string) $dataSource[$key] : '';
+		return isset($dataSource[$key]) ? $dataSource[$key] : '';
 	}
 
 	/**
