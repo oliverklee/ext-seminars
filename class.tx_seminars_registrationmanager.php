@@ -22,8 +22,7 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-// This file does not include the locallang file in the BE because objectfromdb
-// already does that.
+// This file does not include the locallang file in the BE because objectfromdb already does that.
 
 /**
  * This utility class checks and creates registrations for seminars.
@@ -145,7 +144,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 	/**
 	 * Checks whether is possible to register for a given event at all:
-	 * if a possibly logged-in user hasn't registered yet for this event,
+	 * if a possibly logged-in user has not registered yet for this event,
 	 * if the event isn't canceled, full etc.
 	 *
 	 * If no user is logged in, it is just checked whether somebody could
@@ -181,7 +180,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 	/**
 	 * Checks whether is possible to register for a given seminar at all:
-	 * if a possibly logged-in user hasn't registered yet for this seminar, if the seminar isn't canceled, full etc.
+	 * if a possibly logged-in user has not registered yet for this seminar, if the seminar isn't canceled, full etc.
 	 *
 	 * If no user is logged in, it is just checked whether somebody could register for this seminar.
 	 *
@@ -263,7 +262,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Creates an HTML link to either the registration page (if a user is logged in) or the login page (if no user is logged in).
 	 *
 	 * Before you can call this function, you should make sure that the link makes sense (ie. the seminar still has vacancies, the
-	 * user hasn't registered for this seminar etc.).
+	 * user has not registered for this seminar etc.).
 	 *
 	 * @param tx_oelib_templatehelper $plugin an object for a live page
 	 * @param tx_seminars_seminar $seminar a seminar for which we'll check if it is possible to register
