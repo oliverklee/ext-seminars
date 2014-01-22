@@ -2099,12 +2099,15 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Throws an exception if there are no organizers related to this event.
 	 *
 	 * @return tx_seminars_Bag_Organizer an organizerbag object
+	 *
+	 * @throws BadMethodCallException
 	 */
 	public function getOrganizerBag() {
 		if (!$this->hasOrganizers()) {
 			throw new BadMethodCallException('There are no organizers related to this event.', 1333291857);
 		}
 
+		/** @var $builder tx_seminars_BagBuilder_Organizer */
 		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Organizer');
 		$builder->limitToEvent($this->getUid());
 
@@ -2127,6 +2130,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$organizers = $this->getOrganizerBag();
+		/** @var $organizer tx_seminars_OldModel_Organizer */
 		foreach ($organizers as $organizer) {
 			$result[] = $plugin->cObj->getTypoLink(
 				htmlspecialchars($organizer->getName()),
@@ -2134,7 +2138,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				array(),
 				$plugin->getConfValueString('externalLinkTarget')
 			);
-			$organizer->__destruct();
 		}
 
 		return implode(', ', $result);
@@ -2143,8 +2146,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets our organizer's names (and URLs), separated by LF.
 	 *
-	 * @return string names and homepages of our organizers or an
-	 *                empty string if there are no organizers
+	 * @return string names and homepages of our organizers or an empty string if there are no organizers
 	 */
 	protected function getOrganizersRaw() {
 		if (!$this->hasOrganizers()) {
@@ -2154,18 +2156,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$organizers = $this->getOrganizerBag();
+		/** @var $organizer tx_seminars_OldModel_Organizer */
 		foreach ($organizers as $organizer) {
-			$result[] = $organizer->getName()
-				.($organizer->hasHomepage() ? ', '.$organizer->getHomepage() : '');
+			$result[] = $organizer->getName() . ($organizer->hasHomepage() ? ', ' . $organizer->getHomepage() : '');
 		}
-		$organizers->__destruct();
 
 		return implode(LF, $result);
 	}
 
 	/**
-	 * Gets our organizers' names and e-mail addresses in the format
-	 * '"John Doe" <john.doe@example.com>'.
+	 * Gets our organizers' names and e-mail addresses in the format '"John Doe" <john.doe@example.com>'.
 	 *
 	 * The name is not encoded yet.
 	 *
@@ -2179,11 +2179,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$organizers = $this->getOrganizerBag();
+		/** @var $organizer tx_seminars_OldModel_Organizer */
 		foreach ($organizers as $organizer) {
-			$result[] = '"' . $organizer->getName() . '"' .
-				' <' . $organizer->getEMailAddress() . '>';
+			$result[] = '"' . $organizer->getName() . '"' . ' <' . $organizer->getEMailAddress() . '>';
 		}
-		$organizers->__destruct();
 
 		return $result;
 	}
@@ -2202,10 +2201,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$organizers = $this->getOrganizerBag();
+		/** @var $organizer tx_seminars_OldModel_Organizer */
 		foreach ($organizers as $organizer) {
 			$result[] = $organizer->getEMailAddress();
 		}
-		$organizers->__destruct();
 
 		return $result;
 	}
@@ -2214,7 +2213,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets our organizers' e-mail footers.
 	 *
 	 * @return array the organizers' e-mail footers, will be empty if no
-	 *               organzier was set, or all organizers have no e-mail footer
+	 *               organizer was set, or all organizers have no e-mail footer
 	 */
 	public function getOrganizersFooter() {
 		if (!$this->hasOrganizers()) {
@@ -2224,13 +2223,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$organizers = $this->getOrganizerBag();
+		/** @var $organizer tx_seminars_OldModel_Organizer */
 		foreach ($organizers as $organizer) {
 			$emailFooter = $organizer->getEmailFooter();
-			if ($emailFooter != '') {
+			if ($emailFooter !== '') {
 				$result[] = $emailFooter;
 			}
 		}
-		$organizers->__destruct();
 
 		return $result;
 	}
@@ -2239,8 +2238,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Checks whether we have any organizers set, but does not check the
 	 * validity of that entry.
 	 *
-	 * @return boolean TRUE if we have any organizers related to this
-	 *                 seminar, FALSE otherwise
+	 * @return boolean TRUE if we have any organizers related to this seminar, FALSE otherwise
 	 */
 	public function hasOrganizers() {
 		return $this->hasRecordPropertyInteger('organizers');
@@ -2264,8 +2262,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @param tslib_pibase $plugin a tslib_pibase object for a live page
 	 *
-	 * @return string the hyperlinked names of our organizing partners,
-	 *                or an empty string
+	 * @return string the hyperlinked names of our organizing partners, or an empty string
 	 */
 	public function getOrganizingPartners(tslib_pibase $plugin) {
 		if (!$this->hasOrganizingPartners()) {
@@ -2275,13 +2272,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$organizerBag = tx_oelib_ObjectFactory::make(
 			'tx_seminars_Bag_Organizer',
-			'tx_seminars_seminars_organizing_partners_mm.uid_local = ' .
-				$this->getUid() . ' AND ' .
-				'tx_seminars_seminars_organizing_partners_mm.uid_foreign = ' .
-				'tx_seminars_organizers.uid',
+			'tx_seminars_seminars_organizing_partners_mm.uid_local = ' . $this->getUid() . ' AND ' .
+				'tx_seminars_seminars_organizing_partners_mm.uid_foreign = tx_seminars_organizers.uid',
 			'tx_seminars_seminars_organizing_partners_mm'
 		);
 
+		/** @var $organizer tx_seminars_OldModel_Organizer */
 		foreach ($organizerBag as $organizer) {
 			$result[] = $plugin->cObj->getTypoLink(
 				$organizer->getName(),
@@ -2297,8 +2293,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Checks whether we have any organizing partners set.
 	 *
-	 * @return boolean TRUE if we have any organizing partners related to
-	 *                 this event, FALSE otherwise
+	 * @return boolean TRUE if we have any organizing partners related to this event, FALSE otherwise
 	 */
 	public function hasOrganizingPartners() {
 		return $this->hasRecordPropertyInteger('organizing_partners');
@@ -2307,19 +2302,16 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets the number of organizing partners associated with this event.
 	 *
-	 * @return integer the number of organizing partners associated with
-	 *                 this event, will be >= 0
+	 * @return integer the number of organizing partners associated with this event, will be >= 0
 	 */
 	public function getNumberOfOrganizingPartners() {
 		return $this->getRecordPropertyInteger('organizing_partners');
 	}
 
 	/**
-	 * Checks whether this event has a separate details page set (which may be
-	 * an internal or external URL).
+	 * Checks whether this event has a separate details page set (which may be an internal or external URL).
 	 *
-	 * @return boolean TRUE if this event has a separate details page,
-	 *                 FALSE otherwirse
+	 * @return boolean TRUE if this event has a separate details page, FALSE otherwise
 	 */
 	public function hasSeparateDetailsPage() {
 		return $this->hasRecordPropertyString('details_page');
