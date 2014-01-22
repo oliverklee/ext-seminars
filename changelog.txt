@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4929] Feature: Add the fields "food" and "accommodation" to the thank-you e-mail
 - [#4938] Change: Use labels for all billing address fields on the confirmation page
 - [#4924] Feature: Make the sort order of the registration items on the confirmnation page changeable
 - [#4923] Feature: Make the labels on the confirmation page changeable

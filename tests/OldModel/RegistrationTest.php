@@ -1884,4 +1884,87 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$this->fixture->hasRegisteredMySelf()
 		);
 	}
+
+
+	/*
+	 * Tests concerning the food and the accommodation
+	 */
+
+	/**
+	 * @test
+	 */
+	public function getFoodReturnsFood() {
+		$food = 'a hamburger';
+
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('food' => $food));
+
+		$this->assertSame(
+			$food,
+			$this->fixture->getFood()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasFoodForEmptyFoodReturnsFalse() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('food' => ''));
+
+		$this->assertFalse(
+			$this->fixture->hasFood()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasFoodForNonEmptyFoodReturnsTrue() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('food' => 'two donuts'));
+
+		$this->assertTrue(
+			$this->fixture->hasFood()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAccommodationReturnsAccommodation() {
+		$accommodation = 'a tent in the woods';
+
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('accommodation' => $accommodation));
+
+		$this->assertSame(
+			$accommodation,
+			$this->fixture->getAccommodation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAccommodationForEmptyAccommodationReturnsFalse() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('accommodation' => ''));
+
+		$this->assertFalse(
+			$this->fixture->hasAccommodation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasAccommodationForNonEmptyAccommodationReturnsTrue() {
+		$seminar = new tx_seminars_seminar($this->seminarUid);
+		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('accommodation' => 'a youth hostel'));
+
+		$this->assertTrue(
+			$this->fixture->hasAccommodation()
+		);
+	}
 }

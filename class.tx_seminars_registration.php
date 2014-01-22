@@ -925,6 +925,42 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	}
 
 	/**
+	 * Returns the food free-text content.
+	 *
+	 * @return string
+	 */
+	public function getFood() {
+		return $this->getRecordPropertyString('food');
+	}
+
+	/**
+	 * Checks whether this registration has non-empty data in the food field.
+	 *
+	 * @return boolean
+	 */
+	public function hasFood() {
+		return $this->hasRecordPropertyString('food');
+	}
+
+	/**
+	 * Returns the accommodation free-text content.
+	 *
+	 * @return string
+	 */
+	public function getAccommodation() {
+		return $this->getRecordPropertyString('accommodation');
+	}
+
+	/**
+	 * Checks whether this registration has non-empty data in the accommodation field.
+	 *
+	 * @return boolean
+	 */
+	public function hasAccommodation() {
+		return $this->hasRecordPropertyString('accommodation');
+	}
+
+	/**
 	 * Checks whether there are any food options referenced by this record.
 	 *
 	 * @return boolean TRUE if at least one food option is referenced by this record, FALSE otherwise

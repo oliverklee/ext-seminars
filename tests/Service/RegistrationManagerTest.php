@@ -244,6 +244,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array(
 				'seminar' => $this->seminar->getUid(),
 				'user' => $frontEndUserUid,
+				'food' => 'something nice to eat',
+				'accommodation' => 'a nice, dry place',
 			)
 		);
 
@@ -2174,6 +2176,40 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			quoted_printable_decode(
 				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
 			)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeMailBodyContainsRegistrationFood() {
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+
+		$this->assertContains(
+			'something nice to eat',
+			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeMailBodyContainsRegistrationAccommodation() {
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+
+		$this->assertContains(
+			'a nice, dry place',
+			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody())
 		);
 	}
 

@@ -1113,10 +1113,22 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$this->hideSubparts('lodgings', $wrapperPrefix);
 		}
 
+		if ($registration->hasAccommodation()) {
+			$this->setMarker('accommodation', $registration->getAccommodation());
+		} else {
+			$this->hideSubparts('accommodation', $wrapperPrefix);
+		}
+
 		if ($registration->hasFoods()) {
 			$this->setMarker('foods', $registration->getFoods());
 		} else {
 			$this->hideSubparts('foods', $wrapperPrefix);
+		}
+
+		if ($registration->hasFood()) {
+			$this->setMarker('food', $registration->getFood());
+		} else {
+			$this->hideSubparts('food', $wrapperPrefix);
 		}
 
 		if ($registration->hasCheckboxes()) {
