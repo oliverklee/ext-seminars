@@ -120,7 +120,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * @var array<string>
 	 */
-	protected $newFormFields = array();
+	protected $alwaysEnabledFormFields = array();
 
 	/**
 	 * The constructor.
@@ -533,7 +533,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @return boolean TRUE if the current form field should be displayed, FALSE otherwise
 	 */
 	public function isFormFieldEnabled($key) {
-		$isFormFieldAlwaysEnabled = in_array($key, $this->newFormFields, TRUE);
+		$isFormFieldAlwaysEnabled = in_array($key, $this->alwaysEnabledFormFields, TRUE);
 		if ($isFormFieldAlwaysEnabled) {
 			return TRUE;
 		}
@@ -880,7 +880,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @return array<string>
 	 */
 	protected function getAllFieldKeysForConfirmationPage() {
-		return array_merge($this->registrationFieldsOnConfirmationPage, $this->newFormFields);
+		return $this->registrationFieldsOnConfirmationPage;
 	}
 
 	/**
