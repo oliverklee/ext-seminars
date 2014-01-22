@@ -57,22 +57,20 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	public $currentPageNumber = 0;
 
 	/**
-	 * fields that are part of the billing address, with the value controlling
-	 * if the field will be displayed with a label on the second page of the
-	 * registration form
+	 * the keys of fields that are part of the billing address
 	 *
 	 * @var array
 	 */
-	private $fieldsInBillingAddress = array(
-		'company' => FALSE,
-		'gender' => FALSE,
-		'name' => FALSE,
-		'address' => FALSE,
-		'zip' => FALSE,
-		'city' => FALSE,
-		'country' => FALSE,
-		'telephone' => TRUE,
-		'email' => TRUE,
+	protected $fieldsInBillingAddress = array(
+		'gender',
+		'name',
+		'company',
+		'email',
+		'address',
+		'zip',
+		'city',
+		'country',
+		'telephone',
 	);
 
 	/**
@@ -1087,21 +1085,19 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	public function getBillingAddress() {
 		$result = '';
 
-		foreach ($this->fieldsInBillingAddress as $currentKey => $hasLabel) {
-			$currentFormData = $this->getFormValue($currentKey);
-			if ($currentFormData != '') {
+		foreach ($this->fieldsInBillingAddress as $key) {
+			$currentFormData = $this->getFormValue($key);
+			if ($currentFormData !== '') {
 				// If the gender field is hidden, it would have an empty value,
 				// so we wouldn't be here. So let's convert the "gender" index
 				// into a readable string.
-				if ($currentKey == 'gender') {
-					$currentFormData = $this->translate('label_gender.I.' . intval($currentFormData));
+				if ($key === 'gender') {
+					$currentFormData = $this->translate('label_gender.I.' . (integer) $currentFormData);
 				}
 				$processedFormData = str_replace(CR, '<br />', htmlspecialchars($currentFormData));
-				if ($hasLabel) {
-					$processedFormData = $this->translate('label_' . $currentKey) . ' ' . $processedFormData;
-				}
+				$processedFormData = $this->translate('label_' . $key) . ' ' . $processedFormData;
 
-				$result .= $processedFormData.'<br />';
+				$result .= $processedFormData . '<br />';
 			}
 		}
 
