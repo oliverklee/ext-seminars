@@ -111,21 +111,19 @@ class tx_seminars_cli_MailNotifier {
 	 *
 	 * @return void
 	 */
-	private function sendRemindersToOrganizers(
-		tx_seminars_seminar $event, $messageKey
-	) {
-		$organizerBag = $event->getOrganizerBag();
+	private function sendRemindersToOrganizers(tx_seminars_seminar $event, $messageKey) {
 		$attachment = NULL;
 
 		// The first organizer is taken as sender.
 		/** @var $sender tx_seminars_OldModel_Organizer */
-		$sender = $organizerBag->current();
+		$sender = $event->getFirstOrganizer();
 		$subject = $this->customizeMessage($messageKey . 'Subject', $event);
 		if ($this->shouldCsvFileBeAdded($event)) {
 			$attachment = $this->getCsv($event->getUid());
 		}
 
-		foreach ($organizerBag as $organizer) {
+		/** @var $organizer tx_seminars_OldModel_Organizer */
+		foreach ($event->getOrganizerBag() as $organizer) {
 			/** @var $eMail Tx_Oelib_Mail */
 			$eMail = t3lib_div::makeInstance('Tx_Oelib_Mail');
 			$eMail->setSender($sender);

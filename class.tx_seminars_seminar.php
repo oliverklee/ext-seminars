@@ -2115,6 +2115,22 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Returns the first organizer.
+	 *
+	 * @return tx_seminars_OldModel_Organizer|NULL
+	 */
+	public function getFirstOrganizer() {
+		if (!$this->hasOrganizers()) {
+			return NULL;
+		}
+
+		$organizers = $this->getOrganizerBag();
+		$organizers->rewind();
+
+		return $organizers->current();
+	}
+
+	/**
 	 * Gets our organizers (as HTML code with hyperlinks to their homepage, if
 	 * they have any).
 	 *
@@ -3396,10 +3412,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets the PID of the system folder where the registration records of this
 	 * event should be stored. If no folder is set in this event's topmost
 	 * organizer record (ie. the page configured in
-	 * plugin.tx_seminars.attendancesPID should be used), this function will
-	 * return 0.
+	 * plugin.tx_seminars.attendancesPID should be used), this function will return 0.
 	 *
-	 * @return integer the PID of the systen folder where registration records
+	 * @return integer the PID of the system folder where registration records
 	 *                 for this event should be stored or 0 if no folder is set
 	 */
 	public function getAttendancesPid() {
@@ -3407,23 +3422,17 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return 0;
 		}
 
-		$organizers = $this->getOrganizerBag();
-		$firstOrganizer = $organizers->current();
-		$organizers->__destruct();
-
-		return $firstOrganizer->getAttendancesPid();
+		return $this->getFirstOrganizer()->getAttendancesPid();
 	}
 
 	/**
-	 * Checks whether this event's topmost organizer has a PID set to store the
-	 * registration records in.
+	 * Checks whether this event's topmost organizer has a PID set to store the registration records in.
 	 *
-	 * @return boolean TRUE if a the systen folder for registration
-	 *                 records is specified in this event's topmost
-	 *                 organizers record, FALSE otherwise
+	 * @return boolean TRUE if a the system folder for registration is specified in this event's topmost organizers record,
+	 *                 FALSE otherwise
 	 */
 	public function hasAttendancesPid() {
-		return (boolean) $this->getAttendancesPid();
+		return $this->getAttendancesPid() !== 0;
 	}
 
 	/**

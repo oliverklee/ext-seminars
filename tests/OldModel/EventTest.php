@@ -4125,6 +4125,65 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 
 	/*
+	 * Tests concerning getFirstOrganizer
+	 */
+
+	/**
+	 * @test
+	 */
+	public function getFirstOrganizerWithNoOrganizersReturnsNull() {
+		$this->assertNull(
+			$this->fixture->getFirstOrganizer()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getFirstOrganizerForOneOrganizerReturnsThatOrganizer() {
+		$organizerUid = $this->addOrganizerRelation(array());
+
+		$this->assertSame(
+			$organizerUid,
+			$this->fixture->getFirstOrganizer()->getUid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getFirstOrganizerForTwoOrganizerReturnsFirstOrganizer() {
+		$firstOrganizerUid = $this->addOrganizerRelation(array());
+		$this->addOrganizerRelation(array());
+
+		$this->assertSame(
+			$firstOrganizerUid,
+			$this->fixture->getFirstOrganizer()->getUid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getFirstOrganizerWithTwoOrganizersReturnsBothOrganizerNames() {
+		$this->markTestIncomplete('Complete me!');
+		$this->addOrganizerRelation(array('title' => 'foo'));
+		$this->addOrganizerRelation(array('title' => 'bar'));
+
+		$organizers = $this->fixture->getFirstOrganizer();
+
+		$this->assertContains(
+			'foo',
+			$organizers
+		);
+		$this->assertContains(
+			'bar',
+			$organizers
+		);
+	}
+
+
+	/*
 	 * Tests concerning getAttendancesPid
 	 */
 

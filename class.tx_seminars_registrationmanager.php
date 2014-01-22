@@ -794,7 +794,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		/** @var $eMailNotification tx_oelib_Mail */
 		$eMailNotification = t3lib_div::makeInstance('tx_oelib_Mail');
 		$eMailNotification->addRecipient($oldRegistration->getFrontEndUser());
-		$eMailNotification->setSender($event->getOrganizerBag()->current());
+		$eMailNotification->setSender($event->getFirstOrganizer());
 		$eMailNotification->setSubject(
 			$this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $event->getTitleAndDate('-')
 		);
@@ -852,7 +852,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$organizers = $event->getOrganizerBag();
 		/** @var $eMailNotification tx_oelib_Mail */
 		$eMailNotification = t3lib_div::makeInstance('tx_oelib_Mail');
-		$eMailNotification->setSender($organizers->current());
+		$eMailNotification->setSender($event->getFirstOrganizer());
 
 		/** @var $organizer tx_seminars_OldModel_Organizer */
 		foreach ($organizers as $organizer) {
@@ -966,7 +966,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		/** @var $eMail tx_oelib_Mail */
 		$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
 
-		$eMail->setSender($event->getOrganizerBag()->current());
+		$eMail->setSender($event->getFirstOrganizer());
 		$eMail->setMessage($this->getMessageForNotification($registration, $emailReason));
 		$eMail->setSubject(sprintf(
 			$this->translate('email_additionalNotification' . $emailReason . 'Subject'),
