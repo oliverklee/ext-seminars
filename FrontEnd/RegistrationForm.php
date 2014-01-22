@@ -1360,7 +1360,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 */
 	public function getPreselectedPaymentMethod() {
 		$availablePaymentMethods = $this->populateListPaymentMethods(array());
-		if (count($availablePaymentMethods) == 1) {
+		if (count($availablePaymentMethods) === 1) {
 			return $availablePaymentMethods[0]['value'];
 		}
 
@@ -1532,7 +1532,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 			'all_terms',
 			'terms',
 			'terms_2',
-			'traveling_terms'
+			'traveling_terms',
 		);
 
 		$formFieldsToHide = array();
@@ -1577,7 +1577,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 		// Decreases $lastPageNumberForDisplay by one if we only have 2 clicks to registration.
 		$numberOfClicks = $this->getConfValueInteger('numberOfClicksForRegistration', 's_registration');
 
-		if ($numberOfClicks == 2) {
+		if ($numberOfClicks === 2) {
 			$lastPageNumberForDisplay--;
 		}
 
@@ -1610,12 +1610,11 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * 2 => job title
 	 * 3 => e-mail address
 	 *
-	 * @return array<array>
-	 *         the entered person's data, will be empty if no additional persons have been registered
+	 * @return array<array> the entered person's data, will be empty if no additional persons have been registered
 	 */
 	public function getAdditionalRegisteredPersonsData() {
 		$jsonEncodedData = $this->getFormValue('structured_attendees_names');
-		if (!is_string($jsonEncodedData) || empty($jsonEncodedData)) {
+		if (!is_string($jsonEncodedData) || $jsonEncodedData === '') {
 			return array();
 		}
 

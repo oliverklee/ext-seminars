@@ -39,8 +39,9 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	private $formCreator = NULL;
 
 	/**
-	 * @var integer UID of the currently edited object, zero if the object is
-	 *              going to be a new database record
+	 * UID of the currently edited object, zero if the object is going to be a new database record
+	 *
+	 * @var integer
 	 */
 	private $objectUid = 0;
 
@@ -82,8 +83,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Gets the current object UID.
 	 *
-	 * @return integer UID of the currently edited object, zero if a new object
-	 *                 is being created
+	 * @return integer UID of the currently edited object, zero if a new object is being created
 	 */
 	public function getObjectUid() {
 		return $this->objectUid;
@@ -107,7 +107,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	 *                            is set
 	 */
 	public function getFormCreator() {
-		if (!$this->formCreator) {
+		if ($this->formCreator === NULL) {
 			$this->formCreator = $this->makeFormCreator();
 		}
 
@@ -139,8 +139,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	 * Note that render() requires the FORMidable object to be initializable.
 	 * This means that the test mode must not be set when calling render().
 	 *
-	 * @return string HTML for the FE editor or an error view if the
-	 *                requested object is not editable for the current user
+	 * @return string HTML for the FE editor or an error view if the requested object is not editable for the current user
 	 */
 	public function render() {
 		return $this->getFormCreator()->render();
@@ -152,8 +151,9 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	 *
 	 * This function does nothing if this instance is running in test mode.
 	 *
-	 * @return tx_ameosformidable FORMidable instance or NULL if the test mode
-	 *                            is set
+	 * @return tx_ameosformidable FORMidable instance or NULL if the test mode is set
+	 *
+	 * @throws BadMethodCallException
 	 */
 	protected function makeFormCreator() {
 		if ($this->isTestMode()) {
@@ -166,11 +166,10 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 			);
 		}
 
+		/** @var $formCreator tx_ameosformidable */
 		$formCreator = t3lib_div::makeInstance('tx_ameosformidable');
 		$formCreator->initFromTs(
-			$this,
-			$this->formConfiguration,
-			($this->getObjectUid() > 0) ? $this->getObjectUid() : FALSE
+			$this, $this->formConfiguration, ($this->getObjectUid() > 0) ? $this->getObjectUid() : FALSE
 		);
 
 		return $formCreator;
@@ -186,16 +185,13 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	 * @return string form value or an empty string if the value does not exist
 	 */
 	public function getFormValue($key) {
-		$dataSource = ($this->isTestMode)
-			? $this->fakedFormValues
-			: $this->getFormCreator()->oDataHandler->__aFormData;
+		$dataSource = ($this->isTestMode) ? $this->fakedFormValues : $this->getFormCreator()->oDataHandler->__aFormData;
 
-		return isset($dataSource[$key]) ? $dataSource[$key] : '';
+		return isset($dataSource[$key]) ? (string) $dataSource[$key] : '';
 	}
 
 	/**
-	 * Fakes a form data value that is usually provided by the FORMidable
-	 * object.
+	 * Fakes a form data value that is usually provided by the FORMidable object.
 	 *
 	 * This function is for testing purposes.
 	 *
