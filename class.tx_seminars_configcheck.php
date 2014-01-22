@@ -43,7 +43,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	protected function check_tx_seminars_registrationmanager() {
 		// The registration manager needs to be able to create registration
 		// objects. So we check whether the prerequisites for registrations
-		// are fullfilled as well.
+		// are fulfilled as well.
 		$this->check_tx_seminars_registration();
 	}
 
