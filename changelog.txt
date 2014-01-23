@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4940] Bugfix: Label for fe_user.telephone missing in the CSV export
 - [#4941] Feature: Add a CSV label for attendances.crdate
 - [#4952] Feature: Add "sep" marker to the CSV
 - [#4950] Feature: Add the interests to the thank-you e-mail
