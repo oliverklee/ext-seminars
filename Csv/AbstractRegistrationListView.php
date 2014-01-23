@@ -114,7 +114,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 
 		$allLines = array_merge(array($this->createCsvHeading()), $this->createCsvBodyLines());
 
-		return implode(self::LINE_SEPARATOR, $allLines) . self::LINE_SEPARATOR;
+		return $this->createCsvSeparatorLine() . implode(self::LINE_SEPARATOR, $allLines) . self::LINE_SEPARATOR;
 	}
 
 	/**

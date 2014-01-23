@@ -79,7 +79,7 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView {
 
 		$allLines = array_merge(array($this->createCsvHeading()), $this->createCsvBodyLines());
 
-		return implode(self::LINE_SEPARATOR, $allLines) . self::LINE_SEPARATOR;
+		return $this->createCsvSeparatorLine() . implode(self::LINE_SEPARATOR, $allLines) . self::LINE_SEPARATOR;
 	}
 
 	/**

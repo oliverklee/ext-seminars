@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4952] Feature: Add "sep" marker to the CSV
 - [#4950] Feature: Add the interests to the thank-you e-mail
 - [#4946] Cleanup: Add and use seminar::getFirstOrganizer
 - [#4948] Bugfix: Drop the colon after the labels on the confirmation page

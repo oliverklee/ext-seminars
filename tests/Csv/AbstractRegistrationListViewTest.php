@@ -581,9 +581,9 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 	/**
 	 * @test
 	 */
-	public function renderForBothConfigurationFieldsEmptyReturnsEmptyLine() {
+	public function renderForBothConfigurationFieldsEmptyReturnsSeparatorMarkerAndEmptyLine() {
 		$this->assertSame(
-			CRLF,
+			'sep=;' . CRLF . CRLF,
 			$this->subject->render()
 		);
 	}

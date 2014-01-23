@@ -157,6 +157,15 @@ abstract class Tx_Seminars_Csv_AbstractListView {
 	abstract public function render();
 
 	/**
+	 * Returns the first line containing the specification of the separator character.
+	 *
+	 * @return string
+	 */
+	protected function createCsvSeparatorLine() {
+		return 'sep=' . self::COLUMN_SEPARATOR . self::LINE_SEPARATOR;
+	}
+
+	/**
 	 * Creates the heading line for a CSV event list.
 	 *
 	 * @return string header list, will not be empty if the CSV export has been configured correctly

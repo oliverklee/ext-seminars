@@ -157,12 +157,13 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function createListOfEventsHasOnlyHeaderLineForZeroRecords() {
+	public function createListOfEventsForZeroRecordsHasOnlySeparatorSpecificationAndHeaderLine() {
 		$pid = $this->testingFramework->createSystemFolder();
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'uid,title');
 
 		$this->assertSame(
-			$this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
+			'sep=;' . CRLF .
+				$this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
 				$this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
 			$this->fixture->createListOfEvents($pid)
 		);
@@ -281,7 +282,7 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->assertSame(
+		$this->assertContains(
 			$this->localizeAndRemoveColon('tx_seminars_seminars.uid') .
 				CRLF . $this->eventUid . CRLF . $secondEventUid . CRLF,
 			$this->fixture->createAndOutputListOfEvents($this->pid)
@@ -463,14 +464,14 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function createListOfRegistrationsHasOnlyHeaderLineForZeroRecords() {
+	public function createListOfRegistrationsForZeroRecordsHasOnlySeparatorSpecificationHeaderLine() {
 		$this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
 		$this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
 
 		$this->assertSame(
-			$this->localizeAndRemoveColon('LGL.name') . ';' .
-				$this->localizeAndRemoveColon('tx_seminars_attendances.uid') .
-				CRLF,
+			'sep=;' . CRLF .
+				$this->localizeAndRemoveColon('LGL.name') . ';' .
+				$this->localizeAndRemoveColon('tx_seminars_attendances.uid') . CRLF,
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
 	}
@@ -1183,12 +1184,12 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function createListOfRegistrationsForBothConfigurationFieldsEmptyReturnsEmptyLine() {
+	public function createListOfRegistrationsForBothConfigurationFieldsEmptyReturnsOnlySeparatorSpecification() {
 		$this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
 		$this->configuration->setAsString('fieldsFromFeUserForCsv', '');
 
 		$this->assertSame(
-			CRLF,
+			'sep=;' . CRLF . CRLF,
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}

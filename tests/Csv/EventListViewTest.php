@@ -145,14 +145,15 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function renderForZeroRecordsReturnsHeaderOnly() {
+	public function renderForZeroRecordsReturnsOnlySeparatorSpecificationAndHeader() {
 		$pageUid = $this->testingFramework->createSystemFolder();
 		$this->subject->setPageUid($pageUid);
 
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'uid,title');
 
 		$this->assertSame(
-			$this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
+			'sep=;' . CRLF .
+				$this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
 				$this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
 			$this->subject->render()
 		);
@@ -224,7 +225,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars', array('pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600)
 		);
 
-		$this->assertSame(
+		$this->assertContains(
 			$this->localizeAndRemoveColon('tx_seminars_seminars.uid') . CRLF . $firstEventUid . CRLF . $secondEventUid . CRLF,
 			$this->subject->render($this->pageUid)
 		);
