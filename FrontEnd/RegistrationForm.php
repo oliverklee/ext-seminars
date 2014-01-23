@@ -797,20 +797,21 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 		/** @var $userData array */
 		$userData = $GLOBALS['TSFE']->fe_user->user;
 
-		$fields = t3lib_div::trimExplode(',', $this->getConfValueString('showFeUserFieldsInRegistrationForm'));
+		$fieldKeys = t3lib_div::trimExplode(',', $this->getConfValueString('showFeUserFieldsInRegistrationForm'));
 		$fieldsWithLabels = t3lib_div::trimExplode(',', $this->getConfValueString('showFeUserFieldsInRegistrationFormWithLabel'));
 
-		foreach ($fields as $fieldKey) {
-			$hasLabel = in_array($fieldKey, $fieldsWithLabels, TRUE);
-			$fieldValue = isset($userData[$fieldKey]) ? htmlspecialchars((string) $userData[$fieldKey]) : '';
+		foreach ($fieldKeys as $key) {
+			$hasLabel = in_array($key, $fieldsWithLabels, TRUE);
+			$fieldValue = isset($userData[$key]) ? htmlspecialchars((string) $userData[$key]) : '';
+			$fieldValueWithWrapper = '<span id="tx-seminars-feuser-field-' . $key . '">' . $fieldValue . '</span>';
 			// Only show a label if we have any data following it.
 			if ($hasLabel && ($fieldValue !== '')) {
-				$displayValue = $this->translate('label_' . $fieldKey) . ' ' . $fieldValue;
+				$displayValue = $this->translate('label_' . $key) . ' ' . $fieldValueWithWrapper;
 			}  else {
-				$displayValue = $fieldValue;
+				$displayValue = $fieldValueWithWrapper;
 			}
 
-			$this->setMarker('user_' . $fieldKey, $displayValue);
+			$this->setMarker('user_' . $key, $displayValue);
 		}
 
 		$rawOutput = $this->getSubpart('REGISTRATION_CONFIRMATION_FEUSER');
