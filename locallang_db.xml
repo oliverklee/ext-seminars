@@ -116,6 +116,7 @@
 			<label index="tx_seminars_attendances.divLabelPaymentInformation">Payment Information</label>
 			<label index="tx_seminars_attendances.divLabelBillingAddress">Billing Address</label>
 			<label index="tx_seminars_attendances.uid">Ticket ID:</label>
+			<label index="tx_seminars_attendances.crdate">Registration date:</label>
 			<label index="tx_seminars_attendances.title">Title:</label>
 			<label index="tx_seminars_attendances.user">Front-end User:</label>
 			<label index="tx_seminars_attendances.seminar">Seminar:</label>
@@ -331,6 +332,7 @@
 			<label index="tx_seminars_attendances.divLabelPaymentInformation">Zahlungsinformationen</label>
 			<label index="tx_seminars_attendances.divLabelBillingAddress">Rechnungsadresse</label>
 			<label index="tx_seminars_attendances.uid">Ticket-ID:</label>
+			<label index="tx_seminars_attendances.crdate">Anmeldedatum:</label>
 			<label index="tx_seminars_attendances.title">Titel:</label>
 			<label index="tx_seminars_attendances.user">Frontend-User:</label>
 			<label index="tx_seminars_attendances.seminar">Seminar:</label>
@@ -1345,6 +1347,7 @@
 			<label index="tx_seminars_attendances.divLabelPaymentInformation" type="integer">97718815</label>
 			<label index="tx_seminars_attendances.divLabelBillingAddress" type="integer">42621189</label>
 			<label index="tx_seminars_attendances.uid" type="integer">250861441</label>
+			<label index="tx_seminars_attendances.crdate" type="integer">654654</label>
 			<label index="tx_seminars_attendances.title" type="integer">85903807</label>
 			<label index="tx_seminars_attendances.user" type="integer">189069825</label>
 			<label index="tx_seminars_attendances.seminar" type="integer">169385390</label>
@@ -2357,6 +2360,7 @@
 			<label index="tx_seminars_attendances.divLabelPaymentInformation">Payment Information</label>
 			<label index="tx_seminars_attendances.divLabelBillingAddress">Billing Address</label>
 			<label index="tx_seminars_attendances.uid">Ticket ID:</label>
+			<label index="tx_seminars_attendances.crdate">Registration date:</label>
 			<label index="tx_seminars_attendances.title">Title:</label>
 			<label index="tx_seminars_attendances.user">Front-end User:</label>
 			<label index="tx_seminars_attendances.seminar">Seminar:</label>

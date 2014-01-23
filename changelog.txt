@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4941] Feature: Add a CSV label for attendances.crdate
 - [#4952] Feature: Add "sep" marker to the CSV
 - [#4950] Feature: Add the interests to the thank-you e-mail
 - [#4946] Cleanup: Add and use seminar::getFirstOrganizer
