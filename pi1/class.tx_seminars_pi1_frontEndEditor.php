@@ -180,15 +180,12 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
 	 *
 	 * Note: In test mode, this function will return faked values.
 	 *
-	 * @param string column name of the SEMINARS_TABLE_SEMINARS table as key,
-	 *               must not be empty
+	 * @param string column name of the SEMINARS_TABLE_SEMINARS table as key, must not be empty
 	 *
-	 * @return string form value or an empty string if the value does not exist
+	 * @return string|array form value or an empty string if the value does not exist
 	 */
 	public function getFormValue($key) {
-		$dataSource = ($this->isTestMode)
-			? $this->fakedFormValues
-			: $this->getFormCreator()->oDataHandler->__aFormData;
+		$dataSource = ($this->isTestMode) ? $this->fakedFormValues : $this->getFormCreator()->oDataHandler->__aFormData;
 
 		return isset($dataSource[$key]) ? $dataSource[$key] : '';
 	}
