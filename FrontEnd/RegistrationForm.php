@@ -1088,6 +1088,9 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 		foreach ($this->fieldsInBillingAddress as $key) {
 			$currentFormData = $this->getFormValue($key);
 			if ($currentFormData !== '') {
+				$label = $this->translate('label_' . $key);
+				$wrappedLabel = '<span class="tx-seminars-billing-data-label">' . $label . '</span>';
+
 				// If the gender field is hidden, it would have an empty value,
 				// so we wouldn't be here. So let's convert the "gender" index
 				// into a readable string.
@@ -1095,9 +1098,10 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 					$currentFormData = $this->translate('label_gender.I.' . (integer) $currentFormData);
 				}
 				$processedFormData = str_replace(CR, '<br />', htmlspecialchars($currentFormData));
-				$processedFormData = $this->translate('label_' . $key) . ' ' . $processedFormData;
+				$wrappedFormData = '<span class="tx-seminars-billing-data-item tx-seminars-billing-data-item-' . $key . '">' .
+					$processedFormData . '</span>';
 
-				$result .= $processedFormData . '<br />';
+				$result .= $wrappedLabel . ' ' . $wrappedFormData . '<br />' . LF;
 			}
 		}
 

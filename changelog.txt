@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4958] Feature: Add wrappers around the billing address fields on the confirmation page
 - [#4957] Feature: Add wrappers for the FE user data on the first registration page
 - [#4940] Bugfix: Label for fe_user.telephone missing in the CSV export
 - [#4941] Feature: Add a CSV label for attendances.crdate
