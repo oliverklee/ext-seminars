@@ -1,13 +1,13 @@
 0.10.0 (currently working on)
 - [#4958] Feature: Add wrappers around the billing address fields on the confirmation page
 - [#4957] Feature: Add wrappers for the FE user data on the first registration page
-- [#4940] Bugfix: Label for fe_user.telephone missing in the CSV export
+- [#4940] Fix: Label for fe_user.telephone missing in the CSV export
 - [#4941] Feature: Add a CSV label for attendances.crdate
 - [#4952] Feature: Add "sep" marker to the CSV
 - [#4950] Feature: Add the interests to the thank-you e-mail
 - [#4946] Cleanup: Add and use seminar::getFirstOrganizer
-- [#4948] Bugfix: Drop the colon after the labels on the confirmation page
-- [#4947] Bugfix: Foods and lodgings are missing on the confirmation page
+- [#4948] Fix: Drop the colon after the labels on the confirmation page
+- [#4947] Fix: Foods and lodgings are missing on the confirmation page
 - [#4929] Feature: Add the fields "food" and "accommodation" to the thank-you e-mail
 - [#4938] Change: Use labels for all billing address fields on the confirmation page
 - [#4924] Feature: Make the sort order of the registration items on the confirmnation page changeable
@@ -15,7 +15,7 @@
 - [#4889] Feature: Make the CSV classes extensible
 - [#4863] Cleanup: Clean up the CSV class
 - [#4648] Cleanup: Drop some early __destruct calls
-- [#4935] Bugfix: Drop the colon after the payment method in the e-mail to the attendee
+- [#4935] Fix: Drop the colon after the payment method in the e-mail to the attendee
 - [#4300] Feature: Make the FE user data in the registration form configurable (thanks to Philipp Kitzberger)
 - [#4928] Feature: Allow adding arbitrary FE user fields into the notification e-mail to the organizer
 - [#4896] Feature: Add a test for new attendance fields in the e-mail to the organizer
