@@ -1,6 +1,6 @@
 0.9.7 (currently working on)
-- [#4947] Bugfix: Fix the @param value of getFormValue
-- [#4935] Bugfix: Drop the colon after the payment method in the e-mail to the attendee
+- [#4947] Fix: Fix the @param value of getFormValue
+- [#4935] Fix: Drop the colon after the payment method in the e-mail to the attendee
 
 0.9.6 (released 2013-12-31)
 - [#4512] Fix: HTML entities of field ###attached_files### are displayed only as plain text
