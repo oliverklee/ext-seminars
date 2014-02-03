@@ -51,10 +51,7 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_AbstractLis
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		if ($this->organizer) {
-			$this->organizer->__destruct();
-			unset($this->organizer);
-		}
+		unset($this->organizer);
 
 		parent::__destruct();
 	}
@@ -116,7 +113,6 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_AbstractLis
 		$content .= $this->template->getSubpart('SEMINARS_ORGANIZER_LIST');
 
 		$content .= $organizerBag->checkConfiguration();
-		$organizerBag->__destruct();
 
 		return $content;
 	}

@@ -644,8 +644,6 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 				$this->getConfValueInteger('defaultEventVipsFeGroupID')
 			);
 			$isUserOwner = $seminar->isOwnerFeUser();
-			$seminar->__destruct();
-			unset($seminar);
 			$mayManagersEditTheirEvents = $this->getConfValueBoolean(
 				'mayManagersEditTheirEvents', 's_listView'
 			);
@@ -997,10 +995,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		);
 
 		$visibilityTree->makeNodesVisible($this->getFieldsToShow());
-		$subpartsToHide = $visibilityTree->getKeysOfHiddenSubparts();
-		$visibilityTree->__destruct();
-
-		return $subpartsToHide;
+		return $visibilityTree->getKeysOfHiddenSubparts();
 	}
 
 	/**
@@ -1321,8 +1316,6 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			$eMail->setMessage($this->createEMailContent($event));
 
 			tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
-
-			$eMail->__destruct();
 		}
 	}
 

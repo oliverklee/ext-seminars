@@ -54,11 +54,7 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 	 * The destructor.
 	 */
 	public function __destruct() {
-		if ($this->linkBuilder !== NULL) {
-			$this->linkBuilder->__destruct();
-			unset($this->linkBuilder);
-		}
-		unset($this->event);
+		unset($this->linkBuilder, $this->event);
 		parent::__destruct();
 	}
 
@@ -127,7 +123,6 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 			);
 			$output .= $this->getSubpart('SINGLE_REQUIREMENT');
 		}
-		$requirements->__destruct();
 		$this->setSubpart('SINGLE_REQUIREMENT', $output);
 
 		return $this->getSubpart('FIELD_WRAPPER_REQUIREMENTS');

@@ -234,8 +234,6 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_Abstract
 		);
 		$this->template->setMarker('table_rows', $tableRows);
 
-		$registrationBag->__destruct();
-
 		return $result;
 	}
 

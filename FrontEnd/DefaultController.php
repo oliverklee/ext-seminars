@@ -298,8 +298,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 					$this->cObj
 				);
 				$result = $registrationsList->render();
-				$registrationsList->__destruct();
-				unset($registrationsList);
 				break;
 			case 'countdown':
 				$countdown = tx_oelib_ObjectFactory::make(
@@ -309,8 +307,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				);
 				$countdown->injectEventMapper($this->eventMapper);
 				$result = $countdown->render();
-				$countdown->__destruct();
-				unset($countdown);
 				break;
 			case 'category_list':
 				$categoryList = tx_oelib_ObjectFactory::make(
@@ -318,8 +314,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 					$this->conf, $this->cObj
 				);
 				$result = $categoryList->render();
-				$categoryList->__destruct();
-				unset($categoryList);
 				break;
 			case 'event_headline':
 				$eventHeadline = tx_oelib_ObjectFactory::make(
@@ -331,8 +325,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				$this->setErrorMessage(
 					$eventHeadline->checkConfiguration(TRUE)
 				);
-				$eventHeadline->__destruct();
-				unset($eventHeadline);
 				break;
 			case 'my_vip_events':
 				// The fallthrough is intended
@@ -1325,8 +1317,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			'FIELD_WRAPPER_REQUIREMENTS',
 			$requirementsLists->render()
 		);
-
-		$requirementsLists->__destruct();
 	}
 
 	/**
@@ -1354,7 +1344,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			);
 			$output .= $this->getSubpart('SINGLE_DEPENDENCY');
 		}
-		$dependencies->__destruct();
 
 		$this->setSubpart('SINGLE_DEPENDENCY', $output);
 	}
@@ -1573,8 +1562,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 		// Lets warnings from the seminar and the seminar bag bubble up to us.
 		$this->setErrorMessage($seminarBag->checkConfiguration(TRUE));
-		$seminarBag->__destruct();
-		unset($seminarBag);
 
 		// Let's also check the list view configuration..
 		$this->checkConfiguration(TRUE, 'seminar_list');
@@ -1625,9 +1612,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 		// Lets warnings from the seminar and the seminar bag bubble up to us.
 		$this->setErrorMessage($seminarBag->checkConfiguration(TRUE));
-
-		$seminarBag->__destruct();
-		unset($seminarBag);
 
 		// Let's also check the list view configuration..
 		$this->checkConfiguration(TRUE, 'seminar_list');
@@ -1744,9 +1728,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			$this->setErrorMessage(
 				$seminarOrRegistrationBag->checkConfiguration(TRUE)
 			);
-
-			$seminarOrRegistrationBag->__destruct();
-			unset($seminarOrRegistrationBag);
 		}
 
 		return $result;
@@ -2330,12 +2311,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			'tx_seminars_FrontEnd_SelectorWidget', $this->conf, $this->cObj
 		);
 
-		$result = $selectorWidget->render();
-
-		$selectorWidget->__destruct();
-		unset($selectorWidget);
-
-		return $result;
+		return $selectorWidget->render();
 	}
 
 	/**
@@ -3040,8 +3016,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			);
 		}
 
-		$eventEditor->__destruct();
-
 		return $result;
 	}
 
@@ -3368,10 +3342,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 */
 	private function hasEventEditorAccess() {
 		$eventEditor = $this->createEventEditorInstance();
-		$result = ($eventEditor->hasAccessMessage() == '');
-		$eventEditor->__destruct();
-
-		return $result;
+		return $eventEditor->hasAccessMessage() == '';
 	}
 
 	/**

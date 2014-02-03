@@ -66,15 +66,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		if ($this->seminarBag) {
-			$this->seminarBag->__destruct();
-			unset($this->seminarBag);
-		}
-		if ($this->places) {
-			$this->places->__destruct();
-			$this->places = NULL;
-		}
-		unset($this->staticInfo);
+		unset($this->seminarBag, $this->places, $this->staticInfo);
 
 		parent::__destruct();
 	}

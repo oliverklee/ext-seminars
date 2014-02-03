@@ -72,10 +72,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * The destructor.
 	 */
 	public function __destruct() {
-		if ($this->seminar) {
-			$this->seminar->__destruct();
-			unset($this->seminar);
-		}
+		unset($this->seminar);
 
 		parent::__destruct();
 	}

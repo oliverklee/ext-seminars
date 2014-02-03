@@ -65,7 +65,6 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 
 		$bag = $seminarBagBuilder->build();
 		$eventUids = $bag->getUids();
-		$bag->__destruct();
 
 		$categoryBagBuilder = tx_oelib_ObjectFactory::make(
 			'tx_seminars_BagBuilder_Category'
@@ -92,9 +91,6 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 		} else {
 			$result = $this->getSubpart('VIEW_NO_CATEGORIES');
 		}
-
-		$categoryBag->__destruct();
-		unset($categoryBag);
 
 		$this->checkConfiguration();
 		$result .= $this->getWrappedConfigCheckMessage();

@@ -51,10 +51,7 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_AbstractList 
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		if ($this->speaker) {
-			$this->speaker->__destruct();
-			unset($this->speaker);
-		}
+		unset($this->speaker);
 
 		parent::__destruct();
 	}
@@ -130,8 +127,6 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_AbstractList 
 		$content .= $this->template->getSubpart('SEMINARS_SPEAKER_LIST');
 
 		$content .= $speakerBag->checkConfiguration();
-
-		$speakerBag->__destruct();
 
 		return $content;
 	}
