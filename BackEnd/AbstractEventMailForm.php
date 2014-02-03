@@ -111,11 +111,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		if ($this->oldEvent) {
-			$this->oldEvent->__destruct();
-			unset($this->oldEvent);
-		}
-		unset($this->event);
+		unset($this->oldEvent, $this->event);
 		$this->hooks = array();
 		$this->hooksHaveBeenRetrieved = FALSE;
 	}
@@ -247,8 +243,6 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 					' <' . $currentOrganizer->getEMailAddress() . '>'
 				) . $closingOptionTag;
 		}
-
-		$organizers->__destruct();
 
 		return $result . ($multipleOrganizers ? '</select>' : '') . '</p>';
 	}
@@ -448,7 +442,6 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 				$this->modifyEmailWithHook($registration, $eMail);
 
 				$mailer->send($eMail);
-				$eMail->__destruct();
 			}
 
 			$message = t3lib_div::makeInstance(
@@ -460,8 +453,6 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			);
 			t3lib_FlashMessageQueue::addMessage($message);
 		}
-
-		$registrations->__destruct();
 	}
 
 	/**
@@ -587,7 +578,6 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			$GLOBALS['LANG']->getLL($prefix . 'introduction'),
 			$eventDetails
 		);
-		$salutation->__destruct();
 
 		return '%' . $GLOBALS['LANG']->getLL('mailForm_salutation') . LF . LF .
 			$introduction . LF . $GLOBALS['LANG']->getLL($prefix . 'messageBody');
@@ -614,7 +604,6 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			$salutation->getSalutation($user),
 			$this->getPostData('messageBody')
 		);
-		$salutation->__destruct();
 		$messageFooter = $organizer->hasEmailFooter()
 			? LF . '-- ' . LF . $organizer->getEmailFooter() : '';
 
