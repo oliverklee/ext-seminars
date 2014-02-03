@@ -787,10 +787,17 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 
 		$maximumLabelLength = 0;
 		foreach ($keys as $key) {
-			$labelKey = 'label_' . $key;
+			$frontEndUserLabelKey = 'label_feuser_' . $key;
+			$frontEndUserLabel = $this->translate($frontEndUserLabelKey);
 
-			$label = $this->translate($labelKey);
-			if (($label === '') || ($label === $labelKey)) {
+			$defaultLabelKey = 'label_' . $key;
+			$defaultLabel = $this->translate($defaultLabelKey);
+
+			if (($frontEndUserLabel !== '') && ($frontEndUserLabel !== $frontEndUserLabelKey)) {
+				$label = $frontEndUserLabel;
+			} elseif (($defaultLabel !== '') && ($defaultLabel !== $defaultLabelKey)) {
+				$label = $defaultLabel;
+			} else {
 				$label = ucfirst($key);
 			}
 
