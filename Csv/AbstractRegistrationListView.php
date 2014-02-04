@@ -123,8 +123,8 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	 * @return array<string> the translated field names in an array, will be empty if no fields should be exported
 	 */
 	protected function getLocalizedCsvHeadings() {
-		$fieldsFromFeUser = $this->createLocalizeCsvHeadingsForOneTable($this->getFrontEndUserFieldKeys(), 'LGL');
-		$fieldsFromAttendances = $this->createLocalizeCsvHeadingsForOneTable(
+		$fieldsFromFeUser = $this->createLocalizedCsvHeadingsForOneTable($this->getFrontEndUserFieldKeys(), 'LGL');
+		$fieldsFromAttendances = $this->createLocalizedCsvHeadingsForOneTable(
 			$this->getRegistrationFieldKeys(), $this->getTableName()
 		);
 
@@ -139,7 +139,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	 *
 	 * @return array the translated field names in an array, will be empty if no field names were given
 	 */
-	protected function createLocalizeCsvHeadingsForOneTable(array $fieldNames, $localizationPrefix) {
+	protected function createLocalizedCsvHeadingsForOneTable(array $fieldNames, $localizationPrefix) {
 		$translations = array();
 		$translator = $this->getInitializedTranslator();
 
