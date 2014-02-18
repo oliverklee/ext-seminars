@@ -897,6 +897,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$this->callModifyOrganizerNotificationEmailHooks($registration, $this->getTemplate());
 
 		$eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
+		$this->modifyNotificationEmail($eMailNotification, $registration);
+
 		Tx_Oelib_MailerFactory::getInstance()->getMailer()->send($eMailNotification);
 	}
 
@@ -917,6 +919,19 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 				$hook->modifyOrganizerNotificationEmail($registration, $emailTemplate);
 			}
 		}
+	}
+
+	/**
+	 * Modifies the notification e-mail.
+	 *
+	 * This method is intended to be overridden in XClasses if needed.
+	 *
+	 * @param tx_oelib_Mail $emailNotification
+	 * @param tx_seminars_registration $registration
+	 *
+	 * @return void
+	 */
+	protected function modifyNotificationEmail(tx_oelib_Mail $emailNotification, tx_seminars_registration $registration) {
 	}
 
 	/**
