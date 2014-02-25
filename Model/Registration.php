@@ -609,7 +609,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 *
 	 * @return string the e-mail address of this registration, will be empty
 	 */
-	public function getEMailAddress() {
+	public function getEmailAddress() {
 		return $this->getAsString('email');
 	}
 
@@ -620,7 +620,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 *
 	 * @return void
 	 */
-	public function setEMailAddress($email) {
+	public function setEnailAddress($email) {
 		$this->setAsString('email', $email);
 	}
 

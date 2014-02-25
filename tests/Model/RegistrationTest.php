@@ -1110,7 +1110,7 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'',
-			$this->fixture->getEMailAddress()
+			$this->fixture->getEmailAddress()
 		);
 	}
 
@@ -1122,7 +1122,7 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 
 		$this->assertEquals(
 			'john@doe.com',
-			$this->fixture->getEMailAddress()
+			$this->fixture->getEmailAddress()
 		);
 	}
 
@@ -1130,11 +1130,11 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setEMailAddressSetsEMailAddress() {
-		$this->fixture->setEMailAddress('john@doe.com');
+		$this->fixture->setEnailAddress('john@doe.com');
 
 		$this->assertEquals(
 			'john@doe.com',
-			$this->fixture->getEMailAddress()
+			$this->fixture->getEmailAddress()
 		);
 	}
 
