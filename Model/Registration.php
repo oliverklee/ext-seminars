@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2009-2013 Niels Pardon (mail@niels-pardon.de)
+* (c) 2009-2014 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -47,9 +47,11 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 * @param string $title the title of this registration, must not be empty
 	 *
 	 * @return void
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setTitle($title) {
-		if ($title == '') {
+		if ($title === '') {
 			throw new InvalidArgumentException('The parameter $title must not be empty.', 1333296917);
 		}
 
@@ -59,8 +61,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns the front-end user of this registration.
 	 *
-	 * @return tx_oelib_Model_FrontEndUser the front-end user of this
-	 *                                     registration
+	 * @return tx_oelib_Model_FrontEndUser the front-end user of this registration
 	 */
 	public function getFrontEndUser() {
 		return $this->getAsModel('user');
@@ -69,8 +70,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the front-end user of this registration.
 	 *
-	 * @param tx_oelib_Model_FrontEndUser $user
-	 *        the front-end user to set for this registration
+	 * @param tx_oelib_Model_FrontEndUser $user the front-end user to set for this registration
 	 *
 	 * @return void
 	 */
@@ -103,8 +103,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the event of this registration.
 	 *
-	 * @param tx_seminars_Model_Event $event
-	 *        the event to set for this registration
+	 * @param tx_seminars_Model_Event $event the event to set for this registration
 	 *
 	 * @return void
 	 */
@@ -117,8 +116,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 *
 	 * This is an alias for setEvent necessary for the relation to the event.
 	 *
-	 * @param tx_seminars_Model_Event $event
-	 *        the event to set for this registration
+	 * @param tx_seminars_Model_Event $event the event to set for this registration
 	 *
 	 * @see setEvent
 	 *
@@ -131,8 +129,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns whether this registration is on the registration queue.
 	 *
-	 * @return boolean TRUE if this registration is on the registration queue,
-	 *                 FALSE otherwise
+	 * @return boolean TRUE if this registration is on the registration queue, FALSE otherwise
 	 */
 	public function isOnRegistrationQueue() {
 		return $this->getAsBoolean('registration_queue');
@@ -141,8 +138,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets whether this registration is on the registration queue.
 	 *
-	 * @param boolean $isOnQueue
-	 *        whether this registration should be on the registration queue
+	 * @param boolean $isOnQueue whether this registration should be on the registration queue
 	 *
 	 * @return void
 	 */
@@ -153,8 +149,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns the name of the price of this registration.
 	 *
-	 * @return string the name of the price of this registration,
-	 *                e.g. "Price regular", will be empty
+	 * @return string the name of the price of this registration, e.g. "Price regular", might be empty
 	 */
 	public function getPrice() {
 		return $this->getAsString('price');
@@ -163,9 +158,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the name of the price of this registration.
 	 *
-	 * @param string $price
-	 *        the name of the price of this registration to set,
-	 *        e.g. "Price regular", may be empty
+	 * @param string $price the name of the price of this registration to set, e.g. "Price regular", may be empty
 	 *
 	 * @return void
 	 */
@@ -178,8 +171,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 *
 	 * In older versions 0 equals 1 seat, which is deprecated.
 	 *
-	 * @return integer the number of registered seats of this registration,
-	 *                 will be >= 0
+	 * @return integer the number of registered seats of this registration, will be >= 0
 	 */
 	public function getSeats() {
 		return $this->getAsInteger('seats');
@@ -190,10 +182,11 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 *
 	 * In older versions 0 equals 1 seat, which is deprecated.
 	 *
-	 * @param integer $seats
-	 *        the number of registered seats of this registration, must be >= 0
+	 * @param integer $seats the number of registered seats of this registration, must be >= 0
 	 *
 	 * @return void
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setSeats($seats) {
 		if ($seats < 0) {
@@ -206,8 +199,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns whether the front-end user registered themselves.
 	 *
-	 * @return boolean TRUE if the front-end user registered themselves, FALSE
-	 *                 otherwise
+	 * @return boolean TRUE if the front-end user registered themselves, FALSE otherwise
 	 */
 	public function hasRegisteredThemselves() {
 		return $this->getAsBoolean('registered_themselves');
@@ -216,8 +208,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets whether the front-end user registered themselves.
 	 *
-	 * @param boolean $registeredThemselves
-	 *        whether the front-end user registered themselves
+	 * @param boolean $registeredThemselves whether the front-end user registered themselves
 	 *
 	 * @return void
 	 */
@@ -240,6 +231,8 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 * @param float $price the total price of to set, must be >= 0
 	 *
 	 * @return void
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setTotalPrice($price) {
 		if ($price < 0) {
@@ -252,8 +245,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns the names of the attendees of this registration.
 	 *
-	 * @return string the names of the attendees of this registration separated
-	 *                by CRLF, will be empty
+	 * @return string the names of the attendees of this registration separated by CRLF, might be empty
 	 */
 	public function getAttendeesNames() {
 		return $this->getAsString('attendees_names');
@@ -284,8 +276,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the additional persons attached to this registration.
 	 *
-	 * @param tx_oelib_List $persons
-	 *        the additional persons (FE users), may be empty
+	 * @param tx_oelib_List $persons the additional persons (FE users), may be empty
 	 *
 	 * @return void
 	 */
@@ -296,8 +287,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns whether this registration is paid.
 	 *
-	 * @return boolean TRUE if this registration has a payment date, FALSE
-	 *                 otherwise
+	 * @return boolean TRUE if this registration has a payment date, FALSE otherwise
 	 */
 	public function isPaid() {
 		return ($this->getPaymentDateAsUnixTimestamp() > 0);
@@ -306,8 +296,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns the payment date of this registration as a UNIX timestamp.
 	 *
-	 * @return integer the payment date of this registration as a UNIX timestamp,
-	 *                 will be >= 0
+	 * @return integer the payment date of this registration as a UNIX timestamp, will be >= 0
 	 */
 	public function getPaymentDateAsUnixTimestamp() {
 		return $this->getAsInteger('datepaid');
@@ -316,11 +305,11 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the payment date of this registration as a UNIX timestamp.
 	 *
-	 * @param integer $timestamp
-	 *        the payment date of this registration as a UNIX timestamp,
-	 *        must be >= 0
+	 * @param integer $timestamp the payment date of this registration as a UNIX timestamp, must be >= 0
 	 *
 	 * @return void
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setPaymentDateAsUnixTimestamp($timestamp) {
 		if ($timestamp < 0) {
@@ -333,8 +322,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns the payment method of this registration.
 	 *
-	 * @return tx_seminars_Model_PaymentMethod the payment method of this
-	 *                                         registration
+	 * @return tx_seminars_Model_PaymentMethod the payment method of this registration
 	 */
 	public function getPaymentMethod() {
 		return $this->getAsModel('method_of_payment');
@@ -344,22 +332,18 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 * Sets the payment method of this registration.
 	 *
 	 * @param tx_seminars_Model_PaymentMethod $paymentMethod
-	 *        the payment method of this registration to set, may be NULL to set
-	 *        no payment method
+	 *        the payment method of this registration to set, use NULL to set no payment method
 	 *
 	 * @return void
 	 */
-	public function setPaymentMethod(
-		tx_seminars_Model_PaymentMethod $paymentMethod = NULL
-	) {
+	public function setPaymentMethod(tx_seminars_Model_PaymentMethod $paymentMethod = NULL) {
 		$this->set('method_of_payment', $paymentMethod);
 	}
 
 	/**
 	 * Returns the account number of the bank account of this registration.
 	 *
-	 * @return string the account number of the bank account of this
-	 *                registration, will be empty
+	 * @return string the account number of the bank account of this registration, might be empty
 	 */
 	public function getAccountNumber() {
 		return $this->getAsString('account_number');
@@ -368,9 +352,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the account number of the bank account of this registration.
 	 *
-	 * @param string $accountNumber
-	 *        the account number of the bank account of this registration to
-	 *        set, may be empty
+	 * @param string $accountNumber the account number of the bank account of this registration to , may be empty
 	 *
 	 * @return void
 	 */
@@ -381,8 +363,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns the bank code of the bank account of this registration.
 	 *
-	 * @return string the bank code of the bank account of this registration,
-	 *                will be empty
+	 * @return string the bank code of the bank account of this registration, might be empty
 	 */
 	public function getBankCode() {
 		return $this->getAsString('bank_code');
@@ -391,9 +372,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the bank code of the bank account of this registration.
 	 *
-	 * @param string $bankCode
-	 *        the bank code of the bank account of this registration, may be
-	 *        empty
+	 * @param string $bankCode *        the bank code of the bank account of this registration, may be empty
 	 *
 	 * @return void
 	 */
@@ -404,8 +383,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns the bank name of the bank account of this registration.
 	 *
-	 * @return string the bank name of the bank account of this registration,
-	 *                will be empty
+	 * @return string the bank name of the bank account of this registration, might be empty
 	 */
 	public function getBankName() {
 		return $this->getAsString('bank_name');
@@ -414,9 +392,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the bank name of the bank account of this registration.
 	 *
-	 * @param string $bankName
-	 *        the bank name of the bank account of this registration to set,
-	 *        may be empty
+	 * @param string $bankName the bank name of the bank account of this registration to set, may be empty
 	 *
 	 * @return void
 	 */
@@ -427,8 +403,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns the name of the owner of the bank account of this registration.
 	 *
-	 * @return string the name of the owner of the bank account of this
-	 *                registration, will be empty
+	 * @return string the name of the owner of the bank account of this registration, might be empty
 	 */
 	public function getAccountOwner() {
 		return $this->getAsString('account_owner');
@@ -437,9 +412,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the name of the owner of the bank account of this registration.
 	 *
-	 * @param string $accountOwner
-	 *        the name of the owner of the bank account of this registration,
-	 *        may be empty
+	 * @param string $accountOwner the name of the owner of the bank account of this registration, may be empty
 	 *
 	 * @return void
 	 */
@@ -448,10 +421,9 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	}
 
 	/**
-	 * Returns the name of the company of the billing address of this
-	 * registration.
+	 * Returns the name of the company of the billing address of this registration.
 	 *
-	 * @return string the name of the company of this registration, will be empty
+	 * @return string the name of the company of this registration, might be empty
 	 */
 	public function getCompany() {
 		return $this->getAsString('company');
@@ -460,8 +432,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the name of the company of the billing address of this registration.
 	 *
-	 * @param string $company
-	 *        the name of the company of this registration, may be empty
+	 * @param string $company the name of the company of this registration, may be empty
 	 *
 	 * @return void
 	 */
@@ -472,12 +443,19 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns the name of the billing address of this registration.
 	 *
-	 * @return string the name of this registration, will be empty
+	 * @return string the name of this registration, might be empty
 	 */
 	public function getName() {
 		return $this->getAsString('name');
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param string $name
+	 *
+	 * @return void
+	 */
 	public function setName($name) {
 		$this->setAsString('name', $name);
 	}
@@ -505,12 +483,14 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 *        - tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN
 	 *
 	 * @return void
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setGender($gender) {
 		$allowedGenders = array(
 			tx_oelib_Model_FrontEndUser::GENDER_MALE,
 			tx_oelib_Model_FrontEndUser::GENDER_FEMALE,
-			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN
+			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN,
 		);
 
 		if (!in_array($gender, $allowedGenders)) {
@@ -525,8 +505,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	}
 
 	/**
-	 * Returns the address (usually only the street) of the billing address of
-	 * this registration.
+	 * Returns the address (usually only the street) of the billing address of this registration.
 	 *
 	 * @return string the address of this registration, will be empty
 	 */
@@ -535,11 +514,9 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	}
 
 	/**
-	 * Sets the address (usually only the street) of the billing address of this
-	 * registration.
+	 * Sets the address (usually only the street) of the billing address of this registration.
 	 *
-	 * @param string $address
-	 *        the address of this registration to set, may be empty
+	 * @param string $address the address of this registration to set, may be empty
 	 *
 	 * @return void
 	 */
@@ -639,21 +616,18 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the e-mail address of the billing address of this registration.
 	 *
-	 * @param string $eMail
-	 *        the e-mail address of this registration, may be emtpy
+	 * @param string $email the e-mail address of this registration, may be empty
 	 *
 	 * @return void
 	 */
-	public function setEMailAddress($eMail) {
-		$this->setAsString('email', $eMail);
+	public function setEMailAddress($email) {
+		$this->setAsString('email', $email);
 	}
 
 	/**
-	 * Returns whether the attendees of this registration have attended the
-	 * event.
+	 * Returns whether the attendees of this registration have attended the event.
 	 *
-	 * @return boolean TRUE if the attendees of this registration have attended
-	 *                 the event, FALSE otherwise
+	 * @return boolean TRUE if the attendees of this registration have attended the event, FALSE otherwise
 	 */
 	public function hasAttended() {
 		return $this->getAsBoolean('been_there');
@@ -671,8 +645,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the interests of this registration.
 	 *
-	 * @param string $interests
-	 *        the interests of this registration to set, may be empty
+	 * @param string $interests the interests of this registration to set, may be empty
 	 *
 	 * @return void
 	 */
@@ -692,8 +665,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the expectations of this registration.
 	 *
-	 * @param string $expectations
-	 *        the expectations of this registration, may be empty
+	 * @param string $expectations the expectations of this registration, may be empty
 	 *
 	 * @return void
 	 */
@@ -704,8 +676,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns the background knowledge of this registration.
 	 *
-	 * @return string the background knowledge of this registration, will be
-	 *                empty
+	 * @return string the background knowledge of this registration, will be empty
 	 */
 	public function getBackgroundKnowledge() {
 		return $this->getAsString('background_knowledge');
@@ -714,8 +685,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the background knowledge of this registration.
 	 *
-	 * @param string $backgroundKnowledge
-	 *        the background knowledge of this registration to set, may be empty
+	 * @param string $backgroundKnowledge the background knowledge of this registration to set, may be empty
 	 *
 	 * @return void
 	 */
@@ -735,8 +705,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the accommodation of this registration.
 	 *
-	 * @param string $accommodation
-	 *        the accommodation of this registration to set, may be empty
+	 * @param string $accommodation the accommodation of this registration to set, may be empty
 	 *
 	 * @return void
 	 */
@@ -785,8 +754,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns where the attendee has heard of the event of this registration.
 	 *
-	 * @return string where the attendee has heard of the event of this
-	 *                registration, will be empty
+	 * @return string where the attendee has heard of the event of this registration, will be empty
 	 */
 	public function getKnownFrom() {
 		return $this->getAsString('known_from');
@@ -796,8 +764,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 * Sets where the attendee has heard of the event of this registration.
 	 *
 	 * @param string $knownFrom
-	 *        where the attendee has heard of the event of this registration to
-	 *        set, may be empty
+	 *        where the attendee has heard of the event of this registration to set, may be empty
 	 *
 	 * @return void
 	 */
@@ -837,10 +804,11 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the number of kids of this registration.
 	 *
-	 * @param integer $kids
-	 *        the number of kids of this registration to set, must be >= 0
+	 * @param integer $kids the number of kids of this registration to set, must be >= 0
 	 *
 	 * @return void
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function setKids($kids) {
 		if ($kids < 0) {
