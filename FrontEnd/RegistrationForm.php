@@ -339,14 +339,19 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 */
 	public function processRegistration(array $parameters) {
 		$this->saveDataToSession($parameters);
-		if (!$this->getRegistrationManager()->canCreateRegistration($this->getSeminar(), $parameters)) {
+		$registrationManager = $this->getRegistrationManager();
+		if (!$registrationManager->canCreateRegistration($this->getSeminar(), $parameters)) {
 			return;
 		}
 
-		$registration = $this->getRegistrationManager()->createRegistration($this->getSeminar(), $parameters, $this);
+
+		$newRegistration = $registrationManager->createRegistration($this->getSeminar(), $parameters, $this);
 		if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
-			$this->createAdditionalAttendees($registration);
+			$this->createAdditionalAttendees($newRegistration);
 		}
+
+		$oldRegistration = $registrationManager->getRegistration();
+		$registrationManager->sendEmailsForNewRegistration($oldRegistration, $this);
 	}
 
 	/**
@@ -378,7 +383,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 		}
 
 		/** @var $additionalPersons Tx_Oelib_List */
-		$additionalPersons = t3lib_div::makeInstance('Tx_Oelib_List');
+		$additionalPersons = $registration->getAdditionalPersons();
 		/** @var $personData array */
 		foreach ($allPersonsData as $personData) {
 			/** @var $user tx_seminars_Model_FrontEndUser */
@@ -412,11 +417,9 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 			$user->setName($personData[0] . ' ' . $personData[1]);
 			$user->setJobTitle($personData[2]);
 
-			$userMapper->save($user);
 			$additionalPersons->add($user);
 		}
 
-		$registration->setAdditionalPersons($additionalPersons);
 		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->save($registration);
 	}
 

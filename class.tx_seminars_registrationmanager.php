@@ -496,6 +496,18 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			}
 		}
 
+		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($this->registration->getUid());
+	}
+
+	/**
+	 * Sends the e-mails for a new registration.
+	 *
+	 * @param tx_seminars_registration $registration
+	 * @param tslib_pibase $plugin
+	 *
+	 * @return void
+	 */
+	public function sendEmailsForNewRegistration(tx_seminars_registration $registration, tslib_pibase $plugin) {
 		if ($this->registration->isOnRegistrationQueue()) {
 			$this->notifyAttendee($this->registration, $plugin, 'confirmationOnRegistrationForQueue');
 			$this->notifyOrganizers($this->registration, 'notificationOnRegistrationForQueue');
@@ -507,8 +519,6 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
 			$this->sendAdditionalNotification($this->registration);
 		}
-
-		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($this->registration->getUid());
 	}
 
 	/**
