@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2009-2013 Niels Pardon (mail@niels-pardon.de)
+* (c) 2009-2014 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -1057,9 +1057,9 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////////
-	// Tests regarding the phone number.
-	//////////////////////////////////////
+	/*
+	 * Tests regarding the phone number.
+	 */
 
 	/**
 	 * @test
@@ -1077,7 +1077,7 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getPhoneWithPhoneReturnsPhone() {
-		$this->fixture->setData(array('phone' => '+49123456789'));
+		$this->fixture->setData(array('telephone' => '+49123456789'));
 
 		$this->assertEquals(
 			'+49123456789',

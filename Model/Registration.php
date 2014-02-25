@@ -590,7 +590,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 * @return string the phone number of this registration, will be empty
 	 */
 	public function getPhone() {
-		return $this->getAsString('phone');
+		return $this->getAsString('telephone');
 	}
 
 	/**
@@ -601,7 +601,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 * @return void
 	 */
 	public function setPhone($phone) {
-		$this->setAsString('phone', $phone);
+		$this->setAsString('telephone', $phone);
 	}
 
 	/**

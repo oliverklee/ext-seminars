@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4986] Fix: Getter for billing address phone uses the wrong field name
 - [#4985] Fix: Add the additional attendees before sending the e-mails
 - [#4983] Feature: Add a hook point that would allow a HTML subpart to the notification e-mail
 - [#4961] Feature: Use separate FE user data labels in the notification e-mail
