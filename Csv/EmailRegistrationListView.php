@@ -34,7 +34,7 @@ class Tx_Seminars_Csv_EmailRegistrationListView extends Tx_Seminars_Csv_Abstract
 	/**
 	 * Returns the keys of the front-end user fields to export.
 	 *
-	 * @return array<string>
+	 * @return string[]
 	 */
 	protected function getFrontEndUserFieldKeys() {
 		return $this->configuration->getAsTrimmedArray('fieldsFromFeUserForEmailCsv');
@@ -43,7 +43,7 @@ class Tx_Seminars_Csv_EmailRegistrationListView extends Tx_Seminars_Csv_Abstract
 	/**
 	 * Returns the keys of the registration fields to export.
 	 *
-	 * @return array<string>
+	 * @return string[]
 	 */
 	protected function getRegistrationFieldKeys() {
 		return $this->configuration->getAsTrimmedArray('fieldsFromAttendanceForEmailCsv');

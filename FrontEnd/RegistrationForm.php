@@ -89,7 +89,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	protected $registration = NULL;
 
 	/**
-	 * @var array<string>
+	 * @var string[]
 	 */
 	protected $registrationFieldsOnConfirmationPage = array(
 		'price',
@@ -116,7 +116,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * Overwrite this in an XClass with the keys of additional keys that should always be displayed.
 	 *
-	 * @var array<string>
+	 * @var string[]
 	 */
 	protected $alwaysEnabledFormFields = array();
 
@@ -879,7 +879,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * Returns all the keys of all registration fields for the confirmation page.
 	 *
-	 * @return array<string>
+	 * @return string[]
 	 */
 	protected function getAllFieldKeysForConfirmationPage() {
 		return $this->registrationFieldsOnConfirmationPage;
@@ -1613,7 +1613,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * 2 => job title
 	 * 3 => e-mail address
 	 *
-	 * @return array<array> the entered person's data, will be empty if no additional persons have been registered
+	 * @return array[] the entered person's data, will be empty if no additional persons have been registered
 	 */
 	public function getAdditionalRegisteredPersonsData() {
 		$jsonEncodedData = $this->getFormValue('structured_attendees_names');

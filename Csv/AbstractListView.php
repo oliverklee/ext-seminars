@@ -177,14 +177,14 @@ abstract class Tx_Seminars_Csv_AbstractListView {
 	/**
 	 * Returns the localized field names.
 	 *
-	 * @return array<string> the translated field names in an array, will be empty if no fields should be exported
+	 * @return string[] the translated field names in an array, will be empty if no fields should be exported
 	 */
 	abstract protected function getLocalizedCsvHeadings();
 
 	/**
 	 * Creates the body lines of the CSV export.
 	 *
-	 * @return array<string>
+	 * @return string[]
 	 */
 	abstract protected function createCsvBodyLines();
 

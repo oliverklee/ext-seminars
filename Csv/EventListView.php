@@ -61,7 +61,7 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView {
 	/**
 	 * Returns the keys of the fields to export.
 	 *
-	 * @return array<string>
+	 * @return string[]
 	 */
 	protected function getFieldKeys() {
 		return $this->configuration->getAsTrimmedArray('fieldsFromEventsForCsv');
@@ -85,7 +85,7 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView {
 	/**
 	 * Returns the localized field names.
 	 *
-	 * @return array<string> the translated field names in an array, will be empty if no fields should be exported
+	 * @return string[] the translated field names in an array, will be empty if no fields should be exported
 	 */
 	protected function getLocalizedCsvHeadings() {
 		$translations = array();
@@ -101,7 +101,7 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView {
 	/**
 	 * Creates the body lines of the CSV export.
 	 *
-	 * @return array<string>
+	 * @return string[]
 	 */
 	protected function createCsvBodyLines() {
 		/** @var $builder tx_seminars_BagBuilder_Event */
@@ -124,7 +124,7 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView {
 	 *
 	 * @param tx_seminars_seminar $event object that will deliver the data
 	 *
-	 * @return array<string> the data for the keys provided in $keys (may be empty)
+	 * @return string[] the data for the keys provided in $keys (may be empty)
 	 */
 	protected function createCsvColumnsForEvent(tx_seminars_seminar $event) {
 		$csvLines = array();

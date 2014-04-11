@@ -62,12 +62,12 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 	protected $eventUid = 0;
 
 	/**
-	 * @var array<string>
+	 * @var string[]
 	 */
 	public $frontEndUserFieldKeys = array();
 
 	/**
-	 * @var array<string>
+	 * @var array[]
 	 */
 	public $registrationFieldKeys = array();
 

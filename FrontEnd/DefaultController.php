@@ -381,7 +381,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *         if there are registered hook classes that do not implement the
 	 *         tx_seminars_Interface_Hook_EventListView interface
 	 *
-	 * @return array<tx_seminars_Interface_Hook_EventListView>
+	 * @return tx_seminars_Interface_Hook_EventListView[]
 	 *         the hook objects, will be empty if no hooks have been set
 	 */
 	protected function getListViewHooks() {
@@ -414,7 +414,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *         if there are registered hook classes that do not implement the
 	 *         tx_seminars_Interface_Hook_EventSingleView interface
 	 *
-	 * @return array<tx_seminars_Interface_Hook_EventSingleView>
+	 * @return tx_seminars_Interface_Hook_EventSingleView[]
 	 *         the hook objects, will be empty if no hooks have been set
 	 */
 	protected function getSingleViewHooks() {

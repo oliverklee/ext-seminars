@@ -655,7 +655,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 *         if there are registered hook classes that do not implement the
 	 *         tx_seminars_Interface_Hook_BackEndModule interface
 	 *
-	 * @return array<tx_seminars_Interface_Hook_BackEndModule>
+	 * @return tx_seminars_Interface_Hook_BackEndModule[]
 	 *         the hook objects, will be empty if no hooks have been set
 	 */
 	protected function getHooks() {

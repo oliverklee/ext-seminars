@@ -120,7 +120,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	/**
 	 * Returns the localized field names.
 	 *
-	 * @return array<string> the translated field names in an array, will be empty if no fields should be exported
+	 * @return string[] the translated field names in an array, will be empty if no fields should be exported
 	 */
 	protected function getLocalizedCsvHeadings() {
 		$fieldsFromFeUser = $this->createLocalizedCsvHeadingsForOneTable($this->getFrontEndUserFieldKeys(), 'LGL');
@@ -153,21 +153,21 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	/**
 	 * Returns the keys of the front-end user fields to export.
 	 *
-	 * @return array<string>
+	 * @return string[]
 	 */
 	abstract protected function getFrontEndUserFieldKeys();
 
 	/**
 	 * Returns the keys of the registration fields to export.
 	 *
-	 * @return array<string>
+	 * @return string[]
 	 */
 	abstract protected function getRegistrationFieldKeys();
 
 	/**
 	 * Creates the body lines of the CSV export.
 	 *
-	 * @return array<string>
+	 * @return string[]
 	 */
 	protected function createCsvBodyLines() {
 		$registrationBagBuilder = $this->createRegistrationBagBuilder();
@@ -216,7 +216,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	 * @param tx_seminars_BagBuilder_Registration $builder
 	 *        the bag builder already limited to the registrations which should be returned
 	 *
-	 * @return array<string> the list of registrations, will be empty if no registrations have been given
+	 * @return string[] the list of registrations, will be empty if no registrations have been given
 	 *
 	 * @throws RuntimeException
 	 */
@@ -241,7 +241,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	 *
 	 * @param tx_seminars_registration $model object that will deliver the data
 	 *
-	 * @return array<string> the data for the keys provided in $keys (may be empty)
+	 * @return string[] the data for the keys provided in $keys (may be empty)
 	 */
 	protected function createCsvColumnsForRegistration(tx_seminars_registration $model) {
 		$csvLines = array();
@@ -259,7 +259,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	 *
 	 * @param tx_seminars_registration $model object that will deliver the data
 	 *
-	 * @return array<string> the data for the keys provided in $keys (may be empty)
+	 * @return string[] the data for the keys provided in $keys (may be empty)
 	 */
 	protected function createCsvColumnsForFrontEndUser(tx_seminars_registration $model) {
 		$csvLines = array();
