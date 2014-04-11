@@ -217,7 +217,7 @@ class tx_seminars_pi1_registrationEditor extends tx_seminars_pi1_frontEndEditor 
 				break;
 		}
 
-		parent::setFormConfiguration($formConfiguration);
+		parent::setFormConfiguration((array) $formConfiguration);
 	}
 
 	/**

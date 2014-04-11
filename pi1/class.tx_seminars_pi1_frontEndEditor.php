@@ -52,7 +52,7 @@ class tx_seminars_pi1_frontEndEditor extends tx_seminars_pi1_frontEndView {
 	/**
 	 * @var array the FORMidable form configuration
 	 */
-	private $formConfiguration;
+	private $formConfiguration = array();
 
 	/**
 	 * @var boolean whether the class ist used in test mode
