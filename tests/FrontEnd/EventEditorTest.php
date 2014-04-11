@@ -199,8 +199,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 *         field as required field, will not be NULL.
 	 */
 	private function getFixtureWithRequiredField($requiredField) {
-		$result = tx_oelib_ObjectFactory::make(
-			'tx_seminars_FrontEnd_EventEditor',
+		$result = new tx_seminars_FrontEnd_EventEditor(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'form.' => array('eventEditor.' => array()),

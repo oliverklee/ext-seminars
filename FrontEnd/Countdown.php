@@ -82,7 +82,7 @@ class tx_seminars_FrontEnd_Countdown extends tx_seminars_FrontEnd_AbstractView {
 			throw new BadMethodCallException('The method injectEventMapper() needs to be called first.', 1333617194);
 		}
 		if ($this->viewHelper === NULL) {
-			$this->injectCountDownViewHelper(tx_oelib_ObjectFactory::make('tx_seminars_ViewHelper_Countdown'));
+			$this->injectCountDownViewHelper(t3lib_div::makeInstance('tx_seminars_ViewHelper_Countdown'));
 		}
 
 		$this->setErrorMessage($this->checkConfiguration(TRUE));

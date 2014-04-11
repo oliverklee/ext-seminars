@@ -72,7 +72,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 
 		$this->createTableHeading();
 
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Event');
+		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->setBackEndMode();
 
 		$pageData = $this->page->getPageData();

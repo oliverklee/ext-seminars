@@ -614,7 +614,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			if (isset(self::$cachedSeminars[$seminarUid])) {
 				$this->seminar = self::$cachedSeminars[$seminarUid];
 			} else {
-				$this->seminar = tx_oelib_ObjectFactory::make(
+				$this->seminar = t3lib_div::makeInstance(
 					'tx_seminars_seminar', $seminarUid
 				);
 				self::$cachedSeminars[$seminarUid] = $this->seminar;

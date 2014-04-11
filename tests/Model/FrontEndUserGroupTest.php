@@ -175,7 +175,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasReviewerForGroupWithReviewerReturnsTrue() {
-		$backEndUser = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
+		$backEndUser = new tx_oelib_Model_BackEndUser();
 
 		$this->fixture->setData(array('tx_seminars_reviewer' => $backEndUser));
 
@@ -199,7 +199,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getReviewerForGroupWithReviewerReturnsReviewer() {
-		$backEndUser = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
+		$backEndUser = new tx_oelib_Model_BackEndUser();
 
 		$this->fixture->setData(array('tx_seminars_reviewer' => $backEndUser));
 
@@ -268,9 +268,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getDefaultCategoriesForNoCategoriesReturnsAList() {
-		$this->fixture->setData(array(
-			'tx_seminars_default_categories' => tx_oelib_ObjectFactory::make('tx_oelib_List'))
-		);
+		$this->fixture->setData(array('tx_seminars_default_categories' => new tx_oelib_List()));
 
 		$this->assertTrue(
 			$this->fixture->getDefaultCategories() instanceOf tx_oelib_List
@@ -281,7 +279,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getDefaultCategoriesForOneAssignedCategoryReturnsThisCategoryInList() {
-		$list = tx_oelib_ObjectFactory::make('tx_oelib_List');
+		$list = new tx_oelib_List();
 		$category = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
 			->getNewGhost();
 
@@ -303,10 +301,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasDefaultCategoriesForNoAssignedCategoriesReturnsFalse() {
-		$this->fixture->setData(array(
-			'tx_seminars_default_categories'
-				=> tx_oelib_ObjectFactory::make('tx_oelib_List'))
-		);
+		$this->fixture->setData(array('tx_seminars_default_categories' => new tx_oelib_List()));
 
 		$this->assertFalse(
 			$this->fixture->hasDefaultCategories()
@@ -317,7 +312,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasDefaultCategoriesForOneAssignedCategoryReturnsTrue() {
-		$list = tx_oelib_ObjectFactory::make('tx_oelib_List');
+		$list = new tx_oelib_List();
 		$list->add(
 			tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
 				->getNewGhost()

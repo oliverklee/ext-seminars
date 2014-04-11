@@ -135,7 +135,7 @@ class tx_seminars_tcemainprocdm {
 	private function processSingleTimeSlot($uid, array $fieldArray) {
 		// Initializes a timeslot object to have all
 		// functions available.
-		$timeslot = tx_oelib_ObjectFactory::make(
+		$timeslot = t3lib_div::makeInstance(
 			'tx_seminars_timeslot', $uid, FALSE
 		);
 
@@ -159,7 +159,7 @@ class tx_seminars_tcemainprocdm {
 	private function processSingleEvent($uid, array $fieldArray) {
 		// Initializes a seminar object to have all functions
 		// available.
-		$seminar = tx_oelib_ObjectFactory::make(
+		$seminar = t3lib_div::makeInstance(
 			'tx_seminars_seminar', $uid, FALSE, TRUE
 		);
 

@@ -85,7 +85,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * @return void
 	 */
 	private function createSeminar($seminarUid) {
-		$this->seminar = tx_oelib_ObjectFactory::make(
+		$this->seminar = t3lib_div::makeInstance(
 			'tx_seminars_seminar', $seminarUid
 		);
 	}
@@ -220,7 +220,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * @return tx_seminars_BagBuilder_Registration the bag builder
 	 */
 	private function createRegistrationBagBuilder() {
-		$builder = tx_oelib_ObjectFactory::make(
+		$builder = t3lib_div::makeInstance(
 			'tx_seminars_BagBuilder_Registration'
 		);
 		$builder->limitToEvent($this->seminar->getUid());

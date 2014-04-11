@@ -101,7 +101,7 @@ class tx_seminars_FrontEnd_EventHeadline extends tx_seminars_FrontEnd_AbstractVi
 			return $result;
 		}
 
-		$dateRangeViewHelper = tx_oelib_ObjectFactory::make('tx_seminars_ViewHelper_DateRange');
+		$dateRangeViewHelper = t3lib_div::makeInstance('tx_seminars_ViewHelper_DateRange');
 
 		return $result . ', ' . $dateRangeViewHelper->render($event);
 	}

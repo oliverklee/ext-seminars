@@ -75,7 +75,7 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_AbstractLis
 			'label_full_name', $GLOBALS['LANG']->getLL('organizerlist.title')
 		);
 
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Organizer');
+		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Organizer');
 
 		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
 

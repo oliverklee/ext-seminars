@@ -81,7 +81,7 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 			return $result;
 		}
 
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Event');
+		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->limitToEarliestBeginDate($GLOBALS['SIM_EXEC_TIME']);
 		$builder->limitToOtherDatesForTopic($this->getOldEvent());
 
@@ -102,7 +102,7 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 	 */
 	private function getSingleViewUrl() {
 		if ($this->linkBuilder == NULL) {
-			$this->injectLinkBuilder(tx_oelib_ObjectFactory::make(
+			$this->injectLinkBuilder(t3lib_div::makeInstance(
 				'tx_seminars_Service_SingleViewLinkBuilder'
 			));
 		}

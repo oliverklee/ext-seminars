@@ -95,7 +95,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			throw new InvalidArgumentException('$eventUid must be > 0.');
 		}
 
-		$this->oldEvent = tx_oelib_ObjectFactory::make(
+		$this->oldEvent = t3lib_div::makeInstance(
 			'tx_seminars_seminar', $eventUid
 		);
 
@@ -419,7 +419,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		$organizer = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer')
 			->find(intval($this->getPostData('sender')));
 
-		$registrationBagBuilder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Registration');
+		$registrationBagBuilder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Registration');
 		$registrationBagBuilder->limitToEvent($this->getEvent()->getUid());
 		$registrations = $registrationBagBuilder->build();
 
@@ -433,7 +433,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 				if (!$user->hasEMailAddress()) {
 					continue;
 				}
-				$eMail = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
+				$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
 				$eMail->setSender($organizer);
 				$eMail->setSubject($this->getPostData('subject'));
 				$eMail->addRecipient($registration->getFrontEndUser());
@@ -567,7 +567,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 *                for the given prefix could be found
 	 */
 	protected function localizeSalutationPlaceholder($prefix) {
-		$salutation = tx_oelib_ObjectFactory::make(
+		$salutation = t3lib_div::makeInstance(
 			'tx_seminars_EmailSalutation'
 		);
 		$eventDetails = $salutation->createIntroduction(
@@ -598,7 +598,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		tx_seminars_Model_FrontEndUser $user,
 		tx_seminars_Model_Organizer $organizer
 	) {
-		$salutation = tx_oelib_ObjectFactory::make('tx_seminars_EmailSalutation');
+		$salutation = t3lib_div::makeInstance('tx_seminars_EmailSalutation');
 		$messageText = str_replace(
 			'%' . $GLOBALS['LANG']->getLL('mailForm_salutation'),
 			$salutation->getSalutation($user),

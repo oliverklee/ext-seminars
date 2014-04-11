@@ -773,7 +773,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				break;
 		}
 
-		return tx_oelib_ObjectFactory::make(
+		return t3lib_div::makeInstance(
 			'tx_seminars_Bag_Speaker',
 			$mmTable . '.uid_local = ' . $this->getUid() . ' AND ' . 'tx_seminars_speakers.uid = ' . $mmTable . '.uid_foreign',
 			$mmTable,
@@ -1163,7 +1163,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return string the price, formatted as in configured in TS
 	 */
 	public function formatPrice($value) {
-		$priceViewHelper = tx_oelib_ObjectFactory::make(
+		$priceViewHelper = t3lib_div::makeInstance(
 			'tx_oelib_ViewHelper_Price'
 		);
 		$priceViewHelper->setCurrencyFromIsoAlpha3Code(
@@ -2108,7 +2108,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		/** @var $builder tx_seminars_BagBuilder_Organizer */
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Organizer');
+		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Organizer');
 		$builder->limitToEvent($this->getUid());
 
 		return $builder->build();
@@ -2286,7 +2286,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 		$result = array();
 
-		$organizerBag = tx_oelib_ObjectFactory::make(
+		$organizerBag = t3lib_div::makeInstance(
 			'tx_seminars_Bag_Organizer',
 			'tx_seminars_seminars_organizing_partners_mm.uid_local = ' . $this->getUid() . ' AND ' .
 				'tx_seminars_seminars_organizing_partners_mm.uid_foreign = tx_seminars_organizers.uid',
@@ -3043,7 +3043,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$this->getRecordPropertyInteger('topic'),
 				'tx_seminars_seminars')
 			) {
-				$result = tx_oelib_ObjectFactory::make(
+				$result = t3lib_div::makeInstance(
 					'tx_seminars_seminar',
 					$this->getRecordPropertyInteger('topic')
 				);
@@ -3828,7 +3828,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					'tx_seminars_attendances.seminar' .
 				' AND tx_seminars_attendances.user = ' . $feUserUid;
 
-			$seminarBag = tx_oelib_ObjectFactory::make(
+			$seminarBag = t3lib_div::makeInstance(
 				'tx_seminars_Bag_Event', $queryWhere, $additionalTables
 			);
 
@@ -4156,7 +4156,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                                 empty
 	 */
 	private function createTimeSlotBag() {
-		return tx_oelib_ObjectFactory::make(
+		return t3lib_div::makeInstance(
 			'tx_seminars_Bag_TimeSlot',
 			'tx_seminars_timeslots.seminar = ' . $this->getUid() .
 				' AND tx_seminars_timeslots.place > 0',
@@ -4183,7 +4183,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function getTimeSlotsAsArrayWithMarkers() {
 		$result = array();
 
-		$timeSlotBag = tx_oelib_ObjectFactory::make(
+		$timeSlotBag = t3lib_div::makeInstance(
 			'tx_seminars_Bag_TimeSlot',
 			'tx_seminars_timeslots.seminar = ' . $this->getUid(),
 			'',
@@ -4241,7 +4241,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return array();
 		}
 
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Category');
+		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Category');
 		$builder->limitToEvents($this->getTopicUid());
 		$builder->sortByRelationOrder();
 		$bag = $builder->build();
@@ -4430,7 +4430,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                               event has no required events
 	 */
 	public function getRequirements() {
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Event');
+		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->limitToRequiredEventTopics($this->getTopicUid());
 
 		return $builder->build();
@@ -4444,7 +4444,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                               this event has no depending events
 	 */
 	public function getDependencies() {
-		$builder = tx_oelib_ObjectFactory::make('tx_seminars_BagBuilder_Event');
+		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->limitToDependingEventTopics($this->getTopicUid());
 
 		return $builder->build();
@@ -4624,7 +4624,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function getPlaces() {
 		if (!$this->hasPlace()) {
-			return tx_oelib_ObjectFactory::make('tx_oelib_List');
+			return t3lib_div::makeInstance('tx_oelib_List');
 		}
 
 		$places = tx_oelib_db::selectMultiple(
@@ -4634,7 +4634,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				tx_oelib_db::enableFields('tx_seminars_sites')
 		);
 
-		return tx_oelib_ObjectFactory::make('tx_seminars_Mapper_Place')
+		return t3lib_div::makeInstance('tx_seminars_Mapper_Place')
 			->getListOfModels($places);
 	}
 

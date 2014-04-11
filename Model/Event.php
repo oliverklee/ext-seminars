@@ -1664,7 +1664,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                       registrations
 	 */
 	public function getRegularRegistrations() {
-		$regularRegistrations = tx_oelib_ObjectFactory::make('tx_oelib_List');
+		$regularRegistrations = t3lib_div::makeInstance('tx_oelib_List');
 
 		foreach ($this->getRegistrations() as $registration) {
 			if (!$registration->isOnRegistrationQueue()) {
@@ -1683,7 +1683,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                       will be empty if this event no queue registrations
 	 */
 	public function getQueueRegistrations() {
-		$queueRegistrations = tx_oelib_ObjectFactory::make('tx_oelib_List');
+		$queueRegistrations = t3lib_div::makeInstance('tx_oelib_List');
 
 		foreach ($this->getRegistrations() as $registration) {
 			if ($registration->isOnRegistrationQueue()) {

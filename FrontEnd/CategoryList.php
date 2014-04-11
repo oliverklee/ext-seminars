@@ -43,7 +43,7 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 	 *                there are no categories to display
 	 */
 	public function render() {
-		$seminarBagBuilder = tx_oelib_ObjectFactory::make(
+		$seminarBagBuilder = t3lib_div::makeInstance(
 			'tx_seminars_BagBuilder_Event'
 		);
 		$seminarBagBuilder->setSourcePages(
@@ -66,7 +66,7 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 		$bag = $seminarBagBuilder->build();
 		$eventUids = $bag->getUids();
 
-		$categoryBagBuilder = tx_oelib_ObjectFactory::make(
+		$categoryBagBuilder = t3lib_div::makeInstance(
 			'tx_seminars_BagBuilder_Category'
 		);
 		$categoryBagBuilder->limitToEvents($eventUids);

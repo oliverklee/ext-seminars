@@ -147,7 +147,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 *                       to any of the user's groups
 	 */
 	public function getDefaultCategoriesFromGroup() {
-		$categories = tx_oelib_ObjectFactory::make('tx_oelib_List');
+		$categories = t3lib_div::makeInstance('tx_oelib_List');
 
 		foreach ($this->getUserGroups() as $group) {
 			if ($group->hasDefaultCategories()) {
@@ -176,7 +176,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 *                       to any of the user's groups
 	 */
 	public function getDefaultOrganizers() {
-		$organizers = tx_oelib_ObjectFactory::make('tx_oelib_List');
+		$organizers = t3lib_div::makeInstance('tx_oelib_List');
 
 		foreach ($this->getUserGroups() as $group) {
 			if ($group->hasDefaultOrganizer()) {

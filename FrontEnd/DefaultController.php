@@ -292,7 +292,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				// The fallthrough is intended
 				// because createRegistrationsListPage() will differentiate later.
 			case 'list_registrations':
-				$registrationsList = tx_oelib_ObjectFactory::make(
+				$registrationsList = t3lib_div::makeInstance(
 					'tx_seminars_FrontEnd_RegistrationsList', $this->conf,
 					$this->whatToDisplay, intval($this->piVars['seminar']),
 					$this->cObj
@@ -300,7 +300,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				$result = $registrationsList->render();
 				break;
 			case 'countdown':
-				$countdown = tx_oelib_ObjectFactory::make(
+				$countdown = t3lib_div::makeInstance(
 					'tx_seminars_FrontEnd_Countdown',
 					$this->conf,
 					$this->cObj
@@ -309,14 +309,14 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				$result = $countdown->render();
 				break;
 			case 'category_list':
-				$categoryList = tx_oelib_ObjectFactory::make(
+				$categoryList = t3lib_div::makeInstance(
 					'tx_seminars_FrontEnd_CategoryList',
 					$this->conf, $this->cObj
 				);
 				$result = $categoryList->render();
 				break;
 			case 'event_headline':
-				$eventHeadline = tx_oelib_ObjectFactory::make(
+				$eventHeadline = t3lib_div::makeInstance(
 					'tx_seminars_FrontEnd_EventHeadline',
 					$this->conf, $this->cObj
 				);
@@ -462,7 +462,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			$seminarUid, 'tx_seminars_seminars', $showHiddenRecords
 			)
 		) {
-			$this->setSeminar(tx_oelib_ObjectFactory::make(
+			$this->setSeminar(t3lib_div::makeInstance(
 				'tx_seminars_seminar', $seminarUid, FALSE, $showHiddenRecords
 			));
 
@@ -2045,7 +2045,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			}
 			$this->setMarker('image', $image);
 
-			$categoryList = tx_oelib_ObjectFactory::make(
+			$categoryList = t3lib_div::makeInstance(
 				'tx_seminars_FrontEnd_CategoryList', $this->conf, $this->cObj
 			);
 			$listOfCategories = $categoryList->createCategoryList(
@@ -2178,7 +2178,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *                                       the list view
 	 */
 	private function createSeminarBagBuilder() {
-		$seminarBagBuilder = tx_oelib_ObjectFactory::make(
+		$seminarBagBuilder = t3lib_div::makeInstance(
 			'tx_seminars_BagBuilder_Event'
 		);
 
@@ -2200,7 +2200,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *                                             "my events" list
 	 */
 	private function createRegistrationBagBuilder() {
-		$registrationBagBuilder = tx_oelib_ObjectFactory::make(
+		$registrationBagBuilder = t3lib_div::makeInstance(
 			'tx_seminars_BagBuilder_Registration'
 		);
 
@@ -2222,7 +2222,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *         the object to build the requirements list with
 	 */
 	private function createRequirementsList() {
-		return tx_oelib_ObjectFactory::make(
+		return t3lib_div::makeInstance(
 			'tx_seminars_FrontEnd_RequirementsList', $this->conf, $this->cObj
 		);
 	}
@@ -2307,7 +2307,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			return '';
 		}
 
-		$selectorWidget = tx_oelib_ObjectFactory::make(
+		$selectorWidget = t3lib_div::makeInstance(
 			'tx_seminars_FrontEnd_SelectorWidget', $this->conf, $this->cObj
 		);
 
@@ -3025,7 +3025,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @return tx_seminars_FrontEnd_EventEditor the initialized event editor
 	 */
 	protected function createEventEditorInstance() {
-		$eventEditor = tx_oelib_ObjectFactory::make(
+		$eventEditor = t3lib_div::makeInstance(
 			'tx_seminars_FrontEnd_EventEditor', $this->conf, $this->cObj
 		);
 		$eventEditor->setObjectUid(intval($this->piVars['seminar']));
@@ -3504,7 +3504,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 */
 	protected function getLinkBuilder() {
 		if ($this->linkBuilder === NULL) {
-			$this->injectLinkBuilder(tx_oelib_ObjectFactory::make('tx_seminars_Service_SingleViewLinkBuilder'));
+			$this->injectLinkBuilder(t3lib_div::makeInstance('tx_seminars_Service_SingleViewLinkBuilder'));
 		}
 		$this->linkBuilder->setPlugin($this);
 

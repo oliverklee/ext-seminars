@@ -164,7 +164,8 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 
 		$GLOBALS['TT'] = t3lib_div::makeInstance('t3lib_TimeTrackNull');
 
-		$frontEnd = tx_oelib_ObjectFactory::make(
+		/** @var $frontEnd tslib_fe */
+		$frontEnd = t3lib_div::makeInstance(
 			'tslib_fe', $GLOBALS['TYPO3_CONF_VARS'], 0, 0
 		);
 

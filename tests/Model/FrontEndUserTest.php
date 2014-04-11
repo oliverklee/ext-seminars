@@ -365,7 +365,7 @@ class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getReviewerFromGroupForUserWithGroupWithNoReviewerReturnsNull() {
-		$userGroup = tx_oelib_ObjectFactory::make('tx_seminars_Model_FrontEndUserGroup');
+		$userGroup = new tx_seminars_Model_FrontEndUserGroup();
 		$userGroup->setData(array('tx_seminars_reviewer' => NULL));
 
 		$list = new tx_oelib_List();
@@ -382,11 +382,9 @@ class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getReviewerFromGroupForUserWithGroupWithReviewerReturnsReviewer() {
-		$backEndUser = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
+		$backEndUser = new tx_oelib_Model_BackEndUser();
 
-		$userGroup = tx_oelib_ObjectFactory::make(
-			'tx_seminars_Model_FrontEndUserGroup'
-		);
+		$userGroup = new tx_seminars_Model_FrontEndUserGroup();
 		$userGroup->setData(array('tx_seminars_reviewer' => $backEndUser));
 
 		$list = new tx_oelib_List();
@@ -404,14 +402,10 @@ class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getReviewerFromGroupForUserWithTwoGroupsOneWithReviewerOneWithoutReviewerReturnsReviewer() {
-		$backEndUser = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
+		$backEndUser = new tx_oelib_Model_BackEndUser();
 
-		$userGroup1 = tx_oelib_ObjectFactory::make(
-			'tx_seminars_Model_FrontEndUserGroup'
-		);
-		$userGroup2 = tx_oelib_ObjectFactory::make(
-			'tx_seminars_Model_FrontEndUserGroup'
-		);
+		$userGroup1 = new tx_seminars_Model_FrontEndUserGroup();
+		$userGroup2 = new tx_seminars_Model_FrontEndUserGroup();
 
 		$userGroup1->setData(array('tx_seminars_reviewer' => NULL));
 		$userGroup2->setData(array('tx_seminars_reviewer' => $backEndUser));
@@ -432,15 +426,11 @@ class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getReviewerFromGroupForUserWithTwoGroupsWithReviewersReturnsReviewerOfFirstGroup() {
-		$backEndUser1 = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
-		$backEndUser2 = tx_oelib_ObjectFactory::make('tx_oelib_Model_BackEndUser');
+		$backEndUser1 = new tx_oelib_Model_BackEndUser();
+		$backEndUser2 = new tx_oelib_Model_BackEndUser();
 
-		$userGroup1 = tx_oelib_ObjectFactory::make(
-			'tx_seminars_Model_FrontEndUserGroup'
-		);
-		$userGroup2 = tx_oelib_ObjectFactory::make(
-			'tx_seminars_Model_FrontEndUserGroup'
-		);
+		$userGroup1 = new tx_seminars_Model_FrontEndUserGroup();
+		$userGroup2 = new tx_seminars_Model_FrontEndUserGroup();
 
 		$userGroup1->setData(array('tx_seminars_reviewer' => $backEndUser1));
 		$userGroup2->setData(array('tx_seminars_reviewer' => $backEndUser2));

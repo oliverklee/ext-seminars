@@ -74,7 +74,7 @@ class tx_seminars_Bag_Speaker extends tx_seminars_Bag_Abstract {
 	 * @return void
 	 */
 	protected function createItemFromDbResult() {
-		$this->currentItem = tx_oelib_ObjectFactory::make(
+		$this->currentItem = t3lib_div::makeInstance(
 			'tx_seminars_speaker', 0, $this->dbResult
 		);
 		$this->valid();

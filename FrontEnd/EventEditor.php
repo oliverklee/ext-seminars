@@ -115,7 +115,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 
 		$this->storeAttachedFiles();
 
-		$template = tx_oelib_ObjectFactory::make('tx_oelib_Template');
+		$template = t3lib_div::makeInstance('tx_oelib_Template');
 		$template->processTemplate(parent::render());
 
 		$template->hideSubpartsArray(
@@ -636,7 +636,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		}
 
 		if ($this->getObjectUid() > 0) {
-			$seminar = tx_oelib_ObjectFactory::make(
+			$seminar = t3lib_div::makeInstance(
 				'tx_seminars_seminar', $this->getObjectUid(), FALSE, TRUE
 			);
 			$isUserVip = $seminar->isUserVip(
@@ -990,7 +990,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *               if all subparts should be shown.
 	 */
 	private function getHiddenSubparts() {
-		$visibilityTree = tx_oelib_ObjectFactory::make(
+		$visibilityTree = t3lib_div::makeInstance(
 			'tx_oelib_Visibility_Tree', $this->createTemplateStructure()
 		);
 
@@ -1309,7 +1309,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			->findByPublicationHash($this->publicationHash);
 
 		if ($event && $event->isHidden()) {
-			$eMail = tx_oelib_ObjectFactory::make('tx_oelib_Mail');
+			$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
 			$eMail->addRecipient($reviewer);
 			$eMail->setSender($frontEndUser);
 			$eMail->setSubject($this->translate('publish_event_subject'));
@@ -1404,7 +1404,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		};
 
-		$place = tx_oelib_ObjectFactory::make('tx_seminars_Model_Place');
+		$place = t3lib_div::makeInstance('tx_seminars_Model_Place');
 		$place->setData(self::createBasicAuxiliaryData());
 		self::setPlaceData($place, 'newPlace_', $formData);
 		$place->markAsDirty();
@@ -1710,7 +1710,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		};
 
-		$speaker = tx_oelib_ObjectFactory::make('tx_seminars_Model_Speaker');
+		$speaker = t3lib_div::makeInstance('tx_seminars_Model_Speaker');
 		$speaker->setData(array_merge(
 			self::createBasicAuxiliaryData(),
 			array('skills' => new tx_oelib_List())
@@ -1854,7 +1854,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	private static function setSpeakerData(tx_seminars_Model_Speaker $speaker, $prefix, array $formData) {
 		$skillMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill');
-		$skills = tx_oelib_ObjectFactory::make('tx_oelib_List');
+		$skills = t3lib_div::makeInstance('tx_oelib_List');
 
 		if (is_array($formData[$prefix . 'skills'])) {
 			foreach ($formData[$prefix . 'skills'] as $rawUid) {
@@ -1978,7 +1978,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		};
 
-		$checkbox = tx_oelib_ObjectFactory::make('tx_seminars_Model_Checkbox');
+		$checkbox = t3lib_div::makeInstance('tx_seminars_Model_Checkbox');
 		$checkbox->setData(self::createBasicAuxiliaryData());
 		self::setCheckboxData($checkbox, 'newCheckbox_', $formData);
 		$checkbox->markAsDirty();
@@ -2186,8 +2186,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		};
 
-		$targetGroup
-			= tx_oelib_ObjectFactory::make('tx_seminars_Model_TargetGroup');
+		$targetGroup = t3lib_div::makeInstance('tx_seminars_Model_TargetGroup');
 		$targetGroup->setData(self::createBasicAuxiliaryData());
 		self::setTargetGroupData($targetGroup, 'newTargetGroup_', $formData);
 		$targetGroup->markAsDirty();

@@ -98,7 +98,7 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 		}
 
 		if ($this->linkBuilder == NULL) {
-			$this->injectLinkBuilder(tx_oelib_ObjectFactory::make(
+			$this->injectLinkBuilder(t3lib_div::makeInstance(
 				'tx_seminars_Service_SingleViewLinkBuilder'
 			));
 		}

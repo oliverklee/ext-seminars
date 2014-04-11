@@ -7460,9 +7460,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function mayCurrentUserEditCurrentEventForLoggedInUserAsOwnerIsTrue() {
-		$fixture = tx_oelib_ObjectFactory::make(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		$fixture = new $className();
 		$fixture->cObj = $this->createContentMock();
 		$fixture->conf = array();
 		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
@@ -7481,9 +7480,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function mayCurrentUserEditCurrentEventForLoggedInUserAsVipAndVipEditorAccessIsTrue() {
-		$fixture = tx_oelib_ObjectFactory::make(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		$fixture = new $className();
 		$fixture->cObj = $this->createContentMock();
 		$fixture->conf = array('mayManagersEditTheirEvents' => TRUE);
 		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
@@ -7502,9 +7500,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function mayCurrentUserEditCurrentEventForLoggedInUserAsVipAndNoVipEditorAccessIsFalse() {
-		$fixture = tx_oelib_ObjectFactory::make(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		$fixture = new $className();
 		$fixture->cObj = $this->createContentMock();
 		$fixture->conf = array('mayManagersEditTheirEvents' => FALSE);
 		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
@@ -7523,9 +7520,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function mayCurrentUserEditCurrentEventForLoggedInUserNeitherVipNorOwnerIsFalse() {
-		$fixture = tx_oelib_ObjectFactory::make(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		$fixture = new $className();
 		$fixture->cObj = $this->createContentMock();
 		$fixture->conf = array(
 			'eventEditorPID' => 42,
@@ -8086,9 +8082,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$event = $mapper->getLoadedTestingModel(array());
 
-		$fixture = tx_oelib_ObjectFactory::make(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		$fixture = new $className();
 		$fixture->hideEvent($event);
 
 		$this->assertTrue(
@@ -8105,9 +8100,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$event = $mapper->getLoadedTestingModel(array('hidden' => 1));
 
-		$fixture = tx_oelib_ObjectFactory::make(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		$fixture = new $className();
 		$fixture->hideEvent($event);
 
 		$this->assertTrue(
@@ -8125,9 +8119,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event = $mapper->getLoadedTestingModel(array());
 		$mapper->expects($this->once())->method('save')->with($event);
 
-		$fixture = tx_oelib_ObjectFactory::make(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		$fixture = new $className();
 		$fixture->hideEvent($event);
 	}
 
@@ -8140,9 +8133,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$event = $mapper->getLoadedTestingModel(array('hidden' => 1));
 
-		$fixture = tx_oelib_ObjectFactory::make(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		$fixture = new $className();
 		$fixture->unhideEvent($event);
 
 		$this->assertFalse(
@@ -8159,9 +8151,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$event = $mapper->getLoadedTestingModel(array());
 
-		$fixture = tx_oelib_ObjectFactory::make(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		$fixture = new $className();
 		$fixture->unhideEvent($event);
 
 		$this->assertFalse(
@@ -8179,9 +8170,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event = $mapper->getLoadedTestingModel(array());
 		$mapper->expects($this->once())->method('save')->with($event);
 
-		$fixture = tx_oelib_ObjectFactory::make(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		$fixture = new $className();
 		$fixture->unhideEvent($event);
 	}
 

@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4879] Bugfix: Use t3lib_div::makeInstance instead of ObjectFactory::make
 - [#5003] Fix: Make sure the FORMidable configuration always is an array
 - [#4998] Cleanup: Use type[] instead of array<type>
 - [#4986] Fix: Getter for billing address phone uses the wrong field name

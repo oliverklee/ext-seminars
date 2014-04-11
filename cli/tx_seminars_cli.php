@@ -44,7 +44,7 @@ if (!defined('TYPO3_cliMode')) {
 setlocale(LC_NUMERIC, 'C');
 
 try {
-	tx_oelib_ObjectFactory::make('tx_seminars_cli_MailNotifier')->start();
+	t3lib_div::makeInstance('tx_seminars_cli_MailNotifier')->start();
 } catch (Exception $exception) {
 	echo $exception->getMessage();
 }
