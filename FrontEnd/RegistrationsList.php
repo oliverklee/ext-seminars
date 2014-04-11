@@ -208,7 +208,6 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 		// Lets warnings from the registration bag bubble up to us.
 		$this->setErrorMessage($regularRegistrations->checkConfiguration(TRUE));
 
-		$regularRegistrations->__destruct();
 		unset($regularRegistrations, $builder);
 	}
 
