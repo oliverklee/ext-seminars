@@ -253,7 +253,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 				}
 		}
 
-		parent::setFormConfiguration($formConfiguration);
+		parent::setFormConfiguration((array) $formConfiguration);
 	}
 
 	/**

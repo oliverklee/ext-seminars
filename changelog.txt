@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#5003] Bugfix: Make sure the FORMidable configuration always is an array
 - [#4998] Cleanup: Use type[] instead of array<type>
 - [#4986] Fix: Getter for billing address phone uses the wrong field name
 - [#4985] Fix: Add the additional attendees before sending the e-mails

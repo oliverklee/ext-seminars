@@ -110,7 +110,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @return string HTML of the create/edit form
 	 */
 	public function render() {
-		$this->setFormConfiguration($this->conf['form.']['eventEditor.']);
+		$this->setFormConfiguration((array) $this->conf['form.']['eventEditor.']);
 		$this->declareDataHandler();
 
 		$this->storeAttachedFiles();

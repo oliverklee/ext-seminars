@@ -48,7 +48,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * @var array the FORMidable form configuration
 	 */
-	private $formConfiguration;
+	private $formConfiguration = array();
 
 	/**
 	 * @var boolean whether the class ist used in test mode
