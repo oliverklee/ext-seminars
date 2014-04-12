@@ -21,7 +21,9 @@ if (TYPO3_MODE === 'BE') {
 	t3lib_extMgm::addModule('web', 'txseminarsM2', '', $extPath . 'BackEnd/');
 }
 
-t3lib_div::loadTCA('tt_content');
+if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 6001000) {
+	t3lib_div::loadTCA('tt_content');
+}
 
 $TCA['tx_seminars_test'] = array(
 	'ctrl' => array(

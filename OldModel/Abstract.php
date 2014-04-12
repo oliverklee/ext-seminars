@@ -554,7 +554,9 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	public function getRecordIcon() {
 		$iconProperties = array();
 
-		t3lib_div::loadTCA($this->tableName);
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 6001000) {
+			t3lib_div::loadTCA($this->tableName);
+		}
 		$tableConfiguration =& $GLOBALS['TCA'][$this->tableName]['ctrl'];
 
 		$hiddenColumn = $tableConfiguration['enablecolumns']['disabled'];

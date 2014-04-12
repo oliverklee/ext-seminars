@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#5008] Fix: Call loadTCA only for TYPO3 CMS < 6.1
 - [#4572] Fix: Add .htaccess to all folders with private resources
 - [#4648] Fix: Drop early __destruct calls
 - [#4879] Fix: Use t3lib_div::makeInstance instead of ObjectFactory::make

@@ -31,7 +31,9 @@ $usePageBrowser = (boolean) $globalConfiguration['usePageBrowser'];
 $selectType = $usePageBrowser ? 'group' : 'select';
 
 if (!isset($GLOBALS['TCA']['fe_users']['columns']['tx_seminars_registration'])) {
-	t3lib_div::loadTCA('fe_users');
+	if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 6001000) {
+		t3lib_div::loadTCA('fe_users');
+	}
 	t3lib_extMgm::addTCAcolumns(
 		'fe_users',
 		array(
@@ -59,7 +61,9 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 		'EXT:seminars/Resources/Private/Language/locallang_csh_fe_groups.xml'
 	);
 
-	t3lib_div::loadTCA('fe_groups');
+	if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 6001000) {
+		t3lib_div::loadTCA('fe_groups');
+	}
 	t3lib_extMgm::addTCAcolumns(
 		'fe_groups',
 		array(
@@ -176,7 +180,9 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 }
 
 if (!isset($GLOBALS['TCA']['be_groups']['columns']['tx_seminars_events_folder'])) {
-	t3lib_div::loadTCA('be_groups');
+	if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 6001000) {
+		t3lib_div::loadTCA('be_groups');
+	}
 	t3lib_extMgm::addTCAcolumns(
 		'be_groups',
 		array(
