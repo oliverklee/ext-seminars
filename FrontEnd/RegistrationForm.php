@@ -1187,7 +1187,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 */
 	public function populateListCountries() {
 		$this->initStaticInfo();
-		$allCountries = $this->staticInfo->initCountries('ALL', $this->staticInfo->getCurrentLanguage(), TRUE);
+		$allCountries = $this->staticInfo->initCountries('ALL', '', TRUE);
 
 		$result = array();
 		// Puts an empty item at the top so we won't have Afghanistan (the first entry) pre-selected for empty values.
@@ -1206,19 +1206,29 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * Returns the default country as localized string.
 	 *
-	 * @return string the default country's localized name, will be empty if
-	 *                there is no default country
+	 * @return string the default country's localized name, will be empty if there is no default country
 	 */
 	private function getDefaultCountry() {
-		$this->initStaticInfo();
 		$defaultCountryCode = tx_oelib_ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->getAsString('countryCode');
-		if ($defaultCountryCode == '') {
+		if ($defaultCountryCode === '') {
 			return '';
 		}
 
-		return tx_staticinfotables_div::getTitleFromIsoCode(
-			'static_countries', $defaultCountryCode, $this->staticInfo->getCurrentLanguage(), TRUE
-		);
+		$this->initStaticInfo();
+
+		if (class_exists('SJBR\\StaticInfoTables\\Utility\\LocalizationUtility', TRUE)) {
+			$currentLanguageCode = Tx_Oelib_ConfigurationRegistry::get('config')->getAsString('language');
+			$identifiers = array('iso' => $defaultCountryCode);
+			$result = \SJBR\StaticInfoTables\Utility\LocalizationUtility::getLabelFieldValue(
+				$identifiers, 'static_countries', $currentLanguageCode, TRUE
+			);
+		} else {
+			$result = tx_staticinfotables_div::getTitleFromIsoCode(
+				'static_countries', $defaultCountryCode, $this->staticInfo->getCurrentLanguage(), TRUE
+			);
+		}
+
+		return $result;
 	}
 
 	/**

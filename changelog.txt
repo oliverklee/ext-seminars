@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4709] Fix: Crash on the registration page with static_info_tables 6.0.4 under TYPO3 6.0.6
 - [#5021] Fix: Test error in tx_seminars_BackEnd_GeneralEventMailFormTest in TYPO3 CMS 6.1
 - [#5020] Fix: Error massage: The extension CSS Styled Content is not loaded
 - [#5016] Fix: Stop including template.php in pi2
