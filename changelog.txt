@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#5021] Fix: Test error in tx_seminars_BackEnd_GeneralEventMailFormTest in TYPO3 CMS 6.1
 - [#5020] Fix: Error massage: The extension CSS Styled Content is not loaded
 - [#5016] Fix: Stop including template.php in pi2
 - [#5008] Fix: Call loadTCA only for TYPO3 CMS < 6.1

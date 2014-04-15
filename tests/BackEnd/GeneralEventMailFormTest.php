@@ -63,6 +63,13 @@ class tx_seminars_BackEnd_GeneralEventMailFormTest extends tx_phpunit_testcase {
 	private $languageBackup;
 
 	/**
+	 * UID of a dummy system folder
+	 *
+	 * @var integer
+	 */
+	protected $dummySysFolderUid = 0;
+
+	/**
 	 * UID of a dummy organizer record
 	 *
 	 * @var integer
@@ -91,6 +98,9 @@ class tx_seminars_BackEnd_GeneralEventMailFormTest extends tx_phpunit_testcase {
 		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+
+		$this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
+		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
 
 		$this->organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
@@ -182,7 +192,7 @@ class tx_seminars_BackEnd_GeneralEventMailFormTest extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'pid' => $this->dummySysFolderPid,
+				'pid' => $this->dummySysFolderUid,
 				'seminar' => $this->eventUid,
 				'user' => $this->testingFramework->createFrontEndUser(
 					'',
