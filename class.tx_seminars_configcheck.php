@@ -1520,7 +1520,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	 * @return void
 	 */
 	private function checkCommonFrontEndSettings() {
-		$this->checkCssStyledContent();
 		$this->checkStaticIncluded();
 		$this->checkTemplateFile(TRUE);
 		$this->checkCssFileFromConstants();
