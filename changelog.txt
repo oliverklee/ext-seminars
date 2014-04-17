@@ -1,4 +1,5 @@
 0.9.7 (currently working on)
+- [#4991] Fix: Get rid of modernizr.min.js in frontend
 - [#4572] Fix: Add .htaccess to all folders with private resources
 - [#5003] Fix: Make sure the FORMidable configuration always is an array
 - [#4947] Fix: Fix the @param value of getFormValue
