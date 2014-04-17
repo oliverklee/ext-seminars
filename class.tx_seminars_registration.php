@@ -1066,6 +1066,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @return boolean TRUE if everything went OK, FALSE otherwise
 	 */
 	public function commitToDb() {
+		$this->fillEmptyDefaultFields();
+
 		if (!parent::commitToDb()) {
 			return FALSE;
 		}
@@ -1083,6 +1085,32 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		$referenceIndex->updateRefIndexTable('tx_seminars_attendances', $this->getUid());
 
 		return TRUE;
+	}
+
+	/**
+	 * Fills the default fields that don't have any data.
+	 *
+	 * @return void
+	 */
+	protected function fillEmptyDefaultFields() {
+		$integerDefaultFieldKeys = array(
+			'kids', 'method_of_payment', 'gender'
+		);
+		$stringDefaultFieldKeys = array(
+			'name', 'zip', 'city', 'country', 'telephone', 'email'
+		);
+
+		foreach ($integerDefaultFieldKeys as $key) {
+			if (!$this->hasRecordPropertyInteger($key)) {
+				$this->setRecordPropertyInteger($key, 0);
+			}
+		}
+
+		foreach ($stringDefaultFieldKeys as $key) {
+			if (!$this->hasRecordPropertyString($key)) {
+				$this->setRecordPropertyString($key, '');
+			}
+		}
 	}
 
 	/**
