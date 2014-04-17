@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2008-2013 Bernd Schönbach <bernd@oliverklee.de>
+* (c) 2008-2014 Bernd Schönbach <bernd@oliverklee.de>
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -34,21 +34,28 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_FrontEnd_RequirementsList
 	 */
-	private $fixture;
+	protected $fixture = NULL;
 
 	/**
 	 * @var integer the UID of a seminar to which the plugin relates
 	 */
-	private $seminarUid;
+	protected $seminarUid = 0;
 
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
-	private $testingFramework;
+	protected $testingFramework = NULL;
 
-	public function setUp() {
+	/**
+	 * @var integer
+	 */
+	protected $systemFolderPid = 0;
+
+	protected function setUp() {
 		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
+
+		$this->systemFolderPid = $this->testingFramework->createSystemFolder();
 
 		$this->seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -64,7 +71,7 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();
@@ -72,11 +79,14 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////
-	// Tests for the render function
-	//////////////////////////////////
+	/*
+	 * Tests for the render function
+	 */
 
-	public function testRenderWithoutSetSeminarThrowsException() {
+	/**
+	 * @test
+	 */
+	public function renderWithoutSetSeminarThrowsException() {
 		$this->setExpectedException(
 			'BadMethodCallException',
 			'No event was set, please set an event before calling render'
@@ -112,7 +122,10 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderLinksOneRequirementToTheSingleView() {
+	/**
+	 * @test
+	 */
+	public function renderLinksOneRequirementToTheSingleView() {
 		$this->fixture->setConfigurationValue(
 			'detailPID',
 			$this->testingFramework->createFrontEndPage()
@@ -140,7 +153,10 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testRenderShowsTitleOfTwoRequirements() {
+	/**
+	 * @test
+	 */
+	public function renderShowsTitleOfTwoRequirements() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
@@ -176,11 +192,14 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////
-	// Tests for limiting the results
-	///////////////////////////////////
+	/*
+	 * Tests for limiting the results
+	 */
 
-	public function testtLimitToMissingRegistrationsWithNoLoggedInFeUserThrowsException() {
+	/**
+	 * @test
+	 */
+	public function limitToMissingRegistrationsWithNoLoggedInFeUserThrowsException() {
 		$this->setExpectedException(
 			'BadMethodCallException',
 			'No FE user is currently logged in. Please call this function only when a FE user is logged in.'
@@ -189,7 +208,10 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMissingRegistrations();
 	}
 
-	public function testLimitToMissingRegistrationsLimitsOutputToMissingRegistrationsOnly() {
+	/**
+	 * @test
+	 */
+	public function limitToMissingRegistrationsLimitsOutputToMissingRegistrationsOnly() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
