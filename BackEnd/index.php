@@ -116,18 +116,15 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 				'',
 				t3lib_FlashMessage::INFO
 			);
-			t3lib_FlashMessageQueue::addMessage($message);
+			$this->addFlashMessage($message);
 
-			echo $this->content . t3lib_FlashMessageQueue::renderFlashMessages() .
-				$this->doc->endPage();
+			echo $this->content . $this->getRenderedFlashMessages() . $this->doc->endPage();
 			return;
 		}
 
 		$pageAccess = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
 		if (!is_array($pageAccess) && !$BE_USER->user['admin']) {
-			echo $this->content . t3lib_FlashMessageQueue::renderFlashMessages() .
-				$this->doc->endPage();
-
+			echo $this->content . $this->getRenderedFlashMessages() . $this->doc->endPage();
 			return;
 		}
 
@@ -139,10 +136,9 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 				'',
 				t3lib_FlashMessage::WARNING
 			);
-			t3lib_FlashMessageQueue::addMessage($message);
+			$this->addFlashMessage($message);
 
-			echo $this->content . t3lib_FlashMessageQueue::renderFlashMessages() .
-				$this->doc->endPage();
+			echo $this->content . $this->getRenderedFlashMessages() . $this->doc->endPage();
 			return;
 		}
 
@@ -227,6 +223,46 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		}
 
 		echo $this->content . $this->doc->endPage();
+	}
+
+	/**
+	 * Adds a flash message to the queue.
+	 *
+	 * @param t3lib_FlashMessage $flashMessage
+	 *
+	 * @return void
+	 */
+	protected function addFlashMessage(t3lib_FlashMessage $flashMessage) {
+		if (class_exists('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService', TRUE)) {
+			/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
+			$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessageService'
+			);
+			/** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
+			$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+			$defaultFlashMessageQueue->enqueue($flashMessage);
+		} else {
+			t3lib_FlashMessageQueue::addMessage($flashMessage);
+		}
+	}
+
+	/**
+	 * Returns the rendered flash messages.
+	 *
+	 * @return string
+	 */
+	protected function getRenderedFlashMessages() {
+		if (class_exists('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService', TRUE)) {
+			/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
+			$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
+			/** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
+			$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+			$renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
+		} else {
+			$renderedFlashMessages = t3lib_FlashMessageQueue::renderFlashMessages();
+		}
+
+		return $renderedFlashMessages;
 	}
 
 	/**

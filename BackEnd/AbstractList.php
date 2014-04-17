@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2007-2013 Niels Pardon (mail@niels-pardon.de)
+* (c) 2007-2014 Niels Pardon (mail@niels-pardon.de)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -228,19 +228,50 @@ abstract class tx_seminars_BackEnd_AbstractList {
 				TAB . TAB .
 				'</div>' . LF;
 
+			/** @var $message t3lib_FlashMessage */
 			$message = t3lib_div::makeInstance(
 				't3lib_FlashMessage',
 				$storageLabel,
 				'',
 				t3lib_FlashMessage::INFO
 			);
-			t3lib_FlashMessageQueue::addMessage($message);
+			$this->addFlashMessage($message);
 
-			$result .= '<div id="eventsList-clear"></div>' .
-				t3lib_FlashMessageQueue::renderFlashMessages();
+			if (class_exists('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService', TRUE)) {
+				/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
+				$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
+				/** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
+				$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+				$renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
+			} else {
+				$renderedFlashMessages = t3lib_FlashMessageQueue::renderFlashMessages();
+			}
+
+			$result .= '<div id="eventsList-clear"></div>' . $renderedFlashMessages;
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Adds a flash message to the queue.
+	 *
+	 * @param t3lib_FlashMessage $flashMessage
+	 *
+	 * @return void
+	 */
+	protected function addFlashMessage(t3lib_FlashMessage $flashMessage) {
+		if (class_exists('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService', TRUE)) {
+			/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
+			$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessageService'
+			);
+			/** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
+			$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+			$defaultFlashMessageQueue->enqueue($flashMessage);
+		} else {
+			t3lib_FlashMessageQueue::addMessage($flashMessage);
+		}
 	}
 
 	/**

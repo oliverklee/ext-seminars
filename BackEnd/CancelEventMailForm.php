@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2009-2013 Mario Rimann (mario@screenteam.com)
+* (c) 2009-2014 Mario Rimann (mario@screenteam.com)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -129,6 +129,7 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->save($this->getEvent());
 
+		/** @var $message t3lib_FlashMessage */
 		$message = t3lib_div::makeInstance(
 			't3lib_FlashMessage',
 			$GLOBALS['LANG']->getLL('message_eventCanceled'),
@@ -136,7 +137,7 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 			t3lib_FlashMessage::OK,
 			TRUE
 		);
-		t3lib_FlashMessageQueue::addMessage($message);
+		$this->addFlashMessage($message);
 	}
 
 	/**

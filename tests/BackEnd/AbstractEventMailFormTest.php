@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2009-2013 Mario Rimann (mario@screenteam.com)
+* (c) 2009-2014 Mario Rimann (mario@screenteam.com)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -119,7 +119,43 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 
 		unset($this->fixture, $this->testingFramework);
 
-		t3lib_FlashMessageQueue::getAllMessagesAndFlush();
+		$this->flushAllFlashMessages();
+	}
+
+	/**
+	 * Returns the rendered flash messages.
+	 *
+	 * @return string
+	 */
+	protected function getRenderedFlashMessages() {
+		if (class_exists('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService', TRUE)) {
+			/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
+			$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
+			/** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
+			$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+			$renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
+		} else {
+			$renderedFlashMessages = t3lib_FlashMessageQueue::renderFlashMessages();
+		}
+
+		return $renderedFlashMessages;
+	}
+
+	/**
+	 * Flushes all flash messages from the queue.
+	 *
+	 * @return void
+	 */
+	protected function flushAllFlashMessages() {
+		if (class_exists('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService', TRUE)) {
+			/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
+			$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
+			/** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
+			$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+			$defaultFlashMessageQueue->getAllMessagesAndFlush();
+		} else {
+			t3lib_FlashMessageQueue::getAllMessagesAndFlush();
+		}
 	}
 
 
@@ -732,7 +768,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 
 		$this->assertContains(
 			$GLOBALS['LANG']->getLL('message_emailToAttendeesSent'),
-			t3lib_FlashMessageQueue::renderFlashMessages()
+			$this->getRenderedFlashMessages()
 		);
 	}
 
@@ -753,7 +789,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 
 		$this->assertNotContains(
 			$GLOBALS['LANG']->getLL('message_emailToAttendeesSent'),
-			t3lib_FlashMessageQueue::renderFlashMessages()
+			$this->getRenderedFlashMessages()
 		);
 	}
 

@@ -2,7 +2,7 @@
 /***************************************************************
 * Copyright notice
 *
-* (c) 2009-2013 Mario Rimann (mario@screenteam.com)
+* (c) 2009-2014 Mario Rimann (mario@screenteam.com)
 * All rights reserved
 *
 * This script is part of the TYPO3 project. The TYPO3 project is
@@ -88,6 +88,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 *
 	 * @param integer $eventUid UID of an event, must be > 0
 	 *
+	 * @throws InvalidArgumentException
 	 * @throws tx_oelib_Exception_NotFound if event could not be instantiated
 	 */
 	public function __construct($eventUid) {
@@ -323,8 +324,9 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 *        the field name for which the error message should be returned,
 	 *        must not be empty
 	 *
-	 * @return string the error message for the field, will be empty if there's
-	 *                no error message for this field
+	 * @return string the error message for the field, will be empty if there's no error message for this field
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	protected function getErrorMessage($fieldName) {
 		if ($fieldName == '') {
@@ -355,8 +357,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 *
 	 * @param string $fieldName the field name, must not be empty
 	 *
-	 * @return string either the data from POST array or a default value for
-	 *                this field
+	 * @return string either the data from POST array or a default value for this field
 	 */
 	protected function fillFormElement($fieldName) {
 		if ($this->isSubmitted()) {
@@ -401,6 +402,8 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * @param string $key the key of the field to check for, must not be empty
 	 *
 	 * @return boolean TRUE if the stored POST data contains an entry, FALSE otherwise
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	protected function hasPostData($key) {
 		if ($key == '') {
@@ -444,6 +447,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 				$mailer->send($eMail);
 			}
 
+			/** @var $message t3lib_FlashMessage */
 			$message = t3lib_div::makeInstance(
 				't3lib_FlashMessage',
 				$GLOBALS['LANG']->getLL('message_emailToAttendeesSent'),
@@ -451,7 +455,28 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 				t3lib_FlashMessage::OK,
 				TRUE
 			);
-			t3lib_FlashMessageQueue::addMessage($message);
+			$this->addFlashMessage($message);
+		}
+	}
+
+	/**
+	 * Adds a flash message to the queue.
+	 *
+	 * @param t3lib_FlashMessage $flashMessage
+	 *
+	 * @return void
+	 */
+	protected function addFlashMessage(t3lib_FlashMessage $flashMessage) {
+		if (class_exists('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService', TRUE)) {
+			/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
+			$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessageService'
+			);
+			/** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
+			$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+			$defaultFlashMessageQueue->enqueue($flashMessage);
+		} else {
+			t3lib_FlashMessageQueue::addMessage($flashMessage);
 		}
 	}
 
@@ -514,8 +539,9 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 *        the name of the field for which to get the initial value, must be
 	 *        either 'subject' or 'messageBody'
 	 *
-	 * @return string the initial value of the field, will be empty if no
-	 *                initial value is defined
+	 * @return string the initial value of the field, will be empty if no initial value is defined
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	protected function getInitialValue($fieldName) {
 		switch ($fieldName) {

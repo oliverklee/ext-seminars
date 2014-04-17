@@ -137,10 +137,27 @@ class tx_seminars_BackEnd_GeneralEventMailFormTest extends tx_phpunit_testcase {
 
 		unset($this->fixture, $this->testingFramework);
 
-		t3lib_FlashMessageQueue::getAllMessagesAndFlush();
+		$this->flushAllFlashMessages();
 
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
+	}
+
+	/**
+	 * Flushes all flash messages from the queue.
+	 *
+	 * @return void
+	 */
+	protected function flushAllFlashMessages() {
+		if (class_exists('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService', TRUE)) {
+			/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
+			$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
+			/** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
+			$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
+			$defaultFlashMessageQueue->getAllMessagesAndFlush();
+		} else {
+			t3lib_FlashMessageQueue::getAllMessagesAndFlush();
+		}
 	}
 
 
