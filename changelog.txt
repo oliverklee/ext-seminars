@@ -5,7 +5,7 @@
 - [#5022] Fix: Test errors in tx_seminars_FrontEnd_RequirementsListTest with TYPO3 CMS 6.1
 - [#4709] Fix: Crash on the registration page with static_info_tables 6.0.4 under TYPO3 6.0.6
 - [#5021] Fix: Test error in tx_seminars_BackEnd_GeneralEventMailFormTest in TYPO3 CMS 6.1
-- [#5020] Fix: Error massage: The extension CSS Styled Content is not loaded
+- [#5020] Fix: Error message: The extension CSS Styled Content is not loaded
 - [#5016] Fix: Stop including template.php in pi2
 - [#5008] Fix: Call loadTCA only for TYPO3 CMS < 6.1
 - [#4572] Fix: Add .htaccess to all folders with private resources
