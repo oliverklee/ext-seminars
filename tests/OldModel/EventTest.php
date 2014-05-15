@@ -62,6 +62,11 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 */
 	protected $pi1 = NULL;
 
+	/**
+	 * @var int
+	 */
+	protected $placeRelationSorting = 1;
+
 	protected function setUp() {
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
@@ -142,8 +147,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->testingFramework->createRelation(
 			'tx_seminars_seminars_place_mm',
-			$this->fixture->getUid(), $uid
+			$this->fixture->getUid(), $uid, $this->placeRelationSorting
 		);
+		$this->placeRelationSorting++;
 		$this->fixture->setNumberOfPlaces(
 			$this->fixture->getNumberOfPlaces() + 1
 		);
@@ -4162,26 +4168,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	/**
-	 * @test
-	 */
-	public function getFirstOrganizerWithTwoOrganizersReturnsBothOrganizerNames() {
-		$this->markTestIncomplete('Complete me!');
-		$this->addOrganizerRelation(array('title' => 'foo'));
-		$this->addOrganizerRelation(array('title' => 'bar'));
-
-		$organizers = $this->fixture->getFirstOrganizer();
-
-		$this->assertContains(
-			'foo',
-			$organizers
-		);
-		$this->assertContains(
-			'bar',
-			$organizers
-		);
-	}
-
 
 	/*
 	 * Tests concerning getAttendancesPid
@@ -5609,7 +5595,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->addPlaceRelation(array('title' => 'another place'));
 
 		$this->assertContains(
-			'another place' . LF . 'a place',
+			'a place' . LF . 'another place',
 			$this->fixture->getPlaceWithDetailsRaw()
 		);
 	}

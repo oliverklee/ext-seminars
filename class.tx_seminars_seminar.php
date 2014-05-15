@@ -714,7 +714,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'title, address, zip, city, country, homepage, directions',
 			'tx_seminars_sites, tx_seminars_seminars_place_mm',
 			'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
-				tx_oelib_db::enableFields('tx_seminars_sites')
+				tx_oelib_db::enableFields('tx_seminars_sites'),
+			'',
+			'sorting ASC'
 		);
 	}
 
