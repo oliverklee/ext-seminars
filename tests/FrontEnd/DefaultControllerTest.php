@@ -165,8 +165,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		tx_seminars_registrationmanager::purgeInstance();
 		unset($this->fixture, $this->testingFramework, $this->linkBuilder);
 
-		t3lib_div::purgeInstances();
-
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
 	}
@@ -378,6 +376,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 	public function testAddTargetGroupRelationCreatesNewUids() {
+		$this->addTargetGroupRelation(array());
 		$this->assertNotEquals(
 			$this->addTargetGroupRelation(array()),
 			$this->addTargetGroupRelation(array())
@@ -1233,7 +1232,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFileLinkedToFile() {
+	/**
+	 * @test
+	 */
+	public function singleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFileLinkedToFile() {
 		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
@@ -1249,12 +1251,15 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertRegExp(
-			'/<a href="https?:\/\/[\w\d_\-\/\.]+' . $dummyFileName . '" >' . $dummyFileName . '<\/a>/',
+			'#<a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' . $dummyFileName . '</a>#',
 			$this->fixture->main('', array())
 		);
 	}
 
-	public function testSingleViewWithOneAttachedFileInSubfolderOfUploadFolderAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFileLinkedToFile() {
+	/**
+	 * @test
+	 */
+	public function singleViewWithOneAttachedFileInSubfolderOfUploadFolderAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFileLinkedToFile() {
 		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
@@ -1274,9 +1279,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
+
 		$this->assertRegExp(
-			'/<a href="https?:\/\/[\w\d_\-\/\.]+' . preg_quote($dummyFileName, '/') . '" >' .
-				basename($dummyFile) . '<\/a>/',
+			'#<a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' . basename($dummyFile) . '</a>#',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1359,7 +1364,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewWithOneAttachedFileAndLoggedInFeUserAndRegisteredContainsFileNameOfFileLinkedToFile() {
+	/**
+	 * @test
+	 */
+	public function singleViewWithOneAttachedFileAndLoggedInFeUserAndRegisteredContainsFileNameOfFileLinkedToFile() {
 		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->createLogInAndRegisterFeUser();
@@ -1376,12 +1384,15 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertRegExp(
-			'/<a href="https?:\/\/[\w\d_\-\/\.]+' . $dummyFileName . '" >' . $dummyFileName . '<\/a>/',
+			'#<a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' . $dummyFileName . '</a>#',
 			$this->fixture->main('', array())
 		);
 	}
 
-	public function testSingleViewWithOneAttachedFileInSubfolderOfUploadFolderAndLoggedInFeUserAndRegisteredContainsFileNameOfFileLinkedToFile() {
+	/**
+	 * @test
+	 */
+	public function singleViewWithOneAttachedFileInSubfolderOfUploadFolderAndLoggedInFeUserAndRegisteredContainsFileNameOfFileLinkedToFile() {
 		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
 		$this->createLogInAndRegisterFeUser();
@@ -1403,8 +1414,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertRegExp(
-			'/<a href="https?:\/\/[\w\d_\-\/\.]+' . preg_quote($dummyFileName, '/') . '" >' .
-				basename($dummyFile) . '<\/a>/',
+			'#<a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' . basename($dummyFile) . '</a>#',
 			$this->fixture->main('', array())
 		);
 	}
@@ -1467,13 +1477,15 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsCSSClassWithFileType() {
+	/**
+	 * @test
+	 */
+	public function singleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsCSSClassWithFileType() {
 		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
 		$dummyFile = $this->testingFramework->createDummyFile();
-		$dummyFileName =
-			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+		$dummyFileName = $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars',
@@ -1482,12 +1494,12 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 
 		$matches = array();
-		preg_match('/\.(\w+)$/', $dummyFileName, $matches);
+		preg_match('/\\.(\\w+)$/', $dummyFileName, $matches);
 
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 		$this->assertRegExp(
-			'/class="filetype-' . $matches[1] . '">' . '<a href="https?:\/\/[\w\d_\-\/\.]+' .
-				preg_quote($dummyFileName, '/') . '" >' . basename($dummyFile) . '<\/a>/',
+			'#class="filetype-' . $matches[1] . '"><a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName. '" *>' .
+				basename($dummyFile) . '</a>#',
 			$this->fixture->main('', array())
 		);
 	}
@@ -2187,7 +2199,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewForSeminarWithTwoDependenciesShowsTitleOfBothDependencies() {
+	/**
+	 * @test
+	 */
+	public function singleViewForSeminarWithTwoDependenciesShowsTitleOfBothDependencies() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
 			array(
@@ -2221,9 +2236,14 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 		$this->fixture->piVars['showUid'] = $this->seminarUid;
 
-		$this->assertRegExp(
-			'/depending_bar.*depending_foo/s',
-			$this->fixture->main('', array())
+		$renderedOutput = $this->fixture->main('', array());
+		$this->assertContains(
+			'depending_bar',
+			$renderedOutput
+		);
+		$this->assertContains(
+			'depending_foo',
+			$renderedOutput
 		);
 	}
 
@@ -6461,17 +6481,6 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledCanContainImageTagForOwnerPicture() {
-		$this->markTestIncomplete(
-			'Currently, FE image functions cannot be unit-tested yet.'
-		);
-	}
-
-	public function testSingleViewForSeminarWithOwnerWithoutImageAndOwnerDataEnabledNotContainsImageTag() {
-		$this->markTestIncomplete(
-			'Currently, FE image functions cannot be unit-tested yet.'
-		);
-	}
 
 	//////////////////////////////////////////////////////////////
 	// Tests concerning the registration link in the single view
