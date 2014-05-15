@@ -37,10 +37,10 @@ $EM_CONF[$_EXTKEY] = array(
 	'constraints' => array(
 		'depends' => array(
 			'php' => '5.3.0-5.5.99',
-			'typo3' => '4.5.0-6.1.99',
+			'typo3' => '4.5.0-6.2.99',
 			'cms' => '',
 			'css_styled_content' => '',
-			'oelib' => '0.7.75-',
+			'oelib' => '0.7.76-',
 			'ameos_formidable' => '1.1.563-1.9.99',
 			'static_info_tables' => '2.1.0-6.1.99',
 		),

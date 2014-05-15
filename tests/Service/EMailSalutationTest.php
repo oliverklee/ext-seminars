@@ -98,13 +98,16 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	}
 
 	/**
-	 * Checks whether the sr_feuser_register is installed ans marks the test as skipped if that extension is not installed.
+	 * Checks whether the FrontEndUser.gender fields exists and  marks the test as skipped if that extension is not installed.
 	 *
 	 * @return void
 	 */
-	protected function skipWithoutSrFeuserRegister() {
-		if (!t3lib_extMgm::isLoaded('sr_feuser_register')) {
-			$this->markTestSkipped('This test is skipped because it requires the sr_feuser_register extension to be installed.');
+	protected function skipWithoutGenderField() {
+		if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+			$this->markTestSkipped(
+				'This test is skipped because it requires FE user to have a gender field, e.g., ' .
+					'from the sr_feuser_register extension.'
+			);
 		}
 	}
 
@@ -125,7 +128,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function createFrontEndUserForGivenGenderAssignsGenderToFrontEndUser() {
-		$this->skipWithoutSrFeuserRegister();
+		$this->skipWithoutGenderField();
 
 		$this->assertSame(
 			tx_oelib_Model_FrontEndUser::GENDER_FEMALE,
@@ -152,7 +155,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSalutationForMaleUserReturnsMaleSalutation() {
-		$this->skipWithoutSrFeuserRegister();
+		$this->skipWithoutGenderField();
 
 		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_MALE);
 
@@ -166,7 +169,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSalutationForMaleUserReturnsUsersNameWithGenderSpecificTitle() {
-		$this->skipWithoutSrFeuserRegister();
+		$this->skipWithoutGenderField();
 
 		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_MALE);
 
@@ -181,7 +184,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSalutationForFemaleUserReturnsFemaleSalutation() {
-		$this->skipWithoutSrFeuserRegister();
+		$this->skipWithoutGenderField();
 
 		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE);
 
@@ -196,7 +199,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSalutationForFemaleUserReturnsUsersNameWithGenderSpecificTitle() {
-		$this->skipWithoutSrFeuserRegister();
+		$this->skipWithoutGenderField();
 
 		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE);
 

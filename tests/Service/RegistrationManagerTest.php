@@ -3274,11 +3274,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function notifyAttendeeForFormalSalutationAndGenderUnknownContainsFormalUnknownSalutation() {
-		if (t3lib_extMgm::isLoaded('sr_feuser_register')) {
-			$this->markTestSkipped(
-				'This test is only applicable if sr_feuser_register is ' .
-					'not loaded.'
-			);
+		if (Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+			$this->markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
 		}
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
@@ -3307,11 +3304,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function notifyAttendeeForFormalSalutationAndGenderMaleContainsFormalMaleSalutation() {
-		if (!t3lib_extMgm::isLoaded('sr_feuser_register')) {
-			$this->markTestSkipped(
-				'This test is only applicable if sr_feuser_register is ' .
-					'loaded.'
-			);
+		if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+			$this->markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
 		}
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
@@ -3340,11 +3334,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function notifyAttendeeForFormalSalutationAndGenderFemaleContainsFormalFemaleSalutation() {
-		if (!t3lib_extMgm::isLoaded('sr_feuser_register')) {
-			$this->markTestSkipped(
-				'This test is only applicable if sr_feuser_register is ' .
-					'loaded.'
-			);
+		if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+			$this->markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
 		}
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);

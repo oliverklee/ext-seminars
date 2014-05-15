@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4649] Fix: Also recognize first/last name for current TYPO3 versions
 - [#5024] Fix: Test errors in tx_seminars_OldModel_RegistrationTest in TYPO3 CMS 6.1
 - [#5023] Fix: Test failures in tx_seminars_FrontEnd_EventEditorTest in TYPO3 CMS 6.1
 - [#5026] Fix: Deprecation messages about the flash message API in TYPO3 CMS 6.1
