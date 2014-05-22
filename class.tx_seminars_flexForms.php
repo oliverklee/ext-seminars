@@ -138,7 +138,6 @@ class tx_seminars_flexForms {
 	 *               available for selection
 	 */
 	public function getEntriesFromGeneralStoragePage(array $configuration) {
-		$storagePid = 0;
 		$whereClause = '1 = 1';
 		$table = $configuration['config']['itemTable'];
 

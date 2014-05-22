@@ -211,19 +211,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		return $result;
 	}
 
-	/**
-	 * Skips the current test if TYPO3 CMS is >= 6.0 (due to the root-line cache).
-	 *
-	 * @return void
-	 */
-	protected function skipTestForRootLineCache() {
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 6000000) {
-			$this->markTestSkipped(
-				'This test is skipped because TYPO3 CMS >= 6.0 has a root-line cache which makes this test fragile.'
-			);
-		}
-	}
-
 	/*
 	 * Tests for the utility functions.
 	 */
@@ -676,8 +663,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListCategoriesForSetStoragePageReturnsRecordWithThisPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -699,8 +684,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListCategoriesForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -725,8 +708,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListCategoriesForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -748,8 +729,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListCategoriesForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -813,8 +792,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListEventTypesForSetStoragePageReturnsRecordWithThisPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -836,8 +813,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListEventTypesForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -862,8 +837,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListEventTypesForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -885,8 +858,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListEventTypesForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -950,8 +921,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListLodgingsForSetStoragePageReturnsRecordWithThisPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -973,8 +942,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListLodgingsForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -999,8 +966,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListLodgingsForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1022,8 +987,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListLodgingsForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1087,8 +1050,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListFoodsForSetStoragePageReturnsRecordWithThisPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1110,8 +1071,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListFoodsForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1136,8 +1095,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListFoodsForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1159,8 +1116,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListFoodsForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1224,8 +1179,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListPaymentMethodsForSetStoragePageReturnsRecordWithThisPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1247,8 +1200,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListPaymentMethodsForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1273,8 +1224,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListPaymentMethodsForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1296,8 +1245,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListPaymentMethodsForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1361,8 +1308,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListOrganizersForSetStoragePageReturnsRecordWithThisPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1384,8 +1329,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListOrganizersForSetStoragePageAndUseStoragePageSetDoesNotReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1410,8 +1353,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListOrganizersForSetStoragePageAndUseStoragePageNotSetReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1433,8 +1374,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListOrganizersForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1459,8 +1398,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListOrganizersForSetStoragePageAndAuxiliaryRecordsConfigurationPidReturnsRecordWithAuxiliaryPid() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1622,8 +1559,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListPlacesForSetStoragePageReturnsRecordWithThisPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1648,8 +1583,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListPlacesForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1677,8 +1610,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListPlacesForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1703,8 +1634,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListPlacesForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1817,8 +1746,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListCheckboxesForSetStoragePageReturnsRecordWithThisPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1843,8 +1770,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListCheckboxesForSetStoragePageAndUseStoragePageSetDoesNotReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1872,8 +1797,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListCheckboxesForSetStoragePageAndUseStoragePageNotSetReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -1898,8 +1821,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListCheckboxesForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -2011,8 +1932,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListTargetGroupsForSetStoragePageReturnsRecordWithThisPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -2037,8 +1956,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListTargetGroupsForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -2066,8 +1983,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListTargetGroupsForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -2092,8 +2007,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListTargetGroupsForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -2205,8 +2118,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListSpeakersForSetStoragePageReturnsRecordWithThisPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -2231,8 +2142,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListSpeakersForSetStoragePageAndUseStoragePageSetDoesNotReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -2260,8 +2169,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListSpeakersForSetStoragePageAndUseStoragePageNotSetReturnsRecordWithOtherPageId() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
@@ -2286,8 +2193,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function populateListSpeakersForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid() {
-		$this->skipTestForRootLineCache();
-
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
