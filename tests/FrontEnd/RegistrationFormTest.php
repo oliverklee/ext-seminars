@@ -509,6 +509,10 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getFeUserDataWithKeyCountryAndStaticInfoCountrySetReturnsStaticInfoCountry() {
+		if (!t3lib_extMgm::isLoaded('sr_feuser_register')) {
+			$this->markTestSkipped('This test only is available is sr_feuser_register is installed.');
+		}
+
 		$this->testingFramework->createAndLoginFrontEndUser(
 			'', array('static_info_country' => 'GBR')
 		);
