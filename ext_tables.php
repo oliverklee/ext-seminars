@@ -18,6 +18,9 @@ $extIconRelPath = $extRelPath . 'Resources/Public/Icons/';
 $tcaPath = $extPath . 'Configuration/TCA/tca.php';
 
 if (TYPO3_MODE === 'BE') {
+	t3lib_extMgm::addModulePath(
+		'web_txseminarsM2', t3lib_extMgm::extPath($_EXTKEY) . 'BackEnd/'
+	);
 	t3lib_extMgm::addModule('web', 'txseminarsM2', '', $extPath . 'BackEnd/');
 }
 
