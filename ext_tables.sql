@@ -386,7 +386,6 @@ CREATE TABLE tx_seminars_attendances (
 	registered_themselves tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	total_price decimal(10,3) DEFAULT '0.000' NOT NULL,
 	currency int(11) unsigned DEFAULT '0' NOT NULL,
-	tax int(11) unsigned DEFAULT '0' NOT NULL,
 	including_tax tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	attendees_names text,
 	additional_persons int(11) unsigned DEFAULT '0' NOT NULL,

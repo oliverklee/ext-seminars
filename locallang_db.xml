@@ -125,7 +125,6 @@
 			<label index="tx_seminars_attendances.price">Price to pay:</label>
 			<label index="tx_seminars_attendances.total_price">Total price for this attendance:</label>
 			<label index="tx_seminars_attendances.currency">Currency of total price:</label>
-			<label index="tx_seminars_attendances.tax">Tax of total price:</label>
 			<label index="tx_seminars_attendances.including_tax">Including/excluding Tax:</label>
 			<label index="tx_seminars_attendances.including_tax.including">including</label>
 			<label index="tx_seminars_attendances.including_tax.excluding">excluding</label>
@@ -342,7 +341,6 @@
 			<label index="tx_seminars_attendances.price">zu bezahlender Preis:</label>
 			<label index="tx_seminars_attendances.total_price">Gesamtpreis dieser Buchung:</label>
 			<label index="tx_seminars_attendances.currency">Währung des Gesamtpreises:</label>
-			<label index="tx_seminars_attendances.tax">Steuern des Gesamtpreises:</label>
 			<label index="tx_seminars_attendances.including_tax">Inklusive/exklusive Steuern:</label>
 			<label index="tx_seminars_attendances.including_tax.including">inklusive</label>
 			<label index="tx_seminars_attendances.including_tax.excluding">exklusive</label>
@@ -1155,7 +1153,6 @@
 			<label index="tx_seminars_attendances.price">Prix à payer :</label>
 			<label index="tx_seminars_attendances.total_price">Prix total pour cette participation :</label>
 			<label index="tx_seminars_attendances.currency">Monnaie utilisée pour le prix total</label>
-			<label index="tx_seminars_attendances.tax">Taxes du prix total :</label>
 			<label index="tx_seminars_attendances.including_tax">Taxes inclues/exclues :</label>
 			<label index="tx_seminars_attendances.including_tax.including">inclus</label>
 			<label index="tx_seminars_attendances.including_tax.excluding">exclu</label>
@@ -1358,7 +1355,6 @@
 			<label index="tx_seminars_attendances.price" type="integer">253734840</label>
 			<label index="tx_seminars_attendances.total_price" type="integer">83487492</label>
 			<label index="tx_seminars_attendances.currency" type="integer">138834788</label>
-			<label index="tx_seminars_attendances.tax" type="integer">258035818</label>
 			<label index="tx_seminars_attendances.including_tax" type="integer">222008293</label>
 			<label index="tx_seminars_attendances.including_tax.including" type="integer">129466687</label>
 			<label index="tx_seminars_attendances.including_tax.excluding" type="integer">195388725</label>
@@ -2246,7 +2242,6 @@
 			<label index="tx_seminars_attendances.divLabelPaymentInformation" type="integer">97718815</label>
 			<label index="tx_seminars_attendances.divLabelBillingAddress" type="integer">42621189</label>
 			<label index="tx_seminars_attendances.currency" type="integer">138834788</label>
-			<label index="tx_seminars_attendances.tax" type="integer">258035818</label>
 			<label index="tx_seminars_attendances.including_tax" type="integer">222008293</label>
 			<label index="tx_seminars_attendances.including_tax.including" type="integer">129466687</label>
 			<label index="tx_seminars_attendances.including_tax.excluding" type="integer">195388725</label>
@@ -2371,7 +2366,6 @@
 			<label index="tx_seminars_attendances.registration_queue">Is on the registration queue:</label>
 			<label index="tx_seminars_attendances.total_price">Total price for this attendance:</label>
 			<label index="tx_seminars_attendances.currency">Currency of total price:</label>
-			<label index="tx_seminars_attendances.tax">Tax of total price:</label>
 			<label index="tx_seminars_attendances.including_tax">Including/excluding Tax:</label>
 			<label index="tx_seminars_attendances.including_tax.including">including</label>
 			<label index="tx_seminars_attendances.including_tax.excluding">excluding</label>
@@ -3275,7 +3269,6 @@
 			<label index="tx_seminars_attendances.divLabelPaymentInformation">Payment Information</label>
 			<label index="tx_seminars_attendances.divLabelBillingAddress">Billing Address</label>
 			<label index="tx_seminars_attendances.currency">Currency of total price:</label>
-			<label index="tx_seminars_attendances.tax">Tax of total price:</label>
 			<label index="tx_seminars_attendances.including_tax">Including/excluding Tax:</label>
 			<label index="tx_seminars_attendances.including_tax.including">including</label>
 			<label index="tx_seminars_attendances.including_tax.excluding">excluding</label>

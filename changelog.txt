@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#5071] Fix: Drop any reference to static_info_tables_taxes
 - [#4836] Fix: Add compatibility with static_info_tables 2.3.x-6.0.x
 - [#5070] Fix: Test failure if sr_feuser_register is not installed
 - [#5062] Fix: Test crash in tx_seminars_OldModel_EventTest in 6.2
