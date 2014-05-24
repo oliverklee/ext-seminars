@@ -47,6 +47,54 @@ if (!function_exists('txSeminarsGetTableRelationsClause')) {
 	}
 }
 
+if (!function_exists('user_createLanguageSelector')) {
+	/**
+	 * Creates the values for a language selector in the TCA, using the alpha 2 codes as array keys.
+	 *
+	 * @param array $parameters
+	 *
+	 * @return void
+	 */
+	function user_createLanguageSelector(array &$parameters) {
+		$parameters['items'] = array(array('', ''));
+
+		$table = 'static_languages';
+		$titleField = 'lg_name_local';
+		$keyField = 'lg_iso_2';
+		$allFields = $keyField . ', ' . $titleField;
+
+		$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($allFields, $table, '1 = 1' . t3lib_BEfunc::deleteClause($table), '', $titleField);
+		/** @var $row string[] */
+		foreach ($rows as $row) {
+			$parameters['items'][] = array($row[$titleField], $row[$keyField]);
+		}
+	}
+}
+
+if (!function_exists('user_createCountrySelector')) {
+	/**
+	 * Creates the values for a country selector in the TCA, using the alpha 2 codes as array keys.
+	 *
+	 * @param array $parameters
+	 *
+	 * @return void
+	 */
+	function user_createCountrySelector(array &$parameters) {
+		$parameters['items'] = array(array('', ''));
+
+		$table = 'static_countries';
+		$titleField = 'cn_short_local';
+		$keyField = 'cn_iso_2';
+		$allFields = $keyField . ', ' . $titleField;
+
+		$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($allFields, $table, '1 = 1' . t3lib_BEfunc::deleteClause($table), '', $titleField);
+		/** @var $row string[] */
+		foreach ($rows as $row) {
+			$parameters['items'][] = array($row[$titleField], $row[$keyField]);
+		}
+	}
+}
+
 // unserializes the configuration array
 $globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
 $usePageBrowser = (boolean) $globalConfiguration['usePageBrowser'];
@@ -568,12 +616,7 @@ $TCA['tx_seminars_seminars'] = array(
 				'items' => array(
 					array('', ''),
 				),
-				'itemsProcFunc' => 'tx_staticinfotables_div->selectItemsTCA',
-				'itemsProcFunc_config' => array(
-					'table' => 'static_languages',
-					'where' => '',
-					'indexField' => 'lg_iso_2',
-				),
+				'itemsProcFunc' => 'user_createLanguageSelector',
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
@@ -1790,12 +1833,7 @@ $TCA['tx_seminars_sites'] = array(
 				'items' => array(
 					array('', 0),
 				),
-				'itemsProcFunc' => 'tx_staticinfotables_div->selectItemsTCA',
-				'itemsProcFunc_config' => array(
-					'table' => 'static_countries',
-					'where' => '',
-					'indexField' => 'cn_iso_2',
-				),
+				'itemsProcFunc' => 'user_createCountrySelector',
 			'size' => 1,
 			'minitems' => 0,
 			'maxitems' => 1,
