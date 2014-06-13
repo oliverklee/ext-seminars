@@ -258,7 +258,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 		);
 
 		$this->assertContains(
-			'<img src="../Resources/Public/Icons/Canceled.png" title="canceled" alt="canceled" />',
+			'<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Canceled.png" title="canceled" alt="canceled"/>',
 			$this->fixture->show()
 		);
 	}
@@ -273,7 +273,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 		);
 
 		$this->assertContains(
-			'<img src="../Resources/Public/Icons/Confirmed.png" title="confirmed" alt="confirmed" />',
+			'<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Confirmed.png" title="confirmed" alt="confirmed"/>',
 			$this->fixture->show()
 		);
 	}
@@ -288,12 +288,12 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 		);
 
 		$this->assertNotContains(
-			'<img src="../Resources/Public/Icons/Canceled.png" title="canceled" alt="canceled" />',
+			'<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Canceled.png" title="canceled" alt="canceled"/>',
 			$this->fixture->show()
 		);
 
 		$this->assertNotContains(
-			'<img src="../Resources/Public/Icons/Confirmed.png" title="confirmed" alt="confirmed" />',
+			'<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Confirmed.png" title="confirmed" alt="confirmed"/>',
 			$this->fixture->show()
 		);
 	}
@@ -586,7 +586,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 		);
 
 		$this->assertContains(
-			'<a href="CSV.php?id=' .
+			'<a href="mod.php?M=web_txseminarsM2&amp;csv=1&amp;id=' .
 				$this->dummySysFolderPid .
 				'&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
 				'&amp;tx_seminars_pi2[eventUid]=' . $eventUid . '">',
@@ -616,7 +616,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 		);
 
 		$this->assertNotContains(
-			'<a href="CSV.php?id=' .
+			'<a href="mod.php?M=web_txseminarsM2&amp;csv=1&amp;id=' .
 				$this->dummySysFolderPid .
 				'&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
 				'&amp;tx_seminars_pi2[eventUid]=' . $eventUid . '">',

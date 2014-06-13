@@ -111,7 +111,7 @@ class tx_seminars_BackEnd_SpeakersListTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'gfx/button_hide.gif',
+			'Icons/Hide.gif',
 			$this->fixture->show()
 		);
 	}
@@ -129,7 +129,7 @@ class tx_seminars_BackEnd_SpeakersListTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'gfx/button_unhide.gif',
+			'Icons/Unhide.gif',
 			$this->fixture->show()
 		);
 	}

@@ -334,7 +334,7 @@ class tx_seminars_BackEnd_RegistrationsListTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertContains(
-			'CSV.php',
+			'mod.php?M=web_txseminarsM2&amp;csv=1',
 			$this->fixture->show()
 		);
 	}
@@ -349,7 +349,7 @@ class tx_seminars_BackEnd_RegistrationsListTest extends tx_phpunit_testcase {
 		);
 
 		$this->assertNotContains(
-			'CSV.php',
+			'mod.php?M=web_txseminarsM2&amp;csv=1',
 			$this->fixture->show()
 		);
 	}

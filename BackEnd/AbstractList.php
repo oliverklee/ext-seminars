@@ -95,24 +95,20 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 * @return string the HTML source code to return
 	 */
 	public function getEditIcon($uid, $pageUid) {
-		global $BACK_PATH, $LANG, $BE_USER;
-
 		$result = '';
 
-		if ($BE_USER->check('tables_modify', $this->tableName)
+		if ($GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
 			&& $this->doesUserHaveAccess($pageUid)
 		) {
 			$params = '&edit['.$this->tableName.']['.$uid.']=edit';
-			$editOnClick = $this->editNewUrl($params, $BACK_PATH);
-			$langEdit = $LANG->getLL('edit');
-			$result = '<a href="'.htmlspecialchars($editOnClick).'">'
-				.'<img '
-				.t3lib_iconWorks::skinImg(
-					$BACK_PATH,
-					'gfx/edit2.gif',
-					'width="11" height="12"')
-				.' title="'.$langEdit.'" alt="'.$langEdit.'" class="icon" />'
-				.'</a>';
+			$editOnClick = $this->editNewUrl($params, $GLOBALS['BACK_PATH']);
+			$langEdit = $GLOBALS['LANG']->getLL('edit');
+
+			$result = '<a href="' .
+				htmlspecialchars($editOnClick) . '">' .
+				'<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/Edit.gif' .
+				'" title="' . $langEdit . '" alt="' . $langEdit . '" class="icon" />' .
+				'</a>';
 		}
 
 		return $result;
@@ -128,7 +124,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 * @return string the HTML source code to return
 	 */
 	public function getDeleteIcon($uid, $pageUid) {
-		global $BACK_PATH, $LANG, $BE_USER;
+		global $LANG, $BE_USER;
 
 		$result = '';
 
@@ -150,17 +146,12 @@ abstract class tx_seminars_BackEnd_AbstractList {
 					.$referenceWarning)
 				.')) {return true;} else {return false;}');
 			$langDelete = $LANG->getLL('delete', 1);
-			$result = '<a href="'
-				.htmlspecialchars($this->page->doc->issueCommand($params))
-				.'" onclick="'.$confirmation.'">'
-				.'<img'
-				.t3lib_iconWorks::skinImg(
-					$BACK_PATH,
-					'gfx/garbage.gif',
-					'width="11" height="12"'
-				)
-				.' title="'.$langDelete.'" alt="'.$langDelete
-				.'" class="deleteicon" /></a>';
+			$result = '<a href="' .
+				htmlspecialchars($this->page->doc->issueCommand($params)) .
+				'" onclick="' . $confirmation . '">' .
+				'<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/Garbage.gif' .
+				'" title="' . $langDelete . '" alt="' . $langDelete . '" class="deleteicon" />' .
+				'</a>';
 		}
 
 		return $result;
@@ -305,19 +296,14 @@ abstract class tx_seminars_BackEnd_AbstractList {
 		$result = TAB . TAB .
 			'<div id="typo3-csvLink">' . LF .
 			TAB . TAB . TAB .
-			'<a href="CSV.php?id=' . $pageData['uid'] .
+			'<a href="mod.php?M=web_txseminarsM2&amp;csv=1&amp;id=' . $pageData['uid'] .
 			'&amp;tx_seminars_pi2[table]=' . $this->tableName .
 			$this->getAdditionalCsvParameters() . '">' . LF .
 			TAB . TAB . TAB . TAB .
-			'<img' .
-			t3lib_iconWorks::skinImg(
-				$BACK_PATH,
-				'gfx/csv.gif',
-				'width="27" height="14"'
-			) .
+			'<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/Csv.gif" title="' .
+			$langCsv . '" alt="" class="icon" />' .
 			// We use an empty alt attribute as we already have a textual
 			// representation directly next to the icon.
-			' title="' . $langCsv . '" alt="" />' . LF .
 			TAB . TAB . TAB . TAB .
 			$langCsv . LF .
 			TAB . TAB . TAB .
@@ -340,31 +326,25 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 * @return string the HTML source code of the linked hide or unhide icon
 	 */
 	protected function getHideUnhideIcon($uid, $pageUid, $hidden) {
-		global $BACK_PATH, $LANG, $BE_USER;
 		$result = '';
 
-		if ($BE_USER->check('tables_modify', $this->tableName)
+		if ($GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
 			&& $this->doesUserHaveAccess($pageUid)
 		) {
 			if ($hidden) {
 				$params = '&data[' . $this->tableName . '][' . $uid . '][hidden]=0';
-				$icon = 'gfx/button_unhide.gif';
-				$langHide = $LANG->getLL('unHide');
+				$icon = 'Unhide.gif';
+				$langHide = $GLOBALS['LANG']->getLL('unHide');
 			} else {
 				$params = '&data[' . $this->tableName . '][' . $uid . '][hidden]=1';
-				$icon = 'gfx/button_hide.gif';
-				$langHide = $LANG->getLL('hide');
+				$icon = 'Hide.gif';
+				$langHide = $GLOBALS['LANG']->getLL('hide');
 			}
 
 			$result = '<a href="' .
 				htmlspecialchars($this->page->doc->issueCommand($params)) . '">' .
-				'<img' .
-				t3lib_iconWorks::skinImg(
-					$BACK_PATH,
-					$icon,
-					'width="11" height="12"'
-				) .
-				' title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
+				'<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/' . $icon .
+				'" title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
 				'</a>';
 		}
 

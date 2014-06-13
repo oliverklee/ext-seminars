@@ -103,12 +103,12 @@ td.email_button button p {
 }
 
 td.confirm_button button p {
-	background: transparent url(../Resources/Public/Icons/Confirmed.png) no-repeat  top left;
+	background: transparent url(../../typo3conf/ext/seminars/Resources/Public/Icons/Confirmed.png) no-repeat  top left;
 	padding: 0 0 0 17px;
 }
 
 td.cancel_button button p {
-	background: transparent url(../Resources/Public/Icons/Canceled.png) no-repeat top left;
+	background: transparent url(../../typo3conf/ext/seminars/Resources/Public/Icons/Canceled.png) no-repeat top left;
 	padding: 0 0 0 17px;
 }
 
@@ -136,11 +136,11 @@ td.cancel_button button p {
 }
 
 #EventMailForm .confirmEvent p {
-	background: transparent url(../Resources/Public/Icons/Confirmed.png) no-repeat top left;
+	background: transparent url(../../typo3conf/ext/seminars/Resources/Public/Icons/Confirmed.png) no-repeat top left;
 }
 
 #EventMailForm .cancelEvent p {
-	background: transparent url(../Resources/Public/Icons/Canceled.png) no-repeat top left;
+	background: transparent url(../../typo3conf/ext/seminars/Resources/Public/Icons/Canceled.png) no-repeat top left;
 }
 
 #EventMailForm .backButton {

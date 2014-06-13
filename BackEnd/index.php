@@ -168,7 +168,8 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		// rights to show any of the tabs.
 		if ($this->subModule) {
 			$this->content .= $this->doc->getTabMenu(
-				array('id' => $this->id), 'subModule', $this->subModule, $this->availableSubModules
+				array('M' => 'web_txseminarsM2', 'id' => $this->id),
+				'subModule', $this->subModule, $this->availableSubModules
 			);
 			$this->content .= $this->doc->spacer(5);
 		}
@@ -348,21 +349,23 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	}
 }
 
-if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/index.php']) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/BackEnd/index.php']);
-}
-
 // This checks permissions and exits if the users has no permission for entry.
 $GLOBALS['BE_USER']->modAccess($GLOBALS['MCONF'], TRUE);
 
-$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_common.xml');
-$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_show_rechis.xml');
-$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_mod_web_list.xml');
-$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
-$GLOBALS['LANG']->includeLLFile('EXT:seminars/pi2/locallang.xml');
+if (t3lib_div::_GET('csv') !== '1') {
+	$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_common.xml');
+	$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_show_rechis.xml');
+	$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_mod_web_list.xml');
+	$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
+	$GLOBALS['LANG']->includeLLFile('EXT:seminars/pi2/locallang.xml');
 
-/** @var $SOBE tx_seminars_module2 */
-$SOBE = t3lib_div::makeInstance('tx_seminars_module2');
-$SOBE->init();
+	/** @var $SOBE tx_seminars_module2 */
+	$SOBE = t3lib_div::makeInstance('tx_seminars_module2');
+	$SOBE->init();
 
-$SOBE->main();
+	$SOBE->main();
+} else {
+	/** @var $csvExporter tx_seminars_pi2 */
+	$csvExporter = t3lib_div::makeInstance('tx_seminars_pi2');
+	echo $csvExporter->main();
+}

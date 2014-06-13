@@ -135,9 +135,8 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			$this->redirectToListView();
 		}
 
-		return '<fieldset id="EventMailForm"><form action="index.php?id=' .
-			tx_oelib_PageFinder::getInstance()->getPageUid() .
-			'&amp;subModule=1" method="post">' .
+		return '<fieldset id="EventMailForm"><form action="mod.php?M=web_txseminarsM2&amp;id=' .
+			tx_oelib_PageFinder::getInstance()->getPageUid() . '" method="post">' .
 			$this->createSenderFormElement() .
 			$this->createSubjectFormElement() .
 			$this->createMessageBodyFormElement() .
@@ -433,7 +432,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 				$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')
 					->find($oldRegistration->getUid());
 				$user = $registration->getFrontEndUser();
-				if (!$user->hasEMailAddress()) {
+				if (($user === NULL) || !$user->hasEMailAddress()) {
 					continue;
 				}
 				$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
@@ -510,7 +509,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	private function redirectToListView() {
 		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 			'Location: ' . t3lib_div::locationHeaderUrl(
-				'/typo3conf/ext/seminars/BackEnd/index.php?id=' .
+				'/typo3/mod.php?M=web_txseminarsM2&id=' .
 				tx_oelib_PageFinder::getInstance()->getPageUid()
 		));
 	}

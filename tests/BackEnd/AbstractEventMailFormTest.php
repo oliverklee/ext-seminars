@@ -189,7 +189,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		tx_oelib_PageFinder::getInstance()->setPageUid(42);
 
 		$this->assertContains(
-			'?id=42',
+			'&amp;id=42',
 			$this->fixture->render()
 		);
 	}
@@ -813,9 +813,9 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 		$this->fixture->render();
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Location: ' . t3lib_div::locationHeaderUrl(
-				'/typo3conf/ext/seminars/BackEnd/index.php?id=' .
+				'/typo3/mod.php?M=web_txseminarsM2&id=' .
 				tx_oelib_PageFinder::getInstance()->getPageUid()
 			),
 			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
