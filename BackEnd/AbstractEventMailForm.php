@@ -33,6 +33,11 @@
  */
 abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
+	 * @var string
+	 */
+	const MODULE_NAME = 'web_txseminarsM2';
+
+	/**
 	 * @var tx_seminars_seminar the event which this e-mail form refers to
 	 */
 	private $oldEvent = NULL;
@@ -135,8 +140,11 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			$this->redirectToListView();
 		}
 
-		return '<fieldset id="EventMailForm"><form action="mod.php?M=web_txseminarsM2&amp;id=' .
-			tx_oelib_PageFinder::getInstance()->getPageUid() . '" method="post">' .
+		$formAction = t3lib_BEfunc::getModuleUrl(
+			self::MODULE_NAME, array('id' => tx_oelib_PageFinder::getInstance()->getPageUid())
+		);
+
+		return '<fieldset id="EventMailForm"><form action="' . htmlspecialchars($formAction) . '" method="post">' .
 			$this->createSenderFormElement() .
 			$this->createSubjectFormElement() .
 			$this->createMessageBodyFormElement() .
@@ -507,11 +515,10 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * @return void
 	 */
 	private function redirectToListView() {
-		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-			'Location: ' . t3lib_div::locationHeaderUrl(
-				'/typo3/mod.php?M=web_txseminarsM2&id=' .
-				tx_oelib_PageFinder::getInstance()->getPageUid()
-		));
+		$url = t3lib_BEfunc::getModuleUrl(
+			self::MODULE_NAME, array('id' => tx_oelib_PageFinder::getInstance()->getPageUid()), FALSE, TRUE
+		);
+		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' .  $url);
 	}
 
 	/**

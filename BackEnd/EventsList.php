@@ -295,10 +295,17 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 		$imageTag = '<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/Csv.gif" title="' .
 			$langCsv . '" alt="' . $langCsv . '" class="icon" />';
 
-		return '<a href="mod.php?M=web_txseminarsM2&amp;csv=1&amp;id=' . $pageData['uid'] .
-			'&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
-			'&amp;tx_seminars_pi2[eventUid]=' . $event->getUid() . '">' .
-			$imageTag . '</a>&nbsp;';
+		$csvUrl = t3lib_BEfunc::getModuleUrl(
+			self::MODULE_NAME,
+			array(
+				'id' => $pageData['uid'],
+				'csv' => '1',
+				'tx_seminars_pi2[table]' => 'tx_seminars_attendances',
+				'tx_seminars_pi2[eventUid]' => $event->getUid()
+			)
+		);
+
+		return '<a href="' . htmlspecialchars($csvUrl) . '">' . $imageTag . '</a>&nbsp;';
 	}
 
 	/**
@@ -334,10 +341,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 		$pageData = $this->page->getPageData();
 
 		$this->template->setMarker('uid', $event->getUid());
-		$this->template->setMarker(
-			'email_button_url',
-			'mod.php?M=web_txseminarsM2&amp;id=' . $pageData['uid'] . '&amp;subModule=1'
-		);
+		$buttonUrl = t3lib_BEfunc::getModuleUrl(self::MODULE_NAME, array('id' => $pageData['uid']));
+		$this->template->setMarker('email_button_url', htmlspecialchars($buttonUrl));
 		$this->template->setMarker(
 			'label_email_button',
 			$GLOBALS['LANG']->getLL('eventlist_button_email')
@@ -367,10 +372,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 			&& $this->doesUserHaveAccess($event->getPageUid())
 		) {
 			$this->template->setMarker('uid', $event->getUid());
-			$this->template->setMarker(
-				'cancel_button_url',
-				'mod.php?M=web_txseminarsM2&amp;id=' . $pageData['uid'] . '&amp;subModule=1'
-			);
+			$buttonUrl = t3lib_BEfunc::getModuleUrl(self::MODULE_NAME, array('id' => $pageData['uid']));
+			$this->template->setMarker('cancel_button_url', htmlspecialchars($buttonUrl));
 			$this->template->setMarker(
 				'label_cancel_button',
 				$GLOBALS['LANG']->getLL('eventlist_button_cancel')
@@ -403,10 +406,8 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 			&& $this->doesUserHaveAccess($event->getPageUid())
 		) {
 			$this->template->setMarker('uid', $event->getUid());
-			$this->template->setMarker(
-				'confirm_button_url',
-				'mod.php?M=web_txseminarsM2&amp;id=' . $pageData['uid'] . '&amp;subModule=1'
-			);
+			$buttonUrl = t3lib_BEfunc::getModuleUrl(self::MODULE_NAME, array('id' => $pageData['uid']));
+			$this->template->setMarker('confirm_button_url', htmlspecialchars($buttonUrl));
 			$this->template->setMarker(
 				'label_confirm_button',
 				$GLOBALS['LANG']->getLL('eventlist_button_confirm')
@@ -441,10 +442,11 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	private function createEventRegistrationsLink(tx_seminars_seminar $event) {
 		$pageData = $this->page->getPageData();
 
-		return '<a href="mod.php?id=' . $pageData['uid'] .
-			'&amp;M=web_txseminarsM2&amp;subModule=2&amp;eventUid=' . $event->getUid() . '">' .
-			$GLOBALS['LANG']->getLL('label_show_event_registrations') .
-			'</a>';
+		$url = t3lib_BEfunc::getModuleUrl(
+			self::MODULE_NAME, array('id' => $pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid())
+		);
+		return '<a href="' . htmlspecialchars($url) . '">' .
+			$GLOBALS['LANG']->getLL('label_show_event_registrations') . '</a>';
 	}
 }
 

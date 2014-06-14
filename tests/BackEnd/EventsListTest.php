@@ -586,10 +586,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 		);
 
 		$this->assertContains(
-			'<a href="mod.php?M=web_txseminarsM2&amp;csv=1&amp;id=' .
-				$this->dummySysFolderPid .
-				'&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
-				'&amp;tx_seminars_pi2[eventUid]=' . $eventUid . '">',
+			'=' . $eventUid,
 			$this->fixture->show()
 		);
 	}

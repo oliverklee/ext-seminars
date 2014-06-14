@@ -33,6 +33,11 @@
  */
 abstract class tx_seminars_BackEnd_AbstractList {
 	/**
+	 * @var string
+	 */
+	const MODULE_NAME = 'web_txseminarsM2';
+
+	/**
 	 * @var string the name of the table we're working on
 	 */
 	protected $tableName = '';
@@ -274,8 +279,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 * @return string the URL to return
 	 */
 	protected function editNewUrl($params, $backPath = '') {
-		$returnUrl = 'returnUrl=' .
-			rawurlencode(t3lib_div::getIndpEnv('REQUEST_URI'));
+		$returnUrl = 'returnUrl=' . rawurlencode(t3lib_div::getIndpEnv('REQUEST_URI'));
 
 		return $backPath . 'alt_doc.php?' . $returnUrl . $params;
 	}
@@ -289,15 +293,17 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 * @return string the HTML source code of the linked CSV icon
 	 */
 	protected function getCsvIcon() {
-		global $BACK_PATH, $LANG;
-
 		$pageData = $this->page->getPageData();
-		$langCsv = $LANG->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
+		$langCsv = $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
+		$csvUrl = t3lib_BEfunc::getModuleUrl(
+			self::MODULE_NAME,
+			array('id' => $pageData['uid'], 'csv' => '1', 'tx_seminars_pi2[table]' => $this->tableName)
+		);
+
 		$result = TAB . TAB .
 			'<div id="typo3-csvLink">' . LF .
 			TAB . TAB . TAB .
-			'<a href="mod.php?M=web_txseminarsM2&amp;csv=1&amp;id=' . $pageData['uid'] .
-			'&amp;tx_seminars_pi2[table]=' . $this->tableName .
+			'<a href="' . htmlspecialchars($csvUrl) .
 			$this->getAdditionalCsvParameters() . '">' . LF .
 			TAB . TAB . TAB . TAB .
 			'<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/Csv.gif" title="' .

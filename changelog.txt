@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#4114] Fix: Use the Core form tokens in the BE modules
 - [#5072] Change: Switch the BE module to the module dispatcher
 - [#5071] Fix: Drop any reference to static_info_tables_taxes
 - [#4836] Fix: Add compatibility with static_info_tables 2.3.x-6.0.x

@@ -814,9 +814,9 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$this->fixture->render();
 
 		$this->assertSame(
-			'Location: ' . t3lib_div::locationHeaderUrl(
-				'/typo3/mod.php?M=web_txseminarsM2&id=' .
-				tx_oelib_PageFinder::getInstance()->getPageUid()
+			'Location: ' . t3lib_BEfunc::getModuleUrl(
+				tx_seminars_BackEnd_AbstractEventMailForm::MODULE_NAME,
+				array('id' => tx_oelib_PageFinder::getInstance()->getPageUid()), FALSE, TRUE
 			),
 			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
 		);

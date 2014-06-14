@@ -34,6 +34,11 @@
  */
 class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	/**
+	 * @var string
+	 */
+	const MODULE_NAME = 'web_txseminarsM2';
+
+	/**
 	 * available sub modules
 	 *
 	 * @var array
@@ -167,8 +172,9 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		// Only generate the tab menu if the current back-end user has the
 		// rights to show any of the tabs.
 		if ($this->subModule) {
+			$moduleToken = t3lib_formprotection_Factory::get()->generateToken('moduleCall', self::MODULE_NAME);
 			$this->content .= $this->doc->getTabMenu(
-				array('M' => 'web_txseminarsM2', 'id' => $this->id),
+				array('M' => self::MODULE_NAME, 'moduleToken' => $moduleToken, 'id' => $this->id),
 				'subModule', $this->subModule, $this->availableSubModules
 			);
 			$this->content .= $this->doc->spacer(5);
