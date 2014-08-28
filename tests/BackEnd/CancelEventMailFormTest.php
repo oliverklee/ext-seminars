@@ -1,26 +1,16 @@
 <?php
-/***************************************************************
-* Copyright notice
-*
-* (c) 2009-2014 Mario Rimann (mario@screenteam.com)
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+/**
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Test case.
@@ -31,7 +21,7 @@
  * @author Mario Rimann <mario@screenteam.com>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
+class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_BackEnd_CancelEventMailForm
 	 */
@@ -88,6 +78,11 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 	 */
 	private $linkBuilder = NULL;
 
+	/**
+	 * @var Tx_Oelib_EmailCollector
+	 */
+	protected $mailer = NULL;
+
 	public function setUp() {
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
@@ -100,7 +95,10 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 		$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
 
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		/** @var Tx_Oelib_MailerFactory $mailerFactory */
+		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory->enableTestMode();
+		$this->mailer = $mailerFactory->getMailer();
 
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		tx_oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
@@ -151,7 +149,7 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 
 		$this->testingFramework->cleanUp();
 
-		unset($this->linkBuilder, $this->fixture, $this->testingFramework);
+		unset($this->linkBuilder, $this->fixture, $this->testingFramework, $this->mailer);
 
 		$this->flushAllFlashMessages();
 
@@ -549,7 +547,7 @@ class tx_seminars_BackEnd_CancelEventMailFormTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'foo User',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 

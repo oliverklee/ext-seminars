@@ -1,26 +1,16 @@
 <?php
-/***************************************************************
-* Copyright notice
-*
-* (c) 2008-2014 Oliver Klee (typo3-coding@oliverklee.de)
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+/**
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Test case.
@@ -30,7 +20,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
+class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_registrationmanager
 	 */
@@ -95,13 +85,23 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	protected $linkBuilder = NULL;
 
+	/**
+	 * @var Tx_Oelib_EmailCollector
+	 */
+	protected $mailer = NULL;
+
 	protected function setUp() {
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
 
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+
+		/** @var Tx_Oelib_MailerFactory $mailerFactory */
+		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory->enableTestMode();
+		$this->mailer = $mailerFactory->getMailer();
+
 		tx_seminars_registrationchild::purgeCachedSeminars();
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger('eMailFormatForAttendees', tx_seminars_registrationmanager::SEND_TEXT_MAIL);
@@ -155,7 +155,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		tx_seminars_registrationmanager::purgeInstance();
 		unset(
 			$this->seminar, $this->pi1, $this->fixture, $this->testingFramework,
-			$this->linkBuilder, $this->fullyBookedSeminar, $this->cachedSeminar
+			$this->linkBuilder, $this->fullyBookedSeminar, $this->cachedSeminar, $this->mailer
 		);
 
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
@@ -276,6 +276,19 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		}
 
 		return $testingClassName;
+	}
+
+	/**
+	 * Extracts the HTML body from the first sent e-mail.
+	 *
+	 * @return string
+	 */
+	protected function getEmailHtmlPart() {
+		$children = $this->mailer->getFirstSentEmail()->getChildren();
+		/** @var Swift_Mime_MimeEntity $firstChild */
+		$firstChild = $children[0];
+
+		return $firstChild->getBody();
 	}
 
 
@@ -2027,10 +2040,9 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertSame(
+		$this->assertArrayHasKey(
 			'foo@bar.com',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastRecipient()
+			$this->mailer->getFirstSentEmail()->getTo()
 		);
 	}
 
@@ -2053,9 +2065,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertSame(
-			array(),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastEmail()
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -2156,8 +2167,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			$this->fixture->translate('email_confirmationSubject'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastSubject()
+			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 
@@ -2174,9 +2184,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'test event',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2193,7 +2201,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'something nice to eat',
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody())
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2210,7 +2218,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'a nice, dry place',
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody())
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2227,7 +2235,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'learning Ruby on Rails',
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody())
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2244,8 +2252,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'test event',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastSubject()
+			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 
@@ -2260,10 +2267,9 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
-			'From: "test organizer" <mail@example.com>',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastHeaders()
+		$this->assertSame(
+			array('mail@example.com' => 'test organizer'),
+			$this->mailer->getFirstSentEmail()->getFrom()
 		);
 	}
 
@@ -2285,8 +2291,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'<html',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
+			$this->getEmailHtmlPart()
 		);
 	}
 
@@ -2301,10 +2306,9 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertNotContains(
-			'<html',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
+		$this->assertSame(
+			array(),
+			$this->mailer->getFirstSentEmail()->getChildren()
 		);
 	}
 
@@ -2321,8 +2325,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertNotContains(
 			'###',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2344,8 +2347,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertNotContains(
 			'###',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
+			$this->getEmailHtmlPart()
 		);
 	}
 
@@ -2373,8 +2375,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'<html',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
+			$this->getEmailHtmlPart()
 		);
 	}
 
@@ -2400,10 +2401,9 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertNotContains(
-			'<html',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
+		$this->assertSame(
+			array(),
+			$this->mailer->getFirstSentEmail()->getChildren()
 		);
 	}
 
@@ -2429,8 +2429,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'foo_user',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
+			$this->getEmailHtmlPart()
 		);
 	}
 
@@ -2455,8 +2454,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$seminarLink = 'http://singleview.example.com/';
 
 		$this->assertContains(
-			'<a href=3D"' . $seminarLink,
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			'<a href="' . $seminarLink,
+			$this->getEmailHtmlPart()
 		);
 	}
 
@@ -2473,9 +2472,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			LF . '-- ' . LF . 'organizer footer',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2496,10 +2493,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertNotContains(
 			$this->fixture->translate('label_planned_disclaimer'),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()
-					->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2520,10 +2514,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertNotContains(
 			$this->fixture->translate('label_planned_disclaimer'),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()
-					->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2544,9 +2535,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			$this->fixture->translate('label_planned_disclaimer'),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2570,10 +2559,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertNotContains(
 			$this->fixture->translate('label_planned_disclaimer'),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()
-					->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2600,8 +2586,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'style=',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
+			$this->getEmailHtmlPart()
 		);
 	}
 
@@ -2619,9 +2604,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'foo1 foo2',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2639,9 +2622,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'1. foo1' . LF . '2. foo2',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2669,7 +2650,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertRegExp(
 			'/\<ol>.*<li>foo1<\/li>.*<li>foo2<\/li>.*<\/ol>/s',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			$this->getEmailHtmlPart()
 		);
 	}
 
@@ -2693,9 +2674,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'foo_place',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2719,9 +2698,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'foo_street',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2738,9 +2715,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			$this->fixture->translate('message_willBeAnnounced'),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2765,9 +2740,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'place_title' . LF . 'place_address',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2802,7 +2775,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'place_title<br>place_address',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			$this->getEmailHtmlPart()
 		);
 	}
 
@@ -2827,9 +2800,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'place_title' . LF . 'place_address',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2854,9 +2825,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'address1 address2',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2881,9 +2850,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'address1 address2',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2908,9 +2875,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'address1 address2',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2935,9 +2900,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'address1 address2',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2962,9 +2925,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'address1 address2',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -2999,7 +2960,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'address1 address2',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			$this->getEmailHtmlPart()
 		);
 	}
 
@@ -3034,7 +2995,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'address1 address2 address3',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3058,9 +3019,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'footown',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3084,9 +3043,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'12345 footown',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3112,9 +3069,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			$country->getLocalShortName(),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3139,9 +3094,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'address' . LF . 'footown',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3176,7 +3129,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'address<br>footown',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			$this->getEmailHtmlPart()
 		);
 	}
 
@@ -3206,9 +3159,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'footown, ' . $country->getLocalShortName(),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3233,9 +3184,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertNotContains(
 			'footown,',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3262,11 +3211,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->fixture->notifyAttendee($registration, $pi1);
 
 		$this->assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
-				->translate('email_hello_informal'),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-			)
+			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_informal'),
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3292,11 +3238,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->fixture->notifyAttendee($registration, $pi1);
 
 		$this->assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
-				->translate('email_hello_formal_2'),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-			)
+			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_2'),
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3322,11 +3265,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->fixture->notifyAttendee($registration, $pi1);
 
 		$this->assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
-				->translate('email_hello_formal_0'),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-			)
+			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_0'),
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3352,11 +3292,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->fixture->notifyAttendee($registration, $pi1);
 
 		$this->assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
-				->translate('email_hello_formal_1'),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-			)
+			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_1'),
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3381,9 +3318,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 				$this->fixture->translate('email_confirmationHello_formal'),
 				$this->seminar->getTitle()
 			),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3408,9 +3343,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 				$this->fixture->translate('email_confirmationHello_informal'),
 				$this->seminar->getTitle()
 			),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3441,9 +3374,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 				),
 				$this->seminar->getTitle()
 			),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3474,9 +3405,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 				),
 				$this->seminar->getTitle()
 			),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3507,9 +3436,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 				),
 				$this->seminar->getTitle()
 			),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3540,9 +3467,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 				),
 				$this->seminar->getTitle()
 			),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3573,9 +3498,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 				),
 				$this->seminar->getTitle()
 			),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3606,9 +3529,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 				),
 				$this->seminar->getTitle()
 			),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3776,9 +3697,9 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyOrganizers($registration);
 
-		$this->assertContains(
-			'From: "test organizer" <mail@example.com>',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastHeaders()
+		$this->assertSame(
+			array('mail@example.com' => 'test organizer'),
+			$this->mailer->getFirstSentEmail()->getFrom()
 		);
 	}
 
@@ -3791,9 +3712,9 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyOrganizers($registration);
 
-		$this->assertSame(
+		$this->assertArrayHasKey(
 			'mail@example.com',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastRecipient()
+			$this->mailer->getFirstSentEmail()->getTo()
 		);
 	}
 
@@ -3811,9 +3732,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'Hello',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3835,9 +3754,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertRegExp(
 			'/' . $this->fixture->translate('label_vacancies') . ': 1$/',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3860,9 +3777,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->assertContains(
 			$this->fixture->translate('label_vacancies') . ': ' .
 				$this->fixture->translate('label_unlimited'),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3889,9 +3804,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			$this->fixture->translate('label_company'),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3918,9 +3831,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			'foo inc.',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3981,10 +3892,9 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 
-		$this->assertContains(
+		$this->assertArrayHasKey(
 			'mail@example.com',
-			tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getLastRecipient()
+			$this->mailer->getFirstSentEmail()->getTo()
 		);
 	}
 
@@ -4013,10 +3923,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertSame(
 			2,
-			count(
-				tx_oelib_mailerFactory::getInstance()
-					->getMailer()->getAllEmail()
-			)
+			$this->mailer->getNumberOfSentEmails()
 		);
 	}
 
@@ -4043,16 +3950,15 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 
-		$sentEmails = tx_oelib_mailerFactory::getInstance()
-			->getMailer()->getAllEmail();
+		$sentEmails = $this->mailer->getSentEmails();
 
-		$this->assertContains(
+		$this->assertArrayHasKey(
 			'mail@example.com',
-			$sentEmails[0]['headers']
+			$sentEmails[0]->getFrom()
 		);
-		$this->assertContains(
+		$this->assertArrayHasKey(
 			'mail@example.com',
-			$sentEmails[1]['headers']
+			$sentEmails[1]->getFrom()
 		);
 	}
 
@@ -4078,13 +3984,10 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			sprintf(
-				$this->fixture->translate(
-					'email_additionalNotificationEnoughRegistrationsSubject'
-				),
-				$this->seminar->getUid(),
-				''
+				$this->fixture->translate('email_additionalNotificationEnoughRegistrationsSubject'),
+				$this->seminar->getUid(), ''
 			),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 
@@ -4108,9 +4011,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 
-		$this->assertSame(
-			array(),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail()
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -4128,13 +4030,10 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			sprintf(
-				$this->fixture->translate(
-					'email_additionalNotificationIsFullSubject'
-				),
-				$this->seminar->getUid(),
-				''
+				$this->fixture->translate('email_additionalNotificationIsFullSubject'),
+				$this->seminar->getUid(), ''
 			),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 
@@ -4151,9 +4050,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertContains(
 			$this->fixture->translate('email_additionalNotificationIsFull'),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -4176,10 +4073,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$fixture->sendAdditionalNotification($registration);
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -4201,8 +4096,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertSame(
 			1,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()
-				->getAllEmail())
+			$this->mailer->getNumberOfSentEmails()
 		);
 	}
 
@@ -4227,9 +4121,7 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->assertRegExp(
 			'/' . $this->fixture->translate('label_vacancies') . ': 1$/',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -4253,11 +4145,8 @@ class tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->fixture->sendAdditionalNotification($registration);
 
 		$this->assertContains(
-			$this->fixture->translate('label_vacancies') . ': ' .
-				$this->fixture->translate('label_unlimited'),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->fixture->translate('label_vacancies') . ': ' . $this->fixture->translate('label_unlimited'),
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 

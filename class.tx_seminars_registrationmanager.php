@@ -1,31 +1,22 @@
 <?php
-/***************************************************************
-* Copyright notice
-*
-* (c) 2005-2014 Oliver Klee (typo3-coding@oliverklee.de)
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+/**
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
-// This file does not include the locallang file in the BE because objectfromdb already does that.
 
 /**
  * This utility class checks and creates registrations for seminars.
+ *
+ * This file does not include the locallang file in the BE because objectfromdb already does that.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -829,7 +820,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			}
 		}
 
-		tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMailNotification);
+		/** @var Tx_Oelib_MailerFactory $mailerFactory */
+		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory->getMailer()->send($eMailNotification);
 	}
 
 	/**
@@ -909,7 +902,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
 		$this->modifyNotificationEmail($eMailNotification, $registration);
 
-		Tx_Oelib_MailerFactory::getInstance()->getMailer()->send($eMailNotification);
+		/** @var Tx_Oelib_MailerFactory $mailerFactory */
+		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory->getMailer()->send($eMailNotification);
 	}
 
 	/**
@@ -1003,7 +998,9 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$eMail->addRecipient($organizer);
 		}
 
-		tx_oelib_mailerFactory::getInstance()->getMailer()->send($eMail);
+		/** @var Tx_Oelib_MailerFactory $mailerFactory */
+		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory->getMailer()->send($eMail);
 	}
 
 	/**

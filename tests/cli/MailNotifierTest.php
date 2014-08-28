@@ -1,26 +1,16 @@
 <?php
-/***************************************************************
-* Copyright notice
-*
-* (c) 2009-2014 Saskia Metzler <saskia@merlin.owl.de>
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+/**
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Test case.
@@ -31,7 +21,7 @@
  * @author Saskia Metzler <saskia@merlin.owl.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
+class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_cli_MailNotifier
 	 */
@@ -47,9 +37,17 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 	 */
 	protected $configuration = NULL;
 
+	/**
+	 * @var Tx_Oelib_EmailCollector
+	 */
+	protected $mailer = NULL;
+
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		/** @var Tx_Oelib_MailerFactory $mailerFactory */
+		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory->enableTestMode();
+		$this->mailer = $mailerFactory->getMailer();
 
 		define('TYPO3_cliKey', 'seminars');
 		$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['cliKeys'][TYPO3_cliKey][1] = '_cli_seminars_test';
@@ -73,7 +71,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		unset($this->fixture, $this->testingFramework, $this->configuration);
+		unset($this->fixture, $this->testingFramework, $this->configuration, $this->mailer);
 	}
 
 
@@ -122,6 +120,16 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->testingFramework->changeRecord('tx_seminars_seminars', $eventUid, array('speakers' => 1));
 		$this->testingFramework->createRelation('tx_seminars_seminars_speakers_mm', $eventUid, $speakerUid);
+	}
+
+	/**
+	 * Returns the first e-mail attachment (if there is any).
+	 *
+	 * @return Swift_Mime_Attachment
+	 */
+	protected function getFirstEmailAttachment() {
+		$children = $this->mailer->getFirstSentEmail()->getChildren();
+		return $children[0];
 	}
 
 
@@ -300,7 +308,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertSame(
 			1,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+			$this->mailer->getNumberOfSentEmails()
 		);
 	}
 
@@ -323,7 +331,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			$subject,
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 
@@ -346,7 +354,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			substr($message, 0, strpos($message, '%') - 1),
-			quoted_printable_decode(tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody())
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -367,7 +375,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertSame(
 			2,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+			$this->mailer->getNumberOfSentEmails()
 		);
 	}
 
@@ -390,7 +398,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertSame(
 			2,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+			$this->mailer->getNumberOfSentEmails()
 		);
 	}
 
@@ -424,9 +432,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -441,9 +448,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -458,9 +464,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -476,9 +481,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -493,9 +497,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -510,9 +513,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -534,7 +536,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertSame(
 			1,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+			$this->mailer->getNumberOfSentEmails()
 		);
 	}
 
@@ -556,7 +558,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			$subject,
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 
@@ -579,9 +581,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			substr($message, 0, strpos($message, '%') - 1),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -602,7 +602,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertSame(
 			2,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+			$this->mailer->getNumberOfSentEmails()
 		);
 	}
 
@@ -630,7 +630,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertSame(
 			2,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+			$this->mailer->getNumberOfSentEmails()
 		);
 	}
 
@@ -662,9 +662,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendCancellationDeadlineReminders();
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -679,9 +678,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendCancellationDeadlineReminders();
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -696,9 +694,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendCancellationDeadlineReminders();
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -714,9 +711,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendCancellationDeadlineReminders();
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -731,9 +727,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendCancellationDeadlineReminders();
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -748,9 +743,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendCancellationDeadlineReminders();
 
-		$this->assertSame(
-			0,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -772,9 +766,9 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$this->assertContains(
+		$this->assertArrayHasKey(
 			'MrTest@example.com',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastRecipient()
+			$this->mailer->getFirstSentEmail()->getTo()
 		);
 	}
 
@@ -789,9 +783,9 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$this->assertContains(
+		$this->assertArrayHasKey(
 			'MrTest@example.com',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastHeaders()
+			$this->mailer->getFirstSentEmail()->getFrom()
 		);
 	}
 
@@ -812,9 +806,9 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$this->assertContains(
+		$this->assertArrayHasKey(
 			'MrTest@example.com',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastHeaders()
+			$this->mailer->getFirstSentEmail()->getFrom()
 		);
 	}
 
@@ -836,9 +830,9 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$this->assertNotContains(
-			'registrations.csv',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		$this->assertSame(
+			array(),
+			$this->mailer->getFirstSentEmail()->getChildren()
 		);
 	}
 
@@ -862,9 +856,9 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$this->assertContains(
+		$this->assertSame(
 			'registrations.csv',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+			$this->getFirstEmailAttachment()->getFilename()
 		);
 	}
 
@@ -887,9 +881,9 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$this->assertNotContains(
-			'registrations.csv',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
+		$this->assertSame(
+			array(),
+			$this->mailer->getFirstSentEmail()->getChildren()
 		);
 	}
 
@@ -912,16 +906,9 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$attachment = array();
-		preg_match(
-			'/filename.*csv([^-=]+)/s',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody(),
-			$attachment
-		);
-
 		$this->assertContains(
 			'test registration' . CRLF,
-			base64_decode($attachment[1])
+			$this->getFirstEmailAttachment()->getBody()
 		);
 	}
 
@@ -947,16 +934,9 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$attachment = array();
-		preg_match(
-			'/filename.*csv([^-=]+)/s',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody(),
-			$attachment
-		);
-
 		$this->assertContains(
 			'foo@bar.com',
-			base64_decode($attachment[1])
+			$this->getFirstEmailAttachment()->getBody()
 		);
 	}
 
@@ -988,16 +968,9 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$attachment = array();
-		preg_match(
-			'/filename.*csv([^-=]+)/s',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody(),
-			$attachment
-		);
-
 		$this->assertContains(
 			'on queue',
-			base64_decode($attachment[1])
+			$this->getFirstEmailAttachment()->getBody()
 		);
 	}
 
@@ -1031,16 +1004,9 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEventTakesPlaceReminders();
 
-		$attachment = array();
-		preg_match(
-			'/filename.*csv([^-=]+)/s',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody(),
-			$attachment
-		);
-
 		$this->assertNotContains(
 			'on queue',
-			base64_decode($attachment[1])
+			$this->getFirstEmailAttachment()->getBody()
 		);
 	}
 
@@ -1063,7 +1029,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'test event',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 
@@ -1080,7 +1046,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'2',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 
@@ -1102,9 +1068,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Mr. Test',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -1122,9 +1086,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'test event',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -1141,9 +1103,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			(string) $uid,
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -1160,9 +1120,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'2',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -1182,9 +1140,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 				$this->configuration->getAsString('dateFormatYMD'),
 				$GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY
 			),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -1201,9 +1157,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'0',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -1227,9 +1181,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'1',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -1256,7 +1208,7 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			$subject,
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 
@@ -1285,8 +1237,8 @@ class tx_seminars_cli_MailNotifierTest extends tx_phpunit_testcase {
 		$subject = str_replace('%event', '', $subject);
 
 		$this->assertContains(
-			t3lib_div::encodeHeader($subject, 'quoted-printable', 'utf-8'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+			$subject,
+			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 }

@@ -1,26 +1,16 @@
 <?php
-/***************************************************************
-* Copyright notice
-*
-* (c) 2008-2014 Niels Pardon (mail@niels-pardon.de)
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+/**
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Test case.
@@ -30,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
+class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_FrontEnd_EventEditor
 	 */
@@ -40,6 +30,11 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @var tx_oelib_testingFramework
 	 */
 	protected $testingFramework = NULL;
+
+	/**
+	 * @var Tx_Oelib_EmailCollector
+	 */
+	protected $mailer = NULL;
 
 	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
@@ -63,6 +58,11 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 			$GLOBALS['TSFE']->cObj
 		);
 		$this->fixture->setTestMode();
+
+		/** @var Tx_Oelib_MailerFactory $mailerFactory */
+		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory->enableTestMode();
+		$this->mailer = $mailerFactory->getMailer();
 	}
 
 	protected function tearDown() {
@@ -70,7 +70,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		tx_seminars_registrationmanager::purgeInstance();
 		tx_oelib_configurationProxy::purgeInstances();
-		unset($this->testingFramework, $this->fixture);
+		unset($this->testingFramework, $this->fixture, $this->mailer);
 	}
 
 
@@ -3071,13 +3071,10 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function eventEditorForNonHiddenEventDoesNotSendMail() {
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
-
 		$this->fixture->sendEMailToReviewer();
 
-		$this->assertEquals(
-			array(),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail()
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -3088,7 +3085,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('hidden' => 1)
 		);
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3096,9 +3092,8 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEMailToReviewer();
 
-		$this->assertEquals(
-			array(),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail()
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -3107,7 +3102,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 */
 	public function eventEditorForEventHiddenByFormDoesSendMail() {
 		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3123,9 +3117,9 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEMailToReviewer();
 
-		$this->assertNotEquals(
-			array(),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail()
+		$this->assertGreaterThan(
+			0,
+			$this->mailer->getNumberOfSentEmails()
 		);
 	}
 
@@ -3134,7 +3128,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 */
 	public function sendEMailToReviewerSendsMailToReviewerMailAddress() {
 		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3150,9 +3143,9 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEMailToReviewer();
 
-		$this->assertEquals(
+		$this->assertArrayHasKey(
 			'foo@bar.com',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastRecipient()
+			$this->mailer->getFirstSentEmail()->getTo()
 		);
 	}
 
@@ -3161,7 +3154,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 */
 	public function sendEMailToReviewerSetsPublishEventSubjectInMail() {
 		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3177,9 +3169,9 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEMailToReviewer();
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->fixture->translate('publish_event_subject'),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 
@@ -3190,7 +3182,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('title' => 'foo Event')
 		);
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3208,9 +3199,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'foo Event',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3222,7 +3211,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
 		);
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3243,9 +3231,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 				$this->fixture->getConfValueString('dateFormatYMD'),
 				$GLOBALS['SIM_EXEC_TIME']
 			),
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3257,7 +3243,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3275,9 +3260,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'###PUBLISH_EVENT_DATE###',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3289,7 +3272,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3308,9 +3290,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'foo event,',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3321,7 +3301,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3339,9 +3318,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->assertNotContains(
 			'###',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3352,7 +3329,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('description' => 'Foo Description')
 		);
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3370,9 +3346,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Foo Description',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3383,7 +3357,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'
 		);
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3401,9 +3374,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'tx_seminars_publication%5Bhash%5D=' . $formData['publication_hash'],
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -3412,7 +3383,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 */
 	public function sendEMailToReviewerUsesFrontEndUserNameAsFromNameForMail() {
 		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3430,7 +3400,7 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->assertContains(
 			'Mr. Bar',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastHeaders()
+			$this->mailer->getFirstSentEmail()->getFrom()
 		);
 	}
 
@@ -3439,7 +3409,6 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 	 */
 	public function sendEMailToReviewerUsesFrontEndUserMailAddressAsFromAddressForMail() {
 		$seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
 		$this->createAndLoginUserWithReviewer();
 
 		$this->fixture->setObjectUid($seminarUid);
@@ -3455,9 +3424,9 @@ class tx_seminars_FrontEnd_EventEditorTest extends tx_phpunit_testcase {
 
 		$this->fixture->sendEMailToReviewer();
 
-		$this->assertContains(
-			'<mail@foo.com>',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastHeaders()
+		$this->assertArrayHasKey(
+			'mail@foo.com',
+			$this->mailer->getFirstSentEmail()->getFrom()
 		);
 	}
 

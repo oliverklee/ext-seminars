@@ -1,26 +1,16 @@
 <?php
-/***************************************************************
-* Copyright notice
-*
-* (c) 2009-2014 Mario Rimann (mario@screenteam.com)
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+/**
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Test case.
@@ -30,7 +20,7 @@
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase {
+class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_BackEnd_AbstractEventMailForm
 	 */
@@ -68,6 +58,11 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 	 */
 	private $languageBackup;
 
+	/**
+	 * @var Tx_Oelib_EmailCollector
+	 */
+	protected $mailer = NULL;
+
 	public function setUp() {
 		$this->languageBackup = $GLOBALS['LANG']->lang;
 		$GLOBALS['LANG']->lang = 'default';
@@ -76,7 +71,10 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
 
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
-		tx_oelib_mailerFactory::getInstance()->enableTestMode();
+		/** @var Tx_Oelib_MailerFactory $mailerFactory */
+		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory->enableTestMode();
+		$this->mailer = $mailerFactory->getMailer();
 
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
@@ -117,7 +115,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 
 		$this->testingFramework->cleanUp();
 
-		unset($this->fixture, $this->testingFramework);
+		unset($this->fixture, $this->testingFramework, $this->mailer);
 
 		$this->flushAllFlashMessages();
 	}
@@ -480,9 +478,9 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 		$this->fixture->render();
 
-		$this->assertEquals(
+		$this->assertSame(
 			'foo',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastSubject()
+			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 
@@ -510,9 +508,8 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 		$this->fixture->render();
 
-		$this->assertEquals(
-			array(),
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastEmail()
+		$this->assertNull(
+			$this->mailer->getFirstSentEmail()
 		);
 	}
 
@@ -547,9 +544,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 
 		$this->assertContains(
 			'test user',
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -615,9 +610,9 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 		$this->fixture->render();
 
-		$this->assertContains(
+		$this->assertArrayHasKey(
 			'bar@example.org',
-			tx_oelib_mailerFactory::getInstance()->getMailer()->getLastHeaders()
+			$this->mailer->getFirstSentEmail()->getFrom()
 		);
 	}
 
@@ -657,9 +652,9 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 		);
 		$this->fixture->render();
 
-		$this->assertEquals(
+		$this->assertSame(
 			2,
-			count(tx_oelib_mailerFactory::getInstance()->getMailer()->getAllEmail())
+			$this->mailer->getNumberOfSentEmails()
 		);
 	}
 
@@ -699,9 +694,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 
 		$this->assertContains(
 			LF . '-- ' . LF . $organizerFooter,
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
@@ -733,9 +726,7 @@ class tx_seminars_BackEnd_AbstractEventMailFormTest extends tx_phpunit_testcase 
 
 		$this->assertNotContains(
 			LF . '-- ' . LF,
-			quoted_printable_decode(
-				tx_oelib_mailerFactory::getInstance()->getMailer()->getLastBody()
-			)
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
