@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#5086] Fix: Old reference to locallang.php in flexform configuration
 - [#5098] Feature: Switch seminars to SwiftMailer
 - [#4114] Fix: Use the Core form tokens in the BE modules
 - [#5072] Change: Switch the BE module to the module dispatcher
