@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#5174] Fix: Avoid feInterface deprecation warnings in 6.2
 - [#5085] Fix: Allow first_name and last_name in the registration form
 - [#5086] Fix: Old reference to locallang.php in flexform configuration
 - [#5098] Feature: Switch seminars to SwiftMailer

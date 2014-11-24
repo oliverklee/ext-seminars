@@ -30,6 +30,7 @@ $globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']
 $usePageBrowser = (boolean) $globalConfiguration['usePageBrowser'];
 $selectType = $usePageBrowser ? 'group' : 'select';
 
+$addToFeInterface = (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 6002000);
 if (!isset($GLOBALS['TCA']['fe_users']['columns']['tx_seminars_registration'])) {
 	if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 6001000) {
 		t3lib_div::loadTCA('fe_users');
@@ -51,7 +52,7 @@ if (!isset($GLOBALS['TCA']['fe_users']['columns']['tx_seminars_registration'])) 
 				),
 			),
 		),
-		1
+		$addToFeInterface
 	);
 }
 
@@ -167,7 +168,7 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 				),
 			),
 		),
-		1
+		$addToFeInterface
 	);
 
 	t3lib_extMgm::addToAllTCAtypes(
@@ -223,7 +224,7 @@ if (!isset($GLOBALS['TCA']['be_groups']['columns']['tx_seminars_events_folder'])
 				),
 			),
 		),
-		1
+		$addToFeInterface
 	);
 
 	t3lib_extMgm::addToAllTCAtypes(
