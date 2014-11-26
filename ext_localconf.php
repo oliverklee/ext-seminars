@@ -54,10 +54,26 @@ t3lib_extMgm::addPItoST43(
 t3lib_extMgm::addTypoScript($_EXTKEY, 'setup', '
 	plugin.' . t3lib_extMgm::getCN($_EXTKEY) . '_pi1.userFunc = tx_seminars_FrontEnd_DefaultController->main
 ', 43);
-t3lib_extMgm::addTypoScript($_EXTKEY, 'setup','
-	tt_content.shortcut.20.0.conf.tx_seminars_seminars = < plugin.'.t3lib_extMgm::getCN($_EXTKEY).'_pi1
-	tt_content.shortcut.20.0.conf.tx_seminars_seminars.CMD = singleView
-',43);
+
+if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 6002000) {
+	t3lib_extMgm::addTypoScript(
+		$_EXTKEY,
+		'setup', '
+		tt_content.shortcut.20.conf.tx_seminars_seminars = < plugin.' . t3lib_extMgm::getCN($_EXTKEY) . '_pi1
+		tt_content.shortcut.20.conf.tx_seminars_seminars.CMD = singleView
+	',
+		43
+	);
+} else {
+	t3lib_extMgm::addTypoScript(
+		$_EXTKEY,
+		'setup', '
+		tt_content.shortcut.20.0.conf.tx_seminars_seminars = < plugin.' . t3lib_extMgm::getCN($_EXTKEY) . '_pi1
+		tt_content.shortcut.20.0.conf.tx_seminars_seminars.CMD = singleView
+	',
+		43
+	);
+}
 
 // registers the seminars command line interface
 $TYPO3_CONF_VARS['SC_OPTIONS']['GLOBAL']['cliKeys']['seminars'] = array(
