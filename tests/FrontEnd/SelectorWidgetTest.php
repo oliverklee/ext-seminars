@@ -1350,7 +1350,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 			'numberOfYearsInDateFilter', 2
 		);
 
-		$thisYear = date('Y', mktime());
+		$thisYear = date('Y', time());
 		$this->fixture->piVars['from_day'] = 2;
 		$this->fixture->piVars['from_month'] = 5;
 		$this->fixture->piVars['from_year'] = $thisYear;
