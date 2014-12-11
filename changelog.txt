@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#5199] Cleanup: Use $GLOBALS['TCA'] instead of $TCA
 - [#5197] Cleanup: Use comments instead of PHPDoc style comments in copyright block
 - [#5178] Fix: Use time() instead of mktime()
 - [#5176] Change: Update maximum PHP version to 5.6

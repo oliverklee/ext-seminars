@@ -143,8 +143,8 @@ if ($selectType == 'select') {
 	);
 }
 
-$TCA['tx_seminars_test'] = array(
-	'ctrl' => $TCA['tx_seminars_test']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_test'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_test']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'hidden,starttime,endtime,title'
 	),
@@ -203,8 +203,8 @@ $TCA['tx_seminars_test'] = array(
 );
 
 
-$TCA['tx_seminars_seminars'] = array(
-	'ctrl' => $TCA['tx_seminars_seminars']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_seminars'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_seminars']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,begin_date_registration,deadline_registration,deadline_unregistration,expiry,details_page,place,room,speakers,price_regular,price_special,payment_methods,organizers,organizing_partners,event_takes_place_reminder_sent,cancelation_deadline_reminder_sent,needs_registration,allows_multiple_registrations,attendees_min,attendees_max,queue_size,offline_attendees,target_groups,skip_collision_check,registrations,cancelled,notes,attached_files,hidden,starttime,endtime,owner_feuser,vips'
 	),
@@ -1100,8 +1100,8 @@ $TCA['tx_seminars_seminars'] = array(
 );
 
 
-$TCA['tx_seminars_speakers'] = array(
-	'ctrl' => $TCA['tx_seminars_speakers']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_speakers'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_speakers']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'hidden,title,organization,homepage,description,skills,notes,address,phone_work,phone_home,phone_mobile,fax,email,cancelation_period,owner'
 	),
@@ -1295,8 +1295,8 @@ $TCA['tx_seminars_speakers'] = array(
 
 
 
-$TCA['tx_seminars_attendances'] = array(
-	'ctrl' => $TCA['tx_seminars_attendances']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_attendances'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_attendances']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,seats,registered_themselves,total_price,currency,including_tax,attendees_names,additional_persons,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,company,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes',
 	),
@@ -1767,8 +1767,8 @@ $TCA['tx_seminars_attendances'] = array(
 
 
 
-$TCA['tx_seminars_sites'] = array(
-	'ctrl' => $TCA['tx_seminars_sites']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_sites'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_sites']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'title,address,zip,city,homepage,directions,notes,owner',
 	),
@@ -1885,8 +1885,8 @@ $TCA['tx_seminars_sites'] = array(
 
 
 
-$TCA['tx_seminars_organizers'] = array(
-	'ctrl' => $TCA['tx_seminars_organizers']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_organizers'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_organizers']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'title,description,homepage,email,email_footer'
 	),
@@ -1970,8 +1970,8 @@ $TCA['tx_seminars_organizers'] = array(
 	),
 );
 
-$TCA['tx_seminars_payment_methods'] = array(
-	'ctrl' => $TCA['tx_seminars_payment_methods']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_payment_methods'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_payment_methods']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'title, description',
 	),
@@ -2003,8 +2003,8 @@ $TCA['tx_seminars_payment_methods'] = array(
 	)
 );
 
-$TCA['tx_seminars_event_types'] = array(
-	'ctrl' => $TCA['tx_seminars_event_types']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_event_types'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_event_types']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'title, single_view_page',
 	),
@@ -2039,8 +2039,8 @@ $TCA['tx_seminars_event_types'] = array(
 	)
 );
 
-$TCA['tx_seminars_checkboxes'] = array(
-	'ctrl' => $TCA['tx_seminars_checkboxes']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_checkboxes'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_checkboxes']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'title,owner',
 	),
@@ -2075,8 +2075,8 @@ $TCA['tx_seminars_checkboxes'] = array(
 	)
 );
 
-$TCA['tx_seminars_lodgings'] = array(
-	'ctrl' => $TCA['tx_seminars_lodgings']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_lodgings'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_lodgings']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'title',
 	),
@@ -2099,8 +2099,8 @@ $TCA['tx_seminars_lodgings'] = array(
 	),
 );
 
-$TCA['tx_seminars_foods'] = array(
-	'ctrl' => $TCA['tx_seminars_foods']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_foods'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_foods']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'title',
 	),
@@ -2123,8 +2123,8 @@ $TCA['tx_seminars_foods'] = array(
 	)
 );
 
-$TCA['tx_seminars_timeslots'] = array(
-	'ctrl' => $TCA['tx_seminars_timeslots']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_timeslots'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_timeslots']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'begin_date, end_date, entry_date, speakers, place, room'
 	),
@@ -2232,8 +2232,8 @@ $TCA['tx_seminars_timeslots'] = array(
 	),
 );
 
-$TCA['tx_seminars_target_groups'] = array(
-	'ctrl' => $TCA['tx_seminars_target_groups']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_target_groups'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_target_groups']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'title,minimum_age,maximum_age,owner',
 	),
@@ -2296,8 +2296,8 @@ $TCA['tx_seminars_target_groups'] = array(
 	),
 );
 
-$TCA['tx_seminars_categories'] = array(
-	'ctrl' => $TCA['tx_seminars_categories']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_categories'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_categories']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'title, icon, single_view_page',
 	),
@@ -2347,8 +2347,8 @@ $TCA['tx_seminars_categories'] = array(
 	),
 );
 
-$TCA['tx_seminars_skills'] = array(
-	'ctrl' => $TCA['tx_seminars_skills']['ctrl'],
+$GLOBALS['TCA']['tx_seminars_skills'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_seminars_skills']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'title',
 	),
