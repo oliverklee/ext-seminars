@@ -104,8 +104,10 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * Returns a localized string "will be announced" if the time slot has no
 	 * place set.
 	 *
-	 * @return string our places or a localized string "will be announced"
-	 *                if this timeslot has no place assigned
+	 * @return string our places or a localized string "will be announced" if this timeslot has no place assigned
+	 *
+	 * @throws tx_oelib_Exception_Database
+	 * @throws tx_oelib_Exception_NotFound
 	 */
 	public function getPlaceShort() {
 		if (!$this->hasPlace()) {

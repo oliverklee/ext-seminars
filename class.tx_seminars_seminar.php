@@ -1663,8 +1663,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * If the seminar has a event type selected, that one is returned.
 	 * Otherwise, an empty string will be returned.
 	 *
-	 * @return string the type of this event, will be empty if this event
-	 *                does not have a type
+	 * @return string the type of this event, will be empty if this event does not have a type
+	 *
+	 * @throws tx_oelib_Exception_Database
 	 */
 	public function getEventType() {
 		if (!$this->hasEventType()) {

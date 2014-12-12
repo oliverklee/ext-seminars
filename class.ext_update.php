@@ -115,8 +115,9 @@ class ext_update {
 	/**
 	 * Updates the "registrations" field of the event records.
 	 *
-	 * @return string information about the status of the update process,
-	 *                will not be empty
+	 * @return string information about the status of the update process, will not be empty
+	 *
+	 * @throws tx_oelib_Exception_Database
 	 */
 	private function updateRegistrationsField() {
 		$query = 'UPDATE tx_seminars_seminars SET registrations = ' .
