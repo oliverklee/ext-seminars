@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#5088] Cleanup: Shorten the die() line
 - [#4943] Cleanup: Add missing @throws annotations
 - [#5199] Cleanup: Use $GLOBALS['TCA'] instead of $TCA
 - [#5197] Cleanup: Use comments instead of PHPDoc style comments in copyright block

@@ -1,7 +1,5 @@
 <?php
-if (!defined ('TYPO3_MODE')) {
-	die('Access denied.');
-}
+defined('TYPO3_MODE') or die('Access denied.');
 
 t3lib_extMgm::addUserTSConfig('
 	options.saveDocNew.tx_seminars_seminars=1
