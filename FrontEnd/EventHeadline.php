@@ -67,7 +67,7 @@ class tx_seminars_FrontEnd_EventHeadline extends tx_seminars_FrontEnd_AbstractVi
 			throw new BadMethodCallException("The method injectEventMapper() needs to be called first.", 1333614794);
 		}
 
-		$eventId = intval($this->piVars['uid']);
+		$eventId = (int)$this->piVars['uid'];
 		if ($eventId <= 0) {
 			return '';
 		}

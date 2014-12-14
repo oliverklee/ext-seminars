@@ -445,7 +445,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$numberOfSeats = '1';
 		}
 
-		$numberOfSeatsInt = intval($numberOfSeats);
+		$numberOfSeatsInt = (int)$numberOfSeats;
 
 		// Check whether we have a valid number
 		if ($numberOfSeats == strval($numberOfSeatsInt)) {
@@ -531,7 +531,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	protected function setRegistrationData(tx_seminars_Model_Registration $registration, array $formData) {
 		$event = $registration->getEvent();
 
-		$seats = isset($formData['seats']) ? intval($formData['seats']) : 1;
+		$seats = isset($formData['seats']) ? (int)$formData['seats'] : 1;
 		if ($seats < 1) {
 			$seats = 1;
 		}
@@ -555,7 +555,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$attendeesNames = isset($formData['attendees_names']) ? strip_tags($formData['attendees_names']) : '';
 		$registration->setAttendeesNames($attendeesNames);
 
-		$kids = isset($formData['kids']) ? max(0, intval($formData['kids'])) : 0;
+		$kids = isset($formData['kids']) ? max(0, (int)$formData['kids']) : 0;
 		$registration->setKids($kids);
 
 		$paymentMethod = NULL;
@@ -566,7 +566,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 					$paymentMethod = $availablePaymentMethods->first();
 				} else {
 					$paymentMethodUid = isset($formData['method_of_payment'])
-						? max(0, intval($formData['method_of_payment'])) : 0;
+						? max(0, (int)$formData['method_of_payment']) : 0;
 					if (($paymentMethodUid > 0) && $availablePaymentMethods->hasUid($paymentMethodUid)) {
 						$paymentMethod = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_PaymentMethod')
 							->find($paymentMethodUid);
@@ -595,7 +595,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			&& (($formData['gender'] === $validGenderMale) || ($formData['gender'] === $validGenderFemale)
 			)
 		) {
-			$gender = intval($formData['gender']);
+			$gender = (int)$formData['gender'];
 		} else {
 			$gender = tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN;
 		}

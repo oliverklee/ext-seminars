@@ -149,7 +149,7 @@ class tx_seminars_flexForms {
 			);
 
 			foreach ($rootlinePages as $page) {
-				$storagePid = intval($page['storage_pid']);
+				$storagePid = (int)$page['storage_pid'];
 				if ($storagePid > 0) {
 					$whereClause = '(' . $table . '.pid = ' . $storagePid . ')';
 					break;

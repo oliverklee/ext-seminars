@@ -1290,7 +1290,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 
 		$output = $this->fixture->render();
-		$currentYear = intval(date('Y'));
+		$currentYear = (int)date('Y');
 
 		$this->assertContains(
 			'<option value="' . $currentYear . '">' . $currentYear .'</option>',

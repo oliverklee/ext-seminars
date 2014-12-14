@@ -91,7 +91,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_Abstract
 			$GLOBALS['LANG']->getLL('registrationlist.seminar.date')
 		);
 
-		$eventUid = intval(t3lib_div::_GP('eventUid'));
+		$eventUid = (int)t3lib_div::_GP('eventUid');
 		if (($eventUid > 0)
 		 	&& tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 		 		->existsModel($eventUid)

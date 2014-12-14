@@ -86,7 +86,7 @@ class tx_seminars_ViewHelper_Countdown {
 	 * @return string the duration in days
 	 */
 	protected function getAsDays($seconds) {
-		$countdownValue = intval(round($seconds / tx_oelib_Time::SECONDS_PER_DAY));
+		$countdownValue = (int)round($seconds / tx_oelib_Time::SECONDS_PER_DAY);
 		if ($countdownValue > 1 || $countdownValue === 0) {
 			$countdownText = $this->translator->translate('countdown_days_plural');
 		} else {
@@ -104,7 +104,7 @@ class tx_seminars_ViewHelper_Countdown {
 	 * @return string the duration in hours
 	 */
 	protected function getAsHours($seconds) {
-		$countdownValue = intval(round($seconds / tx_oelib_Time::SECONDS_PER_HOUR));
+		$countdownValue = (int)round($seconds / tx_oelib_Time::SECONDS_PER_HOUR);
 		if ($countdownValue > 1 || $countdownValue === 0) {
 			$countdownText = $this->translator->translate('countdown_hours_plural');
 		} else {
@@ -122,7 +122,7 @@ class tx_seminars_ViewHelper_Countdown {
 	 * @return string the duration in minutes
 	 */
 	protected function getAsMinutes($seconds) {
-		$countdownValue = intval(round($seconds / tx_oelib_Time::SECONDS_PER_MINUTE));
+		$countdownValue = (int)round($seconds / tx_oelib_Time::SECONDS_PER_MINUTE);
 		if ($countdownValue > 1 || $countdownValue === 0) {
 			$countdownText = $this->translator->translate('countdown_minutes_plural');
 		} else {

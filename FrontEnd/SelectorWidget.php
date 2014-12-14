@@ -439,7 +439,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 
 			return;
 		}
-		$age = intval($this->piVars['age']);
+		$age = (int)$this->piVars['age'];
 
 		$this->setMarker(
 			'age_value', (($age > 0) ? $age : '')
@@ -460,8 +460,8 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 			return;
 		}
 
-		$priceFrom = intval($this->piVars['price_from']);
-		$priceTo = intval($this->piVars['price_to']);
+		$priceFrom = (int)$this->piVars['price_from'];
+		$priceTo = (int)$this->piVars['price_to'];
 
 		$this->setMarker(
 			'price_from_value', (($priceFrom > 0) ? $priceFrom : '')
@@ -630,7 +630,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 			$result['month'][$month] = $month;
 		}
 
-		$currentYear = intval(date('Y'));
+		$currentYear = (int)date('Y');
 		$targetYear = $currentYear + $this->getConfValueInteger(
 			'numberOfYearsInDateFilter', 's_listView'
 		);

@@ -3122,7 +3122,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
-	 * Gets an (intval'ed) integer element of the record data array.
+	 * Gets an int element of the record data array.
 	 * If the array has not been initialized properly, 0 is returned instead.
 	 * If we are a date record, it'll be retrieved from the corresponding
 	 * topic record.

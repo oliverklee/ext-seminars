@@ -238,7 +238,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Gets an (intval'ed) integer element of the record data array.
+	 * Gets an int element of the record data array.
 	 * If the array has not been initialized properly, 0 is returned instead.
 	 *
 	 * @param string $key key of the element to return
@@ -246,14 +246,11 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * @return int the corresponding element from the record data array
 	 */
 	public function getRecordPropertyInteger($key) {
-		$result = $this->hasKey($key)
-			? intval($this->recordData[$key]) : 0;
-
-		return $result;
+		return $this->hasKey($key) ? (int)$this->recordData[$key] : 0;
 	}
 
 	/**
-	 * Sets an integer element of the record data array (and intvals it).
+	 * Sets an int element of the record data array.
 	 *
 	 * @param string $key key of the element to set (must be non-empty)
 	 * @param int $value the value that will be written into the element
@@ -262,7 +259,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 */
 	protected function setRecordPropertyInteger($key, $value) {
 		if (!empty($key)) {
-			$this->recordData[$key] = intval($value);
+			$this->recordData[$key] = (int)$value;
 		}
 	}
 
@@ -410,7 +407,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 
 		foreach ($references as $currentRelationUid) {
 			// We might get unsafe data here, so better be safe.
-			$foreignUid = intval($currentRelationUid);
+			$foreignUid = (int)$currentRelationUid;
 			if ($foreignUid > 0) {
 				$dataToInsert = array(
 					'uid_local' => $this->getUid(),
@@ -436,27 +433,27 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * This method may be called statically.
 	 *
-	 * @param string $uid string with a UID (need not necessarily be escaped, will be intvaled)
+	 * @param string $uid string with a UID (need not necessarily be escaped, will be cast to int)
 	 * @param string $tableName string with the table name where the UID should be searched for
 	 * @param bool $allowHiddenRecords whether hidden records should be found as well
 	 *
 	 * @return bool TRUE if a visible record with that UID exists, FALSE otherwise
 	 */
 	public static function recordExists($uid, $tableName, $allowHiddenRecords = FALSE) {
-		if ((intval($uid) <= 0) || ($tableName === '')) {
+		if (((int)$uid <= 0) || ($tableName === '')) {
 			return FALSE;
 		}
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
 			$tableName,
-			'uid = ' . intval($uid) . tx_oelib_db::enableFields($tableName, intval($allowHiddenRecords))
+			'uid = ' . (int)$uid . tx_oelib_db::enableFields($tableName, (int)$allowHiddenRecords)
 		);
 
 		if ($dbResult) {
 			$dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 			$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
-			$result = (intval($dbResultAssoc['num']) === 1);
+			$result = (int)$dbResultAssoc['num'] === 1;
 		} else {
 			$result = FALSE;
 		}
@@ -483,7 +480,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 		return $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'*',
 			$this->tableName,
-			'uid=' . intval($uid) . tx_oelib_db::enableFields($this->tableName, $allowHiddenRecords),
+			'uid=' . (int)$uid . tx_oelib_db::enableFields($this->tableName, $allowHiddenRecords),
 			'',
 			'',
 			'1'

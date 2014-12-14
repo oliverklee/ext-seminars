@@ -417,7 +417,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 */
 	private function sendEmailToAttendees() {
 		$organizer = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer')
-			->find(intval($this->getPostData('sender')));
+			->find((int)$this->getPostData('sender'));
 
 		$registrationBagBuilder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Registration');
 		$registrationBagBuilder->limitToEvent($this->getEvent()->getUid());

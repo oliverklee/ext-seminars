@@ -263,7 +263,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				's_template_special'
 			);
 		} else {
-			$this->showUid = intval($this->piVars['showUid']);
+			$this->showUid = (int)$this->piVars['showUid'];
 		}
 
 		$this->whatToDisplay = $this->getConfValueString('what_to_display');
@@ -294,7 +294,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			case 'list_registrations':
 				$registrationsList = t3lib_div::makeInstance(
 					'tx_seminars_FrontEnd_RegistrationsList', $this->conf,
-					$this->whatToDisplay, intval($this->piVars['seminar']),
+					$this->whatToDisplay, (int)$this->piVars['seminar'],
 					$this->cObj
 				);
 				$result = $registrationsList->render();
@@ -1860,7 +1860,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			}
 		}
 
-		$pointer = intval($this->piVars['pointer']);
+		$pointer = (int)$this->piVars['pointer'];
 		if (class_exists('t3lib_utility_Math')) {
 			$resultsAtATime = t3lib_utility_Math::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
 		} else {
@@ -2422,10 +2422,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			);
 		}
 
-		if (isset($this->piVars['category'])
-			&& (intval($this->piVars['category']) > 0)
-		) {
-			$builder->limitToCategories(intval($this->piVars['category']));
+		if (isset($this->piVars['category']) && ((int)$this->piVars['category']) > 0) {
+			$builder->limitToCategories((int)$this->piVars['category']);
 		} else {
 			$builder->limitToCategories(
 				$this->getConfValueString(
@@ -2859,7 +2857,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 					);
 				}
 			}
-		} elseif ($this->createRegistration(intval($this->piVars['registration']))) {
+		} elseif ($this->createRegistration((int)$this->piVars['registration'])) {
 			if ($this->createSeminar($this->registration->getSeminar())) {
 				if ($this->seminar->isUnregistrationPossible()) {
 					$isOkay = TRUE;
@@ -3028,7 +3026,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		$eventEditor = t3lib_div::makeInstance(
 			'tx_seminars_FrontEnd_EventEditor', $this->conf, $this->cObj
 		);
-		$eventEditor->setObjectUid(intval($this->piVars['seminar']));
+		$eventEditor->setObjectUid((int)$this->piVars['seminar']);
 
 		return $eventEditor;
 	}
@@ -3226,7 +3224,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			: 1;
 		$year = ($this->piVars['from_year'] > 0)
 			? $this->piVars['from_year']
-			: intval(date('Y', $GLOBALS['SIM_EXEC_TIME']));
+			: (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
 
 		return mktime(0, 0, 0, $month, $day, $year);
 	}
@@ -3248,7 +3246,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			: 12;
 		$year = ($this->piVars['to_year'] > 0)
 			? $this->piVars['to_year']
-			: intval(date('Y', $GLOBALS['SIM_EXEC_TIME']));
+			: (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
 
 		$day = $this->piVars['to_day'];
 

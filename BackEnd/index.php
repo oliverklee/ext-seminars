@@ -60,7 +60,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	public function init() {
 		parent::init();
 
-		$this->id = intval($this->id);
+		$this->id = (int)$this->id;
 	}
 
 	/**
@@ -159,7 +159,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		}
 
 		// Read the selected sub module (from the tab menu) and make it available within this class.
-		$this->subModule = intval(t3lib_div::_GET('subModule'));
+		$this->subModule = (int)t3lib_div::_GET('subModule');
 
 		// If $this->subModule is not a key of $this->availableSubModules,
 		// set it to the key of the first element in $this->availableSubModules
@@ -263,7 +263,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * @return bool TRUE if the form was requested and pre-conditions are met, FALSE otherwise
 	 */
 	private function isGeneralEmailFormRequested() {
-		if (!(intval(t3lib_div::_POST('eventUid')) > 0)) {
+		if ((int)t3lib_div::_POST('eventUid') <= 0) {
 			return FALSE;
 		}
 
@@ -277,7 +277,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * @return bool TRUE if the form was requested and pre-conditions are met, FALSE otherwise
 	 */
 	private function isConfirmEventFormRequested() {
-		if ((!intval(t3lib_div::_POST('eventUid')) > 0)) {
+		if ((int)t3lib_div::_POST('eventUid') <= 0) {
 			return FALSE;
 		}
 
@@ -292,7 +292,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 *                 met, FALSE otherwise
 	 */
 	private function isCancelEventFormRequested() {
-		if (!(intval(t3lib_div::_POST('eventUid')) > 0)) {
+		if ((int)t3lib_div::_POST('eventUid') <= 0) {
 			return FALSE;
 		}
 
@@ -307,7 +307,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	private function getGeneralMailForm() {
 		/** @var $form tx_seminars_BackEnd_GeneralEventMailForm */
 		$form = t3lib_div::makeInstance(
-			'tx_seminars_BackEnd_GeneralEventMailForm', intval(t3lib_div::_GP('eventUid'))
+			'tx_seminars_BackEnd_GeneralEventMailForm', (int)t3lib_div::_GP('eventUid')
 		);
 		$form->setPostData(t3lib_div::_POST());
 
@@ -322,7 +322,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	private function getConfirmEventMailForm() {
 		/** @var $form tx_seminars_BackEnd_ConfirmEventMailForm */
 		$form = t3lib_div::makeInstance(
-			'tx_seminars_BackEnd_ConfirmEventMailForm', intval(t3lib_div::_GP('eventUid'))
+			'tx_seminars_BackEnd_ConfirmEventMailForm', (int)t3lib_div::_GP('eventUid')
 		);
 		$form->setPostData(t3lib_div::_POST());
 
@@ -337,7 +337,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	private function getCancelEventMailForm() {
 		/** @var $form tx_seminars_BackEnd_CancelEventMailForm */
 		$form = t3lib_div::makeInstance(
-			'tx_seminars_BackEnd_CancelEventMailForm', intval(t3lib_div::_GP('eventUid'))
+			'tx_seminars_BackEnd_CancelEventMailForm', (int)t3lib_div::_GP('eventUid')
 		);
 		$form->setPostData(t3lib_div::_POST());
 

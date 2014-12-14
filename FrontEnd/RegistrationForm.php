@@ -431,7 +431,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @return bool TRUE if there are at least $formData['value'] seats available, FALSE otherwise
 	 */
 	public function canRegisterSeats(array $formData) {
-		return $this->getRegistrationManager()->canRegisterSeats($this->getSeminar(), intval($formData['value']));
+		return $this->getRegistrationManager()->canRegisterSeats($this->getSeminar(), (int)$formData['value']);
 	}
 
 	/**
@@ -1005,7 +1005,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	private function getTotalPriceWithUnit() {
 		$result = '';
 
-		$seats = intval($this->getFormValue('seats'));
+		$seats = (int)$this->getFormValue('seats');
 
 		// Only show the total price if the seats selector is displayed
 		// (otherwise the total price will be same as the price anyway).
@@ -1129,7 +1129,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 		if (empty($formData['value'])) {
 			$bankTransferUid = $this->getConfValueInteger('bankTransferUID');
 
-			$paymentMethod = intval($this->getFormValue('method_of_payment'));
+			$paymentMethod = (int)$this->getFormValue('method_of_payment');
 
 			if (($bankTransferUid > 0) && ($paymentMethod == $bankTransferUid)) {
 				$result = FALSE;
@@ -1447,7 +1447,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @return int the UID of the payment method that has been saved in the FE user session or 0 if there is none
 	 */
 	private function retrieveSavedMethodOfPayment() {
-		return intval($this->retrieveDataFromSession(NULL, array('key' => 'method_of_payment')));
+		return (int)$this->retrieveDataFromSession(NULL, array('key' => 'method_of_payment'));
 	}
 
 	/**
@@ -1647,7 +1647,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 */
 	public function getNumberOfEnteredPersons() {
 		if ($this->isFormFieldEnabled('registered_themselves')) {
-			$formData = intval($this->getFormValue('registered_themselves'));
+			$formData = (int)$this->getFormValue('registered_themselves');
 			$themselves = ($formData > 0) ? 1 : 0;
 		} else {
 			$themselves = 1;
@@ -1664,14 +1664,14 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *         TRUE if the number of seats matches the number of registered persons, FALSE otherwise
 	 */
 	public function validateNumberOfRegisteredPersons() {
-		if (intval($this->getFormValue('seats')) <= 0) {
+		if ((int)$this->getFormValue('seats') <= 0) {
 			return FALSE;
 		}
 		if (!$this->isFormFieldEnabled('attendees_names')) {
 			return TRUE;
 		}
 
-		return (intval($this->getFormValue('seats')) == $this->getNumberOfEnteredPersons());
+		return (int)$this->getFormValue('seats') == $this->getNumberOfEnteredPersons();
 	}
 
 	/**
@@ -1711,7 +1711,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @return string the localized error message, will be empty if both numbers match
 	 */
 	public function getMessageForSeatsNotMatchingRegisteredPersons() {
-		$seats = intval($this->getFormValue('seats'));
+		$seats = (int)$this->getFormValue('seats');
 		$persons = $this->getNumberOfEnteredPersons();
 
 		if ($persons < $seats) {

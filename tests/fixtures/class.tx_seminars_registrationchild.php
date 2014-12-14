@@ -66,7 +66,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	public function setIsOnRegistrationQueue($isOnRegistrationQueueValue) {
 		$this->setRecordPropertyInteger(
 			'registration_queue',
-			intval($isOnRegistrationQueueValue)
+			(int)$isOnRegistrationQueueValue
 		);
 	}
 

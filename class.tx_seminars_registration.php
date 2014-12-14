@@ -170,7 +170,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		$this->recordData['user'] = $userUid;
 		$this->recordData['registration_queue'] = (!$seminar->hasVacancies()) ? 1 : 0;
 
-		$seats = intval($registrationData['seats']);
+		$seats = (int)$registrationData['seats'];
 		if ($seats < 1) {
 			$seats = 1;
 		}

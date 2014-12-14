@@ -112,10 +112,10 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 
 			switch ($this->piVars['table']) {
 				case 'tx_seminars_seminars':
-					$result = $this->createAndOutputListOfEvents(intval($this->piVars['pid']));
+					$result = $this->createAndOutputListOfEvents((int)$this->piVars['pid']);
 					break;
 				case 'tx_seminars_attendances':
-					$result = $this->createAndOutputListOfRegistrations(intval($this->piVars['eventUid']));
+					$result = $this->createAndOutputListOfRegistrations((int)$this->piVars['eventUid']);
 					break;
 				default:
 					$result = $this->addErrorHeaderAndReturnMessage(self::NOT_FOUND);

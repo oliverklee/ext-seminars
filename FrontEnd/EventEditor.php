@@ -1214,7 +1214,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			return TRUE;
 		}
 
-		return (intval($formData['value']) != 0);
+		return ((int)$formData['value']) !== 0;
 	}
 
 	/**
@@ -1448,7 +1448,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
 
 		try {
-			$place = $placeMapper->find(intval($formData['editPlace_uid']));
+			$place = $placeMapper->find((int)$formData['editPlace_uid']);
 		} catch (Exception $exception) {
 			return $formidable->majixExecJs(
 				'alert("The place with the given UID does not exist.");'
@@ -1523,9 +1523,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			}
 		}
 		$key = 'country';
-		if ((intval($formData[$key]) == 0)
-			&& self::isPlaceFieldRequired($key)
-		) {
+		if (((int)$formData[$key] === 0) && self::isPlaceFieldRequired($key)) {
 			$validationErrors[] = $formidable->getLLLabel(
 				'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_empty' . ucfirst($key)
 			);
@@ -1568,7 +1566,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	private static function setPlaceData(
 		tx_seminars_Model_Place $place, $prefix, array $formData
 	) {
-		$countryUid = intval($formData[$prefix . 'country']);
+		$countryUid = (int)$formData[$prefix . 'country'];
 		if ($countryUid > 0) {
 			try {
 				$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
@@ -1608,7 +1606,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
 
 		try {
-			$place = $placeMapper->find(intval($placeUid));
+			$place = $placeMapper->find((int)$placeUid);
 		} catch (tx_oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
 				'alert("A place with the given UID does not exist.");'
@@ -1758,7 +1756,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
 
 		try {
-			$speaker = $speakerMapper->find(intval($formData['editSpeaker_uid']));
+			$speaker = $speakerMapper->find((int)$formData['editSpeaker_uid']);
 		} catch (Exception $exception) {
 			return $formidable->majixExecJs(
 				'alert("The speaker with the given UID does not exist.");'
@@ -1850,7 +1848,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 
 		if (is_array($formData[$prefix . 'skills'])) {
 			foreach ($formData[$prefix . 'skills'] as $rawUid) {
-				$safeUid = intval($rawUid);
+				$safeUid = (int)$rawUid;
 				if ($safeUid > 0) {
 					$skills->add($skillMapper->find($safeUid));
 				}
@@ -1861,7 +1859,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$speaker->setSkills($skills);
 
 		$speaker->setName(trim(strip_tags($formData[$prefix . 'title'])));
-		$speaker->setGender(intval($formData[$prefix . 'gender']));
+		$speaker->setGender((int)$formData[$prefix . 'gender']);
 		$speaker->setOrganization($formData[$prefix . 'organization']);
 		$speaker->setHomepage(trim(strip_tags($formData[$prefix . 'homepage'])));
 		$speaker->setDescription(trim($formData[$prefix . 'description']));
@@ -1872,7 +1870,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$speaker->setPhoneMobile(trim(strip_tags($formData[$prefix . 'phone_mobile'])));
 		$speaker->setFax(trim(strip_tags($formData[$prefix . 'fax'])));
 		$speaker->setEMailAddress(trim(strip_tags($formData[$prefix . 'email'])));
-		$speaker->setCancelationPeriod(intval($formData[$prefix . 'cancelation_period']));
+		$speaker->setCancelationPeriod((int)$formData[$prefix . 'cancelation_period']);
 	}
 
 	/**
@@ -1893,7 +1891,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
 
 		try {
-			$speaker = $speakerMapper->find(intval($speakerUid));
+			$speaker = $speakerMapper->find((int)$speakerUid);
 		} catch (tx_oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
 				'alert("A speaker with the given UID does not exist.");'
@@ -2023,7 +2021,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
 
 		try {
-			$checkbox = $checkboxMapper->find(intval($formData['editCheckbox_uid']));
+			$checkbox = $checkboxMapper->find((int)$formData['editCheckbox_uid']);
 		} catch (Exception $exception) {
 			return $formidable->majixExecJs(
 				'alert("The checkbox with the given UID does not exist.");'
@@ -2118,7 +2116,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
 
 		try {
-			$checkbox = $checkboxMapper->find(intval($checkboxUid));
+			$checkbox = $checkboxMapper->find((int)$checkboxUid);
 		} catch (tx_oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
 				'alert("A checkbox with the given UID does not exist.");'
@@ -2232,7 +2230,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$targetGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup');
 
 		try {
-			$targetGroup = $targetGroupMapper->find(intval($formData['editTargetGroup_uid']));
+			$targetGroup = $targetGroupMapper->find((int)$formData['editTargetGroup_uid']);
 		} catch (Exception $exception) {
 			return $formidable->majixExecJs(
 				'alert("The target group with the given UID does not exist.");'
@@ -2333,8 +2331,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		tx_seminars_Model_TargetGroup $targetGroup, $prefix, array $formData
 	) {
 		$targetGroup->setTitle($formData[$prefix . 'title']);
-		$targetGroup->setMinimumAge(intval($formData[$prefix . 'minimum_age']));
-		$targetGroup->setMaximumAge(intval($formData[$prefix . 'maximum_age']));
+		$targetGroup->setMinimumAge((int)$formData[$prefix . 'minimum_age']);
+		$targetGroup->setMaximumAge((int)$formData[$prefix . 'maximum_age']);
 	}
 
 	/**
@@ -2359,7 +2357,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		);
 
 		try {
-			$targetGroup = $targetGroupMapper->find(intval($targetGroupUid));
+			$targetGroup = $targetGroupMapper->find((int)$targetGroupUid);
 		} catch (tx_oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
 				'alert("A target group with the given UID does not exist.");'

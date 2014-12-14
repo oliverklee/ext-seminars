@@ -413,9 +413,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * @return void
 	 */
 	public function setAllowUnregistrationWithEmptyWaitingList($isAllowed) {
-		$this->setConfigurationValue(
-			'allowUnregistrationWithEmptyWaitingList', intval($isAllowed)
-		);
+		$this->setConfigurationValue('allowUnregistrationWithEmptyWaitingList', (int)$isAllowed);
 	}
 
 	/**
@@ -620,7 +618,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	}
 
 	/**
-	 * Gets an (intval'ed) integer element of the record data array.
+	 * Gets an int element of the record data array.
 	 * If the array has not been initialized properly, 0 is returned instead.
 	 * If we are a date record, it'll be retrieved from the corresponding
 	 * topic record.
@@ -634,7 +632,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	}
 
 	/**
-	 * Sets an integer element of the record data array (and intvals it).
+	 * Sets an int element of the record data array.
 	 *
 	 * @param string $key key of the element to set (must be non-empty)
 	 * @param int $value the value that will be written into the element
