@@ -509,7 +509,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'tx_seminars_seminars_place_mm.uid_local = ' .
 				'tx_seminars_seminars.uid',
 			'tx_seminars_seminars.uid = ' . $this->getUid() .
-				' AND tx_seminars_sites.country != ""' .
+				' AND tx_seminars_sites.country <> ""' .
 				tx_oelib_db::enableFields('tx_seminars_sites'),
 			'country'
 		);
@@ -2963,7 +2963,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'registration_queue=0'
 		) + $this->getOfflineRegistrations();
 		$this->numberOfAttendancesPaid = $this->countAttendances(
-			'datepaid != 0 AND registration_queue = 0'
+			'datepaid <> 0 AND registration_queue = 0'
 		);
 		$this->numberOfAttendancesOnQueue = $this->countAttendances(
 			'registration_queue=1'
@@ -3014,7 +3014,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'tx_seminars_attendances',
 			$queryParameters .
 				' AND seminar = ' . $this->getUid() .
-				' AND seats != 0' .
+				' AND seats <> 0' .
 				tx_oelib_db::enableFields('tx_seminars_attendances')
 		);
 
@@ -3868,7 +3868,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$beginDate = $this->getBeginDateAsTimestamp();
 		$endDate = $this->getEndDateAsTimestampEvenIfOpenEnded();
 
-		$result = 'tx_seminars_seminars.uid != ' . $this->getUid() .
+		$result = 'tx_seminars_seminars.uid <> ' . $this->getUid() .
 			' AND allows_multiple_registrations = 0' .
 			' AND skip_collision_check = 0' .
 			' AND (' .

@@ -71,7 +71,7 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	 */
 	public function limitToPaid() {
 		$this->whereClauseParts['paid'] = 'tx_seminars_attendances' .
-			'.datepaid != 0';
+			'.datepaid <> 0';
 	}
 
 	/**

@@ -134,7 +134,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 		$this->whereClauseParts['categories'] =
 			'(' .
-			'(object_type != ' . tx_seminars_Model_Event::TYPE_DATE . ' AND ' .
+			'(object_type <> ' . tx_seminars_Model_Event::TYPE_DATE . ' AND ' .
 			'tx_seminars_seminars.uid' . $uidMatcher . ')' .
 			' OR ' .
 			'(object_type = ' . tx_seminars_Model_Event::TYPE_DATE . ' AND ' .
@@ -174,7 +174,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * @return void
 	 */
 	public function ignoreCanceledEvents() {
-		$this->whereClauseParts['hideCanceledEvents'] = 'cancelled!=' .
+		$this->whereClauseParts['hideCanceledEvents'] = 'cancelled <> ' .
 			tx_seminars_seminar::STATUS_CANCELED;
 	}
 
@@ -213,8 +213,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 				// 2. If the event has an end date, does it lie in the past?, OR
 				// 3. If the event has *no* end date, does the *begin* date lie
 				//    in the past?
-				$where = 'tx_seminars_seminars.begin_date != 0 ' .
-					'AND ( (tx_seminars_seminars.end_date != 0 ' .
+				$where = 'tx_seminars_seminars.begin_date <> 0 ' .
+					'AND ( (tx_seminars_seminars.end_date <> 0 ' .
 							'AND tx_seminars_seminars.end_date <= ' . $now .
 						') OR (' .
 							'tx_seminars_seminars.end_date = 0 ' .
@@ -227,7 +227,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 				// 1. Generally, only events that have a begin date set, AND
 				// 2. the begin date lies in the past.
 				// (So events without a begin date won't be listed here.)
-				$where = 'tx_seminars_seminars.begin_date != 0 ' .
+				$where = 'tx_seminars_seminars.begin_date <> 0 ' .
 					'AND tx_seminars_seminars.begin_date <= ' . $now;
 				break;
 			case 'current':
@@ -235,7 +235,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 				// 1. Events that have both a begin and end date, AND
 				// 2. The begin date lies in the past, AND
 				// 3. The end date lies in the future.
-				$where = 'tx_seminars_seminars.begin_date != 0 ' .
+				$where = 'tx_seminars_seminars.begin_date <> 0 ' .
 					'AND tx_seminars_seminars.begin_date <= ' . $now . ' ' .
 					// This implies that end_date is != 0.
 					'AND tx_seminars_seminars.end_date > ' . $now;
@@ -274,7 +274,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 				//    (events that have not started yet), OR
 				// 3. Events that have no (begin) date set yet.
 				$where = '(' .
-						'tx_seminars_seminars.deadline_registration != 0 ' .
+						'tx_seminars_seminars.deadline_registration <> 0 ' .
 						'AND tx_seminars_seminars.deadline_registration > ' . $now .
 					') OR (' .
 						'tx_seminars_seminars.deadline_registration = 0 ' .
@@ -585,7 +585,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 		$this->whereClauseParts['other_dates'] = '(' .
 			'tx_seminars_seminars.topic = ' . $event->getTopicUid() .
 			' AND object_type = ' . tx_seminars_Model_Event::TYPE_DATE .
-			' AND uid != ' . $event->getUid() .
+			' AND uid <> ' . $event->getUid() .
 		')';
 	}
 
@@ -799,7 +799,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 				' AND tx_seminars_event_types.uid = s1.event_type' .
 				' AND ((s1.uid = s2.topic AND s2.object_type = ' .
 						tx_seminars_Model_Event::TYPE_DATE . ') ' .
-					'OR (s1.uid = s2.uid AND s1.object_type != ' .
+					'OR (s1.uid = s2.uid AND s1.object_type <> ' .
 						tx_seminars_Model_Event::TYPE_DATE . '))' .
 				' AND s2.uid=tx_seminars_seminars.uid)' .
 			')';
@@ -952,7 +952,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 					$foreignTable .
 				' WHERE ((tx_seminars_seminars.object_type = ' .
 						tx_seminars_Model_Event::TYPE_DATE .
-						' AND s1.object_type != ' . tx_seminars_Model_Event::TYPE_DATE .
+						' AND s1.object_type <> ' . tx_seminars_Model_Event::TYPE_DATE .
 						' AND tx_seminars_seminars.topic = s1.uid)' .
 					' OR (tx_seminars_seminars.object_type = ' .
 						tx_seminars_Model_Event::TYPE_COMPLETE .
