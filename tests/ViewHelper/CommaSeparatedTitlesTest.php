@@ -51,13 +51,13 @@ class tx_seminars_ViewHelper_CommaSeparatedTitlesTest extends tx_phpunit_testcas
 	 */
 	const TIME_FORMAT = '%H:%M';
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
 		$this->list = new tx_oelib_List();
 		$this->fixture = new tx_seminars_ViewHelper_CommaSeparatedTitles();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 		unset($this->fixture, $this->list, $this->testingFramework);
 	}

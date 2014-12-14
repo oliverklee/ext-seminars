@@ -61,7 +61,7 @@ class tx_seminars_ViewHelper_TimeRangeTest extends tx_phpunit_testcase {
 	 */
 	const TIME_FORMAT = '%H:%M';
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
 
 		$this->configuration = new tx_oelib_Configuration();
@@ -74,7 +74,7 @@ class tx_seminars_ViewHelper_TimeRangeTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_ViewHelper_TimeRange();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		unset($this->fixture, $this->testingFramework, $this->configuration, $this->translator);

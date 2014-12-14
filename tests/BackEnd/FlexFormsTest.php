@@ -51,7 +51,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 	 */
 	private $tcaBackup;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->fixture = new tx_seminars_flexForms();
 		$this->tcaBackup = $GLOBALS['TCA'][$this->testingTable]['ctrl'];
@@ -60,7 +60,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 		$GLOBALS['TCA'][$this->testingTable]['ctrl']['iconfile'] = 'fooicon';
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 		$GLOBALS['TCA'][$this->testingTable]['ctrl'] = $this->tcaBackup;
 		unset(

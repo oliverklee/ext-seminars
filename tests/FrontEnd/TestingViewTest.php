@@ -43,7 +43,7 @@ class tx_seminars_FrontEnd_TestingViewTest extends tx_phpunit_testcase {
 	 */
 	private $testingFramework;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 		$this->fixture = new tx_seminars_tests_fixtures_FrontEnd_TestingView(
@@ -52,7 +52,7 @@ class tx_seminars_FrontEnd_TestingViewTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		unset($this->fixture, $this->testingFramework);

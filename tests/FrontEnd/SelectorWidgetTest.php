@@ -48,7 +48,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	 */
 	protected $staticInfo;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
@@ -61,7 +61,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		if ($this->staticInfo) {
 			unset($this->staticInfo);
 		}

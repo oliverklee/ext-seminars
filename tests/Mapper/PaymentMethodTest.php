@@ -41,13 +41,13 @@ class tx_seminars_Mapper_PaymentMethodTest extends tx_phpunit_testcase {
 	 */
 	private $fixture;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->fixture = new tx_seminars_Mapper_PaymentMethod();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		unset($this->fixture, $this->testingFramework);

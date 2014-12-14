@@ -63,7 +63,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 */
 	protected $mailer = NULL;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->languageBackup = $GLOBALS['LANG']->lang;
 		$GLOBALS['LANG']->lang = 'default';
 
@@ -110,7 +110,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		$this->fixture->setDateFormat();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$GLOBALS['LANG']->lang = $this->languageBackup;
 
 		$this->testingFramework->cleanUp();

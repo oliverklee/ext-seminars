@@ -46,7 +46,7 @@ class tx_seminars_ViewHelper_CountdownTest extends tx_phpunit_testcase {
 	 */
 	private $translator;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
 
 		$this->translator = tx_oelib_TranslatorRegistry::getInstance()->get('seminars');
@@ -54,7 +54,7 @@ class tx_seminars_ViewHelper_CountdownTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_ViewHelper_Countdown();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		unset($this->fixture, $this->testingFramework, $this->translator);

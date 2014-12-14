@@ -42,12 +42,12 @@ class tx_seminars_Mapper_FrontEndUserGroupTest extends tx_phpunit_testcase {
 	 */
 	private $testingFramework;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->fixture = new tx_seminars_Mapper_FrontEndUserGroup();
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 		unset($this->fixture, $this->testingFramework);
 	}

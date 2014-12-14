@@ -41,13 +41,13 @@ class tx_seminars_Mapper_EventTopicTest extends tx_phpunit_testcase {
 	 */
 	private $fixture;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->fixture = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		unset($this->fixture, $this->testingFramework);

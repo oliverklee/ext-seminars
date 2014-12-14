@@ -37,11 +37,11 @@ class tx_seminars_Model_PlaceTest extends tx_phpunit_testcase {
 	 */
 	private $fixture;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->fixture = new tx_seminars_Model_Place();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		unset($this->fixture);
 	}
 

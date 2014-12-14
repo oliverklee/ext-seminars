@@ -45,7 +45,7 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 	 */
 	private $fixtureUid = 0;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$systemFolderUid = $this->testingFramework->createSystemFolder();
 		$this->testingFramework->createTemplate(
@@ -71,7 +71,7 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_tests_fixtures_OldModel_Testing($this->fixtureUid);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		unset($this->fixture, $this->testingFramework);

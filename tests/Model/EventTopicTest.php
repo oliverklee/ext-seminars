@@ -37,11 +37,11 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 	 */
 	private $fixture;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->fixture = new tx_seminars_Model_Event();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		unset($this->fixture);
 	}
 

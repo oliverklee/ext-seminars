@@ -47,7 +47,7 @@ class tx_seminars_OldModel_SpeakerTest extends tx_phpunit_testcase {
 	 */
 	private $maximalFixture;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$fixtureUid = $this->testingFramework->createRecord(
 			'tx_seminars_speakers',
@@ -77,7 +77,7 @@ class tx_seminars_OldModel_SpeakerTest extends tx_phpunit_testcase {
 		$this->maximalFixture = new tx_seminars_speaker($maximalFixtureUid);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		unset($this->fixture, $this->testingFramework);

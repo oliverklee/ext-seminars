@@ -34,7 +34,7 @@ class tx_seminars_OldModel_TimeSlotTest extends tx_phpunit_testcase {
 	private $fixture;
 	private $testingFramework;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
@@ -53,7 +53,7 @@ class tx_seminars_OldModel_TimeSlotTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_timeslotchild($fixtureUid);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		unset($this->fixture, $this->testingFramework);

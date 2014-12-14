@@ -42,14 +42,14 @@ class tx_seminars_ConfigCheckTest extends tx_phpunit_testcase {
 	 */
 	private $objectToCheck;
 
-	public function setUp() {
+	protected function setUp() {
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', TRUE);
 
 		$this->objectToCheck = new tx_oelib_dummyObjectToCheck(array());
 		$this->fixture = new tx_seminars_configcheck($this->objectToCheck);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		unset($this->fixture, $this->objectToCheck);
 	}
 

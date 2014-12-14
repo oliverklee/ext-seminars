@@ -54,7 +54,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 	 */
 	protected $pageUid = 0;
 
-	public function setUp() {
+	protected function setUp() {
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
 
@@ -69,7 +69,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 		$this->subject = new Tx_Seminars_Csv_EventListView();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		unset($this->subject, $this->testingFramework, $this->configuration);

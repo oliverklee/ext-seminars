@@ -83,7 +83,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 	 */
 	protected $mailer = NULL;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = array();
@@ -144,7 +144,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 		$this->fixture->injectLinkBuilder($this->linkBuilder);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$GLOBALS['LANG']->lang = $this->languageBackup;
 
 		$this->testingFramework->cleanUp();

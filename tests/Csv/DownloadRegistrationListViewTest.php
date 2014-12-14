@@ -61,7 +61,7 @@ class Tx_Seminars_Tests_Csv_DownloadRegistrationListViewTest extends Tx_Phpunit_
 	 */
 	protected $eventUid = 0;
 
-	public function setUp() {
+	protected function setUp() {
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
 
@@ -86,7 +86,7 @@ class Tx_Seminars_Tests_Csv_DownloadRegistrationListViewTest extends Tx_Phpunit_
 		$this->subject->setEventUid($this->eventUid);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		unset($this->subject, $this->testingFramework, $this->configuration);

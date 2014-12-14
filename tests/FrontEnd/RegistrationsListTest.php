@@ -56,7 +56,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	 */
 	private $registrationUid = 0;
 
-	public function setUp() {
+	protected function setUp() {
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
 
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
@@ -85,7 +85,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();

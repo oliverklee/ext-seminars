@@ -52,7 +52,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	 */
 	private $t3VarBackup = array();
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->fixture = new tx_seminars_EmailSalutation();
 		$configuration = new tx_oelib_Configuration();
@@ -63,7 +63,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;

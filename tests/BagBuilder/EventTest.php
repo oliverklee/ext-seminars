@@ -51,7 +51,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	 */
 	private $future;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework
 			= new tx_oelib_testingFramework('tx_seminars');
 
@@ -61,7 +61,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->past = $GLOBALS['EXEC_TIME'] - 50;
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();

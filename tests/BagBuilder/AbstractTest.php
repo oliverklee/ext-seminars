@@ -44,7 +44,7 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 	/** PID of a dummy system folder */
 	private $dummySysFolderPid = 0;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->fixture = new tx_seminars_tests_fixtures_BagBuilder_Testing();
@@ -53,7 +53,7 @@ class tx_seminars_BagBuilder_AbstractTest extends tx_phpunit_testcase {
 		$this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 		unset($this->fixture, $this->testingFramework);
 	}

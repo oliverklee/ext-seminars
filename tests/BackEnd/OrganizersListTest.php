@@ -55,7 +55,7 @@ class tx_seminars_BackEnd_OrganizersListTest extends tx_phpunit_testcase {
 	*/
 	private $originalLanguage;
 
-	public function setUp() {
+	protected function setUp() {
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
 
 		// Sets the localization to the default language so that all tests can
@@ -88,7 +88,7 @@ class tx_seminars_BackEnd_OrganizersListTest extends tx_phpunit_testcase {
 		);
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		// Resets the language of the interface to the value it had before
 		// we set it to "default" for testing.
 		$GLOBALS['LANG']->lang = $this->originalLanguage;

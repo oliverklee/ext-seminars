@@ -85,7 +85,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 */
 	private $linkBuilder = NULL;
 
-	public function setUp() {
+	protected function setUp() {
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
 
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
@@ -159,7 +159,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->cObj = $content;
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();

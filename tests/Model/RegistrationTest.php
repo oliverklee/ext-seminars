@@ -42,12 +42,12 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 */
 	private $testingFramework;
 
-	public function setUp() {
+	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->fixture = new tx_seminars_Model_Registration();
 	}
 
-	public function tearDown() {
+	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 		unset($this->fixture, $this->testingFramework);
 	}
