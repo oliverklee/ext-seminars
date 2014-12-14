@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#5203] Cleanup: Shorten the boolean casts
 - [#5201] Cleanup: Convert intval/float to casts
 - [#5200] Cleanup: boolean -> bool, integer -> int
 - [#5088] Cleanup: Shorten the die() line

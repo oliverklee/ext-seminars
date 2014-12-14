@@ -443,7 +443,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @return bool TRUE if the checkbox is checked or we are not on the confirmation page, FALSE otherwise
 	 */
 	public function isTermsChecked(array $formData) {
-		return ((boolean) $formData['value']) || ($this->currentPageNumber != 2);
+		return (bool)$formData['value'] || ($this->currentPageNumber != 2);
 	}
 
 	/**
@@ -469,7 +469,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *                 has not just been clicked, FALSE if it is not checked AND enabled in the configuration
 	 */
 	public function isTerms2CheckedAndEnabled(array $formData) {
-		return ((boolean) $formData['value']) || !$this->isTerms2Enabled() || ($this->currentPageNumber != 2);
+		return (bool)$formData['value'] || !$this->isTerms2Enabled() || ($this->currentPageNumber != 2);
 	}
 
 	/**
@@ -499,7 +499,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @return bool TRUE if a radio button is selected, FALSE if none is selected
 	 */
 	private function isRadioButtonSelected($radioGroupValue) {
-		return (boolean) $radioGroupValue;
+		return (bool)$radioGroupValue;
 	}
 
 	/**
@@ -1098,7 +1098,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 				// so we wouldn't be here. So let's convert the "gender" index
 				// into a readable string.
 				if ($key === 'gender') {
-					$currentFormData = $this->translate('label_gender.I.' . (integer) $currentFormData);
+					$currentFormData = $this->translate('label_gender.I.' . (int)$currentFormData);
 				}
 				$processedFormData = str_replace(CR, '<br />', htmlspecialchars($currentFormData));
 				$wrappedFormData = '<span class="tx-seminars-billing-data-item tx-seminars-billing-data-item-' . $key . '">' .

@@ -538,7 +538,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$registration->setSeats($seats);
 
 		$registeredThemselves = isset($formData['registered_themselves'])
-			? ((boolean) $formData['registered_themselves']) : FALSE;
+			? (bool)$formData['registered_themselves'] : FALSE;
 		$registration->setRegisteredThemselves($registeredThemselves);
 
 		$availablePrices = $event->getAvailablePrices();

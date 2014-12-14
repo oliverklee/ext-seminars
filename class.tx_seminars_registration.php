@@ -476,12 +476,12 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 				$result = $this->translate('label_gender.I.' . $rawData);
 				break;
 			case 'status':
-				if ((integer) $rawData !== 0) {
+				if ((int)$rawData !== 0) {
 					$result = $this->translate('label_status.I.' . $rawData);
 				}
 				break;
 			case 'wheelchair':
-				$result = ((boolean) $rawData) ? $this->translate('label_yes') : $this->translate('label_no');
+				$result = (bool)$rawData ? $this->translate('label_yes') : $this->translate('label_no');
 				break;
 			case 'crdate':
 				// The fallthrough is intended.

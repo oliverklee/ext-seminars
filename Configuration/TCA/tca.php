@@ -95,9 +95,9 @@ if (!function_exists('user_createCountrySelector')) {
 
 // unserializes the configuration array
 $globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
-$usePageBrowser = (boolean) $globalConfiguration['usePageBrowser'];
-$useGeneralRecordStoragePage = (boolean) $globalConfiguration['useStoragePid'];
-$selectTopicsFromAllPages = (boolean) $globalConfiguration['selectTopicsFromAllPages'];
+$usePageBrowser = (bool)$globalConfiguration['usePageBrowser'];
+$useGeneralRecordStoragePage = (bool)$globalConfiguration['useStoragePid'];
+$selectTopicsFromAllPages = (bool)$globalConfiguration['selectTopicsFromAllPages'];
 $selectType = $usePageBrowser ? 'group' : 'select';
 $selectWhereForTopics = ($selectTopicsFromAllPages) ? '' : ' AND tx_seminars_seminars.pid=###STORAGE_PID###';
 

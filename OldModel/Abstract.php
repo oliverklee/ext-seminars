@@ -221,7 +221,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * @return bool TRUE if the corresponding value exists and is non-zero
 	 */
 	public function hasRecordPropertyInteger($key) {
-		return (boolean) $this->getRecordPropertyInteger($key);
+		return $this->getRecordPropertyInteger($key) !== 0;
 	}
 
 	/**
@@ -234,7 +234,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *                 is not "0.00".
 	 */
 	public function hasRecordPropertyDecimal($key) {
-		return ($this->getRecordPropertyDecimal($key) != '0.00');
+		return $this->getRecordPropertyDecimal($key) != '0.00';
 	}
 
 	/**
@@ -287,7 +287,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 */
 	protected function setRecordPropertyBoolean($key, $value) {
 		if (!empty($key)) {
-			$this->recordData[$key] = (boolean) $value;
+			$this->recordData[$key] = (bool)$value;
 		}
 	}
 
@@ -300,10 +300,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * @return bool the corresponding element from the record data array
 	 */
 	public function getRecordPropertyBoolean($key) {
-		$result = $this->hasKey($key)
-			? ((boolean) $this->recordData[$key]) : FALSE;
-
-		return $result;
+		return $this->hasKey($key) ? ((bool)$this->recordData[$key]) : FALSE;
 	}
 
 	/**

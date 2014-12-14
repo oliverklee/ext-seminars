@@ -481,8 +481,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                 for the current event
 	 */
 	public function hasCountry() {
-		return $this->hasPlace()
-			&& (boolean) count($this->getPlacesWithCountry());
+		return $this->hasPlace() && !empty($this->getPlacesWithCountry());
 	}
 
 	/**
@@ -1750,7 +1749,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                 event, FALSE otherwise
 	 */
 	public function hasAttendances() {
-		return (boolean) $this->getAttendances();
+		return $this->getAttendances() > 0;
 	}
 
 	/**
@@ -4025,7 +4024,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		// one entry.
 		if ($dbResult) {
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-				$result[] = (integer) $row['uid_foreign'];
+				$result[] = (int)$row['uid_foreign'];
 			}
 		}
 

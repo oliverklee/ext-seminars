@@ -25,7 +25,7 @@ if (!function_exists('txSeminarsGetTableRelationsClause')) {
 }
 
 $globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
-$usePageBrowser = (boolean) $globalConfiguration['usePageBrowser'];
+$usePageBrowser = (bool)$globalConfiguration['usePageBrowser'];
 $selectType = $usePageBrowser ? 'group' : 'select';
 
 $addToFeInterface = (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 6002000);
@@ -137,7 +137,7 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 							'icon' => 'list.gif',
 							'params' => array (
 								'table'=>'tx_seminars_categories',
-								'pid' => ((boolean) $globalConfiguration['useStoragePid'] ?
+								'pid' => ((bool)$globalConfiguration['useStoragePid'] ?
 									'###STORAGE_PID###' : '###CURRENT_PID###'),
 							),
 							'script' => 'wizard_list.php',

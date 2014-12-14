@@ -173,7 +173,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 		/** @var $listView Tx_Seminars_Csv_EmailRegistrationListView */
 		$listView = t3lib_div::makeInstance('Tx_Seminars_Csv_DownloadRegistrationListView');
 
-		$pageUid = (integer) $this->piVars['pid'];
+		$pageUid = (int)$this->piVars['pid'];
 		if ($eventUid > 0) {
 			if (!$this->hasAccessToEventAndItsRegistrations($eventUid)) {
 				return $this->addErrorHeaderAndReturnMessage($this->errorType);
