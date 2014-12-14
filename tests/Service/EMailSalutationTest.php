@@ -67,8 +67,6 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		$this->testingFramework->cleanUp();
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
-
-		unset($this->testingFramework, $this->fixture);
 	}
 
 

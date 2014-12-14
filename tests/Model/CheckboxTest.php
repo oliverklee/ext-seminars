@@ -40,11 +40,6 @@ class tx_seminars_Model_CheckboxTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_Model_Checkbox();
 	}
 
-	protected function tearDown() {
-		unset($this->fixture);
-	}
-
-
 	/**
 	 * @test
 	 */

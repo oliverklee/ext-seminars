@@ -40,11 +40,6 @@ class tx_seminars_Model_AbstractTimeSpanTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_tests_fixtures_TestingTimeSpan();
 	}
 
-	protected function tearDown() {
-		unset($this->fixture);
-	}
-
-
 	/**
 	 * @test
 	 */

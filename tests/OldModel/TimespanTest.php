@@ -37,11 +37,6 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_timespanchild(array());
 	}
 
-	protected function tearDown() {
-		unset($this->fixture);
-	}
-
-
 	/////////////////////////////////////////////
 	// Test for getting the begin and end date.
 	/////////////////////////////////////////////

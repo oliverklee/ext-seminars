@@ -62,14 +62,9 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	}
 
 	protected function tearDown() {
-		if ($this->staticInfo) {
-			unset($this->staticInfo);
-		}
-
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();
-		unset($this->fixture, $this->testingFramework);
 	}
 
 

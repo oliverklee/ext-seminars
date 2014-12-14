@@ -56,8 +56,6 @@ class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
-
-		unset($this->fixture, $this->testingFramework);
 	}
 
 	public function testCreateFromUid() {

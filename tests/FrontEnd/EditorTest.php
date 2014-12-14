@@ -52,12 +52,11 @@ class tx_seminars_FrontEnd_EditorTest extends tx_phpunit_testcase {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();
-		unset($this->fixture, $this->testingFramework);
 	}
 
 
 	//////////////////////////////
-	// Testing the testmode flag
+	// Testing the test mode flag
 	//////////////////////////////
 
 	public function testIsTestModeReturnsTrueForTestModeEnabled() {

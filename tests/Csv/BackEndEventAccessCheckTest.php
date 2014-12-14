@@ -57,8 +57,6 @@ class Tx_Seminars_Tests_Csv_BackEndEventAccessCheckTest extends Tx_Phpunit_TestC
 	protected function tearDown() {
 		Tx_Oelib_BackEndLoginManager::purgeInstance();
 		$GLOBALS['BE_USER'] = $this->backEndUserBackup;
-
-		unset($this->subject, $this->backEndUser, $this->backEndUserBackup);
 	}
 
 	/**

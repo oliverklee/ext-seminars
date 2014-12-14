@@ -94,8 +94,6 @@ class tx_seminars_BackEnd_SpeakersListTest extends tx_phpunit_testcase {
 		$GLOBALS['LANG']->lang = $this->originalLanguage;
 
 		$this->testingFramework->cleanUp();
-
-		unset($this->backEndModule, $this->fixture, $this->testingFramework);
 	}
 
 	/**

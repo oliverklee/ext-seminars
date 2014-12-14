@@ -42,11 +42,6 @@ class tx_seminars_BackEnd_ModuleTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_BackEnd_Module();
 	}
 
-	protected function tearDown() {
-		unset($this->fixture);
-	}
-
-
 	////////////////////////////////////////////////
 	// Tests for getting and setting the page data
 	////////////////////////////////////////////////

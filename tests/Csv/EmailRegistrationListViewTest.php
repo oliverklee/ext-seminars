@@ -88,8 +88,6 @@ class Tx_Seminars_Tests_Csv_EmailRegistrationListViewTest extends Tx_Phpunit_Tes
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
-
-		unset($this->subject, $this->testingFramework, $this->configuration);
 	}
 
 	/**

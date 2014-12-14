@@ -63,10 +63,6 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 		$GLOBALS['TCA'][$this->testingTable]['ctrl'] = $this->tcaBackup;
-		unset(
-			$this->fixture, $this->testingFramework, $this->tcaBackup,
-			$this->testingTable
-		);
 	}
 
 

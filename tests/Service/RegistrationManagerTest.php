@@ -153,10 +153,6 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();
-		unset(
-			$this->seminar, $this->pi1, $this->fixture, $this->testingFramework,
-			$this->linkBuilder, $this->fullyBookedSeminar, $this->cachedSeminar, $this->mailer
-		);
 
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;

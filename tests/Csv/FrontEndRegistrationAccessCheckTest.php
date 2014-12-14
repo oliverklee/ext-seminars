@@ -60,8 +60,6 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 	protected function tearDown() {
 		Tx_Oelib_ConfigurationRegistry::purgeInstance();
 		Tx_Oelib_FrontEndLoginManager::purgeInstance();
-
-		unset($this->subject, $this->seminarsPluginConfiguration);
 	}
 
 	/**

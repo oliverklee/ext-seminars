@@ -89,7 +89,6 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();
-		unset($this->fixture, $this->testingFramework);
 	}
 
 

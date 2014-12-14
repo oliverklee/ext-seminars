@@ -40,11 +40,6 @@ class tx_seminars_Model_FoodTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_Model_Food();
 	}
 
-	protected function tearDown() {
-		unset($this->fixture);
-	}
-
-
 	/**
 	 * @test
 	 */

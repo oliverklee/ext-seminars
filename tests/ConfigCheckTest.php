@@ -49,11 +49,6 @@ class tx_seminars_ConfigCheckTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_configcheck($this->objectToCheck);
 	}
 
-	protected function tearDown() {
-		unset($this->fixture, $this->objectToCheck);
-	}
-
-
 	//////////////////////////////////////
 	// Tests concerning checkCurrency().
 	//////////////////////////////////////

@@ -49,7 +49,6 @@ class tx_seminars_BagBuilder_SpeakerTest extends tx_phpunit_testcase {
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->fixture, $this->testingFramework);
 	}
 
 

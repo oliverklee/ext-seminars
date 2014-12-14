@@ -88,11 +88,6 @@ class tx_seminars_BackEnd_RegistrationsListTest extends tx_phpunit_testcase {
 
 		$this->testingFramework->cleanUp();
 		tx_seminars_registration::purgeCachedSeminars();
-
-		unset(
-			$this->backEndModule, $this->fixture, $this->testingFramework,
-			$_GET['eventUid']
-		);
 	}
 
 

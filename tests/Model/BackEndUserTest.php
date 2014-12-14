@@ -40,11 +40,6 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_Model_BackEndUser();
 	}
 
-	protected function tearDown() {
-		unset($this->fixture);
-	}
-
-
 	/////////////////////////////////////////////
 	// Tests concerning getEventFolderFromGroup
 	/////////////////////////////////////////////

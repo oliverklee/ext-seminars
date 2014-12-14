@@ -88,7 +88,6 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();
-		unset($this->fixture, $this->mapper, $this->testingFramework);
 	}
 
 

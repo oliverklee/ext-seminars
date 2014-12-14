@@ -65,9 +65,6 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();
-		unset(
-			$this->fixture, $this->testingFramework, $this->past, $this->future
-		);
 	}
 
 

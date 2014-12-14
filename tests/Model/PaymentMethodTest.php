@@ -40,11 +40,6 @@ class tx_seminars_Model_PaymentMethodTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_Model_PaymentMethod();
 	}
 
-	protected function tearDown() {
-		unset($this->fixture);
-	}
-
-
 	/**
 	 * @test
 	 */

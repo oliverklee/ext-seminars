@@ -76,8 +76,6 @@ class tx_seminars_ViewHelper_TimeRangeTest extends tx_phpunit_testcase {
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
-
-		unset($this->fixture, $this->testingFramework, $this->configuration, $this->translator);
 	}
 
 	/**

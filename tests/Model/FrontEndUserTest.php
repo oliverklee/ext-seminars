@@ -44,7 +44,6 @@ class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
-		unset($this->fixture);
 	}
 
 

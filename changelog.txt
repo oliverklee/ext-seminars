@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#5206] Cleanup: Drop the unset from tearDown()
 - [#5198] Cleanup: Make setUp and tearDown protected
 - [#4319} Fix: Change != to <> in SQL
 - [#5203] Cleanup: Shorten the boolean casts

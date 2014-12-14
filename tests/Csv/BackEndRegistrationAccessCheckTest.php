@@ -66,7 +66,6 @@ class Tx_Seminars_Tests_Csv_BackEndRegistrationAccessCheckTest extends Tx_Phpuni
 
 		$this->testingFramework->cleanUp();
 		$GLOBALS['BE_USER'] = $this->backEndUserBackup;
-		unset($this->subject, $this->testingFramework, $this->backEndUser, $this->backEndUserBackup);
 	}
 
 	/**

@@ -70,7 +70,6 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 
 		tx_seminars_registrationmanager::purgeInstance();
 		tx_oelib_configurationProxy::purgeInstances();
-		unset($this->testingFramework, $this->fixture, $this->mailer);
 	}
 
 

@@ -75,7 +75,6 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 		$_POST = $this->postBackup;
 
 		$this->testingFramework->cleanUp();
-		unset($this->testingFramework);
 	}
 
 

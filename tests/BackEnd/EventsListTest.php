@@ -102,8 +102,6 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 		$GLOBALS['LANG']->lang = $this->originalLanguage;
 
 		$this->testingFramework->cleanUp();
-
-		unset($this->backEndModule, $this->fixture, $this->testingFramework);
 	}
 
 

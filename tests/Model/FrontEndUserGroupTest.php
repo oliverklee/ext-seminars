@@ -42,11 +42,6 @@ class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_Model_FrontEndUserGroup();
 	}
 
-	protected function tearDown() {
-		unset($this->fixture);
-	}
-
-
 	///////////////////////////////////////
 	// Tests concerning getPublishSetting
 	///////////////////////////////////////

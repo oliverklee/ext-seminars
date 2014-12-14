@@ -149,8 +149,6 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 
 		$this->testingFramework->cleanUp();
 
-		unset($this->linkBuilder, $this->fixture, $this->testingFramework, $this->mailer);
-
 		$this->flushAllFlashMessages();
 
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;

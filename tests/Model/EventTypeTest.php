@@ -41,11 +41,6 @@ class tx_seminars_Model_EventTypeTest extends tx_phpunit_testcase {
 		$this->fixture = new tx_seminars_Model_EventType();
 	}
 
-	protected function tearDown() {
-		unset($this->fixture);
-	}
-
-
 	/**
 	 * @test
 	 */

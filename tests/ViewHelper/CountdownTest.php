@@ -56,8 +56,6 @@ class tx_seminars_ViewHelper_CountdownTest extends tx_phpunit_testcase {
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
-
-		unset($this->fixture, $this->testingFramework, $this->translator);
 	}
 
 	/**
