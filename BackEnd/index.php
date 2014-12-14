@@ -48,7 +48,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	/**
 	 * the ID of the currently selected sub module
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $subModule = 0;
 
@@ -260,7 +260,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * Checks whether the user requested the form for sending an e-mail and
 	 * whether all pre-conditions for showing the form are met.
 	 *
-	 * @return boolean TRUE if the form was requested and pre-conditions are met, FALSE otherwise
+	 * @return bool TRUE if the form was requested and pre-conditions are met, FALSE otherwise
 	 */
 	private function isGeneralEmailFormRequested() {
 		if (!(intval(t3lib_div::_POST('eventUid')) > 0)) {
@@ -274,7 +274,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * Checks whether the user requested the form for confirming an event and
 	 * whether all pre-conditions for showing the form are met.
 	 *
-	 * @return boolean TRUE if the form was requested and pre-conditions are met, FALSE otherwise
+	 * @return bool TRUE if the form was requested and pre-conditions are met, FALSE otherwise
 	 */
 	private function isConfirmEventFormRequested() {
 		if ((!intval(t3lib_div::_POST('eventUid')) > 0)) {
@@ -288,7 +288,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * Checks whether the user requested the form for canceling an event and
 	 * whether all pre-conditions for showing the form are met.
 	 *
-	 * @return boolean TRUE if the form was requested and pre-conditions are
+	 * @return bool TRUE if the form was requested and pre-conditions are
 	 *                 met, FALSE otherwise
 	 */
 	private function isCancelEventFormRequested() {
@@ -348,7 +348,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * Checks whether this extension's static template is included on the
 	 * current page.
 	 *
-	 * @return boolean TRUE if the static template has been included, FALSE otherwise
+	 * @return bool TRUE if the static template has been included, FALSE otherwise
 	 */
 	private function hasStaticTemplate() {
 		return tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsBoolean('isStaticTemplateLoaded');

@@ -89,7 +89,7 @@ class tx_seminars_ViewHelper_TimeRange {
 	 * Checks whether there's a time set (begin time !== 00:00).
 	 * If there's no date/time set, the result will be FALSE.
 	 *
-	 * @return boolean TRUE if we have a begin time, FALSE otherwise
+	 * @return bool TRUE if we have a begin time, FALSE otherwise
 	 */
 	protected function hasTime(tx_seminars_Model_AbstractTimeSpan $timeSpan) {
 		if (!$timeSpan->hasBeginDate()) {
@@ -103,7 +103,7 @@ class tx_seminars_ViewHelper_TimeRange {
 	 * Checks whether there's an end time set (end time !== 00:00).
 	 * If there's no end date/time set, the result will be FALSE.
 	 *
-	 * @return boolean TRUE if we have an end time, FALSE otherwise
+	 * @return bool TRUE if we have an end time, FALSE otherwise
 	 */
 	protected function hasEndTime(tx_seminars_Model_AbstractTimeSpan $timeSpan) {
 		if (!$timeSpan->hasEndDate()) {
@@ -116,7 +116,7 @@ class tx_seminars_ViewHelper_TimeRange {
 	/**
 	 * Returns the time portion of the given UNIX timestamp in the format specified in plugin.tx_seminars.timeFormat.
 	 *
-	 * @param integer $timestamp the UNIX timestamp to convert, must be >= 0
+	 * @param int $timestamp the UNIX timestamp to convert, must be >= 0
 	 *
 	 * @return string the time portion of the UNIX timestamp formatted according to the format in plugin.tx_seminars.timeFormat
 	 */
@@ -127,7 +127,7 @@ class tx_seminars_ViewHelper_TimeRange {
 	/**
 	 * Returns the time portion of the given UNIX timestamp.
 	 *
-	 * @param integer $timestamp the UNIX timestamp to convert, must be >= 0
+	 * @param int $timestamp the UNIX timestamp to convert, must be >= 0
 	 *
 	 * @return string the time portion of the UNIX timestamp
 	 */

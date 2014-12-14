@@ -102,7 +102,7 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 	 * Creates a hyperlink with the title $title to the current list view,
 	 * limited to the category provided by the parameter $categoryUid.
 	 *
-	 * @param integer $categoryUid UID of the category to which the list view should be limited, must be > 0
+	 * @param int $categoryUid UID of the category to which the list view should be limited, must be > 0
 	 * @param string $title title of the link, must not be empty
 	 *
 	 * @return string link to the list view limited to the given category or an

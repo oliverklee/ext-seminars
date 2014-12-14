@@ -42,12 +42,12 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	private $testingFramework;
 
 	/**
-	 * @var integer a UNIX timestamp in the past.
+	 * @var int a UNIX timestamp in the past.
 	 */
 	private $past;
 
 	/**
-	 * @var integer a UNIX timestamp in the future.
+	 * @var int a UNIX timestamp in the future.
 	 */
 	private $future;
 

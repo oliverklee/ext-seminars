@@ -59,7 +59,7 @@ class Tx_Seminars_Csv_FrontEndRegistrationAccessCheck implements Tx_Seminars_Int
 	/**
 	 * Checks whether the logged-in user (if any) in the current environment has access to a CSV export.
 	 *
-	 * @return boolean whether the logged-in user (if any) in the current environment has access to a CSV export.
+	 * @return bool whether the logged-in user (if any) in the current environment has access to a CSV export.
 	 *
 	 * @throws BadMethodCallException
 	 */

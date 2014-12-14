@@ -43,12 +43,12 @@ class tx_seminars_FrontEnd_CategoryListTest extends tx_phpunit_testcase {
 	private $testingFramework;
 
 	/**
-	 * @var integer the UID of a seminar to which the fixture relates
+	 * @var int the UID of a seminar to which the fixture relates
 	 */
 	private $seminarUid;
 
 	/**
-	 * @var integer PID of a dummy system folder
+	 * @var int PID of a dummy system folder
 	 */
 	private $systemFolderPid = 0;
 

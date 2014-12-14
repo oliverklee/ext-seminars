@@ -37,7 +37,7 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 	protected $fixture = NULL;
 
 	/**
-	 * @var integer the UID of a seminar to which the plugin relates
+	 * @var int the UID of a seminar to which the plugin relates
 	 */
 	protected $seminarUid = 0;
 
@@ -47,7 +47,7 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 	protected $testingFramework = NULL;
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	protected $systemFolderPid = 0;
 

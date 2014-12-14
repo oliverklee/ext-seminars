@@ -43,12 +43,12 @@ class tx_seminars_Bag_AbstractTest extends tx_phpunit_testcase {
 	private $testingFramework;
 
 	/**
-	 * @var integer the UID of the first test record in the DB
+	 * @var int the UID of the first test record in the DB
 	 */
 	private $uidOfFirstRecord = 0;
 
 	/**
-	 * @var integer the UID of the second test record in the DB
+	 * @var int the UID of the second test record in the DB
 	 */
 	private $uidOfSecondRecord = 0;
 

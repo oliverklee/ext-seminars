@@ -32,7 +32,7 @@
  */
 class tx_seminars_FrontEnd_PublishEvent extends tx_oelib_templatehelper {
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	const PUBLICATION_TYPE_NUMBER = 737;
 

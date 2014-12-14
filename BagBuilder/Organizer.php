@@ -46,7 +46,7 @@ class tx_seminars_BagBuilder_Organizer extends tx_seminars_BagBuilder_Abstract {
 	 * parameter $eventUid (must be a single or date event as topic events don't
 	 * have any organizers).
 	 *
-	 * @param integer $eventUid the event UID to limit the organizers for, must be > 0
+	 * @param int $eventUid the event UID to limit the organizers for, must be > 0
 	 *
 	 * @return void
 	 */

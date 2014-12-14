@@ -31,13 +31,13 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
-	/** @var integer the gender type for speakers without gender */
+	/** @var int the gender type for speakers without gender */
 	const GENDER_UNKNOWN = 0;
 
-	/** @var integer the gender type male for a speaker */
+	/** @var int the gender type male for a speaker */
 	const GENDER_MALE = 1;
 
-	/** @var integer the gender type female for a speaker */
+	/** @var int the gender type female for a speaker */
 	const GENDER_FEMALE = 2;
 
 	/**
@@ -65,7 +65,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns TRUE if this speaker has an organization, FALSE otherwise.
 	 *
-	 * @return boolean TRUE if this speaker has an organization, FALSE otherwise
+	 * @return bool TRUE if this speaker has an organization, FALSE otherwise
 	 */
 	public function hasOrganization() {
 		return $this->hasRecordPropertyString('organization');
@@ -83,7 +83,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns TRUE if this speaker has a homepage, FALSE otherwise.
 	 *
-	 * @return boolean TRUE if this speaker has a homepage, FALSE otherwise
+	 * @return bool TRUE if this speaker has a homepage, FALSE otherwise
 	 */
 	public function hasHomepage() {
 		return $this->hasRecordPropertyString('homepage');
@@ -114,7 +114,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns TRUE if this speaker has a description, FALSE otherwise.
 	 *
-	 * @return boolean TRUE if this speaker has a description, FALSE otherwise
+	 * @return bool TRUE if this speaker has a description, FALSE otherwise
 	 */
 	public function hasDescription() {
 		return $this->hasRecordPropertyString('description');
@@ -123,7 +123,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Checks whether we have any skills set.
 	 *
-	 * @return boolean TRUE if we have any skills related to this speaker,
+	 * @return bool TRUE if we have any skills related to this speaker,
 	 *                 FALSE otherwise
 	 */
 	public function hasSkills() {
@@ -165,7 +165,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Gets the number of skills associated with this speaker.
 	 *
-	 * @return integer the number of skills associated with this speaker,
+	 * @return int the number of skills associated with this speaker,
 	 *                 will be >= 0
 	 */
 	public function getNumberOfSkills() {
@@ -264,7 +264,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns the gender of this speaker.
 	 *
-	 * @return integer the gender of the speaker, will be either
+	 * @return int the gender of the speaker, will be either
 	 *                 GENDER_MALE,
 	 *                 GENDER_FEMALE or
 	 *                 GENDER_UNKNOWN if the speaker has no gender
@@ -276,7 +276,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets the gender of this speaker.
 	 *
-	 * @param integer $gender
+	 * @param int $gender
 	 *        the gender of the speaker, must be one of tx_seminars_speaker::GENDER_FEMALE, tx_seminars_speaker::GENDER_MALE
 	 *        or tx_seminars_speaker::GENDER_UNKNOWN
 	 *
@@ -289,7 +289,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns TRUE if this speaker has a cancelation period.
 	 *
-	 * @return boolean TRUE if the speaker has a cancelation period, FALSE
+	 * @return bool TRUE if the speaker has a cancelation period, FALSE
 	 *                 otherwise
 	 */
 	public function hasCancelationPeriod() {
@@ -299,7 +299,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns the cancelation period of this speaker in days.
 	 *
-	 * @return integer the cancelation period in days, will be >= 0
+	 * @return int the cancelation period in days, will be >= 0
 	 */
 	public function getCancelationPeriodInDays() {
 		return $this->getRecordPropertyInteger('cancelation_period');
@@ -308,7 +308,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets the gender cancelation period of this speaker
 	 *
-	 * @param integer $cancelationPeriod the cancelation period of this speaker in days, must be > 0
+	 * @param int $cancelationPeriod the cancelation period of this speaker in days, must be > 0
 	 *
 	 * @return void
 	 */
@@ -346,7 +346,7 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns TRUE if the speaker is hidden, otherwise FALSE.
 	 *
-	 * @return boolean TRUE if the speaker is hidden, FALSE otherwise
+	 * @return bool TRUE if the speaker is hidden, FALSE otherwise
 	 */
 	public function isHidden() {
 		return $this->getRecordPropertyBoolean('hidden');

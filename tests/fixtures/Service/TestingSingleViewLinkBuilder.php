@@ -67,7 +67,7 @@ class tx_seminars_tests_fixtures_Service_TestingSingleViewLinkBuilder extends tx
 	/**
 	 * Checks whether there is a single view page set in the configuration.
 	 *
-	 * @return boolean
+	 * @return bool
 	 *         TRUE if a single view page has been set in the configuration,
 	 *         FALSE otherwise
 	 */
@@ -79,7 +79,7 @@ class tx_seminars_tests_fixtures_Service_TestingSingleViewLinkBuilder extends tx
 	 * Retrieves the single view page UID from the flexforms/TS Setup
 	 * configuration.
 	 *
-	 * @return integer
+	 * @return int
 	 *         the single view page UID from the configuration, will be 0 if no
 	 *         page UID has been set
 	 */

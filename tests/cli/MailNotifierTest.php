@@ -85,7 +85,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 *
 	 * @param array $additionalSeminarData additional data for the seminar record, may be empty
 	 *
-	 * @return integer UID of the added event, will be > 0
+	 * @return int UID of the added event, will be > 0
 	 */
 	private function createSeminarWithOrganizer(array $additionalSeminarData = array()) {
 		$organizerUid = $this->testingFramework->createRecord(
@@ -108,7 +108,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 *
 	 * Note: This function must only be called once per test.
 	 *
-	 * @param integer $eventUid event UID, must be > 0
+	 * @param int $eventUid event UID, must be > 0
 	 *
 	 * @return void
 	 */

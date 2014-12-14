@@ -63,12 +63,12 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	protected $accessRights = array();
 
 	/**
-	 * @var integer the depth of the recursion for the back-end lists
+	 * @var int the depth of the recursion for the back-end lists
 	 */
 	const RECURSION_DEPTH = 250;
 
 	/**
-	 * @var integer the page type of a sys-folder
+	 * @var int the page type of a sys-folder
 	 */
 	const SYSFOLDER_TYPE = 254;
 
@@ -94,8 +94,8 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 * Generates an edit record icon which is linked to the edit view of
 	 * a record.
 	 *
-	 * @param integer $uid the UID of the record, must be > 0
-	 * @param integer $pageUid the PID of the record, must be >= 0
+	 * @param int $uid the UID of the record, must be > 0
+	 * @param int $pageUid the PID of the record, must be >= 0
 	 *
 	 * @return string the HTML source code to return
 	 */
@@ -123,8 +123,8 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 * Generates a linked delete record icon whith a JavaScript confirmation
 	 * window.
 	 *
-	 * @param integer $uid the UID of the record, must be > 0
-	 * @param integer $pageUid the PID of the record, must be >= 0
+	 * @param int $uid the UID of the record, must be > 0
+	 * @param int $pageUid the PID of the record, must be >= 0
 	 *
 	 * @return string the HTML source code to return
 	 */
@@ -165,7 +165,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	/**
 	 * Returns a "create new record" image tag that is linked to the new record view.
 	 *
-	 * @param integer $pid the page ID where the record should be stored, must be > 0
+	 * @param int $pid the page ID where the record should be stored, must be > 0
 	 *
 	 * @return string the HTML source code to return
 	 */
@@ -324,9 +324,9 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 * Generates a linked hide or unhide icon depending on the record's hidden
 	 * status.
 	 *
-	 * @param integer $uid the UID of the record, must be > 0
-	 * @param integer $pageUid the PID of the record, must be >= 0
-	 * @param boolean $hidden
+	 * @param int $uid the UID of the record, must be > 0
+	 * @param int $pageUid the PID of the record, must be >= 0
+	 * @param bool $hidden
 	 *        indicates whether the record is hidden (TRUE) or is visible (FALSE)
 	 *
 	 * @return string the HTML source code of the linked hide or unhide icon
@@ -361,9 +361,9 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 * Checks if the currently logged-in BE user has access to records on the
 	 * given page.
 	 *
-	 * @param integer $pageUid the page to check the access for, must be >= 0
+	 * @param int $pageUid the page to check the access for, must be >= 0
 	 *
-	 * @return boolean TRUE if the user has access, FALSE otherwise
+	 * @return bool TRUE if the user has access, FALSE otherwise
 	 */
 	protected function doesUserHaveAccess($pageUid) {
 		if (!isset($this->accessRights[$pageUid])) {
@@ -382,7 +382,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 * This will be determined by the storage setting of the logged-in BE-user's
 	 * groups.
 	 *
-	 * @return integer the PID for the storage of new records, will be >= 0
+	 * @return int the PID for the storage of new records, will be >= 0
 	 */
 	protected abstract function getNewRecordPid();
 

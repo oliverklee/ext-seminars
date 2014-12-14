@@ -41,7 +41,7 @@ class tx_seminars_BackEnd_SpeakersListTest extends tx_phpunit_testcase {
 	private $testingFramework;
 
 	/**
-	 * @var integer PID of a dummy system folder
+	 * @var int PID of a dummy system folder
 	 */
 	private $dummySysFolderPid = 0;
 

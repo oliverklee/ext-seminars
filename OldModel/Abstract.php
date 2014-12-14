@@ -72,18 +72,18 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	protected $recordData = array();
 
 	/**
-	 * @var boolean whether this record already is stored in the DB
+	 * @var bool whether this record already is stored in the DB
 	 */
 	protected $isInDb = FALSE;
 
 	/**
 	 * The constructor. Creates a test instance from a DB record.
 	 *
-	 * @param integer $uid
+	 * @param int $uid
 	 *        The UID of the record to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
 	 * @param resource $dbResult
 	 *        MySQL result pointer (of SELECT query) object. If this parameter is provided, $uid will be ignored.
-	 * @param boolean $allowHiddenRecords
+	 * @param bool $allowHiddenRecords
 	 *        whether it is possible to create an object from a hidden record
 	 */
 	public function __construct($uid, $dbResult = NULL, $allowHiddenRecords = FALSE) {
@@ -104,11 +104,11 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Retrieves this record's data from the DB (if it has not been retrieved
 	 * yet) and gets the record data from the DB result.
 	 *
-	 * @param integer $uid
+	 * @param int $uid
 	 *        The UID of the record to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
 	 * @param resource|boolean $dbResult
 	 *        MySQL result pointer (of SELECT query) object. If this parameter is provided, $uid will be ignored.
-	 * @param boolean $allowHiddenRecords
+	 * @param bool $allowHiddenRecords
 	 *        whether it is possible to create an object from a hidden record
 	 *
 	 * @return void
@@ -162,7 +162,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Checks whether this object has been properly initialized,
 	 * has a non-empty table name set and thus is basically usable.
 	 *
-	 * @return boolean TRUE if the object has been initialized, FALSE otherwise
+	 * @return bool TRUE if the object has been initialized, FALSE otherwise
 	 */
 	public function isOk() {
 		return (!empty($this->recordData) && ($this->tableName !== ''));
@@ -206,7 +206,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param string $key key of the element to check
 	 *
-	 * @return boolean TRUE if the corresponding string exists and is non-empty
+	 * @return bool TRUE if the corresponding string exists and is non-empty
 	 */
 	public function hasRecordPropertyString($key) {
 		return ($this->getRecordPropertyString($key) != '');
@@ -218,7 +218,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param string $key key of the element to check
 	 *
-	 * @return boolean TRUE if the corresponding value exists and is non-zero
+	 * @return bool TRUE if the corresponding value exists and is non-zero
 	 */
 	public function hasRecordPropertyInteger($key) {
 		return (boolean) $this->getRecordPropertyInteger($key);
@@ -230,7 +230,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param string $key key of the element to check
 	 *
-	 * @return boolean TRUE if the corresponding field exists and its value
+	 * @return bool TRUE if the corresponding field exists and its value
 	 *                 is not "0.00".
 	 */
 	public function hasRecordPropertyDecimal($key) {
@@ -243,7 +243,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param string $key key of the element to return
 	 *
-	 * @return integer the corresponding element from the record data array
+	 * @return int the corresponding element from the record data array
 	 */
 	public function getRecordPropertyInteger($key) {
 		$result = $this->hasKey($key)
@@ -256,7 +256,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Sets an integer element of the record data array (and intvals it).
 	 *
 	 * @param string $key key of the element to set (must be non-empty)
-	 * @param integer $value the value that will be written into the element
+	 * @param int $value the value that will be written into the element
 	 *
 	 * @return void
 	 */
@@ -284,7 +284,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * Sets a boolean element of the record data array.
 	 *
 	 * @param string $key key of the element to set (must be non-empty)
-	 * @param boolean $value the value that will be written into the element
+	 * @param bool $value the value that will be written into the element
 	 *
 	 * @return void
 	 */
@@ -300,7 +300,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param string $key key of the element to return
 	 *
-	 * @return boolean the corresponding element from the record data array
+	 * @return bool the corresponding element from the record data array
 	 */
 	public function getRecordPropertyBoolean($key) {
 		$result = $this->hasKey($key)
@@ -315,7 +315,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param string $key the array key to search for
 	 *
-	 * @return boolean TRUE if $this->recordData has been initialized
+	 * @return bool TRUE if $this->recordData has been initialized
 	 *                 and the array key exists, FALSE otherwise
 	 */
 	private function hasKey($key) {
@@ -328,7 +328,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * The UID of the parent page must be set in $this->recordData['pid'].
 	 * (otherwise the record will be created in the root page).
 	 *
-	 * @return boolean TRUE if everything went OK, FALSE otherwise
+	 * @return bool TRUE if everything went OK, FALSE otherwise
 	 */
 	public function commitToDb() {
 		if (!$this->isOk()) {
@@ -387,7 +387,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * @param array $references
 	 *        uids of records from the foreign table to which we should create references, may be empty
 	 *
-	 * @return integer the number of created m:n records
+	 * @return int the number of created m:n records
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws BadMethodCallException
@@ -438,9 +438,9 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param string $uid string with a UID (need not necessarily be escaped, will be intvaled)
 	 * @param string $tableName string with the table name where the UID should be searched for
-	 * @param boolean $allowHiddenRecords whether hidden records should be found as well
+	 * @param bool $allowHiddenRecords whether hidden records should be found as well
 	 *
-	 * @return boolean TRUE if a visible record with that UID exists, FALSE otherwise
+	 * @return bool TRUE if a visible record with that UID exists, FALSE otherwise
 	 */
 	public static function recordExists($uid, $tableName, $allowHiddenRecords = FALSE) {
 		if ((intval($uid) <= 0) || ($tableName === '')) {
@@ -470,8 +470,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * The record is retrieved from $this->tableName. Therefore $this->tableName
 	 * has to be set before calling this method.
 	 *
-	 * @param integer $uid the UID of the record to retrieve from the DB
-	 * @param boolean $allowHiddenRecords whether to allow hidden records
+	 * @param int $uid the UID of the record to retrieve from the DB
+	 * @param bool $allowHiddenRecords whether to allow hidden records
 	 *
 	 * @return resource MySQL result pointer (of SELECT query) object, will be FALSE if the UID is invalid
 	 */
@@ -493,7 +493,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * Gets our UID.
 	 *
-	 * @return integer our UID (or 0 if there is an error)
+	 * @return int our UID (or 0 if there is an error)
 	 */
 	public function getUid() {
 		return $this->getRecordPropertyInteger('uid');
@@ -502,7 +502,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * Checks whether this object has a UID.
 	 *
-	 * @return boolean TRUE if this object has a UID, FALSE otherwise
+	 * @return bool TRUE if this object has a UID, FALSE otherwise
 	 */
 	public function hasUid() {
 		return $this->hasRecordPropertyInteger('uid');
@@ -531,7 +531,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * Gets our PID.
 	 *
-	 * @return integer our PID (or 0 if there is an error)
+	 * @return int our PID (or 0 if there is an error)
 	 */
 	public function getCurrentBePageId() {
 		$result = parent::getCurrentBePageId();
@@ -626,7 +626,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	/**
 	 * Returns this record's page UID.
 	 *
-	 * @return integer the page UID for this record, will be >= 0
+	 * @return int the page UID for this record, will be >= 0
 	 */
 	public function getPageUid() {
 		return $this->getRecordPropertyInteger('pid');

@@ -42,12 +42,12 @@ abstract class Tx_Seminars_Csv_AbstractListView {
 	const LINE_SEPARATOR = CRLF;
 
 	/**
-	 * @var integer the depth of the recursion for the back-end pages
+	 * @var int the depth of the recursion for the back-end pages
 	 */
 	const RECURSION_DEPTH = 250;
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	protected $pageUid = 0;
 
@@ -114,7 +114,7 @@ abstract class Tx_Seminars_Csv_AbstractListView {
 	/**
 	 * Sets the page UID of the records to retrieve.
 	 *
-	 * @param integer $pageUid the page UID of the records
+	 * @param int $pageUid the page UID of the records
 	 *
 	 * @return void
 	 *
@@ -125,7 +125,7 @@ abstract class Tx_Seminars_Csv_AbstractListView {
 	/**
 	 * Returns the page UID of the records to check.
 	 *
-	 * @return integer the page UID, will be >= 0
+	 * @return int the page UID, will be >= 0
 	 */
 	protected function getPageUid() {
 		return $this->pageUid;
@@ -134,7 +134,7 @@ abstract class Tx_Seminars_Csv_AbstractListView {
 	/**
 	 * Checks whether a non-zero page UID has been set.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	protected function hasPageUid() {
 		return $this->getPageUid() > 0;

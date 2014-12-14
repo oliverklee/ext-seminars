@@ -50,14 +50,14 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 	/**
 	 * PID of the system folder in which we store our test data
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $pageUid = 0;
 
 	/**
 	 * UID of a test event record
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $eventUid = 0;
 

@@ -191,7 +191,7 @@ class tx_seminars_cli_MailNotifier {
 	 * Returns the TS setup configuration value of
 	 * 'sendEventTakesPlaceReminderDaysBeforeBeginDate'.
 	 *
-	 * @return integer how many days before an event the event-takes-place
+	 * @return int how many days before an event the event-takes-place
 	 *                 reminder should be send, will be > 0 if this option is
 	 *                 enabled, zero disables sending the reminder
 	 */
@@ -204,7 +204,7 @@ class tx_seminars_cli_MailNotifier {
 	 * Returns a seminar bag builder already limited to upcoming events with a
 	 * begin date and status $status.
 	 *
-	 * @param integer $status status to limit the builder to, must be either tx_seminars_seminar::STATUS_PLANNED or ::CONFIRMED
+	 * @param int $status status to limit the builder to, must be either tx_seminars_seminar::STATUS_PLANNED or ::CONFIRMED
 	 *
 	 * @return tx_seminars_BagBuilder_Event builder for the seminar bag
 	 */
@@ -220,7 +220,7 @@ class tx_seminars_cli_MailNotifier {
 	/**
 	 * Returns the CSV output for the list of registrations for the event with the provided UID.
 	 *
-	 * @param integer $eventUid UID of the event to create the output for, must be > 0
+	 * @param int $eventUid UID of the event to create the output for, must be > 0
 	 *
 	 * @return Tx_Oelib_Attachment CSV list of registrations for the given event
 	 */
@@ -276,7 +276,7 @@ class tx_seminars_cli_MailNotifier {
 	/**
 	 * Returns a timestamp formatted according to the current configuration.
 	 *
-	 * @param integer $timestamp timestamp, must be >= 0
+	 * @param int $timestamp timestamp, must be >= 0
 	 *
 	 * @return string formatted date according to the TS setup configuration for
 	 *                'dateFormatYMD', will not be empty
@@ -292,7 +292,7 @@ class tx_seminars_cli_MailNotifier {
 	 *
 	 * @param tx_seminars_seminar $event the event to send the e-mail for
 	 *
-	 * @return boolean TRUE if the CSV file should be added, FALSE otherwise
+	 * @return bool TRUE if the CSV file should be added, FALSE otherwise
 	 */
 	private function shouldCsvFileBeAdded(tx_seminars_seminar $event) {
 		return tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')

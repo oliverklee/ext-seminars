@@ -52,7 +52,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * the number of the current page of the form (starting with 0 for the first page)
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	public $currentPageNumber = 0;
 
@@ -322,7 +322,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * Checks whether we are on the last page of the registration form and we can proceed to saving the registration.
 	 *
-	 * @return boolean TRUE if we can proceed to saving the registration, FALSE otherwise
+	 * @return bool TRUE if we can proceed to saving the registration, FALSE otherwise
 	 */
 	public function isLastPage() {
 		return ($this->currentPageNumber == 2);
@@ -428,7 +428,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * @param array $formData associative array with the element "value" in which the number of seats to check for is stored
 	 *
-	 * @return boolean TRUE if there are at least $formData['value'] seats available, FALSE otherwise
+	 * @return bool TRUE if there are at least $formData['value'] seats available, FALSE otherwise
 	 */
 	public function canRegisterSeats(array $formData) {
 		return $this->getRegistrationManager()->canRegisterSeats($this->getSeminar(), intval($formData['value']));
@@ -440,7 +440,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @param array $formData
 	 *        associative array with the element "value" in which the current value of the checkbox (0 or 1) is stored
 	 *
-	 * @return boolean TRUE if the checkbox is checked or we are not on the confirmation page, FALSE otherwise
+	 * @return bool TRUE if the checkbox is checked or we are not on the confirmation page, FALSE otherwise
 	 */
 	public function isTermsChecked(array $formData) {
 		return ((boolean) $formData['value']) || ($this->currentPageNumber != 2);
@@ -450,7 +450,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Checks whether the "travelling terms" checkbox (ie. the second "terms" checkbox) is enabled in the event record *and* via
 	 * TS setup.
 	 *
-	 * @return boolean TRUE if the "travelling terms" checkbox is enabled in the event record *and* via TS setup, FALSE otherwise
+	 * @return bool TRUE if the "travelling terms" checkbox is enabled in the event record *and* via TS setup, FALSE otherwise
 	 */
 	public function isTerms2Enabled() {
 		return $this->hasRegistrationFormField(array('elementname' => 'terms_2')) && $this->getSeminar()->hasTerms2();
@@ -465,7 +465,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @param array $formData
 	 *        associative array with the element "value" in which the current value of the checkbox (0 or 1) is stored
 	 *
-	 * @return boolean TRUE if the checkbox is checked or disabled in the configuration or if the "finish registration" button
+	 * @return bool TRUE if the checkbox is checked or disabled in the configuration or if the "finish registration" button
 	 *                 has not just been clicked, FALSE if it is not checked AND enabled in the configuration
 	 */
 	public function isTerms2CheckedAndEnabled(array $formData) {
@@ -483,7 +483,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *        associative array with the element "value" in which the currently selected value
 	 *        (a positive integer or NULL if no radiobutton is selected) is stored
 	 *
-	 * @return boolean TRUE if a method of payment is selected OR no method could have been selected at all OR this event has no
+	 * @return bool TRUE if a method of payment is selected OR no method could have been selected at all OR this event has no
 	 *                 price, FALSE if none is selected, but should have been selected
 	 */
 	public function isMethodOfPaymentSelected(array $formData) {
@@ -496,7 +496,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * @param mixed $radioGroupValue the currently selected value (a positive integer) or NULL if no button is selected
 	 *
-	 * @return boolean TRUE if a radio button is selected, FALSE if none is selected
+	 * @return bool TRUE if a radio button is selected, FALSE if none is selected
 	 */
 	private function isRadioButtonSelected($radioGroupValue) {
 		return (boolean) $radioGroupValue;
@@ -511,7 +511,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *        the contents of the "params" child of the userobj node as key/value pairs
 	 *        (used for retrieving the current form field name)
 	 *
-	 * @return boolean TRUE if the current form field should be displayed, FALSE otherwise
+	 * @return bool TRUE if the current form field should be displayed, FALSE otherwise
 	 */
 	public function hasRegistrationFormField(array $parameters) {
 		return isset($this->formFieldsToShow[$parameters['elementname']]);
@@ -531,7 +531,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * @param string $key the key of the field to test, must not be empty
 	 *
-	 * @return boolean TRUE if the current form field should be displayed, FALSE otherwise
+	 * @return bool TRUE if the current form field should be displayed, FALSE otherwise
 	 */
 	public function isFormFieldEnabled($key) {
 		$isFormFieldAlwaysEnabled = in_array($key, $this->alwaysEnabledFormFields, TRUE);
@@ -655,7 +655,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *        the contents of the "params" child of the userobj node as key/value pairs
 	 *        (used for retrieving the current form field name)
 	 *
-	 * @return boolean TRUE if the current form field should be displayed
+	 * @return bool TRUE if the current form field should be displayed
 	 *                 AND the current event is not completely for free,
 	 *                 FALSE otherwise
 	 */
@@ -716,7 +716,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * getThankYouAfterRegistrationUrl() and getPageToShowAfterUnregistration().
 	 *
 	 * @param string $pageId the page UID
-	 * @param boolean $sendParameters TRUE if GET parameters should be added to the URL, otherwise FALSE
+	 * @param bool $sendParameters TRUE if GET parameters should be added to the URL, otherwise FALSE
 	 *
 	 * @return string complete URL of the FE page with a message
 	 */
@@ -780,7 +780,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * ie. whether they are enable in the setup and the current event actually
 	 * has any payment methods assigned and has at least one price.
 	 *
-	 * @return boolean TRUE if the payment methods should be displayed, FALSE otherwise
+	 * @return bool TRUE if the payment methods should be displayed, FALSE otherwise
 	 */
 	public function showMethodsOfPayment() {
 		return $this->getSeminar()->hasPaymentMethods()
@@ -1121,7 +1121,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * @param array $formData associative array with the element "value" in which the value of the current field is provided
 	 *
-	 * @return boolean TRUE if the field is non-empty or "bank transfer" is not selected
+	 * @return bool TRUE if the field is non-empty or "bank transfer" is not selected
 	 */
 	public function hasBankData(array $formData) {
 		$result = TRUE;
@@ -1250,7 +1250,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Checks whether our current event has any option checkboxes AND the
 	 * checkboxes should be displayed at all.
 	 *
-	 * @return boolean TRUE if we have a non-empty list of checkboxes AND this
+	 * @return bool TRUE if we have a non-empty list of checkboxes AND this
 	 *                 list should be displayed, FALSE otherwise
 	 */
 	public function hasCheckboxes() {
@@ -1280,7 +1280,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * @param array $formData the value of the current field in an associative array witch the element "value"
 	 *
-	 * @return boolean TRUE if at least one item is selected or no lodging options can be selected
+	 * @return bool TRUE if at least one item is selected or no lodging options can be selected
 	 */
 	public function isLodgingSelected(array $formData) {
 		return !empty($formData['value']) || !$this->hasLodgings();
@@ -1290,7 +1290,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Checks whether our current event has any lodging options and the
 	 * lodging options should be displayed at all.
 	 *
-	 * @return boolean TRUE if we have a non-empty list of lodging options and this list should be displayed, FALSE otherwise
+	 * @return bool TRUE if we have a non-empty list of lodging options and this list should be displayed, FALSE otherwise
 	 */
 	public function hasLodgings() {
 		return $this->getSeminar()->hasLodgings() && $this->hasRegistrationFormField(array('elementname' => 'lodgings'));
@@ -1315,7 +1315,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Checks whether our current event has any food options and the food
 	 * options should be displayed at all.
 	 *
-	 * @return boolean TRUE if we have a non-empty list of food options and this list should be displayed, FALSE otherwise
+	 * @return bool TRUE if we have a non-empty list of food options and this list should be displayed, FALSE otherwise
 	 */
 	public function hasFoods() {
 		return $this->getSeminar()->hasFoods() && $this->hasRegistrationFormField(array('elementname' => 'foods'));
@@ -1328,7 +1328,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * @param array $formData associative array with the element "value" in which the value of the current field is provided
 	 *
-	 * @return boolean TRUE if at least one item is selected or no food options can be selected
+	 * @return bool TRUE if at least one item is selected or no food options can be selected
 	 */
 	public function isFoodSelected(array $formData) {
 		return !empty($formData['value']) || !$this->hasFoods();
@@ -1352,7 +1352,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *        associative array with the element "value" in which the currently selected value (a positive integer)
 	 *        or NULL if no radiobutton is selected is provided
 	 *
-	 * @return boolean TRUE if a valid price is selected or the price field
+	 * @return bool TRUE if a valid price is selected or the price field
 	 *                 is hidden, FALSE if none is selected, but could have been selected
 	 */
 	public function isValidPriceSelected(array $formData) {
@@ -1369,7 +1369,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * b) if only one payment method is available, that payment method
 	 * c) 0 in all other cases
 	 *
-	 * @return integer the UID of the preselected payment method or 0 if should will be preselected
+	 * @return int the UID of the preselected payment method or 0 if should will be preselected
 	 */
 	public function getPreselectedPaymentMethod() {
 		$availablePaymentMethods = $this->populateListPaymentMethods(array());
@@ -1444,7 +1444,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * Retrieves the saved payment method from the FE user session.
 	 *
-	 * @return integer the UID of the payment method that has been saved in the FE user session or 0 if there is none
+	 * @return int the UID of the payment method that has been saved in the FE user session or 0 if there is none
 	 */
 	private function retrieveSavedMethodOfPayment() {
 		return intval($this->retrieveDataFromSession(NULL, array('key' => 'method_of_payment')));
@@ -1643,7 +1643,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Gets the number of entered persons in the form by counting the lines
 	 * in the "additional attendees names" field and the state of the "register myself" checkbox.
 	 *
-	 * @return integer the number of entered persons, will be >= 0
+	 * @return int the number of entered persons, will be >= 0
 	 */
 	public function getNumberOfEnteredPersons() {
 		if ($this->isFormFieldEnabled('registered_themselves')) {
@@ -1660,7 +1660,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Checks whether the number of selected seats matches the number of
 	 * registered persons (including the FE user themselves as well as the additional attendees).
 	 *
-	 * @return boolean
+	 * @return bool
 	 *         TRUE if the number of seats matches the number of registered persons, FALSE otherwise
 	 */
 	public function validateNumberOfRegisteredPersons() {
@@ -1679,7 +1679,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 *
 	 * If the entering of additional persons as FE user records is disabled, this function will always return TRUE.
 	 *
-	 * @return boolean
+	 * @return bool
 	 *         TRUE if either additional persons as FE users are disabled or all entered e-mail addresses are non-empty and valid,
 	 *         FALSE otherwise
 	 */

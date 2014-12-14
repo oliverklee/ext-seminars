@@ -38,7 +38,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	public $scriptRelPath = 'class.tx_seminars_timespan.php';
 
 	/**
-	 * @var integer the number of seconds per day
+	 * @var int the number of seconds per day
 	 */
 	const SECONDS_PER_DAY = 86400;
 
@@ -64,7 +64,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Checks whether there's a begin date set.
 	 *
-	 * @return boolean TRUE if we have a begin date, FALSE otherwise
+	 * @return bool TRUE if we have a begin date, FALSE otherwise
 	 */
 	public function hasBeginDate() {
 		return ($this->getBeginDateAsTimestamp() > 0);
@@ -92,7 +92,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Checks whether there's an end date set.
 	 *
-	 * @return boolean TRUE if we have an end date, FALSE otherwise
+	 * @return bool TRUE if we have an end date, FALSE otherwise
 	 */
 	public function hasEndDate() {
 		return ($this->getEndDateAsTimestamp() > 0);
@@ -102,7 +102,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	 * Checks whether there's a begin date set, and whether this has already
 	 * passed.
 	 *
-	 * @return boolean TRUE if the time-span has a begin date set that lies in
+	 * @return bool TRUE if the time-span has a begin date set that lies in
 	 *                 the future (time-span has not started yet), FALSE otherwise
 	 */
 	public function hasStarted() {
@@ -188,7 +188,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	 * If there's an end date but no begin date,
 	 * this function still will return FALSE.
 	 *
-	 * @return boolean TRUE if we have a begin date, FALSE otherwise.
+	 * @return bool TRUE if we have a begin date, FALSE otherwise.
 	 */
 	public function hasDate() {
 		return $this->hasRecordPropertyInteger('begin_date');
@@ -233,7 +233,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	 * Checks whether there's a time set (begin time != 00:00)
 	 * If there's no date/time set, the result will be FALSE.
 	 *
-	 * @return boolean TRUE if we have a begin time, FALSE otherwise
+	 * @return bool TRUE if we have a begin time, FALSE otherwise
 	 */
 	public function hasTime() {
 		$beginTime = strftime('%H:%M', $this->getBeginDateAsTimestamp());
@@ -245,7 +245,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	 * Checks whether there's an end time set (end time != 00:00)
 	 * If there's no end date/time set, the result will be FALSE.
 	 *
-	 * @return boolean TRUE if we have an end time, FALSE otherwise
+	 * @return bool TRUE if we have an end time, FALSE otherwise
 	 */
 	public function hasEndTime() {
 		$endTime = strftime('%H:%M', $this->getEndDateAsTimestamp());
@@ -256,7 +256,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns our begin date and time as a UNIX timestamp.
 	 *
-	 * @return integer our begin date and time as a UNIX timestamp or 0 if
+	 * @return int our begin date and time as a UNIX timestamp or 0 if
 	 *                 we don't have a begin date
 	 */
 	public function getBeginDateAsTimestamp() {
@@ -266,7 +266,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns our end date and time as a UNIX timestamp.
 	 *
-	 * @return integer our end date and time as a UNIX timestamp or 0 if
+	 * @return int our end date and time as a UNIX timestamp or 0 if
 	 *                 we don't have an end date
 	 */
 	public function getEndDateAsTimestamp() {
@@ -278,7 +278,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	 * open-ended, midnight after the begin date and time is returned.
 	 * If we don't even have a begin date, 0 is returned.
 	 *
-	 * @return integer our end date and time as a UNIX timestamp, 0 if
+	 * @return int our end date and time as a UNIX timestamp, 0 if
 	 *                 we don't have a begin date
 	 */
 	public function getEndDateAsTimestampEvenIfOpenEnded() {
@@ -313,7 +313,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Checks whether we have a room set.
 	 *
-	 * @return boolean TRUE if we have a non-empty room, FALSE otherwise.
+	 * @return bool TRUE if we have a non-empty room, FALSE otherwise.
 	 */
 	public function hasRoom() {
 		return $this->hasRecordPropertyString('room');
@@ -325,7 +325,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	 * A time span is considered to be open-ended if it does not have an end
 	 * date.
 	 *
-	 * @return boolean TRUE if this time span is open-ended, FALSE otherwise
+	 * @return bool TRUE if this time span is open-ended, FALSE otherwise
 	 */
 	public function isOpenEnded() {
 		return !$this->hasEndDate();
@@ -334,7 +334,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Checks whether we have a place (or places) set.
 	 *
-	 * @return boolean TRUE if we have a non-empty places list, FALSE otherwise
+	 * @return bool TRUE if we have a non-empty places list, FALSE otherwise
 	 */
 	public function hasPlace() {
 		return $this->hasRecordPropertyInteger('place');
@@ -343,7 +343,7 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Gets the number of places associated with this record.
 	 *
-	 * @return integer the number of places associated with this record,
+	 * @return int the number of places associated with this record,
 	 *                 will be >= 0
 	 */
 	public function getNumberOfPlaces() {

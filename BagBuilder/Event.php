@@ -79,7 +79,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	const TRIM_CHARACTER_LIST = " ,\t\n\r\0\x0b";
 
 	/**
-	 * @var integer the minimum search word length
+	 * @var int the minimum search word length
 	 */
 	const MINIMUM_SEARCH_WORD_LENGTH = 2;
 
@@ -470,7 +470,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Limits the bag to events where the FE user given in the parameter
 	 * $feUserUid is the owner.
 	 *
-	 * @param integer $feUserUid the FE user UID of the owner to limit for, set to 0 to remove the limitation, must be >= 0
+	 * @param int $feUserUid the FE user UID of the owner to limit for, set to 0 to remove the limitation, must be >= 0
 	 *
 	 * @return void
 	 */
@@ -513,7 +513,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Limits the bag to events with the FE user UID given in the parameter
 	 * $feUserUid as event manager.
 	 *
-	 * @param integer $feUserUid
+	 * @param int $feUserUid
 	 *        the FE user UID of the event manager to limit for, set to 0 to remove the limitation, must be >= 0
 	 *
 	 * @return void
@@ -702,7 +702,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * Limits the bag to events in status $status.
 	 *
-	 * @param integer $status tx_seminars_seminar::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
+	 * @param int $status tx_seminars_seminar::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
 	 *
 	 * @return void
 	 */
@@ -715,7 +715,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Limits the bag to events which are currently $days days before their
 	 * begin date.
 	 *
-	 * @param integer $days days before the begin date, must be > 0
+	 * @param int $days days before the begin date, must be > 0
 	 *
 	 * @return void
 	 */
@@ -1083,7 +1083,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Limits the search results to topics which are required for the
 	 * given topic.
 	 *
-	 * @param integer $eventUid the UID of the topic event for which the requirements should be found, must be > 0
+	 * @param int $eventUid the UID of the topic event for which the requirements should be found, must be > 0
 	 *
 	 * @return void
 	 */
@@ -1099,7 +1099,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * Limits the search result to topics which depend on the given topic.
 	 *
-	 * @param integer $eventUid the UID of the topic event which the searched events depend on, must be > 0
+	 * @param int $eventUid the UID of the topic event which the searched events depend on, must be > 0
 	 *
 	 * @return void
 	 */
@@ -1121,7 +1121,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Registrations for dates that have a non-zero expiry date in the past will
 	 * be counted as not existing.
 	 *
-	 * @param integer $uid the UID of the front-end user whose registered events should be removed from the bag, must be > 0
+	 * @param int $uid the UID of the front-end user whose registered events should be removed from the bag, must be > 0
 	 *
 	 * @return void
 	 */
@@ -1145,7 +1145,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 *
 	 * A $earliestBeginDate of 0 will remove the filter.
 	 *
-	 * @param integer $earliestBeginDate the earliest begin date as UNIX time-stamp, 0 will remove the limit
+	 * @param int $earliestBeginDate the earliest begin date as UNIX time-stamp, 0 will remove the limit
 	 *
 	 * @return void
 	 */
@@ -1168,7 +1168,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 *
 	 * A $latestBeginDate of 0 will remove the filter.
 	 *
-	 * @param integer $latestBeginDate the latest begin date as UNIX time-stamp, 0 will remove the limit
+	 * @param int $latestBeginDate the latest begin date as UNIX time-stamp, 0 will remove the limit
 	 *
 	 * @return void
 	 */
@@ -1241,7 +1241,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Limits the bag to events which have target groups with age limits within
 	 * the provided age.
 	 *
-	 * @param integer $age the age to limit the bag to, must be >= 0
+	 * @param int $age the age to limit the bag to, must be >= 0
 	 *
 	 * @return void
 	 */
@@ -1302,7 +1302,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Limits the bag to events which have a price lower or equal to the given
 	 * maximum price.
 	 *
-	 * @param integer $maximumPrice
+	 * @param int $maximumPrice
 	 *                the maximum price an event is allowed to cost, must
 	 *                be >= 0
 	 *
@@ -1369,7 +1369,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Limits the bag to events which have a price higher or equal to the given
 	 * minimum price.
 	 *
-	 * @param integer $minimumPrice
+	 * @param int $minimumPrice
 	 *                the minimum price an event is allowed to cost, must
 	 *                be >= 0
 	 *

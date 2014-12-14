@@ -33,39 +33,39 @@
  */
 class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
-	 * @var integer represents the type for a single event
+	 * @var int represents the type for a single event
 	 */
 	const TYPE_COMPLETE = 0;
 
 	/**
-	 * @var integer represents the type for an event topic
+	 * @var int represents the type for an event topic
 	 */
 	const TYPE_TOPIC = 1;
 
 	/**
-	 * @var integer represents the type for an event date
+	 * @var int represents the type for an event date
 	 */
 	const TYPE_DATE = 2;
 
 	/**
-	 * @var integer the status "planned" for an event
+	 * @var int the status "planned" for an event
 	 */
 	const STATUS_PLANNED = 0;
 
 	/**
-	 * @var integer the status "canceled" for an event
+	 * @var int the status "canceled" for an event
 	 */
 	const STATUS_CANCELED = 1;
 
 	/**
-	 * @var integer the status "confirmed" for an event
+	 * @var int the status "confirmed" for an event
 	 */
 	const STATUS_CONFIRMED = 2;
 
 	/**
 	 * Returns whether this event is a single event.
 	 *
-	 * @return boolean TRUE if this event is a single event, FALSE otherwise
+	 * @return bool TRUE if this event is a single event, FALSE otherwise
 	 */
 	public function isSingleEvent() {
 		return ($this->getAsInteger('object_type') == self::TYPE_COMPLETE);
@@ -74,7 +74,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event is an event date.
 	 *
-	 * @return boolean TRUE if this event is an event date, FALSE otherwise
+	 * @return bool TRUE if this event is an event date, FALSE otherwise
 	 */
 	public function isEventDate() {
 		return ($this->getAsInteger('object_type') == self::TYPE_DATE);
@@ -86,7 +86,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * - tx_seminars_Model_Event::TYPE_TOPIC
 	 * - tx_seminars_Model_Event::TYPE_DATE
 	 *
-	 * @return integer the record type of this event, will be one of the values
+	 * @return int the record type of this event, will be one of the values
 	 *                 mentioned above, will be >= 0
 	 */
 	public function getRecordType() {
@@ -160,7 +160,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has a subtitle.
 	 *
-	 * @return boolean TRUE if this event has a subtitle, FALSE otherwise
+	 * @return bool TRUE if this event has a subtitle, FALSE otherwise
 	 */
 	public function hasSubtitle() {
 		return ($this->isEventDate())
@@ -208,7 +208,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has a teaser.
 	 *
-	 * @return boolean TRUE if this event has a teaser, FALSE otherwise
+	 * @return bool TRUE if this event has a teaser, FALSE otherwise
 	 */
 	public function hasTeaser() {
 		return ($this->isEventDate())
@@ -289,7 +289,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has an accreditation number.
 	 *
-	 * @return boolean TRUE if this event has an accreditation number, FALSE
+	 * @return bool TRUE if this event has an accreditation number, FALSE
 	 *                 otherwise
 	 */
 	public function hasAccreditationNumber() {
@@ -299,7 +299,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our credit points.
 	 *
-	 * @return integer our credit points, will be 0 if this event has no credit
+	 * @return int our credit points, will be 0 if this event has no credit
 	 *                 points, will be >= 0
 	 */
 	public function getCreditPoints() {
@@ -311,7 +311,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Sets our credit points.
 	 *
-	 * @param integer $creditPoints our credit points, must be >= 0
+	 * @param int $creditPoints our credit points, must be >= 0
 	 *
 	 * @return void
 	 */
@@ -330,7 +330,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has credit points.
 	 *
-	 * @return boolean TRUE if this event has credit points, FALSE otherwise
+	 * @return bool TRUE if this event has credit points, FALSE otherwise
 	 */
 	public function hasCreditPoints() {
 		return ($this->isEventDate())
@@ -351,7 +351,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our registration deadline as UNIX time-stamp.
 	 *
-	 * @return integer our registration deadline as UNIX time-stamp, will be
+	 * @return int our registration deadline as UNIX time-stamp, will be
 	 *                 0 if this event has no registration deadline, will be
 	 *                 >= 0
 	 */
@@ -362,7 +362,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Sets our registration deadline as UNIX time-stamp.
 	 *
-	 * @param integer $registrationDeadline
+	 * @param int $registrationDeadline
 	 *        our registration deadline as UNIX time-stamp, must be >= 0, 0 unsets the registration deadline
 	 *
 	 * @return void
@@ -378,7 +378,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has a registration deadline set.
 	 *
-	 * @return boolean TRUE if this event has a registration deadline set, FALSE
+	 * @return bool TRUE if this event has a registration deadline set, FALSE
 	 *                 otherwise
 	 */
 	public function hasRegistrationDeadline() {
@@ -388,7 +388,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our early bird deadline as UNIX time-stamp.
 	 *
-	 * @return integer our early bird deadline as UNIX time-stamp, will be 0
+	 * @return int our early bird deadline as UNIX time-stamp, will be 0
 	 *                 if this event has no early bird deadline, will be >= 0
 	 */
 	public function getEarlyBirdDeadlineAsUnixTimeStamp() {
@@ -398,7 +398,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Sets our early bird deadline as UNIX time-stamp.
 	 *
-	 * @param integer $earlyBirdDeadline
+	 * @param int $earlyBirdDeadline
 	 *        our early bird deadline as UNIX time-stamp, must be >= 0, 0 unsets the early bird deadline
 	 *
 	 * @return void
@@ -414,7 +414,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has an early bird deadline.
 	 *
-	 * @return boolean TRUE if this event has an early bird deadline, FALSE
+	 * @return bool TRUE if this event has an early bird deadline, FALSE
 	 *                 otherwise
 	 */
 	public function hasEarlyBirdDeadline() {
@@ -424,7 +424,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our unregistration deadline as UNIX time-stamp.
 	 *
-	 * @return integer our unregistration deadline as UNIX time-stamp, will be
+	 * @return int our unregistration deadline as UNIX time-stamp, will be
 	 *                 0 if this event has no unregistration deadline, will be
 	 *                 >= 0
 	 */
@@ -435,7 +435,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Sets our unregistration deadline as UNIX time-stamp.
 	 *
-	 * @param integer $unregistrationDeadline
+	 * @param int $unregistrationDeadline
 	 *        our unregistration deadline as UNIX time-stamp, must be >= 0, 0 unsets the unregistration deadline
 	 *
 	 * @return void
@@ -451,7 +451,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has an unregistration deadline.
 	 *
-	 * @return integer TRUE if this event has an unregistration deadline, FALSE
+	 * @return int TRUE if this event has an unregistration deadline, FALSE
 	 *                 otherwise
 	 */
 	public function hasUnregistrationDeadline() {
@@ -461,7 +461,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our expiry as UNIX time-stamp.
 	 *
-	 * @return integer our expiry as UNIX time-stamp, will be 0 if this event
+	 * @return int our expiry as UNIX time-stamp, will be 0 if this event
 	 *                 has no expiry, will be >= 0
 	 */
 	public function getExpiryAsUnixTimeStamp() {
@@ -471,7 +471,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Sets our expiry as UNIX time-stamp.
 	 *
-	 * @param integer $expiry our expiry as UNIX time-stamp, must be >= 0, 0 unsets the expiry
+	 * @param int $expiry our expiry as UNIX time-stamp, must be >= 0, 0 unsets the expiry
 	 *
 	 * @return void
 	 */
@@ -486,7 +486,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has an expiry.
 	 *
-	 * @return boolean TRUE if this event has an expiry, FALSE otherwise
+	 * @return bool TRUE if this event has an expiry, FALSE otherwise
 	 */
 	public function hasExpiry() {
 		return $this->hasInteger('expiry');
@@ -495,7 +495,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our details page.
 	 *
-	 * @return integer our separate details page, will be empty if this event
+	 * @return int our separate details page, will be empty if this event
 	 *                 has no separate details page
 	 */
 	public function getDetailsPage() {
@@ -516,7 +516,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has a separate details page.
 	 *
-	 * @return boolean TRUE if this event has a separate details page, FALSE
+	 * @return bool TRUE if this event has a separate details page, FALSE
 	 *                 otherwise
 	 */
 	public function hasDetailsPage() {
@@ -552,7 +552,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Checks whether this event has a separate single view page (combined
 	 * from the event itself, the event type and the categories).
 	 *
-	 * @return boolean
+	 * @return bool
 	 *         TRUE if this event has a single view page set, FALSE otherwise
 	 */
 	public function hasCombinedSingleViewPage() {
@@ -562,7 +562,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Gets the single view page from the event type.
 	 *
-	 * @return integer
+	 * @return int
 	 *         the single view page UID from the event type, will be > 0 if
 	 *         this event has an event type and a that type has a single view
 	 *         page UID, will be 0 otherwise
@@ -579,7 +579,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Checks whether this event has an event type with a non-zero single view
 	 * page UID.
 	 *
-	 * @return boolean
+	 * @return bool
 	 *         TRUE if this event has an event type and if that event type has
 	 *         a non-zero single view page, FALSE otherwise
 	 */
@@ -593,7 +593,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *
 	 * This function returns the first found UID from the event categories.
 	 *
-	 * @return integer
+	 * @return int
 	 *         the single view page UID from the categories, will be > 0 if
 	 *         this event has at least one category with a single view page
 	 *         UID, will be 0 otherwise
@@ -615,7 +615,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Checks whether this event has at least one category with a single view
 	 * page UID.
 	 *
-	 * @return boolean
+	 * @return bool
 	 *         TRUE if this event has at least one category with a single view
 	 *         page UID, FALSE otherwise
 	 */
@@ -712,7 +712,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has a language.
 	 *
-	 * @return boolean TRUE if this event has a language, FALSE otherwise
+	 * @return bool TRUE if this event has a language, FALSE otherwise
 	 */
 	public function hasLanguage() {
 		return $this->hasString('language');
@@ -752,7 +752,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has a regular price.
 	 *
-	 * @return boolean TRUE if this event has a regular price, FALSE otherwise
+	 * @return bool TRUE if this event has a regular price, FALSE otherwise
 	 */
 	public function hasRegularPrice() {
 		return ($this->isEventDate())
@@ -794,7 +794,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has a regular early bird price.
 	 *
-	 * @return boolean TRUE if this event has a regular early bird price, FALSE
+	 * @return bool TRUE if this event has a regular early bird price, FALSE
 	 *                 otherwise
 	 */
 	public function hasRegularEarlyBirdPrice() {
@@ -880,7 +880,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has a special price.
 	 *
-	 * @return boolean TRUE if this event has a special price, FALSE otherwise
+	 * @return bool TRUE if this event has a special price, FALSE otherwise
 	 */
 	public function hasSpecialPrice() {
 		return ($this->isEventDate())
@@ -922,7 +922,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Return whether this event has a special early bird price.
 	 *
-	 * @return boolean TRUE if this event has a special early bird price, FALSE
+	 * @return bool TRUE if this event has a special early bird price, FALSE
 	 *                 otherwise
 	 */
 	public function hasSpecialEarlyBirdPrice() {
@@ -965,7 +965,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has a special board price.
 	 *
-	 * @return boolean TRUE if this event has a special board price, FALSE
+	 * @return bool TRUE if this event has a special board price, FALSE
 	 *                 otherwise
 	 */
 	public function hasSpecialBoardPrice() {
@@ -985,7 +985,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * version for this function to return TRUE (if there is a regular special
 	 * price).
 	 *
-	 * @return boolean TRUE if an early bird deadline and early bird prices
+	 * @return bool TRUE if an early bird deadline and early bird prices
 	 *                 are set, FALSE otherwise
 	 */
 	public function hasEarlyBirdPrice() {
@@ -1009,7 +1009,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *
 	 * The latest moment is just before a set early bird deadline.
 	 *
-	 * @return boolean TRUE if the deadline has passed, FALSE otherwise
+	 * @return bool TRUE if the deadline has passed, FALSE otherwise
 	 */
 	public function isEarlyBirdDeadlineOver() {
 		return ($GLOBALS['SIM_EXEC_TIME']
@@ -1020,7 +1020,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether an early bird price applies.
 	 *
-	 * @return boolean TRUE if this event has an early bird dealine set and
+	 * @return bool TRUE if this event has an early bird dealine set and
 	 *                 this deadline is not over yet, FALSE otherwise
 	 */
 	public function earlyBirdApplies() {
@@ -1099,7 +1099,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has additional information.
 	 *
-	 * @return boolean TRUE if this event has additional information, FALSE
+	 * @return bool TRUE if this event has additional information, FALSE
 	 *                 otherwise
 	 */
 	public function hasAdditionalInformation() {
@@ -1165,7 +1165,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether the "event takes place reminder" has been sent.
 	 *
-	 * @return boolean TRUE if the "event takes place reminder" has been sent,
+	 * @return bool TRUE if the "event takes place reminder" has been sent,
 	 *                 FALSE otherwise
 	 */
 	public function eventTakesPlaceReminderHasBeenSent() {
@@ -1175,7 +1175,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether the "cancelation deadline reminder" has been sent.
 	 *
-	 * @return boolean TRUE if the "cancelation deadline reminder" has been sent,
+	 * @return bool TRUE if the "cancelation deadline reminder" has been sent,
 	 *                 FALSE otherwise
 	 */
 	public function cancelationDeadlineReminderHasBeenSent() {
@@ -1185,7 +1185,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event needs a registration.
 	 *
-	 * @return boolean TRUE if this event needs a registration, FALSE otherwise
+	 * @return bool TRUE if this event needs a registration, FALSE otherwise
 	 */
 	public function needsRegistration() {
 		return $this->getAsBoolean('needs_registration');
@@ -1194,7 +1194,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event allows multiple registration.
 	 *
-	 * @return boolean TRUE if this event allows multiple registration, FALSE
+	 * @return bool TRUE if this event allows multiple registration, FALSE
 	 *                 otherwise
 	 */
 	public function allowsMultipleRegistrations() {
@@ -1206,7 +1206,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our minimum attendees.
 	 *
-	 * @return integer our minimum attendees, will be 0 if this event has no
+	 * @return int our minimum attendees, will be 0 if this event has no
 	 *                 minimum attendees, will be >= 0
 	 */
 	public function getMinimumAttendees() {
@@ -1216,7 +1216,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Sets our minimum attendees.
 	 *
-	 * @param integer $minimumAttendees our minimum attendees, must be >= 0
+	 * @param int $minimumAttendees our minimum attendees, must be >= 0
 	 *
 	 * @return void
 	 */
@@ -1231,7 +1231,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has minimum attendees.
 	 *
-	 * @return boolean TRUE if this event has minimum attendees, FALSE otherwise
+	 * @return bool TRUE if this event has minimum attendees, FALSE otherwise
 	 */
 	public function hasMinimumAttendees() {
 		return $this->hasInteger('attendees_min');
@@ -1240,7 +1240,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our maximum attendees.
 	 *
-	 * @return integer our maximum attendees, will be 0 if this event has no
+	 * @return int our maximum attendees, will be 0 if this event has no
 	 *                 maximum attendees and allows unlimited number of attendees,
 	 *                 will be >= 0
 	 */
@@ -1251,7 +1251,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Sets our maximum attendees.
 	 *
-	 * @param integer $maximumAttendees our maximum attendees, must be >= 0, 0 means an unlimited number of attendees
+	 * @param int $maximumAttendees our maximum attendees, must be >= 0, 0 means an unlimited number of attendees
 	 *
 	 * @return void
 	 */
@@ -1266,7 +1266,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has maximum attendees.
 	 *
-	 * @return boolean TRUE if this event has maximum attendees, FALSE otherwise
+	 * @return bool TRUE if this event has maximum attendees, FALSE otherwise
 	 *                 (allowing an unlimited number of attendees)
 	 */
 	public function hasMaximumAttendees() {
@@ -1276,7 +1276,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Checks whether this event has unlimited vacancies.
 	 *
-	 * @return boolean TRUE if this event has unlimited vacancies, FALSE
+	 * @return bool TRUE if this event has unlimited vacancies, FALSE
 	 *                 otherwise
 	 */
 	public function hasUnlimitedVacancies() {
@@ -1286,7 +1286,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has a registration queue.
 	 *
-	 * @return boolean TRUE if this event has a registration queue, FALSE
+	 * @return bool TRUE if this event has a registration queue, FALSE
 	 *                 otherwise
 	 */
 	public function hasRegistrationQueue() {
@@ -1308,7 +1308,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether the collision check should be skipped for this event.
 	 *
-	 * @return boolean TRUE if the collision check should be skipped for this
+	 * @return bool TRUE if the collision check should be skipped for this
 	 *                 event, FALSE otherwise
 	 */
 	public function shouldSkipCollisionCheck() {
@@ -1318,7 +1318,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our status.
 	 *
-	 * @return integer our status, will be one of STATUS_PLANNED,
+	 * @return int our status, will be one of STATUS_PLANNED,
 	 *                 STATUS_CANCELED or STATUS_CONFIRMED
 	 */
 	public function getStatus() {
@@ -1328,7 +1328,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Sets our status.
 	 *
-	 * @param integer $status our status, must be one of STATUS_PLANNED, STATUS_CANCELED, STATUS_CONFIRMED
+	 * @param int $status our status, must be one of STATUS_PLANNED, STATUS_CANCELED, STATUS_CONFIRMED
 	 *
 	 * @return void
 	 */
@@ -1377,7 +1377,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event makes use of the second terms & conditions.
 	 *
-	 * @return boolean TRUE if this event makes use of the second terms &
+	 * @return bool TRUE if this event makes use of the second terms &
 	 *                 conditions, FALSE otherwise
 	 */
 	public function usesTerms2() {
@@ -1415,7 +1415,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has notes.
 	 *
-	 * @return boolean TRUE if this event has notes, FALSE otherwise
+	 * @return bool TRUE if this event has notes, FALSE otherwise
 	 */
 	public function hasNotes() {
 		return ($this->isEventDate())
@@ -1451,7 +1451,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has attached files.
 	 *
-	 * @return boolean TRUE if this event has attached files, FALSE otherwise
+	 * @return bool TRUE if this event has attached files, FALSE otherwise
 	 */
 	public function hasAttachedFiles() {
 		return $this->hasString('attached_files');
@@ -1487,7 +1487,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this event has an image.
 	 *
-	 * @return boolean TRUE if this event has an image, FALSE otherwise
+	 * @return bool TRUE if this event has an image, FALSE otherwise
 	 */
 	public function hasImage() {
 		return ($this->isEventDate())
@@ -1522,7 +1522,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Checks whether this event has a begin date for the registration.
 	 *
-	 * @return boolean TRUE if this event has a begin date for the registration,
+	 * @return bool TRUE if this event has a begin date for the registration,
 	 *                 FALSE otherwise
 	 */
 	public function hasRegistrationBegin() {
@@ -1533,7 +1533,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Returns the begin date for the registration of this event as UNIX
 	 * time-stamp.
 	 *
-	 * @return integer the begin date for the registration of this event as UNIX
+	 * @return int the begin date for the registration of this event as UNIX
 	 *                 time-stamp, will be 0 if no begin date for the
 	 *                 registration is set
 	 */
@@ -1554,7 +1554,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Checks whether this event has a publication hash.
 	 *
-	 * @return boolean TRUE if this event has a publication hash, FALSE
+	 * @return bool TRUE if this event has a publication hash, FALSE
 	 *                 otherwise
 	 */
 	public function hasPublicationHash() {
@@ -1590,7 +1590,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Note: The publication state of an event is not related to whether it is
 	 * hidden or not.
 	 *
-	 * @return boolean TRUE if this event has been published, FALSE otherwise
+	 * @return bool TRUE if this event has been published, FALSE otherwise
 	 */
 	public function isPublished() {
 		return !$this->hasPublicationHash();
@@ -1599,7 +1599,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Checks whether this event has any offline registrations.
 	 *
-	 * @return boolean TRUE if this event has at least one offline registration,
+	 * @return bool TRUE if this event has at least one offline registration,
 	 *                 FALSE otherwise
 	 */
 	public function hasOfflineRegistrations() {
@@ -1609,7 +1609,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns the number of offline registrations for this event.
 	 *
-	 * @return integer the number of offline registrations for this event, will
+	 * @return int the number of offline registrations for this event, will
 	 *                 be 0 if this event has no offline registrations
 	 */
 	public function getOfflineRegistrations() {
@@ -1698,7 +1698,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Checks whether this event has any registrations on its registration
 	 * queue (ie. on the waiting list).
 	 *
-	 * @return boolean TRUE if there is at least one registration on the queue,
+	 * @return bool TRUE if there is at least one registration on the queue,
 	 *                 FALSE otherwise
 	 */
 	public function hasQueueRegistrations() {
@@ -1712,7 +1712,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * registrations (but not from queue registrations) and the number of
 	 * offline registrations.
 	 *
-	 * @return boolean the number of registered seats for this event, will
+	 * @return bool the number of registered seats for this event, will
 	 *                 be >= 0
 	 */
 	public function getRegisteredSeats() {
@@ -1731,7 +1731,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * If this event has zero as the minimum number of registrations, this
 	 * function will always return TRUE.
 	 *
-	 * @return boolean TRUE if this event has enough regular registrations to
+	 * @return bool TRUE if this event has enough regular registrations to
 	 *                 to take place, FALSE otherwise
 	 */
 	public function hasEnoughRegistrations() {
@@ -1744,7 +1744,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * If this event has an unlimited number of possible registrations, this
 	 * function will always return zero.
 	 *
-	 * @return integer the number of vacancies for this event, will be >= 0
+	 * @return int the number of vacancies for this event, will be >= 0
 	 */
 	public function getVacancies() {
 		return max(
@@ -1759,7 +1759,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * If this event has an unlimited number of possible registrations, this
 	 * function will always return TRUE.
 	 *
-	 * @return boolean TRUE if this event has at least one vacancy
+	 * @return bool TRUE if this event has at least one vacancy
 	 *                 FALSE otherwise
 	 */
 	public function hasVacancies() {
@@ -1776,7 +1776,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * If this event has an unlimited number of possible registrations, this
 	 * function will always return FALSE.
 	 *
-	 * @return boolean TRUE if this event is fully booked, FALSE otherwise
+	 * @return bool TRUE if this event is fully booked, FALSE otherwise
 	 */
 	public function isFull() {
 		return !$this->hasVacancies();

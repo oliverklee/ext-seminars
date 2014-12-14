@@ -79,7 +79,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	/**
 	 * Creates an FE-user with the given gender and the name "Foo".
 	 *
-	 * @param integer $gender
+	 * @param int $gender
 	 *        the gender for the FE user, must be one of
 	 *        "tx_oelib_Model_FrontEndUser::GENDER_MALE",
 	 *        "tx_oelib_Model_FrontEndUser::GENDER_FEMALE" or

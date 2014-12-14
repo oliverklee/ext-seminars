@@ -34,7 +34,7 @@ class tx_seminars_Model_TimeSlot extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our entry date as UNIX time-stamp.
 	 *
-	 * @return integer our entry date as UNIX time-stamp, will be >= 0,
+	 * @return int our entry date as UNIX time-stamp, will be >= 0,
 	 *                 0 means "no entry date"
 	 */
 	public function getEntryDateAsUnixTimeStamp() {
@@ -44,7 +44,7 @@ class tx_seminars_Model_TimeSlot extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Sets our entry date as UNIX time-stamp.
 	 *
-	 * @param integer $entryDate our entry date as UNIX time-stamp, will be >= 0, 0 means "no entry date"
+	 * @param int $entryDate our entry date as UNIX time-stamp, will be >= 0, 0 means "no entry date"
 	 *
 	 * @return void
 	 */
@@ -59,7 +59,7 @@ class tx_seminars_Model_TimeSlot extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns whether this time-slot has an entry date.
 	 *
-	 * @return boolean TRUE if this time-slot has an entry date, FALSE otherwise
+	 * @return bool TRUE if this time-slot has an entry date, FALSE otherwise
 	 */
 	public function hasEntryDate() {
 		return $this->hasInteger('entry_date');

@@ -81,7 +81,7 @@ class tx_seminars_Model_Category extends tx_oelib_Model implements tx_seminars_I
 	/**
 	 * Returns whether this category has an icon.
 	 *
-	 * @return boolean TRUE if this category has an icon, FALSE otherwise
+	 * @return bool TRUE if this category has an icon, FALSE otherwise
 	 */
 	public function hasIcon() {
 		return $this->hasString('icon');
@@ -90,7 +90,7 @@ class tx_seminars_Model_Category extends tx_oelib_Model implements tx_seminars_I
 	/**
 	 * Gets the UID of the single view page for events of this category.
 	 *
-	 * @return integer the single view page, will be 0 if none has been set
+	 * @return int the single view page, will be 0 if none has been set
 	 */
 	public function getSingleViewPageUid() {
 		return $this->getAsInteger('single_view_page');
@@ -99,7 +99,7 @@ class tx_seminars_Model_Category extends tx_oelib_Model implements tx_seminars_I
 	/**
 	 * Checks whether this category has a single view page UID set.
 	 *
-	 * @return boolean
+	 * @return bool
 	 *         TRUE if this category has a single view page set, FALSE otherwise
 	 */
 	public function hasSingleViewPageUid() {

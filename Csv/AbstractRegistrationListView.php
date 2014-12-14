@@ -37,14 +37,14 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	protected $tableName = 'tx_seminars_attendances';
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	protected $eventUid = 0;
 
 	/**
 	 * Sets the page UID of the records to retrieve.
 	 *
-	 * @param integer $pageUid the page UID of the records, must be >= 0
+	 * @param int $pageUid the page UID of the records, must be >= 0
 	 *
 	 * @return void
 	 *
@@ -61,7 +61,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	/**
 	 * Sets the event UID of the registrations to retrieve.
 	 *
-	 * @param integer $eventUid the event UID of the registrations, must be >= 0
+	 * @param int $eventUid the event UID of the registrations, must be >= 0
 	 *
 	 * @return void
 	 *
@@ -78,7 +78,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	/**
 	 * Returns the event UID of the registrationsToRetrieve.
 	 *
-	 * @return integer the event UID, will be >= 0
+	 * @return int the event UID, will be >= 0
 	 */
 	protected function getEventUid() {
 		return $this->eventUid;
@@ -87,7 +87,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	/**
 	 * Checks whether a non-zero event UID has been set.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	protected function hasEventUid() {
 		return $this->getEventUid() > 0;
@@ -204,7 +204,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	/**
 	 * Checks whether the export should also contain registrations that are on the queue.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	abstract protected function shouldAlsoContainRegistrationsOnQueue();
 

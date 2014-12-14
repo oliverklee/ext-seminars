@@ -34,7 +34,7 @@ class tx_seminars_Model_BackEndUserGroup extends tx_oelib_Model_BackEndUserGroup
 	/**
 	 * Returns the PID for the storage of new events.
 	 *
-	 * @return integer the PID for the storage of new events, will be 0 if no
+	 * @return int the PID for the storage of new events, will be 0 if no
 	 *                 PID has been set
 	 */
 	public function getEventFolder() {
@@ -44,7 +44,7 @@ class tx_seminars_Model_BackEndUserGroup extends tx_oelib_Model_BackEndUserGroup
 	/**
 	 * Returns the PID for the storage of new registrations.
 	 *
-	 * @return integer the PID for the storage of new registrations, will be 0
+	 * @return int the PID for the storage of new registrations, will be 0
 	 *                 if no PID has been set
 	 */
 	public function getRegistrationFolder() {
@@ -57,7 +57,7 @@ class tx_seminars_Model_BackEndUserGroup extends tx_oelib_Model_BackEndUserGroup
 	 * Auxiliary records are all seminars record types with the exception of
 	 * events and registrations.
 	 *
-	 * @return integer the PID for the storage of new auxiliary records, will
+	 * @return int the PID for the storage of new auxiliary records, will
 	 *                 be 0 if no PID has been set
 	 */
 	public function getAuxiliaryRecordFolder() {

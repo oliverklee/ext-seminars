@@ -36,7 +36,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * The constructor.
 	 *
-	 * @param integer $registrationUid UID of the registration record, must be > 0
+	 * @param int $registrationUid UID of the registration record, must be > 0
 	 */
 	public function __construct($registrationUid = 0) {
 		if ($registrationUid > 0) {
@@ -59,7 +59,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Sets the "registration_queue" field of the registration record.
 	 *
-	 * @param boolean $isOnRegistrationQueueValue TRUE if the registration should be on the waiting list, FALSE otherwise
+	 * @param bool $isOnRegistrationQueueValue TRUE if the registration should be on the waiting list, FALSE otherwise
 	 *
 	 * @return void
 	 */
@@ -73,7 +73,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Sets the payment method of this registration.
 	 *
-	 * @param integer $uid the UID of the payment method to set
+	 * @param int $uid the UID of the payment method to set
 	 *
 	 * @return void
 	 */
@@ -132,7 +132,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Sets the value for 'registered_themselves'.
 	 *
-	 * @param boolean $registeredThemselves the value for the registered_themselves property
+	 * @param bool $registeredThemselves the value for the registered_themselves property
 	 *
 	 * @return void
 	 */

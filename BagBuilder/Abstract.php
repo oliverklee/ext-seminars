@@ -54,7 +54,7 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	protected $orderBy = 'uid';
 
 	/**
-	 * @var integer the field by which the DB query result should be grouped
+	 * @var int the field by which the DB query result should be grouped
 	 */
 	protected $groupBy = '';
 
@@ -70,12 +70,12 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	protected $additionalTableNames = array();
 
 	/**
-	 * @var boolean whether the timing of records should be ignored
+	 * @var bool whether the timing of records should be ignored
 	 */
 	protected $ignoreTimingOfRecords = FALSE;
 
 	/**
-	 * @var boolean whether hidden records should be shown, too
+	 * @var bool whether hidden records should be shown, too
 	 */
 	protected $showHiddenRecords = FALSE;
 
@@ -123,7 +123,7 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	 * @param string $sourcePagePids
 	 *        comma-separated list of PIDs of the system folders with the records;
 	 *        must not be empty; need not be safeguarded against SQL injection
-	 * @param integer $recursionDepth
+	 * @param int $recursionDepth
 	 *        recursion depth, must be >= 0
 	 *
 	 * @return void
@@ -145,7 +145,7 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	/**
 	 * Checks whether some source pages have already been set.
 	 *
-	 * @return boolean TRUE if source pages have already been set, FALSE
+	 * @return bool TRUE if source pages have already been set, FALSE
 	 *                 otherwise
 	 */
 	public function hasSourcePages() {

@@ -39,7 +39,7 @@ class Tx_Seminars_Csv_BackEndEventAccessCheck extends Tx_Seminars_Csv_AbstractBa
 	/**
 	 * Checks whether the logged-in user (if any) in the current environment has access to a CSV export.
 	 *
-	 * @return boolean whether the logged-in user (if any) in the current environment has access to a CSV export.
+	 * @return bool whether the logged-in user (if any) in the current environment has access to a CSV export.
 	 */
 	public function hasAccess() {
 		return $this->canAccessTableAndPage(self::TABLE_NAME_EVENTS, $this->getPageUid());

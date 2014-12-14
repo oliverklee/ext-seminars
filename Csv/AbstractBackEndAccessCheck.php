@@ -32,21 +32,21 @@
  */
 abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements Tx_Seminars_Interface_CsvAccessCheck {
 	/**
-	 * @var integer
+	 * @var int
 	 *
 	 * @see t3lib_BEfunc::getRecord
 	 */
 	const SHOW_PAGE_PERMISSION_BITS = 1;
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	protected $pageUid = 0;
 
 	/**
 	 * Sets the page UID of the records.
 	 *
-	 * @param integer $pageUid the page UID of the records, must be >= 0
+	 * @param int $pageUid the page UID of the records, must be >= 0
 	 *
 	 * @return void
 	 */
@@ -57,7 +57,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements Tx_Seminars
 	/**
 	 * Returns the page UID of the records to check.
 	 *
-	 * @return integer the page UID, will be >= 0
+	 * @return int the page UID, will be >= 0
 	 */
 	protected function getPageUid() {
 		return $this->pageUid;
@@ -69,9 +69,9 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements Tx_Seminars
 	 * @param string $tableName
 	 *        the name of the table to check the read access for, must not be empty
 	 *
-	 * @param integer $pageUid the page to check the access for, must be >= 0
+	 * @param int $pageUid the page to check the access for, must be >= 0
 	 *
-	 * @return boolean TRUE if the user has access to the given table and page,
+	 * @return bool TRUE if the user has access to the given table and page,
 	 *                 FALSE otherwise, will also return FALSE if no BE user is logged in
 	 */
 	protected function canAccessTableAndPage($tableName, $pageUid) {
@@ -96,7 +96,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements Tx_Seminars
 	 *
 	 * @param string $tableName the table name to check, must not be empty
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	protected function hasReadAccessToTable($tableName) {
 		return $this->getLoggedInBackEndUser()->check('tables_select', $tableName);
@@ -105,9 +105,9 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements Tx_Seminars
 	/**
 	 * Checks whether the logged-in back-end user has read access to the page (or folder) with the UID $pageUid.
 	 *
-	 * @param integer $pageUid the page to check the access for, must be >= 0
+	 * @param int $pageUid the page to check the access for, must be >= 0
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	protected function hasReadAccessToPage($pageUid) {
 		return $this->getLoggedInBackEndUser()

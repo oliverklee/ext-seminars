@@ -276,7 +276,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	 *
 	 * @param string $fieldToCheck the search field name to check, must not be empty
 	 *
-	 * @return boolean TRUE if the given field should be displayed as per
+	 * @return bool TRUE if the given field should be displayed as per
 	 *                 configuration, FALSE otherwise
 	 */
 	protected function hasSearchField($fieldToCheck) {

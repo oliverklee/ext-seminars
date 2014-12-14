@@ -43,17 +43,17 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	protected $testingFramework = NULL;
 
 	/**
-	 * @var integer the UID of a seminar to which the fixture relates
+	 * @var int the UID of a seminar to which the fixture relates
 	 */
 	protected $seminarUid = 0;
 
 	/**
-	 * @var integer the UID of the registration the fixture relates to
+	 * @var int the UID of the registration the fixture relates to
 	 */
 	protected $registrationUid = 0;
 
 	/**
-	 * @var integer the UID of the user the registration relates to
+	 * @var int the UID of the user the registration relates to
 	 */
 	protected $feUserUid = 0;
 
@@ -137,7 +137,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 *
 	 * @param array $paymentMethodData data of the payment method to add, may be empty
 	 *
-	 * @return integer the UID of the created record, will always be > 0
+	 * @return int the UID of the created record, will always be > 0
 	 */
 	private function setPaymentMethodRelation(array $paymentMethodData) {
 		$uid = $this->testingFramework->createRecord('tx_seminars_payment_methods', $paymentMethodData);

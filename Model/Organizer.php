@@ -80,7 +80,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	/**
 	 * Returns whether this organizer has a homepage.
 	 *
-	 * @return boolean TRUE if this organizer has a homepage, FALSE otherwise
+	 * @return bool TRUE if this organizer has a homepage, FALSE otherwise
 	 */
 	public function hasHomepage() {
 		return $this->hasString('homepage');
@@ -135,7 +135,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	/**
 	 * Returns whether this organizer has an e-mail footer.
 	 *
-	 * @return boolean TRUE if this organizer has an e-mail footer, FALSE otherwise
+	 * @return bool TRUE if this organizer has an e-mail footer, FALSE otherwise
 	 */
 	public function hasEMailFooter() {
 		return $this->hasString('email_footer');
@@ -144,7 +144,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	/**
 	 * Returns our attendances PID.
 	 *
-	 * @return integer our attendances PID, will be >= 0
+	 * @return int our attendances PID, will be >= 0
 	 */
 	public function getAttendancesPID() {
 		return $this->getAsInteger('attendances_pid');
@@ -153,7 +153,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	/**
 	 * Sets our attendances PID.
 	 *
-	 * @param integer $attendancesPID our attendances PID, must be >= 0
+	 * @param int $attendancesPID our attendances PID, must be >= 0
 	 *
 	 * @return void
 	 */
@@ -168,7 +168,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	/**
 	 * Returns whether this organizer has an attendances PID.
 	 *
-	 * @return boolean TRUE if this organizer has an attendances PID, FALSE otherwise
+	 * @return bool TRUE if this organizer has an attendances PID, FALSE otherwise
 	 */
 	public function hasAttendancesPID() {
 		return $this->hasInteger('attendances_pid');
@@ -177,7 +177,7 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	/**
 	 * Checks whether this organizer has a description.
 	 *
-	 * @return boolean TRUE if this organizer has a description, FALSE otherwise
+	 * @return bool TRUE if this organizer has a description, FALSE otherwise
 	 */
 	public function hasDescription() {
 		return $this->hasString('description');

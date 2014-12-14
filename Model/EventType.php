@@ -59,7 +59,7 @@ class tx_seminars_Model_EventType extends tx_oelib_Model implements tx_seminars_
 	/**
 	 * Gets the UID of the single view page for events of this type.
 	 *
-	 * @return integer the single view page, will be 0 if none has been set
+	 * @return int the single view page, will be 0 if none has been set
 	 */
 	public function getSingleViewPageUid() {
 		return $this->getAsInteger('single_view_page');
@@ -68,7 +68,7 @@ class tx_seminars_Model_EventType extends tx_oelib_Model implements tx_seminars_
 	/**
 	 * Checks whether this event type has a single view page UID set.
 	 *
-	 * @return boolean
+	 * @return bool
 	 *         TRUE if this event type has a single view page set, FALSE
 	 *         otherwise
 	 */

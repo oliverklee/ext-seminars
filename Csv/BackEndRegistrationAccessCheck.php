@@ -46,7 +46,7 @@ class Tx_Seminars_Csv_BackEndRegistrationAccessCheck extends Tx_Seminars_Csv_Abs
 	 *
 	 * If a page UID has been set, this method also checks that the user has read access to that page.
 	 *
-	 * @return boolean whether the logged-in user (if any) in the current environment has access to a CSV export.
+	 * @return bool whether the logged-in user (if any) in the current environment has access to a CSV export.
 	 */
 	public function hasAccess() {
 		if (!Tx_Oelib_BackEndLoginManager::getInstance()->isLoggedIn()) {

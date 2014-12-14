@@ -49,7 +49,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	protected $session = NULL;
 
 	/**
-	 * @var integer the UID of the event the fixture relates to
+	 * @var int the UID of the event the fixture relates to
 	 */
 	protected $seminarUid = 0;
 
@@ -691,7 +691,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	 * @test
 	 *
 	 * @param string $key the key of the field to check for, must not be empty
-	 * @param boolean $isSelfContained
+	 * @param bool $isSelfContained
 	 *        whether the field will be visible if no other fields are enabled
 	 *        and the event has no special features enabled
 	 *

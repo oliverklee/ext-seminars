@@ -36,7 +36,7 @@ class tx_seminars_Model_BackEndUser extends tx_oelib_Model_BackEndUser {
 	 *
 	 * This will be the first set PID found in the user's groups.
 	 *
-	 * @return integer the PID for newly created event records, will be 0 if no
+	 * @return int the PID for newly created event records, will be 0 if no
 	 *                 group has a PID set for new event records
 	 */
 	public function getEventFolderFromGroup() {
@@ -48,7 +48,7 @@ class tx_seminars_Model_BackEndUser extends tx_oelib_Model_BackEndUser {
 	 *
 	 * This will be the first set PID found in the user's groups.
 	 *
-	 * @return integer the PID for newly created registration records, will be
+	 * @return int the PID for newly created registration records, will be
 	 *                 0 if no group has a PID set for new registration records
 	 */
 	public function getRegistrationFolderFromGroup() {
@@ -60,7 +60,7 @@ class tx_seminars_Model_BackEndUser extends tx_oelib_Model_BackEndUser {
 	 *
 	 * This will be the first set PID found in the user's groups.
 	 *
-	 * @return integer the PID for newly created auxiliary records, will be
+	 * @return int the PID for newly created auxiliary records, will be
 	 *                 0 if no group has a PID set for new auxiliary records
 	 */
 	public function getAuxiliaryRecordsFolder() {
@@ -76,7 +76,7 @@ class tx_seminars_Model_BackEndUser extends tx_oelib_Model_BackEndUser {
 	 *        the type of the record, must be "event", "registration" or
 	 *        "auxiliary"
 	 *
-	 * @return integer the PID for newly created records, will be 0 if no group
+	 * @return int the PID for newly created records, will be 0 if no group
 	 *                 has a PID set for new records of the given type
 	 */
 	private function getRecordFolderFromGroup($type) {

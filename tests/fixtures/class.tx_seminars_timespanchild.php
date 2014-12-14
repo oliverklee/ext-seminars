@@ -58,7 +58,7 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	/**
 	 * Sets this time span's begin date and time.
 	 *
-	 * @param integer $beginDate begin date and time as a UNIX timestamp, may be zero
+	 * @param int $beginDate begin date and time as a UNIX timestamp, may be zero
 	 *
 	 * @return void
 	 */
@@ -69,7 +69,7 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	/**
 	 * Sets this time span's end date and time.
 	 *
-	 * @param integer $endDate end date and time as a UNIX timestamp, may be zero
+	 * @param int $endDate end date and time as a UNIX timestamp, may be zero
 	 *
 	 * @return void
 	 */
@@ -91,7 +91,7 @@ final class tx_seminars_timespanchild extends tx_seminars_timespan {
 	/**
 	 * Sets the number of places for this time span.
 	 *
-	 * @param integer $places the number of places that are associated with this time span
+	 * @param int $places the number of places that are associated with this time span
 	 *
 	 * @return void
 	 */

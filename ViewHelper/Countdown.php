@@ -58,7 +58,7 @@ class tx_seminars_ViewHelper_Countdown {
 	 * 50000 seconds -> "13 hours"
 	 * The function uses localized strings and also looks for proper usage of singular/plural.
 	 *
-	 * @param integer $targettime the target UNIX timestamp to count up to, must be >= 0
+	 * @param int $targettime the target UNIX timestamp to count up to, must be >= 0
 	 *
 	 * @return string a localized string representing the time left until the event starts
 	 */
@@ -81,7 +81,7 @@ class tx_seminars_ViewHelper_Countdown {
 	/**
 	 * Returns the given duration in days.
 	 *
-	 * @param integer $seconds the duration in seconds, must be >= 0
+	 * @param int $seconds the duration in seconds, must be >= 0
 	 *
 	 * @return string the duration in days
 	 */
@@ -99,7 +99,7 @@ class tx_seminars_ViewHelper_Countdown {
 	/**
 	 * Returns the given duration in hours.
 	 *
-	 * @param integer $seconds the duration in seconds, must be >= 0
+	 * @param int $seconds the duration in seconds, must be >= 0
 	 *
 	 * @return string the duration in hours
 	 */
@@ -117,7 +117,7 @@ class tx_seminars_ViewHelper_Countdown {
 	/**
 	 * Returns the given duration in minutes.
 	 *
-	 * @param integer $seconds the duration in seconds, must be >= 0
+	 * @param int $seconds the duration in seconds, must be >= 0
 	 *
 	 * @return string the duration in minutes
 	 */
@@ -135,7 +135,7 @@ class tx_seminars_ViewHelper_Countdown {
 	/**
 	 * Returns the given duration in seconds.
 	 *
-	 * @param integer $seconds the duration in seconds, must be >= 0
+	 * @param int $seconds the duration in seconds, must be >= 0
 	 *
 	 * @return string the duration in seconds
 	 */
@@ -149,7 +149,7 @@ class tx_seminars_ViewHelper_Countdown {
 	/**
 	 * Returns the formatted countdown message using $countdownValue and $countdownText.
 	 *
-	 * @param integer $countdownValue
+	 * @param int $countdownValue
 	 * @param string $countdownText
 	 *
 	 * @return string the formatted countdown message

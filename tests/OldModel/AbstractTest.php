@@ -41,7 +41,7 @@ class tx_seminars_OldModel_AbstractTest extends tx_phpunit_testcase {
 	protected $testingFramework = NULL;
 
 	/**
-	 * @var integer UID of the minimal fixture's data in the DB
+	 * @var int UID of the minimal fixture's data in the DB
 	 */
 	private $fixtureUid = 0;
 

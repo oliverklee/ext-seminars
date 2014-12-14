@@ -44,7 +44,7 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView {
 	/**
 	 * Sets the page UID of the records to retrieve.
 	 *
-	 * @param integer $pageUid the page UID of the records, must be > 0
+	 * @param int $pageUid the page UID of the records, must be > 0
 	 *
 	 * @return void
 	 *

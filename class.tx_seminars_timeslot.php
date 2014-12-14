@@ -138,7 +138,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * Gets the place.
 	 *
-	 * @return integer the place UID
+	 * @return int the place UID
 	 */
 	public function getPlace() {
 		return $this->getRecordPropertyInteger('place');
@@ -174,7 +174,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * Checks whether the timeslot has a entry date set.
 	 *
-	 * @return boolean TRUE if we have a entry date, FALSE otherwise
+	 * @return bool TRUE if we have a entry date, FALSE otherwise
 	 */
 	public function hasEntryDate() {
 		return $this->hasRecordPropertyInteger('entry_date');

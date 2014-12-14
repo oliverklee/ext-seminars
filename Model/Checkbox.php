@@ -78,7 +78,7 @@ class tx_seminars_Model_Checkbox extends tx_oelib_Model implements tx_seminars_I
 	/**
 	 * Returns whether this payment method has a description.
 	 *
-	 * @return boolean TRUE if this payment method has a description, FALSE
+	 * @return bool TRUE if this payment method has a description, FALSE
 	 *                 otherwise
 	 */
 	public function hasDescription() {

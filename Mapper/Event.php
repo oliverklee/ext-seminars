@@ -103,9 +103,9 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 	 * These boundaries are inclusive, i.e., events with a begin date of
 	 * exactly $minimum or $maximum will also be retrieved.
 	 *
-	 * @param integer $minimum
+	 * @param int $minimum
 	 *        minimum begin date as a UNIX timestamp, must be >= 0
-	 * @param integer $maximum
+	 * @param int $maximum
 	 *        maximum begin date as a UNIX timestamp, must be >= $minimum
 	 *
 	 * @return tx_oelib_List the found tx_seminars_Model_Event models, will be

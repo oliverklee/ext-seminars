@@ -65,7 +65,7 @@ class tx_seminars_OldModel_Organizer extends tx_seminars_OldModel_Abstract imple
 	/**
 	 * Returns TRUE if this organizer has a homepage set, FALSE otherwise.
 	 *
-	 * @return boolean TRUE if this organizer has a homepage set, FALSE
+	 * @return bool TRUE if this organizer has a homepage set, FALSE
 	 *                 otherwise
 	 */
 	public function hasHomepage() {
@@ -94,7 +94,7 @@ class tx_seminars_OldModel_Organizer extends tx_seminars_OldModel_Abstract imple
 	/**
 	 * Gets our attendances PID, will be 0 if there is no attendances PID set.
 	 *
-	 * @return integer our attendances PID or 0 if there is no attendances
+	 * @return int our attendances PID or 0 if there is no attendances
 	 *                 PID set
 	 */
 	public function getAttendancesPid() {
@@ -104,7 +104,7 @@ class tx_seminars_OldModel_Organizer extends tx_seminars_OldModel_Abstract imple
 	/**
 	 * Checks whether this organizer has a description.
 	 *
-	 * @return boolean TRUE if this organizer has a description, FALSE otherwise
+	 * @return bool TRUE if this organizer has a description, FALSE otherwise
 	 */
 	public function hasDescription() {
 		return $this->hasRecordPropertyString('description');

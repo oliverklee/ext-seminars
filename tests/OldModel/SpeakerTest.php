@@ -94,7 +94,7 @@ class tx_seminars_OldModel_SpeakerTest extends tx_phpunit_testcase {
 	 *
 	 * @param array $skillData data of the skill to add, may be empty
 	 *
-	 * @return integer the UID of the created record, will always be > 0
+	 * @return int the UID of the created record, will always be > 0
 	 */
 	private function addSkillRelation(array $skillData) {
 		$uid = $this->testingFramework->createRecord(

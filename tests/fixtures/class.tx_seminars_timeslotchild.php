@@ -34,7 +34,7 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	/**
 	 * Sets the place field of the time slot.
 	 *
-	 * @param integer $place the UID of the place (has to be > 0)
+	 * @param int $place the UID of the place (has to be > 0)
 	 *
 	 * @return void
 	 */
@@ -45,7 +45,7 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	/**
 	 * Sets the entry date.
 	 *
-	 * @param integer $entryDate the entry date as a UNIX timestamp (has to be >= 0, 0 will unset the entry date)
+	 * @param int $entryDate the entry date as a UNIX timestamp (has to be >= 0, 0 will unset the entry date)
 	 *
 	 * @return void
 	 */
@@ -56,7 +56,7 @@ final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
 	/**
 	 * Sets the begin date and time.
 	 *
-	 * @param integer $beginDate the begin date as a UNIX timestamp (has to be >= 0, 0 will unset the begin date)
+	 * @param int $beginDate the begin date as a UNIX timestamp (has to be >= 0, 0 will unset the begin date)
 	 *
 	 * @return void
 	 */

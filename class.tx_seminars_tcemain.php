@@ -67,7 +67,7 @@ class tx_seminars_tcemainprocdm {
 	 *
 	 * @param string $status the status of this record (new/update)
 	 * @param string $table the affected table name
-	 * @param integer $uid the UID of the affected record (may be 0)
+	 * @param int $uid the UID of the affected record (may be 0)
 	 * @param array &$fieldArray an array of all fields that got changed (as reference)
 	 * @param t3lib_TCEmain $pObj reference to calling object
 	 *
@@ -127,7 +127,7 @@ class tx_seminars_tcemainprocdm {
 	/**
 	 * Processes a single time slot.
 	 *
-	 * @param integer $uid the UID of the affected record (may be 0)
+	 * @param int $uid the UID of the affected record (may be 0)
 	 * @param array $fieldArray an array of all fields that got changed
 	 *
 	 * @return void
@@ -151,7 +151,7 @@ class tx_seminars_tcemainprocdm {
 	/**
 	 * Processes a single event.
 	 *
-	 * @param integer $uid the UID of the affected record (may be 0)
+	 * @param int $uid the UID of the affected record (may be 0)
 	 * @param array $fieldArray an array of all fields that got changed
 	 *
 	 * @return void

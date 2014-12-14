@@ -42,7 +42,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	 * whether this class has created a fake front end which needs to get
 	 * cleaned up again
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	private $hasFakeFrontEnd = FALSE;
 
@@ -222,7 +222,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	/**
 	 * Checks whether there is a single view page set in the configuration.
 	 *
-	 * @return boolean
+	 * @return bool
 	 *         TRUE if a single view page has been set in the configuration,
 	 *         FALSE otherwise
 	 */
@@ -234,7 +234,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	 * Retrieves the single view page UID from the flexforms/TS Setup
 	 * configuration.
 	 *
-	 * @return integer
+	 * @return int
 	 *         the single view page UID from the configuration, will be 0 if no
 	 *         page UID has been set
 	 */

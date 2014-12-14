@@ -79,7 +79,7 @@ class tx_seminars_Model_TargetGroup extends tx_oelib_Model implements tx_seminar
 	/**
 	 * Returns this target group's minimum age.
 	 *
-	 * @return integer this target group's minimum age, will be >= 0; will be 0
+	 * @return int this target group's minimum age, will be >= 0; will be 0
 	 *                 if no minimum age has been set
 	 */
 	public function getMinimumAge() {
@@ -89,7 +89,7 @@ class tx_seminars_Model_TargetGroup extends tx_oelib_Model implements tx_seminar
 	/**
 	 * Sets this target group's minimum age.
 	 *
-	 * @param integer $minimumAge
+	 * @param int $minimumAge
 	 *        this target group's minimum age, must be >= 0; set to 0 to unset the minimum age
 	 *
 	 * @return void
@@ -101,7 +101,7 @@ class tx_seminars_Model_TargetGroup extends tx_oelib_Model implements tx_seminar
 	/**
 	 * Returns this target group's maximum age.
 	 *
-	 * @return integer this target group's maximum age, will be >= 0; will be 0
+	 * @return int this target group's maximum age, will be >= 0; will be 0
 	 *                 if no maximum age has been set
 	 */
 	public function getMaximumAge() {
@@ -111,7 +111,7 @@ class tx_seminars_Model_TargetGroup extends tx_oelib_Model implements tx_seminar
 	/**
 	 * Sets this target group's maximum age.
 	 *
-	 * @param integer $maximumAge
+	 * @param int $maximumAge
 	 *        this target group's maximum age, must be >= 0; set to 0 to unset the maximum age
 	 *
 	 * @return void

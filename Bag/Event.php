@@ -45,9 +45,9 @@ class tx_seminars_Bag_Event extends tx_seminars_Bag_Abstract {
 	 *        ORDER BY clause (may be empty), must already be safeguarded against SQL injection
 	 * @param string $limit
 	 *        LIMIT clause (may be empty), must already be safeguarded against SQL injection
-	 * @param integer $showHiddenRecords
+	 * @param int $showHiddenRecords
 	 *        If $showHiddenRecords is set (0/1), any hidden fields in records are ignored.
-	 * @param boolean $ignoreTimingOfRecords
+	 * @param bool $ignoreTimingOfRecords
 	 *        If $ignoreTimingOfRecords is TRUE the timing of records is ignored.
 	 */
 	public function __construct(

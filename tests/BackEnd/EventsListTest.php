@@ -43,7 +43,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 	protected $testingFramework = NULL;
 
 	/**
-	 * @var integer PID of a dummy system folder
+	 * @var int PID of a dummy system folder
 	 */
 	protected $dummySysFolderPid = 0;
 

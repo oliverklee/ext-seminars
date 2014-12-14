@@ -38,7 +38,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	private $event = NULL;
 
 	/**
-	 * @var boolean whether the form is complete
+	 * @var bool whether the form is complete
 	 */
 	private $isComplete = TRUE;
 
@@ -73,7 +73,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * whether the hooks in $this->hooks have been retrieved
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	private $hooksHaveBeenRetrieved = FALSE;
 
@@ -81,7 +81,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * The constructor of this class. Instantiates an event object.
 	 *
-	 * @param integer $eventUid UID of an event, must be > 0
+	 * @param int $eventUid UID of an event, must be > 0
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws tx_oelib_Exception_NotFound if event could not be instantiated
@@ -149,7 +149,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * Checks whether the form was already submitted by the user.
 	 *
-	 * @return boolean TRUE if the form was submitted by the user, FALSE otherwise
+	 * @return bool TRUE if the form was submitted by the user, FALSE otherwise
 	 */
 	protected function isSubmitted() {
 		return $this->getPostData('isSubmitted') == '1';
@@ -163,7 +163,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * - subject
 	 * - messageBody
 	 *
-	 * @return boolean TRUE if the form data is valid, FALSE otherwise
+	 * @return bool TRUE if the form data is valid, FALSE otherwise
 	 */
 	private function validateFormData() {
 		if ($this->getPostData('subject') == '') {
@@ -202,7 +202,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * Checks whether the current back-end user has the needed permissions to
 	 * access this form.
 	 *
-	 * @return boolean TRUE if the user is allowed to see/use the form, FALSE otherwise
+	 * @return bool TRUE if the user is allowed to see/use the form, FALSE otherwise
 	 */
 	public function checkAccess() {
 		return $GLOBALS['BE_USER']->check('tables_select', 'tx_seminars_seminars');
@@ -398,7 +398,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 *
 	 * @param string $key the key of the field to check for, must not be empty
 	 *
-	 * @return boolean TRUE if the stored POST data contains an entry, FALSE otherwise
+	 * @return bool TRUE if the stored POST data contains an entry, FALSE otherwise
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -665,7 +665,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * @param string $fieldName
 	 *        the field to check the error message for, must not be empty
 	 *
-	 * @return boolean TRUE if an error message has been stored for the given
+	 * @return bool TRUE if an error message has been stored for the given
 	 *                 fieldname, FALSE otherwise
 	 */
 	private function hasErrorMessage($fieldName) {

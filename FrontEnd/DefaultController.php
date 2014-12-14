@@ -186,7 +186,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * whether the hooks in $this->listViewHooks have been retrieved
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	private $listViewHooksHaveBeenRetrieved = FALSE;
 
@@ -200,7 +200,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * whether the hooks in $this->singleViewHooks have been retrieved
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	private $singleViewHooksHaveBeenRetrieved = FALSE;
 
@@ -368,7 +368,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Checks that we are properly initialized and that we have a config getter.
 	 *
-	 * @return boolean TRUE if we are properly initialized, FALSE otherwise
+	 * @return bool TRUE if we are properly initialized, FALSE otherwise
 	 */
 	public function isInitialized() {
 		return ($this->isInitialized && is_object($this->configGetter));
@@ -445,10 +445,10 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * If the seminar cannot be created, $this->seminar will be NULL, and
 	 * this function will return FALSE.
 	 *
-	 * @param integer $seminarUid an event UID
-	 * @param boolean $showHiddenRecords whether hidden records should be retrieved as well
+	 * @param int $seminarUid an event UID
+	 * @param bool $showHiddenRecords whether hidden records should be retrieved as well
 	 *
-	 * @return boolean TRUE if the seminar UID is valid and the object has been
+	 * @return bool TRUE if the seminar UID is valid and the object has been
 	 *                 created, FALSE otherwise
 	 */
 	public function createSeminar($seminarUid, $showHiddenRecords = FALSE) {
@@ -493,9 +493,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * If the registration cannot be created, $this->registration will be NULL,
 	 * and this function will return FALSE.
 	 *
-	 * @param integer $registrationUid a registration UID
+	 * @param int $registrationUid a registration UID
 	 *
-	 * @return boolean TRUE if the registration UID is valid and the object has been created, FALSE otherwise
+	 * @return bool TRUE if the registration UID is valid and the object has been created, FALSE otherwise
 	 */
 	public function createRegistration($registrationUid) {
 		$result = FALSE;
@@ -627,8 +627,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * parameter with this UID.
 	 *
 	 * @param string $label the label to wrap into a link
-	 * @param integer $pageId the PID of the page to redirect to after login (must not be empty)
-	 * @param integer $eventId the UID of the event (may be empty)
+	 * @param int $pageId the PID of the page to redirect to after login (must not be empty)
+	 * @param int $eventId the UID of the event (may be empty)
 	 *
 	 * @return string the wrapped label
 	 */
@@ -1457,7 +1457,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Checks whether online registration is enabled at all by configuration.
 	 *
-	 * @return boolean TRUE if online registration is enabled, FALSE otherwise
+	 * @return bool TRUE if online registration is enabled, FALSE otherwise
 	 */
 	protected function isRegistrationEnabled() {
 		return $this->getConfValueBoolean('enableRegistration');
@@ -1466,7 +1466,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Checkes whether a front-end user is logged in.
 	 *
-	 * @return boolean TRUE if a user is logged in, FALSE otherwise
+	 * @return bool TRUE if a user is logged in, FALSE otherwise
 	 */
 	public function isLoggedIn() {
 		return tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
@@ -1978,7 +1978,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
 	 * If $this->seminar is invalid, an empty string is returned.
 	 *
-	 * @param integer $rowCounter
+	 * @param int $rowCounter
 	 *        Row counter. Starts at 0 (zero). Used for alternating class
 	 *        values in the output rows.
 	 * @param string $whatToDisplay
@@ -2580,7 +2580,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Checks whether the currently logged-in FE user is allowed to edit the
 	 * current event in the list view.
 	 *
-	 * @return boolean TRUE if the current user is allowed to edit the current
+	 * @return bool TRUE if the current user is allowed to edit the current
 	 *                 event, FALSE otherwise
 	 */
 	protected function mayCurrentUserEditCurrentEvent() {
@@ -3196,7 +3196,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * @param string $fromOrTo must be "from" or "to", depending on the date part which should be retrieved.
 	 *
-	 * @return integer the timestamp for the date set in piVars, will be 0 if no
+	 * @return int the timestamp for the date set in piVars, will be 0 if no
 	 *                 date was set
 	 */
 	private function getTimestampFromDatePiVars($fromOrTo) {
@@ -3217,7 +3217,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Before this function is called, the piVars from_day, from_month and
 	 * from_year must be run through ensureIntegerPiVars.
 	 *
-	 * @return integer the timestamp for the fromDate, will be > 0
+	 * @return int the timestamp for the fromDate, will be > 0
 	 */
 	private function getFromDate() {
 		$day = ($this->piVars['from_day'] > 0) ? $this->piVars['from_day'] : 1;
@@ -3238,7 +3238,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Before this function is called, the piVars to_day, to_month and to_year
 	 * must be run through ensureIntegerPiVars.
 	 *
-	 * @return integer the timestamp for the toDate, will be > 0
+	 * @return int the timestamp for the toDate, will be > 0
 	 */
 	private function getToDate() {
 		$longMonths = array(1, 3, 5, 7, 8, 10, 12);
@@ -3319,7 +3319,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Checks if the current user has permission to access the attached files of
 	 * an event.
 	 *
-	 * @return boolean TRUE if the user is allowed to access the attached files,
+	 * @return bool TRUE if the user is allowed to access the attached files,
 	 *                 FALSE otherwise
 	 */
 	private function mayUserAccessAttachedFiles() {
@@ -3337,7 +3337,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Checks if the current FE user has access to the event editor and thus may
 	 * see the my entered events list.
 	 *
-	 * @return boolean TRUE if the user is allowed to access the event editor,
+	 * @return bool TRUE if the user is allowed to access the event editor,
 	 *                 FALSE otherwise
 	 */
 	private function hasEventEditorAccess() {
@@ -3352,7 +3352,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * When this function is called, $this->seminar must contain a seminar, and
 	 * a user must be logged in at the front end.
 	 *
-	 * @return boolean TRUE if the logged-in user can view the current seminar,
+	 * @return bool TRUE if the logged-in user can view the current seminar,
 	 *                 FALSE otherwise
 	 */
 	private function canShowCurrentEvent() {
@@ -3486,7 +3486,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @param tx_seminars_Model_Event $event
 	 *        the event which to link to
 	 * @param string $linkText the link text, must not be empty
-	 * @param boolean $htmlspecialcharLinkText whether to htmlspecialchar the link text
+	 * @param bool $htmlspecialcharLinkText whether to htmlspecialchar the link text
 	 *
 	 * @return string HTML code for the link to the event's single view page
 	 */

@@ -39,7 +39,7 @@ class tx_seminars_tests_fixtures_OldModel_Testing extends tx_seminars_OldModel_A
 	/**
 	 * Sets the test field of this record to a boolean value.
 	 *
-	 * @param boolean $test the boolean value to set
+	 * @param bool $test the boolean value to set
 	 *
 	 * @return void
 	 */
@@ -50,7 +50,7 @@ class tx_seminars_tests_fixtures_OldModel_Testing extends tx_seminars_OldModel_A
 	/**
 	 * Returns TRUE if the test field of this record is set, FALSE otherwise.
 	 *
-	 * @return boolean TRUE if the test field of this record is set, FALSE
+	 * @return bool TRUE if the test field of this record is set, FALSE
 	 *                 otherwise
 	 */
 	public function getBooleanTest() {
@@ -66,7 +66,7 @@ class tx_seminars_tests_fixtures_OldModel_Testing extends tx_seminars_OldModel_A
 	 * @param string $mmTable the name of the m:n table, having the fields uid_local, uid_foreign and sorting, must not be empty
 	 * @param array $references array of uids of records from the foreign table to which we should create references, may be empty
 	 *
-	 * @return integer the number of created m:n records
+	 * @return int the number of created m:n records
 	 */
 	public function createMmRecords($mmTable, array $references) {
 		return parent::createMmRecords($mmTable, $references);

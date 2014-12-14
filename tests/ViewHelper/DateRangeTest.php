@@ -52,7 +52,7 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 	private $translator;
 
 	/**
-	 * @var integer some random date (2001-01-01 00:00:00)
+	 * @var int some random date (2001-01-01 00:00:00)
 	 */
 	const BEGIN_DATE = 978303600;
 

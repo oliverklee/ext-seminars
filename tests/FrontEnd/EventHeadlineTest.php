@@ -48,12 +48,12 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 	private $mapper;
 
 	/**
-	 * @var integer event begin date
+	 * @var int event begin date
 	 */
 	private $eventDate = 0;
 
 	/**
-	 * @var integer UID of the event to create the headline for
+	 * @var int UID of the event to create the headline for
 	 */
 	private $eventId = 0;
 

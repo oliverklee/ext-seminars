@@ -33,21 +33,21 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	/**
 	 * UID of a dummy system folder
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $dummySysFolderUid;
 
 	/**
 	 * UID of a dummy organizer record
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $organizerUid;
 
 	/**
 	 * UID of a dummy event record
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $eventUid;
 

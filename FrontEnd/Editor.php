@@ -41,7 +41,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * UID of the currently edited object, zero if the object is going to be a new database record
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $objectUid = 0;
 
@@ -51,7 +51,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	private $formConfiguration = array();
 
 	/**
-	 * @var boolean whether the class ist used in test mode
+	 * @var bool whether the class ist used in test mode
 	 */
 	private $isTestMode = FALSE;
 
@@ -71,7 +71,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Sets the current UID.
 	 *
-	 * @param integer $uid
+	 * @param int $uid
 	 *        UID of the currently edited object. For creating a new database record, $uid must be zero. $uid must not be < 0.
 	 *
 	 * @return void
@@ -83,7 +83,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Gets the current object UID.
 	 *
-	 * @return integer UID of the currently edited object, zero if a new object is being created
+	 * @return int UID of the currently edited object, zero if a new object is being created
 	 */
 	public function getObjectUid() {
 		return $this->objectUid;
@@ -127,7 +127,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Checks whether the test mode is set.
 	 *
-	 * @return boolean TRUE if the test mode is set, FALSE otherwise
+	 * @return bool TRUE if the test mode is set, FALSE otherwise
 	 */
 	public function isTestMode() {
 		return $this->isTestMode;

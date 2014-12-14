@@ -42,7 +42,7 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 	protected $seminarsPluginConfiguration = NULL;
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	protected $vipsGroupUid = 12431;
 

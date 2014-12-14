@@ -37,17 +37,17 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	protected $seminar = NULL;
 
 	/**
-	 * @var integer the UID of a fake front-end user
+	 * @var int the UID of a fake front-end user
 	 */
 	protected $frontEndUserUid = 0;
 
 	/**
-	 * @var integer UID of a fake login page
+	 * @var int UID of a fake login page
 	 */
 	protected $loginPageUid = 0;
 
 	/**
-	 * @var integer UID of a fake registration page
+	 * @var int UID of a fake registration page
 	 */
 	protected $registrationPageUid = 0;
 

@@ -67,7 +67,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	private $seminar = NULL;
 
 	/**
-	 * @var boolean whether the user data has already been retrieved
+	 * @var bool whether the user data has already been retrieved
 	 */
 	private $userDataHasBeenRetrieved = FALSE;
 
@@ -156,7 +156,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * This function must be called directly after construction or this object will not be usable.
 	 *
 	 * @param tx_seminars_seminar $seminar the seminar object (that's the seminar we would like to register for)
-	 * @param integer $userUid UID of the FE user who wants to sign up
+	 * @param int $userUid UID of the FE user who wants to sign up
 	 * @param array $registrationData associative array with the registration data the user has just entered, may be empty
 	 *
 	 * @return void
@@ -271,7 +271,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 *
 	 * If no value is saved in the record, 1 will be returned.
 	 *
-	 * @return integer the number of seats
+	 * @return int the number of seats
 	 */
 	public function getSeats() {
 		if ($this->hasSeats()) {
@@ -286,7 +286,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets our number of seats.
 	 *
-	 * @param integer $seats the number of seats, must be >= 0
+	 * @param int $seats the number of seats, must be >= 0
 	 *
 	 * @return void
 	 *
@@ -303,7 +303,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns whether this registration has seats.
 	 *
-	 * @return boolean TRUE if this registration has seats, FALSE otherwise
+	 * @return bool TRUE if this registration has seats, FALSE otherwise
 	 */
 	public function hasSeats() {
 		return $this->hasRecordPropertyInteger('seats');
@@ -536,7 +536,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Gets the attendee's UID.
 	 *
-	 * @return integer the attendee's feuser uid
+	 * @return int the attendee's feuser uid
 	 */
 	public function getUser() {
 		return $this->getRecordPropertyInteger('user');
@@ -573,7 +573,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns whether the registration has an existing front-end user.
 	 *
-	 * @return boolean TRUE if the registration has an existing front-end user, FALSE otherwise
+	 * @return bool TRUE if the registration has an existing front-end user, FALSE otherwise
 	 */
 	public function hasExistingFrontEndUser() {
 		if ($this->getUser() <= 0) {
@@ -586,7 +586,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets the front-end user UID of the registration.
 	 *
-	 * @param integer $frontEndUserUID the front-end user UID of the attendee, must be > 0
+	 * @param int $frontEndUserUID the front-end user UID of the attendee, must be > 0
 	 *
 	 * @return void
 	 */
@@ -597,7 +597,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Gets the seminar's UID.
 	 *
-	 * @return integer the seminar's UID
+	 * @return int the seminar's UID
 	 */
 	public function getSeminar() {
 		return $this->getRecordPropertyInteger('seminar');
@@ -627,7 +627,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Gets whether this attendance has already been paid for.
 	 *
-	 * @return boolean whether this attendance has already been paid for
+	 * @return bool whether this attendance has already been paid for
 	 */
 	public function isPaid() {
 		return $this->getRecordPropertyInteger('datepaid') > 0;
@@ -636,7 +636,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets the date when this registration has been paid for.
 	 *
-	 * @param integer $paymentDate
+	 * @param int $paymentDate
 	 *        the date of the payment as UNIX timestamp, must be >= 0
 	 *
 	 * @return void
@@ -657,7 +657,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Checks whether the attendee has stated any special interests.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasInterests() {
 		return $this->hasRecordPropertyString('interests');
@@ -727,7 +727,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns whether this registration has a saved price category name and its single price.
 	 *
-	 * @return boolean TRUE if this registration has a price, FALSE otherwise
+	 * @return bool TRUE if this registration has a price, FALSE otherwise
 	 */
 	public function hasPrice() {
 		return $this->hasRecordPropertyString('price');
@@ -764,7 +764,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns whether this registration has a total price.
 	 *
-	 * @return boolean TRUE if this registration has a total price, FALSE otherwise
+	 * @return bool TRUE if this registration has a total price, FALSE otherwise
 	 */
 	public function hasTotalPrice() {
 		return $this->hasRecordPropertyDecimal('total_price');
@@ -918,7 +918,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Checks whether there are any lodging options referenced by this record.
 	 *
-	 * @return boolean TRUE if at least one lodging option is referenced by this record, FALSE otherwise
+	 * @return bool TRUE if at least one lodging option is referenced by this record, FALSE otherwise
 	 */
 	public function hasLodgings() {
 		return $this->hasRecordPropertyInteger('lodgings');
@@ -951,7 +951,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Checks whether this registration has non-empty data in the food field.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasFood() {
 		return $this->hasRecordPropertyString('food');
@@ -969,7 +969,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Checks whether this registration has non-empty data in the accommodation field.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasAccommodation() {
 		return $this->hasRecordPropertyString('accommodation');
@@ -978,7 +978,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Checks whether there are any food options referenced by this record.
 	 *
-	 * @return boolean TRUE if at least one food option is referenced by this record, FALSE otherwise
+	 * @return bool TRUE if at least one food option is referenced by this record, FALSE otherwise
 	 */
 	public function hasFoods() {
 		return $this->hasRecordPropertyInteger('foods');
@@ -1001,7 +1001,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Checks whether any option checkboxes are referenced by this record.
 	 *
-	 * @return boolean TRUE if at least one option checkbox is referenced by this record, FALSE otherwise
+	 * @return bool TRUE if at least one option checkbox is referenced by this record, FALSE otherwise
 	 */
 	public function hasCheckboxes() {
 		return $this->hasRecordPropertyInteger('checkboxes');
@@ -1063,7 +1063,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * The UID of the parent page must be set in $this->recordData['pid'].
 	 * (otherwise the record will be created in the root page).
 	 *
-	 * @return boolean TRUE if everything went OK, FALSE otherwise
+	 * @return bool TRUE if everything went OK, FALSE otherwise
 	 */
 	public function commitToDb() {
 		$this->fillEmptyDefaultFields();
@@ -1116,7 +1116,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns TRUE if this registration is on the registration queue, FALSE otherwise.
 	 *
-	 * @return boolean TRUE if this registration is on the registration queue, FALSE otherwise
+	 * @return bool TRUE if this registration is on the registration queue, FALSE otherwise
 	 */
 	public function isOnRegistrationQueue() {
 		return $this->getRecordPropertyBoolean('registration_queue');
@@ -1156,7 +1156,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns whether this registration has attendees names.
 	 *
-	 * @return boolean TRUE if this registration has attendees names, FALSE otherwise
+	 * @return bool TRUE if this registration has attendees names, FALSE otherwise
 	 */
 	public function hasAttendeesNames() {
 		return $this->hasRecordPropertyString('attendees_names');
@@ -1165,7 +1165,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns our number of kids.
 	 *
-	 * @return integer the number of kids, will be >= 0, will be 0 if this registration has no kids
+	 * @return int the number of kids, will be >= 0, will be 0 if this registration has no kids
 	 */
 	public function getNumberOfKids() {
 		return $this->getRecordPropertyInteger('kids');
@@ -1174,7 +1174,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets the number of kids.
 	 *
-	 * @param integer $numberOfKids the number of kids, must be >= 0
+	 * @param int $numberOfKids the number of kids, must be >= 0
 	 *
 	 * @return void
 	 *
@@ -1191,7 +1191,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns whether this registration has kids.
 	 *
-	 * @return boolean TRUE if this registration has kids, FALSE otherwise
+	 * @return bool TRUE if this registration has kids, FALSE otherwise
 	 */
 	public function hasKids() {
 		return $this->hasRecordPropertyInteger('kids');
@@ -1200,7 +1200,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns our method of payment UID.
 	 *
-	 * @return integer our method of payment UID, will be >= 0, will be 0 if this registration has no method of payment
+	 * @return int our method of payment UID, will be >= 0, will be 0 if this registration has no method of payment
 	 */
 	public function getMethodOfPaymentUid() {
 		return $this->getRecordPropertyInteger('method_of_payment');
@@ -1209,7 +1209,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets our method of payment UID.
 	 *
-	 * @param integer $uid our method of payment UID, must be >= 0
+	 * @param int $uid our method of payment UID, must be >= 0
 	 *
 	 * @return void
 	 *
@@ -1226,7 +1226,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Returns whether this registration has a method of payment.
 	 *
-	 * @return boolean TRUE if this event has a method of payment, FALSE otherwise
+	 * @return bool TRUE if this event has a method of payment, FALSE otherwise
 	 */
 	public function hasMethodOfPayment() {
 		return $this->hasRecordPropertyInteger('method_of_payment');
@@ -1239,7 +1239,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * created as list items of an ordered list. In the plain text case the
 	 * entries will be separated by LF.
 	 *
-	 * @param boolean $useHtml whether to use HTML to build the enumeration
+	 * @param bool $useHtml whether to use HTML to build the enumeration
 	 *
 	 * @return string the names stored in attendees_name enumerated, will be
 	 *                empty if this registration has no attendees names
@@ -1272,7 +1272,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Checks whether the user has registered themselves.
 	 *
-	 * @return boolean TRUE if the user registered themselves, FALSE otherwise
+	 * @return bool TRUE if the user registered themselves, FALSE otherwise
 	 */
 	public function hasRegisteredMySelf() {
 		return $this->getRecordPropertyBoolean('registered_themselves');

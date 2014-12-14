@@ -126,7 +126,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * Creates a front end user testing model which has a group with the given
 	 * publish settings.
 	 *
-	 * @param integer $publishSetting
+	 * @param int $publishSetting
 	 *        the publish settings for the user, must be one of the following:
 	 *        tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY, tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW, or
 	 *        tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED

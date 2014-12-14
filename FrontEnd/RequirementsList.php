@@ -38,7 +38,7 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 	private $event = NULL;
 
 	/**
-	 * @var boolean whether to limit the requirements to the events the user
+	 * @var bool whether to limit the requirements to the events the user
 	 *              still needs to register
 	 */
 	private $limitRequirementsToMissing = FALSE;

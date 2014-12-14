@@ -79,7 +79,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	/**
 	 * Returns whether this place has an address.
 	 *
-	 * @return boolean TRUE if this address has an address, FALSE otherwise
+	 * @return bool TRUE if this address has an address, FALSE otherwise
 	 */
 	public function hasAddress() {
 		return $this->hasString('address');
@@ -108,7 +108,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	/**
 	 * Returns whether this place has a ZIP code.
 	 *
-	 * @return boolean TRUE if this place has a ZIP code, FALSE otherwise
+	 * @return bool TRUE if this place has a ZIP code, FALSE otherwise
 	 */
 	public function hasZip() {
 		return $this->hasString('zip');
@@ -176,7 +176,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	/**
 	 * Returns whether this place has a country.
 	 *
-	 * @return boolean TRUE if this place has a country, FALSE otherwise
+	 * @return bool TRUE if this place has a country, FALSE otherwise
 	 */
 	public function hasCountry() {
 		return ($this->getCountry() instanceof tx_oelib_Model_Country);
@@ -205,7 +205,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	/**
 	 * Returns whether this place has a homepage.
 	 *
-	 * @return boolean TRUE if this place has a homepage, FALSE otherwise
+	 * @return bool TRUE if this place has a homepage, FALSE otherwise
 	 */
 	public function hasHomepage() {
 		return $this->hasString('homepage');
@@ -234,7 +234,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 	/**
 	 * Returns whether this place has directions.
 	 *
-	 * @return boolean TRUE if this place has directions, FALSE otherwise
+	 * @return bool TRUE if this place has directions, FALSE otherwise
 	 */
 	public function hasDirections() {
 		return $this->hasString('directions');

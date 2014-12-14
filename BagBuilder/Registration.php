@@ -51,7 +51,7 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	 * Limits the bag to the registrations of the events provided by the
 	 * parameter $eventUids.
 	 *
-	 * @param integer $eventUid the UID of the event to which the registration selection should be limited, must be > 0
+	 * @param int $eventUid the UID of the event to which the registration selection should be limited, must be > 0
 	 *
 	 * @return void
 	 */
@@ -127,7 +127,7 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	 * Limits the bag to contain only registrations with seats equal or less
 	 * than the seats given in the parameter $seats.
 	 *
-	 * @param integer $seats the number of seats to filter for, set to 0 to remove the limitation, must be >= 0
+	 * @param int $seats the number of seats to filter for, set to 0 to remove the limitation, must be >= 0
 	 *
 	 * @return void
 	 */

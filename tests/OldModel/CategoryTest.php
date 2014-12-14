@@ -42,7 +42,7 @@ class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
 	/**
 	 * UID of the fixture's data in the DB
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	private $fixtureUid = 0;
 

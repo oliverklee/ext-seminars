@@ -123,7 +123,7 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_AbstractLis
 	 * This will be determined by the auxiliary folder storage setting of the
 	 * currently logged-in BE-user.
 	 *
-	 * @return integer the PID for new organizer records, will be >= 0
+	 * @return int the PID for new organizer records, will be >= 0
 	 */
 	protected function getNewRecordPid() {
 		return $this->getLoggedInUser()->getAuxiliaryRecordsFolder();

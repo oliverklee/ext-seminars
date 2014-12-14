@@ -873,7 +873,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * @param array $valueToCheck form data to check, must not be empty
 	 *
-	 * @return boolean TRUE if the provided file is valid, FALSE otherwise
+	 * @return bool TRUE if the provided file is valid, FALSE otherwise
 	 */
 	public function checkFile(array $valueToCheck) {
 		$this->validationError = '';
@@ -1100,7 +1100,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @param array $parameters the contents of the "params" child of the
 	 *                          userobj node as key/value pairs
 	 *
-	 * @return boolean TRUE if front-end editing of the given related record
+	 * @return bool TRUE if front-end editing of the given related record
 	 *                 type is allowed, FALSE otherwise
 	 */
 	public function isFrontEndEditingOfRelatedRecordsAllowed(array $parameters) {
@@ -1167,7 +1167,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *        the field to check, the array must contain an element with the key
 	 *        'elementName' and a nonempty value for that key
 	 *
-	 * @return boolean TRUE if the field is required, FALSE otherwise
+	 * @return bool TRUE if the field is required, FALSE otherwise
 	 */
 	private function isFieldRequired(array $field) {
 		if ($field['elementName'] == '') {
@@ -1186,7 +1186,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
 	 *
-	 * @return boolean TRUE if this field is not empty or not required, FALSE
+	 * @return bool TRUE if this field is not empty or not required, FALSE
 	 *                 otherwise
 	 */
 	public function validateString(array $formData) {
@@ -1206,7 +1206,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
 	 *
-	 * @return boolean TRUE if this field is not zero or not required, FALSE
+	 * @return bool TRUE if this field is not zero or not required, FALSE
 	 *                 otherwise
 	 */
 	public function validateInteger(array $formData) {
@@ -1226,7 +1226,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
 	 *
-	 * @return boolean TRUE if this field is not zero or not required, FALSE
+	 * @return bool TRUE if this field is not zero or not required, FALSE
 	 *                 otherwise
 	 */
 	public function validateCheckboxes(array $formData) {
@@ -1246,7 +1246,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
 	 *
-	 * @return boolean TRUE if this field contains a valid date or if this field
+	 * @return bool TRUE if this field contains a valid date or if this field
 	 *                 is not required, FALSE otherwise
 	 */
 	public function validateDate(array $formData) {
@@ -1266,7 +1266,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
 	 *
-	 * @return boolean TRUE if this field contains a valid price or if this
+	 * @return bool TRUE if this field contains a valid price or if this
 	 *                 field is not required, FALSE otherwise
 	 */
 	public function validatePrice(array $formData) {
@@ -1539,7 +1539,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * @param string $key the key of the field to check, must not be empty
 	 *
-	 * @return boolean TRUE if the field with the key $key is required,
+	 * @return bool TRUE if the field with the key $key is required,
 	 *                 FALSE otherwise
 	 */
 	static private function isPlaceFieldRequired($key) {
@@ -1594,7 +1594,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Shows a modalbox containing a form for editing an existing place record.
 	 *
 	 * @param tx_ameosformidable $formidable the FORMidable object
-	 * @param integer $placeUid the UID of the place to edit, must be > 0
+	 * @param int $placeUid the UID of the place to edit, must be > 0
 	 *
 	 * @return array calls to be executed on the client
 	 */
@@ -1879,7 +1879,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Shows a modalbox containing a form for editing an existing speaker record.
 	 *
 	 * @param tx_ameosformidable $formidable the FORMidable object
-	 * @param integer $speakerUid the UID of the speaker to edit, must be > 0
+	 * @param int $speakerUid the UID of the speaker to edit, must be > 0
 	 *
 	 * @return array calls to be executed on the client
 	 */
@@ -2104,7 +2104,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Shows a modalbox containing a form for editing an existing checkbox record.
 	 *
 	 * @param tx_ameosformidable $formidable the FORMidable object
-	 * @param integer $checkboxUid the UID of the checkbox to edit, must be > 0
+	 * @param int $checkboxUid the UID of the checkbox to edit, must be > 0
 	 *
 	 * @return array calls to be executed on the client
 	 */
@@ -2342,7 +2342,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * record.
 	 *
 	 * @param tx_ameosformidable $formidable the FORMidable object
-	 * @param integer $targetGroupUid
+	 * @param int $targetGroupUid
 	 *        the UID of the target group to edit, must be > 0
 	 *
 	 * @return array calls to be executed on the client
@@ -2462,7 +2462,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Returns the UID of the preselected organizer.
 	 *
-	 * @return integer the UID of the preselected organizer; if more than one
+	 * @return int the UID of the preselected organizer; if more than one
 	 *                 organizer is available, zero will be returned
 	 */
 	public function getPreselectedOrganizer() {

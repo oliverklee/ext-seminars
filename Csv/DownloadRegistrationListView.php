@@ -52,7 +52,7 @@ class Tx_Seminars_Csv_DownloadRegistrationListView extends Tx_Seminars_Csv_Abstr
 	/**
 	 * Checks whether the export should also contain registrations that are on the queue.
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	protected function shouldAlsoContainRegistrationsOnQueue() {
 		return $this->configuration->getAsBoolean('showAttendancesOnRegistrationQueueInCSV');

@@ -32,17 +32,17 @@
  */
 class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Interface_MailRole {
 	/**
-	 * @var integer the gender type for speakers without gender
+	 * @var int the gender type for speakers without gender
 	 */
 	const GENDER_UNKNOWN = 0;
 
 	/**
-	 * @var integer the gender type male for a speaker
+	 * @var int the gender type male for a speaker
 	 */
 	const GENDER_MALE = 1;
 
 	/**
-	 * @var integer the gender type female for a speaker
+	 * @var int the gender type female for a speaker
 	 */
 	const GENDER_FEMALE = 2;
 
@@ -96,7 +96,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has an organization.
 	 *
-	 * @return boolean TRUE if this speaker has an organization, FALSE otherwise
+	 * @return bool TRUE if this speaker has an organization, FALSE otherwise
 	 */
 	public function hasOrganization() {
 		return $this->hasString('organization');
@@ -125,7 +125,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a homepage.
 	 *
-	 * @return boolean TRUE if this speaker has a homepage, FALSE otherwise
+	 * @return bool TRUE if this speaker has a homepage, FALSE otherwise
 	 */
 	public function hasHomepage() {
 		return $this->hasString('homepage');
@@ -155,7 +155,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a description.
 	 *
-	 * @return boolean TRUE if this speaker has a description, FALSE otherwise
+	 * @return bool TRUE if this speaker has a description, FALSE otherwise
 	 */
 	public function hasDescription() {
 		return $this->hasString('description');
@@ -205,7 +205,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this place has an address.
 	 *
-	 * @return boolean TRUE if this address has an address, FALSE otherwise
+	 * @return bool TRUE if this address has an address, FALSE otherwise
 	 */
 	public function hasAddress() {
 		return $this->hasString('address');
@@ -235,7 +235,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a work telephone number.
 	 *
-	 * @return boolean TRUE if this speaker has a work telephone number, FALSE
+	 * @return bool TRUE if this speaker has a work telephone number, FALSE
 	 *                 otherwise
 	 */
 	public function hasPhoneWork() {
@@ -266,7 +266,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a home telephone number.
 	 *
-	 * @return boolean TRUE if this speaker has a home telephone number, FALSE
+	 * @return bool TRUE if this speaker has a home telephone number, FALSE
 	 *                 otherwise
 	 */
 	public function hasPhoneHome() {
@@ -297,7 +297,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a mobile telephone number.
 	 *
-	 * @return boolean TRUE if this speaker has a mobile telephone number, FALSE
+	 * @return bool TRUE if this speaker has a mobile telephone number, FALSE
 	 *                 otherwise
 	 */
 	public function hasPhoneMobile() {
@@ -327,7 +327,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a fax number.
 	 *
-	 * @return boolean TRUE if this speaker has a fax number, FALSE otherwise
+	 * @return bool TRUE if this speaker has a fax number, FALSE otherwise
 	 */
 	public function hasFax() {
 		return $this->hasString('fax');
@@ -358,7 +358,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has an e-mail address.
 	 *
-	 * @return boolean TRUE if this speaker has an e-mail address, FALSE
+	 * @return bool TRUE if this speaker has an e-mail address, FALSE
 	 *                 otherwise
 	 */
 	public function hasEMailAddress() {
@@ -368,7 +368,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns our gender.
 	 *
-	 * @return integer our gender, will be either GENDER_MALE, GENDER_FEMALE or
+	 * @return int our gender, will be either GENDER_MALE, GENDER_FEMALE or
 	 *                 GENDER_UNKNOWN if the speaker has no gender
 	 */
 	public function getGender() {
@@ -378,7 +378,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our gender.
 	 *
-	 * @param integer $gender
+	 * @param int $gender
 	 *        our gender to set, must be one of tx_seminars_Model_Speaker::GENDER_FEMALE, tx_seminars_Model_Speaker::GENDER_MALE
 	 *        or tx_seminars_Model_Speaker::GENDER_UNKNOWN
 	 *
@@ -391,7 +391,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a gender.
 	 *
-	 * @return boolean TRUE if this speaker has a gender, FALSE otherwise
+	 * @return bool TRUE if this speaker has a gender, FALSE otherwise
 	 */
 	public function hasGender() {
 		return $this->hasInteger('gender');
@@ -400,7 +400,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns our cancelation period in days.
 	 *
-	 * @return integer our cancelation period in days, will be >= 0
+	 * @return int our cancelation period in days, will be >= 0
 	 */
 	public function getCancelationPeriod() {
 		return $this->getAsInteger('cancelation_period');
@@ -409,7 +409,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Sets our cancelation period in days.
 	 *
-	 * @param integer $cancelationPeriod our cancelation period in days to set, must be >= 0
+	 * @param int $cancelationPeriod our cancelation period in days to set, must be >= 0
 	 *
 	 * @return void
 	 */
@@ -424,7 +424,7 @@ class tx_seminars_Model_Speaker extends tx_oelib_Model implements tx_oelib_Inter
 	/**
 	 * Returns whether this speaker has a cancelation period set.
 	 *
-	 * @return boolean TRUE if this speaker has a cancelation period set, FALSE
+	 * @return bool TRUE if this speaker has a cancelation period set, FALSE
 	 *                 otherwise
 	 */
 	public function hasCancelationPeriod() {

@@ -50,7 +50,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 	/**
 	 * PID of the system folder in which we store our test data
 	 *
-	 * @var integer
+	 * @var int
 	 */
 	protected $pageUid = 0;
 
@@ -95,7 +95,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 	 *
 	 * @param array $eventData optional data for the event record
 	 *
-	 * @return integer the UID of the created event record
+	 * @return int the UID of the created event record
 	 */
 	protected function createEventInFolderAndSetPageUid(array $eventData = array()) {
 		$this->pageUid = $this->testingFramework->createSystemFolder();

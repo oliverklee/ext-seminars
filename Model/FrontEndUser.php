@@ -41,7 +41,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 * If the user has more than one group, the strictest setting of the groups
 	 * will be returned.
 	 *
-	 * @return integer one of the class constants
+	 * @return int one of the class constants
 	 *                 tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
 	 *                 tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW or
 	 *                 tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
@@ -71,7 +71,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 *
 	 * The PID is retrieved from the first user group which has a PID set.
 	 *
-	 * @return integer the PID where to store auxiliary records created by this
+	 * @return int the PID where to store auxiliary records created by this
 	 *                 front-end user, will be 0 if no PID is set
 	 */
 	public function getAuxiliaryRecordsPid() {
@@ -118,7 +118,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 *
 	 * This will return the first PID found for events in this user's groups.
 	 *
-	 * @return integer the PID for the event records to store, will be 0 if no
+	 * @return int the PID for the event records to store, will be 0 if no
 	 *                 event record PID has been set in any of this user's
 	 *                 groups
 	 */
@@ -161,7 +161,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	/**
 	 * Checks whether this user's groups have any default categories.
 	 *
-	 * @return boolean TRUE if at least one of the user's groups has a default
+	 * @return bool TRUE if at least one of the user's groups has a default
 	 *                 category, FALSE otherwise
 	 */
 	public function hasDefaultCategories() {
@@ -190,7 +190,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	/**
 	 * Checks whether this user's groups have any default organizers.
 	 *
-	 * @return boolean TRUE if at least one of the user's groups has a default
+	 * @return bool TRUE if at least one of the user's groups has a default
 	 *                 organizer, FALSE otherwise
 	 */
 	public function hasDefaultOrganizers() {
