@@ -134,8 +134,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		$this->setPageData($pageAccess);
 
 		// JavaScript function called within getDeleteIcon()
-		$this->doc->JScode = '<script type="text/javascript">/*<![CDATA[*/' .
-			'function jumpToUrl(URL) {document.location = URL;}/*]]>*/</script>';
+		$this->doc->JScode = '<script type="text/javascript">function jumpToUrl(URL) {document.location = URL;}</script>';
 
 		// define the sub modules that should be available in the tab menu
 		$this->availableSubModules = array();
