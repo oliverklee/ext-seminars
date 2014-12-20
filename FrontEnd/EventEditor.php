@@ -28,7 +28,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	private $validationError = '';
 
 	/**
-	 * @var array currently attached files
+	 * @var string[] currently attached files
 	 */
 	private $attachedFiles = array();
 
@@ -38,7 +38,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	const SUBPART_PREFIX = 'fe_editor';
 
 	/**
-	 * @var array the fields required to file a new event.
+	 * @var string[] the fields required to file a new event.
 	 */
 	private $requiredFormFields = array();
 
@@ -105,6 +105,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 
 		$this->storeAttachedFiles();
 
+		/** @var tx_oelib_Template $template */
 		$template = t3lib_div::makeInstance('tx_oelib_Template');
 		$template->processTemplate(parent::render());
 
@@ -177,13 +178,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of available categories.
 	 *
-	 * @return array $items with additional items from the categories
+	 * @return array[] $items with additional items from the categories
 	 *               table as an array with the keys "caption" (for the
 	 *               title) and "value" (for the UID)
 	 */
 	public function populateListCategories() {
-		$categories = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
-			->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+		/** @var tx_seminars_Mapper_Category $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category');
+		$categories = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		return self::makeListToFormidableList($categories);
 	}
@@ -191,15 +193,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of available event types.
 	 *
-	 * @return array $items with additional items from the event_types
+	 * @return array[] $items with additional items from the event_types
 	 *               table as an array with the keys "caption" (for the
 	 *               title) and "value" (for the UID)
 	 */
 	public function populateListEventTypes() {
-		$eventTypes = tx_oelib_MapperRegistry
-			::get('tx_seminars_Mapper_EventType')->findByPageUid(
-				$this->getPidsForAuxiliaryRecords(), 'title ASC'
-			);
+		/** @var tx_seminars_Mapper_EventType $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_EventType');
+		$eventTypes = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		return self::makeListToFormidableList($eventTypes);
 	}
@@ -207,13 +208,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of available lodgings.
 	 *
-	 * @return array $items with additional items from the lodgings table
+	 * @return array[] $items with additional items from the lodgings table
 	 *               as an array with the keys "caption" (for the title)
 	 *               and "value" (for the UID)
 	 */
 	public function populateListLodgings() {
-		$lodgings = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Lodging')
-			->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+		/** @var tx_seminars_Mapper_Lodging $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Lodging');
+		$lodgings = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		return self::makeListToFormidableList($lodgings);
 	}
@@ -221,13 +223,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of available foods.
 	 *
-	 * @return array $items with additional items from the foods table
+	 * @return array[] $items with additional items from the foods table
 	 *               as an array with the keys "caption" (for the title)
 	 *               and "value" (for the UID)
 	 */
 	public function populateListFoods() {
-		$foods= tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Food')
-			->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+		/** @var tx_seminars_Mapper_Food $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Food');
+		$foods = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		return self::makeListToFormidableList($foods);
 	}
@@ -235,15 +238,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of available payment methods.
 	 *
-	 * @return array $items with additional items from payment methods
+	 * @return array[] $items with additional items from payment methods
 	 *               table as an array with the keys "caption" (for the
 	 *               title) and "value" (for the UID)
 	 */
 	public function populateListPaymentMethods() {
-		$paymentMethods = tx_oelib_MapperRegistry
-			::get('tx_seminars_Mapper_PaymentMethod')->findByPageUid(
-				$this->getPidsForAuxiliaryRecords(), 'title ASC'
-			);
+		/** @var tx_seminars_Mapper_PaymentMethod $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_PaymentMethod');
+		$paymentMethods = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		return self::makeListToFormidableList($paymentMethods);
 	}
@@ -251,7 +253,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of available organizers.
 	 *
-	 * @return array $items with additional items from the organizers
+	 * @return array[] $items with additional items from the organizers
 	 *               table as an array with the keys "caption" (for the
 	 *               title) and "value" (for the UID)
 	 */
@@ -262,10 +264,9 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		if ($frontEndUser->hasDefaultOrganizers()) {
 			$organizers = $frontEndUser->getDefaultOrganizers();
 		} else {
-			$organizers = tx_oelib_MapperRegistry
-				::get('tx_seminars_Mapper_Organizer')->findByPageUid(
-					$this->getPidsForAuxiliaryRecords(), 'title ASC'
-				);
+			/** @var tx_seminars_Mapper_Organizer $mapper */
+			$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer');
+			$organizers = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 		}
 
 		return self::makeListToFormidableList($organizers);
@@ -274,11 +275,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of available places.
 	 *
-	 * @param array $items any pre-filled data (may be empty)
+	 * @param array[] $items any pre-filled data (may be empty)
 	 * @param array $unused unused
 	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
-	 * @return array $items with additional items from the places table
+	 * @return array[] $items with additional items from the places table
 	 *               as an array with the keys "caption" (for the title)
 	 *               and "value" (for the UID)
 	 */
@@ -287,10 +288,9 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	) {
 		$result = $items;
 
+		/** @var tx_seminars_Mapper_Place $placeMapper */
 		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
-		$places = $placeMapper->findByPageUid(
-			$this->getPidsForAuxiliaryRecords(), 'title ASC'
-		);
+		$places = $placeMapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		if (is_object($formidable)) {
 			$editButtonConfiguration =& $formidable->_navConf(
@@ -305,6 +305,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			array('relatedRecordType' => 'Places')
 		) && is_object($formidable);
 
+		/** @var tx_seminars_Model_Place $place */
 		foreach ($places as $place) {
 			$frontEndUserIsOwner = ($place->getOwner() === $frontEndUser);
 
@@ -347,11 +348,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of available speakers.
 	 *
-	 * @param array $items any pre-filled data (may be empty)
+	 * @param array[] $items any pre-filled data (may be empty)
 	 * @param array $parameters the parameters sent to this function by FORMidable
 	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
-	 * @return array $items with additional items from the speakers table
+	 * @return array[] $items with additional items from the speakers table
 	 *               as an array with the keys "caption" (for the title)
 	 *               and "value" (for the UID)
 	 */
@@ -360,10 +361,9 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	) {
 		$result = $items;
 
+		/** @var tx_seminars_Mapper_Speaker $speakerMapper */
 		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
-		$speakers = $speakerMapper->findByPageUid(
-			$this->getPidsForAuxiliaryRecords(), 'title ASC'
-		);
+		$speakers = $speakerMapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		if (is_object($formidable)) {
 			$editButtonConfiguration =& $formidable->_navConf(
@@ -380,6 +380,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 
 		$type = $parameters['type'];
 
+		/** @var tx_seminars_Model_Speaker $speaker */
 		foreach ($speakers as $speaker) {
 			$frontEndUserIsOwner = ($speaker->getOwner() === $frontEndUser);
 
@@ -423,11 +424,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of available checkboxes.
 	 *
-	 * @param array $items any pre-filled data (may be empty)
+	 * @param array[] $items any pre-filled data (may be empty)
 	 * @param array $unused unused
 	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
-	 * @return array $items with additional items from the checkboxes
+	 * @return array[] $items with additional items from the checkboxes
 	 *               table as an array with the keys "caption" (for the
 	 *               title) and "value" (for the UID)
 	 */
@@ -436,10 +437,9 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	) {
 		$result = $items;
 
+		/** @var tx_seminars_Mapper_Checkbox $checkboxMapper */
 		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
-		$checkboxes = $checkboxMapper->findByPageUid(
-			$this->getPidsForAuxiliaryRecords(), 'title ASC'
-		);
+		$checkboxes = $checkboxMapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		if (is_object($formidable)) {
 			$editButtonConfiguration =& $formidable->_navConf(
@@ -454,6 +454,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			array('relatedRecordType' => 'Checkboxes')
 		) && is_object($formidable);
 
+		/** @var tx_seminars_Model_Checkbox $checkbox */
 		foreach ($checkboxes as $checkbox) {
 			$frontEndUserIsOwner = ($checkbox->getOwner() === $frontEndUser);
 
@@ -496,11 +497,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of available target groups.
 	 *
-	 * @param array $items array any pre-filled data (may be empty)
+	 * @param array[] $items array any pre-filled data (may be empty)
 	 * @param array $unused unused
 	 * @param tx_ameosformidable $formidable the FORMidable object
 	 *
-	 * @return array $items with additional items from the target groups
+	 * @return array[] $items with additional items from the target groups
 	 *               table as an array with the keys "caption" (for the
 	 *               title) and "value" (for the UID)
 	 */
@@ -509,12 +510,9 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	) {
 		$result = $items;
 
-		$targetGroupMapper = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_TargetGroup'
-		);
-		$targetGroups = $targetGroupMapper->findByPageUid(
-			$this->getPidsForAuxiliaryRecords(), 'title ASC'
-		);
+		/** @var tx_seminars_Mapper_TargetGroup $targetGroupMapper */
+		$targetGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup');
+		$targetGroups = $targetGroupMapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		if (is_object($formidable)) {
 			$editButtonConfiguration =& $formidable->_navConf(
@@ -529,6 +527,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			array('relatedRecordType' => 'TargetGroups')
 		) && is_object($formidable);
 
+		/** @var tx_seminars_Model_TargetGroup $targetGroup */
 		foreach ($targetGroups as $targetGroup) {
 			$frontEndUserIsOwner = ($targetGroup->getOwner() === $frontEndUser);
 
@@ -626,9 +625,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		}
 
 		if ($this->getObjectUid() > 0) {
-			$seminar = t3lib_div::makeInstance(
-				'tx_seminars_seminar', $this->getObjectUid(), FALSE, TRUE
-			);
+			/** @var tx_seminars_seminar $seminar */
+			$seminar = t3lib_div::makeInstance('tx_seminars_seminar', $this->getObjectUid(), FALSE, TRUE);
 			$isUserVip = $seminar->isUserVip(
 				$this->getFeUserUid(),
 				$this->getConfValueInteger('defaultEventVipsFeGroupID')
@@ -679,7 +677,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Changes all potential decimal separators (commas and dots) in price
 	 * fields to dots.
 	 *
-	 * @param array &$formData all entered form data with the field names as keys, will be modified, must not be empty
+	 * @param array[] $formData all entered form data with the field names as keys, will be modified, must not be empty
 	 *
 	 * @return void
 	 */
@@ -706,7 +704,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * FORMidable, it is possible to store the name of an invalid file in the
 	 * list of attachments.
 	 *
-	 * @param array &$formData form data, will be modified, must not be empty
+	 * @param array[] $formData form data, will be modified, must not be empty
 	 *
 	 * @return void
 	 */
@@ -728,7 +726,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Removes all form data elements that are no fields in the seminars table.
 	 *
-	 * @param array &$formData form data, will be modified, must not be empty
+	 * @param array[] $formData form data, will be modified, must not be empty
 	 *
 	 * @return void
 	 */
@@ -777,7 +775,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * 'owner_feuser'.
 	 * For objects to update, just the 'tstamp' will be refreshed.
 	 *
-	 * @param array &$formData form data, will be modified, must not be empty
+	 * @param array[] $formData form data, will be modified, must not be empty
 	 *
 	 * @return void
 	 */
@@ -802,7 +800,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Checks the publish settings of the user and hides the event record if
 	 * necessary.
 	 *
-	 * @param array &$formData
+	 * @param array[] $formData
 	 *        form data, will be modified if the seminar must be hidden corresponding to the publish settings of the user,
 	 *        must not be empty
 	 *
@@ -824,10 +822,15 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 				> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 			);
 
-		$eventIsHidden = !$isNew
-			? tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-				->find($eventUid)->isHidden()
-			: FALSE;
+		if (!$isNew) {
+			/** @var tx_seminars_Mapper_Event $mapper */
+			$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+			/** @var tx_seminars_Model_Event $event */
+			$event = $mapper->find($eventUid);
+			$eventIsHidden = $event->isHidden();
+		} else {
+			$eventIsHidden = FALSE;
+		}
 
 		if (($hideEditedObject || $hideNewObject) && !$eventIsHidden) {
 			$formData['hidden'] = 1;
@@ -845,7 +848,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @see unifyDecimalSeparators(), processAttachments(),
 	 *      purgeNonSeminarsFields(), addAdministrativeData()
 	 *
-	 * @param array $formData form data, must not be empty
+	 * @param array[] $formData form data, must not be empty
 	 *
 	 * @return array modified form data, will not be empty
 	 */
@@ -871,7 +874,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * This check is done here because the FORMidable validators do not allow
 	 * multiple error messages.
 	 *
-	 * @param array $valueToCheck form data to check, must not be empty
+	 * @param string[] $valueToCheck form data to check, must not be empty
 	 *
 	 * @return bool TRUE if the provided file is valid, FALSE otherwise
 	 */
@@ -934,8 +937,9 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	private function checkFileSize($fileName) {
 		$maximumFileSize = $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'];
-		$fileInformation = t3lib_div::makeInstance('t3lib_basicFileFunctions')
-			->getTotalFileInfo(PATH_site . 'uploads/tx_seminars/' . $fileName);
+		/** @var t3lib_basicFileFunctions $fileUtility */
+		$fileUtility = t3lib_div::makeInstance('t3lib_basicFileFunctions');
+		$fileInformation = $fileUtility->getTotalFileInfo(PATH_site . 'uploads/tx_seminars/' . $fileName);
 
 		if ($fileInformation['size'] > ($maximumFileSize * 1024)) {
 			$this->validationError
@@ -975,14 +979,13 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Retrieves the keys of the subparts which should be hidden in the event
 	 * editor.
 	 *
-	 * @return array the keys of the subparts which should be hidden in the
+	 * @return string[] the keys of the subparts which should be hidden in the
 	 *               event editor without the prefix FE_EDITOR_, will be empty
 	 *               if all subparts should be shown.
 	 */
 	private function getHiddenSubparts() {
-		$visibilityTree = t3lib_div::makeInstance(
-			'tx_oelib_Visibility_Tree', $this->createTemplateStructure()
-		);
+		/** @var tx_oelib_Visibility_Tree $visibilityTree */
+		$visibilityTree = t3lib_div::makeInstance('tx_oelib_Visibility_Tree', $this->createTemplateStructure());
 
 		$visibilityTree->makeNodesVisible($this->getFieldsToShow());
 		return $visibilityTree->getKeysOfHiddenSubparts();
@@ -1078,8 +1081,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Returns the keys of the fields which should be shown in the FE editor.
 	 *
-	 * @return array the keys of the fields which should be shown, will be empty
-	 *               if all fields should be hidden
+	 * @return string[] the keys of the fields which should be shown, will be empty if all fields should be hidden
 	 */
 	private function getFieldsToShow() {
 		$fieldsToShow = t3lib_div::trimExplode(
@@ -1097,8 +1099,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Returns whether front-end editing of the given related record type is
 	 * allowed.
 	 *
-	 * @param array $parameters the contents of the "params" child of the
-	 *                          userobj node as key/value pairs
+	 * @param string[] $parameters the contents of the "params" child of the userobj node as key/value pairs
 	 *
 	 * @return bool TRUE if front-end editing of the given related record
 	 *                 type is allowed, FALSE otherwise
@@ -1163,7 +1164,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Checks whether a given field is required.
 	 *
-	 * @param array $field
+	 * @param string[] $field
 	 *        the field to check, the array must contain an element with the key
 	 *        'elementName' and a nonempty value for that key
 	 *
@@ -1181,7 +1182,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Checks whether a given field needs to be filled in, but hasn't been
 	 * filled in yet.
 	 *
-	 * @param array $formData
+	 * @param array[] $formData
 	 *        associative array containing the current value, with the key
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
@@ -1201,7 +1202,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Checks whether a given field needs to be filled in with a non-zero value,
 	 * but hasn't been filled in correctly yet.
 	 *
-	 * @param array $formData
+	 * @param array[] $formData
 	 *        associative array containing the current value, with the key
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
@@ -1221,7 +1222,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Checks whether a given field needs to be filled in with a non-empty array,
 	 * but hasn't been filled in correctly yet.
 	 *
-	 * @param array $formData
+	 * @param array[] $formData
 	 *        associative array containing the current value, with the key
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
@@ -1241,7 +1242,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Checks whether a given field needs to be filled in with a valid date,
 	 * but hasn't been filled in correctly yet.
 	 *
-	 * @param array $formData
+	 * @param array[] $formData
 	 *        associative array containing the current value, with the key
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
@@ -1261,7 +1262,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Checks whether a given field needs to be filled in with a valid price,
 	 * but hasn't been filled in correctly yet.
 	 *
-	 * @param array $formData
+	 * @param array[] $formData
 	 *        associative array containing the current value, with the key
 	 *        'value' and the name, with the key 'elementName', of the form
 	 *        field to check, must not be empty
@@ -1287,18 +1288,21 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			return;
 		}
 		tx_oelib_MapperRegistry::purgeInstance();
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		/** @var tx_seminars_Model_FrontEndUser $frontEndUser */
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 		$reviewer = $frontEndUser->getReviewerFromGroup();
 
 		if (!$reviewer) {
 			return;
 		}
 
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->findByPublicationHash($this->publicationHash);
+		/** @var tx_seminars_Mapper_Event $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		/** @var tx_seminars_Model_Event $event */
+		$event = $mapper->findByPublicationHash($this->publicationHash);
 
-		if ($event && $event->isHidden()) {
+		if ($event !== NULL && $event->isHidden()) {
+			/** @var tx_oelib_Mail $eMail */
 			$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
 			$eMail->addRecipient($reviewer);
 			$eMail->setSender($frontEndUser);
@@ -1396,11 +1400,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		};
 
+		/** @var tx_seminars_Model_Place $place */
 		$place = t3lib_div::makeInstance('tx_seminars_Model_Place');
 		$place->setData(self::createBasicAuxiliaryData());
 		self::setPlaceData($place, 'newPlace_', $formData);
 		$place->markAsDirty();
-		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place')->save($place);
+		/** @var tx_seminars_Mapper_Place $mapper */
+		$mapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
+		$mapper->save($place);
 
 		$editButtonConfiguration =& $formidable->_navConf(
 			$formidable->aORenderlets['editPlaceButton']->sXPath
@@ -1445,9 +1452,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
 			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 
+		/** @var tx_seminars_Mapper_Place $placeMapper */
 		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
 
 		try {
+			/** @var tx_seminars_Model_Place $place */
 			$place = $placeMapper->find((int)$formData['editPlace_uid']);
 		} catch (Exception $exception) {
 			return $formidable->majixExecJs(
@@ -1498,12 +1507,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * @param tx_ameosformidable $formidable
 	 *        the FORMidable object for the AJAX call
-	 * @param array $formData
+	 * @param array[] $formData
 	 *        the entered form data, the key must be stripped of the
 	 *        "newPlace_"/"editPlace_" prefix
 	 *
-	 * @return array the error messages, will be empty if there are no
-	 *         validation errors
+	 * @return string[] the error messages, will be empty if there are no validation errors
 	 */
 	static private function validatePlace(
 		tx_ameosformidable $formidable, array $formData
@@ -1559,7 +1567,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * @param tx_seminars_Model_Place $place the place model to set the data
 	 * @param string $prefix the prefix of the form fields in $formData
-	 * @param array $formData the form data to use for setting the place data
+	 * @param array[] $formData the form data to use for setting the place data
 	 *
 	 * @return void
 	 */
@@ -1569,8 +1577,10 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$countryUid = (int)$formData[$prefix . 'country'];
 		if ($countryUid > 0) {
 			try {
-				$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
-					->find($countryUid);
+				/** @var tx_oelib_Mapper_Country $mapper */
+				$mapper = Tx_Oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
+				/** @var Tx_Oelib_Model_Country $country */
+				$country = $mapper->find($countryUid);
 			} catch (Exception $exception) {
 				$country = NULL;
 			}
@@ -1603,9 +1613,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			return $formidable->majixExecJs('alert("$placeUid must be >= 0.");');
 		}
 
+		/** @var tx_seminars_Mapper_Place $placeMapper */
 		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
 
 		try {
+			/** @var tx_seminars_Model_Place $place */
 			$place = $placeMapper->find((int)$placeUid);
 		} catch (tx_oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
@@ -1613,8 +1625,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		}
 
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		/** @var tx_seminars_Mapper_FrontEndUser $frontEndUser */
+		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 
 		if ($place->getOwner() !== $frontEndUser) {
 			return $formidable->majixExecJs(
@@ -1700,6 +1712,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		};
 
+		/** @var tx_seminars_Model_Speaker $speaker */
 		$speaker = t3lib_div::makeInstance('tx_seminars_Model_Speaker');
 		$speaker->setData(array_merge(
 			self::createBasicAuxiliaryData(),
@@ -1707,8 +1720,9 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		));
 		self::setSpeakerData($speaker, 'newSpeaker_', $formData);
 		$speaker->markAsDirty();
-		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker')
-			->save($speaker);
+		/** @var tx_seminars_Mapper_Speaker $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
+		$mapper->save($speaker);
 
 		$editButtonConfiguration =& $formidable->_navConf(
 			$formidable->aORenderlets['editSpeakerButton']->sXPath
@@ -1753,9 +1767,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
 			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 
+		/** @var tx_seminars_Mapper_Speaker $speakerMapper */
 		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
 
 		try {
+			/** @var tx_seminars_Model_Speaker $speaker */
 			$speaker = $speakerMapper->find((int)$formData['editSpeaker_uid']);
 		} catch (Exception $exception) {
 			return $formidable->majixExecJs(
@@ -1784,10 +1800,10 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$speakerMapper->save($speaker);
 
 		$speakerTypes = array(
-			"speaker",
-			"leader",
-			"partner",
-			"tutor",
+			'speaker',
+			'leader',
+			'partner',
+			'tutor',
 		);
 
 		$uid = $speaker->getUid();
@@ -1812,12 +1828,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * @param tx_ameosformidable $formidable
 	 *        the FORMidable object for the AJAX call
-	 * @param array $formData
+	 * @param array[] $formData
 	 *        the entered form data, the key must be stripped of the
 	 *        "newSpeaker_"/"editSpeaker_" prefix
 	 *
-	 * @return array the error messages, will be empty if there are no
-	 *         validation errors
+	 * @return string[] the error messages, will be empty if there are no validation errors
 	 */
 	private static function validateSpeaker(
 		tx_ameosformidable $formidable, array $formData
@@ -1838,19 +1853,23 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @param tx_seminars_Model_Speaker $speaker
 	 *        the speaker model to set the data for
 	 * @param string $prefix the prefix of the form fields in $formData
-	 * @param array $formData the form data to use for setting the speaker data
+	 * @param array[] $formData the form data to use for setting the speaker data
 	 *
 	 * @return void
 	 */
 	private static function setSpeakerData(tx_seminars_Model_Speaker $speaker, $prefix, array $formData) {
+		/** @var tx_seminars_Mapper_Skill $skillMapper */
 		$skillMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill');
+		/** @var tx_oelib_List $skills */
 		$skills = t3lib_div::makeInstance('tx_oelib_List');
 
 		if (is_array($formData[$prefix . 'skills'])) {
 			foreach ($formData[$prefix . 'skills'] as $rawUid) {
 				$safeUid = (int)$rawUid;
 				if ($safeUid > 0) {
-					$skills->add($skillMapper->find($safeUid));
+					/** @var tx_seminars_Model_Skill $skill */
+					$skill = $skillMapper->find($safeUid);
+					$skills->add($skill);
 				}
 			}
 
@@ -1888,9 +1907,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			return $formidable->majixExecJs('alert("$speakerUid must be >= 0.");');
 		}
 
+		/** @var tx_seminars_Mapper_Speaker $speakerMapper */
 		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
 
 		try {
+			/** @var tx_seminars_Model_Speaker $speaker */
 			$speaker = $speakerMapper->find((int)$speakerUid);
 		} catch (tx_oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
@@ -1937,6 +1958,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$result[] = $formidable->aORenderlets['editSpeaker_skills']->majixCheckNone();
 
 		$skills = $speaker->getSkills();
+		/** @var tx_seminars_Model_Skill $skill */
 		foreach ($skills as $skill) {
 			$result[] = $formidable->aORenderlets['editSpeaker_skills']
 				->majixCheckItem($skill->getUid());
@@ -1968,12 +1990,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		};
 
+		/** @var tx_seminars_Model_Checkbox $checkbox */
 		$checkbox = t3lib_div::makeInstance('tx_seminars_Model_Checkbox');
 		$checkbox->setData(self::createBasicAuxiliaryData());
 		self::setCheckboxData($checkbox, 'newCheckbox_', $formData);
 		$checkbox->markAsDirty();
-		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox')
-			->save($checkbox);
+		/** @var tx_seminars_Mapper_Checkbox $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
+		$mapper->save($checkbox);
 
 		$editButtonConfiguration =& $formidable->_navConf(
 			$formidable->aORenderlets['editCheckboxButton']->sXPath
@@ -2018,9 +2042,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
 			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 
+		/** @var tx_seminars_Mapper_Checkbox $checkboxMapper */
 		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
 
 		try {
+			/** @var tx_seminars_Model_Checkbox $checkbox */
 			$checkbox = $checkboxMapper->find((int)$formData['editCheckbox_uid']);
 		} catch (Exception $exception) {
 			return $formidable->majixExecJs(
@@ -2063,12 +2089,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * @param tx_ameosformidable $formidable
 	 *        the FORMidable object for the AJAX call
-	 * @param array $formData
+	 * @param array[] $formData
 	 *        the entered form data, the key must be stripped of the
 	 *        "newCheckbox_"/"editCheckbox_" prefix
 	 *
-	 * @return array the error messages, will be empty if there are no
-	 *         validation errors
+	 * @return string[] the error messages, will be empty if there are no validation errors
 	 */
 	private static function validateCheckbox(
 		tx_ameosformidable $formidable, array $formData
@@ -2088,7 +2113,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * @param tx_seminars_Model_Checkbox $checkbox the checkbox model to set the data
 	 * @param string $prefix the prefix of the form fields in $formData
-	 * @param array $formData the form data to use for setting the checkbox data
+	 * @param array[] $formData the form data to use for setting the checkbox data
 	 *
 	 * @return void
 	 */
@@ -2113,9 +2138,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			return $formidable->majixExecJs('alert("$checkboxUid must be >= 0.");');
 		}
 
+		/** @var tx_seminars_Mapper_Checkbox $checkboxMapper */
 		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
 
 		try {
+			/** @var tx_seminars_Model_Checkbox $checkbox */
 			$checkbox = $checkboxMapper->find((int)$checkboxUid);
 		} catch (tx_oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
@@ -2176,12 +2203,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		};
 
+		/** @var tx_seminars_Model_TargetGroup $targetGroup */
 		$targetGroup = t3lib_div::makeInstance('tx_seminars_Model_TargetGroup');
 		$targetGroup->setData(self::createBasicAuxiliaryData());
 		self::setTargetGroupData($targetGroup, 'newTargetGroup_', $formData);
 		$targetGroup->markAsDirty();
-		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup')
-			->save($targetGroup);
+		/** @var tx_seminars_Mapper_TargetGroup $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup');
+		$mapper->save($targetGroup);
 
 		$editButtonConfiguration =& $formidable->_navConf(
 			$formidable->aORenderlets['editTargetGroupButton']->sXPath
@@ -2227,9 +2256,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
 			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 
+		/** @var tx_seminars_Mapper_TargetGroup $targetGroupMapper */
 		$targetGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup');
 
 		try {
+			/** @var tx_seminars_Model_TargetGroup $targetGroup */
 			$targetGroup = $targetGroupMapper->find((int)$formData['editTargetGroup_uid']);
 		} catch (Exception $exception) {
 			return $formidable->majixExecJs(
@@ -2276,12 +2307,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * @param tx_ameosformidable $formidable
 	 *        the FORMidable object for the AJAX call
-	 * @param array $formData
+	 * @param array[] $formData
 	 *        the entered form data, the key must be stripped of the
 	 *        "newTargetGroup_"/"editTargetGroup_" prefix
 	 *
-	 * @return array the error messages, will be empty if there are no
-	 *         validation errors
+	 * @return string[] the error messages, will be empty if there are no validation errors
 	 */
 	private static function validateTargetGroup(
 		tx_ameosformidable $formidable, array $formData
@@ -2322,7 +2352,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @param tx_seminars_Model_TargetGroup $targetGroup
 	 *        the target group model to set the data
 	 * @param string $prefix the prefix of the form fields in $formData
-	 * @param array $formData
+	 * @param array[] $formData
 	 *        the form data to use for setting the target group data
 	 *
 	 * @return void
@@ -2352,11 +2382,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			return $formidable->majixExecJs('alert("$targetGroupUid must be >= 0.");');
 		}
 
-		$targetGroupMapper = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_TargetGroup'
-		);
+		/** @var tx_seminars_Mapper_TargetGroup $targetGroupMapper */
+		$targetGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup');
 
 		try {
+			/** @var tx_seminars_Model_TargetGroup $targetGroup */
 			$targetGroup = $targetGroupMapper->find((int)$targetGroupUid);
 		} catch (tx_oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
@@ -2399,14 +2429,15 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of countries.
 	 *
-	 * @return array items as an array with the keys "caption" (for the title)
-	 *         and "value" (for the UID)
+	 * @return array[] items as an array with the keys "caption" (for the title) and "value" (for the UID)
 	 */
 	public static function populateListCountries() {
 		$result = array();
 
-		$countries = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')
-			->findAll('cn_short_local');
+		/** @var tx_oelib_Mapper_Country $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
+		$countries = $mapper->findAll('cn_short_local');
+		/** @var tx_oelib_Model_Country $country */
 		foreach ($countries as $country) {
 			$result[] = array(
 				'caption' => $country->getLocalShortName(),
@@ -2420,12 +2451,12 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Provides data items for the list of skills.
 	 *
-	 * @return array items as an array with the keys "caption" (for the title)
-	 *         and "value" (for the UID)
+	 * @return array[] items as an array with the keys "caption" (for the title) and "value" (for the UID)
 	 */
 	public static function populateListSkills() {
-		$skills = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill')
-			->findAll('title ASC');
+		/** @var tx_seminars_Mapper_Skill $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill');
+		$skills = $mapper->findAll('title ASC');
 
 		return self::makeListToFormidableList($skills);
 	}
@@ -2436,7 +2467,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @param tx_oelib_List $models
 	 *        List of models to show in the checkboxes, may be empty
 	 *
-	 * @return array items as an array with the keys "caption" (for the title)
+	 * @return array[] items as an array with the keys "caption" (for the title)
 	 *         and "value" (for the UID), will be empty if an empty model list
 	 *         was provided
 	 */
@@ -2447,6 +2478,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 
 		$result = array();
 
+		/** @var Tx_Oelib_Model $model */
 		foreach ($models as $model) {
 			$result[] = array(
 				'caption' => $model->getTitle(),
@@ -2510,7 +2542,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Note: This affects only new records. Existing records (with a UID) will
 	 * not be changed.
 	 *
-	 * @param array $formData
+	 * @param array[] $formData
 	 *        all entered form data with the field names as keys, will be
 	 *        modified, must not be empty
 	 *
@@ -2534,7 +2566,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Removes the category field if the user has default categories set.
 	 *
-	 * @param array $formFields
+	 * @param string[] $formFields
 	 *        the fields which should be checked for category, will be modified, may be empty
 	 *
 	 * @return void

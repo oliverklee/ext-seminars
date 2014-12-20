@@ -73,9 +73,11 @@ class tx_seminars_Mapper_LodgingTest extends tx_phpunit_testcase {
 			'tx_seminars_lodgings', array('title' => 'Shack')
 		);
 
+		/** @var tx_seminars_Model_Lodging $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			'Shack',
-			$this->fixture->find($uid)->getTitle()
+			$model->getTitle()
 		);
 	}
 }

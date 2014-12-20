@@ -79,9 +79,11 @@ class tx_seminars_BackEnd_OrganizersListTest extends tx_phpunit_testcase {
 			'doktype' => tx_seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
 		));
 
-		$this->backEndModule->doc = t3lib_div::makeInstance('bigDoc');
-		$this->backEndModule->doc->backPath = $GLOBALS['BACK_PATH'];
-		$this->backEndModule->doc->docType = 'xhtml_strict';
+		/** @var bigDoc $document */
+		$document = t3lib_div::makeInstance('bigDoc');
+		$this->backEndModule->doc = $document;
+		$document->backPath = $GLOBALS['BACK_PATH'];
+		$document->docType = 'xhtml_strict';
 
 		$this->fixture = new tx_seminars_BackEnd_OrganizersList(
 			$this->backEndModule

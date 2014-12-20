@@ -73,9 +73,11 @@ class tx_seminars_Mapper_OrganizerTest extends tx_phpunit_testcase {
 			'tx_seminars_organizers', array('title' => 'Fabulous organizer')
 		);
 
+		/** @var tx_seminars_Model_Lodging $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			'Fabulous organizer',
-			$this->fixture->find($uid)->getName()
+			$model->getName()
 		);
 	}
 }

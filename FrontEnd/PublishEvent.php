@@ -61,7 +61,9 @@ class tx_seminars_FrontEnd_PublishEvent extends tx_oelib_templatehelper {
 			return $this->translate('message_publishingFailed');
 		}
 
+		/** @var tx_seminars_Mapper_Event $eventMapper */
 		$eventMapper = t3lib_div::makeInstance('tx_seminars_Mapper_Event');
+		/** @var tx_seminars_Model_Event $event */
 		$event = $eventMapper->findByPublicationHash($this->piVars['hash']);
 
 		if (($event !== NULL) && $event->isHidden()) {

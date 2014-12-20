@@ -34,7 +34,7 @@ class tx_seminars_BackEnd_Module extends t3lib_SCbase {
 	/**
 	 * data of the current BE page
 	 *
-	 * @var array
+	 * @var string[]
 	 */
 	private $pageData = array();
 
@@ -48,7 +48,7 @@ class tx_seminars_BackEnd_Module extends t3lib_SCbase {
 	/**
 	 * Returns the data of the current BE page.
 	 *
-	 * @return array the data of the current BE page, may be emtpy
+	 * @return string[] the data of the current BE page, may be emtpy
 	 */
 	public function getPageData() {
 		return $this->pageData;
@@ -57,7 +57,7 @@ class tx_seminars_BackEnd_Module extends t3lib_SCbase {
 	/**
 	 * Sets the data for the current BE page.
 	 *
-	 * @param array $pageData page data, may be empty
+	 * @param string[] $pageData page data, may be empty
 	 *
 	 * @return void
 	 */

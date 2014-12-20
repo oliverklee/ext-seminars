@@ -73,9 +73,11 @@ class tx_seminars_Mapper_SkillTest extends tx_phpunit_testcase {
 			'tx_seminars_skills', array('title' => 'Superhero')
 		);
 
+		/** @var tx_seminars_Model_Skill $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			'Superhero',
-			$this->fixture->find($uid)->getTitle()
+			$model->getTitle()
 		);
 	}
 }

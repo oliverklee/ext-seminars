@@ -134,10 +134,10 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	/**
 	 * Returns the localized field names.
 	 *
-	 * @param array $fieldNames the field names to translate, may be empty
+	 * @param string[] $fieldNames the field names to translate, may be empty
 	 * @param string $localizationPrefix the table to which the fields belong to
 	 *
-	 * @return array the translated field names in an array, will be empty if no field names were given
+	 * @return string[] the translated field names in an array, will be empty if no field names were given
 	 */
 	protected function createLocalizedCsvHeadingsForOneTable(array $fieldNames, $localizationPrefix) {
 		$translations = array();
@@ -189,7 +189,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	 * @return tx_seminars_BagBuilder_Registration the bag builder with some preset limitations
 	 */
 	protected function createRegistrationBagBuilder() {
-		/** @var $registrationBagBuilder tx_seminars_BagBuilder_Registration */
+		/** @var tx_seminars_BagBuilder_Registration $registrationBagBuilder */
 		$registrationBagBuilder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Registration');
 
 		if (!$this->shouldAlsoContainRegistrationsOnQueue()) {
@@ -225,7 +225,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 		/** @var $bag tx_seminars_Bag_Registration */
 		$bag = $builder->build();
 
-		/** @var $registration tx_seminars_registration */
+		/** @var tx_seminars_registration $registration */
 		foreach ($bag as $registration) {
 			$userData = $this->createCsvColumnsForFrontEndUser($registration);
 			$registrationData = $this->createCsvColumnsForRegistration($registration);

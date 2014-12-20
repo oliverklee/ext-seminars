@@ -81,9 +81,10 @@ class tx_seminars_Mapper_FrontEndUserGroupTest extends tx_phpunit_testcase {
 			array('tx_seminars_reviewer' => $backEndUser->getUid())
 		);
 
+		/** @var tx_seminars_Model_FrontEndUserGroup $model */
+		$model = $this->fixture->find($frontEndUserGroup->getUid());
 		$this->assertTrue(
-			$this->fixture->find($frontEndUserGroup->getUid())->getReviewer()
-				instanceof tx_oelib_Model_BackEndUser
+			$model->getReviewer() instanceof tx_oelib_Model_BackEndUser
 		);
 	}
 
@@ -105,9 +106,10 @@ class tx_seminars_Mapper_FrontEndUserGroupTest extends tx_phpunit_testcase {
 			'fe_groups', $frontEndUserGroupUid, $categoryUid, 'tx_seminars_default_categories'
 		);
 
+		/** @var tx_seminars_Model_FrontEndUserGroup $model */
+		$model = $this->fixture->find($frontEndUserGroupUid);
 		$this->assertTrue(
-			$this->fixture->find($frontEndUserGroupUid)->getDefaultCategories()->first()
-				instanceof tx_seminars_Model_Category
+			$model->getDefaultCategories()->first() instanceof tx_seminars_Model_Category
 		);
 	}
 
@@ -127,9 +129,10 @@ class tx_seminars_Mapper_FrontEndUserGroupTest extends tx_phpunit_testcase {
 			array('tx_seminars_default_organizer' => $organizerUid)
 		);
 
+		/** @var tx_seminars_Model_FrontEndUserGroup $model */
+		$model = $this->fixture->find($groupUid);
 		$this->assertTrue(
-			$this->fixture->find($groupUid)->getDefaultOrganizer()
-				instanceof tx_seminars_Model_Organizer
+			$model->getDefaultOrganizer() instanceof tx_seminars_Model_Organizer
 		);
 	}
 }

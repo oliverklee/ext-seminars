@@ -77,6 +77,7 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_AbstractList 
 			'label_skills', $GLOBALS['LANG']->getLL('speakerlist.skills')
 		);
 
+		/** @var tx_seminars_BagBuilder_Speaker $builder */
 		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Speaker');
 		$builder->showHiddenRecords();
 
@@ -86,6 +87,7 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_AbstractList 
 
 		$tableRows = '';
 
+		/** @var tx_seminars_speaker $speakerBag */
 		foreach ($speakerBag as $this->speaker) {
 			$this->template->setMarker(
 				'icon', $this->speaker->getRecordIcon()

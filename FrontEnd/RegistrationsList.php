@@ -85,9 +85,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * @return void
 	 */
 	private function createSeminar($seminarUid) {
-		$this->seminar = t3lib_div::makeInstance(
-			'tx_seminars_seminar', $seminarUid
-		);
+		$this->seminar = t3lib_div::makeInstance('tx_seminars_seminar', $seminarUid);
 	}
 
 	/**
@@ -219,9 +217,8 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * @return tx_seminars_BagBuilder_Registration the bag builder
 	 */
 	private function createRegistrationBagBuilder() {
-		$builder = t3lib_div::makeInstance(
-			'tx_seminars_BagBuilder_Registration'
-		);
+		/** @var tx_seminars_BagBuilder_Registration $builder */
+		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Registration');
 		$builder->limitToEvent($this->seminar->getUid());
 		$builder->limitToExistingUsers();
 		$builder->setOrderBy('crdate');
@@ -235,6 +232,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * @return string the table header HTML, will not be empty
 	 */
 	private function createTableHeader() {
+		/** @var string[] $labelKeys */
 		$labelKeys = array();
 		foreach ($this->getFrontEndUserFields() as $field) {
 			$labelKeys[] = 'label_' . $field;
@@ -272,7 +270,9 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	private function createTableBody(tx_seminars_Bag_Registration $registrations) {
 		$tableBody = '';
 
+		/** @var tx_seminars_registration $registration */
 		foreach ($registrations as $registration) {
+			/** @var string[] $cellContents */
 			$cellContents = array();
 			foreach ($this->getFrontEndUserFields() as $field) {
 				$cellContents[] = $registration->getUserData($field);
@@ -303,7 +303,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * Gets the keys of the front-end user fields that should be displayed in
 	 * the list.
 	 *
-	 * @return array keys of the front-end user fields to display, might be empty
+	 * @return string[] keys of the front-end user fields to display, might be empty
 	 */
 	private function getFrontEndUserFields() {
 		return t3lib_div::trimExplode(
@@ -319,7 +319,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * Gets the keys of the registration fields that should be displayed in
 	 * the list.
 	 *
-	 * @return array keys of the registration fields to display, might be empty
+	 * @return string[] keys of the registration fields to display, might be empty
 	 */
 	private function getRegistrationFields() {
 		return t3lib_div::trimExplode(

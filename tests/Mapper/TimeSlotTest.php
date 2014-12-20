@@ -73,9 +73,11 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 			'tx_seminars_timeslots', array('title' => '01.02.03 04:05')
 		);
 
+		/** @var tx_seminars_Model_TimeSlot $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			'01.02.03 04:05',
-			$this->fixture->find($uid)->getTitle()
+			$model->getTitle()
 		);
 	}
 
@@ -90,8 +92,10 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 	public function getSpeakersReturnsListInstance() {
 		$uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
+		/** @var tx_seminars_Model_TimeSlot $model */
+		$model = $this->fixture->find($uid);
 		$this->assertTrue(
-			$this->fixture->find($uid)->getSpeakers() instanceof tx_oelib_List
+			$model->getSpeakers() instanceof tx_oelib_List
 		);
 	}
 
@@ -108,9 +112,10 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 			'tx_seminars_timeslots', $timeSlotUid, $speaker->getUid(), 'speakers'
 		);
 
+		/** @var tx_seminars_Model_TimeSlot $model */
+		$model = $this->fixture->find($timeSlotUid);
 		$this->assertTrue(
-			$this->fixture->find($timeSlotUid)->getSpeakers()->first()
-				instanceof tx_seminars_Model_Speaker
+			$model->getSpeakers()->first() instanceof tx_seminars_Model_Speaker
 		);
 	}
 
@@ -127,9 +132,11 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 			'tx_seminars_timeslots', $timeSlotUid, $speaker->getUid(), 'speakers'
 		);
 
+		/** @var tx_seminars_Model_TimeSlot $model */
+		$model = $this->fixture->find($timeSlotUid);
 		$this->assertEquals(
 			$speaker->getUid(),
-			$this->fixture->find($timeSlotUid)->getSpeakers()->getUids()
+			$model->getSpeakers()->getUids()
 		);
 	}
 
@@ -144,8 +151,10 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 	public function getPlaceWithoutPlaceReturnsNull() {
 		$uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
+		/** @var tx_seminars_Model_TimeSlot $model */
+		$model = $this->fixture->find($uid);
 		$this->assertNull(
-			$this->fixture->find($uid)->getPlace()
+			$model->getPlace()
 		);
 	}
 
@@ -158,9 +167,10 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 			'tx_seminars_timeslots', array('place' => $place->getUid())
 		);
 
+		/** @var tx_seminars_Model_TimeSlot $model */
+		$model = $this->fixture->find($timeSlotUid);
 		$this->assertTrue(
-			$this->fixture->find($timeSlotUid)->getPlace()
-				instanceof tx_seminars_Model_Place
+			$model->getPlace() instanceof tx_seminars_Model_Place
 		);
 	}
 }

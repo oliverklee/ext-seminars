@@ -7,10 +7,10 @@ if (!function_exists('txSeminarsReplaceTables')) {
 	 * table name. It's mainly used to simplify the maintaining of the wizard
 	 * code (equals in more than 90%) and to get some flexibility.
 	 *
-	 * @param array $array wizards array with the table markers
+	 * @param array[] $array wizards array with the table markers
 	 * @param string $table name of the real database table (e.g. "tx_seminars_seminars")
 	 *
-	 * @return array wizards array with replaced table markers
+	 * @return array[] wizards array with replaced table markers
 	 */
 	function txSeminarsReplaceTables(array $array, $table) {
 		$array['add']['params']['table'] =
@@ -49,7 +49,7 @@ if (!function_exists('user_createLanguageSelector')) {
 	/**
 	 * Creates the values for a language selector in the TCA, using the alpha 2 codes as array keys.
 	 *
-	 * @param array $parameters
+	 * @param array[] $parameters
 	 *
 	 * @return void
 	 */
@@ -73,7 +73,7 @@ if (!function_exists('user_createCountrySelector')) {
 	/**
 	 * Creates the values for a country selector in the TCA, using the alpha 2 codes as array keys.
 	 *
-	 * @param array $parameters
+	 * @param array[] $parameters
 	 *
 	 * @return void
 	 */

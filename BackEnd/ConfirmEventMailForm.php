@@ -88,10 +88,11 @@ class tx_seminars_BackEnd_ConfirmEventMailForm extends tx_seminars_BackEnd_Abstr
 	 */
 	protected function setEventStatus() {
 		$this->getEvent()->setStatus(tx_seminars_Model_Event::STATUS_CONFIRMED);
-		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->save($this->getEvent());
+		/** @var tx_seminars_Mapper_Event $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		$mapper->save($this->getEvent());
 
-		/** @var $message t3lib_FlashMessage */
+		/** @var t3lib_FlashMessage $message */
 		$message = t3lib_div::makeInstance(
 			't3lib_FlashMessage',
 			$GLOBALS['LANG']->getLL('message_eventConfirmed'),

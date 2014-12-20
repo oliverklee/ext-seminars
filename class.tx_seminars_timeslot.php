@@ -50,18 +50,20 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * @return tx_seminars_Bag_Speaker a speakerbag object
 	 */
 	private function getSpeakerBag() {
-		return t3lib_div::makeInstance(
+		/** @var tx_seminars_Bag_Speaker $bag */
+		$bag = t3lib_div::makeInstance(
 			'tx_seminars_Bag_Speaker',
 			'tx_seminars_timeslots_speakers_mm.uid_local = ' . $this->getUid() .' AND uid = uid_foreign',
 			'tx_seminars_timeslots_speakers_mm',
 			'sorting'
 		);
+		return $bag;
 	}
 
 	/**
 	 * Gets the speaker UIDs.
 	 *
-	 * @return array the speaker UIDs
+	 * @return int[] the speaker UIDs
 	 */
 	public function getSpeakersUids() {
 		$result = array();
@@ -74,7 +76,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 
 		if ($dbResult) {
 			while ($speaker = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-				$result[] = $speaker['uid_foreign'];
+				$result[] = (int)$speaker['uid_foreign'];
 			}
 			$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 		}
@@ -92,6 +94,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 		$result = array();
 		$speakerBag = $this->getSpeakerBag();
 
+		/** @var tx_seminars_speaker $organizer */
 		foreach ($speakerBag as $speaker) {
 			$result[] = $speaker->getTitle();
 		}
@@ -184,8 +187,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * Returns an associative array, containing fieldname/value pairs that need
 	 * to be updated in the database. Update means "set the title" so far.
 	 *
-	 * @return array associative array containing data to update the
-	 *               database entry of the timeslot, might be empty
+	 * @return string[] data to update the database entry of the timeslot, might be empty
 	 */
 	public function getUpdateArray() {
 		$updateArray = array();

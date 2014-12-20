@@ -43,6 +43,7 @@ class tx_seminars_ViewHelper_CommaSeparatedTitles {
 	public function render(tx_oelib_List $list) {
 		$titles = array();
 
+		/** @var tx_seminars_Interface_Titled $element */
 		foreach ($list as $element) {
 			if (!$element instanceof tx_seminars_Interface_Titled) {
 				throw new InvalidArgumentException(

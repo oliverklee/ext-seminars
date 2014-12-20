@@ -75,6 +75,7 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_AbstractLis
 			'label_full_name', $GLOBALS['LANG']->getLL('organizerlist.title')
 		);
 
+		/** @var tx_seminars_BagBuilder_Organizer $builder */
 		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Organizer');
 
 		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
@@ -83,6 +84,7 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_AbstractLis
 
 		$tableRows = '';
 
+		/** @var tx_seminars_OldModel_Organizer $organizerBag */
 		foreach ($organizerBag as $this->organizer) {
 			$this->template->setMarker(
 				'icon', $this->organizer->getRecordIcon()

@@ -73,9 +73,11 @@ class tx_seminars_Mapper_FoodTest extends tx_phpunit_testcase {
 			'tx_seminars_foods', array('title' => 'Crunchy crisps')
 		);
 
+		/** @var tx_seminars_Model_Food $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			'Crunchy crisps',
-			$this->fixture->find($uid)->getTitle()
+			$model->getTitle()
 		);
 	}
 }

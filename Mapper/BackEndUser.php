@@ -37,8 +37,7 @@ class tx_seminars_Mapper_BackEndUser extends tx_oelib_Mapper_BackEndUser {
 	protected $modelClassName = 'tx_seminars_Model_BackEndUser';
 
 	/**
-	 * @var array the (possible) relations of the created models in the format
-	 *            DB column name => mapper name
+	 * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
 	 */
 	protected $relations = array(
 		'usergroup' => 'tx_seminars_Mapper_BackEndUserGroup',

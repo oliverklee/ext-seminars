@@ -98,22 +98,23 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 		}
 
 		if ($this->linkBuilder == NULL) {
-			$this->injectLinkBuilder(t3lib_div::makeInstance(
-				'tx_seminars_Service_SingleViewLinkBuilder'
-			));
+			/** @var tx_seminars_Service_SingleViewLinkBuilder $linkBuilder */
+			$linkBuilder = t3lib_div::makeInstance('tx_seminars_Service_SingleViewLinkBuilder');
+			$this->injectLinkBuilder($linkBuilder);
 		}
 		$this->linkBuilder->setPlugin($this);
 
 		$output = '';
 
+		/** @var tx_seminars_Mapper_Event $eventMapper */
 		$eventMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
 		$requirements = $this->getRequirements();
+		/** @var tx_seminars_seminar $requirement */
 		foreach ($requirements as $requirement) {
+			/** @var tx_seminars_Model_Event $event */
 			$event = $eventMapper->find($requirement->getUid());
 
-			$singleViewUrl = $this->linkBuilder->createRelativeUrlForEvent(
-				$event
-			);
+			$singleViewUrl = $this->linkBuilder->createRelativeUrlForEvent($event);
 			$this->setMarker(
 				'requirement_url', htmlspecialchars($singleViewUrl)
 			);

@@ -42,8 +42,7 @@ class tx_seminars_Mapper_TargetGroup extends tx_oelib_DataMapper {
 	protected $modelClassName = 'tx_seminars_Model_TargetGroup';
 
 	/**
-	 * @var array the (possible) relations of the created models in the format
-	 *            DB column name => mapper name
+	 * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
 	 */
 	protected $relations = array(
 		'owner' => 'tx_seminars_Mapper_FrontEndUser',

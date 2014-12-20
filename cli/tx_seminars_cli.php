@@ -42,7 +42,9 @@ defined('TYPO3_cliMode') or die('You cannot run this script directly!');
 setlocale(LC_NUMERIC, 'C');
 
 try {
-	t3lib_div::makeInstance('tx_seminars_cli_MailNotifier')->start();
+	/** @var tx_seminars_cli_MailNotifier $mailNotifier */
+	$mailNotifier = t3lib_div::makeInstance('tx_seminars_cli_MailNotifier');
+	$mailNotifier->start();
 } catch (Exception $exception) {
 	echo $exception->getMessage();
 }

@@ -164,10 +164,8 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 
 		$GLOBALS['TT'] = t3lib_div::makeInstance('t3lib_TimeTrackNull');
 
-		/** @var $frontEnd tslib_fe */
-		$frontEnd = t3lib_div::makeInstance(
-			'tslib_fe', $GLOBALS['TYPO3_CONF_VARS'], 0, 0
-		);
+		/** @var tslib_fe $frontEnd */
+		$frontEnd = t3lib_div::makeInstance('tslib_fe', $GLOBALS['TYPO3_CONF_VARS'], 0, 0);
 
 		// simulates a normal FE without any logged-in FE or BE user
 		$frontEnd->beUserLogin = FALSE;

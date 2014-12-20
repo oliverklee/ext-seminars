@@ -267,7 +267,10 @@ class tx_seminars_Model_PlaceTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getCountryWithCountryReturnsCountryInstance() {
-		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
+		/** @var tx_oelib_Mapper_Country $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
+		/** @var tx_oelib_Model_Country $country */
+		$country = $mapper->find(54);
 		$this->fixture->setData(array('country' => $country->getIsoAlpha2Code()));
 
 		$this->assertTrue(
@@ -279,7 +282,10 @@ class tx_seminars_Model_PlaceTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getCountryWithCountryReturnsCountryAsModel() {
-		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
+		/** @var tx_oelib_Mapper_Country $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
+		/** @var tx_oelib_Model_Country $country */
+		$country = $mapper->find(54);
 		$this->fixture->setData(array('country' => $country->getIsoAlpha2Code()));
 
 		$this->assertSame(
@@ -292,7 +298,10 @@ class tx_seminars_Model_PlaceTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setCountrySetsCountry() {
-		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
+		/** @var tx_oelib_Mapper_Country $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
+		/** @var tx_oelib_Model_Country $country */
+		$country = $mapper->find(54);
 		$this->fixture->setCountry($country);
 
 		$this->assertSame(
@@ -338,7 +347,10 @@ class tx_seminars_Model_PlaceTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasCountryWithCountryReturnsTrue() {
-		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
+		/** @var tx_oelib_Mapper_Country $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
+		/** @var tx_oelib_Model_Country $country */
+		$country = $mapper->find(54);
 		$this->fixture->setCountry($country);
 
 		$this->assertTrue(

@@ -73,9 +73,11 @@ class tx_seminars_Mapper_PlaceTest extends tx_phpunit_testcase {
 			'tx_seminars_sites', array('title' => 'Nice place')
 		);
 
+		/** @var tx_seminars_Model_Place $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			'Nice place',
-			$this->fixture->find($uid)->getTitle()
+			$model->getTitle()
 		);
 	}
 

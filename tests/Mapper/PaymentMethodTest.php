@@ -73,9 +73,11 @@ class tx_seminars_Mapper_PaymentMethodTest extends tx_phpunit_testcase {
 			'tx_seminars_payment_methods', array('title' => 'Cash')
 		);
 
+		/** @var tx_seminars_Model_PaymentMethod $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			'Cash',
-			$this->fixture->find($uid)->getTitle()
+			$model->getTitle()
 		);
 	}
 }

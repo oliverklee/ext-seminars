@@ -601,6 +601,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	protected function getSingleViewPageUidFromCategories() {
 		$result = 0;
 
+		/** @var tx_seminars_Model_Category $category */
 		foreach ($this->getCategories() as $category) {
 			if ($category->hasSingleViewPageUid()) {
 				$result = $category->getSingleViewPageUid();
@@ -694,8 +695,9 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 			return NULL;
 		}
 
-		return tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Language')
-			->findByIsoAlpha2Code($this->getAsString('language'));
+		/** @var tx_oelib_Mapper_Language $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Language');
+		return $mapper->findByIsoAlpha2Code($this->getAsString('language'));
 	}
 
 	/**
@@ -1037,8 +1039,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * regular, regular_early, regular_board,
 	 * special, special_early, special_board
 	 *
-	 * @return array the available prices as an associative array of floats,
-	 *               will not be empty
+	 * @return float[] the available prices as an associative array, will not be empty
 	 */
 	public function getAvailablePrices() {
 		$result = array();
@@ -1429,7 +1430,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * The returned array will be sorted like the files are sorted in the back-
 	 * end form.
 	 *
-	 * @return array our attached file names relative to the seminars upload
+	 * @return string[] our attached file names relative to the seminars upload
 	 *               directory, will be empty if this event has no attached files
 	 */
 	public function getAttachedFiles() {
@@ -1439,7 +1440,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Sets our attached files.
 	 *
-	 * @param array $attachedFiles
+	 * @param string[] $attachedFiles
 	 *        our attached file names, file names must be relative to the seminars upload directory, may be empty
 	 *
 	 * @return void
@@ -1664,8 +1665,10 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                       registrations
 	 */
 	public function getRegularRegistrations() {
-		$regularRegistrations = t3lib_div::makeInstance('tx_oelib_List');
+		/** @var Tx_Oelib_List $regularRegistrations */
+		$regularRegistrations = t3lib_div::makeInstance('Tx_Oelib_List');
 
+		/** @var tx_seminars_Model_Registration $registration */
 		foreach ($this->getRegistrations() as $registration) {
 			if (!$registration->isOnRegistrationQueue()) {
 				$regularRegistrations->add($registration);
@@ -1683,8 +1686,10 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 *                       will be empty if this event no queue registrations
 	 */
 	public function getQueueRegistrations() {
-		$queueRegistrations = t3lib_div::makeInstance('tx_oelib_List');
+		/** @var Tx_Oelib_List $queueRegistrations */
+		$queueRegistrations = t3lib_div::makeInstance('Tx_Oelib_List');
 
+		/** @var tx_seminars_Model_Registration $registration */
 		foreach ($this->getRegistrations() as $registration) {
 			if ($registration->isOnRegistrationQueue()) {
 				$queueRegistrations->add($registration);
@@ -1712,12 +1717,12 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * registrations (but not from queue registrations) and the number of
 	 * offline registrations.
 	 *
-	 * @return bool the number of registered seats for this event, will
-	 *                 be >= 0
+	 * @return int the number of registered seats for this event, will be >= 0
 	 */
 	public function getRegisteredSeats() {
 		$registeredSeats = $this->getOfflineRegistrations();
 
+		/** @var tx_seminars_Model_Registration $registration */
 		foreach ($this->getRegularRegistrations() as $registration) {
 			$registeredSeats += $registration->getSeats();
 		}

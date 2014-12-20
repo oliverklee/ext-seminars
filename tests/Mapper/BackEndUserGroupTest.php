@@ -71,6 +71,7 @@ class tx_seminars_Mapper_BackEndUserGroupTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function loadForExistingUserGroupCanLoadUserGroupData() {
+		/** @var tx_seminars_Model_BackEndUserGroup $userGroup */
 		$userGroup = $this->fixture->find(
 			$this->testingFramework->createBackEndUserGroup(
 				array('title' => 'foo')

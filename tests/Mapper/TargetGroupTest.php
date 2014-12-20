@@ -73,9 +73,11 @@ class tx_seminars_Mapper_TargetGroupTest extends tx_phpunit_testcase {
 			'tx_seminars_target_groups', array('title' => 'Housewives')
 		);
 
+		/** @var tx_seminars_Model_TargetGroup $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			'Housewives',
-			$this->fixture->find($uid)->getTitle()
+			$model->getTitle()
 		);
 	}
 

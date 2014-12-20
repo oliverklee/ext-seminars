@@ -76,35 +76,35 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * available without further database queries. It will get filled with data
 	 * in the constructor.
 	 *
-	 * @var array|NULL
+	 * @var string[]|NULL
 	 */
 	private $userData = NULL;
 
 	/**
 	 * UIDs of lodging options associated with this record
 	 *
-	 * @var array
+	 * @var int[]
 	 */
 	protected $lodgings = array();
 
 	/**
 	 * UIDs of food options associated with this record
 	 *
-	 * @var array
+	 * @var int[]
 	 */
 	protected $foods = array();
 
 	/**
 	 * UIDs of option checkboxes associated with this record
 	 *
-	 * @var array
+	 * @var int[]
 	 */
 	protected $checkboxes = array();
 
 	/**
 	 * cached seminar objects with the seminar UIDs as keys and the objects as values
 	 *
-	 * @var array
+	 * @var tx_seminars_seminar[]
 	 */
 	private static $cachedSeminars = array();
 
@@ -358,7 +358,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Sets the data of the FE user of this registration.
 	 *
-	 * @param array $userData data of the front-end user, must not be empty
+	 * @param string[] $userData data of the front-end user, must not be empty
 	 *
 	 * @return void
 	 *
@@ -567,7 +567,9 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @return tx_seminars_Model_FrontEndUser the front-end user of the registration
 	 */
 	public function getFrontEndUser() {
-		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')->find($this->getUser());
+		/** @var tx_seminars_Mapper_FrontEndUser $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser');
+		return $mapper->find($this->getUser());
 	}
 
 	/**
@@ -580,7 +582,10 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			return FALSE;
 		}
 
-		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')->existsModel($this->getUser());
+		/** @var tx_seminars_Mapper_FrontEndUser $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser');
+
+		return $mapper->existsModel($this->getUser());
 	}
 
 	/**
@@ -1079,8 +1084,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			$this->createMmRecords('tx_seminars_attendances_checkboxes_mm', $this->checkboxes);
 		}
 
-		// update the reference index
-		/** @var $referenceIndex t3lib_refindex */
+		/** @var t3lib_refindex $referenceIndex */
 		$referenceIndex = t3lib_div::makeInstance('t3lib_refindex');
 		$referenceIndex->updateRefIndexTable('tx_seminars_attendances', $this->getUid());
 

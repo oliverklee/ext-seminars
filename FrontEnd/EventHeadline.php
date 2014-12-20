@@ -72,6 +72,7 @@ class tx_seminars_FrontEnd_EventHeadline extends tx_seminars_FrontEnd_AbstractVi
 			return '';
 		}
 
+		/** @var tx_seminars_Model_Event $event */
 		$event = $this->mapper->find($eventId);
 
 		if (!$this->mapper->existsModel($eventId)) {
@@ -101,6 +102,7 @@ class tx_seminars_FrontEnd_EventHeadline extends tx_seminars_FrontEnd_AbstractVi
 			return $result;
 		}
 
+		/** @var tx_seminars_ViewHelper_DateRange $dateRangeViewHelper */
 		$dateRangeViewHelper = t3lib_div::makeInstance('tx_seminars_ViewHelper_DateRange');
 
 		return $result . ', ' . $dateRangeViewHelper->render($event);

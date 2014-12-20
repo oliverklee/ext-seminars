@@ -46,7 +46,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	private $objectUid = 0;
 
 	/**
-	 * @var array the FORMidable form configuration
+	 * @var array[] the FORMidable form configuration
 	 */
 	private $formConfiguration = array();
 
@@ -92,7 +92,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 	/**
 	 * Sets the FORMidable form configuration.
 	 *
-	 * @param array $formConfiguration the FORMidable form configuration, must not be empty
+	 * @param array[] $formConfiguration the FORMidable form configuration, must not be empty
 	 *
 	 * @return void
 	 */
@@ -166,7 +166,7 @@ class tx_seminars_FrontEnd_Editor extends tx_seminars_FrontEnd_AbstractView {
 			);
 		}
 
-		/** @var $formCreator tx_ameosformidable */
+		/** @var tx_ameosformidable $formCreator */
 		$formCreator = t3lib_div::makeInstance('tx_ameosformidable');
 		$formCreator->initFromTs(
 			$this, $this->formConfiguration, ($this->getObjectUid() > 0) ? $this->getObjectUid() : FALSE

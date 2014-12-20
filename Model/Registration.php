@@ -61,7 +61,7 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Returns the front-end user of this registration.
 	 *
-	 * @return tx_oelib_Model_FrontEndUser the front-end user of this registration
+	 * @return tx_seminars_Model_FrontEndUser the front-end user of this registration
 	 */
 	public function getFrontEndUser() {
 		return $this->getAsModel('user');

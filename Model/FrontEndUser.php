@@ -54,6 +54,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 
 		$result = tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
 
+		/** @var tx_seminars_Model_FrontEndUserGroup $userGroup */
 		foreach ($userGroups as $userGroup) {
 			$groupPermissions = $userGroup->getPublishSetting();
 
@@ -81,6 +82,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 
 		$auxiliaryRecordsPid = 0;
 
+		/** @var tx_seminars_Model_FrontEndUserGroup $userGroup */
 		foreach ($this->getUserGroups() as $userGroup) {
 			if ($userGroup->hasAuxiliaryRecordsPid()) {
 				$auxiliaryRecordsPid = $userGroup->getAuxiliaryRecordsPid();
@@ -96,13 +98,14 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 *
 	 * Will return the first reviewer found.
 	 *
-	 * @return tx_oelib_Model_BackEndUser the reviewer set in the user's group,
+	 * @return tx_seminars_Model_BackEndUser the reviewer set in the user's group,
 	 *                                    will be NULL if no reviewer has been
 	 *                                    set or the user has no groups
 	 */
 	public function getReviewerFromGroup() {
 		$result = NULL;
 
+		/** @var tx_seminars_Model_FrontEndUserGroup $userGroup */
 		foreach ($this->getUserGroups() as $userGroup) {
 			if ($userGroup->hasReviewer()) {
 				$result = $userGroup->getReviewer();
@@ -129,6 +132,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 
 		$eventRecordPid = 0;
 
+		/** @var tx_seminars_Model_FrontEndUserGroup $userGroup */
 		foreach ($this->getUserGroups() as $userGroup) {
 			if ($userGroup->hasEventRecordPid()) {
 				$eventRecordPid = $userGroup->getEventRecordPid();
@@ -142,13 +146,15 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	/**
 	 * Returns all default categories assigned to this user's groups.
 	 *
-	 * @return tx_oelib_List the categories assigned to this user's groups, will
+	 * @return Tx_Oelib_List the categories assigned to this user's groups, will
 	 *                       be empty if no default categories have been assigned
 	 *                       to any of the user's groups
 	 */
 	public function getDefaultCategoriesFromGroup() {
-		$categories = t3lib_div::makeInstance('tx_oelib_List');
+		/** @var Tx_Oelib_List $categories */
+		$categories = t3lib_div::makeInstance('Tx_Oelib_List');
 
+		/** @var tx_seminars_Model_FrontEndUserGroup $group */
 		foreach ($this->getUserGroups() as $group) {
 			if ($group->hasDefaultCategories()) {
 				$categories->append($group->getDefaultCategories());
@@ -176,8 +182,10 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 *                       to any of the user's groups
 	 */
 	public function getDefaultOrganizers() {
-		$organizers = t3lib_div::makeInstance('tx_oelib_List');
+		/** @var Tx_Oelib_List $organizers */
+		$organizers = t3lib_div::makeInstance('Tx_Oelib_List');
 
+		/** @var tx_seminars_Model_FrontEndUserGroup $group */
 		foreach ($this->getUserGroups() as $group) {
 			if ($group->hasDefaultOrganizer()) {
 				$organizers->add($group->getDefaultOrganizer());

@@ -56,7 +56,7 @@ class tx_seminars_tests_fixtures_BagBuilder_Testing extends tx_seminars_BagBuild
 	/**
 	 * Returns the additional table names.
 	 *
-	 * @return array the additional table names, may be empty
+	 * @return string[] the additional table names, may be empty
 	 */
 	public function getAdditionalTableNames() {
 		return $this->additionalTableNames;

@@ -43,9 +43,8 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 	 *                there are no categories to display
 	 */
 	public function render() {
-		$seminarBagBuilder = t3lib_div::makeInstance(
-			'tx_seminars_BagBuilder_Event'
-		);
+		/** @var tx_seminars_BagBuilder_Event $seminarBagBuilder */
+		$seminarBagBuilder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
 		$seminarBagBuilder->setSourcePages(
 			$this->getConfValueString('pages'),
 			$this->getConfValueInteger('recursive')
@@ -66,9 +65,8 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 		$bag = $seminarBagBuilder->build();
 		$eventUids = $bag->getUids();
 
-		$categoryBagBuilder = t3lib_div::makeInstance(
-			'tx_seminars_BagBuilder_Category'
-		);
+		/** @var tx_seminars_BagBuilder_Category $categoryBagBuilder */
+		$categoryBagBuilder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Category');
 		$categoryBagBuilder->limitToEvents($eventUids);
 		$categoryBag = $categoryBagBuilder->build();
 
@@ -76,6 +74,7 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 		if (($eventUids != '') && !$categoryBag->isEmpty()) {
 			$allCategories = '';
 
+			/** @var tx_seminars_OldModel_Category $category */
 			foreach ($categoryBag as $category) {
 				$link = $this->createLinkToListViewLimitedByCategory(
 					$category->getUid(),
@@ -132,7 +131,7 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 	 * either only the titles as comma-separated list, only the icons with the
 	 * title as title attribute or both.
 	 *
-	 * @param array $categoriesToDisplay
+	 * @param array[] $categoriesToDisplay
 	 *        the categories in an associative array, with the UID as key and "title", and "icon" as second level keys
 	 *
 	 * @return string the HTML output, will be empty if $categoriesToDisplay
@@ -180,7 +179,7 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 	/**
 	 * Creates the category icon with the icon title as alt text.
 	 *
-	 * @param array $iconData
+	 * @param string[] $iconData
 	 *        the filename and title of the icon in an associative array with "icon" as key for the filename and "title" as key
 	 *        for the icon title, the values for "title" and "icon" may be empty
 	 *

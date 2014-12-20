@@ -544,7 +544,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	/**
 	 * Data provider that returns the keys of all available form fields.
 	 *
-	 * @return array two-dimensional array with the inner array being:
+	 * @return array[] two-dimensional array with the inner array being:
 	 *               [key] string: the form field key
 	 *               [self-contained] boolean: whether the field is visible
 	 *                                if no other fields are visible

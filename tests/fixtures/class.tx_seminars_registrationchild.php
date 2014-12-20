@@ -49,7 +49,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 			$dbResult = FALSE;
 		}
 
-		/** @var $contentObject tslib_cObj */
+		/** @var tslib_cObj $contentObject */
 		$contentObject = t3lib_div::makeInstance('tslib_cObj');
 		$contentObject->start(array());
 
@@ -102,8 +102,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Returns the content of the member variable foods.
 	 *
-	 * @return array the content of the member variable foods, will be empty if
-	 *               foods is empty
+	 * @return int[] the content of the member variable foods, will be empty if foods is empty
 	 */
 	public function getFoodsData() {
 		return $this->foods;
@@ -112,8 +111,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Returns the content of the member variable lodgings.
 	 *
-	 * @return array the content of the member variable lodgings, will be empty
-	 *               if lodgings is empty
+	 * @return int[] the content of the member variable lodgings, will be empty if lodgings is empty
 	 */
 	public function getLodgingsData() {
 		return $this->lodgings;
@@ -122,8 +120,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	/**
 	 * Returns the content of the member variable checkboxes.
 	 *
-	 * @return array the content of the member variable checkboxes, will be
-	 *               empty if checkboxes is empty
+	 * @return int[] the content of the member variable checkboxes, will be empty if checkboxes is empty
 	 */
 	public function getCheckboxesData() {
 		return $this->checkboxes;

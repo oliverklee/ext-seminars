@@ -82,12 +82,15 @@ class tx_seminars_FrontEnd_Countdown extends tx_seminars_FrontEnd_AbstractView {
 			throw new BadMethodCallException('The method injectEventMapper() needs to be called first.', 1333617194);
 		}
 		if ($this->viewHelper === NULL) {
-			$this->injectCountDownViewHelper(t3lib_div::makeInstance('tx_seminars_ViewHelper_Countdown'));
+			/** @var tx_seminars_ViewHelper_Countdown $viewHelper */
+			$viewHelper = t3lib_div::makeInstance('tx_seminars_ViewHelper_Countdown');
+			$this->injectCountDownViewHelper($viewHelper);
 		}
 
 		$this->setErrorMessage($this->checkConfiguration(TRUE));
 
 		try {
+			/** @var tx_seminars_Model_Event $event */
 			$event = $this->mapper->findNextUpcoming();
 
 			$message = $this->viewHelper->render($event->getBeginDateAsUnixTimestamp());

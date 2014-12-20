@@ -72,10 +72,12 @@ class tx_seminars_Mapper_CategoryTest extends tx_phpunit_testcase {
 		$uid = $this->testingFramework->createRecord(
 			'tx_seminars_categories', array('title' => 'Lecture')
 		);
+		/** @var tx_seminars_Model_Category $model */
+		$model = $this->fixture->find($uid);
 
 		$this->assertEquals(
 			'Lecture',
-			$this->fixture->find($uid)->getTitle()
+			$model->getTitle()
 		);
 	}
 }

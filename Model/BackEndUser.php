@@ -81,12 +81,13 @@ class tx_seminars_Model_BackEndUser extends tx_oelib_Model_BackEndUser {
 	 */
 	private function getRecordFolderFromGroup($type) {
 		$groups = $this->getAllGroups();
-		if ($groups->isEmpty) {
+		if ($groups->isEmpty()) {
 			return 0;
 		}
 
 		$result = 0;
 
+		/** @var tx_seminars_Model_BackEndUserGroup $group */
 		foreach ($groups as $group) {
 			switch ($type) {
 				case 'event':

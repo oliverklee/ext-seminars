@@ -58,7 +58,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	protected $templateFile = '';
 
 	/**
-	 * @var array the access rights to page UIDs
+	 * @var bool[] the access rights to page UIDs
 	 */
 	protected $accessRights = array();
 
@@ -224,7 +224,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 				TAB . TAB .
 				'</div>' . LF;
 
-			/** @var $message t3lib_FlashMessage */
+			/** @var t3lib_FlashMessage $message */
 			$message = t3lib_div::makeInstance(
 				't3lib_FlashMessage',
 				$storageLabel,
@@ -234,9 +234,9 @@ abstract class tx_seminars_BackEnd_AbstractList {
 			$this->addFlashMessage($message);
 
 			if (class_exists('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService', TRUE)) {
-				/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
+				/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
 				$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
-				/** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
+				/** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
 				$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 				$renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
 			} else {

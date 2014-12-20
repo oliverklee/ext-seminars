@@ -152,8 +152,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 			$this->isInDb = TRUE;
 
 			if ($this->mapperName != '') {
-				tx_oelib_MapperRegistry::get($this->mapperName)
-					->getModel($this->recordData);
+				tx_oelib_MapperRegistry::get($this->mapperName)->getModel($this->recordData);
 			}
 		}
 	}
@@ -378,8 +377,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param string $mmTable
 	 *        the name of the m:n table, having the fields uid_local, uid_foreign and sorting, must not be empty
-	 * @param array $references
-	 *        uids of records from the foreign table to which we should create references, may be empty
+	 * @param int[] $references
+	 *        UIDs of records from the foreign table to which we should create references, may be empty
 	 *
 	 * @return int the number of created m:n records
 	 *

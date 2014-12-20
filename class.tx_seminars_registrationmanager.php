@@ -40,7 +40,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	public $extKey = 'seminars';
 
 	/**
-	 * @var tx_seminars_registrationmanager the Singleton instance
+	 * @var tx_seminars_registrationmanager
 	 */
 	private static $instance = NULL;
 
@@ -487,7 +487,10 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			}
 		}
 
-		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($this->registration->getUid());
+		/** @var tx_seminars_Mapper_Registration $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration');
+
+		return $mapper->find($this->registration->getUid());
 	}
 
 	/**
@@ -568,8 +571,10 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 					$paymentMethodUid = isset($formData['method_of_payment'])
 						? max(0, (int)$formData['method_of_payment']) : 0;
 					if (($paymentMethodUid > 0) && $availablePaymentMethods->hasUid($paymentMethodUid)) {
-						$paymentMethod = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_PaymentMethod')
-							->find($paymentMethodUid);
+						/** @var tx_seminars_Mapper_PaymentMethod $mapper */
+						$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_PaymentMethod');
+						/** @var tx_seminars_Model_PaymentMethod $paymentMethod */
+						$paymentMethod = $mapper->find($paymentMethodUid);
 					}
 				}
 			}
@@ -684,13 +689,14 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		$vacancies = $seminar->getVacancies();
 
-		/** @var $registrationBagBuilder tx_seminars_BagBuilder_Registration */
+		/** @var tx_seminars_BagBuilder_Registration $registrationBagBuilder */
 		$registrationBagBuilder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Registration');
 		$registrationBagBuilder->limitToEvent($seminar->getUid());
 		$registrationBagBuilder->limitToOnQueue();
 		$registrationBagBuilder->limitToSeatsAtMost($vacancies);
 
 		$bag = $registrationBagBuilder->build();
+		/** @var tx_seminars_registration $registration */
 		foreach ($bag as $registration) {
 			if ($vacancies <= 0) {
 				break;
@@ -746,7 +752,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @return tx_seminars_Bag_Event the event topics which still need the user's registration, may be empty
 	 */
 	public function getMissingRequiredTopics(tx_seminars_seminar $event) {
-		/** @var $builder tx_seminars_BagBuilder_Event */
+		/** @var tx_seminars_BagBuilder_Event $builder */
 		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->limitToRequiredEventTopics($event->getTopicUid());
 		$builder->limitToTopicsWithoutRegistrationByUser($this->getFeUserUid());
@@ -812,8 +818,10 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		$eMailNotification->setMessage($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
 
+		/** @var tx_seminars_Mapper_Registration $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration');
 		/** @var $registration tx_seminars_Model_Registration */
-		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($oldRegistration->getUid());
+		$registration = $mapper->find($oldRegistration->getUid());
 		foreach ($this->getHooks() as $hook) {
 			if (method_exists($hook, 'modifyThankYouEmail')) {
 				$hook->modifyThankYouEmail($eMailNotification, $registration);
@@ -857,7 +865,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$eMailNotification = t3lib_div::makeInstance('tx_oelib_Mail');
 		$eMailNotification->setSender($event->getFirstOrganizer());
 
-		/** @var $organizer tx_seminars_OldModel_Organizer */
+		/** @var tx_seminars_OldModel_Organizer $organizer */
 		foreach ($organizers as $organizer) {
 			$eMailNotification->addRecipient($organizer);
 		}
@@ -994,6 +1002,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$event->getTitleAndDate('-')
 		));
 
+		/** @var tx_seminars_OldModel_Organizer $organizer */
 		foreach ($event->getOrganizerBag() as $organizer) {
 			$eMail->addRecipient($organizer);
 		}
@@ -1217,9 +1226,10 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$this->hideSubparts('interests', $wrapperPrefix);
 		}
 
-
+		/** @var tx_seminars_Mapper_Event $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
 		/** @var $newEvent tx_seminars_Model_Event */
-		$newEvent = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($event->getUid());
+		$newEvent = $mapper->find($event->getUid());
 		$singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);
 		$this->setMarker('url', ($useHtml ? htmlspecialchars($singleViewUrl) : $singleViewUrl));
 
@@ -1314,6 +1324,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$newline = ($useHtml) ? '<br />' : LF;
 
 		$formattedPlaces = array();
+		/** @var tx_seminars_Model_Place $place */
 		foreach ($event->getPlaces() as $place) {
 			$formattedPlaces[] = $this->formatPlace($place, $newline);
 		}

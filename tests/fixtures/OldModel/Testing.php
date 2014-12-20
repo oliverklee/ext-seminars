@@ -64,7 +64,7 @@ class tx_seminars_tests_fixtures_OldModel_Testing extends tx_seminars_OldModel_A
 	 * correctly.
 	 *
 	 * @param string $mmTable the name of the m:n table, having the fields uid_local, uid_foreign and sorting, must not be empty
-	 * @param array $references array of uids of records from the foreign table to which we should create references, may be empty
+	 * @param int[] $references array of uids of records from the foreign table to which we should create references, may be empty
 	 *
 	 * @return int the number of created m:n records
 	 */

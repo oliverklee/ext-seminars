@@ -35,9 +35,9 @@ class tx_seminars_FrontEnd_WizardIcon {
 	/**
 	 * Processes the wizard items array.
 	 *
-	 * @param array $wizardItems the wizard items, may be empty
+	 * @param array[] $wizardItems the wizard items, may be empty
 	 *
-	 * @return array modified array with wizard items
+	 * @return array[] modified array with wizard items
 	 */
 	public function proc(array $wizardItems) {
 		$localLanguage = $this->includeLocalLang();
@@ -55,11 +55,11 @@ class tx_seminars_FrontEnd_WizardIcon {
 	/**
 	 * Reads the [extDir]/locallang.xml and returns the $LOCAL_LANG array found in that file.
 	 *
-	 * @return array the found language labels
+	 * @return array[] the found language labels
 	 */
 	public function includeLocalLang() {
 		if (class_exists('t3lib_l10n_parser_Llxml')) {
-			/** @var $xmlParser t3lib_l10n_parser_Llxml */
+			/** @var t3lib_l10n_parser_Llxml $xmlParser */
 			$xmlParser = t3lib_div::makeInstance('t3lib_l10n_parser_Llxml');
 			$localLanguage = $xmlParser->getParsedData(
 				t3lib_extMgm::extPath('seminars') . 'locallang.xml', $GLOBALS['LANG']->lang

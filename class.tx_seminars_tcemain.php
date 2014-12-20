@@ -35,7 +35,7 @@
  */
 class tx_seminars_tcemainprocdm {
 	/**
-	 * @var array
+	 * @var array[]
 	 */
 	private $tceMainFieldArrays = array();
 
@@ -68,7 +68,7 @@ class tx_seminars_tcemainprocdm {
 	 * @param string $status the status of this record (new/update)
 	 * @param string $table the affected table name
 	 * @param int $uid the UID of the affected record (may be 0)
-	 * @param array &$fieldArray an array of all fields that got changed (as reference)
+	 * @param string[] &$fieldArray an array of all fields that got changed (as reference)
 	 * @param t3lib_TCEmain $pObj reference to calling object
 	 *
 	 * @return void
@@ -101,7 +101,7 @@ class tx_seminars_tcemainprocdm {
 			&& is_array($this->tceMainFieldArrays[$table])
 		) {
 			foreach ($this->tceMainFieldArrays[$table] as $uid => $fieldArray) {
-				$this->processSingleTimeSlot($uid, $fieldArray);
+				$this->processSingleTimeSlot($uid);
 			}
 		}
 	}
@@ -128,13 +128,11 @@ class tx_seminars_tcemainprocdm {
 	 * Processes a single time slot.
 	 *
 	 * @param int $uid the UID of the affected record (may be 0)
-	 * @param array $fieldArray an array of all fields that got changed
 	 *
 	 * @return void
 	 */
-	private function processSingleTimeSlot($uid, array $fieldArray) {
-		// Initializes a timeslot object to have all
-		// functions available.
+	private function processSingleTimeSlot($uid) {
+		/** @var tx_seminars_timeslot $timeslot */
 		$timeslot = t3lib_div::makeInstance(
 			'tx_seminars_timeslot', $uid, FALSE
 		);
@@ -143,7 +141,7 @@ class tx_seminars_tcemainprocdm {
 			// Gets an associative array of fields that need
 			// to be updated in the database and update them.
 			$timeslot->saveToDatabase(
-				$timeslot->getUpdateArray($fieldArray)
+				$timeslot->getUpdateArray()
 			);
 		}
 	}
@@ -152,13 +150,12 @@ class tx_seminars_tcemainprocdm {
 	 * Processes a single event.
 	 *
 	 * @param int $uid the UID of the affected record (may be 0)
-	 * @param array $fieldArray an array of all fields that got changed
+	 * @param string[] $fieldArray an array of all fields that got changed
 	 *
 	 * @return void
 	 */
 	private function processSingleEvent($uid, array $fieldArray) {
-		// Initializes a seminar object to have all functions
-		// available.
+		/** @var tx_seminars_seminar $seminar */
 		$seminar = t3lib_div::makeInstance(
 			'tx_seminars_seminar', $uid, FALSE, TRUE
 		);

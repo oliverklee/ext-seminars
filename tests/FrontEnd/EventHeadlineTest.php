@@ -122,7 +122,9 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function renderWithUidOfExistingEventReturnsHtmlSpecialCharedTitleOfSelectedEvent() {
-		$this->mapper->find($this->eventId)->setTitle('<test>Test event</test>');
+		/** @var tx_seminars_Model_Event $event */
+		$event = $this->mapper->find($this->eventId);
+		$event->setTitle('<test>Test event</test>');
 		$this->fixture->piVars['uid'] = $this->eventId;
 
 		$this->assertContains(

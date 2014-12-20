@@ -349,7 +349,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 *
 	 * @param string $label the link text
 	 * @param int $pageId the page ID to link to, must be >= 0
-	 * @param array $urlParameters
+	 * @param string[] $urlParameters
 	 *        URL parameters to set as key/value pairs, not URL-encoded yet
 	 *
 	 * @return string faked link tag, will not be empty
@@ -1190,6 +1190,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	public function singleViewCallsModifyEventSingleViewHook() {
 		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
 		$hook = $this->getMock('tx_seminars_Interface_Hook_EventSingleView');
 		$hook->expects($this->once())->method('modifyEventSingleView')
@@ -1905,6 +1906,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			array('timeslots' => $timeSlotUid)
 		);
 
+		/** @var tx_seminars_Model_TimeSlot $timeSlot */
 		$timeSlot = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TimeSlot')->find($timeSlotUid);
 		$hook = $this->getMock('tx_seminars_Interface_Hook_EventSingleView');
 		$hook->expects($this->once())->method('modifyTimeSlotListRow')
@@ -8233,7 +8235,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * Data provider for the tests concerning
 	 * hideListRegistrationsColumnIfNecessary.
 	 *
-	 * @return array nested array with the following inner keys:
+	 * @return array[] nested array with the following inner keys:
 	 *               [getsHidden] boolean: whether the registration column is
 	 *                            expected to be hidden
 	 *               [whatToDisplay] string: the value for what_to_display
@@ -8448,6 +8450,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function eventsListCallsModifyListRowHook() {
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
 
 		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
@@ -8484,6 +8487,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
 
 		$registrationUid = $this->createLogInAndRegisterFeUser();
+		/** @var tx_seminars_Model_Registration $registration */
 		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($registrationUid);
 
 		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
@@ -8502,6 +8506,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function myEventsListCallsModifyListRowHook() {
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
 
 		$this->testingFramework->createAndLoginFrontEndUser();

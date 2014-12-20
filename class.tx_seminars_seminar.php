@@ -150,8 +150,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @param string $fieldName the name of the field to check
 	 * @param string $value the value that was entered in the TCE form that needs to be validated
 	 *
-	 * @return array associative array containing the field "status" and
-	 *               "newValue" (if needed)
+	 * @return array associative array containing the field "status" and "newValue" (if needed)
 	 */
 	private function validateTceValues($fieldName, $value) {
 		$result = array('status' => TRUE);
@@ -208,7 +207,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * This function is used in order to check values entered in the TCE forms
 	 * in the TYPO3 back end. It is called through a hook in the TCE class.
 	 *
-	 * @param array &$fieldArray
+	 * @param string[] &$fieldArray
 	 *        associative array containing the values entered in the TCE form (as a reference)
 	 *
 	 * @return array associative array containing data to update the database
@@ -490,8 +489,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * place is set, or the set place(s) don't have any country set, an empty
 	 * array will be returned.
 	 *
-	 * @return array the list of ISO codes for the countries of this
-	 *               event, may be empty
+	 * @return string[] the list of ISO codes for the countries of this event, may be empty
 	 */
 	public function getPlacesWithCountry() {
 		if (!$this->hasPlace()) {
@@ -542,9 +540,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$countries = $this->getPlacesWithCountry();
 		// Get the real country names from the ISO codes.
 		foreach ($countries as $currentCountry) {
-			$countryList[] = $this->getCountryNameFromIsoCode(
-				$currentCountry
-			);
+			$countryList[] = $this->getCountryNameFromIsoCode($currentCountry);
 		}
 
 		// Makes sure that each country is exactly once in the array and then
@@ -594,7 +590,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * place is set, or the set place(s) don't have any city set, an empty
 	 * array will be returned.
 	 *
-	 * @return array the list of city names for this event, may be empty
+	 * @return string[] the list of city names for this event, may be empty
 	 */
 	public function getCitiesFromPlaces() {
 		$cities = array();
@@ -705,8 +701,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * The second dimension is associative with the following keys:
 	 * title, address, city, country, homepage, directions
 	 *
-	 * @return array all places as a two-dimensional array, will be empty
-	 *               if there are no places assigned
+	 * @return array[] all places as a two-dimensional array, will be empty if there are no places assigned
 	 */
 	protected function getPlacesAsArray() {
 		return tx_oelib_db::selectMultiple(
@@ -807,6 +802,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$result = '';
 
+		/** @var tx_seminars_speaker $speaker */
 		foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
 			$name = $speaker->getLinkedTitle($plugin);
 			if ($speaker->hasOrganization()) {
@@ -852,6 +848,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$result = '';
 
+		/** @var tx_seminars_speaker $speaker */
 		foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
 			$result .= $speaker->getTitle();
 			if ($speaker->hasOrganization()) {
@@ -896,6 +893,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$result = array();
 
+		/** @var tx_seminars_speaker $speaker */
 		foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
 			$result[] = $speaker->getLinkedTitle($plugin);
 		}
@@ -1049,6 +1047,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			$result .= '_single';
 		}
 
+		/** @var tx_seminars_speaker $speaker */
 		foreach ($speakers as $speaker) {
 			switch ($speaker->getGender()) {
 				case tx_seminars_speaker::GENDER_MALE:
@@ -1164,9 +1163,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return string the price, formatted as in configured in TS
 	 */
 	public function formatPrice($value) {
-		$priceViewHelper = t3lib_div::makeInstance(
-			'tx_oelib_ViewHelper_Price'
-		);
+		/** @var tx_oelib_ViewHelper_Price $priceViewHelper */
+		$priceViewHelper = t3lib_div::makeInstance('tx_oelib_ViewHelper_Price');
 		$priceViewHelper->setCurrencyFromIsoAlpha3Code(
 			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 				->getAsString('currency')
@@ -1431,8 +1429,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets the titles of allowed payment methods for this event.
 	 *
-	 * @return array our payment method titles, will be an empty array if there
-	 *               are no payment methods
+	 * @return string[] our payment method titles, will be an empty array if there are no payment methods
 	 */
 	public function getPaymentMethods() {
 		if (!$this->hasPaymentMethods()) {
@@ -1898,9 +1895,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * Returns an array of our events's target group titles (or an empty array
-	 * if there aren't any).
+	 * if there are none).
 	 *
-	 * @return array the target groups of this event (or an empty array)
+	 * @return string[] the target groups of this event (or an empty array)
 	 */
 	public function getTargetGroupsAsArray() {
 		if (!$this->hasTargetGroups()) {
@@ -2148,7 +2145,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$organizers = $this->getOrganizerBag();
-		/** @var $organizer tx_seminars_OldModel_Organizer */
+		/** @var tx_seminars_OldModel_Organizer $organizer */
 		foreach ($organizers as $organizer) {
 			$result[] = $plugin->cObj->getTypoLink(
 				htmlspecialchars($organizer->getName()),
@@ -2174,7 +2171,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$organizers = $this->getOrganizerBag();
-		/** @var $organizer tx_seminars_OldModel_Organizer */
+		/** @var tx_seminars_OldModel_Organizer $organizer */
 		foreach ($organizers as $organizer) {
 			$result[] = $organizer->getName() . ($organizer->hasHomepage() ? ', ' . $organizer->getHomepage() : '');
 		}
@@ -2187,7 +2184,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * The name is not encoded yet.
 	 *
-	 * @return array the organizers' names and e-mail addresses
+	 * @return string[] the organizers' names and e-mail addresses
 	 */
 	public function getOrganizersNameAndEmail() {
 		if (!$this->hasOrganizers()) {
@@ -2197,7 +2194,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$organizers = $this->getOrganizerBag();
-		/** @var $organizer tx_seminars_OldModel_Organizer */
+		/** @var tx_seminars_OldModel_Organizer $organizer */
 		foreach ($organizers as $organizer) {
 			$result[] = '"' . $organizer->getName() . '"' . ' <' . $organizer->getEMailAddress() . '>';
 		}
@@ -2209,7 +2206,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets our organizers' e-mail addresses in the format
 	 * "john.doe@example.com".
 	 *
-	 * @return array the organizers' e-mail addresses
+	 * @return string[] the organizers' e-mail addresses
 	 */
 	public function getOrganizersEmail() {
 		if (!$this->hasOrganizers()) {
@@ -2219,7 +2216,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$organizers = $this->getOrganizerBag();
-		/** @var $organizer tx_seminars_OldModel_Organizer */
+		/** @var tx_seminars_OldModel_Organizer $organizer */
 		foreach ($organizers as $organizer) {
 			$result[] = $organizer->getEMailAddress();
 		}
@@ -2230,7 +2227,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets our organizers' e-mail footers.
 	 *
-	 * @return array the organizers' e-mail footers, will be empty if no
+	 * @return string[] the organizers' e-mail footers, will be empty if no
 	 *               organizer was set, or all organizers have no e-mail footer
 	 */
 	public function getOrganizersFooter() {
@@ -2241,7 +2238,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		$organizers = $this->getOrganizerBag();
-		/** @var $organizer tx_seminars_OldModel_Organizer */
+		/** @var tx_seminars_OldModel_Organizer $organizer */
 		foreach ($organizers as $organizer) {
 			$emailFooter = $organizer->getEmailFooter();
 			if ($emailFooter !== '') {
@@ -2288,6 +2285,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 		$result = array();
 
+		/** @var tx_seminars_Bag_Organizer $organizerBag */
 		$organizerBag = t3lib_div::makeInstance(
 			'tx_seminars_Bag_Organizer',
 			'tx_seminars_seminars_organizing_partners_mm.uid_local = ' . $this->getUid() . ' AND ' .
@@ -2295,7 +2293,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'tx_seminars_seminars_organizing_partners_mm'
 		);
 
-		/** @var $organizer tx_seminars_OldModel_Organizer */
+		/** @var tx_seminars_OldModel_Organizer $organizer */
 		foreach ($organizerBag as $organizer) {
 			$result[] = $plugin->cObj->getTypoLink(
 				$organizer->getName(),
@@ -3045,6 +3043,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				$this->getRecordPropertyInteger('topic'),
 				'tx_seminars_seminars')
 			) {
+				/** @var tx_seminars_seminar $result */
 				$result = t3lib_div::makeInstance(
 					'tx_seminars_seminar',
 					$this->getRecordPropertyInteger('topic')
@@ -3259,7 +3258,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets the lodging options associated with this event.
 	 *
-	 * @return array an array of lodging options, consisting each of a nested
+	 * @return array[] lodging options, consisting each of a nested
 	 *               array with the keys "caption" (for the title) and "value"
 	 *               (for the UID), might be empty
 	 */
@@ -3289,7 +3288,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets the food options associated with this event.
 	 *
-	 * @return array an array of food options, consisting each of a nested array
+	 * @return array[] food options, consisting each of a nested array
 	 *               with the keys "caption" (for the title) and "value" (for
 	 *               the UID), might be empty
 	 */
@@ -3323,7 +3322,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * record, the option checkboxes of the corresponding topic record will be
 	 * retrieved.
 	 *
-	 * @return array an array of option checkboxes, consisting each of a nested
+	 * @return array[] option checkboxes, consisting each of a nested
 	 *               array with the keys "caption" (for the title) and "value"
 	 *               (for the UID), might be empty
 	 */
@@ -3353,7 +3352,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @param bool $useTopicRecord
 	 *        TRUE if the referenced records of the corresponding topic record should be retrieved, FALSE otherwise
 	 *
-	 * @return array an array of referenced records, consisting each of a nested
+	 * @return array[] referenced records, consisting each of a nested
 	 *               array with the keys "caption" (for the title) and "value"
 	 *               (for the UID), might be empty
 	 */
@@ -3390,10 +3389,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Converts an array m:m records (each having a "value" and a "caption"
 	 * element) to a LF-separated string.
 	 *
-	 * @param array $records m:n elements, each having a "value" and "caption" element, may be empty
+	 * @param array[] $records m:n elements, each having a "value" and "caption" element, may be empty
 	 *
-	 * @return string the captions of the array contents separated by
-	 *                LF, will be empty if the array is empty
+	 * @return string the captions of the array contents separated by LF, will be empty if the array is empty
 	 */
 	private function mmRecordsToText($records) {
 		$result = '';
@@ -3448,8 +3446,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return NULL;
 		}
 
-		return tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser')
-			->find($this->getRecordPropertyInteger('owner_feuser'));
+		/** @var tx_oelib_Mapper_FrontEndUser $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser');
+		return $mapper->find($this->getRecordPropertyInteger('owner_feuser'));
 	}
 
 	/**
@@ -3697,7 +3696,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * The return array's pointer will already be reset to its first element.
 	 *
-	 * @return array the available prices as a reset array of arrays
+	 * @return array[] the available prices as a reset array of arrays
 	 *               with the keys "caption" (for the title) and "value"
 	 *               (for the price code), might be empty
 	 */
@@ -3830,9 +3829,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					'tx_seminars_attendances.seminar' .
 				' AND tx_seminars_attendances.user = ' . $feUserUid;
 
-			$seminarBag = t3lib_div::makeInstance(
-				'tx_seminars_Bag_Event', $queryWhere, $additionalTables
-			);
+			/** @var tx_seminars_Bag_Event $seminarBag */
+			$seminarBag = t3lib_div::makeInstance('tx_seminars_Bag_Event', $queryWhere, $additionalTables);
 
 			// One blocking event is enough.
 			$result = !$seminarBag->isEmpty();
@@ -4004,8 +4002,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @param string $tableName the name of the m:n table to query, must not be empty
 	 *
-	 * @return array array of foreign record's UIDs, ordered by the field
-	 *               uid_foreign in the m:n table, may be empty
+	 * @return int[] foreign record's UIDs, ordered by the field uid_foreign in the m:n table, may be empty
 	 */
 	public function getRelatedMmRecordUids($tableName) {
 		$result = array();
@@ -4140,6 +4137,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		// Creates an array with all place UIDs which should be related to this
 		// event.
 		$placesOfTimeSlots = array();
+		/** @var tx_seminars_timeslot $organizer */
 		foreach ($timeSlotBag as $timeSlot) {
 			if ($timeSlot->hasPlace()) {
 				$placesOfTimeSlots[] = $timeSlot->getPlace();
@@ -4154,11 +4152,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Creates a time slot bag for the time slots associated with this event.
 	 *
-	 * @return tx_seminars_Bag_TimeSlot bag with this event's time slots, may be
-	 *                                 empty
+	 * @return tx_seminars_Bag_TimeSlot bag with this event's time slots, may be empty
 	 */
 	private function createTimeSlotBag() {
-		return t3lib_div::makeInstance(
+		/** @var tx_seminars_Bag_TimeSlot $bag */
+		$bag = t3lib_div::makeInstance(
 			'tx_seminars_Bag_TimeSlot',
 			'tx_seminars_timeslots.seminar = ' . $this->getUid() .
 				' AND tx_seminars_timeslots.place > 0',
@@ -4166,13 +4164,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'tx_seminars_timeslots.place',
 			'tx_seminars_timeslots.begin_date ASC'
 		);
+		return $bag;
 	}
 
 	/**
 	 * Returns our time slots in an array.
 	 *
-	 * @return array an array of time slots or an empty array if there are no
-	 *               time slots
+	 * @return array[] time slots or an empty array if there are no time slots
 	 *               the array contains the following elements:
 	 *               - 'date' as key and the time slot's begin date as value
 	 *               - 'time' as key and the time slot's time as value
@@ -4185,6 +4183,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function getTimeSlotsAsArrayWithMarkers() {
 		$result = array();
 
+		/** @var tx_seminars_Bag_TimeSlot $timeSlotBag */
 		$timeSlotBag = t3lib_div::makeInstance(
 			'tx_seminars_Bag_TimeSlot',
 			'tx_seminars_timeslots.seminar = ' . $this->getUid(),
@@ -4193,6 +4192,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			'tx_seminars_timeslots.begin_date ASC'
 		);
 
+		/** @var tx_seminars_timeslot $organizer */
 		foreach ($timeSlotBag as $timeSlot) {
 			$result[] = array(
 				'uid' => $timeSlot->getUid(),
@@ -4232,7 +4232,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets this event's category titles and icons as an associative
 	 * array (which may be empty), using the category UIDs as keys.
 	 *
-	 * @return array 2 level associative array with the UID as first level key
+	 * @return array[] two-dimensional associative array with the UID as first level key
 	 *               and "title" and "icon" as second level keys. "Title" will
 	 *               contain the category title and "icon" will contain the
 	 *               category icon. Will be an empty array in if the event has
@@ -4243,6 +4243,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return array();
 		}
 
+		/** @var tx_seminars_BagBuilder_Category $builder */
 		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Category');
 		$builder->limitToEvents($this->getTopicUid());
 		$builder->sortByRelationOrder();
@@ -4294,7 +4295,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @param tslib_pibase $plugin a tslib_pibase object for a live page
 	 *
-	 * @return array an array of arrays with the elements "name" and
+	 * @return array[] an array of arrays with the elements "name" and
 	 *               "size" of the attached file, will be empty if
 	 *               there are no attached files
 	 */
@@ -4432,6 +4433,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                               event has no required events
 	 */
 	public function getRequirements() {
+		/** @var tx_seminars_BagBuilder_Event $builder */
 		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->limitToRequiredEventTopics($this->getTopicUid());
 
@@ -4446,6 +4448,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                               this event has no depending events
 	 */
 	public function getDependencies() {
+		/** @var tx_seminars_BagBuilder_Event $builder */
 		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->limitToDependingEventTopics($this->getTopicUid());
 
@@ -4514,6 +4517,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$deadline = $beginDate;
 		$speakers = $this->getSpeakerBag();
 
+		/** @var tx_seminars_speaker $organizer */
 		foreach ($speakers as $speaker) {
 			$speakerDeadline = $beginDate -
 				($speaker->getCancelationPeriodInDays()
@@ -4621,12 +4625,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Returns the places associated with this event.
 	 *
-	 * @return tx_oelib_List with the models for the places of this event, will
-	 *                       be empty if this event has no places
+	 * @return Tx_Oelib_List with the models for the places of this event, will be empty if this event has no places
 	 */
 	public function getPlaces() {
 		if (!$this->hasPlace()) {
-			return t3lib_div::makeInstance('tx_oelib_List');
+			/** @var Tx_Oelib_List $list */
+			$list = t3lib_div::makeInstance('tx_oelib_List');
+			return $list;
 		}
 
 		$places = tx_oelib_db::selectMultiple(
@@ -4636,8 +4641,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				tx_oelib_db::enableFields('tx_seminars_sites')
 		);
 
-		return t3lib_div::makeInstance('tx_seminars_Mapper_Place')
-			->getListOfModels($places);
+		/** @var tx_seminars_Mapper_Place $mapper */
+		$mapper = t3lib_div::makeInstance('tx_seminars_Mapper_Place');
+		return $mapper->getListOfModels($places);
 	}
 
 	/**

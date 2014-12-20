@@ -98,14 +98,12 @@ class tx_seminars_EmailSalutation {
 	/**
 	 * Gets all hooks for this class.
 	 *
-	 * @return array the hook objects in an array, will be empty if no hooks
-	 *               have been set
+	 * @return array the hook objects in an array, will be empty if no hooks have been set
 	 */
 	private function getHooks() {
 		$result = array();
 
-		$hooks = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']
-			['modifyEmailSalutation'];
+		$hooks = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'];
 		if (is_array($hooks)) {
 			foreach ($hooks as $classReference) {
 				$result[] = t3lib_div::getUserObj($classReference);

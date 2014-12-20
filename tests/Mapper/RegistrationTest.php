@@ -74,9 +74,11 @@ class tx_seminars_Mapper_RegistrationTest extends tx_phpunit_testcase {
 			'tx_seminars_attendances', array('title' => 'registration for event')
 		);
 
+		/** @var tx_seminars_Model_Registration $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			'registration for event',
-			$this->fixture->find($uid)->getTitle()
+			$model->getTitle()
 		);
 	}
 
@@ -190,9 +192,10 @@ class tx_seminars_Mapper_RegistrationTest extends tx_phpunit_testcase {
 			'tx_seminars_attendances', $uid, $lodging->getUid(), 'lodgings'
 		);
 
+		/** @var tx_seminars_Model_Registration $model */
+		$model = $this->fixture->find($uid);
 		$this->assertTrue(
-			$this->fixture->find($uid)->getLodgings()->first() instanceof
-				tx_seminars_Model_Lodging
+			$model->getLodgings()->first() instanceof tx_seminars_Model_Lodging
 		);
 	}
 
@@ -207,9 +210,11 @@ class tx_seminars_Mapper_RegistrationTest extends tx_phpunit_testcase {
 			'tx_seminars_attendances', $uid, $lodging->getUid(), 'lodgings'
 		);
 
+		/** @var tx_seminars_Model_Registration $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			$lodging->getUid(),
-			$this->fixture->find($uid)->getLodgings()->first()->getUid()
+			$model->getLodgings()->first()->getUid()
 		);
 	}
 
@@ -239,9 +244,10 @@ class tx_seminars_Mapper_RegistrationTest extends tx_phpunit_testcase {
 			'tx_seminars_attendances', $uid, $food->getUid(), 'foods'
 		);
 
+		/** @var tx_seminars_Model_Registration $model */
+		$model = $this->fixture->find($uid);
 		$this->assertTrue(
-			$this->fixture->find($uid)->getFoods()->first() instanceof
-				tx_seminars_Model_Food
+			$model->getFoods()->first() instanceof tx_seminars_Model_Food
 		);
 
 	}
@@ -257,9 +263,11 @@ class tx_seminars_Mapper_RegistrationTest extends tx_phpunit_testcase {
 			'tx_seminars_attendances', $uid, $food->getUid(), 'foods'
 		);
 
+		/** @var tx_seminars_Model_Registration $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			$food->getUid(),
-			$this->fixture->find($uid)->getFoods()->first()->getUid()
+			$model->getFoods()->first()->getUid()
 		);
 	}
 
@@ -289,9 +297,11 @@ class tx_seminars_Mapper_RegistrationTest extends tx_phpunit_testcase {
 			'tx_seminars_attendances', $uid, $checkbox->getUid(), 'checkboxes'
 		);
 
+		/** @var tx_seminars_Model_Registration $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			$checkbox->getUid(),
-			$this->fixture->find($uid)->getCheckboxes()->first()->getUid()
+			$model->getCheckboxes()->first()->getUid()
 		);
 	}
 
@@ -306,9 +316,11 @@ class tx_seminars_Mapper_RegistrationTest extends tx_phpunit_testcase {
 			'tx_seminars_attendances', $uid, $checkbox->getUid(), 'checkboxes'
 		);
 
+		/** @var tx_seminars_Model_Registration $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			$checkbox->getUid(),
-			$this->fixture->find($uid)->getCheckboxes()->first()->getUid()
+			$model->getCheckboxes()->first()->getUid()
 		);
 	}
 
@@ -328,10 +340,11 @@ class tx_seminars_Mapper_RegistrationTest extends tx_phpunit_testcase {
 			'', array('tx_seminars_registration' => $registrationUid)
 		);
 
+		/** @var tx_seminars_Model_Registration $model */
+		$model = $this->fixture->find($registrationUid);
 		$this->assertEquals(
 			(string) $personUid,
-			$this->fixture->find($registrationUid)
-				->getAdditionalPersons()->getUids()
+			$model->getAdditionalPersons()->getUids()
 		);
 	}
 }

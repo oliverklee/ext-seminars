@@ -92,13 +92,12 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_Abstract
 		);
 
 		$eventUid = (int)t3lib_div::_GP('eventUid');
-		if (($eventUid > 0)
-		 	&& tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-		 		->existsModel($eventUid)
-		) {
+		/** @var tx_seminars_Mapper_Event $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		if (($eventUid > 0) && $mapper->existsModel($eventUid)) {
 			$this->eventUid = $eventUid;
-			$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-				->find($eventUid);
+			/** @var tx_seminars_Model_Event $event */
+			$event = $mapper->find($eventUid);
 			$registrationsHeading = sprintf(
 				$GLOBALS['LANG']->getLL('registrationlist.label_registrationsHeading'),
 				htmlspecialchars($event->getTitle()),
@@ -153,6 +152,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_Abstract
 	 * @return bool TRUE if the generated list is not empty, FALSE otherwise
 	 */
 	private function setRegistrationTableMarkers($registrationsToShow) {
+		/** @var tx_seminars_BagBuilder_Registration $builder */
 		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Registration');
 		$pageData = $this->page->getPageData();
 
@@ -177,6 +177,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_Abstract
 
 		$tableRows = '';
 
+		/** @var tx_seminars_registration $registration */
 		foreach ($registrationBag as $registration) {
 			try {
 				$userName = htmlspecialchars($registration->getUserName());

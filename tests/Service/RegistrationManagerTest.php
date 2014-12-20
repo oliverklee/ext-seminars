@@ -3048,7 +3048,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCountryOfPlace() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
+
+		/** @var tx_oelib_Mapper_Country $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
+		/** @var tx_oelib_Model_Country $country */
+		$country = $mapper->find(54);
 		$uid = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
 			array('city' => 'footown', 'country' => $country->getIsoAlpha2Code())
@@ -3134,7 +3138,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForPlaceAddressWithCountryAndCitySeparatesCountryAndCityWithComma() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		$country = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country')->find(54);
+
+		/** @var tx_oelib_Mapper_Country $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
+		/** @var tx_oelib_Model_Country $country */
+		$country = $mapper->find(54);
 		$uid = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
 			array(
@@ -4502,11 +4510,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForPositiveSeatsSetsSeats() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** $event tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4525,11 +4533,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingSeatsSetsOneSeat() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4548,11 +4556,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForZeroSeatsSetsOneSeat() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4571,11 +4579,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNegativeSeatsSetsOneSeat() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4594,11 +4602,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForRegisteredThemselvesOneSetsItToTrue() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4616,11 +4624,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForRegisteredThemselvesZeroSetsItToFalse() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4638,11 +4646,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForRegisteredThemselvesMissingSetsItToFalse() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4660,16 +4668,16 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForSelectedAvailablePricePutsSelectedPriceCodeToPrice() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
 		$event->setData(array('payment_methods' => new tx_oelib_List()));
 		$event->expects($this->any())->method('getAvailablePrices')
 			->will($this->returnValue(array('regular' => 12, 'special' => 3)));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData(
@@ -4686,16 +4694,16 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForSelectedNotAvailablePricePutsFirstPriceCodeToPrice() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
 		$event->setData(array('payment_methods' => new tx_oelib_List()));
 		$event->expects($this->any())->method('getAvailablePrices')
 			->will($this->returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData(
@@ -4712,16 +4720,16 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNoSelectedPricePutsFirstPriceCodeToPrice() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
 		$event->setData(array('payment_methods' => new tx_oelib_List()));
 		$event->expects($this->any())->method('getAvailablePrices')
 			->will($this->returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData(
@@ -4738,16 +4746,16 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNoSelectedAndOnlyFreeRegularPriceAvailablePutsRegularPriceCodeToPrice() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
 		$event->setData(array('payment_methods' => new tx_oelib_List()));
 		$event->expects($this->any())->method('getAvailablePrices')
 			->will($this->returnValue(array('regular' => 0)));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData(
@@ -4764,16 +4772,16 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForOneSeatsCalculatesTotalPriceFromSelectedPriceAndSeats() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
 		$event->setData(array('payment_methods' => new tx_oelib_List()));
 		$event->expects($this->any())->method('getAvailablePrices')
 			->will($this->returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData(
@@ -4790,16 +4798,16 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForTwoSeatsCalculatesTotalPriceFromSelectedPriceAndSeats() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
 		$event->setData(array('payment_methods' => new tx_oelib_List()));
 		$event->expects($this->any())->method('getAvailablePrices')
 			->will($this->returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData(
@@ -4816,11 +4824,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNonEmptyAttendeesNamesSetsAttendeesNames() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4839,11 +4847,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataDropsHtmlTagsFromAttendeesNames() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4862,11 +4870,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForEmptyAttendeesNamesSetsEmptyAttendeesNames() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4885,11 +4893,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingAttendeesNamesSetsEmptyAttendeesNames() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4908,11 +4916,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForPositiveKidsSetsNumberOfKids() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4931,11 +4939,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingKidsSetsZeroKids() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4954,11 +4962,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForZeroKidsSetsZeroKids() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -4977,11 +4985,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNegativeKidsSetsZeroKids() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5000,9 +5008,9 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneSetsIt() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$paymentMethod = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
@@ -5015,7 +5023,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$event->expects($this->any())->method('getPaymentMethods')
 			->will($this->returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData($registration, array('method_of_payment' => $paymentMethod->getUid()));
@@ -5030,9 +5038,9 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForSelectedAvailablePaymentMethodFromTwoSetsIt() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$paymentMethod1 = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
@@ -5048,7 +5056,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$event->expects($this->any())->method('getPaymentMethods')
 			->will($this->returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData($registration, array('method_of_payment' => $paymentMethod2->getUid()));
@@ -5063,9 +5071,9 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneForFreeEventsSetsNoPaymentMethod() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$paymentMethod = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
@@ -5078,7 +5086,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$event->expects($this->any())->method('getPaymentMethods')
 			->will($this->returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData($registration, array('method_of_payment' => $paymentMethod->getUid()));
@@ -5092,9 +5100,9 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingPaymentMethodAndNoneAvailableSetsNone() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));
 		$event->expects($this->any())->method('getAvailablePrices')
@@ -5102,7 +5110,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$event->expects($this->any())->method('getPaymentMethods')
 			->will($this->returnValue(new tx_oelib_List()));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData(
@@ -5118,9 +5126,9 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingPaymentMethodAndTwoAvailableSetsNone() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$paymentMethod1 = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
 		$paymentMethod2 = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
@@ -5134,7 +5142,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$event->expects($this->any())->method('getPaymentMethods')
 			->will($this->returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData($registration, array());
@@ -5148,9 +5156,9 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingPaymentMethodAndOneAvailableSetsIt() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$paymentMethod = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
@@ -5163,7 +5171,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$event->expects($this->any())->method('getPaymentMethods')
 			->will($this->returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData($registration, array());
@@ -5178,9 +5186,9 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForUnavailablePaymentMethodAndTwoAvailableSetsNone() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$paymentMethod1 = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
@@ -5196,7 +5204,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$event->expects($this->any())->method('getPaymentMethods')
 			->will($this->returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData(
@@ -5212,9 +5220,9 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForUnavailablePaymentMethodAndOneAvailableSetsAvailable() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$paymentMethod = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
@@ -5227,7 +5235,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$event->expects($this->any())->method('getPaymentMethods')
 			->will($this->returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData($registration, array('method_of_payment' => $paymentMethod->getUid() + 1));
@@ -5242,11 +5250,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNonEmptyAccountNumberSetsAccountNumber() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5263,11 +5271,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataDropsHtmlTagsFromAccountNumber() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5284,11 +5292,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataChangesWhitespaceToSpaceInAccountNumber() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5307,11 +5315,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForEmptyAccountNumberSetsEmptyAccountNumber() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5328,11 +5336,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingAccountNumberSetsEmptyAccountNumber() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5349,11 +5357,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNonEmptyBankCodeSetsBankCode() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5370,11 +5378,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataDropsHtmlTagsFromBankCode() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5391,11 +5399,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataChangesWhitespaceToSpaceInBankCode() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5414,11 +5422,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForEmptyBankCodeSetsEmptyBankCode() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5435,11 +5443,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingBankCodeSetsEmptyBankCode() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5456,11 +5464,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNonEmptyBankNameSetsBankName() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5477,11 +5485,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataDropsHtmlTagsFromBankName() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5498,11 +5506,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataChangesWhitespaceToSpaceInBankName() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5521,9 +5529,9 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForEmptyBankNameSetsEmptyBankName() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event') ->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
@@ -5541,11 +5549,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingBankNameSetsEmptyBankName() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5562,11 +5570,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNonEmptyAccountOwnerSetsAccountOwner() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5583,11 +5591,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataDropsHtmlTagsFromAccountOwner() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5604,11 +5612,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataChangesWhitespaceToSpaceInAccountOwner() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5627,11 +5635,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForEmptyAccountOwnerSetsEmptyAccountOwner() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5648,11 +5656,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingAccountOwnerSetsEmptyAccountOwner() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5669,11 +5677,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNonEmptyCompanySetsCompany() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5692,11 +5700,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataDropsHtmlTagsFromCompany() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5713,11 +5721,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForEmptyCompanySetsEmptyCompany() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5734,11 +5742,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingCompanySetsEmptyCompany() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5755,11 +5763,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMaleGenderSetsGender() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5778,11 +5786,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForFemaleGenderSetsGender() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5801,11 +5809,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForInvalidIntegerGenderSetsUnknownGender() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5822,11 +5830,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForInvalidStringGenderSetsUnknownGender() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5843,11 +5851,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForEmptyGenderSetsUnknownGender() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5864,11 +5872,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingGenderSetsUnknownGender() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5885,11 +5893,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNonEmptyNameSetsName() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5906,11 +5914,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataDropsHtmlTagsFromName() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5927,11 +5935,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataChangesWhitespaceToSpaceInName() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5948,11 +5956,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForEmptyNameSetsEmptyName() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5969,11 +5977,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingNameSetsEmptyName() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -5990,11 +5998,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNonEmptyAddressSetsAddress() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6011,11 +6019,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataDropsHtmlTagsFromAddress() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6032,11 +6040,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForEmptyAddressSetsEmptyAddress() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6053,11 +6061,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingAddressSetsEmptyAddress() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6074,11 +6082,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNonEmptyZipSetsZip() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6095,11 +6103,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataDropsHtmlTagsFromZip() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6116,11 +6124,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataChangesWhitespaceToSpaceInZip() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6137,11 +6145,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForEmptyZipSetsEmptyZip() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6158,11 +6166,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingZipSetsEmptyZip() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6179,11 +6187,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNonEmptyCitySetsCity() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6200,11 +6208,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataDropsHtmlTagsFromCity() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6221,11 +6229,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataChangesWhitespaceToSpaceInCity() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6242,11 +6250,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForEmptyCitySetsEmptyCity() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6263,11 +6271,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingCitySetsEmptyCity() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6284,11 +6292,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNonEmptyCountrySetsCountry() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6305,11 +6313,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataDropsHtmlTagsFromCountry() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6326,11 +6334,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataChangesWhitespaceToSpaceInCountry() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6347,11 +6355,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForEmptyCountrySetsEmptyCountry() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
@@ -6368,11 +6376,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForMissingCountrySetsEmptyCountry() {
-		$fixture = t3lib_div::makeInstance(
-			$this->createAccessibleProxyClass()
-		);
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_registrationmanager $fixture */
+		$fixture = new $className();
 
-		/** @var $event tx_seminars_Model_Event */
+		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);

@@ -45,7 +45,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * the names of the form fields to show (with the keys being the same as the values for performance reasons)
 	 *
-	 * @var array
+	 * @var string[]
 	 */
 	private $formFieldsToShow = array();
 
@@ -59,7 +59,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * the keys of fields that are part of the billing address
 	 *
-	 * @var array
+	 * @var string[]
 	 */
 	protected $fieldsInBillingAddress = array(
 		'gender',
@@ -198,8 +198,10 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	public function getEvent() {
 		/** @var $eventMapper tx_seminars_Mapper_Event */
 		$eventMapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		/** @var tx_seminars_Model_Event $event */
+		$event = $eventMapper->find($this->getSeminar()->getUid());
 
-		return $eventMapper->find($this->getSeminar()->getUid());
+		return $event;
 	}
 
 	/**
@@ -373,20 +375,22 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 
 		/** @var $userGroupMapper tx_seminars_Mapper_FrontEndUserGroup */
 		$userGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup');
-		/** @var $userGroups Tx_Oelib_List */
+		/** @var  Tx_Oelib_List $userGroups */
 		$userGroups = t3lib_div::makeInstance('Tx_Oelib_List');
 		$userGroupUids = t3lib_div::intExplode(
 			',', $this->getConfValueString('userGroupUidsForAdditionalAttendeesFrontEndUsers', 's_registration'), TRUE
 		);
 		foreach ($userGroupUids as $uid) {
-			$userGroups->add($userGroupMapper->find($uid));
+			/** @var tx_seminars_Model_FrontEndUserGroup $userGroup */
+			$userGroup = $userGroupMapper->find($uid);
+			$userGroups->add($userGroup);
 		}
 
 		/** @var $additionalPersons Tx_Oelib_List */
 		$additionalPersons = $registration->getAdditionalPersons();
 		/** @var $personData array */
 		foreach ($allPersonsData as $personData) {
-			/** @var $user tx_seminars_Model_FrontEndUser */
+			/** @var tx_seminars_Model_FrontEndUser $user */
 			$user = t3lib_div::makeInstance('tx_seminars_Model_FrontEndUser');
 			$user->setPageUid($pageUid);
 			$user->setPassword(t3lib_div::getRandomHexString(8));
@@ -420,7 +424,9 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 			$additionalPersons->add($user);
 		}
 
-		tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->save($registration);
+		/** @var tx_seminars_Mapper_Registration $registrationMapper */
+		$registrationMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration');
+		$registrationMapper->save($registration);
 	}
 
 	/**
@@ -746,9 +752,9 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * Provides data items for the list of available payment methods.
 	 *
-	 * @param array $items array that contains any pre-filled data (may be empty, unused)
+	 * @param array[] $items array that contains any pre-filled data (may be empty, unused)
 	 *
-	 * @return array items from the payment methods table as an array
+	 * @return array[] items from the payment methods table as an array
 	 *               with the keys "caption" (for the title) and "value" (for the uid)
 	 */
 	public function populateListPaymentMethods(array $items) {
@@ -1053,11 +1059,11 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Takes the selected options for a list of options and displays it
 	 * nicely using their captions, separated by a carriage return (ASCII 13).
 	 *
-	 * @param array $availableOptions
+	 * @param array[] $availableOptions
 	 *        all available options for this form element as a nested array, the outer array having the UIDs of the options as
 	 *        keys, the inner array having the keys "caption" (for the visible captions) and "value" (the UID again), may be empty,
 	 *        must not be NULL
-	 * @param array $selectedOptions
+	 * @param int[] $selectedOptions
 	 *        the selected options with the array values being the UIDs of the corresponding options, may be empty or even NULL
 	 *
 	 * @return string the captions of the selected options, separated by CR
@@ -1181,12 +1187,13 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * Provides a localized list of country names from static_tables.
 	 *
-	 * @return array a list of localized country names from static_tables as an
+	 * @return array[] localized country names from static_tables as an
 	 *               array with the keys "caption" (for the title) and "value"
 	 *               (in this case, the same as the caption)
 	 */
 	public function populateListCountries() {
 		$this->initStaticInfo();
+		/** @var string[] $allCountries */
 		$allCountries = $this->staticInfo->initCountries('ALL', '', TRUE);
 
 		$result = array();
@@ -1234,7 +1241,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * Provides data items for the list of option checkboxes for this event.
 	 *
-	 * @return array items from the checkboxes table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 * @return array[] items from the checkboxes table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 */
 	public function populateCheckboxes() {
 		$result = array();
@@ -1250,8 +1257,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * Checks whether our current event has any option checkboxes AND the
 	 * checkboxes should be displayed at all.
 	 *
-	 * @return bool TRUE if we have a non-empty list of checkboxes AND this
-	 *                 list should be displayed, FALSE otherwise
+	 * @return bool TRUE if we have a non-empty list of checkboxes AND this list should be displayed, FALSE otherwise
 	 */
 	public function hasCheckboxes() {
 		return $this->getSeminar()->hasCheckboxes() && $this->hasRegistrationFormField(array('elementname' => 'checkboxes'));
@@ -1260,8 +1266,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * Provides data items for the list of lodging options for this event.
 	 *
-	 * @return array items from the lodgings table as an array with the keys
-	 *               "caption" (for the title) and "value" (for the uid)
+	 * @return array[] items from the lodgings table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 */
 	public function populateLodgings() {
 		$result = array();
@@ -1299,7 +1304,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * Provides data items for the list of food options for this event.
 	 *
-	 * @return array items from the foods table as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 * @return array[] items from the foods table as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 */
 	public function populateFoods() {
 		$result = array();
@@ -1337,7 +1342,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	/**
 	 * Provides data items for the prices for this event.
 	 *
-	 * @return array available prices as an array with the keys "caption" (for the title) and "value" (for the uid)
+	 * @return array[] available prices as an array with the keys "caption" (for the title) and "value" (for the uid)
 	 */
 	public function populatePrices() {
 		return $this->getSeminar()->getAvailablePrices();

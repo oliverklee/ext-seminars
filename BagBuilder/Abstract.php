@@ -43,8 +43,7 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	protected $tableName = '';
 
 	/**
-	 * @var array associative array with the WHERE clause parts (will be
-	 *            concatenated with " AND " later)
+	 * @var string[] associative array with the WHERE clause parts (will be concatenated with " AND " later)
 	 */
 	protected $whereClauseParts = array();
 
@@ -65,7 +64,7 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	protected $limit = '';
 
 	/**
-	 * @var array array of additional table names for the query
+	 * @var string[] additional table names for the query
 	 */
 	protected $additionalTableNames = array();
 
@@ -94,7 +93,8 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	 * @return tx_seminars_Bag_Abstract customized, newly-created bag
 	 */
 	public function build() {
-		return t3lib_div::makeInstance(
+		/** @var tx_seminars_Bag_Abstract $bag */
+		$bag = t3lib_div::makeInstance(
 			$this->bagClassName,
 			$this->getWhereClause(),
 			implode(',', $this->additionalTableNames),
@@ -104,6 +104,7 @@ abstract class tx_seminars_BagBuilder_Abstract {
 			($this->showHiddenRecords ? 1 : -1),
 			$this->ignoreTimingOfRecords
 		);
+		return $bag;
 	}
 
 	/**

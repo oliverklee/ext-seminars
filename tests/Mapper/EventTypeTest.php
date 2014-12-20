@@ -73,9 +73,11 @@ class tx_seminars_Mapper_EventTypeTest extends tx_phpunit_testcase {
 			'tx_seminars_event_types', array('title' => 'Workshop')
 		);
 
+		/** @var tx_seminars_Model_EventType $model */
+		$model = $this->fixture->find($uid);
 		$this->assertEquals(
 			'Workshop',
-			$this->fixture->find($uid)->getTitle()
+			$model->getTitle()
 		);
 	}
 }

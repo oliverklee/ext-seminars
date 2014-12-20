@@ -384,6 +384,7 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	public function getUids() {
 		$uids = array();
 
+		/** @var tx_seminars_OldModel_Abstract $currentItem */
 		foreach ($this as $currentItem) {
 			$uids[] = $currentItem->getUid();
 		}

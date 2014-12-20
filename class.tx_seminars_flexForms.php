@@ -33,7 +33,7 @@
  */
 class tx_seminars_flexForms {
 	/**
-	 * @var language the back-end language object
+	 * @var language
 	 */
 	private $language = NULL;
 
@@ -58,10 +58,9 @@ class tx_seminars_flexForms {
 	 * "showFeUserFieldsInRegistrationsList" with the selectable database
 	 * columns.
 	 *
-	 * @param array $configuration the flex forms configuration
+	 * @param array[] $configuration the flex forms configuration
 	 *
-	 * @return array the modified flex forms configuration including the
-	 *               selectable database columns
+	 * @return array[] the modified flex forms configuration including the selectable database columns
 	 */
 	public function getShowFeUserFieldsInRegistrationsList(array $configuration) {
 		foreach ($this->getColumnsOfTable('fe_users') as $column) {
@@ -82,10 +81,9 @@ class tx_seminars_flexForms {
 	 * "showRegistrationFieldsInRegistrationList" with the selectable database
 	 * columns.
 	 *
-	 * @param array $configuration the flex forms configuration
+	 * @param array[] $configuration the flex forms configuration
 	 *
-	 * @return array the modified flex forms configuration including the
-	 *               selectable database columns
+	 * @return array[] the modified flex forms configuration including the selectable database columns
 	 */
 	public function getShowRegistrationFieldsInRegistrationList(array $configuration) {
 		foreach ($this->getColumnsOfTable('tx_seminars_attendances') as $column) {
@@ -109,7 +107,7 @@ class tx_seminars_flexForms {
 	 *
 	 * @param string $tableName the table name to get the columns for, must not be empty
 	 *
-	 * @return array the column names of the given table name, may not be empty
+	 * @return string[] the column names of the given table name, may not be empty
 	 */
 	private function getColumnsOfTable($tableName) {
 		if ($tableName == '') {
@@ -132,10 +130,9 @@ class tx_seminars_flexForms {
 	 *   table which has a title column
 	 * - "row" must have an item "pid" with the current page ID
 	 *
-	 * @param array $configuration the flexforms configuration
+	 * @param array[] $configuration the flexforms configuration
 	 *
-	 * @return array the modified flexforms configuration including the items
-	 *               available for selection
+	 * @return array[] the modified flexforms configuration including the items available for selection
 	 */
 	public function getEntriesFromGeneralStoragePage(array $configuration) {
 		$whereClause = '1 = 1';

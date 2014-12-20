@@ -8531,7 +8531,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Data provider for testing the canViewRegistrationsList function
 	 * with default access and access only for attendees and managers.
 	 *
-	 * @return array test data for canViewRegistrationsList with each row
+	 * @return array[] test data for canViewRegistrationsList with each row
 	 *               having the following elements:
 	 *               [expected] boolean: expected value (TRUE or FALSE)
 	 *               [loggedIn] boolean: whether a user is logged in
@@ -8774,7 +8774,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Data provider for the canViewRegistrationsForCsvExportListDataProvider
 	 * test.
 	 *
-	 * @return array test data for canViewRegistrationsList with each row
+	 * @return array[] test data for canViewRegistrationsList with each row
 	 *               having the following elements:
 	 *               [expected] boolean: expected value (TRUE or FALSE)
 	 *               [loggedIn] boolean: whether a user is logged in
@@ -8852,7 +8852,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Data provider for testing the canViewRegistrationsList function
 	 * with login access.
 	 *
-	 * @return array test data for canViewRegistrationsList with each row
+	 * @return array[] test data for canViewRegistrationsList with each row
 	 *               having the following elements:
 	 *               [expected] boolean: expected value (TRUE or FALSE)
 	 *               [loggedIn] boolean: whether a user is logged in
@@ -9057,7 +9057,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Data provider for testing the canViewRegistrationsList function
 	 * with world access.
 	 *
-	 * @return array test data for canViewRegistrationsList with each row
+	 * @return array[] test data for canViewRegistrationsList with each row
 	 *               having the following elements:
 	 *               [expected] boolean: expected value (TRUE or FALSE)
 	 *               [loggedIn] boolean: whether a user is logged in
@@ -9329,7 +9329,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Data provider that returns all possible access level codes for the
 	 * FE registration lists.
 	 *
-	 * @return array the possible access levels, will not be empty
+	 * @return array[] the possible access levels, will not be empty
 	 *
 	 * @see canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage
 	 */
@@ -9369,7 +9369,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Data provider that returns all possible parameter combinations for
 	 * canViewRegistrationsList as called from canViewRegistrationsListMessage.
 	 *
-	 * @return array the possible parameter combinations, will not be empty
+	 * @return array[] the possible parameter combinations, will not be empty
 	 *
 	 * @see canViewRegistrationsListMessageWithLoginRoutesParameters
 	 */
@@ -9499,7 +9499,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	/**
 	 * Data provider for hasAnyPriceWithDataProvider.
 	 *
-	 * @return array two-dimensional array with the following inner keys:
+	 * @return array[] two-dimensional array with the following inner keys:
 	 *               [expectedHasAnyPrice] the expected return value of hasAnyPrice
 	 *               [hasPriceRegular] the return value of that function
 	 *               [hasPriceSpecial] the return value of that function
