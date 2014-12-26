@@ -58,6 +58,14 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 	private $eventId = 0;
 
 	protected function setUp() {
+		$pluginConfiguration = new Tx_Oelib_Configuration();
+		$pluginConfiguration->setAsString('dateFormatYMD', '%d.%m.%Y');
+		$configurationRegistry = Tx_Oelib_ConfigurationRegistry::getInstance();
+		$configurationRegistry->set('plugin.tx_seminars', $pluginConfiguration);
+		$configurationRegistry->set('config', new Tx_Oelib_Configuration());
+		$configurationRegistry->set('page.config', new Tx_Oelib_Configuration());
+		$configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new Tx_Oelib_Configuration());
+
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
 
 		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');

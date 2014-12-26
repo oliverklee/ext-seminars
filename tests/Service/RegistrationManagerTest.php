@@ -106,10 +106,10 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		tx_oelib_configurationProxy::getInstance('seminars')
 			->setAsInteger('eMailFormatForAttendees', tx_seminars_registrationmanager::SEND_TEXT_MAIL);
 		$configurationRegistry = tx_oelib_ConfigurationRegistry::getInstance();
-		$configurationRegistry->set('plugin.tx_seminars', new tx_oelib_Configuration());
-		$configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.de', new tx_oelib_Configuration());
-		$configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new tx_oelib_Configuration());
-		$configurationRegistry->set('config', new tx_oelib_Configuration());
+		$configurationRegistry->set('plugin.tx_seminars', new Tx_Oelib_Configuration());
+		$configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new Tx_Oelib_Configuration());
+		$configurationRegistry->set('config', new Tx_Oelib_Configuration());
+		$configurationRegistry->set('page.config', new Tx_Oelib_Configuration());
 
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',

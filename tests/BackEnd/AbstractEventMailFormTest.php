@@ -64,6 +64,9 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	protected $mailer = NULL;
 
 	protected function setUp() {
+		$configuration = new Tx_Oelib_Configuration();
+		Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+
 		$this->languageBackup = $GLOBALS['LANG']->lang;
 		$GLOBALS['LANG']->lang = 'default';
 
@@ -104,9 +107,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 			'organizers'
 		);
 
-		$this->fixture = new tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm(
-			$this->eventUid
-		);
+		$this->fixture = new tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm($this->eventUid);
 		$this->fixture->setDateFormat();
 	}
 
