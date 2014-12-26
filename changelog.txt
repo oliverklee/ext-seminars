@@ -1,4 +1,5 @@
 0.10.0 (currently working on)
+- [#5209] Cleanup: Use makeInstance in the unit tests only for singletons
 - [#5207] Cleanup: Drop unnecessary CDATA
 - [#4320] Cleanup: Add @var type hinting to help static analysis
 - [#5206] Cleanup: Drop the unset from tearDown()

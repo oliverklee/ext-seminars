@@ -463,7 +463,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	 */
 	public function populateListCountriesWithLanguageSetToDefaultNotContainsEnglishCountryNameForGermany() {
 		$backUpLanguage = $GLOBALS['LANG'];
-		$GLOBALS['LANG'] = t3lib_div::makeInstance('language');
+		$GLOBALS['LANG'] = new language();
 		$GLOBALS['LANG']->init('default');
 
 		$this->assertNotContains(

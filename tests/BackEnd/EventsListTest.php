@@ -79,8 +79,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			'doktype' => tx_seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
 		));
 
-		/** @var bigDoc $document */
-		$document = t3lib_div::makeInstance('bigDoc');
+		$document = new bigDoc();
 		$this->backEndModule->doc = $document;
 		$document->backPath = $GLOBALS['BACK_PATH'];
 		$document->docType = 'xhtml_strict';
