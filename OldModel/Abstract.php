@@ -164,7 +164,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * @return bool TRUE if the object has been initialized, FALSE otherwise
 	 */
 	public function isOk() {
-		return (!empty($this->recordData) && ($this->tableName !== ''));
+		return !empty($this->recordData) && ($this->tableName !== '');
 	}
 
 	/**

@@ -480,7 +480,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                 for the current event
 	 */
 	public function hasCountry() {
-		return $this->hasPlace() && !empty($this->getPlacesWithCountry());
+		$placesWithCountry = $this->getPlacesWithCountry();
+		return $this->hasPlace() && !empty($placesWithCountry);
 	}
 
 	/**

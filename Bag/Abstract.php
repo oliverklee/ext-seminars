@@ -139,8 +139,7 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	) {
 		$this->dbTableName = $dbTableName;
 		$this->queryParameters = trim($queryParameters);
-		$this->additionalTableNames = (!empty($additionalTableNames))
-			? ', ' . $additionalTableNames : '';
+		$this->additionalTableNames = !empty($additionalTableNames) ? ', ' . $additionalTableNames : '';
 		$this->createEnabledFieldsQuery(
 			$showHiddenRecords, $ignoreTimingOfRecords
 		);
