@@ -40,7 +40,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'typo3' => '4.5.0-6.2.99',
 			'cms' => '',
 			'css_styled_content' => '',
-			'oelib' => '0.7.78-',
+			'oelib' => '0.8.0-1.0.99',
 			'ameos_formidable' => '1.1.563-1.9.99',
 			'static_info_tables' => '2.1.0-6.1.99',
 		),
