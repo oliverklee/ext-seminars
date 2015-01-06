@@ -417,10 +417,10 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * @return void
 	 */
 	private function sendEmailToAttendees() {
-		/** @var tx_seminars_Mapper_Organizer $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer');
+		/** @var tx_seminars_Mapper_Organizer $organizerMapper */
+		$organizerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer');
 		/** @var tx_seminars_Model_Organizer $organizer */
-		$organizer = $mapper->find((int)$this->getPostData('sender'));
+		$organizer = $organizerMapper->find((int)$this->getPostData('sender'));
 
 		/** @var tx_seminars_BagBuilder_Registration $registrationBagBuilder */
 		$registrationBagBuilder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Registration');
@@ -432,12 +432,12 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
 			$mailer = $mailerFactory->getMailer();
 
-			/** @var tx_seminars_Mapper_Registration $mapper */
-			$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration');
+			/** @var tx_seminars_Mapper_Registration $registrationMapper */
+			$registrationMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration');
 			/** @var tx_seminars_registration $oldRegistration */
 			foreach ($registrations as $oldRegistration) {
 				/** @var tx_seminars_Model_Registration $registration */
-				$registration = $mapper->find($oldRegistration->getUid());
+				$registration = $registrationMapper->find($oldRegistration->getUid());
 				$user = $registration->getFrontEndUser();
 				if (($user === NULL) || !$user->hasEMailAddress()) {
 					continue;

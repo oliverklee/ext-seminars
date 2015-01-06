@@ -37,14 +37,6 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	protected $tableName = 'tx_seminars_timeslots';
 
 	/**
-	 * the class name of the mapper responsible for creating the new model
-	 * that corresponds to this old model
-	 *
-	 * @var string
-	 */
-	protected $mapperName = 'tx_seminars_Mapper_TimeSlot';
-
-	/**
 	 * Creates and returns a speakerbag object.
 	 *
 	 * @return tx_seminars_Bag_Speaker a speakerbag object

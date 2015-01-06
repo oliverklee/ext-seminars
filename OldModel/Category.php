@@ -37,14 +37,6 @@ class tx_seminars_OldModel_Category extends tx_seminars_OldModel_Abstract {
 	protected $tableName = 'tx_seminars_categories';
 
 	/**
-	 * the class name of the mapper responsible for creating the new model
-	 * that corresponds to this old model
-	 *
-	 * @var string
-	 */
-	protected $mapperName = 'tx_seminars_Mapper_Category';
-
-	/**
 	 * Returns the icon of this category.
 	 *
 	 * @return string the file name of the icon (relative to the extension

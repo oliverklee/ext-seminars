@@ -59,14 +59,6 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	protected $tableName = '';
 
 	/**
-	 * the class name of the mapper responsible for creating the new model
-	 * that corresponds to this old model
-	 *
-	 * @var string
-	 */
-	protected $mapperName = '';
-
-	/**
 	 * @var array the values from/for the DB
 	 */
 	protected $recordData = array();
@@ -150,10 +142,6 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 		if (!empty($this->tableName) && !empty($dbResultRow)) {
 			$this->recordData = $dbResultRow;
 			$this->isInDb = TRUE;
-
-			if ($this->mapperName != '') {
-				tx_oelib_MapperRegistry::get($this->mapperName)->getModel($this->recordData);
-			}
 		}
 	}
 

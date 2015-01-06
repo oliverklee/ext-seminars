@@ -53,14 +53,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	protected $tableName = 'tx_seminars_seminars';
 
 	/**
-	 * the class name of the mapper responsible for creating the new model
-	 * that corresponds to this old model
-	 *
-	 * @var string
-	 */
-	protected $mapperName = 'tx_seminars_Mapper_Event';
-
-	/**
 	 * the number of all attendances
 	 *
 	 * @var int
