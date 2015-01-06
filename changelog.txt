@@ -1,298 +1,309 @@
 0.10.0 (currently working on)
-- [#5221] Change: Require oelib 0.8.0
-- [#5214] Fix: Crash in BE events list in PHP 5.4
-- [#4343] Fix: Some unit tests read the real TS setup
-- [#5209] Cleanup: Use makeInstance in the unit tests only for singletons
-- [#5207] Cleanup: Drop unnecessary CDATA
-- [#4320] Cleanup: Add @var type hinting to help static analysis
-- [#5206] Cleanup: Drop the unset from tearDown()
-- [#5198] Cleanup: Make setUp and tearDown protected
-- [#4319} Fix: Change != to <> in SQL
-- [#5203] Cleanup: Shorten the boolean casts
-- [#5201] Cleanup: Convert intval/float to casts
-- [#5200] Cleanup: boolean -> bool, integer -> int
-- [#5088] Cleanup: Shorten the die() line
-- [#4943] Cleanup: Add missing @throws annotations
-- [#5199] Cleanup: Use $GLOBALS['TCA'] instead of $TCA
-- [#5197] Cleanup: Use comments instead of PHPDoc style comments in copyright block
-- [#5178] Fix: Use time() instead of mktime()
-- [#5176] Change: Update maximum PHP version to 5.6
-- [#5163] Fix: Make the insert record shortcut TS compatible with 6.2
-- [#5174] Fix: Avoid feInterface deprecation warnings in 6.2
-- [#5085] Fix: Allow first_name and last_name in the registration form
-- [#5086] Fix: Old reference to locallang.php in flexform configuration
-- [#5098] Feature: Switch seminars to SwiftMailer
-- [#4114] Fix: Use the Core form tokens in the BE modules
-- [#5072] Change: Switch the BE module to the module dispatcher
-- [#5071] Fix: Drop any reference to static_info_tables_taxes
-- [#4836] Fix: Add compatibility with static_info_tables 2.3.x-6.0.x
-- [#5070] Fix: Test failure if sr_feuser_register is not installed
-- [#5062] Fix: Test crash in tx_seminars_OldModel_EventTest in 6.2
-- [#5061] Fix: Test error in tx_seminars_FrontEnd_DefaultControllerTest in 6.2
-- [#4649] Fix: Also recognize first/last name for current TYPO3 versions
-- [#5024] Fix: Test errors in tx_seminars_OldModel_RegistrationTest in TYPO3 CMS 6.1
-- [#5023] Fix: Test failures in tx_seminars_FrontEnd_EventEditorTest in TYPO3 CMS 6.1
-- [#5026] Fix: Deprecation messages about the flash message API in TYPO3 CMS 6.1
-- [#5022] Fix: Test errors in tx_seminars_FrontEnd_RequirementsListTest with TYPO3 CMS 6.1
-- [#4709] Fix: Crash on the registration page with static_info_tables 6.0.4 under TYPO3 6.0.6
-- [#5021] Fix: Test error in tx_seminars_BackEnd_GeneralEventMailFormTest in TYPO3 CMS 6.1
-- [#5020] Fix: Error message: The extension CSS Styled Content is not loaded
-- [#5016] Fix: Stop including template.php in pi2
-- [#5008] Fix: Call loadTCA only for TYPO3 CMS < 6.1
-- [#4572] Fix: Add .htaccess to all folders with private resources
-- [#4648] Fix: Drop early __destruct calls
-- [#4879] Fix: Use t3lib_div::makeInstance instead of ObjectFactory::make
-- [#5003] Fix: Make sure the FORMidable configuration always is an array
-- [#4998] Cleanup: Use type[] instead of array<type>
-- [#4986] Fix: Getter for billing address phone uses the wrong field name
-- [#4985] Fix: Add the additional attendees before sending the e-mails
-- [#4983] Feature: Add a hook point that would allow a HTML subpart to the notification e-mail
-- [#4961] Feature: Use separate FE user data labels in the notification e-mail
-- [#4958] Feature: Add wrappers around the billing address fields on the confirmation page
-- [#4957] Feature: Add wrappers for the FE user data on the first registration page
-- [#4940] Fix: Label for fe_user.telephone missing in the CSV export
-- [#4941] Feature: Add a CSV label for attendances.crdate
-- [#4952] Feature: Add "sep" marker to the CSV
-- [#4950] Feature: Add the interests to the thank-you e-mail
-- [#4946] Cleanup: Add and use seminar::getFirstOrganizer
-- [#4948] Fix: Drop the colon after the labels on the confirmation page
-- [#4947] Fix: Foods and lodgings are missing on the confirmation page
-- [#4929] Feature: Add the fields "food" and "accommodation" to the thank-you e-mail
-- [#4938] Change: Use labels for all billing address fields on the confirmation page
-- [#4924] Feature: Make the sort order of the registration items on the confirmnation page changeable
-- [#4923] Feature: Make the labels on the confirmation page changeable
-- [#4889] Feature: Make the CSV classes extensible
-- [#4863] Cleanup: Clean up the CSV class
-- [#4648] Cleanup: Drop some early __destruct calls
-- [#4935] Fix: Drop the colon after the payment method in the e-mail to the attendee
-- [#4300] Feature: Make the FE user data in the registration form configurable (thanks to Philipp Kitzberger)
-- [#4928] Feature: Allow adding arbitrary FE user fields into the notification e-mail to the organizer
-- [#4896] Feature: Add a test for new attendance fields in the e-mail to the organizer
-- [#4888] Feature: Add a hook for modifying the thank-you e-mail texts
-- [#4886] Feature: Add a hook for saving additional fields in the registration form
-- [#4919] Feature: Make the fields on the confirmation page extensible
-- [#4909] Cleanup: Drop the constant for the type number for the publication plugin
-- [#4908] Cleanup: Drop plugin.tx_seminars.allowAccessToCsv
-- [#4907] Cleanup: Make OldModel_Abstract::recordExists static
-- [#4878] Fix: tx_seminars_Interface_Hook_Registration is missing in ext_autoload.php
-- [#4872] Feature: Make RegistrationForm.getSeminar public and add .getEvent
-- [#4852] Feature: Add a hook for notifying the administrator after a user has registered
-- [#4220] Change: Change tx_seminars_pi1_registrationEditor::getSeminar from private to protected
-- [#4166] Feature: Create additional registered persons as FE user records
-- [#3866] Fix: Path to changed registration form HTML template not used
-- [#4364] Change: Drop the accreditation number from the registration form heading
-- [#4512] Fix: HTML entities of field ###attached_files### are displayed only as plain text
-- [#4761] Fix: Speaker sorting should obey backend order
-- [#3571] Feature: Add listrow-even and listrow-odd for the list view (thanks to Dimitri König)
-- [#4610] Fix: PHP/Apache crash/SIGSEV when running the unit tests on PHP 5.4
-- [#4844] Fix: Crash in the single view and on the registration page on PHP 5.4.22
-- [#4817] Change: Drop the new prices
-- [#4850] Fix: Test failures in DefaultControllerTest
-- [#4849] Fix: Unit test errors about missing constructor parameters
-- [#4362] Fix: Skip the configuration check in the unit tests
-- [#4361] Fix: Hide the time slot records in the BE lists
-- [#4846] Fix: Crash in tx_seminars_ViewHelper_CommaSeparatedTitlesTest
-- [#4818] Change: Drop the ExtJS back-end module
-- [#4843] Cleanup: Drop the todo.txt file
-- [#4833] Cleanup: Remove the closing PHP tags
-- [#4661] Change: Sort speakers, places, organizers, etc. by title in the backend
-- [#4653] Fix: Crash in BE in TYPO3 CMS 6.0.x
-- [#4625] Cleanup: Fix all instances of "Underscores are not allowed in method names"
-- [#4645] Fix: Crash when running the RegistrationManager unit tests in PHP 5.4.6
-- [#4622] Fix: Unit test crash in the DefaultControllerTest PHP 5.4.6
-- [#4631] Cleanup: Drop useless class comments
-- [#4630] Cleanup: Update the copyright to 2013
-- [#4623] Cleanup: Fix all instances of "Missing @return tag in function comment"
-- [#4621] Fix: Event list crashes with PHP 5.4.6
-- [#4603] Fix: Download CSV file is empty, thanks to Ton Tersteeg
-- [#4504] Fix: Fix the function comment for registrationmanager::getLinkToRegistrationOrLoginPage and add a unit test
-- [#4483] Fix: Dash gets escaped twice in the time-slot list in the single view
-- [#4497] Change: Adapt the German label for the submit button to § 312g Abs. 3 BGB
-- [#4485] Fix: Add TYPO3 maximum version to ext_emconf.php
-- [#4481] Fix: Failing unit tests in tx_seminars_Mapper_EventTest and tx_seminars_Service_EMailSalutationTest
-- [#4462] Fix: HTML tags are visible in the forms when using ameos_formidable 1.1.549
-- [#4471] Fix: Double escape of date in "other dates" table in single view
-- [#4467] Fix: Test failures and crashes in current Core master in tx_seminars_FrontEnd_DefaultControllerTest, tx_seminars_OldModel_RegistrationTest, tx_seminars_Service_RegistrationManagerTest
-- [#4371] Fix: Empty labels in the FE editor and the registration form need be just a space instead of &nbsp;
-- [#4464] Fix: CSV export links lead to 404 error
-- [#4443] Cleanup: Use UTF-8 by default
-- [#4366] Fix: Tab headings and all other labels are missing with the current TYPO3 master (4.7)
-- [#4465] Fix: Fix JavaScript code inspection warnings
-- [#3451] Cleanup: Use TYPO3's autoloader instead of oelib's autoloader
-- [#4278] Cleanup: Update the copyright to 2012
-- [#4452] Cleanup: Stop using the DATABASE_QUERY_ERROR and DATABASE_RESULT_ERROR constants
-- [#4352] Change: Require PHP 5.3
-- [#4440] Fix: In pi2, only use forceCharset for TYPO3 < 4.7
-- [#4140] Change: Require TYPO3 4.5
-- [#4437] Fix: Test failures in the DefaultController tests when the test are run on a typo3.local host
-- [#4429] Fix: Escape the output in more places
-- [#4427] Feature: Create a comma-separated titles view helper
-- [#4426] Feature: Create a time range view helper
-- [#4428] Fix: Test failure in tx_seminars_EmailSalutation_testcase with latest oelib
-- [#4333] Change: Use the new models in the countdown
-- [#4425] Fix: EventHeadline needs to unset $this->mapper in __destruct
-- [#4424] Fix: Make the seminars columns searchable in TYPO3 4.6
-- [#3815] Fix: Throw more meaningful Exceptions
-- [#4335] Change: Use the new models in the event headline
-- [#4419] Feature: Add a view helper for rendering the date of an event
-- [#4316] Fix: TCA: Fields with displayCond depend on inverted needs_registration (thanks to Philipp Kitzberger)
-- [#4270] Cleanup: Add the parameter name to all @param
-- [#4347] Fix: Fix missing/incorrect @return and return values
-- [#4296] Fix: Fix all deprecation log warnings and version-specific unit test failures when running the unit tests on the current Core master
-- [#3987] Change: Require TYPO3 4.4
-- [#4326] Cleanup: Remove the Zend Studio metadata from all projects
-- [#4189] Fix: Replace double quotes in subject-field of cancel/confirm-form
-- [#3905] Fix: Exception in the FE editor the first time after clearing the cache
-- [#4294] Fix: Adapt all version number checks for 4.6
-- [#4286] Fix: pi1_eventEditor accesses a private variable isTestMode instead of calling the function
-- [#4280] Cleanup: Make true, false and null uppercase
-- [#4269] Cleanup: Convert the XCLASS code to use $GLOBALS
-- [#4177] Cleanup: Update the copyright to 2011
-- [#4268] Cleanup: Drop the XCLASS code from abstract classes
-- [#4233] Fix: The default value for price_regular_early is missing a decimal (thanks to Eric Chavaillaz)
-- [#3988] Fix: Field in the registration TCE forms has no label
-- [#3951] Feature: Add a hook for sending the confirmation e-mail (from the BE module)
-- [#4210] Feature: Modernize the modifySingleView hook
-- [#4104] Feature: Add a hook for modifying the time frame list rows in the single view
-- [#4199] Feature: Add a separate flavor for the single view
-- [#4198] Fix: The registrationManager cannot be XCLASSed
-- [#3873] Feature: Modernize the modifyListView hook
-- [#4191] Feature: Add EventModel::getRawTitle
-- [#4045] Fix: Always use the display title of events
-- [#4042] Fix: Table headings in mod2 are invisible (white on white) in TYPO3 4.4
-- [#4170] Fix: tx_seminars_seminar::getOrganizerBag needs to sort the organizers by the relation sorting
-- [#4169] Fix: Drop unused code and some unused variables
-- [#4152] Feature: In the "my events" list, also list the events to which the logged-in FE user is an additional attendee
-- [#4165] Cleanup: Change BagBuilder_Registration::limitToAttendee to expect an FE user model
-- [#4159] Fix: In the notification e-mail to the organizers, add a LF before the field data if the field data contains a LF or CR
-- [#4151] Feature: Display the e-mail address and position of the FE user on the second registration page
-- [#4150] Feature: Add two fields "e-mail" and "position" for additional attendees
-- [#4149] Feature: Add some configuration to TS Setup and the flexforms
-- [#4144] Fix: Test crash and SQL error in the pi2 test
-- [#4132] Cleanup: Use the time constants from tx_oelib_Time
-- [#4130] Fix: Set the numeric locale in our CLI scripts
-- [#4125] Fix: Check all class_exists for the correct use of the autoload flag
-- [#4024] Fix: Test failure: tx_seminars_Mapper_EventTest::getOrganizersWithOneOrganizerReturnsOneOrganizer
-- [#4047] Cleanup: Rename all test classes from *_testcase to *Test
-- [#3889] Change: Disable the CSV export button in the events menu if there are no registrations for that event
-- [#4116] Change: Drop the option for the manual sorting of event records in the BE
-- [#3901] Change: The AJAX module needs to check the BE user rights
-- [#4115] Change: Cache the locallang labels in a JavaScript file
-- [#3917] Change: Use the PID from the BE user groups when creating new records
-- [#3892] Fix: Table headings for registrations, speakers and organizers are incorrect
-- [#4094] Fix: Use empty configurations in the unit tests
-- [#4008] Change: Use the single view link builder class in the FE and BE
-- [#4005] Feature: Add a single view link builder class
-- [#4006] Feature: Add getters for the single view page to the category and event type model
-- [#4009] Change: The OldModels should provide the Mapper with the data to reduce double DB requests
-- [#4007] Change: Provide the new event model in places where single view links get created
-- [#4002] Feature: Add a method "find by begin date" to the event mapper
-- [#4004] Feature: Use the default organizers in the FE editor
-- [#4003] Feature: Add a getter for the default organizer
-- [#4001] Feature: Add some fields
-- [#3995] Change: Add a conflict with the "sourceopt" extension, thanks to Philipp Gampe
-- [#3992] Change: Increase the size of the hideFields and hideColumns fields in the flexforms
-- [#3931] Fix: Prices greater 9999.999 are not possible, thanks to Philipp Gampe
-- [#3909] Feature: Allow paging for the grids
-- [#3955] Change: Add icon to the print button
-- [#3985] Change: Move the print button to the top toolbar
-- [#3982] Fix: Text overlaps canceled/confirmed icons in grid
-- [#3885] Feature: Save the current active tab in the BE user settings BE_USER->uc
-- [#3971] Feature: Display flash messages in the ExtJS BE module
-- [#3943] Feature: Add a general e-mail form to the BE module
-- [#3979] Cleanup: Move the icons from icons/ to Resources/Public/Icons
-- [#3967] Cleanup: Drop SEMINARS_UPLOAD_PATH and tx_seminars_constants.php
-- [#3933] Feature: Display flash messages after an e-mail has been sent and an event has been confirmed or canceled
-- [#3974] Cleanup: Remove getter and setter for the owner in the old organizer and category models
-- [#3970] Cleanup: Move pi1/locallang.xml to Resources/Private/Language/FrontEnd/locallang.xml
-- [#3969] Cleanup: Move front-end JavaScript and CSS to the Resources folder
-- [#3950] Feature: Add a hook for sending the thank-you e-mail
-- [#3966] Change: Remove the partner integration for now
-- [#3915] Cleanup: Drop the SEMINARS_TABLE_SEMINARS_* and SEMINARS_RECORD_TYPE_* constants
-- [#3928] Cleanup: Drop all require_once that are covered by an autoloader
-- [#3963] Fix: Crash in PHP 5.2 due to PHP-5.3-only array_replace
-- [#2609] Change: Use mod.php for the ExtJS BE modules
-- [#3938] Feature: Add a "print" button and a print stylesheet to the ExtJS BE module
-- [#3936] Feature: Add a "print" button and a print stylesheet to the BE module
-- [#3954] Fix: Use the default language as fallback for labels that are not available in the current BE language
-- [#3952] Fix: Events list is empty
-- [#3856] Change: Make ISO8859-15 the charset for the CSV for the CSV export and convert the data
-- [#3926] Change: Refactor tx_seminars_BackEndExtJs_Ajax with Extract Subclass
-- [#3839] Fix: Clarify the label for the organizer footer (thanks to Philipp Gampe)
-- [#3548] Feature: Use flash messages in the BE module
-- [#3930] Fix: Typo in the reference: boh -> both
-- [#3920] Fix: Crash on the second registration page
-- [#3910] Feature: Load records from the current page and its subpages in the grids
-- [#3914] Fix: Spelling, punctuation and grammar errors and inconsistencies in manual (thanks to Christian Hennecke)
-- [#3911] Change: Attached files should be combined from the topic and date record
-- [#3902] Feature: Add icons for the registration, speaker and organizer records in the grids
-- [#3904] Feature: Load the stores of the grids after the grid is rendered for the first time
-- [#3881] Feature: Add a context menu to the organizers grid
-- [#3880] Feature: Add a context menu to the speakers grid
-- [#3894] Feature: Add a context menu to the registrations grid
-- [#1879] Fix: Don't use &= or |= for booleans
-- [#3851] Fix: CSV export for events from the BE ignores event record in subfolders
-- [#3882] Feature: Respect the back-end user rights in the ExtJS back-end module
-- [#3870] Change: tx_oelib_List should use an SplObjectStorage
-- [#3895] Change: Make the BE module testable
-- [#3893] Fix: returnUrls needs to get encoded
-- [#3886] Feature: Integrate the CSV export functions
-- [#3827] Feature: Use ExtJS in the back-end module
-- [#3874] Fix: Test failures in the registration manager testcase
-- [#3872] Feature: Add a hook for modifying the "my events" list row
-- [#3877] Fix: pi1::isLoggedIn must be public
-- [#3222] Feature: Model the "additional attendees" as a 1:n relation from registrations to FE users
-- [#3849] Feature: Use separate labels for the first name and last name in the registration form
-- [#3861] Cleanup: Drop our own exception handlers in seminars
-- [#3850] Fix: Non-admin users have no "edit" icon for registrations in the BE module
-- [#3809] Fix: Salutation in thank-you e-mails is formal although informal is configured
-- [#3853] Localization: Replace "Seminar-Manager" with "Seminarmanager" in the German localizations
-- [#3852] Localization: Update the French localization, thanks to Martin Rebetez
-- [#3847] Fix: Replace newRecordLinkPosition with levelLinksPosition in the TCA
-- [#3843] Fix: Payment methods set in the FE editor do not get saved
-- [#3814] Fix: The "list of registrations" column should be hidden in the topic list
-- [#3277] Cleanup: Drop the workaround for Core bug 2178 from the seminars BE module
-- [#3743] Feature: Split the FE registration list in two lists
-- [#2842] Change: Require TYPO3 4.3 for oelib and seminars
-- [#3829] Cleanup: Refactor and unit-test pi1::hideListRegistrationsColumnIfNecessary
-- [#3434] Cleanup: Replace false/true with FALSE/TRUE
-- [#3458] Fix: Unregistration is not possible if allowRegistrationForEventsWithoutDate = 1
-- [#3830] Fix: Number of vacancies is blank in the list view and single view for unlimited vacancies
-- [#3825] Fix: ###EVENT_TYPE###: ###TITLE###" are not correctly replaced in HTML confirmation mail for attendes
-- [#3831] Fix: Topic list is empty if a category is selected in the flexforms
-- [#3820] Feature: Make it configurable which place fields in the FE editor are required
-- [#3817] Fix: Calling the deprecated t3lib_div::GPvar floods the deprecation log
-- [#3811] Feature: Filter the topic list automatically by the event types that are selected in the flexforms
-- [#3806] Feature: Include the places ZIP in the thank-you e-mail to the participants
-- [#3807] Feature: Include the places ZIP in the CSV export of events
-- [#3805] Feature: Display the places ZIP in the single view
-- [#3804] Feature: Add the places ZIP to the FE editor
-- [#3803] Feature: Add a field "ZIP" to the places
-- [#3220] Feature: On the second registration page, list the user's name at the beginning of the names list if "myself" has been checked
-- [#3543] Fix: Multiple registrations when double-clicking submit-button
-- [#3149] Fix: Search in list module ignores the the registration titles
-- [#3792] Fix: Total price not shown on registration summary page
-- [#3793] Change: The "my managed events" list should take timeframeInList into account
-- [#3784] Fix: $this->iEdition not defined in addAdministrativeData
-- [#3802] Fix: Test failures in latest TYPO3 due to changed icon paths
-- [#3766] Fix: In the events CSV file, place not formatted correctly
-- [#3778] Feature: Add some hooks for the registration and unregistration process
-- [#3780] Feature: Add a relation event->registrations
-- [#3777] Feature: Add Model_Event::getAvailablePrices
-- [#955] Change: Drop mod1
-- [#3065] Change: Use the new getters/setters when using the configuration proxy
-- [#2586] Change: Remove the conflict with date2cal once the date2cal bugs have been fixed
-- [#3735] Fix: Error 102 when saving a registration record in backend
-- [#3779] Fix: Typo in the Event Model: "Boad"
-- [#3595] Fix: Internet Explorer shows border around radio button on registration page, patch by Thomas Biesenbach
-- [#3738] Change: Require static_info_tables >= 2.1.0
-- [#3710] Change: Use self:: for static calls within the same class
-- [#3450] Change: Mention in setup.txt that the admin should not copy'n'paste the complete template into the TS template
-- [#3733] Change: Improve the full-text search performance even more
-- [#3729] Change: Provide ext_autoload for our extensions
-- [#3718] Fix: CSV file displayed in the brower or saved with php suffix, original patch by Joern Dost
-- [#3583] Change: Speed up our full-text search
-- [#3582] Change: Slim down our full-text search
+
+Features:
+- [#5098] Switch seminars to SwiftMailer
+- [#4983] Add a hook point that would allow a HTML subpart to the notification e-mail
+- [#4961] Use separate FE user data labels in the notification e-mail
+- [#4958] Add wrappers around the billing address fields on the confirmation page
+- [#4957] Add wrappers for the FE user data on the first registration page
+- [#4941] Add a CSV label for attendances.crdate
+- [#4952] Add "sep" marker to the CSV
+- [#4950] Add the interests to the thank-you e-mail
+- [#4929] Add the fields "food" and "accommodation" to the thank-you e-mail
+- [#4924] Make the sort order of the registration items on the confirmnation page changeable
+- [#4923] Make the labels on the confirmation page changeable
+- [#4889] Make the CSV classes extensible
+- [#4300] Make the FE user data in the registration form configurable (thanks to Philipp Kitzberger)
+- [#4928] Allow adding arbitrary FE user fields into the notification e-mail to the organizer
+- [#4896] Add a test for new attendance fields in the e-mail to the organizer
+- [#4888] Add a hook for modifying the thank-you e-mail texts
+- [#4886] Add a hook for saving additional fields in the registration form
+- [#4919] Make the fields on the confirmation page extensible
+- [#4872] Make RegistrationForm.getSeminar public and add .getEvent
+- [#4852] Add a hook for notifying the administrator after a user has registered
+- [#4166] Create additional registered persons as FE user records
+- [#3571] Add listrow-even and listrow-odd for the list view (thanks to Dimitri König)
+- [#4427] Create a comma-separated titles view helper
+- [#4426] Create a time range view helper
+- [#4419] Add a view helper for rendering the date of an event
+- [#3951] Add a hook for sending the confirmation e-mail (from the BE module)
+- [#4210] Modernize the modifySingleView hook
+- [#4104] Add a hook for modifying the time frame list rows in the single view
+- [#4199] Add a separate flavor for the single view
+- [#3873] Modernize the modifyListView hook
+- [#4191] Add EventModel::getRawTitle
+- [#4152] In the "my events" list, also list the events to which the logged-in FE user is an additional attendee
+- [#4151] Display the e-mail address and position of the FE user on the second registration page
+- [#4150] Add two fields "e-mail" and "position" for additional attendees
+- [#4149] Add some configuration to TS Setup and the flexforms
+- [#4005] Add a single view link builder class
+- [#4006] Add getters for the single view page to the category and event type model
+- [#4002] Add a method "find by begin date" to the event mapper
+- [#4004] Use the default organizers in the FE editor
+- [#4003] Add a getter for the default organizer
+- [#4001] Add some fields
+- [#3909] Allow paging for the grids
+- [#3885] Save the current active tab in the BE user settings BE_USER->uc
+- [#3971] Display flash messages in the ExtJS BE module
+- [#3943] Add a general e-mail form to the BE module
+- [#3933] Display flash messages after an e-mail has been sent and an event has been confirmed or canceled
+- [#3950] Add a hook for sending the thank-you e-mail
+- [#3938] Add a "print" button and a print stylesheet to the ExtJS BE module
+- [#3936] Add a "print" button and a print stylesheet to the BE module
+- [#3548] Use flash messages in the BE module
+- [#3910] Load records from the current page and its subpages in the grids
+- [#3902] Add icons for the registration, speaker and organizer records in the grids
+- [#3904] Load the stores of the grids after the grid is rendered for the first time
+- [#3881] Add a context menu to the organizers grid
+- [#3880] Add a context menu to the speakers grid
+- [#3894] Add a context menu to the registrations grid
+- [#3882] Respect the back-end user rights in the ExtJS back-end module
+- [#3886] Integrate the CSV export functions
+- [#3827] Use ExtJS in the back-end module
+- [#3872] Add a hook for modifying the "my events" list row
+- [#3222] Model the "additional attendees" as a 1:n relation from registrations to FE users
+- [#3849] Use separate labels for the first name and last name in the registration form
+- [#3743] Split the FE registration list in two lists
+- [#3820] Make it configurable which place fields in the FE editor are required
+- [#3811] Filter the topic list automatically by the event types that are selected in the flexforms
+- [#3806] Include the places ZIP in the thank-you e-mail to the participants
+- [#3807] Include the places ZIP in the CSV export of events
+- [#3805] Display the places ZIP in the single view
+- [#3804] Add the places ZIP to the FE editor
+- [#3803] Add a field "ZIP" to the places
+- [#3220] On the second registration page, list the user's name at the beginning of the names list if "myself" has been checked
+- [#3778] Add some hooks for the registration and unregistration process
+- [#3780] Add a relation event->registrations
+- [#3777] Add Model_Event::getAvailablePrices
+
+Localization:
+- [#3853] Replace "Seminar-Manager" with "Seminarmanager" in the German localizations
+- [#3852] Update the French localization, thanks to Martin Rebetez
+
+Bug fixes:
+- [#5214] Crash in BE events list in PHP 5.4
+- [#4343] Some unit tests read the real TS setup
+- [#4319} Change != to <> in SQL
+- [#5178] Use time() instead of mktime()
+- [#5163] Make the insert record shortcut TS compatible with 6.2
+- [#5174] Avoid feInterface deprecation warnings in 6.2
+- [#5085] Allow first_name and last_name in the registration form
+- [#5086] Old reference to locallang.php in flexform configuration
+- [#4114] Use the Core form tokens in the BE modules
+- [#5071] Drop any reference to static_info_tables_taxes
+- [#4836] Add compatibility with static_info_tables 2.3.x-6.0.x
+- [#5070] Test failure if sr_feuser_register is not installed
+- [#5062] Test crash in tx_seminars_OldModel_EventTest in 6.2
+- [#5061] Test error in tx_seminars_FrontEnd_DefaultControllerTest in 6.2
+- [#4649] Also recognize first/last name for current TYPO3 versions
+- [#5024] Test errors in tx_seminars_OldModel_RegistrationTest in TYPO3 CMS 6.1
+- [#5023] Test failures in tx_seminars_FrontEnd_EventEditorTest in TYPO3 CMS 6.1
+- [#5026] Deprecation messages about the flash message API in TYPO3 CMS 6.1
+- [#5022] Test errors in tx_seminars_FrontEnd_RequirementsListTest with TYPO3 CMS 6.1
+- [#4709] Crash on the registration page with static_info_tables 6.0.4 under TYPO3 6.0.6
+- [#5021] Test error in tx_seminars_BackEnd_GeneralEventMailFormTest in TYPO3 CMS 6.1
+- [#5020] Error message: The extension CSS Styled Content is not loaded
+- [#5016] Stop including template.php in pi2
+- [#5008] Call loadTCA only for TYPO3 CMS < 6.1
+- [#4572] Add .htaccess to all folders with private resources
+- [#4648] Drop early __destruct calls
+- [#4879] Use t3lib_div::makeInstance instead of ObjectFactory::make
+- [#5003] Make sure the FORMidable configuration always is an array
+- [#4986] Getter for billing address phone uses the wrong field name
+- [#4985] Add the additional attendees before sending the e-mails
+- [#4940] Label for fe_user.telephone missing in the CSV export
+- [#4948] Drop the colon after the labels on the confirmation page
+- [#4947] Foods and lodgings are missing on the confirmation page
+- [#4935] Drop the colon after the payment method in the e-mail to the attendee
+- [#4878] tx_seminars_Interface_Hook_Registration is missing in ext_autoload.php
+- [#3866] Path to changed registration form HTML template not used
+- [#4512] HTML entities of field ###attached_files### are displayed only as plain text
+- [#4761] Speaker sorting should obey backend order
+- [#4610] PHP/Apache crash/SIGSEV when running the unit tests on PHP 5.4
+- [#4844] Crash in the single view and on the registration page on PHP 5.4.22
+- [#4850] Test failures in DefaultControllerTest
+- [#4849] Unit test errors about missing constructor parameters
+- [#4362] Skip the configuration check in the unit tests
+- [#4361] Hide the time slot records in the BE lists
+- [#4846] Crash in tx_seminars_ViewHelper_CommaSeparatedTitlesTest
+- [#4653] Crash in BE in TYPO3 CMS 6.0.x
+- [#4645] Crash when running the RegistrationManager unit tests in PHP 5.4.6
+- [#4622] Unit test crash in the DefaultControllerTest PHP 5.4.6
+- [#4621] Event list crashes with PHP 5.4.6
+- [#4603] Download CSV file is empty, thanks to Ton Tersteeg
+- [#4504] Fix the function comment for registrationmanager::getLinkToRegistrationOrLoginPage and add a unit test
+- [#4483] Dash gets escaped twice in the time-slot list in the single view
+- [#4485] Add TYPO3 maximum version to ext_emconf.php
+- [#4481] Failing unit tests in tx_seminars_Mapper_EventTest and tx_seminars_Service_EMailSalutationTest
+- [#4462] HTML tags are visible in the forms when using ameos_formidable 1.1.549
+- [#4471] Double escape of date in "other dates" table in single view
+- [#4467] Test failures and crashes in current Core master in tx_seminars_FrontEnd_DefaultControllerTest, tx_seminars_OldModel_RegistrationTest, tx_seminars_Service_RegistrationManagerTest
+- [#4371] Empty labels in the FE editor and the registration form need be just a space instead of &nbsp;
+- [#4464] CSV export links lead to 404 error
+- [#4366] Tab headings and all other labels are missing with the current TYPO3 master (4.7)
+- [#4465] Fix JavaScript code inspection warnings
+- [#4440] In pi2, only use forceCharset for TYPO3 < 4.7
+- [#4437] Test failures in the DefaultController tests when the test are run on a typo3.local host
+- [#4429] Escape the output in more places
+- [#4428] Test failure in tx_seminars_EmailSalutation_testcase with latest oelib
+- [#4425] EventHeadline needs to unset $this->mapper in __destruct
+- [#4424] Make the seminars columns searchable in TYPO3 4.6
+- [#3815] Throw more meaningful Exceptions
+- [#4316] TCA: Fields with displayCond depend on inverted needs_registration (thanks to Philipp Kitzberger)
+- [#4347] Fix missing/incorrect @return and return values
+- [#4296] Fix all deprecation log warnings and version-specific unit test failures when running the unit tests on the current Core master
+- [#4189] Replace double quotes in subject-field of cancel/confirm-form
+- [#3905] Exception in the FE editor the first time after clearing the cache
+- [#4294] Adapt all version number checks for 4.6
+- [#4286] pi1_eventEditor accesses a private variable isTestMode instead of calling the function
+- [#4233] The default value for price_regular_early is missing a decimal (thanks to Eric Chavaillaz)
+- [#3988] Field in the registration TCE forms has no label
+- [#4198] The registrationManager cannot be XCLASSed
+- [#4045] Always use the display title of events
+- [#4042] Table headings in mod2 are invisible (white on white) in TYPO3 4.4
+- [#4170] tx_seminars_seminar::getOrganizerBag needs to sort the organizers by the relation sorting
+- [#4169] Drop unused code and some unused variables
+- [#4159] In the notification e-mail to the organizers, add a LF before the field data if the field data contains a LF or CR
+- [#4144] Test crash and SQL error in the pi2 test
+- [#4130] Set the numeric locale in our CLI scripts
+- [#4125] Check all class_exists for the correct use of the autoload flag
+- [#4024] Test failure: tx_seminars_Mapper_EventTest::getOrganizersWithOneOrganizerReturnsOneOrganizer
+- [#3892] Table headings for registrations, speakers and organizers are incorrect
+- [#4094] Use empty configurations in the unit tests
+- [#3931] Prices greater 9999.999 are not possible, thanks to Philipp Gampe
+- [#3982] Text overlaps canceled/confirmed icons in grid
+- [#3963] Crash in PHP 5.2 due to PHP-5.3-only array_replace
+- [#3954] Use the default language as fallback for labels that are not available in the current BE language
+- [#3952] Events list is empty
+- [#3839] Clarify the label for the organizer footer (thanks to Philipp Gampe)
+- [#3930] Typo in the reference: boh -> both
+- [#3920] Crash on the second registration page
+- [#3914] Spelling, punctuation and grammar errors and inconsistencies in manual (thanks to Christian Hennecke)
+- [#1879] Don't use &= or |= for booleans
+- [#3851] CSV export for events from the BE ignores event record in subfolders
+- [#3893] returnUrls needs to get encoded
+- [#3874] Test failures in the registration manager testcase
+- [#3877] pi1::isLoggedIn must be public
+- [#3850] Non-admin users have no "edit" icon for registrations in the BE module
+- [#3809] Salutation in thank-you e-mails is formal although informal is configured
+- [#3847] Replace newRecordLinkPosition with levelLinksPosition in the TCA
+- [#3843] Payment methods set in the FE editor do not get saved
+- [#3814] The "list of registrations" column should be hidden in the topic list
+- [#3458] Unregistration is not possible if allowRegistrationForEventsWithoutDate = 1
+- [#3830] Number of vacancies is blank in the list view and single view for unlimited vacancies
+- [#3825] ###EVENT_TYPE###: ###TITLE###" are not correctly replaced in HTML confirmation mail for attendes
+- [#3831] Topic list is empty if a category is selected in the flexforms
+- [#3817] Calling the deprecated t3lib_div::GPvar floods the deprecation log
+- [#3543] Multiple registrations when double-clicking submit-button
+- [#3149] Search in list module ignores the the registration titles
+- [#3792] Total price not shown on registration summary page
+- [#3784] $this->iEdition not defined in addAdministrativeData
+- [#3802] Test failures in latest TYPO3 due to changed icon paths
+- [#3766] In the events CSV file, place not formatted correctly
+- [#3735] Error 102 when saving a registration record in backend
+- [#3779] Typo in the Event Model: "Boad"
+- [#3595] Internet Explorer shows border around radio button on registration page, patch by Thomas Biesenbach
+- [#3718] CSV file displayed in the browser or saved with php suffix, original patch by Joern Dost
+
+Changes:
+- [#5221] Require oelib 0.8.0
+- [#5176] Update maximum PHP version to 5.6
+- [#5072] Switch the BE module to the module dispatcher
+- [#4938] Use labels for all billing address fields on the confirmation page
+- [#4220] Change tx_seminars_pi1_registrationEditor::getSeminar from private to protected
+- [#4364] Drop the accreditation number from the registration form heading
+- [#4817] Drop the new prices
+- [#4818] Drop the ExtJS back-end module
+- [#4661] Sort speakers, places, organizers, etc. by title in the backend
+- [#4497] Adapt the German label for the submit button to § 312g Abs. 3 BGB
+- [#4352] Require PHP 5.3
+- [#4140] Require TYPO3 4.5
+- [#4333] Use the new models in the countdown
+- [#4335] Use the new models in the event headline
+- [#3987] Require TYPO3 4.4
+- [#3889] Disable the CSV export button in the events menu if there are no registrations for that event
+- [#4116] Drop the option for the manual sorting of event records in the BE
+- [#3901] The AJAX module needs to check the BE user rights
+- [#4115] Cache the locallang labels in a JavaScript file
+- [#3917] Use the PID from the BE user groups when creating new records
+- [#4008] Use the single view link builder class in the FE and BE
+- [#4009] The OldModels should provide the Mapper with the data to reduce double DB requests
+- [#4007] Provide the new event model in places where single view links get created
+- [#3995] Add a conflict with the "sourceopt" extension, thanks to Philipp Gampe
+- [#3992] Increase the size of the hideFields and hideColumns fields in the flexforms
+- [#3955] Add icon to the print button
+- [#3985] Move the print button to the top toolbar
+- [#3966] Remove the partner integration for now
+- [#2609] Use mod.php for the ExtJS BE modules
+- [#3856] Make ISO8859-15 the charset for the CSV for the CSV export and convert the data
+- [#3926] Refactor tx_seminars_BackEndExtJs_Ajax with Extract Subclass
+- [#3911] Attached files should be combined from the topic and date record
+- [#3870] tx_oelib_List should use an SplObjectStorage
+- [#3895] Make the BE module testable
+- [#2842] Require TYPO3 4.3 for oelib and seminars
+- [#3793] The "my managed events" list should take timeframeInList into account
+- [#955]  Drop mod1
+- [#3065] Use the new getters/setters when using the configuration proxy
+- [#2586] Remove the conflict with date2cal once the date2cal bugs have been fixed
+- [#3738] Require static_info_tables >= 2.1.0
+- [#3710] Use self:: for static calls within the same class
+- [#3450] Mention in setup.txt that the admin should not copy'n'paste the complete template into the TS template
+- [#3733] Improve the full-text search performance even more
+- [#3729] Provide ext_autoload for our extensions
+- [#3583] Speed up our full-text search
+- [#3582] Slim down our full-text search
+
+Cleanup:
+- [#5209] Use makeInstance in the unit tests only for singletons
+- [#5207] Drop unnecessary CDATA
+- [#4320] Add @var type hinting to help static analysis
+- [#5206] Drop the unset from tearDown()
+- [#5198] Make setUp and tearDown protected
+- [#5203] Shorten the boolean casts
+- [#5201] Convert intval/float to casts
+- [#5200] boolean -> bool, integer -> int
+- [#5088] Shorten the die() line
+- [#4943] Add missing @throws annotations
+- [#5199] Use $GLOBALS['TCA'] instead of $TCA
+- [#5197] Use comments instead of PHPDoc style comments in copyright block
+- [#4998] Use type[] instead of array<type>
+- [#4946] Add and use seminar::getFirstOrganizer
+- [#4863] Clean up the CSV class
+- [#4648] Drop some early __destruct calls
+- [#4909] Drop the constant for the type number for the publication plugin
+- [#4908] Drop plugin.tx_seminars.allowAccessToCsv
+- [#4907] Make OldModel_Abstract::recordExists static
+- [#4843] Drop the todo.txt file
+- [#4833] Remove the closing PHP tags
+- [#4625] Fix all instances of "Underscores are not allowed in method names"
+- [#4631] Drop useless class comments
+- [#4630] Update the copyright to 2013
+- [#4623] Fix all instances of "Missing @return tag in function comment"
+- [#4443] Use UTF-8 by default
+- [#3451] Use TYPO3's autoloader instead of oelib's autoloader
+- [#4278] Update the copyright to 2012
+- [#4452] Stop using the DATABASE_QUERY_ERROR and DATABASE_RESULT_ERROR constants
+- [#4270] Add the parameter name to all @param
+- [#4326] Remove the Zend Studio metadata from all projects
+- [#4280] Make true, false and null uppercase
+- [#4269] Convert the XCLASS code to use $GLOBALS
+- [#4177] Update the copyright to 2011
+- [#4268] Drop the XCLASS code from abstract classes
+- [#4165] Change BagBuilder_Registration::limitToAttendee to expect an FE user model
+- [#4132] Use the time constants from tx_oelib_Time
+- [#4047] Rename all test classes from *_testcase to *Test
+- [#3979] Move the icons from icons/ to Resources/Public/Icons
+- [#3967] Drop SEMINARS_UPLOAD_PATH and tx_seminars_constants.php
+- [#3974] Remove getter and setter for the owner in the old organizer and category models
+- [#3970] Move pi1/locallang.xml to Resources/Private/Language/FrontEnd/locallang.xml
+- [#3969] Move front-end JavaScript and CSS to the Resources folder
+- [#3915] Drop the SEMINARS_TABLE_SEMINARS_* and SEMINARS_RECORD_TYPE_* constants
+- [#3928] Drop all require_once that are covered by an autoloader
+- [#3861] Drop our own exception handlers in seminars
+- [#3277] Drop the workaround for Core bug 2178 from the seminars BE module
+- [#3829] Refactor and unit-test pi1::hideListRegistrationsColumnIfNecessary
+- [#3434] Replace false/true with FALSE/TRUE
+
 
 0.9.0 (released 2010-03-01)
 - [#3712] Fix: Items in the search filter comboboxes should be sorted alphabetically
