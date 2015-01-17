@@ -82,6 +82,7 @@
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
 			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
 			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
+			<label index="message_missingSeminarNumber">The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
@@ -324,6 +325,7 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="message_alreadyRegistered_informal">Du bist für diese Veranstaltung bereits angemeldet.</label>
 			<label index="message_userIsBlocked_formal">Sie sind schon für eine Veranstaltung angemeldet, deren Zeiten mit dieser Veranstaltung kollidieren.</label>
 			<label index="message_userIsBlocked_informal">Du bist schon für eine Veranstaltung angemeldet, deren Zeiten mit dieser Veranstaltung kollidieren.</label>
+			<label index="message_missingSeminarNumber">Die URL enthält keine Veranstaltungs-ID. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noRegistrationNecessary">Für diese Veranstaltung ist keine Anmeldung erforderlich.</label>
@@ -1550,6 +1552,7 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
 			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
 			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
+			<label index="message_missingSeminarNumber">The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>

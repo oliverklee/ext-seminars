@@ -2702,6 +2702,19 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
+	public function singleViewForZeroEventUidNoLoggedInUserReturnsWrongSeminarNumberMessage() {
+		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
+		$this->fixture->piVars['showUid'] = 0;
+
+		$this->assertContains(
+			$this->fixture->translate('message_missingSeminarNumber'),
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function singleViewForHiddenRecordAndNoLoggedInUserReturnsWrongSeminarNumberMessage() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)

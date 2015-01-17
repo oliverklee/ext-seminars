@@ -216,6 +216,11 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	protected $feuser = NULL;
 
 	/**
+	 * int
+	 */
+	protected $showUid = 0;
+
+	/**
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
@@ -451,29 +456,22 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @param int $seminarUid an event UID
 	 * @param bool $showHiddenRecords whether hidden records should be retrieved as well
 	 *
-	 * @return bool TRUE if the seminar UID is valid and the object has been
-	 *                 created, FALSE otherwise
+	 * @return bool TRUE if the seminar UID is valid and the object has been created, FALSE otherwise
 	 */
 	public function createSeminar($seminarUid, $showHiddenRecords = FALSE) {
-		$result = FALSE;
-
-		if ($this->seminar) {
+		if ($this->seminar !== NULL) {
 			unset($this->seminar);
 		}
 
-		if (tx_seminars_OldModel_Abstract::recordExists(
-			$seminarUid, 'tx_seminars_seminars', $showHiddenRecords
-			)
-		) {
+		if (tx_seminars_OldModel_Abstract::recordExists($seminarUid, 'tx_seminars_seminars', $showHiddenRecords)) {
 			/** @var tx_seminars_seminar $seminar */
 			$seminar = t3lib_div::makeInstance('tx_seminars_seminar', $seminarUid, FALSE, $showHiddenRecords);
 			$this->setSeminar($seminar);
 
-			$result = ($showHiddenRecords)
-				? $this->canShowCurrentEvent()
-				: TRUE;
+			$result = $showHiddenRecords ? $this->canShowCurrentEvent() : TRUE;
 		} else {
 			$this->setSeminar(NULL);
+			$result = FALSE;
 		}
 
 		return $result;
@@ -697,124 +695,131 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			'FIELD_WRAPPER'
 		);
 
-		if ($this->createSeminar($this->showUid, $this->isLoggedIn())) {
-			/** @var tx_seminars_Mapper_Event $mapper */
-			$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
-			/** @var tx_seminars_Model_Event $event */
-			$event = $mapper->find($this->showUid);
-
-			// Lets warnings from the seminar bubble up to us.
-			$this->setErrorMessage($this->seminar->checkConfiguration(TRUE));
-
-			// This sets the title of the page for use in indexed search results:
-			$GLOBALS['TSFE']->indexedDocTitle = $this->seminar->getTitle();
-
-			$this->setEventTypeMarker();
-
-			$this->setMarker(
-				'STYLE_SINGLEVIEWTITLE',
-				$this->seminar->createImageForSingleView(
-					$this->getConfValueInteger('seminarImageSingleViewWidth'),
-					$this->getConfValueInteger('seminarImageSingleViewHeight')
-				)
-			);
-
-			$this->setMarker('title', htmlspecialchars($this->seminar->getTitle()));
-			$this->setMarker('uid', $this->seminar->getUid());
-
-			$this->setSubtitleMarker();
-			$this->setDescriptionMarker();
-
-			$this->setAccreditationNumberMarker();
-			$this->setCreditPointsMarker();
-
-			$this->setCategoriesMarker();
-
-			$this->setMarker('date', $this->seminar->getDate());
-			$this->setMarker('time', $this->seminar->getTime());
-			$this->setPlaceMarker();
-			$this->setRoomMarker();
-
-			$this->setTimeSlotsMarkers();
-
-			$this->setExpiryMarker();
-
-			$this->setGenderSpecificHeading('speakers');
-			$this->setSpeakersMarker();
-			$this->setGenderSpecificHeading('partners');
-			$this->setPartnersMarker();
-			$this->setGenderSpecificHeading('tutors');
-			$this->setTutorsMarker();
-			$this->setGenderSpecificHeading('leaders');
-			$this->setLeadersMarker();
-
-			$this->setLanguageMarker();
-
-			$this->setPriceMarkers();
-			$this->setPaymentMethodsMarker();
-
-			$this->setAdditionalInformationMarker();
-
-			$this->setTargetGroupsMarkers();
-
-			$this->setRequirementsMarker();
-			$this->setDependenciesMarker();
-
-			$this->setMarker('organizers', $this->getOrganizersMarkerContent());
-			$this->setOrganizingPartnersMarker();
-
-			$this->setOwnerDataMarker();
-
-			$this->setAttachedFilesMarkers();
-
-			$this->setVacanciesMarker();
-
-			$this->setRegistrationDeadlineMarker();
-			$this->setRegistrationMarker();
-			$this->setListOfRegistrationMarker();
-
-			$this->hideUnneededSubpartsForTopicRecords();
-
-			foreach ($this->getSingleViewHooks() as $hook) {
-				$hook->modifyEventSingleView($event, $this->getTemplate());
-			}
-
-			$result = $this->getSubpart('SINGLE_VIEW');
-
-			// Caches $this->seminar because the list view will overwrite
-			// $this->seminar.
-			// TODO: This needs to be removed as soon as the list view is moved
-			// to its own class.
-			// @see https://bugs.oliverklee.com/show_bug.cgi?id=290
-			$seminar = $this->seminar;
-			if ($this->seminar->hasEndDate()) {
-				$result .= $this->createEventsOnNextDayList();
-			}
-			$this->setSeminar($seminar);
-			if ($this->seminar->isEventTopic() || $this->seminar->isEventDate()) {
-				$result .= $this->createOtherDatesList();
-			}
-		} else {
-			$this->setMarker(
-				'error_text',
-				$this->translate('message_wrongSeminarNumber')
-			);
+		if ($this->showUid <= 0) {
+			$this->setMarker('error_text', $this->translate('message_missingSeminarNumber'));
 			$result = $this->getSubpart('ERROR_VIEW');
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-				'Status: 404 Not Found'
-			);
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+		} elseif ($this->createSeminar($this->showUid, $this->isLoggedIn())) {
+			$result = $this->createSingleViewForExistingEvent();
+		} else {
+			$this->setMarker('error_text', $this->translate('message_wrongSeminarNumber'));
+			$result = $this->getSubpart('ERROR_VIEW');
+			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
 		}
 
 		$this->setMarker(
 			'backlink',
-			$this->pi_linkTP(
-				$this->translate('label_back', 'Back'),
-				array(),
-				TRUE,
-				$this->getConfValueInteger('listPID')
-			)
+			$this->pi_linkTP($this->translate('label_back', 'Back'), array(), TRUE, $this->getConfValueInteger('listPID'))
 		);
 		$result .= $this->getSubpart('BACK_VIEW');
+
+		return $result;
+	}
+
+	/**
+	 * Creates the single view for the event with the event in $this->seminar.
+	 *
+	 * @return string the rendered single view
+	 *
+	 * @throws t3lib_exception
+	 */
+	protected function createSingleViewForExistingEvent() {
+		/** @var tx_seminars_Mapper_Event $mapper */
+		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		/** @var tx_seminars_Model_Event $event */
+		$event = $mapper->find($this->showUid);
+
+		// Lets warnings from the seminar bubble up to us.
+		$this->setErrorMessage($this->seminar->checkConfiguration(TRUE));
+
+		// This sets the title of the page for use in indexed search results:
+		$GLOBALS['TSFE']->indexedDocTitle = $this->seminar->getTitle();
+
+		$this->setEventTypeMarker();
+
+		$this->setMarker(
+			'STYLE_SINGLEVIEWTITLE',
+			$this->seminar->createImageForSingleView(
+				$this->getConfValueInteger('seminarImageSingleViewWidth'),
+				$this->getConfValueInteger('seminarImageSingleViewHeight')
+			)
+		);
+
+		$this->setMarker('title', htmlspecialchars($this->seminar->getTitle()));
+		$this->setMarker('uid', $this->seminar->getUid());
+
+		$this->setSubtitleMarker();
+		$this->setDescriptionMarker();
+
+		$this->setAccreditationNumberMarker();
+		$this->setCreditPointsMarker();
+
+		$this->setCategoriesMarker();
+
+		$this->setMarker('date', $this->seminar->getDate());
+		$this->setMarker('time', $this->seminar->getTime());
+		$this->setPlaceMarker();
+		$this->setRoomMarker();
+
+		$this->setTimeSlotsMarkers();
+
+		$this->setExpiryMarker();
+
+		$this->setGenderSpecificHeading('speakers');
+		$this->setSpeakersMarker();
+		$this->setGenderSpecificHeading('partners');
+		$this->setPartnersMarker();
+		$this->setGenderSpecificHeading('tutors');
+		$this->setTutorsMarker();
+		$this->setGenderSpecificHeading('leaders');
+		$this->setLeadersMarker();
+
+		$this->setLanguageMarker();
+
+		$this->setPriceMarkers();
+		$this->setPaymentMethodsMarker();
+
+		$this->setAdditionalInformationMarker();
+
+		$this->setTargetGroupsMarkers();
+
+		$this->setRequirementsMarker();
+		$this->setDependenciesMarker();
+
+		$this->setMarker('organizers', $this->getOrganizersMarkerContent());
+		$this->setOrganizingPartnersMarker();
+
+		$this->setOwnerDataMarker();
+
+		$this->setAttachedFilesMarkers();
+
+		$this->setVacanciesMarker();
+
+		$this->setRegistrationDeadlineMarker();
+		$this->setRegistrationMarker();
+		$this->setListOfRegistrationMarker();
+
+		$this->hideUnneededSubpartsForTopicRecords();
+
+		foreach ($this->getSingleViewHooks() as $hook) {
+			$hook->modifyEventSingleView($event, $this->getTemplate());
+		}
+
+		$result = $this->getSubpart('SINGLE_VIEW');
+
+		// Caches $this->seminar because the list view will overwrite
+		// $this->seminar.
+		// TODO: This needs to be removed as soon as the list view is moved
+		// to its own class.
+		// @see https://bugs.oliverklee.com/show_bug.cgi?id=290
+		$seminar = $this->seminar;
+		if ($this->seminar->hasEndDate()) {
+			$result .= $this->createEventsOnNextDayList();
+		}
+		$this->setSeminar($seminar);
+		if ($this->seminar->isEventTopic() || $this->seminar->isEventDate()) {
+			$result .= $this->createOtherDatesList();
+		}
 
 		return $result;
 	}
@@ -1912,11 +1917,11 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 		foreach ($seminarOrRegistrationBag as $currentItem) {
 			if ($whatToDisplay == 'my_events') {
-				/** tx_seminars_registration $currentItem */
+				/** @var tx_seminars_registration $currentItem */
 				$this->registration = $currentItem;
 				$this->setSeminar($this->registration->getSeminarObject());
 			} else {
-				/** tx_seminars_seminar $currentItem */
+				/** @var tx_seminars_seminar $currentItem */
 				$this->setSeminar($currentItem);
 			}
 

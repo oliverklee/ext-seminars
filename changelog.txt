@@ -1,6 +1,7 @@
 0.10.0 (currently working on)
 
 Features:
+- [#5233] Add a different error message if the event UID is missing in the URL
 - [#5098] Switch seminars to SwiftMailer
 - [#4983] Add a hook point that would allow a HTML subpart to the notification e-mail
 - [#4961] Use separate FE user data labels in the notification e-mail

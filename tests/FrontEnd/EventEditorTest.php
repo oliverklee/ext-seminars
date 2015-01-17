@@ -563,16 +563,15 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		);
 	}
 
-	public function testHasAccessForLoggedInUserAndInvalidSeminarUidReturnsWrongSeminarMessage() {
-		$groupUid = $this->testingFramework->createFrontEndUserGroup(
-			array('title' => 'test')
-		);
+	/**
+	 * @test
+	 */
+	public function hasAccessForLoggedInUserAndInvalidSeminarUidReturnsWrongSeminarMessage() {
+		$groupUid = $this->testingFramework->createFrontEndUserGroup(array('title' => 'test'));
+		$this->fixture->setConfigurationValue('eventEditorFeGroupID', $groupUid);
 		$this->testingFramework->createAndLoginFrontEndUser($groupUid);
 
-		$this->fixture->setConfigurationValue('eventEditorFeGroupID', $groupUid);
-		$this->fixture->setObjectUid($this->testingFramework->getAutoIncrement(
-			'tx_seminars_seminars'
-		));
+		$this->fixture->setObjectUid($this->testingFramework->getAutoIncrement('tx_seminars_seminars'));
 
 		$this->assertContains(
 			$this->fixture->translate('message_wrongSeminarNumber'),

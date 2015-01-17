@@ -608,46 +608,33 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * It also is checked whether that event record exists and the logged-in
 	 * FE user is the owner or is editing a new record.
 	 *
-	 * @return string locallang key of an error message, will be an empty
-	 *                string if access was granted
+	 * @return string locallang key of an error message, will be an empty string if access was granted
 	 */
 	private function checkAccess() {
 		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			return 'message_notLoggedIn';
 		}
 
-		if (($this->getObjectUid() > 0)
-			&& !tx_seminars_OldModel_Abstract::recordExists(
-				$this->getObjectUid(), 'tx_seminars_seminars', TRUE
-			)
-		) {
+		$objectUid = $this->getObjectUid();
+		if (($objectUid > 0) && !tx_seminars_OldModel_Abstract::recordExists($objectUid, 'tx_seminars_seminars', TRUE)) {
 			return 'message_wrongSeminarNumber';
 		}
 
-		if ($this->getObjectUid() > 0) {
+		if ($objectUid > 0) {
 			/** @var tx_seminars_seminar $seminar */
 			$seminar = t3lib_div::makeInstance('tx_seminars_seminar', $this->getObjectUid(), FALSE, TRUE);
-			$isUserVip = $seminar->isUserVip(
-				$this->getFeUserUid(),
-				$this->getConfValueInteger('defaultEventVipsFeGroupID')
-			);
+			$isUserVip = $seminar->isUserVip($this->getFeUserUid(), $this->getConfValueInteger('defaultEventVipsFeGroupID'));
 			$isUserOwner = $seminar->isOwnerFeUser();
-			$mayManagersEditTheirEvents = $this->getConfValueBoolean(
-				'mayManagersEditTheirEvents', 's_listView'
-			);
+			$mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');
 
-			$hasAccess = $isUserOwner
-				|| ($mayManagersEditTheirEvents && $isUserVip);
+			$hasAccess = $isUserOwner || ($mayManagersEditTheirEvents && $isUserVip);
 		} else {
-			$eventEditorGroupUid = $this->getConfValueInteger(
-				'eventEditorFeGroupID', 's_fe_editing'
-			);
+			$eventEditorGroupUid = $this->getConfValueInteger('eventEditorFeGroupID', 's_fe_editing');
 			$hasAccess = ($eventEditorGroupUid != 0)
-				&& tx_oelib_FrontEndLoginManager::getInstance()
-					->getLoggedInUser()->hasGroupMembership($eventEditorGroupUid);
+				&& tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser()->hasGroupMembership($eventEditorGroupUid);
 		}
 
-		return ($hasAccess ? '' : 'message_noAccessToEventEditor');
+		return $hasAccess ? '' : 'message_noAccessToEventEditor';
 	}
 
 	/**

@@ -32,7 +32,12 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	protected $testingFramework = NULL;
 
 	/**
-	 * @var tx_seminars_seminarchild a seminar to which the fixture relates
+	 * @var int
+	 */
+	protected $seminarUid = 0;
+
+	/**
+	 * @var tx_seminars_seminarchild
 	 */
 	protected $seminar = NULL;
 
@@ -90,6 +95,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	protected $mailer = NULL;
 
+	/**
+	 * @var Tx_Oelib_HeaderCollector
+	 */
+	protected $headerCollector = NULL;
+
 	protected function setUp() {
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
@@ -119,8 +129,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 				'email_footer' => 'organizer footer',
 			)
 		);
-
-		$seminarUid = $this->testingFramework->createRecord(
+		$this->seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
 				'title' => 'test event',
@@ -132,14 +141,17 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 				'organizers' => 1,
 			)
 		);
-
-		$this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $seminarUid, $organizerUid);
+		$this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $this->seminarUid, $organizerUid);
 
 		tx_oelib_templateHelper::setCachedConfigurationValue(
 			'templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
 
-		$this->seminar = new tx_seminars_seminarchild($seminarUid);
+		$headerProxyFactory = tx_oelib_headerProxyFactory::getInstance();
+		$headerProxyFactory->enableTestMode();
+		$this->headerCollector = $headerProxyFactory->getHeaderProxy();
+
+		$this->seminar = new tx_seminars_seminarchild($this->seminarUid);
 		$this->fixture = tx_seminars_registrationmanager::getInstance();
 
 		$this->linkBuilder = $this->getMock('tx_seminars_Service_SingleViewLinkBuilder', array('createAbsoluteUrlForEvent'));
@@ -238,7 +250,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registrationUid = $this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'seminar' => $this->seminar->getUid(),
+				'seminar' => $this->seminarUid,
 				'user' => $frontEndUserUid,
 				'food' => 'something nice to eat',
 				'accommodation' => 'a nice, dry place',
@@ -443,7 +455,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
 		$this->assertContains(
-			'%255Bseminar%255D%3D' . $this->seminar->getUid(),
+			'%255Bseminar%255D%3D' . $this->seminarUid,
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
 	}
@@ -468,7 +480,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 		$this->assertContains(
-			'[seminar]=' . $this->seminar->getUid(),
+			'[seminar]=' . $this->seminarUid,
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
 	}
@@ -585,7 +597,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->createAndLogInFrontEndUser();
 
 		$this->assertContains(
-			'[seminar]=' . $this->seminar->getUid(),
+			'[seminar]=' . $this->seminarUid,
 			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
 		);
 	}
@@ -683,7 +695,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setUnlimitedVacancies();
 
 		$this->assertContains(
-			'[seminar]=' . $this->seminar->getUid(),
+			'[seminar]=' . $this->seminarUid,
 			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
 		);
 	}
@@ -713,7 +725,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setRegistrationQueue(TRUE);
 
 		$this->assertContains(
-			'[seminar]=' . $this->seminar->getUid(),
+			'[seminar]=' . $this->seminarUid,
 			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
 		);
 	}
@@ -767,7 +779,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_attendances',
 			array(
 				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
-				'seminar' => $this->seminar->getUid(),
+				'seminar' => $this->seminarUid,
 			)
 		);
 
@@ -786,7 +798,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_attendances',
 			array(
 				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
-				'seminar' => $this->seminar->getUid(),
+				'seminar' => $this->seminarUid,
 			)
 		);
 
@@ -803,7 +815,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_attendances',
 			array(
 				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
-				'seminar' => $this->seminar->getUid(),
+				'seminar' => $this->seminarUid,
 			)
 		);
 
@@ -1014,7 +1026,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_attendances',
 			array(
 				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
-				'seminar' => $this->seminar->getUid(),
+				'seminar' => $this->seminarUid,
 			)
 		);
 
@@ -1034,7 +1046,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_attendances',
 			array(
 				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
-				'seminar' => $this->seminar->getUid(),
+				'seminar' => $this->seminarUid,
 			)
 		);
 
@@ -1052,7 +1064,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_attendances',
 			array(
 				'user' => $this->testingFramework->createAndLoginFrontEndUser(),
-				'seminar' => $this->seminar->getUid(),
+				'seminar' => $this->seminarUid,
 			)
 		);
 
@@ -1647,7 +1659,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function removeRegistrationHidesRegistrationOfUser() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$seminarUid = $this->seminar->getUid();
+		$seminarUid = $this->seminarUid;
 		$this->createFrontEndPages();
 
 		$registrationUid = $this->testingFramework->createRecord(
@@ -1685,7 +1697,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			[$hookClass] = $hookClass;
 
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$seminarUid = $this->seminar->getUid();
+		$seminarUid = $this->seminarUid;
 		$this->createFrontEndPages();
 
 		$registrationUid = $this->testingFramework->createRecord(
@@ -1704,7 +1716,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function removeRegistrationWithFittingQueueRegistrationMovesItFromQueue() {
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$seminarUid = $this->seminar->getUid();
+		$seminarUid = $this->seminarUid;
 		$this->createFrontEndPages();
 
 		$registrationUid = $this->testingFramework->createRecord(
@@ -1747,7 +1759,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			[$hookClass] = $hookClass;
 
 		$userUid = $this->testingFramework->createAndLoginFrontEndUser();
-		$seminarUid = $this->seminar->getUid();
+		$seminarUid = $this->seminarUid;
 		$this->createFrontEndPages();
 
 		$registrationUid = $this->testingFramework->createRecord(
@@ -2053,7 +2065,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registrationUid = $this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'seminar' => $this->seminar->getUid(),
+				'seminar' => $this->seminarUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
@@ -2659,7 +2671,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_sites', array('title' => 'foo_place')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -2683,7 +2695,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_sites', array('address' => 'foo_street')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -2725,7 +2737,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('title' => 'place_title','address' => 'place_address')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -2760,7 +2772,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('title' => 'place_title','address' => 'place_address')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -2785,7 +2797,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('title' => 'place_title','address' => 'place<h2>_address</h2>')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -2810,7 +2822,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('address' => 'address1' . LF . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -2835,7 +2847,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('address' => 'address1' . CR . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -2860,7 +2872,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('address' => 'address1' . CRLF . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -2885,7 +2897,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('address' => 'address1' . CR . CR . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -2910,7 +2922,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('address' => 'address1' . LF . LF . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -2945,7 +2957,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('address' => 'address1' . LF . LF . 'address2')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -2980,7 +2992,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('address' => 'address1' . LF . 'address2' . CR . CRLF . 'address3')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -3004,7 +3016,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_sites', array('city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -3028,7 +3040,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_sites', array('zip' => '12345', 'city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -3058,7 +3070,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('city' => 'footown', 'country' => $country->getIsoAlpha2Code())
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -3083,7 +3095,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('address' => 'address', 'city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -3118,7 +3130,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('address' => 'address', 'city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -3152,7 +3164,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -3177,7 +3189,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('address' => 'address', 'city' => 'footown')
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $this->seminar->getUid(), $uid, 'place'
+			'tx_seminars_seminars', $this->seminarUid, $uid, 'place'
 		);
 
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -3554,7 +3566,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture->setConfigurationValue('sendConfirmationOnUnregistration', TRUE);
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(), array(
+			'tx_seminars_seminars', $this->seminarUid, array(
 				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
@@ -3582,7 +3594,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(), array(
+			'tx_seminars_seminars', $this->seminarUid, array(
 				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
@@ -3613,7 +3625,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			array('email' => 'foo@bar.com')
 		);
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(), array(
+			'tx_seminars_seminars', $this->seminarUid, array(
 				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
 			)
 		);
@@ -3639,7 +3651,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->createRegistration();
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(), array(
+			'tx_seminars_seminars', $this->seminarUid, array(
 				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
 				'queue_size' => 1,
 			)
@@ -3669,7 +3681,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture->setConfigurationValue('sendConfirmationOnQueueUpdate', TRUE);
 		$registration = $this->createRegistration();
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(), array(
+			'tx_seminars_seminars', $this->seminarUid, array(
 				'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
 				'queue_size' => 1,
 			)
@@ -3749,7 +3761,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'showSeminarFieldsInNotificationMail', 'vacancies'
 		);
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminarUid,
 			array('needs_registration' => 1, 'attendees_max' => 2)
 		);
 
@@ -3771,7 +3783,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'showSeminarFieldsInNotificationMail', 'vacancies'
 		);
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminarUid,
 			array('needs_registration' => 1, 'attendees_max' => 0)
 		);
 
@@ -3797,7 +3809,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registrationUid = $this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'seminar' => $this->seminar->getUid(),
+				'seminar' => $this->seminarUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
 				'company' => 'foo inc.',
 			)
@@ -3824,7 +3836,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registrationUid = $this->testingFramework->createRecord(
 			'tx_seminars_attendances',
 			array(
-				'seminar' => $this->seminar->getUid(),
+				'seminar' => $this->seminarUid,
 				'user' => $this->testingFramework->createFrontEndUser(),
 				'company' => 'foo inc.',
 			)
@@ -3847,7 +3859,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$registrationUid = $this->testingFramework->createRecord(
 			'tx_seminars_attendances',
-			array('seminar' => $this->seminar->getUid(), 'user' => $this->testingFramework->createFrontEndUser())
+			array('seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser())
 		);
 		$registration = new tx_seminars_registrationchild($registrationUid);
 
@@ -3869,7 +3881,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$registrationUid = $this->testingFramework->createRecord(
 			'tx_seminars_attendances',
-			array('seminar' => $this->seminar->getUid(), 'user' => $this->testingFramework->createFrontEndUser())
+			array('seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser())
 		);
 		$registration = new tx_seminars_registrationchild($registrationUid);
 
@@ -3914,11 +3926,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_organizers_mm', $this->seminar->getUid(),
+			'tx_seminars_seminars_organizers_mm', $this->seminarUid,
 			$organizerUid
 		);
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminarUid,
 			array('organizers' => 2)
 		);
 
@@ -3943,11 +3955,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_organizers_mm', $this->seminar->getUid(),
+			'tx_seminars_seminars_organizers_mm', $this->seminarUid,
 			$organizerUid
 		);
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminarUid,
 			array('organizers' => 2)
 		);
 
@@ -3971,7 +3983,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendAdditionalNotificationForEventWithEnoughAttendancesSendsEnoughAttendancesMail() {
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminarUid,
 			array('attendees_min' => 1, 'attendees_max' => 42)
 		);
 
@@ -3989,7 +4001,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->assertContains(
 			sprintf(
 				$this->fixture->translate('email_additionalNotificationEnoughRegistrationsSubject'),
-				$this->seminar->getUid(), ''
+				$this->seminarUid, ''
 			),
 			$this->mailer->getFirstSentEmail()->getSubject()
 		);
@@ -4000,7 +4012,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendAdditionalNotificationForEventWithZeroAttendeesMinDoesNotSendAnyMail() {
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminarUid,
 			array('attendees_min' => 0, 'attendees_max' => 42)
 		);
 
@@ -4025,7 +4037,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutSubject() {
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminarUid,
 			array('attendees_max' => 1)
 		);
 
@@ -4035,7 +4047,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->assertContains(
 			sprintf(
 				$this->fixture->translate('email_additionalNotificationIsFullSubject'),
-				$this->seminar->getUid(), ''
+				$this->seminarUid, ''
 			),
 			$this->mailer->getFirstSentEmail()->getSubject()
 		);
@@ -4046,7 +4058,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutMessage() {
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminarUid,
 			array('attendees_max' => 1)
 		);
 		$registration = $this->createRegistration();
@@ -4063,7 +4075,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendAdditionalNotificationForEventWithNotEnoughAttendancesAndNotBookedOutSendsNoEmail() {
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminarUid,
 			array('attendees_min' => 5, 'attendees_max' => 5)
 		);
 
@@ -4087,7 +4099,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendAdditionalNotificationForEventWithEnoughAttendancesAndUnlimitedVacanciesSendsEmail() {
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'attendees_min' => 1,
 				'attendees_max' => 0,
@@ -4109,7 +4121,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendAdditionalNotificationForEventWithEnoughAttendancesAndOneVacancyShowsVacanciesLabelWithVacancyNumber() {
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'attendees_min' => 1,
 				'attendees_max' => 2,
@@ -4134,7 +4146,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendAdditionalNotificationForEventWithEnoughAttendancesAndUnlimitedVacanciesShowsVacanciesLabelWithUnlimitedLabel() {
 		$this->testingFramework->changeRecord(
-			'tx_seminars_seminars', $this->seminar->getUid(),
+			'tx_seminars_seminars', $this->seminarUid,
 			array(
 				'attendees_min' => 1,
 				'attendees_max' => 0,
@@ -6390,6 +6402,176 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->assertSame(
 			'',
 			$registration->getCountry()
+		);
+	}
+
+	/*
+	 *  Tests concerning existsSeminar and existsSeminarMessage
+	 */
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarForZeroUidReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->existsSeminar(0)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarForInvalidStringUidReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->existsSeminar('Hello world!')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarForInexistentUidReturnsFalse() {
+		$this->assertFalse(
+			$this->fixture->existsSeminar($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarForExistingDeleteUidReturnsFalse() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid, array('deleted' => 1)
+		);
+
+		$this->assertFalse(
+			$this->fixture->existsSeminar($this->seminarUid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarForExistingHiddenUidReturnsFalse() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)
+		);
+
+		$this->assertFalse(
+			$this->fixture->existsSeminar($this->seminarUid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarForExistingUidReturnsTrue() {
+		$this->assertTrue(
+			$this->fixture->existsSeminar($this->seminarUid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarMessageForZeroUidReturnsErrorMessage() {
+		$this->assertContains(
+			$this->fixture->translate('message_missingSeminarNumber'),
+			$this->fixture->existsSeminarMessage(0)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarMessageForZeroUidSendsNotFoundHeader() {
+		$this->fixture->existsSeminarMessage(0);
+
+		$this->assertSame(
+			'Status: 404 Not Found',
+			$this->headerCollector->getLastAddedHeader()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarMessageForInvalidStringUidReturnsErrorMessage() {
+		$this->assertContains(
+			$this->fixture->translate('message_missingSeminarNumber'),
+			$this->fixture->existsSeminarMessage('Hello world!')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarMessageForInexistentUidReturnsErrorMessage() {
+		$this->assertContains(
+			$this->fixture->translate('message_wrongSeminarNumber'),
+			$this->fixture->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarMessageForInexistentUidSendsNotFoundHeader() {
+		$this->fixture->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'));
+
+		$this->assertSame(
+			'Status: 404 Not Found',
+			$this->headerCollector->getLastAddedHeader()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarMessageForExistingDeleteUidReturnsErrorMessage() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid, array('deleted' => 1)
+		);
+
+		$this->assertContains(
+			$this->fixture->translate('message_wrongSeminarNumber'),
+			$this->fixture->existsSeminarMessage($this->seminarUid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarMessageForExistingHiddenUidReturnsErrorMessage() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)
+		);
+
+		$this->assertContains(
+			$this->fixture->translate('message_wrongSeminarNumber'),
+			$this->fixture->existsSeminarMessage($this->seminarUid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarMessageForExistingUidReturnsEmptyString() {
+		$this->assertSame(
+			'',
+			$this->fixture->existsSeminarMessage($this->seminarUid)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function existsSeminarMessageForExistingUidNotSendsHttpHeader() {
+		$this->fixture->existsSeminarMessage($this->seminarUid);
+
+		$this->assertSame(
+			array(),
+			$this->headerCollector->getAllAddedHeaders()
 		);
 	}
 }
