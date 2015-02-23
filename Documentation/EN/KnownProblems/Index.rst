@@ -57,4 +57,4 @@ Known problems
 
 - The registration form and the front-end editor use PrototypeJS.
   If you are using jQuery on your site, you will either need to disable
-  it on the pages with the onetimeaccount plugin or use jQuery in no-conflict mode.
+  it on the pages with the plugin or use jQuery in no-conflict mode.
