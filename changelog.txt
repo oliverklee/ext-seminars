@@ -208,6 +208,7 @@ Bug fixes:
 - [#3718] CSV file displayed in the browser or saved with php suffix, original patch by Joern Dost
 
 Changes:
+- [#5228] Convert the manual to ReST
 - [#5221] Require oelib 0.8.0
 - [#5176] Update maximum PHP version to 5.6
 - [#5072] Switch the BE module to the module dispatcher
