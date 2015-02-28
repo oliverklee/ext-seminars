@@ -1518,7 +1518,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkTemplateFile(TRUE);
 		$this->checkCssFileFromConstants();
 		$this->checkSalutationMode(TRUE);
-		$this->checkCssClassNames();
 		$this->checkWhatToDisplay();
 	}
 
