@@ -249,7 +249,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 		$this->getTemplateCode();
 		$this->setLabels();
-		$this->setCSS();
 		$this->createHelperObjects();
 
 		// Lets warnings from the registration manager bubble up to us.
@@ -2025,10 +2024,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			if ($this->seminar->isOwnerFeUser()) {
 				$cssClasses[] = $this->pi_getClassName('owner');
 			}
-			// Only use the class construct if we actually have a class.
-			$completeClass = (count($cssClasses)) ?
-				' class="'.implode(' ', $cssClasses).'"' :
-				'';
+			$completeClass = implode(' ', $cssClasses);
 
 			$this->setMarker('class_itemrow', $completeClass);
 
@@ -2466,21 +2462,16 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * @param tx_seminars_seminar $seminar the current seminar object
 	 *
-	 * @return string class attribute filled with a list a space-separated
-	 *                CSS classes, plus a leading space
+	 * @return string class attribute value filled with a list a space-separated CSS classes
 	 */
 	public function getVacanciesClasses(tx_seminars_seminar $seminar) {
 		if (!$seminar->needsRegistration()
-			|| (!$seminar->hasDate()
-				&& !$this->configGetter->getConfValueBoolean(
-					'allowRegistrationForEventsWithoutDate'
-				)
-			)
+			|| (!$seminar->hasDate() && !$this->configGetter->getConfValueBoolean('allowRegistrationForEventsWithoutDate'))
 		) {
-			return ' class="' . $this->pi_getClassName('vacancies') . '"';
+			return '';
 		}
 
-		$classes = array('vacancies');
+		$classes = array();
 
 		if ($seminar->hasDate() && $seminar->hasStarted()) {
 			$classes[] = 'event-begin-date-over';
@@ -2511,7 +2502,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			array($this, 'pi_getClassName'), $classes
 		);
 
-		return ' class="' . implode(' ', $prefixedClasses) . '"';
+		return ' ' . implode(' ', $prefixedClasses);
 	}
 
 	/**

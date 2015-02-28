@@ -70,7 +70,6 @@ abstract class tx_seminars_FrontEnd_AbstractView extends tx_oelib_templatehelper
 
 		$this->getTemplateCode();
 		$this->setLabels();
-		$this->setCSS();
 	}
 
 	/**

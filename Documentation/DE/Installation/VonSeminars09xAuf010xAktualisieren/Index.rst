@@ -38,6 +38,10 @@ Aktualisierung Warnungen auf den Seiten zu sehen sein können.
    Templates im Frontend wahrscheinlich fehlerhaft dargestellt werden.)
    Schalten Sie die angepassten Templates aus.
 
+# Insbesondere sind die meisten Marker CLASS\_ verschwunden und durch
+  hartkodierte Klassen ersetzt worden. Bitte entfernen Sie die Marker
+  ebenfalls.
+
 #. Wenn Sie den alten Hook für die Einzelansicht benutzen, ändern Sie
    Ihren Code, so dass er stattdessen den neuen Hook benutzt.
 

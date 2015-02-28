@@ -6916,9 +6916,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 
-	/////////////////////////////////////////
-	// Tests concerning getVacanciesClasses
-	/////////////////////////////////////////
+	/*
+	 * Tests concerning getVacanciesClasses
+	 */
 
 	/**
 	 * @test
@@ -6930,11 +6930,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-		$output = $this->fixture->getVacanciesClasses($event);
-
 		$this->assertContains(
-			$this->fixture->pi_getClassName('vacancies-available'),
-			$output
+			'tx-seminars-pi1-vacancies-available',
+			$this->fixture->getVacanciesClasses($event)
 		);
 	}
 
@@ -6948,11 +6946,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-		$output = $this->fixture->getVacanciesClasses($event);
-
 		$this->assertContains(
-			$this->fixture->pi_getClassName('vacancies-1'),
-			$output
+			'tx-seminars-pi1-vacancies-1',
+			$this->fixture->getVacanciesClasses($event)
 		);
 	}
 
@@ -6966,11 +6962,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-		$output = $this->fixture->getVacanciesClasses($event);
-
 		$this->assertContains(
-			$this->fixture->pi_getClassName('vacancies-2'),
-			$output
+			'tx-seminars-pi1-vacancies-2',
+			$this->fixture->getVacanciesClasses($event)
 		);
 	}
 
@@ -6984,11 +6978,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-		$output = $this->fixture->getVacanciesClasses($event);
-
 		$this->assertContains(
-			$this->fixture->pi_getClassName('vacancies-0'),
-			$output
+			'tx-seminars-pi1-vacancies-0',
+			$this->fixture->getVacanciesClasses($event)
 		);
 	}
 
@@ -7000,11 +6992,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setUnlimitedVacancies();
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-		$output = $this->fixture->getVacanciesClasses($event);
-
 		$this->assertContains(
-			$this->fixture->pi_getClassName('vacancies-available'),
-			$output
+			'tx-seminars-pi1-vacancies-available',
+			$this->fixture->getVacanciesClasses($event)
 		);
 	}
 
@@ -7016,11 +7006,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setUnlimitedVacancies();
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-		$output = $this->fixture->getVacanciesClasses($event);
-
 		$this->assertNotContains(
-			$this->fixture->pi_getClassName('vacancies-0'),
-			$output
+			'tx-seminars-pi1-vacancies-0',
+			$this->fixture->getVacanciesClasses($event)
 		);
 	}
 
@@ -7032,11 +7020,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setUnlimitedVacancies();
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-		$output = $this->fixture->getVacanciesClasses($event);
-
 		$this->assertContains(
-			$this->fixture->pi_getClassName('vacancies-unlimited'),
-			$output
+			'tx-seminars-pi1-vacancies-unlimited',
+			$this->fixture->getVacanciesClasses($event)
 		);
 	}
 
@@ -7049,11 +7035,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 45);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 
-		$output = $this->fixture->getVacanciesClasses($event);
-
 		$this->assertContains(
-			$this->fixture->pi_getClassName('registration-deadline-over'),
-			$output
+			'tx-seminars-pi1-registration-deadline-over',
+			$this->fixture->getVacanciesClasses($event)
 		);
 	}
 
@@ -7065,11 +7049,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
 
-		$output = $this->fixture->getVacanciesClasses($event);
-
 		$this->assertContains(
-			$this->fixture->pi_getClassName('event-begin-date-over'),
-			$output
+			'tx-seminars-pi1-event-begin-date-over',
+			$this->fixture->getVacanciesClasses($event)
 		);
 	}
 
@@ -7084,45 +7066,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			'allowRegistrationForStartedEvents', 1
 		);
 
-		$output = $this->fixture->getVacanciesClasses($event);
-
 		$this->assertContains(
-			$this->fixture->pi_getClassName('vacancies-available'),
-			$output
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getVacanciesClassesForEventNotNeedingRegistrationReturnsVacanciesBasicClass() {
-		$event = new tx_seminars_seminarchild($this->seminarUid);
-		$event->setNeedsRegistration(FALSE);
-		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
-
-		$output = $this->fixture->getVacanciesClasses($event);
-
-		$this->assertEquals(
-			' class="' . $this->fixture->pi_getClassName('vacancies') . '"',
-			$output
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getVacanciesClassesForEventWithoutBeginDateAndAllowRegistrationForEventsWithoutDateFalseReturnsVacanciesBasicClass() {
-		$event = new tx_seminars_seminarchild($this->seminarUid);
-		$event->setNeedsRegistration(TRUE);
-		$this->fixture->getConfigGetter()->setConfigurationValue(
-			'allowRegistrationForEventsWithoutDate', 0
-		);
-
-		$output = $this->fixture->getVacanciesClasses($event);
-
-		$this->assertEquals(
-			' class="' . $this->fixture->pi_getClassName('vacancies') . '"',
-			$output
+			'tx-seminars-pi1-vacancies-available',
+			$this->fixture->getVacanciesClasses($event)
 		);
 	}
 
@@ -7137,11 +7083,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setRegistrationQueue(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-		$output = $this->fixture->getVacanciesClasses($event);
-
 		$this->assertContains(
-			$this->fixture->pi_getClassName('has-registration-queue'),
-			$output
+			'tx-seminars-pi1-has-registration-queue',
+			$this->fixture->getVacanciesClasses($event)
 		);
 	}
 
@@ -7156,11 +7100,9 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$event->setRegistrationQueue(FALSE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-		$output = $this->fixture->getVacanciesClasses($event);
-
 		$this->assertNotContains(
-			$this->fixture->pi_getClassName('has-registration-queue'),
-			$output
+			'tx-seminars-pi1-has-registration-queue',
+			$this->fixture->getVacanciesClasses($event)
 		);
 	}
 

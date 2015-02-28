@@ -25,37 +25,6 @@ you need to include the stylesheet
 *typo3conf/ext/seminars/pi1/seminars\_pi1.css* manually into your page
 header.
 
-When looking to the source of the HTML output of this extension, you
-will see that there are some parts of the output (for example table
-cells) marked to belong to a certain class. But not every part has as
-'class=”xyz”'—we have only those classes that are actually used in the
-CSS file so that the HTML code stays lean. If needed, you can add
-classes to these parts by adding them to your TypoScript setup (in the
-template):
-
-By default, the organizer field in the ListView has no class added to
-keep the HTML-Output as clean as possible. It looks like this:
-
-[...]<td>[name of the organizer]<td>[...]
-
-If you add the following line to your setup,
-
-plugin.tx\_seminars\_pi1.class\_listorganizers = organizers
-
-the output shows us the following:
-
-[...]<td class="tx-seminars-pi1-organizers">[name of the
-organizer]</td>[...]
-
-So the resulting class name will be tx-seminars-pi1 and the value from
-the corresponding TS rule appended. Please note that the last part of
-the name in the TS setup (“class\_listorganizers”) needs to match the
-string in the HTML template (“###CLASS\_LISTORGANIZERS###”). The only
-difference lies in the capitalization and the “###.”
-
-Then you can add a rule like this to your CSS file:
-
-.tx-seminars-pi1-organizers {...;}
 
 
 Classes for table rows

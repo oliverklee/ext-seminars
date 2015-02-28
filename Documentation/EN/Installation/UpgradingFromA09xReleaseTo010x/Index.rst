@@ -35,6 +35,9 @@ the front end until you have finished the upgrade.
    features. In addition, your old templates probably will display some
    garbage on the front end.) Switch off your custom templates.
 
+# Particularly, most of the CLASS\_ markers have been removed and been
+  replaced by fixed classes. You will need to remove the markers as well.
+
 #. If you are using the old single view hook, adapt your code to use the
    new single view hook instead.
 
