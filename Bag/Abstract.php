@@ -155,11 +155,10 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		if ($this->dbResult) {
-			$GLOBALS['TYPO3_DB']->sql_free_result($this->dbResult);
+		$databaseConnection = Tx_Oelib_Db::getDatabaseConnection();
+		if (($this->dbResult !== FALSE) && ($databaseConnection !== NULL)) {
+			$databaseConnection->sql_free_result($this->dbResult);
 		}
-
-		unset($this->dbResult, $this->currentItem);
 	}
 
 	/**

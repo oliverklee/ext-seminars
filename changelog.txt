@@ -82,6 +82,7 @@ Localization:
 - [#3852] Update the French localization, thanks to Martin Rebetez
 
 Bug fixes:
+- [#5151] PHP Fatal error: Call to a member function sql_free_result() if using full-text search
 - [#5215] Sending emails from backend not possible
 - [#5214] Crash in BE events list in PHP 5.4
 - [#4343] Some unit tests read the real TS setup
