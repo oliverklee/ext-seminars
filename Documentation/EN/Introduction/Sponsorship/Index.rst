@@ -42,9 +42,13 @@ organizations and persons:
 
 - `die medienagenten oHG <http://www.medienagenten.de/>`_
 
+- `docnet: Doctoral Network at the University of St. Gallen <http://www.docnet-hsg.ch/>`_
+
 - `edv-rose <http://www.edv-rose.de/>`_
 
 - `F7-Softwareentwicklung Joachim Nielsen <http://www.f7.de/>`_
+
+- `f.com GmbH + Co. KG <http://www.f-com.de/>`_
 
 - `Geo.net IT GmbH <http://www.geo.net/>`_
 
