@@ -37,15 +37,14 @@ class tx_seminars_ConfigCheckTest extends tx_phpunit_testcase {
 	private $fixture;
 
 	/**
-	 * @var tx_oelib_dummyObjectToCheck dummy object to be checked by the
-	 *                                  configuration check object
+	 * @var Tx_Oelib_Tests_Unit_Fixtures_DummyObjectToCheck
 	 */
-	private $objectToCheck;
+	private $objectToCheck = NULL;
 
 	protected function setUp() {
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', TRUE);
 
-		$this->objectToCheck = new tx_oelib_dummyObjectToCheck(array());
+		$this->objectToCheck = new Tx_Oelib_Tests_Unit_Fixtures_DummyObjectToCheck(array());
 		$this->fixture = new tx_seminars_configcheck($this->objectToCheck);
 	}
 
