@@ -158,7 +158,10 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 		$databaseConnection = Tx_Oelib_Db::getDatabaseConnection();
 		if (($this->dbResult !== FALSE) && ($databaseConnection !== NULL)) {
 			$databaseConnection->sql_free_result($this->dbResult);
+			$this->dbResult = FALSE;
 		}
+
+		$this->currentItem = NULL;
 	}
 
 	/**
