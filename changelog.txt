@@ -210,6 +210,7 @@ Bug fixes:
 - [#3718] CSV file displayed in the browser or saved with php suffix, original patch by Joern Dost
 
 Changes:
+- [#5260] Reduce the fields for the full-text search
 - [#5259] Drop the Usage of TemplateHelper::setCss
 - [#5254] Document the Prototype/jQuery clash
 - [#5228] Convert the manual to ReST
