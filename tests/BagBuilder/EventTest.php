@@ -1,26 +1,16 @@
 <?php
-/***************************************************************
-* Copyright notice
-*
-* (c) 2007-2013 Oliver Klee (typo3-coding@oliverklee.de)
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Test case.
@@ -35,25 +25,24 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_BagBuilder_Event
 	 */
-	private $fixture;
+	private $fixture = NULL;
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
-	private $testingFramework;
+	private $testingFramework = NULL;
 
 	/**
 	 * @var int a UNIX timestamp in the past.
 	 */
-	private $past;
+	private $past = 0;
 
 	/**
 	 * @var int a UNIX timestamp in the future.
 	 */
-	private $future;
+	private $future = 0;
 
 	protected function setUp() {
-		$this->testingFramework
-			= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->fixture = new tx_seminars_BagBuilder_Event();
 		$this->fixture->setTestMode();
@@ -3364,7 +3353,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchWithTwoCommasAsSearchWordFindsAllEvents() {
 		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars', array('title' => 'foo bar event')
+			'tx_seminars_seminars', array('title' => 'avocado paprika event')
 		);
 		$this->fixture->limitToFullTextSearch(',,');
 		$bag = $this->fixture->build();
@@ -3377,9 +3366,9 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedByTwoSpacesFindsEvents() {
 		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars', array('title' => 'foo bar event')
+			'tx_seminars_seminars', array('title' => 'avocado paprika event')
 		);
-		$this->fixture->limitToFullTextSearch('foo  bar');
+		$this->fixture->limitToFullTextSearch('avocado  paprika');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -3390,7 +3379,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchWithTwoCommasSeparatedByTwoSpacesFindsAllEvents() {
 		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars', array('title' => 'foo bar event')
+			'tx_seminars_seminars', array('title' => 'avocado paprika event')
 		);
 		$this->fixture->limitToFullTextSearch(',  ,');
 		$bag = $this->fixture->build();
@@ -3403,7 +3392,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 
 	public function testLimitToFullTextSearchWithTooShortSearchWordFindsAllEvents() {
 		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars', array('title' => 'foo bar event')
+			'tx_seminars_seminars', array('title' => 'avocado paprika event')
 		);
 		$this->fixture->limitToFullTextSearch('o');
 		$bag = $this->fixture->build();
@@ -3418,11 +3407,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'accreditation_number' => 'foo bar event',
+				'accreditation_number' => 'avocado paprika event',
 				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -3435,11 +3424,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'accreditation_number' => 'bar event',
+				'accreditation_number' => 'paprika event',
 				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -3450,9 +3439,9 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTitle() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('title' => 'foo bar event')
+			array('title' => 'avocado paprika event')
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -3464,9 +3453,9 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTitle() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('title' => 'bar event')
+			array('title' => 'paprika event')
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -3477,9 +3466,9 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSubtitle() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('subtitle' => 'foo bar event')
+			array('subtitle' => 'avocado paprika event')
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -3491,9 +3480,9 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSubtitle() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('subtitle' => 'bar event')
+			array('subtitle' => 'paprika event')
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -3504,9 +3493,9 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInDescription() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('description' => 'foo bar event')
+			array('description' => 'avocado paprika event')
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -3518,9 +3507,9 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInDescription() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('description' => 'bar event')
+			array('description' => 'paprika event')
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -3531,7 +3520,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInSpeakerTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
 			'tx_seminars_speakers',
-			array('title' => 'foo bar speaker')
+			array('title' => 'avocado paprika speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3545,7 +3534,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$speakerUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -3557,7 +3546,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
 			'tx_seminars_speakers',
-			array('title' => 'bar speaker')
+			array('title' => 'paprika speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3571,7 +3560,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$speakerUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -3582,7 +3571,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceTitle() {
 		$placeUid = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
-			array('title' => 'foo bar place')
+			array('title' => 'avocado paprika place')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3596,7 +3585,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$placeUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -3608,7 +3597,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceTitle() {
 		$placeUid = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
-			array('title' => 'bar place')
+			array('title' => 'paprika place')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3622,7 +3611,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$placeUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -3633,7 +3622,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInPlaceCity() {
 		$placeUid = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
-			array('city' => 'foo bar city')
+			array('city' => 'avocado paprika city')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3647,7 +3636,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$placeUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -3659,7 +3648,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceCity() {
 		$placeUid = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
-			array('city' => 'bar city')
+			array('city' => 'paprika city')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3673,7 +3662,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$placeUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -3684,7 +3673,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInEventTypeTitle() {
 		$eventTypeUid = $this->testingFramework->createRecord(
 			'tx_seminars_event_types',
-			array('title' => 'foo bar event type')
+			array('title' => 'avocado paprika event type')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3693,7 +3682,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -3705,7 +3694,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInEventTypeTitle() {
 		$eventTypeUid = $this->testingFramework->createRecord(
 			'tx_seminars_event_types',
-			array('title' => 'bar event type')
+			array('title' => 'paprika event type')
 		);
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3714,7 +3703,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -3725,7 +3714,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInCategoryTitle() {
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories',
-			array('title' => 'foo bar category')
+			array('title' => 'avocado paprika category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3739,7 +3728,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$categoryUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -3751,7 +3740,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInCategoryTitle() {
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories',
-			array('title' => 'bar category')
+			array('title' => 'paprika category')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3765,7 +3754,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$categoryUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -3776,9 +3765,9 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedBySpaceFindsTwoEventsWithSearchWordsInTitle() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('title' => 'foo event bar')
+			array('title' => 'avocado event paprika')
 		);
-		$this->fixture->limitToFullTextSearch('foo bar');
+		$this->fixture->limitToFullTextSearch('avocado paprika');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -3790,9 +3779,9 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedByCommaFindsTwoEventsWithSearchWordsInTitle() {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('title' => 'foo event bar')
+			array('title' => 'avocado event paprika')
 		);
-		$this->fixture->limitToFullTextSearch('foo,bar');
+		$this->fixture->limitToFullTextSearch('avocado,paprika');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -3810,7 +3799,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'title' => 'foo bar event',
+				'title' => 'avocado paprika event',
 				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
@@ -3821,7 +3810,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
@@ -3835,7 +3824,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'title' => 'bar event',
+				'title' => 'paprika event',
 				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
@@ -3846,7 +3835,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
@@ -3859,7 +3848,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'subtitle' => 'foo bar event',
+				'subtitle' => 'avocado paprika event',
 				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
@@ -3870,7 +3859,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
@@ -3884,7 +3873,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'subtitle' => 'bar event',
+				'subtitle' => 'paprika event',
 				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
@@ -3895,7 +3884,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
@@ -3908,7 +3897,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'description' => 'foo bar event',
+				'description' => 'avocado paprika event',
 				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
@@ -3919,7 +3908,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
@@ -3933,7 +3922,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'description' => 'bar event',
+				'description' => 'paprika event',
 				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
@@ -3944,7 +3933,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
@@ -3956,7 +3945,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicCategoryTitle() {
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories',
-			array('title' => 'foo bar category')
+			array('title' => 'avocado paprika category')
 		);
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -3977,7 +3966,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
@@ -3990,7 +3979,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicCategoryTitle() {
 		$categoryUid = $this->testingFramework->createRecord(
 			'tx_seminars_categories',
-			array('title' => 'bar category')
+			array('title' => 'paprika category')
 		);
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -4011,7 +4000,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
@@ -4023,7 +4012,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventWithSearchWordInTopicEventTypeTitle() {
 		$eventTypeUid = $this->testingFramework->createRecord(
 			'tx_seminars_event_types',
-			array('title' => 'foo bar event type')
+			array('title' => 'avocado paprika event type')
 		);
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -4039,7 +4028,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
@@ -4052,7 +4041,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventWithoutSearchWordInTopicEventTypeTitle() {
 		$eventTypeUid = $this->testingFramework->createRecord(
 			'tx_seminars_event_types',
-			array('title' => 'bar event type')
+			array('title' => 'paprika event type')
 		);
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -4068,7 +4057,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
@@ -4086,11 +4075,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'accreditation_number' => 'foo bar event',
+				'accreditation_number' => 'avocado paprika event',
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -4103,11 +4092,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'accreditation_number' => 'bar event',
+				'accreditation_number' => 'paprika event',
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 			)
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -4118,7 +4107,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInSpeakerTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
 			'tx_seminars_speakers',
-			array('title' => 'foo bar speaker')
+			array('title' => 'avocado paprika speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -4132,7 +4121,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$speakerUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -4144,7 +4133,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerTitle() {
 		$speakerUid = $this->testingFramework->createRecord(
 			'tx_seminars_speakers',
-			array('title' => 'bar speaker')
+			array('title' => 'paprika speaker')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -4158,7 +4147,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$speakerUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -4169,7 +4158,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceTitle() {
 		$placeUid = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
-			array('title' => 'foo bar place')
+			array('title' => 'avocado paprika place')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -4183,7 +4172,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$placeUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -4195,7 +4184,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceTitle() {
 		$placeUid = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
-			array('title' => 'bar place')
+			array('title' => 'paprika place')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -4209,7 +4198,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$placeUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(
@@ -4220,7 +4209,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchFindsEventDateWithSearchWordInPlaceCity() {
 		$placeUid = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
-			array('city' => 'foo bar city')
+			array('city' => 'avocado paprika city')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -4234,7 +4223,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$placeUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertEquals(
@@ -4246,7 +4235,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	public function testLimitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceCity() {
 		$placeUid = $this->testingFramework->createRecord(
 			'tx_seminars_sites',
-			array('city' => 'bar city')
+			array('city' => 'paprika city')
 		);
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -4260,7 +4249,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 			$eventUid,
 			$placeUid
 		);
-		$this->fixture->limitToFullTextSearch('foo');
+		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
 		$this->assertTrue(

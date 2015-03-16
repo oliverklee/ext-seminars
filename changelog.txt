@@ -1,6 +1,7 @@
 0.10.0 (currently working on)
 
 Features:
+- [#5261] Add a full-text search index
 - [#5274] Make it configurable whether to link to the single view
 - [#5273] Add a configuration for disabling the sorting links in the list view
 - [#5233] Add a different error message if the event UID is missing in the URL

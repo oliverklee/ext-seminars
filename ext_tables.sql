@@ -13,9 +13,9 @@ CREATE TABLE fe_groups (
 	tx_seminars_publish_events tinyint(1) DEFAULT '0' NOT NULL,
 	tx_seminars_events_pid int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_seminars_auxiliary_records_pid int(11) unsigned DEFAULT '0' NOT NULL,
-	tx_seminars_reviewer int(11) unsigned DEFAULT '0' NOT NULL
+	tx_seminars_reviewer int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_seminars_default_categories int(11) unsigned DEFAULT '0' NOT NULL,
-	tx_seminars_default_organizer int(11) unsigned DEFAULT '0' NOT NULL,
+	tx_seminars_default_organizer int(11) unsigned DEFAULT '0' NOT NULL
 );
 
 
@@ -25,7 +25,7 @@ CREATE TABLE fe_groups (
 CREATE TABLE be_groups (
 	tx_seminars_events_folder int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_seminars_registrations_folder int(11) unsigned DEFAULT '0' NOT NULL,
-	tx_seminars_auxiliaries_folder int(11) unsigned DEFAULT '0' NOT NULL,
+	tx_seminars_auxiliaries_folder int(11) unsigned DEFAULT '0' NOT NULL
 );
 
 
@@ -297,7 +297,9 @@ CREATE TABLE tx_seminars_seminars (
 	KEY object_type (object_type),
 	KEY topic (topic),
 	KEY event_takes_place_reminder_sent (event_takes_place_reminder_sent),
-	KEY cancelation_deadline_reminder_sent (cancelation_deadline_reminder_sent)
+	KEY cancelation_deadline_reminder_sent (cancelation_deadline_reminder_sent),
+	FULLTEXT index_event_searchfields (accreditation_number),
+	FULLTEXT index_topic_searchfields (title,subtitle,description)
 );
 
 
@@ -346,7 +348,8 @@ CREATE TABLE tx_seminars_speakers (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
-	KEY dummy (is_dummy_record)
+	KEY dummy (is_dummy_record),
+	FULLTEXT index_searchfields (title)
 );
 
 
@@ -448,7 +451,8 @@ CREATE TABLE tx_seminars_sites (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
-	KEY dummy (is_dummy_record)
+	KEY dummy (is_dummy_record),
+	FULLTEXT index_searchfields (title,city)
 );
 
 
@@ -512,7 +516,8 @@ CREATE TABLE tx_seminars_event_types (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
-	KEY dummy (is_dummy_record)
+	KEY dummy (is_dummy_record),
+	FULLTEXT index_searchfields (title)
 );
 
 
@@ -746,7 +751,8 @@ CREATE TABLE tx_seminars_categories (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
-	KEY dummy (is_dummy_record)
+	KEY dummy (is_dummy_record),
+	FULLTEXT index_searchfields (title)
 );
 
 
