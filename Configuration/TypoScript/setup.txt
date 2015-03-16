@@ -152,7 +152,6 @@ plugin.tx_seminars {
 	# whether to show attendances on the registration queue in the CLI CSV export or not
 	showAttendancesOnRegistrationQueueInEmailCsv = 0
 
-
 	# whether to send a cancelation deadline reminder to the organizers
 	sendCancelationDeadlineReminder = 0
 
@@ -311,6 +310,13 @@ plugin.tx_seminars_pi1 {
 
 	# whether one-time FE users will be automatically logged out after registering for an event
 	logOutOneTimeAccountsAfterRegistration = 1
+
+	# whether to add sorting links to the headers in the list view
+	enableSortingLinksInListView = 1
+
+
+	# The following variables don't have any default values provided.
+	# You need to set them yourself for this extension to work correctly.
 
 	# PID of the sysfolder that contains all the event records (e.g., the starting point)
 	pages =

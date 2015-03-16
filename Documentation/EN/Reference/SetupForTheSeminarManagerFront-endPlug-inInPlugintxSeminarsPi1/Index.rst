@@ -768,6 +768,21 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
+         enableSortingLinksInListView
+
+   Data type
+         boolean
+
+   Description
+        whether to add sorting links to the headers in the list view
+
+   Default
+         1
+
+
+.. container:: table-row
+
+   Property
          pages
 
    Data type

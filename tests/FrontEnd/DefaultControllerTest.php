@@ -5870,25 +5870,50 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////
-	// Tests concerning getFieldHeader
-	////////////////////////////////////
+	/*
+	 * Tests concerning getFieldHeader
+	 */
 
-	public function testGetFieldHeaderContainsLabelOfKey() {
+	/**
+	 * @test
+	 */
+	public function getFieldHeaderContainsLabelOfKey() {
 		$this->assertContains(
 			$this->fixture->translate('label_date'),
 			$this->fixture->getFieldHeader('date')
 		);
 	}
 
-	public function testGetFieldHeaderForSortableFieldContainsLink() {
+	/**
+	 * @test
+	 */
+	public function getFieldHeaderForSortableFieldAndSortingEnabledContainsLink() {
+		$this->fixture->setConfigurationValue('enableSortingLinksInListView', TRUE);
+
 		$this->assertContains(
 			'<a',
 			$this->fixture->getFieldHeader('date')
 		);
 	}
 
-	public function testGetFieldHeaderForNonSortableFieldNotContainsLink() {
+	/**
+	 * @test
+	 */
+	public function getFieldHeaderForSortableFieldAndSortingDisabledNotContainsLink() {
+		$this->fixture->setConfigurationValue('enableSortingLinksInListView', FALSE);
+
+		$this->assertNotContains(
+			'<a',
+			$this->fixture->getFieldHeader('date')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getFieldHeaderForNonSortableFieldAndSortingEnabledNotContainsLink() {
+		$this->fixture->setConfigurationValue('enableSortingLinksInListView', TRUE);
+
 		$this->assertNotContains(
 			'<a',
 			$this->fixture->getFieldHeader('register')

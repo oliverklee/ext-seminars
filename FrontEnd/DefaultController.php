@@ -2276,30 +2276,21 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 *
 	 * @param string $fieldName key of the field type for which the heading should be retrieved, must not be empty
 	 *
-	 * @return string the heading label, may be completely wrapped in a
-	 *                hyperlink for sorting
+	 * @return string the heading label, may be completely wrapped in a hyperlink for sorting
 	 */
 	public function getFieldHeader($fieldName) {
 		$label = $this->translate('label_' . $fieldName);
-		if (($fieldName == 'price_regular')
-			&& $this->getConfValueBoolean(
-				'generalPriceInList',
-				's_template_special')
-		) {
+		if (($fieldName === 'price_regular') && $this->getConfValueBoolean('generalPriceInList', 's_template_special')) {
 			$label = $this->translate('label_price_general');
 		}
 
 		// Can we sort by that field?
-		if (isset($this->orderByList[$fieldName])) {
+		if (isset($this->orderByList[$fieldName]) && $this->getConfValueBoolean('enableSortingLinksInListView')) {
 			$result = $this->pi_linkTP_keepPIvars(
-				$label,
-				array(
-					'sort' => $fieldName . ':' .
-						($this->internal['descFlag'] ? 0 : 1)
-				)
+				$label, array('sort' => $fieldName . ':' . ($this->internal['descFlag'] ? 0 : 1))
 			);
 		} else {
-			$result = $label;
+			$result = htmlspecialchars($label);
 		}
 
 		return $result;
