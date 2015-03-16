@@ -3492,9 +3492,15 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @return string HTML code for the link to the event's single view page
 	 */
 	public function createSingleViewLink(tx_seminars_Model_Event $event, $linkText, $htmlspecialcharLinkText = TRUE) {
-		$url = $this->getLinkBuilder()->createRelativeUrlForEvent($event);
 		$processedLinkText = $htmlspecialcharLinkText ? htmlspecialchars($linkText) : $linkText;
+		$linkConditionConfiguration = $this->getConfValueString('linkToSingleView', 's_listView');
+		$createLink = ($linkConditionConfiguration === 'always')
+			|| (($linkConditionConfiguration === 'onlyForNonEmptyDescription') && $event->hasDescription());
+		if (!$createLink) {
+			return $processedLinkText;
+		}
 
+		$url = $this->getLinkBuilder()->createRelativeUrlForEvent($event);
 		return '<a href="' . htmlspecialchars($url) . '">' . $processedLinkText . '</a>';
 	}
 

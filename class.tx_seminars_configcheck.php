@@ -280,6 +280,8 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 		$this->checkNumberOfYearsInDateFilter();
 		$this->checkLimitFileDownloadToAttendees();
 		$this->checkShowOnlyEventsWithVacancies();
+		$this->checkEnableSortingLinksInListView();
+		$this->checkLinkToSingleView();
 	}
 
 	/**
@@ -2925,6 +2927,44 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'should also be exported in the CSV file in the e-mail mode.' .
 				'If this is not set correctly, the attendances on the ' .
 				'registration queue might not get exported.'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value
+	 * enableSortingLinksInListView.
+	 *
+	 * @return void
+	 */
+	private function checkEnableSortingLinksInListView() {
+		$this->checkIfBoolean(
+			'enableSortingLinksInListView',
+			FALSE,
+			'',
+			'This value specifies whether the list view header should be sorting links. ' .
+			'If this value is incorrect, the sorting might be enabled ' .
+			'even when this is not desired (or vice versa).'
+		);
+	}
+
+	/**
+	 * Checks the setting of the configuration value linkToSingleView.
+	 *
+	 * @return void
+	 */
+	private function checkLinkToSingleView() {
+		$this->checkIfSingleInSetNotEmpty(
+			'linkToSingleView',
+			TRUE,
+			's_listView',
+			'This value specifies when the list view will link to the single view. '
+				. 'If this value is not set correctly, the single view might not be linked although this is intended '
+				. '(or vice versa).',
+			array(
+				'always',
+				'never',
+				'onlyForNonEmptyDescription',
+			)
 		);
 	}
 }

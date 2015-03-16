@@ -782,6 +782,21 @@ override the corresponding value from TS Setup.**
 
 .. container:: table-row
 
+   Property
+         enableSortingLinksInListView
+
+   Data type
+         string
+
+   Description
+        when to link to the single view: always, never, onlyForNonEmptyDescription
+
+   Default
+         always
+
+
+.. container:: table-row
+
    Eigenschaft
          pages
 

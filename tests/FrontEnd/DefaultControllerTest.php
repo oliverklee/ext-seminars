@@ -130,6 +130,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 					'maxPages' => 5,
 				),
 				'eventFieldsOnRegistrationPage' => 'title,price_regular,price_special,vacancies,accreditation_number',
+				'linkToSingleView' => 'always',
 			)
 		);
 		$this->fixture->getTemplateCode();
@@ -8537,16 +8538,16 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////////////
-	// Tests concerning createSingleViewLink
-	//////////////////////////////////////////
+	/*
+	 * Tests concerning createSingleViewLink
+	 */
 
 	/**
 	 * @test
 	 */
 	public function createSingleViewLinkCreatesLinkToSingleViewPage() {
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(array());
+		/** @var tx_seminars_Model_Event $event */
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
 		$this->assertContains(
 			'href="index.php?id=42&amp;tx_seminars_pi1%5BshowUid%5D=1337"',
@@ -8557,9 +8558,12 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function createSingleViewLinkUsesLinkText() {
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(array());
+	public function createSingleViewForEventWithoutDescriptionWithAlwaysLinkSettingLinkUsesLinkText() {
+		$this->fixture->setConfigurationValue('linkToSingleView', 'always');
+		/** @var tx_seminars_Model_Event $event */
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(
+			array('description' => '')
+		);
 
 		$this->assertContains(
 			'>foo</a>',
@@ -8570,9 +8574,89 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
+	public function createSingleViewForEventWithDescriptionWithAlwaysLinkSettingLinkUsesLinkText() {
+		$this->fixture->setConfigurationValue('linkToSingleView', 'always');
+		/** @var tx_seminars_Model_Event $event */
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(
+			array('description' => 'Hello world!')
+		);
+
+		$this->assertContains(
+			'>foo</a>',
+			$this->fixture->createSingleViewLink($event, 'foo')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createSingleViewForEventWithoutDescriptionWithNeverLinkSettingReturnsOnlyLabel() {
+		$this->fixture->setConfigurationValue('linkToSingleView', 'never');
+		/** @var tx_seminars_Model_Event $event */
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(
+			array('description' => '')
+		);
+
+		$this->assertSame(
+			'foo &amp; bar',
+			$this->fixture->createSingleViewLink($event, 'foo & bar')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createSingleViewForEventWithDescriptionWithConditionalLinkSettingLinkUsesLinkText() {
+		$this->fixture->setConfigurationValue('linkToSingleView', 'onlyForNonEmptyDescription');
+		/** @var tx_seminars_Model_Event $event */
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(
+			array('description' => 'Hello world!')
+		);
+
+		$this->assertContains(
+			'>foo &amp; bar</a>',
+			$this->fixture->createSingleViewLink($event, 'foo & bar')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createSingleViewForEventWithoutDescriptionWithConditionalLinkSettingReturnsOnlyLabel() {
+		$this->fixture->setConfigurationValue('linkToSingleView', 'onlyForNonEmptyDescription');
+		/** @var tx_seminars_Model_Event $event */
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(
+			array('description' => '')
+		);
+
+		$this->assertSame(
+			'foo &amp; bar',
+			$this->fixture->createSingleViewLink($event, 'foo & bar')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createSingleViewForEventWithDescriptionWithNeverLinkSettingReturnsOnlyLabel() {
+		$this->fixture->setConfigurationValue('linkToSingleView', 'never');
+		/** @var tx_seminars_Model_Event $event */
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(
+			array('description' => 'Hello world!')
+		);
+
+		$this->assertSame(
+			'foo &amp; bar',
+			$this->fixture->createSingleViewLink($event, 'foo & bar')
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function createSingleViewLinkByDefaultHtmlSpecialCharsLinkText() {
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(array());
+		/** @var tx_seminars_Model_Event $event */
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
 		$this->assertContains(
 			'Chaos &amp; Confusion',
@@ -8584,8 +8668,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function createSingleViewLinkByWithHtmlSpecialCharsTrueHtmlSpecialCharsLinkText() {
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(array());
+		/** @var tx_seminars_Model_Event $event */
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
 		$this->assertContains(
 			'Chaos &amp; Confusion',
@@ -8597,8 +8681,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function createSingleViewLinkByWithHtmlSpecialCharsFalseNotHtmlSpecialCharsLinkText() {
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(array());
+		/** @var tx_seminars_Model_Event $event */
+		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
 		$this->assertContains(
 			'Chaos & Confusion',

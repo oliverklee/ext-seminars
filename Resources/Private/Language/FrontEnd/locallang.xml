@@ -108,6 +108,10 @@
 			<label index="seminars.pi_flexform.iconAndText">Icons and text</label>
 			<label index="seminars.pi_flexform.iconOnly">Icons only</label>
 			<label index="seminars.pi_flexform.textOnly">Text only</label>
+			<label index="seminars.pi_flexform.linkToSingleView">Link the single view from the list view:</label>
+			<label index="seminars.pi_flexform.always">always</label>
+			<label index="seminars.pi_flexform.never">never</label>
+			<label index="seminars.pi_flexform.onlyForNonEmptyDescription">if the event has a description</label>
 			<label index="seminars.pi_flexform.fromTsSetup">(from TS setup)</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfSpeakers">Allow editing speakers:</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfPlaces">Allow editing places:</label>
@@ -724,6 +728,10 @@
 			<label index="seminars.pi_flexform.iconAndText">Icons und Titel</label>
 			<label index="seminars.pi_flexform.iconOnly">Nur Icons</label>
 			<label index="seminars.pi_flexform.textOnly">Nur Titel</label>
+			<label index="seminars.pi_flexform.linkToSingleView">Verlinke die Einzelansicht aus der Listenansicht:</label>
+			<label index="seminars.pi_flexform.always">immer</label>
+			<label index="seminars.pi_flexform.never">nie</label>
+			<label index="seminars.pi_flexform.onlyForNonEmptyDescription">wenn die Veranstaltung eine Beschreibung hat</label>
 			<label index="seminars.pi_flexform.fromTsSetup">(aus dem TS-Setup)</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfSpeakers">Erlaube das Bearbeiten von ReferentInnen:</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfPlaces">Erlaube das Bearbeiten von Veranstaltungsorten:</label>
