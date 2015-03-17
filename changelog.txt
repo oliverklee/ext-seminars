@@ -84,6 +84,7 @@ Localization:
 - [#3852] Update the French localization, thanks to Martin Rebetez
 
 Bug fixes:
+- [#5275] Test failure in BagBuilder_EventTest
 - [#5264] Crash in the configcheck unit tests with the latest oelib
 - [#5151] PHP Fatal error: Call to a member function sql_free_result() if using full-text search
 - [#5215] Sending emails from backend not possible
