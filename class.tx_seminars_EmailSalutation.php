@@ -32,7 +32,7 @@
  */
 class tx_seminars_EmailSalutation {
 	/**
-	 * @var tx_oelib_Translator the translator for the localized salutation
+	 * @var Tx_Oelib_Translator
 	 */
 	private $translator = NULL;
 
@@ -40,7 +40,7 @@ class tx_seminars_EmailSalutation {
 	 * the constructor
 	 */
 	public function __construct() {
-		$this->translator = tx_oelib_TranslatorRegistry::getInstance()->get('seminars');
+		$this->translator = Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars');
 	}
 
 	/**
@@ -59,31 +59,22 @@ class tx_seminars_EmailSalutation {
 	 * @param tx_seminars_Model_FrontEndUser $user
 	 *        the user to create the salutation for
 	 *
-	 * @return string the localized, gender-specific salutation with a trailing
-	 *                comma, will not be empty
+	 * @return string the localized, gender-specific salutation with a trailing comma, will not be empty
 	 */
 	public function getSalutation(tx_seminars_Model_FrontEndUser $user) {
 		$salutationParts = array();
 
-		$salutationMode = tx_oelib_ConfigurationRegistry
-			::get('plugin.tx_seminars')->getAsString('salutation');
+		$salutationMode = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('salutation');
 		switch ($salutationMode) {
 			case 'informal':
-				$salutationParts['dear'] = $this->translator->translate(
-					'email_hello_informal'
-				);
+				$salutationParts['dear'] = $this->translator->translate('email_hello_informal');
 				$salutationParts['name'] = $user->getFirstOrFullName();
 				break;
 			default:
 				$gender = $user->getGender();
-				$salutationParts['dear'] = $this->translator->translate(
-					'email_hello_formal_' . $gender
-				);
-				$salutationParts['title'] = $this->translator->translate(
-						'email_salutation_title_' . $gender
-					);
+				$salutationParts['dear'] = $this->translator->translate('email_hello_formal_' . $gender);
+				$salutationParts['title'] = $this->translator->translate('email_salutation_title_' . $gender);
 				$salutationParts['name'] = $user->getLastOrFullName();
-				break;
 		}
 
 		foreach ($this->getHooks() as $hook) {
@@ -125,19 +116,14 @@ class tx_seminars_EmailSalutation {
 	 * @return string the introduction with the event's title and if available
 	 *                date and time, will not be empty
 	 */
-	public function createIntroduction(
-		$introductionBegin, tx_seminars_seminar $event
-	) {
+	public function createIntroduction($introductionBegin, tx_seminars_seminar $event) {
 		$result = sprintf($introductionBegin, $event->getTitle());
 
 		if (!$event->hasDate()) {
 			return $result;
 		}
 
-		$result .= ' ' . sprintf(
-			$this->translator->translate('email_eventDate'),
-			$event->getDate('-')
-		);
+		$result .= ' ' . sprintf($this->translator->translate('email_eventDate'), $event->getDate('-'));
 
 		if ($event->hasTime() && !$event->hasTimeslots()) {
 			$timeToLabel = $this->translator->translate('email_timeTo');

@@ -32,14 +32,14 @@
  */
 class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	/**
-	 * @var tx_oelib_testingFramework the testing framework
+	 * @var Tx_Oelib_TestingFramework the testing framework
 	 */
-	private $testingFramework;
+	private $testingFramework = NULL;
 
 	/**
 	 * @var tx_seminars_EmailSalutation the fixture the tests relate to
 	 */
-	private $fixture;
+	private $fixture = NULL;
 
 	/**
 	 * @var array backed-up extension configuration of the TYPO3 configuration
@@ -53,12 +53,11 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	private $t3VarBackup = array();
 
 	protected function setUp() {
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		$this->fixture = new tx_seminars_EmailSalutation();
-		$configuration = new tx_oelib_Configuration();
+		$configuration = new Tx_Oelib_Configuration();
 		$configuration->setAsString('salutation', 'formal');
-		tx_oelib_ConfigurationRegistry::getInstance()
-			->set('plugin.tx_seminars', $configuration);
+		Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 		$this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
 	}
@@ -69,10 +68,9 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
 	}
 
-
-	//////////////////////
-	// Utility functions
-	//////////////////////
+	/*
+	 * Utility functions
+	 */
 
 	/**
 	 * Creates an FE-user with the given gender and the name "Foo".
@@ -109,9 +107,9 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		}
 	}
 
-	///////////////////////////////////////////
-	// Tests concerning the utility functions
-	///////////////////////////////////////////
+	/*
+	 * Tests concerning the utility functions
+	 */
 
 	/**
 	 * @test
@@ -134,10 +132,9 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		);
 	}
 
-
-	///////////////////////////////////
-	// Tests concerning getSalutation
-	///////////////////////////////////
+	/*
+	 * Tests concerning getSalutation
+	 */
 
 	/**
 	 * @test
@@ -268,10 +265,9 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		);
 	}
 
-
-	///////////////////////////////
-	// Tests concerning the hooks
-	///////////////////////////////
+	/*
+	 * Tests concerning the hooks
+	 */
 
 	/**
 	 * @test
@@ -318,10 +314,9 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		$this->fixture->getSalutation($this->createFrontEndUser());
 	}
 
-
-	////////////////////////////////////////
-	// Tests concerning createIntroduction
-	////////////////////////////////////////
+	/*
+	 * Tests concerning createIntroduction
+	 */
 
 	/**
 	 * @test
