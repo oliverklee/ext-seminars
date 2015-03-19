@@ -403,7 +403,6 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 	 */
 	protected function check_tx_seminars_FrontEnd_EventHeadline() {
 		$this->checkCommonFrontEndSettings();
-		$this->checkTimeAndDate();
 	}
 
 	/**
