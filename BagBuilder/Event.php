@@ -62,13 +62,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 		'seminars' => array('accreditation_number'),
 		'seminars_topic' => array('title', 'subtitle', 'description'),
 		'speakers' => array('title'),
-		'partners' => array('title'),
-		'tutors' => array('title'),
-		'leaders' => array('title'),
 		'places' => array('title', 'city'),
 		'event_types' => array('title'),
-		'organizers' => array('title'),
-		'target_groups' => array('title'),
 		'categories' => array('title'),
 	);
 
@@ -636,36 +631,17 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 			$safeKeyword = '\'%' . $safeKeyword . '%\'';
 
-			$wherePartsForCurrentSearchword = array_merge(
-				$this->getSearchWherePartIndependentFromEventRecordType(
-					$safeKeyword
-				),
-				$this->getSearchWherePartForEventTopics(
-					$safeKeyword
-				),
-				$this->getSearchWherePartForSpeakers(
-					$safeKeyword
-				),
-				$this->getSearchWherePartForPlaces(
-					$safeKeyword
-				),
-				$this->getSearchWherePartForEventTypes(
-					$safeKeyword
-				),
-				$this->getSearchWherePartForOrganizers(
-					$safeKeyword
-				),
-				$this->getSearchWherePartForTargetGroups(
-					$safeKeyword
-				),
-				$this->getSearchWherePartForCategories(
-					$safeKeyword
-				)
+			$wherePartsForCurrentSearchWord = array_merge(
+				$this->getSearchWherePartIndependentFromEventRecordType($safeKeyword),
+				$this->getSearchWherePartForEventTopics($safeKeyword),
+				$this->getSearchWherePartForSpeakers($safeKeyword),
+				$this->getSearchWherePartForPlaces($safeKeyword),
+				$this->getSearchWherePartForEventTypes($safeKeyword),
+				$this->getSearchWherePartForCategories($safeKeyword)
 			);
 
-			if (!empty($wherePartsForCurrentSearchword)) {
-				$allWhereParts[] = '(' .
-					implode(' OR ', $wherePartsForCurrentSearchword) . ')';
+			if (!empty($wherePartsForCurrentSearchWord)) {
+				$allWhereParts[] = '(' . implode(' OR ', $wherePartsForCurrentSearchWord) . ')';
 			}
 		}
 
@@ -740,40 +716,6 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 			'categories',
 			'tx_seminars_categories',
 			'tx_seminars_seminars_categories_mm'
-		);
-	}
-
-	/**
-	 * Generates and returns the WHERE clause parts for the search in target
-	 * groups based on the search word given in the first parameter $searchWord.
-	 *
-	 * @param string $searchWord the current search word, must not be empty, must be SQL-safe and quoted for LIKE
-	 *
-	 * @return string[] the WHERE clause parts for the search in target groups
-	 */
-	private function getSearchWherePartForTargetGroups($searchWord) {
-		return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
-			$searchWord,
-			'target_groups',
-			'tx_seminars_target_groups',
-			'tx_seminars_seminars_target_groups_mm'
-		);
-	}
-
-	/**
-	 * Generates and returns the WHERE clause parts for the search in organizers
-	 * based on the search word given in the first parameter $searchWord.
-	 *
-	 * @param string $searchWord the current search word, must not be empty, must be SQL-safe and quoted for LIKE
-	 *
-	 * @return string[] the WHERE clause parts for the search in organizers
-	 */
-	private function getSearchWherePartForOrganizers($searchWord) {
-		return $this->getSearchWherePartForMmRelation(
-			$searchWord,
-			'organizers',
-			'tx_seminars_organizers',
-			'tx_seminars_seminars_organizers_mm'
 		);
 	}
 
@@ -874,8 +816,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 		$result = array();
 
 		foreach (self::$searchFieldList['seminars'] as $field) {
-			$result[] = 'tx_seminars_seminars.' . $field .
-				' LIKE ' . $searchWord;
+			$result[] = 'tx_seminars_seminars.' . $field . ' LIKE ' . $searchWord;
 		}
 
 		return $result;
@@ -891,28 +832,9 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * @return string[] the WHERE clause parts for the search in speakers
 	 */
 	private function getSearchWherePartForSpeakers($searchWord) {
-		$mmTables = array(
-			'speakers' => 'tx_seminars_seminars_speakers_mm',
-			'partners' => 'tx_seminars_seminars_speakers_mm_partners',
-			'tutors' => 'tx_seminars_seminars_speakers_mm_tutors',
-			'leaders' => 'tx_seminars_seminars_speakers_mm_leaders',
+		return $this->getSearchWherePartForMmRelation(
+			$searchWord, 'speakers', 'tx_seminars_speakers', 'tx_seminars_seminars_speakers_mm'
 		);
-
-		$result = array();
-
-		foreach ($mmTables as $key => $currentMmTable) {
-			$result = array_merge(
-				$result,
-				$this->getSearchWherePartForMmRelation(
-					$searchWord,
-					$key,
-					'tx_seminars_speakers',
-					$currentMmTable
-				)
-			);
-		}
-
-		return $result;
 	}
 
 	/**
@@ -944,10 +866,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 		foreach (self::$searchFieldList[$searchFieldKey] as $field) {
 			$result[] = 'EXISTS ' .
-				'(SELECT * FROM ' .
-					'tx_seminars_seminars s1, ' .
-					$mmTable . ', ' .
-					$foreignTable .
+				'(SELECT * FROM ' . 'tx_seminars_seminars s1, ' . $mmTable . ', ' . $foreignTable .
 				' WHERE ((tx_seminars_seminars.object_type = ' .
 						tx_seminars_Model_Event::TYPE_DATE .
 						' AND s1.object_type <> ' . tx_seminars_Model_Event::TYPE_DATE .
@@ -986,12 +905,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 *
 	 * @return string[] the WHERE clause parts for the search in categories, will not be empty
 	 */
-	private function getSearchWherePartForMmRelation(
-		$searchWord, $searchFieldKey, $foreignTable, $mmTable
-	) {
-		$this->checkParametersForMmSearchFunctions(
-			$searchWord, $searchFieldKey, $foreignTable, $mmTable
-		);
+	private function getSearchWherePartForMmRelation($searchWord, $searchFieldKey, $foreignTable, $mmTable) {
+		$this->checkParametersForMmSearchFunctions($searchWord, $searchFieldKey, $foreignTable, $mmTable);
 
 		$result = array();
 
@@ -1002,8 +917,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 		$foreignUids = tx_oelib_db::selectColumnForMultiple(
 			'uid',
 			$foreignTable,
-			'(' . implode(' OR ', $foreignQuery) . ')' .
-				tx_oelib_db::enableFields($foreignTable)
+			'(' . implode(' OR ', $foreignQuery) . ')' . tx_oelib_db::enableFields($foreignTable)
 		);
 		if (empty($foreignUids)) {
 			return array();
@@ -1018,8 +932,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 			return array();
 		}
 
-		$result[] = 'tx_seminars_seminars.uid IN (' .
-			implode(',', $localUids) . ')';
+		$result[] = 'tx_seminars_seminars.uid IN (' . implode(',', $localUids) . ')';
 
 		return $result;
 	}
@@ -1033,10 +946,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 */
 	private function prepareSearchWord($searchWord) {
 		return $GLOBALS['TYPO3_DB']->escapeStrForLike(
-			$GLOBALS['TYPO3_DB']->quoteStr(
-				trim($searchWord, self::TRIM_CHARACTER_LIST),
-				'tx_seminars_seminars'
-			),
+			$GLOBALS['TYPO3_DB']->quoteStr(trim($searchWord, self::TRIM_CHARACTER_LIST), 'tx_seminars_seminars'),
 			'tx_seminars_seminars'
 		);
 	}
@@ -1154,9 +1064,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 		}
 
 		$this->whereClauseParts['earliestBeginDate'] = '(' .
-			'tx_seminars_seminars.begin_date = 0 OR ' .
-			'tx_seminars_seminars.begin_date >= '. $earliestBeginDate .
-			')';
+			'tx_seminars_seminars.begin_date = 0 OR ' . 'tx_seminars_seminars.begin_date >= '. $earliestBeginDate . ')';
 	}
 
 	/**
