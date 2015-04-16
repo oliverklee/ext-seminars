@@ -1,26 +1,16 @@
 <?php
-/***************************************************************
-* Copyright notice
-*
-* (c) 2008-2013 Niels Pardon (mail@niels-pardon.de)
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Test case.
@@ -35,18 +25,18 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_FrontEnd_SelectorWidget
 	 */
-	private $fixture;
+	private $fixture = NULL;
 
 	/**
 	 * @var tx_oelib_testingFramework
 	 */
-	private $testingFramework;
+	private $testingFramework = NULL;
 
 	/**
 	 * @var tx_staticinfotables_pi1 needed to convert ISO codes to country and
 	 *                              language names
 	 */
-	protected $staticInfo;
+	protected $staticInfo = NULL;
 
 	protected function setUp() {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
@@ -1533,6 +1523,55 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
+	/*
+	 * Tests concerning the category search widget
+	 */
+
+	/**
+	 * @test
+	 */
+	public function renderForCategoriesLimitedAndCategoryDisplayedShowsTheLimitedCategories() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'categories');
+
+		$categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => 'Category Foo'));
+		$this->testingFramework->createRelationAndUpdateCounter(
+			'tx_seminars_seminars',
+			$this->testingFramework->createRecord('tx_seminars_seminars'),
+			$categoryUid,
+			'categories'
+		);
+
+		$this->fixture->setConfigurationValue('limitListViewToCategories', $categoryUid);
+
+		self::assertContains(
+			'Category Foo',
+			$this->fixture->render()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForCategoryLimitedAndCategoriesDisplayedHidesTheCategoriesWhichAreNotTheLimitedOnes() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'categories');
+
+		$categoryUid1 = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => 'Category Bar'));
+		$this->testingFramework->createRelationAndUpdateCounter(
+			'tx_seminars_seminars',
+			$this->testingFramework->createRecord('tx_seminars_seminars'),
+			$categoryUid1,
+			'categories'
+		);
+
+		$categoryUid2 = $this->testingFramework->createRecord('tx_seminars_categories');
+
+		$this->fixture->setConfigurationValue('limitListViewToCategories', $categoryUid2);
+
+		self::assertNotContains(
+			'Category Bar',
+			$this->fixture->render()
+		);
+	}
 
 	//////////////////////////////////////////
 	// Tests concerning the age search input
@@ -1778,6 +1817,118 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		);
 	}
 
+	/*
+	 * Tests concerning the rendering of the category option box
+	 */
+
+	/**
+	 * @test
+	 */
+	public function renderForCategoryHiddenInConfigurationHidesCategorySubpart() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
+
+		$this->fixture->render();
+
+		self::assertFalse(
+			$this->fixture->isSubpartVisible('SEARCH_PART_ORGANIZER')
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCategoryContainsCategoryOption() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'categories');
+
+		$categoryName = 'test category';
+		$categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => $categoryName));
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+		$this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid, 'categories');
+
+		self::assertContains(
+			'<option value="' . $categoryUid . '">' . $categoryName . '</option>',
+			$this->fixture->render()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCategoryHtmlSpecialCharsTheCategoriesName() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'categories');
+
+		$categoryName = '< Category Name >';
+		$categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => $categoryName));
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+		$this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid, 'categories');
+
+		self::assertContains(
+			'<option value="' . $categoryUid . '">' . htmlspecialchars($categoryName) . '</option>',
+			$this->fixture->render()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCategoryPreselectsSelectedValue() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'categories');
+
+		$categoryName = 'Category Name';
+		$categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => $categoryName));
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+		$this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid, 'categories');
+
+		$this->fixture->piVars['categories'][] = (string) $categoryUid;
+
+		self::assertContains(
+			$categoryUid . '" selected="selected">' . $categoryName . '</option>',
+			$this->fixture->render()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCategoryCanPreselectTwoValues() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'categories');
+
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+
+		$categoryName1 = 'Category 1';
+		$categoryUid1 = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => $categoryName1));
+		$categoryName2 = 'Category 2';
+		$categoryUid2 = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => $categoryName2));
+
+		$this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid1, 'categories');
+		$this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid2, 'categories');
+
+		$this->fixture->piVars['categories'][] = (string)$categoryUid1;
+		$this->fixture->piVars['categories'][] = (string)$categoryUid2;
+
+		$output = $this->fixture->render();
+
+		self::assertContains(
+			$categoryUid1 . '" selected="selected">' . $categoryName1 . '</option>',
+			$output
+		);
+		self::assertContains(
+			$categoryUid2 . '" selected="selected">' . $categoryName2 . '</option>',
+			$output
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForEnabledCategoryContainsCategoriesSubpart() {
+		$this->fixture->setConfigurationValue('displaySearchFormFields', 'categories');
+		$this->fixture->render();
+
+		self::assertTrue(
+			$this->fixture->isSubpartVisible('SEARCH_PART_CATEGORIES')
+		);
+	}
 
 	////////////////////////////////////////////
 	// Tests concerning the price search input

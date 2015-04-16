@@ -1,26 +1,16 @@
 <?php
-/***************************************************************
-* Copyright notice
-*
-* (c) 2007-2013 Oliver Klee (typo3-coding@oliverklee.de)
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Test case.
@@ -3414,6 +3404,55 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function listViewWithCategoryContainsEventsWithOneOfTwoSelectedCategories() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid = (string)$this->testingFramework->createRecord('tx_seminars_categories', array('title' => 'a category'));
+		$this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $eventUid, $categoryUid);
+		$this->fixture->piVars['categories'][] = $categoryUid;
+
+		self::assertContains(
+			'Event with category',
+			$this->fixture->main('', array())
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function listViewWithCategoryExcludesEventsWithNotSelectedCategory() {
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'pid' => $this->systemFolderPid,
+				'title' => 'Event with category',
+				// the number of categories
+				'categories' => 1
+			)
+		);
+		$categoryUid1 = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => 'a category'));
+		$this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $eventUid, $categoryUid1);
+
+		$categoryUid2 = (string)$this->testingFramework->createRecord(
+			'tx_seminars_categories', array('title' => 'another category')
+		);
+		$this->fixture->piVars['categories'][] = $categoryUid2;
+
+		self::assertNotContains(
+			'Event with category',
+			$this->fixture->main('', array())
+		);
+	}
 
 	///////////////////////////////////////////////////////////
 	// Tests concerning the list view, filtered by event type

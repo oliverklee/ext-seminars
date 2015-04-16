@@ -273,7 +273,7 @@ override the corresponding value from TS Setup.**
          comma-separated list of search options which should be shown in the
          search widget. If no field is displayed the search widget will be
          hidden. Allowed values are in: event\_type, language, country, city,
-         place, full\_text\_search, day, age, organizer, price
+         place, full\_text\_search, day, age, organizer, price, categories
 
    Standardwert
 

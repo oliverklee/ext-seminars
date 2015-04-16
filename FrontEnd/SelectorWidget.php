@@ -1,26 +1,16 @@
 <?php
-/***************************************************************
-* Copyright notice
-*
-* (c) 2008-2013 Niels Pardon (mail@niels-pardon.de)
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
 
@@ -91,6 +81,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 		$this->fillOrHideSearchSubpart('country');
 		$this->fillOrHideSearchSubpart('city');
 		$this->fillOrHideSearchSubpart('organizer');
+		$this->fillOrHideSearchSubpart('categories');
 		$this->fillOrHideFullTextSearch();
 		$this->fillOrHideDateSearch();
 		$this->fillOrHideAgeSearch();
@@ -116,18 +107,10 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 		/** @var tx_seminars_BagBuilder_Event $builder */
 		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->limitToEventTypes(
-			t3lib_div::trimExplode(
-				',',
-				$this->getConfValueString(
-					'limitListViewToEventTypes', 's_listView'
-				),
-				TRUE
-			)
+			t3lib_div::trimExplode(',', $this->getConfValueString('limitListViewToEventTypes', 's_listView'), TRUE)
 		);
-
-		$builder->limitToOrganizers(
-			$this->getConfValueString('limitListViewToOrganizers', 's_listView')
-		);
+		$builder->limitToOrganizers($this->getConfValueString('limitListViewToOrganizers', 's_listView'));
+		$builder->limitToCategories($this->getConfValueString('limitListViewToCategories', 's_listView'));
 
 		$this->seminarBag = $builder->build();
 	}
@@ -340,14 +323,10 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	 */
 	private function fillOrHideSearchSubpart($searchField) {
 		if (!$this->hasSearchField($searchField)) {
-			$this->hideSubparts(
-				self::SUBPART_PREFIX . strtoupper($searchField)
-			);
-
+			$this->hideSubparts(self::SUBPART_PREFIX . strtoupper($searchField));
 			return;
 		}
 
-		$optionData = array();
 		switch ($searchField) {
 			case 'event_type':
 				$optionData = $this->getEventTypeData();
@@ -367,13 +346,15 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 			case 'organizer':
 				$optionData = $this->getOrganizerData();
 				break;
+			case 'categories':
+				$optionData = $this->getCategoryData();
+				break;
 			default:
 				throw new InvalidArgumentException(
 					'The given search field . "' . $searchField . '" was not an allowed value. ' .
 						'Allowed values are: "event_type", "language", "country", "city", "place" or "organizer".',
 					1333293298
 				);
-				break;
 		}
 
 		asort($optionData, SORT_STRING);
@@ -666,6 +647,32 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 					$organizerUid = $organizer->getUid();
 					if (!isset($result[$organizerUid])) {
 						$result[$organizerUid] = $organizer->getName();
+					}
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Gets the data for the category search field options.
+	 *
+	 * @return string[] the data for the category search field options; the key
+	 *               will be the UID of the category and the value will be the
+	 *               name of the category, will be empty if no data could be
+	 *               found
+	 */
+	private function getCategoryData() {
+		$result = array();
+
+		/** @var tx_seminars_seminar $event */
+		foreach ($this->seminarBag as $event) {
+			if ($event->hasCategories()) {
+				$categories = $event->getCategories();
+				foreach ($categories as $uid => $category) {
+					if (!isset($result[$uid])) {
+						$result[$uid] = $category['title'];
 					}
 				}
 			}

@@ -305,18 +305,22 @@
 										<numIndex index="1">organizer</numIndex>
 									</numIndex>
 									<numIndex index="6" type="array">
+										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.categories</numIndex>
+										<numIndex index="1">categories</numIndex>
+									</numIndex>
+									<numIndex index="7" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.date</numIndex>
 										<numIndex index="1">date</numIndex>
 									</numIndex>
-									<numIndex index="7" type="array">
+									<numIndex index="8" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.age</numIndex>
 										<numIndex index="1">age</numIndex>
 									</numIndex>
-									<numIndex index="8" type="array">
+									<numIndex index="9" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.price</numIndex>
 										<numIndex index="1">price</numIndex>
 									</numIndex>
-									<numIndex index="9" type="array">
+									<numIndex index="10" type="array">
 										<numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.searchForm.textField</numIndex>
 										<numIndex index="1">full_text_search</numIndex>
 									</numIndex>

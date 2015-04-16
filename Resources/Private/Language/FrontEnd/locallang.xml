@@ -42,6 +42,7 @@
 			<label index="seminars.pi_flexform.searchForm.city">City</label>
 			<label index="seminars.pi_flexform.searchForm.place">Place</label>
 			<label index="seminars.pi_flexform.searchForm.organizer">Organizer</label>
+			<label index="seminars.pi_flexform.searchForm.categories">Categories</label>
 			<label index="seminars.pi_flexform.searchForm.date">Date</label>
 			<label index="seminars.pi_flexform.searchForm.age">Age</label>
 			<label index="seminars.pi_flexform.searchForm.price">Price</label>
@@ -194,6 +195,7 @@
 			<label index="label_dependencies">Required for</label>
 			<label index="label_organizers">Organizers</label>
 			<label index="label_organizing_partners">Organizing partners</label>
+			<label index="label_categories">Categories</label>
 			<label index="label_vacancies">Vacancies</label>
 			<label index="label_deadline_registration">Deadline for registration</label>
 			<label index="label_status_registration">Status</label>
@@ -662,6 +664,7 @@
 			<label index="seminars.pi_flexform.searchForm.city">Stadt</label>
 			<label index="seminars.pi_flexform.searchForm.place">Ort</label>
 			<label index="seminars.pi_flexform.searchForm.organizer">Veranstalter</label>
+			<label index="seminars.pi_flexform.searchForm.categories">Kategorien</label>
 			<label index="seminars.pi_flexform.searchForm.date">Datum</label>
 			<label index="seminars.pi_flexform.searchForm.age">Alter</label>
 			<label index="seminars.pi_flexform.searchForm.price">Preis</label>
@@ -814,6 +817,7 @@
 			<label index="label_dependencies">Voraussetzung für</label>
 			<label index="label_organizers">Veranstalter</label>
 			<label index="label_organizing_partners">Kooperationspartner</label>
+			<label index="label_categories">Kategorien</label>
 			<label index="label_vacancies">Freie Plätze</label>
 			<label index="label_deadline_registration">Anmeldeschluss</label>
 			<label index="label_status_registration">Status</label>

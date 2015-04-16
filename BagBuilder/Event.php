@@ -90,7 +90,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * @return void
 	 */
 	public function limitToCategories($categoryUids) {
-		if ($categoryUids == '') {
+		if ($categoryUids === '') {
 			unset($this->whereClauseParts['categories']);
 			return;
 		}
@@ -105,8 +105,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 			return;
 		}
 
-		$uidMatcher = ' IN(' .
-			implode(',', $directMatchUids) . ')';
+		$uidMatcher = ' IN(' . implode(',', $directMatchUids) . ')';
 
 		$this->whereClauseParts['categories'] =
 			'(' .

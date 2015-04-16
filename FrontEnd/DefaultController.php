@@ -1,26 +1,16 @@
 <?php
-/***************************************************************
-* Copyright notice
-*
-* (c) 2005-2014 Oliver Klee (typo3-coding@oliverklee.de)
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 require(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
 
@@ -2424,15 +2414,17 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			);
 		}
 
-		if (isset($this->piVars['category']) && ((int)$this->piVars['category']) > 0) {
-			$builder->limitToCategories((int)$this->piVars['category']);
+		$categoryUid = isset($this->piVars['category']) ? (int)$this->piVars['category'] : 0;
+		$categoryUids = isset($this->piVars['categories']) ? (array)$this->piVars['categories'] : array();
+		array_walk($categoryUids, 'intval');
+		if ($categoryUid > 0) {
+			$categories = (string)$categoryUid;
+		} elseif (!empty($categoryUids)) {
+			$categories = implode(',', $categoryUids);
 		} else {
-			$builder->limitToCategories(
-				$this->getConfValueString(
-					'limitListViewToCategories', 's_listView'
-				)
-			);
+			$categories = $this->getConfValueString('limitListViewToCategories', 's_listView');
 		}
+		$builder->limitToCategories($categories);
 
 		if ($this->piVars['age'] > 0) {
 			$builder->limitToAge($this->piVars['age']);
