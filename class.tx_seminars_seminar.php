@@ -1141,7 +1141,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets our regular price as a decimal.
 	 *
-	 * @return float the regular event price
+	 * @return string the regular event price
 	 */
 	private function getPriceRegularAmount() {
 		return $this->getTopicDecimal('price_regular');
@@ -1149,7 +1149,6 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 	/**
 	 * Returns the price, formatted as configured in TS.
-	 * The price must be supplied as integer or floating point value.
 	 *
 	 * @param string $value the price
 	 *
@@ -1159,10 +1158,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		/** @var tx_oelib_ViewHelper_Price $priceViewHelper */
 		$priceViewHelper = t3lib_div::makeInstance('tx_oelib_ViewHelper_Price');
 		$priceViewHelper->setCurrencyFromIsoAlpha3Code(
-			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
-				->getAsString('currency')
+			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency')
 		);
-		$priceViewHelper->setValue($value);
+		$priceViewHelper->setValue((float)$value);
 
 		return $priceViewHelper->render();
 	}
@@ -3689,9 +3687,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * The return array's pointer will already be reset to its first element.
 	 *
-	 * @return array[] the available prices as a reset array of arrays
-	 *               with the keys "caption" (for the title) and "value"
-	 *               (for the price code), might be empty
+	 * @return string[][] the available prices as a reset array of arrays with the keys "caption" (for the title) and "value
+	 *                    (for the price code), might be empty
 	 */
 	public function getAvailablePrices() {
 		$result = array();
