@@ -300,7 +300,7 @@ CREATE TABLE tx_seminars_seminars (
 	KEY cancelation_deadline_reminder_sent (cancelation_deadline_reminder_sent),
 	FULLTEXT index_event_searchfields (accreditation_number),
 	FULLTEXT index_topic_searchfields (title,subtitle,description)
-);
+) ENGINE = MyISAM;
 
 
 #
@@ -350,7 +350,7 @@ CREATE TABLE tx_seminars_speakers (
 	KEY parent (pid),
 	KEY dummy (is_dummy_record),
 	FULLTEXT index_searchfields (title)
-);
+) ENGINE = MyISAM;
 
 
 #
@@ -453,7 +453,7 @@ CREATE TABLE tx_seminars_sites (
 	KEY parent (pid),
 	KEY dummy (is_dummy_record),
 	FULLTEXT index_searchfields (title,city)
-);
+) ENGINE = MyISAM;
 
 
 #
@@ -518,7 +518,7 @@ CREATE TABLE tx_seminars_event_types (
 	KEY parent (pid),
 	KEY dummy (is_dummy_record),
 	FULLTEXT index_searchfields (title)
-);
+) ENGINE = MyISAM;
 
 
 #
@@ -753,7 +753,7 @@ CREATE TABLE tx_seminars_categories (
 	KEY parent (pid),
 	KEY dummy (is_dummy_record),
 	FULLTEXT index_searchfields (title)
-);
+) ENGINE = MyISAM;
 
 
 #
