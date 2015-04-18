@@ -30,11 +30,8 @@ extensions to be installed beforehand:
 
 - **oelib**
 
-- **ameos\_formidable** . If you are using TYPO3 >= 4.7, you will need
-  the patched ameos\_formidable from `https://dl.dropboxusercontent.com/
-  u/27225645/Extensions/T3X\_ameos\_formidable-1\_1\_563-z-201404171623.
-  t3x <https://dl.dropboxusercontent.com/u/27225645/Extensions
-  /T3X_ameos_formidable-1_1_563-z-201404171623.t3x>`_
+- **ameos\_formidable**: Please use the `patched ameos\_formidable
+  <https://dl.dropboxusercontent.com/u/27225645/Extensions/T3X_ameos_formidable-1_1_563-z-201404171623.t3x>`_.
 
 - **static\_info\_tables**
 
@@ -75,9 +72,9 @@ The default values are good for starters.
 
 - Disable “Select topic records from all pages” only in one of the
   following two cases:
-  
+
   - if you have really a lot (like about 20 or more) event *topic* records
-  
+
   - if you already have created lots of complete event records and you now
     are just starting to use the topic/date separation for events
 

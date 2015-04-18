@@ -86,6 +86,7 @@ Localization:
 - [#3852] Update the French localization, thanks to Martin Rebetez
 
 Bug fixes:
+- [#5282] Download link to FORMidable is split across several lines
 - [#5290] Force the SQL tables with full-text indices to use the MyISAM engine
 - [#5285] Warning about wrong type for number_format
 - [#5276] Event headline configuration check looks in the wrong namespace
