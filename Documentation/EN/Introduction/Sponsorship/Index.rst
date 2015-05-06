@@ -99,6 +99,8 @@ organizations and persons:
 
 - `Scheltwort IT-Services KG <http://www.scheltwort-its.de/>`_
 
+- `sitegeist media solutions GmbH <https://sitegeist.de/>`_
+
 - `SIVA creative media <http://www.siva-creative.net/>`_
 
 - `SONNENDEQ - Form + eFunktion <http://www.sonnendeq.com/>`_
