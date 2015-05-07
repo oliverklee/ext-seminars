@@ -116,7 +116,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'listView.' => array(
 					'orderBy' => 'data',
 					'descFlag' => 0,
-					'results_at_a_time' => 5,
+					'results_at_a_time' => 999,
 					'maxPages' => 5,
 				),
 				'eventFieldsOnRegistrationPage' => 'title,price_regular,price_special,vacancies,accreditation_number',
@@ -3653,7 +3653,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['from_month'] = date('n', $fromTime);
 		$this->fixture->piVars['from_year'] = date('Y', $fromTime);
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event From',
 			$this->fixture->main('', array())
 		);
@@ -3679,7 +3679,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['from_month'] = date('n', $fromTime);
 		$this->fixture->piVars['from_year'] = date('Y', $fromTime);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'Foo Event From',
 			$this->fixture->main('', array())
 		);
@@ -3703,7 +3703,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['from_month'] = date('n', $simTime);
 		$this->fixture->piVars['from_year'] = date('Y', $simTime);
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event From',
 			$this->fixture->main('', array())
 		);
@@ -3728,7 +3728,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['from_day'] = date('j', $fromTime);
 		$this->fixture->piVars['from_month'] = date('n', $fromTime);
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event From',
 			$this->fixture->main('', array())
 		);
@@ -3752,7 +3752,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['from_day'] = date('j', $simTime);
 		$this->fixture->piVars['from_year'] = date('Y', $simTime);
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event From',
 			$this->fixture->main('', array())
 		);
@@ -3775,7 +3775,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['from_year'] = date('Y', $simTime);
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event From',
 			$this->fixture->main('', array())
 		);
@@ -3801,7 +3801,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['to_month'] = date('n', $toTime);
 		$this->fixture->piVars['to_year'] = date('Y', $toTime);
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event To',
 			$this->fixture->main('', array())
 		);
@@ -3827,7 +3827,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['to_month'] = date('n', $toTime);
 		$this->fixture->piVars['to_year'] = date('Y', $toTime);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'Foo Event To',
 			$this->fixture->main('', array())
 		);
@@ -3851,7 +3851,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['to_month'] = date('n', $simTime);
 		$this->fixture->piVars['to_year'] = date('Y', $simTime);
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event To',
 			$this->fixture->main('', array())
 		);
@@ -3876,7 +3876,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['to_day'] = date('j', $toTime);
 		$this->fixture->piVars['to_month'] = date('n', $toTime);
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event To',
 			$this->fixture->main('', array())
 		);
@@ -3899,7 +3899,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['to_day'] = date('j', $simTime);
 		$this->fixture->piVars['to_year'] = date('Y', $simTime);
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event To',
 			$this->fixture->main('', array())
 		);
@@ -3921,7 +3921,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['to_year'] = date('Y', $simTime);
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event To',
 			$this->fixture->main('', array())
 		);
@@ -3951,7 +3951,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['to_month'] = date('n', $toTime);
 		$this->fixture->piVars['to_year'] = date('Y', $toTime);
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event To',
 			$this->fixture->main('', array())
 		);
@@ -3991,11 +3991,11 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		$output = $this->fixture->main('', array());
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event To',
 			$output
 		);
-		$this->assertContains(
+		self::assertContains(
 			'Bar Event To',
 			$output
 		);
@@ -4024,7 +4024,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['to_month'] = date('n', $toTime);
 		$this->fixture->piVars['to_year'] = date('Y', $toTime);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'Foo Event',
 			$this->fixture->main('', array())
 		);
@@ -4053,7 +4053,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['to_month'] = date('n', $simTime);
 		$this->fixture->piVars['to_year'] = date('Y', $simTime);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'Foo Event',
 			$this->fixture->main('', array())
 		);
@@ -4078,7 +4078,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['to_month'] = 0;
 		$this->fixture->piVars['to_year'] = 0;
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo Event',
 			$this->fixture->main('', array())
 		);

@@ -1,6 +1,7 @@
 0.10.0 (currently working on)
 
 Features:
+- [#5319] The from-to search should also find events ending during that period
 - [#5286] Add a category filter to the search widget
 - [#5261] Add a full-text search index
 - [#5274] Make it configurable whether to link to the single view

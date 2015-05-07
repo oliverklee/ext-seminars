@@ -5072,19 +5072,19 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	////////////////////////////////////////////
-	// Tests concerning limitToLatestBeginDate
-	////////////////////////////////////////////
+	/*
+	 * Tests concerning limitToLatestBeginOrEndDate
+	 */
 
 	/**
 	 * @test
 	 */
-	public function limitToLatestBeginDateForEventWithoutDateDoesNotFindThisEvent() {
+	public function limitToLatestBeginOrEndDateForEventWithoutDateDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord('tx_seminars_seminars');
-		$this->fixture->limitToLatestBeginDate(42);
+		$this->fixture->limitToLatestBeginOrEndDate(42);
 		$bag = $this->fixture->build();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$bag->isEmpty()
 		);
 	}
@@ -5092,14 +5092,14 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function limitToLatestBeginDateForEventBeginDateEqualToGivenTimestampFindsThisEvent() {
+	public function limitToLatestBeginOrEndDateForEventBeginDateEqualToGivenTimestampFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 42)
 		);
-		$this->fixture->limitToLatestBeginDate(42);
+		$this->fixture->limitToLatestBeginOrEndDate(42);
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5108,14 +5108,14 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function limitToLatestBeginDateForEventWithBeginDateAfterGivenTimestampDoesNotFindThisEvent() {
+	public function limitToLatestBeginOrEndDateForEventWithBeginDateAfterGivenTimestampDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 42)
 		);
-		$this->fixture->limitToLatestBeginDate(21);
+		$this->fixture->limitToLatestBeginOrEndDate(21);
 		$bag = $this->fixture->build();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$bag->isEmpty()
 		);
 	}
@@ -5123,14 +5123,14 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function limitToLatestBeginDateForEventBeginDateBeforeGivenTimestampFindsThisEvent() {
+	public function limitToLatestBeginOrEndDateForEventBeginDateBeforeGivenTimestampFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 42)
 		);
-		$this->fixture->limitToLatestBeginDate(84);
+		$this->fixture->limitToLatestBeginOrEndDate(84);
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5139,14 +5139,61 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function limitToLatestBeginDateForZeroGivenUnsetsTheFilter() {
-		$this->testingFramework->createRecord('tx_seminars_seminars');
-
-		$this->fixture->limitToLatestBeginDate(42);
-		$this->fixture->limitToLatestBeginDate(0);
+	public function limitToLatestBeginOrEndDateForEventEndDateEqualToGivenTimestampFindsThisEvent() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('end_date' => 42)
+		);
+		$this->fixture->limitToLatestBeginOrEndDate(42);
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function limitToLatestBeginOrEndDateForEventWithEndDateAfterGivenTimestampDoesNotFindThisEvent() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('end_date' => 42)
+		);
+		$this->fixture->limitToLatestBeginOrEndDate(21);
+		$bag = $this->fixture->build();
+
+		self::assertTrue(
+			$bag->isEmpty()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function limitToLatestBeginOrEndDateForEventEndDateBeforeGivenTimestampFindsThisEvent() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_seminars', array('end_date' => 42)
+		);
+		$this->fixture->limitToLatestBeginOrEndDate(84);
+		$bag = $this->fixture->build();
+
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function limitToLatestBeginOrEndDateForZeroGivenUnsetsTheFilter() {
+		$this->testingFramework->createRecord('tx_seminars_seminars');
+
+		$this->fixture->limitToLatestBeginOrEndDate(42);
+		$this->fixture->limitToLatestBeginOrEndDate(0);
+		$bag = $this->fixture->build();
+
+		self::assertSame(
 			1,
 			$bag->count()
 		);

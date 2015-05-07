@@ -3174,7 +3174,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 
 		$dateTo = $this->getTimestampFromDatePiVars('to');
 		if ($dateTo > 0) {
-			$builder->limitToLatestBeginDate($dateTo);
+			$builder->limitToLatestBeginOrEndDate($dateTo);
 		}
 	}
 
