@@ -1017,10 +1017,10 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 		}
 
 		$this->whereClauseParts['latestBeginDate'] =
-			'tx_seminars_seminars.begin_date <> 0 AND ' .
+			'(tx_seminars_seminars.begin_date <> 0 AND ' .
 			'tx_seminars_seminars.begin_date <= ' . $latestBeginDate . ' OR ' .
 			'tx_seminars_seminars.end_date <> 0 AND ' .
-			'tx_seminars_seminars.end_date <= ' . $latestBeginDate;
+			'tx_seminars_seminars.end_date <= ' . $latestBeginDate . ')';
 	}
 
 	/**
