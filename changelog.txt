@@ -87,6 +87,7 @@ Localization:
 - [#3852] Update the French localization, thanks to Martin Rebetez
 
 Bug fixes:
+- [#5333] Update the FORMidable download link
 - [#5332] EventBagBuilder needs more parentheses
 - [#5282] Download link to FORMidable is split across several lines
 - [#5290] Force the SQL tables with full-text indices to use the MyISAM engine

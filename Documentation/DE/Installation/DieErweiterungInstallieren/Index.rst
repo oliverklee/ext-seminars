@@ -30,7 +30,7 @@ TYPO3- Erweiterungen auf Ihrem Server:
 - **oelib**
 
 - **ameos\_formidable**: Bitte benutzen Sie das `gepatchte ameos\_formidable
-  <https://dl.dropboxusercontent.com/u/27225645/Extensions/T3X_ameos_formidable-1_1_563-z-201404171623.t3x>`_.
+  <https://dl.dropboxusercontent.com/u/27225645/Extensions/T3X_ameos_formidable-1_1_564-z-201506082123.t3x>`_.
 
 - **static\_info\_tables**
 
