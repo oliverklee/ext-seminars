@@ -60,7 +60,7 @@ class tx_seminars_FrontEnd_EditorTest extends tx_phpunit_testcase {
 	//////////////////////////////
 
 	public function testIsTestModeReturnsTrueForTestModeEnabled() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isTestMode()
 		);
 	}
@@ -68,7 +68,7 @@ class tx_seminars_FrontEnd_EditorTest extends tx_phpunit_testcase {
 	public function testIsTestModeReturnsFalseForTestModeDisabled() {
 		$fixture = new tx_seminars_FrontEnd_Editor(array(), $GLOBALS['TSFE']->cObj);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$fixture->isTestMode()
 		);
 	}
@@ -81,7 +81,7 @@ class tx_seminars_FrontEnd_EditorTest extends tx_phpunit_testcase {
 	public function testGetObjectUidReturnsTheSetObjectUidForZero() {
 		$this->fixture->setObjectUid(0);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getObjectUid()
 		);
@@ -91,7 +91,7 @@ class tx_seminars_FrontEnd_EditorTest extends tx_phpunit_testcase {
 		$uid = $this->testingFramework->createRecord('tx_seminars_test');
 		$this->fixture->setObjectUid($uid);
 
-		$this->assertEquals(
+		self::assertEquals(
 			$uid,
 			$this->fixture->getObjectUid()
 		);
@@ -103,7 +103,7 @@ class tx_seminars_FrontEnd_EditorTest extends tx_phpunit_testcase {
 	////////////////////////////////////////////////////////////////
 
 	public function testGetFormValueReturnsEmptyStringForRequestedFormValueNotSet() {
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getFormValue('title')
 		);
@@ -112,7 +112,7 @@ class tx_seminars_FrontEnd_EditorTest extends tx_phpunit_testcase {
 	public function testGetFormValueReturnsValueSetViaSetFakedFormValue() {
 		$this->fixture->setFakedFormValue('title', 'foo');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'foo',
 			$this->fixture->getFormValue('title')
 		);

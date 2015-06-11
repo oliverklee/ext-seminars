@@ -65,7 +65,7 @@ class tx_seminars_ViewHelper_CommaSeparatedTitlesTest extends tx_phpunit_testcas
 	 * @test
 	 */
 	public function renderWithEmptyListReturnsEmptyString() {
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->render($this->list)
 		);
@@ -95,7 +95,7 @@ class tx_seminars_ViewHelper_CommaSeparatedTitlesTest extends tx_phpunit_testcas
 
 		$this->list->add($model);
 
-		$this->assertSame(
+		self::assertSame(
 			$model->getTitle(),
 			$this->fixture->render($this->list)
 		);
@@ -113,7 +113,7 @@ class tx_seminars_ViewHelper_CommaSeparatedTitlesTest extends tx_phpunit_testcas
 		$this->list->add($firstModel);
 		$this->list->add($secondModel);
 
-		$this->assertSame(
+		self::assertSame(
 			$firstModel->getTitle() . ', ' . $secondModel->getTitle(),
 			$this->fixture->render($this->list)
 		);
@@ -128,7 +128,7 @@ class tx_seminars_ViewHelper_CommaSeparatedTitlesTest extends tx_phpunit_testcas
 
 		$this->list->add($model);
 
-		$this->assertSame(
+		self::assertSame(
 			htmlspecialchars($model->getTitle()),
 			$this->fixture->render($this->list)
 		);

@@ -93,17 +93,17 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 		);
 
 		$this->subject = $this->getMockForAbstractClass('Tx_Seminars_Csv_AbstractRegistrationListView');
-		$this->subject->expects($this->any())->method('shouldAlsoContainRegistrationsOnQueue')->will($this->returnValue(TRUE));
+		$this->subject->expects(self::any())->method('shouldAlsoContainRegistrationsOnQueue')->will(self::returnValue(TRUE));
 
 		$testCase = $this;
-		$this->subject->expects($this->any())->method('getFrontEndUserFieldKeys')
-			->will($this->returnCallback(
+		$this->subject->expects(self::any())->method('getFrontEndUserFieldKeys')
+			->will(self::returnCallback(
 				function() use ($testCase) {
 					return $testCase->frontEndUserFieldKeys;
 				}
 			));
-		$this->subject->expects($this->any())->method('getRegistrationFieldKeys')
-			->will($this->returnCallback(
+		$this->subject->expects(self::any())->method('getRegistrationFieldKeys')
+			->will(self::returnCallback(
 				function() use ($testCase) {
 					return $testCase->registrationFieldKeys;
 				}
@@ -176,7 +176,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 	public function renderForNoPageAndNoEventThrowsException() {
 		$subject = $this->getMockForAbstractClass('Tx_Seminars_Csv_AbstractRegistrationListView');
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$subject->render()
 		);
@@ -210,7 +210,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			(string) $registrationUid,
 			$this->subject->render()
 		);
@@ -240,11 +240,11 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 		);
 
 		$registrationsList = $this->subject->render();
-		$this->assertContains(
+		self::assertContains(
 			(string) $firstRegistrationUid,
 			$registrationsList
 		);
-		$this->assertContains(
+		self::assertContains(
 			(string) $secondRegistrationUid,
 			$registrationsList
 		);
@@ -266,7 +266,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'foo_user',
 			$this->subject->render()
 		);
@@ -288,7 +288,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			(string) $registrationUid,
 			$this->subject->render()
 		);
@@ -309,7 +309,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			(string) $registrationUid,
 			$this->subject->render()
 		);
@@ -338,7 +338,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			CRLF . $firstRegistrationUid . CRLF .
 			$secondRegistrationUid . CRLF,
 			$this->subject->render()
@@ -368,7 +368,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertRegExp(
+		self::assertRegExp(
 			'/\r\n$/',
 			$this->subject->render()
 		);
@@ -390,7 +390,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'foo "" bar',
 			$this->subject->render()
 		);
@@ -412,7 +412,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'"foo bar"',
 			$this->subject->render()
 		);
@@ -434,7 +434,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'"foo ; bar"',
 			$this->subject->render()
 		);
@@ -456,7 +456,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'"foo' . LF . 'bar"',
 			$this->subject->render()
 		);
@@ -478,7 +478,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'"foo "" bar"',
 			$this->subject->render()
 		);
@@ -501,7 +501,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'foo;test',
 			$this->subject->render()
 		);
@@ -516,11 +516,11 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 		$registrationsList = $this->subject->render();
 		$localizedAddress = $this->localizeAndRemoveColon('tx_seminars_attendances.address');
 
-		$this->assertContains(
+		self::assertContains(
 			$localizedAddress,
 			$registrationsList
 		);
-		$this->assertNotContains(
+		self::assertNotContains(
 			'"' . $localizedAddress . '"',
 			$registrationsList
 		);
@@ -532,7 +532,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 	public function renderSeparatesHeadlineFieldsWithSemicolons() {
 		$this->registrationFieldKeys = array('address', 'title');
 
-		$this->assertContains(
+		self::assertContains(
 			$this->localizeAndRemoveColon('tx_seminars_attendances.address') .
 				';' . $this->localizeAndRemoveColon('tx_seminars_attendances.title'),
 			$this->subject->render()
@@ -545,7 +545,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 	public function renderForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeadline() {
 		$this->frontEndUserFieldKeys = array('name');
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'name;',
 			$this->subject->render()
 		);
@@ -557,7 +557,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 	public function renderForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeadline() {
 		$this->registrationFieldKeys = array('address');
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			';address',
 			$this->subject->render()
 		);
@@ -570,7 +570,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 		$this->registrationFieldKeys = array('address');
 		$this->frontEndUserFieldKeys = array('name');
 
-		$this->assertContains(
+		self::assertContains(
 			$this->localizeAndRemoveColon('LGL.name') . ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.address'),
 			$this->subject->render()
 		);
@@ -580,7 +580,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 	 * @test
 	 */
 	public function renderForBothConfigurationFieldsEmptyReturnsSeparatorMarkerAndEmptyLine() {
-		$this->assertSame(
+		self::assertSame(
 			'sep=;' . CRLF . CRLF,
 			$this->subject->render()
 		);
@@ -605,7 +605,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'foo',
 			$this->subject->render()
 		);
@@ -630,7 +630,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'foo',
 			$this->subject->render()
 		);
@@ -656,7 +656,7 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'foo',
 			$this->subject->render()
 		);

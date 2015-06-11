@@ -58,7 +58,7 @@ class tx_seminars_Model_FoodTest extends tx_phpunit_testcase {
 	public function setTitleSetsTitle() {
 		$this->fixture->setTitle('Crunchy crisps');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Crunchy crisps',
 			$this->fixture->getTitle()
 		);
@@ -70,7 +70,7 @@ class tx_seminars_Model_FoodTest extends tx_phpunit_testcase {
 	public function getTitleWithNonEmptyTitleReturnsTitle() {
 		$this->fixture->setData(array('title' => 'Crunchy crisps'));
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Crunchy crisps',
 			$this->fixture->getTitle()
 		);

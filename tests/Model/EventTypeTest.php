@@ -59,7 +59,7 @@ class tx_seminars_Model_EventTypeTest extends tx_phpunit_testcase {
 	public function setTitleSetsTitle() {
 		$this->fixture->setTitle('Workshop');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Workshop',
 			$this->fixture->getTitle()
 		);
@@ -71,7 +71,7 @@ class tx_seminars_Model_EventTypeTest extends tx_phpunit_testcase {
 	public function getTitleWithNonEmptyTitleReturnsTitle() {
 		$this->fixture->setData(array('title' => 'Workshop'));
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Workshop',
 			$this->fixture->getTitle()
 		);
@@ -88,7 +88,7 @@ class tx_seminars_Model_EventTypeTest extends tx_phpunit_testcase {
 	public function getSingleViewPageUidReturnsSingleViewPageUid() {
 		$this->fixture->setData(array('single_view_page' => 42));
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getSingleViewPageUid()
 		);
@@ -100,7 +100,7 @@ class tx_seminars_Model_EventTypeTest extends tx_phpunit_testcase {
 	public function hasSingleViewPageUidForZeroPageUidReturnsFalse() {
 		$this->fixture->setData(array('single_view_page' => 0));
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasSingleViewPageUid()
 		);
 	}
@@ -111,7 +111,7 @@ class tx_seminars_Model_EventTypeTest extends tx_phpunit_testcase {
 	public function hasSingleViewPageUidForNonZeroPageUidReturnsTrue() {
 		$this->fixture->setData(array('single_view_page' => 42));
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasSingleViewPageUid()
 		);
 	}

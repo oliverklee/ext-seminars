@@ -115,7 +115,7 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));
 
-		$this->assertContains(
+		self::assertContains(
 			'required &amp; foo',
 			$this->fixture->render()
 		);
@@ -146,7 +146,7 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));
 
-		$this->assertRegExp(
+		self::assertRegExp(
 			'/<a href=.*' . $requiredEvent . '.*>required_foo<\/a>/',
 			$this->fixture->render()
 		);
@@ -184,7 +184,7 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));
 
-		$this->assertRegExp(
+		self::assertRegExp(
 			'/required_foo.*required_bar/s',
 			$this->fixture->render()
 		);
@@ -259,7 +259,7 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));
 		$this->fixture->limitToMissingRegistrations();
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'required_bar',
 			$this->fixture->render()
 		);

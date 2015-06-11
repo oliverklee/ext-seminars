@@ -51,7 +51,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 	public function getTitleWithNonEmptyTitleReturnsTitle() {
 		$this->fixture->setData(array('title' => 'Superhero'));
 
-		$this->assertSame(
+		self::assertSame(
 			'Superhero',
 			$this->fixture->getTitle()
 		);
@@ -63,7 +63,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 	public function getRawTitleWithNonEmptyTitleReturnsTitle() {
 		$this->fixture->setData(array('title' => 'Superhero'));
 
-		$this->assertSame(
+		self::assertSame(
 			'Superhero',
 			$this->fixture->getRawTitle()
 		);
@@ -82,7 +82,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getSubtitle()
 		);
@@ -99,7 +99,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'sub title',
 			$this->fixture->getSubtitle()
 		);
@@ -114,7 +114,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSubtitle('sub title');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'sub title',
 			$this->fixture->getSubtitle()
 		);
@@ -128,7 +128,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasSubtitle()
 		);
 	}
@@ -142,7 +142,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSubtitle('sub title');
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasSubtitle()
 		);
 	}
@@ -160,7 +160,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getTeaser()
 		);
@@ -177,7 +177,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'wow, this is teasing',
 			$this->fixture->getTeaser()
 		);
@@ -192,7 +192,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setTeaser('wow, this is teasing');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'wow, this is teasing',
 			$this->fixture->getTeaser()
 		);
@@ -206,7 +206,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasTeaser()
 		);
 	}
@@ -222,7 +222,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasTeaser()
 		);
 	}
@@ -240,7 +240,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getDescription()
 		);
@@ -257,7 +257,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'this is a great event.',
 			$this->fixture->getDescription()
 		);
@@ -272,7 +272,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setDescription('this is a great event.');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'this is a great event.',
 			$this->fixture->getDescription()
 		);
@@ -286,7 +286,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasDescription()
 		);
 	}
@@ -300,7 +300,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setDescription('this is a great event.');
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasDescription()
 		);
 	}
@@ -318,7 +318,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getCreditPoints()
 		);
@@ -335,7 +335,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getCreditPoints()
 		);
@@ -350,7 +350,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setCreditPoints(0);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getCreditPoints()
 		);
@@ -365,7 +365,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setCreditPoints(42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getCreditPoints()
 		);
@@ -379,7 +379,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasCreditPoints()
 		);
 	}
@@ -395,7 +395,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasCreditPoints()
 		);
 	}
@@ -416,7 +416,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getRegularPrice()
 		);
@@ -433,7 +433,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getRegularPrice()
 		);
@@ -448,7 +448,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegularPrice(0.00);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getRegularPrice()
 		);
@@ -463,7 +463,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegularPrice(42.42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getRegularPrice()
 		);
@@ -477,7 +477,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasRegularPrice()
 		);
 	}
@@ -493,7 +493,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasRegularPrice()
 		);
 	}
@@ -511,7 +511,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getRegularEarlyBirdPrice()
 		);
@@ -528,7 +528,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getRegularEarlyBirdPrice()
 		);
@@ -555,7 +555,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegularEarlyBirdPrice(0.00);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getRegularEarlyBirdPrice()
 		);
@@ -570,7 +570,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegularEarlyBirdPrice(42.42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getRegularEarlyBirdPrice()
 		);
@@ -584,7 +584,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasRegularEarlyBirdPrice()
 		);
 	}
@@ -600,7 +600,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasRegularEarlyBirdPrice()
 		);
 	}
@@ -618,7 +618,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getRegularBoardPrice()
 		);
@@ -635,7 +635,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getRegularBoardPrice()
 		);
@@ -650,7 +650,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegularBoardPrice(0.00);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getRegularBoardPrice()
 		);
@@ -665,7 +665,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegularBoardPrice(42.42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getRegularBoardPrice()
 		);
@@ -679,7 +679,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasRegularBoardPrice()
 		);
 	}
@@ -695,7 +695,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasRegularBoardPrice()
 		);
 	}
@@ -713,7 +713,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getSpecialPrice()
 		);
@@ -730,7 +730,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getSpecialPrice()
 		);
@@ -745,7 +745,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialPrice(0.00);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getSpecialPrice()
 		);
@@ -760,7 +760,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialPrice(42.42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getSpecialPrice()
 		);
@@ -774,7 +774,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasSpecialPrice()
 		);
 	}
@@ -788,7 +788,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialPrice(42.42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasSpecialPrice()
 		);
 	}
@@ -806,7 +806,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getSpecialEarlyBirdPrice()
 		);
@@ -823,7 +823,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getSpecialEarlyBirdPrice()
 		);
@@ -838,7 +838,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialEarlyBirdPrice(0.00);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getSpecialEarlyBirdPrice()
 		);
@@ -853,7 +853,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialEarlyBirdPrice(42.42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getSpecialEarlyBirdPrice()
 		);
@@ -867,7 +867,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasSpecialEarlyBirdPrice()
 		);
 	}
@@ -883,7 +883,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasSpecialEarlyBirdPrice()
 		);
 	}
@@ -901,7 +901,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getSpecialBoardPrice()
 		);
@@ -918,7 +918,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getSpecialBoardPrice()
 		);
@@ -933,7 +933,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialBoardPrice(0.00);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getSpecialBoardPrice()
 		);
@@ -948,7 +948,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialBoardPrice(42.42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getSpecialBoardPrice()
 		);
@@ -962,7 +962,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasSpecialBoardPrice()
 		);
 	}
@@ -976,7 +976,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialBoardPrice(42.42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasSpecialBoardPrice()
 		);
 	}
@@ -994,7 +994,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getAdditionalInformation()
 		);
@@ -1011,7 +1011,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'this is good to know',
 			$this->fixture->getAdditionalInformation()
 		);
@@ -1026,7 +1026,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setAdditionalInformation('this is good to know');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'this is good to know',
 			$this->fixture->getAdditionalInformation()
 		);
@@ -1040,7 +1040,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasAdditionalInformation()
 		);
 	}
@@ -1056,7 +1056,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasAdditionalInformation()
 		);
 	}
@@ -1074,7 +1074,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->allowsMultipleRegistrations()
 		);
 	}
@@ -1090,7 +1090,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->allowsMultipleRegistrations()
 		);
 	}
@@ -1108,7 +1108,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->usesTerms2()
 		);
 	}
@@ -1124,7 +1124,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->usesTerms2()
 		);
 	}
@@ -1142,7 +1142,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getNotes()
 		);
@@ -1159,7 +1159,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Don\'t forget this.',
 			$this->fixture->getNotes()
 		);
@@ -1174,7 +1174,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setNotes('Don\'t forget this.');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Don\'t forget this.',
 			$this->fixture->getNotes()
 		);
@@ -1188,7 +1188,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasNotes()
 		);
 	}
@@ -1204,7 +1204,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasNotes()
 		);
 	}
@@ -1222,7 +1222,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getImage()
 		);
@@ -1239,7 +1239,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'file.jpg',
 			$this->fixture->getImage()
 		);
@@ -1254,7 +1254,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setImage('file.jpg');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'file.jpg',
 			$this->fixture->getImage()
 		);
@@ -1268,7 +1268,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasImage()
 		);
 	}
@@ -1284,7 +1284,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasImage()
 		);
 	}
@@ -1308,7 +1308,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasEarlyBirdPrice()
 		);
 	}
@@ -1327,7 +1327,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasEarlyBirdPrice()
 		);
 	}
@@ -1344,7 +1344,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasEarlyBirdPrice()
 		);
 	}
@@ -1362,7 +1362,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasEarlyBirdPrice()
 		);
 	}
@@ -1379,7 +1379,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasEarlyBirdPrice()
 		);
 	}
@@ -1396,7 +1396,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasEarlyBirdPrice()
 		);
 	}
@@ -1412,7 +1412,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 	public function isEarlyBirdDeadlineOverForNoEarlyBirdDeadlineReturnsTrue() {
 		$this->fixture->setData(array());
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isEarlyBirdDeadlineOver()
 		);
 	}
@@ -1425,7 +1425,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('deadline_early_bird' => ($GLOBALS['SIM_EXEC_TIME'] - 1))
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isEarlyBirdDeadlineOver()
 		);
 	}
@@ -1438,7 +1438,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'])
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isEarlyBirdDeadlineOver()
 		);
 	}
@@ -1451,7 +1451,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			array('deadline_early_bird' => ($GLOBALS['SIM_EXEC_TIME'] + 1))
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->isEarlyBirdDeadlineOver()
 		);
 	}
@@ -1469,12 +1469,12 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			'tx_seminars_Model_Event',
 			array('hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver')
 		);
-		$fixture->expects($this->any())->method('hasEarlyBirdPrice')
-			->will($this->returnValue(FALSE));
-		$fixture->expects($this->any())->method('isEarlyBirdDeadlineOver')
-			->will($this->returnValue(TRUE));
+		$fixture->expects(self::any())->method('hasEarlyBirdPrice')
+			->will(self::returnValue(FALSE));
+		$fixture->expects(self::any())->method('isEarlyBirdDeadlineOver')
+			->will(self::returnValue(TRUE));
 
-		$this->assertFalse(
+		self::assertFalse(
 			$fixture->earlyBirdApplies()
 		);
 	}
@@ -1487,12 +1487,12 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			'tx_seminars_Model_Event',
 			array('hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver')
 		);
-		$fixture->expects($this->any())->method('hasEarlyBirdPrice')
-			->will($this->returnValue(TRUE));
-		$fixture->expects($this->any())->method('isEarlyBirdDeadlineOver')
-			->will($this->returnValue(TRUE));
+		$fixture->expects(self::any())->method('hasEarlyBirdPrice')
+			->will(self::returnValue(TRUE));
+		$fixture->expects(self::any())->method('isEarlyBirdDeadlineOver')
+			->will(self::returnValue(TRUE));
 
-		$this->assertFalse(
+		self::assertFalse(
 			$fixture->earlyBirdApplies()
 		);
 	}
@@ -1505,12 +1505,12 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			'tx_seminars_Model_Event',
 			array('hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver')
 		);
-		$fixture->expects($this->any())->method('hasEarlyBirdPrice')
-			->will($this->returnValue(TRUE));
-		$fixture->expects($this->any())->method('isEarlyBirdDeadlineOver')
-			->will($this->returnValue(FALSE));
+		$fixture->expects(self::any())->method('hasEarlyBirdPrice')
+			->will(self::returnValue(TRUE));
+		$fixture->expects(self::any())->method('isEarlyBirdDeadlineOver')
+			->will(self::returnValue(FALSE));
 
-		$this->assertTrue(
+		self::assertTrue(
 			$fixture->earlyBirdApplies()
 		);
 	}
@@ -1527,11 +1527,11 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$fixture = $this->getMock(
 			'tx_seminars_Model_Event', array('earlyBirdApplies')
 		);
-		$fixture->expects($this->any())->method('earlyBirdApplies')
-			->will($this->returnValue(FALSE));
+		$fixture->expects(self::any())->method('earlyBirdApplies')
+			->will(self::returnValue(FALSE));
 		$fixture->setData(array());
 
-		$this->assertEquals(
+		self::assertEquals(
 			array('regular' => 0.000),
 			$fixture->getAvailablePrices()
 		);
@@ -1544,11 +1544,11 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$fixture = $this->getMock(
 			'tx_seminars_Model_Event', array('earlyBirdApplies')
 		);
-		$fixture->expects($this->any())->method('earlyBirdApplies')
-			->will($this->returnValue(FALSE));
+		$fixture->expects(self::any())->method('earlyBirdApplies')
+			->will(self::returnValue(FALSE));
 		$fixture->setData(array('price_regular' => 12.345));
 
-		$this->assertEquals(
+		self::assertEquals(
 			array('regular' => 12.345),
 			$fixture->getAvailablePrices()
 		);
@@ -1561,8 +1561,8 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$fixture = $this->getMock(
 			'tx_seminars_Model_Event', array('earlyBirdApplies')
 		);
-		$fixture->expects($this->any())->method('earlyBirdApplies')
-			->will($this->returnValue(TRUE));
+		$fixture->expects(self::any())->method('earlyBirdApplies')
+			->will(self::returnValue(TRUE));
 		$fixture->setData(
 			array(
 				'price_regular' => 12.345,
@@ -1570,7 +1570,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			array('regular_early' => 23.456),
 			$fixture->getAvailablePrices()
 		);
@@ -1583,8 +1583,8 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$fixture = $this->getMock(
 			'tx_seminars_Model_Event', array('earlyBirdApplies')
 		);
-		$fixture->expects($this->any())->method('earlyBirdApplies')
-			->will($this->returnValue(FALSE));
+		$fixture->expects(self::any())->method('earlyBirdApplies')
+			->will(self::returnValue(FALSE));
 		$fixture->setData(
 			array(
 				'price_regular' => 12.345,
@@ -1592,7 +1592,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			array('regular' => 12.345),
 			$fixture->getAvailablePrices()
 		);
@@ -1605,15 +1605,15 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$fixture = $this->getMock(
 			'tx_seminars_Model_Event', array('earlyBirdApplies')
 		);
-		$fixture->expects($this->any())->method('earlyBirdApplies')
-			->will($this->returnValue(FALSE));
+		$fixture->expects(self::any())->method('earlyBirdApplies')
+			->will(self::returnValue(FALSE));
 		$fixture->setData(
 			array(
 				'price_regular_board' => 23.456,
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			array(
 				'regular' => 0.000,
 				'regular_board' => 23.456,
@@ -1629,15 +1629,15 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$fixture = $this->getMock(
 			'tx_seminars_Model_Event', array('earlyBirdApplies')
 		);
-		$fixture->expects($this->any())->method('earlyBirdApplies')
-			->will($this->returnValue(FALSE));
+		$fixture->expects(self::any())->method('earlyBirdApplies')
+			->will(self::returnValue(FALSE));
 		$fixture->setData(
 			array(
 				'price_special_board' => 23.456,
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			array(
 				'regular' => 0.000,
 				'special_board' => 23.456,
@@ -1653,11 +1653,11 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$fixture = $this->getMock(
 			'tx_seminars_Model_Event', array('earlyBirdApplies')
 		);
-		$fixture->expects($this->any())->method('earlyBirdApplies')
-			->will($this->returnValue(FALSE));
+		$fixture->expects(self::any())->method('earlyBirdApplies')
+			->will(self::returnValue(FALSE));
 		$fixture->setData(array('price_special' => 12.345));
 
-		$this->assertEquals(
+		self::assertEquals(
 			array(
 				'regular' => 0.000,
 				'special' => 12.345,
@@ -1673,8 +1673,8 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$fixture = $this->getMock(
 			'tx_seminars_Model_Event', array('earlyBirdApplies')
 		);
-		$fixture->expects($this->any())->method('earlyBirdApplies')
-			->will($this->returnValue(TRUE));
+		$fixture->expects(self::any())->method('earlyBirdApplies')
+			->will(self::returnValue(TRUE));
 		$fixture->setData(
 			array(
 				'price_special' => 34.567,
@@ -1682,7 +1682,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			array(
 				'regular' => 0.000,
 				'special_early' => 23.456,
@@ -1698,8 +1698,8 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$fixture = $this->getMock(
 			'tx_seminars_Model_Event', array('earlyBirdApplies')
 		);
-		$fixture->expects($this->any())->method('earlyBirdApplies')
-			->will($this->returnValue(TRUE));
+		$fixture->expects(self::any())->method('earlyBirdApplies')
+			->will(self::returnValue(TRUE));
 		$fixture->setData(
 			array(
 				'price_regular' => 34.567,
@@ -1707,7 +1707,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			array('regular' => 34.567),
 			$fixture->getAvailablePrices()
 		);
@@ -1720,8 +1720,8 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$fixture = $this->getMock(
 			'tx_seminars_Model_Event', array('earlyBirdApplies')
 		);
-		$fixture->expects($this->any())->method('earlyBirdApplies')
-			->will($this->returnValue(FALSE));
+		$fixture->expects(self::any())->method('earlyBirdApplies')
+			->will(self::returnValue(FALSE));
 		$fixture->setData(
 			array(
 				'price_special' => 34.567,
@@ -1729,7 +1729,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			array(
 				'regular' => 0.000,
 				'special' => 34.567,
@@ -1752,7 +1752,7 @@ class tx_seminars_Model_EventTopicTest extends tx_phpunit_testcase {
 		$paymentMethods = new tx_oelib_List();
 		$this->fixture->setPaymentMethods($paymentMethods);
 
-		$this->assertSame(
+		self::assertSame(
 			$paymentMethods,
 			$this->fixture->getPaymentMethods()
 		);

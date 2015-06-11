@@ -64,7 +64,7 @@ class tx_seminars_ViewHelper_CountdownTest extends tx_phpunit_testcase {
 	public function renderWithBeginDateInThirtySecondsReturnsThirtySecondsLeft() {
 		$offset = 30;
 
-		$this->assertSame(
+		self::assertSame(
 			sprintf(
 				$this->translator->translate('message_countdown'),
 				$offset,
@@ -80,7 +80,7 @@ class tx_seminars_ViewHelper_CountdownTest extends tx_phpunit_testcase {
 	public function renderWithBeginDateInOneMinuteReturnsOneMinuteLeft() {
 		$offset = 60;
 
-		$this->assertSame(
+		self::assertSame(
 			sprintf(
 				$this->translator->translate('message_countdown'),
 				$offset,
@@ -96,7 +96,7 @@ class tx_seminars_ViewHelper_CountdownTest extends tx_phpunit_testcase {
 	public function renderWithBeginDateInTwoMinutesReturnsTwoMinutesLeft() {
 		$offset = 120;
 
-		$this->assertSame(
+		self::assertSame(
 			sprintf(
 				$this->translator->translate('message_countdown'),
 				$offset,
@@ -112,7 +112,7 @@ class tx_seminars_ViewHelper_CountdownTest extends tx_phpunit_testcase {
 	public function renderWithBeginDateInOneHourReturnsOneHourLeft() {
 		$offset = 3600;
 
-		$this->assertSame(
+		self::assertSame(
 			sprintf(
 				$this->translator->translate('message_countdown'),
 				$offset,
@@ -128,7 +128,7 @@ class tx_seminars_ViewHelper_CountdownTest extends tx_phpunit_testcase {
 	public function renderWithBeginDateInTwoHoursReturnsTwoHoursLeft() {
 		$offset = 7200;
 
-		$this->assertSame(
+		self::assertSame(
 			sprintf(
 				$this->translator->translate('message_countdown'),
 				$offset,
@@ -144,7 +144,7 @@ class tx_seminars_ViewHelper_CountdownTest extends tx_phpunit_testcase {
 	public function renderWithBeginDateInOneDayReturnsOneDayLeft() {
 		$offset = 86400;
 
-		$this->assertSame(
+		self::assertSame(
 			sprintf(
 				$this->translator->translate('message_countdown'),
 				$offset,
@@ -160,7 +160,7 @@ class tx_seminars_ViewHelper_CountdownTest extends tx_phpunit_testcase {
 	public function renderWithBeginDateInTwoDaysReturnsTwoDaysLeft() {
 		$offset = 2*86400;
 
-		$this->assertSame(
+		self::assertSame(
 			sprintf(
 				$this->translator->translate('message_countdown'),
 				$offset,

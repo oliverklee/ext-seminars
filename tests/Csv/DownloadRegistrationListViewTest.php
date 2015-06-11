@@ -119,7 +119,7 @@ class Tx_Seminars_Tests_Csv_DownloadRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			(string) $registrationUid,
 			$this->subject->render()
 		);
@@ -146,7 +146,7 @@ class Tx_Seminars_Tests_Csv_DownloadRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			$firstName,
 			$this->subject->render()
 		);
@@ -173,7 +173,7 @@ class Tx_Seminars_Tests_Csv_DownloadRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			$lastName,
 			$this->subject->render()
 		);
@@ -200,7 +200,7 @@ class Tx_Seminars_Tests_Csv_DownloadRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			$knownFrom,
 			$this->subject->render()
 		);
@@ -227,7 +227,7 @@ class Tx_Seminars_Tests_Csv_DownloadRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			$notes,
 			$this->subject->render()
 		);
@@ -253,7 +253,7 @@ class Tx_Seminars_Tests_Csv_DownloadRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			(string) $registrationUid,
 			$this->subject->render()
 		);
@@ -279,7 +279,7 @@ class Tx_Seminars_Tests_Csv_DownloadRegistrationListViewTest extends Tx_Phpunit_
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			(string) $registrationUid,
 			$this->subject->render()
 		);

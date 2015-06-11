@@ -58,7 +58,7 @@ class tx_seminars_Model_CheckboxTest extends tx_phpunit_testcase {
 	public function setTitleSetsTitle() {
 		$this->fixture->setTitle('I agree with the T&C.');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'I agree with the T&C.',
 			$this->fixture->getTitle()
 		);
@@ -70,7 +70,7 @@ class tx_seminars_Model_CheckboxTest extends tx_phpunit_testcase {
 	public function getTitleWithNonEmptyTitleReturnsTitle() {
 		$this->fixture->setData(array('title' => 'I agree with the T&C.'));
 
-		$this->assertEquals(
+		self::assertEquals(
 			'I agree with the T&C.',
 			$this->fixture->getTitle()
 		);
@@ -87,7 +87,7 @@ class tx_seminars_Model_CheckboxTest extends tx_phpunit_testcase {
 	public function getDescriptionWithoutDescriptionReturnsAnEmptyString() {
 		$this->fixture->setData(array());
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getDescription()
 		);
@@ -99,7 +99,7 @@ class tx_seminars_Model_CheckboxTest extends tx_phpunit_testcase {
 	public function getDescriptionWithDescriptionReturnsDescription() {
 		$this->fixture->setData(array('description' => 'I agree with the T&C.'));
 
-		$this->assertEquals(
+		self::assertEquals(
 			'I agree with the T&C.',
 			$this->fixture->getDescription()
 		);
@@ -111,7 +111,7 @@ class tx_seminars_Model_CheckboxTest extends tx_phpunit_testcase {
 	public function setDescriptionSetsDescription() {
 		$this->fixture->setDescription('I agree with the T&C.');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'I agree with the T&C.',
 			$this->fixture->getDescription()
 		);
@@ -123,7 +123,7 @@ class tx_seminars_Model_CheckboxTest extends tx_phpunit_testcase {
 	public function hasDescriptionWithoutDescriptionReturnsFalse() {
 		$this->fixture->setData(array());
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasDescription()
 		);
 	}
@@ -134,7 +134,7 @@ class tx_seminars_Model_CheckboxTest extends tx_phpunit_testcase {
 	public function hasDescriptionWithDescriptionReturnsTrue() {
 		$this->fixture->setDescription('I agree with the T&C.');
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasDescription()
 		);
 	}

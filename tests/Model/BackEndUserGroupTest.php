@@ -50,7 +50,7 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 	public function getTitleForNonEmptyGroupTitleReturnsGroupTitle() {
 		$this->fixture->setData(array('title' => 'foo'));
 
-		$this->assertEquals(
+		self::assertEquals(
 			'foo',
 			$this->fixture->getTitle()
 		);
@@ -62,7 +62,7 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 	public function getTitleForEmptyGroupTitleReturnsEmptyString() {
 		$this->fixture->setData(array('title' => ''));
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getTitle()
 		);
@@ -78,7 +78,7 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 	public function getEventFolderForNoSetEventFolderReturnsZero() {
 		$this->fixture->setData(array());
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getEventFolder()
 		);
@@ -90,7 +90,7 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 	public function getEventFolderForSetEventFolderReturnsEventFolderPid() {
 		$this->fixture->setData(array('tx_seminars_events_folder' => 42));
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getEventFolder()
 		);
@@ -108,7 +108,7 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 	public function getRegistrationFolderForNoSetRegistrationFolderReturnsZero() {
 		$this->fixture->setData(array());
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getRegistrationFolder()
 		);
@@ -120,7 +120,7 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 	public function getRegistrationFolderForSetRegistrationFolderReturnsRegistrationFolderPid() {
 		$this->fixture->setData(array('tx_seminars_registrations_folder' => 42));
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getRegistrationFolder()
 		);
@@ -138,7 +138,7 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 	public function getAuxiliaryRecordsFolderForNoSetAuxiliaryRecordsFolderReturnsZero() {
 		$this->fixture->setData(array());
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getAuxiliaryRecordFolder()
 		);
@@ -150,7 +150,7 @@ class tx_seminars_Model_BackEndUserGroupTest extends tx_phpunit_testcase {
 	public function getAuxiliaryRecordsFolderForSetAuxiliaryRecordsFolderReturnsAuxiliaryRecordsFolderPid() {
 		$this->fixture->setData(array('tx_seminars_auxiliaries_folder' => 42));
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getAuxiliaryRecordFolder()
 		);

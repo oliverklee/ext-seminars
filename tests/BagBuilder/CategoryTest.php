@@ -57,7 +57,7 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 	///////////////////////////////////////////
 
 	public function testBuilderBuildsABag() {
-		$this->assertTrue(
+		self::assertTrue(
 			is_subclass_of($this->fixture->build(), 'tx_seminars_Bag_Abstract')
 		);
 	}
@@ -73,16 +73,16 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 		);
 
 		$categoryBag = $this->fixture->build();
-		$this->assertEquals(
+		self::assertEquals(
 			2,
 			$categoryBag->count()
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Title 1',
 			$categoryBag->current()->getTitle()
 		);
-		$this->assertEquals(
+		self::assertEquals(
 			'Title 2',
 			$categoryBag->next()->getTitle()
 		);
@@ -107,7 +107,7 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 		);
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
+		self::assertEquals(
 			2,
 			$bag->count()
 		);
@@ -129,7 +129,7 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEvents('');
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
+		self::assertEquals(
 			2,
 			$bag->count()
 		);
@@ -189,7 +189,7 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEvents($eventUid);
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
+		self::assertEquals(
 			1,
 			$bag->count()
 		);
@@ -219,7 +219,7 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEvents($eventUid);
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
+		self::assertEquals(
 			2,
 			$bag->count()
 		);
@@ -251,7 +251,7 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEvents($eventUid1.','.$eventUid2);
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
+		self::assertEquals(
 			2,
 			$bag->count()
 		);
@@ -273,10 +273,10 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEvents($eventUid);
 		$bag = $this->fixture->build();
 
-		$this->assertFalse(
+		self::assertFalse(
 			$bag->isEmpty()
 		);
-		$this->assertEquals(
+		self::assertEquals(
 			$categoryUid,
 			$bag->current()->getUid()
 		);
@@ -306,11 +306,11 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEvents($eventUid1);
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
+		self::assertEquals(
 			1,
 			$bag->count()
 		);
-		$this->assertEquals(
+		self::assertEquals(
 			$categoryUid1,
 			$bag->current()->getUid()
 		);
@@ -338,7 +338,7 @@ class tx_seminars_BagBuilder_CategoryTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEvents($eventUid2);
 		$bag = $this->fixture->build();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$bag->isEmpty()
 		);
 	}

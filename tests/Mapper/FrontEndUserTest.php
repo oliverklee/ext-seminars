@@ -57,7 +57,7 @@ class tx_seminars_Mapper_FrontEndUserTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function mapperForGhostReturnsSeminarsFrontEndUserInstance() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->getNewGhost()
 				instanceof tx_seminars_Model_FrontEndUser
 		);
@@ -79,7 +79,7 @@ class tx_seminars_Mapper_FrontEndUserTest extends tx_phpunit_testcase {
 			array('tx_seminars_registration' => $registration->getUid())
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			$registration,
 			$model->getRegistration()
 		);

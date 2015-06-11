@@ -60,7 +60,7 @@ class tx_seminars_Mapper_CategoryTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function findWithUidReturnsCategoryInstance() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->find(1) instanceof tx_seminars_Model_Category
 		);
 	}
@@ -75,7 +75,7 @@ class tx_seminars_Mapper_CategoryTest extends tx_phpunit_testcase {
 		/** @var tx_seminars_Model_Category $model */
 		$model = $this->fixture->find($uid);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Lecture',
 			$model->getTitle()
 		);

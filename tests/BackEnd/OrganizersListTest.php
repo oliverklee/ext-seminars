@@ -112,7 +112,7 @@ class tx_seminars_BackEnd_OrganizersListTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'Organizer in subfolder',
 			$this->fixture->show()
 		);
@@ -137,7 +137,7 @@ class tx_seminars_BackEnd_OrganizersListTest extends tx_phpunit_testcase {
 			$backEndUser
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'edit[tx_seminars_organizers][' . $newOrganizerFolder . ']=new',
 			$this->fixture->show()
 		);

@@ -58,7 +58,7 @@ class tx_seminars_Model_LodgingTest extends tx_phpunit_testcase {
 	public function setTitleSetsTitle() {
 		$this->fixture->setTitle('Shack');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Shack',
 			$this->fixture->getTitle()
 		);
@@ -70,7 +70,7 @@ class tx_seminars_Model_LodgingTest extends tx_phpunit_testcase {
 	public function getTitleWithNonEmptyTitleReturnsTitle() {
 		$this->fixture->setData(array('title' => 'Shack'));
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Shack',
 			$this->fixture->getTitle()
 		);

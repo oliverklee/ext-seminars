@@ -66,7 +66,7 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 	 * @test
 	 */
 	public function subjectImplementsAccessCheck() {
-		$this->assertInstanceOf(
+		self::assertInstanceOf(
 			'Tx_Seminars_Interface_CsvAccessCheck',
 			$this->subject
 		);
@@ -82,7 +82,7 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 		/** @var $event tx_seminars_seminar */
 		$this->subject->setEvent($event);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->subject->hasAccess()
 		);
 	}
@@ -95,16 +95,16 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 
 		$user = $this->getMock('tx_seminars_Model_FrontEndUser');
 		$userUid = 42;
-		$user->expects($this->any())->method('getUid')->will($this->returnValue($userUid));
+		$user->expects(self::any())->method('getUid')->will(self::returnValue($userUid));
 		/** @var $user tx_seminars_Model_FrontEndUser */
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
 		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);
-		$event->expects($this->any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will($this->returnValue(FALSE));
+		$event->expects(self::any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will(self::returnValue(FALSE));
 		/** @var $event tx_seminars_seminar */
 		$this->subject->setEvent($event);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->subject->hasAccess()
 		);
 	}
@@ -117,16 +117,16 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 
 		$user = $this->getMock('tx_seminars_Model_FrontEndUser');
 		$userUid = 42;
-		$user->expects($this->any())->method('getUid')->will($this->returnValue($userUid));
+		$user->expects(self::any())->method('getUid')->will(self::returnValue($userUid));
 		/** @var $user tx_seminars_Model_FrontEndUser */
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
 		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);
-		$event->expects($this->any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will($this->returnValue(TRUE));
+		$event->expects(self::any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will(self::returnValue(TRUE));
 		/** @var $event tx_seminars_seminar */
 		$this->subject->setEvent($event);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->subject->hasAccess()
 		);
 	}
@@ -139,16 +139,16 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 
 		$user = $this->getMock('tx_seminars_Model_FrontEndUser');
 		$userUid = 42;
-		$user->expects($this->any())->method('getUid')->will($this->returnValue($userUid));
+		$user->expects(self::any())->method('getUid')->will(self::returnValue($userUid));
 		/** @var $user tx_seminars_Model_FrontEndUser */
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
 		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);
-		$event->expects($this->any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will($this->returnValue(FALSE));
+		$event->expects(self::any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will(self::returnValue(FALSE));
 		/** @var $event tx_seminars_seminar */
 		$this->subject->setEvent($event);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->subject->hasAccess()
 		);
 	}
@@ -161,16 +161,16 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 
 		$user = $this->getMock('tx_seminars_Model_FrontEndUser');
 		$userUid = 42;
-		$user->expects($this->any())->method('getUid')->will($this->returnValue($userUid));
+		$user->expects(self::any())->method('getUid')->will(self::returnValue($userUid));
 		/** @var $user tx_seminars_Model_FrontEndUser */
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
 		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);
-		$event->expects($this->any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will($this->returnValue(TRUE));
+		$event->expects(self::any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will(self::returnValue(TRUE));
 		/** @var $event tx_seminars_seminar */
 		$this->subject->setEvent($event);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->subject->hasAccess()
 		);
 	}

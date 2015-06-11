@@ -60,7 +60,7 @@ class tx_seminars_Mapper_OrganizerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function findWithUidReturnsOrganizerInstance() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->find(1) instanceof tx_seminars_Model_Organizer
 		);
 	}
@@ -75,7 +75,7 @@ class tx_seminars_Mapper_OrganizerTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_Lodging $model */
 		$model = $this->fixture->find($uid);
-		$this->assertEquals(
+		self::assertEquals(
 			'Fabulous organizer',
 			$model->getName()
 		);

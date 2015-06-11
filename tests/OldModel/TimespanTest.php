@@ -42,37 +42,37 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	/////////////////////////////////////////////
 
 	public function testInitiallyHasNoDate() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasDate()
 		);
 	}
 
 	public function testBeginDateIsInitiallyZero() {
-		$this->assertEquals(
+		self::assertEquals(
 			0, $this->fixture->getBeginDateAsTimestamp()
 		);
 	}
 
 	public function testInitiallyHasNoBeginDate() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasBeginDate()
 		);
 	}
 
 	public function testEndDateIsInitiallyZero() {
-		$this->assertEquals(
+		self::assertEquals(
 			0, $this->fixture->getEndDateAsTimestamp()
 		);
 	}
 
 	public function testInitiallyHasNoEndDate() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasEndDate()
 		);
 	}
 
 	public function testEndDateForOpenEndedIsInitiallyZero() {
-		$this->assertEquals(
+		self::assertEquals(
 			0, $this->fixture->getEndDateAsTimestampEvenIfOpenEnded()
 		);
 	}
@@ -80,10 +80,10 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testSetAndGetTheBeginDate() {
 		$this->fixture->setBeginDateAndTime(42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasBeginDate()
 		);
-		$this->assertEquals(
+		self::assertEquals(
 			42, $this->fixture->getBeginDateAsTimestamp()
 		);
 	}
@@ -91,7 +91,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testHasDateAfterSettingBeginDate() {
 		$this->fixture->setBeginDateAndTime(42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasDate()
 		);
 	}
@@ -99,10 +99,10 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testSetAndGetTheEndDate() {
 		$this->fixture->setEndDateAndTime(42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasEndDate()
 		);
-		$this->assertEquals(
+		self::assertEquals(
 			42, $this->fixture->getEndDateAsTimestamp()
 		);
 	}
@@ -110,7 +110,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testHasNoDateAfterSettingEndDate() {
 		$this->fixture->setEndDateAndTime(42);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasDate()
 		);
 	}
@@ -118,7 +118,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testEndDateForOpenEndedIsZeroIfNoBeginDate() {
 		$this->fixture->setEndDateAndTime(42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0, $this->fixture->getEndDateAsTimestampEvenIfOpenEnded()
 		);
 	}
@@ -129,7 +129,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	///////////////////////////////
 
 	public function testInitiallyHasNoTime() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasTime()
 		);
 	}
@@ -137,7 +137,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testHasNoEndTimeIfEndsAtMidnight() {
 		$this->fixture->setEndDateAndTime(mktime(0, 0, 0, 1, 1, 2010));
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasEndTime()
 		);
 	}
@@ -145,7 +145,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testHasEndTimeIfEndsDuringTheDay() {
 		$this->fixture->setEndDateAndTime(mktime(9, 0, 0, 1, 1, 2010));
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasEndTime()
 		);
 	}
@@ -156,7 +156,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	/////////////////////////////
 
 	public function testInitiallyIsOpenEnded() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isOpenEnded()
 		);
 	}
@@ -164,7 +164,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testIsOpenEndedAfterSettingOnlyTheBeginDate() {
 		$this->fixture->setBeginDateAndTime(42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isOpenEnded()
 		);
 	}
@@ -174,7 +174,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 			mktime(9, 0, 0, 1, 1, 2010)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->isOpenEnded()
 		);
 	}
@@ -188,7 +188,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 			mktime(9, 0, 0, 1, 1, 2010)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->isOpenEnded()
 		);
 	}
@@ -198,7 +198,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 			mktime(0, 0, 0, 1, 1, 2010)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->isOpenEnded()
 		);
 	}
@@ -213,10 +213,10 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 			mktime(1, 0, 0, 1, 1, 2010)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isOpenEnded()
 		);
-		$this->assertEquals(
+		self::assertEquals(
 			mktime(0, 0, 0, 1, 2, 2010),
 			$this->fixture->getEndDateAsTimestampEvenIfOpenEnded()
 		);
@@ -227,10 +227,10 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 			mktime(9, 0, 0, 1, 1, 2010)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isOpenEnded()
 		);
-		$this->assertEquals(
+		self::assertEquals(
 			mktime(0, 0, 0, 1, 2, 2010),
 			$this->fixture->getEndDateAsTimestampEvenIfOpenEnded()
 		);
@@ -241,10 +241,10 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 			mktime(23, 0, 0, 1, 1, 2010)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isOpenEnded()
 		);
-		$this->assertEquals(
+		self::assertEquals(
 			mktime(0, 0, 0, 1, 2, 2010),
 			$this->fixture->getEndDateAsTimestampEvenIfOpenEnded()
 		);
@@ -255,10 +255,10 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 			mktime(0, 0, 0, 1, 1, 2010)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isOpenEnded()
 		);
-		$this->assertEquals(
+		self::assertEquals(
 			mktime(0, 0, 0, 1, 2, 2010),
 			$this->fixture->getEndDateAsTimestampEvenIfOpenEnded()
 		);
@@ -272,7 +272,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testHasStartedReturnsTrueForStartedEvent() {
 		$this->fixture->setBeginDateAndTime(42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasStarted()
 		);
 	}
@@ -280,7 +280,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testHasStartedReturnsFalseForUpcomingEvent() {
 		$this->fixture->setBeginDateAndTime($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasStarted()
 		);
 	}
@@ -288,7 +288,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testHasStartedReturnsFalseForEventWithoutBeginDate() {
 		$this->fixture->setBeginDateAndTime(0);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasStarted()
 		);
 	}
@@ -299,7 +299,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	/////////////////////////////////
 
 	public function testNumberOfPlacesIsInitiallyZero() {
-		$this->assertEquals(
+		self::assertEquals(
 			0, $this->fixture->getNumberOfPlaces()
 		);
 	}
@@ -307,7 +307,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testSetNumberOfPlacesToZero() {
 		$this->fixture->setNumberOfPlaces(0);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0, $this->fixture->getNumberOfPlaces()
 		);
 	}
@@ -315,7 +315,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testSetNumberOfPlacesToPositiveInteger() {
 		$this->fixture->setNumberOfPlaces(42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42, $this->fixture->getNumberOfPlaces()
 		);
 	}
@@ -326,7 +326,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	////////////////////////////////
 
 	public function testRoomIsInitiallyEmpty() {
-		$this->assertSame(
+		self::assertSame(
 			'', $this->fixture->getRoom()
 		);
 	}
@@ -334,7 +334,7 @@ class tx_seminars_OldModel_TimespanTest extends tx_phpunit_testcase {
 	public function testSetAndGetRoom() {
 		$this->fixture->setRoom('foo');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'foo', $this->fixture->getRoom()
 		);
 	}

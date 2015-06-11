@@ -61,7 +61,7 @@ class tx_seminars_Mapper_BackEndUserGroupTest extends tx_phpunit_testcase {
 	public function findReturnsBackEndUserGroupInstance() {
 		$uid = $this->fixture->getNewGhost()->getUid();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->find($uid)
 				instanceof tx_seminars_Model_BackEndUserGroup
 		);
@@ -80,7 +80,7 @@ class tx_seminars_Mapper_BackEndUserGroupTest extends tx_phpunit_testcase {
 
 		$this->fixture->load($userGroup);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'foo',
 			$userGroup->getTitle()
 		);

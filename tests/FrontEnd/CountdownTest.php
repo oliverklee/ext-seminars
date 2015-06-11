@@ -89,7 +89,7 @@ class tx_seminars_FrontEnd_CountdownTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function fixtureIsAFrontEndCountdownObject() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture instanceof tx_seminars_FrontEnd_Countdown
 		);
 	}
@@ -114,11 +114,11 @@ class tx_seminars_FrontEnd_CountdownTest extends tx_phpunit_testcase {
 	 */
 	public function renderWithMapperFindNextUpcomingThrowingEmptyQueryResultExceptionReturnsNoEventsFoundMessage() {
 		$this->fixture->injectEventMapper($this->mapper);
-		$this->mapper->expects($this->once())
+		$this->mapper->expects(self::once())
 			->method('findNextUpcoming')
-			->will($this->throwException(new tx_oelib_Exception_NotFound()));
+			->will(self::throwException(new tx_oelib_Exception_NotFound()));
 
-		$this->assertContains(
+		self::assertContains(
 			'There are no upcoming events. Please come back later.',
 			$this->fixture->render()
 		);
@@ -136,14 +136,14 @@ class tx_seminars_FrontEnd_CountdownTest extends tx_phpunit_testcase {
 			'begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000,
 		));
 
-		$this->mapper->expects($this->once())
+		$this->mapper->expects(self::once())
 			->method('findNextUpcoming')
-			->will($this->returnValue($event));
+			->will(self::returnValue($event));
 
 		$this->viewHelper = $this->getMock('tx_seminars_ViewHelper_Countdown', array('render'));
-		$this->viewHelper->expects($this->once())
+		$this->viewHelper->expects(self::once())
 			->method('render')
-			->with($this->equalTo($event->getBeginDateAsUnixTimeStamp()));
+			->with(self::equalTo($event->getBeginDateAsUnixTimeStamp()));
 
 		$this->fixture->injectCountDownViewHelper($this->viewHelper);
 

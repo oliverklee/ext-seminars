@@ -56,7 +56,7 @@ class tx_seminars_Mapper_BackEndUserTest extends tx_phpunit_testcase {
 	//////////////////////////
 
 	public function testFindWithUidOfExistingRecordReturnsBackEndUserInstance() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->find($this->testingFramework->createBackEndUser())
 				instanceof tx_seminars_Model_BackEndUser
 		);

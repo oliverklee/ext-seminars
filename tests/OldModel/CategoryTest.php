@@ -61,7 +61,7 @@ class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
 	public function testCreateFromUid() {
 		$this->fixture = new tx_seminars_OldModel_Category($this->fixtureUid);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isOk()
 		);
 	}
@@ -69,7 +69,7 @@ class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
 	public function testCreateFromUidFailsForInvalidUid() {
 		$this->fixture = new tx_seminars_OldModel_Category($this->fixtureUid + 99);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->isOk()
 		);
 	}
@@ -77,7 +77,7 @@ class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
 	public function testCreateFromUidFailsForZeroUid() {
 		$this->fixture = new tx_seminars_OldModel_Category(0);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->isOk()
 		);
 	}
@@ -91,7 +91,7 @@ class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
 
 		$this->fixture = new tx_seminars_OldModel_Category(0, $dbResult);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isOk()
 		);
 	}
@@ -99,7 +99,7 @@ class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
 	public function testCreateFromDbResultFailsForNull() {
 		$this->fixture = new tx_seminars_OldModel_Category(0, NULL);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->isOk()
 		);
 	}
@@ -107,7 +107,7 @@ class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
 	public function testGetTitle() {
 		$this->fixture = new tx_seminars_OldModel_Category($this->fixtureUid);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Test category',
 			$this->fixture->getTitle()
 		);
@@ -124,7 +124,7 @@ class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'foo.gif',
 			$this->fixture->getIcon()
 		);
@@ -133,7 +133,7 @@ class tx_seminars_OldModel_CategoryTest extends tx_phpunit_testcase {
 	public function testGetIconReturnsEmptyStringIfCategoryHasNoIcon() {
 		$this->fixture = new tx_seminars_OldModel_Category($this->fixtureUid);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getIcon()
 		);

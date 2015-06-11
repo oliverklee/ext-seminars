@@ -93,7 +93,7 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 		$timeSpan = new tx_seminars_tests_fixtures_TestingTimeSpan();
 		$timeSpan->setData(array());
 
-		$this->assertSame(
+		self::assertSame(
 			$this->translator->translate('message_willBeAnnounced'),
 			$this->fixture->render($timeSpan)
 		);
@@ -106,7 +106,7 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 		$timeSpan = new tx_seminars_tests_fixtures_TestingTimeSpan();
 		$timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
 
-		$this->assertSame(
+		self::assertSame(
 			strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE),
 			$this->fixture->render($timeSpan)
 		);
@@ -120,7 +120,7 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 		$timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
 		$timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE);
 
-		$this->assertSame(
+		self::assertSame(
 			strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE),
 			$this->fixture->render($timeSpan)
 		);
@@ -134,7 +134,7 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 		$timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
 		$timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + 3600);
 
-		$this->assertEquals(
+		self::assertEquals(
 			strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE),
 			$this->fixture->render($timeSpan)
 		);
@@ -151,7 +151,7 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 		$endDate = self::BEGIN_DATE + (2 * 86400);
 		$timeSpan->setEndDateAsUnixTimeStamp($endDate);
 
-		$this->assertEquals(
+		self::assertEquals(
 			strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE) . '&#8211;' . strftime(self::DATE_FORMAT_YMD, $endDate),
 			$this->fixture->render($timeSpan)
 		);
@@ -168,7 +168,7 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 		$endDate = self::BEGIN_DATE + (2 * 86400);
 		$timeSpan->setEndDateAsUnixTimeStamp($endDate);
 
-		$this->assertEquals(
+		self::assertEquals(
 			strftime(self::DATE_FORMAT_D, self::BEGIN_DATE) . '&#8211;' . strftime(self::DATE_FORMAT_YMD, $endDate),
 			$this->fixture->render($timeSpan)
 		);
@@ -185,7 +185,7 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 		$endDate = self::BEGIN_DATE + (32 * 86400);
 		$timeSpan->setEndDateAsUnixTimeStamp($endDate);
 
-		$this->assertEquals(
+		self::assertEquals(
 			strftime(self::DATE_FORMAT_MD, self::BEGIN_DATE) . '&#8211;' . strftime(self::DATE_FORMAT_YMD, $endDate),
 			$this->fixture->render($timeSpan)
 		);
@@ -202,7 +202,7 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 		$endDate = self::BEGIN_DATE + (366 * 86400);
 		$timeSpan->setEndDateAsUnixTimeStamp($endDate);
 
-		$this->assertEquals(
+		self::assertEquals(
 			strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE) . '&#8211;' . strftime(self::DATE_FORMAT_YMD, $endDate),
 			$this->fixture->render($timeSpan)
 		);
@@ -220,7 +220,7 @@ class tx_seminars_ViewHelper_DateRangeTest extends tx_phpunit_testcase {
 		$endDate = self::BEGIN_DATE + (2 * 86400);
 		$timeSpan->setEndDateAsUnixTimeStamp($endDate);
 
-		$this->assertEquals(
+		self::assertEquals(
 			strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE) . $dash . strftime(self::DATE_FORMAT_YMD, $endDate),
 			$this->fixture->render($timeSpan, $dash)
 		);

@@ -109,7 +109,7 @@ class tx_seminars_BackEnd_SpeakersListTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'Icons/Hide.gif',
 			$this->fixture->show()
 		);
@@ -127,7 +127,7 @@ class tx_seminars_BackEnd_SpeakersListTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'Icons/Unhide.gif',
 			$this->fixture->show()
 		);
@@ -148,7 +148,7 @@ class tx_seminars_BackEnd_SpeakersListTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'Speaker in subfolder',
 			$this->fixture->show()
 		);
@@ -173,7 +173,7 @@ class tx_seminars_BackEnd_SpeakersListTest extends tx_phpunit_testcase {
 			$backEndUser
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'edit[tx_seminars_speakers][' . $newSpeakerFolder . ']=new',
 			$this->fixture->show()
 		);

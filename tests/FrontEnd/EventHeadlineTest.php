@@ -120,7 +120,7 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 	public function renderWithUidOfExistingEventReturnsTitleOfSelectedEvent() {
 		$this->fixture->piVars['uid'] = $this->eventId;
 
-		$this->assertContains(
+		self::assertContains(
 			'Test event',
 			$this->fixture->render()
 		);
@@ -135,7 +135,7 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 		$event->setTitle('<test>Test event</test>');
 		$this->fixture->piVars['uid'] = $this->eventId;
 
-		$this->assertContains(
+		self::assertContains(
 			htmlspecialchars('<test>Test event</test>'),
 			$this->fixture->render()
 		);
@@ -152,7 +152,7 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['uid'] = $this->eventId;
 
-		$this->assertContains(
+		self::assertContains(
 			strftime($dateFormat, $this->eventDate),
 			$this->fixture->render()
 		);
@@ -164,7 +164,7 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 	public function renderReturnsEmptyStringIfNoUidIsSetInPiVar() {
 		unset($this->fixture->piVars['uid']);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->render()
 		);
@@ -176,7 +176,7 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 	public function renderReturnsEmptyStringIfUidOfInexistentEventIsSetInPiVar() {
 		$this->fixture->piVars['uid'] = $this->testingFramework->getAutoIncrement('tx_seminars_seminars');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->render()
 		);
@@ -188,7 +188,7 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 	public function renderReturnsEmptyStringIfNonNumericEventUidIsSetInPiVar() {
 		$this->fixture->piVars['uid'] = 'foo';
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->render()
 		);

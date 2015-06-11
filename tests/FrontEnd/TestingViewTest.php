@@ -57,7 +57,7 @@ class tx_seminars_FrontEnd_TestingViewTest extends tx_phpunit_testcase {
 	}
 
 	public function testRenderCanReturnAViewsContent() {
-		$this->assertEquals(
+		self::assertEquals(
 			'Hi, I am the testingFrontEndView!',
 			$this->fixture->render()
 		);

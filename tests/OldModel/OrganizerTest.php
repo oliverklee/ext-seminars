@@ -81,7 +81,7 @@ class tx_seminars_OldModel_OrganizerTest extends tx_phpunit_testcase {
 	//////////////////////////////////////////
 
 	public function testCreateFromUid() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isOk()
 		);
 	}
@@ -95,30 +95,30 @@ class tx_seminars_OldModel_OrganizerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getNameWithNameReturnsName() {
-		$this->assertEquals(
+		self::assertEquals(
 			'Test organizer',
 			$this->fixture->getName()
 		);
 	}
 
 	public function testHasHomepageWithEmptyHomepageReturnsFalse() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasHomepage()
 		);
 	}
 
 	public function testHasHomepageWithHomepageReturnsTrue() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->maximalFixture->hasHomepage()
 		);
 	}
 
 	public function testGetHomepage() {
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getHomepage()
 		);
-		$this->assertEquals(
+		self::assertEquals(
 			'http://www.test.com/',
 			$this->maximalFixture->getHomepage()
 		);
@@ -128,7 +128,7 @@ class tx_seminars_OldModel_OrganizerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getEmailFooterForEmptyFooterReturnsEmptyString() {
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getEmailFooter()
 		);
@@ -138,7 +138,7 @@ class tx_seminars_OldModel_OrganizerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getEmailFooterForNonEmptyFooterReturnsThisFooter() {
-		$this->assertEquals(
+		self::assertEquals(
 			'line 1'.LF.'line 2',
 			$this->maximalFixture->getEmailFooter()
 		);
@@ -148,21 +148,21 @@ class tx_seminars_OldModel_OrganizerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getEMailAddressWithEMailAddressReturnsEMailAddress() {
-		$this->assertEquals(
+		self::assertEquals(
 			'foo@test.com',
 			$this->fixture->getEMailAddress()
 		);
 	}
 
 	public function testGetAttendancesPidWithNoAttendancesPidReturnsZero() {
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getAttendancesPid()
 		);
 	}
 
 	public function testGetAttendancesPidWithAttendancesPidReturnsAttendancesPid() {
-		$this->assertEquals(
+		self::assertEquals(
 			99,
 			$this->maximalFixture->getAttendancesPid()
 		);
@@ -177,7 +177,7 @@ class tx_seminars_OldModel_OrganizerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasDescriptionForOrganizerWithoutDescriptionReturnsFalse() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasDescription()
 		);
 	}
@@ -186,7 +186,7 @@ class tx_seminars_OldModel_OrganizerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasDescriptionForOrganizerWithDescriptionReturnsTrue() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->maximalFixture->hasDescription()
 		);
 	}
@@ -195,7 +195,7 @@ class tx_seminars_OldModel_OrganizerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getDescriptionForOrganizerWithoutDescriptionReturnsEmptyString() {
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getDescription()
 		);
@@ -205,7 +205,7 @@ class tx_seminars_OldModel_OrganizerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getDescriptionForOrganizerWithDescriptionReturnsDescription() {
-		$this->assertEquals(
+		self::assertEquals(
 			'foo',
 			$this->maximalFixture->getDescription()
 		);

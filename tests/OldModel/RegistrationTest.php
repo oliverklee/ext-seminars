@@ -120,7 +120,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function isOk() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isOk()
 		);
 	}
@@ -155,7 +155,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setPaymentMethodRelationReturnsUid() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->setPaymentMethodRelation(array()) > 0
 		);
 	}
@@ -164,7 +164,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setPaymentMethodRelationCreatesNewUid() {
-		$this->assertNotEquals(
+		self::assertNotEquals(
 			$this->setPaymentMethodRelation(array()),
 			$this->setPaymentMethodRelation(array())
 		);
@@ -184,7 +184,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$seminar, 0, array('method_of_payment' => 42)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			42,
 			$this->fixture->getMethodOfPaymentUid()
 		);
@@ -211,7 +211,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData($seminar, 0, array());
 
-		$this->assertSame(
+		self::assertSame(
 			$paymentMethodUid,
 			$this->fixture->getMethodOfPaymentUid()
 		);
@@ -226,12 +226,12 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function isOnRegistrationQueue() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->isOnRegistrationQueue()
 		);
 
 		$this->fixture->setIsOnRegistrationQueue(1);
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isOnRegistrationQueue()
 		);
 	}
@@ -240,7 +240,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function statusIsInitiallyRegular() {
-		$this->assertSame(
+		self::assertSame(
 			'regular',
 			$this->fixture->getStatus()
 		);
@@ -252,7 +252,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function statusIsRegularIfNotOnQueue() {
 		$this->fixture->setIsOnRegistrationQueue(FALSE);
 
-		$this->assertSame(
+		self::assertSame(
 			'regular',
 			$this->fixture->getStatus()
 		);
@@ -264,7 +264,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function statusIsWaitingListIfOnQueue() {
 		$this->fixture->setIsOnRegistrationQueue(TRUE);
 
-		$this->assertSame(
+		self::assertSame(
 			'waiting list',
 			$this->fixture->getStatus()
 		);
@@ -279,7 +279,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getRegistrationDataIsEmptyForEmptyKey() {
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->getRegistrationData('')
 		);
@@ -289,7 +289,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getRegistrationDataCanGetUid() {
-		$this->assertSame(
+		self::assertSame(
 			(string) $this->fixture->getUid(),
 			$this->fixture->getRegistrationData('uid')
 		);
@@ -302,7 +302,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$title = 'Test payment method';
 		$this->setPaymentMethodRelation(array('title' => $title));
 
-		$this->assertContains(
+		self::assertContains(
 			$title,
 			$this->fixture->getRegistrationData('method_of_payment')
 		);
@@ -314,7 +314,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function getRegistrationDataForRegisteredThemselvesZeroReturnsLabelNo() {
 		$this->fixture->setRegisteredThemselves(0);
 
-		$this->assertSame(
+		self::assertSame(
 			$this->fixture->translate('label_no'),
 			$this->fixture->getRegistrationData('registered_themselves')
 		);
@@ -326,7 +326,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function getRegistrationDataForRegisteredThemselvesOneReturnsLabelYes() {
 		$this->fixture->setRegisteredThemselves(1);
 
-		$this->assertSame(
+		self::assertSame(
 			$this->fixture->translate('label_yes'),
 			$this->fixture->getRegistrationData('registered_themselves')
 		);
@@ -341,7 +341,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$seminar, 0, array('notes' => 'foo' . CRLF . 'bar')
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			CRLF,
 			$this->fixture->getRegistrationData('notes')
 		);
@@ -356,7 +356,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$seminar, 0, array('notes' => 'foo' . CRLF . 'bar')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'foo' . LF . 'bar',
 			$this->fixture->getRegistrationData('notes')
 		);
@@ -371,7 +371,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$seminar, 0, array('attendees_names' => 'foo' . LF . 'bar')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'1. foo' . LF . '2. bar',
 			$this->fixture->getRegistrationData('attendees_names')
 		);
@@ -386,7 +386,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpAttendanceValuesCanContainUid() {
-		$this->assertContains(
+		self::assertContains(
 			(string) $this->fixture->getUid(),
 			$this->fixture->dumpAttendanceValues('uid')
 		);
@@ -396,7 +396,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpAttendanceValuesContainsInterestsIfRequested() {
-		$this->assertContains(
+		self::assertContains(
 			'nothing',
 			$this->fixture->dumpAttendanceValues('interests')
 		);
@@ -406,7 +406,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpAttendanceValuesContainsInterestsIfRequestedEvenForSpaceAfterCommaInKeyList() {
-		$this->assertContains(
+		self::assertContains(
 			'nothing',
 			$this->fixture->dumpAttendanceValues('email, interests')
 		);
@@ -416,7 +416,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpAttendanceValuesContainsInterestsIfRequestedEvenForSpaceBeforeCommaInKeyList() {
-		$this->assertContains(
+		self::assertContains(
 			'nothing',
 			$this->fixture->dumpAttendanceValues('interests ,email')
 		);
@@ -426,7 +426,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpAttendanceValuesContainsLabelForInterestsIfRequested() {
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('label_interests'),
 			$this->fixture->dumpAttendanceValues('interests')
 		);
@@ -436,7 +436,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpAttendanceValuesContainsLabelEvenForSpaceAfterCommaInKeyList() {
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('label_interests'),
 			$this->fixture->dumpAttendanceValues('interests, expectations')
 		);
@@ -446,7 +446,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpAttendanceValuesContainsLabelEvenForSpaceBeforeCommaInKeyList() {
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('label_interests'),
 			$this->fixture->dumpAttendanceValues('interests ,expectations')
 		);
@@ -456,7 +456,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpAttendanceValuesForDataWithLineFeedStartsDataOnNewLine() {
-		$this->assertContains(
+		self::assertContains(
 			LF . 'foo' . LF . 'bar',
 			$this->fixture->dumpAttendanceValues('background_knowledge')
 		);
@@ -466,7 +466,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpAttendanceValuesForDataWithCarriageReturnStartsDataOnNewLine() {
-		$this->assertContains(
+		self::assertContains(
 			LF . 'foo' . LF . 'bar',
 			$this->fixture->dumpAttendanceValues('known_from')
 		);
@@ -476,7 +476,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpAttendanceValuesCanContainNonRegisteredField() {
-		$this->assertContains(
+		self::assertContains(
 			'label_is_dummy_record: 1',
 			$this->fixture->dumpAttendanceValues('is_dummy_record')
 		);
@@ -497,13 +497,13 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$registration->enableTestMode();
 		$this->testingFramework->markTableAsDirty('tx_seminars_attendances');
 
-		$this->assertTrue(
+		self::assertTrue(
 			$registration->isOk()
 		);
-		$this->assertTrue(
+		self::assertTrue(
 			$registration->commitToDb()
 		);
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_attendances',
@@ -532,13 +532,13 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			'tx_seminars_attendances_lodgings_mm'
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$registration->isOk()
 		);
-		$this->assertTrue(
+		self::assertTrue(
 			$registration->commitToDb()
 		);
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_attendances',
@@ -546,7 +546,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			),
 			'The registration record cannot be found in the DB.'
 		);
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_attendances_lodgings_mm',
@@ -576,13 +576,13 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			'tx_seminars_attendances_foods_mm'
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$registration->isOk()
 		);
-		$this->assertTrue(
+		self::assertTrue(
 			$registration->commitToDb()
 		);
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_attendances',
@@ -590,7 +590,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			),
 			'The registration record cannot be found in the DB.'
 		);
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_attendances_foods_mm',
@@ -620,13 +620,13 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			'tx_seminars_attendances_checkboxes_mm'
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$registration->isOk()
 		);
-		$this->assertTrue(
+		self::assertTrue(
 			$registration->commitToDb()
 		);
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_attendances',
@@ -634,7 +634,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			),
 			'The registration record cannot be found in the DB.'
 		);
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'tx_seminars_attendances_checkboxes_mm',
@@ -654,7 +654,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSeminarObjectReturnsSeminarInstance() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->getSeminarObject() instanceof tx_seminars_seminar
 		);
 	}
@@ -673,7 +673,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 
 		$fixture = new tx_seminars_registrationchild($this->registrationUid);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$fixture->getSeminarObject() instanceof tx_seminars_seminar
 		);
 	}
@@ -682,7 +682,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSeminarObjectReturnsSeminarWithUidFromRelation() {
-		$this->assertSame(
+		self::assertSame(
 			$this->seminarUid,
 			$this->fixture->getSeminarObject()->getUid()
 		);
@@ -716,7 +716,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		tx_seminars_registrationchild::purgeCachedSeminars();
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
-		$this->assertSame(
+		self::assertSame(
 			'test title 2',
 			$fixture->getSeminarObject()->getTitle()
 		);
@@ -757,7 +757,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getUserDataIsEmptyForEmptyKey() {
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->getUserData('')
 		);
@@ -769,7 +769,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function getUserDataReturnsEmptyStringForInexistentKeyName() {
 		$this->fixture->setUserData(array('name' => 'John Doe'));
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->getUserData('foo')
 		);
@@ -781,7 +781,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function getUserDataCanReturnWwwSetViaSetUserData() {
 		$this->fixture->setUserData(array('www' => 'www.foo.com'));
 
-		$this->assertSame(
+		self::assertSame(
 			'www.foo.com',
 			$this->fixture->getUserData('www')
 		);
@@ -794,10 +794,10 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$pid = $this->testingFramework->createSystemFolder();
 		$this->fixture->setUserData(array('pid' => $pid));
 
-		$this->assertTrue(
+		self::assertTrue(
 			is_string($this->fixture->getUserData('pid'))
 		);
-		$this->assertSame(
+		self::assertSame(
 			(string) $pid,
 			$this->fixture->getUserData('pid')
 		);
@@ -807,7 +807,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getUserDataForUserWithNameReturnsUsersName() {
-		$this->assertSame(
+		self::assertSame(
 			'foo_user',
 			$this->fixture->getUserData('name')
 		);
@@ -822,7 +822,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			array('name' => '', 'first_name' => 'first_foo')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'first_foo',
 			$this->fixture->getUserData('name')
 		);
@@ -837,7 +837,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			array('name' => '', 'last_name' => 'last_foo')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'last_foo',
 			$this->fixture->getUserData('name')
 		);
@@ -852,7 +852,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			array('name' => '', 'first_name' => 'first', 'last_name' => 'last')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'first last',
 			$this->fixture->getUserData('name')
 		);
@@ -871,7 +871,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			'fe_users', $this->feUserUid, array('name' => 'John Doe')
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'John Doe',
 			$this->fixture->dumpUserValues('name')
 		);
@@ -885,7 +885,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			'fe_users', $this->feUserUid, array('name' => 'John Doe')
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'John Doe',
 			$this->fixture->dumpUserValues('email, name')
 		);
@@ -899,7 +899,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			'fe_users', $this->feUserUid, array('name' => 'John Doe')
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'John Doe',
 			$this->fixture->dumpUserValues('name ,email')
 		);
@@ -909,7 +909,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpUserValuesContainsLabelForUserNameIfRequested() {
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('label_name'),
 			$this->fixture->dumpUserValues('name')
 		);
@@ -919,7 +919,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpUserValuesContainsLabelEvenForSpaceAfterCommaInKeyList() {
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('label_name'),
 			$this->fixture->dumpUserValues('email, name')
 		);
@@ -929,7 +929,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function dumpUserValuesContainsLabelEvenForSpaceBeforeCommaInKeyList() {
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('label_name'),
 			$this->fixture->dumpUserValues('name ,email')
 		);
@@ -942,11 +942,11 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$pid = $this->testingFramework->createSystemFolder();
 		$this->fixture->setUserData(array('pid' => $pid));
 
-		$this->assertTrue(
+		self::assertTrue(
 			is_string($this->fixture->getUserData('pid'))
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			(string) $pid,
 			$this->fixture->dumpUserValues('pid')
 		);
@@ -959,7 +959,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$pid = $this->testingFramework->createSystemFolder();
 		$this->fixture->setUserData(array('pid' => $pid));
 
-		$this->assertContains(
+		self::assertContains(
 			'Pid',
 			$this->fixture->dumpUserValues('pid')
 		);
@@ -972,7 +972,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$pid = $this->testingFramework->createSystemFolder();
 		$this->fixture->setUserData(array('pid' => $pid));
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'label_pid',
 			$this->fixture->dumpUserValues('pid')
 		);
@@ -984,7 +984,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function dumpUserValuesCanContainNonRegisteredField() {
 		$this->fixture->setUserData(array('is_dummy_record' => TRUE));
 
-		$this->assertContains(
+		self::assertContains(
 			'Is_dummy_record: 1',
 			$this->fixture->dumpUserValues('is_dummy_record')
 		);
@@ -999,7 +999,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function isPaidInitiallyReturnsFalse() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->isPaid()
 		);
 	}
@@ -1010,7 +1010,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function isPaidForPaidRegistrationReturnsTrue() {
 		$this->fixture->setPaymentDateAsUnixTimestamp($GLOBALS['SIM_EXEC_TIME']);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isPaid()
 		);
 	}
@@ -1021,7 +1021,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function isPaidForUnpaidRegistrationReturnsFalse() {
 		$this->fixture->setPaymentDateAsUnixTimestamp(0);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->isPaid()
 		);
 	}
@@ -1035,7 +1035,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasExistingFrontEndUserWithExistingFrontEndUserReturnsTrue() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasExistingFrontEndUser()
 		);
 	}
@@ -1050,7 +1050,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			array('deleted' => 1)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasExistingFrontEndUser()
 		);
 	}
@@ -1061,7 +1061,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function hasExistingFrontEndUserWithZeroFrontEndUserUIDReturnsFalse() {
 		$this->fixture->setFrontEndUserUID(0);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasExistingFrontEndUser()
 		);
 	}
@@ -1075,7 +1075,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getFrontEndUserWithExistingFrontEndUserReturnsFrontEndUser() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->getFrontEndUser() instanceof tx_oelib_Model_FrontEndUser
 		);
 	}
@@ -1095,7 +1095,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$this->fixture->getSeminarObject(), $userUid, array()
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			is_array($this->fixture->getFoodsData())
 		);
 	}
@@ -1113,7 +1113,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			array('foods' => $foods)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			$foods,
 			$this->fixture->getFoodsData()
 		);
@@ -1129,7 +1129,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$this->fixture->getSeminarObject(), $userUid, array('foods' => '')
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			is_array($this->fixture->getFoodsData())
 		);
 	}
@@ -1144,7 +1144,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$this->fixture->getSeminarObject(), $userUid, array()
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			is_array($this->fixture->getLodgingsData())
 		);
 	}
@@ -1162,7 +1162,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			array('lodgings' => $lodgings)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			$lodgings,
 			$this->fixture->getLodgingsData()
 		);
@@ -1178,7 +1178,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$this->fixture->getSeminarObject(), $userUid, array('lodgings' => '')
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			is_array($this->fixture->getLodgingsData())
 		);
 	}
@@ -1193,7 +1193,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$this->fixture->getSeminarObject(), $userUid, array()
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			is_array($this->fixture->getCheckboxesData())
 		);
 	}
@@ -1211,7 +1211,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			array('checkboxes' => $checkboxes)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			$checkboxes,
 			$this->fixture->getCheckboxesData()
 		);
@@ -1227,7 +1227,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$this->fixture->getSeminarObject(), $userUid, array('checkboxes' => '')
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			is_array($this->fixture->getCheckboxesData())
 		);
 	}
@@ -1242,7 +1242,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			array('registered_themselves' => 1)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			$this->fixture->translate('label_yes'),
 			$this->fixture->getRegistrationData('registered_themselves')
 		);
@@ -1258,7 +1258,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			array('company' => 'Foo' . LF . 'Bar Inc')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'Foo' . LF . 'Bar Inc',
 			$this->fixture->getRegistrationData('company')
 		);
@@ -1273,7 +1273,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSeatsWithoutSeatsReturnsOne() {
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$this->fixture->getSeats()
 		);
@@ -1297,7 +1297,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function setSeatsWithZeroSeatsSetsSeats() {
 		$this->fixture->setSeats(0);
 
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$this->fixture->getSeats()
 		);
@@ -1309,7 +1309,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function setSeatsWithPositiveSeatsSetsSeats() {
 		$this->fixture->setSeats(42);
 
-		$this->assertSame(
+		self::assertSame(
 			42,
 			$this->fixture->getSeats()
 		);
@@ -1319,7 +1319,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasSeatsWithoutSeatsReturnsFalse() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasSeats()
 		);
 	}
@@ -1330,7 +1330,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function hasSeatsWithSeatsReturnsTrue() {
 		$this->fixture->setSeats(42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasSeats()
 		);
 	}
@@ -1344,7 +1344,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getAttendeesNamesWithoutAttendeesNamesReturnsEmptyString() {
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->getAttendeesNames()
 		);
@@ -1356,7 +1356,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function setAttendeesNamesWithAttendeesNamesSetsAttendeesNames() {
 		$this->fixture->setAttendeesNames('John Doe');
 
-		$this->assertSame(
+		self::assertSame(
 			'John Doe',
 			$this->fixture->getAttendeesNames()
 		);
@@ -1366,7 +1366,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasAttendeesNamesWithoutAttendeesNamesReturnsFalse() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasAttendeesNames()
 		);
 	}
@@ -1377,7 +1377,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function hasAttendeesNamesWithAttendeesNamesReturnsTrue() {
 		$this->fixture->setAttendeesNames('John Doe');
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasAttendeesNames()
 		);
 	}
@@ -1391,7 +1391,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getNumberOfKidsWithoutKidsReturnsZero() {
-		$this->assertSame(
+		self::assertSame(
 			0,
 			$this->fixture->getNumberOfKids()
 		);
@@ -1415,7 +1415,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function setNumberOfKidsWithZeroNumberOfKidsSetsNumberOfKids() {
 		$this->fixture->setNumberOfKids(0);
 
-		$this->assertSame(
+		self::assertSame(
 			0,
 			$this->fixture->getNumberOfKids()
 		);
@@ -1427,7 +1427,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function setNumberOfKidsWithPositiveNumberOfKidsSetsNumberOfKids() {
 		$this->fixture->setNumberOfKids(42);
 
-		$this->assertSame(
+		self::assertSame(
 			42,
 			$this->fixture->getNumberOfKids()
 		);
@@ -1437,7 +1437,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasKidsWithoutKidsReturnsFalse() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasKids()
 		);
 	}
@@ -1448,7 +1448,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function hasKidsWithKidsReturnsTrue() {
 		$this->fixture->setNumberOfKids(42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasKids()
 		);
 	}
@@ -1462,7 +1462,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getPriceWithoutPriceReturnsEmptyString() {
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->getPrice()
 		);
@@ -1474,7 +1474,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function setPriceWithPriceSetsPrice() {
 		$this->fixture->setPrice('Regular price: 42.42');
 
-		$this->assertSame(
+		self::assertSame(
 			'Regular price: 42.42',
 			$this->fixture->getPrice()
 		);
@@ -1484,7 +1484,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasPriceWithoutPriceReturnsFalse() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasPrice()
 		);
 	}
@@ -1495,7 +1495,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function hasPriceWithPriceReturnsTrue() {
 		$this->fixture->setPrice('Regular price: 42.42');
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasPrice()
 		);
 	}
@@ -1509,7 +1509,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getTotalPriceWithoutTotalPriceReturnsEmptyString() {
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->getTotalPrice()
 		);
@@ -1523,7 +1523,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			->setAsString('currency', 'EUR');
 		$this->fixture->setTotalPrice('42.42');
 
-		$this->assertSame(
+		self::assertSame(
 			'€ 42,42',
 			$this->fixture->getTotalPrice()
 		);
@@ -1533,7 +1533,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasTotalPriceWithoutTotalPriceReturnsFalse() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasTotalPrice()
 		);
 	}
@@ -1544,7 +1544,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function hasTotalPriceWithTotalPriceReturnsTrue() {
 		$this->fixture->setTotalPrice('42.42');
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasTotalPrice()
 		);
 	}
@@ -1558,7 +1558,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getMethodOfPaymentUidWithoutMethodOfPaymentReturnsZero() {
-		$this->assertSame(
+		self::assertSame(
 			0,
 			$this->fixture->getMethodOfPaymentUid()
 		);
@@ -1582,7 +1582,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function setMethodOfPaymentUidWithZeroUidSetsMethodOfPaymentUid() {
 		$this->fixture->setMethodOfPaymentUid(0);
 
-		$this->assertSame(
+		self::assertSame(
 			0,
 			$this->fixture->getMethodOfPaymentUid()
 		);
@@ -1594,7 +1594,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function setMethodOfPaymentUidWithPositiveUidSetsMethodOfPaymentUid() {
 		$this->fixture->setMethodOfPaymentUid(42);
 
-		$this->assertSame(
+		self::assertSame(
 			42,
 			$this->fixture->getMethodOfPaymentUid()
 		);
@@ -1604,7 +1604,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hasMethodOfPaymentWithoutMethodOfPaymentReturnsFalse() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasMethodOfPayment()
 		);
 	}
@@ -1615,7 +1615,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function hasMethodOfPaymentWithMethodOfPaymentReturnsTrue() {
 		$this->fixture->setMethodOfPaymentUid(42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasMethodOfPayment()
 		);
 	}
@@ -1634,7 +1634,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
-		$this->assertContains(
+		self::assertContains(
 			$fixture->translate('label_gender.I.0'),
 			$fixture->getBillingAddress()
 		);
@@ -1649,7 +1649,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
-		$this->assertContains(
+		self::assertContains(
 			$fixture->translate('label_gender.I.1'),
 			$fixture->getBillingAddress()
 		);
@@ -1664,7 +1664,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
-		$this->assertContains(
+		self::assertContains(
 			'John Doe',
 			$fixture->getBillingAddress()
 		);
@@ -1679,7 +1679,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
-		$this->assertContains(
+		self::assertContains(
 			'Main Street 123',
 			$fixture->getBillingAddress()
 		);
@@ -1694,7 +1694,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
-		$this->assertContains(
+		self::assertContains(
 			'12345',
 			$fixture->getBillingAddress()
 		);
@@ -1709,7 +1709,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
-		$this->assertContains(
+		self::assertContains(
 			'Big City',
 			$fixture->getBillingAddress()
 		);
@@ -1724,7 +1724,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
-		$this->assertContains(
+		self::assertContains(
 			'Takka-Tukka-Land',
 			$fixture->getBillingAddress()
 		);
@@ -1739,7 +1739,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
-		$this->assertContains(
+		self::assertContains(
 			'01234-56789',
 			$fixture->getBillingAddress()
 		);
@@ -1754,7 +1754,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 		$fixture = new tx_seminars_registrationchild($registrationUid);
 
-		$this->assertContains(
+		self::assertContains(
 			'john@doe.com',
 			$fixture->getBillingAddress()
 		);
@@ -1774,7 +1774,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$seminar, 0, array('attendees_names' => 'foo' . LF . 'bar')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'<ol><li>foo</li><li>bar</li></ol>',
 			$this->fixture->getEnumeratedAttendeeNames(TRUE)
 		);
@@ -1789,7 +1789,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$seminar, 0, array('attendees_names' => '')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->getEnumeratedAttendeeNames(TRUE)
 		);
@@ -1804,7 +1804,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$seminar, 0, array('attendees_names' => 'foo' . LF . 'bar')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'1. foo' . LF . '2. bar',
 			$this->fixture->getEnumeratedAttendeeNames()
 		);
@@ -1819,7 +1819,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 			$seminar, 0, array('attendees_names' => '')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->getEnumeratedAttendeeNames()
 		);
@@ -1835,7 +1835,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegisteredThemselves(1);
 
-		$this->assertSame(
+		self::assertSame(
 			'1. foo_user',
 			$this->fixture->getEnumeratedAttendeeNames()
 		);
@@ -1851,7 +1851,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegisteredThemselves(1);
 
-		$this->assertSame(
+		self::assertSame(
 			'1. foo_user' . LF . '2. foo',
 			$this->fixture->getEnumeratedAttendeeNames()
 		);
@@ -1868,7 +1868,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function hasRegisteredMySelfForRegisteredThemselvesFalseReturnsFalse() {
 		$this->fixture->setRegisteredThemselves(0);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasRegisteredMySelf()
 		);
 	}
@@ -1879,7 +1879,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	public function hasRegisteredMySelfForRegisteredThemselvesTrueReturnsTrue() {
 		$this->fixture->setRegisteredThemselves(1);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasRegisteredMySelf()
 		);
 	}
@@ -1898,7 +1898,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('food' => $food));
 
-		$this->assertSame(
+		self::assertSame(
 			$food,
 			$this->fixture->getFood()
 		);
@@ -1911,7 +1911,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('food' => ''));
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasFood()
 		);
 	}
@@ -1923,7 +1923,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('food' => 'two donuts'));
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasFood()
 		);
 	}
@@ -1942,7 +1942,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('accommodation' => $accommodation));
 
-		$this->assertSame(
+		self::assertSame(
 			$accommodation,
 			$this->fixture->getAccommodation()
 		);
@@ -1955,7 +1955,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('accommodation' => ''));
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasAccommodation()
 		);
 	}
@@ -1967,7 +1967,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('accommodation' => 'a youth hostel'));
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasAccommodation()
 		);
 	}
@@ -1986,7 +1986,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('interests' => $interests));
 
-		$this->assertSame(
+		self::assertSame(
 			$interests,
 			$this->fixture->getInterests()
 		);
@@ -1999,7 +1999,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('interests' => ''));
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasInterests()
 		);
 	}
@@ -2011,7 +2011,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 		$seminar = new tx_seminars_seminar($this->seminarUid);
 		$this->fixture->setRegistrationData($seminar, $this->feUserUid, array('interests' => 'meeting people'));
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasInterests()
 		);
 	}

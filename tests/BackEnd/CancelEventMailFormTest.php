@@ -139,9 +139,9 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_Service_SingleViewLinkBuilder',
 			array('createAbsoluteUrlForEvent')
 		);
-		$this->linkBuilder->expects($this->any())
+		$this->linkBuilder->expects(self::any())
 			->method('createAbsoluteUrlForEvent')
-			->will($this->returnValue('http://singleview.example.com/'));
+			->will(self::returnValue('http://singleview.example.com/'));
 		$this->fixture->injectLinkBuilder($this->linkBuilder);
 	}
 
@@ -201,7 +201,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function renderContainsSubmitButton() {
-		$this->assertContains(
+		self::assertContains(
 			'<button class="submitButton cancelEvent"><p>' .
 			$GLOBALS['LANG']->getLL('cancelMailForm_sendButton') .
 			'</p></button>',
@@ -213,7 +213,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function renderContainsPrefilledBodyFieldWithLocalizedSalutation() {
-		$this->assertContains(
+		self::assertContains(
 			$GLOBALS['LANG']->getLL('mailForm_salutation'),
 			$this->fixture->render()
 		);
@@ -223,7 +223,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function renderContainsTheCancelEventActionForThisForm() {
-		$this->assertContains(
+		self::assertContains(
 			'<input type="hidden" name="action" value="cancelEvent" />',
 			$this->fixture->render()
 		);
@@ -244,7 +244,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'http://singleview.example.com/',
 			$this->fixture->render()
 		);
@@ -285,7 +285,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
 		$fixture->injectLinkBuilder($this->linkBuilder);
 
-		$this->assertContains(
+		self::assertContains(
 			'http://singleview.example.com/',
 			$fixture->render()
 		);
@@ -319,7 +319,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
 		$fixture->injectLinkBuilder($this->linkBuilder);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'http://singleview.example.com/',
 			$fixture->render()
 		);
@@ -363,7 +363,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
 		$fixture->injectLinkBuilder($this->linkBuilder);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'http://singleview.example.com/',
 			$fixture->render()
 		);
@@ -410,11 +410,11 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_Service_SingleViewLinkBuilder',
 			array('createAbsoluteUrlForEvent')
 		);
-		$linkBuilder->expects($this->any())
-			->method('createAbsoluteUrlForEvent')->will($this->returnValue(''));
+		$linkBuilder->expects(self::any())
+			->method('createAbsoluteUrlForEvent')->will(self::returnValue(''));
 		$fixture->injectLinkBuilder($linkBuilder);
 
-		$this->assertContains(
+		self::assertContains(
 			$GLOBALS['LANG']->getLL('eventMailForm_error_noDetailsPageFound'),
 			$fixture->render()
 		);
@@ -434,12 +434,12 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_Service_SingleViewLinkBuilder',
 			array('createAbsoluteUrlForEvent')
 		);
-		$linkBuilder->expects($this->any())
-			->method('createAbsoluteUrlForEvent')->will($this->returnValue(''));
+		$linkBuilder->expects(self::any())
+			->method('createAbsoluteUrlForEvent')->will(self::returnValue(''));
 		$this->fixture->injectLinkBuilder($linkBuilder);
 
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			$GLOBALS['LANG']->getLL('eventMailForm_error_noDetailsPageFound'),
 			$this->fixture->render()
 		);
@@ -454,7 +454,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function localizationReturnsLocalizedStringForExistingKey() {
-		$this->assertEquals(
+		self::assertEquals(
 			'Events',
 			$GLOBALS['LANG']->getLL('title')
 		);
@@ -480,7 +480,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 		);
 		$this->fixture->render();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->testingFramework->existsRecord(
 				'tx_seminars_seminars',
 				'uid = ' . $this->eventUid . ' AND cancelled = ' .
@@ -504,7 +504,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 		);
 		$this->fixture->render();
 
-		$this->assertContains(
+		self::assertContains(
 			$GLOBALS['LANG']->getLL('message_eventCanceled'),
 			$this->getRenderedFlashMessages()
 		);
@@ -544,7 +544,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 		);
 		$this->fixture->render();
 
-		$this->assertContains(
+		self::assertContains(
 			'foo User',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -568,8 +568,8 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Registration $registration */
 		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($registrationUid);
 		$hook = $this->getMock('tx_seminars_Interface_Hook_BackEndModule');
-		$hook->expects($this->once())->method('modifyCancelEmail')
-			->with($registration, $this->anything());
+		$hook->expects(self::once())->method('modifyCancelEmail')
+			->with($registration, self::anything());
 
 		$hookClass = get_class($hook);
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
@@ -613,7 +613,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 		);
 
 		$hook = $this->getMock('tx_seminars_Interface_Hook_BackEndModule');
-		$hook->expects($this->exactly(2))->method('modifyCancelEmail');
+		$hook->expects(self::exactly(2))->method('modifyCancelEmail');
 
 		$hookClass = get_class($hook);
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;

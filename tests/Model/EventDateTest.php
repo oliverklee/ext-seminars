@@ -59,7 +59,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'Superhero',
 			$this->fixture->getTitle()
 		);
@@ -79,7 +79,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'Supervillain',
 			$this->fixture->getRawTitle()
 		);
@@ -103,7 +103,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getSubtitle()
 		);
@@ -122,7 +122,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'sub title',
 			$this->fixture->getSubtitle()
 		);
@@ -142,7 +142,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSubtitle('sub title');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'sub title',
 			$topic->getSubtitle()
 		);
@@ -161,7 +161,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasSubtitle()
 		);
 	}
@@ -179,7 +179,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasSubtitle()
 		);
 	}
@@ -202,7 +202,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getTeaser()
 		);
@@ -221,7 +221,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'wow, this is teasing',
 			$this->fixture->getTeaser()
 		);
@@ -241,7 +241,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setTeaser('wow, this is teasing');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'wow, this is teasing',
 			$topic->getTeaser()
 		);
@@ -260,7 +260,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasTeaser()
 		);
 	}
@@ -278,7 +278,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasTeaser()
 		);
 	}
@@ -301,7 +301,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getDescription()
 		);
@@ -322,7 +322,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'this is a great event.',
 			$this->fixture->getDescription()
 		);
@@ -342,7 +342,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setDescription('this is a great event.');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'this is a great event.',
 			$topic->getDescription()
 		);
@@ -361,7 +361,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasDescription()
 		);
 	}
@@ -381,7 +381,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasDescription()
 		);
 	}
@@ -404,7 +404,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getCreditPoints()
 		);
@@ -423,7 +423,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getCreditPoints()
 		);
@@ -443,7 +443,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setCreditPoints(0);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$topic->getCreditPoints()
 		);
@@ -463,7 +463,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setCreditPoints(42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$topic->getCreditPoints()
 		);
@@ -482,7 +482,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasCreditPoints()
 		);
 	}
@@ -500,7 +500,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasCreditPoints()
 		);
 	}
@@ -523,7 +523,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getRegularPrice()
 		);
@@ -542,7 +542,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getRegularPrice()
 		);
@@ -562,7 +562,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegularPrice(0.00);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$topic->getRegularPrice()
 		);
@@ -582,7 +582,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegularPrice(42.42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$topic->getRegularPrice()
 		);
@@ -601,7 +601,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasRegularPrice()
 		);
 	}
@@ -619,7 +619,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasRegularPrice()
 		);
 	}
@@ -642,7 +642,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getRegularEarlyBirdPrice()
 		);
@@ -661,7 +661,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getRegularEarlyBirdPrice()
 		);
@@ -681,7 +681,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegularEarlyBirdPrice(0.00);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$topic->getRegularEarlyBirdPrice()
 		);
@@ -701,7 +701,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegularEarlyBirdPrice(42.42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$topic->getRegularEarlyBirdPrice()
 		);
@@ -720,7 +720,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasRegularEarlyBirdPrice()
 		);
 	}
@@ -738,7 +738,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasRegularEarlyBirdPrice()
 		);
 	}
@@ -761,7 +761,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getRegularBoardPrice()
 		);
@@ -780,7 +780,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getRegularBoardPrice()
 		);
@@ -800,7 +800,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegularBoardPrice(0.00);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$topic->getRegularBoardPrice()
 		);
@@ -820,7 +820,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setRegularBoardPrice(42.42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$topic->getRegularBoardPrice()
 		);
@@ -839,7 +839,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasRegularBoardPrice()
 		);
 	}
@@ -857,7 +857,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasRegularBoardPrice()
 		);
 	}
@@ -880,7 +880,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getSpecialPrice()
 		);
@@ -899,7 +899,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getSpecialPrice()
 		);
@@ -919,7 +919,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialPrice(0.00);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$topic->getSpecialPrice()
 		);
@@ -939,7 +939,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialPrice(42.42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$topic->getSpecialPrice()
 		);
@@ -958,7 +958,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasSpecialPrice()
 		);
 	}
@@ -976,7 +976,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasSpecialPrice()
 		);
 	}
@@ -999,7 +999,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getSpecialEarlyBirdPrice()
 		);
@@ -1018,7 +1018,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getSpecialEarlyBirdPrice()
 		);
@@ -1038,7 +1038,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialEarlyBirdPrice(0.00);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$topic->getSpecialEarlyBirdPrice()
 		);
@@ -1058,7 +1058,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialEarlyBirdPrice(42.42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$topic->getSpecialEarlyBirdPrice()
 		);
@@ -1077,7 +1077,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasSpecialEarlyBirdPrice()
 		);
 	}
@@ -1095,7 +1095,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasSpecialEarlyBirdPrice()
 		);
 	}
@@ -1118,7 +1118,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$this->fixture->getSpecialBoardPrice()
 		);
@@ -1137,7 +1137,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$this->fixture->getSpecialBoardPrice()
 		);
@@ -1157,7 +1157,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialBoardPrice(0.00);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0.00,
 			$topic->getSpecialBoardPrice()
 		);
@@ -1177,7 +1177,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setSpecialBoardPrice(42.42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42.42,
 			$topic->getSpecialBoardPrice()
 		);
@@ -1196,7 +1196,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasSpecialBoardPrice()
 		);
 	}
@@ -1214,7 +1214,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasSpecialBoardPrice()
 		);
 	}
@@ -1237,7 +1237,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getAdditionalInformation()
 		);
@@ -1258,7 +1258,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'this is good to know',
 			$this->fixture->getAdditionalInformation()
 		);
@@ -1278,7 +1278,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setAdditionalInformation('this is good to know');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'this is good to know',
 			$topic->getAdditionalInformation()
 		);
@@ -1297,7 +1297,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasAdditionalInformation()
 		);
 	}
@@ -1317,7 +1317,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasAdditionalInformation()
 		);
 	}
@@ -1340,7 +1340,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->allowsMultipleRegistrations()
 		);
 	}
@@ -1360,7 +1360,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->allowsMultipleRegistrations()
 		);
 	}
@@ -1383,7 +1383,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->usesTerms2()
 		);
 	}
@@ -1401,7 +1401,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->usesTerms2()
 		);
 	}
@@ -1424,7 +1424,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getNotes()
 		);
@@ -1443,7 +1443,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Don\'t forget this.',
 			$this->fixture->getNotes()
 		);
@@ -1463,7 +1463,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setNotes('Don\'t forget this.');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Don\'t forget this.',
 			$topic->getNotes()
 		);
@@ -1482,7 +1482,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasNotes()
 		);
 	}
@@ -1500,7 +1500,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasNotes()
 		);
 	}
@@ -1523,7 +1523,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getImage()
 		);
@@ -1542,7 +1542,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertEquals(
+		self::assertEquals(
 			'file.jpg',
 			$this->fixture->getImage()
 		);
@@ -1562,7 +1562,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 		);
 		$this->fixture->setImage('file.jpg');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'file.jpg',
 			$topic->getImage()
 		);
@@ -1581,7 +1581,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasImage()
 		);
 	}
@@ -1599,7 +1599,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasImage()
 		);
 	}
@@ -1623,7 +1623,7 @@ class tx_seminars_Model_EventDateTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			$paymentMethods,
 			$this->fixture->getPaymentMethods()
 		);

@@ -60,7 +60,7 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function findWithUidReturnsTimeSlotInstance() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->find(1) instanceof tx_seminars_Model_TimeSlot
 		);
 	}
@@ -75,7 +75,7 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_TimeSlot $model */
 		$model = $this->fixture->find($uid);
-		$this->assertEquals(
+		self::assertEquals(
 			'01.02.03 04:05',
 			$model->getTitle()
 		);
@@ -94,7 +94,7 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_TimeSlot $model */
 		$model = $this->fixture->find($uid);
-		$this->assertTrue(
+		self::assertTrue(
 			$model->getSpeakers() instanceof tx_oelib_List
 		);
 	}
@@ -114,7 +114,7 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_TimeSlot $model */
 		$model = $this->fixture->find($timeSlotUid);
-		$this->assertTrue(
+		self::assertTrue(
 			$model->getSpeakers()->first() instanceof tx_seminars_Model_Speaker
 		);
 	}
@@ -134,7 +134,7 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_TimeSlot $model */
 		$model = $this->fixture->find($timeSlotUid);
-		$this->assertEquals(
+		self::assertEquals(
 			$speaker->getUid(),
 			$model->getSpeakers()->getUids()
 		);
@@ -153,7 +153,7 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_TimeSlot $model */
 		$model = $this->fixture->find($uid);
-		$this->assertNull(
+		self::assertNull(
 			$model->getPlace()
 		);
 	}
@@ -169,7 +169,7 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_TimeSlot $model */
 		$model = $this->fixture->find($timeSlotUid);
-		$this->assertTrue(
+		self::assertTrue(
 			$model->getPlace() instanceof tx_seminars_Model_Place
 		);
 	}

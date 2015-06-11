@@ -63,7 +63,7 @@ class Tx_Seminars_Tests_Csv_BackEndEventAccessCheckTest extends Tx_Phpunit_TestC
 	 * @test
 	 */
 	public function subjectImplementsAccessCheck() {
-		$this->assertInstanceOf(
+		self::assertInstanceOf(
 			'Tx_Seminars_Interface_CsvAccessCheck',
 			$this->subject
 		);
@@ -75,7 +75,7 @@ class Tx_Seminars_Tests_Csv_BackEndEventAccessCheckTest extends Tx_Phpunit_TestC
 	public function hasAccessForNoBackEndUserReturnsFalse() {
 		unset($GLOBALS['BE_USER']);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->subject->hasAccess()
 		);
 	}
@@ -89,14 +89,14 @@ class Tx_Seminars_Tests_Csv_BackEndEventAccessCheckTest extends Tx_Phpunit_TestC
 
 		$pageRecord = t3lib_BEfunc::getRecord('pages', $pageUid);
 
-		$this->backEndUser->expects($this->any())->method('check')
+		$this->backEndUser->expects(self::any())->method('check')
 			->with('tables_select', 'tx_seminars_seminars')
-			->will($this->returnValue(FALSE));
-		$this->backEndUser->expects($this->any())->method('doesUserHaveAccess')
+			->will(self::returnValue(FALSE));
+		$this->backEndUser->expects(self::any())->method('doesUserHaveAccess')
 			->with($pageRecord, 1)
-			->will($this->returnValue(FALSE));
+			->will(self::returnValue(FALSE));
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->subject->hasAccess()
 		);
 	}
@@ -110,14 +110,14 @@ class Tx_Seminars_Tests_Csv_BackEndEventAccessCheckTest extends Tx_Phpunit_TestC
 
 		$pageRecord = t3lib_BEfunc::getRecord('pages', $pageUid);
 
-		$this->backEndUser->expects($this->any())->method('check')
+		$this->backEndUser->expects(self::any())->method('check')
 			->with('tables_select', 'tx_seminars_seminars')
-			->will($this->returnValue(FALSE));
-		$this->backEndUser->expects($this->any())->method('doesUserHaveAccess')
+			->will(self::returnValue(FALSE));
+		$this->backEndUser->expects(self::any())->method('doesUserHaveAccess')
 			->with($pageRecord, 1)
-			->will($this->returnValue(TRUE));
+			->will(self::returnValue(TRUE));
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->subject->hasAccess()
 		);
 	}
@@ -131,14 +131,14 @@ class Tx_Seminars_Tests_Csv_BackEndEventAccessCheckTest extends Tx_Phpunit_TestC
 
 		$pageRecord = t3lib_BEfunc::getRecord('pages', $pageUid);
 
-		$this->backEndUser->expects($this->any())->method('check')
+		$this->backEndUser->expects(self::any())->method('check')
 			->with('tables_select', 'tx_seminars_seminars')
-			->will($this->returnValue(TRUE));
-		$this->backEndUser->expects($this->any())->method('doesUserHaveAccess')
+			->will(self::returnValue(TRUE));
+		$this->backEndUser->expects(self::any())->method('doesUserHaveAccess')
 			->with($pageRecord, 1)
-			->will($this->returnValue(FALSE));
+			->will(self::returnValue(FALSE));
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->subject->hasAccess()
 		);
 	}
@@ -152,14 +152,14 @@ class Tx_Seminars_Tests_Csv_BackEndEventAccessCheckTest extends Tx_Phpunit_TestC
 
 		$pageRecord = t3lib_BEfunc::getRecord('pages', $pageUid);
 
-		$this->backEndUser->expects($this->any())->method('check')
+		$this->backEndUser->expects(self::any())->method('check')
 			->with('tables_select', 'tx_seminars_seminars')
-			->will($this->returnValue(TRUE));
-		$this->backEndUser->expects($this->any())->method('doesUserHaveAccess')
+			->will(self::returnValue(TRUE));
+		$this->backEndUser->expects(self::any())->method('doesUserHaveAccess')
 			->with($pageRecord, 1)
-			->will($this->returnValue(TRUE));
+			->will(self::returnValue(TRUE));
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->subject->hasAccess()
 		);
 	}

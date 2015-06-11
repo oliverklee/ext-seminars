@@ -59,7 +59,7 @@ class tx_seminars_Bag_SpeakerTest extends tx_phpunit_testcase {
 
 		$this->fixture = new tx_seminars_Bag_Speaker('is_dummy_record=1');
 
-		$this->assertEquals(
+		self::assertEquals(
 			1,
 			$this->fixture->count()
 		);
@@ -73,7 +73,7 @@ class tx_seminars_Bag_SpeakerTest extends tx_phpunit_testcase {
 
 		$this->fixture = new tx_seminars_Bag_Speaker('is_dummy_record=1');
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->current()->isHidden()
 		);
 	}
@@ -89,7 +89,7 @@ class tx_seminars_Bag_SpeakerTest extends tx_phpunit_testcase {
 
 		$this->fixture = new tx_seminars_Bag_Speaker('is_dummy_record=1');
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isEmpty()
 		);
 	}
@@ -112,7 +112,7 @@ class tx_seminars_Bag_SpeakerTest extends tx_phpunit_testcase {
 			-1
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->isEmpty()
 		);
 	}
@@ -135,7 +135,7 @@ class tx_seminars_Bag_SpeakerTest extends tx_phpunit_testcase {
 			1
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->current()->isHidden()
 		);
 	}

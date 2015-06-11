@@ -187,7 +187,7 @@ class Tx_Seminars_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function renderContainsSubmitButton() {
-		$this->assertContains(
+		self::assertContains(
 			'<button class="submitButton confirmEvent"><p>' .
 				$GLOBALS['LANG']->getLL('confirmMailForm_sendButton') .
 				'</p></button>',
@@ -199,7 +199,7 @@ class Tx_Seminars_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function renderContainsPrefilledBodyFieldWithLocalizedSalutation() {
-		$this->assertContains(
+		self::assertContains(
 			$GLOBALS['LANG']->getLL('mailForm_salutation'),
 			$this->fixture->render()
 		);
@@ -209,7 +209,7 @@ class Tx_Seminars_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function renderContainsTheConfirmEventActionForThisForm() {
-		$this->assertContains(
+		self::assertContains(
 			'<input type="hidden" name="action" value="confirmEvent" />',
 			$this->fixture->render()
 		);
@@ -224,7 +224,7 @@ class Tx_Seminars_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function localizationReturnsLocalizedStringForExistingKey() {
-		$this->assertEquals(
+		self::assertEquals(
 			'Events',
 			$GLOBALS['LANG']->getLL('title')
 		);
@@ -250,7 +250,7 @@ class Tx_Seminars_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase {
 		);
 		$this->fixture->render();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->testingFramework->existsRecord(
 				'tx_seminars_seminars',
 				'uid = ' . $this->eventUid . ' AND cancelled = ' .
@@ -274,7 +274,7 @@ class Tx_Seminars_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase {
 		);
 		$this->fixture->render();
 
-		$this->assertContains(
+		self::assertContains(
 			$GLOBALS['LANG']->getLL('message_eventConfirmed'),
 			$this->getRenderedFlashMessages()
 		);
@@ -315,7 +315,7 @@ class Tx_Seminars_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase {
 		);
 		$this->fixture->render();
 
-		$this->assertContains(
+		self::assertContains(
 			'foo User',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -339,8 +339,8 @@ class Tx_Seminars_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Registration $registration */
 		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($registrationUid);
 		$hook = $this->getMock('tx_seminars_Interface_Hook_BackEndModule');
-		$hook->expects($this->once())->method('modifyConfirmEmail')
-			->with($registration, $this->anything());
+		$hook->expects(self::once())->method('modifyConfirmEmail')
+			->with($registration, self::anything());
 
 		$hookClass = get_class($hook);
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
@@ -384,7 +384,7 @@ class Tx_Seminars_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase {
 		);
 
 		$hook = $this->getMock('tx_seminars_Interface_Hook_BackEndModule');
-		$hook->expects($this->exactly(2))->method('modifyConfirmEmail');
+		$hook->expects(self::exactly(2))->method('modifyConfirmEmail');
 
 		$hookClass = get_class($hook);
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;

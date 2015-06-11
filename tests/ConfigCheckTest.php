@@ -59,7 +59,7 @@ class tx_seminars_ConfigCheckTest extends tx_phpunit_testcase {
 		$this->objectToCheck->setConfigurationValue('currency', '');
 		$this->fixture->checkCurrency();
 
-		$this->assertContains(
+		self::assertContains(
 			'The specified currency setting is either empty or not a valid ' .
 				'ISO 4217 alpha 3 code.',
 			$this->fixture->getRawMessage()
@@ -73,7 +73,7 @@ class tx_seminars_ConfigCheckTest extends tx_phpunit_testcase {
 		$this->objectToCheck->setConfigurationValue('currency', 'XYZ');
 		$this->fixture->checkCurrency();
 
-		$this->assertContains(
+		self::assertContains(
 			'The specified currency setting is either empty or not a valid ' .
 				'ISO 4217 alpha 3 code.',
 			$this->fixture->getRawMessage()
@@ -87,7 +87,7 @@ class tx_seminars_ConfigCheckTest extends tx_phpunit_testcase {
 		$this->objectToCheck->setConfigurationValue('currency', 'EUR');
 		$this->fixture->checkCurrency();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->getRawMessage() == ''
 		);
 	}

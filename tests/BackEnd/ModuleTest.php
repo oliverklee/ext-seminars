@@ -47,7 +47,7 @@ class tx_seminars_BackEnd_ModuleTest extends tx_phpunit_testcase {
 	////////////////////////////////////////////////
 
 	public function testGetPageDataInitiallyReturnsEmptyArray() {
-		$this->assertEquals(
+		self::assertEquals(
 			array(),
 			$this->fixture->getPageData()
 		);
@@ -56,7 +56,7 @@ class tx_seminars_BackEnd_ModuleTest extends tx_phpunit_testcase {
 	public function testGetPageDataReturnsCompleteDataSetViaSetPageData() {
 		$this->fixture->setPageData(array('foo' => 'bar'));
 
-		$this->assertEquals(
+		self::assertEquals(
 			array('foo' => 'bar'),
 			$this->fixture->getPageData()
 		);

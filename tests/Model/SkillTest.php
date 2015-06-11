@@ -58,7 +58,7 @@ class tx_seminars_Model_SkillTest extends tx_phpunit_testcase {
 	public function setTitleSetsTitle() {
 		$this->fixture->setTitle('Superhero');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Superhero',
 			$this->fixture->getTitle()
 		);
@@ -70,7 +70,7 @@ class tx_seminars_Model_SkillTest extends tx_phpunit_testcase {
 	public function getTitleWithNonEmptyTitleReturnsTitle() {
 		$this->fixture->setData(array('title' => 'Superhero'));
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Superhero',
 			$this->fixture->getTitle()
 		);

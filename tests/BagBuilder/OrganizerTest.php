@@ -58,7 +58,7 @@ class tx_seminars_BagBuilder_OrganizerTest extends tx_phpunit_testcase {
 	///////////////////////////////////////////
 
 	public function testBuilderBuildsABag() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->build() instanceof tx_seminars_Bag_Abstract
 		);
 	}
@@ -103,7 +103,7 @@ class tx_seminars_BagBuilder_OrganizerTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEvent($eventUid);
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
+		self::assertEquals(
 			1,
 			$bag->countWithoutLimit()
 		);
@@ -134,7 +134,7 @@ class tx_seminars_BagBuilder_OrganizerTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEvent($eventUid);
 		$bag = $this->fixture->build();
 
-		$this->assertEquals(
+		self::assertEquals(
 			2,
 			$bag->countWithoutLimit()
 		);
@@ -160,7 +160,7 @@ class tx_seminars_BagBuilder_OrganizerTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEvent($eventUid2);
 		$bag = $this->fixture->build();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$bag->isEmpty()
 		);
 	}
@@ -195,7 +195,7 @@ class tx_seminars_BagBuilder_OrganizerTest extends tx_phpunit_testcase {
 		$bag = $this->fixture->build();
 		$bag->rewind();
 
-		$this->assertEquals(
+		self::assertEquals(
 			$organizerUid2,
 			$bag->current()->getUid()
 		);

@@ -63,7 +63,7 @@ class tx_seminars_Model_CategoryTest extends tx_phpunit_testcase {
 	public function setTitleSetsTitle() {
 		$this->fixture->setTitle('Lecture');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Lecture',
 			$this->fixture->getTitle()
 		);
@@ -75,7 +75,7 @@ class tx_seminars_Model_CategoryTest extends tx_phpunit_testcase {
 	public function getTitleWithNonEmptyTitleReturnsTitle() {
 		$this->fixture->setData(array('title' => 'Lecture'));
 
-		$this->assertEquals(
+		self::assertEquals(
 			'Lecture',
 			$this->fixture->getTitle()
 		);
@@ -92,7 +92,7 @@ class tx_seminars_Model_CategoryTest extends tx_phpunit_testcase {
 	public function getIconInitiallyReturnsAnEmptyString() {
 		$this->fixture->setData(array());
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getIcon()
 		);
@@ -104,7 +104,7 @@ class tx_seminars_Model_CategoryTest extends tx_phpunit_testcase {
 	public function getIconWithNonEmptyIconReturnsIcon() {
 		$this->fixture->setData(array('icon' => 'icon.gif'));
 
-		$this->assertEquals(
+		self::assertEquals(
 			'icon.gif',
 			$this->fixture->getIcon()
 		);
@@ -116,7 +116,7 @@ class tx_seminars_Model_CategoryTest extends tx_phpunit_testcase {
 	public function setIconSetsIcon() {
 		$this->fixture->setIcon('icon.gif');
 
-		$this->assertEquals(
+		self::assertEquals(
 			'icon.gif',
 			$this->fixture->getIcon()
 		);
@@ -128,7 +128,7 @@ class tx_seminars_Model_CategoryTest extends tx_phpunit_testcase {
 	public function hasIconInitiallyReturnsFalse() {
 		$this->fixture->setData(array());
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasIcon()
 		);
 	}
@@ -139,7 +139,7 @@ class tx_seminars_Model_CategoryTest extends tx_phpunit_testcase {
 	public function hasIconWithIconReturnsTrue() {
 		$this->fixture->setIcon('icon.gif');
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasIcon()
 		);
 	}
@@ -155,7 +155,7 @@ class tx_seminars_Model_CategoryTest extends tx_phpunit_testcase {
 	public function getSingleViewPageUidReturnsSingleViewPageUid() {
 		$this->fixture->setData(array('single_view_page' => 42));
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getSingleViewPageUid()
 		);
@@ -167,7 +167,7 @@ class tx_seminars_Model_CategoryTest extends tx_phpunit_testcase {
 	public function hasSingleViewPageUidForZeroPageUidReturnsFalse() {
 		$this->fixture->setData(array('single_view_page' => 0));
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasSingleViewPageUid()
 		);
 	}
@@ -178,7 +178,7 @@ class tx_seminars_Model_CategoryTest extends tx_phpunit_testcase {
 	public function hasSingleViewPageUidForNonZeroPageUidReturnsTrue() {
 		$this->fixture->setData(array('single_view_page' => 42));
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasSingleViewPageUid()
 		);
 	}

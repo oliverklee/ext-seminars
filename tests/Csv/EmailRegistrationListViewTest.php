@@ -121,7 +121,7 @@ class Tx_Seminars_Tests_Csv_EmailRegistrationListViewTest extends Tx_Phpunit_Tes
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			(string) $registrationUid,
 			$this->subject->render()
 		);
@@ -148,7 +148,7 @@ class Tx_Seminars_Tests_Csv_EmailRegistrationListViewTest extends Tx_Phpunit_Tes
 			)
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			$firstName,
 			$this->subject->render()
 		);
@@ -175,7 +175,7 @@ class Tx_Seminars_Tests_Csv_EmailRegistrationListViewTest extends Tx_Phpunit_Tes
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			$lastName,
 			$this->subject->render()
 		);
@@ -202,7 +202,7 @@ class Tx_Seminars_Tests_Csv_EmailRegistrationListViewTest extends Tx_Phpunit_Tes
 			)
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			$knownFrom,
 			$this->subject->render()
 		);
@@ -229,7 +229,7 @@ class Tx_Seminars_Tests_Csv_EmailRegistrationListViewTest extends Tx_Phpunit_Tes
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			$notes,
 			$this->subject->render()
 		);
@@ -255,7 +255,7 @@ class Tx_Seminars_Tests_Csv_EmailRegistrationListViewTest extends Tx_Phpunit_Tes
 			)
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			(string) $registrationUid,
 			$this->subject->render()
 		);
@@ -281,7 +281,7 @@ class Tx_Seminars_Tests_Csv_EmailRegistrationListViewTest extends Tx_Phpunit_Tes
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			(string) $registrationUid,
 			$this->subject->render()
 		);

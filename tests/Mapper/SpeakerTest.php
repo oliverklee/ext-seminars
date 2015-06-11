@@ -62,7 +62,7 @@ class tx_seminars_Mapper_SpeakerTest extends tx_phpunit_testcase {
 	public function findWithUidOfExistingRecordReturnsOrganizerInstance() {
 		$uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->find($uid) instanceof tx_seminars_Model_Speaker
 		);
 	}
@@ -77,7 +77,7 @@ class tx_seminars_Mapper_SpeakerTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_Speaker $model */
 		$model = $this->fixture->find($uid);
-		$this->assertEquals(
+		self::assertEquals(
 			'John Doe',
 			$model->getName()
 		);
@@ -96,7 +96,7 @@ class tx_seminars_Mapper_SpeakerTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_Speaker $model */
 		$model = $this->fixture->find($uid);
-		$this->assertTrue(
+		self::assertTrue(
 			$model->getSkills() instanceof tx_oelib_List
 		);
 	}
@@ -109,7 +109,7 @@ class tx_seminars_Mapper_SpeakerTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_Speaker $model */
 		$model = $this->fixture->find($uid);
-		$this->assertTrue(
+		self::assertTrue(
 			$model->getSkills()->isEmpty()
 		);
 	}
@@ -127,7 +127,7 @@ class tx_seminars_Mapper_SpeakerTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_Speaker $model */
 		$model = $this->fixture->find($speakerUid);
-		$this->assertFalse(
+		self::assertFalse(
 			$model->getSkills()->isEmpty()
 		);
 	}
@@ -145,7 +145,7 @@ class tx_seminars_Mapper_SpeakerTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_Speaker $model */
 		$model = $this->fixture->find($speakerUid);
-		$this->assertEquals(
+		self::assertEquals(
 			$skill->getUid(),
 			$model->getSkills()->getUids()
 		);
@@ -160,7 +160,7 @@ class tx_seminars_Mapper_SpeakerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getOwnerWithoutOwnerReturnsNull() {
-		$this->assertNull(
+		self::assertNull(
 			$this->fixture->getLoadedTestingModel(array())->getOwner()
 		);
 	}
@@ -172,7 +172,7 @@ class tx_seminars_Mapper_SpeakerTest extends tx_phpunit_testcase {
 		$frontEndUser = tx_oelib_MapperRegistry::
 			get('tx_seminars_Mapper_FrontEndUser')->getLoadedTestingModel(array());
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->getLoadedTestingModel(
 				array('owner' => $frontEndUser->getUid())
 			)->getOwner() instanceof

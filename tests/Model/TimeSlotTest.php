@@ -50,7 +50,7 @@ class tx_seminars_Model_TimeSlotTest extends tx_phpunit_testcase {
 	public function getEntryDateAsUnixTimeStampWithoutEntryDateReturnsZero() {
 		$this->fixture->setData(array());
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getEntryDateAsUnixTimeStamp()
 		);
@@ -62,7 +62,7 @@ class tx_seminars_Model_TimeSlotTest extends tx_phpunit_testcase {
 	public function getEntryDateAsUnixTimeStampWithEntryDateReturnsEntryDate() {
 		$this->fixture->setData(array('entry_date' => 42));
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getEntryDateAsUnixTimeStamp()
 		);
@@ -86,7 +86,7 @@ class tx_seminars_Model_TimeSlotTest extends tx_phpunit_testcase {
 	public function setEntryDateAsUnixTimeStampWithZeroTimeStampSetsEntryDate() {
 		$this->fixture->setEntryDateAsUnixTimeStamp(0);
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getEntryDateAsUnixTimeStamp()
 		);
@@ -98,7 +98,7 @@ class tx_seminars_Model_TimeSlotTest extends tx_phpunit_testcase {
 	public function setEntryDateAsUnixTimeStampWithPositiveTimeStampSetsEntryDate() {
 		$this->fixture->setEntryDateAsUnixTimeStamp(42);
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getEntryDateAsUnixTimeStamp()
 		);
@@ -110,7 +110,7 @@ class tx_seminars_Model_TimeSlotTest extends tx_phpunit_testcase {
 	public function hasEntryDateWithoutEntryDateReturnsFalse() {
 		$this->fixture->setData(array());
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->hasEntryDate()
 		);
 	}
@@ -121,7 +121,7 @@ class tx_seminars_Model_TimeSlotTest extends tx_phpunit_testcase {
 	public function hasEntryDateWithEntryDateReturnsTrue() {
 		$this->fixture->setEntryDateAsUnixTimeStamp(42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->hasEntryDate()
 		);
 	}

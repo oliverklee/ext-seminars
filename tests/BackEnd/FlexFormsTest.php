@@ -95,7 +95,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			in_array(
 				array(0 => 'foo record', 1 => $recordUid, 2 => 'fooicon'),
 				$configuration['items']
@@ -127,7 +127,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			in_array(
 				array(0 => 'foo record', 1 => $recordUid, 2 => 'fooicon'),
 				$configuration['items']
@@ -162,7 +162,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			in_array(
 				array(0 => 'foo record', 1 => $recordUid, 2 => 'fooicon'),
 				$configuration['items']
@@ -191,7 +191,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			in_array(
 				array(0 => 'foo record', 1 => $recordUid, 2 => 'fooicon'),
 				$configuration['items']
@@ -220,7 +220,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			in_array(
 				array(0 => 'foo record', 1 => $recordUid, 2 => 'fooicon'),
 				$configuration['items']

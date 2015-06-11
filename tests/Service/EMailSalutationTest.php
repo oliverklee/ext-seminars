@@ -100,7 +100,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	 */
 	protected function skipWithoutGenderField() {
 		if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
-			$this->markTestSkipped(
+			self::markTestSkipped(
 				'This test is skipped because it requires FE user to have a gender field, e.g., ' .
 					'from the sr_feuser_register extension.'
 			);
@@ -115,7 +115,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function createFrontEndUserReturnsFeUserModel() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->createFrontEndUser() instanceof tx_seminars_Model_FrontEndUser
 		);
 	}
@@ -126,7 +126,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	public function createFrontEndUserForGivenGenderAssignsGenderToFrontEndUser() {
 		$this->skipWithoutGenderField();
 
-		$this->assertSame(
+		self::assertSame(
 			tx_oelib_Model_FrontEndUser::GENDER_FEMALE,
 			$this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE)->getGender()
 		);
@@ -140,7 +140,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getSalutationReturnsUsernameOfRegistration() {
-		$this->assertContains(
+		self::assertContains(
 			'Foo',
 			$this->fixture->getSalutation($this->createFrontEndUser())
 		);
@@ -154,7 +154,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 
 		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_MALE);
 
-		$this->assertContains(
+		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_0'),
 			$this->fixture->getSalutation($user)
 		);
@@ -168,7 +168,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 
 		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_MALE);
 
-		$this->assertContains(
+		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_0') .
 				' ' . $user->getLastOrFullName(),
 			$this->fixture->getSalutation($user)
@@ -183,7 +183,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 
 		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE);
 
-		$this->assertContains(
+		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
 				->translate('email_hello_formal_1'),
 			$this->fixture->getSalutation($user)
@@ -198,7 +198,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 
 		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE);
 
-		$this->assertContains(
+		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_1') .
 				' ' . $user->getLastOrFullName(),
 			$this->fixture->getSalutation($user)
@@ -213,7 +213,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
 				->translate('email_hello_formal_99'),
 			$this->fixture->getSalutation($user)
@@ -228,7 +228,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
 				->translate('email_salutation_title_99') . ' ' .
 				$user->getLastOrFullName(),
@@ -244,7 +244,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('salutation', 'informal');
 
-		$this->assertContains(
+		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
 					->translate('email_hello_informal'),
 			$this->fixture->getSalutation($user)
@@ -259,7 +259,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('salutation', 'informal');
 
-		$this->assertContains(
+		self::assertContains(
 			$user->getLastOrFullName(),
 			$this->fixture->getSalutation($user)
 		);
@@ -277,7 +277,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		$salutationHookMock = $this->getMock(
 			$hookClassName, array('modifySalutation')
 		);
-		$salutationHookMock->expects($this->atLeastOnce())
+		$salutationHookMock->expects(self::atLeastOnce())
 			->method('modifySalutation');
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClassName] = $salutationHookMock;
@@ -295,7 +295,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		$salutationHookMock1 = $this->getMock(
 			$hookClassName1, array('modifySalutation')
 		);
-		$salutationHookMock1->expects($this->atLeastOnce())
+		$salutationHookMock1->expects(self::atLeastOnce())
 			->method('modifySalutation');
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClassName1] = $salutationHookMock1;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']
@@ -305,7 +305,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		$salutationHookMock2 = $this->getMock(
 			$hookClassName2, array('modifySalutation')
 		);
-		$salutationHookMock2->expects($this->atLeastOnce())
+		$salutationHookMock2->expects(self::atLeastOnce())
 			->method('modifySalutation');
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClassName2] = $salutationHookMock2;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']
@@ -332,7 +332,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			'dateFormatYMD' => $dateFormatYMD
 		));
 
-		$this->assertContains(
+		self::assertContains(
 			strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME']),
 			$this->fixture->createIntroduction('%s', $event)
 		);
@@ -358,7 +358,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			'abbreviateDateRanges' => 1,
 		));
 
-		$this->assertContains(
+		self::assertContains(
 			strftime($dateFormatD, $GLOBALS['SIM_EXEC_TIME']) .
 				'-' .
 				strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY),
@@ -382,7 +382,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			'timeFormat' => $timeFormat,
 		));
 
-		$this->assertContains(
+		self::assertContains(
 			strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']),
 			$this->fixture->createIntroduction('%s', $event)
 		);
@@ -410,7 +410,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			$translator->translate('email_timeTo') . ' ' .
 			strftime($timeFormat, $endDate);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf(
 				$translator->translate('email_timeFrom'),
 				$timeInsert

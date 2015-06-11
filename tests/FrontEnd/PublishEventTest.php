@@ -60,7 +60,7 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function renderForNoPublicationHashSetInPiVarsReturnsPublishFailedMessage() {
-		$this->assertEquals(
+		self::assertEquals(
 			$this->fixture->translate('message_publishingFailed'),
 			$this->fixture->render()
 		);
@@ -72,7 +72,7 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 	public function renderForEmptyPublicationHashSetInPiVarsReturnsPublishFailedMessage() {
 		$this->fixture->piVars['hash'] = '';
 
-		$this->assertEquals(
+		self::assertEquals(
 			$this->fixture->translate('message_publishingFailed'),
 			$this->fixture->render()
 		);
@@ -84,7 +84,7 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 	public function renderForInvalidPublicationHashSetInPiVarsReturnsPublishFailedMessage() {
 		$this->fixture->piVars['hash'] = 'foo';
 
-		$this->assertEquals(
+		self::assertEquals(
 			$this->fixture->translate('message_publishingFailed'),
 			$this->fixture->render()
 		);
@@ -102,7 +102,7 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['hash'] = '123456ABC';
 
-		$this->assertEquals(
+		self::assertEquals(
 			$this->fixture->translate('message_publishingFailed'),
 			$this->fixture->render()
 		);
@@ -120,7 +120,7 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 
 		$this->fixture->piVars['hash'] = '123456ABC';
 
-		$this->assertEquals(
+		self::assertEquals(
 			$this->fixture->translate('message_publishingSuccessful'),
 			$this->fixture->render()
 		);
@@ -139,7 +139,7 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 
 		$this->fixture->render();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->testingFramework->existsRecord(
 				'tx_seminars_seminars', 'uid = ' . $eventUid . ' AND hidden = 0'
 			)
@@ -159,7 +159,7 @@ class tx_seminars_FrontEnd_PublishEventTest extends tx_phpunit_testcase {
 
 		$this->fixture->render();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->testingFramework->existsRecord(
 				'tx_seminars_seminars', 'uid = ' . $eventUid .
 					' AND publication_hash = ""'

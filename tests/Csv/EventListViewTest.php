@@ -134,7 +134,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function renderIsEmptyForNoPageUid() {
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->subject->render()
 		);
@@ -149,7 +149,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'uid,title');
 
-		$this->assertSame(
+		self::assertSame(
 			'sep=;' . CRLF .
 				$this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
 				$this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
@@ -165,7 +165,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
-		$this->assertContains(
+		self::assertContains(
 			(string) $eventUid,
 			$this->subject->render()
 		);
@@ -183,7 +183,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-		$this->assertContains(
+		self::assertContains(
 			'another event',
 			$this->subject->render($this->pageUid)
 		);
@@ -202,11 +202,11 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 
 		$eventList = $this->subject->render($this->pageUid);
 
-		$this->assertContains(
+		self::assertContains(
 			(string) $firstEventUid,
 			$eventList
 		);
-		$this->assertContains(
+		self::assertContains(
 			(string) $secondEventUid,
 			$eventList
 		);
@@ -223,7 +223,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars', array('pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			$this->localizeAndRemoveColon('tx_seminars_seminars.uid') . CRLF . $firstEventUid . CRLF . $secondEventUid . CRLF,
 			$this->subject->render($this->pageUid)
 		);
@@ -240,7 +240,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars', array('pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600)
 		);
 
-		$this->assertRegExp(
+		self::assertRegExp(
 			'/\r\n$/',
 			$this->subject->render($this->pageUid)
 		);
@@ -254,7 +254,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'"bar"',
 			$this->subject->render($this->pageUid)
 		);
@@ -268,7 +268,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'description');
 
-		$this->assertContains(
+		self::assertContains(
 			'foo "" bar',
 			$this->subject->render($this->pageUid)
 		);
@@ -282,7 +282,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-		$this->assertContains(
+		self::assertContains(
 			'"foo' . LF . 'bar"',
 			$this->subject->render($this->pageUid)
 		);
@@ -296,7 +296,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-		$this->assertContains(
+		self::assertContains(
 			'"foo "" bar"',
 			$this->subject->render($this->pageUid)
 		);
@@ -310,7 +310,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-		$this->assertContains(
+		self::assertContains(
 			'"foo ; bar"',
 			$this->subject->render($this->pageUid)
 		);
@@ -324,7 +324,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
 
-		$this->assertContains(
+		self::assertContains(
 			'foo;bar',
 			$this->subject->render($this->pageUid)
 		);
@@ -340,11 +340,11 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 		$eventList = $this->subject->render($this->pageUid);
 		$description = $this->localizeAndRemoveColon('tx_seminars_seminars.description');
 
-		$this->assertContains(
+		self::assertContains(
 			$description,
 			$eventList
 		);
-		$this->assertNotContains(
+		self::assertNotContains(
 			'"' . $description . '"',
 			$eventList
 		);
@@ -357,7 +357,7 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
 		$this->createEventInFolderAndSetPageUid();
 
-		$this->assertContains(
+		self::assertContains(
 			$this->localizeAndRemoveColon('tx_seminars_seminars.description') .
 			';' . $this->localizeAndRemoveColon('tx_seminars_seminars.title'),
 			$this->subject->render($this->pageUid)

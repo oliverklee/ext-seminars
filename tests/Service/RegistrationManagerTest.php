@@ -155,9 +155,9 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->fixture = tx_seminars_registrationmanager::getInstance();
 
 		$this->linkBuilder = $this->getMock('tx_seminars_Service_SingleViewLinkBuilder', array('createAbsoluteUrlForEvent'));
-		$this->linkBuilder->expects($this->any())
+		$this->linkBuilder->expects(self::any())
 			->method('createAbsoluteUrlForEvent')
-			->will($this->returnValue('http://singleview.example.com/'));
+			->will(self::returnValue('http://singleview.example.com/'));
 		$this->fixture->injectLinkBuilder($this->linkBuilder);
 	}
 
@@ -310,7 +310,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function createFrontEndPagesCreatesNonZeroLoginPageUid() {
 		$this->createFrontEndPages();
 
-		$this->assertGreaterThan(
+		self::assertGreaterThan(
 			0,
 			$this->loginPageUid
 		);
@@ -319,7 +319,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function testCreateFrontEndPagesCreatesNonZeroRegistrationPageUid() {
 		$this->createFrontEndPages();
 
-		$this->assertGreaterThan(
+		self::assertGreaterThan(
 			0,
 			$this->registrationPageUid
 		);
@@ -328,10 +328,10 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function testCreateFrontEndPagesCreatesPi1() {
 		$this->createFrontEndPages();
 
-		$this->assertNotNull(
+		self::assertNotNull(
 			$this->pi1
 		);
-		$this->assertInstanceOf(
+		self::assertInstanceOf(
 			'tx_seminars_FrontEnd_DefaultController',
 			$this->pi1
 		);
@@ -340,7 +340,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function testCreateAndLogInFrontEndUserCreatesNonZeroUserUid() {
 		$this->createAndLogInFrontEndUser();
 
-		$this->assertGreaterThan(
+		self::assertGreaterThan(
 			0,
 			$this->frontEndUserUid
 		);
@@ -348,7 +348,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 	public function testCreateAndLogInFrontEndUserLogsInFrontEndUser() {
 		$this->createAndLogInFrontEndUser();
-		$this->assertTrue(
+		self::assertTrue(
 			$this->testingFramework->isLoggedIn()
 		);
 	}
@@ -356,7 +356,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function testCreateBookedOutSeminarSetsSeminarInstance() {
 		$this->createBookedOutSeminar();
 
-		$this->assertInstanceOf(
+		self::assertInstanceOf(
 			'tx_seminars_seminar',
 			$this->fullyBookedSeminar
 		);
@@ -365,7 +365,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function testCreatedBookedOutSeminarHasUidGreaterZero() {
 		$this->createBookedOutSeminar();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fullyBookedSeminar->getUid() > 0
 		);
 	}
@@ -377,7 +377,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$className = $this->createAccessibleProxyClass();
 		$instance = new $className();
 
-		$this->assertInstanceOf(
+		self::assertInstanceOf(
 			'tx_seminars_registrationmanager',
 			$instance
 		);
@@ -392,7 +392,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getInstanceReturnsRegistrationManagerInstance() {
-		$this->assertInstanceOf(
+		self::assertInstanceOf(
 			'tx_seminars_registrationmanager',
 			tx_seminars_registrationmanager::getInstance()
 		);
@@ -402,7 +402,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getInstanceTwoTimesReturnsSameInstance() {
-		$this->assertSame(
+		self::assertSame(
 			tx_seminars_registrationmanager::getInstance(),
 			tx_seminars_registrationmanager::getInstance()
 		);
@@ -415,7 +415,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$firstInstance = tx_seminars_registrationmanager::getInstance();
 		tx_seminars_registrationmanager::purgeInstance();
 
-		$this->assertNotSame(
+		self::assertNotSame(
 			$firstInstance,
 			tx_seminars_registrationmanager::getInstance()
 		);
@@ -430,7 +430,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework->logoutFrontEndUser();
 		$this->createFrontEndPages();
 
-		$this->assertContains(
+		self::assertContains(
 			'<a ',
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
@@ -440,7 +440,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework->logoutFrontEndUser();
 		$this->createFrontEndPages();
 
-		$this->assertContains(
+		self::assertContains(
 			'?id=' . $this->loginPageUid,
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
@@ -450,11 +450,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework->logoutFrontEndUser();
 		$this->createFrontEndPages();
 
-		$this->assertContains(
+		self::assertContains(
 			'redirect_url',
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
-		$this->assertContains(
+		self::assertContains(
 			'%255Bseminar%255D%3D' . $this->seminarUid,
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
@@ -464,7 +464,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 
-		$this->assertContains(
+		self::assertContains(
 			'<a ',
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
@@ -474,12 +474,12 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 
-		$this->assertContains(
+		self::assertContains(
 			'?id=' . $this->registrationPageUid,
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar
 			)
 		);
-		$this->assertContains(
+		self::assertContains(
 			'[seminar]=' . $this->seminarUid,
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
@@ -498,7 +498,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->createAndLogInFrontEndUser();
 
-		$this->assertContains(
+		self::assertContains(
 			'?id=' . $this->registrationPageUid,
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
@@ -508,7 +508,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'redirect_url',
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
@@ -522,7 +522,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->createAndLogInFrontEndUser();
 		$this->seminar->setBeginDate(0);
 
-		$this->assertContains(
+		self::assertContains(
 			$this->pi1->translate('label_onlinePrebooking'),
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
@@ -538,7 +538,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setNumberOfAttendances(5);
 		$this->seminar->setAttendancesMax(5);
 
-		$this->assertContains(
+		self::assertContains(
 			$this->pi1->translate('label_onlineRegistration'),
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
@@ -555,7 +555,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAttendancesMax(5);
 		$this->seminar->setRegistrationQueue(TRUE);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf($this->pi1->translate('label_onlineRegistrationOnQueue'), 0),
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
@@ -571,7 +571,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAttendancesMax(5);
 		$this->seminar->setRegistrationQueue(TRUE);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf($this->pi1->translate('label_onlineRegistrationOnQueue'), 0),
 			$this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
 		);
@@ -586,7 +586,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 
-		$this->assertContains(
+		self::assertContains(
 			'?id=' . $this->registrationPageUid,
 			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
 		);
@@ -596,7 +596,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->createFrontEndPages();
 		$this->createAndLogInFrontEndUser();
 
-		$this->assertContains(
+		self::assertContains(
 			'[seminar]=' . $this->seminarUid,
 			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
 		);
@@ -605,7 +605,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function testGetRegistrationLinkForLoggedOutUserAndSeminarWithVacanciesReturnsLoginLink() {
 		$this->createFrontEndPages();
 
-		$this->assertContains(
+		self::assertContains(
 			'?id=' . $this->loginPageUid,
 			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
 		);
@@ -620,7 +620,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->createBookedOutSeminar();
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->getRegistrationLink($this->pi1, $this->fullyBookedSeminar)
 		);
@@ -634,7 +634,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->createBookedOutSeminar();
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->getRegistrationLink($this->pi1, $this->fullyBookedSeminar)
 		);
@@ -656,7 +656,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->getRegistrationLink($this->pi1, $this->cachedSeminar)
 		);
@@ -680,7 +680,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->getRegistrationLink($this->pi1, $this->cachedSeminar)
 		);
@@ -694,7 +694,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->createAndLogInFrontEndUser();
 		$this->seminar->setUnlimitedVacancies();
 
-		$this->assertContains(
+		self::assertContains(
 			'[seminar]=' . $this->seminarUid,
 			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
 		);
@@ -707,7 +707,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->createFrontEndPages();
 		$this->seminar->setUnlimitedVacancies();
 
-		$this->assertContains(
+		self::assertContains(
 			'?id=' . $this->loginPageUid,
 			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
 		);
@@ -724,7 +724,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setRegistrationQueue(TRUE);
 
-		$this->assertContains(
+		self::assertContains(
 			'[seminar]=' . $this->seminarUid,
 			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
 		);
@@ -740,7 +740,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setRegistrationQueue(TRUE);
 
-		$this->assertContains(
+		self::assertContains(
 			'?id=' . $this->loginPageUid,
 			$this->fixture->getRegistrationLink($this->pi1, $this->seminar)
 		);
@@ -755,7 +755,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function canRegisterIfLoggedInForLoggedOutUserAndSeminarRegistrationOpenReturnsTrue() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
@@ -766,7 +766,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterIfLoggedInForLoggedInUserAndRegistrationOpenReturnsTrue() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
@@ -783,7 +783,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
@@ -802,7 +802,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
@@ -831,7 +831,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterIfLoggedIn($this->cachedSeminar)
 		);
 	}
@@ -842,7 +842,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterIfLoggedInForLoggedOutUserAndFullyBookedSeminarReturnsFalse() {
 		$this->createBookedOutSeminar();
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterIfLoggedIn($this->fullyBookedSeminar)
 		);
 	}
@@ -853,7 +853,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterIfLoggedInForLoggedOutUserAndCanceledSeminarReturnsFalse() {
 		$this->seminar->setStatus(tx_seminars_seminar::STATUS_CANCELED);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
@@ -865,7 +865,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAttendancesMax(0);
 		$this->seminar->setNeedsRegistration(FALSE);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
@@ -876,7 +876,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterIfLoggedInForLoggedOutUserAndSeminarWithUnlimitedVacanciesReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
@@ -888,7 +888,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setUnlimitedVacancies();
 		$this->testingFramework->createAndLoginFrontEndUser();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
@@ -901,7 +901,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setNumberOfAttendances(5);
 		$this->seminar->setRegistrationQueue(TRUE);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
@@ -915,7 +915,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setRegistrationQueue(TRUE);
 		$this->testingFramework->createAndLoginFrontEndUser();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
@@ -929,7 +929,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hookClass = uniqid('tx_registrationHook');
 		$hook = $this->getMock($hookClass, array('canRegisterForSeminar'));
-		$hook->expects($this->once())->method('canRegisterForSeminar')->with($this->seminar, $user);
+		$hook->expects(self::once())->method('canRegisterForSeminar')->with($this->seminar, $user);
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
@@ -947,7 +947,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hookClass = uniqid('tx_registrationHook');
 		$hook = $this->getMock($hookClass, array('canRegisterForSeminar'));
-		$hook->expects($this->never())->method('canRegisterForSeminar');
+		$hook->expects(self::never())->method('canRegisterForSeminar');
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -963,12 +963,12 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hookClass = uniqid('tx_registrationHook');
 		$hook = $this->getMock($hookClass, array('canRegisterForSeminar'));
-		$hook->expects($this->once())->method('canRegisterForSeminar')->will($this->returnValue(TRUE));
+		$hook->expects(self::once())->method('canRegisterForSeminar')->will(self::returnValue(TRUE));
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
@@ -981,12 +981,12 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hookClass = uniqid('tx_registrationHook');
 		$hook = $this->getMock($hookClass, array('canRegisterForSeminar'));
-		$hook->expects($this->once())->method('canRegisterForSeminar')->will($this->returnValue(FALSE));
+		$hook->expects(self::once())->method('canRegisterForSeminar')->will(self::returnValue(FALSE));
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
 		);
 	}
@@ -1000,7 +1000,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function canRegisterIfLoggedInMessageForLoggedOutUserAndSeminarRegistrationOpenReturnsEmptyString() {
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1012,7 +1012,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterIfLoggedInMessageForLoggedInUserAndRegistrationOpenReturnsEmptyString() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1030,7 +1030,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			$this->fixture->translate('message_alreadyRegistered'),
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1050,7 +1050,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1080,7 +1080,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			$this->fixture->translate('message_userIsBlocked'),
 			$this->fixture->canRegisterIfLoggedInMessage($this->cachedSeminar)
 		);
@@ -1092,7 +1092,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterIfLoggedInMessageForLoggedOutUserAndFullyBookedSeminarReturnsFullyBookedMessage() {
 		$this->createBookedOutSeminar();
 
-		$this->assertSame(
+		self::assertSame(
 			'message_noVacancies',
 			$this->fixture->canRegisterIfLoggedInMessage($this->fullyBookedSeminar)
 		);
@@ -1104,7 +1104,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterIfLoggedInMessageForLoggedOutUserAndCanceledSeminarReturnsSeminarCancelledMessage() {
 		$this->seminar->setStatus(tx_seminars_seminar::STATUS_CANCELED);
 
-		$this->assertSame(
+		self::assertSame(
 			'message_seminarCancelled',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1117,7 +1117,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAttendancesMax(0);
 		$this->seminar->setNeedsRegistration(FALSE);
 
-		$this->assertSame(
+		self::assertSame(
 			'message_noRegistrationNecessary',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1129,7 +1129,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterIfLoggedInMessageForLoggedOutUserAndSeminarWithUnlimitedVacanciesReturnsEmptyString() {
 		$this->seminar->setUnlimitedVacancies();
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1142,7 +1142,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setUnlimitedVacancies();
 		$this->testingFramework->createAndLoginFrontEndUser();
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1156,7 +1156,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setNumberOfAttendances(5);
 		$this->seminar->setRegistrationQueue(TRUE);
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1171,7 +1171,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setRegistrationQueue(TRUE);
 		$this->testingFramework->createAndLoginFrontEndUser();
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1186,7 +1186,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hookClass = uniqid('tx_registrationHook');
 		$hook = $this->getMock($hookClass, array('canRegisterForSeminarMessage'));
-		$hook->expects($this->once())->method('canRegisterForSeminarMessage')->with($this->seminar, $user);
+		$hook->expects(self::once())->method('canRegisterForSeminarMessage')->with($this->seminar, $user);
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
@@ -1204,7 +1204,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hookClass = uniqid('tx_registrationHook');
 		$hook = $this->getMock($hookClass, array('canRegisterForSeminarMessage'));
-		$hook->expects($this->never())->method('canRegisterForSeminarMessage');
+		$hook->expects(self::never())->method('canRegisterForSeminarMessage');
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -1220,12 +1220,12 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hookClass = uniqid('tx_registrationHook');
 		$hook = $this->getMock($hookClass, array('canRegisterForSeminarMessage'));
-		$hook->expects($this->once())->method('canRegisterForSeminarMessage')->will($this->returnValue('Hello world!'));
+		$hook->expects(self::once())->method('canRegisterForSeminarMessage')->will(self::returnValue('Hello world!'));
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
 
-		$this->assertSame(
+		self::assertSame(
 			'Hello world!',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1239,17 +1239,17 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hookClass1 = uniqid('tx_registrationHook');
 		$hook1 = $this->getMock($hookClass1, array('canRegisterForSeminarMessage'));
-		$hook1->expects($this->any())->method('canRegisterForSeminarMessage')->will($this->returnValue('message 1'));
+		$hook1->expects(self::any())->method('canRegisterForSeminarMessage')->will(self::returnValue('message 1'));
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass1] = $hook1;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass1] = $hookClass1;
 
 		$hookClass2 = uniqid('tx_registrationHook');
 		$hook2 = $this->getMock($hookClass2, array('canRegisterForSeminarMessage'));
-		$hook2->expects($this->any())->method('canRegisterForSeminarMessage')->will($this->returnValue('message 2'));
+		$hook2->expects(self::any())->method('canRegisterForSeminarMessage')->will(self::returnValue('message 2'));
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass2] = $hook2;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass2] = $hookClass2;
 
-		$this->assertSame(
+		self::assertSame(
 			'message 1',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1263,17 +1263,17 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hookClass1 = uniqid('tx_registrationHook');
 		$hook1 = $this->getMock($hookClass1, array('canRegisterForSeminarMessage'));
-		$hook1->expects($this->any())->method('canRegisterForSeminarMessage')->will($this->returnValue(''));
+		$hook1->expects(self::any())->method('canRegisterForSeminarMessage')->will(self::returnValue(''));
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass1] = $hook1;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass1] = $hookClass1;
 
 		$hookClass2 = uniqid('tx_registrationHook');
 		$hook2 = $this->getMock($hookClass2, array('canRegisterForSeminarMessage'));
-		$hook2->expects($this->any())->method('canRegisterForSeminarMessage')->will($this->returnValue('message 2'));
+		$hook2->expects(self::any())->method('canRegisterForSeminarMessage')->will(self::returnValue('message 2'));
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass2] = $hook2;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass2] = $hookClass2;
 
-		$this->assertSame(
+		self::assertSame(
 			'message 2',
 			$this->fixture->canRegisterIfLoggedInMessage($this->seminar)
 		);
@@ -1301,7 +1301,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->userFulfillsRequirements($this->cachedSeminar)
 		);
 	}
@@ -1345,7 +1345,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->userFulfillsRequirements($this->cachedSeminar)
 		);
 	}
@@ -1382,7 +1382,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->userFulfillsRequirements($this->cachedSeminar)
 		);
 	}
@@ -1393,7 +1393,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 
 	public function testGetMissingRequiredTopicsReturnsSeminarBag() {
-		$this->assertInstanceOf(
+		self::assertInstanceOf(
 			'tx_seminars_Bag_Event',
 			$this->fixture->getMissingRequiredTopics($this->seminar)
 		);
@@ -1434,7 +1434,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$this->cachedSeminar
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$missingTopics->count()
 		);
@@ -1475,7 +1475,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$this->cachedSeminar
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			$requiredTopicUid,
 			$missingTopics->current()->getUid()
 		);
@@ -1533,7 +1533,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$this->cachedSeminar
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			2,
 			$missingTopics->count()
 		);
@@ -1588,7 +1588,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$this->cachedSeminar
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			$requiredTopicUid2,
 			$missingTopics->current()->getUid()
 		);
@@ -1643,7 +1643,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$this->cachedSeminar
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$missingTopics->count()
 		);
@@ -1673,7 +1673,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->removeRegistration($registrationUid, $this->pi1);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->testingFramework->existsRecord(
 				'tx_seminars_attendances',
 				'user = ' . $userUid . ' AND seminar = ' . $seminarUid .
@@ -1690,7 +1690,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$hook = $this->getMock($hookClass, array('seminarRegistrationRemoved'));
 		// We cannot test for the expected parameters because the registration
 		// instance does not exist yet at this point.
-		$hook->expects($this->once())->method('seminarRegistrationRemoved');
+		$hook->expects(self::once())->method('seminarRegistrationRemoved');
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
@@ -1752,7 +1752,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$hook = $this->getMock($hookClass, array('seminarRegistrationMovedFromQueue'));
 		// We cannot test for the expected parameters because the registration
 		// instance does not exist yet at this point.
-		$hook->expects($this->once())->method('seminarRegistrationMovedFromQueue');
+		$hook->expects(self::once())->method('seminarRegistrationMovedFromQueue');
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
@@ -1794,7 +1794,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterSeats($this->seminar, 0)
 		);
 	}
@@ -1806,7 +1806,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterSeats($this->seminar, 1)
 		);
 	}
@@ -1818,7 +1818,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterSeats($this->seminar, '')
 		);
 	}
@@ -1830,7 +1830,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setNumberOfAttendances(1);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterSeats($this->seminar, 'foo')
 		);
 	}
@@ -1841,7 +1841,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterSeatsForEventWithOneVacancyAndZeroSeatsGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 0)
 		);
 	}
@@ -1853,7 +1853,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterSeatsForEventWithOneVacancyAndOneSeatGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 1)
 		);
 	}
@@ -1864,7 +1864,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterSeatsForEventWithOneVacancyAndTwoSeatsGivenReturnsFalse() {
 		$this->seminar->setAttendancesMax(1);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterSeats($this->seminar, 2)
 		);
 	}
@@ -1875,7 +1875,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterSeatsForEventWithOneVacancyAndEmptyStringGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(1);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, '')
 		);
 	}
@@ -1886,7 +1886,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterSeatsForEventWithOneVacancyAndInvalidStringGivenReturnsFalse() {
 		$this->seminar->setAttendancesMax(1);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterSeats($this->seminar, 'foo')
 		);
 	}
@@ -1897,7 +1897,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterSeatsForEventWithTwoVacanciesAndOneSeatGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(2);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 1)
 		);
 	}
@@ -1908,7 +1908,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterSeatsForEventWithTwoVacanciesAndTwoSeatsGivenReturnsTrue() {
 		$this->seminar->setAttendancesMax(2);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 2)
 		);
 	}
@@ -1919,7 +1919,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterSeatsForEventWithTwoVacanciesAndThreeSeatsGivenReturnsFalse() {
 		$this->seminar->setAttendancesMax(2);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->canRegisterSeats($this->seminar, 3)
 		);
 	}
@@ -1930,7 +1930,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterSeatsForEventWithUnlimitedVacanciesAndZeroSeatsGivenReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 0)
 		);
 	}
@@ -1941,7 +1941,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterSeatsForEventWithUnlimitedVacanciesAndOneSeatGivenReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 1)
 		);
 	}
@@ -1952,7 +1952,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterSeatsForEventWithUnlimitedVacanciesAndTwoSeatsGivenReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 2)
 		);
 	}
@@ -1963,7 +1963,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function canRegisterSeatsForEventWithUnlimitedVacanciesAndFortytwoSeatsGivenReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 42)
 		);
 	}
@@ -1976,7 +1976,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setRegistrationQueue(TRUE);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 0)
 		);
 	}
@@ -1989,7 +1989,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setRegistrationQueue(TRUE);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 1)
 		);
 	}
@@ -2002,7 +2002,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setRegistrationQueue(TRUE);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 2)
 		);
 	}
@@ -2015,7 +2015,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setNumberOfAttendances(1);
 		$this->seminar->setRegistrationQueue(TRUE);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, '')
 		);
 	}
@@ -2027,7 +2027,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAttendancesMax(2);
 		$this->seminar->setRegistrationQueue(TRUE);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->canRegisterSeats($this->seminar, 42)
 		);
 	}
@@ -2048,7 +2048,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertArrayHasKey(
+		self::assertArrayHasKey(
 			'foo@bar.com',
 			$this->mailer->getFirstSentEmail()->getTo()
 		);
@@ -2073,7 +2073,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertNull(
+		self::assertNull(
 			$this->mailer->getFirstSentEmail()
 		);
 	}
@@ -2084,7 +2084,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function notifyAttendeeForSendConfirmationTrueCallsModifyThankYouEmailHook() {
 		$hookClass = uniqid('tx_seminars_registrationHook');
 		$hook = $this->getMock($hookClass, array('modifyThankYouEmail'));
-		$hook->expects($this->once())->method('modifyThankYouEmail');
+		$hook->expects(self::once())->method('modifyThankYouEmail');
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -2103,7 +2103,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function notifyAttendeeForSendConfirmationFalseNotCallsModifyThankYouEmailHook() {
 		$hookClass = uniqid('tx_seminars_registrationHook');
 		$hook = $this->getMock($hookClass, array('modifyThankYouEmail'));
-		$hook->expects($this->never())->method('modifyThankYouEmail');
+		$hook->expects(self::never())->method('modifyThankYouEmail');
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -2127,7 +2127,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hook = $this->getMock('tx_seminars_Interface_Hook_Registration', array());
 		$hookClass = get_class($hook);
-		$hook->expects($this->once())->method('modifyAttendeeEmailText')->with($registration, $this->anything());
+		$hook->expects(self::once())->method('modifyAttendeeEmailText')->with($registration, self::anything());
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -2150,7 +2150,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hook = $this->getMock('tx_seminars_Interface_Hook_Registration', array());
 		$hookClass = get_class($hook);
-		$hook->expects($this->exactly(2))->method('modifyAttendeeEmailText')->with($registration, $this->anything());;
+		$hook->expects(self::exactly(2))->method('modifyAttendeeEmailText')->with($registration, self::anything());;
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -2173,7 +2173,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('email_confirmationSubject'),
 			$this->mailer->getFirstSentEmail()->getSubject()
 		);
@@ -2190,7 +2190,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'test event',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2207,7 +2207,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'something nice to eat',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2224,7 +2224,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'a nice, dry place',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2241,7 +2241,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'learning Ruby on Rails',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2258,7 +2258,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'test event',
 			$this->mailer->getFirstSentEmail()->getSubject()
 		);
@@ -2275,7 +2275,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertSame(
+		self::assertSame(
 			array('mail@example.com' => 'test organizer'),
 			$this->mailer->getFirstSentEmail()->getFrom()
 		);
@@ -2297,7 +2297,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'<html',
 			$this->getEmailHtmlPart()
 		);
@@ -2314,7 +2314,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertSame(
+		self::assertSame(
 			array(),
 			$this->mailer->getFirstSentEmail()->getChildren()
 		);
@@ -2331,7 +2331,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'###',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2353,7 +2353,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'###',
 			$this->getEmailHtmlPart()
 		);
@@ -2381,7 +2381,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'<html',
 			$this->getEmailHtmlPart()
 		);
@@ -2409,7 +2409,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertSame(
+		self::assertSame(
 			array(),
 			$this->mailer->getFirstSentEmail()->getChildren()
 		);
@@ -2435,7 +2435,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'foo_user',
 			$this->getEmailHtmlPart()
 		);
@@ -2461,7 +2461,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->fixture->notifyAttendee($registration, $pi1);
 		$seminarLink = 'http://singleview.example.com/';
 
-		$this->assertContains(
+		self::assertContains(
 			'<a href="' . $seminarLink,
 			$this->getEmailHtmlPart()
 		);
@@ -2478,7 +2478,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			LF . '-- ' . LF . 'organizer footer',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2499,7 +2499,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			$this->fixture->translate('label_planned_disclaimer'),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2520,7 +2520,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			$this->fixture->translate('label_planned_disclaimer'),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2541,7 +2541,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('label_planned_disclaimer'),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2565,7 +2565,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			$this->fixture->translate('label_planned_disclaimer'),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2592,7 +2592,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'style=',
 			$this->getEmailHtmlPart()
 		);
@@ -2610,7 +2610,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration->setAttendeesNames('foo1 foo2');
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'foo1 foo2',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2628,7 +2628,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration->setAttendeesNames('foo1' . LF . 'foo2');
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'1. foo1' . LF . '2. foo2',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2656,7 +2656,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration->setAttendeesNames('foo1' . LF . 'foo2');
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertRegExp(
+		self::assertRegExp(
 			'/\<ol>.*<li>foo1<\/li>.*<li>foo2<\/li>.*<\/ol>/s',
 			$this->getEmailHtmlPart()
 		);
@@ -2680,7 +2680,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'foo_place',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2704,7 +2704,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'foo_street',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2721,7 +2721,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('message_willBeAnnounced'),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2746,7 +2746,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'place_title' . LF . 'place_address',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2781,7 +2781,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'place_title<br>place_address',
 			$this->getEmailHtmlPart()
 		);
@@ -2806,7 +2806,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'place_title' . LF . 'place_address',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2831,7 +2831,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'address1 address2',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2856,7 +2856,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'address1 address2',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2881,7 +2881,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'address1 address2',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2906,7 +2906,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'address1 address2',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2931,7 +2931,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'address1 address2',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -2966,7 +2966,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'address1 address2',
 			$this->getEmailHtmlPart()
 		);
@@ -3001,7 +3001,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'address1 address2 address3',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3025,7 +3025,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'footown',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3049,7 +3049,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'12345 footown',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3079,7 +3079,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			$country->getLocalShortName(),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3104,7 +3104,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'address' . LF . 'footown',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3139,7 +3139,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'address<br>footown',
 			$this->getEmailHtmlPart()
 		);
@@ -3173,7 +3173,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			'footown, ' . $country->getLocalShortName(),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3198,7 +3198,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'footown,',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3226,7 +3226,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_informal'),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3237,7 +3237,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForFormalSalutationAndGenderUnknownContainsFormalUnknownSalutation() {
 		if (Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
-			$this->markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
+			self::markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
 		}
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
@@ -3253,7 +3253,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_2'),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3264,7 +3264,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForFormalSalutationAndGenderMaleContainsFormalMaleSalutation() {
 		if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
-			$this->markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
+			self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
 		}
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
@@ -3280,7 +3280,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_0'),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3291,7 +3291,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForFormalSalutationAndGenderFemaleContainsFormalFemaleSalutation() {
 		if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
-			$this->markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
+			self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
 		}
 
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
@@ -3307,7 +3307,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_1'),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3329,7 +3329,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf(
 				$this->fixture->translate('email_confirmationHello_formal'),
 				$this->seminar->getTitle()
@@ -3354,7 +3354,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf(
 				$this->fixture->translate('email_confirmationHello_informal'),
 				$this->seminar->getTitle()
@@ -3383,7 +3383,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, $pi1, 'confirmationOnUnregistration'
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf(
 				$this->fixture->translate(
 					'email_confirmationOnUnregistrationHello_formal'
@@ -3414,7 +3414,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, $pi1, 'confirmationOnUnregistration'
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf(
 				$this->fixture->translate(
 					'email_confirmationOnUnregistrationHello_informal'
@@ -3445,7 +3445,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, $pi1, 'confirmationOnRegistrationForQueue'
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf(
 				$this->fixture->translate(
 					'email_confirmationOnRegistrationForQueueHello_formal'
@@ -3476,7 +3476,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, $pi1, 'confirmationOnRegistrationForQueue'
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf(
 				$this->fixture->translate(
 					'email_confirmationOnRegistrationForQueueHello_informal'
@@ -3507,7 +3507,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, $pi1, 'confirmationOnQueueUpdate'
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf(
 				$this->fixture->translate(
 					'email_confirmationOnQueueUpdateHello_formal'
@@ -3538,7 +3538,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, $pi1, 'confirmationOnQueueUpdate'
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf(
 				$this->fixture->translate(
 					'email_confirmationOnQueueUpdateHello_informal'
@@ -3561,7 +3561,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture = $this->getMock(
 			'tx_seminars_registrationmanager', array('getUnregistrationNotice')
 		);
-		$fixture->expects($this->never())->method('getUnregistrationNotice');
+		$fixture->expects(self::never())->method('getUnregistrationNotice');
 
 		$fixture->setConfigurationValue('sendConfirmationOnUnregistration', TRUE);
 		$registration = $this->createRegistration();
@@ -3589,7 +3589,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture = $this->getMock(
 			'tx_seminars_registrationmanager', array('getUnregistrationNotice')
 		);
-		$fixture->expects($this->never())->method('getUnregistrationNotice');
+		$fixture->expects(self::never())->method('getUnregistrationNotice');
 		$fixture->setConfigurationValue('sendConfirmation', TRUE);
 
 		$registration = $this->createRegistration();
@@ -3616,7 +3616,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture = $this->getMock(
 			'tx_seminars_registrationmanager', array('getUnregistrationNotice')
 		);
-		$fixture->expects($this->once())->method('getUnregistrationNotice');
+		$fixture->expects(self::once())->method('getUnregistrationNotice');
 		$fixture->setConfigurationValue('sendConfirmation', TRUE);
 
 		$registration = $this->createRegistration();
@@ -3643,7 +3643,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture = $this->getMock(
 			'tx_seminars_registrationmanager', array('getUnregistrationNotice')
 		);
-		$fixture->expects($this->once())->method('getUnregistrationNotice');
+		$fixture->expects(self::once())->method('getUnregistrationNotice');
 
 		$fixture->setConfigurationValue(
 			'sendConfirmationOnRegistrationForQueue', TRUE
@@ -3676,7 +3676,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture = $this->getMock(
 			'tx_seminars_registrationmanager', array('getUnregistrationNotice')
 		);
-		$fixture->expects($this->once())->method('getUnregistrationNotice');
+		$fixture->expects(self::once())->method('getUnregistrationNotice');
 
 		$fixture->setConfigurationValue('sendConfirmationOnQueueUpdate', TRUE);
 		$registration = $this->createRegistration();
@@ -3713,7 +3713,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyOrganizers($registration);
 
-		$this->assertSame(
+		self::assertSame(
 			array('mail@example.com' => 'test organizer'),
 			$this->mailer->getFirstSentEmail()->getFrom()
 		);
@@ -3728,7 +3728,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyOrganizers($registration);
 
-		$this->assertArrayHasKey(
+		self::assertArrayHasKey(
 			'mail@example.com',
 			$this->mailer->getFirstSentEmail()->getTo()
 		);
@@ -3746,7 +3746,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$this->fixture->notifyOrganizers($registration);
 
-		$this->assertContains(
+		self::assertContains(
 			'Hello',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3768,7 +3768,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyOrganizers($registration);
 
-		$this->assertRegExp(
+		self::assertRegExp(
 			'/' . $this->fixture->translate('label_vacancies') . ': 1$/',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3790,7 +3790,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->notifyOrganizers($registration);
 
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('label_vacancies') . ': ' .
 				$this->fixture->translate('label_unlimited'),
 			$this->mailer->getFirstSentEmail()->getBody()
@@ -3818,7 +3818,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = new tx_seminars_registrationchild($registrationUid);
 		$this->fixture->notifyOrganizers($registration);
 
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('label_company'),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3845,7 +3845,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = new tx_seminars_registrationchild($registrationUid);
 		$this->fixture->notifyOrganizers($registration);
 
-		$this->assertContains(
+		self::assertContains(
 			'foo inc.',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -3865,7 +3865,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hook = $this->getMock('tx_seminars_Interface_Hook_Registration');
 		$hookClassName = get_class($hook);
-		$hook->expects($this->once())->method('modifyOrganizerNotificationEmail')->with($registration, $this->anything());
+		$hook->expects(self::once())->method('modifyOrganizerNotificationEmail')->with($registration, self::anything());
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClassName] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
@@ -3887,8 +3887,8 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$hook = $this->getMock('tx_seminars_Interface_Hook_Registration');
 		$hookClassName = get_class($hook);
-		$hook->expects($this->once())->method('modifyOrganizerNotificationEmail')
-			->with($this->anything(), $this->isInstanceOf('Tx_Oelib_Template'));
+		$hook->expects(self::once())->method('modifyOrganizerNotificationEmail')
+			->with(self::anything(), self::isInstanceOf('Tx_Oelib_Template'));
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClassName] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
@@ -3908,7 +3908,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 
-		$this->assertArrayHasKey(
+		self::assertArrayHasKey(
 			'mail@example.com',
 			$this->mailer->getFirstSentEmail()->getTo()
 		);
@@ -3937,7 +3937,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 
-		$this->assertSame(
+		self::assertSame(
 			2,
 			$this->mailer->getNumberOfSentEmails()
 		);
@@ -3968,11 +3968,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$sentEmails = $this->mailer->getSentEmails();
 
-		$this->assertArrayHasKey(
+		self::assertArrayHasKey(
 			'mail@example.com',
 			$sentEmails[0]->getFrom()
 		);
-		$this->assertArrayHasKey(
+		self::assertArrayHasKey(
 			'mail@example.com',
 			$sentEmails[1]->getFrom()
 		);
@@ -3998,7 +3998,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf(
 				$this->fixture->translate('email_additionalNotificationEnoughRegistrationsSubject'),
 				$this->seminarUid, ''
@@ -4027,7 +4027,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 
-		$this->assertNull(
+		self::assertNull(
 			$this->mailer->getFirstSentEmail()
 		);
 	}
@@ -4044,7 +4044,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 
-		$this->assertContains(
+		self::assertContains(
 			sprintf(
 				$this->fixture->translate('email_additionalNotificationIsFullSubject'),
 				$this->seminarUid, ''
@@ -4064,7 +4064,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('email_additionalNotificationIsFull'),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -4089,7 +4089,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$fixture->sendAdditionalNotification($registration);
 
-		$this->assertNull(
+		self::assertNull(
 			$this->mailer->getFirstSentEmail()
 		);
 	}
@@ -4110,7 +4110,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$this->mailer->getNumberOfSentEmails()
 		);
@@ -4135,7 +4135,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 
-		$this->assertRegExp(
+		self::assertRegExp(
 			'/' . $this->fixture->translate('label_vacancies') . ': 1$/',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -4160,7 +4160,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration = $this->createRegistration();
 		$this->fixture->sendAdditionalNotification($registration);
 
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('label_vacancies') . ': ' . $this->fixture->translate('label_unlimited'),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -4178,7 +4178,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAllowRegistrationForEventsWithoutDate(1);
 		$this->seminar->setBeginDate(0);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->allowsRegistrationByDate($this->seminar)
 		);
 	}
@@ -4190,7 +4190,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAllowRegistrationForEventsWithoutDate(0);
 		$this->seminar->setBeginDate(0);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->allowsRegistrationByDate($this->seminar)
 		);
 	}
@@ -4202,7 +4202,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 		$this->seminar->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 42);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->allowsRegistrationByDate($this->seminar)
 		);
 	}
@@ -4214,7 +4214,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 		$this->seminar->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->allowsRegistrationByDate($this->seminar)
 		);
 	}
@@ -4226,7 +4226,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 		$this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] + 10);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->allowsRegistrationByDate($this->seminar)
 		);
 	}
@@ -4238,7 +4238,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 		$this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] - 42);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->allowsRegistrationByDate($this->seminar)
 		);
 	}
@@ -4250,7 +4250,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 		$this->seminar->setRegistrationBeginDate(0);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->allowsRegistrationByDate($this->seminar)
 		);
 	}
@@ -4262,7 +4262,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 42);
 		$this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] - 50);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->allowsRegistrationByDate($this->seminar)
 		);
 	}
@@ -4280,7 +4280,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setRegistrationQueue(FALSE);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->allowsRegistrationBySeats($this->seminar)
 		);
 	}
@@ -4291,7 +4291,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function allowsRegistrationBySeatsForEventWithUnlimitedVacanciesReturnsTrue() {
 		$this->seminar->setUnlimitedVacancies();
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->allowsRegistrationBySeats($this->seminar)
 		);
 	}
@@ -4304,7 +4304,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setRegistrationQueue(TRUE);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->allowsRegistrationBySeats($this->seminar)
 		);
 	}
@@ -4317,7 +4317,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar->setAttendancesMax(1);
 		$this->seminar->setRegistrationQueue(FALSE);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->allowsRegistrationBySeats($this->seminar)
 		);
 	}
@@ -4333,7 +4333,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function registrationHasStartedForEventWithoutRegistrationBeginReturnsTrue() {
 		$this->seminar->setRegistrationBeginDate(0);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->registrationHasStarted($this->seminar)
 		);
 	}
@@ -4346,7 +4346,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$GLOBALS['SIM_EXEC_TIME'] - 42
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->registrationHasStarted($this->seminar)
 		);
 	}
@@ -4359,7 +4359,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$GLOBALS['SIM_EXEC_TIME'] + 42
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->registrationHasStarted($this->seminar)
 		);
 	}
@@ -4390,12 +4390,12 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->createRegistration($this->seminar, array(), $plugin);
 
-		$this->assertInstanceOf(
+		self::assertInstanceOf(
 			'tx_seminars_registration',
 			$fixture->getRegistration()
 		);
 		$uid = $fixture->getRegistration()->getUid();
-		$this->assertTrue(
+		self::assertTrue(
 			// We're not using the testing framework here because the record
 			// is not marked as dummy record.
 			tx_oelib_db::existsRecordWithUid(
@@ -4429,7 +4429,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		// the data mapper to save the registration.
 		tx_oelib_db::delete('tx_seminars_attendances', 'uid = ' . $uid);
 
-		$this->assertInstanceOf(
+		self::assertInstanceOf(
 			'tx_seminars_Model_Registration',
 			$registration
 		);
@@ -4472,7 +4472,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		// the data mapper to save the registration.
 		tx_oelib_db::delete('tx_seminars_attendances', 'uid = ' . $uid);
 
-		$this->assertSame(
+		self::assertSame(
 			$registration->getUid(),
 			$fixture->getRegistration()->getUid()
 		);
@@ -4488,7 +4488,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$hook = $this->getMock($hookClass, array('seminarRegistrationCreated'));
 		// We cannot test for the expected parameters because the registration
 		// instance does not exist yet at this point.
-		$hook->expects($this->once())->method('seminarRegistrationCreated');
+		$hook->expects(self::once())->method('seminarRegistrationCreated');
 
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
@@ -4535,7 +4535,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('seats' => '3')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			3,
 			$registration->getSeats()
 		);
@@ -4558,7 +4558,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array()
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$registration->getSeats()
 		);
@@ -4581,7 +4581,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('seats' => '0')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$registration->getSeats()
 		);
@@ -4604,7 +4604,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('seats' => '-1')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$registration->getSeats()
 		);
@@ -4627,7 +4627,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('registered_themselves' => '1')
 		);
 
-		$this->assertTrue(
+		self::assertTrue(
 			$registration->hasRegisteredThemselves()
 		);
 	}
@@ -4649,7 +4649,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('registered_themselves' => '0')
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$registration->hasRegisteredThemselves()
 		);
 	}
@@ -4671,7 +4671,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array()
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$registration->hasRegisteredThemselves()
 		);
 	}
@@ -4686,8 +4686,8 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
 		$event->setData(array('payment_methods' => new tx_oelib_List()));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 12, 'special' => 3)));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 12, 'special' => 3)));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
@@ -4696,7 +4696,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('price' => 'special')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'special',
 			$registration->getPrice()
 		);
@@ -4712,8 +4712,8 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
 		$event->setData(array('payment_methods' => new tx_oelib_List()));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 12)));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
@@ -4722,7 +4722,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('price' => 'early_bird_regular')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'regular',
 			$registration->getPrice()
 		);
@@ -4738,8 +4738,8 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
 		$event->setData(array('payment_methods' => new tx_oelib_List()));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 12)));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
@@ -4748,7 +4748,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array()
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'regular',
 			$registration->getPrice()
 		);
@@ -4764,8 +4764,8 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
 		$event->setData(array('payment_methods' => new tx_oelib_List()));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 0)));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 0)));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
@@ -4774,7 +4774,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array()
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'regular',
 			$registration->getPrice()
 		);
@@ -4790,8 +4790,8 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
 		$event->setData(array('payment_methods' => new tx_oelib_List()));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 12)));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
@@ -4800,7 +4800,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('price' => 'regular', 'seats' => '1')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			12.0,
 			$registration->getTotalPrice()
 		);
@@ -4816,8 +4816,8 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
 		$event->setData(array('payment_methods' => new tx_oelib_List()));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 12)));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
@@ -4826,7 +4826,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('price' => 'regular', 'seats' => '2')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			24.0,
 			$registration->getTotalPrice()
 		);
@@ -4849,7 +4849,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('attendees_names' => 'John Doe' . LF . 'Jane Doe')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'John Doe' . LF . 'Jane Doe',
 			$registration->getAttendeesNames()
 		);
@@ -4872,7 +4872,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('attendees_names' => 'John <em>Doe</em>')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'John Doe',
 			$registration->getAttendeesNames()
 		);
@@ -4895,7 +4895,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('attendees_names' => '')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getAttendeesNames()
 		);
@@ -4918,7 +4918,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array()
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getAttendeesNames()
 		);
@@ -4941,7 +4941,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('kids' => '3')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			3,
 			$registration->getKids()
 		);
@@ -4964,7 +4964,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array()
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			0,
 			$registration->getKids()
 		);
@@ -4987,7 +4987,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('kids' => '0')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			0,
 			$registration->getKids()
 		);
@@ -5010,7 +5010,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('kids' => '-1')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			0,
 			$registration->getKids()
 		);
@@ -5030,17 +5030,17 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$paymentMethods->add($paymentMethod);
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 12)));
-		$event->expects($this->any())->method('getPaymentMethods')
-			->will($this->returnValue($paymentMethods));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 12)));
+		$event->expects(self::any())->method('getPaymentMethods')
+			->will(self::returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData($registration, array('method_of_payment' => $paymentMethod->getUid()));
 
-		$this->assertSame(
+		self::assertSame(
 			$paymentMethod,
 			$registration->getPaymentMethod()
 		);
@@ -5063,17 +5063,17 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$paymentMethods->add($paymentMethod2);
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 12)));
-		$event->expects($this->any())->method('getPaymentMethods')
-			->will($this->returnValue($paymentMethods));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 12)));
+		$event->expects(self::any())->method('getPaymentMethods')
+			->will(self::returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData($registration, array('method_of_payment' => $paymentMethod2->getUid()));
 
-		$this->assertSame(
+		self::assertSame(
 			$paymentMethod2,
 			$registration->getPaymentMethod()
 		);
@@ -5093,17 +5093,17 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$paymentMethods->add($paymentMethod);
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 0)));
-		$event->expects($this->any())->method('getPaymentMethods')
-			->will($this->returnValue($paymentMethods));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 0)));
+		$event->expects(self::any())->method('getPaymentMethods')
+			->will(self::returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData($registration, array('method_of_payment' => $paymentMethod->getUid()));
 
-		$this->assertNull(
+		self::assertNull(
 			$registration->getPaymentMethod()
 		);
 	}
@@ -5117,10 +5117,10 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 0)));
-		$event->expects($this->any())->method('getPaymentMethods')
-			->will($this->returnValue(new tx_oelib_List()));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 0)));
+		$event->expects(self::any())->method('getPaymentMethods')
+			->will(self::returnValue(new tx_oelib_List()));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
@@ -5129,7 +5129,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array()
 		);
 
-		$this->assertNull(
+		self::assertNull(
 			$registration->getPaymentMethod()
 		);
 	}
@@ -5149,17 +5149,17 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$paymentMethods->add($paymentMethod2);
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 12)));
-		$event->expects($this->any())->method('getPaymentMethods')
-			->will($this->returnValue($paymentMethods));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 12)));
+		$event->expects(self::any())->method('getPaymentMethods')
+			->will(self::returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertNull(
+		self::assertNull(
 			$registration->getPaymentMethod()
 		);
 	}
@@ -5178,17 +5178,17 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$paymentMethods->add($paymentMethod);
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 12)));
-		$event->expects($this->any())->method('getPaymentMethods')
-			->will($this->returnValue($paymentMethods));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 12)));
+		$event->expects(self::any())->method('getPaymentMethods')
+			->will(self::returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertSame(
+		self::assertSame(
 			$paymentMethod,
 			$registration->getPaymentMethod()
 		);
@@ -5211,10 +5211,10 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$paymentMethods->add($paymentMethod2);
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 12)));
-		$event->expects($this->any())->method('getPaymentMethods')
-			->will($this->returnValue($paymentMethods));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 12)));
+		$event->expects(self::any())->method('getPaymentMethods')
+			->will(self::returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
@@ -5223,7 +5223,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('method_of_payment' => max($paymentMethod1->getUid(), $paymentMethod2->getUid()) + 1)
 		);
 
-		$this->assertNull(
+		self::assertNull(
 			$registration->getPaymentMethod()
 		);
 	}
@@ -5242,17 +5242,17 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$paymentMethods->add($paymentMethod);
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));
-		$event->expects($this->any())->method('getAvailablePrices')
-			->will($this->returnValue(array('regular' => 12)));
-		$event->expects($this->any())->method('getPaymentMethods')
-			->will($this->returnValue($paymentMethods));
+		$event->expects(self::any())->method('getAvailablePrices')
+			->will(self::returnValue(array('regular' => 12)));
+		$event->expects(self::any())->method('getPaymentMethods')
+			->will(self::returnValue($paymentMethods));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData($registration, array('method_of_payment' => $paymentMethod->getUid() + 1));
 
-		$this->assertSame(
+		self::assertSame(
 			$paymentMethod,
 			$registration->getPaymentMethod()
 		);
@@ -5273,7 +5273,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('account_number' => '123 455 ABC'));
 
-		$this->assertSame(
+		self::assertSame(
 			'123 455 ABC',
 			$registration->getAccountNumber()
 		);
@@ -5294,7 +5294,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('account_number' => '123 <em>455</em> ABC'));
 
-		$this->assertSame(
+		self::assertSame(
 			'123 455 ABC',
 			$registration->getAccountNumber()
 		);
@@ -5317,7 +5317,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('account_number' => '123' . CRLF . '455'  . TAB . ' ABC')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'123 455 ABC',
 			$registration->getAccountNumber()
 		);
@@ -5338,7 +5338,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('account_number' => ''));
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getAccountNumber()
 		);
@@ -5359,7 +5359,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getAccountNumber()
 		);
@@ -5380,7 +5380,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('bank_code' => '123 455 ABC'));
 
-		$this->assertSame(
+		self::assertSame(
 			'123 455 ABC',
 			$registration->getBankCode()
 		);
@@ -5401,7 +5401,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('bank_code' => '123 <em>455</em> ABC'));
 
-		$this->assertSame(
+		self::assertSame(
 			'123 455 ABC',
 			$registration->getBankCode()
 		);
@@ -5424,7 +5424,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('bank_code' => '123' . CRLF . '455'  . TAB . ' ABC')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'123 455 ABC',
 			$registration->getBankCode()
 		);
@@ -5445,7 +5445,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('bank_code' => ''));
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getBankCode()
 		);
@@ -5466,7 +5466,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getBankCode()
 		);
@@ -5487,7 +5487,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('bank_name' => 'Swiss Tax Protection'));
 
-		$this->assertSame(
+		self::assertSame(
 			'Swiss Tax Protection',
 			$registration->getBankName()
 		);
@@ -5508,7 +5508,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('bank_name' => 'Swiss <em>Tax</em> Protection'));
 
-		$this->assertSame(
+		self::assertSame(
 			'Swiss Tax Protection',
 			$registration->getBankName()
 		);
@@ -5531,7 +5531,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('bank_name' => 'Swiss' . CRLF . 'Tax'  . TAB . ' Protection')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'Swiss Tax Protection',
 			$registration->getBankName()
 		);
@@ -5551,7 +5551,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('bank_name' => ''));
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getBankName()
 		);
@@ -5572,7 +5572,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getBankName()
 		);
@@ -5593,7 +5593,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('account_owner' => 'John Doe'));
 
-		$this->assertSame(
+		self::assertSame(
 			'John Doe',
 			$registration->getAccountOwner()
 		);
@@ -5614,7 +5614,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('account_owner' => 'John <em>Doe</em>'));
 
-		$this->assertSame(
+		self::assertSame(
 			'John Doe',
 			$registration->getAccountOwner()
 		);
@@ -5637,7 +5637,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('account_owner' => 'John' . CRLF . TAB . ' Doe')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'John Doe',
 			$registration->getAccountOwner()
 		);
@@ -5658,7 +5658,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('account_owner' => ''));
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getAccountOwner()
 		);
@@ -5679,7 +5679,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getAccountOwner()
 		);
@@ -5702,7 +5702,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('company' => 'Business Ltd.' . LF . 'Tom, Dick & Harry')
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			'Business Ltd.' . LF . 'Tom, Dick & Harry',
 			$registration->getCompany()
 		);
@@ -5723,7 +5723,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('company' => 'Business <em>Ltd.</em>'));
 
-		$this->assertSame(
+		self::assertSame(
 			'Business Ltd.',
 			$registration->getCompany()
 		);
@@ -5744,7 +5744,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('company' => ''));
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getCompany()
 		);
@@ -5765,7 +5765,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getCompany()
 		);
@@ -5788,7 +5788,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('gender' => (string) tx_oelib_Model_FrontEndUser::GENDER_MALE)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			tx_oelib_Model_FrontEndUser::GENDER_MALE,
 			$registration->getGender()
 		);
@@ -5811,7 +5811,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			$registration, array('gender' => (string) tx_oelib_Model_FrontEndUser::GENDER_FEMALE)
 		);
 
-		$this->assertSame(
+		self::assertSame(
 			tx_oelib_Model_FrontEndUser::GENDER_FEMALE,
 			$registration->getGender()
 		);
@@ -5832,7 +5832,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('gender' => '42'));
 
-		$this->assertSame(
+		self::assertSame(
 			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN,
 			$registration->getGender()
 		);
@@ -5853,7 +5853,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('gender' => 'Mr. Fantastic'));
 
-		$this->assertSame(
+		self::assertSame(
 			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN,
 			$registration->getGender()
 		);
@@ -5874,7 +5874,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('gender' => ''));
 
-		$this->assertSame(
+		self::assertSame(
 			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN,
 			$registration->getGender()
 		);
@@ -5895,7 +5895,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertSame(
+		self::assertSame(
 			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN,
 			$registration->getGender()
 		);
@@ -5916,7 +5916,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('name' => 'John Doe'));
 
-		$this->assertSame(
+		self::assertSame(
 			'John Doe',
 			$registration->getName()
 		);
@@ -5937,7 +5937,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('name' => 'John <em>Doe</em>'));
 
-		$this->assertSame(
+		self::assertSame(
 			'John Doe',
 			$registration->getName()
 		);
@@ -5958,7 +5958,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('name' => 'John' . CRLF . TAB . ' Doe'));
 
-		$this->assertSame(
+		self::assertSame(
 			'John Doe',
 			$registration->getName()
 		);
@@ -5979,7 +5979,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('name' => ''));
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getName()
 		);
@@ -6000,7 +6000,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getName()
 		);
@@ -6021,7 +6021,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('address' => 'Back Road 42' . LF . '(second door)'));
 
-		$this->assertSame(
+		self::assertSame(
 			'Back Road 42' . LF . '(second door)',
 			$registration->getAddress()
 		);
@@ -6042,7 +6042,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('address' => 'Back <em>Road</em> 42'));
 
-		$this->assertSame(
+		self::assertSame(
 			'Back Road 42',
 			$registration->getAddress()
 		);
@@ -6063,7 +6063,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('address' => ''));
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getAddress()
 		);
@@ -6084,7 +6084,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getAddress()
 		);
@@ -6105,7 +6105,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('zip' => '12345 ABC'));
 
-		$this->assertSame(
+		self::assertSame(
 			'12345 ABC',
 			$registration->getZip()
 		);
@@ -6126,7 +6126,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('zip' => '12345 <em>ABC</em>'));
 
-		$this->assertSame(
+		self::assertSame(
 			'12345 ABC',
 			$registration->getZip()
 		);
@@ -6147,7 +6147,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('zip' => '12345' . CRLF . TAB . ' ABC'));
 
-		$this->assertSame(
+		self::assertSame(
 			'12345 ABC',
 			$registration->getZip()
 		);
@@ -6168,7 +6168,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('zip' => ''));
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getZip()
 		);
@@ -6189,7 +6189,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getZip()
 		);
@@ -6210,7 +6210,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('city' => 'Elmshorn'));
 
-		$this->assertSame(
+		self::assertSame(
 			'Elmshorn',
 			$registration->getCity()
 		);
@@ -6231,7 +6231,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('city' => 'Santiago de <em>Chile</em>'));
 
-		$this->assertSame(
+		self::assertSame(
 			'Santiago de Chile',
 			$registration->getCity()
 		);
@@ -6252,7 +6252,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('city' => 'Santiago' . CRLF . TAB . ' de Chile'));
 
-		$this->assertSame(
+		self::assertSame(
 			'Santiago de Chile',
 			$registration->getCity()
 		);
@@ -6273,7 +6273,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('city' => ''));
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getCity()
 		);
@@ -6294,7 +6294,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getCity()
 		);
@@ -6315,7 +6315,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('country' => 'Brazil'));
 
-		$this->assertSame(
+		self::assertSame(
 			'Brazil',
 			$registration->getCountry()
 		);
@@ -6336,7 +6336,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('country' => 'South <em>Africa</em>'));
 
-		$this->assertSame(
+		self::assertSame(
 			'South Africa',
 			$registration->getCountry()
 		);
@@ -6357,7 +6357,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('country' => 'South' . CRLF . TAB . ' Africa'));
 
-		$this->assertSame(
+		self::assertSame(
 			'South Africa',
 			$registration->getCountry()
 		);
@@ -6378,7 +6378,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array('country' => ''));
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getCountry()
 		);
@@ -6399,7 +6399,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$fixture->setRegistrationData($registration, array());
 
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$registration->getCountry()
 		);
@@ -6413,7 +6413,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function existsSeminarForZeroUidReturnsFalse() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->existsSeminar(0)
 		);
 	}
@@ -6422,7 +6422,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function existsSeminarForInvalidStringUidReturnsFalse() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->existsSeminar('Hello world!')
 		);
 	}
@@ -6431,7 +6431,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function existsSeminarForInexistentUidReturnsFalse() {
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->existsSeminar($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
 		);
 	}
@@ -6444,7 +6444,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars', $this->seminarUid, array('deleted' => 1)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->existsSeminar($this->seminarUid)
 		);
 	}
@@ -6457,7 +6457,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)
 		);
 
-		$this->assertFalse(
+		self::assertFalse(
 			$this->fixture->existsSeminar($this->seminarUid)
 		);
 	}
@@ -6466,7 +6466,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function existsSeminarForExistingUidReturnsTrue() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->existsSeminar($this->seminarUid)
 		);
 	}
@@ -6475,7 +6475,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function existsSeminarMessageForZeroUidReturnsErrorMessage() {
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('message_missingSeminarNumber'),
 			$this->fixture->existsSeminarMessage(0)
 		);
@@ -6487,7 +6487,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function existsSeminarMessageForZeroUidSendsNotFoundHeader() {
 		$this->fixture->existsSeminarMessage(0);
 
-		$this->assertSame(
+		self::assertSame(
 			'Status: 404 Not Found',
 			$this->headerCollector->getLastAddedHeader()
 		);
@@ -6497,7 +6497,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function existsSeminarMessageForInvalidStringUidReturnsErrorMessage() {
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('message_missingSeminarNumber'),
 			$this->fixture->existsSeminarMessage('Hello world!')
 		);
@@ -6507,7 +6507,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function existsSeminarMessageForInexistentUidReturnsErrorMessage() {
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('message_wrongSeminarNumber'),
 			$this->fixture->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
 		);
@@ -6519,7 +6519,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function existsSeminarMessageForInexistentUidSendsNotFoundHeader() {
 		$this->fixture->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'));
 
-		$this->assertSame(
+		self::assertSame(
 			'Status: 404 Not Found',
 			$this->headerCollector->getLastAddedHeader()
 		);
@@ -6533,7 +6533,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars', $this->seminarUid, array('deleted' => 1)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('message_wrongSeminarNumber'),
 			$this->fixture->existsSeminarMessage($this->seminarUid)
 		);
@@ -6547,7 +6547,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			$this->fixture->translate('message_wrongSeminarNumber'),
 			$this->fixture->existsSeminarMessage($this->seminarUid)
 		);
@@ -6557,7 +6557,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function existsSeminarMessageForExistingUidReturnsEmptyString() {
-		$this->assertSame(
+		self::assertSame(
 			'',
 			$this->fixture->existsSeminarMessage($this->seminarUid)
 		);
@@ -6569,7 +6569,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function existsSeminarMessageForExistingUidNotSendsHttpHeader() {
 		$this->fixture->existsSeminarMessage($this->seminarUid);
 
-		$this->assertSame(
+		self::assertSame(
 			array(),
 			$this->headerCollector->getAllAddedHeaders()
 		);

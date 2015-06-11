@@ -185,7 +185,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	public function formActionContainsCurrentPage() {
 		tx_oelib_PageFinder::getInstance()->setPageUid(42);
 
-		$this->assertContains(
+		self::assertContains(
 			'&amp;id=42',
 			$this->fixture->render()
 		);
@@ -195,7 +195,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 * @test
 	 */
 	public function renderContainsEventTitleInSubjectFieldForNewForm() {
-		$this->assertContains(
+		self::assertContains(
 			'Dummy Event',
 			$this->fixture->render()
 		);
@@ -205,7 +205,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 * @test
 	 */
 	public function renderContainsPrefilledBodyField() {
-		$this->assertContains(
+		self::assertContains(
 			$GLOBALS['LANG']->getLL('testForm_prefillField_messageBody'),
 			$this->fixture->render()
 		);
@@ -215,7 +215,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 * @test
 	 */
 	public function renderContainsBodyFieldWithIntroduction() {
-		$this->assertContains(
+		self::assertContains(
 			sprintf(
 				$GLOBALS['LANG']->getLL('testForm_prefillField_introduction'),
 				htmlspecialchars('"Dummy Event"')
@@ -236,7 +236,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 			)
 		);
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			'Dummy event',
 			$this->fixture->render()
 		);
@@ -246,7 +246,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 * @test
 	 */
 	public function renderContainsOrganizerNameAsSenderForEventWithOneOrganizer() {
-		$this->assertContains(
+		self::assertContains(
 			'<input type="hidden" id="sender" name="sender" value="' .
 				$this->organizerUid . '" />' .
 				htmlspecialchars('"Dummy Organizer" <foo@example.org>'),
@@ -258,7 +258,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 * @test
 	 */
 	public function renderContainsEventDateInSubjectFieldForNewFormAndEventWithBeginDate() {
-		$this->assertContains(
+		self::assertContains(
 			strftime('%d.%m.%Y', $GLOBALS['SIM_EXEC_TIME'] + 42),
 			$this->fixture->render()
 		);
@@ -284,15 +284,15 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 
 		$formOutput = $this->fixture->render();
 
-		$this->assertContains(
+		self::assertContains(
 			'<select id="sender" name="sender">',
 			$formOutput
 		);
-		$this->assertContains(
+		self::assertContains(
 			'<option value="' . $this->organizerUid . '">' . htmlspecialchars('"Dummy Organizer" <foo@example.org>'),
 			$formOutput
 		);
-		$this->assertContains(
+		self::assertContains(
 			'<option value="' . $secondOrganizerUid . '">' . htmlspecialchars('"Second Organizer" <bar@example.org>'),
 			$formOutput
 		);
@@ -311,7 +311,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$formOutput = $this->fixture->render();
 
-		$this->assertContains(
+		self::assertContains(
 			'&lt;test&gt;',
 			$formOutput
 		);
@@ -321,7 +321,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 * @test
 	 */
 	public function renderFormContainsCancelButton() {
-		$this->assertContains(
+		self::assertContains(
 			'<input type="button" value="' .
 				$GLOBALS['LANG']->getLL('eventMailForm_backButton') .
 				'" class="backButton"' .
@@ -342,7 +342,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			$GLOBALS['LANG']->getLL('eventMailForm_error_subjectMustNotBeEmpty'),
 			$this->fixture->render()
 		);
@@ -360,7 +360,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 			)
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			$GLOBALS['LANG']->getLL('eventMailForm_error_messageBodyMustNotBeEmpty'),
 			$this->fixture->render()
 		);
@@ -379,7 +379,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$this->fixture->markAsIncomplete();
 
-		$this->assertContains(
+		self::assertContains(
 			'foo bar',
 			$this->fixture->render()
 		);
@@ -397,7 +397,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 			)
 		);
 		$this->fixture->markAsIncomplete();
-		$this->assertContains(
+		self::assertContains(
 			'&lt;foo&gt; &amp; &quot;bar&quot;',
 			$this->fixture->render()
 		);
@@ -416,7 +416,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$this->fixture->markAsIncomplete();
 
-		$this->assertContains(
+		self::assertContains(
 			'foo bar',
 			$this->fixture->render()
 		);
@@ -426,7 +426,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 * @test
 	 */
 	public function renderContainsHiddenFieldWithVariableEventUid() {
-		$this->assertContains(
+		self::assertContains(
 			'<input type="hidden" name="eventUid" value="' . $this->eventUid . '" />',
 			$this->fixture->render()
 		);
@@ -441,7 +441,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 * @test
 	 */
 	public function localizationReturnsLocalizedStringForExistingKey() {
-		$this->assertEquals(
+		self::assertEquals(
 			'Events',
 			$GLOBALS['LANG']->getLL('title')
 		);
@@ -477,7 +477,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$this->fixture->render();
 
-		$this->assertSame(
+		self::assertSame(
 			'foo',
 			$this->mailer->getFirstSentEmail()->getSubject()
 		);
@@ -507,7 +507,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$this->fixture->render();
 
-		$this->assertNull(
+		self::assertNull(
 			$this->mailer->getFirstSentEmail()
 		);
 	}
@@ -541,7 +541,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$this->fixture->render();
 
-		$this->assertContains(
+		self::assertContains(
 			'test user',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -609,7 +609,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$this->fixture->render();
 
-		$this->assertArrayHasKey(
+		self::assertArrayHasKey(
 			'bar@example.org',
 			$this->mailer->getFirstSentEmail()->getFrom()
 		);
@@ -651,7 +651,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$this->fixture->render();
 
-		$this->assertSame(
+		self::assertSame(
 			2,
 			$this->mailer->getNumberOfSentEmails()
 		);
@@ -691,7 +691,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$this->fixture->render();
 
-		$this->assertContains(
+		self::assertContains(
 			LF . '-- ' . LF . $organizerFooter,
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -723,7 +723,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$this->fixture->render();
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			LF . '-- ' . LF,
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -756,7 +756,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$this->fixture->render();
 
-		$this->assertContains(
+		self::assertContains(
 			$GLOBALS['LANG']->getLL('message_emailToAttendeesSent'),
 			$this->getRenderedFlashMessages()
 		);
@@ -777,7 +777,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$this->fixture->render();
 
-		$this->assertNotContains(
+		self::assertNotContains(
 			$GLOBALS['LANG']->getLL('message_emailToAttendeesSent'),
 			$this->getRenderedFlashMessages()
 		);
@@ -803,7 +803,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 		$this->fixture->render();
 
-		$this->assertSame(
+		self::assertSame(
 			'Location: ' . t3lib_BEfunc::getModuleUrl(
 				tx_seminars_BackEnd_AbstractEventMailForm::MODULE_NAME,
 				array('id' => tx_oelib_PageFinder::getInstance()->getPageUid()), FALSE, TRUE
@@ -829,7 +829,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 			$this->eventUid
 		);
 
-		$this->assertContains(
+		self::assertContains(
 			'FooBar',
 			$fixture->getInitialValue('subject')
 		);
@@ -841,7 +841,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	public function getInitialValueForSubjectAppendsEventDate() {
 		$beginDate = strftime('%d.%m.%Y', $GLOBALS['SIM_EXEC_TIME'] + 42);
 
-		$this->assertContains(
+		self::assertContains(
 			$beginDate,
 			$this->fixture->getInitialValue('subject')
 		);
@@ -870,7 +870,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	public function getErrorMessageForIncompleteFormAndNoStoredMessageReturnsEmptyString() {
 		$this->fixture->markAsIncomplete();
 
-		$this->assertEquals(
+		self::assertEquals(
 			'',
 			$this->fixture->getErrorMessage('subject')
 		);
@@ -882,7 +882,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	public function getErrorMessageForCompleteFormAndStoredMessageReturnsStoredMessage() {
 		$this->fixture->setErrorMessage('subject', 'Foo');
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo',
 			$this->fixture->getErrorMessage('subject')
 		);
@@ -895,7 +895,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		$this->fixture->markAsIncomplete();
 		$this->fixture->setErrorMessage('subject', 'Foo');
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo',
 			$this->fixture->getErrorMessage('subject')
 		);
@@ -910,11 +910,11 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		$this->fixture->setErrorMessage('subject', 'Bar');
 		$errorMessage = $this->fixture->getErrorMessage('subject');
 
-		$this->assertContains(
+		self::assertContains(
 			'Foo',
 			$errorMessage
 		);
-		$this->assertContains(
+		self::assertContains(
 			'Bar',
 			$errorMessage
 		);

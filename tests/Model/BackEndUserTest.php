@@ -50,7 +50,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 	public function getEventFolderFromGroupForNoGroupsReturnsZero() {
 		$this->fixture->setData(array('usergroup' => new tx_oelib_List()));
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getEventFolderFromGroup()
 		);
@@ -66,7 +66,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		$groups->add($group);
 		$this->fixture->setData(array('usergroup' => $groups));
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getEventFolderFromGroup()
 		);
@@ -84,7 +84,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		$groups->add($group);
 		$this->fixture->setData(array('usergroup' => $groups));
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getEventFolderFromGroup()
 		);
@@ -108,7 +108,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		$this->fixture->setData(array('usergroup' => $groups));
 		$eventFolder = $this->fixture->getEventFolderFromGroup();
 
-		$this->assertTrue(
+		self::assertTrue(
 			(($eventFolder == 23) || ($eventFolder == 42))
 		);
 	}
@@ -124,7 +124,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 	public function getRegistrationFolderFromGroupForNoGroupsReturnsZero() {
 		$this->fixture->setData(array('usergroup' => new tx_oelib_List()));
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getRegistrationFolderFromGroup()
 		);
@@ -140,7 +140,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		$groups->add($group);
 		$this->fixture->setData(array('usergroup' => $groups));
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getRegistrationFolderFromGroup()
 		);
@@ -158,7 +158,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		$groups->add($group);
 		$this->fixture->setData(array('usergroup' => $groups));
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getRegistrationFolderFromGroup()
 		);
@@ -182,7 +182,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		$this->fixture->setData(array('usergroup' => $groups));
 		$eventFolder = $this->fixture->getRegistrationFolderFromGroup();
 
-		$this->assertTrue(
+		self::assertTrue(
 			(($eventFolder == 23) || ($eventFolder == 42))
 		);
 	}
@@ -198,7 +198,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 	public function getAuxiliaryRecordsFolderForNoGroupsReturnsZero() {
 		$this->fixture->setData(array('usergroup' => new tx_oelib_List()));
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getAuxiliaryRecordsFolder()
 		);
@@ -214,7 +214,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		$groups->add($group);
 		$this->fixture->setData(array('usergroup' => $groups));
 
-		$this->assertEquals(
+		self::assertEquals(
 			0,
 			$this->fixture->getAuxiliaryRecordsFolder()
 		);
@@ -232,7 +232,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		$groups->add($group);
 		$this->fixture->setData(array('usergroup' => $groups));
 
-		$this->assertEquals(
+		self::assertEquals(
 			42,
 			$this->fixture->getAuxiliaryRecordsFolder()
 		);
@@ -256,7 +256,7 @@ class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
 		$this->fixture->setData(array('usergroup' => $groups));
 		$eventFolder = $this->fixture->getAuxiliaryRecordsFolder();
 
-		$this->assertTrue(
+		self::assertTrue(
 			(($eventFolder == 23) || ($eventFolder == 42))
 		);
 	}

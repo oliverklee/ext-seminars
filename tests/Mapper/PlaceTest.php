@@ -60,7 +60,7 @@ class tx_seminars_Mapper_PlaceTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function findWithUidReturnsPlaceInstance() {
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->find(1) instanceof tx_seminars_Model_Place
 		);
 	}
@@ -75,7 +75,7 @@ class tx_seminars_Mapper_PlaceTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_Place $model */
 		$model = $this->fixture->find($uid);
-		$this->assertEquals(
+		self::assertEquals(
 			'Nice place',
 			$model->getTitle()
 		);
@@ -90,7 +90,7 @@ class tx_seminars_Mapper_PlaceTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getOwnerWithoutOwnerReturnsNull() {
-		$this->assertNull(
+		self::assertNull(
 			$this->fixture->getLoadedTestingModel(array())->getOwner()
 		);
 	}
@@ -102,7 +102,7 @@ class tx_seminars_Mapper_PlaceTest extends tx_phpunit_testcase {
 		$frontEndUser = tx_oelib_MapperRegistry::
 			get('tx_seminars_Mapper_FrontEndUser')->getLoadedTestingModel(array());
 
-		$this->assertTrue(
+		self::assertTrue(
 			$this->fixture->getLoadedTestingModel(
 				array('owner' => $frontEndUser->getUid())
 			)->getOwner() instanceof

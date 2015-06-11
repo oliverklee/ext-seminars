@@ -166,7 +166,7 @@ class Tx_Seminars_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function renderContainsSubmitButton() {
-		$this->assertContains(
+		self::assertContains(
 			'<button class="submitButton sendEmail"><p>' .
 			$GLOBALS['LANG']->getLL('generalMailForm_sendButton') .
 			'</p></button>',
@@ -178,7 +178,7 @@ class Tx_Seminars_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function renderContainsPrefilledBodyFieldWithLocalizedSalutation() {
-		$this->assertContains(
+		self::assertContains(
 			$GLOBALS['LANG']->getLL('mailForm_salutation'),
 			$this->fixture->render()
 		);
@@ -188,7 +188,7 @@ class Tx_Seminars_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function renderContainsTheCancelEventActionForThisForm() {
-		$this->assertContains(
+		self::assertContains(
 			'<input type="hidden" name="action" value="sendEmail" />',
 			$this->fixture->render()
 		);
@@ -228,7 +228,7 @@ class Tx_Seminars_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit_TestCase {
 		);
 		$this->fixture->render();
 
-		$this->assertContains(
+		self::assertContains(
 			'foo User',
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -252,8 +252,8 @@ class Tx_Seminars_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Registration $registration */
 		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($registrationUid);
 		$hook = $this->getMock('tx_seminars_Interface_Hook_BackEndModule');
-		$hook->expects($this->once())->method('modifyGeneralEmail')
-			->with($registration, $this->anything());
+		$hook->expects(self::once())->method('modifyGeneralEmail')
+			->with($registration, self::anything());
 
 		$hookClass = get_class($hook);
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
@@ -297,7 +297,7 @@ class Tx_Seminars_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit_TestCase {
 		);
 
 		$hook = $this->getMock('tx_seminars_Interface_Hook_BackEndModule');
-		$hook->expects($this->exactly(2))->method('modifyGeneralEmail');
+		$hook->expects(self::exactly(2))->method('modifyGeneralEmail');
 
 		$hookClass = get_class($hook);
 		$GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
