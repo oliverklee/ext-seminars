@@ -1,26 +1,16 @@
 <?php
-/***************************************************************
-* Copyright notice
-*
-* (c) 2007-2013 Niels Pardon (mail@niels-pardon.de)
-* All rights reserved
-*
-* This script is part of the TYPO3 project. The TYPO3 project is
-* free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* The GNU General Public License can be found at
-* http://www.gnu.org/copyleft/gpl.html.
-*
-* This script is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * This class offers timespan-related methods for the time slot and seminar classes.
@@ -206,25 +196,21 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	 */
 	public function getTime($dash = '&#8211;') {
 		if (!$this->hasTime()) {
-			$result = $this->translate('message_willBeAnnounced');
-		} else {
-			$beginTime = strftime(
-				$this->getConfValueString('timeFormat'),
-				$this->getBeginDateAsTimestamp()
-			);
-			$endTime = strftime(
-				$this->getConfValueString('timeFormat'),
-				$this->getEndDateAsTimestamp()
-			);
-
-			$result = $beginTime;
-
-			// Only display the end time if the event has an end date/time set
-			// and the end time is not the same as the begin time.
-			if ($this->hasEndTime() && ($beginTime != $endTime)) {
-				$result .= $dash.$endTime;
-			}
+			return $this->translate('message_willBeAnnounced');
 		}
+
+		$timeFormat = $this->getConfValueString('timeFormat');
+		$beginTime = strftime($timeFormat, $this->getBeginDateAsTimestamp());
+		$endTime = strftime($timeFormat, $this->getEndDateAsTimestamp());
+
+		$result = $beginTime;
+
+		// Only display the end time if the event has an end date/time set
+		// and the end time is not the same as the begin time.
+		if (($beginTime !== $endTime) && $this->hasEndTime()) {
+			$result .= $dash . $endTime;
+		}
+		$result .= ' ' . $this->translate('label_hours');
 
 		return $result;
 	}

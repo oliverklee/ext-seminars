@@ -76,6 +76,7 @@
 			<label index="label_waiting_list">waiting list</label>
 			<label index="label_yes">yes</label>
 			<label index="label_no">no</label>
+			<label index="label_hours">h</label>
 			<label index="message_notLoggedIn_formal">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
 			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
@@ -319,6 +320,7 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="label_waiting_list">Warteliste</label>
 			<label index="label_yes">ja</label>
 			<label index="label_no">nein</label>
+			<label index="label_hours">Uhr</label>
 			<label index="message_notLoggedIn_formal">Bitte loggen Sie sich zuerst ein.</label>
 			<label index="message_notLoggedIn_informal">Bitte logge dich zuerst ein.</label>
 			<label index="message_alreadyRegistered_formal">Sie sind für diese Veranstaltung bereits angemeldet.</label>
@@ -1546,6 +1548,7 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="label_waiting_list">waiting list</label>
 			<label index="label_yes">yes</label>
 			<label index="label_no">no</label>
+			<label index="label_hours">h</label>
 			<label index="message_notLoggedIn_formal">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
 			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
