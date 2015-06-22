@@ -57,6 +57,9 @@ organizations and persons:
 - `Hochschule für angewandte Wissenschaften Würzburg-Schweinfurt
   <http://www.fhws.de/>`_
 
+- `Jugendbildungsstätte Windberg, 94336 Windberg (Bay. Wald), Seminarhaus, Fortbildungen, Tagungshaus, Seminare
+  <http://www.jugendbildungsstaette-windberg.de/>`_
+
 - `Kienast Datenverarbeitung <http://www.kienastdv.de/>`_
 
 - `Klare Köpfe <http://www.klarekoepfe.de/>`_
