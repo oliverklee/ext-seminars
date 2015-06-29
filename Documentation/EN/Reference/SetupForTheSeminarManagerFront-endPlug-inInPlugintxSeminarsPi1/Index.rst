@@ -783,7 +783,7 @@ override the corresponding value from TS Setup.**
 .. container:: table-row
 
    Property
-         enableSortingLinksInListView
+         linkToSingleView
 
    Data type
          string
@@ -793,6 +793,21 @@ override the corresponding value from TS Setup.**
 
    Default
          always
+
+
+.. container:: table-row
+
+   Property
+         whether to send an additional notification e-mail from the FE editor to the reviewers when a new record has been created
+
+   Data type
+         boolean
+
+   Description
+        sendAdditionalNotificationEmailInFrontEndEditor
+
+   Default
+         0
 
 
 .. container:: table-row

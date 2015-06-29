@@ -48,6 +48,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	private $publicationHash = '';
 
 	/**
+	 * @var mixed[]
+	 */
+	protected $savedFormData = array();
+
+	/**
 	 * The constructor.
 	 *
 	 * After the constructor has been called, hasAccessMessage() must be called
@@ -258,8 +263,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *               title) and "value" (for the UID)
 	 */
 	public function populateListOrganizers() {
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$frontEndUser = self::getLoggedInUser();
 
 		if ($frontEndUser->hasDefaultOrganizers()) {
 			$organizers = $frontEndUser->getDefaultOrganizers();
@@ -273,6 +277,15 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	}
 
 	/**
+	 * Returns the logged-in user.
+	 *
+	 * @return tx_seminars_Model_FrontEndUser
+	 */
+	static protected function getLoggedInUser() {
+		return tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+	}
+
+	/**
 	 * Provides data items for the list of available places.
 	 *
 	 * @param array[] $items any pre-filled data (may be empty)
@@ -283,23 +296,20 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *               as an array with the keys "caption" (for the title)
 	 *               and "value" (for the UID)
 	 */
-	public function populateListPlaces(
-		array $items, $unused = NULL, tx_ameosformidable $formidable = NULL
-	) {
+	public function populateListPlaces(array $items, $unused = NULL, tx_ameosformidable $formidable = NULL) {
 		$result = $items;
 
 		/** @var tx_seminars_Mapper_Place $placeMapper */
 		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
 		$places = $placeMapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
-		if (is_object($formidable)) {
+		if ($formidable !== NULL) {
 			$editButtonConfiguration =& $formidable->_navConf(
 				$formidable->aORenderlets['editPlaceButton']->sXPath
 			);
 		}
 
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$frontEndUser = self::getLoggedInUser();
 
 		$showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
 			array('relatedRecordType' => 'Places')
@@ -371,8 +381,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		}
 
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$frontEndUser = self::getLoggedInUser();
 
 		$showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
 			array('relatedRecordType' => 'Speakers')
@@ -447,8 +456,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		}
 
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$frontEndUser = self::getLoggedInUser();
 
 		$showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
 			array('relatedRecordType' => 'Checkboxes')
@@ -520,8 +528,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		}
 
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$frontEndUser = self::getLoggedInUser();
 
 		$showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
 			array('relatedRecordType' => 'TargetGroups')
@@ -630,8 +637,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			$hasAccess = $isUserOwner || ($mayManagersEditTheirEvents && $isUserVip);
 		} else {
 			$eventEditorGroupUid = $this->getConfValueInteger('eventEditorFeGroupID', 's_fe_editing');
-			$hasAccess = ($eventEditorGroupUid != 0)
-				&& tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser()->hasGroupMembership($eventEditorGroupUid);
+			$hasAccess = ($eventEditorGroupUid !== 0) && self::getLoggedInUser()->hasGroupMembership($eventEditorGroupUid);
 		}
 
 		return $hasAccess ? '' : 'message_noAccessToEventEditor';
@@ -776,16 +782,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 
 		$formData['crdate'] = $GLOBALS['SIM_EXEC_TIME'];
 		$formData['owner_feuser'] = $this->getFeUserUid();
-		$eventPid = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(
-			'tx_seminars_Mapper_FrontEndUser')->getEventRecordsPid();
+		$eventPid = self::getLoggedInUser()->getEventRecordsPid();
 		$formData['pid'] = ($eventPid > 0)
 			? $eventPid
 			: $this->getConfValueInteger('createEventsPID', 's_fe_editing');
 	}
 
 	/**
-	 * Checks the publish settings of the user and hides the event record if
-	 * necessary.
+	 * Checks the publish settings of the user and hides the event record if necessary.
 	 *
 	 * @param array[] $formData
 	 *        form data, will be modified if the seminar must be hidden corresponding to the publish settings of the user,
@@ -794,24 +798,17 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @return void
 	 */
 	private function checkPublishSettings(array &$formData) {
-		$publishSetting	= tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')
-				->getPublishSetting();
+		$user = self::getLoggedInUser();
+		$publishSetting	= $user->getPublishSetting();
 		$eventUid = $this->getObjectUid();
-		$isNew = ($eventUid == 0);
+		$isNew = ($eventUid === 0);
 
-		$hideEditedObject = !$isNew
-			&& ($publishSetting
-				== tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
-			);
-		$hideNewObject = $isNew
-			&& ($publishSetting
-				> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
-			);
+		$hideEditedObject = !$isNew && ($publishSetting === tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED);
+		$hideNewObject = $isNew && ($publishSetting > tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 
 		if (!$isNew) {
 			/** @var tx_seminars_Mapper_Event $mapper */
-			$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+			$mapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
 			/** @var tx_seminars_Model_Event $event */
 			$event = $mapper->find($eventUid);
 			$eventIsHidden = $event->isHidden();
@@ -848,6 +845,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$this->addAdministrativeData($modifiedFormData);
 		$this->checkPublishSettings($modifiedFormData);
 		$this->addCategoriesOfUser($modifiedFormData);
+
+		$this->savedFormData = $modifiedFormData;
 
 		return $modifiedFormData;
 	}
@@ -905,13 +904,9 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			'allowedExtensionsForUpload', 's_fe_editing'
 		);
 
-		if (!preg_match(
-			'/^.+\.(' . str_replace(',', '|', $allowedExtensions) . ')$/i',
-			$fileName
-		)) {
-			$this->validationError
-				= $this->translate('message_invalid_type') .
-					' ' . str_replace(',', ', ', $allowedExtensions) . '.';
+		if (!preg_match('/^.+\\.(' . str_replace(',', '|', $allowedExtensions) . ')$/i', $fileName)) {
+			$this->validationError = $this->translate('message_invalid_type') .
+				' ' . str_replace(',', ', ', $allowedExtensions) . '.';
 		}
 	}
 
@@ -929,9 +924,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$fileInformation = $fileUtility->getTotalFileInfo(PATH_site . 'uploads/tx_seminars/' . $fileName);
 
 		if ($fileInformation['size'] > ($maximumFileSize * 1024)) {
-			$this->validationError
-				= $this->translate('message_file_too_large') .
-					' ' . $maximumFileSize . 'kB.';
+			$this->validationError = $this->translate('message_file_too_large') . ' ' . $maximumFileSize . 'kB.';
 		}
 	}
 
@@ -1094,18 +1087,11 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	public function isFrontEndEditingOfRelatedRecordsAllowed(array $parameters) {
 		$relatedRecordType = $parameters['relatedRecordType'];
 
-		$frontEndUser = tx_oelib_FrontEndLoginManager::
-			getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$frontEndUser = self::getLoggedInUser();
+		$isFrontEndEditingAllowed = $this->getConfValueBoolean('allowFrontEndEditingOf' . $relatedRecordType, 's_fe_editing');
 
-		$isFrontEndEditingAllowed = $this->getConfValueBoolean(
-			'allowFrontEndEditingOf' . $relatedRecordType, 's_fe_editing'
-		);
-
-		$axiliaryPidFromSetup = $this->getConfValueBoolean(
-			'createAuxiliaryRecordsPID'
-		);
-		$isAnAuxiliaryPidSet = ($frontEndUser->getAuxiliaryRecordsPid() > 0) ||
-			($axiliaryPidFromSetup > 0);
+		$auxiliaryPidFromSetup = $this->getConfValueBoolean('createAuxiliaryRecordsPID');
+		$isAnAuxiliaryPidSet = ($frontEndUser->getAuxiliaryRecordsPid() > 0) || ($auxiliaryPidFromSetup > 0);
 
 		return $isFrontEndEditingAllowed && $isAnAuxiliaryPidSet;
 	}
@@ -1242,7 +1228,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			return TRUE;
 		}
 
-		return (preg_match('/^[\d:\-\/ ]+$/', $formData['value']) == 1);
+		return (preg_match('/^[\\d:\-\/ ]+$/', $formData['value']) == 1);
 	}
 
 	/**
@@ -1271,20 +1257,16 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @return void
 	 */
 	public function sendEMailToReviewer() {
-		if ($this->publicationHash == '') {
+		if ($this->publicationHash === '') {
 			return;
 		}
-		tx_oelib_MapperRegistry::purgeInstance();
-		/** @var tx_seminars_Model_FrontEndUser $frontEndUser */
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-		$reviewer = $frontEndUser->getReviewerFromGroup();
-
-		if (!$reviewer) {
+		$reviewer = $this->getReviewer();
+		if ($reviewer === NULL) {
 			return;
 		}
 
 		/** @var tx_seminars_Mapper_Event $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		$mapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->findByPublicationHash($this->publicationHash);
 
@@ -1292,7 +1274,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			/** @var tx_oelib_Mail $eMail */
 			$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
 			$eMail->addRecipient($reviewer);
-			$eMail->setSender($frontEndUser);
+			$eMail->setSender(self::getLoggedInUser());
 			$eMail->setSubject($this->translate('publish_event_subject'));
 			$eMail->setMessage($this->createEMailContent($event));
 
@@ -1300,6 +1282,16 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
 			$mailerFactory->getMailer()->send($eMail);
 		}
+	}
+
+	/**
+	 * Gets the reviewer for new/edited records.
+	 *
+	 * @return tx_oelib_Model_BackEndUser|NULL
+	 */
+	protected function getReviewer() {
+		Tx_Oelib_MapperRegistry::purgeInstance();
+		return self::getLoggedInUser()->getReviewerFromGroup();
 	}
 
 	/**
@@ -1353,8 +1345,62 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			'type' => tx_seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
 		));
 
-		return t3lib_div::locationHeaderUrl(preg_replace(array('/\[/', '/\]/'), array('%5B', '%5D'), $url));
+		return t3lib_div::locationHeaderUrl(preg_replace(array('/\\[/', '/\\]/'), array('%5B', '%5D'), $url));
 	}
+
+	/**
+	 * Sends an additional notification email to the review if this is enabled in the configuration and if the event has been
+	 * newly created.
+	 *
+	 * @return void
+	 */
+	public function sendAdditionalNotificationEmailToReviewer() {
+		if (!self::getSeminarsConfiguration()->getAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor')) {
+			return;
+		}
+		$reviewer = $this->getReviewer();
+		if ($reviewer === NULL) {
+			return;
+		}
+
+		/** @var tx_oelib_Mail $eMail */
+		$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
+		$eMail->addRecipient($reviewer);
+		$eMail->setSender(self::getLoggedInUser());
+		$eMail->setSubject($this->translate('save_event_subject'));
+		$eMail->setMessage($this->createAdditionalEmailContent());
+
+		/** @var Tx_Oelib_MailerFactory $mailerFactory */
+		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory->getMailer()->send($eMail);
+	}
+
+	/**
+	 * Builds the content for the additional notification e-mail to the reviewer.
+	 *
+	 * @return string the e-mail body for the notification e-mail, will not be empty
+	 */
+	protected function createAdditionalEmailContent() {
+		$this->getTemplateCode(TRUE);
+		$this->setLabels();
+
+		$markerPrefix = 'save_event';
+
+		$title = isset($this->savedFormData['title']) ? $this->savedFormData['title'] : '';
+		$this->setMarker('title', $title, $markerPrefix);
+		$description = isset($this->savedFormData['description']) ? $this->savedFormData['description'] : '';
+		$this->setMarker('description', $description, $markerPrefix);
+
+		$beginDateAsTimeStamp = isset($this->savedFormData['begin_date']) ? (int)$this->savedFormData['begin_date'] : 0;
+		$beginDate = ($beginDateAsTimeStamp !== 0)
+			? strftime($this->getConfValueString('dateFormatYMD'), $beginDateAsTimeStamp) : '';
+		$this->setOrDeleteMarkerIfNotEmpty(
+			'date', $beginDate, $markerPrefix, 'wrapper_save_event'
+		);
+
+		return $this->getSubpart('MAIL_SAVE_EVENT');
+	}
+
 
 	/**
 	 * Creates a new place record.
@@ -1435,10 +1481,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	public static function updatePlace(tx_ameosformidable $formidable) {
 		$formData = $formidable->oMajixEvent->getParams();
-
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-
+		$frontEndUser = self::getLoggedInUser();
 		/** @var tx_seminars_Mapper_Place $placeMapper */
 		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
 
@@ -1540,9 +1583,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			throw new InvalidArgumentException('$key must not be empty.');
 		}
 
-		$requiredFields = tx_oelib_ConfigurationRegistry::get(
-			'plugin.tx_seminars_pi1'
-		)->getAsTrimmedArray('requiredFrontEndEditorPlaceFields');
+		$requiredFields = self::getSeminarsConfiguration()->getAsTrimmedArray('requiredFrontEndEditorPlaceFields');
 		// The field "title" always is required.
 		$requiredFields[] = 'title';
 
@@ -1593,9 +1634,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *
 	 * @return array calls to be executed on the client
 	 */
-	public static function showEditPlaceModalBox(
-		tx_ameosformidable $formidable, $placeUid
-	) {
+	public static function showEditPlaceModalBox(tx_ameosformidable $formidable, $placeUid) {
 		if ($placeUid <= 0) {
 			return $formidable->majixExecJs('alert("$placeUid must be >= 0.");');
 		}
@@ -1612,9 +1651,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		}
 
-		/** @var tx_seminars_Mapper_FrontEndUser $frontEndUser */
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-
+		$frontEndUser = self::getLoggedInUser();
 		if ($place->getOwner() !== $frontEndUser) {
 			return $formidable->majixExecJs(
 				'alert("You are not allowed to edit this place.");'
@@ -1661,14 +1698,10 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @return array the basic data as an associative array, will not be empty
 	 */
 	private static function createBasicAuxiliaryData() {
-		$owner = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$owner = self::getLoggedInUser();
 		$ownerPageUid = $owner->getAuxiliaryRecordsPid();
 
-		$pageUid = ($ownerPageUid > 0)
-			? $ownerPageUid
-			: tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
-				->getAsInteger('createAuxiliaryRecordsPID');
+		$pageUid = ($ownerPageUid > 0) ? $ownerPageUid : self::getSeminarsConfiguration()->getAsInteger('createAuxiliaryRecordsPID');
 
 		return array(
 			'owner' => $owner,
@@ -1750,10 +1783,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	public static function updateSpeaker(tx_ameosformidable $formidable) {
 		$formData = $formidable->oMajixEvent->getParams();
-
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-
+		$frontEndUser = self::getLoggedInUser();
 		/** @var tx_seminars_Mapper_Speaker $speakerMapper */
 		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
 
@@ -1906,9 +1936,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		}
 
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-
+		$frontEndUser = self::getLoggedInUser();
 		if ($speaker->getOwner() !== $frontEndUser) {
 			return $formidable->majixExecJs(
 				'alert("You are not allowed to edit this speaker.");'
@@ -2025,10 +2053,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	public static function updateCheckbox(tx_ameosformidable $formidable) {
 		$formData = $formidable->oMajixEvent->getParams();
-
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-
+		$frontEndUser = self::getLoggedInUser();
 		/** @var tx_seminars_Mapper_Checkbox $checkboxMapper */
 		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
 
@@ -2137,9 +2162,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		}
 
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-
+		$frontEndUser = self::getLoggedInUser();
 		if ($checkbox->getOwner() !== $frontEndUser) {
 			return $formidable->majixExecJs(
 				'alert("You are not allowed to edit this checkbox.");'
@@ -2239,10 +2262,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	public static function updateTargetGroup(tx_ameosformidable $formidable) {
 		$formData = $formidable->oMajixEvent->getParams();
-
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-
+		$frontEndUser = self::getLoggedInUser();
 		/** @var tx_seminars_Mapper_TargetGroup $targetGroupMapper */
 		$targetGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup');
 
@@ -2381,9 +2401,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		}
 
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-
+		$frontEndUser = self::getLoggedInUser();
 		if ($targetGroup->getOwner() !== $frontEndUser) {
 			return $formidable->majixExecJs(
 				'alert("You are not allowed to edit this target group.");'
@@ -2501,13 +2519,10 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	private function getPidsForAuxiliaryRecords() {
 		$recordPids = array();
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$frontEndUser = self::getLoggedInUser();
 		$auxiliaryRecordsPid = $frontEndUser->getAuxiliaryRecordsPid();
 		if ($auxiliaryRecordsPid == 0) {
-			$auxiliaryRecordsPid
-				= tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
-					->getAsInteger('createAuxiliaryRecordsPID');
+			$auxiliaryRecordsPid = self::getSeminarsConfiguration()->getAsInteger('createAuxiliaryRecordsPID');
 		}
 
 		if (tx_oelib_configurationProxy::getInstance('seminars')
@@ -2540,8 +2555,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		if ($eventUid > 0) {
 			return;
 		}
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$frontEndUser = self::getLoggedInUser();
 		if (!$frontEndUser->hasDefaultCategories()) {
 			return;
 		}
@@ -2563,13 +2577,34 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			return;
 		}
 
-		$frontEndUser = tx_oelib_FrontEndLoginManager::getInstance()
-			->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
-
+		$frontEndUser = self::getLoggedInUser();
 		if ($frontEndUser->hasDefaultCategories()) {
 			$categoryKey = array_search('categories', $formFields);
 			unset($formFields[$categoryKey]);
 		}
+	}
+
+	/**
+	 * Gets the Configuration for plugin.tx_seminars_pi1.
+	 *
+	 * @return Tx_Oelib_Configuration
+	 */
+	static protected function getSeminarsConfiguration() {
+		return tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1');
+	}
+
+	/**
+	 * Fakes a form data value that is usually provided by the FORMidable object.
+	 *
+	 * This function is for testing purposes.
+	 *
+	 * @param string $key column name of the 'tx_seminars_seminars' table as key, must not be empty
+	 * @param mixed $value faked value
+	 *
+	 * @return void
+	 */
+	public function setSavedFormValue($key, $value) {
+		$this->savedFormData[$key] = $value;
 	}
 }
 

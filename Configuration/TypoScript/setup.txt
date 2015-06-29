@@ -317,6 +317,9 @@ plugin.tx_seminars_pi1 {
 	# when to link to the single view: always, never, onlyForNonEmptyDescription
 	linkToSingleView = always
 
+	# whether to send an additional notification e-mail from the FE editor to the reviewers when a new record has been created
+	sendAdditionalNotificationEmailInFrontEndEditor = 0
+
 
 	# The following variables don't have any default values provided.
 	# You need to set them yourself for this extension to work correctly.
@@ -506,8 +509,13 @@ plugin.tx_seminars_pi1 {
 						extension = this
 						method = sendEMailToReviewer
 					}
-					20 = actionlet:REDIRECT
-					20.url.userobj {
+					20 = actionlet:USEROBJ
+					20.userobj {
+						extension = this
+						method = sendAdditionalNotificationEmailToReviewer
+					}
+					30 = actionlet:REDIRECT
+					30.url.userobj {
 						extension = this
 						method = getEventSuccessfullySavedUrl
 					}

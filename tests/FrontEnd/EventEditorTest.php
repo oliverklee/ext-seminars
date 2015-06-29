@@ -19,6 +19,7 @@
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ *         @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	/**
@@ -27,7 +28,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	protected $fixture = NULL;
 
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
 	protected $testingFramework = NULL;
 
@@ -36,19 +37,20 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	protected $mailer = NULL;
 
-	protected function setUp() {
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
-		$this->testingFramework->createFakeFrontEnd();
-		tx_oelib_MapperRegistry::getInstance()
-			->activateTestingMode($this->testingFramework);
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
-			'useStoragePid', FALSE
-		);
+	/**
+	 * @var tx_oelib_Configuration
+	 */
+	private $configuration = NULL;
 
-		$configuration = new tx_oelib_Configuration();
-		$configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
-		tx_oelib_ConfigurationRegistry::getInstance()
-			->set('plugin.tx_seminars_pi1', $configuration);
+	protected function setUp() {
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+		$this->testingFramework->createFakeFrontEnd();
+		tx_oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
+		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('useStoragePid', FALSE);
+
+		$this->configuration = new tx_oelib_Configuration();
+		$this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
+		tx_oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
 
 		$this->fixture = new tx_seminars_FrontEnd_EventEditor(
 			array(
@@ -3425,6 +3427,242 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		self::assertArrayHasKey(
 			'mail@foo.com',
 			$this->mailer->getFirstSentEmail()->getFrom()
+		);
+	}
+
+	/*
+	 * Tests concerning the notification e-mails
+	 */
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerWithReviewerAndFeatureEnabledSendsEmail() {
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNotNull(
+			$this->mailer->getFirstSentEmail()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerWithoutReviewerAndFeatureEnabledNotSendsEmail() {
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
+		$this->createAndLoginUserWithPublishSetting(0);
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNull(
+			$this->mailer->getFirstSentEmail()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerWithReviewerAndFeatureDisabledNotSendsEmail() {
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', FALSE);
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNull(
+			$this->mailer->getFirstSentEmail()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerSendsEmailToReviewer() {
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNotNull(
+			$this->mailer->getFirstSentEmail()
+		);
+		self::assertArrayHasKey(
+			'foo@bar.com',
+			$this->mailer->getFirstSentEmail()->getTo()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerUsesFrontEndUserAsFromName() {
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNotNull(
+			$this->mailer->getFirstSentEmail()
+		);
+		self::assertContains(
+			'Mr. Bar',
+			$this->mailer->getFirstSentEmail()->getFrom()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerUsesFrontEndUserAsFromAddress() {
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNotNull(
+			$this->mailer->getFirstSentEmail()
+		);
+		self::assertArrayHasKey(
+			'mail@foo.com',
+			$this->mailer->getFirstSentEmail()->getFrom()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerUsesEventSavedSubject() {
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNotNull(
+			$this->mailer->getFirstSentEmail()
+		);
+		self::assertSame(
+			$this->fixture->translate('save_event_subject'),
+			$this->mailer->getFirstSentEmail()->getSubject()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerHasIntroductoryText() {
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNotNull(
+			$this->mailer->getFirstSentEmail()
+		);
+		self::assertContains(
+			$this->fixture->translate('label_save_event_text'),
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerHasOverviewText() {
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNotNull(
+			$this->mailer->getFirstSentEmail()
+		);
+		self::assertContains(
+			$this->fixture->translate('label_save_event_overview'),
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerHasNoUnreplacedMarkers() {
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNotNull(
+			$this->mailer->getFirstSentEmail()
+		);
+		self::assertNotContains(
+			'###',
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerHasEventTitleInBody() {
+		$title = 'Some nice event';
+		$this->fixture->setSavedFormValue('title', $title);
+
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNotNull(
+			$this->mailer->getFirstSentEmail()
+		);
+		self::assertContains(
+			$title,
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerHasEventDescriptionInBody() {
+		$description = 'Everybody needs to attend!';
+		$this->fixture->setSavedFormValue('description', $description);
+
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNotNull(
+			$this->mailer->getFirstSentEmail()
+		);
+		self::assertContains(
+			$description,
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationEmailToReviewerHasEventDateInBody() {
+		$beginDate = mktime(10, 0, 0, 4, 2, 1975);
+		$this->fixture->setSavedFormValue('begin_date', $beginDate);
+
+		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
+		$this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
+		$this->createAndLoginUserWithReviewer();
+
+		$this->fixture->sendAdditionalNotificationEmailToReviewer();
+
+		self::assertNotNull(
+			$this->mailer->getFirstSentEmail()
+		);
+		self::assertContains(
+			'02.04.1975',
+			$this->mailer->getFirstSentEmail()->getBody()
 		);
 	}
 
