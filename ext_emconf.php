@@ -42,7 +42,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'css_styled_content' => '',
 			'oelib' => '0.8.50-1.0.99',
 			'ameos_formidable' => '1.1.564-1.9.99',
-			'static_info_tables' => '2.1.0-6.1.99',
+			'static_info_tables' => '2.1.0-6.2.99',
 		),
 		'conflicts' => array(
 			'dbal' => '',

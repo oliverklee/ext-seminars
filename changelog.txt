@@ -89,6 +89,7 @@ Localization:
 - [#3852] Update the French localization, thanks to Martin Rebetez
 
 Bug fixes:
+- [#5350] Up the allows static_info_tables version to 6.2.99
 - [#5340] Category selector is not cleared with the clear button
 - [#5333] Update the FORMidable download link
 - [#5332] EventBagBuilder needs more parentheses
