@@ -218,6 +218,7 @@
 			<label index="label_edit">Edit</label>
 			<label index="label_hide">hide</label>
 			<label index="label_unhide">unhide</label>
+			<label index="label_copy">copy</label>
 			<label index="label_back">Back to listing</label>
 			<label index="label_save">Save</label>
 			<label index="label_save_and_back">Save and back</label>
@@ -843,6 +844,7 @@
 			<label index="label_edit">Bearbeiten</label>
 			<label index="label_hide">ausblenden</label>
 			<label index="label_unhide">einblenden</label>
+			<label index="label_copy">kopieren</label>
 			<label index="label_back">Zur Übersicht</label>
 			<label index="label_save">Speichern</label>
 			<label index="label_save_and_back">Speichern und zurück</label>
@@ -3923,6 +3925,7 @@
 			<label index="label_edit">Edit</label>
 			<label index="label_hide">hide</label>
 			<label index="label_unhide">unhide</label>
+			<label index="label_copy">copy</label>
 			<label index="label_back">Back to listing</label>
 			<label index="label_save">Save</label>
 			<label index="label_save_and_back">Save and back</label>

@@ -75,6 +75,11 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 */
 	private $linkBuilder = NULL;
 
+	/**
+	 * @var Tx_Oelib_HeaderCollector
+	 */
+	private $headerCollector = NULL;
+
 	protected function setUp() {
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
 
@@ -85,11 +90,11 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
+		$this->headerCollector = tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy();
 
 		$configuration = new tx_oelib_Configuration();
 		$configuration->setAsString('currency', 'EUR');
-		tx_oelib_ConfigurationRegistry::getInstance()
-			->set('plugin.tx_seminars', $configuration);
+		tx_oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
 		$this->systemFolderPid = $this->testingFramework->createSystemFolder();
 		$this->seminarUid = $this->testingFramework->createRecord(
@@ -301,14 +306,17 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 				'public function mayCurrentUserEditCurrentEvent() {' .
 				'  return parent::mayCurrentUserEditCurrentEvent();' .
 				'}' .
-				'public function processHideUnhide() {' .
-				'  parent::processHideUnhide();' .
+				'public function processEventEditorActions() {' .
+				'  parent::processEventEditorActions();' .
 				'}' .
 				'public function hideEvent(tx_seminars_Model_Event $event) {' .
 				'  parent::hideEvent($event);' .
 				'}' .
 				'public function unhideEvent(tx_seminars_Model_Event $event) {' .
 				'  parent::unhideEvent($event);' .
+				'}' .
+				'public function copyEvent(tx_seminars_Model_Event $event) {' .
+				'  parent::copyEvent($event);' .
 				'}' .
 				'}'
 			);
@@ -5698,9 +5706,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	public function testManagedEventsViewWithMayManagersEditTheirEventsSetToTrueContainsEditLink() {
 		$this->createLogInAndAddFeUserAsVip();
 		$this->fixture->setConfigurationValue('mayManagersEditTheirEvents', 1);
-		$editorPid = $this->fixture->setConfigurationValue(
-			'eventEditorPID', $this->testingFramework->createFrontEndPage()
-		);
+		$editorPid = $this->testingFramework->createFrontEndPage();
+		$this->fixture->setConfigurationValue('eventEditorPID', $editorPid);
 		$this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
 		self::assertContains(
@@ -7572,14 +7579,15 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	}
 
 
-	///////////////////////////////////////////////////////////
-	// Tests concerning the "edit", "hide" and "unhide" links
-	///////////////////////////////////////////////////////////
+	/*
+	 * Tests concerning the "edit", "hide", "unhide" and "copy" links
+	 */
 
 	/**
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessDeniedReturnsEmptyString() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7603,6 +7611,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedCreatesLinkToEditPageWithSeminarUid() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7629,6 +7638,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedAndPublishedVisibleEventCreatesHideLinkToCurrentPageWithSeminarUid() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7648,8 +7658,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		self::assertContains(
 			'<a href="index.php?id=' . $currentPageId .
-				'&amp;tx_seminars_pi1[action]=hide' .
-				'&amp;tx_seminars_pi1[seminar]=91">' .
+				'" data-method="post" data-post-tx_seminars_pi1-action="hide" data-post-tx_seminars_pi1-seminar="91">' .
 				$fixture->translate('label_hide') . '</a>',
 			$fixture->createAllEditorLinks()
 		);
@@ -7659,6 +7668,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesUnhideLinkToCurrentPageWithSeminarUid() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7678,8 +7688,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 
 		self::assertContains(
 			'<a href="index.php?id=' . $currentPageId .
-				'&amp;tx_seminars_pi1[action]=unhide' .
-				'&amp;tx_seminars_pi1[seminar]=91">' .
+				'" data-method="post" data-post-tx_seminars_pi1-action="unhide" data-post-tx_seminars_pi1-seminar="91">' .
 				$fixture->translate('label_unhide') . '</a>',
 			$fixture->createAllEditorLinks()
 		);
@@ -7689,6 +7698,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedAndUnpublishedVisibleEventNotCreatesHideLink() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7714,6 +7724,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedAndUnpublishedHiddenEventNotCreatesUnhideLink() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7735,19 +7746,100 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function createAllEditorLinksForEditAccessGrantedAndUnpublishedHiddenEventNotCreatesCopyLink() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		$fixture = $this->getMock(
+			$this->createAccessibleProxyClass(),
+			array('mayCurrentUserEditCurrentEvent')
+		);
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array();
+		$fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
+			->will(self::returnValue(TRUE));
 
-	///////////////////////////////////////////////////
-	// Tests concerning the hide/unhide functionality
-	///////////////////////////////////////////////////
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event->expects(self::any())->method('getUid')->will(self::returnValue(91));
+		$event->expects(self::any())->method('isPublished')->will(self::returnValue(FALSE));
+		$event->expects(self::any())->method('isHidden')->will(self::returnValue(TRUE));
+		$fixture->setSeminar($event);
+
+		self::assertNotContains(
+			'tx_seminars_pi1[action]=copy',
+			$fixture->createAllEditorLinks()
+		);
+	}
 
 	/**
 	 * @test
 	 */
-	public function eventsListNotCallsProcessHideUnhide() {
+	public function createAllEditorLinksForEditAccessGrantedAndUnpublishedVisibleEventNotCreatesCopyLink() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController', array('processHideUnhide')
+			$this->createAccessibleProxyClass(),
+			array('mayCurrentUserEditCurrentEvent')
 		);
-		$fixture->expects(self::never())->method('processHideUnhide');
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array();
+		$fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
+			->will(self::returnValue(TRUE));
+
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event->expects(self::any())->method('getUid')->will(self::returnValue(91));
+		$event->expects(self::any())->method('isPublished')->will(self::returnValue(FALSE));
+		$event->expects(self::any())->method('isHidden')->will(self::returnValue(FALSE));
+		$fixture->setSeminar($event);
+
+		self::assertNotContains(
+			'tx_seminars_pi1[action]=copy',
+			$fixture->createAllEditorLinks()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesCopyLinkToCurrentPageWithSeminarUid() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		$fixture = $this->getMock(
+			$this->createAccessibleProxyClass(),
+			array('mayCurrentUserEditCurrentEvent')
+		);
+		$fixture->cObj = $this->createContentMock();
+		$fixture->conf = array();
+		$fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
+			->will(self::returnValue(TRUE));
+
+		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event->expects(self::any())->method('getUid')->will(self::returnValue(91));
+		$event->expects(self::any())->method('isPublished')->will(self::returnValue(TRUE));
+		$event->expects(self::any())->method('isHidden')->will(self::returnValue(TRUE));
+		$fixture->setSeminar($event);
+
+		$currentPageId = $GLOBALS['TSFE']->id;
+
+		self::assertContains(
+			'<a href="index.php?id=' . $currentPageId .
+			'" data-method="post" data-post-tx_seminars_pi1-action="copy" data-post-tx_seminars_pi1-seminar="91">' .
+			$fixture->translate('label_copy') . '</a>',
+			$fixture->createAllEditorLinks()
+		);
+	}
+
+
+	/*
+	 * Tests concerning the hide/unhide and copy functionality
+	 */
+
+	/**
+	 * @test
+	 */
+	public function eventsListNotCallsProcessEventEditorActions() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		$fixture = $this->getMock('tx_seminars_FrontEnd_DefaultController', array('processEventEditorActions'));
+		$fixture->expects(self::never())->method('processEventEditorActions');
 
 		$fixture->main(
 			'',
@@ -7758,11 +7850,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function myEnteredEventsListCallsProcessHideUnhide() {
-		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController', array('processHideUnhide')
-		);
-		$fixture->expects(self::once())->method('processHideUnhide');
+	public function myEnteredEventsListCallsProcessEventEditorActions() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		$fixture = $this->getMock('tx_seminars_FrontEnd_DefaultController', array('processEventEditorActions'));
+		$fixture->expects(self::once())->method('processEventEditorActions');
 
 		$fixture->main(
 			'',
@@ -7773,11 +7864,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function myManagedEventsListCallsProcessHideUnhide() {
-		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController', array('processHideUnhide')
-		);
-		$fixture->expects(self::once())->method('processHideUnhide');
+	public function myManagedEventsListCallsProcessEventEditorActions() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		$fixture = $this->getMock('tx_seminars_FrontEnd_DefaultController', array('processEventEditorActions'));
+		$fixture->expects(self::once())->method('processEventEditorActions');
 
 		$fixture->main(
 			'',
@@ -7788,24 +7878,23 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function processHideUnhideIntvalsSeminarPivar() {
+	public function processEventEditorActionsIntvalsSeminarPivar() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
-			array(
-				'ensureIntegerPiVars', 'createEventEditorInstance', 'hideEvent',
-				'unhideEvent'
-			)
+			array('ensureIntegerPiVars', 'createEventEditorInstance', 'hideEvent', 'unhideEvent')
 		);
 		$fixture->expects(self::atLeastOnce())->method('ensureIntegerPiVars')
 			->with(array('seminar'));
 
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
-	public function processHideUnhideWithZeroSeminarPivarNotCreatesEventEditor() {
+	public function processEventEditorActionsWithZeroSeminarPivarNotCreatesEventEditor() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -7813,13 +7902,14 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->expects(self::never())->method('createEventEditorInstance');
 
 		$fixture->piVars['seminar'] = 0;
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
-	public function processHideUnhideWithNegativeSeminarPivarNotCreatesEventEditor() {
+	public function processEventEditorActionsWithNegativeSeminarPivarNotCreatesEventEditor() {
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -7827,292 +7917,342 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture->expects(self::never())->method('createEventEditorInstance');
 
 		$fixture->piVars['seminar'] = -1;
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
-	public function processHideUnhideWithPositiveSeminarPivarCreatesEventEditor() {
-		tx_oelib_MapperRegistry::denyDatabaseAccess();
+	public function processEventEditorActionsWithPositiveSeminarPivarCreatesEventEditor() {
+		Tx_Oelib_MapperRegistry::denyDatabaseAccess();
 
-		$eventEditor = $this->getMock(
-			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
-			array(), '', FALSE
-		);
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
 
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
 		);
-		$fixture->expects(self::once())->method('createEventEditorInstance')->
-			will(self::returnValue($eventEditor));
+		$fixture->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 
 		$fixture->piVars['seminar'] = 1;
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
-	public function processHideUnhideWithUidOfExistingEventChecksPermissions() {
-		tx_oelib_MapperRegistry::denyDatabaseAccess();
+	public function processEventEditorActionsWithUidOfExistingEventChecksPermissions() {
+		Tx_Oelib_MapperRegistry::denyDatabaseAccess();
 
-		$eventEditor = $this->getMock(
-			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
-			array(), '', FALSE
-		);
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
 		$eventEditor->expects(self::once())->method('hasAccessMessage');
 
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
 		);
-		$fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->
-			will(self::returnValue($eventEditor));
+		$fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 
-		$fixture->piVars['seminar'] = tx_oelib_MapperRegistry
+		$fixture->piVars['seminar'] = Tx_Oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Event')->getNewGhost()->getUid();
 
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
-	public function processHideUnhideForHideActionWithAccessGrantedCallsHideEvent() {
-		$eventEditor = $this->getMock(
-			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
-			array(), '', FALSE
-		);
-		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')
-			->will(self::returnValue(''));
+	public function processEventEditorActionsForHideActionWithAccessGrantedCallsHideEvent() {
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
+		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
 
-		$event = tx_oelib_MapperRegistry
-			::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		/** @var tx_seminars_Model_Event $event */
+		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
 		);
-		$fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->
-			will(self::returnValue($eventEditor));
+		$fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 		$fixture->expects(self::once())->method('hideEvent')->with($event);
 
 		$fixture->piVars['seminar'] = $event->getUid();
 		$fixture->piVars['action'] = 'hide';
 
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
-	public function processHideUnhideForHideActionWithUnpublishedEventAndAccessGrantedNotCallsHideEvent() {
-		$eventEditor = $this->getMock(
-			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
-			array(), '', FALSE
-		);
-		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')
-			->will(self::returnValue(''));
+	public function processEventEditorActionsForHideActionWithUnpublishedEventAndAccessGrantedNotCallsHideEvent() {
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
+		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
 
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(array('publication_hash' => 'foo'));
+		/** @var tx_seminars_Model_Event $event */
+		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array('publication_hash' => 'foo'));
 
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
 		);
-		$fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->
-			will(self::returnValue($eventEditor));
+		$fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 		$fixture->expects(self::never())->method('hideEvent');
 
 		$fixture->piVars['seminar'] = $event->getUid();
 		$fixture->piVars['action'] = 'hide';
 
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
-	public function processHideUnhideForHideActionWithAccessDeniedNotCallsHideEvent() {
-		$eventEditor = $this->getMock(
-			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
-			array(), '', FALSE
-		);
-		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')
-			->will(self::returnValue('access denied'));
+	public function processEventEditorActionsForHideActionWithAccessDeniedNotCallsHideEvent() {
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
+		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue('access denied'));
 
-		$event = tx_oelib_MapperRegistry
-			::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		/** @var tx_seminars_Model_Event $event */
+		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
 		);
-		$fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->
-			will(self::returnValue($eventEditor));
+		$fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 		$fixture->expects(self::never())->method('hideEvent');
 
 		$fixture->piVars['seminar'] = $event->getUid();
 		$fixture->piVars['action'] = 'hide';
 
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
-	public function processHideUnhideForUnhideActionWithAccessGrantedCallsUnhideEvent() {
-		$eventEditor = $this->getMock(
-			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
-			array(), '', FALSE
-		);
-		$eventEditor->expects(self::once())->method('hasAccessMessage')
-			->will(self::returnValue(''));
+	public function processEventEditorActionsForUnhideActionWithAccessGrantedCallsUnhideEvent() {
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
+		$eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
 
-		$event = tx_oelib_MapperRegistry
-			::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		/** @var tx_seminars_Model_Event $event */
+		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
 		);
-		$fixture->expects(self::once())->method('createEventEditorInstance')->
-			will(self::returnValue($eventEditor));
+		$fixture->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 		$fixture->expects(self::once())->method('unhideEvent')->with($event);
 
 		$fixture->piVars['seminar'] = $event->getUid();
 		$fixture->piVars['action'] = 'unhide';
 
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
-	public function processHideUnhideForUnhideActionWithUnpublishedEventAccessGrantedNotCallsUnhideEvent() {
-		$eventEditor = $this->getMock(
-			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
-			array(), '', FALSE
-		);
-		$eventEditor->expects(self::once())->method('hasAccessMessage')
-			->will(self::returnValue(''));
+	public function processEventEditorActionsForUnhideActionWithUnpublishedEventAccessGrantedNotCallsUnhideEvent() {
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),array(), '', FALSE);
+		$eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
 
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
-			->getLoadedTestingModel(array('publication_hash' => foo));
+		/** @var tx_seminars_Model_Event $event */
+		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array('publication_hash' => 'foo'));
 
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
 		);
-		$fixture->expects(self::once())->method('createEventEditorInstance')->
-			will(self::returnValue($eventEditor));
+		$fixture->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 		$fixture->expects(self::never())->method('unhideEvent');
 
 		$fixture->piVars['seminar'] = $event->getUid();
 		$fixture->piVars['action'] = 'unhide';
 
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
-	public function processHideUnhideForUnhideActionWithAccessDeniedNotCallsUnhideEvent() {
-		$eventEditor = $this->getMock(
-			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
-			array(), '', FALSE
-		);
-		$eventEditor->expects(self::once())->method('hasAccessMessage')
-			->will(self::returnValue('access denied'));
+	public function processEventEditorActionsForUnhideActionWithAccessDeniedNotCallsUnhideEvent() {
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
+		$eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue('access denied'));
 
-		$event = tx_oelib_MapperRegistry
-			::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		/** @var tx_seminars_Model_Event $event */
+		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
 		);
-		$fixture->expects(self::once())->method('createEventEditorInstance')->
-			will(self::returnValue($eventEditor));
+		$fixture->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 		$fixture->expects(self::never())->method('unhideEvent');
 
 		$fixture->piVars['seminar'] = $event->getUid();
 		$fixture->piVars['action'] = 'unhide';
 
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
-	public function processHideUnhideForEmptyActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent() {
-		$eventEditor = $this->getMock(
-			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
-			array(), '', FALSE
+	public function processEventEditorActionsForCopyActionWithAccessGrantedCallsCopyEvent() {
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
+		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
+
+		/** @var tx_seminars_Model_Event $event */
+		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		$fixture = $this->getMock(
+			$this->createAccessibleProxyClass(),
+			array('createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent')
 		);
-		$eventEditor->expects(self::once())->method('hasAccessMessage')
-			->will(self::returnValue(''));
+		$fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
+		$fixture->expects(self::once())->method('copyEvent')->with($event);
 
-		$event = tx_oelib_MapperRegistry
-			::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$fixture->piVars['seminar'] = $event->getUid();
+		$fixture->piVars['action'] = 'copy';
 
+		$fixture->processEventEditorActions();
+	}
+
+	/**
+	 * @test
+	 */
+	public function processEventEditorActionsForCopyActionWithUnpublishedEventAndAccessGrantedNotCallsCopyEvent() {
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
+		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
+
+		/** @var tx_seminars_Model_Event $event */
+		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array('publication_hash' => 'foo'));
+
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		$fixture = $this->getMock(
+			$this->createAccessibleProxyClass(),
+			array('createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent')
+		);
+		$fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
+		$fixture->expects(self::never())->method('copyEvent');
+
+		$fixture->piVars['seminar'] = $event->getUid();
+		$fixture->piVars['action'] = 'copy';
+
+		$fixture->processEventEditorActions();
+	}
+
+	/**
+	 * @test
+	 */
+	public function processEventEditorActionsForCopyActionWithAccessDeniedNotCallsCopyEvent() {
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
+		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue('access denied'));
+
+		/** @var tx_seminars_Model_Event $event */
+		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		$fixture = $this->getMock(
+			$this->createAccessibleProxyClass(),
+			array('createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent')
+		);
+		$fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
+		$fixture->expects(self::never())->method('copyEvent');
+
+		$fixture->piVars['seminar'] = $event->getUid();
+		$fixture->piVars['action'] = 'copy';
+
+		$fixture->processEventEditorActions();
+	}
+
+	/**
+	 * @test
+	 */
+	public function processEventEditorActionsForEmptyActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent() {
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
+		$eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
+
+		/** @var tx_seminars_Model_Event $event */
+		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
 		);
-		$fixture->expects(self::once())->method('createEventEditorInstance')->
-			will(self::returnValue($eventEditor));
+		$fixture->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 		$fixture->expects(self::never())->method('hideEvent');
 		$fixture->expects(self::never())->method('unhideEvent');
 
 		$fixture->piVars['seminar'] = $event->getUid();
 		$fixture->piVars['action'] = '';
 
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
-	public function processHideUnhideForInvalidActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent() {
-		$eventEditor = $this->getMock(
-			'tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'),
-			array(), '', FALSE
-		);
-		$eventEditor->expects(self::once())->method('hasAccessMessage')
-			->will(self::returnValue(''));
+	public function processEventEditorActionsForInvalidActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent() {
+		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
+		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
+		$eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
 
-		$event = tx_oelib_MapperRegistry
-			::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		/** @var tx_seminars_Model_Event $event */
+		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
+		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
 		);
-		$fixture->expects(self::once())->method('createEventEditorInstance')->
-			will(self::returnValue($eventEditor));
+		$fixture->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 		$fixture->expects(self::never())->method('hideEvent');
 		$fixture->expects(self::never())->method('unhideEvent');
 
 		$fixture->piVars['seminar'] = $event->getUid();
 		$fixture->piVars['action'] = 'foo';
 
-		$fixture->processHideUnhide();
+		$fixture->processEventEditorActions();
 	}
 
 	/**
 	 * @test
 	 */
 	public function hideEventMarksVisibleEventAsHidden() {
+		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
 		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		tx_oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
 
+		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array());
 
 		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->hideEvent($event);
 
@@ -8125,12 +8265,15 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hideEventKeepsHiddenEventAsHidden() {
+		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
 		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		tx_oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
 
+		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array('hidden' => 1));
 
 		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->hideEvent($event);
 
@@ -8143,13 +8286,16 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function hideEventSavesEvent() {
+		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
 		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		tx_oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
 
+		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array());
 		$mapper->expects(self::once())->method('save')->with($event);
 
 		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->hideEvent($event);
 	}
@@ -8157,13 +8303,39 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function unhideEventMarksHiddenEventAsVisible() {
+	public function hideEventRedirectsToRequestUrl() {
+		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
 		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		tx_oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
 
+		/** @var tx_seminars_Model_Event $event */
+		$event = $mapper->getLoadedTestingModel(array());
+
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		$fixture = new $className();
+		$fixture->hideEvent($event);
+
+		$currentUrl = t3lib_div::locationHeaderUrl(t3lib_div::getIndpEnv('REQUEST_URI'));
+		self::assertSame(
+			'Location: ' . $currentUrl,
+			$this->headerCollector->getLastAddedHeader()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function unhideEventMarksHiddenEventAsVisible() {
+		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
+		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+
+		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array('hidden' => 1));
 
 		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->unhideEvent($event);
 
@@ -8176,12 +8348,15 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function unhideEventKeepsVisibleEventAsVisible() {
+		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
 		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		tx_oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
 
+		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array());
 
 		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->unhideEvent($event);
 
@@ -8194,15 +8369,110 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function unhideEventSavesEvent() {
+		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
 		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		tx_oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
 
+		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array());
 		$mapper->expects(self::once())->method('save')->with($event);
 
 		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->unhideEvent($event);
+	}
+
+	/**
+	 * @test
+	 */
+	public function unhideEventRedirectsToRequestUrl() {
+		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
+		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+
+		/** @var tx_seminars_Model_Event $event */
+		$event = $mapper->getLoadedTestingModel(array());
+
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		$fixture = new $className();
+		$fixture->unhideEvent($event);
+
+		$currentUrl = t3lib_div::locationHeaderUrl(t3lib_div::getIndpEnv('REQUEST_URI'));
+		self::assertSame(
+			'Location: ' . $currentUrl,
+			$this->headerCollector->getLastAddedHeader()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function copySavesHiddenCloneOfEvent() {
+		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
+		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+
+		/** @var tx_seminars_Model_Event $event */
+		$event = $mapper->getLoadedTestingModel(array('title' => 'TDD for starters'));
+
+		$hiddenClone = clone $event;
+		$hiddenClone->markAsHidden();
+		$mapper->expects(self::once())->method('save')->with($hiddenClone);
+
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		$fixture = new $className();
+		$fixture->copyEvent($event);
+	}
+
+	/**
+	 * @test
+	 */
+	public function copyRemovesRegistrationsFromEvent() {
+		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
+		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+
+		/** @var tx_seminars_Model_Event $event */
+		$event = $mapper->getLoadedTestingModel(array('title' => 'TDD for starters'));
+		$registrations = new Tx_Oelib_List();
+		$registrations->add(new tx_seminars_Model_Registration());
+		$event->setRegistrations($registrations);
+
+		$hiddenClone = clone $event;
+		$hiddenClone->markAsHidden();
+		$hiddenClone->setRegistrations(new Tx_Oelib_List());
+		$mapper->expects(self::once())->method('save')->with($hiddenClone);
+
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		$fixture = new $className();
+		$fixture->copyEvent($event);
+	}
+
+	/**
+	 * @test
+	 */
+	public function copyEventRedirectsToRequestUrl() {
+		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
+		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+
+		/** @var tx_seminars_Model_Event $event */
+		$event = $mapper->getLoadedTestingModel(array());
+
+		$className = $this->createAccessibleProxyClass();
+		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		$fixture = new $className();
+		$fixture->copyEvent($event);
+
+		$currentUrl = t3lib_div::locationHeaderUrl(t3lib_div::getIndpEnv('REQUEST_URI'));
+		self::assertSame(
+			'Location: ' . $currentUrl,
+			$this->headerCollector->getLastAddedHeader()
+		);
 	}
 
 

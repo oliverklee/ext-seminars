@@ -23,6 +23,9 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 
+var TYPO3 = TYPO3 || {};
+TYPO3.seminars = {};
+
 /**
  * Marks the current attachment as deleted if the confirm becomes submitted.
  *
@@ -349,3 +352,64 @@ function clearSearchWidgetFields() {
 		}
 	}
 }
+
+/**
+ * Converts the links that have a data-method="post" to forms.
+ */
+TYPO3.seminars.convertActionLinks = function() {
+	var linkElements = document.querySelectorAll('a[data-method]');
+	for (var i = 0; i < linkElements.length; i++) {
+		var linkElement = linkElements[i];
+		var linkHref = linkElement.getAttribute('href');
+		var formElement = document.createElement("form");
+		formElement.setAttribute('method', 'post');
+		formElement.setAttribute('action', linkHref);
+		formElement.style.display = 'none';
+
+		for (var j = 0; j < linkElement.attributes.length; j++) {
+			var attribute = linkElement.attributes[j];
+			var name = attribute.name;
+			if (/^data-post-/.test(name)) {
+				var dataParts = name.split('-');
+				var inputElement = document.createElement('input');
+				inputElement.setAttribute('type', 'hidden');
+				inputElement.setAttribute('name', dataParts[2] + '[' + dataParts[3] + ']');
+				inputElement.setAttribute('value', attribute.value);
+				formElement.appendChild(inputElement);
+			}
+		}
+
+		linkElement.appendChild(formElement);
+		linkElement.onclick = TYPO3.seminars.executeLinkAction;
+	}
+};
+
+/**
+ * Executes the action on a link.
+ *
+ * @param {MouseEvent} event
+ */
+TYPO3.seminars.executeLinkAction = function(event) {
+	var link = event.target;
+
+	var form = link.children[0];
+	if (form.tagName === 'FORM') {
+		TYPO3.seminars.disableLink(link);
+
+		form.submit();
+	}
+
+	return false;
+};
+
+/**
+ * Disables a link.
+ *
+ * @param {Element} element
+ */
+TYPO3.seminars.disableLink = function(element) {
+	element.onclick = function () {
+		return false;
+	};
+	element.setAttribute('href', '#');
+};

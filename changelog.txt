@@ -1,6 +1,7 @@
 0.10.0 (currently working on)
 
 Features:
+- [#5353} Clone feature for events in the FE editor
 - [#5287] Add additional notification e-mails for new FE-entered events
 - [#5339] Format times with "hour"
 - [#5319] The from-to search should also find events ending during that period

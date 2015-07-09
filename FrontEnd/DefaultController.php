@@ -326,9 +326,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			case 'my_vip_events':
 				// The fallthrough is intended
 				// because createListView() will differentiate later.
-				// We still use the processHideUnhide call in the next case.
+				// We still use the processEventEditorActions call in the next case.
 			case 'my_entered_events':
-				$this->processHideUnhide();
+				$this->processEventEditorActions();
 				// The fallthrough is intended
 				// because createListView() will differentiate later.
 			case 'topic_list':
@@ -1699,11 +1699,9 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				}
 				break;
 			case 'favorites_list':
-				$result = 'Hello World. When I grow up I will be the list of ' .
-							'favorites';
+				$result = 'Hello World. When I grow up I will be the list of favorites';
 				break;
 			default:
-				break;
 		}
 
 		if ($isOkay) {
@@ -2493,23 +2491,22 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * the list view, depending on the logged-in FE user's permissions and the
 	 * event's state.
 	 *
-	 * @return string HTML with the links, will be empty if the FE user can not
-	 *                edit the current event
+	 * @return string HTML with the links, will be empty if the FE user can not edit the current event
 	 */
 	protected function createAllEditorLinks() {
 		if (!$this->mayCurrentUserEditCurrentEvent()) {
 			return '';
 		}
 
-		$result = $this->createEditLink();
+		/** @var string[] $links */
+		$links = array($this->createEditLink());
 
 		if ($this->seminar->isPublished()) {
-			$result .= ' ';
-			$result .=  $this->seminar->isHidden()
-				? $this->createUnhideLink() : $this->createHideLink();
+			$links[] = $this->createCopyLink();
+			$links[] = $this->seminar->isHidden() ? $this->createUnhideLink() : $this->createHideLink();
 		}
 
-		return $result;
+		return implode(' ', $links);
 	}
 
 	/**
@@ -2535,14 +2532,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @return string HTML for the link, will not be empty
 	 */
 	protected function createHideLink() {
-		return $this->cObj->getTypoLink(
-			$this->translate('label_hide'),
-			$GLOBALS['TSFE']->id,
-			array(
-				'tx_seminars_pi1[action]' => 'hide',
-				'tx_seminars_pi1[seminar]' => $this->seminar->getUid(),
-			)
-		);
+		return $this->createActionLink('hide');
 	}
 
 	/**
@@ -2553,22 +2543,55 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @return string HTML for the link, will not be empty
 	 */
 	protected function createUnhideLink() {
-		return $this->cObj->getTypoLink(
-			$this->translate('label_unhide'),
-			$GLOBALS['TSFE']->id,
-			array(
-				'tx_seminars_pi1[action]' => 'unhide',
-				'tx_seminars_pi1[seminar]' => $this->seminar->getUid(),
-			)
+		return $this->createActionLink('unhide');
+	}
+
+	/**
+	 * Creates a "copy" link (to the current page) for the current event.
+	 *
+	 * This function does not check the edit permissions for this event.
+	 *
+	 * @return string HTML for the link, will not be empty
+	 */
+	protected function createCopyLink() {
+		return $this->createActionLink('copy');
+	}
+
+	/**
+	 * Creates a an action link (to the current page or $pageUid) for the current event.
+	 *
+	 * This function does not check the edit permissions for this event.
+	 *
+	 * @param string $action "hide", "unhide" or "copy"
+	 *
+	 * @return string HTML for the link, will not be empty
+	 */
+	protected function createActionLink($action) {
+		$seminarUid = $this->seminar->getUid();
+
+		$aTag = $this->cObj->getTypoLink($this->translate('label_' . $action), (int)$GLOBALS['TSFE']->id);
+
+		/** @var string[] $dataAttributes */
+		$dataAttributes = array(
+			'method' => 'post',
+			'post-tx_seminars_pi1-action' => $action,
+			'post-tx_seminars_pi1-seminar' => $seminarUid
 		);
+		$flattenedDataAttributes = '';
+		foreach ($dataAttributes as $key => $value) {
+			$flattenedDataAttributes .= ' data-' . $key . '="' . $value . '"';
+		}
+
+		$replacement = preg_replace('/" *>/', '"' . $flattenedDataAttributes . '>', $aTag);
+
+		return $replacement;
 	}
 
 	/**
 	 * Checks whether the currently logged-in FE user is allowed to edit the
 	 * current event in the list view.
 	 *
-	 * @return bool TRUE if the current user is allowed to edit the current
-	 *                 event, FALSE otherwise
+	 * @return bool TRUE if the current user is allowed to edit the current event, FALSE otherwise
 	 */
 	protected function mayCurrentUserEditCurrentEvent() {
 		if ($this->seminar->isOwnerFeUser()) {
@@ -3408,11 +3431,11 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	}
 
 	/**
-	 * Processes hide/unhide events for the FE-editable events.
+	 * Processes hide/unhide and copy events for the FE-editable events.
 	 *
 	 * @return void
 	 */
-	protected function processHideUnhide() {
+	protected function processEventEditorActions() {
 		$this->ensureIntegerPiVars(array('seminar'));
 		if ($this->piVars['seminar'] <= 0) {
 			return;
@@ -3440,8 +3463,10 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			case 'unhide':
 				$this->unhideEvent($event);
 				break;
-			default:
+			case 'copy':
+				$this->copyEvent($event);
 				break;
+			default:
 		}
 	}
 
@@ -3455,8 +3480,10 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	protected function hideEvent(tx_seminars_Model_Event $event) {
 		$event->markAsHidden();
 		/** @var tx_seminars_Mapper_Event $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		$mapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
 		$mapper->save($event);
+
+		$this->redirectToCurrentUrl();
 	}
 
 	/**
@@ -3469,8 +3496,39 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	protected function unhideEvent(tx_seminars_Model_Event $event) {
 		$event->markAsVisible();
 		/** @var tx_seminars_Mapper_Event $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		$mapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
 		$mapper->save($event);
+
+		$this->redirectToCurrentUrl();
+	}
+
+	/**
+	 * Creates a hidden copy of $event and saves it.
+	 *
+	 * @param tx_seminars_Model_Event $event the event copy
+	 *
+	 * @return void
+	 */
+	protected function copyEvent(tx_seminars_Model_Event $event) {
+		$copy = clone $event;
+		$copy->markAsHidden();
+		$copy->setRegistrations(new Tx_Oelib_List());
+
+		/** @var tx_seminars_Mapper_Event $mapper */
+		$mapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		$mapper->save($copy);
+
+		$this->redirectToCurrentUrl();
+	}
+
+	/**
+	 * Redirects to the current URL.
+	 *
+	 * @return void
+	 */
+	protected function redirectToCurrentUrl() {
+		$currentUrl = t3lib_div::locationHeaderUrl(t3lib_div::getIndpEnv('REQUEST_URI'));
+		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $currentUrl);
 	}
 
 	/**
