@@ -354,33 +354,12 @@ function clearSearchWidgetFields() {
 }
 
 /**
- * Converts the links that have a data-method="post" to forms.
+ * Converts the links that have a data-method="post" to JavaScript-powered on-the-fly forms.
  */
 TYPO3.seminars.convertActionLinks = function() {
 	var linkElements = document.querySelectorAll('a[data-method]');
 	for (var i = 0; i < linkElements.length; i++) {
-		var linkElement = linkElements[i];
-		var linkHref = linkElement.getAttribute('href');
-		var formElement = document.createElement("form");
-		formElement.setAttribute('method', 'post');
-		formElement.setAttribute('action', linkHref);
-		formElement.style.display = 'none';
-
-		for (var j = 0; j < linkElement.attributes.length; j++) {
-			var attribute = linkElement.attributes[j];
-			var name = attribute.name;
-			if (/^data-post-/.test(name)) {
-				var dataParts = name.split('-');
-				var inputElement = document.createElement('input');
-				inputElement.setAttribute('type', 'hidden');
-				inputElement.setAttribute('name', dataParts[2] + '[' + dataParts[3] + ']');
-				inputElement.setAttribute('value', attribute.value);
-				formElement.appendChild(inputElement);
-			}
-		}
-
-		linkElement.appendChild(formElement);
-		linkElement.onclick = TYPO3.seminars.executeLinkAction;
+		linkElements[i].onclick = TYPO3.seminars.executeLinkAction;
 	}
 };
 
@@ -390,26 +369,41 @@ TYPO3.seminars.convertActionLinks = function() {
  * @param {MouseEvent} event
  */
 TYPO3.seminars.executeLinkAction = function(event) {
-	var link = event.target;
+	var linkElement = event.target
+	var linkHref = linkElement.getAttribute('href');
 
-	var form = link.children[0];
-	if (form.tagName === 'FORM') {
-		TYPO3.seminars.disableLink(link);
+	TYPO3.seminars.disableAllActionLinks();
 
-		form.submit();
+	var formElement = document.createElement("form");
+	formElement.setAttribute('method', 'post');
+	formElement.setAttribute('action', linkHref);
+
+	for (var j = 0; j < linkElement.attributes.length; j++) {
+		var attribute = linkElement.attributes[j];
+		var name = attribute.name;
+		if (/^data-post-/.test(name)) {
+			var dataParts = name.split('-');
+			var inputElement = document.createElement('input');
+			inputElement.setAttribute('type', 'hidden');
+			inputElement.setAttribute('name', dataParts[2] + '[' + dataParts[3] + ']');
+			inputElement.setAttribute('value', attribute.value);
+			formElement.appendChild(inputElement);
+		}
 	}
+
+	formElement.submit();
 
 	return false;
 };
 
 /**
- * Disables a link.
- *
- * @param {Element} element
+ * Disables all action links (so that they cannot be clicked again once an action is being processed).
  */
-TYPO3.seminars.disableLink = function(element) {
-	element.onclick = function () {
-		return false;
-	};
-	element.setAttribute('href', '#');
+TYPO3.seminars.disableAllActionLinks = function() {
+	var linkElements = document.querySelectorAll('a[data-method]');
+	for (var i = 0; i < linkElements.length; i++) {
+		linkElements[i].onclick = function () {
+			return false;
+		};
+	}
 };
