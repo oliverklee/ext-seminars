@@ -131,11 +131,11 @@
 			<label index="pi_list_browseresults_displays">Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Sorry, no events were found.</label>
 			<label index="pi_list_searchBox_search">Search</label>
-			<label index="label_myevents_formal">You are registered for the following events:</label>
+			<label index="label_myevents">You are registered for the following events:</label>
 			<label index="label_myevents_informal">You are registered for the following events:</label>
-			<label index="label_myvipevents_formal">You are an editor for the following events:</label>
+			<label index="label_myvipevents">You are an editor for the following events:</label>
 			<label index="label_myvipevents_informal">You are an editor for the following events:</label>
-			<label index="label_myenteredevents_formal">You have entered the following events:</label>
+			<label index="label_myenteredevents">You have entered the following events:</label>
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_category">Category</label>
 			<label index="label_title">Title</label>
@@ -231,7 +231,7 @@
 			<label index="label_register_lodging_and_food">Lodging and food</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
-			<label index="label_known_from_formal">How have you heard of this event?</label>
+			<label index="label_known_from">How have you heard of this event?</label>
 			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_register_additional_attendees">Persons to register:</label>
@@ -262,7 +262,7 @@
 			<label index="label_email">E-mail address:</label>
 			<label index="label_lodgings">Lodging:</label>
 			<label index="label_foods">Food:</label>
-			<label index="label_register_entered_data_formal">Your registration data</label>
+			<label index="label_register_entered_data">Your registration data</label>
 			<label index="label_register_entered_data_informal">Your registration data</label>
 			<label index="label_register_all_terms">Registration terms</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
@@ -270,7 +270,7 @@
 			<label index="label_submit_registration">Submit registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>
 			<label index="label_back_registration">Back</label>
-			<label index="label_your_user_data_formal">Your address data:</label>
+			<label index="label_your_user_data">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
 			<label index="label_method_of_payment">Selected method of payment:</label>
 			<label index="label_timeslot_date">Date</label>
@@ -279,7 +279,7 @@
 			<label index="label_timeslot_room">Room</label>
 			<label index="label_timeslot_place">Place</label>
 			<label index="label_timeslot_speakers">Speakers</label>
-			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>
+			<label index="label_unregistration_message">Do you really want to unregister from this event?</label>
 			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>
 			<label index="label_cancel">Cancel</label>
 			<label index="label_unregister">Unregister</label>
@@ -292,29 +292,29 @@
 			<label index="label_date_search">Period from</label>
 			<label index="label_age_search">Age:</label>
 			<label index="label_price_search">Price</label>
-			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
+			<label index="label_searching_hints">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
-			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
+			<label index="label_we_offer_events_in_categories">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
 			<label index="label_delete">Mark to delete</label>
-			<label index="label_really_delete_formal">Do you really want to mark this attachment for deletion?</label>
+			<label index="label_really_delete">Do you really want to mark this attachment for deletion?</label>
 			<label index="label_really_delete_informal">Do you really want to mark this attachment for deletion?</label>
 			<label index="label_owner">Event manager</label>
-			<label index="label_registration_requirements_formal">Please register for the following events first:</label>
+			<label index="label_registration_requirements">Please register for the following events first:</label>
 			<label index="label_registration_requirements_informal">Please register for the following events first:</label>
 			<label index="label_waiting_list">Waiting list</label>
-			<label index="message_file_too_large_formal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
+			<label index="message_file_too_large">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_file_too_large_informal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
-			<label index="message_invalid_type_formal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
+			<label index="message_invalid_type">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
 			<label index="message_invalid_type_informal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
 			<label index="message_missingSeminarNumber">The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
-			<label index="message_notLoggedIn_formal">Sorry, you are not logged in.</label>
+			<label index="message_notLoggedIn">Sorry, you are not logged in.</label>
 			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
-			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
+			<label index="message_pleaseLogIn">Please log in to view this page.</label>
 			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
@@ -362,13 +362,13 @@
 			<label index="message_offlineAttendeesZero">Please enter the number of offline-registered attendees.</label>
 			<label index="message_noTargetGroupsChosen">Please select at least target group.</label>
 			<label index="message_emptyNotes">Please enter internal notes.</label>
-			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
+			<label index="message_noAccessToEventEditor">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
-			<label index="message_moreAttendeesThanSeats_formal">Please register only as many persons as you are booking seats.</label>
+			<label index="message_moreAttendeesThanSeats">Please register only as many persons as you are booking seats.</label>
 			<label index="message_moreAttendeesThanSeats_informal">Please register only as many persons as you are booking seats.</label>
-			<label index="message_lessAttendeesThanSeats_formal">Please provide the names of all persons to register.</label>
+			<label index="message_lessAttendeesThanSeats">Please provide the names of all persons to register.</label>
 			<label index="message_lessAttendeesThanSeats_informal">Please provide the names of all persons to register.</label>
 			<label index="message_invalidEMailAddress">Please enter a valid e-mail address for each person.</label>
 			<label index="message_noKidsNumber">Please enter only numbers for the number of kids.</label>
@@ -380,12 +380,12 @@
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 			<label index="message_acceptTerms2">Please accept the terms for travelling in order to register for this event.</label>
 			<label index="message_countdown">%d %s left until the next event starts!</label>
-			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
+			<label index="message_countdown_noEventFound">There are no upcoming events. Please come back later.</label>
 			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
-			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
+			<label index="message_notRegisteredForThisEvent">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
-			<label index="message_requirementsNotFulfilled_formal">You are not registered for all required events yet.</label>
+			<label index="message_requirementsNotFulfilled">You are not registered for all required events yet.</label>
 			<label index="message_requirementsNotFulfilled_informal">You are not registered for all required events yet.</label>
 			<label index="message_registrationOpensOn">starting %s</label>
 			<label index="message_noTargetGroupAgeNumber">Please enter only positive numbers as minimum and maximum age.</label>
@@ -480,11 +480,11 @@
 			<label index="pi_list_browseresults_displays">Viser resultater ###SPAN_BEGIN###%s til %s&lt;/span&gt; ud af ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Beklager, der blev ikke fundet nogen arrangementer.</label>
 			<label index="pi_list_searchBox_search">Søg</label>
-			<label index="label_myevents_formal">Du er tilmeldt de følgende arrangementer:</label>
+			<label index="label_myevents">Du er tilmeldt de følgende arrangementer:</label>
 			<label index="label_myevents_informal">Du er tilmeldt de følgende arrangementer:</label>
-			<label index="label_myvipevents_formal">Du er VIP ved de følgende arrangementer:</label>
+			<label index="label_myvipevents">Du er VIP ved de følgende arrangementer:</label>
 			<label index="label_myvipevents_informal">Du er VIP ved de følgende arrangementer:</label>
-			<label index="label_myenteredevents_formal">Du har tilmeldt dig følgende arrangementer:</label>
+			<label index="label_myenteredevents">Du har tilmeldt dig følgende arrangementer:</label>
 			<label index="label_myenteredevents_informal">Du har tilmeldt dig følgende arrangementer:</label>
 			<label index="label_category">Kategori</label>
 			<label index="label_title">Titel</label>
@@ -544,7 +544,7 @@
 			<label index="label_register_lodging_and_food">Kost og logi</label>
 			<label index="label_accommodation">Hvad er dine logi-præferencer (hvis det er muligt,- et enkeltværelse, dobbeltværelse eller uden overnatning)?</label>
 			<label index="label_food">Hvilken slags mad foretrækker du (normal, vegetar, eller en speciel diæt):</label>
-			<label index="label_known_from_formal">Hvordan har du hørt om dette arrangement?</label>
+			<label index="label_known_from">Hvordan har du hørt om dette arrangement?</label>
 			<label index="label_known_from_informal">Hvordan har du hørt om dette arrangement?</label>
 			<label index="label_notes">Yderligere bemærkninger:</label>
 			<label index="label_seats">Antal pladser:</label>
@@ -567,7 +567,7 @@
 			<label index="label_email">Email:</label>
 			<label index="label_lodgings">Logi:</label>
 			<label index="label_foods">Kost:</label>
-			<label index="label_register_entered_data_formal">Dine registrerede informationer</label>
+			<label index="label_register_entered_data">Dine registrerede informationer</label>
 			<label index="label_register_entered_data_informal">Dine registrerede informationer</label>
 			<label index="label_register_all_terms">Tilmeldingsbetingelser</label>
 			<label index="label_terms">Jeg accepterer betingelserne.</label>
@@ -575,7 +575,7 @@
 			<label index="label_submit_registration">Send tilmelding</label>
 			<label index="label_proceed_registration">Fortsæt til betaling</label>
 			<label index="label_back_registration">Tilbage</label>
-			<label index="label_your_user_data_formal">Dine adresse informationer:</label>
+			<label index="label_your_user_data">Dine adresse informationer:</label>
 			<label index="label_your_user_data_informal">Dine adresse informationer:</label>
 			<label index="label_method_of_payment">Valgte betalingsmetode:</label>
 			<label index="label_timeslot_date">Dato</label>
@@ -584,7 +584,7 @@
 			<label index="label_timeslot_room">Lokale</label>
 			<label index="label_timeslot_place">Sted</label>
 			<label index="label_timeslot_speakers">Talere</label>
-			<label index="label_unregistration_message_formal">Vil de virkeligt afmeldes dette arranegement?</label>
+			<label index="label_unregistration_message">Vil de virkeligt afmeldes dette arranegement?</label>
 			<label index="label_unregistration_message_informal">Vil du virkeligt afmeldes dette arranegement?</label>
 			<label index="label_cancel">Fortryd</label>
 			<label index="label_unregister">Afmeld</label>
@@ -592,23 +592,23 @@
 			<label index="label_selector_pleaseChoose">Vælg venligst</label>
 			<label index="label_selector_reset">Nulstil</label>
 			<label index="label_selector_searchbox">Søg begreb</label>
-			<label index="label_searching_hints_formal">De kan få en mindre liste af arrangementer ved at anvende et eller flere filtre (søgekriterier). For at se hele listen igen, kan du klikke på Nulstil.</label>
+			<label index="label_searching_hints">De kan få en mindre liste af arrangementer ved at anvende et eller flere filtre (søgekriterier). For at se hele listen igen, kan du klikke på Nulstil.</label>
 			<label index="label_searching_hints_informal">Du kan få en mindre liste af arrangementer ved at anvende et eller flere filtre (søgekriterier). For at se hele listen igen, kan du klikke på Nulstil.</label>
-			<label index="label_we_offer_events_in_categories_formal">I øjeblikket tilbyder vi arrangementer indenfor følgende kategorier:</label>
+			<label index="label_we_offer_events_in_categories">I øjeblikket tilbyder vi arrangementer indenfor følgende kategorier:</label>
 			<label index="label_we_offer_events_in_categories_informal">I øjeblikket tilbyder vi arrangementer indenfor følgende kategorier:</label>
 			<label index="label_no_categories">I øjeblikket tilbyder vi ingen kategoriserede arrangementer.</label>
-			<label index="message_wrongSeminarNumber_formal">Der findes ikke noget arrangement med dette nummer. Hvis du får denne fejl når du bruger et link på denne side informer da venligst webmaster. Tak!</label>
+			<label index="message_wrongSeminarNumber">Der findes ikke noget arrangement med dette nummer. Hvis du får denne fejl når du bruger et link på denne side informer da venligst webmaster. Tak!</label>
 			<label index="message_wrongSeminarNumber_informal">Der findes ikke noget arrangement med dette nummer. Hvis du får denne fejl når du bruger et link på denne side informer da venligst webmaster. Tak!</label>
 			<label index="message_noResults">Beklager, ingen arrangementer fundet</label>
-			<label index="message_notLoggedIn_formal">Beklager, du skal være logget ind.</label>
+			<label index="message_notLoggedIn">Beklager, du skal være logget ind.</label>
 			<label index="message_notLoggedIn_informal">Beklager, du skal være logget ind.</label>
-			<label index="message_pleaseLogIn_formal">Log ind for at se denne side.</label>
+			<label index="message_pleaseLogIn">Log ind for at se denne side.</label>
 			<label index="message_pleaseLogIn_informal">Log ind for at se denne side.</label>
 			<label index="message_noRegistrations">Der er ingen tilmeldinger til dette arrangement endnu.</label>
 			<label index="message_earlybird_price">Denne pris er gyldig og kan bookes frem til %s</label>
 			<label index="message_emptyTitle">Indtast en overskrift for dette arrangement.</label>
 			<label index="message_emptyOrganizer">Vælg mindst én arrangør</label>
-			<label index="message_noAccessToEventEditor_formal">Beklager, du har ikke rettigheder til at redigere arrangementer.</label>
+			<label index="message_noAccessToEventEditor">Beklager, du har ikke rettigheder til at redigere arrangementer.</label>
 			<label index="message_noAccessToEventEditor_informal">Beklager, du har ikke rettigheder til at redigere arrangementer.</label>
 			<label index="message_noSeatsNumber">Indtast kun antal udfra antal stole.</label>
 			<label index="message_invalidNumberOfSeats">Beklager, der er ikke så mange ledige pladser til dette arrangement.</label>
@@ -621,9 +621,9 @@
 			<label index="message_acceptTerms">Du skal acceptére vilkår og betingelser for at kunne tilmelde dig dette arrangement.</label>
 			<label index="message_acceptTerms2">Du skal acceptere rejsevilkårene for at kunne tilmelde dig dette arrangement.</label>
 			<label index="message_countdown">Der er %d %s tilbage før næste arrangement starter!</label>
-			<label index="message_countdown_noEventFound_formal">Der er ingen kommende arrangementer. Kom tilbage senere.</label>
+			<label index="message_countdown_noEventFound">Der er ingen kommende arrangementer. Kom tilbage senere.</label>
 			<label index="message_countdown_noEventFound_informal">Der er ingen kommende arrangementer. Kom tilbage senere.</label>
-			<label index="message_notRegisteredForThisEvent_formal">De er endnu ikke tilmeldt dette arrangement.</label>
+			<label index="message_notRegisteredForThisEvent">De er endnu ikke tilmeldt dette arrangement.</label>
 			<label index="message_notRegisteredForThisEvent_informal">Du er endnu ikke tilmeldt dette arrangement.</label>
 			<label index="message_unregistrationNotPossible">Afmeldingsfristen er overskredet.</label>
 			<label index="countdown_days_plural">dage</label>
@@ -757,11 +757,11 @@
 			<label index="pi_list_browseresults_displays">Zeige Ergebnisse ###SPAN_BEGIN###%s bis %s&lt;/span&gt; von ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Es wurden leider keine Veranstaltungen gefunden, die den Suchkriterien entsprechen.</label>
 			<label index="pi_list_searchBox_search">Suchen</label>
-			<label index="label_myevents_formal">Sie sind für die folgenden Veranstaltungen angemeldet:</label>
+			<label index="label_myevents">Sie sind für die folgenden Veranstaltungen angemeldet:</label>
 			<label index="label_myevents_informal">Du bist für die folgenden Veranstaltungen angemeldet:</label>
-			<label index="label_myvipevents_formal">Sie sind für die folgenden Veranstaltungen als Bearbeiter eingetragen:</label>
+			<label index="label_myvipevents">Sie sind für die folgenden Veranstaltungen als Bearbeiter eingetragen:</label>
 			<label index="label_myvipevents_informal">Du bist für die folgenden Veranstaltungen als Bearbeiter eingetragen:</label>
-			<label index="label_myenteredevents_formal">Sie haben die folgenden Veranstaltungen eingetragen:</label>
+			<label index="label_myenteredevents">Sie haben die folgenden Veranstaltungen eingetragen:</label>
 			<label index="label_myenteredevents_informal">Du hast die folgenden Veranstaltungen eingetragen:</label>
 			<label index="label_category">Kategorie</label>
 			<label index="label_title">Titel</label>
@@ -857,7 +857,7 @@
 			<label index="label_register_lodging_and_food">Unterbringung und Verpflegung</label>
 			<label index="label_accommodation">Wie möchten Sie übernachten (wenn möglich im Einzelzimmer, Doppelzimmer, keine Übernachtung):</label>
 			<label index="label_food">Welche Kost bevorzugen Sie (Normalkost, vegetarisch oder eine spezielle Diät):</label>
-			<label index="label_known_from_formal">Wie haben Sie von dieser Veranstaltung erfahren?</label>
+			<label index="label_known_from">Wie haben Sie von dieser Veranstaltung erfahren?</label>
 			<label index="label_known_from_informal">Wie hast du von dieser Veranstaltung erfahren?</label>
 			<label index="label_notes">Weitere Mitteilungen:</label>
 			<label index="label_register_additional_attendees">Angemeldete Personen:</label>
@@ -888,7 +888,7 @@
 			<label index="label_email">E-Mail-Adresse:</label>
 			<label index="label_lodgings">Art der Unterbringung:</label>
 			<label index="label_foods">Art der Verpflegung:</label>
-			<label index="label_register_entered_data_formal">Ihre Anmeldungsdaten</label>
+			<label index="label_register_entered_data">Ihre Anmeldungsdaten</label>
 			<label index="label_register_entered_data_informal">Deine Anmeldungsdaten</label>
 			<label index="label_register_all_terms">Anmeldebedingungen</label>
 			<label index="label_terms">Ich akzeptiere die allgemeinen Geschäftsbedingungen.</label>
@@ -896,7 +896,7 @@
 			<label index="label_submit_registration">Zahlungspflichtig anmelden</label>
 			<label index="label_proceed_registration">Weiter</label>
 			<label index="label_back_registration">Zurück</label>
-			<label index="label_your_user_data_formal">Ihre Adressdaten</label>
+			<label index="label_your_user_data">Ihre Adressdaten</label>
 			<label index="label_your_user_data_informal">Deine Adressdaten</label>
 			<label index="label_method_of_payment">Gewählte Zahlungsart:</label>
 			<label index="label_timeslot_date">Datum</label>
@@ -905,7 +905,7 @@
 			<label index="label_timeslot_room">Raum</label>
 			<label index="label_timeslot_place">Ort</label>
 			<label index="label_timeslot_speakers">ReferentInnen</label>
-			<label index="label_unregistration_message_formal">Wollen Sie sich wirklich von dieser Veranstaltung abmelden?</label>
+			<label index="label_unregistration_message">Wollen Sie sich wirklich von dieser Veranstaltung abmelden?</label>
 			<label index="label_unregistration_message_informal">Willst du dich wirklich von dieser Veranstaltung abmelden?</label>
 			<label index="label_cancel">Abbrechen</label>
 			<label index="label_unregister">Abmelden</label>
@@ -918,29 +918,29 @@
 			<label index="label_date_search">Zeitraum von</label>
 			<label index="label_age_search">Alter:</label>
 			<label index="label_price_search">Preis</label>
-			<label index="label_searching_hints_formal">Sie können die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Veranstaltungen zu sehen, setzen Sie den Filter bitte zurück.</label>
+			<label index="label_searching_hints">Sie können die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Veranstaltungen zu sehen, setzen Sie den Filter bitte zurück.</label>
 			<label index="label_searching_hints_informal">Du kannst die Liste der angezeigten Veranstaltungen filtern. Um wieder alle Veranstaltungen zu sehen, setze den Filter bitte zurück.</label>
-			<label index="label_we_offer_events_in_categories_formal">Zurzeit können wir Ihnen Veranstaltungen aus den folgenden Kategorien anbieten:</label>
+			<label index="label_we_offer_events_in_categories">Zurzeit können wir Ihnen Veranstaltungen aus den folgenden Kategorien anbieten:</label>
 			<label index="label_we_offer_events_in_categories_informal">Zurzeit können wir dir Veranstaltungen aus den folgenden Kategorien anbieten:</label>
 			<label index="label_no_categories">Momentan bieten wir keine in Kategorien eingeordneten Veranstaltungen an.</label>
 			<label index="label_delete">Zum Löschen markieren</label>
-			<label index="label_really_delete_formal">Möchten Sie diese Datei wirklich zum Löschen markieren?</label>
+			<label index="label_really_delete">Möchten Sie diese Datei wirklich zum Löschen markieren?</label>
 			<label index="label_really_delete_informal">Möchtest du diese Datei wirklich zum Löschen markieren?</label>
 			<label index="label_owner">Verwalter dieser Veranstaltung</label>
-			<label index="label_registration_requirements_formal">Bitte melden Sie sich zuerst für folgende Veranstaltungen an:</label>
+			<label index="label_registration_requirements">Bitte melden Sie sich zuerst für folgende Veranstaltungen an:</label>
 			<label index="label_registration_requirements_informal">Bitte melde dich zuerst für folgende Veranstaltungen an:</label>
 			<label index="label_waiting_list">Warteliste</label>
-			<label index="message_file_too_large_formal">Die anzuhängende Datei ist zu groß. Bitte wählen Sie eine kleinere. Die maximal erlaubte Größe ist</label>
+			<label index="message_file_too_large">Die anzuhängende Datei ist zu groß. Bitte wählen Sie eine kleinere. Die maximal erlaubte Größe ist</label>
 			<label index="message_file_too_large_informal">Die anzuhängende Datei ist zu groß. Bitte wähle eine kleinere. Die maximal erlaubte Größe ist</label>
-			<label index="message_invalid_type_formal">Die hochzuladende Datei hat ein ungültiges Format. Bitte wählen Sie eine andere. Erlaubte Dateiformate sind</label>
+			<label index="message_invalid_type">Die hochzuladende Datei hat ein ungültiges Format. Bitte wählen Sie eine andere. Erlaubte Dateiformate sind</label>
 			<label index="message_invalid_type_informal">Die hochzuladende Datei hat ein ungültiges Format. Bitte wähle eine andere. Erlaubte Dateiformate sind</label>
 			<label index="message_missingSeminarNumber">Die URL enthält keine Veranstaltungs-ID. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
-			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
+			<label index="message_wrongSeminarNumber">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noResults">Momentan konnten leider keine Veranstaltungen gefunden werden.</label>
-			<label index="message_notLoggedIn_formal">Sie sind nicht eingeloggt.</label>
+			<label index="message_notLoggedIn">Sie sind nicht eingeloggt.</label>
 			<label index="message_notLoggedIn_informal">Du bist nicht eingeloggt.</label>
-			<label index="message_pleaseLogIn_formal">Bitte loggen Sie sich ein um diese Seite zu sehen.</label>
+			<label index="message_pleaseLogIn">Bitte loggen Sie sich ein um diese Seite zu sehen.</label>
 			<label index="message_pleaseLogIn_informal">Bitte logge dich ein um diese Seite zu sehen.</label>
 			<label index="message_noRegistrations">Für diese Veranstaltung liegen bisher noch keine Anmeldungen vor.</label>
 			<label index="message_earlybird_price">Preis gültig und buchbar bis %s</label>
@@ -988,13 +988,13 @@
 			<label index="message_offlineAttendeesZero">Bitte geben Sie die Anzahl der offline angemeldeten TeilnehmerInnen an.</label>
 			<label index="message_noTargetGroupsChosen">Bitte wählen Sie mindestens eine Zielgruppe aus.</label>
 			<label index="message_emptyNotes">Bitte geben Sie interne Notizen ein.</label>
-			<label index="message_noAccessToEventEditor_formal">Sorry, Sie haben nicht die Berechtigung, Veranstaltungen zu bearbeiten.</label>
+			<label index="message_noAccessToEventEditor">Sorry, Sie haben nicht die Berechtigung, Veranstaltungen zu bearbeiten.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, du hast nicht die Berechtigung, Veranstaltungen zu bearbeiten.</label>
 			<label index="message_noSeatsNumber">Bitte geben Sie nur Zahlen für die Anzahl der Pätze ein.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, so viele Plätze sind leider nicht mehr frei.</label>
-			<label index="message_moreAttendeesThanSeats_formal">Bitte melden Sie nur so viele Personen an, wie Sie Plätze buchen.</label>
+			<label index="message_moreAttendeesThanSeats">Bitte melden Sie nur so viele Personen an, wie Sie Plätze buchen.</label>
 			<label index="message_moreAttendeesThanSeats_informal">Bitte melde nur so viele Personen an, wie du Plätze buchst.</label>
-			<label index="message_lessAttendeesThanSeats_formal">Bitte geben Sie die Namen aller anzumeldenden Personen an.</label>
+			<label index="message_lessAttendeesThanSeats">Bitte geben Sie die Namen aller anzumeldenden Personen an.</label>
 			<label index="message_lessAttendeesThanSeats_informal">Bitte gib die Namen aller anzumeldenden Personen an.</label>
 			<label index="message_invalidEMailAddress">Bitte geben Sie für alle angemeldeten Personen eine gültige E-Mail-Adresse an.</label>
 			<label index="message_noKidsNumber">Bitte geben Sie nur Zahlen für die Anzahl der Kinder ein.</label>
@@ -1006,12 +1006,12 @@
 			<label index="message_acceptTerms">Bitte akzeptieren Sie die allgemeinen Geschäftsbedingungen, um sich für diese Veranstaltung anzumelden.</label>
 			<label index="message_acceptTerms2">Bitte akzeptieren Sie die Reisebedingungen, um sich für diese Veranstaltung anzumelden.</label>
 			<label index="message_countdown">Noch %d %s bis zur nächsten Veranstaltung!</label>
-			<label index="message_countdown_noEventFound_formal">Es konnten keine geplanten Veranstaltungen gefunden werden. Bitte besuchen Sie uns später noch einmal.</label>
+			<label index="message_countdown_noEventFound">Es konnten keine geplanten Veranstaltungen gefunden werden. Bitte besuchen Sie uns später noch einmal.</label>
 			<label index="message_countdown_noEventFound_informal">Es konnten keine geplanten Veranstaltungen gefunden werden. Bitte besuche uns später noch einmal.</label>
-			<label index="message_notRegisteredForThisEvent_formal">Sie sind nicht für diese Veranstaltung angemeldet.</label>
+			<label index="message_notRegisteredForThisEvent">Sie sind nicht für diese Veranstaltung angemeldet.</label>
 			<label index="message_notRegisteredForThisEvent_informal">Du bist nicht für diese Veranstaltung angemeldet.</label>
 			<label index="message_unregistrationNotPossible">Die Abmelde-Deadline ist leider schon vorüber.</label>
-			<label index="message_requirementsNotFulfilled_formal">Sie sind noch nicht für alle nötigen Veranstaltungen angemeldet.</label>
+			<label index="message_requirementsNotFulfilled">Sie sind noch nicht für alle nötigen Veranstaltungen angemeldet.</label>
 			<label index="message_requirementsNotFulfilled_informal">Du bist noch nicht für alle nötigen Veranstaltungen angemeldet.</label>
 			<label index="message_registrationOpensOn">ab %s</label>
 			<label index="message_noTargetGroupAgeNumber">Bitte geben Sie nur positive Zahlen als Mindest- und Höchstalter an.</label>
@@ -1106,11 +1106,11 @@
 			<label index="pi_list_browseresults_displays">Toon resultaten ###SPAN_BEGIN###%s tot %s&lt;/span&gt; van in totaal ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Sorry, geen evenementen gevonden.</label>
 			<label index="pi_list_searchBox_search">Zoek</label>
-			<label index="label_myevents_formal">U bent voor de volgende evenementen geregistreerd:</label>
+			<label index="label_myevents">U bent voor de volgende evenementen geregistreerd:</label>
 			<label index="label_myevents_informal">Jij bent voor de volgende evenementen geregistreerd:</label>
-			<label index="label_myvipevents_formal">U bent een VIP voor de volgende evenementen:</label>
+			<label index="label_myvipevents">U bent een VIP voor de volgende evenementen:</label>
 			<label index="label_myvipevents_informal">Jij bent een VIP voor de volgende evenementen:</label>
-			<label index="label_myenteredevents_formal">U heeft de volgende evenementen ingevoerd:</label>
+			<label index="label_myenteredevents">U heeft de volgende evenementen ingevoerd:</label>
 			<label index="label_myenteredevents_informal">Jij hebt de volgende evenementen ingevoerd:</label>
 			<label index="label_category">Categorie</label>
 			<label index="label_title">Titel</label>
@@ -1170,7 +1170,7 @@
 			<label index="label_register_lodging_and_food">Acomodatie en voeding</label>
 			<label index="label_accommodation">Wat zijn je accommodatie wensen ?</label>
 			<label index="label_food">Welk voedsel geef je de voorkeur aan?</label>
-			<label index="label_known_from_formal">Hoe ben je geinformeerd over dit evenement.</label>
+			<label index="label_known_from">Hoe ben je geinformeerd over dit evenement.</label>
 			<label index="label_known_from_informal">Hoe ben je geinformeerd over dit evenement.</label>
 			<label index="label_notes">extra notities</label>
 			<label index="label_seats">Stoelen</label>
@@ -1193,7 +1193,7 @@
 			<label index="label_email">E-mail adres:</label>
 			<label index="label_lodgings">Acomodatie:</label>
 			<label index="label_foods">Voeding:</label>
-			<label index="label_register_entered_data_formal">Uw registratie gegevens</label>
+			<label index="label_register_entered_data">Uw registratie gegevens</label>
 			<label index="label_register_entered_data_informal">Jouw registratie gegevens</label>
 			<label index="label_register_all_terms">Registratie voorwaarden</label>
 			<label index="label_terms">Ik accepteer de voorwaarden.</label>
@@ -1201,7 +1201,7 @@
 			<label index="label_submit_registration">Verstuur de registratie</label>
 			<label index="label_proceed_registration">Ga verder met uitcheken</label>
 			<label index="label_back_registration">Terug</label>
-			<label index="label_your_user_data_formal">U adres gegevens:</label>
+			<label index="label_your_user_data">U adres gegevens:</label>
 			<label index="label_your_user_data_informal">Jouw adres gegevens:</label>
 			<label index="label_method_of_payment">Gekozen methode van betalen:</label>
 			<label index="label_timeslot_date">Datum</label>
@@ -1210,7 +1210,7 @@
 			<label index="label_timeslot_room">Kamer</label>
 			<label index="label_timeslot_place">Plaats</label>
 			<label index="label_timeslot_speakers">Sprekers</label>
-			<label index="label_unregistration_message_formal">Weet u zeker dat u de registratie voor dit evenement wilt annuleren?</label>
+			<label index="label_unregistration_message">Weet u zeker dat u de registratie voor dit evenement wilt annuleren?</label>
 			<label index="label_unregistration_message_informal">Weet u zeker dat u de registratie voor dit evenement wilt annuleren?</label>
 			<label index="label_cancel">Afbreken</label>
 			<label index="label_unregister">Annuleer registratie</label>
@@ -1218,23 +1218,23 @@
 			<label index="label_selector_pleaseChoose">Maak een keuze</label>
 			<label index="label_selector_reset">Reset</label>
 			<label index="label_selector_searchbox">Zoek gegeven</label>
-			<label index="label_searching_hints_formal">Je kunt de lijst van evenementen korter maken door een filter te gebruiken. Om de volledig lijst te zien, reset het filter.</label>
+			<label index="label_searching_hints">Je kunt de lijst van evenementen korter maken door een filter te gebruiken. Om de volledig lijst te zien, reset het filter.</label>
 			<label index="label_searching_hints_informal">Je kunt de lijst van evenementen korter maken door een filter te gebruiken. Om de volledig lijst te zien, reset het filter.</label>
-			<label index="label_we_offer_events_in_categories_formal">Op dit moment bieden we evenementen in de volgende categorieën:</label>
+			<label index="label_we_offer_events_in_categories">Op dit moment bieden we evenementen in de volgende categorieën:</label>
 			<label index="label_we_offer_events_in_categories_informal">Op dit moment bieden we evenementen in de volgende categorieën:</label>
 			<label index="label_no_categories">Op dit moment bieden we geen evenementen in de volgende categorieën:</label>
-			<label index="message_wrongSeminarNumber_formal">Er is geen evenement bekend onder dit nummer. Wanneer u deze foutmelding krijgt bij gebruik van een link wilt u dan de webmaster hiervan op de hoogte brengen? Dank u!</label>
+			<label index="message_wrongSeminarNumber">Er is geen evenement bekend onder dit nummer. Wanneer u deze foutmelding krijgt bij gebruik van een link wilt u dan de webmaster hiervan op de hoogte brengen? Dank u!</label>
 			<label index="message_wrongSeminarNumber_informal">Een evenement met dit nummer bestaat niet. Wanneer je een foutmelding hebt gekregen door het gebruik van een link op onze website breng dan aub de webmaster hiervan op de hoogte. Bedankt!</label>
 			<label index="message_noResults">Sorry, op dit moment zijn er geen evenementen gevonden.</label>
-			<label index="message_notLoggedIn_formal">Sorry, U bent niet ingelogd.</label>
+			<label index="message_notLoggedIn">Sorry, U bent niet ingelogd.</label>
 			<label index="message_notLoggedIn_informal">Sorry, je bent niet ingelogd.</label>
-			<label index="message_pleaseLogIn_formal">Log in om deze pagina te kunnen zien.</label>
+			<label index="message_pleaseLogIn">Log in om deze pagina te kunnen zien.</label>
 			<label index="message_pleaseLogIn_informal">Log in om deze pagina te kunnen zien.</label>
 			<label index="message_noRegistrations">Voor dit Seminar zijn nog geen registraties.</label>
 			<label index="message_earlybird_price">Prijs is geldig en er kan geboekt worden tot %s</label>
 			<label index="message_emptyTitle">Vul een titel in voor dit Seminar.</label>
 			<label index="message_emptyOrganizer">Vul tenminste 1 organisator in.</label>
-			<label index="message_noAccessToEventEditor_formal">Sorry, U heeft geen toegang tot de Evenementen Editor.</label>
+			<label index="message_noAccessToEventEditor">Sorry, U heeft geen toegang tot de Evenementen Editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, Je hebt geen toegang tot de Evenementen Editor.</label>
 			<label index="message_noSeatsNumber">Geef alleen cijfers voor het aantal plaatsen.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, er zijn genoeg vrije plaatsen voor dit evenement.</label>
@@ -1247,9 +1247,9 @@
 			<label index="message_acceptTerms">Accepteer de voorwaarden om voor dit Seminar te registreren</label>
 			<label index="message_acceptTerms2">Accepteer de reisvoorwaarden om voor dit Seminar te registreren.</label>
 			<label index="message_countdown">%d %s over tot de volgende begint.</label>
-			<label index="message_countdown_noEventFound_formal">Er zijn geen Evenementen meer. Kom later terug.</label>
+			<label index="message_countdown_noEventFound">Er zijn geen Evenementen meer. Kom later terug.</label>
 			<label index="message_countdown_noEventFound_informal">Er zijn geen Evenementen meer. Kom later terug.</label>
-			<label index="message_notRegisteredForThisEvent_formal">U bent niet geregistreerd voor dit evenement.</label>
+			<label index="message_notRegisteredForThisEvent">U bent niet geregistreerd voor dit evenement.</label>
 			<label index="message_notRegisteredForThisEvent_informal">U bent niet geregistreerd voor dit evenement.</label>
 			<label index="message_unregistrationNotPossible">Annuleringsdatum is verstreken.</label>
 			<label index="countdown_days_plural">dagen</label>
@@ -1328,11 +1328,11 @@
 			<label index="pi_list_browseresults_displays">Результаты с ###SPAN_BEGIN###%s по %s&lt;/span&gt; из ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Мероприятий не найдено.</label>
 			<label index="pi_list_searchBox_search">Поиск</label>
-			<label index="label_myevents_formal">Вы зарегистрированы на следующие мероприятия:</label>
+			<label index="label_myevents">Вы зарегистрированы на следующие мероприятия:</label>
 			<label index="label_myevents_informal">Вы зарегистрированы на следующие мероприятия:</label>
-			<label index="label_myvipevents_formal">Вы зарегистрированы как VIP на следующие мероприятия:</label>
+			<label index="label_myvipevents">Вы зарегистрированы как VIP на следующие мероприятия:</label>
 			<label index="label_myvipevents_informal">Вы зарегистрированы как VIP на следующие мероприятия:</label>
-			<label index="label_myenteredevents_formal">Вы посетили следующие мероприятия:</label>
+			<label index="label_myenteredevents">Вы посетили следующие мероприятия:</label>
 			<label index="label_myenteredevents_informal">Вы посетили следующие мероприятия:</label>
 			<label index="label_category">Категория</label>
 			<label index="label_title">Заголовок</label>
@@ -1392,7 +1392,7 @@
 			<label index="label_register_lodging_and_food">Размещение и питание</label>
 			<label index="label_accommodation">Ваши пожелания к размещению (отдельная комната, двойная комната, без размещения)?</label>
 			<label index="label_food">Предпочтения по питанию (вегетарианская пища, специальная диета):</label>
-			<label index="label_known_from_formal">Как вы узнали об этом событии?</label>
+			<label index="label_known_from">Как вы узнали об этом событии?</label>
 			<label index="label_known_from_informal">Как вы узнали об этом событии?</label>
 			<label index="label_notes">Дополнительные заметки:</label>
 			<label index="label_seats">Количество мест:</label>
@@ -1415,7 +1415,7 @@
 			<label index="label_email">E-mail</label>
 			<label index="label_lodgings">Размещение</label>
 			<label index="label_foods">Питание</label>
-			<label index="label_register_entered_data_formal">Ваши данные</label>
+			<label index="label_register_entered_data">Ваши данные</label>
 			<label index="label_register_entered_data_informal">Твои данные</label>
 			<label index="label_register_all_terms">Условия регистрации</label>
 			<label index="label_terms">Я принимаю условия.</label>
@@ -1423,7 +1423,7 @@
 			<label index="label_submit_registration">Закончить регистрацию</label>
 			<label index="label_proceed_registration">Перейти к оплате</label>
 			<label index="label_back_registration">Назад</label>
-			<label index="label_your_user_data_formal">Ваш адрес:</label>
+			<label index="label_your_user_data">Ваш адрес:</label>
 			<label index="label_your_user_data_informal">Ваш адрес:</label>
 			<label index="label_method_of_payment">Выбранные методы оплаты:</label>
 			<label index="label_timeslot_date">Дата</label>
@@ -1432,30 +1432,30 @@
 			<label index="label_timeslot_room">Комнота</label>
 			<label index="label_timeslot_place">Город</label>
 			<label index="label_timeslot_speakers">Референт</label>
-			<label index="label_unregistration_message_formal">Вы действително хотите отказаться от мероприятия?</label>
+			<label index="label_unregistration_message">Вы действително хотите отказаться от мероприятия?</label>
 			<label index="label_unregistration_message_informal">Ты действително хочешь отказаться от мероприятия?</label>
 			<label index="label_cancel">прервать</label>
 			<label index="label_unregister">отменить</label>
 			<label index="label_selector_submit">применить фильтер</label>
 			<label index="label_selector_pleaseChoose">выберите, пожайлуста ...</label>
 			<label index="label_selector_searchbox">поисковое слово</label>
-			<label index="label_searching_hints_formal">Вы можете профильтровать список с данными мероприятиями.Чтобы можно было снова просмотреть полный список.</label>
+			<label index="label_searching_hints">Вы можете профильтровать список с данными мероприятиями.Чтобы можно было снова просмотреть полный список.</label>
 			<label index="label_searching_hints_informal">Ты можешь профильтровать список с данными мероприятиями.Чтобы можно было снова просмотреть полный список.</label>
-			<label index="label_we_offer_events_in_categories_formal">Мы можем вам предложить следующие котегории мероприятий:</label>
+			<label index="label_we_offer_events_in_categories">Мы можем вам предложить следующие котегории мероприятий:</label>
 			<label index="label_we_offer_events_in_categories_informal">Мы можем тебе предложить следующие котегории мероприятий:</label>
 			<label index="label_no_categories">В даннаый момент мы можем предложить мероприятия в расположеных котегорииях</label>
-			<label index="message_wrongSeminarNumber_formal">Не существует мероприятия с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
+			<label index="message_wrongSeminarNumber">Не существует мероприятия с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
 			<label index="message_wrongSeminarNumber_informal">Не существует мероприятия с таким номером. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
 			<label index="message_noResults">Не найдено ни одного мероприятия.</label>
-			<label index="message_notLoggedIn_formal">Извините, вы не вошли в систему.</label>
+			<label index="message_notLoggedIn">Извините, вы не вошли в систему.</label>
 			<label index="message_notLoggedIn_informal">Извините, вы не вошли в систему.</label>
-			<label index="message_pleaseLogIn_formal">Пожалуйста, войдите в систему чтобы просмотреть эту страницу.</label>
+			<label index="message_pleaseLogIn">Пожалуйста, войдите в систему чтобы просмотреть эту страницу.</label>
 			<label index="message_pleaseLogIn_informal">Пожалуйста, войдите в систему чтобы просмотреть эту страницу.</label>
 			<label index="message_noRegistrations">На это мероприятие регистрация еще не открыта.</label>
 			<label index="message_earlybird_price">цена действительна до %s</label>
 			<label index="message_emptyTitle">Введите название мероприятия.</label>
 			<label index="message_emptyOrganizer">Выберите как минимум одного организатора.</label>
-			<label index="message_noAccessToEventEditor_formal">Извините, у вас нет доступа к редактированию событий.</label>
+			<label index="message_noAccessToEventEditor">Извините, у вас нет доступа к редактированию событий.</label>
 			<label index="message_noAccessToEventEditor_informal">Извините, у вас нет доступа к редактированию событий.</label>
 			<label index="message_noSeatsNumber">Введите количество мест.</label>
 			<label index="message_invalidNumberOfSeats">Извините, на это мероприятие недостаточно свободных мест.</label>
@@ -1468,9 +1468,9 @@
 			<label index="message_acceptTerms">Вам нужно принять правила и условия, чтобы зарегистрироваться на это мероприятие.</label>
 			<label index="message_acceptTerms2">Вам нужно принять транспортные правила и условия, чтобы зарегистрироваться на это событие.</label>
 			<label index="message_countdown">%d %s до начала следующего события!</label>
-			<label index="message_countdown_noEventFound_formal">Не предвидится мероприятий. Пожалуйста, приходите позже.</label>
+			<label index="message_countdown_noEventFound">Не предвидится мероприятий. Пожалуйста, приходите позже.</label>
 			<label index="message_countdown_noEventFound_informal">Не предвидится мероприятий. Пожалуйста, приходите позже.</label>
-			<label index="message_notRegisteredForThisEvent_formal">Вы не зарегистрированы на это мероприятие.</label>
+			<label index="message_notRegisteredForThisEvent">Вы не зарегистрированы на это мероприятие.</label>
 			<label index="message_notRegisteredForThisEvent_informal">Ты не зарегистрирован на это мероприятие.</label>
 			<label index="message_unregistrationNotPossible">Срок регистации к сожалению истёк</label>
 			<label index="countdown_days_plural">дн.</label>
@@ -1549,11 +1549,11 @@
 			<label index="pi_list_browseresults_displays">Visualizza risultati ###SPAN_BEGIN###%s a %s&lt;/span&gt; di ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Spiacente, nessun evento trovato</label>
 			<label index="pi_list_searchBox_search">Ricerca</label>
-			<label index="label_myevents_formal">Lei è registrato ai seguenti eventi:</label>
+			<label index="label_myevents">Lei è registrato ai seguenti eventi:</label>
 			<label index="label_myevents_informal">Sei reistrato ai seguenti eventi:</label>
-			<label index="label_myvipevents_formal">Lei è un VIP  ai seguenti eventi:</label>
+			<label index="label_myvipevents">Lei è un VIP  ai seguenti eventi:</label>
 			<label index="label_myvipevents_informal">Sei un VIP ai seguenti eventi:</label>
-			<label index="label_myenteredevents_formal">Lei ha inserito i seguenti eventi:</label>
+			<label index="label_myenteredevents">Lei ha inserito i seguenti eventi:</label>
 			<label index="label_myenteredevents_informal">Hai inserito i seguenti eventi:</label>
 			<label index="label_category">Categoria</label>
 			<label index="label_title">Titolo</label>
@@ -1613,7 +1613,7 @@
 			<label index="label_register_lodging_and_food">Alloggio e vitto</label>
 			<label index="label_accommodation">Preferenze per l'alloggio (singola se disponibile, doppia, nessuno alloggio)?</label>
 			<label index="label_food">Preferenze per il vitto (normale, vegetariano, dieta speciale):</label>
-			<label index="label_known_from_formal">Come ha conosciuto questo evento?</label>
+			<label index="label_known_from">Come ha conosciuto questo evento?</label>
 			<label index="label_known_from_informal">Come hai conosciuto questo evento?</label>
 			<label index="label_notes">Note aggiuntive:</label>
 			<label index="label_seats">Posti</label>
@@ -1636,7 +1636,7 @@
 			<label index="label_email">E-mail:</label>
 			<label index="label_lodgings">Alloggio:</label>
 			<label index="label_foods">Vitto:</label>
-			<label index="label_register_entered_data_formal">Dati di registrazione</label>
+			<label index="label_register_entered_data">Dati di registrazione</label>
 			<label index="label_register_entered_data_informal">Dati di registrazione</label>
 			<label index="label_register_all_terms">Termini di registrazione</label>
 			<label index="label_terms">Accetto i termini e le condizioni.</label>
@@ -1644,7 +1644,7 @@
 			<label index="label_submit_registration">Conferma registrazione</label>
 			<label index="label_proceed_registration">Procedi al checkout</label>
 			<label index="label_back_registration">Indietro</label>
-			<label index="label_your_user_data_formal">Il suo indirizzo:</label>
+			<label index="label_your_user_data">Il suo indirizzo:</label>
 			<label index="label_your_user_data_informal">Il tuo indirizzo:</label>
 			<label index="label_method_of_payment">Selezionare il metodo di pagamento:</label>
 			<label index="label_timeslot_date">Data</label>
@@ -1653,7 +1653,7 @@
 			<label index="label_timeslot_room">Stanza</label>
 			<label index="label_timeslot_place">Luogo</label>
 			<label index="label_timeslot_speakers">Oratori</label>
-			<label index="label_unregistration_message_formal">Vuole veramente cancellare la sua registrazione all'evento?</label>
+			<label index="label_unregistration_message">Vuole veramente cancellare la sua registrazione all'evento?</label>
 			<label index="label_unregistration_message_informal">Vuoi veramente cancellare la tua registrazione all'evento?</label>
 			<label index="label_cancel">Cancella</label>
 			<label index="label_unregister">Cancellato</label>
@@ -1661,23 +1661,23 @@
 			<label index="label_selector_pleaseChoose">sei pregato di selezionare...</label>
 			<label index="label_selector_reset">Reset</label>
 			<label index="label_selector_searchbox">Parola di ricerca</label>
-			<label index="label_searching_hints_formal">E' possibile restringere i risultati applicando dei filtri di ricerca. Per vedere tutta la lista è sufficiente resettare il filtro.</label>
+			<label index="label_searching_hints">E' possibile restringere i risultati applicando dei filtri di ricerca. Per vedere tutta la lista è sufficiente resettare il filtro.</label>
 			<label index="label_searching_hints_informal">E' possibile restringere i risultati applicando dei filtri di ricerca. Per vedere tutta la lista è sufficiente resettare il filtro.</label>
-			<label index="label_we_offer_events_in_categories_formal">Attualmente, forniamo eventi nelle seguenti categorie:</label>
+			<label index="label_we_offer_events_in_categories">Attualmente, forniamo eventi nelle seguenti categorie:</label>
 			<label index="label_we_offer_events_in_categories_informal">Attualmente, forniamo eventi nelle seguenti categorie:</label>
 			<label index="label_no_categories">Attualmente, non stiamo offrendo nessun evento categorizzato.</label>
-			<label index="message_wrongSeminarNumber_formal">Non ci sono eventi con questo codice.</label>
+			<label index="message_wrongSeminarNumber">Non ci sono eventi con questo codice.</label>
 			<label index="message_wrongSeminarNumber_informal">Non ci sono eventi con questo codice.</label>
 			<label index="message_noResults">Spiacente, al momento non è possibile trovare nessun evento.</label>
-			<label index="message_notLoggedIn_formal">Spiacente, lei non si è autenticato.</label>
+			<label index="message_notLoggedIn">Spiacente, lei non si è autenticato.</label>
 			<label index="message_notLoggedIn_informal">Spiacente, non ti sei autenticato.</label>
-			<label index="message_pleaseLogIn_formal">E' necessario autenticarsi per vedere questa pagina.</label>
+			<label index="message_pleaseLogIn">E' necessario autenticarsi per vedere questa pagina.</label>
 			<label index="message_pleaseLogIn_informal">E' necessario autenticarsi per vedere questa pagina.</label>
 			<label index="message_noRegistrations">Per questo evento non ci sono ancora registrazioni.</label>
 			<label index="message_earlybird_price">Prezzo valido fino al %s</label>
 			<label index="message_emptyTitle">Inserire un titolo per l'evento.</label>
 			<label index="message_emptyOrganizer">Selezionare almeno un organizzatore.</label>
-			<label index="message_noAccessToEventEditor_formal">Spiacente, non ha accesso alla modifica dell'evento.</label>
+			<label index="message_noAccessToEventEditor">Spiacente, non ha accesso alla modifica dell'evento.</label>
 			<label index="message_noAccessToEventEditor_informal">Spiacente, non hai accesso alla modifica dell'evento.</label>
 			<label index="message_noSeatsNumber">Inserire solo numeri per il numero di posti.</label>
 			<label index="message_invalidNumberOfSeats">Spiacente, non ci sono sufficienti posti disponibili per questo evento.</label>
@@ -1690,9 +1690,9 @@
 			<label index="message_acceptTerms">E' necessario accettare i termini e le condizioni per registrarsi all'evento.</label>
 			<label index="message_acceptTerms2">E' necessario accettare i termini e le condizioni per registrarsi all'evento.</label>
 			<label index="message_countdown">%d %s prima che il prossimo evento inizi.</label>
-			<label index="message_countdown_noEventFound_formal">Non ci sono eventi futuri. La preghiamo di ritornare più avanti.</label>
+			<label index="message_countdown_noEventFound">Non ci sono eventi futuri. La preghiamo di ritornare più avanti.</label>
 			<label index="message_countdown_noEventFound_informal">Non ci sono eventi futuri. Ti preghiamo di ritornare più avanti.</label>
-			<label index="message_notRegisteredForThisEvent_formal">Non è registrato per l'evento.</label>
+			<label index="message_notRegisteredForThisEvent">Non è registrato per l'evento.</label>
 			<label index="message_notRegisteredForThisEvent_informal">Non sei registrato per l'evento.</label>
 			<label index="message_unregistrationNotPossible">La data di scadenza per cancellarsi dall'evento è passata.</label>
 			<label index="countdown_days_plural">giorni</label>
@@ -1817,11 +1817,11 @@
 			<label index="pi_list_browseresults_displays">Résultats ###SPAN_BEGIN###%s de %s&lt;/span&gt; sur un total de ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Désolé, aucun événement n'a été trouvé.</label>
 			<label index="pi_list_searchBox_search">Recherche</label>
-			<label index="label_myevents_formal">Vous êtes inscrit aux événements suivants :</label>
+			<label index="label_myevents">Vous êtes inscrit aux événements suivants :</label>
 			<label index="label_myevents_informal">Tu es inscrit aux événements suivants :</label>
-			<label index="label_myvipevents_formal">Vous êtes VIP aux événements suivants :</label>
+			<label index="label_myvipevents">Vous êtes VIP aux événements suivants :</label>
 			<label index="label_myvipevents_informal">Tu es VIP aux événements suivants :</label>
-			<label index="label_myenteredevents_formal">Vous avez saisi les événements suivants :</label>
+			<label index="label_myenteredevents">Vous avez saisi les événements suivants :</label>
 			<label index="label_myenteredevents_informal">Tu as saisi les événements suivants :</label>
 			<label index="label_category">Catégorie</label>
 			<label index="label_title">Titre</label>
@@ -1915,7 +1915,7 @@
 			<label index="label_register_lodging_and_food">Hébergement et nourriture</label>
 			<label index="label_accommodation">Quelles sont vos préférences en matière d'hébergement (si possible chambre simple, chambre double ou pas d'hébergement) ?</label>
 			<label index="label_food">Quel type de nourriture préférez-vous (normale, végétarienne ou régime spécial) ?</label>
-			<label index="label_known_from_formal">Comment avez-vous entendu parler de cet événement ?</label>
+			<label index="label_known_from">Comment avez-vous entendu parler de cet événement ?</label>
 			<label index="label_known_from_informal">Comment as-tu entendu parler de cet événement ?</label>
 			<label index="label_notes">Informations supplémentaires :</label>
 			<label index="label_register_additional_attendees">Personnes à inscrire :</label>
@@ -1945,7 +1945,7 @@
 			<label index="label_email">Adresse mail :</label>
 			<label index="label_lodgings">Hébergement :</label>
 			<label index="label_foods">Nourriture :</label>
-			<label index="label_register_entered_data_formal">Vos données d'inscription</label>
+			<label index="label_register_entered_data">Vos données d'inscription</label>
 			<label index="label_register_entered_data_informal">Tes données d'inscription</label>
 			<label index="label_register_all_terms">Conditions d'inscription</label>
 			<label index="label_terms">J'accepte les conditions.</label>
@@ -1953,7 +1953,7 @@
 			<label index="label_submit_registration">Confirmer l'inscription</label>
 			<label index="label_proceed_registration">Commander</label>
 			<label index="label_back_registration">Retour</label>
-			<label index="label_your_user_data_formal">Votre adresse :</label>
+			<label index="label_your_user_data">Votre adresse :</label>
 			<label index="label_your_user_data_informal">Ton adresse :</label>
 			<label index="label_method_of_payment">Méthode de paiment choisie :</label>
 			<label index="label_timeslot_date">Date</label>
@@ -1962,7 +1962,7 @@
 			<label index="label_timeslot_room">Salle</label>
 			<label index="label_timeslot_place">Lieu</label>
 			<label index="label_timeslot_speakers">Conférenciers</label>
-			<label index="label_unregistration_message_formal">Voulez-vous vraiment annuler votre inscription pour cet événement ?</label>
+			<label index="label_unregistration_message">Voulez-vous vraiment annuler votre inscription pour cet événement ?</label>
 			<label index="label_unregistration_message_informal">Veux-tu vraiment annuler ton inscription pour cet événement ?</label>
 			<label index="label_cancel">Annuler</label>
 			<label index="label_unregister">Annuler l'inscription</label>
@@ -1975,27 +1975,27 @@
 			<label index="label_date_search">Période du</label>
 			<label index="label_age_search">Âge :</label>
 			<label index="label_price_search">Prix</label>
-			<label index="label_searching_hints_formal">Vous pouvez limiter la liste des événements en choisissant un ou plusieurs critères de filtre. Pour voir la liste complète, réinitialisez les filtres.</label>
+			<label index="label_searching_hints">Vous pouvez limiter la liste des événements en choisissant un ou plusieurs critères de filtre. Pour voir la liste complète, réinitialisez les filtres.</label>
 			<label index="label_searching_hints_informal">Tu peux limiter la liste des événements en choisissant un ou plusieurs critères de filtre. Pour voir la liste complète, réinitialise les filtres.</label>
-			<label index="label_we_offer_events_in_categories_formal">Pour l'instant, nous vous proposons des événements dans les catégories suivantes:</label>
+			<label index="label_we_offer_events_in_categories">Pour l'instant, nous vous proposons des événements dans les catégories suivantes:</label>
 			<label index="label_we_offer_events_in_categories_informal">Pour l'instant, nous te proposons des événements dans les catégories suivantes:</label>
 			<label index="label_no_categories">Pour l'instant, nous ne proposons aucun événement catégorisé.</label>
 			<label index="label_delete">Marquer pour effacement</label>
-			<label index="label_really_delete_formal">Voulez-vous réellement marquer cet attachement comme étant à effacer ?</label>
+			<label index="label_really_delete">Voulez-vous réellement marquer cet attachement comme étant à effacer ?</label>
 			<label index="label_really_delete_informal">Veux-tu réellement marquer cet attachement comme étant à effacer ?</label>
 			<label index="label_owner">Responsable de l'événement</label>
-			<label index="label_registration_requirements_formal">Veuillez vous inscrire d'abord pour cet événement :</label>
+			<label index="label_registration_requirements">Veuillez vous inscrire d'abord pour cet événement :</label>
 			<label index="label_registration_requirements_informal">Il faut t'inscrire d'abord pour cet événement :</label>
-			<label index="message_file_too_large_formal">Le ficher à uploader est trop volumineux. Veuillez choisir un fichier moins lourd. La taille maximale est</label>
+			<label index="message_file_too_large">Le ficher à uploader est trop volumineux. Veuillez choisir un fichier moins lourd. La taille maximale est</label>
 			<label index="message_file_too_large_informal">Le ficher à uploader est trop volumineux. Choisis un fichier moins lourd. La taille maximale est</label>
-			<label index="message_invalid_type_formal">Le fichier à uploader est dans un format invalide. Veuillez en sélectionner un autre. Les formats reconnus sont</label>
+			<label index="message_invalid_type">Le fichier à uploader est dans un format invalide. Veuillez en sélectionner un autre. Les formats reconnus sont</label>
 			<label index="message_invalid_type_informal">Le fichier à uploader est dans un format invalide. Sélectionne en un autre. Les formats reconnus sont</label>
-			<label index="message_wrongSeminarNumber_formal">Il n'y a aucun événement correspondant à ce numéro. Si vous voyez ce message d'erreur en cliquant sur un lien de cette page, merci de prévenir le responsable du site.</label>
+			<label index="message_wrongSeminarNumber">Il n'y a aucun événement correspondant à ce numéro. Si vous voyez ce message d'erreur en cliquant sur un lien de cette page, merci de prévenir le responsable du site.</label>
 			<label index="message_wrongSeminarNumber_informal">Il n'y a aucun événement correspondant à ce numéro. Si tu vois ce message d'erreur en cliquant sur un lien de cette page, merci de prévenir le responsable du site.</label>
 			<label index="message_noResults">Désolé, aucun événement n'a pu être trouvé.</label>
-			<label index="message_notLoggedIn_formal">Désolé, vous n'êtes pas identifié.</label>
+			<label index="message_notLoggedIn">Désolé, vous n'êtes pas identifié.</label>
 			<label index="message_notLoggedIn_informal">Désolé, tu n'es pas identifié.</label>
-			<label index="message_pleaseLogIn_formal">Veuillez vous identifier pour accéder à cette page.</label>
+			<label index="message_pleaseLogIn">Veuillez vous identifier pour accéder à cette page.</label>
 			<label index="message_pleaseLogIn_informal">Merci de t'identifier pour accéder à cette page.</label>
 			<label index="message_noRegistrations">Il n'y a encore aucune inscription à cet événement.</label>
 			<label index="message_earlybird_price">prix valables jusqu'au %s</label>
@@ -2038,13 +2038,13 @@
 			<label index="message_offlineAttendeesZero">Veuillez indiquer le nombre de personnes inscrites offline.</label>
 			<label index="message_noTargetGroupsChosen">Veuillez sélectionner un groupe cible.</label>
 			<label index="message_emptyNotes">Veuillez compléter les notes internes.</label>
-			<label index="message_noAccessToEventEditor_formal">Désolé, vous n'avez pas accès à la modification des événements.</label>
+			<label index="message_noAccessToEventEditor">Désolé, vous n'avez pas accès à la modification des événements.</label>
 			<label index="message_noAccessToEventEditor_informal">Désolé, tu n'as pas accès à la modification des événements.</label>
 			<label index="message_noSeatsNumber">Veuillez ne donner que des chiffres pour le nombre de places.</label>
 			<label index="message_invalidNumberOfSeats">Désolé, il n'y a pas suffisamment de places libres pour cet événement.</label>
-			<label index="message_moreAttendeesThanSeats_formal">Veuillez inscrire uniquement le nombre de personnes correspondant au nombre de sièges réservés.</label>
+			<label index="message_moreAttendeesThanSeats">Veuillez inscrire uniquement le nombre de personnes correspondant au nombre de sièges réservés.</label>
 			<label index="message_moreAttendeesThanSeats_informal">N'inscris que le nombre de personnes correspondant au nombre de sièges réservés.</label>
-			<label index="message_lessAttendeesThanSeats_formal">Veuillez indiquer le nom des toutes les personnes à inscrire.</label>
+			<label index="message_lessAttendeesThanSeats">Veuillez indiquer le nom des toutes les personnes à inscrire.</label>
 			<label index="message_lessAttendeesThanSeats_informal">Indique le nom des toutes les personnes à inscrire.</label>
 			<label index="message_noKidsNumber">Veuillez ne donner que des chiffres pour le nombre d'enfants.</label>
 			<label index="message_choosePrice">Veuillez choisir un prix.</label>
@@ -2055,12 +2055,12 @@
 			<label index="message_acceptTerms">Veuillez accepter les conditions générales pour pouvoir vous inscrire à cet événement.</label>
 			<label index="message_acceptTerms2">Veuillez accepter les conditions générales de voyage pour pouvoir vous inscrire à cet événement.</label>
 			<label index="message_countdown">%d %s avant le début de l'événement!</label>
-			<label index="message_countdown_noEventFound_formal">Il n'y a aucun événement à venir. Merci de revenir plus tard.</label>
+			<label index="message_countdown_noEventFound">Il n'y a aucun événement à venir. Merci de revenir plus tard.</label>
 			<label index="message_countdown_noEventFound_informal">Il n'y a aucun événement à venir. Merci de revenir plus tard.</label>
-			<label index="message_notRegisteredForThisEvent_formal">Vous n'êtes pas inscrit à cet événement.</label>
+			<label index="message_notRegisteredForThisEvent">Vous n'êtes pas inscrit à cet événement.</label>
 			<label index="message_notRegisteredForThisEvent_informal">Tu n'es pas inscrit à cet événement.</label>
 			<label index="message_unregistrationNotPossible">Le délai d'annulation d'inscription est expiré.</label>
-			<label index="message_requirementsNotFulfilled_formal">Vous n'êtes pas enregistré à tous les événements requis pour l'instant.</label>
+			<label index="message_requirementsNotFulfilled">Vous n'êtes pas enregistré à tous les événements requis pour l'instant.</label>
 			<label index="message_requirementsNotFulfilled_informal">Tu n'es pas enregistré à tous les événements requis pour l'instant.</label>
 			<label index="message_registrationOpensOn">dès %s</label>
 			<label index="message_noTargetGroupAgeNumber">Veuillez n'entrer que des nombres positifs comme âge minimal et maximal.</label>
@@ -2130,9 +2130,9 @@
 			<label index="seminars.pi_flexform.showSiteDetails" type="integer">28251281</label>
 			<label index="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" type="integer">82941740</label>
 			<label index="pi_list_browseresults_noResults" type="integer">210107189</label>
-			<label index="label_myevents_formal" type="integer">177740162</label>
+			<label index="label_myevents" type="integer">177740162</label>
 			<label index="label_myevents_informal" type="integer">177740162</label>
-			<label index="label_myvipevents_formal" type="integer">74285293</label>
+			<label index="label_myvipevents" type="integer">74285293</label>
 			<label index="label_myvipevents_informal" type="integer">74285293</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_uid" type="integer">187623698</label>
@@ -2155,7 +2155,7 @@
 			<label index="label_onlineRegistration" type="integer">201391585</label>
 			<label index="label_list_registrations" type="integer">206095824</label>
 			<label index="label_listRegistrationsLink" type="integer">169828522</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
 			<label index="message_noRegistrations" type="integer">261689699</label>
@@ -2176,7 +2176,7 @@
 			<label index="seminars.pi_flexform.eventEditorPID" type="integer">236783633</label>
 			<label index="seminars.pi_flexform.createEventsPID" type="integer">130277073</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID" type="integer">107570988</label>
-			<label index="label_myenteredevents_formal" type="integer">250348827</label>
+			<label index="label_myenteredevents" type="integer">250348827</label>
 			<label index="label_myenteredevents_informal" type="integer">250348827</label>
 			<label index="label_subtitle" type="integer">3536098</label>
 			<label index="label_partners" type="integer">265740084</label>
@@ -2198,7 +2198,7 @@
 			<label index="label_background_knowledge" type="integer">17742601</label>
 			<label index="label_accommodation" type="integer">139911191</label>
 			<label index="label_food" type="integer">230880093</label>
-			<label index="label_known_from_formal" type="integer">243584829</label>
+			<label index="label_known_from" type="integer">243584829</label>
 			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_seats" type="integer">187299883</label>
@@ -2225,17 +2225,17 @@
 			<label index="label_submit_registration" type="integer">78670567</label>
 			<label index="label_proceed_registration" type="integer">132169581</label>
 			<label index="label_back_registration" type="integer">5603241</label>
-			<label index="label_your_user_data_formal" type="integer">128811576</label>
+			<label index="label_your_user_data" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
 			<label index="label_method_of_payment" type="integer">221962435</label>
-			<label index="message_notLoggedIn_formal" type="integer">107637433</label>
+			<label index="message_notLoggedIn" type="integer">107637433</label>
 			<label index="message_notLoggedIn_informal" type="integer">107637433</label>
-			<label index="message_pleaseLogIn_formal" type="integer">64977327</label>
+			<label index="message_pleaseLogIn" type="integer">64977327</label>
 			<label index="message_pleaseLogIn_informal" type="integer">64977327</label>
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
-			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
+			<label index="message_noAccessToEventEditor" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
 			<label index="message_invalidNumberOfSeats" type="integer">21499875</label>
@@ -2248,7 +2248,7 @@
 			<label index="message_acceptTerms" type="integer">198918363</label>
 			<label index="message_acceptTerms2" type="integer">220063200</label>
 			<label index="message_countdown" type="integer">3805429</label>
-			<label index="message_countdown_noEventFound_formal" type="integer">20205356</label>
+			<label index="message_countdown_noEventFound" type="integer">20205356</label>
 			<label index="message_countdown_noEventFound_informal" type="integer">20205356</label>
 			<label index="countdown_days_plural" type="integer">72343236</label>
 			<label index="countdown_days_singular" type="integer">103331803</label>
@@ -2263,7 +2263,7 @@
 			<label index="label_register_additional_information" type="integer">16157584</label>
 			<label index="label_register_lodging_and_food" type="integer">246916949</label>
 			<label index="label_legend_payment" type="integer">205863499</label>
-			<label index="label_register_entered_data_formal" type="integer">250390933</label>
+			<label index="label_register_entered_data" type="integer">250390933</label>
 			<label index="label_register_entered_data_informal" type="integer">250390933</label>
 			<label index="label_register_all_terms" type="integer">246270935</label>
 			<label index="seminars.pi_flexform.category_list" type="integer">68970858</label>
@@ -2291,7 +2291,7 @@
 			<label index="label_timeslot_room" type="integer">214150095</label>
 			<label index="label_timeslot_place" type="integer">129617664</label>
 			<label index="label_timeslot_speakers" type="integer">258305227</label>
-			<label index="label_unregistration_message_formal" type="integer">42111281</label>
+			<label index="label_unregistration_message" type="integer">42111281</label>
 			<label index="label_unregistration_message_informal" type="integer">42111281</label>
 			<label index="label_cancel" type="integer">245659783</label>
 			<label index="label_unregister" type="integer">164931826</label>
@@ -2299,12 +2299,12 @@
 			<label index="label_selector_pleaseChoose" type="integer">184476378</label>
 			<label index="label_selector_reset" type="integer">86431368</label>
 			<label index="label_selector_searchbox" type="integer">151546043</label>
-			<label index="label_searching_hints_formal" type="integer">130447560</label>
+			<label index="label_searching_hints" type="integer">130447560</label>
 			<label index="label_searching_hints_informal" type="integer">130447560</label>
-			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
+			<label index="label_we_offer_events_in_categories" type="integer">151476596</label>
 			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
 			<label index="label_no_categories" type="integer">133830972</label>
-			<label index="message_notRegisteredForThisEvent_formal" type="integer">15158885</label>
+			<label index="message_notRegisteredForThisEvent" type="integer">15158885</label>
 			<label index="message_notRegisteredForThisEvent_informal" type="integer">15158885</label>
 			<label index="message_unregistrationNotPossible" type="integer">224997406</label>
 		</languageKey>
@@ -2420,11 +2420,11 @@
 			<label index="pi_list_browseresults_displays" type="integer">152851483</label>
 			<label index="pi_list_browseresults_noResults" type="integer">210107189</label>
 			<label index="pi_list_searchBox_search" type="integer">20138052</label>
-			<label index="label_myevents_formal" type="integer">177740162</label>
+			<label index="label_myevents" type="integer">177740162</label>
 			<label index="label_myevents_informal" type="integer">177740162</label>
-			<label index="label_myvipevents_formal" type="integer">40545818</label>
+			<label index="label_myvipevents" type="integer">40545818</label>
 			<label index="label_myvipevents_informal" type="integer">40545818</label>
-			<label index="label_myenteredevents_formal" type="integer">250348827</label>
+			<label index="label_myenteredevents" type="integer">250348827</label>
 			<label index="label_myenteredevents_informal" type="integer">250348827</label>
 			<label index="label_category" type="integer">61717939</label>
 			<label index="label_title" type="integer">192455458</label>
@@ -2496,7 +2496,7 @@
 			<label index="label_register_lodging_and_food" type="integer">246916949</label>
 			<label index="label_accommodation" type="integer">139911191</label>
 			<label index="label_food" type="integer">230880093</label>
-			<label index="label_known_from_formal" type="integer">243584829</label>
+			<label index="label_known_from" type="integer">243584829</label>
 			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_register_additional_attendees" type="integer">29171521</label>
@@ -2527,7 +2527,7 @@
 			<label index="label_email" type="integer">126760538</label>
 			<label index="label_lodgings" type="integer">100712032</label>
 			<label index="label_foods" type="integer">253668178</label>
-			<label index="label_register_entered_data_formal" type="integer">250390933</label>
+			<label index="label_register_entered_data" type="integer">250390933</label>
 			<label index="label_register_entered_data_informal" type="integer">250390933</label>
 			<label index="label_register_all_terms" type="integer">246270935</label>
 			<label index="label_terms" type="integer">112775823</label>
@@ -2535,7 +2535,7 @@
 			<label index="label_submit_registration" type="integer">78670567</label>
 			<label index="label_proceed_registration" type="integer">132169581</label>
 			<label index="label_back_registration" type="integer">5603241</label>
-			<label index="label_your_user_data_formal" type="integer">128811576</label>
+			<label index="label_your_user_data" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
 			<label index="label_method_of_payment" type="integer">221962435</label>
 			<label index="label_timeslot_date" type="integer">71780721</label>
@@ -2544,7 +2544,7 @@
 			<label index="label_timeslot_room" type="integer">214150095</label>
 			<label index="label_timeslot_place" type="integer">129617664</label>
 			<label index="label_timeslot_speakers" type="integer">258305227</label>
-			<label index="label_unregistration_message_formal" type="integer">42111281</label>
+			<label index="label_unregistration_message" type="integer">42111281</label>
 			<label index="label_unregistration_message_informal" type="integer">42111281</label>
 			<label index="label_cancel" type="integer">245659783</label>
 			<label index="label_unregister" type="integer">164931826</label>
@@ -2557,25 +2557,25 @@
 			<label index="label_date_search" type="integer">182310723</label>
 			<label index="label_age_search" type="integer">38941977</label>
 			<label index="label_price_search" type="integer">56627526</label>
-			<label index="label_searching_hints_formal" type="integer">130447560</label>
+			<label index="label_searching_hints" type="integer">130447560</label>
 			<label index="label_searching_hints_informal" type="integer">130447560</label>
-			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
+			<label index="label_we_offer_events_in_categories" type="integer">151476596</label>
 			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
 			<label index="label_no_categories" type="integer">133830972</label>
 			<label index="label_delete" type="integer">46242689</label>
-			<label index="label_really_delete_formal" type="integer">195679946</label>
+			<label index="label_really_delete" type="integer">195679946</label>
 			<label index="label_really_delete_informal" type="integer">195679946</label>
 			<label index="label_owner" type="integer">193881237</label>
-			<label index="message_file_too_large_formal" type="integer">27037616</label>
+			<label index="message_file_too_large" type="integer">27037616</label>
 			<label index="message_file_too_large_informal" type="integer">27037616</label>
-			<label index="message_invalid_type_formal" type="integer">60436029</label>
+			<label index="message_invalid_type" type="integer">60436029</label>
 			<label index="message_invalid_type_informal" type="integer">60436029</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
-			<label index="message_notLoggedIn_formal" type="integer">107637433</label>
+			<label index="message_notLoggedIn" type="integer">107637433</label>
 			<label index="message_notLoggedIn_informal" type="integer">107637433</label>
-			<label index="message_pleaseLogIn_formal" type="integer">64977327</label>
+			<label index="message_pleaseLogIn" type="integer">64977327</label>
 			<label index="message_pleaseLogIn_informal" type="integer">64977327</label>
 			<label index="message_noRegistrations" type="integer">261689699</label>
 			<label index="message_earlybird_price" type="integer">46171995</label>
@@ -2623,13 +2623,13 @@
 			<label index="message_offlineAttendeesZero" type="integer">206107390</label>
 			<label index="message_noTargetGroupsChosen" type="integer">255227194</label>
 			<label index="message_emptyNotes" type="integer">75352038</label>
-			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
+			<label index="message_noAccessToEventEditor" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
 			<label index="message_invalidNumberOfSeats" type="integer">21499875</label>
-			<label index="message_moreAttendeesThanSeats_formal" type="integer">187630531</label>
+			<label index="message_moreAttendeesThanSeats" type="integer">187630531</label>
 			<label index="message_moreAttendeesThanSeats_informal" type="integer">187630531</label>
-			<label index="message_lessAttendeesThanSeats_formal" type="integer">54745285</label>
+			<label index="message_lessAttendeesThanSeats" type="integer">54745285</label>
 			<label index="message_lessAttendeesThanSeats_informal" type="integer">54745285</label>
 			<label index="message_invalidEMailAddress" type="integer">163118308</label>
 			<label index="message_noKidsNumber" type="integer">211979974</label>
@@ -2641,9 +2641,9 @@
 			<label index="message_acceptTerms" type="integer">198918363</label>
 			<label index="message_acceptTerms2" type="integer">220063200</label>
 			<label index="message_countdown" type="integer">3805429</label>
-			<label index="message_countdown_noEventFound_formal" type="integer">20205356</label>
+			<label index="message_countdown_noEventFound" type="integer">20205356</label>
 			<label index="message_countdown_noEventFound_informal" type="integer">20205356</label>
-			<label index="message_notRegisteredForThisEvent_formal" type="integer">15158885</label>
+			<label index="message_notRegisteredForThisEvent" type="integer">15158885</label>
 			<label index="message_notRegisteredForThisEvent_informal" type="integer">15158885</label>
 			<label index="message_unregistrationNotPossible" type="integer">224997406</label>
 			<label index="message_registrationOpensOn" type="integer">260849167</label>
@@ -2685,9 +2685,9 @@
 			<label index="label_requirements" type="integer">94563323</label>
 			<label index="label_dependencies" type="integer">257076868</label>
 			<label index="label_waiting_list" type="integer">15566702</label>
-			<label index="label_registration_requirements_formal" type="integer">48963476</label>
+			<label index="label_registration_requirements" type="integer">48963476</label>
 			<label index="label_registration_requirements_informal" type="integer">48963476</label>
-			<label index="message_requirementsNotFulfilled_formal" type="integer">66387523</label>
+			<label index="message_requirementsNotFulfilled" type="integer">66387523</label>
 			<label index="message_requirementsNotFulfilled_informal" type="integer">66387523</label>
 			<label index="newPlaceButton" type="integer">208822420</label>
 			<label index="newSpeakerButton" type="integer">76404781</label>
@@ -2752,7 +2752,7 @@
 			<label index="label_registration" type="integer">16354175</label>
 			<label index="label_onlineRegistration" type="integer">201391585</label>
 			<label index="label_back" type="integer">168615651</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
 			<label index="seminars.pi_flexform.topic_list" type="integer">105969965</label>
@@ -2789,11 +2789,11 @@
 			<label index="seminars.pi_flexform.eventEditorPID" type="integer">236783633</label>
 			<label index="seminars.pi_flexform.createEventsPID" type="integer">130277073</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID" type="integer">107570988</label>
-			<label index="label_myevents_formal" type="integer">177740162</label>
+			<label index="label_myevents" type="integer">177740162</label>
 			<label index="label_myevents_informal" type="integer">177740162</label>
-			<label index="label_myvipevents_formal" type="integer">74285293</label>
+			<label index="label_myvipevents" type="integer">74285293</label>
 			<label index="label_myvipevents_informal" type="integer">74285293</label>
-			<label index="label_myenteredevents_formal" type="integer">250348827</label>
+			<label index="label_myenteredevents" type="integer">250348827</label>
 			<label index="label_myenteredevents_informal" type="integer">250348827</label>
 			<label index="label_subtitle" type="integer">3536098</label>
 			<label index="label_uid" type="integer">187623698</label>
@@ -2824,7 +2824,7 @@
 			<label index="label_register_lodging_and_food" type="integer">246916949</label>
 			<label index="label_accommodation" type="integer">139911191</label>
 			<label index="label_food" type="integer">230880093</label>
-			<label index="label_known_from_formal" type="integer">243584829</label>
+			<label index="label_known_from" type="integer">243584829</label>
 			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_seats" type="integer">187299883</label>
@@ -2847,7 +2847,7 @@
 			<label index="label_email" type="integer">126760538</label>
 			<label index="label_lodgings" type="integer">100712032</label>
 			<label index="label_foods" type="integer">253668178</label>
-			<label index="label_register_entered_data_formal" type="integer">250390933</label>
+			<label index="label_register_entered_data" type="integer">250390933</label>
 			<label index="label_register_entered_data_informal" type="integer">250390933</label>
 			<label index="label_register_all_terms" type="integer">246270935</label>
 			<label index="label_terms" type="integer">112775823</label>
@@ -2855,18 +2855,18 @@
 			<label index="label_submit_registration" type="integer">78670567</label>
 			<label index="label_proceed_registration" type="integer">132169581</label>
 			<label index="label_back_registration" type="integer">5603241</label>
-			<label index="label_your_user_data_formal" type="integer">128811576</label>
+			<label index="label_your_user_data" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
 			<label index="label_method_of_payment" type="integer">221962435</label>
-			<label index="message_notLoggedIn_formal" type="integer">107637433</label>
+			<label index="message_notLoggedIn" type="integer">107637433</label>
 			<label index="message_notLoggedIn_informal" type="integer">107637433</label>
-			<label index="message_pleaseLogIn_formal" type="integer">64977327</label>
+			<label index="message_pleaseLogIn" type="integer">64977327</label>
 			<label index="message_pleaseLogIn_informal" type="integer">64977327</label>
 			<label index="message_noRegistrations" type="integer">261689699</label>
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
-			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
+			<label index="message_noAccessToEventEditor" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
 			<label index="message_invalidNumberOfSeats" type="integer">21499875</label>
@@ -2879,7 +2879,7 @@
 			<label index="message_acceptTerms" type="integer">198918363</label>
 			<label index="message_acceptTerms2" type="integer">220063200</label>
 			<label index="message_countdown" type="integer">3805429</label>
-			<label index="message_countdown_noEventFound_formal" type="integer">20205356</label>
+			<label index="message_countdown_noEventFound" type="integer">20205356</label>
 			<label index="message_countdown_noEventFound_informal" type="integer">20205356</label>
 			<label index="seminars.pi_flexform.category_list" type="integer">68970858</label>
 			<label index="seminars.pi_flexform.myEventsPID" type="integer">58335550</label>
@@ -2906,7 +2906,7 @@
 			<label index="label_timeslot_room" type="integer">214150095</label>
 			<label index="label_timeslot_place" type="integer">129617664</label>
 			<label index="label_timeslot_speakers" type="integer">258305227</label>
-			<label index="label_unregistration_message_formal" type="integer">42111281</label>
+			<label index="label_unregistration_message" type="integer">42111281</label>
 			<label index="label_unregistration_message_informal" type="integer">42111281</label>
 			<label index="label_cancel" type="integer">245659783</label>
 			<label index="label_unregister" type="integer">164931826</label>
@@ -2914,12 +2914,12 @@
 			<label index="label_selector_pleaseChoose" type="integer">184476378</label>
 			<label index="label_selector_reset" type="integer">86431368</label>
 			<label index="label_selector_searchbox" type="integer">151546043</label>
-			<label index="label_searching_hints_formal" type="integer">130447560</label>
+			<label index="label_searching_hints" type="integer">130447560</label>
 			<label index="label_searching_hints_informal" type="integer">130447560</label>
-			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
+			<label index="label_we_offer_events_in_categories" type="integer">151476596</label>
 			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
 			<label index="label_no_categories" type="integer">133830972</label>
-			<label index="message_notRegisteredForThisEvent_formal" type="integer">15158885</label>
+			<label index="message_notRegisteredForThisEvent" type="integer">15158885</label>
 			<label index="message_notRegisteredForThisEvent_informal" type="integer">15158885</label>
 			<label index="message_unregistrationNotPossible" type="integer">224997406</label>
 		</languageKey>
@@ -2983,11 +2983,11 @@
 			<label index="pi_list_browseresults_displays" type="integer">152851483</label>
 			<label index="pi_list_browseresults_noResults" type="integer">210107189</label>
 			<label index="pi_list_searchBox_search" type="integer">20138052</label>
-			<label index="label_myevents_formal" type="integer">177740162</label>
+			<label index="label_myevents" type="integer">177740162</label>
 			<label index="label_myevents_informal" type="integer">177740162</label>
-			<label index="label_myvipevents_formal" type="integer">74285293</label>
+			<label index="label_myvipevents" type="integer">74285293</label>
 			<label index="label_myvipevents_informal" type="integer">74285293</label>
-			<label index="label_myenteredevents_formal" type="integer">250348827</label>
+			<label index="label_myenteredevents" type="integer">250348827</label>
 			<label index="label_myenteredevents_informal" type="integer">250348827</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_subtitle" type="integer">3536098</label>
@@ -3031,7 +3031,7 @@
 			<label index="label_background_knowledge" type="integer">17742601</label>
 			<label index="label_accommodation" type="integer">139911191</label>
 			<label index="label_food" type="integer">230880093</label>
-			<label index="label_known_from_formal" type="integer">243584829</label>
+			<label index="label_known_from" type="integer">243584829</label>
 			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_seats" type="integer">187299883</label>
@@ -3058,21 +3058,21 @@
 			<label index="label_submit_registration" type="integer">78670567</label>
 			<label index="label_proceed_registration" type="integer">132169581</label>
 			<label index="label_back_registration" type="integer">5603241</label>
-			<label index="label_your_user_data_formal" type="integer">128811576</label>
+			<label index="label_your_user_data" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
 			<label index="label_method_of_payment" type="integer">221962435</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
-			<label index="message_notLoggedIn_formal" type="integer">107637433</label>
+			<label index="message_notLoggedIn" type="integer">107637433</label>
 			<label index="message_notLoggedIn_informal" type="integer">107637433</label>
-			<label index="message_pleaseLogIn_formal" type="integer">64977327</label>
+			<label index="message_pleaseLogIn" type="integer">64977327</label>
 			<label index="message_pleaseLogIn_informal" type="integer">64977327</label>
 			<label index="message_noRegistrations" type="integer">261689699</label>
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
-			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
+			<label index="message_noAccessToEventEditor" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
 			<label index="message_invalidNumberOfSeats" type="integer">21499875</label>
@@ -3085,7 +3085,7 @@
 			<label index="message_acceptTerms" type="integer">198918363</label>
 			<label index="message_acceptTerms2" type="integer">220063200</label>
 			<label index="message_countdown" type="integer">3805429</label>
-			<label index="message_countdown_noEventFound_formal" type="integer">20205356</label>
+			<label index="message_countdown_noEventFound" type="integer">20205356</label>
 			<label index="message_countdown_noEventFound_informal" type="integer">20205356</label>
 			<label index="countdown_days_plural" type="integer">72343236</label>
 			<label index="countdown_days_singular" type="integer">103331803</label>
@@ -3116,13 +3116,13 @@
 			<label index="label_register_additional_information" type="integer">16157584</label>
 			<label index="label_checkboxes" type="integer">15950088</label>
 			<label index="label_register_lodging_and_food" type="integer">246916949</label>
-			<label index="label_register_entered_data_formal" type="integer">250390933</label>
+			<label index="label_register_entered_data" type="integer">250390933</label>
 			<label index="label_register_entered_data_informal" type="integer">250390933</label>
 			<label index="label_register_all_terms" type="integer">246270935</label>
 			<label index="label_timeslot_entry_date" type="integer">17175357</label>
-			<label index="label_unregistration_message_formal" type="integer">42111281</label>
+			<label index="label_unregistration_message" type="integer">42111281</label>
 			<label index="label_unregistration_message_informal" type="integer">42111281</label>
-			<label index="message_notRegisteredForThisEvent_formal" type="integer">15158885</label>
+			<label index="message_notRegisteredForThisEvent" type="integer">15158885</label>
 			<label index="message_notRegisteredForThisEvent_informal" type="integer">15158885</label>
 			<label index="message_unregistrationNotPossible" type="integer">224997406</label>
 			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists" type="integer">27709563</label>
@@ -3137,9 +3137,9 @@
 			<label index="label_selector_submit" type="integer">131190777</label>
 			<label index="label_selector_pleaseChoose" type="integer">184476378</label>
 			<label index="label_selector_searchbox" type="integer">151546043</label>
-			<label index="label_searching_hints_formal" type="integer">130447560</label>
+			<label index="label_searching_hints" type="integer">130447560</label>
 			<label index="label_searching_hints_informal" type="integer">130447560</label>
-			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
+			<label index="label_we_offer_events_in_categories" type="integer">151476596</label>
 			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
 			<label index="label_no_categories" type="integer">133830972</label>
 			<label index="seminars.pi_flexform.numberOfClicksForRegistration" type="integer">4469597</label>
@@ -3205,11 +3205,11 @@
 			<label index="pi_list_browseresults_displays" type="integer">152851483</label>
 			<label index="pi_list_browseresults_noResults" type="integer">210107189</label>
 			<label index="pi_list_searchBox_search" type="integer">20138052</label>
-			<label index="label_myevents_formal" type="integer">177740162</label>
+			<label index="label_myevents" type="integer">177740162</label>
 			<label index="label_myevents_informal" type="integer">177740162</label>
-			<label index="label_myvipevents_formal" type="integer">74285293</label>
+			<label index="label_myvipevents" type="integer">74285293</label>
 			<label index="label_myvipevents_informal" type="integer">74285293</label>
-			<label index="label_myenteredevents_formal" type="integer">250348827</label>
+			<label index="label_myenteredevents" type="integer">250348827</label>
 			<label index="label_myenteredevents_informal" type="integer">250348827</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_subtitle" type="integer">3536098</label>
@@ -3264,7 +3264,7 @@
 			<label index="label_register_lodging_and_food" type="integer">246916949</label>
 			<label index="label_accommodation" type="integer">139911191</label>
 			<label index="label_food" type="integer">230880093</label>
-			<label index="label_known_from_formal" type="integer">243584829</label>
+			<label index="label_known_from" type="integer">243584829</label>
 			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_seats" type="integer">187299883</label>
@@ -3287,7 +3287,7 @@
 			<label index="label_email" type="integer">126760538</label>
 			<label index="label_lodgings" type="integer">100712032</label>
 			<label index="label_foods" type="integer">253668178</label>
-			<label index="label_register_entered_data_formal" type="integer">250390933</label>
+			<label index="label_register_entered_data" type="integer">250390933</label>
 			<label index="label_register_entered_data_informal" type="integer">250390933</label>
 			<label index="label_register_all_terms" type="integer">246270935</label>
 			<label index="label_terms" type="integer">112775823</label>
@@ -3295,10 +3295,10 @@
 			<label index="label_submit_registration" type="integer">78670567</label>
 			<label index="label_proceed_registration" type="integer">132169581</label>
 			<label index="label_back_registration" type="integer">5603241</label>
-			<label index="label_your_user_data_formal" type="integer">128811576</label>
+			<label index="label_your_user_data" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
 			<label index="label_method_of_payment" type="integer">221962435</label>
-			<label index="label_unregistration_message_formal" type="integer">42111281</label>
+			<label index="label_unregistration_message" type="integer">42111281</label>
 			<label index="label_unregistration_message_informal" type="integer">42111281</label>
 			<label index="label_unregister" type="integer">164931826</label>
 			<label index="label_selector_submit" type="integer">131190777</label>
@@ -3311,20 +3311,20 @@
 			<label index="countdown_minutes_plural" type="integer">104922380</label>
 			<label index="countdown_minutes_singular" type="integer">10999131</label>
 			<label index="countdown_seconds_plural" type="integer">126085346</label>
-			<label index="label_searching_hints_formal" type="integer">130447560</label>
+			<label index="label_searching_hints" type="integer">130447560</label>
 			<label index="label_searching_hints_informal" type="integer">130447560</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
-			<label index="message_notLoggedIn_formal" type="integer">107637433</label>
+			<label index="message_notLoggedIn" type="integer">107637433</label>
 			<label index="message_notLoggedIn_informal" type="integer">107637433</label>
-			<label index="message_pleaseLogIn_formal" type="integer">64977327</label>
+			<label index="message_pleaseLogIn" type="integer">64977327</label>
 			<label index="message_pleaseLogIn_informal" type="integer">64977327</label>
 			<label index="message_noRegistrations" type="integer">261689699</label>
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">246835141</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
-			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
+			<label index="message_noAccessToEventEditor" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
 			<label index="message_invalidNumberOfSeats" type="integer">21499875</label>
@@ -3337,9 +3337,9 @@
 			<label index="message_acceptTerms" type="integer">198918363</label>
 			<label index="message_acceptTerms2" type="integer">220063200</label>
 			<label index="message_countdown" type="integer">3805429</label>
-			<label index="message_countdown_noEventFound_formal" type="integer">20205356</label>
+			<label index="message_countdown_noEventFound" type="integer">20205356</label>
 			<label index="message_countdown_noEventFound_informal" type="integer">20205356</label>
-			<label index="message_notRegisteredForThisEvent_formal" type="integer">15158885</label>
+			<label index="message_notRegisteredForThisEvent" type="integer">15158885</label>
 			<label index="message_notRegisteredForThisEvent_informal" type="integer">15158885</label>
 			<label index="message_unregistrationNotPossible" type="integer">224997406</label>
 			<label index="seminars.pi_flexform.category_list" type="integer">68970858</label>
@@ -3362,7 +3362,7 @@
 			<label index="label_timeslot_speakers" type="integer">258305227</label>
 			<label index="label_cancel" type="integer">245659783</label>
 			<label index="label_selector_pleaseChoose" type="integer">184476378</label>
-			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
+			<label index="label_we_offer_events_in_categories" type="integer">151476596</label>
 			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
 			<label index="label_no_categories" type="integer">133830972</label>
 		</languageKey>
@@ -3429,11 +3429,11 @@
 			<label index="pi_list_browseresults_displays" type="integer">152851483</label>
 			<label index="pi_list_browseresults_noResults" type="integer">210107189</label>
 			<label index="pi_list_searchBox_search" type="integer">20138052</label>
-			<label index="label_myevents_formal" type="integer">177740162</label>
+			<label index="label_myevents" type="integer">177740162</label>
 			<label index="label_myevents_informal" type="integer">177740162</label>
-			<label index="label_myvipevents_formal" type="integer">40545818</label>
+			<label index="label_myvipevents" type="integer">40545818</label>
 			<label index="label_myvipevents_informal" type="integer">40545818</label>
-			<label index="label_myenteredevents_formal" type="integer">250348827</label>
+			<label index="label_myenteredevents" type="integer">250348827</label>
 			<label index="label_myenteredevents_informal" type="integer">250348827</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_subtitle" type="integer">3536098</label>
@@ -3488,7 +3488,7 @@
 			<label index="label_register_lodging_and_food" type="integer">246916949</label>
 			<label index="label_accommodation" type="integer">139911191</label>
 			<label index="label_food" type="integer">230880093</label>
-			<label index="label_known_from_formal" type="integer">243584829</label>
+			<label index="label_known_from" type="integer">243584829</label>
 			<label index="label_known_from_informal" type="integer">243584829</label>
 			<label index="label_notes" type="integer">67236517</label>
 			<label index="label_seats" type="integer">187299883</label>
@@ -3511,7 +3511,7 @@
 			<label index="label_email" type="integer">126760538</label>
 			<label index="label_lodgings" type="integer">100712032</label>
 			<label index="label_foods" type="integer">253668178</label>
-			<label index="label_register_entered_data_formal" type="integer">250390933</label>
+			<label index="label_register_entered_data" type="integer">250390933</label>
 			<label index="label_register_entered_data_informal" type="integer">250390933</label>
 			<label index="label_register_all_terms" type="integer">246270935</label>
 			<label index="label_terms" type="integer">112775823</label>
@@ -3519,29 +3519,29 @@
 			<label index="label_submit_registration" type="integer">78670567</label>
 			<label index="label_proceed_registration" type="integer">132169581</label>
 			<label index="label_back_registration" type="integer">5603241</label>
-			<label index="label_your_user_data_formal" type="integer">128811576</label>
+			<label index="label_your_user_data" type="integer">128811576</label>
 			<label index="label_your_user_data_informal" type="integer">128811576</label>
 			<label index="label_method_of_payment" type="integer">221962435</label>
-			<label index="label_unregistration_message_formal" type="integer">42111281</label>
+			<label index="label_unregistration_message" type="integer">42111281</label>
 			<label index="label_unregistration_message_informal" type="integer">42111281</label>
 			<label index="label_unregister" type="integer">164931826</label>
 			<label index="label_selector_submit" type="integer">131190777</label>
 			<label index="label_selector_reset" type="integer">86431368</label>
 			<label index="label_selector_searchbox" type="integer">151546043</label>
-			<label index="label_searching_hints_formal" type="integer">130447560</label>
+			<label index="label_searching_hints" type="integer">130447560</label>
 			<label index="label_searching_hints_informal" type="integer">130447560</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noResults" type="integer">15777293</label>
-			<label index="message_notLoggedIn_formal" type="integer">107637433</label>
+			<label index="message_notLoggedIn" type="integer">107637433</label>
 			<label index="message_notLoggedIn_informal" type="integer">107637433</label>
-			<label index="message_pleaseLogIn_formal" type="integer">64977327</label>
+			<label index="message_pleaseLogIn" type="integer">64977327</label>
 			<label index="message_pleaseLogIn_informal" type="integer">64977327</label>
 			<label index="message_noRegistrations" type="integer">261689699</label>
 			<label index="message_earlybird_price" type="integer">46171995</label>
 			<label index="message_emptyTitle" type="integer">174051111</label>
 			<label index="message_emptyOrganizer" type="integer">144184241</label>
-			<label index="message_noAccessToEventEditor_formal" type="integer">236206698</label>
+			<label index="message_noAccessToEventEditor" type="integer">236206698</label>
 			<label index="message_noAccessToEventEditor_informal" type="integer">236206698</label>
 			<label index="message_noSeatsNumber" type="integer">314941</label>
 			<label index="message_invalidNumberOfSeats" type="integer">21499875</label>
@@ -3554,9 +3554,9 @@
 			<label index="message_acceptTerms" type="integer">198918363</label>
 			<label index="message_acceptTerms2" type="integer">220063200</label>
 			<label index="message_countdown" type="integer">3805429</label>
-			<label index="message_countdown_noEventFound_formal" type="integer">20205356</label>
+			<label index="message_countdown_noEventFound" type="integer">20205356</label>
 			<label index="message_countdown_noEventFound_informal" type="integer">20205356</label>
-			<label index="message_notRegisteredForThisEvent_formal" type="integer">15158885</label>
+			<label index="message_notRegisteredForThisEvent" type="integer">15158885</label>
 			<label index="message_notRegisteredForThisEvent_informal" type="integer">15158885</label>
 			<label index="message_unregistrationNotPossible" type="integer">224997406</label>
 			<label index="countdown_days_plural" type="integer">72343236</label>
@@ -3584,7 +3584,7 @@
 			<label index="label_timeslot_speakers" type="integer">258305227</label>
 			<label index="label_cancel" type="integer">245659783</label>
 			<label index="label_selector_pleaseChoose" type="integer">184476378</label>
-			<label index="label_we_offer_events_in_categories_formal" type="integer">151476596</label>
+			<label index="label_we_offer_events_in_categories" type="integer">151476596</label>
 			<label index="label_we_offer_events_in_categories_informal" type="integer">151476596</label>
 			<label index="label_no_categories" type="integer">133830972</label>
 			<label index="seminars.pi_flexform.sheet_list_view" type="integer">252903448</label>
@@ -3695,11 +3695,11 @@
 			<label index="message_emptySubtitle" type="integer">99304859</label>
 			<label index="message_noCategoryChosen" type="integer">167200433</label>
 			<label index="message_emptyTeaser" type="integer">252216048</label>
-			<label index="message_moreAttendeesThanSeats_formal" type="integer">187630531</label>
+			<label index="message_moreAttendeesThanSeats" type="integer">187630531</label>
 			<label index="message_moreAttendeesThanSeats_informal" type="integer">187630531</label>
-			<label index="message_lessAttendeesThanSeats_formal" type="integer">54745285</label>
+			<label index="message_lessAttendeesThanSeats" type="integer">54745285</label>
 			<label index="message_lessAttendeesThanSeats_informal" type="integer">54745285</label>
-			<label index="message_requirementsNotFulfilled_formal" type="integer">66387523</label>
+			<label index="message_requirementsNotFulfilled" type="integer">66387523</label>
 			<label index="message_requirementsNotFulfilled_informal" type="integer">66387523</label>
 			<label index="message_noTargetGroupAgeNumber" type="integer">256462402</label>
 			<label index="message_targetGroupMaximumAgeSmallerThanMinimumAge" type="integer">144184264</label>
@@ -3737,14 +3737,14 @@
 			<label index="message_invalidPriceSpecialBoard" type="integer">51169901</label>
 			<label index="message_emptyAdditionalInformation" type="integer">97662471</label>
 			<label index="label_delete" type="integer">46242689</label>
-			<label index="label_really_delete_formal" type="integer">195679946</label>
+			<label index="label_really_delete" type="integer">195679946</label>
 			<label index="label_really_delete_informal" type="integer">195679946</label>
 			<label index="label_owner" type="integer">193881237</label>
-			<label index="label_registration_requirements_formal" type="integer">48963476</label>
+			<label index="label_registration_requirements" type="integer">48963476</label>
 			<label index="label_registration_requirements_informal" type="integer">48963476</label>
-			<label index="message_file_too_large_formal" type="integer">27037616</label>
+			<label index="message_file_too_large" type="integer">27037616</label>
 			<label index="message_file_too_large_informal" type="integer">27037616</label>
-			<label index="message_invalid_type_formal" type="integer">60436029</label>
+			<label index="message_invalid_type" type="integer">60436029</label>
 			<label index="message_invalid_type_informal" type="integer">60436029</label>
 		</languageKey>
 	</orig_hash>
@@ -3861,11 +3861,11 @@
 			<label index="pi_list_browseresults_displays">Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Sorry, no events were found.</label>
 			<label index="pi_list_searchBox_search">Search</label>
-			<label index="label_myevents_formal">You are registered for the following events:</label>
+			<label index="label_myevents">You are registered for the following events:</label>
 			<label index="label_myevents_informal">You are registered for the following events:</label>
-			<label index="label_myvipevents_formal">You are an editor for the following events:</label>
+			<label index="label_myvipevents">You are an editor for the following events:</label>
 			<label index="label_myvipevents_informal">You are an editor for the following events:</label>
-			<label index="label_myenteredevents_formal">You have entered the following events:</label>
+			<label index="label_myenteredevents">You have entered the following events:</label>
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_category">Category</label>
 			<label index="label_title">Title</label>
@@ -3938,7 +3938,7 @@
 			<label index="label_register_lodging_and_food">Lodging and food</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
-			<label index="label_known_from_formal">How have you heard of this event?</label>
+			<label index="label_known_from">How have you heard of this event?</label>
 			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_register_additional_attendees">Persons to register:</label>
@@ -3969,7 +3969,7 @@
 			<label index="label_email">E-mail address:</label>
 			<label index="label_lodgings">Lodging:</label>
 			<label index="label_foods">Food:</label>
-			<label index="label_register_entered_data_formal">Your registration data</label>
+			<label index="label_register_entered_data">Your registration data</label>
 			<label index="label_register_entered_data_informal">Your registration data</label>
 			<label index="label_register_all_terms">Registration terms</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
@@ -3977,7 +3977,7 @@
 			<label index="label_submit_registration">Submit registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>
 			<label index="label_back_registration">Back</label>
-			<label index="label_your_user_data_formal">Your address data:</label>
+			<label index="label_your_user_data">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
 			<label index="label_method_of_payment">Selected method of payment:</label>
 			<label index="label_timeslot_date">Date</label>
@@ -3986,7 +3986,7 @@
 			<label index="label_timeslot_room">Room</label>
 			<label index="label_timeslot_place">Place</label>
 			<label index="label_timeslot_speakers">Speakers</label>
-			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
+			<label index="message_notRegisteredForThisEvent">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="label_selector_submit">Apply filter</label>
 			<label index="label_selector_pleaseChoose">please choose...</label>
@@ -3997,30 +3997,30 @@
 			<label index="label_date_search">Period from</label>
 			<label index="label_age_search">Age:</label>
 			<label index="label_price_search">Price</label>
-			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
+			<label index="label_searching_hints">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
-			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>
+			<label index="label_unregistration_message">Do you really want to unregister from this event?</label>
 			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>
 			<label index="label_cancel">Cancel</label>
 			<label index="label_unregister">Unregister</label>
-			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
+			<label index="label_we_offer_events_in_categories">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
 			<label index="label_delete">Mark to delete</label>
-			<label index="label_really_delete_formal">Do you really want to mark this attachment for deletion?</label>
+			<label index="label_really_delete">Do you really want to mark this attachment for deletion?</label>
 			<label index="label_really_delete_informal">Do you really want to mark this attachment for deletion?</label>
 			<label index="label_owner">Event manager</label>
-			<label index="message_file_too_large_formal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
+			<label index="message_file_too_large">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_file_too_large_informal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
-			<label index="message_invalid_type_formal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
+			<label index="message_invalid_type">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
 			<label index="message_invalid_type_informal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
 			<label index="message_missingSeminarNumber">The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
-			<label index="message_notLoggedIn_formal">Sorry, you are not logged in.</label>
+			<label index="message_notLoggedIn">Sorry, you are not logged in.</label>
 			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
-			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
+			<label index="message_pleaseLogIn">Please log in to view this page.</label>
 			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
@@ -4068,13 +4068,13 @@
 			<label index="message_offlineAttendeesZero">Please enter the number of offline-registered attendees.</label>
 			<label index="message_noTargetGroupsChosen">Please select at least target group.</label>
 			<label index="message_emptyNotes">Please enter internal notes.</label>
-			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
+			<label index="message_noAccessToEventEditor">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
-			<label index="message_moreAttendeesThanSeats_formal">Please register only as many persons as you are booking seats.</label>
+			<label index="message_moreAttendeesThanSeats">Please register only as many persons as you are booking seats.</label>
 			<label index="message_moreAttendeesThanSeats_informal">Please register only as many persons as you are booking seats.</label>
-			<label index="message_lessAttendeesThanSeats_formal">Please provide the names of all persons to register.</label>
+			<label index="message_lessAttendeesThanSeats">Please provide the names of all persons to register.</label>
 			<label index="message_lessAttendeesThanSeats_informal">Please provide the names of all persons to register.</label>
 			<label index="message_invalidEMailAddress">Please enter a valid e-mail address for each person.</label>
 			<label index="message_noKidsNumber">Please enter only numbers for the number of kids.</label>
@@ -4086,7 +4086,7 @@
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 			<label index="message_acceptTerms2">Please accept the terms for travelling in order to register for this event.</label>
 			<label index="message_countdown">%d %s left until the next event starts!</label>
-			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
+			<label index="message_countdown_noEventFound">There are no upcoming events. Please come back later.</label>
 			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
 			<label index="message_registrationOpensOn">starting %s</label>
@@ -4128,9 +4128,9 @@
 			<label index="label_requirements">Requirements</label>
 			<label index="label_dependencies">Required for</label>
 			<label index="label_waiting_list">Waiting list</label>
-			<label index="label_registration_requirements_formal">Please register for the following events first:</label>
+			<label index="label_registration_requirements">Please register for the following events first:</label>
 			<label index="label_registration_requirements_informal">Please register for the following events first:</label>
-			<label index="message_requirementsNotFulfilled_formal">You are not registered for all required events yet.</label>
+			<label index="message_requirementsNotFulfilled">You are not registered for all required events yet.</label>
 			<label index="message_requirementsNotFulfilled_informal">You are not registered for all required events yet.</label>
 			<label index="newPlaceButton">Create new place</label>
 			<label index="newSpeakerButton">Create new speaker</label>
@@ -4190,9 +4190,9 @@
 			<label index="pi_list_browseresults_displays">Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Sorry, no events were found.</label>
 			<label index="pi_list_searchBox_search">Search</label>
-			<label index="label_myevents_formal">You are registered for the following events:</label>
+			<label index="label_myevents">You are registered for the following events:</label>
 			<label index="label_myevents_informal">You are registered for the following events:</label>
-			<label index="label_myvipevents_formal">You are a VIP for the following events:</label>
+			<label index="label_myvipevents">You are a VIP for the following events:</label>
 			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
 			<label index="label_title">Title</label>
 			<label index="label_uid">Number</label>
@@ -4216,7 +4216,7 @@
 			<label index="label_list_registrations">List of registrations</label>
 			<label index="label_listRegistrationsLink">View the list of registrations</label>
 			<label index="label_back">Back to listing</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
@@ -4237,7 +4237,7 @@
 			<label index="seminars.pi_flexform.eventEditorPID">Page that contains the plug-in for editing event records</label>
 			<label index="seminars.pi_flexform.createEventsPID">Sysfolder to store FE-created events in</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Page to redirect to after saving an event in the front end</label>
-			<label index="label_myenteredevents_formal">You have entered the following events:</label>
+			<label index="label_myenteredevents">You have entered the following events:</label>
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_subtitle">Subtitle</label>
 			<label index="label_partners">Partners</label>
@@ -4259,7 +4259,7 @@
 			<label index="label_background_knowledge">Background knowledge:</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
-			<label index="label_known_from_formal">How have you heard of this event?</label>
+			<label index="label_known_from">How have you heard of this event?</label>
 			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Seats</label>
@@ -4286,17 +4286,17 @@
 			<label index="label_submit_registration">Submit registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>
 			<label index="label_back_registration">Back</label>
-			<label index="label_your_user_data_formal">Your address data:</label>
+			<label index="label_your_user_data">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
 			<label index="label_method_of_payment">Selected method of payment:</label>
-			<label index="message_notLoggedIn_formal">Sorry, you are not logged in.</label>
+			<label index="message_notLoggedIn">Sorry, you are not logged in.</label>
 			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
-			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
+			<label index="message_pleaseLogIn">Please log in to view this page.</label>
 			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
-			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
+			<label index="message_noAccessToEventEditor">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
@@ -4309,7 +4309,7 @@
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 			<label index="message_acceptTerms2">Please accept the terms for travelling in order to register for this event.</label>
 			<label index="message_countdown">%d %s left until the next event starts!</label>
-			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
+			<label index="message_countdown_noEventFound">There are no upcoming events. Please come back later.</label>
 			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
 			<label index="countdown_days_plural">days</label>
 			<label index="countdown_days_singular">day</label>
@@ -4324,7 +4324,7 @@
 			<label index="label_register_additional_information">Additional information</label>
 			<label index="label_register_lodging_and_food">Lodging and food</label>
 			<label index="label_legend_payment">Payment</label>
-			<label index="label_register_entered_data_formal">Your registration data</label>
+			<label index="label_register_entered_data">Your registration data</label>
 			<label index="label_register_entered_data_informal">Your registration data</label>
 			<label index="label_register_all_terms">Registration terms</label>
 			<label index="seminars.pi_flexform.category_list">Category List</label>
@@ -4352,7 +4352,7 @@
 			<label index="label_timeslot_room">Room</label>
 			<label index="label_timeslot_place">Place</label>
 			<label index="label_timeslot_speakers">Speakers</label>
-			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>
+			<label index="label_unregistration_message">Do you really want to unregister from this event?</label>
 			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>
 			<label index="label_cancel">Cancel</label>
 			<label index="label_unregister">Unregister</label>
@@ -4360,12 +4360,12 @@
 			<label index="label_selector_pleaseChoose">please choose...</label>
 			<label index="label_selector_reset">Reset</label>
 			<label index="label_selector_searchbox">Search term</label>
-			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
+			<label index="label_searching_hints">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
-			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
+			<label index="label_we_offer_events_in_categories">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
-			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
+			<label index="message_notRegisteredForThisEvent">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
 		</languageKey>
@@ -4429,11 +4429,11 @@
 			<label index="pi_list_browseresults_displays">Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Sorry, no events were found.</label>
 			<label index="pi_list_searchBox_search">Search</label>
-			<label index="label_myevents_formal">You are registered for the following events:</label>
+			<label index="label_myevents">You are registered for the following events:</label>
 			<label index="label_myevents_informal">You are registered for the following events:</label>
-			<label index="label_myvipevents_formal">You are a VIP for the following events:</label>
+			<label index="label_myvipevents">You are a VIP for the following events:</label>
 			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
-			<label index="label_myenteredevents_formal">You have entered the following events:</label>
+			<label index="label_myenteredevents">You have entered the following events:</label>
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_title">Title</label>
 			<label index="label_subtitle">Subtitle</label>
@@ -4477,7 +4477,7 @@
 			<label index="label_background_knowledge">Background knowledge:</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
-			<label index="label_known_from_formal">How have you heard of this event?</label>
+			<label index="label_known_from">How have you heard of this event?</label>
 			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Seats</label>
@@ -4504,21 +4504,21 @@
 			<label index="label_submit_registration">Submit registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>
 			<label index="label_back_registration">Back</label>
-			<label index="label_your_user_data_formal">Your address data:</label>
+			<label index="label_your_user_data">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
 			<label index="label_method_of_payment">Selected method of payment:</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
-			<label index="message_notLoggedIn_formal">Sorry, you are not logged in.</label>
+			<label index="message_notLoggedIn">Sorry, you are not logged in.</label>
 			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
-			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
+			<label index="message_pleaseLogIn">Please log in to view this page.</label>
 			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
-			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
+			<label index="message_noAccessToEventEditor">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
@@ -4531,7 +4531,7 @@
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 			<label index="message_acceptTerms2">Please accept the terms for travelling in order to register for this event.</label>
 			<label index="message_countdown">%d %s left until the next event starts!</label>
-			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
+			<label index="message_countdown_noEventFound">There are no upcoming events. Please come back later.</label>
 			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
 			<label index="countdown_days_plural">days</label>
 			<label index="countdown_days_singular">day</label>
@@ -4562,13 +4562,13 @@
 			<label index="label_register_additional_information">Additional information</label>
 			<label index="label_checkboxes">Additional information:</label>
 			<label index="label_register_lodging_and_food">Lodging and food</label>
-			<label index="label_register_entered_data_formal">Your registration data</label>
+			<label index="label_register_entered_data">Your registration data</label>
 			<label index="label_register_entered_data_informal">Your registration data</label>
 			<label index="label_register_all_terms">Registration terms</label>
 			<label index="label_timeslot_entry_date">Entry date</label>
-			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>
+			<label index="label_unregistration_message">Do you really want to unregister from this event?</label>
 			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>
-			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
+			<label index="message_notRegisteredForThisEvent">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
 			<label index="seminars.pi_flexform.showEmptyEntryInOptionLists">Show empty option in selector widget:</label>
@@ -4583,9 +4583,9 @@
 			<label index="label_selector_submit">Apply filter</label>
 			<label index="label_selector_pleaseChoose">please choose...</label>
 			<label index="label_selector_searchbox">Search term</label>
-			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
+			<label index="label_searching_hints">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
-			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
+			<label index="label_we_offer_events_in_categories">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
 			<label index="seminars.pi_flexform.numberOfClicksForRegistration">Number of clicks for registration</label>
@@ -4656,7 +4656,7 @@
 			<label index="label_registration">Registration</label>
 			<label index="label_onlineRegistration">Register now</label>
 			<label index="label_back">Back to listing</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
 			<label index="countdown_days_plural">days</label>
@@ -4678,11 +4678,11 @@
 			<label index="seminars.pi_flexform.eventEditorPID">Page that contains the plug-in for editing event records</label>
 			<label index="seminars.pi_flexform.createEventsPID">Sysfolder to store FE-created events in</label>
 			<label index="seminars.pi_flexform.eventSuccessfullySavedPID">Page to redirect to after saving an event in the front end</label>
-			<label index="label_myevents_formal">You are registered for the following events:</label>
+			<label index="label_myevents">You are registered for the following events:</label>
 			<label index="label_myevents_informal">You are registered for the following events:</label>
-			<label index="label_myvipevents_formal">You are a VIP for the following events:</label>
+			<label index="label_myvipevents">You are a VIP for the following events:</label>
 			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
-			<label index="label_myenteredevents_formal">You have entered the following events:</label>
+			<label index="label_myenteredevents">You have entered the following events:</label>
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_subtitle">Subtitle</label>
 			<label index="label_uid">Number</label>
@@ -4713,7 +4713,7 @@
 			<label index="label_register_lodging_and_food">Lodging and food</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
-			<label index="label_known_from_formal">How have you heard of this event?</label>
+			<label index="label_known_from">How have you heard of this event?</label>
 			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Seats</label>
@@ -4736,7 +4736,7 @@
 			<label index="label_email">E-mail address:</label>
 			<label index="label_lodgings">Lodging:</label>
 			<label index="label_foods">Food:</label>
-			<label index="label_register_entered_data_formal">Your registration data</label>
+			<label index="label_register_entered_data">Your registration data</label>
 			<label index="label_register_entered_data_informal">Your registration data</label>
 			<label index="label_register_all_terms">Registration terms</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
@@ -4744,18 +4744,18 @@
 			<label index="label_submit_registration">Submit registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>
 			<label index="label_back_registration">Back</label>
-			<label index="label_your_user_data_formal">Your address data:</label>
+			<label index="label_your_user_data">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
 			<label index="label_method_of_payment">Selected method of payment:</label>
-			<label index="message_notLoggedIn_formal">Sorry, you are not logged in.</label>
+			<label index="message_notLoggedIn">Sorry, you are not logged in.</label>
 			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
-			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
+			<label index="message_pleaseLogIn">Please log in to view this page.</label>
 			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
-			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
+			<label index="message_noAccessToEventEditor">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
@@ -4768,7 +4768,7 @@
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 			<label index="message_acceptTerms2">Please accept the terms for travelling in order to register for this event.</label>
 			<label index="message_countdown">%d %s left until the next event starts!</label>
-			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
+			<label index="message_countdown_noEventFound">There are no upcoming events. Please come back later.</label>
 			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
 			<label index="seminars.pi_flexform.category_list">Category List</label>
 			<label index="seminars.pi_flexform.myEventsPID">Page that contains the &quot;my events&quot; list:</label>
@@ -4795,7 +4795,7 @@
 			<label index="label_timeslot_room">Room</label>
 			<label index="label_timeslot_place">Place</label>
 			<label index="label_timeslot_speakers">Speakers</label>
-			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>
+			<label index="label_unregistration_message">Do you really want to unregister from this event?</label>
 			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>
 			<label index="label_cancel">Cancel</label>
 			<label index="label_unregister">Unregister</label>
@@ -4803,12 +4803,12 @@
 			<label index="label_selector_pleaseChoose">please choose...</label>
 			<label index="label_selector_reset">Reset</label>
 			<label index="label_selector_searchbox">Search term</label>
-			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
+			<label index="label_searching_hints">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
-			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
+			<label index="label_we_offer_events_in_categories">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
-			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
+			<label index="message_notRegisteredForThisEvent">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
 		</languageKey>
@@ -4873,11 +4873,11 @@
 			<label index="pi_list_browseresults_displays">Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Sorry, no events were found.</label>
 			<label index="pi_list_searchBox_search">Search</label>
-			<label index="label_myevents_formal">You are registered for the following events:</label>
+			<label index="label_myevents">You are registered for the following events:</label>
 			<label index="label_myevents_informal">You are registered for the following events:</label>
-			<label index="label_myvipevents_formal">You are a VIP for the following events:</label>
+			<label index="label_myvipevents">You are a VIP for the following events:</label>
 			<label index="label_myvipevents_informal">You are a VIP for the following events:</label>
-			<label index="label_myenteredevents_formal">You have entered the following events:</label>
+			<label index="label_myenteredevents">You have entered the following events:</label>
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_title">Title</label>
 			<label index="label_subtitle">Subtitle</label>
@@ -4932,7 +4932,7 @@
 			<label index="label_register_lodging_and_food">Lodging and food</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
-			<label index="label_known_from_formal">How have you heard of this event?</label>
+			<label index="label_known_from">How have you heard of this event?</label>
 			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Seats</label>
@@ -4955,7 +4955,7 @@
 			<label index="label_email">E-mail address:</label>
 			<label index="label_lodgings">Lodging:</label>
 			<label index="label_foods">Food:</label>
-			<label index="label_register_entered_data_formal">Your registration data</label>
+			<label index="label_register_entered_data">Your registration data</label>
 			<label index="label_register_entered_data_informal">Your registration data</label>
 			<label index="label_register_all_terms">Registration terms</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
@@ -4963,10 +4963,10 @@
 			<label index="label_submit_registration">Submit registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>
 			<label index="label_back_registration">Back</label>
-			<label index="label_your_user_data_formal">Your address data:</label>
+			<label index="label_your_user_data">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
 			<label index="label_method_of_payment">Selected method of payment:</label>
-			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>
+			<label index="label_unregistration_message">Do you really want to unregister from this event?</label>
 			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>
 			<label index="label_unregister">Unregister</label>
 			<label index="label_selector_submit">Apply filter</label>
@@ -4979,20 +4979,20 @@
 			<label index="countdown_minutes_plural">minutes</label>
 			<label index="countdown_minutes_singular">minute</label>
 			<label index="countdown_seconds_plural">seconds</label>
-			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
+			<label index="label_searching_hints">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
-			<label index="message_notLoggedIn_formal">Sorry, you are not logged in.</label>
+			<label index="message_notLoggedIn">Sorry, you are not logged in.</label>
 			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
-			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
+			<label index="message_pleaseLogIn">Please log in to view this page.</label>
 			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title for this event.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
-			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
+			<label index="message_noAccessToEventEditor">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
@@ -5005,9 +5005,9 @@
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 			<label index="message_acceptTerms2">Please accept the terms for travelling in order to register for this event.</label>
 			<label index="message_countdown">%d %s left until the next event starts!</label>
-			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
+			<label index="message_countdown_noEventFound">There are no upcoming events. Please come back later.</label>
 			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
-			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
+			<label index="message_notRegisteredForThisEvent">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
 			<label index="seminars.pi_flexform.category_list">Category List</label>
@@ -5030,7 +5030,7 @@
 			<label index="label_timeslot_speakers">Speakers</label>
 			<label index="label_cancel">Cancel</label>
 			<label index="label_selector_pleaseChoose">please choose...</label>
-			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
+			<label index="label_we_offer_events_in_categories">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
 		</languageKey>
@@ -5097,11 +5097,11 @@
 			<label index="pi_list_browseresults_displays">Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</label>
 			<label index="pi_list_browseresults_noResults">Sorry, no events were found.</label>
 			<label index="pi_list_searchBox_search">Search</label>
-			<label index="label_myevents_formal">You are registered for the following events:</label>
+			<label index="label_myevents">You are registered for the following events:</label>
 			<label index="label_myevents_informal">You are registered for the following events:</label>
-			<label index="label_myvipevents_formal">You are an editor for the following events:</label>
+			<label index="label_myvipevents">You are an editor for the following events:</label>
 			<label index="label_myvipevents_informal">You are an editor for the following events:</label>
-			<label index="label_myenteredevents_formal">You have entered the following events:</label>
+			<label index="label_myenteredevents">You have entered the following events:</label>
 			<label index="label_myenteredevents_informal">You have entered the following events:</label>
 			<label index="label_title">Title</label>
 			<label index="label_subtitle">Subtitle</label>
@@ -5156,7 +5156,7 @@
 			<label index="label_register_lodging_and_food">Lodging and food</label>
 			<label index="label_accommodation">How are your lodging preferences (if possible a single room, a double room, no lodging)?</label>
 			<label index="label_food">Which kind of food do you prefer (normal, vegetarian, or a special diet):</label>
-			<label index="label_known_from_formal">How have you heard of this event?</label>
+			<label index="label_known_from">How have you heard of this event?</label>
 			<label index="label_known_from_informal">How have you heard of this event?</label>
 			<label index="label_notes">Additional notes:</label>
 			<label index="label_seats">Seats</label>
@@ -5179,7 +5179,7 @@
 			<label index="label_email">E-mail address:</label>
 			<label index="label_lodgings">Lodging:</label>
 			<label index="label_foods">Food:</label>
-			<label index="label_register_entered_data_formal">Your registration data</label>
+			<label index="label_register_entered_data">Your registration data</label>
 			<label index="label_register_entered_data_informal">Your registration data</label>
 			<label index="label_register_all_terms">Registration terms</label>
 			<label index="label_terms">I accept the terms and conditions.</label>
@@ -5187,29 +5187,29 @@
 			<label index="label_submit_registration">Submit registration</label>
 			<label index="label_proceed_registration">Proceed to checkout</label>
 			<label index="label_back_registration">Back</label>
-			<label index="label_your_user_data_formal">Your address data:</label>
+			<label index="label_your_user_data">Your address data:</label>
 			<label index="label_your_user_data_informal">Your address data:</label>
 			<label index="label_method_of_payment">Selected method of payment:</label>
-			<label index="label_unregistration_message_formal">Do you really want to unregister from this event?</label>
+			<label index="label_unregistration_message">Do you really want to unregister from this event?</label>
 			<label index="label_unregistration_message_informal">Do you really want to unregister from this event?</label>
 			<label index="label_unregister">Unregister</label>
 			<label index="label_selector_submit">Apply filter</label>
 			<label index="label_selector_reset">Reset</label>
 			<label index="label_selector_searchbox">Search term</label>
-			<label index="label_searching_hints_formal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
+			<label index="label_searching_hints">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
 			<label index="label_searching_hints_informal">You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noResults">Sorry, currently no events could be found.</label>
-			<label index="message_notLoggedIn_formal">Sorry, you are not logged in.</label>
+			<label index="message_notLoggedIn">Sorry, you are not logged in.</label>
 			<label index="message_notLoggedIn_informal">Sorry, you are not logged in.</label>
-			<label index="message_pleaseLogIn_formal">Please log in to view this page.</label>
+			<label index="message_pleaseLogIn">Please log in to view this page.</label>
 			<label index="message_pleaseLogIn_informal">Please log in to view this page.</label>
 			<label index="message_noRegistrations">For this event, there are no registrations yet.</label>
 			<label index="message_earlybird_price">price valid and bookable until %s</label>
 			<label index="message_emptyTitle">Please enter a title.</label>
 			<label index="message_emptyOrganizer">Please select at least one organizer.</label>
-			<label index="message_noAccessToEventEditor_formal">Sorry, you don't have access to the event editor.</label>
+			<label index="message_noAccessToEventEditor">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noAccessToEventEditor_informal">Sorry, you don't have access to the event editor.</label>
 			<label index="message_noSeatsNumber">Please enter only numbers for the number of seats.</label>
 			<label index="message_invalidNumberOfSeats">Sorry, there are not that many vacancies for this event.</label>
@@ -5222,9 +5222,9 @@
 			<label index="message_acceptTerms">Please accept the terms and conditions in order to register for this event.</label>
 			<label index="message_acceptTerms2">Please accept the terms for travelling in order to register for this event.</label>
 			<label index="message_countdown">%d %s left until the next event starts!</label>
-			<label index="message_countdown_noEventFound_formal">There are no upcoming events. Please come back later.</label>
+			<label index="message_countdown_noEventFound">There are no upcoming events. Please come back later.</label>
 			<label index="message_countdown_noEventFound_informal">There are no upcoming events. Please come back later.</label>
-			<label index="message_notRegisteredForThisEvent_formal">You are not registered for this event.</label>
+			<label index="message_notRegisteredForThisEvent">You are not registered for this event.</label>
 			<label index="message_notRegisteredForThisEvent_informal">You are not registered for this event.</label>
 			<label index="message_unregistrationNotPossible">The unregistration deadline already has passed.</label>
 			<label index="countdown_days_plural">days</label>
@@ -5252,7 +5252,7 @@
 			<label index="label_timeslot_speakers">Speakers</label>
 			<label index="label_cancel">Cancel</label>
 			<label index="label_selector_pleaseChoose">please choose...</label>
-			<label index="label_we_offer_events_in_categories_formal">Currently, we offer you events in the following categories:</label>
+			<label index="label_we_offer_events_in_categories">Currently, we offer you events in the following categories:</label>
 			<label index="label_we_offer_events_in_categories_informal">Currently, we offer you events in the following categories:</label>
 			<label index="label_no_categories">Currently, we aren't offering any categorized events.</label>
 			<label index="seminars.pi_flexform.sheet_list_view">List view</label>
@@ -5363,11 +5363,11 @@
 			<label index="message_emptySubtitle">Please enter a subtitle.</label>
 			<label index="message_noCategoryChosen">Please select at least one category.</label>
 			<label index="message_emptyTeaser">Please enter a teaser.</label>
-			<label index="message_moreAttendeesThanSeats_formal">Please register only as many persons as you are booking seats.</label>
+			<label index="message_moreAttendeesThanSeats">Please register only as many persons as you are booking seats.</label>
 			<label index="message_moreAttendeesThanSeats_informal">Please register only as many persons as you are booking seats.</label>
-			<label index="message_lessAttendeesThanSeats_formal">Please provide the names of all persons to register.</label>
+			<label index="message_lessAttendeesThanSeats">Please provide the names of all persons to register.</label>
 			<label index="message_lessAttendeesThanSeats_informal">Please provide the names of all persons to register.</label>
-			<label index="message_requirementsNotFulfilled_formal">You are not registered for all required events yet.</label>
+			<label index="message_requirementsNotFulfilled">You are not registered for all required events yet.</label>
 			<label index="message_requirementsNotFulfilled_informal">You are not registered for all required events yet.</label>
 			<label index="message_noTargetGroupAgeNumber">Please enter only positive numbers as minimum and maximum age.</label>
 			<label index="message_targetGroupMaximumAgeSmallerThanMinimumAge">Please enter a maximum age that is at equal to or greater than the minimum age.</label>
@@ -5405,14 +5405,14 @@
 			<label index="message_invalidPriceSpecialBoard">Please enter a valid special board price.</label>
 			<label index="message_emptyAdditionalInformation">Please enter additional information.</label>
 			<label index="label_delete">Mark to delete</label>
-			<label index="label_really_delete_formal">Do you really want to mark this attachment for deletion?</label>
+			<label index="label_really_delete">Do you really want to mark this attachment for deletion?</label>
 			<label index="label_really_delete_informal">Do you really want to mark this attachment for deletion?</label>
 			<label index="label_owner">Event manager</label>
-			<label index="label_registration_requirements_formal">Please register for the following events first:</label>
+			<label index="label_registration_requirements">Please register for the following events first:</label>
 			<label index="label_registration_requirements_informal">Please register for the following events first:</label>
-			<label index="message_file_too_large_formal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
+			<label index="message_file_too_large">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
 			<label index="message_file_too_large_informal">The file to upload is too large. Please choose a smaller file. The maximum allowed size is</label>
-			<label index="message_invalid_type_formal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
+			<label index="message_invalid_type">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
 			<label index="message_invalid_type_informal">The file to upload is of an invalid type. Please choose another file. Allowed types are</label>
 		</languageKey>
 	</orig_text>
