@@ -19,7 +19,7 @@
  * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
- *         @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	/**
@@ -132,39 +132,29 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 *        tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY, tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW, or
 	 *        tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 	 *
-	 * @return void
+	 * @return int user UID
 	 */
 	private function createAndLoginUserWithPublishSetting($publishSetting) {
-		$userGroup = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_FrontEndUserGroup')->getLoadedTestingModel(
-				array('tx_seminars_publish_events' => $publishSetting)
-		);
-
-		$user = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
-			->getLoadedTestingModel(
-				array('usergroup' => $userGroup->getUid())
-		);
-		$this->testingFramework->loginFrontEndUser($user->getUid());
+		$userGroupUid = $this->testingFramework->createFrontEndUserGroup(array('tx_seminars_publish_events' => $publishSetting));
+		return $this->testingFramework->createAndLoginFrontEndUser($userGroupUid);
 	}
 
 	/**
 	 * Creates a front-end user which has a group with the publish setting
 	 * tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED and a reviewer.
 	 *
-	 * @return void
+	 * @return int user UID
 	 */
 	private function createAndLoginUserWithReviewer() {
-		$backendUserUid = $this->testingFramework->createBackEndUser(
-			array('email' => 'foo@bar.com', 'realName' => 'Mr. Foo'));
+		$backendUserUid = $this->testingFramework->createBackEndUser(array('email' => 'foo@bar.com', 'realName' => 'Mr. Foo'));
 		$userGroupUid = $this->testingFramework->createFrontEndUserGroup(
 			array(
-				'tx_seminars_publish_events'
-					=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+				'tx_seminars_publish_events' => tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
 				'tx_seminars_reviewer' => $backendUserUid,
 			)
 		);
 
-		$this->testingFramework->createAndLoginFrontEndUser(
+		return $this->testingFramework->createAndLoginFrontEndUser(
 			$userGroupUid, array('name' => 'Mr. Bar', 'email' => 'mail@foo.com')
 		);
 	}
@@ -2467,43 +2457,13 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function modifyDataToInsertAddsOwnerFeUserToFormData() {
-		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
-		);
-		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
-
-		self::assertTrue(
-			isset($modifiedFormData['owner_feuser'])
-		);
-	}
-
-	/**
-	 * @test
-	 */
 	public function modifyDataToInsertsetsOwnerFeUserToCurrentlyLoggedInUser() {
-		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
-		);
+		$userUid = $this->createAndLoginUserWithPublishSetting(tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
-		self::assertEquals(
-			1,
+		self::assertSame(
+			$userUid,
 			$modifiedFormData['owner_feuser']
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function modifyDataToInsertAddsEventsPidToFormData() {
-		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
-		);
-		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
-
-		self::assertTrue(
-			isset($modifiedFormData['pid'])
 		);
 	}
 
@@ -3453,7 +3413,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendAdditionalNotificationEmailToReviewerWithoutReviewerAndFeatureEnabledNotSendsEmail() {
 		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
-		$this->createAndLoginUserWithPublishSetting(0);
+		$this->createAndLoginUserWithPublishSetting(tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 
 		$this->fixture->sendAdditionalNotificationEmailToReviewer();
 
