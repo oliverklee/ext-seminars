@@ -23,27 +23,6 @@
  */
 class tx_seminars_flexForms {
 	/**
-	 * @var language
-	 */
-	private $language = NULL;
-
-	/**
-	 * The constructor.
-	 */
-	public function __construct() {
-		$this->language = t3lib_div::makeInstance('language');
-		$this->language->init($GLOBALS['BE_USER']->uc['lang']);
-		$this->language->includeLLFile('EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml');
-	}
-
-	/**
-	 * The destructor.
-	 */
-	public function __destruct() {
-		unset($this->language);
-	}
-
-	/**
 	 * Returns the configuration for the flex forms field
 	 * "showFeUserFieldsInRegistrationsList" with the selectable database
 	 * columns.
@@ -54,13 +33,7 @@ class tx_seminars_flexForms {
 	 */
 	public function getShowFeUserFieldsInRegistrationsList(array $configuration) {
 		foreach ($this->getColumnsOfTable('fe_users') as $column) {
-			$label = $this->language->getLL('label_' . $column);
-
-			if ($label == '') {
-				$label = $column;
-			}
-
-			$configuration['items'][] = array(0 => $label, 1 => $column);
+			$configuration['items'][] = array(0 => $column, 1 => $column);
 		}
 
 		return $configuration;
@@ -77,15 +50,7 @@ class tx_seminars_flexForms {
 	 */
 	public function getShowRegistrationFieldsInRegistrationList(array $configuration) {
 		foreach ($this->getColumnsOfTable('tx_seminars_attendances') as $column) {
-			$label = $this->language->getLL(
-				'label_' . ($column == 'uid' ? 'registration_' : '') .$column
-			);
-
-			if ($label == '') {
-				$label = $column;
-			}
-
-			$configuration['items'][] = array(0 => $label, 1 => $column);
+			$configuration['items'][] = array(0 => $column, 1 => $column);
 		}
 
 		return $configuration;
