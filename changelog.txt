@@ -281,6 +281,7 @@ Changes:
 - [#3582] Slim down our full-text search
 
 Cleanup:
+- [#5358] Use the new copyright headers
 - [#5335] Make the calls to static PHPUnit methods static
 - [#5209] Use makeInstance in the unit tests only for singletons
 - [#5207] Drop unnecessary CDATA

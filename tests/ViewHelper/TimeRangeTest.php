@@ -13,7 +13,7 @@
  */
 
 /**
- * Testcase for the tx_seminars_ViewHelper_TimeRange class.
+ * Test case.
  *
  * @package TYPO3
  * @subpackage tx_seminars
