@@ -375,6 +375,7 @@ TYPO3.seminars.executeLinkAction = function(event) {
 	TYPO3.seminars.disableAllActionLinks();
 
 	var formElement = document.createElement("form");
+	formElement.style.display = 'none';
 	formElement.setAttribute('method', 'post');
 	formElement.setAttribute('action', linkHref);
 
@@ -391,6 +392,7 @@ TYPO3.seminars.executeLinkAction = function(event) {
 		}
 	}
 
+	linkElement.appendChild(formElement);
 	formElement.submit();
 
 	return false;
