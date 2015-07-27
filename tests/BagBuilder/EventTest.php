@@ -4987,16 +4987,16 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	}
 
 
-	//////////////////////////////////////////////
-	// Tests concerning limitToEarliestBeginDate
-	//////////////////////////////////////////////
+	/*
+	 * Tests concerning limitToEarliestBeginOrEndDate
+	 */
 
 	/**
 	 * @test
 	 */
-	public function limitToEarliestBeginDateForEventWithoutBeginDateFindsThisEvent() {
+	public function limitToEarliestBeginOrEndDateForEventWithoutBeginDateFindsThisEvent() {
 		$this->testingFramework->createRecord('tx_seminars_seminars');
-		$this->fixture->limitToEarliestBeginDate(42);
+		$this->fixture->limitToEarliestBeginOrEndDate(42);
 		$bag = $this->fixture->build();
 
 		self::assertEquals(
@@ -5008,11 +5008,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function limitToEarliestBeginDateForEventWithBeginDateEqualToGivenTimestampFindsThisEvent() {
+	public function limitToEarliestBeginOrEndDateForEventWithBeginDateEqualToGivenTimestampFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 42)
 		);
-		$this->fixture->limitToEarliestBeginDate(42);
+		$this->fixture->limitToEarliestBeginOrEndDate(42);
 		$bag = $this->fixture->build();
 
 		self::assertEquals(
@@ -5024,11 +5024,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function limitToEarliestBeginDateForEventWithGreaterBeginDateThanGivenTimestampFindsThisEvent() {
+	public function limitToEarliestBeginOrEndDateForEventWithGreaterBeginDateThanGivenTimestampFindsThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 42)
 		);
-		$this->fixture->limitToEarliestBeginDate(21);
+		$this->fixture->limitToEarliestBeginOrEndDate(21);
 		$bag = $this->fixture->build();
 
 		self::assertEquals(
@@ -5040,11 +5040,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function limitToEarliestBeginDateForEventWithBeginDateLowerThanGivenTimestampDoesNotFindThisEvent() {
+	public function limitToEarliestBeginOrEndDateForEventWithBeginDateLowerThanGivenTimestampDoesNotFindThisEvent() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 42)
 		);
-		$this->fixture->limitToEarliestBeginDate(84);
+		$this->fixture->limitToEarliestBeginOrEndDate(84);
 		$bag = $this->fixture->build();
 
 		self::assertTrue(
@@ -5055,17 +5055,31 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function limitToEarliestBeginDateForZeroGivenAsTimestampUnsetsFilter() {
+	public function limitToEarliestBeginOrEndDateForZeroGivenAsTimestampUnsetsFilter() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('begin_date' => 21)
 		);
 
-		$this->fixture->limitToEarliestBeginDate(42);
+		$this->fixture->limitToEarliestBeginOrEndDate(42);
 
-		$this->fixture->limitToEarliestBeginDate(0);
+		$this->fixture->limitToEarliestBeginOrEndDate(0);
 		$bag = $this->fixture->build();
 
 		self::assertEquals(
+			1,
+			$bag->count()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function limitToEarliestBeginOrEndDateForFindsEventStartingBeforeAndEndingAfterDeadline() {
+		$this->testingFramework->createRecord('tx_seminars_seminars', array('begin_date' => 8, 'end_date' => 10));
+		$this->fixture->limitToEarliestBeginOrEndDate(9);
+		$bag = $this->fixture->build();
+
+		self::assertSame(
 			1,
 			$bag->count()
 		);

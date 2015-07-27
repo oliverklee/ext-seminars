@@ -980,8 +980,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	}
 
 	/**
-	 * Limits the bag to events which have a begin_date greater than the given
-	 * time-stamp or without a begin_date.
+	 * Limits the bag to events which start later than $earliestBeginDate or which are still running at $earliestBeginDate.
 	 *
 	 * A $earliestBeginDate of 0 will remove the filter.
 	 *
@@ -989,15 +988,19 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 *
 	 * @return void
 	 */
-	public function limitToEarliestBeginDate($earliestBeginDate) {
+	public function limitToEarliestBeginOrEndDate($earliestBeginDate) {
 		if ($earliestBeginDate == 0) {
 			unset($this->whereClauseParts['earliestBeginDate']);
 
 			return;
 		}
 
-		$this->whereClauseParts['earliestBeginDate'] = '(' .
-			'tx_seminars_seminars.begin_date = 0 OR ' . 'tx_seminars_seminars.begin_date >= '. $earliestBeginDate . ')';
+		$this->whereClauseParts['earliestBeginDate'] = '('
+			. 'tx_seminars_seminars.begin_date = 0 OR '
+			. '(tx_seminars_seminars.begin_date >= '. $earliestBeginDate
+			. ' OR (tx_seminars_seminars.begin_date <= ' . $earliestBeginDate
+			. ' AND tx_seminars_seminars.end_date > ' . $earliestBeginDate . '))'
+			. ')';
 	}
 
 	/**

@@ -90,6 +90,7 @@ Localization:
 - [#3852] Update the French localization, thanks to Martin Rebetez
 
 Bug fixes:
+- [#5364] Search by start date ignores then-running events
 - [#5359] Action links don't trigger actions in Firefox
 - [#5356] Test failure in Tx_Seminars_FrontEnd_EventEditorTest
 - [#5355] Test failure in tx_seminars_FrontEnd_CountdownTest

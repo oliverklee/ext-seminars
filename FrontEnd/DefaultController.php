@@ -3192,7 +3192,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	private function filterByDate(tx_seminars_BagBuilder_Event $builder) {
 		$dateFrom = $this->getTimestampFromDatePiVars('from');
 		if ($dateFrom > 0) {
-			$builder->limitToEarliestBeginDate($dateFrom);
+			$builder->limitToEarliestBeginOrEndDate($dateFrom);
 		}
 
 		$dateTo = $this->getTimestampFromDatePiVars('to');
