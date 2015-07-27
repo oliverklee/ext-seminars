@@ -215,6 +215,7 @@
 			<label index="label_list_otherdates">Other dates for this topic</label>
 			<label index="label_list_dates">Dates for this topic</label>
 			<label index="label_eventsnextday">Subsequent events</label>
+			<label index="label_actions">Actions</label>
 			<label index="label_edit">Edit</label>
 			<label index="label_hide">hide</label>
 			<label index="label_unhide">unhide</label>
@@ -841,7 +842,8 @@
 			<label index="label_list_otherdates">Andere Termine für diese Veranstaltung</label>
 			<label index="label_list_dates">Termine für diese Veranstaltung</label>
 			<label index="label_eventsnextday">Veranstaltungen im Anschluss</label>
-			<label index="label_edit">Bearbeiten</label>
+			<label index="label_actions">Aktionen</label>
+			<label index="label_edit">bearbeiten</label>
 			<label index="label_hide">ausblenden</label>
 			<label index="label_unhide">einblenden</label>
 			<label index="label_copy">kopieren</label>
