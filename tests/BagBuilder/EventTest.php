@@ -3790,6 +3790,65 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function limitToFullTextSearchFindsEventWithSearchWordInTargetGroupTitle() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			'tx_seminars_target_groups',
+			array('title' => 'avocado paprika place')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'target_groups' => 1,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_target_groups_mm',
+			$eventUid,
+			$targetGroupUid
+		);
+		$this->fixture->limitToFullTextSearch('avocado');
+		$bag = $this->fixture->build();
+
+		self::assertFalse(
+			$bag->isEmpty()
+		);
+		self::assertSame(
+			$eventUid,
+			$bag->current()->getUid()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTargetGroupTitle() {
+		$targetGroupUid = $this->testingFramework->createRecord(
+			'tx_seminars_target_groups',
+			array('title' => 'paprika place')
+		);
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'target_groups' => 1,
+				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+			)
+		);
+		$this->testingFramework->createRelation(
+			'tx_seminars_seminars_target_groups_mm',
+			$eventUid,
+			$targetGroupUid
+		);
+		$this->fixture->limitToFullTextSearch('avocado');
+		$bag = $this->fixture->build();
+
+		self::assertTrue(
+			$bag->isEmpty()
+		);
+	}
 
 	////////////////////////////////////////////////////////////////
 	// Tests for limitToFullTextSearch() for topic event records

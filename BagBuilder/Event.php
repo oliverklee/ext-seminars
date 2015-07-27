@@ -47,6 +47,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 		'speakers' => array('title'),
 		'places' => array('title', 'city'),
 		'categories' => array('title'),
+		'target_groups' => array('title'),
 	);
 
 	/**
@@ -612,7 +613,8 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 				$this->getSearchWherePartForSpeakers($safeKeyword),
 				$this->getSearchWherePartForPlaces($safeKeyword),
 				$this->getSearchWherePartForEventTypes($safeKeyword),
-				$this->getSearchWherePartForCategories($safeKeyword)
+				$this->getSearchWherePartForCategories($safeKeyword),
+				$this->getSearchWherePartForTargetGroups($safeKeyword)
 			);
 
 			if (!empty($wherePartsForCurrentSearchWord)) {
@@ -691,6 +693,23 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 			'categories',
 			'tx_seminars_categories',
 			'tx_seminars_seminars_categories_mm'
+		);
+	}
+
+	/**
+	 * Generates and returns the WHERE clause parts for the search in target groups
+	 * based on the search word given in the first parameter $searchWord.
+	 *
+	 * @param string $searchWord the current search word, must not be empty, must be SQL-safe
+	 *
+	 * @return string[] the WHERE clause parts for the search in categories
+	 */
+	private function getSearchWherePartForTargetGroups($searchWord) {
+		return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
+			$searchWord,
+			'target_groups',
+			'tx_seminars_target_groups',
+			'tx_seminars_seminars_target_groups_mm'
 		);
 	}
 

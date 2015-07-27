@@ -730,8 +730,9 @@ CREATE TABLE tx_seminars_target_groups (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
-	KEY dummy (is_dummy_record)
-);
+	KEY dummy (is_dummy_record),
+	FULLTEXT index_searchfields (title)
+) ENGINE = MyISAM;
 
 
 #
