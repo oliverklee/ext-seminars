@@ -592,37 +592,6 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function mainCanExportValueOfSignedThemselves() {
-		self::markTestIncomplete(
-			'For this test to run, we need to provide a language file to the ' .
-				'registration class @see ' .
-				'https://bugs.oliverklee.com/show_bug.cgi?id=3133'
-		);
-
-		$this->configuration->setAsString('fieldsFromFeUserForCsv', '');
-		$this->configuration->setAsString('fieldsFromAttendanceForCsv', 'registered_themselves');
-
-		$this->testingFramework->createRecord(
-			'tx_seminars_attendances',
-			array(
-				'seminar' => $this->eventUid,
-				'user' => $this->testingFramework->createFrontEndUser(),
-				'registered_themselves' => 1,
-			)
-		);
-
-		$this->fixture->piVars['table'] = 'tx_seminars_attendances';
-		$this->fixture->piVars['eventUid'] = $this->eventUid;
-
-		self::assertContains(
-			$this->fixture->translate('label_yes'),
-			$this->fixture->main()
-		);
-	}
-
-	/**
-	 * @test
-	 */
 	public function mainCanExportOneRegistrationUid() {
 		$this->configuration->setAsString('fieldsFromFeUserForCsv', '');
 		$this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
