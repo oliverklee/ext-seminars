@@ -242,7 +242,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
 			'',
 			array(
-				'name' => 'foo_user',
+				'name' => 'Harry Callagan',
 				'email' => 'foo@bar.com',
 			)
 		);
@@ -2436,7 +2436,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->fixture->notifyAttendee($registration, $pi1);
 
 		self::assertContains(
-			'foo_user',
+			'Harry Callagan',
 			$this->getEmailHtmlPart()
 		);
 	}
@@ -3331,7 +3331,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		self::assertContains(
 			sprintf(
-				$this->fixture->translate('email_confirmationHello_formal'),
+				$this->fixture->translate('email_confirmationHello'),
 				$this->seminar->getTitle()
 			),
 			$this->mailer->getFirstSentEmail()->getBody()
@@ -3386,7 +3386,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		self::assertContains(
 			sprintf(
 				$this->fixture->translate(
-					'email_confirmationOnUnregistrationHello_formal'
+					'email_confirmationOnUnregistrationHello'
 				),
 				$this->seminar->getTitle()
 			),
@@ -3448,7 +3448,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		self::assertContains(
 			sprintf(
 				$this->fixture->translate(
-					'email_confirmationOnRegistrationForQueueHello_formal'
+					'email_confirmationOnRegistrationForQueueHello'
 				),
 				$this->seminar->getTitle()
 			),
@@ -3510,7 +3510,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		self::assertContains(
 			sprintf(
 				$this->fixture->translate(
-					'email_confirmationOnQueueUpdateHello_formal'
+					'email_confirmationOnQueueUpdateHello'
 				),
 				$this->seminar->getTitle()
 			),

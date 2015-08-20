@@ -77,43 +77,43 @@
 			<label index="label_yes">yes</label>
 			<label index="label_no">no</label>
 			<label index="label_hours">h</label>
-			<label index="message_notLoggedIn_formal">Please log in first.</label>
+			<label index="message_notLoggedIn">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
-			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
+			<label index="message_alreadyRegistered">You already have registered for this event.</label>
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
-			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
+			<label index="message_userIsBlocked">You are already registered for an event that collides with this event.</label>
 			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
 			<label index="message_missingSeminarNumber">The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
 			<label index="message_seminarCancelled">Alas, this event has been canceled.</label>
 			<label index="message_noDate">This event has no date yet.</label>
 			<label index="message_seminarRegistrationIsClosed">Sorry, the registration period for this event is over.</label>
 			<label index="message_noVacancies">Sorry, there are no more vancacies.</label>
-			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
+			<label index="message_invalidNumberOfSeats">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_willBeAnnounced">will be announced</label>
 			<label index="message_forFree">free</label>
 			<label index="message_enough">enough</label>
 			<label index="message_fullyBooked">fully booked</label>
 			<label index="message_registrationOpensOn">starting %s</label>
-			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
+			<label index="message_accessDenied">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
-			<label index="email_confirmationHello_formal">thank you for registering for the event &quot;%s&quot;</label>
+			<label index="email_confirmationHello">thank you for registering for the event &quot;%s&quot;</label>
 			<label index="email_confirmationHello_informal">thank you for registering for the event &quot;%s&quot;</label>
 			<label index="email_price">at the total price of %s</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
-			<label index="email_confirmationOnUnregistrationHello_formal">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnUnregistrationHello">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnUnregistrationHello_informal">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject">Registration for the waiting list confirmation</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_formal">thank you for registering for the waiting list of the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnRegistrationForQueueHello">thank you for registering for the waiting list of the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_informal">thank you for registering for the waiting list of the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnQueueUpdateSubject">Registration became a regular registration confirmation</label>
-			<label index="email_confirmationOnQueueUpdateHello_formal">your registration just has become a regular registration for the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnQueueUpdateHello">your registration just has become a regular registration for the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnQueueUpdateHello_informal">your registration just has become a regular registration for the event &quot;%s&quot;</label>
-			<label index="email_unregistrationNotice_formal">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
+			<label index="email_unregistrationNotice">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
 			<label index="email_unregistrationNotice_informal">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Your event has now enough registrations to be held.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">Event has enough registrations: %d - %s</label>
@@ -209,25 +209,25 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 			<label index="label_waiting_list">Venteliste</label>
 			<label index="label_yes">Ja</label>
 			<label index="label_no">Nej</label>
-			<label index="message_notLoggedIn_formal">Venligst log in først.</label>
+			<label index="message_notLoggedIn">Venligst log in først.</label>
 			<label index="message_notLoggedIn_informal">Venligst log in først.</label>
-			<label index="message_alreadyRegistered_formal">De er allerede tilmeldt dette arrangement.</label>
+			<label index="message_alreadyRegistered">De er allerede tilmeldt dette arrangement.</label>
 			<label index="message_alreadyRegistered_informal">Du er allerede tilmeldt dette arrangement.</label>
-			<label index="message_userIsBlocked_formal">Du er tilmeldt et andet arrangement der konflikter med dette.</label>
+			<label index="message_userIsBlocked">Du er tilmeldt et andet arrangement der konflikter med dette.</label>
 			<label index="message_userIsBlocked_informal">Du er tilmeldt et andet arrangement der konflikter med dette.</label>
-			<label index="message_wrongSeminarNumber_formal">Der er ikke noget arrangement med dette nr. Hvis du får denne fejl ved at følge et link på denne side informer da venligst webmaster. Tak!</label>
+			<label index="message_wrongSeminarNumber">Der er ikke noget arrangement med dette nr. Hvis du får denne fejl ved at følge et link på denne side informer da venligst webmaster. Tak!</label>
 			<label index="message_wrongSeminarNumber_informal">Der ikke noget arrangement med dette nr. Hvis du får denne fejl ved at følge et link på denne side informer da venligst webmaster. Tak!</label>
 			<label index="message_noRegistrationNecessary">ingen registrering er nødvendig til dette arrangement</label>
 			<label index="message_seminarCancelled">Desværre er dette arrangement blevet aflyst</label>
 			<label index="message_noDate">Dette arrangement har ikke nogen fastsat dato endnu</label>
 			<label index="message_seminarRegistrationIsClosed">Desværre er tilmeldingsfristen til dette arrangement overskredet</label>
 			<label index="message_noVacancies">Desværre, der er ikke flere pladser</label>
-			<label index="message_invalidNumberOfSeats_formal">Desværre kan dette antal ikke tilmeldes. Venligst registrer max %s pladser.</label>
+			<label index="message_invalidNumberOfSeats">Desværre kan dette antal ikke tilmeldes. Venligst registrer max %s pladser.</label>
 			<label index="message_invalidNumberOfSeats_informal">Desværre kan dette antal ikke tilmeldes. Venligst registrer max %s pladser.</label>
 			<label index="message_willBeAnnounced">Vil blive annonceret</label>
 			<label index="message_forFree">Gratis</label>
 			<label index="message_enough">Åben</label>
-			<label index="message_accessDenied_formal">Desværre har du ikke adgang til denne del af sitet.</label>
+			<label index="message_accessDenied">Desværre har du ikke adgang til denne del af sitet.</label>
 			<label index="message_accessDenied_informal">Desværre har du ikke adgang til denne del af sitet.</label>
 			<label index="email_confirmationSubject">Tilmeldings bekræftelse</label>
 			<label index="email_confirmationOnUnregistrationSubject">Afmeldingsbekræftelse</label>
@@ -321,43 +321,43 @@ En persons tilmelding blev lige til en almindelig tilmelding til arrangementet:<
 			<label index="label_yes">ja</label>
 			<label index="label_no">nein</label>
 			<label index="label_hours">Uhr</label>
-			<label index="message_notLoggedIn_formal">Bitte loggen Sie sich zuerst ein.</label>
+			<label index="message_notLoggedIn">Bitte loggen Sie sich zuerst ein.</label>
 			<label index="message_notLoggedIn_informal">Bitte logge dich zuerst ein.</label>
-			<label index="message_alreadyRegistered_formal">Sie sind für diese Veranstaltung bereits angemeldet.</label>
+			<label index="message_alreadyRegistered">Sie sind für diese Veranstaltung bereits angemeldet.</label>
 			<label index="message_alreadyRegistered_informal">Du bist für diese Veranstaltung bereits angemeldet.</label>
-			<label index="message_userIsBlocked_formal">Sie sind schon für eine Veranstaltung angemeldet, deren Zeiten mit dieser Veranstaltung kollidieren.</label>
+			<label index="message_userIsBlocked">Sie sind schon für eine Veranstaltung angemeldet, deren Zeiten mit dieser Veranstaltung kollidieren.</label>
 			<label index="message_userIsBlocked_informal">Du bist schon für eine Veranstaltung angemeldet, deren Zeiten mit dieser Veranstaltung kollidieren.</label>
 			<label index="message_missingSeminarNumber">Die URL enthält keine Veranstaltungs-ID. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
-			<label index="message_wrongSeminarNumber_formal">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
+			<label index="message_wrongSeminarNumber">Eine Veranstaltung mit dieser Nummer existiert nicht. Wenn Sie diese Fehlermeldung durch einen Link auf unserer Seite bekommen haben, benachrichtigen Sie bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_wrongSeminarNumber_informal">Ein Veranstaltung mit dieser Nummer existiert nicht. Wenn du diese Fehlermeldung durch einen Link auf unserer Seite bekommen hast, benachrichtige bitte den Webmaster. Vielen Dank!</label>
 			<label index="message_noRegistrationNecessary">Für diese Veranstaltung ist keine Anmeldung erforderlich.</label>
 			<label index="message_seminarCancelled">Diese Veranstaltung wurde leider abgesagt.</label>
 			<label index="message_noDate">Diese Veranstaltung hat noch keinen fixen Termin.</label>
 			<label index="message_seminarRegistrationIsClosed">Die Anmeldefrist für diese Veranstaltung ist leider schon vorbei.</label>
 			<label index="message_noVacancies">Es sind leider keine Plätze mehr frei.</label>
-			<label index="message_invalidNumberOfSeats_formal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reservieren Sie maximal %s Plätze.</label>
+			<label index="message_invalidNumberOfSeats">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reservieren Sie maximal %s Plätze.</label>
 			<label index="message_invalidNumberOfSeats_informal">Diese Anzahl Plätze lässt sich leider nicht reservieren. Bitte reserviere maximal %s Plätze.</label>
 			<label index="message_willBeAnnounced">wird noch bekannt gegeben</label>
 			<label index="message_forFree">kostenlos</label>
 			<label index="message_enough">genug</label>
 			<label index="message_fullyBooked">ausgebucht</label>
 			<label index="message_registrationOpensOn">ab %s</label>
-			<label index="message_accessDenied_formal">Zu diesem Teil der Site haben Sie leider keine Zugangsberechtigung.</label>
+			<label index="message_accessDenied">Zu diesem Teil der Site haben Sie leider keine Zugangsberechtigung.</label>
 			<label index="message_accessDenied_informal">Zu diesem Teil der Site hast du leider keine Zugangsberechtigung.</label>
 			<label index="email_confirmationSubject">Anmeldebestätigung</label>
-			<label index="email_confirmationHello_formal">vielen Dank für Ihre Anmeldung zur Veranstaltung &quot;%s&quot;</label>
+			<label index="email_confirmationHello">vielen Dank für Ihre Anmeldung zur Veranstaltung &quot;%s&quot;</label>
 			<label index="email_confirmationHello_informal">vielen Dank für deine Anmeldung zur Veranstaltung &quot;%s&quot;</label>
 			<label index="email_price">zum Gesamtpreis von %s</label>
 			<label index="email_confirmationOnUnregistrationSubject">Abmeldebestätigung</label>
-			<label index="email_confirmationOnUnregistrationHello_formal">hiermit bestätigen wir Ihre Abmeldung von der Veranstaltung &quot;%s&quot;</label>
+			<label index="email_confirmationOnUnregistrationHello">hiermit bestätigen wir Ihre Abmeldung von der Veranstaltung &quot;%s&quot;</label>
 			<label index="email_confirmationOnUnregistrationHello_informal">hiermit bestätigen wir deine Abmeldung von der Veranstaltung &quot;%s&quot;</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject">Anmeldebestätigung für die Warteliste</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_formal">vielen Dank für Ihre Anmeldung für die Warteliste der Veranstaltung &quot;%s&quot;</label>
+			<label index="email_confirmationOnRegistrationForQueueHello">vielen Dank für Ihre Anmeldung für die Warteliste der Veranstaltung &quot;%s&quot;</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_informal">vielen Dank für deine Anmeldung für die Warteliste der Veranstaltung &quot;%s&quot;</label>
 			<label index="email_confirmationOnQueueUpdateSubject">Bestätigung: Anmeldung wurde zu regulärer Anmeldung</label>
-			<label index="email_confirmationOnQueueUpdateHello_formal">Ihre Anmeldung wurde gerade zu einer regulären Anmeldung der Veranstaltung &quot;%s&quot;</label>
+			<label index="email_confirmationOnQueueUpdateHello">Ihre Anmeldung wurde gerade zu einer regulären Anmeldung der Veranstaltung &quot;%s&quot;</label>
 			<label index="email_confirmationOnQueueUpdateHello_informal">deine Anmeldung wurde gerade zu einer regulären Anmeldung der Veranstaltung &quot;%s&quot;</label>
-			<label index="email_unregistrationNotice_formal">Bis zum %s können Sie Ihre Anmeldung kostenfrei stornieren; danach sind Sie zur Zahlung der Veranstaltungsgebühr verpflichtet.</label>
+			<label index="email_unregistrationNotice">Bis zum %s können Sie Ihre Anmeldung kostenfrei stornieren; danach sind Sie zur Zahlung der Veranstaltungsgebühr verpflichtet.</label>
 			<label index="email_unregistrationNotice_informal">Bis zum %s kannst du deine Anmeldung kostenfrei stornieren; danach bist du zur Zahlung der Veranstaltungsgebühr verpflichtet.</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Folgende Veranstaltung hat nun genug Anmeldungen, um durchgeführt zu werden.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">Veranstaltung hat genug Anmeldungen: %d - %s</label>
@@ -427,25 +427,25 @@ das Ende der Absagefrist für die ReferentInnen der Veranstaltung &quot;%event&q
 			<label index="label_status.I.4">Gepensioneerd</label>
 			<label index="label_yes">ja</label>
 			<label index="label_no">nee</label>
-			<label index="message_notLoggedIn_formal">U dient eerst in te loggen voordat u zich kunt registreren voor een evenement.</label>
+			<label index="message_notLoggedIn">U dient eerst in te loggen voordat u zich kunt registreren voor een evenement.</label>
 			<label index="message_notLoggedIn_informal">Log je eerst in om je aan te melden voor een evenement.</label>
-			<label index="message_alreadyRegistered_formal">U heeft zich al geregistreerd voor dit evenement.</label>
+			<label index="message_alreadyRegistered">U heeft zich al geregistreerd voor dit evenement.</label>
 			<label index="message_alreadyRegistered_informal">Je bent al voor dit evenement bijeenkomst aangemeld.</label>
-			<label index="message_userIsBlocked_formal">U heeft zich al geregistreerd voor een bijeenkomst dat samenvalt dit evenement.</label>
+			<label index="message_userIsBlocked">U heeft zich al geregistreerd voor een bijeenkomst dat samenvalt dit evenement.</label>
 			<label index="message_userIsBlocked_informal">Je hebt je al geregistreerd voor een bijeenkomst die samenvalt dit evenement.</label>
-			<label index="message_wrongSeminarNumber_formal">Er is geen evenement bekend onder dit nummer. Wanneer u deze foutmelding krijgt bij gebruik van een link op deze pagina wilt u dan svp de webmaster hiervan op de hoogte brengen. Dank u!</label>
+			<label index="message_wrongSeminarNumber">Er is geen evenement bekend onder dit nummer. Wanneer u deze foutmelding krijgt bij gebruik van een link op deze pagina wilt u dan svp de webmaster hiervan op de hoogte brengen. Dank u!</label>
 			<label index="message_wrongSeminarNumber_informal">Een evenement met dit nummer bestaat niet. Wanneer je een foutmelding hebt gekregen door het gebruik van een link op onze website breng dan aub de webmaster hiervan op de hoogte. Bedankt!</label>
 			<label index="message_noRegistrationNecessary">Voor dit evenement is geen registratie noodzakelijk.</label>
 			<label index="message_seminarCancelled">Helaas, dit evenement is geannuleerd.</label>
 			<label index="message_noDate">Dit evenement heeft nog geen datum.</label>
 			<label index="message_seminarRegistrationIsClosed">De registratieperiode voor dit evenement is helaas al voorbij.</label>
 			<label index="message_noVacancies">Helaas, er zijn geen vrije plaatsen meer beschikbaar.</label>
-			<label index="message_invalidNumberOfSeats_formal">Het aantal plaatsen dat u wilt reserveren is helaas te hoog. U kunt ten hoogste %s plaatsen reserveren.</label>
+			<label index="message_invalidNumberOfSeats">Het aantal plaatsen dat u wilt reserveren is helaas te hoog. U kunt ten hoogste %s plaatsen reserveren.</label>
 			<label index="message_invalidNumberOfSeats_informal">Het aantal plaatsen dat je wilt reserveren is helaas te hoog. Je kunt ten hoogste %s plaatsen reserveren.</label>
 			<label index="message_willBeAnnounced">zal worden aangekondigd</label>
 			<label index="message_forFree">vrij</label>
 			<label index="message_enough">genoeg</label>
-			<label index="message_accessDenied_formal">Sorry, U heeft geen toegang tot dit deel van de website.</label>
+			<label index="message_accessDenied">Sorry, U heeft geen toegang tot dit deel van de website.</label>
 			<label index="message_accessDenied_informal">Sorry, je hebt geen toegang tot dit deel van de website.</label>
 			<label index="email_confirmationSubject">Bevestiging van de registratie</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Uw evenement gaat niet door, wegens niet genoeg deelnemers.</label>
@@ -562,25 +562,25 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="label_waiting_list">список очередников</label>
 			<label index="label_yes">да</label>
 			<label index="label_no">нет</label>
-			<label index="message_notLoggedIn_formal">Пожалуйста, войдите в систему.</label>
+			<label index="message_notLoggedIn">Пожалуйста, войдите в систему.</label>
 			<label index="message_notLoggedIn_informal">Пожалуйста, войдите в систему.</label>
-			<label index="message_alreadyRegistered_formal">Вы уже зарегистрированы на это мероприятие</label>
+			<label index="message_alreadyRegistered">Вы уже зарегистрированы на это мероприятие</label>
 			<label index="message_alreadyRegistered_informal">Ты уже зарегистрированы на это мероприятие.</label>
-			<label index="message_userIsBlocked_formal">Вы уже зарегистрированы на одно мероприятие,которое совподает с этим мероприятием</label>
+			<label index="message_userIsBlocked">Вы уже зарегистрированы на одно мероприятие,которое совподает с этим мероприятием</label>
 			<label index="message_userIsBlocked_informal">Ты уже зарегистрирован на одно мероприятие,которое совподает с этим мероприятием</label>
-			<label index="message_wrongSeminarNumber_formal">Мероприятия с таким номером не существует . Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
+			<label index="message_wrongSeminarNumber">Мероприятия с таким номером не существует . Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
 			<label index="message_wrongSeminarNumber_informal">Мероприятия с таким номером не существует. Если вы полчили эту ошибку, воспользовавшись ссылкой с сайта, сообщите администратору. Спасибо!</label>
 			<label index="message_noRegistrationNecessary">Регистрация на это мероприятие не требуется</label>
 			<label index="message_seminarCancelled">К сожалению, мероприятие было отменено</label>
 			<label index="message_noDate">Для этого мероприятия не указана дата.</label>
 			<label index="message_seminarRegistrationIsClosed">Срок регистрации на это мероприятие истёк.</label>
 			<label index="message_noVacancies">Извините, свободных мест не осталось</label>
-			<label index="message_invalidNumberOfSeats_formal">Извините, вы не можете зарезервировать такое количество мест. Зарезервируйте максимум %s мест.</label>
+			<label index="message_invalidNumberOfSeats">Извините, вы не можете зарезервировать такое количество мест. Зарезервируйте максимум %s мест.</label>
 			<label index="message_invalidNumberOfSeats_informal">Извините, вы не можете зарезервировать такое количество мест. Зарезервируйте максимум %s мест.</label>
 			<label index="message_willBeAnnounced">будет объявлено</label>
 			<label index="message_forFree">свободно</label>
 			<label index="message_enough">достаточно</label>
-			<label index="message_accessDenied_formal">Извините, у вас нет доступа к этой части сайта.</label>
+			<label index="message_accessDenied">Извините, у вас нет доступа к этой части сайта.</label>
 			<label index="message_accessDenied_informal">Извините, у вас нет доступа к этой части сайта.</label>
 			<label index="email_confirmationSubject">Подтверждение регистрации</label>
 			<label index="email_confirmationOnUnregistrationSubject">Подтверждение отказа</label>
@@ -671,25 +671,25 @@ een registratie is zojuist een standaard registratie geworden voor een evenement
 			<label index="label_waiting_list">In lista d'attesa</label>
 			<label index="label_yes">si</label>
 			<label index="label_no">no</label>
-			<label index="message_notLoggedIn_formal">E' pregato di fare il login.</label>
+			<label index="message_notLoggedIn">E' pregato di fare il login.</label>
 			<label index="message_notLoggedIn_informal">Sei pregato di fare il login.</label>
-			<label index="message_alreadyRegistered_formal">Lei è già registrato per questo evento.</label>
+			<label index="message_alreadyRegistered">Lei è già registrato per questo evento.</label>
 			<label index="message_alreadyRegistered_informal">Sei già registrato per questo evento.</label>
-			<label index="message_userIsBlocked_formal">Lei è già registrato per un evento che si svolge negli stessi orari.</label>
+			<label index="message_userIsBlocked">Lei è già registrato per un evento che si svolge negli stessi orari.</label>
 			<label index="message_userIsBlocked_informal">Sei già registrato per un evento che si svolge negli stessi orari.</label>
-			<label index="message_wrongSeminarNumber_formal">Non ci sono eventi con questo codice. Se ha ricevuto questo errore arrivando da un link in queste pagine, gentilmente avverta il webmaster. Grazie!</label>
+			<label index="message_wrongSeminarNumber">Non ci sono eventi con questo codice. Se ha ricevuto questo errore arrivando da un link in queste pagine, gentilmente avverta il webmaster. Grazie!</label>
 			<label index="message_wrongSeminarNumber_informal">Non ci sono eventi con questo codice. Se hai ricevuto questo errore arrivando da un link in queste pagine, gentilmente avverti il webmaster. Grazie!</label>
 			<label index="message_noRegistrationNecessary">Per questo evento non è necessario registrarsi.</label>
 			<label index="message_seminarCancelled">Questo evento è stato cancellato.</label>
 			<label index="message_noDate">La data di questo evento non è ancora stata decisa.</label>
 			<label index="message_seminarRegistrationIsClosed">Spiacente, il periodo utile per registrarsi a questo evento è scaduto.</label>
 			<label index="message_noVacancies">Spiacente, non ci sono posti liberi.</label>
-			<label index="message_invalidNumberOfSeats_formal">Spiacente, questo numero di posti non può essere prenotato. E' possibile riservare al massimo %s posti.</label>
+			<label index="message_invalidNumberOfSeats">Spiacente, questo numero di posti non può essere prenotato. E' possibile riservare al massimo %s posti.</label>
 			<label index="message_invalidNumberOfSeats_informal">Spiacente, questo numero di posti non può essere prenotato. E' possibile riservare al massimo %s posti.</label>
 			<label index="message_willBeAnnounced">verrà annunciato</label>
 			<label index="message_forFree">libero</label>
 			<label index="message_enough">sufficiente</label>
-			<label index="message_accessDenied_formal">Spiacente, lei non ha accesso a questa sezione del sito.</label>
+			<label index="message_accessDenied">Spiacente, lei non ha accesso a questa sezione del sito.</label>
 			<label index="message_accessDenied_informal">Spiacente, non hai accesso a questa sezione del sito.</label>
 			<label index="email_confirmationSubject">Registrazione confermata</label>
 			<label index="email_confirmationOnUnregistrationSubject">Conferma cancellazione registrazione</label>
@@ -782,42 +782,42 @@ la registrazione di un partecipante è stata promossa a regolare per un evento:<
 			<label index="label_waiting_list">liste d'attente</label>
 			<label index="label_yes">Oui</label>
 			<label index="label_no">Non</label>
-			<label index="message_notLoggedIn_formal">Veuillez vous identifier d'abord.</label>
+			<label index="message_notLoggedIn">Veuillez vous identifier d'abord.</label>
 			<label index="message_notLoggedIn_informal">Merci de t'identifier d'abord.</label>
-			<label index="message_alreadyRegistered_formal">Vous êtes déjà enregistré à cet événement.</label>
+			<label index="message_alreadyRegistered">Vous êtes déjà enregistré à cet événement.</label>
 			<label index="message_alreadyRegistered_informal">Tu es déjà enregistré à cet événement.</label>
-			<label index="message_userIsBlocked_formal">Vous êtes déjà enregistré à un événement qui en conflit avec celui-ci.</label>
+			<label index="message_userIsBlocked">Vous êtes déjà enregistré à un événement qui en conflit avec celui-ci.</label>
 			<label index="message_userIsBlocked_informal">Tu es déjà enregistré à un événement qui en conflit avec celui-ci.</label>
-			<label index="message_wrongSeminarNumber_formal">Il n'existe aucun événement portant ce numéro. Si vous voyez ce message après avoir cliqué sur un lien du site, merci de prévenir le webmaster</label>
+			<label index="message_wrongSeminarNumber">Il n'existe aucun événement portant ce numéro. Si vous voyez ce message après avoir cliqué sur un lien du site, merci de prévenir le webmaster</label>
 			<label index="message_wrongSeminarNumber_informal">Il n'existe aucun événement portant ce numéro. Si tu vois ce message après avoir cliqué sur un lien du site, merci de prévenir le webmaster.</label>
 			<label index="message_noRegistrationNecessary">Il n'est nécessaire de s'inscire pour cet événement.</label>
 			<label index="message_seminarCancelled">Malheureusement, cet événement a été annulé.</label>
 			<label index="message_noDate">La date de cet événement n'a pas encore été fixée.</label>
 			<label index="message_seminarRegistrationIsClosed">Désolé, la période d'inscription pour cet événement est dépassée.</label>
 			<label index="message_noVacancies">Désolé, il n'y a plus de place.</label>
-			<label index="message_invalidNumberOfSeats_formal">Désolé, il n'est pas possible de réserver ce nombre de places. Le maximum est de %s.</label>
+			<label index="message_invalidNumberOfSeats">Désolé, il n'est pas possible de réserver ce nombre de places. Le maximum est de %s.</label>
 			<label index="message_invalidNumberOfSeats_informal">Désolé, il n'est pas possible de réserver ce nombre de places. Le maximum est de %s.</label>
 			<label index="message_willBeAnnounced">sera annoncé</label>
 			<label index="message_forFree">gratuit</label>
 			<label index="message_enough">suffisant</label>
 			<label index="message_fullyBooked">complet</label>
 			<label index="message_registrationOpensOn">commence le %s</label>
-			<label index="message_accessDenied_formal">Désolé, vous n'avez pas le droit d'accéder à cette partie du site.</label>
+			<label index="message_accessDenied">Désolé, vous n'avez pas le droit d'accéder à cette partie du site.</label>
 			<label index="message_accessDenied_informal">Désolé, tu n'as pas le droit d'accéder à cette partie du site.</label>
 			<label index="email_confirmationSubject">Confirmation d'inscription</label>
-			<label index="email_confirmationHello_formal">nous vous remercions pour votre inscription à l'événement &quot;%s&quot;</label>
+			<label index="email_confirmationHello">nous vous remercions pour votre inscription à l'événement &quot;%s&quot;</label>
 			<label index="email_confirmationHello_informal">nous te remercions pour ton inscription à l'événement &quot;%s&quot;</label>
 			<label index="email_price">pour le prix total de %s</label>
 			<label index="email_confirmationOnUnregistrationSubject">Confirmation d'annulation d'inscription</label>
-			<label index="email_confirmationOnUnregistrationHello_formal">nous vous confirmons votre désinscription pour l'événement &quot;%s&quot;</label>
+			<label index="email_confirmationOnUnregistrationHello">nous vous confirmons votre désinscription pour l'événement &quot;%s&quot;</label>
 			<label index="email_confirmationOnUnregistrationHello_informal">nous te confirmons ta désinscription pour l'événement &quot;%s&quot;</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject">Confirmation d'inscription sur liste d'attente</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_formal">merci pour votre inscription sur la liste d'attente pour l'événement &quot;%s&quot;</label>
+			<label index="email_confirmationOnRegistrationForQueueHello">merci pour votre inscription sur la liste d'attente pour l'événement &quot;%s&quot;</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_informal">merci pour ton inscription sur la liste d'attente pour l'événement &quot;%s&quot;</label>
 			<label index="email_confirmationOnQueueUpdateSubject">Confirmation de régularisation de votre inscription</label>
-			<label index="email_confirmationOnQueueUpdateHello_formal">Votre inscription pour l'l'évènement  &quot;%s&quot; vient d'être confirmée</label>
+			<label index="email_confirmationOnQueueUpdateHello">Votre inscription pour l'l'évènement  &quot;%s&quot; vient d'être confirmée</label>
 			<label index="email_confirmationOnQueueUpdateHello_informal">Ton inscription pour l'l'évènement  &quot;%s&quot; vient d'être confirmée</label>
-			<label index="email_unregistrationNotice_formal">Vous avez la possibilité de vous désinscrire  gratuitement jusqu'au %s. Passé ce délais, vous devrez payer les frais d'inscription.</label>
+			<label index="email_unregistrationNotice">Vous avez la possibilité de vous désinscrire  gratuitement jusqu'au %s. Passé ce délais, vous devrez payer les frais d'inscription.</label>
 			<label index="email_unregistrationNotice_informal">Tu as la possibilité de te désinscrire  gratuitement jusqu'au %s. Passé ce délais, tu devras payer les frais d'inscription.</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Votre événement a reçu suffisamment d'inscriptions pour avoir lieu.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">L'événement compte assez d'inscriptions: %d - %s</label>
@@ -869,21 +869,21 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="label_seminardata" type="integer">202303574</label>
 			<label index="label_feuserdata" type="integer">104853840</label>
 			<label index="label_attendancedata" type="integer">196013839</label>
-			<label index="message_notLoggedIn_formal" type="integer">264485426</label>
+			<label index="message_notLoggedIn" type="integer">264485426</label>
 			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
-			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
+			<label index="message_alreadyRegistered" type="integer">72254150</label>
 			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
 			<label index="message_seminarCancelled" type="integer">154447024</label>
 			<label index="message_seminarRegistrationIsClosed" type="integer">157436583</label>
 			<label index="message_noVacancies" type="integer">139364947</label>
-			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
+			<label index="message_invalidNumberOfSeats" type="integer">85122580</label>
 			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
 			<label index="message_willBeAnnounced" type="integer">181096808</label>
 			<label index="message_enough" type="integer">249306686</label>
-			<label index="message_accessDenied_formal" type="integer">68141847</label>
+			<label index="message_accessDenied" type="integer">68141847</label>
 			<label index="message_accessDenied_informal" type="integer">68141847</label>
 			<label index="email_confirmationSubject" type="integer">69825439</label>
 			<label index="email_additionalNotificationEnoughRegistrations" type="integer">40292240</label>
@@ -914,7 +914,7 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="message_noDate" type="integer">11811061</label>
 			<label index="label_telephone" type="integer">197928267</label>
 			<label index="label_email" type="integer">146136420</label>
-			<label index="message_userIsBlocked_formal" type="integer">82463404</label>
+			<label index="message_userIsBlocked" type="integer">82463404</label>
 			<label index="message_userIsBlocked_informal" type="integer">82463404</label>
 			<label index="label_title" type="integer">192455458</label>
 			<label index="label_registration_uid" type="integer">262691347</label>
@@ -997,45 +997,45 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="label_waiting_list" type="integer">128272059</label>
 			<label index="label_yes" type="integer">174130624</label>
 			<label index="label_no" type="integer">133839734</label>
-			<label index="message_notLoggedIn_formal" type="integer">264485426</label>
+			<label index="message_notLoggedIn" type="integer">264485426</label>
 			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
-			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
+			<label index="message_alreadyRegistered" type="integer">72254150</label>
 			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
-			<label index="message_userIsBlocked_formal" type="integer">82463404</label>
+			<label index="message_userIsBlocked" type="integer">82463404</label>
 			<label index="message_userIsBlocked_informal" type="integer">82463404</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
 			<label index="message_seminarCancelled" type="integer">154447024</label>
 			<label index="message_noDate" type="integer">11811061</label>
 			<label index="message_seminarRegistrationIsClosed" type="integer">157436583</label>
 			<label index="message_noVacancies" type="integer">139364947</label>
-			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
+			<label index="message_invalidNumberOfSeats" type="integer">85122580</label>
 			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
 			<label index="message_willBeAnnounced" type="integer">181096808</label>
 			<label index="message_forFree" type="integer">178444004</label>
 			<label index="message_enough" type="integer">249306686</label>
 			<label index="message_fullyBooked" type="integer">65406827</label>
 			<label index="message_registrationOpensOn" type="integer">260849167</label>
-			<label index="message_accessDenied_formal" type="integer">68141847</label>
+			<label index="message_accessDenied" type="integer">68141847</label>
 			<label index="message_accessDenied_informal" type="integer">68141847</label>
 			<label index="email_confirmationSubject" type="integer">69825439</label>
 			<label index="email_confirmationHello" type="integer">88233580</label>
 			<label index="email_confirmationHello_informal" type="integer">186378957</label>
 			<label index="email_notificationSubject" type="integer">239440327</label>
 			<label index="email_notificationHello" type="integer">108930896</label>
-			<label index="email_confirmationHello_formal" type="integer">186378957</label>
+			<label index="email_confirmationHello" type="integer">186378957</label>
 			<label index="email_price" type="integer">102789220</label>
 			<label index="email_confirmationOnUnregistrationSubject" type="integer">71851432</label>
-			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">225736015</label>
+			<label index="email_confirmationOnUnregistrationHello" type="integer">225736015</label>
 			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">225736015</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject" type="integer">245357554</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_formal" type="integer">201582578</label>
+			<label index="email_confirmationOnRegistrationForQueueHello" type="integer">201582578</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_informal" type="integer">201582578</label>
 			<label index="email_confirmationOnQueueUpdateSubject" type="integer">141930955</label>
-			<label index="email_confirmationOnQueueUpdateHello_formal" type="integer">43196046</label>
+			<label index="email_confirmationOnQueueUpdateHello" type="integer">43196046</label>
 			<label index="email_confirmationOnQueueUpdateHello_informal" type="integer">43196046</label>
-			<label index="email_unregistrationNotice_formal" type="integer">174712508</label>
+			<label index="email_unregistrationNotice" type="integer">174712508</label>
 			<label index="email_unregistrationNotice_informal" type="integer">174712508</label>
 			<label index="email_additionalNotificationSubject" type="integer">75541883</label>
 			<label index="email_additionalNotificationEnoughRegistrations" type="integer">40292240</label>
@@ -1093,17 +1093,17 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="label_seminardata" type="integer">202303574</label>
 			<label index="label_feuserdata" type="integer">104853840</label>
 			<label index="label_attendancedata" type="integer">196013839</label>
-			<label index="message_notLoggedIn_formal" type="integer">264485426</label>
+			<label index="message_notLoggedIn" type="integer">264485426</label>
 			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
-			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
+			<label index="message_alreadyRegistered" type="integer">72254150</label>
 			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
 			<label index="message_seminarCancelled" type="integer">154447024</label>
 			<label index="message_seminarRegistrationIsClosed" type="integer">157436583</label>
 			<label index="message_noVacancies" type="integer">139364947</label>
-			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
+			<label index="message_invalidNumberOfSeats" type="integer">85122580</label>
 			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
 			<label index="message_willBeAnnounced" type="integer">181096808</label>
 			<label index="email_confirmationSubject" type="integer">69825439</label>
@@ -1131,12 +1131,12 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="label_status.I.4" type="integer">219192007</label>
 			<label index="label_yes" type="integer">174130624</label>
 			<label index="label_no" type="integer">133839734</label>
-			<label index="message_userIsBlocked_formal" type="integer">82463404</label>
+			<label index="message_userIsBlocked" type="integer">82463404</label>
 			<label index="message_userIsBlocked_informal" type="integer">82463404</label>
 			<label index="message_noDate" type="integer">11811061</label>
 			<label index="message_forFree" type="integer">178444004</label>
 			<label index="message_enough" type="integer">249306686</label>
-			<label index="message_accessDenied_formal" type="integer">68141847</label>
+			<label index="message_accessDenied" type="integer">68141847</label>
 			<label index="message_accessDenied_informal" type="integer">68141847</label>
 			<label index="email_additionalNotificationEnoughRegistrations" type="integer">40292240</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject" type="integer">106627365</label>
@@ -1214,23 +1214,23 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="label_status.I.4" type="integer">219192007</label>
 			<label index="label_yes" type="integer">174130624</label>
 			<label index="label_no" type="integer">133839734</label>
-			<label index="message_notLoggedIn_formal" type="integer">264485426</label>
+			<label index="message_notLoggedIn" type="integer">264485426</label>
 			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
-			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
+			<label index="message_alreadyRegistered" type="integer">72254150</label>
 			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
 			<label index="message_seminarCancelled" type="integer">154447024</label>
 			<label index="message_noDate" type="integer">11811061</label>
 			<label index="message_seminarRegistrationIsClosed" type="integer">157436583</label>
 			<label index="message_noVacancies" type="integer">139364947</label>
-			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
+			<label index="message_invalidNumberOfSeats" type="integer">85122580</label>
 			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
 			<label index="message_willBeAnnounced" type="integer">181096808</label>
 			<label index="message_forFree" type="integer">178444004</label>
 			<label index="message_enough" type="integer">249306686</label>
-			<label index="message_accessDenied_formal" type="integer">68141847</label>
+			<label index="message_accessDenied" type="integer">68141847</label>
 			<label index="message_accessDenied_informal" type="integer">68141847</label>
 			<label index="email_confirmationSubject" type="integer">69825439</label>
 			<label index="email_additionalNotificationEnoughRegistrations" type="integer">40292240</label>
@@ -1269,7 +1269,7 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="label_method_of_payment" type="integer">138981420</label>
 			<label index="label_is_full" type="integer">13790082</label>
 			<label index="label_email" type="integer">146136420</label>
-			<label index="message_userIsBlocked_formal" type="integer">82463404</label>
+			<label index="message_userIsBlocked" type="integer">82463404</label>
 			<label index="message_userIsBlocked_informal" type="integer">82463404</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject" type="integer">245357554</label>
 			<label index="email_confirmationOnQueueUpdateSubject" type="integer">141930955</label>
@@ -1336,25 +1336,25 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="label_status.I.4" type="integer">219192007</label>
 			<label index="label_yes" type="integer">174130624</label>
 			<label index="label_no" type="integer">133839734</label>
-			<label index="message_notLoggedIn_formal" type="integer">264485426</label>
+			<label index="message_notLoggedIn" type="integer">264485426</label>
 			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
-			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
+			<label index="message_alreadyRegistered" type="integer">72254150</label>
 			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
-			<label index="message_userIsBlocked_formal" type="integer">82463404</label>
+			<label index="message_userIsBlocked" type="integer">82463404</label>
 			<label index="message_userIsBlocked_informal" type="integer">82463404</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
 			<label index="message_seminarCancelled" type="integer">154447024</label>
 			<label index="message_noDate" type="integer">11811061</label>
 			<label index="message_seminarRegistrationIsClosed" type="integer">157436583</label>
 			<label index="message_noVacancies" type="integer">139364947</label>
-			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
+			<label index="message_invalidNumberOfSeats" type="integer">85122580</label>
 			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
 			<label index="message_willBeAnnounced" type="integer">181096808</label>
 			<label index="message_forFree" type="integer">178444004</label>
 			<label index="message_enough" type="integer">249306686</label>
-			<label index="message_accessDenied_formal" type="integer">68141847</label>
+			<label index="message_accessDenied" type="integer">68141847</label>
 			<label index="message_accessDenied_informal" type="integer">68141847</label>
 			<label index="email_confirmationSubject" type="integer">69825439</label>
 			<label index="email_confirmationOnUnregistrationSubject" type="integer">71851432</label>
@@ -1441,25 +1441,25 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="label_status.I.4" type="integer">219192007</label>
 			<label index="label_yes" type="integer">174130624</label>
 			<label index="label_no" type="integer">133839734</label>
-			<label index="message_notLoggedIn_formal" type="integer">264485426</label>
+			<label index="message_notLoggedIn" type="integer">264485426</label>
 			<label index="message_notLoggedIn_informal" type="integer">264485426</label>
-			<label index="message_alreadyRegistered_formal" type="integer">72254150</label>
+			<label index="message_alreadyRegistered" type="integer">72254150</label>
 			<label index="message_alreadyRegistered_informal" type="integer">72254150</label>
-			<label index="message_userIsBlocked_formal" type="integer">82463404</label>
+			<label index="message_userIsBlocked" type="integer">82463404</label>
 			<label index="message_userIsBlocked_informal" type="integer">82463404</label>
-			<label index="message_wrongSeminarNumber_formal" type="integer">103788042</label>
+			<label index="message_wrongSeminarNumber" type="integer">103788042</label>
 			<label index="message_wrongSeminarNumber_informal" type="integer">103788042</label>
 			<label index="message_noRegistrationNecessary" type="integer">59870455</label>
 			<label index="message_seminarCancelled" type="integer">154447024</label>
 			<label index="message_noDate" type="integer">11811061</label>
 			<label index="message_seminarRegistrationIsClosed" type="integer">157436583</label>
 			<label index="message_noVacancies" type="integer">139364947</label>
-			<label index="message_invalidNumberOfSeats_formal" type="integer">85122580</label>
+			<label index="message_invalidNumberOfSeats" type="integer">85122580</label>
 			<label index="message_invalidNumberOfSeats_informal" type="integer">85122580</label>
 			<label index="message_willBeAnnounced" type="integer">181096808</label>
 			<label index="message_forFree" type="integer">178444004</label>
 			<label index="message_enough" type="integer">249306686</label>
-			<label index="message_accessDenied_formal" type="integer">68141847</label>
+			<label index="message_accessDenied" type="integer">68141847</label>
 			<label index="message_accessDenied_informal" type="integer">68141847</label>
 			<label index="email_confirmationSubject" type="integer">69825439</label>
 			<label index="email_confirmationOnUnregistrationSubject" type="integer">71851432</label>
@@ -1484,16 +1484,16 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="label_unlimited" type="integer">156824688</label>
 			<label index="message_fullyBooked" type="integer">65406827</label>
 			<label index="message_registrationOpensOn" type="integer">260849167</label>
-			<label index="email_confirmationHello_formal" type="integer">186378957</label>
+			<label index="email_confirmationHello" type="integer">186378957</label>
 			<label index="email_confirmationHello_informal" type="integer">186378957</label>
 			<label index="email_price" type="integer">102789220</label>
-			<label index="email_confirmationOnUnregistrationHello_formal" type="integer">225736015</label>
+			<label index="email_confirmationOnUnregistrationHello" type="integer">225736015</label>
 			<label index="email_confirmationOnUnregistrationHello_informal" type="integer">225736015</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_formal" type="integer">201582578</label>
+			<label index="email_confirmationOnRegistrationForQueueHello" type="integer">201582578</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_informal" type="integer">201582578</label>
-			<label index="email_confirmationOnQueueUpdateHello_formal" type="integer">43196046</label>
+			<label index="email_confirmationOnQueueUpdateHello" type="integer">43196046</label>
 			<label index="email_confirmationOnQueueUpdateHello_informal" type="integer">43196046</label>
-			<label index="email_unregistrationNotice_formal" type="integer">174712508</label>
+			<label index="email_unregistrationNotice" type="integer">174712508</label>
 			<label index="email_unregistrationNotice_informal" type="integer">174712508</label>
 			<label index="email_eventTakesPlaceReminderSubject" type="integer">83496300</label>
 			<label index="email_eventTakesPlaceReminder" type="integer">57044606</label>
@@ -1549,43 +1549,43 @@ L'échéance d'annulation pour les conférenciers de l'événement &quot;%event&
 			<label index="label_yes">yes</label>
 			<label index="label_no">no</label>
 			<label index="label_hours">h</label>
-			<label index="message_notLoggedIn_formal">Please log in first.</label>
+			<label index="message_notLoggedIn">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
-			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
+			<label index="message_alreadyRegistered">You already have registered for this event.</label>
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
-			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
+			<label index="message_userIsBlocked">You are already registered for an event that collides with this event.</label>
 			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
 			<label index="message_missingSeminarNumber">The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
 			<label index="message_seminarCancelled">Alas, this event has been canceled.</label>
 			<label index="message_noDate">This event has no date yet.</label>
 			<label index="message_seminarRegistrationIsClosed">Sorry, the registration period for this event is over.</label>
 			<label index="message_noVacancies">Sorry, there are no more vancacies.</label>
-			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
+			<label index="message_invalidNumberOfSeats">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_willBeAnnounced">will be announced</label>
 			<label index="message_forFree">free</label>
 			<label index="message_enough">enough</label>
 			<label index="message_fullyBooked">fully booked</label>
 			<label index="message_registrationOpensOn">starting %s</label>
-			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
+			<label index="message_accessDenied">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
-			<label index="email_confirmationHello_formal">thank you for registering for the event &quot;%s&quot;</label>
+			<label index="email_confirmationHello">thank you for registering for the event &quot;%s&quot;</label>
 			<label index="email_confirmationHello_informal">thank you for registering for the event &quot;%s&quot;</label>
 			<label index="email_price">at the total price of %s</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
-			<label index="email_confirmationOnUnregistrationHello_formal">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnUnregistrationHello">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnUnregistrationHello_informal">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject">Registration for the waiting list confirmation</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_formal">thank you for registering for the waiting list of the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnRegistrationForQueueHello">thank you for registering for the waiting list of the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_informal">thank you for registering for the waiting list of the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnQueueUpdateSubject">Registration became a regular registration confirmation</label>
-			<label index="email_confirmationOnQueueUpdateHello_formal">your registration just has become a regular registration for the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnQueueUpdateHello">your registration just has become a regular registration for the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnQueueUpdateHello_informal">your registration just has become a regular registration for the event &quot;%s&quot;</label>
-			<label index="email_unregistrationNotice_formal">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
+			<label index="email_unregistrationNotice">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
 			<label index="email_unregistrationNotice_informal">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Your event has now enough registrations to be held.</label>
 			<label index="email_additionalNotificationEnoughRegistrationsSubject">Event has enough registrations: %d - %s</label>
@@ -1658,21 +1658,21 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 			<label index="label_seminardata">Seminar data</label>
 			<label index="label_feuserdata">Account data</label>
 			<label index="label_attendancedata">Data that has been entered on registration</label>
-			<label index="message_notLoggedIn_formal">Please log in first.</label>
+			<label index="message_notLoggedIn">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
-			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
+			<label index="message_alreadyRegistered">You already have registered for this event.</label>
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
 			<label index="message_seminarCancelled">Alas, this event has been canceled.</label>
 			<label index="message_seminarRegistrationIsClosed">Sorry, the registration period for this event is over.</label>
 			<label index="message_noVacancies">Sorry, there are no more vancacies.</label>
-			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
+			<label index="message_invalidNumberOfSeats">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_willBeAnnounced">will be announced</label>
 			<label index="message_enough">enough</label>
-			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
+			<label index="message_accessDenied">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Your event has now enough registrations to be held.</label>
@@ -1705,7 +1705,7 @@ someone just has registered for an event:</label>
 			<label index="message_noDate">This event has no date yet.</label>
 			<label index="label_telephone">Phone</label>
 			<label index="label_email">E-mail address</label>
-			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
+			<label index="message_userIsBlocked">You are already registered for an event that collides with this event.</label>
 			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
 			<label index="label_title">Title</label>
 			<label index="label_registration_uid">Ticket ID</label>
@@ -1785,23 +1785,23 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_status.I.4">Retired</label>
 			<label index="label_yes">yes</label>
 			<label index="label_no">no</label>
-			<label index="message_notLoggedIn_formal">Please log in first.</label>
+			<label index="message_notLoggedIn">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
-			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
+			<label index="message_alreadyRegistered">You already have registered for this event.</label>
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
 			<label index="message_seminarCancelled">Alas, this event has been canceled.</label>
 			<label index="message_noDate">This event has no date yet.</label>
 			<label index="message_seminarRegistrationIsClosed">Sorry, the registration period for this event is over.</label>
 			<label index="message_noVacancies">Sorry, there are no more vancacies.</label>
-			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
+			<label index="message_invalidNumberOfSeats">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_willBeAnnounced">will be announced</label>
 			<label index="message_forFree">free</label>
 			<label index="message_enough">enough</label>
-			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
+			<label index="message_accessDenied">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Your event has now enough registrations to be held.</label>
@@ -1842,7 +1842,7 @@ someone just has registered for an event:</label>
 			<label index="label_method_of_payment">Method of payment</label>
 			<label index="label_is_full">Is full</label>
 			<label index="label_email">E-mail address</label>
-			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
+			<label index="message_userIsBlocked">You are already registered for an event that collides with this event.</label>
 			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
 			<label index="email_confirmationOnRegistrationForQueueSubject">Registration for the waiting list confirmation</label>
 			<label index="email_confirmationOnQueueUpdateSubject">Registration became a regular registration confirmation</label>
@@ -1896,25 +1896,25 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_status.I.4">Retired</label>
 			<label index="label_yes">yes</label>
 			<label index="label_no">no</label>
-			<label index="message_notLoggedIn_formal">Please log in first.</label>
+			<label index="message_notLoggedIn">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
-			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
+			<label index="message_alreadyRegistered">You already have registered for this event.</label>
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
-			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
+			<label index="message_userIsBlocked">You are already registered for an event that collides with this event.</label>
 			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
 			<label index="message_seminarCancelled">Alas, this event has been canceled.</label>
 			<label index="message_noDate">This event has no date yet.</label>
 			<label index="message_seminarRegistrationIsClosed">Sorry, the registration period for this event is over.</label>
 			<label index="message_noVacancies">Sorry, there are no more vancacies.</label>
-			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
+			<label index="message_invalidNumberOfSeats">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_willBeAnnounced">will be announced</label>
 			<label index="message_forFree">free</label>
 			<label index="message_enough">enough</label>
-			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
+			<label index="message_accessDenied">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
 			<label index="email_additionalNotificationEnoughRegistrations">Your event has now enough registrations to be held.</label>
@@ -2024,25 +2024,25 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_status.I.4">Retired</label>
 			<label index="label_yes">yes</label>
 			<label index="label_no">no</label>
-			<label index="message_notLoggedIn_formal">Please log in first.</label>
+			<label index="message_notLoggedIn">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
-			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
+			<label index="message_alreadyRegistered">You already have registered for this event.</label>
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
-			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
+			<label index="message_userIsBlocked">You are already registered for an event that collides with this event.</label>
 			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
 			<label index="message_seminarCancelled">Alas, this event has been canceled.</label>
 			<label index="message_noDate">This event has no date yet.</label>
 			<label index="message_seminarRegistrationIsClosed">Sorry, the registration period for this event is over.</label>
 			<label index="message_noVacancies">Sorry, there are no more vancacies.</label>
-			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
+			<label index="message_invalidNumberOfSeats">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_willBeAnnounced">will be announced</label>
 			<label index="message_forFree">free</label>
 			<label index="message_enough">enough</label>
-			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
+			<label index="message_accessDenied">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
@@ -2137,25 +2137,25 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_status.I.4">Retired</label>
 			<label index="label_yes">yes</label>
 			<label index="label_no">no</label>
-			<label index="message_notLoggedIn_formal">Please log in first.</label>
+			<label index="message_notLoggedIn">Please log in first.</label>
 			<label index="message_notLoggedIn_informal">Please log in first.</label>
-			<label index="message_alreadyRegistered_formal">You already have registered for this event.</label>
+			<label index="message_alreadyRegistered">You already have registered for this event.</label>
 			<label index="message_alreadyRegistered_informal">You already have registered for this event.</label>
-			<label index="message_userIsBlocked_formal">You are already registered for an event that collides with this event.</label>
+			<label index="message_userIsBlocked">You are already registered for an event that collides with this event.</label>
 			<label index="message_userIsBlocked_informal">You are already registered for an event that collides with this event.</label>
-			<label index="message_wrongSeminarNumber_formal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
+			<label index="message_wrongSeminarNumber">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_wrongSeminarNumber_informal">There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</label>
 			<label index="message_noRegistrationNecessary">For this event, no registration is necessary.</label>
 			<label index="message_seminarCancelled">Alas, this event has been canceled.</label>
 			<label index="message_noDate">This event has no date yet.</label>
 			<label index="message_seminarRegistrationIsClosed">Sorry, the registration period for this event is over.</label>
 			<label index="message_noVacancies">Sorry, there are no more vancacies.</label>
-			<label index="message_invalidNumberOfSeats_formal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
+			<label index="message_invalidNumberOfSeats">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_invalidNumberOfSeats_informal">Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</label>
 			<label index="message_willBeAnnounced">will be announced</label>
 			<label index="message_forFree">free</label>
 			<label index="message_enough">enough</label>
-			<label index="message_accessDenied_formal">Sorry, you don't have access to this part of the site.</label>
+			<label index="message_accessDenied">Sorry, you don't have access to this part of the site.</label>
 			<label index="message_accessDenied_informal">Sorry, you don't have access to this part of the site.</label>
 			<label index="email_confirmationSubject">Registration confirmation</label>
 			<label index="email_confirmationOnUnregistrationSubject">Unregistration confirmation</label>
@@ -2188,16 +2188,16 @@ someone's registration just has become a regular registration of an event:</labe
 			<label index="label_unlimited">unlimited</label>
 			<label index="message_fullyBooked">fully booked</label>
 			<label index="message_registrationOpensOn">starting %s</label>
-			<label index="email_confirmationHello_formal">thank you for registering for the event &quot;%s&quot;</label>
+			<label index="email_confirmationHello">thank you for registering for the event &quot;%s&quot;</label>
 			<label index="email_confirmationHello_informal">thank you for registering for the event &quot;%s&quot;</label>
 			<label index="email_price">at the total price of %s</label>
-			<label index="email_confirmationOnUnregistrationHello_formal">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnUnregistrationHello">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnUnregistrationHello_informal">hereby, we confirm your unregistration from the event &quot;%s&quot;</label>
-			<label index="email_confirmationOnRegistrationForQueueHello_formal">thank you for registering for the waiting list of the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnRegistrationForQueueHello">thank you for registering for the waiting list of the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnRegistrationForQueueHello_informal">thank you for registering for the waiting list of the event &quot;%s&quot;</label>
-			<label index="email_confirmationOnQueueUpdateHello_formal">your registration just has become a regular registration for the event &quot;%s&quot;</label>
+			<label index="email_confirmationOnQueueUpdateHello">your registration just has become a regular registration for the event &quot;%s&quot;</label>
 			<label index="email_confirmationOnQueueUpdateHello_informal">your registration just has become a regular registration for the event &quot;%s&quot;</label>
-			<label index="email_unregistrationNotice_formal">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
+			<label index="email_unregistrationNotice">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
 			<label index="email_unregistrationNotice_informal">You will be able to unregister for free until %s. After this date you will have to pay the event fee.</label>
 			<label index="email_eventTakesPlaceReminderSubject">&quot;%event&quot; begins in %days days</label>
 			<label index="email_eventTakesPlaceReminder">Hello %organizer,

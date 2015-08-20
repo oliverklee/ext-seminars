@@ -6850,7 +6850,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->fixture->piVars['seminar'] = $date;
 
 		self::assertNotContains(
-			$this->fixture->translate('label_your_user_data_formal'),
+			$this->fixture->translate('label_your_user_data'),
 			$this->fixture->main('', array())
 		);
 	}

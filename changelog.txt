@@ -91,6 +91,9 @@ Localization:
 - [#3852] Update the French localization, thanks to Martin Rebetez
 
 Bug fixes:
+- [#4746] Salutation in the thank-you e-mail is mixed up
+- [#4235] Registrationmanager::setEMailIntroduction might build a nonsense introduction
+- [#5277] Test failure in Tx_seminars_Service_RegistrationManagerTest
 - [#5357] Test failure in tx_seminars_OldModel_EventTest
 - [#5364] Search by start date ignores then-running events
 - [#5359] Action links don't trigger actions in Firefox

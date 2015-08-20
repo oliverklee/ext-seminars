@@ -1371,10 +1371,12 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	private function setEMailIntroduction($helloSubjectPrefix, tx_seminars_registration $registration) {
 		/** @var $salutation tx_seminars_EmailSalutation */
 		$salutation = t3lib_div::makeInstance('tx_seminars_EmailSalutation');
-		$this->setMarker('salutation', $salutation->getSalutation($registration->getFrontEndUser()));
+		$salutationText = $salutation->getSalutation($registration->getFrontEndUser());
+		$this->setMarker('salutation', $salutationText);
 
 		$event = $registration->getSeminarObject();
-		$introduction = $salutation->createIntroduction($this->translate('email_' . $helloSubjectPrefix . 'Hello'), $event);
+		$introductionTemplate = $this->translate('email_' . $helloSubjectPrefix . 'Hello');
+		$introduction = $salutation->createIntroduction($introductionTemplate, $event);
 
 		if ($registration->hasTotalPrice()) {
 			$introduction .= ' ' . sprintf($this->translate('email_price'), $registration->getTotalPrice());

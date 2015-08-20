@@ -29,7 +29,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	/**
 	 * @var tx_seminars_EmailSalutation the fixture the tests relate to
 	 */
-	private $fixture = NULL;
+	private $subject = NULL;
 
 	/**
 	 * @var array backed-up extension configuration of the TYPO3 configuration
@@ -44,7 +44,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
-		$this->fixture = new tx_seminars_EmailSalutation();
+		$this->subject = new tx_seminars_EmailSalutation();
 		$configuration = new Tx_Oelib_Configuration();
 		$configuration->setAsString('salutation', 'formal');
 		Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
@@ -132,7 +132,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	public function getSalutationReturnsUsernameOfRegistration() {
 		self::assertContains(
 			'Foo',
-			$this->fixture->getSalutation($this->createFrontEndUser())
+			$this->subject->getSalutation($this->createFrontEndUser())
 		);
 	}
 
@@ -146,7 +146,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 
 		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_0'),
-			$this->fixture->getSalutation($user)
+			$this->subject->getSalutation($user)
 		);
 	}
 
@@ -161,7 +161,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_0') .
 				' ' . $user->getLastOrFullName(),
-			$this->fixture->getSalutation($user)
+			$this->subject->getSalutation($user)
 		);
 	}
 
@@ -176,7 +176,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
 				->translate('email_hello_formal_1'),
-			$this->fixture->getSalutation($user)
+			$this->subject->getSalutation($user)
 		);
 	}
 
@@ -191,7 +191,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_1') .
 				' ' . $user->getLastOrFullName(),
-			$this->fixture->getSalutation($user)
+			$this->subject->getSalutation($user)
 		);
 	}
 
@@ -206,7 +206,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
 				->translate('email_hello_formal_99'),
-			$this->fixture->getSalutation($user)
+			$this->subject->getSalutation($user)
 		);
 	}
 
@@ -222,7 +222,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
 				->translate('email_salutation_title_99') . ' ' .
 				$user->getLastOrFullName(),
-			$this->fixture->getSalutation($user)
+			$this->subject->getSalutation($user)
 		);
 	}
 
@@ -237,7 +237,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
 					->translate('email_hello_informal'),
-			$this->fixture->getSalutation($user)
+			$this->subject->getSalutation($user)
 		);
 	}
 
@@ -251,8 +251,93 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 
 		self::assertContains(
 			$user->getLastOrFullName(),
-			$this->fixture->getSalutation($user)
+			$this->subject->getSalutation($user)
 		);
+	}
+
+	/**
+	 * Returns all valid genders.
+	 *
+	 * @return int[][]
+	 */
+	public function genderDataProvider() {
+		return array(
+			'male' => array(0),
+			'female' => array(1),
+			'unknown (old)' => array(2),
+			'unknown' => array(99),
+		);
+	}
+
+	/**
+	 * @test
+	 * @param int $gender
+	 * @dataProvider genderDataProvider
+	 */
+	public function getSalutationForFormalSalutationModeContainsNoRawLabelKeys($gender) {
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'formal');
+
+		$user = $this->createFrontEndUser($gender);
+		$salutation = $this->subject->getSalutation($user);
+
+		self::assertNotContains(
+			'_',
+			$salutation
+		);
+		self::assertNotContains(
+			'salutation',
+			$salutation
+		);
+		self::assertNotContains(
+			'email',
+			$salutation
+		);
+		self::assertNotContains(
+			'formal',
+			$salutation
+		);
+	}
+
+	/**
+	 * @test
+	 * @param int $gender
+	 * @dataProvider genderDataProvider
+	 */
+	public function getSalutationForInformalSalutationModeContainsNoRawLabelKeys($gender) {
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'informal');
+
+		$user = $this->createFrontEndUser($gender);
+		$salutation = $this->subject->getSalutation($user);
+
+		$this->assertNotContainsRawLabelKey($salutation);
+	}
+
+	/**
+	 * @test
+	 * @param int $gender
+	 * @dataProvider genderDataProvider
+	 */
+	public function getSalutationForNoSalutationModeContainsNoRawLabelKeys($gender) {
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', '');
+
+		$user = $this->createFrontEndUser($gender);
+		$salutation = $this->subject->getSalutation($user);
+
+		$this->assertNotContainsRawLabelKey($salutation);
+	}
+
+	/**
+	 * Checks that $string does not contain a raw label key.
+	 *
+	 * @param string $string
+	 *
+	 * @return void
+	 */
+	private function assertNotContainsRawLabelKey($string) {
+		self::assertNotContains('_', $string);
+		self::assertNotContains('salutation', $string);
+		self::assertNotContains('email', $string);
+		self::assertNotContains('formal', $string);
 	}
 
 	/*
@@ -274,7 +359,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']
 			['modifyEmailSalutation'][$hookClassName] = $hookClassName;
 
-		$this->fixture->getSalutation($this->createFrontEndUser());
+		$this->subject->getSalutation($this->createFrontEndUser());
 	}
 
 	/**
@@ -301,12 +386,24 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']
 			['modifyEmailSalutation'][$hookClassName2] = $hookClassName2;
 
-		$this->fixture->getSalutation($this->createFrontEndUser());
+		$this->subject->getSalutation($this->createFrontEndUser());
 	}
 
 	/*
 	 * Tests concerning createIntroduction
 	 */
+
+	/**
+	 * @test
+	 * @expectedException \InvalidArgumentException
+	 */
+	public function createIntroductionWithEmptyBeginThrowsException() {
+		$eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+
+		$event = new tx_seminars_seminarchild($eventUid, array());
+
+		$this->subject->createIntroduction('', $event);
+	}
 
 	/**
 	 * @test
@@ -324,7 +421,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 
 		self::assertContains(
 			strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME']),
-			$this->fixture->createIntroduction('%s', $event)
+			$this->subject->createIntroduction('%s', $event)
 		);
 	}
 
@@ -352,7 +449,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			strftime($dateFormatD, $GLOBALS['SIM_EXEC_TIME']) .
 				'-' .
 				strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY),
-			$this->fixture->createIntroduction('%s', $event)
+			$this->subject->createIntroduction('%s', $event)
 		);
 	}
 
@@ -374,7 +471,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 
 		self::assertContains(
 			strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']),
-			$this->fixture->createIntroduction('%s', $event)
+			$this->subject->createIntroduction('%s', $event)
 		);
 	}
 
@@ -405,7 +502,76 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 				$translator->translate('email_timeFrom'),
 				$timeInsert
 			),
-			$this->fixture->createIntroduction('%s', $event)
+			$this->subject->createIntroduction('%s', $event)
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createIntroductionForFormalSalutationModeContainsNoRawLabelKeys() {
+		$salutation = 'formal';
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', $salutation);
+
+		$dateFormatYMD = '%d.%m.%Y';
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
+		);
+
+		$event = new tx_seminars_seminarchild(
+			$eventUid,
+			array('dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation)
+		);
+
+		$introduction = $this->subject->createIntroduction('%s', $event);
+
+		$this->assertNotContainsRawLabelKey($introduction);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createIntroductionForInformalSalutationModeContainsNoRawLabelKeys() {
+		$salutation = 'informal';
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', $salutation);
+
+		$dateFormatYMD = '%d.%m.%Y';
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
+		);
+
+		$event = new tx_seminars_seminarchild(
+			$eventUid,
+			array('dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation)
+		);
+
+		$introduction = $this->subject->createIntroduction('%s', $event);
+
+		$this->assertNotContainsRawLabelKey($introduction);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createIntroductionForNoSalutationModeContainsNoRawLabelKeys() {
+		$salutation = '';
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', $salutation);
+
+		$dateFormatYMD = '%d.%m.%Y';
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
+		);
+
+		$event = new tx_seminars_seminarchild(
+			$eventUid,
+			array('dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation)
+		);
+
+		$introduction = $this->subject->createIntroduction('%s', $event);
+
+		$this->assertNotContainsRawLabelKey($introduction);
 	}
 }
