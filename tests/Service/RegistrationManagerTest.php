@@ -2199,6 +2199,22 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
+	public function notifyAttendeeMailBodyNotContainsRawTemplateMarkers() {
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyAttendee($registration, $pi1);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function notifyAttendeeMailBodyContainsRegistrationFood() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$pi1 = new tx_seminars_FrontEnd_DefaultController();
@@ -3204,6 +3220,18 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		);
 	}
 
+	/**
+	 * Checks that $string does not contain a raw label key.
+	 *
+	 * @param string $string
+	 *
+	 * @return void
+	 */
+	private function assertNotContainsRawLabelKey($string) {
+		self::assertNotContains('_', $string);
+		self::assertNotContains('salutation', $string);
+		self::assertNotContains('formal', $string);
+	}
 
 	/*
 	 * Tests concerning the salutation
@@ -3549,6 +3577,297 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForInformalSalutationNotContainsRawTemplateMarkers() {
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+			->setAsString('salutation', 'informal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndGenderUnknownNotContainsRawTemplateMarkers() {
+		if (Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+			self::markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
+		}
+
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+			->setAsString('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndGenderMaleNotContainsRawTemplateMarkers() {
+		if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+			self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
+		}
+
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+			->setAsString('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com', 'gender' => 0)
+		);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndGenderFemaleNotContainsRawTemplateMarkers() {
+		if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+			self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
+		}
+
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+			->setAsString('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com', 'gender' => 1)
+		);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndConfirmationNotContainsRawTemplateMarkers() {
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForInformalSalutationAndConfirmationNotContainsRawTemplateMarkers() {
+		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
+		$this->fixture->setConfigurationValue('salutation', 'informal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee($registration, $pi1);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndUnregistrationNotContainsRawTemplateMarkers() {
+		$this->fixture->setConfigurationValue(
+			'sendConfirmationOnUnregistration', TRUE
+		);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnUnregistration'
+		);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForInformalSalutationAndUnregistrationNotContainsRawTemplateMarkers() {
+		$this->fixture->setConfigurationValue(
+			'sendConfirmationOnUnregistration', TRUE
+		);
+		$this->fixture->setConfigurationValue('salutation', 'informal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnUnregistration'
+		);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndQueueConfirmationNotContainsRawTemplateMarkers() {
+		$this->fixture->setConfigurationValue(
+			'sendConfirmationOnRegistrationForQueue', TRUE
+		);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnRegistrationForQueue'
+		);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForInformalSalutationAndQueueConfirmationNotContainsRawTemplateMarkers() {
+		$this->fixture->setConfigurationValue(
+			'sendConfirmationOnRegistrationForQueue', TRUE
+		);
+		$this->fixture->setConfigurationValue('salutation', 'informal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnRegistrationForQueue'
+		);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForFormalSalutationAndQueueUpdateNotContainsRawTemplateMarkers() {
+		$this->fixture->setConfigurationValue(
+			'sendConfirmationOnQueueUpdate', TRUE
+		);
+		$this->fixture->setConfigurationValue('salutation', 'formal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnQueueUpdate'
+		);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function notifyAttendeeForInformalSalutationAndQueueUpdateNotContainsRawTemplateMarkers() {
+		$this->fixture->setConfigurationValue(
+			'sendConfirmationOnQueueUpdate', TRUE
+		);
+		$this->fixture->setConfigurationValue('salutation', 'informal');
+		$registration = $this->createRegistration();
+		$this->testingFramework->changeRecord(
+			'fe_users', $registration->getFrontEndUser()->getUid(),
+			array('email' => 'foo@bar.com')
+		);
+		$pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$pi1->init();
+
+		$this->fixture->notifyAttendee(
+			$registration, $pi1, 'confirmationOnQueueUpdate'
+		);
+
+		$this->assertNotContainsRawLabelKey(
+			$this->mailer->getFirstSentEmail()->getBody()
+		);
+	}
 
 	/*
 	 * Tests concerning the unregistration notice

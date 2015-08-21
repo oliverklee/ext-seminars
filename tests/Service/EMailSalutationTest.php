@@ -336,7 +336,6 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	private function assertNotContainsRawLabelKey($string) {
 		self::assertNotContains('_', $string);
 		self::assertNotContains('salutation', $string);
-		self::assertNotContains('email', $string);
 		self::assertNotContains('formal', $string);
 	}
 

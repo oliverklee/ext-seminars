@@ -27,7 +27,7 @@
 			<label index="label_lodgings">Selected lodging options</label>
 			<label index="label_accommodation">Accommodation</label>
 			<label index="label_foods">Selected food options</label>
-			<label index="label_foods">Food</label>
+			<label index="label_food">Food</label>
 			<label index="label_kids">Number of kids</label>
 			<label index="label_price">Price</label>
 			<label index="label_price_general">Price</label>
