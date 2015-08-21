@@ -121,8 +121,8 @@ class tx_seminars_EmailSalutation {
 		$result .= ' ' . sprintf($this->translator->translate('email_eventDate'), $event->getDate('-'));
 
 		if ($event->hasTime() && !$event->hasTimeslots()) {
-			$timeToLabel = $this->translator->translate('email_timeTo');
-			$time = $event->getTime(' ' . $timeToLabel . ' ');
+			$timeToLabelWithPlaceholders = $this->translator->translate('email_timeTo');
+			$time = $event->getTime(' ' . $timeToLabelWithPlaceholders . ' ');
 			$label = ' ' . (!$event->isOpenEnded()
 				? $this->translator->translate('email_timeFrom')
 				: $this->translator->translate('email_timeAt'));

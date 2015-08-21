@@ -210,7 +210,8 @@ abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 		if (($beginTime !== $endTime) && $this->hasEndTime()) {
 			$result .= $dash . $endTime;
 		}
-		$result .= ' ' . $this->translate('label_hours');
+		$hours = $this->translate('label_hours');
+		$result .= ' ' . $hours;
 
 		return $result;
 	}

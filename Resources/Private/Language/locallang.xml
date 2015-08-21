@@ -22,6 +22,7 @@
 			<label index="email_timeFrom">from %s</label>
 			<label index="email_timeAt">at %s</label>
 			<label index="email_timeTo">to</label>
+			<label index="label_hours">h</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="email_hello_informal">Hallo</label>
@@ -32,9 +33,10 @@
 			<label index="email_salutation_title_0">Herr</label>
 			<label index="email_salutation_title_1">Frau</label>
 			<label index="email_eventDate">am %s</label>
-			<label index="email_timeFrom">von %s Uhr</label>
+			<label index="email_timeFrom">von %s</label>
 			<label index="email_timeAt">um %s Uhr</label>
 			<label index="email_timeTo">bis</label>
+			<label index="label_hours">Uhr</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="email_hello_informal">Cher</label>

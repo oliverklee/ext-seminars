@@ -488,19 +488,37 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			)
 		);
 
-		$event = new tx_seminars_seminarchild($eventUid, array(
-			'timeFormat' => $timeFormat,
-		));
+		$event = new tx_seminars_seminarchild($eventUid, array('timeFormat' => $timeFormat,));
 		$translator = tx_oelib_TranslatorRegistry::getInstance()->get('seminars');
 		$timeInsert = strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']) . ' ' .
 			$translator->translate('email_timeTo') . ' ' .
 			strftime($timeFormat, $endDate);
 
 		self::assertContains(
-			sprintf(
-				$translator->translate('email_timeFrom'),
-				$timeInsert
-			),
+			sprintf($translator->translate('email_timeFrom'), $timeInsert),
+			$this->subject->createIntroduction('%s', $event)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createIntroductionForEventWithStartAndEndOnOneDayContainsDate() {
+		$dateFormat = '%d.%m.%Y';
+		$endDate = $GLOBALS['SIM_EXEC_TIME'] + 3600;
+		$eventUid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			array(
+				'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
+				'end_date' => $endDate,
+			)
+		);
+
+		$event = new tx_seminars_seminarchild($eventUid, array('dateFormatYMD' => $dateFormat));
+		$formattedDate = strftime($dateFormat, $GLOBALS['SIM_EXEC_TIME']);
+
+		self::assertContains(
+			$formattedDate,
 			$this->subject->createIntroduction('%s', $event)
 		);
 	}
