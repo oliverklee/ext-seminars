@@ -8521,7 +8521,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Data provider for testing the canViewRegistrationsList function
 	 * with default access and access only for attendees and managers.
 	 *
-	 * @return array[] test data for canViewRegistrationsList with each row
+	 * @return mixed[][] test data for canViewRegistrationsList with each row
 	 *               having the following elements:
 	 *               [expected] boolean: expected value (TRUE or FALSE)
 	 *               [loggedIn] boolean: whether a user is logged in
@@ -8532,9 +8532,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 *               [whichPlugin] string: value for that parameter
 	 *               [registrationsListPID] integer: value for that parameter
 	 *               [registrationsVipListPID] integer: value for that parameter
-	 *
-	 * @see canViewRegistrationsListWithNeedsRegistrationAndDefaultAccess
-	 * @see canViewRegistrationsListWithNeedsRegistrationAndAttendeesManagersAccess
 	 */
 	public function canViewRegistrationsListDataProvider() {
 		return array(
@@ -8764,15 +8761,13 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Data provider for the canViewRegistrationsForCsvExportListDataProvider
 	 * test.
 	 *
-	 * @return array[] test data for canViewRegistrationsList with each row
+	 * @return bool[][] test data for canViewRegistrationsList with each row
 	 *               having the following elements:
 	 *               [expected] boolean: expected value (TRUE or FALSE)
 	 *               [loggedIn] boolean: whether a user is logged in
 	 *               [isVip] boolean: whether the logged-in user is a VIP
 	 *                                that event
 	 *               [allowCsvExportForVips] boolean: that configuration value
-	 *
-	 * @see canViewRegistrationsListForCsvExport
 	 */
 	public function canViewRegistrationsForCsvExportListDataProvider() {
 		return array(
@@ -8842,7 +8837,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Data provider for testing the canViewRegistrationsList function
 	 * with login access.
 	 *
-	 * @return array[] test data for canViewRegistrationsList with each row
+	 * @return mixed[][] test data for canViewRegistrationsList with each row
 	 *               having the following elements:
 	 *               [expected] boolean: expected value (TRUE or FALSE)
 	 *               [loggedIn] boolean: whether a user is logged in
@@ -8853,8 +8848,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 *               [whichPlugin] string: value for that parameter
 	 *               [registrationsListPID] integer: value for that parameter
 	 *               [registrationsVipListPID] integer: value for that parameter
-	 *
-	 * @see canViewRegistrationsListWithNeedsRegistrationAndLoginAccess
 	 */
 	public function canViewRegistrationsListDataProviderForLoggedIn() {
 		return array(
@@ -9047,7 +9040,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Data provider for testing the canViewRegistrationsList function
 	 * with world access.
 	 *
-	 * @return array[] test data for canViewRegistrationsList with each row
+	 * @return mixed[][] test data for canViewRegistrationsList with each row
 	 *               having the following elements:
 	 *               [expected] boolean: expected value (TRUE or FALSE)
 	 *               [loggedIn] boolean: whether a user is logged in
@@ -9058,8 +9051,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 *               [whichPlugin] string: value for that parameter
 	 *               [registrationsListPID] integer: value for that parameter
 	 *               [registrationsVipListPID] integer: value for that parameter
-	 *
-	 * @see canViewRegistrationsListWithNeedsRegistrationAndWorldAccess
 	 */
 	public function canViewRegistrationsListDataProviderForWorld() {
 		return array(
@@ -9257,6 +9248,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function canViewRegistrationsListMessageWithoutNeededRegistrationReturnsNoRegistrationMessage() {
+		/** @var tx_seminars_seminar|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock('tx_seminars_seminar', array('needsRegistration'), array(), '', FALSE);
 		$fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(FALSE));
 		$fixture->init();
@@ -9271,15 +9263,14 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function canViewRegistrationsListMessageForListAndNoLoginAndAttendeesAccessReturnsPleaseLoginMessage() {
+		/** @var tx_seminars_seminar|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock('tx_seminars_seminar', array('needsRegistration'), array(), '', FALSE);
 		$fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(TRUE));
 		$fixture->init();
 
 		self::assertSame(
 			$fixture->translate('message_notLoggedIn'),
-			$fixture->canViewRegistrationsListMessage(
-				'list_registrations', 'attendees_and_managers'
-			)
+			$fixture->canViewRegistrationsListMessage('list_registrations', 'attendees_and_managers')
 		);
 	}
 
@@ -9287,15 +9278,14 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function canViewRegistrationsListMessageForListAndNoLoginAndLoginAccessReturnsPleaseLoginMessage() {
+		/** @var tx_seminars_seminar|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock('tx_seminars_seminar', array('needsRegistration'), array(), '', FALSE);
 		$fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(TRUE));
 		$fixture->init();
 
 		self::assertSame(
 			$fixture->translate('message_notLoggedIn'),
-			$fixture->canViewRegistrationsListMessage(
-				'list_registrations', 'login'
-			)
+			$fixture->canViewRegistrationsListMessage('list_registrations', 'login')
 		);
 	}
 
@@ -9303,15 +9293,14 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function canViewRegistrationsListMessageForListAndNoLoginAndWorldAccessReturnsEmptyString() {
+		/** @var tx_seminars_seminar|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock('tx_seminars_seminar', array('needsRegistration'), array(), '', FALSE);
 		$fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(TRUE));
 		$fixture->init();
 
 		self::assertSame(
 			'',
-			$fixture->canViewRegistrationsListMessage(
-				'list_registrations', 'world'
-			)
+			$fixture->canViewRegistrationsListMessage('list_registrations', 'world')
 		);
 	}
 
@@ -9319,15 +9308,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Data provider that returns all possible access level codes for the
 	 * FE registration lists.
 	 *
-	 * @return array[] the possible access levels, will not be empty
-	 *
-	 * @see canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage
+	 * @return string[][] the possible access levels, will not be empty
 	 */
 	public function registrationListAccessLevelsDataProvider() {
 		return array(
 			'attendeesAndManagers' => array('attendees_and_managers'),
 			'login' => array('login'),
-			'world' => array('world'),
 		);
 	}
 
@@ -9340,18 +9326,32 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 *
 	 * @return void
 	 */
-	public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage(
-		$accessLevel
-	) {
+	public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage($accessLevel) {
+		/** @var tx_seminars_seminar|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock('tx_seminars_seminar', array('needsRegistration'), array(), '', FALSE);
 		$fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(TRUE));
 		$fixture->init();
 
 		self::assertSame(
 			$fixture->translate('message_notLoggedIn'),
-			$fixture->canViewRegistrationsListMessage(
-				'list_vip_registrations', $accessLevel
-			)
+			$fixture->canViewRegistrationsListMessage('list_vip_registrations', $accessLevel)
+		);
+	}
+
+	/**
+	 * @test
+	 *
+	 * @return void
+	 */
+	public function canViewRegistrationsListMessageForVipListAndWorldAccessAndNoLoginReturnsEmptyString() {
+		/** @var tx_seminars_seminar|PHPUnit_Framework_MockObject_MockObject $fixture */
+		$fixture = $this->getMock('tx_seminars_seminar', array('needsRegistration'), array(), '', FALSE);
+		$fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(TRUE));
+		$fixture->init();
+
+		self::assertSame(
+			'',
+			$fixture->canViewRegistrationsListMessage('list_vip_registrations', 'world')
 		);
 	}
 
@@ -9359,30 +9359,16 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * Data provider that returns all possible parameter combinations for
 	 * canViewRegistrationsList as called from canViewRegistrationsListMessage.
 	 *
-	 * @return array[] the possible parameter combinations, will not be empty
-	 *
-	 * @see canViewRegistrationsListMessageWithLoginRoutesParameters
+	 * @return string[][] the possible parameter combinations, will not be empty
 	 */
 	public function registrationListParametersDataProvider() {
 		return array(
-			'attendeesAndManagers' => array(
-				'list_registrations', 'attendees_and_managers'
-			),
-			'login' => array(
-				'list_registrations', 'login'
-			),
-			'world' => array(
-				'list_registrations', 'world'
-			),
-			'attendeesAndManagersVip' => array(
-				'list_vip_registrations', 'attendees_and_managers'
-			),
-			'loginVip' => array(
-				'list_vip_registrations', 'login'
-			),
-			'worldVip' => array(
-				'list_vip_registrations', 'world'
-			),
+			'attendeesAndManagers' => array('list_registrations', 'attendees_and_managers'),
+			'login' => array('list_registrations', 'login'),
+			'world' => array('list_registrations', 'world'),
+			'attendeesAndManagersVip' => array('list_vip_registrations', 'attendees_and_managers'),
+			'loginVip' => array('list_vip_registrations', 'login'),
+			'worldVip' => array('list_vip_registrations', 'world'),
 		);
 	}
 
@@ -9396,16 +9382,15 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 *
 	 * @return void
 	 */
-	public function canViewRegistrationsListMessageWithLoginRoutesParameters(
-		$whichPlugin, $accessLevel
-	) {
+	public function canViewRegistrationsListMessageWithLoginRoutesParameters($whichPlugin, $accessLevel) {
+		/** @var tx_seminars_seminar|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			'tx_seminars_seminar',
 			array('needsRegistration', 'canViewRegistrationsList'),
 			array(), '', FALSE
 		);
 		$fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(TRUE));
-		$fixture->expects(self::once())->method('canViewRegistrationsList')
+		$fixture->expects(self::any())->method('canViewRegistrationsList')
 			->with($whichPlugin, $accessLevel)
 			->will(self::returnValue(TRUE));
 
@@ -9419,6 +9404,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function canViewRegistrationsListMessageWithLoginAndAccessGrantedReturnsEmptyString() {
+		/** @var tx_seminars_seminar|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			'tx_seminars_seminar',
 			array('needsRegistration', 'canViewRegistrationsList'),
@@ -9432,29 +9418,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		self::assertSame(
 			'',
-			$fixture->canViewRegistrationsListMessage(
-				'list_registrations', 'world'
-			)
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function canViewRegistrationsListMessageWithoutLoginAndAccessGrantedReturnsEmptyString() {
-		$fixture = $this->getMock(
-			'tx_seminars_seminar',
-			array('needsRegistration', 'canViewRegistrationsList'),
-			array(), '', FALSE
-		);
-		$fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(TRUE));
-		$fixture->expects(self::any())->method('canViewRegistrationsList')->will(self::returnValue(TRUE));
-
-		self::assertSame(
-			'',
-			$fixture->canViewRegistrationsListMessage(
-				'list_registrations', 'world'
-			)
+			$fixture->canViewRegistrationsListMessage('list_registrations', 'attendees_and_managers')
 		);
 	}
 
@@ -9462,6 +9426,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function canViewRegistrationsListMessageWithLoginAndAccessDeniedReturnsAccessDeniedMessage() {
+		/** @var tx_seminars_seminar|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			'tx_seminars_seminar',
 			array('needsRegistration', 'canViewRegistrationsList'),
@@ -9475,9 +9440,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		self::assertSame(
 			$fixture->translate('message_accessDenied'),
-			$fixture->canViewRegistrationsListMessage(
-				'list_registrations', 'world'
-			)
+			$fixture->canViewRegistrationsListMessage('list_registrations', 'attendees_and_managers')
 		);
 	}
 
@@ -9489,7 +9452,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	/**
 	 * Data provider for hasAnyPriceWithDataProvider.
 	 *
-	 * @return array[] two-dimensional array with the following inner keys:
+	 * @return bool[][] two-dimensional array with the following inner keys:
 	 *               [expectedHasAnyPrice] the expected return value of hasAnyPrice
 	 *               [hasPriceRegular] the return value of that function
 	 *               [hasPriceSpecial] the return value of that function
@@ -9498,8 +9461,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 *               [hasEarlyBirdPriceSpecial] the return value of that function
 	 *               [hasPriceRegularBoard] the return value of that function
 	 *               [hasPriceSpecialBoard] the return value of that function
-
-	 * @see hasAnyPriceWithDataProvider
 	 */
 	public function hasAnyPriceDataProvider() {
 		return array(

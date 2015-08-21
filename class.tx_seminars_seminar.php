@@ -2785,23 +2785,21 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return string an empty string if everything is OK, a localized error
 	 *                error message otherwise
 	 */
-	public function canViewRegistrationsListMessage(
-		$whichPlugin, $accessLevel = 'attendees_and_managers'
-	) {
-		$result = '';
-
+	public function canViewRegistrationsListMessage($whichPlugin, $accessLevel = 'attendees_and_managers') {
 		if (!$this->needsRegistration()) {
-			$result = $this->translate('message_noRegistrationNecessary');
-		} elseif (
-			($accessLevel != 'world')
-				&& !tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
-		) {
-			$result = $this->translate('message_notLoggedIn');
-		} elseif (!$this->canViewRegistrationsList($whichPlugin, $accessLevel)) {
-			$result = $this->translate('message_accessDenied');
+			return $this->translate('message_noRegistrationNecessary');
+		}
+		if ($accessLevel === 'world') {
+			return '';
+		}
+		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+			return $this->translate('message_notLoggedIn');
+		}
+		if (!$this->canViewRegistrationsList($whichPlugin, $accessLevel)) {
+			return $this->translate('message_accessDenied');
 		}
 
-		return $result;
+		return '';
 	}
 
 	/**
