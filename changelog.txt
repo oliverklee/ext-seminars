@@ -91,6 +91,7 @@ Localization:
 - [#3852] Update the French localization, thanks to Martin Rebetez
 
 Bug fixes:
+- [#5376] Test errors in Tx_Seminars_Cli_MailNotifierTest
 - [#5375] Test failures in tx_seminars_OldModel_EventTest
 - [#5374] Test failure in tx_seminars_Service_EMailSalutationTest on 6.2
 - [#5373] Test errors in tx_seminars_OldModel_EventTest on 6.2

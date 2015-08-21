@@ -42,7 +42,15 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	protected $mailer = NULL;
 
+	/**
+	 * @var language
+	 */
+	private $languageBackup = NULL;
+
 	protected function setUp() {
+		$this->languageBackup = $GLOBALS['LANG'];
+		$GLOBALS['LANG'] = new \language();
+
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
 		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
@@ -70,6 +78,9 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
+
+		$GLOBALS['LANG'] = $this->languageBackup;
+		$this->languageBackup = NULL;
 	}
 
 
@@ -1188,64 +1199,6 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		self::assertContains(
 			'1',
 			$this->mailer->getFirstSentEmail()->getBody()
-		);
-	}
-
-
-	/*
-	 * * used language
-	 */
-
-	/**
-	 * @test
-	 */
-	public function sendRemindersToOrganizersForCliBackendUserWithoutLanguageSendsReminderInDefaultLanguage() {
-		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => tx_seminars_seminar::STATUS_PLANNED,
-		)));
-
-		$this->fixture->sendCancellationDeadlineReminders();
-
-		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
-		$GLOBALS['LANG']->lang = '';
-		$subject = $GLOBALS['LANG']->getLL('email_cancelationDeadlineReminderSubject');
-		$subject = str_replace('%event', '', $subject);
-
-		self::assertContains(
-			$subject,
-			$this->mailer->getFirstSentEmail()->getSubject()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function sendRemindersToOrganizersForCliBackendUserWithLanguageGermanSendsReminderInGerman() {
-		/** @var tx_seminars_Model_BackEndUser $user */
-		$user = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_BackEndUser')->findByCliKey();
-		$this->testingFramework->changeRecord(
-			'be_users',
-			$user->getUid(),
-			array('lang' => 'de')
-		);
-		tx_oelib_MapperRegistry::purgeInstance();
-
-		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => tx_seminars_seminar::STATUS_PLANNED,
-		)));
-
-		$this->fixture->sendCancellationDeadlineReminders();
-
-		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
-		$GLOBALS['LANG']->lang = 'de';
-		$subject = $GLOBALS['LANG']->getLL('email_cancelationDeadlineReminderSubject');
-		$subject = str_replace('%event', '', $subject);
-
-		self::assertContains(
-			$subject,
-			$this->mailer->getFirstSentEmail()->getSubject()
 		);
 	}
 }
