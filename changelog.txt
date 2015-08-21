@@ -243,6 +243,7 @@ Bug fixes:
 - [#3718] CSV file displayed in the browser or saved with php suffix, original patch by Joern Dost
 
 Changes:
+- [#5381] Add a BE label for the publication hash
 - [#5348] Change the money fields from 3 to 2 decimals
 - [#5378] Change Event::getTopic* from private to protected
 - [#5363] Heading "actions" for the FE-edited events list

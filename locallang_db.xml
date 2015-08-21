@@ -93,6 +93,7 @@
 			<label index="tx_seminars_seminars.image">Image:</label>
 			<label index="tx_seminars_seminars.requirements">Requirements:</label>
 			<label index="tx_seminars_seminars.dependencies">Requirement for:</label>
+			<label index="tx_seminars_seminars.publication_hash">Publication hash:</label>
 			<label index="tx_seminars_speakers">Speakers</label>
 			<label index="tx_seminars_speakers.title">Name:</label>
 			<label index="tx_seminars_speakers.gender">Gender:</label>
@@ -309,6 +310,7 @@
 			<label index="tx_seminars_seminars.image">Bild:</label>
 			<label index="tx_seminars_seminars.requirements">Voraussetzungen:</label>
 			<label index="tx_seminars_seminars.dependencies">Voraussetzungen für:</label>
+			<label index="tx_seminars_seminars.publication_hash">Veröffentlichungscode:</label>
 			<label index="tx_seminars_speakers">ReferentInnen</label>
 			<label index="tx_seminars_speakers.title">Name:</label>
 			<label index="tx_seminars_speakers.gender">Geschlecht:</label>

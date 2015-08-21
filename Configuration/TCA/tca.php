@@ -1053,7 +1053,7 @@ $GLOBALS['TCA']['tx_seminars_seminars'] = array(
 		),
 		'publication_hash' => array(
 			'exclude' => 1,
-			'label' => '',
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.publication_hash',
 			'config' => array(
 				'type' => 'input',
 				'size' => '20',
