@@ -1,4 +1,4 @@
-0.10.0 (currently working on)
+0.10.0 (released 2015-08-22)
 
 Features:
 - [#5379] Make the Excel-specific CSV line configurable
