@@ -2602,46 +2602,34 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$hasListPid = ($registrationsListPID > 0);
 		$hasVipListPid = ($registrationsVipListPID > 0);
 
-		$currentUserUid = $this->getFeUserUid();
+		$loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
+		$currentUserUid = $loginManager->isLoggedIn()
+			? $loginManager->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')->getUid() : 0;
 
 		switch ($whichPlugin) {
 			case 'seminar_list':
 				// In the standard list view, we could have any kind of link.
-				$result = $this->canViewRegistrationsList(
-						'my_events',
-						$registrationsListPID)
-					|| $this->canViewRegistrationsList(
-						'my_vip_events',
-						0,
-						$registrationsVipListPID,
-						$defaultEventVipsFeGroupID);
+				$result = $this->canViewRegistrationsList('my_events', $registrationsListPID)
+					|| $this->canViewRegistrationsList('my_vip_events', 0, $registrationsVipListPID, $defaultEventVipsFeGroupID);
 				break;
 			case 'my_events':
-				$result = $this->isUserRegistered($currentUserUid)
-					&& $hasListPid;
+				$result = $this->isUserRegistered($currentUserUid) && $hasListPid;
 				break;
 			case 'my_vip_events':
-				$result = $this->isUserVip(
-						$currentUserUid,
-						$defaultEventVipsFeGroupID)
-					&& $hasVipListPid;
+				$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID) && $hasVipListPid;
 				break;
 			case 'list_registrations':
 				$result = $this->isUserRegistered($currentUserUid);
 				break;
 			case 'list_vip_registrations':
-				$result = $this->isUserVip(
-					$currentUserUid, $defaultEventVipsFeGroupID
-				);
+				$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID);
 				break;
 			case 'csv_export':
-				$result = $this->isUserVip(
-					$currentUserUid, $defaultEventVipsFeGroupID
-				) && $this->getConfValueBoolean('allowCsvExportForVips');
+				$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
+					&& $this->getConfValueBoolean('allowCsvExportForVips');
 				break;
 			default:
 				$result = FALSE;
-				break;
 		}
 
 		return $result;
@@ -2672,33 +2660,27 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                 page, FALSE otherwise
 	 */
 	protected function canViewRegistrationsListForLoginAccess(
-		$whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0,
-		$defaultEventVipsFeGroupID = 0
+		$whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0, $defaultEventVipsFeGroupID = 0
 	) {
-		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+		$loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
+		if (!$loginManager->isLoggedIn()) {
 			return FALSE;
 		}
 
+		$currentUserUid = $loginManager->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')->getUid();
 		$hasListPid = ($registrationsListPID > 0);
 		$hasVipListPid = ($registrationsVipListPID > 0);
 
-		$currentUserUid = $this->getFeUserUid();
 		switch ($whichPlugin) {
 			case 'csv_export':
-				$result = $this->isUserVip(
-					$currentUserUid, $defaultEventVipsFeGroupID
-				) && $this->getConfValueBoolean('allowCsvExportForVips');
+				$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
+					&& $this->getConfValueBoolean('allowCsvExportForVips');
 				break;
 			case 'my_vip_events':
-				$result = $this->isUserVip(
-						$currentUserUid,
-						$defaultEventVipsFeGroupID)
-					&& $hasVipListPid;
+				$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID) && $hasVipListPid;
 				break;
 			case 'list_vip_registrations':
-				$result = $this->isUserVip(
-					$currentUserUid, $defaultEventVipsFeGroupID
-				);
+				$result = $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID);
 				break;
 			case 'list_registrations':
 				$result = TRUE;
@@ -2735,30 +2717,25 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                 page, FALSE otherwise
 	 */
 	protected function canViewRegistrationsListForWorldAccess(
-		$whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0,
-		$defaultEventVipsFeGroupID = 0
+		$whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0, $defaultEventVipsFeGroupID = 0
 	) {
-		$isLoggedIn = tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
+		$loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
+		$isLoggedIn = $loginManager->isLoggedIn();
 
 		$hasListPid = ($registrationsListPID > 0);
 		$hasVipListPid = ($registrationsVipListPID > 0);
+		$currentUserUid = $isLoggedIn ? $loginManager->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')->getUid() : 0;
 
 		switch ($whichPlugin) {
 			case 'csv_export':
-				$result = $isLoggedIn && $this->isUserVip(
-					$this->getFeUserUid(), $defaultEventVipsFeGroupID
-				) && $this->getConfValueBoolean('allowCsvExportForVips');
+				$result = $isLoggedIn && $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
+					&& $this->getConfValueBoolean('allowCsvExportForVips');
 				break;
 			case 'my_vip_events':
-				$result = $isLoggedIn && $this->isUserVip(
-						$this->getFeUserUid(),
-						$defaultEventVipsFeGroupID)
-					&& $hasVipListPid;
+				$result = $isLoggedIn && $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID) && $hasVipListPid;
 				break;
 			case 'list_vip_registrations':
-				$result = $isLoggedIn && $this->isUserVip(
-					$this->getFeUserUid(), $defaultEventVipsFeGroupID
-				);
+				$result = $isLoggedIn && $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID);
 				break;
 			case 'list_registrations':
 				$result = TRUE;
@@ -3447,9 +3424,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *                 the owner of this event, FALSE otherwise
 	 */
 	public function isOwnerFeUser() {
-		return $this->hasRecordPropertyInteger('owner_feuser')
-			&& ($this->getRecordPropertyInteger('owner_feuser')
-				== $this->getFeUserUid());
+		$loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
+		if (!$loginManager->isLoggedIn()) {
+			return FALSE;
+		}
+
+		return $this->getRecordPropertyInteger('owner_feuser')
+			=== $loginManager->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')->getUid();
 	}
 
 	/**

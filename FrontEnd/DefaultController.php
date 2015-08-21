@@ -1474,7 +1474,17 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * @return bool TRUE if a user is logged in, FALSE otherwise
 	 */
 	public function isLoggedIn() {
-		return tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
+		return Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
+	}
+
+	/**
+	 * Returns the UID of the logged-in front-end user (or 0 if no user is logged in).
+	 *
+	 * @return int
+	 */
+	protected function getLoggedInFrontEndUserUid() {
+		$loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
+		return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')->getUid() : 0;
 	}
 
 	/**
@@ -1795,22 +1805,21 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			);
 		}
 
-		if ($whatToDisplay == 'my_events') {
+		if ($whatToDisplay === 'my_events') {
 			$builder = $this->createRegistrationBagBuilder();
 		} else {
 			$builder = $this->createSeminarBagBuilder();
 		}
 
-		if ($whatToDisplay != 'my_events') {
+		if ($whatToDisplay !== 'my_events') {
 			$this->limitForAdditionalParameters($builder);
 		}
-		if (!in_array(
-			$whatToDisplay,
-			array('my_entered_events', 'my_events', 'topic_list')
-		)) {
+		if (!in_array($whatToDisplay, array('my_entered_events', 'my_events', 'topic_list'), TRUE)) {
 			$builder->limitToDateAndSingleRecords();
 			$this->limitToTimeFrameSetting($builder);
 		}
+
+		$user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 
 		switch ($whatToDisplay) {
 			case 'topic_list':
@@ -1818,28 +1827,23 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				$this->hideColumnsForTheTopicListView();
 				break;
 			case 'my_events':
-				$builder->limitToAttendee(
-					tx_oelib_FrontEndLoginManager::getInstance()
-						->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')
-				);
+				$builder->limitToAttendee($user);
 				break;
 			case 'my_vip_events':
 				$groupForDefaultVips = $this->getConfValueInteger(
 					'defaultEventVipsFeGroupID','s_template_special'
 				);
-				$isDefaultVip = ($groupForDefaultVips != 0)
-					&& tx_oelib_FrontEndLoginManager::getInstance()->
-						getLoggedInUser()->hasGroupMembership($groupForDefaultVips);
+				$isDefaultVip = ($groupForDefaultVips != 0) && $user->hasGroupMembership($groupForDefaultVips);
 
 				if (!$isDefaultVip) {
 					// The current user is not listed as a default VIP for all
 					// events. Change the query to show only events where the
 					// current user is manually added as a VIP.
-					$builder->limitToEventManager($this->getFeUserUid());
+					$builder->limitToEventManager($this->getLoggedInFrontEndUserUid());
 				}
 				break;
 			case 'my_entered_events':
-				$builder->limitToOwner($this->getFeUserUid());
+				$builder->limitToOwner($user !== NULL ? $user->getUid() : 0);
 				$builder->showHiddenRecords();
 				break;
 			case 'events_next_day':
@@ -1849,15 +1853,10 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				$builder->limitToOtherDatesForTopic($this->seminar);
 				break;
 			default:
-				break;
 		}
 
-		if (($whatToDisplay == 'other_dates')
-			|| ($whatToDisplay == 'seminar_list')
-		) {
-			$hideBookedOutEvents = $this->getConfValueBoolean(
-				'showOnlyEventsWithVacancies', 's_listView'
-			);
+		if (($whatToDisplay === 'other_dates') || ($whatToDisplay === 'seminar_list')) {
+			$hideBookedOutEvents = $this->getConfValueBoolean('showOnlyEventsWithVacancies', 's_listView');
 			if ($hideBookedOutEvents) {
 				$builder->limitToEventsWithVacancies();
 			}
@@ -2598,12 +2597,10 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			return TRUE;
 		}
 
-		$mayManagersEditTheirEvents = $this->getConfValueBoolean(
-			'mayManagersEditTheirEvents', 's_listView'
-		);
+		$mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');
 
 		$isUserManager = $this->seminar->isUserVip(
-			$this->getFeUserUid(),
+			$this->getLoggedInFrontEndUserUid(),
 			$this->getConfValueInteger('defaultEventVipsFeGroupID')
 		);
 
@@ -3337,10 +3334,8 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			'limitFileDownloadToAttendees', 'sDEF'
 		);
 
-		return !$limitToAttendees ||
-			($this->isLoggedIn() && $this->seminar->isUserRegistered(
-				$this->getFeUserUid()
-			));
+		return !$limitToAttendees
+			|| ($this->isLoggedIn() && $this->seminar->isUserRegistered($this->getLoggedInFrontEndUserUid()));
 	}
 
 	/**
@@ -3373,7 +3368,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			return FALSE;
 		}
 
-		return ($this->seminar->getOwner()->getUid() == $this->getFeUserUid());
+		return $this->seminar->getOwner()->getUid() === $this->getLoggedInFrontEndUserUid();
 	}
 
 	/**

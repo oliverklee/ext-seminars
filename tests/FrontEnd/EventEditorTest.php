@@ -100,14 +100,14 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * Creates a FE user, adds his/her FE user group as a default VIP group via
 	 * TS setup and logs him/her in.
 	 *
-	 * @return void
+	 * @return int FE user UID
 	 */
 	private function createLogInAndAddFeUserAsDefaultVip() {
 		$feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
 		$this->fixture->setConfigurationValue(
 			'defaultEventVipsFeGroupID', $feUserGroupUid
 		);
-		$this->testingFramework->createAndLoginFrontEndUser($feUserGroupUid);
+		return $this->testingFramework->createAndLoginFrontEndUser($feUserGroupUid);
 	}
 
 	/**
@@ -165,7 +165,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 *
 	 * @param array $frontEndUserGroupData front-end user group data to set, may be empty
 	 *
-	 * @return void
+	 * @return int FE user UID
 	 */
 	private function createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
 		array $frontEndUserGroupData = array()
@@ -176,7 +176,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setConfigurationValue(
 			'eventEditorFeGroupID', $feUserGroupUid
 		);
-		$this->testingFramework->createAndLoginFrontEndUser($feUserGroupUid);
+		return $this->testingFramework->createAndLoginFrontEndUser($feUserGroupUid);
 	}
 
 	/**
@@ -282,16 +282,13 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testCreateLogInAndAddFeUserAsDefaultVipAddsFeUserAsDefaultVip() {
-		$this->createLogInAndAddFeUserAsDefaultVip();
+		$userUid = $this->createLogInAndAddFeUserAsDefaultVip();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'fe_users',
-				'uid=' . $this->fixture->getFeUserUid() .
-					' AND usergroup=' . $this->fixture->getConfValueInteger(
-						'defaultEventVipsFeGroupID'
-					)
+				'uid=' . $userUid . ' AND usergroup=' . $this->fixture->getConfValueInteger('defaultEventVipsFeGroupID')
 			)
 		);
 	}
@@ -323,16 +320,13 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function createLogInAndAddFrontEndUserToEventEditorFrontEndGroupAddsFrontEndUserToEventEditorFrontEndGroup() {
-		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
+		$userUid = $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$this->testingFramework->countRecords(
 				'fe_users',
-				'uid=' . $this->fixture->getFeUserUid() .
-					' AND usergroup=' . $this->fixture->getConfValueInteger(
-						'eventEditorFeGroupID'
-					)
+				'uid=' . $userUid . ' AND usergroup=' . $this->fixture->getConfValueInteger('eventEditorFeGroupID')
 			)
 		);
 	}

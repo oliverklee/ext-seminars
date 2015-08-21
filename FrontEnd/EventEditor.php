@@ -282,7 +282,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @return tx_seminars_Model_FrontEndUser
 	 */
 	static protected function getLoggedInUser() {
-		return tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		return Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
 	}
 
 	/**
@@ -618,7 +618,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @return string locallang key of an error message, will be an empty string if access was granted
 	 */
 	private function checkAccess() {
-		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+		if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			return 'message_notLoggedIn';
 		}
 
@@ -627,17 +627,18 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			return 'message_wrongSeminarNumber';
 		}
 
+		$user = self::getLoggedInUser();
 		if ($objectUid > 0) {
 			/** @var tx_seminars_seminar $seminar */
 			$seminar = t3lib_div::makeInstance('tx_seminars_seminar', $this->getObjectUid(), FALSE, TRUE);
-			$isUserVip = $seminar->isUserVip($this->getFeUserUid(), $this->getConfValueInteger('defaultEventVipsFeGroupID'));
+			$isUserVip = $seminar->isUserVip($user->getUid(), $this->getConfValueInteger('defaultEventVipsFeGroupID'));
 			$isUserOwner = $seminar->isOwnerFeUser();
 			$mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');
 
 			$hasAccess = $isUserOwner || ($mayManagersEditTheirEvents && $isUserVip);
 		} else {
 			$eventEditorGroupUid = $this->getConfValueInteger('eventEditorFeGroupID', 's_fe_editing');
-			$hasAccess = ($eventEditorGroupUid !== 0) && self::getLoggedInUser()->hasGroupMembership($eventEditorGroupUid);
+			$hasAccess = ($eventEditorGroupUid !== 0) && $user->hasGroupMembership($eventEditorGroupUid);
 		}
 
 		return $hasAccess ? '' : 'message_noAccessToEventEditor';
@@ -774,18 +775,17 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	private function addAdministrativeData(array &$formData) {
 		$formData['tstamp'] = $GLOBALS['SIM_EXEC_TIME'];
-
-		// Updating the timestamp is sufficent for existing records.
+		// For existing records, updating the timestamp is sufficient.
 		if ($this->getObjectUid() > 0) {
 			return;
 		}
 
+		$user = self::getLoggedInUser();
+
 		$formData['crdate'] = $GLOBALS['SIM_EXEC_TIME'];
-		$formData['owner_feuser'] = $this->getFeUserUid();
-		$eventPid = self::getLoggedInUser()->getEventRecordsPid();
-		$formData['pid'] = ($eventPid > 0)
-			? $eventPid
-			: $this->getConfValueInteger('createEventsPID', 's_fe_editing');
+		$formData['owner_feuser'] = $user->getUid();
+		$eventPid = $user->getEventRecordsPid();
+		$formData['pid'] = ($eventPid > 0) ? $eventPid : $this->getConfValueInteger('createEventsPID', 's_fe_editing');
 	}
 
 	/**

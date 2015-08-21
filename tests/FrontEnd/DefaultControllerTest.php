@@ -7851,6 +7851,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function myEnteredEventsListCallsProcessEventEditorActions() {
+		$this->testingFramework->createAndLoginFrontEndUser();
+
 		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock('tx_seminars_FrontEnd_DefaultController', array('processEventEditorActions'));
 		$fixture->expects(self::once())->method('processEventEditorActions');
