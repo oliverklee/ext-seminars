@@ -4341,18 +4341,21 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return '';
 		}
 
-		$imageWidth = array();
-		$imageHeight = array();
-		$imageUrl = array();
-		$imageWithTag = $this->createRestrictedImage(
-			tx_seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->getImage(),
-			'',
-			$maxImageWidth,
-			$maxImageHeight
+		$imageConfiguration = array(
+			'altText' => '',
+			'file' => tx_seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->getImage(),
+			'file.' => array(
+				'width' => $maxImageWidth,
+				'height' => $maxImageHeight,
+			),
 		);
+		$imageWithTag = $this->cObj->IMAGE($imageConfiguration);
 
+		$imageWidth = array();
 		preg_match('/width="([^"]*)"/', $imageWithTag, $imageWidth);
+		$imageHeight = array();
 		preg_match('/height="([^"]*)"/', $imageWithTag, $imageHeight);
+		$imageUrl = array();
 		preg_match('/src="([^"]*)"/', $imageWithTag, $imageUrl);
 
 		return ' style="' .

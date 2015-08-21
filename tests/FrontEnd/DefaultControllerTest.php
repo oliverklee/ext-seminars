@@ -3080,7 +3080,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$content = $this->getMock('tslib_cObj', array('IMAGE'));
 		$content->expects(self::any())->method('IMAGE')
 			->with(array(
-				'file' => 'uploads/tx_seminars/' . $fileName, 'file.' => array(),
+				'file' => 'uploads/tx_seminars/' . $fileName, 'file.' => array('width' => '0c', 'height' => '0c'),
 				'altText' => $topicTitle, 'titleText' => $topicTitle
 			))
 			->will(self::returnValue('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>'));

@@ -1400,31 +1400,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			'OWNER_DATA',
 			implode($this->getSubpart('OWNER_DATA_SEPARATOR'), $ownerData)
 		);
-
-		if ($owner->hasImage()) {
-			$configuredUploadFolder = tx_oelib_configurationProxy::getInstance(
-				'sr_feuser_register'
-			)->getAsString('uploadFolder');
-
-			$uploadFolder = ($configuredUploadFolder == '')
-				? 'uploads/tx_srfeuserregister'
-				: $configuredUploadFolder;
-
-			if (substr($uploadFolder, -1) != '/') {
-				$uploadFolder .= '/';
-			}
-
-			$imageTag = $this->createRestrictedImage(
-				$uploadFolder . $owner->getImage(), '',
-				$this->getConfValueInteger('ownerPictureMaxWidth'), 0, 0, '',
-				$this->prefixId . '_owner_image'
-			);
-		} else {
-			$imageTag = '';
-		}
-		$this->setMarker(
-			'owner_image', $imageTag
-		);
 	}
 
 	/**
@@ -2034,15 +2009,16 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			}
 
 			if ($this->seminar->hasImage()) {
-				$image = $this->createRestrictedImage(
-					tx_seminars_FrontEnd_AbstractView::UPLOAD_PATH .
-						$this->seminar->getImage(),
-					$this->seminar->getTitle(),
-					$this->getConfValueInteger('seminarImageListViewWidth'),
-					$this->getConfValueInteger('seminarImageListViewHeight'),
-					0,
-					$this->seminar->getTitle()
+				$imageConfiguration = array(
+					'altText' => $this->seminar->getTitle(),
+					'titleText' => $this->seminar->getTitle(),
+					'file' => tx_seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->seminar->getImage(),
+					'file.' => array(
+						'width' => $this->getConfValueInteger('seminarImageListViewWidth') . 'c',
+						'height' => $this->getConfValueInteger('seminarImageListViewHeight') . 'c',
+					),
 				);
+				$image = $this->cObj->IMAGE($imageConfiguration);
 			} else {
 				$image = '';
 			}
