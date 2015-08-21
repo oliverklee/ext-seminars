@@ -592,6 +592,10 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 		} else {
 			throw new RuntimeException('There was neither a front end nor a back end detected.', 1333292389);
 		}
+
+		if ($this->renderCharset === NULL || $this->renderCharset === '') {
+			$this->renderCharset = 'utf-8';
+		}
 	}
 
 	/**

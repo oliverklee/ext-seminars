@@ -91,10 +91,11 @@ Localization:
 - [#3852] Update the French localization, thanks to Martin Rebetez
 
 Bug fixes:
+- [#5373] Test errors in tx_seminars_OldModel_EventTest on 6.2
 - [#5291] Full-text search finds nothing on some installations
 - [#5372] Test failures in tx_seminars_OldModel_EventTest
 - [#4746] Salutation in the thank-you e-mail is mixed up
-- [#4235] Registrationmanager::setEMailIntroduction might build a nonsense introduction
+- [#4235] RegistrationManager::setEMailIntroduction might build a nonsense introduction
 - [#5277] Test failure in Tx_seminars_Service_RegistrationManagerTest
 - [#5357] Test failure in tx_seminars_OldModel_EventTest
 - [#5364] Search by start date ignores then-running events
