@@ -5179,46 +5179,6 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 	}
 
-	/**
-	 * @test
-	 */
-	public function usesCorrectIconForStillInvisibleTimedSingleEvent() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
-		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
-
-		self::assertRegExp(
-			'/EventComplete__tf?\./',
-			$this->fixture->getRecordIcon()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function usesCorrectIconForStillInvisibleTimedTopic() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_TOPIC);
-		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
-
-		self::assertRegExp(
-			'/EventTopic__tf?\./',
-			$this->fixture->getRecordIcon()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function usesCorrectIconForStillInvisibleTimedDate() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
-		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] + 1000);
-
-		self::assertRegExp(
-			'/EventDate__tf?\./',
-			$this->fixture->getRecordIcon()
-		);
-	}
-
-
 	/*
 	 * Tests for hasSeparateDetailsPage
 	 */
