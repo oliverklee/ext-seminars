@@ -153,7 +153,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -182,7 +182,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCategories('');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -212,7 +212,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCategories('');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -236,7 +236,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCategories($categoryUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -269,7 +269,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCategories($categoryUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -298,11 +298,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCategories($categoryUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
-		self::assertEquals(
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -337,11 +337,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCategories($categoryUid1);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
-		self::assertEquals(
+		self::assertSame(
 			$eventUid1,
 			$bag->current()->getUid()
 		);
@@ -397,7 +397,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCategories($categoryUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -428,7 +428,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCategories($categoryUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -467,7 +467,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCategories($categoryUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -539,7 +539,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCategories($categoryUid1 . ','  . $categoryUid2);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -563,7 +563,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToPlaces(array($siteUid));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -604,7 +608,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToPlaces(array($siteUid1, $siteUid2));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -619,7 +623,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToPlaces();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -657,7 +661,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToPlaces(array($siteUid1));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -675,7 +679,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -704,7 +708,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->ignoreCanceledEvents();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -719,7 +723,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->allowCanceledEvents();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -735,7 +739,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->allowCanceledEvents();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -798,7 +802,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('past');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -816,7 +820,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('past');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -910,7 +914,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('pastAndCurrent');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -928,7 +932,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('pastAndCurrent');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -946,7 +950,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('pastAndCurrent');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1056,7 +1060,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('current');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1166,7 +1170,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('currentAndUpcoming');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1184,7 +1188,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('currentAndUpcoming');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1202,7 +1206,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('currentAndUpcoming');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1220,7 +1224,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('currentAndUpcoming');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1296,7 +1300,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('upcoming');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1314,7 +1318,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('upcoming');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1332,7 +1336,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('upcoming');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1408,7 +1412,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('upcomingWithBeginDate');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1426,7 +1430,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('upcomingWithBeginDate');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1444,7 +1448,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('upcomingWithBeginDate');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			0,
 			$bag->count()
 		);
@@ -1524,7 +1528,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('deadlineNotOver');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1543,7 +1547,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('deadlineNotOver');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1580,7 +1584,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('deadlineNotOver');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1599,7 +1603,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('deadlineNotOver');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1627,7 +1631,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('today');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1668,7 +1672,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('today');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1689,7 +1693,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('today');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1710,7 +1714,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('today');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1795,7 +1799,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('all');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1813,7 +1817,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('all');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1831,7 +1835,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('all');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1849,7 +1853,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('all');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1867,7 +1871,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('all');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1885,7 +1889,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setTimeFrame('all');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -1914,7 +1918,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -1940,7 +1944,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventTypes();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -1967,7 +1971,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventTypes();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -1988,7 +1992,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventTypes(array($typeUid));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2016,7 +2020,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventTypes(array($typeUid));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -2042,11 +2046,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventTypes(array($typeUid));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
-		self::assertEquals(
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -2078,11 +2082,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventTypes(array($typeUid1));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
-		self::assertEquals(
+		self::assertSame(
 			$eventUid1,
 			$bag->current()->getUid()
 		);
@@ -2159,11 +2163,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventTypes(array($typeUid));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
-		self::assertEquals(
+		self::assertSame(
 			$dateUid,
 			$bag->current()->getUid()
 		);
@@ -2191,7 +2195,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventTypes(array($typeUid));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -2255,7 +2259,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventTypes(array($typeUid1, $typeUid2));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -2283,7 +2287,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCities(array('test city 1'));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -2341,7 +2349,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCities(array('test city 1', 'test city 2'));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -2365,7 +2373,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCities();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2438,7 +2446,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCities(array('test city 1', 'test city 2'));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2470,7 +2478,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCities(array('test city 1'));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2502,7 +2510,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCities(array('test city 2', 'test city 3'));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2530,7 +2538,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCountries(array('DE'));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -2588,7 +2600,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCountries(array('US', 'DE'));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -2612,7 +2624,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCountries();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2685,7 +2697,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCountries(array('US'));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2704,7 +2716,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToLanguages(array('DE'));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -2722,7 +2738,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToLanguages(array('EN', 'DE'));
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -2737,7 +2753,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToLanguages();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2781,7 +2797,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToTopicRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2827,7 +2843,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->removeLimitToTopicRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2842,7 +2858,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->removeLimitToTopicRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2871,7 +2887,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToOwner($feUserUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2913,7 +2929,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToOwner(0);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2929,7 +2945,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToOwner(0);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2948,7 +2964,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2962,7 +2978,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -2990,7 +3006,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->removeLimitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -3025,7 +3041,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventManager($feUserUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -3055,7 +3071,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventManager(0);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -3082,7 +3098,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventsNextDay($event);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid2,
 			$bag->current()->getUid()
 		);
@@ -3173,7 +3193,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$dateUid2,
 			$bag->current()->getUid()
 		);
@@ -3202,7 +3226,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToOtherDatesForTopic($topic);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -3310,7 +3334,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->removeLimitToOtherDatesForTopic();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			4,
 			$bag->count()
 		);
@@ -3340,7 +3364,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->removeLimitToOtherDatesForTopic();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			3,
 			$bag->count()
 		);
@@ -3358,7 +3382,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch(',,');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3371,7 +3399,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado  paprika');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3384,7 +3416,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch(',  ,');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3397,7 +3433,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('o');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3414,7 +3454,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3444,7 +3488,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3471,7 +3519,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3498,7 +3550,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3537,7 +3593,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3588,7 +3648,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3639,7 +3703,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3685,7 +3753,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3731,7 +3803,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3770,7 +3846,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado paprika');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3784,7 +3864,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado,paprika');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -3813,8 +3897,9 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertFalse(
-			$bag->isEmpty()
+		self::assertSame(
+			1,
+			$bag->count()
 		);
 		self::assertSame(
 			$eventUid,
@@ -3873,7 +3958,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$dateUid,
 			$bag->current()->getUid()
 		);
@@ -3922,7 +4011,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$dateUid,
 			$bag->current()->getUid()
 		);
@@ -3971,7 +4064,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$dateUid,
 			$bag->current()->getUid()
 		);
@@ -4029,7 +4126,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$dateUid,
 			$bag->current()->getUid()
 		);
@@ -4091,7 +4192,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDateAndSingleRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$dateUid,
 			$bag->current()->getUid()
 		);
@@ -4141,7 +4246,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -4183,7 +4292,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -4234,7 +4347,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -4285,7 +4402,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToFullTextSearch('avocado');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$eventUid,
 			$bag->current()->getUid()
 		);
@@ -4338,7 +4459,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToRequiredEventTopics($eventUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4370,7 +4491,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToRequiredEventTopics($eventUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -4402,7 +4523,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToRequiredEventTopics($eventUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4434,7 +4555,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDependingEventTopics($eventUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4466,7 +4587,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDependingEventTopics($eventUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -4498,7 +4619,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDependingEventTopics($eventUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4524,7 +4645,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$topicUid,
 			$bag->current()->getUid()
 		);
@@ -4548,7 +4673,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$topicUid,
 			$bag->current()->getUid()
 		);
@@ -4572,7 +4701,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4603,7 +4732,11 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$topicUid,
 			$bag->current()->getUid()
 		);
@@ -4685,7 +4818,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4756,7 +4889,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4775,7 +4908,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCancelationDeadlineReminderNotSent();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4789,7 +4922,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToCancelationDeadlineReminderNotSent();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			0,
 			$bag->count()
 		);
@@ -4808,7 +4941,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventTakesPlaceReminderNotSent();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4822,7 +4955,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventTakesPlaceReminderNotSent();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			0,
 			$bag->count()
 		);
@@ -4842,7 +4975,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CANCELED);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4857,7 +4990,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CANCELED);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			0,
 			$bag->count()
 		);
@@ -4872,7 +5005,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CANCELED);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			0,
 			$bag->count()
 		);
@@ -4887,7 +5020,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CONFIRMED);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4902,7 +5035,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CONFIRMED);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			0,
 			$bag->count()
 		);
@@ -4917,7 +5050,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CONFIRMED);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			0,
 			$bag->count()
 		);
@@ -4932,7 +5065,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_PLANNED);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4947,7 +5080,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_PLANNED);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			0,
 			$bag->count()
 		);
@@ -4962,7 +5095,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_PLANNED);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			0,
 			$bag->count()
 		);
@@ -4982,7 +5115,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDaysBeforeBeginDate(2);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -4997,7 +5130,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDaysBeforeBeginDate(3);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5012,7 +5145,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDaysBeforeBeginDate(1);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			0,
 			$bag->count()
 		);
@@ -5027,7 +5160,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDaysBeforeBeginDate(1);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5039,7 +5172,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToDaysBeforeBeginDate(1);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5058,7 +5191,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEarliestBeginOrEndDate(42);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5074,7 +5207,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEarliestBeginOrEndDate(42);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5090,7 +5223,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEarliestBeginOrEndDate(21);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5124,7 +5257,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEarliestBeginOrEndDate(0);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5288,7 +5421,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->showHiddenRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5305,7 +5438,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->showHiddenRecords();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5327,7 +5460,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventsWithVacancies();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5345,7 +5478,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventsWithVacancies();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5394,7 +5527,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventsWithVacancies();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5506,7 +5639,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventsWithVacancies();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5528,7 +5661,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToEventsWithVacancies();
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5556,7 +5689,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToOrganizers($organizerUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5627,7 +5760,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToOrganizers($organizerUid1 . ',' . $organizerUid2);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5657,7 +5790,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToOrganizers($organizerUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			2,
 			$bag->count()
 		);
@@ -5690,9 +5823,13 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToOrganizers($organizerUid);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$dateUid,
-			$bag->getUids()
+			$bag->current()->getUid()
 		);
 	}
 
@@ -5713,7 +5850,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToOrganizers('');
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5742,7 +5879,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToAge(6);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5766,7 +5903,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToAge(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5790,7 +5927,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToAge(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5814,7 +5951,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToAge(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5861,7 +5998,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToAge(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5901,7 +6038,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToAge(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5924,7 +6061,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToAge(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5955,7 +6092,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToAge(21);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -5986,7 +6123,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToAge(6);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6010,7 +6147,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToAge(0);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6032,7 +6169,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(43);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6049,7 +6186,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6066,7 +6203,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6100,7 +6237,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6118,7 +6255,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(42);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6153,7 +6290,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6171,7 +6308,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6206,7 +6343,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6224,7 +6361,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6269,9 +6406,13 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
+			1,
+			$bag->count()
+		);
+		self::assertSame(
 			$dateUid,
-			$bag->getUids()
+			$bag->current()->getUid()
 		);
 	}
 
@@ -6318,7 +6459,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6340,7 +6481,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6404,7 +6545,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6426,7 +6567,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6530,7 +6671,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6552,7 +6693,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6573,7 +6714,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(50);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6593,7 +6734,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMaximumPrice(0);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6645,7 +6786,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6662,7 +6803,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6679,7 +6820,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6696,7 +6837,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6729,7 +6870,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6746,7 +6887,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6779,7 +6920,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6796,7 +6937,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6833,7 +6974,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6891,7 +7032,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6912,7 +7053,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6933,7 +7074,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6974,7 +7115,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -6995,7 +7136,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(15);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);
@@ -7052,7 +7193,7 @@ class tx_seminars_BagBuilder_EventTest extends tx_phpunit_testcase {
 		$this->fixture->limitToMinimumPrice(0);
 		$bag = $this->fixture->build();
 
-		self::assertEquals(
+		self::assertSame(
 			1,
 			$bag->count()
 		);

@@ -681,15 +681,15 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Generates and returns the WHERE clause parts for the search in categories
-	 * based on the search word given in the first parameter $searchWord.
+	 * based on the search word given in the first parameter $quotedSearchWord.
 	 *
-	 * @param string $searchWord the current search word, must not be empty, must be SQL-safe
+	 * @param string $quotedSearchWord the current search word, must not be empty, must be SQL-safe
 	 *
 	 * @return string[] the WHERE clause parts for the search in categories
 	 */
-	private function getSearchWherePartForCategories($searchWord) {
+	private function getSearchWherePartForCategories($quotedSearchWord) {
 		return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
-			$searchWord,
+			$quotedSearchWord,
 			'categories',
 			'tx_seminars_categories',
 			'tx_seminars_seminars_categories_mm'
@@ -698,15 +698,15 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Generates and returns the WHERE clause parts for the search in target groups
-	 * based on the search word given in the first parameter $searchWord.
+	 * based on the search word given in the first parameter $quotedSearchWord.
 	 *
-	 * @param string $searchWord the current search word, must not be empty, must be SQL-safe
+	 * @param string $quotedSearchWord the current search word, must not be empty, must be SQL-safe
 	 *
 	 * @return string[] the WHERE clause parts for the search in categories
 	 */
-	private function getSearchWherePartForTargetGroups($searchWord) {
+	private function getSearchWherePartForTargetGroups($quotedSearchWord) {
 		return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
-			$searchWord,
+			$quotedSearchWord,
 			'target_groups',
 			'tx_seminars_target_groups',
 			'tx_seminars_seminars_target_groups_mm'
@@ -715,17 +715,17 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Generates and returns the WHERE clause parts for the search in event
-	 * types based on the search word given in the first parameter $searchWord.
+	 * types based on the search word given in the first parameter $quotedSearchWord.
 	 *
-	 * @param string $searchWord the current search word, must not be empty, must be SQL-safe
+	 * @param string $quotedSearchWord the current search word, must not be empty, must be SQL-safe
 	 *
 	 * @return string[] the WHERE clause parts for the search in event types
 	 */
-	private function getSearchWherePartForEventTypes($searchWord) {
+	private function getSearchWherePartForEventTypes($quotedSearchWord) {
 		return array(
 			'EXISTS (' .
 				'SELECT * FROM tx_seminars_event_types, tx_seminars_seminars s1, tx_seminars_seminars s2' .
-				' WHERE (MATCH (tx_seminars_event_types.title) AGAINST (' . $searchWord . ')' .
+				' WHERE (MATCH (tx_seminars_event_types.title) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)' .
 				' AND tx_seminars_event_types.uid = s1.event_type' .
 				' AND ((s1.uid = s2.topic AND s2.object_type = ' . tx_seminars_Model_Event::TYPE_DATE . ') ' .
 					'OR (s1.uid = s2.uid AND s1.object_type <> ' . tx_seminars_Model_Event::TYPE_DATE . '))' .
@@ -736,15 +736,15 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Generates and returns the WHERE clause parts for the search in places
-	 * based on the search word given in the first parameter $searchWord.
+	 * based on the search word given in the first parameter $quotedSearchWord.
 	 *
-	 * @param string $searchWord the current search word, must not be empty
+	 * @param string $quotedSearchWord the current search word, must not be empty
 	 *
 	 * @return string[] the WHERE clause parts for the search in places
 	 */
-	private function getSearchWherePartForPlaces($searchWord) {
+	private function getSearchWherePartForPlaces($quotedSearchWord) {
 		return $this->getSearchWherePartForMmRelation(
-			$searchWord,
+			$quotedSearchWord,
 			'places',
 			'tx_seminars_sites',
 			'tx_seminars_seminars_place_mm'
@@ -753,15 +753,15 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 	/**
 	 * Generates and returns the WHERE clause parts for the search in event
-	 * topics based on the search word given in the first parameter $searchWord.
+	 * topics based on the search word given in the first parameter $quotedSearchWord.
 	 *
-	 * @param string $searchWord the current search word, must not be empty
+	 * @param string $quotedSearchWord the current search word, must not be empty
 	 *
 	 * @return string[] the WHERE clause parts for the search in event topics
 	 */
-	private function getSearchWherePartForEventTopics($searchWord) {
+	private function getSearchWherePartForEventTopics($quotedSearchWord) {
 		$where = array();
-		$where[] = 'MATCH (title, subtitle, description) AGAINST (' . $searchWord . ')';
+		$where[] = 'MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)';
 
 		$matchingUids = tx_oelib_db::selectColumnForMultiple(
 			'uid',
@@ -783,28 +783,28 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * Generates and returns the WHERE clause parts for the search independent
 	 * from the event record type based on the search word given in the first
-	 * parameter $searchWord.
+	 * parameter $quotedSearchWord.
 	 *
-	 * @param string $searchWord the current search word, must not be empty, must be SQL-safe
+	 * @param string $quotedSearchWord the current search word, must not be empty, must be SQL-safe
 	 *
 	 * @return string[] the WHERE clause parts for the search independent from the event record type
 	 */
-	private function getSearchWherePartIndependentFromEventRecordType($searchWord) {
-		return array('MATCH (tx_seminars_seminars.accreditation_number) AGAINST (' . $searchWord . ')');
+	private function getSearchWherePartIndependentFromEventRecordType($quotedSearchWord) {
+		return array('MATCH (tx_seminars_seminars.accreditation_number) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)');
 	}
 
 	/**
 	 * Generates and returns the WHERE clause parts for the search in speakers
-	 * based on the search word given in the first parameter $searchWord.
+	 * based on the search word given in the first parameter $quotedSearchWord.
 	 *
-	 * @param string $searchWord the current search word, must not be empty,
+	 * @param string $quotedSearchWord the current search word, must not be empty,
 	 *               must be SQL-safe
 	 *
 	 * @return string[] the WHERE clause parts for the search in speakers
 	 */
-	private function getSearchWherePartForSpeakers($searchWord) {
+	private function getSearchWherePartForSpeakers($quotedSearchWord) {
 		return $this->getSearchWherePartForMmRelation(
-			$searchWord, 'speakers', 'tx_seminars_speakers', 'tx_seminars_seminars_speakers_mm'
+			$quotedSearchWord, 'speakers', 'tx_seminars_speakers', 'tx_seminars_seminars_speakers_mm'
 		);
 	}
 
@@ -815,7 +815,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Searches for $searchWord in $field in $foreignTable using the m:n table
 	 * $mmTable.
 	 *
-	 * @param string $searchWord
+	 * @param string $quotedSearchWord
 	 *        the current search word, must not be empty, must be SQL-safe
 	 * @param string $searchFieldKey
 	 *        the key of the search field list, must not be empty, must be an valid key of $this->searchFieldList
@@ -827,13 +827,13 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * @return string[] the WHERE clause parts for the search in categories
 	 */
 	private function getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
-		$searchWord, $searchFieldKey, $foreignTable, $mmTable
+		$quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable
 	) {
-		$this->checkParametersForMmSearchFunctions($searchWord, $searchFieldKey, $foreignTable, $mmTable);
+		$this->checkParametersForMmSearchFunctions($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable);
 
 		$matchQueryPart = 'MATCH (' .
 			$foreignTable . '.' . implode(',' . $foreignTable . '.', self::$searchFieldList[$searchFieldKey]) .
-			') AGAINST (' . $searchWord . ')';
+			') AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)';
 		return array(
 			'EXISTS ' .
 			'(SELECT * FROM ' . 'tx_seminars_seminars s1, ' . $mmTable . ', ' . $foreignTable .
@@ -855,7 +855,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 * Searches for $searchWord in $field in $foreignTable using the m:n table
 	 * $mmTable.
 	 *
-	 * @param string $searchWord
+	 * @param string $quotedSearchWord
 	 *        the current search word, must not be empty, must be SQL-safe
 	 * @param string $searchFieldKey
 	 *        the key of the search field list, must not be empty, must be a
@@ -867,10 +867,11 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	 *
 	 * @return string[] the WHERE clause parts for the search in categories, will not be empty
 	 */
-	private function getSearchWherePartForMmRelation($searchWord, $searchFieldKey, $foreignTable, $mmTable) {
-		$this->checkParametersForMmSearchFunctions($searchWord, $searchFieldKey, $foreignTable, $mmTable);
+	private function getSearchWherePartForMmRelation($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable) {
+		$this->checkParametersForMmSearchFunctions($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable);
 
-		$matchQueryPart = 'MATCH (' . implode(',', self::$searchFieldList[$searchFieldKey]) . ') AGAINST (' . $searchWord . ')';
+		$matchQueryPart = 'MATCH (' . implode(',', self::$searchFieldList[$searchFieldKey]) . ') AGAINST (' . $quotedSearchWord
+			. ' IN BOOLEAN MODE)';
 		$foreignUids = tx_oelib_db::selectColumnForMultiple(
 			'uid', $foreignTable, $matchQueryPart . tx_oelib_db::enableFields($foreignTable)
 		);
