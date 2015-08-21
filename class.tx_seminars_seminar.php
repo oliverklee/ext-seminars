@@ -3151,7 +3151,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return string the corresponding element from the record data array
 	 */
-	private function getTopicString($key) {
+	protected function getTopicString($key) {
 		$result = '';
 
 		if ($this->isTopicOkay()) {
@@ -3195,7 +3195,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return string the corresponding element from the record data array
 	 */
-	private function getTopicDecimal($key) {
+	protected function getTopicDecimal($key) {
 		$result = '';
 
 		if ($this->isTopicOkay()) {
@@ -3218,7 +3218,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return bool the corresponding element from the record data array
 	 */
-	private function getTopicBoolean($key) {
+	protected function getTopicBoolean($key) {
 		return ($this->isTopicOkay())
 			? $this->topic->getRecordPropertyBoolean($key)
 			: $this->getRecordPropertyBoolean($key);
