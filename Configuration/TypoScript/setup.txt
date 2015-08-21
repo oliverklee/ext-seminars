@@ -152,6 +152,9 @@ plugin.tx_seminars {
 	# whether to show attendances on the registration queue in the CLI CSV export or not
 	showAttendancesOnRegistrationQueueInEmailCsv = 0
 
+	# whether to add the Excel-specific "sep=;" line to the CSV
+	addExcelSpecificSeparatorLineToCsv = 0
+
 	# whether to send a cancelation deadline reminder to the organizers
 	sendCancelationDeadlineReminder = 0
 

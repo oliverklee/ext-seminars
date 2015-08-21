@@ -133,11 +133,29 @@ class Tx_Seminars_Tests_Csv_EventListViewTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function renderForZeroRecordsReturnsOnlySeparatorSpecificationAndHeader() {
+	public function renderForZeroRecordsAndSeparatorDisabledReturnsOnlyHeader() {
 		$pageUid = $this->testingFramework->createSystemFolder();
 		$this->subject->setPageUid($pageUid);
 
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'uid,title');
+		$this->configuration->setAsBoolean('addExcelSpecificSeparatorLineToCsv', FALSE);
+
+		self::assertSame(
+			$this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
+				$this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
+			$this->subject->render()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForZeroRecordsAndSeparatorEnabledReturnsOnlySeparatorSpecificationAndHeader() {
+		$pageUid = $this->testingFramework->createSystemFolder();
+		$this->subject->setPageUid($pageUid);
+
+		$this->configuration->setAsString('fieldsFromEventsForCsv', 'uid,title');
+		$this->configuration->setAsBoolean('addExcelSpecificSeparatorLineToCsv', TRUE);
 
 		self::assertSame(
 			'sep=;' . CRLF .

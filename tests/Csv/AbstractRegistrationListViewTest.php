@@ -569,9 +569,23 @@ class Tx_Seminars_Tests_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_
 	/**
 	 * @test
 	 */
-	public function renderForBothConfigurationFieldsEmptyReturnsSeparatorMarkerAndEmptyLine() {
+	public function renderForBothConfigurationFieldsEmptyAndSeparatorEnabledReturnsSeparatorMarkerAndEmptyLine() {
+		$this->configuration->setAsBoolean('addExcelSpecificSeparatorLineToCsv', TRUE);
+
 		self::assertSame(
 			'sep=;' . CRLF . CRLF,
+			$this->subject->render()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function renderForBothConfigurationFieldsEmptyAndSeparatorDisabledReturnsEmptyLine() {
+		$this->configuration->setAsBoolean('addExcelSpecificSeparatorLineToCsv', FALSE);
+
+		self::assertSame(
+			CRLF,
 			$this->subject->render()
 		);
 	}

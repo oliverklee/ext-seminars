@@ -147,11 +147,16 @@ abstract class Tx_Seminars_Csv_AbstractListView {
 	abstract public function render();
 
 	/**
-	 * Returns the first line containing the specification of the separator character.
+	 * Depending on the configuration, either returns the first line containing the specification of the separator character
+	 * or just an empty string.
 	 *
 	 * @return string
 	 */
 	protected function createCsvSeparatorLine() {
+		if (!$this->configuration->getAsBoolean('addExcelSpecificSeparatorLineToCsv')) {
+			return '';
+		}
+
 		return 'sep=' . self::COLUMN_SEPARATOR . self::LINE_SEPARATOR;
 	}
 

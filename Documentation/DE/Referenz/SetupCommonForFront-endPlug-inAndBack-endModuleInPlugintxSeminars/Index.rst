@@ -859,6 +859,21 @@ only be configured using your TypoScript setup, but not via flexforms.
 .. container:: table-row
 
    Eigenschaft
+         addExcelSpecificSeparatorLineToCsv
+
+   Datentyp
+         boolean
+
+   Beschreibung
+         whether to add the Excel-specific "sep=;" line to the CSV
+
+   Standardwert
+         0
+
+
+.. container:: table-row
+
+   Eigenschaft
          sendCancelationDeadlineReminder
 
    Datentyp

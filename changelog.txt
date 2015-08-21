@@ -1,6 +1,7 @@
 0.10.0 (currently working on)
 
 Features:
+- [#5379] Make the Excel-specific CSV line configurable
 - [#5365] Full-text search for target_groups
 - [#5353] Clone feature for events in the FE editor
 - [#5287] Add additional notification e-mails for new FE-entered events

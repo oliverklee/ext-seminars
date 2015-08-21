@@ -146,13 +146,12 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function createListOfEventsForZeroRecordsHasOnlySeparatorSpecificationAndHeaderLine() {
+	public function createListOfEventsForZeroRecordsHasOnlyHeaderLine() {
 		$pid = $this->testingFramework->createSystemFolder();
 		$this->configuration->setAsString('fieldsFromEventsForCsv', 'uid,title');
 
 		self::assertSame(
-			'sep=;' . CRLF .
-				$this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
+			$this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
 				$this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
 			$this->fixture->createListOfEvents($pid)
 		);
@@ -453,13 +452,12 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function createListOfRegistrationsForZeroRecordsHasOnlySeparatorSpecificationHeaderLine() {
+	public function createListOfRegistrationsForZeroRecordsHasOnlyHeaderLine() {
 		$this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
 		$this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
 
 		self::assertSame(
-			'sep=;' . CRLF .
-				$this->localizeAndRemoveColon('LGL.name') . ';' .
+			$this->localizeAndRemoveColon('LGL.name') . ';' .
 				$this->localizeAndRemoveColon('tx_seminars_attendances.uid') . CRLF,
 			$this->fixture->createListOfRegistrations($this->eventUid)
 		);
@@ -1142,12 +1140,12 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function createListOfRegistrationsForBothConfigurationFieldsEmptyReturnsOnlySeparatorSpecification() {
+	public function createListOfRegistrationsForBothConfigurationFieldsEmptyReturnsCrLf() {
 		$this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
 		$this->configuration->setAsString('fieldsFromFeUserForCsv', '');
 
 		self::assertSame(
-			'sep=;' . CRLF . CRLF,
+			CRLF,
 			$this->fixture->createAndOutputListOfRegistrations($this->eventUid)
 		);
 	}
