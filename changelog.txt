@@ -3,6 +3,7 @@
 Features:
 
 Bug fixes:
+- [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
 
