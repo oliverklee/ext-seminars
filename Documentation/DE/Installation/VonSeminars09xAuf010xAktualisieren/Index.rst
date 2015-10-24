@@ -31,6 +31,9 @@ Aktualisierung Warnungen auf den Seiten zu sehen sein können.
 #. Aktualisieren Sie oelib und static\_info\_tables auf die aktuelle
    Version.
 
+#. Aktualisieren Sie auf das `gepatchte ameos\_formidable
+   <https://dl.dropboxusercontent.com/u/27225645/Extensions/T3X_ameos_formidable-1_1_564-z-201506082123.t3x>`_.
+
 #. Wenn Sie angepasste HTML-Template benutzen, machen Sie ein Diff
    zwischen den Originaltemplates und Ihren angepassten Templates, so
    dass Ihre Änderungen dokumentiert sind. (Um alle neuen Funktionen zu

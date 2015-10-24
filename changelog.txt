@@ -8,6 +8,7 @@ Bug fixes:
 Cleanup:
 
 Changes:
+- [#5399] Document the new FORMidable in the upgrade notes
 
 
 0.10.0 (released 2015-08-22)

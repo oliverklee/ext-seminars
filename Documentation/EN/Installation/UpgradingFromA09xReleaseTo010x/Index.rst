@@ -29,6 +29,9 @@ the front end until you have finished the upgrade.
 
 #. Update to the latest version of oelib and static\_info\_tables.
 
+#. Update to the `patched ameos\_formidable
+   <https://dl.dropboxusercontent.com/u/27225645/Extensions/T3X_ameos_formidable-1_1_564-z-201506082123.t3x>`_.
+
 #. If you are using custom HTML templates, make a diff between the
    provided templates and your templates so you know what you have
    changed. (You’ll need to create new templates to make use of all new
