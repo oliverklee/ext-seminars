@@ -9,6 +9,7 @@ Bug fixes:
 Cleanup:
 
 Changes:
+- [#5401] Mark the extension as stable
 - [#5399] Document the new FORMidable in the upgrade notes
 
 
