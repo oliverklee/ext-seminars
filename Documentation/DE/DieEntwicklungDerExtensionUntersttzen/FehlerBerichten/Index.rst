@@ -17,9 +17,9 @@ Fehler berichten
 ^^^^^^^^^^^^^^^^
 
 Wenn Sie einen Fehler finden oder eine neue Funktion vorschlagen
-möchten, können Sie sich einen Account im Bugtracker anlegen und dann
-(auf englisch) einen neuen Bericht für das Produkt *Seminarmanager*
-anlegen. Bitte geben Sie dabeifolgende Daten an:
+möchten, können Sie sich einen Account im `Bug racker <https://bugs.oliverklee.com/>`_
+anlegen und dann (auf englisch) einen neuen Bericht für das Produkt
+*Seminarmanager* anlegen. Bitte geben Sie dabei folgende Daten an:
 
 - die Versionsnummer dieser Extension, mit der das Problem auftritt
 
