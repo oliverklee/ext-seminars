@@ -533,8 +533,7 @@ only be configured using your TypoScript setup, but not via flexforms.
          string
 
    Beschreibung
-         ISO3 code of the currency to be used  **(XXX not used yet)** (taken
-         from the  *static\_info\_tables* extension)
+         ISO 4217 alpha 3 code of the currency to be used, must be valid
 
    Standardwert
          EUR
