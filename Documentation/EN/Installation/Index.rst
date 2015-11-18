@@ -36,5 +36,5 @@ Installation
    SettingUpTheFront-endRegistrationLists/Index
    SettingUpTheCommandLineInterface(cli)/Index
    TestingTheConfiguration/Index
-   UpgradingFromA09xReleaseTo010x/Index
+   UpgradingFromA010xReleaseTo10x/Index
    GettingAnOlderVersionOfTheSeminarManager/Index

@@ -36,5 +36,5 @@ Installation
    SettingUpTheFront-endRegistrationLists/Index
    BenutzungDesCli(commandLineInterface)/Index
    TestingTheConfiguration/Index
-   VonSeminars09xAuf010xAktualisieren/Index
+   VonSeminars010xAuf10xAktualisieren/Index
    EineLtereVersionDesSeminarmanagersInstallieren/Index

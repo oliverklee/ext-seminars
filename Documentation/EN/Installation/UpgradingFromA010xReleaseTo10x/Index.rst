@@ -13,19 +13,19 @@
 .. role::   php(code)
 
 
-Upgrading from a 0.9.x release to 0.10.x
+Upgrading from a 0.10.x release to 1.0.x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Upgrading to .10.x will bring you a lot of new features, but it will
+**Upgrading to 1.0.x will bring you a lot of new features, but it will
 also mean a bit of work if you are using custom HTML templates.**
 
 You should do the upgrade at a time when there are usually no new
 registrations as there might be some configuration check warnings on
 the front end until you have finished the upgrade.
 
-#. Make sure you are using PHP 5.3 or greater.
+#. Make sure you are using PHP 5.5 or greater.
 
-#. Make sure you are using TYPO3 4.5.0 or greater.
+#. Make sure you are using TYPO3 6.2.0 or greater.
 
 #. Update to the latest version of oelib and static\_info\_tables.
 
@@ -37,12 +37,6 @@ the front end until you have finished the upgrade.
    changed. (You’ll need to create new templates to make use of all new
    features. In addition, your old templates probably will display some
    garbage on the front end.) Switch off your custom templates.
-
-# Particularly, most of the CLASS\_ markers have been removed and been
-  replaced by fixed classes. You will need to remove the markers as well.
-
-#. If you are using the old single view hook, adapt your code to use the
-   new single view hook instead.
 
 #. Upgrade to the new Seminar Manager from TER and upgrade the database.
 

@@ -13,10 +13,10 @@
 .. role::   php(code)
 
 
-Von seminars 0.9.x auf 0.10.x aktualisieren
+Von seminars 0.10.x auf 1.0.x aktualisieren
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Eine Aktualisierung auf 0.10.x bringt viele neue Features, aber es
+**Eine Aktualisierung auf 1.0.x bringt viele neue Features, aber es
 bedeutet auch einiges an Arbeit, wenn Sie mit angepassten HTML-
 Templates arbeiten.**
 
@@ -24,9 +24,9 @@ Am besten führen Sie die Aktualisierung zu einem Zeitpunkt durch, zu
 dem keine neuen Anmeldungen zu erwarten sind, da während der
 Aktualisierung Warnungen auf den Seiten zu sehen sein können.
 
-#. Stellen Sie sicher, dass Sie mindestens PHP 5.3 benutzen.
+#. Stellen Sie sicher, dass Sie mindestens PHP 5.5 benutzen.
 
-#. Stellen Sie sicher, dass Sie mindestens TYPO3 4.5.0 benutzen.
+#. Stellen Sie sicher, dass Sie mindestens TYPO3 6.2.99 benutzen.
 
 #. Aktualisieren Sie oelib und static\_info\_tables auf die aktuelle
    Version.
@@ -40,13 +40,6 @@ Aktualisierung Warnungen auf den Seiten zu sehen sein können.
    benutzen, benötigen Sie neue Templates. Außerdem werden Ihre alten
    Templates im Frontend wahrscheinlich fehlerhaft dargestellt werden.)
    Schalten Sie die angepassten Templates aus.
-
-# Insbesondere sind die meisten Marker CLASS\_ verschwunden und durch
-  hartkodierte Klassen ersetzt worden. Bitte entfernen Sie die Marker
-  ebenfalls.
-
-#. Wenn Sie den alten Hook für die Einzelansicht benutzen, ändern Sie
-   Ihren Code, so dass er stattdessen den neuen Hook benutzt.
 
 #. Aktualisieren Sie den Seminarmanager aus dem TER und führen Sie die
    Datenbank-Aktualisierungen durch.
