@@ -1,4 +1,4 @@
-﻿.. ==================================================
+.. ==================================================
 .. FOR YOUR INFORMATION
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
@@ -58,12 +58,7 @@ Bekannte Probleme
 - Sortieren in den Front-end-Listen funktioniert mit MySQL < 4.1 nicht
   richtig.
 
-- Abhängig von Ihrer Konfiguration und den von anderen installierten
-  Extensions, kann es sein, dass diese Extension abstürzt, wenn PHP nur
-  30 oder 32 MB Speicher zugewiesen hat. Wenn Sie solche Probleme sehen
-  (Fehlerbericht), weisen Sie PHP bitte 64 MB oder mehr zu.
-
-- Manche Benutzer haben von Problemen mit realURL berichtet (vor allem
+- Manche Benutzer haben von Problemen mit RealURL berichtet (vor allem
   mit dem Internet Explorer) bezüglich nicht funktionierenden
   Weiterleitungen zur Danke-Seite oder doppelten Anmeldungen
   (Fehlerbericht). Wenn diese Probleme bei Ihnen auftreten, schalten Sie

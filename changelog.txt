@@ -10,6 +10,7 @@ Bug fixes:
 Cleanup:
 
 Changes:
+- [#5406] Require TYPO3 6.2 and PHP 5.5
 - [#5401] Mark the extension as stable
 - [#5399] Document the new FORMidable in the upgrade notes
 

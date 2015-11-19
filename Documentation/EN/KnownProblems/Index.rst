@@ -1,4 +1,4 @@
-﻿.. ==================================================
+.. ==================================================
 .. FOR YOUR INFORMATION
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
@@ -45,11 +45,6 @@ Known problems
 
 - The search in the list view covers pretty most of what is visible in
   the single view except for the payment methods (this is intended).
-
-- Depending on your configuration and on which other extensions you have
-  installed, this extension may crash if PHP has only 30 or 32 MB of
-  RAM. If you encounter these crashes (bug report), please assign PHP 64
-  MB or more.
 
 - If the maximum upload file size in PHP is set to a lower value than
   the one in TYPO3, the FE editor does not show an error message if one

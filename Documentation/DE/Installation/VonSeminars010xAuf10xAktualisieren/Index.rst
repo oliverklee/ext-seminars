@@ -26,7 +26,7 @@ Aktualisierung Warnungen auf den Seiten zu sehen sein können.
 
 #. Stellen Sie sicher, dass Sie mindestens PHP 5.5 benutzen.
 
-#. Stellen Sie sicher, dass Sie mindestens TYPO3 6.2.99 benutzen.
+#. Stellen Sie sicher, dass Sie mindestens TYPO3 6.2.0 benutzen.
 
 #. Aktualisieren Sie oelib und static\_info\_tables auf die aktuelle
    Version.

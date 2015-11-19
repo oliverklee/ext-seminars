@@ -1,4 +1,4 @@
-﻿.. ==================================================
+.. ==================================================
 .. FOR YOUR INFORMATION
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
@@ -16,11 +16,11 @@
 System requirements
 ^^^^^^^^^^^^^^^^^^^
 
-**TYPO3:** You need at least TYPO3 4.5.0.
+**TYPO3:** You need at least TYPO3 CMS 6.2.0.
 
-**PHP:** You need at least PHP 5.3.
+**PHP:** You need at least PHP 5.5.
 
-It is recommended to assign PHP 64 MB of RAM.
+It is recommended to assign PHP 128 MB of RAM.
 
 **MySQL/PostgreSQL:** You need MySQL 5.0 or greater.
 
