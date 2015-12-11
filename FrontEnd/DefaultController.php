@@ -376,12 +376,12 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Gets the hooks for the list view.
 	 *
-	 * @throws t3lib_exception
-	 *         if there are registered hook classes that do not implement the
-	 *         tx_seminars_Interface_Hook_EventListView interface
-	 *
 	 * @return tx_seminars_Interface_Hook_EventListView[]
 	 *         the hook objects, will be empty if no hooks have been set
+	 *
+	 * @throws \UnexpectedValueException
+	 *          if there are registered hook classes that do not implement the
+	 *          tx_seminars_Interface_Hook_EventListView interface
 	 */
 	protected function getListViewHooks() {
 		if (!$this->listViewHooksHaveBeenRetrieved) {
@@ -390,7 +390,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				foreach ($hookClasses as $hookClass) {
 					$hookInstance = GeneralUtility::getUserObj($hookClass);
 					if (!($hookInstance instanceof tx_seminars_Interface_Hook_EventListView)) {
-						throw new t3lib_exception(
+						throw new \UnexpectedValueException(
 							'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .
 								'but does not implement the tx_seminars_Interface_Hook_EventListView interface.',
 								1301928334
@@ -409,12 +409,12 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	/**
 	 * Gets the hooks for the single view.
 	 *
-	 * @throws t3lib_exception
-	 *         if there are registered hook classes that do not implement the
-	 *         tx_seminars_Interface_Hook_EventSingleView interface
-	 *
 	 * @return tx_seminars_Interface_Hook_EventSingleView[]
 	 *         the hook objects, will be empty if no hooks have been set
+	 *
+	 * @throws \UnexpectedValueException
+	 *          if there are registered hook classes that do not implement the
+	 *          tx_seminars_Interface_Hook_EventSingleView interface
 	 */
 	protected function getSingleViewHooks() {
 		if (!$this->singleViewHooksHaveBeenRetrieved) {
@@ -423,7 +423,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 				foreach ($hookClasses as $hookClass) {
 					$hookInstance = GeneralUtility::getUserObj($hookClass);
 					if (!($hookInstance instanceof tx_seminars_Interface_Hook_EventSingleView)) {
-						throw new t3lib_exception(
+						throw new \UnexpectedValueException(
 							'The class ' . get_class($hookInstance) . ' is used for the event single view hook, ' .
 								'but does not implement the tx_seminars_Interface_Hook_EventSingleView interface.',
 								1306432026
@@ -711,8 +711,6 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 * Creates the single view for the event with the event in $this->seminar.
 	 *
 	 * @return string the rendered single view
-	 *
-	 * @throws t3lib_exception
 	 */
 	protected function createSingleViewForExistingEvent() {
 		/** @var tx_seminars_Mapper_Event $mapper */

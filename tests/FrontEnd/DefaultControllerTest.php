@@ -8761,7 +8761,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 *
-	 * @expectedException t3lib_exception
+	 * @expectedException \UnexpectedValueException
 	 */
 	public function eventsListForModifyListRowHookWithoutInterfaceThrowsException() {
 		$hookClass = uniqid('myEventsListRowHook');
@@ -8833,7 +8833,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 *
-	 * @expectedException t3lib_exception
+	 * @expectedException \UnexpectedValueException
 	 */
 	public function myEventsListForModifyMyEventsListRowHookWithoutInterfaceThrowsException() {
 		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
