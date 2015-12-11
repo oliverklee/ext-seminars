@@ -12,6 +12,8 @@
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * This class represents a seminar (or similar event).
  *
@@ -750,7 +752,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				break;
 		}
 
-		return t3lib_div::makeInstance(
+		return GeneralUtility::makeInstance(
 			'tx_seminars_Bag_Speaker',
 			$mmTable . '.uid_local = ' . $this->getUid() . ' AND ' . 'tx_seminars_speakers.uid = ' . $mmTable . '.uid_foreign',
 			$mmTable,
@@ -1144,7 +1146,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function formatPrice($value) {
 		/** @var tx_oelib_ViewHelper_Price $priceViewHelper */
-		$priceViewHelper = t3lib_div::makeInstance('tx_oelib_ViewHelper_Price');
+		$priceViewHelper = GeneralUtility::makeInstance('tx_oelib_ViewHelper_Price');
 		$priceViewHelper->setCurrencyFromIsoAlpha3Code(
 			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency')
 		);
@@ -2086,7 +2088,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		/** @var $builder tx_seminars_BagBuilder_Organizer */
-		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Organizer');
+		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Organizer');
 		$builder->limitToEvent($this->getUid());
 
 		return $builder->build();
@@ -2265,7 +2267,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		/** @var tx_seminars_Bag_Organizer $organizerBag */
-		$organizerBag = t3lib_div::makeInstance(
+		$organizerBag = GeneralUtility::makeInstance(
 			'tx_seminars_Bag_Organizer',
 			'tx_seminars_seminars_organizing_partners_mm.uid_local = ' . $this->getUid() . ' AND ' .
 				'tx_seminars_seminars_organizing_partners_mm.uid_foreign = tx_seminars_organizers.uid',
@@ -2334,7 +2336,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return string formatted output (may be empty)
 	 */
 	public function dumpSeminarValues($keysList) {
-		$keys = t3lib_div::trimExplode(',', $keysList, TRUE);
+		$keys = GeneralUtility::trimExplode(',', $keysList, TRUE);
 		$keysWithLabels = array();
 
 		$maxLength = 0;
@@ -2998,7 +3000,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'tx_seminars_seminars')
 			) {
 				/** @var tx_seminars_seminar $result */
-				$result = t3lib_div::makeInstance(
+				$result = GeneralUtility::makeInstance(
 					'tx_seminars_seminar',
 					$this->getRecordPropertyInteger('topic')
 				);
@@ -3787,7 +3789,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				' AND tx_seminars_attendances.user = ' . $feUserUid;
 
 			/** @var tx_seminars_Bag_Event $seminarBag */
-			$seminarBag = t3lib_div::makeInstance('tx_seminars_Bag_Event', $queryWhere, $additionalTables);
+			$seminarBag = GeneralUtility::makeInstance('tx_seminars_Bag_Event', $queryWhere, $additionalTables);
 
 			// One blocking event is enough.
 			$result = !$seminarBag->isEmpty();
@@ -4113,7 +4115,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	private function createTimeSlotBag() {
 		/** @var tx_seminars_Bag_TimeSlot $bag */
-		$bag = t3lib_div::makeInstance(
+		$bag = GeneralUtility::makeInstance(
 			'tx_seminars_Bag_TimeSlot',
 			'tx_seminars_timeslots.seminar = ' . $this->getUid() .
 				' AND tx_seminars_timeslots.place > 0',
@@ -4141,7 +4143,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = array();
 
 		/** @var tx_seminars_Bag_TimeSlot $timeSlotBag */
-		$timeSlotBag = t3lib_div::makeInstance(
+		$timeSlotBag = GeneralUtility::makeInstance(
 			'tx_seminars_Bag_TimeSlot',
 			'tx_seminars_timeslots.seminar = ' . $this->getUid(),
 			'',
@@ -4201,7 +4203,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		/** @var tx_seminars_BagBuilder_Category $builder */
-		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Category');
+		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Category');
 		$builder->limitToEvents($this->getTopicUid());
 		$builder->sortByRelationOrder();
 		$bag = $builder->build();
@@ -4269,10 +4271,10 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$result = $filesFromTopic;
 		$uploadFolderPath = PATH_site . 'uploads/tx_seminars/';
-		$uploadFolderUrl = t3lib_div::getIndpEnv('TYPO3_SITE_URL') .
+		$uploadFolderUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL') .
 			'uploads/tx_seminars/';
 
-		$attachedFiles = t3lib_div::trimExplode(
+		$attachedFiles = GeneralUtility::trimExplode(
 			',', $this->getRecordPropertyString('attached_files'), TRUE
 		);
 
@@ -4286,7 +4288,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 					array('parameter' => $uploadFolderUrl . $attachedFile)
 				),
 				'type' => htmlspecialchars((isset($matches[1]) ? $matches[1] : 'none')),
-				'size' => t3lib_div::formatSize(filesize($uploadFolderPath . $attachedFile)),
+				'size' => GeneralUtility::formatSize(filesize($uploadFolderPath . $attachedFile)),
 			);
 		}
 
@@ -4394,7 +4396,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function getRequirements() {
 		/** @var tx_seminars_BagBuilder_Event $builder */
-		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
+		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->limitToRequiredEventTopics($this->getTopicUid());
 
 		return $builder->build();
@@ -4409,7 +4411,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function getDependencies() {
 		/** @var tx_seminars_BagBuilder_Event $builder */
-		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
+		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->limitToDependingEventTopics($this->getTopicUid());
 
 		return $builder->build();
@@ -4590,7 +4592,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function getPlaces() {
 		if (!$this->hasPlace()) {
 			/** @var Tx_Oelib_List $list */
-			$list = t3lib_div::makeInstance('tx_oelib_List');
+			$list = GeneralUtility::makeInstance('tx_oelib_List');
 			return $list;
 		}
 
@@ -4602,7 +4604,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		);
 
 		/** @var tx_seminars_Mapper_Place $mapper */
-		$mapper = t3lib_div::makeInstance('tx_seminars_Mapper_Place');
+		$mapper = GeneralUtility::makeInstance('tx_seminars_Mapper_Place');
 		return $mapper->getListOfModels($places);
 	}
 

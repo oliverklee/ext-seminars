@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -108,7 +109,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework->createFakeFrontEnd();
 
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
-		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
 		$mailerFactory->enableTestMode();
 		$this->mailer = $mailerFactory->getMailer();
 

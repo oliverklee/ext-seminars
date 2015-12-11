@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a registration/attendance.
@@ -498,7 +499,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @return string the values retrieved from $this->userData, may be empty
 	 */
 	public function getUserDataAsHtml($keys, tslib_pibase $plugin) {
-		$singleKeys = t3lib_div::trimExplode(',', $keys, TRUE);
+		$singleKeys = GeneralUtility::trimExplode(',', $keys, TRUE);
 		$singleValues = array();
 
 		foreach ($singleKeys as $key) {
@@ -601,7 +602,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			if (isset(self::$cachedSeminars[$seminarUid])) {
 				$this->seminar = self::$cachedSeminars[$seminarUid];
 			} else {
-				$this->seminar = t3lib_div::makeInstance(
+				$this->seminar = GeneralUtility::makeInstance(
 					'tx_seminars_seminar', $seminarUid
 				);
 				self::$cachedSeminars[$seminarUid] = $this->seminar;
@@ -768,7 +769,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @return string formatted output (may be empty)
 	 */
 	public function dumpUserValues($keysList) {
-		$keys = t3lib_div::trimExplode(',', $keysList, TRUE);
+		$keys = GeneralUtility::trimExplode(',', $keysList, TRUE);
 		$labels = array();
 		$result = '';
 
@@ -818,7 +819,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @return string formatted output (may be empty)
 	 */
 	public function dumpAttendanceValues($keysList) {
-		$keys = t3lib_div::trimExplode(',', $keysList, TRUE);
+		$keys = GeneralUtility::trimExplode(',', $keysList, TRUE);
 		$labels = array();
 
 		$maximumLabelLength = 0;
@@ -1067,7 +1068,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		}
 
 		/** @var t3lib_refindex $referenceIndex */
-		$referenceIndex = t3lib_div::makeInstance('t3lib_refindex');
+		$referenceIndex = GeneralUtility::makeInstance('t3lib_refindex');
 		$referenceIndex->updateRefIndexTable('tx_seminars_attendances', $this->getUid());
 
 		return TRUE;
@@ -1235,7 +1236,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			return '';
 		}
 
-		$names = t3lib_div::trimExplode(LF, $this->getAttendeesNames(), TRUE);
+		$names = GeneralUtility::trimExplode(LF, $this->getAttendeesNames(), TRUE);
 		if ($this->hasRegisteredMySelf()) {
 			$names = array_merge(array($this->getFrontEndUser()->getName()), $names);
 		}

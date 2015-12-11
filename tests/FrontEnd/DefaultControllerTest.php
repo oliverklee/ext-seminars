@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -6795,7 +6796,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 */
 	public function registrationFormHtmlspecialcharsEventTitle() {
 		$registrationFormMock = $this->getMock('tx_seminars_FrontEnd_RegistrationForm', array(), array(), '', FALSE);
-		t3lib_div::addInstance('tx_seminars_FrontEnd_RegistrationForm', $registrationFormMock);
+		GeneralUtility::addInstance('tx_seminars_FrontEnd_RegistrationForm', $registrationFormMock);
 
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
@@ -8318,7 +8319,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture = new $className();
 		$fixture->hideEvent($event);
 
-		$currentUrl = t3lib_div::locationHeaderUrl(t3lib_div::getIndpEnv('REQUEST_URI'));
+		$currentUrl = GeneralUtility::locationHeaderUrl(GeneralUtility::getIndpEnv('REQUEST_URI'));
 		self::assertSame(
 			'Location: ' . $currentUrl,
 			$this->headerCollector->getLastAddedHeader()
@@ -8401,7 +8402,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture = new $className();
 		$fixture->unhideEvent($event);
 
-		$currentUrl = t3lib_div::locationHeaderUrl(t3lib_div::getIndpEnv('REQUEST_URI'));
+		$currentUrl = GeneralUtility::locationHeaderUrl(GeneralUtility::getIndpEnv('REQUEST_URI'));
 		self::assertSame(
 			'Location: ' . $currentUrl,
 			$this->headerCollector->getLastAddedHeader()
@@ -8470,7 +8471,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$fixture = new $className();
 		$fixture->copyEvent($event);
 
-		$currentUrl = t3lib_div::locationHeaderUrl(t3lib_div::getIndpEnv('REQUEST_URI'));
+		$currentUrl = GeneralUtility::locationHeaderUrl(GeneralUtility::getIndpEnv('REQUEST_URI'));
 		self::assertSame(
 			'Location: ' . $currentUrl,
 			$this->headerCollector->getLastAddedHeader()

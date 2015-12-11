@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a registration list in the back end.
@@ -81,7 +82,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_Abstract
 			$GLOBALS['LANG']->getLL('registrationlist.seminar.date')
 		);
 
-		$eventUid = (int)t3lib_div::_GP('eventUid');
+		$eventUid = (int)GeneralUtility::_GP('eventUid');
 		/** @var tx_seminars_Mapper_Event $mapper */
 		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
 		if (($eventUid > 0) && $mapper->existsModel($eventUid)) {
@@ -143,7 +144,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_Abstract
 	 */
 	private function setRegistrationTableMarkers($registrationsToShow) {
 		/** @var tx_seminars_BagBuilder_Registration $builder */
-		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Registration');
+		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Registration');
 		$pageData = $this->page->getPageData();
 
 		switch ($registrationsToShow) {

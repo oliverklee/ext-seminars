@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class provides functions for creating the link/URL to the single view page of an event.
@@ -102,7 +103,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	 *         the absolute URL for the event's single view, not htmlspecialchared
 	 */
 	public function createAbsoluteUrlForEvent(tx_seminars_Model_Event $event) {
-		return t3lib_div::locationHeaderUrl(
+		return GeneralUtility::locationHeaderUrl(
 			$this->createRelativeUrlForEvent($event)
 		);
 	}
@@ -118,7 +119,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	public function createRelativeUrlForEvent(tx_seminars_Model_Event $event) {
 		$linkConfiguration = array(
 			'parameter' => $this->getSingleViewPageForEvent($event),
-			'additionalParams' => t3lib_div::implodeArrayForUrl(
+			'additionalParams' => GeneralUtility::implodeArrayForUrl(
 				'tx_seminars_pi1',
 				array('showUid' => $event->getUid()),
 				'',
@@ -152,10 +153,10 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	protected function createFakeFrontEnd() {
 		$this->suppressFrontEndCookies();
 
-		$GLOBALS['TT'] = t3lib_div::makeInstance('t3lib_TimeTrackNull');
+		$GLOBALS['TT'] = GeneralUtility::makeInstance('t3lib_TimeTrackNull');
 
 		/** @var tslib_fe $frontEnd */
-		$frontEnd = t3lib_div::makeInstance('tslib_fe', $GLOBALS['TYPO3_CONF_VARS'], 0, 0);
+		$frontEnd = GeneralUtility::makeInstance('tslib_fe', $GLOBALS['TYPO3_CONF_VARS'], 0, 0);
 
 		// simulates a normal FE without any logged-in FE or BE user
 		$frontEnd->beUserLogin = FALSE;

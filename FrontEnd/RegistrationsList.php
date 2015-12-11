@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a list of registrations for the front end.
@@ -75,7 +76,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * @return void
 	 */
 	private function createSeminar($seminarUid) {
-		$this->seminar = t3lib_div::makeInstance('tx_seminars_seminar', $seminarUid);
+		$this->seminar = GeneralUtility::makeInstance('tx_seminars_seminar', $seminarUid);
 	}
 
 	/**
@@ -208,7 +209,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 */
 	private function createRegistrationBagBuilder() {
 		/** @var tx_seminars_BagBuilder_Registration $builder */
-		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Registration');
+		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Registration');
 		$builder->limitToEvent($this->seminar->getUid());
 		$builder->limitToExistingUsers();
 		$builder->setOrderBy('crdate');
@@ -296,7 +297,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * @return string[] keys of the front-end user fields to display, might be empty
 	 */
 	private function getFrontEndUserFields() {
-		return t3lib_div::trimExplode(
+		return GeneralUtility::trimExplode(
 			',',
 			$this->getConfValueString(
 				'showFeUserFieldsInRegistrationsList', 's_template_special'
@@ -312,7 +313,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * @return string[] keys of the registration fields to display, might be empty
 	 */
 	private function getRegistrationFields() {
-		return t3lib_div::trimExplode(
+		return GeneralUtility::trimExplode(
 			',',
 			$this->getConfValueString(
 				'showRegistrationFieldsInRegistrationList', 's_template_special'

@@ -21,6 +21,7 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This is the base class for lists in the back end.
@@ -225,7 +226,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 				'</div>' . LF;
 
 			/** @var t3lib_FlashMessage $message */
-			$message = t3lib_div::makeInstance(
+			$message = GeneralUtility::makeInstance(
 				't3lib_FlashMessage',
 				$storageLabel,
 				'',
@@ -234,7 +235,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 			$this->addFlashMessage($message);
 
 			/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
-			$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
+			$flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
 			/** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
 			$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 			$renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
@@ -254,7 +255,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 */
 	protected function addFlashMessage(t3lib_FlashMessage $flashMessage) {
 		/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
-		$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+		$flashMessageService = GeneralUtility::makeInstance(
 			'TYPO3\\CMS\\Core\\Messaging\\FlashMessageService'
 		);
 		/** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
@@ -271,7 +272,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 	 * @return string the URL to return
 	 */
 	protected function editNewUrl($params, $backPath = '') {
-		$returnUrl = 'returnUrl=' . rawurlencode(t3lib_div::getIndpEnv('REQUEST_URI'));
+		$returnUrl = 'returnUrl=' . rawurlencode(GeneralUtility::getIndpEnv('REQUEST_URI'));
 
 		return $backPath . 'alt_doc.php?' . $returnUrl . $params;
 	}

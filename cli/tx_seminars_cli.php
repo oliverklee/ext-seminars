@@ -33,7 +33,7 @@ setlocale(LC_NUMERIC, 'C');
 
 try {
 	/** @var tx_seminars_cli_MailNotifier $mailNotifier */
-	$mailNotifier = t3lib_div::makeInstance('tx_seminars_cli_MailNotifier');
+	$mailNotifier = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_seminars_cli_MailNotifier');
 	$mailNotifier->start();
 } catch (Exception $exception) {
 	echo $exception->getMessage();

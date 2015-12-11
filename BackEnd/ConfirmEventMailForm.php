@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates back-end e-mail form for confirming an event.
@@ -83,7 +84,7 @@ class tx_seminars_BackEnd_ConfirmEventMailForm extends tx_seminars_BackEnd_Abstr
 		$mapper->save($this->getEvent());
 
 		/** @var t3lib_FlashMessage $message */
-		$message = t3lib_div::makeInstance(
+		$message = GeneralUtility::makeInstance(
 			't3lib_FlashMessage',
 			$GLOBALS['LANG']->getLL('message_eventConfirmed'),
 			'',

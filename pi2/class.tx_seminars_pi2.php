@@ -12,6 +12,8 @@
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 if (is_object($GLOBALS['LANG'])) {
 	$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
 }
@@ -155,7 +157,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 */
 	public function createAndOutputListOfRegistrations($eventUid = 0) {
 		/** @var Tx_Seminars_Csv_EmailRegistrationListView $listView */
-		$listView = t3lib_div::makeInstance('Tx_Seminars_Csv_DownloadRegistrationListView');
+		$listView = GeneralUtility::makeInstance('Tx_Seminars_Csv_DownloadRegistrationListView');
 
 		$pageUid = (int)$this->piVars['pid'];
 		if ($eventUid > 0) {
@@ -192,7 +194,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 		}
 
 		/** @var Tx_Seminars_Csv_EmailRegistrationListView $listView */
-		$listView = t3lib_div::makeInstance('Tx_Seminars_Csv_DownloadRegistrationListView');
+		$listView = GeneralUtility::makeInstance('Tx_Seminars_Csv_DownloadRegistrationListView');
 		$listView->setEventUid($eventUid);
 
 		return $listView->render();
@@ -233,7 +235,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 */
 	public function createListOfEvents($pageUid) {
 		/** @var Tx_Seminars_Csv_EventListView $eventListView */
-		$eventListView = t3lib_div::makeInstance('Tx_Seminars_Csv_EventListView');
+		$eventListView = GeneralUtility::makeInstance('Tx_Seminars_Csv_EventListView');
 		$eventListView->setPageUid($pageUid);
 
 		return $eventListView->render();
@@ -254,15 +256,15 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 		switch ($this->getTypo3Mode()) {
 			case 'BE':
 				/** @var Tx_Seminars_Csv_BackEndRegistrationAccessCheck $accessCheck */
-				$accessCheck = t3lib_div::makeInstance('Tx_Seminars_Csv_BackEndRegistrationAccessCheck');
+				$accessCheck = GeneralUtility::makeInstance('Tx_Seminars_Csv_BackEndRegistrationAccessCheck');
 				$result = $accessCheck->hasAccess();
 				break;
 			case 'FE':
 				/** @var Tx_Seminars_Csv_FrontEndRegistrationAccessCheck $accessCheck */
-				$accessCheck = t3lib_div::makeInstance('Tx_Seminars_Csv_FrontEndRegistrationAccessCheck');
+				$accessCheck = GeneralUtility::makeInstance('Tx_Seminars_Csv_FrontEndRegistrationAccessCheck');
 
 				/** @var tx_seminars_seminar $seminar */
-				$seminar = t3lib_div::makeInstance('tx_seminars_seminar', $eventUid);
+				$seminar = GeneralUtility::makeInstance('tx_seminars_seminar', $eventUid);
 				$accessCheck->setEvent($seminar);
 
 				$result = $accessCheck->hasAccess();
@@ -283,7 +285,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 */
 	protected function canAccessListOfEvents($pageUid) {
 		/** @var Tx_Seminars_Csv_BackEndEventAccessCheck $accessCheck */
-		$accessCheck = t3lib_div::makeInstance('Tx_Seminars_Csv_BackEndEventAccessCheck');
+		$accessCheck = GeneralUtility::makeInstance('Tx_Seminars_Csv_BackEndEventAccessCheck');
 		$accessCheck->setPageUid($pageUid);
 
 		return $accessCheck->hasAccess();
@@ -365,7 +367,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 		switch ($this->getTypo3Mode()) {
 			case 'BE':
 				/** @var Tx_Seminars_Csv_BackEndRegistrationAccessCheck $accessCheck */
-				$accessCheck = t3lib_div::makeInstance('Tx_Seminars_Csv_BackEndRegistrationAccessCheck');
+				$accessCheck = GeneralUtility::makeInstance('Tx_Seminars_Csv_BackEndRegistrationAccessCheck');
 				$accessCheck->setPageUid($pageUid);
 				$result = $accessCheck->hasAccess();
 				break;

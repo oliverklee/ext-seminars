@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -5765,7 +5766,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		self::assertSame(
-			t3lib_div::formatSize(filesize($dummyFile)),
+			GeneralUtility::formatSize(filesize($dummyFile)),
 			$attachedFiles[0]['size']
 		);
 	}
@@ -5893,7 +5894,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
 		$this->fixture->setAttachedFiles($dummyFileName1 . ',' . $dummyFileName2);
 
-		t3lib_div::writeFile($dummyFile2, 'Test');
+		GeneralUtility::writeFile($dummyFile2, 'Test');
 
 		$attachedFiles = $this->fixture->getAttachedFiles($this->pi1);
 
@@ -5903,7 +5904,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		self::assertSame(
-			t3lib_div::formatSize(filesize($dummyFile1)),
+			GeneralUtility::formatSize(filesize($dummyFile1)),
 			$attachedFiles[0]['size']
 		);
 
@@ -5913,7 +5914,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		);
 
 		self::assertSame(
-			t3lib_div::formatSize(filesize($dummyFile2)),
+			GeneralUtility::formatSize(filesize($dummyFile2)),
 			$attachedFiles[1]['size']
 		);
 	}

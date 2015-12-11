@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a speaker list in the back end.
@@ -68,7 +69,7 @@ class tx_seminars_BackEnd_SpeakersList extends tx_seminars_BackEnd_AbstractList 
 		);
 
 		/** @var tx_seminars_BagBuilder_Speaker $builder */
-		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Speaker');
+		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Speaker');
 		$builder->showHiddenRecords();
 
 		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);

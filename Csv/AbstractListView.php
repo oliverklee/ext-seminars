@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a CSV export of registrations.
@@ -75,7 +76,7 @@ abstract class Tx_Seminars_Csv_AbstractListView {
 			if (isset($GLOBALS['LANG'])) {
 				$this->translator = $GLOBALS['LANG'];
 			} else {
-				$this->translator = t3lib_div::makeInstance('language');
+				$this->translator = GeneralUtility::makeInstance('language');
 				if (isset($GLOBALS['BE_USER'])) {
 					$this->translator->init($GLOBALS['BE_USER']->uc['lang']);
 				} else {

@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class is a controller which allows to create and edit events on the FE.
@@ -76,7 +77,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	private function storeAttachedFiles() {
 		if (!$this->isTestMode()) {
-			$this->attachedFiles = t3lib_div::trimExplode(
+			$this->attachedFiles = GeneralUtility::trimExplode(
 				',',
 				$this->getFormCreator()->oDataHandler
 					->__aStoredData['attached_files'],
@@ -111,7 +112,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$this->storeAttachedFiles();
 
 		/** @var tx_oelib_Template $template */
-		$template = t3lib_div::makeInstance('tx_oelib_Template');
+		$template = GeneralUtility::makeInstance('tx_oelib_Template');
 		$template->processTemplate(parent::render());
 
 		$template->hideSubpartsArray(
@@ -588,7 +589,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$additionalParameters = '';
 
 		if ($this->getFormValue('proceed_file_upload')) {
-			$additionalParameters = t3lib_div::implodeArrayForUrl(
+			$additionalParameters = GeneralUtility::implodeArrayForUrl(
 				$this->prefixId,
 				array('seminar' => $this->getObjectUid())
 			);
@@ -599,7 +600,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			);
 		}
 
-		return t3lib_div::locationHeaderUrl(
+		return GeneralUtility::locationHeaderUrl(
 			$this->cObj->typoLink_URL(array(
 				'parameter' => $pageId,
 				'additionalParams' => $additionalParameters,
@@ -630,7 +631,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$user = self::getLoggedInUser();
 		if ($objectUid > 0) {
 			/** @var tx_seminars_seminar $seminar */
-			$seminar = t3lib_div::makeInstance('tx_seminars_seminar', $this->getObjectUid(), FALSE, TRUE);
+			$seminar = GeneralUtility::makeInstance('tx_seminars_seminar', $this->getObjectUid(), FALSE, TRUE);
 			$isUserVip = $seminar->isUserVip($user->getUid(), $this->getConfValueInteger('defaultEventVipsFeGroupID'));
 			$isUserOwner = $seminar->isOwnerFeUser();
 			$mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');
@@ -703,7 +704,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @return void
 	 */
 	private function processAttachments(array &$formData) {
-		$filesToDelete = t3lib_div::trimExplode(
+		$filesToDelete = GeneralUtility::trimExplode(
 			',', $formData['delete_attached_files'], TRUE
 		);
 
@@ -874,7 +875,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		}
 
 		$fileToCheck = array_pop(
-			t3lib_div::trimExplode(',', $valueToCheck['value'], TRUE)
+			GeneralUtility::trimExplode(',', $valueToCheck['value'], TRUE)
 		);
 
 		$this->checkFileSize($fileToCheck);
@@ -920,7 +921,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	private function checkFileSize($fileName) {
 		$maximumFileSize = $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'];
 		/** @var t3lib_basicFileFunctions $fileUtility */
-		$fileUtility = t3lib_div::makeInstance('t3lib_basicFileFunctions');
+		$fileUtility = GeneralUtility::makeInstance('t3lib_basicFileFunctions');
 		$fileInformation = $fileUtility->getTotalFileInfo(PATH_site . 'uploads/tx_seminars/' . $fileName);
 
 		if ($fileInformation['size'] > ($maximumFileSize * 1024)) {
@@ -965,7 +966,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	private function getHiddenSubparts() {
 		/** @var tx_oelib_Visibility_Tree $visibilityTree */
-		$visibilityTree = t3lib_div::makeInstance('tx_oelib_Visibility_Tree', $this->createTemplateStructure());
+		$visibilityTree = GeneralUtility::makeInstance('tx_oelib_Visibility_Tree', $this->createTemplateStructure());
 
 		$visibilityTree->makeNodesVisible($this->getFieldsToShow());
 		return $visibilityTree->getKeysOfHiddenSubparts();
@@ -1064,7 +1065,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @return string[] the keys of the fields which should be shown, will be empty if all fields should be hidden
 	 */
 	private function getFieldsToShow() {
-		$fieldsToShow = t3lib_div::trimExplode(
+		$fieldsToShow = GeneralUtility::trimExplode(
 			',',
 			$this->getConfValueString(
 				'displayFrontEndEditorFields', 's_fe_editing'),
@@ -1103,7 +1104,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * @return void
 	 */
 	private function setRequiredFormFields() {
-		$this->requiredFormFields = t3lib_div::trimExplode(
+		$this->requiredFormFields = GeneralUtility::trimExplode(
 			',',
 			$this->getConfValueString(
 				'requiredFrontEndEditorFields', 's_fe_editing'
@@ -1272,14 +1273,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 
 		if ($event !== NULL && $event->isHidden()) {
 			/** @var tx_oelib_Mail $eMail */
-			$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
+			$eMail = GeneralUtility::makeInstance('tx_oelib_Mail');
 			$eMail->addRecipient($reviewer);
 			$eMail->setSender(self::getLoggedInUser());
 			$eMail->setSubject($this->translate('publish_event_subject'));
 			$eMail->setMessage($this->createEMailContent($event));
 
 			/** @var Tx_Oelib_MailerFactory $mailerFactory */
-			$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+			$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
 			$mailerFactory->getMailer()->send($eMail);
 		}
 	}
@@ -1339,13 +1340,13 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	private function createReviewUrl() {
 		$url = $this->cObj->typoLink_URL(array(
 			'parameter' => $GLOBALS['TSFE']->id . ',' . tx_seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
-			'additionalParams' => t3lib_div::implodeArrayForUrl(
+			'additionalParams' => GeneralUtility::implodeArrayForUrl(
 				'tx_seminars_publication', array('hash' => $this->publicationHash), '', FALSE, TRUE
 			),
 			'type' => tx_seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
 		));
 
-		return t3lib_div::locationHeaderUrl(preg_replace(array('/\\[/', '/\\]/'), array('%5B', '%5D'), $url));
+		return GeneralUtility::locationHeaderUrl(preg_replace(array('/\\[/', '/\\]/'), array('%5B', '%5D'), $url));
 	}
 
 	/**
@@ -1364,14 +1365,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		}
 
 		/** @var tx_oelib_Mail $eMail */
-		$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
+		$eMail = GeneralUtility::makeInstance('tx_oelib_Mail');
 		$eMail->addRecipient($reviewer);
 		$eMail->setSender(self::getLoggedInUser());
 		$eMail->setSubject($this->translate('save_event_subject'));
 		$eMail->setMessage($this->createAdditionalEmailContent());
 
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
-		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
 		$mailerFactory->getMailer()->send($eMail);
 	}
 
@@ -1434,7 +1435,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		};
 
 		/** @var tx_seminars_Model_Place $place */
-		$place = t3lib_div::makeInstance('tx_seminars_Model_Place');
+		$place = GeneralUtility::makeInstance('tx_seminars_Model_Place');
 		$place->setData(self::createBasicAuxiliaryData());
 		self::setPlaceData($place, 'newPlace_', $formData);
 		$place->markAsDirty();
@@ -1733,7 +1734,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		};
 
 		/** @var tx_seminars_Model_Speaker $speaker */
-		$speaker = t3lib_div::makeInstance('tx_seminars_Model_Speaker');
+		$speaker = GeneralUtility::makeInstance('tx_seminars_Model_Speaker');
 		$speaker->setData(array_merge(
 			self::createBasicAuxiliaryData(),
 			array('skills' => new tx_oelib_List())
@@ -1878,7 +1879,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		/** @var tx_seminars_Mapper_Skill $skillMapper */
 		$skillMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill');
 		/** @var tx_oelib_List $skills */
-		$skills = t3lib_div::makeInstance('tx_oelib_List');
+		$skills = GeneralUtility::makeInstance('tx_oelib_List');
 
 		if (is_array($formData[$prefix . 'skills'])) {
 			foreach ($formData[$prefix . 'skills'] as $rawUid) {
@@ -2006,7 +2007,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		};
 
 		/** @var tx_seminars_Model_Checkbox $checkbox */
-		$checkbox = t3lib_div::makeInstance('tx_seminars_Model_Checkbox');
+		$checkbox = GeneralUtility::makeInstance('tx_seminars_Model_Checkbox');
 		$checkbox->setData(self::createBasicAuxiliaryData());
 		self::setCheckboxData($checkbox, 'newCheckbox_', $formData);
 		$checkbox->markAsDirty();
@@ -2214,7 +2215,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		};
 
 		/** @var tx_seminars_Model_TargetGroup $targetGroup */
-		$targetGroup = t3lib_div::makeInstance('tx_seminars_Model_TargetGroup');
+		$targetGroup = GeneralUtility::makeInstance('tx_seminars_Model_TargetGroup');
 		$targetGroup->setData(self::createBasicAuxiliaryData());
 		self::setTargetGroupData($targetGroup, 'newTargetGroup_', $formData);
 		$targetGroup->markAsDirty();

@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a countdown to the next upcoming event.
@@ -73,7 +74,7 @@ class tx_seminars_FrontEnd_Countdown extends tx_seminars_FrontEnd_AbstractView {
 		}
 		if ($this->viewHelper === NULL) {
 			/** @var tx_seminars_ViewHelper_Countdown $viewHelper */
-			$viewHelper = t3lib_div::makeInstance('tx_seminars_ViewHelper_Countdown');
+			$viewHelper = GeneralUtility::makeInstance('tx_seminars_ViewHelper_Countdown');
 			$this->injectCountDownViewHelper($viewHelper);
 		}
 

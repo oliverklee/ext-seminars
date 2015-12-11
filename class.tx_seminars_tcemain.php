@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class holds functions used to validate submitted forms in the back end.
@@ -123,7 +124,7 @@ class tx_seminars_tcemainprocdm {
 	 */
 	private function processSingleTimeSlot($uid) {
 		/** @var tx_seminars_timeslot $timeslot */
-		$timeslot = t3lib_div::makeInstance(
+		$timeslot = GeneralUtility::makeInstance(
 			'tx_seminars_timeslot', $uid, FALSE
 		);
 
@@ -146,7 +147,7 @@ class tx_seminars_tcemainprocdm {
 	 */
 	private function processSingleEvent($uid, array $fieldArray) {
 		/** @var tx_seminars_seminar $seminar */
-		$seminar = t3lib_div::makeInstance(
+		$seminar = GeneralUtility::makeInstance(
 			'tx_seminars_seminar', $uid, FALSE, TRUE
 		);
 

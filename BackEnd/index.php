@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Back-end module "Events".
@@ -63,7 +64,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	public function main() {
 		global $LANG, $BACK_PATH, $BE_USER;
 
-		$this->doc = t3lib_div::makeInstance('bigDoc');
+		$this->doc = GeneralUtility::makeInstance('bigDoc');
 		$this->doc->backPath = $BACK_PATH;
 		$this->doc->docType = 'xhtml_strict';
 
@@ -89,7 +90,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 
 		if ($this->id <= 0) {
 			/** @var t3lib_FlashMessage $message */
-			$message = t3lib_div::makeInstance(
+			$message = GeneralUtility::makeInstance(
 				't3lib_FlashMessage',
 				$GLOBALS['LANG']->getLL('message_noPageTypeSelected'),
 				'',
@@ -109,7 +110,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 
 		if (!$this->hasStaticTemplate()) {
 			/** @var t3lib_FlashMessage $message */
-			$message = t3lib_div::makeInstance(
+			$message = GeneralUtility::makeInstance(
 				't3lib_FlashMessage',
 				$GLOBALS['LANG']->getLL('message_noStaticTemplateFound'),
 				'',
@@ -148,7 +149,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		}
 
 		// Read the selected sub module (from the tab menu) and make it available within this class.
-		$this->subModule = (int)t3lib_div::_GET('subModule');
+		$this->subModule = (int)GeneralUtility::_GET('subModule');
 
 		// If $this->subModule is not a key of $this->availableSubModules,
 		// set it to the key of the first element in $this->availableSubModules
@@ -174,17 +175,17 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		switch ($this->subModule) {
 			case 2:
 				/** @var tx_seminars_BackEnd_RegistrationsList $registrationsList */
-				$registrationsList = t3lib_div::makeInstance('tx_seminars_BackEnd_RegistrationsList', $this);
+				$registrationsList = GeneralUtility::makeInstance('tx_seminars_BackEnd_RegistrationsList', $this);
 				$this->content .= $registrationsList->show();
 				break;
 			case 3:
 				/** @var tx_seminars_BackEnd_SpeakersList $speakersList */
-				$speakersList = t3lib_div::makeInstance('tx_seminars_BackEnd_SpeakersList', $this);
+				$speakersList = GeneralUtility::makeInstance('tx_seminars_BackEnd_SpeakersList', $this);
 				$this->content .= $speakersList->show();
 				break;
 			case 4:
 				/** @var tx_seminars_BackEnd_OrganizersList $organizersList */
-				$organizersList = t3lib_div::makeInstance('tx_seminars_BackEnd_OrganizersList', $this);
+				$organizersList = GeneralUtility::makeInstance('tx_seminars_BackEnd_OrganizersList', $this);
 				$this->content .= $organizersList->show();
 				break;
 			case 1:
@@ -196,7 +197,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 					$this->content .= $this->getCancelEventMailForm();
 				} else {
 					/** @var tx_seminars_BackEnd_EventsList $eventsList */
-					$eventsList = t3lib_div::makeInstance('tx_seminars_BackEnd_EventsList', $this);
+					$eventsList = GeneralUtility::makeInstance('tx_seminars_BackEnd_EventsList', $this);
 					$this->content .= $eventsList->show();
 				}
 			default:
@@ -214,7 +215,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 */
 	protected function addFlashMessage(t3lib_FlashMessage $flashMessage) {
 		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
-		$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+		$flashMessageService = GeneralUtility::makeInstance(
 			'TYPO3\\CMS\\Core\\Messaging\\FlashMessageService'
 		);
 		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
@@ -229,7 +230,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 */
 	protected function getRenderedFlashMessages() {
 		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
-		$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
+		$flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
 		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
@@ -244,11 +245,11 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * @return bool TRUE if the form was requested and pre-conditions are met, FALSE otherwise
 	 */
 	private function isGeneralEmailFormRequested() {
-		if ((int)t3lib_div::_POST('eventUid') <= 0) {
+		if ((int)GeneralUtility::_POST('eventUid') <= 0) {
 			return FALSE;
 		}
 
-		return t3lib_div::_POST('action') == 'sendEmail';
+		return GeneralUtility::_POST('action') == 'sendEmail';
 	}
 
 	/**
@@ -258,11 +259,11 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * @return bool TRUE if the form was requested and pre-conditions are met, FALSE otherwise
 	 */
 	private function isConfirmEventFormRequested() {
-		if ((int)t3lib_div::_POST('eventUid') <= 0) {
+		if ((int)GeneralUtility::_POST('eventUid') <= 0) {
 			return FALSE;
 		}
 
-		return t3lib_div::_POST('action') == 'confirmEvent';
+		return GeneralUtility::_POST('action') == 'confirmEvent';
 	}
 
 	/**
@@ -273,11 +274,11 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 *                 met, FALSE otherwise
 	 */
 	private function isCancelEventFormRequested() {
-		if ((int)t3lib_div::_POST('eventUid') <= 0) {
+		if ((int)GeneralUtility::_POST('eventUid') <= 0) {
 			return FALSE;
 		}
 
-		return t3lib_div::_POST('action') == 'cancelEvent';
+		return GeneralUtility::_POST('action') == 'cancelEvent';
 	}
 
 	/**
@@ -287,10 +288,10 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 */
 	private function getGeneralMailForm() {
 		/** @var tx_seminars_BackEnd_GeneralEventMailForm $form */
-		$form = t3lib_div::makeInstance(
-			'tx_seminars_BackEnd_GeneralEventMailForm', (int)t3lib_div::_GP('eventUid')
+		$form = GeneralUtility::makeInstance(
+			'tx_seminars_BackEnd_GeneralEventMailForm', (int)GeneralUtility::_GP('eventUid')
 		);
-		$form->setPostData(t3lib_div::_POST());
+		$form->setPostData(GeneralUtility::_POST());
 
 		return $form->render();
 	}
@@ -302,10 +303,10 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 */
 	private function getConfirmEventMailForm() {
 		/** @var tx_seminars_BackEnd_ConfirmEventMailForm $form */
-		$form = t3lib_div::makeInstance(
-			'tx_seminars_BackEnd_ConfirmEventMailForm', (int)t3lib_div::_GP('eventUid')
+		$form = GeneralUtility::makeInstance(
+			'tx_seminars_BackEnd_ConfirmEventMailForm', (int)GeneralUtility::_GP('eventUid')
 		);
-		$form->setPostData(t3lib_div::_POST());
+		$form->setPostData(GeneralUtility::_POST());
 
 		return $form->render();
 	}
@@ -317,10 +318,10 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 */
 	private function getCancelEventMailForm() {
 		/** @var tx_seminars_BackEnd_CancelEventMailForm $form */
-		$form = t3lib_div::makeInstance(
-			'tx_seminars_BackEnd_CancelEventMailForm', (int)t3lib_div::_GP('eventUid')
+		$form = GeneralUtility::makeInstance(
+			'tx_seminars_BackEnd_CancelEventMailForm', (int)GeneralUtility::_GP('eventUid')
 		);
-		$form->setPostData(t3lib_div::_POST());
+		$form->setPostData(GeneralUtility::_POST());
 
 		return $form->render();
 	}
@@ -339,7 +340,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 // This checks permissions and exits if the users has no permission for entry.
 $GLOBALS['BE_USER']->modAccess($GLOBALS['MCONF'], TRUE);
 
-if (t3lib_div::_GET('csv') !== '1') {
+if (GeneralUtility::_GET('csv') !== '1') {
 	$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_common.xml');
 	$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_show_rechis.xml');
 	$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_mod_web_list.xml');
@@ -347,12 +348,12 @@ if (t3lib_div::_GET('csv') !== '1') {
 	$GLOBALS['LANG']->includeLLFile('EXT:seminars/pi2/locallang.xml');
 
 	/** @var tx_seminars_module2 $SOBE */
-	$SOBE = t3lib_div::makeInstance('tx_seminars_module2');
+	$SOBE = GeneralUtility::makeInstance('tx_seminars_module2');
 	$SOBE->init();
 
 	$SOBE->main();
 } else {
 	/** @var tx_seminars_pi2 $csvExporter */
-	$csvExporter = t3lib_div::makeInstance('tx_seminars_pi2');
+	$csvExporter = GeneralUtility::makeInstance('tx_seminars_pi2');
 	echo $csvExporter->main();
 }

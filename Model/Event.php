@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents an event.
@@ -1656,7 +1657,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function getRegularRegistrations() {
 		/** @var Tx_Oelib_List $regularRegistrations */
-		$regularRegistrations = t3lib_div::makeInstance('Tx_Oelib_List');
+		$regularRegistrations = GeneralUtility::makeInstance('Tx_Oelib_List');
 
 		/** @var tx_seminars_Model_Registration $registration */
 		foreach ($this->getRegistrations() as $registration) {
@@ -1677,7 +1678,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 */
 	public function getQueueRegistrations() {
 		/** @var Tx_Oelib_List $queueRegistrations */
-		$queueRegistrations = t3lib_div::makeInstance('Tx_Oelib_List');
+		$queueRegistrations = GeneralUtility::makeInstance('Tx_Oelib_List');
 
 		/** @var tx_seminars_Model_Registration $registration */
 		foreach ($this->getRegistrations() as $registration) {

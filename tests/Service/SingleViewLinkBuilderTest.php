@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -301,7 +302,7 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends tx_phpunit_testcase 
 			->will(self::returnValue($relativeUrl));
 
 		self::assertEquals(
-			t3lib_div::locationHeaderUrl($relativeUrl),
+			GeneralUtility::locationHeaderUrl($relativeUrl),
 			$fixture->createAbsoluteUrlForEvent($event)
 		);
 	}

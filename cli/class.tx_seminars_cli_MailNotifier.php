@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class sends reminders to the organizers.
@@ -115,7 +116,7 @@ class tx_seminars_cli_MailNotifier {
 		/** @var tx_seminars_OldModel_Organizer $organizer */
 		foreach ($event->getOrganizerBag() as $organizer) {
 			/** @var Tx_Oelib_Mail $eMail */
-			$eMail = t3lib_div::makeInstance('Tx_Oelib_Mail');
+			$eMail = GeneralUtility::makeInstance('Tx_Oelib_Mail');
 			$eMail->setSender($sender);
 			$eMail->setSubject($subject);
 			$eMail->addRecipient($organizer);
@@ -125,7 +126,7 @@ class tx_seminars_cli_MailNotifier {
 			}
 
 			/** @var Tx_Oelib_MailerFactory $mailerFactory */
-			$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+			$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
 			$mailerFactory->getMailer()->send($eMail);
 		}
 	}
@@ -211,7 +212,7 @@ class tx_seminars_cli_MailNotifier {
 	 */
 	private function getSeminarBagBuilder($status) {
 		/** @var tx_seminars_BagBuilder_Event $builder */
-		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
+		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->setTimeFrame('upcomingWithBeginDate');
 		$builder->limitToStatus($status);
 
@@ -227,12 +228,12 @@ class tx_seminars_cli_MailNotifier {
 	 */
 	private function getCsv($eventUid) {
 		/** @var Tx_Seminars_Csv_EmailRegistrationListView $csvCreator */
-		$csvCreator = t3lib_div::makeInstance('Tx_Seminars_Csv_EmailRegistrationListView');
+		$csvCreator = GeneralUtility::makeInstance('Tx_Seminars_Csv_EmailRegistrationListView');
 		$csvCreator->setEventUid($eventUid);
 		$csvString = $csvCreator->render();
 
 		/** @var Tx_Oelib_Attachment $attachment */
-		$attachment = t3lib_div::makeInstance('Tx_Oelib_Attachment');
+		$attachment = GeneralUtility::makeInstance('Tx_Oelib_Attachment');
 		$attachment->setContent($csvString);
 		$attachment->setContentType('text/csv');
 		$attachment->setFileName(

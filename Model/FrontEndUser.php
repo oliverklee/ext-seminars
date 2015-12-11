@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a front-end user.
@@ -140,7 +141,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 */
 	public function getDefaultCategoriesFromGroup() {
 		/** @var Tx_Oelib_List $categories */
-		$categories = t3lib_div::makeInstance('Tx_Oelib_List');
+		$categories = GeneralUtility::makeInstance('Tx_Oelib_List');
 
 		/** @var tx_seminars_Model_FrontEndUserGroup $group */
 		foreach ($this->getUserGroups() as $group) {
@@ -171,7 +172,7 @@ class tx_seminars_Model_FrontEndUser extends tx_oelib_Model_FrontEndUser {
 	 */
 	public function getDefaultOrganizers() {
 		/** @var Tx_Oelib_List $organizers */
-		$organizers = t3lib_div::makeInstance('Tx_Oelib_List');
+		$organizers = GeneralUtility::makeInstance('Tx_Oelib_List');
 
 		/** @var tx_seminars_Model_FrontEndUserGroup $group */
 		foreach ($this->getUserGroups() as $group) {

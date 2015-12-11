@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a salutation for e-mails.
@@ -87,7 +88,7 @@ class tx_seminars_EmailSalutation {
 		$hooks = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'];
 		if (is_array($hooks)) {
 			foreach ($hooks as $classReference) {
-				$result[] = t3lib_div::getUserObj($classReference);
+				$result[] = GeneralUtility::getUserObj($classReference);
 			}
 		}
 

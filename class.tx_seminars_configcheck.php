@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class checks the Seminar Manager configuration for basic sanity.
@@ -2777,7 +2778,7 @@ class tx_seminars_configcheck extends tx_oelib_configcheck {
 				'editing an event. Some fields are set to required but are ' .
 				'actually not configured to be visible in the form. The form ' .
 				'cannot be submitted as long as this inconsistency remains.',
-			t3lib_div::trimExplode(
+			GeneralUtility::trimExplode(
 				',',
 				$this->objectToCheck->getConfValueString(
 					'displayFrontEndEditorFields', 's_fe_editing'

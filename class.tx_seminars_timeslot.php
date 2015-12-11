@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a time slot.
@@ -33,7 +34,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 */
 	private function getSpeakerBag() {
 		/** @var tx_seminars_Bag_Speaker $bag */
-		$bag = t3lib_div::makeInstance(
+		$bag = GeneralUtility::makeInstance(
 			'tx_seminars_Bag_Speaker',
 			'tx_seminars_timeslots_speakers_mm.uid_local = ' . $this->getUid() .' AND uid = uid_foreign',
 			'tx_seminars_timeslots_speakers_mm',

@@ -21,6 +21,7 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a category list.
@@ -44,7 +45,7 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 	 */
 	public function render() {
 		/** @var tx_seminars_BagBuilder_Event $seminarBagBuilder */
-		$seminarBagBuilder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
+		$seminarBagBuilder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
 		$seminarBagBuilder->setSourcePages(
 			$this->getConfValueString('pages'),
 			$this->getConfValueInteger('recursive')
@@ -66,7 +67,7 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 		$eventUids = $bag->getUids();
 
 		/** @var tx_seminars_BagBuilder_Category $categoryBagBuilder */
-		$categoryBagBuilder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Category');
+		$categoryBagBuilder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Category');
 		$categoryBagBuilder->limitToEvents($eventUids);
 		$categoryBag = $categoryBagBuilder->build();
 

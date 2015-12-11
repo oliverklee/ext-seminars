@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This aggregate class holds a bunch of event objects and allows to iterate over them.
@@ -68,7 +69,7 @@ class tx_seminars_Bag_Event extends tx_seminars_Bag_Abstract {
 	 * @return void
 	 */
 	protected function createItemFromDbResult() {
-		$this->currentItem = t3lib_div::makeInstance(
+		$this->currentItem = GeneralUtility::makeInstance(
 			'tx_seminars_seminar', 0, $this->dbResult
 		);
 		$this->valid();

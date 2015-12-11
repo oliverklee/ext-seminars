@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This is the base class for e-mail forms in the back end.
@@ -91,7 +92,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			throw new InvalidArgumentException('$eventUid must be > 0.');
 		}
 
-		$this->oldEvent = t3lib_div::makeInstance('tx_seminars_seminar', $eventUid);
+		$this->oldEvent = GeneralUtility::makeInstance('tx_seminars_seminar', $eventUid);
 
 		if (!$this->oldEvent->isOk()) {
 			throw new tx_oelib_Exception_NotFound('There is no event with this UID.', 1333292164);
@@ -334,7 +335,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 
 		if ($this->hasErrorMessage($fieldName)) {
 			/** @var t3lib_FlashMessage $message */
-			$message = t3lib_div::makeInstance(
+			$message = GeneralUtility::makeInstance(
 				't3lib_FlashMessage',
 				$this->errorMessages[$fieldName],
 				'',
@@ -423,13 +424,13 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		$organizer = $organizerMapper->find((int)$this->getPostData('sender'));
 
 		/** @var tx_seminars_BagBuilder_Registration $registrationBagBuilder */
-		$registrationBagBuilder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Registration');
+		$registrationBagBuilder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Registration');
 		$registrationBagBuilder->limitToEvent($this->getEvent()->getUid());
 		$registrations = $registrationBagBuilder->build();
 
 		if (!$registrations->isEmpty()) {
 			/** @var Tx_Oelib_MailerFactory $mailerFactory */
-			$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+			$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
 			$mailer = $mailerFactory->getMailer();
 
 			/** @var tx_seminars_Mapper_Registration $registrationMapper */
@@ -443,7 +444,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 					continue;
 				}
 				/** @var tx_oelib_Mail $eMail */
-				$eMail = t3lib_div::makeInstance('tx_oelib_Mail');
+				$eMail = GeneralUtility::makeInstance('tx_oelib_Mail');
 				$eMail->setSender($organizer);
 				$eMail->setSubject($this->getPostData('subject'));
 				$eMail->addRecipient($registration->getFrontEndUser());
@@ -455,7 +456,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			}
 
 			/** @var t3lib_FlashMessage $message */
-			$message = t3lib_div::makeInstance(
+			$message = GeneralUtility::makeInstance(
 				't3lib_FlashMessage',
 				$GLOBALS['LANG']->getLL('message_emailToAttendeesSent'),
 				'',
@@ -475,7 +476,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 */
 	protected function addFlashMessage(t3lib_FlashMessage $flashMessage) {
 		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
-		$flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+		$flashMessageService = GeneralUtility::makeInstance(
 			'TYPO3\\CMS\\Core\\Messaging\\FlashMessageService'
 		);
 		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
@@ -596,7 +597,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 */
 	protected function localizeSalutationPlaceholder($prefix) {
 		/** @var tx_seminars_EmailSalutation $salutation */
-		$salutation = t3lib_div::makeInstance('tx_seminars_EmailSalutation');
+		$salutation = GeneralUtility::makeInstance('tx_seminars_EmailSalutation');
 		$eventDetails = $salutation->createIntroduction(
 			'"%s"',
 			$this->getOldEvent()
@@ -623,7 +624,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 */
 	private function createMessageBody(tx_seminars_Model_FrontEndUser $user, tx_seminars_Model_Organizer $organizer) {
 		/** @var tx_seminars_EmailSalutation $salutation */
-		$salutation = t3lib_div::makeInstance('tx_seminars_EmailSalutation');
+		$salutation = GeneralUtility::makeInstance('tx_seminars_EmailSalutation');
 		$messageText = str_replace(
 			'%' . $GLOBALS['LANG']->getLL('mailForm_salutation'),
 			$salutation->getSalutation($user),
@@ -688,7 +689,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			$hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'];
 			if (is_array($hookClasses)) {
 				foreach ($hookClasses as $hookClass) {
-					$hookInstance = t3lib_div::getUserObj($hookClass);
+					$hookInstance = GeneralUtility::getUserObj($hookClass);
 					if (!($hookInstance instanceof tx_seminars_Interface_Hook_BackEndModule)) {
 						throw new t3lib_exception(
 							'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .

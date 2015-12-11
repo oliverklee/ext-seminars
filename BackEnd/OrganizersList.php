@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates an organizer list in the back end.
@@ -66,7 +67,7 @@ class tx_seminars_BackEnd_OrganizersList extends tx_seminars_BackEnd_AbstractLis
 		);
 
 		/** @var tx_seminars_BagBuilder_Organizer $builder */
-		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Organizer');
+		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Organizer');
 
 		$builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
 

@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class publishes events which are hidden through editing or creation in the FE-editor.
@@ -52,7 +53,7 @@ class tx_seminars_FrontEnd_PublishEvent extends tx_oelib_templatehelper {
 		}
 
 		/** @var tx_seminars_Mapper_Event $eventMapper */
-		$eventMapper = t3lib_div::makeInstance('tx_seminars_Mapper_Event');
+		$eventMapper = GeneralUtility::makeInstance('tx_seminars_Mapper_Event');
 		/** @var tx_seminars_Model_Event $event */
 		$event = $eventMapper->findByPublicationHash($this->piVars['hash']);
 

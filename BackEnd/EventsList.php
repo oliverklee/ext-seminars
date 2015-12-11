@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates an events list in the back end.
@@ -63,7 +64,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 		$this->createTableHeading();
 
 		/** @var tx_seminars_BagBuilder_Event $builder */
-		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
+		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->setBackEndMode();
 
 		$pageData = $this->page->getPageData();
@@ -160,7 +161,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 			$this->template->setMarker(
 				'title',
 				htmlspecialchars(
-					t3lib_div::fixed_lgd_cs(
+					GeneralUtility::fixed_lgd_cs(
 						$event->getRealTitle(),
 						$GLOBALS['BE_USER']->uc['titleLen']
 					)
@@ -307,7 +308,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	 */
 	protected function getAccessCheck() {
 		if ($this->accessCheck === NULL) {
-			$this->accessCheck = t3lib_div::makeInstance('Tx_Seminars_Csv_BackEndRegistrationAccessCheck');
+			$this->accessCheck = GeneralUtility::makeInstance('Tx_Seminars_Csv_BackEndRegistrationAccessCheck');
 		}
 
 		return $this->accessCheck;

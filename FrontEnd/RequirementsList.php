@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class is a view which creates the requirements lists for the front end.
@@ -89,7 +90,7 @@ class tx_seminars_FrontEnd_RequirementsList extends tx_seminars_FrontEnd_Abstrac
 
 		if ($this->linkBuilder == NULL) {
 			/** @var tx_seminars_Service_SingleViewLinkBuilder $linkBuilder */
-			$linkBuilder = t3lib_div::makeInstance('tx_seminars_Service_SingleViewLinkBuilder');
+			$linkBuilder = GeneralUtility::makeInstance('tx_seminars_Service_SingleViewLinkBuilder');
 			$this->injectLinkBuilder($linkBuilder);
 		}
 		$this->linkBuilder->setPlugin($this);

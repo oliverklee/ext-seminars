@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This aggregate class holds a bunch of objects that are created from
@@ -176,7 +177,7 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 			);
 		}
 
-		$allTableNames = t3lib_div::trimExplode(
+		$allTableNames = GeneralUtility::trimExplode(
 			',',
 			$this->dbTableName.$this->additionalTableNames
 		);

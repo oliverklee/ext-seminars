@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class displays an event headline consisting of the event title and date.
@@ -93,7 +94,7 @@ class tx_seminars_FrontEnd_EventHeadline extends tx_seminars_FrontEnd_AbstractVi
 		}
 
 		/** @var tx_seminars_ViewHelper_DateRange $dateRangeViewHelper */
-		$dateRangeViewHelper = t3lib_div::makeInstance('tx_seminars_ViewHelper_DateRange');
+		$dateRangeViewHelper = GeneralUtility::makeInstance('tx_seminars_ViewHelper_DateRange');
 
 		return $result . ', ' . $dateRangeViewHelper->render($event);
 	}

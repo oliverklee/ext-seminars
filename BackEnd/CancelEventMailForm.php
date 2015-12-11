@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates back-end e-mail form for canceling an event.
@@ -72,7 +73,7 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 		}
 
 		/** @var tx_seminars_BagBuilder_Event $builder */
-		$builder = t3lib_div::makeInstance('tx_seminars_BagBuilder_Event');
+		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
 		$builder->limitToEarliestBeginOrEndDate($GLOBALS['SIM_EXEC_TIME']);
 		$builder->limitToOtherDatesForTopic($this->getOldEvent());
 
@@ -94,7 +95,7 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 	private function getSingleViewUrl() {
 		if ($this->linkBuilder == NULL) {
 			/** @var tx_seminars_Service_SingleViewLinkBuilder $linkBuilder */
-			$linkBuilder = t3lib_div::makeInstance('tx_seminars_Service_SingleViewLinkBuilder');
+			$linkBuilder = GeneralUtility::makeInstance('tx_seminars_Service_SingleViewLinkBuilder');
 			$this->injectLinkBuilder($linkBuilder);
 		}
 		$result = $this->linkBuilder->createAbsoluteUrlForEvent($this->getEvent());
@@ -122,7 +123,7 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 		$mapper->save($this->getEvent());
 
 		/** @var t3lib_FlashMessage $message */
-		$message = t3lib_div::makeInstance(
+		$message = GeneralUtility::makeInstance(
 			't3lib_FlashMessage',
 			$GLOBALS['LANG']->getLL('message_eventCanceled'),
 			'',

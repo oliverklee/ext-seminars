@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This builder class creates customized bag objects.
@@ -84,7 +85,7 @@ abstract class tx_seminars_BagBuilder_Abstract {
 	 */
 	public function build() {
 		/** @var tx_seminars_Bag_Abstract $bag */
-		$bag = t3lib_div::makeInstance(
+		$bag = GeneralUtility::makeInstance(
 			$this->bagClassName,
 			$this->getWhereClause(),
 			implode(',', $this->additionalTableNames),

@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -53,7 +54,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
-		$mailerFactory = t3lib_div::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
 		$mailerFactory->enableTestMode();
 		$this->mailer = $mailerFactory->getMailer();
 

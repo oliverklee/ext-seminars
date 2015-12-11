@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This aggregate class holds a bunch of registration objects and allows to iterate over them.
@@ -42,7 +43,7 @@ class tx_seminars_Bag_Registration extends tx_seminars_Bag_Abstract {
 		$queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
 		$orderBy = 'uid', $limit = '', $showHiddenRecords = -1
 	) {
-		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
+		$this->cObj = GeneralUtility::makeInstance('tslib_cObj');
 
 		parent::__construct(
 			'tx_seminars_attendances',
@@ -65,7 +66,7 @@ class tx_seminars_Bag_Registration extends tx_seminars_Bag_Abstract {
 	 * @return void
 	 */
 	protected function createItemFromDbResult() {
-		$this->currentItem = t3lib_div::makeInstance(
+		$this->currentItem = GeneralUtility::makeInstance(
 			'tx_seminars_registration', $this->cObj, $this->dbResult
 		);
 		$this->valid();
