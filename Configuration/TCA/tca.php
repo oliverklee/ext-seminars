@@ -61,7 +61,7 @@ if (!function_exists('user_createLanguageSelector')) {
 		$keyField = 'lg_iso_2';
 		$allFields = $keyField . ', ' . $titleField;
 
-		$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($allFields, $table, '1 = 1' . t3lib_BEfunc::deleteClause($table), '', $titleField);
+		$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($allFields, $table, '1 = 1' . \TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause($table), '', $titleField);
 		/** @var $row string[] */
 		foreach ($rows as $row) {
 			$parameters['items'][] = array($row[$titleField], $row[$keyField]);
@@ -85,7 +85,7 @@ if (!function_exists('user_createCountrySelector')) {
 		$keyField = 'cn_iso_2';
 		$allFields = $keyField . ', ' . $titleField;
 
-		$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($allFields, $table, '1 = 1' . t3lib_BEfunc::deleteClause($table), '', $titleField);
+		$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($allFields, $table, '1 = 1' . \TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause($table), '', $titleField);
 		/** @var $row string[] */
 		foreach ($rows as $row) {
 			$parameters['items'][] = array($row[$titleField], $row[$keyField]);

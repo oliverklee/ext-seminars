@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
  * This class is needed to dynamically create the list of selectable database
@@ -96,7 +97,7 @@ class tx_seminars_flexForms {
 		if (tx_oelib_configurationProxy::getInstance('seminars')
 			->getAsBoolean('useStoragePid')
 		) {
-			$rootlinePages = t3lib_befunc::BEgetRootLine(
+			$rootlinePages = BackendUtility::BEgetRootLine(
 				$configuration['row']['pid']
 			);
 

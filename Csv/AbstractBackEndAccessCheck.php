@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
  * This class provides an access check for the CSV export in the back end.
@@ -24,7 +25,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements Tx_Seminars
 	/**
 	 * @var int
 	 *
-	 * @see t3lib_BEfunc::getRecord
+	 * @see BackendUtility::getRecord
 	 */
 	const SHOW_PAGE_PERMISSION_BITS = 1;
 
@@ -101,6 +102,6 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements Tx_Seminars
 	 */
 	protected function hasReadAccessToPage($pageUid) {
 		return $this->getLoggedInBackEndUser()
-			->doesUserHaveAccess(t3lib_BEfunc::getRecord('pages', $pageUid), self::SHOW_PAGE_PERMISSION_BITS);
+			->doesUserHaveAccess(BackendUtility::getRecord('pages', $pageUid), self::SHOW_PAGE_PERMISSION_BITS);
 	}
 }

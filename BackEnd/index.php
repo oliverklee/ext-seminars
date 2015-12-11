@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -102,7 +103,7 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 			return;
 		}
 
-		$pageAccess = t3lib_BEfunc::readPageAccess($this->id, $this->perms_clause);
+		$pageAccess = BackendUtility::readPageAccess($this->id, $this->perms_clause);
 		if (!is_array($pageAccess) && !$BE_USER->user['admin']) {
 			echo $this->content . $this->getRenderedFlashMessages() . $this->doc->endPage();
 			return;

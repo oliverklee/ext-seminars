@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -130,7 +131,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 			$this->redirectToListView();
 		}
 
-		$formAction = t3lib_BEfunc::getModuleUrl(
+		$formAction = BackendUtility::getModuleUrl(
 			self::MODULE_NAME, array('id' => tx_oelib_PageFinder::getInstance()->getPageUid())
 		);
 
@@ -512,7 +513,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * @return void
 	 */
 	private function redirectToListView() {
-		$url = t3lib_BEfunc::getModuleUrl(
+		$url = BackendUtility::getModuleUrl(
 			self::MODULE_NAME, array('id' => tx_oelib_PageFinder::getInstance()->getPageUid()), FALSE, TRUE
 		);
 		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' .  $url);

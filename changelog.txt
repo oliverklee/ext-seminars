@@ -15,6 +15,7 @@ Cleanup:
 - [#5407] Drop the old XCLASS footers
 
 Changes:
+- [#5455] Change t3lib_BEfunc into TYPO3\CMS\Backend\Utility\BackendUtility
 - [#5425] Change t3lib_div into \TYPO3\CMS\Core\Utility\GeneralUtility
 - [#5418] Drop the css_styled_content requirement
 - [#5406] Require TYPO3 6.2 and PHP 5.5

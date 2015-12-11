@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -288,7 +289,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 		$imageTag = '<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/Csv.gif" title="' .
 			$langCsv . '" alt="' . $langCsv . '" class="icon" />';
 
-		$csvUrl = t3lib_BEfunc::getModuleUrl(
+		$csvUrl = BackendUtility::getModuleUrl(
 			self::MODULE_NAME,
 			array(
 				'id' => $pageData['uid'],
@@ -334,7 +335,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 		$pageData = $this->page->getPageData();
 
 		$this->template->setMarker('uid', $event->getUid());
-		$buttonUrl = t3lib_BEfunc::getModuleUrl(self::MODULE_NAME, array('id' => $pageData['uid']));
+		$buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, array('id' => $pageData['uid']));
 		$this->template->setMarker('email_button_url', htmlspecialchars($buttonUrl));
 		$this->template->setMarker(
 			'label_email_button',
@@ -365,7 +366,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 			&& $this->doesUserHaveAccess($event->getPageUid())
 		) {
 			$this->template->setMarker('uid', $event->getUid());
-			$buttonUrl = t3lib_BEfunc::getModuleUrl(self::MODULE_NAME, array('id' => $pageData['uid']));
+			$buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, array('id' => $pageData['uid']));
 			$this->template->setMarker('cancel_button_url', htmlspecialchars($buttonUrl));
 			$this->template->setMarker(
 				'label_cancel_button',
@@ -399,7 +400,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 			&& $this->doesUserHaveAccess($event->getPageUid())
 		) {
 			$this->template->setMarker('uid', $event->getUid());
-			$buttonUrl = t3lib_BEfunc::getModuleUrl(self::MODULE_NAME, array('id' => $pageData['uid']));
+			$buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, array('id' => $pageData['uid']));
 			$this->template->setMarker('confirm_button_url', htmlspecialchars($buttonUrl));
 			$this->template->setMarker(
 				'label_confirm_button',
@@ -435,7 +436,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 	private function createEventRegistrationsLink(tx_seminars_seminar $event) {
 		$pageData = $this->page->getPageData();
 
-		$url = t3lib_BEfunc::getModuleUrl(
+		$url = BackendUtility::getModuleUrl(
 			self::MODULE_NAME, array('id' => $pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid())
 		);
 		return '<a href="' . htmlspecialchars($url) . '">' .

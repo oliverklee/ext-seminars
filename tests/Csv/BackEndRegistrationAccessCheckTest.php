@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
  * Test case.
@@ -147,7 +148,7 @@ class Tx_Seminars_Tests_Csv_BackEndRegistrationAccessCheckTest extends Tx_Phpuni
 
 		$pageUid = 12341;
 		$this->subject->setPageUid($pageUid);
-		$pageRecord = t3lib_BEfunc::getRecord('pages', $pageUid);
+		$pageRecord = BackendUtility::getRecord('pages', $pageUid);
 		$this->backEndUser->expects(self::any())->method('doesUserHaveAccess')
 			->with($pageRecord, 1)
 			->will(self::returnValue(TRUE));
@@ -167,7 +168,7 @@ class Tx_Seminars_Tests_Csv_BackEndRegistrationAccessCheckTest extends Tx_Phpuni
 
 		$pageUid = 12341;
 		$this->subject->setPageUid($pageUid);
-		$pageRecord = t3lib_BEfunc::getRecord('pages', $pageUid);
+		$pageRecord = BackendUtility::getRecord('pages', $pageUid);
 		$this->backEndUser->expects(self::any())->method('doesUserHaveAccess')
 			->with($pageRecord, 1)
 			->will(self::returnValue(FALSE));
