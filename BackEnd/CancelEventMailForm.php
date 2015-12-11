@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -122,12 +123,12 @@ class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_Abstra
 		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
 		$mapper->save($this->getEvent());
 
-		/** @var t3lib_FlashMessage $message */
+		/** @var FlashMessage $message */
 		$message = GeneralUtility::makeInstance(
-			't3lib_FlashMessage',
+			FlashMessage::class,
 			$GLOBALS['LANG']->getLL('message_eventCanceled'),
 			'',
-			t3lib_FlashMessage::OK,
+			FlashMessage::OK,
 			TRUE
 		);
 		$this->addFlashMessage($message);

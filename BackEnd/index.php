@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -90,12 +91,12 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		$this->content .= $this->doc->spacer(5);
 
 		if ($this->id <= 0) {
-			/** @var t3lib_FlashMessage $message */
+			/** @var FlashMessage $message */
 			$message = GeneralUtility::makeInstance(
-				't3lib_FlashMessage',
+				FlashMessage::class,
 				$GLOBALS['LANG']->getLL('message_noPageTypeSelected'),
 				'',
-				t3lib_FlashMessage::INFO
+				FlashMessage::INFO
 			);
 			$this->addFlashMessage($message);
 
@@ -110,12 +111,12 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		}
 
 		if (!$this->hasStaticTemplate()) {
-			/** @var t3lib_FlashMessage $message */
+			/** @var FlashMessage $message */
 			$message = GeneralUtility::makeInstance(
-				't3lib_FlashMessage',
+				FlashMessage::class,
 				$GLOBALS['LANG']->getLL('message_noStaticTemplateFound'),
 				'',
-				t3lib_FlashMessage::WARNING
+				FlashMessage::WARNING
 			);
 			$this->addFlashMessage($message);
 
@@ -210,11 +211,11 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	/**
 	 * Adds a flash message to the queue.
 	 *
-	 * @param t3lib_FlashMessage $flashMessage
+	 * @param FlashMessage $flashMessage
 	 *
 	 * @return void
 	 */
-	protected function addFlashMessage(t3lib_FlashMessage $flashMessage) {
+	protected function addFlashMessage(FlashMessage $flashMessage) {
 		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
 		$flashMessageService = GeneralUtility::makeInstance(
 			'TYPO3\\CMS\\Core\\Messaging\\FlashMessageService'

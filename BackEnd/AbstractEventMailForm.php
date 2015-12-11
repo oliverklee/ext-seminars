@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -335,12 +336,12 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		$result = '';
 
 		if ($this->hasErrorMessage($fieldName)) {
-			/** @var t3lib_FlashMessage $message */
+			/** @var FlashMessage $message */
 			$message = GeneralUtility::makeInstance(
-				't3lib_FlashMessage',
+				FlashMessage::class,
 				$this->errorMessages[$fieldName],
 				'',
-				t3lib_FlashMessage::WARNING
+				FlashMessage::WARNING
 			);
 			$result = $message->render();
 		}
@@ -456,12 +457,12 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 				$mailer->send($eMail);
 			}
 
-			/** @var t3lib_FlashMessage $message */
+			/** @var FlashMessage $message */
 			$message = GeneralUtility::makeInstance(
-				't3lib_FlashMessage',
+				FlashMessage::class,
 				$GLOBALS['LANG']->getLL('message_emailToAttendeesSent'),
 				'',
-				t3lib_FlashMessage::OK,
+				FlashMessage::OK,
 				TRUE
 			);
 			$this->addFlashMessage($message);
@@ -471,11 +472,11 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * Adds a flash message to the queue.
 	 *
-	 * @param t3lib_FlashMessage $flashMessage
+	 * @param FlashMessage $flashMessage
 	 *
 	 * @return void
 	 */
-	protected function addFlashMessage(t3lib_FlashMessage $flashMessage) {
+	protected function addFlashMessage(FlashMessage $flashMessage) {
 		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
 		$flashMessageService = GeneralUtility::makeInstance(
 			'TYPO3\\CMS\\Core\\Messaging\\FlashMessageService'
