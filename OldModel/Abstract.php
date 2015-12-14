@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Backend\Utility\IconUtility;
+use TYPO3\CMS\Core\Charset\CharsetConverter;
 
 // In the back end, include the extension's locallang.xml.
 if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
@@ -40,7 +41,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	protected $renderCharset = 'utf-8';
 
 	/**
-	 * @var t3lib_cs helper for charset conversion
+	 * @var CharsetConverter helper for charset conversion
 	 */
 	protected $charsetConversion = NULL;
 

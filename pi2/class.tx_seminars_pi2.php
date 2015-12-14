@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -129,7 +130,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	/**
 	 * Retrieves an active charset conversion instance.
 	 *
-	 * @return t3lib_cs a charset conversion instance
+	 * @return CharsetConverter a charset conversion instance
 	 *
 	 * @throws RuntimeException
 	 */
