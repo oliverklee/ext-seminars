@@ -14,6 +14,7 @@
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 require(ExtensionManagementUtility::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
 
@@ -204,7 +205,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	private $linkBuilder = NULL;
 
 	/**
-	 * @var tslib_feUserAuth
+	 * @var FrontendUserAuthentication
 	 */
 	protected $feuser = NULL;
 
