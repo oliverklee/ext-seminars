@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
@@ -1069,8 +1070,8 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			$this->createMmRecords('tx_seminars_attendances_checkboxes_mm', $this->checkboxes);
 		}
 
-		/** @var t3lib_refindex $referenceIndex */
-		$referenceIndex = GeneralUtility::makeInstance('t3lib_refindex');
+		/** @var ReferenceIndex $referenceIndex */
+		$referenceIndex = GeneralUtility::makeInstance(ReferenceIndex::class);
 		$referenceIndex->updateRefIndexTable('tx_seminars_attendances', $this->getUid());
 
 		return TRUE;
