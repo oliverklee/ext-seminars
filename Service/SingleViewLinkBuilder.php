@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\TimeTracker\NullTimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -154,7 +155,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	protected function createFakeFrontEnd() {
 		$this->suppressFrontEndCookies();
 
-		$GLOBALS['TT'] = GeneralUtility::makeInstance('t3lib_TimeTrackNull');
+		$GLOBALS['TT'] = GeneralUtility::makeInstance(NullTimeTracker::class);
 
 		/** @var TypoScriptFrontendController $frontEnd */
 		$frontEnd = GeneralUtility::makeInstance(TypoScriptFrontendController::class, $GLOBALS['TYPO3_CONF_VARS'], 0, 0);

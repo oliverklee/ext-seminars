@@ -16,6 +16,7 @@ Cleanup:
 - [#5407] Drop the old XCLASS footers
 
 Changes:
+- [#5428] Change t3lib_TimeTrackNull to NullTimeTracker
 - [#5436] Change t3lib_cs to \TYPO3\CMS\Core\Charset\CharsetConverter
 - [#5433] Change t3lib_basicFileFunctions to \TYPO3\CMS\Core\Utility\File\BasicFileUtility
 - [#5427] Change tslib_fe to TypoScriptFrontendController
