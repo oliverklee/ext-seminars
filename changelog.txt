@@ -16,6 +16,7 @@ Cleanup:
 - [#5407] Drop the old XCLASS footers
 
 Changes:
+- [#5433] Change t3lib_basicFileFunctions to \TYPO3\CMS\Core\Utility\File\BasicFileUtility
 - [#5427] Change tslib_fe to TypoScriptFrontendController
 - [#5426] Change t3lib_beUserAuth to BackendUserAuthentication
 - [#5439] Change t3lib_SCbase to \TYPO3\CMS\Backend\Module\BaseScriptClass
