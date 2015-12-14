@@ -13,6 +13,7 @@
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This class represents a seminar (or similar event).
@@ -768,7 +769,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * As speakers can be related to this event as speakers, partners, tutors or
 	 * leaders, the type relation can be specified. The default is "speakers".
 	 *
-	 * @param tslib_pibase $plugin
+	 * @param AbstractPlugin $plugin
 	 *        the live pibase object
 	 * @param string $speakerRelation
 	 *        the relation in which the speakers stand to this event:
@@ -777,7 +778,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return string our speakers (or '' if there is an error)
 	 */
 	public function getSpeakersWithDescription(
-		tslib_pibase $plugin, $speakerRelation = 'speakers'
+		AbstractPlugin $plugin, $speakerRelation = 'speakers'
 	) {
 		if (!$this->hasSpeakersOfType($speakerRelation)){
 			return '';
@@ -858,7 +859,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * As speakers can be related to this event as speakers, partners, tutors or
 	 * leaders, the type relation can be specified. The default is "speakers".
 	 *
-	 * @param tx_oelib_templatehelper $plugin the live pibase object
+	 * @param Tx_Oelib_TemplateHelper $plugin
 	 * @param string $speakerRelation
 	 *        the relation in which the speakers stand to this event:
 	 *        "speakers" (default), "partners", "tutors" or "leaders"
@@ -866,10 +867,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return string our speakers list, will be empty if an error occurred
 	 *                during processing
 	 */
-	public function getSpeakersShort(
-		tx_oelib_templatehelper $plugin,
-		$speakerRelation = 'speakers'
-	) {
+	public function getSpeakersShort(Tx_Oelib_TemplateHelper $plugin, $speakerRelation = 'speakers') {
 		if (!$this->hasSpeakersOfType($speakerRelation)) {
 			return '';
 		}
@@ -2114,11 +2112,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Gets our organizers (as HTML code with hyperlinks to their homepage, if
 	 * they have any).
 	 *
-	 * @param tslib_pibase $plugin a tslib_pibase object for a live page
+	 * @param AbstractPlugin $plugin an object for a live page
 	 *
 	 * @return string the hyperlinked names of our organizers
 	 */
-	public function getOrganizers(tslib_pibase $plugin) {
+	public function getOrganizers(AbstractPlugin $plugin) {
 		if (!$this->hasOrganizers()) {
 			return '';
 		}
@@ -2256,11 +2254,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Returns an empty string if this event has no organizing partners or
 	 * something went wrong with the database query.
 	 *
-	 * @param tslib_pibase $plugin a tslib_pibase object for a live page
+	 * @param AbstractPlugin $plugin an object for a live page
 	 *
 	 * @return string the hyperlinked names of our organizing partners, or an empty string
 	 */
-	public function getOrganizingPartners(tslib_pibase $plugin) {
+	public function getOrganizingPartners(AbstractPlugin $plugin) {
 		if (!$this->hasOrganizingPartners()) {
 			return '';
 		}
@@ -4252,13 +4250,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * Note: This functions' return values already are htmlspecialchared.
 	 *
-	 * @param tslib_pibase $plugin a tslib_pibase object for a live page
+	 * @param AbstractPlugin $plugin an object for a live page
 	 *
 	 * @return array[] an array of arrays with the elements "name" and
 	 *               "size" of the attached file, will be empty if
 	 *               there are no attached files
 	 */
-	public function getAttachedFiles(tslib_pibase $plugin) {
+	public function getAttachedFiles(AbstractPlugin $plugin) {
 		if (!$this->hasAttachedFiles()) {
 			return array();
 		}

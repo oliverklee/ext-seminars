@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This class represents a registration/attendance.
@@ -494,11 +495,11 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * Empty values will be removed from the output.
 	 *
 	 * @param string $keys comma-separated list of keys to retrieve
-	 * @param tslib_pibase $plugin an object for a live page
+	 * @param AbstractPlugin $plugin an object for a live page
 	 *
 	 * @return string the values retrieved from $this->userData, may be empty
 	 */
-	public function getUserDataAsHtml($keys, tslib_pibase $plugin) {
+	public function getUserDataAsHtml($keys, AbstractPlugin $plugin) {
 		$singleKeys = GeneralUtility::trimExplode(',', $keys, TRUE);
 		$singleValues = array();
 

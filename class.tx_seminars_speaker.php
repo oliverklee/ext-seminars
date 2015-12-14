@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This class represents a speaker.
@@ -74,11 +75,11 @@ class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
 	/**
 	 * Gets our description.
 	 *
-	 * @param tslib_pibase $plugin the live pibase object
+	 * @param AbstractPlugin $plugin
 	 *
 	 * @return string our description (or '' if there is an error)
 	 */
-	public function getDescription(tslib_pibase $plugin) {
+	public function getDescription(AbstractPlugin $plugin) {
 		return $plugin->pi_RTEcssText(
 			$this->getRecordPropertyString('description')
 		);

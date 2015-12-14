@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 
 /**
@@ -326,12 +327,12 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/**
 	 * Creates an HTML link to the unregistration page (if a user is logged in).
 	 *
-	 * @param tslib_pibase $plugin an object for a live page
+	 * @param AbstractPlugin $plugin an object for a live page
 	 * @param tx_seminars_registration $registration a registration from which we'll get the UID for our GET parameters
 	 *
 	 * @return string HTML code with the link
 	 */
-	public function getLinkToUnregistrationPage(tslib_pibase $plugin, tx_seminars_registration $registration) {
+	public function getLinkToUnregistrationPage(AbstractPlugin $plugin, tx_seminars_registration $registration) {
 		return $plugin->cObj->getTypoLink(
 			$plugin->translate('label_onlineUnregistration'),
 			$plugin->getConfValueInteger('registerPID'),
@@ -474,11 +475,11 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @param tx_seminars_seminar $seminar the seminar we would like to register for
 	 * @param array $formData the raw registration data from the registration form
-	 * @param tslib_pibase $plugin live plugin object
+	 * @param AbstractPlugin $plugin live plugin object
 	 *
 	 * @return tx_seminars_Model_Registration the created, saved registration
 	 */
-	public function createRegistration(tx_seminars_seminar $seminar, array $formData, tslib_pibase $plugin) {
+	public function createRegistration(tx_seminars_seminar $seminar, array $formData, AbstractPlugin $plugin) {
 		$this->registration = GeneralUtility::makeInstance('tx_seminars_registration', $plugin->cObj);
 		$this->registration->setRegistrationData($seminar, $this->getLoggedInFrontEndUserUid(), $formData);
 		$this->registration->commitToDb();
@@ -501,11 +502,11 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Sends the e-mails for a new registration.
 	 *
 	 * @param tx_seminars_registration $registration
-	 * @param tslib_pibase $plugin
+	 * @param AbstractPlugin $plugin
 	 *
 	 * @return void
 	 */
-	public function sendEmailsForNewRegistration(tx_seminars_registration $registration, tslib_pibase $plugin) {
+	public function sendEmailsForNewRegistration(tx_seminars_registration $registration, AbstractPlugin $plugin) {
 		if ($this->registration->isOnRegistrationQueue()) {
 			$this->notifyAttendee($this->registration, $plugin, 'confirmationOnRegistrationForQueue');
 			$this->notifyOrganizers($this->registration, 'notificationOnRegistrationForQueue');
@@ -638,11 +639,11 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * currently logged-in FE user).
 	 *
 	 * @param int $uid the UID of the registration that should be removed
-	 * @param tslib_pibase $plugin a live plugin object
+	 * @param AbstractPlugin $plugin a live plugin object
 	 *
 	 * @return void
 	 */
-	public function removeRegistration($uid, tslib_pibase $plugin) {
+	public function removeRegistration($uid, AbstractPlugin $plugin) {
 		if (!tx_seminars_OldModel_Abstract::recordExists($uid, 'tx_seminars_attendances')) {
 			return;
 		}
@@ -680,11 +681,11 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/**
 	 * Fills vacancies created through a unregistration with attendees from the registration queue.
 	 *
-	 * @param tslib_pibase $plugin live plugin object
+	 * @param AbstractPlugin $plugin live plugin object
 	 *
 	 * @return void
 	 */
-	private function fillVacancies(tslib_pibase $plugin) {
+	private function fillVacancies(AbstractPlugin $plugin) {
 		$seminar = $this->registration->getSeminarObject();
 		$seminar->calculateStatistics();
 		if (!$seminar->hasVacancies()) {
@@ -768,7 +769,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Sends an e-mail to the attendee with a message concerning his/her registration or unregistration.
 	 *
 	 * @param tx_seminars_registration $oldRegistration the registration for which the notification should be sent
-	 * @param tslib_pibase $plugin a live plugin
+	 * @param AbstractPlugin $plugin a live plugin
 	 * @param string $helloSubjectPrefix
 	 *        prefix for the locallang key of the localized hello and subject
 	 *        string; allowed values are:
@@ -782,7 +783,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @return void
 	 */
 	public function notifyAttendee(
-		tx_seminars_registration $oldRegistration, tslib_pibase $plugin, $helloSubjectPrefix = 'confirmation'
+		tx_seminars_registration $oldRegistration, AbstractPlugin $plugin, $helloSubjectPrefix = 'confirmation'
 	) {
 		if (!$this->getConfValueBoolean('send' . ucfirst($helloSubjectPrefix))) {
 			return;
@@ -1091,7 +1092,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * @param tx_seminars_registration $registration
 	 *        the registration for which the notification should be send
-	 * @param tslib_pibase $plugin a live plugin
+	 * @param AbstractPlugin $plugin a live plugin
 	 * @param string $helloSubjectPrefix
 	 *        prefix for the locallang key of the localized hello and subject
 	 *        string; allowed values are:
@@ -1105,7 +1106,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @return string the e-mail body for the attendee e-mail, will not be empty
 	 */
 	private function buildEmailContent(
-		tx_seminars_registration $registration, tslib_pibase $plugin, $helloSubjectPrefix , $useHtml = FALSE
+		tx_seminars_registration $registration, AbstractPlugin $plugin, $helloSubjectPrefix , $useHtml = FALSE
 	) {
 		if ($this->linkBuilder === NULL) {
 			/** @var $linkBuilder tx_seminars_Service_SingleViewLinkBuilder */
