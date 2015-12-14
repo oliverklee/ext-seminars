@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
 /**
  * This class provides an access check for the CSV export in the back end.
@@ -76,7 +77,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements Tx_Seminars
 	/**
 	 * Returns the logged-in back-end user.
 	 *
-	 * @return t3lib_beUserAuth
+	 * @return BackendUserAuthentication
 	 */
 	protected function getLoggedInBackEndUser() {
 		return $GLOBALS['BE_USER'];

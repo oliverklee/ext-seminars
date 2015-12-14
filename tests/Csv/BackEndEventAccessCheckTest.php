@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
 /**
  * Test case.
@@ -28,18 +29,18 @@ class Tx_Seminars_Tests_Csv_BackEndEventAccessCheckTest extends Tx_Phpunit_TestC
 	protected $subject = NULL;
 
 	/**
-	 * @var PHPUnit_Framework_MockObject_MockObject|t3lib_beUserAuth
+	 * @var PHPUnit_Framework_MockObject_MockObject|BackendUserAuthentication
 	 */
 	protected $backEndUser = NULL;
 
 	/**
-	 * @var t3lib_beUserAuth
+	 * @var BackendUserAuthentication
 	 */
 	protected $backEndUserBackup = NULL;
 
 	protected function setUp() {
 		$this->backEndUserBackup = $GLOBALS['BE_USER'];
-		$this->backEndUser = $this->getMock('t3lib_beUserAuth');
+		$this->backEndUser = $this->getMock(BackendUserAuthentication::class);
 		$GLOBALS['BE_USER'] = $this->backEndUser;
 
 		$this->subject = new Tx_Seminars_Csv_BackEndEventAccessCheck();
