@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * This class provides functions for creating the link/URL to the single view page of an event.
@@ -155,8 +156,8 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 
 		$GLOBALS['TT'] = GeneralUtility::makeInstance('t3lib_TimeTrackNull');
 
-		/** @var tslib_fe $frontEnd */
-		$frontEnd = GeneralUtility::makeInstance('tslib_fe', $GLOBALS['TYPO3_CONF_VARS'], 0, 0);
+		/** @var TypoScriptFrontendController $frontEnd */
+		$frontEnd = GeneralUtility::makeInstance(TypoScriptFrontendController::class, $GLOBALS['TYPO3_CONF_VARS'], 0, 0);
 
 		// simulates a normal FE without any logged-in FE or BE user
 		$frontEnd->beUserLogin = FALSE;
