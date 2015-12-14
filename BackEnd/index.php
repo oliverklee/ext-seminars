@@ -220,7 +220,6 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		$flashMessageService = GeneralUtility::makeInstance(
 			'TYPO3\\CMS\\Core\\Messaging\\FlashMessageService'
 		);
-		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$defaultFlashMessageQueue->enqueue($flashMessage);
 	}
@@ -233,7 +232,6 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	protected function getRenderedFlashMessages() {
 		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
 		$flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
-		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
 

@@ -15,6 +15,7 @@ Cleanup:
 - [#5407] Drop the old XCLASS footers
 
 Changes:
+- [#5459] Change t3lib_FlashMessageQueue to \TYPO3\CMS\Core\Messaging\FlashMessageQueue
 - [#5430] Change t3lib_extMgm to \TYPO3\CMS\Core\Utility\ExtensionManagementUtility
 - [#5458] Change t3lib_iconworks to \TYPO3\CMS\Backend\Utility\IconUtility
 - [#5457] Change t3lib_FlashMessage to \TYPO3\CMS\Core\Messaging\FlashMessage

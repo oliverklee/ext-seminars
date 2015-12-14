@@ -129,7 +129,6 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	protected function getRenderedFlashMessages() {
 		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
 		$flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
-		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
 
@@ -144,7 +143,6 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	protected function flushAllFlashMessages() {
 		/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
 		$flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
-		/** @var $defaultFlashMessageQueue \TYPO3\CMS\Core\Messaging\FlashMessageQueue */
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$defaultFlashMessageQueue->getAllMessagesAndFlush();
 	}

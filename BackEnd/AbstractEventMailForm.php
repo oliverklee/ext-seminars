@@ -481,7 +481,6 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		$flashMessageService = GeneralUtility::makeInstance(
 			'TYPO3\\CMS\\Core\\Messaging\\FlashMessageService'
 		);
-		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$defaultFlashMessageQueue->enqueue($flashMessage);
 	}

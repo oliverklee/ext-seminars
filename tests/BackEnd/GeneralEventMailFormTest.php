@@ -149,7 +149,6 @@ class Tx_Seminars_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit_TestCase {
 	protected function flushAllFlashMessages() {
 		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
 		$flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
-		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageQueue $defaultFlashMessageQueue */
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$defaultFlashMessageQueue->getAllMessagesAndFlush();
 	}
