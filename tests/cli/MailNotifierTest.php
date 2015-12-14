@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * Test case.
@@ -329,7 +330,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_BackEndUser $user */
 		$user = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_BackEndUser')->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
-		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
+		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
 		$subject = $GLOBALS['LANG']->getLL('email_eventTakesPlaceReminderSubject');
 		$subject = str_replace('%event', '', $subject);
 		$subject = str_replace('%days', 2, $subject);
@@ -354,7 +355,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_BackEndUser $user */
 		$user = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_BackEndUser')->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
-		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
+		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
 		$message = $GLOBALS['LANG']->getLL('email_eventTakesPlaceReminder');
 		$message = str_replace('%event', '', $message);
 		$message = str_replace('%organizer', 'Mr. Test', $message);
@@ -561,7 +562,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_BackEndUser $user */
 		$user = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_BackEndUser')->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
-		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
+		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
 		$subject = $GLOBALS['LANG']->getLL('email_cancelationDeadlineReminderSubject');
 		$subject = str_replace('%event', '', $subject);
 
@@ -585,7 +586,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_BackEndUser $user */
 		$user = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_BackEndUser')->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
-		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
+		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
 		$message = $GLOBALS['LANG']->getLL('email_cancelationDeadlineReminder');
 		$message = str_replace('%event', '', $message);
 		$message = str_replace('%organizer', 'Mr. Test', $message);

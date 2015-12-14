@@ -12,9 +12,10 @@
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-require(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
+require(ExtensionManagementUtility::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
 
 /**
  * Plugin "Seminar Manager".

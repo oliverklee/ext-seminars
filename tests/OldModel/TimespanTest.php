@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * Test case.
@@ -32,7 +33,7 @@ class tx_seminars_OldModel_TimespanTest extends Tx_Phpunit_TestCase {
 	private $subject = NULL;
 
 	protected function setUp() {
-		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
+		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
 
 		$this->subject = new tx_seminars_timespanchild(array('timeFormat' => self::TIME_FORMAT));
 	}

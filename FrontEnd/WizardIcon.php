@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -34,7 +35,7 @@ class tx_seminars_FrontEnd_WizardIcon {
 		$localLanguage = $this->includeLocalLang();
 
 		$wizardItems['plugins_tx_seminars_pi1'] = array(
-			'icon' => t3lib_extMgm::extRelPath('seminars') . 'Resources/Public/Icons/ContentWizard.gif',
+			'icon' => ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/ContentWizard.gif',
 			'title' => $GLOBALS['LANG']->getLLL('pi1_title', $localLanguage),
 			'description' => $GLOBALS['LANG']->getLLL('pi1_description', $localLanguage),
 			'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=seminars_pi1',
@@ -52,7 +53,7 @@ class tx_seminars_FrontEnd_WizardIcon {
 		/** @var t3lib_l10n_parser_Llxml $xmlParser */
 		$xmlParser = GeneralUtility::makeInstance('t3lib_l10n_parser_Llxml');
 		$localLanguage = $xmlParser->getParsedData(
-			t3lib_extMgm::extPath('seminars') . 'locallang.xml', $GLOBALS['LANG']->lang
+			ExtensionManagementUtility::extPath('seminars') . 'locallang.xml', $GLOBALS['LANG']->lang
 		);
 
 		return $localLanguage;

@@ -12,13 +12,14 @@
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 if (is_object($GLOBALS['LANG'])) {
-	$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
+	$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
 }
 
-require_once(t3lib_extMgm::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
+require_once(ExtensionManagementUtility::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
 
 /**
  * Plugin "CSV export".

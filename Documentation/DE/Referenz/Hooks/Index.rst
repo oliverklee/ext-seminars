@@ -175,7 +175,7 @@ example:
 ::
 
    // includes my hook class
-   require_once(t3lib_extMgm::extPath('invoices') . 'class.tx_invoices_email.php');
+   require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('invoices') . 'class.tx_invoices_email.php');
 
    // register my hook objects
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = 'EXT:invoices/class.tx_invoices_email.php:tx_invoices_email';

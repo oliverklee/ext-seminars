@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * This class offers functions to update the database from one version to another.
@@ -48,8 +49,8 @@ class ext_update {
 	 * @return bool TRUE if the update module may be accessed, FALSE otherwise
 	 */
 	public function access() {
-		if (!t3lib_extMgm::isLoaded('oelib')
-			|| !t3lib_extMgm::isLoaded('seminars')
+		if (!ExtensionManagementUtility::isLoaded('oelib')
+			|| !ExtensionManagementUtility::isLoaded('seminars')
 		) {
 			return FALSE;
 		}

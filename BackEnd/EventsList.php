@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -266,7 +267,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 		}
 		$label = $GLOBALS['LANG']->getLL($labelKey);
 
-		return '<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/' . $icon .
+		return '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/' . $icon .
 			'" title="' . $label . '" alt="' . $label . '"/>';
 	}
 
@@ -286,7 +287,7 @@ class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
 		$pageData = $this->page->getPageData();
 		$langCsv = $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
 
-		$imageTag = '<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/Csv.gif" title="' .
+		$imageTag = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Csv.gif" title="' .
 			$langCsv . '" alt="' . $langCsv . '" class="icon" />';
 
 		$csvUrl = BackendUtility::getModuleUrl(

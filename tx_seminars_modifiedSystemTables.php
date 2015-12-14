@@ -29,7 +29,7 @@ $usePageBrowser = (bool)$globalConfiguration['usePageBrowser'];
 $selectType = $usePageBrowser ? 'group' : 'select';
 
 if (!isset($GLOBALS['TCA']['fe_users']['columns']['tx_seminars_registration'])) {
-	t3lib_extMgm::addTCAcolumns(
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
 		'fe_users',
 		array(
 			'tx_seminars_registration' => array(
@@ -50,12 +50,12 @@ if (!isset($GLOBALS['TCA']['fe_users']['columns']['tx_seminars_registration'])) 
 }
 
 if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events'])) {
-	t3lib_extMgm::addLLrefForTCAdescr(
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
 		'fe_groups',
 		'EXT:seminars/Resources/Private/Language/locallang_csh_fe_groups.xml'
 	);
 
-	t3lib_extMgm::addTCAcolumns(
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
 		'fe_groups',
 		array(
 			'tx_seminars_publish_events' => array(
@@ -161,7 +161,7 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 		$addToFeInterface
 	);
 
-	t3lib_extMgm::addToAllTCAtypes(
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
 		'fe_groups',
 		'--div--;LLL:EXT:seminars/locallang_db.xml:fe_groups.tab_event_management,' .
 			'tx_seminars_publish_events;;;;1-1-1,tx_seminars_events_pid,' .
@@ -171,7 +171,7 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 }
 
 if (!isset($GLOBALS['TCA']['be_groups']['columns']['tx_seminars_events_folder'])) {
-	t3lib_extMgm::addTCAcolumns(
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
 		'be_groups',
 		array(
 			'tx_seminars_events_folder' => array(
@@ -214,7 +214,7 @@ if (!isset($GLOBALS['TCA']['be_groups']['columns']['tx_seminars_events_folder'])
 		$addToFeInterface
 	);
 
-	t3lib_extMgm::addToAllTCAtypes(
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
 		'be_groups',
 		'--div--;LLL:EXT:seminars/locallang_db.xml:be_groups.tab_event_management,' .
 			'tx_seminars_events_folder,tx_seminars_registrations_folder,' .

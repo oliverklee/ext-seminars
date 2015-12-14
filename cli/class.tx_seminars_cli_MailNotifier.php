@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -262,7 +263,7 @@ class tx_seminars_cli_MailNotifier {
 		/** @var Tx_Oelib_Model_BackEndUser $user */
 		$user = $mapper->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
-		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang.xml');
+		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
 		$result = $GLOBALS['LANG']->getLL($locallangKey);
 
 		foreach (array(

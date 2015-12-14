@@ -24,6 +24,7 @@
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -115,7 +116,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 
 			$result = '<a href="' .
 				htmlspecialchars($editOnClick) . '">' .
-				'<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/Edit.gif' .
+				'<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Edit.gif' .
 				'" title="' . $langEdit . '" alt="' . $langEdit . '" class="icon" />' .
 				'</a>';
 		}
@@ -158,7 +159,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 			$result = '<a href="' .
 				htmlspecialchars($this->page->doc->issueCommand($params)) .
 				'" onclick="' . $confirmation . '">' .
-				'<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/Garbage.gif' .
+				'<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Garbage.gif' .
 				'" title="' . $langDelete . '" alt="' . $langDelete . '" class="deleteicon" />' .
 				'</a>';
 		}
@@ -302,7 +303,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 			'<a href="' . htmlspecialchars($csvUrl) .
 			$this->getAdditionalCsvParameters() . '">' . LF .
 			TAB . TAB . TAB . TAB .
-			'<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/Csv.gif" title="' .
+			'<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Csv.gif" title="' .
 			$langCsv . '" alt="" class="icon" />' .
 			// We use an empty alt attribute as we already have a textual
 			// representation directly next to the icon.
@@ -345,7 +346,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 
 			$result = '<a href="' .
 				htmlspecialchars($this->page->doc->issueCommand($params)) . '">' .
-				'<img src="/' . t3lib_extMgm::siteRelPath('seminars') . 'Resources/Public/Icons/' . $icon .
+				'<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/' . $icon .
 				'" title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
 				'</a>';
 		}

@@ -1,43 +1,43 @@
 <?php
 defined('TYPO3_MODE') or die('Access denied.');
 
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_seminars=1
 ');
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_speakers=1
 ');
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_attendances=1
 ');
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_sites=1
 ');
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_organizers=1
 ');
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_payment_methods=1
 ');
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_event_types=1
 ');
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_checkboxes=1
 ');
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_lodgings=1
 ');
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_foods=1
 ');
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_target_groups=1
 ');
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_categories=1
 ');
-t3lib_extMgm::addUserTSConfig('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
 	options.saveDocNew.tx_seminars_skills=1
 ');
 
@@ -46,17 +46,17 @@ t3lib_extMgm::addUserTSConfig('
 // Used for post-validation of fields in back-end forms.
 $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:seminars/class.tx_seminars_tcemain.php:tx_seminars_tcemainprocdm';
 
-t3lib_extMgm::addPItoST43(
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43(
 	$_EXTKEY, 'FrontEnd/DefaultController.php', '_pi1', 'list_type', 0
 );
-t3lib_extMgm::addTypoScript($_EXTKEY, 'setup', '
-	plugin.' . t3lib_extMgm::getCN($_EXTKEY) . '_pi1.userFunc = tx_seminars_FrontEnd_DefaultController->main
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($_EXTKEY, 'setup', '
+	plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN($_EXTKEY) . '_pi1.userFunc = tx_seminars_FrontEnd_DefaultController->main
 ', 43);
 
-t3lib_extMgm::addTypoScript(
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript(
 	$_EXTKEY,
 	'setup', '
-	tt_content.shortcut.20.conf.tx_seminars_seminars = < plugin.' . t3lib_extMgm::getCN($_EXTKEY) . '_pi1
+	tt_content.shortcut.20.conf.tx_seminars_seminars = < plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN($_EXTKEY) . '_pi1
 	tt_content.shortcut.20.conf.tx_seminars_seminars.CMD = singleView
 ',
 	43

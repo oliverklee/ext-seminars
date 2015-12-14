@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * This class creates a CSV export of registrations.
@@ -84,8 +85,8 @@ abstract class Tx_Seminars_Csv_AbstractListView {
 				}
 			}
 
-			$this->translator->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
-			$this->translator->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
+			$this->translator->includeLLFile(ExtensionManagementUtility::extPath('lang') . 'locallang_general.xml');
+			$this->translator->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang_db.xml');
 			$this->includeAdditionalLanguageFiles();
 		}
 

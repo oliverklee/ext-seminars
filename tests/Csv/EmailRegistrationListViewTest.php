@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * Test case.
@@ -52,8 +53,8 @@ class Tx_Seminars_Tests_Csv_EmailRegistrationListViewTest extends Tx_Phpunit_Tes
 	protected $eventUid = 0;
 
 	protected function setUp() {
-		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
-		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
+		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang_db.xml');
+		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('lang') . 'locallang_general.xml');
 
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
