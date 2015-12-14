@@ -15,10 +15,11 @@ Cleanup:
 - [#5407] Drop the old XCLASS footers
 
 Changes:
-- [#5457] Change t3lib_FlashMessage into \TYPO3\CMS\Core\Messaging\FlashMessage
-- [#5456] Change t3lib_exception into \UnexpectedValueException
-- [#5455] Change t3lib_BEfunc into TYPO3\CMS\Backend\Utility\BackendUtility
-- [#5425] Change t3lib_div into \TYPO3\CMS\Core\Utility\GeneralUtility
+- [#5458] Change t3lib_iconworks to \TYPO3\CMS\Backend\Utility\IconUtility
+- [#5457] Change t3lib_FlashMessage to \TYPO3\CMS\Core\Messaging\FlashMessage
+- [#5456] Change t3lib_exception to \UnexpectedValueException
+- [#5455] Change t3lib_BEfunc to TYPO3\CMS\Backend\Utility\BackendUtility
+- [#5425] Change t3lib_div to \TYPO3\CMS\Core\Utility\GeneralUtility
 - [#5418] Drop the css_styled_content requirement
 - [#5406] Require TYPO3 6.2 and PHP 5.5
 - [#5401] Mark the extension as stable

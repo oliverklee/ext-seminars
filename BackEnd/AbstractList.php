@@ -22,6 +22,7 @@
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -212,7 +213,7 @@ abstract class tx_seminars_BackEnd_AbstractList {
 				'<a href="' . htmlspecialchars($editOnClick) . '">' . LF .
 				TAB . TAB . TAB . TAB .
 				'<img' .
-				t3lib_iconWorks::skinImg(
+				IconUtility::skinImg(
 					$BACK_PATH,
 					'gfx/new_record.gif',
 					'width="7" height="4"'

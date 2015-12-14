@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Backend\Utility\IconUtility;
 
 // In the back end, include the extension's locallang.xml.
 if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
@@ -531,7 +532,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 		$endTimeColumn = $tableConfiguration['enablecolumns']['endtime'];
 
 		// Checks if there are enable columns configured in TCA and sends them
-		// as parameter to t3lib_iconworks::getIcon().
+		// as parameter to IconUtility::getIcon().
 		if ($this->getRecordPropertyBoolean($hiddenColumn)) {
 			$iconProperties[$hiddenColumn] = $this->getRecordPropertyInteger(
 				$hiddenColumn
@@ -554,7 +555,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 			);
 		}
 
-		$imageURL = $GLOBALS['BACK_PATH'].t3lib_iconworks::getIcon(
+		$imageURL = $GLOBALS['BACK_PATH']. IconUtility::getIcon(
 			$this->tableName, $iconProperties
 		);
 
