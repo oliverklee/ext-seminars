@@ -13,6 +13,7 @@
  */
 use TYPO3\CMS\Core\TimeTracker\NullTimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
@@ -137,7 +138,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	/**
 	 * Retrieves a content object to be used for creating typolinks.
 	 *
-	 * @return tslib_cObj a content object for creating typolinks
+	 * @return ContentObjectRenderer a content object for creating typolinks
 	 */
 	protected function getContentObject() {
 		if (!isset($GLOBALS['TSFE']) || !is_object($GLOBALS['TSFE'])) {

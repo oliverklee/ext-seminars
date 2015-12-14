@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class represents a list of registrations for the front end.
@@ -38,11 +39,11 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 *        a string selecting the flavor of the list view, either "list_registrations" or "list_vip_registrations"
 	 * @param int $seminarUid
 	 *        UID of the seminar of which we want to list the registrations, invalid UIDs will be handled later
-	 * @param tslib_cObj $cObj
+	 * @param ContentObjectRenderer $contentObjectRenderer
 	 *        the parent cObj, needed for the flexforms
 	 */
 	public function __construct(
-		array $configuration, $whatToDisplay, $seminarUid, tslib_cObj $cObj
+		array $configuration, $whatToDisplay, $seminarUid, ContentObjectRenderer $contentObjectRenderer
 	) {
 		if (($whatToDisplay != 'list_registrations')
 			&& ($whatToDisplay != 'list_vip_registrations')
@@ -54,7 +55,7 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 
 		$this->whatToDisplay = $whatToDisplay;
 
-		parent::__construct($configuration, $cObj);
+		parent::__construct($configuration, $contentObjectRenderer);
 
 		$this->createSeminar($seminarUid);
 	}

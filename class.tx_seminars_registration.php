@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
@@ -95,13 +96,13 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	/**
 	 * The constructor.
 	 *
-	 * @param tslib_cObj $cObj content object
+	 * @param ContentObjectRenderer $contentObjectRenderer content object
 	 * @param mysqli_result|bool $dbResult
 	 *        MySQL result (of SELECT query)/DBAL object. If this parameter is not provided or FALSE,
 	 *        setRegistrationData() needs to be called directly after construction or this object will not be usable.
 	 */
-	public function __construct(tslib_cObj $cObj, $dbResult = FALSE) {
-		$this->cObj = $cObj;
+	public function __construct(ContentObjectRenderer $contentObjectRenderer, $dbResult = FALSE) {
+		$this->cObj = $contentObjectRenderer;
 		$this->initializeCharsetConversion();
 		$this->init();
 

@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class just makes some functions public for testing purposes.
@@ -24,7 +25,7 @@ class tx_seminars_tests_fixtures_Service_TestingSingleViewLinkBuilder extends tx
 	/**
 	 * Retrieves a content object to be used for creating typolinks.
 	 *
-	 * @return tslib_cObj a content object for creating typolinks
+	 * @return ContentObjectRenderer a content object for creating typolinks
 	 */
 	public function getContentObject() {
 		return parent::getContentObject();
@@ -33,7 +34,7 @@ class tx_seminars_tests_fixtures_Service_TestingSingleViewLinkBuilder extends tx
 	/**
 	 * Creates a content object.
 	 *
-	 * @return tslib_cObj
+	 * @return ContentObjectRenderer
 	 *         a created content object (will always be the same instance)
 	 */
 	public function createContentObject() {

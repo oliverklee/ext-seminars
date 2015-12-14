@@ -13,6 +13,7 @@
  */
 use TYPO3\CMS\Core\Utility\File\BasicFileUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class is a controller which allows to create and edit events on the FE.
@@ -61,10 +62,10 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * to ensure that the logged-in user is allowed to edit a given seminar.
 	 *
 	 * @param array $configuration TypoScript configuration for the plugin
-	 * @param tslib_cObj $cObj the parent cObj content, needed for the flexforms
+	 * @param ContentObjectRenderer $contentObjectRenderer the parent cObj content, needed for the flexforms
 	 */
-	public function __construct(array $configuration, tslib_cObj $cObj) {
-		parent::__construct($configuration, $cObj);
+	public function __construct(array $configuration, ContentObjectRenderer $contentObjectRenderer) {
+		parent::__construct($configuration, $contentObjectRenderer);
 		$this->setRequiredFormFields();
 	}
 

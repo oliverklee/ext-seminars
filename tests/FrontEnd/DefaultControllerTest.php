@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Test case.
@@ -150,8 +151,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			));
 		$this->fixture->injectLinkBuilder($this->linkBuilder);
 
-		/** @var $content tslib_cObj|PHPUnit_Framework_MockObject_MockObject */
-		$content = $this->getMock('tslib_cObj', array('IMAGE'));
+		/** @var $content ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject */
+		$content = $this->getMock(ContentObjectRenderer::class, array('IMAGE'));
 		$content->expects(self::any())->method('IMAGE')->will(self::returnValue('<img src="foo.jpg" alt="bar"/>'));
 		$this->fixture->cObj = $content;
 	}
@@ -334,10 +335,10 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	 *
 	 * The page ID isn't checked for existence. So any page ID can be used.
 	 *
-	 * @return tslib_cObj a mock content object
+	 * @return ContentObjectRenderer a mock content object
 	 */
 	private function createContentMock() {
-		$mock = $this->getMock('tslib_cObj', array('getTypoLink'));
+		$mock = $this->getMock(ContentObjectRenderer::class, array('getTypoLink'));
 		$mock->expects(self::any())->method('getTypoLink')
 			->will(self::returnCallback(array($this, 'getTypoLink')));
 
@@ -535,10 +536,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 	/**
 	 * @test
 	 */
-	public function createContentMockCreatesContentInstance() {
-		self::assertTrue(
-			$this->createContentMock() instanceof tslib_cObj
-		);
+	public function createContentMockCreatesContentObjectRenderer() {
+		self::assertInstanceOf(ContentObjectRenderer::class, $this->createContentMock());
 	}
 
 	/**
@@ -3077,8 +3076,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 			)
 		);
 
-		/** @var $content tslib_cObj|PHPUnit_Framework_MockObject_MockObject */
-		$content = $this->getMock('tslib_cObj', array('IMAGE'));
+		/** @var $content ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject */
+		$content = $this->getMock(ContentObjectRenderer::class, array('IMAGE'));
 		$content->expects(self::any())->method('IMAGE')
 			->with(array(
 				'file' => 'uploads/tx_seminars/' . $fileName, 'file.' => array('width' => '0c', 'height' => '0c'),

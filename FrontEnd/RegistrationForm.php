@@ -15,6 +15,7 @@
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class is a controller which allows to create registrations on the FE.
@@ -123,10 +124,10 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * directly after instantiation.
 	 *
 	 * @param array $configuration TypoScript configuration for the plugin
-	 * @param tslib_cObj $cObj the parent cObj content, needed for the flexforms
+	 * @param ContentObjectRenderer $contentObjectRenderer the parent cObj content, needed for the flexforms
 	 */
-	public function __construct(array $configuration, tslib_cObj $cObj) {
-		parent::__construct($configuration, $cObj);
+	public function __construct(array $configuration, ContentObjectRenderer $contentObjectRenderer) {
+		parent::__construct($configuration, $contentObjectRenderer);
 
 		$formFieldsToShow = GeneralUtility::trimExplode(
 			',', $this->getConfValueString('showRegistrationFields', 's_template_special'), TRUE

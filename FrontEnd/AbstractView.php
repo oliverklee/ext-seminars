@@ -21,6 +21,7 @@
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class represents a basic view.
@@ -61,10 +62,10 @@ abstract class tx_seminars_FrontEnd_AbstractView extends tx_oelib_templatehelper
 	 * and set the CSS classes from TypoScript.
 	 *
 	 * @param array $configuration TypoScript configuration for the plugin
-	 * @param tslib_cObj $cObj the parent cObj content, needed for the flexforms
+	 * @param ContentObjectRenderer $contentObjectRenderer the parent cObj content, needed for the flexforms
 	 */
-	public function __construct(array $configuration, tslib_cObj $cObj) {
-		$this->cObj = $cObj;
+	public function __construct(array $configuration, ContentObjectRenderer $contentObjectRenderer) {
+		$this->cObj = $contentObjectRenderer;
 		$this->init($configuration);
 		$this->pi_initPIflexForm();
 

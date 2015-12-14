@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Test case.
@@ -39,7 +40,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 			$dbResult = FALSE;
 		}
 
-		$contentObject = new tslib_cObj();
+		$contentObject = new ContentObjectRenderer();
 		$contentObject->start(array());
 
 		parent::__construct($contentObject, $dbResult);
