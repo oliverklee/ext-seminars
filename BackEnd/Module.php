@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Backend\Module\BaseScriptClass;
 
 /**
  * This class is the base class for a back-end module.
@@ -20,7 +21,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_BackEnd_Module extends t3lib_SCbase {
+class tx_seminars_BackEnd_Module extends BaseScriptClass {
 	/**
 	 * data of the current BE page
 	 *
