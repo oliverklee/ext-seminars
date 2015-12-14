@@ -11,12 +11,13 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class holds functions used to validate submitted forms in the back end.
  *
- * These functions are called from t3lib/class.t3lib_tcemain.php via hooks.
+ * These functions are called from DataHandler via hooks.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -49,7 +50,7 @@ class tx_seminars_tcemainprocdm {
 	 * Builds $this->tceMainFieldArrays if the right tables were modified.
 	 *
 	 * Some of the parameters of this function are not used in this function.
-	 * But they are given by the hook in t3lib/class.t3lib_tcemain.php.
+	 * But they are given by the hook in DataHandler.
 	 *
 	 * Note: When using the hook after INSERT operations, you will only get the
 	 * temporary NEW... id passed to your hook as $id, but you can easily
@@ -60,12 +61,12 @@ class tx_seminars_tcemainprocdm {
 	 * @param string $table the affected table name
 	 * @param int $uid the UID of the affected record (may be 0)
 	 * @param string[] &$fieldArray an array of all fields that got changed (as reference)
-	 * @param t3lib_TCEmain $pObj reference to calling object
+	 * @param DataHandler $pObj reference to calling object
 	 *
 	 * @return void
 	 */
 	public function processDatamap_afterDatabaseOperations(
-		$status, $table, $uid, array &$fieldArray, t3lib_TCEmain $pObj
+		$status, $table, $uid, array &$fieldArray, DataHandler $pObj
 	) {
 		// Translates new UIDs.
 		if ($status == 'new') {

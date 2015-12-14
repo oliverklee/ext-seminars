@@ -42,7 +42,7 @@ defined('TYPO3_MODE') or die('Access denied.');
 ');
 
 
-// Adds our custom function to a hook in t3lib/class.t3lib_tcemain.php
+// Adds our custom function to a hook in \TYPO3\CMS\Core\DataHandling\DataHandler
 // Used for post-validation of fields in back-end forms.
 $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:seminars/class.tx_seminars_tcemain.php:tx_seminars_tcemainprocdm';
 
