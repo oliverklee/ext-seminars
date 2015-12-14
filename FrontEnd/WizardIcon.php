@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Localization\Parser\LocallangXmlParser;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -50,8 +51,8 @@ class tx_seminars_FrontEnd_WizardIcon {
 	 * @return array[] the found language labels
 	 */
 	public function includeLocalLang() {
-		/** @var t3lib_l10n_parser_Llxml $xmlParser */
-		$xmlParser = GeneralUtility::makeInstance('t3lib_l10n_parser_Llxml');
+		/** @var LocallangXmlParser $xmlParser */
+		$xmlParser = GeneralUtility::makeInstance(LocallangXmlParser::class);
 		$localLanguage = $xmlParser->getParsedData(
 			ExtensionManagementUtility::extPath('seminars') . 'locallang.xml', $GLOBALS['LANG']->lang
 		);
