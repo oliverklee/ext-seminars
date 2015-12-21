@@ -199,8 +199,8 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 				} elseif ($this->isCancelEventFormRequested()) {
 					$this->content .= $this->getCancelEventMailForm();
 				} else {
-					/** @var tx_seminars_BackEnd_EventsList $eventsList */
-					$eventsList = GeneralUtility::makeInstance('tx_seminars_BackEnd_EventsList', $this);
+					/** @var Tx_Seminars_BackEnd_EventsList $eventsList */
+					$eventsList = GeneralUtility::makeInstance(Tx_Seminars_BackEnd_EventsList::class, $this);
 					$this->content .= $eventsList->show();
 				}
 			default:

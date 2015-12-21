@@ -22,9 +22,9 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_BackEnd_EventsList
+	 * @var Tx_Seminars_BackEnd_EventsList
 	 */
 	protected $fixture = NULL;
 	/**
@@ -74,7 +74,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 		$document->backPath = $GLOBALS['BACK_PATH'];
 		$document->docType = 'xhtml_strict';
 
-		$this->fixture = new tx_seminars_BackEnd_EventsList($this->backEndModule);
+		$this->fixture = new Tx_Seminars_BackEnd_EventsList($this->backEndModule);
 
 		$backEndGroup = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
