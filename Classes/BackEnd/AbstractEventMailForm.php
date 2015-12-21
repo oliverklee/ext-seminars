@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Mario Rimann <mario@screenteam.com>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class tx_seminars_BackEnd_AbstractEventMailForm {
+abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * @var string
 	 */

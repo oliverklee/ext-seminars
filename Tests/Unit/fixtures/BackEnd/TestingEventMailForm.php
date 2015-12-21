@@ -20,7 +20,7 @@
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm extends tx_seminars_BackEnd_AbstractEventMailForm {
+class tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm extends Tx_Seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * the prefix for all locallang keys for prefilling the form, must not be empty
 	 *
