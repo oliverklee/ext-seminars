@@ -286,9 +286,9 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * @return string the HTML source for the form
 	 */
 	private function getGeneralMailForm() {
-		/** @var tx_seminars_BackEnd_GeneralEventMailForm $form */
+		/** @var Tx_Seminars_BackEnd_GeneralEventMailForm $form */
 		$form = GeneralUtility::makeInstance(
-			'tx_seminars_BackEnd_GeneralEventMailForm', (int)GeneralUtility::_GP('eventUid')
+			Tx_Seminars_BackEnd_GeneralEventMailForm::class, (int)GeneralUtility::_GP('eventUid')
 		);
 		$form->setPostData(GeneralUtility::_POST());
 

@@ -20,7 +20,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_BackEnd_GeneralEventMailForm extends Tx_Seminars_BackEnd_AbstractEventMailForm {
+class Tx_Seminars_BackEnd_GeneralEventMailForm extends Tx_Seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * the action of this form
 	 *

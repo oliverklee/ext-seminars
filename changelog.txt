@@ -12,6 +12,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5518] Rename tx_seminars_BackEnd_GeneralEventMailForm to Tx_Seminars_BackEnd_GeneralEventMailForm
 - [#5516] Rename tx_seminars_BackEnd_EventsList into Tx_Seminars_BackEnd_EventsList
 - [#5530] Rename tx_seminars_Bag_Organizer to Tx_Seminars_Bag_Organizer
 - [#5516] Rename tx_seminars_BackEnd_ConfirmEventMailForm to Tx_Seminars_BackEnd_ConfirmEventMailForm
