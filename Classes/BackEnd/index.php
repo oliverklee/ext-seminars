@@ -26,7 +26,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_module2 extends Tx_Seminars_BackEnd_Module {
+class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module {
 	/**
 	 * @var string
 	 */
@@ -346,8 +346,8 @@ if (GeneralUtility::_GET('csv') !== '1') {
 	$GLOBALS['LANG']->includeLLFile('EXT:seminars/Classes/BackEnd/locallang.xml');
 	$GLOBALS['LANG']->includeLLFile('EXT:seminars/Classes/pi2/locallang.xml');
 
-	/** @var tx_seminars_module2 $SOBE */
-	$SOBE = GeneralUtility::makeInstance('tx_seminars_module2');
+	/** @var Tx_Seminars_Module2 $SOBE */
+	$SOBE = GeneralUtility::makeInstance(Tx_Seminars_Module2::class);
 	$SOBE->init();
 
 	$SOBE->main();

@@ -12,6 +12,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5519] Rename tx_seminars_module2 to Tx_Seminars_Module2
 - [#5523] Rename tx_seminars_BackEnd_SpeakersList to Tx_Seminars_BackEnd_SpeakersList
 - [#5522] Rename tx_seminars_BackEnd_RegistrationsList to Tx_Seminars_BackEnd_RegistrationsList
 - [#5521] Rename tx_seminars_BackEnd_OrganizersList to Tx_Seminars_BackEnd_OrganizersList
