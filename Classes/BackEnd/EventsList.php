@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_BackEnd_EventsList extends tx_seminars_BackEnd_AbstractList {
+class tx_seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList {
 	/**
 	 * @var string the name of the table we're working on
 	 */

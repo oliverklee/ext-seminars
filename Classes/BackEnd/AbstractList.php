@@ -37,7 +37,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-abstract class tx_seminars_BackEnd_AbstractList {
+abstract class Tx_Seminars_BackEnd_AbstractList {
 	/**
 	 * @var string
 	 */

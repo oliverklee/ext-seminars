@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_AbstractList {
+class tx_seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_AbstractList {
 	/**
 	 * @var string the name of the table we're working on
 	 */

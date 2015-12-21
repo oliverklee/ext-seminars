@@ -61,7 +61,7 @@ class tx_seminars_BackEnd_RegistrationsListTest extends Tx_Phpunit_TestCase {
 		$this->backEndModule->id = $this->dummySysFolderPid;
 		$this->backEndModule->setPageData(array(
 			'uid' => $this->dummySysFolderPid,
-			'doktype' => tx_seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
+			'doktype' => Tx_Seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
 		));
 
 		$document = new bigDoc();
