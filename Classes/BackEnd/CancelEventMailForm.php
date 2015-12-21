@@ -23,7 +23,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Mario Rimann <mario@screenteam.com>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_AbstractEventMailForm  {
+class Tx_Seminars_BackEnd_CancelEventMailForm extends tx_seminars_BackEnd_AbstractEventMailForm  {
 	/**
 	 * @var string the action of this form
 	 */

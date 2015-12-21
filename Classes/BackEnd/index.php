@@ -316,9 +316,9 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * @return string the HTML source for the form
 	 */
 	private function getCancelEventMailForm() {
-		/** @var tx_seminars_BackEnd_CancelEventMailForm $form */
+		/** @var Tx_Seminars_BackEnd_CancelEventMailForm $form */
 		$form = GeneralUtility::makeInstance(
-			'tx_seminars_BackEnd_CancelEventMailForm', (int)GeneralUtility::_GP('eventUid')
+			Tx_Seminars_BackEnd_CancelEventMailForm::class, (int)GeneralUtility::_GP('eventUid')
 		);
 		$form->setPostData(GeneralUtility::_POST());
 

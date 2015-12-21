@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_BackEnd_CancelEventMailForm
+	 * @var Tx_Seminars_BackEnd_CancelEventMailForm
 	 */
 	private $fixture;
 	/**
@@ -135,7 +135,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 			'organizers'
 		);
 
-		$this->fixture = new tx_seminars_BackEnd_CancelEventMailForm($this->eventUid);
+		$this->fixture = new Tx_Seminars_BackEnd_CancelEventMailForm($this->eventUid);
 
 		$this->linkBuilder = $this->getMock(
 			'tx_seminars_Service_SingleViewLinkBuilder',
@@ -274,7 +274,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 			'organizers'
 		);
 
-		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
+		$fixture = new Tx_Seminars_BackEnd_CancelEventMailForm($dateUid);
 		$fixture->injectLinkBuilder($this->linkBuilder);
 
 		self::assertContains(
@@ -308,7 +308,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 			'organizers'
 		);
 
-		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
+		$fixture = new Tx_Seminars_BackEnd_CancelEventMailForm($dateUid);
 		$fixture->injectLinkBuilder($this->linkBuilder);
 
 		self::assertNotContains(
@@ -352,7 +352,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 			'organizers'
 		);
 
-		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
+		$fixture = new Tx_Seminars_BackEnd_CancelEventMailForm($dateUid);
 		$fixture->injectLinkBuilder($this->linkBuilder);
 
 		self::assertNotContains(
@@ -396,7 +396,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 			'organizers'
 		);
 
-		$fixture = new tx_seminars_BackEnd_CancelEventMailForm($dateUid);
+		$fixture = new Tx_Seminars_BackEnd_CancelEventMailForm($dateUid);
 
 		$linkBuilder = $this->getMock(
 			'tx_seminars_Service_SingleViewLinkBuilder',
