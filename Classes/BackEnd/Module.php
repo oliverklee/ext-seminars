@@ -21,7 +21,7 @@ use TYPO3\CMS\Backend\Module\BaseScriptClass;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_BackEnd_Module extends BaseScriptClass {
+class Tx_Seminars_BackEnd_Module extends BaseScriptClass {
 	/**
 	 * data of the current BE page
 	 *

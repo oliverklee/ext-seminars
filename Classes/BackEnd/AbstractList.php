@@ -39,7 +39,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList {
 	protected $tableName = '';
 
 	/**
-	 * @var tx_seminars_BackEnd_Module the back-end module
+	 * @var Tx_Seminars_BackEnd_Module the back-end module
 	 */
 	protected $page = NULL;
 
@@ -71,9 +71,9 @@ abstract class Tx_Seminars_BackEnd_AbstractList {
 	/**
 	 * The constructor. Sets the table name and the back-end page object.
 	 *
-	 * @param tx_seminars_BackEnd_Module $module the current back-end module
+	 * @param Tx_Seminars_BackEnd_Module $module the current back-end module
 	 */
-	public function __construct(tx_seminars_BackEnd_Module $module) {
+	public function __construct(Tx_Seminars_BackEnd_Module $module) {
 		$this->page = $module;
 
 		$this->template = tx_oelib_TemplateRegistry::get($this->templateFile);

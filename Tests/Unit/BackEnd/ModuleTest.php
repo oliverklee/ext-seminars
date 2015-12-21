@@ -20,16 +20,16 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_BackEnd_ModuleTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_BackEnd_ModuleTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_BackEnd_Module
+	 * @var Tx_Seminars_BackEnd_Module
 	 */
 	private $fixture;
 
 	protected function setUp() {
 		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
 
-		$this->fixture = new tx_seminars_BackEnd_Module();
+		$this->fixture = new Tx_Seminars_BackEnd_Module();
 	}
 
 	////////////////////////////////////////////////
