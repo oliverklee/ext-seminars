@@ -177,8 +177,8 @@ class tx_seminars_module2 extends Tx_Seminars_BackEnd_Module {
 		// If no sub module is specified, an empty page will be displayed.
 		switch ($this->subModule) {
 			case 2:
-				/** @var tx_seminars_BackEnd_RegistrationsList $registrationsList */
-				$registrationsList = GeneralUtility::makeInstance('tx_seminars_BackEnd_RegistrationsList', $this);
+				/** @var Tx_Seminars_BackEnd_RegistrationsList $registrationsList */
+				$registrationsList = GeneralUtility::makeInstance(Tx_Seminars_BackEnd_RegistrationsList::class, $this);
 				$this->content .= $registrationsList->show();
 				break;
 			case 3:

@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_AbstractList {
+class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_AbstractList {
 	/**
 	 * @var string the name of the table we're working on
 	 */
@@ -137,8 +137,8 @@ class tx_seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
 	 * @param int $registrationsToShow
 	 *        the switch to decide which registrations should be shown, must
 	 *        be either
-	 *        tx_seminars_BackEnd_RegistrationsList::REGISTRATIONS_ON_QUEUE or
-	 *        tx_seminars_BackEnd_RegistrationsList::REGULAR_REGISTRATIONS
+	 *        Tx_Seminars_BackEnd_RegistrationsList::REGISTRATIONS_ON_QUEUE or
+	 *        Tx_Seminars_BackEnd_RegistrationsList::REGULAR_REGISTRATIONS
 	 *
 	 * @return bool TRUE if the generated list is not empty, FALSE otherwise
 	 */
