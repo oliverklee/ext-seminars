@@ -31,10 +31,13 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @var string same as class name
 	 */
 	public $prefixId = 'tx_seminars_registrationmanager';
+
 	/**
-	 * @var string path to this script relative to the extension directory
+	 * faking $this->scriptRelPath so the locallang.xml file is found
+	 *
+	 * @var string
 	 */
-	public $scriptRelPath = 'class.tx_seminars_registrationmanager.php';
+	public $scriptRelPath = 'locallang.xml';
 
 	/**
 	 * @var string the extension key

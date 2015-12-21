@@ -41,11 +41,11 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	public $prefixId = 'tx_seminars_registration';
 
 	/**
-	 * the path to this script relative to the extension directory
+	 * faking $this->scriptRelPath so the locallang.xml file is found
 	 *
 	 * @var string
 	 */
-	public $scriptRelPath = 'class.tx_seminars_registration.php';
+	public $scriptRelPath = 'locallang.xml';
 
 	/**
 	 * @var tx_seminars_seminar the event to which this registration relates

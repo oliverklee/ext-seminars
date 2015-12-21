@@ -23,8 +23,13 @@
 class tx_seminars_configgetter extends tx_oelib_templatehelper {
 	/** Same as class name */
 	public $prefixId = 'tx_seminars_configgetter';
-	/**  Path to this script relative to the extension dir. */
-	public $scriptRelPath = 'class.tx_seminars_configgetter.php';
+
+	/**
+	 * faking $this->scriptRelPath so the locallang.xml file is found
+	 *
+	 * @var string
+	 */
+	public $scriptRelPath = 'locallang.xml';
 
 	/**
 	 * @var string the extension key

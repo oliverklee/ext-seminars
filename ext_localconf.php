@@ -44,10 +44,10 @@ defined('TYPO3_MODE') or die('Access denied.');
 
 // Adds our custom function to a hook in \TYPO3\CMS\Core\DataHandling\DataHandler
 // Used for post-validation of fields in back-end forms.
-$GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:seminars/class.tx_seminars_tcemain.php:tx_seminars_tcemainprocdm';
+$GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:seminars/Classes/class.tx_seminars_tcemain.php:tx_seminars_tcemainprocdm';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43(
-	$_EXTKEY, 'FrontEnd/DefaultController.php', '_pi1', 'list_type', 0
+	$_EXTKEY, 'Classes/FrontEnd/DefaultController.php', '_pi1', 'list_type', 0
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($_EXTKEY, 'setup', '
 	plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN($_EXTKEY) . '_pi1.userFunc = tx_seminars_FrontEnd_DefaultController->main
@@ -64,5 +64,5 @@ $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['pro
 
 // registers the seminars command line interface
 $TYPO3_CONF_VARS['SC_OPTIONS']['GLOBAL']['cliKeys']['seminars'] = array(
-	'EXT:seminars/cli/tx_seminars_cli.php', '_CLI_seminars',
+	'EXT:seminars/Classes/cli/tx_seminars_cli.php', '_CLI_seminars',
 );

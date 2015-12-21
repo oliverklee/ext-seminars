@@ -55,7 +55,7 @@ class tx_seminars_BackEnd_RegistrationsListTest extends Tx_Phpunit_TestCase {
 		$GLOBALS['LANG']->lang = 'default';
 
 		// Loads the locallang file for properly working localization in the tests.
-		$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
+		$GLOBALS['LANG']->includeLLFile('EXT:seminars/Classes/BackEnd/locallang.xml');
 
 		$this->backEndModule = new tx_seminars_BackEnd_Module();
 		$this->backEndModule->id = $this->dummySysFolderPid;

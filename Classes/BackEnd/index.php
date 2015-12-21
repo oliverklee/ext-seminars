@@ -343,8 +343,8 @@ if (GeneralUtility::_GET('csv') !== '1') {
 	$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_common.xml');
 	$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_show_rechis.xml');
 	$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_mod_web_list.xml');
-	$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
-	$GLOBALS['LANG']->includeLLFile('EXT:seminars/pi2/locallang.xml');
+	$GLOBALS['LANG']->includeLLFile('EXT:seminars/Classes/BackEnd/locallang.xml');
+	$GLOBALS['LANG']->includeLLFile('EXT:seminars/Classes/pi2/locallang.xml');
 
 	/** @var tx_seminars_module2 $SOBE */
 	$SOBE = GeneralUtility::makeInstance('tx_seminars_module2');

@@ -24,8 +24,13 @@
 abstract class tx_seminars_timespan extends tx_seminars_OldModel_Abstract {
 	/** @var string same as class name */
 	public $prefixId = 'tx_seminars_timespan';
-	/** @var string path to this script relative to the extension dir */
-	public $scriptRelPath = 'class.tx_seminars_timespan.php';
+
+	/**
+	 * faking $this->scriptRelPath so the locallang.xml file is found
+	 *
+	 * @var string
+	 */
+	public $scriptRelPath = 'locallang.xml';
 
 	/**
 	 * @var int the number of seconds per day

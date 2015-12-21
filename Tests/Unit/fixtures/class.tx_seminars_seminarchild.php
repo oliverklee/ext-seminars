@@ -28,7 +28,7 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	/**
 	 * @var string path to this script relative to the extension dir
 	 */
-	public $scriptRelPath = 'tests/fixtures/class.tx_seminars_seminarchild.php';
+	public $scriptRelPath = 'Tests/Unit/fixtures/class.tx_seminars_seminarchild.php';
 
 	/**
 	 * The constructor.

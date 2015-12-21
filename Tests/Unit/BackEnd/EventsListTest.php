@@ -56,7 +56,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 		$GLOBALS['LANG']->lang = 'default';
 
 		// Loads the locallang file for properly working localization in the tests.
-		$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
+		$GLOBALS['LANG']->includeLLFile('EXT:seminars/Classes/BackEnd/locallang.xml');
 
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 

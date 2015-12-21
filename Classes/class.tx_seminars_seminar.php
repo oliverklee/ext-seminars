@@ -31,12 +31,13 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @var string
 	 */
 	public $prefixId = 'tx_seminars_seminar';
+
 	/**
-	 * the path to this script relative to the extension directory
+	 * faking $this->scriptRelPath so the locallang.xml file is found
 	 *
 	 * @var string
 	 */
-	public $scriptRelPath = 'class.tx_seminars_seminar.php';
+	public $scriptRelPath = 'locallang.xml';
 
 	/**
 	 * @var string the name of the SQL table this class corresponds to

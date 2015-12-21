@@ -1,10 +1,10 @@
 <?php
 defined('TYPO3_MODE') or die('Access denied.');
 
-include_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'class.tx_seminars_flexForms.php');
-include_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'tx_seminars_modifiedSystemTables.php');
+include_once(TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/class.tx_seminars_flexForms.php');
+include_once(TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'tx_seminars_modifiedSystemTables.php');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
 	'tx_seminars_seminars',
 	'EXT:seminars/Resources/Private/Language/locallang_csh_seminars.xml'
 );
@@ -17,9 +17,9 @@ $tcaPath = $extPath . 'Configuration/TCA/tca.php';
 
 if (TYPO3_MODE === 'BE') {
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModulePath(
-		'web_txseminarsM2', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'BackEnd/'
+		'web_txseminarsM2', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/BackEnd/'
 	);
-	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('web', 'txseminarsM2', '', $extPath . 'BackEnd/');
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('web', 'txseminarsM2', '', $extPath . 'Classes/BackEnd/');
 }
 
 $GLOBALS['TCA']['tx_seminars_test'] = array(

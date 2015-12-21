@@ -20,9 +20,9 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_BackEnd_OrganizersListTest extends Tx_Phpunit_TestCase {
+class tx_seminars_BackEnd_SpeakersListTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_BackEnd_OrganizersList
+	 * @var tx_seminars_BackEnd_SpeakersList
 	 */
 	private $fixture;
 	/**
@@ -54,7 +54,7 @@ class tx_seminars_BackEnd_OrganizersListTest extends Tx_Phpunit_TestCase {
 		$GLOBALS['LANG']->lang = 'default';
 
 		// Loads the locallang file for properly working localization in the tests.
-		$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
+		$GLOBALS['LANG']->includeLLFile('EXT:seminars/Classes/BackEnd/locallang.xml');
 
 		$this->testingFramework
 			= new Tx_Oelib_TestingFramework('tx_seminars');
@@ -74,7 +74,7 @@ class tx_seminars_BackEnd_OrganizersListTest extends Tx_Phpunit_TestCase {
 		$document->backPath = $GLOBALS['BACK_PATH'];
 		$document->docType = 'xhtml_strict';
 
-		$this->fixture = new tx_seminars_BackEnd_OrganizersList(
+		$this->fixture = new tx_seminars_BackEnd_SpeakersList(
 			$this->backEndModule
 		);
 	}
@@ -90,20 +90,56 @@ class tx_seminars_BackEnd_OrganizersListTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function showContainsOrganizerFromSubfolder() {
+	public function showContainsHideButtonForVisibleSpeaker() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_speakers',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'hidden' => 0,
+			)
+		);
+
+		self::assertContains(
+			'Icons/Hide.gif',
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showContainsUnhideButtonForHiddenSpeaker() {
+		$this->testingFramework->createRecord(
+			'tx_seminars_speakers',
+			array(
+				'pid' => $this->dummySysFolderPid,
+				'hidden' => 1,
+			)
+		);
+
+		self::assertContains(
+			'Icons/Unhide.gif',
+			$this->fixture->show()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function showContainsSpeakerFromSubfolder() {
 		$subfolderPid = $this->testingFramework->createSystemFolder(
 			$this->dummySysFolderPid
 		);
 		$this->testingFramework->createRecord(
-			'tx_seminars_organizers',
+			'tx_seminars_speakers',
 			array(
-				'title' => 'Organizer in subfolder',
+				'title' => 'Speaker in subfolder',
 				'pid' => $subfolderPid,
 			)
 		);
 
 		self::assertContains(
-			'Organizer in subfolder',
+			'Speaker in subfolder',
 			$this->fixture->show()
 		);
 	}
@@ -113,11 +149,11 @@ class tx_seminars_BackEnd_OrganizersListTest extends Tx_Phpunit_TestCase {
 	// Tests concerning the "new" button
 	//////////////////////////////////////
 
-	public function testNewButtonForOrganizerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid() {
-		$newOrganizerFolder = $this->dummySysFolderPid + 1;
+	public function testNewButtonForSpeakerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid() {
+		$newSpeakerFolder = $this->dummySysFolderPid + 1;
 		$backEndGroup = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
-			array('tx_seminars_auxiliaries_folder' => $newOrganizerFolder)
+			array('tx_seminars_auxiliaries_folder' => $newSpeakerFolder)
 		);
 		$backEndUser = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_BackEndUser')->getLoadedTestingModel(
@@ -128,7 +164,7 @@ class tx_seminars_BackEnd_OrganizersListTest extends Tx_Phpunit_TestCase {
 		);
 
 		self::assertContains(
-			'edit[tx_seminars_organizers][' . $newOrganizerFolder . ']=new',
+			'edit[tx_seminars_speakers][' . $newSpeakerFolder . ']=new',
 			$this->fixture->show()
 		);
 	}

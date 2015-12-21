@@ -56,7 +56,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	/**
 	 * @var string path to this script relative to the extension dir
 	 */
-	public $scriptRelPath = 'pi2/class.tx_seminars_pi2.php';
+	public $scriptRelPath = 'Classes/pi2/class.tx_seminars_pi2.php';
 
 	/**
 	 * @var string the extension key
