@@ -301,9 +301,9 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * @return string the HTML source for the form
 	 */
 	private function getConfirmEventMailForm() {
-		/** @var tx_seminars_BackEnd_ConfirmEventMailForm $form */
+		/** @var Tx_Seminars_BackEnd_ConfirmEventMailForm $form */
 		$form = GeneralUtility::makeInstance(
-			'tx_seminars_BackEnd_ConfirmEventMailForm', (int)GeneralUtility::_GP('eventUid')
+			Tx_Seminars_BackEnd_ConfirmEventMailForm::class, (int)GeneralUtility::_GP('eventUid')
 		);
 		$form->setPostData(GeneralUtility::_POST());
 

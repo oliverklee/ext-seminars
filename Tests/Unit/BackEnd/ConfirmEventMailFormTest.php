@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Tx_Seminars_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_BackEnd_ConfirmEventMailForm
+	 * @var Tx_Seminars_BackEnd_ConfirmEventMailForm
 	 */
 	private $fixture;
 	/**
@@ -130,7 +130,7 @@ class Tx_Seminars_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase {
 			'organizers'
 		);
 
-		$this->fixture = new tx_seminars_BackEnd_ConfirmEventMailForm($this->eventUid);
+		$this->fixture = new Tx_Seminars_BackEnd_ConfirmEventMailForm($this->eventUid);
 	}
 
 	protected function tearDown() {
