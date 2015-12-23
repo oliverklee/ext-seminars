@@ -120,7 +120,7 @@ class Tx_Seminars_BackEnd_OrganizersListTest extends Tx_Phpunit_TestCase {
 			array('tx_seminars_auxiliaries_folder' => $newOrganizerFolder)
 		);
 		$backEndUser = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_BackEndUser')->getLoadedTestingModel(
+			Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel(
 				array('usergroup' => $backEndGroup->getUid())
 		);
 		Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(

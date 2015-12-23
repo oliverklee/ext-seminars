@@ -20,20 +20,20 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_Mapper_BackEndUserTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Mapper_BackEndUserTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Oelib_TestingFramework for creating dummy records
 	 */
 	private $testingFramework;
 	/**
-	 * @var tx_seminars_Mapper_BackEndUser the object to test
+	 * @var Tx_Seminars_Mapper_BackEndUser the object to test
 	 */
 	private $fixture;
 
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_Mapper_BackEndUser();
+		$this->fixture = new Tx_Seminars_Mapper_BackEndUser();
 	}
 
 	protected function tearDown() {
