@@ -592,7 +592,7 @@ class tx_seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
 	protected function getSingleViewPageUidFromCategories() {
 		$result = 0;
 
-		/** @var tx_seminars_Model_Category $category */
+		/** @var Tx_Seminars_Model_Category $category */
 		foreach ($this->getCategories() as $category) {
 			if ($category->hasSingleViewPageUid()) {
 				$result = $category->getSingleViewPageUid();

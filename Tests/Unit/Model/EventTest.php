@@ -746,7 +746,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getCombinedSingleViewPageForAvailableCategoryWithoutSingleViewPageReturnsEmptyString() {
-		$category = new tx_seminars_Model_Category();
+		$category = new Tx_Seminars_Model_Category();
 		$category->setData(array());
 		$categories = new Tx_Oelib_List();
 		$categories->add($category);
@@ -762,7 +762,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getCombinedSingleViewPageForAvailableCategoryTypeWithSingleViewPageReturnsSingleViewPageFromCategory() {
-		$category = new tx_seminars_Model_Category();
+		$category = new Tx_Seminars_Model_Category();
 		$category->setData(array('single_view_page' => 42));
 		$categories = new Tx_Oelib_List();
 		$categories->add($category);
@@ -778,9 +778,9 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getCombinedSingleViewPageForTwoAvailableCategoriesWithSingleViewPageReturnsSingleViewPageFromFirstCategory() {
-		$category1 = new tx_seminars_Model_Category();
+		$category1 = new Tx_Seminars_Model_Category();
 		$category1->setData(array('single_view_page' => 42));
-		$category2 = new tx_seminars_Model_Category();
+		$category2 = new Tx_Seminars_Model_Category();
 		$category2->setData(array('single_view_page' => 12));
 		$categories = new Tx_Oelib_List();
 		$categories->add($category1);
@@ -848,7 +848,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	public function getCombinedSingleViewPageUsesEventTypeInsteadOfCategoriesIfBothAreAvailable() {
 		$eventType = new tx_seminars_Model_EventType();
 		$eventType->setData(array('single_view_page' => 42));
-		$category = new tx_seminars_Model_Category();
+		$category = new Tx_Seminars_Model_Category();
 		$category->setData(array('single_view_page' => 91));
 		$categories = new Tx_Oelib_List();
 		$categories->add($category);
