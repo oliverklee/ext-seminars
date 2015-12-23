@@ -29,7 +29,7 @@ class Tx_Seminars_Mapper_Checkbox extends tx_oelib_DataMapper {
 	/**
 	 * @var string the model class name for this mapper, must not be empty
 	 */
-	protected $modelClassName = 'tx_seminars_Model_Checkbox';
+	protected $modelClassName = Tx_Seminars_Model_Checkbox::class;
 
 	/**
 	 * @var string[] the (possible) relations of the created models in the format DB column name => mapper name

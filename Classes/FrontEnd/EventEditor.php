@@ -463,7 +463,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 			array('relatedRecordType' => 'Checkboxes')
 		) && is_object($formidable);
 
-		/** @var tx_seminars_Model_Checkbox $checkbox */
+		/** @var Tx_Seminars_Model_Checkbox $checkbox */
 		foreach ($checkboxes as $checkbox) {
 			$frontEndUserIsOwner = ($checkbox->getOwner() === $frontEndUser);
 
@@ -2002,8 +2002,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 			);
 		};
 
-		/** @var tx_seminars_Model_Checkbox $checkbox */
-		$checkbox = GeneralUtility::makeInstance('tx_seminars_Model_Checkbox');
+		/** @var Tx_Seminars_Model_Checkbox $checkbox */
+		$checkbox = GeneralUtility::makeInstance(Tx_Seminars_Model_Checkbox::class);
 		$checkbox->setData(self::createBasicAuxiliaryData());
 		self::setCheckboxData($checkbox, 'newCheckbox_', $formData);
 		$checkbox->markAsDirty();
@@ -2054,7 +2054,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		$checkboxMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
 
 		try {
-			/** @var tx_seminars_Model_Checkbox $checkbox */
+			/** @var Tx_Seminars_Model_Checkbox $checkbox */
 			$checkbox = $checkboxMapper->find((int)$formData['editCheckbox_uid']);
 		} catch (Exception $exception) {
 			return $formidable->majixExecJs(
@@ -2119,14 +2119,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	/**
 	 * Sets the data of a checkbox model based on the data given in $formData.
 	 *
-	 * @param tx_seminars_Model_Checkbox $checkbox the checkbox model to set the data
+	 * @param Tx_Seminars_Model_Checkbox $checkbox the checkbox model to set the data
 	 * @param string $prefix the prefix of the form fields in $formData
 	 * @param array[] $formData the form data to use for setting the checkbox data
 	 *
 	 * @return void
 	 */
 	private static function setCheckboxData(
-		tx_seminars_Model_Checkbox $checkbox, $prefix, array $formData
+		Tx_Seminars_Model_Checkbox $checkbox, $prefix, array $formData
 	) {
 		$checkbox->setTitle($formData[$prefix . 'title']);
 	}
@@ -2150,7 +2150,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		$checkboxMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
 
 		try {
-			/** @var tx_seminars_Model_Checkbox $checkbox */
+			/** @var Tx_Seminars_Model_Checkbox $checkbox */
 			$checkbox = $checkboxMapper->find((int)$checkboxUid);
 		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(

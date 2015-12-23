@@ -381,10 +381,7 @@ class Tx_Seminars_Mapper_EventDateTest extends Tx_Phpunit_TestCase {
 
 		/** @var tx_seminars_Model_Event $model */
 		$model = $this->fixture->find($uid);
-		self::assertTrue(
-			$model->getCheckboxes()->first() instanceof
-				tx_seminars_Model_Checkbox
-		);
+		self::assertInstanceOf(Tx_Seminars_Model_Checkbox::class, $model->getCheckboxes()->first());
 	}
 
 	/**
