@@ -3696,7 +3696,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function makeListToFormidableListForListWithOneElementReturnsModelDataInArray() {
 		$targetGroup = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_TargetGroup')->getLoadedTestingModel(
+			Tx_Seminars_Mapper_TargetGroup::class)->getLoadedTestingModel(
 				array('title' => 'foo')
 		);
 
@@ -3716,9 +3716,9 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function makeListToFormidableListForListWithTwoElementsReturnsArrayWithTwoModels() {
 		$targetGroup1 = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_TargetGroup')->getLoadedTestingModel(array());
+			Tx_Seminars_Mapper_TargetGroup::class)->getLoadedTestingModel(array());
 		$targetGroup2 = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_TargetGroup')->getLoadedTestingModel(array());
+			Tx_Seminars_Mapper_TargetGroup::class)->getLoadedTestingModel(array());
 
 		$list = new Tx_Oelib_List();
 		$list->add($targetGroup1);

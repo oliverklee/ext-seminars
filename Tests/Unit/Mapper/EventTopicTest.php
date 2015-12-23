@@ -245,7 +245,7 @@ class Tx_Seminars_Mapper_EventTopicTest extends Tx_Phpunit_TestCase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$targetGroup = tx_oelib_MapperRegistry::
-			get('tx_seminars_Mapper_TargetGroup')->getNewGhost();
+			get(Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars', $uid, $targetGroup->getUid(), 'target_groups'
 		);
@@ -266,7 +266,7 @@ class Tx_Seminars_Mapper_EventTopicTest extends Tx_Phpunit_TestCase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 		$targetGroup = tx_oelib_MapperRegistry::
-			get('tx_seminars_Mapper_TargetGroup')->getNewGhost();
+			get(Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars', $uid, $targetGroup->getUid(), 'target_groups'
 		);

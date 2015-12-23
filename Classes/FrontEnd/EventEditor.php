@@ -518,8 +518,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	) {
 		$result = $items;
 
-		/** @var tx_seminars_Mapper_TargetGroup $targetGroupMapper */
-		$targetGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup');
+		/** @var Tx_Seminars_Mapper_TargetGroup $targetGroupMapper */
+		$targetGroupMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
 		$targetGroups = $targetGroupMapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		if (is_object($formidable)) {
@@ -2214,8 +2214,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		$targetGroup->setData(self::createBasicAuxiliaryData());
 		self::setTargetGroupData($targetGroup, 'newTargetGroup_', $formData);
 		$targetGroup->markAsDirty();
-		/** @var tx_seminars_Mapper_TargetGroup $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup');
+		/** @var Tx_Seminars_Mapper_TargetGroup $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
 		$mapper->save($targetGroup);
 
 		$editButtonConfiguration =& $formidable->_navConf(
@@ -2258,8 +2258,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	public static function updateTargetGroup(tx_ameosformidable $formidable) {
 		$formData = $formidable->oMajixEvent->getParams();
 		$frontEndUser = self::getLoggedInUser();
-		/** @var tx_seminars_Mapper_TargetGroup $targetGroupMapper */
-		$targetGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup');
+		/** @var Tx_Seminars_Mapper_TargetGroup $targetGroupMapper */
+		$targetGroupMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
 
 		try {
 			/** @var tx_seminars_Model_TargetGroup $targetGroup */
@@ -2384,8 +2384,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 			return $formidable->majixExecJs('alert("$targetGroupUid must be >= 0.");');
 		}
 
-		/** @var tx_seminars_Mapper_TargetGroup $targetGroupMapper */
-		$targetGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TargetGroup');
+		/** @var Tx_Seminars_Mapper_TargetGroup $targetGroupMapper */
+		$targetGroupMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
 
 		try {
 			/** @var tx_seminars_Model_TargetGroup $targetGroup */
