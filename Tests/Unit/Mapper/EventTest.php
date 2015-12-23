@@ -249,7 +249,7 @@ class Tx_Seminars_Mapper_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getFoodsWithOneFoodReturnsListOfFoods() {
 		$uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		$food = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Food')
+		$food = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Food::class)
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars', $uid, $food->getUid(), 'foods'
@@ -267,7 +267,7 @@ class Tx_Seminars_Mapper_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getFoodsWithOneFoodReturnsOneFood() {
 		$uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		$food = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Food')
+		$food = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Food::class)
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars', $uid, $food->getUid(), 'foods'

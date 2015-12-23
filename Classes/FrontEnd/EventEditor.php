@@ -236,8 +236,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	 *               and "value" (for the UID)
 	 */
 	public function populateListFoods() {
-		/** @var tx_seminars_Mapper_Food $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Food');
+		/** @var Tx_Seminars_Mapper_Food $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Food::class);
 		$foods = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		return self::makeListToFormidableList($foods);
