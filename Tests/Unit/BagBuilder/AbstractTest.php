@@ -21,7 +21,7 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Seminars_Tests_Fixtures_BagBuilder_Testing
 	 */
