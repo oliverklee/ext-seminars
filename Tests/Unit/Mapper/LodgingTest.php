@@ -50,9 +50,7 @@ class Tx_Seminars_Mapper_LodgingTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function findWithUidReturnsLodgingInstance() {
-		self::assertTrue(
-			$this->fixture->find(1) instanceof tx_seminars_Model_Lodging
-		);
+		self::assertInstanceOf(Tx_Seminars_Model_Lodging::class, $this->fixture->find(1));
 	}
 
 	/**
@@ -63,7 +61,7 @@ class Tx_Seminars_Mapper_LodgingTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_lodgings', array('title' => 'Shack')
 		);
 
-		/** @var tx_seminars_Model_Lodging $model */
+		/** @var Tx_Seminars_Model_Lodging $model */
 		$model = $this->fixture->find($uid);
 		self::assertEquals(
 			'Shack',

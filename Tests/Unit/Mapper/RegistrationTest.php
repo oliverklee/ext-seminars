@@ -184,9 +184,7 @@ class Tx_Seminars_Mapper_RegistrationTest extends Tx_Phpunit_TestCase {
 
 		/** @var tx_seminars_Model_Registration $model */
 		$model = $this->fixture->find($uid);
-		self::assertTrue(
-			$model->getLodgings()->first() instanceof tx_seminars_Model_Lodging
-		);
+		self::assertInstanceOf(Tx_Seminars_Model_Lodging::class, $model->getLodgings()->first());
 	}
 
 	/**

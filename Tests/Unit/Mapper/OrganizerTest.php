@@ -63,7 +63,7 @@ class Tx_Seminars_Mapper_OrganizerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_organizers', array('title' => 'Fabulous organizer')
 		);
 
-		/** @var tx_seminars_Model_Lodging $model */
+		/** @var Tx_Seminars_Model_Lodging $model */
 		$model = $this->fixture->find($uid);
 		self::assertEquals(
 			'Fabulous organizer',
