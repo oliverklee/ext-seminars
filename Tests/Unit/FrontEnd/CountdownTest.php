@@ -21,9 +21,9 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_FrontEnd_Countdown
+	 * @var Tx_Seminars_FrontEnd_Countdown
 	 */
 	private $fixture = NULL;
 
@@ -55,7 +55,7 @@ class tx_seminars_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase {
 
 		$this->mapper = $this->getMock('tx_seminars_Mapper_Event', array('findNextUpcoming'));
 
-		$this->fixture = new tx_seminars_FrontEnd_Countdown(
+		$this->fixture = new Tx_Seminars_FrontEnd_Countdown(
 			array(
 				'isStaticTemplateLoaded' => 1,
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
@@ -79,9 +79,7 @@ class tx_seminars_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function fixtureIsAFrontEndCountdownObject() {
-		self::assertTrue(
-			$this->fixture instanceof tx_seminars_FrontEnd_Countdown
-		);
+		self::assertInstanceOf(Tx_Seminars_FrontEnd_Countdown::class, $this->fixture);
 	}
 
 
