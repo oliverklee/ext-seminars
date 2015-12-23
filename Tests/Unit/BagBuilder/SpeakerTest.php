@@ -20,9 +20,9 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_BagBuilder_SpeakerTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_BagBuilder_SpeakerTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_BagBuilder_Speaker
+	 * @var Tx_Seminars_BagBuilder_Speaker
 	 */
 	private $fixture;
 	/**
@@ -33,7 +33,7 @@ class tx_seminars_BagBuilder_SpeakerTest extends Tx_Phpunit_TestCase {
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_BagBuilder_Speaker();
+		$this->fixture = new Tx_Seminars_BagBuilder_Speaker();
 		$this->fixture->setTestMode();
 	}
 
