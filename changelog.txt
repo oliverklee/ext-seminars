@@ -15,6 +15,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5599] Rename tx_seminars_Model_Speaker to Tx_Seminars_Model_Speaker
 - [#5598] Rename tx_seminars_Model_Skill to Tx_Seminars_Model_Skill
 - [#5597] Rename tx_seminars_Model_Registration to Tx_Seminars_Model_Registration
 - [#5596] Rename tx_seminars_Model_PaymentMethod to Tx_Seminars_Model_PaymentMethod

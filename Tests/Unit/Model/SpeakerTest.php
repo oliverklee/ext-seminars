@@ -20,14 +20,14 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Model_SpeakerTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Model_SpeakerTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_Model_Speaker
+	 * @var Tx_Seminars_Model_Speaker
 	 */
 	private $fixture;
 
 	protected function setUp() {
-		$this->fixture = new tx_seminars_Model_Speaker();
+		$this->fixture = new Tx_Seminars_Model_Speaker();
 	}
 
 	///////////////////////////////
@@ -649,7 +649,7 @@ class tx_seminars_Model_SpeakerTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setData(array());
 
 		self::assertEquals(
-			tx_seminars_Model_Speaker::GENDER_UNKNOWN,
+			Tx_Seminars_Model_Speaker::GENDER_UNKNOWN,
 			$this->fixture->getGender()
 		);
 	}
@@ -659,11 +659,11 @@ class tx_seminars_Model_SpeakerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getGenderWithGenderMaleReturnsMaleGender() {
 		$this->fixture->setData(
-			array('gender' => tx_seminars_Model_Speaker::GENDER_MALE)
+			array('gender' => Tx_Seminars_Model_Speaker::GENDER_MALE)
 		);
 
 		self::assertEquals(
-			tx_seminars_Model_Speaker::GENDER_MALE,
+			Tx_Seminars_Model_Speaker::GENDER_MALE,
 			$this->fixture->getGender()
 		);
 	}
@@ -673,11 +673,11 @@ class tx_seminars_Model_SpeakerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getGenderWithGenderFemaleReturnsFemaleGender() {
 		$this->fixture->setData(
-			array('gender' => tx_seminars_Model_Speaker::GENDER_FEMALE)
+			array('gender' => Tx_Seminars_Model_Speaker::GENDER_FEMALE)
 		);
 
 		self::assertEquals(
-			tx_seminars_Model_Speaker::GENDER_FEMALE,
+			Tx_Seminars_Model_Speaker::GENDER_FEMALE,
 			$this->fixture->getGender()
 		);
 	}
@@ -686,10 +686,10 @@ class tx_seminars_Model_SpeakerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setGenderSetsGender() {
-		$this->fixture->setGender(tx_seminars_Model_Speaker::GENDER_MALE);
+		$this->fixture->setGender(Tx_Seminars_Model_Speaker::GENDER_MALE);
 
 		self::assertEquals(
-			tx_seminars_Model_Speaker::GENDER_MALE,
+			Tx_Seminars_Model_Speaker::GENDER_MALE,
 			$this->fixture->getGender()
 		);
 	}
@@ -709,7 +709,7 @@ class tx_seminars_Model_SpeakerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function hasGenderWithGenderMaleReturnsTrue() {
-		$this->fixture->setGender(tx_seminars_Model_Speaker::GENDER_MALE);
+		$this->fixture->setGender(Tx_Seminars_Model_Speaker::GENDER_MALE);
 
 		self::assertTrue(
 			$this->fixture->hasGender()
@@ -720,7 +720,7 @@ class tx_seminars_Model_SpeakerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function hasGenderWithGenderFemaleReturnsTrue() {
-		$this->fixture->setGender(tx_seminars_Model_Speaker::GENDER_FEMALE);
+		$this->fixture->setGender(Tx_Seminars_Model_Speaker::GENDER_FEMALE);
 
 		self::assertTrue(
 			$this->fixture->hasGender()
