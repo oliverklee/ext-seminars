@@ -21,9 +21,9 @@
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_FrontEnd_EventHeadline
+	 * @var Tx_Seminars_FrontEnd_EventHeadline
 	 */
 	private $fixture;
 
@@ -72,7 +72,7 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestCase {
 		));
 		$this->eventId = $event->getUid();
 
-		$this->fixture = new tx_seminars_FrontEnd_EventHeadline(
+		$this->fixture = new Tx_Seminars_FrontEnd_EventHeadline(
 			array(
 				'isStaticTemplateLoaded' => 1,
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',

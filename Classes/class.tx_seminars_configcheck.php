@@ -402,7 +402,7 @@ class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_EventHeadline() {
+	protected function check_Tx_Seminars_FrontEnd_EventHeadline() {
 		$this->checkCommonFrontEndSettings();
 	}
 
