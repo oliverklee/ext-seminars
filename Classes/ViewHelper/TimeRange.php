@@ -51,12 +51,12 @@ class tx_seminars_ViewHelper_TimeRange {
 	 * Returns a localized string "will be announced" if there's no time set (i.e. both begin time and end time are 00:00).
 	 * Returns only the begin time if begin time and end time are the same.
 	 *
-	 * @param tx_seminars_Model_AbstractTimeSpan $timeSpan the timespan to get the date for
+	 * @param Tx_Seminars_Model_AbstractTimeSpan $timeSpan the timespan to get the date for
 	 * @param string $dash the character or HTML entity used to separate begin time and end time
 	 *
 	 * @return string the time
 	 */
-	public function render(tx_seminars_Model_AbstractTimeSpan $timeSpan, $dash = '&#8211;') {
+	public function render(Tx_Seminars_Model_AbstractTimeSpan $timeSpan, $dash = '&#8211;') {
 		if (!$this->hasTime($timeSpan)) {
 			return $this->translator->translate('message_willBeAnnounced');
 		}
@@ -83,7 +83,7 @@ class tx_seminars_ViewHelper_TimeRange {
 	 *
 	 * @return bool TRUE if we have a begin time, FALSE otherwise
 	 */
-	protected function hasTime(tx_seminars_Model_AbstractTimeSpan $timeSpan) {
+	protected function hasTime(Tx_Seminars_Model_AbstractTimeSpan $timeSpan) {
 		if (!$timeSpan->hasBeginDate()) {
 			return FALSE;
 		}
@@ -97,7 +97,7 @@ class tx_seminars_ViewHelper_TimeRange {
 	 *
 	 * @return bool TRUE if we have an end time, FALSE otherwise
 	 */
-	protected function hasEndTime(tx_seminars_Model_AbstractTimeSpan $timeSpan) {
+	protected function hasEndTime(Tx_Seminars_Model_AbstractTimeSpan $timeSpan) {
 		if (!$timeSpan->hasEndDate()) {
 			return FALSE;
 		}

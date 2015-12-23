@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
+class tx_seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
 	/**
 	 * @var int represents the type for a single event
 	 */

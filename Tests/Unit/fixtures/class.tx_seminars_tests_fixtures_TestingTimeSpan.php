@@ -20,5 +20,5 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_tests_fixtures_TestingTimeSpan extends tx_seminars_Model_AbstractTimeSpan {
+class tx_seminars_tests_fixtures_TestingTimeSpan extends Tx_Seminars_Model_AbstractTimeSpan {
 }
