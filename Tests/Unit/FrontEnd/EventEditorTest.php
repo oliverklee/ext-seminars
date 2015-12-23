@@ -24,7 +24,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_FrontEnd_EventEditor
+	 * @var Tx_Seminars_FrontEnd_EventEditor
 	 */
 	protected $fixture = NULL;
 
@@ -53,7 +53,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
 		tx_oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
 
-		$this->fixture = new tx_seminars_FrontEnd_EventEditor(
+		$this->fixture = new Tx_Seminars_FrontEnd_EventEditor(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'form.' => array('eventEditor.' => array()),
@@ -186,11 +186,11 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @param string $requiredField
 	 *        the field which should be required, may be empty
 	 *
-	 * @return tx_seminars_FrontEnd_EventEditor event editor fixture with the given
+	 * @return Tx_Seminars_FrontEnd_EventEditor event editor fixture with the given
 	 *         field as required field, will not be NULL.
 	 */
 	private function getFixtureWithRequiredField($requiredField) {
-		$result = new tx_seminars_FrontEnd_EventEditor(
+		$result = new Tx_Seminars_FrontEnd_EventEditor(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'form.' => array('eventEditor.' => array()),
@@ -3633,7 +3633,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		self::assertTrue(
 			in_array(
 				array('caption' => 'Deutschland', 'value' => 54),
-				tx_seminars_FrontEnd_EventEditor::populateListCountries()
+				Tx_Seminars_FrontEnd_EventEditor::populateListCountries()
 			)
 		);
 	}
@@ -3642,7 +3642,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function populateListCountriesSortsResultsByLocalCountryName() {
-		$countries = tx_seminars_FrontEnd_EventEditor::populateListCountries();
+		$countries = Tx_Seminars_FrontEnd_EventEditor::populateListCountries();
 		$positionGermany = array_search(
 			array('caption' => 'Deutschland', 'value' => 54), $countries
 		);
@@ -3671,7 +3671,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		self::assertTrue(
 			in_array(
 				array('caption' => 'Juggling', 'value' => $uid),
-				tx_seminars_FrontEnd_EventEditor::populateListSkills()
+				Tx_Seminars_FrontEnd_EventEditor::populateListSkills()
 			)
 		);
 	}
@@ -3687,7 +3687,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	public function makeListToFormidableListForEmptyListGivenReturnsEmptyArray() {
 		self::assertEquals(
 			array(),
-			tx_seminars_FrontEnd_EventEditor::makeListToFormidableList(new Tx_Oelib_List())
+			Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList(new Tx_Oelib_List())
 		);
 	}
 
@@ -3706,7 +3706,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		self::assertTrue(
 			in_array(
 				array('caption' => 'foo', 'value' => $targetGroup->getUid()),
-				tx_seminars_FrontEnd_EventEditor::makeListToFormidableList($list)
+				Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList($list)
 			)
 		);
 	}
@@ -3726,7 +3726,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 
 		self::assertEquals(
 			2,
-			count(tx_seminars_FrontEnd_EventEditor::makeListToFormidableList($list))
+			count(Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList($list))
 		);
 	}
 

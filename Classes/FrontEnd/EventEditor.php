@@ -24,7 +24,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
+class Tx_Seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * @var string stores a validation error message if there was one
 	 */
@@ -332,7 +332,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 				$editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
 				$editButtonConfiguration['onclick']['userobj']['php'] = '
 					require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-					return tx_seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
+					return Tx_Seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
 					';
 				$editButton = $formidable->_makeRenderlet(
 					$editButtonConfiguration,
@@ -406,7 +406,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 				$editButtonConfiguration['name'] = 'edit' . $type . 'Button_' . $speaker->getUid();
 				$editButtonConfiguration['onclick']['userobj']['php'] = '
 					require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-					return tx_seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');
+					return Tx_Seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');
 					';
 				$editButton = $formidable->_makeRenderlet(
 					$editButtonConfiguration,
@@ -479,7 +479,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 				$editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
 				$editButtonConfiguration['onclick']['userobj']['php'] = '
 					require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-					return tx_seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
+					return Tx_Seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
 					';
 				$editButton = $formidable->_makeRenderlet(
 					$editButtonConfiguration,
@@ -552,7 +552,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 					$targetGroup->getUid();
 				$editButtonConfiguration['onclick']['userobj']['php'] = '
 					require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-					return tx_seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
+					return Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
 					';
 				$editButton = $formidable->_makeRenderlet(
 					$editButtonConfiguration,
@@ -1451,7 +1451,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
 		$editButtonConfiguration['onclick']['userobj']['php'] = '
 			require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-			return tx_seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
+			return Tx_Seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
 			';
 		$editButton = $formidable->_makeRenderlet(
 			$editButtonConfiguration,
@@ -1753,7 +1753,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$editButtonConfiguration['name'] = 'editSpeakerButton_' . $speaker->getUid();
 		$editButtonConfiguration['onclick']['userobj']['php'] = '
 			require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-			return tx_seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');
+			return Tx_Seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');
 			';
 		$editButton = $formidable->_makeRenderlet(
 			$editButtonConfiguration,
@@ -2023,7 +2023,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
 		$editButtonConfiguration['onclick']['userobj']['php'] = '
 			require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-			return tx_seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
+			return Tx_Seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
 			';
 		$editButton = $formidable->_makeRenderlet(
 			$editButtonConfiguration,
@@ -2232,7 +2232,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			$targetGroup->getUid();
 		$editButtonConfiguration['onclick']['userobj']['php'] = '
 			require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(\'oelib\') . \'class.tx_oelib_Autoloader.php\');
-			return tx_seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
+			return Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
 			';
 		$editButton = $formidable->_makeRenderlet(
 			$editButtonConfiguration,

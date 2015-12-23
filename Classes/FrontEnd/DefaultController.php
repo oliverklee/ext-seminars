@@ -2989,11 +2989,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	/**
 	 * Creates an event editor instance and returns it.
 	 *
-	 * @return tx_seminars_FrontEnd_EventEditor the initialized event editor
+	 * @return Tx_Seminars_FrontEnd_EventEditor the initialized event editor
 	 */
 	protected function createEventEditorInstance() {
-		/** @var tx_seminars_FrontEnd_EventEditor $eventEditor */
-		$eventEditor = GeneralUtility::makeInstance('tx_seminars_FrontEnd_EventEditor', $this->conf, $this->cObj);
+		/** @var Tx_Seminars_FrontEnd_EventEditor $eventEditor */
+		$eventEditor = GeneralUtility::makeInstance(Tx_Seminars_FrontEnd_EventEditor::class, $this->conf, $this->cObj);
 		$eventEditor->setObjectUid((int)$this->piVars['seminar']);
 
 		return $eventEditor;
