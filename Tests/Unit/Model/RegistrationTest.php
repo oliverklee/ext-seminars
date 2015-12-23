@@ -531,7 +531,7 @@ class tx_seminars_Model_RegistrationTest extends Tx_Phpunit_TestCase {
 	 */
 	public function setPaymentMethodSetsPaymentMethod() {
 		$paymentMethod = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_PaymentMethod'
+			Tx_Seminars_Mapper_PaymentMethod::class
 		)->getNewGhost();
 		$this->fixture->setPaymentMethod($paymentMethod);
 

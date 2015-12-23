@@ -47,7 +47,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 		'partners' => 'tx_seminars_Mapper_Speaker',
 		'tutors' => 'tx_seminars_Mapper_Speaker',
 		'leaders' => 'tx_seminars_Mapper_Speaker',
-		'payment_methods' => 'tx_seminars_Mapper_PaymentMethod',
+		'payment_methods' => Tx_Seminars_Mapper_PaymentMethod::class,
 		'organizers' => 'tx_seminars_Mapper_Organizer',
 		'organizing_partners' => 'tx_seminars_Mapper_Organizer',
 		'target_groups' => 'tx_seminars_Mapper_TargetGroup',

@@ -38,7 +38,7 @@ class Tx_Seminars_Mapper_Registration extends Tx_Oelib_DataMapper {
 		'seminar' => 'tx_seminars_Mapper_Event',
 		'user' => 'tx_seminars_Mapper_FrontEndUser',
 		'currency' => Tx_Oelib_Mapper_Currency::class,
-		'method_of_payment' => 'tx_seminars_Mapper_PaymentMethod',
+		'method_of_payment' => Tx_Seminars_Mapper_PaymentMethod::class,
 		'lodgings' => Tx_Seminars_Mapper_Lodging::class,
 		'foods' => 'tx_seminars_Mapper_Food',
 		'checkboxes' => 'tx_seminars_Mapper_Checkbox',

@@ -175,7 +175,7 @@ class tx_seminars_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getPaymentMethodsForSingleEventWithOnePaymentMethodReturnsListOfPaymentMethods() {
 		$paymentMethod = tx_oelib_MapperRegistry::
-			get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
+			get(Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
 		$uid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
@@ -199,7 +199,7 @@ class tx_seminars_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getPaymentMethodsForSingleEventWithOnePaymentMethodReturnsOnePaymentMethod() {
 		$paymentMethod = tx_oelib_MapperRegistry::
-			get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
+			get(Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
 		$uid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
