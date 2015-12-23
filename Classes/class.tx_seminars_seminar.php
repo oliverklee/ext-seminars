@@ -4109,12 +4109,12 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Creates a time slot bag for the time slots associated with this event.
 	 *
-	 * @return tx_seminars_Bag_TimeSlot bag with this event's time slots, may be empty
+	 * @return Tx_Seminars_Bag_TimeSlot bag with this event's time slots, may be empty
 	 */
 	private function createTimeSlotBag() {
-		/** @var tx_seminars_Bag_TimeSlot $bag */
+		/** @var Tx_Seminars_Bag_TimeSlot $bag */
 		$bag = GeneralUtility::makeInstance(
-			'tx_seminars_Bag_TimeSlot',
+			Tx_Seminars_Bag_TimeSlot::class,
 			'tx_seminars_timeslots.seminar = ' . $this->getUid() .
 				' AND tx_seminars_timeslots.place > 0',
 			'',
@@ -4140,9 +4140,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function getTimeSlotsAsArrayWithMarkers() {
 		$result = array();
 
-		/** @var tx_seminars_Bag_TimeSlot $timeSlotBag */
+		/** @var Tx_Seminars_Bag_TimeSlot $timeSlotBag */
 		$timeSlotBag = GeneralUtility::makeInstance(
-			'tx_seminars_Bag_TimeSlot',
+			Tx_Seminars_Bag_TimeSlot::class,
 			'tx_seminars_timeslots.seminar = ' . $this->getUid(),
 			'',
 			'',
