@@ -145,11 +145,11 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList {
 	 *
 	 * The table rows are set directly in the template, so nothing is returned.
 	 *
-	 * @param tx_seminars_Bag_Event $events the events to list
+	 * @param Tx_Seminars_Bag_Event $events the events to list
 	 *
 	 * @return void
 	 */
-	private function createListBody(tx_seminars_Bag_Event $events) {
+	private function createListBody(Tx_Seminars_Bag_Event $events) {
 		$tableRows = '';
 
 		/** @var tx_seminars_seminar $event */

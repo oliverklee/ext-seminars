@@ -44,7 +44,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	const SUBPART_PREFIX = 'SEARCH_PART_';
 
 	/**
-	 * @var tx_seminars_Bag_Event all seminars to show in the list view
+	 * @var Tx_Seminars_Bag_Event all seminars to show in the list view
 	 */
 	private $seminarBag = NULL;
 

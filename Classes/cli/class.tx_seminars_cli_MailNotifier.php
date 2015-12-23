@@ -177,7 +177,7 @@ class tx_seminars_cli_MailNotifier {
 		/** @var $builder tx_seminars_BagBuilder_Event */
 		$builder = $this->getSeminarBagBuilder(tx_seminars_seminar::STATUS_PLANNED);
 		$builder->limitToCancelationDeadlineReminderNotSent();
-		/** @var $bag tx_seminars_Bag_Event */
+		/** @var $bag Tx_Seminars_Bag_Event */
 		$bag = $builder->build();
 
 		/** @var tx_seminars_seminar $event */

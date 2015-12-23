@@ -6915,9 +6915,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRequirementsReturnsSeminarBag() {
-		self::assertTrue(
-			$this->fixture->getRequirements() instanceof tx_seminars_Bag_Event
-		);
+		self::assertInstanceOf(Tx_Seminars_Bag_Event::class, $this->fixture->getRequirements());
 	}
 
 	/**
@@ -7039,9 +7037,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getDependenciesReturnsSeminarBag() {
-		self::assertTrue(
-			$this->fixture->getDependencies() instanceof tx_seminars_Bag_Event
-		);
+		self::assertInstanceOf(Tx_Seminars_Bag_Event::class, $this->fixture->getDependencies());
 	}
 
 	/**

@@ -25,7 +25,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * @var string class name of the bag class that will be built
 	 */
-	protected $bagClassName = 'tx_seminars_Bag_Event';
+	protected $bagClassName = Tx_Seminars_Bag_Event::class;
 
 	/**
 	 * @var string the table name of the bag to build
