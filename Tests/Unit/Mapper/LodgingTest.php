@@ -20,21 +20,21 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Mapper_LodgingTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Mapper_LodgingTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Oelib_TestingFramework
 	 */
 	private $testingFramework;
 
 	/**
-	 * @var tx_seminars_Mapper_Lodging
+	 * @var Tx_Seminars_Mapper_Lodging
 	 */
 	private $fixture;
 
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_Mapper_Lodging();
+		$this->fixture = new Tx_Seminars_Mapper_Lodging();
 	}
 
 	protected function tearDown() {

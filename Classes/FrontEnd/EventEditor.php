@@ -221,8 +221,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *               and "value" (for the UID)
 	 */
 	public function populateListLodgings() {
-		/** @var tx_seminars_Mapper_Lodging $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Lodging');
+		/** @var Tx_Seminars_Mapper_Lodging $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Lodging::class);
 		$lodgings = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		return self::makeListToFormidableList($lodgings);

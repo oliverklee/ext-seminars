@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Mapper_Lodging extends tx_oelib_DataMapper {
+class Tx_Seminars_Mapper_Lodging extends tx_oelib_DataMapper {
 	/**
 	 * @var string the name of the database table for this mapper
 	 */
@@ -29,5 +29,5 @@ class tx_seminars_Mapper_Lodging extends tx_oelib_DataMapper {
 	/**
 	 * @var string the model class name for this mapper, must not be empty
 	 */
-	protected $modelClassName = 'tx_seminars_Model_Lodging';
+	protected $modelClassName = Tx_Seminars_Model_Lodging::class;
 }

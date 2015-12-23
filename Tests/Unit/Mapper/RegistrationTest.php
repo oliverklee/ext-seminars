@@ -176,7 +176,7 @@ class tx_seminars_Mapper_RegistrationTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getLodgingsWithOneLodgingReturnsListOfLodgings() {
 		$uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-		$lodging = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Lodging')
+		$lodging = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Lodging::class)
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_attendances', $uid, $lodging->getUid(), 'lodgings'
@@ -194,7 +194,7 @@ class tx_seminars_Mapper_RegistrationTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getLodgingsWithOneLodgingReturnsOneLodging() {
 		$uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-		$lodging = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Lodging')
+		$lodging = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Lodging::class)
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_attendances', $uid, $lodging->getUid(), 'lodgings'
