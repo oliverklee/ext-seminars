@@ -21,7 +21,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class tx_seminars_FrontEnd_AbstractView extends Tx_Oelib_TemplateHelper implements Tx_Oelib_Interface_ConfigurationCheckable {
+abstract class Tx_Seminars_FrontEnd_AbstractView extends Tx_Oelib_TemplateHelper implements Tx_Oelib_Interface_ConfigurationCheckable {
 	/**
 	 * @var string same as plugin name
 	 */

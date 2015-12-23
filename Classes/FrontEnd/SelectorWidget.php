@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Mario Rimann <typo3-coding@rimann.org>
  */
-class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractView {
+class tx_seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractView {
 	/**
 	 * needed for the list view to convert ISO codes to country names and languages
 	 *

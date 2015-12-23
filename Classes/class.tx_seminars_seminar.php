@@ -4341,7 +4341,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$imageConfiguration = array(
 			'altText' => '',
-			'file' => tx_seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->getImage(),
+			'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->getImage(),
 			'file.' => array(
 				'width' => $maxImageWidth,
 				'height' => $maxImageHeight,

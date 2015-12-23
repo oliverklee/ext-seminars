@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractView {
+class tx_seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractView {
 	/**
 	 * Creates a HTML list of categories.
 	 *
@@ -184,7 +184,7 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 
 		$imageWithoutClass = $this->cObj->IMAGE(
 			array(
-				'file' => tx_seminars_FrontEnd_AbstractView::UPLOAD_PATH .
+				'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH .
 					$iconData['icon'],
 				'titleText' => $iconData['title'],
 			)
