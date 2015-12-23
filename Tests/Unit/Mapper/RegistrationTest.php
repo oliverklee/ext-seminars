@@ -281,7 +281,7 @@ class Tx_Seminars_Mapper_RegistrationTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getCheckboxesWithOneCheckboxReturnsListOfCheckboxes() {
 		$uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-		$checkbox = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox')
+		$checkbox = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_attendances', $uid, $checkbox->getUid(), 'checkboxes'
@@ -300,7 +300,7 @@ class Tx_Seminars_Mapper_RegistrationTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getCheckboxesWithOneCheckboxReturnsOneCheckbox() {
 		$uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-		$checkbox = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox')
+		$checkbox = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_attendances', $uid, $checkbox->getUid(), 'checkboxes'

@@ -447,8 +447,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	) {
 		$result = $items;
 
-		/** @var tx_seminars_Mapper_Checkbox $checkboxMapper */
-		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
+		/** @var Tx_Seminars_Mapper_Checkbox $checkboxMapper */
+		$checkboxMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
 		$checkboxes = $checkboxMapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		if (is_object($formidable)) {
@@ -2007,8 +2007,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		$checkbox->setData(self::createBasicAuxiliaryData());
 		self::setCheckboxData($checkbox, 'newCheckbox_', $formData);
 		$checkbox->markAsDirty();
-		/** @var tx_seminars_Mapper_Checkbox $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
+		/** @var Tx_Seminars_Mapper_Checkbox $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
 		$mapper->save($checkbox);
 
 		$editButtonConfiguration =& $formidable->_navConf(
@@ -2050,8 +2050,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	public static function updateCheckbox(tx_ameosformidable $formidable) {
 		$formData = $formidable->oMajixEvent->getParams();
 		$frontEndUser = self::getLoggedInUser();
-		/** @var tx_seminars_Mapper_Checkbox $checkboxMapper */
-		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
+		/** @var Tx_Seminars_Mapper_Checkbox $checkboxMapper */
+		$checkboxMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
 
 		try {
 			/** @var tx_seminars_Model_Checkbox $checkbox */
@@ -2146,8 +2146,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 			return $formidable->majixExecJs('alert("$checkboxUid must be >= 0.");');
 		}
 
-		/** @var tx_seminars_Mapper_Checkbox $checkboxMapper */
-		$checkboxMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Checkbox');
+		/** @var Tx_Seminars_Mapper_Checkbox $checkboxMapper */
+		$checkboxMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
 
 		try {
 			/** @var tx_seminars_Model_Checkbox $checkbox */
