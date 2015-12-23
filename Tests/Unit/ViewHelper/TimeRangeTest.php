@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_ViewHelper_TimeRangeTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_ViewHelper_TimeRangeTest extends Tx_Phpunit_TestCase {
 	/**
 	 * some random date (2001-01-01 00:00:00)
 	 *
@@ -34,7 +34,7 @@ class tx_seminars_ViewHelper_TimeRangeTest extends Tx_Phpunit_TestCase {
 	const TIME_FORMAT = '%H:%M';
 
 	/**
-	 * @var tx_seminars_ViewHelper_TimeRange
+	 * @var Tx_Seminars_ViewHelper_TimeRange
 	 */
 	private $subject = NULL;
 
@@ -69,7 +69,7 @@ class tx_seminars_ViewHelper_TimeRangeTest extends Tx_Phpunit_TestCase {
 		$this->translator = Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars');
 		$this->translatedHours = ' ' . $this->translator->translate('label_hours');
 
-		$this->subject = new tx_seminars_ViewHelper_TimeRange();
+		$this->subject = new Tx_Seminars_ViewHelper_TimeRange();
 	}
 
 	protected function tearDown() {

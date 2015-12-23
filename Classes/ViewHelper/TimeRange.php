@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_ViewHelper_TimeRange {
+class Tx_Seminars_ViewHelper_TimeRange {
 	/**
 	 * @var Tx_Oelib_Configuration
 	 */
