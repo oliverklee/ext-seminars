@@ -23,9 +23,9 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_FrontEnd_DefaultController
+	 * @var Tx_Seminars_FrontEnd_DefaultController
 	 */
 	private $fixture;
 	/**
@@ -110,7 +110,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->fixture = new tx_seminars_FrontEnd_DefaultController();
+		$this->fixture = new Tx_Seminars_FrontEnd_DefaultController();
 		$this->fixture->init(
 			array(
 				'isStaticTemplateLoaded' => 1,
@@ -298,7 +298,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 
 		if (!class_exists($testingClassName, FALSE)) {
 			eval(
-				'class ' . $testingClassName . ' extends tx_seminars_FrontEnd_DefaultController {' .
+				'class ' . $testingClassName . ' extends Tx_Seminars_FrontEnd_DefaultController {' .
 				'public function setSeminar(tx_seminars_seminar $seminar = NULL) {' .
 				'  parent::setSeminar($seminar);' .
 				'}' .
@@ -528,9 +528,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$className = $this->createAccessibleProxyClass();
 		$instance = new $className();
 
-		self::assertTrue(
-			$instance instanceof tx_seminars_FrontEnd_DefaultController
-		);
+		self::assertInstanceOf(Tx_Seminars_FrontEnd_DefaultController::class, $instance);
 	}
 
 	/**
@@ -664,7 +662,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function singleViewFlavorWithUidCreatesSingleView() {
 		$controller = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController',
+			Tx_Seminars_FrontEnd_DefaultController::class,
 			array(
 				'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
 				'setCSS', 'createHelperObjects', 'setErrorMessage'
@@ -683,7 +681,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function singleViewFlavorWithUidFromShowSingleEventConfigurationCreatesSingleView() {
 		$controller = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController',
+			Tx_Seminars_FrontEnd_DefaultController::class,
 			array(
 				'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
 				'setCSS', 'createHelperObjects', 'setErrorMessage'
@@ -702,7 +700,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function singleViewFlavorWithoutUidCreatesSingleView() {
 		$controller = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController',
+			Tx_Seminars_FrontEnd_DefaultController::class,
 			array(
 				'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
 				'setCSS', 'createHelperObjects', 'setErrorMessage'
@@ -2779,7 +2777,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function eventListFlavorWithoutUidCreatesListView() {
 		$controller = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController',
+			Tx_Seminars_FrontEnd_DefaultController::class,
 			array(
 				'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
 				'setCSS', 'createHelperObjects', 'setErrorMessage'
@@ -2798,7 +2796,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function eventListFlavorWithUidCreatesListView() {
 		$controller = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController',
+			Tx_Seminars_FrontEnd_DefaultController::class,
 			array(
 				'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
 				'setCSS', 'createHelperObjects', 'setErrorMessage'
@@ -4352,7 +4350,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testListViewSortedByCategoryWithoutStaticTemplateDoesNotCrash() {
-		$fixture = new tx_seminars_FrontEnd_DefaultController();
+		$fixture = new Tx_Seminars_FrontEnd_DefaultController();
 		$fixture->init(
 			array('sortListViewByCategory' => 1)
 		);
@@ -7587,7 +7585,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessDeniedReturnsEmptyString() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7611,7 +7609,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedCreatesLinkToEditPageWithSeminarUid() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7638,7 +7636,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedAndPublishedVisibleEventCreatesHideLinkToCurrentPageWithSeminarUid() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7668,7 +7666,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesUnhideLinkToCurrentPageWithSeminarUid() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7698,7 +7696,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedAndUnpublishedVisibleEventNotCreatesHideLink() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7724,7 +7722,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedAndUnpublishedHiddenEventNotCreatesUnhideLink() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7750,7 +7748,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedAndUnpublishedHiddenEventNotCreatesCopyLink() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7776,7 +7774,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedAndUnpublishedVisibleEventNotCreatesCopyLink() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7802,7 +7800,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesCopyLinkToCurrentPageWithSeminarUid() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('mayCurrentUserEditCurrentEvent')
@@ -7837,8 +7835,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function eventsListNotCallsProcessEventEditorActions() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
-		$fixture = $this->getMock('tx_seminars_FrontEnd_DefaultController', array('processEventEditorActions'));
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		$fixture = $this->getMock(Tx_Seminars_FrontEnd_DefaultController::class, array('processEventEditorActions'));
 		$fixture->expects(self::never())->method('processEventEditorActions');
 
 		$fixture->main(
@@ -7853,8 +7851,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	public function myEnteredEventsListCallsProcessEventEditorActions() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
-		$fixture = $this->getMock('tx_seminars_FrontEnd_DefaultController', array('processEventEditorActions'));
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		$fixture = $this->getMock(Tx_Seminars_FrontEnd_DefaultController::class, array('processEventEditorActions'));
 		$fixture->expects(self::once())->method('processEventEditorActions');
 
 		$fixture->main(
@@ -7867,8 +7865,8 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function myManagedEventsListCallsProcessEventEditorActions() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
-		$fixture = $this->getMock('tx_seminars_FrontEnd_DefaultController', array('processEventEditorActions'));
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		$fixture = $this->getMock(Tx_Seminars_FrontEnd_DefaultController::class, array('processEventEditorActions'));
 		$fixture->expects(self::once())->method('processEventEditorActions');
 
 		$fixture->main(
@@ -7881,7 +7879,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function processEventEditorActionsIntvalsSeminarPivar() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('ensureIntegerPiVars', 'createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -7896,7 +7894,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function processEventEditorActionsWithZeroSeminarPivarNotCreatesEventEditor() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -7911,7 +7909,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function processEventEditorActionsWithNegativeSeminarPivarNotCreatesEventEditor() {
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -7931,7 +7929,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
 		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -7952,7 +7950,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$eventEditor = $this->getMock('tx_seminars_FrontEnd_EventEditor', array('hasAccessMessage'), array(), '', FALSE);
 		$eventEditor->expects(self::once())->method('hasAccessMessage');
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -7976,7 +7974,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -8001,7 +7999,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array('publication_hash' => 'foo'));
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -8026,7 +8024,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -8051,7 +8049,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -8076,7 +8074,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array('publication_hash' => 'foo'));
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -8101,7 +8099,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -8126,7 +8124,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent')
@@ -8151,7 +8149,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array('publication_hash' => 'foo'));
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent')
@@ -8176,7 +8174,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent')
@@ -8201,7 +8199,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -8227,7 +8225,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
 
-		/** @var tx_seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
 			$this->createAccessibleProxyClass(),
 			array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
@@ -8254,7 +8252,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event = $mapper->getLoadedTestingModel(array());
 
 		$className = $this->createAccessibleProxyClass();
-		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->hideEvent($event);
 
@@ -8275,7 +8273,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event = $mapper->getLoadedTestingModel(array('hidden' => 1));
 
 		$className = $this->createAccessibleProxyClass();
-		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->hideEvent($event);
 
@@ -8297,7 +8295,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$mapper->expects(self::once())->method('save')->with($event);
 
 		$className = $this->createAccessibleProxyClass();
-		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->hideEvent($event);
 	}
@@ -8314,7 +8312,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event = $mapper->getLoadedTestingModel(array());
 
 		$className = $this->createAccessibleProxyClass();
-		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->hideEvent($event);
 
@@ -8337,7 +8335,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event = $mapper->getLoadedTestingModel(array('hidden' => 1));
 
 		$className = $this->createAccessibleProxyClass();
-		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->unhideEvent($event);
 
@@ -8358,7 +8356,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event = $mapper->getLoadedTestingModel(array());
 
 		$className = $this->createAccessibleProxyClass();
-		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->unhideEvent($event);
 
@@ -8380,7 +8378,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$mapper->expects(self::once())->method('save')->with($event);
 
 		$className = $this->createAccessibleProxyClass();
-		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->unhideEvent($event);
 	}
@@ -8397,7 +8395,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event = $mapper->getLoadedTestingModel(array());
 
 		$className = $this->createAccessibleProxyClass();
-		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->unhideEvent($event);
 
@@ -8424,7 +8422,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$mapper->expects(self::once())->method('save')->with($hiddenClone);
 
 		$className = $this->createAccessibleProxyClass();
-		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->copyEvent($event);
 	}
@@ -8449,7 +8447,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$mapper->expects(self::once())->method('save')->with($hiddenClone);
 
 		$className = $this->createAccessibleProxyClass();
-		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->copyEvent($event);
 	}
@@ -8466,7 +8464,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event = $mapper->getLoadedTestingModel(array());
 
 		$className = $this->createAccessibleProxyClass();
-		/** @var tx_seminars_FrontEnd_DefaultController $fixture */
+		/** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
 		$fixture = new $className();
 		$fixture->copyEvent($event);
 
@@ -8487,7 +8485,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function initListViewForDefaultListLimitsListByAdditionalParameters() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController', array('limitForAdditionalParameters')
+			Tx_Seminars_FrontEnd_DefaultController::class, array('limitForAdditionalParameters')
 		);
 		$fixture->expects(self::once())->method('limitForAdditionalParameters');
 
@@ -8499,7 +8497,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function initListViewForTopicListLimitsListByAdditionalParameters() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController', array('limitForAdditionalParameters')
+			Tx_Seminars_FrontEnd_DefaultController::class, array('limitForAdditionalParameters')
 		);
 		$fixture->expects(self::once())->method('limitForAdditionalParameters');
 
@@ -8511,7 +8509,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function initListViewForMyEventsListNotLimitsListByAdditionalParameters() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController', array('limitForAdditionalParameters')
+			Tx_Seminars_FrontEnd_DefaultController::class, array('limitForAdditionalParameters')
 		);
 		$fixture->expects(self::never())->method('limitForAdditionalParameters');
 
@@ -8644,7 +8642,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$getsHidden, $whatToDisplay, $listPid, $vipListPid
 	) {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController',
+			Tx_Seminars_FrontEnd_DefaultController::class,
 			array('isRegistrationEnabled', 'isLoggedIn', 'hideColumns')
 		);
 		$fixture->expects(self::any())->method('isRegistrationEnabled')
@@ -8681,7 +8679,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$getsHidden, $whatToDisplay, $listPid, $vipListPid
 	) {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController',
+			Tx_Seminars_FrontEnd_DefaultController::class,
 			array('isRegistrationEnabled', 'isLoggedIn', 'hideColumns')
 		);
 		$fixture->expects(self::any())->method('isRegistrationEnabled')
@@ -8714,7 +8712,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$getsHidden, $whatToDisplay, $listPid, $vipListPid
 	) {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_DefaultController',
+			Tx_Seminars_FrontEnd_DefaultController::class,
 			array('isRegistrationEnabled', 'isLoggedIn', 'hideColumns')
 		);
 		$fixture->expects(self::any())->method('isRegistrationEnabled')

@@ -50,7 +50,7 @@ $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['pro
 	$_EXTKEY, 'Classes/FrontEnd/DefaultController.php', '_pi1', 'list_type', 0
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($_EXTKEY, 'setup', '
-	plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN($_EXTKEY) . '_pi1.userFunc = tx_seminars_FrontEnd_DefaultController->main
+	plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN($_EXTKEY) . '_pi1.userFunc = Tx_Seminars_FrontEnd_DefaultController->main
 ', 43);
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript(

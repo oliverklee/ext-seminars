@@ -236,7 +236,7 @@ class tx_seminars_OldModel_SpeakerTest extends Tx_Phpunit_TestCase {
 	 *
 
 	public function testGetDescription() {
-		$plugin = new tx_seminars_FrontEnd_DefaultController();
+		$plugin = new Tx_Seminars_FrontEnd_DefaultController();
 		$plugin->init(array());
 
 		self::assertEquals(

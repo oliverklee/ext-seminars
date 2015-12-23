@@ -146,15 +146,15 @@ class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_DefaultController() {
+	protected function check_Tx_Seminars_FrontEnd_DefaultController() {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/seminar_registration.
+	 * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/seminar_registration.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_DefaultController_seminar_registration() {
+	protected function check_Tx_Seminars_FrontEnd_DefaultController_seminar_registration() {
 		$this->checkCommonFrontEndSettings();
 
 		$this->checkRegistrationFlag();
@@ -202,11 +202,11 @@ class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/single_view.
+	 * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/single_view.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_DefaultController_single_view() {
+	protected function check_Tx_Seminars_FrontEnd_DefaultController_single_view() {
 		$this->checkCommonFrontEndSettings();
 
 		$this->checkRegistrationFlag();
@@ -237,11 +237,11 @@ class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/seminar_list.
+	 * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/seminar_list.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_DefaultController_seminar_list() {
+	protected function check_Tx_Seminars_FrontEnd_DefaultController_seminar_list() {
 		$this->checkCommonFrontEndSettings();
 
 		$this->checkRegistrationFlag();
@@ -296,12 +296,12 @@ class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/my_vip_events.
+	 * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/my_vip_events.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_DefaultController_my_vip_events() {
-		$this->check_tx_seminars_FrontEnd_DefaultController_seminar_list();
+	protected function check_Tx_Seminars_FrontEnd_DefaultController_my_vip_events() {
+		$this->check_Tx_Seminars_FrontEnd_DefaultController_seminar_list();
 		$this->checkRegistrationsVipListPid();
 		$this->checkDefaultEventVipsFeGroupID();
 		$this->checkMayManagersEditTheirEvents();
@@ -315,29 +315,29 @@ class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/topic_list.
+	 * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/topic_list.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_DefaultController_topic_list() {
-		$this->check_tx_seminars_FrontEnd_DefaultController_seminar_list();
+	protected function check_Tx_Seminars_FrontEnd_DefaultController_topic_list() {
+		$this->check_Tx_Seminars_FrontEnd_DefaultController_seminar_list();
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/my_events.
+	 * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/my_events.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_DefaultController_my_events() {
-		$this->check_tx_seminars_FrontEnd_DefaultController_seminar_list();
+	protected function check_Tx_Seminars_FrontEnd_DefaultController_my_events() {
+		$this->check_Tx_Seminars_FrontEnd_DefaultController_seminar_list();
 	}
 
 	/**
-	 * Checks the configuration for: check_tx_seminars_FrontEnd_DefaultController/edit_event.
+	 * Checks the configuration for: check_Tx_Seminars_FrontEnd_DefaultController/edit_event.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_DefaultController_edit_event() {
+	protected function check_Tx_Seminars_FrontEnd_DefaultController_edit_event() {
 		$this->checkCommonFrontEndSettings();
 
 		$this->checkEventEditorTemplateFile();
@@ -356,12 +356,12 @@ class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 	}
 
 	/**
-	 * Checks the configuration for: check_tx_seminars_FrontEnd_DefaultController/my_entered_events.
+	 * Checks the configuration for: check_Tx_Seminars_FrontEnd_DefaultController/my_entered_events.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_DefaultController_my_entered_events() {
-		$this->check_tx_seminars_FrontEnd_DefaultController_seminar_list();
+	protected function check_Tx_Seminars_FrontEnd_DefaultController_my_entered_events() {
+		$this->check_Tx_Seminars_FrontEnd_DefaultController_seminar_list();
 		$this->checkEventEditorFeGroupID();
 		$this->checkEventEditorPID();
 	}
@@ -382,12 +382,12 @@ class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_FrontEnd_DefaultController/favorites_list
+	 * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/favorites_list
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_DefaultController_favorites_list() {
-		$this->check_tx_seminars_FrontEnd_DefaultController_seminar_list();
+	protected function check_Tx_Seminars_FrontEnd_DefaultController_favorites_list() {
+		$this->check_Tx_Seminars_FrontEnd_DefaultController_seminar_list();
 	}
 
 	/**
@@ -395,7 +395,7 @@ class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_DefaultController_events_next_day() {}
+	protected function check_Tx_Seminars_FrontEnd_DefaultController_events_next_day() {}
 
 	/**
 	 * Checks if the common frontend settings are set.
@@ -411,7 +411,7 @@ class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_DefaultController_event_headline() {
+	protected function check_Tx_Seminars_FrontEnd_DefaultController_event_headline() {
 	}
 
 	/**

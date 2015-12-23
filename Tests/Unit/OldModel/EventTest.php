@@ -50,7 +50,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	protected $now = 0;
 
 	/**
-	 * @var tx_seminars_FrontEnd_DefaultController
+	 * @var Tx_Seminars_FrontEnd_DefaultController
 	 */
 	protected $pi1 = NULL;
 
@@ -112,7 +112,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	private function createPi1($detailPageUid = 0) {
 		$this->testingFramework->createFakeFrontEnd();
 
-		$this->pi1 = new tx_seminars_FrontEnd_DefaultController();
+		$this->pi1 = new Tx_Seminars_FrontEnd_DefaultController();
 		$this->pi1->init(
 			array(
 				'isStaticTemplateLoaded' => 1,
@@ -414,9 +414,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 
 		$this->createPi1();
 
-		self::assertTrue(
-			$this->pi1 instanceof tx_seminars_FrontEnd_DefaultController
-		);
+		self::assertInstanceOf(Tx_Seminars_FrontEnd_DefaultController::class, $this->pi1);
 	}
 
 	/**

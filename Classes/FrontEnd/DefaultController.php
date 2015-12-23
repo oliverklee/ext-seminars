@@ -27,7 +27,7 @@ require(ExtensionManagementUtility::extPath('seminars') . 'tx_seminars_modifiedS
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper implements Tx_Oelib_Interface_ConfigurationCheckable {
+class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper implements Tx_Oelib_Interface_ConfigurationCheckable {
 	/**
 	 * @var string same as class name
 	 */
