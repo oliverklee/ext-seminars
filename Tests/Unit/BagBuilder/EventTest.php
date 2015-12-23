@@ -64,9 +64,7 @@ class tx_seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	public function testBuilderBuildsABag() {
 		$bag = $this->fixture->build();
 
-		self::assertTrue(
-			is_subclass_of($bag, 'tx_seminars_Bag_Abstract')
-		);
+		self::assertInstanceOf(Tx_Seminars_Bag_Abstract::class, $bag);
 	}
 
 	/**

@@ -23,7 +23,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class tx_seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_ConfigurationCheckable {
+abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_ConfigurationCheckable {
 	/**
 	 * @var string the name of the main DB table from which we get the records
 	 *             for this bag

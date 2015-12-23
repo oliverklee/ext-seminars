@@ -47,9 +47,7 @@ class tx_seminars_BagBuilder_CategoryTest extends Tx_Phpunit_TestCase {
 	///////////////////////////////////////////
 
 	public function testBuilderBuildsABag() {
-		self::assertTrue(
-			is_subclass_of($this->fixture->build(), 'tx_seminars_Bag_Abstract')
-		);
+		self::assertInstanceOf(Tx_Seminars_Bag_Abstract::class, $this->fixture->build());
 	}
 
 	public function testBuiltBagIsSortedAscendingByTitle() {

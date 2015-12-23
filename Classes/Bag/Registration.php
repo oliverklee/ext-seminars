@@ -22,7 +22,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Bag_Registration extends tx_seminars_Bag_Abstract {
+class tx_seminars_Bag_Registration extends Tx_Seminars_Bag_Abstract {
 	/**
 	 * The constructor. Creates a bag that contains test records and allows to iterate over them.
 	 *

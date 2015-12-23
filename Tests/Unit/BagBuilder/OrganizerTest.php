@@ -48,9 +48,7 @@ class tx_seminars_BagBuilder_OrganizerTest extends Tx_Phpunit_TestCase {
 	///////////////////////////////////////////
 
 	public function testBuilderBuildsABag() {
-		self::assertTrue(
-			$this->fixture->build() instanceof tx_seminars_Bag_Abstract
-		);
+		self::assertInstanceOf(Tx_Seminars_Bag_Abstract::class, $this->fixture->build());
 	}
 
 

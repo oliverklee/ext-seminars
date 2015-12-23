@@ -1732,7 +1732,7 @@ class tx_seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 *        the flavor of list view: either an empty string (for the default
 	 *        list view), the value from "what_to_display", or "other_dates"
 	 *
-	 * @return tx_seminars_Bag_Abstract a seminar bag or a registration bag
+	 * @return Tx_Seminars_Bag_Abstract a seminar bag or a registration bag
 	 *                                  containing the seminars or registrations
 	 *                                  for the list view
 	 */
@@ -1846,7 +1846,7 @@ class tx_seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 * This function should only be called when there are actually any list
 	 * items.
 	 *
-	 * @param tx_seminars_Bag_Abstract $seminarOrRegistrationBag
+	 * @param Tx_Seminars_Bag_Abstract $seminarOrRegistrationBag
 	 *        initialized seminar or registration bag
 	 * @param string $whatToDisplay
 	 *        a string selecting the flavor of list view: either an empty string (for the default list view),
@@ -1855,7 +1855,7 @@ class tx_seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 * @return string HTML for the table (will not be empty)
 	 */
 	protected function createListTable(
-		tx_seminars_Bag_Abstract $seminarOrRegistrationBag, $whatToDisplay
+		Tx_Seminars_Bag_Abstract $seminarOrRegistrationBag, $whatToDisplay
 	) {
 		$result = $this->createListHeader();
 		$rowCounter = 0;

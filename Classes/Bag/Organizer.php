@@ -21,7 +21,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Bag_Organizer extends tx_seminars_Bag_Abstract {
+class Tx_Seminars_Bag_Organizer extends Tx_Seminars_Bag_Abstract {
 	/**
 	 * The constructor. Creates a bag that contains test records and allows to iterate over them.
 	 *
