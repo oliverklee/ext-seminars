@@ -35,7 +35,7 @@ class Tx_Seminars_Mapper_TimeSlot extends tx_oelib_DataMapper {
 	 * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
 	 */
 	protected $relations = array(
-		'speakers' => 'tx_seminars_Mapper_Speaker',
+		'speakers' => Tx_Seminars_Mapper_Speaker::class,
 		'place' => Tx_Seminars_Mapper_Place::class,
 		'seminar' => Tx_Seminars_Mapper_Event::class,
 	);

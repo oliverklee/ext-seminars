@@ -373,8 +373,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	) {
 		$result = $items;
 
-		/** @var tx_seminars_Mapper_Speaker $speakerMapper */
-		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
+		/** @var Tx_Seminars_Mapper_Speaker $speakerMapper */
+		$speakerMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class);
 		$speakers = $speakerMapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		if (is_object($formidable)) {
@@ -1738,8 +1738,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		));
 		self::setSpeakerData($speaker, 'newSpeaker_', $formData);
 		$speaker->markAsDirty();
-		/** @var tx_seminars_Mapper_Speaker $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
+		/** @var Tx_Seminars_Mapper_Speaker $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class);
 		$mapper->save($speaker);
 
 		$editButtonConfiguration =& $formidable->_navConf(
@@ -1781,8 +1781,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	public static function updateSpeaker(tx_ameosformidable $formidable) {
 		$formData = $formidable->oMajixEvent->getParams();
 		$frontEndUser = self::getLoggedInUser();
-		/** @var tx_seminars_Mapper_Speaker $speakerMapper */
-		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
+		/** @var Tx_Seminars_Mapper_Speaker $speakerMapper */
+		$speakerMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class);
 
 		try {
 			/** @var tx_seminars_Model_Speaker $speaker */
@@ -1921,8 +1921,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 			return $formidable->majixExecJs('alert("$speakerUid must be >= 0.");');
 		}
 
-		/** @var tx_seminars_Mapper_Speaker $speakerMapper */
-		$speakerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker');
+		/** @var Tx_Seminars_Mapper_Speaker $speakerMapper */
+		$speakerMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class);
 
 		try {
 			/** @var tx_seminars_Model_Speaker $speaker */

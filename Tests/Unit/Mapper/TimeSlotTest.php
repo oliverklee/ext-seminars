@@ -94,7 +94,7 @@ class Tx_Seminars_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase {
 		$timeSlotUid = $this->testingFramework->createRecord(
 			'tx_seminars_timeslots'
 		);
-		$speaker = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker')
+		$speaker = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class)
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_timeslots', $timeSlotUid, $speaker->getUid(), 'speakers'
@@ -114,7 +114,7 @@ class Tx_Seminars_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase {
 		$timeSlotUid = $this->testingFramework->createRecord(
 			'tx_seminars_timeslots'
 		);
-		$speaker = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Speaker')
+		$speaker = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class)
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_timeslots', $timeSlotUid, $speaker->getUid(), 'speakers'
