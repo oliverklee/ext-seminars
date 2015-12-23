@@ -2086,8 +2086,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			throw new BadMethodCallException('There are no organizers related to this event.', 1333291857);
 		}
 
-		/** @var $builder tx_seminars_BagBuilder_Organizer */
-		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Organizer');
+		/** @var $builder Tx_Seminars_BagBuilder_Organizer */
+		$builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Organizer::class);
 		$builder->limitToEvent($this->getUid());
 
 		return $builder->build();

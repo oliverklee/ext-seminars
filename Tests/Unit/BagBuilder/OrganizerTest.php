@@ -21,9 +21,9 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_BagBuilder_OrganizerTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_BagBuilder_OrganizerTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_BagBuilder_Organizer
+	 * @var Tx_Seminars_BagBuilder_Organizer
 	 */
 	private $fixture;
 	/**
@@ -34,7 +34,7 @@ class tx_seminars_BagBuilder_OrganizerTest extends Tx_Phpunit_TestCase {
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_BagBuilder_Organizer();
+		$this->fixture = new Tx_Seminars_BagBuilder_Organizer();
 		$this->fixture->setTestMode();
 	}
 
