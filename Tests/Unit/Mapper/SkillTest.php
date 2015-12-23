@@ -51,7 +51,7 @@ class Tx_Seminars_Mapper_SkillTest extends Tx_Phpunit_TestCase {
 	 */
 	public function findWithUidReturnsSkillInstance() {
 		self::assertTrue(
-			$this->fixture->find(1) instanceof tx_seminars_Model_Skill
+			$this->fixture->find(1) instanceof Tx_Seminars_Model_Skill
 		);
 	}
 
@@ -63,7 +63,7 @@ class Tx_Seminars_Mapper_SkillTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_skills', array('title' => 'Superhero')
 		);
 
-		/** @var tx_seminars_Model_Skill $model */
+		/** @var Tx_Seminars_Model_Skill $model */
 		$model = $this->fixture->find($uid);
 		self::assertEquals(
 			'Superhero',
