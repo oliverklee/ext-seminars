@@ -421,8 +421,8 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	 * @return void
 	 */
 	private function sendEmailToAttendees() {
-		/** @var tx_seminars_Mapper_Organizer $organizerMapper */
-		$organizerMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer');
+		/** @var Tx_Seminars_Mapper_Organizer $organizerMapper */
+		$organizerMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class);
 		/** @var tx_seminars_Model_Organizer $organizer */
 		$organizer = $organizerMapper->find((int)$this->getPostData('sender'));
 

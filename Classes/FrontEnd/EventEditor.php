@@ -271,8 +271,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		if ($frontEndUser->hasDefaultOrganizers()) {
 			$organizers = $frontEndUser->getDefaultOrganizers();
 		} else {
-			/** @var tx_seminars_Mapper_Organizer $mapper */
-			$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Organizer');
+			/** @var Tx_Seminars_Mapper_Organizer $mapper */
+			$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class);
 			$organizers = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 		}
 

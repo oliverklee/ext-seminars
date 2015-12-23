@@ -13,6 +13,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5571] Rename tx_seminars_Mapper_Organizer to Tx_Seminars_Mapper_Organizer
 - [#5572] Rename tx_seminars_Mapper_PaymentMethod to Tx_Seminars_Mapper_PaymentMethod
 - [#5621] Rename tx_seminars_configcheck to Tx_Seminars_ConfigCheck
 - [#5584] Rename tx_seminars_Mapper_TimeSlot to Tx_Seminars_Mapper_TimeSlot
