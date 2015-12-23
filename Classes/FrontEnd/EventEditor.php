@@ -1872,8 +1872,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	 * @return void
 	 */
 	private static function setSpeakerData(tx_seminars_Model_Speaker $speaker, $prefix, array $formData) {
-		/** @var tx_seminars_Mapper_Skill $skillMapper */
-		$skillMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill');
+		/** @var Tx_Seminars_Mapper_Skill $skillMapper */
+		$skillMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Skill::class);
 		/** @var Tx_Oelib_List $skills */
 		$skills = GeneralUtility::makeInstance(Tx_Oelib_List::class);
 
@@ -2454,8 +2454,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	 * @return array[] items as an array with the keys "caption" (for the title) and "value" (for the UID)
 	 */
 	public static function populateListSkills() {
-		/** @var tx_seminars_Mapper_Skill $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill');
+		/** @var Tx_Seminars_Mapper_Skill $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Skill::class);
 		$skills = $mapper->findAll('title ASC');
 
 		return self::makeListToFormidableList($skills);
