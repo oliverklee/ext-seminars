@@ -27,14 +27,14 @@ class tx_seminars_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
 	private $testingFramework;
 
 	/**
-	 * @var tx_seminars_Mapper_Event
+	 * @var Tx_Seminars_Mapper_Event
 	 */
 	private $fixture;
 
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->fixture = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		$this->fixture = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 	}
 
 	protected function tearDown() {

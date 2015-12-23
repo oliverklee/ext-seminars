@@ -101,8 +101,8 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 			throw new Tx_Oelib_Exception_NotFound('There is no event with this UID.', 1333292164);
 		}
 
-		/** @var tx_seminars_Mapper_Event $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		/** @var Tx_Seminars_Mapper_Event $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		$this->event = $mapper->find($eventUid);
 	}
 

@@ -21,7 +21,7 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
+class Tx_Seminars_Mapper_Event extends tx_oelib_DataMapper {
 	/**
 	 * @var string the name of the database table for this mapper
 	 */
@@ -36,7 +36,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 	 * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
 	 */
 	protected $relations = array(
-		'topic' => 'tx_seminars_Mapper_Event',
+		'topic' => Tx_Seminars_Mapper_Event::class,
 		'categories' => Tx_Seminars_Mapper_Category::class,
 		'event_type' => Tx_Seminars_Mapper_EventType::class,
 		'timeslots' => Tx_Seminars_Mapper_TimeSlot::class,
@@ -54,8 +54,8 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 		'owner_feuser' => Tx_Oelib_Mapper_FrontEndUser::class,
 		'vips' => Tx_Oelib_Mapper_FrontEndUser::class,
 		'checkboxes' => Tx_Seminars_Mapper_Checkbox::class,
-		'requirements' => 'tx_seminars_Mapper_Event',
-		'dependencies' => 'tx_seminars_Mapper_Event',
+		'requirements' => Tx_Seminars_Mapper_Event::class,
+		'dependencies' => Tx_Seminars_Mapper_Event::class,
 		'registrations' => Tx_Seminars_Mapper_Registration::class,
 	);
 

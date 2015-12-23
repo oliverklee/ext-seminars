@@ -1227,8 +1227,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			$this->hideSubparts('interests', $wrapperPrefix);
 		}
 
-		/** @var tx_seminars_Mapper_Event $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		/** @var Tx_Seminars_Mapper_Event $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		/** @var $newEvent tx_seminars_Model_Event */
 		$newEvent = $mapper->find($event->getUid());
 		$singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);

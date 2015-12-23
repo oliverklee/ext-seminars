@@ -1188,8 +1188,8 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setConfigurationValue('what_to_display', 'single_view');
 
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
-		$hook = $this->getMock(Tx_Seminars_Interface_Hook_EventSingleView::class);
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
+		$hook = $this->getMock('tx_seminars_Interface_Hook_EventSingleView');
 		$hook->expects(self::once())->method('modifyEventSingleView')
 			->with($event, self::anything());
 		// We don't test for the second parameter (the template instance here)
@@ -7958,7 +7958,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 
 		$fixture->piVars['seminar'] = Tx_Oelib_MapperRegistry
-			::get('tx_seminars_Mapper_Event')->getNewGhost()->getUid();
+			::get(Tx_Seminars_Mapper_Event::class)->getNewGhost()->getUid();
 
 		$fixture->processEventEditorActions();
 	}
@@ -7972,7 +7972,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
 
 		/** @var tx_seminars_Model_Event $event */
-		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 
 		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
@@ -7997,7 +7997,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
 
 		/** @var tx_seminars_Model_Event $event */
-		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array('publication_hash' => 'foo'));
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array('publication_hash' => 'foo'));
 
 		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
@@ -8022,7 +8022,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue('access denied'));
 
 		/** @var tx_seminars_Model_Event $event */
-		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 
 		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
@@ -8047,7 +8047,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
 
 		/** @var tx_seminars_Model_Event $event */
-		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 
 		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
@@ -8072,7 +8072,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
 
 		/** @var tx_seminars_Model_Event $event */
-		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array('publication_hash' => 'foo'));
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array('publication_hash' => 'foo'));
 
 		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
@@ -8097,7 +8097,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue('access denied'));
 
 		/** @var tx_seminars_Model_Event $event */
-		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 
 		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
@@ -8122,7 +8122,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
 
 		/** @var tx_seminars_Model_Event $event */
-		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 
 		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
@@ -8147,7 +8147,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
 
 		/** @var tx_seminars_Model_Event $event */
-		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array('publication_hash' => 'foo'));
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array('publication_hash' => 'foo'));
 
 		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
@@ -8172,7 +8172,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue('access denied'));
 
 		/** @var tx_seminars_Model_Event $event */
-		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 
 		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
@@ -8197,7 +8197,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
 
 		/** @var tx_seminars_Model_Event $event */
-		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 
 		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
@@ -8223,7 +8223,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
 
 		/** @var tx_seminars_Model_Event $event */
-		$event = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 
 		/** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
 		$fixture = $this->getMock(
@@ -8244,9 +8244,9 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function hideEventMarksVisibleEventAsHidden() {
-		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		/** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+		Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array());
@@ -8265,9 +8265,9 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function hideEventKeepsHiddenEventAsHidden() {
-		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		/** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+		Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array('hidden' => 1));
@@ -8286,9 +8286,9 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function hideEventSavesEvent() {
-		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		/** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+		Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array());
@@ -8304,9 +8304,9 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function hideEventRedirectsToRequestUrl() {
-		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		/** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+		Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array());
@@ -8327,9 +8327,9 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function unhideEventMarksHiddenEventAsVisible() {
-		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		/** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+		Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array('hidden' => 1));
@@ -8348,9 +8348,9 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function unhideEventKeepsVisibleEventAsVisible() {
-		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		/** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+		Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array());
@@ -8369,9 +8369,9 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function unhideEventSavesEvent() {
-		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		/** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+		Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array());
@@ -8387,9 +8387,9 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function unhideEventRedirectsToRequestUrl() {
-		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		/** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+		Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array());
@@ -8410,9 +8410,9 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function copySavesHiddenCloneOfEvent() {
-		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		/** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+		Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array('title' => 'TDD for starters'));
@@ -8431,9 +8431,9 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function copyRemovesRegistrationsFromEvent() {
-		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		/** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+		Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array('title' => 'TDD for starters'));
@@ -8456,9 +8456,9 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function copyEventRedirectsToRequestUrl() {
-		/** @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-		$mapper = $this->getMock('tx_seminars_Mapper_Event', array('save'));
-		Tx_Oelib_MapperRegistry::set('tx_seminars_Mapper_Event', $mapper);
+		/** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
+		$mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+		Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array());
@@ -8741,7 +8741,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function eventsListCallsModifyListRowHook() {
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
 
 		$hook = $this->getMock(Tx_Seminars_Interface_Hook_EventListView::class);
 		$hook->expects(self::once())->method('modifyListRow')->with($event, self::anything());
@@ -8797,7 +8797,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function myEventsListCallsModifyListRowHook() {
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
 
 		$this->testingFramework->createAndLoginFrontEndUser();
 
@@ -8856,7 +8856,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function createSingleViewLinkCreatesLinkToSingleViewPage() {
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 
 		self::assertContains(
 			'href="index.php?id=42&amp;tx_seminars_pi1%5BshowUid%5D=1337"',
@@ -8870,7 +8870,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	public function createSingleViewForEventWithoutDescriptionWithAlwaysLinkSettingLinkUsesLinkText() {
 		$this->fixture->setConfigurationValue('linkToSingleView', 'always');
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
 			array('description' => '')
 		);
 
@@ -8886,7 +8886,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	public function createSingleViewForEventWithDescriptionWithAlwaysLinkSettingLinkUsesLinkText() {
 		$this->fixture->setConfigurationValue('linkToSingleView', 'always');
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
 			array('description' => 'Hello world!')
 		);
 
@@ -8902,7 +8902,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	public function createSingleViewForEventWithoutDescriptionWithNeverLinkSettingReturnsOnlyLabel() {
 		$this->fixture->setConfigurationValue('linkToSingleView', 'never');
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
 			array('description' => '')
 		);
 
@@ -8918,7 +8918,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	public function createSingleViewForEventWithDescriptionWithConditionalLinkSettingLinkUsesLinkText() {
 		$this->fixture->setConfigurationValue('linkToSingleView', 'onlyForNonEmptyDescription');
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
 			array('description' => 'Hello world!')
 		);
 
@@ -8934,7 +8934,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	public function createSingleViewForEventWithoutDescriptionWithConditionalLinkSettingReturnsOnlyLabel() {
 		$this->fixture->setConfigurationValue('linkToSingleView', 'onlyForNonEmptyDescription');
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
 			array('description' => '')
 		);
 
@@ -8950,7 +8950,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	public function createSingleViewForEventWithDescriptionWithNeverLinkSettingReturnsOnlyLabel() {
 		$this->fixture->setConfigurationValue('linkToSingleView', 'never');
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
 			array('description' => 'Hello world!')
 		);
 
@@ -8965,7 +8965,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function createSingleViewLinkByDefaultHtmlSpecialCharsLinkText() {
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 
 		self::assertContains(
 			'Chaos &amp; Confusion',
@@ -8978,7 +8978,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function createSingleViewLinkByWithHtmlSpecialCharsTrueHtmlSpecialCharsLinkText() {
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 
 		self::assertContains(
 			'Chaos &amp; Confusion',
@@ -8991,7 +8991,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function createSingleViewLinkByWithHtmlSpecialCharsFalseNotHtmlSpecialCharsLinkText() {
 		/** @var tx_seminars_Model_Event $event */
-		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getLoadedTestingModel(array());
+		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 
 		self::assertContains(
 			'Chaos & Confusion',

@@ -52,8 +52,8 @@ class Tx_Seminars_FrontEnd_PublishEvent extends Tx_Oelib_TemplateHelper {
 			return $this->translate('message_publishingFailed');
 		}
 
-		/** @var tx_seminars_Mapper_Event $eventMapper */
-		$eventMapper = GeneralUtility::makeInstance('tx_seminars_Mapper_Event');
+		/** @var Tx_Seminars_Mapper_Event $eventMapper */
+		$eventMapper = GeneralUtility::makeInstance(Tx_Seminars_Mapper_Event::class);
 		/** @var tx_seminars_Model_Event $event */
 		$event = $eventMapper->findByPublicationHash($this->piVars['hash']);
 

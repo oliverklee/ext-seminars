@@ -37,6 +37,6 @@ class Tx_Seminars_Mapper_TimeSlot extends tx_oelib_DataMapper {
 	protected $relations = array(
 		'speakers' => 'tx_seminars_Mapper_Speaker',
 		'place' => 'tx_seminars_Mapper_Place',
-		'seminar' => 'tx_seminars_Mapper_Event',
+		'seminar' => Tx_Seminars_Mapper_Event::class,
 	);
 }

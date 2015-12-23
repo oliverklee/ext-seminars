@@ -181,7 +181,7 @@ class Tx_Seminars_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getSeminarWithSeminarReturnsEventInstance() {
-		$seminar = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getNewGhost();
+		$seminar = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getNewGhost();
 		$timeSlotUid = $this->testingFramework->createRecord(
 			'tx_seminars_timeslots', array('seminar' => $seminar->getUid())
 		);

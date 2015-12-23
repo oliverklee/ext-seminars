@@ -806,8 +806,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		$hideNewObject = $isNew && ($publishSetting > tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 
 		if (!$isNew) {
-			/** @var tx_seminars_Mapper_Event $mapper */
-			$mapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+			/** @var Tx_Seminars_Mapper_Event $mapper */
+			$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 			/** @var tx_seminars_Model_Event $event */
 			$event = $mapper->find($eventUid);
 			$eventIsHidden = $event->isHidden();
@@ -1264,8 +1264,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 			return;
 		}
 
-		/** @var tx_seminars_Mapper_Event $mapper */
-		$mapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		/** @var Tx_Seminars_Mapper_Event $mapper */
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->findByPublicationHash($this->publicationHash);
 

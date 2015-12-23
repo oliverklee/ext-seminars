@@ -33,7 +33,7 @@ class Tx_Seminars_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase {
 	private $testingFramework = NULL;
 
 	/**
-	 * @var tx_seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject
+	 * @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private $mapper = NULL;
 
@@ -53,7 +53,7 @@ class Tx_Seminars_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
-		$this->mapper = $this->getMock('tx_seminars_Mapper_Event', array('findNextUpcoming'));
+		$this->mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('findNextUpcoming'));
 
 		$this->fixture = new Tx_Seminars_FrontEnd_Countdown(
 			array(

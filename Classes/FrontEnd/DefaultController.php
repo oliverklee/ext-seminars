@@ -46,7 +46,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	public $extKey = 'seminars';
 
 	/**
-	 * @var tx_seminars_Mapper_Event an event mapper used to retrieve event models
+	 * @var Tx_Seminars_Mapper_Event an event mapper used to retrieve event models
 	 */
 	protected $eventMapper = NULL;
 
@@ -526,7 +526,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		}
 
 		if ($this->eventMapper === NULL) {
-			$this->eventMapper = GeneralUtility::makeInstance('tx_seminars_Mapper_Event');
+			$this->eventMapper = GeneralUtility::makeInstance(Tx_Seminars_Mapper_Event::class);
 		}
 	}
 
@@ -715,8 +715,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 * @return string the rendered single view
 	 */
 	protected function createSingleViewForExistingEvent() {
-		/** @var tx_seminars_Mapper_Event $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		/** @var Tx_Seminars_Mapper_Event $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->find($this->showUid);
 
@@ -1337,8 +1337,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 
 		$output = '';
 
-		/** @var tx_seminars_Mapper_Event $eventMapper */
-		$eventMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		/** @var Tx_Seminars_Mapper_Event $eventMapper */
+		$eventMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 
 		$dependencies = $this->seminar->getDependencies();
 		/** @var tx_seminars_seminar $dependency */
@@ -1956,8 +1956,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		$result = '';
 
 		if ($this->seminar->isOk()) {
-			/** @var tx_seminars_Mapper_Event $mapper */
-			$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+			/** @var Tx_Seminars_Mapper_Event $mapper */
+			$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 			/** @var tx_seminars_Model_Event $event */
 			$event = $mapper->find($this->getSeminar()->getUid());
 
@@ -3403,8 +3403,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 			return;
 		}
 
-		/** @var tx_seminars_Mapper_Event $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		/** @var Tx_Seminars_Mapper_Event $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->find($this->piVars['seminar']);
 		if (!$event->isPublished()) {
@@ -3434,8 +3434,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 */
 	protected function hideEvent(tx_seminars_Model_Event $event) {
 		$event->markAsHidden();
-		/** @var tx_seminars_Mapper_Event $mapper */
-		$mapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		/** @var Tx_Seminars_Mapper_Event $mapper */
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		$mapper->save($event);
 
 		$this->redirectToCurrentUrl();
@@ -3450,8 +3450,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 */
 	protected function unhideEvent(tx_seminars_Model_Event $event) {
 		$event->markAsVisible();
-		/** @var tx_seminars_Mapper_Event $mapper */
-		$mapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		/** @var Tx_Seminars_Mapper_Event $mapper */
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		$mapper->save($event);
 
 		$this->redirectToCurrentUrl();
@@ -3469,8 +3469,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		$copy->markAsHidden();
 		$copy->setRegistrations(new Tx_Oelib_List());
 
-		/** @var tx_seminars_Mapper_Event $mapper */
-		$mapper = Tx_Oelib_MapperRegistry::get('tx_seminars_Mapper_Event');
+		/** @var Tx_Seminars_Mapper_Event $mapper */
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		$mapper->save($copy);
 
 		$this->redirectToCurrentUrl();

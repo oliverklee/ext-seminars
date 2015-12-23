@@ -33,7 +33,7 @@ class Tx_Seminars_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestCase {
 	private $testingFramework;
 
 	/**
-	 * @var tx_seminars_Mapper_Event
+	 * @var Tx_Seminars_Mapper_Event
 	 */
 	private $mapper;
 
@@ -64,7 +64,7 @@ class Tx_Seminars_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestCase {
 		// just picked some random date (2001-01-01 00:00:00)
 		$this->eventDate = 978303600;
 
-		$this->mapper = new tx_seminars_Mapper_Event();
+		$this->mapper = new Tx_Seminars_Mapper_Event();
 		$event = $this->mapper->getLoadedTestingModel(array(
 			'pid' => 0,
 			'title' => 'Test event',

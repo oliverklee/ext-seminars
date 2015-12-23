@@ -24,7 +24,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Tx_Seminars_FrontEnd_Countdown extends Tx_Seminars_FrontEnd_AbstractView {
 	/**
-	 * @var tx_seminars_Mapper_Event
+	 * @var Tx_Seminars_Mapper_Event
 	 */
 	protected $mapper = NULL;
 
@@ -44,11 +44,11 @@ class Tx_Seminars_FrontEnd_Countdown extends Tx_Seminars_FrontEnd_AbstractView {
 	/**
 	 * Injects an Event Mapper for this View.
 	 *
-	 * @param tx_seminars_Mapper_Event $mapper
+	 * @param Tx_Seminars_Mapper_Event $mapper
 	 *
 	 * @return void
 	 */
-	public function injectEventMapper(tx_seminars_Mapper_Event $mapper) {
+	public function injectEventMapper(Tx_Seminars_Mapper_Event $mapper) {
 		$this->mapper = $mapper;
 	}
 
