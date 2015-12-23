@@ -20,9 +20,9 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_FrontEnd_RequirementsListTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_FrontEnd_RequirementsListTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_FrontEnd_RequirementsList
+	 * @var Tx_Seminars_FrontEnd_RequirementsList
 	 */
 	protected $fixture = NULL;
 
@@ -55,7 +55,7 @@ class tx_seminars_FrontEnd_RequirementsListTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->fixture = new tx_seminars_FrontEnd_RequirementsList(
+		$this->fixture = new Tx_Seminars_FrontEnd_RequirementsList(
 			array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
 			$GLOBALS['TSFE']->cObj
 		);
