@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_ViewHelper_CommaSeparatedTitles {
+class Tx_Seminars_ViewHelper_CommaSeparatedTitles {
 	/**
 	 * Gets the titles of the elements in $list as a comma-separated list.
 	 *
