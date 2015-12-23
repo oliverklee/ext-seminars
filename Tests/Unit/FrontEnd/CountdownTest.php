@@ -38,7 +38,7 @@ class Tx_Seminars_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase {
 	private $mapper = NULL;
 
 	/**
-	 * @var tx_seminars_ViewHelper_Countdown|PHPUnit_Framework_MockObject_MockObject
+	 * @var Tx_Seminars_ViewHelper_Countdown|PHPUnit_Framework_MockObject_MockObject
 	 */
 	private $viewHelper = NULL;
 
@@ -128,7 +128,7 @@ class Tx_Seminars_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase {
 			->method('findNextUpcoming')
 			->will(self::returnValue($event));
 
-		$this->viewHelper = $this->getMock('tx_seminars_ViewHelper_Countdown', array('render'));
+		$this->viewHelper = $this->getMock(Tx_Seminars_ViewHelper_Countdown::class, array('render'));
 		$this->viewHelper->expects(self::once())
 			->method('render')
 			->with(self::equalTo($event->getBeginDateAsUnixTimeStamp()));

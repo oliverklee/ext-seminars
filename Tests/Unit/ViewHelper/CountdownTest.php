@@ -20,9 +20,9 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_ViewHelper_CountdownTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_ViewHelper_CountdownTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_ViewHelper_Countdown
+	 * @var Tx_Seminars_ViewHelper_Countdown
 	 */
 	private $fixture;
 
@@ -41,7 +41,7 @@ class tx_seminars_ViewHelper_CountdownTest extends Tx_Phpunit_TestCase {
 
 		$this->translator = Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars');
 
-		$this->fixture = new tx_seminars_ViewHelper_Countdown();
+		$this->fixture = new Tx_Seminars_ViewHelper_Countdown();
 	}
 
 	protected function tearDown() {

@@ -29,7 +29,7 @@ class Tx_Seminars_FrontEnd_Countdown extends Tx_Seminars_FrontEnd_AbstractView {
 	protected $mapper = NULL;
 
 	/**
-	 * @var tx_seminars_ViewHelper_Countdown
+	 * @var Tx_Seminars_ViewHelper_Countdown
 	 */
 	protected $viewHelper = NULL;
 
@@ -55,11 +55,11 @@ class Tx_Seminars_FrontEnd_Countdown extends Tx_Seminars_FrontEnd_AbstractView {
 	/**
 	 * Injects an Countdown View Helper.
 	 *
-	 * @param tx_seminars_ViewHelper_Countdown $viewHelper
+	 * @param Tx_Seminars_ViewHelper_Countdown $viewHelper
 	 *
 	 * @return void
 	 */
-	public function injectCountDownViewHelper(tx_seminars_ViewHelper_Countdown $viewHelper) {
+	public function injectCountDownViewHelper(Tx_Seminars_ViewHelper_Countdown $viewHelper) {
 		$this->viewHelper = $viewHelper;
 	}
 
@@ -73,8 +73,8 @@ class Tx_Seminars_FrontEnd_Countdown extends Tx_Seminars_FrontEnd_AbstractView {
 			throw new BadMethodCallException('The method injectEventMapper() needs to be called first.', 1333617194);
 		}
 		if ($this->viewHelper === NULL) {
-			/** @var tx_seminars_ViewHelper_Countdown $viewHelper */
-			$viewHelper = GeneralUtility::makeInstance('tx_seminars_ViewHelper_Countdown');
+			/** @var Tx_Seminars_ViewHelper_Countdown $viewHelper */
+			$viewHelper = GeneralUtility::makeInstance(Tx_Seminars_ViewHelper_Countdown::class);
 			$this->injectCountDownViewHelper($viewHelper);
 		}
 
