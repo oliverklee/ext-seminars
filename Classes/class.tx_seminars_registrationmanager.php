@@ -581,7 +581,7 @@ class tx_seminars_registrationmanager extends Tx_Oelib_TemplateHelper {
 					if (($paymentMethodUid > 0) && $availablePaymentMethods->hasUid($paymentMethodUid)) {
 						/** @var Tx_Seminars_Mapper_PaymentMethod $mapper */
 						$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_PaymentMethod::class);
-						/** @var tx_seminars_Model_PaymentMethod $paymentMethod */
+						/** @var Tx_Seminars_Model_PaymentMethod $paymentMethod */
 						$paymentMethod = $mapper->find($paymentMethodUid);
 					}
 				}

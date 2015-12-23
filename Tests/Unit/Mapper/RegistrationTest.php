@@ -152,7 +152,7 @@ class Tx_Seminars_Mapper_RegistrationTest extends Tx_Phpunit_TestCase {
 			$this->fixture->getLoadedTestingModel(
 				array('method_of_payment' => $paymentMethod->getUid())
 			)->getPaymentMethod() instanceof
-				tx_seminars_Model_PaymentMethod
+				Tx_Seminars_Model_PaymentMethod
 		);
 	}
 

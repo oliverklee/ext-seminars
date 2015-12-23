@@ -29,5 +29,5 @@ class Tx_Seminars_Mapper_PaymentMethod extends Tx_Oelib_DataMapper {
 	/**
 	 * @var string the model class name for this mapper, must not be empty
 	 */
-	protected $modelClassName = 'tx_seminars_Model_PaymentMethod';
+	protected $modelClassName = Tx_Seminars_Model_PaymentMethod::class;
 }
