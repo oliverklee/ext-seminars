@@ -8743,7 +8743,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->find($this->seminarUid);
 
-		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
+		$hook = $this->getMock(Tx_Seminars_Interface_Hook_EventListView::class);
 		$hook->expects(self::once())->method('modifyListRow')->with($event, self::anything());
 		// We don't test for the second parameter (the template instance here)
 		// because we cannot access it from the outside.
@@ -8780,7 +8780,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Registration $registration */
 		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($registrationUid);
 
-		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
+		$hook = $this->getMock(Tx_Seminars_Interface_Hook_EventListView::class);
 		$hook->expects(self::once())->method('modifyMyEventsListRow')->with($registration, self::anything());
 		// We don't test for the second parameter (the template instance here)
 		// because we cannot access it from the outside.
@@ -8801,7 +8801,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 
 		$this->testingFramework->createAndLoginFrontEndUser();
 
-		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
+		$hook = $this->getMock(Tx_Seminars_Interface_Hook_EventListView::class);
 		$hook->expects(self::once())->method('modifyListRow')->with($event, self::anything());
 		// We don't test for the second parameter (the template instance here)
 		// because we cannot access it from the outside.
@@ -8817,7 +8817,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function eventListNotCallsModifyMyEventsListRowHook() {
-		$hook = $this->getMock('tx_seminars_Interface_Hook_EventListView');
+		$hook = $this->getMock(Tx_Seminars_Interface_Hook_EventListView::class);
 		$hook->expects(self::never())->method('modifyMyEventsListRow');
 
 		$hookClass = get_class($hook);

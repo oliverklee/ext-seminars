@@ -12,6 +12,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5558] Rename tx_seminars_Interface_Hook_EventListView to Tx_Seminars_Interface_Hook_EventListView
 - [#5578] Rename tx_seminars_Model_Place to Tx_Seminars_Model_Place
 - [#5548] Rename tx_seminars_FrontEnd_Editor to Tx_Seminars_FrontEnd_Editor
 - [#5557] Rename tx_seminars_Interface_Hook_BackEndModule to Tx_Seminars_Interface_Hook_BackEndModule

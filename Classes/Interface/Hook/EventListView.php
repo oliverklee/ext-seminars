@@ -20,7 +20,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-interface tx_seminars_Interface_Hook_EventListView {
+interface Tx_Seminars_Interface_Hook_EventListView {
 	/**
 	 * Modifies a list row in the events list.
 	 *

@@ -172,7 +172,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	/**
 	 * hook objects for the list view
 	 *
-	 * @var tx_seminars_Interface_Hook_EventListView[]
+	 * @var Tx_Seminars_Interface_Hook_EventListView[]
 	 */
 	private $listViewHooks = array();
 
@@ -378,12 +378,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	/**
 	 * Gets the hooks for the list view.
 	 *
-	 * @return tx_seminars_Interface_Hook_EventListView[]
+	 * @return Tx_Seminars_Interface_Hook_EventListView[]
 	 *         the hook objects, will be empty if no hooks have been set
 	 *
 	 * @throws \UnexpectedValueException
 	 *          if there are registered hook classes that do not implement the
-	 *          tx_seminars_Interface_Hook_EventListView interface
+	 *          Tx_Seminars_Interface_Hook_EventListView interface
 	 */
 	protected function getListViewHooks() {
 		if (!$this->listViewHooksHaveBeenRetrieved) {
@@ -391,10 +391,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 			if (is_array($hookClasses)) {
 				foreach ($hookClasses as $hookClass) {
 					$hookInstance = GeneralUtility::getUserObj($hookClass);
-					if (!($hookInstance instanceof tx_seminars_Interface_Hook_EventListView)) {
+					if (!($hookInstance instanceof Tx_Seminars_Interface_Hook_EventListView)) {
 						throw new \UnexpectedValueException(
 							'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .
-								'but does not implement the tx_seminars_Interface_Hook_EventListView interface.',
+								'but does not implement the Tx_Seminars_Interface_Hook_EventListView interface.',
 								1301928334
 						);
 					}

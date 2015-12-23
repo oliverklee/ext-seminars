@@ -94,14 +94,14 @@ in ext\_localconf.php:
 ::
 
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][]
-         = 'EXT:seminarspaypal/Hooks/class.tx_seminarspaypal_Hooks_ListView.php:' .
-                 '&tx_seminarspaypal_Hooks_ListView';
+         = 'EXT:seminarspaypal/Hooks/Classes/Hooks/ListView.php:' .
+                 '&Tx_Seminarspaypal_Hooks_ListView';
 
 It's used like this:
 
 ::
 
-   class tx_seminarspaypal_Hooks_ListView implements tx_seminars_Interface_Hook_EventListView {
+   class Tx_Seminarspaypal_Hooks_ListView implements Tx_Seminars_Interface_Hook_EventListView {
         /**
          * Adds a countdown column.
        *
