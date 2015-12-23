@@ -22,14 +22,14 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_Model_FrontEndUserGroup the object to test
+	 * @var Tx_Seminars_Model_FrontEndUserGroup the object to test
 	 */
 	private $fixture;
 
 	protected function setUp() {
-		$this->fixture = new tx_seminars_Model_FrontEndUserGroup();
+		$this->fixture = new Tx_Seminars_Model_FrontEndUserGroup();
 	}
 
 	///////////////////////////////////////
@@ -43,7 +43,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setData(array());
 
 		self::assertEquals(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
 			$this->fixture->getPublishSetting()
 		);
 	}
@@ -55,7 +55,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setData(array('tx_seminars_publish_events' => 0));
 
 		self::assertEquals(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
 			$this->fixture->getPublishSetting()
 		);
 	}
@@ -67,7 +67,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setData(array('tx_seminars_publish_events' => 1));
 
 		self::assertEquals(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
 			$this->fixture->getPublishSetting()
 		);
 	}
@@ -79,7 +79,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setData(array('tx_seminars_publish_events' => 2));
 
 		self::assertEquals(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
 			$this->fixture->getPublishSetting()
 		);
 	}

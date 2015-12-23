@@ -374,7 +374,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 			',', $this->getConfValueString('userGroupUidsForAdditionalAttendeesFrontEndUsers', 's_registration'), TRUE
 		);
 		foreach ($userGroupUids as $uid) {
-			/** @var tx_seminars_Model_FrontEndUserGroup $userGroup */
+			/** @var Tx_Seminars_Model_FrontEndUserGroup $userGroup */
 			$userGroup = $userGroupMapper->find($uid);
 			$userGroups->add($userGroup);
 		}

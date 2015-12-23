@@ -22,7 +22,7 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGroup implements Tx_Seminars_Interface_Titled {
+class Tx_Seminars_Model_FrontEndUserGroup extends Tx_Oelib_Model_FrontEndUserGroup implements Tx_Seminars_Interface_Titled {
 	/**
 	 * @var int the publish setting to immediately publish all events edited
 	 */

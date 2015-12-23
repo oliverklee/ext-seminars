@@ -802,8 +802,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		$eventUid = $this->getObjectUid();
 		$isNew = ($eventUid === 0);
 
-		$hideEditedObject = !$isNew && ($publishSetting === tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED);
-		$hideNewObject = $isNew && ($publishSetting > tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
+		$hideEditedObject = !$isNew && ($publishSetting === Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED);
+		$hideNewObject = $isNew && ($publishSetting > Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 
 		if (!$isNew) {
 			/** @var Tx_Seminars_Mapper_Event $mapper */

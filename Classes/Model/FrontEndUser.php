@@ -33,19 +33,19 @@ class tx_seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
 	 * will be returned.
 	 *
 	 * @return int one of the class constants
-	 *                 tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
-	 *                 tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW or
-	 *                 tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+	 *                 Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+	 *                 Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW or
+	 *                 Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 	 */
 	public function getPublishSetting() {
 		$userGroups = $this->getUserGroups();
 		if ($userGroups->isEmpty()) {
-			return tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
+			return Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
 		}
 
-		$result = tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
+		$result = Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
 
-		/** @var tx_seminars_Model_FrontEndUserGroup $userGroup */
+		/** @var Tx_Seminars_Model_FrontEndUserGroup $userGroup */
 		foreach ($userGroups as $userGroup) {
 			$groupPermissions = $userGroup->getPublishSetting();
 
@@ -71,7 +71,7 @@ class tx_seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
 
 		$auxiliaryRecordsPid = 0;
 
-		/** @var tx_seminars_Model_FrontEndUserGroup $userGroup */
+		/** @var Tx_Seminars_Model_FrontEndUserGroup $userGroup */
 		foreach ($this->getUserGroups() as $userGroup) {
 			if ($userGroup->hasAuxiliaryRecordsPid()) {
 				$auxiliaryRecordsPid = $userGroup->getAuxiliaryRecordsPid();
@@ -94,7 +94,7 @@ class tx_seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
 	public function getReviewerFromGroup() {
 		$result = NULL;
 
-		/** @var tx_seminars_Model_FrontEndUserGroup $userGroup */
+		/** @var Tx_Seminars_Model_FrontEndUserGroup $userGroup */
 		foreach ($this->getUserGroups() as $userGroup) {
 			if ($userGroup->hasReviewer()) {
 				$result = $userGroup->getReviewer();
@@ -121,7 +121,7 @@ class tx_seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
 
 		$eventRecordPid = 0;
 
-		/** @var tx_seminars_Model_FrontEndUserGroup $userGroup */
+		/** @var Tx_Seminars_Model_FrontEndUserGroup $userGroup */
 		foreach ($this->getUserGroups() as $userGroup) {
 			if ($userGroup->hasEventRecordPid()) {
 				$eventRecordPid = $userGroup->getEventRecordPid();
@@ -143,7 +143,7 @@ class tx_seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
 		/** @var Tx_Oelib_List $categories */
 		$categories = GeneralUtility::makeInstance(Tx_Oelib_List::class);
 
-		/** @var tx_seminars_Model_FrontEndUserGroup $group */
+		/** @var Tx_Seminars_Model_FrontEndUserGroup $group */
 		foreach ($this->getUserGroups() as $group) {
 			if ($group->hasDefaultCategories()) {
 				$categories->append($group->getDefaultCategories());
@@ -174,7 +174,7 @@ class tx_seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
 		/** @var Tx_Oelib_List $organizers */
 		$organizers = GeneralUtility::makeInstance(Tx_Oelib_List::class);
 
-		/** @var tx_seminars_Model_FrontEndUserGroup $group */
+		/** @var Tx_Seminars_Model_FrontEndUserGroup $group */
 		foreach ($this->getUserGroups() as $group) {
 			if ($group->hasDefaultOrganizer()) {
 				$organizers->add($group->getDefaultOrganizer());

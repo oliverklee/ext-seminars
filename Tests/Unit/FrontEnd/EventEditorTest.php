@@ -130,8 +130,8 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 *
 	 * @param int $publishSetting
 	 *        the publish settings for the user, must be one of the following:
-	 *        tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY, tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW, or
-	 *        tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+	 *        Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY, Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW, or
+	 *        Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 	 *
 	 * @return int user UID
 	 */
@@ -142,7 +142,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 
 	/**
 	 * Creates a front-end user which has a group with the publish setting
-	 * tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED and a reviewer.
+	 * Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED and a reviewer.
 	 *
 	 * @return int user UID
 	 */
@@ -150,7 +150,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$backendUserUid = $this->testingFramework->createBackEndUser(array('email' => 'foo@bar.com', 'realName' => 'Mr. Foo'));
 		$userGroupUid = $this->testingFramework->createFrontEndUserGroup(
 			array(
-				'tx_seminars_publish_events' => tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+				'tx_seminars_publish_events' => Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
 				'tx_seminars_reviewer' => $backendUserUid,
 			)
 		);
@@ -2210,7 +2210,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertForPublishSettingPublishImmediatelyDoesNotHideCreatedEvent() {
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
 
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
@@ -2228,7 +2228,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 			Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
 
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
@@ -2243,7 +2243,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertForPublishSettingHideNewHidesCreatedEvent() {
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		);
 
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
@@ -2259,7 +2259,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertForPublishSettingHideEditedHidesCreatedEvent() {
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 		);
 
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
@@ -2278,7 +2278,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 			Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 		);
 
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
@@ -2297,7 +2297,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 			Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		);
 
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
@@ -2312,7 +2312,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertForEventHiddenOnEditingAddsPublicationHashToEvent() {
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 		);
 
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
@@ -2328,7 +2328,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertForEventHiddenOnCreationAddsPublicationHashToEvent() {
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		);
 
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
@@ -2347,7 +2347,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 			Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
 		);
 
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
@@ -2362,7 +2362,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertForEventNotHiddenOnCreationDoesNotAddPublicationHashToEvent() {
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
 
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
@@ -2382,7 +2382,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		);
 		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
 		);
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
@@ -2396,7 +2396,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertAddsTimestampToFormData() {
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
@@ -2410,7 +2410,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertSetsTimestampToCurrentExecutionTime() {
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
@@ -2425,7 +2425,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertAddsCreationDateToFormData() {
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
@@ -2439,7 +2439,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertsetsCreationDateToCurrentExecutionTime() {
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
@@ -2453,7 +2453,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function modifyDataToInsertsetsOwnerFeUserToCurrentlyLoggedInUser() {
-		$userUid = $this->createAndLoginUserWithPublishSetting(tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
+		$userUid = $this->createAndLoginUserWithPublishSetting(Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
 
 		self::assertSame(
@@ -2467,7 +2467,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertForNoUserGroupSpecificEventPidSetsPidFromTsSetupAsEventPid() {
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
 		$this->fixture->setConfigurationValue('createEventsPID', 42);
 
@@ -2509,7 +2509,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertForNewEventAndUserWithoutDefaultCategoriesDoesNotAddAnyCategories() {
 		$this->createAndLoginUserWithPublishSetting(
-			tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+			Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
 		);
 
 		$modifiedFormData = $this->fixture->modifyDataToInsert(array());
@@ -2534,7 +2534,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 			array(
 				'tx_seminars_default_categories' => $categories,
 				'tx_seminars_publish_events'
-					=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+					=> Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
 			)
 		);
 
@@ -2568,7 +2568,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 			array(
 				'tx_seminars_default_categories' => $categories,
 				'tx_seminars_publish_events'
-					=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+					=> Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
 			)
 		);
 
@@ -2599,7 +2599,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 			array(
 				'tx_seminars_default_categories' => $categories,
 				'tx_seminars_publish_events'
-					=> tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+					=> Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
 			)
 		);
 
@@ -3408,7 +3408,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendAdditionalNotificationEmailToReviewerWithoutReviewerAndFeatureEnabledNotSendsEmail() {
 		$this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', TRUE);
-		$this->createAndLoginUserWithPublishSetting(tx_seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
+		$this->createAndLoginUserWithPublishSetting(Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 
 		$this->fixture->sendAdditionalNotificationEmailToReviewer();
 

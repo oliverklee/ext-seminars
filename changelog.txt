@@ -15,6 +15,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5592] Rename tx_seminars_Model_FrontEndUserGroup to Tx_Seminars_Model_FrontEndUserGroup
 - [#5591] Rename tx_seminars_Model_Food to Tx_Seminars_Model_Food
 - [#5589] Rename tx_seminars_Model_EventType to Tx_Seminars_Model_EventType
 - [#5588] Rename tx_seminars_Model_Checkbox to Tx_Seminars_Model_Checkbox

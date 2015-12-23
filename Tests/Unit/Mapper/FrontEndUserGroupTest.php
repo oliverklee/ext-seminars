@@ -50,10 +50,7 @@ class Tx_Seminars_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function mapperForGhostReturnsSeminarsFrontEndUserGroupInstance() {
-		self::assertTrue(
-			$this->fixture->getNewGhost()
-				instanceof tx_seminars_Model_FrontEndUserGroup
-		);
+		self::assertInstanceOf(Tx_Seminars_Model_FrontEndUserGroup::class, $this->fixture->getNewGhost());
 	}
 
 
@@ -71,7 +68,7 @@ class Tx_Seminars_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 			array('tx_seminars_reviewer' => $backEndUser->getUid())
 		);
 
-		/** @var tx_seminars_Model_FrontEndUserGroup $model */
+		/** @var Tx_Seminars_Model_FrontEndUserGroup $model */
 		$model = $this->fixture->find($frontEndUserGroup->getUid());
 
 		self::assertInstanceOf(Tx_Oelib_Model_BackEndUser::class, $model->getReviewer());
@@ -95,7 +92,7 @@ class Tx_Seminars_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 			'fe_groups', $frontEndUserGroupUid, $categoryUid, 'tx_seminars_default_categories'
 		);
 
-		/** @var tx_seminars_Model_FrontEndUserGroup $model */
+		/** @var Tx_Seminars_Model_FrontEndUserGroup $model */
 		$model = $this->fixture->find($frontEndUserGroupUid);
 		self::assertInstanceOf(Tx_Seminars_Model_Category::class, $model->getDefaultCategories()->first());
 	}
@@ -116,7 +113,7 @@ class Tx_Seminars_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 			array('tx_seminars_default_organizer' => $organizerUid)
 		);
 
-		/** @var tx_seminars_Model_FrontEndUserGroup $model */
+		/** @var Tx_Seminars_Model_FrontEndUserGroup $model */
 		$model = $this->fixture->find($groupUid);
 		self::assertTrue(
 			$model->getDefaultOrganizer() instanceof tx_seminars_Model_Organizer
