@@ -182,8 +182,8 @@ class tx_seminars_module2 extends Tx_Seminars_BackEnd_Module {
 				$this->content .= $registrationsList->show();
 				break;
 			case 3:
-				/** @var tx_seminars_BackEnd_SpeakersList $speakersList */
-				$speakersList = GeneralUtility::makeInstance('tx_seminars_BackEnd_SpeakersList', $this);
+				/** @var Tx_Seminars_BackEnd_SpeakersList $speakersList */
+				$speakersList = GeneralUtility::makeInstance(Tx_Seminars_BackEnd_SpeakersList::class, $this);
 				$this->content .= $speakersList->show();
 				break;
 			case 4:
