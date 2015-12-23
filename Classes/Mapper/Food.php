@@ -29,5 +29,5 @@ class Tx_Seminars_Mapper_Food extends tx_oelib_DataMapper {
 	/**
 	 * @var string the model class name for this mapper, must not be empty
 	 */
-	protected $modelClassName = 'tx_seminars_Model_Food';
+	protected $modelClassName = Tx_Seminars_Model_Food::class;
 }
