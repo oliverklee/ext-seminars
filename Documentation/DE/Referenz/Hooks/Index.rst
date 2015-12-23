@@ -26,14 +26,14 @@ like this in ext\_localconf.php:
 ::
 
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][]
-         = 'EXT:seminarspaypal/Hooks/class.tx_seminarspaypal_Hooks_EventSingleView .php:' .
-                 '&tx_seminarspaypal_Hooks_EventSingleView';
+         = 'EXT:seminarspaypal/Classes/Hooks/EventSingleView.php:' .
+                 '&Tx_Seminarspaypal_Hooks_EventSingleView';
 
 They are used like this:
 
 ::
 
-   class tx_seminarspaypal_Hooks_SingleView implements tx_seminars_Interface_Hook_EventSingleView {
+   class Tx_Seminarspaypal_Hooks_SingleView implements Tx_Seminars_Interface_Hook_EventSingleView {
 
 /\*\*
 
