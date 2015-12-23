@@ -191,8 +191,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	 *               title) and "value" (for the UID)
 	 */
 	public function populateListCategories() {
-		/** @var tx_seminars_Mapper_Category $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category');
+		/** @var Tx_Seminars_Mapper_Category $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class);
 		$categories = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
 
 		return self::makeListToFormidableList($categories);

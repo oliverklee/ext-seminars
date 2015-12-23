@@ -107,7 +107,7 @@ class tx_seminars_Mapper_EventDateTest extends Tx_Phpunit_TestCase {
 				'topic' => $topicUid,
 			)
 		);
-		$category = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
+		$category = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars', $topicUid, $category->getUid(), 'categories'
@@ -132,7 +132,7 @@ class tx_seminars_Mapper_EventDateTest extends Tx_Phpunit_TestCase {
 				'topic' => $topicUid,
 			)
 		);
-		$category = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
+		$category = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars', $topicUid, $category->getUid(), 'categories'
