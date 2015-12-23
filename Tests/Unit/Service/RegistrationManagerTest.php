@@ -2126,7 +2126,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$registration = $this->createRegistration();
 
-		$hook = $this->getMock('tx_seminars_Interface_Hook_Registration', array());
+		$hook = $this->getMock(Tx_Seminars_Interface_Hook_Registration::class, array());
 		$hookClass = get_class($hook);
 		$hook->expects(self::once())->method('modifyAttendeeEmailText')->with($registration, self::anything());
 
@@ -2149,7 +2149,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$registration = $this->createRegistration();
 
-		$hook = $this->getMock('tx_seminars_Interface_Hook_Registration', array());
+		$hook = $this->getMock(Tx_Seminars_Interface_Hook_Registration::class, array());
 		$hookClass = get_class($hook);
 		$hook->expects(self::exactly(2))->method('modifyAttendeeEmailText')->with($registration, self::anything());;
 
@@ -4183,7 +4183,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		);
 		$registration = new tx_seminars_registrationchild($registrationUid);
 
-		$hook = $this->getMock('tx_seminars_Interface_Hook_Registration');
+		$hook = $this->getMock(Tx_Seminars_Interface_Hook_Registration::class);
 		$hookClassName = get_class($hook);
 		$hook->expects(self::once())->method('modifyOrganizerNotificationEmail')->with($registration, self::anything());
 
@@ -4205,7 +4205,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		);
 		$registration = new tx_seminars_registrationchild($registrationUid);
 
-		$hook = $this->getMock('tx_seminars_Interface_Hook_Registration');
+		$hook = $this->getMock(Tx_Seminars_Interface_Hook_Registration::class);
 		$hookClassName = get_class($hook);
 		$hook->expects(self::once())->method('modifyOrganizerNotificationEmail')
 			->with(self::anything(), self::isInstanceOf('Tx_Oelib_Template'));

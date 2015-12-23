@@ -935,8 +935,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		tx_seminars_registration $registration, Tx_Oelib_Template $emailTemplate
 	) {
 		foreach ($this->getHooks() as $hook) {
-			if ($hook instanceof tx_seminars_Interface_Hook_Registration) {
-				/** @var $hook tx_seminars_Interface_Hook_Registration */
+			if ($hook instanceof Tx_Seminars_Interface_Hook_Registration) {
+				/** @var $hook Tx_Seminars_Interface_Hook_Registration */
 				$hook->modifyOrganizerNotificationEmail($registration, $emailTemplate);
 			}
 		}
@@ -965,8 +965,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 */
 	protected function callModifyAttendeeEmailTextHooks(tx_seminars_registration $registration, Tx_Oelib_Template $emailTemplate) {
 		foreach ($this->getHooks() as $hook) {
-			if ($hook instanceof tx_seminars_Interface_Hook_Registration) {
-				/** @var $hook tx_seminars_Interface_Hook_Registration */
+			if ($hook instanceof Tx_Seminars_Interface_Hook_Registration) {
+				/** @var $hook Tx_Seminars_Interface_Hook_Registration */
 				$hook->modifyAttendeeEmailText($registration, $emailTemplate);
 			}
 		}
