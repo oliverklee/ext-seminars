@@ -15,6 +15,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5586] Rename tx_seminars_Model_BackEndUser to Tx_Seminars_Model_BackEndUser
 - [#5585] Rename tx_seminars_Model_BackEndUserGroup to Tx_Seminars_Model_BackEndUserGroup
 - [#5583] Rename tx_seminars_Mapper_TargetGroup to Tx_Seminars_Mapper_TargetGroup
 - [#5582] Rename tx_seminars_Mapper_Speaker to Tx_Seminars_Mapper_Speaker

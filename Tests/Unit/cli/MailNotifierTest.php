@@ -327,7 +327,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceSubject() {
-		/** @var tx_seminars_Model_BackEndUser $user */
+		/** @var Tx_Seminars_Model_BackEndUser $user */
 		$user = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
@@ -352,7 +352,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceMessage() {
-		/** @var tx_seminars_Model_BackEndUser $user */
+		/** @var Tx_Seminars_Model_BackEndUser $user */
 		$user = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
@@ -559,7 +559,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineSubject() {
-		/** @var tx_seminars_Model_BackEndUser $user */
+		/** @var Tx_Seminars_Model_BackEndUser $user */
 		$user = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
@@ -583,7 +583,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage() {
-		/** @var tx_seminars_Model_BackEndUser $user */
+		/** @var Tx_Seminars_Model_BackEndUser $user */
 		$user = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');

@@ -46,9 +46,9 @@ class Tx_Seminars_Mapper_BackEndUserTest extends Tx_Phpunit_TestCase {
 	//////////////////////////
 
 	public function testFindWithUidOfExistingRecordReturnsBackEndUserInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Seminars_Model_BackEndUser::class,
 			$this->fixture->find($this->testingFramework->createBackEndUser())
-				instanceof tx_seminars_Model_BackEndUser
 		);
 	}
 }

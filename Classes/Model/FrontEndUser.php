@@ -87,7 +87,7 @@ class tx_seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
 	 *
 	 * Will return the first reviewer found.
 	 *
-	 * @return tx_seminars_Model_BackEndUser the reviewer set in the user's group,
+	 * @return Tx_Seminars_Model_BackEndUser the reviewer set in the user's group,
 	 *                                    will be NULL if no reviewer has been
 	 *                                    set or the user has no groups
 	 */

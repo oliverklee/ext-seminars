@@ -20,14 +20,14 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_Model_BackEndUserTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Model_BackEndUserTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_Model_BackEndUser
+	 * @var Tx_Seminars_Model_BackEndUser
 	 */
 	private $fixture;
 
 	protected function setUp() {
-		$this->fixture = new tx_seminars_Model_BackEndUser();
+		$this->fixture = new Tx_Seminars_Model_BackEndUser();
 	}
 
 	/////////////////////////////////////////////
