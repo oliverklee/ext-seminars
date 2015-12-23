@@ -23,7 +23,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_AbstractView {
+class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_AbstractView {
 	/**
 	 * @var tx_seminars_seminar the seminar of which we want to list the
 	 *                          registrations
