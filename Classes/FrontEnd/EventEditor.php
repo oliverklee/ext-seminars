@@ -318,7 +318,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 			array('relatedRecordType' => 'Places')
 		) && is_object($formidable);
 
-		/** @var tx_seminars_Model_Place $place */
+		/** @var Tx_Seminars_Model_Place $place */
 		foreach ($places as $place) {
 			$frontEndUserIsOwner = ($place->getOwner() === $frontEndUser);
 
@@ -1436,8 +1436,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 			);
 		};
 
-		/** @var tx_seminars_Model_Place $place */
-		$place = GeneralUtility::makeInstance('tx_seminars_Model_Place');
+		/** @var Tx_Seminars_Model_Place $place */
+		$place = GeneralUtility::makeInstance(Tx_Seminars_Model_Place::class);
 		$place->setData(self::createBasicAuxiliaryData());
 		self::setPlaceData($place, 'newPlace_', $formData);
 		$place->markAsDirty();
@@ -1489,7 +1489,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
 
 		try {
-			/** @var tx_seminars_Model_Place $place */
+			/** @var Tx_Seminars_Model_Place $place */
 			$place = $placeMapper->find((int)$formData['editPlace_uid']);
 		} catch (Exception $exception) {
 			return $formidable->majixExecJs(
@@ -1596,14 +1596,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	/**
 	 * Sets the data of a place model based on the data given in $formData.
 	 *
-	 * @param tx_seminars_Model_Place $place the place model to set the data
+	 * @param Tx_Seminars_Model_Place $place the place model to set the data
 	 * @param string $prefix the prefix of the form fields in $formData
 	 * @param array[] $formData the form data to use for setting the place data
 	 *
 	 * @return void
 	 */
 	private static function setPlaceData(
-		tx_seminars_Model_Place $place, $prefix, array $formData
+		Tx_Seminars_Model_Place $place, $prefix, array $formData
 	) {
 		$countryUid = (int)$formData[$prefix . 'country'];
 		if ($countryUid > 0) {
@@ -1646,7 +1646,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		$placeMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
 
 		try {
-			/** @var tx_seminars_Model_Place $place */
+			/** @var Tx_Seminars_Model_Place $place */
 			$place = $placeMapper->find((int)$placeUid);
 		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(

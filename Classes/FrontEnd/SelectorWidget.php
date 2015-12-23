@@ -533,7 +533,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 		$result = array();
 		$this->collectPlaces();
 
-		/** @var tx_seminars_Model_Place $place */
+		/** @var Tx_Seminars_Model_Place $place */
 		foreach ($this->places as $place) {
 			$result[$place->getUid()] = $place->getTitle();
 		}
@@ -556,7 +556,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 		$result = array();
 		$this->collectPlaces();
 
-		/** @var tx_seminars_Model_Place $place */
+		/** @var Tx_Seminars_Model_Place $place */
 		foreach ($this->places as $place) {
 			$result[$place->getCity()] = $place->getCity();
 		}
@@ -581,7 +581,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 		$result = array();
 		$this->collectPlaces();
 
-		/** @var tx_seminars_Model_Place $place */
+		/** @var Tx_Seminars_Model_Place $place */
 		foreach ($this->places as $place) {
 			if ($place->hasCountry()) {
 				$countryIsoCode = $place->getCountry()->getIsoAlpha2Code();

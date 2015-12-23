@@ -157,9 +157,7 @@ class tx_seminars_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase {
 
 		/** @var tx_seminars_Model_TimeSlot $model */
 		$model = $this->fixture->find($timeSlotUid);
-		self::assertTrue(
-			$model->getPlace() instanceof tx_seminars_Model_Place
-		);
+		self::assertInstanceOf(Tx_Seminars_Model_Place::class, $model->getPlace());
 	}
 
 	/*

@@ -1325,7 +1325,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$newline = ($useHtml) ? '<br />' : LF;
 
 		$formattedPlaces = array();
-		/** @var tx_seminars_Model_Place $place */
+		/** @var Tx_Seminars_Model_Place $place */
 		foreach ($event->getPlaces() as $place) {
 			$formattedPlaces[] = $this->formatPlace($place, $newline);
 		}
@@ -1336,12 +1336,12 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/**
 	 * Formats a place for the thank-you e-mail.
 	 *
-	 * @param tx_seminars_Model_Place $place the place to format
+	 * @param Tx_Seminars_Model_Place $place the place to format
 	 * @param string $newline the newline to use in formatting, must be either LF or '<br />'
 	 *
 	 * @return string the formatted place, will not be empty
 	 */
-	private function formatPlace(tx_seminars_Model_Place $place, $newline) {
+	private function formatPlace(Tx_Seminars_Model_Place $place, $newline) {
 		$address = preg_replace('/[\n|\r]+/', ' ', str_replace('<br />', ' ', strip_tags($place->getAddress())));
 
 		$countryName = ($place->hasCountry()) ? ', ' . $place->getCountry()->getLocalShortName() : '';
