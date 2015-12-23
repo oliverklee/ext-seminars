@@ -143,8 +143,8 @@ class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
 	 * @return bool TRUE if the generated list is not empty, FALSE otherwise
 	 */
 	private function setRegistrationTableMarkers($registrationsToShow) {
-		/** @var tx_seminars_BagBuilder_Registration $builder */
-		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Registration');
+		/** @var Tx_Seminars_BagBuilder_Registration $builder */
+		$builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
 		$pageData = $this->page->getPageData();
 
 		switch ($registrationsToShow) {

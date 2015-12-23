@@ -177,11 +177,11 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	/**
 	 * Creates a registrationBagBuilder with some preset limitations.
 	 *
-	 * @return tx_seminars_BagBuilder_Registration the bag builder with some preset limitations
+	 * @return Tx_Seminars_BagBuilder_Registration the bag builder with some preset limitations
 	 */
 	protected function createRegistrationBagBuilder() {
-		/** @var tx_seminars_BagBuilder_Registration $registrationBagBuilder */
-		$registrationBagBuilder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Registration');
+		/** @var Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
+		$registrationBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
 
 		if (!$this->shouldAlsoContainRegistrationsOnQueue()) {
 			$registrationBagBuilder->limitToRegular();
@@ -204,14 +204,14 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	 *
 	 * The fields are separated by semicolons and the lines by CRLF.
 	 *
-	 * @param tx_seminars_BagBuilder_Registration $builder
+	 * @param Tx_Seminars_BagBuilder_Registration $builder
 	 *        the bag builder already limited to the registrations which should be returned
 	 *
 	 * @return string[] the list of registrations, will be empty if no registrations have been given
 	 *
 	 * @throws RuntimeException
 	 */
-	protected function getRegistrationsCsvList(tx_seminars_BagBuilder_Registration $builder) {
+	protected function getRegistrationsCsvList(Tx_Seminars_BagBuilder_Registration $builder) {
 		$csvLines = array();
 		/** @var $bag Tx_Seminars_Bag_Registration */
 		$bag = $builder->build();

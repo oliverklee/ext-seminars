@@ -426,8 +426,8 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 		/** @var tx_seminars_Model_Organizer $organizer */
 		$organizer = $organizerMapper->find((int)$this->getPostData('sender'));
 
-		/** @var tx_seminars_BagBuilder_Registration $registrationBagBuilder */
-		$registrationBagBuilder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Registration');
+		/** @var Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
+		$registrationBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
 		$registrationBagBuilder->limitToEvent($this->getEvent()->getUid());
 		$registrations = $registrationBagBuilder->build();
 

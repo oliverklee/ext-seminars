@@ -206,11 +206,11 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * (regular and on the queue) for the event in $this->seminar, ordered by
 	 * creation date.
 	 *
-	 * @return tx_seminars_BagBuilder_Registration the bag builder
+	 * @return Tx_Seminars_BagBuilder_Registration the bag builder
 	 */
 	private function createRegistrationBagBuilder() {
-		/** @var tx_seminars_BagBuilder_Registration $builder */
-		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Registration');
+		/** @var Tx_Seminars_BagBuilder_Registration $builder */
+		$builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
 		$builder->limitToEvent($this->seminar->getUid());
 		$builder->limitToExistingUsers();
 		$builder->setOrderBy('crdate');

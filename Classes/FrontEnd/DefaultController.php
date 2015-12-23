@@ -2159,12 +2159,12 @@ class tx_seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 * currently logged in front-end user as attendee for the "my events" list
 	 * view.
 	 *
-	 * @return tx_seminars_BagBuilder_Registration the registrations for the
+	 * @return Tx_Seminars_BagBuilder_Registration the registrations for the
 	 *                                             "my events" list
 	 */
 	private function createRegistrationBagBuilder() {
-		/** @var tx_seminars_BagBuilder_Registration $registrationBagBuilder */
-		$registrationBagBuilder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Registration');
+		/** @var Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
+		$registrationBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
 
 		/** @var tx_seminars_Model_FrontEndUser $loggedInUser */
 		$loggedInUser = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');

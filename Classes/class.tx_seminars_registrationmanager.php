@@ -697,8 +697,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		$vacancies = $seminar->getVacancies();
 
-		/** @var tx_seminars_BagBuilder_Registration $registrationBagBuilder */
-		$registrationBagBuilder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Registration');
+		/** @var Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
+		$registrationBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
 		$registrationBagBuilder->limitToEvent($seminar->getUid());
 		$registrationBagBuilder->limitToOnQueue();
 		$registrationBagBuilder->limitToSeatsAtMost($vacancies);
