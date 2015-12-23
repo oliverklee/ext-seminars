@@ -34,8 +34,8 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 	 *                there are no categories to display
 	 */
 	public function render() {
-		/** @var tx_seminars_BagBuilder_Event $seminarBagBuilder */
-		$seminarBagBuilder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
+		/** @var Tx_Seminars_BagBuilder_Event $seminarBagBuilder */
+		$seminarBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
 		$seminarBagBuilder->setSourcePages(
 			$this->getConfValueString('pages'),
 			$this->getConfValueInteger('recursive')

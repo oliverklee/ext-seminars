@@ -21,9 +21,9 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_BagBuilder_Event
+	 * @var Tx_Seminars_BagBuilder_Event
 	 */
 	private $fixture = NULL;
 	/**
@@ -44,7 +44,7 @@ class tx_seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_BagBuilder_Event();
+		$this->fixture = new Tx_Seminars_BagBuilder_Event();
 		$this->fixture->setTestMode();
 		$this->future = $GLOBALS['EXEC_TIME'] + 50;
 		$this->past = $GLOBALS['EXEC_TIME'] - 50;

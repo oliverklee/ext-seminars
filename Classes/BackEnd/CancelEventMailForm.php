@@ -73,8 +73,8 @@ class Tx_Seminars_BackEnd_CancelEventMailForm extends Tx_Seminars_BackEnd_Abstra
 			return $result;
 		}
 
-		/** @var tx_seminars_BagBuilder_Event $builder */
-		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
+		/** @var Tx_Seminars_BagBuilder_Event $builder */
+		$builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
 		$builder->limitToEarliestBeginOrEndDate($GLOBALS['SIM_EXEC_TIME']);
 		$builder->limitToOtherDatesForTopic($this->getOldEvent());
 

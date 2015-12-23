@@ -65,8 +65,8 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList {
 
 		$this->createTableHeading();
 
-		/** @var tx_seminars_BagBuilder_Event $builder */
-		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
+		/** @var Tx_Seminars_BagBuilder_Event $builder */
+		$builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
 		$builder->setBackEndMode();
 
 		$pageData = $this->page->getPageData();

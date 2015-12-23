@@ -174,7 +174,7 @@ class tx_seminars_cli_MailNotifier {
 
 		$result = array();
 
-		/** @var $builder tx_seminars_BagBuilder_Event */
+		/** @var $builder Tx_Seminars_BagBuilder_Event */
 		$builder = $this->getSeminarBagBuilder(tx_seminars_seminar::STATUS_PLANNED);
 		$builder->limitToCancelationDeadlineReminderNotSent();
 		/** @var $bag Tx_Seminars_Bag_Event */
@@ -209,11 +209,11 @@ class tx_seminars_cli_MailNotifier {
 	 *
 	 * @param int $status status to limit the builder to, must be either tx_seminars_seminar::STATUS_PLANNED or ::CONFIRMED
 	 *
-	 * @return tx_seminars_BagBuilder_Event builder for the seminar bag
+	 * @return Tx_Seminars_BagBuilder_Event builder for the seminar bag
 	 */
 	private function getSeminarBagBuilder($status) {
-		/** @var tx_seminars_BagBuilder_Event $builder */
-		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
+		/** @var Tx_Seminars_BagBuilder_Event $builder */
+		$builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
 		$builder->setTimeFrame('upcomingWithBeginDate');
 		$builder->limitToStatus($status);
 

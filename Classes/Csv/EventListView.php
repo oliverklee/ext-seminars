@@ -95,8 +95,8 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView {
 	 * @return string[]
 	 */
 	protected function createCsvBodyLines() {
-		/** @var $builder tx_seminars_BagBuilder_Event */
-		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
+		/** @var $builder Tx_Seminars_BagBuilder_Event */
+		$builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
 		$builder->setBackEndMode();
 		$builder->setSourcePages($this->getPageUid(), self::RECURSION_DEPTH);
 

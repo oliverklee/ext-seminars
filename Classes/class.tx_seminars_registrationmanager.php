@@ -760,8 +760,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * @return Tx_Seminars_Bag_Event the event topics which still need the user's registration, may be empty
 	 */
 	public function getMissingRequiredTopics(tx_seminars_seminar $event) {
-		/** @var tx_seminars_BagBuilder_Event $builder */
-		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
+		/** @var Tx_Seminars_BagBuilder_Event $builder */
+		$builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
 		$builder->limitToRequiredEventTopics($event->getTopicUid());
 		$builder->limitToTopicsWithoutRegistrationByUser($this->getLoggedInFrontEndUserUid());
 

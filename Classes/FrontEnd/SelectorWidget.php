@@ -106,8 +106,8 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 		);
 
 		$this->instantiateStaticInfo();
-		/** @var tx_seminars_BagBuilder_Event $builder */
-		$builder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Event');
+		/** @var Tx_Seminars_BagBuilder_Event $builder */
+		$builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
 		$builder->limitToEventTypes(
 			GeneralUtility::trimExplode(',', $this->getConfValueString('limitListViewToEventTypes', 's_listView'), TRUE)
 		);
