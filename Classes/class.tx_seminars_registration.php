@@ -553,8 +553,8 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 	 * @return tx_seminars_Model_FrontEndUser the front-end user of the registration
 	 */
 	public function getFrontEndUser() {
-		/** @var tx_seminars_Mapper_FrontEndUser $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser');
+		/** @var Tx_Seminars_Mapper_FrontEndUser $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
 		return $mapper->find($this->getUser());
 	}
 
@@ -568,8 +568,8 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 			return FALSE;
 		}
 
-		/** @var tx_seminars_Mapper_FrontEndUser $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser');
+		/** @var Tx_Seminars_Mapper_FrontEndUser $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
 
 		return $mapper->existsModel($this->getUser());
 	}

@@ -2603,7 +2603,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
 		$currentUserUid = $loginManager->isLoggedIn()
-			? $loginManager->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')->getUid() : 0;
+			? $loginManager->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
 
 		switch ($whichPlugin) {
 			case 'seminar_list':
@@ -2666,7 +2666,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return FALSE;
 		}
 
-		$currentUserUid = $loginManager->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')->getUid();
+		$currentUserUid = $loginManager->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class)->getUid();
 		$hasListPid = ($registrationsListPID > 0);
 		$hasVipListPid = ($registrationsVipListPID > 0);
 
@@ -2723,7 +2723,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		$hasListPid = ($registrationsListPID > 0);
 		$hasVipListPid = ($registrationsVipListPID > 0);
-		$currentUserUid = $isLoggedIn ? $loginManager->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')->getUid() : 0;
+		$currentUserUid = $isLoggedIn ? $loginManager->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
 
 		switch ($whichPlugin) {
 			case 'csv_export':
@@ -3428,7 +3428,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		return $this->getRecordPropertyInteger('owner_feuser')
-			=== $loginManager->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')->getUid();
+			=== $loginManager->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class)->getUid();
 	}
 
 	/**

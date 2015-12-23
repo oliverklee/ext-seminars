@@ -20,7 +20,7 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_Mapper_FrontEndUser extends Tx_Oelib_Mapper_FrontEndUser {
+class Tx_Seminars_Mapper_FrontEndUser extends Tx_Oelib_Mapper_FrontEndUser {
 	/**
 	 * @var string the model class name for this mapper, must not be empty
 	 */

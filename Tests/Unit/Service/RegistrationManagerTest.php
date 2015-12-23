@@ -926,7 +926,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function canRegisterIfLoggedInForRegistrationPossibleCallsCanRegisterForSeminarHook() {
 		$this->testingFramework->createAndLoginFrontEndUser();
-		$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 
 		$hookClass = uniqid('tx_registrationHook');
 		$hook = $this->getMock($hookClass, array('canRegisterForSeminar'));
@@ -1183,7 +1183,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function canRegisterIfLoggedInMessageForRegistrationPossibleCallsCanUserRegisterForSeminarMessageHook() {
 		$this->testingFramework->createAndLoginFrontEndUser();
-		$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 
 		$hookClass = uniqid('tx_registrationHook');
 		$hook = $this->getMock($hookClass, array('canRegisterForSeminarMessage'));

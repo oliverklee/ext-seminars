@@ -117,7 +117,7 @@ class Tx_Seminars_Mapper_RegistrationTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getFrontEndUserWithFrontEndUserReturnsFrontEndUserInstance() {
 		$frontEndUser = tx_oelib_MapperRegistry::
-			get('tx_seminars_Mapper_FrontEndUser')->getNewGhost();
+			get(Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
 
 		self::assertTrue(
 			$this->fixture->getLoadedTestingModel(

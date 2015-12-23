@@ -77,7 +77,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 	private function createFrontEndUser(
 		$gender = Tx_Oelib_Model_FrontEndUser::GENDER_MALE
 	) {
-		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
+		return tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)
 			->getLoadedTestingModel(
 				array('name' => 'Foo', 'gender' => $gender)
 		);

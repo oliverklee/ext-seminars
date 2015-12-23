@@ -362,8 +362,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 			return;
 		}
 
-		/** @var $userMapper tx_seminars_Mapper_FrontEndUser */
-		$userMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser');
+		/** @var $userMapper Tx_Seminars_Mapper_FrontEndUser */
+		$userMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
 		$pageUid = $this->getConfValueInteger('sysFolderForAdditionalAttendeeUsersPID', 's_registration');
 
 		/** @var $userGroupMapper tx_seminars_Mapper_FrontEndUserGroup */
@@ -930,7 +930,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 			case 'attendees_names':
 				if ($this->isFormFieldEnabled('registered_themselves') && ($this->getFormValue('registered_themselves') == '1')) {
 					/** @var $user tx_seminars_Model_FrontEndUser */
-					$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+					$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 					$userData = array($user->getName());
 					if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
 						if ($user->hasJobTitle()) {

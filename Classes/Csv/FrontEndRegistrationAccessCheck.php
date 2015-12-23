@@ -66,7 +66,7 @@ class Tx_Seminars_Csv_FrontEndRegistrationAccessCheck implements Tx_Seminars_Int
 			return FALSE;
 		}
 
-		$user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 		$vipsGroupUid = $configuration->getAsInteger('defaultEventVipsFeGroupID');
 
 		return $this->getEvent()->isUserVip($user->getUid(), $vipsGroupUid);

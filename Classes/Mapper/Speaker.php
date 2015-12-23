@@ -36,6 +36,6 @@ class tx_seminars_Mapper_Speaker extends tx_oelib_DataMapper {
 	 */
 	protected $relations = array(
 		'skills' => 'tx_seminars_Mapper_Skill',
-		'owner' => 'tx_seminars_Mapper_FrontEndUser',
+		'owner' => Tx_Seminars_Mapper_FrontEndUser::class,
 	);
 }

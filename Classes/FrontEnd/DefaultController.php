@@ -1461,7 +1461,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 */
 	protected function getLoggedInFrontEndUserUid() {
 		$loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
-		return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser('tx_seminars_Mapper_FrontEndUser')->getUid() : 0;
+		return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
 	}
 
 	/**
@@ -1783,7 +1783,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 			$this->limitToTimeFrameSetting($builder);
 		}
 
-		$user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 
 		switch ($whatToDisplay) {
 			case 'topic_list':
@@ -2167,7 +2167,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		$registrationBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
 
 		/** @var tx_seminars_Model_FrontEndUser $loggedInUser */
-		$loggedInUser = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser('tx_seminars_Mapper_FrontEndUser');
+		$loggedInUser = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 		$registrationBagBuilder->limitToAttendee($loggedInUser);
 		$registrationBagBuilder->setOrderByEventColumn($this->getOrderByForListView());
 

@@ -2491,7 +2491,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		);
 
 		$user = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_FrontEndUser')->getLoadedTestingModel(
+			Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel(
 				array('usergroup' => $userGroup->getUid())
 		);
 		$this->testingFramework->loginFrontEndUser($user->getUid());
