@@ -32,8 +32,8 @@ defined('TYPO3_cliMode') or die('You cannot run this script directly!');
 setlocale(LC_NUMERIC, 'C');
 
 try {
-	/** @var tx_seminars_cli_MailNotifier $mailNotifier */
-	$mailNotifier = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_seminars_cli_MailNotifier');
+	/** @var Tx_Seminars_Cli_MailNotifier $mailNotifier */
+	$mailNotifier = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Tx_Seminars_Cli_MailNotifier::class);
 	$mailNotifier->start();
 } catch (Exception $exception) {
 	echo $exception->getMessage();

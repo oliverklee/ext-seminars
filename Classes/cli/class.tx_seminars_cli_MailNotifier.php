@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Saskia Metzler <saskia@merlin.owl.de>
  */
-class tx_seminars_cli_MailNotifier {
+class Tx_Seminars_Cli_MailNotifier {
 	/**
 	 * Starts the CLI module.
 	 *
