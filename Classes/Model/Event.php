@@ -247,7 +247,7 @@ class tx_seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our event type.
 	 *
-	 * @return tx_seminars_Model_EventType our event type, will be NULL if this
+	 * @return Tx_Seminars_Model_EventType|null our event type, will be null if this
 	 *                                     event has no event type
 	 */
 	public function getEventType() {

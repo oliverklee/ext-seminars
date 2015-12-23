@@ -141,13 +141,14 @@ class tx_seminars_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
 		$eventType = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_EventType::class)
 			->getLoadedTestingModel(array());
 
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Seminars_Model_EventType::class,
 			$this->fixture->getLoadedTestingModel(
 				array(
 					'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
 					'event_type' => $eventType->getUid(),
 				)
-			)->getEventType() instanceof tx_seminars_Model_EventType
+			)->getEventType()
 		);
 	}
 

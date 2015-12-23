@@ -175,13 +175,14 @@ class Tx_Seminars_Mapper_EventDateTest extends Tx_Phpunit_TestCase {
 		$topic = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
 			->getLoadedTestingModel(array('event_type' => $eventType->getUid()));
 
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Seminars_Model_EventType::class,
 			$this->fixture->getLoadedTestingModel(
 				array(
 					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topic->getUid(),
 				)
-			)->getEventType() instanceof tx_seminars_Model_EventType
+			)->getEventType()
 		);
 	}
 
