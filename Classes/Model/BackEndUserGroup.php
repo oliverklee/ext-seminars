@@ -20,7 +20,7 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_Model_BackEndUserGroup extends Tx_Oelib_Model_BackEndUserGroup implements tx_seminars_Interface_Titled {
+class tx_seminars_Model_BackEndUserGroup extends Tx_Oelib_Model_BackEndUserGroup implements Tx_Seminars_Interface_Titled {
 	/**
 	 * Returns the PID for the storage of new events.
 	 *

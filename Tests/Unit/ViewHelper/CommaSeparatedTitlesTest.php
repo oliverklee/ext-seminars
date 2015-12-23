@@ -64,7 +64,7 @@ class tx_seminars_ViewHelper_CommaSeparatedTitlesTest extends Tx_Phpunit_TestCas
 	/**
 	 * @test
 	 * @expectedException InvalidArgumentException
-	 * @expectedExceptionMessage All elements in $list must implement the interface tx_seminars_Interface_Titled.
+	 * @expectedExceptionMessage All elements in $list must implement the interface Tx_Seminars_Interface_Titled.
 	 * @expectedExceptionCode 1333658899
 	 */
 	public function renderWithElementsInListWithoutGetTitleMethodThrowsBadMethodCallException() {

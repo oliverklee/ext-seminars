@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Model_Food extends Tx_Oelib_Model implements tx_seminars_Interface_Titled {
+class tx_seminars_Model_Food extends Tx_Oelib_Model implements Tx_Seminars_Interface_Titled {
 	/**
 	 * Returns our title.
 	 *

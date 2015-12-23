@@ -12,6 +12,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5561] Rename tx_seminars_Interface_Titled to Tx_Seminars_Interface_Titled
 - [#5560] Rename tx_seminars_Interface_Hook_Registration to Tx_Seminars_Interface_Hook_Registration
 - [#5559] Rename tx_seminars_Interface_Hook_EventSingleView to Tx_Seminars_Interface_Hook_EventSingleView
 - [#5558] Rename tx_seminars_Interface_Hook_EventListView to Tx_Seminars_Interface_Hook_EventListView

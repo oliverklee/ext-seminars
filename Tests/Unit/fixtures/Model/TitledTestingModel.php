@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Fixtures_Model_TitledTestingModel extends Tx_Oelib_Model implements tx_seminars_Interface_Titled {
+class Tx_Seminars_Tests_Fixtures_Model_TitledTestingModel extends Tx_Oelib_Model implements Tx_Seminars_Interface_Titled {
 	/**
 	 * Returns our title.
 	 *

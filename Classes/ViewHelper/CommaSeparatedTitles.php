@@ -26,18 +26,18 @@ class tx_seminars_ViewHelper_CommaSeparatedTitles {
 	 *
 	 * The titles will be htmlspecialchared before being returned.
 	 *
-	 * @param Tx_Oelib_List<tx_seminars_Interface_Titled> $list
+	 * @param Tx_Oelib_List<Tx_Seminars_Interface_Titled> $list
 	 *
 	 * @return string the titles of the elements in $list as a comma-separated list or an empty string if the list is empty
 	 */
 	public function render(Tx_Oelib_List $list) {
 		$titles = array();
 
-		/** @var tx_seminars_Interface_Titled $element */
+		/** @var Tx_Seminars_Interface_Titled $element */
 		foreach ($list as $element) {
-			if (!$element instanceof tx_seminars_Interface_Titled) {
+			if (!$element instanceof Tx_Seminars_Interface_Titled) {
 				throw new InvalidArgumentException(
-					'All elements in $list must implement the interface tx_seminars_Interface_Titled.', 1333658899
+					'All elements in $list must implement the interface Tx_Seminars_Interface_Titled.', 1333658899
 				);
 			}
 

@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-interface tx_seminars_Interface_Titled {
+interface Tx_Seminars_Interface_Titled {
 	/**
 	 * Returns our title.
 	 *
