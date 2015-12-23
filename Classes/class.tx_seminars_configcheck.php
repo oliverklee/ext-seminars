@@ -367,11 +367,11 @@ class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_FrontEnd_CategoryList.
+	 * Checks the configuration for: Tx_Seminars_FrontEnd_CategoryList.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_FrontEnd_CategoryList() {
+	protected function check_Tx_Seminars_FrontEnd_CategoryList() {
 		$this->checkCommonFrontEndSettings();
 
 		$this->checkPagesForCategoryList();

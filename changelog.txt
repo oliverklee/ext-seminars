@@ -12,6 +12,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5545] Rename tx_seminars_FrontEnd_CategoryList to Tx_Seminars_FrontEnd_CategoryList
 - [#5544] Rename tx_seminars_FrontEnd_AbstractView to Tx_Seminars_FrontEnd_AbstractView
 - [#5543] Rename tx_seminars_cli_MailNotifier to Tx_Seminars_Cli_MailNotifier
 - [#5538] Rename tx_seminars_BagBuilder_Speaker to Tx_Seminars_BagBuilder_Speaker

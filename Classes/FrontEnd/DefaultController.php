@@ -308,9 +308,9 @@ class tx_seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 				$result = $countdown->render();
 				break;
 			case 'category_list':
-				/** @var tx_seminars_FrontEnd_CategoryList $categoryList */
+				/** @var Tx_Seminars_FrontEnd_CategoryList $categoryList */
 				$categoryList = GeneralUtility::makeInstance(
-					'tx_seminars_FrontEnd_CategoryList',
+					Tx_Seminars_FrontEnd_CategoryList::class,
 					$this->conf, $this->cObj
 				);
 				$result = $categoryList->render();
@@ -2008,8 +2008,8 @@ class tx_seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 			}
 			$this->setMarker('image', $image);
 
-			/** @var tx_seminars_FrontEnd_CategoryList $categoryList */
-			$categoryList = GeneralUtility::makeInstance('tx_seminars_FrontEnd_CategoryList', $this->conf, $this->cObj);
+			/** @var Tx_Seminars_FrontEnd_CategoryList $categoryList */
+			$categoryList = GeneralUtility::makeInstance(Tx_Seminars_FrontEnd_CategoryList::class, $this->conf, $this->cObj);
 			$listOfCategories = $categoryList->createCategoryList(
 				$this->seminar->getCategories()
 			);

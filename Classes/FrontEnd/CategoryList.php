@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractView {
+class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractView {
 	/**
 	 * Creates a HTML list of categories.
 	 *
