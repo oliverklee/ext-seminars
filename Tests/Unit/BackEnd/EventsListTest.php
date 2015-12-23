@@ -77,7 +77,7 @@ class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 		$this->fixture = new Tx_Seminars_BackEnd_EventsList($this->backEndModule);
 
 		$backEndGroup = tx_oelib_MapperRegistry::get(
-			'tx_seminars_Mapper_BackEndUserGroup')->getLoadedTestingModel(
+			Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
 			array('tx_seminars_events_folder' => $this->dummySysFolderPid + 1)
 		);
 		$backEndUser = tx_oelib_MapperRegistry::get(
