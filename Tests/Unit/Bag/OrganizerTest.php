@@ -20,9 +20,9 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Bag_OrganizerTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Bag_OrganizerTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_Bag_Organizer
+	 * @var Tx_Seminars_Bag_Organizer
 	 */
 	private $fixture;
 
@@ -37,7 +37,7 @@ class tx_seminars_Bag_OrganizerTest extends Tx_Phpunit_TestCase {
 
 		$this->testingFramework->createRecord('tx_seminars_organizers');
 
-		$this->fixture = new tx_seminars_Bag_Organizer('is_dummy_record=1');
+		$this->fixture = new Tx_Seminars_Bag_Organizer('is_dummy_record=1');
 	}
 
 	protected function tearDown() {

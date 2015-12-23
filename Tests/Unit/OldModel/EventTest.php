@@ -4221,7 +4221,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$this->addOrganizerRelation();
 
 		self::assertTrue(
-			$this->fixture->getOrganizerBag() instanceof tx_seminars_Bag_Organizer
+			$this->fixture->getOrganizerBag() instanceof Tx_Seminars_Bag_Organizer
 		);
 	}
 

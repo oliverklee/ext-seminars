@@ -2077,7 +2077,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * Creates an organizerbag object and returns it.
 	 * Throws an exception if there are no organizers related to this event.
 	 *
-	 * @return tx_seminars_Bag_Organizer an organizerbag object
+	 * @return Tx_Seminars_Bag_Organizer an organizerbag object
 	 *
 	 * @throws BadMethodCallException
 	 */
@@ -2265,9 +2265,9 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 		$result = array();
 
-		/** @var tx_seminars_Bag_Organizer $organizerBag */
+		/** @var Tx_Seminars_Bag_Organizer $organizerBag */
 		$organizerBag = GeneralUtility::makeInstance(
-			'tx_seminars_Bag_Organizer',
+			Tx_Seminars_Bag_Organizer::class,
 			'tx_seminars_seminars_organizing_partners_mm.uid_local = ' . $this->getUid() . ' AND ' .
 				'tx_seminars_seminars_organizing_partners_mm.uid_foreign = tx_seminars_organizers.uid',
 			'tx_seminars_seminars_organizing_partners_mm'
