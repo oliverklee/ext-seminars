@@ -5865,7 +5865,8 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_registrationmanager $fixture */
 		$fixture = new $className();
 
-		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class) ->getLoadedTestingModel(array());
+		/** @var Tx_Seminars_Model_Event $event */
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 		$registration = new tx_seminars_Model_Registration();
 		$registration->setEvent($event);
 

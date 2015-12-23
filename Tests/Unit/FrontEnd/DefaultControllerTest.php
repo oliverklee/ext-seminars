@@ -1189,7 +1189,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 
 		/** @var tx_seminars_Model_Event $event */
 		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
-		$hook = $this->getMock('tx_seminars_Interface_Hook_EventSingleView');
+		$hook = $this->getMock(Tx_Seminars_Interface_Hook_EventSingleView::class);
 		$hook->expects(self::once())->method('modifyEventSingleView')
 			->with($event, self::anything());
 		// We don't test for the second parameter (the template instance here)
