@@ -15,6 +15,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5608] Rename tx_seminars_ViewHelper_DateRange to Tx_Seminars_ViewHelper_DateRange
 - [#5607] Rename tx_seminars_ViewHelper_Countdown to Tx_Seminars_ViewHelper_Countdown
 - [#5605] Rename tx_seminars_ViewHelper_CommaSeparatedTitles to Tx_Seminars_ViewHelper_CommaSeparatedTitles
 - [#5606] Rename tx_seminars_Service_SingleViewLinkBuilder to Tx_Seminars_Service_SingleViewLinkBuilder
