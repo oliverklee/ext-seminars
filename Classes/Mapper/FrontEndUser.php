@@ -24,7 +24,7 @@ class Tx_Seminars_Mapper_FrontEndUser extends Tx_Oelib_Mapper_FrontEndUser {
 	/**
 	 * @var string the model class name for this mapper, must not be empty
 	 */
-	protected $modelClassName = 'tx_seminars_Model_FrontEndUser';
+	protected $modelClassName = Tx_Seminars_Model_FrontEndUser::class;
 
 	/**
 	 * @var string[] the (possible) relations of the created models in the format DB column name => mapper name

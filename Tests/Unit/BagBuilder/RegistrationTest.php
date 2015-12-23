@@ -435,7 +435,7 @@ class Tx_Seminars_BagBuilder_RegistrationTest extends Tx_Phpunit_TestCase {
 			array('seminar' => $eventUid, 'user' => $feUserUid)
 		);
 
-		/** @var tx_seminars_Model_FrontEndUser $user */
+		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		$user = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
 		$this->fixture->limitToAttendee($user);
 		$bag = $this->fixture->build();
@@ -461,7 +461,7 @@ class Tx_Seminars_BagBuilder_RegistrationTest extends Tx_Phpunit_TestCase {
 			'', array('tx_seminars_registration' => $registrationUid)
 		);
 
-		/** @var tx_seminars_Model_FrontEndUser $user */
+		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		$user = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
 		$this->fixture->limitToAttendee($user);
 		$bag = $this->fixture->build();
@@ -479,7 +479,7 @@ class Tx_Seminars_BagBuilder_RegistrationTest extends Tx_Phpunit_TestCase {
 		$feUserUid = $this->testingFramework->createFrontEndUser();
 		$this->testingFramework->createRecord('tx_seminars_seminars');
 
-		/** @var tx_seminars_Model_FrontEndUser $user */
+		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		$user = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
 		$this->fixture->limitToAttendee($user);
 		$bag = $this->fixture->build();
@@ -502,7 +502,7 @@ class Tx_Seminars_BagBuilder_RegistrationTest extends Tx_Phpunit_TestCase {
 			array('seminar' => $eventUid, 'user' => $feUserUid2)
 		);
 
-		/** @var tx_seminars_Model_FrontEndUser $user */
+		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		$user = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
 		$this->fixture->limitToAttendee($user);
 		$bag = $this->fixture->build();
@@ -525,7 +525,7 @@ class Tx_Seminars_BagBuilder_RegistrationTest extends Tx_Phpunit_TestCase {
 			array('seminar' => $eventUid, 'user' => $feUserUid2)
 		);
 
-		/** @var tx_seminars_Model_FrontEndUser $user */
+		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		$user = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
 		$this->fixture->limitToAttendee($user);
 		$this->fixture->limitToAttendee(NULL);

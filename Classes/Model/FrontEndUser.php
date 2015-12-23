@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
+class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
 	/**
 	 * Returns the publish setting for the user groups the user is assigned to.
 	 *

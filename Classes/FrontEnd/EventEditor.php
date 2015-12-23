@@ -282,7 +282,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	/**
 	 * Returns the logged-in user.
 	 *
-	 * @return tx_seminars_Model_FrontEndUser
+	 * @return Tx_Seminars_Model_FrontEndUser
 	 */
 	static protected function getLoggedInUser() {
 		return Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);

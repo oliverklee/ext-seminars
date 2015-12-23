@@ -2166,7 +2166,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		/** @var Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
 		$registrationBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
 
-		/** @var tx_seminars_Model_FrontEndUser $loggedInUser */
+		/** @var Tx_Seminars_Model_FrontEndUser $loggedInUser */
 		$loggedInUser = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 		$registrationBagBuilder->limitToAttendee($loggedInUser);
 		$registrationBagBuilder->setOrderByEventColumn($this->getOrderByForListView());

@@ -83,10 +83,10 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 	public function hasAccessForNonVipFrontEndUserAndNoVipAccessReturnsFalse() {
 		$this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', FALSE);
 
-		$user = $this->getMock('tx_seminars_Model_FrontEndUser');
+		$user = $this->getMock(Tx_Seminars_Model_FrontEndUser::class);
 		$userUid = 42;
 		$user->expects(self::any())->method('getUid')->will(self::returnValue($userUid));
-		/** @var $user tx_seminars_Model_FrontEndUser */
+		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
 		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);
@@ -105,10 +105,10 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 	public function hasAccessForVipFrontEndUserAndNoVipAccessReturnsFalse() {
 		$this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', FALSE);
 
-		$user = $this->getMock('tx_seminars_Model_FrontEndUser');
+		$user = $this->getMock(Tx_Seminars_Model_FrontEndUser::class);
 		$userUid = 42;
 		$user->expects(self::any())->method('getUid')->will(self::returnValue($userUid));
-		/** @var $user tx_seminars_Model_FrontEndUser */
+		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
 		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);
@@ -127,10 +127,10 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 	public function hasAccessForNonVipFrontEndUserAndVipAccessReturnsFalse() {
 		$this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', TRUE);
 
-		$user = $this->getMock('tx_seminars_Model_FrontEndUser');
+		$user = $this->getMock(Tx_Seminars_Model_FrontEndUser::class);
 		$userUid = 42;
 		$user->expects(self::any())->method('getUid')->will(self::returnValue($userUid));
-		/** @var $user tx_seminars_Model_FrontEndUser */
+		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
 		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);
@@ -149,10 +149,10 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 	public function hasAccessForVipFrontEndUserAndVipAccessReturnsTrue() {
 		$this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', TRUE);
 
-		$user = $this->getMock('tx_seminars_Model_FrontEndUser');
+		$user = $this->getMock(Tx_Seminars_Model_FrontEndUser::class);
 		$userUid = 42;
 		$user->expects(self::any())->method('getUid')->will(self::returnValue($userUid));
-		/** @var $user tx_seminars_Model_FrontEndUser */
+		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
 		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);

@@ -383,8 +383,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 		$additionalPersons = $registration->getAdditionalPersons();
 		/** @var $personData array */
 		foreach ($allPersonsData as $personData) {
-			/** @var tx_seminars_Model_FrontEndUser $user */
-			$user = GeneralUtility::makeInstance('tx_seminars_Model_FrontEndUser');
+			/** @var Tx_Seminars_Model_FrontEndUser $user */
+			$user = GeneralUtility::makeInstance(Tx_Seminars_Model_FrontEndUser::class);
 			$user->setPageUid($pageUid);
 			$user->setPassword(GeneralUtility::getRandomHexString(8));
 			$eMailAddress = $personData[3];
@@ -929,7 +929,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 				break;
 			case 'attendees_names':
 				if ($this->isFormFieldEnabled('registered_themselves') && ($this->getFormValue('registered_themselves') == '1')) {
-					/** @var $user tx_seminars_Model_FrontEndUser */
+					/** @var Tx_Seminars_Model_FrontEndUser $user */
 					$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 					$userData = array($user->getName());
 					if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {

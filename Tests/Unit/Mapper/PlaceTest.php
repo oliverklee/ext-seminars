@@ -90,11 +90,11 @@ class Tx_Seminars_Mapper_PlaceTest extends Tx_Phpunit_TestCase {
 		$frontEndUser = tx_oelib_MapperRegistry::
 			get(Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel(array());
 
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Seminars_Model_FrontEndUser::class,
 			$this->fixture->getLoadedTestingModel(
 				array('owner' => $frontEndUser->getUid())
-			)->getOwner() instanceof
-				tx_seminars_Model_FrontEndUser
+			)->getOwner()
 		);
 	}
 }

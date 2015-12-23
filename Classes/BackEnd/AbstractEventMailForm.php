@@ -614,7 +614,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * Creates the message body for the e-mail.
 	 *
-	 * @param tx_seminars_Model_FrontEndUser $user the recipient of the e-mail
+	 * @param Tx_Seminars_Model_FrontEndUser $user the recipient of the e-mail
 	 * @param tx_seminars_Model_Organizer $organizer
 	 *        the organizer which is selected as sender
 	 *
@@ -622,7 +622,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	 *                name, will be empty if no message has been set in the POST
 	 *                data
 	 */
-	private function createMessageBody(tx_seminars_Model_FrontEndUser $user, tx_seminars_Model_Organizer $organizer) {
+	private function createMessageBody(Tx_Seminars_Model_FrontEndUser $user, tx_seminars_Model_Organizer $organizer) {
 		/** @var tx_seminars_EmailSalutation $salutation */
 		$salutation = GeneralUtility::makeInstance('tx_seminars_EmailSalutation');
 		$messageText = str_replace(

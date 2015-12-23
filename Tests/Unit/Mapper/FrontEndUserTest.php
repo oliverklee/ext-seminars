@@ -47,10 +47,7 @@ class Tx_Seminars_Mapper_FrontEndUserTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function mapperForGhostReturnsSeminarsFrontEndUserInstance() {
-		self::assertTrue(
-			$this->fixture->getNewGhost()
-				instanceof tx_seminars_Model_FrontEndUser
-		);
+		self::assertInstanceOf(Tx_Seminars_Model_FrontEndUser::class, $this->fixture->getNewGhost());
 	}
 
 

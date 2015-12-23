@@ -550,7 +550,7 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 	/**
 	 * Returns the front-end user of the registration.
 	 *
-	 * @return tx_seminars_Model_FrontEndUser the front-end user of the registration
+	 * @return Tx_Seminars_Model_FrontEndUser the front-end user of the registration
 	 */
 	public function getFrontEndUser() {
 		/** @var Tx_Seminars_Mapper_FrontEndUser $mapper */

@@ -47,12 +47,12 @@ class tx_seminars_EmailSalutation {
 	 * The salutation is localized and gender-specific and contains the name of
 	 * the user.
 	 *
-	 * @param tx_seminars_Model_FrontEndUser $user
+	 * @param Tx_Seminars_Model_FrontEndUser $user
 	 *        the user to create the salutation for
 	 *
 	 * @return string the localized, gender-specific salutation with a trailing comma, will not be empty
 	 */
-	public function getSalutation(tx_seminars_Model_FrontEndUser $user) {
+	public function getSalutation(Tx_Seminars_Model_FrontEndUser $user) {
 		$salutationParts = array();
 
 		$salutationMode = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('salutation');
