@@ -25,7 +25,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Service_SingleViewLinkBuilder {
+class Tx_Seminars_Service_SingleViewLinkBuilder {
 	/**
 	 * a plugin instance that provides access to the flexforms plugin settings
 	 *

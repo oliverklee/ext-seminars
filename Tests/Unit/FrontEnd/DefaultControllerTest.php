@@ -73,7 +73,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	private $t3VarBackup = array();
 
 	/**
-	 * @var tx_seminars_Service_SingleViewLinkBuilder
+	 * @var Tx_Seminars_Service_SingleViewLinkBuilder
 	 */
 	private $linkBuilder = NULL;
 
@@ -141,7 +141,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		);
 
 		$this->linkBuilder = $this->getMock(
-			'tx_seminars_Service_SingleViewLinkBuilder',
+			Tx_Seminars_Service_SingleViewLinkBuilder::class,
 			array('createRelativeUrlForEvent')
 		);
 		$this->linkBuilder->expects(self::any())

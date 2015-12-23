@@ -92,7 +92,7 @@ class tx_seminars_registrationmanager extends Tx_Oelib_TemplateHelper {
 	/**
 	 * a link builder instance
 	 *
-	 * @var tx_seminars_Service_SingleViewLinkBuilder
+	 * @var Tx_Seminars_Service_SingleViewLinkBuilder
 	 */
 	private $linkBuilder = NULL;
 
@@ -1112,8 +1112,8 @@ class tx_seminars_registrationmanager extends Tx_Oelib_TemplateHelper {
 		tx_seminars_registration $registration, AbstractPlugin $plugin, $helloSubjectPrefix , $useHtml = FALSE
 	) {
 		if ($this->linkBuilder === NULL) {
-			/** @var $linkBuilder tx_seminars_Service_SingleViewLinkBuilder */
-			$linkBuilder = GeneralUtility::makeInstance('tx_seminars_Service_SingleViewLinkBuilder');
+			/** @var $linkBuilder Tx_Seminars_Service_SingleViewLinkBuilder */
+			$linkBuilder = GeneralUtility::makeInstance(Tx_Seminars_Service_SingleViewLinkBuilder::class);
 			$this->injectLinkBuilder($linkBuilder);
 		}
 		$this->linkBuilder->setPlugin($plugin);
@@ -1457,11 +1457,11 @@ class tx_seminars_registrationmanager extends Tx_Oelib_TemplateHelper {
 	/**
 	 * Injects a link builder.
 	 *
-	 * @param tx_seminars_Service_SingleViewLinkBuilder $linkBuilder the link builder instance to use
+	 * @param Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder the link builder instance to use
 	 *
 	 * @return void
 	 */
-	public function injectLinkBuilder(tx_seminars_Service_SingleViewLinkBuilder $linkBuilder) {
+	public function injectLinkBuilder(Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder) {
 		$this->linkBuilder = $linkBuilder;
 	}
 

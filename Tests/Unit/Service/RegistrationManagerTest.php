@@ -87,7 +87,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	protected $t3VarBackup = array();
 
 	/**
-	 * @var tx_seminars_Service_SingleViewLinkBuilder
+	 * @var Tx_Seminars_Service_SingleViewLinkBuilder
 	 */
 	protected $linkBuilder = NULL;
 
@@ -155,7 +155,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->seminar = new tx_seminars_seminarchild($this->seminarUid);
 		$this->fixture = tx_seminars_registrationmanager::getInstance();
 
-		$this->linkBuilder = $this->getMock('tx_seminars_Service_SingleViewLinkBuilder', array('createAbsoluteUrlForEvent'));
+		$this->linkBuilder = $this->getMock(Tx_Seminars_Service_SingleViewLinkBuilder::class, array('createAbsoluteUrlForEvent'));
 		$this->linkBuilder->expects(self::any())
 			->method('createAbsoluteUrlForEvent')
 			->will(self::returnValue('http://singleview.example.com/'));

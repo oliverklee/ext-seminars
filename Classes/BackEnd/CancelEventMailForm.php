@@ -39,7 +39,7 @@ class Tx_Seminars_BackEnd_CancelEventMailForm extends Tx_Seminars_BackEnd_Abstra
 	/**
 	 * a link builder instance
 	 *
-	 * @var tx_seminars_Service_SingleViewLinkBuilder
+	 * @var Tx_Seminars_Service_SingleViewLinkBuilder
 	 */
 	private $linkBuilder = NULL;
 
@@ -95,8 +95,8 @@ class Tx_Seminars_BackEnd_CancelEventMailForm extends Tx_Seminars_BackEnd_Abstra
 	 */
 	private function getSingleViewUrl() {
 		if ($this->linkBuilder == NULL) {
-			/** @var tx_seminars_Service_SingleViewLinkBuilder $linkBuilder */
-			$linkBuilder = GeneralUtility::makeInstance('tx_seminars_Service_SingleViewLinkBuilder');
+			/** @var Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder */
+			$linkBuilder = GeneralUtility::makeInstance(Tx_Seminars_Service_SingleViewLinkBuilder::class);
 			$this->injectLinkBuilder($linkBuilder);
 		}
 		$result = $this->linkBuilder->createAbsoluteUrlForEvent($this->getEvent());
@@ -137,13 +137,13 @@ class Tx_Seminars_BackEnd_CancelEventMailForm extends Tx_Seminars_BackEnd_Abstra
 	/**
 	 * Injects a link builder.
 	 *
-	 * @param tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
+	 * @param Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder
 	 *        the link builder instance to use
 	 *
 	 * @return void
 	 */
 	public function injectLinkBuilder(
-		tx_seminars_Service_SingleViewLinkBuilder $linkBuilder
+		Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder
 	) {
 		$this->linkBuilder = $linkBuilder;
 	}
