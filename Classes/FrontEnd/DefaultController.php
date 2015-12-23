@@ -2257,8 +2257,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 			return '';
 		}
 
-		/** @var tx_seminars_FrontEnd_SelectorWidget $selectorWidget */
-		$selectorWidget = GeneralUtility::makeInstance('tx_seminars_FrontEnd_SelectorWidget', $this->conf, $this->cObj);
+		/** @var Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget */
+		$selectorWidget = GeneralUtility::makeInstance(Tx_Seminars_FrontEnd_SelectorWidget::class, $this->conf, $this->cObj);
 
 		return $selectorWidget->render();
 	}
@@ -2277,7 +2277,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		// selector widget (including the search form).
 		if (is_array($this->piVars['language'])) {
 			$builder->limitToLanguages(
-				tx_seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+				Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
 					$this->piVars['language']
 				)
 			);
@@ -2287,7 +2287,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		// @see https://bugs.oliverklee.com/show_bug.cgi?id=3410
 		if (is_array($this->piVars['place'])) {
 			$builder->limitToPlaces(
-				tx_seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+				Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
 					$this->piVars['place']
 				)
 			);
@@ -2308,14 +2308,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 
 		if (is_array($this->piVars['city'])) {
 			$builder->limitToCities(
-				tx_seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+				Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
 					$this->piVars['city']
 				)
 			);
 		}
 		if (is_array($this->piVars['country'])) {
 			$builder->limitToCountries(
-				tx_seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+				Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
 					$this->piVars['country']
 				)
 			);
@@ -2324,7 +2324,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 			$builder->limitToOrganizers(
 				implode(
 					',',
-					tx_seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+					Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
 						$this->piVars['organizer']
 					)
 				)
@@ -2352,7 +2352,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 			&& (is_array($this->piVars['event_type']))
 		) {
 			$builder->limitToEventTypes(
-				tx_seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+				Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
 					$this->piVars['event_type']
 				)
 			);

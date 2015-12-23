@@ -23,9 +23,9 @@ use SJBR\StaticInfoTables\PiBaseApi;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_FrontEnd_SelectorWidget
+	 * @var Tx_Seminars_FrontEnd_SelectorWidget
 	 */
 	private $fixture = NULL;
 
@@ -43,7 +43,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
-		$this->fixture = new tx_seminars_FrontEnd_SelectorWidget(
+		$this->fixture = new Tx_Seminars_FrontEnd_SelectorWidget(
 			array(
 				'isStaticTemplateLoaded' => 1,
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
@@ -92,9 +92,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_TestCase {
 	//////////////////////////////////////////
 
 	public function testFixtureIsAFrontEndSelectorWidgetObject() {
-		self::assertTrue(
-			$this->fixture instanceof tx_seminars_FrontEnd_SelectorWidget
-		);
+		self::assertInstanceOf(Tx_Seminars_FrontEnd_SelectorWidget::class, $this->fixture);
 	}
 
 
@@ -221,7 +219,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_TestCase {
 	public function testRemoveDummyOptionFromFormDataRemovesDummyOptionAtBeginningOfArray() {
 		self::assertEquals(
 			array('CH', 'DE'),
-			tx_seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+			Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
 				array(0, 'CH', 'DE')
 			)
 		);
@@ -230,7 +228,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_TestCase {
 	public function testRemoveDummyOptionFromFormDataRemovesDummyOptionInMiddleOfArray() {
 		self::assertEquals(
 			array('CH', 'DE'),
-			tx_seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+			Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
 				array('CH', 0, 'DE')
 			)
 		);
@@ -239,7 +237,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_TestCase {
 	public function testRemoveDummyOptionFromFormDataWithEmptyFormDataReturnsEmptyArray() {
 		self::assertEquals(
 			array(),
-			tx_seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+			Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
 				array()
 			)
 		);
@@ -398,7 +396,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_TestCase {
 	 */
 	public function itemsInSearchBoxAreSortedAlphabetically() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_SelectorWidget',
+			Tx_Seminars_FrontEnd_SelectorWidget::class,
 			array(
 				'initialize', 'hasSearchField', 'getEventTypeData',
 				'getLanguageData', 'getPlaceData', 'getCityData',
