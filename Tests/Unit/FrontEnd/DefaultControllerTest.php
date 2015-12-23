@@ -1904,7 +1904,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		);
 
 		/** @var tx_seminars_Model_TimeSlot $timeSlot */
-		$timeSlot = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_TimeSlot')->find($timeSlotUid);
+		$timeSlot = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_TimeSlot::class)->find($timeSlotUid);
 		$hook = $this->getMock(Tx_Seminars_Interface_Hook_EventSingleView::class);
 		$hook->expects(self::once())->method('modifyTimeSlotListRow')
 			->with($timeSlot, self::anything());
