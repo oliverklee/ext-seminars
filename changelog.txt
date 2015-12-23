@@ -12,6 +12,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5535] Rename tx_seminars_BagBuilder_Category to Tx_Seminars_BagBuilder_Category
 - [#5534] Rename tx_seminars_BagBuilder_Abstract to Tx_Seminars_BagBuilder_Abstract
 - [#5533] Rename tx_seminars_Bag_TimeSlot to Tx_Seminars_Bag_TimeSlot
 - [#5532] Rename tx_seminars_Bag_Speaker to Tx_Seminars_Bag_Speaker

@@ -56,8 +56,8 @@ class tx_seminars_FrontEnd_CategoryList extends tx_seminars_FrontEnd_AbstractVie
 		$bag = $seminarBagBuilder->build();
 		$eventUids = $bag->getUids();
 
-		/** @var tx_seminars_BagBuilder_Category $categoryBagBuilder */
-		$categoryBagBuilder = GeneralUtility::makeInstance('tx_seminars_BagBuilder_Category');
+		/** @var Tx_Seminars_BagBuilder_Category $categoryBagBuilder */
+		$categoryBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Category::class);
 		$categoryBagBuilder->limitToEvents($eventUids);
 		$categoryBag = $categoryBagBuilder->build();
 

@@ -20,9 +20,9 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_BagBuilder_CategoryTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_BagBuilder_CategoryTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_BagBuilder_Category
+	 * @var Tx_Seminars_BagBuilder_Category
 	 */
 	private $fixture;
 	/**
@@ -33,7 +33,7 @@ class tx_seminars_BagBuilder_CategoryTest extends Tx_Phpunit_TestCase {
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_BagBuilder_Category();
+		$this->fixture = new Tx_Seminars_BagBuilder_Category();
 		$this->fixture->setTestMode();
 	}
 
