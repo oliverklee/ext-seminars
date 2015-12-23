@@ -3784,7 +3784,7 @@ tx_seminars_publication {
 
 	10 = USER
 	10 {
-		userFunc = tx_seminars_FrontEnd_PublishEvent->render
+		userFunc = Tx_Seminars_FrontEnd_PublishEvent->render
 		xhtml_cleaning = all
 	}
 }

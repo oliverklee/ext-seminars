@@ -1341,11 +1341,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 */
 	private function createReviewUrl() {
 		$url = $this->cObj->typoLink_URL(array(
-			'parameter' => $GLOBALS['TSFE']->id . ',' . tx_seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
+			'parameter' => $GLOBALS['TSFE']->id . ',' . Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
 			'additionalParams' => GeneralUtility::implodeArrayForUrl(
 				'tx_seminars_publication', array('hash' => $this->publicationHash), '', FALSE, TRUE
 			),
-			'type' => tx_seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
+			'type' => Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
 		));
 
 		return GeneralUtility::locationHeaderUrl(preg_replace(array('/\\[/', '/\\]/'), array('%5B', '%5D'), $url));
