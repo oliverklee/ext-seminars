@@ -366,8 +366,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 		$userMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
 		$pageUid = $this->getConfValueInteger('sysFolderForAdditionalAttendeeUsersPID', 's_registration');
 
-		/** @var $userGroupMapper tx_seminars_Mapper_FrontEndUserGroup */
-		$userGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup');
+		/** @var $userGroupMapper Tx_Seminars_Mapper_FrontEndUserGroup */
+		$userGroupMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUserGroup::class);
 		/** @var  Tx_Oelib_List $userGroups */
 		$userGroups = GeneralUtility::makeInstance(Tx_Oelib_List::class);
 		$userGroupUids = GeneralUtility::intExplode(
