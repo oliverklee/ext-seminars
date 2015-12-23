@@ -23,9 +23,9 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Philipp Kitzberger <philipp@cron-it.de>
  */
-class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_FrontEnd_RegistrationForm
+	 * @var Tx_Seminars_FrontEnd_RegistrationForm
 	 */
 	protected $fixture = NULL;
 
@@ -70,7 +70,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 		));
 		$this->seminarUid = $this->seminar->getUid();
 
-		$this->fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$this->fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'pageToShowAfterUnregistrationPID' => $frontEndPageUid,
 				'sendParametersToThankYouAfterRegistrationPageUrl' => 1,
@@ -666,7 +666,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField(
 		$key
 	) {
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array('showRegistrationFields' => ''),
 			$GLOBALS['TSFE']->cObj
 		);
@@ -691,7 +691,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	public function isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields(
 		$key, $isSelfContained
 	) {
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array('showRegistrationFields' => $key),
 			$GLOBALS['TSFE']->cObj
 		);
@@ -707,7 +707,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function isFormFieldEnabledForEnabledRegisteredThemselvesFieldOnlyReturnsFalseForMoreSeats() {
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array('showRegistrationFields' => 'registered_themselves'),
 			$GLOBALS['TSFE']->cObj
 		);
@@ -721,7 +721,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function isFormFieldEnabledForEnabledCompanyFieldReturnsTrueForBillingAddress() {
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array('showRegistrationFields' => 'company, billing_address'),
 			$GLOBALS['TSFE']->cObj
 		);
@@ -864,7 +864,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getNumberOfEnteredPersonsForSelfRegistrationHiddenReturnsOne() {
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'showRegistrationFields' => 'seats',
 				'form.' => array(
@@ -971,7 +971,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 */
 	public function validateNumberOfRegisteredPersonsForOnePersonAndOneSeatReturnsTrue() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_RegistrationForm',
+			Tx_Seminars_FrontEnd_RegistrationForm::class,
 			array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
 			array(), '', FALSE
 		);
@@ -993,7 +993,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 */
 	public function validateNumberOfRegisteredPersonsForOnePersonAndTwoSeatsReturnsFalse() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_RegistrationForm',
+			Tx_Seminars_FrontEnd_RegistrationForm::class,
 			array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
 			array(), '', FALSE
 		);
@@ -1015,7 +1015,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 */
 	public function validateNumberOfRegisteredPersonsForTwoPersonsAndOneSeatReturnsFalse() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_RegistrationForm',
+			Tx_Seminars_FrontEnd_RegistrationForm::class,
 			array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
 			array(), '', FALSE
 		);
@@ -1037,7 +1037,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 */
 	public function validateNumberOfRegisteredPersonsForTwoPersonsAndTwoSeatsReturnsTrue() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_RegistrationForm',
+			Tx_Seminars_FrontEnd_RegistrationForm::class,
 			array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
 			array(), '', FALSE
 		);
@@ -1107,7 +1107,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function validateNumberOfRegisteredPersonsForAttendeesNamesHiddenAndManySeatsReturnsTrue() {
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'showRegistrationFields' => 'seats',
 				'form.' => array(
@@ -1139,7 +1139,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 */
 	public function validateAdditionalPersonsEMailAddressesForDisabledFrontEndUserCreationReturnsTrue() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_RegistrationForm',
+			Tx_Seminars_FrontEnd_RegistrationForm::class,
 			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
 			array(), '', FALSE
 		);
@@ -1162,7 +1162,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 */
 	public function validateAdditionalPersonsEMailAddressesForDisabledFormFieldReturnsTrue() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_RegistrationForm',
+			Tx_Seminars_FrontEnd_RegistrationForm::class,
 			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
 			array(), '', FALSE
 		);
@@ -1185,7 +1185,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 */
 	public function validateAdditionalPersonsEMailAddressesForNoPersonsReturnsTrue() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_RegistrationForm',
+			Tx_Seminars_FrontEnd_RegistrationForm::class,
 			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
 			array(), '', FALSE
 		);
@@ -1208,7 +1208,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 */
 	public function validateAdditionalPersonsEMailAddressesForOneValidEMailAddressReturnsTrue() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_RegistrationForm',
+			Tx_Seminars_FrontEnd_RegistrationForm::class,
 			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
 			array(), '', FALSE
 		);
@@ -1233,7 +1233,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 */
 	public function validateAdditionalPersonsEMailAddressesForOneInvalidEMailAddressReturnsFalse() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_RegistrationForm',
+			Tx_Seminars_FrontEnd_RegistrationForm::class,
 			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
 			array(), '', FALSE
 		);
@@ -1258,7 +1258,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 */
 	public function validateAdditionalPersonsEMailAddressesForOneEmptyAddressReturnsFalse() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_RegistrationForm',
+			Tx_Seminars_FrontEnd_RegistrationForm::class,
 			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
 			array(), '', FALSE
 		);
@@ -1283,7 +1283,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 */
 	public function validateAdditionalPersonsEMailAddressesForOneMissingAddressReturnsFalse() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_RegistrationForm',
+			Tx_Seminars_FrontEnd_RegistrationForm::class,
 			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
 			array(), '', FALSE
 		);
@@ -1308,7 +1308,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 */
 	public function validateAdditionalPersonsEMailAddressesForOneValidAndOneInvalidEMailAddressReturnsFalse() {
 		$fixture = $this->getMock(
-			'tx_seminars_FrontEnd_RegistrationForm',
+			Tx_Seminars_FrontEnd_RegistrationForm::class,
 			array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
 			array(), '', FALSE
 		);
@@ -1442,7 +1442,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRegistrationDataForEnabledPriceFieldReturnsSelectedPriceValue() {
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'price',
@@ -1470,7 +1470,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRegistrationDataHtmlspecialcharsInterestsField() {
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'interests',
@@ -1493,7 +1493,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRegistrationDataReplacesCarriageReturnInInterestsFieldWithBr() {
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'interests',
@@ -1516,7 +1516,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRegistrationDataCanContainAttendeesNames() {
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'attendees_names',
@@ -1543,7 +1543,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 			'', array('name' => 'Jane Doe')
 		);
 
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1571,7 +1571,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 			'', array('name' => 'Jane Doe')
 		);
 
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1600,7 +1600,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 			array('name' => 'Jane Doe', 'title' => 'facility manager')
 		);
 
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1629,7 +1629,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 			array('name' => 'Jane Doe', 'title' => 'facility manager')
 		);
 
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1658,7 +1658,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 			array('name' => 'Jane Doe', 'email' => 'jane@example.com')
 		);
 
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1687,7 +1687,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 			array('name' => 'Jane Doe', 'email' => 'jane@example.com')
 		);
 
-		$fixture = new tx_seminars_FrontEnd_RegistrationForm(
+		$fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
 			array(
 				'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
 				'showRegistrationFields' => 'attendees_names,registered_themselves',

@@ -27,7 +27,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Philipp Kitzberger <philipp@cron-it.de>
  */
-class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor {
+class Tx_Seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * the same as the class name
 	 *

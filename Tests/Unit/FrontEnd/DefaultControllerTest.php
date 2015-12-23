@@ -6792,8 +6792,8 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function registrationFormHtmlspecialcharsEventTitle() {
-		$registrationFormMock = $this->getMock('tx_seminars_FrontEnd_RegistrationForm', array(), array(), '', FALSE);
-		GeneralUtility::addInstance('tx_seminars_FrontEnd_RegistrationForm', $registrationFormMock);
+		$registrationFormMock = $this->getMock(Tx_Seminars_FrontEnd_RegistrationForm::class, array(), array(), '', FALSE);
+		GeneralUtility::addInstance(Tx_Seminars_FrontEnd_RegistrationForm::class, $registrationFormMock);
 
 		$this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setConfigurationValue('what_to_display', 'seminar_registration');
