@@ -8778,7 +8778,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 
 		$registrationUid = $this->createLogInAndRegisterFeUser();
 		/** @var tx_seminars_Model_Registration $registration */
-		$registration = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration')->find($registrationUid);
+		$registration = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class)->find($registrationUid);
 
 		$hook = $this->getMock(Tx_Seminars_Interface_Hook_EventListView::class);
 		$hook->expects(self::once())->method('modifyMyEventsListRow')->with($registration, self::anything());

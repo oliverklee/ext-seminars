@@ -56,7 +56,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 		'checkboxes' => 'tx_seminars_Mapper_Checkbox',
 		'requirements' => 'tx_seminars_Mapper_Event',
 		'dependencies' => 'tx_seminars_Mapper_Event',
-		'registrations' => 'tx_seminars_Mapper_Registration',
+		'registrations' => Tx_Seminars_Mapper_Registration::class,
 	);
 
 	/**

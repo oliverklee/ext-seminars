@@ -417,8 +417,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 			$additionalPersons->add($user);
 		}
 
-		/** @var tx_seminars_Mapper_Registration $registrationMapper */
-		$registrationMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration');
+		/** @var Tx_Seminars_Mapper_Registration $registrationMapper */
+		$registrationMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
 		$registrationMapper->save($registration);
 	}
 

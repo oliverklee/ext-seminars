@@ -63,7 +63,7 @@ class tx_seminars_Mapper_FrontEndUserTest extends Tx_Phpunit_TestCase {
 	 */
 	public function relationToRegistrationIsReadFromRegistrationMapper() {
 		$registration = tx_oelib_MapperRegistry
-			::get('tx_seminars_Mapper_Registration')->getNewGhost();
+			::get(Tx_Seminars_Mapper_Registration::class)->getNewGhost();
 
 		$model = $this->fixture->getLoadedTestingModel(
 			array('tx_seminars_registration' => $registration->getUid())

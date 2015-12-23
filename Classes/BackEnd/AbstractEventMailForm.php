@@ -436,8 +436,8 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 			$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
 			$mailer = $mailerFactory->getMailer();
 
-			/** @var tx_seminars_Mapper_Registration $registrationMapper */
-			$registrationMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration');
+			/** @var Tx_Seminars_Mapper_Registration $registrationMapper */
+			$registrationMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
 			/** @var tx_seminars_registration $oldRegistration */
 			foreach ($registrations as $oldRegistration) {
 				/** @var tx_seminars_Model_Registration $registration */

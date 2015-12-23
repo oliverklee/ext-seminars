@@ -495,8 +495,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			}
 		}
 
-		/** @var tx_seminars_Mapper_Registration $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration');
+		/** @var Tx_Seminars_Mapper_Registration $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
 
 		return $mapper->find($this->registration->getUid());
 	}
@@ -826,8 +826,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		$eMailNotification->setMessage($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
 
-		/** @var tx_seminars_Mapper_Registration $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Registration');
+		/** @var Tx_Seminars_Mapper_Registration $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
 		/** @var $registration tx_seminars_Model_Registration */
 		$registration = $mapper->find($oldRegistration->getUid());
 		foreach ($this->getHooks() as $hook) {
