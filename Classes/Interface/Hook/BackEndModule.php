@@ -20,7 +20,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-interface tx_seminars_Interface_Hook_BackEndModule {
+interface Tx_Seminars_Interface_Hook_BackEndModule {
 	/**
 	 * Modifies the general e-mail sent via the back-end module.
 	 *

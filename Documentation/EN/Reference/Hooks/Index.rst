@@ -245,7 +245,7 @@ It's used like this:
 
 ::
 
-   class tx_seminarspaypal_Hooks_BackEndModule implements tx_seminars_Interface_Hook_BackEndModule {
+   class tx_seminarspaypal_Hooks_BackEndModule implements Tx_Seminars_Interface_Hook_BackEndModule {
          /**
         * Modifies the general e-mail sent via the back-end module.
         *

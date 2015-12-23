@@ -677,12 +677,12 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * Gets the hooks.
 	 *
-	 * @return tx_seminars_Interface_Hook_BackEndModule[]
+	 * @return Tx_Seminars_Interface_Hook_BackEndModule[]
 	 *         the hook objects, will be empty if no hooks have been set
 	 *
 	 * @throws \UnexpectedValueException
 	 *          if there are registered hook classes that do not implement the
-	 *          tx_seminars_Interface_Hook_BackEndModule interface
+	 *          Tx_Seminars_Interface_Hook_BackEndModule interface
 	 */
 	protected function getHooks() {
 		if (!$this->hooksHaveBeenRetrieved) {
@@ -690,10 +690,10 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 			if (is_array($hookClasses)) {
 				foreach ($hookClasses as $hookClass) {
 					$hookInstance = GeneralUtility::getUserObj($hookClass);
-					if (!($hookInstance instanceof tx_seminars_Interface_Hook_BackEndModule)) {
+					if (!($hookInstance instanceof Tx_Seminars_Interface_Hook_BackEndModule)) {
 						throw new \UnexpectedValueException(
 							'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .
-								'but does not implement the tx_seminars_Interface_Hook_BackEndModule interface.',
+								'but does not implement the Tx_Seminars_Interface_Hook_BackEndModule interface.',
 								1301928334
 						);
 					}
