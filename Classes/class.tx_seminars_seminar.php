@@ -2994,7 +2994,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 
 		// Check whether this event has an topic set.
 		if ($this->hasRecordPropertyInteger('topic')) {
-			if (tx_seminars_OldModel_Abstract::recordExists(
+			if (Tx_Seminars_OldModel_Abstract::recordExists(
 				$this->getRecordPropertyInteger('topic'),
 				'tx_seminars_seminars')
 			) {

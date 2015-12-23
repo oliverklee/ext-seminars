@@ -456,7 +456,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 			unset($this->seminar);
 		}
 
-		if (tx_seminars_OldModel_Abstract::recordExists($seminarUid, 'tx_seminars_seminars', $showHiddenRecords)) {
+		if (Tx_Seminars_OldModel_Abstract::recordExists($seminarUid, 'tx_seminars_seminars', $showHiddenRecords)) {
 			/** @var tx_seminars_seminar $seminar */
 			$seminar = GeneralUtility::makeInstance('tx_seminars_seminar', $seminarUid, FALSE, $showHiddenRecords);
 			$this->setSeminar($seminar);
@@ -494,7 +494,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	public function createRegistration($registrationUid) {
 		$result = FALSE;
 
-		if (tx_seminars_OldModel_Abstract::recordExists($registrationUid, 'tx_seminars_attendances')) {
+		if (Tx_Seminars_OldModel_Abstract::recordExists($registrationUid, 'tx_seminars_attendances')) {
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
 				'tx_seminars_attendances',

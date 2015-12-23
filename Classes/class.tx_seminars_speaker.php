@@ -21,7 +21,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_speaker extends tx_seminars_OldModel_Abstract {
+class tx_seminars_speaker extends Tx_Seminars_OldModel_Abstract {
 	/** @var int the gender type for speakers without gender */
 	const GENDER_UNKNOWN = 0;
 

@@ -626,7 +626,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		}
 
 		$objectUid = $this->getObjectUid();
-		if (($objectUid > 0) && !tx_seminars_OldModel_Abstract::recordExists($objectUid, 'tx_seminars_seminars', TRUE)) {
+		if (($objectUid > 0) && !Tx_Seminars_OldModel_Abstract::recordExists($objectUid, 'tx_seminars_seminars', TRUE)) {
 			return 'message_wrongSeminarNumber';
 		}
 

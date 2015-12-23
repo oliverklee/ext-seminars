@@ -12,6 +12,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5577] Rename tx_seminars_OldModel_Abstract to Tx_Seminars_OldModel_Abstract
 - [#5576] Rename tx_seminars_Model_AbstractTimeSpan to Tx_Seminars_Model_AbstractTimeSpan
 - [#5563] Rename tx_seminars_Mapper_BackEndUserGroup to Tx_Seminars_Mapper_BackEndUserGroup
 - [#5547] Rename tx_seminars_FrontEnd_DefaultController to Tx_Seminars_FrontEnd_DefaultController
