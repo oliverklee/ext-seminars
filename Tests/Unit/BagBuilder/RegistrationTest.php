@@ -50,9 +50,7 @@ class tx_seminars_BagBuilder_RegistrationTest extends Tx_Phpunit_TestCase {
 	///////////////////////////////////////////
 
 	public function testBagBuilderBuildsARegistrationBag() {
-		self::assertTrue(
-			$this->fixture->build() instanceof tx_seminars_Bag_Registration
-		);
+		self::assertInstanceOf(Tx_Seminars_Bag_Registration::class, $this->fixture->build());
 	}
 
 	public function testBuildReturnsBagWhichIsSortedAscendingByCrDate() {

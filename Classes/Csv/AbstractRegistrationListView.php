@@ -213,7 +213,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	 */
 	protected function getRegistrationsCsvList(tx_seminars_BagBuilder_Registration $builder) {
 		$csvLines = array();
-		/** @var $bag tx_seminars_Bag_Registration */
+		/** @var $bag Tx_Seminars_Bag_Registration */
 		$bag = $builder->build();
 
 		/** @var tx_seminars_registration $registration */

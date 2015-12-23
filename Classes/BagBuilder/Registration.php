@@ -25,7 +25,7 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 	/**
 	 * @var string class name of the bag class that will be built
 	 */
-	protected $bagClassName = 'tx_seminars_Bag_Registration';
+	protected $bagClassName = Tx_Seminars_Bag_Registration::class;
 
 	/**
 	 * @var string the table name of the bag to build

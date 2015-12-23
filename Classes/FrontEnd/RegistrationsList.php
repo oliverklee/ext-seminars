@@ -254,12 +254,12 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 	 * Creates the table body for a list of registrations and sets the subpart
 	 * in the template.
 	 *
-	 * @param tx_seminars_Bag_Registration $registrations
+	 * @param Tx_Seminars_Bag_Registration $registrations
 	 *        the registrations to list, must not be empty
 	 *
 	 * @return void
 	 */
-	private function createTableBody(tx_seminars_Bag_Registration $registrations) {
+	private function createTableBody(Tx_Seminars_Bag_Registration $registrations) {
 		$tableBody = '';
 
 		/** @var tx_seminars_registration $registration */
