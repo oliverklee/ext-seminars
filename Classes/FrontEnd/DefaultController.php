@@ -977,7 +977,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 			$this->setMarker('timeslot_place', htmlspecialchars($timeSlotData['place']));
 			$this->setMarker('timeslot_speakers', htmlspecialchars($timeSlotData['speakers']));
 
-			/** @var tx_seminars_Model_TimeSlot $timeSlot */
+			/** @var Tx_Seminars_Model_TimeSlot $timeSlot */
 			$timeSlot = $timeSlotMapper->find($timeSlotData['uid']);
 
 			foreach ($this->getSingleViewHooks() as $hook) {

@@ -37,12 +37,12 @@ interface Tx_Seminars_Interface_Hook_EventSingleView {
 	 * Modifies a list row in the time slots list (which is part of the event
 	 * single view).
 	 *
-	 * @param tx_seminars_Model_TimeSlot $timeSlot
+	 * @param Tx_Seminars_Model_TimeSlot $timeSlot
 	 *        the time slot to display in the current row
 	 * @param Tx_Oelib_Template $template
 	 *        the template that will be used to create the list row output
 	 *
 	 * @return void
 	 */
-	public function modifyTimeSlotListRow(tx_seminars_Model_TimeSlot $timeSlot, Tx_Oelib_Template $template);
+	public function modifyTimeSlotListRow(Tx_Seminars_Model_TimeSlot $timeSlot, Tx_Oelib_Template $template);
 }

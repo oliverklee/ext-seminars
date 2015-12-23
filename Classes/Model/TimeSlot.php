@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Model_TimeSlot extends Tx_Seminars_Model_AbstractTimeSpan {
+class Tx_Seminars_Model_TimeSlot extends Tx_Seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our entry date as UNIX time-stamp.
 	 *
