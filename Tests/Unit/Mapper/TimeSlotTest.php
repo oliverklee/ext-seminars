@@ -150,7 +150,7 @@ class Tx_Seminars_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getPlaceWithPlaceReturnsPlaceInstance() {
-		$place = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place')->getNewGhost();
+		$place = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Place::class)->getNewGhost();
 		$timeSlotUid = $this->testingFramework->createRecord(
 			'tx_seminars_timeslots', array('place' => $place->getUid())
 		);

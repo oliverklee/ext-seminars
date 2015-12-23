@@ -4601,8 +4601,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				Tx_Oelib_Db::enableFields('tx_seminars_sites')
 		);
 
-		/** @var tx_seminars_Mapper_Place $mapper */
-		$mapper = GeneralUtility::makeInstance('tx_seminars_Mapper_Place');
+		/** @var Tx_Seminars_Mapper_Place $mapper */
+		$mapper = GeneralUtility::makeInstance(Tx_Seminars_Mapper_Place::class);
 		return $mapper->getListOfModels($places);
 	}
 

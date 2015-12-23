@@ -40,7 +40,7 @@ class Tx_Seminars_Mapper_Event extends tx_oelib_DataMapper {
 		'categories' => Tx_Seminars_Mapper_Category::class,
 		'event_type' => Tx_Seminars_Mapper_EventType::class,
 		'timeslots' => Tx_Seminars_Mapper_TimeSlot::class,
-		'place' => 'tx_seminars_Mapper_Place',
+		'place' => Tx_Seminars_Mapper_Place::class,
 		'lodgings' => Tx_Seminars_Mapper_Lodging::class,
 		'foods' => Tx_Seminars_Mapper_Food::class,
 		'speakers' => 'tx_seminars_Mapper_Speaker',

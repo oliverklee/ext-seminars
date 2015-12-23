@@ -238,8 +238,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 				$this->seminarBag->getUids() . ')'
 		);
 
-		/** @var tx_seminars_Mapper_Place $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Place');
+		/** @var Tx_Seminars_Mapper_Place $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Place::class);
 		$this->places = $mapper->getListOfModels($dataOfPlaces);
 	}
 
