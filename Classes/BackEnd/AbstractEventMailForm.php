@@ -423,7 +423,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	private function sendEmailToAttendees() {
 		/** @var Tx_Seminars_Mapper_Organizer $organizerMapper */
 		$organizerMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class);
-		/** @var tx_seminars_Model_Organizer $organizer */
+		/** @var Tx_Seminars_Model_Organizer $organizer */
 		$organizer = $organizerMapper->find((int)$this->getPostData('sender'));
 
 		/** @var Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
@@ -615,14 +615,14 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	 * Creates the message body for the e-mail.
 	 *
 	 * @param Tx_Seminars_Model_FrontEndUser $user the recipient of the e-mail
-	 * @param tx_seminars_Model_Organizer $organizer
+	 * @param Tx_Seminars_Model_Organizer $organizer
 	 *        the organizer which is selected as sender
 	 *
 	 * @return string the message with the salutation replaced by the user's
 	 *                name, will be empty if no message has been set in the POST
 	 *                data
 	 */
-	private function createMessageBody(Tx_Seminars_Model_FrontEndUser $user, tx_seminars_Model_Organizer $organizer) {
+	private function createMessageBody(Tx_Seminars_Model_FrontEndUser $user, Tx_Seminars_Model_Organizer $organizer) {
 		/** @var tx_seminars_EmailSalutation $salutation */
 		$salutation = GeneralUtility::makeInstance('tx_seminars_EmailSalutation');
 		$messageText = str_replace(

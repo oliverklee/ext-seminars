@@ -515,9 +515,7 @@ class Tx_Seminars_Mapper_EventTest extends Tx_Phpunit_TestCase {
 
 		/** @var tx_seminars_Model_Event $model */
 		$model = $this->fixture->find($uid);
-		self::assertTrue(
-			$model->getOrganizers()->first() instanceof tx_seminars_Model_Organizer
-		);
+		self::assertInstanceOf(Tx_Seminars_Model_Organizer::class, $model->getOrganizers()->first());
 	}
 
 	/**
@@ -569,9 +567,7 @@ class Tx_Seminars_Mapper_EventTest extends Tx_Phpunit_TestCase {
 
 		/** @var tx_seminars_Model_Event $model */
 		$model = $this->fixture->find($uid);
-		self::assertTrue(
-			$model->getOrganizingPartners()->first() instanceof tx_seminars_Model_Organizer
-		);
+		self::assertInstanceOf(Tx_Seminars_Model_Organizer::class, $model->getOrganizingPartners()->first());
 	}
 
 	/**

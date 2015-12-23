@@ -20,14 +20,14 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Model_OrganizerTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Model_OrganizerTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_Model_Organizer
+	 * @var Tx_Seminars_Model_Organizer
 	 */
 	private $fixture;
 
 	protected function setUp() {
-		$this->fixture = new tx_seminars_Model_Organizer();
+		$this->fixture = new Tx_Seminars_Model_Organizer();
 	}
 
 	///////////////////////////////

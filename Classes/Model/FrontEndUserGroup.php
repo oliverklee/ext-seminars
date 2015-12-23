@@ -135,7 +135,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends Tx_Oelib_Model_FrontEndUserGro
 	/**
 	 * Returns this user group's default organizer for the FE editor.
 	 *
-	 * @return tx_seminars_Model_Organizer this group's default organizer, will
+	 * @return Tx_Seminars_Model_Organizer this group's default organizer, will
 	 *                                     be NULL if no organizer has been set
 	 */
 	public function getDefaultOrganizer() {
@@ -150,6 +150,6 @@ class Tx_Seminars_Model_FrontEndUserGroup extends Tx_Oelib_Model_FrontEndUserGro
 	 */
 	public function hasDefaultOrganizer() {
 		return ($this->getDefaultOrganizer()
-			instanceof tx_seminars_Model_Organizer);
+			instanceof Tx_Seminars_Model_Organizer);
 	}
 }

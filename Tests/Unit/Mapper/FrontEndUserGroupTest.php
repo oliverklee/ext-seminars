@@ -115,8 +115,6 @@ class Tx_Seminars_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 
 		/** @var Tx_Seminars_Model_FrontEndUserGroup $model */
 		$model = $this->fixture->find($groupUid);
-		self::assertTrue(
-			$model->getDefaultOrganizer() instanceof tx_seminars_Model_Organizer
-		);
+		self::assertInstanceOf(Tx_Seminars_Model_Organizer::class, $model->getDefaultOrganizer());
 	}
 }
