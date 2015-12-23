@@ -12,6 +12,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5556] Rename tx_seminars_FrontEnd_WizardIcon to Tx_Seminars_FrontEnd_WizardIcon
 - [#5555] Rename tx_seminars_FrontEnd_SelectorWidget to Tx_Seminars_FrontEnd_SelectorWidget
 - [#5554] Rename tx_seminars_FrontEnd_RequirementsList to Tx_Seminars_FrontEnd_RequirementsList
 - [#5553] Rename tx_seminars_FrontEnd_RegistrationsList to Tx_Seminars_FrontEnd_RegistrationsList

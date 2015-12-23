@@ -24,7 +24,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_FrontEnd_WizardIcon {
+class Tx_Seminars_FrontEnd_WizardIcon {
 	/**
 	 * Processes the wizard items array.
 	 *
