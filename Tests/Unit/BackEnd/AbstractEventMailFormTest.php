@@ -110,7 +110,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 			'organizers'
 		);
 
-		$this->fixture = new tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm($this->eventUid);
+		$this->fixture = new Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm($this->eventUid);
 		$this->fixture->setDateFormat();
 	}
 
@@ -162,7 +162,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 			'There is no event with this UID.'
 		);
 
-		new tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm(
+		new Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm(
 			$this->testingFramework->getAutoIncrement('tx_seminars_seminars')
 		);
 	}
@@ -818,7 +818,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 			'tx_seminars_seminars', $this->eventUid, array('title' => 'FooBar')
 		);
 
-		$fixture = new tx_seminars_tests_fixtures_BackEnd_TestingEventMailForm(
+		$fixture = new Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm(
 			$this->eventUid
 		);
 
