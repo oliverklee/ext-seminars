@@ -172,7 +172,7 @@ class tx_seminars_Mapper_EventDateTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getEventTypeForEventDateWithEventTypeReturnsEventTypeInstance() {
-		$eventType = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_EventType')
+		$eventType = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_EventType::class)
 			->getLoadedTestingModel(array());
 		$topic = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')
 			->getLoadedTestingModel(array('event_type' => $eventType->getUid()));
