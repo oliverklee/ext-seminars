@@ -24,7 +24,7 @@ require_once(PATH_formidableapi);
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView {
+class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView {
 	/**
 	 * @var tx_ameosformidable object that creates the form
 	 */

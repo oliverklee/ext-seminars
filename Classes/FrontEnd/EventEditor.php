@@ -24,7 +24,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
+class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	/**
 	 * @var string stores a validation error message if there was one
 	 */
