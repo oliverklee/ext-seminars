@@ -24,7 +24,7 @@ class tx_seminars_BagBuilder_Speaker extends tx_seminars_BagBuilder_Abstract {
 	/**
 	 * @var string class name of the bag class that will be built
 	 */
-	protected $bagClassName = 'tx_seminars_Bag_Speaker';
+	protected $bagClassName = Tx_Seminars_Bag_Speaker::class;
 
 	/**
 	 * @var string the table name of the bag to build

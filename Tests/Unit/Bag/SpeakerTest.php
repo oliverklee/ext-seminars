@@ -20,9 +20,9 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Bag_SpeakerTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Bag_SpeakerTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_Bag_Speaker
+	 * @var Tx_Seminars_Bag_Speaker
 	 */
 	private $fixture;
 
@@ -47,7 +47,7 @@ class tx_seminars_Bag_SpeakerTest extends Tx_Phpunit_TestCase {
 	public function testBagCanHaveAtLeastOneElement() {
 		$this->testingFramework->createRecord('tx_seminars_speakers');
 
-		$this->fixture = new tx_seminars_Bag_Speaker('is_dummy_record=1');
+		$this->fixture = new Tx_Seminars_Bag_Speaker('is_dummy_record=1');
 
 		self::assertEquals(
 			1,
@@ -61,7 +61,7 @@ class tx_seminars_Bag_SpeakerTest extends Tx_Phpunit_TestCase {
 	public function bagContainsVisibleSpeakers() {
 		$this->testingFramework->createRecord('tx_seminars_speakers');
 
-		$this->fixture = new tx_seminars_Bag_Speaker('is_dummy_record=1');
+		$this->fixture = new Tx_Seminars_Bag_Speaker('is_dummy_record=1');
 
 		self::assertFalse(
 			$this->fixture->current()->isHidden()
@@ -77,7 +77,7 @@ class tx_seminars_Bag_SpeakerTest extends Tx_Phpunit_TestCase {
 			array('hidden' => 1)
 		);
 
-		$this->fixture = new tx_seminars_Bag_Speaker('is_dummy_record=1');
+		$this->fixture = new Tx_Seminars_Bag_Speaker('is_dummy_record=1');
 
 		self::assertTrue(
 			$this->fixture->isEmpty()
@@ -93,7 +93,7 @@ class tx_seminars_Bag_SpeakerTest extends Tx_Phpunit_TestCase {
 			array('hidden' => 1)
 		);
 
-		$this->fixture = new tx_seminars_Bag_Speaker(
+		$this->fixture = new Tx_Seminars_Bag_Speaker(
 			'is_dummy_record=1',
 			'',
 			'',
@@ -116,7 +116,7 @@ class tx_seminars_Bag_SpeakerTest extends Tx_Phpunit_TestCase {
 			array('hidden' => 1)
 		);
 
-		$this->fixture = new tx_seminars_Bag_Speaker(
+		$this->fixture = new Tx_Seminars_Bag_Speaker(
 			'is_dummy_record=1',
 			'',
 			'',

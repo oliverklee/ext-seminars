@@ -30,12 +30,12 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	/**
 	 * Creates and returns a speakerbag object.
 	 *
-	 * @return tx_seminars_Bag_Speaker a speakerbag object
+	 * @return Tx_Seminars_Bag_Speaker a speakerbag object
 	 */
 	private function getSpeakerBag() {
-		/** @var tx_seminars_Bag_Speaker $bag */
+		/** @var Tx_Seminars_Bag_Speaker $bag */
 		$bag = GeneralUtility::makeInstance(
-			'tx_seminars_Bag_Speaker',
+			Tx_Seminars_Bag_Speaker::class,
 			'tx_seminars_timeslots_speakers_mm.uid_local = ' . $this->getUid() .' AND uid = uid_foreign',
 			'tx_seminars_timeslots_speakers_mm',
 			'sorting'
