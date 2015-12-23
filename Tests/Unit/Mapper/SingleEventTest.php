@@ -250,7 +250,7 @@ class tx_seminars_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $model */
 		$model = $this->fixture->find($uid);
 		self::assertTrue(
-			$model->getTargetGroups()->first() instanceof tx_seminars_Model_TargetGroup
+			$model->getTargetGroups()->first() instanceof Tx_Seminars_Model_TargetGroup
 		);
 	}
 
@@ -305,7 +305,7 @@ class tx_seminars_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $model */
 		$model = $this->fixture->find($uid);
 		self::assertTrue(
-			$model->getTargetGroups()->first() instanceof tx_seminars_Model_TargetGroup
+			$model->getTargetGroups()->first() instanceof Tx_Seminars_Model_TargetGroup
 		);
 	}
 

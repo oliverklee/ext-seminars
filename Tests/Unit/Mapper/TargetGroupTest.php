@@ -51,7 +51,7 @@ class Tx_Seminars_Mapper_TargetGroupTest extends Tx_Phpunit_TestCase {
 	 */
 	public function findWithUidReturnsTargetGroupInstance() {
 		self::assertTrue(
-			$this->fixture->find(1) instanceof tx_seminars_Model_TargetGroup
+			$this->fixture->find(1) instanceof Tx_Seminars_Model_TargetGroup
 		);
 	}
 
@@ -63,7 +63,7 @@ class Tx_Seminars_Mapper_TargetGroupTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_target_groups', array('title' => 'Housewives')
 		);
 
-		/** @var tx_seminars_Model_TargetGroup $model */
+		/** @var Tx_Seminars_Model_TargetGroup $model */
 		$model = $this->fixture->find($uid);
 		self::assertEquals(
 			'Housewives',

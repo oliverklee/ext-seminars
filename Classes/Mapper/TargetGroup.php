@@ -29,7 +29,7 @@ class Tx_Seminars_Mapper_TargetGroup extends Tx_Oelib_DataMapper {
 	/**
 	 * @var string the model class name for this mapper, must not be empty
 	 */
-	protected $modelClassName = 'tx_seminars_Model_TargetGroup';
+	protected $modelClassName = Tx_Seminars_Model_TargetGroup::class;
 
 	/**
 	 * @var string[] the (possible) relations of the created models in the format DB column name => mapper name

@@ -534,7 +534,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 			array('relatedRecordType' => 'TargetGroups')
 		) && is_object($formidable);
 
-		/** @var tx_seminars_Model_TargetGroup $targetGroup */
+		/** @var Tx_Seminars_Model_TargetGroup $targetGroup */
 		foreach ($targetGroups as $targetGroup) {
 			$frontEndUserIsOwner = ($targetGroup->getOwner() === $frontEndUser);
 
@@ -2209,8 +2209,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 			);
 		};
 
-		/** @var tx_seminars_Model_TargetGroup $targetGroup */
-		$targetGroup = GeneralUtility::makeInstance('tx_seminars_Model_TargetGroup');
+		/** @var Tx_Seminars_Model_TargetGroup $targetGroup */
+		$targetGroup = GeneralUtility::makeInstance(Tx_Seminars_Model_TargetGroup::class);
 		$targetGroup->setData(self::createBasicAuxiliaryData());
 		self::setTargetGroupData($targetGroup, 'newTargetGroup_', $formData);
 		$targetGroup->markAsDirty();
@@ -2262,7 +2262,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		$targetGroupMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
 
 		try {
-			/** @var tx_seminars_Model_TargetGroup $targetGroup */
+			/** @var Tx_Seminars_Model_TargetGroup $targetGroup */
 			$targetGroup = $targetGroupMapper->find((int)$formData['editTargetGroup_uid']);
 		} catch (Exception $exception) {
 			return $formidable->majixExecJs(
@@ -2351,7 +2351,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	 * Sets the data of a target group model based on the data given in
 	 * $formData.
 	 *
-	 * @param tx_seminars_Model_TargetGroup $targetGroup
+	 * @param Tx_Seminars_Model_TargetGroup $targetGroup
 	 *        the target group model to set the data
 	 * @param string $prefix the prefix of the form fields in $formData
 	 * @param array[] $formData
@@ -2360,7 +2360,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	 * @return void
 	 */
 	private static function setTargetGroupData(
-		tx_seminars_Model_TargetGroup $targetGroup, $prefix, array $formData
+		Tx_Seminars_Model_TargetGroup $targetGroup, $prefix, array $formData
 	) {
 		$targetGroup->setTitle($formData[$prefix . 'title']);
 		$targetGroup->setMinimumAge((int)$formData[$prefix . 'minimum_age']);
@@ -2388,7 +2388,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		$targetGroupMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
 
 		try {
-			/** @var tx_seminars_Model_TargetGroup $targetGroup */
+			/** @var Tx_Seminars_Model_TargetGroup $targetGroup */
 			$targetGroup = $targetGroupMapper->find((int)$targetGroupUid);
 		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
