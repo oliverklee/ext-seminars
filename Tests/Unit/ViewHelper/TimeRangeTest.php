@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_ViewHelper_TimeRangeTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends Tx_Phpunit_TestCase {
 	/**
 	 * some random date (2001-01-01 00:00:00)
 	 *

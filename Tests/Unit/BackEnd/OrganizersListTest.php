@@ -21,7 +21,7 @@ use TYPO3\CMS\Backend\Template\DocumentTemplate;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_BackEnd_OrganizersListTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Seminars_BackEnd_OrganizersList
 	 */

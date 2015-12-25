@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Oelib_TestingFramework
 	 */

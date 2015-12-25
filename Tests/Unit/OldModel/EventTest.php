@@ -23,7 +23,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_seminarchild
 	 */

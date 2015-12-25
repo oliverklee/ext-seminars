@@ -20,7 +20,7 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Mapper_BackEndUserGroupTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_Mapper_BackEndUserGroupTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Oelib_TestingFramework for creating dummy records
 	 */

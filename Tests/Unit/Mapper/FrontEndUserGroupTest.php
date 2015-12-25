@@ -21,7 +21,7 @@
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Seminars_Mapper_FrontEndUserGroup the object to test
 	 */

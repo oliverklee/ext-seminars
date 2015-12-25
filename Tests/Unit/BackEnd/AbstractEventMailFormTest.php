@@ -23,7 +23,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Seminars_BackEnd_AbstractEventMailForm
 	 */

@@ -22,7 +22,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Oelib_TestingFramework
 	 */

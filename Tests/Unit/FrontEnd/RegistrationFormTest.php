@@ -23,7 +23,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Philipp Kitzberger <philipp@cron-it.de>
  */
-class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Seminars_FrontEnd_RegistrationForm
 	 */

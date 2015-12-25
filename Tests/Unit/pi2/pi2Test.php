@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_Pi2_Pi2Test extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_pi2
 	 */

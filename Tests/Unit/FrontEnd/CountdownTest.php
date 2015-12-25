@@ -21,7 +21,7 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Seminars_FrontEnd_Countdown
 	 */

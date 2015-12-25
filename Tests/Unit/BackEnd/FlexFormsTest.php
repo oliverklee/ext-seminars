@@ -20,7 +20,7 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_BackEnd_FlexFormsTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_BackEnd_FlexFormsTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Seminars_FlexForms
 	 */

@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_TestingViewTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends Tx_Phpunit_TestCase {
 	/**
 	 * the fixture to test
 	 *

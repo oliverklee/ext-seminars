@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_OldModel_TimeSlotTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends Tx_Phpunit_TestCase {
 	private $fixture;
 	private $testingFramework;
 
