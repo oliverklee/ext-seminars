@@ -3,6 +3,7 @@
 Features:
 
 Bug fixes:
+- [#5416] Relax the static_info_tables version dependencies
 - [#5402] Add link to bug tracker
 - [#5400] Allow more than 22 pages in the flexforms
 - [#5321] Update .htaccess to be Apache 2.4 compatible
