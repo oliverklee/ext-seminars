@@ -172,21 +172,12 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * @return string[] data to update the database entry of the timeslot, might be empty
 	 */
 	public function getUpdateArray() {
-		$updateArray = array();
-
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4007000) {
-			$charset = 'utf-8';
-		} else {
-			$charset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset']
-				? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] : 'utf-8';
-		}
-
-		$updateArray['title'] = html_entity_decode(
-			$this->getDate(),
-			ENT_COMPAT,
-			$charset
+		return array(
+			'title' => html_entity_decode(
+				$this->getDate(),
+				ENT_COMPAT,
+				'utf-8'
+			)
 		);
-
-		return $updateArray;
 	}
 }

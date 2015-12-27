@@ -1756,29 +1756,16 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		$this->internal['descFlag'] = $this->getListViewConfValueBoolean('descFlag');
 		$this->internal['orderBy'] = $this->getListViewConfValueString('orderBy');
 
-		if (class_exists('t3lib_utility_Math')) {
-			// number of results to show in a listing
-			$this->internal['results_at_a_time'] = t3lib_utility_Math::forceIntegerInRange(
-				$this->getListViewConfValueInteger('results_at_a_time'),
-				0, 1000, 20
-			);
-			// maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.
-			$this->internal['maxPages'] = t3lib_utility_Math::forceIntegerInRange(
-				$this->getListViewConfValueInteger('maxPages'),
-				0, 1000, 2
-			);
-		} else {
-			// number of results to show in a listing
-			$this->internal['results_at_a_time'] = t3lib_div::intInRange(
-				$this->getListViewConfValueInteger('results_at_a_time'),
-				0, 1000, 20
-			);
-			// maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.
-			$this->internal['maxPages'] = t3lib_div::intInRange(
-				$this->getListViewConfValueInteger('maxPages'),
-				0, 1000, 2
-			);
-		}
+		// number of results to show in a listing
+		$this->internal['results_at_a_time'] = t3lib_utility_Math::forceIntegerInRange(
+			$this->getListViewConfValueInteger('results_at_a_time'),
+			0, 1000, 20
+		);
+		// maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.
+		$this->internal['maxPages'] = t3lib_utility_Math::forceIntegerInRange(
+			$this->getListViewConfValueInteger('maxPages'),
+			0, 1000, 2
+		);
 
 		if ($whatToDisplay === 'my_events') {
 			$builder = $this->createRegistrationBagBuilder();
@@ -1838,12 +1825,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		}
 
 		$pointer = (int)$this->piVars['pointer'];
-		if (class_exists('t3lib_utility_Math')) {
-			$resultsAtATime = t3lib_utility_Math::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
-		} else {
-			$resultsAtATime = t3lib_div::intInRange($this->internal['results_at_a_time'], 1, 1000);
-		}
-
+		$resultsAtATime = t3lib_utility_Math::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
 		$builder->setLimit(($pointer * $resultsAtATime) . ',' . $resultsAtATime);
 
 		$seminarOrRegistrationBag = $builder->build();

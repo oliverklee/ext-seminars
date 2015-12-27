@@ -10,6 +10,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5408] Drop version-specific code and class_exists
 - [#5407] Drop the old XCLASS footers
 
 Changes:

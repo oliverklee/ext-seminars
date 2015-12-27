@@ -94,7 +94,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * $allowHiddenRecords should be set to TRUE.
 	 *
 	 * @param int $uid UID of the seminar to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
-	 * @param resource|boolean $dbResult MySQL result pointer (of SELECT query). If this parameter is provided, $uid will be ignored.
+	 * @param mysqli_result|bool $dbResult MySQL result (of SELECT query). If this parameter is provided, $uid will be ignored.
 	 * @param bool $allowHiddenRecords whether it is possible to create a seminar object from a hidden record
 	 */
 	public function __construct($uid, $dbResult = FALSE, $allowHiddenRecords = FALSE) {

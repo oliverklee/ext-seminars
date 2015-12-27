@@ -33,13 +33,6 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 	protected $testingFramework = NULL;
 
 	/**
-	 * a backup of $GLOBALS['TYPO3_CONF_VARS']['BE']
-	 *
-	 * @var array
-	 */
-	protected $backEndConfigurationBackup = array();
-
-	/**
 	 * PID of the system folder in which we store our test data
 	 *
 	 * @var int
@@ -59,11 +52,6 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 	protected $configuration = NULL;
 
 	protected function setUp() {
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4007000) {
-			$this->backEndConfigurationBackup = $GLOBALS['TYPO3_CONF_VARS']['BE'];
-			$GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] = 'utf-8';
-		}
-
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('seminars') . 'locallang_db.xml');
 		$GLOBALS['LANG']->includeLLFile(t3lib_extMgm::extPath('lang') . 'locallang_general.xml');
 
@@ -93,12 +81,7 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();
-
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4007000) {
-			$GLOBALS['TYPO3_CONF_VARS']['BE'] = $this->backEndConfigurationBackup;
-		}
 	}
-
 
 	/*
 	 * Utility functions

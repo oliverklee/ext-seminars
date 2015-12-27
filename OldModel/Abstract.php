@@ -63,8 +63,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param int $uid
 	 *        The UID of the record to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
-	 * @param resource $dbResult
-	 *        MySQL result pointer (of SELECT query) object. If this parameter is provided, $uid will be ignored.
+	 * @param mysqli_result|null $dbResult
+	 *        MySQL result (of SELECT query) object. If this parameter is provided, $uid will be ignored.
 	 * @param bool $allowHiddenRecords
 	 *        whether it is possible to create an object from a hidden record
 	 */
@@ -88,8 +88,8 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 *
 	 * @param int $uid
 	 *        The UID of the record to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
-	 * @param resource|boolean $dbResult
-	 *        MySQL result pointer (of SELECT query) object. If this parameter is provided, $uid will be ignored.
+	 * @param mysqli_result|bool $dbResult
+	 *        MySQL result (of SELECT query) object. If this parameter is provided, $uid will be ignored.
 	 * @param bool $allowHiddenRecords
 	 *        whether it is possible to create an object from a hidden record
 	 *
@@ -444,7 +444,7 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 * @param int $uid the UID of the record to retrieve from the DB
 	 * @param bool $allowHiddenRecords whether to allow hidden records
 	 *
-	 * @return resource MySQL result pointer (of SELECT query) object, will be FALSE if the UID is invalid
+	 * @return mysqli_result MySQL result (of SELECT query) object, will be FALSE if the UID is invalid
 	 */
 	protected function retrieveRecord($uid, $allowHiddenRecords = FALSE) {
 		if (!self::recordExists($uid, $this->tableName, $allowHiddenRecords)) {
@@ -524,10 +524,6 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 */
 	public function getRecordIcon() {
 		$iconProperties = array();
-
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 6001000) {
-			t3lib_div::loadTCA($this->tableName);
-		}
 		$tableConfiguration =& $GLOBALS['TCA'][$this->tableName]['ctrl'];
 
 		$hiddenColumn = $tableConfiguration['enablecolumns']['disabled'];
