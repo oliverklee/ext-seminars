@@ -115,4 +115,29 @@ class tx_seminars_Model_TimeSlotTest extends tx_phpunit_testcase {
 			$this->fixture->hasEntryDate()
 		);
 	}
+
+	/*
+	 * Tests for the seminar association.
+	 */
+
+	/**
+	 * @test
+	 */
+	public function getSeminarByDefaultReturnsNull() {
+		$this->fixture->setData(array());
+
+		self::assertNull($this->fixture->getSeminar());
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSeminarSetsSeminar()
+	{
+		$seminar = new tx_seminars_Model_Event();
+
+		$this->fixture->setSeminar($seminar);
+
+		self::assertSame($seminar, $this->fixture->getSeminar());
+	}
 }

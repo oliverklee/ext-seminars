@@ -163,4 +163,37 @@ class tx_seminars_Mapper_TimeSlotTest extends tx_phpunit_testcase {
 			$model->getPlace() instanceof tx_seminars_Model_Place
 		);
 	}
+
+	/*
+	 * Tests regarding the seminar.
+	 */
+
+	/**
+	 * @test
+	 */
+	public function getSeminarWithoutSeminarReturnsNull() {
+		$uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
+
+		/** @var tx_seminars_Model_TimeSlot $model */
+		$model = $this->fixture->find($uid);
+		self::assertNull(
+			$model->getSeminar()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSeminarWithSeminarReturnsEventInstance() {
+		$seminar = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Event')->getNewGhost();
+		$timeSlotUid = $this->testingFramework->createRecord(
+			'tx_seminars_timeslots', array('seminar' => $seminar->getUid())
+		);
+
+		/** @var tx_seminars_Model_TimeSlot $model */
+		$model = $this->fixture->find($timeSlotUid);
+		self::assertTrue(
+			$model->getSeminar() instanceof tx_seminars_Model_Event
+		);
+	}
 }

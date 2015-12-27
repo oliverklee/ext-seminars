@@ -3,6 +3,7 @@
 Features:
 
 Bug fixes:
+- [#5389] Crash when confirming/canceling an event with time-slots
 - [#5416] Relax the static_info_tables version dependencies
 - [#5402] Add link to bug tracker
 - [#5400] Allow more than 22 pages in the flexforms
