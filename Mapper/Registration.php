@@ -45,7 +45,3 @@ class tx_seminars_Mapper_Registration extends tx_oelib_DataMapper {
 		'additional_persons' => 'tx_seminars_Mapper_FrontEndUser',
 	);
 }
-
-if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/Registration.php']) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/Registration.php']);
-}

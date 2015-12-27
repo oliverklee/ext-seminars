@@ -66,7 +66,3 @@ class tx_seminars_Model_EventType extends tx_oelib_Model implements tx_seminars_
 		return $this->hasInteger('single_view_page');
 	}
 }
-
-if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Model/EventType.php']) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Model/EventType.php']);
-}

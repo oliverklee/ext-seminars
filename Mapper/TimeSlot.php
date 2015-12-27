@@ -40,7 +40,3 @@ class tx_seminars_Mapper_TimeSlot extends tx_oelib_DataMapper {
 		'seminar' => 'tx_seminars_Mapper_Event',
 	);
 }
-
-if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/TimeSlot.php']) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/TimeSlot.php']);
-}

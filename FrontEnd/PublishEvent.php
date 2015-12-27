@@ -68,7 +68,3 @@ class tx_seminars_FrontEnd_PublishEvent extends tx_oelib_templatehelper {
 		return $result;
 	}
 }
-
-if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/PublishEvent.php']) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/FrontEnd/PublishEvent.php']);
-}

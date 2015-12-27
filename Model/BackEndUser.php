@@ -102,7 +102,3 @@ class tx_seminars_Model_BackEndUser extends tx_oelib_Model_BackEndUser {
 		return $result;
 	}
 }
-
-if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Model/BackEndUser.php']) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Model/BackEndUser.php']);
-}

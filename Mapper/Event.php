@@ -141,7 +141,3 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 		return $this->getModel($row);
 	}
 }
-
-if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/Event.php']) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/Event.php']);
-}

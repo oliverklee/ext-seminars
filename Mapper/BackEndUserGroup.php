@@ -33,7 +33,3 @@ class tx_seminars_Mapper_BackEndUserGroup extends tx_oelib_Mapper_BackEndUserGro
 		'subgroup' => 'tx_seminars_Mapper_BackEndUserGroup',
 	);
 }
-
-if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/BackEndUserGroup.php']) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/BackEndUserGroup.php']);
-}

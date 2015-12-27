@@ -31,7 +31,3 @@ class tx_seminars_Mapper_EventType extends tx_oelib_DataMapper {
 	 */
 	protected $modelClassName = 'tx_seminars_Model_EventType';
 }
-
-if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/EventType.php']) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Mapper/EventType.php']);
-}

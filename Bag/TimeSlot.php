@@ -68,7 +68,3 @@ class tx_seminars_Bag_TimeSlot extends tx_seminars_Bag_Abstract {
 		$this->valid();
 	}
 }
-
-if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Bag/TimeSlot.php']) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Bag/TimeSlot.php']);
-}
