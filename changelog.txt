@@ -1,6 +1,4 @@
-0.10.1 - currently working on
-
-Features:
+0.10.1 (released 2015-12-27)
 
 Bug fixes:
 - [#5389] Crash when confirming/canceling an event with time-slots
@@ -8,8 +6,6 @@ Bug fixes:
 - [#5402] Add link to bug tracker
 - [#5400] Allow more than 22 pages in the flexforms
 - [#5321] Update .htaccess to be Apache 2.4 compatible
-
-Cleanup:
 
 Changes:
 - [#5401] Mark the extension as stable
