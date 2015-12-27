@@ -58,11 +58,30 @@ class tx_seminars_Model_TimeSlot extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our place.
 	 *
-	 * @return tx_seminars_Model_Place our place, will be NULL if this time-slot
-	 *                                 has no place
+	 * @return tx_seminars_Model_Place our place, will be NULL if this time-slot has no place
 	 */
 	public function getPlace() {
 		return $this->getAsModel('place');
+	}
+
+	/**
+	 * Returns the seminar/event this time-slot belongs to.
+	 *
+	 * @return tx_seminars_Model_Event
+	 */
+	public function getSeminar() {
+		return $this->getAsModel('seminar');
+	}
+
+	/**
+	 * Sets the seminar/event this time-slot belongs to.
+	 *
+	 * @param tx_seminars_Model_Event $seminar
+	 *
+	 * @return void
+	 */
+	public function setSeminar(tx_seminars_Model_Event $seminar) {
+		$this->set('seminar', $seminar);
 	}
 }
 
