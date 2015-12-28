@@ -12,7 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
+use SJBR\StaticInfoTables\PiBaseApi;
 
 /**
  * This class creates a selector widget.
@@ -26,8 +26,9 @@ require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_statici
  */
 class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractView {
 	/**
-	 * @var tx_staticinfotables_pi1 needed for the list view to convert ISO
-	 *                              codes to country names and languages
+	 * needed for the list view to convert ISO codes to country names and languages
+	 *
+	 * @var PiBaseApi
 	 */
 	protected $staticInfo = NULL;
 
@@ -242,16 +243,16 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	}
 
 	/**
-	 * Creates an instance of tx_staticinfotables_pi1 if that has not happened yet.
+	 * Creates an instance of PiBaseApi if that has not happened yet.
 	 *
 	 * @return void
 	 */
 	protected function instantiateStaticInfo() {
-		if ($this->staticInfo instanceof tx_staticinfotables_pi1) {
+		if ($this->staticInfo !== null) {
 			return;
 		}
 
-		$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
+		$this->staticInfo = t3lib_div::makeInstance(PiBaseApi::class);
 		$this->staticInfo->init();
 	}
 

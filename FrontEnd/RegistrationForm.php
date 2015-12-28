@@ -12,7 +12,8 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-require_once(t3lib_extMgm::extPath('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
+use SJBR\StaticInfoTables\PiBaseApi;
+use SJBR\StaticInfoTables\Utility\LocalizationUtility;
 
 /**
  * This class is a controller which allows to create registrations on the FE.
@@ -64,7 +65,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	);
 
 	/**
-	 * @var tx_staticinfotables_pi1
+	 * @var PiBaseApi
 	 */
 	private $staticInfo = NULL;
 
@@ -1213,17 +1214,9 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 
 		$this->initStaticInfo();
 
-		if (class_exists('SJBR\\StaticInfoTables\\Utility\\LocalizationUtility', TRUE)) {
-			$currentLanguageCode = Tx_Oelib_ConfigurationRegistry::get('config')->getAsString('language');
-			$identifiers = array('iso' => $defaultCountryCode);
-			$result = \SJBR\StaticInfoTables\Utility\LocalizationUtility::getLabelFieldValue(
-				$identifiers, 'static_countries', $currentLanguageCode, TRUE
-			);
-		} else {
-			$result = tx_staticinfotables_div::getTitleFromIsoCode(
-				'static_countries', $defaultCountryCode, $this->staticInfo->getCurrentLanguage(), TRUE
-			);
-		}
+		$currentLanguageCode = Tx_Oelib_ConfigurationRegistry::get('config')->getAsString('language');
+		$identifiers = array('iso' => $defaultCountryCode);
+		$result = LocalizationUtility::getLabelFieldValue($identifiers, 'static_countries', $currentLanguageCode, true);
 
 		return $result;
 	}
@@ -1483,8 +1476,8 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @return void
 	 */
 	private function initStaticInfo() {
-		if ($this->staticInfo === NULL) {
-			$this->staticInfo = t3lib_div::makeInstance('tx_staticinfotables_pi1');
+		if ($this->staticInfo === null) {
+			$this->staticInfo = t3lib_div::makeInstance(PiBaseApi::class);
 			$this->staticInfo->init();
 		}
 	}

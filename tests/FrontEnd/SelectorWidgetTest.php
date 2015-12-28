@@ -12,6 +12,8 @@
  * The TYPO3 project - inspiring people to share!
  */
 
+use SJBR\StaticInfoTables\PiBaseApi;
+
 /**
  * Test case.
  *
@@ -33,8 +35,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	private $testingFramework = NULL;
 
 	/**
-	 * @var tx_staticinfotables_pi1 needed to convert ISO codes to country and
-	 *                              language names
+	 * @var PiBaseApi
 	 */
 	protected $staticInfo = NULL;
 
@@ -63,13 +64,12 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 	//////////////////////
 
 	/**
-	 * Creates and initializes an instance of tx_staticinfotables_pi1 in
-	 * $this->staticInfo.
+	 * Creates and initializes $this->staticInfo.
 	 *
 	 * @return void
 	 */
 	private function instantiateStaticInfo() {
-		$this->staticInfo = new tx_staticinfotables_pi1();
+		$this->staticInfo = new PiBaseApi();
 		$this->staticInfo->init();
 	}
 
@@ -82,7 +82,7 @@ class tx_seminars_FrontEnd_SelectorWidgetTest extends tx_phpunit_testcase {
 		$this->instantiateStaticInfo();
 
 		self::assertTrue(
-			$this->staticInfo instanceof tx_staticinfotables_pi1
+			$this->staticInfo instanceof PiBaseApi
 		);
 	}
 
