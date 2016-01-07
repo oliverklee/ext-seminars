@@ -13,6 +13,7 @@
  */
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -216,10 +217,8 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * @return void
 	 */
 	protected function addFlashMessage(FlashMessage $flashMessage) {
-		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
-		$flashMessageService = GeneralUtility::makeInstance(
-			'TYPO3\\CMS\\Core\\Messaging\\FlashMessageService'
-		);
+		/** @var FlashMessageService $flashMessageService */
+		$flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$defaultFlashMessageQueue->enqueue($flashMessage);
 	}
@@ -230,8 +229,8 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 	 * @return string
 	 */
 	protected function getRenderedFlashMessages() {
-		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
-		$flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
+		/** @var FlashMessageService $flashMessageService */
+		$flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
 

@@ -13,6 +13,7 @@
  */
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -477,10 +478,8 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * @return void
 	 */
 	protected function addFlashMessage(FlashMessage $flashMessage) {
-		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
-		$flashMessageService = GeneralUtility::makeInstance(
-			'TYPO3\\CMS\\Core\\Messaging\\FlashMessageService'
-		);
+		/** @var FlashMessageService $flashMessageService */
+		$flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$defaultFlashMessageQueue->enqueue($flashMessage);
 	}

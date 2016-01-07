@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -127,8 +128,8 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 * @return string
 	 */
 	protected function getRenderedFlashMessages() {
-		/** @var \TYPO3\CMS\Core\Messaging\FlashMessageService $flashMessageService */
-		$flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
+		/** @var FlashMessageService $flashMessageService */
+		$flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
 
@@ -141,8 +142,8 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 * @return void
 	 */
 	protected function flushAllFlashMessages() {
-		/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
-		$flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
+		/** @var $flashMessageService FlashMessageService */
+		$flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$defaultFlashMessageQueue->getAllMessagesAndFlush();
 	}
