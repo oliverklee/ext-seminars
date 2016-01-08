@@ -20,13 +20,11 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Interface_MailRole, tx_seminars_Interface_Titled {
+class tx_seminars_Model_Organizer extends Tx_Oelib_Model implements Tx_Oelib_Interface_MailRole, tx_seminars_Interface_Titled {
 	/**
 	 * Returns our name.
 	 *
-	 * @return string our namee, will not be empty
-	 *
-	 * @see EXT:oelib/Interface/tx_oelib_Interface_MailRole#getName()
+	 * @return string our name, will not be empty
 	 */
 	public function getName() {
 		return $this->getAsString('title');
@@ -80,8 +78,6 @@ class tx_seminars_Model_Organizer extends tx_oelib_Model implements tx_oelib_Int
 	 * Returns our e-mail address.
 	 *
 	 * @return string our e-mail address, will not be empty
-	 *
-	 * @see EXT:oelib/Interface/tx_oelib_Interface_MailRole#getEMailAddress()
 	 */
 	public function getEMailAddress() {
 		return $this->getAsString('email');

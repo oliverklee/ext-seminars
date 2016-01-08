@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_OldModel_Organizer extends tx_seminars_OldModel_Abstract implements tx_oelib_Interface_MailRole {
+class tx_seminars_OldModel_Organizer extends tx_seminars_OldModel_Abstract implements Tx_Oelib_Interface_MailRole {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
