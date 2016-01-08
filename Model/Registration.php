@@ -60,11 +60,11 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	/**
 	 * Sets the front-end user of this registration.
 	 *
-	 * @param tx_oelib_Model_FrontEndUser $user the front-end user to set for this registration
+	 * @param Tx_Oelib_Model_FrontEndUser $user the front-end user to set for this registration
 	 *
 	 * @return void
 	 */
-	public function setFrontEndUser(tx_oelib_Model_FrontEndUser $user) {
+	public function setFrontEndUser(Tx_Oelib_Model_FrontEndUser $user) {
 		$this->set('user', $user);
 	}
 
@@ -455,9 +455,9 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 *
 	 * @return int the gender of this registration, will be one of the
 	 *                 following:
-	 *                 - tx_oelib_Model_FrontEndUser::GENDER_MALE
-	 *                 - tx_oelib_Model_FrontEndUser::GENDER_FEMALE
-	 *                 - tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN
+	 *                 - Tx_Oelib_Model_FrontEndUser::GENDER_MALE
+	 *                 - Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE
+	 *                 - Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
 	 */
 	public function getGender() {
 		return $this->getAsInteger('gender');
@@ -468,9 +468,9 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 *
 	 * @param int $gender
 	 *        the gender of this registration, must be one of the following:
-	 *        - tx_oelib_Model_FrontEndUser::GENDER_MALE
-	 *        - tx_oelib_Model_FrontEndUser::GENDER_FEMALE
-	 *        - tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN
+	 *        - Tx_Oelib_Model_FrontEndUser::GENDER_MALE
+	 *        - Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE
+	 *        - Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
 	 *
 	 * @return void
 	 *
@@ -478,15 +478,15 @@ class tx_seminars_Model_Registration extends tx_oelib_Model implements tx_semina
 	 */
 	public function setGender($gender) {
 		$allowedGenders = array(
-			tx_oelib_Model_FrontEndUser::GENDER_MALE,
-			tx_oelib_Model_FrontEndUser::GENDER_FEMALE,
-			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+			Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
+			Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
+			Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
 		);
 
 		if (!in_array($gender, $allowedGenders)) {
 			throw new InvalidArgumentException(
-				'The parameter $gender must be one of the following: tx_oelib_Model_FrontEndUser::GENDER_MALE, ' .
-					'tx_oelib_Model_FrontEndUser::GENDER_FEMALE, tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN',
+				'The parameter $gender must be one of the following: Tx_Oelib_Model_FrontEndUser::GENDER_MALE, ' .
+					'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN',
 				1333296957
 			);
 		}

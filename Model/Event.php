@@ -1337,8 +1337,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our owner.
 	 *
-	 * @return tx_oelib_Model_FrontEndUser our owner, will be NULL if this event
-	 *                                     has no owner
+	 * @return Tx_Oelib_Model_FrontEndUser our owner, will be null if this event has no owner
 	 */
 	public function getOwner() {
 		return $this->getAsModel('owner_feuser');

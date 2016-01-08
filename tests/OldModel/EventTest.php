@@ -6064,9 +6064,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
 		$this->fixture->setOwnerUid($ownerUid);
 
-		self::assertTrue(
-			$this->fixture->getOwner() instanceof tx_oelib_Model_FrontEndUser
-		);
+		self::assertInstanceOf(Tx_Oelib_Model_FrontEndUser::class, $this->fixture->getOwner());
 	}
 
 	/**

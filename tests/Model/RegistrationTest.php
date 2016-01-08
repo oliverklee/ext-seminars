@@ -810,7 +810,7 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 		$this->fixture->setData(array());
 
 		self::assertEquals(
-			tx_oelib_Model_FrontEndUser::GENDER_MALE,
+			Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
 			$this->fixture->getGender()
 		);
 	}
@@ -820,11 +820,11 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 */
 	public function getGenderWithGenderFemaleReturnsGenderFemale() {
 		$this->fixture->setData(
-			array('gender' => tx_oelib_Model_FrontEndUser::GENDER_FEMALE)
+			array('gender' => Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE)
 		);
 
 		self::assertEquals(
-			tx_oelib_Model_FrontEndUser::GENDER_FEMALE,
+			Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
 			$this->fixture->getGender()
 		);
 	}
@@ -834,11 +834,11 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 */
 	public function getGenderWithGenderUnknownReturnsGenderUnknown() {
 		$this->fixture->setData(
-			array('gender' => tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN)
+			array('gender' => Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN)
 		);
 
 		self::assertEquals(
-			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+			Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
 			$this->fixture->getGender()
 		);
 	}
@@ -849,8 +849,8 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	public function setGenderWithUnsupportedGenderThrowsException() {
 		$this->setExpectedException(
 			'InvalidArgumentException',
-			'The parameter $gender must be one of the following: tx_oelib_Model_FrontEndUser::GENDER_MALE, ' .
-				'tx_oelib_Model_FrontEndUser::GENDER_FEMALE, tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN'
+			'The parameter $gender must be one of the following: Tx_Oelib_Model_FrontEndUser::GENDER_MALE, ' .
+				'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN'
 		);
 
 		$this->fixture->setGender(-1);
@@ -860,10 +860,10 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setGenderWithGenderMaleSetsGender() {
-		$this->fixture->setGender(tx_oelib_Model_FrontEndUser::GENDER_MALE);
+		$this->fixture->setGender(Tx_Oelib_Model_FrontEndUser::GENDER_MALE);
 
 		self::assertEquals(
-			tx_oelib_Model_FrontEndUser::GENDER_MALE,
+			Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
 			$this->fixture->getGender()
 		);
 	}
@@ -872,10 +872,10 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setGenderWithGenderFemaleSetsGender() {
-		$this->fixture->setGender(tx_oelib_Model_FrontEndUser::GENDER_FEMALE);
+		$this->fixture->setGender(Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE);
 
 		self::assertEquals(
-			tx_oelib_Model_FrontEndUser::GENDER_FEMALE,
+			Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
 			$this->fixture->getGender()
 		);
 	}
@@ -884,10 +884,10 @@ class tx_seminars_Model_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function setGenderWithGenderUnknownSetsGender() {
-		$this->fixture->setGender(tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN);
+		$this->fixture->setGender(Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN);
 
 		self::assertEquals(
-			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+			Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
 			$this->fixture->getGender()
 		);
 	}

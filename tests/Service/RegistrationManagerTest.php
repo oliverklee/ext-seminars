@@ -6105,11 +6105,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData(
-			$registration, array('gender' => (string) tx_oelib_Model_FrontEndUser::GENDER_MALE)
+			$registration, array('gender' => (string) Tx_Oelib_Model_FrontEndUser::GENDER_MALE)
 		);
 
 		self::assertSame(
-			tx_oelib_Model_FrontEndUser::GENDER_MALE,
+			Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
 			$registration->getGender()
 		);
 	}
@@ -6128,11 +6128,11 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$registration->setEvent($event);
 
 		$fixture->setRegistrationData(
-			$registration, array('gender' => (string) tx_oelib_Model_FrontEndUser::GENDER_FEMALE)
+			$registration, array('gender' => (string) Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE)
 		);
 
 		self::assertSame(
-			tx_oelib_Model_FrontEndUser::GENDER_FEMALE,
+			Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
 			$registration->getGender()
 		);
 	}
@@ -6153,7 +6153,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture->setRegistrationData($registration, array('gender' => '42'));
 
 		self::assertSame(
-			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+			Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
 			$registration->getGender()
 		);
 	}
@@ -6174,7 +6174,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture->setRegistrationData($registration, array('gender' => 'Mr. Fantastic'));
 
 		self::assertSame(
-			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+			Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
 			$registration->getGender()
 		);
 	}
@@ -6195,7 +6195,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture->setRegistrationData($registration, array('gender' => ''));
 
 		self::assertSame(
-			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+			Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
 			$registration->getGender()
 		);
 	}
@@ -6216,7 +6216,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture->setRegistrationData($registration, array());
 
 		self::assertSame(
-			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+			Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
 			$registration->getGender()
 		);
 	}

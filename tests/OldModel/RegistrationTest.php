@@ -1065,9 +1065,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getFrontEndUserWithExistingFrontEndUserReturnsFrontEndUser() {
-		self::assertTrue(
-			$this->fixture->getFrontEndUser() instanceof tx_oelib_Model_FrontEndUser
-		);
+		self::assertInstanceOf(Tx_Oelib_Model_FrontEndUser::class, $this->fixture->getFrontEndUser());
 	}
 
 

@@ -599,15 +599,15 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$company = isset($formData['company']) ? strip_tags($formData['company']) : '';
 		$registration->setCompany($company);
 
-		$validGenderMale = (string) tx_oelib_Model_FrontEndUser::GENDER_MALE;
-		$validGenderFemale = (string) tx_oelib_Model_FrontEndUser::GENDER_FEMALE;
+		$validGenderMale = (string) Tx_Oelib_Model_FrontEndUser::GENDER_MALE;
+		$validGenderFemale = (string) Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE;
 		if (isset($formData['gender'])
 			&& (($formData['gender'] === $validGenderMale) || ($formData['gender'] === $validGenderFemale)
 			)
 		) {
 			$gender = (int)$formData['gender'];
 		} else {
-			$gender = tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN;
+			$gender = Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN;
 		}
 		$registration->setGender($gender);
 

@@ -67,15 +67,15 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	 *
 	 * @param int $gender
 	 *        the gender for the FE user, must be one of
-	 *        "tx_oelib_Model_FrontEndUser::GENDER_MALE",
-	 *        "tx_oelib_Model_FrontEndUser::GENDER_FEMALE" or
-	 *        "tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN", may be empty
+	 *        "Tx_Oelib_Model_FrontEndUser::GENDER_MALE",
+	 *        "Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE" or
+	 *        "Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN", may be empty
 	 *
 	 * @return tx_seminars_Model_FrontEndUser the loaded testing model of a
 	 *                                        FE user
 	 */
 	private function createFrontEndUser(
-		$gender = tx_oelib_Model_FrontEndUser::GENDER_MALE
+		$gender = Tx_Oelib_Model_FrontEndUser::GENDER_MALE
 	) {
 		return tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUser')
 			->getLoadedTestingModel(
@@ -117,8 +117,8 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		$this->skipWithoutGenderField();
 
 		self::assertSame(
-			tx_oelib_Model_FrontEndUser::GENDER_FEMALE,
-			$this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE)->getGender()
+			Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
+			$this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE)->getGender()
 		);
 	}
 
@@ -142,7 +142,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	public function getSalutationForMaleUserReturnsMaleSalutation() {
 		$this->skipWithoutGenderField();
 
-		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_MALE);
+		$user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_MALE);
 
 		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_0'),
@@ -156,7 +156,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	public function getSalutationForMaleUserReturnsUsersNameWithGenderSpecificTitle() {
 		$this->skipWithoutGenderField();
 
-		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_MALE);
+		$user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_MALE);
 
 		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_0') .
@@ -171,7 +171,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	public function getSalutationForFemaleUserReturnsFemaleSalutation() {
 		$this->skipWithoutGenderField();
 
-		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE);
+		$user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE);
 
 		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
@@ -186,7 +186,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	public function getSalutationForFemaleUserReturnsUsersNameWithGenderSpecificTitle() {
 		$this->skipWithoutGenderField();
 
-		$user = $this->createFrontEndUser(tx_oelib_Model_FrontEndUser::GENDER_FEMALE);
+		$user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE);
 
 		self::assertContains(
 			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_1') .
@@ -200,7 +200,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	 */
 	public function getSalutationForUnknownUserReturnsUnknownSalutation() {
 		$user = $this->createFrontEndUser(
-			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN
+			Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
 		);
 
 		self::assertContains(
@@ -215,7 +215,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 	 */
 	public function getSalutationForUnknownUserReturnsUsersNameWithGenderSpecificTitle() {
 		$user = $this->createFrontEndUser(
-			tx_oelib_Model_FrontEndUser::GENDER_UNKNOWN
+			Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
 		);
 
 		self::assertContains(

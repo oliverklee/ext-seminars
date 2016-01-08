@@ -3392,8 +3392,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	/**
 	 * Gets this event's owner (the FE user who has created this event).
 	 *
-	 * @return tx_oelib_Model_FrontEndUser the owner, will be NULL if the event
-	 *                                     has no owner
+	 * @return Tx_Oelib_Model_FrontEndUser the owner, will be null if the event has no owner
 	 */
 	public function getOwner() {
 		if (!$this->hasRecordPropertyInteger('owner_feuser')) {

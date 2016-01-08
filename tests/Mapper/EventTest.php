@@ -621,11 +621,9 @@ class tx_seminars_Mapper_EventTest extends tx_phpunit_testcase {
 		$frontEndUser = tx_oelib_MapperRegistry::
 			get('tx_oelib_Mapper_FrontEndUser')->getLoadedTestingModel(array());
 
-		self::assertTrue(
-			$this->fixture->getLoadedTestingModel(
-				array('owner_feuser' => $frontEndUser->getUid())
-			)->getOwner() instanceof
-				tx_oelib_Model_FrontEndUser
+		self::assertInstanceOf(
+			Tx_Oelib_Model_FrontEndUser::class,
+			$this->fixture->getLoadedTestingModel(array('owner_feuser' => $frontEndUser->getUid()))->getOwner()
 		);
 	}
 
@@ -657,9 +655,7 @@ class tx_seminars_Mapper_EventTest extends tx_phpunit_testcase {
 
 		/** @var tx_seminars_Model_Event $model */
 		$model = $this->fixture->find($uid);
-		self::assertTrue(
-			$model->getEventManagers()->first() instanceof tx_oelib_Model_FrontEndUser
-		);
+		self::assertInstanceOf(Tx_Oelib_Model_FrontEndUser::class, $model->getEventManagers()->first());
 	}
 
 	/**

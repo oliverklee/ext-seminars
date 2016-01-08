@@ -16,6 +16,7 @@ Cleanup:
 - [#5407] Drop the old XCLASS footers
 
 Changes:
+- [#5451] Rename tx_oelib_Model_FrontEndUser to Tx_Oelib_Model_FrontEndUser
 - [#5447] Rename tx_oelib_Interface_MailRole to Tx_Oelib_Interface_MailRole
 - [#5438] Change tslib_cObj to ContentObjectRenderer
 - [#5437] Change tslib_pibase to \TYPO3\CMS\Frontend\Plugin\AbstractPlugin
