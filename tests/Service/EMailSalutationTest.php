@@ -434,7 +434,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 			'tx_seminars_seminars',
 			array(
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
-				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY,
+				'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 
@@ -447,7 +447,7 @@ class tx_seminars_Service_EMailSalutationTest extends tx_phpunit_testcase {
 		self::assertContains(
 			strftime($dateFormatD, $GLOBALS['SIM_EXEC_TIME']) .
 				'-' .
-				strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY),
+				strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY),
 			$this->subject->createIntroduction('%s', $event)
 		);
 	}

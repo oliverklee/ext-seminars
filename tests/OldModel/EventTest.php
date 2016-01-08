@@ -64,8 +64,8 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 
 		$this->now = $GLOBALS['SIM_EXEC_TIME'];
-		$this->beginDate = ($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
-		$this->unregistrationDeadline = ($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
+		$this->beginDate = ($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+		$this->unregistrationDeadline = ($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 
 		$uid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
@@ -2060,7 +2060,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 		$this->fixture->setUnregistrationDeadline(0);
-		$this->fixture->setBeginDate($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
+		$this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 		$this->fixture->setAttendancesMax(10);
 
 		self::assertFalse(
@@ -2092,7 +2092,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setUnregistrationDeadline(0);
-		$this->fixture->setBeginDate($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
+		$this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 		$this->fixture->setAttendancesMax(10);
 
 		self::assertTrue(
@@ -2108,7 +2108,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setGlobalUnregistrationDeadline(5);
 		$this->fixture->setUnregistrationDeadline(0);
-		$this->fixture->setBeginDate($this->now + tx_oelib_Time::SECONDS_PER_DAY);
+		$this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_DAY);
 		$this->fixture->setAttendancesMax(10);
 
 		self::assertFalse(
@@ -2140,9 +2140,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 		$this->fixture->setUnregistrationDeadline(
-			$this->now + tx_oelib_Time::SECONDS_PER_DAY
+			$this->now + Tx_Oelib_Time::SECONDS_PER_DAY
 		);
-		$this->fixture->setBeginDate($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
+		$this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 		$this->fixture->setAttendancesMax(10);
 
 		self::assertTrue(
@@ -2158,9 +2158,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 		$this->fixture->setUnregistrationDeadline(
-			$this->now - tx_oelib_Time::SECONDS_PER_DAY
+			$this->now - Tx_Oelib_Time::SECONDS_PER_DAY
 		);
-		$this->fixture->setBeginDate($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
+		$this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 		$this->fixture->setAttendancesMax(10);
 
 		self::assertFalse(
@@ -2176,7 +2176,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 		$this->fixture->setUnregistrationDeadline(
-			$this->now + tx_oelib_Time::SECONDS_PER_DAY
+			$this->now + Tx_Oelib_Time::SECONDS_PER_DAY
 		);
 		$this->fixture->setBeginDate(0);
 		$this->fixture->setAttendancesMax(10);
@@ -2194,7 +2194,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 		$this->fixture->setUnregistrationDeadline(
-			$this->now - tx_oelib_Time::SECONDS_PER_DAY
+			$this->now - Tx_Oelib_Time::SECONDS_PER_DAY
 		);
 		$this->fixture->setBeginDate(0);
 		$this->fixture->setAttendancesMax(10);
@@ -2212,9 +2212,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setUnregistrationDeadline(
-			$this->now + tx_oelib_Time::SECONDS_PER_DAY
+			$this->now + Tx_Oelib_Time::SECONDS_PER_DAY
 		);
-		$this->fixture->setBeginDate($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
+		$this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 		$this->fixture->setAttendancesMax(10);
 
 		self::assertTrue(
@@ -2231,9 +2231,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setGlobalUnregistrationDeadline(2);
 		$this->fixture->setAttendancesMax(10);
 		$this->fixture->setUnregistrationDeadline(
-			$this->now - tx_oelib_Time::SECONDS_PER_DAY
+			$this->now - Tx_Oelib_Time::SECONDS_PER_DAY
 		);
-		$this->fixture->setBeginDate($this->now + tx_oelib_Time::SECONDS_PER_DAY);
+		$this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_DAY);
 
 		self::assertFalse(
 			$this->fixture->isUnregistrationPossible()
@@ -2248,7 +2248,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setUnregistrationDeadline(
-			$this->now + tx_oelib_Time::SECONDS_PER_DAY
+			$this->now + Tx_Oelib_Time::SECONDS_PER_DAY
 		);
 		$this->fixture->setBeginDate(0);
 		$this->fixture->setAttendancesMax(10);
@@ -2268,7 +2268,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setBeginDate(0);
 		$this->fixture->setAttendancesMax(10);
 		$this->fixture->setUnregistrationDeadline(
-			$this->now - tx_oelib_Time::SECONDS_PER_DAY
+			$this->now - Tx_Oelib_Time::SECONDS_PER_DAY
 		);
 
 		self::assertFalse(
@@ -2283,9 +2283,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setAllowUnregistrationWithEmptyWaitingList(TRUE);
 
 		$this->fixture->setGlobalUnregistrationDeadline(1);
-		$this->fixture->setBeginDate($this->now + 2 * tx_oelib_Time::SECONDS_PER_DAY);
+		$this->fixture->setBeginDate($this->now + 2 * Tx_Oelib_Time::SECONDS_PER_DAY);
 		$this->fixture->setUnregistrationDeadline(
-			$this->now - tx_oelib_Time::SECONDS_PER_DAY
+			$this->now - Tx_Oelib_Time::SECONDS_PER_DAY
 		);
 		$this->fixture->setAttendancesMax(10);
 
@@ -2303,9 +2303,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setAttendancesMax(10);
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setUnregistrationDeadline(
-			$this->now + tx_oelib_Time::SECONDS_PER_DAY
+			$this->now + Tx_Oelib_Time::SECONDS_PER_DAY
 		);
-		$this->fixture->setBeginDate($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
+		$this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 
 		self::assertTrue(
 			$this->fixture->isUnregistrationPossible()
@@ -2321,9 +2321,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setNeedsRegistration(FALSE);
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setUnregistrationDeadline(
-			$this->now + tx_oelib_Time::SECONDS_PER_DAY
+			$this->now + Tx_Oelib_Time::SECONDS_PER_DAY
 		);
-		$this->fixture->setBeginDate($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
+		$this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 
 		self::assertFalse(
 			$this->fixture->isUnregistrationPossible()
@@ -2339,9 +2339,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 		$this->fixture->setAttendancesMax(10);
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setUnregistrationDeadline(
-			$this->now + tx_oelib_Time::SECONDS_PER_DAY
+			$this->now + Tx_Oelib_Time::SECONDS_PER_DAY
 		);
-		$this->fixture->setBeginDate($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
+		$this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 		$this->fixture->setRegistrationQueue(TRUE);
 		$this->fixture->setNumberOfAttendancesOnQueue(0);
 
@@ -2401,7 +2401,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlineSetInEventReturnsThisDeadline() {
-		$this->fixture->setBeginDate(($this->now + tx_oelib_Time::SECONDS_PER_WEEK));
+		$this->fixture->setBeginDate(($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK));
 		$this->fixture->setUnregistrationDeadline($this->now);
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 
@@ -2415,7 +2415,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getUnregistrationDeadlineFromModelAndConfigurationForNoUnregistrationDeadlineSetInEventAndNoDeadlineConfigurationSetReturnsZero() {
-		$this->fixture->setBeginDate($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
+		$this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 		$this->fixture->setUnregistrationDeadline(0);
 		$this->fixture->setGlobalUnregistrationDeadline(0);
 
@@ -2429,12 +2429,12 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getUnregistrationDeadlineFromModelAndConfigurationForNoUnregistrationDeadlineSetInEventAndDeadlineConfigurationSetReturnsCalculatedDeadline() {
-		$this->fixture->setBeginDate($this->now + tx_oelib_Time::SECONDS_PER_WEEK);
+		$this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 		$this->fixture->setUnregistrationDeadline(0);
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 
 		self::assertSame(
-			$this->now + tx_oelib_Time::SECONDS_PER_WEEK - tx_oelib_Time::SECONDS_PER_DAY,
+			$this->now + Tx_Oelib_Time::SECONDS_PER_WEEK - Tx_Oelib_Time::SECONDS_PER_DAY,
 			$this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
 		);
 	}
@@ -2443,7 +2443,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlinesSetInEventAndConfigurationReturnsEventsDeadline() {
-		$this->fixture->setBeginDate(($this->now + tx_oelib_Time::SECONDS_PER_WEEK));
+		$this->fixture->setBeginDate(($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK));
 		$this->fixture->setUnregistrationDeadline($this->now);
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 
@@ -2559,9 +2559,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setUnregistrationDeadline(
-			($this->now + (6*tx_oelib_Time::SECONDS_PER_DAY))
+			($this->now + (6*Tx_Oelib_Time::SECONDS_PER_DAY))
 		);
-		$this->fixture->setBeginDate(($this->now + tx_oelib_Time::SECONDS_PER_WEEK));
+		$this->fixture->setBeginDate(($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK));
 
 		self::assertTrue(
 			$this->fixture->isUnregistrationPossible()
@@ -2579,9 +2579,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setUnregistrationDeadline(
-			($this->now + (6*tx_oelib_Time::SECONDS_PER_DAY))
+			($this->now + (6*Tx_Oelib_Time::SECONDS_PER_DAY))
 		);
-		$this->fixture->setBeginDate(($this->now + tx_oelib_Time::SECONDS_PER_WEEK));
+		$this->fixture->setBeginDate(($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK));
 
 		self::assertFalse(
 			$this->fixture->isUnregistrationPossible()
@@ -2601,9 +2601,9 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 		$this->fixture->setGlobalUnregistrationDeadline(1);
 		$this->fixture->setUnregistrationDeadline(
-			($this->now + (6*tx_oelib_Time::SECONDS_PER_DAY))
+			($this->now + (6*Tx_Oelib_Time::SECONDS_PER_DAY))
 		);
-		$this->fixture->setBeginDate(($this->now + tx_oelib_Time::SECONDS_PER_WEEK));
+		$this->fixture->setBeginDate(($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK));
 
 		self::assertTrue(
 			$this->fixture->isUnregistrationPossible()
@@ -7610,7 +7610,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 	 */
 	public function getEventDataForEventWithDateUsesHyphenAsDateSeparator() {
 		$this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
-		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + tx_oelib_Time::SECONDS_PER_DAY);
+		$this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY);
 
 		self::assertContains(
 			'-',

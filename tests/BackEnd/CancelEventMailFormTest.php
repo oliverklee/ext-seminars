@@ -341,7 +341,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME']
-					- tx_oelib_Time::SECONDS_PER_DAY,
+					- Tx_Oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 
@@ -385,7 +385,7 @@ class Tx_Seminars_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_TestCase {
 				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicUid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME']
-					+ tx_oelib_Time::SECONDS_PER_DAY,
+					+ Tx_Oelib_Time::SECONDS_PER_DAY,
 			)
 		);
 
