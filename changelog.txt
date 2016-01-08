@@ -10,6 +10,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5466] Move the back-end CSS file to Resources/Public
 - [#5460] Clean up the use of FlashMessageService
 - [#5417] Require static_info_tables >= 6.2.0
 - [#5408] Drop version-specific code and class_exists

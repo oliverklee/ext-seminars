@@ -72,14 +72,14 @@ class tx_seminars_module2 extends tx_seminars_BackEnd_Module {
 		$this->doc->docType = 'xhtml_strict';
 
 		$this->doc->getPageRenderer()->addCssFile(
-			'BackEnd.css',
+			'../typo3conf/ext/seminars/Resources/Public/CSS/BackEnd/BackEnd.css',
 			'stylesheet',
 			'all',
 			'',
 			FALSE
 		);
 		$this->doc->getPageRenderer()->addCssFile(
-			'../Resources/Public/CSS/BackEnd/Print.css',
+			'../typo3conf/ext/seminars/Resources/Public/CSS/BackEnd/Print.css',
 			'stylesheet',
 			'print',
 			'',
