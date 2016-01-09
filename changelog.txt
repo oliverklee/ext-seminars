@@ -3,6 +3,7 @@
 Features:
 
 Bug fixes:
+- [#5235] Explicitly provide the configuration check namespaces
 
 Cleanup:
 

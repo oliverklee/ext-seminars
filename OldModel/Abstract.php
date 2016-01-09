@@ -27,7 +27,7 @@ if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
+abstract class tx_seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper implements Tx_Oelib_Interface_ConfigurationCheckable {
 	/**
 	 * @var string the extension key
 	 */
@@ -605,5 +605,15 @@ abstract class tx_seminars_OldModel_Abstract extends tx_oelib_templatehelper {
 	 */
 	public function getPageUid() {
 		return $this->getRecordPropertyInteger('pid');
+	}
+
+	/**
+	 * Returns the prefix for the configuration to check, e.g. "plugin.tx_seminars_pi1.".
+	 *
+	 * @return string the namespace prefix, will end with a dot
+	 */
+	public function getTypoScriptNamespace()
+	{
+		return 'plugin.tx_seminars.';
 	}
 }
