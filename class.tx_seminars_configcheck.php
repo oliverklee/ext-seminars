@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_configcheck extends tx_oelib_configcheck {
+class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 	/**
 	 * Checks the configuration for: tx_seminars_registrationmanager/.
 	 *

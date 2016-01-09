@@ -20,6 +20,7 @@ Cleanup:
 - [#5407] Drop the old XCLASS footers
 
 Changes:
+- [#5475] Change tx_oelib_configcheck to Tx_Oelib_ConfigCheck
 - [#5474] Change tx_oelib_testingFramework to Tx_Oelib_TestingFramework
 - [#5473] Change tx_oelib_configurationProxy to Tx_Oelib_ConfigurationProxy
 - [#5465] Change tslib_feUserAuth to \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication
