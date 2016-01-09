@@ -13,7 +13,7 @@ if (!function_exists('txSeminarsGetTableRelationsClause')) {
 	 *                select options
 	 */
 	function txSeminarsGetTableRelationsClause($tableName) {
-		if (!tx_oelib_configurationProxy::getInstance('seminars')
+		if (!Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->getAsBoolean('useStoragePid')
 		) {
 			return '';

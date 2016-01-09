@@ -2528,7 +2528,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			$auxiliaryRecordsPid = self::getSeminarsConfiguration()->getAsInteger('createAuxiliaryRecordsPID');
 		}
 
-		if (tx_oelib_configurationProxy::getInstance('seminars')
+		if (Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->getAsBoolean('useStoragePid')
 		) {
 			$recordPids[] = $this->getStoragePid();

@@ -94,7 +94,7 @@ class tx_seminars_flexForms {
 		$whereClause = '1 = 1';
 		$table = $configuration['config']['itemTable'];
 
-		if (tx_oelib_configurationProxy::getInstance('seminars')
+		if (Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->getAsBoolean('useStoragePid')
 		) {
 			$rootlinePages = BackendUtility::BEgetRootLine(

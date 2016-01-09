@@ -47,7 +47,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 		tx_oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('useStoragePid', FALSE);
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('useStoragePid', FALSE);
 
 		$this->configuration = new tx_oelib_Configuration();
 		$this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
@@ -72,7 +72,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework->cleanUp();
 
 		tx_seminars_registrationmanager::purgeInstance();
-		tx_oelib_configurationProxy::purgeInstances();
+		Tx_Oelib_ConfigurationProxy::purgeInstances();
 	}
 
 
@@ -672,7 +672,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
 			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
@@ -801,7 +801,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
 			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
@@ -930,7 +930,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
 			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
@@ -1059,7 +1059,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
 			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
@@ -1188,7 +1188,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
 			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
@@ -1317,7 +1317,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
 			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
@@ -1571,7 +1571,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
 			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
@@ -1758,7 +1758,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
 			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
@@ -1944,7 +1944,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
 			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
@@ -2130,7 +2130,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$pageUid = $this->testingFramework->createFrontEndPage(
 			0, array('storage_pid' => 42)
 		);
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean(
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
 			'useStoragePid', TRUE
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);

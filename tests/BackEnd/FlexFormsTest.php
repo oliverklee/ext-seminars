@@ -45,7 +45,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->fixture = new tx_seminars_flexForms();
 		$this->tcaBackup = $GLOBALS['TCA'][$this->testingTable]['ctrl'];
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsBoolean('useStoragePid', FALSE);
 		$GLOBALS['TCA'][$this->testingTable]['ctrl']['iconfile'] = 'fooicon';
 	}
@@ -64,7 +64,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getEntriesFromGeneralStoragePageForUseStoragePidAndStoragePidSetFindsRecordWithThisPid() {
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsBoolean('useStoragePid', TRUE);
 
 		$storagePageUid = $this->testingFramework->createSystemFolder();
@@ -97,7 +97,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getEntriesFromGeneralStoragePageForUseStoragePidAndStoragePidSetDoesNotFindRecordWithOtherPid() {
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsBoolean('useStoragePid', TRUE);
 
 		$sysFolderUid = $this->testingFramework->createSystemFolder(
@@ -129,7 +129,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getEntriesFromGeneralStoragePageForUseStoragePidSetAndStoragePidSetOnParentPageFindsRecordWithThisPid() {
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsBoolean('useStoragePid', TRUE);
 
 		$storagePage = $this->testingFramework->createSystemFolder();
@@ -164,7 +164,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getEntriesFromGeneralStoragePageForUseStoragePidSetAndNoStoragePidSetFindsRecordWithAnyPid() {
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsBoolean('useStoragePid', TRUE);
 
 		$recordUid = $this->testingFramework->createRecord(

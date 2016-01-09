@@ -46,7 +46,7 @@ class tx_seminars_BackEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	private $backEndLanguageBackup;
 
 	protected function setUp() {
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
 
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 

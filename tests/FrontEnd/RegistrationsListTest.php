@@ -47,7 +47,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	private $registrationUid = 0;
 
 	protected function setUp() {
-		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
 
 		Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
 

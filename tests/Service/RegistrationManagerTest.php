@@ -114,7 +114,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$this->mailer = $mailerFactory->getMailer();
 
 		tx_seminars_registrationchild::purgeCachedSeminars();
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger('eMailFormatForAttendees', tx_seminars_registrationmanager::SEND_TEXT_MAIL);
 		$configurationRegistry = tx_oelib_ConfigurationRegistry::getInstance();
 		$configurationRegistry->set('plugin.tx_seminars', new Tx_Oelib_Configuration());
@@ -2121,7 +2121,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function notifyAttendeeForSendConfirmationTrueAndPlainTextEmailCallsModifyAttendeeEmailTextHookOnce() {
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger('eMailFormatForAttendees', tx_seminars_registrationmanager::SEND_TEXT_MAIL);
 
 		$registration = $this->createRegistration();
@@ -2144,7 +2144,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function notifyAttendeeForSendConfirmationTrueAndHtmlEmailCallsModifyAttendeeEmailTextHookTwice() {
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger('eMailFormatForAttendees', tx_seminars_registrationmanager::SEND_HTML_MAIL);
 
 		$registration = $this->createRegistration();
@@ -2303,7 +2303,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForHtmlMailSetHasHtmlBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
@@ -2359,7 +2359,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForHtmlMailHasNoUnreplacedMarkers() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
@@ -2381,7 +2381,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForMailSetToUserModeAndUserSetToHtmlMailsHasHtmlBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_USER_MAIL
@@ -2409,7 +2409,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForMailSetToUserModeAndUserSetToTextMailsNotHasHtmlBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_USER_MAIL
@@ -2437,7 +2437,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForHtmlMailsContainsNameOfUserInBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
@@ -2463,7 +2463,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForHtmlMailsHasLinkToSeminarInBody() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
@@ -2593,7 +2593,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForHtmlMailsHasCssStylesFromFile() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
@@ -2656,7 +2656,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForHtmlMailReturnsAttendeesNamesInOrderedList() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
@@ -2774,7 +2774,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForHtmlMailSeparatesPlacesTitleAndAddressWithBreaks() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
@@ -2959,7 +2959,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForPlaceAddressAndHtmlMailsReplacesMultipleLineFeedsWithSpaces() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
@@ -2994,7 +2994,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForPlaceAddressReplacesMultipleLineFeedAndCarriageReturnsWithSpaces() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
@@ -3132,7 +3132,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function notifyAttendeeForPlaceAddressAndHtmlMailsSeparatresAddressAndCityLineWithBreaks() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
-		tx_oelib_configurationProxy::getInstance('seminars')
+		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger(
 				'eMailFormatForAttendees',
 				tx_seminars_registrationmanager::SEND_HTML_MAIL
