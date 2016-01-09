@@ -23,7 +23,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class tx_seminars_Bag_Abstract implements Iterator {
+abstract class tx_seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_ConfigurationCheckable {
 	/**
 	 * @var string the name of the main DB table from which we get the records
 	 *             for this bag
@@ -398,5 +398,15 @@ abstract class tx_seminars_Bag_Abstract implements Iterator {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Returns the prefix for the configuration to check, e.g. "plugin.tx_seminars_pi1.".
+	 *
+	 * @return string the namespace prefix, will end with a dot
+	 */
+	public function getTypoScriptNamespace()
+	{
+		return 'plugin.tx_seminars.';
 	}
 }

@@ -27,7 +27,7 @@ require(ExtensionManagementUtility::extPath('seminars') . 'tx_seminars_modifiedS
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
+class tx_seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper implements Tx_Oelib_Interface_ConfigurationCheckable {
 	/**
 	 * @var string same as class name
 	 */
@@ -3535,5 +3535,15 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 */
 	public function injectLinkBuilder(tx_seminars_Service_SingleViewLinkBuilder $linkBuilder) {
 		$this->linkBuilder = $linkBuilder;
+	}
+
+	/**
+	 * Returns the prefix for the configuration to check, e.g. "plugin.tx_seminars_pi1.".
+	 *
+	 * @return string the namespace prefix, will end with a dot
+	 */
+	public function getTypoScriptNamespace()
+	{
+		return 'plugin.tx_seminars_pi1.';
 	}
 }
