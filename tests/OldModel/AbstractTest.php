@@ -95,7 +95,7 @@ class tx_seminars_OldModel_AbstractTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testCreateFromDbResult() {
-		$dbResult = tx_oelib_db::select(
+		$dbResult = Tx_Oelib_Db::select(
 			'*',
 			'tx_seminars_test',
 			'uid = ' . $this->fixtureUid

@@ -31,7 +31,7 @@ class tx_seminars_registrationchild extends tx_seminars_registration {
 	 */
 	public function __construct($registrationUid = 0) {
 		if ($registrationUid > 0) {
-			$dbResult = tx_oelib_db::select(
+			$dbResult = Tx_Oelib_Db::select(
 				'*',
 				$this->tableName,
 				'uid = ' . $registrationUid

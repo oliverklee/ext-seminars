@@ -52,7 +52,7 @@ class tx_seminars_cli_MailNotifier {
 		}
 
 		$uid = (int)$_SERVER['argv'][1];
-		if (($uid == 0) || (tx_oelib_db::selectSingle('COUNT(*) AS number', 'pages', 'uid = ' . $uid) != array('number' => 1))) {
+		if (($uid == 0) || (Tx_Oelib_Db::selectSingle('COUNT(*) AS number', 'pages', 'uid = ' . $uid) != array('number' => 1))) {
 			throw new InvalidArgumentException(
 				'The provided UID for the page with the configuration was ' . $_SERVER['argv'][1] .
 					', which was not found to be a UID of an existing page. Please provide the UID of an existing page.',

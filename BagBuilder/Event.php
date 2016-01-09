@@ -96,7 +96,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 			return;
 		}
 
-		$directMatchUids = tx_oelib_db::selectColumnForMultiple(
+		$directMatchUids = Tx_Oelib_Db::selectColumnForMultiple(
 			'uid_local',
 			'tx_seminars_seminars_categories_mm',
 			'uid_foreign IN(' . $categoryUids . ')'
@@ -763,10 +763,10 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 		$where = array();
 		$where[] = 'MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)';
 
-		$matchingUids = tx_oelib_db::selectColumnForMultiple(
+		$matchingUids = Tx_Oelib_Db::selectColumnForMultiple(
 			'uid',
 			'tx_seminars_seminars',
-			'(' . implode(' OR ', $where) . ')' . tx_oelib_db::enableFields('tx_seminars_seminars')
+			'(' . implode(' OR ', $where) . ')' . Tx_Oelib_Db::enableFields('tx_seminars_seminars')
 		);
 		if (empty($matchingUids)) {
 			return array();
@@ -872,14 +872,14 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 
 		$matchQueryPart = 'MATCH (' . implode(',', self::$searchFieldList[$searchFieldKey]) . ') AGAINST (' . $quotedSearchWord
 			. ' IN BOOLEAN MODE)';
-		$foreignUids = tx_oelib_db::selectColumnForMultiple(
-			'uid', $foreignTable, $matchQueryPart . tx_oelib_db::enableFields($foreignTable)
+		$foreignUids = Tx_Oelib_Db::selectColumnForMultiple(
+			'uid', $foreignTable, $matchQueryPart . Tx_Oelib_Db::enableFields($foreignTable)
 		);
 		if (empty($foreignUids)) {
 			return array();
 		}
 
-		$localUids = tx_oelib_db::selectColumnForMultiple(
+		$localUids = Tx_Oelib_Db::selectColumnForMultiple(
 			'uid_local',
 			$mmTable,
 			'uid_foreign IN (' . implode(',', $foreignUids). ')'
@@ -1054,7 +1054,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 	public function limitToEventsWithVacancies() {
 		$seats = '(SELECT COALESCE(SUM(seats),0) FROM tx_seminars_attendances ' .
 			'WHERE seminar = tx_seminars_seminars.uid' .
-			tx_oelib_db::enableFields('tx_seminars_attendances') . ')';
+			Tx_Oelib_Db::enableFields('tx_seminars_attendances') . ')';
 		$hasVacancies = '(attendees_max > (' . $seats . ' + offline_attendees))';
 
 		$this->whereClauseParts['eventsWithVacancies'] =
@@ -1078,7 +1078,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 		if ($organizerUids == '') {
 			return;
 		}
-		$eventUids = implode(',', tx_oelib_db::selectColumnForMultiple(
+		$eventUids = implode(',', Tx_Oelib_Db::selectColumnForMultiple(
 			'uid_local',
 			'tx_seminars_seminars_organizers_mm',
 			'uid_foreign IN (' . $organizerUids .')'
@@ -1113,7 +1113,7 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 		}
 
 		$matchingTargetGroups = implode(',',
-			tx_oelib_db::selectColumnForMultiple(
+			Tx_Oelib_Db::selectColumnForMultiple(
 				'uid',
 				'tx_seminars_target_groups',
 				'(minimum_age <= ' . $age . ' AND (maximum_age = 0 OR maximum_age >= ' .
@@ -1121,17 +1121,17 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 			)
 		);
 
-		$eventsWithoutTargetGroup = tx_oelib_db::selectColumnForMultiple(
+		$eventsWithoutTargetGroup = Tx_Oelib_Db::selectColumnForMultiple(
 			'uid',
 			'tx_seminars_seminars',
 			'(object_type = ' . tx_seminars_Model_Event::TYPE_COMPLETE . ' OR ' .
 				'object_type = ' . tx_seminars_Model_Event::TYPE_TOPIC . ') AND ' .
 				'(target_groups = 0)' .
-				tx_oelib_db::enableFields('tx_seminars_seminars')
+				Tx_Oelib_Db::enableFields('tx_seminars_seminars')
 		);
 		if ($matchingTargetGroups != '') {
 			$eventsWithMatchingTargetGroup
-				= tx_oelib_db::selectColumnForMultiple(
+				= Tx_Oelib_Db::selectColumnForMultiple(
 					'uid_local',
 					'tx_seminars_seminars_target_groups_mm',
 					'uid_foreign IN (' . $matchingTargetGroups . ')',
@@ -1206,11 +1206,11 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 				sprintf(
 					$notZeroAndInRange, 'price_special_board', $maximumPrice
 				) .
-			')' . tx_oelib_db::enableFields('tx_seminars_seminars');
+			')' . Tx_Oelib_Db::enableFields('tx_seminars_seminars');
 
 		$foundUids = implode(
 			',',
-			tx_oelib_db::selectColumnForMultiple(
+			Tx_Oelib_Db::selectColumnForMultiple(
 				'uid', 'tx_seminars_seminars', $whereClause
 			)
 		);
@@ -1259,11 +1259,11 @@ class tx_seminars_BagBuilder_Event extends tx_seminars_BagBuilder_Abstract {
 				')) ' .
 			'OR price_regular_board >= ' . $minimumPrice . ' ' .
 			'OR price_special_board >= ' . $minimumPrice . ') ' .
-			tx_oelib_db::enableFields('tx_seminars_seminars');
+			Tx_Oelib_Db::enableFields('tx_seminars_seminars');
 
 		$foundUids = implode(
 			',',
-			tx_oelib_db::selectColumnForMultiple(
+			Tx_Oelib_Db::selectColumnForMultiple(
 				'uid', 'tx_seminars_seminars', $whereClause
 			)
 		);

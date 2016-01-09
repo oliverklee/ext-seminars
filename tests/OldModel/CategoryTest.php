@@ -73,7 +73,7 @@ class tx_seminars_OldModel_CategoryTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testCreateFromDbResult() {
-		$dbResult = tx_oelib_db::select(
+		$dbResult = Tx_Oelib_Db::select(
 			'*',
 			'tx_seminars_categories',
 			'uid = '.$this->fixtureUid

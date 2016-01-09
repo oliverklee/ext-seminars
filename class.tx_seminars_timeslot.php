@@ -104,7 +104,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 			'title',
 			'tx_seminars_sites',
 			'uid=' . $this->getPlace() .
-				tx_oelib_db::enableFields('tx_seminars_sites')
+				Tx_Oelib_Db::enableFields('tx_seminars_sites')
 		);
 		if (!$dbResult) {
 			throw new tx_oelib_Exception_Database();

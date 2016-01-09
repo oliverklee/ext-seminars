@@ -498,7 +498,7 @@ class tx_seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 			$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 				'*',
 				'tx_seminars_attendances',
-				'tx_seminars_attendances.uid = ' . $registrationUid . tx_oelib_db::enableFields('tx_seminars_attendances')
+				'tx_seminars_attendances.uid = ' . $registrationUid . Tx_Oelib_Db::enableFields('tx_seminars_attendances')
 			);
 			$this->registration = GeneralUtility::makeInstance('tx_seminars_registration', $this->cObj, $dbResult);
 			if ($dbResult !== FALSE) {

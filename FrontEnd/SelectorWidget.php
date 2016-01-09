@@ -230,7 +230,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 			return;
 		}
 
-		$dataOfPlaces = tx_oelib_db::selectMultiple(
+		$dataOfPlaces = Tx_Oelib_Db::selectMultiple(
 			'tx_seminars_sites.*',
 			'tx_seminars_sites, tx_seminars_seminars_place_mm',
 			'tx_seminars_sites.uid = tx_seminars_seminars_place_mm.uid_foreign ' .

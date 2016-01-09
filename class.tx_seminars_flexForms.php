@@ -110,10 +110,10 @@ class tx_seminars_flexForms {
 			}
 		}
 
-		$items = tx_oelib_db::selectMultiple(
+		$items = Tx_Oelib_Db::selectMultiple(
 			'uid,title',
 			$table,
-			$whereClause . tx_oelib_db::enableFields($table),
+			$whereClause . Tx_Oelib_Db::enableFields($table),
 			'',
 			'title ASC'
 		);

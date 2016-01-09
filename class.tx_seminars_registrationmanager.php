@@ -650,8 +650,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$this->registration = GeneralUtility::makeInstance(
 			'tx_seminars_registration',
 			$plugin->cObj,
-			tx_oelib_db::select(
-				'*', 'tx_seminars_attendances', 'uid = ' . $uid . tx_oelib_db::enableFields('tx_seminars_attendances')
+			Tx_Oelib_Db::select(
+				'*', 'tx_seminars_attendances', 'uid = ' . $uid . Tx_Oelib_Db::enableFields('tx_seminars_attendances')
 			)
 		);
 		if ($this->registration->getUser() !== $this->getLoggedInFrontEndUserUid()) {
@@ -666,7 +666,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			}
 		}
 
-		tx_oelib_db::update(
+		Tx_Oelib_Db::update(
 			'tx_seminars_attendances',
 			'uid = ' . $uid,
 			array('hidden' => 1, 'tstamp' => $GLOBALS['SIM_EXEC_TIME'])
@@ -708,7 +708,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			}
 
 			if ($registration->getSeats() <= $vacancies) {
-				tx_oelib_db::update(
+				Tx_Oelib_Db::update(
 					'tx_seminars_attendances', 'uid = ' . $registration->getUid(), array('registration_queue' => 0)
 				);
 				$vacancies -= $registration->getSeats();

@@ -314,11 +314,11 @@ abstract class tx_seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
 
 		if (!$this->isInDb || !$this->hasUid()) {
 			$this->setRecordPropertyInteger('crdate', $now);
-			tx_oelib_db::insert(
+			Tx_Oelib_Db::insert(
 				$this->tableName, $this->recordData
 			);
 		} else {
-			tx_oelib_db::update(
+			Tx_Oelib_Db::update(
 				$this->tableName,
 				'uid = ' . $this->getUid(),
 				$this->recordData
@@ -342,7 +342,7 @@ abstract class tx_seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
 			return;
 		}
 
-		tx_oelib_db::update(
+		Tx_Oelib_Db::update(
 			$this->tableName,
 			'uid = ' . $this->getUid(),
 			$updateArray
@@ -391,7 +391,7 @@ abstract class tx_seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
 					'sorting' => $sorting,
 					'is_dummy_record' => $isDummyRecord
 				);
-				tx_oelib_db::insert(
+				Tx_Oelib_Db::insert(
 					$mmTable, $dataToInsert
 				);
 				$sorting++;
@@ -423,7 +423,7 @@ abstract class tx_seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'COUNT(*) AS num',
 			$tableName,
-			'uid = ' . (int)$uid . tx_oelib_db::enableFields($tableName, (int)$allowHiddenRecords)
+			'uid = ' . (int)$uid . Tx_Oelib_Db::enableFields($tableName, (int)$allowHiddenRecords)
 		);
 
 		if ($dbResult) {
@@ -456,7 +456,7 @@ abstract class tx_seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
 		return $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'*',
 			$this->tableName,
-			'uid=' . (int)$uid . tx_oelib_db::enableFields($this->tableName, $allowHiddenRecords),
+			'uid=' . (int)$uid . Tx_Oelib_Db::enableFields($this->tableName, $allowHiddenRecords),
 			'',
 			'',
 			'1'

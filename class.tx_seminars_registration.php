@@ -180,12 +180,12 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		// selected, there actually is anything to pay and only one payment
 		// method is provided.
 		if (!$methodOfPayment && ($this->recordData['total_price'] > 0.00) && ($seminar->getNumberOfPaymentMethods() == 1)) {
-			$rows = tx_oelib_db::selectMultiple(
+			$rows = Tx_Oelib_Db::selectMultiple(
 				'uid',
 				'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
 				'tx_seminars_payment_methods.uid = tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
 					'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' . $seminar->getTopicUid() .
-					tx_oelib_db::enableFields('tx_seminars_payment_methods'),
+					Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
 				'',
 				'tx_seminars_seminars_payment_methods_mm.sorting'
 			);
@@ -328,7 +328,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		}
 
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			'*', 'fe_users', 'uid = ' . $uid . tx_oelib_db::enableFields('fe_users')
+			'*', 'fe_users', 'uid = ' . $uid . Tx_Oelib_Db::enableFields('fe_users')
 		);
 		if ($dbResult === FALSE) {
 			throw new tx_oelib_Exception_Database();
@@ -1028,7 +1028,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		$dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'title, sorting',
 			$foreignTable . ', ' . $mmTable,
-			'uid_local = ' . $this->getUid() . ' AND uid_foreign = uid' . tx_oelib_db::enableFields($foreignTable),
+			'uid_local = ' . $this->getUid() . ' AND uid_foreign = uid' . Tx_Oelib_Db::enableFields($foreignTable),
 			'',
 			'sorting'
 		);

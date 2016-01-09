@@ -190,6 +190,6 @@ class tx_seminars_BagBuilder_Registration extends tx_seminars_BagBuilder_Abstrac
 		$this->whereClauseParts['existingUsers'] = 'EXISTS (
 			SELECT * FROM fe_users WHERE ' .
 			' fe_users.uid = tx_seminars_attendances.user' .
-			tx_oelib_db::enableFields('fe_users') . ')';
+			Tx_Oelib_Db::enableFields('fe_users') . ')';
 	}
 }

@@ -4718,12 +4718,12 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		self::assertTrue(
 			// We're not using the testing framework here because the record
 			// is not marked as dummy record.
-			tx_oelib_db::existsRecordWithUid(
+			Tx_Oelib_Db::existsRecordWithUid(
 				'tx_seminars_attendances', $uid
 			)
 		);
 
-		tx_oelib_db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+		Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $uid);
 	}
 
 	/**
@@ -4747,7 +4747,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$uid = $fixture->getRegistration()->getUid();
 		// @TODO: This line needs to be removed once createRegistration uses
 		// the data mapper to save the registration.
-		tx_oelib_db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+		Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $uid);
 
 		self::assertInstanceOf(
 			'tx_seminars_Model_Registration',
@@ -4790,7 +4790,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$uid = $fixture->getRegistration()->getUid();
 		// @TODO: This line needs to be removed once createRegistration uses
 		// the data mapper to save the registration.
-		tx_oelib_db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+		Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $uid);
 
 		self::assertSame(
 			$registration->getUid(),
@@ -4830,7 +4830,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$uid = $fixture->getRegistration()->getUid();
 
-		tx_oelib_db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+		Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $uid);
 	}
 
 

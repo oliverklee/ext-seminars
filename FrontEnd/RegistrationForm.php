@@ -755,12 +755,12 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 			return array();
 		}
 
-		$rows = tx_oelib_db::selectMultiple(
+		$rows = Tx_Oelib_Db::selectMultiple(
 			'uid, title',
 			'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
 			'tx_seminars_payment_methods.uid = tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
 				'AND tx_seminars_seminars_payment_methods_mm.uid_local=' . $this->getSeminar()->getTopicUid() .
-				tx_oelib_db::enableFields('tx_seminars_payment_methods')
+				Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
 		);
 
 		$result = array();

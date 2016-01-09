@@ -127,7 +127,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 			' AND object_type <> ' . tx_seminars_Model_Event::TYPE_TOPIC . ' AND begin_date > ' . $GLOBALS['SIM_ACCESS_TIME'];
 
 		try {
-			$row = tx_oelib_db::selectSingle(
+			$row = Tx_Oelib_Db::selectSingle(
 				$this->columns,
 				$this->tableName,
 				$whereClause,

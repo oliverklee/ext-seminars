@@ -2909,7 +2909,7 @@ class tx_seminars_configcheck extends Tx_Oelib_ConfigCheck {
 			'The specified currency setting is either empty or not a valid ' .
 				'ISO 4217 alpha 3 code. Please correct the value of <strong>' .
 				$this->getTSSetupPath() . 'currency</strong>.',
-			tx_oelib_db::selectColumnForMultiple('cu_iso_3', 'static_currencies')
+			Tx_Oelib_Db::selectColumnForMultiple('cu_iso_3', 'static_currencies')
 		);
 	}
 
