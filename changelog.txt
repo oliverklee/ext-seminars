@@ -10,6 +10,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5468] Rename tx_oelib_headerProxyFactory to Tx_Oelib_HeaderProxyFactory
 - [#5470] Rename tx_oelib_Time to Tx_Oelib_Time
 - [#5466] Move the back-end CSS file to Resources/Public
 - [#5460] Clean up the use of FlashMessageService

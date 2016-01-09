@@ -1597,7 +1597,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	public function processUnregistration() {
 		if ($this->getFormCreator()->aORenderlets['button_cancel']->hasThrown('click')) {
 			$redirectUrl = GeneralUtility::locationHeaderUrl($this->pi_getPageLink($this->getConfValueInteger('myEventsPID')));
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location:' . $redirectUrl);
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location:' . $redirectUrl);
 			exit;
 		}
 

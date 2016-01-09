@@ -515,7 +515,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		$url = BackendUtility::getModuleUrl(
 			self::MODULE_NAME, array('id' => tx_oelib_PageFinder::getInstance()->getPageUid()), FALSE, TRUE
 		);
-		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' .  $url);
+		Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' .  $url);
 	}
 
 	/**

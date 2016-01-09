@@ -49,7 +49,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 	protected function setUp() {
 		tx_oelib_configurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
 
-		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
+		Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
 
 		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
@@ -203,7 +203,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 
 		self::assertEquals(
 			'Status: 404 Not Found',
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
 		);
 	}
 
@@ -219,7 +219,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 
 		self::assertEquals(
 			'Status: 404 Not Found',
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
 		);
 	}
 
@@ -231,7 +231,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 
 		self::assertEquals(
 			'Status: 403 Forbidden',
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
 		);
 	}
 
@@ -244,7 +244,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 
 		self::assertEquals(
 			'Status: 403 Forbidden',
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
 		);
 	}
 
@@ -257,7 +257,7 @@ class tx_seminars_FrontEnd_RegistrationsListTest extends tx_phpunit_testcase {
 
 		self::assertNotContains(
 			'403',
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
 		);
 	}
 

@@ -120,7 +120,7 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 				$result = $this->getCharsetConversion()->conv($result, 'utf-8', $resultCharset);
 			}
 		} catch (Exception $exception) {
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 500 Internal Server Error');
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 500 Internal Server Error');
 			$result = $exception->getMessage() . LF . LF . $exception->getTraceAsString() . LF . LF;
 		}
 
@@ -321,10 +321,10 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	 * @return void
 	 */
 	private function setPageTypeAndDisposition($csvFileName) {
-		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+		Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 			'Content-type: text/csv; header=present; charset=' . $this->configuration->getAsString('charsetForCsv')
 		);
-		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+		Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 			'Content-disposition: attachment; filename=' . $csvFileName
 		);
 	}
@@ -342,11 +342,11 @@ class tx_seminars_pi2 extends Tx_Oelib_TemplateHelper {
 	private function addErrorHeaderAndReturnMessage($errorCode) {
 		switch ($errorCode) {
 			case self::ACCESS_DENIED:
-				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
+				Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
 				$result = $this->translate('message_403');
 				break;
 			case self::NOT_FOUND:
-				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+				Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
 				$result = $this->translate('message_404');
 				break;
 			default:

@@ -56,7 +56,7 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang_db.xml');
 		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('lang') . 'locallang_general.xml');
 
-		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
+		Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
 		$this->pid = $this->testingFramework->createSystemFolder();
@@ -748,7 +748,7 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 
 		self::assertContains(
 			'404',
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()
 				->getLastAddedHeader()
 		);
 	}
@@ -1214,7 +1214,7 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 
 		self::assertContains(
 			'404',
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()
 				->getLastAddedHeader()
 		);
 	}
@@ -1228,7 +1228,7 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 
 		self::assertContains(
 			'403',
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()
 				->getLastAddedHeader()
 		);
 	}
@@ -1242,7 +1242,7 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 		self::assertTrue(
 			in_array(
 				'Content-type: text/csv; header=present; charset=utf-8',
-				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+				Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()
 					->getAllAddedHeaders()
 			)
 		);
@@ -1258,7 +1258,7 @@ class Tx_Seminars_Tests_pi2_pi2Test extends Tx_Phpunit_TestCase {
 		self::assertTrue(
 			in_array(
 				'Content-type: text/csv; header=present; charset=utf-8',
-				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()
+				Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()
 					->getAllAddedHeaders()
 			)
 		);

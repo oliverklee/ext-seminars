@@ -366,11 +366,11 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 */
 	public function existsSeminarMessage($seminarUid) {
 		if ($seminarUid <= 0) {
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
 			return $this->translate('message_missingSeminarNumber');
 		}
 		if (!tx_seminars_OldModel_Abstract::recordExists($seminarUid, 'tx_seminars_seminars')) {
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
 			return $this->translate('message_wrongSeminarNumber');
 		}
 

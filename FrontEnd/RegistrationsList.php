@@ -111,13 +111,13 @@ class tx_seminars_FrontEnd_RegistrationsList extends tx_seminars_FrontEnd_Abstra
 				$errorMessage = $this->seminar->canViewRegistrationsListMessage(
 					$this->whatToDisplay
 				);
-				tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+				Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 					'Status: 403 Forbidden'
 				);
 			}
 		} else {
 			$errorMessage = $this->translate('message_wrongSeminarNumber');
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 				'Status: 404 Not Found'
 			);
 			$this->setMarker('title', '');

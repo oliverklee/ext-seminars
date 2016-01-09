@@ -94,7 +94,7 @@ class Tx_Seminars_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit_TestCase {
 		// Loads the locallang file for properly working localization in the tests.
 		$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
 
-		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
+		Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
 		$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
 		$mailerFactory->enableTestMode();

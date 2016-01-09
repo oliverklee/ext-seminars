@@ -691,13 +691,13 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 		if ($this->showUid <= 0) {
 			$this->setMarker('error_text', $this->translate('message_missingSeminarNumber'));
 			$result = $this->getSubpart('ERROR_VIEW');
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
 		} elseif ($this->createSeminar($this->showUid, $this->isLoggedIn())) {
 			$result = $this->createSingleViewForExistingEvent();
 		} else {
 			$this->setMarker('error_text', $this->translate('message_wrongSeminarNumber'));
 			$result = $this->getSubpart('ERROR_VIEW');
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
 		}
 
 		$this->setMarker(
@@ -2978,7 +2978,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 			$result = $eventEditor->render();
 		} else {
 			$result = $hasAccessMessage;
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
 				'Status: 403 Forbidden'
 			);
 		}
@@ -3483,7 +3483,7 @@ class tx_seminars_FrontEnd_DefaultController extends tx_oelib_templatehelper {
 	 */
 	protected function redirectToCurrentUrl() {
 		$currentUrl = GeneralUtility::locationHeaderUrl(GeneralUtility::getIndpEnv('REQUEST_URI'));
-		tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $currentUrl);
+		Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $currentUrl);
 	}
 
 	/**

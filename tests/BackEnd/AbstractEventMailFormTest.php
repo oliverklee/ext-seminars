@@ -76,7 +76,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		// Loads the locallang file for properly working localization in the tests.
 		$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
 
-		tx_oelib_headerProxyFactory::getInstance()->enableTestMode();
+		Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
 		$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
 		$mailerFactory->enableTestMode();
@@ -801,7 +801,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 				tx_seminars_BackEnd_AbstractEventMailForm::MODULE_NAME,
 				array('id' => tx_oelib_PageFinder::getInstance()->getPageUid()), FALSE, TRUE
 			),
-			tx_oelib_headerProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
 		);
 	}
 

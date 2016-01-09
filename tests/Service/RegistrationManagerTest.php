@@ -148,7 +148,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'templateFile', 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
 		);
 
-		$headerProxyFactory = tx_oelib_headerProxyFactory::getInstance();
+		$headerProxyFactory = Tx_Oelib_HeaderProxyFactory::getInstance();
 		$headerProxyFactory->enableTestMode();
 		$this->headerCollector = $headerProxyFactory->getHeaderProxy();
 
