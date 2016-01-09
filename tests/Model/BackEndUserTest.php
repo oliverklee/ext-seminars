@@ -20,7 +20,7 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_Model_BackEndUserTest extends tx_phpunit_testcase {
+class tx_seminars_Model_BackEndUserTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_Model_BackEndUser
 	 */

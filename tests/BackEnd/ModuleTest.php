@@ -20,7 +20,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_BackEnd_ModuleTest extends tx_phpunit_testcase {
+class tx_seminars_BackEnd_ModuleTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_BackEnd_Module
 	 */

@@ -21,20 +21,20 @@
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Mapper_FrontEndUserGroupTest extends tx_phpunit_testcase {
+class tx_seminars_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_Mapper_FrontEndUserGroup the object to test
 	 */
 	private $fixture;
 
 	/**
-	 * @var tx_oelib_testingFramework the testing framework	 *
+	 * @var Tx_Oelib_TestingFramework the testing framework	 *
 	 */
 	private $testingFramework;
 
 	protected function setUp() {
 		$this->fixture = new tx_seminars_Mapper_FrontEndUserGroup();
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 	}
 
 	protected function tearDown() {

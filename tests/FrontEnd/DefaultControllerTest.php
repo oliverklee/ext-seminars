@@ -23,13 +23,13 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
+class tx_seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_FrontEnd_DefaultController
 	 */
 	private $fixture;
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
 	private $testingFramework;
 
@@ -89,7 +89,7 @@ class tx_seminars_FrontEnd_DefaultControllerTest extends tx_phpunit_testcase {
 		$this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = array();
 
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 		Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
 		$this->headerCollector = Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy();

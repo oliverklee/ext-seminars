@@ -22,7 +22,7 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Model_FrontEndUserGroupTest extends tx_phpunit_testcase {
+class tx_seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_Model_FrontEndUserGroup the object to test
 	 */

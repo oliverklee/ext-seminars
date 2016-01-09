@@ -21,9 +21,9 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_OldModel_SpeakerTest extends tx_phpunit_testcase {
+class tx_seminars_OldModel_SpeakerTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
 	private $testingFramework;
 
@@ -38,7 +38,7 @@ class tx_seminars_OldModel_SpeakerTest extends tx_phpunit_testcase {
 	private $maximalFixture;
 
 	protected function setUp() {
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		$fixtureUid = $this->testingFramework->createRecord(
 			'tx_seminars_speakers',
 			array(

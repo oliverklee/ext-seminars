@@ -20,7 +20,7 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
+class tx_seminars_FrontEnd_RequirementsListTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_FrontEnd_RequirementsList
 	 */
@@ -32,7 +32,7 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 	protected $seminarUid = 0;
 
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
 	protected $testingFramework = NULL;
 
@@ -42,7 +42,7 @@ class tx_seminars_FrontEnd_RequirementsListTest extends tx_phpunit_testcase {
 	protected $systemFolderPid = 0;
 
 	protected function setUp() {
-		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework	= new Tx_Oelib_TestingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
 		$this->systemFolderPid = $this->testingFramework->createSystemFolder();

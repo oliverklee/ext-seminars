@@ -20,13 +20,13 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
+class tx_seminars_BackEnd_FlexFormsTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_flexForms
 	 */
 	private $fixture;
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
 	private $testingFramework;
 
@@ -42,7 +42,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends tx_phpunit_testcase {
 	private $tcaBackup;
 
 	protected function setUp() {
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		$this->fixture = new tx_seminars_flexForms();
 		$this->tcaBackup = $GLOBALS['TCA'][$this->testingTable]['ctrl'];
 		Tx_Oelib_ConfigurationProxy::getInstance('seminars')

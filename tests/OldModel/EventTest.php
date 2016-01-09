@@ -23,14 +23,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
+class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_seminarchild
 	 */
 	protected $fixture = NULL;
 
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
 	protected $testingFramework = NULL;
 
@@ -61,7 +61,7 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 
 	protected function setUp() {
 		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
 		$this->now = $GLOBALS['SIM_EXEC_TIME'];
 		$this->beginDate = ($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);

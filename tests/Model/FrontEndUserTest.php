@@ -21,7 +21,7 @@
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
+class tx_seminars_Model_FrontEndUserTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_Model_FrontEndUser the object to test
 	 */
@@ -29,7 +29,7 @@ class tx_seminars_Model_FrontEndUserTest extends tx_phpunit_testcase {
 
 	protected function setUp() {
 		$this->fixture = new tx_seminars_Model_FrontEndUser();
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 	}
 
 	protected function tearDown() {

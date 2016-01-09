@@ -21,14 +21,14 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
+class tx_seminars_OldModel_RegistrationTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_registrationchild
 	 */
 	protected $fixture = NULL;
 
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
 	protected $testingFramework = NULL;
 
@@ -50,7 +50,7 @@ class tx_seminars_OldModel_RegistrationTest extends tx_phpunit_testcase {
 	protected function setUp() {
 		tx_seminars_registrationchild::purgeCachedSeminars();
 
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
 		tx_oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new tx_oelib_Configuration());

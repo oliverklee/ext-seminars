@@ -21,14 +21,14 @@
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
+class tx_seminars_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_FrontEnd_EventHeadline
 	 */
 	private $fixture;
 
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
 	private $testingFramework;
 
@@ -58,7 +58,7 @@ class tx_seminars_FrontEnd_EventHeadlineTest extends tx_phpunit_testcase {
 
 		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
 
-		$this->testingFramework	= new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework	= new Tx_Oelib_TestingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
 		// just picked some random date (2001-01-01 00:00:00)

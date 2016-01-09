@@ -20,13 +20,13 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_BackEnd_SpeakersListTest extends tx_phpunit_testcase {
+class tx_seminars_BackEnd_SpeakersListTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_BackEnd_SpeakersList
 	 */
 	private $fixture;
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
 	private $testingFramework;
 
@@ -57,7 +57,7 @@ class tx_seminars_BackEnd_SpeakersListTest extends tx_phpunit_testcase {
 		$GLOBALS['LANG']->includeLLFile('EXT:seminars/BackEnd/locallang.xml');
 
 		$this->testingFramework
-			= new tx_oelib_testingFramework('tx_seminars');
+			= new Tx_Oelib_TestingFramework('tx_seminars');
 
 		$this->dummySysFolderPid
 			= $this->testingFramework->createSystemFolder();

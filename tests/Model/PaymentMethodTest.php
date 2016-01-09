@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Model_PaymentMethodTest extends tx_phpunit_testcase {
+class tx_seminars_Model_PaymentMethodTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_Model_PaymentMethod
 	 */

@@ -21,19 +21,19 @@
  * @author Mario Rimann <typo3-coding@rimann.org>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Bag_EventTest extends tx_phpunit_testcase {
+class tx_seminars_Bag_EventTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_Bag_Event
 	 */
 	private $fixture;
 
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
 	private $testingFramework;
 
 	protected function setUp() {
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',

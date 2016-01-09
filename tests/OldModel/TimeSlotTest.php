@@ -20,13 +20,13 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_OldModel_TimeSlotTest extends tx_phpunit_testcase {
+class tx_seminars_OldModel_TimeSlotTest extends Tx_Phpunit_TestCase {
 	private $fixture;
 	private $testingFramework;
 
 	protected function setUp() {
 		$this->testingFramework
-			= new tx_oelib_testingFramework('tx_seminars');
+			= new Tx_Oelib_TestingFramework('tx_seminars');
 
 		$seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars'

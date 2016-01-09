@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Model_SpeakerTest extends tx_phpunit_testcase {
+class tx_seminars_Model_SpeakerTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_Model_Speaker
 	 */

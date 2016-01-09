@@ -20,19 +20,19 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Bag_SpeakerTest extends tx_phpunit_testcase {
+class tx_seminars_Bag_SpeakerTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_Bag_Speaker
 	 */
 	private $fixture;
 
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
 	private $testingFramework;
 
 	protected function setUp() {
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 	}
 
 	protected function tearDown() {

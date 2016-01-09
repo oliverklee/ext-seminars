@@ -23,14 +23,14 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Philipp Kitzberger <philipp@cron-it.de>
  */
-class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
+class tx_seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_seminars_FrontEnd_RegistrationForm
 	 */
 	protected $fixture = NULL;
 
 	/**
-	 * @var tx_oelib_testingFramework
+	 * @var Tx_Oelib_TestingFramework
 	 */
 	protected $testingFramework = NULL;
 
@@ -50,7 +50,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	protected $seminar = NULL;
 
 	protected function setUp() {
-		$this->testingFramework = new tx_oelib_testingFramework('tx_seminars');
+		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		$frontEndPageUid = $this->testingFramework->createFrontEndPage();
 		$this->testingFramework->createFakeFrontEnd($frontEndPageUid);
 
