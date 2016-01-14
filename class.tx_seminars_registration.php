@@ -317,7 +317,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 *
 	 * @return void
 	 *
-	 * @throws tx_oelib_Exception_Database
+	 * @throws Tx_Oelib_Exception_Database
 	 * @throws tx_oelib_Exception_NotFound
 	 */
 	private function retrieveUserData() {
@@ -331,7 +331,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 			'*', 'fe_users', 'uid = ' . $uid . Tx_Oelib_Db::enableFields('fe_users')
 		);
 		if ($dbResult === FALSE) {
-			throw new tx_oelib_Exception_Database();
+			throw new Tx_Oelib_Exception_Database();
 		}
 		$userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 		if ($userData === FALSE) {

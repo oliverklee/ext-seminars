@@ -1640,7 +1640,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 *
 	 * @return string the type of this event, will be empty if this event does not have a type
 	 *
-	 * @throws tx_oelib_Exception_Database
+	 * @throws Tx_Oelib_Exception_Database
 	 */
 	public function getEventType() {
 		if (!$this->hasEventType()) {
@@ -1658,11 +1658,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		);
 
 		if (!$dbResult) {
-			throw new tx_oelib_Exception_Database();
+			throw new Tx_Oelib_Exception_Database();
 		}
 		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 		if (!$dbResultRow) {
-			throw new tx_oelib_Exception_Database();
+			throw new Tx_Oelib_Exception_Database();
 		}
 
 		return $dbResultRow['title'];

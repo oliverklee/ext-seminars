@@ -36,7 +36,7 @@ class ext_update {
 			if ($this->needsToUpdateEventField('registrations')) {
 				$result .= $this->updateRegistrationsField();
 			}
-		} catch (tx_oelib_Exception_Database $exception) {
+		} catch (Tx_Oelib_Exception_Database $exception) {
 			$result = '';
 		}
 
@@ -67,7 +67,7 @@ class ext_update {
 
 		try {
 			$result = $this->needsToUpdateEventField('registrations');
-		} catch (tx_oelib_Exception_Database $exception) {
+		} catch (Tx_Oelib_Exception_Database $exception) {
 			$result = FALSE;
 		}
 
@@ -108,7 +108,7 @@ class ext_update {
 	 *
 	 * @return string information about the status of the update process, will not be empty
 	 *
-	 * @throws tx_oelib_Exception_Database
+	 * @throws Tx_Oelib_Exception_Database
 	 */
 	private function updateRegistrationsField() {
 		$query = 'UPDATE tx_seminars_seminars SET registrations = ' .
@@ -121,7 +121,7 @@ class ext_update {
 				Tx_Oelib_Db::enableFields('tx_seminars_attendances') .
 			')';
 		if (!$GLOBALS['TYPO3_DB']->sql_query($query)) {
-			throw new tx_oelib_Exception_Database();
+			throw new Tx_Oelib_Exception_Database();
 		}
 
 		return '<h2>Updating the events.registrations field.</h2>' .
