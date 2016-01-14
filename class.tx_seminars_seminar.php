@@ -618,7 +618,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 				'cn_iso_2 = "' . $isoCode . '"'
 			);
 			$countryName = $dbResultRow['cn_short_local'];
-		} catch (tx_oelib_Exception_EmptyQueryResult $exception) {
+		} catch (Tx_Oelib_Exception_EmptyQueryResult $exception) {
 			$countryName = '';
 		}
 

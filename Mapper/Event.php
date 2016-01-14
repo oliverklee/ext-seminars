@@ -134,7 +134,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 				'',
 				'begin_date ASC'
 			);
-		} catch (tx_oelib_Exception_EmptyQueryResult $exception) {
+		} catch (Tx_Oelib_Exception_EmptyQueryResult $exception) {
 			throw new tx_oelib_Exception_NotFound();
 		}
 
