@@ -1648,7 +1648,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		try {
 			/** @var tx_seminars_Model_Place $place */
 			$place = $placeMapper->find((int)$placeUid);
-		} catch (tx_oelib_Exception_NotFound $exception) {
+		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
 				'alert("A place with the given UID does not exist.");'
 			);
@@ -1668,7 +1668,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 			} else {
 				$countryUid = 0;
 			}
-		} catch (tx_oelib_Exception_NotFound $exception) {
+		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			$countryUid = 0;
 		}
 
@@ -1933,7 +1933,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		try {
 			/** @var tx_seminars_Model_Speaker $speaker */
 			$speaker = $speakerMapper->find((int)$speakerUid);
-		} catch (tx_oelib_Exception_NotFound $exception) {
+		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
 				'alert("A speaker with the given UID does not exist.");'
 			);
@@ -2159,7 +2159,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		try {
 			/** @var tx_seminars_Model_Checkbox $checkbox */
 			$checkbox = $checkboxMapper->find((int)$checkboxUid);
-		} catch (tx_oelib_Exception_NotFound $exception) {
+		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
 				'alert("A checkbox with the given UID does not exist.");'
 			);
@@ -2398,7 +2398,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		try {
 			/** @var tx_seminars_Model_TargetGroup $targetGroup */
 			$targetGroup = $targetGroupMapper->find((int)$targetGroupUid);
-		} catch (tx_oelib_Exception_NotFound $exception) {
+		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			return $formidable->majixExecJs(
 				'alert("A target group with the given UID does not exist.");'
 			);

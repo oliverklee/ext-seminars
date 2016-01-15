@@ -93,7 +93,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 	 * @return string our places or a localized string "will be announced" if this timeslot has no place assigned
 	 *
 	 * @throws Tx_Oelib_Exception_Database
-	 * @throws tx_oelib_Exception_NotFound
+	 * @throws Tx_Oelib_Exception_NotFound
 	 */
 	public function getPlaceShort() {
 		if (!$this->hasPlace()) {
@@ -113,7 +113,7 @@ class tx_seminars_timeslot extends tx_seminars_timespan {
 		$dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 		$GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
 		if (!$dbResultRow) {
-			throw new tx_oelib_Exception_NotFound(
+			throw new Tx_Oelib_Exception_NotFound(
 				'The related place with the UID ' . $this->getPlace() . ' could not be found in the DB.', 1333291925
 			);
 		}

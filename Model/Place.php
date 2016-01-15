@@ -143,7 +143,7 @@ class tx_seminars_Model_Place extends tx_oelib_Model implements tx_seminars_Inte
 			/** @var tx_oelib_Mapper_Country $mapper */
 			$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
 			$country = $mapper->findByIsoAlpha2Code($countryCode);
-		} catch (tx_oelib_Exception_NotFound $exception) {
+		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			$country = NULL;
 		}
 

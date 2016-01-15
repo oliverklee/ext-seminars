@@ -11,6 +11,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5480] Rename tx_oelib_Exception_NotFound to Tx_Oelib_Exception_NotFound
 - [#5479] Rename tx_oelib_Exception_EmptyQueryResult to Tx_Oelib_Exception_EmptyQueryResult
 - [#5478] Rename tx_oelib_Exception_Database to Tx_Oelib_Exception_Database
 - [#5468] Rename tx_oelib_headerProxyFactory to Tx_Oelib_HeaderProxyFactory

@@ -916,7 +916,7 @@ class tx_seminars_Mapper_EventTest extends Tx_Phpunit_TestCase {
 
 	/**
 	 * @test
-	 * @expectedException tx_oelib_Exception_NotFound
+	 * @expectedException Tx_Oelib_Exception_NotFound
 	 */
 	public function findNextUpcomingWithNoEventsThrowsEmptyQueryResultException() {
 		$this->fixture->findNextUpcoming();
@@ -924,7 +924,7 @@ class tx_seminars_Mapper_EventTest extends Tx_Phpunit_TestCase {
 
 	/**
 	 * @test
-	 * @expectedException tx_oelib_Exception_NotFound
+	 * @expectedException Tx_Oelib_Exception_NotFound
 	 */
 	public function findNextUpcomingWithPastEventThrowsEmptyQueryResultException() {
 		$this->testingFramework->createRecord(

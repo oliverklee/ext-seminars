@@ -399,7 +399,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 				}
 				try {
 					$userMapper->findByUserName($userName);
-				} catch (tx_oelib_Exception_NotFound $exception) {
+				} catch (Tx_Oelib_Exception_NotFound $exception) {
 					$isUnique = TRUE;
 				}
 

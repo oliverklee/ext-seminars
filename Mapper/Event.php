@@ -77,7 +77,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 		try {
 			/** @var tx_seminars_Model_Event $result */
 			$result = $this->findSingleByWhereClause(array('publication_hash' => $publicationHash));
-		} catch (tx_oelib_Exception_NotFound $exception) {
+		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			$result = NULL;
 		}
 
@@ -120,7 +120,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 	 *
 	 * @return tx_seminars_Model_Event the next upcoming event
 	 *
-	 * @throws tx_oelib_Exception_NotFound
+	 * @throws Tx_Oelib_Exception_NotFound
 	 */
 	public function findNextUpcoming() {
 		$whereClause = $this->getUniversalWhereClause() . ' AND cancelled <> ' . tx_seminars_seminar::STATUS_CANCELED .
@@ -135,7 +135,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 				'begin_date ASC'
 			);
 		} catch (Tx_Oelib_Exception_EmptyQueryResult $exception) {
-			throw new tx_oelib_Exception_NotFound();
+			throw new Tx_Oelib_Exception_NotFound();
 		}
 
 		return $this->getModel($row);

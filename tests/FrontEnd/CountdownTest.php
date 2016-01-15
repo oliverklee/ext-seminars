@@ -106,7 +106,7 @@ class tx_seminars_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase {
 		$this->fixture->injectEventMapper($this->mapper);
 		$this->mapper->expects(self::once())
 			->method('findNextUpcoming')
-			->will(self::throwException(new tx_oelib_Exception_NotFound()));
+			->will(self::throwException(new Tx_Oelib_Exception_NotFound()));
 
 		self::assertContains(
 			'There are no upcoming events. Please come back later.',

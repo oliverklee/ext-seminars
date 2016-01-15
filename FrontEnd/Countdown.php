@@ -85,7 +85,7 @@ class tx_seminars_FrontEnd_Countdown extends tx_seminars_FrontEnd_AbstractView {
 			$event = $this->mapper->findNextUpcoming();
 
 			$message = $this->viewHelper->render($event->getBeginDateAsUnixTimeStamp());
-		} catch (tx_oelib_Exception_NotFound $exception) {
+		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			$message = $this->translate('message_countdown_noEventFound');
 		}
 

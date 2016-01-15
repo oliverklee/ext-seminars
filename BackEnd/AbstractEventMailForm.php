@@ -88,7 +88,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 	 * @param int $eventUid UID of an event, must be > 0
 	 *
 	 * @throws InvalidArgumentException
-	 * @throws tx_oelib_Exception_NotFound if event could not be instantiated
+	 * @throws Tx_Oelib_Exception_NotFound if event could not be instantiated
 	 */
 	public function __construct($eventUid) {
 		if ($eventUid <= 0) {
@@ -98,7 +98,7 @@ abstract class tx_seminars_BackEnd_AbstractEventMailForm {
 		$this->oldEvent = GeneralUtility::makeInstance('tx_seminars_seminar', $eventUid);
 
 		if (!$this->oldEvent->isOk()) {
-			throw new tx_oelib_Exception_NotFound('There is no event with this UID.', 1333292164);
+			throw new Tx_Oelib_Exception_NotFound('There is no event with this UID.', 1333292164);
 		}
 
 		/** @var tx_seminars_Mapper_Event $mapper */

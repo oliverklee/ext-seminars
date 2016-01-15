@@ -172,7 +172,7 @@ class tx_seminars_BackEnd_RegistrationsList extends tx_seminars_BackEnd_Abstract
 		foreach ($registrationBag as $registration) {
 			try {
 				$userName = htmlspecialchars($registration->getUserName());
-			} catch (tx_oelib_Exception_NotFound $exception) {
+			} catch (Tx_Oelib_Exception_NotFound $exception) {
 				$userName = $GLOBALS['LANG']->getLL('registrationlist.deleted');
 			}
 			$event = $registration->getSeminarObject();

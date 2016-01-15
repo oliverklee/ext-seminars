@@ -158,7 +158,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 */
 	public function renderThrowsExceptionForInvalidEventUid() {
 		$this->setExpectedException(
-			'tx_oelib_Exception_NotFound',
+			'Tx_Oelib_Exception_NotFound',
 			'There is no event with this UID.'
 		);
 

@@ -318,7 +318,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 	 * @return void
 	 *
 	 * @throws Tx_Oelib_Exception_Database
-	 * @throws tx_oelib_Exception_NotFound
+	 * @throws Tx_Oelib_Exception_NotFound
 	 */
 	private function retrieveUserData() {
 		$uid = $this->getUser();
@@ -335,7 +335,7 @@ class tx_seminars_registration extends tx_seminars_OldModel_Abstract {
 		}
 		$userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
 		if ($userData === FALSE) {
-			throw new tx_oelib_Exception_NotFound('The FE user with the UID ' . $uid . ' could not be retrieved.', 1390065114);
+			throw new Tx_Oelib_Exception_NotFound('The FE user with the UID ' . $uid . ' could not be retrieved.', 1390065114);
 		}
 
 		$this->setUserData($userData);
