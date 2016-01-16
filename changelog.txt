@@ -11,6 +11,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5485] Rename tx_oelib_Mapper_BackEndUserGroup to Tx_Oelib_Mapper_BackEndUserGroup
 - [#5515] Rename tx_seminars_BackEnd_AbstractEventMailForm to Tx_Seminars_BackEnd_AbstractEventMailForm
 - [#5514] Rename tx_seminars_BackEnd_CancelEventMailForm to Tx_Seminars_BackEnd_CancelEventMailForm
 - [#5513] Rename tx_seminars_BackEnd_AbstractList to Tx_Seminars_BackEnd_AbstractList

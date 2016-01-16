@@ -20,7 +20,7 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_Mapper_BackEndUserGroup extends tx_oelib_Mapper_BackEndUserGroup {
+class tx_seminars_Mapper_BackEndUserGroup extends Tx_Oelib_Mapper_BackEndUserGroup {
 	/**
 	 * @var string the model class name for this mapper, must not be empty
 	 */
