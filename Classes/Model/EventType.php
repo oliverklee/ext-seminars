@@ -21,7 +21,7 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Model_EventType extends tx_oelib_Model implements tx_seminars_Interface_Titled {
+class tx_seminars_Model_EventType extends Tx_Oelib_Model implements tx_seminars_Interface_Titled {
 	/**
 	 * Returns our title.
 	 *

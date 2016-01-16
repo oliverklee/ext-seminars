@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_Model_TargetGroup extends tx_oelib_Model implements tx_seminars_Interface_Titled {
+class tx_seminars_Model_TargetGroup extends Tx_Oelib_Model implements tx_seminars_Interface_Titled {
 	/**
 	 * Returns our title.
 	 *

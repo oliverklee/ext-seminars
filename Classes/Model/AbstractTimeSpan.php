@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class tx_seminars_Model_AbstractTimeSpan extends tx_oelib_Model implements tx_seminars_Interface_Titled {
+abstract class tx_seminars_Model_AbstractTimeSpan extends Tx_Oelib_Model implements tx_seminars_Interface_Titled {
 	/**
 	 * Returns our title.
 	 *
