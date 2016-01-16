@@ -258,8 +258,8 @@ class tx_seminars_cli_MailNotifier {
 	 * @return string the localized e-mail content, will not be empty
 	 */
 	private function customizeMessage($locallangKey, tx_seminars_seminar $event, $organizerName = '') {
-		/** @var tx_oelib_Mapper_BackEndUser $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_BackEndUser');
+		/** @var Tx_Oelib_Mapper_BackEndUser $mapper */
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class);
 		/** @var Tx_Oelib_Model_BackEndUser $user */
 		$user = $mapper->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();

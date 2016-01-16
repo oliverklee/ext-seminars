@@ -66,7 +66,7 @@ class tx_seminars_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 	 */
 	public function frontEndUserGroupCanReturnBackEndUserModel() {
 		$backEndUser = tx_oelib_MapperRegistry::get(
-			'tx_oelib_Mapper_BackEndUser')->getNewGhost();
+			Tx_Oelib_Mapper_BackEndUser::class)->getNewGhost();
 		$frontEndUserGroup = $this->fixture->getLoadedTestingModel(
 			array('tx_seminars_reviewer' => $backEndUser->getUid())
 		);
