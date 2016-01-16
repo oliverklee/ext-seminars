@@ -134,7 +134,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 		}
 
 		$formAction = BackendUtility::getModuleUrl(
-			self::MODULE_NAME, array('id' => tx_oelib_PageFinder::getInstance()->getPageUid())
+			self::MODULE_NAME, array('id' => Tx_Oelib_PageFinder::getInstance()->getPageUid())
 		);
 
 		return '<fieldset id="EventMailForm"><form action="' . htmlspecialchars($formAction) . '" method="post">' .
@@ -513,7 +513,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	 */
 	private function redirectToListView() {
 		$url = BackendUtility::getModuleUrl(
-			self::MODULE_NAME, array('id' => tx_oelib_PageFinder::getInstance()->getPageUid()), FALSE, TRUE
+			self::MODULE_NAME, array('id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()), FALSE, TRUE
 		);
 		Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' .  $url);
 	}

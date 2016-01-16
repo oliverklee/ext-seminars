@@ -297,7 +297,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 
 		self::assertSame(
 			$pageUid,
-			tx_oelib_PageFinder::getInstance()->getPageUid()
+			Tx_Oelib_PageFinder::getInstance()->getPageUid()
 		);
 	}
 

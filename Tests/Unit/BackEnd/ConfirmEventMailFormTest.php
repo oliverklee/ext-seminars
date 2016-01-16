@@ -104,7 +104,7 @@ class Tx_Seminars_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase {
 		tx_oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
 		$this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
-		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
+		Tx_Oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
 
 		$this->organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',

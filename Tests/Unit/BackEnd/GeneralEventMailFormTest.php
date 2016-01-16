@@ -103,7 +103,7 @@ class Tx_Seminars_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
 		$this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
-		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
+		Tx_Oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
 
 		$this->organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',

@@ -60,7 +60,7 @@ class tx_seminars_cli_MailNotifier {
 			);
 		}
 
-		tx_oelib_PageFinder::getInstance()->setPageUid($uid);
+		Tx_Oelib_PageFinder::getInstance()->setPageUid($uid);
 	}
 
 	/**

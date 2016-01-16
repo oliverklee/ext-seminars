@@ -85,7 +85,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
 		$this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
-		tx_oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
+		Tx_Oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
 
 		$this->organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
@@ -176,7 +176,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 * @test
 	 */
 	public function formActionContainsCurrentPage() {
-		tx_oelib_PageFinder::getInstance()->setPageUid(42);
+		Tx_Oelib_PageFinder::getInstance()->setPageUid(42);
 
 		self::assertContains(
 			'&amp;id=42',
@@ -799,7 +799,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		self::assertSame(
 			'Location: ' . BackendUtility::getModuleUrl(
 				Tx_Seminars_BackEnd_AbstractEventMailForm::MODULE_NAME,
-				array('id' => tx_oelib_PageFinder::getInstance()->getPageUid()), FALSE, TRUE
+				array('id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()), false, true
 			),
 			Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
 		);
