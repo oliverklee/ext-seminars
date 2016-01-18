@@ -3078,8 +3078,8 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCountryOfPlace() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 
-		/** @var tx_oelib_Mapper_Country $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
+		/** @var Tx_Oelib_Mapper_Country $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
 		/** @var tx_oelib_Model_Country $country */
 		$country = $mapper->find(54);
 		$uid = $this->testingFramework->createRecord(
@@ -3168,8 +3168,8 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	public function notifyAttendeeForPlaceAddressWithCountryAndCitySeparatesCountryAndCityWithComma() {
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 
-		/** @var tx_oelib_Mapper_Country $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
+		/** @var Tx_Oelib_Mapper_Country $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
 		/** @var tx_oelib_Model_Country $country */
 		$country = $mapper->find(54);
 		$uid = $this->testingFramework->createRecord(

@@ -1608,8 +1608,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$countryUid = (int)$formData[$prefix . 'country'];
 		if ($countryUid > 0) {
 			try {
-				/** @var tx_oelib_Mapper_Country $mapper */
-				$mapper = Tx_Oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
+				/** @var Tx_Oelib_Mapper_Country $mapper */
+				$mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
 				/** @var Tx_Oelib_Model_Country $country */
 				$country = $mapper->find($countryUid);
 			} catch (Exception $exception) {
@@ -2442,8 +2442,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	public static function populateListCountries() {
 		$result = array();
 
-		/** @var tx_oelib_Mapper_Country $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Country');
+		/** @var Tx_Oelib_Mapper_Country $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
 		$countries = $mapper->findAll('cn_short_local');
 		/** @var tx_oelib_Model_Country $country */
 		foreach ($countries as $country) {
