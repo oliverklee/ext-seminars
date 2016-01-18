@@ -116,7 +116,7 @@ abstract class tx_seminars_Model_AbstractTimeSpan extends Tx_Oelib_Model impleme
 	/**
 	 * Returns our speakers.
 	 *
-	 * @return tx_oelib_List our speakers, will be empty if this time-span has
+	 * @return Tx_Oelib_List our speakers, will be empty if this time-span has
 	 *                       no speakers
 	 */
 	public function getSpeakers() {

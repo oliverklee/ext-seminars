@@ -114,7 +114,7 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	/**
 	 * Gets this user group's assigned default categories.
 	 *
-	 * @return tx_oelib_List the list of default categories assigned to this
+	 * @return Tx_Oelib_List the list of default categories assigned to this
 	 *                       group, will be empty if no default categories are
 	 *                       assigned to this group
 	 */

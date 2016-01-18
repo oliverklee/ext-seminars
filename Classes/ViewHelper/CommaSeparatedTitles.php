@@ -26,11 +26,11 @@ class tx_seminars_ViewHelper_CommaSeparatedTitles {
 	 *
 	 * The titles will be htmlspecialchared before being returned.
 	 *
-	 * @param tx_oelib_List<tx_seminars_Interface_Titled> $list
+	 * @param Tx_Oelib_List<tx_seminars_Interface_Titled> $list
 	 *
 	 * @return string the titles of the elements in $list as a comma separated list or an empty string if the list is empty
 	 */
-	public function render(tx_oelib_List $list) {
+	public function render(Tx_Oelib_List $list) {
 		$titles = array();
 
 		/** @var tx_seminars_Interface_Titled $element */

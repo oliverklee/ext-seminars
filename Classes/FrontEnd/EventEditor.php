@@ -1739,7 +1739,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 		$speaker = GeneralUtility::makeInstance('tx_seminars_Model_Speaker');
 		$speaker->setData(array_merge(
 			self::createBasicAuxiliaryData(),
-			array('skills' => new tx_oelib_List())
+			array('skills' => new Tx_Oelib_List())
 		));
 		self::setSpeakerData($speaker, 'newSpeaker_', $formData);
 		$speaker->markAsDirty();
@@ -1880,8 +1880,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	private static function setSpeakerData(tx_seminars_Model_Speaker $speaker, $prefix, array $formData) {
 		/** @var tx_seminars_Mapper_Skill $skillMapper */
 		$skillMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Skill');
-		/** @var tx_oelib_List $skills */
-		$skills = GeneralUtility::makeInstance('tx_oelib_List');
+		/** @var Tx_Oelib_List $skills */
+		$skills = GeneralUtility::makeInstance(Tx_Oelib_List::class);
 
 		if (is_array($formData[$prefix . 'skills'])) {
 			foreach ($formData[$prefix . 'skills'] as $rawUid) {
@@ -2472,14 +2472,14 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Returns an array of caption value pairs for formidable checkboxes.
 	 *
-	 * @param tx_oelib_List $models
+	 * @param Tx_Oelib_List $models
 	 *        List of models to show in the checkboxes, may be empty
 	 *
 	 * @return array[] items as an array with the keys "caption" (for the title)
 	 *         and "value" (for the UID), will be empty if an empty model list
 	 *         was provided
 	 */
-	public static function makeListToFormidableList(tx_oelib_List $models) {
+	public static function makeListToFormidableList(Tx_Oelib_List $models) {
 		if ($models->isEmpty()) {
 			return array();
 		}

@@ -69,10 +69,11 @@ class tx_seminars_Mapper_EventTopicTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getCategoriesForEventTopicReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
-			)->getCategories() instanceof tx_oelib_List
+			)->getCategories()
 		);
 	}
 
@@ -161,10 +162,11 @@ class tx_seminars_Mapper_EventTopicTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getPaymentMethodsForEventTopicReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
-			)->getPaymentMethods() instanceof tx_oelib_List
+			)->getPaymentMethods()
 		);
 	}
 
@@ -226,10 +228,11 @@ class tx_seminars_Mapper_EventTopicTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getTargetGroupsForEventTopicReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
-			)->getTargetGroups() instanceof tx_oelib_List
+			)->getTargetGroups()
 		);
 	}
 
@@ -285,10 +288,11 @@ class tx_seminars_Mapper_EventTopicTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getCheckboxesForEventTopicReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
-			)->getCheckboxes() instanceof tx_oelib_List
+			)->getCheckboxes()
 		);
 	}
 
@@ -344,10 +348,11 @@ class tx_seminars_Mapper_EventTopicTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRequirementsForEventTopicReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
-			)->getRequirements() instanceof tx_oelib_List
+			)->getRequirements()
 		);
 	}
 
@@ -401,10 +406,11 @@ class tx_seminars_Mapper_EventTopicTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getDependenciesForEventTopicReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
-			)->getDependencies() instanceof tx_oelib_List
+			)->getDependencies()
 		);
 	}
 

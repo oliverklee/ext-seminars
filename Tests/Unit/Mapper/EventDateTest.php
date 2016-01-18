@@ -84,13 +84,14 @@ class tx_seminars_Mapper_EventDateTest extends Tx_Phpunit_TestCase {
 	public function getCategoriesForEventDateReturnsListInstance() {
 		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array(
 					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			)->getCategories() instanceof tx_oelib_List
+			)->getCategories()
 		);
 	}
 
@@ -197,13 +198,14 @@ class tx_seminars_Mapper_EventDateTest extends Tx_Phpunit_TestCase {
 	public function getPaymentMethodsForEventDateReturnsListInstance() {
 		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array(
 					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			)->getPaymentMethods() instanceof tx_oelib_List
+			)->getPaymentMethods()
 		);
 	}
 
@@ -277,13 +279,14 @@ class tx_seminars_Mapper_EventDateTest extends Tx_Phpunit_TestCase {
 	public function getTargetGroupsForEventDateReturnsListInstance() {
 		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array(
 					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			)->getTargetGroups() instanceof tx_oelib_List
+			)->getTargetGroups()
 		);
 	}
 
@@ -349,13 +352,14 @@ class tx_seminars_Mapper_EventDateTest extends Tx_Phpunit_TestCase {
 	public function getCheckboxesForEventDateReturnsListInstance() {
 		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array(
 					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			)->getCheckboxes() instanceof tx_oelib_List
+			)->getCheckboxes()
 		);
 	}
 
@@ -425,13 +429,14 @@ class tx_seminars_Mapper_EventDateTest extends Tx_Phpunit_TestCase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array(
 					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			)->getRequirements() instanceof tx_oelib_List
+			)->getRequirements()
 		);
 	}
 
@@ -504,13 +509,14 @@ class tx_seminars_Mapper_EventDateTest extends Tx_Phpunit_TestCase {
 			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
 		);
 
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array(
 					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
-			)->getDependencies() instanceof tx_oelib_List
+			)->getDependencies()
 		);
 	}
 

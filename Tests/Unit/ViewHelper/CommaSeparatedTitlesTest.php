@@ -32,7 +32,7 @@ class tx_seminars_ViewHelper_CommaSeparatedTitlesTest extends Tx_Phpunit_TestCas
 	private $testingFramework;
 
 	/**
-	 * @var tx_oelib_List
+	 * @var Tx_Oelib_List
 	 */
 	private $list;
 
@@ -43,7 +43,7 @@ class tx_seminars_ViewHelper_CommaSeparatedTitlesTest extends Tx_Phpunit_TestCas
 
 	protected function setUp() {
 		$this->testingFramework	= new Tx_Oelib_TestingFramework('tx_seminars');
-		$this->list = new tx_oelib_List();
+		$this->list = new Tx_Oelib_List();
 		$this->fixture = new tx_seminars_ViewHelper_CommaSeparatedTitles();
 	}
 

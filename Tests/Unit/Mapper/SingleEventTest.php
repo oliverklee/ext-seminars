@@ -69,10 +69,11 @@ class tx_seminars_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getCategoriesForSingleEventReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
-			)->getCategories() instanceof tx_oelib_List
+			)->getCategories()
 		);
 	}
 
@@ -161,10 +162,11 @@ class tx_seminars_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getPaymentMethodsForSingleEventReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
-			)->getPaymentMethods() instanceof tx_oelib_List
+			)->getPaymentMethods()
 		);
 	}
 
@@ -226,10 +228,11 @@ class tx_seminars_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getTargetGroupsForSingleEventReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
-			)->getTargetGroups() instanceof tx_oelib_List
+			)->getTargetGroups()
 		);
 	}
 
@@ -280,10 +283,11 @@ class tx_seminars_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getTargetGroupsForEventTopicReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
-			)->getTargetGroups() instanceof tx_oelib_List
+			)->getTargetGroups()
 		);
 	}
 
@@ -339,10 +343,11 @@ class tx_seminars_Mapper_SingleEventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getCheckboxesForSingleEventReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(
 				array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
-			)->getCheckboxes() instanceof tx_oelib_List
+			)->getCheckboxes()
 		);
 	}
 

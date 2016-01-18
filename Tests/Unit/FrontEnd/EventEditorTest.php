@@ -2523,7 +2523,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function modifyDataToInsertForNewEventAndUserWithOneDefaultCategoryAddsThisCategory() {
-		$categories = new tx_oelib_List();
+		$categories = new Tx_Oelib_List();
 		$category = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
 			->getNewGhost();
 		$categories->add($category);
@@ -2558,7 +2558,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$category1 = $categoryMapper->getNewGhost();
 		$category2 = $categoryMapper->getNewGhost();
 
-		$categories = new tx_oelib_List();
+		$categories = new Tx_Oelib_List();
 		$categories->add($category1);
 		$categories->add($category2);
 
@@ -2588,7 +2588,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function modifyDataToInsertForEditedEventAndUserWithOneDefaultCategoryDoesNotAddTheUsersCategory() {
-		$categories = new tx_oelib_List();
+		$categories = new Tx_Oelib_List();
 		$category = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
 			->getNewGhost();
 		$categories->add($category);
@@ -2862,7 +2862,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function validateCheckboxesForUserWithDefaultCategoriesAndCategoriesRequiredAndEmptyReturnsTrue() {
-		$categories = new tx_oelib_List();
+		$categories = new Tx_Oelib_List();
 		$categories->add(
 			tx_oelib_MapperRegistry::get('tx_seminars_Mapper_Category')
 				->getNewGhost()
@@ -3687,7 +3687,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	public function makeListToFormidableListForEmptyListGivenReturnsEmptyArray() {
 		self::assertEquals(
 			array(),
-			tx_seminars_FrontEnd_EventEditor::makeListToFormidableList(new tx_oelib_List())
+			tx_seminars_FrontEnd_EventEditor::makeListToFormidableList(new Tx_Oelib_List())
 		);
 	}
 
@@ -3700,7 +3700,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 				array('title' => 'foo')
 		);
 
-		$list = new tx_oelib_List();
+		$list = new Tx_Oelib_List();
 		$list->add($targetGroup);
 
 		self::assertTrue(
@@ -3720,7 +3720,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$targetGroup2 = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_TargetGroup')->getLoadedTestingModel(array());
 
-		$list = new tx_oelib_List();
+		$list = new Tx_Oelib_List();
 		$list->add($targetGroup1);
 		$list->add($targetGroup2);
 

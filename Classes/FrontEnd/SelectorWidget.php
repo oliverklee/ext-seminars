@@ -49,7 +49,7 @@ class tx_seminars_FrontEnd_SelectorWidget extends tx_seminars_FrontEnd_AbstractV
 	private $seminarBag = NULL;
 
 	/**
-	 * @var tx_oelib_List all places which are assigned to at least one event
+	 * @var Tx_Oelib_List all places which are assigned to at least one event
 	 */
 	private $places = NULL;
 

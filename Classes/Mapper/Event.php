@@ -96,7 +96,7 @@ class tx_seminars_Mapper_Event extends tx_oelib_DataMapper {
 	 * @param int $maximum
 	 *        maximum begin date as a UNIX timestamp, must be >= $minimum
 	 *
-	 * @return tx_oelib_List the found tx_seminars_Model_Event models, will be
+	 * @return Tx_Oelib_List the found tx_seminars_Model_Event models, will be
 	 *                       empty if there are no matches
 	 */
 	public function findAllByBeginDate($minimum, $maximum) {

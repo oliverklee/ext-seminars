@@ -257,7 +257,7 @@ class tx_seminars_Model_Registration extends Tx_Oelib_Model implements tx_semina
 	/**
 	 * Gets the additional persons (FE users) attached to this registration.
 	 *
-	 * @return tx_oelib_List additional persons, will be empty if there are none
+	 * @return Tx_Oelib_List additional persons, will be empty if there are none
 	 */
 	public function getAdditionalPersons() {
 		return $this->getAsList('additional_persons');
@@ -266,11 +266,11 @@ class tx_seminars_Model_Registration extends Tx_Oelib_Model implements tx_semina
 	/**
 	 * Sets the additional persons attached to this registration.
 	 *
-	 * @param tx_oelib_List $persons the additional persons (FE users), may be empty
+	 * @param Tx_Oelib_List $persons the additional persons (FE users), may be empty
 	 *
 	 * @return void
 	 */
-	public function setAdditionalPersons(tx_oelib_List $persons) {
+	public function setAdditionalPersons(Tx_Oelib_List $persons) {
 		$this->set('additional_persons', $persons);
 	}
 
@@ -706,7 +706,7 @@ class tx_seminars_Model_Registration extends Tx_Oelib_Model implements tx_semina
 	/**
 	 * Returns the lodgings of this registration.
 	 *
-	 * @return tx_oelib_List the lodgings of this registration
+	 * @return Tx_Oelib_List the lodgings of this registration
 	 */
 	public function getLodgings() {
 		return $this->getAsList('lodgings');
@@ -735,7 +735,7 @@ class tx_seminars_Model_Registration extends Tx_Oelib_Model implements tx_semina
 	/**
 	 * Returns the foods of this registration.
 	 *
-	 * @return tx_oelib_List the foods of this registration
+	 * @return Tx_Oelib_List the foods of this registration
 	 */
 	public function getFoods() {
 		return $this->getAsList('foods');
@@ -811,7 +811,7 @@ class tx_seminars_Model_Registration extends Tx_Oelib_Model implements tx_semina
 	/**
 	 * Returns the checkboxes of this registration.
 	 *
-	 * @return tx_oelib_List the checkboxes of this registration
+	 * @return Tx_Oelib_List the checkboxes of this registration
 	 */
 	public function getCheckboxes() {
 		return $this->getAsList('checkboxes');

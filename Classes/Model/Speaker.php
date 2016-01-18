@@ -152,7 +152,7 @@ class tx_seminars_Model_Speaker extends Tx_Oelib_Model implements Tx_Oelib_Inter
 	/**
 	 * Returns our skills.
 	 *
-	 * @return tx_oelib_List our skills, will be empty if there are no skills
+	 * @return Tx_Oelib_List our skills, will be empty if there are no skills
 	 *                       related to this speaker
 	 */
 	public function getSkills() {
@@ -162,11 +162,11 @@ class tx_seminars_Model_Speaker extends Tx_Oelib_Model implements Tx_Oelib_Inter
 	/**
 	 * Sets this speaker's skills.
 	 *
-	 * @param tx_oelib_List $skills this speaker's skills, may be empty
+	 * @param Tx_Oelib_List $skills this speaker's skills, may be empty
 	 *
 	 * @return void
 	 */
-	public function setSkills(tx_oelib_List $skills) {
+	public function setSkills(Tx_Oelib_List $skills) {
 		$this->set('skills', $skills);
 	}
 

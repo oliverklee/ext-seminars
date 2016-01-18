@@ -165,9 +165,9 @@ class tx_seminars_Mapper_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getLodgingsReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(array())->getLodgings()
-				instanceof tx_oelib_List
 		);
 	}
 
@@ -217,9 +217,9 @@ class tx_seminars_Mapper_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getFoodsReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(array())->getFoods()
-				instanceof tx_oelib_List
 		);
 	}
 
@@ -270,9 +270,9 @@ class tx_seminars_Mapper_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getCheckboxesReturnsListInstance() {
-		self::assertTrue(
+		self::assertInstanceOf(
+			Tx_Oelib_List::class,
 			$this->fixture->getLoadedTestingModel(array())->getCheckboxes()
-				instanceof tx_oelib_List
 		);
 	}
 

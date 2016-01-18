@@ -674,7 +674,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getCombinedSingleViewPageInitiallyReturnsEmptyString() {
-		$this->fixture->setData(array('categories' => new tx_oelib_List()));
+		$this->fixture->setData(array('categories' => new Tx_Oelib_List()));
 
 		self::assertEquals(
 			'',
@@ -687,7 +687,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getCombinedSingleViewPageForAvailableDetailsPageUidReturnsTheDetailsPageUid() {
 		$this->fixture->setData(array(
-			'details_page' => '5', 'categories' => new tx_oelib_List()
+			'details_page' => '5', 'categories' => new Tx_Oelib_List()
 		));
 
 		self::assertEquals(
@@ -701,7 +701,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getCombinedSingleViewPageForAvailableDetailsPageUrlReturnsTheDetailsPageUrl() {
 		$this->fixture->setData(array(
-			'details_page' => 'www.example.com', 'categories' => new tx_oelib_List()
+			'details_page' => 'www.example.com', 'categories' => new Tx_Oelib_List()
 		));
 
 		self::assertEquals(
@@ -717,7 +717,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 		$eventType = new tx_seminars_Model_EventType();
 		$eventType->setData(array());
 		$this->fixture->setData(array(
-			'event_type' => $eventType, 'categories' => new tx_oelib_List()
+			'event_type' => $eventType, 'categories' => new Tx_Oelib_List()
 		));
 
 		self::assertEquals(
@@ -733,7 +733,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 		$eventType = new tx_seminars_Model_EventType();
 		$eventType->setData(array('single_view_page' => 42));
 		$this->fixture->setData(array(
-			'event_type' => $eventType, 'categories' => new tx_oelib_List()
+			'event_type' => $eventType, 'categories' => new Tx_Oelib_List()
 		));
 
 		self::assertEquals(
@@ -748,7 +748,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	public function getCombinedSingleViewPageForAvailableCategoryWithoutSingleViewPageReturnsEmptyString() {
 		$category = new tx_seminars_Model_Category();
 		$category->setData(array());
-		$categories = new tx_oelib_List();
+		$categories = new Tx_Oelib_List();
 		$categories->add($category);
 		$this->fixture->setData(array('categories' => $categories));
 
@@ -764,7 +764,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	public function getCombinedSingleViewPageForAvailableCategoryTypeWithSingleViewPageReturnsSingleViewPageFromCategory() {
 		$category = new tx_seminars_Model_Category();
 		$category->setData(array('single_view_page' => 42));
-		$categories = new tx_oelib_List();
+		$categories = new Tx_Oelib_List();
 		$categories->add($category);
 		$this->fixture->setData(array('categories' => $categories));
 
@@ -782,7 +782,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 		$category1->setData(array('single_view_page' => 42));
 		$category2 = new tx_seminars_Model_Category();
 		$category2->setData(array('single_view_page' => 12));
-		$categories = new tx_oelib_List();
+		$categories = new Tx_Oelib_List();
 		$categories->add($category1);
 		$categories->add($category2);
 		$this->fixture->setData(array('categories' => $categories));
@@ -833,7 +833,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setData(array(
 			'details_page' => '5',
 			'event_type' => $eventType,
-			'categories' => new tx_oelib_List(),
+			'categories' => new Tx_Oelib_List(),
 		));
 
 		self::assertEquals(
@@ -850,7 +850,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 		$eventType->setData(array('single_view_page' => 42));
 		$category = new tx_seminars_Model_Category();
 		$category->setData(array('single_view_page' => 91));
-		$categories = new tx_oelib_List();
+		$categories = new Tx_Oelib_List();
 		$categories->add($category);
 
 		$this->fixture->setData(array(
@@ -1667,7 +1667,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRegistrationsReturnsRegistrations() {
-		$registrations = new tx_oelib_List();
+		$registrations = new Tx_Oelib_List();
 
 		$this->fixture->setData(array('registrations' => $registrations));
 
@@ -1681,7 +1681,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationsSetsRegistrations() {
-		$registrations = new tx_oelib_List();
+		$registrations = new Tx_Oelib_List();
 
 		$this->fixture->setRegistrations($registrations);
 
@@ -1695,7 +1695,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRegularRegistrationsReturnsRegularRegistrations() {
-		$registrations = new tx_oelib_List();
+		$registrations = new Tx_Oelib_List();
 		$registration = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
 				array('registration_queue' => 0)
@@ -1713,7 +1713,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRegularRegistrationsNotReturnsQueueRegistrations() {
-		$registrations = new tx_oelib_List();
+		$registrations = new Tx_Oelib_List();
 		$registration = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
 				array('registration_queue' => 1)
@@ -1730,7 +1730,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getQueueRegistrationsReturnsQueueRegistrations() {
-		$registrations = new tx_oelib_List();
+		$registrations = new Tx_Oelib_List();
 		$registration = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
 				array('registration_queue' => 1)
@@ -1748,7 +1748,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getQueueRegistrationsNotReturnsRegularRegistrations() {
-		$registrations = new tx_oelib_List();
+		$registrations = new Tx_Oelib_List();
 		$registration = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
 				array('registration_queue' => 0)
@@ -1765,7 +1765,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function hasQueueRegistrationsForOneQueueRegistrationReturnsTrue() {
-		$registrations = new tx_oelib_List();
+		$registrations = new Tx_Oelib_List();
 		$registration = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
 				array('registration_queue' => 1)
@@ -1790,7 +1790,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_Model_Event', array('getQueueRegistrations')
 		);
 		$event->expects(self::any())->method('getQueueRegistrations')
-			->will(self::returnValue(new tx_oelib_List()));
+			->will(self::returnValue(new Tx_Oelib_List()));
 
 		self::assertFalse(
 			$event->hasQueueRegistrations()
@@ -1838,7 +1838,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 		);
 		$event->setData(array());
 		$event->expects(self::any())->method('getRegularRegistrations')
-			->will(self::returnValue(new tx_oelib_List()));
+			->will(self::returnValue(new Tx_Oelib_List()));
 
 		self::assertEquals(
 			0,
@@ -1850,7 +1850,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRegisteredSeatsCountsSingleSeatRegularRegistrations() {
-		$registrations = new tx_oelib_List();
+		$registrations = new Tx_Oelib_List();
 		$registration = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
 				array('seats' => 1)
@@ -1873,7 +1873,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRegisteredSeatsCountsMultiSeatRegularRegistrations() {
-		$registrations = new tx_oelib_List();
+		$registrations = new Tx_Oelib_List();
 		$registration = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
 				array('seats' => 2)
@@ -1896,7 +1896,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRegisteredSeatsNotCountsQueueRegistrations() {
-		$queueRegistrations = new tx_oelib_List();
+		$queueRegistrations = new Tx_Oelib_List();
 		$registration = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Registration')->getLoadedTestingModel(
 				array('seats' => 1)
@@ -1910,7 +1910,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 		$event->expects(self::any())->method('getQueueRegistrations')
 			->will(self::returnValue($queueRegistrations));
 		$event->expects(self::any())->method('getRegularRegistrations')
-			->will(self::returnValue(new tx_oelib_List()));
+			->will(self::returnValue(new Tx_Oelib_List()));
 
 		self::assertEquals(
 			0,
@@ -1927,7 +1927,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 		);
 		$event->setData(array('offline_attendees' => 2));
 		$event->expects(self::any())->method('getRegularRegistrations')
-			->will(self::returnValue(new tx_oelib_List()));
+			->will(self::returnValue(new Tx_Oelib_List()));
 
 		self::assertEquals(
 			2,
@@ -2240,7 +2240,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function attachRegistrationAddsRegistration() {
-		$this->fixture->setRegistrations(new tx_oelib_List());
+		$this->fixture->setRegistrations(new Tx_Oelib_List());
 
 		$registration = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Registration')
@@ -2256,7 +2256,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function attachRegistrationNotRemovesExistingRegistration() {
-		$registrations = new tx_oelib_List();
+		$registrations = new Tx_Oelib_List();
 		$oldRegistration = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Registration')->getNewGhost();
 		$registrations->add($oldRegistration);
@@ -2276,7 +2276,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function attachRegistrationSetsEventForRegistration() {
-		$this->fixture->setRegistrations(new tx_oelib_List());
+		$this->fixture->setRegistrations(new Tx_Oelib_List());
 
 		$registration = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_Registration')
@@ -2298,7 +2298,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getPaymentMethodsReturnsPaymentMethods() {
-		$paymentMethods = new tx_oelib_List();
+		$paymentMethods = new Tx_Oelib_List();
 		$this->fixture->setData(
 			array('payment_methods' => $paymentMethods)
 		);
@@ -2315,7 +2315,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	public function setPaymentMethodsSetsPaymentMethods() {
 		$this->fixture->setData(array());
 
-		$paymentMethods = new tx_oelib_List();
+		$paymentMethods = new Tx_Oelib_List();
 		$this->fixture->setPaymentMethods($paymentMethods);
 
 		self::assertSame(

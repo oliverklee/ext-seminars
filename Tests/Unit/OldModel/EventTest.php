@@ -5621,9 +5621,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getPlacesForEventWithNoPlacesReturnsEmptyList() {
-		self::assertTrue(
-			$this->fixture->getPlaces() instanceof tx_oelib_List
-		);
+		self::assertInstanceOf(Tx_Oelib_List::class, $this->fixture->getPlaces());
 	}
 
 	/**

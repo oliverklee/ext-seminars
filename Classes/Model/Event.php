@@ -162,7 +162,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our categories.
 	 *
-	 * @return tx_oelib_List our categories
+	 * @return Tx_Oelib_List our categories
 	 */
 	public function getCategories() {
 		return ($this->isEventDate())
@@ -332,7 +332,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our time-slots.
 	 *
-	 * @return tx_oelib_List our time-slots, will be empty if this event has no
+	 * @return Tx_Oelib_List our time-slots, will be empty if this event has no
 	 *                       time-slots
 	 */
 	public function getTimeSlots() {
@@ -618,7 +618,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our places.
 	 *
-	 * @return tx_oelib_List our places, will be empty if this event has no
+	 * @return Tx_Oelib_List our places, will be empty if this event has no
 	 *                       places
 	 */
 	public function getPlaces() {
@@ -628,7 +628,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our lodgings.
 	 *
-	 * @return tx_oelib_List our lodgings, will be empty if this event has no
+	 * @return Tx_Oelib_List our lodgings, will be empty if this event has no
 	 *                       lodgings
 	 */
 	public function getLodgings() {
@@ -638,7 +638,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our foods.
 	 *
-	 * @return tx_oelib_List our foods, will be empty if this event has no
+	 * @return Tx_Oelib_List our foods, will be empty if this event has no
 	 *                       foods
 	 */
 	public function getFoods() {
@@ -648,7 +648,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our partners.
 	 *
-	 * @return tx_oelib_List our partners, will be empty if this event has no
+	 * @return Tx_Oelib_List our partners, will be empty if this event has no
 	 *                       partners
 	 */
 	public function getPartners() {
@@ -658,7 +658,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our tutors.
 	 *
-	 * @return tx_oelib_List our tutors, will be empty if this event has no
+	 * @return Tx_Oelib_List our tutors, will be empty if this event has no
 	 *                       tutors
 	 */
 	public function getTutors() {
@@ -668,7 +668,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our leaders.
 	 *
-	 * @return tx_oelib_List our leaders, will be empty if this event has no
+	 * @return Tx_Oelib_List our leaders, will be empty if this event has no
 	 *                       leaders
 	 */
 	public function getLeaders() {
@@ -1103,7 +1103,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our payment methods.
 	 *
-	 * @return tx_oelib_List our payment methods, will be empty if this event
+	 * @return Tx_Oelib_List our payment methods, will be empty if this event
 	 *                       has no payment methods
 	 */
 	public function getPaymentMethods() {
@@ -1118,12 +1118,12 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Note: This function should only be called on topic or single event
 	 * records, not on event dates.
 	 *
-	 * @param tx_oelib_List $paymentMethods
+	 * @param Tx_Oelib_List $paymentMethods
 	 *        our payment methods, can be empty
 	 *
 	 * @return void
 	 */
-	public function setPaymentMethods(tx_oelib_List $paymentMethods) {
+	public function setPaymentMethods(Tx_Oelib_List $paymentMethods) {
 		if ($this->isEventDate()) {
 			throw new BadMethodCallException(
 				'setPaymentMethods may only be called on single events and ' .
@@ -1137,7 +1137,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our organizers.
 	 *
-	 * @return tx_oelib_List our organizers, will be empty if this event has no
+	 * @return Tx_Oelib_List our organizers, will be empty if this event has no
 	 *                       organizers
 	 */
 	public function getOrganizers() {
@@ -1147,7 +1147,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our organinzing partners.
 	 *
-	 * @return tx_oelib_List our organizing partners, will be empty if this event
+	 * @return Tx_Oelib_List our organizing partners, will be empty if this event
 	 *                       has no organizing partners
 	 */
 	public function getOrganizingPartners() {
@@ -1288,7 +1288,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our target groups.
 	 *
-	 * @return tx_oelib_List our target groups, will be empty if this event has
+	 * @return Tx_Oelib_List our target groups, will be empty if this event has
 	 *                       no target groups
 	 */
 	public function getTargetGroups() {
@@ -1346,7 +1346,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our event managers.
 	 *
-	 * @return tx_oelib_List our event managers, will be empty if this event has
+	 * @return Tx_Oelib_List our event managers, will be empty if this event has
 	 *                       no event managers
 	 */
 	public function getEventManagers() {
@@ -1356,7 +1356,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our checkboxes.
 	 *
-	 * @return tx_oelib_List our checkboxes, will be empty if this event has no
+	 * @return Tx_Oelib_List our checkboxes, will be empty if this event has no
 	 *                       checkboxes
 	 */
 	public function getCheckboxes() {
@@ -1489,7 +1489,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our requirements.
 	 *
-	 * @return tx_oelib_List our requirements, will be empty if this event has
+	 * @return Tx_Oelib_List our requirements, will be empty if this event has
 	 *                       no requirements
 	 */
 	public function getRequirements() {
@@ -1501,7 +1501,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our dependencies.
 	 *
-	 * @return tx_oelib_List our dependencies, will be empty if this event has
+	 * @return Tx_Oelib_List our dependencies, will be empty if this event has
 	 *                       no dependencies
 	 */
 	public function getDependencies() {
@@ -1610,7 +1610,7 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Gets the registrations for this event.
 	 *
-	 * @return tx_oelib_List the registrations for this event (both regular and
+	 * @return Tx_Oelib_List the registrations for this event (both regular and
 	 *                       on the waiting list), will be empty if this event
 	 *                       has no registrations
 	 */
@@ -1621,13 +1621,13 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	/**
 	 * Sets the registrations for this event.
 	 *
-	 * @param tx_oelib_List $registrations
+	 * @param Tx_Oelib_List $registrations
 	 *       the registrations for this event (both regular and on the waiting
 	 *       list), may be empty
 	 *
 	 * @return void
 	 */
-	public function setRegistrations(tx_oelib_List $registrations) {
+	public function setRegistrations(Tx_Oelib_List $registrations) {
 		$this->set('registrations', $registrations);
 	}
 
@@ -1650,13 +1650,13 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Gets the regular registrations for this event, ie. the registrations
 	 * that are not on the waiting list.
 	 *
-	 * @return tx_oelib_List the regular registrations for this event, will be
+	 * @return Tx_Oelib_List the regular registrations for this event, will be
 	 *                       will be empty if this event no regular
 	 *                       registrations
 	 */
 	public function getRegularRegistrations() {
 		/** @var Tx_Oelib_List $regularRegistrations */
-		$regularRegistrations = GeneralUtility::makeInstance('Tx_Oelib_List');
+		$regularRegistrations = GeneralUtility::makeInstance(Tx_Oelib_List::class);
 
 		/** @var tx_seminars_Model_Registration $registration */
 		foreach ($this->getRegistrations() as $registration) {
@@ -1672,12 +1672,12 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 	 * Gets the queue registrations for this event, ie. the registrations
 	 * that are no regular registrations (yet).
 	 *
-	 * @return tx_oelib_List the queue registrations for this event, will be
+	 * @return Tx_Oelib_List the queue registrations for this event, will be
 	 *                       will be empty if this event no queue registrations
 	 */
 	public function getQueueRegistrations() {
 		/** @var Tx_Oelib_List $queueRegistrations */
-		$queueRegistrations = GeneralUtility::makeInstance('Tx_Oelib_List');
+		$queueRegistrations = GeneralUtility::makeInstance(Tx_Oelib_List::class);
 
 		/** @var tx_seminars_Model_Registration $registration */
 		foreach ($this->getRegistrations() as $registration) {

@@ -4590,7 +4590,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function getPlaces() {
 		if (!$this->hasPlace()) {
 			/** @var Tx_Oelib_List $list */
-			$list = GeneralUtility::makeInstance('tx_oelib_List');
+			$list = GeneralUtility::makeInstance(Tx_Oelib_List::class);
 			return $list;
 		}
 

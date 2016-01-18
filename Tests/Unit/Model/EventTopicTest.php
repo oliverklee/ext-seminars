@@ -1739,7 +1739,7 @@ class tx_seminars_Model_EventTopicTest extends Tx_Phpunit_TestCase {
 	public function setPaymentMethodsSetsPaymentMethods() {
 		$this->fixture->setData(array());
 
-		$paymentMethods = new tx_oelib_List();
+		$paymentMethods = new Tx_Oelib_List();
 		$this->fixture->setPaymentMethods($paymentMethods);
 
 		self::assertSame(

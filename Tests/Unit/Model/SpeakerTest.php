@@ -777,7 +777,7 @@ class tx_seminars_Model_SpeakerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setSkillsSetsSkills() {
-		$skills = new tx_oelib_List();
+		$skills = new Tx_Oelib_List();
 		$this->fixture->setSkills($skills);
 
 		self::assertSame(

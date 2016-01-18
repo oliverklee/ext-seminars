@@ -1505,7 +1505,7 @@ class tx_seminars_Model_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getAdditionalPersonsGetsAdditionalPersons() {
-		$additionalPersons = new tx_oelib_List();
+		$additionalPersons = new Tx_Oelib_List();
 		$this->fixture->setData(
 			array('additional_persons' => $additionalPersons)
 		);
@@ -1520,7 +1520,7 @@ class tx_seminars_Model_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setAdditionalPersonsSetsAdditionalPersons() {
-		$additionalPersons = new tx_oelib_List();
+		$additionalPersons = new Tx_Oelib_List();
 		$this->fixture->setAdditionalPersons($additionalPersons);
 
 		self::assertSame(

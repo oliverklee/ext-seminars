@@ -5005,7 +5005,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
-		$event->setData(array('payment_methods' => new tx_oelib_List()));
+		$event->setData(array('payment_methods' => new Tx_Oelib_List()));
 		$event->expects(self::any())->method('getAvailablePrices')
 			->will(self::returnValue(array('regular' => 12, 'special' => 3)));
 		$registration = new tx_seminars_Model_Registration();
@@ -5031,7 +5031,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
-		$event->setData(array('payment_methods' => new tx_oelib_List()));
+		$event->setData(array('payment_methods' => new Tx_Oelib_List()));
 		$event->expects(self::any())->method('getAvailablePrices')
 			->will(self::returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
@@ -5057,7 +5057,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
-		$event->setData(array('payment_methods' => new tx_oelib_List()));
+		$event->setData(array('payment_methods' => new Tx_Oelib_List()));
 		$event->expects(self::any())->method('getAvailablePrices')
 			->will(self::returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
@@ -5083,7 +5083,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
-		$event->setData(array('payment_methods' => new tx_oelib_List()));
+		$event->setData(array('payment_methods' => new Tx_Oelib_List()));
 		$event->expects(self::any())->method('getAvailablePrices')
 			->will(self::returnValue(array('regular' => 0)));
 		$registration = new tx_seminars_Model_Registration();
@@ -5109,7 +5109,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
-		$event->setData(array('payment_methods' => new tx_oelib_List()));
+		$event->setData(array('payment_methods' => new Tx_Oelib_List()));
 		$event->expects(self::any())->method('getAvailablePrices')
 			->will(self::returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
@@ -5135,7 +5135,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture = new $className();
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices'));
-		$event->setData(array('payment_methods' => new tx_oelib_List()));
+		$event->setData(array('payment_methods' => new Tx_Oelib_List()));
 		$event->expects(self::any())->method('getAvailablePrices')
 			->will(self::returnValue(array('regular' => 12)));
 		$registration = new tx_seminars_Model_Registration();
@@ -5346,7 +5346,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$paymentMethod = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
-		$paymentMethods = new tx_oelib_List();
+		$paymentMethods = new Tx_Oelib_List();
 		$paymentMethods->add($paymentMethod);
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));
@@ -5378,7 +5378,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
 		$paymentMethod2 = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
-		$paymentMethods = new tx_oelib_List();
+		$paymentMethods = new Tx_Oelib_List();
 		$paymentMethods->add($paymentMethod1);
 		$paymentMethods->add($paymentMethod2);
 
@@ -5409,7 +5409,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$paymentMethod = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
-		$paymentMethods = new tx_oelib_List();
+		$paymentMethods = new Tx_Oelib_List();
 		$paymentMethods->add($paymentMethod);
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));
@@ -5440,7 +5440,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$event->expects(self::any())->method('getAvailablePrices')
 			->will(self::returnValue(array('regular' => 0)));
 		$event->expects(self::any())->method('getPaymentMethods')
-			->will(self::returnValue(new tx_oelib_List()));
+			->will(self::returnValue(new Tx_Oelib_List()));
 		$registration = new tx_seminars_Model_Registration();
 		/** @var tx_seminars_Model_Event $event */
 		$registration->setEvent($event);
@@ -5464,7 +5464,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$paymentMethod1 = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
 		$paymentMethod2 = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
-		$paymentMethods = new tx_oelib_List();
+		$paymentMethods = new Tx_Oelib_List();
 		$paymentMethods->add($paymentMethod1);
 		$paymentMethods->add($paymentMethod2);
 
@@ -5494,7 +5494,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$paymentMethod = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
-		$paymentMethods = new tx_oelib_List();
+		$paymentMethods = new Tx_Oelib_List();
 		$paymentMethods->add($paymentMethod);
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));
@@ -5526,7 +5526,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
 		$paymentMethod2 = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
-		$paymentMethods = new tx_oelib_List();
+		$paymentMethods = new Tx_Oelib_List();
 		$paymentMethods->add($paymentMethod1);
 		$paymentMethods->add($paymentMethod2);
 
@@ -5558,7 +5558,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 
 		$paymentMethod = tx_oelib_MapperRegistry
 			::get('tx_seminars_Mapper_PaymentMethod')->getNewGhost();
-		$paymentMethods = new tx_oelib_List();
+		$paymentMethods = new Tx_Oelib_List();
 		$paymentMethods->add($paymentMethod);
 
 		$event = $this->getMock('tx_seminars_Model_Event', array('getAvailablePrices', 'getPaymentMethods'));

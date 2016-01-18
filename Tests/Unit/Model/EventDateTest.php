@@ -1603,7 +1603,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getPaymentMethodsReturnsPaymentMethodsFromTopic() {
-		$paymentMethods = new tx_oelib_List();
+		$paymentMethods = new Tx_Oelib_List();
 		$topic = new tx_seminars_Model_Event();
 		$topic->setData(array('payment_methods' => $paymentMethods));
 		$this->fixture->setData(
@@ -1637,6 +1637,6 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->fixture->setPaymentMethods(new tx_oelib_List());
+		$this->fixture->setPaymentMethods(new Tx_Oelib_List());
 	}
 }

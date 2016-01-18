@@ -141,7 +141,7 @@ class tx_seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
 	 */
 	public function getDefaultCategoriesFromGroup() {
 		/** @var Tx_Oelib_List $categories */
-		$categories = GeneralUtility::makeInstance('Tx_Oelib_List');
+		$categories = GeneralUtility::makeInstance(Tx_Oelib_List::class);
 
 		/** @var tx_seminars_Model_FrontEndUserGroup $group */
 		foreach ($this->getUserGroups() as $group) {
@@ -166,13 +166,13 @@ class tx_seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
 	/**
 	 * Returns all default organizers assigned to this user's groups.
 	 *
-	 * @return tx_oelib_List the organizers assigned to this user's groups, will
+	 * @return Tx_Oelib_List the organizers assigned to this user's groups, will
 	 *                       be empty if no default organizers have been assigned
 	 *                       to any of the user's groups
 	 */
 	public function getDefaultOrganizers() {
 		/** @var Tx_Oelib_List $organizers */
-		$organizers = GeneralUtility::makeInstance('Tx_Oelib_List');
+		$organizers = GeneralUtility::makeInstance(Tx_Oelib_List::class);
 
 		/** @var tx_seminars_Model_FrontEndUserGroup $group */
 		foreach ($this->getUserGroups() as $group) {

@@ -86,9 +86,7 @@ class tx_seminars_Mapper_SpeakerTest extends Tx_Phpunit_TestCase {
 
 		/** @var tx_seminars_Model_Speaker $model */
 		$model = $this->fixture->find($uid);
-		self::assertTrue(
-			$model->getSkills() instanceof tx_oelib_List
-		);
+		self::assertInstanceOf(Tx_Oelib_List::class, $model->getSkills());
 	}
 
 	/**

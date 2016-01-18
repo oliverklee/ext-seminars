@@ -369,7 +369,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 		/** @var $userGroupMapper tx_seminars_Mapper_FrontEndUserGroup */
 		$userGroupMapper = tx_oelib_MapperRegistry::get('tx_seminars_Mapper_FrontEndUserGroup');
 		/** @var  Tx_Oelib_List $userGroups */
-		$userGroups = GeneralUtility::makeInstance('Tx_Oelib_List');
+		$userGroups = GeneralUtility::makeInstance(Tx_Oelib_List::class);
 		$userGroupUids = GeneralUtility::intExplode(
 			',', $this->getConfValueString('userGroupUidsForAdditionalAttendeesFrontEndUsers', 's_registration'), TRUE
 		);
