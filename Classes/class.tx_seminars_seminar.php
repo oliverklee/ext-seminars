@@ -1144,8 +1144,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * @return string the price, formatted as in configured in TS
 	 */
 	public function formatPrice($value) {
-		/** @var tx_oelib_ViewHelper_Price $priceViewHelper */
-		$priceViewHelper = GeneralUtility::makeInstance('tx_oelib_ViewHelper_Price');
+		/** @var Tx_Oelib_ViewHelper_Price $priceViewHelper */
+		$priceViewHelper = GeneralUtility::makeInstance(Tx_Oelib_ViewHelper_Price::class);
 		$priceViewHelper->setCurrencyFromIsoAlpha3Code(
 			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency')
 		);
