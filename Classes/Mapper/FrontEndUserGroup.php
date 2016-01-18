@@ -21,7 +21,7 @@
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Mapper_FrontEndUserGroup extends tx_oelib_Mapper_FrontEndUserGroup {
+class tx_seminars_Mapper_FrontEndUserGroup extends Tx_Oelib_Mapper_FrontEndUserGroup {
 	/**
 	 * @var string the model class name for this mapper, must not be empty
 	 */
