@@ -886,8 +886,8 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	public function getLanguageWithLanguageReturnsLanguage() {
 		$this->fixture->setData(array('language' => 'DE'));
 
-		/** @var tx_oelib_Mapper_Language $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Language');
+		/** @var Tx_Oelib_Mapper_Language $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
 		self::assertSame(
 			$mapper->findByIsoAlpha2Code('DE'),
 			$this->fixture->getLanguage()
@@ -898,8 +898,8 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setLanguageSetsLanguage() {
-		/** @var tx_oelib_Mapper_Language $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Language');
+		/** @var Tx_Oelib_Mapper_Language $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
 		$language = $mapper->findByIsoAlpha2Code('DE');
 		$this->fixture->setLanguage($language);
 
@@ -924,8 +924,8 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function hasLanguageWithLanguageReturnsTrue() {
-		/** @var tx_oelib_Mapper_Language $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Language');
+		/** @var Tx_Oelib_Mapper_Language $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
 		$language = $mapper->findByIsoAlpha2Code('DE');
 		$this->fixture->setLanguage($language);
 

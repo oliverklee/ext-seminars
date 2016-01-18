@@ -686,8 +686,8 @@ class tx_seminars_Model_Event extends tx_seminars_Model_AbstractTimeSpan {
 			return NULL;
 		}
 
-		/** @var tx_oelib_Mapper_Language $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_Language');
+		/** @var Tx_Oelib_Mapper_Language $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
 		return $mapper->findByIsoAlpha2Code($this->getAsString('language'));
 	}
 
