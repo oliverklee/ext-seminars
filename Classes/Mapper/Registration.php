@@ -37,7 +37,7 @@ class tx_seminars_Mapper_Registration extends tx_oelib_DataMapper {
 	protected $relations = array(
 		'seminar' => 'tx_seminars_Mapper_Event',
 		'user' => 'tx_seminars_Mapper_FrontEndUser',
-		'currency' => 'tx_oelib_Mapper_Currency',
+		'currency' => Tx_Oelib_Mapper_Currency::class,
 		'method_of_payment' => 'tx_seminars_Mapper_PaymentMethod',
 		'lodgings' => 'tx_seminars_Mapper_Lodging',
 		'foods' => 'tx_seminars_Mapper_Food',
