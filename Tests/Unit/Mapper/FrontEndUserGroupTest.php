@@ -73,9 +73,8 @@ class tx_seminars_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 
 		/** @var tx_seminars_Model_FrontEndUserGroup $model */
 		$model = $this->fixture->find($frontEndUserGroup->getUid());
-		self::assertTrue(
-			$model->getReviewer() instanceof tx_oelib_Model_BackEndUser
-		);
+
+		self::assertInstanceOf(Tx_Oelib_Model_BackEndUser::class, $model->getReviewer());
 	}
 
 

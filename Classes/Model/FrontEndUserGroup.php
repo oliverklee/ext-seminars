@@ -84,7 +84,7 @@ class tx_seminars_Model_FrontEndUserGroup extends tx_oelib_Model_FrontEndUserGro
 	/**
 	 * Returns the BE user which is stored as reviewer for this group.
 	 *
-	 * @return tx_oelib_Model_BackEndUser the reviewer for this group, will be
+	 * @return Tx_Oelib_Model_BackEndUser the reviewer for this group, will be
 	 *                                    NULL if no reviewer has been set
 	 */
 	public function getReviewer() {

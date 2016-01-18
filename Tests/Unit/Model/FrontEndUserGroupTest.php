@@ -160,7 +160,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function hasReviewerForGroupWithReviewerReturnsTrue() {
-		$backEndUser = new tx_oelib_Model_BackEndUser();
+		$backEndUser = new Tx_Oelib_Model_BackEndUser();
 
 		$this->fixture->setData(array('tx_seminars_reviewer' => $backEndUser));
 
@@ -184,7 +184,7 @@ class tx_seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getReviewerForGroupWithReviewerReturnsReviewer() {
-		$backEndUser = new tx_oelib_Model_BackEndUser();
+		$backEndUser = new Tx_Oelib_Model_BackEndUser();
 
 		$this->fixture->setData(array('tx_seminars_reviewer' => $backEndUser));
 

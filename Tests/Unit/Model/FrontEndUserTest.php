@@ -371,7 +371,7 @@ class tx_seminars_Model_FrontEndUserTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getReviewerFromGroupForUserWithGroupWithReviewerReturnsReviewer() {
-		$backEndUser = new tx_oelib_Model_BackEndUser();
+		$backEndUser = new Tx_Oelib_Model_BackEndUser();
 
 		$userGroup = new tx_seminars_Model_FrontEndUserGroup();
 		$userGroup->setData(array('tx_seminars_reviewer' => $backEndUser));
@@ -391,7 +391,7 @@ class tx_seminars_Model_FrontEndUserTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getReviewerFromGroupForUserWithTwoGroupsOneWithReviewerOneWithoutReviewerReturnsReviewer() {
-		$backEndUser = new tx_oelib_Model_BackEndUser();
+		$backEndUser = new Tx_Oelib_Model_BackEndUser();
 
 		$userGroup1 = new tx_seminars_Model_FrontEndUserGroup();
 		$userGroup2 = new tx_seminars_Model_FrontEndUserGroup();
@@ -415,8 +415,8 @@ class tx_seminars_Model_FrontEndUserTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getReviewerFromGroupForUserWithTwoGroupsWithReviewersReturnsReviewerOfFirstGroup() {
-		$backEndUser1 = new tx_oelib_Model_BackEndUser();
-		$backEndUser2 = new tx_oelib_Model_BackEndUser();
+		$backEndUser1 = new Tx_Oelib_Model_BackEndUser();
+		$backEndUser2 = new Tx_Oelib_Model_BackEndUser();
 
 		$userGroup1 = new tx_seminars_Model_FrontEndUserGroup();
 		$userGroup2 = new tx_seminars_Model_FrontEndUserGroup();

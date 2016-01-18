@@ -1290,7 +1290,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	/**
 	 * Gets the reviewer for new/edited records.
 	 *
-	 * @return tx_oelib_Model_BackEndUser|NULL
+	 * @return Tx_Oelib_Model_BackEndUser|null
 	 */
 	protected function getReviewer() {
 		Tx_Oelib_MapperRegistry::purgeInstance();
