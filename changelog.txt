@@ -11,6 +11,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5486] Rename tx_oelib_BackEndLoginManager to Tx_Oelib_BackEndLoginManager
 - [#5509] Rename tx_oelib_Model_BackEndUserGroup to Tx_Oelib_Model_BackEndUserGroup
 - [#5506] Rename tx_oelib_Model to Tx_Oelib_Model
 - [#5503] Rename tx_oelib_PageFinder to Tx_Oelib_PageFinder

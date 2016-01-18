@@ -159,7 +159,7 @@ class tx_seminars_BackEnd_SpeakersListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_Mapper_BackEndUser')->getLoadedTestingModel(
 				array('usergroup' => $backEndGroup->getUid())
 		);
-		tx_oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
+		Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
 			$backEndUser
 		);
 

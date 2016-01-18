@@ -84,7 +84,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_Mapper_BackEndUser')->getLoadedTestingModel(
 			array('usergroup' => $backEndGroup->getUid())
 		);
-		tx_oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
+		Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 	}
 
 	protected function tearDown() {
@@ -763,7 +763,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 	public function testNewButtonForNoEventStorageSettingInUserGroupsSetsCurrentPageIdAsNewRecordPid() {
 		$backEndUser = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_BackEndUser')->getLoadedTestingModel(array());
-		tx_oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
+		Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
 			$backEndUser
 		);
 
@@ -776,7 +776,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 	public function testNewButtonForEventStoredOnCurrentPageHasCurrentFolderLabel() {
 		$backEndUser = tx_oelib_MapperRegistry::get(
 			'tx_seminars_Mapper_BackEndUser')->getLoadedTestingModel(array());
-		tx_oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
+		Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
 			$backEndUser
 		);
 
@@ -791,7 +791,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testNewButtonForEventStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid() {
-		$newEventFolder = tx_oelib_BackEndLoginManager::getInstance()->
+		$newEventFolder = Tx_Oelib_BackEndLoginManager::getInstance()->
 			getLoggedInUser('tx_seminars_Mapper_BackEndUser')
 				->getEventFolderFromGroup();
 
@@ -802,7 +802,7 @@ class tx_seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testNewButtonForEventStoredInPageDetermindedByGroupHasForeignFolderLabel() {
-		$newEventFolder = tx_oelib_BackEndLoginManager::getInstance()->
+		$newEventFolder = Tx_Oelib_BackEndLoginManager::getInstance()->
 			getLoggedInUser('tx_seminars_Mapper_BackEndUser')
 				->getEventFolderFromGroup();
 
