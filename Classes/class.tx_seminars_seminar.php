@@ -3400,8 +3400,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 			return NULL;
 		}
 
-		/** @var tx_oelib_Mapper_FrontEndUser $mapper */
-		$mapper = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser');
+		/** @var Tx_Oelib_Mapper_FrontEndUser $mapper */
+		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_FrontEndUser::class);
 		return $mapper->find($this->getRecordPropertyInteger('owner_feuser'));
 	}
 

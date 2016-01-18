@@ -11,6 +11,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5491] Rename tx_oelib_Mapper_FrontEndUser to Tx_Oelib_Mapper_FrontEndUser
 - [#5490] Rename tx_oelib_Mapper_FrontEndUserGroup to Tx_Oelib_Mapper_FrontEndUserGroup
 - [#5488] Rename tx_oelib_Mapper_Currency to Tx_Oelib_Mapper_Currency
 - [#5487] Rename tx_oelib_Mapper_Country to Tx_Oelib_Mapper_Country

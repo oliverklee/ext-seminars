@@ -91,7 +91,7 @@ class tx_seminars_Model_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setFrontEndUserSetsFrontEndUser() {
-		$frontEndUser = tx_oelib_MapperRegistry::get('tx_oelib_Mapper_FrontEndUser')
+		$frontEndUser = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_FrontEndUser::class)
 			->getNewGhost();
 		$this->fixture->setFrontEndUser($frontEndUser);
 

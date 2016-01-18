@@ -619,7 +619,7 @@ class tx_seminars_Mapper_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getOwnerWithOwnerReturnsOwnerInstance() {
 		$frontEndUser = tx_oelib_MapperRegistry::
-			get('tx_oelib_Mapper_FrontEndUser')->getLoadedTestingModel(array());
+			get(Tx_Oelib_Mapper_FrontEndUser::class)->getLoadedTestingModel(array());
 
 		self::assertInstanceOf(
 			Tx_Oelib_Model_FrontEndUser::class,
@@ -648,7 +648,7 @@ class tx_seminars_Mapper_EventTest extends Tx_Phpunit_TestCase {
 	public function getEventManagersWithOneEventManagerReturnsListOfFrontEndUsers() {
 		$uid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		$frontEndUser = tx_oelib_MapperRegistry::
-			get('tx_oelib_Mapper_FrontEndUser')->getNewGhost();
+			get(Tx_Oelib_Mapper_FrontEndUser::class)->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars', $uid, $frontEndUser->getUid(), 'vips'
 		);
@@ -664,7 +664,7 @@ class tx_seminars_Mapper_EventTest extends Tx_Phpunit_TestCase {
 	public function getEventManagersWithOneEventManagerReturnsOneEventManager() {
 		$uid = $this->testingFramework->createRecord('tx_seminars_seminars');
 		$frontEndUser = tx_oelib_MapperRegistry::
-			get('tx_oelib_Mapper_FrontEndUser')->getNewGhost();
+			get(Tx_Oelib_Mapper_FrontEndUser::class)->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars', $uid, $frontEndUser->getUid(), 'vips'
 		);
