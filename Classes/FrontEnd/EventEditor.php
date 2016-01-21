@@ -967,8 +967,8 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 *               if all subparts should be shown.
 	 */
 	private function getHiddenSubparts() {
-		/** @var tx_oelib_Visibility_Tree $visibilityTree */
-		$visibilityTree = GeneralUtility::makeInstance('tx_oelib_Visibility_Tree', $this->createTemplateStructure());
+		/** @var Tx_Oelib_Visibility_Tree $visibilityTree */
+		$visibilityTree = GeneralUtility::makeInstance(Tx_Oelib_Visibility_Tree::class, $this->createTemplateStructure());
 
 		$visibilityTree->makeNodesVisible($this->getFieldsToShow());
 		return $visibilityTree->getKeysOfHiddenSubparts();
@@ -978,7 +978,7 @@ class tx_seminars_FrontEnd_EventEditor extends tx_seminars_FrontEnd_Editor {
 	 * Creates the template subpart structure.
 	 *
 	 * @return array the template's subpart structure for use with
-	 *               tx_oelib_Visibility_Tree
+	 *               Tx_Oelib_Visibility_Tree
 	 */
 	private function createTemplateStructure() {
 		return array(
