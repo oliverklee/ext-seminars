@@ -12,7 +12,8 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
-- [#5540] Rename tx_seminars_tests_fixtures_OldModel_Testing to Tx_Seminars_tests_fixtures_OldModel_Testing
+- [#5541] Rename tx_seminars_Tests_Fixtures_Bag_Testing to Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing
+- [#5540] Rename tx_seminars_tests_fixtures_OldModel_Testing to Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing
 - [#5525] Rename tx_seminars_Bag_Abstract to Tx_Seminars_Bag_Abstract
 - [#5519] Rename tx_seminars_module2 to Tx_Seminars_Module2
 - [#5523] Rename tx_seminars_BackEnd_SpeakersList to Tx_Seminars_BackEnd_SpeakersList

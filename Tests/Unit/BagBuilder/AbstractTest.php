@@ -23,7 +23,7 @@
  */
 class tx_seminars_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_tests_fixtures_BagBuilder_Testing
+	 * @var Tx_Seminars_Tests_Fixtures_BagBuilder_Testing
 	 */
 	private $fixture;
 	/**
@@ -37,7 +37,7 @@ class tx_seminars_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase {
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->fixture = new tx_seminars_tests_fixtures_BagBuilder_Testing();
+		$this->fixture = new Tx_Seminars_Tests_Fixtures_BagBuilder_Testing();
 		$this->fixture->setTestMode();
 
 		$this->dummySysFolderPid = $this->testingFramework->createSystemFolder();

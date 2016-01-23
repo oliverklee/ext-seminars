@@ -23,7 +23,7 @@
  */
 class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_tests_fixtures_Bag_Testing
+	 * @var Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing
 	 */
 	private $fixture;
 
@@ -54,7 +54,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 			array('title' => 'test 2')
 		);
 
-		$this->fixture = new tx_seminars_tests_fixtures_Bag_Testing('is_dummy_record=1');
+		$this->fixture = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record=1');
 	}
 
 	protected function tearDown() {
@@ -67,7 +67,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	///////////////////////////////////////////
 
 	public function testEmptyBagHasNoUids() {
-		$bag = new tx_seminars_tests_fixtures_Bag_Testing('1 = 2');
+		$bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('1 = 2');
 
 		self::assertEquals(
 			'', $bag->getUids()
@@ -75,7 +75,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testBagCanHaveOneUid() {
-		$bag = new tx_seminars_tests_fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
+		$bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
 
 		self::assertEquals(
 			(string) $this->uidOfFirstRecord, $bag->getUids()
@@ -107,7 +107,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	///////////////////////////
 
 	public function testCountForEmptyBagReturnsZero() {
-		$bag = new tx_seminars_tests_fixtures_Bag_Testing('1 = 2');
+		$bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('1 = 2');
 
 		self::assertEquals(
 			0,
@@ -116,7 +116,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testCountForBagWithOneElementReturnsOne() {
-		$bag = new tx_seminars_tests_fixtures_Bag_Testing('uid=' . $this->uidOfFirstRecord);
+		$bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('uid=' . $this->uidOfFirstRecord);
 
 		self::assertEquals(
 			1,
@@ -142,7 +142,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testCountForBagWithTwoMatchesElementsAndLimitOfOneReturnsOne() {
-		$bag = new tx_seminars_tests_fixtures_Bag_Testing('is_dummy_record = 1', '', '', '', 1);
+		$bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record = 1', '', '', '', 1);
 
 		self::assertEquals(
 			1,
@@ -156,7 +156,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	///////////////////////////////////////
 
 	public function testCountWithoutLimitForEmptyBagReturnsZero() {
-		$bag = new tx_seminars_tests_fixtures_Bag_Testing('1 = 2');
+		$bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('1 = 2');
 
 		self::assertEquals(
 			0,
@@ -165,7 +165,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testCountWithoutLimitForBagWithOneElementReturnsOne() {
-		$bag = new tx_seminars_tests_fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
+		$bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
 
 		self::assertEquals(
 			1,
@@ -191,7 +191,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testCountWithoutLimitForBagWithTwoMatchesElementsAndLimitOfOneReturnsTwo() {
-		$bag = new tx_seminars_tests_fixtures_Bag_Testing('is_dummy_record = 1', '', '', '', 1);
+		$bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record = 1', '', '', '', 1);
 
 		self::assertEquals(
 			2,
@@ -205,7 +205,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	/////////////////////////////
 
 	public function testIsEmptyForEmptyBagReturnsTrue() {
-		$bag = new tx_seminars_tests_fixtures_Bag_Testing('1=2');
+		$bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('1=2');
 
 		self::assertTrue(
 			$bag->isEmpty()
@@ -213,7 +213,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testIsEmptyForEmptyBagAfterIteratingReturnsTrue() {
-		$bag = new tx_seminars_tests_fixtures_Bag_Testing('1 = 2');
+		$bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('1 = 2');
 		/** @var Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing $item */
 		foreach ($bag as $item);
 
@@ -223,7 +223,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testIsEmptyForBagWithOneElementReturnsFalse() {
-		$bag = new tx_seminars_tests_fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
+		$bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
 
 		self::assertFalse(
 			$bag->isEmpty()
@@ -231,7 +231,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 	}
 
 	public function testIsEmptyForBagWithOneElementAfterIteratingReturnsFalse() {
-		$bag = new tx_seminars_tests_fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
+		$bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
 		/** @var Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing $item */
 		foreach ($bag as $item);
 

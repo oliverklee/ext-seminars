@@ -24,5 +24,5 @@ class tx_seminars_tests_fixtures_BagBuilder_BrokenTesting extends tx_seminars_Ba
 	/**
 	 * @var string class name of the bag class that will be built
 	 */
-	protected $bagClassName = 'tx_seminars_tests_fixtures_Bag_Testing';
+	protected $bagClassName = Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing::class;
 }

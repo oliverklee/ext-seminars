@@ -20,7 +20,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_tests_fixtures_Bag_Testing extends tx_seminars_Bag_Abstract {
+class Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing extends tx_seminars_Bag_Abstract {
 	/**
 	 * The constructor. Creates a bag that contains test records and allows to iterate over them.
 	 *
