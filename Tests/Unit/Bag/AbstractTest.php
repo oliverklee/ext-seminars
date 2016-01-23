@@ -214,7 +214,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 
 	public function testIsEmptyForEmptyBagAfterIteratingReturnsTrue() {
 		$bag = new tx_seminars_tests_fixtures_Bag_Testing('1 = 2');
-		/** @var tx_seminars_tests_fixtures_OldModel_Testing $item */
+		/** @var Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing $item */
 		foreach ($bag as $item);
 
 		self::assertTrue(
@@ -232,7 +232,7 @@ class Tx_Seminars_Bag_AbstractTest extends Tx_Phpunit_TestCase {
 
 	public function testIsEmptyForBagWithOneElementAfterIteratingReturnsFalse() {
 		$bag = new tx_seminars_tests_fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
-		/** @var tx_seminars_tests_fixtures_OldModel_Testing $item */
+		/** @var Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing $item */
 		foreach ($bag as $item);
 
 		self::assertFalse(

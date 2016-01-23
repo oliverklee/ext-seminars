@@ -121,7 +121,7 @@ return array(
 	'tx_seminars_tests_fixtures_frontend_testingview' => $extensionPath . 'Tests/Unit/fixtures/FrontEnd/TestingView.php',
 	'tx_seminars_tests_fixtures_model_titledtestingmodel' => $extensionPath . 'Tests/Unit/fixtures/Model/TitledTestingModel.php',
 	'tx_seminars_tests_fixtures_model_untitledtestingmodel' => $extensionPath . 'Tests/Unit/fixtures/Model/UntitledTestingModel.php',
-	'tx_seminars_tests_fixtures_oldmodel_testing' => $extensionPath . 'Tests/Unit/fixtures/OldModel/Testing.php',
+	'tx_seminars_tests_unit_fixtures_oldmodel_testing' => $extensionPath . 'Tests/Unit/fixtures/OldModel/Testing.php',
 	'tx_seminars_tests_fixtures_service_testingsingleviewlinkbuilder' => $extensionPath . 'Tests/Unit/fixtures/Service/TestingSingleViewLinkBuilder.php',
 	'tx_seminars_tests_unit_fixtures_backend_testingeventmailform' => $extensionPath . 'Tests/Unit/fixtures/BackEnd/TestingEventMailForm.php',
 	'tx_seminars_pi2_pi2test' => $extensionPath . 'Tests/Unit/pi2/pi2Test.php',

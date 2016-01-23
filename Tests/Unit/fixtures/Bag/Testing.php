@@ -67,7 +67,7 @@ class tx_seminars_tests_fixtures_Bag_Testing extends tx_seminars_Bag_Abstract {
 	 * @return void
 	 */
 	protected function createItemFromDbResult() {
-		$this->currentItem = new tx_seminars_tests_fixtures_OldModel_Testing(0, $this->dbResult);
+		$this->currentItem = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, $this->dbResult);
 		$this->valid();
 	}
 }

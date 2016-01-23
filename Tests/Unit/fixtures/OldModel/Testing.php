@@ -20,7 +20,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_tests_fixtures_OldModel_Testing extends tx_seminars_OldModel_Abstract {
+class Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing extends tx_seminars_OldModel_Abstract {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
