@@ -38,7 +38,7 @@ class tx_seminars_BagBuilder_Category extends tx_seminars_BagBuilder_Abstract {
 	protected $orderBy = 'title';
 
 	/**
-	 * @var string the UIDs of the current events as commma-separated list,
+	 * @var string the UIDs of the current events as comma-separated list,
 	 *             will be set by limitToEvents
 	 */
 	protected $eventUids = '';

@@ -13,7 +13,7 @@
  */
 
 /**
- * This class represents a view helper for rendering the elements of a list as comma separated titles.
+ * This class represents a view helper for rendering the elements of a list as comma-separated titles.
  *
  * @package TYPO3
  * @subpackage tx_seminars
@@ -22,13 +22,13 @@
  */
 class tx_seminars_ViewHelper_CommaSeparatedTitles {
 	/**
-	 * Gets the titles of the elements in $list as a comma separated list.
+	 * Gets the titles of the elements in $list as a comma-separated list.
 	 *
 	 * The titles will be htmlspecialchared before being returned.
 	 *
 	 * @param Tx_Oelib_List<tx_seminars_Interface_Titled> $list
 	 *
-	 * @return string the titles of the elements in $list as a comma separated list or an empty string if the list is empty
+	 * @return string the titles of the elements in $list as a comma-separated list or an empty string if the list is empty
 	 */
 	public function render(Tx_Oelib_List $list) {
 		$titles = array();

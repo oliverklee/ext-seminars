@@ -52,7 +52,7 @@ Wenn Sie
 - vorhaben, mehr als 20 Veranstaltungsthemeneinträge zu haben
 
 - oder Sie bereits mehr als 20 bereits geschehene Veranstaltungseinträge
-  haben (definiert als “not being seperated into topic and dates”)
+  haben (definiert als “not being separated into topic and dates”)
 
 - oder Sie vorhaben, mehr als 20 veranstaltete Veramstaltungen zu haben
 

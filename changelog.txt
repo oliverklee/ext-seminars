@@ -12,6 +12,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5573] Fix the spelling of "comma-separated"
 - [#5529] Rename tx_seminars_Bag_Category to Tx_Seminars_Bag_Category
 - [#5528] Rename tx_seminars_Bag_Event to Tx_Seminars_Bag_Event
 - [#5527] Rename tx_seminars_Mapper_Lodging to Tx_Seminars_Mapper_Lodging
