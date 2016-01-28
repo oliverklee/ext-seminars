@@ -3,6 +3,7 @@
 Features:
 
 Bug fixes:
+- [#5602] Stop requiring the oelib autoloader
 - [#5539] Move class.ext_update.php back into the extension root
 - [#5235] Explicitly provide the configuration check namespaces
 - [#5389] Crash when confirming/canceling an event with time-slots
