@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Backend\Template\DocumentTemplate;
 
 /**
  * Test case.
@@ -64,7 +65,7 @@ class Tx_Seminars_BackEnd_RegistrationsListTest extends Tx_Phpunit_TestCase {
 			'doktype' => Tx_Seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
 		));
 
-		$document = new bigDoc();
+		$document = new DocumentTemplate();
 		$this->backEndModule->doc = $document;
 		$document->backPath = $GLOBALS['BACK_PATH'];
 		$document->docType = 'xhtml_strict';

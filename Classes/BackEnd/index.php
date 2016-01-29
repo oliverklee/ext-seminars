@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
@@ -67,7 +68,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module {
 	public function main() {
 		global $LANG, $BACK_PATH, $BE_USER;
 
-		$this->doc = GeneralUtility::makeInstance('bigDoc');
+		$this->doc = GeneralUtility::makeInstance(DocumentTemplate::class);
 		$this->doc->backPath = $BACK_PATH;
 		$this->doc->docType = 'xhtml_strict';
 
