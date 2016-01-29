@@ -2528,7 +2528,7 @@ plugin.tx_seminars_pi1 {
 									value = 1
 								}
 							}
-							defaultvalue {
+							defaultvalue.userobj {
 								extension = this
 								method = getFeUserData
 								params {
