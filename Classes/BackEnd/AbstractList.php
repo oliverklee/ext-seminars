@@ -141,11 +141,8 @@ abstract class Tx_Seminars_BackEnd_AbstractList {
 			);
 
 			$confirmation = htmlspecialchars(
-				'if (confirm('
-				.$LANG->JScharCode(
-					$LANG->getLL('deleteWarning')
-					.$referenceWarning)
-				.')) {return true;} else {return false;}');
+				'if (confirm(' . GeneralUtility::quoteJSvalue($LANG->getLL('deleteWarning') . $referenceWarning
+			) . ')) {return true;} else {return false;}');
 			$langDelete = $LANG->getLL('delete', 1);
 			$result = '<a href="' .
 				htmlspecialchars($this->page->doc->issueCommand($params)) .
