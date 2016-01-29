@@ -23,7 +23,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_registrationchild extends Tx_Seminars_OldModel_Registration {
+class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends Tx_Seminars_OldModel_Registration {
 	/**
 	 * The constructor.
 	 *

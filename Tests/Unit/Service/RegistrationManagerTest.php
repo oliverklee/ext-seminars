@@ -113,7 +113,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$mailerFactory->enableTestMode();
 		$this->mailer = $mailerFactory->getMailer();
 
-		tx_seminars_registrationchild::purgeCachedSeminars();
+		Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration::purgeCachedSeminars();
 		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsInteger('eMailFormatForAttendees', Tx_Seminars_Service_RegistrationManager::SEND_TEXT_MAIL);
 		$configurationRegistry = Tx_Oelib_ConfigurationRegistry::getInstance();
@@ -259,7 +259,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		return new tx_seminars_registrationchild($registrationUid);
+		return new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
 	}
 
 	/**
@@ -2070,7 +2070,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 				'user' => $this->testingFramework->createFrontEndUser(),
 			)
 		);
-		$registration = new tx_seminars_registrationchild($registrationUid);
+		$registration = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
 
 		$this->fixture->notifyAttendee($registration, $pi1);
 
@@ -4135,7 +4135,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$registration = new tx_seminars_registrationchild($registrationUid);
+		$registration = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
 		$this->fixture->notifyOrganizers($registration);
 
 		self::assertContains(
@@ -4162,7 +4162,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$registration = new tx_seminars_registrationchild($registrationUid);
+		$registration = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
 		$this->fixture->notifyOrganizers($registration);
 
 		self::assertContains(
@@ -4181,7 +4181,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_attendances',
 			array('seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser())
 		);
-		$registration = new tx_seminars_registrationchild($registrationUid);
+		$registration = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
 
 		$hook = $this->getMock(Tx_Seminars_Interface_Hook_Registration::class);
 		$hookClassName = get_class($hook);
@@ -4203,7 +4203,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_attendances',
 			array('seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser())
 		);
-		$registration = new tx_seminars_registrationchild($registrationUid);
+		$registration = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
 
 		$hook = $this->getMock(Tx_Seminars_Interface_Hook_Registration::class);
 		$hookClassName = get_class($hook);

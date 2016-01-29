@@ -15,6 +15,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5617] Rename tx_seminars_registrationchild to Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration
 - [#5620] Rename tx_seminars_configgetter to Tx_Seminars_Service_ConfigurationService
 - [#5630] Rename class.tx_seminars_cli_MailNotifier.php to MailNotifier.php
 - [#5619] Rename tx_seminars_EmailSalutation to Tx_Seminars_EmailSalutation
