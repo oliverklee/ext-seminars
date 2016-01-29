@@ -1,6 +1,7 @@
 1.0.0 - currently working on
 
 Features:
+- [#5628] Add a RealURL auto configuration
 
 Bug fixes:
 - [#5602] Stop requiring the oelib autoloader

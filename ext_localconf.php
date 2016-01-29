@@ -66,3 +66,7 @@ $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['pro
 $TYPO3_CONF_VARS['SC_OPTIONS']['GLOBAL']['cliKeys']['seminars'] = array(
 	'EXT:seminars/Classes/cli/tx_seminars_cli.php', '_CLI_seminars',
 );
+
+// RealURL autoconfiguration
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['seminars']
+	= 'OliverKlee\\Seminars\\RealUrl\\Configuration->addConfiguration';

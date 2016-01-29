@@ -4,6 +4,7 @@
 
 $extensionPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('seminars');
 return array(
+	'oliverklee\\seminars\\realurl\\configuration' => $extensionPath . 'Classes/RealUrl/Configuration.php',
 	'tx_seminars_emailsalutation' => $extensionPath . 'Classes/class.tx_seminars_EmailSalutation.php',
 	'tx_seminars_configcheck' => $extensionPath . 'Classes/class.tx_seminars_configcheck.php',
 	'tx_seminars_configgetter' => $extensionPath . 'Classes/class.tx_seminars_configgetter.php',
