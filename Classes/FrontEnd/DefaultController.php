@@ -52,10 +52,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	protected $eventMapper = NULL;
 
 	/**
-	 * @var tx_seminars_configgetter a config getter that gets us the
-	 *                               configuration in plugin.tx_seminars
+	 * configuration in plugin.tx_seminars (not plugin.tx_seminars_pi1)
+	 *
+	 * @var Tx_Seminars_Service_ConfigurationService
 	 */
-	private $configGetter = NULL;
+	private $configurationService = NULL;
 
 	/**
 	 * @var Tx_Seminars_OldModel_Event the seminar which we want to list/show or
@@ -220,7 +221,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 */
 	public function __destruct() {
 		unset(
-			$this->configGetter, $this->seminar, $this->registration, $this->feuser,
+			$this->configurationService, $this->seminar, $this->registration, $this->feuser,
 			$this->listViewHooks, $this->singleViewHooks, $this->feuser, $this->linkBuilder
 		);
 		$this->listViewHooksHaveBeenRetrieved = FALSE;
@@ -373,7 +374,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 * @return bool TRUE if we are properly initialized, FALSE otherwise
 	 */
 	public function isInitialized() {
-		return ($this->isInitialized && is_object($this->configGetter));
+		return ($this->isInitialized && is_object($this->configurationService));
 	}
 
 	/**
@@ -522,8 +523,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 * @return void
 	 */
 	public function createHelperObjects() {
-		if ($this->configGetter === NULL) {
-			$this->configGetter = GeneralUtility::makeInstance('tx_seminars_configgetter');
+		if ($this->configurationService === null) {
+			$this->configurationService = GeneralUtility::makeInstance(Tx_Seminars_Service_ConfigurationService::class);
 		}
 
 		if ($this->eventMapper === NULL) {
@@ -564,10 +565,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 *
 	 * This function is intended for testing purposes only.
 	 *
-	 * @return tx_seminars_configgetter our config getter, might be NULL
+	 * @return Tx_Seminars_Service_ConfigurationService|null
 	 */
-	public function getConfigGetter() {
-		return $this->configGetter;
+	public function getConfigurationService() {
+		return $this->configurationService;
 	}
 
 	/**
@@ -2407,7 +2408,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 */
 	public function getVacanciesClasses(Tx_Seminars_OldModel_Event $event) {
 		if (!$event->needsRegistration()
-			|| (!$event->hasDate() && !$this->configGetter->getConfValueBoolean('allowRegistrationForEventsWithoutDate'))
+			|| (!$event->hasDate() && !$this->configurationService->getConfValueBoolean('allowRegistrationForEventsWithoutDate'))
 		) {
 			return '';
 		}

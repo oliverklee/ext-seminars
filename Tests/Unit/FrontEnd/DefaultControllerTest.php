@@ -7132,7 +7132,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setNeedsRegistration(TRUE);
 		$event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
-		$this->fixture->getConfigGetter()->setConfigurationValue(
+		$this->fixture->getConfigurationService()->setConfigurationValue(
 			'allowRegistrationForStartedEvents', 1
 		);
 
@@ -7190,7 +7190,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event->setAttendancesMax(10);
 		$event->setNeedsRegistration(TRUE);
 		$event->setNumberOfAttendances(0);
-		$this->fixture->getConfigGetter()->setConfigurationValue(
+		$this->fixture->getConfigurationService()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
 		);
 
@@ -7210,7 +7210,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event->setAttendancesMax(10);
 		$event->setNeedsRegistration(TRUE);
 		$event->setNumberOfAttendances(9);
-		$this->fixture->getConfigGetter()->setConfigurationValue(
+		$this->fixture->getConfigurationService()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
 		);
 
@@ -7230,7 +7230,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event->setAttendancesMax(10);
 		$event->setNeedsRegistration(TRUE);
 		$event->setNumberOfAttendances(8);
-		$this->fixture->getConfigGetter()->setConfigurationValue(
+		$this->fixture->getConfigurationService()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
 		);
 
@@ -7250,7 +7250,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event->setAttendancesMax(10);
 		$event->setNeedsRegistration(TRUE);
 		$event->setNumberOfAttendances(10);
-		$this->fixture->getConfigGetter()->setConfigurationValue(
+		$this->fixture->getConfigurationService()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
 		);
 
@@ -7269,7 +7269,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setUnlimitedVacancies();
 		$event->setNumberOfAttendances(0);
-		$this->fixture->getConfigGetter()->setConfigurationValue(
+		$this->fixture->getConfigurationService()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
 		);
 
@@ -7288,7 +7288,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$event = new tx_seminars_seminarchild($this->seminarUid);
 		$event->setUnlimitedVacancies();
 		$event->setNumberOfAttendances(0);
-		$this->fixture->getConfigGetter()->setConfigurationValue(
+		$this->fixture->getConfigurationService()->setConfigurationValue(
 			'allowRegistrationForEventsWithoutDate', 1
 		);
 
