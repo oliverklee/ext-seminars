@@ -246,7 +246,7 @@ class Tx_Seminars_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		/** @var tx_seminars_Model_Registration $registration */
+		/** @var Tx_Seminars_Model_Registration $registration */
 		$registration = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class)->find($registrationUid);
 		$hook = $this->getMock(Tx_Seminars_Interface_Hook_BackEndModule::class);
 		$hook->expects(self::once())->method('modifyGeneralEmail')

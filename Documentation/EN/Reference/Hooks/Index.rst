@@ -119,13 +119,13 @@ It's used like this:
          * Adds an "add to cart" PayPal button for non-free registrations that have
        * not been paid for.
        *
-       * @param tx_seminars_Model_Registration $registration
+       * @param Tx_Seminars_Model_Registration $registration
        *        the affected registration
         * @param Tx_Oelib_Template $template
         *        the template from which the list row is built
         */
          public function modifyMyEventsListRow(
-                 tx_seminars_Model_Registration $registration, Tx_Oelib_Template $template
+                 Tx_Seminars_Model_Registration $registration, Tx_Oelib_Template $template
        ) {…}
 
 
@@ -167,7 +167,7 @@ parameters:
 ::
 
            public function modifyThankYouEmail(
-                 Tx_Oelib_Mail $email, tx_seminars_Model_Registration $registration
+                 Tx_Oelib_Mail $email, Tx_Seminars_Model_Registration $registration
          ) {
 
 Your class then needs to be included and registered like in this
@@ -252,26 +252,26 @@ It's used like this:
         * Note: This hook does not get called yet. It is just here so the interface
         * is finalized.
         *
-        * @param tx_seminars_Model_Registration $registration
+        * @param Tx_Seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
         * @param Tx_Oelib_Mail $eMail
         *        the e-mail that will be sent
         *
         * @return void
         */
-         public function modifyGeneralEmail(tx_seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
+         public function modifyGeneralEmail(Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
 
          /**
         * Modifies the confirmation e-mail sent via the back-end module.
         *
-        * @param tx_seminars_Model_Registration $registration
+        * @param Tx_Seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
         * @param Tx_Oelib_Mail $eMail
         *        the e-mail that will be sent
         *
         * @return void
         */
-         public function modifyConfirmEmail(tx_seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
+         public function modifyConfirmEmail(Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
 
          /**
         * Modifies the cancelation e-mail sent via the back-end module.
@@ -279,13 +279,13 @@ It's used like this:
         * Note: This hook does not get called yet. It is just here so the interface
         * is finalized.
         *
-        * @param tx_seminars_Model_Registration $registration
+        * @param Tx_Seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
         * @param Tx_Oelib_Mail $eMail
         *        the e-mail that will be sent
         *
         * @return void
         */
-          public function modifyCancelEmail(tx_seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
+          public function modifyCancelEmail(Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
 
 Please contact us if you need additional hooks.

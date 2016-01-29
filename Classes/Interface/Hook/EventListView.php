@@ -38,7 +38,7 @@ interface Tx_Seminars_Interface_Hook_EventListView {
 	/**
 	 * Modifies a list view row in the "my events" list.
 	 *
-	 * @param tx_seminars_Model_Registration $registration
+	 * @param Tx_Seminars_Model_Registration $registration
 	 *        the registration to display in the current row
 	 * @param Tx_Oelib_Template $template
 	 *        the template that will be used to create the list row output
@@ -46,6 +46,6 @@ interface Tx_Seminars_Interface_Hook_EventListView {
 	 * @return void
 	 */
 	public function modifyMyEventsListRow(
-		tx_seminars_Model_Registration $registration, Tx_Oelib_Template $template
+		Tx_Seminars_Model_Registration $registration, Tx_Oelib_Template $template
 	);
 }

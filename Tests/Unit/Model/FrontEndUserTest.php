@@ -784,7 +784,7 @@ class Tx_Seminars_Model_FrontEndUserTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getRegistrationReturnsRegistration() {
-		$registration = new tx_seminars_Model_Registration();
+		$registration = new Tx_Seminars_Model_Registration();
 		$this->fixture->setData(
 			array('tx_seminars_registration' => $registration)
 		);
@@ -799,7 +799,7 @@ class Tx_Seminars_Model_FrontEndUserTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationSetsRegistration() {
-		$registration = new tx_seminars_Model_Registration();
+		$registration = new Tx_Seminars_Model_Registration();
 		$this->fixture->setRegistration($registration);
 
 		self::assertSame(

@@ -198,7 +198,7 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
 	 * Gets the registration record for which this user is related to as
 	 * "additional registered person".
 	 *
-	 * @return tx_seminars_Model_Registration the associated registration,
+	 * @return Tx_Seminars_Model_Registration the associated registration,
 	 *                                        might be NULL
 	 */
 	public function getRegistration() {
@@ -209,12 +209,12 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser {
 	 * sets the registration record for which this user is related to as
 	 * "additional registered person".
 	 *
-	 * @param tx_seminars_Model_Registration $registration
+	 * @param Tx_Seminars_Model_Registration $registration
 	 *        the associated registration, may be NULL
 	 *
 	 * @return void
 	 */
-	public function setRegistration(tx_seminars_Model_Registration $registration = NULL) {
+	public function setRegistration(Tx_Seminars_Model_Registration $registration = NULL) {
 		$this->set('tx_seminars_registration', $registration);
 	}
 }

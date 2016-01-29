@@ -352,11 +352,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 	/**
 	 * Creates additional attendees as FE users and adds them to $registration.
 	 *
-	 * @param tx_seminars_Model_Registration $registration
+	 * @param Tx_Seminars_Model_Registration $registration
 	 *
 	 * @return void
 	 */
-	protected function createAdditionalAttendees(tx_seminars_Model_Registration $registration) {
+	protected function createAdditionalAttendees(Tx_Seminars_Model_Registration $registration) {
 		$allPersonsData = $this->getAdditionalRegisteredPersonsData();
 		if (empty($allPersonsData)) {
 			return;

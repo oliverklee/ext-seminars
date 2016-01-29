@@ -8438,7 +8438,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		/** @var tx_seminars_Model_Event $event */
 		$event = $mapper->getLoadedTestingModel(array('title' => 'TDD for starters'));
 		$registrations = new Tx_Oelib_List();
-		$registrations->add(new tx_seminars_Model_Registration());
+		$registrations->add(new Tx_Seminars_Model_Registration());
 		$event->setRegistrations($registrations);
 
 		$hiddenClone = clone $event;
@@ -8777,7 +8777,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setConfigurationValue('what_to_display', 'my_events');
 
 		$registrationUid = $this->createLogInAndRegisterFeUser();
-		/** @var tx_seminars_Model_Registration $registration */
+		/** @var Tx_Seminars_Model_Registration $registration */
 		$registration = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class)->find($registrationUid);
 
 		$hook = $this->getMock(Tx_Seminars_Interface_Hook_EventListView::class);

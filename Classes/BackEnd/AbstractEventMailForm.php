@@ -440,7 +440,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 			$registrationMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
 			/** @var tx_seminars_registration $oldRegistration */
 			foreach ($registrations as $oldRegistration) {
-				/** @var tx_seminars_Model_Registration $registration */
+				/** @var Tx_Seminars_Model_Registration $registration */
 				$registration = $registrationMapper->find($oldRegistration->getUid());
 				$user = $registration->getFrontEndUser();
 				if (($user === NULL) || !$user->hasEMailAddress()) {
@@ -487,7 +487,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * Calls all registered hooks for modifying the e-mail.
 	 *
-	 * @param tx_seminars_Model_Registration $registration
+	 * @param Tx_Seminars_Model_Registration $registration
 	 *        the registration to which the e-mail refers
 	 * @param Tx_Oelib_Mail $eMail
 	 *        the e-mail to be sent
@@ -495,7 +495,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	 * @return void
 	 */
 	protected function modifyEmailWithHook(
-		tx_seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail
+		Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail
 	) {}
 
 	/**

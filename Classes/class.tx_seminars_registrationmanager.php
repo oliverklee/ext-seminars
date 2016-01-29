@@ -480,7 +480,7 @@ class tx_seminars_registrationmanager extends Tx_Oelib_TemplateHelper {
 	 * @param array $formData the raw registration data from the registration form
 	 * @param AbstractPlugin $plugin live plugin object
 	 *
-	 * @return tx_seminars_Model_Registration the created, saved registration
+	 * @return Tx_Seminars_Model_Registration the created, saved registration
 	 */
 	public function createRegistration(tx_seminars_seminar $seminar, array $formData, AbstractPlugin $plugin) {
 		$this->registration = GeneralUtility::makeInstance('tx_seminars_registration', $plugin->cObj);
@@ -534,12 +534,12 @@ class tx_seminars_registrationmanager extends Tx_Oelib_TemplateHelper {
 	 *
 	 * Note: This functions does not check whether registration is possible at all.
 	 *
-	 * @param tx_seminars_Model_Registration $registration the registration to fill, must already have an event assigned
+	 * @param Tx_Seminars_Model_Registration $registration the registration to fill, must already have an event assigned
 	 * @param array $formData the raw data submitted via the form, may be empty
 	 *
 	 * @return void
 	 */
-	protected function setRegistrationData(tx_seminars_Model_Registration $registration, array $formData) {
+	protected function setRegistrationData(Tx_Seminars_Model_Registration $registration, array $formData) {
 		$event = $registration->getEvent();
 
 		$seats = isset($formData['seats']) ? (int)$formData['seats'] : 1;
@@ -828,7 +828,7 @@ class tx_seminars_registrationmanager extends Tx_Oelib_TemplateHelper {
 
 		/** @var Tx_Seminars_Mapper_Registration $mapper */
 		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
-		/** @var $registration tx_seminars_Model_Registration */
+		/** @var $registration Tx_Seminars_Model_Registration */
 		$registration = $mapper->find($oldRegistration->getUid());
 		foreach ($this->getHooks() as $hook) {
 			if (method_exists($hook, 'modifyThankYouEmail')) {

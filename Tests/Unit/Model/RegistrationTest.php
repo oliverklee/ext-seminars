@@ -23,7 +23,7 @@
  */
 class tx_seminars_Model_RegistrationTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_Model_Registration
+	 * @var Tx_Seminars_Model_Registration
 	 */
 	private $fixture;
 
@@ -34,7 +34,7 @@ class tx_seminars_Model_RegistrationTest extends Tx_Phpunit_TestCase {
 
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
-		$this->fixture = new tx_seminars_Model_Registration();
+		$this->fixture = new Tx_Seminars_Model_Registration();
 	}
 
 	protected function tearDown() {
