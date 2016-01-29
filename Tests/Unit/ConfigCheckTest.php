@@ -20,9 +20,9 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_ConfigCheckTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_ConfigCheckTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_configcheck
+	 * @var Tx_Seminars_ConfigCheck
 	 */
 	private $fixture;
 
@@ -35,7 +35,7 @@ class tx_seminars_ConfigCheckTest extends Tx_Phpunit_TestCase {
 		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', TRUE);
 
 		$this->objectToCheck = new Tx_Oelib_Tests_Unit_Fixtures_DummyObjectToCheck(array());
-		$this->fixture = new tx_seminars_configcheck($this->objectToCheck);
+		$this->fixture = new Tx_Seminars_ConfigCheck($this->objectToCheck);
 	}
 
 	//////////////////////////////////////
