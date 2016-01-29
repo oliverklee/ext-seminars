@@ -20,7 +20,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-final class tx_seminars_timespanchild extends tx_seminars_timespan {
+final class tx_seminars_timespanchild extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	/** same as class name */
 	public $prefixId = 'tx_seminars_timespanchild';
 	/**  path to this script relative to the extension dir */

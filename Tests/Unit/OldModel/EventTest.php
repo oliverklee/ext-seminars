@@ -7369,7 +7369,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$this->addSpeakerRelation(array('cancelation_period' => 1));
 
 		self::assertSame(
-			$GLOBALS['SIM_EXEC_TIME'] - tx_seminars_timespan::SECONDS_PER_DAY,
+			$GLOBALS['SIM_EXEC_TIME'] - Tx_Seminars_OldModel_AbstractTimeSpan::SECONDS_PER_DAY,
 			$this->fixture->getCancelationDeadline()
 		);
 	}
@@ -7384,7 +7384,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 
 		self::assertSame(
 			$GLOBALS['SIM_EXEC_TIME']
-				- (42 * tx_seminars_timespan::SECONDS_PER_DAY),
+				- (42 * Tx_Seminars_OldModel_AbstractTimeSpan::SECONDS_PER_DAY),
 			$this->fixture->getCancelationDeadline()
 		);
 	}

@@ -24,7 +24,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_seminar extends tx_seminars_timespan {
+class tx_seminars_seminar extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	/**
 	 * the same as the class name
 	 *
@@ -4481,7 +4481,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		foreach ($speakers as $speaker) {
 			$speakerDeadline = $beginDate -
 				($speaker->getCancelationPeriodInDays()
-					* tx_seminars_timespan::SECONDS_PER_DAY
+					* Tx_Seminars_OldModel_AbstractTimeSpan::SECONDS_PER_DAY
 				);
 			$deadline = min($speakerDeadline, $deadline);
 		}

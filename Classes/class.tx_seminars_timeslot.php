@@ -21,7 +21,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_timeslot extends tx_seminars_timespan {
+class tx_seminars_timeslot extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */

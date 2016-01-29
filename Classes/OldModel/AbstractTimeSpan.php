@@ -21,9 +21,9 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class tx_seminars_timespan extends Tx_Seminars_OldModel_Abstract {
+abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldModel_Abstract {
 	/** @var string same as class name */
-	public $prefixId = 'tx_seminars_timespan';
+	public $prefixId = Tx_Seminars_OldModel_AbstractTimeSpan::class;
 
 	/**
 	 * faking $this->scriptRelPath so the locallang.xml file is found
