@@ -45,7 +45,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	protected $seminarUid = 0;
 
 	/**
-	 * @var tx_seminars_seminars
+	 * @var Tx_Seminars_OldModel_Event
 	 */
 	protected $seminar = NULL;
 
@@ -65,7 +65,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 			'plugin.tx_staticinfotables_pi1', new Tx_Oelib_Configuration()
 		);
 
-		$this->seminar = new tx_seminars_seminar($this->testingFramework->createRecord(
+		$this->seminar = new Tx_Seminars_OldModel_Event($this->testingFramework->createRecord(
 			'tx_seminars_seminars', array('payment_methods' => '1')
 		));
 		$this->seminarUid = $this->seminar->getUid();
@@ -670,7 +670,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 			array('showRegistrationFields' => ''),
 			$GLOBALS['TSFE']->cObj
 		);
-		$fixture->setSeminar($this->getMock('tx_seminars_seminar', array(), array(), '', FALSE));
+		$fixture->setSeminar($this->getMock(Tx_Seminars_OldModel_Event::class, array(), array(), '', FALSE));
 
 		self::assertFalse(
 			$fixture->isFormFieldEnabled($key)
@@ -695,7 +695,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 			array('showRegistrationFields' => $key),
 			$GLOBALS['TSFE']->cObj
 		);
-		$fixture->setSeminar($this->getMock('tx_seminars_seminar', array(), array(), '', FALSE));
+		$fixture->setSeminar($this->getMock(Tx_Seminars_OldModel_Event::class, array(), array(), '', FALSE));
 
 		self::assertEquals(
 			$isSelfContained,
@@ -1456,7 +1456,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 			$this->seminarUid,
 			array('price_regular' => 42)
 		);
-		$event = new tx_seminars_seminar($this->seminarUid);
+		$event = new Tx_Seminars_OldModel_Event($this->seminarUid);
 		$fixture->setSeminar($event);
 		$fixture->setFakedFormValue('price', 42);
 
@@ -1479,7 +1479,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 		);
 		$fixture->setTestMode();
 
-		$event = new tx_seminars_seminar($this->seminarUid);
+		$event = new Tx_Seminars_OldModel_Event($this->seminarUid);
 		$fixture->setSeminar($event);
 		$fixture->setFakedFormValue('interests', 'A, B & C');
 
@@ -1502,7 +1502,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 		);
 		$fixture->setTestMode();
 
-		$event = new tx_seminars_seminar($this->seminarUid);
+		$event = new Tx_Seminars_OldModel_Event($this->seminarUid);
 		$fixture->setSeminar($event);
 		$fixture->setFakedFormValue('interests', 'Love' . CR . 'Peace');
 
@@ -1525,7 +1525,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 		);
 		$fixture->setTestMode();
 
-		$event = new tx_seminars_seminar($this->seminarUid);
+		$event = new Tx_Seminars_OldModel_Event($this->seminarUid);
 		$fixture->setSeminar($event);
 		$fixture->setFakedFormValue('attendees_names', 'John Doe');
 
@@ -1552,7 +1552,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 		);
 		$fixture->setTestMode();
 
-		$event = new tx_seminars_seminar($this->seminarUid);
+		$event = new Tx_Seminars_OldModel_Event($this->seminarUid);
 		$fixture->setSeminar($event);
 		$fixture->setFakedFormValue('attendees_names', 'John Doe');
 		$fixture->setFakedFormValue('registered_themselves', '1');
@@ -1580,7 +1580,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 		);
 		$fixture->setTestMode();
 
-		$event = new tx_seminars_seminar($this->seminarUid);
+		$event = new Tx_Seminars_OldModel_Event($this->seminarUid);
 		$fixture->setSeminar($event);
 		$fixture->setFakedFormValue('attendees_names', 'John Doe');
 		$fixture->setFakedFormValue('registered_themselves', '');
@@ -1610,7 +1610,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 		);
 		$fixture->setTestMode();
 
-		$event = new tx_seminars_seminar($this->seminarUid);
+		$event = new Tx_Seminars_OldModel_Event($this->seminarUid);
 		$fixture->setSeminar($event);
 		$fixture->setFakedFormValue('registered_themselves', '1');
 
@@ -1639,7 +1639,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 		);
 		$fixture->setTestMode();
 
-		$event = new tx_seminars_seminar($this->seminarUid);
+		$event = new Tx_Seminars_OldModel_Event($this->seminarUid);
 		$fixture->setSeminar($event);
 		$fixture->setFakedFormValue('registered_themselves', '1');
 
@@ -1668,7 +1668,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 		);
 		$fixture->setTestMode();
 
-		$event = new tx_seminars_seminar($this->seminarUid);
+		$event = new Tx_Seminars_OldModel_Event($this->seminarUid);
 		$fixture->setSeminar($event);
 		$fixture->setFakedFormValue('registered_themselves', '1');
 
@@ -1697,7 +1697,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 		);
 		$fixture->setTestMode();
 
-		$event = new tx_seminars_seminar($this->seminarUid);
+		$event = new Tx_Seminars_OldModel_Event($this->seminarUid);
 		$fixture->setSeminar($event);
 		$fixture->setFakedFormValue('registered_themselves', '1');
 

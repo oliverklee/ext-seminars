@@ -32,7 +32,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	const MODULE_NAME = 'web_txseminarsM2';
 
 	/**
-	 * @var tx_seminars_seminar the event which this e-mail form refers to
+	 * @var Tx_Seminars_OldModel_Event the event which this e-mail form refers to
 	 */
 	private $oldEvent = NULL;
 
@@ -95,7 +95,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 			throw new InvalidArgumentException('$eventUid must be > 0.');
 		}
 
-		$this->oldEvent = GeneralUtility::makeInstance('tx_seminars_seminar', $eventUid);
+		$this->oldEvent = GeneralUtility::makeInstance(Tx_Seminars_OldModel_Event::class, $eventUid);
 
 		if (!$this->oldEvent->isOk()) {
 			throw new Tx_Oelib_Exception_NotFound('There is no event with this UID.', 1333292164);
@@ -302,7 +302,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * Returns the event object.
 	 *
-	 * @return tx_seminars_seminar the event object
+	 * @return Tx_Seminars_OldModel_Event the event object
 	 */
 	protected function getOldEvent() {
 		return $this->oldEvent;

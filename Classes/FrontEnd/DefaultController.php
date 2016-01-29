@@ -58,7 +58,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	private $configGetter = NULL;
 
 	/**
-	 * @var tx_seminars_seminar the seminar which we want to list/show or
+	 * @var Tx_Seminars_OldModel_Event the seminar which we want to list/show or
 	 *                          for which the user wants to register
 	 */
 	private $seminar = NULL;
@@ -458,9 +458,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		}
 
 		if (Tx_Seminars_OldModel_Abstract::recordExists($seminarUid, 'tx_seminars_seminars', $showHiddenRecords)) {
-			/** @var tx_seminars_seminar $seminar */
-			$seminar = GeneralUtility::makeInstance('tx_seminars_seminar', $seminarUid, FALSE, $showHiddenRecords);
-			$this->setSeminar($seminar);
+			/** @var Tx_Seminars_OldModel_Event $event */
+			$event = GeneralUtility::makeInstance(Tx_Seminars_OldModel_Event::class, $seminarUid, FALSE, $showHiddenRecords);
+			$this->setSeminar($event);
 
 			$result = $showHiddenRecords ? $this->canShowCurrentEvent() : TRUE;
 		} else {
@@ -474,12 +474,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	/**
 	 * Sets the current seminar for the list view.
 	 *
-	 * @param tx_seminars_seminar $seminar the current seminar
+	 * @param Tx_Seminars_OldModel_Event|null $event the current seminar
 	 *
 	 * @return void
 	 */
-	protected function setSeminar(tx_seminars_seminar $seminar = NULL) {
-		$this->seminar = $seminar;
+	protected function setSeminar(Tx_Seminars_OldModel_Event $event = null) {
+		$this->seminar = $event;
 	}
 
 	/**
@@ -534,7 +534,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	/**
 	 * Gets our seminar object.
 	 *
-	 * @return tx_seminars_seminar our seminar object
+	 * @return Tx_Seminars_OldModel_Event our seminar object
 	 */
 	public function getSeminar() {
 		return $this->seminar;
@@ -1342,7 +1342,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		$eventMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 
 		$dependencies = $this->seminar->getDependencies();
-		/** @var tx_seminars_seminar $dependency */
+		/** @var Tx_Seminars_OldModel_Event $dependency */
 		foreach ($dependencies as $dependency) {
 			/** @var Tx_Seminars_Model_Event $event */
 			$event = $eventMapper->find($dependency->getUid());
@@ -1867,7 +1867,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 				$this->registration = $currentItem;
 				$this->setSeminar($this->registration->getSeminarObject());
 			} else {
-				/** @var tx_seminars_seminar $currentItem */
+				/** @var Tx_Seminars_OldModel_Event $currentItem */
 				$this->setSeminar($currentItem);
 			}
 
@@ -2401,33 +2401,33 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	/**
 	 * Gets the CSS classes (space-separated) for the Vacancies TD.
 	 *
-	 * @param tx_seminars_seminar $seminar the current seminar object
+	 * @param Tx_Seminars_OldModel_Event $event the current seminar object
 	 *
 	 * @return string class attribute value filled with a list a space-separated CSS classes
 	 */
-	public function getVacanciesClasses(tx_seminars_seminar $seminar) {
-		if (!$seminar->needsRegistration()
-			|| (!$seminar->hasDate() && !$this->configGetter->getConfValueBoolean('allowRegistrationForEventsWithoutDate'))
+	public function getVacanciesClasses(Tx_Seminars_OldModel_Event $event) {
+		if (!$event->needsRegistration()
+			|| (!$event->hasDate() && !$this->configGetter->getConfValueBoolean('allowRegistrationForEventsWithoutDate'))
 		) {
 			return '';
 		}
 
 		$classes = array();
 
-		if ($seminar->hasDate() && $seminar->hasStarted()) {
+		if ($event->hasDate() && $event->hasStarted()) {
 			$classes[] = 'event-begin-date-over';
 		}
 
-		if ($seminar->hasVacancies()) {
+		if ($event->hasVacancies()) {
 			$classes[] = 'vacancies-available';
-			if ($seminar->hasUnlimitedVacancies()) {
+			if ($event->hasUnlimitedVacancies()) {
 				$classes[] = 'vacancies-unlimited';
 			} else {
-				$classes[] = 'vacancies-' . $seminar->getVacancies();
+				$classes[] = 'vacancies-' . $event->getVacancies();
 			}
 		} else {
 			$classes[] = 'vacancies-0';
-			if ($seminar->hasRegistrationQueue()) {
+			if ($event->hasRegistrationQueue()) {
 				$classes[] = 'has-registration-queue';
 			}
 		}
@@ -2435,7 +2435,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		// We add this class in addition to the number of vacancies so that
 		// user stylesheets still can use the number of vacancies even for
 		// events for which the registration deadline is over.
-		if ($seminar->hasDate() && $seminar->isRegistrationDeadlineOver()) {
+		if ($event->hasDate() && $event->isRegistrationDeadlineOver()) {
 			$classes[] = 'registration-deadline-over';
 		}
 

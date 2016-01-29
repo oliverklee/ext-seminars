@@ -48,7 +48,7 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 	public $scriptRelPath = 'locallang.xml';
 
 	/**
-	 * @var tx_seminars_seminar the event to which this registration relates
+	 * @var Tx_Seminars_OldModel_Event the event to which this registration relates
 	 */
 	private $seminar = NULL;
 
@@ -90,7 +90,7 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 	/**
 	 * cached seminar objects with the seminar UIDs as keys and the objects as values
 	 *
-	 * @var tx_seminars_seminar[]
+	 * @var Tx_Seminars_OldModel_Event[]
 	 */
 	private static $cachedSeminars = array();
 
@@ -141,20 +141,20 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 	 *
 	 * This function must be called directly after construction or this object will not be usable.
 	 *
-	 * @param tx_seminars_seminar $seminar the seminar object (that's the seminar we would like to register for)
+	 * @param Tx_Seminars_OldModel_Event $event the seminar object (that's the seminar we would like to register for)
 	 * @param int $userUid UID of the FE user who wants to sign up
 	 * @param array $registrationData associative array with the registration data the user has just entered, may be empty
 	 *
 	 * @return void
 	 */
-	public function setRegistrationData(tx_seminars_seminar $seminar, $userUid, array $registrationData) {
-		$this->seminar = $seminar;
+	public function setRegistrationData(Tx_Seminars_OldModel_Event $event, $userUid, array $registrationData) {
+		$this->seminar = $event;
 
 		$this->recordData = array();
 
-		$this->recordData['seminar'] = $seminar->getUid();
+		$this->recordData['seminar'] = $event->getUid();
 		$this->recordData['user'] = $userUid;
-		$this->recordData['registration_queue'] = (!$seminar->hasVacancies()) ? 1 : 0;
+		$this->recordData['registration_queue'] = (!$event->hasVacancies()) ? 1 : 0;
 
 		$seats = (int)$registrationData['seats'];
 		if ($seats < 1) {
@@ -163,9 +163,9 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 		$this->recordData['seats'] = $seats;
 		$this->recordData['registered_themselves'] = ($registrationData['registered_themselves']) ? 1 : 0;
 
-		$availablePrices = $seminar->getAvailablePrices();
+		$availablePrices = $event->getAvailablePrices();
 		// If no (available) price is selected, use the first price by default.
-		$selectedPrice = (isset($registrationData['price']) && $seminar->isPriceAvailable($registrationData['price']))
+		$selectedPrice = (isset($registrationData['price']) && $event->isPriceAvailable($registrationData['price']))
 			? $registrationData['price'] : key($availablePrices);
 		$this->recordData['price'] = $availablePrices[$selectedPrice]['caption'];
 
@@ -179,12 +179,12 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 		// Auto-select the only payment method if no payment method has been
 		// selected, there actually is anything to pay and only one payment
 		// method is provided.
-		if (!$methodOfPayment && ($this->recordData['total_price'] > 0.00) && ($seminar->getNumberOfPaymentMethods() == 1)) {
+		if (!$methodOfPayment && ($this->recordData['total_price'] > 0.00) && ($event->getNumberOfPaymentMethods() == 1)) {
 			$rows = Tx_Oelib_Db::selectMultiple(
 				'uid',
 				'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
 				'tx_seminars_payment_methods.uid = tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
-					'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' . $seminar->getTopicUid() .
+					'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' . $event->getTopicUid() .
 					Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
 				'',
 				'tx_seminars_seminars_payment_methods_mm.sorting'
@@ -597,7 +597,7 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 	/**
 	 * Gets the seminar to which this registration belongs.
 	 *
-	 * @return tx_seminars_seminar the seminar to which this registration belongs
+	 * @return Tx_Seminars_OldModel_Event the seminar to which this registration belongs
 	 */
 	public function getSeminarObject() {
 		if (!$this->seminar && $this->isOk()) {
@@ -606,7 +606,7 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 				$this->seminar = self::$cachedSeminars[$seminarUid];
 			} else {
 				$this->seminar = GeneralUtility::makeInstance(
-					'tx_seminars_seminar', $seminarUid
+					Tx_Seminars_OldModel_Event::class, $seminarUid
 				);
 				self::$cachedSeminars[$seminarUid] = $this->seminar;
 			}

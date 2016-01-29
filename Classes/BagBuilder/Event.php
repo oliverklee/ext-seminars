@@ -151,7 +151,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract {
 	 */
 	public function ignoreCanceledEvents() {
 		$this->whereClauseParts['hideCanceledEvents'] = 'cancelled <> ' .
-			tx_seminars_seminar::STATUS_CANCELED;
+			Tx_Seminars_OldModel_Event::STATUS_CANCELED;
 	}
 
 	/**
@@ -515,11 +515,11 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract {
 	 * Limits the bag to events on the day after the end date of the event given
 	 * event in the first parameter $event.
 	 *
-	 * @param tx_seminars_seminar $event the event object with the end date to limit for, must have an end date
+	 * @param Tx_Seminars_OldModel_Event $event the event object with the end date to limit for, must have an end date
 	 *
 	 * @return void
 	 */
-	public function limitToEventsNextDay(tx_seminars_seminar $event) {
+	public function limitToEventsNextDay(Tx_Seminars_OldModel_Event $event) {
 		if (!$event->hasEndDate()) {
 			throw new InvalidArgumentException(
 				'The event object given in the first parameter $event must have an end date set.', 1333292744
@@ -549,11 +549,11 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract {
 	 * Limits the bag to date event records of the same topic as the event
 	 * given in the first parameter $event.
 	 *
-	 * @param tx_seminars_seminar $event the date or topic object to find other dates of the same topic for
+	 * @param Tx_Seminars_OldModel_Event $event the date or topic object to find other dates of the same topic for
 	 *
 	 * @return void
 	 */
-	public function limitToOtherDatesForTopic(tx_seminars_seminar $event) {
+	public function limitToOtherDatesForTopic(Tx_Seminars_OldModel_Event $event) {
 		if (!$event->isEventDate() && !$event->isEventTopic()) {
 			throw new InvalidArgumentException('The first parameter $event must be either a date or a topic record.', 1333292764);
 		}
@@ -654,7 +654,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract {
 	/**
 	 * Limits the bag to events in status $status.
 	 *
-	 * @param int $status tx_seminars_seminar::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
+	 * @param int $status Tx_Seminars_OldModel_Event::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
 	 *
 	 * @return void
 	 */

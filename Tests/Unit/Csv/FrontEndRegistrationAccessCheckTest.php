@@ -68,8 +68,8 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 	public function hasAccessForNoFrontEndUserReturnsFalse() {
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser(NULL);
 
-		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);
-		/** @var $event tx_seminars_seminar */
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array(), array(), '', FALSE);
+		/** @var Tx_Seminars_OldModel_Event $event */
 		$this->subject->setEvent($event);
 
 		self::assertFalse(
@@ -89,9 +89,9 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
-		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array(), array(), '', FALSE);
 		$event->expects(self::any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will(self::returnValue(FALSE));
-		/** @var $event tx_seminars_seminar */
+		/** @var Tx_Seminars_OldModel_Event $event */
 		$this->subject->setEvent($event);
 
 		self::assertFalse(
@@ -111,9 +111,9 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
-		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array(), array(), '', FALSE);
 		$event->expects(self::any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will(self::returnValue(TRUE));
-		/** @var $event tx_seminars_seminar */
+		/** @var Tx_Seminars_OldModel_Event $event */
 		$this->subject->setEvent($event);
 
 		self::assertFalse(
@@ -133,9 +133,9 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
-		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array(), array(), '', FALSE);
 		$event->expects(self::any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will(self::returnValue(FALSE));
-		/** @var $event tx_seminars_seminar */
+		/** @var Tx_Seminars_OldModel_Event $event */
 		$this->subject->setEvent($event);
 
 		self::assertFalse(
@@ -155,9 +155,9 @@ class Tx_Seminars_Tests_Csv_FrontEndRegistrationAccessCheckTest extends Tx_Phpun
 		/** @var Tx_Seminars_Model_FrontEndUser $user */
 		Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
-		$event = $this->getMock('tx_seminars_seminar', array(), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array(), array(), '', FALSE);
 		$event->expects(self::any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will(self::returnValue(TRUE));
-		/** @var $event tx_seminars_seminar */
+		/** @var Tx_Seminars_OldModel_Event $event */
 		$this->subject->setEvent($event);
 
 		self::assertTrue(

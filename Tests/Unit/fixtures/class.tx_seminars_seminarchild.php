@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-final class tx_seminars_seminarchild extends tx_seminars_seminar {
+final class tx_seminars_seminarchild extends Tx_Seminars_OldModel_Event {
 	/**
 	 * @var string same as class name
 	 */

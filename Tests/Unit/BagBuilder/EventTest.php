@@ -700,7 +700,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	public function testBuilderFindsConfirmedEventsWithHideCanceledEvents() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('cancelled' => tx_seminars_seminar::STATUS_CONFIRMED)
+			array('cancelled' => Tx_Seminars_OldModel_Event::STATUS_CONFIRMED)
 		);
 
 		$this->fixture->ignoreCanceledEvents();
@@ -3092,7 +3092,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 				'end_date' => (60 * 60 + 2 * Tx_Oelib_Time::SECONDS_PER_DAY),
 				)
 		);
-		$event = new tx_seminars_seminar($eventUid1);
+		$event = new Tx_Seminars_OldModel_Event($eventUid1);
 		$this->fixture->limitToEventsNextDay($event);
 		$bag = $this->fixture->build();
 
@@ -3118,7 +3118,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 				'end_date' => (60 * 60),
 				)
 		);
-		$event = new tx_seminars_seminar($eventUid);
+		$event = new Tx_Seminars_OldModel_Event($eventUid);
 		$this->fixture->limitToEventsNextDay($event);
 		$bag = $this->fixture->build();
 
@@ -3139,7 +3139,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 				'end_date' => (60 * 60 + 3 * Tx_Oelib_Time::SECONDS_PER_DAY),
 				)
 		);
-		$event = new tx_seminars_seminar($eventUid);
+		$event = new Tx_Seminars_OldModel_Event($eventUid);
 		$this->fixture->limitToEventsNextDay($event);
 		$bag = $this->fixture->build();
 
@@ -3159,7 +3159,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars'
 		);
 		$this->fixture->limitToEventsNextDay(
-			new tx_seminars_seminar($eventUid)
+			new Tx_Seminars_OldModel_Event($eventUid)
 		);
 	}
 
@@ -3187,7 +3187,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 				'topic' => $topicUid,
 			)
 		);
-		$date = new tx_seminars_seminar($dateUid1);
+		$date = new Tx_Seminars_OldModel_Event($dateUid1);
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$bag = $this->fixture->build();
 
@@ -3220,7 +3220,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 				'topic' => $topicUid,
 			)
 		);
-		$topic = new tx_seminars_seminar($topicUid);
+		$topic = new Tx_Seminars_OldModel_Event($topicUid);
 		$this->fixture->limitToOtherDatesForTopic($topic);
 		$bag = $this->fixture->build();
 
@@ -3240,7 +3240,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars',
 			array('object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE)
 		);
-		$event = new tx_seminars_seminar($eventUid);
+		$event = new Tx_Seminars_OldModel_Event($eventUid);
 		$this->fixture->limitToOtherDatesForTopic($event);
 	}
 
@@ -3267,7 +3267,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 				'topic' => $topicUid2,
 			)
 		);
-		$date = new tx_seminars_seminar($dateUid1);
+		$date = new Tx_Seminars_OldModel_Event($dateUid1);
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$bag = $this->fixture->build();
 
@@ -3295,7 +3295,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 				'topic' => $topicUid,
 			)
 		);
-		$date = new tx_seminars_seminar($dateUid);
+		$date = new Tx_Seminars_OldModel_Event($dateUid);
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$bag = $this->fixture->build();
 
@@ -3327,7 +3327,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 				'topic' => $topicUid2,
 			)
 		);
-		$date = new tx_seminars_seminar($dateUid1);
+		$date = new Tx_Seminars_OldModel_Event($dateUid1);
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$this->fixture->removeLimitToOtherDatesForTopic();
 		$bag = $this->fixture->build();
@@ -3357,7 +3357,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 				'topic' => $topicUid,
 			)
 		);
-		$date = new tx_seminars_seminar($dateUid);
+		$date = new Tx_Seminars_OldModel_Event($dateUid);
 		$this->fixture->limitToOtherDatesForTopic($date);
 		$this->fixture->removeLimitToOtherDatesForTopic();
 		$bag = $this->fixture->build();
@@ -4967,10 +4967,10 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	public function testLimitToStatusFindsEventWithStatusCanceledIfLimitIsStatusCanceled() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('cancelled' => tx_seminars_seminar::STATUS_CANCELED)
+			array('cancelled' => Tx_Seminars_OldModel_Event::STATUS_CANCELED)
 		);
 
-		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CANCELED);
+		$this->fixture->limitToStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
 		$bag = $this->fixture->build();
 
 		self::assertSame(
@@ -4982,10 +4982,10 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	public function testLimitToStatusNotFindsEventWithStatusPlannedIfLimitIsStatusCanceled() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('cancelled' => tx_seminars_seminar::STATUS_PLANNED)
+			array('cancelled' => Tx_Seminars_OldModel_Event::STATUS_PLANNED)
 		);
 
-		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CANCELED);
+		$this->fixture->limitToStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
 		$bag = $this->fixture->build();
 
 		self::assertSame(
@@ -4997,10 +4997,10 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	public function testLimitToStatusNotFindsEventWithStatusConfirmedIfLimitIsStatusCanceled() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('cancelled' => tx_seminars_seminar::STATUS_CONFIRMED)
+			array('cancelled' => Tx_Seminars_OldModel_Event::STATUS_CONFIRMED)
 		);
 
-		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CANCELED);
+		$this->fixture->limitToStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
 		$bag = $this->fixture->build();
 
 		self::assertSame(
@@ -5012,10 +5012,10 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	public function testLimitToStatusFindsEventWithStatusConfirmedIfLimitIsStatusConfirmed() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('cancelled' => tx_seminars_seminar::STATUS_CONFIRMED)
+			array('cancelled' => Tx_Seminars_OldModel_Event::STATUS_CONFIRMED)
 		);
 
-		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CONFIRMED);
+		$this->fixture->limitToStatus(Tx_Seminars_OldModel_Event::STATUS_CONFIRMED);
 		$bag = $this->fixture->build();
 
 		self::assertSame(
@@ -5027,10 +5027,10 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	public function testLimitToStatusNotFindsEventWithStatusPlannedIfLimitIsStatusConfirmed() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('cancelled' => tx_seminars_seminar::STATUS_PLANNED)
+			array('cancelled' => Tx_Seminars_OldModel_Event::STATUS_PLANNED)
 		);
 
-		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CONFIRMED);
+		$this->fixture->limitToStatus(Tx_Seminars_OldModel_Event::STATUS_CONFIRMED);
 		$bag = $this->fixture->build();
 
 		self::assertSame(
@@ -5042,10 +5042,10 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	public function testLimitToStatusNotFindsEventWithStatusCanceledIfLimitIsStatusConfirmed() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('cancelled' => tx_seminars_seminar::STATUS_CANCELED)
+			array('cancelled' => Tx_Seminars_OldModel_Event::STATUS_CANCELED)
 		);
 
-		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_CONFIRMED);
+		$this->fixture->limitToStatus(Tx_Seminars_OldModel_Event::STATUS_CONFIRMED);
 		$bag = $this->fixture->build();
 
 		self::assertSame(
@@ -5057,10 +5057,10 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	public function testLimitToStatusFindsEventWithStatusPlannedIfLimitIsStatusPlanned() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('cancelled' => tx_seminars_seminar::STATUS_PLANNED)
+			array('cancelled' => Tx_Seminars_OldModel_Event::STATUS_PLANNED)
 		);
 
-		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_PLANNED);
+		$this->fixture->limitToStatus(Tx_Seminars_OldModel_Event::STATUS_PLANNED);
 		$bag = $this->fixture->build();
 
 		self::assertSame(
@@ -5072,10 +5072,10 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	public function testLimitToStatusNotFindsEventWithStatusConfirmedIfLimitIsStatusPlanned() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('cancelled' => tx_seminars_seminar::STATUS_CONFIRMED)
+			array('cancelled' => Tx_Seminars_OldModel_Event::STATUS_CONFIRMED)
 		);
 
-		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_PLANNED);
+		$this->fixture->limitToStatus(Tx_Seminars_OldModel_Event::STATUS_PLANNED);
 		$bag = $this->fixture->build();
 
 		self::assertSame(
@@ -5087,10 +5087,10 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	public function testLimitToStatusNotFindsEventWithStatusCanceledIfLimitIsStatusPlanned() {
 		$this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('cancelled' => tx_seminars_seminar::STATUS_CANCELED)
+			array('cancelled' => Tx_Seminars_OldModel_Event::STATUS_CANCELED)
 		);
 
-		$this->fixture->limitToStatus(tx_seminars_seminar::STATUS_PLANNED);
+		$this->fixture->limitToStatus(Tx_Seminars_OldModel_Event::STATUS_PLANNED);
 		$bag = $this->fixture->build();
 
 		self::assertSame(

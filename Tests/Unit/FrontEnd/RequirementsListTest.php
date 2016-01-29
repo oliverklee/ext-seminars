@@ -103,7 +103,7 @@ class Tx_Seminars_FrontEnd_RequirementsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent, 'requirements'
 		);
-		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));
+		$this->fixture->setEvent(new Tx_Seminars_OldModel_Event($this->seminarUid));
 
 		self::assertContains(
 			'required &amp; foo',
@@ -134,7 +134,7 @@ class Tx_Seminars_FrontEnd_RequirementsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent, 'requirements'
 		);
-		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));
+		$this->fixture->setEvent(new Tx_Seminars_OldModel_Event($this->seminarUid));
 
 		self::assertRegExp(
 			'/<a href=.*' . $requiredEvent . '.*>required_foo<\/a>/',
@@ -172,7 +172,7 @@ class Tx_Seminars_FrontEnd_RequirementsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars', $this->seminarUid,
 			$requiredEvent2, 'requirements'
 		);
-		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));
+		$this->fixture->setEvent(new Tx_Seminars_OldModel_Event($this->seminarUid));
 
 		self::assertRegExp(
 			'/required_foo.*required_bar/s',
@@ -246,7 +246,7 @@ class Tx_Seminars_FrontEnd_RequirementsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_attendances',
 			array('seminar' => $requiredDate2, 'user' => $userUid)
 		);
-		$this->fixture->setEvent(new tx_seminars_seminar($this->seminarUid));
+		$this->fixture->setEvent(new Tx_Seminars_OldModel_Event($this->seminarUid));
 		$this->fixture->limitToMissingRegistrations();
 
 		self::assertNotContains(

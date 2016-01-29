@@ -101,9 +101,9 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView {
 		$builder->setSourcePages($this->getPageUid(), self::RECURSION_DEPTH);
 
 		$csvLines = array();
-		/** @var tx_seminars_seminar $seminar */
-		foreach ($builder->build() as $seminar) {
-			$csvLines[] = implode(self::COLUMN_SEPARATOR, $this->createCsvColumnsForEvent($seminar));
+		/** @var Tx_Seminars_OldModel_Event $event */
+		foreach ($builder->build() as $event) {
+			$csvLines[] = implode(self::COLUMN_SEPARATOR, $this->createCsvColumnsForEvent($event));
 		}
 
 		return $csvLines;
@@ -113,11 +113,11 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView {
 	 * Retrieves data from an object and returns that data as an array of values. The individual values are already wrapped in
 	 * double quotes, with the contents having all quotes escaped.
 	 *
-	 * @param tx_seminars_seminar $event object that will deliver the data
+	 * @param Tx_Seminars_OldModel_Event $event object that will deliver the data
 	 *
 	 * @return string[] the data for the keys provided in $keys (may be empty)
 	 */
-	protected function createCsvColumnsForEvent(tx_seminars_seminar $event) {
+	protected function createCsvColumnsForEvent(Tx_Seminars_OldModel_Event $event) {
 		$csvLines = array();
 
 		foreach ($this->getFieldKeys() as $key) {

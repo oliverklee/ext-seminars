@@ -471,7 +471,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 	protected function getEventTypeData() {
 		$result = array();
 
-		/** @var tx_seminars_seminar $event */
+		/** @var Tx_Seminars_OldModel_Event $event */
 		foreach ($this->seminarBag as $event) {
 			$eventTypeUid = $event->getEventTypeUid();
 			if ($eventTypeUid != 0) {
@@ -496,7 +496,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 	protected function getLanguageData() {
 		$result = array();
 
-		/** @var tx_seminars_seminar $event */
+		/** @var Tx_Seminars_OldModel_Event $event */
 		foreach ($this->seminarBag as $event) {
 			if ($event->hasLanguage()) {
 				// Reads the language from the event record.
@@ -640,7 +640,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 	private function getOrganizerData() {
 		$result = array();
 
-		/** @var tx_seminars_seminar $event */
+		/** @var Tx_Seminars_OldModel_Event $event */
 		foreach ($this->seminarBag as $event) {
 			if ($event->hasOrganizers()) {
 				$organizers = $event->getOrganizerBag();
@@ -668,7 +668,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 	private function getCategoryData() {
 		$result = array();
 
-		/** @var tx_seminars_seminar $event */
+		/** @var Tx_Seminars_OldModel_Event $event */
 		foreach ($this->seminarBag as $event) {
 			if ($event->hasCategories()) {
 				$categories = $event->getCategories();

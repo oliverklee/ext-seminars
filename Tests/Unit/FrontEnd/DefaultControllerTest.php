@@ -299,8 +299,8 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		if (!class_exists($testingClassName, FALSE)) {
 			eval(
 				'class ' . $testingClassName . ' extends Tx_Seminars_FrontEnd_DefaultController {' .
-				'public function setSeminar(tx_seminars_seminar $seminar = NULL) {' .
-				'  parent::setSeminar($seminar);' .
+				'public function setSeminar(Tx_Seminars_OldModel_Event $event = NULL) {' .
+				'  parent::setSeminar($event);' .
 				'}' .
 				'public function createAllEditorLinks() {' .
 				'  return parent::createAllEditorLinks();' .
@@ -627,7 +627,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$this->fixture->createSeminar($this->seminarUid);
 
 		self::assertTrue(
-			$this->fixture->getSeminar() instanceof tx_seminars_seminar
+			$this->fixture->getSeminar() instanceof Tx_Seminars_OldModel_Event
 		);
 	}
 
@@ -7499,7 +7499,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture = new $className();
 		$fixture->cObj = $this->createContentMock();
 		$fixture->conf = array();
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
 		$event->expects(self::any())->method('isUserVip')
 			->will(self::returnValue(FALSE));
 		$event->expects(self::any())->method('isOwnerFeUser')
@@ -7519,7 +7519,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture = new $className();
 		$fixture->cObj = $this->createContentMock();
 		$fixture->conf = array('mayManagersEditTheirEvents' => TRUE);
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
 		$event->expects(self::any())->method('isUserVip')
 			->will(self::returnValue(TRUE));
 		$event->expects(self::any())->method('isOwnerFeUser')
@@ -7539,7 +7539,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture = new $className();
 		$fixture->cObj = $this->createContentMock();
 		$fixture->conf = array('mayManagersEditTheirEvents' => FALSE);
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
 		$event->expects(self::any())->method('isUserVip')
 			->will(self::returnValue(TRUE));
 		$event->expects(self::any())->method('isOwnerFeUser')
@@ -7562,7 +7562,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 			'eventEditorPID' => 42,
 			'mayManagersEditTheirEvents' => TRUE,
 		);
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', FALSE);
 		$event->expects(self::any())->method('getUid')
 			->will(self::returnValue(91));
 		$event->expects(self::any())->method('isUserVip')
@@ -7595,7 +7595,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
 			->will(self::returnValue(FALSE));
 
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
 		$event->expects(self::any())->method('getUid')->will(self::returnValue(91));
 		$fixture->setSeminar($event);
 
@@ -7621,7 +7621,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
 			->will(self::returnValue(TRUE));
 
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
 		$event->expects(self::any())->method('getUid')->will(self::returnValue(91));
 		$fixture->setSeminar($event);
 
@@ -7646,7 +7646,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
 			->will(self::returnValue(TRUE));
 
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
 		$event->expects(self::any())->method('getUid')->will(self::returnValue(91));
 		$event->expects(self::any())->method('isPublished')->will(self::returnValue(TRUE));
 		$event->expects(self::any())->method('isHidden')->will(self::returnValue(FALSE));
@@ -7676,7 +7676,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
 			->will(self::returnValue(TRUE));
 
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
 		$event->expects(self::any())->method('getUid')->will(self::returnValue(91));
 		$event->expects(self::any())->method('isPublished')->will(self::returnValue(TRUE));
 		$event->expects(self::any())->method('isHidden')->will(self::returnValue(TRUE));
@@ -7706,7 +7706,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
 			->will(self::returnValue(TRUE));
 
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
 		$event->expects(self::any())->method('getUid')->will(self::returnValue(91));
 		$event->expects(self::any())->method('isPublished')->will(self::returnValue(FALSE));
 		$event->expects(self::any())->method('isHidden')->will(self::returnValue(FALSE));
@@ -7732,7 +7732,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
 			->will(self::returnValue(TRUE));
 
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
 		$event->expects(self::any())->method('getUid')->will(self::returnValue(91));
 		$event->expects(self::any())->method('isPublished')->will(self::returnValue(FALSE));
 		$event->expects(self::any())->method('isHidden')->will(self::returnValue(TRUE));
@@ -7758,7 +7758,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
 			->will(self::returnValue(TRUE));
 
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
 		$event->expects(self::any())->method('getUid')->will(self::returnValue(91));
 		$event->expects(self::any())->method('isPublished')->will(self::returnValue(FALSE));
 		$event->expects(self::any())->method('isHidden')->will(self::returnValue(TRUE));
@@ -7784,7 +7784,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
 			->will(self::returnValue(TRUE));
 
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
 		$event->expects(self::any())->method('getUid')->will(self::returnValue(91));
 		$event->expects(self::any())->method('isPublished')->will(self::returnValue(FALSE));
 		$event->expects(self::any())->method('isHidden')->will(self::returnValue(FALSE));
@@ -7810,7 +7810,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 		$fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
 			->will(self::returnValue(TRUE));
 
-		$event = $this->getMock('tx_seminars_seminar', array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
+		$event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', FALSE);
 		$event->expects(self::any())->method('getUid')->will(self::returnValue(91));
 		$event->expects(self::any())->method('isPublished')->will(self::returnValue(TRUE));
 		$event->expects(self::any())->method('isHidden')->will(self::returnValue(TRUE));

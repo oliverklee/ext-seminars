@@ -628,10 +628,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 
 		$user = self::getLoggedInUser();
 		if ($objectUid > 0) {
-			/** @var tx_seminars_seminar $seminar */
-			$seminar = GeneralUtility::makeInstance('tx_seminars_seminar', $this->getObjectUid(), FALSE, TRUE);
-			$isUserVip = $seminar->isUserVip($user->getUid(), $this->getConfValueInteger('defaultEventVipsFeGroupID'));
-			$isUserOwner = $seminar->isOwnerFeUser();
+			/** @var Tx_Seminars_OldModel_Event $event */
+			$event = GeneralUtility::makeInstance(Tx_Seminars_OldModel_Event::class, $this->getObjectUid(), false, true);
+			$isUserVip = $event->isUserVip($user->getUid(), $this->getConfValueInteger('defaultEventVipsFeGroupID'));
+			$isUserOwner = $event->isOwnerFeUser();
 			$mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');
 
 			$hasAccess = $isUserOwner || ($mayManagersEditTheirEvents && $isUserVip);

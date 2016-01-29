@@ -25,7 +25,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_AbstractView {
 	/**
-	 * @var tx_seminars_seminar the seminar of which we want to list the
+	 * @var Tx_Seminars_OldModel_Event the seminar of which we want to list the
 	 *                          registrations
 	 */
 	private $seminar = NULL;
@@ -77,7 +77,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
 	 * @return void
 	 */
 	private function createSeminar($seminarUid) {
-		$this->seminar = GeneralUtility::makeInstance('tx_seminars_seminar', $seminarUid);
+		$this->seminar = GeneralUtility::makeInstance(Tx_Seminars_OldModel_Event::class, $seminarUid);
 	}
 
 	/**

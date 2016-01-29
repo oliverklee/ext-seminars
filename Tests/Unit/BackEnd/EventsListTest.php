@@ -243,7 +243,7 @@ class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
-				'cancelled' => tx_seminars_seminar::STATUS_CANCELED,
+				'cancelled' => Tx_Seminars_OldModel_Event::STATUS_CANCELED,
 			)
 		);
 
@@ -258,7 +258,7 @@ class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
-				'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
+				'cancelled' => Tx_Seminars_OldModel_Event::STATUS_CONFIRMED,
 			)
 		);
 
@@ -273,7 +273,7 @@ class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
-				'cancelled' => tx_seminars_seminar::STATUS_PLANNED,
+				'cancelled' => Tx_Seminars_OldModel_Event::STATUS_PLANNED,
 			)
 		);
 
@@ -336,7 +336,7 @@ class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
-				'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
+				'cancelled' => Tx_Seminars_OldModel_Event::STATUS_CONFIRMED,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
 			)
 		);
@@ -367,7 +367,7 @@ class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
-				'cancelled' => tx_seminars_seminar::STATUS_PLANNED,
+				'cancelled' => Tx_Seminars_OldModel_Event::STATUS_PLANNED,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
 			)
 		);
@@ -383,7 +383,7 @@ class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
-				'cancelled' => tx_seminars_seminar::STATUS_CANCELED,
+				'cancelled' => Tx_Seminars_OldModel_Event::STATUS_CANCELED,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
 			)
 		);
@@ -448,7 +448,7 @@ class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
-				'cancelled' => tx_seminars_seminar::STATUS_CANCELED,
+				'cancelled' => Tx_Seminars_OldModel_Event::STATUS_CANCELED,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
 			)
 		);
@@ -495,7 +495,7 @@ class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-				'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED,
+				'cancelled' => Tx_Seminars_OldModel_Event::STATUS_CONFIRMED,
 			)
 		);
 

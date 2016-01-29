@@ -15,6 +15,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5614] Rename tx_seminars_seminar to Tx_Seminars_OldModel_Event
 - [#5613] Rename tx_seminars_speaker to Tx_Seminars_OldModel_Speaker
 - [#5611] Rename tx_seminars_timeslot to Tx_Seminars_OldModel_TimeSlot
 - [#5610] Rename tx_seminars_timespan to Tx_Seminars_OldModel_AbstractTimeSpan

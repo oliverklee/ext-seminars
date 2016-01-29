@@ -39,11 +39,11 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_seminar/.
+	 * Checks the configuration for: Tx_Seminars_OldModel_Event/.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_seminar() {
+	protected function check_Tx_Seminars_OldModel_Event() {
 		$this->checkStaticIncluded();
 		$this->checkSalutationMode();
 		$this->checkTimeAndDate();

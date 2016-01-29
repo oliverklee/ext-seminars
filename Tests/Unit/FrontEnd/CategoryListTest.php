@@ -305,7 +305,7 @@ class Tx_Seminars_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCase {
 				'title' => 'my_title',
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
 				'categories' => 1,
-				'cancelled' => tx_seminars_seminar::STATUS_CONFIRMED
+				'cancelled' => Tx_Seminars_OldModel_Event::STATUS_CONFIRMED
 			)
 		);
 		$this->testingFramework->createRelation(

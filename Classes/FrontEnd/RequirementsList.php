@@ -24,7 +24,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Tx_Seminars_FrontEnd_RequirementsList extends Tx_Seminars_FrontEnd_AbstractView {
 	/**
-	 * @var tx_seminars_seminar the event to build the requirements list for
+	 * @var Tx_Seminars_OldModel_Event the event to build the requirements list for
 	 */
 	private $event = NULL;
 
@@ -52,11 +52,11 @@ class Tx_Seminars_FrontEnd_RequirementsList extends Tx_Seminars_FrontEnd_Abstrac
 	/**
 	 * Sets the event to which this view relates.
 	 *
-	 * @param tx_seminars_seminar $event the event to build the requirements list for
+	 * @param Tx_Seminars_OldModel_Event $event the event to build the requirements list for
 	 *
 	 * @return void
 	 */
-	public function setEvent(tx_seminars_seminar $event) {
+	public function setEvent(Tx_Seminars_OldModel_Event $event) {
 		$this->event = $event;
 	}
 
@@ -100,7 +100,7 @@ class Tx_Seminars_FrontEnd_RequirementsList extends Tx_Seminars_FrontEnd_Abstrac
 		/** @var Tx_Seminars_Mapper_Event $eventMapper */
 		$eventMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		$requirements = $this->getRequirements();
-		/** @var tx_seminars_seminar $requirement */
+		/** @var Tx_Seminars_OldModel_Event $requirement */
 		foreach ($requirements as $requirement) {
 			/** @var Tx_Seminars_Model_Event $event */
 			$event = $eventMapper->find($requirement->getUid());

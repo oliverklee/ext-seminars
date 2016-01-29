@@ -147,16 +147,16 @@ class tx_seminars_tcemainprocdm {
 	 * @return void
 	 */
 	private function processSingleEvent($uid, array $fieldArray) {
-		/** @var tx_seminars_seminar $seminar */
-		$seminar = GeneralUtility::makeInstance(
-			'tx_seminars_seminar', $uid, FALSE, TRUE
+		/** @var Tx_Seminars_OldModel_Event $event */
+		$event = GeneralUtility::makeInstance(
+			Tx_Seminars_OldModel_Event::class, $uid, FALSE, TRUE
 		);
 
-		if ($seminar->isOk()) {
+		if ($event->isOk()) {
 			// Gets an associative array of fields that need to be updated in
 			// the database.
-			$seminar->saveToDatabase(
-				$seminar->getUpdateArray($fieldArray)
+			$event->saveToDatabase(
+				$event->getUpdateArray($fieldArray)
 			);
 		}
 	}

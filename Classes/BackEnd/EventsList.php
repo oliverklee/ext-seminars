@@ -32,7 +32,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList {
 	protected $tableName = 'tx_seminars_seminars';
 
 	/**
-	 * @var tx_seminars_seminar the seminar which we want to list
+	 * @var Tx_Seminars_OldModel_Event the seminar which we want to list
 	 */
 	protected $seminar = NULL;
 
@@ -152,7 +152,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList {
 	private function createListBody(Tx_Seminars_Bag_Event $events) {
 		$tableRows = '';
 
-		/** @var tx_seminars_seminar $event */
+		/** @var Tx_Seminars_OldModel_Event $event */
 		foreach ($events as $event) {
 			$this->template->setMarker('uid', $event->getUid());
 			$this->template->setMarker('icon', $event->getRecordIcon());
@@ -249,11 +249,11 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList {
 	 * or "confirmed". If the event's status is "planned", an empty string will be
 	 * returned.
 	 *
-	 * @param tx_seminars_seminar $event the event to get the status icon for
+	 * @param Tx_Seminars_OldModel_Event $event the event to get the status icon for
 	 *
 	 * @return string HTML image tag, may be empty
 	 */
-	private function getStatusIcon(tx_seminars_seminar $event) {
+	private function getStatusIcon(Tx_Seminars_OldModel_Event $event) {
 		if (!$event->isCanceled() && !$event->isConfirmed()) {
 			return '';
 		}
@@ -275,11 +275,11 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList {
 	 * Generates a linked CSV export icon for registrations from $event if that event has at least one registration and access to
 	 * the registration records is granted.
 	 *
-	 * @param tx_seminars_seminar $event the event to get the registrations CSV icon for
+	 * @param Tx_Seminars_OldModel_Event $event the event to get the registrations CSV icon for
 	 *
 	 * @return string the HTML for the linked image (followed by a non-breaking space) or an empty string
 	 */
-	public function getRegistrationsCsvIcon(tx_seminars_seminar $event) {
+	public function getRegistrationsCsvIcon(Tx_Seminars_OldModel_Event $event) {
 		if (!$this->getAccessCheck()->hasAccess() || !$event->hasAttendances()) {
 			return '';
 		}
@@ -322,11 +322,11 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList {
 	 *
 	 * The button will only be visible if the event has at least one registration.
 	 *
-	 * @param tx_seminars_seminar $event the event to get the e-mail button for
+	 * @param Tx_Seminars_OldModel_Event $event the event to get the e-mail button for
 	 *
 	 * @return void
 	 */
-	private function setEmailButtonMarkers(tx_seminars_seminar $event) {
+	private function setEmailButtonMarkers(Tx_Seminars_OldModel_Event $event) {
 		if (!$event->hasAttendances()) {
 			$this->template->hideSubpartsArray(array('EMAIL_BUTTON'));
 			return;
@@ -352,11 +352,11 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList {
 	 * - the event has not started yet
 	 * In all other cases the corresponding subpart is hidden.
 	 *
-	 * @param tx_seminars_seminar $event the event to get the cancel button for
+	 * @param Tx_Seminars_OldModel_Event $event the event to get the cancel button for
 	 *
 	 * @return void
 	 */
-	private function setCancelButtonMarkers(tx_seminars_seminar $event) {
+	private function setCancelButtonMarkers(Tx_Seminars_OldModel_Event $event) {
 		$this->template->unhideSubpartsArray(array('CANCEL_BUTTON'));
 		$pageData = $this->page->getPageData();
 
@@ -386,11 +386,11 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList {
 	 * - the event has not started yet
 	 * In all other cases the corresponding subpart is hidden.
 	 *
-	 * @param tx_seminars_seminar $event the event to get the confirm button for
+	 * @param Tx_Seminars_OldModel_Event $event the event to get the confirm button for
 	 *
 	 * @return void
 	 */
-	private function setConfirmButtonMarkers(tx_seminars_seminar $event) {
+	private function setConfirmButtonMarkers(Tx_Seminars_OldModel_Event $event) {
 		$this->template->unhideSubpartsArray(array('CONFIRM_BUTTON'));
 		$pageData = $this->page->getPageData();
 
@@ -428,13 +428,13 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList {
 	 * Creates a link to the registrations page, showing the attendees for the
 	 * given event UID.
 	 *
-	 * @param tx_seminars_seminar $event
+	 * @param Tx_Seminars_OldModel_Event $event
 	 *        the event to show the registrations for, must be >= 0
 	 *
 	 * @return string the URL to the registrations tab with the registration for
 	 *                the current event, will not be empty
 	 */
-	private function createEventRegistrationsLink(tx_seminars_seminar $event) {
+	private function createEventRegistrationsLink(Tx_Seminars_OldModel_Event $event) {
 		$pageData = $this->page->getPageData();
 
 		$url = BackendUtility::getModuleUrl(

@@ -24,13 +24,13 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_seminar extends Tx_Seminars_OldModel_AbstractTimeSpan {
+class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	/**
 	 * the same as the class name
 	 *
 	 * @var string
 	 */
-	public $prefixId = 'tx_seminars_seminar';
+	public $prefixId = Tx_Seminars_OldModel_Event::class;
 
 	/**
 	 * faking $this->scriptRelPath so the locallang.xml file is found
@@ -77,7 +77,7 @@ class tx_seminars_seminar extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	 *
 	 * This will be NULL if we are not a date record.
 
-	 * @var tx_seminars_seminar
+	 * @var Tx_Seminars_OldModel_Event
 	 */
 	private $topic = NULL;
 
@@ -2986,7 +2986,7 @@ class tx_seminars_seminar extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	 *
 	 * In case of an error, the return value will be NULL.
 	 *
-	 * @return tx_seminars_seminar the topic object (will be NULL if an error
+	 * @return Tx_Seminars_OldModel_Event the topic object (will be NULL if an error
 	 *                             has occured)
 	 */
 	private function retrieveTopic() {
@@ -2998,9 +2998,9 @@ class tx_seminars_seminar extends Tx_Seminars_OldModel_AbstractTimeSpan {
 				$this->getRecordPropertyInteger('topic'),
 				'tx_seminars_seminars')
 			) {
-				/** @var tx_seminars_seminar $result */
+				/** @var Tx_Seminars_OldModel_Event $result */
 				$result = GeneralUtility::makeInstance(
-					'tx_seminars_seminar',
+					Tx_Seminars_OldModel_Event::class,
 					$this->getRecordPropertyInteger('topic')
 				);
 			}

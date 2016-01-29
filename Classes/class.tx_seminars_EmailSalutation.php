@@ -102,13 +102,13 @@ class tx_seminars_EmailSalutation {
 	 * @param string $introductionBegin
 	 *        the start of the introduction, must not be empty and contain %s as
 	 *        place to fill the title of the event in
-	 * @param tx_seminars_seminar $event the event the introduction is for
+	 * @param Tx_Seminars_OldModel_Event $event the event the introduction is for
 	 *
 	 * @return string the introduction with the event's title and if available date and time, will not be empty
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function createIntroduction($introductionBegin, tx_seminars_seminar $event) {
+	public function createIntroduction($introductionBegin, Tx_Seminars_OldModel_Event $event) {
 		if ($introductionBegin === '') {
 			throw new \InvalidArgumentException('$introductionBegin must not be empty.', 1440109640);
 		}
