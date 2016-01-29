@@ -3,6 +3,7 @@
 Features:
 
 Bug fixes:
+- [#5624] Salutation from onetimeaccount not used for the billing address
 - [#5602] Stop requiring the oelib autoloader
 - [#5235] Explicitly provide the configuration check namespaces
 
