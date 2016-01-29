@@ -15,6 +15,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5615] Rename tx_seminars_registrationmanager to Tx_Seminars_Service_RegistrationManager
 - [#5616] Rename tx_seminars_registration to Tx_Seminars_OldModel_Registration
 - [#5614] Rename tx_seminars_seminar to Tx_Seminars_OldModel_Event
 - [#5613] Rename tx_seminars_speaker to Tx_Seminars_OldModel_Speaker

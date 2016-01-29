@@ -111,7 +111,7 @@ return array(
 	'tx_seminars_pi2' => $extensionPath . 'Classes/pi2/class.tx_seminars_pi2.php',
 	'tx_seminars_pi2_pi2test' => $extensionPath . 'Tests/Unit/pi2/pi2Test.php',
 	'tx_seminars_registrationchild' => $extensionPath . 'Tests/Unit/fixtures/class.tx_seminars_registrationchild.php',
-	'tx_seminars_registrationmanager' => $extensionPath . 'Classes/class.tx_seminars_registrationmanager.php',
+	'tx_seminars_service_registrationmanager' => $extensionPath . 'Classes/Service/RegistrationManager.php',
 	'tx_seminars_service_singleviewlinkbuilder' => $extensionPath . 'Classes/Service/SingleViewLinkBuilder.php',
 	'tx_seminars_seminarchild' => $extensionPath . 'Tests/Unit/fixtures/class.tx_seminars_seminarchild.php',
 	'tx_seminars_tests_fixtures_testingtimespan' => $extensionPath . 'Tests/Unit/fixtures/class.tx_seminars_tests_fixtures_TestingTimeSpan.php',

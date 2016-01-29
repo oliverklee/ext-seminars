@@ -160,7 +160,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		tx_seminars_registrationmanager::purgeInstance();
+		Tx_Seminars_Service_RegistrationManager::purgeInstance();
 
 		$GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
 		$GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
@@ -648,7 +648,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 	public function testGetRegistrationManagerReturnsRegistrationManager() {
 		self::assertTrue(
 			$this->fixture->getRegistrationManager()
-				instanceof tx_seminars_registrationmanager
+				instanceof Tx_Seminars_Service_RegistrationManager
 		);
 	}
 

@@ -552,10 +552,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	/**
 	 * Returns the Singleton registration manager instance.
 	 *
-	 * @return tx_seminars_registrationmanager the Singleton instance
+	 * @return Tx_Seminars_Service_RegistrationManager the Singleton instance
 	 */
 	public function getRegistrationManager() {
-		return tx_seminars_registrationmanager::getInstance();
+		return Tx_Seminars_Service_RegistrationManager::getInstance();
 	}
 
 	/**

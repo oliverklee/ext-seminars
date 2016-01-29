@@ -1718,9 +1718,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 	/**
 	 * Returns the Singleton registration manager instance.
 	 *
-	 * @return tx_seminars_registrationmanager the singleton instance
+	 * @return Tx_Seminars_Service_RegistrationManager the singleton instance
 	 */
 	private function getRegistrationManager() {
-		return tx_seminars_registrationmanager::getInstance();
+		return Tx_Seminars_Service_RegistrationManager::getInstance();
 	}
 }

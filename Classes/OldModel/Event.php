@@ -2790,7 +2790,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	 * @return bool TRUE if registration is possible, FALSE otherwise
 	 */
 	public function canSomebodyRegister() {
-		$registrationManager = tx_seminars_registrationmanager::getInstance();
+		$registrationManager = Tx_Seminars_Service_RegistrationManager::getInstance();
 		$allowsRegistrationByDate
 			= $registrationManager->allowsRegistrationByDate($this);
 		$allowsRegistrationBySeats
@@ -2815,7 +2815,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	 */
 	public function canSomebodyRegisterMessage() {
 		$message = '';
-		$registrationManager = tx_seminars_registrationmanager::getInstance();
+		$registrationManager = Tx_Seminars_Service_RegistrationManager::getInstance();
 
 		if (!$this->needsRegistration()) {
 			$message = $this->translate('message_noRegistrationNecessary');

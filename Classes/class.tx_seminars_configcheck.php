@@ -27,11 +27,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck {
 	/**
-	 * Checks the configuration for: tx_seminars_registrationmanager/.
+	 * Checks the configuration for: Tx_Seminars_Service_RegistrationManager/.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_registrationmanager() {
+	protected function check_Tx_Seminars_Service_RegistrationManager() {
 		// The registration manager needs to be able to create registration
 		// objects. So we check whether the prerequisites for registrations
 		// are fulfilled as well.

@@ -53,7 +53,7 @@ class Tx_Seminars_BagBuilder_EventTest extends Tx_Phpunit_TestCase {
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
-		tx_seminars_registrationmanager::purgeInstance();
+		Tx_Seminars_Service_RegistrationManager::purgeInstance();
 	}
 
 
