@@ -64,7 +64,7 @@ class Tx_Seminars_Bag_TimeSlot extends Tx_Seminars_Bag_Abstract {
 	 */
 	protected function createItemFromDbResult() {
 		$this->currentItem = GeneralUtility::makeInstance(
-			'tx_seminars_timeslot', 0, $this->dbResult
+			Tx_Seminars_OldModel_TimeSlot::class, 0, $this->dbResult
 		);
 		$this->valid();
 	}

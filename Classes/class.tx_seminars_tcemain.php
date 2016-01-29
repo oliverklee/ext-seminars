@@ -124,9 +124,9 @@ class tx_seminars_tcemainprocdm {
 	 * @return void
 	 */
 	private function processSingleTimeSlot($uid) {
-		/** @var tx_seminars_timeslot $timeslot */
+		/** @var Tx_Seminars_OldModel_TimeSlot $timeslot */
 		$timeslot = GeneralUtility::makeInstance(
-			'tx_seminars_timeslot', $uid, FALSE
+			Tx_Seminars_OldModel_TimeSlot::class, $uid, FALSE
 		);
 
 		if ($timeslot->isOk()) {

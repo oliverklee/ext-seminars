@@ -20,7 +20,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-final class tx_seminars_timeslotchild extends tx_seminars_timeslot {
+final class tx_seminars_timeslotchild extends Tx_Seminars_OldModel_TimeSlot {
 	/**
 	 * Sets the place field of the time slot.
 	 *

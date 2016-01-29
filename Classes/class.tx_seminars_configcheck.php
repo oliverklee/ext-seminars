@@ -102,11 +102,11 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_timeslot/.
+	 * Checks the configuration for: Tx_Seminars_OldModel_TimeSlot/.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_timeslot() {
+	protected function check_Tx_Seminars_OldModel_TimeSlot() {
 		$this->checkStaticIncluded();
 	}
 
