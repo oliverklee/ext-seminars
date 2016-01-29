@@ -29,7 +29,7 @@ class Tx_Seminars_BackEnd_SpeakersList extends Tx_Seminars_BackEnd_AbstractList 
 	protected $tableName = 'tx_seminars_speakers';
 
 	/**
-	 * @var tx_seminars_speaker the speaker which we want to list
+	 * @var Tx_Seminars_OldModel_Speaker the speaker which we want to list
 	 */
 	private $speaker = NULL;
 
@@ -78,7 +78,7 @@ class Tx_Seminars_BackEnd_SpeakersList extends Tx_Seminars_BackEnd_AbstractList 
 
 		$tableRows = '';
 
-		/** @var tx_seminars_speaker $speakerBag */
+		/** @var Tx_Seminars_OldModel_Speaker $speaker */
 		foreach ($speakerBag as $this->speaker) {
 			$this->template->setMarker(
 				'icon', $this->speaker->getRecordIcon()

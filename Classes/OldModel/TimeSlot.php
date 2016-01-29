@@ -77,7 +77,7 @@ class Tx_Seminars_OldModel_TimeSlot extends Tx_Seminars_OldModel_AbstractTimeSpa
 		$result = array();
 		$speakerBag = $this->getSpeakerBag();
 
-		/** @var tx_seminars_speaker $organizer */
+		/** @var Tx_Seminars_OldModel_Speaker $organizer */
 		foreach ($speakerBag as $speaker) {
 			$result[] = $speaker->getTitle();
 		}

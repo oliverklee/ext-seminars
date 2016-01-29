@@ -84,11 +84,11 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_speaker/.
+	 * Checks the configuration for: Tx_Seminars_OldModel_Speaker/.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_speaker() {
+	protected function check_Tx_Seminars_OldModel_Speaker() {
 		$this->checkStaticIncluded();
 	}
 

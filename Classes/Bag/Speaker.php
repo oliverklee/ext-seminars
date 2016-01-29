@@ -66,7 +66,7 @@ class Tx_Seminars_Bag_Speaker extends Tx_Seminars_Bag_Abstract {
 	 */
 	protected function createItemFromDbResult() {
 		$this->currentItem = GeneralUtility::makeInstance(
-			'tx_seminars_speaker', 0, $this->dbResult
+			Tx_Seminars_OldModel_Speaker::class, 0, $this->dbResult
 		);
 		$this->valid();
 	}

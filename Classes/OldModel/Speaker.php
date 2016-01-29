@@ -21,7 +21,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_speaker extends Tx_Seminars_OldModel_Abstract {
+class Tx_Seminars_OldModel_Speaker extends Tx_Seminars_OldModel_Abstract {
 	/** @var int the gender type for speakers without gender */
 	const GENDER_UNKNOWN = 0;
 
@@ -260,8 +260,8 @@ class tx_seminars_speaker extends Tx_Seminars_OldModel_Abstract {
 	 * Sets the gender of this speaker.
 	 *
 	 * @param int $gender
-	 *        the gender of the speaker, must be one of tx_seminars_speaker::GENDER_FEMALE, tx_seminars_speaker::GENDER_MALE
-	 *        or tx_seminars_speaker::GENDER_UNKNOWN
+	 *        the gender of the speaker, must be one of Tx_Seminars_OldModel_Speaker::GENDER_FEMALE, Tx_Seminars_OldModel_Speaker::GENDER_MALE
+	 *        or Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN
 	 *
 	 * @return void
 	 */

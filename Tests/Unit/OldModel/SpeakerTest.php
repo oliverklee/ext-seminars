@@ -21,19 +21,19 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_OldModel_SpeakerTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_OldModel_SpeakerTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var Tx_Oelib_TestingFramework
 	 */
 	private $testingFramework;
 
 	/**
-	 * @var tx_seminars_speaker
+	 * @var Tx_Seminars_OldModel_Speaker
 	 */
 	private $fixture;
 
 	/**
-	 * @var tx_seminars_speaker a maximal filled speaker
+	 * @var Tx_Seminars_OldModel_Speaker a maximal filled speaker
 	 */
 	private $maximalFixture;
 
@@ -46,7 +46,7 @@ class tx_seminars_OldModel_SpeakerTest extends Tx_Phpunit_TestCase {
 				'email' => 'foo@test.com'
 			)
 		);
-		$this->fixture = new tx_seminars_speaker($fixtureUid);
+		$this->fixture = new Tx_Seminars_OldModel_Speaker($fixtureUid);
 
 		$maximalFixtureUid = $this->testingFramework->createRecord(
 			'tx_seminars_speakers',
@@ -64,7 +64,7 @@ class tx_seminars_OldModel_SpeakerTest extends Tx_Phpunit_TestCase {
 				'email' => 'maximal-foo@test.com'
 			)
 		);
-		$this->maximalFixture = new tx_seminars_speaker($maximalFixtureUid);
+		$this->maximalFixture = new Tx_Seminars_OldModel_Speaker($maximalFixtureUid);
 	}
 
 	protected function tearDown() {
@@ -94,7 +94,7 @@ class tx_seminars_OldModel_SpeakerTest extends Tx_Phpunit_TestCase {
 			$this->fixture->getUid(), $uid, 'skills'
 		);
 
-		$this->fixture = new tx_seminars_speaker($this->fixture->getUid());
+		$this->fixture = new Tx_Seminars_OldModel_Speaker($this->fixture->getUid());
 
 		return $uid;
 	}
@@ -416,16 +416,16 @@ class tx_seminars_OldModel_SpeakerTest extends Tx_Phpunit_TestCase {
 
 	public function testGetGenderForNoGenderSetReturnsUnknownGenderValue() {
 		self::assertEquals(
-			tx_seminars_speaker::GENDER_UNKNOWN,
+			Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN,
 			$this->fixture->getGender()
 		);
 	}
 
 	public function testGetGenderForKnownGenderReturnsGender() {
-		$this->fixture->setGender(tx_seminars_speaker::GENDER_MALE);
+		$this->fixture->setGender(Tx_Seminars_OldModel_Speaker::GENDER_MALE);
 
 		self::assertEquals(
-			tx_seminars_speaker::GENDER_MALE,
+			Tx_Seminars_OldModel_Speaker::GENDER_MALE,
 			$this->fixture->getGender()
 		);
 	}
