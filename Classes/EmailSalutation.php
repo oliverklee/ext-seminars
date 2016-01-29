@@ -21,7 +21,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class tx_seminars_EmailSalutation {
+class Tx_Seminars_EmailSalutation {
 	/**
 	 * @var Tx_Oelib_Translator
 	 */

@@ -27,7 +27,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 	private $testingFramework = NULL;
 
 	/**
-	 * @var tx_seminars_EmailSalutation the fixture the tests relate to
+	 * @var Tx_Seminars_EmailSalutation
 	 */
 	private $subject = NULL;
 
@@ -44,7 +44,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
-		$this->subject = new tx_seminars_EmailSalutation();
+		$this->subject = new Tx_Seminars_EmailSalutation();
 		$configuration = new Tx_Oelib_Configuration();
 		$configuration->setAsString('salutation', 'formal');
 		Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);

@@ -41,7 +41,7 @@ return array(
 	'tx_seminars_csv_emailregistrationlistview' => $extensionPath . 'Classes/Csv/EmailRegistrationListView.php',
 	'tx_seminars_csv_eventlistview' => $extensionPath . 'Classes/Csv/EventListView.php',
 	'tx_seminars_csv_frontendregistrationaccesscheck' => $extensionPath . 'Classes/Csv/FrontEndRegistrationAccessCheck.php',
-	'tx_seminars_emailsalutation' => $extensionPath . 'Classes/class.tx_seminars_EmailSalutation.php',
+	'tx_seminars_emailsalutation' => $extensionPath . 'Classes/EmailSalutation.php',
 	'tx_seminars_flexforms' => $extensionPath . 'Classes/FlexForms.php',
 	'tx_seminars_frontend_abstractview' => $extensionPath . 'Classes/FrontEnd/AbstractView.php',
 	'tx_seminars_frontend_categorylist' => $extensionPath . 'Classes/FrontEnd/CategoryList.php',

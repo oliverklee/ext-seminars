@@ -596,8 +596,8 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	 *                for the given prefix could be found
 	 */
 	protected function localizeSalutationPlaceholder($prefix) {
-		/** @var tx_seminars_EmailSalutation $salutation */
-		$salutation = GeneralUtility::makeInstance('tx_seminars_EmailSalutation');
+		/** @var Tx_Seminars_EmailSalutation $salutation */
+		$salutation = GeneralUtility::makeInstance(Tx_Seminars_EmailSalutation::class);
 		$eventDetails = $salutation->createIntroduction(
 			'"%s"',
 			$this->getOldEvent()
@@ -623,8 +623,8 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	 *                data
 	 */
 	private function createMessageBody(Tx_Seminars_Model_FrontEndUser $user, Tx_Seminars_Model_Organizer $organizer) {
-		/** @var tx_seminars_EmailSalutation $salutation */
-		$salutation = GeneralUtility::makeInstance('tx_seminars_EmailSalutation');
+		/** @var Tx_Seminars_EmailSalutation $salutation */
+		$salutation = GeneralUtility::makeInstance(Tx_Seminars_EmailSalutation::class);
 		$messageText = str_replace(
 			'%' . $GLOBALS['LANG']->getLL('mailForm_salutation'),
 			$salutation->getSalutation($user),
