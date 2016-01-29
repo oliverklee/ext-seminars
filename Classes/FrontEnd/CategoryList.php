@@ -65,7 +65,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
 		if (($eventUids != '') && !$categoryBag->isEmpty()) {
 			$allCategories = '';
 
-			/** @var tx_seminars_OldModel_Category $category */
+			/** @var Tx_Seminars_OldModel_Category $category */
 			foreach ($categoryBag as $category) {
 				$link = $this->createLinkToListViewLimitedByCategory(
 					$category->getUid(),

@@ -20,7 +20,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_OldModel_Category extends Tx_Seminars_OldModel_Abstract {
+class Tx_Seminars_OldModel_Category extends Tx_Seminars_OldModel_Abstract {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */

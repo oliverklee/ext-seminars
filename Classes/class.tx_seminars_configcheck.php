@@ -120,11 +120,11 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_OldModel_Category/.
+	 * Checks the configuration for: Tx_Seminars_OldModel_Category/.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_OldModel_Category() {
+	protected function check_Tx_Seminars_OldModel_Category() {
 		$this->checkStaticIncluded();
 	}
 
