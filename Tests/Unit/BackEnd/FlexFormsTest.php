@@ -22,7 +22,7 @@
  */
 class tx_seminars_BackEnd_FlexFormsTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_flexForms
+	 * @var Tx_Seminars_FlexForms
 	 */
 	private $fixture;
 	/**
@@ -43,7 +43,7 @@ class tx_seminars_BackEnd_FlexFormsTest extends Tx_Phpunit_TestCase {
 
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
-		$this->fixture = new tx_seminars_flexForms();
+		$this->fixture = new Tx_Seminars_FlexForms();
 		$this->tcaBackup = $GLOBALS['TCA'][$this->testingTable]['ctrl'];
 		Tx_Oelib_ConfigurationProxy::getInstance('seminars')
 			->setAsBoolean('useStoragePid', FALSE);

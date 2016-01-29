@@ -15,6 +15,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5618] Rename tx_seminars_flexForms to Tx_Seminars_FlexForms
 - [#5590] Rename tx_seminars_Model_Event to Tx_Seminars_Model_Event
 - [#5609] Rename tx_seminars_ViewHelper_TimeRange to Tx_Seminars_ViewHelper_TimeRange
 - [#5608] Rename tx_seminars_ViewHelper_DateRange to Tx_Seminars_ViewHelper_DateRange

@@ -8,7 +8,7 @@ return array(
 	'tx_seminars_emailsalutation' => $extensionPath . 'Classes/class.tx_seminars_EmailSalutation.php',
 	'tx_seminars_configcheck' => $extensionPath . 'Classes/class.tx_seminars_configcheck.php',
 	'tx_seminars_configgetter' => $extensionPath . 'Classes/class.tx_seminars_configgetter.php',
-	'tx_seminars_flexforms' => $extensionPath . 'Classes/class.tx_seminars_flexForms.php',
+	'tx_seminars_flexforms' => $extensionPath . 'Classes/FlexForms.php',
 	'tx_seminars_registration' => $extensionPath . 'Classes/class.tx_seminars_registration.php',
 	'tx_seminars_registrationmanager' => $extensionPath . 'Classes/class.tx_seminars_registrationmanager.php',
 	'tx_seminars_seminar' => $extensionPath . 'Classes/class.tx_seminars_seminar.php',

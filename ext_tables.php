@@ -1,7 +1,7 @@
 <?php
 defined('TYPO3_MODE') or die('Access denied.');
 
-include_once(TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/class.tx_seminars_flexForms.php');
+include_once(TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/FlexForms.php');
 include_once(TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'tx_seminars_modifiedSystemTables.php');
 
 TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(

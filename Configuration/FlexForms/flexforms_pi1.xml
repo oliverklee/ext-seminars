@@ -375,7 +375,7 @@
 								<itemTable>tx_seminars_event_types</itemTable>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
-								<itemsProcFunc>tx_seminars_flexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
+								<itemsProcFunc>Tx_Seminars_FlexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</limitListViewToEventTypes>
@@ -387,7 +387,7 @@
 								<itemTable>tx_seminars_categories</itemTable>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
-								<itemsProcFunc>tx_seminars_flexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
+								<itemsProcFunc>Tx_Seminars_FlexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</limitListViewToCategories>
@@ -399,7 +399,7 @@
 								<itemTable>tx_seminars_sites</itemTable>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
-								<itemsProcFunc>tx_seminars_flexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
+								<itemsProcFunc>Tx_Seminars_FlexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</limitListViewToPlaces>
@@ -411,7 +411,7 @@
 								<itemTable>tx_seminars_organizers</itemTable>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
-								<itemsProcFunc>tx_seminars_flexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
+								<itemsProcFunc>Tx_Seminars_FlexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</limitListViewToOrganizers>
@@ -764,7 +764,7 @@
 								<type>select</type>
 								<renderMode>checkbox</renderMode>
 								<maxitems>100</maxitems>
-								<itemsProcFunc>tx_seminars_flexForms->getShowFeUserFieldsInRegistrationsList</itemsProcFunc>
+								<itemsProcFunc>Tx_Seminars_FlexForms->getShowFeUserFieldsInRegistrationsList</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</showFeUserFieldsInRegistrationsList>
@@ -775,7 +775,7 @@
 								<type>select</type>
 								<renderMode>checkbox</renderMode>
 								<maxitems>100</maxitems>
-								<itemsProcFunc>tx_seminars_flexForms->getShowRegistrationFieldsInRegistrationList</itemsProcFunc>
+								<itemsProcFunc>Tx_Seminars_FlexForms->getShowRegistrationFieldsInRegistrationList</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</showRegistrationFieldsInRegistrationList>
