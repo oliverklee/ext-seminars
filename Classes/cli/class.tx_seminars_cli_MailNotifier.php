@@ -107,14 +107,14 @@ class Tx_Seminars_Cli_MailNotifier {
 		$attachment = NULL;
 
 		// The first organizer is taken as sender.
-		/** @var $sender tx_seminars_OldModel_Organizer */
+		/** @var Tx_Seminars_OldModel_Organizer $sender */
 		$sender = $event->getFirstOrganizer();
 		$subject = $this->customizeMessage($messageKey . 'Subject', $event);
 		if ($this->shouldCsvFileBeAdded($event)) {
 			$attachment = $this->getCsv($event->getUid());
 		}
 
-		/** @var tx_seminars_OldModel_Organizer $organizer */
+		/** @var Tx_Seminars_OldModel_Organizer $organizer */
 		foreach ($event->getOrganizerBag() as $organizer) {
 			/** @var Tx_Oelib_Mail $eMail */
 			$eMail = GeneralUtility::makeInstance(Tx_Oelib_Mail::class);

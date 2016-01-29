@@ -237,7 +237,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 			$closingOptionTag = '';
 		}
 
-		/** @var tx_seminars_OldModel_Organizer $currentOrganizer */
+		/** @var Tx_Seminars_OldModel_Organizer $currentOrganizer */
 		foreach ($organizers as $currentOrganizer) {
 			$result .=  $openingOptionTag . $currentOrganizer->getUid() .
 				$bracketClose . htmlspecialchars(

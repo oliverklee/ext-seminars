@@ -29,7 +29,7 @@ class Tx_Seminars_BackEnd_OrganizersList extends Tx_Seminars_BackEnd_AbstractLis
 	protected $tableName = 'tx_seminars_organizers';
 
 	/**
-	 * @var tx_seminars_OldModel_Organizer the organizer which we want to list
+	 * @var Tx_Seminars_OldModel_Organizer the organizer which we want to list
 	 */
 	private $organizer = NULL;
 
@@ -75,7 +75,7 @@ class Tx_Seminars_BackEnd_OrganizersList extends Tx_Seminars_BackEnd_AbstractLis
 
 		$tableRows = '';
 
-		/** @var tx_seminars_OldModel_Organizer $organizerBag */
+		/** @var Tx_Seminars_OldModel_Organizer $organizerBag */
 		foreach ($organizerBag as $this->organizer) {
 			$this->template->setMarker(
 				'icon', $this->organizer->getRecordIcon()

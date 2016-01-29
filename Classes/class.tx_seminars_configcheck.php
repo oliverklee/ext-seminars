@@ -93,11 +93,11 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck {
 	}
 
 	/**
-	 * Checks the configuration for: tx_seminars_OldModel_Organizer/.
+	 * Checks the configuration for: Tx_Seminars_OldModel_Organizer/.
 	 *
 	 * @return void
 	 */
-	protected function check_tx_seminars_OldModel_Organizer() {
+	protected function check_Tx_Seminars_OldModel_Organizer() {
 		$this->checkStaticIncluded();
 	}
 

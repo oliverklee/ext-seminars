@@ -873,7 +873,7 @@ class tx_seminars_registrationmanager extends Tx_Oelib_TemplateHelper {
 		$eMailNotification = GeneralUtility::makeInstance(Tx_Oelib_Mail::class);
 		$eMailNotification->setSender($event->getFirstOrganizer());
 
-		/** @var tx_seminars_OldModel_Organizer $organizer */
+		/** @var Tx_Seminars_OldModel_Organizer $organizer */
 		foreach ($organizers as $organizer) {
 			$eMailNotification->addRecipient($organizer);
 		}
@@ -1010,7 +1010,7 @@ class tx_seminars_registrationmanager extends Tx_Oelib_TemplateHelper {
 			$event->getTitleAndDate('-')
 		));
 
-		/** @var tx_seminars_OldModel_Organizer $organizer */
+		/** @var Tx_Seminars_OldModel_Organizer $organizer */
 		foreach ($event->getOrganizerBag() as $organizer) {
 			$eMail->addRecipient($organizer);
 		}

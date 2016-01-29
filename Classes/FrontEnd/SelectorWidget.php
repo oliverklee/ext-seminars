@@ -644,7 +644,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 		foreach ($this->seminarBag as $event) {
 			if ($event->hasOrganizers()) {
 				$organizers = $event->getOrganizerBag();
-				/** @var tx_seminars_OldModel_Organizer $organizer */
+				/** @var Tx_Seminars_OldModel_Organizer $organizer */
 				foreach ($organizers as $organizer) {
 					$organizerUid = $organizer->getUid();
 					if (!isset($result[$organizerUid])) {
