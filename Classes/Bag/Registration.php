@@ -68,7 +68,7 @@ class Tx_Seminars_Bag_Registration extends Tx_Seminars_Bag_Abstract {
 	 */
 	protected function createItemFromDbResult() {
 		$this->currentItem = GeneralUtility::makeInstance(
-			'tx_seminars_registration', $this->cObj, $this->dbResult
+			Tx_Seminars_OldModel_Registration::class, $this->cObj, $this->dbResult
 		);
 		$this->valid();
 	}

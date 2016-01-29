@@ -641,7 +641,7 @@ class Tx_Seminars_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase {
 
 		self::assertTrue(
 			$this->fixture->getRegistration()
-				instanceof tx_seminars_registration
+				instanceof Tx_Seminars_OldModel_Registration
 		);
 	}
 

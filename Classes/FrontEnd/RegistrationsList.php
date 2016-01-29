@@ -262,7 +262,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
 	private function createTableBody(Tx_Seminars_Bag_Registration $registrations) {
 		$tableBody = '';
 
-		/** @var tx_seminars_registration $registration */
+		/** @var Tx_Seminars_OldModel_Registration $registration */
 		foreach ($registrations as $registration) {
 			/** @var string[] $cellContents */
 			$cellContents = array();

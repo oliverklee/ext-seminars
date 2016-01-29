@@ -216,7 +216,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 		/** @var $bag Tx_Seminars_Bag_Registration */
 		$bag = $builder->build();
 
-		/** @var tx_seminars_registration $registration */
+		/** @var Tx_Seminars_OldModel_Registration $registration */
 		foreach ($bag as $registration) {
 			$userData = $this->createCsvColumnsForFrontEndUser($registration);
 			$registrationData = $this->createCsvColumnsForRegistration($registration);
@@ -230,11 +230,11 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	 * Retrieves data from an object and returns that data as an array of values. The individual values are already wrapped in
 	 * double quotes, with the contents having all quotes escaped.
 	 *
-	 * @param tx_seminars_registration $model object that will deliver the data
+	 * @param Tx_Seminars_OldModel_Registration $model object that will deliver the data
 	 *
 	 * @return string[] the data for the keys provided in $keys (may be empty)
 	 */
-	protected function createCsvColumnsForRegistration(tx_seminars_registration $model) {
+	protected function createCsvColumnsForRegistration(Tx_Seminars_OldModel_Registration $model) {
 		$csvLines = array();
 
 		foreach ($this->getRegistrationFieldKeys() as $key) {
@@ -248,11 +248,11 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
 	 * Retrieves data from an object and returns that data as an array of values. The individual values are already wrapped in
 	 * double quotes, with the contents having all quotes escaped.
 	 *
-	 * @param tx_seminars_registration $model object that will deliver the data
+	 * @param Tx_Seminars_OldModel_Registration $model object that will deliver the data
 	 *
 	 * @return string[] the data for the keys provided in $keys (may be empty)
 	 */
-	protected function createCsvColumnsForFrontEndUser(tx_seminars_registration $model) {
+	protected function createCsvColumnsForFrontEndUser(Tx_Seminars_OldModel_Registration $model) {
 		$csvLines = array();
 
 		foreach ($this->getFrontEndUserFieldKeys() as $key) {

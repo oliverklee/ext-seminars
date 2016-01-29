@@ -27,7 +27,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
+class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract {
 	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
@@ -38,7 +38,7 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 	 *
 	 * @var string
 	 */
-	public $prefixId = 'tx_seminars_registration';
+	public $prefixId = Tx_Seminars_OldModel_Registration::class;
 
 	/**
 	 * faking $this->scriptRelPath so the locallang.xml file is found

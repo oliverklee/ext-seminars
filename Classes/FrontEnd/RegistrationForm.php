@@ -77,7 +77,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 	private $seminar = NULL;
 
 	/**
-	 * @var tx_seminars_registration
+	 * @var Tx_Seminars_OldModel_Registration
 	 */
 	protected $registration = NULL;
 
@@ -200,18 +200,18 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 	/**
 	 * Sets the registration for which to create the unregistration form.
 	 *
-	 * @param tx_seminars_registration $registration the registration to use
+	 * @param Tx_Seminars_OldModel_Registration $registration the registration to use
 	 *
 	 * @return void
 	 */
-	public function setRegistration(tx_seminars_registration $registration) {
+	public function setRegistration(Tx_Seminars_OldModel_Registration $registration) {
 		$this->registration = $registration;
 	}
 
 	/**
 	 * Returns the current registration object.
 	 *
-	 * @return tx_seminars_registration the registration, will be NULL if none has been set
+	 * @return Tx_Seminars_OldModel_Registration the registration, will be NULL if none has been set
 	 */
 	private function getRegistration() {
 		return $this->registration;

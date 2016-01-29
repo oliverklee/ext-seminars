@@ -237,7 +237,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 	 *
 	 * A new front-end user will be created and the event in $this->seminar will be used.
 	 *
-	 * @return tx_seminars_registration the created registration
+	 * @return Tx_Seminars_OldModel_Registration the created registration
 	 */
 	private function createRegistration() {
 		$frontEndUserUid = $this->testingFramework->createFrontEndUser(
@@ -4711,7 +4711,7 @@ class Tx_seminars_Service_RegistrationManagerTest extends Tx_Phpunit_TestCase {
 		$fixture->createRegistration($this->seminar, array(), $plugin);
 
 		self::assertInstanceOf(
-			'tx_seminars_registration',
+			Tx_Seminars_OldModel_Registration::class,
 			$fixture->getRegistration()
 		);
 		$uid = $fixture->getRegistration()->getUid();

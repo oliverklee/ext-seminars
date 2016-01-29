@@ -168,7 +168,7 @@ class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
 
 		$tableRows = '';
 
-		/** @var tx_seminars_registration $registration */
+		/** @var Tx_Seminars_OldModel_Registration $registration */
 		foreach ($registrationBag as $registration) {
 			try {
 				$userName = htmlspecialchars($registration->getUserName());
