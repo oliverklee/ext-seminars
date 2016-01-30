@@ -39,19 +39,19 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	protected $mailer = NULL;
 
 	/**
-	 * @var tx_oelib_Configuration
+	 * @var Tx_Oelib_Configuration
 	 */
 	private $configuration = NULL;
 
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
-		tx_oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
+		Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('useStoragePid', FALSE);
 
-		$this->configuration = new tx_oelib_Configuration();
+		$this->configuration = new Tx_Oelib_Configuration();
 		$this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
-		tx_oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
+		Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
 
 		$this->fixture = new Tx_Seminars_FrontEnd_EventEditor(
 			array(
@@ -63,7 +63,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setTestMode();
 
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
-		$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
 		$mailerFactory->enableTestMode();
 		$this->mailer = $mailerFactory->getMailer();
 	}
@@ -1388,7 +1388,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		);
 		$this->testingFramework->createFakeFrontEnd($pageUid);
 		$this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->set(
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->set(
 			'createAuxiliaryRecordsPID', 21
 		);
 
@@ -1408,9 +1408,9 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function populateListOrganizersShowsDefaultOrganizerFromUserGroup() {
-		$organizerUid = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
+		$organizerUid = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
 			->getLoadedTestingModel(array())->getUid();
-		$frontEndUserGroupUid = tx_oelib_MapperRegistry
+		$frontEndUserGroupUid = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_FrontEndUserGroup::class)->getLoadedTestingModel(
 				array('tx_seminars_default_organizer' => $organizerUid)
 			)->getUid();
@@ -1430,7 +1430,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function populateListOrganizersForDefaultOrganizerInUserGroupNotIncludesOtherOrganizer() {
-		$organizerMapper = tx_oelib_MapperRegistry::get(
+		$organizerMapper = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_Organizer::class
 		);
 		$organizerUidFromDatabase = $this->testingFramework->createRecord(
@@ -1440,7 +1440,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$organizerMapper->find($organizerUidFromDatabase);
 
 		$organizerUid = $organizerMapper->getLoadedTestingModel(array())->getUid();
-		$frontEndUserGroupUid = tx_oelib_MapperRegistry
+		$frontEndUserGroupUid = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_FrontEndUserGroup::class)->getLoadedTestingModel(
 				array('tx_seminars_default_organizer' => $organizerUid)
 			)->getUid();
@@ -2224,7 +2224,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function modifyDataToInsertForPublishSettingPublishImmediatelyDoesNotHideEditedEvent() {
-		$event = tx_oelib_MapperRegistry::get(
+		$event = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
@@ -2274,7 +2274,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function modifyDataToInsertForPublishSettingHideEditedHidesEditedEvent() {
-		$event = tx_oelib_MapperRegistry::get(
+		$event = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
@@ -2293,7 +2293,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function modifyDataToInsertForPublishSettingHideNewDoesNotHideEditedEvent() {
-		$event = tx_oelib_MapperRegistry::get(
+		$event = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
@@ -2343,7 +2343,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function modifyDataToInsertForEventNotHiddenOnEditingDoesNotAddPublicationHashToEvent() {
-		$event = tx_oelib_MapperRegistry::get(
+		$event = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
 		$this->fixture->setObjectUid($event->getUid());
 		$this->createAndLoginUserWithPublishSetting(
@@ -2376,7 +2376,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function modifyDataToInsertForHiddenEventDoesNotAddPublicationHashToEvent() {
-		$event = tx_oelib_MapperRegistry::get(
+		$event = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
 			array('hidden' => 1)
 		);
@@ -2485,12 +2485,12 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	public function modifyDataToInsertForUserGroupSpecificEventPidSetsPidFromUserGroupAsEventPid() {
 		$this->fixture->setConfigurationValue('createEventsPID', 42);
 
-		$userGroup = tx_oelib_MapperRegistry::get(
+		$userGroup = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_FrontEndUserGroup::class)->getLoadedTestingModel(
 				array('tx_seminars_events_pid' => 21)
 		);
 
-		$user = tx_oelib_MapperRegistry::get(
+		$user = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel(
 				array('usergroup' => $userGroup->getUid())
 		);
@@ -2524,11 +2524,11 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertForNewEventAndUserWithOneDefaultCategoryAddsThisCategory() {
 		$categories = new Tx_Oelib_List();
-		$category = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+		$category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
 			->getNewGhost();
 		$categories->add($category);
 
-		$userGroup = tx_oelib_MapperRegistry::get(
+		$userGroup = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
 		$userGroup->setData(
 			array(
@@ -2554,7 +2554,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function modifyDataToInsertForNewEventAndUserWithTwoDefaultCategoriesAddsTheseCategories() {
-		$categoryMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class);
+		$categoryMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class);
 		$category1 = $categoryMapper->getNewGhost();
 		$category2 = $categoryMapper->getNewGhost();
 
@@ -2562,7 +2562,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 		$categories->add($category1);
 		$categories->add($category2);
 
-		$userGroup = tx_oelib_MapperRegistry::get(
+		$userGroup = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
 		$userGroup->setData(
 			array(
@@ -2589,11 +2589,11 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 */
 	public function modifyDataToInsertForEditedEventAndUserWithOneDefaultCategoryDoesNotAddTheUsersCategory() {
 		$categories = new Tx_Oelib_List();
-		$category = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+		$category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
 			->getNewGhost();
 		$categories->add($category);
 
-		$userGroup = tx_oelib_MapperRegistry::get(
+		$userGroup = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
 		$userGroup->setData(
 			array(
@@ -2607,7 +2607,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 			$userGroup->getUid()
 		);
 
-		$this->fixture->setObjectUid(tx_oelib_MapperRegistry::get(
+		$this->fixture->setObjectUid(Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
 				array())->getUid()
 		);
@@ -2864,11 +2864,11 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	public function validateCheckboxesForUserWithDefaultCategoriesAndCategoriesRequiredAndEmptyReturnsTrue() {
 		$categories = new Tx_Oelib_List();
 		$categories->add(
-			tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+			Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
 				->getNewGhost()
 		);
 
-		$userGroup = tx_oelib_MapperRegistry::get(
+		$userGroup = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
 		$userGroup->setData(
 			array('tx_seminars_default_categories' => $categories)
@@ -3695,7 +3695,7 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function makeListToFormidableListForListWithOneElementReturnsModelDataInArray() {
-		$targetGroup = tx_oelib_MapperRegistry::get(
+		$targetGroup = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_TargetGroup::class)->getLoadedTestingModel(
 				array('title' => 'foo')
 		);
@@ -3715,9 +3715,9 @@ class Tx_Seminars_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function makeListToFormidableListForListWithTwoElementsReturnsArrayWithTwoModels() {
-		$targetGroup1 = tx_oelib_MapperRegistry::get(
+		$targetGroup1 = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_TargetGroup::class)->getLoadedTestingModel(array());
-		$targetGroup2 = tx_oelib_MapperRegistry::get(
+		$targetGroup2 = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_TargetGroup::class)->getLoadedTestingModel(array());
 
 		$list = new Tx_Oelib_List();

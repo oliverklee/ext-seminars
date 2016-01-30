@@ -29,24 +29,24 @@ interface Tx_Seminars_Interface_Hook_BackEndModule {
 	 *
 	 * @param tx_seminars_Model_Registration $registration
 	 *        the registration to which the e-mail refers
-	 * @param tx_oelib_Mail $eMail
+	 * @param Tx_Oelib_Mail $eMail
 	 *        the e-mail that will be sent
 	 *
 	 * @return void
 	 */
-	public function modifyGeneralEmail(tx_seminars_Model_Registration $registration, tx_oelib_Mail $eMail);
+	public function modifyGeneralEmail(tx_seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail);
 
 	/**
 	 * Modifies the confirmation e-mail sent via the back-end module.
 	 *
 	 * @param tx_seminars_Model_Registration $registration
 	 *        the registration to which the e-mail refers
-	 * @param tx_oelib_Mail $eMail
+	 * @param Tx_Oelib_Mail $eMail
 	 *        the e-mail that will be sent
 	 *
 	 * @return void
 	 */
-	public function modifyConfirmEmail(tx_seminars_Model_Registration $registration, tx_oelib_Mail $eMail);
+	public function modifyConfirmEmail(tx_seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail);
 
 	/**
 	 * Modifies the cancelation e-mail sent via the back-end module.
@@ -56,10 +56,10 @@ interface Tx_Seminars_Interface_Hook_BackEndModule {
 	 *
 	 * @param tx_seminars_Model_Registration $registration
 	 *        the registration to which the e-mail refers
-	 * @param tx_oelib_Mail $eMail
+	 * @param Tx_Oelib_Mail $eMail
 	 *        the e-mail that will be sent
 	 *
 	 * @return void
 	 */
-	public function modifyCancelEmail(tx_seminars_Model_Registration $registration, tx_oelib_Mail $eMail);
+	public function modifyCancelEmail(tx_seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail);
 }

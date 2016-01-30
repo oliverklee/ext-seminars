@@ -66,7 +66,7 @@ class Tx_Seminars_FrontEnd_RequirementsList extends Tx_Seminars_FrontEnd_Abstrac
 	 * @return void
 	 */
 	public function limitToMissingRegistrations() {
-		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+		if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			throw new BadMethodCallException(
 				'No FE user is currently logged in. Please call this function only when a FE user is logged in.', 1333293236
 			);
@@ -98,7 +98,7 @@ class Tx_Seminars_FrontEnd_RequirementsList extends Tx_Seminars_FrontEnd_Abstrac
 		$output = '';
 
 		/** @var Tx_Seminars_Mapper_Event $eventMapper */
-		$eventMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
+		$eventMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		$requirements = $this->getRequirements();
 		/** @var tx_seminars_seminar $requirement */
 		foreach ($requirements as $requirement) {

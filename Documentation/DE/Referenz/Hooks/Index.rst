@@ -45,7 +45,7 @@ They are used like this:
 
 \* the event to display in the single view
 
-\*  **@param** tx\_oelib\_Template $template
+\*  **@param** Tx\_Oelib\_Template $template
 
 \* the template that will be used to create the single view output
 
@@ -56,7 +56,7 @@ They are used like this:
 \*/
 
 public functionmodifyEventSingleView(tx\_seminars\_Model\_Event$event,
-tx\_oelib\_Template$template) {…}
+Tx\_Oelib\_Template$template) {…}
 
 /\*\*
 
@@ -71,7 +71,7 @@ event
 
 \* the time slot to display in the current row
 
-\*  **@param** tx\_oelib\_Template $template
+\*  **@param** Tx\_Oelib\_Template $template
 
 \* the template that will be used to create the list row output
 
@@ -82,7 +82,7 @@ event
 \*/
 
 public function modifyTimeSlotListRow(tx\_seminars\_Model\_TimeSlot
-$timeSlot, tx\_oelib\_Template $template) {…}
+$timeSlot, Tx\_Oelib\_Template $template) {…}
 
 
 New hooks for the list view
@@ -107,11 +107,11 @@ It's used like this:
        *
        * @param tx_seminars_Model_Event $event
        *        the affected registration
-        * @param tx_oelib_Template $template
+        * @param Tx_Oelib_Template $template
         *        the template from which the list row is built
         */
          public function modifyListRow(
-                 tx_seminars_Model_Event $event, tx_oelib_Template $template
+                 tx_seminars_Model_Event $event, Tx_Oelib_Template $template
          ) {…}
 
         /**
@@ -120,11 +120,11 @@ It's used like this:
        *
        * @param tx_seminars_Model_Registration $registration
        *        the affected registration
-        * @param tx_oelib_Template $template
+        * @param Tx_Oelib_Template $template
         *        the template from which the list row is built
         */
          public function modifyMyEventsListRow(
-                 tx_seminars_Model_Registration $registration, tx_oelib_Template $template
+                 tx_seminars_Model_Registration $registration, Tx_Oelib_Template $template
        ) {…}
 
 
@@ -138,7 +138,7 @@ then should expect two parameters:
 ::
 
    public function modifyOrganizerNotificationEmail(
-         tx_seminars_registration $registration, tx_oelib_Template $emailTemplate
+         tx_seminars_registration $registration, Tx_Oelib_Template $emailTemplate
    ) {
 
 Your class then needs to be included and registered like in this
@@ -166,7 +166,7 @@ parameters:
 ::
 
            public function modifyThankYouEmail(
-                 tx_oelib_Mail $email, tx_seminars_Model_Registration $registration
+                 Tx_Oelib_Mail $email, tx_seminars_Model_Registration $registration
          ) {
 
 Your class then needs to be included and registered like in this
@@ -189,7 +189,7 @@ then should expect two parameters:
 ::
 
     public function modifyAttendeeEmailText(
-                 tx_seminars_registration $registration, tx_oelib_Template $emailTemplate
+                 tx_seminars_registration $registration, Tx_Oelib_Template $emailTemplate
        ) {
 
 Your class then needs to be included and registered like in this
@@ -225,24 +225,24 @@ It's used like this:
         *
         * @param tx_seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
-        * @param tx_oelib_Mail $eMail
+        * @param Tx_Oelib_Mail $eMail
         *        the e-mail that will be sent
         *
         * @return void
         */
-         public function modifyGeneralEmail(tx_seminars_Model_Registration $registration, tx_oelib_Mail $eMail) {…}
+         public function modifyGeneralEmail(tx_seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
 
          /**
         * Modifies the confirmation e-mail sent via the back-end module.
         *
         * @param tx_seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
-        * @param tx_oelib_Mail $eMail
+        * @param Tx_Oelib_Mail $eMail
         *        the e-mail that will be sent
         *
         * @return void
         */
-         public function modifyConfirmEmail(tx_seminars_Model_Registration $registration, tx_oelib_Mail $eMail) {…}
+         public function modifyConfirmEmail(tx_seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
 
          /**
         * Modifies the cancelation e-mail sent via the back-end module.
@@ -252,11 +252,11 @@ It's used like this:
         *
         * @param tx_seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
-        * @param tx_oelib_Mail $eMail
+        * @param Tx_Oelib_Mail $eMail
         *        the e-mail that will be sent
         *
         * @return void
         */
-          public function modifyCancelEmail(tx_seminars_Model_Registration $registration, tx_oelib_Mail $eMail) {…}
+          public function modifyCancelEmail(tx_seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
 
 Please contact us if you need additional hooks.

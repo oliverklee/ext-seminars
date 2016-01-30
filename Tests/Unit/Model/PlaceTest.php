@@ -258,13 +258,13 @@ class Tx_Seminars_Model_PlaceTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getCountryWithCountryReturnsCountryInstance() {
 		/** @var Tx_Oelib_Mapper_Country $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
-		/** @var tx_oelib_Model_Country $country */
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
+		/** @var Tx_Oelib_Model_Country $country */
 		$country = $mapper->find(54);
 		$this->fixture->setData(array('country' => $country->getIsoAlpha2Code()));
 
 		self::assertTrue(
-			$this->fixture->getCountry() instanceof tx_oelib_Model_Country
+			$this->fixture->getCountry() instanceof Tx_Oelib_Model_Country
 		);
 	}
 
@@ -273,8 +273,8 @@ class Tx_Seminars_Model_PlaceTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getCountryWithCountryReturnsCountryAsModel() {
 		/** @var Tx_Oelib_Mapper_Country $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
-		/** @var tx_oelib_Model_Country $country */
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
+		/** @var Tx_Oelib_Model_Country $country */
 		$country = $mapper->find(54);
 		$this->fixture->setData(array('country' => $country->getIsoAlpha2Code()));
 
@@ -289,8 +289,8 @@ class Tx_Seminars_Model_PlaceTest extends Tx_Phpunit_TestCase {
 	 */
 	public function setCountrySetsCountry() {
 		/** @var Tx_Oelib_Mapper_Country $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
-		/** @var tx_oelib_Model_Country $country */
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
+		/** @var Tx_Oelib_Model_Country $country */
 		$country = $mapper->find(54);
 		$this->fixture->setCountry($country);
 
@@ -338,8 +338,8 @@ class Tx_Seminars_Model_PlaceTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasCountryWithCountryReturnsTrue() {
 		/** @var Tx_Oelib_Mapper_Country $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
-		/** @var tx_oelib_Model_Country $country */
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
+		/** @var Tx_Oelib_Model_Country $country */
 		$country = $mapper->find(54);
 		$this->fixture->setCountry($country);
 

@@ -129,9 +129,9 @@ class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Inte
 	}
 
 	/**
-	 * Returns the country of this place as tx_oelib_Model_Country.
+	 * Returns the country of this place as Tx_Oelib_Model_Country.
 	 *
-	 * @return tx_oelib_Model_Country the country of this place
+	 * @return Tx_Oelib_Model_Country the country of this place
 	 */
 	public function getCountry() {
 		$countryCode = $this->getAsString('country');
@@ -141,7 +141,7 @@ class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Inte
 
 		try {
 			/** @var Tx_Oelib_Mapper_Country $mapper */
-			$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
+			$mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
 			$country = $mapper->findByIsoAlpha2Code($countryCode);
 		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			$country = NULL;
@@ -153,12 +153,12 @@ class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Inte
 	/**
 	 * Sets the country of this place.
 	 *
-	 * @param tx_oelib_Model_Country $country
+	 * @param Tx_Oelib_Model_Country $country
 	 *        the country to set for this place, can be NULL for "no country"
 	 *
 	 * @return void
 	 */
-	public function setCountry(tx_oelib_Model_Country $country = NULL) {
+	public function setCountry(Tx_Oelib_Model_Country $country = NULL) {
 		$countryCode = ($country !== NULL) ? $country->getIsoAlpha2Code() : '';
 
 		$this->setAsString('country', $countryCode);
@@ -170,7 +170,7 @@ class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Inte
 	 * @return bool TRUE if this place has a country, FALSE otherwise
 	 */
 	public function hasCountry() {
-		return ($this->getCountry() instanceof tx_oelib_Model_Country);
+		return ($this->getCountry() instanceof Tx_Oelib_Model_Country);
 	}
 
 	/**

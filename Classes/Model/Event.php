@@ -678,7 +678,7 @@ class tx_seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns our language.
 	 *
-	 * @return tx_oelib_Model_Language our language, will be NULL if this event
+	 * @return Tx_Oelib_Model_Language our language, will be NULL if this event
 	 *                                 has no language set
 	 */
 	public function getLanguage() {
@@ -687,18 +687,18 @@ class tx_seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
 		}
 
 		/** @var Tx_Oelib_Mapper_Language $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
 		return $mapper->findByIsoAlpha2Code($this->getAsString('language'));
 	}
 
 	/**
 	 * Sets our language.
 	 *
-	 * @param tx_oelib_Model_Language $language our language
+	 * @param Tx_Oelib_Model_Language $language our language
 	 *
 	 * @return void
 	 */
-	public function setLanguage(tx_oelib_Model_Language $language) {
+	public function setLanguage(Tx_Oelib_Model_Language $language) {
 		$this->setAsString('language', $language->getIsoAlpha2Code());
 	}
 

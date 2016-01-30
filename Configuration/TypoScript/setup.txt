@@ -501,7 +501,7 @@ plugin.tx_seminars_pi1 {
 				renderer = renderer:TEMPLATE
 				renderer.template {
 					path.userobj.php (
-						return tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('eventEditorTemplateFile');
+						return Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('eventEditorTemplateFile');
 					)
 					subpart = ###seminars_FORM###
 					errortag = errors
@@ -2300,7 +2300,7 @@ plugin.tx_seminars_pi1 {
 					renderer = renderer:TEMPLATE
 					renderer.template {
 						path.userobj.php (
-							return tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
+							return Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
 						)
 						subpart = ###REGISTRATION_EDITOR_STEP_1###
 						errortag = errors
@@ -3102,7 +3102,7 @@ plugin.tx_seminars_pi1 {
 					renderer = renderer:TEMPLATE
 					renderer.template {
 						path.userobj.php (
-							return tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
+							return Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
 						)
 						subpart = ###REGISTRATION_EDITOR_STEP_2###
 						errortag = errors
@@ -3693,7 +3693,7 @@ plugin.tx_seminars_pi1 {
 				renderer = renderer:TEMPLATE
 				renderer.template {
 						path.userobj.php (
-							return tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
+							return Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
 						)
 					subpart = ###REGISTRATION_EDITOR_UNREGISTRATION###
 					errortag = errors

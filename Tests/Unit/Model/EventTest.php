@@ -887,7 +887,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setData(array('language' => 'DE'));
 
 		/** @var Tx_Oelib_Mapper_Language $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
 		self::assertSame(
 			$mapper->findByIsoAlpha2Code('DE'),
 			$this->fixture->getLanguage()
@@ -899,7 +899,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function setLanguageSetsLanguage() {
 		/** @var Tx_Oelib_Mapper_Language $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
 		$language = $mapper->findByIsoAlpha2Code('DE');
 		$this->fixture->setLanguage($language);
 
@@ -925,7 +925,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasLanguageWithLanguageReturnsTrue() {
 		/** @var Tx_Oelib_Mapper_Language $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
 		$language = $mapper->findByIsoAlpha2Code('DE');
 		$this->fixture->setLanguage($language);
 
@@ -1696,7 +1696,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getRegularRegistrationsReturnsRegularRegistrations() {
 		$registrations = new Tx_Oelib_List();
-		$registration = tx_oelib_MapperRegistry
+		$registration = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
 				array('registration_queue' => 0)
 			);
@@ -1714,7 +1714,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getRegularRegistrationsNotReturnsQueueRegistrations() {
 		$registrations = new Tx_Oelib_List();
-		$registration = tx_oelib_MapperRegistry
+		$registration = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
 				array('registration_queue' => 1)
 			);
@@ -1731,7 +1731,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getQueueRegistrationsReturnsQueueRegistrations() {
 		$registrations = new Tx_Oelib_List();
-		$registration = tx_oelib_MapperRegistry
+		$registration = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
 				array('registration_queue' => 1)
 			);
@@ -1749,7 +1749,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getQueueRegistrationsNotReturnsRegularRegistrations() {
 		$registrations = new Tx_Oelib_List();
-		$registration = tx_oelib_MapperRegistry
+		$registration = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
 				array('registration_queue' => 0)
 			);
@@ -1766,7 +1766,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasQueueRegistrationsForOneQueueRegistrationReturnsTrue() {
 		$registrations = new Tx_Oelib_List();
-		$registration = tx_oelib_MapperRegistry
+		$registration = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
 				array('registration_queue' => 1)
 			);
@@ -1851,7 +1851,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getRegisteredSeatsCountsSingleSeatRegularRegistrations() {
 		$registrations = new Tx_Oelib_List();
-		$registration = tx_oelib_MapperRegistry
+		$registration = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
 				array('seats' => 1)
 			);
@@ -1874,7 +1874,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getRegisteredSeatsCountsMultiSeatRegularRegistrations() {
 		$registrations = new Tx_Oelib_List();
-		$registration = tx_oelib_MapperRegistry
+		$registration = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
 				array('seats' => 2)
 			);
@@ -1897,7 +1897,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getRegisteredSeatsNotCountsQueueRegistrations() {
 		$queueRegistrations = new Tx_Oelib_List();
-		$registration = tx_oelib_MapperRegistry
+		$registration = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
 				array('seats' => 1)
 			);
@@ -2242,7 +2242,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	public function attachRegistrationAddsRegistration() {
 		$this->fixture->setRegistrations(new Tx_Oelib_List());
 
-		$registration = tx_oelib_MapperRegistry
+		$registration = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Registration::class)
 			->getLoadedTestingModel(array());
 		$this->fixture->attachRegistration($registration);
@@ -2257,12 +2257,12 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function attachRegistrationNotRemovesExistingRegistration() {
 		$registrations = new Tx_Oelib_List();
-		$oldRegistration = tx_oelib_MapperRegistry
+		$oldRegistration = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Registration::class)->getNewGhost();
 		$registrations->add($oldRegistration);
 		$this->fixture->setRegistrations($registrations);
 
-		$newRegistration = tx_oelib_MapperRegistry
+		$newRegistration = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Registration::class)
 			->getLoadedTestingModel(array());
 		$this->fixture->attachRegistration($newRegistration);
@@ -2278,7 +2278,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	public function attachRegistrationSetsEventForRegistration() {
 		$this->fixture->setRegistrations(new Tx_Oelib_List());
 
-		$registration = tx_oelib_MapperRegistry
+		$registration = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Registration::class)
 			->getLoadedTestingModel(array());
 		$this->fixture->attachRegistration($registration);

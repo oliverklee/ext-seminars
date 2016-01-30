@@ -391,11 +391,11 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 * links. Returns a localized string "will be announced" if the seminar has
 	 * no places set.
 	 *
-	 * @param tx_oelib_templatehelper $plugin the current FE plugin
+	 * @param Tx_Oelib_TemplateHelper $plugin the current FE plugin
 	 *
 	 * @return string our places description (or '' if there is an error)
 	 */
-	public function getPlaceWithDetails(tx_oelib_templatehelper $plugin) {
+	public function getPlaceWithDetails(Tx_Oelib_TemplateHelper $plugin) {
 		if (!$this->hasPlace()) {
 			$plugin->setMarker(
 				'message_will_be_announced',
@@ -1147,7 +1147,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		/** @var Tx_Oelib_ViewHelper_Price $priceViewHelper */
 		$priceViewHelper = GeneralUtility::makeInstance(Tx_Oelib_ViewHelper_Price::class);
 		$priceViewHelper->setCurrencyFromIsoAlpha3Code(
-			tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency')
+			Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency')
 		);
 		$priceViewHelper->setValue((float)$value);
 
@@ -2479,8 +2479,8 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	public function isUserVip($feUserUid, $defaultEventVipsFeGroupID) {
 		$result = FALSE;
 		$isDefaultVip = ($defaultEventVipsFeGroupID != 0)
-			&& tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
-			&& tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser()
+			&& Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
+			&& Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser()
 				->hasGroupMembership($defaultEventVipsFeGroupID);
 
 		if ($isDefaultVip) {
@@ -2594,7 +2594,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0,
 		$defaultEventVipsFeGroupID = 0
 	) {
-		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+		if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			return FALSE;
 		}
 
@@ -2768,7 +2768,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		if ($accessLevel === 'world') {
 			return '';
 		}
-		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+		if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			return $this->translate('message_notLoggedIn');
 		}
 		if (!$this->canViewRegistrationsList($whichPlugin, $accessLevel)) {
@@ -3401,7 +3401,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		}
 
 		/** @var Tx_Oelib_Mapper_FrontEndUser $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_FrontEndUser::class);
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_FrontEndUser::class);
 		return $mapper->find($this->getRecordPropertyInteger('owner_feuser'));
 	}
 

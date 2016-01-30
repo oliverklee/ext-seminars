@@ -263,7 +263,7 @@ class Tx_Seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getDefaultCategoriesForOneAssignedCategoryReturnsThisCategoryInList() {
 		$list = new Tx_Oelib_List();
-		$category = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+		$category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
 			->getNewGhost();
 
 		$list->add($category);
@@ -297,7 +297,7 @@ class Tx_Seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 	public function hasDefaultCategoriesForOneAssignedCategoryReturnsTrue() {
 		$list = new Tx_Oelib_List();
 		$list->add(
-			tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+			Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
 				->getNewGhost()
 		);
 
@@ -317,7 +317,7 @@ class Tx_Seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getDefaultOrganizerForSetOrganizerReturnsIt() {
-		$organizer = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
+		$organizer = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
 			->getNewGhost();
 		$this->fixture->setData(array('tx_seminars_default_organizer' => $organizer));
 
@@ -331,7 +331,7 @@ class Tx_Seminars_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function hasDefaultOrganizerForSetOrganizerReturnsTrue() {
-		$organizer = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
+		$organizer = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
 			->getNewGhost();
 		$this->fixture->setData(array('tx_seminars_default_organizer' => $organizer));
 

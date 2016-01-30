@@ -497,7 +497,7 @@ class tx_seminars_OldModel_SpeakerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getOwnerWithOwnerReturnsOwner() {
-		$frontEndUser = tx_oelib_MapperRegistry::get(
+		$frontEndUser = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_FrontEndUser::class
 		)->getNewGhost();
 		$this->fixture->setOwner($frontEndUser);

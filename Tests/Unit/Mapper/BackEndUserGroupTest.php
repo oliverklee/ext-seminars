@@ -33,7 +33,7 @@ class Tx_Seminars_Mapper_BackEndUserGroupTest extends Tx_Phpunit_TestCase {
 	protected function setUp() {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_oelib');
 
-		$this->fixture = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_BackEndUserGroup::class);
+		$this->fixture = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_BackEndUserGroup::class);
 	}
 
 	protected function tearDown() {

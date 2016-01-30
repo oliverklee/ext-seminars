@@ -107,7 +107,7 @@ class Tx_Seminars_Mapper_SpeakerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getSkillsWithOneSkillReturnsNonEmptyList() {
 		$speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
-		$skill = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Skill::class)
+		$skill = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Skill::class)
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_speakers', $speakerUid, $skill->getUid(), 'skills'
@@ -125,7 +125,7 @@ class Tx_Seminars_Mapper_SpeakerTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getSkillsWithOneSkillReturnsOneSkill() {
 		$speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
-		$skill = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Skill::class)
+		$skill = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Skill::class)
 			->getNewGhost();
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_speakers', $speakerUid, $skill->getUid(), 'skills'
@@ -157,7 +157,7 @@ class Tx_Seminars_Mapper_SpeakerTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getOwnerWithOwnerReturnsOwnerInstance() {
-		$frontEndUser = tx_oelib_MapperRegistry::
+		$frontEndUser = Tx_Oelib_MapperRegistry::
 			get(Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel(array());
 
 		self::assertInstanceOf(

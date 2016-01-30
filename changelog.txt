@@ -121,6 +121,7 @@ Cleanup:
 - [#5407] Drop the old XCLASS footers
 
 Changes:
+- [#5631] Fix the casing of all tx_oelib usages to Tx_Oelib
 - [#5626] Replace the deprecated JScharCode calls
 - [#5627] Replace the deprecated bigDoc
 - [#5481] Set 7.9.99 as maximum TYPO3 version

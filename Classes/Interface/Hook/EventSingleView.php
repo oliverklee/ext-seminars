@@ -26,12 +26,12 @@ interface Tx_Seminars_Interface_Hook_EventSingleView {
 	 *
 	 * @param tx_seminars_Model_Event $event
 	 *        the event to display in the single view
-	 * @param tx_oelib_Template $template
+	 * @param Tx_Oelib_Template $template
 	 *        the template that will be used to create the single view output
 	 *
 	 * @return void
 	 */
-	public function modifyEventSingleView(tx_seminars_Model_Event $event, tx_oelib_Template $template);
+	public function modifyEventSingleView(tx_seminars_Model_Event $event, Tx_Oelib_Template $template);
 
 	/**
 	 * Modifies a list row in the time slots list (which is part of the event
@@ -39,10 +39,10 @@ interface Tx_Seminars_Interface_Hook_EventSingleView {
 	 *
 	 * @param tx_seminars_Model_TimeSlot $timeSlot
 	 *        the time slot to display in the current row
-	 * @param tx_oelib_Template $template
+	 * @param Tx_Oelib_Template $template
 	 *        the template that will be used to create the list row output
 	 *
 	 * @return void
 	 */
-	public function modifyTimeSlotListRow(tx_seminars_Model_TimeSlot $timeSlot, tx_oelib_Template $template);
+	public function modifyTimeSlotListRow(tx_seminars_Model_TimeSlot $timeSlot, Tx_Oelib_Template $template);
 }

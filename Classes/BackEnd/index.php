@@ -333,7 +333,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module {
 	 * @return bool TRUE if the static template has been included, FALSE otherwise
 	 */
 	private function hasStaticTemplate() {
-		return tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsBoolean('isStaticTemplateLoaded');
+		return Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsBoolean('isStaticTemplateLoaded');
 	}
 }
 

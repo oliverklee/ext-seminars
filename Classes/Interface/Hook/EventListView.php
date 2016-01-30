@@ -28,24 +28,24 @@ interface Tx_Seminars_Interface_Hook_EventListView {
 	 *
 	 * @param tx_seminars_Model_Event $event
 	 *        the event to display in the current row
-	 * @param tx_oelib_Template $template
+	 * @param Tx_Oelib_Template $template
 	 *        the template that will be used to create the list row output
 	 *
 	 * @return void
 	 */
-	public function modifyListRow(tx_seminars_Model_Event $event, tx_oelib_Template $template);
+	public function modifyListRow(tx_seminars_Model_Event $event, Tx_Oelib_Template $template);
 
 	/**
 	 * Modifies a list view row in the "my events" list.
 	 *
 	 * @param tx_seminars_Model_Registration $registration
 	 *        the registration to display in the current row
-	 * @param tx_oelib_Template $template
+	 * @param Tx_Oelib_Template $template
 	 *        the template that will be used to create the list row output
 	 *
 	 * @return void
 	 */
 	public function modifyMyEventsListRow(
-		tx_seminars_Model_Registration $registration, tx_oelib_Template $template
+		tx_seminars_Model_Registration $registration, Tx_Oelib_Template $template
 	);
 }

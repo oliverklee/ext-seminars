@@ -77,7 +77,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 	private function createFrontEndUser(
 		$gender = Tx_Oelib_Model_FrontEndUser::GENDER_MALE
 	) {
-		return tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)
+		return Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)
 			->getLoadedTestingModel(
 				array('name' => 'Foo', 'gender' => $gender)
 		);
@@ -143,7 +143,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 		$user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_MALE);
 
 		self::assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_0'),
+			Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_0'),
 			$this->subject->getSalutation($user)
 		);
 	}
@@ -157,7 +157,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 		$user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_MALE);
 
 		self::assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_0') .
+			Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_0') .
 				' ' . $user->getLastOrFullName(),
 			$this->subject->getSalutation($user)
 		);
@@ -172,7 +172,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 		$user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE);
 
 		self::assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
+			Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')
 				->translate('email_hello_formal_1'),
 			$this->subject->getSalutation($user)
 		);
@@ -187,7 +187,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 		$user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE);
 
 		self::assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_1') .
+			Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_1') .
 				' ' . $user->getLastOrFullName(),
 			$this->subject->getSalutation($user)
 		);
@@ -202,7 +202,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 		);
 
 		self::assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
+			Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')
 				->translate('email_hello_formal_99'),
 			$this->subject->getSalutation($user)
 		);
@@ -217,7 +217,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 		);
 
 		self::assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
+			Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')
 				->translate('email_salutation_title_99') . ' ' .
 				$user->getLastOrFullName(),
 			$this->subject->getSalutation($user)
@@ -229,11 +229,11 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getSalutationForInformalSalutationReturnsInformalSalutation() {
 		$user = $this->createFrontEndUser();
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('salutation', 'informal');
 
 		self::assertContains(
-			tx_oelib_TranslatorRegistry::getInstance()->get('seminars')
+			Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')
 					->translate('email_hello_informal'),
 			$this->subject->getSalutation($user)
 		);
@@ -244,7 +244,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getSalutationForInformalSalutationReturnsUsersName() {
 		$user = $this->createFrontEndUser();
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('salutation', 'informal');
 
 		self::assertContains(
@@ -273,7 +273,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 	 * @dataProvider genderDataProvider
 	 */
 	public function getSalutationForFormalSalutationModeContainsNoRawLabelKeys($gender) {
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'formal');
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'formal');
 
 		$user = $this->createFrontEndUser($gender);
 		$salutation = $this->subject->getSalutation($user);
@@ -302,7 +302,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 	 * @dataProvider genderDataProvider
 	 */
 	public function getSalutationForInformalSalutationModeContainsNoRawLabelKeys($gender) {
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'informal');
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'informal');
 
 		$user = $this->createFrontEndUser($gender);
 		$salutation = $this->subject->getSalutation($user);
@@ -316,7 +316,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 	 * @dataProvider genderDataProvider
 	 */
 	public function getSalutationForNoSalutationModeContainsNoRawLabelKeys($gender) {
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', '');
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', '');
 
 		$user = $this->createFrontEndUser($gender);
 		$salutation = $this->subject->getSalutation($user);
@@ -487,7 +487,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 		);
 
 		$event = new tx_seminars_seminarchild($eventUid, array('timeFormat' => $timeFormat,));
-		$translator = tx_oelib_TranslatorRegistry::getInstance()->get('seminars');
+		$translator = Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars');
 		$timeInsert = strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']) . ' ' .
 			$translator->translate('email_timeTo') . ' ' .
 			strftime($timeFormat, $endDate);
@@ -526,7 +526,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 	 */
 	public function createIntroductionForFormalSalutationModeContainsNoRawLabelKeys() {
 		$salutation = 'formal';
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', $salutation);
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', $salutation);
 
 		$dateFormatYMD = '%d.%m.%Y';
 		$eventUid = $this->testingFramework->createRecord(
@@ -549,7 +549,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 	 */
 	public function createIntroductionForInformalSalutationModeContainsNoRawLabelKeys() {
 		$salutation = 'informal';
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', $salutation);
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', $salutation);
 
 		$dateFormatYMD = '%d.%m.%Y';
 		$eventUid = $this->testingFramework->createRecord(
@@ -572,7 +572,7 @@ class tx_seminars_Service_EMailSalutationTest extends Tx_Phpunit_TestCase {
 	 */
 	public function createIntroductionForNoSalutationModeContainsNoRawLabelKeys() {
 		$salutation = '';
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', $salutation);
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', $salutation);
 
 		$dateFormatYMD = '%d.%m.%Y';
 		$eventUid = $this->testingFramework->createRecord(

@@ -136,9 +136,9 @@ class Tx_Seminars_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestCase {
 	 */
 	public function renderWithUidOfExistingEventReturnsDateOfSelectedEvent() {
 		$dateFormat = '%d.%m.%Y';
-		$configuration = new tx_oelib_Configuration();
+		$configuration = new Tx_Oelib_Configuration();
 		$configuration->setAsString('dateFormatYMD', $dateFormat);
-		tx_oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_seminars', $configuration);
+		Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_seminars', $configuration);
 
 		$this->fixture->piVars['uid'] = $this->eventId;
 

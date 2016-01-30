@@ -89,7 +89,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 	/**
 	 * Returns the plugin used for accessing the flexforms plugin settings.
 	 *
-	 * @return tx_oelib_templatehelper
+	 * @return Tx_Oelib_TemplateHelper
 	 *         the plugin, will be NULL if non has been set via setPlugin
 	 *
 	 * @see setPlugin
@@ -235,7 +235,7 @@ class tx_seminars_Service_SingleViewLinkBuilder {
 		if ($this->plugin !== NULL) {
 			$result = $this->getPlugin()->getConfValueInteger('detailPID');
 		} else {
-			$result = tx_oelib_ConfigurationRegistry
+			$result = Tx_Oelib_ConfigurationRegistry
 				::get('plugin.tx_seminars_pi1')->getAsInteger('detailPID');
 		}
 

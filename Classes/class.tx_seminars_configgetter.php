@@ -20,7 +20,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_configgetter extends tx_oelib_templatehelper {
+class tx_seminars_configgetter extends Tx_Oelib_TemplateHelper {
 	/** Same as class name */
 	public $prefixId = 'tx_seminars_configgetter';
 

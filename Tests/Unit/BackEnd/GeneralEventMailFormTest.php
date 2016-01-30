@@ -96,7 +96,7 @@ class Tx_Seminars_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit_TestCase {
 
 		Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
-		$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
 		$mailerFactory->enableTestMode();
 		$this->mailer = $mailerFactory->getMailer();
 
@@ -247,7 +247,7 @@ class Tx_Seminars_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit_TestCase {
 		);
 
 		/** @var tx_seminars_Model_Registration $registration */
-		$registration = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class)->find($registrationUid);
+		$registration = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class)->find($registrationUid);
 		$hook = $this->getMock(Tx_Seminars_Interface_Hook_BackEndModule::class);
 		$hook->expects(self::once())->method('modifyGeneralEmail')
 			->with($registration, self::anything());

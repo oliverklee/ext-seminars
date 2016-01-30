@@ -35,7 +35,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	protected $testingFramework = NULL;
 
 	/**
-	 * @var tx_oelib_FakeSession a fake session
+	 * @var Tx_Oelib_FakeSession a fake session
 	 */
 	protected $session = NULL;
 
@@ -54,15 +54,15 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 		$frontEndPageUid = $this->testingFramework->createFrontEndPage();
 		$this->testingFramework->createFakeFrontEnd($frontEndPageUid);
 
-		$this->session = new tx_oelib_FakeSession();
-		tx_oelib_Session::setInstance(tx_oelib_Session::TYPE_USER, $this->session);
+		$this->session = new Tx_Oelib_FakeSession();
+		Tx_Oelib_Session::setInstance(Tx_Oelib_Session::TYPE_USER, $this->session);
 
-		$configurationRegistry = tx_oelib_ConfigurationRegistry::getInstance();
-		$configuration = new tx_oelib_Configuration();
+		$configurationRegistry = Tx_Oelib_ConfigurationRegistry::getInstance();
+		$configuration = new Tx_Oelib_Configuration();
 		$configuration->setAsString('currency', 'EUR');
 		$configurationRegistry->set('plugin.tx_seminars', $configuration);
 		$configurationRegistry->set(
-			'plugin.tx_staticinfotables_pi1', new tx_oelib_Configuration()
+			'plugin.tx_staticinfotables_pi1', new Tx_Oelib_Configuration()
 		);
 
 		$this->seminar = new tx_seminars_seminar($this->testingFramework->createRecord(
@@ -486,7 +486,7 @@ class Tx_Seminars_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase {
 	public function getFeUserDataWithKeyCountryAndNoCountrySetReturnsDefaultCountrySetViaTypoScriptSetup() {
 		$this->testingFramework->createAndLoginFrontEndUser();
 
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->
 			setAsString('countryCode', 'DEU');
 
 		self::assertEquals(

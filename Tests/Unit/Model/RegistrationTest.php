@@ -91,7 +91,7 @@ class tx_seminars_Model_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setFrontEndUserSetsFrontEndUser() {
-		$frontEndUser = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_FrontEndUser::class)
+		$frontEndUser = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_FrontEndUser::class)
 			->getNewGhost();
 		$this->fixture->setFrontEndUser($frontEndUser);
 
@@ -110,7 +110,7 @@ class tx_seminars_Model_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getEventReturnsEvent() {
-		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
 			->getNewGhost();
 		$this->fixture->setData(array('seminar' => $event));
 
@@ -124,7 +124,7 @@ class tx_seminars_Model_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function getSeminarReturnsEvent() {
-		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
 			->getNewGhost();
 		$this->fixture->setData(array('seminar' => $event));
 
@@ -138,7 +138,7 @@ class tx_seminars_Model_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setEventSetsEvent() {
-		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
 			->getNewGhost();
 		$this->fixture->setEvent($event);
 
@@ -152,7 +152,7 @@ class tx_seminars_Model_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setSeminarSetsEvent() {
-		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
 			->getNewGhost();
 		$this->fixture->setSeminar($event);
 
@@ -530,7 +530,7 @@ class tx_seminars_Model_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setPaymentMethodSetsPaymentMethod() {
-		$paymentMethod = tx_oelib_MapperRegistry::get(
+		$paymentMethod = Tx_Oelib_MapperRegistry::get(
 			Tx_Seminars_Mapper_PaymentMethod::class
 		)->getNewGhost();
 		$this->fixture->setPaymentMethod($paymentMethod);

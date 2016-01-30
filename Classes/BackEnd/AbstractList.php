@@ -44,7 +44,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList {
 	protected $page = NULL;
 
 	/**
-	 * @var tx_oelib_Template the template object
+	 * @var Tx_Oelib_Template the template object
 	 */
 	protected $template = NULL;
 
@@ -76,7 +76,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList {
 	public function __construct(Tx_Seminars_BackEnd_Module $module) {
 		$this->page = $module;
 
-		$this->template = tx_oelib_TemplateRegistry::get($this->templateFile);
+		$this->template = Tx_Oelib_TemplateRegistry::get($this->templateFile);
 	}
 
 	/**

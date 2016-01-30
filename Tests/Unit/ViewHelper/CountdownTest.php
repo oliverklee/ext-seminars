@@ -32,14 +32,14 @@ class tx_seminars_ViewHelper_CountdownTest extends Tx_Phpunit_TestCase {
 	private $testingFramework;
 
 	/**
-	 * @var tx_oelib_Translator
+	 * @var Tx_Oelib_Translator
 	 */
 	private $translator;
 
 	protected function setUp() {
 		$this->testingFramework	= new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->translator = tx_oelib_TranslatorRegistry::getInstance()->get('seminars');
+		$this->translator = Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars');
 
 		$this->fixture = new tx_seminars_ViewHelper_Countdown();
 	}

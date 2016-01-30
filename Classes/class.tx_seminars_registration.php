@@ -554,7 +554,7 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 	 */
 	public function getFrontEndUser() {
 		/** @var Tx_Seminars_Mapper_FrontEndUser $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
 		return $mapper->find($this->getUser());
 	}
 
@@ -569,7 +569,7 @@ class tx_seminars_registration extends Tx_Seminars_OldModel_Abstract {
 		}
 
 		/** @var Tx_Seminars_Mapper_FrontEndUser $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
 
 		return $mapper->existsModel($this->getUser());
 	}

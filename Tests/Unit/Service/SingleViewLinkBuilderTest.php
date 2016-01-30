@@ -57,8 +57,8 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase 
 		$this->getBackup = $_GET;
 		$this->typo3confVarsBackup = $GLOBALS['TYPO3_CONF_VARS'];
 
-		tx_oelib_ConfigurationRegistry::getInstance()
-			->set('plugin.tx_seminars_pi1', new tx_oelib_Configuration());
+		Tx_Oelib_ConfigurationRegistry::getInstance()
+			->set('plugin.tx_seminars_pi1', new Tx_Oelib_Configuration());
 	}
 
 	protected function tearDown() {
@@ -251,7 +251,7 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase 
 	 */
 	public function getSingleViewPageFromConfigurationForPluginSetReturnsPageUidFromPluginConfiguration() {
 		$plugin = $this->getMock(
-			'tx_oelib_templatehelper',
+			'Tx_Oelib_TemplateHelper',
 			array('hasConfValueInteger', 'getConfValueInteger')
 		);
 		$plugin->expects(self::any())->method('hasConfValueInteger')
@@ -272,7 +272,7 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase 
 	 * @test
 	 */
 	public function getSingleViewPageFromConfigurationForNoPluginSetReturnsPageUidFromTypoScriptSetup() {
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')
 			->set('detailPID', 91);
 
 		$fixture = new tx_seminars_tests_fixtures_Service_TestingSingleViewLinkBuilder();
@@ -368,7 +368,7 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase 
 	 * @test
 	 */
 	public function createAbsoluteUrlForEventWithExternalDetailsPageAddsProtocolAndNoSeminarParameter() {
-		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
 			->getLoadedTestingModel(array('details_page' => 'www.example.com'));
 
 		$fixture = new tx_seminars_tests_fixtures_Service_TestingSingleViewLinkBuilder();
@@ -385,7 +385,7 @@ class tx_seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase 
 	public function createAbsoluteUrlForEventWithInternalDetailsPageAddsSeminarParameter() {
 		$pageUid = $this->testingFramework->createFrontEndPage();
 
-		$event = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
+		$event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
 			->getLoadedTestingModel(array('details_page' => $pageUid));
 
 		$fixture = new tx_seminars_tests_fixtures_Service_TestingSingleViewLinkBuilder();

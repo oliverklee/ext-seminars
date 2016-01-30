@@ -22,7 +22,7 @@
  */
 class tx_seminars_ViewHelper_Countdown {
 	/**
-	 * @var tx_oelib_Translator
+	 * @var Tx_Oelib_Translator
 	 */
 	protected $translator = NULL;
 
@@ -30,7 +30,7 @@ class tx_seminars_ViewHelper_Countdown {
 	 * The constructor.
 	 */
 	public function __construct() {
-		$this->translator = tx_oelib_TranslatorRegistry::getInstance()->get('seminars');
+		$this->translator = Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars');
 	}
 
 	/**

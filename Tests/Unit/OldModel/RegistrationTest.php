@@ -53,7 +53,7 @@ class tx_seminars_OldModel_RegistrationTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		$this->testingFramework->createFakeFrontEnd();
 
-		tx_oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new tx_oelib_Configuration());
+		Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new Tx_Oelib_Configuration());
 
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
@@ -184,7 +184,7 @@ class tx_seminars_OldModel_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod() {
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('currency', 'EUR');
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
@@ -1507,7 +1507,7 @@ class tx_seminars_OldModel_RegistrationTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setTotalPriceWithTotalPriceSetsTotalPrice() {
-		tx_oelib_ConfigurationRegistry::get('plugin.tx_seminars')
+		Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
 			->setAsString('currency', 'EUR');
 		$this->fixture->setTotalPrice('42.42');
 

@@ -55,7 +55,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
-		$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
 		$mailerFactory->enableTestMode();
 		$this->mailer = $mailerFactory->getMailer();
 
@@ -63,7 +63,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['cliKeys'][TYPO3_cliKey][1] = '_cli_seminars_test';
 		$this->testingFramework->createBackEndUser(array('username' => '_cli_seminars_test'));
 
-		tx_oelib_ConfigurationRegistry::getInstance()->set('plugin', new Tx_Oelib_Configuration());
+		Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin', new Tx_Oelib_Configuration());
 		$this->configuration = new Tx_Oelib_Configuration();
 		$this->configuration->setData(array(
 			'sendEventTakesPlaceReminderDaysBeforeBeginDate' => 2,
@@ -73,7 +73,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 			'fieldsFromAttendanceForEmailCsv' => 'title',
 			'showAttendancesOnRegistrationQueueInEmailCsv' => TRUE
 		));
-		tx_oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
+		Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
 		$this->fixture = new Tx_Seminars_Cli_MailNotifier();
 	}
@@ -328,7 +328,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceSubject() {
 		/** @var Tx_Seminars_Model_BackEndUser $user */
-		$user = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
+		$user = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
 		$subject = $GLOBALS['LANG']->getLL('email_eventTakesPlaceReminderSubject');
@@ -353,7 +353,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceMessage() {
 		/** @var Tx_Seminars_Model_BackEndUser $user */
-		$user = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
+		$user = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
 		$message = $GLOBALS['LANG']->getLL('email_eventTakesPlaceReminder');
@@ -560,7 +560,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineSubject() {
 		/** @var Tx_Seminars_Model_BackEndUser $user */
-		$user = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
+		$user = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
 		$subject = $GLOBALS['LANG']->getLL('email_cancelationDeadlineReminderSubject');
@@ -584,7 +584,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage() {
 		/** @var Tx_Seminars_Model_BackEndUser $user */
-		$user = tx_oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
+		$user = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
 		$GLOBALS['LANG']->lang = $user->getLanguage();
 		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
 		$message = $GLOBALS['LANG']->getLL('email_cancelationDeadlineReminder');

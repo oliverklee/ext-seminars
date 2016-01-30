@@ -26,7 +26,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
+class tx_seminars_registrationmanager extends Tx_Oelib_TemplateHelper {
 	/**
 	 * @var string same as class name
 	 */
@@ -157,14 +157,14 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		if (!$event->canSomebodyRegister()) {
 			return FALSE;
 		}
-		if (!tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+		if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			return TRUE;
 		}
 
 		$canRegister = $this->couldThisUserRegister($event);
 
 		/** @var Tx_Seminars_Model_FrontEndUser $user */
-		$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
+		$user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 		foreach ($this->getHooks() as $hook) {
 			if (method_exists($hook, 'canRegisterForSeminar')) {
 				$canRegister = $canRegister && $hook->canRegisterForSeminar($event, $user);
@@ -193,7 +193,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	public function canRegisterIfLoggedInMessage(tx_seminars_seminar $event) {
 		$message = '';
 
-		$isLoggedIn = tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
+		$isLoggedIn = Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
 
 		if ($isLoggedIn	&& $this->isUserBlocked($event)) {
 			$message = $this->translate('message_userIsBlocked');
@@ -205,7 +205,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 
 		if ($isLoggedIn && ($message === '')) {
 			/** @var Tx_Seminars_Model_FrontEndUser $user */
-			$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
+			$user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 			foreach ($this->getHooks() as $hook) {
 				if (method_exists($hook, 'canRegisterForSeminarMessage')) {
 					$message = $hook->canRegisterForSeminarMessage($event, $user);
@@ -239,14 +239,14 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	/**
 	 * Creates an HTML link to the registration or login page.
 	 *
-	 * @param tx_oelib_templatehelper $plugin the pi1 object with configuration data
+	 * @param Tx_Oelib_TemplateHelper $plugin the pi1 object with configuration data
 	 * @param tx_seminars_seminar $event the seminar to create the registration link for
 	 *
 	 * @return string the HTML tag, will be empty if the event needs no registration, nobody can register to this event or the
 	 *                currently logged in user is already registered to this event and the event does not allow multiple
 	 *                registrations by one user
 	 */
-	public function getRegistrationLink(tx_oelib_templatehelper $plugin, tx_seminars_seminar $event) {
+	public function getRegistrationLink(Tx_Oelib_TemplateHelper $plugin, tx_seminars_seminar $event) {
 		if (!$event->needsRegistration() || !$this->canRegisterIfLoggedIn($event)) {
 			return '';
 		}
@@ -260,24 +260,24 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * Before you can call this function, you should make sure that the link makes sense (ie. the seminar still has vacancies, the
 	 * user has not registered for this seminar etc.).
 	 *
-	 * @param tx_oelib_templatehelper $plugin an object for a live page
+	 * @param Tx_Oelib_TemplateHelper $plugin an object for a live page
 	 * @param tx_seminars_seminar $seminar a seminar for which we'll check if it is possible to register
 	 *
 	 * @return string HTML code with the link
 	 */
-	public function getLinkToRegistrationOrLoginPage(tx_oelib_templatehelper $plugin, tx_seminars_seminar $seminar) {
+	public function getLinkToRegistrationOrLoginPage(Tx_Oelib_TemplateHelper $plugin, tx_seminars_seminar $seminar) {
 		return $this->getLinkToStandardRegistrationOrLoginPage($plugin, $seminar, $this->getRegistrationLabel($plugin, $seminar));
 	}
 
 	/**
 	 * Creates the label for the registration link.
 	 *
-	 * @param tx_oelib_templatehelper $plugin an object for a live page
+	 * @param Tx_Oelib_TemplateHelper $plugin an object for a live page
 	 * @param tx_seminars_seminar $seminar a seminar to which the registration should relate
 	 *
 	 * @return string label for the registration link, will not be empty
 	 */
-	private function getRegistrationLabel(tx_oelib_templatehelper $plugin, tx_seminars_seminar $seminar) {
+	private function getRegistrationLabel(Tx_Oelib_TemplateHelper $plugin, tx_seminars_seminar $seminar) {
 		if ($seminar->hasVacancies()) {
 			if ($seminar->hasDate()) {
 				$label = $plugin->translate('label_onlineRegistration');
@@ -303,16 +303,16 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 * This function only creates the link to the standard registration or login
 	 * page; it should not be used if the seminar has a separate details page.
 	 *
-	 * @param tx_oelib_templatehelper $plugin an object for a live page
+	 * @param Tx_Oelib_TemplateHelper $plugin an object for a live page
 	 * @param tx_seminars_seminar $seminar a seminar for which we'll check if it is possible to register
 	 * @param string $label label for the link, will not be empty
 	 *
 	 * @return string HTML code with the link
 	 */
 	private function getLinkToStandardRegistrationOrLoginPage(
-		tx_oelib_templatehelper $plugin, tx_seminars_seminar $seminar, $label
+		Tx_Oelib_TemplateHelper $plugin, tx_seminars_seminar $seminar, $label
 	) {
-		if (tx_oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+		if (Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
 			// provides the registration link
 			$result = $plugin->cObj->getTypoLink(
 				$label,
@@ -488,7 +488,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$this->registration->commitToDb();
 		$seminar->calculateStatistics();
 
-		$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
+		$user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 		foreach ($this->getHooks() as $hook) {
 			if (method_exists($hook, 'seminarRegistrationCreated')) {
 				$hook->seminarRegistrationCreated($this->registration, $user);
@@ -496,7 +496,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		/** @var Tx_Seminars_Mapper_Registration $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
 
 		return $mapper->find($this->registration->getUid());
 	}
@@ -580,7 +580,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 						? max(0, (int)$formData['method_of_payment']) : 0;
 					if (($paymentMethodUid > 0) && $availablePaymentMethods->hasUid($paymentMethodUid)) {
 						/** @var Tx_Seminars_Mapper_PaymentMethod $mapper */
-						$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_PaymentMethod::class);
+						$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_PaymentMethod::class);
 						/** @var tx_seminars_Model_PaymentMethod $paymentMethod */
 						$paymentMethod = $mapper->find($paymentMethodUid);
 					}
@@ -662,7 +662,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		/** @var Tx_Seminars_Model_FrontEndUser $user */
-		$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
+		$user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 		foreach ($this->getHooks() as $hook) {
 			if (method_exists($hook, 'seminarRegistrationRemoved')) {
 				$hook->seminarRegistrationRemoved($this->registration, $user);
@@ -806,8 +806,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 			return;
 		}
 
-		/** @var $eMailNotification tx_oelib_Mail */
-		$eMailNotification = GeneralUtility::makeInstance('tx_oelib_Mail');
+		/** @var $eMailNotification Tx_Oelib_Mail */
+		$eMailNotification = GeneralUtility::makeInstance(Tx_Oelib_Mail::class);
 		$eMailNotification->addRecipient($oldRegistration->getFrontEndUser());
 		$eMailNotification->setSender($event->getFirstOrganizer());
 		$eMailNotification->setSubject(
@@ -827,7 +827,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$eMailNotification->setMessage($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
 
 		/** @var Tx_Seminars_Mapper_Registration $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
 		/** @var $registration tx_seminars_Model_Registration */
 		$registration = $mapper->find($oldRegistration->getUid());
 		foreach ($this->getHooks() as $hook) {
@@ -837,7 +837,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
-		$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
 		$mailerFactory->getMailer()->send($eMailNotification);
 	}
 
@@ -869,8 +869,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		$organizers = $event->getOrganizerBag();
-		/** @var $eMailNotification tx_oelib_Mail */
-		$eMailNotification = GeneralUtility::makeInstance('tx_oelib_Mail');
+		/** @var $eMailNotification Tx_Oelib_Mail */
+		$eMailNotification = GeneralUtility::makeInstance(Tx_Oelib_Mail::class);
 		$eMailNotification->setSender($event->getFirstOrganizer());
 
 		/** @var tx_seminars_OldModel_Organizer $organizer */
@@ -919,7 +919,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		$this->modifyNotificationEmail($eMailNotification, $registration);
 
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
-		$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
 		$mailerFactory->getMailer()->send($eMailNotification);
 	}
 
@@ -947,12 +947,12 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 	 *
 	 * This method is intended to be overridden in XClasses if needed.
 	 *
-	 * @param tx_oelib_Mail $emailNotification
+	 * @param Tx_Oelib_Mail $emailNotification
 	 * @param tx_seminars_registration $registration
 	 *
 	 * @return void
 	 */
-	protected function modifyNotificationEmail(tx_oelib_Mail $emailNotification, tx_seminars_registration $registration) {
+	protected function modifyNotificationEmail(Tx_Oelib_Mail $emailNotification, tx_seminars_registration $registration) {
 	}
 
 	/**
@@ -999,8 +999,8 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		$event = $registration->getSeminarObject();
-		/** @var $eMail tx_oelib_Mail */
-		$eMail = GeneralUtility::makeInstance('tx_oelib_Mail');
+		/** @var $eMail Tx_Oelib_Mail */
+		$eMail = GeneralUtility::makeInstance(Tx_Oelib_Mail::class);
 
 		$eMail->setSender($event->getFirstOrganizer());
 		$eMail->setMessage($this->getMessageForNotification($registration, $emailReason));
@@ -1016,7 +1016,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
-		$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
 		$mailerFactory->getMailer()->send($eMail);
 	}
 
@@ -1228,7 +1228,7 @@ class tx_seminars_registrationmanager extends tx_oelib_templatehelper {
 		}
 
 		/** @var Tx_Seminars_Mapper_Event $mapper */
-		$mapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
+		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		/** @var $newEvent tx_seminars_Model_Event */
 		$newEvent = $mapper->find($event->getUid());
 		$singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);

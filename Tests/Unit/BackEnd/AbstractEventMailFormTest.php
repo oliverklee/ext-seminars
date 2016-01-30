@@ -78,7 +78,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 
 		Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
-		$mailerFactory = GeneralUtility::makeInstance('Tx_Oelib_MailerFactory');
+		$mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
 		$mailerFactory->enableTestMode();
 		$this->mailer = $mailerFactory->getMailer();
 
@@ -574,7 +574,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 	 * @test
 	 */
 	public function sendEmailToAttendeesUsesSelectedOrganizerAsSender() {
-		$secondOrganizer = tx_oelib_MapperRegistry
+		$secondOrganizer = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel(array(
 				'title' => 'Second Organizer',
 				'email' => 'bar@example.org',
@@ -666,7 +666,7 @@ class Tx_Seminars_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase 
 		);
 
 		$organizerFooter = 'organizer footer';
-		$secondOrganizer = tx_oelib_MapperRegistry
+		$secondOrganizer = Tx_Oelib_MapperRegistry
 			::get(Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel(array(
 				'title' => 'Second Organizer',
 				'email' => 'bar@example.org',

@@ -58,13 +58,13 @@ class Tx_Seminars_BackEnd_GeneralEventMailForm extends Tx_Seminars_BackEnd_Abstr
 	 *
 	 * @param tx_seminars_Model_Registration $registration
 	 *        the registration to which the e-mail refers
-	 * @param tx_oelib_Mail $eMail
+	 * @param Tx_Oelib_Mail $eMail
 	 *        the e-mail to be sent
 	 *
 	 * @return void
 	 */
 	protected function modifyEmailWithHook(
-		tx_seminars_Model_Registration $registration, tx_oelib_Mail $eMail
+		tx_seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail
 	) {
 		foreach ($this->getHooks() as $hook) {
 			$hook->modifyGeneralEmail($registration, $eMail);

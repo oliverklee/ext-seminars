@@ -363,11 +363,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 		}
 
 		/** @var $userMapper Tx_Seminars_Mapper_FrontEndUser */
-		$userMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
+		$userMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
 		$pageUid = $this->getConfValueInteger('sysFolderForAdditionalAttendeeUsersPID', 's_registration');
 
 		/** @var $userGroupMapper Tx_Seminars_Mapper_FrontEndUserGroup */
-		$userGroupMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUserGroup::class);
+		$userGroupMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUserGroup::class);
 		/** @var  Tx_Oelib_List $userGroups */
 		$userGroups = GeneralUtility::makeInstance(Tx_Oelib_List::class);
 		$userGroupUids = GeneralUtility::intExplode(
@@ -418,7 +418,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 		}
 
 		/** @var Tx_Seminars_Mapper_Registration $registrationMapper */
-		$registrationMapper = tx_oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
+		$registrationMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
 		$registrationMapper->save($registration);
 	}
 
@@ -679,7 +679,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 		$pageId = $this->getConfValueInteger('thankYouAfterRegistrationPID', 's_registration');
 
 		if ($this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
-				&& tx_oelib_Session::getInstance(tx_oelib_Session::TYPE_USER)->getAsBoolean('onetimeaccount')
+				&& Tx_Oelib_Session::getInstance(Tx_Oelib_Session::TYPE_USER)->getAsBoolean('onetimeaccount')
 		) {
 			$GLOBALS['TSFE']->fe_user->logoff();
 			$GLOBALS['TSFE']->loginUser = 0;
@@ -930,7 +930,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 			case 'attendees_names':
 				if ($this->isFormFieldEnabled('registered_themselves') && ($this->getFormValue('registered_themselves') == '1')) {
 					/** @var Tx_Seminars_Model_FrontEndUser $user */
-					$user = tx_oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
+					$user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
 					$userData = array($user->getName());
 					if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
 						if ($user->hasJobTitle()) {
@@ -1209,7 +1209,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 	 * @return string the default country's localized name, will be empty if there is no default country
 	 */
 	private function getDefaultCountry() {
-		$defaultCountryCode = tx_oelib_ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->getAsString('countryCode');
+		$defaultCountryCode = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->getAsString('countryCode');
 		if ($defaultCountryCode === '') {
 			return '';
 		}
@@ -1425,7 +1425,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 
 		foreach ($parametersToSave as $currentKey) {
 			if (isset($parameters[$currentKey])) {
-				tx_oelib_Session::getInstance(tx_oelib_Session::TYPE_USER)
+				Tx_Oelib_Session::getInstance(Tx_Oelib_Session::TYPE_USER)
 					->setAsString($this->prefixId . '_' . $currentKey, $parameters[$currentKey]);
 			}
 		}
@@ -1452,7 +1452,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 	 * @return string the data stored in the FE user session under the given key, might be empty
 	 */
 	public function retrieveDataFromSession($unused, array $parameters) {
-		return tx_oelib_Session::getInstance(tx_oelib_Session::TYPE_USER)
+		return Tx_Oelib_Session::getInstance(Tx_Oelib_Session::TYPE_USER)
 			->getAsString($this->prefixId . '_' . $parameters['key']);
 	}
 
