@@ -45,13 +45,13 @@ class Tx_Seminars_Tests_Fixtures_Service_TestingSingleViewLinkBuilder extends Tx
 	 * Gets the single view page UID/URL from $event (if any single view page is set for
 	 * the event) or from the configuration.
 	 *
-	 * @param tx_seminars_Model_Event $event the event for which to get the single view page
+	 * @param Tx_Seminars_Model_Event $event the event for which to get the single view page
 	 *
 	 * @return string
 	 *         the single view page UID/URL for $event, will be empty if neither
 	 *         the event nor the configuration has any single view page set
 	 */
-	public function getSingleViewPageForEvent(tx_seminars_Model_Event $event) {
+	public function getSingleViewPageForEvent(Tx_Seminars_Model_Event $event) {
 		return parent::getSingleViewPageForEvent($event);
 	}
 

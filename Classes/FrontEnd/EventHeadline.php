@@ -63,7 +63,7 @@ class Tx_Seminars_FrontEnd_EventHeadline extends Tx_Seminars_FrontEnd_AbstractVi
 			return '';
 		}
 
-		/** @var tx_seminars_Model_Event $event */
+		/** @var Tx_Seminars_Model_Event $event */
 		$event = $this->mapper->find($eventId);
 
 		if (!$this->mapper->existsModel($eventId)) {
@@ -83,11 +83,11 @@ class Tx_Seminars_FrontEnd_EventHeadline extends Tx_Seminars_FrontEnd_AbstractVi
 	 *
 	 * If the event has no date, just the title is returned.
 	 *
-	 * @param tx_seminars_Model_Event $event the event to get the unique event title for
+	 * @param Tx_Seminars_Model_Event $event the event to get the unique event title for
 	 *
 	 * @return string the unique event title (or '' if there is an error)
 	 */
-	protected function getTitleAndDate(tx_seminars_Model_Event $event) {
+	protected function getTitleAndDate(Tx_Seminars_Model_Event $event) {
 		$result = htmlspecialchars($event->getTitle());
 		if (!$event->hasBeginDate()) {
 			return $result;

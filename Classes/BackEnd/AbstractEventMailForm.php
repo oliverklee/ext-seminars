@@ -37,7 +37,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	private $oldEvent = NULL;
 
 	/**
-	 * @var tx_seminars_Model_Event the event which this e-mail form refers to
+	 * @var Tx_Seminars_Model_Event the event which this e-mail form refers to
 	 */
 	private $event = NULL;
 
@@ -311,7 +311,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm {
 	/**
 	 * Returns the event this e-mail form refers to.
 	 *
-	 * @return tx_seminars_Model_Event the event
+	 * @return Tx_Seminars_Model_Event the event
 	 */
 	protected function getEvent() {
 		return $this->event;

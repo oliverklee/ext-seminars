@@ -3015,7 +3015,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function isEventDate() {
 		return ($this->getRecordPropertyInteger('object_type')
-			== tx_seminars_Model_Event::TYPE_DATE);
+			== Tx_Seminars_Model_Event::TYPE_DATE);
 	}
 
 	/**
@@ -3025,7 +3025,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	 */
 	public function isEventTopic() {
 		return ($this->getRecordPropertyInteger('object_type')
-			== tx_seminars_Model_Event::TYPE_TOPIC);
+			== Tx_Seminars_Model_Event::TYPE_TOPIC);
 	}
 
 	/**
@@ -3865,7 +3865,7 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 		$result = '';
 
 		if ($this->getRecordPropertyInteger('object_type')
-			!= tx_seminars_Model_Event::TYPE_TOPIC
+			!= Tx_Seminars_Model_Event::TYPE_TOPIC
 		) {
 			$result = parent::getDate($dash);
 		}

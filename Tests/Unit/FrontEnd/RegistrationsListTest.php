@@ -57,7 +57,7 @@ class Tx_Seminars_FrontEnd_RegistrationsListTest extends Tx_Phpunit_TestCase {
 		$this->seminarUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
 				'title' => 'Test event & more',
 				'attendees_max' => 10,
 				'needs_registration' => 1,

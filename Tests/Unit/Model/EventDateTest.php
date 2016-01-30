@@ -21,14 +21,14 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_Model_Event
+	 * @var Tx_Seminars_Model_Event
 	 */
 	private $fixture;
 
 	protected function setUp() {
-		$this->fixture = new tx_seminars_Model_Event();
+		$this->fixture = new Tx_Seminars_Model_Event();
 	}
 
 	////////////////////////////////
@@ -43,7 +43,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('title' => 'Superhero'));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 				'title' => 'Supervillain',
 			)
@@ -63,7 +63,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('title' => 'Superhero'));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 				'title' => 'Supervillain',
 			)
@@ -88,7 +88,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -107,7 +107,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('subtitle' => 'sub title'));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -126,7 +126,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -146,7 +146,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -164,7 +164,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('subtitle' => 'sub title'));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -187,7 +187,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -206,7 +206,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('teaser' => 'wow, this is teasing'));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -225,7 +225,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -245,7 +245,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -263,7 +263,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('teaser' => 'wow, this is teasing'));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -286,7 +286,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -307,7 +307,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			);
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -326,7 +326,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -346,7 +346,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -366,7 +366,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			);
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -389,7 +389,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -408,7 +408,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('credit_points' => 42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -427,7 +427,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -447,7 +447,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -467,7 +467,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -485,7 +485,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('credit_points' => 42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -508,7 +508,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_regular' => 0.00));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -527,7 +527,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_regular' => 42.42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -546,7 +546,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -566,7 +566,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -586,7 +586,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -604,7 +604,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_regular' => 42.42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -627,7 +627,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -646,7 +646,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_regular_early' => 42.42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -665,7 +665,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -685,7 +685,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -705,7 +705,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -723,7 +723,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_regular_early' => 42.42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -746,7 +746,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -765,7 +765,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_regular_board' => 42.42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -784,7 +784,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -804,7 +804,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -824,7 +824,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -842,7 +842,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_regular_board' => 42.42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -865,7 +865,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -884,7 +884,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_special' => 42.42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -903,7 +903,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -923,7 +923,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -943,7 +943,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -961,7 +961,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_special' => 42.42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -984,7 +984,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
 				'topic' => $topic,
 			)
 		);
@@ -1003,7 +1003,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_special_early' => 42.42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1022,7 +1022,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1042,7 +1042,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1062,7 +1062,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1080,7 +1080,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_special_early' => 42.42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1103,7 +1103,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1122,7 +1122,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_special_board' => 42.42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1141,7 +1141,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1161,7 +1161,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1181,7 +1181,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1199,7 +1199,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('price_special_board' => 42.42));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1222,7 +1222,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1243,7 +1243,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			);
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1262,7 +1262,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1282,7 +1282,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1302,7 +1302,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			);
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1325,7 +1325,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1345,7 +1345,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			);
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1368,7 +1368,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1386,7 +1386,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('use_terms_2' => TRUE));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1409,7 +1409,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1428,7 +1428,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('notes' => 'Don\'t forget this.'));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1447,7 +1447,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1467,7 +1467,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1485,7 +1485,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('notes' => 'Don\'t forget this.'));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1508,7 +1508,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1527,7 +1527,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('image' => 'file.jpg'));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1546,7 +1546,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1566,7 +1566,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array());
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1584,7 +1584,7 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 			->getLoadedTestingModel(array('image' => 'file.jpg'));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1604,11 +1604,11 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getPaymentMethodsReturnsPaymentMethodsFromTopic() {
 		$paymentMethods = new Tx_Oelib_List();
-		$topic = new tx_seminars_Model_Event();
+		$topic = new Tx_Seminars_Model_Event();
 		$topic->setData(array('payment_methods' => $paymentMethods));
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);
@@ -1629,10 +1629,10 @@ class tx_seminars_Model_EventDateTest extends Tx_Phpunit_TestCase {
 				'topics, but not on event dates.'
 		);
 
-		$topic = new tx_seminars_Model_Event();
+		$topic = new Tx_Seminars_Model_Event();
 		$this->fixture->setData(
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topic,
 			)
 		);

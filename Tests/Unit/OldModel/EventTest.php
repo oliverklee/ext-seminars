@@ -1060,7 +1060,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'a test topic',
 			)
 		);
@@ -1079,14 +1079,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'title' => 'a test topic',
 			)
 		);
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 				'title' => 'a test date',
 			)
@@ -1665,7 +1665,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 				'language' => 'it'
 			)
@@ -1697,7 +1697,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$singleRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
 				'topic' => $topicRecordUid,
 				'language' => 'it'
 			)
@@ -3399,7 +3399,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'event_type' => $this->testingFramework->createRecord(
 					'tx_seminars_event_types', array('title' => 'foo type')
 				),
@@ -3408,7 +3408,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 			)
 		);
@@ -3427,7 +3427,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'event_type' => $this->testingFramework->createRecord(
 					'tx_seminars_event_types', array('title' => 'foo type')
 				),
@@ -3449,14 +3449,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'event_type' => 99999
 			)
 		);
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 				'event_type' => 199999
 			)
@@ -3717,7 +3717,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$eventUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
 				'organizers' => 'foo',
 			)
 		);
@@ -5028,7 +5028,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function usesCorrectIconForSingleEvent() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
+		$this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
 
 		self::assertContains(
 			'EventComplete.',
@@ -5040,7 +5040,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function usesCorrectIconForTopic() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_TOPIC);
+		$this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
 
 		self::assertContains(
 			'EventTopic.',
@@ -5052,7 +5052,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function usesCorrectIconForDateRecord() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
+		$this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
 
 		self::assertContains(
 			'EventDate.',
@@ -5064,7 +5064,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function usesCorrectIconForHiddenSingleEvent() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
+		$this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
 		$this->fixture->setHidden(TRUE);
 
 		self::assertContains(
@@ -5077,7 +5077,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function usesCorrectIconForHiddenTopic() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_TOPIC);
+		$this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
 		$this->fixture->setHidden(TRUE);
 
 		self::assertContains(
@@ -5090,7 +5090,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function usesCorrectIconForHiddenDate() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
+		$this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
 		$this->fixture->setHidden(TRUE);
 
 		self::assertContains(
@@ -5103,7 +5103,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function usesCorrectIconForVisibleTimedSingleEvent() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
+		$this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		self::assertContains(
@@ -5116,7 +5116,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function usesCorrectIconForVisibleTimedTopic() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_TOPIC);
+		$this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		self::assertContains(
@@ -5129,7 +5129,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function usesCorrectIconForVisibleTimedDate() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
+		$this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
 		$this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		self::assertContains(
@@ -5142,7 +5142,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function usesCorrectIconForExpiredSingleEvent() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_COMPLETE);
+		$this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
 		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		self::assertContains(
@@ -5155,7 +5155,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function usesCorrectIconForExpiredTimedTopic() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_TOPIC);
+		$this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
 		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		self::assertContains(
@@ -5168,7 +5168,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function usesCorrectIconForExpiredTimedDate() {
-		$this->fixture->setRecordType(tx_seminars_Model_Event::TYPE_DATE);
+		$this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
 		$this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
 		self::assertContains(
@@ -5686,14 +5686,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'attached_files' => 'test.file',
 			)
 		);
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'attached_files' => '',
 				'topic' => $topicRecordUid,
 			)
@@ -5712,14 +5712,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'attached_files' => '',
 			)
 		);
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'attached_files' => '',
 				'topic' => $topicRecordUid,
 			)
@@ -5778,14 +5778,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'attached_files' => '',
 			)
 		);
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'attached_files' => $dummyFileName,
 				'topic' => $topicRecordUid,
 			)
@@ -5812,14 +5812,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'attached_files' => $dummyFileName,
 			)
 		);
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'attached_files' => '',
 				'topic' => $topicRecordUid,
 			)
@@ -5846,7 +5846,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'attached_files' => $topicDummyFileName,
 			)
 		);
@@ -5857,7 +5857,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'attached_files' => $dateDummyFileName,
 				'topic' => $topicRecordUid,
 			)
@@ -6622,7 +6622,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+					'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 					'requirements' => 0,
 				)
 			)
@@ -6640,7 +6640,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'requirements' => 0,
 			)
 		);
@@ -6648,7 +6648,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -6665,11 +6665,11 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	public function hasRequirementsForTopicWithOneRequirementReturnsTrue() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$requiredTopicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars',
@@ -6688,11 +6688,11 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	public function hasRequirementsForDateOfTopicWithOneRequirementReturnsTrue() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$requiredTopicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars',
@@ -6702,7 +6702,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -6719,11 +6719,11 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	public function hasRequirementsForTopicWithTwoRequirementsReturnsTrue() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$requiredTopicUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars',
@@ -6731,7 +6731,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		);
 		$requiredTopicUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars',
@@ -6757,7 +6757,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+					'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 					'dependencies' => 0,
 				)
 			)
@@ -6775,7 +6775,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'dependencies' => 0,
 			)
 		);
@@ -6783,7 +6783,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -6801,14 +6801,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'dependencies' => 1,
 			)
 		);
 		$dependentTopicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'requirements' => 1,
 			)
 		);
@@ -6830,14 +6830,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'dependencies' => 1,
 			)
 		);
 		$dependentTopicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'requirements' => 1,
 			)
 		);
@@ -6849,7 +6849,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -6867,14 +6867,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'dependencies' => 2,
 			)
 		);
 		$dependentTopicUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'requirements' => 1,
 			)
 		);
@@ -6885,7 +6885,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$dependentTopicUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'requirements' => 1,
 			)
 		);
@@ -6929,11 +6929,11 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	public function getRequirementsForOneRequirementReturnsBagWithOneTopic() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$requiredTopicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars',
@@ -6959,11 +6959,11 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	public function getRequirementsForDateOfTopicWithOneRequirementReturnsBagWithOneTopic() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$requiredTopicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars',
@@ -6973,7 +6973,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -6997,11 +6997,11 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	public function getRequirementsForTwoRequirementsReturnsBagWithTwoItems() {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$requiredTopicUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars',
@@ -7009,7 +7009,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		);
 		$requiredTopicUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 		$this->testingFramework->createRelationAndUpdateCounter(
 			'tx_seminars_seminars',
@@ -7052,14 +7052,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'dependencies' => 1,
 			)
 		);
 		$dependentTopicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'requirements' => 1,
 			)
 		);
@@ -7088,14 +7088,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'dependencies' => 1,
 			)
 		);
 		$dependentTopicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'requirements' => 1,
 			)
 		);
@@ -7107,7 +7107,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 			$this->testingFramework->createRecord(
 				'tx_seminars_seminars',
 				array(
-					'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 					'topic' => $topicUid,
 				)
 			)
@@ -7132,14 +7132,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'dependencies' => 2,
 			)
 		);
 		$dependentTopicUid1 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'requirements' => 1,
 			)
 		);
@@ -7150,7 +7150,7 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$dependentTopicUid2 = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'requirements' => 1,
 			)
 		);
@@ -8298,14 +8298,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'credit_points' => 42,
 			)
 		);
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 			)
 		);
@@ -8363,14 +8363,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'credit_points' => 0,
 			)
 		);
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 			)
 		);
@@ -8389,14 +8389,14 @@ class tx_seminars_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$topicRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 				'credit_points' => 1,
 			)
 		);
 		$dateRecordUid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			array(
-				'object_type' => tx_seminars_Model_Event::TYPE_DATE,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
 				'topic' => $topicRecordUid,
 			)
 		);

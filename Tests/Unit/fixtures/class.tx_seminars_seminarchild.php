@@ -351,8 +351,8 @@ final class tx_seminars_seminarchild extends tx_seminars_seminar {
 	 * Sets the record type for this event record.
 	 *
 	 * @param int $recordType
-	 *        the record type for this event record, must be either tx_seminars_Model_Event::TYPE_COMPLETE,
-	 *        tx_seminars_Model_Event::TYPE_TOPIC or tx_seminars_Model_Event::TYPE_DATE
+	 *        the record type for this event record, must be either Tx_Seminars_Model_Event::TYPE_COMPLETE,
+	 *        Tx_Seminars_Model_Event::TYPE_TOPIC or Tx_Seminars_Model_Event::TYPE_DATE
 	 *
 	 * @return void
 	 */

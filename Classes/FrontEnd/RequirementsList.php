@@ -102,7 +102,7 @@ class Tx_Seminars_FrontEnd_RequirementsList extends Tx_Seminars_FrontEnd_Abstrac
 		$requirements = $this->getRequirements();
 		/** @var tx_seminars_seminar $requirement */
 		foreach ($requirements as $requirement) {
-			/** @var tx_seminars_Model_Event $event */
+			/** @var Tx_Seminars_Model_Event $event */
 			$event = $eventMapper->find($requirement->getUid());
 
 			$singleViewUrl = $this->linkBuilder->createRelativeUrlForEvent($event);

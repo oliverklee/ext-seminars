@@ -87,7 +87,7 @@ class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
 		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		if (($eventUid > 0) && $mapper->existsModel($eventUid)) {
 			$this->eventUid = $eventUid;
-			/** @var tx_seminars_Model_Event $event */
+			/** @var Tx_Seminars_Model_Event $event */
 			$event = $mapper->find($eventUid);
 			$registrationsHeading = sprintf(
 				$GLOBALS['LANG']->getLL('registrationlist.label_registrationsHeading'),

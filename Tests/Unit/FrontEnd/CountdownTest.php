@@ -118,7 +118,7 @@ class Tx_Seminars_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase {
 	public function renderCallsRenderMethodOfCountdownViewHelperWithNextUpcomingEventsBeginDateAsUnixTimeStamp() {
 		$this->fixture->injectEventMapper($this->mapper);
 		$event = $this->mapper->getLoadedTestingModel(array(
-			'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE,
+			'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
 			'pid' => 0,
 			'title' => 'Test event',
 			'begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000,

@@ -105,13 +105,13 @@ It's used like this:
         /**
          * Adds a countdown column.
        *
-       * @param tx_seminars_Model_Event $event
+       * @param Tx_Seminars_Model_Event $event
        *        the affected registration
         * @param Tx_Oelib_Template $template
         *        the template from which the list row is built
         */
          public function modifyListRow(
-                 tx_seminars_Model_Event $event, Tx_Oelib_Template $template
+                 Tx_Seminars_Model_Event $event, Tx_Oelib_Template $template
          ) {…}
 
         /**

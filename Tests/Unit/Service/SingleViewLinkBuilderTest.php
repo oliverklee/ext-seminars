@@ -79,7 +79,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase 
 	 */
 	public function getSingleViewPageForEventForEventWithSingleViewPageAndNoConfigurationReturnsSingleViewPageFromEvent() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event',
+			Tx_Seminars_Model_Event::class,
 			array('hasCombinedSingleViewPage', 'getCombinedSingleViewPage')
 		);
 		$event->expects(self::any())->method('hasCombinedSingleViewPage')
@@ -111,7 +111,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase 
 	 */
 	public function getSingleViewPageForEventForEventWithoutSingleViewPageReturnsSingleViewPageFromConfiguration() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event',
+			Tx_Seminars_Model_Event::class,
 			array('hasCombinedSingleViewPage', 'getCombinedSingleViewPage')
 		);
 		$event->expects(self::any())->method('hasCombinedSingleViewPage')
@@ -143,7 +143,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase 
 	 */
 	public function getSingleViewPageForEventForEventAndConfigurationWithSingleViewPageReturnsSingleViewPageFromEvent() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event',
+			Tx_Seminars_Model_Event::class,
 			array('hasCombinedSingleViewPage', 'getCombinedSingleViewPage')
 		);
 		$event->expects(self::any())->method('hasCombinedSingleViewPage')
@@ -175,7 +175,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase 
 	 */
 	public function getSingleViewPageForEventForEventWithoutSingleViewPageAndConfigurationWithoutSettingReturnsEmptyString() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event',
+			Tx_Seminars_Model_Event::class,
 			array('hasCombinedSingleViewPage', 'getCombinedSingleViewPage')
 		);
 		$event->expects(self::any())->method('hasCombinedSingleViewPage')
@@ -293,7 +293,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase 
 	 */
 	public function createAbsoluteUrlForEventReturnsRelativeUrlMadeAbsolute() {
 		$relativeUrl = 'index.php?id=42&tx_seminars%5BshowUid%5D=17';
-		$event = $this->getMock('tx_seminars_Model_Event');
+		$event = $this->getMock(Tx_Seminars_Model_Event::class);
 
 		$fixture = $this->getMock(
 			'tx_seminars_tests_fixtures_Service_TestingSingleViewLinkBuilder',
@@ -315,7 +315,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase 
 		$eventUid = 19;
 		$singleViewPageUid = 42;
 
-		$event = $this->getMock('tx_seminars_Model_Event', array('getUid'));
+		$event = $this->getMock(Tx_Seminars_Model_Event::class, array('getUid'));
 		$event->expects(self::any())->method('getUid')
 			->will(self::returnValue($eventUid));
 
@@ -356,7 +356,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilderTest extends Tx_Phpunit_TestCase 
 		$fixture->expects(self::any())->method('getContentObject')
 			->will(self::returnValue($contentObject));
 
-		$event = $this->getMock('tx_seminars_Model_Event');
+		$event = $this->getMock(Tx_Seminars_Model_Event::class);
 
 		self::assertEquals(
 			$relativeUrl,

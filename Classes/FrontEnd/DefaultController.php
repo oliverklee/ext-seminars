@@ -718,7 +718,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	protected function createSingleViewForExistingEvent() {
 		/** @var Tx_Seminars_Mapper_Event $mapper */
 		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
-		/** @var tx_seminars_Model_Event $event */
+		/** @var Tx_Seminars_Model_Event $event */
 		$event = $mapper->find($this->showUid);
 
 		// Lets warnings from the seminar bubble up to us.
@@ -1344,7 +1344,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		$dependencies = $this->seminar->getDependencies();
 		/** @var tx_seminars_seminar $dependency */
 		foreach ($dependencies as $dependency) {
-			/** @var tx_seminars_Model_Event $event */
+			/** @var Tx_Seminars_Model_Event $event */
 			$event = $eventMapper->find($dependency->getUid());
 			$this->setMarker(
 				'dependency_title',
@@ -1515,7 +1515,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	 * @return void
 	 */
 	private function hideUnneededSubpartsForTopicRecords() {
-		if ($this->seminar->getRecordType() != tx_seminars_Model_Event::TYPE_TOPIC) {
+		if ($this->seminar->getRecordType() != Tx_Seminars_Model_Event::TYPE_TOPIC) {
 			return;
 		}
 
@@ -1580,8 +1580,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		if ($this->internal['res_count']) {
 			// If we are on a topic record, overwrite the label with an
 			// alternative text.
-			if (($this->seminar->getRecordType() == tx_seminars_Model_Event::TYPE_COMPLETE)
-				|| ($this->seminar->getRecordType() == tx_seminars_Model_Event::TYPE_TOPIC)
+			if (($this->seminar->getRecordType() == Tx_Seminars_Model_Event::TYPE_COMPLETE)
+				|| ($this->seminar->getRecordType() == Tx_Seminars_Model_Event::TYPE_TOPIC)
 			) {
 				$this->setMarker(
 					'label_list_otherdates',
@@ -1959,7 +1959,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		if ($this->seminar->isOk()) {
 			/** @var Tx_Seminars_Mapper_Event $mapper */
 			$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
-			/** @var tx_seminars_Model_Event $event */
+			/** @var Tx_Seminars_Model_Event $event */
 			$event = $mapper->find($this->getSeminar()->getUid());
 
 			$cssClasses = array();
@@ -3406,7 +3406,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 
 		/** @var Tx_Seminars_Mapper_Event $mapper */
 		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
-		/** @var tx_seminars_Model_Event $event */
+		/** @var Tx_Seminars_Model_Event $event */
 		$event = $mapper->find($this->piVars['seminar']);
 		if (!$event->isPublished()) {
 			return;
@@ -3429,11 +3429,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	/**
 	 * Marks $event as hidden and saves it.
 	 *
-	 * @param tx_seminars_Model_Event $event the event to hide
+	 * @param Tx_Seminars_Model_Event $event the event to hide
 	 *
 	 * @return void
 	 */
-	protected function hideEvent(tx_seminars_Model_Event $event) {
+	protected function hideEvent(Tx_Seminars_Model_Event $event) {
 		$event->markAsHidden();
 		/** @var Tx_Seminars_Mapper_Event $mapper */
 		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
@@ -3445,11 +3445,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	/**
 	 * Marks $event as visible and saves it.
 	 *
-	 * @param tx_seminars_Model_Event $event the event to unhide
+	 * @param Tx_Seminars_Model_Event $event the event to unhide
 	 *
 	 * @return void
 	 */
-	protected function unhideEvent(tx_seminars_Model_Event $event) {
+	protected function unhideEvent(Tx_Seminars_Model_Event $event) {
 		$event->markAsVisible();
 		/** @var Tx_Seminars_Mapper_Event $mapper */
 		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
@@ -3461,11 +3461,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	/**
 	 * Creates a hidden copy of $event and saves it.
 	 *
-	 * @param tx_seminars_Model_Event $event the event copy
+	 * @param Tx_Seminars_Model_Event $event the event copy
 	 *
 	 * @return void
 	 */
-	protected function copyEvent(tx_seminars_Model_Event $event) {
+	protected function copyEvent(Tx_Seminars_Model_Event $event) {
 		$copy = clone $event;
 		$copy->markAsHidden();
 		$copy->setRegistrations(new Tx_Oelib_List());
@@ -3490,14 +3490,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 	/**
 	 * Creates a hyperlink to the single view page of the event $event.
 	 *
-	 * @param tx_seminars_Model_Event $event
+	 * @param Tx_Seminars_Model_Event $event
 	 *        the event which to link to
 	 * @param string $linkText the link text, must not be empty
 	 * @param bool $htmlspecialcharLinkText whether to htmlspecialchar the link text
 	 *
 	 * @return string HTML code for the link to the event's single view page
 	 */
-	public function createSingleViewLink(tx_seminars_Model_Event $event, $linkText, $htmlspecialcharLinkText = TRUE) {
+	public function createSingleViewLink(Tx_Seminars_Model_Event $event, $linkText, $htmlspecialcharLinkText = TRUE) {
 		$processedLinkText = $htmlspecialcharLinkText ? htmlspecialchars($linkText) : $linkText;
 		$linkConditionConfiguration = $this->getConfValueString('linkToSingleView', 's_listView');
 		$createLink = ($linkConditionConfiguration === 'always')

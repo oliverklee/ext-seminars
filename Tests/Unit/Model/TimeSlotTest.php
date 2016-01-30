@@ -134,7 +134,7 @@ class Tx_Seminars_Model_TimeSlotTest extends Tx_Phpunit_TestCase {
 	 */
 	public function setSeminarSetsSeminar()
 	{
-		$seminar = new tx_seminars_Model_Event();
+		$seminar = new Tx_Seminars_Model_Event();
 
 		$this->fixture->setSeminar($seminar);
 

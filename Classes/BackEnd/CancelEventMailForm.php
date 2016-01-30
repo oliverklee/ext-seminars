@@ -118,7 +118,7 @@ class Tx_Seminars_BackEnd_CancelEventMailForm extends Tx_Seminars_BackEnd_Abstra
 	 * @return void
 	 */
 	protected function setEventStatus() {
-		$this->getEvent()->setStatus(tx_seminars_Model_Event::STATUS_CANCELED);
+		$this->getEvent()->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
 		/** @var Tx_Seminars_Mapper_Event $mapper */
 		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
 		$mapper->save($this->getEvent());

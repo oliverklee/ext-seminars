@@ -81,7 +81,7 @@ class Tx_Seminars_FrontEnd_Countdown extends Tx_Seminars_FrontEnd_AbstractView {
 		$this->setErrorMessage($this->checkConfiguration(TRUE));
 
 		try {
-			/** @var tx_seminars_Model_Event $event */
+			/** @var Tx_Seminars_Model_Event $event */
 			$event = $this->mapper->findNextUpcoming();
 
 			$message = $this->viewHelper->render($event->getBeginDateAsUnixTimeStamp());

@@ -54,7 +54,7 @@ class Tx_Seminars_FrontEnd_PublishEvent extends Tx_Oelib_TemplateHelper {
 
 		/** @var Tx_Seminars_Mapper_Event $eventMapper */
 		$eventMapper = GeneralUtility::makeInstance(Tx_Seminars_Mapper_Event::class);
-		/** @var tx_seminars_Model_Event $event */
+		/** @var Tx_Seminars_Model_Event $event */
 		$event = $eventMapper->findByPublicationHash($this->piVars['hash']);
 
 		if (($event !== NULL) && $event->isHidden()) {

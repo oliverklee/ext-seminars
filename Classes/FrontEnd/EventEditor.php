@@ -808,7 +808,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 		if (!$isNew) {
 			/** @var Tx_Seminars_Mapper_Event $mapper */
 			$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
-			/** @var tx_seminars_Model_Event $event */
+			/** @var Tx_Seminars_Model_Event $event */
 			$event = $mapper->find($eventUid);
 			$eventIsHidden = $event->isHidden();
 		} else {
@@ -1266,7 +1266,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 
 		/** @var Tx_Seminars_Mapper_Event $mapper */
 		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
-		/** @var tx_seminars_Model_Event $event */
+		/** @var Tx_Seminars_Model_Event $event */
 		$event = $mapper->findByPublicationHash($this->publicationHash);
 
 		if ($event !== NULL && $event->isHidden()) {
@@ -1296,13 +1296,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor {
 	/**
 	 * Builds the content for the publishing e-mail to the reviewer.
 	 *
-	 * @param tx_seminars_Model_Event $event
+	 * @param Tx_Seminars_Model_Event $event
 	 *        the event to send the publication e-mail for
 	 *
 	 * @return string the e-mail body for the publishing e-mail, will not be
 	 *                empty
 	 */
-	private function createEMailContent(tx_seminars_Model_Event $event) {
+	private function createEMailContent(Tx_Seminars_Model_Event $event) {
 		$this->getTemplateCode(TRUE);
 		$this->setLabels();
 

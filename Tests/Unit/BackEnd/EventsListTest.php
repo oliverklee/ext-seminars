@@ -399,7 +399,7 @@ class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars',
 			array(
 				'pid' => $this->dummySysFolderPid,
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
 
@@ -511,7 +511,7 @@ class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-				'object_type' => tx_seminars_Model_Event::TYPE_TOPIC,
+				'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
 			)
 		);
 
@@ -727,7 +727,7 @@ class Tx_Seminars_BackEnd_EventsListTest extends Tx_Phpunit_TestCase {
 			array(
 				'pid' => $this->dummySysFolderPid,
 				'title' => 'event_1',
-				'object_type' => tx_seminars_Model_Event::TYPE_COMPLETE
+				'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE
 			)
 		);
 

@@ -67,7 +67,7 @@ class Tx_Seminars_Model_TimeSlot extends Tx_Seminars_Model_AbstractTimeSpan {
 	/**
 	 * Returns the seminar/event this time-slot belongs to.
 	 *
-	 * @return tx_seminars_Model_Event
+	 * @return Tx_Seminars_Model_Event
 	 */
 	public function getSeminar() {
 		return $this->getAsModel('seminar');
@@ -76,11 +76,11 @@ class Tx_Seminars_Model_TimeSlot extends Tx_Seminars_Model_AbstractTimeSpan {
 	/**
 	 * Sets the seminar/event this time-slot belongs to.
 	 *
-	 * @param tx_seminars_Model_Event $seminar
+	 * @param Tx_Seminars_Model_Event $seminar
 	 *
 	 * @return void
 	 */
-	public function setSeminar(tx_seminars_Model_Event $seminar) {
+	public function setSeminar(Tx_Seminars_Model_Event $seminar) {
 		$this->set('seminar', $seminar);
 	}
 }

@@ -21,14 +21,14 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
+class Tx_Seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	/**
-	 * @var tx_seminars_Model_Event
+	 * @var Tx_Seminars_Model_Event
 	 */
 	private $fixture;
 
 	protected function setUp() {
-		$this->fixture = new tx_seminars_Model_Event();
+		$this->fixture = new Tx_Seminars_Model_Event();
 	}
 
 	/////////////////////////////////////
@@ -40,7 +40,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function isSingleEventForSingleRecordReturnsTrue() {
 		$this->fixture->setData(
-			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		self::assertTrue(
@@ -53,7 +53,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function isSingleEventForTopicRecordReturnsFalse() {
 		$this->fixture->setData(
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 
 		self::assertFalse(
@@ -66,7 +66,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function isSingleEventForDateRecordReturnsFalse() {
 		$this->fixture->setData(
-			array('object_type' => tx_seminars_Model_Event::TYPE_DATE)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_DATE)
 		);
 
 		self::assertFalse(
@@ -84,7 +84,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function isEventDateForSingleRecordReturnsFalse() {
 		$this->fixture->setData(
-			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		self::assertFalse(
@@ -97,7 +97,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function isEventDateForTopicRecordReturnsFalse() {
 		$this->fixture->setData(
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 
 		self::assertFalse(
@@ -110,7 +110,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function isEventDateForDateRecordReturnsTrue() {
 		$this->fixture->setData(
-			array('object_type' => tx_seminars_Model_Event::TYPE_DATE)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_DATE)
 		);
 
 		self::assertTrue(
@@ -128,11 +128,11 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getRecordTypeWithRecordTypeCompleteReturnsRecordTypeComplete() {
 		$this->fixture->setData(
-			array('object_type' => tx_seminars_Model_Event::TYPE_COMPLETE)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE)
 		);
 
 		self::assertEquals(
-			tx_seminars_Model_Event::TYPE_COMPLETE,
+			Tx_Seminars_Model_Event::TYPE_COMPLETE,
 			$this->fixture->getRecordType()
 		);
 	}
@@ -142,11 +142,11 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getRecordTypeWithRecordTypeDateReturnsRecordTypeDate() {
 		$this->fixture->setData(
-			array('object_type' => tx_seminars_Model_Event::TYPE_DATE)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_DATE)
 		);
 
 		self::assertEquals(
-			tx_seminars_Model_Event::TYPE_DATE,
+			Tx_Seminars_Model_Event::TYPE_DATE,
 			$this->fixture->getRecordType()
 		);
 	}
@@ -156,11 +156,11 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getRecordTypeWithRecordTypeTopicReturnsRecordTypeTopic() {
 		$this->fixture->setData(
-			array('object_type' => tx_seminars_Model_Event::TYPE_TOPIC)
+			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
 		);
 
 		self::assertEquals(
-			tx_seminars_Model_Event::TYPE_TOPIC,
+			Tx_Seminars_Model_Event::TYPE_TOPIC,
 			$this->fixture->getRecordType()
 		);
 	}
@@ -798,7 +798,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasCombinedSingleViewPageForEmptySingleViewPageReturnsFalse() {
 		$fixture = $this->getMock(
-			'tx_seminars_Model_Event', array('getCombinedSingleViewPage')
+			Tx_Seminars_Model_Event::class, array('getCombinedSingleViewPage')
 		);
 		$fixture->expects(self::atLeastOnce())
 			->method('getCombinedSingleViewPage')->will(self::returnValue(''));
@@ -813,7 +813,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasCombinedSingleViewPageForNonEmptySingleViewPageReturnsTrue() {
 		$fixture = $this->getMock(
-			'tx_seminars_Model_Event', array('getCombinedSingleViewPage')
+			Tx_Seminars_Model_Event::class, array('getCombinedSingleViewPage')
 		);
 		$fixture->expects(self::atLeastOnce())
 			->method('getCombinedSingleViewPage')->will(self::returnValue(42));
@@ -1255,7 +1255,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setData(array());
 
 		self::assertEquals(
-			tx_seminars_Model_Event::STATUS_PLANNED,
+			Tx_Seminars_Model_Event::STATUS_PLANNED,
 			$this->fixture->getStatus()
 		);
 	}
@@ -1265,11 +1265,11 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getStatusWithStatusPlannedReturnsStatusPlanned() {
 		$this->fixture->setData(
-			array('cancelled' => tx_seminars_Model_Event::STATUS_PLANNED)
+			array('cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED)
 		);
 
 		self::assertEquals(
-			tx_seminars_Model_Event::STATUS_PLANNED,
+			Tx_Seminars_Model_Event::STATUS_PLANNED,
 			$this->fixture->getStatus()
 		);
 	}
@@ -1279,11 +1279,11 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getStatusWithStatusCanceledReturnStatusCanceled() {
 		$this->fixture->setData(
-			array('cancelled' => tx_seminars_Model_Event::STATUS_CANCELED)
+			array('cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED)
 		);
 
 		self::assertEquals(
-			tx_seminars_Model_Event::STATUS_CANCELED,
+			Tx_Seminars_Model_Event::STATUS_CANCELED,
 			$this->fixture->getStatus()
 		);
 	}
@@ -1293,11 +1293,11 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getStatusWithStatusConfirmedReturnsStatusConfirmed() {
 		$this->fixture->setData(
-			array('cancelled' => tx_seminars_Model_Event::STATUS_CONFIRMED)
+			array('cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED)
 		);
 
 		self::assertEquals(
-			tx_seminars_Model_Event::STATUS_CONFIRMED,
+			Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 			$this->fixture->getStatus()
 		);
 	}
@@ -1319,10 +1319,10 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setStatusWithStatusPlannedSetsStatus() {
-		$this->fixture->setStatus(tx_seminars_Model_Event::STATUS_PLANNED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
 
 		self::assertEquals(
-			tx_seminars_Model_Event::STATUS_PLANNED,
+			Tx_Seminars_Model_Event::STATUS_PLANNED,
 			$this->fixture->getStatus()
 		);
 	}
@@ -1331,10 +1331,10 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setStatusWithStatusCanceledSetsStatus() {
-		$this->fixture->setStatus(tx_seminars_Model_Event::STATUS_CANCELED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
 
 		self::assertEquals(
-			tx_seminars_Model_Event::STATUS_CANCELED,
+			Tx_Seminars_Model_Event::STATUS_CANCELED,
 			$this->fixture->getStatus()
 		);
 	}
@@ -1343,10 +1343,10 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function setStatusWithStatusConfirmedSetsStatus() {
-		$this->fixture->setStatus(tx_seminars_Model_Event::STATUS_CONFIRMED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
 		self::assertEquals(
-			tx_seminars_Model_Event::STATUS_CONFIRMED,
+			Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 			$this->fixture->getStatus()
 		);
 	}
@@ -1772,7 +1772,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 			);
 		$registrations->add($registration);
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getQueueRegistrations')
+			Tx_Seminars_Model_Event::class, array('getQueueRegistrations')
 		);
 		$event->expects(self::any())->method('getQueueRegistrations')
 			->will(self::returnValue($registrations));
@@ -1787,7 +1787,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasQueueRegistrationsForNoQueueRegistrationReturnsFalse() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getQueueRegistrations')
+			Tx_Seminars_Model_Event::class, array('getQueueRegistrations')
 		);
 		$event->expects(self::any())->method('getQueueRegistrations')
 			->will(self::returnValue(new Tx_Oelib_List()));
@@ -1834,7 +1834,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getRegisteredSeatsForNoRegularRegistrationsReturnsZero() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegularRegistrations')
+			Tx_Seminars_Model_Event::class, array('getRegularRegistrations')
 		);
 		$event->setData(array());
 		$event->expects(self::any())->method('getRegularRegistrations')
@@ -1857,7 +1857,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 			);
 		$registrations->add($registration);
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegularRegistrations')
+			Tx_Seminars_Model_Event::class, array('getRegularRegistrations')
 		);
 		$event->setData(array());
 		$event->expects(self::any())->method('getRegularRegistrations')
@@ -1880,7 +1880,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 			);
 		$registrations->add($registration);
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegularRegistrations')
+			Tx_Seminars_Model_Event::class, array('getRegularRegistrations')
 		);
 		$event->setData(array());
 		$event->expects(self::any())->method('getRegularRegistrations')
@@ -1903,7 +1903,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 			);
 		$queueRegistrations->add($registration);
 		$event = $this->getMock(
-			'tx_seminars_Model_Event',
+			Tx_Seminars_Model_Event::class,
 			array('getRegularRegistrations', 'getQueueRegistrations')
 		);
 		$event->setData(array());
@@ -1923,7 +1923,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getRegisteredSeatsCountsOfflineRegistrations() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegularRegistrations')
+			Tx_Seminars_Model_Event::class, array('getRegularRegistrations')
 		);
 		$event->setData(array('offline_attendees' => 2));
 		$event->expects(self::any())->method('getRegularRegistrations')
@@ -1945,7 +1945,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasEnoughRegistrationsForZeroSeatsAndZeroNeededReturnsTrue() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_min' => 0));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -1961,7 +1961,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasEnoughRegistrationsForLessSeatsThanNeededReturnsFalse() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_min' => 2));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -1977,7 +1977,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasEnoughRegistrationsForAsManySeatsAsNeededReturnsTrue() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_min' => 2));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -1993,7 +1993,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasEnoughRegistrationsForMoreSeatsThanNeededReturnsTrue() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_min' => 1));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2014,7 +2014,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getVacanciesForOneRegisteredAndTwoMaximumReturnsOne() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 2));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2031,7 +2031,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getVacanciesForAsManySeatsRegisteredAsMaximumReturnsZero() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 2));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2048,7 +2048,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsZero() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 1));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2065,7 +2065,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function getVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsZero() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 0));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2087,7 +2087,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasVacanciesForOneRegisteredAndTwoMaximumReturnsTrue() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 2));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2103,7 +2103,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasVacanciesForAsManySeatsRegisteredAsMaximumReturnsFalse() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 2));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2119,7 +2119,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsFalse() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 1));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2135,7 +2135,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function hasVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsTrue() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 0));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2156,7 +2156,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function isFullForLessSeatsThanMaximumReturnsFalse() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 2));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2172,7 +2172,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function isFullForAsManySeatsAsMaximumReturnsTrue() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 2));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2188,7 +2188,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function isFullForMoreSeatsThanMaximumReturnsTrue() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 1));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2204,7 +2204,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function isFullForZeroSeatsAndUnlimitedMaximumReturnsFalse() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 0));
 		$event->expects(self::any())->method('getRegisteredSeats')
@@ -2220,7 +2220,7 @@ class tx_seminars_Model_EventTest extends Tx_Phpunit_TestCase {
 	 */
 	public function isFullForPositiveSeatsAndUnlimitedMaximumReturnsFalse() {
 		$event = $this->getMock(
-			'tx_seminars_Model_Event', array('getRegisteredSeats')
+			Tx_Seminars_Model_Event::class, array('getRegisteredSeats')
 		);
 		$event->setData(array('attendees_max' => 0));
 		$event->expects(self::any())->method('getRegisteredSeats')

@@ -30,7 +30,7 @@ class Tx_Seminars_Mapper_Event extends Tx_Oelib_DataMapper {
 	/**
 	 * @var string the model class name for this mapper, must not be empty
 	 */
-	protected $modelClassName = 'tx_seminars_Model_Event';
+	protected $modelClassName = Tx_Seminars_Model_Event::class;
 
 	/**
 	 * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
@@ -65,7 +65,7 @@ class Tx_Seminars_Mapper_Event extends Tx_Oelib_DataMapper {
 	 * @param string $publicationHash
 	 *        the publication hash to find the event for, must not be empty
 	 *
-	 * @return tx_seminars_Model_Event the event with the publication hash
+	 * @return Tx_Seminars_Model_Event the event with the publication hash
 	 *                                 provided, will be NULL if no event could
 	 *                                 be found
 	 */
@@ -75,7 +75,7 @@ class Tx_Seminars_Mapper_Event extends Tx_Oelib_DataMapper {
 		}
 
 		try {
-			/** @var tx_seminars_Model_Event $result */
+			/** @var Tx_Seminars_Model_Event $result */
 			$result = $this->findSingleByWhereClause(array('publication_hash' => $publicationHash));
 		} catch (Tx_Oelib_Exception_NotFound $exception) {
 			$result = NULL;
@@ -96,7 +96,7 @@ class Tx_Seminars_Mapper_Event extends Tx_Oelib_DataMapper {
 	 * @param int $maximum
 	 *        maximum begin date as a UNIX timestamp, must be >= $minimum
 	 *
-	 * @return Tx_Oelib_List the found tx_seminars_Model_Event models, will be
+	 * @return Tx_Oelib_List the found Tx_Seminars_Model_Event models, will be
 	 *                       empty if there are no matches
 	 */
 	public function findAllByBeginDate($minimum, $maximum) {
@@ -118,13 +118,13 @@ class Tx_Seminars_Mapper_Event extends Tx_Oelib_DataMapper {
 	/**
 	 * Returns the next upcoming event.
 	 *
-	 * @return tx_seminars_Model_Event the next upcoming event
+	 * @return Tx_Seminars_Model_Event the next upcoming event
 	 *
 	 * @throws Tx_Oelib_Exception_NotFound
 	 */
 	public function findNextUpcoming() {
 		$whereClause = $this->getUniversalWhereClause() . ' AND cancelled <> ' . tx_seminars_seminar::STATUS_CANCELED .
-			' AND object_type <> ' . tx_seminars_Model_Event::TYPE_TOPIC . ' AND begin_date > ' . $GLOBALS['SIM_ACCESS_TIME'];
+			' AND object_type <> ' . Tx_Seminars_Model_Event::TYPE_TOPIC . ' AND begin_date > ' . $GLOBALS['SIM_ACCESS_TIME'];
 
 		try {
 			$row = Tx_Oelib_Db::selectSingle(

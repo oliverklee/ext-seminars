@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class tx_seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
+class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
 	/**
 	 * @var int represents the type for a single event
 	 */
@@ -73,9 +73,9 @@ class tx_seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
 
 	/**
 	 * Returns the record type of this event, which will be one of the following:
-	 * - tx_seminars_Model_Event::TYPE_COMPLETE
-	 * - tx_seminars_Model_Event::TYPE_TOPIC
-	 * - tx_seminars_Model_Event::TYPE_DATE
+	 * - Tx_Seminars_Model_Event::TYPE_COMPLETE
+	 * - Tx_Seminars_Model_Event::TYPE_TOPIC
+	 * - Tx_Seminars_Model_Event::TYPE_DATE
 	 *
 	 * @return int the record type of this event, will be one of the values
 	 *                 mentioned above, will be >= 0
@@ -89,7 +89,7 @@ class tx_seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
 	 *
 	 * This method may only be called for date records.
 	 *
-	 * @return tx_seminars_Model_Event our topic, will be NULL if this event has
+	 * @return Tx_Seminars_Model_Event our topic, will be NULL if this event has
 	 *                                 no topic
 	 */
 	public function getTopic() {
