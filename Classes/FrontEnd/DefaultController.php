@@ -14,6 +14,7 @@
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 require(ExtensionManagementUtility::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
@@ -1759,12 +1760,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		$this->internal['orderBy'] = $this->getListViewConfValueString('orderBy');
 
 		// number of results to show in a listing
-		$this->internal['results_at_a_time'] = t3lib_utility_Math::forceIntegerInRange(
+		$this->internal['results_at_a_time'] = MathUtility::forceIntegerInRange(
 			$this->getListViewConfValueInteger('results_at_a_time'),
 			0, 1000, 20
 		);
 		// maximum number of 'pages' in the browse-box: 'Page 1', 'Page 2', etc.
-		$this->internal['maxPages'] = t3lib_utility_Math::forceIntegerInRange(
+		$this->internal['maxPages'] = MathUtility::forceIntegerInRange(
 			$this->getListViewConfValueInteger('maxPages'),
 			0, 1000, 2
 		);
@@ -1827,7 +1828,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 		}
 
 		$pointer = (int)$this->piVars['pointer'];
-		$resultsAtATime = t3lib_utility_Math::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
+		$resultsAtATime = MathUtility::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
 		$builder->setLimit(($pointer * $resultsAtATime) . ',' . $resultsAtATime);
 
 		$seminarOrRegistrationBag = $builder->build();
