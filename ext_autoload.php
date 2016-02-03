@@ -30,7 +30,7 @@ return array(
 	'tx_seminars_bagbuilder_registration' => $extensionPath . 'Classes/BagBuilder/Registration.php',
 	'tx_seminars_bagbuilder_speaker' => $extensionPath . 'Classes/BagBuilder/Speaker.php',
 	'tx_seminars_cli_mailnotifier' => $extensionPath . 'Classes/Cli/MailNotifier.php',
-	'tx_seminars_configcheck' => $extensionPath . 'Classes/class.tx_seminars_configcheck.php',
+	'tx_seminars_configcheck' => $extensionPath . 'Classes/ConfigCheck.php',
 	'tx_seminars_csv_abstractbackendaccesscheck' => $extensionPath . 'Classes/Csv/AbstractBackEndAccessCheck.php',
 	'tx_seminars_csv_abstractlistview' => $extensionPath . 'Classes/Csv/AbstractListView.php',
 	'tx_seminars_csv_abstractregistrationlistview' => $extensionPath . 'Classes/Csv/AbstractRegistrationListView.php',
