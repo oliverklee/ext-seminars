@@ -35,7 +35,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck {
 		// The registration manager needs to be able to create registration
 		// objects. So we check whether the prerequisites for registrations
 		// are fulfilled as well.
-		$this->check_tx_seminars_registration();
+		$this->check_Tx_Seminars_OldModel_Registration();
 	}
 
 	/**
