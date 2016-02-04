@@ -151,7 +151,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract {
 	 */
 	public function ignoreCanceledEvents() {
 		$this->whereClauseParts['hideCanceledEvents'] = 'cancelled <> ' .
-			Tx_Seminars_OldModel_Event::STATUS_CANCELED;
+			Tx_Seminars_Model_Event::STATUS_CANCELED;
 	}
 
 	/**
@@ -654,7 +654,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract {
 	/**
 	 * Limits the bag to events in status $status.
 	 *
-	 * @param int $status Tx_Seminars_OldModel_Event::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
+	 * @param int $status Tx_Seminars_Model_Event::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
 	 *
 	 * @return void
 	 */

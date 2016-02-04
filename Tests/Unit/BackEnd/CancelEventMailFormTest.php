@@ -476,7 +476,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
 			$this->testingFramework->existsRecord(
 				'tx_seminars_seminars',
 				'uid = ' . $this->eventUid . ' AND cancelled = ' .
-					Tx_Seminars_OldModel_Event::STATUS_CANCELED
+					Tx_Seminars_Model_Event::STATUS_CANCELED
 			)
 		);
 	}

@@ -1217,7 +1217,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		// Activates the configuration switch "canRegisterForEventsWithoutDate".
 		$this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
-		$this->fixture->setStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
 
 		self::assertFalse(
 			$this->fixture->canSomebodyRegister()
@@ -1441,7 +1441,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function canSomebodyRegisterMessageForCancelledEventReturnsSeminarCancelledMessage() {
-		$this->fixture->setStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
 
 		self::assertSame(
 			$this->fixture->translate('message_seminarCancelled'),
@@ -6123,7 +6123,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 		$this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
 		$this->fixture->setAttendancesMax(5);
 		$this->fixture->setNumberOfAttendances(0);
-		$this->fixture->setStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
 
 		self::assertSame(
 			'',
@@ -7176,7 +7176,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function isConfirmedForStatusPlannedReturnsFalse() {
-		$this->fixture->setStatus(Tx_Seminars_OldModel_Event::STATUS_PLANNED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
 
 		self::assertFalse(
 			$this->fixture->isConfirmed()
@@ -7187,7 +7187,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function isConfirmedForStatusConfirmedReturnsTrue() {
-		$this->fixture->setStatus(Tx_Seminars_OldModel_Event::STATUS_CONFIRMED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
 		self::assertTrue(
 			$this->fixture->isConfirmed()
@@ -7198,7 +7198,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function isConfirmedForStatusCanceledReturnsFalse() {
-		$this->fixture->setStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
 
 		self::assertFalse(
 			$this->fixture->isConfirmed()
@@ -7214,7 +7214,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function isCanceledForPlannedEventReturnsFalse() {
-	$this->fixture->setStatus(Tx_Seminars_OldModel_Event::STATUS_PLANNED);
+	$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
 
 	self::assertFalse(
 			$this->fixture->isCanceled()
@@ -7225,7 +7225,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function isCanceledForCanceledEventReturnsTrue() {
-		$this->fixture->setStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
 
 		self::assertTrue(
 			$this->fixture->isCanceled()
@@ -7236,7 +7236,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function isCanceledForConfirmedEventReturnsFalse() {
-		$this->fixture->setStatus(Tx_Seminars_OldModel_Event::STATUS_CONFIRMED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
 		self::assertFalse(
 			$this->fixture->isCanceled()
@@ -7252,7 +7252,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function isPlannedForStatusPlannedReturnsTrue() {
-		$this->fixture->setStatus(Tx_Seminars_OldModel_Event::STATUS_PLANNED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
 
 		self::assertTrue(
 			$this->fixture->isPlanned()
@@ -7263,7 +7263,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function isPlannedForStatusConfirmedReturnsFalse() {
-		$this->fixture->setStatus(Tx_Seminars_OldModel_Event::STATUS_CONFIRMED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
 		self::assertFalse(
 			$this->fixture->isPlanned()
@@ -7274,7 +7274,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function isPlannedForStatusCanceledReturnsFalse() {
-		$this->fixture->setStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
+		$this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
 
 		self::assertFalse(
 			$this->fixture->isPlanned()

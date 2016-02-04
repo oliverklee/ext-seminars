@@ -852,7 +852,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 	 * @test
 	 */
 	public function canRegisterIfLoggedInForLoggedOutUserAndCanceledSeminarReturnsFalse() {
-		$this->seminar->setStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
+		$this->seminar->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
 
 		self::assertFalse(
 			$this->fixture->canRegisterIfLoggedIn($this->seminar)
@@ -943,7 +943,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 	 * @test
 	 */
 	public function canRegisterIfLoggedInForRegistrationNotPossibleNotCallsCanRegisterForSeminarHook() {
-		$this->seminar->setStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
+		$this->seminar->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
 		$this->testingFramework->createAndLoginFrontEndUser();
 
 		$hookClass = uniqid('tx_registrationHook');
@@ -1103,7 +1103,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 	 * @test
 	 */
 	public function canRegisterIfLoggedInMessageForLoggedOutUserAndCanceledSeminarReturnsSeminarCancelledMessage() {
-		$this->seminar->setStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
+		$this->seminar->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
 
 		self::assertSame(
 			'message_seminarCancelled',
@@ -1201,7 +1201,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 	 */
 	public function canRegisterIfLoggedInMessageForRegistrationNotPossibleNotCallsCanUserRegisterForSeminarMessageHook() {
 		$this->testingFramework->createAndLoginFrontEndUser();
-		$this->seminar->setStatus(Tx_Seminars_OldModel_Event::STATUS_CANCELED);
+		$this->seminar->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
 
 		$hookClass = uniqid('tx_registrationHook');
 		$hook = $this->getMock($hookClass, array('canRegisterForSeminarMessage'));
@@ -2508,7 +2508,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$registration = $this->createRegistration();
 		$registration->getSeminarObject()->setStatus(
-			Tx_Seminars_OldModel_Event::STATUS_CONFIRMED
+			Tx_Seminars_Model_Event::STATUS_CONFIRMED
 		);
 
 		$pi1 = new Tx_Seminars_FrontEnd_DefaultController();
@@ -2529,7 +2529,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$registration = $this->createRegistration();
 		$registration->getSeminarObject()->setStatus(
-			Tx_Seminars_OldModel_Event::STATUS_CANCELED
+			Tx_Seminars_Model_Event::STATUS_CANCELED
 		);
 
 		$pi1 = new Tx_Seminars_FrontEnd_DefaultController();
@@ -2550,7 +2550,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 		$this->fixture->setConfigurationValue('sendConfirmation', TRUE);
 		$registration = $this->createRegistration();
 		$registration->getSeminarObject()->setStatus(
-			Tx_Seminars_OldModel_Event::STATUS_PLANNED
+			Tx_Seminars_Model_Event::STATUS_PLANNED
 		);
 
 		$pi1 = new Tx_Seminars_FrontEnd_DefaultController();
@@ -2574,7 +2574,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 		);
 		$registration = $this->createRegistration();
 		$registration->getSeminarObject()->setStatus(
-			Tx_Seminars_OldModel_Event::STATUS_PLANNED
+			Tx_Seminars_Model_Event::STATUS_PLANNED
 		);
 
 		$pi1 = new Tx_Seminars_FrontEnd_DefaultController();

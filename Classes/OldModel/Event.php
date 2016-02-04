@@ -82,13 +82,6 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	private $topic = NULL;
 
 	/**
-	 * @var int the different statuses of an event.
-	 */
-	const STATUS_PLANNED = 0,
-		STATUS_CANCELED = 1,
-		STATUS_CONFIRMED = 2;
-
-	/**
 	 * The constructor. Creates a seminar instance from a DB record.
 	 *
 	 * By default, the process of creating a seminar object from a hidden record
@@ -2845,7 +2838,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	 * @return bool TRUE if the event has been canceled, FALSE otherwise
 	 */
 	public function isCanceled() {
-		return ($this->getStatus() == self::STATUS_CANCELED);
+		return ($this->getStatus() == Tx_Seminars_Model_Event::STATUS_CANCELED);
 	}
 
 	/**
@@ -4421,7 +4414,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	 * @return bool TRUE if the event has been confirmed, FALSE otherwise
 	 */
 	public function isConfirmed() {
-		return ($this->getStatus() == self::STATUS_CONFIRMED);
+		return ($this->getStatus() == Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 	}
 
 	/**
@@ -4430,7 +4423,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	 * @return bool TRUE if the event has been planned, FALSE otherwise
 	 */
 	public function isPlanned() {
-		return ($this->getStatus() == self::STATUS_PLANNED);
+		return ($this->getStatus() == Tx_Seminars_Model_Event::STATUS_PLANNED);
 	}
 
 	/**
