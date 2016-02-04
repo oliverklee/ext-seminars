@@ -20,6 +20,8 @@ Von seminars 0.10.x auf 1.0.x aktualisieren
 bedeutet auch einiges an Arbeit, wenn Sie mit angepassten HTML-
 Templates arbeiten.**
 
+Außerdem haben sich die meisten Klassennamen und Hook-Deklarationen geändert.
+
 Am besten führen Sie die Aktualisierung zu einem Zeitpunkt durch, zu
 dem keine neuen Anmeldungen zu erwarten sind, da während der
 Aktualisierung Warnungen auf den Seiten zu sehen sein können.
@@ -27,6 +29,10 @@ Aktualisierung Warnungen auf den Seiten zu sehen sein können.
 #. Stellen Sie sicher, dass Sie mindestens PHP 5.5 benutzen.
 
 #. Stellen Sie sicher, dass Sie mindestens TYPO3 6.2.0 benutzen.
+
+#. Deinstallieren sie vorübergehend seminars, onetimeaccount (falls es
+   installiert ist) und alle Extensions, die Hooks oder XCLASSes von
+   seminars benutzen.
 
 #. Aktualisieren Sie oelib und static\_info\_tables auf die aktuelle
    Version.
@@ -41,8 +47,8 @@ Aktualisierung Warnungen auf den Seiten zu sehen sein können.
    Templates im Frontend wahrscheinlich fehlerhaft dargestellt werden.)
    Schalten Sie die angepassten Templates aus.
 
-#. Aktualisieren Sie den Seminarmanager aus dem TER und führen Sie die
-   Datenbank-Aktualisierungen durch.
+#. Aktualisieren Sie den Seminarmanager (und onetimeaccount, falls nötig)
+   aus dem TER und führen Sie die Datenbank-Aktualisierungen durch.
 
 #. Schalten Sie im Extensionmanager den automatischen Konfigurationscheck
    für den Seminarmanager ein.
@@ -52,16 +58,8 @@ Aktualisierung Warnungen auf den Seiten zu sehen sein können.
 
 #. Leeren Sie alle Caches.
 
-#. Entfernen Sie die Temp-Cache-Dateien in typo3conf (entweder manuell
-   oder via extdeveval).
-
 #. Entfernen Sie die FORMidable-Cache-Dateien in
    typo3temp/ameos\_formidable.
-
-#. Öffnen Sie im TYPO3-Backend alle Inhaltselemente, die Sie für die
-   Veranstaltungs-Einzelansicht benutzen. Ändern Sie in den Flexforms das
-   „Was soll angezeigt werden“-Drop-down von „Veranstaltungsliste“ auf
-   „Veranstaltungs-Einzelansicht“.
 
 #. Schauen Sie sich alle Frontend-Seiten an, die den Seminarmanager
    enthalten. Melden Sie sich für eine Veranstaltung an und prüfen Sie,
@@ -74,8 +72,8 @@ Aktualisierung Warnungen auf den Seiten zu sehen sein können.
    Veranstalter noch funktionieren und so aussehen, wie sie aussehen
    sollen.
 
-#. Viele Klassen wurden verschoben oder umbenannt. Wenn Sie mit XCLASSes
-   arbeitet, sollten Sie diese jetzt anpassen.
+#. Wenn Sie seminars-spezifische Hooks oder XCLASSEs benutzen, aktualisieren
+   Sie diese anhand der neuen Klassen.
 
 #. Schauen Sie sich die neuen Felder in den Veranstaltungsdatensätzen an
    und entscheiden Sie, welche davon Sie nutzen möchten.

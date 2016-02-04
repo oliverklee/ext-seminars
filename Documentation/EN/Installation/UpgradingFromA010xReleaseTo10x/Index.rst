@@ -19,6 +19,8 @@ Upgrading from a 0.10.x release to 1.0.x
 **Upgrading to 1.0.x will bring you a lot of new features, but it will
 also mean a bit of work if you are using custom HTML templates.**
 
+Also, most of the class names and hook declarations have changed.
+
 You should do the upgrade at a time when there are usually no new
 registrations as there might be some configuration check warnings on
 the front end until you have finished the upgrade.
@@ -26,6 +28,9 @@ the front end until you have finished the upgrade.
 #. Make sure you are using PHP 5.5 or greater.
 
 #. Make sure you are using TYPO3 6.2.0 or greater.
+
+#. Temporarily uninstall seminars, onetimeaccount (if it is installed)
+   and all extensions that use hooks or XCLASSes of seminars.
 
 #. Update to the latest version of oelib and static\_info\_tables.
 
@@ -38,7 +43,8 @@ the front end until you have finished the upgrade.
    features. In addition, your old templates probably will display some
    garbage on the front end.) Switch off your custom templates.
 
-#. Upgrade to the new Seminar Manager from TER and upgrade the database.
+#. Upgrade to the new seminars (and onetimeaccount, if needed) from TER
+   and upgrade the database.
 
 #. In the extension manager, enable the automatic configuration check for
    the Seminar Manager.
@@ -54,15 +60,7 @@ the front end until you have finished the upgrade.
 
 #. Clear all caches.
 
-#. Remove the temp cache files in typo3conf (either manualy or via
-   extdeveval).
-
 #. Remove the FORMidable cache files in typo3temp/ameos\_formidable.
-
-#. In the TYPO3 back end, edit all plug-in content elements which you are
-   using for displaying an event single view. In the “what to display”
-   drop-down, change the selection form “event list” to “event single
-   view”.
 
 #. View all pages in the FE that contain anything Seminar Manager-
    related. Sign up for an event and check that everything still is
@@ -73,8 +71,8 @@ the front end until you have finished the upgrade.
 #. Check that the e-mails to the participants and the organizers still
    are working and still look like you want them to look.
 
-#. Many classes have been moved or renamed. If you are using XCLASSes,
-   you'll need to adapt them.
+#. If you are using any seminars-related hooks or XCLASSES, update them
+   to the new classes.
 
 #. Have a look at the new fields for event records and decide which you
    want to use.
