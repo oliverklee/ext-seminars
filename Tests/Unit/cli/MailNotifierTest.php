@@ -13,6 +13,7 @@
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Test case.
@@ -51,7 +52,9 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 
 	protected function setUp() {
 		$this->languageBackup = $GLOBALS['LANG'];
-		$GLOBALS['LANG'] = new \language();
+		$languageService = new LanguageService();
+		$languageService->init('en');
+		$GLOBALS['LANG'] = $languageService;
 
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
