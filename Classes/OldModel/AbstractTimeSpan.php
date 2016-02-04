@@ -33,11 +33,6 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
 	public $scriptRelPath = 'locallang.xml';
 
 	/**
-	 * @var int the number of seconds per day
-	 */
-	const SECONDS_PER_DAY = 86400;
-
-	/**
 	 * Gets the begin date.
 	 *
 	 * @return string the begin date (or the localized string "will be

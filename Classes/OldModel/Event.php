@@ -4479,10 +4479,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan {
 
 		/** @var Tx_Seminars_OldModel_Speaker $organizer */
 		foreach ($speakers as $speaker) {
-			$speakerDeadline = $beginDate -
-				($speaker->getCancelationPeriodInDays()
-					* Tx_Seminars_OldModel_AbstractTimeSpan::SECONDS_PER_DAY
-				);
+			$speakerDeadline = $beginDate - ($speaker->getCancelationPeriodInDays() * Tx_Oelib_Time::SECONDS_PER_DAY);
 			$deadline = min($speakerDeadline, $deadline);
 		}
 
