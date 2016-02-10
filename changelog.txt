@@ -1,6 +1,7 @@
 0.10.2 (currently working on)
 
 Features:
+- [#5653] Add a configuration for PDF rendering of the manual
 
 Bug fixes:
 - [#5647] Initialize the language service in MailNotifierTest
