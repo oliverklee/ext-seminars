@@ -11,6 +11,7 @@
 		<languageKey index="default" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
 			<label index="LGL.telephone">Phone:</label>
+			<label index="LGL.gender">Gender:</label>
 			<label index="tx_seminars_test">Test records</label>
 			<label index="tx_seminars_test.title">Title:</label>
 			<label index="tx_seminars_seminars">Seminars</label>
@@ -228,6 +229,7 @@
 		<languageKey index="de" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminare</label>
 			<label index="LGL.telephone">Telefon:</label>
+			<label index="LGL.gender">Anrede:</label>
 			<label index="tx_seminars_test">Test-Datensätze</label>
 			<label index="tx_seminars_test.title">Titel:</label>
 			<label index="tx_seminars_seminars">Seminare</label>
@@ -2281,6 +2283,7 @@
 		<languageKey index="de" type="array">
 			<label index="moduleFunction.tx_seminars_modfunc1">Seminars</label>
 			<label index="LGL.telephone">Phone:</label>
+			<label index="LGL.gender">Gender:</label>
 			<label index="tx_seminars_test">Test records</label>
 			<label index="tx_seminars_test.title">Title:</label>
 			<label index="tx_seminars_seminars">Seminars</label>
