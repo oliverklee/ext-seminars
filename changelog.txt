@@ -5,6 +5,7 @@ Features:
 - [#5628] Add a RealURL auto configuration
 
 Bug fixes:
+- [#5649] Heading for the FE user gender is missing in the CSV export
 - [#5624] Salutation from onetimeaccount not used for the billing address
 - [#5602] Stop requiring the oelib autoloader
 - [#5539] Move class.ext_update.php back into the extension root
