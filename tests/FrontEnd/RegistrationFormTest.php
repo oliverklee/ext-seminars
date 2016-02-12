@@ -191,7 +191,7 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 	 * @test
 	 */
 	public function getAllFeUserContainsLabelForNonEmptyEmailOfFrontEndUser() {
-			$this->testingFramework->createAndLoginFrontEndUser('', array('email' => 'john@example.com'));
+		$this->testingFramework->createAndLoginFrontEndUser('', array('email' => 'john@example.com'));
 
 		self::assertContains(
 			'mail',
@@ -206,7 +206,19 @@ class tx_seminars_FrontEnd_RegistrationFormTest extends tx_phpunit_testcase {
 		$this->testingFramework->createAndLoginFrontEndUser('', array('name' => 'John Doe'));
 
 		self::assertNotRegExp(
-			'/<br \/>\s*<br \/>/',
+			'/<br *\\/>\s*<br *\\/>/',
+			$this->fixture->getAllFeUserData()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAllFeUserContainsNoUnreplacedMarkers() {
+		$this->testingFramework->createAndLoginFrontEndUser('', array('name' => 'John Doe'));
+
+		self::assertNotContains(
+			'###',
 			$this->fixture->getAllFeUserData()
 		);
 	}

@@ -4,6 +4,7 @@ Features:
 - [#5653] Add a configuration for PDF rendering of the manual
 
 Bug fixes:
+- [#5413] showFeUserFieldsInRegistrationForm does not hide unused markers
 - [#5649] Heading for the FE user gender is missing in the CSV export
 - [#5647] Initialize the language service in MailNotifierTest
 - [#5624] Salutation from onetimeaccount not used for the billing address

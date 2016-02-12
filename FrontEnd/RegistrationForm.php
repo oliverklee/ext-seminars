@@ -793,7 +793,7 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 	 * @return string the currently logged-in FE user's data
 	 */
 	public function getAllFeUserData() {
-		/** @var $userData array */
+		/** @var $userData mixed[] */
 		$userData = $GLOBALS['TSFE']->fe_user->user;
 
 		$fieldKeys = t3lib_div::trimExplode(',', $this->getConfValueString('showFeUserFieldsInRegistrationForm'));
@@ -802,21 +802,22 @@ class tx_seminars_FrontEnd_RegistrationForm extends tx_seminars_FrontEnd_Editor 
 		foreach ($fieldKeys as $key) {
 			$hasLabel = in_array($key, $fieldsWithLabels, TRUE);
 			$fieldValue = isset($userData[$key]) ? htmlspecialchars((string) $userData[$key]) : '';
-			$fieldValueWithWrapper = '<span id="tx-seminars-feuser-field-' . $key . '">' . $fieldValue . '</span>';
-			// Only show a label if we have any data following it.
-			if ($hasLabel && ($fieldValue !== '')) {
-				$displayValue = $this->translate('label_' . $key) . ' ' . $fieldValueWithWrapper;
-			}  else {
-				$displayValue = $fieldValueWithWrapper;
+			$wrappedFieldValue = '<span id="tx-seminars-feuser-field-' . $key . '">' . $fieldValue . '</span>';
+			if ($fieldValue !== '') {
+				$marker = $hasLabel ? ($this->translate('label_' . $key) . ' ') : '';
+				$marker .= $wrappedFieldValue;
+			} else {
+				$marker = '';
 			}
 
-			$this->setMarker('user_' . $key, $displayValue);
+			$this->setMarker('user_' . $key, $marker);
 		}
 
 		$rawOutput = $this->getSubpart('REGISTRATION_CONFIRMATION_FEUSER');
+		$outputWithoutEmptyMarkers = preg_replace('/###USER_[A-Z]+###/', '', $rawOutput);
+		$outputWithoutBlankLines = preg_replace('/^\\s*<br[^>]*>\\s*$/m', '', $outputWithoutEmptyMarkers);
 
-		// drops empty lines
-		return preg_replace('/[\n\r]\\s*<br \\/>/', '', $rawOutput);
+		return $outputWithoutBlankLines;
 	}
 
 	/**
