@@ -1603,9 +1603,9 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase {
 	}
 
 
-	/////////////////////////////////////////////
-	// Tests concerning hasOfflineRegistrations
-	/////////////////////////////////////////////
+	/*
+	 * Tests concerning the offline registrations
+	 */
 
 	/**
 	 * @test
@@ -1629,11 +1629,6 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase {
 		);
 	}
 
-
-	/////////////////////////////////////////////
-	// Tests concerning getOfflineRegistrations
-	/////////////////////////////////////////////
-
 	/**
 	 * @test
 	 */
@@ -1654,6 +1649,21 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase {
 
 		self::assertEquals(
 			2,
+			$this->fixture->getOfflineRegistrations()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setOfflineRegistrationsSetsOfflineRegistrations() {
+		$numberOfOfflineRegistrations = 2;
+		$this->fixture->setData(array('offline_attendees' => 0));
+
+		$this->fixture->setOfflineRegistrations($numberOfOfflineRegistrations);
+
+		self::assertSame(
+			$numberOfOfflineRegistrations,
 			$this->fixture->getOfflineRegistrations()
 		);
 	}

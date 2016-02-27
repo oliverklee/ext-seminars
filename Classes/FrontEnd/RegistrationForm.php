@@ -107,6 +107,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 	);
 
 	/**
+	 * @var int
+	 */
+	protected $maximumNumberOfSeats = 10;
+
+	/**
 	 * Overwrite this in an XClass with the keys of additional keys that should always be displayed.
 	 *
 	 * @var string[]
@@ -769,6 +774,29 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 				'caption' => $row['title'],
 				'value' => $row['uid'],
 			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Creates the data for the seats drop-down.
+	 *
+	 * @return int[][] array with sub arrays: [caption => i, value => i]
+	 **/
+	public function populateSeats() {
+		$result = [];
+
+		$event = $this->getEvent();
+		if ($event->hasMaximumAttendees() && $event->hasVacancies()) {
+			$numberOfVacancies = $event->getVacancies();
+			$availableSeatsForBooking = min($numberOfVacancies, $this->maximumNumberOfSeats);
+		} else {
+			$availableSeatsForBooking = $this->maximumNumberOfSeats;
+		}
+
+		for ($i = 1; $i <= $availableSeatsForBooking; $i++) {
+			$result[] = ['caption' => $i, 'value' => $i];
 		}
 
 		return $result;

@@ -1608,6 +1608,17 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
+	 * Sets the number of offline registrations.
+	 *
+	 * @param int $numberOfRegistrations
+	 *
+	 * @return void
+	 */
+	public function setOfflineRegistrations($numberOfRegistrations) {
+		$this->setAsInteger('offline_attendees', $numberOfRegistrations);
+	}
+
+	/**
 	 * Gets the registrations for this event.
 	 *
 	 * @return Tx_Oelib_List the registrations for this event (both regular and

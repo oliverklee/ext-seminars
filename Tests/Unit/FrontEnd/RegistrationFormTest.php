@@ -1750,4 +1750,164 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 			$event->getUid()
 		);
 	}
+
+	/*
+	 * Tests concerning populateSeats
+	 */
+
+	/**
+	 * @test
+	 */
+	public function populateSeatsForOneVacancyReturnsItemOfOne()
+	{
+		$event = $this->fixture->getEvent();
+		$event->setMaximumAttendees(1);
+		self::assertSame(1, $event->getVacancies());
+
+		$result = $this->fixture->populateSeats();
+
+		self::assertSame(
+			[['caption' => 1, 'value' => 1]],
+			$result
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateSeatsForLessVacanciesThanMaximumSeatsReturnsVacancyValues()
+	{
+		$event = $this->fixture->getEvent();
+		$event->setMaximumAttendees(9);
+		self::assertSame(9, $event->getVacancies());
+
+		$result = $this->fixture->populateSeats();
+
+		self::assertSame(
+			[
+				['caption' => 1, 'value' => 1],
+				['caption' => 2, 'value' => 2],
+				['caption' => 3, 'value' => 3],
+				['caption' => 4, 'value' => 4],
+				['caption' => 5, 'value' => 5],
+				['caption' => 6, 'value' => 6],
+				['caption' => 7, 'value' => 7],
+				['caption' => 8, 'value' => 8],
+				['caption' => 9, 'value' => 9],
+			],
+			$result
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateSeatsForAsManyVacanciesAsMaximumSeatsReturnsMaximumValues()
+	{
+		$event = $this->fixture->getEvent();
+		$event->setMaximumAttendees(10);
+		self::assertSame(10, $event->getVacancies());
+
+		$result = $this->fixture->populateSeats();
+
+		self::assertSame(
+			[
+				['caption' => 1, 'value' => 1],
+				['caption' => 2, 'value' => 2],
+				['caption' => 3, 'value' => 3],
+				['caption' => 4, 'value' => 4],
+				['caption' => 5, 'value' => 5],
+				['caption' => 6, 'value' => 6],
+				['caption' => 7, 'value' => 7],
+				['caption' => 8, 'value' => 8],
+				['caption' => 9, 'value' => 9],
+				['caption' => 10, 'value' => 10],
+			],
+			$result
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateSeatsForMoreVacanciesThanMaximumSeatsReturnsMaximumValues()
+	{
+		$event = $this->fixture->getEvent();
+		$event->setMaximumAttendees(11);
+		self::assertSame(11, $event->getVacancies());
+
+		$result = $this->fixture->populateSeats();
+
+		self::assertSame(
+			[
+				['caption' => 1, 'value' => 1],
+				['caption' => 2, 'value' => 2],
+				['caption' => 3, 'value' => 3],
+				['caption' => 4, 'value' => 4],
+				['caption' => 5, 'value' => 5],
+				['caption' => 6, 'value' => 6],
+				['caption' => 7, 'value' => 7],
+				['caption' => 8, 'value' => 8],
+				['caption' => 9, 'value' => 9],
+				['caption' => 10, 'value' => 10],
+			],
+			$result
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateSeatsForNoVacanciesReturnsMaximumValues()
+	{
+		$event = $this->fixture->getEvent();
+		$event->setMaximumAttendees(1);
+		$event->setOfflineRegistrations(1);
+		self::assertSame(0, $event->getVacancies());
+
+		$result = $this->fixture->populateSeats();
+
+		self::assertSame(
+			[
+				['caption' => 1, 'value' => 1],
+				['caption' => 2, 'value' => 2],
+				['caption' => 3, 'value' => 3],
+				['caption' => 4, 'value' => 4],
+				['caption' => 5, 'value' => 5],
+				['caption' => 6, 'value' => 6],
+				['caption' => 7, 'value' => 7],
+				['caption' => 8, 'value' => 8],
+				['caption' => 9, 'value' => 9],
+				['caption' => 10, 'value' => 10],
+			],
+			$result
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateSeatsForUnlimitedRegistrationsReturnsMaximumValues()
+	{
+		$event = $this->fixture->getEvent();
+		self::assertTrue($event->hasVacancies());
+
+		$result = $this->fixture->populateSeats();
+
+		self::assertSame(
+			[
+				['caption' => 1, 'value' => 1],
+				['caption' => 2, 'value' => 2],
+				['caption' => 3, 'value' => 3],
+				['caption' => 4, 'value' => 4],
+				['caption' => 5, 'value' => 5],
+				['caption' => 6, 'value' => 6],
+				['caption' => 7, 'value' => 7],
+				['caption' => 8, 'value' => 8],
+				['caption' => 9, 'value' => 9],
+				['caption' => 10, 'value' => 10],
+			],
+			$result
+		);
+	}
 }

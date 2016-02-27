@@ -1,6 +1,7 @@
 1.0.0 - currently working on
 
 Features:
+- [#5650] Limit the number of seats in the registration drop-down
 - [#5653] Add a configuration for PDF rendering of the manual
 - [#5628] Add a RealURL auto configuration
 
