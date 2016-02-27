@@ -5,6 +5,8 @@
 $extensionPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('seminars');
 return array(
 	'oliverklee\\seminars\\realurl\\configuration' => $extensionPath . 'Classes/RealUrl/Configuration.php',
+	'oliverklee\\seminars\\schedulertasks\\mailnotifier' => $extensionPath . 'Classes/SchedularTasks/MailNotifier.php',
+	'oliverklee\\seminars\\schedulertasks\\mailnotifierconfiguration' => $extensionPath . 'Classes/SchedularTasks/MailNotifierConfiguration.php',
 	'tx_seminars_tcemainprocdm' => $extensionPath . 'Classes/class.tx_seminars_tcemain.php',
 	'tx_seminars_backend_abstracteventmailform' => $extensionPath . 'Classes/BackEnd/AbstractEventMailForm.php',
 	'tx_seminars_backend_abstractlist' => $extensionPath . 'Classes/BackEnd/AbstractList.php',
@@ -29,7 +31,6 @@ return array(
 	'tx_seminars_bagbuilder_organizer' => $extensionPath . 'Classes/BagBuilder/Organizer.php',
 	'tx_seminars_bagbuilder_registration' => $extensionPath . 'Classes/BagBuilder/Registration.php',
 	'tx_seminars_bagbuilder_speaker' => $extensionPath . 'Classes/BagBuilder/Speaker.php',
-	'tx_seminars_cli_mailnotifier' => $extensionPath . 'Classes/Cli/MailNotifier.php',
 	'tx_seminars_configcheck' => $extensionPath . 'Classes/ConfigCheck.php',
 	'tx_seminars_csv_abstractbackendaccesscheck' => $extensionPath . 'Classes/Csv/AbstractBackEndAccessCheck.php',
 	'tx_seminars_csv_abstractlistview' => $extensionPath . 'Classes/Csv/AbstractListView.php',

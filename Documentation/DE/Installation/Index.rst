@@ -1,4 +1,4 @@
-﻿.. ==================================================
+.. ==================================================
 .. FOR YOUR INFORMATION
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
@@ -34,7 +34,7 @@ Installation
    AbmeldungenErlauben/Index
    EineKategorienlisteAnlegen/Index
    SettingUpTheFront-endRegistrationLists/Index
-   BenutzungDesCli(commandLineInterface)/Index
+   BenutzungDesSchedulerTasks/Index
    TestingTheConfiguration/Index
    VonSeminars010xAuf10xAktualisieren/Index
    EineLtereVersionDesSeminarmanagersInstallieren/Index

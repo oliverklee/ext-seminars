@@ -1,4 +1,4 @@
-﻿.. ==================================================
+.. ==================================================
 .. FOR YOUR INFORMATION
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
@@ -13,11 +13,10 @@
 .. role::   php(code)
 
 
-Setting up the command line interface (CLI)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Setting up the Scheduler task
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This extension offers a command line interface to trigger actions
-through the command line e.g. by a cronjob. It can be configured to
+This extension offers a Scheduler Task to trigger actions. It can be configured to
 send reminders to the events' organizers
 
 - if a confirmed event is about to begin, or
@@ -30,13 +29,10 @@ registrations appended as CSV.
 
 To setup the CLI, do the following:
 
-#. Go to the User admin tool in the TYPO3 BE and create a BE user record
-   with the user name “ **\_cli\_seminars** ”. There is no need to
-   provide any further information, just set any password (you will not
-   need it again), save and close.
+#. Set up the Scheduler as described in the manual of the Scheduler extension.
 
 #. Choose/create a FE page where to do some TS setup configuration for
-   the CLI and configure the following:
+   the Scheduler task and configure the following:
 
 - Set the option “ *sendCancelationDeadlineReminder* ” to 1 to enable
   the cancellation deadline reminder.
@@ -53,16 +49,13 @@ To setup the CLI, do the following:
   consider the corresponding section about CSV-File Attachmentfor more
   details.
 
-#. In your cronjob definition, use the following command to start the
-   script: **/[** absolute path of your TYPO3 installation
-   **]/typo3/cli\_dispatch.phpsh seminars [** configuration page UID
-   **]**
+#. Add a seminars Scheduler task and provide UID of the page with the configuration.
 
 
 **CSV-File Attachment**
 """""""""""""""""""""""
 
-The mails send via CLI can contain a CSV file with the registrations
+The mails send via Scheduler can contain a CSV file with the registrations
 to the event the mail is sent for. To customize the contents of the
 CSV file use the following options:
 

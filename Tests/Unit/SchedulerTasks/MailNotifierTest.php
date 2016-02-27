@@ -1,4 +1,6 @@
 <?php
+namespace OliverKlee\Seminars\Tests\Unit\SchedulerTasks;
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -11,63 +13,65 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Lang\LanguageService;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * Test case.
  *
- * @package TYPO3
- * @subpackage tx_seminars
- *
  * @author Saskia Metzler <saskia@merlin.owl.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
+class MailNotifierTest extends \Tx_Phpunit_TestCase {
 	/**
-	 * @var Tx_Seminars_Cli_MailNotifier
+	 * @var MailNotifier
 	 */
-	protected $fixture = NULL;
+	protected $subject = NULL;
 
 	/**
-	 * @var Tx_Oelib_TestingFramework
+	 * @var \Tx_Oelib_TestingFramework
 	 */
 	protected $testingFramework = NULL;
 
 	/**
-	 * @var Tx_Oelib_Configuration
+	 * @var \Tx_Oelib_Configuration
 	 */
 	protected $configuration = NULL;
 
 	/**
-	 * @var Tx_Oelib_EmailCollector
+	 * @var \Tx_Oelib_EmailCollector
 	 */
 	protected $mailer = NULL;
 
 	/**
-	 * @var language
+	 * @var LanguageService
 	 */
 	private $languageBackup = NULL;
 
-	protected function setUp() {
-		$this->languageBackup = $GLOBALS['LANG'];
-		$languageService = new LanguageService();
-		$languageService->init('en');
-		$GLOBALS['LANG'] = $languageService;
+	/**
+	 * @var LanguageService
+	 */
+	private $languageService = null;
 
-		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
-		/** @var Tx_Oelib_MailerFactory $mailerFactory */
-		$mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
+	protected function setUp() {
+		$this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
+
+		$this->languageService = new LanguageService();
+		$this->languageService->init('en');
+		$GLOBALS['LANG'] = $this->languageService;
+
+		$this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+		/** @var \Tx_Oelib_MailerFactory $mailerFactory */
+		$mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
 		$mailerFactory->enableTestMode();
 		$this->mailer = $mailerFactory->getMailer();
 
-		define('TYPO3_cliKey', 'seminars');
-		$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['cliKeys'][TYPO3_cliKey][1] = '_cli_seminars_test';
-		$this->testingFramework->createBackEndUser(array('username' => '_cli_seminars_test'));
-
-		Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin', new Tx_Oelib_Configuration());
-		$this->configuration = new Tx_Oelib_Configuration();
+		\Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin', new \Tx_Oelib_Configuration());
+		$this->configuration = new \Tx_Oelib_Configuration();
 		$this->configuration->setData(array(
 			'sendEventTakesPlaceReminderDaysBeforeBeginDate' => 2,
 			'sendCancelationDeadlineReminder' => TRUE,
@@ -76,16 +80,19 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 			'fieldsFromAttendanceForEmailCsv' => 'title',
 			'showAttendancesOnRegistrationQueueInEmailCsv' => TRUE
 		));
-		Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
+		\Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
-		$this->fixture = new Tx_Seminars_Cli_MailNotifier();
+		$this->subject = new MailNotifier();
+
+		$configurationPageUid = $this->testingFramework->createFrontEndPage();
+		$this->subject->setConfigurationPageUid($configurationPageUid);
 	}
 
 	protected function tearDown() {
 		$this->testingFramework->cleanUp();
 
 		$GLOBALS['LANG'] = $this->languageBackup;
-		$this->languageBackup = NULL;
+		$this->languageBackup = null;
 	}
 
 
@@ -139,7 +146,7 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	/**
 	 * Returns the first e-mail attachment (if there is any).
 	 *
-	 * @return Swift_Mime_Attachment
+	 * @return \Swift_Mime_Attachment
 	 */
 	protected function getFirstEmailAttachment() {
 		$children = $this->mailer->getFirstSentEmail()->getChildren();
@@ -228,82 +235,52 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		);
 	}
 
-
 	/*
-	 * Tests for setConfigurationPage
+	 * Basic tests
 	 */
 
 	/**
 	 * @test
 	 */
-	public function setConfigurationPageThrowsExceptionIfNoPidIsProvided() {
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'Please provide the UID for the page with the configuration ' .
-				'for the CLI module.'
-		);
-
-		unset($_SERVER['argv'][1]);
-
-		$this->fixture->setConfigurationPage();
+	public function classIsSchedulerTask() {
+		self::assertInstanceOf(AbstractTask::class, $this->subject);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setConfigurationPageThrowsExceptionIfZeroIsProvidedAsPid() {
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'The provided UID for the page with the configuration was 0, which was not found to be a UID of an existing page. ' .
-				'Please provide the UID of an existing page.'
-		);
+	public function executeWithoutPageConfigurationReturnsFalse() {
+		$subject = new MailNotifier();
 
-		$_SERVER['argv'][1] = 0;
+		$result = $subject->execute();
 
-		$this->fixture->setConfigurationPage();
+		self::assertFalse($result);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setConfigurationPageThrowsExceptionIfNonExistingPidIsProvided() {
-		$invalidPid = $this->testingFramework->getAutoIncrement('pages');
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'The provided UID for the page with the configuration was ' . $invalidPid .
-				', which was not found to be a UID of an existing page. Please provide the UID of an existing page.'
-		);
+	public function executeWithZeroPageConfigurationReturnsFalse() {
+		$subject = new MailNotifier();
+		$subject->setConfigurationPageUid(0);
 
-		$_SERVER['argv'][1] = $invalidPid;
+		$result = $subject->execute();
 
-		$this->fixture->setConfigurationPage();
+		self::assertFalse($result);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setConfigurationPageThrowsNoExceptionIfAnExistingPidIsProvided() {
-		$_SERVER['argv'][1] = $this->testingFramework->createFrontEndPage();
-
-		$this->fixture->setConfigurationPage();
-	}
-
-	/**
-	 * @test
-	 */
-	public function setConfigurationPageSetsTheExistingPidIsProvidedForThePageFinder() {
+	public function executeWithPageConfigurationReturnsTrue() {
+		$subject = new MailNotifier();
 		$pageUid = $this->testingFramework->createFrontEndPage();
+		$subject->setConfigurationPageUid($pageUid);
 
-		$_SERVER['argv'][1] = $pageUid;
+		$result = $subject->execute();
 
-		$this->fixture->setConfigurationPage();
-
-		self::assertSame(
-			$pageUid,
-			Tx_Oelib_PageFinder::getInstance()->getPageUid()
-		);
+		self::assertTrue($result);
 	}
-
 
 	/*
 	 * Tests concerning sendEventTakesPlaceReminders
@@ -314,11 +291,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendEventTakesPlaceRemindersForConfirmedEventWithinConfiguredTimeFrameSendsReminder() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertSame(
 			1,
@@ -330,20 +307,20 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceSubject() {
-		/** @var Tx_Seminars_Model_BackEndUser $user */
-		$user = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
-		$GLOBALS['LANG']->lang = $user->getLanguage();
-		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
-		$subject = $GLOBALS['LANG']->getLL('email_eventTakesPlaceReminderSubject');
+		/** @var \Tx_Seminars_Model_BackEndUser $user */
+		$user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
+		$this->languageService->lang = $user->getLanguage();
+		$this->languageService->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
+		$subject = $this->languageService->getLL('email_eventTakesPlaceReminderSubject');
 		$subject = str_replace('%event', '', $subject);
 		$subject = str_replace('%days', 2, $subject);
 
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			$subject,
@@ -355,20 +332,20 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceMessage() {
-		/** @var Tx_Seminars_Model_BackEndUser $user */
-		$user = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
-		$GLOBALS['LANG']->lang = $user->getLanguage();
-		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
-		$message = $GLOBALS['LANG']->getLL('email_eventTakesPlaceReminder');
+		/** @var \Tx_Seminars_Model_BackEndUser $user */
+		$user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
+		$this->languageService->lang = $user->getLanguage();
+		$this->languageService->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
+		$message = $this->languageService->getLL('email_eventTakesPlaceReminder');
 		$message = str_replace('%event', '', $message);
 		$message = str_replace('%organizer', 'Mr. Test', $message);
 
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			substr($message, 0, strpos($message, '%') - 1),
@@ -381,15 +358,15 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendEventTakesPlaceRemindersForTwoConfirmedEventsWithinConfiguredTimeFrameSendsTwoReminders() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertSame(
 			2,
@@ -402,8 +379,8 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendEventTakesPlaceRemindersForConfirmedEventWithTwoOrganizersAndWithinConfiguredTimeFrameSendsTwoReminders() {
 		$eventUid = $this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
@@ -412,7 +389,7 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid);
 		$this->testingFramework->changeRecord('tx_seminars_seminars', $eventUid, array('organizers' => 2));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertSame(
 			2,
@@ -425,11 +402,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendEventTakesPlaceRemindersSetsSentFlagInTheDatabaseWhenReminderWasSent() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertTrue(
 			$this->testingFramework->existsRecord(
@@ -443,12 +420,12 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendEventTakesPlaceRemindersForConfirmedEventWithinConfiguredTimeFrameAndReminderSentFlagTrueSendsNoReminder() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 			'event_takes_place_reminder_sent' => 1,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertNull(
 			$this->mailer->getFirstSentEmail()
@@ -460,11 +437,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendEventTakesPlaceRemindersForConfirmedEventWithPassedBeginDateSendsNoReminder() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertNull(
 			$this->mailer->getFirstSentEmail()
@@ -476,11 +453,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendEventTakesPlaceRemindersForConfirmedEventBeginningLaterThanConfiguredTimeFrameSendsNoReminder() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (3 * Tx_Oelib_Time::SECONDS_PER_DAY),
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (3 * \Tx_Oelib_Time::SECONDS_PER_DAY),
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertNull(
 			$this->mailer->getFirstSentEmail()
@@ -492,12 +469,12 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendEventTakesPlaceRemindersForConfirmedEventAndNoTimeFrameConfiguredSendsNoReminder() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 		$this->configuration->setAsInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate', 0);
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertNull(
 			$this->mailer->getFirstSentEmail()
@@ -509,11 +486,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendEventTakesPlaceRemindersForCanceledEventWithinConfiguredTimeFrameSendsNoReminder() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertNull(
 			$this->mailer->getFirstSentEmail()
@@ -525,11 +502,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendEventTakesPlaceRemindersForPlannedEventWithinConfiguredTimeFrameSendsNoReminder() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertNull(
 			$this->mailer->getFirstSentEmail()
@@ -546,11 +523,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendCancellationDeadlineRemindersForPlannedEventAndOptionEnabledSendsReminder() {
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 		)));
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertSame(
 			1,
@@ -562,19 +539,19 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineSubject() {
-		/** @var Tx_Seminars_Model_BackEndUser $user */
-		$user = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
-		$GLOBALS['LANG']->lang = $user->getLanguage();
-		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
-		$subject = $GLOBALS['LANG']->getLL('email_cancelationDeadlineReminderSubject');
+		/** @var \Tx_Seminars_Model_BackEndUser $user */
+		$user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
+		$this->languageService->lang = $user->getLanguage();
+		$this->languageService->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
+		$subject = $this->languageService->getLL('email_cancelationDeadlineReminderSubject');
 		$subject = str_replace('%event', '', $subject);
 
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 		)));
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertContains(
 			$subject,
@@ -586,20 +563,20 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage() {
-		/** @var Tx_Seminars_Model_BackEndUser $user */
-		$user = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_BackEndUser::class)->findByCliKey();
-		$GLOBALS['LANG']->lang = $user->getLanguage();
-		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
-		$message = $GLOBALS['LANG']->getLL('email_cancelationDeadlineReminder');
+		/** @var \Tx_Seminars_Model_BackEndUser $user */
+		$user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
+		$this->languageService->lang = $user->getLanguage();
+		$this->languageService->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
+		$message = $this->languageService->getLL('email_cancelationDeadlineReminder');
 		$message = str_replace('%event', '', $message);
 		$message = str_replace('%organizer', 'Mr. Test', $message);
 
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 		)));
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertContains(
 			substr($message, 0, strpos($message, '%') - 1),
@@ -612,15 +589,15 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendCancellationDeadlineRemindersForTwoPlannedEventsAndOptionEnabledSendsTwoReminders() {
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 		)));
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 		)));
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertSame(
 			2,
@@ -633,8 +610,8 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendCancellationDeadlineRemindersForPlannedEventWithTwoOrganizersAndOptionEnabledSendsTwoReminders() {
 		$eventUid = $this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 		));
 		$this->addSpeaker($eventUid);
 		$organizerUid = $this->testingFramework->createRecord(
@@ -648,7 +625,7 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 			'tx_seminars_seminars', $eventUid, array('organizers' => 2)
 		);
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertSame(
 			2,
@@ -661,11 +638,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendCancellationDeadlineRemindersSetsFlagInTheDatabaseWhenReminderWasSent() {
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 		)));
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertTrue(
 			$this->testingFramework->existsRecord('tx_seminars_seminars', 'cancelation_deadline_reminder_sent = 1')
@@ -677,12 +654,12 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendCancellationDeadlineRemindersForPlannedEventAndOptionEnabledAndReminderSentFlagTrueSendsNoReminder() {
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 			'cancelation_deadline_reminder_sent' => 1,
 		)));
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertNull(
 			$this->mailer->getFirstSentEmail()
@@ -694,11 +671,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendCancellationDeadlineRemindersForPlannedEventWithPassedBeginDateSendsNoReminder() {
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 		)));
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertNull(
 			$this->mailer->getFirstSentEmail()
@@ -710,11 +687,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendCancellationDeadlineRemindersForPlannedEventWithSpeakersDeadlineNotYetReachedSendsNoReminder() {
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (3 * Tx_Oelib_Time::SECONDS_PER_DAY),
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (3 * \Tx_Oelib_Time::SECONDS_PER_DAY),
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 		)));
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertNull(
 			$this->mailer->getFirstSentEmail()
@@ -726,12 +703,12 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendCancellationDeadlineRemindersForPlannedEventAndOptionDisabledSendsNoReminder() {
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 		)));
 		$this->configuration->setAsBoolean('sendCancelationDeadlineReminder', FALSE);
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertNull(
 			$this->mailer->getFirstSentEmail()
@@ -743,11 +720,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendCancellationDeadlineRemindersForCanceledEventAndOptionEnabledSendsNoReminder() {
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED,
 		)));
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertNull(
 			$this->mailer->getFirstSentEmail()
@@ -759,11 +736,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendCancellationDeadlineRemindersForConfirmedEventAndOptionEnabledSendsNoReminder() {
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		)));
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertNull(
 			$this->mailer->getFirstSentEmail()
@@ -782,11 +759,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendRemindersToOrganizersSendsEmailWithOrganizerAsRecipient() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertArrayHasKey(
 			'MrTest@example.com',
@@ -799,11 +776,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendRemindersToOrganizersSendsEmailWithOrganizerAsSender() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertArrayHasKey(
 			'MrTest@example.com',
@@ -816,8 +793,8 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendRemindersToOrganizersForEventWithTwoOrganizersSendsEmailWithFirstOrganizerAsSender() {
 		$eventUid = $this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 		$organizerUid = $this->testingFramework->createRecord(
 			'tx_seminars_organizers',
@@ -826,7 +803,7 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		$this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid);
 		$this->testingFramework->changeRecord('tx_seminars_seminars', $eventUid, array('organizers' => 2));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertArrayHasKey(
 			'MrTest@example.com',
@@ -846,11 +823,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		$this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', TRUE);
 
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertSame(
 			array(),
@@ -865,8 +842,8 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		$this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', TRUE);
 
 		$eventUid = $this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances', array(
@@ -876,7 +853,7 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertSame(
 			'registrations.csv',
@@ -890,8 +867,8 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	public function sendRemindersToOrganizersForEventWithAttendancesAndAttachCsvFileFalseNotAttachesRegistrationsCsv() {
 		$this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', FALSE);
 		$eventUid = $this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances', array(
@@ -901,7 +878,7 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertSame(
 			array(),
@@ -915,8 +892,8 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	public function sendRemindersToOrganizersSendsEmailWithCsvFileWhichContainsRegistration() {
 		$this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', TRUE);
 		$eventUid = $this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances', array(
@@ -926,7 +903,7 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			'test registration' . CRLF,
@@ -942,8 +919,8 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		$this->configuration->setAsString('fieldsFromFeUserForEmailCsv', 'email');
 
 		$eventUid = $this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
 		$this->testingFramework->createRecord(
@@ -954,7 +931,7 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			'foo@bar.com',
@@ -968,8 +945,8 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvSendsEmailWithCsvWithRegistrationsOnQueue() {
 		$this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', TRUE);
 		$eventUid = $this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
 		$this->testingFramework->createRecord(
@@ -988,7 +965,7 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			'on queue',
@@ -1004,8 +981,8 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 		$this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', FALSE);
 
 		$eventUid = $this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
 		$this->testingFramework->createRecord(
@@ -1024,7 +1001,7 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertNotContains(
 			'on queue',
@@ -1042,12 +1019,12 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendRemindersToOrganizersSendsReminderWithSubjectWithEventTitle() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 			'title' => 'test event'
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			'test event',
@@ -1060,11 +1037,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendRemindersToOrganizersSendsReminderWithSubjectWithDaysUntilBeginDate() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			'2',
@@ -1082,11 +1059,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendRemindersToOrganizersSendsReminderWithMessageWithOrganizerName() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			'Mr. Test',
@@ -1099,12 +1076,12 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendRemindersToOrganizersSendsReminderWithMessageWithEventTitle() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 			'title' => 'test event'
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			'test event',
@@ -1117,11 +1094,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendRemindersToOrganizersSendsReminderWithMessageWithEventUid() {
 		$uid = $this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			(string) $uid,
@@ -1134,11 +1111,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendRemindersToOrganizersSendsReminderWithMessageWithDaysUntilBeginDate() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			'2',
@@ -1151,16 +1128,16 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendRemindersToOrganizersSendsReminderWithMessageWithEventsBeginDate() {
 		$this->addSpeaker($this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
 		)));
 
-		$this->fixture->sendCancellationDeadlineReminders();
+		$this->subject->sendCancellationDeadlineReminders();
 
 		self::assertContains(
 			strftime(
 				$this->configuration->getAsString('dateFormatYMD'),
-				$GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY
+				$GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY
 			),
 			$this->mailer->getFirstSentEmail()->getBody()
 		);
@@ -1171,11 +1148,11 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendRemindersToOrganizersForEventWithNoRegistrationSendsReminderWithMessageWithNumberOfRegistrations() {
 		$this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			'0',
@@ -1188,8 +1165,8 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	 */
 	public function sendRemindersToOrganizersForEventWithOneRegistrationsSendsReminderWithMessageWithNumberOfRegistrations() {
 		$eventUid = $this->createSeminarWithOrganizer(array(
-			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-			'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+			'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+			'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
 		));
 		$this->testingFramework->createRecord(
 			'tx_seminars_attendances', array(
@@ -1199,7 +1176,7 @@ class Tx_Seminars_Tests_Unit_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 			)
 		);
 
-		$this->fixture->sendEventTakesPlaceReminders();
+		$this->subject->sendEventTakesPlaceReminders();
 
 		self::assertContains(
 			'1',

@@ -23,6 +23,10 @@
 			<label index="email_timeAt">at %s</label>
 			<label index="email_timeTo">to</label>
 			<label index="label_hours">h</label>
+			<label index="schedulerTasks.mailNotifier.name">E-mail notifications</label>
+			<label index="schedulerTasks.mailNotifier.description">This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</label>
+			<label index="schedulerTasks.fields.page-uid">UID of the page with the TypoScript configuration</label>
+			<label index="schedulerTasks.errors.page-uid">Please enter the UID of an existing page.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="email_hello_informal">Hallo</label>
@@ -37,6 +41,10 @@
 			<label index="email_timeAt">um %s Uhr</label>
 			<label index="email_timeTo">bis</label>
 			<label index="label_hours">Uhr</label>
+			<label index="schedulerTasks.mailNotifier.name">E-Mail-Benachrichtigungen</label>
+			<label index="schedulerTasks.mailNotifier.description">Dieser Task verschickt Erinnerungen per Mail, darunter Erinnerungen, dass eine Veranstaltung demnächst stattfindet oder dass die Absagefrist abläuft.</label>
+			<label index="schedulerTasks.fields.page-uid">UID der Seite mit der TypoScript-Konfiguration</label>
+			<label index="schedulerTasks.errors.page-uid">Bitte geben Sie die UID einer existierenden Seite an.</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="email_hello_informal">Cher</label>
@@ -93,6 +101,10 @@
 			<label index="email_timeFrom">from %s</label>
 			<label index="email_timeAt">at %s</label>
 			<label index="email_timeTo">to</label>
+			<label index="schedulerTasks.mailNotifier.name">E-mail notifications</label>
+			<label index="schedulerTasks.mailNotifier.description">This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</label>
+			<label index="schedulerTasks.fields.page-uid">UID of the page with the TypoScript configuration</label>
+			<label index="schedulerTasks.errors.page-uid">Please enter the UID of an existing page.</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="email_hello_informal">Dear</label>

@@ -1,4 +1,4 @@
-﻿.. ==================================================
+.. ==================================================
 .. FOR YOUR INFORMATION
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
@@ -13,13 +13,11 @@
 .. role::   php(code)
 
 
-Benutzung des CLI (command line interface)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Benutzung des Scheduler-Tasks
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Die Seminars Erweiterung stellt ein CLI zur Verfügung mit dem
-Funktionen via Kommandozeile genutzt werden können, zum Beispiel für
-Cronjob. Das CLI kann zum Versenden von Erinnerungs-E-Mails an die
-Veranstalter bei folgenden Ereignissen benutzt werden:
+Die Seminars-Erweiterung stellt eine Scheduler-Task zur Verfügung, mit dem
+Funktionen man von Erinnerungs-E-Mails versenden kann:
 
 - wenn ein fest zugesagtes Seminar in Kürze anfängt
 
@@ -31,10 +29,8 @@ Anhang eine CSV-Datei mit der aktuellen Teilnehmerliste.
 
 Die folgenden Dinge sind zu konfigurieren:
 
-#. Im User Admin Tool im TYPO3 BE muss zunächst ein neuer BE Benutzer mit
-   dem Benutzernamen “ **\_cli\_seminars** ” angelegt werden. Es sind
-   keine weiteren Angaben für diesen Benutzer erforderlich, auch das
-   einzugebende Passwort wird nicht wieder gebraucht.
+#. Richten Sie den Scheduler ein, wie es im Manual der Scheduler-Extension
+   beschrieben ist.
 
 #. Für die TS Setup-Konfiguration des CLI ist eine beliebige FE Seite
    auszuwählen/zu erstellen. Auf dieser Seite muss folgendes konfiguriert
@@ -56,16 +52,14 @@ Die folgenden Dinge sind zu konfigurieren:
   Informationen über diese Optionen befinden sich im Abschnitt über CSV-
   Dateianhang.
 
-#. In der Cronjob-Datei startet das folgende Kommando das CLI-Skript:
-   **/[** absoluter Pfad derTYPO3-Installation
-   **]/typo3/cli\_dispatch.phpsh seminars [** UID der Seite mit der
-   Konfiguration **]**
+#. Legen Sie eine Seminars-Scheduler-Task an und geben Sie die UID der Seite
+   mit der Konfiguration an.
 
 
 **CSV-Dateianhang**
 """""""""""""""""""
 
-**Die E-Mails die mit dem CLI gesendet werden, können eine CSV-Datei
+**Die E-Mails, die mit dem Scheduler-Task gesendet werden, können eine CSV-Datei
 als Anhang enthalten, welche die Anmeldung, der zur Mail zugehörigen
 Veranstaltung enthält. Um diese Datei zu modifizieren benutzen Sie
 bitte die folgenden Optionen:**

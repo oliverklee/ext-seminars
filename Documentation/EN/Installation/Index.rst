@@ -1,4 +1,4 @@
-﻿.. ==================================================
+.. ==================================================
 .. FOR YOUR INFORMATION
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
@@ -34,7 +34,7 @@ Installation
    EnablingUnregistration/Index
    SettingUpAListOfCategories/Index
    SettingUpTheFront-endRegistrationLists/Index
-   SettingUpTheCommandLineInterface(cli)/Index
+   SettingUpTheSchedulerTask/Index
    TestingTheConfiguration/Index
    UpgradingFromA010xReleaseTo10x/Index
    GettingAnOlderVersionOfTheSeminarManager/Index

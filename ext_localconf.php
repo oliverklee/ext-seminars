@@ -62,10 +62,12 @@ $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['pro
 	43
 );
 
-// registers the seminars command line interface
-$TYPO3_CONF_VARS['SC_OPTIONS']['GLOBAL']['cliKeys']['seminars'] = array(
-	'EXT:seminars/Classes/Cli/CliRunner.php', '_CLI_seminars',
-);
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][\OliverKlee\Seminars\SchedulerTasks\MailNotifier::class] = [
+	'extension' => $_EXTKEY,
+	'title' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xml:schedulerTasks.mailNotifier.name',
+	'description' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xml:schedulerTasks.mailNotifier.description',
+	'additionalFields' => \OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration::class,
+];
 
 // RealURL autoconfiguration
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['seminars']
