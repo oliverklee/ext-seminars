@@ -15,10 +15,9 @@
 /**
  * This is mere a class used for unit tests. Don't use it for any other purpose.
  *
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-final class tx_seminars_timeslotchild extends Tx_Seminars_OldModel_TimeSlot
+final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot extends Tx_Seminars_OldModel_TimeSlot
 {
     /**
      * Sets the place field of the time slot.

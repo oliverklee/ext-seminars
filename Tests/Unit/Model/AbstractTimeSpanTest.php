@@ -21,13 +21,13 @@
 class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestCase
 {
     /**
-     * @var tx_seminars_tests_fixtures_TestingTimeSpan
+     * @var \Tx_Seminars_Model_AbstractTimeSpan
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->fixture = new tx_seminars_tests_fixtures_TestingTimeSpan();
+        $this->fixture = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
     }
 
     /**

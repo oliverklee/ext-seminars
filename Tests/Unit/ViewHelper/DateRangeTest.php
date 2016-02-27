@@ -82,7 +82,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends Tx_Phpunit_TestCas
      */
     public function renderWithTimeSpanWithNoDatesReturnMessageWillBeAnnounced()
     {
-        $timeSpan = new tx_seminars_tests_fixtures_TestingTimeSpan();
+        /** @var Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
+        $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
         $timeSpan->setData(array());
 
         self::assertSame(
@@ -96,7 +97,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends Tx_Phpunit_TestCas
      */
     public function renderWithTimeSpanWithBeginDateOnlyRendersOnlyBeginDate()
     {
-        $timeSpan = new tx_seminars_tests_fixtures_TestingTimeSpan();
+        /** @var Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
+        $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
 
         self::assertSame(
@@ -110,7 +112,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends Tx_Phpunit_TestCas
      */
     public function renderWithTimeSpanWithEqualBeginAndEndDateReturnsOnlyBeginDate()
     {
-        $timeSpan = new tx_seminars_tests_fixtures_TestingTimeSpan();
+        /** @var Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
+        $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE);
 
@@ -125,7 +128,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends Tx_Phpunit_TestCas
      */
     public function renderWithTimeSpanWithBeginAndEndDateOnSameDayReturnsOnlyBeginDate()
     {
-        $timeSpan = new tx_seminars_tests_fixtures_TestingTimeSpan();
+        /** @var Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
+        $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + 3600);
 
@@ -142,7 +146,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends Tx_Phpunit_TestCas
     {
         $this->configuration->setAsBoolean('abbreviateDateRanges', false);
 
-        $timeSpan = new tx_seminars_tests_fixtures_TestingTimeSpan();
+        /** @var Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
+        $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $endDate = self::BEGIN_DATE + (2 * 86400);
         $timeSpan->setEndDateAsUnixTimeStamp($endDate);
@@ -160,7 +165,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends Tx_Phpunit_TestCas
     {
         $this->configuration->setAsBoolean('abbreviateDateRanges', true);
 
-        $timeSpan = new tx_seminars_tests_fixtures_TestingTimeSpan();
+        /** @var Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
+        $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $endDate = self::BEGIN_DATE + (2 * 86400);
         $timeSpan->setEndDateAsUnixTimeStamp($endDate);
@@ -178,7 +184,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends Tx_Phpunit_TestCas
     {
         $this->configuration->setAsBoolean('abbreviateDateRanges', true);
 
-        $timeSpan = new tx_seminars_tests_fixtures_TestingTimeSpan();
+        /** @var Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
+        $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $endDate = self::BEGIN_DATE + (32 * 86400);
         $timeSpan->setEndDateAsUnixTimeStamp($endDate);
@@ -196,7 +203,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends Tx_Phpunit_TestCas
     {
         $this->configuration->setAsBoolean('abbreviateDateRanges', true);
 
-        $timeSpan = new tx_seminars_tests_fixtures_TestingTimeSpan();
+        /** @var Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
+        $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $endDate = self::BEGIN_DATE + (366 * 86400);
         $timeSpan->setEndDateAsUnixTimeStamp($endDate);
@@ -215,7 +223,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends Tx_Phpunit_TestCas
         $this->configuration->setAsBoolean('abbreviateDateRanges', false);
         $dash = '#DASH#';
 
-        $timeSpan = new tx_seminars_tests_fixtures_TestingTimeSpan();
+        /** @var Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
+        $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
         $endDate = self::BEGIN_DATE + (2 * 86400);
         $timeSpan->setEndDateAsUnixTimeStamp($endDate);

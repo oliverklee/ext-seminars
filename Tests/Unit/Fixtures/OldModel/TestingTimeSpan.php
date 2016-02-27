@@ -15,16 +15,10 @@
 /**
  * This is mere a class used for unit tests. Don't use it for any other purpose.
  *
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-final class tx_seminars_timespanchild extends Tx_Seminars_OldModel_AbstractTimeSpan
+final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan extends Tx_Seminars_OldModel_AbstractTimeSpan
 {
-    /** same as class name */
-    public $prefixId = 'tx_seminars_timespanchild';
-    /**  path to this script relative to the extension dir */
-    public $scriptRelPath = 'Tests/Unit/fixtures/class.tx_seminars_timespanchild.php';
-
     /** string with the name of the SQL table this class corresponds to */
     public $tableName = 'tx_seminars_unit_testing';
     /** associative array with the values from/for the DB */

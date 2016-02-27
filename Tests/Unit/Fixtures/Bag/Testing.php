@@ -15,10 +15,9 @@
 /**
  * This aggregate class holds a bunch of test objects and allows to iterate over them.
  *
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing extends tx_seminars_Bag_Abstract
+class Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing extends Tx_Seminars_Bag_Abstract
 {
     /**
      * The constructor. Creates a bag that contains test records and allows to iterate over them.

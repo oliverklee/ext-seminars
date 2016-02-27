@@ -26,7 +26,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
     const TIME_FORMAT = '%H:%M';
 
     /**
-     * @var tx_seminars_timespanchild
+     * @var Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan
      */
     private $subject = null;
 
@@ -34,7 +34,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
     {
         $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
 
-        $this->subject = new tx_seminars_timespanchild(array('timeFormat' => self::TIME_FORMAT));
+        $this->subject = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan(array('timeFormat' => self::TIME_FORMAT));
     }
 
     /*

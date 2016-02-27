@@ -40,7 +40,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends Tx_Phpunit_TestCase
             )
         );
 
-        $this->fixture = new tx_seminars_timeslotchild($fixtureUid);
+        $this->fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot($fixtureUid);
     }
 
     protected function tearDown()

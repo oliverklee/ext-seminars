@@ -1,6 +1,7 @@
 1.0.0 - currently working on
 
 Features:
+- [#5655] Add a composer.json and a ClassAliasMap file for autoloading
 - [#5656] Automatic canceling/confirmation of events
 - [#5682] Add variables for the e-mail subject
 - [#5676] Add EventMapper::findForAutomaticStatusChange

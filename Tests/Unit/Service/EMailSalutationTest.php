@@ -418,7 +418,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
     {
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        $event = new tx_seminars_seminarchild($eventUid, array());
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, array());
 
         $this->subject->createIntroduction('', $event);
     }
@@ -434,7 +434,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
             array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
         );
 
-        $event = new tx_seminars_seminarchild($eventUid, array(
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, array(
             'dateFormatYMD' => $dateFormatYMD
         ));
 
@@ -459,7 +459,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
             )
         );
 
-        $event = new tx_seminars_seminarchild($eventUid, array(
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, array(
             'dateFormatYMD' => $dateFormatYMD,
             'dateFormatD' => $dateFormatD,
             'abbreviateDateRanges' => 1,
@@ -486,7 +486,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
             )
         );
 
-        $event = new tx_seminars_seminarchild($eventUid, array(
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, array(
             'timeFormat' => $timeFormat,
         ));
 
@@ -511,7 +511,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
             )
         );
 
-        $event = new tx_seminars_seminarchild($eventUid, array('timeFormat' => $timeFormat));
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, array('timeFormat' => $timeFormat));
         $translator = Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars');
         $timeInsert = strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']) . ' ' .
             $translator->translate('email_timeTo') . ' ' .
@@ -538,7 +538,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
             )
         );
 
-        $event = new tx_seminars_seminarchild($eventUid, array('dateFormatYMD' => $dateFormat));
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, array('dateFormatYMD' => $dateFormat));
         $formattedDate = strftime($dateFormat, $GLOBALS['SIM_EXEC_TIME']);
 
         self::assertContains(
@@ -561,7 +561,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
             array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
         );
 
-        $event = new tx_seminars_seminarchild(
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $eventUid,
             array('dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation)
         );
@@ -585,7 +585,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
             array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
         );
 
-        $event = new tx_seminars_seminarchild(
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $eventUid,
             array('dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation)
         );
@@ -609,7 +609,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
             array('begin_date' => $GLOBALS['SIM_EXEC_TIME'])
         );
 
-        $event = new tx_seminars_seminarchild(
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $eventUid,
             array('dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation)
         );

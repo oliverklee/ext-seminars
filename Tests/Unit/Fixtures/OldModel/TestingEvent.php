@@ -15,20 +15,10 @@
 /**
  * This is mere a class used for unit tests. Don't use it for any other purpose.
  *
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-final class tx_seminars_seminarchild extends Tx_Seminars_OldModel_Event
+final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Seminars_OldModel_Event
 {
-    /**
-     * @var string same as class name
-     */
-    public $prefixId = 'tx_seminars_seminarchild';
-    /**
-     * @var string path to this script relative to the extension dir
-     */
-    public $scriptRelPath = 'Tests/Unit/fixtures/class.tx_seminars_seminarchild.php';
-
     /**
      * The constructor.
      *
