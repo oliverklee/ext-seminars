@@ -2333,4 +2333,43 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase {
 			$this->fixture->getPaymentMethods()
 		);
 	}
+
+	/*
+	 * Tests regarding the flag for organizers having been notified about enough attendees.
+	 */
+
+	/**
+	 * @test
+	 */
+	public function haveOrganizersBeenNotifiedAboutEnoughAttendeesByDefaultReturnsFalse() {
+		$this->fixture->setData([]);
+
+		self::assertFalse(
+			$this->fixture->haveOrganizersBeenNotifiedAboutEnoughAttendees()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function haveOrganizersBeenNotifiedAboutEnoughAttendeesReturnsFalseValueFromDatabase() {
+		$this->fixture->setData(['organizers_notified_about_minimum_reached' => 1]);
+
+		self::assertTrue(
+			$this->fixture->haveOrganizersBeenNotifiedAboutEnoughAttendees()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setOrganizersBeenNotifiedAboutEnoughAttendeesMarksItAsTrue() {
+		$this->fixture->setData([]);
+
+		$this->fixture->setOrganizersBeenNotifiedAboutEnoughAttendees();
+
+		self::assertTrue(
+			$this->fixture->haveOrganizersBeenNotifiedAboutEnoughAttendees()
+		);
+	}
 }

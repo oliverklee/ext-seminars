@@ -290,6 +290,7 @@ CREATE TABLE tx_seminars_seminars (
 	requirements int(11) unsigned DEFAULT '0' NOT NULL,
 	dependencies int(11) unsigned DEFAULT '0' NOT NULL,
 	publication_hash text,
+	organizers_notified_about_minimum_reached tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),

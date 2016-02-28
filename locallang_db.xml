@@ -76,6 +76,7 @@
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
 			<label index="tx_seminars_seminars.queue_size">Registration queue</label>
 			<label index="tx_seminars_seminars.offline_attendees">Number of offline-registered attendees:</label>
+			<label index="tx_seminars_seminars.organizers_notified_about_minimum_reached">Organizers have been notified that the minimum number of attendees has been reached</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
 			<label index="tx_seminars_seminars.attendees">Current number of attendees:</label>
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies:</label>
@@ -294,6 +295,7 @@
 			<label index="tx_seminars_seminars.attendees_max">Maximale Anzahl TeilnehmerInnen:</label>
 			<label index="tx_seminars_seminars.queue_size">Warteliste</label>
 			<label index="tx_seminars_seminars.offline_attendees">Anzahl der offline angemeldeten TeilnehmerInnen:</label>
+			<label index="tx_seminars_seminars.organizers_notified_about_minimum_reached">Veranstalter wurde benachrichtigt, dass es genug Teilnehmer gibt</label>
 			<label index="tx_seminars_seminars.target_groups">Zielgruppen:</label>
 			<label index="tx_seminars_seminars.attendees">Momentane Anzahl Anmeldungen:</label>
 			<label index="tx_seminars_seminars.vacancies">Momentane Anzahl freie Plätze:</label>
@@ -2332,6 +2334,7 @@
 			<label index="tx_seminars_seminars.attendees_max">Maximal number of attendees:</label>
 			<label index="tx_seminars_seminars.queue_size">Registration queue</label>
 			<label index="tx_seminars_seminars.offline_attendees">Number of offline-registered attendees:</label>
+			<label index="tx_seminars_seminars.organizers_notified_about_minimum_reached">Organizers have been notified that the minimum number of attendees has been reached</label>
 			<label index="tx_seminars_seminars.target_groups">Target groups:</label>
 			<label index="tx_seminars_seminars.registrations">Registrations:</label>
 			<label index="tx_seminars_seminars.cancelled">Status:</label>

@@ -7,6 +7,7 @@ Features:
 - [#5628] Add a RealURL auto configuration
 
 Bug fixes:
+- [#5648] Also email the organizers when a registration make the event more than possible
 - [#5413] showFeUserFieldsInRegistrationForm does not hide unused markers
 - [#5649] Heading for the FE user gender is missing in the CSV export
 - [#5624] Salutation from onetimeaccount not used for the billing address

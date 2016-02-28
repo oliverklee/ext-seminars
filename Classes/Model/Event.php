@@ -1619,6 +1619,24 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
+	 * Checks whether the organizers have already been informed that the event has enough registrations.
+	 *
+	 * @return bool
+	 */
+	public function haveOrganizersBeenNotifiedAboutEnoughAttendees() {
+		return $this->getAsBoolean('organizers_notified_about_minimum_reached');
+	}
+
+	/**
+	 * Sets that the organizers have already been informed that the event has enough registrations.
+	 *
+	 * @return void
+	 */
+	public function setOrganizersBeenNotifiedAboutEnoughAttendees() {
+		$this->setAsBoolean('organizers_notified_about_minimum_reached', true);
+	}
+
+	/**
 	 * Gets the registrations for this event.
 	 *
 	 * @return Tx_Oelib_List the registrations for this event (both regular and

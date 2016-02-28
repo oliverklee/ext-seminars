@@ -986,15 +986,13 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper {
 	 *
 	 * @return void
 	 */
-	public function sendAdditionalNotification(
-		Tx_Seminars_OldModel_Registration $registration
-	) {
+	public function sendAdditionalNotification(Tx_Seminars_OldModel_Registration $registration) {
 		if ($registration->isOnRegistrationQueue()) {
 			return;
 		}
 
 		$emailReason = $this->getReasonForNotification($registration);
-		if ($emailReason == '') {
+		if ($emailReason === '') {
 			return;
 		}
 
@@ -1018,6 +1016,11 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper {
 		/** @var Tx_Oelib_MailerFactory $mailerFactory */
 		$mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
 		$mailerFactory->getMailer()->send($eMail);
+
+		if ($event->hasEnoughAttendances() && !$event->haveOrganizersBeenNotifiedAboutEnoughAttendees()) {
+			$event->setOrganizersBeenNotifiedAboutEnoughAttendees();
+			$event->commitToDb();
+		}
 	}
 
 	/**
@@ -1029,18 +1032,18 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper {
 	 *                "IsFull" if the event is fully booked, otherwise an empty string
 	 */
 	private function getReasonForNotification(Tx_Seminars_OldModel_Registration $registration) {
-		$result = '';
-
 		$event = $registration->getSeminarObject();
 		if ($event->isFull()) {
-			$result = 'IsFull';
-		// Using "==" instead of ">=" ensures that only one set of e-mails is
-		// sent to the organizers.
-		// This also ensures that no e-mail is send when minAttendances is 0
-		// since this function is only called when at least one registration
-		// is present.
-		} elseif ($event->getAttendances() == $event->getAttendancesMin()) {
+			return 'IsFull';
+		}
+
+		$minimumNeededRegistrations = $event->getAttendancesMin();
+		if ($minimumNeededRegistrations > 0
+			&& !$event->haveOrganizersBeenNotifiedAboutEnoughAttendees()
+			&& $event->hasEnoughAttendances()) {
 			$result = 'EnoughRegistrations';
+		} else {
+			$result = '';
 		}
 
 		return $result;

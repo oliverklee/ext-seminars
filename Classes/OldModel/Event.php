@@ -4617,6 +4617,24 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	}
 
 	/**
+	 * Checks whether the organizers have already been informed that the event has enough registrations.
+	 *
+	 * @return bool
+	 */
+	public function haveOrganizersBeenNotifiedAboutEnoughAttendees() {
+		return $this->getRecordPropertyBoolean('organizers_notified_about_minimum_reached');
+	}
+
+	/**
+	 * Sets that the organizers have already been informed that the event has enough registrations.
+	 *
+	 * @return void
+	 */
+	public function setOrganizersBeenNotifiedAboutEnoughAttendees() {
+		$this->setRecordPropertyBoolean('organizers_notified_about_minimum_reached', true);
+	}
+
+	/**
 	 * Returns the unregistration deadline set by configuration and the begin
 	 * date as UNIX timestamp.
 	 *

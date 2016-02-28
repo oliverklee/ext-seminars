@@ -4330,6 +4330,182 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 	/**
 	 * @test
 	 */
+	public function sendAdditionalNotificationForEventWithNotEnoughAttendancesNotSendsEmail() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid,
+			['attendees_min' => 2, 'attendees_max' => 42]
+		);
+
+		Tx_Seminars_Service_RegistrationManager::purgeInstance();
+		$this->fixture = Tx_Seminars_Service_RegistrationManager::getInstance();
+		$this->fixture->setConfigurationValue(
+			'templateFile',
+			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
+		);
+
+		$registration = $this->createRegistration();
+		$this->fixture->sendAdditionalNotification($registration);
+
+		self::assertNull($this->mailer->getFirstSentEmail());
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForEventWithNotEnoughAttendancesNotSetsNotificationFlag() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid,
+			['attendees_min' => 2, 'attendees_max' => 42]
+		);
+
+		Tx_Seminars_Service_RegistrationManager::purgeInstance();
+		$this->fixture = Tx_Seminars_Service_RegistrationManager::getInstance();
+		$this->fixture->setConfigurationValue(
+			'templateFile',
+			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
+		);
+
+		$registration = $this->createRegistration();
+		$this->fixture->sendAdditionalNotification($registration);
+
+		// This makes sure the event is loaded from DB again.
+		$event = new tx_seminars_seminarchild($this->seminarUid);
+
+		self::assertFalse($event->haveOrganizersBeenNotifiedAboutEnoughAttendees());
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForEventWithMoreThanEnoughAttendancesSendsEnoughAttendancesMail() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid,
+			['attendees_min' => 1, 'attendees_max' => 42]
+		);
+
+		Tx_Seminars_Service_RegistrationManager::purgeInstance();
+		$this->fixture = Tx_Seminars_Service_RegistrationManager::getInstance();
+		$this->fixture->setConfigurationValue(
+			'templateFile',
+			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
+		);
+
+		$this->createRegistration();
+		$registration = $this->createRegistration();
+		$this->fixture->sendAdditionalNotification($registration);
+
+		$firstEmail = $this->mailer->getFirstSentEmail();
+		self::assertNotNull($firstEmail);
+		self::assertContains(
+			sprintf(
+				$this->fixture->translate('email_additionalNotificationEnoughRegistrationsSubject'),
+				$this->seminarUid, ''
+			),
+			$firstEmail->getSubject()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForEventWithEnoughAttendancesSetsNotifiedFlag() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid,
+			['attendees_min' => 1, 'attendees_max' => 42]
+		);
+
+		Tx_Seminars_Service_RegistrationManager::purgeInstance();
+		$this->fixture = Tx_Seminars_Service_RegistrationManager::getInstance();
+		$this->fixture->setConfigurationValue(
+			'templateFile',
+			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
+		);
+
+		$registration = $this->createRegistration();
+		$this->fixture->sendAdditionalNotification($registration);
+
+		// This makes sure the event is loaded from DB again.
+		$event = new tx_seminars_seminarchild($this->seminarUid);
+
+		self::assertTrue($event->haveOrganizersBeenNotifiedAboutEnoughAttendees());
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForEventWithMoreThanEnoughAttendancesSetsNotifiedFlag() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid,
+			['attendees_min' => 1, 'attendees_max' => 42]
+		);
+
+		Tx_Seminars_Service_RegistrationManager::purgeInstance();
+		$this->fixture = Tx_Seminars_Service_RegistrationManager::getInstance();
+		$this->fixture->setConfigurationValue(
+			'templateFile',
+			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
+		);
+
+		$this->createRegistration();
+		$registration = $this->createRegistration();
+		$this->fixture->sendAdditionalNotification($registration);
+
+		// This makes sure the event is loaded from DB again.
+		$event = new tx_seminars_seminarchild($this->seminarUid);
+
+		self::assertTrue($event->haveOrganizersBeenNotifiedAboutEnoughAttendees());
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForEventWithEnoughAttendancesAndOrganizersAlreadyNotifiedNotSendsEmail() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid,
+			['attendees_min' => 1, 'attendees_max' => 42, 'organizers_notified_about_minimum_reached' => 1]
+		);
+
+		Tx_Seminars_Service_RegistrationManager::purgeInstance();
+		$this->fixture = Tx_Seminars_Service_RegistrationManager::getInstance();
+		$this->fixture->setConfigurationValue(
+			'templateFile',
+			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
+		);
+
+		$registration = $this->createRegistration();
+		$this->fixture->sendAdditionalNotification($registration);
+
+		$firstEmail = $this->mailer->getFirstSentEmail();
+		self::assertNull($firstEmail);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendAdditionalNotificationForEventWithMoreThanEnoughAttendancesAndOrganizersAlreadyNotifiedNotSendsEmail() {
+		$this->testingFramework->changeRecord(
+			'tx_seminars_seminars', $this->seminarUid,
+			['attendees_min' => 1, 'attendees_max' => 42, 'organizers_notified_about_minimum_reached' => 1]
+		);
+
+		Tx_Seminars_Service_RegistrationManager::purgeInstance();
+		$this->fixture = Tx_Seminars_Service_RegistrationManager::getInstance();
+		$this->fixture->setConfigurationValue(
+			'templateFile',
+			'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
+		);
+
+		$this->createRegistration();
+		$registration = $this->createRegistration();
+		$this->fixture->sendAdditionalNotification($registration);
+
+		$firstEmail = $this->mailer->getFirstSentEmail();
+		self::assertNull($firstEmail);
+	}
+
+	/**
+	 * @test
+	 */
 	public function sendAdditionalNotificationForEventWithZeroAttendeesMinDoesNotSendAnyMail() {
 		$this->testingFramework->changeRecord(
 			'tx_seminars_seminars', $this->seminarUid,
