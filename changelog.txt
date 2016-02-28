@@ -20,6 +20,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5659] Remove the "used tools" section from the manual
 - [#5658] Replace "language" in the PHPDoc
 - [#5657] Remove the byte order mark from the ReST files
 - [#5642] Only use the status constants from the new event model

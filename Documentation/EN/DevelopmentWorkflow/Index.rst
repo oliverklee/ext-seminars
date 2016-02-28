@@ -27,4 +27,3 @@ Development Workflow
    GettingTheExtensionFromGit/Index
    DevelopmentWorkflowAndCodingStyleGuidelines/Index
    ReleaseChecklist/Index
-   UsedTools/Index
