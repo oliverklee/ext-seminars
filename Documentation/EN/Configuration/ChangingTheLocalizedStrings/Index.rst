@@ -21,7 +21,7 @@ front end and for the e-mails. (The localized strings for the back end
 cannot be changed.)
 
 When you want to change some strings, please don't change
-locallang.xml or pi1/locallang.xml directly as these changes would get
+locallang.xml directly as these changes would get
 overwritten on the next update. Instead, do it like this:
 
 #. Find out the language code of the language for which you'd like to
@@ -30,7 +30,7 @@ overwritten on the next update. Instead, do it like this:
    codes as well.
 
 #. Find out whether the string which you'd like to change is in
-   locallang.xml or pi1/locallang.xml.
+   locallang.xml or FrontEnd/locallang.xml.
 
 #. Find out the array key for that corresponding string.
 
@@ -41,4 +41,4 @@ overwritten on the next update. Instead, do it like this:
   locallang.xml) or
 
 - plugin.tx\_seminars\_pi1.\_LOCAL\_LANG. *language.key* (for strings
-  from pi1/locallang.xml)
+  from FrontEnd/locallang.xml)

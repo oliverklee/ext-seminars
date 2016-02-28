@@ -37,7 +37,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper {
 	 *
 	 * @var string
 	 */
-	public $scriptRelPath = 'locallang.xml';
+	public $scriptRelPath = 'Resources/Private/Language/locallang.xml';
 
 	/**
 	 * @var string the extension key

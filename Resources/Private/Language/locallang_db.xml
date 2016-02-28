@@ -3,7 +3,7 @@
 	<meta type="array">
 		<description></description>
 		<type>database</type>
-		<fileId>EXT:seminars/locallang_db.xml</fileId>
+		<fileId>EXT:seminars/Resources/Langauge/Private/locallang_db.xml</fileId>
 		<labelContext type="array">
 		</labelContext>
 	</meta>

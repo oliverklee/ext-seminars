@@ -310,7 +310,7 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase {
 		/** @var \Tx_Seminars_Model_BackEndUser $user */
 		$user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
 		$this->languageService->lang = $user->getLanguage();
-		$this->languageService->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
+		$this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
 		$subject = $this->languageService->getLL('email_eventTakesPlaceReminderSubject');
 		$subject = str_replace('%event', '', $subject);
 		$subject = str_replace('%days', 2, $subject);
@@ -335,7 +335,7 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase {
 		/** @var \Tx_Seminars_Model_BackEndUser $user */
 		$user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
 		$this->languageService->lang = $user->getLanguage();
-		$this->languageService->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
+		$this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
 		$message = $this->languageService->getLL('email_eventTakesPlaceReminder');
 		$message = str_replace('%event', '', $message);
 		$message = str_replace('%organizer', 'Mr. Test', $message);
@@ -542,7 +542,7 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase {
 		/** @var \Tx_Seminars_Model_BackEndUser $user */
 		$user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
 		$this->languageService->lang = $user->getLanguage();
-		$this->languageService->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
+		$this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
 		$subject = $this->languageService->getLL('email_cancelationDeadlineReminderSubject');
 		$subject = str_replace('%event', '', $subject);
 
@@ -566,7 +566,7 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase {
 		/** @var \Tx_Seminars_Model_BackEndUser $user */
 		$user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
 		$this->languageService->lang = $user->getLanguage();
-		$this->languageService->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
+		$this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
 		$message = $this->languageService->getLL('email_cancelationDeadlineReminder');
 		$message = str_replace('%event', '', $message);
 		$message = str_replace('%organizer', 'Mr. Test', $message);

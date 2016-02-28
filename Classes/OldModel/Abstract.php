@@ -15,8 +15,8 @@ use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 
 // In the back end, include the extension's locallang.xml.
-if ((TYPO3_MODE == 'BE') && is_object($LANG)) {
-    $LANG->includeLLFile('EXT:seminars/locallang.xml');
+if ((TYPO3_MODE === 'BE') && is_object($GLOBALS['LANG'])) {
+    $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
 }
 
 /**
@@ -34,6 +34,13 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
 	 * @var string the extension key
 	 */
 	public $extKey = 'seminars';
+
+	/**
+	 * faking $this->scriptRelPath so the locallang.xml file is found
+	 *
+	 * @var string
+	 */
+	public $scriptRelPath = 'Resources/Private/Language/locallang.xml';
 
 	/**
 	 * @var string the charset that is used for the output

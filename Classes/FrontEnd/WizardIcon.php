@@ -46,7 +46,7 @@ class Tx_Seminars_FrontEnd_WizardIcon {
 	}
 
 	/**
-	 * Reads the [extDir]/locallang.xml and returns the $LOCAL_LANG array found in that file.
+	 * Reads the locallang.xml and returns the $LOCAL_LANG array found in that file.
 	 *
 	 * @return array[] the found language labels
 	 */
@@ -54,7 +54,7 @@ class Tx_Seminars_FrontEnd_WizardIcon {
 		/** @var LocallangXmlParser $xmlParser */
 		$xmlParser = GeneralUtility::makeInstance(LocallangXmlParser::class);
 		$localLanguage = $xmlParser->getParsedData(
-			ExtensionManagementUtility::extPath('seminars') . 'locallang.xml', $GLOBALS['LANG']->lang
+			'EXT:seminars/Resources/Private/Language/locallang.xml', $GLOBALS['LANG']->lang
 		);
 
 		return $localLanguage;

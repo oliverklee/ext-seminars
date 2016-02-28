@@ -60,7 +60,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	protected $placeRelationSorting = 1;
 
 	protected function setUp() {
-		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
+		$GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
 		$this->now = $GLOBALS['SIM_EXEC_TIME'];

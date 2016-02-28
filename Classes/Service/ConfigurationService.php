@@ -29,7 +29,7 @@ class Tx_Seminars_Service_ConfigurationService extends Tx_Oelib_TemplateHelper {
 	 *
 	 * @var string
 	 */
-	public $scriptRelPath = 'locallang.xml';
+	public $scriptRelPath = 'Resources/Private/Language/locallang.xml';
 
 	/**
 	 * @var string the extension key

@@ -41,13 +41,6 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract {
 	public $prefixId = Tx_Seminars_OldModel_Registration::class;
 
 	/**
-	 * faking $this->scriptRelPath so the locallang.xml file is found
-	 *
-	 * @var string
-	 */
-	public $scriptRelPath = 'locallang.xml';
-
-	/**
 	 * @var Tx_Seminars_OldModel_Event the event to which this registration relates
 	 */
 	private $seminar = NULL;

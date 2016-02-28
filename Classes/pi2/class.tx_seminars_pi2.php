@@ -17,7 +17,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 if (is_object($GLOBALS['LANG'])) {
-	$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
+	$GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
 }
 
 require_once(ExtensionManagementUtility::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');

@@ -33,13 +33,6 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	public $prefixId = Tx_Seminars_OldModel_Event::class;
 
 	/**
-	 * faking $this->scriptRelPath so the locallang.xml file is found
-	 *
-	 * @var string
-	 */
-	public $scriptRelPath = 'locallang.xml';
-
-	/**
 	 * @var string the name of the SQL table this class corresponds to
 	 */
 	protected $tableName = 'tx_seminars_seminars';

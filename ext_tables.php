@@ -22,9 +22,11 @@ if (TYPO3_MODE === 'BE') {
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('web', 'txseminarsM2', '', $extPath . 'Classes/BackEnd/');
 }
 
+$ll = 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:';
+
 $GLOBALS['TCA']['tx_seminars_test'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_test',
+		'title' => $ll . 'tx_seminars_test',
 		'readOnly' => 1,
 		'adminOnly' => 1,
 		'rootLevel' => 1,
@@ -47,7 +49,7 @@ $GLOBALS['TCA']['tx_seminars_test'] = array(
 
 $GLOBALS['TCA']['tx_seminars_seminars'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars',
+		'title' => $ll . 'tx_seminars_seminars',
 		'label' => 'title',
 		'type' => 'object_type',
 		'tstamp' => 'tstamp',
@@ -77,7 +79,7 @@ $GLOBALS['TCA']['tx_seminars_seminars'] = array(
 
 $GLOBALS['TCA']['tx_seminars_speakers'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_speakers',
+		'title' => $ll . 'tx_seminars_speakers',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -95,7 +97,7 @@ $GLOBALS['TCA']['tx_seminars_speakers'] = array(
 
 $GLOBALS['TCA']['tx_seminars_attendances'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_attendances',
+		'title' => $ll . 'tx_seminars_attendances',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -114,7 +116,7 @@ $GLOBALS['TCA']['tx_seminars_attendances'] = array(
 
 $GLOBALS['TCA']['tx_seminars_sites'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_sites',
+		'title' => $ll . 'tx_seminars_sites',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -129,7 +131,7 @@ $GLOBALS['TCA']['tx_seminars_sites'] = array(
 
 $GLOBALS['TCA']['tx_seminars_organizers'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_organizers',
+		'title' => $ll . 'tx_seminars_organizers',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -144,7 +146,7 @@ $GLOBALS['TCA']['tx_seminars_organizers'] = array(
 
 $GLOBALS['TCA']['tx_seminars_payment_methods'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_payment_methods',
+		'title' => $ll . 'tx_seminars_payment_methods',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -159,7 +161,7 @@ $GLOBALS['TCA']['tx_seminars_payment_methods'] = array(
 
 $GLOBALS['TCA']['tx_seminars_event_types'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_event_types',
+		'title' => $ll . 'tx_seminars_event_types',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -174,7 +176,7 @@ $GLOBALS['TCA']['tx_seminars_event_types'] = array(
 
 $GLOBALS['TCA']['tx_seminars_checkboxes'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_checkboxes',
+		'title' => $ll . 'tx_seminars_checkboxes',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -189,7 +191,7 @@ $GLOBALS['TCA']['tx_seminars_checkboxes'] = array(
 
 $GLOBALS['TCA']['tx_seminars_lodgings'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_lodgings',
+		'title' => $ll . 'tx_seminars_lodgings',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -204,7 +206,7 @@ $GLOBALS['TCA']['tx_seminars_lodgings'] = array(
 
 $GLOBALS['TCA']['tx_seminars_foods'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_foods',
+		'title' => $ll . 'tx_seminars_foods',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -219,7 +221,7 @@ $GLOBALS['TCA']['tx_seminars_foods'] = array(
 
 $GLOBALS['TCA']['tx_seminars_timeslots'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_timeslots',
+		'title' => $ll . 'tx_seminars_timeslots',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -234,7 +236,7 @@ $GLOBALS['TCA']['tx_seminars_timeslots'] = array(
 
 $GLOBALS['TCA']['tx_seminars_target_groups'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_target_groups',
+		'title' => $ll . 'tx_seminars_target_groups',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -249,7 +251,7 @@ $GLOBALS['TCA']['tx_seminars_target_groups'] = array(
 
 $GLOBALS['TCA']['tx_seminars_categories'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_categories',
+		'title' => $ll . 'tx_seminars_categories',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -264,7 +266,7 @@ $GLOBALS['TCA']['tx_seminars_categories'] = array(
 
 $GLOBALS['TCA']['tx_seminars_skills'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_skills',
+		'title' => $ll . 'tx_seminars_skills',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -293,7 +295,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
 	array(
-		'LLL:EXT:seminars/locallang_db.xml:tt_content.list_type_pi1',
+		$ll . 'tt_content.list_type_pi1',
 		$_EXTKEY.'_pi1',
 		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'ext_icon.gif',
 	),

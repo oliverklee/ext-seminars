@@ -253,7 +253,7 @@ class MailNotifier extends AbstractTask {
 		$user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
 		$languageService = $this->getLanguageService();
 		$languageService->lang = $user->getLanguage();
-		$languageService->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
+		$languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
 		$result = $languageService->getLL($locallangKey);
 
 		foreach (array(

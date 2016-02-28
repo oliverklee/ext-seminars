@@ -53,8 +53,8 @@ class Tx_Seminars_Tests_Unit_Pi2_Pi2Test extends Tx_Phpunit_TestCase {
 	protected $configuration = NULL;
 
 	protected function setUp() {
-		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang_db.xml');
-		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('lang') . 'locallang_general.xml');
+		$GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xml');
+		$GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_general.xml');
 
 		Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');

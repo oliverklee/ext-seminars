@@ -33,7 +33,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase {
 	private $subject = NULL;
 
 	protected function setUp() {
-		$GLOBALS['LANG']->includeLLFile(ExtensionManagementUtility::extPath('seminars') . 'locallang.xml');
+		$GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
 
 		$this->subject = new tx_seminars_timespanchild(array('timeFormat' => self::TIME_FORMAT));
 	}

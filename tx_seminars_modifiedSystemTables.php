@@ -27,6 +27,7 @@ if (!function_exists('txSeminarsGetTableRelationsClause')) {
 $globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
 $usePageBrowser = (bool)$globalConfiguration['usePageBrowser'];
 $selectType = $usePageBrowser ? 'group' : 'select';
+$ll = 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:';
 
 if (!isset($GLOBALS['TCA']['fe_users']['columns']['tx_seminars_registration'])) {
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
@@ -60,20 +61,20 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 		array(
 			'tx_seminars_publish_events' => array(
 				'exclude' => 1,
-				'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_publish_events',
+				'label' => $ll . 'fe_groups.tx_seminars_publish_events',
 				'config' => array(
 					'type' => 'radio',
 					'default' => '0',
 					'items' => array(
-						array('LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_publish_events.I.0', '0'),
-						array('LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_publish_events.I.1', '1'),
-						array('LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_publish_events.I.2', '2'),
+						array($ll . 'fe_groups.tx_seminars_publish_events.I.0', '0'),
+						array($ll . 'fe_groups.tx_seminars_publish_events.I.1', '1'),
+						array($ll . 'fe_groups.tx_seminars_publish_events.I.2', '2'),
 					),
 				),
 			),
 			'tx_seminars_events_pid' => array(
 				'exclude' => 1,
-				'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_events_pid',
+				'label' => $ll . 'fe_groups.tx_seminars_events_pid',
 				'config' => array(
 					'type' => 'group',
 					'internal_type' => 'db',
@@ -85,7 +86,7 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 			),
 			'tx_seminars_auxiliary_records_pid' => array(
 				'exclude' => 1,
-				'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_auxiliary_records_pid',
+				'label' => $ll . 'fe_groups.tx_seminars_auxiliary_records_pid',
 				'config' => array(
 					'type' => 'group',
 					'internal_type' => 'db',
@@ -97,7 +98,7 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 			),
 			'tx_seminars_reviewer' => array(
 				'exclude' => 1,
-				'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_reviewer',
+				'label' => $ll . 'fe_groups.tx_seminars_reviewer',
 				'config' => array(
 					'type' => 'group',
 					'internal_type' => 'db',
@@ -109,7 +110,7 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 			),
 			'tx_seminars_default_categories' => array(
 				'exclude' => 1,
-				'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_default_categories',
+				'label' => $ll . 'fe_groups.tx_seminars_default_categories',
 				'config' => array(
 					'type' => $selectType,
 					'internal_type' => 'db',
@@ -140,7 +141,7 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 			),
 			'tx_seminars_default_organizer' => array(
 				'exclude' => 1,
-				'label' => 'LLL:EXT:seminars/locallang_db.xml:fe_groups.tx_seminars_default_organizer',
+				'label' => $ll . 'fe_groups.tx_seminars_default_organizer',
 				'config' => array(
 					'type' => $selectType,
 					'internal_type' => 'db',
@@ -163,7 +164,7 @@ if (!isset($GLOBALS['TCA']['fe_groups']['columns']['tx_seminars_publish_events']
 
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
 		'fe_groups',
-		'--div--;LLL:EXT:seminars/locallang_db.xml:fe_groups.tab_event_management,' .
+		'--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:fe_groups.tab_event_management,' .
 			'tx_seminars_publish_events;;;;1-1-1,tx_seminars_events_pid,' .
 			'tx_seminars_auxiliary_records_pid,tx_seminars_reviewer,' .
 			'tx_seminars_default_categories, tx_seminars_default_organizer'
@@ -176,7 +177,7 @@ if (!isset($GLOBALS['TCA']['be_groups']['columns']['tx_seminars_events_folder'])
 		array(
 			'tx_seminars_events_folder' => array(
 				'exclude' => 1,
-				'label' => 'LLL:EXT:seminars/locallang_db.xml:be_groups.tx_seminars_events_folder',
+				'label' => $ll . 'be_groups.tx_seminars_events_folder',
 				'config' => array(
 					'type' => 'group',
 					'internal_type' => 'db',
@@ -188,7 +189,7 @@ if (!isset($GLOBALS['TCA']['be_groups']['columns']['tx_seminars_events_folder'])
 			),
 			'tx_seminars_registrations_folder' => array(
 				'exclude' => 1,
-				'label' => 'LLL:EXT:seminars/locallang_db.xml:be_groups.tx_seminars_registrations_folder',
+				'label' => $ll . 'be_groups.tx_seminars_registrations_folder',
 				'config' => array(
 					'type' => 'group',
 					'internal_type' => 'db',
@@ -200,7 +201,7 @@ if (!isset($GLOBALS['TCA']['be_groups']['columns']['tx_seminars_events_folder'])
 			),
 			'tx_seminars_auxiliaries_folder' => array(
 				'exclude' => 1,
-				'label' => 'LLL:EXT:seminars/locallang_db.xml:be_groups.tx_seminars_auxiliaries_folder',
+				'label' => $ll . 'be_groups.tx_seminars_auxiliaries_folder',
 				'config' => array(
 					'type' => 'group',
 					'internal_type' => 'db',
@@ -216,7 +217,7 @@ if (!isset($GLOBALS['TCA']['be_groups']['columns']['tx_seminars_events_folder'])
 
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
 		'be_groups',
-		'--div--;LLL:EXT:seminars/locallang_db.xml:be_groups.tab_event_management,' .
+		'--div--;' . $ll . 'be_groups.tab_event_management,' .
 			'tx_seminars_events_folder,tx_seminars_registrations_folder,' .
 			'tx_seminars_auxiliaries_folder,'
 	);

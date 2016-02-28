@@ -26,13 +26,6 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
 	public $prefixId = Tx_Seminars_OldModel_AbstractTimeSpan::class;
 
 	/**
-	 * faking $this->scriptRelPath so the locallang.xml file is found
-	 *
-	 * @var string
-	 */
-	public $scriptRelPath = 'locallang.xml';
-
-	/**
 	 * Gets the begin date.
 	 *
 	 * @return string the begin date (or the localized string "will be
