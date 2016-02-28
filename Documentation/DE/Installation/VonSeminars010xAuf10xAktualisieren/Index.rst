@@ -50,8 +50,14 @@ Aktualisierung Warnungen auf den Seiten zu sehen sein können.
 #. Aktualisieren Sie den Seminarmanager (und onetimeaccount, falls nötig)
    aus dem TER und führen Sie die Datenbank-Aktualisierungen durch.
 
+#. Der CLI-Runner für den Cronjob wurde durch einen Scheduler-Task ersetzt.
+   Falls Sie den Cronjob nutzen, löschen Sie bitte den Cronjob und legen Sie
+   stattdessen einen Scheduler-Task an (mit derselben Page-UID wie beim Cronjob).
+
 #. Schalten Sie im Extensionmanager den automatischen Konfigurationscheck
    für den Seminarmanager ein.
+
+#. Führen Sie das Update-Skript der Extension im EM durch (falls verfügbar).
 
 #. Leeren Sie die Verzeichnisse typo3temp/llxml/ und
    typo3conf/l10n/\*/seminars/ (falls diese bei Ihnen existieren).

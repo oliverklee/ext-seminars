@@ -46,10 +46,14 @@ the front end until you have finished the upgrade.
 #. Upgrade to the new seminars (and onetimeaccount, if needed) from TER
    and upgrade the database.
 
+#. The CLI runner has been replaced by a Scheduler task. If you are using
+   the cronjob, delete it and add a Scheduler task (with the same page
+   UID for the configuration).
+
 #. In the extension manager, enable the automatic configuration check for
    the Seminar Manager.
 
-#. Run the extension's update script in the extension manager.(Choose the
+#. Run the extension's update script in the extension manager. (Choose the
    option “UPDATE!” in the extension's drop-down menu at the top. If the
    option is not displayed than you either have already run the update
    script or it is not necessary to run the update script on your
