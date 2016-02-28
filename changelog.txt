@@ -20,6 +20,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5658] Replace "language" in the PHPDoc
 - [#5657] Remove the byte order mark from the ReST files
 - [#5642] Only use the status constants from the new event model
 - [#5623] Use Tx_Oelib_Time::SECONDS_PER_DAY and drop our own constant

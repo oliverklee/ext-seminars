@@ -13,6 +13,7 @@
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * This class creates a CSV export of registrations.
@@ -44,7 +45,7 @@ abstract class Tx_Seminars_Csv_AbstractListView {
 	protected $pageUid = 0;
 
 	/**
-	 * @var language
+	 * @var LanguageService
 	 */
 	protected $translator = NULL;
 
@@ -70,7 +71,7 @@ abstract class Tx_Seminars_Csv_AbstractListView {
 	/**
 	 * Loads the language data and returns the corresponding translator instance.
 	 *
-	 * @return language
+	 * @return LanguageService
 	 */
 	protected function getInitializedTranslator() {
 		if ($this->translator === NULL) {
