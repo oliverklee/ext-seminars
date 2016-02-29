@@ -45,6 +45,7 @@
 			<label index="tx_seminars_seminars.cancelled_planned">planned</label>
 			<label index="tx_seminars_seminars.cancelled_canceled">canceled</label>
 			<label index="tx_seminars_seminars.cancelled_confirmed">confirmed</label>
+			<label index="tx_seminars_seminars.automatic_confirmation_cancelation">Set the status automatically</label>
 			<label index="tx_seminars_seminars.notes">Internal Notes:</label>
 			<label index="tx_seminars_seminars.attached_files">Attached files:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Speakers</label>
@@ -265,6 +266,7 @@
 			<label index="tx_seminars_seminars.cancelled_planned">geplant</label>
 			<label index="tx_seminars_seminars.cancelled_canceled">abgesagt</label>
 			<label index="tx_seminars_seminars.cancelled_confirmed">bestätigt</label>
+			<label index="tx_seminars_seminars.automatic_confirmation_cancelation">Den Status automatisch setzen</label>
 			<label index="tx_seminars_seminars.notes">Interne Notizen:</label>
 			<label index="tx_seminars_seminars.attached_files">Angehängte Dateien:</label>
 			<label index="tx_seminars_seminars.divLabelSpeakers">Referenten</label>
@@ -2344,6 +2346,7 @@
 			<label index="tx_seminars_seminars.cancelled_planned">planned</label>
 			<label index="tx_seminars_seminars.cancelled_canceled">canceled</label>
 			<label index="tx_seminars_seminars.cancelled_confirmed">confirmed</label>
+			<label index="tx_seminars_seminars.automatic_confirmation_cancelation">Set the status automatically</label>
 			<label index="tx_seminars_seminars.attendees">Current number of attendees:</label>
 			<label index="tx_seminars_seminars.vacancies">Current number of vacancies:</label>
 			<label index="tx_seminars_seminars.enough_attendees">Has enough registrations:</label>

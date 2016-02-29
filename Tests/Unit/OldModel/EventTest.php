@@ -9626,4 +9626,32 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 			$subject->shouldMuteNotificationEmails()
 		);
 	}
+
+	/*
+	 * Tests regarding the flag for automatic cancelation/confirmation
+	 */
+
+	/**
+	 * @test
+	 */
+	public function shouldAutomaticallyConfirmOrCancelByDefaultReturnsFalse() {
+		self::assertFalse(
+			$this->fixture->shouldAutomaticallyConfirmOrCancel()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function shouldAutomaticallyConfirmOrCancelReturnsTrueValueFromDatabase() {
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			['automatic_confirmation_cancelation' => 1]
+		);
+		$subject = new tx_seminars_seminarchild($uid);
+
+		self::assertTrue(
+			$subject->shouldAutomaticallyConfirmOrCancel()
+		);
+	}
 }

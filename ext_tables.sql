@@ -292,6 +292,7 @@ CREATE TABLE tx_seminars_seminars (
 	publication_hash text,
 	organizers_notified_about_minimum_reached tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	mute_notification_emails tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	automatic_confirmation_cancelation tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),

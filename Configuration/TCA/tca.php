@@ -204,7 +204,7 @@ $GLOBALS['TCA']['tx_seminars_test'] = array(
 $GLOBALS['TCA']['tx_seminars_seminars'] = array(
 	'ctrl' => $GLOBALS['TCA']['tx_seminars_seminars']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,begin_date_registration,deadline_registration,deadline_unregistration,expiry,details_page,place,room,speakers,price_regular,price_special,payment_methods,organizers,organizing_partners,event_takes_place_reminder_sent,cancelation_deadline_reminder_sent,needs_registration,allows_multiple_registrations,attendees_min,attendees_max,queue_size,offline_attendees,organizers_notified_about_minimum_reached,mute_notification_emails,target_groups,skip_collision_check,registrations,cancelled,notes,attached_files,hidden,starttime,endtime,owner_feuser,vips'
+		'showRecordFieldList' => 'title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,begin_date_registration,deadline_registration,deadline_unregistration,expiry,details_page,place,room,speakers,price_regular,price_special,payment_methods,organizers,organizing_partners,event_takes_place_reminder_sent,cancelation_deadline_reminder_sent,needs_registration,allows_multiple_registrations,attendees_min,attendees_max,queue_size,offline_attendees,organizers_notified_about_minimum_reached,mute_notification_emails,target_groups,skip_collision_check,registrations,cancelled,automatic_confirmation_cancelation,notes,attached_files,hidden,starttime,endtime,owner_feuser,vips'
 	),
 	'columns' => array(
 		'object_type' => array(
@@ -897,6 +897,7 @@ $GLOBALS['TCA']['tx_seminars_seminars'] = array(
 		'organizers_notified_about_minimum_reached' => [
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.organizers_notified_about_minimum_reached',
+			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => [
 				'type' => 'check',
 				'default' => 1,
@@ -905,6 +906,7 @@ $GLOBALS['TCA']['tx_seminars_seminars'] = array(
 		'mute_notification_emails' => [
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.mute_notification_emails',
+			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => [
 				'type' => 'check',
 				'default' => 1,
@@ -938,6 +940,7 @@ $GLOBALS['TCA']['tx_seminars_seminars'] = array(
 		'registrations' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.registrations',
+			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => array(
 				'type' => 'inline',
 				'foreign_table' => 'tx_seminars_attendances',
@@ -964,6 +967,15 @@ $GLOBALS['TCA']['tx_seminars_seminars'] = array(
 
 			),
 		),
+		'automatic_confirmation_cancelation' => [
+			'exclude' => 1,
+			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.automatic_confirmation_cancelation',
+			'displayCond' => 'FIELD:needs_registration:REQ:true',
+			'config' => [
+				'type' => 'check',
+				'default' => 0,
+			],
+		],
 		'notes' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.notes',
@@ -1081,7 +1093,7 @@ $GLOBALS['TCA']['tx_seminars_seminars'] = array(
 	'types' => array(
 		// Single event
 		'0' => array('showitem' => '' .
-			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, subtitle;;;;3-3-3, image, categories, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, language, accreditation_number, credit_points, details_page, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, cancelled, notes, attached_files, ' .
+			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, subtitle;;;;3-3-3, image, categories, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, language, accreditation_number, credit_points, details_page, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, cancelled, automatic_confirmation_cancelation, notes, attached_files, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, begin_date_registration, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, event_takes_place_reminder_sent, cancelation_deadline_reminder_sent, ' .
@@ -1099,7 +1111,7 @@ $GLOBALS['TCA']['tx_seminars_seminars'] = array(
 		),
 		// Multiple event date
 		'2' => array('showitem' =>
-			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, topic, language, accreditation_number, details_page, cancelled, notes, attached_files, ' .
+			'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, topic, language, accreditation_number, details_page, cancelled, automatic_confirmation_cancelation, notes, attached_files, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, begin_date_registration, deadline_registration, deadline_early_bird, deadline_unregistration, expiry, place, room, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, ' .
 				'--div--;LLL:EXT:seminars/locallang_db.xml:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, event_takes_place_reminder_sent, cancelation_deadline_reminder_sent, ' .

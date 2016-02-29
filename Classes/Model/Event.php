@@ -1646,6 +1646,15 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
+	 * Checks whether automatic confirmation/cancelation for this event is enabled.
+	 *
+	 * @return bool
+	 */
+	public function shouldAutomaticallyConfirmOrCancel() {
+		return $this->getAsBoolean('automatic_confirmation_cancelation');
+	}
+
+	/**
 	 * Gets the registrations for this event.
 	 *
 	 * @return Tx_Oelib_List the registrations for this event (both regular and

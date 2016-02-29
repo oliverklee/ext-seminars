@@ -4644,6 +4644,15 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	}
 
 	/**
+	 * Checks whether automatic confirmation/cancelation for this event is enabled.
+	 *
+	 * @return bool
+	 */
+	public function shouldAutomaticallyConfirmOrCancel() {
+		return $this->getRecordPropertyBoolean('automatic_confirmation_cancelation');
+	}
+
+	/**
 	 * Returns the unregistration deadline set by configuration and the begin
 	 * date as UNIX timestamp.
 	 *
