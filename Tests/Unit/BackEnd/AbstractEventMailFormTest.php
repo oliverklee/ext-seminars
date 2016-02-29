@@ -28,6 +28,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
 	 * @var Tx_Seminars_BackEnd_AbstractEventMailForm
 	 */
 	private $fixture;
+
 	/**
 	 * @var Tx_Oelib_TestingFramework
 	 */

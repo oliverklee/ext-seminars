@@ -7,6 +7,7 @@ return array(
 	'oliverklee\\seminars\\realurl\\configuration' => $extensionPath . 'Classes/RealUrl/Configuration.php',
 	'oliverklee\\seminars\\schedulertasks\\mailnotifier' => $extensionPath . 'Classes/SchedularTasks/MailNotifier.php',
 	'oliverklee\\seminars\\schedulertasks\\mailnotifierconfiguration' => $extensionPath . 'Classes/SchedularTasks/MailNotifierConfiguration.php',
+	'oliverklee\\seminars\\service\\emailservice' => $extensionPath . 'Classes/Service/EmailService.php',
 	'tx_seminars_tcemainprocdm' => $extensionPath . 'Classes/class.tx_seminars_tcemain.php',
 	'tx_seminars_backend_abstracteventmailform' => $extensionPath . 'Classes/BackEnd/AbstractEventMailForm.php',
 	'tx_seminars_backend_abstractlist' => $extensionPath . 'Classes/BackEnd/AbstractList.php',
