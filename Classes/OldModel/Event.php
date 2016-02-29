@@ -4635,6 +4635,15 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan {
 	}
 
 	/**
+	 * Checks whether notification e-mail to the organizers are muted.
+	 *
+	 * @return bool
+	 */
+	public function shouldMuteNotificationEmails() {
+		return $this->getRecordPropertyBoolean('mute_notification_emails');
+	}
+
+	/**
 	 * Returns the unregistration deadline set by configuration and the begin
 	 * date as UNIX timestamp.
 	 *

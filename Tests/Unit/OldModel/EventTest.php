@@ -9576,7 +9576,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function haveOrganizersBeenNotifiedAboutEnoughAttendeesReturnsFalseValueFromDatabase() {
+	public function haveOrganizersBeenNotifiedAboutEnoughAttendeesReturnsTrueValueFromDatabase() {
 		$uid = $this->testingFramework->createRecord(
 			'tx_seminars_seminars',
 			['organizers_notified_about_minimum_reached' => 1]
@@ -9596,6 +9596,34 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase {
 
 		self::assertTrue(
 			$this->fixture->haveOrganizersBeenNotifiedAboutEnoughAttendees()
+		);
+	}
+
+	/*
+	 * Tests regarding the flag for organizers having been notified about enough attendees.
+	 */
+
+	/**
+	 * @test
+	 */
+	public function shouldMuteNotificationEmailsByDefaultReturnsFalse() {
+		self::assertFalse(
+			$this->fixture->shouldMuteNotificationEmails()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function shouldMuteNotificationEmailsReturnsTrueValueFromDatabase() {
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			['mute_notification_emails' => 1]
+		);
+		$subject = new tx_seminars_seminarchild($uid);
+
+		self::assertTrue(
+			$subject->shouldMuteNotificationEmails()
 		);
 	}
 }

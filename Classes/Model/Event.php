@@ -1637,6 +1637,15 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan {
 	}
 
 	/**
+	 * Checks whether notification e-mail to the organizers are muted.
+	 *
+	 * @return bool
+	 */
+	public function shouldMuteNotificationEmails() {
+		return $this->getAsBoolean('mute_notification_emails');
+	}
+
+	/**
 	 * Gets the registrations for this event.
 	 *
 	 * @return Tx_Oelib_List the registrations for this event (both regular and

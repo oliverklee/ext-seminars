@@ -864,7 +864,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper {
 			return;
 		}
 		$event = $registration->getSeminarObject();
-		if (!$event->hasOrganizers()) {
+		if ($event->shouldMuteNotificationEmails() || !$event->hasOrganizers()) {
 			return;
 		}
 

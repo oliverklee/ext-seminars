@@ -2372,4 +2372,32 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase {
 			$this->fixture->haveOrganizersBeenNotifiedAboutEnoughAttendees()
 		);
 	}
+
+	/*
+	 * Tests regarding the flag for organizers having been notified about enough attendees.
+	 */
+
+	/**
+	 * @test
+	 */
+	public function shouldMuteNotificationEmailsByDefaultReturnsFalse() {
+		$this->fixture->setData([]);
+
+		self::assertFalse(
+			$this->fixture->shouldMuteNotificationEmails()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function shouldMuteNotificationEmailsReturnsTrueValueFromDatabase() {
+		$this->fixture->setData(
+			['mute_notification_emails' => 1]
+		);
+
+		self::assertTrue(
+			$this->fixture->shouldMuteNotificationEmails()
+		);
+	}
 }

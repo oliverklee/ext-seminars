@@ -4027,6 +4027,19 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 	/**
 	 * @test
 	 */
+	public function notifyOrganizersForEventWithEmailsMutedNotSendsEmail() {
+		$this->fixture->setConfigurationValue('sendNotification', TRUE);
+		$this->testingFramework->changeRecord('tx_seminars_seminars', $this->seminarUid, ['mute_notification_emails' => 1]);
+
+		$registration = $this->createRegistration();
+		$this->fixture->notifyOrganizers($registration);
+
+		self::assertNull($this->mailer->getFirstSentEmail());
+	}
+
+	/**
+	 * @test
+	 */
 	public function notifyOrganizersUsesOrganizerAsFrom() {
 		$this->fixture->setConfigurationValue('sendNotification', TRUE);
 
