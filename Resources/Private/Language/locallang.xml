@@ -162,6 +162,18 @@ the speakers' cancelation deadline for the event &quot;%event&quot; has just pas
 			<label index="schedulerTasks.mailNotifier.description">This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</label>
 			<label index="schedulerTasks.fields.page-uid">UID of the page with the TypoScript configuration</label>
 			<label index="schedulerTasks.errors.page-uid">Please enter the UID of an existing page.</label>
+			<label index="email-event-canceled-subject">Event canceled: %eventTitle %eventDate</label>
+			<label index="email-event-confirmed-subject">Event confirmed: %eventTitle %eventDate</label>
+			<label index="email-event-canceled-body">%salutation
+
+you registered for the event &quot;%eventTitle&quot; (%eventDate).
+
+Unfortunately, we had to cancel this event.</label>
+			<label index="email-event-confirmed-body">%salutation
+
+you registered for the event &quot;%eventTitle&quot; (%eventDate).
+
+This event now has been confirmed.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 			<label index="pi1_title">Arrangementsmanager</label>
@@ -422,6 +434,18 @@ das Ende der Absagefrist für die ReferentInnen der Veranstaltung &quot;%event&q
 			<label index="schedulerTasks.mailNotifier.description">Dieser Task verschickt Erinnerungen per Mail, darunter Erinnerungen, dass eine Veranstaltung demnächst stattfindet oder dass die Absagefrist abläuft.</label>
 			<label index="schedulerTasks.fields.page-uid">UID der Seite mit der TypoScript-Konfiguration</label>
 			<label index="schedulerTasks.errors.page-uid">Bitte geben Sie die UID einer existierenden Seite an.</label>
+			<label index="email-event-canceled-subject">Veranstaltung abgesagt: %eventTitle %eventDate</label>
+			<label index="email-event-confirmed-subject">Veranstaltung zugesagt: %eventTitle %eventDate</label>
+			<label index="email-event-canceled-body">%salutation
+
+Sie hatten sich für die Veranstaltung &quot;%eventTitle&quot; (%eventDate) angemeldet.
+
+Leider mussten wir diese Veranstaltung absagen.</label>
+			<label index="email-event-confirmed-body">%salutation
+
+Sie hatten sich für die Veranstaltung &quot;%eventTitle&quot; (%eventDate) angemeldet.
+
+Wir konnten dieser Veranstaltung nun fest zusagen.</label>
 		</languageKey>
 		<languageKey index="nl" type="array">
 			<label index="pi1_title">Seminar manager</label>

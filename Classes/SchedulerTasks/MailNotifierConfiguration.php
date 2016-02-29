@@ -38,12 +38,15 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
      */
     public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $schedulerModule)
     {
-        $hasPageUid = !empty($taskInfo['configurationPageUid']) && (int) $taskInfo['configurationPageUid'] > 0;
-        $pageUid = $hasPageUid ? (string)(int)$taskInfo['configurationPageUid'] : '';
-        $taskInfo['configurationPageUid'] = $pageUid;
+        if ($task !== null && $task instanceof MailNotifier) {
+            $pageUid = $task->getConfigurationPageUid();
+        } else {
+            $pageUid = '';
+        }
+        $taskInfo['seminars_configurationPageUid'] = $pageUid;
 
         $fieldId = 'task-page-uid';
-        $fieldCode = '<input type="text" name="tx_scheduler[configurationPageUid]" id="'
+        $fieldCode = '<input type="text" name="tx_scheduler[seminars_configurationPageUid]" id="'
             . $fieldId . '" value="' . $pageUid . '" size="4" />';
 
         $additionalFields = [
@@ -68,8 +71,8 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
      */
     public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $schedulerModule)
     {
-        $submittedData['configurationPageUid'] = (int)$submittedData['configurationPageUid'];
-        $pageUid = $submittedData['configurationPageUid'];
+        $submittedData['seminars_configurationPageUid'] = (int)$submittedData['seminars_configurationPageUid'];
+        $pageUid = $submittedData['seminars_configurationPageUid'];
         $hasPageUid = $pageUid > 0 && \Tx_Oelib_Db::existsRecordWithUid('pages', $pageUid);
         if ($hasPageUid) {
             return true;
@@ -105,7 +108,8 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
      */
     public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
-        $pageUid = !empty($submittedData['configurationPageUid']) ? (int)$submittedData['configurationPageUid'] : 0;
+        $pageUid = !empty($submittedData['seminars_configurationPageUid'])
+            ? (int)$submittedData['seminars_configurationPageUid'] : 0;
 
         /** @var MailNotifier$task */
         $task->setConfigurationPageUid($pageUid);

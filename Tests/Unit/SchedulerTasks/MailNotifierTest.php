@@ -14,6 +14,8 @@ namespace OliverKlee\Seminars\Tests\Unit\SchedulerTasks;
  * The TYPO3 project - inspiring people to share!
  */
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
+use OliverKlee\Seminars\Service\EmailService;
+use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
@@ -28,7 +30,7 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 class MailNotifierTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var MailNotifier
+     * @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $subject = null;
 
@@ -48,6 +50,26 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
     protected $mailer = null;
 
     /**
+     * @var EventStatusService|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $eventStatusService = null;
+
+    /**
+     * @var EmailService|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $emailService = null;
+
+    /**
+     * @var \Tx_Seminars_Mapper_Event|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $eventMapper = null;
+
+    /**
+     * @var \Tx_Seminars_EmailSalutation|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $emailSalutation = null;
+
+    /**
      * @var LanguageService
      */
     private $languageBackup = null;
@@ -63,13 +85,10 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
 
         $this->languageService = new LanguageService();
         $this->languageService->init('default');
+        $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
         $GLOBALS['LANG'] = $this->languageService;
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
-        $mailerFactory->enableTestMode();
-        $this->mailer = $mailerFactory->getMailer();
 
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin', new \Tx_Oelib_Configuration());
         $this->configuration = new \Tx_Oelib_Configuration();
@@ -83,10 +102,28 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
         ));
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
-        $this->subject = new MailNotifier();
+        $this->subject = $this->getAccessibleMock(MailNotifier::class, ['dummy'], [], '', false);
 
         $configurationPageUid = $this->testingFramework->createFrontEndPage();
         $this->subject->setConfigurationPageUid($configurationPageUid);
+
+        $this->eventStatusService = $this->getMock(EventStatusService::class);
+        $this->subject->_set('eventStatusService', $this->eventStatusService);
+
+        $this->emailService = $this->getMock(EmailService::class);
+        $this->subject->_set('emailService', $this->emailService);
+
+        $this->eventMapper = $this->getMock(\Tx_Seminars_Mapper_Event::class);
+        $this->subject->_set('eventMapper', $this->eventMapper);
+
+        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        $mailerFactory->enableTestMode();
+        $this->mailer = $mailerFactory->getMailer();
+        $this->subject->_set('mailer', $this->mailer);
+
+        $this->emailSalutation = $this->getMock(\Tx_Seminars_EmailSalutation::class);
+        $this->subject->_set('emailSalutation', $this->emailSalutation);
     }
 
     protected function tearDown()
@@ -252,9 +289,30 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
+    public function classCanBeInstantiated()
+    {
+        new MailNotifier();
+    }
+
+    /**
+     * @test
+     */
     public function classIsSchedulerTask()
     {
         self::assertInstanceOf(AbstractTask::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function setConfigurationPageUidSetsConfigiurationPageUid()
+    {
+        $uid = 42;
+        $this->subject->setConfigurationPageUid($uid);
+
+        $result = $this->subject->getConfigurationPageUid();
+
+        self::assertSame($uid, $result);
     }
 
     /**
@@ -294,6 +352,51 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
         $result = $subject->execute();
 
         self::assertTrue($result);
+    }
+
+    /**
+     * @test
+     */
+    public function executeWithPageConfigurationCallsAllSeparateSteps()
+    {
+        /** @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
+            MailNotifier::class,
+            ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses'],
+            [],
+            '',
+            false
+        );
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $subject->setConfigurationPageUid($pageUid);
+
+        $subject->expects(self::once())->method('sendEventTakesPlaceReminders');
+        $subject->expects(self::once())->method('sendCancellationDeadlineReminders');
+        $subject->expects(self::once())->method('automaticallyChangeEventStatuses');
+
+        $subject->execute();
+    }
+
+    /**
+     * @test
+     */
+    public function executeWithoutPageConfigurationNotCallsAnySeparateStep()
+    {
+        /** @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
+            MailNotifier::class,
+            ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses'],
+            [],
+            '',
+            false
+        );
+        $subject->setConfigurationPageUid(0);
+
+        $subject->expects(self::never())->method('sendEventTakesPlaceReminders');
+        $subject->expects(self::never())->method('sendCancellationDeadlineReminders');
+        $subject->expects(self::never())->method('automaticallyChangeEventStatuses');
+
+        $subject->execute();
     }
 
     /*
@@ -1020,7 +1123,8 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvFalseSendsEmailWithCsvFileWhichDoesNotContainDataOfAttendanceOnQueue()
+    public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvFalseSendsEmailWithCsvFileWhichDoesNotContainDataOfAttendanceOnQueue(
+    )
     {
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', false);
@@ -1149,7 +1253,7 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertContains(
-            (string) $uid,
+            (string)$uid,
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -1234,5 +1338,246 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
             '1',
             $this->mailer->getFirstSentEmail()->getBody()
         );
+    }
+
+    /**
+     * Tests for the automatic status change
+     */
+
+    /**
+     * @test
+     */
+    public function automaticallyChangeEventStatusesForNoEventsForStatusChangeNotRequestsStatusChange()
+    {
+        $events = new \Tx_Oelib_List();
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->eventStatusService->expects(self::never())->method('updateStatusAndSave');
+
+        $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    /**
+     * @test
+     */
+    public function automaticallyChangeEventStatusesForNoEventsForStatusChangeSendsNoEmail()
+    {
+        $events = new \Tx_Oelib_List();
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->emailService->expects(self::never())->method('sendEmailToAttendees');
+
+        $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    /**
+     * @test
+     */
+    public function automaticallyChangeEventStatusesForOneEventForStatusChangeRequestsStatusChangeWithThatEvent()
+    {
+        $events = new \Tx_Oelib_List();
+        $event = new \Tx_Seminars_Model_Event();
+        $events->add($event);
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->eventStatusService->expects(self::once())
+            ->method('updateStatusAndSave')->with($event)
+            ->will(self::returnValue(false));
+
+        $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    /**
+     * @test
+     */
+    public function automaticallyChangeEventStatusesForOneEventWithNoStatusChangeNeededNotSendsEmail()
+    {
+        $events = new \Tx_Oelib_List();
+        $event = new \Tx_Seminars_Model_Event();
+        $events->add($event);
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->eventStatusService->expects(self::any())->method('updateStatusAndSave')->will(self::returnValue(false));
+
+        $this->emailService->expects(self::never())->method('sendEmailToAttendees');
+
+        $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    /**
+     * @test
+     */
+    public function automaticallyChangeEventStatusesForOneEventWithConfirmedStatusChangeSendsEmail()
+    {
+        $events = new \Tx_Oelib_List();
+        $event = new \Tx_Seminars_Model_Event();
+        $event->confirm();
+        $events->add($event);
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->eventStatusService->expects(self::any())->method('updateStatusAndSave')->will(self::returnValue(true));
+
+        $this->emailService->expects(self::once())->method('sendEmailToAttendees')
+            ->with($event, self::anything(), self::anything());
+
+        $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    /**
+     * @test
+     */
+    public function automaticallyChangeEventStatusesForOneEventWithConfirmedStatusChangeSendsEmailWithConfirmSubject()
+    {
+        $events = new \Tx_Oelib_List();
+        $event = new \Tx_Seminars_Model_Event();
+        $event->confirm();
+        $events->add($event);
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->eventStatusService->expects(self::any())->method('updateStatusAndSave')->will(self::returnValue(true));
+
+        $emailSubject = $this->languageService->getLL('email-event-confirmed-subject');
+        $this->emailService->expects(self::once())->method('sendEmailToAttendees')
+            ->with(self::anything(), $emailSubject, self::anything());
+
+        $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    /**
+     * @test
+     */
+    public function automaticallyChangeEventStatusesForOneEventWithConfirmedStatusChangeSendsEmailWithConfirmBody()
+    {
+        $events = new \Tx_Oelib_List();
+        $event = new \Tx_Seminars_Model_Event();
+        $event->confirm();
+        $events->add($event);
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->eventStatusService->expects(self::any())->method('updateStatusAndSave')->will(self::returnValue(true));
+
+        $emailBody = $this->languageService->getLL('email-event-confirmed-body');
+        $this->emailService->expects(self::once())->method('sendEmailToAttendees')
+            ->with(self::anything(), self::anything(), $emailBody);
+
+        $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    /**
+     * @test
+     */
+    public function automaticallyChangeEventStatusesForTwoEventsWithConfirmedStatusChangeSendsTwoEmails()
+    {
+        $events = new \Tx_Oelib_List();
+        $event1 = new \Tx_Seminars_Model_Event();
+        $event1->confirm();
+        $events->add($event1);
+        $event2 = new \Tx_Seminars_Model_Event();
+        $event2->confirm();
+        $events->add($event2);
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->eventStatusService->expects(self::any())->method('updateStatusAndSave')->will(self::returnValue(true));
+
+        $this->emailService->expects(self::exactly(2))->method('sendEmailToAttendees');
+
+        $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    /**
+     * @test
+     */
+    public function automaticallyChangeEventStatusesForOneEventWithCanceledStatusChangeSendsEmail()
+    {
+        $events = new \Tx_Oelib_List();
+        $event = new \Tx_Seminars_Model_Event();
+        $event->cancel();
+        $events->add($event);
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->eventStatusService->expects(self::any())->method('updateStatusAndSave')->will(self::returnValue(true));
+
+        $this->emailService->expects(self::once())->method('sendEmailToAttendees')
+            ->with($event, self::anything(), self::anything());
+
+        $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    /**
+     * @test
+     */
+    public function automaticallyChangeEventStatusesForOneEventWithCanceledStatusChangeSendsEmailWithCancelSubject()
+    {
+        $events = new \Tx_Oelib_List();
+        $event = new \Tx_Seminars_Model_Event();
+        $event->cancel();
+        $events->add($event);
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->eventStatusService->expects(self::any())->method('updateStatusAndSave')->will(self::returnValue(true));
+
+        $emailSubject = $this->languageService->getLL('email-event-canceled-subject');
+        $this->emailService->expects(self::once())->method('sendEmailToAttendees')
+            ->with(self::anything(), $emailSubject, self::anything());
+
+        $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    /**
+     * @test
+     */
+    public function automaticallyChangeEventStatusesForOneEventWithCanceledStatusChangeSendsEmailWithCancelBody()
+    {
+        $events = new \Tx_Oelib_List();
+        $event = new \Tx_Seminars_Model_Event();
+        $event->cancel();
+        $events->add($event);
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->eventStatusService->expects(self::any())->method('updateStatusAndSave')->will(self::returnValue(true));
+
+        $emailBody = $this->languageService->getLL('email-event-canceled-body');
+        $this->emailService->expects(self::once())->method('sendEmailToAttendees')
+            ->with(self::anything(), self::anything(), $emailBody);
+
+        $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    /**
+     * @test
+     */
+    public function automaticallyChangeEventStatusesForTwoEventsWithCanceledStatusChangeSendsTwoEmails()
+    {
+        $events = new \Tx_Oelib_List();
+        $event1 = new \Tx_Seminars_Model_Event();
+        $event1->cancel();
+        $events->add($event1);
+        $event2 = new \Tx_Seminars_Model_Event();
+        $event2->cancel();
+        $events->add($event2);
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->eventStatusService->expects(self::any())->method('updateStatusAndSave')->will(self::returnValue(true));
+
+        $this->emailService->expects(self::exactly(2))->method('sendEmailToAttendees');
+
+        $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    /**
+     * @test
+     * @expectedException \UnexpectedValueException
+     */
+    public function automaticallyChangeEventStatusesForOneEventWithPlannedStatusChangeThrowsException()
+    {
+        $events = new \Tx_Oelib_List();
+        $event = new \Tx_Seminars_Model_Event();
+        $event->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $events->add($event);
+        $this->eventMapper->expects(self::once())->method('findForAutomaticStatusChange')->will(self::returnValue($events));
+
+        $this->eventStatusService->expects(self::any())->method('updateStatusAndSave')->will(self::returnValue(true));
+
+        $this->subject->automaticallyChangeEventStatuses();
     }
 }

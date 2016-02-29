@@ -102,7 +102,7 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
         self::assertSame(
             [
                 'task-page-uid' => [
-                    'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="" size="4" />',
+                    'code' => '<input type="text" name="tx_scheduler[seminars_configurationPageUid]" id="task-page-uid" value="" size="4" />',
                     'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
                     'cshKey' => '',
                     'cshLabel' => '',
@@ -115,78 +115,19 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getAdditionalFieldsForNonZeroIntegerUidReturnsFieldWithUid()
+    public function getAdditionalFieldsForTaskWithPageUidReturnsFieldWithUid()
     {
-        $taskInfo = ['configurationPageUid' => 42];
-        $result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
+        $taskInfo = [];
+        $uid = 112;
+        $task = new MailNotifier();
+        $task->setConfigurationPageUid($uid);
+
+        $result = $this->subject->getAdditionalFields($taskInfo, $task, $this->moduleController);
 
         self::assertSame(
             [
                 'task-page-uid' => [
-                    'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="42" size="4" />',
-                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
-                    'cshKey' => '',
-                    'cshLabel' => '',
-                ],
-            ],
-            $result
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAdditionalFieldsForNonZeroStringUidReturnsFieldWithUid()
-    {
-        $taskInfo = ['configurationPageUid' => '42'];
-        $result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
-
-        self::assertSame(
-            [
-                'task-page-uid' => [
-                    'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="42" size="4" />',
-                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
-                    'cshKey' => '',
-                    'cshLabel' => '',
-                ],
-            ],
-            $result
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAdditionalFieldsForZeroStringUidReturnsEmptyField()
-    {
-        $taskInfo = ['configurationPageUid' => '0'];
-        $result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
-
-        self::assertSame(
-            [
-                'task-page-uid' => [
-                    'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="" size="4" />',
-                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
-                    'cshKey' => '',
-                    'cshLabel' => '',
-                ],
-            ],
-            $result
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAdditionalFieldsForStringUidReturnsEmptyField()
-    {
-        $taskInfo = ['configurationPageUid' => 'hello'];
-        $result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
-
-        self::assertSame(
-            [
-                'task-page-uid' => [
-                    'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="" size="4" />',
+                    'code' => '<input type="text" name="tx_scheduler[seminars_configurationPageUid]" id="task-page-uid" value="' . $uid . '" size="4" />',
                     'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
                     'cshKey' => '',
                     'cshLabel' => '',
@@ -202,7 +143,7 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
     public function validateAdditionalFieldsForUidOfExistingPageReturnsTrue()
     {
         $pageUid = $this->testingFramework->createFrontEndPage();
-        $submittedData = ['configurationPageUid' => $pageUid];
+        $submittedData = ['seminars_configurationPageUid' => $pageUid];
 
         $result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
 
@@ -215,7 +156,7 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
     public function validateAdditionalFieldsForUidOfExistingPageNotAddsErrorMessage()
     {
         $pageUid = $this->testingFramework->createFrontEndPage();
-        $submittedData = ['configurationPageUid' => $pageUid];
+        $submittedData = ['seminars_configurationPageUid' => $pageUid];
 
         $this->moduleController->expects(self::never())->method('addMessage');
 
@@ -228,7 +169,7 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
     public function validateAdditionalFieldsForUidOfInexistentPageReturnsFalse()
     {
         $pageUid = $this->testingFramework->getAutoIncrement('pages');
-        $submittedData = ['configurationPageUid' => $pageUid];
+        $submittedData = ['seminars_configurationPageUid' => $pageUid];
 
         $result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
 
@@ -241,7 +182,7 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
     public function validateAdditionalFieldsForUidOfInexistentPageAddsErrorMessage()
     {
         $pageUid = $this->testingFramework->getAutoIncrement('pages');
-        $submittedData = ['configurationPageUid' => $pageUid];
+        $submittedData = ['seminars_configurationPageUid' => $pageUid];
 
         $this->moduleController->expects(self::once())->method('addMessage')->with(
             $this->languageService->sL(
@@ -259,7 +200,7 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
     public function validateAdditionalFieldsForZeroUidReturnsFalse()
     {
         $pageUid = 0;
-        $submittedData = ['configurationPageUid' => $pageUid];
+        $submittedData = ['seminars_configurationPageUid' => $pageUid];
 
         $result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
 
@@ -272,7 +213,7 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
     public function validateAdditionalFieldsForZeroUidAddsErrorMessage()
     {
         $pageUid = 0;
-        $submittedData = ['configurationPageUid' => $pageUid];
+        $submittedData = ['seminars_configurationPageUid' => $pageUid];
 
         $this->moduleController->expects(self::once())->method('addMessage')->with(
             $this->languageService->sL(
@@ -290,7 +231,7 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
     public function saveAdditionalFieldsSavesIntegerPageUidToTask()
     {
         $pageUid = $this->testingFramework->createFrontEndPage();
-        $submittedData = ['configurationPageUid' => (string)$pageUid];
+        $submittedData = ['seminars_configurationPageUid' => (string)$pageUid];
 
         /** @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject $task */
         $task = $this->getMock(MailNotifier::class);

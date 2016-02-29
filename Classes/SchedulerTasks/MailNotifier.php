@@ -13,6 +13,8 @@ namespace OliverKlee\Seminars\SchedulerTasks;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use OliverKlee\Seminars\Service\EmailService;
+use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
@@ -31,18 +33,61 @@ class MailNotifier extends AbstractTask
     protected $configurationPageUid = 0;
 
     /**
+     * @var EventStatusService
+     */
+    protected $eventStatusService = null;
+
+    /**
+     * @var EmailService
+     */
+    protected $emailService = null;
+
+    /**
+     * @var \Tx_Seminars_Mapper_Event
+     */
+    protected $eventMapper = null;
+
+    /**
+     * @var \Tx_Oelib_AbstractMailer
+     */
+    protected $mailer = null;
+
+    /**
+     * Sets up the dependencies (as we cannot use dependency injection on scheduler tasks).
+     *
+     * @return void
+     */
+    protected function constituteDependencies()
+    {
+        // This is necessary so that the configuration is fetched from the provided page UID early.
+        $this->getConfiguration();
+        $this->eventStatusService = GeneralUtility::makeInstance(EventStatusService::class);
+        $this->emailService = GeneralUtility::makeInstance(EmailService::class);
+        $this->eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        $this->mailer = $mailerFactory->getMailer();
+
+        $languageService = $this->getLanguageService();
+        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
+    }
+
+    /**
      * Runs the task.
      *
      * @return bool true on successful execution, false on error
      */
     public function execute()
     {
-        if ($this->configurationPageUid <= 0) {
+        if ($this->getConfigurationPageUid() <= 0) {
             return false;
         }
 
+        $this->constituteDependencies();
+
         $this->sendEventTakesPlaceReminders();
         $this->sendCancellationDeadlineReminders();
+        $this->automaticallyChangeEventStatuses();
 
         return true;
     }
@@ -57,6 +102,14 @@ class MailNotifier extends AbstractTask
     public function setConfigurationPageUid($pageUid)
     {
         $this->configurationPageUid = $pageUid;
+    }
+
+    /**
+     * @return int
+     */
+    public function getConfigurationPageUid()
+    {
+        return $this->configurationPageUid;
     }
 
     /**
@@ -125,9 +178,7 @@ class MailNotifier extends AbstractTask
                 $eMail->addAttachment($attachment);
             }
 
-            /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-            $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
-            $mailerFactory->getMailer()->send($eMail);
+            $this->mailer->send($eMail);
         }
     }
 
@@ -303,8 +354,42 @@ class MailNotifier extends AbstractTask
      */
     private function shouldCsvFileBeAdded(\Tx_Seminars_OldModel_Event $event)
     {
-        return $this->getConfiguration()->getAsBoolean('addRegistrationCsvToOrganizerReminderMail')
-            && $event->hasAttendances();
+        return $this->getConfiguration()->getAsBoolean('addRegistrationCsvToOrganizerReminderMail') && $event->hasAttendances();
+    }
+
+    /**
+     * Automatically changes the status for events for which this is enabled.
+     *
+     * @return void
+     *
+     * @throws \UnexpectedValueException
+     */
+    public function automaticallyChangeEventStatuses()
+    {
+        $languageService = $this->getLanguageService();
+
+        $events = $this->eventMapper->findForAutomaticStatusChange();
+        /** @var \Tx_Seminars_Model_Event $event */
+        foreach ($events as $event) {
+            $statusWasChanged = $this->eventStatusService->updateStatusAndSave($event);
+            if (!$statusWasChanged) {
+                continue;
+            }
+
+            if ($event->isConfirmed()) {
+                $subject = $languageService->getLL('email-event-confirmed-subject');
+                $body = $languageService->getLL('email-event-confirmed-body');
+            } elseif ($event->isCanceled()) {
+                $subject = $languageService->getLL('email-event-canceled-subject');
+                $body = $languageService->getLL('email-event-canceled-body');
+            } else {
+                throw new \UnexpectedValueException(
+                    'Event status for event #' . $event->getUid() . ' was still "planned" after the status change.',
+                    1457982810);
+            }
+
+            $this->emailService->sendEmailToAttendees($event, $subject, $body);
+        }
     }
 
     /**
@@ -324,7 +409,8 @@ class MailNotifier extends AbstractTask
      */
     protected function getConfiguration()
     {
-        \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->configurationPageUid);
+        \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->getConfigurationPageUid());
+
         return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
     }
 }

@@ -1,6 +1,7 @@
 1.0.0 - currently working on
 
 Features:
+- [#5656] Automatic canceling/confirmation of events
 - [#5682] Add variables for the e-mail subject
 - [#5676] Add EventMapper::findForAutomaticStatusChange
 - [#5674] Also mute the notification e-mails to the organizer
