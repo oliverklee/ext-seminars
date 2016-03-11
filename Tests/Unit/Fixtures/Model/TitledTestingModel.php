@@ -15,18 +15,18 @@
 /**
  * This class represents a titled model for testing purposes.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Fixtures_Model_TitledTestingModel extends Tx_Oelib_Model implements Tx_Seminars_Interface_Titled {
-	/**
-	 * Returns our title.
-	 *
-	 * @return string our title, will not be empty
-	 */
-	public function getTitle() {
-		return $this->getAsString('title');
-	}
+class Tx_Seminars_Tests_Fixtures_Model_TitledTestingModel extends Tx_Oelib_Model implements Tx_Seminars_Interface_Titled
+{
+    /**
+     * Returns our title.
+     *
+     * @return string our title, will not be empty
+     */
+    public function getTitle()
+    {
+        return $this->getAsString('title');
+    }
 }

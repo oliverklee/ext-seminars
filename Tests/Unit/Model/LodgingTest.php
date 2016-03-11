@@ -15,54 +15,57 @@
 /**
  * Test case.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Model_LodgingTest extends Tx_Phpunit_TestCase {
-	/**
-	 * @var Tx_Seminars_Model_Lodging
-	 */
-	private $fixture;
+class Tx_Seminars_Tests_Unit_Model_LodgingTest extends Tx_Phpunit_TestCase
+{
+    /**
+     * @var Tx_Seminars_Model_Lodging
+     */
+    private $fixture;
 
-	protected function setUp() {
-		$this->fixture = new Tx_Seminars_Model_Lodging();
-	}
+    protected function setUp()
+    {
+        $this->fixture = new Tx_Seminars_Model_Lodging();
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTitleWithEmptyTitleThrowsException() {
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'The parameter $title must not be empty.'
-		);
+    /**
+     * @test
+     */
+    public function setTitleWithEmptyTitleThrowsException()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'The parameter $title must not be empty.'
+        );
 
-		$this->fixture->setTitle('');
-	}
+        $this->fixture->setTitle('');
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTitleSetsTitle() {
-		$this->fixture->setTitle('Shack');
+    /**
+     * @test
+     */
+    public function setTitleSetsTitle()
+    {
+        $this->fixture->setTitle('Shack');
 
-		self::assertEquals(
-			'Shack',
-			$this->fixture->getTitle()
-		);
-	}
+        self::assertEquals(
+            'Shack',
+            $this->fixture->getTitle()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getTitleWithNonEmptyTitleReturnsTitle() {
-		$this->fixture->setData(array('title' => 'Shack'));
+    /**
+     * @test
+     */
+    public function getTitleWithNonEmptyTitleReturnsTitle()
+    {
+        $this->fixture->setData(array('title' => 'Shack'));
 
-		self::assertEquals(
-			'Shack',
-			$this->fixture->getTitle()
-		);
-	}
+        self::assertEquals(
+            'Shack',
+            $this->fixture->getTitle()
+        );
+    }
 }

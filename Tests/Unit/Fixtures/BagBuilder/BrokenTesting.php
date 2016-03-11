@@ -15,14 +15,13 @@
 /**
  * This builder class creates customized test bag objects.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_tests_fixtures_BagBuilder_BrokenTesting extends Tx_Seminars_BagBuilder_Abstract {
-	/**
-	 * @var string class name of the bag class that will be built
-	 */
-	protected $bagClassName = Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing::class;
+class tx_seminars_tests_fixtures_BagBuilder_BrokenTesting extends Tx_Seminars_BagBuilder_Abstract
+{
+    /**
+     * @var string class name of the bag class that will be built
+     */
+    protected $bagClassName = Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing::class;
 }

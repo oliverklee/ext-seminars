@@ -15,41 +15,43 @@
 /**
  * Test case.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends Tx_Phpunit_TestCase {
-	/**
-	 * the fixture to test
-	 *
-	 * @var tx_seminars_tests_fixtures_FrontEnd_TestingView
-	 */
-	private $fixture;
+class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends Tx_Phpunit_TestCase
+{
+    /**
+     * the fixture to test
+     *
+     * @var tx_seminars_tests_fixtures_FrontEnd_TestingView
+     */
+    private $fixture;
 
-	/**
-	 * @var Tx_Oelib_TestingFramework
-	 */
-	private $testingFramework;
+    /**
+     * @var Tx_Oelib_TestingFramework
+     */
+    private $testingFramework;
 
-	protected function setUp() {
-		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
-		$this->testingFramework->createFakeFrontEnd();
-		$this->fixture = new tx_seminars_tests_fixtures_FrontEnd_TestingView(
-			array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
-			$GLOBALS['TSFE']->cObj
-		);
-	}
+    protected function setUp()
+    {
+        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework->createFakeFrontEnd();
+        $this->fixture = new tx_seminars_tests_fixtures_FrontEnd_TestingView(
+            array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
+            $GLOBALS['TSFE']->cObj
+        );
+    }
 
-	protected function tearDown() {
-		$this->testingFramework->cleanUp();
-	}
+    protected function tearDown()
+    {
+        $this->testingFramework->cleanUp();
+    }
 
-	public function testRenderCanReturnAViewsContent() {
-		self::assertEquals(
-			'Hi, I am the testingFrontEndView!',
-			$this->fixture->render()
-		);
-	}
+    public function testRenderCanReturnAViewsContent()
+    {
+        self::assertEquals(
+            'Hi, I am the testingFrontEndView!',
+            $this->fixture->render()
+        );
+    }
 }

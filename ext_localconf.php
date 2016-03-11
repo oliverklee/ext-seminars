@@ -41,34 +41,33 @@ defined('TYPO3_MODE') or die('Access denied.');
 	options.saveDocNew.tx_seminars_skills=1
 ');
 
-
 // Adds our custom function to a hook in \TYPO3\CMS\Core\DataHandling\DataHandler
 // Used for post-validation of fields in back-end forms.
 $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:seminars/Classes/class.tx_seminars_tcemain.php:tx_seminars_tcemainprocdm';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43(
-	$_EXTKEY, 'Classes/FrontEnd/DefaultController.php', '_pi1', 'list_type', 0
+    $_EXTKEY, 'Classes/FrontEnd/DefaultController.php', '_pi1', 'list_type', 0
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($_EXTKEY, 'setup', '
 	plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN($_EXTKEY) . '_pi1.userFunc = Tx_Seminars_FrontEnd_DefaultController->main
 ', 43);
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript(
-	$_EXTKEY,
-	'setup', '
+    $_EXTKEY,
+    'setup', '
 	tt_content.shortcut.20.conf.tx_seminars_seminars = < plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN($_EXTKEY) . '_pi1
 	tt_content.shortcut.20.conf.tx_seminars_seminars.CMD = singleView
 ',
-	43
+    43
 );
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][\OliverKlee\Seminars\SchedulerTasks\MailNotifier::class] = [
-	'extension' => $_EXTKEY,
-	'title' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xml:schedulerTasks.mailNotifier.name',
-	'description' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xml:schedulerTasks.mailNotifier.description',
-	'additionalFields' => \OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration::class,
+    'extension' => $_EXTKEY,
+    'title' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xml:schedulerTasks.mailNotifier.name',
+    'description' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xml:schedulerTasks.mailNotifier.description',
+    'additionalFields' => \OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration::class,
 ];
 
 // RealURL autoconfiguration
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['seminars']
-	= 'OliverKlee\\Seminars\\RealUrl\\Configuration->addConfiguration';
+    = 'OliverKlee\\Seminars\\RealUrl\\Configuration->addConfiguration';

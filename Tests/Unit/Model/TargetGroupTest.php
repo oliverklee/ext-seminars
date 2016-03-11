@@ -15,136 +15,143 @@
 /**
  * Test case.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends Tx_Phpunit_TestCase {
-	/**
-	 * @var Tx_Seminars_Model_TargetGroup
-	 */
-	private $fixture;
+class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends Tx_Phpunit_TestCase
+{
+    /**
+     * @var Tx_Seminars_Model_TargetGroup
+     */
+    private $fixture;
 
-	protected function setUp() {
-		$this->fixture = new Tx_Seminars_Model_TargetGroup();
-	}
+    protected function setUp()
+    {
+        $this->fixture = new Tx_Seminars_Model_TargetGroup();
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTitleWithEmptyTitleThrowsException() {
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'The parameter $title must not be empty.'
-		);
+    /**
+     * @test
+     */
+    public function setTitleWithEmptyTitleThrowsException()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'The parameter $title must not be empty.'
+        );
 
-		$this->fixture->setTitle('');
-	}
+        $this->fixture->setTitle('');
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTitleSetsTitle() {
-		$this->fixture->setTitle('Housewives');
+    /**
+     * @test
+     */
+    public function setTitleSetsTitle()
+    {
+        $this->fixture->setTitle('Housewives');
 
-		self::assertEquals(
-			'Housewives',
-			$this->fixture->getTitle()
-		);
-	}
+        self::assertEquals(
+            'Housewives',
+            $this->fixture->getTitle()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getTitleWithNonEmptyTitleReturnsTitle() {
-		$this->fixture->setData(array('title' => 'Housewives'));
+    /**
+     * @test
+     */
+    public function getTitleWithNonEmptyTitleReturnsTitle()
+    {
+        $this->fixture->setData(array('title' => 'Housewives'));
 
-		self::assertEquals(
-			'Housewives',
-			$this->fixture->getTitle()
-		);
-	}
+        self::assertEquals(
+            'Housewives',
+            $this->fixture->getTitle()
+        );
+    }
 
+    /////////////////////////////////////
+    // Tests concerning the minimum age
+    /////////////////////////////////////
 
-	/////////////////////////////////////
-	// Tests concerning the minimum age
-	/////////////////////////////////////
+    /**
+     * @test
+     */
+    public function getMinimumAgeWithNoMinimumAgeSetReturnsZero()
+    {
+        $this->fixture->setData(array());
 
-	/**
-	 * @test
-	 */
-	public function getMinimumAgeWithNoMinimumAgeSetReturnsZero() {
-		$this->fixture->setData(array());
+        self::assertEquals(
+            0,
+            $this->fixture->getMinimumAge()
+        );
+    }
 
-		self::assertEquals(
-			0,
-			$this->fixture->getMinimumAge()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getMinimumAgeWithNonZeroMinimumAgeReturnsMinimumAge()
+    {
+        $this->fixture->setData(array('minimum_age' => 18));
 
-	/**
-	 * @test
-	 */
-	public function getMinimumAgeWithNonZeroMinimumAgeReturnsMinimumAge() {
-		$this->fixture->setData(array('minimum_age' => 18));
+        self::assertEquals(
+            18,
+            $this->fixture->getMinimumAge()
+        );
+    }
 
-		self::assertEquals(
-			18,
-			$this->fixture->getMinimumAge()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setMinimumAgeSetsMinimumAge()
+    {
+        $this->fixture->setMinimumAge(18);
 
-	/**
-	 * @test
-	 */
-	public function setMinimumAgeSetsMinimumAge() {
-		$this->fixture->setMinimumAge(18);
+        self::assertEquals(
+            18,
+            $this->fixture->getMinimumAge()
+        );
+    }
 
-		self::assertEquals(
-			18,
-			$this->fixture->getMinimumAge()
-		);
-	}
+    /////////////////////////////////////
+    // Tests concerning the maximum age
+    /////////////////////////////////////
 
+    /**
+     * @test
+     */
+    public function getMaximumAgeWithNoMaximumAgeSetReturnsZero()
+    {
+        $this->fixture->setData(array());
 
-	/////////////////////////////////////
-	// Tests concerning the maximum age
-	/////////////////////////////////////
+        self::assertEquals(
+            0,
+            $this->fixture->getMaximumAge()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getMaximumAgeWithNoMaximumAgeSetReturnsZero() {
-		$this->fixture->setData(array());
+    /**
+     * @test
+     */
+    public function getMaximumAgeWithNonZeroMaximumAgeReturnsMaximumAge()
+    {
+        $this->fixture->setData(array('maximum_age' => 18));
 
-		self::assertEquals(
-			0,
-			$this->fixture->getMaximumAge()
-		);
-	}
+        self::assertEquals(
+            18,
+            $this->fixture->getMaximumAge()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getMaximumAgeWithNonZeroMaximumAgeReturnsMaximumAge() {
-		$this->fixture->setData(array('maximum_age' => 18));
+    /**
+     * @test
+     */
+    public function setMaximumAgeSetsMaximumAge()
+    {
+        $this->fixture->setMaximumAge(18);
 
-		self::assertEquals(
-			18,
-			$this->fixture->getMaximumAge()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setMaximumAgeSetsMaximumAge() {
-		$this->fixture->setMaximumAge(18);
-
-		self::assertEquals(
-			18,
-			$this->fixture->getMaximumAge()
-		);
-	}
+        self::assertEquals(
+            18,
+            $this->fixture->getMaximumAge()
+        );
+    }
 }

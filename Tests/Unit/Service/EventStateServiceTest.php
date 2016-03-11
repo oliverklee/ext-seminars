@@ -319,5 +319,4 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
 
         $this->subject->updateStatusAndSave($event);
     }
-
 }

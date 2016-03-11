@@ -17,81 +17,83 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class creates back-end e-mail form for confirming an event.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Mario Rimann <mario@screenteam.com>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_BackEnd_ConfirmEventMailForm extends Tx_Seminars_BackEnd_AbstractEventMailForm  {
-	/**
-	 * @var string the action of this form
-	 */
-	protected $action = 'confirmEvent';
+class Tx_Seminars_BackEnd_ConfirmEventMailForm extends Tx_Seminars_BackEnd_AbstractEventMailForm
+{
+    /**
+     * @var string the action of this form
+     */
+    protected $action = 'confirmEvent';
 
-	/**
-	 * the prefix for all locallang keys for prefilling the form, must not be empty
-	 *
-	 * @var string
-	 */
-	protected $formFieldPrefix = 'confirmMailForm_prefillField_';
+    /**
+     * the prefix for all locallang keys for prefilling the form, must not be empty
+     *
+     * @var string
+     */
+    protected $formFieldPrefix = 'confirmMailForm_prefillField_';
 
-	/**
-	 * Returns the label for the submit button.
-	 *
-	 * @return string label for the submit button, will not be empty
-	 */
-	protected function getSubmitButtonLabel() {
-		return $GLOBALS['LANG']->getLL('confirmMailForm_sendButton');
-	}
+    /**
+     * Returns the label for the submit button.
+     *
+     * @return string label for the submit button, will not be empty
+     */
+    protected function getSubmitButtonLabel()
+    {
+        return $GLOBALS['LANG']->getLL('confirmMailForm_sendButton');
+    }
 
-	/**
-	 * Gets the content of the message body for the e-mail.
-	 *
-	 * @return string the content for the message body, will not be empty
-	 */
-	protected function getMessageBodyFormContent() {
-		return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
-	}
+    /**
+     * Gets the content of the message body for the e-mail.
+     *
+     * @return string the content for the message body, will not be empty
+     */
+    protected function getMessageBodyFormContent()
+    {
+        return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
+    }
 
-	/**
-	 * Calls all registered hooks for modifying the e-mail.
-	 *
-	 * @param Tx_Seminars_Model_Registration $registration
-	 *        the registration to which the e-mail refers
-	 * @param Tx_Oelib_Mail $eMail
-	 *        the e-mail to be sent
-	 *
-	 * @return void
-	 */
-	protected function modifyEmailWithHook(
-		Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail
-	) {
-		foreach ($this->getHooks() as $hook) {
-			$hook->modifyConfirmEmail($registration, $eMail);
-		}
-	}
+    /**
+     * Calls all registered hooks for modifying the e-mail.
+     *
+     * @param Tx_Seminars_Model_Registration $registration
+     *        the registration to which the e-mail refers
+     * @param Tx_Oelib_Mail $eMail
+     *        the e-mail to be sent
+     *
+     * @return void
+     */
+    protected function modifyEmailWithHook(
+        Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail
+    ) {
+        foreach ($this->getHooks() as $hook) {
+            $hook->modifyConfirmEmail($registration, $eMail);
+        }
+    }
 
-	/**
-	 * Marks an event according to the status to set and commits the change to
-	 * the database.
-	 *
-	 * @return void
-	 */
-	protected function setEventStatus() {
-		$this->getEvent()->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
-		/** @var Tx_Seminars_Mapper_Event $mapper */
-		$mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
-		$mapper->save($this->getEvent());
+    /**
+     * Marks an event according to the status to set and commits the change to
+     * the database.
+     *
+     * @return void
+     */
+    protected function setEventStatus()
+    {
+        $this->getEvent()->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        /** @var Tx_Seminars_Mapper_Event $mapper */
+        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
+        $mapper->save($this->getEvent());
 
-		/** @var FlashMessage $message */
-		$message = GeneralUtility::makeInstance(
-			FlashMessage::class,
-			$GLOBALS['LANG']->getLL('message_eventConfirmed'),
-			'',
-			FlashMessage::OK,
-			TRUE
-		);
-		$this->addFlashMessage($message);
-	}
+        /** @var FlashMessage $message */
+        $message = GeneralUtility::makeInstance(
+            FlashMessage::class,
+            $GLOBALS['LANG']->getLL('message_eventConfirmed'),
+            '',
+            FlashMessage::OK,
+            true
+        );
+        $this->addFlashMessage($message);
+    }
 }

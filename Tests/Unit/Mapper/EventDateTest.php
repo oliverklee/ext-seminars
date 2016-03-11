@@ -15,563 +15,578 @@
 /**
  * This test case holds all tests specific to event dates.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase {
-	/**
-	 * @var Tx_Oelib_TestingFramework
-	 */
-	private $testingFramework;
+class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
+{
+    /**
+     * @var Tx_Oelib_TestingFramework
+     */
+    private $testingFramework;
 
-	/**
-	 * @var Tx_Seminars_Mapper_Event
-	 */
-	private $fixture;
+    /**
+     * @var Tx_Seminars_Mapper_Event
+     */
+    private $fixture;
 
-	protected function setUp() {
-		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+    protected function setUp()
+    {
+        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->fixture = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
-	}
+        $this->fixture = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
+    }
 
-	protected function tearDown() {
-		$this->testingFramework->cleanUp();
-	}
+    protected function tearDown()
+    {
+        $this->testingFramework->cleanUp();
+    }
 
+    /////////////////////////////////
+    // Tests regarding getTopic().
+    /////////////////////////////////
 
-	/////////////////////////////////
-	// Tests regarding getTopic().
-	/////////////////////////////////
+    /**
+     * @test
+     */
+    public function getTopicWithoutTopicReturnsNull()
+    {
+        self::assertNull(
+            $this->fixture->getLoadedTestingModel(
+                array('object_type' => Tx_Seminars_Model_Event::TYPE_DATE)
+            )->getTopic()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getTopicWithoutTopicReturnsNull() {
-		self::assertNull(
-			$this->fixture->getLoadedTestingModel(
-				array('object_type' => Tx_Seminars_Model_Event::TYPE_DATE)
-			)->getTopic()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getTopicWithTopicReturnsEventInstance()
+    {
+        $topic = $this->fixture->getNewGhost();
 
-	/**
-	 * @test
-	 */
-	public function getTopicWithTopicReturnsEventInstance() {
-		$topic = $this->fixture->getNewGhost();
+        self::assertTrue(
+            $this->fixture->getLoadedTestingModel(
+                array(
+                    'topic' => $topic->getUid(),
+                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                )
+            )->getTopic() instanceof Tx_Seminars_Model_Event
+        );
+    }
 
-		self::assertTrue(
-			$this->fixture->getLoadedTestingModel(
-				array(
-					'topic' => $topic->getUid(),
-					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				)
-			)->getTopic() instanceof Tx_Seminars_Model_Event
-		);
-	}
+    //////////////////////////////////////
+    // Tests regarding getCategories().
+    //////////////////////////////////////
 
+    /**
+     * @test
+     */
+    public function getCategoriesForEventDateReturnsListInstance()
+    {
+        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-	//////////////////////////////////////
-	// Tests regarding getCategories().
-	//////////////////////////////////////
+        self::assertInstanceOf(
+            Tx_Oelib_List::class,
+            $this->fixture->getLoadedTestingModel(
+                array(
+                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'topic' => $topicUid,
+                )
+            )->getCategories()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getCategoriesForEventDateReturnsListInstance() {
-		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+    /**
+     * @test
+     */
+    public function getCategoriesForEventDateWithOneCategoryReturnsListOfCategories()
+    {
+        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array(
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            )
+        );
+        $category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+            ->getNewGhost();
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars', $topicUid, $category->getUid(), 'categories'
+        );
 
-		self::assertInstanceOf(
-			Tx_Oelib_List::class,
-			$this->fixture->getLoadedTestingModel(
-				array(
-					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-					'topic' => $topicUid,
-				)
-			)->getCategories()
-		);
-	}
+        /** @var Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->find($uid);
+        self::assertInstanceOf(Tx_Seminars_Model_Category::class, $model->getCategories()->first());
+    }
 
-	/**
-	 * @test
-	 */
-	public function getCategoriesForEventDateWithOneCategoryReturnsListOfCategories() {
-		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		$uid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				'topic' => $topicUid,
-			)
-		);
-		$category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
-			->getNewGhost();
-		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $topicUid, $category->getUid(), 'categories'
-		);
+    /**
+     * @test
+     */
+    public function getCategoriesForEventDateWithOneCategoryReturnsOneCategory()
+    {
+        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array(
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            )
+        );
+        $category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+            ->getNewGhost();
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars', $topicUid, $category->getUid(), 'categories'
+        );
 
-		/** @var Tx_Seminars_Model_Event $model */
-		$model = $this->fixture->find($uid);
-		self::assertInstanceOf(Tx_Seminars_Model_Category::class, $model->getCategories()->first());
-	}
+        /** @var Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->find($uid);
+        self::assertEquals(
+            $category->getUid(),
+            $model->getCategories()->getUids()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getCategoriesForEventDateWithOneCategoryReturnsOneCategory() {
-		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		$uid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				'topic' => $topicUid,
-			)
-		);
-		$category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
-			->getNewGhost();
-		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $topicUid, $category->getUid(), 'categories'
-		);
+    ////////////////////////////////////
+    // Tests regarding getEventType().
+    ////////////////////////////////////
 
-		/** @var Tx_Seminars_Model_Event $model */
-		$model = $this->fixture->find($uid);
-		self::assertEquals(
-			$category->getUid(),
-			$model->getCategories()->getUids()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getEventTypeForEventDateWithoutEventTypeReturnsNull()
+    {
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
+            ->getLoadedTestingModel(array());
 
+        self::assertNull(
+            $this->fixture->getLoadedTestingModel(
+                array(
+                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'topic' => $topic,
+                )
+            )->getEventType()
+        );
+    }
 
-	////////////////////////////////////
-	// Tests regarding getEventType().
-	////////////////////////////////////
+    /**
+     * @test
+     */
+    public function getEventTypeForEventDateWithEventTypeReturnsEventTypeInstance()
+    {
+        $eventType = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_EventType::class)
+            ->getLoadedTestingModel(array());
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
+            ->getLoadedTestingModel(array('event_type' => $eventType->getUid()));
 
-	/**
-	 * @test
-	 */
-	public function getEventTypeForEventDateWithoutEventTypeReturnsNull() {
-		$topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-			->getLoadedTestingModel(array());
+        self::assertInstanceOf(
+            Tx_Seminars_Model_EventType::class,
+            $this->fixture->getLoadedTestingModel(
+                array(
+                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'topic' => $topic->getUid(),
+                )
+            )->getEventType()
+        );
+    }
 
-		self::assertNull(
-			$this->fixture->getLoadedTestingModel(
-				array(
-					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-					'topic' => $topic,
-				)
-			)->getEventType()
-		);
-	}
+    /////////////////////////////////////////
+    // Tests regarding getPaymentMethods().
+    /////////////////////////////////////////
 
-	/**
-	 * @test
-	 */
-	public function getEventTypeForEventDateWithEventTypeReturnsEventTypeInstance() {
-		$eventType = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_EventType::class)
-			->getLoadedTestingModel(array());
-		$topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-			->getLoadedTestingModel(array('event_type' => $eventType->getUid()));
+    /**
+     * @test
+     */
+    public function getPaymentMethodsForEventDateReturnsListInstance()
+    {
+        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-		self::assertInstanceOf(
-			Tx_Seminars_Model_EventType::class,
-			$this->fixture->getLoadedTestingModel(
-				array(
-					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-					'topic' => $topic->getUid(),
-				)
-			)->getEventType()
-		);
-	}
+        self::assertInstanceOf(
+            Tx_Oelib_List::class,
+            $this->fixture->getLoadedTestingModel(
+                array(
+                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'topic' => $topicUid,
+                )
+            )->getPaymentMethods()
+        );
+    }
 
+    /**
+     * @test
+     */
+    public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsListOfPaymentMethods()
+    {
+        $paymentMethod = Tx_Oelib_MapperRegistry::
+            get(Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $topicUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('payment_methods' => 1)
+        );
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array(
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            )
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_payment_methods_mm', $topicUid,
+            $paymentMethod->getUid()
+        );
 
-	/////////////////////////////////////////
-	// Tests regarding getPaymentMethods().
-	/////////////////////////////////////////
+        /** @var Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->find($uid);
+        self::assertInstanceOf(Tx_Seminars_Model_PaymentMethod::class, $model->getPaymentMethods()->first());
+    }
 
-	/**
-	 * @test
-	 */
-	public function getPaymentMethodsForEventDateReturnsListInstance() {
-		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+    /**
+     * @test
+     */
+    public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsOnePaymentMethod()
+    {
+        $paymentMethod = Tx_Oelib_MapperRegistry::
+            get(Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $topicUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('payment_methods' => 1)
+        );
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array(
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            )
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_payment_methods_mm', $topicUid,
+            $paymentMethod->getUid()
+        );
 
-		self::assertInstanceOf(
-			Tx_Oelib_List::class,
-			$this->fixture->getLoadedTestingModel(
-				array(
-					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-					'topic' => $topicUid,
-				)
-			)->getPaymentMethods()
-		);
-	}
+        /** @var Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->find($uid);
+        self::assertEquals(
+            $paymentMethod->getUid(),
+            $model->getPaymentMethods()->getUids()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsListOfPaymentMethods() {
-		$paymentMethod = Tx_Oelib_MapperRegistry::
-			get(Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-		$topicUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('payment_methods' => 1)
-		);
-		$uid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				'topic' => $topicUid,
-			)
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_payment_methods_mm', $topicUid,
-			$paymentMethod->getUid()
-		);
+    ///////////////////////////////////////
+    // Tests regarding getTargetGroups().
+    ///////////////////////////////////////
 
-		/** @var Tx_Seminars_Model_Event $model */
-		$model = $this->fixture->find($uid);
-		self::assertInstanceOf(Tx_Seminars_Model_PaymentMethod::class, $model->getPaymentMethods()->first());
-	}
+    /**
+     * @test
+     */
+    public function getTargetGroupsForEventDateReturnsListInstance()
+    {
+        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-	/**
-	 * @test
-	 */
-	public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsOnePaymentMethod() {
-		$paymentMethod = Tx_Oelib_MapperRegistry::
-			get(Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-		$topicUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('payment_methods' => 1)
-		);
-		$uid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				'topic' => $topicUid,
-			)
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_payment_methods_mm', $topicUid,
-			$paymentMethod->getUid()
-		);
+        self::assertInstanceOf(
+            Tx_Oelib_List::class,
+            $this->fixture->getLoadedTestingModel(
+                array(
+                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'topic' => $topicUid,
+                )
+            )->getTargetGroups()
+        );
+    }
 
-		/** @var Tx_Seminars_Model_Event $model */
-		$model = $this->fixture->find($uid);
-		self::assertEquals(
-			$paymentMethod->getUid(),
-			$model->getPaymentMethods()->getUids()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getTargetGroupsForEventDateWithOneTargetGroupReturnsListOfTargetGroups()
+    {
+        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array(
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            )
+        );
+        $targetGroup = Tx_Oelib_MapperRegistry::
+            get(Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars', $topicUid, $targetGroup->getUid(), 'target_groups'
+        );
 
+        /** @var Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->find($uid);
+        self::assertTrue(
+            $model->getTargetGroups()->first() instanceof Tx_Seminars_Model_TargetGroup
+        );
+    }
 
-	///////////////////////////////////////
-	// Tests regarding getTargetGroups().
-	///////////////////////////////////////
+    /**
+     * @test
+     */
+    public function getTargetGroupsForEventDateWithOneTargetGroupReturnsOneTargetGroup()
+    {
+        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array(
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            )
+        );
+        $targetGroup = Tx_Oelib_MapperRegistry::
+            get(Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars', $topicUid, $targetGroup->getUid(), 'target_groups'
+        );
 
-	/**
-	 * @test
-	 */
-	public function getTargetGroupsForEventDateReturnsListInstance() {
-		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        /** @var Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->find($uid);
+        self::assertEquals(
+            $targetGroup->getUid(),
+            $model->getTargetGroups()->getUids()
+        );
+    }
 
-		self::assertInstanceOf(
-			Tx_Oelib_List::class,
-			$this->fixture->getLoadedTestingModel(
-				array(
-					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-					'topic' => $topicUid,
-				)
-			)->getTargetGroups()
-		);
-	}
+    /////////////////////////////////////
+    // Tests regarding getCheckboxes().
+    /////////////////////////////////////
 
-	/**
-	 * @test
-	 */
-	public function getTargetGroupsForEventDateWithOneTargetGroupReturnsListOfTargetGroups() {
-		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		$uid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				'topic' => $topicUid,
-			)
-		);
-		$targetGroup = Tx_Oelib_MapperRegistry::
-			get(Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
-		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $topicUid, $targetGroup->getUid(), 'target_groups'
-		);
+    /**
+     * @test
+     */
+    public function getCheckboxesForEventDateReturnsListInstance()
+    {
+        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-		/** @var Tx_Seminars_Model_Event $model */
-		$model = $this->fixture->find($uid);
-		self::assertTrue(
-			$model->getTargetGroups()->first() instanceof Tx_Seminars_Model_TargetGroup
-		);
-	}
+        self::assertInstanceOf(
+            Tx_Oelib_List::class,
+            $this->fixture->getLoadedTestingModel(
+                array(
+                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'topic' => $topicUid,
+                )
+            )->getCheckboxes()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getTargetGroupsForEventDateWithOneTargetGroupReturnsOneTargetGroup() {
-		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		$uid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				'topic' => $topicUid,
-			)
-		);
-		$targetGroup = Tx_Oelib_MapperRegistry::
-			get(Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
-		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $topicUid, $targetGroup->getUid(), 'target_groups'
-		);
+    /**
+     * @test
+     */
+    public function getCheckboxesForEventDateWithOneCheckboxReturnsListOfCheckboxes()
+    {
+        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array(
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            )
+        );
+        $checkbox = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
+            ->getNewGhost();
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars', $topicUid, $checkbox->getUid(), 'checkboxes'
+        );
 
-		/** @var Tx_Seminars_Model_Event $model */
-		$model = $this->fixture->find($uid);
-		self::assertEquals(
-			$targetGroup->getUid(),
-			$model->getTargetGroups()->getUids()
-		);
-	}
+        /** @var Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->find($uid);
+        self::assertInstanceOf(Tx_Seminars_Model_Checkbox::class, $model->getCheckboxes()->first());
+    }
 
+    /**
+     * @test
+     */
+    public function getCheckboxesForEventDateWithOneCheckboxReturnsOneCheckbox()
+    {
+        $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array(
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            )
+        );
+        $checkbox = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
+            ->getNewGhost();
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars', $topicUid, $checkbox->getUid(), 'checkboxes'
+        );
 
-	/////////////////////////////////////
-	// Tests regarding getCheckboxes().
-	/////////////////////////////////////
+        /** @var Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->find($uid);
+        self::assertEquals(
+            $checkbox->getUid(),
+            $model->getCheckboxes()->getUids()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getCheckboxesForEventDateReturnsListInstance() {
-		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+    ///////////////////////////////////////
+    // Tests regarding getRequirements().
+    ///////////////////////////////////////
 
-		self::assertInstanceOf(
-			Tx_Oelib_List::class,
-			$this->fixture->getLoadedTestingModel(
-				array(
-					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-					'topic' => $topicUid,
-				)
-			)->getCheckboxes()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getRequirementsForEventDateReturnsListInstance()
+    {
+        $topicUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+        );
 
-	/**
-	 * @test
-	 */
-	public function getCheckboxesForEventDateWithOneCheckboxReturnsListOfCheckboxes() {
-		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		$uid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				'topic' => $topicUid,
-			)
-		);
-		$checkbox = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
-			->getNewGhost();
-		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $topicUid, $checkbox->getUid(), 'checkboxes'
-		);
+        self::assertInstanceOf(
+            Tx_Oelib_List::class,
+            $this->fixture->getLoadedTestingModel(
+                array(
+                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'topic' => $topicUid,
+                )
+            )->getRequirements()
+        );
+    }
 
-		/** @var Tx_Seminars_Model_Event $model */
-		$model = $this->fixture->find($uid);
-		self::assertInstanceOf(Tx_Seminars_Model_Checkbox::class, $model->getCheckboxes()->first());
-	}
+    /**
+     * @test
+     */
+    public function getRequirementsForEventDateWithOneRequirementReturnsListOfEvents()
+    {
+        $topicUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+        );
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array(
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            )
+        );
+        $event = $this->fixture->getNewGhost();
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars', $topicUid, $event->getUid(), 'requirements'
+        );
 
-	/**
-	 * @test
-	 */
-	public function getCheckboxesForEventDateWithOneCheckboxReturnsOneCheckbox() {
-		$topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-		$uid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				'topic' => $topicUid,
-			)
-		);
-		$checkbox = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
-			->getNewGhost();
-		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $topicUid, $checkbox->getUid(), 'checkboxes'
-		);
+        /** @var Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->find($uid);
+        self::assertTrue(
+            $model->getRequirements()->first() instanceof Tx_Seminars_Model_Event
+        );
+    }
 
-		/** @var Tx_Seminars_Model_Event $model */
-		$model = $this->fixture->find($uid);
-		self::assertEquals(
-			$checkbox->getUid(),
-			$model->getCheckboxes()->getUids()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getRequirementsForEventDateWithOneRequirementsReturnsOneRequirement()
+    {
+        $topicUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+        );
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array(
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            )
+        );
+        $event = $this->fixture->getNewGhost();
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars', $topicUid, $event->getUid(), 'requirements'
+        );
 
+        /** @var Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->find($uid);
+        self::assertEquals(
+            $event->getUid(),
+            $model->getRequirements()->getUids()
+        );
+    }
 
-	///////////////////////////////////////
-	// Tests regarding getRequirements().
-	///////////////////////////////////////
+    ///////////////////////////////////////
+    // Tests regarding getDependencies().
+    ///////////////////////////////////////
 
-	/**
-	 * @test
-	 */
-	public function getRequirementsForEventDateReturnsListInstance() {
-		$topicUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
-		);
+    /**
+     * @test
+     */
+    public function getDependenciesForEventDateReturnsListInstance()
+    {
+        $topicUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+        );
 
-		self::assertInstanceOf(
-			Tx_Oelib_List::class,
-			$this->fixture->getLoadedTestingModel(
-				array(
-					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-					'topic' => $topicUid,
-				)
-			)->getRequirements()
-		);
-	}
+        self::assertInstanceOf(
+            Tx_Oelib_List::class,
+            $this->fixture->getLoadedTestingModel(
+                array(
+                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'topic' => $topicUid,
+                )
+            )->getDependencies()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getRequirementsForEventDateWithOneRequirementReturnsListOfEvents() {
-		$topicUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
-		);
-		$uid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				'topic' => $topicUid,
-			)
-		);
-		$event = $this->fixture->getNewGhost();
-		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $topicUid, $event->getUid(), 'requirements'
-		);
+    /**
+     * @test
+     */
+    public function getDependenciesForEventDateWithOneDependencyReturnsListOfEvents()
+    {
+        $topicUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+        );
+        $relatedUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+        );
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array(
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $relatedUid,
+            )
+        );
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars', $relatedUid, $topicUid, 'dependencies'
+        );
 
-		/** @var Tx_Seminars_Model_Event $model */
-		$model = $this->fixture->find($uid);
-		self::assertTrue(
-			$model->getRequirements()->first() instanceof Tx_Seminars_Model_Event
-		);
-	}
+        /** @var Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->find($uid);
+        self::assertTrue(
+            $model->getDependencies()->first() instanceof Tx_Seminars_Model_Event
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getRequirementsForEventDateWithOneRequirementsReturnsOneRequirement() {
-		$topicUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
-		);
-		$uid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				'topic' => $topicUid,
-			)
-		);
-		$event = $this->fixture->getNewGhost();
-		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $topicUid, $event->getUid(), 'requirements'
-		);
+    /**
+     * @test
+     */
+    public function getDependenciesForEventDateWithOneDependencyReturnsOneDependency()
+    {
+        $topicUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+        );
+        $relatedUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+        );
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array(
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $relatedUid,
+            )
+        );
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars', $relatedUid, $topicUid, 'dependencies'
+        );
 
-		/** @var Tx_Seminars_Model_Event $model */
-		$model = $this->fixture->find($uid);
-		self::assertEquals(
-			$event->getUid(),
-			$model->getRequirements()->getUids()
-		);
-	}
-
-
-	///////////////////////////////////////
-	// Tests regarding getDependencies().
-	///////////////////////////////////////
-
-	/**
-	 * @test
-	 */
-	public function getDependenciesForEventDateReturnsListInstance() {
-		$topicUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
-		);
-
-		self::assertInstanceOf(
-			Tx_Oelib_List::class,
-			$this->fixture->getLoadedTestingModel(
-				array(
-					'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-					'topic' => $topicUid,
-				)
-			)->getDependencies()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getDependenciesForEventDateWithOneDependencyReturnsListOfEvents() {
-		$topicUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
-		);
-		$relatedUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
-		);
-		$uid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				'topic' => $relatedUid,
-			)
-		);
-		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $relatedUid, $topicUid, 'dependencies'
-		);
-
-		/** @var Tx_Seminars_Model_Event $model */
-		$model = $this->fixture->find($uid);
-		self::assertTrue(
-			$model->getDependencies()->first() instanceof Tx_Seminars_Model_Event
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getDependenciesForEventDateWithOneDependencyReturnsOneDependency() {
-		$topicUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
-		);
-		$relatedUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
-		);
-		$uid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array(
-				'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-				'topic' => $relatedUid,
-			)
-		);
-		$this->testingFramework->createRelationAndUpdateCounter(
-			'tx_seminars_seminars', $relatedUid, $topicUid, 'dependencies'
-		);
-
-		/** @var Tx_Seminars_Model_Event $model */
-		$model = $this->fixture->find($uid);
-		self::assertEquals(
-			$topicUid,
-			$model->getDependencies()->getUids()
-		);
-	}
+        /** @var Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->find($uid);
+        self::assertEquals(
+            $topicUid,
+            $model->getDependencies()->getUids()
+        );
+    }
 }

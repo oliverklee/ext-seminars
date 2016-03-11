@@ -15,11 +15,9 @@
 /**
  * This class represents an untitled model for testing purposes.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Fixtures_Model_UntitledTestingModel extends Tx_Oelib_Model {
-
+class Tx_Seminars_Tests_Fixtures_Model_UntitledTestingModel extends Tx_Oelib_Model
+{
 }

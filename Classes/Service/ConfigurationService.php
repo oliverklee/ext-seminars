@@ -15,31 +15,31 @@
 /**
  * This class provides a way to access config values from plugin.tx_seminars to classes within FrontEnd/.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Service_ConfigurationService extends Tx_Oelib_TemplateHelper {
-	/** Same as class name */
-	public $prefixId = Tx_Seminars_Service_ConfigurationService::class;
+class Tx_Seminars_Service_ConfigurationService extends Tx_Oelib_TemplateHelper
+{
+    /** Same as class name */
+    public $prefixId = Tx_Seminars_Service_ConfigurationService::class;
 
-	/**
-	 * faking $this->scriptRelPath so the locallang.xml file is found
-	 *
-	 * @var string
-	 */
-	public $scriptRelPath = 'Resources/Private/Language/locallang.xml';
+    /**
+     * faking $this->scriptRelPath so the locallang.xml file is found
+     *
+     * @var string
+     */
+    public $scriptRelPath = 'Resources/Private/Language/locallang.xml';
 
-	/**
-	 * @var string the extension key
-	 */
-	public $extKey = 'seminars';
+    /**
+     * @var string the extension key
+     */
+    public $extKey = 'seminars';
 
-	/**
-	 * The constructor.
-	 */
-	public function __construct() {
-		$this->init();
-	}
+    /**
+     * The constructor.
+     */
+    public function __construct()
+    {
+        $this->init();
+    }
 }

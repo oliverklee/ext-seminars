@@ -24,85 +24,90 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class MailNotifierConfiguration implements AdditionalFieldProviderInterface {
-	/**
-	 * Gets additional fields to render in the form to add/edit a task
-	 *
-	 * @param string[] $taskInfo Values of the fields from the add/edit task form
-	 * @param AbstractTask|null $task The task object being edited. Null when adding a task!
-	 * @param SchedulerModuleController $schedulerModule Reference to the scheduler backend module
-	 *
-	 * @return string[][] a two-dimensional array
-	 *          array('Identifier' => array('fieldId' => array('code' => '', 'label' => '', 'cshKey' => '', 'cshLabel' => ''))
-	 */
-	public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $schedulerModule) {
-		$hasPageUid = !empty($taskInfo['configurationPageUid']) && (int) $taskInfo['configurationPageUid'] > 0;
-		$pageUid = $hasPageUid ? (string)(int)$taskInfo['configurationPageUid'] : '';
-		$taskInfo['configurationPageUid'] = $pageUid;
+class MailNotifierConfiguration implements AdditionalFieldProviderInterface
+{
+    /**
+     * Gets additional fields to render in the form to add/edit a task
+     *
+     * @param string[] $taskInfo Values of the fields from the add/edit task form
+     * @param AbstractTask|null $task The task object being edited. Null when adding a task!
+     * @param SchedulerModuleController $schedulerModule Reference to the scheduler backend module
+     *
+     * @return string[][] a two-dimensional array
+     *          array('Identifier' => array('fieldId' => array('code' => '', 'label' => '', 'cshKey' => '', 'cshLabel' => ''))
+     */
+    public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $schedulerModule)
+    {
+        $hasPageUid = !empty($taskInfo['configurationPageUid']) && (int) $taskInfo['configurationPageUid'] > 0;
+        $pageUid = $hasPageUid ? (string)(int)$taskInfo['configurationPageUid'] : '';
+        $taskInfo['configurationPageUid'] = $pageUid;
 
-		$fieldId = 'task-page-uid';
-		$fieldCode = '<input type="text" name="tx_scheduler[configurationPageUid]" id="'
-			. $fieldId . '" value="' . $pageUid . '" size="4" />';
+        $fieldId = 'task-page-uid';
+        $fieldCode = '<input type="text" name="tx_scheduler[configurationPageUid]" id="'
+            . $fieldId . '" value="' . $pageUid . '" size="4" />';
 
-		$additionalFields = [
-			$fieldId => [
-				'code' => $fieldCode,
-				'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
-				'cshKey' => '',
-				'cshLabel' => '',
-			],
-		];
+        $additionalFields = [
+            $fieldId => [
+                'code' => $fieldCode,
+                'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
+                'cshKey' => '',
+                'cshLabel' => '',
+            ],
+        ];
 
-		return $additionalFields;
-	}
+        return $additionalFields;
+    }
 
-	/**
-	 * Validates the additional field values.
-	 *
-	 * @param string[] $submittedData an array containing the data submitted by the add/edit task form
-	 * @param SchedulerModuleController $schedulerModule reference to the scheduler backend module
-	 *
-	 * @return bool true if validation was OK (or selected class is not relevant), false otherwise
-	 */
-	public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $schedulerModule) {
-		$submittedData['configurationPageUid'] = (int)$submittedData['configurationPageUid'];
-		$pageUid = $submittedData['configurationPageUid'];
-		$hasPageUid = $pageUid > 0 && \Tx_Oelib_Db::existsRecordWithUid('pages', $pageUid);
-		if ($hasPageUid) {
-			return true;
-		}
+    /**
+     * Validates the additional field values.
+     *
+     * @param string[] $submittedData an array containing the data submitted by the add/edit task form
+     * @param SchedulerModuleController $schedulerModule reference to the scheduler backend module
+     *
+     * @return bool true if validation was OK (or selected class is not relevant), false otherwise
+     */
+    public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $schedulerModule)
+    {
+        $submittedData['configurationPageUid'] = (int)$submittedData['configurationPageUid'];
+        $pageUid = $submittedData['configurationPageUid'];
+        $hasPageUid = $pageUid > 0 && \Tx_Oelib_Db::existsRecordWithUid('pages', $pageUid);
+        if ($hasPageUid) {
+            return true;
+        }
 
-		$schedulerModule->addMessage(
-			$this->getLanguageService()->sL(
-				'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.errors.page-uid'
-			),
-			FlashMessage::ERROR
-		);
+        $schedulerModule->addMessage(
+            $this->getLanguageService()->sL(
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.errors.page-uid'
+            ),
+            FlashMessage::ERROR
+        );
 
-		return false;
-	}
+        return false;
+    }
 
-	/**
-	 * Returns $GLOBALS['LANG'].
-	 *
-	 * @return LanguageService|null
-	 */
-	protected function getLanguageService() {
-		return isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
-	}
+    /**
+     * Returns $GLOBALS['LANG'].
+     *
+     * @return LanguageService|null
+     */
+    protected function getLanguageService()
+    {
+        return isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
+    }
 
-	/**
-	 * Takes care of saving the additional fields' values in the task.
-	 *
-	 * @param string[] $submittedData an array containing the data submitted by the add/edit task form
-	 * @param AbstractTask $task the task that is being configured
-	 *
-	 * @return void
-	 */
-	public function saveAdditionalFields(array $submittedData, AbstractTask $task) {
-		$pageUid = !empty($submittedData['configurationPageUid']) ? (int)$submittedData['configurationPageUid'] : 0;
+    /**
+     * Takes care of saving the additional fields' values in the task.
+     *
+     * @param string[] $submittedData an array containing the data submitted by the add/edit task form
+     * @param AbstractTask $task the task that is being configured
+     *
+     * @return void
+     */
+    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
+    {
+        $pageUid = !empty($submittedData['configurationPageUid']) ? (int)$submittedData['configurationPageUid'] : 0;
 
-		/** @var MailNotifier$task */
-		$task->setConfigurationPageUid($pageUid);
-	}
+        /** @var MailNotifier$task */
+        $task->setConfigurationPageUid($pageUid);
+    }
 }

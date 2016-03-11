@@ -15,19 +15,18 @@
 /**
  * This class represents a mapper for organizers.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Mapper_Organizer extends Tx_Oelib_DataMapper {
-	/**
-	 * @var string the name of the database table for this mapper
-	 */
-	protected $tableName = 'tx_seminars_organizers';
+class Tx_Seminars_Mapper_Organizer extends Tx_Oelib_DataMapper
+{
+    /**
+     * @var string the name of the database table for this mapper
+     */
+    protected $tableName = 'tx_seminars_organizers';
 
-	/**
-	 * @var string the model class name for this mapper, must not be empty
-	 */
-	protected $modelClassName = Tx_Seminars_Model_Organizer::class;
+    /**
+     * @var string the model class name for this mapper, must not be empty
+     */
+    protected $modelClassName = Tx_Seminars_Model_Organizer::class;
 }

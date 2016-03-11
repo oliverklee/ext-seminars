@@ -15,96 +15,100 @@
 /**
  * Test case.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends Tx_Phpunit_TestCase {
-	/**
-	 * @var Tx_Seminars_FrontEnd_Editor
-	 */
-	private $fixture;
-	/**
-	 * @var Tx_Oelib_TestingFramework
-	 */
-	private $testingFramework;
+class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends Tx_Phpunit_TestCase
+{
+    /**
+     * @var Tx_Seminars_FrontEnd_Editor
+     */
+    private $fixture;
+    /**
+     * @var Tx_Oelib_TestingFramework
+     */
+    private $testingFramework;
 
-	protected function setUp() {
-		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
-		$this->testingFramework->createFakeFrontEnd();
+    protected function setUp()
+    {
+        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework->createFakeFrontEnd();
 
-		$this->fixture = new Tx_Seminars_FrontEnd_Editor(array(), $GLOBALS['TSFE']->cObj);
-		$this->fixture->setTestMode();
-	}
+        $this->fixture = new Tx_Seminars_FrontEnd_Editor(array(), $GLOBALS['TSFE']->cObj);
+        $this->fixture->setTestMode();
+    }
 
-	protected function tearDown() {
-		$this->testingFramework->cleanUp();
+    protected function tearDown()
+    {
+        $this->testingFramework->cleanUp();
 
-		Tx_Seminars_Service_RegistrationManager::purgeInstance();
-	}
+        Tx_Seminars_Service_RegistrationManager::purgeInstance();
+    }
 
+    //////////////////////////////
+    // Testing the test mode flag
+    //////////////////////////////
 
-	//////////////////////////////
-	// Testing the test mode flag
-	//////////////////////////////
+    public function testIsTestModeReturnsTrueForTestModeEnabled()
+    {
+        self::assertTrue(
+            $this->fixture->isTestMode()
+        );
+    }
 
-	public function testIsTestModeReturnsTrueForTestModeEnabled() {
-		self::assertTrue(
-			$this->fixture->isTestMode()
-		);
-	}
+    public function testIsTestModeReturnsFalseForTestModeDisabled()
+    {
+        $fixture = new Tx_Seminars_FrontEnd_Editor(array(), $GLOBALS['TSFE']->cObj);
 
-	public function testIsTestModeReturnsFalseForTestModeDisabled() {
-		$fixture = new Tx_Seminars_FrontEnd_Editor(array(), $GLOBALS['TSFE']->cObj);
+        self::assertFalse(
+            $fixture->isTestMode()
+        );
+    }
 
-		self::assertFalse(
-			$fixture->isTestMode()
-		);
-	}
+    /////////////////////////////////////////////////
+    // Tests for setting and getting the object UID
+    /////////////////////////////////////////////////
 
+    public function testGetObjectUidReturnsTheSetObjectUidForZero()
+    {
+        $this->fixture->setObjectUid(0);
 
-	/////////////////////////////////////////////////
-	// Tests for setting and getting the object UID
-	/////////////////////////////////////////////////
+        self::assertEquals(
+            0,
+            $this->fixture->getObjectUid()
+        );
+    }
 
-	public function testGetObjectUidReturnsTheSetObjectUidForZero() {
-		$this->fixture->setObjectUid(0);
+    public function testGetObjectUidReturnsTheSetObjectUidForExistingObjectUid()
+    {
+        $uid = $this->testingFramework->createRecord('tx_seminars_test');
+        $this->fixture->setObjectUid($uid);
 
-		self::assertEquals(
-			0,
-			$this->fixture->getObjectUid()
-		);
-	}
+        self::assertEquals(
+            $uid,
+            $this->fixture->getObjectUid()
+        );
+    }
 
-	public function testGetObjectUidReturnsTheSetObjectUidForExistingObjectUid() {
-		$uid = $this->testingFramework->createRecord('tx_seminars_test');
-		$this->fixture->setObjectUid($uid);
+    ////////////////////////////////////////////////////////////////
+    // Tests for getting form values and setting faked form values
+    ////////////////////////////////////////////////////////////////
 
-		self::assertEquals(
-			$uid,
-			$this->fixture->getObjectUid()
-		);
-	}
+    public function testGetFormValueReturnsEmptyStringForRequestedFormValueNotSet()
+    {
+        self::assertEquals(
+            '',
+            $this->fixture->getFormValue('title')
+        );
+    }
 
+    public function testGetFormValueReturnsValueSetViaSetFakedFormValue()
+    {
+        $this->fixture->setFakedFormValue('title', 'foo');
 
-	////////////////////////////////////////////////////////////////
-	// Tests for getting form values and setting faked form values
-	////////////////////////////////////////////////////////////////
-
-	public function testGetFormValueReturnsEmptyStringForRequestedFormValueNotSet() {
-		self::assertEquals(
-			'',
-			$this->fixture->getFormValue('title')
-		);
-	}
-
-	public function testGetFormValueReturnsValueSetViaSetFakedFormValue() {
-		$this->fixture->setFakedFormValue('title', 'foo');
-
-		self::assertEquals(
-			'foo',
-			$this->fixture->getFormValue('title')
-		);
-	}
+        self::assertEquals(
+            'foo',
+            $this->fixture->getFormValue('title')
+        );
+    }
 }

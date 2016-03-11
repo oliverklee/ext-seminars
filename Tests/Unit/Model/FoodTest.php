@@ -15,54 +15,57 @@
 /**
  * Test case.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Model_FoodTest extends Tx_Phpunit_TestCase {
-	/**
-	 * @var Tx_Seminars_Model_Food
-	 */
-	private $fixture;
+class Tx_Seminars_Tests_Unit_Model_FoodTest extends Tx_Phpunit_TestCase
+{
+    /**
+     * @var Tx_Seminars_Model_Food
+     */
+    private $fixture;
 
-	protected function setUp() {
-		$this->fixture = new Tx_Seminars_Model_Food();
-	}
+    protected function setUp()
+    {
+        $this->fixture = new Tx_Seminars_Model_Food();
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTitleWithEmptyTitleThrowsException() {
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'The parameter $title must not be empty.'
-		);
+    /**
+     * @test
+     */
+    public function setTitleWithEmptyTitleThrowsException()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'The parameter $title must not be empty.'
+        );
 
-		$this->fixture->setTitle('');
-	}
+        $this->fixture->setTitle('');
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTitleSetsTitle() {
-		$this->fixture->setTitle('Crunchy crisps');
+    /**
+     * @test
+     */
+    public function setTitleSetsTitle()
+    {
+        $this->fixture->setTitle('Crunchy crisps');
 
-		self::assertEquals(
-			'Crunchy crisps',
-			$this->fixture->getTitle()
-		);
-	}
+        self::assertEquals(
+            'Crunchy crisps',
+            $this->fixture->getTitle()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getTitleWithNonEmptyTitleReturnsTitle() {
-		$this->fixture->setData(array('title' => 'Crunchy crisps'));
+    /**
+     * @test
+     */
+    public function getTitleWithNonEmptyTitleReturnsTitle()
+    {
+        $this->fixture->setData(array('title' => 'Crunchy crisps'));
 
-		self::assertEquals(
-			'Crunchy crisps',
-			$this->fixture->getTitle()
-		);
-	}
+        self::assertEquals(
+            'Crunchy crisps',
+            $this->fixture->getTitle()
+        );
+    }
 }

@@ -25,262 +25,277 @@ use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase {
-	/**
-	 * @var MailNotifierConfiguration
-	 */
-	protected $subject = NULL;
+class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
+{
+    /**
+     * @var MailNotifierConfiguration
+     */
+    protected $subject = null;
 
-	/**
-	 * @var \Tx_Oelib_TestingFramework
-	 */
-	protected $testingFramework = NULL;
+    /**
+     * @var \Tx_Oelib_TestingFramework
+     */
+    protected $testingFramework = null;
 
-	/**
-	 * @var \Tx_Oelib_Configuration
-	 */
-	protected $configuration = NULL;
+    /**
+     * @var \Tx_Oelib_Configuration
+     */
+    protected $configuration = null;
 
-	/**
-	 * @var \Tx_Oelib_EmailCollector
-	 */
-	protected $mailer = NULL;
+    /**
+     * @var \Tx_Oelib_EmailCollector
+     */
+    protected $mailer = null;
 
-	/**
-	 * @var LanguageService
-	 */
-	private $languageBackup = NULL;
+    /**
+     * @var LanguageService
+     */
+    private $languageBackup = null;
 
-	/**
-	 * @var SchedulerModuleController|\PHPUnit_Framework_MockObject_MockObject
-	 */
-	private $moduleController = null;
+    /**
+     * @var SchedulerModuleController|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $moduleController = null;
 
-	/**
-	 * @var LanguageService
-	 */
-	private $languageService = null;
+    /**
+     * @var LanguageService
+     */
+    private $languageService = null;
 
-	protected function setUp() {
-		$this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
-		$this->languageService = new LanguageService();
-		$this->languageService->init('default');
-		$GLOBALS['LANG'] = $this->languageService;
+    protected function setUp()
+    {
+        $this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
+        $this->languageService = new LanguageService();
+        $this->languageService->init('default');
+        $GLOBALS['LANG'] = $this->languageService;
 
-		$this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
-		$this->moduleController = $this->getMock(SchedulerModuleController::class, [], [], '', false);
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->moduleController = $this->getMock(SchedulerModuleController::class, [], [], '', false);
 
-		$this->subject = new MailNotifierConfiguration();
-	}
+        $this->subject = new MailNotifierConfiguration();
+    }
 
-	protected function tearDown() {
-		$this->testingFramework->cleanUp();
+    protected function tearDown()
+    {
+        $this->testingFramework->cleanUp();
 
-		$GLOBALS['LANG'] = $this->languageBackup;
-		$this->languageBackup = null;
-	}
+        $GLOBALS['LANG'] = $this->languageBackup;
+        $this->languageBackup = null;
+    }
 
-	/**
-	 * @test
-	 */
-	public function classImplementsAdditionalFieldProvider() {
-		self::assertInstanceOf(AdditionalFieldProviderInterface::class, $this->subject);
-	}
+    /**
+     * @test
+     */
+    public function classImplementsAdditionalFieldProvider()
+    {
+        self::assertInstanceOf(AdditionalFieldProviderInterface::class, $this->subject);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getAdditionalFieldsInitiallyReturnsEmptyField() {
-		$taskInfo = [];
-		$result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
+    /**
+     * @test
+     */
+    public function getAdditionalFieldsInitiallyReturnsEmptyField()
+    {
+        $taskInfo = [];
+        $result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
 
-		self::assertSame(
-			[
-				'task-page-uid' => [
-					'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="" size="4" />',
-					'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
-					'cshKey' => '',
-					'cshLabel' => '',
-				],
-			],
-			$result
-		);
-	}
+        self::assertSame(
+            [
+                'task-page-uid' => [
+                    'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="" size="4" />',
+                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
+                    'cshKey' => '',
+                    'cshLabel' => '',
+                ],
+            ],
+            $result
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getAdditionalFieldsForNonZeroIntegerUidReturnsFieldWithUid() {
-		$taskInfo = ['configurationPageUid' => 42];
-		$result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
+    /**
+     * @test
+     */
+    public function getAdditionalFieldsForNonZeroIntegerUidReturnsFieldWithUid()
+    {
+        $taskInfo = ['configurationPageUid' => 42];
+        $result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
 
-		self::assertSame(
-			[
-				'task-page-uid' => [
-					'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="42" size="4" />',
-					'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
-					'cshKey' => '',
-					'cshLabel' => '',
-				],
-			],
-			$result
-		);
-	}
+        self::assertSame(
+            [
+                'task-page-uid' => [
+                    'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="42" size="4" />',
+                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
+                    'cshKey' => '',
+                    'cshLabel' => '',
+                ],
+            ],
+            $result
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getAdditionalFieldsForNonZeroStringUidReturnsFieldWithUid() {
-		$taskInfo = ['configurationPageUid' => '42'];
-		$result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
+    /**
+     * @test
+     */
+    public function getAdditionalFieldsForNonZeroStringUidReturnsFieldWithUid()
+    {
+        $taskInfo = ['configurationPageUid' => '42'];
+        $result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
 
-		self::assertSame(
-			[
-				'task-page-uid' => [
-					'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="42" size="4" />',
-					'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
-					'cshKey' => '',
-					'cshLabel' => '',
-				],
-			],
-			$result
-		);
-	}
+        self::assertSame(
+            [
+                'task-page-uid' => [
+                    'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="42" size="4" />',
+                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
+                    'cshKey' => '',
+                    'cshLabel' => '',
+                ],
+            ],
+            $result
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getAdditionalFieldsForZeroStringUidReturnsEmptyField() {
-		$taskInfo = ['configurationPageUid' => '0'];
-		$result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
+    /**
+     * @test
+     */
+    public function getAdditionalFieldsForZeroStringUidReturnsEmptyField()
+    {
+        $taskInfo = ['configurationPageUid' => '0'];
+        $result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
 
-		self::assertSame(
-			[
-				'task-page-uid' => [
-					'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="" size="4" />',
-					'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
-					'cshKey' => '',
-					'cshLabel' => '',
-				],
-			],
-			$result
-		);
-	}
+        self::assertSame(
+            [
+                'task-page-uid' => [
+                    'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="" size="4" />',
+                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
+                    'cshKey' => '',
+                    'cshLabel' => '',
+                ],
+            ],
+            $result
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getAdditionalFieldsForStringUidReturnsEmptyField() {
-		$taskInfo = ['configurationPageUid' => 'hello'];
-		$result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
+    /**
+     * @test
+     */
+    public function getAdditionalFieldsForStringUidReturnsEmptyField()
+    {
+        $taskInfo = ['configurationPageUid' => 'hello'];
+        $result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
 
-		self::assertSame(
-			[
-				'task-page-uid' => [
-					'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="" size="4" />',
-					'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
-					'cshKey' => '',
-					'cshLabel' => '',
-				],
-			],
-			$result
-		);
-	}
+        self::assertSame(
+            [
+                'task-page-uid' => [
+                    'code' => '<input type="text" name="tx_scheduler[configurationPageUid]" id="task-page-uid" value="" size="4" />',
+                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
+                    'cshKey' => '',
+                    'cshLabel' => '',
+                ],
+            ],
+            $result
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function validateAdditionalFieldsForUidOfExistingPageReturnsTrue() {
-		$pageUid = $this->testingFramework->createFrontEndPage();
-		$submittedData = ['configurationPageUid' => $pageUid];
+    /**
+     * @test
+     */
+    public function validateAdditionalFieldsForUidOfExistingPageReturnsTrue()
+    {
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $submittedData = ['configurationPageUid' => $pageUid];
 
-		$result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
+        $result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
 
-		self::assertTrue($result);
-	}
+        self::assertTrue($result);
+    }
 
-	/**
-	 * @test
-	 */
-	public function validateAdditionalFieldsForUidOfExistingPageNotAddsErrorMessage() {
-		$pageUid = $this->testingFramework->createFrontEndPage();
-		$submittedData = ['configurationPageUid' => $pageUid];
+    /**
+     * @test
+     */
+    public function validateAdditionalFieldsForUidOfExistingPageNotAddsErrorMessage()
+    {
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $submittedData = ['configurationPageUid' => $pageUid];
 
-		$this->moduleController->expects(self::never())->method('addMessage');
+        $this->moduleController->expects(self::never())->method('addMessage');
 
-		$this->subject->validateAdditionalFields($submittedData, $this->moduleController);
-	}
+        $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
+    }
 
-	/**
-	 * @test
-	 */
-	public function validateAdditionalFieldsForUidOfInexistentPageReturnsFalse() {
-		$pageUid = $this->testingFramework->getAutoIncrement('pages');
-		$submittedData = ['configurationPageUid' => $pageUid];
+    /**
+     * @test
+     */
+    public function validateAdditionalFieldsForUidOfInexistentPageReturnsFalse()
+    {
+        $pageUid = $this->testingFramework->getAutoIncrement('pages');
+        $submittedData = ['configurationPageUid' => $pageUid];
 
-		$result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
+        $result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
 
-		self::assertFalse($result);
-	}
+        self::assertFalse($result);
+    }
 
-	/**
-	 * @test
-	 */
-	public function validateAdditionalFieldsForUidOfInexistentPageAddsErrorMessage() {
-		$pageUid = $this->testingFramework->getAutoIncrement('pages');
-		$submittedData = ['configurationPageUid' => $pageUid];
+    /**
+     * @test
+     */
+    public function validateAdditionalFieldsForUidOfInexistentPageAddsErrorMessage()
+    {
+        $pageUid = $this->testingFramework->getAutoIncrement('pages');
+        $submittedData = ['configurationPageUid' => $pageUid];
 
-		$this->moduleController->expects(self::once())->method('addMessage')->with(
-			$this->languageService->sL(
-				'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.errors.page-uid'
-			),
-			FlashMessage::ERROR
-		);
+        $this->moduleController->expects(self::once())->method('addMessage')->with(
+            $this->languageService->sL(
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.errors.page-uid'
+            ),
+            FlashMessage::ERROR
+        );
 
-		$this->subject->validateAdditionalFields($submittedData, $this->moduleController);
-	}
+        $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
+    }
 
-	/**
-	 * @test
-	 */
-	public function validateAdditionalFieldsForZeroUidReturnsFalse() {
-		$pageUid = 0;
-		$submittedData = ['configurationPageUid' => $pageUid];
+    /**
+     * @test
+     */
+    public function validateAdditionalFieldsForZeroUidReturnsFalse()
+    {
+        $pageUid = 0;
+        $submittedData = ['configurationPageUid' => $pageUid];
 
-		$result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
+        $result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
 
-		self::assertFalse($result);
-	}
+        self::assertFalse($result);
+    }
 
-	/**
-	 * @test
-	 */
-	public function validateAdditionalFieldsForZeroUidAddsErrorMessage() {
-		$pageUid = 0;
-		$submittedData = ['configurationPageUid' => $pageUid];
+    /**
+     * @test
+     */
+    public function validateAdditionalFieldsForZeroUidAddsErrorMessage()
+    {
+        $pageUid = 0;
+        $submittedData = ['configurationPageUid' => $pageUid];
 
-		$this->moduleController->expects(self::once())->method('addMessage')->with(
-			$this->languageService->sL(
-				'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.errors.page-uid'
-			),
-			FlashMessage::ERROR
-		);
+        $this->moduleController->expects(self::once())->method('addMessage')->with(
+            $this->languageService->sL(
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.errors.page-uid'
+            ),
+            FlashMessage::ERROR
+        );
 
-		$this->subject->validateAdditionalFields($submittedData, $this->moduleController);
-	}
+        $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
+    }
 
-	/**
-	 * @test
-	 */
-	public function saveAdditionalFieldsSavesIntegerPageUidToTask() {
-		$pageUid = $this->testingFramework->createFrontEndPage();
-		$submittedData = ['configurationPageUid' => (string)$pageUid];
+    /**
+     * @test
+     */
+    public function saveAdditionalFieldsSavesIntegerPageUidToTask()
+    {
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $submittedData = ['configurationPageUid' => (string)$pageUid];
 
-		/** @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject $task */
-		$task = $this->getMock(MailNotifier::class);
-		$task->expects(self::once())->method('setConfigurationPageUid')->with($pageUid);
+        /** @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject $task */
+        $task = $this->getMock(MailNotifier::class);
+        $task->expects(self::once())->method('setConfigurationPageUid')->with($pageUid);
 
-		$this->subject->saveAdditionalFields($submittedData, $task);
-	}
-
+        $this->subject->saveAdditionalFields($submittedData, $task);
+    }
 }

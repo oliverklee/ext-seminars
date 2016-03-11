@@ -15,334 +15,348 @@
 /**
  * Test case.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends Tx_Phpunit_TestCase {
-	/**
-	 * @var Tx_Seminars_BagBuilder_Category
-	 */
-	private $fixture;
-	/**
-	 * @var Tx_Oelib_TestingFramework
-	 */
-	private $testingFramework;
+class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends Tx_Phpunit_TestCase
+{
+    /**
+     * @var Tx_Seminars_BagBuilder_Category
+     */
+    private $fixture;
+    /**
+     * @var Tx_Oelib_TestingFramework
+     */
+    private $testingFramework;
 
-	protected function setUp() {
-		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+    protected function setUp()
+    {
+        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->fixture = new Tx_Seminars_BagBuilder_Category();
-		$this->fixture->setTestMode();
-	}
+        $this->fixture = new Tx_Seminars_BagBuilder_Category();
+        $this->fixture->setTestMode();
+    }
 
-	protected function tearDown() {
-		$this->testingFramework->cleanUp();
-	}
+    protected function tearDown()
+    {
+        $this->testingFramework->cleanUp();
+    }
 
+    ///////////////////////////////////////////
+    // Tests for the basic builder functions.
+    ///////////////////////////////////////////
 
-	///////////////////////////////////////////
-	// Tests for the basic builder functions.
-	///////////////////////////////////////////
+    public function testBuilderBuildsABag()
+    {
+        self::assertInstanceOf(Tx_Seminars_Bag_Abstract::class, $this->fixture->build());
+    }
 
-	public function testBuilderBuildsABag() {
-		self::assertInstanceOf(Tx_Seminars_Bag_Abstract::class, $this->fixture->build());
-	}
+    public function testBuiltBagIsSortedAscendingByTitle()
+    {
+        $this->testingFramework->createRecord(
+            'tx_seminars_categories',
+            array('title' => 'Title 2')
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_categories',
+            array('title' => 'Title 1')
+        );
 
-	public function testBuiltBagIsSortedAscendingByTitle() {
-		$this->testingFramework->createRecord(
-			'tx_seminars_categories',
-			array('title' => 'Title 2')
-		);
-		$this->testingFramework->createRecord(
-			'tx_seminars_categories',
-			array('title' => 'Title 1')
-		);
+        $categoryBag = $this->fixture->build();
+        self::assertEquals(
+            2,
+            $categoryBag->count()
+        );
 
-		$categoryBag = $this->fixture->build();
-		self::assertEquals(
-			2,
-			$categoryBag->count()
-		);
+        self::assertEquals(
+            'Title 1',
+            $categoryBag->current()->getTitle()
+        );
+        self::assertEquals(
+            'Title 2',
+            $categoryBag->next()->getTitle()
+        );
+    }
 
-		self::assertEquals(
-			'Title 1',
-			$categoryBag->current()->getTitle()
-		);
-		self::assertEquals(
-			'Title 2',
-			$categoryBag->next()->getTitle()
-		);
-	}
+    ///////////////////////////////////////////////////////////////
+    // Test for limiting the bag to categories of certain events.
+    ///////////////////////////////////////////////////////////////
 
+    public function testSkippingLimitToEventResultsInAllCategories()
+    {
+        $this->testingFramework->createRecord('tx_seminars_categories');
 
-	///////////////////////////////////////////////////////////////
-	// Test for limiting the bag to categories of certain events.
-	///////////////////////////////////////////////////////////////
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars'
+        );
+        $categoryUid = $this->testingFramework->createRecord(
+            'tx_seminars_categories'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+        );
+        $bag = $this->fixture->build();
 
-	public function testSkippingLimitToEventResultsInAllCategories() {
-		$this->testingFramework->createRecord('tx_seminars_categories');
+        self::assertEquals(
+            2,
+            $bag->count()
+        );
+    }
 
-		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
-		);
-		$categoryUid = $this->testingFramework->createRecord(
-			'tx_seminars_categories'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
-		);
-		$bag = $this->fixture->build();
+    public function testToLimitEmptyEventUidsResultsInAllCategories()
+    {
+        $this->testingFramework->createRecord('tx_seminars_categories');
 
-		self::assertEquals(
-			2,
-			$bag->count()
-		);
-	}
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars'
+        );
+        $categoryUid = $this->testingFramework->createRecord(
+            'tx_seminars_categories'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+        );
 
-	public function testToLimitEmptyEventUidsResultsInAllCategories() {
-		$this->testingFramework->createRecord('tx_seminars_categories');
+        $this->fixture->limitToEvents('');
+        $bag = $this->fixture->build();
 
-		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
-		);
-		$categoryUid = $this->testingFramework->createRecord(
-			'tx_seminars_categories'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
-		);
+        self::assertEquals(
+            2,
+            $bag->count()
+        );
+    }
 
-		$this->fixture->limitToEvents('');
-		$bag = $this->fixture->build();
+    public function testLimitToZeroEventUidFails()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            '$eventUids must be a comma-separated list of positive integers.'
+        );
+        $this->fixture->limitToEvents('0');
+    }
 
-		self::assertEquals(
-			2,
-			$bag->count()
-		);
-	}
+    public function testLimitToNegativeEventUidFails()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            '$eventUids must be a comma-separated list of positive integers.'
+        );
+        $this->fixture->limitToEvents('-2');
+    }
 
-	public function testLimitToZeroEventUidFails() {
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'$eventUids must be a comma-separated list of positive integers.'
-		);
-		$this->fixture->limitToEvents('0');
-	}
+    public function testLimitToInvalidEventUidAtTheStartFails()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            '$eventUids must be a comma-separated list of positive integers.'
+        );
+        $this->fixture->limitToEvents('0,1');
+    }
 
-	public function testLimitToNegativeEventUidFails() {
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'$eventUids must be a comma-separated list of positive integers.'
-		);
-		$this->fixture->limitToEvents('-2');
-	}
+    public function testLimitToInvalidEventUidAtTheEndFails()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            '$eventUids must be a comma-separated list of positive integers.'
+        );
+        $this->fixture->limitToEvents('1,0');
+    }
 
-	public function testLimitToInvalidEventUidAtTheStartFails() {
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'$eventUids must be a comma-separated list of positive integers.'
-		);
-		$this->fixture->limitToEvents('0,1');
-	}
+    public function testLimitToInvalidEventUidInTheMiddleFails()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            '$eventUids must be a comma-separated list of positive integers.'
+        );
+        $this->fixture->limitToEvents('1,0,2');
+    }
 
-	public function testLimitToInvalidEventUidAtTheEndFails() {
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'$eventUids must be a comma-separated list of positive integers.'
-		);
-		$this->fixture->limitToEvents('1,0');
-	}
+    public function testLimitToEventsCanResultInOneCategory()
+    {
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars'
+        );
+        $categoryUid = $this->testingFramework->createRecord(
+            'tx_seminars_categories'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+        );
 
-	public function testLimitToInvalidEventUidInTheMiddleFails() {
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'$eventUids must be a comma-separated list of positive integers.'
-		);
-		$this->fixture->limitToEvents('1,0,2');
-	}
+        $this->fixture->limitToEvents($eventUid);
+        $bag = $this->fixture->build();
 
-	public function testLimitToEventsCanResultInOneCategory() {
-		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
-		);
-		$categoryUid = $this->testingFramework->createRecord(
-			'tx_seminars_categories'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
-		);
+        self::assertEquals(
+            1,
+            $bag->count()
+        );
+    }
 
-		$this->fixture->limitToEvents($eventUid);
-		$bag = $this->fixture->build();
+    public function testLimitToEventsCanResultInTwoCategoriesForOneEvent()
+    {
+        $this->testingFramework->createRecord('tx_seminars_categories');
 
-		self::assertEquals(
-			1,
-			$bag->count()
-		);
-	}
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars'
+        );
 
-	public function testLimitToEventsCanResultInTwoCategoriesForOneEvent() {
-		$this->testingFramework->createRecord('tx_seminars_categories');
+        $categoryUid1 = $this->testingFramework->createRecord(
+            'tx_seminars_categories'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid1
+        );
 
-		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
-		);
+        $categoryUid2 = $this->testingFramework->createRecord(
+            'tx_seminars_categories'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid2
+        );
 
-		$categoryUid1 = $this->testingFramework->createRecord(
-			'tx_seminars_categories'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid1
-		);
+        $this->fixture->limitToEvents($eventUid);
+        $bag = $this->fixture->build();
 
-		$categoryUid2 = $this->testingFramework->createRecord(
-			'tx_seminars_categories'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid2
-		);
+        self::assertEquals(
+            2,
+            $bag->count()
+        );
+    }
 
-		$this->fixture->limitToEvents($eventUid);
-		$bag = $this->fixture->build();
+    public function testLimitToEventsCanResultInTwoCategoriesForTwoEvents()
+    {
+        $this->testingFramework->createRecord('tx_seminars_categories');
 
-		self::assertEquals(
-			2,
-			$bag->count()
-		);
-	}
+        $eventUid1 = $this->testingFramework->createRecord(
+            'tx_seminars_seminars'
+        );
+        $categoryUid1 = $this->testingFramework->createRecord(
+            'tx_seminars_categories'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid1
+        );
 
-	public function testLimitToEventsCanResultInTwoCategoriesForTwoEvents() {
-		$this->testingFramework->createRecord('tx_seminars_categories');
+        $eventUid2 = $this->testingFramework->createRecord(
+            'tx_seminars_seminars'
+        );
+        $categoryUid2 = $this->testingFramework->createRecord(
+            'tx_seminars_categories'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_categories_mm', $eventUid2, $categoryUid2
+        );
 
-		$eventUid1 = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
-		);
-		$categoryUid1 = $this->testingFramework->createRecord(
-			'tx_seminars_categories'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid1
-		);
+        $this->fixture->limitToEvents($eventUid1 . ',' . $eventUid2);
+        $bag = $this->fixture->build();
 
-		$eventUid2 = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
-		);
-		$categoryUid2 = $this->testingFramework->createRecord(
-			'tx_seminars_categories'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_categories_mm', $eventUid2, $categoryUid2
-		);
+        self::assertEquals(
+            2,
+            $bag->count()
+        );
+    }
 
-		$this->fixture->limitToEvents($eventUid1.','.$eventUid2);
-		$bag = $this->fixture->build();
+    public function testLimitToEventsWillExcludeUnassignedCategories()
+    {
+        $this->testingFramework->createRecord('tx_seminars_categories');
 
-		self::assertEquals(
-			2,
-			$bag->count()
-		);
-	}
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars'
+        );
+        $categoryUid = $this->testingFramework->createRecord(
+            'tx_seminars_categories'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+        );
 
-	public function testLimitToEventsWillExcludeUnassignedCategories() {
-		$this->testingFramework->createRecord('tx_seminars_categories');
+        $this->fixture->limitToEvents($eventUid);
+        $bag = $this->fixture->build();
 
-		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
-		);
-		$categoryUid = $this->testingFramework->createRecord(
-			'tx_seminars_categories'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
-		);
+        self::assertFalse(
+            $bag->isEmpty()
+        );
+        self::assertEquals(
+            $categoryUid,
+            $bag->current()->getUid()
+        );
+    }
 
-		$this->fixture->limitToEvents($eventUid);
-		$bag = $this->fixture->build();
+    public function testLimitToEventsWillExcludeCategoriesOfOtherEvents()
+    {
+        $eventUid1 = $this->testingFramework->createRecord(
+            'tx_seminars_seminars'
+        );
+        $categoryUid1 = $this->testingFramework->createRecord(
+            'tx_seminars_categories'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid1
+        );
 
-		self::assertFalse(
-			$bag->isEmpty()
-		);
-		self::assertEquals(
-			$categoryUid,
-			$bag->current()->getUid()
-		);
-	}
+        $eventUid2 = $this->testingFramework->createRecord(
+            'tx_seminars_seminars'
+        );
+        $categoryUid2 = $this->testingFramework->createRecord(
+            'tx_seminars_categories'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_categories_mm', $eventUid2, $categoryUid2
+        );
 
-	public function testLimitToEventsWillExcludeCategoriesOfOtherEvents() {
-		$eventUid1 = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
-		);
-		$categoryUid1 = $this->testingFramework->createRecord(
-			'tx_seminars_categories'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid1
-		);
+        $this->fixture->limitToEvents($eventUid1);
+        $bag = $this->fixture->build();
 
-		$eventUid2 = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
-		);
-		$categoryUid2 = $this->testingFramework->createRecord(
-			'tx_seminars_categories'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_categories_mm', $eventUid2, $categoryUid2
-		);
+        self::assertEquals(
+            1,
+            $bag->count()
+        );
+        self::assertEquals(
+            $categoryUid1,
+            $bag->current()->getUid()
+        );
+    }
 
-		$this->fixture->limitToEvents($eventUid1);
-		$bag = $this->fixture->build();
+    public function testLimitToEventsResultsInAnEmptyBagIfThereAreNoMatches()
+    {
+        $this->testingFramework->createRecord(
+            'tx_seminars_categories'
+        );
 
-		self::assertEquals(
-			1,
-			$bag->count()
-		);
-		self::assertEquals(
-			$categoryUid1,
-			$bag->current()->getUid()
-		);
-	}
+        $eventUid1 = $this->testingFramework->createRecord(
+            'tx_seminars_seminars'
+        );
+        $categoryUid = $this->testingFramework->createRecord(
+            'tx_seminars_categories'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid
+        );
 
-	public function testLimitToEventsResultsInAnEmptyBagIfThereAreNoMatches() {
-		$this->testingFramework->createRecord(
-			'tx_seminars_categories'
-		);
+        $eventUid2 = $this->testingFramework->createRecord(
+            'tx_seminars_seminars'
+        );
 
-		$eventUid1 = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
-		);
-		$categoryUid = $this->testingFramework->createRecord(
-			'tx_seminars_categories'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid
-		);
+        $this->fixture->limitToEvents($eventUid2);
+        $bag = $this->fixture->build();
 
-		$eventUid2 = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
-		);
+        self::assertTrue(
+            $bag->isEmpty()
+        );
+    }
 
-		$this->fixture->limitToEvents($eventUid2);
-		$bag = $this->fixture->build();
+    //////////////////////////////////
+    // Tests for sortByRelationOrder
+    //////////////////////////////////
 
-		self::assertTrue(
-			$bag->isEmpty()
-		);
-	}
+    public function testSortByRelationOrderThrowsExceptionIfLimitToEventsHasNotBeenCalledBefore()
+    {
+        $this->setExpectedException(
+            'BadMethodCallException',
+            'The event UIDs were empty. This means limitToEvents has not been called. LimitToEvents has to be called before ' .
+                'calling this function.'
+        );
 
-
-	//////////////////////////////////
-	// Tests for sortByRelationOrder
-	//////////////////////////////////
-
-	public function testSortByRelationOrderThrowsExceptionIfLimitToEventsHasNotBeenCalledBefore() {
-		$this->setExpectedException(
-			'BadMethodCallException',
-			'The event UIDs were empty. This means limitToEvents has not been called. LimitToEvents has to be called before ' .
-				'calling this function.'
-		);
-
-		$this->fixture->sortByRelationOrder();
-	}
+        $this->fixture->sortByRelationOrder();
+    }
 }

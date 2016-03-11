@@ -15,10 +15,9 @@
 /**
  * This class represents a time span for testing purposes.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_tests_fixtures_TestingTimeSpan extends Tx_Seminars_Model_AbstractTimeSpan {
+class tx_seminars_tests_fixtures_TestingTimeSpan extends Tx_Seminars_Model_AbstractTimeSpan
+{
 }

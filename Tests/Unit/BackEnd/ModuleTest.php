@@ -15,40 +15,42 @@
 /**
  * Test case.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_ModuleTest extends Tx_Phpunit_TestCase {
-	/**
-	 * @var Tx_Seminars_BackEnd_Module
-	 */
-	private $fixture;
+class Tx_Seminars_Tests_Unit_BackEnd_ModuleTest extends Tx_Phpunit_TestCase
+{
+    /**
+     * @var Tx_Seminars_BackEnd_Module
+     */
+    private $fixture;
 
-	protected function setUp() {
-		Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', FALSE);
+    protected function setUp()
+    {
+        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
 
-		$this->fixture = new Tx_Seminars_BackEnd_Module();
-	}
+        $this->fixture = new Tx_Seminars_BackEnd_Module();
+    }
 
-	////////////////////////////////////////////////
-	// Tests for getting and setting the page data
-	////////////////////////////////////////////////
+    ////////////////////////////////////////////////
+    // Tests for getting and setting the page data
+    ////////////////////////////////////////////////
 
-	public function testGetPageDataInitiallyReturnsEmptyArray() {
-		self::assertEquals(
-			array(),
-			$this->fixture->getPageData()
-		);
-	}
+    public function testGetPageDataInitiallyReturnsEmptyArray()
+    {
+        self::assertEquals(
+            array(),
+            $this->fixture->getPageData()
+        );
+    }
 
-	public function testGetPageDataReturnsCompleteDataSetViaSetPageData() {
-		$this->fixture->setPageData(array('foo' => 'bar'));
+    public function testGetPageDataReturnsCompleteDataSetViaSetPageData()
+    {
+        $this->fixture->setPageData(array('foo' => 'bar'));
 
-		self::assertEquals(
-			array('foo' => 'bar'),
-			$this->fixture->getPageData()
-		);
-	}
+        self::assertEquals(
+            array('foo' => 'bar'),
+            $this->fixture->getPageData()
+        );
+    }
 }

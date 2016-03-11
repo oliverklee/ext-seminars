@@ -15,177 +15,183 @@
 /**
  * Test case.
  *
- * @package TYPO3
- * @subpackage tx_seminars
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends Tx_Phpunit_TestCase {
-	/**
-	 * @var Tx_Seminars_BagBuilder_Organizer
-	 */
-	private $fixture;
-	/**
-	 * @var Tx_Oelib_TestingFramework
-	 */
-	private $testingFramework;
+class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends Tx_Phpunit_TestCase
+{
+    /**
+     * @var Tx_Seminars_BagBuilder_Organizer
+     */
+    private $fixture;
+    /**
+     * @var Tx_Oelib_TestingFramework
+     */
+    private $testingFramework;
 
-	protected function setUp() {
-		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+    protected function setUp()
+    {
+        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-		$this->fixture = new Tx_Seminars_BagBuilder_Organizer();
-		$this->fixture->setTestMode();
-	}
+        $this->fixture = new Tx_Seminars_BagBuilder_Organizer();
+        $this->fixture->setTestMode();
+    }
 
-	protected function tearDown() {
-		$this->testingFramework->cleanUp();
-	}
+    protected function tearDown()
+    {
+        $this->testingFramework->cleanUp();
+    }
 
+    ///////////////////////////////////////////
+    // Tests for the basic builder functions.
+    ///////////////////////////////////////////
 
-	///////////////////////////////////////////
-	// Tests for the basic builder functions.
-	///////////////////////////////////////////
+    public function testBuilderBuildsABag()
+    {
+        self::assertInstanceOf(Tx_Seminars_Bag_Abstract::class, $this->fixture->build());
+    }
 
-	public function testBuilderBuildsABag() {
-		self::assertInstanceOf(Tx_Seminars_Bag_Abstract::class, $this->fixture->build());
-	}
+    /////////////////////////////
+    // Tests for limitToEvent()
+    /////////////////////////////
 
+    public function testLimitToEventWithNegativeEventUidThrowsException()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'The parameter $eventUid must be > 0.'
+        );
 
-	/////////////////////////////
-	// Tests for limitToEvent()
-	/////////////////////////////
+        $this->fixture->limitToEvent(-1);
+    }
 
-	public function testLimitToEventWithNegativeEventUidThrowsException() {
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'The parameter $eventUid must be > 0.'
-		);
+    public function testLimitToEventWithZeroEventUidThrowsException()
+    {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'The parameter $eventUid must be > 0.'
+        );
 
-		$this->fixture->limitToEvent(-1);
-	}
+        $this->fixture->limitToEvent(0);
+    }
 
-	public function testLimitToEventWithZeroEventUidThrowsException() {
-		$this->setExpectedException(
-			'InvalidArgumentException',
-			'The parameter $eventUid must be > 0.'
-		);
+    public function testLimitToEventFindsOneOrganizerOfEvent()
+    {
+        $organizerUid = $this->testingFramework->createRecord(
+            'tx_seminars_organizers'
+        );
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('organizers' => 1)
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_organizers_mm',
+            $eventUid,
+            $organizerUid
+        );
 
-		$this->fixture->limitToEvent(0);
-	}
+        $this->fixture->limitToEvent($eventUid);
+        $bag = $this->fixture->build();
 
-	public function testLimitToEventFindsOneOrganizerOfEvent() {
-		$organizerUid = $this->testingFramework->createRecord(
-			'tx_seminars_organizers'
-		);
-		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('organizers' => 1)
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_organizers_mm',
-			$eventUid,
-			$organizerUid
-		);
+        self::assertEquals(
+            1,
+            $bag->countWithoutLimit()
+        );
+    }
 
-		$this->fixture->limitToEvent($eventUid);
-		$bag = $this->fixture->build();
+    public function testLimitToEventFindsTwoOrganizersOfEvent()
+    {
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('organizers' => 2)
+        );
+        $organizerUid1 = $this->testingFramework->createRecord(
+            'tx_seminars_organizers'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_organizers_mm',
+            $eventUid,
+            $organizerUid1
+        );
+        $organizerUid2 = $this->testingFramework->createRecord(
+            'tx_seminars_organizers'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_organizers_mm',
+            $eventUid,
+            $organizerUid2
+        );
 
-		self::assertEquals(
-			1,
-			$bag->countWithoutLimit()
-		);
-	}
+        $this->fixture->limitToEvent($eventUid);
+        $bag = $this->fixture->build();
 
-	public function testLimitToEventFindsTwoOrganizersOfEvent() {
-		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('organizers' => 2)
-		);
-		$organizerUid1 = $this->testingFramework->createRecord(
-			'tx_seminars_organizers'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_organizers_mm',
-			$eventUid,
-			$organizerUid1
-		);
-		$organizerUid2 = $this->testingFramework->createRecord(
-			'tx_seminars_organizers'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_organizers_mm',
-			$eventUid,
-			$organizerUid2
-		);
+        self::assertEquals(
+            2,
+            $bag->countWithoutLimit()
+        );
+    }
 
-		$this->fixture->limitToEvent($eventUid);
-		$bag = $this->fixture->build();
+    public function testLimitToEventIgnoresOrganizerOfOtherEvent()
+    {
+        $eventUid1 = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('organizers' => 1)
+        );
+        $organizerUid = $this->testingFramework->createRecord(
+            'tx_seminars_organizers'
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_organizers_mm',
+            $eventUid1,
+            $organizerUid
+        );
+        $eventUid2 = $this->testingFramework->createRecord(
+            'tx_seminars_seminars'
+        );
 
-		self::assertEquals(
-			2,
-			$bag->countWithoutLimit()
-		);
-	}
+        $this->fixture->limitToEvent($eventUid2);
+        $bag = $this->fixture->build();
 
-	public function testLimitToEventIgnoresOrganizerOfOtherEvent() {
-		$eventUid1 = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('organizers' => 1)
-		);
-		$organizerUid = $this->testingFramework->createRecord(
-			'tx_seminars_organizers'
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_organizers_mm',
-			$eventUid1,
-			$organizerUid
-		);
-		$eventUid2 = $this->testingFramework->createRecord(
-			'tx_seminars_seminars'
-		);
+        self::assertTrue(
+            $bag->isEmpty()
+        );
+    }
 
-		$this->fixture->limitToEvent($eventUid2);
-		$bag = $this->fixture->build();
+    /**
+     * @test
+     */
+    public function limitToEventSortsByRelationSorting()
+    {
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            array('organizers' => 2)
+        );
+        $organizerUid1 = $this->testingFramework->createRecord(
+            'tx_seminars_organizers'
+        );
+        $organizerUid2 = $this->testingFramework->createRecord(
+            'tx_seminars_organizers'
+        );
 
-		self::assertTrue(
-			$bag->isEmpty()
-		);
-	}
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_organizers_mm',
+            $eventUid,
+            $organizerUid2
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_organizers_mm',
+            $eventUid,
+            $organizerUid1
+        );
 
-	/**
-	 * @test
-	 */
-	public function limitToEventSortsByRelationSorting() {
-		$eventUid = $this->testingFramework->createRecord(
-			'tx_seminars_seminars',
-			array('organizers' => 2)
-		);
-		$organizerUid1 = $this->testingFramework->createRecord(
-			'tx_seminars_organizers'
-		);
-		$organizerUid2 = $this->testingFramework->createRecord(
-			'tx_seminars_organizers'
-		);
+        $this->fixture->limitToEvent($eventUid);
+        $bag = $this->fixture->build();
+        $bag->rewind();
 
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_organizers_mm',
-			$eventUid,
-			$organizerUid2
-		);
-		$this->testingFramework->createRelation(
-			'tx_seminars_seminars_organizers_mm',
-			$eventUid,
-			$organizerUid1
-		);
-
-		$this->fixture->limitToEvent($eventUid);
-		$bag = $this->fixture->build();
-		$bag->rewind();
-
-		self::assertEquals(
-			$organizerUid2,
-			$bag->current()->getUid()
-		);
-	}
+        self::assertEquals(
+            $organizerUid2,
+            $bag->current()->getUid()
+        );
+    }
 }
