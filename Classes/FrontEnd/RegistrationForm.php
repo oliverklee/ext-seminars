@@ -107,11 +107,6 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 	);
 
 	/**
-	 * @var int
-	 */
-	protected $maximumNumberOfSeats = 10;
-
-	/**
 	 * Overwrite this in an XClass with the keys of additional keys that should always be displayed.
 	 *
 	 * @var string[]
@@ -788,11 +783,12 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor 
 		$result = [];
 
 		$event = $this->getEvent();
+		$maximumBookableSeats = $this->getConfValueInteger('maximumBookableSeats');
 		if ($event->hasMaximumAttendees() && $event->hasVacancies()) {
 			$numberOfVacancies = $event->getVacancies();
-			$availableSeatsForBooking = min($numberOfVacancies, $this->maximumNumberOfSeats);
+			$availableSeatsForBooking = min($numberOfVacancies, $maximumBookableSeats);
 		} else {
-			$availableSeatsForBooking = $this->maximumNumberOfSeats;
+			$availableSeatsForBooking = $maximumBookableSeats;
 		}
 
 		for ($i = 1; $i <= $availableSeatsForBooking; $i++) {

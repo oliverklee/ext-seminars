@@ -670,6 +670,21 @@ override the corresponding value from TS Setup.**
 
 .. container:: table-row
 
+   Property
+         maximumBookableSeats
+
+   Data type
+         integer
+
+   Description
+         the maximum number of seats that can be booked in one registration
+
+   Default
+         10
+
+
+.. container:: table-row
+
    Eigenschaft
          showSpeakerDetails
 

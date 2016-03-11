@@ -81,6 +81,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 				'showRegistrationFields' => 'registered_themselves,attendees_names',
 				'showFeUserFieldsInRegistrationForm' => 'name,email',
 				'showFeUserFieldsInRegistrationFormWithLabel' => 'email',
+				'maximumBookableSeats' => 10,
 				'form.' => array(
 					'unregistration.' => array(),
 					'registration.'	=> array(
@@ -1830,7 +1831,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 	/**
 	 * @test
 	 */
-	public function populateSeatsForMoreVacanciesThanMaximumSeatsReturnsMaximumValues()
+	public function populateSeatsForMoreVacanciesThanMaximumSeatsReturnsMaximumValues10FromConfiguration()
 	{
 		$event = $this->fixture->getEvent();
 		$event->setMaximumAttendees(11);
@@ -1850,6 +1851,35 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 				['caption' => 8, 'value' => 8],
 				['caption' => 9, 'value' => 9],
 				['caption' => 10, 'value' => 10],
+			],
+			$result
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function populateSeatsForMoreVacanciesThanMaximumSeatsReturnsMaximumValues3FromConfiguration()
+	{
+		$event = $this->fixture->getEvent();
+		$event->setMaximumAttendees(11);
+		self::assertSame(11, $event->getVacancies());
+
+		$subject = new Tx_Seminars_FrontEnd_RegistrationForm(
+			['maximumBookableSeats' => 3],
+			$GLOBALS['TSFE']->cObj
+		);
+		$subject->setAction('register');
+		$subject->setSeminar($this->seminar);
+		$subject->setTestMode();
+
+		$result = $subject->populateSeats();
+
+		self::assertSame(
+			[
+				['caption' => 1, 'value' => 1],
+				['caption' => 2, 'value' => 2],
+				['caption' => 3, 'value' => 3],
 			],
 			$result
 		);

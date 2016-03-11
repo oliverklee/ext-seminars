@@ -296,6 +296,9 @@ plugin.tx_seminars_pi1 {
 	# the displayed number of the last registration page (for "step x of y")
 	numberOfLastRegistrationPage = 2
 
+	# the maximum number of seats that can be booked in one registration
+	maximumBookableSeats = 10
+
 	# whether detailed information for the speakers is shown in the single view
 	showSpeakerDetails = 1
 
