@@ -50,7 +50,7 @@ class Tx_Seminars_Cli_MailNotifierTest extends Tx_Phpunit_TestCase {
 	protected function setUp() {
 		$this->languageBackup = $GLOBALS['LANG'];
 		$languageService = new \language();
-		$languageService->init('en');
+		$languageService->init('default');
 		$GLOBALS['LANG'] = $languageService;
 
 		$this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');

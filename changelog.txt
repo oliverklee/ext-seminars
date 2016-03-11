@@ -3,6 +3,7 @@
 Features:
 
 Bug fixes:
+- [#5671] Test failures in MailNotifierTest
 
 Cleanup:
 
