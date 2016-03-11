@@ -64,7 +64,7 @@ class EmailServiceTest extends \Tx_Phpunit_TestCase
     {
         $this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
         $languageService = new LanguageService();
-        $languageService->init('en');
+        $languageService->init('default');
         $GLOBALS['LANG'] = $languageService;
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');

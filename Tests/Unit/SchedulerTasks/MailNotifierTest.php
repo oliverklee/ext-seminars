@@ -61,7 +61,7 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase {
 		$this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
 
 		$this->languageService = new LanguageService();
-		$this->languageService->init('en');
+		$this->languageService->init('default');
 		$GLOBALS['LANG'] = $this->languageService;
 
 		$this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
