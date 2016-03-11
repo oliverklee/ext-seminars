@@ -10,6 +10,7 @@ Features:
 - [#5628] Add a RealURL auto configuration
 
 Bug fixes:
+- [#5669] Disable the new checkboxes by default
 - [#5648] Also email the organizers when a registration make the event more than possible
 - [#5413] showFeUserFieldsInRegistrationForm does not hide unused markers
 - [#5649] Heading for the FE user gender is missing in the CSV export

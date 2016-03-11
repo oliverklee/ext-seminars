@@ -900,7 +900,7 @@ $GLOBALS['TCA']['tx_seminars_seminars'] = array(
 			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => [
 				'type' => 'check',
-				'default' => 1,
+				'default' => 0,
 			],
 		],
 		'mute_notification_emails' => [
@@ -909,7 +909,7 @@ $GLOBALS['TCA']['tx_seminars_seminars'] = array(
 			'displayCond' => 'FIELD:needs_registration:REQ:true',
 			'config' => [
 				'type' => 'check',
-				'default' => 1,
+				'default' => 0,
 			],
 		],
 		'target_groups' => array(
