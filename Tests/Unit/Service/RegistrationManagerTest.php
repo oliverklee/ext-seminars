@@ -5143,6 +5143,33 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
     /**
      * @test
      */
+    public function createRegistrationIncreasesRegistrationCountInEventFromZeroToOne()
+    {
+        $this->createAndLogInFrontEndUser();
+
+        $plugin = new Tx_Seminars_FrontEnd_DefaultController();
+        $plugin->cObj = $GLOBALS['TSFE']->cObj;
+        $fixture = $this->getMock(
+            Tx_Seminars_Service_RegistrationManager::class,
+            array(
+                'notifyAttendee', 'notifyOrganizers',
+                'sendAdditionalNotification', 'setRegistrationData'
+            )
+        );
+
+        $fixture->createRegistration($this->seminar, array(), $plugin);
+
+        $seminarData = Tx_Oelib_Db::selectSingle('*', 'tx_seminars_seminars', 'uid = ' . $this->seminarUid);
+
+        $registrationUid = $fixture->getRegistration()->getUid();
+        Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $registrationUid);
+
+        self::assertSame(1, (int)$seminarData['registrations']);
+    }
+
+    /**
+     * @test
+     */
     public function createRegistrationReturnsRegistration()
     {
         $this->createAndLogInFrontEndUser();

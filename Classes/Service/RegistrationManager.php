@@ -504,6 +504,10 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
         $this->registration->setRegistrationData($event, $this->getLoggedInFrontEndUserUid(), $formData);
         $this->registration->commitToDb();
         $event->calculateStatistics();
+        $event->increaseNumberOfAssociatedRegistrationRecords();
+        $event->commitToDb();
+
+        $event->getAttendances();
 
         $user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
         foreach ($this->getHooks() as $hook) {
