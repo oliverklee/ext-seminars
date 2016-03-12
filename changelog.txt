@@ -3,12 +3,12 @@
 Features:
 
 Bug fixes:
+- [#5670] Increase counter cache for registrations after registration
 - [#5671] Test failures in MailNotifierTest
 
 Cleanup:
 
 Changes:
-
 
 
 0.10.2 (released 2016-02-12)

@@ -9570,4 +9570,57 @@ class tx_seminars_OldModel_EventTest extends tx_phpunit_testcase {
 			$fixture->hasAnyPrice()
 		);
 	}
+
+	/*
+	 * Tests regarding the number of associated registration records
+	 */
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfAssociatedRegistrationRecordsByDefaultReturnsZero()
+	{
+		self::assertSame(0, $this->fixture->getNumberOfAssociatedRegistrationRecords());
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNumberOfAssociatedRegistrationRecordsReturnsValueFromDatabase()
+	{
+		$numberOfRegistrations = 3;
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			['registrations' => $numberOfRegistrations]
+		);
+		$subject = new tx_seminars_seminarchild($uid);
+
+		self::assertSame($numberOfRegistrations, $subject->getNumberOfAssociatedRegistrationRecords());
+	}
+
+	/**
+	 * @test
+	 */
+	public function increaseNumberOfAssociatedRegistrationRecordsCanIncreaseItFromZeroToOne()
+	{
+		$this->fixture->increaseNumberOfAssociatedRegistrationRecords();
+
+		self::assertSame(1, $this->fixture->getNumberOfAssociatedRegistrationRecords());
+	}
+
+	/**
+	 * @test
+	 */
+	public function increaseNumberOfAssociatedRegistrationRecordsCanIncreaseItFromTwoToThree()
+	{
+		$uid = $this->testingFramework->createRecord(
+			'tx_seminars_seminars',
+			['registrations' => 2]
+		);
+		$subject = new tx_seminars_seminarchild($uid);
+
+		$subject->increaseNumberOfAssociatedRegistrationRecords();
+
+		self::assertSame(3, $subject->getNumberOfAssociatedRegistrationRecords());
+	}
 }

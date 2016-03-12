@@ -1830,6 +1830,27 @@ class tx_seminars_seminar extends tx_seminars_timespan {
 	}
 
 	/**
+	 * Returns the number of associated registration records (i.e., the number in the counter cache).
+	 *
+	 * @return int
+	 */
+	public function getNumberOfAssociatedRegistrationRecords()
+	{
+		return $this->getRecordPropertyInteger('registrations');
+	}
+
+	/**
+	 * Increases the number of associated registration records by one.
+	 *
+	 * This method does not save this model.
+	 *
+	 * @return void
+	 */
+	public function increaseNumberOfAssociatedRegistrationRecords() {
+		$this->setRecordPropertyInteger('registrations', $this->getNumberOfAssociatedRegistrationRecords() + 1);
+	}
+
+	/**
 	 * Returns TRUE if this seminar has at least one target group, FALSE
 	 * otherwise.
 	 *
