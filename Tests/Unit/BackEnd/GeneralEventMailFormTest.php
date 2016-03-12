@@ -178,10 +178,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit
      */
     public function renderContainsPrefilledBodyFieldWithLocalizedSalutation()
     {
-        self::assertContains(
-            $GLOBALS['LANG']->getLL('mailForm_salutation'),
-            $this->fixture->render()
-        );
+        self::assertContains('salutation', $this->fixture->render());
     }
 
     /**
@@ -216,8 +213,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit
             )
         );
 
-        $messageBody = '%' . $GLOBALS['LANG']->getLL('mailForm_salutation') .
-            $GLOBALS['LANG']->getLL('confirmMailForm_prefillField_messageBody');
+        $messageBody = '%salutation' . $GLOBALS['LANG']->getLL('confirmMailForm_prefillField_messageBody');
         $this->fixture->setPostData(
             array(
                 'action' => 'confirmEvent',

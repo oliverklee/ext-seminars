@@ -20,6 +20,13 @@ use TYPO3\CMS\Lang\LanguageService;
 /**
  * This class takes care of sending emails.
  *
+ * The following markers will get replaced in the e-mail body:
+ *
+ * %salutation
+ * %userName
+ * %eventTitle
+ * %eventDate
+ *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class EmailService implements SingletonInterface
@@ -30,11 +37,17 @@ class EmailService implements SingletonInterface
     protected $salutationBuilder = null;
 
     /**
+     * @var \Tx_Seminars_ViewHelper_DateRange
+     */
+    protected $dateRangeViewHelper = null;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->salutationBuilder = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
+        $this->dateRangeViewHelper = GeneralUtility::makeInstance(\Tx_Seminars_ViewHelper_DateRange::class);
     }
 
     /**
@@ -65,11 +78,10 @@ class EmailService implements SingletonInterface
             /** @var \Tx_Oelib_Mail $eMail */
             $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
             $eMail->setSender($firstOrganizer);
-            $eMail->addRecipient($registration->getFrontEndUser());
+            $eMail->addRecipient($user);
             $eMail->setSubject($subject);
 
-            $bodyWithFooter = $this->buildMessageBody($body, $firstOrganizer, $user);
-            $eMail->setMessage($bodyWithFooter);
+            $eMail->setMessage($this->buildMessageBody($body, $event, $user));
 
             $mailer->send($eMail);
         }
@@ -79,26 +91,49 @@ class EmailService implements SingletonInterface
      * Builds the message body (including the email footer).
      *
      * @param string $rawBody
-     * @param \Tx_Seminars_Model_Organizer $organizer
+     * @param \Tx_Seminars_Model_Event $event
      * @param \Tx_Seminars_Model_FrontEndUser $user
      *
      * @return string
      */
-    protected function buildMessageBody(
-        $rawBody,
-        \Tx_Seminars_Model_Organizer $organizer,
-        \Tx_Seminars_Model_FrontEndUser $user
-    ) {
-        $salutation = $this->salutationBuilder->getSalutation($user);
-        $salutationKey = '%' . $this->getLanguageService()->getLL('mailForm_salutation');
-        $bodyWithReplaceSalutation = str_replace($salutationKey, $salutation, $rawBody);
-
-        $bodyWithFooter = $bodyWithReplaceSalutation;
-        if ($organizer->hasEMailFooter()) {
-            $bodyWithFooter .= LF . '-- ' . LF . $organizer->getEMailFooter();
+    protected function buildMessageBody($rawBody, \Tx_Seminars_Model_Event $event, \Tx_Seminars_Model_FrontEndUser $user)
+    {
+        $bodyWithFooter = $this->replaceMarkers($rawBody, $event, $user);
+        /** @var \Tx_Seminars_Model_Organizer $firstOrganizer */
+        $firstOrganizer = $event->getOrganizers()->first();
+        if ($firstOrganizer->hasEMailFooter()) {
+            $bodyWithFooter .= LF . '-- ' . LF . $firstOrganizer->getEMailFooter();
         }
 
         return $bodyWithFooter;
+    }
+
+    /**
+     * Replaces markers in $emailBody.
+     *
+     * The following markers will get replaced:
+     *
+     * %salutation
+     * %userName
+     * %eventTitle
+     * %eventDate
+     *
+     * @param string $emailBody
+     * @param \Tx_Seminars_Model_Event $event
+     * @param \Tx_Seminars_Model_FrontEndUser $user
+     *
+     * @return string
+     */
+    protected function replaceMarkers($emailBody, \Tx_Seminars_Model_Event $event, \Tx_Seminars_Model_FrontEndUser $user)
+    {
+        $markers = [
+            '%salutation' => $this->salutationBuilder->getSalutation($user),
+            '%userName' => $user->getName(),
+            '%eventTitle' => $event->getTitle(),
+            '%eventDate' => $this->dateRangeViewHelper->render($event, '-'),
+        ];
+
+        return str_replace(array_keys($markers), array_values($markers), $emailBody);
     }
 
     /**

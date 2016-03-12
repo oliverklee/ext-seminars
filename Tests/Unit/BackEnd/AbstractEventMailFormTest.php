@@ -549,8 +549,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
                 'isSubmitted' => '1',
                 'sender' => $this->organizerUid,
                 'subject' => 'foo',
-                'messageBody' => 'foo bar %' .
-                    $GLOBALS['LANG']->getLL('mailForm_salutation'),
+                'messageBody' => 'foo bar %salutation',
             )
         );
         $this->fixture->render();

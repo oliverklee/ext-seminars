@@ -66,7 +66,6 @@
 			<label index="generalMailForm_prefillField_introduction">you registered for the event %s.</label>
 			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
 			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
-			<label index="mailForm_salutation">salutation</label>
 			<label index="testForm_prefillField_subject">Event tested</label>
 			<label index="testForm_prefillField_messageBody">This is the message body.</label>
 			<label index="testForm_prefillField_introduction">This is the introduction: %s</label>
@@ -157,7 +156,6 @@
 			<label index="generalMailForm_prefillField_introduction">Sie hatten sich für die Veranstaltung %s angemeldet.</label>
 			<label index="message_noPageTypeSelected">Bitte wählen Sie einen SysOrdner im Seitenbaum aus.</label>
 			<label index="message_noStaticTemplateFound">Kein statisches Template gefunden. Bitte binden Sie das statische Template der seminars-Extension im TS-Setup dieses SysOrdners ein.</label>
-			<label index="mailForm_salutation">Anrede</label>
 			<label index="testForm_prefillField_subject">Event getestet</label>
 			<label index="testForm_prefillField_messageBody">Dies ist der Nachrichtenkörper.</label>
 			<label index="testForm_prefillField_introduction">Dies ist die Einleitung: %s</label>
@@ -266,7 +264,6 @@
 			<label index="cancelMailForm_alternativeDate">Des dates de rechange peuvent être consultées sur notre page web :</label>
 			<label index="message_noPageTypeSelected">Sélectionnez une sysfolder dans l'arborescence des pages,</label>
 			<label index="message_noStaticTemplateFound">Aucun template statique n'a été trouvé. Incluez svp les template statique seminars dans le TS setup de ce sysfolder.</label>
-			<label index="mailForm_salutation">salutation</label>
 			<label index="testForm_prefillField_subject">Événement testé</label>
 			<label index="testForm_prefillField_messageBody">Ceci est le corps du message.</label>
 			<label index="testForm_prefillField_introduction">Ceci est l'introduction: %s</label>
@@ -356,7 +353,6 @@
 			<label index="generalMailForm_prefillField_introduction" type="integer">115928722</label>
 			<label index="message_noPageTypeSelected" type="integer">217321592</label>
 			<label index="message_noStaticTemplateFound" type="integer">236035033</label>
-			<label index="mailForm_salutation" type="integer">128380848</label>
 			<label index="testForm_prefillField_subject" type="integer">115548765</label>
 			<label index="testForm_prefillField_messageBody" type="integer">10500938</label>
 			<label index="testForm_prefillField_introduction" type="integer">150623124</label>
@@ -461,7 +457,6 @@
 			<label index="cancelMailForm_alternativeDate" type="integer">231667710</label>
 			<label index="message_noPageTypeSelected" type="integer">217321592</label>
 			<label index="message_noStaticTemplateFound" type="integer">236035033</label>
-			<label index="mailForm_salutation" type="integer">128380848</label>
 			<label index="testForm_prefillField_subject" type="integer">115548765</label>
 			<label index="testForm_prefillField_messageBody" type="integer">10500938</label>
 			<label index="testForm_prefillField_introduction" type="integer">150623124</label>
@@ -555,7 +550,6 @@
 			<label index="generalMailForm_prefillField_introduction">you registered for the event %s.</label>
 			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
 			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
-			<label index="mailForm_salutation">salutation</label>
 			<label index="testForm_prefillField_subject">Event tested</label>
 			<label index="testForm_prefillField_messageBody">This is the message body.</label>
 			<label index="testForm_prefillField_introduction">This is the introduction: %s</label>
@@ -660,7 +654,6 @@
 			<label index="cancelMailForm_alternativeDate">Alternative dates can be found at our website:</label>
 			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
 			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
-			<label index="mailForm_salutation">salutation</label>
 			<label index="testForm_prefillField_subject">Event tested</label>
 			<label index="testForm_prefillField_messageBody">This is the message body.</label>
 			<label index="testForm_prefillField_introduction">This is the introduction: %s</label>

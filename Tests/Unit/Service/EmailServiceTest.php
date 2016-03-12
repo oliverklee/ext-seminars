@@ -26,6 +26,31 @@ use TYPO3\CMS\Lang\LanguageService;
 class EmailServiceTest extends \Tx_Phpunit_TestCase
 {
     /**
+     * @var string
+     */
+    const DATE_FORMAT_YMD = '%d.%m.%Y';
+
+    /**
+     * @var string
+     */
+    const DATE_FORMAT_Y = '%Y';
+
+    /**
+     * @var string
+     */
+    const DATE_FORMAT_M = '%m.';
+
+    /**
+     * @var string
+     */
+    const DATE_FORMAT_MD = '%d.%m.';
+
+    /**
+     * @var string
+     */
+    const DATE_FORMAT_D = '%d.';
+
+    /**
      * @var EmailService
      */
     private $subject = null;
@@ -69,6 +94,15 @@ class EmailServiceTest extends \Tx_Phpunit_TestCase
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
+        $configuration = new \Tx_Oelib_Configuration();
+        $configuration->setAsString('dateFormatYMD', self::DATE_FORMAT_YMD);
+        $configuration->setAsString('dateFormatY', self::DATE_FORMAT_Y);
+        $configuration->setAsString('dateFormatM', self::DATE_FORMAT_M);
+        $configuration->setAsString('dateFormatMD', self::DATE_FORMAT_MD);
+        $configuration->setAsString('dateFormatD', self::DATE_FORMAT_D);
+
+        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $mailerFactory->enableTestMode();
@@ -82,7 +116,15 @@ class EmailServiceTest extends \Tx_Phpunit_TestCase
         $organizers->add($this->organizer);
 
         $this->event = new \Tx_Seminars_Model_Event();
-        $this->event->setData(['registrations' => new \Tx_Oelib_List(), 'organizers' => $organizers]);
+        $this->event->setData(
+            [
+                'title' => 'A nice event',
+                'begin_date' => mktime(10, 0, 0, 4, 2, 2016),
+                'end_date' => mktime(18, 30, 0, 4, 3, 2016),
+                'registrations' => new \Tx_Oelib_List(),
+                'organizers' => $organizers,
+            ]
+        );
 
         $this->user = new \Tx_Seminars_Model_FrontEndUser();
         $this->user->setData(['name' => 'John Doe', 'email' => 'john.doe@example.com']);
@@ -239,14 +281,63 @@ class EmailServiceTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesInsertsUserNameIntoMailTextWithSalutationMarker()
+    public function sendEmailToAttendeesInsertsSalutationIntoMailTextWithSalutationMarker()
     {
-        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', '%salutation The cake is a lie.');
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', '%salutation (This was the salutation)');
 
         $email = $this->mailer->getFirstSentEmail();
         self::assertNotNull($email);
         self::assertContains(
             $this->user->getName(),
+            $email->getBody()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailToAttendeesInsertsUserNameIntoMailTextWithUserNameMarker()
+    {
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello %userName!');
+
+        $email = $this->mailer->getFirstSentEmail();
+        self::assertNotNull($email);
+        self::assertContains(
+            'Hello ' . $this->user->getName() . '!',
+            $email->getBody()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailToAttendeesInsertsEventTitleIntoMailTextWithEventTitleMarker()
+    {
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Event: %eventTitle');
+
+        $email = $this->mailer->getFirstSentEmail();
+        self::assertNotNull($email);
+        self::assertContains(
+            'Event: ' . $this->event->getTitle(),
+            $email->getBody()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailToAttendeesInsertsEventDateIntoMailTextWithEventDateMarker()
+    {
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Date: %eventDate');
+
+        $dateViewHelper = new \Tx_Seminars_ViewHelper_DateRange();
+        $formattedDate = $dateViewHelper->render($this->event, '-');
+        self::assertNotSame('asdfasd', $formattedDate);
+
+        $email = $this->mailer->getFirstSentEmail();
+        self::assertNotNull($email);
+        self::assertContains(
+            'Date: ' . $formattedDate,
             $email->getBody()
         );
     }

@@ -632,7 +632,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
             $eventDetails
         );
 
-        return '%' . $GLOBALS['LANG']->getLL('mailForm_salutation') . LF . LF .
+        return '%salutation' . LF . LF .
             $introduction . LF . $GLOBALS['LANG']->getLL($prefix . 'messageBody');
     }
 
@@ -652,7 +652,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
         /** @var Tx_Seminars_EmailSalutation $salutation */
         $salutation = GeneralUtility::makeInstance(Tx_Seminars_EmailSalutation::class);
         $messageText = str_replace(
-            '%' . $GLOBALS['LANG']->getLL('mailForm_salutation'),
+            '%salutation',
             $salutation->getSalutation($user),
             $this->getPostData('messageBody')
         );
