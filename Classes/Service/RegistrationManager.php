@@ -199,7 +199,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
 
         $isLoggedIn = Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
 
-        if ($isLoggedIn    && $this->isUserBlocked($event)) {
+        if ($isLoggedIn && $this->isUserBlocked($event)) {
             $message = $this->translate('message_userIsBlocked');
         } elseif ($isLoggedIn && !$this->couldThisUserRegister($event)) {
             $message = $this->translate('message_alreadyRegistered');
@@ -1018,16 +1018,17 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
         if ($registration->isOnRegistrationQueue()) {
             return;
         }
-
         $emailReason = $this->getReasonForNotification($registration);
         if ($emailReason === '') {
             return;
         }
-
         $event = $registration->getSeminarObject();
-        /** @var $eMail Tx_Oelib_Mail */
-        $eMail = GeneralUtility::makeInstance(Tx_Oelib_Mail::class);
+        if ($event->shouldMuteNotificationEmails()) {
+            return;
+        }
 
+        /** @var Tx_Oelib_Mail $eMail */
+        $eMail = GeneralUtility::makeInstance(Tx_Oelib_Mail::class);
         $eMail->setSender($event->getFirstOrganizer());
         $eMail->setMessage($this->getMessageForNotification($registration, $emailReason));
         $eMail->setSubject(sprintf(

@@ -10082,6 +10082,18 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function muteNotificationEmailsSetsShouldMute()
+    {
+        $this->fixture->muteNotificationEmails();
+
+        self::assertTrue(
+            $this->fixture->shouldMuteNotificationEmails()
+        );
+    }
+
     /*
      * Tests regarding the flag for automatic cancelation/confirmation
      */

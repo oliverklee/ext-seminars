@@ -4850,6 +4850,16 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
+     * Makes sure that notification e-mail to the organizers are muted.
+     *
+     * @return void
+     */
+    public function muteNotificationEmails()
+    {
+        $this->setRecordPropertyBoolean('mute_notification_emails', true);
+    }
+
+    /**
      * Checks whether automatic confirmation/cancelation for this event is enabled.
      *
      * @return bool

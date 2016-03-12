@@ -4433,6 +4433,20 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
     /**
      * @test
      */
+    public function sendAdditionalNotificationForEmailMutedNotSendsEmail()
+    {
+        $registration = $this->createRegistration();
+        $event = $registration->getSeminarObject();
+        $event->muteNotificationEmails();
+
+        $this->fixture->sendAdditionalNotification($registration);
+
+        self::assertNull($this->mailer->getFirstSentEmail());
+    }
+
+    /**
+     * @test
+     */
     public function sendAdditionalNotificationCanSendEmailsToTwoOrganizers()
     {
         $organizerUid = $this->testingFramework->createRecord(
