@@ -142,4 +142,16 @@ class Tx_Seminars_Mapper_Event extends Tx_Oelib_DataMapper
 
         return $this->getModel($row);
     }
+
+    /**
+     * Finds events that have the status "planned" and that have the automatic state change enabled.
+     *
+     * @return Tx_Oelib_List the Tx_Oelib_List<Tx_Seminars_Model_Event>
+     */
+    public function findForAutomaticStatusChange()
+    {
+        $whereClause = 'cancelled = ' . Tx_Seminars_Model_Event::STATUS_PLANNED . ' AND automatic_confirmation_cancelation = 1';
+
+        return $this->findByWhereClause($whereClause);
+    }
 }

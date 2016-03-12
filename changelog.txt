@@ -1,6 +1,7 @@
 1.0.0 - currently working on
 
 Features:
+- [#5676] Add EventMapper::findForAutomaticStatusChange
 - [#5674] Also mute the notification e-mails to the organizer
 - [#5673] Add variables for the event name and date for the cancel/confirm e-mails
 - [#5666] Configuration for the maximum number of seats in the registration form

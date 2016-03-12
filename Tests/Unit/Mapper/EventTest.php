@@ -1000,4 +1000,80 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
             $this->fixture->findNextUpcoming()->getUid()
         );
     }
+
+    /*
+     * Tests concerning findForAutomaticStatusChange
+     */
+
+    /**
+     * @test
+     */
+    public function findForAutomaticStatusChangeForNoEventsReturnsEmptyList()
+    {
+        $result = $this->fixture->findForAutomaticStatusChange();
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $result);
+        self::assertTrue($result->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function findForAutomaticStatusChangeFindsPlannedEventWithAutomaticStateChange()
+    {
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 1]
+        );
+
+        $result = $this->fixture->findForAutomaticStatusChange();
+
+        self::assertFalse($result->isEmpty());
+        self::assertSame((string)$uid, $result->getUids());
+    }
+
+    /**
+     * @test
+     */
+    public function findForAutomaticStatusChangeNotFindsCanceledEventWithAutomaticStateChange()
+    {
+        $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED, 'automatic_confirmation_cancelation' => 1]
+        );
+
+        $result = $this->fixture->findForAutomaticStatusChange();
+
+        self::assertTrue($result->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function findForAutomaticStatusChangeNotFindsConfirmedEventWithAutomaticStateChange()
+    {
+        $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED, 'automatic_confirmation_cancelation' => 1]
+        );
+
+        $result = $this->fixture->findForAutomaticStatusChange();
+
+        self::assertTrue($result->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function findForAutomaticStatusChangeNotFindsPlannedEventWithoutAutomaticStateChange()
+    {
+        $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED, 'automatic_confirmation_cancelation' => 0]
+        );
+
+        $result = $this->fixture->findForAutomaticStatusChange();
+
+        self::assertTrue($result->isEmpty());
+    }
 }
