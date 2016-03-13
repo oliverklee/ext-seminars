@@ -15,7 +15,6 @@
 /**
  * This class represents an e-mail form that does not change the event's status.
  *
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_BackEnd_GeneralEventMailForm extends Tx_Seminars_BackEnd_AbstractEventMailForm
@@ -42,16 +41,6 @@ class Tx_Seminars_BackEnd_GeneralEventMailForm extends Tx_Seminars_BackEnd_Abstr
     protected function getSubmitButtonLabel()
     {
         return $GLOBALS['LANG']->getLL('generalMailForm_sendButton');
-    }
-
-    /**
-     * Gets the content of the message body for the e-mail.
-     *
-     * @return string the content for the message body, will not be empty
-     */
-    protected function getMessageBodyFormContent()
-    {
-        return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
     }
 
     /**

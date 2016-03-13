@@ -19,7 +19,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This is the base class for e-mail forms in the back end.
  *
- *
  * @author Mario Rimann <mario@screenteam.com>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
@@ -667,7 +666,10 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      *
      * @return string the content for the message body, will not be empty
      */
-    abstract protected function getMessageBodyFormContent();
+    protected function getMessageBodyFormContent()
+    {
+        return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
+    }
 
     /**
      * Sets an error message.

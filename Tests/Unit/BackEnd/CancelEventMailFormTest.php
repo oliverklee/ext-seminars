@@ -17,7 +17,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Test case.
  *
- *
  * @author Mario Rimann <mario@screenteam.com>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
@@ -73,11 +72,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
      * @var string
      */
     private $languageBackup;
-
-    /**
-     * @var Tx_Seminars_Service_SingleViewLinkBuilder
-     */
-    private $linkBuilder = null;
 
     /**
      * @var Tx_Oelib_EmailCollector
@@ -136,15 +130,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
         );
 
         $this->fixture = new Tx_Seminars_BackEnd_CancelEventMailForm($this->eventUid);
-
-        $this->linkBuilder = $this->getMock(
-            Tx_Seminars_Service_SingleViewLinkBuilder::class,
-            array('createAbsoluteUrlForEvent')
-        );
-        $this->linkBuilder->expects(self::any())
-            ->method('createAbsoluteUrlForEvent')
-            ->will(self::returnValue('http://singleview.example.com/'));
-        $this->fixture->injectLinkBuilder($this->linkBuilder);
     }
 
     protected function tearDown()
@@ -219,226 +204,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
     {
         self::assertContains(
             '<input type="hidden" name="action" value="cancelEvent" />',
-            $this->fixture->render()
-        );
-    }
-
-    /////////////////////////////////////////////////
-    // Tests concerning the link to the single view
-    /////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function renderForSingleEventDoesNotAppendSingleViewLink()
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->eventUid,
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE)
-        );
-
-        self::assertNotContains(
-            'http://singleview.example.com/',
-            $this->fixture->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForDateWithOtherDatesInFutureAppendsSingleViewLink()
-    {
-        $topicUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            array(
-                'title' => 'Dummy event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
-            )
-        );
-        $dateUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            array(
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                'topic' => $topicUid,
-            )
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            array(
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                'topic' => $topicUid,
-            )
-        );
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $dateUid,
-            $this->testingFramework->createRecord('tx_seminars_organizers'),
-            'organizers'
-        );
-
-        $fixture = new Tx_Seminars_BackEnd_CancelEventMailForm($dateUid);
-        $fixture->injectLinkBuilder($this->linkBuilder);
-
-        self::assertContains(
-            'http://singleview.example.com/',
-            $fixture->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForDateWithoutOtherDatesNotAppendsSingleViewLink()
-    {
-        $topicUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            array(
-                'title' => 'Dummy event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
-            )
-        );
-        $dateUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            array(
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                'topic' => $topicUid,
-            )
-        );
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $dateUid,
-            $this->testingFramework->createRecord('tx_seminars_organizers'),
-            'organizers'
-        );
-
-        $fixture = new Tx_Seminars_BackEnd_CancelEventMailForm($dateUid);
-        $fixture->injectLinkBuilder($this->linkBuilder);
-
-        self::assertNotContains(
-            'http://singleview.example.com/',
-            $fixture->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForDateWithOtherDatesInPastNotAppendsSingleViewLink()
-    {
-        $topicUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            array(
-                'title' => 'Dummy event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
-            )
-        );
-        $dateUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            array(
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                'topic' => $topicUid,
-            )
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            array(
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                'topic' => $topicUid,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME']
-                    - Tx_Oelib_Time::SECONDS_PER_DAY,
-            )
-        );
-
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $dateUid,
-            $this->testingFramework->createRecord('tx_seminars_organizers'),
-            'organizers'
-        );
-
-        $fixture = new Tx_Seminars_BackEnd_CancelEventMailForm($dateUid);
-        $fixture->injectLinkBuilder($this->linkBuilder);
-
-        self::assertNotContains(
-            'http://singleview.example.com/',
-            $fixture->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForEmptyLinkShowsErrorMessage()
-    {
-        $topicUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            array(
-                'title' => 'Dummy event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
-            )
-        );
-        $dateUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            array(
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                'topic' => $topicUid,
-            )
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            array(
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                'topic' => $topicUid,
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME']
-                    + Tx_Oelib_Time::SECONDS_PER_DAY,
-            )
-        );
-
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $dateUid,
-            $this->testingFramework->createRecord('tx_seminars_organizers'),
-            'organizers'
-        );
-
-        $fixture = new Tx_Seminars_BackEnd_CancelEventMailForm($dateUid);
-
-        $linkBuilder = $this->getMock(
-            Tx_Seminars_Service_SingleViewLinkBuilder::class,
-            array('createAbsoluteUrlForEvent')
-        );
-        $linkBuilder->expects(self::any())
-            ->method('createAbsoluteUrlForEvent')->will(self::returnValue(''));
-        $fixture->injectLinkBuilder($linkBuilder);
-
-        self::assertContains(
-            $GLOBALS['LANG']->getLL('eventMailForm_error_noDetailsPageFound'),
-            $fixture->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderForSingleEventEmptyLinkNotShowsErrorMessage()
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->eventUid,
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE)
-        );
-
-        $linkBuilder = $this->getMock(
-            Tx_Seminars_Service_SingleViewLinkBuilder::class,
-            array('createAbsoluteUrlForEvent')
-        );
-        $linkBuilder->expects(self::any())
-            ->method('createAbsoluteUrlForEvent')->will(self::returnValue(''));
-        $this->fixture->injectLinkBuilder($linkBuilder);
-
-        self::assertNotContains(
-            $GLOBALS['LANG']->getLL('eventMailForm_error_noDetailsPageFound'),
             $this->fixture->render()
         );
     }

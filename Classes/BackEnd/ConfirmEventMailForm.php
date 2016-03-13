@@ -18,7 +18,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class creates back-end e-mail form for confirming an event.
  *
- *
  * @author Mario Rimann <mario@screenteam.com>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
@@ -44,16 +43,6 @@ class Tx_Seminars_BackEnd_ConfirmEventMailForm extends Tx_Seminars_BackEnd_Abstr
     protected function getSubmitButtonLabel()
     {
         return $GLOBALS['LANG']->getLL('confirmMailForm_sendButton');
-    }
-
-    /**
-     * Gets the content of the message body for the e-mail.
-     *
-     * @return string the content for the message body, will not be empty
-     */
-    protected function getMessageBodyFormContent()
-    {
-        return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
     }
 
     /**

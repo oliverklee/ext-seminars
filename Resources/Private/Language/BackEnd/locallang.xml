@@ -60,7 +60,6 @@
 			<label index="cancelMailForm_prefillField_subject">Event canceled</label>
 			<label index="cancelMailForm_prefillField_messageBody">Unfortunately, we had to cancel this event.</label>
 			<label index="cancelMailForm_prefillField_introduction">you registered for the event %s.</label>
-			<label index="cancelMailForm_alternativeDate">Alternative dates can be found at our website:</label>
 			<label index="generalMailForm_sendButton">Send e-mail</label>
 			<label index="generalMailForm_prefillField_subject">Event</label>
 			<label index="generalMailForm_prefillField_introduction">you registered for the event %s.</label>
@@ -150,7 +149,6 @@
 			<label index="cancelMailForm_prefillField_subject">Veranstaltung abgesagt:</label>
 			<label index="cancelMailForm_prefillField_messageBody">Leider musste diese Veranstaltung abgesagt werden.</label>
 			<label index="cancelMailForm_prefillField_introduction">Sie hatten sich für die Veranstaltung %s angemeldet.</label>
-			<label index="cancelMailForm_alternativeDate">Alternativtermine entnehmen Sie bitte unserer Homepage:</label>
 			<label index="generalMailForm_sendButton">E-Mail senden</label>
 			<label index="generalMailForm_prefillField_subject">Veranstaltung</label>
 			<label index="generalMailForm_prefillField_introduction">Sie hatten sich für die Veranstaltung %s angemeldet.</label>
@@ -261,7 +259,6 @@
 			<label index="cancelMailForm_prefillField_subject">Événement annulé</label>
 			<label index="cancelMailForm_prefillField_messageBody">Malheureusement cet événement a dû être annulé</label>
 			<label index="cancelMailForm_prefillField_introduction">Vous vous êtes inscrits à l'événement %s.</label>
-			<label index="cancelMailForm_alternativeDate">Des dates de rechange peuvent être consultées sur notre page web :</label>
 			<label index="message_noPageTypeSelected">Sélectionnez une sysfolder dans l'arborescence des pages,</label>
 			<label index="message_noStaticTemplateFound">Aucun template statique n'a été trouvé. Incluez svp les template statique seminars dans le TS setup de ce sysfolder.</label>
 			<label index="testForm_prefillField_subject">Événement testé</label>
@@ -347,7 +344,6 @@
 			<label index="cancelMailForm_prefillField_subject" type="integer">175603821</label>
 			<label index="cancelMailForm_prefillField_messageBody" type="integer">121602317</label>
 			<label index="cancelMailForm_prefillField_introduction" type="integer">115928722</label>
-			<label index="cancelMailForm_alternativeDate" type="integer">231667710</label>
 			<label index="generalMailForm_sendButton" type="integer">238141636</label>
 			<label index="generalMailForm_prefillField_subject" type="integer">172937159</label>
 			<label index="generalMailForm_prefillField_introduction" type="integer">115928722</label>
@@ -454,7 +450,6 @@
 			<label index="cancelMailForm_prefillField_subject" type="integer">175603821</label>
 			<label index="cancelMailForm_prefillField_messageBody" type="integer">121602317</label>
 			<label index="cancelMailForm_prefillField_introduction" type="integer">115928722</label>
-			<label index="cancelMailForm_alternativeDate" type="integer">231667710</label>
 			<label index="message_noPageTypeSelected" type="integer">217321592</label>
 			<label index="message_noStaticTemplateFound" type="integer">236035033</label>
 			<label index="testForm_prefillField_subject" type="integer">115548765</label>
@@ -544,7 +539,6 @@
 			<label index="cancelMailForm_prefillField_subject">Event canceled</label>
 			<label index="cancelMailForm_prefillField_messageBody">Unfortunately, we had to cancel this event.</label>
 			<label index="cancelMailForm_prefillField_introduction">you registered for the event %s.</label>
-			<label index="cancelMailForm_alternativeDate">Alternative dates can be found at our website:</label>
 			<label index="generalMailForm_sendButton">Send e-mail</label>
 			<label index="generalMailForm_prefillField_subject">Event</label>
 			<label index="generalMailForm_prefillField_introduction">you registered for the event %s.</label>
@@ -651,7 +645,6 @@
 			<label index="cancelMailForm_prefillField_subject">Event canceled</label>
 			<label index="cancelMailForm_prefillField_messageBody">Unfortunately, we had to cancel this event.</label>
 			<label index="cancelMailForm_prefillField_introduction">you registered for the event %s.</label>
-			<label index="cancelMailForm_alternativeDate">Alternative dates can be found at our website:</label>
 			<label index="message_noPageTypeSelected">Please select a sysfolder in the page tree.</label>
 			<label index="message_noStaticTemplateFound">No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</label>
 			<label index="testForm_prefillField_subject">Event tested</label>
