@@ -224,14 +224,14 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
         );
     }
 
-    ////////////////////////////
-    // Tests for setEventState
-    ////////////////////////////
+    /*
+     * Tests for setEventStatus
+     */
 
     /**
      * @test
      */
-    public function setEventStateSetsStatusToConfirmed()
+    public function setEventStatusSetsStatusToConfirmed()
     {
         $this->fixture->setPostData(
             array(
@@ -256,7 +256,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
     /**
      * @test
      */
-    public function setEventStateCreatesFlashMessage()
+    public function setEventStatusCreatesFlashMessage()
     {
         $this->fixture->setPostData(
             array(

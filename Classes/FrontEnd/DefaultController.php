@@ -2511,7 +2511,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Creates the "edit", "hide" and "unhide" links for the current event in
      * the list view, depending on the logged-in FE user's permissions and the
-     * event's state.
+     * event's status.
      *
      * @return string HTML with the links, will be empty if the FE user can not edit the current event
      */

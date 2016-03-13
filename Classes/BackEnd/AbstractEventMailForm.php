@@ -432,7 +432,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     }
 
     /**
-     * Sends an e-mail to the attendees to inform about the changed event state.
+     * Sends an e-mail to the attendees to inform about the changed event status.
      *
      * @return void
      */

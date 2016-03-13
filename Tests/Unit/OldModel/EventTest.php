@@ -8840,7 +8840,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     }
 
     /*
-     * Tests concerning the publication state
+     * Tests concerning the publication status
      */
 
     /**

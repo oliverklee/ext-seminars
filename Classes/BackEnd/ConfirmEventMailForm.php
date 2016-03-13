@@ -11,7 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
-use OliverKlee\Seminars\Service\EventStateService;
+use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -82,8 +82,8 @@ class Tx_Seminars_BackEnd_ConfirmEventMailForm extends Tx_Seminars_BackEnd_Abstr
      */
     protected function setEventStatus()
     {
-        /** @var EventStateService $eventStatusService */
-        $eventStatusService = GeneralUtility::makeInstance(EventStateService::class);
+        /** @var EventStatusService $eventStatusService */
+        $eventStatusService = GeneralUtility::makeInstance(EventStatusService::class);
         $eventStatusService->confirmAndSave($this->getEvent());
 
         /** @var FlashMessage $message */

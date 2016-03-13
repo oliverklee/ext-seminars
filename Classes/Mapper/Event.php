@@ -144,7 +144,7 @@ class Tx_Seminars_Mapper_Event extends Tx_Oelib_DataMapper
     }
 
     /**
-     * Finds events that have the status "planned" and that have the automatic state change enabled.
+     * Finds events that have the status "planned" and that have the automatic status change enabled.
      *
      * @return Tx_Oelib_List the Tx_Oelib_List<Tx_Seminars_Model_Event>
      */

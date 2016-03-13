@@ -458,14 +458,14 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
         );
     }
 
-    ////////////////////////////
-    // Tests for setEventState
-    ////////////////////////////
+    /*
+     * Tests for setEventStatus
+     */
 
     /**
      * @test
      */
-    public function setEventStateSetsStatusToCanceled()
+    public function setEventStatusSetsStatusToCanceled()
     {
         $this->fixture->setPostData(
             array(
@@ -490,7 +490,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
     /**
      * @test
      */
-    public function setEventStateCreatesFlashMessage()
+    public function setEventStatusCreatesFlashMessage()
     {
         $this->fixture->setPostData(
             array(

@@ -1019,7 +1019,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function findForAutomaticStatusChangeFindsPlannedEventWithAutomaticStateChange()
+    public function findForAutomaticStatusChangeFindsPlannedEventWithAutomaticStatusChange()
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1035,7 +1035,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function findForAutomaticStatusChangeNotFindsCanceledEventWithAutomaticStateChange()
+    public function findForAutomaticStatusChangeNotFindsCanceledEventWithAutomaticStatusChange()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1050,7 +1050,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function findForAutomaticStatusChangeNotFindsConfirmedEventWithAutomaticStateChange()
+    public function findForAutomaticStatusChangeNotFindsConfirmedEventWithAutomaticStatusChange()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1065,7 +1065,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function findForAutomaticStatusChangeNotFindsPlannedEventWithoutAutomaticStateChange()
+    public function findForAutomaticStatusChangeNotFindsPlannedEventWithoutAutomaticStatusChange()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',

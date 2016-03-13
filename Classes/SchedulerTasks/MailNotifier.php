@@ -132,7 +132,7 @@ class MailNotifier extends AbstractTask
     }
 
     /**
-     * Returns events in confirmed state which are about to take place and for
+     * Returns events in confirmed status which are about to take place and for
      * which no reminder has been sent yet.
      *
      * @return \Tx_Seminars_OldModel_Event[] events for which to send the event-takes-place reminder to
@@ -161,7 +161,7 @@ class MailNotifier extends AbstractTask
     }
 
     /**
-     * Returns events in planned state for which the cancellation deadline has
+     * Returns events in planned status for which the cancellation deadline has
      * just passed and for which no reminder has been sent yet.
      *
      * @return \Tx_Seminars_OldModel_Event[] events for which to send the cancellation reminder to their

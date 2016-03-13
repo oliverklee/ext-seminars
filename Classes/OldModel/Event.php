@@ -4970,7 +4970,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether this event has been published.
      *
-     * Note: The publication state of an event is not related to whether it is
+     * Note: The publication status of an event is not related to whether it is
      * hidden or not.
      *
      * @return bool TRUE if this event has been published, FALSE otherwise

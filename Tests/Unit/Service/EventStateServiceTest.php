@@ -13,7 +13,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Service;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use OliverKlee\Seminars\Service\EventStateService;
+use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
@@ -21,10 +21,10 @@ use TYPO3\CMS\Core\SingletonInterface;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class EventStateServiceTest extends \Tx_Phpunit_TestCase
+class EventStatusServiceTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var EventStateService
+     * @var EventStatusService
      */
     private $subject = null;
 
@@ -58,7 +58,7 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
         $this->eventMapper = $this->getMock(\Tx_Seminars_Mapper_Event::class);
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $this->eventMapper);
 
-        $this->subject = new EventStateService();
+        $this->subject = new EventStatusService();
 
         $this->past = $GLOBALS['SIM_EXEC_TIME'] - 1;
         $this->future = $GLOBALS['SIM_EXEC_TIME'] + 1;
