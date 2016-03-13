@@ -138,7 +138,6 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
         );
 
         return '<fieldset id="EventMailForm"><form action="' . htmlspecialchars($formAction) . '" method="post">' .
-            $this->createSenderFormElement() .
             $this->createSubjectFormElement() .
             $this->createMessageBodyFormElement() .
             $this->createBackButton() .
@@ -213,45 +212,6 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     public function checkAccess()
     {
         return $GLOBALS['BE_USER']->check('tables_select', 'tx_seminars_seminars');
-    }
-
-    /**
-     * Returns the HTML for the sender field of the form. If the event has more
-     * then one organizer, a drop-down menu is returned - a hidden field otherwise.
-     *
-     * @return string the HTML for rendering the sender field of the form, will
-     *                not be empty
-     */
-    protected function createSenderFormElement()
-    {
-        $result = '<p><label for="sender">' .
-            $GLOBALS['LANG']->getLL('eventMailForm_sender') . '</label>';
-
-        $organizers = $this->getOldEvent()->getOrganizerBag();
-        $multipleOrganizers = $organizers->count() > 1;
-
-        if ($multipleOrganizers) {
-            $result .= '<select id="sender" name="sender">';
-            $openingOptionTag = '<option value="';
-            $bracketClose = '">';
-            $closingOptionTag = '</option>';
-        } else {
-            $result .= '<input type="hidden" id="sender" name="sender" value="';
-            $openingOptionTag = '';
-            $bracketClose = '" />';
-            $closingOptionTag = '';
-        }
-
-        /** @var Tx_Seminars_OldModel_Organizer $currentOrganizer */
-        foreach ($organizers as $currentOrganizer) {
-            $result .=  $openingOptionTag . $currentOrganizer->getUid() .
-                $bracketClose . htmlspecialchars(
-                    '"' . $currentOrganizer->getName() . '"' .
-                    ' <' . $currentOrganizer->getEMailAddress() . '>'
-                ) . $closingOptionTag;
-        }
-
-        return $result . ($multipleOrganizers ? '</select>' : '') . '</p>';
     }
 
     /**
@@ -437,10 +397,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      */
     private function sendEmailToAttendees()
     {
-        /** @var Tx_Seminars_Mapper_Organizer $organizerMapper */
-        $organizerMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class);
-        /** @var Tx_Seminars_Model_Organizer $organizer */
-        $organizer = $organizerMapper->find((int)$this->getPostData('sender'));
+        $organizer = $this->getEvent()->getFirstOrganizer();
 
         /** @var Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
         $registrationBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);

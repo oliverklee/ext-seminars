@@ -93,6 +93,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             array(
                 'title' => 'Dummy Organizer',
                 'email' => 'foo@example.org',
+                'email_footer' => 'organizer footer',
             )
         );
         $this->eventUid = $this->testingFramework->createRecord(
@@ -246,59 +247,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     /**
      * @test
      */
-    public function renderContainsOrganizerNameAsSenderForEventWithOneOrganizer()
-    {
-        self::assertContains(
-            '<input type="hidden" id="sender" name="sender" value="' .
-                $this->organizerUid . '" />' .
-                htmlspecialchars('"Dummy Organizer" <foo@example.org>'),
-            $this->fixture->render()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function renderContainsEventDateInSubjectFieldForNewFormAndEventWithBeginDate()
     {
         self::assertContains(
             strftime('%d.%m.%Y', $GLOBALS['SIM_EXEC_TIME'] + 42),
             $this->fixture->render()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderContainsDropDownForSenderSelectionForEventWithMultipleOrganizers()
-    {
-        $secondOrganizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers',
-            array(
-                'title' => 'Second Organizer',
-                'email' => 'bar@example.org',
-            )
-        );
-        $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars',
-            $this->eventUid,
-            $secondOrganizerUid,
-            'organizers'
-        );
-
-        $formOutput = $this->fixture->render();
-
-        self::assertContains(
-            '<select id="sender" name="sender">',
-            $formOutput
-        );
-        self::assertContains(
-            '<option value="' . $this->organizerUid . '">' . htmlspecialchars('"Dummy Organizer" <foo@example.org>'),
-            $formOutput
-        );
-        self::assertContains(
-            '<option value="' . $secondOrganizerUid . '">' . htmlspecialchars('"Second Organizer" <bar@example.org>'),
-            $formOutput
         );
     }
 
@@ -482,7 +435,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
             )
@@ -513,7 +465,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
             )
@@ -547,7 +498,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'foo bar %salutation',
             )
@@ -582,7 +532,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'foo bar foo',
             )
@@ -594,7 +543,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     /**
      * @test
      */
-    public function sendEmailToAttendeesUsesSelectedOrganizerAsSender()
+    public function sendEmailToAttendeesUsesFirstOrganizerAsSender()
     {
         $secondOrganizer = Tx_Oelib_MapperRegistry
             ::get(Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel(array(
@@ -619,13 +568,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
-                'sender' => (string) $secondOrganizer->getUid(),
             )
         );
         $this->fixture->render();
 
         self::assertArrayHasKey(
-            'bar@example.org',
+            'foo@example.org',
             $this->mailer->getFirstSentEmail()->getFrom()
         );
     }
@@ -662,7 +610,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
-                'sender' => $this->organizerUid,
             )
         );
         $this->fixture->render();
@@ -676,7 +623,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     /**
      * @test
      */
-    public function sendEmailToAttendeesAppendsOrganizersFooterToMessageBodyIfSet()
+    public function sendEmailToAttendeesAppendsFirstOrganizersFooterToMessageBodyIfSet()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -694,7 +641,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             ::get(Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel(array(
                 'title' => 'Second Organizer',
                 'email' => 'bar@example.org',
-                'email_footer' => $organizerFooter,
+                'email_footer' => 'oasdfasrganizer footer',
             ));
 
         $this->fixture->setPostData(
@@ -703,7 +650,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
-                'sender' => (string) $secondOrganizer->getUid(),
             )
         );
         $this->fixture->render();
@@ -719,6 +665,13 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
      */
     public function sendEmailToAttendeesForOrganizerWithoutFooterDoesNotAppendFooterMarkersToMessageBody()
     {
+        $this->testingFramework->changeRecord(
+            'tx_seminars_organizers',
+            $this->organizerUid,
+            ['email_footer' => '']
+        );
+
+
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
             array(
@@ -734,7 +687,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
             )
@@ -768,7 +720,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
             )
@@ -790,7 +741,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
             )
@@ -816,7 +766,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
             )

@@ -237,7 +237,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
             )
@@ -262,7 +261,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
             )
@@ -302,7 +300,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => $messageBody,
             )
@@ -345,7 +342,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'some message body',
             )
@@ -390,7 +386,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'some message body',
             )

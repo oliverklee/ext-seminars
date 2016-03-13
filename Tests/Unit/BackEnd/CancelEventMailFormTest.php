@@ -236,7 +236,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
             array(
                 'action' => 'cancelEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
             )
@@ -261,7 +260,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
             array(
                 'action' => 'cancelEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
             )
@@ -300,7 +298,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => $messageBody,
             )
@@ -343,7 +340,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'some message body',
             )
@@ -388,7 +384,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
             array(
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
-                'sender' => $this->organizerUid,
                 'subject' => 'foo',
                 'messageBody' => 'some message body',
             )
