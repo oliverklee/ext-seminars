@@ -2575,4 +2575,65 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
             $this->fixture->shouldAutomaticallyConfirmOrCancel()
         );
     }
+
+    /*
+     * Tests concerning the organizers
+     */
+
+    /**
+     * @test
+     */
+    public function getOrganizersGetsOrganizers()
+    {
+        $organizers = new \Tx_Oelib_List();
+        $this->fixture->setData(['organizers' => $organizers]);
+
+        $result = $this->fixture->getOrganizers();
+
+        self::assertSame($organizers, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getFirstOrganizerForNoOrganizersReturnsNull()
+    {
+        $organizers = new \Tx_Oelib_List();
+        $this->fixture->setData(['organizers' => $organizers]);
+
+        $result = $this->fixture->getFirstOrganizer();
+
+        self::assertNull($result);
+    }
+
+    /**
+     * @test
+     */
+    public function getFirstOrganizerForOneOrganizerReturnsThatOrganizer()
+    {
+        $organizer = new \Tx_Seminars_Model_Organizer();
+        $organizers = new \Tx_Oelib_List();
+        $organizers->add($organizer);
+        $this->fixture->setData(['organizers' => $organizers]);
+
+        $result = $this->fixture->getFirstOrganizer();
+
+        self::assertSame($organizer, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getFirstOrganizerForTwoOrganizersReturnsFirstOrganizer()
+    {
+        $firstOrganizer = new \Tx_Seminars_Model_Organizer();
+        $organizers = new \Tx_Oelib_List();
+        $organizers->add($firstOrganizer);
+        $organizers->add(new \Tx_Seminars_Model_Organizer());
+        $this->fixture->setData(['organizers' => $organizers]);
+
+        $result = $this->fixture->getFirstOrganizer();
+
+        self::assertSame($firstOrganizer, $result);
+    }
 }

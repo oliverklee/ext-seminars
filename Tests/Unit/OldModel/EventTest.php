@@ -5938,9 +5938,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $this->addPlaceRelation();
 
-        self::assertTrue(
-            $this->fixture->getPlaces()->first() instanceof tx_seminars_Model_place
-        );
+        self::assertInstanceOf(Tx_Seminars_Model_Place::class, $this->fixture->getPlaces()->first());
     }
 
     /**

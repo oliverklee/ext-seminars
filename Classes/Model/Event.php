@@ -1225,6 +1225,15 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     }
 
     /**
+     * Retrieves the first organizer.
+     *
+     * @return \Tx_Seminars_Model_Organizer|null
+     */
+    public function getFirstOrganizer() {
+        return $this->getOrganizers()->first();
+    }
+
+    /**
      * Returns our organinzing partners.
      *
      * @return Tx_Oelib_List our organizing partners, will be empty if this event

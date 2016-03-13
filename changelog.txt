@@ -31,6 +31,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5678] Add Event::getFirstOrganizer
 - [#5360] Reformat the code to PSR-2
 - [#5632] Move language files to Resources/Private/Language
 - [#5660] Move the cancelation/confirmation of an event to services

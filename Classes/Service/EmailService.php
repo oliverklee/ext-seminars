@@ -65,9 +65,6 @@ class EmailService implements SingletonInterface
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $mailer = $mailerFactory->getMailer();
 
-        /** @var \Tx_Seminars_Model_Organizer $firstOrganizer */
-        $firstOrganizer = $event->getOrganizers()->first();
-
         /** @var \Tx_Seminars_Model_Registration $registration */
         foreach ($event->getRegistrations() as $registration) {
             $user = $registration->getFrontEndUser();
@@ -77,7 +74,7 @@ class EmailService implements SingletonInterface
 
             /** @var \Tx_Oelib_Mail $eMail */
             $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-            $eMail->setSender($firstOrganizer);
+            $eMail->setSender($event->getFirstOrganizer());
             $eMail->addRecipient($user);
             $eMail->setSubject($subject);
 
@@ -99,10 +96,9 @@ class EmailService implements SingletonInterface
     protected function buildMessageBody($rawBody, \Tx_Seminars_Model_Event $event, \Tx_Seminars_Model_FrontEndUser $user)
     {
         $bodyWithFooter = $this->replaceMarkers($rawBody, $event, $user);
-        /** @var \Tx_Seminars_Model_Organizer $firstOrganizer */
-        $firstOrganizer = $event->getOrganizers()->first();
-        if ($firstOrganizer->hasEMailFooter()) {
-            $bodyWithFooter .= LF . '-- ' . LF . $firstOrganizer->getEMailFooter();
+        $organizer = $event->getFirstOrganizer();
+        if ($organizer->hasEMailFooter()) {
+            $bodyWithFooter .= LF . '-- ' . LF . $organizer->getEMailFooter();
         }
 
         return $bodyWithFooter;
