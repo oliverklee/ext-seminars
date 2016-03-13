@@ -130,7 +130,7 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
 
         $this->subject->updateStatusAndSave($event);
 
-        self::assertSame(\Tx_Seminars_Model_Event::STATUS_CONFIRMED, $event->getStatus());
+        self::assertTrue($event->isConfirmed());
     }
 
     /**
@@ -193,7 +193,7 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
 
         $this->subject->updateStatusAndSave($event);
 
-        self::assertSame(\Tx_Seminars_Model_Event::STATUS_PLANNED, $event->getStatus());
+        self::assertTrue($event->isPlanned());
     }
 
     /**
@@ -295,7 +295,7 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
 
         $this->subject->updateStatusAndSave($event);
 
-        self::assertSame(\Tx_Seminars_Model_Event::STATUS_CANCELED, $event->getStatus());
+        self::assertTrue($event->isCanceled());
     }
 
     /**
@@ -318,5 +318,57 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
         $this->eventMapper->expects(self::once())->method('save')->with($event);
 
         $this->subject->updateStatusAndSave($event);
+    }
+
+    /**
+     * @test
+     */
+    public function cancelAndSaveCancelsEvent()
+    {
+        $event = new \Tx_Seminars_Model_Event();
+        $event->setData([]);
+
+        $this->subject->cancelAndSave($event);
+
+        self::assertTrue($event->isCanceled());
+    }
+
+    /**
+     * @test
+     */
+    public function cancelAndSaveSavesEvent()
+    {
+        $event = new \Tx_Seminars_Model_Event();
+        $event->setData([]);
+
+        $this->eventMapper->expects(self::once())->method('save')->with($event);
+
+        $this->subject->cancelAndSave($event);
+    }
+
+    /**
+     * @test
+     */
+    public function confirmAndSaveConfirmsEvent()
+    {
+        $event = new \Tx_Seminars_Model_Event();
+        $event->setData([]);
+
+        $this->subject->confirmAndSave($event);
+
+        self::assertTrue($event->isConfirmed());
+    }
+
+    /**
+     * @test
+     */
+    public function confirmAndSaveSavesEvent()
+    {
+        $event = new \Tx_Seminars_Model_Event();
+        $event->setData([]);
+
+        $this->eventMapper->expects(self::once())->method('save')->with($event);
+
+        $this->subject->confirmAndSave($event);
     }
 }

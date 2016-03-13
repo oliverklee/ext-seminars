@@ -47,28 +47,50 @@ class EventStateService implements SingletonInterface
      */
     public function updateStatusAndSave(\Tx_Seminars_Model_Event $event)
     {
-        if (!$event->shouldAutomaticallyConfirmOrCancel() || $event->getStatus() !== \Tx_Seminars_Model_Event::STATUS_PLANNED) {
+        if (!$event->shouldAutomaticallyConfirmOrCancel() || !$event->isPlanned()) {
             return false;
         }
 
         $eventWasUpdated = false;
         if ($event->hasEnoughRegistrations()) {
-            $event->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+            $this->confirmAndSave($event);
             $eventWasUpdated = true;
         } else {
             if (
                 $event->hasRegistrationDeadline()
                 && $event->getRegistrationDeadlineAsUnixTimeStamp() < $GLOBALS['SIM_EXEC_TIME']
             ) {
-                $event->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+                $this->cancelAndSave($event);
                 $eventWasUpdated = true;
             }
         }
 
-        if ($eventWasUpdated) {
-            $this->eventMapper->save($event);
-        }
-
         return $eventWasUpdated;
+    }
+
+    /**
+     * Cancels and saves $event.
+     *
+     * @param \Tx_Seminars_Model_Event $event
+     *
+     * @return void
+     */
+    public function cancelAndSave(\Tx_Seminars_Model_Event $event)
+    {
+        $event->cancel();
+        $this->eventMapper->save($event);
+    }
+
+    /**
+     * Confirms and saves $event.
+     *
+     * @param \Tx_Seminars_Model_Event $event
+     *
+     * @return void
+     */
+    public function confirmAndSave(\Tx_Seminars_Model_Event $event)
+    {
+        $event->confirm();
+        $this->eventMapper->save($event);
     }
 }

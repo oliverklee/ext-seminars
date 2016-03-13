@@ -1428,16 +1428,72 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      * @param int $status our status, must be one of STATUS_PLANNED, STATUS_CANCELED, STATUS_CONFIRMED
      *
      * @return void
+     *
+     * @throws \InvalidArgumentException
      */
     public function setStatus($status)
     {
-        if (!in_array($status, array(self::STATUS_PLANNED, self::STATUS_CANCELED, self::STATUS_CONFIRMED))) {
-            throw new InvalidArgumentException(
-                'The parameter $status must be either STATUS_PLANNED, STATUS_CANCELED or STATUS_CONFIRMED', 1333296722
+        if (!in_array($status, [self::STATUS_PLANNED, self::STATUS_CANCELED, self::STATUS_CONFIRMED], true)) {
+            throw new \InvalidArgumentException(
+                '$status must be either STATUS_PLANNED, STATUS_CANCELED or STATUS_CONFIRMED.', 1333296722
             );
         }
 
         $this->setAsInteger('cancelled', $status);
+    }
+
+    /**
+     * Checks whether this event still has the "planned" status.
+     *
+     * @return bool
+     */
+    public function isPlanned()
+    {
+        return $this->getStatus() === self::STATUS_PLANNED;
+    }
+
+    /**
+     * Checks whether this event has been canceled.
+     *
+     * @return bool
+     */
+    public function isCanceled()
+    {
+        return $this->getStatus() === self::STATUS_CANCELED;
+    }
+
+    /**
+     * Checks whether this event has been confirmed.
+     *
+     * @return bool
+     */
+    public function isConfirmed()
+    {
+        return $this->getStatus() === self::STATUS_CONFIRMED;
+    }
+
+    /**
+     * Marks this event as canceled.
+     *
+     * If this event already is canceled, this method is a no-op.
+     *
+     * @return void
+     */
+    public function cancel()
+    {
+        $this->setStatus(self::STATUS_CANCELED);
+    }
+
+    /**
+     * Marks this event as confirmed.
+     *
+     * If this event already is confirmed, this method is a no-op.
+     *
+     * @return void
+     */
+    public function confirm()
+    {
+        $this->setStatus(self::STATUS_CONFIRMED);
     }
 
     /**

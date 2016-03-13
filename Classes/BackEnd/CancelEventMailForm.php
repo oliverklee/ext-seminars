@@ -11,6 +11,7 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+use OliverKlee\Seminars\Service\EventStateService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -122,10 +123,9 @@ class Tx_Seminars_BackEnd_CancelEventMailForm extends Tx_Seminars_BackEnd_Abstra
      */
     protected function setEventStatus()
     {
-        $this->getEvent()->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
-        /** @var Tx_Seminars_Mapper_Event $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
-        $mapper->save($this->getEvent());
+        /** @var EventStateService $eventStatusService */
+        $eventStatusService = GeneralUtility::makeInstance(EventStateService::class);
+        $eventStatusService->cancelAndSave($this->getEvent());
 
         /** @var FlashMessage $message */
         $message = GeneralUtility::makeInstance(

@@ -1315,9 +1315,9 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         );
     }
 
-    ////////////////////////////////
-    // Tests regarding the status.
-    ////////////////////////////////
+    /*
+     * Tests regarding the status.
+     */
 
     /**
      * @test
@@ -1379,15 +1379,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
 
     /**
      * @test
+     * @expectedException \InvalidArgumentException
      */
     public function setStatusWithInvalidStatusThrowsException()
     {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'The parameter $status must be either STATUS_PLANNED, ' .
-                'STATUS_CANCELED or STATUS_CONFIRMED'
-        );
-
         $this->fixture->setStatus(-1);
     }
 
@@ -1428,6 +1423,164 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
             Tx_Seminars_Model_Event::STATUS_CONFIRMED,
             $this->fixture->getStatus()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function isPlannedForPlannedStatusReturnsTrue()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+
+        self::assertTrue($this->fixture->isPlanned());
+    }
+
+    /**
+     * @test
+     */
+    public function isPlannedForCanceledStatusReturnsFalse()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+
+        self::assertFalse($this->fixture->isPlanned());
+    }
+
+    /**
+     * @test
+     */
+    public function isPlannedForConfirmedStatusReturnsFalse()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+
+        self::assertFalse($this->fixture->isPlanned());
+    }
+
+    /**
+     * @test
+     */
+    public function isCanceledForPlannedStatusReturnsFalse()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+
+        self::assertFalse($this->fixture->isCanceled());
+    }
+
+    /**
+     * @test
+     */
+    public function isCanceledForCanceledStatusReturnsTrue()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+
+        self::assertTrue($this->fixture->isCanceled());
+    }
+
+    /**
+     * @test
+     */
+    public function isCanceledForConfirmedStatusReturnsFalse()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+
+        self::assertFalse($this->fixture->isCanceled());
+    }
+
+    /**
+     * @test
+     */
+    public function isConfirmedForPlannedStatusReturnsFalse()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+
+        self::assertFalse($this->fixture->isConfirmed());
+    }
+
+    /**
+     * @test
+     */
+    public function isConfirmedForCanceledStatusReturnsFalse()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+
+        self::assertFalse($this->fixture->isConfirmed());
+    }
+
+    /**
+     * @test
+     */
+    public function isConfirmedForConfirmedStatusReturnsTrue()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+
+        self::assertTrue($this->fixture->isConfirmed());
+    }
+
+    /**
+     * @test
+     */
+    public function cancelCanMakePlannedEventCanceled()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+
+        $this->fixture->cancel();
+
+        self::assertTrue($this->fixture->isCanceled());
+    }
+
+    /**
+     * @test
+     */
+    public function cancelCanMakeConfirmedEventCanceled()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+
+        $this->fixture->cancel();
+
+        self::assertTrue($this->fixture->isCanceled());
+    }
+
+    /**
+     * @test
+     */
+    public function cancelForCanceledEventNotThrowsException()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+
+        $this->fixture->cancel();
+    }
+
+    /**
+     * @test
+     */
+    public function confirmCanMakePlannedEventConfirmed()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+
+        $this->fixture->confirm();
+
+        self::assertTrue($this->fixture->isConfirmed());
+    }
+
+    /**
+     * @test
+     */
+    public function confirmCanMakeCanceledEventConfirmed()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+
+        $this->fixture->confirm();
+
+        self::assertTrue($this->fixture->isConfirmed());
+    }
+
+    /**
+     * @test
+     */
+    public function confirmForConfirmedEventNotThrowsException()
+    {
+        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+
+        $this->fixture->confirm();
     }
 
     ////////////////////////////////////////
