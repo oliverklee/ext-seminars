@@ -76,7 +76,7 @@ class EmailService implements SingletonInterface
             $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
             $eMail->setSender($event->getFirstOrganizer());
             $eMail->addRecipient($user);
-            $eMail->setSubject($subject);
+            $eMail->setSubject($this->replaceMarkers($subject, $event, $user));
 
             $eMail->setMessage($this->buildMessageBody($body, $event, $user));
 
@@ -105,7 +105,7 @@ class EmailService implements SingletonInterface
     }
 
     /**
-     * Replaces markers in $emailBody.
+     * Replaces markers in $textWithMarkers.
      *
      * The following markers will get replaced:
      *
@@ -114,13 +114,13 @@ class EmailService implements SingletonInterface
      * %eventTitle
      * %eventDate
      *
-     * @param string $emailBody
+     * @param string $textWithMarkers
      * @param \Tx_Seminars_Model_Event $event
      * @param \Tx_Seminars_Model_FrontEndUser $user
      *
      * @return string
      */
-    protected function replaceMarkers($emailBody, \Tx_Seminars_Model_Event $event, \Tx_Seminars_Model_FrontEndUser $user)
+    protected function replaceMarkers($textWithMarkers, \Tx_Seminars_Model_Event $event, \Tx_Seminars_Model_FrontEndUser $user)
     {
         $markers = [
             '%salutation' => $this->salutationBuilder->getSalutation($user),
@@ -129,7 +129,7 @@ class EmailService implements SingletonInterface
             '%eventDate' => $this->dateRangeViewHelper->render($event, '-'),
         ];
 
-        return str_replace(array_keys($markers), array_values($markers), $emailBody);
+        return str_replace(array_keys($markers), array_values($markers), $textWithMarkers);
     }
 
     /**

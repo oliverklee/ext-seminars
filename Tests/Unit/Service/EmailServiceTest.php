@@ -202,6 +202,43 @@ class EmailServiceTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
+    public function sendEmailToAttendeesReplacesEventTitleInSubject()
+    {
+        $subjectPrefix = 'Event title goes here: ';
+
+        $this->subject->sendEmailToAttendees($this->event, $subjectPrefix . '%eventTitle', 'Hello!');
+
+        $email = $this->mailer->getFirstSentEmail();
+        self::assertNotNull($email);
+        self::assertSame(
+            $subjectPrefix . $this->event->getTitle(),
+            $email->getSubject()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailToAttendeesReplacesEventDateInSubject()
+    {
+        $subjectPrefix = 'Event date goes here: ';
+
+        $dateViewHelper = new \Tx_Seminars_ViewHelper_DateRange();
+        $formattedDate = $dateViewHelper->render($this->event, '-');
+
+        $this->subject->sendEmailToAttendees($this->event, $subjectPrefix . '%eventDate', 'Hello!');
+
+        $email = $this->mailer->getFirstSentEmail();
+        self::assertNotNull($email);
+        self::assertSame(
+            $subjectPrefix . $formattedDate,
+            $email->getSubject()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function sendEmailToAttendeesSendsEmailWithProvidedBody()
     {
         $body = 'Life is good.';
@@ -332,7 +369,6 @@ class EmailServiceTest extends \Tx_Phpunit_TestCase
 
         $dateViewHelper = new \Tx_Seminars_ViewHelper_DateRange();
         $formattedDate = $dateViewHelper->render($this->event, '-');
-        self::assertNotSame('asdfasd', $formattedDate);
 
         $email = $this->mailer->getFirstSentEmail();
         self::assertNotNull($email);
