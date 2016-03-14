@@ -15,6 +15,7 @@ Features:
 - [#5628] Add a RealURL auto configuration
 
 Bug fixes:
+- [#5684] Cannot create new content element due to incorrect locallang path
 - [#5670] Increase counter cache for registrations after registration
 - [#5671] Test failures in MailNotifierTest
 - [#5669] Disable the new checkboxes by default

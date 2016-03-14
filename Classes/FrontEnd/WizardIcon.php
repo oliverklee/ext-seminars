@@ -55,7 +55,8 @@ class Tx_Seminars_FrontEnd_WizardIcon
         /** @var LocallangXmlParser $xmlParser */
         $xmlParser = GeneralUtility::makeInstance(LocallangXmlParser::class);
         $localLanguage = $xmlParser->getParsedData(
-            'EXT:seminars/Resources/Private/Language/locallang.xml', $GLOBALS['LANG']->lang
+            ExtensionManagementUtility::extPath('seminars') . 'Resources/Private/Language/locallang.xml',
+            $GLOBALS['LANG']->lang
         );
 
         return $localLanguage;
