@@ -76,6 +76,8 @@ organizations and persons:
 
 - `medien+bildung.com gGmbH <http://medienundbildung.com/>`_
 
+- `MK Office Monika Kaderabek <http://www.mk-office.ch./>`_
+
 - `Michael Bakonyi – Neue Medien <http://www.mb-neuemedien.de/>`_
 
 - `m\|r\|o\|net <http://www.mronet.at/>`_
