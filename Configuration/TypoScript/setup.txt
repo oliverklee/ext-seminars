@@ -3680,11 +3680,11 @@ tx_seminars_pi2 {
 		xhtml_cleaning >
 	}
 
-	includeLibs.tx_seminars_pi2 = EXT:seminars/Classes/pi2/class.tx_seminars_pi2.php
+	includeLibs.tx_seminars_pi2 = EXT:seminars/Classes/Csv/CsvDownloader.php
 
 	10 = USER
 	10 {
-		userFunc = tx_seminars_pi2->main
+		userFunc = CsvDownloader->main
 
 		# pro forma salutation mode for the FE; has no effect whatsoever
 		salutation = formal

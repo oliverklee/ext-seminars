@@ -34,6 +34,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5625] Rename tx_seminars_pi2 to Tx_Seminars_Csv_CsvDownloader
 - [#5680] Unify "state/status" to "status"
 - [#5679] Add convenience functions for the event status
 - [#5678] Add Event::getFirstOrganizer

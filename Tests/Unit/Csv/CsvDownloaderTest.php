@@ -15,14 +15,13 @@
 /**
  * Test case.
  *
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Pi2_Pi2Test extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 {
     /**
-     * @var tx_seminars_pi2
+     * @var Tx_Seminars_Csv_CsvDownloader
      */
     protected $fixture = null;
 
@@ -73,7 +72,7 @@ class Tx_Seminars_Tests_Unit_Pi2_Pi2Test extends Tx_Phpunit_TestCase
         $this->configuration->setData(array('charsetForCsv' => 'utf-8'));
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
-        $this->fixture = new tx_seminars_pi2();
+        $this->fixture = new Tx_Seminars_Csv_CsvDownloader();
         $this->fixture->init(array());
     }
 
