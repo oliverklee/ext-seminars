@@ -19,11 +19,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * These functions are called from DataHandler via hooks.
  *
- *
  * @author Mario Rimann <typo3-coding@rimann.org>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class tx_seminars_tcemainprocdm
+class Tx_Seminars_Hooks_TceProcessingHook
 {
     /**
      * @var array[]

@@ -43,7 +43,7 @@ defined('TYPO3_MODE') or die('Access denied.');
 
 // Adds our custom function to a hook in \TYPO3\CMS\Core\DataHandling\DataHandler
 // Used for post-validation of fields in back-end forms.
-$GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:seminars/Classes/class.tx_seminars_tcemain.php:tx_seminars_tcemainprocdm';
+$GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:seminars/Classes/Hooks/TceProcessingHook.php:TceProcessingHook';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43(
     $_EXTKEY, 'Classes/FrontEnd/DefaultController.php', '_pi1', 'list_type', 0
