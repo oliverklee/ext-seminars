@@ -49,7 +49,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
     /**
      * @var string same as class name
      */
-    public $prefixId = self::class;
+    public $prefixId = 'tx_seminars_pi2';
 
     /**
      * faking $this->scriptRelPath so the locallang.xml file is found

@@ -16,6 +16,7 @@ Features:
 - [#5628] Add a RealURL auto configuration
 
 Bug fixes:
+- [#5687] Error 500 for CSV download in BE
 - [#5638] Fix user functions in the TS setup and hooks
 - [#5684] Cannot create new content element due to incorrect locallang path
 - [#5670] Increase counter cache for registrations after registration
