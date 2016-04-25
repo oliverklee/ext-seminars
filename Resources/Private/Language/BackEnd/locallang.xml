@@ -42,8 +42,8 @@
 			<label index="registrationlist.label_regularRegistrations">Regular attendances</label>
 			<label index="registrationlist.label_queueRegistrations">Attendances on the registration queue</label>
 			<label index="registrationlist.label_registrationsHeading">Registrations for event &quot;%s&quot; (UID %u)</label>
-			<label index="label_create_record_in_foreign_folder">The new record will be created in the sysfolder &quot;%s&quot; (UID %u)</label>
-			<label index="label_create_record_in_current_folder">The new record will be created in the current sysfolder &quot;%s&quot; (UID %u).</label>
+			<label index="label_create_record_in_foreign_folder">The new record will be created in the sysfolder: %s (UID %u)</label>
+			<label index="label_create_record_in_current_folder">The new record will be created in the current sysfolder: %s (UID %u).</label>
 			<label index="eventMailForm_subject">Subject:</label>
 			<label index="eventMailForm_message">Message:</label>
 			<label index="eventMailForm_backButton">Back</label>
@@ -517,8 +517,8 @@
 			<label index="eventlist_button_confirm">Confirm</label>
 			<label index="registrationlist.deleted">(deleted)</label>
 			<label index="eventlist_button_cancel">Cancel</label>
-			<label index="label_create_record_in_foreign_folder">The new record will be created in the sysfolder &quot;%s&quot; (UID %u)</label>
-			<label index="label_create_record_in_current_folder">The new record will be created in the current sysfolder &quot;%s&quot; (UID %u).</label>
+			<label index="label_create_record_in_foreign_folder">The new record will be created in the sysfolder: %s (UID %u)</label>
+			<label index="label_create_record_in_current_folder">The new record will be created in the current sysfolder: %s (UID %u).</label>
 			<label index="eventMailForm_subject">Subject:</label>
 			<label index="eventMailForm_message">Message:</label>
 			<label index="eventMailForm_backButton">Back</label>
@@ -645,8 +645,8 @@
 			<label index="testForm_prefillField_introduction">This is the introduction: %s</label>
 			<label index="label_show_event_registrations">show</label>
 			<label index="registrationlist.label_registrationsHeading">Registrations for event &quot;%s&quot; (UID %u)</label>
-			<label index="label_create_record_in_foreign_folder">The new record will be created in the sysfolder &quot;%s&quot; (UID %u)</label>
-			<label index="label_create_record_in_current_folder">The new record will be created in the current sysfolder &quot;%s&quot; (UID %u).</label>
+			<label index="label_create_record_in_foreign_folder">The new record will be created in the sysfolder: %s (UID %u)</label>
+			<label index="label_create_record_in_current_folder">The new record will be created in the current sysfolder: %s (UID %u).</label>
 			<label index="eventMailForm_error_noDetailsPageFound">The single view page is not set. If this is not set, the link to the single view page cannot be sent in the cancelation emails. To fix this problem, please set plugin.tx_seminars_pi1.detailPID in the TS Setup of the current page.</label>
 		</languageKey>
 	</orig_text>
