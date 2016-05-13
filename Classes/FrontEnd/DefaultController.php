@@ -17,8 +17,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
-require(ExtensionManagementUtility::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
-
 /**
  * Plugin "Seminar Manager".
  *

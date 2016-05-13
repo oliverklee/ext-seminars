@@ -20,8 +20,6 @@ if (is_object($GLOBALS['LANG'])) {
     $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
 }
 
-require_once(ExtensionManagementUtility::extPath('seminars') . 'tx_seminars_modifiedSystemTables.php');
-
 /**
  * Plugin "CSV export".
  *

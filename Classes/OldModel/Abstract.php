@@ -551,6 +551,10 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
      * Gets an HTML image tag with the URL of the icon file of the record as
      * configured in TCA.
      *
+     * Note: This method does not work if the icon paths for the table are defined
+     * using the "EXT:seminars/" syntax. Instead, ExtensionManagementUtility::extRelPath
+     * needs to be used.
+     *
      * @return string our HTML image tag with the URL of the icon file of
      *                the record or a "not found" icon if there's no icon
      *                for this record
