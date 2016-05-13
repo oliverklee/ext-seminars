@@ -47,7 +47,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
         Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('useStoragePid', false);
 
         $this->configuration = new Tx_Oelib_Configuration();
         $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
@@ -681,100 +680,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         );
     }
 
-    /**
-     * @test
-     */
-    public function populateListCategoriesForSetStoragePageReturnsRecordWithThisPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories', array('pid' => 42)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $categoryUid),
-                $this->fixture->populateListCategories(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListCategoriesForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
-            'useStoragePid', true
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories', array('pid' => 21)
-        );
-
-        self::assertFalse(
-            in_array(
-                array('caption' => '', 'value' => $categoryUid),
-                $this->fixture->populateListCategories(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListCategoriesForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories', array('pid' => 21)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $categoryUid),
-                $this->fixture->populateListCategories(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListCategoriesForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
-            array('tx_seminars_auxiliary_records_pid' => 21)
-        );
-
-        $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories', array('pid' => 21)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $categoryUid),
-                $this->fixture->populateListCategories(array())
-            )
-        );
-    }
-
     ///////////////////////////////////////////////
     // Tests concerning populateListEventTypes().
     ///////////////////////////////////////////////
@@ -800,105 +705,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     /**
      * @test
      */
-    public function populateListEventTypesForNoSetStoragePageReturnsRecordWithAnyPageId()
+    public function populateListEventTypesReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types', array('pid' => 87)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $eventTypeUid),
-                $this->fixture->populateListEventTypes(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListEventTypesForSetStoragePageReturnsRecordWithThisPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('pid' => 42)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $eventTypeUid),
-                $this->fixture->populateListEventTypes(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListEventTypesForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
-            'useStoragePid', true
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('pid' => 23)
-        );
-
-        self::assertFalse(
-            in_array(
-                array('caption' => '', 'value' => $eventTypeUid),
-                $this->fixture->populateListEventTypes(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListEventTypesForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('pid' => 23)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $eventTypeUid),
-                $this->fixture->populateListEventTypes(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListEventTypesForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
-            array('tx_seminars_auxiliary_records_pid' => 21)
-        );
-
-        $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('pid' => 21)
         );
 
         self::assertTrue(
@@ -934,105 +745,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     /**
      * @test
      */
-    public function populateListLodgingsForNoSetStoragePageReturnsRecordWithAnyPageId()
+    public function populateListLodgingsReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $lodgingUid = $this->testingFramework->createRecord(
             'tx_seminars_lodgings', array('pid' => 11)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $lodgingUid),
-                $this->fixture->populateListLodgings(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListLodgingsForSetStoragePageReturnsRecordWithThisPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $lodgingUid = $this->testingFramework->createRecord(
-            'tx_seminars_lodgings', array('pid' => 42)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $lodgingUid),
-                $this->fixture->populateListLodgings(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListLodgingsForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
-            'useStoragePid', true
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $lodgingUid = $this->testingFramework->createRecord(
-            'tx_seminars_lodgings', array('pid' => 21)
-        );
-
-        self::assertFalse(
-            in_array(
-                array('caption' => '', 'value' => $lodgingUid),
-                $this->fixture->populateListLodgings(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListLodgingsForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $lodgingUid = $this->testingFramework->createRecord(
-            'tx_seminars_lodgings', array('pid' => 21)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $lodgingUid),
-                $this->fixture->populateListLodgings(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListLodgingsForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
-            array('tx_seminars_auxiliary_records_pid' => 21)
-        );
-
-        $lodgingUid = $this->testingFramework->createRecord(
-            'tx_seminars_lodgings', array('pid' => 21)
         );
 
         self::assertTrue(
@@ -1068,105 +785,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     /**
      * @test
      */
-    public function populateListFoodsForNoSetStoragePageReturnsRecordWithAnyPageId()
+    public function populateListFoodsReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $foodUid = $this->testingFramework->createRecord(
             'tx_seminars_foods', array('pid' => 22)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $foodUid),
-                $this->fixture->populateListFoods(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListFoodsForSetStoragePageReturnsRecordWithThisPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $foodUid = $this->testingFramework->createRecord(
-            'tx_seminars_foods', array('pid' => 42)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $foodUid),
-                $this->fixture->populateListFoods(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListFoodsForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
-            'useStoragePid', true
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $foodUid = $this->testingFramework->createRecord(
-            'tx_seminars_foods', array('pid' => 21)
-        );
-
-        self::assertFalse(
-            in_array(
-                array('caption' => '', 'value' => $foodUid),
-                $this->fixture->populateListFoods(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListFoodsForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $foodUid = $this->testingFramework->createRecord(
-            'tx_seminars_foods', array('pid' => 21)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $foodUid),
-                $this->fixture->populateListFoods(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListFoodsForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
-            array('tx_seminars_auxiliary_records_pid' => 21)
-        );
-
-        $foodUid = $this->testingFramework->createRecord(
-            'tx_seminars_foods', array('pid' => 21)
         );
 
         self::assertTrue(
@@ -1202,105 +825,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     /**
      * @test
      */
-    public function populateListPaymentMethodsForNoSetStoragePageReturnsRecordWithAnyPageId()
+    public function populateListPaymentMethodsReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods', array('pid' => 52)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $paymentMethodUid),
-                $this->fixture->populateListPaymentMethods(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListPaymentMethodsForSetStoragePageReturnsRecordWithThisPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', array('pid' => 42)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $paymentMethodUid),
-                $this->fixture->populateListPaymentMethods(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListPaymentMethodsForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
-            'useStoragePid', true
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', array('pid' => 21)
-        );
-
-        self::assertFalse(
-            in_array(
-                array('caption' => '', 'value' => $paymentMethodUid),
-                $this->fixture->populateListPaymentMethods(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListPaymentMethodsForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', array('pid' => 21)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $paymentMethodUid),
-                $this->fixture->populateListPaymentMethods(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListPaymentMethodsForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
-            array('tx_seminars_auxiliary_records_pid' => 21)
-        );
-
-        $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', array('pid' => 21)
         );
 
         self::assertTrue(
@@ -1336,131 +865,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     /**
      * @test
      */
-    public function populateListOrganizersForNoSetStoragePageReturnsRecordWithAnyPageId()
+    public function populateListOrganizersReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers', array('pid' => 12)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $organizerUid),
-                $this->fixture->populateListOrganizers(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListOrganizersForSetStoragePageReturnsRecordWithThisPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', array('pid' => 42)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $organizerUid),
-                $this->fixture->populateListOrganizers(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListOrganizersForSetStoragePageAndUseStoragePageSetDoesNotReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
-            'useStoragePid', true
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', array('pid' => 12)
-        );
-
-        self::assertFalse(
-            in_array(
-                array('caption' => '', 'value' => $organizerUid),
-                $this->fixture->populateListOrganizers(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListOrganizersForSetStoragePageAndUseStoragePageNotSetReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', array('pid' => 12)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $organizerUid),
-                $this->fixture->populateListOrganizers(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListOrganizersForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
-            array('tx_seminars_auxiliary_records_pid' => 21)
-        );
-
-        $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', array('pid' => 21)
-        );
-
-        self::assertTrue(
-            in_array(
-                array('caption' => '', 'value' => $organizerUid),
-                $this->fixture->populateListOrganizers(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListOrganizersForSetStoragePageAndAuxiliaryRecordsConfigurationPidReturnsRecordWithAuxiliaryPid()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
-        Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->set(
-            'createAuxiliaryRecordsPID', 21
-        );
-
-        $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', array('pid' => 21)
         );
 
         self::assertTrue(
@@ -1594,117 +1003,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     /**
      * @test
      */
-    public function populateListPlacesForNoSetStoragePageReturnsRecordWithAnyPageId()
+    public function populateListPlacesReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites', array('pid' => 55)
-        );
-
-        self::assertTrue(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $placeUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListPlaces(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListPlacesForSetStoragePageReturnsRecordWithThisPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('pid' => 42)
-        );
-
-        self::assertTrue(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $placeUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListPlaces(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListPlacesForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
-            'useStoragePid', true
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('pid' => 21)
-        );
-
-        self::assertFalse(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $placeUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListPlaces(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListPlacesForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('pid' => 21)
-        );
-
-        self::assertTrue(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $placeUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListPlaces(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListPlacesForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
-            array('tx_seminars_auxiliary_records_pid' => 21)
-        );
-
-        $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('pid' => 21)
         );
 
         self::assertTrue(
@@ -1788,116 +1091,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     /**
      * @test
      */
-    public function populateListCheckboxesForNoSetStoragePageReturnsRecordWithAnyPageId()
+    public function populateListCheckboxesReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $checkboxUid = $this->testingFramework->createRecord(
             'tx_seminars_checkboxes', array('pid' => 12)
-        );
-
-        self::assertTrue(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $checkboxUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListCheckboxes(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListCheckboxesForSetStoragePageReturnsRecordWithThisPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $checkboxUid = $this->testingFramework->createRecord(
-            'tx_seminars_checkboxes', array('pid' => 42)
-        );
-
-        self::assertTrue(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $checkboxUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListCheckboxes(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListCheckboxesForSetStoragePageAndUseStoragePageSetDoesNotReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
-            'useStoragePid', true
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $checkboxUid = $this->testingFramework->createRecord(
-            'tx_seminars_checkboxes', array('pid' => 21)
-        );
-
-        self::assertFalse(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $checkboxUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListCheckboxes(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListCheckboxesForSetStoragePageAndUseStoragePageNotSetReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $checkboxUid = $this->testingFramework->createRecord(
-            'tx_seminars_checkboxes', array('pid' => 21)
-        );
-
-        self::assertTrue(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $checkboxUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListCheckboxes(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListCheckboxesForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
-            array('tx_seminars_auxiliary_records_pid' => 21)
-        );
-        $checkboxUid = $this->testingFramework->createRecord(
-            'tx_seminars_checkboxes', array('pid' => 21)
         );
 
         self::assertTrue(
@@ -1981,116 +1179,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     /**
      * @test
      */
-    public function populateListTargetGroupsForNoSetStoragePageReturnsRecordWithAnyPageId()
+    public function populateListTargetGroupsReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups', array('pid' => 42)
-        );
-
-        self::assertTrue(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $targetGroupUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListTargetGroups(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListTargetGroupsForSetStoragePageReturnsRecordWithThisPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $targetGroupUid = $this->testingFramework->createRecord(
-            'tx_seminars_target_groups', array('pid' => 42)
-        );
-
-        self::assertTrue(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $targetGroupUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListTargetGroups(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListTargetGroupsForSetStoragePageAndUseStoragePidSetDoesNotReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
-            'useStoragePid', true
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $targetGroupUid = $this->testingFramework->createRecord(
-            'tx_seminars_target_groups', array('pid' => 21)
-        );
-
-        self::assertFalse(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $targetGroupUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListTargetGroups(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListTargetGroupsForSetStoragePageAndUseStoragePidNotSetReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $targetGroupUid = $this->testingFramework->createRecord(
-            'tx_seminars_target_groups', array('pid' => 21)
-        );
-
-        self::assertTrue(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $targetGroupUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListTargetGroups(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListTargetGroupsForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
-            array('tx_seminars_auxiliary_records_pid' => 21)
-        );
-        $targetGroupUid = $this->testingFramework->createRecord(
-            'tx_seminars_target_groups', array('pid' => 21)
         );
 
         self::assertTrue(
@@ -2174,116 +1267,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     /**
      * @test
      */
-    public function populateListSpeakersForNoSetStoragePageReturnsRecordWithAnyPageId()
+    public function populateListSpeakersReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers', array('pid' => 25)
-        );
-
-        self::assertTrue(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $speakerUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListSpeakers(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListSpeakersForSetStoragePageReturnsRecordWithThisPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $speakerUid = $this->testingFramework->createRecord(
-            'tx_seminars_speakers', array('pid' => 42)
-        );
-
-        self::assertTrue(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $speakerUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListSpeakers(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListSpeakersForSetStoragePageAndUseStoragePageSetDoesNotReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean(
-            'useStoragePid', true
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $speakerUid = $this->testingFramework->createRecord(
-            'tx_seminars_speakers', array('pid' => 21)
-        );
-
-        self::assertFalse(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $speakerUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListSpeakers(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListSpeakersForSetStoragePageAndUseStoragePageNotSetReturnsRecordWithOtherPageId()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $speakerUid = $this->testingFramework->createRecord(
-            'tx_seminars_speakers', array('pid' => 21)
-        );
-
-        self::assertTrue(
-            in_array(
-                array(
-                    'caption' => '', 'value' => $speakerUid,
-                    'wrapitem' => '|</td><td>&nbsp;'
-                ),
-                $this->fixture->populateListSpeakers(array())
-            )
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function populateListSpeakersForSetStoragePageAndUserWithSetAuxiliaryPidReturnsRecordWithAuxiliaryPid()
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage(
-            0, array('storage_pid' => 42)
-        );
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
-            array('tx_seminars_auxiliary_records_pid' => 21)
-        );
-        $speakerUid = $this->testingFramework->createRecord(
-            'tx_seminars_speakers', array('pid' => 21)
         );
 
         self::assertTrue(

@@ -42,18 +42,6 @@ folder*
 
 The following system folder structure is proposed for a full-blown installation with lots of events and different organizers that manage their registrations independently:|img-9|  *Illustration 9: Full blown installation*
 
-If you- intend to have more than 20 event topic records
-
-- or you already have more than 20 complete event records (defined as
-  “not being separated into topic and dates”)
-
-- or you intend to have more than 20 complete event records
-
-it is recommended to disable the option “Select topic records from all
-pages” in the Extension Manager. You then need to set the “General
-record storage page” of the events system folder to the folder with
-the event topics.
-
 If you create these folders outside of the site root page with the
 template, you still need to create a template for them and “include
 static (from extensions)” in that template, or else the back-end

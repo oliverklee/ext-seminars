@@ -47,21 +47,6 @@ Teilnehmer unabhängig verwalten können sollen:
 
 |img-9|  *Illustration 9: vollständige, sehr große Installation*
 
-Wenn Sie
-
-- vorhaben, mehr als 20 Veranstaltungsthemeneinträge zu haben
-
-- oder Sie bereits mehr als 20 bereits geschehene Veranstaltungseinträge
-  haben (definiert als “not being separated into topic and dates”)
-
-- oder Sie vorhaben, mehr als 20 veranstaltete Veramstaltungen zu haben
-
-so ist es empfehlenswert, die Option “Select topic records from all
-pages” im Extension-Manager zu deaktivieren. Sie müssen anschließend
-die “General record storage page” des Veranstaltungsordners auf den
-Ordner mit den Veranstaltungsthemen setzen.
-(########################DIESER ABSATZ MACHT KEINEN SINN!)
-
 Wenn Sie diese Ordner außerhalb der Root Seite (Die Rootseite müsste
 ein Template haben) erstellen, müssen trotzdem ein Template für diese
 Ordner erstellen und ein statisches Extension Template (“include

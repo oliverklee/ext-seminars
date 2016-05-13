@@ -198,7 +198,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     {
         /** @var Tx_Seminars_Mapper_Category $mapper */
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class);
-        $categories = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+        $categories = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         return self::makeListToFormidableList($categories);
     }
@@ -214,7 +214,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     {
         /** @var Tx_Seminars_Mapper_EventType $mapper */
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_EventType::class);
-        $eventTypes = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+        $eventTypes = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         return self::makeListToFormidableList($eventTypes);
     }
@@ -230,7 +230,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     {
         /** @var Tx_Seminars_Mapper_Lodging $mapper */
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Lodging::class);
-        $lodgings = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+        $lodgings = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         return self::makeListToFormidableList($lodgings);
     }
@@ -246,7 +246,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     {
         /** @var Tx_Seminars_Mapper_Food $mapper */
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Food::class);
-        $foods = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+        $foods = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         return self::makeListToFormidableList($foods);
     }
@@ -262,7 +262,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     {
         /** @var Tx_Seminars_Mapper_PaymentMethod $mapper */
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_PaymentMethod::class);
-        $paymentMethods = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+        $paymentMethods = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         return self::makeListToFormidableList($paymentMethods);
     }
@@ -283,7 +283,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         } else {
             /** @var Tx_Seminars_Mapper_Organizer $mapper */
             $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class);
-            $organizers = $mapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+            $organizers = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
         }
 
         return self::makeListToFormidableList($organizers);
@@ -316,7 +316,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         /** @var Tx_Seminars_Mapper_Place $placeMapper */
         $placeMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Place::class);
-        $places = $placeMapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+        $places = $placeMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         if ($formidable !== null) {
             $editButtonConfiguration =& $formidable->_navConf(
@@ -387,7 +387,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         /** @var Tx_Seminars_Mapper_Speaker $speakerMapper */
         $speakerMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class);
-        $speakers = $speakerMapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+        $speakers = $speakerMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         if (is_object($formidable)) {
             $editButtonConfiguration =& $formidable->_navConf(
@@ -461,7 +461,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         /** @var Tx_Seminars_Mapper_Checkbox $checkboxMapper */
         $checkboxMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
-        $checkboxes = $checkboxMapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+        $checkboxes = $checkboxMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         if (is_object($formidable)) {
             $editButtonConfiguration =& $formidable->_navConf(
@@ -532,7 +532,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         /** @var Tx_Seminars_Mapper_TargetGroup $targetGroupMapper */
         $targetGroupMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
-        $targetGroups = $targetGroupMapper->findByPageUid($this->getPidsForAuxiliaryRecords(), 'title ASC');
+        $targetGroups = $targetGroupMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         if (is_object($formidable)) {
             $editButtonConfiguration =& $formidable->_navConf(
@@ -2567,28 +2567,17 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     /**
      * Returns the allowed PIDs for the auxiliary records.
      *
-     * @return string comma-sparated list of PIDs for the auxiliary records, may
-     *                be empty
+     * @return int PID for the auxiliary records, may be empty
      */
-    private function getPidsForAuxiliaryRecords()
+    private function getPidForAuxiliaryRecords()
     {
-        $recordPids = array();
         $frontEndUser = self::getLoggedInUser();
         $auxiliaryRecordsPid = $frontEndUser->getAuxiliaryRecordsPid();
         if ($auxiliaryRecordsPid == 0) {
             $auxiliaryRecordsPid = self::getSeminarsConfiguration()->getAsInteger('createAuxiliaryRecordsPID');
         }
 
-        if (Tx_Oelib_ConfigurationProxy::getInstance('seminars')
-            ->getAsBoolean('useStoragePid')
-        ) {
-            $recordPids[] = $this->getStoragePid();
-        }
-        if ($auxiliaryRecordsPid != 0) {
-            $recordPids[] = $auxiliaryRecordsPid;
-        }
-
-        return implode(',', $recordPids);
+        return $auxiliaryRecordsPid;
     }
 
     /**

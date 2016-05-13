@@ -372,10 +372,9 @@
 							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.limitListViewToEventTypes</label>
 							<config>
 								<type>select</type>
-								<itemTable>tx_seminars_event_types</itemTable>
+								<foreign_table>tx_seminars_event_types</foreign_table>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
-								<itemsProcFunc>Tx_Seminars_FlexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</limitListViewToEventTypes>
@@ -384,10 +383,9 @@
 							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.limitListViewToCategories</label>
 							<config>
 								<type>select</type>
-								<itemTable>tx_seminars_categories</itemTable>
+								<foreign_table>tx_seminars_categories</foreign_table>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
-								<itemsProcFunc>Tx_Seminars_FlexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</limitListViewToCategories>
@@ -396,10 +394,9 @@
 							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.limitListViewToPlaces</label>
 							<config>
 								<type>select</type>
-								<itemTable>tx_seminars_sites</itemTable>
+								<foreign_table>tx_seminars_sites</foreign_table>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
-								<itemsProcFunc>Tx_Seminars_FlexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</limitListViewToPlaces>
@@ -408,10 +405,9 @@
 							<label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:seminars.pi_flexform.limitListViewToOrganizers</label>
 							<config>
 								<type>select</type>
-								<itemTable>tx_seminars_organizers</itemTable>
+								<foreign_table>tx_seminars_organizers</foreign_table>
 								<maxitems>100</maxitems>
 								<renderMode>checkbox</renderMode>
-								<itemsProcFunc>Tx_Seminars_FlexForms->getEntriesFromGeneralStoragePage</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</limitListViewToOrganizers>
