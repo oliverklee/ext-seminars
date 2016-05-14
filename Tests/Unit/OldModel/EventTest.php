@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
@@ -95,6 +96,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->cleanUp();
 
         Tx_Seminars_Service_RegistrationManager::purgeInstance();
+    }
+
+    /**
+     * @return bool
+     */
+    private function isTypo376OrHigher() {
+        return VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000;
     }
 
     /*
@@ -5340,8 +5348,12 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function usesCorrectIconForHiddenSingleEvent()
+    public function usesCorrectIconForHiddenSingleEventForTypo362()
     {
+        if ($this->isTypo376OrHigher()) {
+            self::markTestSkipped('This test is for TYPO3 CMS version 6.2 only.');
+        }
+
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
         $this->fixture->setHidden(true);
 
@@ -5354,8 +5366,30 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function usesCorrectIconForHiddenTopic()
+    public function usesCorrectIconForHiddenSingleEventForTypo376()
     {
+        if (!$this->isTypo376OrHigher()) {
+            self::markTestSkipped('This test is for TYPO3 CMS version >= 7.6 only.');
+        }
+
+        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
+        $this->fixture->setHidden(true);
+
+        self::assertContains(
+            'overlay-hidden.svg',
+            $this->fixture->getRecordIcon()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function usesCorrectIconForHiddenTopicForTypo362()
+    {
+        if ($this->isTypo376OrHigher()) {
+            self::markTestSkipped('This test is for TYPO3 CMS version 6.2 only.');
+        }
+
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
         $this->fixture->setHidden(true);
 
@@ -5368,13 +5402,53 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function usesCorrectIconForHiddenDate()
+    public function usesCorrectIconForHiddenTopicForTypo376()
     {
+        if (!$this->isTypo376OrHigher()) {
+            self::markTestSkipped('This test is for TYPO3 CMS version >= 7.6 only.');
+        }
+
+        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
+        $this->fixture->setHidden(true);
+
+        self::assertContains(
+            'overlay-hidden.svg',
+            $this->fixture->getRecordIcon()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function usesCorrectIconForHiddenDateForTypo362()
+    {
+        if ($this->isTypo376OrHigher()) {
+            self::markTestSkipped('This test is for TYPO3 CMS version 6.2 only.');
+        }
+
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
         $this->fixture->setHidden(true);
 
         self::assertContains(
             'EventDate__h.',
+            $this->fixture->getRecordIcon()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function usesCorrectIconForHiddenDateForTypo376()
+    {
+        if (!$this->isTypo376OrHigher()) {
+            self::markTestSkipped('This test is for TYPO3 CMS version >= 7.6 only.');
+        }
+
+        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
+        $this->fixture->setHidden(true);
+
+        self::assertContains(
+            'overlay-hidden.svg',
             $this->fixture->getRecordIcon()
         );
     }
@@ -5424,8 +5498,12 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function usesCorrectIconForExpiredSingleEvent()
+    public function usesCorrectIconForExpiredSingleEventForTypo362()
     {
+        if ($this->isTypo376OrHigher()) {
+            self::markTestSkipped('This test is for TYPO3 CMS version 6.2 only.');
+        }
+
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
         $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
@@ -5438,8 +5516,30 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function usesCorrectIconForExpiredTimedTopic()
+    public function usesCorrectIconForExpiredSingleEventForTypo376()
     {
+        if (!$this->isTypo376OrHigher()) {
+            self::markTestSkipped('This test is for TYPO3 CMS version >= 7.6 only.');
+        }
+
+        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
+        $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
+
+        self::assertContains(
+            'overlay-scheduled.svg',
+            $this->fixture->getRecordIcon()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function usesCorrectIconForExpiredTimedTopicForTypo362()
+    {
+        if ($this->isTypo376OrHigher()) {
+            self::markTestSkipped('This test is for TYPO3 CMS version 6.2 only.');
+        }
+
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
         $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
@@ -5452,13 +5552,53 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function usesCorrectIconForExpiredTimedDate()
+    public function usesCorrectIconForExpiredTimedTopicForTypo376()
     {
+        if (!$this->isTypo376OrHigher()) {
+            self::markTestSkipped('This test is for TYPO3 CMS version >= 7.6 only.');
+        }
+
+        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
+        $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
+
+        self::assertContains(
+            'overlay-scheduled.svg',
+            $this->fixture->getRecordIcon()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function usesCorrectIconForExpiredTimedDateForTypo362()
+    {
+        if ($this->isTypo376OrHigher()) {
+            self::markTestSkipped('This test is for TYPO3 CMS version 6.2 only.');
+        }
+
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
         $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         self::assertContains(
             'EventDate__t.',
+            $this->fixture->getRecordIcon()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function usesCorrectIconForExpiredTimedDateForTypo376()
+    {
+        if (!$this->isTypo376OrHigher()) {
+            self::markTestSkipped('This test is for TYPO3 CMS version >= 7.6 only.');
+        }
+
+        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
+        $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
+
+        self::assertContains(
+            'overlay-scheduled.svg',
             $this->fixture->getRecordIcon()
         );
     }

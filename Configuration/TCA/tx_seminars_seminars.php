@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_seminars_seminars');
 
-return [
+$tca = [
     'ctrl' => [
         'title' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_seminars',
         'label' => 'title',
@@ -18,16 +18,13 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        // We cannot use the EXT:seminars syntax as this would break getIcon::getIcon (which gets called in
-        // OldModel/Abstract::getRecordIcon where the icons for the BE module are created).
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/EventComplete.gif',
+        'iconfile' => 'EXT:seminars/Resources/Public/Icons/EventComplete.gif',
         'typeicon_column' => 'object_type',
-        'typeicons' => [
-            // We cannot use the EXT:seminars syntax as this would break getIcon::getIcon (which gets called in
-            // OldModel/Abstract::getRecordIcon where the icons for the BE module are created).
-            '0' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/EventComplete.gif',
-            '1' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/EventTopic.gif',
-            '2' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/EventDate.gif'
+        'typeicon_classes' => [
+            'default' => 'tx-seminars-event-complete',
+            '0' => 'tx-seminars-event-complete',
+            '1' => 'tx-seminars-event-topic',
+            '2' => 'tx-seminars-event-date'
         ],
         'dividers2tabs' => true,
         'hideAtCopy' => true,
@@ -970,3 +967,15 @@ return [
         '1' => ['showitem' => 'starttime, endtime'],
     ],
 ];
+
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 7006000) {
+    $iconsPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/';
+    $tca['ctrl']['iconfile']  = $iconsPath . 'EventComplete.gif';
+    $tca['ctrl']['typeicons'] = [
+        '0' => $iconsPath . 'EventComplete.gif',
+        '1' => $iconsPath . 'EventTopic.gif',
+        '2' => $iconsPath . 'EventDate.gif',
+    ];
+}
+
+return $tca;

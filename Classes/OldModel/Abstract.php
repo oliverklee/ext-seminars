@@ -13,6 +13,8 @@
  */
 use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * This class represents an object that is created from a DB record or can be written to a DB record.
@@ -552,52 +554,60 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
      * Gets an HTML image tag with the URL of the icon file of the record as
      * configured in TCA.
      *
-     * Note: This method does not work if the icon paths for the table are defined
-     * using the "EXT:seminars/" syntax. Instead, ExtensionManagementUtility::extRelPath
-     * needs to be used.
-     *
      * @return string our HTML image tag with the URL of the icon file of
      *                the record or a "not found" icon if there's no icon
      *                for this record
      */
     public function getRecordIcon()
     {
-        $iconProperties = array();
-        $tableConfiguration =& $GLOBALS['TCA'][$this->tableName]['ctrl'];
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
+            return $this->createRecordIconForTypo3Version76AndUp();
+        } else {
+            return $this->createRecordIconForTypo3UpTo62();
+        }
+    }
 
+    /**
+     * @return string
+     */
+    protected function createRecordIconForTypo3Version76AndUp()
+    {
+        /** @var \TYPO3\CMS\Core\Imaging\IconFactory $iconFactory */
+        $iconFactory = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconFactory::class);
+        return $iconFactory->getIconForRecord(
+            $this->tableName, $this->recordData, \TYPO3\CMS\Core\Imaging\Icon::SIZE_SMALL
+        )->render();
+    }
+
+    /**
+     * @return string
+     */
+    protected function createRecordIconForTypo3UpTo62()
+    {
+        $iconProperties = [];
+        $tableConfiguration = $GLOBALS['TCA'][$this->tableName]['ctrl'];
         $hiddenColumn = $tableConfiguration['enablecolumns']['disabled'];
         $startTimeColumn = $tableConfiguration['enablecolumns']['starttime'];
         $endTimeColumn = $tableConfiguration['enablecolumns']['endtime'];
-
         // Checks if there are enable columns configured in TCA and sends them
         // as parameter to IconUtility::getIcon().
         if ($this->getRecordPropertyBoolean($hiddenColumn)) {
-            $iconProperties[$hiddenColumn] = $this->getRecordPropertyInteger(
-                $hiddenColumn
-            );
+            $iconProperties[$hiddenColumn] = $this->getRecordPropertyInteger($hiddenColumn);
         }
         if ($this->hasRecordPropertyInteger($startTimeColumn)) {
-            $iconProperties[$startTimeColumn] = $this->getRecordPropertyInteger(
-                $startTimeColumn
-            );
+            $iconProperties[$startTimeColumn] = $this->getRecordPropertyInteger($startTimeColumn);
         }
         if ($this->hasRecordPropertyInteger($endTimeColumn)) {
-            $iconProperties[$endTimeColumn] = $this->getRecordPropertyInteger(
-                $endTimeColumn
-            );
+            $iconProperties[$endTimeColumn] = $this->getRecordPropertyInteger($endTimeColumn);
         }
         if (isset($tableConfiguration['typeicon_column'])) {
             $typeIconColumn = $tableConfiguration['typeicon_column'];
-            $iconProperties[$typeIconColumn] = $this->getRecordPropertyInteger(
-                $typeIconColumn
-            );
+            $iconProperties[$typeIconColumn] = $this->getRecordPropertyInteger($typeIconColumn);
         }
+        $imageUrl = $GLOBALS['BACK_PATH'] . IconUtility::getIcon($this->tableName, $iconProperties);
+        $uid = $this->getUid();
 
-        $imageURL = $GLOBALS['BACK_PATH'] . IconUtility::getIcon(
-            $this->tableName, $iconProperties
-        );
-
-        return '<img src="' . $imageURL . '" title="id=' . $this->getUid() . '" alt="' . $this->getUid() . '" />';
+        return '<img src="' . htmlspecialchars($imageUrl) . '" title="id=' . $uid . '" alt="' . $uid . '" />';
     }
 
     /**

@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_seminars_speakers');
 
-return [
+$tca = [
     'ctrl' => [
         'title' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers',
         'label' => 'title',
@@ -15,9 +15,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        // We cannot use the EXT:seminars syntax as this would break getIcon::getIcon (which gets called in
-        // OldModel/Abstract::getRecordIcon where the icons for the BE module are created).
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/Speaker.gif',
+        'iconfile'  => 'EXT:seminars/Resources/Public/Icons/Speaker.gif',
         'searchFields' => 'title'
     ],
     'interface' => [
@@ -216,3 +214,9 @@ return [
         '1' => ['showitem' => ''],
     ],
 ];
+
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 7006000) {
+    $tca['ctrl']['iconfile']  = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/Speaker.gif';
+}
+
+return $tca;
