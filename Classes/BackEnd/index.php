@@ -13,6 +13,7 @@
  */
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -167,7 +168,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
         // Only generate the tab menu if the current back-end user has the
         // rights to show any of the tabs.
         if ($this->subModule) {
-            $moduleToken = t3lib_formprotection_Factory::get()->generateToken('moduleCall', self::MODULE_NAME);
+            $moduleToken = FormProtectionFactory::get()->generateToken('moduleCall', self::MODULE_NAME);
             $this->content .= $this->doc->getTabMenu(
                 array('M' => self::MODULE_NAME, 'moduleToken' => $moduleToken, 'id' => $this->id),
                 'subModule', $this->subModule, $this->availableSubModules
