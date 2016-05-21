@@ -11,13 +11,13 @@ return [
         'default_sortby' => 'ORDER BY crdate DESC',
         'delete' => 'deleted',
         'enablecolumns' => [
-            'disabled' => 'hidden'
+            'disabled' => 'hidden',
         ],
         // We cannot use the EXT:seminars syntax as this would break getIcon::getIcon (which gets called in
         // OldModel/Abstract::getRecordIcon where the icons for the BE module are created).
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/Registration.gif',
         'dividers2tabs' => true,
-        'searchFields' => 'title'
+        'searchFields' => 'title',
     ],
     'interface' => [
         'showRecordFieldList' => 'hidden,uid,title,user,seminar,registration_queue,price,seats,registered_themselves,total_price,currency,including_tax,attendees_names,additional_persons,datepaid,method_of_payment,account_number,bank_code,bank_name,account_owner,company,gender,name,address,zip,city,country,phone,email,been_there,interests,expectations,background_knowledge,accommodation,food,known_from,notes',
@@ -186,7 +186,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_attendances_foods_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_foods'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_foods'),
             ],
         ],
         'food' => [
@@ -211,7 +212,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_attendances_lodgings_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_lodgings'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_lodgings'),
             ],
         ],
         'accommodation' => [
@@ -236,7 +238,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_attendances_checkboxes_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_checkboxes'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_checkboxes'),
             ],
         ],
         'interests' => [
@@ -313,11 +316,17 @@ return [
             'exclude' => 1,
             'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.including_tax',
             'config' => [
-            'type' => 'select',
+                'type' => 'select',
                 'default' => '0',
                 'items' => [
-                    [\OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.including_tax.including', '0'],
-                    [\OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.including_tax.excluding', '1'],
+                    [
+                        \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.including_tax.including',
+                        '0'
+                    ],
+                    [
+                        \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.including_tax.excluding',
+                        '1'
+                    ],
                 ],
                 'size' => 1,
                 'minitems' => 1,
@@ -336,7 +345,8 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_payment_methods'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_payment_methods'),
             ],
         ],
         'account_number' => [
@@ -468,7 +478,8 @@ return [
         ],
     ],
     'types' => [
-        '0' => ['showitem' => '' .
+        '0' => [
+            'showitem' => '' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_attendances.divLabelOverview, title, uid, seminar, user;;;;1-1-1, been_there, hidden;;;;1-1-1, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_attendances.divLabelBookingInformation, registration_queue, registered_themselves, seats, price, total_price, attendees_names, additional_persons, kids, foods, food, lodgings, accommodation, checkboxes, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_attendances.divLabelRegistrationComments, interests, expectations, background_knowledge, known_from, notes, ' .

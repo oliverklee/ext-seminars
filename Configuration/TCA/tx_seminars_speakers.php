@@ -17,7 +17,7 @@ return [
         ],
         // We cannot use the EXT:seminars syntax as this would break getIcon::getIcon (which gets called in
         // OldModel/Abstract::getRecordIcon where the icons for the BE module are created).
-        'iconfile'  => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/Speaker.gif',
+        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/Speaker.gif',
         'searchFields' => 'title'
     ],
     'interface' => [
@@ -45,7 +45,7 @@ return [
             'exclude' => 1,
             'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.gender',
             'config' => [
-            'type' => 'radio',
+                'type' => 'radio',
                 'default' => '0',
                 'items' => [
                     ['', '0'],
@@ -81,12 +81,12 @@ return [
                         'type' => 'popup',
                         'title' => 'Link',
                         'icon' => 'link_popup.gif',
-                        'module' => array(
+                        'module' => [
                             'name' => 'wizard_element_browser',
-                            'urlParameters' => array(
+                            'urlParameters' => [
                                 'mode' => 'wizard',
-                            ),
-                        ),
+                            ],
+                        ],
                         'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1',
                     ],
                 ],
@@ -114,7 +114,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_speakers_skills_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_skills'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_skills'),
             ],
         ],
         'notes' => [

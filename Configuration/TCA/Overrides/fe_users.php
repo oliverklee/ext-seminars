@@ -89,11 +89,11 @@ defined('TYPO3_MODE') or die('Access denied.');
                         'title' => 'List entries',
                         'icon' => 'list.gif',
                         'params' => [
-                            'table'=>'tx_seminars_categories',
+                            'table' => 'tx_seminars_categories',
                             'pid' => '###CURRENT_PID###',
                         ],
                         'module' => [
-                            'name' => 'wizard_list'
+                            'name' => 'wizard_list',
                         ],
                         'JSopenParams' => 'height=480,width=640,status=0,menubar=0,scrollbars=1',
                     ],
@@ -119,9 +119,9 @@ defined('TYPO3_MODE') or die('Access denied.');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'fe_groups',
     '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:fe_groups.tab_event_management,' .
-        'tx_seminars_publish_events;;;;1-1-1,tx_seminars_events_pid,' .
-        'tx_seminars_auxiliary_records_pid,tx_seminars_reviewer,' .
-        'tx_seminars_default_categories, tx_seminars_default_organizer'
+    'tx_seminars_publish_events;;;;1-1-1,tx_seminars_events_pid,' .
+    'tx_seminars_auxiliary_records_pid,tx_seminars_reviewer,' .
+    'tx_seminars_default_categories, tx_seminars_default_organizer'
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
@@ -169,6 +169,6 @@ defined('TYPO3_MODE') or die('Access denied.');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'be_groups',
     '--div--;' . \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'be_groups.tab_event_management,' .
-        'tx_seminars_events_folder,tx_seminars_registrations_folder,' .
-        'tx_seminars_auxiliaries_folder,'
+    'tx_seminars_events_folder,tx_seminars_registrations_folder,' .
+    'tx_seminars_auxiliaries_folder,'
 );

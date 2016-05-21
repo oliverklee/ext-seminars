@@ -11,7 +11,7 @@ return [
         'default_sortby' => 'ORDER BY title',
         'delete' => 'deleted',
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/PaymentMethod.gif',
-        'searchFields' => 'title'
+        'searchFields' => 'title',
     ],
     'interface' => [
         'showRecordFieldList' => 'title, description',

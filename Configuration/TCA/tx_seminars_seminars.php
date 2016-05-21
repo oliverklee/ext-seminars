@@ -16,7 +16,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
-            'endtime' => 'endtime'
+            'endtime' => 'endtime',
         ],
         // We cannot use the EXT:seminars syntax as this would break getIcon::getIcon (which gets called in
         // OldModel/Abstract::getRecordIcon where the icons for the BE module are created).
@@ -32,17 +32,17 @@ return [
         'dividers2tabs' => true,
         'hideAtCopy' => true,
         'requestUpdate' => 'needs_registration',
-        'searchFields' => 'title,accreditation_number'
+        'searchFields' => 'title,accreditation_number',
     ],
     'interface' => [
-        'showRecordFieldList' => 'title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,begin_date_registration,deadline_registration,deadline_unregistration,expiry,details_page,place,room,speakers,price_regular,price_special,payment_methods,organizers,organizing_partners,event_takes_place_reminder_sent,cancelation_deadline_reminder_sent,needs_registration,allows_multiple_registrations,attendees_min,attendees_max,queue_size,offline_attendees,organizers_notified_about_minimum_reached,mute_notification_emails,target_groups,skip_collision_check,registrations,cancelled,automatic_confirmation_cancelation,notes,attached_files,hidden,starttime,endtime,owner_feuser,vips'
+        'showRecordFieldList' => 'title,subtitle,categories,teaser,description,accreditation_number,credit_points,begin_date,end_date,timeslots,begin_date_registration,deadline_registration,deadline_unregistration,expiry,details_page,place,room,speakers,price_regular,price_special,payment_methods,organizers,organizing_partners,event_takes_place_reminder_sent,cancelation_deadline_reminder_sent,needs_registration,allows_multiple_registrations,attendees_min,attendees_max,queue_size,offline_attendees,organizers_notified_about_minimum_reached,mute_notification_emails,target_groups,skip_collision_check,registrations,cancelled,automatic_confirmation_cancelation,notes,attached_files,hidden,starttime,endtime,owner_feuser,vips',
     ],
     'columns' => [
         'object_type' => [
             'exclude' => 1,
             'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_seminars.object_type',
             'config' => [
-            'type' => 'radio',
+                'type' => 'radio',
                 'default' => '0',
                 'items' => [
                     [\OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_seminars.object_type.I.0', '0'],
@@ -97,7 +97,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_categories_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_categories'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_categories'),
             ],
         ],
         'requirements' => [
@@ -160,7 +161,8 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_event_types'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_event_types'),
             ],
         ],
         'accreditation_number' => [
@@ -306,12 +308,12 @@ return [
                         'type' => 'popup',
                         'title' => 'Link',
                         'icon' => 'link_popup.gif',
-                        'module' => array(
+                        'module' => [
                             'name' => 'wizard_element_browser',
-                            'urlParameters' => array(
+                            'urlParameters' => [
                                 'mode' => 'wizard',
-                            ),
-                        ),
+                            ],
+                        ],
                         'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1',
                     ],
                 ],
@@ -330,7 +332,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_place_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_sites'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_sites'),
             ],
         ],
         'room' => [
@@ -355,7 +358,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_lodgings_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_lodgings'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_lodgings'),
             ],
         ],
         'foods' => [
@@ -371,7 +375,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_foods_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_foods'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_foods'),
             ],
         ],
         'speakers' => [
@@ -387,7 +392,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_speakers_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_speakers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_speakers'),
             ],
         ],
         'partners' => [
@@ -403,7 +409,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_speakers_mm_partners',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_speakers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_speakers'),
             ],
         ],
         'tutors' => [
@@ -419,7 +426,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_speakers_mm_tutors',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_speakers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_speakers'),
             ],
         ],
         'leaders' => [
@@ -435,7 +443,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_speakers_mm_leaders',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_speakers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_speakers'),
             ],
         ],
         'language' => [
@@ -570,7 +579,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_checkboxes_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_checkboxes'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_checkboxes'),
             ],
         ],
         'uses_terms_2' => [
@@ -595,7 +605,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_payment_methods_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_payment_methods'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_payment_methods'),
             ],
         ],
         'organizers' => [
@@ -611,7 +622,8 @@ return [
                 'minitems' => 1,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_organizers_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_organizers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_organizers'),
             ],
         ],
         'organizing_partners' => [
@@ -627,7 +639,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_organizing_partners_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_organizers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_organizers'),
             ],
         ],
         'event_takes_place_reminder_sent' => [
@@ -754,7 +767,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_target_groups_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(), 'tx_seminars_target_groups'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_target_groups'),
             ],
         ],
         'skip_collision_check' => [
@@ -921,8 +935,9 @@ return [
     ],
     'types' => [
         // Single event
-        '0' => ['showitem' => '' .
-            '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, subtitle;;;;3-3-3, image, categories, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, language, accreditation_number, credit_points, details_page, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, cancelled, automatic_confirmation_cancelation, notes, attached_files, ' .
+        '0' => [
+            'showitem' => '' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, subtitle;;;;3-3-3, image, categories, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, language, accreditation_number, credit_points, details_page, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, cancelled, automatic_confirmation_cancelation, notes, attached_files, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, begin_date_registration, deadline_registration, deadline_early_bird, deadline_unregistration, place, room, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, event_takes_place_reminder_sent, cancelation_deadline_reminder_sent, ' .
@@ -932,15 +947,17 @@ return [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAccess, hidden;;1;;1-1-1, owner_feuser, vips',
         ],
         // Multiple event topic
-        '1' => ['showitem' =>
-            '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, subtitle;;;;3-3-3, image, categories, requirements, dependencies, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, attached_files, ' .
+        '1' => [
+            'showitem' =>
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, subtitle;;;;3-3-3, image, categories, requirements, dependencies, teaser, description;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], event_type, credit_points, additional_information;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], checkboxes, uses_terms_2, notes, attached_files, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, target_groups, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_seminars.divLabelPayment, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_seminars.divLabelAccess, hidden;;1;;1-1-1, ',
         ],
         // Multiple event date
-        '2' => ['showitem' =>
-            '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, topic, language, accreditation_number, details_page, cancelled, automatic_confirmation_cancelation, notes, attached_files, ' .
+        '2' => [
+            'showitem' =>
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelGeneral, object_type, title;;;;2-2-2, topic, language, accreditation_number, details_page, cancelled, automatic_confirmation_cancelation, notes, attached_files, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPlaceTime, begin_date, end_date, timeslots, begin_date_registration, deadline_registration, deadline_early_bird, deadline_unregistration, expiry, place, room, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelSpeakers, speakers, partners, tutors, leaders, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelOrganizers, organizers, organizing_partners, event_takes_place_reminder_sent, cancelation_deadline_reminder_sent, ' .

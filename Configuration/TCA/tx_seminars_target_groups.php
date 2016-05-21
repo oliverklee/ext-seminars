@@ -11,7 +11,7 @@ return [
         'default_sortby' => 'ORDER BY title',
         'delete' => 'deleted',
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/TargetGroup.gif',
-        'searchFields' => 'title'
+        'searchFields' => 'title',
     ],
     'interface' => [
         'showRecordFieldList' => 'title,minimum_age,maximum_age,owner',
@@ -37,7 +37,7 @@ return [
                 'range' => [
                     'lower' => '0',
                     'upper' => '199',
-        ],
+                ],
             ],
         ],
         'maximum_age' => [

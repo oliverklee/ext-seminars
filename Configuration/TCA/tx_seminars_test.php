@@ -16,14 +16,14 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
-            'endtime' => 'endtime'
+            'endtime' => 'endtime',
         ],
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Test.gif',
-        'searchFields' => 'title'
+        'searchFields' => 'title',
     ],
     $GLOBALS['TCA']['tx_seminars_test'] = [
         'interface' => [
-            'showRecordFieldList' => 'hidden,starttime,endtime,title'
+            'showRecordFieldList' => 'hidden,starttime,endtime,title',
         ],
         'columns' => [
             'hidden' => [

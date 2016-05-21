@@ -13,10 +13,10 @@ return [
         // We cannot use the EXT:seminars syntax as this would break getIcon::getIcon (which gets called in
         // OldModel/Abstract::getRecordIcon where the icons for the BE module are created).
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/Organizer.gif',
-        'searchFields' => 'title'
+        'searchFields' => 'title',
     ],
     'interface' => [
-        'showRecordFieldList' => 'title,description,homepage,email,email_footer'
+        'showRecordFieldList' => 'title,description,homepage,email,email_footer',
     ],
     'columns' => [
         'title' => [
@@ -52,12 +52,12 @@ return [
                         'type' => 'popup',
                         'title' => 'Link',
                         'icon' => 'link_popup.gif',
-                        'module' => array(
+                        'module' => [
                             'name' => 'wizard_element_browser',
-                            'urlParameters' => array(
+                            'urlParameters' => [
                                 'mode' => 'wizard',
-                            ),
-                        ),
+                            ],
+                        ],
                         'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1',
                     ],
                 ],

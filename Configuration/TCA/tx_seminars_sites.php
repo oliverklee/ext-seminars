@@ -11,7 +11,7 @@ return [
         'default_sortby' => 'ORDER BY title',
         'delete' => 'deleted',
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Place.gif',
-        'searchFields' => 'title'
+        'searchFields' => 'title',
     ],
     'interface' => [
         'showRecordFieldList' => 'title,address,zip,city,homepage,directions,notes,owner',
@@ -62,9 +62,9 @@ return [
                     ['', 0],
                 ],
                 'itemsProcFunc' => \OliverKlee\Seminars\BackEnd\TceForms::class . '->createCountrySelector',
-            'size' => 1,
-            'minitems' => 0,
-            'maxitems' => 1,
+                'size' => 1,
+                'minitems' => 0,
+                'maxitems' => 1,
             ],
         ],
         'homepage' => [
@@ -85,7 +85,7 @@ return [
                         'module' => [
                             'name' => 'wizard_element_browser',
                             'urlParameters' => [
-                                'mode' => 'wizard'
+                                'mode' => 'wizard',
                             ],
                         ],
                         'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1',
