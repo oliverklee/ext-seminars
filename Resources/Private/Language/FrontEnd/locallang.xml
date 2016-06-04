@@ -125,6 +125,12 @@
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups">Allow editing target groups:</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfCategories">Allow editing categories:</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfSkills">Allow editing skills:</label>
+			<label index="seminars.pi_flexform.recursive.I.0">0 levels (only selected page)</label>
+			<label index="seminars.pi_flexform.recursive.I.1">1 level</label>
+			<label index="seminars.pi_flexform.recursive.I.2">2 levels</label>
+			<label index="seminars.pi_flexform.recursive.I.3">3 levels</label>
+			<label index="seminars.pi_flexform.recursive.I.4">4 levels</label>
+			<label index="seminars.pi_flexform.recursive.I.5">Infinite</label>
 			<label index="pi_list_browseresults_prev">&lt; Previous</label>
 			<label index="pi_list_browseresults_page">Page</label>
 			<label index="pi_list_browseresults_next">Next &gt;</label>
@@ -752,6 +758,12 @@
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups">Erlaube das Bearbeiten von Zielgruppen:</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfCategories">Erlaube das Bearbeiten von Kategorien:</label>
 			<label index="seminars.pi_flexform.allowFrontEndEditingOfSkills">Erlaube das Bearbeiten von Fähigkeiten:</label>
+			<label index="seminars.pi_flexform.recursive.I.0">0 Ebenen (nur die ausgewählte Seite)</label>
+			<label index="seminars.pi_flexform.recursive.I.1">1 Ebene</label>
+			<label index="seminars.pi_flexform.recursive.I.2">2 Ebenen</label>
+			<label index="seminars.pi_flexform.recursive.I.3">3 Ebenen</label>
+			<label index="seminars.pi_flexform.recursive.I.4">4 Ebenen</label>
+			<label index="seminars.pi_flexform.recursive.I.5">Unendlich</label>
 			<label index="pi_list_browseresults_prev">&lt; Vorherige</label>
 			<label index="pi_list_browseresults_page">Seite</label>
 			<label index="pi_list_browseresults_next">Nächste &gt;</label>

@@ -17,6 +17,7 @@ Features:
 - [#5628] Add a RealURL auto configuration
 
 Bug fixes:
+- [#5711] "Recursion" drop-down labels are empty in the flexforms in 6.2
 - [#5511] Test failures in 7.6 for BackEnd/EventsListTest
 - [#5687] Error 500 for CSV download in BE
 - [#5638] Fix user functions in the TS setup and hooks
