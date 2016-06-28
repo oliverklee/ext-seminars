@@ -13,12 +13,7 @@
  */
 
 use TYPO3\CMS\Core\Charset\CharsetConverter;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-
-if (is_object($GLOBALS['LANG'])) {
-    $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
-}
 
 /**
  * Plugin "CSV export".
@@ -82,6 +77,11 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
     public function __construct()
     {
         parent::__construct();
+
+        if (is_object($GLOBALS['LANG'])) {
+            $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
+        }
+
         $this->configuration = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
     }
 

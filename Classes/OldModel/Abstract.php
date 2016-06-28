@@ -14,11 +14,6 @@
 use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 
-// In the back end, include the extension's locallang.xml.
-if ((TYPO3_MODE === 'BE') && is_object($GLOBALS['LANG'])) {
-    $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
-}
-
 /**
  * This class represents an object that is created from a DB record or can be written to a DB record.
  *
@@ -79,6 +74,12 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
     public function __construct($uid, $dbResult = null, $allowHiddenRecords = false)
     {
         $this->initializeCharsetConversion();
+
+        // In the back end, include the extension's locallang.xml.
+        if ((TYPO3_MODE === 'BE') && is_object($GLOBALS['LANG'])) {
+            $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
+        }
+
         $this->retrieveRecordAndGetData($uid, $dbResult, $allowHiddenRecords);
         $this->init();
     }

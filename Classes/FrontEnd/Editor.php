@@ -13,8 +13,7 @@
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-
-require_once(PATH_formidableapi);
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class is the base class for any kind of front-end editor, for example the event editor or the registration editor.
@@ -50,6 +49,21 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
      * @var array this is used to fake form values for testing
      */
     private $fakedFormValues = array();
+
+    /**
+     * The constructor. Initializes the TypoScript configuration, initializes
+     * the flex forms, gets the template HTML code, sets the localized labels
+     * and set the CSS classes from TypoScript.
+     *
+     * @param array $configuration TypoScript configuration for the plugin
+     * @param ContentObjectRenderer $contentObjectRenderer the parent cObj content, needed for the flexforms
+     */
+    public function __construct(array $configuration, ContentObjectRenderer $contentObjectRenderer)
+    {
+        parent::__construct($configuration, $contentObjectRenderer);
+
+        require_once(PATH_formidableapi);
+    }
 
     /**
      * Frees as much memory that has been used by this object as possible.
