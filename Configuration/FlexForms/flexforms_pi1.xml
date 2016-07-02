@@ -326,7 +326,7 @@
 									</numIndex>
 								</items>
 								<minitems>0</minitems>
-								<maxitems>10</maxitems>
+								<maxitems>99</maxitems>
 								<renderMode>checkbox</renderMode>
 							</config>
 						</TCEforms>
