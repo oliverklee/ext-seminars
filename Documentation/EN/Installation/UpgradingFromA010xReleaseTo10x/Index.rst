@@ -32,10 +32,9 @@ the front end until you have finished the upgrade.
 #. Temporarily uninstall seminars, onetimeaccount (if it is installed)
    and all extensions that use hooks or XCLASSes of seminars.
 
-#. Update to the latest version of oelib and static\_info\_tables.
+#. Remove the ameos_formidable extension from your system.
 
-#. Update to the `patched ameos\_formidable
-   <https://dl.dropboxusercontent.com/u/27225645/Extensions/T3X_ameos_formidable-1_1_564-z-201506082123.t3x>`_.
+#. Update to the latest version of oelib and static\_info\_tables.
 
 #. If you are using custom HTML templates, make a diff between the
    provided templates and your templates so you know what you have
@@ -43,15 +42,24 @@ the front end until you have finished the upgrade.
    features. In addition, your old templates probably will display some
    garbage on the front end.) Switch off your custom templates.
 
-#. Upgrade to the new seminars (and onetimeaccount, if needed) from TER
-   and upgrade the database.
+#. Upgrade to the new seminars (and onetimeaccount, if needed) from the TER.
+
+#. Enable the seminars extension again.
+
+#. In the extension manager, enable the automatic configuration check for
+   the Seminar Manager.
+
+#. In your site TS template, include the static extension template
+   *MKFORMS - Basics (mkforms)*
+   *above* the static seminars template.
+
+#. If your site does not use jQuery by default, also include the following
+   static template::
+     MKFORMS JQuery-JS (mkforms)
 
 #. The CLI runner has been replaced by a Scheduler task. If you are using
    the cronjob, delete it and add a Scheduler task (with the same page
    UID for the configuration).
-
-#. In the extension manager, enable the automatic configuration check for
-   the Seminar Manager.
 
 #. Run the extension's update script in the extension manager. (Choose the
    option “UPDATE!” in the extension's drop-down menu at the top. If the

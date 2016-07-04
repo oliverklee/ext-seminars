@@ -308,7 +308,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         self::assertEquals(
             '',
-            $this->fixture->retrieveDataFromSession('', array('key' => 'foo'))
+            $this->fixture->retrieveDataFromSession(array('key' => 'foo'))
         );
     }
 
@@ -320,7 +320,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 
         self::assertEquals(
             '12345',
-            $this->fixture->retrieveDataFromSession('', array('key' => 'zip'))
+            $this->fixture->retrieveDataFromSession(array('key' => 'zip'))
         );
     }
 
@@ -330,7 +330,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 
     public function testPopulateListPaymentMethodsDoesNotCrash()
     {
-        $this->fixture->populateListPaymentMethods(array());
+        $this->fixture->populateListPaymentMethods();
     }
 
     public function testPopulateListPaymentMethodsForEventWithOnePaymentMethodReturnsOneItem()
@@ -348,7 +348,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 
         self::assertEquals(
             1,
-            count($this->fixture->populateListPaymentMethods(array()))
+            count($this->fixture->populateListPaymentMethods())
         );
     }
 
@@ -365,7 +365,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             'payment_methods'
         );
 
-        $paymentMethods = $this->fixture->populateListPaymentMethods(array());
+        $paymentMethods = $this->fixture->populateListPaymentMethods();
 
         self::assertContains(
             'foo',
@@ -386,7 +386,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             'payment_methods'
         );
 
-        $paymentMethods = $this->fixture->populateListPaymentMethods(array());
+        $paymentMethods = $this->fixture->populateListPaymentMethods();
 
         self::assertEquals(
             $paymentMethodUid,
@@ -412,7 +412,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 
         self::assertEquals(
             2,
-            count($this->fixture->populateListPaymentMethods(array()))
+            count($this->fixture->populateListPaymentMethods())
         );
     }
 
@@ -524,7 +524,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 
         self::assertEquals(
             'Deutschland',
-            $this->fixture->getFeUserData(null, array('key' => 'country'))
+            $this->fixture->getFeUserData(array('key' => 'country'))
         );
     }
 
@@ -543,7 +543,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 
         self::assertEquals(
             'United Kingdom',
-            $this->fixture->getFeUserData(null, array('key' => 'country'))
+            $this->fixture->getFeUserData(array('key' => 'country'))
         );
     }
 
@@ -558,7 +558,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 
         self::assertEquals(
             'Taka-Tuka-Land',
-            $this->fixture->getFeUserData(null, array('key' => 'country'))
+            $this->fixture->getFeUserData(array('key' => 'country'))
         );
     }
 

@@ -20,7 +20,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 /**
  * This class is a controller which allows to create registrations on the FE.
  *
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Philipp Kitzberger <philipp@cron-it.de>
@@ -136,15 +135,6 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         foreach ($formFieldsToShow as $currentFormField) {
             $this->formFieldsToShow[$currentFormField] = $currentFormField;
         }
-    }
-
-    /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->staticInfo, $this->seminar, $this->registration);
-        parent::__destruct();
     }
 
     /**
@@ -290,7 +280,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         $this->setMarker('billing_address', $this->getBillingAddress());
         $this->setMarker('registration_data', $this->getAllRegistrationDataForConfirmation());
 
-        return $this->getSubpart('', 2);
+        return $this->getSubpart('');
     }
 
     /**
@@ -315,6 +305,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
 
     /**
      * Selects the confirmation page (the second step of the registration form) for display. This affects $this->render().
+     *
+     * This method is used only in the unit tests.
      *
      * @param array $parameters the entered form data with the field names as array keys (including the submit button)
      *
@@ -401,7 +393,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             $user->setPageUid($pageUid);
             $user->setPassword(GeneralUtility::getRandomHexString(8));
             $eMailAddress = $personData[3];
-            $user->setEMailAddress($eMailAddress);
+            $user->setEmailAddress($eMailAddress);
 
             $isUnique = false;
             $suffixCounter = 0;
@@ -770,12 +762,10 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     /**
      * Provides data items for the list of available payment methods.
      *
-     * @param array[] $items array that contains any pre-filled data (may be empty, unused)
-     *
      * @return array[] items from the payment methods table as an array
      *               with the keys "caption" (for the title) and "value" (for the uid)
      */
-    public function populateListPaymentMethods(array $items)
+    public function populateListPaymentMethods()
     {
         if (!$this->getSeminar()->hasPaymentMethods()) {
             return array();
@@ -995,8 +985,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
                         if ($user->hasJobTitle()) {
                             $userData[] = $user->getJobTitle();
                         }
-                        if ($user->hasEMailAddress()) {
-                            $userData[] = $user->getEMailAddress();
+                        if ($user->hasEmailAddress()) {
+                            $userData[] = $user->getEmailAddress();
                         }
                     }
 
@@ -1214,15 +1204,14 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      *
      * The caller needs to take care of htmlspecialcharing the data.
      *
-     * @param mixed $unused (unused)
      * @param array $params
      *        contents of the "params" XML child of the userobj node (needs to contain an element with the key "key")
      *
      * @return string the contents of the element
      */
-    public function getFeUserData($unused, array $params)
+    public function getFeUserData(array $params)
     {
-        $result = $this->retrieveDataFromSession(null, $params);
+        $result = $this->retrieveDataFromSession($params);
 
         if (empty($result)) {
             $key = $params['key'];
@@ -1520,21 +1509,20 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     private function retrieveSavedMethodOfPayment()
     {
-        return (int)$this->retrieveDataFromSession(null, array('key' => 'method_of_payment'));
+        return (int)$this->retrieveDataFromSession(array('key' => 'method_of_payment'));
     }
 
     /**
      * Retrieves the data for a given key from the FE user session. Returns an
      * empty string if no data for that key is stored.
      *
-     * @param mixed $unused (unused)
      * @param array $parameters
      *        the contents of the "params" child of the userobj node as key/value pairs
      *        (used for retrieving the current form field name)
      *
      * @return string the data stored in the FE user session under the given key, might be empty
      */
-    public function retrieveDataFromSession($unused, array $parameters)
+    public function retrieveDataFromSession(array $parameters)
     {
         return Tx_Oelib_Session::getInstance(Tx_Oelib_Session::TYPE_USER)
             ->getAsString($this->prefixId . '_' . $parameters['key']);
@@ -1548,10 +1536,10 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function prefillAccountOwner()
     {
-        $result = $this->retrieveDataFromSession(null, array('key' => 'account_owner'));
+        $result = $this->retrieveDataFromSession(array('key' => 'account_owner'));
 
         if (empty($result)) {
-            $result = $this->getFeUserData(null, array('key' => 'name'));
+            $result = $this->getFeUserData(array('key' => 'name'));
         }
 
         return $result;

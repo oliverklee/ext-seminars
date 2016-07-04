@@ -34,11 +34,10 @@ Aktualisierung Warnungen auf den Seiten zu sehen sein können.
    installiert ist) und alle Extensions, die Hooks oder XCLASSes von
    seminars benutzen.
 
+#. Entfernen Sie die Extension ameos_formidable von Ihrem System.
+
 #. Aktualisieren Sie oelib und static\_info\_tables auf die aktuelle
    Version.
-
-#. Aktualisieren Sie auf das `gepatchte ameos\_formidable
-   <https://dl.dropboxusercontent.com/u/27225645/Extensions/T3X_ameos_formidable-1_1_564-z-201506082123.t3x>`_.
 
 #. Wenn Sie angepasste HTML-Template benutzen, machen Sie ein Diff
    zwischen den Originaltemplates und Ihren angepassten Templates, so
@@ -48,14 +47,25 @@ Aktualisierung Warnungen auf den Seiten zu sehen sein können.
    Schalten Sie die angepassten Templates aus.
 
 #. Aktualisieren Sie den Seminarmanager (und onetimeaccount, falls nötig)
-   aus dem TER und führen Sie die Datenbank-Aktualisierungen durch.
+   aus dem TER
+
+#. Installieren Sie die seminars wieder.
+
+#. Schalten Sie im Extensionmanager den automatischen Konfigurationscheck
+   für den Seminarmanager ein.
+
+#. Inkludieren Sie das statische Extension-Template
+   *MKFORMS - Basics (mkforms)* in
+   in Ihrem Seitentemplate unter “Include static (from extensions)”
+   *oberhalb* des statischen seminars-Templates.
+
+#. Wenn Ihre Seite nicht ohnehin schon jQuery einbindet, binden Sie noch
+   folgendes statisches Template ein::
+     MKFORMS JQuery-JS (mkforms)
 
 #. Der CLI-Runner für den Cronjob wurde durch einen Scheduler-Task ersetzt.
    Falls Sie den Cronjob nutzen, löschen Sie bitte den Cronjob und legen Sie
    stattdessen einen Scheduler-Task an (mit derselben Page-UID wie beim Cronjob).
-
-#. Schalten Sie im Extensionmanager den automatischen Konfigurationscheck
-   für den Seminarmanager ein.
 
 #. Führen Sie das Update-Skript der Extension im EM durch (falls verfügbar).
 

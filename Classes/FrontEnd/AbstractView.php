@@ -72,6 +72,20 @@ abstract class Tx_Seminars_FrontEnd_AbstractView extends Tx_Oelib_TemplateHelper
     }
 
     /**
+     * Eliminates the renderlet path info from the given form data.
+     *
+     * @param mixed[] $formData submitted renderlet data
+     * @param tx_mkforms_forms_Base $form
+     *
+     * @return mixed[] renderlet data with the path info removed from the keys
+     */
+    protected static function removePathFromWidgetData(array $formData, tx_mkforms_forms_Base $form)
+    {
+        \tx_rnbase::load(\tx_mkforms_util_FormBase::class);
+        return tx_mkforms_util_FormBase::removePathFromWidgetData($formData, $form);
+    }
+
+    /**
      * Renders the view and returns its content.
      *
      * @return string the view's content

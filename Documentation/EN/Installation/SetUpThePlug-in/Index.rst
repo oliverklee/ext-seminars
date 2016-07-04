@@ -16,8 +16,17 @@
 Set up the plug-in
 ^^^^^^^^^^^^^^^^^^
 
-**First, include the *Seminars* template in your site template under
+**First, include the *MKFORMS - Basics (mkforms)*
+template in your site template under
 “Include static (from extensions).”**
+
+**Below that, include the *Seminars* static template**.
+It is important that you include this
+template *below* the MKFORMS template.
+
+If your site does not use jQuery by default, also include the following
+static template::
+  MKFORMS JQuery-JS (mkforms)
 
 Then configure the plug-in in your TS template setup or the plug-in
 flexforms. The properties are listed in the reference.

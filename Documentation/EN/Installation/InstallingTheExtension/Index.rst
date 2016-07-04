@@ -28,12 +28,11 @@ have one of the following extensions installed:
 **Required extensions:** This extension requires the following TYPO3
 extensions to be installed beforehand:
 
+- **static\_info\_tables**
+
 - **oelib**
 
-- **ameos\_formidable**: Please use the `patched ameos\_formidable
-  <https://dl.dropboxusercontent.com/u/27225645/Extensions/T3X_ameos_formidable-1_1_564-z-201506082123.t3x>`_.
-
-- **static\_info\_tables**
+- **mkforms**
 
 - **felogin** : If you want FE users to be able to log in so that they
   can register for events, you should also install a login extension

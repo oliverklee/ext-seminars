@@ -189,6 +189,7 @@ Cleanup:
 - [#5407] Drop the old XCLASS footers
 
 Changes:
+- [#5405] Migrate the form engine from ameos_formidable to mkforms
 - [#5703] Change t3lib_formprotection_Factory to FormProtectionFactory
 - [#5663] Always use the first organizer as sender in the email form
 - [#5681] Remove the other dates from the cancelation e-mail

@@ -66,7 +66,21 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     public function __construct(array $configuration, ContentObjectRenderer $contentObjectRenderer)
     {
         parent::__construct($configuration, $contentObjectRenderer);
+        \tx_rnbase::load(\Tx_Rnbase_Database_Connection::class);
         $this->setRequiredFormFields();
+    }
+
+    /**
+     * There are more than one init calls.
+     * Mkforms calls the init for code behinds and oelib inits the class, too.
+     *
+     * @param array|\tx_mkforms_forms_IForm $configuration
+     */
+    public function init($configuration)
+    {
+        if (is_array($configuration)) {
+            parent::init($configuration);
+        }
     }
 
     /**
@@ -304,13 +318,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *
      * @param array[] $items any pre-filled data (may be empty)
      * @param array $unused unused
-     * @param tx_ameosformidable $formidable the FORMidable object
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] $items with additional items from the places table
      *               as an array with the keys "caption" (for the title)
      *               and "value" (for the UID)
      */
-    public function populateListPlaces(array $items, $unused = null, tx_ameosformidable $formidable = null)
+    public function populateListPlaces(array $items, $unused = null, \tx_mkforms_forms_Base $form = null)
     {
         $result = $items;
 
@@ -318,17 +332,19 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $placeMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Place::class);
         $places = $placeMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
-        if ($formidable !== null) {
-            $editButtonConfiguration =& $formidable->_navConf(
-                $formidable->aORenderlets['editPlaceButton']->sXPath
+        if ($form !== null) {
+            $editButtonConfiguration = $form->_navConf(
+                $form->aORenderlets['editPlaceButton']->sXPath
             );
+        } else {
+            $editButtonConfiguration = [];
         }
 
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
             array('relatedRecordType' => 'Places')
-        ) && is_object($formidable);
+        ) && is_object($form);
 
         /** @var Tx_Seminars_Model_Place $place */
         foreach ($places as $place) {
@@ -345,9 +361,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
 					return Tx_Seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
 					';
-                $editButton = $formidable->_makeRenderlet(
+                $editButton = $form->_makeRenderlet(
                     $editButtonConfiguration,
-                    $formidable->aORenderlets['editPlaceButton']->sXPath
+                    $form->aORenderlets['editPlaceButton']->sXPath
                 );
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
@@ -372,36 +388,44 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     /**
      * Provides data items for the list of available speakers.
      *
-     * @param array[] $items any pre-filled data (may be empty)
      * @param array $parameters the parameters sent to this function by FORMidable
-     * @param tx_ameosformidable $formidable the FORMidable object
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] $items with additional items from the speakers table
      *               as an array with the keys "caption" (for the title)
      *               and "value" (for the UID)
      */
     public function populateListSpeakers(
-        array $items, $parameters = array(), tx_ameosformidable $formidable = null
+        array $parameters = array(), \tx_mkforms_forms_Base $form = null
     ) {
-        $result = $items;
+        $result = array();
 
         /** @var Tx_Seminars_Mapper_Speaker $speakerMapper */
         $speakerMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class);
         $speakers = $speakerMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
-        if (is_object($formidable)) {
-            $editButtonConfiguration =& $formidable->_navConf(
-                $formidable->aORenderlets['editSpeakerButton']->sXPath
+        if (is_object($form)) {
+            $editButtonConfiguration =& $form->_navConf(
+                $form->aORenderlets['editSpeakerButton']->sXPath
             );
+        } else {
+            $editButtonConfiguration = [];
         }
 
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
             array('relatedRecordType' => 'Speakers')
-        ) && is_object($formidable);
+        ) && is_object($form);
 
         $type = $parameters['type'];
+        if (!empty($parameters['lister'])) {
+            $isLister = true;
+            $activeSpeakers = $form->getDataHandler()->getStoredData(strtolower($type) . 's');
+        } else {
+            $isLister = false;
+            $activeSpeakers = '';
+        }
 
         /** @var Tx_Seminars_Model_Speaker $speaker */
         foreach ($speakers as $speaker) {
@@ -413,14 +437,23 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 continue;
             }
 
+            // the new method to list the speakers
+            if ($isLister) {
+                $result[] = array(
+                    'uid' => $speaker->getUid(),
+                    'selected' => GeneralUtility::inList($activeSpeakers, $speaker->getUid()) ? 1 : 0,
+                    'name' => $speaker->getName(),
+                    'edit' => ($showEditButton && $frontEndUserIsOwner) ? 1 : 0,
+                );
+                continue;
+            }
             if ($showEditButton && $frontEndUserIsOwner) {
                 $editButtonConfiguration['name'] = 'edit' . $type . 'Button_' . $speaker->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
-					return Tx_Seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');
-					';
-                $editButton = $formidable->_makeRenderlet(
+                    return Tx_Seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');';
+                $editButton = $form->_makeRenderlet(
                     $editButtonConfiguration,
-                    $formidable->aORenderlets['editSpeakerButton']->sXPath
+                    $form->aORenderlets['editSpeakerButton']->sXPath
                 );
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
@@ -448,14 +481,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *
      * @param array[] $items any pre-filled data (may be empty)
      * @param array $unused unused
-     * @param tx_ameosformidable $formidable the FORMidable object
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] $items with additional items from the checkboxes
      *               table as an array with the keys "caption" (for the
      *               title) and "value" (for the UID)
      */
     public function populateListCheckboxes(
-        array $items, $unused = null, tx_ameosformidable $formidable = null
+        array $items, $unused = null, \tx_mkforms_forms_Base $form = null
     ) {
         $result = $items;
 
@@ -463,9 +496,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $checkboxMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
         $checkboxes = $checkboxMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
-        if (is_object($formidable)) {
-            $editButtonConfiguration =& $formidable->_navConf(
-                $formidable->aORenderlets['editCheckboxButton']->sXPath
+        if (is_object($form)) {
+            $editButtonConfiguration =& $form->_navConf(
+                $form->aORenderlets['editCheckboxButton']->sXPath
             );
         }
 
@@ -473,7 +506,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
             array('relatedRecordType' => 'Checkboxes')
-        ) && is_object($formidable);
+        ) && is_object($form);
 
         /** @var Tx_Seminars_Model_Checkbox $checkbox */
         foreach ($checkboxes as $checkbox) {
@@ -490,9 +523,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
 					return Tx_Seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
 					';
-                $editButton = $formidable->_makeRenderlet(
+                $editButton = $form->_makeRenderlet(
                     $editButtonConfiguration,
-                    $formidable->aORenderlets['editCheckboxButton']->sXPath
+                    $form->aORenderlets['editCheckboxButton']->sXPath
                 );
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
@@ -519,14 +552,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *
      * @param array[] $items array any pre-filled data (may be empty)
      * @param array $unused unused
-     * @param tx_ameosformidable $formidable the FORMidable object
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] $items with additional items from the target groups
      *               table as an array with the keys "caption" (for the
      *               title) and "value" (for the UID)
      */
     public function populateListTargetGroups(
-        array $items, $unused = null, tx_ameosformidable $formidable = null
+        array $items, $unused = null, \tx_mkforms_forms_Base $form = null
     ) {
         $result = $items;
 
@@ -534,9 +567,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $targetGroupMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
         $targetGroups = $targetGroupMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
-        if (is_object($formidable)) {
-            $editButtonConfiguration =& $formidable->_navConf(
-                $formidable->aORenderlets['editTargetGroupButton']->sXPath
+        if (is_object($form)) {
+            $editButtonConfiguration =& $form->_navConf(
+                $form->aORenderlets['editTargetGroupButton']->sXPath
             );
         }
 
@@ -544,7 +577,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
             array('relatedRecordType' => 'TargetGroups')
-        ) && is_object($formidable);
+        ) && is_object($form);
 
         /** @var Tx_Seminars_Model_TargetGroup $targetGroup */
         foreach ($targetGroups as $targetGroup) {
@@ -562,9 +595,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
 					return Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
 					';
-                $editButton = $formidable->_makeRenderlet(
+                $editButton = $form->_makeRenderlet(
                     $editButtonConfiguration,
-                    $formidable->aORenderlets['editTargetGroupButton']->sXPath
+                    $form->aORenderlets['editTargetGroupButton']->sXPath
                 );
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
@@ -725,7 +758,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         foreach ($filesToDelete as $fileName) {
             // saves other files in the upload folder from being deleted
-            if (in_array($fileName, $this->attachedFiles)) {
+            if (in_array($fileName, $this->attachedFiles, true)) {
                 $this->purgeUploadedFile($fileName);
             }
         }
@@ -963,7 +996,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     private function purgeUploadedFile($fileName)
     {
         @unlink(PATH_site . 'uploads/tx_seminars/' . $fileName);
-        $keyToPurge = array_search($fileName, $this->attachedFiles);
+        $keyToPurge = array_search($fileName, $this->attachedFiles, true);
         if ($keyToPurge !== false) {
             unset($this->attachedFiles[$keyToPurge]);
         }
@@ -1158,7 +1191,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         foreach ($formFieldsToCheck as $formField) {
             $template->setMarker(
                 $formField . '_required',
-                (in_array($formField, $this->requiredFormFields))
+                in_array($formField, $this->requiredFormFields, true)
                     ? ' class="required"'
                     : ''
             );
@@ -1180,7 +1213,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             throw new InvalidArgumentException('The given field name was empty.', 1333293167);
         }
 
-        return in_array($field['elementName'], $this->requiredFormFields);
+        return in_array($field['elementName'], $this->requiredFormFields, true);
     }
 
     /**
@@ -1449,16 +1482,15 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @param tx_ameosformidable $formidable
-     *        the FORMidable object for the AJAX call
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return array calls to be executed on the client
      */
-    public static function createNewPlace(tx_ameosformidable $formidable)
+    public static function createNewPlace(\tx_mkforms_forms_Base $form)
     {
-        $formData = $formidable->oMajixEvent->getParams();
+        $formData = $form->oMajixEvent->getParams();
         $validationErrors = self::validatePlace(
-            $formidable, array(
+            $form, array(
                 'title' => $formData['newPlace_title'],
                 'address' => $formData['newPlace_address'],
                 'zip' => $formData['newPlace_zip'],
@@ -1470,11 +1502,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         );
         if (!empty($validationErrors)) {
             return array(
-                $formidable->majixExecJs(
+                $form->majixExecJs(
                     'alert("' . implode('\n', $validationErrors) . '");'
                 ),
             );
-        };
+        }
 
         /** @var Tx_Seminars_Model_Place $place */
         $place = GeneralUtility::makeInstance(Tx_Seminars_Model_Place::class);
@@ -1485,24 +1517,24 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Place::class);
         $mapper->save($place);
 
-        $editButtonConfiguration =& $formidable->_navConf(
-            $formidable->aORenderlets['editPlaceButton']->sXPath
+        $editButtonConfiguration =& $form->_navConf(
+            $form->aORenderlets['editPlaceButton']->sXPath
         );
         $editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
         $editButtonConfiguration['onclick']['userobj']['php'] = '
 			return Tx_Seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
 			';
-        $editButton = $formidable->_makeRenderlet(
+        $editButton = $form->_makeRenderlet(
             $editButtonConfiguration,
-            $formidable->aORenderlets['editPlaceButton']->sXPath
+            $form->aORenderlets['editPlaceButton']->sXPath
         );
         $editButton->includeScripts();
         $editButtonHTML = $editButton->_render();
 
         return array(
-            $formidable->aORenderlets['newPlaceModalBox']->majixCloseBox(),
-            $formidable->majixExecJs(
-                'appendPlaceInEditor(' . $place->getUid() . ', "' .
+            $form->aORenderlets['newPlaceModalBox']->majixCloseBox(),
+            $form->majixExecJs(
+                'TYPO3.seminars.appendPlaceInEditor(' . $place->getUid() . ', "' .
                     addcslashes($place->getTitle(), '"\\') . '", {
 						"name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
 						"id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
@@ -1517,13 +1549,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @param tx_ameosformidable $formidable the FORMidable object
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return array calls to be executed on the client
      */
-    public static function updatePlace(tx_ameosformidable $formidable)
+    public static function updatePlace(\tx_mkforms_forms_Base $form)
     {
-        $formData = $formidable->oMajixEvent->getParams();
+        $formData = $form->oMajixEvent->getParams();
         $frontEndUser = self::getLoggedInUser();
         /** @var Tx_Seminars_Mapper_Place $placeMapper */
         $placeMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Place::class);
@@ -1532,19 +1564,19 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             /** @var Tx_Seminars_Model_Place $place */
             $place = $placeMapper->find((int)$formData['editPlace_uid']);
         } catch (Exception $exception) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("The place with the given UID does not exist.");'
             );
         }
 
         if ($place->getOwner() !== $frontEndUser) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("You are not allowed to edit this place.");'
             );
         }
 
         $validationErrors = self::validatePlace(
-            $formidable,
+            $form,
             array(
                 'title' => $formData['editPlace_title'],
                 'address' => $formData['editPlace_address'],
@@ -1556,10 +1588,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             )
         );
         if (!empty($validationErrors)) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("' . implode('\n', $validationErrors) . '");'
             );
-        };
+        }
 
         self::setPlaceData($place, 'editPlace_', $formData);
         $placeMapper->save($place);
@@ -1567,9 +1599,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $htmlId = 'tx_seminars_pi1_seminars_place_label_' . $place->getUid();
 
         return array(
-            $formidable->aORenderlets['editPlaceModalBox']->majixCloseBox(),
-            $formidable->majixExecJs(
-                'updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
+            $form->aORenderlets['editPlaceModalBox']->majixCloseBox(),
+            $form->majixExecJs(
+                'TYPO3.seminars.updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
                     addcslashes($place->getTitle(), '"\\') . '")'
             ),
         );
@@ -1578,8 +1610,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     /**
      * Validates the entered data for a place.
      *
-     * @param tx_ameosformidable $formidable
-     *        the FORMidable object for the AJAX call
+     * @param \tx_mkforms_forms_Base $form
      * @param array[] $formData
      *        the entered form data, the key must be stripped of the
      *        "newPlace_"/"editPlace_" prefix
@@ -1587,7 +1618,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return string[] the error messages, will be empty if there are no validation errors
      */
     private static function validatePlace(
-        tx_ameosformidable $formidable, array $formData
+        \tx_mkforms_forms_Base $form, array $formData
     ) {
         $validationErrors = array();
 
@@ -1597,7 +1628,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         foreach ($keys as $key) {
             if ((trim($formData[$key]) == '') && self::isPlaceFieldRequired($key)
             ) {
-                $validationErrors[] = $formidable->getLLLabel(
+                $validationErrors[] = $form->getConfigXML()->getLLLabel(
                     'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_empty' .
                         ucfirst($key)
                 );
@@ -1605,7 +1636,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         }
         $key = 'country';
         if (((int)$formData[$key] === 0) && self::isPlaceFieldRequired($key)) {
-            $validationErrors[] = $formidable->getLLLabel(
+            $validationErrors[] = $form->getConfigXML()->getLLLabel(
                 'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_empty' . ucfirst($key)
             );
         }
@@ -1631,7 +1662,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         // The field "title" always is required.
         $requiredFields[] = 'title';
 
-        return in_array($key, $requiredFields);
+        return in_array($key, $requiredFields, true);
     }
 
     /**
@@ -1673,15 +1704,15 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     /**
      * Shows a modalbox containing a form for editing an existing place record.
      *
-     * @param tx_ameosformidable $formidable the FORMidable object
+     * @param \tx_mkforms_forms_Base $form
      * @param int $placeUid the UID of the place to edit, must be > 0
      *
      * @return array calls to be executed on the client
      */
-    public static function showEditPlaceModalBox(tx_ameosformidable $formidable, $placeUid)
+    public static function showEditPlaceModalBox(\tx_mkforms_forms_Base $form, $placeUid)
     {
         if ($placeUid <= 0) {
-            return $formidable->majixExecJs('alert("$placeUid must be >= 0.");');
+            return $form->majixExecJs('alert("$placeUid must be >= 0.");');
         }
 
         /** @var Tx_Seminars_Mapper_Place $placeMapper */
@@ -1691,14 +1722,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             /** @var Tx_Seminars_Model_Place $place */
             $place = $placeMapper->find((int)$placeUid);
         } catch (Tx_Oelib_Exception_NotFound $exception) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("A place with the given UID does not exist.");'
             );
         }
 
         $frontEndUser = self::getLoggedInUser();
         if ($place->getOwner() !== $frontEndUser) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("You are not allowed to edit this place.");'
             );
         }
@@ -1727,12 +1758,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         );
 
         foreach ($fields as $key => $value) {
-            $formidable->aORenderlets['editPlace_' . $key]->setValue($value);
+            $form->aORenderlets['editPlace_' . $key]->setValue($value);
         }
 
-        $formidable->oRenderer->_setDisplayLabels(true);
-        $result = $formidable->aORenderlets['editPlaceModalBox']->majixShowBox();
-        $formidable->oRenderer->_setDisplayLabels(false);
+        $form->oRenderer->_setDisplayLabels(true);
+        $result = $form->aORenderlets['editPlaceModalBox']->majixShowBox();
+        $form->oRenderer->_setDisplayLabels(false);
 
         return $result;
     }
@@ -1760,27 +1791,30 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @param tx_ameosformidable $formidable
-     *        the FORMidable object for the AJAX call
+     * @param mixed[] $formData
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return array calls to be executed on the client
      */
-    public static function createNewSpeaker(tx_ameosformidable $formidable)
+    public function createNewSpeaker(array $formData, \tx_mkforms_forms_Base $form)
     {
-        $formData = $formidable->oMajixEvent->getParams();
+        $formData = self::removePathFromWidgetData($formData, $form);
         $validationErrors = self::validateSpeaker(
-            $formidable, array('title' => $formData['newSpeaker_title'])
+            $form, array('title' => $formData['newSpeaker_title'])
         );
         if (!empty($validationErrors)) {
             return array(
-                $formidable->majixExecJs(
+                $form->majixExecJs(
                     'alert("' . implode('\n', $validationErrors) . '");'
                 ),
             );
-        };
+        }
 
         /** @var Tx_Seminars_Model_Speaker $speaker */
         $speaker = GeneralUtility::makeInstance(Tx_Seminars_Model_Speaker::class);
+
+        self::createBasicAuxiliaryData();
+
         $speaker->setData(array_merge(
             self::createBasicAuxiliaryData(),
             array('skills' => new Tx_Oelib_List())
@@ -1791,31 +1825,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class);
         $mapper->save($speaker);
 
-        $editButtonConfiguration =& $formidable->_navConf(
-            $formidable->aORenderlets['editSpeakerButton']->sXPath
-        );
-        $editButtonConfiguration['name'] = 'editSpeakerButton_' . $speaker->getUid();
-        $editButtonConfiguration['onclick']['userobj']['php'] = '
-			return Tx_Seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');
-			';
-        $editButton = $formidable->_makeRenderlet(
-            $editButtonConfiguration,
-            $formidable->aORenderlets['editSpeakerButton']->sXPath
-        );
-        $editButton->includeScripts();
-        $editButtonHTML = $editButton->_render();
+        // refresh all speaker listers
+        $results = $this->repaintSpeakers($form);
+        // close box
+        $results[] = $form->aORenderlets['newSpeakerModalBox']->majixCloseBox();
 
-        return array(
-            $formidable->aORenderlets['newSpeakerModalBox']->majixCloseBox(),
-            $formidable->majixExecJs(
-                'appendSpeakerInEditor(' . $speaker->getUid() . ', "' .
-                    addcslashes($speaker->getName(), '"\\') . '", {
-						"name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
-						"id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
-						"value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
-					});'
-            ),
-        );
+        return $results;
     }
 
     /**
@@ -1823,13 +1838,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @param tx_ameosformidable $formidable the FORMidable object
+     * @param mixed[] $formData
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return array calls to be executed on the client
      */
-    public static function updateSpeaker(tx_ameosformidable $formidable)
+    public function updateSpeaker(array $formData, \tx_mkforms_forms_Base $form)
     {
-        $formData = $formidable->oMajixEvent->getParams();
+        $formData = self::removePathFromWidgetData($formData, $form);
         $frontEndUser = self::getLoggedInUser();
         /** @var Tx_Seminars_Mapper_Speaker $speakerMapper */
         $speakerMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class);
@@ -1838,31 +1854,45 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             /** @var Tx_Seminars_Model_Speaker $speaker */
             $speaker = $speakerMapper->find((int)$formData['editSpeaker_uid']);
         } catch (Exception $exception) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("The speaker with the given UID does not exist.");'
             );
         }
 
         if ($speaker->getOwner() !== $frontEndUser) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("You are not allowed to edit this speaker.");'
             );
         }
 
         $validationErrors = self::validateSpeaker(
-            $formidable, array('title' => $formData['editSpeaker_title'])
+            $form, array('title' => $formData['editSpeaker_title'])
         );
         if (!empty($validationErrors)) {
             return array(
-                $formidable->majixExecJs(
+                $form->majixExecJs(
                     'alert("' . implode('\n', $validationErrors) . '");'
                 ),
             );
-        };
+        }
 
         self::setSpeakerData($speaker, 'editSpeaker_', $formData);
         $speakerMapper->save($speaker);
 
+        $results = $this->repaintSpeakers($form);
+        // close edit box
+        $results[] = $form->aORenderlets['editSpeakerModalBox']->majixCloseBox();
+
+        return $results;
+    }
+
+    /**
+     * @param \tx_mkforms_forms_Base $form
+     *
+     * @return array
+     */
+    protected function repaintSpeakers(\tx_mkforms_forms_Base $form)
+    {
         $speakerTypes = array(
             'speaker',
             'leader',
@@ -1870,28 +1900,23 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             'tutor',
         );
 
-        $uid = $speaker->getUid();
-        $name = $speaker->getName();
-
-        $javaScript = '';
+        $results = array();
+        // refresh all speaker listers
         foreach ($speakerTypes as $speakerType) {
-            $javaScript .= 'updateAuxiliaryRecordInEditor("' .
-                'tx_seminars_pi1_seminars_' .  $speakerType . '_label_' . $uid . '", ' .
-                '"' . addcslashes($name, '"\\') . '"' .
-                ');';
+            if (
+                is_object($widget = $form->getWidget($speakerType . 's'))
+                && $widget instanceof tx_mkforms_widgets_lister_Main
+            ) {
+                $results[] = $widget->repaintFirst();
+            }
         }
-
-        return array(
-            $formidable->aORenderlets['editSpeakerModalBox']->majixCloseBox(),
-            $formidable->majixExecJs($javaScript),
-        );
+        return $results;
     }
 
     /**
      * Validates the entered data for a speaker.
      *
-     * @param tx_ameosformidable $formidable
-     *        the FORMidable object for the AJAX call
+     * @param \tx_mkforms_forms_Base $form
      * @param array[] $formData
      *        the entered form data, the key must be stripped of the
      *        "newSpeaker_"/"editSpeaker_" prefix
@@ -1899,11 +1924,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return string[] the error messages, will be empty if there are no validation errors
      */
     private static function validateSpeaker(
-        tx_ameosformidable $formidable, array $formData
+        \tx_mkforms_forms_Base $form, array $formData
     ) {
         $validationErrors = array();
         if (trim($formData['title']) == '') {
-            $validationErrors[] = $formidable->getLLLabel(
+            $validationErrors[] = $form->getConfigXML()->getLLLabel(
                 'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_emptyName'
             );
         }
@@ -1959,16 +1984,31 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     /**
      * Shows a modalbox containing a form for editing an existing speaker record.
      *
-     * @param tx_ameosformidable $formidable the FORMidable object
+     * @param mixed $params
+     * @param \tx_mkforms_forms_Base $form
+     *
+     * @return array calls to be executed on the client
+     */
+    public static function openEditSpeakerModalBox(
+        array $params, \tx_mkforms_forms_Base $form
+    ) {
+        $speakerId = empty($params['uid']) ? 0 : (int) $params['uid'];
+        return self::showEditSpeakerModalBox($form, $speakerId);
+    }
+
+    /**
+     * Shows a modalbox containing a form for editing an existing speaker record.
+     *
+     * @param \tx_mkforms_forms_Base $form
      * @param int $speakerUid the UID of the speaker to edit, must be > 0
      *
      * @return array calls to be executed on the client
      */
     public static function showEditSpeakerModalBox(
-        tx_ameosformidable $formidable, $speakerUid
+        \tx_mkforms_forms_Base $form, $speakerUid
     ) {
         if ($speakerUid <= 0) {
-            return $formidable->majixExecJs('alert("$speakerUid must be >= 0.");');
+            return $form->majixExecJs('alert("$speakerUid must be >= 0.");');
         }
 
         /** @var Tx_Seminars_Mapper_Speaker $speakerMapper */
@@ -1978,14 +2018,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             /** @var Tx_Seminars_Model_Speaker $speaker */
             $speaker = $speakerMapper->find((int)$speakerUid);
         } catch (Tx_Oelib_Exception_NotFound $exception) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("A speaker with the given UID does not exist.");'
             );
         }
 
         $frontEndUser = self::getLoggedInUser();
         if ($speaker->getOwner() !== $frontEndUser) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("You are not allowed to edit this speaker.");'
             );
         }
@@ -2008,21 +2048,21 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         );
 
         foreach ($fields as $key => $value) {
-            $formidable->aORenderlets['editSpeaker_' . $key]->setValue($value);
+            $form->aORenderlets['editSpeakerModalBox__editSpeaker_' . $key]->setValue($value);
         }
 
         $result = array();
 
-        $formidable->oRenderer->_setDisplayLabels(true);
-        $result[] = $formidable->aORenderlets['editSpeakerModalBox']->majixShowBox();
-        $formidable->oRenderer->_setDisplayLabels(false);
+        $form->oRenderer->_setDisplayLabels(true);
+        $result[] = $form->aORenderlets['editSpeakerModalBox']->majixShowBox();
+        $form->oRenderer->_setDisplayLabels(false);
 
-        $result[] = $formidable->aORenderlets['editSpeaker_skills']->majixCheckNone();
+        $result[] = $form->aORenderlets['editSpeakerModalBox__editSpeaker_skills']->majixCheckNone();
 
         $skills = $speaker->getSkills();
         /** @var Tx_Seminars_Model_Skill $skill */
         foreach ($skills as $skill) {
-            $result[] = $formidable->aORenderlets['editSpeaker_skills']
+            $result[] = $form->aORenderlets['editSpeakerModalBox__editSpeaker_skills']
                 ->majixCheckItem($skill->getUid());
         }
 
@@ -2034,24 +2074,23 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @param tx_ameosformidable $formidable
-     *        the FORMidable object for the AJAX call
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return array calls to be executed on the client
      */
-    public static function createNewCheckbox(tx_ameosformidable $formidable)
+    public static function createNewCheckbox(\tx_mkforms_forms_Base $form)
     {
-        $formData = $formidable->oMajixEvent->getParams();
+        $formData = $form->oMajixEvent->getParams();
         $validationErrors = self::validateCheckbox(
-            $formidable, array('title' => $formData['newCheckbox_title'])
+            $form, array('title' => $formData['newCheckbox_title'])
         );
         if (!empty($validationErrors)) {
             return array(
-                $formidable->majixExecJs(
+                $form->majixExecJs(
                     'alert("' . implode('\n', $validationErrors) . '");'
                 ),
             );
-        };
+        }
 
         /** @var Tx_Seminars_Model_Checkbox $checkbox */
         $checkbox = GeneralUtility::makeInstance(Tx_Seminars_Model_Checkbox::class);
@@ -2062,24 +2101,24 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
         $mapper->save($checkbox);
 
-        $editButtonConfiguration =& $formidable->_navConf(
-            $formidable->aORenderlets['editCheckboxButton']->sXPath
+        $editButtonConfiguration =& $form->_navConf(
+            $form->aORenderlets['editCheckboxButton']->sXPath
         );
         $editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
         $editButtonConfiguration['onclick']['userobj']['php'] = '
 			return Tx_Seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
 			';
-        $editButton = $formidable->_makeRenderlet(
+        $editButton = $form->_makeRenderlet(
             $editButtonConfiguration,
-            $formidable->aORenderlets['editCheckboxButton']->sXPath
+            $form->aORenderlets['editCheckboxButton']->sXPath
         );
         $editButton->includeScripts();
         $editButtonHTML = $editButton->_render();
 
         return array(
-            $formidable->aORenderlets['newCheckboxModalBox']->majixCloseBox(),
-            $formidable->majixExecJs(
-                'appendCheckboxInEditor(' . $checkbox->getUid() . ', "' .
+            $form->aORenderlets['newCheckboxModalBox']->majixCloseBox(),
+            $form->majixExecJs(
+                'TYPO3.seminars.appendCheckboxInEditor(' . $checkbox->getUid() . ', "' .
                     addcslashes($checkbox->getTitle(), '"\\') . '", {
 						"name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
 						"id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
@@ -2094,13 +2133,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @param tx_ameosformidable $formidable the FORMidable object
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return array calls to be executed on the client
      */
-    public static function updateCheckbox(tx_ameosformidable $formidable)
+    public static function updateCheckbox(\tx_mkforms_forms_Base $form)
     {
-        $formData = $formidable->oMajixEvent->getParams();
+        $formData = $form->oMajixEvent->getParams();
         $frontEndUser = self::getLoggedInUser();
         /** @var Tx_Seminars_Mapper_Checkbox $checkboxMapper */
         $checkboxMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
@@ -2109,26 +2148,26 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             /** @var Tx_Seminars_Model_Checkbox $checkbox */
             $checkbox = $checkboxMapper->find((int)$formData['editCheckbox_uid']);
         } catch (Exception $exception) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("The checkbox with the given UID does not exist.");'
             );
         }
 
         if ($checkbox->getOwner() !== $frontEndUser) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("You are not allowed to edit this checkbox.");'
             );
         }
 
         $validationErrors = self::validateCheckbox(
-            $formidable,
+            $form,
             array('title' => $formData['editCheckbox_title'])
         );
         if (!empty($validationErrors)) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("' . implode('\n', $validationErrors) . '");'
             );
-        };
+        }
 
         self::setCheckboxData($checkbox, 'editCheckbox_', $formData);
         $checkboxMapper->save($checkbox);
@@ -2136,9 +2175,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $htmlId = 'tx_seminars_pi1_seminars_checkbox_label_' . $checkbox->getUid();
 
         return array(
-            $formidable->aORenderlets['editCheckboxModalBox']->majixCloseBox(),
-            $formidable->majixExecJs(
-                'updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
+            $form->aORenderlets['editCheckboxModalBox']->majixCloseBox(),
+            $form->majixExecJs(
+                'TYPO3.seminars.updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
                     addcslashes($checkbox->getTitle(), '"\\') . '")'
             ),
         );
@@ -2147,8 +2186,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     /**
      * Validates the entered data for a checkbox.
      *
-     * @param tx_ameosformidable $formidable
-     *        the FORMidable object for the AJAX call
+     * @param \tx_mkforms_forms_Base $form
      * @param array[] $formData
      *        the entered form data, the key must be stripped of the
      *        "newCheckbox_"/"editCheckbox_" prefix
@@ -2156,11 +2194,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return string[] the error messages, will be empty if there are no validation errors
      */
     private static function validateCheckbox(
-        tx_ameosformidable $formidable, array $formData
+        \tx_mkforms_forms_Base $form, array $formData
     ) {
         $validationErrors = array();
         if (trim($formData['title']) == '') {
-            $validationErrors[] = $formidable->getLLLabel(
+            $validationErrors[] = $form->getConfigXML()->getLLLabel(
                 'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_emptyTitle'
             );
         }
@@ -2186,16 +2224,16 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     /**
      * Shows a modalbox containing a form for editing an existing checkbox record.
      *
-     * @param tx_ameosformidable $formidable the FORMidable object
+     * @param \tx_mkforms_forms_Base $form
      * @param int $checkboxUid the UID of the checkbox to edit, must be > 0
      *
      * @return array calls to be executed on the client
      */
     public static function showEditCheckboxModalBox(
-        tx_ameosformidable $formidable, $checkboxUid
+        \tx_mkforms_forms_Base $form, $checkboxUid
     ) {
         if ($checkboxUid <= 0) {
-            return $formidable->majixExecJs('alert("$checkboxUid must be >= 0.");');
+            return $form->majixExecJs('alert("$checkboxUid must be >= 0.");');
         }
 
         /** @var Tx_Seminars_Mapper_Checkbox $checkboxMapper */
@@ -2205,14 +2243,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             /** @var Tx_Seminars_Model_Checkbox $checkbox */
             $checkbox = $checkboxMapper->find((int)$checkboxUid);
         } catch (Tx_Oelib_Exception_NotFound $exception) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("A checkbox with the given UID does not exist.");'
             );
         }
 
         $frontEndUser = self::getLoggedInUser();
         if ($checkbox->getOwner() !== $frontEndUser) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("You are not allowed to edit this checkbox.");'
             );
         }
@@ -2223,12 +2261,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         );
 
         foreach ($fields as $key => $value) {
-            $formidable->aORenderlets['editCheckbox_' . $key]->setValue($value);
+            $form->aORenderlets['editCheckbox_' . $key]->setValue($value);
         }
 
-        $formidable->oRenderer->_setDisplayLabels(true);
-        $result = $formidable->aORenderlets['editCheckboxModalBox']->majixShowBox();
-        $formidable->oRenderer->_setDisplayLabels(false);
+        $form->oRenderer->_setDisplayLabels(true);
+        $result = $form->aORenderlets['editCheckboxModalBox']->majixShowBox();
+        $form->oRenderer->_setDisplayLabels(false);
 
         return $result;
     }
@@ -2238,16 +2276,15 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @param tx_ameosformidable $formidable
-     *        the FORMidable object for the AJAX call
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return array calls to be executed on the client
      */
-    public static function createNewTargetGroup(tx_ameosformidable $formidable)
+    public static function createNewTargetGroup(\tx_mkforms_forms_Base $form)
     {
-        $formData = $formidable->oMajixEvent->getParams();
+        $formData = $form->oMajixEvent->getParams();
         $validationErrors = self::validateTargetGroup(
-            $formidable,
+            $form,
             array(
                 'title' => $formData['newTargetGroup_title'],
                 'minimum_age' => $formData['newTargetGroup_minimum_age'],
@@ -2256,11 +2293,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         );
         if (!empty($validationErrors)) {
             return array(
-                $formidable->majixExecJs(
+                $form->majixExecJs(
                     'alert("' . implode('\n', $validationErrors) . '");'
                 ),
             );
-        };
+        }
 
         /** @var Tx_Seminars_Model_TargetGroup $targetGroup */
         $targetGroup = GeneralUtility::makeInstance(Tx_Seminars_Model_TargetGroup::class);
@@ -2271,25 +2308,25 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
         $mapper->save($targetGroup);
 
-        $editButtonConfiguration =& $formidable->_navConf(
-            $formidable->aORenderlets['editTargetGroupButton']->sXPath
+        $editButtonConfiguration =& $form->_navConf(
+            $form->aORenderlets['editTargetGroupButton']->sXPath
         );
         $editButtonConfiguration['name'] = 'editTargetGroupButton_' .
             $targetGroup->getUid();
         $editButtonConfiguration['onclick']['userobj']['php'] = '
 			return Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
 			';
-        $editButton = $formidable->_makeRenderlet(
+        $editButton = $form->_makeRenderlet(
             $editButtonConfiguration,
-            $formidable->aORenderlets['editTargetGroupButton']->sXPath
+            $form->aORenderlets['editTargetGroupButton']->sXPath
         );
         $editButton->includeScripts();
         $editButtonHTML = $editButton->_render();
 
         return array(
-            $formidable->aORenderlets['newTargetGroupModalBox']->majixCloseBox(),
-            $formidable->majixExecJs(
-                'appendTargetGroupInEditor(' . $targetGroup->getUid() . ', "' .
+            $form->aORenderlets['newTargetGroupModalBox']->majixCloseBox(),
+            $form->majixExecJs(
+                'TYPO3.seminars.appendTargetGroupInEditor(' . $targetGroup->getUid() . ', "' .
                     addcslashes($targetGroup->getTitle(), '"\\') . '", {
 						"name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
 						"id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
@@ -2304,13 +2341,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @param tx_ameosformidable $formidable the FORMidable object
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return array calls to be executed on the client
      */
-    public static function updateTargetGroup(tx_ameosformidable $formidable)
+    public static function updateTargetGroup(\tx_mkforms_forms_Base $form)
     {
-        $formData = $formidable->oMajixEvent->getParams();
+        $formData = $form->oMajixEvent->getParams();
         $frontEndUser = self::getLoggedInUser();
         /** @var Tx_Seminars_Mapper_TargetGroup $targetGroupMapper */
         $targetGroupMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
@@ -2319,19 +2356,19 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             /** @var Tx_Seminars_Model_TargetGroup $targetGroup */
             $targetGroup = $targetGroupMapper->find((int)$formData['editTargetGroup_uid']);
         } catch (Exception $exception) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("The target group with the given UID does not exist.");'
             );
         }
 
         if ($targetGroup->getOwner() !== $frontEndUser) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("You are not allowed to edit this target group.");'
             );
         }
 
         $validationErrors = self::validateTargetGroup(
-            $formidable,
+            $form,
             array(
                 'title' => $formData['editTargetGroup_title'],
                 'minimum_age' => $formData['editTargetGroup_minimum_age'],
@@ -2339,10 +2376,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             )
         );
         if (!empty($validationErrors)) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("' . implode('\n', $validationErrors) . '");'
             );
-        };
+        }
 
         self::setTargetGroupData($targetGroup, 'editTargetGroup_', $formData);
         $targetGroupMapper->save($targetGroup);
@@ -2350,9 +2387,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $htmlId = 'tx_seminars_pi1_seminars_target_group_label_' . $targetGroup->getUid();
 
         return array(
-            $formidable->aORenderlets['editTargetGroupModalBox']->majixCloseBox(),
-            $formidable->majixExecJs(
-                'updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
+            $form->aORenderlets['editTargetGroupModalBox']->majixCloseBox(),
+            $form->majixExecJs(
+                'TYPO3.seminars.updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
                     addcslashes($targetGroup->getTitle(), '"\\') . '")'
             ),
         );
@@ -2361,8 +2398,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     /**
      * Validates the entered data for a target group.
      *
-     * @param tx_ameosformidable $formidable
-     *        the FORMidable object for the AJAX call
+     * @param \tx_mkforms_forms_Base $form
      * @param array[] $formData
      *        the entered form data, the key must be stripped of the
      *        "newTargetGroup_"/"editTargetGroup_" prefix
@@ -2370,11 +2406,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return string[] the error messages, will be empty if there are no validation errors
      */
     private static function validateTargetGroup(
-        tx_ameosformidable $formidable, array $formData
+        \tx_mkforms_forms_Base $form, array $formData
     ) {
         $validationErrors = array();
         if (trim($formData['title']) == '') {
-            $validationErrors[] = $formidable->getLLLabel(
+            $validationErrors[] = $form->getConfigXML()->getLLLabel(
                 'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_emptyTitle'
             );
         }
@@ -2384,16 +2420,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             $minimumAge = $formData['minimum_age'];
             $maximumAge = $formData['maximum_age'];
 
-            if (($minimumAge > 0) && ($maximumAge > 0)) {
-                if ($minimumAge > $maximumAge) {
-                    $validationErrors[] = $formidable->getLLLabel(
-                        'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:' .
-                            'message_targetGroupMaximumAgeSmallerThanMinimumAge'
-                    );
-                }
+            if (($minimumAge > 0) && ($maximumAge > 0) && ($minimumAge > $maximumAge)) {
+                $validationErrors[] = $form->getConfigXML()->getLLLabel(
+                    'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:' .
+                        'message_targetGroupMaximumAgeSmallerThanMinimumAge'
+                );
             }
         } else {
-            $validationErrors[] = $formidable->getLLLabel(
+            $validationErrors[] = $form->getConfigXML()->getLLLabel(
                 'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xml:message_noTargetGroupAgeNumber'
             );
         }
@@ -2425,17 +2459,17 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * Shows a modalbox containing a form for editing an existing target group
      * record.
      *
-     * @param tx_ameosformidable $formidable the FORMidable object
+     * @param \tx_mkforms_forms_Base $form
      * @param int $targetGroupUid
      *        the UID of the target group to edit, must be > 0
      *
      * @return array calls to be executed on the client
      */
     public static function showEditTargetGroupModalBox(
-        tx_ameosformidable $formidable, $targetGroupUid
+        \tx_mkforms_forms_Base $form, $targetGroupUid
     ) {
         if ($targetGroupUid <= 0) {
-            return $formidable->majixExecJs('alert("$targetGroupUid must be >= 0.");');
+            return $form->majixExecJs('alert("$targetGroupUid must be >= 0.");');
         }
 
         /** @var Tx_Seminars_Mapper_TargetGroup $targetGroupMapper */
@@ -2445,14 +2479,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             /** @var Tx_Seminars_Model_TargetGroup $targetGroup */
             $targetGroup = $targetGroupMapper->find((int)$targetGroupUid);
         } catch (Tx_Oelib_Exception_NotFound $exception) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("A target group with the given UID does not exist.");'
             );
         }
 
         $frontEndUser = self::getLoggedInUser();
         if ($targetGroup->getOwner() !== $frontEndUser) {
-            return $formidable->majixExecJs(
+            return $form->majixExecJs(
                 'alert("You are not allowed to edit this target group.");'
             );
         }
@@ -2470,12 +2504,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         );
 
         foreach ($fields as $key => $value) {
-            $formidable->aORenderlets['editTargetGroup_' . $key]->setValue($value);
+            $form->aORenderlets['editTargetGroup_' . $key]->setValue($value);
         }
 
-        $formidable->oRenderer->_setDisplayLabels(true);
-        $result = $formidable->aORenderlets['editTargetGroupModalBox']->majixShowBox();
-        $formidable->oRenderer->_setDisplayLabels(false);
+        $form->oRenderer->_setDisplayLabels(true);
+        $result = $form->aORenderlets['editTargetGroupModalBox']->majixShowBox();
+        $form->oRenderer->_setDisplayLabels(false);
 
         return $result;
     }
@@ -2554,7 +2588,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     public function getPreselectedOrganizer()
     {
-        $availableOrganizers = $this->populateListOrganizers(array());
+        $availableOrganizers = $this->populateListOrganizers();
         if (count($availableOrganizers) != 1) {
             return 0;
         }
@@ -2618,13 +2652,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     private function removeCategoryIfNecessary(array &$formFields)
     {
-        if (!in_array('categories', $formFields)) {
+        if (!in_array('categories', $formFields, true)) {
             return;
         }
 
         $frontEndUser = self::getLoggedInUser();
         if ($frontEndUser->hasDefaultCategories()) {
-            $categoryKey = array_search('categories', $formFields);
+            $categoryKey = array_search('categories', $formFields, true);
             unset($formFields[$categoryKey]);
         }
     }

@@ -16,9 +16,17 @@
 Das Plugin konfigurieren
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Inkludieren Sie zuerst das static extension template “Seminars” in
-Ihr Template, in Ihrem Seitentemplate unter “Include static (from
-extensions)”.**
+**Inkludieren Sie zuerst das statische Extension-Template
+*MKFORMS - Basics (mkforms)* in
+in Ihrem Seitentemplate unter “Include static (from extensions)”.**
+
+**Inkludieren Sie danach das statische Extension-Template *Seminars* in
+in Ihrem Seitentemplate.**
+Wichtig ist, dass Sie dieses Template *nach* dem MKFORMS-Template einbinden.
+
+Wenn Ihre Seite nicht ohnehin schon jQuery einbindet, binden Sie noch
+folgendes statisches Template ein::
+  MKFORMS JQuery-JS (mkforms)
 
 Dann konfigurieren Sie das Plugin in Ihrem TS template setup oder in
 den Plugin Flexforms. Die Eigenschaften sind in der Referenz

@@ -15,9 +15,6 @@
  * This file provides some JavaScript functions for the seminars front-end
  * editor and the registration form.
  *
- * @package TYPO3
- * @subpackage tx_seminars
- *
  * @author Saskia Metzler <saskia@merlin.owl.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
@@ -35,176 +32,163 @@ TYPO3.seminars = {};
  *        localized confirm message for whether really to mark an attachment for
  *        deletion
  */
-function markAttachmentAsDeleted(listItemId, confirmMessage) {
-	var listItem = document.getElementById(listItemId);
-	var deleteButton = document.getElementById(listItemId + "_button");
+TYPO3.seminars.markAttachmentAsDeleted = function (listItemId, confirmMessage) {
+    var listItem = document.getElementById(listItemId);
+    var deleteButton = document.getElementById(listItemId + '_button');
 
-	if (confirm(confirmMessage)) {
-		document.getElementById("tx_seminars_pi1_seminars_delete_attached_files").value
-			+= "," + listItem.firstChild.nodeValue;
-		listItem.setAttribute("class", "deleted");
-		deleteButton.disabled = true;
-	}
-}
+    if (confirm(confirmMessage)) {
+        document.getElementById('tx_seminars_pi1_seminars_delete_attached_files').value += ',' + listItem.firstChild.nodeValue;
+        listItem.setAttribute('class', 'deleted');
+        deleteButton.disabled = true;
+    }
+};
 
 /**
  * Collects the names from the first/last name field pairs and compiles/inserts
  * them into the human-readable "additional attendees" field and the machine-readable
  * "structured attendees" field.
  */
-function compileNames() {
-	var humanReadableField = $("tx_seminars_pi1_registration_editor_attendees_names");
-	var machineReadableField = $("tx_seminars_pi1_registration_editor_structured_attendees_names");
+TYPO3.seminars.compileNames = function () {
+    var humanReadableField = jQuery('#tx_seminars_pi1_registration_editor__attendees_names')[0];
+    var machineReadableField = jQuery('#tx_seminars_pi1_registration_editor__structured_attendees_names')[0];
 
-	if (!humanReadableField || !machineReadableField) {
-		 return;
-	}
+    var separateNamesElement = jQuery('#tx_seminars_pi1_registration_editor_separate_names');
 
-	var firstNames = $$("#tx_seminars_pi1_registration_editor_separate_names "
-		+ ".tx_seminars_pi1_registration_editor_first_name");
-	var lastNames = $$("#tx_seminars_pi1_registration_editor_separate_names "
-		+ ".tx_seminars_pi1_registration_editor_last_name");
-	var positions = $$("#tx_seminars_pi1_registration_editor_separate_names "
-		+ ".tx_seminars_pi1_registration_editor_position");
-	var eMailAddresses = $$("#tx_seminars_pi1_registration_editor_separate_names "
-		+ ".tx_seminars_pi1_registration_editor_attendee_email");
+    var firstNames = separateNamesElement.find('.tx_seminars_pi1_registration_editor_first_name');
+    var lastNames = separateNamesElement.find('.tx_seminars_pi1_registration_editor_last_name');
+    var positions = separateNamesElement.find('.tx_seminars_pi1_registration_editor_position');
+    var eMailAddresses = separateNamesElement.find('.tx_seminars_pi1_registration_editor_attendee_email');
 
-	if (firstNames.length != lastNames.length) {
-		return;
-	}
+    var humanReadableNames = '';
+    var machineReadableNames = [];
 
-	var humanReadableNames = "";
-	var machineReadableNames = [];
+    var numberOfLines = firstNames.length;
+    if (numberOfLines === 0) {
+        return;
+    }
 
-	var numberOfLines = firstNames.length;
+    for (var i = 0; i < numberOfLines; i++) {
+        var firstName = jQuery.trim(firstNames[i].value);
+        var lastName = jQuery.trim(lastNames[i].value);
 
-	for (var i = 0; i < numberOfLines; i++) {
-		var firstName = firstNames[i].value.strip();
-		var lastName = lastNames[i].value.strip();
+        if (firstName === '' && lastName === '') {
+            continue;
+        }
 
-		if ((firstName.empty()) && (lastName.empty())) {
-			continue;
-		}
+        var position = '';
+        if (i < positions.length) {
+            position = jQuery.trim(positions[i].value);
+        }
 
-		var position = "";
-		if (i < positions.length) {
-			position = positions[i].value.strip();
-		}
+        var eMailAddress = '';
+        if (i < eMailAddresses.length) {
+            eMailAddress = jQuery.trim(eMailAddresses[i].value);
+        }
 
-		var eMailAddress = "";
-		if (i < eMailAddresses.length) {
-			eMailAddress = eMailAddresses[i].value.strip();
-		}
+        var fullName = jQuery.trim(firstName + ' ' + lastName);
+        if (humanReadableNames !== '') {
+            humanReadableNames += "\r\n";
+        }
+        humanReadableNames += fullName;
 
-		var fullName = (firstName + " " + lastName).strip();
-		if (!humanReadableNames.empty()) {
-			humanReadableNames += "\r\n";
-		}
-		humanReadableNames += fullName;
+        if (position !== '') {
+            humanReadableNames += ', ' + position;
+        }
+        if (eMailAddress !== '') {
+            humanReadableNames += ', ' + eMailAddress;
+        }
 
-		if (!position.empty()) {
-			humanReadableNames += ", " + position;
-		}
-		if (!eMailAddress.empty()) {
-			humanReadableNames += ", " + eMailAddress;
-		}
+        machineReadableNames[i] = [firstName, lastName, position, eMailAddress];
+    }
 
-		machineReadableNames[i] = [firstName, lastName, position, eMailAddress];
-	}
-
-	humanReadableField.value = humanReadableNames;
-	machineReadableField.value = machineReadableNames.toJSON();
-}
+    humanReadableField.value = humanReadableNames;
+    machineReadableField.value = JSON.stringify(machineReadableNames);
+};
 
 /**
  * Restores the separate name fields from the hidden field with the names
  * in a JSON-encoded array.
  */
-function restoreSeparateNameFields() {
-	var machineReadableField = $("tx_seminars_pi1_registration_editor_structured_attendees_names");
+TYPO3.seminars.restoreSeparateNameFields = function () {
+    var machineReadableField = jQuery('#tx_seminars_pi1_registration_editor__structured_attendees_names')[0];
 
-	if (!machineReadableField || machineReadableField.value.empty()
-		|| !machineReadableField.value.isJSON()) {
-		return;
-	}
+    if (!machineReadableField || machineReadableField.value === '') {
+        return;
+    }
 
-	var firstNames = $$("#tx_seminars_pi1_registration_editor_separate_names "
-		+ ".tx_seminars_pi1_registration_editor_first_name");
-	var lastNames = $$("#tx_seminars_pi1_registration_editor_separate_names "
-		+ ".tx_seminars_pi1_registration_editor_last_name");
-	var positions = $$("#tx_seminars_pi1_registration_editor_separate_names "
-		+ ".tx_seminars_pi1_registration_editor_position");
-	var eMailAddresses = $$("#tx_seminars_pi1_registration_editor_separate_names "
-		+ ".tx_seminars_pi1_registration_editor_attendee_email");
+    var separateNamesElement = jQuery('#tx_seminars_pi1_registration_editor_separate_names');
+    var firstNames = separateNamesElement.find('.tx_seminars_pi1_registration_editor_first_name');
+    var lastNames = separateNamesElement.find('.tx_seminars_pi1_registration_editor_last_name');
+    var positions = separateNamesElement.find('.tx_seminars_pi1_registration_editor_position');
+    var eMailAddresses = separateNamesElement.find('.tx_seminars_pi1_registration_editor_attendee_email');
 
-	if (firstNames.length != lastNames.length) {
-		return;
-	}
+    if (firstNames.length != lastNames.length) {
+        return;
+    }
 
-	var allNames = machineReadableField.value.evalJSON(true);
-	var numberOfNames = Math.min(firstNames.length, allNames.length);
+    var allNames = JSON.parse(machineReadableField.value);
+    var numberOfNames = Math.min(firstNames.length, allNames.length);
 
-	for (var i = 0; i < numberOfNames; i++) {
-		firstNames[i].value = allNames[i][0];
-		lastNames[i].value = allNames[i][1];
-		if (positions[i]) {
-			positions[i].value = allNames[i][2];
-		}
-		if (eMailAddresses[i]) {
-			eMailAddresses[i].value = allNames[i][3];
-		}
-	}
-}
+    for (var i = 0; i < numberOfNames; i++) {
+        firstNames[i].value = allNames[i][0];
+        lastNames[i].value = allNames[i][1];
+        if (positions[i]) {
+            positions[i].value = allNames[i][2];
+        }
+        if (eMailAddresses[i]) {
+            eMailAddresses[i].value = allNames[i][3];
+        }
+    }
+};
 
 /**
  * Adds or drops name fields to match the number of selected seats.
  */
-function fixNameFieldsNumber() {
-	var neededNameLines = getNumberOfNeededNameFields();
-	var nameLines = $$("#tx_seminars_pi1_registration_editor_separate_names "
-		+ ".tx_seminars_pi1_registration_editor_name_line");
+TYPO3.seminars.fixNameFieldsNumber = function () {
+    var neededNameLines = TYPO3.seminars.getNumberOfNeededNameFields();
+    var nameLines = jQuery('#tx_seminars_pi1_registration_editor_separate_names .tx_seminars_pi1_registration_editor_name_line');
 
-	if (nameLines.length < neededNameLines) {
-		var nameLineTemplate =
-			$$("#tx_seminars_pi1_registration_editor_name_template "
-				+".tx_seminars_pi1_registration_editor_name_line")[0];
-		var nameLinesContainer =
-			$("tx_seminars_pi1_registration_editor_separate_names");
+    if (nameLines.length < neededNameLines) {
+        var nameLineTemplate = jQuery('#tx_seminars_pi1_registration_editor_name_template .tx_seminars_pi1_registration_editor_name_line')[0];
+        if (!nameLineTemplate) {
+            return;
+        }
 
-		for (var i = nameLines.length; i < neededNameLines; i++) {
-			nameLinesContainer.appendChild(nameLineTemplate.cloneNode(true));
-		}
-	} else if (nameLines.length > neededNameLines) {
-		for (var i = nameLines.length; i > neededNameLines; i--) {
-			nameLines[i - 1].remove();
-		}
-	}
-}
+        var nameLinesContainer = jQuery('#tx_seminars_pi1_registration_editor_separate_names');
+
+        for (var i = nameLines.length; i < neededNameLines; i++) {
+            nameLinesContainer.append(nameLineTemplate.cloneNode(true));
+        }
+    } else if (nameLines.length > neededNameLines) {
+        for (var j = nameLines.length; j > neededNameLines; j--) {
+            nameLines[j - 1].remove();
+        }
+    }
+};
 
 /**
  * Gets the number of needed name fields.
  *
  * @return {Number} the number of needed name fields, will be >= 0
  */
-function getNumberOfNeededNameFields() {
-	var seatsSelector = $("tx_seminars_pi1_registration_editor_seats");
-	if (!seatsSelector) {
-		return 0;
-	}
+TYPO3.seminars.getNumberOfNeededNameFields = function () {
+    var seatsElements = jQuery('#tx_seminars_pi1_registration_editor__seats');
+    if (seatsElements.length === 0) {
+        return 0;
+    }
 
-	var seats = parseInt(seatsSelector.value);
+    var seats = parseInt(seatsElements[0].value);
 
-	var myselfSelector
-		= $("tx_seminars_pi1_registration_editor_registered_themselves");
-	var selfSeat;
-	if (myselfSelector) {
-		selfSeat = myselfSelector.checked ? 1 : 0;
-	} else {
-		selfSeat = 1;
-	}
+    var myselfSelector = jQuery('#tx_seminars_pi1_registration_editor__registered_themselves');
+    var selfSeat;
+    if (myselfSelector.length > 0) {
+        selfSeat = parseInt(myselfSelector[0].value);
+    } else {
+        selfSeat = 1;
+    }
 
-	return seats - selfSeat;
-}
+    return seats - selfSeat;
+};
 
 /**
  * Updates an auxiliary record after it has been edited in the FE editor.
@@ -214,14 +198,14 @@ function getNumberOfNeededNameFields() {
  *        be empty
  * @param {String} title the title of the auxiliary record, must not be empty
  */
-function updateAuxiliaryRecordInEditor(htmlId, title) {
-	var label = $(htmlId);
-	if (!label) {
-		return;
-	}
+TYPO3.seminars.updateAuxiliaryRecordInEditor = function (htmlId, title) {
+    var labels = jQuery('#' + htmlId);
+    if (labels.length === 0) {
+        return;
+    }
 
-	label.innerHTML = title;
-}
+    labels[0].innerHTML = title;
+};
 
 /**
  * Appends an auxiliary record as a checkbox so that it is available for
@@ -234,48 +218,46 @@ function updateAuxiliaryRecordInEditor(htmlId, title) {
  *        e.g. "place", "speaker" or "tutor".
  * @param {Array} buttonData the data of the edit button of the record
  */
-function appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonData) {
-	var container = $$("#tx_seminars_pi1_seminars_" + htmlName + " tbody")[0];
-	if (!container) {
-		return;
-	}
-	var nextOptionNumber
-		= $$("#tx_seminars_pi1_seminars_" + htmlName + " input").length;
+TYPO3.seminars.appendAuxiliaryRecordInEditor = function (uid, title, htmlName, buttonData) {
+    var container = jQuery('#tx_seminars_pi1_seminars_' + htmlName + ' tbody')[0];
+    if (!container) {
+        return;
+    }
+    var nextOptionNumber = jQuery('#tx_seminars_pi1_seminars_' + htmlName + ' input').length;
 
-	var id = "tx_seminars_pi1_seminars_" + htmlName + "_" + nextOptionNumber;
-	var input = new Element("input", {
-		"id": id, "type": "checkbox", "value": uid,
-		"name" :
-			"tx_seminars_pi1_seminars[" + htmlName + "][" + nextOptionNumber + "]",
-		"class" : "tx-seminars-pi1-event-editor-checkbox"
-	});
-	var labelId = "tx_seminars_pi1_seminars_" + htmlName + "_label_" + uid;
-	var label = new Element("label", {"for": id, "id": labelId});
-	label.appendChild(document.createTextNode(title));
+    var id = 'tx_seminars_pi1_seminars_' + htmlName + '_' + nextOptionNumber;
+    var input = new Element('input', {
+        'id': id, 'type': 'checkbox', 'value': uid,
+        'name': 'tx_seminars_pi1_seminars[' + htmlName + '][' + nextOptionNumber + ']',
+        'class': 'tx-seminars-pi1-event-editor-checkbox'
+    });
+    var labelId = 'tx_seminars_pi1_seminars_' + htmlName + '_label_' + uid;
+    var label = new Element('label', {'for': id, 'id': labelId});
+    label.appendChild(document.createTextNode(title));
 
-	var button = new Element(
-		"input",
-		{
-			"type": "button",
-			"name": buttonData.name,
-			"value": buttonData.value,
-			"id": buttonData.id,
-			"class": "tx-seminars-pi1-event-editor-edit-button"
-		}
-	);
+    var button = new Element(
+        'input',
+        {
+            'type': 'button',
+            'name': buttonData.name,
+            'value': buttonData.value,
+            'id': buttonData.id,
+            'class': 'tx-seminars-pi1-event-editor-edit-button'
+        }
+    );
 
-	var tableRow = new Element("tr");
-	var tableColumnLeft = new Element("td");
-	var tableColumnRight = new Element("td");
+    var tableRow = new Element('tr');
+    var tableColumnLeft = new Element('td');
+    var tableColumnRight = new Element('td');
 
-	tableColumnLeft.appendChild(input);
-	tableColumnLeft.appendChild(label);
-	tableColumnRight.appendChild(button);
-	tableRow.appendChild(tableColumnLeft);
-	tableRow.appendChild(tableColumnRight);
+    tableColumnLeft.appendChild(input);
+    tableColumnLeft.appendChild(label);
+    tableColumnRight.appendChild(button);
+    tableRow.appendChild(tableColumnLeft);
+    tableRow.appendChild(tableColumnRight);
 
-	container.appendChild(tableRow);
-}
+    container.appendChild(tableRow);
+};
 
 /**
  * Appends a place so that it is available for selection in the FE editor.
@@ -284,9 +266,9 @@ function appendAuxiliaryRecordInEditor(uid, title, htmlName, buttonData) {
  * @param {String} title the title of the place, must not be empty
  * @param {Array} buttonData the data of the edit button of the place
  */
-function appendPlaceInEditor(uid, title, buttonData) {
-	appendAuxiliaryRecordInEditor(uid, title, "place", buttonData);
-}
+TYPO3.seminars.appendPlaceInEditor = function (uid, title, buttonData) {
+    TYPO3.seminars.appendAuxiliaryRecordInEditor(uid, title, "place", buttonData);
+};
 
 /**
  * Appends a speaker so that it is available for selection in the FE editor.
@@ -295,12 +277,12 @@ function appendPlaceInEditor(uid, title, buttonData) {
  * @param {String} title the name of the speaker, must not be empty
  * @param {Array} buttonData the data of the edit button of the speaker
  */
-function appendSpeakerInEditor(uid, title, buttonData) {
-	appendAuxiliaryRecordInEditor(uid, title, "speakers", buttonData);
-	appendAuxiliaryRecordInEditor(uid, title, "leaders", buttonData);
-	appendAuxiliaryRecordInEditor(uid, title, "partners", buttonData);
-	appendAuxiliaryRecordInEditor(uid, title, "tutors", buttonData);
-}
+TYPO3.seminars.appendSpeakerInEditor = function (uid, title, buttonData) {
+    TYPO3.seminars.appendAuxiliaryRecordInEditor(uid, title, 'speakers', buttonData);
+    TYPO3.seminars.appendAuxiliaryRecordInEditor(uid, title, 'leaders', buttonData);
+    TYPO3.seminars.appendAuxiliaryRecordInEditor(uid, title, 'partners', buttonData);
+    TYPO3.seminars.appendAuxiliaryRecordInEditor(uid, title, 'tutors', buttonData);
+};
 
 /**
  * Appends a checkbox so that it is available for selection in the FE editor.
@@ -309,9 +291,9 @@ function appendSpeakerInEditor(uid, title, buttonData) {
  * @param {String} title the title of the checkbox, must not be empty
  * @param {Array} buttonData the data of the edit button of the checkbox
  */
-function appendCheckboxInEditor(uid, title, buttonData) {
-	appendAuxiliaryRecordInEditor(uid, title, "checkboxes", buttonData);
-}
+TYPO3.seminars.appendCheckboxInEditor = function (uid, title, buttonData) {
+    TYPO3.seminars.appendAuxiliaryRecordInEditor(uid, title, 'checkboxes', buttonData);
+};
 
 /**
  * Appends a target group so that it is available for selection in the FE editor.
@@ -320,47 +302,47 @@ function appendCheckboxInEditor(uid, title, buttonData) {
  * @param {String} title the title of the target group, must not be empty
  * @param {Array} buttonData the data of the edit button of the target group
  */
-function appendTargetGroupInEditor(uid, title, buttonData) {
-	appendAuxiliaryRecordInEditor(uid, title, "target_groups", buttonData);
-}
+TYPO3.seminars.appendTargetGroupInEditor = function (uid, title, buttonData) {
+    TYPO3.seminars.appendAuxiliaryRecordInEditor(uid, title, 'target_groups', buttonData);
+};
 
 /**
  * Clears the selection of the search widget.
  */
-function clearSearchWidgetFields() {
-	var prefix = 'tx_seminars_pi1';
-	var textElements = ['sword', 'search_age', 'price_from', 'price_to'];
-	for (var i = 0; i < textElements.length; i++) {
-		var textElement = document.getElementById(prefix + '_' + textElements[i]);
-		if (textElement) {
-			textElement.value = null;
-		}
-	}
+TYPO3.seminars.clearSearchWidgetFields = function () {
+    var prefix = 'tx_seminars_pi1';
+    var textElements = ['sword', 'search_age', 'price_from', 'price_to'];
+    for (var i = 0; i < textElements.length; i++) {
+        var textElement = document.getElementById(prefix + '_' + textElements[i]);
+        if (textElement) {
+            textElement.value = null;
+        }
+    }
 
-	var suffixes = ['from_day', 'from_month', 'from_year', 'to_day', 'to_month',
-		'to_year', 'event_type', 'language', 'country', 'city', 'place', 'date',
-		'organizer', 'categories'
-	];
+    var suffixes = ['from_day', 'from_month', 'from_year', 'to_day', 'to_month',
+        'to_year', 'event_type', 'language', 'country', 'city', 'place', 'date',
+        'organizer', 'categories'
+    ];
 
-	for (var i = 0; i < suffixes.length; i++) {
-		var suffix = suffixes[i];
-		var element = document.getElementById(prefix + '-' + suffix);
-		if (element) {
-			for (var j = 0; j < element.options.length; j++) {
-				element.options[j].selected = false;
-			}
-		}
-	}
-}
+    for (var j = 0; j < suffixes.length; j++) {
+        var suffix = suffixes[j];
+        var element = document.getElementById(prefix + '-' + suffix);
+        if (element) {
+            for (var k = 0; k < element.options.length; k++) {
+                element.options[k].selected = false;
+            }
+        }
+    }
+};
 
 /**
  * Converts the links that have a data-method="post" to JavaScript-powered on-the-fly forms.
  */
-TYPO3.seminars.convertActionLinks = function() {
-	var linkElements = document.querySelectorAll('a[data-method]');
-	for (var i = 0; i < linkElements.length; i++) {
-		linkElements[i].onclick = TYPO3.seminars.executeLinkAction;
-	}
+TYPO3.seminars.convertActionLinks = function () {
+    var linkElements = document.querySelectorAll('a[data-method]');
+    for (var i = 0; i < linkElements.length; i++) {
+        linkElements[i].onclick = TYPO3.seminars.executeLinkAction;
+    }
 };
 
 /**
@@ -368,44 +350,92 @@ TYPO3.seminars.convertActionLinks = function() {
  *
  * @param {MouseEvent} event
  */
-TYPO3.seminars.executeLinkAction = function(event) {
-	var linkElement = event.target
-	var linkHref = linkElement.getAttribute('href');
+TYPO3.seminars.executeLinkAction = function (event) {
+    var linkElement = event.target;
+    var linkHref = linkElement.getAttribute('href');
 
-	TYPO3.seminars.disableAllActionLinks();
+    TYPO3.seminars.disableAllActionLinks();
 
-	var formElement = document.createElement("form");
-	formElement.style.display = 'none';
-	formElement.setAttribute('method', 'post');
-	formElement.setAttribute('action', linkHref);
+    var formElement = document.createElement("form");
+    formElement.style.display = 'none';
+    formElement.setAttribute('method', 'post');
+    formElement.setAttribute('action', linkHref);
 
-	for (var j = 0; j < linkElement.attributes.length; j++) {
-		var attribute = linkElement.attributes[j];
-		var name = attribute.name;
-		if (/^data-post-/.test(name)) {
-			var dataParts = name.split('-');
-			var inputElement = document.createElement('input');
-			inputElement.setAttribute('type', 'hidden');
-			inputElement.setAttribute('name', dataParts[2] + '[' + dataParts[3] + ']');
-			inputElement.setAttribute('value', attribute.value);
-			formElement.appendChild(inputElement);
-		}
-	}
+    for (var j = 0; j < linkElement.attributes.length; j++) {
+        var attribute = linkElement.attributes[j];
+        var name = attribute.name;
+        if (/^data-post-/.test(name)) {
+            var dataParts = name.split('-');
+            var inputElement = document.createElement('input');
+            inputElement.setAttribute('type', 'hidden');
+            inputElement.setAttribute('name', dataParts[2] + '[' + dataParts[3] + ']');
+            inputElement.setAttribute('value', attribute.value);
+            formElement.appendChild(inputElement);
+        }
+    }
 
-	linkElement.appendChild(formElement);
-	formElement.submit();
+    linkElement.appendChild(formElement);
+    formElement.submit();
 
-	return false;
+    return false;
 };
 
 /**
  * Disables all action links (so that they cannot be clicked again once an action is being processed).
  */
-TYPO3.seminars.disableAllActionLinks = function() {
-	var linkElements = document.querySelectorAll('a[data-method]');
-	for (var i = 0; i < linkElements.length; i++) {
-		linkElements[i].onclick = function () {
-			return false;
-		};
-	}
+TYPO3.seminars.disableAllActionLinks = function () {
+    var linkElements = document.querySelectorAll('a[data-method]');
+    for (var i = 0; i < linkElements.length; i++) {
+        linkElements[i].onclick = function () {
+            return false;
+        };
+    }
 };
+
+/**
+ * Initializes the search widget.
+ */
+TYPO3.seminars.initializeSearchWidget = function () {
+    if (jQuery('.tx-seminars-pi1-selectorwidget').length === 0) {
+        return;
+    }
+
+    jQuery('#tx-seminars-pi1-clear-search-widget').click(function () {
+        TYPO3.seminars.clearSearchWidgetFields();
+    });
+};
+
+/**
+ * This method updates the UI if anything corresponding the number of seats has changed.
+ */
+TYPO3.seminars.updateAttendees = function () {
+    TYPO3.seminars.fixNameFieldsNumber();
+    TYPO3.seminars.compileNames();
+};
+
+/**
+ * Initializes the registration form.
+ */
+TYPO3.seminars.initializeRegistrationForm = function () {
+    var registrationForm = jQuery('#tx-seminars-pi1-registration-form');
+    if (registrationForm.length === 0) {
+        return;
+    }
+
+    registrationForm.find('#tx_seminars_pi1_registration_editor_separate_names').on('blur', 'input', TYPO3.seminars.compileNames);
+    registrationForm.find('#tx_seminars_pi1_registration_editor__seats').change(TYPO3.seminars.updateAttendees);
+    registrationForm.find('#tx_seminars_pi1_registration_editor__registered_themselves_checkbox').click(TYPO3.seminars.updateAttendees);
+
+    TYPO3.seminars.fixNameFieldsNumber();
+    TYPO3.seminars.restoreSeparateNameFields();
+    TYPO3.seminars.compileNames();
+};
+
+jQuery(document).ready(function () {
+    if (jQuery('.tx-seminars-pi1').length === 0) {
+        return;
+    }
+
+    TYPO3.seminars.initializeSearchWidget();
+    TYPO3.seminars.initializeRegistrationForm();
+});

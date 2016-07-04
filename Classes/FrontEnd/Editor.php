@@ -12,19 +12,15 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-
 /**
  * This class is the base class for any kind of front-end editor, for example the event editor or the registration editor.
- *
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
 {
     /**
-     * @var tx_ameosformidable object that creates the form
+     * @var \tx_mkforms_forms_Base
      */
     private $formCreator = null;
 
@@ -36,7 +32,7 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
     private $objectUid = 0;
 
     /**
-     * @var array[] the FORMidable form configuration
+     * @var array[] the form configuration
      */
     private $formConfiguration = array();
 
@@ -49,30 +45,6 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
      * @var array this is used to fake form values for testing
      */
     private $fakedFormValues = array();
-
-    /**
-     * The constructor. Initializes the TypoScript configuration, initializes
-     * the flex forms, gets the template HTML code, sets the localized labels
-     * and set the CSS classes from TypoScript.
-     *
-     * @param array $configuration TypoScript configuration for the plugin
-     * @param ContentObjectRenderer $contentObjectRenderer the parent cObj content, needed for the flexforms
-     */
-    public function __construct(array $configuration, ContentObjectRenderer $contentObjectRenderer)
-    {
-        parent::__construct($configuration, $contentObjectRenderer);
-
-        require_once(PATH_formidableapi);
-    }
-
-    /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->formCreator);
-        parent::__destruct();
-    }
 
     /**
      * Sets the current UID.
@@ -98,9 +70,9 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
     }
 
     /**
-     * Sets the FORMidable form configuration.
+     * Sets the form configuration.
      *
-     * @param array[] $formConfiguration the FORMidable form configuration, must not be empty
+     * @param array[] $formConfiguration the form configuration, must not be empty
      *
      * @return void
      */
@@ -112,8 +84,7 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
     /**
      * Returns the FORMidable instance.
      *
-     * @return tx_ameosformidable FORMidable instance or NULL if the test mode
-     *                            is set
+     * @return \tx_mkforms_forms_Base|null
      */
     public function getFormCreator()
     {
@@ -164,7 +135,7 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
      *
      * This function does nothing if this instance is running in test mode.
      *
-     * @return tx_ameosformidable FORMidable instance or NULL if the test mode is set
+     * @return \tx_mkforms_forms_Base|null
      *
      * @throws BadMethodCallException
      */
@@ -176,17 +147,28 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
 
         if (empty($this->formConfiguration)) {
             throw new BadMethodCallException(
-                'Please define the FORMidable form configuration to use via $this->setFormConfiguration().', 1333293139
+                'Please define the form configuration to use via $this->setFormConfiguration().', 1333293139
             );
         }
 
-        /** @var tx_ameosformidable $formCreator */
-        $formCreator = GeneralUtility::makeInstance('tx_ameosformidable');
-        $formCreator->initFromTs(
-            $this, $this->formConfiguration, ($this->getObjectUid() > 0) ? $this->getObjectUid() : false
+        \tx_rnbase::load(\tx_mkforms_forms_Factory::class);
+        $form = \tx_mkforms_forms_Factory::createForm(null);
+
+        /**
+         * Configuration instance for plugin data. Necessary for LABEL translation.
+         * @var \tx_rnbase_configurations $pluginConfiguration
+         */
+        $pluginConfiguration = \tx_rnbase::makeInstance(tx_rnbase_configurations::class);
+        $pluginConfiguration->init($this->conf, $this->cObj, 'mkforms', 'mkforms');
+
+        // Initialize the form from TypoScript data and provide configuration for the plugin.
+        $form->initFromTs(
+            $this, $this->formConfiguration,
+            ($this->getObjectUid() > 0) ? $this->getObjectUid() : false,
+            $pluginConfiguration, 'form.'
         );
 
-        return $formCreator;
+        return $form;
     }
 
     /**
@@ -200,7 +182,7 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
      */
     public function getFormValue($key)
     {
-        $dataSource = ($this->isTestMode) ? $this->fakedFormValues : $this->getFormCreator()->oDataHandler->__aFormData;
+        $dataSource = $this->isTestMode ? $this->fakedFormValues : $this->getFormCreator()->oDataHandler->__aFormData;
 
         return isset($dataSource[$key]) ? $dataSource[$key] : '';
     }
