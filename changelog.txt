@@ -18,6 +18,7 @@ Features:
 - [#5628] Add a RealURL auto configuration
 
 Bug fixes:
+- [#5722] Change language() to LanguageService()
 - [#5720] Not all search widget options can be selected in the FlexForms
 - [#5711] "Recursion" drop-down labels are empty in the flexforms in 6.2
 - [#5511] Test failures in 7.6 for BackEnd/EventsListTest

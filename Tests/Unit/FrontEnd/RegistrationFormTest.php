@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Test case.
@@ -486,7 +487,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function populateListCountriesWithLanguageSetToDefaultNotContainsEnglishCountryNameForGermany()
     {
         $backUpLanguage = $GLOBALS['LANG'];
-        $GLOBALS['LANG'] = new language();
+        $GLOBALS['LANG'] = new LanguageService();
         $GLOBALS['LANG']->init('default');
 
         self::assertNotContains(
