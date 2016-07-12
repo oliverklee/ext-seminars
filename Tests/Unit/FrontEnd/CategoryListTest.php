@@ -12,9 +12,10 @@
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+
 /**
  * Test case.
- *
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
@@ -47,6 +48,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
 
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
+
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version)
+            < 7006000
+        ) {
+            $GLOBALS['TSFE']->config['config']['uniqueLinkVars'] = 1;
+        }
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
         $this->seminarUid = $this->testingFramework->createRecord(
@@ -411,7 +418,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
         );
 
         self::assertContains(
-            'tx_seminars_pi1[category]=' . $categoryUid,
+            'tx_seminars_pi1%5Bcategory%5D=' . $categoryUid,
             $this->fixture->render()
         );
     }

@@ -11,11 +11,12 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
- *
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
@@ -121,6 +122,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new Tx_Oelib_Configuration());
         $configurationRegistry->set('config', new Tx_Oelib_Configuration());
         $configurationRegistry->set('page.config', new Tx_Oelib_Configuration());
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version)
+            < 7006000
+        ) {
+            $GLOBALS['TSFE']->config['config']['uniqueLinkVars'] = 1;
+        }
 
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -500,7 +506,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
             )
         );
         self::assertContains(
-            '[seminar]=' . $this->seminarUid,
+            '%5Bseminar%5D=' . $this->seminarUid,
             $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
@@ -624,7 +630,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $this->createAndLogInFrontEndUser();
 
         self::assertContains(
-            '[seminar]=' . $this->seminarUid,
+            '%5Bseminar%5D=' . $this->seminarUid,
             $this->fixture->getRegistrationLink($this->pi1, $this->seminar)
         );
     }
@@ -727,7 +733,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $this->seminar->setUnlimitedVacancies();
 
         self::assertContains(
-            '[seminar]=' . $this->seminarUid,
+            '%5Bseminar%5D=' . $this->seminarUid,
             $this->fixture->getRegistrationLink($this->pi1, $this->seminar)
         );
     }
@@ -759,7 +765,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $this->seminar->setRegistrationQueue(true);
 
         self::assertContains(
-            '[seminar]=' . $this->seminarUid,
+            '%5Bseminar%5D=' . $this->seminarUid,
             $this->fixture->getRegistrationLink($this->pi1, $this->seminar)
         );
     }

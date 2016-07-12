@@ -11,12 +11,13 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Test case.
- *
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
@@ -97,6 +98,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $configuration = new Tx_Oelib_Configuration();
         $configuration->setAsString('currency', 'EUR');
         Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version)
+            < 7006000
+        ) {
+            $GLOBALS['TSFE']->config['config']['uniqueLinkVars'] = 1;
+        }
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
         $this->seminarUid = $this->testingFramework->createRecord(
@@ -605,11 +612,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $contentMock = $this->createContentMock();
 
         self::assertContains(
-            'tx_seminars_pi1[seminar]=42',
+            'tx_seminars_pi1%5Bseminar%5D=42',
             $contentMock->getTypoLink(
                 'link label',
                 1,
-                array('tx_seminars_pi1[seminar]' => 42)
+                array('tx_seminars_pi1%5Bseminar%5D' => 42)
             )
         );
     }
@@ -622,12 +629,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $contentMock = $this->createContentMock();
 
         self::assertContains(
-            'tx_seminars_pi1[seminar]=42&amp;foo=bar',
+            'tx_seminars_pi1%5Bseminar%5D=42&amp;foo=bar',
             $contentMock->getTypoLink(
                 'link label',
                 1,
                 array(
-                    'tx_seminars_pi1[seminar]' => 42,
+                    'tx_seminars_pi1%5Bseminar%5D' => 42,
                     'foo' => 'bar'
                 )
             )
@@ -4812,7 +4819,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
 
         self::assertContains(
-            'tx_seminars_pi1[category]=' . $categoryUid,
+            'tx_seminars_pi1%5Bcategory%5D=' . $categoryUid,
             $this->fixture->main('', array())
         );
     }
@@ -4844,7 +4851,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->createSeminar($eventUid);
 
         self::assertNotContains(
-            'tx_seminars_pi1[category]=' . $categoryUid,
+            'tx_seminars_pi1[category%5D=' . $categoryUid,
             $this->fixture->main('', array())
         );
     }
@@ -5963,7 +5970,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
         self::assertContains(
-            'tx_seminars_pi2[eventUid]',
+            'tx_seminars_pi2%5BeventUid%5D',
             $this->fixture->main('', array())
         );
     }
@@ -5980,7 +5987,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
         self::assertContains(
-            'tx_seminars_pi2[table]=tx_seminars_attendances',
+            'tx_seminars_pi2%5Btable%5D=tx_seminars_attendances',
             $this->fixture->main('', array())
         );
     }
@@ -7982,7 +7989,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $fixture->setSeminar($event);
 
         self::assertNotContains(
-            'tx_seminars_pi1[action]=hide',
+            'tx_seminars_pi1[action%5D=hide',
             $fixture->createAllEditorLinks()
         );
     }
@@ -8009,7 +8016,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $fixture->setSeminar($event);
 
         self::assertNotContains(
-            'tx_seminars_pi1[action]=unhide',
+            'tx_seminars_pi1[action%5D=unhide',
             $fixture->createAllEditorLinks()
         );
     }
@@ -8036,7 +8043,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $fixture->setSeminar($event);
 
         self::assertNotContains(
-            'tx_seminars_pi1[action]=copy',
+            'tx_seminars_pi1[action%5D=copy',
             $fixture->createAllEditorLinks()
         );
     }
@@ -8063,7 +8070,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $fixture->setSeminar($event);
 
         self::assertNotContains(
-            'tx_seminars_pi1[action]=copy',
+            'tx_seminars_pi1[action%5D=copy',
             $fixture->createAllEditorLinks()
         );
     }

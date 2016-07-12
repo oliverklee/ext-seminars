@@ -11,11 +11,12 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
- *
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
@@ -51,6 +52,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         $this->configuration = new Tx_Oelib_Configuration();
         $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
+
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version)
+            < 7006000
+        ) {
+            $GLOBALS['TSFE']->config['config']['uniqueLinkVars'] = 1;
+        }
 
         $this->fixture = new Tx_Seminars_FrontEnd_EventEditor(
             array(
@@ -408,7 +415,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         $this->fixture->setFakedFormValue('proceed_file_upload', 1);
 
         self::assertContains(
-            'tx_seminars_pi1[seminar]=' . $this->fixture->getObjectUid(),
+            'tx_seminars_pi1%5Bseminar%5D=' . $this->fixture->getObjectUid(),
             $this->fixture->getEventSuccessfullySavedUrl()
         );
     }
