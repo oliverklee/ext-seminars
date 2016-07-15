@@ -18,6 +18,7 @@ Features:
 - [#5628] Add a RealURL auto configuration
 
 Bug fixes:
+- [#5729] Fix action links in the list of FE-edited events
 - [#5724] Get the edit links in the BE module to work in 7.6
 - [#5723] Fix the URL encode issue for 6.2 and 7.6 in the unit tests
 - [#5722] Change language() to LanguageService()

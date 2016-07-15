@@ -339,10 +339,7 @@ TYPO3.seminars.clearSearchWidgetFields = function () {
  * Converts the links that have a data-method="post" to JavaScript-powered on-the-fly forms.
  */
 TYPO3.seminars.convertActionLinks = function () {
-    var linkElements = document.querySelectorAll('a[data-method]');
-    for (var i = 0; i < linkElements.length; i++) {
-        linkElements[i].onclick = TYPO3.seminars.executeLinkAction;
-    }
+    jQuery('a[data-method]').click(TYPO3.seminars.executeLinkAction);
 };
 
 /**
@@ -438,4 +435,5 @@ jQuery(document).ready(function () {
 
     TYPO3.seminars.initializeSearchWidget();
     TYPO3.seminars.initializeRegistrationForm();
+    TYPO3.seminars.convertActionLinks();
 });
