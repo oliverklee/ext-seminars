@@ -11,13 +11,13 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates an events list in the back end.
- *
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
@@ -305,7 +305,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
             )
         );
 
-        return '<a href="' . htmlspecialchars($csvUrl) . '">' . $imageTag . '</a>&nbsp;';
+        return '<a class="btn btn-default" href="' . htmlspecialchars($csvUrl) . '">' . $imageTag . '</a>&nbsp;';
     }
 
     /**
@@ -451,7 +451,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
         $url = BackendUtility::getModuleUrl(
             self::MODULE_NAME, array('id' => $pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid())
         );
-        return '<a href="' . htmlspecialchars($url) . '">' .
+        return '<a class="btn btn-default" href="' . htmlspecialchars($url) . '">' .
             $GLOBALS['LANG']->getLL('label_show_event_registrations') . '</a>';
     }
 }

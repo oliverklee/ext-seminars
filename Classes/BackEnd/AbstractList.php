@@ -11,8 +11,8 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -20,7 +20,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This is the base class for lists in the back end.
- *
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
@@ -98,21 +97,18 @@ abstract class Tx_Seminars_BackEnd_AbstractList
      */
     public function getEditIcon($uid, $pageUid)
     {
-        $result = '';
-
-        if ($GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
-            && $this->doesUserHaveAccess($pageUid)
-        ) {
-            $params = '&edit[' . $this->tableName . '][' . $uid . ']=edit';
-            $editOnClick = $this->editNewUrl($params, $GLOBALS['BACK_PATH']);
-            $langEdit = $GLOBALS['LANG']->getLL('edit');
-
-            $result = '<a href="' .
-                htmlspecialchars($editOnClick) . '">' .
-                '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Edit.gif' .
-                '" title="' . $langEdit . '" alt="' . $langEdit . '" class="icon" />' .
-                '</a>';
+        if (!$this->doesUserHaveAccess($pageUid) || !$GLOBALS['BE_USER']->check('tables_modify', $this->tableName)) {
+            return '';
         }
+
+        $params = '&edit[' . $this->tableName . '][' . $uid . ']=edit';
+        $langEdit = htmlspecialchars($GLOBALS['LANG']->getLL('edit'));
+        $icon = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Edit.gif' .
+            '" alt="' . $langEdit . '" class="icon" />';
+
+        $editOnClick = BackendUtility::editOnClick($params, '', '');
+        $result = '<a class="btn btn-default" href="#" onclick="' . htmlspecialchars($editOnClick)
+            . '" title="' . $langEdit . '">' . $icon . '</a>';
 
         return $result;
     }
@@ -147,7 +143,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
                 'if (confirm(' . GeneralUtility::quoteJSvalue($LANG->getLL('deleteWarning') . $referenceWarning
             ) . ')) {return true;} else {return false;}');
             $langDelete = $LANG->getLL('delete', 1);
-            $result = '<a href="' .
+            $result = '<a class="btn btn-default" href="' .
                 htmlspecialchars($this->page->doc->issueCommand($params)) .
                 '" onclick="' . $confirmation . '">' .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Garbage.gif' .
@@ -203,14 +199,9 @@ abstract class Tx_Seminars_BackEnd_AbstractList
             $result = TAB . TAB .
                 '<div id="typo3-newRecordLink">' . LF .
                 TAB . TAB . TAB .
-                '<a href="' . htmlspecialchars($editOnClick) . '">' . LF .
+                '<a class="btn btn-default" href="' . htmlspecialchars($editOnClick) . '">' . LF .
                 TAB . TAB . TAB . TAB .
-                '<img' .
-                IconUtility::skinImg(
-                    $BACK_PATH,
-                    'gfx/new_record.gif',
-                    'width="7" height="4"'
-                ) .
+                '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/New.gif"' .
                 // We use an empty alt attribute as we already have a textual
                 // representation directly next to the icon.
                 ' title="' . $langNew . '" alt="" />' . LF .
@@ -291,7 +282,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
         $result = TAB . TAB .
             '<div id="typo3-csvLink">' . LF .
             TAB . TAB . TAB .
-            '<a href="' . htmlspecialchars($csvUrl) .
+            '<a class="btn btn-default" href="' . htmlspecialchars($csvUrl) .
             $this->getAdditionalCsvParameters() . '">' . LF .
             TAB . TAB . TAB . TAB .
             '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Csv.gif" title="' .
@@ -336,7 +327,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
                 $langHide = $GLOBALS['LANG']->getLL('hide');
             }
 
-            $result = '<a href="' .
+            $result = '<a class="btn btn-default" href="' .
                 htmlspecialchars($this->page->doc->issueCommand($params)) . '">' .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/' . $icon .
                 '" title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
@@ -358,9 +349,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
     {
         if (!isset($this->accessRights[$pageUid])) {
             $this->accessRights[$pageUid] = $GLOBALS['BE_USER']
-                ->doesUserHaveAccess(
-                    BackendUtility::getRecord('pages', $pageUid), 16
-            );
+                ->doesUserHaveAccess(BackendUtility::getRecord('pages', $pageUid), 16);
         }
 
         return $this->accessRights[$pageUid];
