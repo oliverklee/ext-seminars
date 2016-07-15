@@ -20,7 +20,7 @@ Live examples
 
 - `Beachvolleyball Kurse <http://www.beachkurse.de/>`_
 
-- `Deutsche Trainer Akademie <http://www.trainer-akademie.com/index.php?id=1281>`_
+- `Deutsche Trainer Akademie <http://www.trainer-akademie.com/?id=1281>`_
 
 - `Euresearch <https://www.euresearch.ch/en/events/>`_
 
