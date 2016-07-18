@@ -21,7 +21,7 @@ E-Mails benutzt werden. (Die lokalisierten Texte im Back-end können
 nicht geändert werden.)
 
 Wenn Sie einige lokalisierte Texte ändern möchten, bearbeiten Sie
-bitte nicht direkt die Dateien locallang.xml, da
+bitte nicht direkt die Dateien locallang.xlf, da
 Änderungen in diesen Dateien beim nächsten Update überschrieben werden
 würden. Stattdessen können Sie Folgendes tun:
 
@@ -31,7 +31,7 @@ würden. Stattdessen können Sie Folgendes tun:
    codes as well.
 
 #. Find out whether the string which you'd like to change is in
-   locallang.xml or FrontEnd/locallang.xml.
+   locallang.xlf or FrontEnd/locallang.xlf.
 
 #. Find out the array key for that corresponding string.
 
@@ -39,7 +39,7 @@ würden. Stattdessen können Sie Folgendes tun:
    language code and *key* with the corresponding array key):
 
 - plugin.tx\_seminars.\_LOCAL\_LANG. *language.key* (für Texte aus
-  locallang.xml) oder
+  locallang.xlf) oder
 
 - plugin.tx\_seminars\_pi1.\_LOCAL\_LANG. *language.key* (für Texte aus
-  FrontEnd/locallang.xml)
+  FrontEnd/locallang.xlf)

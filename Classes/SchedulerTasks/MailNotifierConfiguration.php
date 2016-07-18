@@ -52,7 +52,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
         $additionalFields = [
             $fieldId => [
                 'code' => $fieldCode,
-                'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
+                'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.fields.page-uid',
                 'cshKey' => '',
                 'cshLabel' => '',
             ],
@@ -80,7 +80,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
 
         $schedulerModule->addMessage(
             $this->getLanguageService()->sL(
-                'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.errors.page-uid'
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.errors.page-uid'
             ),
             FlashMessage::ERROR
         );

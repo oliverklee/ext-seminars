@@ -103,7 +103,7 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
             [
                 'task-page-uid' => [
                     'code' => '<input type="text" name="tx_scheduler[seminars_configurationPageUid]" id="task-page-uid" value="" size="4" />',
-                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
+                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.fields.page-uid',
                     'cshKey' => '',
                     'cshLabel' => '',
                 ],
@@ -128,7 +128,7 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
             [
                 'task-page-uid' => [
                     'code' => '<input type="text" name="tx_scheduler[seminars_configurationPageUid]" id="task-page-uid" value="' . $uid . '" size="4" />',
-                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.fields.page-uid',
+                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.fields.page-uid',
                     'cshKey' => '',
                     'cshLabel' => '',
                 ],
@@ -186,7 +186,7 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
 
         $this->moduleController->expects(self::once())->method('addMessage')->with(
             $this->languageService->sL(
-                'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.errors.page-uid'
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.errors.page-uid'
             ),
             FlashMessage::ERROR
         );
@@ -217,7 +217,7 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
 
         $this->moduleController->expects(self::once())->method('addMessage')->with(
             $this->languageService->sL(
-                'LLL:EXT:seminars/Resources/Private/Language/locallang.xml:schedulerTasks.errors.page-uid'
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.errors.page-uid'
             ),
             FlashMessage::ERROR
         );

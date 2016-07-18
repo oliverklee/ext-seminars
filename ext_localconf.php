@@ -64,8 +64,8 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][\OliverKlee\Seminars\SchedulerTasks\MailNotifier::class] = [
     'extension' => $_EXTKEY,
-    'title' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xml:schedulerTasks.mailNotifier.name',
-    'description' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xml:schedulerTasks.mailNotifier.description',
+    'title' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xlf:schedulerTasks.mailNotifier.name',
+    'description' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xlf:schedulerTasks.mailNotifier.description',
     'additionalFields' => \OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration::class,
 ];
 

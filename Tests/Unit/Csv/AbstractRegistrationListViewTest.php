@@ -62,8 +62,8 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
 
     protected function setUp()
     {
-        $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xml');
-        $GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_general.xml');
+        $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
+        $GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_general.xlf');
 
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 

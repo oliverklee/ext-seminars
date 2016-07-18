@@ -97,7 +97,7 @@ class TceForms
      */
     public static function getPathToDbLL()
     {
-        return 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:';
+        return 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:';
     }
 
     /**

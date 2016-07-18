@@ -45,11 +45,11 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
     public $prefixId = 'tx_seminars_pi2';
 
     /**
-     * faking $this->scriptRelPath so the locallang.xml file is found
+     * faking $this->scriptRelPath so the locallang.xlf file is found
      *
      * @var string
      */
-    public $scriptRelPath = 'Resources/Private/Language/Csv/locallang.xml';
+    public $scriptRelPath = 'Resources/Private/Language/Csv/locallang.xlf';
 
     /**
      * @var string the extension key
@@ -79,7 +79,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
         parent::__construct();
 
         if (is_object($GLOBALS['LANG'])) {
-            $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
+            $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         }
 
         $this->configuration = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');

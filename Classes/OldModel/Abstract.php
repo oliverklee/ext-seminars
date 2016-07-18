@@ -32,11 +32,11 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
     public $extKey = 'seminars';
 
     /**
-     * faking $this->scriptRelPath so the locallang.xml file is found
+     * faking $this->scriptRelPath so the locallang.xlf file is found
      *
      * @var string
      */
-    public $scriptRelPath = 'Resources/Private/Language/locallang.xml';
+    public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
 
     /**
      * @var string the charset that is used for the output
@@ -77,9 +77,9 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
     {
         $this->initializeCharsetConversion();
 
-        // In the back end, include the extension's locallang.xml.
+        // In the back end, include the extension's locallang.xlf.
         if ((TYPO3_MODE === 'BE') && is_object($GLOBALS['LANG'])) {
-            $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
+            $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         }
 
         $this->retrieveRecordAndGetData($uid, $dbResult, $allowHiddenRecords);

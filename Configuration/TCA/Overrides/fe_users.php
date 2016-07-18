@@ -118,7 +118,7 @@ defined('TYPO3_MODE') or die('Access denied.');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'fe_groups',
-    '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:fe_groups.tab_event_management,' .
+    '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tab_event_management,' .
     'tx_seminars_publish_events;;;;1-1-1,tx_seminars_events_pid,' .
     'tx_seminars_auxiliary_records_pid,tx_seminars_reviewer,' .
     'tx_seminars_default_categories, tx_seminars_default_organizer'

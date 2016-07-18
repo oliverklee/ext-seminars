@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="nl" datatype="plaintext" original="messages" date="2016-07-18T21:20:42Z" product-name="seminars">
+		<header/>
+		<body>
+			<trans-unit id="pi1_title" xml:space="preserve" approved="yes">
+				<source>Seminar Manager</source>
+				<target>Seminar manager</target>
+			</trans-unit>
+			<trans-unit id="pi1_description" xml:space="preserve" approved="yes">
+				<source>Displays seminars in the FE</source>
+				<target>Seminar manager</target>
+			</trans-unit>
+			<trans-unit id="label_title" xml:space="preserve" approved="yes">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="label_uid" xml:space="preserve" approved="yes">
+				<source>Number</source>
+				<target>Nummer</target>
+			</trans-unit>
+			<trans-unit id="label_registration_uid" xml:space="preserve" approved="yes">
+				<source>Ticket ID</source>
+				<target>Kaart Nummer</target>
+			</trans-unit>
+			<trans-unit id="label_event_type" xml:space="preserve" approved="yes">
+				<source>Event type</source>
+				<target>Evenement type</target>
+			</trans-unit>
+			<trans-unit id="label_accreditation_number" xml:space="preserve" approved="yes">
+				<source>Accreditation number</source>
+				<target>Accrediteringsnummer</target>
+			</trans-unit>
+			<trans-unit id="label_credit_points" xml:space="preserve" approved="yes">
+				<source>Credit points</source>
+				<target>Kredietpunten</target>
+			</trans-unit>
+			<trans-unit id="label_date" xml:space="preserve" approved="yes">
+				<source>Date</source>
+				<target>Datum</target>
+			</trans-unit>
+			<trans-unit id="label_time" xml:space="preserve" approved="yes">
+				<source>Time</source>
+				<target>Tijd</target>
+			</trans-unit>
+			<trans-unit id="label_place" xml:space="preserve" approved="yes">
+				<source>Place</source>
+				<target>Plaats</target>
+			</trans-unit>
+			<trans-unit id="label_room" xml:space="preserve" approved="yes">
+				<source>Room</source>
+				<target>Kamer</target>
+			</trans-unit>
+			<trans-unit id="label_seats" xml:space="preserve" approved="yes">
+				<source>Seats</source>
+				<target>Stoelen</target>
+			</trans-unit>
+			<trans-unit id="label_total_price" xml:space="preserve" approved="yes">
+				<source>Total price</source>
+				<target>Totaal prijs</target>
+			</trans-unit>
+			<trans-unit id="label_attendees_names" xml:space="preserve" approved="yes">
+				<source>Registered persons</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="label_lodgings" xml:space="preserve" approved="yes">
+				<source>Selected lodging options</source>
+				<target>Gekozen verblijf opties</target>
+			</trans-unit>
+			<trans-unit id="label_accommodation" xml:space="preserve" approved="yes">
+				<source>Accommodation</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="label_foods" xml:space="preserve" approved="yes">
+				<source>Selected food options</source>
+				<target>Gekozen voeding opties</target>
+			</trans-unit>
+			<trans-unit id="label_food" xml:space="preserve" approved="yes">
+				<source>Food</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="label_kids" xml:space="preserve" approved="yes">
+				<source>Number of kids</source>
+				<target>Aantal kinderen</target>
+			</trans-unit>
+			<trans-unit id="label_price" xml:space="preserve" approved="yes">
+				<source>Price</source>
+				<target>Prijs</target>
+			</trans-unit>
+			<trans-unit id="label_price_general" xml:space="preserve" approved="yes">
+				<source>Price</source>
+				<target>Prijs</target>
+			</trans-unit>
+			<trans-unit id="label_price_regular" xml:space="preserve" approved="yes">
+				<source>Regular price</source>
+				<target>Standaardprijs</target>
+			</trans-unit>
+			<trans-unit id="label_price_regular_early" xml:space="preserve" approved="yes">
+				<source>Early-bird price</source>
+				<target>Vroegboeking prijs</target>
+			</trans-unit>
+			<trans-unit id="label_price_earlybird_regular" xml:space="preserve" approved="yes">
+				<source>Early-bird price</source>
+				<target>Vroegboeking prijs</target>
+			</trans-unit>
+			<trans-unit id="label_price_board_regular" xml:space="preserve" approved="yes">
+				<source>Regular price including full board</source>
+				<target>Normale prijs inclusief maaltijden</target>
+			</trans-unit>
+			<trans-unit id="label_price_special" xml:space="preserve" approved="yes">
+				<source>Special price</source>
+				<target>Speciale prijs</target>
+			</trans-unit>
+			<trans-unit id="label_price_special_early" xml:space="preserve" approved="yes">
+				<source>Early-bird special price</source>
+				<target>Vroegboek speciale prijs</target>
+			</trans-unit>
+			<trans-unit id="label_price_earlybird_special" xml:space="preserve" approved="yes">
+				<source>Early-bird special price</source>
+				<target>Vroegboek speciale prijs</target>
+			</trans-unit>
+			<trans-unit id="label_price_board_special" xml:space="preserve" approved="yes">
+				<source>Special price including full board</source>
+				<target>Speciale prijs inclusief maaltijden</target>
+			</trans-unit>
+			<trans-unit id="label_method_of_payment" xml:space="preserve" approved="yes">
+				<source>Method of payment</source>
+				<target>Betaalwijze</target>
+			</trans-unit>
+			<trans-unit id="label_gender" xml:space="preserve" approved="yes">
+				<source>Gender</source>
+				<target>Geslacht</target>
+			</trans-unit>
+			<trans-unit id="label_username" xml:space="preserve" approved="yes">
+				<source>User name</source>
+				<target>Gebruikernaam</target>
+			</trans-unit>
+			<trans-unit id="label_name" xml:space="preserve" approved="yes">
+				<source>Name</source>
+				<target>Naam</target>
+			</trans-unit>
+			<trans-unit id="label_address" xml:space="preserve" approved="yes">
+				<source>Address</source>
+				<target>Adres</target>
+			</trans-unit>
+			<trans-unit id="label_zip" xml:space="preserve" approved="yes">
+				<source>ZIP code</source>
+				<target>Postcode</target>
+			</trans-unit>
+			<trans-unit id="label_city" xml:space="preserve" approved="yes">
+				<source>City</source>
+				<target>Woonplaats</target>
+			</trans-unit>
+			<trans-unit id="label_country" xml:space="preserve" approved="yes">
+				<source>Country</source>
+				<target>Land</target>
+			</trans-unit>
+			<trans-unit id="label_attendees" xml:space="preserve" approved="yes">
+				<source>Attendees</source>
+				<target>Deelnemers</target>
+			</trans-unit>
+			<trans-unit id="label_vacancies" xml:space="preserve" approved="yes">
+				<source>Vacancies</source>
+				<target>Vrije plaatsten</target>
+			</trans-unit>
+			<trans-unit id="label_unlimited" xml:space="preserve" approved="yes">
+				<source>unlimited</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="label_enough_attendees" xml:space="preserve" approved="yes">
+				<source>Enough attendees</source>
+				<target>Voldoende deelnemers</target>
+			</trans-unit>
+			<trans-unit id="label_is_full" xml:space="preserve" approved="yes">
+				<source>Is full</source>
+				<target>Is volgeboekt</target>
+			</trans-unit>
+			<trans-unit id="label_paymentmethod" xml:space="preserve" approved="yes">
+				<source>Selected method of payment</source>
+				<target>Gekozen betaalwijze</target>
+			</trans-unit>
+			<trans-unit id="label_billing_address" xml:space="preserve" approved="yes">
+				<source>Billing address</source>
+				<target>Factuur adres</target>
+			</trans-unit>
+			<trans-unit id="label_telephone" xml:space="preserve" approved="yes">
+				<source>Phone</source>
+				<target>Telefoon</target>
+			</trans-unit>
+			<trans-unit id="label_fax" xml:space="preserve" approved="yes">
+				<source>Fax</source>
+				<target>Fax</target>
+			</trans-unit>
+			<trans-unit id="label_email" xml:space="preserve" approved="yes">
+				<source>E-mail address</source>
+				<target>E-mail adres</target>
+			</trans-unit>
+			<trans-unit id="label_interests" xml:space="preserve" approved="yes">
+				<source>Special interests</source>
+				<target>Speciale interesses</target>
+			</trans-unit>
+			<trans-unit id="label_expectations" xml:space="preserve" approved="yes">
+				<source>Expectations</source>
+				<target>Verwachtingen</target>
+			</trans-unit>
+			<trans-unit id="label_background_knowledge" xml:space="preserve" approved="yes">
+				<source>Background knowledge</source>
+				<target>Achtergrond kennis</target>
+			</trans-unit>
+			<trans-unit id="label_known_from" xml:space="preserve" approved="yes">
+				<source>Known from</source>
+				<target>Bekend van</target>
+			</trans-unit>
+			<trans-unit id="label_notes" xml:space="preserve" approved="yes">
+				<source>Notes</source>
+				<target>Notities</target>
+			</trans-unit>
+			<trans-unit id="label_url" xml:space="preserve" approved="yes">
+				<source>More information</source>
+				<target>Meer informatie</target>
+			</trans-unit>
+			<trans-unit id="label_seminardata" xml:space="preserve" approved="yes">
+				<source>Seminar data</source>
+				<target>Seminar gegevens</target>
+			</trans-unit>
+			<trans-unit id="label_feuserdata" xml:space="preserve" approved="yes">
+				<source>Account data</source>
+				<target>Gebruikergegevens</target>
+			</trans-unit>
+			<trans-unit id="label_attendancedata" xml:space="preserve" approved="yes">
+				<source>Data that has been entered on registration</source>
+				<target>Gegevens die zijn ingevoerd bij registratie</target>
+			</trans-unit>
+			<trans-unit id="label_gender.I.0" xml:space="preserve" approved="yes">
+				<source>Mr.</source>
+				<target>Hr.</target>
+			</trans-unit>
+			<trans-unit id="label_gender.I.1" xml:space="preserve" approved="yes">
+				<source>Ms.</source>
+				<target>Mv.</target>
+			</trans-unit>
+			<trans-unit id="label_status.I.1" xml:space="preserve" approved="yes">
+				<source>Student</source>
+				<target>Student</target>
+			</trans-unit>
+			<trans-unit id="label_status.I.2" xml:space="preserve" approved="yes">
+				<source>Job seeking</source>
+				<target>Werkloos</target>
+			</trans-unit>
+			<trans-unit id="label_status.I.3" xml:space="preserve" approved="yes">
+				<source>Working</source>
+				<target>Werkend</target>
+			</trans-unit>
+			<trans-unit id="label_status.I.4" xml:space="preserve" approved="yes">
+				<source>Retired</source>
+				<target>Gepensioneerd</target>
+			</trans-unit>
+			<trans-unit id="label_regular" xml:space="preserve" approved="yes">
+				<source>regular</source>
+				<target>standaar</target>
+			</trans-unit>
+			<trans-unit id="label_waiting_list" xml:space="preserve" approved="yes">
+				<source>waiting list</source>
+				<target>wachtlijst</target>
+			</trans-unit>
+			<trans-unit id="label_yes" xml:space="preserve" approved="yes">
+				<source>yes</source>
+				<target>ja</target>
+			</trans-unit>
+			<trans-unit id="label_no" xml:space="preserve" approved="yes">
+				<source>no</source>
+				<target>nee</target>
+			</trans-unit>
+			<trans-unit id="label_hours" xml:space="preserve" approved="yes">
+				<source>h</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="message_notLoggedIn" xml:space="preserve" approved="yes">
+				<source>Please log in first.</source>
+				<target>U dient eerst in te loggen voordat u zich kunt registreren voor een evenement.</target>
+			</trans-unit>
+			<trans-unit id="message_notLoggedIn_informal" xml:space="preserve" approved="yes">
+				<source>Please log in first.</source>
+				<target>Log je eerst in om je aan te melden voor een evenement.</target>
+			</trans-unit>
+			<trans-unit id="message_alreadyRegistered" xml:space="preserve" approved="yes">
+				<source>You already have registered for this event.</source>
+				<target>U heeft zich al geregistreerd voor dit evenement.</target>
+			</trans-unit>
+			<trans-unit id="message_alreadyRegistered_informal" xml:space="preserve" approved="yes">
+				<source>You already have registered for this event.</source>
+				<target>Je bent al voor dit evenement bijeenkomst aangemeld.</target>
+			</trans-unit>
+			<trans-unit id="message_userIsBlocked" xml:space="preserve" approved="yes">
+				<source>You are already registered for an event that collides with this event.</source>
+				<target>U heeft zich al geregistreerd voor een bijeenkomst dat samenvalt dit evenement.</target>
+			</trans-unit>
+			<trans-unit id="message_userIsBlocked_informal" xml:space="preserve" approved="yes">
+				<source>You are already registered for an event that collides with this event.</source>
+				<target>Je hebt je al geregistreerd voor een bijeenkomst die samenvalt dit evenement.</target>
+			</trans-unit>
+			<trans-unit id="message_missingSeminarNumber" xml:space="preserve" approved="yes">
+				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="message_wrongSeminarNumber" xml:space="preserve" approved="yes">
+				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+				<target>Er is geen evenement bekend onder dit nummer. Wanneer u deze foutmelding krijgt bij gebruik van een link op deze pagina wilt u dan svp de webmaster hiervan op de hoogte brengen. Dank u!</target>
+			</trans-unit>
+			<trans-unit id="message_wrongSeminarNumber_informal" xml:space="preserve" approved="yes">
+				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+				<target>Een evenement met dit nummer bestaat niet. Wanneer je een foutmelding hebt gekregen door het gebruik van een link op onze website breng dan aub de webmaster hiervan op de hoogte. Bedankt!</target>
+			</trans-unit>
+			<trans-unit id="message_noRegistrationNecessary" xml:space="preserve" approved="yes">
+				<source>For this event, no registration is necessary.</source>
+				<target>Voor dit evenement is geen registratie noodzakelijk.</target>
+			</trans-unit>
+			<trans-unit id="message_seminarCancelled" xml:space="preserve" approved="yes">
+				<source>Alas, this event has been canceled.</source>
+				<target>Helaas, dit evenement is geannuleerd.</target>
+			</trans-unit>
+			<trans-unit id="message_noDate" xml:space="preserve" approved="yes">
+				<source>This event has no date yet.</source>
+				<target>Dit evenement heeft nog geen datum.</target>
+			</trans-unit>
+			<trans-unit id="message_seminarRegistrationIsClosed" xml:space="preserve" approved="yes">
+				<source>Sorry, the registration period for this event is over.</source>
+				<target>De registratieperiode voor dit evenement is helaas al voorbij.</target>
+			</trans-unit>
+			<trans-unit id="message_noVacancies" xml:space="preserve" approved="yes">
+				<source>Sorry, there are no more vancacies.</source>
+				<target>Helaas, er zijn geen vrije plaatsen meer beschikbaar.</target>
+			</trans-unit>
+			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve" approved="yes">
+				<source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>
+				<target>Het aantal plaatsen dat u wilt reserveren is helaas te hoog. U kunt ten hoogste %s plaatsen reserveren.</target>
+			</trans-unit>
+			<trans-unit id="message_invalidNumberOfSeats_informal" xml:space="preserve" approved="yes">
+				<source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>
+				<target>Het aantal plaatsen dat je wilt reserveren is helaas te hoog. Je kunt ten hoogste %s plaatsen reserveren.</target>
+			</trans-unit>
+			<trans-unit id="message_willBeAnnounced" xml:space="preserve" approved="yes">
+				<source>will be announced</source>
+				<target>zal worden aangekondigd</target>
+			</trans-unit>
+			<trans-unit id="message_forFree" xml:space="preserve" approved="yes">
+				<source>free</source>
+				<target>vrij</target>
+			</trans-unit>
+			<trans-unit id="message_enough" xml:space="preserve" approved="yes">
+				<source>enough</source>
+				<target>genoeg</target>
+			</trans-unit>
+			<trans-unit id="message_fullyBooked" xml:space="preserve" approved="yes">
+				<source>fully booked</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="message_registrationOpensOn" xml:space="preserve" approved="yes">
+				<source>starting %s</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="message_accessDenied" xml:space="preserve" approved="yes">
+				<source>Sorry, you don't have access to this part of the site.</source>
+				<target>Sorry, U heeft geen toegang tot dit deel van de website.</target>
+			</trans-unit>
+			<trans-unit id="message_accessDenied_informal" xml:space="preserve" approved="yes">
+				<source>Sorry, you don't have access to this part of the site.</source>
+				<target>Sorry, je hebt geen toegang tot dit deel van de website.</target>
+			</trans-unit>
+			<trans-unit id="email_confirmationSubject" xml:space="preserve" approved="yes">
+				<source>Registration confirmation</source>
+				<target>Bevestiging van de registratie</target>
+			</trans-unit>
+			<trans-unit id="email_confirmationHello" xml:space="preserve" approved="yes">
+				<source>thank you for registering for the event &quot;%s&quot;</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_confirmationHello_informal" xml:space="preserve" approved="yes">
+				<source>thank you for registering for the event &quot;%s&quot;</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_price" xml:space="preserve" approved="yes">
+				<source>at the total price of %s</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnUnregistrationSubject" xml:space="preserve" approved="yes">
+				<source>Unregistration confirmation</source>
+				<target>Bevestiging van annuleren registratie</target>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnUnregistrationHello" xml:space="preserve" approved="yes">
+				<source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnUnregistrationHello_informal" xml:space="preserve" approved="yes">
+				<source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnRegistrationForQueueSubject" xml:space="preserve" approved="yes">
+				<source>Registration for the waiting list confirmation</source>
+				<target>Bevestiging van registratie op de wachtlijst</target>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnRegistrationForQueueHello" xml:space="preserve" approved="yes">
+				<source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnRegistrationForQueueHello_informal" xml:space="preserve" approved="yes">
+				<source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnQueueUpdateSubject" xml:space="preserve" approved="yes">
+				<source>Registration became a regular registration confirmation</source>
+				<target>De registratie is een bevestiging van een standaard registratie geworden</target>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnQueueUpdateHello" xml:space="preserve" approved="yes">
+				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnQueueUpdateHello_informal" xml:space="preserve" approved="yes">
+				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_unregistrationNotice" xml:space="preserve" approved="yes">
+				<source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_unregistrationNotice_informal" xml:space="preserve" approved="yes">
+				<source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_additionalNotificationEnoughRegistrations" xml:space="preserve" approved="yes">
+				<source>Your event has now enough registrations to be held.</source>
+				<target>Uw evenement gaat niet door, wegens niet genoeg deelnemers.</target>
+			</trans-unit>
+			<trans-unit id="email_additionalNotificationEnoughRegistrationsSubject" xml:space="preserve" approved="yes">
+				<source>Event has enough registrations: %d - %s</source>
+				<target>Evenement heeft niet genoeg registraties: %d - % s</target>
+			</trans-unit>
+			<trans-unit id="email_additionalNotificationIsFull" xml:space="preserve" approved="yes">
+				<source>Your event is full, there are no empty seats left.</source>
+				<target>Uw evenement is vol, daarom zijn er geen vrije plaatsen meer.</target>
+			</trans-unit>
+			<trans-unit id="email_additionalNotificationIsFullSubject" xml:space="preserve" approved="yes">
+				<source>Event is full: %d - %s</source>
+				<target>Evenement is vol: %d - %s</target>
+			</trans-unit>
+			<trans-unit id="email_notificationSubject" xml:space="preserve" approved="yes">
+				<source>Registration notification</source>
+				<target>Registratiebericht</target>
+			</trans-unit>
+			<trans-unit id="email_notificationHello" xml:space="preserve" approved="yes">
+				<source>Hello,
+
+someone just has registered for an event:</source>
+				<target>Hallo,
+
+iemand heeft zich zojuist voor een evenement geregistreerd:</target>
+			</trans-unit>
+			<trans-unit id="email_notificationOnUnregistrationSubject" xml:space="preserve" approved="yes">
+				<source>Unregistration notification</source>
+				<target>melding van annulering registratie</target>
+			</trans-unit>
+			<trans-unit id="email_notificationOnUnregistrationHello" xml:space="preserve" approved="yes">
+				<source>Hello,
+
+someone just has unregistered from an event:</source>
+				<target>Hallo,
+
+iemand heeft zojuist een registratie geannuleerd van een evenement:</target>
+			</trans-unit>
+			<trans-unit id="email_notificationOnRegistrationForQueueSubject" xml:space="preserve" approved="yes">
+				<source>Registration for waiting list notification</source>
+				<target>melding van registratie op de wachtlijst</target>
+			</trans-unit>
+			<trans-unit id="email_notificationOnRegistrationForQueueHello" xml:space="preserve" approved="yes">
+				<source>Hello,
+
+someone just has registered for the waiting list of an event:</source>
+				<target>Hallo,
+
+iemand heeft zich zojuist geregistreerd op de wachtlijst van een evenement:</target>
+			</trans-unit>
+			<trans-unit id="email_notificationOnQueueUpdateSubject" xml:space="preserve" approved="yes">
+				<source>Registration became a regular registration notification</source>
+				<target>De registratie is een melding van een standaar registratie geworden.</target>
+			</trans-unit>
+			<trans-unit id="email_notificationOnQueueUpdateHello" xml:space="preserve" approved="yes">
+				<source>Hello,
+
+someone's registration just has become a regular registration of an event:</source>
+				<target>Hallo,
+
+een registratie is zojuist een standaard registratie geworden voor een evenement:</target>
+			</trans-unit>
+			<trans-unit id="email_eventTakesPlaceReminderSubject" xml:space="preserve" approved="yes">
+				<source>&quot;%event&quot; begins in %days days</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_eventTakesPlaceReminder" xml:space="preserve" approved="yes">
+				<source>Hello %organizer,
+
+the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there are %registrations registrations for this event.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_cancelationDeadlineReminderSubject" xml:space="preserve" approved="yes">
+				<source>Cancelation deadline for &quot;%event&quot; has just passed</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_cancelationDeadlineReminder" xml:space="preserve" approved="yes">
+				<source>Hello %organizer,
+
+the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number: %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are %registrations registrations for this event.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="label_planned_disclaimer" xml:space="preserve" approved="yes">
+				<source>For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_hello_informal" xml:space="preserve" approved="yes">
+				<source>Dear</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_hello_formal_0" xml:space="preserve" approved="yes">
+				<source>Dear</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_hello_formal_1" xml:space="preserve" approved="yes">
+				<source>Dear</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_hello_formal_2" xml:space="preserve" approved="yes">
+				<source>Dear</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_hello_formal_99" xml:space="preserve" approved="yes">
+				<source>Dear</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_salutation_title_0" xml:space="preserve" approved="yes">
+				<source>Mr.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_salutation_title_1" xml:space="preserve" approved="yes">
+				<source>Ms.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_salutation_title_2" xml:space="preserve" approved="yes">
+				<source></source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_salutation_title_99" xml:space="preserve" approved="yes">
+				<source></source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_eventDate" xml:space="preserve" approved="yes">
+				<source>on %s</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_timeFrom" xml:space="preserve" approved="yes">
+				<source>from %s</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_timeAt" xml:space="preserve" approved="yes">
+				<source>at %s</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email_timeTo" xml:space="preserve" approved="yes">
+				<source>to</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="schedulerTasks.mailNotifier.name" xml:space="preserve" approved="yes">
+				<source>E-mail notifications</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="schedulerTasks.mailNotifier.description" xml:space="preserve" approved="yes">
+				<source>This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="schedulerTasks.fields.page-uid" xml:space="preserve" approved="yes">
+				<source>UID of the page with the TypoScript configuration</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="schedulerTasks.errors.page-uid" xml:space="preserve" approved="yes">
+				<source>Please enter the UID of an existing page.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email-event-canceled-subject" xml:space="preserve" approved="yes">
+				<source>Event canceled: %eventTitle %eventDate</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email-event-confirmed-subject" xml:space="preserve" approved="yes">
+				<source>Event confirmed: %eventTitle %eventDate</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email-event-canceled-body" xml:space="preserve" approved="yes">
+				<source>%salutation
+
+you registered for the event &quot;%eventTitle&quot; (%eventDate).
+
+Unfortunately, we had to cancel this event.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="email-event-confirmed-body" xml:space="preserve" approved="yes">
+				<source>%salutation
+
+you registered for the event &quot;%eventTitle&quot; (%eventDate).
+
+This event now has been confirmed.</source>
+				<target></target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

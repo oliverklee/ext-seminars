@@ -24,11 +24,11 @@ class Tx_Seminars_Service_ConfigurationService extends Tx_Oelib_TemplateHelper
     public $prefixId = Tx_Seminars_Service_ConfigurationService::class;
 
     /**
-     * faking $this->scriptRelPath so the locallang.xml file is found
+     * faking $this->scriptRelPath so the locallang.xlf file is found
      *
      * @var string
      */
-    public $scriptRelPath = 'Resources/Private/Language/locallang.xml';
+    public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
 
     /**
      * @var string the extension key

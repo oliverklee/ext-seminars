@@ -69,7 +69,7 @@ class MailNotifier extends AbstractTask
         $this->mailer = $mailerFactory->getMailer();
 
         $languageService = $this->getLanguageService();
-        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
+        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
     }
 
     /**
@@ -315,7 +315,7 @@ class MailNotifier extends AbstractTask
         $user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $languageService = $this->getLanguageService();
         $languageService->lang = $user->getLanguage();
-        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xml');
+        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $result = $languageService->getLL($locallangKey);
 
         foreach (array(

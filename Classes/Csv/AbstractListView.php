@@ -87,8 +87,8 @@ abstract class Tx_Seminars_Csv_AbstractListView
                 }
             }
 
-            $this->translator->includeLLFile('EXT:lang/locallang_general.xml');
-            $this->translator->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xml');
+            $this->translator->includeLLFile('EXT:lang/locallang_general.xlf');
+            $this->translator->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
             $this->includeAdditionalLanguageFiles();
         }
 

@@ -273,7 +273,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
     protected function getCsvIcon()
     {
         $pageData = $this->page->getPageData();
-        $langCsv = $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.xml:labels.csv', 1);
+        $langCsv = $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
         $csvUrl = BackendUtility::getModuleUrl(
             self::MODULE_NAME,
             array('id' => $pageData['uid'], 'csv' => '1', 'tx_seminars_pi2[table]' => $this->tableName)

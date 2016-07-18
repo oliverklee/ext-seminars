@@ -11,13 +11,13 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Core\Localization\Parser\LocallangXmlParser;
+
+use TYPO3\CMS\Core\Localization\Parser\XliffParser;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class that adds the wizard icon.
- *
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
@@ -46,16 +46,16 @@ class Tx_Seminars_FrontEnd_WizardIcon
     }
 
     /**
-     * Reads the locallang.xml and returns the $LOCAL_LANG array found in that file.
+     * Reads the locallang.xlf and returns the $LOCAL_LANG array found in that file.
      *
      * @return array[] the found language labels
      */
     public function includeLocalLang()
     {
-        /** @var LocallangXmlParser $xmlParser */
-        $xmlParser = GeneralUtility::makeInstance(LocallangXmlParser::class);
+        /** @var XliffParser $xmlParser */
+        $xmlParser = GeneralUtility::makeInstance(XliffParser::class);
         $localLanguage = $xmlParser->getParsedData(
-            ExtensionManagementUtility::extPath('seminars') . 'Resources/Private/Language/locallang.xml',
+            ExtensionManagementUtility::extPath('seminars') . 'Resources/Private/Language/locallang.xlf',
             $GLOBALS['LANG']->lang
         );
 

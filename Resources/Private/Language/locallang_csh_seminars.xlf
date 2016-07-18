@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-18T21:20:36Z" product-name="seminars">
+		<header/>
+		<body>
+			<trans-unit id="attached_files.description" xml:space="preserve">
+				<source>The files are available for download in the front end.</source>
+			</trans-unit>
+			<trans-unit id="attached_files.details" xml:space="preserve">
+				<source>By default, only the front-end users that are registered for an event can download that event's files. This setting can be changed in the configuration.</source>
+			</trans-unit>
+			<trans-unit id="offline_attendees.description" xml:space="preserve">
+				<source>This is the number of registrations for which no registration records in TYPO3 exist.</source>
+			</trans-unit>
+			<trans-unit id="offline_attendees.details" xml:space="preserve">
+				<source>Still, these registrations will reduce the number of vacancies, for example if the registrations have been received offline via a phone call.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

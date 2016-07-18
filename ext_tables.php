@@ -3,12 +3,12 @@ defined('TYPO3_MODE') or die('Access denied.');
 
 TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'tx_seminars_seminars',
-    'EXT:seminars/Resources/Private/Language/locallang_csh_seminars.xml'
+    'EXT:seminars/Resources/Private/Language/locallang_csh_seminars.xlf'
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'fe_groups',
-    'EXT:seminars/Resources/Private/Language/locallang_csh_fe_groups.xml'
+    'EXT:seminars/Resources/Private/Language/locallang_csh_fe_groups.xlf'
 );
 
 $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY);

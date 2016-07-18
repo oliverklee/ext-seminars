@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-18T21:20:42Z" product-name="seminars">
+		<header/>
+		<body>
+			<trans-unit id="pi1_title" xml:space="preserve">
+				<source>Seminar Manager</source>
+			</trans-unit>
+			<trans-unit id="pi1_description" xml:space="preserve">
+				<source>Displays seminars in the FE</source>
+			</trans-unit>
+			<trans-unit id="label_title" xml:space="preserve">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="label_uid" xml:space="preserve">
+				<source>Number</source>
+			</trans-unit>
+			<trans-unit id="label_registration_uid" xml:space="preserve">
+				<source>Ticket ID</source>
+			</trans-unit>
+			<trans-unit id="label_event_type" xml:space="preserve">
+				<source>Event type</source>
+			</trans-unit>
+			<trans-unit id="label_accreditation_number" xml:space="preserve">
+				<source>Accreditation number</source>
+			</trans-unit>
+			<trans-unit id="label_credit_points" xml:space="preserve">
+				<source>Credit points</source>
+			</trans-unit>
+			<trans-unit id="label_date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="label_time" xml:space="preserve">
+				<source>Time</source>
+			</trans-unit>
+			<trans-unit id="label_place" xml:space="preserve">
+				<source>Place</source>
+			</trans-unit>
+			<trans-unit id="label_room" xml:space="preserve">
+				<source>Room</source>
+			</trans-unit>
+			<trans-unit id="label_seats" xml:space="preserve">
+				<source>Seats</source>
+			</trans-unit>
+			<trans-unit id="label_total_price" xml:space="preserve">
+				<source>Total price</source>
+			</trans-unit>
+			<trans-unit id="label_attendees_names" xml:space="preserve">
+				<source>Registered persons</source>
+			</trans-unit>
+			<trans-unit id="label_lodgings" xml:space="preserve">
+				<source>Selected lodging options</source>
+			</trans-unit>
+			<trans-unit id="label_accommodation" xml:space="preserve">
+				<source>Accommodation</source>
+			</trans-unit>
+			<trans-unit id="label_foods" xml:space="preserve">
+				<source>Selected food options</source>
+			</trans-unit>
+			<trans-unit id="label_food" xml:space="preserve">
+				<source>Food</source>
+			</trans-unit>
+			<trans-unit id="label_kids" xml:space="preserve">
+				<source>Number of kids</source>
+			</trans-unit>
+			<trans-unit id="label_price" xml:space="preserve">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="label_price_general" xml:space="preserve">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="label_price_regular" xml:space="preserve">
+				<source>Regular price</source>
+			</trans-unit>
+			<trans-unit id="label_price_regular_early" xml:space="preserve">
+				<source>Early-bird price</source>
+			</trans-unit>
+			<trans-unit id="label_price_earlybird_regular" xml:space="preserve">
+				<source>Early-bird price</source>
+			</trans-unit>
+			<trans-unit id="label_price_board_regular" xml:space="preserve">
+				<source>Regular price including full board</source>
+			</trans-unit>
+			<trans-unit id="label_price_special" xml:space="preserve">
+				<source>Special price</source>
+			</trans-unit>
+			<trans-unit id="label_price_special_early" xml:space="preserve">
+				<source>Early-bird special price</source>
+			</trans-unit>
+			<trans-unit id="label_price_earlybird_special" xml:space="preserve">
+				<source>Early-bird special price</source>
+			</trans-unit>
+			<trans-unit id="label_price_board_special" xml:space="preserve">
+				<source>Special price including full board</source>
+			</trans-unit>
+			<trans-unit id="label_method_of_payment" xml:space="preserve">
+				<source>Method of payment</source>
+			</trans-unit>
+			<trans-unit id="label_gender" xml:space="preserve">
+				<source>Gender</source>
+			</trans-unit>
+			<trans-unit id="label_username" xml:space="preserve">
+				<source>User name</source>
+			</trans-unit>
+			<trans-unit id="label_name" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="label_address" xml:space="preserve">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="label_zip" xml:space="preserve">
+				<source>ZIP code</source>
+			</trans-unit>
+			<trans-unit id="label_city" xml:space="preserve">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="label_country" xml:space="preserve">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="label_attendees" xml:space="preserve">
+				<source>Attendees</source>
+			</trans-unit>
+			<trans-unit id="label_vacancies" xml:space="preserve">
+				<source>Vacancies</source>
+			</trans-unit>
+			<trans-unit id="label_unlimited" xml:space="preserve">
+				<source>unlimited</source>
+			</trans-unit>
+			<trans-unit id="label_enough_attendees" xml:space="preserve">
+				<source>Enough attendees</source>
+			</trans-unit>
+			<trans-unit id="label_is_full" xml:space="preserve">
+				<source>Is full</source>
+			</trans-unit>
+			<trans-unit id="label_paymentmethod" xml:space="preserve">
+				<source>Selected method of payment</source>
+			</trans-unit>
+			<trans-unit id="label_billing_address" xml:space="preserve">
+				<source>Billing address</source>
+			</trans-unit>
+			<trans-unit id="label_telephone" xml:space="preserve">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="label_fax" xml:space="preserve">
+				<source>Fax</source>
+			</trans-unit>
+			<trans-unit id="label_email" xml:space="preserve">
+				<source>E-mail address</source>
+			</trans-unit>
+			<trans-unit id="label_interests" xml:space="preserve">
+				<source>Special interests</source>
+			</trans-unit>
+			<trans-unit id="label_expectations" xml:space="preserve">
+				<source>Expectations</source>
+			</trans-unit>
+			<trans-unit id="label_background_knowledge" xml:space="preserve">
+				<source>Background knowledge</source>
+			</trans-unit>
+			<trans-unit id="label_known_from" xml:space="preserve">
+				<source>Known from</source>
+			</trans-unit>
+			<trans-unit id="label_notes" xml:space="preserve">
+				<source>Notes</source>
+			</trans-unit>
+			<trans-unit id="label_url" xml:space="preserve">
+				<source>More information</source>
+			</trans-unit>
+			<trans-unit id="label_seminardata" xml:space="preserve">
+				<source>Seminar data</source>
+			</trans-unit>
+			<trans-unit id="label_feuserdata" xml:space="preserve">
+				<source>Account data</source>
+			</trans-unit>
+			<trans-unit id="label_attendancedata" xml:space="preserve">
+				<source>Data that has been entered on registration</source>
+			</trans-unit>
+			<trans-unit id="label_gender.I.0" xml:space="preserve">
+				<source>Mr.</source>
+			</trans-unit>
+			<trans-unit id="label_gender.I.1" xml:space="preserve">
+				<source>Ms.</source>
+			</trans-unit>
+			<trans-unit id="label_status.I.1" xml:space="preserve">
+				<source>Student</source>
+			</trans-unit>
+			<trans-unit id="label_status.I.2" xml:space="preserve">
+				<source>Job seeking</source>
+			</trans-unit>
+			<trans-unit id="label_status.I.3" xml:space="preserve">
+				<source>Working</source>
+			</trans-unit>
+			<trans-unit id="label_status.I.4" xml:space="preserve">
+				<source>Retired</source>
+			</trans-unit>
+			<trans-unit id="label_regular" xml:space="preserve">
+				<source>regular</source>
+			</trans-unit>
+			<trans-unit id="label_waiting_list" xml:space="preserve">
+				<source>waiting list</source>
+			</trans-unit>
+			<trans-unit id="label_yes" xml:space="preserve">
+				<source>yes</source>
+			</trans-unit>
+			<trans-unit id="label_no" xml:space="preserve">
+				<source>no</source>
+			</trans-unit>
+			<trans-unit id="label_hours" xml:space="preserve">
+				<source>h</source>
+			</trans-unit>
+			<trans-unit id="message_notLoggedIn" xml:space="preserve">
+				<source>Please log in first.</source>
+			</trans-unit>
+			<trans-unit id="message_notLoggedIn_informal" xml:space="preserve">
+				<source>Please log in first.</source>
+			</trans-unit>
+			<trans-unit id="message_alreadyRegistered" xml:space="preserve">
+				<source>You already have registered for this event.</source>
+			</trans-unit>
+			<trans-unit id="message_alreadyRegistered_informal" xml:space="preserve">
+				<source>You already have registered for this event.</source>
+			</trans-unit>
+			<trans-unit id="message_userIsBlocked" xml:space="preserve">
+				<source>You are already registered for an event that collides with this event.</source>
+			</trans-unit>
+			<trans-unit id="message_userIsBlocked_informal" xml:space="preserve">
+				<source>You are already registered for an event that collides with this event.</source>
+			</trans-unit>
+			<trans-unit id="message_missingSeminarNumber" xml:space="preserve">
+				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			</trans-unit>
+			<trans-unit id="message_wrongSeminarNumber" xml:space="preserve">
+				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			</trans-unit>
+			<trans-unit id="message_wrongSeminarNumber_informal" xml:space="preserve">
+				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			</trans-unit>
+			<trans-unit id="message_noRegistrationNecessary" xml:space="preserve">
+				<source>For this event, no registration is necessary.</source>
+			</trans-unit>
+			<trans-unit id="message_seminarCancelled" xml:space="preserve">
+				<source>Alas, this event has been canceled.</source>
+			</trans-unit>
+			<trans-unit id="message_noDate" xml:space="preserve">
+				<source>This event has no date yet.</source>
+			</trans-unit>
+			<trans-unit id="message_seminarRegistrationIsClosed" xml:space="preserve">
+				<source>Sorry, the registration period for this event is over.</source>
+			</trans-unit>
+			<trans-unit id="message_noVacancies" xml:space="preserve">
+				<source>Sorry, there are no more vancacies.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">
+				<source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidNumberOfSeats_informal" xml:space="preserve">
+				<source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>
+			</trans-unit>
+			<trans-unit id="message_willBeAnnounced" xml:space="preserve">
+				<source>will be announced</source>
+			</trans-unit>
+			<trans-unit id="message_forFree" xml:space="preserve">
+				<source>free</source>
+			</trans-unit>
+			<trans-unit id="message_enough" xml:space="preserve">
+				<source>enough</source>
+			</trans-unit>
+			<trans-unit id="message_fullyBooked" xml:space="preserve">
+				<source>fully booked</source>
+			</trans-unit>
+			<trans-unit id="message_registrationOpensOn" xml:space="preserve">
+				<source>starting %s</source>
+			</trans-unit>
+			<trans-unit id="message_accessDenied" xml:space="preserve">
+				<source>Sorry, you don't have access to this part of the site.</source>
+			</trans-unit>
+			<trans-unit id="message_accessDenied_informal" xml:space="preserve">
+				<source>Sorry, you don't have access to this part of the site.</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationSubject" xml:space="preserve">
+				<source>Registration confirmation</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationHello" xml:space="preserve">
+				<source>thank you for registering for the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationHello_informal" xml:space="preserve">
+				<source>thank you for registering for the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_price" xml:space="preserve">
+				<source>at the total price of %s</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnUnregistrationSubject" xml:space="preserve">
+				<source>Unregistration confirmation</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnUnregistrationHello" xml:space="preserve">
+				<source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnUnregistrationHello_informal" xml:space="preserve">
+				<source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnRegistrationForQueueSubject" xml:space="preserve">
+				<source>Registration for the waiting list confirmation</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnRegistrationForQueueHello" xml:space="preserve">
+				<source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnRegistrationForQueueHello_informal" xml:space="preserve">
+				<source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnQueueUpdateSubject" xml:space="preserve">
+				<source>Registration became a regular registration confirmation</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnQueueUpdateHello" xml:space="preserve">
+				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnQueueUpdateHello_informal" xml:space="preserve">
+				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_unregistrationNotice" xml:space="preserve">
+				<source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
+			</trans-unit>
+			<trans-unit id="email_unregistrationNotice_informal" xml:space="preserve">
+				<source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
+			</trans-unit>
+			<trans-unit id="email_additionalNotificationEnoughRegistrations" xml:space="preserve">
+				<source>Your event has now enough registrations to be held.</source>
+			</trans-unit>
+			<trans-unit id="email_additionalNotificationEnoughRegistrationsSubject" xml:space="preserve">
+				<source>Event has enough registrations: %d - %s</source>
+			</trans-unit>
+			<trans-unit id="email_additionalNotificationIsFull" xml:space="preserve">
+				<source>Your event is full, there are no empty seats left.</source>
+			</trans-unit>
+			<trans-unit id="email_additionalNotificationIsFullSubject" xml:space="preserve">
+				<source>Event is full: %d - %s</source>
+			</trans-unit>
+			<trans-unit id="email_notificationSubject" xml:space="preserve">
+				<source>Registration notification</source>
+			</trans-unit>
+			<trans-unit id="email_notificationHello" xml:space="preserve">
+				<source>Hello,
+
+someone just has registered for an event:</source>
+			</trans-unit>
+			<trans-unit id="email_notificationOnUnregistrationSubject" xml:space="preserve">
+				<source>Unregistration notification</source>
+			</trans-unit>
+			<trans-unit id="email_notificationOnUnregistrationHello" xml:space="preserve">
+				<source>Hello,
+
+someone just has unregistered from an event:</source>
+			</trans-unit>
+			<trans-unit id="email_notificationOnRegistrationForQueueSubject" xml:space="preserve">
+				<source>Registration for waiting list notification</source>
+			</trans-unit>
+			<trans-unit id="email_notificationOnRegistrationForQueueHello" xml:space="preserve">
+				<source>Hello,
+
+someone just has registered for the waiting list of an event:</source>
+			</trans-unit>
+			<trans-unit id="email_notificationOnQueueUpdateSubject" xml:space="preserve">
+				<source>Registration became a regular registration notification</source>
+			</trans-unit>
+			<trans-unit id="email_notificationOnQueueUpdateHello" xml:space="preserve">
+				<source>Hello,
+
+someone's registration just has become a regular registration of an event:</source>
+			</trans-unit>
+			<trans-unit id="email_eventTakesPlaceReminderSubject" xml:space="preserve">
+				<source>&quot;%event&quot; begins in %days days</source>
+			</trans-unit>
+			<trans-unit id="email_eventTakesPlaceReminder" xml:space="preserve">
+				<source>Hello %organizer,
+
+the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there are %registrations registrations for this event.</source>
+			</trans-unit>
+			<trans-unit id="email_cancelationDeadlineReminderSubject" xml:space="preserve">
+				<source>Cancelation deadline for &quot;%event&quot; has just passed</source>
+			</trans-unit>
+			<trans-unit id="email_cancelationDeadlineReminder" xml:space="preserve">
+				<source>Hello %organizer,
+
+the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number: %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are %registrations registrations for this event.</source>
+			</trans-unit>
+			<trans-unit id="label_planned_disclaimer" xml:space="preserve">
+				<source>For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</source>
+			</trans-unit>
+			<trans-unit id="email_hello_informal" xml:space="preserve">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="email_hello_formal_0" xml:space="preserve">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="email_hello_formal_1" xml:space="preserve">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="email_hello_formal_2" xml:space="preserve">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="email_hello_formal_99" xml:space="preserve">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="email_salutation_title_0" xml:space="preserve">
+				<source>Mr.</source>
+			</trans-unit>
+			<trans-unit id="email_salutation_title_1" xml:space="preserve">
+				<source>Ms.</source>
+			</trans-unit>
+			<trans-unit id="email_salutation_title_2" xml:space="preserve">
+				<source></source>
+			</trans-unit>
+			<trans-unit id="email_salutation_title_99" xml:space="preserve">
+				<source></source>
+			</trans-unit>
+			<trans-unit id="email_eventDate" xml:space="preserve">
+				<source>on %s</source>
+			</trans-unit>
+			<trans-unit id="email_timeFrom" xml:space="preserve">
+				<source>from %s</source>
+			</trans-unit>
+			<trans-unit id="email_timeAt" xml:space="preserve">
+				<source>at %s</source>
+			</trans-unit>
+			<trans-unit id="email_timeTo" xml:space="preserve">
+				<source>to</source>
+			</trans-unit>
+			<trans-unit id="schedulerTasks.mailNotifier.name" xml:space="preserve">
+				<source>E-mail notifications</source>
+			</trans-unit>
+			<trans-unit id="schedulerTasks.mailNotifier.description" xml:space="preserve">
+				<source>This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
+			</trans-unit>
+			<trans-unit id="schedulerTasks.fields.page-uid" xml:space="preserve">
+				<source>UID of the page with the TypoScript configuration</source>
+			</trans-unit>
+			<trans-unit id="schedulerTasks.errors.page-uid" xml:space="preserve">
+				<source>Please enter the UID of an existing page.</source>
+			</trans-unit>
+			<trans-unit id="email-event-canceled-subject" xml:space="preserve">
+				<source>Event canceled: %eventTitle %eventDate</source>
+			</trans-unit>
+			<trans-unit id="email-event-confirmed-subject" xml:space="preserve">
+				<source>Event confirmed: %eventTitle %eventDate</source>
+			</trans-unit>
+			<trans-unit id="email-event-canceled-body" xml:space="preserve">
+				<source>%salutation
+
+you registered for the event &quot;%eventTitle&quot; (%eventDate).
+
+Unfortunately, we had to cancel this event.</source>
+			</trans-unit>
+			<trans-unit id="email-event-confirmed-body" xml:space="preserve">
+				<source>%salutation
+
+you registered for the event &quot;%eventTitle&quot; (%eventDate).
+
+This event now has been confirmed.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

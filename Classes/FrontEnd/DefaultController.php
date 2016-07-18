@@ -32,11 +32,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     public $prefixId = 'tx_seminars_pi1';
 
     /**
-     * faking $this->scriptRelPath so the locallang.xml file is found
+     * faking $this->scriptRelPath so the locallang.xlf file is found
      *
      * @var string
      */
-    public $scriptRelPath = 'Resources/Private/Language/FrontEnd/locallang.xml';
+    public $scriptRelPath = 'Resources/Private/Language/FrontEnd/locallang.xlf';
 
     /**
      * @var string the extension key

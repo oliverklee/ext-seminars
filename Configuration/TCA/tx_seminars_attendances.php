@@ -71,7 +71,7 @@ return [
         ],
         'hidden' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
                 'default' => '0',
@@ -480,11 +480,11 @@ return [
     'types' => [
         '0' => [
             'showitem' => '' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_attendances.divLabelOverview, title, uid, seminar, user;;;;1-1-1, been_there, hidden;;;;1-1-1, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_attendances.divLabelBookingInformation, registration_queue, registered_themselves, seats, price, total_price, attendees_names, additional_persons, kids, foods, food, lodgings, accommodation, checkboxes, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_attendances.divLabelRegistrationComments, interests, expectations, background_knowledge, known_from, notes, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_attendances.divLabelPaymentInformation, datepaid, currency, including_tax, method_of_payment, account_number, account_owner, bank_code, bank_name, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xml:tx_seminars_attendances.divLabelBillingAddress, company, gender, name, address, zip, city, country, telephone, email'
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelOverview, title, uid, seminar, user;;;;1-1-1, been_there, hidden;;;;1-1-1, ' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBookingInformation, registration_queue, registered_themselves, seats, price, total_price, attendees_names, additional_persons, kids, foods, food, lodgings, accommodation, checkboxes, ' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelRegistrationComments, interests, expectations, background_knowledge, known_from, notes, ' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelPaymentInformation, datepaid, currency, including_tax, method_of_payment, account_number, account_owner, bank_code, bank_name, ' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBillingAddress, company, gender, name, address, zip, city, country, telephone, email'
         ],
     ],
     'palettes' => [
