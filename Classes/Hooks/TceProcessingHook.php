@@ -27,7 +27,7 @@ class Tx_Seminars_Hooks_TceProcessingHook
     /**
      * @var array[]
      */
-    private $tceMainFieldArrays = array();
+    private $tceMainFieldArrays = [];
 
     /**
      * @var string the extension key

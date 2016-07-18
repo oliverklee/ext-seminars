@@ -34,7 +34,7 @@ class Tx_Seminars_Mapper_Event extends Tx_Oelib_DataMapper
     /**
      * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
      */
-    protected $relations = array(
+    protected $relations = [
         'topic' => Tx_Seminars_Mapper_Event::class,
         'categories' => Tx_Seminars_Mapper_Category::class,
         'event_type' => Tx_Seminars_Mapper_EventType::class,
@@ -56,7 +56,7 @@ class Tx_Seminars_Mapper_Event extends Tx_Oelib_DataMapper
         'requirements' => Tx_Seminars_Mapper_Event::class,
         'dependencies' => Tx_Seminars_Mapper_Event::class,
         'registrations' => Tx_Seminars_Mapper_Registration::class,
-    );
+    ];
 
     /**
      * Retrieves an event model with the publication hash provided.
@@ -76,7 +76,7 @@ class Tx_Seminars_Mapper_Event extends Tx_Oelib_DataMapper
 
         try {
             /** @var Tx_Seminars_Model_Event $result */
-            $result = $this->findSingleByWhereClause(array('publication_hash' => $publicationHash));
+            $result = $this->findSingleByWhereClause(['publication_hash' => $publicationHash]);
         } catch (Tx_Oelib_Exception_NotFound $exception) {
             $result = null;
         }

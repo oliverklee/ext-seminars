@@ -55,11 +55,11 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'Title 2')
+            ['title' => 'Title 2']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'Title 1')
+            ['title' => 'Title 1']
         );
 
         $categoryBag = $this->fixture->build();

@@ -90,20 +90,20 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
 
         $this->organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            array(
+            [
                 'title' => 'Dummy Organizer',
                 'email' => 'foo@example.org',
                 'email_footer' => 'organizer footer',
-            )
+            ]
         );
         $this->eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'organizers' => 1,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
                 'title' => 'Dummy Event',
                 'registrations' => 1,
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -231,11 +231,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function renderNotPrefillsSubjectFieldIfEmptyStringWasSentViaPost()
     {
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'cancelEvent',
                 'isSubmitted' => '1',
                 'subject' => '',
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -261,11 +261,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function renderSanitizesPostDataWhenPreFillingAFormField()
     {
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'messageBody' => '<test>',
-            )
+            ]
         );
         $formOutput = $this->fixture->render();
 
@@ -295,11 +295,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function renderContainsErrorMessageIfFormWasSubmittedWithEmptySubjectField()
     {
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => '',
-            )
+            ]
         );
 
         self::assertContains(
@@ -314,11 +314,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function renderContainsErrorMessageIfFormWasSubmittedWithEmptyMessageField()
     {
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'messageBody' => '',
-            )
+            ]
         );
 
         self::assertContains(
@@ -333,11 +333,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function renderContainsSubjectFieldPrefilledByUserInputIfFormIsReRendered()
     {
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'sendForm',
                 'isSubmitted' => '1',
                 'subject' => 'foo bar',
-            )
+            ]
         );
         $this->fixture->markAsIncomplete();
 
@@ -353,11 +353,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function renderEncodesHtmlSpecialCharsInSubjectField()
     {
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'sendForm',
                 'isSubmitted' => '1',
                 'subject' => '<foo> & "bar"',
-            )
+            ]
         );
         $this->fixture->markAsIncomplete();
         self::assertContains(
@@ -372,11 +372,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function renderContainsMessageFieldPrefilledByUserInputIfFormIsReRendered()
     {
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'messageBody' => 'foo bar',
-            )
+            ]
         );
         $this->fixture->markAsIncomplete();
 
@@ -423,21 +423,21 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array('email' => 'foo@example.com'))
-            )
+                    '', ['email' => 'foo@example.com']),
+            ]
         );
 
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
-            )
+            ]
         );
         $this->fixture->render();
 
@@ -454,20 +454,20 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser()
-            )
+                'user' => $this->testingFramework->createFrontEndUser(),
+            ]
         );
 
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
-            )
+            ]
         );
         $this->fixture->render();
 
@@ -483,24 +483,24 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array(
-                        'email' => 'foo@example.com', 'name' => 'test user'
-                    )
-                )
-            )
+                    '', [
+                        'email' => 'foo@example.com', 'name' => 'test user',
+                    ]
+                ),
+            ]
         );
 
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar %salutation',
-            )
+            ]
         );
         $this->fixture->render();
 
@@ -517,24 +517,24 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array(
-                        'email' => 'foo@example.com', 'name' => 'test user'
-                    )
-                )
-            )
+                    '', [
+                        'email' => 'foo@example.com', 'name' => 'test user',
+                    ]
+                ),
+            ]
         );
 
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar foo',
-            )
+            ]
         );
 
         $this->fixture->render();
@@ -546,29 +546,29 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function sendEmailToAttendeesUsesFirstOrganizerAsSender()
     {
         $secondOrganizer = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel(array(
+            ::get(Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel([
                 'title' => 'Second Organizer',
                 'email' => 'bar@example.org',
-            ));
+            ]);
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array('email' => 'foo@example.com')
-                )
-            )
+                    '', ['email' => 'foo@example.com']
+                ),
+            ]
         );
 
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
-            )
+            ]
         );
         $this->fixture->render();
 
@@ -585,32 +585,32 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array('email' => 'foo@example.com')
-                )
-            )
+                    '', ['email' => 'foo@example.com']
+                ),
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array('email' => 'foo@example.com')
-                )
-            )
+                    '', ['email' => 'foo@example.com']
+                ),
+            ]
         );
 
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
-            )
+            ]
         );
         $this->fixture->render();
 
@@ -627,30 +627,30 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array('email' => 'foo@example.com')
-                )
-            )
+                    '', ['email' => 'foo@example.com']
+                ),
+            ]
         );
 
         $organizerFooter = 'organizer footer';
         $secondOrganizer = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel(array(
+            ::get(Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel([
                 'title' => 'Second Organizer',
                 'email' => 'bar@example.org',
                 'email_footer' => 'oasdfasrganizer footer',
-            ));
+            ]);
 
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
-            )
+            ]
         );
         $this->fixture->render();
 
@@ -671,25 +671,24 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             ['email_footer' => '']
         );
 
-
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array('email' => 'foo@example.com')
-                )
-            )
+                    '', ['email' => 'foo@example.com']
+                ),
+            ]
         );
 
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
-            )
+            ]
         );
         $this->fixture->render();
 
@@ -706,23 +705,23 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
                     '',
-                    array('email' => 'foo@example.com')
-                )
-            )
+                    ['email' => 'foo@example.com']
+                ),
+            ]
         );
 
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
-            )
+            ]
         );
         $this->fixture->render();
 
@@ -738,12 +737,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function sendEmailToAttendeesForNoRegistrationsNotAddsEmailSentFlashMessage()
     {
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
-            )
+            ]
         );
         $this->fixture->render();
 
@@ -763,19 +762,19 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function redirectToListViewSendsTheRedirectHeader()
     {
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'foo bar',
-            )
+            ]
         );
         $this->fixture->render();
 
         self::assertSame(
             'Location: ' . BackendUtility::getModuleUrl(
                 Tx_Seminars_BackEnd_AbstractEventMailForm::MODULE_NAME,
-                array('id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()), false, true
+                ['id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()], false, true
             ),
             Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
         );
@@ -791,7 +790,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function getInitialValueForSubjectAppendsEventTitle()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $this->eventUid, array('title' => 'FooBar')
+            'tx_seminars_seminars', $this->eventUid, ['title' => 'FooBar']
         );
 
         $fixture = new Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm(

@@ -38,7 +38,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
      *
      * @var string[]
      */
-    protected $availableSubModules = array();
+    protected $availableSubModules = [];
 
     /**
      * the ID of the currently selected sub module
@@ -131,7 +131,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
         $this->setPageData($pageAccess);
 
         // define the sub modules that should be available in the tab menu
-        $this->availableSubModules = array();
+        $this->availableSubModules = [];
 
         // only show the tabs if the back-end user has access to the
         // corresponding tables
@@ -167,7 +167,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
         if ($this->subModule) {
             $moduleToken = FormProtectionFactory::get()->generateToken('moduleCall', self::MODULE_NAME);
             $this->content .= $this->doc->getTabMenu(
-                array('M' => self::MODULE_NAME, 'moduleToken' => $moduleToken, 'id' => $this->id),
+                ['M' => self::MODULE_NAME, 'moduleToken' => $moduleToken, 'id' => $this->id],
                 'subModule', $this->subModule, $this->availableSubModules
             );
             $this->content .= $this->doc->spacer(5);

@@ -11,7 +11,6 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
  * This class is needed to dynamically create the list of selectable database
@@ -34,7 +33,7 @@ class Tx_Seminars_FlexForms
     public function getShowFeUserFieldsInRegistrationsList(array $configuration)
     {
         foreach ($this->getColumnsOfTable('fe_users') as $column) {
-            $configuration['items'][] = array(0 => $column, 1 => $column);
+            $configuration['items'][] = [0 => $column, 1 => $column];
         }
 
         return $configuration;
@@ -52,7 +51,7 @@ class Tx_Seminars_FlexForms
     public function getShowRegistrationFieldsInRegistrationList(array $configuration)
     {
         foreach ($this->getColumnsOfTable('tx_seminars_attendances') as $column) {
-            $configuration['items'][] = array(0 => $column, 1 => $column);
+            $configuration['items'][] = [0 => $column, 1 => $column];
         }
 
         return $configuration;

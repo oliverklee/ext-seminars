@@ -35,12 +35,12 @@ class Tx_Seminars_FrontEnd_WizardIcon
     {
         $localLanguage = $this->includeLocalLang();
 
-        $wizardItems['plugins_tx_seminars_pi1'] = array(
+        $wizardItems['plugins_tx_seminars_pi1'] = [
             'icon' => ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/ContentWizard.gif',
             'title' => $GLOBALS['LANG']->getLLL('pi1_title', $localLanguage),
             'description' => $GLOBALS['LANG']->getLLL('pi1_description', $localLanguage),
             'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=seminars_pi1',
-        );
+        ];
 
         return $wizardItems;
     }

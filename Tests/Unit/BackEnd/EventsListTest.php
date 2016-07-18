@@ -43,8 +43,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     protected $backEndModule = null;
 
     /**
-    * @var string the original language of the back-end module
-    */
+     * @var string the original language of the back-end module
+     */
     protected $originalLanguage = '';
 
     protected function setUp()
@@ -65,10 +65,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
 
         $this->backEndModule = new Tx_Seminars_BackEnd_Module();
         $this->backEndModule->id = $this->dummySysFolderPid;
-        $this->backEndModule->setPageData(array(
+        $this->backEndModule->setPageData([
             'uid' => $this->dummySysFolderPid,
             'doktype' => Tx_Seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
-        ));
+        ]);
 
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
@@ -79,11 +79,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
 
         $backEndGroup = Tx_Oelib_MapperRegistry::get(
             Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
-            array('tx_seminars_events_folder' => $this->dummySysFolderPid + 1)
+            ['tx_seminars_events_folder' => $this->dummySysFolderPid + 1]
         );
         $backEndUser = Tx_Oelib_MapperRegistry::get(
             Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel(
-            array('usergroup' => $backEndGroup->getUid())
+            ['usergroup' => $backEndGroup->getUid()]
         );
         Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
     }
@@ -113,7 +113,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('pid' => $this->dummySysFolderPid)
+            ['pid' => $this->dummySysFolderPid]
         );
 
         self::assertContains(
@@ -127,7 +127,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('pid' => $this->dummySysFolderPid + 1)
+            ['pid' => $this->dummySysFolderPid + 1]
         );
 
         self::assertNotContains(
@@ -140,10 +140,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
-                'title' => 'event_1'
-            )
+                'title' => 'event_1',
+            ]
         );
 
         self::assertContains(
@@ -156,17 +156,17 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
-                'title' => 'event_1'
-            )
+                'title' => 'event_1',
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
-                'title' => 'event_2'
-            )
+                'title' => 'event_2',
+            ]
         );
 
         self::assertContains(
@@ -183,11 +183,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
-                'hidden' => 1
-            )
+                'hidden' => 1,
+            ]
         );
 
         self::assertContains(
@@ -200,11 +200,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
-                'endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000
-            )
+                'endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000,
+            ]
         );
 
         self::assertContains(
@@ -217,11 +217,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
                 'accreditation_number' => 'accreditation number 123',
-            )
+            ]
         );
 
         self::assertContains(
@@ -234,11 +234,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
                 'accreditation_number' => '&"<>',
-            )
+            ]
         );
 
         self::assertContains(
@@ -251,10 +251,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED,
-            )
+            ]
         );
 
         self::assertContains(
@@ -267,10 +267,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
-            )
+            ]
         );
 
         self::assertContains(
@@ -283,10 +283,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -307,17 +307,17 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'registrations' => 1,
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'seminar' => $eventUid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -333,10 +333,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'registrations' => 0,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -349,11 +349,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -366,10 +366,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 42,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -382,11 +382,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
 
         self::assertContains(
@@ -399,11 +399,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
 
         self::assertContains(
@@ -416,10 +416,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -432,10 +432,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
 
         self::assertContains(
@@ -452,10 +452,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'hidden' => 1,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -468,11 +468,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -485,10 +485,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 42,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -501,10 +501,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
 
         self::assertContains(
@@ -517,11 +517,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
                 'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
-            )
+            ]
         );
 
         self::assertContains(
@@ -534,11 +534,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -551,10 +551,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
 
         self::assertContains(
@@ -571,10 +571,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'hidden' => 1,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -590,18 +590,18 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'needs_registration' => 1,
-            )
+            ]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'seminar' => $eventUid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -617,19 +617,19 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'hidden' => 1,
                 'needs_registration' => 1,
-            )
+            ]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'seminar' => $eventUid,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -651,10 +651,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'title' => 'Event in subfolder',
                 'pid' => $subfolderPid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -667,12 +667,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('pid' => $this->dummySysFolderPid, 'needs_registration' => 1)
+            ['pid' => $this->dummySysFolderPid, 'needs_registration' => 1]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('pid' => $this->dummySysFolderPid, 'seminar' => $eventUid)
+            ['pid' => $this->dummySysFolderPid, 'seminar' => $eventUid]
         );
 
         self::assertContains(
@@ -685,7 +685,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('pid' => $this->dummySysFolderPid, 'needs_registration' => 1)
+            ['pid' => $this->dummySysFolderPid, 'needs_registration' => 1]
         );
 
         self::assertNotContains(
@@ -698,12 +698,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('pid' => $this->dummySysFolderPid, 'needs_registration' => 1)
+            ['pid' => $this->dummySysFolderPid, 'needs_registration' => 1]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('pid' => $this->dummySysFolderPid, 'seminar' => $eventUid)
+            ['pid' => $this->dummySysFolderPid, 'seminar' => $eventUid]
         );
 
         self::assertContains(
@@ -716,12 +716,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('pid' => $this->dummySysFolderPid, 'needs_registration' => 1)
+            ['pid' => $this->dummySysFolderPid, 'needs_registration' => 1]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('pid' => $this->dummySysFolderPid, 'seminar' => $eventUid)
+            ['pid' => $this->dummySysFolderPid, 'seminar' => $eventUid]
         );
 
         self::assertContains(
@@ -734,16 +734,16 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'needs_registration' => 1,
                 'hidden' => 1,
-            )
+            ]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('pid' => $this->dummySysFolderPid, 'seminar' => $eventUid)
+            ['pid' => $this->dummySysFolderPid, 'seminar' => $eventUid]
         );
 
         self::assertNotContains(
@@ -760,11 +760,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE
-            )
+                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+            ]
         );
 
         self::assertContains(
@@ -800,7 +800,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     public function testNewButtonForNoEventStorageSettingInUserGroupsSetsCurrentPageIdAsNewRecordPid()
     {
         $backEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel(array());
+            Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
         Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
             $backEndUser
         );
@@ -814,7 +814,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     public function testNewButtonForEventStoredOnCurrentPageHasCurrentFolderLabel()
     {
         $backEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel(array());
+            Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
         Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
             $backEndUser
         );

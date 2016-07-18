@@ -480,14 +480,14 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
         $explanation = 'This determines the way dates and times are '
             . 'displayed. If this is not set correctly, dates and times might '
             . 'be mangled or not get displayed at all.';
-        $configVariables = array(
+        $configVariables = [
             'timeFormat',
             'dateFormatY',
             'dateFormatM',
             'dateFormatD',
             'dateFormatYMD',
-            'dateFormatMD'
-        );
+            'dateFormatMD',
+        ];
         foreach ($configVariables as $configVariableToCheck) {
             $this->checkForNonEmptyString(
                 $configVariableToCheck,
@@ -531,7 +531,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'This value specifies the type of seminar manager plug-in to '
                 . 'display. If this value is not set correctly, the wrong '
                 . 'type of plug-in will be displayed.',
-            array(
+            [
                 'seminar_list',
                 'single_view',
                 'topic_list',
@@ -545,7 +545,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 'countdown',
                 'category_list',
                 'event_headline',
-            )
+            ]
         );
     }
 
@@ -655,7 +655,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             's_template_special',
             'This value specifies which section to remove from the details view. '
                 . 'Incorrect values will cause the sections to still be displayed.',
-            array(
+            [
                 'image',
                 'event_type',
                 'title',
@@ -696,7 +696,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 'back',
                 'requirements',
                 'dependencies',
-            )
+            ]
         );
     }
 
@@ -713,7 +713,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             's_template_special',
             'This value specifies which columns to remove from the list view. '
                 . 'Incorrect values will cause the colums to still be displayed.',
-            array(
+            [
                 'image',
                 'category',
                 'title',
@@ -744,7 +744,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 'list_registrations',
                 'status',
                 'edit',
-            )
+            ]
         );
     }
 
@@ -763,7 +763,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 . 'displayed in the list view. An incorrect value will events '
                 . 'from a different time-frame cause to be displayed and other '
                 . 'events to not get displayed.',
-            array(
+            [
                 'all',
                 'past',
                 'pastAndCurrent',
@@ -772,7 +772,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 'upcoming',
                 'deadlineNotOver',
                 'today',
-            )
+            ]
         );
     }
 
@@ -862,7 +862,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             '',
             'These values specify the sections to hide in e-mails to  participants. A mistyped field name will cause the field ' .
                 'to be included nonetheless.',
-            array(
+            [
                 'hello',
                 'title',
                 'uid',
@@ -891,7 +891,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 'footer',
                 'first_name',
                 'last_name',
-            )
+            ]
         );
     }
 
@@ -909,12 +909,12 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'These values specify the sections to hide in e-mails to '
                 . 'organizers. A mistyped field name will cause the field to '
                 . 'be included nonetheless.',
-            array(
+            [
                 'summary',
                 'seminardata',
                 'feuserdata',
-                'attendancedata'
-            )
+                'attendancedata',
+            ]
         );
     }
 
@@ -932,7 +932,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'These values specify the event fields to show in e-mails to '
                 . 'organizers. A mistyped field name will cause the field to '
                 . 'not get included.',
-            array(
+            [
                 'uid',
                 'event_type',
                 'title',
@@ -956,8 +956,8 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 'vacancies',
                 'enough_attendees',
                 'is_full',
-                'notes'
-            )
+                'notes',
+            ]
         );
     }
 
@@ -993,7 +993,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'These values specify the registration fields to show in e-mails ' .
                 'to organizers. A mistyped field name will cause the field ' .
                 'to not get included.',
-            array(
+            [
                 'uid',
                 'interests',
                 'expectations',
@@ -1020,7 +1020,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 'country',
                 'telephone',
                 'email',
-            )
+            ]
         );
     }
 
@@ -1129,7 +1129,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 'If this value is incorrect, persons may access the ' .
                 'registration lists although they should not be allowed to ' .
                 '(or vice versa).',
-            array('attendees_and_managers', 'login', 'world')
+            ['attendees_and_managers', 'login', 'world']
         );
     }
 
@@ -1184,13 +1184,13 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'This value specifies which data fields of the selected event '
                 . 'will be displayed on the registration page. '
                 . 'Incorrect values will cause those fields to not get displayed.',
-            array(
+            [
                 'uid',
                 'title',
                 'price_regular',
                 'price_special',
-                'vacancies'
-            )
+                'vacancies',
+            ]
         );
     }
 
@@ -1208,7 +1208,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'This value specifies which registration fields ' .
                 'will be displayed on the registration page. ' .
                 'Incorrect values will cause those fields to not get displayed.',
-            array(
+            [
                 'step_counter',
                 'price',
                 'method_of_payment',
@@ -1247,7 +1247,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 'registration_data',
                 'terms',
                 'terms_2',
-            )
+            ]
         );
     }
 
@@ -1840,7 +1840,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'These values specify the event fields to export via CSV. '
                 . 'A mistyped field name will cause the field to not get '
                 . 'included.',
-            array(
+            [
                 'uid',
                 'tstamp',
                 'crdate',
@@ -1879,8 +1879,8 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 'vacancies',
                 'enough_attendees',
                 'is_full',
-                'cancelled'
-            )
+                'cancelled',
+            ]
         );
     }
 
@@ -2549,11 +2549,11 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'This setting determines whether the seminar category is shown, as ' .
                 'icon and text, as text only or as icon only. If this value is ' .
                 'not set correctly, the category will only be shown as text.',
-            array(
+            [
                 'both',
                 'text',
                 'icon',
-            )
+            ]
         );
     }
 
@@ -2693,10 +2693,10 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'This value specifies which search widget fields to display in the ' .
                 'list view. The search widget will not display any fields at ' .
                 'all if this value is empty or contains only invalid keys.',
-            array(
+            [
                 'event_type', 'language', 'country', 'city', 'place',
-                'full_text_search', 'date', 'age', 'organizer', 'categories', 'price'
-            )
+                'full_text_search', 'date', 'age', 'organizer', 'categories', 'price',
+            ]
         );
     }
 
@@ -2732,7 +2732,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'This value specifies which fields should be displayed in the ' .
                 'fe-editor. Incorrect values will cause the fields not to be ' .
                 'displayed.',
-            array(
+            [
                 'subtitle',
                 'accreditation_number',
                 'credit_points',
@@ -2773,7 +2773,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 'uses_terms_2',
                 'attached_file_box',
                 'notes',
-            )
+            ]
         );
     }
 
@@ -2863,7 +2863,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'This value specifies which fields are required to be filled when ' .
                 'editing an event. Some fields will be not be required if ' .
                 'this configuration is incorrect.',
-            array(
+            [
                 'subtitle',
                 'accreditation_number',
                 'credit_points',
@@ -2904,7 +2904,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
                 'uses_terms_2',
                 'attached_file_box',
                 'notes',
-            )
+            ]
         );
 
         // checks whether the required fields are visible
@@ -2940,14 +2940,14 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'This value specifies which fields are required to be filled when ' .
                 'editing a pkace. Some fields will be not be required if ' .
                 'this configuration is incorrect.',
-            array(
+            [
                 'address',
                 'zip',
                 'city',
                 'country',
                 'homepage',
                 'directions',
-            )
+            ]
         );
     }
 
@@ -3106,11 +3106,11 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'This value specifies when the list view will link to the single view. '
                 . 'If this value is not set correctly, the single view might not be linked although this is intended '
                 . '(or vice versa).',
-            array(
+            [
                 'always',
                 'never',
                 'onlyForNonEmptyDescription',
-            )
+            ]
         );
     }
 }

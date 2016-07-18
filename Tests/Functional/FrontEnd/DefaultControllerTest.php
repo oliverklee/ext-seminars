@@ -52,7 +52,8 @@ class DefaultControllerTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function defaultContentRenderingIsGenerated() {
+    public function defaultContentRenderingIsGenerated()
+    {
         $configuration = $GLOBALS['TYPO3_CONF_VARS']['FE']['defaultTypoScript_setup.']['defaultContentRendering'];
 
         self::assertContains('TypoScript added by extension "seminars"', $configuration);
@@ -62,7 +63,8 @@ class DefaultControllerTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function pluginUserFuncPointsToExistingMethodInExistingDefaultControllerClass() {
+    public function pluginUserFuncPointsToExistingMethodInExistingDefaultControllerClass()
+    {
         $configuration = $GLOBALS['TYPO3_CONF_VARS']['FE']['defaultTypoScript_setup.']['defaultContentRendering'];
 
         $matches = [];

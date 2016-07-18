@@ -41,8 +41,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends Tx_Phpunit_TestC
     private $backEndModule;
 
     /**
-    * @var string the original language of the back-end module
-    */
+     * @var string the original language of the back-end module
+     */
     private $originalLanguage;
 
     protected function setUp()
@@ -65,10 +65,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends Tx_Phpunit_TestC
 
         $this->backEndModule = new Tx_Seminars_BackEnd_Module();
         $this->backEndModule->id = $this->dummySysFolderPid;
-        $this->backEndModule->setPageData(array(
+        $this->backEndModule->setPageData([
             'uid' => $this->dummySysFolderPid,
             'doktype' => Tx_Seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
-        ));
+        ]);
 
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
@@ -99,10 +99,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends Tx_Phpunit_TestC
         );
         $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            array(
+            [
                 'title' => 'Organizer in subfolder',
                 'pid' => $subfolderPid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -120,11 +120,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends Tx_Phpunit_TestC
         $newOrganizerFolder = $this->dummySysFolderPid + 1;
         $backEndGroup = Tx_Oelib_MapperRegistry::get(
             Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
-            array('tx_seminars_auxiliaries_folder' => $newOrganizerFolder)
+            ['tx_seminars_auxiliaries_folder' => $newOrganizerFolder]
         );
         $backEndUser = Tx_Oelib_MapperRegistry::get(
             Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel(
-                array('usergroup' => $backEndGroup->getUid())
+                ['usergroup' => $backEndGroup->getUid()]
         );
         Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
             $backEndUser

@@ -84,7 +84,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends Tx_Phpunit_TestCas
     {
         /** @var Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
-        $timeSpan->setData(array());
+        $timeSpan->setData([]);
 
         self::assertSame(
             $this->translator->translate('message_willBeAnnounced'),

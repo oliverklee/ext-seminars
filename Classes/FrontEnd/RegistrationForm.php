@@ -38,7 +38,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      *
      * @var string[]
      */
-    private $formFieldsToShow = array();
+    private $formFieldsToShow = [];
 
     /**
      * the number of the current page of the form (starting with 0 for the first page)
@@ -52,7 +52,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      *
      * @var string[]
      */
-    protected $fieldsInBillingAddress = array(
+    protected $fieldsInBillingAddress = [
         'gender',
         'name',
         'company',
@@ -62,7 +62,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         'city',
         'country',
         'telephone',
-    );
+    ];
 
     /**
      * @var PiBaseApi
@@ -82,7 +82,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     /**
      * @var string[]
      */
-    protected $registrationFieldsOnConfirmationPage = array(
+    protected $registrationFieldsOnConfirmationPage = [
         'price',
         'seats',
         'total_price',
@@ -102,14 +102,14 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         'background_knowledge',
         'known_from',
         'notes',
-    );
+    ];
 
     /**
      * Overwrite this in an XClass with the keys of additional keys that should always be displayed.
      *
      * @var string[]
      */
-    protected $alwaysEnabledFormFields = array();
+    protected $alwaysEnabledFormFields = [];
 
     /**
      * The constructor.
@@ -460,7 +460,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function isTerms2Enabled()
     {
-        return $this->hasRegistrationFormField(array('elementname' => 'terms_2')) && $this->getSeminar()->hasTerms2();
+        return $this->hasRegistrationFormField(['elementname' => 'terms_2']) && $this->getSeminar()->hasTerms2();
     }
 
     /**
@@ -743,18 +743,18 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             $pageId = $this->getConfValueInteger('listPID', 'sDEF');
         }
 
-        $linkConfiguration = array('parameter' => $pageId);
+        $linkConfiguration = ['parameter' => $pageId];
 
         if ($sendParameters) {
             $linkConfiguration['additionalParams'] = GeneralUtility::implodeArrayForUrl(
-                'tx_seminars_pi1', array('showUid' => $this->getSeminar()->getUid()), '', false, true
+                'tx_seminars_pi1', ['showUid' => $this->getSeminar()->getUid()], '', false, true
             );
         }
 
         // XXX We need to do this workaround of manually encoding brackets in
         // the URL due to a bug in the TYPO3 core:
         // http://bugs.typo3.org/view.php?id=3808
-        $result = preg_replace(array('/\[/', '/\]/'), array('%5B', '%5D'), $this->cObj->typoLink_URL($linkConfiguration));
+        $result = preg_replace(['/\[/', '/\]/'], ['%5B', '%5D'], $this->cObj->typoLink_URL($linkConfiguration));
 
         return GeneralUtility::locationHeaderUrl($result);
     }
@@ -768,7 +768,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     public function populateListPaymentMethods()
     {
         if (!$this->getSeminar()->hasPaymentMethods()) {
-            return array();
+            return [];
         }
 
         $rows = Tx_Oelib_Db::selectMultiple(
@@ -779,12 +779,12 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
                 Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
         );
 
-        $result = array();
+        $result = [];
         foreach ($rows as $row) {
-            $result[] = array(
+            $result[] = [
                 'caption' => $row['title'],
                 'value' => $row['uid'],
-            );
+            ];
         }
 
         return $result;
@@ -826,7 +826,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     {
         return $this->getSeminar()->hasPaymentMethods()
             && $this->getSeminar()->hasAnyPrice()
-            && $this->hasRegistrationFormField(array('elementname' => 'method_of_payment'));
+            && $this->hasRegistrationFormField(['elementname' => 'method_of_payment']);
     }
 
     /**
@@ -980,7 +980,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
                 if ($this->isFormFieldEnabled('registered_themselves') && ($this->getFormValue('registered_themselves') == '1')) {
                     /** @var Tx_Seminars_Model_FrontEndUser $user */
                     $user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
-                    $userData = array($user->getName());
+                    $userData = [$user->getName()];
                     if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
                         if ($user->hasJobTitle()) {
                             $userData[] = $user->getJobTitle();
@@ -1009,7 +1009,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     protected function ensureArray(&$data)
     {
         if (!is_array($data)) {
-            $data = array();
+            $data = [];
         }
     }
 
@@ -1089,7 +1089,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     private function getSelectedPaymentMethod()
     {
         $result = '';
-        $availablePaymentMethods = $this->populateListPaymentMethods(array());
+        $availablePaymentMethods = $this->populateListPaymentMethods([]);
 
         foreach ($availablePaymentMethods as $paymentMethod) {
             if ($paymentMethod['value'] == $this->getFormValue('method_of_payment')) {
@@ -1120,7 +1120,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         $result = '';
 
         if (!empty($selectedOptions)) {
-            $captions = array();
+            $captions = [];
 
             foreach ($selectedOptions as $currentSelection) {
                 if (isset($availableOptions[$currentSelection])) {
@@ -1247,15 +1247,15 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         /** @var string[] $allCountries */
         $allCountries = $this->staticInfo->initCountries('ALL', '', true);
 
-        $result = array();
+        $result = [];
         // Puts an empty item at the top so we won't have Afghanistan (the first entry) pre-selected for empty values.
-        $result[] = array('caption' => '', 'value' => '');
+        $result[] = ['caption' => '', 'value' => ''];
 
         foreach ($allCountries as $currentCountryName) {
-            $result[] = array(
+            $result[] = [
                 'caption' => $currentCountryName,
                 'value' => $currentCountryName,
-            );
+            ];
         }
 
         return $result;
@@ -1276,7 +1276,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         $this->initStaticInfo();
 
         $currentLanguageCode = Tx_Oelib_ConfigurationRegistry::get('config')->getAsString('language');
-        $identifiers = array('iso' => $defaultCountryCode);
+        $identifiers = ['iso' => $defaultCountryCode];
         $result = LocalizationUtility::getLabelFieldValue($identifiers, 'static_countries', $currentLanguageCode, true);
 
         return $result;
@@ -1289,7 +1289,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function populateCheckboxes()
     {
-        $result = array();
+        $result = [];
 
         if ($this->getSeminar()->hasCheckboxes()) {
             $result = $this->getSeminar()->getCheckboxes();
@@ -1306,7 +1306,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function hasCheckboxes()
     {
-        return $this->getSeminar()->hasCheckboxes() && $this->hasRegistrationFormField(array('elementname' => 'checkboxes'));
+        return $this->getSeminar()->hasCheckboxes() && $this->hasRegistrationFormField(['elementname' => 'checkboxes']);
     }
 
     /**
@@ -1316,7 +1316,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function populateLodgings()
     {
-        $result = array();
+        $result = [];
 
         if ($this->getSeminar()->hasLodgings()) {
             $result = $this->getSeminar()->getLodgings();
@@ -1347,7 +1347,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function hasLodgings()
     {
-        return $this->getSeminar()->hasLodgings() && $this->hasRegistrationFormField(array('elementname' => 'lodgings'));
+        return $this->getSeminar()->hasLodgings() && $this->hasRegistrationFormField(['elementname' => 'lodgings']);
     }
 
     /**
@@ -1357,7 +1357,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function populateFoods()
     {
-        $result = array();
+        $result = [];
 
         if ($this->getSeminar()->hasFoods()) {
             $result = $this->getSeminar()->getFoods();
@@ -1374,7 +1374,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function hasFoods()
     {
-        return $this->getSeminar()->hasFoods() && $this->hasRegistrationFormField(array('elementname' => 'foods'));
+        return $this->getSeminar()->hasFoods() && $this->hasRegistrationFormField(['elementname' => 'foods']);
     }
 
     /**
@@ -1416,7 +1416,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     public function isValidPriceSelected(array $formData)
     {
         return $this->getSeminar()->isPriceAvailable($formData['value'])
-            || !$this->hasRegistrationFormField(array('elementname' => 'price'));
+            || !$this->hasRegistrationFormField(['elementname' => 'price']);
     }
 
     /**
@@ -1432,7 +1432,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function getPreselectedPaymentMethod()
     {
-        $availablePaymentMethods = $this->populateListPaymentMethods(array());
+        $availablePaymentMethods = $this->populateListPaymentMethods([]);
         if (count($availablePaymentMethods) === 1) {
             return $availablePaymentMethods[0]['value'];
         }
@@ -1476,7 +1476,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             return;
         }
 
-        $parametersToSave = array(
+        $parametersToSave = [
             'method_of_payment',
             'account_number',
             'bank_code',
@@ -1492,7 +1492,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             'telephone',
             'email',
             'registered_themselves',
-        );
+        ];
 
         foreach ($parametersToSave as $currentKey) {
             if (isset($parameters[$currentKey])) {
@@ -1509,7 +1509,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     private function retrieveSavedMethodOfPayment()
     {
-        return (int)$this->retrieveDataFromSession(array('key' => 'method_of_payment'));
+        return (int)$this->retrieveDataFromSession(['key' => 'method_of_payment']);
     }
 
     /**
@@ -1536,10 +1536,10 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function prefillAccountOwner()
     {
-        $result = $this->retrieveDataFromSession(array('key' => 'account_owner'));
+        $result = $this->retrieveDataFromSession(['key' => 'account_owner']);
 
         if (empty($result)) {
-            $result = $this->getFeUserData(array('key' => 'name'));
+            $result = $this->getFeUserData(['key' => 'name']);
         }
 
         return $result;
@@ -1566,7 +1566,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     private function hideUnusedFormFields()
     {
-        static $availableFormFields = array(
+        static $availableFormFields = [
             'step_counter',
             'payment',
             'price',
@@ -1611,9 +1611,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             'terms',
             'terms_2',
             'traveling_terms',
-        );
+        ];
 
-        $formFieldsToHide = array();
+        $formFieldsToHide = [];
 
         foreach ($availableFormFields as $key) {
             if (!$this->isFormFieldEnabled($key)) {
@@ -1696,12 +1696,12 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     {
         $jsonEncodedData = $this->getFormValue('structured_attendees_names');
         if (!is_string($jsonEncodedData) || $jsonEncodedData === '') {
-            return array();
+            return [];
         }
 
         $result = json_decode($jsonEncodedData, true);
         if (!is_array($result)) {
-            $result = array();
+            $result = [];
         }
 
         return $result;

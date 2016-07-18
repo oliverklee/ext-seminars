@@ -145,7 +145,7 @@ class Tx_Seminars_OldModel_Speaker extends Tx_Seminars_OldModel_Abstract
             return '';
         }
 
-        $result = array();
+        $result = [];
         while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
             $result[] = $row['title'];
         }
@@ -251,7 +251,7 @@ class Tx_Seminars_OldModel_Speaker extends Tx_Seminars_OldModel_Abstract
             $result = $plugin->cObj->getTypoLink(
                 $safeTitle,
                 $this->getHomepage(),
-                array(),
+                [],
                 $plugin->getConfValueString('externalLinkTarget')
             );
         } else {

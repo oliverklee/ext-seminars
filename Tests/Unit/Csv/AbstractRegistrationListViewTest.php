@@ -53,12 +53,12 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
     /**
      * @var string[]
      */
-    public $frontEndUserFieldKeys = array();
+    public $frontEndUserFieldKeys = [];
 
     /**
      * @var array[]
      */
-    public $registrationFieldKeys = array();
+    public $registrationFieldKeys = [];
 
     protected function setUp()
     {
@@ -70,16 +70,16 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
         $configurationRegistry = Tx_Oelib_ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin', new Tx_Oelib_Configuration());
         $this->configuration = new Tx_Oelib_Configuration();
-        $this->configuration->setData(array('charsetForCsv' => 'utf-8'));
+        $this->configuration->setData(['charsetForCsv' => 'utf-8']);
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
         $this->pageUid = $this->testingFramework->createSystemFolder();
         $this->eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->pageUid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
-            )
+            ]
         );
 
         $this->subject = $this->getMockForAbstractClass('Tx_Seminars_Csv_AbstractRegistrationListView');
@@ -199,15 +199,15 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderCanContainOneRegistrationUid()
     {
-        $this->registrationFieldKeys = array('uid');
+        $this->registrationFieldKeys = ['uid'];
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         self::assertContains(
@@ -221,23 +221,23 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderCanContainTwoRegistrationUids()
     {
-        $this->registrationFieldKeys = array('uid');
+        $this->registrationFieldKeys = ['uid'];
 
         $firstRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
         $secondRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + 1),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         $registrationsList = $this->subject->render();
@@ -256,16 +256,16 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderCanContainNameOfUser()
     {
-        $this->frontEndUserFieldKeys = array('name');
+        $this->frontEndUserFieldKeys = ['name'];
 
-        $frontEndUserUid = $this->testingFramework->createFrontEndUser('', array('name' => 'foo_user'));
+        $frontEndUserUid = $this->testingFramework->createFrontEndUser('', ['name' => 'foo_user']);
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $frontEndUserUid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -279,16 +279,16 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderNotContainsUidOfRegistrationWithDeletedUser()
     {
-        $this->registrationFieldKeys = array('uid');
+        $this->registrationFieldKeys = ['uid'];
 
-        $frontEndUserUid = $this->testingFramework->createFrontEndUser('', array('deleted' => 1));
+        $frontEndUserUid = $this->testingFramework->createFrontEndUser('', ['deleted' => 1]);
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $frontEndUserUid,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -302,15 +302,15 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderNotContainsUidOfRegistrationWithInexistentUser()
     {
-        $this->registrationFieldKeys = array('uid');
+        $this->registrationFieldKeys = ['uid'];
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->getAutoIncrement('fe_users'),
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -324,23 +324,23 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderSeparatesLinesWithCarriageReturnAndLineFeed()
     {
-        $this->registrationFieldKeys = array('uid');
+        $this->registrationFieldKeys = ['uid'];
 
         $firstRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => 1,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
         $secondRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => 2,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         self::assertContains(
@@ -355,23 +355,23 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderHasResultThatEndsWithCarriageReturnAndLineFeed()
     {
-        $this->registrationFieldKeys = array('uid');
+        $this->registrationFieldKeys = ['uid'];
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         self::assertRegExp(
@@ -385,16 +385,16 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderEscapesDoubleQuotes()
     {
-        $this->registrationFieldKeys = array('uid', 'address');
+        $this->registrationFieldKeys = ['uid', 'address'];
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
-            )
+            ]
         );
 
         self::assertContains(
@@ -408,16 +408,16 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderNotEscapesRegularValues()
     {
-        $this->registrationFieldKeys = array('address');
+        $this->registrationFieldKeys = ['address'];
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -431,16 +431,16 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderWrapsValuesWithSemicolonsInDoubleQuotes()
     {
-        $this->registrationFieldKeys = array('address');
+        $this->registrationFieldKeys = ['address'];
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo ; bar',
-            )
+            ]
         );
 
         self::assertContains(
@@ -454,16 +454,16 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderWrapsValuesWithLineFeedsInDoubleQuotes()
     {
-        $this->registrationFieldKeys = array('address');
+        $this->registrationFieldKeys = ['address'];
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo' . LF . 'bar',
-            )
+            ]
         );
 
         self::assertContains(
@@ -477,16 +477,16 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderWrapsValuesWithDoubleQuotesInDoubleQuotes()
     {
-        $this->registrationFieldKeys = array('address');
+        $this->registrationFieldKeys = ['address'];
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
-            )
+            ]
         );
 
         self::assertContains(
@@ -500,17 +500,17 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderSeparatesTwoValuesWithSemicolons()
     {
-        $this->registrationFieldKeys = array('address', 'title');
+        $this->registrationFieldKeys = ['address', 'title'];
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo',
                 'title' => 'test',
-            )
+            ]
         );
 
         self::assertContains(
@@ -524,7 +524,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderDoesNotWrapHeadlineFieldsInDoubleQuotes()
     {
-        $this->registrationFieldKeys = array('address');
+        $this->registrationFieldKeys = ['address'];
 
         $registrationsList = $this->subject->render();
         $localizedAddress = $this->localizeAndRemoveColon('tx_seminars_attendances.address');
@@ -544,7 +544,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderSeparatesHeadlineFieldsWithSemicolons()
     {
-        $this->registrationFieldKeys = array('address', 'title');
+        $this->registrationFieldKeys = ['address', 'title'];
 
         self::assertContains(
             $this->localizeAndRemoveColon('tx_seminars_attendances.address') .
@@ -558,7 +558,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeadline()
     {
-        $this->frontEndUserFieldKeys = array('name');
+        $this->frontEndUserFieldKeys = ['name'];
 
         self::assertNotContains(
             'name;',
@@ -571,7 +571,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeadline()
     {
-        $this->registrationFieldKeys = array('address');
+        $this->registrationFieldKeys = ['address'];
 
         self::assertNotContains(
             ';address',
@@ -584,8 +584,8 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderForBothConfigurationFieldsNotEmptyAddsSemicolonBetweenConfigurationFields()
     {
-        $this->registrationFieldKeys = array('address');
-        $this->frontEndUserFieldKeys = array('name');
+        $this->registrationFieldKeys = ['address'];
+        $this->frontEndUserFieldKeys = ['name'];
 
         self::assertContains(
             $this->localizeAndRemoveColon('LGL.name') . ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.address'),
@@ -627,16 +627,16 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
         $this->subject->setEventUid(0);
         $this->subject->setPageUid($this->pageUid);
 
-        $this->registrationFieldKeys = array('address');
+        $this->registrationFieldKeys = ['address'];
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo',
                 'pid' => $this->pageUid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -653,16 +653,16 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
         $this->subject->setEventUid(0);
         $this->subject->setPageUid($this->pageUid);
 
-        $this->registrationFieldKeys = array('address');
+        $this->registrationFieldKeys = ['address'];
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo',
                 'pid' => $this->pageUid + 1,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -680,16 +680,16 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
         $this->subject->setPageUid($this->pageUid);
 
         $subpagePid = $this->testingFramework->createSystemFolder($this->pageUid);
-        $this->registrationFieldKeys = array('address');
+        $this->registrationFieldKeys = ['address'];
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo',
                 'pid' => $subpagePid,
-            )
+            ]
         );
 
         self::assertContains(

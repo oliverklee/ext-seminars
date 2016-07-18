@@ -193,10 +193,10 @@ class MailNotifier extends AbstractTask
     {
         $days = $this->getDaysBeforeBeginDate();
         if ($days == 0) {
-            return array();
+            return [];
         }
 
-        $result = array();
+        $result = [];
 
         $builder = $this->getSeminarBagBuilder(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
         $builder->limitToEventTakesPlaceReminderNotSent();
@@ -221,10 +221,10 @@ class MailNotifier extends AbstractTask
     private function getEventsToSendCancellationDeadlineReminderFor()
     {
         if (!$this->getConfiguration()->getAsBoolean('sendCancelationDeadlineReminder')) {
-            return array();
+            return [];
         }
 
-        $result = array();
+        $result = [];
 
         /** @var $builder \Tx_Seminars_BagBuilder_Event */
         $builder = $this->getSeminarBagBuilder(\Tx_Seminars_Model_Event::STATUS_PLANNED);
@@ -318,14 +318,14 @@ class MailNotifier extends AbstractTask
         $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $result = $languageService->getLL($locallangKey);
 
-        foreach (array(
+        foreach ([
             '%begin_date' => $this->getDate($event->getBeginDateAsTimeStamp()),
             '%days' => $this->getDaysBeforeBeginDate(),
             '%event' => $event->getTitle(),
             '%organizer' => $organizerName,
             '%registrations' => $event->getAttendances(),
             '%uid' => $event->getUid(),
-        ) as $search => $replace) {
+        ] as $search => $replace) {
             $result = str_replace($search, $replace, $result);
         }
 

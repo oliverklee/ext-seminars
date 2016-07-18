@@ -41,7 +41,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getPublishSettingWithoutPublishSettingReturnsPublishAll()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
@@ -54,7 +54,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getPublishSettingWithPublishSettingSetToZeroReturnsPublishAll()
     {
-        $this->fixture->setData(array('tx_seminars_publish_events' => 0));
+        $this->fixture->setData(['tx_seminars_publish_events' => 0]);
 
         self::assertEquals(
             Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
@@ -67,7 +67,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getPublishSettingWithPublishSettingSetToOneReturnsHideNew()
     {
-        $this->fixture->setData(array('tx_seminars_publish_events' => 1));
+        $this->fixture->setData(['tx_seminars_publish_events' => 1]);
 
         self::assertEquals(
             Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
@@ -80,7 +80,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getPublishSettingWithPublishSettingSetToTwoReturnsHideEdited()
     {
-        $this->fixture->setData(array('tx_seminars_publish_events' => 2));
+        $this->fixture->setData(['tx_seminars_publish_events' => 2]);
 
         self::assertEquals(
             Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
@@ -97,7 +97,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getAuxiliaryRecordsPidWithoutPidReturnsZero()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             0,
@@ -110,7 +110,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getAuxiliaryRecordsPidWithPidReturnsPid()
     {
-        $this->fixture->setData(array('tx_seminars_auxiliary_records_pid' => 42));
+        $this->fixture->setData(['tx_seminars_auxiliary_records_pid' => 42]);
 
         self::assertEquals(
             42,
@@ -127,7 +127,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function hasAuxiliaryRecordsPidWithoutPidReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->hasAuxiliaryRecordsPid()
@@ -139,7 +139,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function hasAuxiliaryRecordsPidWithPidReturnsTrue()
     {
-        $this->fixture->setData(array('tx_seminars_auxiliary_records_pid' => 42));
+        $this->fixture->setData(['tx_seminars_auxiliary_records_pid' => 42]);
 
         self::assertTrue(
             $this->fixture->hasAuxiliaryRecordsPid()
@@ -155,7 +155,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function hasReviewerForGroupWithoutReviewerReturnsFalse()
     {
-        $this->fixture->setData(array('tx_seminars_reviewer' => null));
+        $this->fixture->setData(['tx_seminars_reviewer' => null]);
 
         self::assertFalse(
             $this->fixture->hasReviewer()
@@ -169,7 +169,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
     {
         $backEndUser = new Tx_Oelib_Model_BackEndUser();
 
-        $this->fixture->setData(array('tx_seminars_reviewer' => $backEndUser));
+        $this->fixture->setData(['tx_seminars_reviewer' => $backEndUser]);
 
         self::assertTrue(
             $this->fixture->hasReviewer()
@@ -181,7 +181,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getReviewerForGroupWithoutReviewerReturnsNull()
     {
-        $this->fixture->setData(array('tx_seminars_reviewer' => null));
+        $this->fixture->setData(['tx_seminars_reviewer' => null]);
 
         self::assertNull(
             $this->fixture->getReviewer()
@@ -195,7 +195,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
     {
         $backEndUser = new Tx_Oelib_Model_BackEndUser();
 
-        $this->fixture->setData(array('tx_seminars_reviewer' => $backEndUser));
+        $this->fixture->setData(['tx_seminars_reviewer' => $backEndUser]);
 
         self::assertSame(
             $backEndUser,
@@ -212,7 +212,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function hasEventRecordPidForNoPidSetReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->hasEventRecordPid()
@@ -224,7 +224,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function hasEventRecordPidForPidSetReturnsTrue()
     {
-        $this->fixture->setData(array('tx_seminars_events_pid' => 42));
+        $this->fixture->setData(['tx_seminars_events_pid' => 42]);
 
         self::assertTrue(
             $this->fixture->hasEventRecordPid()
@@ -236,7 +236,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getEventRecordPidForNoPidSetReturnsZero()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             0,
@@ -249,7 +249,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getEventRecordPidForPidSetReturnsThisPid()
     {
-        $this->fixture->setData(array('tx_seminars_events_pid' => 42));
+        $this->fixture->setData(['tx_seminars_events_pid' => 42]);
 
         self::assertEquals(
             42,
@@ -266,7 +266,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getDefaultCategoriesForNoCategoriesReturnsAList()
     {
-        $this->fixture->setData(array('tx_seminars_default_categories' => new Tx_Oelib_List()));
+        $this->fixture->setData(['tx_seminars_default_categories' => new Tx_Oelib_List()]);
 
         self::assertInstanceOf(Tx_Oelib_List::class, $this->fixture->getDefaultCategories());
     }
@@ -281,7 +281,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
             ->getNewGhost();
 
         $list->add($category);
-        $this->fixture->setData(array('tx_seminars_default_categories' => $list));
+        $this->fixture->setData(['tx_seminars_default_categories' => $list]);
 
         self::assertSame(
             $category,
@@ -298,7 +298,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function hasDefaultCategoriesForNoAssignedCategoriesReturnsFalse()
     {
-        $this->fixture->setData(array('tx_seminars_default_categories' => new Tx_Oelib_List()));
+        $this->fixture->setData(['tx_seminars_default_categories' => new Tx_Oelib_List()]);
 
         self::assertFalse(
             $this->fixture->hasDefaultCategories()
@@ -316,7 +316,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
                 ->getNewGhost()
         );
 
-        $this->fixture->setData(array('tx_seminars_default_categories' => $list));
+        $this->fixture->setData(['tx_seminars_default_categories' => $list]);
 
         self::assertTrue(
             $this->fixture->hasDefaultCategories()
@@ -334,7 +334,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
     {
         $organizer = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
             ->getNewGhost();
-        $this->fixture->setData(array('tx_seminars_default_organizer' => $organizer));
+        $this->fixture->setData(['tx_seminars_default_organizer' => $organizer]);
 
         self::assertSame(
             $organizer,
@@ -349,7 +349,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
     {
         $organizer = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
             ->getNewGhost();
-        $this->fixture->setData(array('tx_seminars_default_organizer' => $organizer));
+        $this->fixture->setData(['tx_seminars_default_organizer' => $organizer]);
 
         self::assertTrue(
             $this->fixture->hasDefaultOrganizer()
@@ -361,7 +361,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function hasDefaultOrganizerForNotSetOrganizerReturnsFalse()
     {
-        $this->fixture->setData(array('tx_seminars_default_organizer' => null));
+        $this->fixture->setData(['tx_seminars_default_organizer' => null]);
 
         self::assertFalse(
             $this->fixture->hasDefaultOrganizer()

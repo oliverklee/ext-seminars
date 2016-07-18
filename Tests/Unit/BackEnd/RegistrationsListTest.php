@@ -60,10 +60,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
 
         $this->backEndModule = new Tx_Seminars_BackEnd_Module();
         $this->backEndModule->id = $this->dummySysFolderPid;
-        $this->backEndModule->setPageData(array(
+        $this->backEndModule->setPageData([
             'uid' => $this->dummySysFolderPid,
             'doktype' => Tx_Seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
-        ));
+        ]);
 
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
@@ -91,19 +91,19 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
                 'accreditation_number' => 'accreditation number 123',
-            )
+            ]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'seminar' => $seminarUid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -116,19 +116,19 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
                 'accreditation_number' => '&"<>',
-            )
+            ]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'seminar' => $seminarUid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -140,19 +140,19 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function testShowShowsUserName()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', array('name' => 'foo_user')
+            '', ['name' => 'foo_user']
         );
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('pid' => $this->dummySysFolderPid)
+            ['pid' => $this->dummySysFolderPid]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'seminar' => $seminarUid,
                 'user' => $userUid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -164,20 +164,20 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function testShowWithRegistrationForDeletedUserDoesNotShowUserName()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', array('name' => 'foo_user', 'deleted' => 1)
+            '', ['name' => 'foo_user', 'deleted' => 1]
         );
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('pid' => $this->dummySysFolderPid)
+            ['pid' => $this->dummySysFolderPid]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'seminar' => $seminarUid,
                 'user' => $userUid,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -191,16 +191,16 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
         $userUid = $this->testingFramework->getAutoIncrement('fe_users');
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('pid' => $this->dummySysFolderPid)
+            ['pid' => $this->dummySysFolderPid]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'seminar' => $seminarUid,
                 'user' => $userUid,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -213,18 +213,18 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
-            )
+            ]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'seminar' => $seminarUid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -237,19 +237,19 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
                 'deleted' => 1,
-            )
+            ]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'seminar' => $seminarUid,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -261,7 +261,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function testShowForOneInexistentEventShowsUserName()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', array('name' => 'user_foo')
+            '', ['name' => 'user_foo']
         );
         $seminarUid = $this->testingFramework->getAutoIncrement(
             'tx_seminars_seminars'
@@ -269,11 +269,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'seminar' => $seminarUid,
                 'user' => $userUid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -292,18 +292,18 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
         );
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event for registration in subfolder',
-            )
+            ]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $subfolderPid,
                 'seminar' => $seminarUid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -316,18 +316,18 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
-            )
+            ]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'seminar' => $seminarUid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -340,10 +340,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -359,10 +359,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     {
         $_GET['eventUid'] = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
-            )
+            ]
         );
 
         self::assertContains(
@@ -378,10 +378,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
-            )
+            ]
         );
         $_GET['eventUid'] = $eventUid;
 
@@ -397,15 +397,15 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function showForEventUidSetShowsRegistrationOfThisEvent()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', array('name' => 'user_foo')
+            '', ['name' => 'user_foo']
         );
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $eventUid,
                 'user' => $userUid,
-            )
+            ]
         );
 
         $_GET['eventUid'] = $eventUid;
@@ -424,12 +424,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array('name' => 'user_foo')
+                    '', ['name' => 'user_foo']
                 ),
-            )
+            ]
         );
 
         $_GET['eventUid'] = $this->testingFramework->createRecord(
@@ -448,15 +448,15 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function showForEventUidAddsEventUidToCsvExportIcon()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', array('name' => 'user_foo')
+            '', ['name' => 'user_foo']
         );
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $eventUid,
                 'user' => $userUid,
-            )
+            ]
         );
 
         $_GET['eventUid'] = $eventUid;
@@ -473,15 +473,15 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function showForEventUidDoesNotAddPidToCsvExportIcon()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', array('name' => 'user_foo')
+            '', ['name' => 'user_foo']
         );
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $eventUid,
                 'user' => $userUid,
-            )
+            ]
         );
 
         $_GET['eventUid'] = $eventUid;
@@ -498,15 +498,15 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function showForNoEventUidDoesNotAddEventUidToCsvExportIcon()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', array('name' => 'user_foo')
+            '', ['name' => 'user_foo']
         );
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $eventUid,
                 'user' => $userUid,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -524,11 +524,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
         $newRegistrationFolder = $this->dummySysFolderPid + 1;
         $backEndGroup = Tx_Oelib_MapperRegistry::get(
             Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
-            array('tx_seminars_registrations_folder' => $newRegistrationFolder)
+            ['tx_seminars_registrations_folder' => $newRegistrationFolder]
         );
         $backEndUser = Tx_Oelib_MapperRegistry::get(
             Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel(
-                array('usergroup' => $backEndGroup->getUid())
+                ['usergroup' => $backEndGroup->getUid()]
         );
         Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
             $backEndUser

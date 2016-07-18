@@ -61,7 +61,7 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(array('title' => 'Cash'));
+        $this->fixture->setData(['title' => 'Cash']);
 
         self::assertEquals(
             'Cash',
@@ -78,7 +78,7 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends Tx_Phpunit_TestCase
      */
     public function getDescriptionWithoutDescriptionReturnsAnEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -91,7 +91,7 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends Tx_Phpunit_TestCase
      */
     public function getDescriptionWithDescriptionReturnsDescription()
     {
-        $this->fixture->setData(array('description' => 'Just plain cash, baby!'));
+        $this->fixture->setData(['description' => 'Just plain cash, baby!']);
 
         self::assertEquals(
             'Just plain cash, baby!',
@@ -117,7 +117,7 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends Tx_Phpunit_TestCase
      */
     public function hasDescriptionWithoutDescriptionReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->hasDescription()

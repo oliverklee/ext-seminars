@@ -37,7 +37,7 @@ class Tx_Seminars_Tests_Unit_Bag_EventTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('title' => 'test event')
+            ['title' => 'test event']
         );
 
         $this->fixture = new Tx_Seminars_Bag_Event('is_dummy_record=1');

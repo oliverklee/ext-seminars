@@ -61,7 +61,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(array('title' => 'Superhero'));
+        $this->fixture->setData(['title' => 'Superhero']);
 
         self::assertEquals(
             'Superhero',
@@ -78,7 +78,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
      */
     public function getBeginDateAsUnixTimeStampWithoutBeginDateReturnsZero()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             0,
@@ -91,7 +91,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
      */
     public function getBeginDateAsUnixTimeStampWithBeginDateReturnsBeginDate()
     {
-        $this->fixture->setData(array('begin_date' => 42));
+        $this->fixture->setData(['begin_date' => 42]);
 
         self::assertEquals(
             42,
@@ -143,7 +143,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
      */
     public function hasBeginDateWithoutBeginDateReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->hasBeginDate()
@@ -171,7 +171,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
      */
     public function getEndDateAsUnixTimeStampWithoutEndDateReturnsZero()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             0,
@@ -184,7 +184,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
      */
     public function getEndDateAsUnixTimeStampWithEndDateReturnsEndDate()
     {
-        $this->fixture->setData(array('end_date' => 42));
+        $this->fixture->setData(['end_date' => 42]);
 
         self::assertEquals(
             42,
@@ -236,7 +236,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
      */
     public function hasEndDateWithoutEndDateReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->hasEndDate()
@@ -264,7 +264,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
      */
     public function getRoomWithoutRoomReturnsAnEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -277,7 +277,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
      */
     public function getRoomWithRoomReturnsRoom()
     {
-        $this->fixture->setData(array('room' => 'cuby'));
+        $this->fixture->setData(['room' => 'cuby']);
 
         self::assertEquals(
             'cuby',
@@ -303,7 +303,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
      */
     public function hasRoomWithoutRoomReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->hasRoom()

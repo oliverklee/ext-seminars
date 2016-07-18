@@ -61,7 +61,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', array('title' => 'registration for event')
+            'tx_seminars_attendances', ['title' => 'registration for event']
         );
 
         /** @var Tx_Seminars_Model_Registration $model */
@@ -86,7 +86,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
 
         self::assertTrue(
             $this->fixture->getLoadedTestingModel(
-                array('seminar' => $event->getUid())
+                ['seminar' => $event->getUid()]
             )->getEvent() instanceof
                 Tx_Seminars_Model_Event
         );
@@ -102,7 +102,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
 
         self::assertTrue(
             $this->fixture->getLoadedTestingModel(
-                array('seminar' => $event->getUid())
+                ['seminar' => $event->getUid()]
             )->getSeminar() instanceof
                 Tx_Seminars_Model_Event
         );
@@ -123,7 +123,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
         self::assertInstanceOf(
             Tx_Seminars_Model_FrontEndUser::class,
             $this->fixture->getLoadedTestingModel(
-                array('user' => $frontEndUser->getUid())
+                ['user' => $frontEndUser->getUid()]
             )->getFrontEndUser()
         );
     }
@@ -138,7 +138,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     public function getPaymentMethodWithoutPaymentMethodReturnsNull()
     {
         self::assertNull(
-            $this->fixture->getLoadedTestingModel(array())->getPaymentMethod()
+            $this->fixture->getLoadedTestingModel([])->getPaymentMethod()
         );
     }
 
@@ -152,7 +152,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
 
         self::assertTrue(
             $this->fixture->getLoadedTestingModel(
-                array('method_of_payment' => $paymentMethod->getUid())
+                ['method_of_payment' => $paymentMethod->getUid()]
             )->getPaymentMethod() instanceof
                 Tx_Seminars_Model_PaymentMethod
         );
@@ -169,7 +169,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getLodgings()
+            $this->fixture->getLoadedTestingModel([])->getLodgings()
         );
     }
 
@@ -221,7 +221,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getFoods()
+            $this->fixture->getLoadedTestingModel([])->getFoods()
         );
     }
 
@@ -273,7 +273,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getCheckboxes()
+            $this->fixture->getLoadedTestingModel([])->getCheckboxes()
         );
     }
 
@@ -327,10 +327,10 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     public function relationToAdditionalPersonsReturnsPersonsFromDatabase()
     {
         $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', array('additional_persons' => 1)
+            'tx_seminars_attendances', ['additional_persons' => 1]
         );
         $personUid = $this->testingFramework->createFrontEndUser(
-            '', array('tx_seminars_registration' => $registrationUid)
+            '', ['tx_seminars_registration' => $registrationUid]
         );
 
         /** @var Tx_Seminars_Model_Registration $model */

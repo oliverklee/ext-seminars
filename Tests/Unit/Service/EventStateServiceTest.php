@@ -21,7 +21,7 @@ use TYPO3\CMS\Core\SingletonInterface;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class EventStatusServiceTest extends \Tx_Phpunit_TestCase
+class EventStateServiceTest extends \Tx_Phpunit_TestCase
 {
     /**
      * @var EventStatusService

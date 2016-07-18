@@ -37,7 +37,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends Tx_Phpunit_TestCas
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
         $this->fixture = new Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView(
-            array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
+            ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             $GLOBALS['TSFE']->cObj
         );
     }

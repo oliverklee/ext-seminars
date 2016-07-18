@@ -66,7 +66,7 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(array('title' => 'Lecture'));
+        $this->fixture->setData(['title' => 'Lecture']);
 
         self::assertEquals(
             'Lecture',
@@ -83,7 +83,7 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends Tx_Phpunit_TestCase
      */
     public function getIconInitiallyReturnsAnEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -96,7 +96,7 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends Tx_Phpunit_TestCase
      */
     public function getIconWithNonEmptyIconReturnsIcon()
     {
-        $this->fixture->setData(array('icon' => 'icon.gif'));
+        $this->fixture->setData(['icon' => 'icon.gif']);
 
         self::assertEquals(
             'icon.gif',
@@ -122,7 +122,7 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends Tx_Phpunit_TestCase
      */
     public function hasIconInitiallyReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->hasIcon()
@@ -150,7 +150,7 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends Tx_Phpunit_TestCase
      */
     public function getSingleViewPageUidReturnsSingleViewPageUid()
     {
-        $this->fixture->setData(array('single_view_page' => 42));
+        $this->fixture->setData(['single_view_page' => 42]);
 
         self::assertEquals(
             42,
@@ -163,7 +163,7 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends Tx_Phpunit_TestCase
      */
     public function hasSingleViewPageUidForZeroPageUidReturnsFalse()
     {
-        $this->fixture->setData(array('single_view_page' => 0));
+        $this->fixture->setData(['single_view_page' => 0]);
 
         self::assertFalse(
             $this->fixture->hasSingleViewPageUid()
@@ -175,7 +175,7 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends Tx_Phpunit_TestCase
      */
     public function hasSingleViewPageUidForNonZeroPageUidReturnsTrue()
     {
-        $this->fixture->setData(array('single_view_page' => 42));
+        $this->fixture->setData(['single_view_page' => 42]);
 
         self::assertTrue(
             $this->fixture->hasSingleViewPageUid()

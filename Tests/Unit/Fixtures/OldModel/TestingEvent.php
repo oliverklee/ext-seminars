@@ -25,7 +25,7 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Sem
      * @param int $uid the UID of the event to retrieve from the DB, must be > 0
      * @param array $configuration TS setup configuration array, may be empty
      */
-    public function __construct($uid, array $configuration = array())
+    public function __construct($uid, array $configuration = [])
     {
         parent::__construct($uid);
 

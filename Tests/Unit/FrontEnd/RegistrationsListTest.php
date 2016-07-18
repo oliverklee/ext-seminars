@@ -56,19 +56,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
 
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'title' => 'Test event & more',
                 'attendees_max' => 10,
                 'needs_registration' => 1,
-            )
+            ]
         );
 
         $this->fixture = new Tx_Seminars_FrontEnd_RegistrationsList(
-            array(
+            [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'enableRegistration' => 1,
-            ),
+            ],
             'list_registrations',
             $this->seminarUid,
             $GLOBALS['TSFE']->cObj
@@ -97,14 +97,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     private function createLogInAndRegisterFrontEndUser()
     {
         $this->feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
-            '', array('name' => 'Tom & Jerry')
+            '', ['name' => 'Tom & Jerry']
         );
         $this->registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->seminarUid,
                 'user' => $this->feUserUid,
-            )
+            ]
         );
     }
 
@@ -153,7 +153,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
         );
 
         new Tx_Seminars_FrontEnd_RegistrationsList(
-            array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
+            ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'foo', 0, $GLOBALS['TSFE']->cObj
         );
     }
@@ -164,7 +164,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function createFixtureWithListRegistrationsAsWhatToDisplayDoesNotThrowException()
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationsList(
-            array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
+            ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations', 0, $GLOBALS['TSFE']->cObj
         );
     }
@@ -175,7 +175,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function createFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException()
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationsList(
-            array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
+            ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_vip_registrations', 0, $GLOBALS['TSFE']->cObj
         );
     }
@@ -201,7 +201,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithNegativeSeminarUidReturnsHeader404()
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationsList(
-            array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
+            ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations', -1, $GLOBALS['TSFE']->cObj
         );
         $fixture->render();
@@ -218,7 +218,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithZeroSeminarUidReturnsHeader404()
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationsList(
-            array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
+            ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations', 0, $GLOBALS['TSFE']->cObj
         );
         $fixture->render();
@@ -367,7 +367,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'fe_users',
             $this->feUserUid,
-            array('name' => 'Tom & Jerry')
+            ['name' => 'Tom & Jerry']
         );
         $result = $this->fixture->render();
 
@@ -441,7 +441,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
             $this->registrationUid,
-            array('seats' => 42)
+            ['seats' => 42]
         );
 
         self::assertContains(
@@ -462,7 +462,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
             $this->registrationUid,
-            array('interests' => 'everything practical & theoretical')
+            ['interests' => 'everything practical & theoretical']
         );
 
         self::assertContains(
@@ -503,7 +503,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_attendances',
             $this->registrationUid,
-            array('seats' => 42)
+            ['seats' => 42]
         );
 
         self::assertContains(
@@ -560,7 +560,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
         $this->createLogInAndRegisterFrontEndUser();
 
         $this->testingFramework->changeRecord(
-            'fe_users', $this->feUserUid, array('deleted' => 1)
+            'fe_users', $this->feUserUid, ['deleted' => 1]
         );
 
         self::assertNotContains(
@@ -582,11 +582,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $secondRegistration = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->seminarUid,
                 'user' => $feUserUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'] + 500,
-            )
+            ]
         );
 
         self::assertRegExp(
@@ -624,11 +624,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->seminarUid,
                 'user' => $feUserUid,
                 'registration_queue' => 1,
-            )
+            ]
         );
 
         self::assertContains(
@@ -650,11 +650,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $secondRegistration = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->seminarUid,
                 'user' => $feUserUid,
                 'registration_queue' => 1,
-            )
+            ]
         );
 
         self::assertRegExp(

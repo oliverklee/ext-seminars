@@ -63,14 +63,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      *
      * @var array
      */
-    private $extConfBackup = array();
+    private $extConfBackup = [];
 
     /**
      * backed-up T3_VAR configuration
      *
      * @var array
      */
-    private $t3VarBackup = array();
+    private $t3VarBackup = [];
 
     /**
      * @var Tx_Seminars_Service_SingleViewLinkBuilder
@@ -88,7 +88,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
         $this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = array();
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
 
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
@@ -108,18 +108,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Test & event',
                 'subtitle' => 'Something for you & me',
                 'accreditation_number' => '1 & 1',
                 'room' => 'Rooms 2 & 3',
-            )
+            ]
         );
 
         $this->fixture = new Tx_Seminars_FrontEnd_DefaultController();
         $this->fixture->init(
-            array(
+            [
                 'isStaticTemplateLoaded' => 1,
                 'enableRegistration' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
@@ -127,15 +127,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
                 'pidList' => $this->systemFolderPid,
                 'pages' => $this->systemFolderPid,
                 'recursive' => 1,
-                'listView.' => array(
+                'listView.' => [
                     'orderBy' => 'data',
                     'descFlag' => 0,
                     'results_at_a_time' => 999,
                     'maxPages' => 5,
-                ),
+                ],
                 'eventFieldsOnRegistrationPage' => 'title,price_regular,price_special,vacancies,accreditation_number',
                 'linkToSingleView' => 'always',
-            )
+            ]
         );
         $this->fixture->getTemplateCode();
         $this->fixture->setLabels();
@@ -149,7 +149,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->linkBuilder = $this->getMock(
             Tx_Seminars_Service_SingleViewLinkBuilder::class,
-            array('createRelativeUrlForEvent')
+            ['createRelativeUrlForEvent']
         );
         $this->linkBuilder->expects(self::any())
             ->method('createRelativeUrlForEvent')
@@ -159,7 +159,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->injectLinkBuilder($this->linkBuilder);
 
         /** @var $content ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject */
-        $content = $this->getMock(ContentObjectRenderer::class, array('IMAGE'));
+        $content = $this->getMock(ContentObjectRenderer::class, ['IMAGE']);
         $content->expects(self::any())->method('IMAGE')->will(self::returnValue('<img src="foo.jpg" alt="bar"/>'));
         $this->fixture->cObj = $content;
     }
@@ -186,7 +186,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addTargetGroupRelation(array $targetGroupData = array())
+    private function addTargetGroupRelation(array $targetGroupData = [])
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups', $targetGroupData
@@ -200,7 +200,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->numberOfTargetGroups++;
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('target_groups' => $this->numberOfTargetGroups)
+            ['target_groups' => $this->numberOfTargetGroups]
         );
 
         return $uid;
@@ -217,10 +217,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $feUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         return $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->seminarUid,
                 'user' => $feUserUid,
-            )
+            ]
         );
     }
 
@@ -241,7 +241,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('vips' => 1)
+            ['vips' => 1]
         );
     }
 
@@ -253,7 +253,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addCategoryRelation(array $categoryData = array())
+    private function addCategoryRelation(array $categoryData = [])
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_categories', $categoryData
@@ -267,7 +267,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->numberOfCategories++;
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('categories' => $this->numberOfCategories)
+            ['categories' => $this->numberOfCategories]
         );
 
         return $uid;
@@ -281,7 +281,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      *
      * @return void
      */
-    private function addOrganizerRelation(array $organizerData = array())
+    private function addOrganizerRelation(array $organizerData = [])
     {
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers', $organizerData
@@ -295,7 +295,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->numberOfOrganizers++;
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('organizers' => $this->numberOfOrganizers)
+            ['organizers' => $this->numberOfOrganizers]
         );
     }
 
@@ -352,9 +352,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     private function createContentMock()
     {
-        $mock = $this->getMock(ContentObjectRenderer::class, array('getTypoLink'));
+        $mock = $this->getMock(ContentObjectRenderer::class, ['getTypoLink']);
         $mock->expects(self::any())->method('getTypoLink')
-            ->will(self::returnCallback(array($this, 'getTypoLink')));
+            ->will(self::returnCallback([$this, 'getTypoLink']));
 
         return $mock;
     }
@@ -369,7 +369,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      *
      * @return string faked link tag, will not be empty
      */
-    public function getTypoLink($label, $pageId, array $urlParameters = array())
+    public function getTypoLink($label, $pageId, array $urlParameters = [])
     {
         $encodedParameters = '';
         foreach ($urlParameters as $key => $value) {
@@ -386,16 +386,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function testAddTargetGroupRelationReturnsUid()
     {
         self::assertTrue(
-            $this->addTargetGroupRelation(array()) > 0
+            $this->addTargetGroupRelation([]) > 0
         );
     }
 
     public function testAddTargetGroupRelationCreatesNewUids()
     {
-        $this->addTargetGroupRelation(array());
+        $this->addTargetGroupRelation([]);
         self::assertNotEquals(
-            $this->addTargetGroupRelation(array()),
-            $this->addTargetGroupRelation(array())
+            $this->addTargetGroupRelation([]),
+            $this->addTargetGroupRelation([])
         );
     }
 
@@ -406,13 +406,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             $this->numberOfTargetGroups
         );
 
-        $this->addTargetGroupRelation(array());
+        $this->addTargetGroupRelation([]);
         self::assertEquals(
             1,
             $this->numberOfTargetGroups
         );
 
-        $this->addTargetGroupRelation(array());
+        $this->addTargetGroupRelation([]);
         self::assertEquals(
             2,
             $this->numberOfTargetGroups
@@ -430,7 +430,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         );
 
-        $this->addTargetGroupRelation(array());
+        $this->addTargetGroupRelation([]);
         self::assertEquals(
             1,
             $this->testingFramework->countRecords(
@@ -439,7 +439,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             )
         );
 
-        $this->addTargetGroupRelation(array());
+        $this->addTargetGroupRelation([]);
         self::assertEquals(
             2,
             $this->testingFramework->countRecords(
@@ -484,15 +484,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function testAddCategoryRelationReturnsPositiveUid()
     {
         self::assertTrue(
-            $this->addCategoryRelation(array()) > 0
+            $this->addCategoryRelation([]) > 0
         );
     }
 
     public function testAddCategoryRelationCreatesNewUids()
     {
         self::assertNotEquals(
-            $this->addCategoryRelation(array()),
-            $this->addCategoryRelation(array())
+            $this->addCategoryRelation([]),
+            $this->addCategoryRelation([])
         );
     }
 
@@ -503,13 +503,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             $this->numberOfCategories
         );
 
-        $this->addCategoryRelation(array());
+        $this->addCategoryRelation([]);
         self::assertEquals(
             1,
             $this->numberOfCategories
         );
 
-        $this->addCategoryRelation(array());
+        $this->addCategoryRelation([]);
         self::assertEquals(
             2,
             $this->numberOfCategories
@@ -527,7 +527,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         );
 
-        $this->addCategoryRelation(array());
+        $this->addCategoryRelation([]);
         self::assertEquals(
             1,
             $this->testingFramework->countRecords(
@@ -536,7 +536,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             )
         );
 
-        $this->addCategoryRelation(array());
+        $this->addCategoryRelation([]);
         self::assertEquals(
             2,
             $this->testingFramework->countRecords(
@@ -600,7 +600,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             '>foo & bar</a>',
-            $contentMock->getTypoLink('foo & bar', array()), 42
+            $contentMock->getTypoLink('foo & bar', []), 42
         );
     }
 
@@ -616,7 +616,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             $contentMock->getTypoLink(
                 'link label',
                 1,
-                array('tx_seminars_pi1%5Bseminar%5D' => 42)
+                ['tx_seminars_pi1%5Bseminar%5D' => 42]
             )
         );
     }
@@ -633,10 +633,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             $contentMock->getTypoLink(
                 'link label',
                 1,
-                array(
+                [
                     'tx_seminars_pi1%5Bseminar%5D' => 42,
-                    'foo' => 'bar'
-                )
+                    'foo' => 'bar',
+                ]
             )
         );
     }
@@ -669,7 +669,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->createRegistration(
             $this->testingFramework->createRecord(
                 'tx_seminars_attendances',
-                array('seminar' => $this->seminarUid)
+                ['seminar' => $this->seminarUid]
             )
         );
 
@@ -698,17 +698,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $controller = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
-            array(
+            [
                 'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
-                'setCSS', 'createHelperObjects', 'setErrorMessage'
-            )
+                'setCSS', 'createHelperObjects', 'setErrorMessage',
+            ]
         );
         $controller->expects(self::once())->method('createSingleView');
         $controller->expects(self::never())->method('createListView');
 
-        $controller->piVars = array('showUid' => 42);
+        $controller->piVars = ['showUid' => 42];
 
-        $controller->main('', array('what_to_display' => 'single_view'));
+        $controller->main('', ['what_to_display' => 'single_view']);
     }
 
     /**
@@ -718,17 +718,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $controller = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
-            array(
+            [
                 'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
-                'setCSS', 'createHelperObjects', 'setErrorMessage'
-            )
+                'setCSS', 'createHelperObjects', 'setErrorMessage',
+            ]
         );
         $controller->expects(self::once())->method('createSingleView');
         $controller->expects(self::never())->method('createListView');
 
-        $controller->piVars = array();
+        $controller->piVars = [];
 
-        $controller->main('', array('what_to_display' => 'single_view', 'showSingleEvent' => 42));
+        $controller->main('', ['what_to_display' => 'single_view', 'showSingleEvent' => 42]);
     }
 
     /**
@@ -738,17 +738,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $controller = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
-            array(
+            [
                 'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
-                'setCSS', 'createHelperObjects', 'setErrorMessage'
-            )
+                'setCSS', 'createHelperObjects', 'setErrorMessage',
+            ]
         );
         $controller->expects(self::once())->method('createSingleView');
         $controller->expects(self::never())->method('createListView');
 
-        $controller->piVars = array();
+        $controller->piVars = [];
 
-        $controller->main('', array('what_to_display' => 'single_view'));
+        $controller->main('', ['what_to_display' => 'single_view']);
     }
 
     /**
@@ -761,7 +761,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Test &amp; event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -775,7 +775,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Something for you &amp; me',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -789,7 +789,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Rooms 2 &amp; 3',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -803,7 +803,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             '1 &amp; 1',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -814,33 +814,33 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'Test topic',
-            )
+            ]
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + Tx_Oelib_Time::SECONDS_PER_DAY,
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date 2',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 2*Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 3*Tx_Oelib_Time::SECONDS_PER_DAY,
-            )
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 2 * Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 3 * Tx_Oelib_Time::SECONDS_PER_DAY,
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -848,7 +848,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'tx_seminars_pi1%5BshowUid%5D=1337',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -862,39 +862,39 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'Test topic',
-            )
+            ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + Tx_Oelib_Time::SECONDS_PER_DAY,
-            )
+            ]
         );
         $singleEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'topic' => $topicUid,
                 'title' => 'Test single 2',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 2*Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 3*Tx_Oelib_Time::SECONDS_PER_DAY,
-            )
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 2 * Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 3 * Tx_Oelib_Time::SECONDS_PER_DAY,
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $dateUid;
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
 
         self::assertNotContains(
             'tx_seminars_pi1%5BshowUid%5D=' . $singleEventUid,
@@ -909,36 +909,36 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'Test topic',
-            )
+            ]
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + Tx_Oelib_Time::SECONDS_PER_DAY,
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date 2',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 2*Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 3*Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 2 * Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 3 * Tx_Oelib_Time::SECONDS_PER_DAY,
                 'needs_registration' => 1,
                 'attendees_max' => 5,
                 'offline_attendees' => 5,
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -946,7 +946,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'tx_seminars_pi1%5BshowUid%5D=1337',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -961,43 +961,43 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'Test topic',
-            )
+            ]
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + Tx_Oelib_Time::SECONDS_PER_DAY,
-            )
+            ]
         );
         $dateUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date 2',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 2*Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 3*Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 2 * Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK + 3 * Tx_Oelib_Time::SECONDS_PER_DAY,
                 'needs_registration' => 1,
                 'attendees_max' => 5,
                 'offline_attendees' => 5,
-            )
+            ]
         );
 
         $this->fixture->piVars['showUid'] = $dateUid1;
 
         self::assertNotContains(
             'tx_seminars_pi1%5BshowUid%5D=' . $dateUid2,
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1016,10 +1016,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            array(
+            [
                 'title' => 'foo & bar',
                 'organization' => 'baz',
-            )
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
@@ -1028,12 +1028,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('speakers' => '1')
+            ['speakers' => '1']
         );
 
         self::assertContains(
             'foo &amp; bar',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1052,10 +1052,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            array(
+            [
                 'title' => 'John Doe',
                 'organization' => 'foo & bar',
-            )
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
@@ -1064,12 +1064,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('speakers' => '1')
+            ['speakers' => '1']
         );
 
         self::assertContains(
             'foo &amp; bar',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1088,11 +1088,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            array(
+            [
                 'title' => 'foo & bar',
                 'organization' => 'baz',
                 'homepage' => 'www.foo.com',
-            )
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
@@ -1101,12 +1101,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('speakers' => '1')
+            ['speakers' => '1']
         );
 
         self::assertRegExp(
             '#<a href="http://www.foo.com".*>foo &amp; bar</a>#',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1125,11 +1125,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            array(
+            [
                 'title' => 'foo & bar',
                 'organization' => 'baz',
                 'homepage' => 'www.foo.com',
-            )
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_speakers_mm',
@@ -1138,12 +1138,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('speakers' => '1')
+            ['speakers' => '1']
         );
 
         self::assertRegExp(
             '#<a href="http://www.foo.com".*>foo &amp; bar</a>#',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1164,7 +1164,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'style="background-image:',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1186,11 +1186,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('image' => 'test_foo.gif')
+            ['image' => 'test_foo.gif']
         );
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
-        $seminarWithImage = $this->fixture->main('', array());
+        $seminarWithImage = $this->fixture->main('', []);
 
         $this->testingFramework->deleteDummyFile('test_foo.gif');
 
@@ -1219,11 +1219,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('image' => 'test_foo.gif')
+            ['image' => 'test_foo.gif']
         );
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
-        $seminarWithImage = $this->fixture->main('', array());
+        $seminarWithImage = $this->fixture->main('', []);
 
         $this->testingFramework->deleteDummyFile('test_foo.gif');
 
@@ -1253,7 +1253,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
     }
 
     ///////////////////////////////////////////////////////
@@ -1272,13 +1272,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertContains(
             $dummyFileName,
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1297,13 +1297,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertRegExp(
             '#<a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' . $dummyFileName . '</a>#',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1327,14 +1327,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
         self::assertRegExp(
             '#<a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' . basename($dummyFile) . '</a>#',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1354,11 +1354,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
+            ['attached_files' => $dummyFileName . ',' . $dummyFileName2]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertContains(
             $dummyFileName,
             $result
@@ -1385,14 +1385,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
+            ['attached_files' => $dummyFileName . ',' . $dummyFileName2]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertRegExp(
             '/.*(' . preg_quote($dummyFileName, '/') . ').*\s*' .
                 '.*(' . preg_quote($dummyFileName2, '/') . ').*/',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1409,13 +1409,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertContains(
             $dummyFileName,
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1435,13 +1435,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertRegExp(
             '#<a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' . $dummyFileName . '</a>#',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1466,13 +1466,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertRegExp(
             '#<a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' . basename($dummyFile) . '</a>#',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1493,11 +1493,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
+            ['attached_files' => $dummyFileName . ',' . $dummyFileName2]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertContains(
             $dummyFileName,
             $result
@@ -1525,14 +1525,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
+            ['attached_files' => $dummyFileName . ',' . $dummyFileName2]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertRegExp(
             '/.*(' . preg_quote($dummyFileName, '/') . ').*\s*' .
                 '.*(' . preg_quote($dummyFileName2, '/') . ').*/',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1550,17 +1550,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
-        $matches = array();
+        $matches = [];
         preg_match('/\\.(\\w+)$/', $dummyFileName, $matches);
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertRegExp(
             '#class="filetype-' . $matches[1] . '"><a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' .
                 basename($dummyFile) . '</a>#',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1571,7 +1571,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->createLogInAndRegisterFeUser();
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertFalse(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
         );
@@ -1590,11 +1590,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertFalse(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
         );
@@ -1611,11 +1611,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertFalse(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
         );
@@ -1634,11 +1634,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertTrue(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
         );
@@ -1656,11 +1656,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertTrue(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
         );
@@ -1672,7 +1672,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertFalse(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_ATTACHED_FILES')
         );
@@ -1691,10 +1691,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('showSiteDetails', false);
 
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('place' => 1)
+            'tx_seminars_seminars', ['place' => 1]
         );
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('title' => 'a & place')
+            'tx_seminars_sites', ['title' => 'a & place']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm', $eventUid, $placeUid
@@ -1703,7 +1703,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'a &amp; place',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1716,10 +1716,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('showSiteDetails', true);
 
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('place' => 1)
+            'tx_seminars_seminars', ['place' => 1]
         );
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('title' => 'a & place')
+            'tx_seminars_sites', ['title' => 'a & place']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm', $eventUid, $placeUid
@@ -1728,7 +1728,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'a &amp; place',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1741,10 +1741,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('showSiteDetails', true);
 
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('place' => 1)
+            'tx_seminars_seminars', ['place' => 1]
         );
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('address' => 'over & the rainbow')
+            'tx_seminars_sites', ['address' => 'over & the rainbow']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm', $eventUid, $placeUid
@@ -1753,7 +1753,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'over &amp; the rainbow',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1766,10 +1766,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('showSiteDetails', true);
 
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('place' => 1)
+            'tx_seminars_seminars', ['place' => 1]
         );
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('city' => 'Knödlingen & Großwürsteling')
+            'tx_seminars_sites', ['city' => 'Knödlingen & Großwürsteling']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm', $eventUid, $placeUid
@@ -1778,7 +1778,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Knödlingen &amp; Großwürsteling',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1791,10 +1791,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('showSiteDetails', true);
 
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('place' => 1)
+            'tx_seminars_seminars', ['place' => 1]
         );
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('city' => 'Bonn', 'zip' => '12 & 45')
+            'tx_seminars_sites', ['city' => 'Bonn', 'zip' => '12 & 45']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm', $eventUid, $placeUid
@@ -1803,7 +1803,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             '12 &amp; 45',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1815,7 +1815,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertFalse(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_TIMESLOTS')
         );
@@ -1825,15 +1825,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $timeSlotUid = $this->testingFramework->createRecord(
-            'tx_seminars_timeslots', array('seminar' => $this->seminarUid)
+            'tx_seminars_timeslots', ['seminar' => $this->seminarUid]
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('timeslots' => (string) $timeSlotUid)
+            ['timeslots' => (string) $timeSlotUid]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertTrue(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_TIMESLOTS')
         );
@@ -1849,21 +1849,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
-            array(
+            [
                 'seminar' => $this->seminarUid,
                 'begin_date' => mktime(9, 45, 0, 4, 2, 2020),
                 'end_date' => mktime(18, 30, 0, 4, 2, 2020),
-            )
+            ]
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('timeslots' => (string) $timeSlotUid)
+            ['timeslots' => (string) $timeSlotUid]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertContains(
             '9:45&#8211;18:30',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1875,20 +1875,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
-            array(
+            [
                 'seminar' => $this->seminarUid,
-                'room' => 'room & 1'
-            )
+                'room' => 'room & 1',
+            ]
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('timeslots' => (string) $timeSlotUid)
+            ['timeslots' => (string) $timeSlotUid]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertContains(
             'room &amp; 1',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -1896,18 +1896,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $timeSlotUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_timeslots', array('seminar' => $this->seminarUid)
+            'tx_seminars_timeslots', ['seminar' => $this->seminarUid]
         );
         $timeSlotUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_timeslots', array('seminar' => $this->seminarUid)
+            'tx_seminars_timeslots', ['seminar' => $this->seminarUid]
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('timeslots' => $timeSlotUid1 . ',' . $timeSlotUid2)
+            ['timeslots' => $timeSlotUid1 . ',' . $timeSlotUid2]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertTrue(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_TIMESLOTS')
         );
@@ -1918,25 +1918,25 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $timeSlotUid1 = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
-            array(
+            [
                 'seminar' => $this->seminarUid,
-                'room' => 'room 1'
-            )
+                'room' => 'room 1',
+            ]
         );
         $timeSlotUid2 = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
-            array(
+            [
                 'seminar' => $this->seminarUid,
-                'room' => 'room 2'
-            )
+                'room' => 'room 2',
+            ]
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('timeslots' => $timeSlotUid1 . ',' . $timeSlotUid2)
+            ['timeslots' => $timeSlotUid1 . ',' . $timeSlotUid2]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertContains(
             'room 1',
             $result
@@ -1962,7 +1962,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
     }
 
     /**
@@ -1973,14 +1973,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
-            array(
+            [
                 'seminar' => $this->seminarUid,
-                'room' => 'room 1'
-            )
+                'room' => 'room 1',
+            ]
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('timeslots' => $timeSlotUid)
+            ['timeslots' => $timeSlotUid]
         );
 
         /** @var Tx_Seminars_Model_TimeSlot $timeSlot */
@@ -1996,7 +1996,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
     }
 
     /**
@@ -2007,21 +2007,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $timeSlotUid1 = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
-            array(
+            [
                 'seminar' => $this->seminarUid,
-                'room' => 'room 1'
-            )
+                'room' => 'room 1',
+            ]
         );
         $timeSlotUid2 = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
-            array(
+            [
                 'seminar' => $this->seminarUid,
-                'room' => 'room 2'
-            )
+                'room' => 'room 2',
+            ]
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('timeslots' => $timeSlotUid1 . ',' . $timeSlotUid2)
+            ['timeslots' => $timeSlotUid1 . ',' . $timeSlotUid2]
         );
 
         $hook = $this->getMock(Tx_Seminars_Interface_Hook_EventSingleView::class);
@@ -2032,7 +2032,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
     }
 
     ///////////////////////////////////////////////////////
@@ -2043,7 +2043,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertFalse(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_TARGET_GROUPS')
         );
@@ -2055,7 +2055,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertTrue(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_TARGET_GROUPS')
         );
@@ -2067,7 +2067,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function singleViewCanContainOneHtmlSpecialcharedTargetGroupTitle()
     {
         $this->addTargetGroupRelation(
-            array('title' => 'group 1 & 2')
+            ['title' => 'group 1 & 2']
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2075,22 +2075,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'group 1 &amp; 2',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
     public function testTargetGroupsSubpartIsVisibleInSingleViewWithTwoTargetGroups()
     {
         $this->addTargetGroupRelation(
-            array('title' => 'group 1')
+            ['title' => 'group 1']
         );
         $this->addTargetGroupRelation(
-            array('title' => 'group 2')
+            ['title' => 'group 2']
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertTrue(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_TARGET_GROUPS')
         );
@@ -2099,15 +2099,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function testSingleViewCanContainTwoTargetGroupTitles()
     {
         $this->addTargetGroupRelation(
-            array('title' => 'group 1')
+            ['title' => 'group 1']
         );
         $this->addTargetGroupRelation(
-            array('title' => 'group 2')
+            ['title' => 'group 2']
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
 
         self::assertContains(
             'group 1',
@@ -2127,7 +2127,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertFalse(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_REQUIREMENTS')
         );
@@ -2137,11 +2137,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $this->seminarUid,
@@ -2149,7 +2149,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertTrue(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_REQUIREMENTS')
@@ -2164,14 +2164,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_foo',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $this->seminarUid,
@@ -2182,7 +2182,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertRegExp(
             '/<a href=.*' . $requiredEvent . '.*>required_foo<\/a>/',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2194,7 +2194,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertFalse(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_DEPENDENCIES')
         );
@@ -2204,14 +2204,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'dependencies' => 1,
-            )
+            ]
         );
         $dependingEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
@@ -2219,7 +2219,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertTrue(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_DEPENDENCIES')
@@ -2230,17 +2230,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'dependencies' => 1,
-            )
+            ]
         );
         $dependingEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'depending_foo',
-            )
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
@@ -2251,7 +2251,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'depending_foo',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2262,17 +2262,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'dependencies' => 1,
-            )
+            ]
         );
         $dependingEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'depending_foo',
-            )
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
@@ -2283,7 +2283,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             '>depending_foo</a>',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2294,17 +2294,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'dependencies' => 2,
-            )
+            ]
         );
         $dependingEventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'depending_foo',
-            )
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
@@ -2312,10 +2312,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $dependingEventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'depending_bar',
-            )
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_requirements_mm',
@@ -2325,7 +2325,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
-        $renderedOutput = $this->fixture->main('', array());
+        $renderedOutput = $this->fixture->main('', []);
         self::assertContains(
             'depending_bar',
             $renderedOutput
@@ -2347,11 +2347,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'event_type' => $this->testingFramework->createRecord(
-                    'tx_seminars_event_types', array('title' => 'foo & type')
-                )
-            )
+                    'tx_seminars_event_types', ['title' => 'foo & type']
+                ),
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2359,7 +2359,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'foo &amp; type:',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2370,7 +2370,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotRegExp(
             '/: *Test &amp; event/',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2384,29 +2384,29 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function singleViewCanContainOneHtmlSpecialcharedCategoryTitle()
     {
         $this->addCategoryRelation(
-            array('title' => 'category & 1')
+            ['title' => 'category & 1']
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertContains(
             'category &amp; 1',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
     public function testSingleViewCanContainTwoCategories()
     {
         $this->addCategoryRelation(
-            array('title' => 'category 1')
+            ['title' => 'category 1']
         );
         $this->addCategoryRelation(
-            array('title' => 'category 2')
+            ['title' => 'category 2']
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
 
         self::assertContains(
             'category 1',
@@ -2422,16 +2422,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createDummyFile('foo_test.gif');
         $this->addCategoryRelation(
-            array(
+            [
                 'title' => 'category 1',
                 'icon' => 'foo_test.gif',
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
-        $singleCategoryWithIcon = $this->fixture->main('', array());
+        $singleCategoryWithIcon = $this->fixture->main('', []);
 
         $this->testingFramework->deleteDummyFile('foo_test.gif');
 
@@ -2446,22 +2446,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->createDummyFile('foo_test.gif');
         $this->testingFramework->createDummyFile('foo_test2.gif');
         $this->addCategoryRelation(
-            array(
+            [
                 'title' => 'category 1',
                 'icon' => 'foo_test.gif',
-            )
+            ]
         );
         $this->addCategoryRelation(
-            array(
+            [
                 'title' => 'category 2',
                 'icon' => 'foo_test2.gif',
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
-        $multipleCategoriesWithIcons = $this->fixture->main('', array());
+        $multipleCategoriesWithIcons = $this->fixture->main('', []);
 
         $this->testingFramework->deleteDummyFile('foo_test.gif');
 
@@ -2479,7 +2479,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function testSingleViewForCategoryWithoutIconDoesNotShowCategoryIcon()
     {
         $this->addCategoryRelation(
-            array('title' => 'category 1')
+            ['title' => 'category 1']
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2487,7 +2487,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'category 1 <img src="',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2499,11 +2499,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $this->seminarUid,
                 'expiry' => mktime(0, 0, 0, 1, 1, 2008),
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2511,7 +2511,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             '01.01.2008',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2519,11 +2519,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $this->seminarUid,
                 'expiry' => 0,
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2531,7 +2531,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             $this->fixture->translate('label_expiry'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2549,7 +2549,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             $this->fixture->translate('label_paymentmethods'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2559,11 +2559,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function singleViewForEventWithOnePaymentMethodContainsLabelForPaymentMethods()
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', array('title' => 'Payment Method')
+            'tx_seminars_payment_methods', ['title' => 'Payment Method']
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('payment_methods' => 1)
+            ['payment_methods' => 1]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm', $this->seminarUid,
@@ -2575,7 +2575,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             $this->fixture->translate('label_paymentmethods'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2585,11 +2585,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function singleViewForEventWithOnePaymentMethodContainsOnePaymentMethod()
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', array('title' => 'Payment Method')
+            'tx_seminars_payment_methods', ['title' => 'Payment Method']
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('payment_methods' => 1)
+            ['payment_methods' => 1]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm', $this->seminarUid,
@@ -2601,7 +2601,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Payment Method',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2611,16 +2611,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function singleViewForEventWithTwoPaymentMethodsContainsTwoPaymentMethods()
     {
         $paymentMethodUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', array('title' => 'Payment Method 1')
+            'tx_seminars_payment_methods', ['title' => 'Payment Method 1']
         );
         $paymentMethodUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', array('title' => 'Payment Method 2')
+            'tx_seminars_payment_methods', ['title' => 'Payment Method 2']
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'payment_methods' => 2,
-            )
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm', $this->seminarUid,
@@ -2634,7 +2634,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertContains(
             'Payment Method 1',
             $result
@@ -2652,11 +2652,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $paymentMethodTitle = '<b>Payment & Method</b>';
         $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', array('title' => $paymentMethodTitle)
+            'tx_seminars_payment_methods', ['title' => $paymentMethodTitle]
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('payment_methods' => 1)
+            ['payment_methods' => 1]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm', $this->seminarUid,
@@ -2668,7 +2668,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             htmlspecialchars($paymentMethodTitle),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2681,14 +2681,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function singleViewForEventWithOrganzierShowsHtmlspecialcharedOrganizerTitle()
     {
-        $this->addOrganizerRelation(array('title' => 'foo & organizer'));
+        $this->addOrganizerRelation(['title' => 'foo & organizer']);
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
         self::assertContains(
             'foo &amp; organizer',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2698,7 +2698,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function singleViewForEventWithOrganizerWithDescriptionShowsOrganizerDescription()
     {
         $this->addOrganizerRelation(
-            array('title' => 'foo', 'description' => 'organizer description')
+            ['title' => 'foo', 'description' => 'organizer description']
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2706,7 +2706,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'organizer description',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2716,7 +2716,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function singleViewForEventWithOrganizerWithHomepageLinksHtmlSpecialcharedOrganizerNameToTheirHomepage()
     {
         $this->addOrganizerRelation(
-            array('title' => 'foo & bar', 'homepage' => 'http://www.orgabar.com')
+            ['title' => 'foo & bar', 'homepage' => 'http://www.orgabar.com']
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2724,7 +2724,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertRegexp(
             '#<a href="http://www.orgabar.com".*>foo &amp; bar</a>#',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2733,14 +2733,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function singleViewDoesNotHaveUnreplacedMarkers()
     {
-        $this->addOrganizerRelation(array('title' => 'foo organizer'));
+        $this->addOrganizerRelation(['title' => 'foo organizer']);
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
         self::assertNotContains(
             '###',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2749,15 +2749,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function singleViewForEventWithTwoOrganizersShowsBothOrganizers()
     {
-        $this->addOrganizerRelation(array('title' => 'organizer 1'));
-        $this->addOrganizerRelation(array('title' => 'organizer 2'));
+        $this->addOrganizerRelation(['title' => 'organizer 1']);
+        $this->addOrganizerRelation(['title' => 'organizer 2']);
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
         self::assertRegExp(
             '/organizer 1.*organizer 2/s',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2767,7 +2767,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function singleViewForEventWithOrganizerWithHomepageHtmlSpecialcharsTitleOfOrganizer()
     {
         $this->addOrganizerRelation(
-            array('title' => 'foo<bar')
+            ['title' => 'foo<bar']
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2775,7 +2775,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'foo&lt;bar',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2785,7 +2785,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function singleViewForEventWithOrganizerWithoutHomepageHtmlSpecialCharsTitleOfOrganizer()
     {
         $this->addOrganizerRelation(
-            array('title' => 'foo<bar')
+            ['title' => 'foo<bar']
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2793,7 +2793,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             htmlspecialchars('foo<bar'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2811,7 +2811,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             $this->fixture->translate('message_missingSeminarNumber'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2821,7 +2821,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function singleViewForHiddenRecordAndNoLoggedInUserReturnsWrongSeminarNumberMessage()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)
+            'tx_seminars_seminars', $this->seminarUid, ['hidden' => 1]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2829,7 +2829,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             $this->fixture->translate('message_wrongSeminarNumber'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2840,7 +2840,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $this->seminarUid, array('hidden' => 1)
+            'tx_seminars_seminars', $this->seminarUid, ['hidden' => 1]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2848,7 +2848,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             $this->fixture->translate('message_wrongSeminarNumber'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2860,11 +2860,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'hidden' => 1,
                 'title' => 'hidden event',
                 'owner_feuser' => $ownerUid,
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -2872,7 +2872,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'hidden event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2887,17 +2887,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $controller = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
-            array(
+            [
                 'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
-                'setCSS', 'createHelperObjects', 'setErrorMessage'
-            )
+                'setCSS', 'createHelperObjects', 'setErrorMessage',
+            ]
         );
         $controller->expects(self::once())->method('createListView')->with('seminar_list');
         $controller->expects(self::never())->method('createSingleView');
 
-        $controller->piVars = array();
+        $controller->piVars = [];
 
-        $controller->main('', array('what_to_display' => 'seminar_list'));
+        $controller->main('', ['what_to_display' => 'seminar_list']);
     }
 
     /**
@@ -2907,17 +2907,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $controller = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
-            array(
+            [
                 'createListView', 'createSingleView', 'pi_initPIflexForm', 'getTemplateCode', 'setLabels',
-                'setCSS', 'createHelperObjects', 'setErrorMessage'
-            )
+                'setCSS', 'createHelperObjects', 'setErrorMessage',
+            ]
         );
         $controller->expects(self::once())->method('createListView')->with('seminar_list');
         $controller->expects(self::never())->method('createSingleView');
 
-        $controller->piVars = array('showUid' => 42);
+        $controller->piVars = ['showUid' => 42];
 
-        $controller->main('', array('what_to_display' => 'seminar_list'));
+        $controller->main('', ['what_to_display' => 'seminar_list']);
     }
 
     /**
@@ -2927,7 +2927,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         self::assertContains(
             'Test &amp; event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2938,7 +2938,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         self::assertContains(
             'Something for you &amp; me',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2949,16 +2949,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'event_type' => $this->testingFramework->createRecord(
-                    'tx_seminars_event_types', array('title' => 'foo & type')
-                )
-            )
+                    'tx_seminars_event_types', ['title' => 'foo & type']
+                ),
+            ]
         );
 
         self::assertContains(
             'foo &amp; type',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2969,7 +2969,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         self::assertContains(
             '1 &amp; 1',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -2979,10 +2979,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function listViewShowsHtmlspecialcharedPlaceTitle()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $this->seminarUid, array('place' => 1)
+            'tx_seminars_seminars', $this->seminarUid, ['place' => 1]
         );
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('title' => 'a & place')
+            'tx_seminars_sites', ['title' => 'a & place']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm', $this->seminarUid, $placeUid
@@ -2990,7 +2990,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'a &amp; place',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3000,10 +3000,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function listViewShowsHtmlspecialcharedCityTitle()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $this->seminarUid, array('place' => 1)
+            'tx_seminars_seminars', $this->seminarUid, ['place' => 1]
         );
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('city' => 'Bonn & Köln')
+            'tx_seminars_sites', ['city' => 'Bonn & Köln']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm', $this->seminarUid, $placeUid
@@ -3011,7 +3011,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Bonn &amp; Köln',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3020,11 +3020,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function listViewShowsHtmlspecialcharedOrganizerTitle()
     {
-        $this->addOrganizerRelation(array('title' => 'foo & organizer'));
+        $this->addOrganizerRelation(['title' => 'foo & organizer']);
 
         self::assertContains(
             'foo &amp; organizer',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3034,12 +3034,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function listViewShowsHtmlSpecialcharedTargetGroupTitle()
     {
         $this->addTargetGroupRelation(
-            array('title' => 'group 1 & 2')
+            ['title' => 'group 1 & 2']
         );
 
         self::assertContains(
             'group 1 &amp; 2',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3050,23 +3050,23 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
-                'title' => 'Test topic'
-            )
+                'title' => 'Test topic',
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
-                'title' => 'Test date'
-            )
+                'title' => 'Test date',
+            ]
         );
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertContains(
             'Test topic',
             $result
@@ -3081,17 +3081,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'title' => 'Test single event',
-                'hidden' => 1
-            )
+                'hidden' => 1,
+            ]
         );
 
         self::assertNotContains(
             'Test single event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3099,17 +3099,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'title' => 'Test single event',
-                'deleted' => 1
-            )
+                'deleted' => 1,
+            ]
         );
 
         self::assertNotContains(
             'Test single event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3117,26 +3117,26 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
-                'title' => 'Test topic'
-            )
+                'title' => 'Test topic',
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
-                'hidden' => 1
-            )
+                'hidden' => 1,
+            ]
         );
 
         self::assertNotContains(
             'Test topic',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3146,9 +3146,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('image' => 'test_foo.gif')
+            ['image' => 'test_foo.gif']
         );
-        $listViewWithImage = $this->fixture->main('', array());
+        $listViewWithImage = $this->fixture->main('', []);
         $this->testingFramework->deleteDummyFile('test_foo.gif');
 
         self::assertContains(
@@ -3161,7 +3161,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         self::assertNotContains(
             '<img src="',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3169,7 +3169,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         self::assertNotContains(
             '###IMAGE###',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3183,36 +3183,36 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => $topicTitle,
                 'image' => $fileName,
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
-            )
+            ]
         );
 
         /** @var $content ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject */
-        $content = $this->getMock(ContentObjectRenderer::class, array('IMAGE'));
+        $content = $this->getMock(ContentObjectRenderer::class, ['IMAGE']);
         $content->expects(self::any())->method('IMAGE')
-            ->with(array(
-                'file' => 'uploads/tx_seminars/' . $fileName, 'file.' => array('width' => '0c', 'height' => '0c'),
-                'altText' => $topicTitle, 'titleText' => $topicTitle
-            ))
+            ->with([
+                'file' => 'uploads/tx_seminars/' . $fileName, 'file.' => ['width' => '0c', 'height' => '0c'],
+                'altText' => $topicTitle, 'titleText' => $topicTitle,
+            ])
             ->will(self::returnValue('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>'));
         $this->fixture->cObj = $content;
 
         self::assertRegExp(
             '/<img src="[^"]*"[^>]*title="' . $topicTitle . '"/',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3220,7 +3220,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         self::assertNotContains(
             $this->fixture->translate('label_expiry'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3229,7 +3229,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function listViewHidesStatusColumnByDefault()
     {
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertFalse(
             $this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_STATUS')
@@ -3243,18 +3243,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'needs_registration' => 1,
                 'attendees_max' => 5,
                 'offline_attendees' => 5,
-            )
+            ]
         );
 
         self::assertContains(
             'Foo Event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3269,18 +3269,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'needs_registration' => 1,
                 'attendees_max' => 5,
                 'offline_attendees' => 5,
-            )
+            ]
         );
 
         self::assertNotContains(
             'Foo Event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3293,7 +3293,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue(
             'pidList', $this->testingFramework->createSystemFolder()
         );
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertEquals(
             0,
@@ -3303,7 +3303,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
     public function testResultCounterIsOneForOneResult()
     {
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertEquals(
             1,
@@ -3315,12 +3315,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Another event',
-            )
+            ]
         );
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertEquals(
             2,
@@ -3333,13 +3333,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         for ($i = 0; $i < 5; $i++) {
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
-                array(
+                [
                     'pid' => $this->systemFolderPid,
                     'title' => 'Another event',
-                )
+                ]
             );
         }
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertEquals(
             6,
@@ -3355,7 +3355,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         self::assertContains(
             'Test &amp; event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3363,16 +3363,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -3381,7 +3381,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Event with category',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3389,13 +3389,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->fixture->piVars['category'] = $categoryUid;
 
         self::assertNotContains(
             'Test &amp; event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3403,16 +3403,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -3422,7 +3422,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Event with category',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3430,17 +3430,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 'hidden' => 1,
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -3450,7 +3450,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Event with category',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3458,17 +3458,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 'deleted' => 1,
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -3478,7 +3478,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Event with category',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3486,16 +3486,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -3504,13 +3504,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'another category')
+            ['title' => 'another category']
         );
         $this->fixture->piVars['category'] = $categoryUid2;
 
         self::assertNotContains(
             'Event with category',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3518,16 +3518,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 // the number of categories
-                'categories' => 2
-            )
+                'categories' => 2,
+            ]
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -3536,7 +3536,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'another category')
+            ['title' => 'another category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -3546,7 +3546,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Event with category',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3557,20 +3557,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
-        $categoryUid = (string)$this->testingFramework->createRecord('tx_seminars_categories', array('title' => 'a category'));
+        $categoryUid = (string)$this->testingFramework->createRecord('tx_seminars_categories', ['title' => 'a category']);
         $this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $eventUid, $categoryUid);
         $this->fixture->piVars['categories'][] = $categoryUid;
 
         self::assertContains(
             'Event with category',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3581,24 +3581,24 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
-        $categoryUid1 = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => 'a category'));
+        $categoryUid1 = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => 'a category']);
         $this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $eventUid, $categoryUid1);
 
         $categoryUid2 = (string)$this->testingFramework->createRecord(
-            'tx_seminars_categories', array('title' => 'another category')
+            'tx_seminars_categories', ['title' => 'another category']
         );
         $this->fixture->piVars['categories'][] = $categoryUid2;
 
         self::assertNotContains(
             'Event with category',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3610,7 +3610,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         self::assertContains(
             'Test &amp; event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3618,19 +3618,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type',
                 'event_type' => $this->testingFramework->createRecord(
                     'tx_seminars_event_types',
-                    array('title' => 'foo type')
+                    ['title' => 'foo type']
                 ),
-            )
+            ]
         );
 
         self::assertContains(
             'Event with type',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3638,13 +3638,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'foo type')
+            ['title' => 'foo type']
         );
-        $this->fixture->piVars['event_type'] = array($eventTypeUid);
+        $this->fixture->piVars['event_type'] = [$eventTypeUid];
 
         self::assertNotContains(
             'Test &amp; event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3652,21 +3652,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'foo type')
+            ['title' => 'foo type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type',
                 'event_type' => $eventTypeUid,
-            )
+            ]
         );
-        $this->fixture->piVars['event_type'] = array($eventTypeUid);
+        $this->fixture->piVars['event_type'] = [$eventTypeUid];
 
         self::assertContains(
             'Event with type',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3674,33 +3674,33 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventTypeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'foo type')
+            ['title' => 'foo type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type 1',
                 'event_type' => $eventTypeUid1,
-            )
+            ]
         );
         $eventTypeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'foo type')
+            ['title' => 'foo type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type 2',
                 'event_type' => $eventTypeUid2,
-            )
+            ]
         );
-        $this->fixture->piVars['event_type'] = array(
-            $eventTypeUid1, $eventTypeUid2
-        );
+        $this->fixture->piVars['event_type'] = [
+            $eventTypeUid1, $eventTypeUid2,
+        ];
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
 
         self::assertContains(
             'Event with type 1',
@@ -3716,22 +3716,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'foo type')
+            ['title' => 'foo type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type',
                 'hidden' => 1,
                 'event_type' => $eventTypeUid,
-            )
+            ]
         );
-        $this->fixture->piVars['event_type'] = array($eventTypeUid);
+        $this->fixture->piVars['event_type'] = [$eventTypeUid];
 
         self::assertNotContains(
             'Event with type',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3739,22 +3739,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'foo type')
+            ['title' => 'foo type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type',
                 'deleted' => 1,
                 'event_type' => $eventTypeUid,
-            )
+            ]
         );
-        $this->fixture->piVars['event_type'] = array($eventTypeUid);
+        $this->fixture->piVars['event_type'] = [$eventTypeUid];
 
         self::assertNotContains(
             'Event with type',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3762,26 +3762,26 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventTypeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'foo type')
+            ['title' => 'foo type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type',
                 'event_type' => $eventTypeUid1,
-            )
+            ]
         );
 
         $eventTypeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'another eventType')
+            ['title' => 'another eventType']
         );
-        $this->fixture->piVars['event_type'] = array($eventTypeUid2);
+        $this->fixture->piVars['event_type'] = [$eventTypeUid2];
 
         self::assertNotContains(
             'Event with type',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3798,11 +3798,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $fromTime = $simTime - 86400;
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event From',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['from_day'] = date('j', $fromTime);
@@ -3811,7 +3811,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event From',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3825,11 +3825,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event From',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['from_day'] = date('j', $fromTime);
@@ -3838,7 +3838,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Foo Event From',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3851,11 +3851,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event From',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['from_month'] = date('n', $simTime);
@@ -3863,7 +3863,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event From',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3877,11 +3877,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event From',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['from_day'] = date('j', $fromTime);
@@ -3889,7 +3889,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event From',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3902,11 +3902,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event From',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['from_day'] = date('j', $simTime);
@@ -3914,7 +3914,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event From',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3927,18 +3927,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event From',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['from_year'] = date('Y', $simTime);
 
         self::assertContains(
             'Foo Event From',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3952,11 +3952,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['to_day'] = date('j', $toTime);
@@ -3965,7 +3965,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event To',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -3979,11 +3979,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['to_day'] = date('j', $toTime);
@@ -3992,7 +3992,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Foo Event To',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4005,11 +4005,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['to_month'] = date('n', $simTime);
@@ -4017,7 +4017,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event To',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4031,11 +4031,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['to_day'] = date('j', $toTime);
@@ -4043,7 +4043,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event To',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4055,11 +4055,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $simTime = $GLOBALS['SIM_EXEC_TIME'];
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['to_day'] = date('j', $simTime);
@@ -4067,7 +4067,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event To',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4079,18 +4079,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $simTime = $GLOBALS['SIM_EXEC_TIME'];
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['to_year'] = date('Y', $simTime);
 
         self::assertContains(
             'Foo Event To',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4105,11 +4105,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['from_day'] = date('j', $fromTime);
@@ -4121,7 +4121,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event To',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4136,19 +4136,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $simTime,
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Bar Event To',
                 'begin_date' => $simTime,
-            )
+            ]
         );
 
         $this->fixture->piVars['from_day'] = date('j', $fromTime);
@@ -4158,7 +4158,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->piVars['to_month'] = date('n', $toTime);
         $this->fixture->piVars['to_year'] = date('Y', $toTime);
 
-        $output = $this->fixture->main('', array());
+        $output = $this->fixture->main('', []);
 
         self::assertContains(
             'Foo Event To',
@@ -4180,11 +4180,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'begin_date' => $simTime - 86000,
-            )
+            ]
         );
 
         $this->fixture->piVars['from_day'] = date('j', $simTime);
@@ -4196,7 +4196,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Foo Event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4210,11 +4210,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'begin_date' => $simTime + 86400,
-            )
+            ]
         );
 
         $this->fixture->piVars['from_day'] = date('j', $fromTime);
@@ -4226,7 +4226,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Foo Event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4237,10 +4237,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
-            )
+            ]
         );
 
         $this->fixture->piVars['from_day'] = 0;
@@ -4252,7 +4252,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4267,15 +4267,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            array('minimum_age' => 5, 'maximum_age' => 20)
+            ['minimum_age' => 5, 'maximum_age' => 20]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 50,
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
@@ -4285,7 +4285,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event To',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4296,15 +4296,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            array('minimum_age' => 5, 'maximum_age' => 20)
+            ['minimum_age' => 5, 'maximum_age' => 20]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event To',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 50,
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
@@ -4314,7 +4314,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Foo Event To',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4332,7 +4332,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('title' => 'Foo Event', 'pid' => $this->systemFolderPid)
+            ['title' => 'Foo Event', 'pid' => $this->systemFolderPid]
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
@@ -4343,7 +4343,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4357,7 +4357,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('title' => 'Foo Event', 'pid' => $this->systemFolderPid)
+            ['title' => 'Foo Event', 'pid' => $this->systemFolderPid]
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
@@ -4369,7 +4369,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Foo Event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4384,18 +4384,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'price_regular' => 21,
-            )
+            ]
         );
 
         $this->fixture->piVars['price_from'] = 20;
 
         self::assertContains(
             'Foo Event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4406,18 +4406,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'price_regular' => 19,
-            )
+            ]
         );
 
         $this->fixture->piVars['price_to'] = 20;
 
         self::assertContains(
             'Foo Event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4428,11 +4428,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'price_regular' => 21,
-            )
+            ]
         );
 
         $this->fixture->piVars['price_from'] = 20;
@@ -4440,7 +4440,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Foo Event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4451,11 +4451,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Foo Event',
                 'price_regular' => 23,
-            )
+            ]
         );
 
         $this->fixture->piVars['price_from'] = 20;
@@ -4463,7 +4463,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Foo Event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4475,21 +4475,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event B'
-            )
+                'title' => 'Event B',
+            ]
         );
 
         $this->fixture->piVars['sort'] = 'title:0';
-        $output = $this->fixture->main('', array());
+        $output = $this->fixture->main('', []);
 
         self::assertTrue(
             strpos($output, 'Event A') < strpos($output, 'Event B')
@@ -4500,21 +4500,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event B'
-            )
+                'title' => 'Event B',
+            ]
         );
 
         $this->fixture->piVars['sort'] = 'title:1';
-        $output = $this->fixture->main('', array());
+        $output = $this->fixture->main('', []);
 
         self::assertTrue(
             strpos($output, 'Event B') < strpos($output, 'Event A')
@@ -4525,27 +4525,27 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $fixture = new Tx_Seminars_FrontEnd_DefaultController();
         $fixture->init(
-            array('sortListViewByCategory' => 1)
+            ['sortListViewByCategory' => 1]
         );
 
-        $fixture->main('', array());
+        $fixture->main('', []);
     }
 
     public function testListViewCanBeSortedByTitleAscendingWithinOneCategory()
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
 
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 // the number of categories
                 'categories' => 1,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -4554,12 +4554,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 // the number of categories
                 'categories' => 1,
-                'title' => 'Event B'
-            )
+                'title' => 'Event B',
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -4568,7 +4568,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->fixture->setConfigurationValue('sortListViewByCategory', 1);
         $this->fixture->piVars['sort'] = 'title:0';
-        $output = $this->fixture->main('', array());
+        $output = $this->fixture->main('', []);
 
         self::assertTrue(
             strpos($output, 'Event A') < strpos($output, 'Event B')
@@ -4579,17 +4579,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
 
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 // the number of categories
                 'categories' => 1,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -4598,12 +4598,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 // the number of categories
                 'categories' => 1,
-                'title' => 'Event B'
-            )
+                'title' => 'Event B',
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -4612,7 +4612,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->fixture->setConfigurationValue('sortListViewByCategory', 1);
         $this->fixture->piVars['sort'] = 'title:1';
-        $output = $this->fixture->main('', array());
+        $output = $this->fixture->main('', []);
 
         self::assertTrue(
             strpos($output, 'Event B') < strpos($output, 'Event A')
@@ -4623,16 +4623,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'Category Y')
+            ['title' => 'Category Y']
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 // the number of categories
                 'categories' => 1,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -4641,16 +4641,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'Category X')
+            ['title' => 'Category X']
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 // the number of categories
                 'categories' => 1,
-                'title' => 'Event B'
-            )
+                'title' => 'Event B',
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -4659,7 +4659,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->fixture->setConfigurationValue('sortListViewByCategory', 1);
         $this->fixture->piVars['sort'] = 'title:0';
-        $output = $this->fixture->main('', array());
+        $output = $this->fixture->main('', []);
 
         self::assertTrue(
             strpos($output, 'Event B') < strpos($output, 'Event A')
@@ -4670,17 +4670,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'Category X')
+            ['title' => 'Category X']
         );
 
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 // the number of categories
                 'categories' => 1,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -4689,12 +4689,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 // the number of categories
                 'categories' => 1,
-                'title' => 'Event B'
-            )
+                'title' => 'Event B',
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -4707,7 +4707,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         self::assertEquals(
             1,
             mb_substr_count(
-                $this->fixture->main('', array()),
+                $this->fixture->main('', []),
                 'Category X'
             )
         );
@@ -4717,16 +4717,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'Category Y')
+            ['title' => 'Category Y']
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 // the number of categories
                 'categories' => 1,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -4735,16 +4735,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'Category X')
+            ['title' => 'Category X']
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 // the number of categories
                 'categories' => 1,
-                'title' => 'Event B'
-            )
+                'title' => 'Event B',
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -4753,7 +4753,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->fixture->setConfigurationValue('sortListViewByCategory', 1);
         $this->fixture->piVars['sort'] = 'title:0';
-        $output = $this->fixture->main('', array());
+        $output = $this->fixture->main('', []);
 
         self::assertContains(
             'Category X',
@@ -4778,16 +4778,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with teaser',
                 'teaser' => 'Test Teaser',
-            )
+            ]
         );
 
         self::assertContains(
             '>Test Teaser</a>',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4802,16 +4802,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -4820,7 +4820,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'tx_seminars_pi1%5Bcategory%5D=' . $categoryUid,
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4832,17 +4832,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 'end_date' => Tx_Oelib_Time::SECONDS_PER_WEEK,
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -4852,7 +4852,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'tx_seminars_pi1[category%5D=' . $categoryUid,
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -4864,21 +4864,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event title',
                 'begin_date' => mktime(10, 0, 0, 1, 1, 2020),
-                'end_date' => mktime(18, 0, 0, 1, 1, 2020)
-            )
+                'end_date' => mktime(18, 0, 0, 1, 1, 2020),
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event title',
                 'begin_date' => mktime(10, 0, 0, 1, 1, 2021),
-                'end_date' => mktime(18, 0, 0, 1, 1, 2021)
-            )
+                'end_date' => mktime(18, 0, 0, 1, 1, 2021),
+            ]
         );
 
         $this->fixture->piVars['sort'] = 'date:0';
@@ -4886,7 +4886,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             'omitDateIfSameAsPrevious', 1
         );
 
-        $output = $this->fixture->main('', array());
+        $output = $this->fixture->main('', []);
         self::assertContains(
             '2020',
             $output
@@ -4901,21 +4901,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event title',
                 'begin_date' => mktime(10, 0, 0, 1, 1, 2020),
-                'end_date' => mktime(18, 0, 0, 1, 1, 2020)
-            )
+                'end_date' => mktime(18, 0, 0, 1, 1, 2020),
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event title',
                 'begin_date' => mktime(10, 0, 0, 1, 1, 2021),
-                'end_date' => mktime(18, 0, 0, 1, 1, 2021)
-            )
+                'end_date' => mktime(18, 0, 0, 1, 1, 2021),
+            ]
         );
 
         $this->fixture->piVars['sort'] = 'date:0';
@@ -4923,7 +4923,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             'omitDateIfSameAsPrevious', 0
         );
 
-        $output = $this->fixture->main('', array());
+        $output = $this->fixture->main('', []);
         self::assertContains(
             '2020',
             $output
@@ -4936,12 +4936,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
     public function testOmitDateIfSameAsPreviousOnSameDatesWithActiveConfig()
     {
-        $eventData = array(
+        $eventData = [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event title',
                 'begin_date' => mktime(10, 0, 0, 1, 1, 2020),
-                'end_date' => mktime(18, 0, 0, 1, 1, 2020)
-        );
+                'end_date' => mktime(18, 0, 0, 1, 1, 2020),
+        ];
         $this->testingFramework->createRecord(
             'tx_seminars_seminars', $eventData
         );
@@ -4957,7 +4957,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         self::assertEquals(
             1,
             mb_substr_count(
-                $this->fixture->main('', array()),
+                $this->fixture->main('', []),
                 '2020'
             )
         );
@@ -4965,12 +4965,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
     public function testOmitDateIfSameAsPreviousOnSameDatesWithInactiveConfig()
     {
-        $eventData = array(
+        $eventData = [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event title',
                 'begin_date' => mktime(10, 0, 0, 1, 1, 2020),
-                'end_date' => mktime(18, 0, 0, 1, 1, 2020)
-        );
+                'end_date' => mktime(18, 0, 0, 1, 1, 2020),
+        ];
         $this->testingFramework->createRecord(
             'tx_seminars_seminars', $eventData
         );
@@ -4986,7 +4986,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         self::assertEquals(
             2,
             mb_substr_count(
-                $this->fixture->main('', array()),
+                $this->fixture->main('', []),
                 '2020'
             )
         );
@@ -5000,7 +5000,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'an event type')
+            ['title' => 'an event type']
         );
         $this->fixture->setConfigurationValue(
             'limitListViewToEventTypes', $eventTypeUid
@@ -5008,7 +5008,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Test &amp; event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5016,35 +5016,35 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventTypeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'an event type')
+            ['title' => 'an event type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type',
                 'event_type' => $eventTypeUid1,
-            )
+            ]
         );
 
         $eventTypeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'an event type')
+            ['title' => 'an event type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with another type',
                 'event_type' => $eventTypeUid2,
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue(
             'limitListViewToEventTypes', $eventTypeUid1 . ',' . $eventTypeUid2
         );
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertContains(
             'Event with type',
             $result
@@ -5059,20 +5059,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventTypeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'an event type')
+            ['title' => 'an event type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type',
                 'event_type' => $eventTypeUid1,
-            )
+            ]
         );
 
         $eventTypeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'another eventType')
+            ['title' => 'another eventType']
         );
         $this->fixture->setConfigurationValue(
             'limitListViewToEventTypes', $eventTypeUid2
@@ -5080,7 +5080,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Event with type',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5088,36 +5088,36 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventTypeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'an event type')
+            ['title' => 'an event type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with type',
                 'event_type' => $eventTypeUid1,
-            )
+            ]
         );
 
         $eventTypeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            array('title' => 'an event type')
+            ['title' => 'an event type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with another type',
                 'event_type' => $eventTypeUid2,
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue(
             'limitListViewToEventTypes', $eventTypeUid1
         );
-        $this->fixture->piVars['event_type'] = array($eventTypeUid2);
+        $this->fixture->piVars['event_type'] = [$eventTypeUid2];
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertNotContains(
             'Event with type',
             $result
@@ -5136,7 +5136,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->fixture->setConfigurationValue(
             'limitListViewToCategories', $categoryUid
@@ -5144,7 +5144,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Test &amp; event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5152,16 +5152,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -5170,16 +5170,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with another category',
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -5190,7 +5190,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             'limitListViewToCategories', $categoryUid1 . ',' . $categoryUid2
         );
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertContains(
             'Event with category',
             $result
@@ -5205,16 +5205,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -5223,7 +5223,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'another category')
+            ['title' => 'another category']
         );
         $this->fixture->setConfigurationValue(
             'limitListViewToCategories', $categoryUid2
@@ -5231,7 +5231,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Event with category',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5239,16 +5239,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -5257,16 +5257,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with another category',
                 // the number of categories
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'a category')
+            ['title' => 'a category']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -5278,7 +5278,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $this->fixture->piVars['category'] = $categoryUid2;
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertNotContains(
             'Event with category',
             $result
@@ -5297,7 +5297,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            array('title' => 'a place')
+            ['title' => 'a place']
         );
         $this->fixture->setConfigurationValue(
             'limitListViewToPlaces', $placeUid
@@ -5305,7 +5305,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Test &amp; event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5313,16 +5313,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with place',
                 // the number of places
-                'place' => 1
-            )
+                'place' => 1,
+            ]
         );
         $placeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            array('title' => 'a place')
+            ['title' => 'a place']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
@@ -5331,16 +5331,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with another place',
                 // the number of places
-                'place' => 1
-            )
+                'place' => 1,
+            ]
         );
         $placeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            array('title' => 'a place')
+            ['title' => 'a place']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
@@ -5351,7 +5351,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             'limitListViewToPlaces', $placeUid1 . ',' . $placeUid2
         );
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertContains(
             'Event with place',
             $result
@@ -5366,16 +5366,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with place',
                 // the number of places
-                'place' => 1
-            )
+                'place' => 1,
+            ]
         );
         $placeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            array('title' => 'a place')
+            ['title' => 'a place']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
@@ -5384,7 +5384,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $placeUid2 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            array('title' => 'another place')
+            ['title' => 'another place']
         );
         $this->fixture->setConfigurationValue(
             'limitListViewToPlaces', $placeUid2
@@ -5392,7 +5392,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Event with place',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5400,17 +5400,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with place',
                 'hidden' => 1,
                 // the number of places
-                'place' => 1
-            )
+                'place' => 1,
+            ]
         );
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            array('title' => 'a place')
+            ['title' => 'a place']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
@@ -5421,7 +5421,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             'limitListViewToPlaces', $placeUid
         );
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertNotContains(
             'Event with place',
             $result
@@ -5432,17 +5432,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with place',
                 'deleted' => 1,
                 // the number of places
-                'place' => 1
-            )
+                'place' => 1,
+            ]
         );
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            array('title' => 'a place')
+            ['title' => 'a place']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
@@ -5453,7 +5453,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             'limitListViewToPlaces', $placeUid
         );
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertNotContains(
             'Event with place',
             $result
@@ -5466,15 +5466,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         // @see https://bugs.oliverklee.com/show_bug.cgi?id=2304
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with place',
                 // the number of places
-                'place' => 1
-            )
+                'place' => 1,
+            ]
         );
         $placeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('title' => 'a place')
+            'tx_seminars_sites', ['title' => 'a place']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm', $eventUid1, $placeUid1
@@ -5482,15 +5482,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with another place',
                 // the number of places
-                'place' => 1
-            )
+                'place' => 1,
+            ]
         );
         $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('title' => 'a place')
+            'tx_seminars_sites', ['title' => 'a place']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm', $eventUid2, $placeUid2
@@ -5499,9 +5499,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue(
             'limitListViewToPlaces', $placeUid1
         );
-        $this->fixture->piVars['place'] = array($placeUid2);
+        $this->fixture->piVars['place'] = [$placeUid2];
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
         self::assertNotContains(
             'Event with place',
             $result
@@ -5523,10 +5523,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with organizer 1',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $eventUid, $organizerUid, 'organizers'
@@ -5536,7 +5536,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             'limitListViewToOrganizers', $organizerUid
         );
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
 
         self::assertContains(
             'Event with organizer 1',
@@ -5551,10 +5551,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with organizer 1',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $eventUid1, $organizerUid1, 'organizers'
@@ -5565,10 +5565,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with organizer 2',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $eventUid2, $organizerUid2, 'organizers'
@@ -5580,7 +5580,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Event with organizer 2',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5591,10 +5591,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with organizer 1',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $eventUid1, $organizerUid1, 'organizers'
@@ -5605,10 +5605,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with organizer 2',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $eventUid2, $organizerUid2, 'organizers'
@@ -5617,9 +5617,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue(
             'limitListViewToOrganizers', $organizerUid1
         );
-        $this->fixture->piVars['organizer'] = array($organizerUid2);
+        $this->fixture->piVars['organizer'] = [$organizerUid2];
 
-        $result = $this->fixture->main('', array());
+        $result = $this->fixture->main('', []);
 
         self::assertNotContains(
             'Event with organizer 1',
@@ -5643,16 +5643,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
 
         self::assertContains(
             $this->fixture->translate('label_onlineRegistration'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5664,26 +5664,26 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 1,
                 'queue_size' => 1,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->seminarUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         self::assertContains(
             sprintf(
                 $this->fixture->translate('label_onlineRegistrationOnQueue'), 0
             ),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5695,26 +5695,26 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 1,
                 'queue_size' => 0,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->seminarUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         self::assertNotContains(
             sprintf(
                 $this->fixture->translate('label_onlineRegistrationOnQueue'), 0
             ),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5726,17 +5726,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 1,
                 'queue_size' => 0,
                 'begin_date' => '',
-            )
+            ]
         );
 
         self::assertNotContains(
             $this->fixture->translate('label_onlinePrebooking'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5748,18 +5748,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'queue_size' => 0,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
                 'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] + 20,
-            )
+            ]
         );
 
         self::assertNotContains(
             $this->fixture->translate('label_onlineRegistration'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5772,13 +5772,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'queue_size' => 0,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
                 'begin_date_registration' => $registrationBegin,
-            )
+            ]
         );
 
         self::assertContains(
@@ -5786,7 +5786,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
                 $this->fixture->translate('message_registrationOpensOn'),
                 strftime('%d.%m.%Y %H:%M', $registrationBegin)
             ),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5798,18 +5798,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'queue_size' => 0,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
                 'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] - 42,
-            )
+            ]
         );
 
         self::assertContains(
             $this->fixture->translate('label_onlineRegistration'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5821,17 +5821,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
                 'begin_date_registration' => 0,
-            )
+            ]
         );
 
         self::assertContains(
             $this->fixture->translate('label_onlineRegistration'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5846,7 +5846,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Test &amp; event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5857,7 +5857,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Test &amp; event',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5866,13 +5866,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->createLogInAndRegisterFeUser();
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('expiry' => mktime(0, 0, 0, 1, 1, 2008))
+            ['expiry' => mktime(0, 0, 0, 1, 1, 2008)]
         );
         $this->fixture->setConfigurationValue('what_to_display', 'my_events');
 
         self::assertContains(
             '01.01.2008',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5886,7 +5886,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('mayManagersEditTheirEvents', 0);
         $this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertFalse(
             $this->fixture->isSubpartVisible('LISTITEM_WRAPPER_EDIT')
         );
@@ -5898,7 +5898,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('mayManagersEditTheirEvents', 1);
         $this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertTrue(
             $this->fixture->isSubpartVisible('LISTITEM_WRAPPER_EDIT')
         );
@@ -5914,7 +5914,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             '?id=' . $editorPid,
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5931,10 +5931,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->fixture->main(
             '',
-            array(
+            [
                 'allowCsvExportOfRegistrationsInMyVipEventsView' => 0,
                 'what_to_display' => 'my_vip_events',
-            )
+            ]
         );
         self::assertFalse(
             $this->fixture->isSubpartVisible('LISTITEM_WRAPPER_REGISTRATIONS')
@@ -5952,7 +5952,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
         self::assertTrue(
             $this->fixture->isSubpartVisible('LISTITEM_WRAPPER_REGISTRATIONS')
         );
@@ -5971,7 +5971,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'tx_seminars_pi2%5BeventUid%5D',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -5988,7 +5988,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'tx_seminars_pi2%5Btable%5D=tx_seminars_attendances',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6003,7 +6003,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'category_foo')
+            ['title' => 'category_foo']
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -6012,7 +6012,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'category_foo',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6030,16 +6030,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('timeframeInList', 'current');
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'title' => 'currentEvent',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 20,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 20,
-            )
+            ]
         );
 
         self::assertContains(
             'currentEvent',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6053,16 +6053,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('timeframeInList', 'current');
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'title' => 'futureEvent',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 21,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
 
         self::assertNotContains(
             'futureEvent',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6074,7 +6074,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->createLogInAndAddFeUserAsVip();
         $this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertTrue(
             $this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_STATUS')
@@ -6090,7 +6090,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
         $this->fixture->setConfigurationValue('hideColumns', 'status');
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertFalse(
             $this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_STATUS')
@@ -6107,7 +6107,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             $this->fixture->translate('visibility_status_published'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6119,7 +6119,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->createLogInAndAddFeUserAsVip();
         $this->fixture->setConfigurationValue('what_to_display', 'my_vip_events');
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertFalse(
             $this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_REGISTRATION')
@@ -6188,10 +6188,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'foo',
-            )
+            ]
         );
         $this->testingFramework->logoutFrontEndUser();
 
@@ -6217,15 +6217,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
 
         self::assertContains(
             'Event A',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6233,20 +6233,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event B'
-            )
+                'title' => 'Event B',
+            ]
         );
 
-        $output = $this->fixture->main('', array());
+        $output = $this->fixture->main('', []);
         self::assertContains(
             'Event A',
             $output
@@ -6260,63 +6260,63 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function testFirstPageOfListViewNotContainsItemForTheSecondPage()
     {
         $this->fixture->setConfigurationValue(
-            'listView.', array(
+            'listView.', [
                 'orderBy' => 'title',
                 'descFlag' => 0,
                 'results_at_a_time' => 1,
                 'maxPages' => 5,
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event B'
-            )
+                'title' => 'Event B',
+            ]
         );
 
         self::assertNotContains(
             'Event B',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
     public function testSecondPageOfListViewContainsItemForTheSecondPage()
     {
         $this->fixture->setConfigurationValue(
-            'listView.', array(
+            'listView.', [
                 'orderBy' => 'title',
                 'descFlag' => 0,
                 'results_at_a_time' => 1,
                 'maxPages' => 5,
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event B'
-            )
+                'title' => 'Event B',
+            ]
         );
 
         $this->fixture->piVars['pointer'] = 1;
         self::assertContains(
             'Event B',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6334,13 +6334,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertFalse(
             $this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_ATTACHED_FILES')
@@ -6357,13 +6357,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertTrue(
             $this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_ATTACHED_FILES')
@@ -6380,13 +6380,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 1);
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertFalse(
             $this->fixture->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES')
@@ -6403,13 +6403,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertTrue(
             $this->fixture->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES')
@@ -6425,13 +6425,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('hideColumns', '');
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertTrue(
             $this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_ATTACHED_FILES')
@@ -6447,13 +6447,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('hideColumns', '');
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
-                'title' => 'Event A'
-            )
+                'title' => 'Event A',
+            ]
         );
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertTrue(
             $this->fixture->isSubpartVisible('LISTITEM_WRAPPER_ATTACHED_FILES')
@@ -6475,12 +6475,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         self::assertContains(
             $dummyFileName,
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6503,10 +6503,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName . ',' . $dummyFileName2)
+            ['attached_files' => $dummyFileName . ',' . $dummyFileName2]
         );
 
-        $output = $this->fixture->main('', array());
+        $output = $this->fixture->main('', []);
 
         self::assertContains(
             $dummyFileName,
@@ -6533,12 +6533,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         self::assertNotContains(
             $dummyFileName,
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6557,19 +6557,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('attached_files' => $dummyFileName)
+            ['attached_files' => $dummyFileName]
         );
 
         self::assertContains(
             $dummyFileName,
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
     public function testListViewEnsuresPlacePiVarArray()
     {
-        $this->fixture->piVars['place'] = array('foo');
-        $this->fixture->main('', array());
+        $this->fixture->piVars['place'] = ['foo'];
+        $this->fixture->main('', []);
 
         self::assertTrue(
             empty($this->fixture->piVars['place'])
@@ -6578,8 +6578,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
     public function testListViewEnsuresOrganizerPiVarArray()
     {
-        $this->fixture->piVars['organizer'] = array('foo');
-        $this->fixture->main('', array());
+        $this->fixture->piVars['organizer'] = ['foo'];
+        $this->fixture->main('', []);
 
         self::assertTrue(
             empty($this->fixture->piVars['organizer'])
@@ -6588,8 +6588,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
     public function testListViewEnsuresEventTypePiVarArray()
     {
-        $this->fixture->piVars['event_type'] = array('foo');
-        $this->fixture->main('', array());
+        $this->fixture->piVars['event_type'] = ['foo'];
+        $this->fixture->main('', []);
 
         self::assertTrue(
             empty($this->fixture->piVars['event_type'])
@@ -6606,7 +6606,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('owner_feuser' => $ownerUid)
+            ['owner_feuser' => $ownerUid]
         );
 
         $this->fixture->setConfigurationValue(
@@ -6618,7 +6618,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             $this->fixture->translate('label_owner'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6628,7 +6628,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('owner_feuser' => $ownerUid)
+            ['owner_feuser' => $ownerUid]
         );
 
         $this->fixture->setConfigurationValue(
@@ -6640,7 +6640,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotRegexp(
             '/(<p>|<br \/>)\s*<br \/>\s*(<br \/>|<\/p>)/m',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6655,7 +6655,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             $this->fixture->translate('label_owner'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6665,7 +6665,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('owner_feuser' => $ownerUid)
+            ['owner_feuser' => $ownerUid]
         );
 
         $this->fixture->setConfigurationValue(
@@ -6677,19 +6677,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             $this->fixture->translate('label_owner'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
     public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledContainsOwnerName()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser(
-            '', array('name' => 'John Doe')
+            '', ['name' => 'John Doe']
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('owner_feuser' => $ownerUid)
+            ['owner_feuser' => $ownerUid]
         );
 
         $this->fixture->setConfigurationValue(
@@ -6701,19 +6701,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'John Doe',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
     public function testSingleViewForSeminarWithOwnerHtmlSpecialCharsOwnerName()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser(
-            '', array('name' => 'Tom & Jerry')
+            '', ['name' => 'Tom & Jerry']
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('owner_feuser' => $ownerUid)
+            ['owner_feuser' => $ownerUid]
         );
 
         $this->fixture->setConfigurationValue(
@@ -6725,20 +6725,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Tom &amp; Jerry',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
     public function testSingleViewForSeminarWithOwnerAndOwnerDataDisabledNotContainsOwnerName()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser(
-            '', array('name' => 'Jon Doe')
+            '', ['name' => 'Jon Doe']
         );
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('owner_feuser' => $ownerUid)
+            ['owner_feuser' => $ownerUid]
         );
 
         $this->fixture->setConfigurationValue(
@@ -6750,19 +6750,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             'Jon Doe',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
     public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledCanContainOwnerPhone()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser(
-            '', array('telephone' => '0123 4567')
+            '', ['telephone' => '0123 4567']
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('owner_feuser' => $ownerUid)
+            ['owner_feuser' => $ownerUid]
         );
 
         $this->fixture->setConfigurationValue(
@@ -6774,19 +6774,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             '0123 4567',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
     public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledCanContainOwnerEMailAddress()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser(
-            '', array('email' => 'foo@bar.com')
+            '', ['email' => 'foo@bar.com']
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('owner_feuser' => $ownerUid)
+            ['owner_feuser' => $ownerUid]
         );
 
         $this->fixture->setConfigurationValue(
@@ -6798,7 +6798,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'foo@bar.com',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6814,11 +6814,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -6826,7 +6826,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             $this->fixture->translate('label_onlineRegistration'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6838,19 +6838,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 1,
                 'queue_size' => 1,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->seminarUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -6860,7 +6860,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             sprintf(
                 $this->fixture->translate('label_onlineRegistrationOnQueue'), 0
             ),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6872,19 +6872,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 1,
                 'queue_size' => 0,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->seminarUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -6894,7 +6894,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             sprintf(
                 $this->fixture->translate('label_onlineRegistrationOnQueue'), 0
             ),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6906,12 +6906,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 1,
                 'queue_size' => 0,
                 'begin_date' => '',
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -6919,7 +6919,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             $this->fixture->translate('label_onlinePrebooking'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6931,12 +6931,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
                 'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] + 40,
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -6944,7 +6944,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             $this->fixture->translate('label_onlineRegistration'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6957,12 +6957,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
                 'begin_date_registration' => $registrationBegin,
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -6973,7 +6973,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
                 $this->fixture->translate('message_registrationOpensOn'),
                 strftime('%d.%m.%Y %H:%M', $registrationBegin)
             ),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -6985,12 +6985,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
                 'begin_date_registration' => $GLOBALS['SIM_EXEC_TIME'] - 42,
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -6998,7 +6998,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             $this->fixture->translate('label_onlineRegistration'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -7010,12 +7010,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array(
+            [
                 'needs_registration' => 1,
                 'attendees_max' => 0,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
                 'begin_date_registration' => 0,
-            )
+            ]
         );
 
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
@@ -7023,7 +7023,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             $this->fixture->translate('label_onlineRegistration'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -7036,7 +7036,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function registrationFormHtmlspecialcharsEventTitle()
     {
-        $registrationFormMock = $this->getMock(Tx_Seminars_FrontEnd_RegistrationForm::class, array(), array(), '', false);
+        $registrationFormMock = $this->getMock(Tx_Seminars_FrontEnd_RegistrationForm::class, [], [], '', false);
         GeneralUtility::addInstance(Tx_Seminars_FrontEnd_RegistrationForm::class, $registrationFormMock);
 
         $this->testingFramework->createAndLoginFrontEndUser();
@@ -7044,21 +7044,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'title' => 'foo & bar',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
                 'needs_registration' => 1,
                 'attendees_max' => 10,
-            )
+            ]
         );
 
         $this->fixture->piVars['seminar'] = $eventUid;
 
         self::assertContains(
             'foo &amp; bar',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -7069,21 +7069,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $requiredTopic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $topic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $date = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
                 'attendees_max' => 10,
                 'topic' => $topic,
-            )
+            ]
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
@@ -7094,7 +7094,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             $this->fixture->translate('label_your_user_data'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -7105,21 +7105,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $requiredTopic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $topic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $date = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
                 'attendees_max' => 10,
                 'topic' => $topic,
-            )
+            ]
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
@@ -7127,7 +7127,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             $topic, $requiredTopic, 'requirements'
         );
         $this->fixture->piVars['seminar'] = $date;
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertTrue(
             $this->fixture->isSubpartVisible('FIELD_WRAPPER_REQUIREMENTS')
@@ -7148,26 +7148,26 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $topic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $date = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
                 'attendees_max' => 10,
                 'topic' => $topic,
                 'needs_registration' => 1,
-            )
+            ]
         );
 
         $requiredTopic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required & foo',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -7177,7 +7177,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertRegExp(
             '/<a href=.*' . $requiredTopic . '.*>required &amp; foo<\/a>/',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -7188,26 +7188,26 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $topic = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $date = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
                 'attendees_max' => 10,
                 'topic' => $topic,
                 'needs_registration' => 1,
-            )
+            ]
         );
 
         $requiredTopic1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_foo',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -7215,10 +7215,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $requiredTopic2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_bar',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -7229,7 +7229,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertRegExp(
             '/required_foo.*required_bar/s',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -7242,7 +7242,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function getVacanciesClassesForEventWithEnoughVacanciesReturnsAvailableClass()
     {
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, array());
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(0);
         $event->setNeedsRegistration(true);
@@ -7259,7 +7259,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function getVacanciesClassesForEventWithOneVacancyReturnsVacancyOneClass()
     {
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, array());
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(9);
         $event->setNeedsRegistration(true);
@@ -7276,7 +7276,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function getVacanciesClassesForEventWithTwoVacanciesReturnsVacancyTwoClass()
     {
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, array());
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(8);
         $event->setNeedsRegistration(true);
@@ -7293,7 +7293,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function getVacanciesClassesForEventWithNoVacanciesReturnsVacancyZeroClass()
     {
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, array());
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(10);
         $event->setNeedsRegistration(true);
@@ -7310,7 +7310,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function getVacanciesClassesForEventWithUnlimitedVacanciesReturnsVacanciesAvailableClass()
     {
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, array());
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
         $event->setUnlimitedVacancies();
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
@@ -7325,7 +7325,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function getVacanciesClassesForEventWithUnlimitedVacanciesDoesNotReturnZeroVacancyClass()
     {
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, array());
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
         $event->setUnlimitedVacancies();
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
@@ -7340,7 +7340,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function getVacanciesClassesForEventWithUnlimitedVacanciesReturnsVacanciesUnlimitedClass()
     {
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, array());
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
         $event->setUnlimitedVacancies();
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
@@ -7404,7 +7404,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function getVacanciesClassesForEventWithNoVacanciesAndRegistrationQueueReturnsRegistrationQueueClass()
     {
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, array());
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(10);
         $event->setNeedsRegistration(true);
@@ -7422,7 +7422,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function getVacanciesClassesForEventWithNoVacanciesAndNoRegistrationQueueDoesNotReturnRegistrationQueueClass()
     {
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, array());
+        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(10);
         $event->setNeedsRegistration(true);
@@ -7587,17 +7587,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'owner_feuser' => $feUserUid,
                 'hidden' => 1,
                 'title' => 'hiddenEvent',
-            )
+            ]
         );
 
         self::assertContains(
             'hiddenEvent',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -7620,15 +7620,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'owner_feuser' => $feUserUid,
                 'hidden' => 1,
                 'title' => 'hiddenEvent',
-            )
+            ]
         );
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertTrue(
             $this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_STATUS')
@@ -7653,16 +7653,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'owner_feuser' => $feUserUid,
                 'hidden' => 1,
-            )
+            ]
         );
 
         self::assertContains(
             $this->fixture->translate('visibility_status_pending'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -7684,15 +7684,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'owner_feuser' => $feUserUid,
-            )
+            ]
         );
 
         self::assertContains(
             $this->fixture->translate('visibility_status_published'),
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -7716,19 +7716,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'owner_feuser' => $feUserUid,
                 'hidden' => 1,
                 'title' => 'pastEvent',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 30,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] - 20,
-            )
+            ]
         );
 
         self::assertContains(
             'pastEvent',
-            $this->fixture->main('', array())
+            $this->fixture->main('', [])
         );
     }
 
@@ -7748,7 +7748,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->testingFramework->createAndLoginFrontEndUser($editorGroupUid);
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
 
         self::assertFalse(
             $this->fixture->isSubpartVisible('LISTHEADER_WRAPPER_REGISTRATION')
@@ -7767,8 +7767,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $className = $this->createAccessibleProxyClass();
         $fixture = new $className();
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array();
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', false);
+        $fixture->conf = [];
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser'], [], '', false);
         $event->expects(self::any())->method('isUserVip')
             ->will(self::returnValue(false));
         $event->expects(self::any())->method('isOwnerFeUser')
@@ -7788,8 +7788,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $className = $this->createAccessibleProxyClass();
         $fixture = new $className();
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array('mayManagersEditTheirEvents' => true);
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', false);
+        $fixture->conf = ['mayManagersEditTheirEvents' => true];
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser'], [], '', false);
         $event->expects(self::any())->method('isUserVip')
             ->will(self::returnValue(true));
         $event->expects(self::any())->method('isOwnerFeUser')
@@ -7809,8 +7809,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $className = $this->createAccessibleProxyClass();
         $fixture = new $className();
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array('mayManagersEditTheirEvents' => false);
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', false);
+        $fixture->conf = ['mayManagersEditTheirEvents' => false];
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser'], [], '', false);
         $event->expects(self::any())->method('isUserVip')
             ->will(self::returnValue(true));
         $event->expects(self::any())->method('isOwnerFeUser')
@@ -7830,11 +7830,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $className = $this->createAccessibleProxyClass();
         $fixture = new $className();
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array(
+        $fixture->conf = [
             'eventEditorPID' => 42,
             'mayManagersEditTheirEvents' => true,
-        );
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isUserVip', 'isOwnerFeUser'), array(), '', false);
+        ];
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser'], [], '', false);
         $event->expects(self::any())->method('getUid')
             ->will(self::returnValue(91));
         $event->expects(self::any())->method('isUserVip')
@@ -7860,14 +7860,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('mayCurrentUserEditCurrentEvent')
+            ['mayCurrentUserEditCurrentEvent']
         );
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array('eventEditorPID' => 42);
+        $fixture->conf = ['eventEditorPID' => 42];
         $fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->will(self::returnValue(false));
 
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', false);
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden'], [], '', false);
         $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
         $fixture->setSeminar($event);
 
@@ -7885,16 +7885,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('mayCurrentUserEditCurrentEvent')
+            ['mayCurrentUserEditCurrentEvent']
         );
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array(
+        $fixture->conf = [
             'eventEditorPID' => 42,
-        );
+        ];
         $fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->will(self::returnValue(true));
 
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', false);
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden'], [], '', false);
         $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
         $fixture->setSeminar($event);
 
@@ -7913,14 +7913,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('mayCurrentUserEditCurrentEvent')
+            ['mayCurrentUserEditCurrentEvent']
         );
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array();
+        $fixture->conf = [];
         $fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->will(self::returnValue(true));
 
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', false);
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden'], [], '', false);
         $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
         $event->expects(self::any())->method('isPublished')->will(self::returnValue(true));
         $event->expects(self::any())->method('isHidden')->will(self::returnValue(false));
@@ -7944,14 +7944,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('mayCurrentUserEditCurrentEvent')
+            ['mayCurrentUserEditCurrentEvent']
         );
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array();
+        $fixture->conf = [];
         $fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->will(self::returnValue(true));
 
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', false);
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden'], [], '', false);
         $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
         $event->expects(self::any())->method('isPublished')->will(self::returnValue(true));
         $event->expects(self::any())->method('isHidden')->will(self::returnValue(true));
@@ -7975,14 +7975,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('mayCurrentUserEditCurrentEvent')
+            ['mayCurrentUserEditCurrentEvent']
         );
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array();
+        $fixture->conf = [];
         $fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->will(self::returnValue(true));
 
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', false);
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden'], [], '', false);
         $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
         $event->expects(self::any())->method('isPublished')->will(self::returnValue(false));
         $event->expects(self::any())->method('isHidden')->will(self::returnValue(false));
@@ -8002,14 +8002,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('mayCurrentUserEditCurrentEvent')
+            ['mayCurrentUserEditCurrentEvent']
         );
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array();
+        $fixture->conf = [];
         $fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->will(self::returnValue(true));
 
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', false);
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden'], [], '', false);
         $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
         $event->expects(self::any())->method('isPublished')->will(self::returnValue(false));
         $event->expects(self::any())->method('isHidden')->will(self::returnValue(true));
@@ -8029,14 +8029,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('mayCurrentUserEditCurrentEvent')
+            ['mayCurrentUserEditCurrentEvent']
         );
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array();
+        $fixture->conf = [];
         $fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->will(self::returnValue(true));
 
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', false);
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden'], [], '', false);
         $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
         $event->expects(self::any())->method('isPublished')->will(self::returnValue(false));
         $event->expects(self::any())->method('isHidden')->will(self::returnValue(true));
@@ -8056,14 +8056,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('mayCurrentUserEditCurrentEvent')
+            ['mayCurrentUserEditCurrentEvent']
         );
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array();
+        $fixture->conf = [];
         $fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->will(self::returnValue(true));
 
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', false);
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden'], [], '', false);
         $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
         $event->expects(self::any())->method('isPublished')->will(self::returnValue(false));
         $event->expects(self::any())->method('isHidden')->will(self::returnValue(false));
@@ -8083,14 +8083,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('mayCurrentUserEditCurrentEvent')
+            ['mayCurrentUserEditCurrentEvent']
         );
         $fixture->cObj = $this->createContentMock();
-        $fixture->conf = array();
+        $fixture->conf = [];
         $fixture->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->will(self::returnValue(true));
 
-        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, array('getUid', 'isPublished', 'isHidden'), array(), '', false);
+        $event = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden'], [], '', false);
         $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
         $event->expects(self::any())->method('isPublished')->will(self::returnValue(true));
         $event->expects(self::any())->method('isHidden')->will(self::returnValue(true));
@@ -8116,12 +8116,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function eventsListNotCallsProcessEventEditorActions()
     {
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_FrontEnd_DefaultController::class, array('processEventEditorActions'));
+        $fixture = $this->getMock(Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
         $fixture->expects(self::never())->method('processEventEditorActions');
 
         $fixture->main(
             '',
-            array('what_to_display' => 'seminar_list')
+            ['what_to_display' => 'seminar_list']
         );
     }
 
@@ -8133,12 +8133,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->testingFramework->createAndLoginFrontEndUser();
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_FrontEnd_DefaultController::class, array('processEventEditorActions'));
+        $fixture = $this->getMock(Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
         $fixture->expects(self::once())->method('processEventEditorActions');
 
         $fixture->main(
             '',
-            array('what_to_display' => 'my_entered_events')
+            ['what_to_display' => 'my_entered_events']
         );
     }
 
@@ -8148,12 +8148,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function myManagedEventsListCallsProcessEventEditorActions()
     {
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_FrontEnd_DefaultController::class, array('processEventEditorActions'));
+        $fixture = $this->getMock(Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
         $fixture->expects(self::once())->method('processEventEditorActions');
 
         $fixture->main(
             '',
-            array('what_to_display' => 'my_vip_events')
+            ['what_to_display' => 'my_vip_events']
         );
     }
 
@@ -8165,10 +8165,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('ensureIntegerPiVars', 'createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['ensureIntegerPiVars', 'createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::atLeastOnce())->method('ensureIntegerPiVars')
-            ->with(array('seminar'));
+            ->with(['seminar']);
 
         $fixture->processEventEditorActions();
     }
@@ -8181,7 +8181,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::never())->method('createEventEditorInstance');
 
@@ -8197,7 +8197,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::never())->method('createEventEditorInstance');
 
@@ -8213,12 +8213,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         Tx_Oelib_MapperRegistry::denyDatabaseAccess();
 
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 
@@ -8234,13 +8234,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         Tx_Oelib_MapperRegistry::denyDatabaseAccess();
 
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
         $eventEditor->expects(self::once())->method('hasAccessMessage');
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
 
@@ -8256,16 +8256,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function processEventEditorActionsForHideActionWithAccessGrantedCallsHideEvent()
     {
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
         $fixture->expects(self::once())->method('hideEvent')->with($event);
@@ -8282,16 +8282,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function processEventEditorActionsForHideActionWithUnpublishedEventAndAccessGrantedNotCallsHideEvent()
     {
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array('publication_hash' => 'foo'));
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(['publication_hash' => 'foo']);
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
         $fixture->expects(self::never())->method('hideEvent');
@@ -8308,16 +8308,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function processEventEditorActionsForHideActionWithAccessDeniedNotCallsHideEvent()
     {
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue('access denied'));
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
         $fixture->expects(self::never())->method('hideEvent');
@@ -8334,16 +8334,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function processEventEditorActionsForUnhideActionWithAccessGrantedCallsUnhideEvent()
     {
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
         $eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
         $fixture->expects(self::once())->method('unhideEvent')->with($event);
@@ -8360,16 +8360,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function processEventEditorActionsForUnhideActionWithUnpublishedEventAccessGrantedNotCallsUnhideEvent()
     {
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
         $eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array('publication_hash' => 'foo'));
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(['publication_hash' => 'foo']);
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
         $fixture->expects(self::never())->method('unhideEvent');
@@ -8386,16 +8386,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function processEventEditorActionsForUnhideActionWithAccessDeniedNotCallsUnhideEvent()
     {
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
         $eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue('access denied'));
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
         $fixture->expects(self::never())->method('unhideEvent');
@@ -8412,16 +8412,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function processEventEditorActionsForCopyActionWithAccessGrantedCallsCopyEvent()
     {
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent']
         );
         $fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
         $fixture->expects(self::once())->method('copyEvent')->with($event);
@@ -8438,16 +8438,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function processEventEditorActionsForCopyActionWithUnpublishedEventAndAccessGrantedNotCallsCopyEvent()
     {
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array('publication_hash' => 'foo'));
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(['publication_hash' => 'foo']);
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent']
         );
         $fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
         $fixture->expects(self::never())->method('copyEvent');
@@ -8464,16 +8464,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function processEventEditorActionsForCopyActionWithAccessDeniedNotCallsCopyEvent()
     {
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue('access denied'));
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent']
         );
         $fixture->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
         $fixture->expects(self::never())->method('copyEvent');
@@ -8490,16 +8490,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function processEventEditorActionsForEmptyActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent()
     {
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
         $eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
         $fixture->expects(self::never())->method('hideEvent');
@@ -8517,16 +8517,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function processEventEditorActionsForInvalidActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent()
     {
         /** @var Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, array('hasAccessMessage'), array(), '', false);
+        $eventEditor = $this->getMock(Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
         $eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             $this->createAccessibleProxyClass(),
-            array('createEventEditorInstance', 'hideEvent', 'unhideEvent')
+            ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
         $fixture->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
         $fixture->expects(self::never())->method('hideEvent');
@@ -8544,11 +8544,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function hideEventMarksVisibleEventAsHidden()
     {
         /** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, ['save']);
         Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = $mapper->getLoadedTestingModel(array());
+        $event = $mapper->getLoadedTestingModel([]);
 
         $className = $this->createAccessibleProxyClass();
         /** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
@@ -8566,11 +8566,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function hideEventKeepsHiddenEventAsHidden()
     {
         /** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, ['save']);
         Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = $mapper->getLoadedTestingModel(array('hidden' => 1));
+        $event = $mapper->getLoadedTestingModel(['hidden' => 1]);
 
         $className = $this->createAccessibleProxyClass();
         /** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
@@ -8588,11 +8588,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function hideEventSavesEvent()
     {
         /** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, ['save']);
         Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = $mapper->getLoadedTestingModel(array());
+        $event = $mapper->getLoadedTestingModel([]);
         $mapper->expects(self::once())->method('save')->with($event);
 
         $className = $this->createAccessibleProxyClass();
@@ -8607,11 +8607,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function hideEventRedirectsToRequestUrl()
     {
         /** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, ['save']);
         Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = $mapper->getLoadedTestingModel(array());
+        $event = $mapper->getLoadedTestingModel([]);
 
         $className = $this->createAccessibleProxyClass();
         /** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
@@ -8631,11 +8631,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function unhideEventMarksHiddenEventAsVisible()
     {
         /** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, ['save']);
         Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = $mapper->getLoadedTestingModel(array('hidden' => 1));
+        $event = $mapper->getLoadedTestingModel(['hidden' => 1]);
 
         $className = $this->createAccessibleProxyClass();
         /** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
@@ -8653,11 +8653,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function unhideEventKeepsVisibleEventAsVisible()
     {
         /** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, ['save']);
         Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = $mapper->getLoadedTestingModel(array());
+        $event = $mapper->getLoadedTestingModel([]);
 
         $className = $this->createAccessibleProxyClass();
         /** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
@@ -8675,11 +8675,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function unhideEventSavesEvent()
     {
         /** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, ['save']);
         Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = $mapper->getLoadedTestingModel(array());
+        $event = $mapper->getLoadedTestingModel([]);
         $mapper->expects(self::once())->method('save')->with($event);
 
         $className = $this->createAccessibleProxyClass();
@@ -8694,11 +8694,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function unhideEventRedirectsToRequestUrl()
     {
         /** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, ['save']);
         Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = $mapper->getLoadedTestingModel(array());
+        $event = $mapper->getLoadedTestingModel([]);
 
         $className = $this->createAccessibleProxyClass();
         /** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
@@ -8718,11 +8718,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function copySavesHiddenCloneOfEvent()
     {
         /** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, ['save']);
         Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = $mapper->getLoadedTestingModel(array('title' => 'TDD for starters'));
+        $event = $mapper->getLoadedTestingModel(['title' => 'TDD for starters']);
 
         $hiddenClone = clone $event;
         $hiddenClone->markAsHidden();
@@ -8740,11 +8740,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function copyRemovesRegistrationsFromEvent()
     {
         /** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, ['save']);
         Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = $mapper->getLoadedTestingModel(array('title' => 'TDD for starters'));
+        $event = $mapper->getLoadedTestingModel(['title' => 'TDD for starters']);
         $registrations = new Tx_Oelib_List();
         $registrations->add(new Tx_Seminars_Model_Registration());
         $event->setRegistrations($registrations);
@@ -8766,11 +8766,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function copyEventRedirectsToRequestUrl()
     {
         /** @var Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('save'));
+        $mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, ['save']);
         Tx_Oelib_MapperRegistry::set(Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var Tx_Seminars_Model_Event $event */
-        $event = $mapper->getLoadedTestingModel(array());
+        $event = $mapper->getLoadedTestingModel([]);
 
         $className = $this->createAccessibleProxyClass();
         /** @var Tx_Seminars_FrontEnd_DefaultController $fixture */
@@ -8794,7 +8794,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function initListViewForDefaultListLimitsListByAdditionalParameters()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_DefaultController::class, array('limitForAdditionalParameters')
+            Tx_Seminars_FrontEnd_DefaultController::class, ['limitForAdditionalParameters']
         );
         $fixture->expects(self::once())->method('limitForAdditionalParameters');
 
@@ -8807,7 +8807,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function initListViewForTopicListLimitsListByAdditionalParameters()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_DefaultController::class, array('limitForAdditionalParameters')
+            Tx_Seminars_FrontEnd_DefaultController::class, ['limitForAdditionalParameters']
         );
         $fixture->expects(self::once())->method('limitForAdditionalParameters');
 
@@ -8820,7 +8820,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function initListViewForMyEventsListNotLimitsListByAdditionalParameters()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_DefaultController::class, array('limitForAdditionalParameters')
+            Tx_Seminars_FrontEnd_DefaultController::class, ['limitForAdditionalParameters']
         );
         $fixture->expects(self::never())->method('limitForAdditionalParameters');
 
@@ -8845,98 +8845,98 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function hideListRegistrationsColumnIfNecessaryDataProvider()
     {
-        return array(
-            'notHiddenForListForBothPidsSet' => array(
+        return [
+            'notHiddenForListForBothPidsSet' => [
                 'getsHidden' => false,
                 'whatToDisplay' => 'seminar_list',
                 'listPid' => 1,
                 'vipListPid' => 1,
-            ),
-            'hiddenForListForNoPidsSet' => array(
+            ],
+            'hiddenForListForNoPidsSet' => [
                 'getsHidden' => true,
                 'whatToDisplay' => 'seminar_list',
                 'listPid' => 0,
                 'vipListPid' => 0,
-            ),
-            'notHiddenForListForListPidSet' => array(
+            ],
+            'notHiddenForListForListPidSet' => [
                 'getsHidden' => false,
                 'whatToDisplay' => 'seminar_list',
                 'listPid' => 1,
                 'vipListPid' => 0,
-            ),
-            'notHiddenForListForVipListPidSet' => array(
+            ],
+            'notHiddenForListForVipListPidSet' => [
                 'getsHidden' => false,
                 'whatToDisplay' => 'seminar_list',
                 'listPid' => 0,
                 'vipListPid' => 1,
-            ),
-            'hiddenForOtherDatesForAndBothPidsSet' => array(
+            ],
+            'hiddenForOtherDatesForAndBothPidsSet' => [
                 'getsHidden' => true,
                 'whatToDisplay' => 'other_dates',
                 'listPid' => 1,
                 'vipListPid' => 1,
-            ),
-            'hiddenForEventsNextDayForBothPidsSet' => array(
+            ],
+            'hiddenForEventsNextDayForBothPidsSet' => [
                 'getsHidden' => true,
                 'whatToDisplay' => 'events_next_day',
                 'listPid' => 1,
                 'vipListPid' => 1,
-            ),
-            'notHiddenForMyEventsForBothPidsSet' => array(
+            ],
+            'notHiddenForMyEventsForBothPidsSet' => [
                 'getsHidden' => false,
                 'whatToDisplay' => 'my_events',
                 'listPid' => 1,
                 'vipListPid' => 1,
-            ),
-            'hiddenForMyEventsForNoPidsSet' => array(
+            ],
+            'hiddenForMyEventsForNoPidsSet' => [
                 'getsHidden' => true,
                 'whatToDisplay' => 'my_events',
                 'listPid' => 0,
                 'vipListPid' => 0,
-            ),
-            'notHiddenForMyEventsForListPidSet' => array(
+            ],
+            'notHiddenForMyEventsForListPidSet' => [
                 'getsHidden' => false,
                 'whatToDisplay' => 'my_events',
                 'listPid' => 1,
                 'vipListPid' => 0,
-            ),
-            'hiddenForMyEventsForVipListPidSet' => array(
+            ],
+            'hiddenForMyEventsForVipListPidSet' => [
                 'getsHidden' => true,
                 'whatToDisplay' => 'my_events',
                 'listPid' => 0,
                 'vipListPid' => 1,
-            ),
-            'notHiddenForMyVipEventsForBothPidsSet' => array(
+            ],
+            'notHiddenForMyVipEventsForBothPidsSet' => [
                 'getsHidden' => false,
                 'whatToDisplay' => 'my_vip_events',
                 'listPid' => 1,
                 'vipListPid' => 1,
-            ),
-            'hiddenForMyVipEventsForNoPidsSet' => array(
+            ],
+            'hiddenForMyVipEventsForNoPidsSet' => [
                 'getsHidden' => true,
                 'whatToDisplay' => 'my_vip_events',
                 'listPid' => 0,
                 'vipListPid' => 0,
-            ),
-            'hiddenForMyVipEventsForListPidSet' => array(
+            ],
+            'hiddenForMyVipEventsForListPidSet' => [
                 'getsHidden' => true,
                 'whatToDisplay' => 'my_vip_events',
                 'listPid' => 1,
                 'vipListPid' => 0,
-            ),
-            'notHiddenForMyVipEventsForVipListPidSet' => array(
+            ],
+            'notHiddenForMyVipEventsForVipListPidSet' => [
                 'getsHidden' => false,
                 'whatToDisplay' => 'my_vip_events',
                 'listPid' => 0,
                 'vipListPid' => 1,
-            ),
-            'hiddenForTopicListForBothPidsSet' => array(
+            ],
+            'hiddenForTopicListForBothPidsSet' => [
                 'getsHidden' => true,
                 'whatToDisplay' => 'topic_list',
                 'listPid' => 1,
                 'vipListPid' => 1,
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -8954,7 +8954,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     ) {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
-            array('isRegistrationEnabled', 'isLoggedIn', 'hideColumns')
+            ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns']
         );
         $fixture->expects(self::any())->method('isRegistrationEnabled')
             ->will(self::returnValue(true));
@@ -8963,15 +8963,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         if ($getsHidden) {
             $fixture->expects(self::once())->method('hideColumns')
-                ->with(array('list_registrations'));
+                ->with(['list_registrations']);
         } else {
             $fixture->expects(self::never())->method('hideColumns');
         }
 
-        $fixture->init(array(
+        $fixture->init([
             'registrationsListPID' => $listPid,
             'registrationsVipListPID' => $vipListPid,
-        ));
+        ]);
 
         $fixture->hideListRegistrationsColumnIfNecessary($whatToDisplay);
     }
@@ -8991,7 +8991,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     ) {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
-            array('isRegistrationEnabled', 'isLoggedIn', 'hideColumns')
+            ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns']
         );
         $fixture->expects(self::any())->method('isRegistrationEnabled')
             ->will(self::returnValue(true));
@@ -8999,12 +8999,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             ->will(self::returnValue(false));
 
         $fixture->expects(self::once())->method('hideColumns')
-            ->with(array('list_registrations'));
+            ->with(['list_registrations']);
 
-        $fixture->init(array(
+        $fixture->init([
             'registrationsListPID' => $listPid,
             'registrationsVipListPID' => $vipListPid,
-        ));
+        ]);
 
         $fixture->hideListRegistrationsColumnIfNecessary($whatToDisplay);
     }
@@ -9024,7 +9024,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     ) {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
-            array('isRegistrationEnabled', 'isLoggedIn', 'hideColumns')
+            ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns']
         );
         $fixture->expects(self::any())->method('isRegistrationEnabled')
             ->will(self::returnValue(false));
@@ -9032,12 +9032,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             ->will(self::returnValue(true));
 
         $fixture->expects(self::once())->method('hideColumns')
-            ->with(array('list_registrations'));
+            ->with(['list_registrations']);
 
-        $fixture->init(array(
+        $fixture->init([
             'registrationsListPID' => $listPid,
             'registrationsVipListPID' => $vipListPid,
-        ));
+        ]);
 
         $fixture->hideListRegistrationsColumnIfNecessary($whatToDisplay);
     }
@@ -9063,7 +9063,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
     }
 
     /**
@@ -9079,7 +9079,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
     }
 
     /**
@@ -9102,7 +9102,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
     }
 
     /**
@@ -9124,7 +9124,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
     }
 
     /**
@@ -9139,7 +9139,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
     }
 
     /**
@@ -9159,7 +9159,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
 
-        $this->fixture->main('', array());
+        $this->fixture->main('', []);
     }
 
     /*
@@ -9172,7 +9172,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function createSingleViewLinkCreatesLinkToSingleViewPage()
     {
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         self::assertContains(
             'href="index.php?id=42&amp;tx_seminars_pi1%5BshowUid%5D=1337"',
@@ -9188,7 +9188,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('linkToSingleView', 'always');
         /** @var Tx_Seminars_Model_Event $event */
         $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
-            array('description' => '')
+            ['description' => '']
         );
 
         self::assertContains(
@@ -9205,7 +9205,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('linkToSingleView', 'always');
         /** @var Tx_Seminars_Model_Event $event */
         $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
-            array('description' => 'Hello world!')
+            ['description' => 'Hello world!']
         );
 
         self::assertContains(
@@ -9222,7 +9222,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('linkToSingleView', 'never');
         /** @var Tx_Seminars_Model_Event $event */
         $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
-            array('description' => '')
+            ['description' => '']
         );
 
         self::assertSame(
@@ -9239,7 +9239,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('linkToSingleView', 'onlyForNonEmptyDescription');
         /** @var Tx_Seminars_Model_Event $event */
         $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
-            array('description' => 'Hello world!')
+            ['description' => 'Hello world!']
         );
 
         self::assertContains(
@@ -9256,7 +9256,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('linkToSingleView', 'onlyForNonEmptyDescription');
         /** @var Tx_Seminars_Model_Event $event */
         $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
-            array('description' => '')
+            ['description' => '']
         );
 
         self::assertSame(
@@ -9273,7 +9273,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('linkToSingleView', 'never');
         /** @var Tx_Seminars_Model_Event $event */
         $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
-            array('description' => 'Hello world!')
+            ['description' => 'Hello world!']
         );
 
         self::assertSame(
@@ -9288,7 +9288,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function createSingleViewLinkByDefaultHtmlSpecialCharsLinkText()
     {
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         self::assertContains(
             'Chaos &amp; Confusion',
@@ -9302,7 +9302,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function createSingleViewLinkByWithHtmlSpecialCharsTrueHtmlSpecialCharsLinkText()
     {
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         self::assertContains(
             'Chaos &amp; Confusion',
@@ -9316,7 +9316,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function createSingleViewLinkByWithHtmlSpecialCharsFalseNotHtmlSpecialCharsLinkText()
     {
         /** @var Tx_Seminars_Model_Event $event */
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(array());
+        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         self::assertContains(
             'Chaos & Confusion',

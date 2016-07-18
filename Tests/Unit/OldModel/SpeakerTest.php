@@ -41,16 +41,16 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $fixtureUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            array(
+            [
                 'title' => 'Test speaker',
-                'email' => 'foo@test.com'
-            )
+                'email' => 'foo@test.com',
+            ]
         );
         $this->fixture = new Tx_Seminars_OldModel_Speaker($fixtureUid);
 
         $maximalFixtureUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            array(
+            [
                 'title' => 'Test speaker',
                 'organization' => 'Foo inc.',
                 'homepage' => 'http://www.test.com/',
@@ -61,8 +61,8 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
                 'phone_home' => '456',
                 'phone_mobile' => '789',
                 'fax' => '000',
-                'email' => 'maximal-foo@test.com'
-            )
+                'email' => 'maximal-foo@test.com',
+            ]
         );
         $this->maximalFixture = new Tx_Seminars_OldModel_Speaker($maximalFixtureUid);
     }
@@ -107,15 +107,15 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
     public function testAddSkillRelationReturnsUid()
     {
         self::assertTrue(
-            $this->addSkillRelation(array()) > 0
+            $this->addSkillRelation([]) > 0
         );
     }
 
     public function testAddSkillRelationCreatesNewUids()
     {
         self::assertNotEquals(
-            $this->addSkillRelation(array()),
-            $this->addSkillRelation(array())
+            $this->addSkillRelation([]),
+            $this->addSkillRelation([])
         );
     }
 
@@ -126,13 +126,13 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
             $this->fixture->getNumberOfSkills()
         );
 
-        $this->addSkillRelation(array());
+        $this->addSkillRelation([]);
         self::assertEquals(
             1,
             $this->fixture->getNumberOfSkills()
         );
 
-        $this->addSkillRelation(array());
+        $this->addSkillRelation([]);
         self::assertEquals(
             2,
             $this->fixture->getNumberOfSkills()
@@ -149,7 +149,7 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
             )
         );
 
-        $this->addSkillRelation(array());
+        $this->addSkillRelation([]);
         self::assertEquals(
             1,
             $this->testingFramework->countRecords(
@@ -158,7 +158,7 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
             )
         );
 
-        $this->addSkillRelation(array());
+        $this->addSkillRelation([]);
         self::assertEquals(
             2,
             $this->testingFramework->countRecords(
@@ -284,7 +284,7 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
      */
     public function canHaveOneSkill()
     {
-        $this->addSkillRelation(array());
+        $this->addSkillRelation([]);
         self::assertTrue(
             $this->fixture->hasSkills()
         );
@@ -301,7 +301,7 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
     public function testGetSkillsShortWithSingleSkillReturnsASingleSkill()
     {
         $title = 'Test title';
-        $this->addSkillRelation(array('title' => $title));
+        $this->addSkillRelation(['title' => $title]);
 
         self::assertContains(
             $title,
@@ -313,8 +313,8 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
     {
         $firstTitle = 'Skill 1';
         $secondTitle = 'Skill 2';
-        $this->addSkillRelation(array('title' => $firstTitle));
-        $this->addSkillRelation(array('title' => $secondTitle));
+        $this->addSkillRelation(['title' => $firstTitle]);
+        $this->addSkillRelation(['title' => $secondTitle]);
 
         self::assertEquals(
             $firstTitle . ', ' . $secondTitle,
@@ -332,7 +332,7 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
 
     public function testGetNumberOfSkillsWithSingleSkillReturnsOne()
     {
-        $this->addSkillRelation(array());
+        $this->addSkillRelation([]);
         self::assertEquals(
             1,
             $this->fixture->getNumberOfSkills()
@@ -341,8 +341,8 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
 
     public function testGetNumberOfSkillsWithTwoSkillsReturnsTwo()
     {
-        $this->addSkillRelation(array());
-        $this->addSkillRelation(array());
+        $this->addSkillRelation([]);
+        $this->addSkillRelation([]);
         self::assertEquals(
             2,
             $this->fixture->getNumberOfSkills()

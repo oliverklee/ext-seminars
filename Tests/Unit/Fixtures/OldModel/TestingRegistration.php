@@ -41,7 +41,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends Tx_Se
         }
 
         $contentObject = new ContentObjectRenderer();
-        $contentObject->start(array());
+        $contentObject->start([]);
 
         parent::__construct($contentObject, $dbResult);
     }

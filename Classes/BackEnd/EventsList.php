@@ -297,12 +297,12 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
 
         $csvUrl = BackendUtility::getModuleUrl(
             self::MODULE_NAME,
-            array(
+            [
                 'id' => $pageData['uid'],
                 'csv' => '1',
                 'tx_seminars_pi2[table]' => 'tx_seminars_attendances',
-                'tx_seminars_pi2[eventUid]' => $event->getUid()
-            )
+                'tx_seminars_pi2[eventUid]' => $event->getUid(),
+            ]
         );
 
         return '<a class="btn btn-default" href="' . htmlspecialchars($csvUrl) . '">' . $imageTag . '</a>&nbsp;';
@@ -335,15 +335,15 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
     private function setEmailButtonMarkers(Tx_Seminars_OldModel_Event $event)
     {
         if (!$event->hasAttendances()) {
-            $this->template->hideSubpartsArray(array('EMAIL_BUTTON'));
+            $this->template->hideSubpartsArray(['EMAIL_BUTTON']);
             return;
         }
 
-        $this->template->unhideSubpartsArray(array('EMAIL_BUTTON'));
+        $this->template->unhideSubpartsArray(['EMAIL_BUTTON']);
         $pageData = $this->page->getPageData();
 
         $this->template->setMarker('uid', $event->getUid());
-        $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, array('id' => $pageData['uid']));
+        $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, ['id' => $pageData['uid']]);
         $this->template->setMarker('email_button_url', htmlspecialchars($buttonUrl));
         $this->template->setMarker(
             'label_email_button',
@@ -365,7 +365,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
      */
     private function setCancelButtonMarkers(Tx_Seminars_OldModel_Event $event)
     {
-        $this->template->unhideSubpartsArray(array('CANCEL_BUTTON'));
+        $this->template->unhideSubpartsArray(['CANCEL_BUTTON']);
         $pageData = $this->page->getPageData();
 
         if (($event->getRecordType() != Tx_Seminars_Model_Event::TYPE_TOPIC)
@@ -375,14 +375,14 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
             && $this->doesUserHaveAccess($event->getPageUid())
         ) {
             $this->template->setMarker('uid', $event->getUid());
-            $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, array('id' => $pageData['uid']));
+            $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, ['id' => $pageData['uid']]);
             $this->template->setMarker('cancel_button_url', htmlspecialchars($buttonUrl));
             $this->template->setMarker(
                 'label_cancel_button',
                 $GLOBALS['LANG']->getLL('eventlist_button_cancel')
             );
         } else {
-            $this->template->hideSubpartsArray(array('CANCEL_BUTTON'));
+            $this->template->hideSubpartsArray(['CANCEL_BUTTON']);
         }
     }
 
@@ -400,7 +400,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
      */
     private function setConfirmButtonMarkers(Tx_Seminars_OldModel_Event $event)
     {
-        $this->template->unhideSubpartsArray(array('CONFIRM_BUTTON'));
+        $this->template->unhideSubpartsArray(['CONFIRM_BUTTON']);
         $pageData = $this->page->getPageData();
 
         if (($event->getRecordType() != Tx_Seminars_Model_Event::TYPE_TOPIC)
@@ -410,14 +410,14 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
             && $this->doesUserHaveAccess($event->getPageUid())
         ) {
             $this->template->setMarker('uid', $event->getUid());
-            $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, array('id' => $pageData['uid']));
+            $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, ['id' => $pageData['uid']]);
             $this->template->setMarker('confirm_button_url', htmlspecialchars($buttonUrl));
             $this->template->setMarker(
                 'label_confirm_button',
                 $GLOBALS['LANG']->getLL('eventlist_button_confirm')
             );
         } else {
-            $this->template->hideSubpartsArray(array('CONFIRM_BUTTON'));
+            $this->template->hideSubpartsArray(['CONFIRM_BUTTON']);
         }
     }
 
@@ -449,7 +449,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
         $pageData = $this->page->getPageData();
 
         $url = BackendUtility::getModuleUrl(
-            self::MODULE_NAME, array('id' => $pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid())
+            self::MODULE_NAME, ['id' => $pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid()]
         );
         return '<a class="btn btn-default" href="' . htmlspecialchars($url) . '">' .
             $GLOBALS['LANG']->getLL('label_show_event_registrations') . '</a>';

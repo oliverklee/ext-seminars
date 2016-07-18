@@ -60,7 +60,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTypeTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('title' => 'Workshop')
+            'tx_seminars_event_types', ['title' => 'Workshop']
         );
 
         /** @var Tx_Seminars_Model_EventType $model */

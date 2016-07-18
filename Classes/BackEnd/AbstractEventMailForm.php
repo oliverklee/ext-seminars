@@ -47,12 +47,12 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     /**
      * @var string[]
      */
-    private $errorMessages = array();
+    private $errorMessages = [];
 
     /**
      * @var array
      */
-    private $postData = array();
+    private $postData = [];
 
     /**
      * @var string the action of this form
@@ -70,7 +70,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      *
      * @var array
      */
-    private $hooks = array();
+    private $hooks = [];
 
     /**
      * whether the hooks in $this->hooks have been retrieved
@@ -110,7 +110,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     public function __destruct()
     {
         unset($this->oldEvent, $this->event);
-        $this->hooks = array();
+        $this->hooks = [];
         $this->hooksHaveBeenRetrieved = false;
     }
 
@@ -134,7 +134,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
         }
 
         $formAction = BackendUtility::getModuleUrl(
-            self::MODULE_NAME, array('id' => Tx_Oelib_PageFinder::getInstance()->getPageUid())
+            self::MODULE_NAME, ['id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()]
         );
 
         return '<fieldset id="EventMailForm"><form action="' . htmlspecialchars($formAction) . '" method="post">' .
@@ -491,7 +491,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     private function redirectToListView()
     {
         $url = BackendUtility::getModuleUrl(
-            self::MODULE_NAME, array('id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()), false, true
+            self::MODULE_NAME, ['id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()], false, true
         );
         Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' .  $url);
     }

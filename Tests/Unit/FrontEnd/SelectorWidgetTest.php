@@ -44,10 +44,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $this->testingFramework->createFakeFrontEnd();
 
         $this->fixture = new Tx_Seminars_FrontEnd_SelectorWidget(
-            array(
+            [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
     }
@@ -225,9 +225,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function testRemoveDummyOptionFromFormDataRemovesDummyOptionAtBeginningOfArray()
     {
         self::assertEquals(
-            array('CH', 'DE'),
+            ['CH', 'DE'],
             Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
-                array(0, 'CH', 'DE')
+                [0, 'CH', 'DE']
             )
         );
     }
@@ -235,9 +235,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function testRemoveDummyOptionFromFormDataRemovesDummyOptionInMiddleOfArray()
     {
         self::assertEquals(
-            array('CH', 'DE'),
+            ['CH', 'DE'],
             Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
-                array('CH', 0, 'DE')
+                ['CH', 0, 'DE']
             )
         );
     }
@@ -245,9 +245,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function testRemoveDummyOptionFromFormDataWithEmptyFormDataReturnsEmptyArray()
     {
         self::assertEquals(
-            array(),
+            [],
             Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
-                array()
+                []
             )
         );
     }
@@ -283,10 +283,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
 
         $eventTypeTitle = 'test event type';
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('title' => $eventTypeTitle)
+            'tx_seminars_event_types', ['title' => $eventTypeTitle]
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('event_type' => $eventTypeUid)
+            'tx_seminars_seminars', ['event_type' => $eventTypeUid]
         );
 
         self::assertContains(
@@ -307,10 +307,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
 
         $eventTypeTitle = '< Test >';
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('title' => $eventTypeTitle)
+            'tx_seminars_event_types', ['title' => $eventTypeTitle]
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('event_type' => $eventTypeUid)
+            'tx_seminars_seminars', ['event_type' => $eventTypeUid]
         );
 
         self::assertContains(
@@ -332,10 +332,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
 
         $eventTypeTitle = 'test event type';
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('title' => $eventTypeTitle)
+            'tx_seminars_event_types', ['title' => $eventTypeTitle]
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('event_type' => $eventTypeUid)
+            'tx_seminars_seminars', ['event_type' => $eventTypeUid]
         );
 
         $this->fixture->piVars['event_type'][] = (string) $eventTypeUid;
@@ -359,17 +359,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $eventTypeTitle = 'foo';
         $eventTypeTitle2 = 'bar';
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('title' => $eventTypeTitle)
+            'tx_seminars_event_types', ['title' => $eventTypeTitle]
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('event_type' => $eventTypeUid)
+            'tx_seminars_seminars', ['event_type' => $eventTypeUid]
         );
 
         $eventTypeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('title' => $eventTypeTitle2)
+            'tx_seminars_event_types', ['title' => $eventTypeTitle2]
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('event_type' => $eventTypeUid2)
+            'tx_seminars_seminars', ['event_type' => $eventTypeUid2]
         );
 
         $this->fixture->piVars['event_type'][] = (string) $eventTypeUid;
@@ -412,32 +412,32 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_SelectorWidget::class,
-            array(
+            [
                 'initialize', 'hasSearchField', 'getEventTypeData',
                 'getLanguageData', 'getPlaceData', 'getCityData',
-                'getCountryData'
-            ),
-            array(
-                array(
+                'getCountryData',
+            ],
+            [
+                [
                     'isStaticTemplateLoaded' => 1,
                     'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                     'displaySearchFormFields' => 'event_type',
-                ),
-                $GLOBALS['TSFE']->cObj
-            )
+                ],
+                $GLOBALS['TSFE']->cObj,
+            ]
         );
         $fixture->expects(self::any())->method('hasSearchField')
             ->will(self::returnValue(true));
         $fixture->expects(self::once())->method('getEventTypeData')
-            ->will(self::returnValue(array(1 => 'Foo', 2 => 'Bar')));
+            ->will(self::returnValue([1 => 'Foo', 2 => 'Bar']));
         $fixture->expects(self::any())->method('getLanguageData')
-            ->will(self::returnValue(array()));
+            ->will(self::returnValue([]));
         $fixture->expects(self::any())->method('getPlaceData')
-            ->will(self::returnValue(array()));
+            ->will(self::returnValue([]));
         $fixture->expects(self::any())->method('getCityData')
-            ->will(self::returnValue(array()));
+            ->will(self::returnValue([]));
         $fixture->expects(self::any())->method('getCountryData')
-            ->will(self::returnValue(array()));
+            ->will(self::returnValue([]));
 
         $output = $fixture->render();
         self::assertTrue(
@@ -496,7 +496,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
             'LANGUAGES', $languageIsoCode, '', '', 0
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('language' => $languageIsoCode)
+            'tx_seminars_seminars', ['language' => $languageIsoCode]
         );
 
         self::assertContains(
@@ -538,7 +538,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
             'LANGUAGES', $languageIsoCode, '', '', 0
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('language' => $languageIsoCode)
+            'tx_seminars_seminars', ['language' => $languageIsoCode]
         );
 
         $this->fixture->piVars['language'][] = $languageIsoCode;
@@ -565,7 +565,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
             'LANGUAGES', $languageIsoCode, '', '', 0
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('language' => $languageIsoCode)
+            'tx_seminars_seminars', ['language' => $languageIsoCode]
         );
 
         $languageIsoCode2 = 'EN';
@@ -573,7 +573,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
             'LANGUAGES', $languageIsoCode2, '', '', 0
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('language' => $languageIsoCode2)
+            'tx_seminars_seminars', ['language' => $languageIsoCode2]
         );
 
         $this->fixture->piVars['language'][] = $languageIsoCode;
@@ -623,7 +623,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
         $placeTitle = 'test place';
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('title' => $placeTitle)
+            'tx_seminars_sites', ['title' => $placeTitle]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -648,7 +648,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
         $placeTitle = '<>';
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('title' => $placeTitle)
+            'tx_seminars_sites', ['title' => $placeTitle]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -690,7 +690,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
         $placeTitle = 'test place';
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('title' => $placeTitle)
+            'tx_seminars_sites', ['title' => $placeTitle]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -718,10 +718,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $placeTitle = 'foo';
         $placeTitle2 = 'bar';
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('title' => $placeTitle)
+            'tx_seminars_sites', ['title' => $placeTitle]
         );
         $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('title' => $placeTitle2)
+            'tx_seminars_sites', ['title' => $placeTitle2]
         );
 
         $eventUid = $this->testingFramework->createRecord(
@@ -780,7 +780,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
 
         $cityName = 'test city';
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('city' => $cityName)
+            'tx_seminars_sites', ['city' => $cityName]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -805,7 +805,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $cityName2 = 'bar city';
 
         $placeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('city' => $cityName1)
+            'tx_seminars_sites', ['city' => $cityName1]
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -815,7 +815,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('city' => $cityName2)
+            'tx_seminars_sites', ['city' => $cityName2]
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -844,7 +844,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
         $cityTitle = 'test city';
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('city' => $cityTitle)
+            'tx_seminars_sites', ['city' => $cityTitle]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -872,7 +872,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $cityTitle2 = 'foo city';
 
         $placeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('city' => $cityTitle1)
+            'tx_seminars_sites', ['city' => $cityTitle1]
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -882,7 +882,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('city' => $cityTitle2)
+            'tx_seminars_sites', ['city' => $cityTitle2]
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -958,7 +958,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
             'COUNTRIES', $countryIsoCode
         );
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('country' => $countryIsoCode)
+            'tx_seminars_sites', ['country' => $countryIsoCode]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -995,7 +995,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $placeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('country' => $countryIsoCode1)
+            'tx_seminars_sites', ['country' => $countryIsoCode1]
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -1006,7 +1006,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('country' => $countryIsoCode2)
+            'tx_seminars_sites', ['country' => $countryIsoCode2]
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -1045,7 +1045,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
             'COUNTRIES', $countryIsoCode
         );
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('country' => $countryIsoCode)
+            'tx_seminars_sites', ['country' => $countryIsoCode]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -1084,7 +1084,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $placeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('country' => $countryIsoCode1)
+            'tx_seminars_sites', ['country' => $countryIsoCode1]
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -1095,7 +1095,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', array('country' => $countryIsoCode2)
+            'tx_seminars_sites', ['country' => $countryIsoCode2]
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -1458,11 +1458,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('title' => 'foo_type')
+            'tx_seminars_event_types', ['title' => 'foo_type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('event_type' => $eventTypeUid)
+            ['event_type' => $eventTypeUid]
         );
 
         $this->fixture->setConfigurationValue(
@@ -1485,14 +1485,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('title' => 'foo_type')
+            'tx_seminars_event_types', ['title' => 'foo_type']
         );
         $eventTypeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', array('title' => 'bar_type')
+            'tx_seminars_event_types', ['title' => 'bar_type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('event_type' => $eventTypeUid2)
+            ['event_type' => $eventTypeUid2]
         );
 
         $this->fixture->setConfigurationValue(
@@ -1519,7 +1519,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', array('title' => 'Organizer Foo')
+            'tx_seminars_organizers', ['title' => 'Organizer Foo']
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1548,7 +1548,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $organizerUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', array('title' => 'Organizer Bar')
+            'tx_seminars_organizers', ['title' => 'Organizer Bar']
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1582,7 +1582,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         $this->fixture->setConfigurationValue('displaySearchFormFields', 'categories');
 
-        $categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => 'Category Foo'));
+        $categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => 'Category Foo']);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->testingFramework->createRecord('tx_seminars_seminars'),
@@ -1605,7 +1605,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         $this->fixture->setConfigurationValue('displaySearchFormFields', 'categories');
 
-        $categoryUid1 = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => 'Category Bar'));
+        $categoryUid1 = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => 'Category Bar']);
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->testingFramework->createRecord('tx_seminars_seminars'),
@@ -1744,7 +1744,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
 
         $organizerName = 'test organizer';
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', array('title' => $organizerName)
+            'tx_seminars_organizers', ['title' => $organizerName]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -1771,7 +1771,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
 
         $organizerName = '< Organizer Name >';
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', array('title' => $organizerName)
+            'tx_seminars_organizers', ['title' => $organizerName]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -1799,7 +1799,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
 
         $organizerName = 'Organizer Name';
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', array('title' => $organizerName)
+            'tx_seminars_organizers', ['title' => $organizerName]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -1830,11 +1830,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
 
         $organizerName1 = 'Organizer 1';
         $organizerUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', array('title' => $organizerName1)
+            'tx_seminars_organizers', ['title' => $organizerName1]
         );
         $organizerName2 = 'Organizer 2';
         $organizerUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', array('title' => $organizerName2)
+            'tx_seminars_organizers', ['title' => $organizerName2]
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
@@ -1903,7 +1903,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $this->fixture->setConfigurationValue('displaySearchFormFields', 'categories');
 
         $categoryName = 'test category';
-        $categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => $categoryName));
+        $categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => $categoryName]);
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid, 'categories');
 
@@ -1921,7 +1921,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $this->fixture->setConfigurationValue('displaySearchFormFields', 'categories');
 
         $categoryName = '< Category Name >';
-        $categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => $categoryName));
+        $categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => $categoryName]);
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid, 'categories');
 
@@ -1939,7 +1939,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $this->fixture->setConfigurationValue('displaySearchFormFields', 'categories');
 
         $categoryName = 'Category Name';
-        $categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => $categoryName));
+        $categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => $categoryName]);
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid, 'categories');
 
@@ -1961,9 +1961,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
         $categoryName1 = 'Category 1';
-        $categoryUid1 = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => $categoryName1));
+        $categoryUid1 = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => $categoryName1]);
         $categoryName2 = 'Category 2';
-        $categoryUid2 = $this->testingFramework->createRecord('tx_seminars_categories', array('title' => $categoryName2));
+        $categoryUid2 = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => $categoryName2]);
 
         $this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid1, 'categories');
         $this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid2, 'categories');

@@ -33,11 +33,11 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends Tx_Phpunit_TestCase
         );
         $fixtureUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
-            array(
+            [
                 'seminar' => $seminarUid,
                 'entry_date' => 0,
-                'place' => 0
-            )
+                'place' => 0,
+            ]
         );
 
         $this->fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot($fixtureUid);
@@ -119,7 +119,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends Tx_Phpunit_TestCase
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            array('title' => 'a place')
+            ['title' => 'a place']
         );
         $this->fixture->setPlace($placeUid);
 
@@ -147,7 +147,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends Tx_Phpunit_TestCase
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            array('deleted' => 1)
+            ['deleted' => 1]
         );
         $this->setExpectedException(
             'Tx_Oelib_Exception_NotFound',

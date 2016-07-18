@@ -61,7 +61,7 @@ class Tx_Seminars_Tests_Unit_Model_SkillTest extends Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(array('title' => 'Superhero'));
+        $this->fixture->setData(['title' => 'Superhero']);
 
         self::assertEquals(
             'Superhero',

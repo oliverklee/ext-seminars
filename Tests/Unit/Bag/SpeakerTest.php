@@ -77,7 +77,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            array('hidden' => 1)
+            ['hidden' => 1]
         );
 
         $this->fixture = new Tx_Seminars_Bag_Speaker('is_dummy_record=1');
@@ -94,7 +94,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            array('hidden' => 1)
+            ['hidden' => 1]
         );
 
         $this->fixture = new Tx_Seminars_Bag_Speaker(
@@ -118,7 +118,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            array('hidden' => 1)
+            ['hidden' => 1]
         );
 
         $this->fixture = new Tx_Seminars_Bag_Speaker(

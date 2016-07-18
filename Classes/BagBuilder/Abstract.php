@@ -35,11 +35,11 @@ abstract class Tx_Seminars_BagBuilder_Abstract
     /**
      * @var string[] associative array with the WHERE clause parts (will be concatenated with " AND " later)
      */
-    protected $whereClauseParts = array();
+    protected $whereClauseParts = [];
 
     /**
      * @var string the sorting field
-    */
+     */
     protected $orderBy = 'uid';
 
     /**
@@ -56,7 +56,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
     /**
      * @var string[] additional table names for the query
      */
-    protected $additionalTableNames = array();
+    protected $additionalTableNames = [];
 
     /**
      * @var bool whether the timing of records should be ignored

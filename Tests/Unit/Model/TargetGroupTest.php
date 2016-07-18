@@ -61,7 +61,7 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(array('title' => 'Housewives'));
+        $this->fixture->setData(['title' => 'Housewives']);
 
         self::assertEquals(
             'Housewives',
@@ -78,7 +78,7 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends Tx_Phpunit_TestCase
      */
     public function getMinimumAgeWithNoMinimumAgeSetReturnsZero()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             0,
@@ -91,7 +91,7 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends Tx_Phpunit_TestCase
      */
     public function getMinimumAgeWithNonZeroMinimumAgeReturnsMinimumAge()
     {
-        $this->fixture->setData(array('minimum_age' => 18));
+        $this->fixture->setData(['minimum_age' => 18]);
 
         self::assertEquals(
             18,
@@ -121,7 +121,7 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends Tx_Phpunit_TestCase
      */
     public function getMaximumAgeWithNoMaximumAgeSetReturnsZero()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             0,
@@ -134,7 +134,7 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends Tx_Phpunit_TestCase
      */
     public function getMaximumAgeWithNonZeroMaximumAgeReturnsMaximumAge()
     {
-        $this->fixture->setData(array('maximum_age' => 18));
+        $this->fixture->setData(['maximum_age' => 18]);
 
         self::assertEquals(
             18,

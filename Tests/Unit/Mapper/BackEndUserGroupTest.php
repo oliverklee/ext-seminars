@@ -63,7 +63,7 @@ class Tx_Seminars_Tests_Unit_Mapper_BackEndUserGroupTest extends Tx_Phpunit_Test
         /** @var Tx_Seminars_Model_BackEndUserGroup $userGroup */
         $userGroup = $this->fixture->find(
             $this->testingFramework->createBackEndUserGroup(
-                array('title' => 'foo')
+                ['title' => 'foo']
             )
         );
 

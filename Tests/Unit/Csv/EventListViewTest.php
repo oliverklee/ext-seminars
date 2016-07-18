@@ -53,7 +53,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
         $configurationRegistry = Tx_Oelib_ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin', new Tx_Oelib_Configuration());
         $this->configuration = new Tx_Oelib_Configuration();
-        $this->configuration->setData(array('charsetForCsv' => 'utf-8'));
+        $this->configuration->setData(['charsetForCsv' => 'utf-8']);
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
         $this->subject = new Tx_Seminars_Csv_EventListView();
@@ -87,7 +87,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
      *
      * @return int the UID of the created event record
      */
-    protected function createEventInFolderAndSetPageUid(array $eventData = array())
+    protected function createEventInFolderAndSetPageUid(array $eventData = [])
     {
         $this->pageUid = $this->testingFramework->createSystemFolder();
         $this->subject->setPageUid($this->pageUid);
@@ -198,7 +198,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
         $this->subject->setPageUid($pageUid);
 
         $subFolderPid = $this->testingFramework->createSystemFolder($pageUid);
-        $this->testingFramework->createRecord('tx_seminars_seminars', array('pid' => $subFolderPid, 'title' => 'another event'));
+        $this->testingFramework->createRecord('tx_seminars_seminars', ['pid' => $subFolderPid, 'title' => 'another event']);
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
@@ -217,7 +217,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         $firstEventUid = $this->createEventInFolderAndSetPageUid();
         $secondEventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600)
+            'tx_seminars_seminars', ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
         );
 
         $eventList = $this->subject->render($this->pageUid);
@@ -241,7 +241,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         $firstEventUid = $this->createEventInFolderAndSetPageUid();
         $secondEventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600)
+            'tx_seminars_seminars', ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
         );
 
         self::assertContains(
@@ -259,7 +259,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         $this->createEventInFolderAndSetPageUid();
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600)
+            'tx_seminars_seminars', ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
         );
 
         self::assertRegExp(
@@ -273,7 +273,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
      */
     public function renderNotWrapsRegularValuesWithDoubleQuotes()
     {
-        $this->createEventInFolderAndSetPageUid(array('title' => 'bar'));
+        $this->createEventInFolderAndSetPageUid(['title' => 'bar']);
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
@@ -288,7 +288,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
      */
     public function renderEscapesDoubleQuotes()
     {
-        $this->createEventInFolderAndSetPageUid(array('description' => 'foo " bar'));
+        $this->createEventInFolderAndSetPageUid(['description' => 'foo " bar']);
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description');
 
@@ -303,7 +303,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
      */
     public function renderWrapsValuesWithLineFeedsInDoubleQuotes()
     {
-        $this->createEventInFolderAndSetPageUid(array('title' => 'foo' . LF . 'bar'));
+        $this->createEventInFolderAndSetPageUid(['title' => 'foo' . LF . 'bar']);
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
@@ -318,7 +318,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
      */
     public function renderWrapsValuesWithDoubleQuotesInDoubleQuotes()
     {
-        $this->createEventInFolderAndSetPageUid(array('title' => 'foo " bar'));
+        $this->createEventInFolderAndSetPageUid(['title' => 'foo " bar']);
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
@@ -333,7 +333,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
      */
     public function renderWrapsValuesWithSemicolonsInDoubleQuotes()
     {
-        $this->createEventInFolderAndSetPageUid(array('title' => 'foo ; bar'));
+        $this->createEventInFolderAndSetPageUid(['title' => 'foo ; bar']);
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
@@ -348,7 +348,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
      */
     public function renderSeparatesValuesWithSemicolons()
     {
-        $this->createEventInFolderAndSetPageUid(array('description' => 'foo', 'title' => 'bar'));
+        $this->createEventInFolderAndSetPageUid(['description' => 'foo', 'title' => 'bar']);
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
 

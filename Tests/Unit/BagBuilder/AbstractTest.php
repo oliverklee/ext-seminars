@@ -152,12 +152,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid)
+            ['pid' => $this->dummySysFolderPid]
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid + 1)
+            ['pid' => $this->dummySysFolderPid + 1]
         );
         $bag = $this->fixture->build();
 
@@ -172,12 +172,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         $this->fixture->setSourcePages('');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid)
+            ['pid' => $this->dummySysFolderPid]
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid + 1)
+            ['pid' => $this->dummySysFolderPid + 1]
         );
         $bag = $this->fixture->build();
 
@@ -191,12 +191,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid)
+            ['pid' => $this->dummySysFolderPid]
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid + 1)
+            ['pid' => $this->dummySysFolderPid + 1]
         );
 
         $this->fixture->setSourcePages($this->dummySysFolderPid);
@@ -216,12 +216,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         );
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid)
+            ['pid' => $this->dummySysFolderPid]
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid + 1)
+            ['pid' => $this->dummySysFolderPid + 1]
         );
         $bag = $this->fixture->build();
 
@@ -238,12 +238,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         );
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid)
+            ['pid' => $this->dummySysFolderPid]
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid + 1)
+            ['pid' => $this->dummySysFolderPid + 1]
         );
         $bag = $this->fixture->build();
 
@@ -257,12 +257,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid)
+            ['pid' => $this->dummySysFolderPid]
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid + 1)
+            ['pid' => $this->dummySysFolderPid + 1]
         );
 
         $this->fixture->setSourcePages($this->dummySysFolderPid);
@@ -278,12 +278,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid)
+            ['pid' => $this->dummySysFolderPid]
         );
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $this->dummySysFolderPid + 1)
+            ['pid' => $this->dummySysFolderPid + 1]
         );
 
         $this->fixture->setSourcePages(
@@ -305,7 +305,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $subPagePid)
+            ['pid' => $subPagePid]
         );
 
         $this->fixture->setSourcePages($this->dummySysFolderPid);
@@ -324,7 +324,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $subPagePid)
+            ['pid' => $subPagePid]
         );
 
         $this->fixture->setSourcePages($this->dummySysFolderPid, 1);
@@ -343,7 +343,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         );
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $subPagePid1)
+            ['pid' => $subPagePid1]
         );
 
         $subPagePid2 = $this->testingFramework->createSystemFolder(
@@ -351,7 +351,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         );
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $subPagePid2)
+            ['pid' => $subPagePid2]
         );
 
         $this->fixture->setSourcePages($this->dummySysFolderPid, 1);
@@ -370,14 +370,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         );
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $subPagePid1)
+            ['pid' => $subPagePid1]
         );
 
         $parentPid2 = $this->testingFramework->createSystemFolder();
         $subPagePid2 = $this->testingFramework->createSystemFolder($parentPid2);
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $subPagePid2)
+            ['pid' => $subPagePid2]
         );
 
         $this->fixture->setSourcePages(
@@ -403,7 +403,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('pid' => $subSubPagePid)
+            ['pid' => $subSubPagePid]
         );
 
         $this->fixture->setSourcePages($this->dummySysFolderPid, 1);
@@ -422,7 +422,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('hidden' => 1)
+            ['hidden' => 1]
         );
         $bag = $this->fixture->build();
 
@@ -435,7 +435,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('hidden' => 1)
+            ['hidden' => 1]
         );
 
         $this->fixture->setBackEndMode();
@@ -451,7 +451,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000)
+            ['endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000]
         );
         $bag = $this->fixture->build();
 
@@ -464,7 +464,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000)
+            ['endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000]
         );
 
         $this->fixture->setBackEndMode();
@@ -480,7 +480,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('deleted' => 1)
+            ['deleted' => 1]
         );
         $bag = $this->fixture->build();
 
@@ -493,7 +493,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('deleted' => 1)
+            ['deleted' => 1]
         );
 
         $this->fixture->setBackEndMode();
@@ -533,7 +533,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         $this->fixture->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('title' => 'foo')
+            ['title' => 'foo']
         );
         $bag = $this->fixture->build();
 
@@ -548,7 +548,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         $this->fixture->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('title' => 'bar')
+            ['title' => 'bar']
         );
         $bag = $this->fixture->build();
 
@@ -567,7 +567,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         $this->fixture->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('title' => 'foo', 'pid' => $this->dummySysFolderPid)
+            ['title' => 'foo', 'pid' => $this->dummySysFolderPid]
         );
         $bag = $this->fixture->build();
 
@@ -583,7 +583,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         $this->fixture->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('title' => 'foo')
+            ['title' => 'foo']
         );
         $bag = $this->fixture->build();
 
@@ -598,7 +598,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         $this->fixture->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('title' => 'bar', 'pid' => $this->dummySysFolderPid)
+            ['title' => 'bar', 'pid' => $this->dummySysFolderPid]
         );
         $bag = $this->fixture->build();
 
@@ -612,7 +612,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         $this->fixture->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('title' => 'foo', 'hidden' => 1)
+            ['title' => 'foo', 'hidden' => 1]
         );
         $bag = $this->fixture->build();
 
@@ -626,7 +626,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         $this->fixture->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('title' => 'foo', 'deleted' => 1)
+            ['title' => 'foo', 'deleted' => 1]
         );
         $bag = $this->fixture->build();
 

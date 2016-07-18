@@ -39,7 +39,7 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends Tx_Phpunit_TestCase
      */
     public function getEntryDateAsUnixTimeStampWithoutEntryDateReturnsZero()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             0,
@@ -52,7 +52,7 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends Tx_Phpunit_TestCase
      */
     public function getEntryDateAsUnixTimeStampWithEntryDateReturnsEntryDate()
     {
-        $this->fixture->setData(array('entry_date' => 42));
+        $this->fixture->setData(['entry_date' => 42]);
 
         self::assertEquals(
             42,
@@ -104,7 +104,7 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends Tx_Phpunit_TestCase
      */
     public function hasEntryDateWithoutEntryDateReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->hasEntryDate()
@@ -132,7 +132,7 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends Tx_Phpunit_TestCase
      */
     public function getSeminarByDefaultReturnsNull()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertNull($this->fixture->getSeminar());
     }

@@ -55,7 +55,7 @@ class Tx_Seminars_EmailSalutation
      */
     public function getSalutation(Tx_Seminars_Model_FrontEndUser $user)
     {
-        $salutationParts = array();
+        $salutationParts = [];
 
         $salutationMode = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('salutation');
         switch ($salutationMode) {
@@ -86,7 +86,7 @@ class Tx_Seminars_EmailSalutation
      */
     private function getHooks()
     {
-        $result = array();
+        $result = [];
 
         $hooks = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'];
         if (is_array($hooks)) {

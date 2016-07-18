@@ -61,7 +61,7 @@ class Tx_Seminars_Tests_Unit_Model_LodgingTest extends Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(array('title' => 'Shack'));
+        $this->fixture->setData(['title' => 'Shack']);
 
         self::assertEquals(
             'Shack',

@@ -56,7 +56,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
     /**
      * @var array the values from/for the DB
      */
-    protected $recordData = array();
+    protected $recordData = [];
 
     /**
      * @var bool whether this record already is stored in the DB
@@ -412,12 +412,12 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
             // We might get unsafe data here, so better be safe.
             $foreignUid = (int)$currentRelationUid;
             if ($foreignUid > 0) {
-                $dataToInsert = array(
+                $dataToInsert = [
                     'uid_local' => $this->getUid(),
                     'uid_foreign' => $foreignUid,
                     'sorting' => $sorting,
-                    'is_dummy_record' => $isDummyRecord
-                );
+                    'is_dummy_record' => $isDummyRecord,
+                ];
                 Tx_Oelib_Db::insert(
                     $mmTable, $dataToInsert
                 );

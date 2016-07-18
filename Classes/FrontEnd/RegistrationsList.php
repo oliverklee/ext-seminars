@@ -230,7 +230,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
     private function createTableHeader()
     {
         /** @var string[] $labelKeys */
-        $labelKeys = array();
+        $labelKeys = [];
         foreach ($this->getFrontEndUserFields() as $field) {
             $labelKeys[] = 'label_' . $field;
         }
@@ -271,7 +271,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
         /** @var Tx_Seminars_OldModel_Registration $registration */
         foreach ($registrations as $registration) {
             /** @var string[] $cellContents */
-            $cellContents = array();
+            $cellContents = [];
             foreach ($this->getFrontEndUserFields() as $field) {
                 $cellContents[] = $registration->getUserData($field);
             }

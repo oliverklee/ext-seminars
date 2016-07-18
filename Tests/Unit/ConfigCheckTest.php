@@ -34,7 +34,7 @@ class Tx_Seminars_Tests_Unit_ConfigCheckTest extends Tx_Phpunit_TestCase
     {
         Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', true);
 
-        $this->objectToCheck = new Tx_Oelib_Tests_Unit_Fixtures_DummyObjectToCheck(array());
+        $this->objectToCheck = new Tx_Oelib_Tests_Unit_Fixtures_DummyObjectToCheck([]);
         $this->fixture = new Tx_Seminars_ConfigCheck($this->objectToCheck);
     }
 

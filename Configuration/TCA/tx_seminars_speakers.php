@@ -16,10 +16,10 @@ $tca = [
             'disabled' => 'hidden',
         ],
         'iconfile'  => 'EXT:seminars/Resources/Public/Icons/Speaker.gif',
-        'searchFields' => 'title'
+        'searchFields' => 'title',
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden,title,organization,homepage,description,skills,notes,address,phone_work,phone_home,phone_mobile,fax,email,cancelation_period,owner'
+        'showRecordFieldList' => 'hidden,title,organization,homepage,description,skills,notes,address,phone_work,phone_home,phone_mobile,fax,email,cancelation_period,owner',
     ],
     'columns' => [
         'hidden' => [

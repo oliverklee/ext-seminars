@@ -67,12 +67,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
 
         $this->seminar = new Tx_Seminars_OldModel_Event($this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('payment_methods' => '1')
+            'tx_seminars_seminars', ['payment_methods' => '1']
         ));
         $this->seminarUid = $this->seminar->getUid();
 
         $this->fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'pageToShowAfterUnregistrationPID' => $frontEndPageUid,
                 'sendParametersToThankYouAfterRegistrationPageUrl' => 1,
                 'thankYouAfterRegistrationPID' => $frontEndPageUid,
@@ -83,14 +83,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
                 'showFeUserFieldsInRegistrationForm' => 'name,email',
                 'showFeUserFieldsInRegistrationFormWithLabel' => 'email',
                 'maximumBookableSeats' => 10,
-                'form.' => array(
-                    'unregistration.' => array(),
-                    'registration.'    => array(
-                        'step1.' => array(),
-                        'step2.' => array(),
-                    ),
-                ),
-            ),
+                'form.' => [
+                    'unregistration.' => [],
+                    'registration.'    => [
+                        'step1.' => [],
+                        'step2.' => [],
+                    ],
+                ],
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $this->fixture->setAction('register');
@@ -187,7 +187,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function getAllFeUserContainsNonEmptyNameOfFrontEndUser()
     {
-        $this->testingFramework->createAndLoginFrontEndUser('', array('name' => 'John Doe'));
+        $this->testingFramework->createAndLoginFrontEndUser('', ['name' => 'John Doe']);
 
         self::assertContains(
             'John Doe',
@@ -200,7 +200,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function getAllFeUserContainsLabelForNonEmptyEmailOfFrontEndUser()
     {
-        $this->testingFramework->createAndLoginFrontEndUser('', array('email' => 'john@example.com'));
+        $this->testingFramework->createAndLoginFrontEndUser('', ['email' => 'john@example.com']);
 
         self::assertContains(
             'mail',
@@ -213,7 +213,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function getAllFeUserDoesNotContainEmptyLinesForMissingCompanyName()
     {
-        $this->testingFramework->createAndLoginFrontEndUser('', array('name' => 'John Doe'));
+        $this->testingFramework->createAndLoginFrontEndUser('', ['name' => 'John Doe']);
 
         self::assertNotRegExp(
             '/<br *\\/>\s*<br *\\/>/',
@@ -226,7 +226,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function getAllFeUserContainsNoUnreplacedMarkers()
     {
-        $this->testingFramework->createAndLoginFrontEndUser('', array('name' => 'John Doe'));
+        $this->testingFramework->createAndLoginFrontEndUser('', ['name' => 'John Doe']);
 
         self::assertNotContains(
             '###',
@@ -240,7 +240,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 
     public function testSaveDataToSessionCanWriteEmptyZipToUserSession()
     {
-        $this->fixture->processRegistration(array('zip' => ''));
+        $this->fixture->processRegistration(['zip' => '']);
 
         self::assertEquals(
             '',
@@ -250,7 +250,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 
     public function testSaveDataToSessionCanWriteNonEmptyZipToUserSession()
     {
-        $this->fixture->processRegistration(array('zip' => '12345'));
+        $this->fixture->processRegistration(['zip' => '12345']);
 
         self::assertEquals(
             '12345',
@@ -263,7 +263,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $this->session->setAsString(
             'tx_seminars_registration_editor_zip', '12345'
         );
-        $this->fixture->processRegistration(array('zip' => ''));
+        $this->fixture->processRegistration(['zip' => '']);
 
         self::assertEquals(
             '',
@@ -276,7 +276,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function saveDataToSessionCanStoreCompanyInSession()
     {
-        $this->fixture->processRegistration(array('company' => 'foo inc.'));
+        $this->fixture->processRegistration(['company' => 'foo inc.']);
 
         self::assertEquals(
             'foo inc.',
@@ -291,7 +291,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function saveDataToSessionCanStoreNameInSession()
     {
-        $this->fixture->processRegistration(array('name' => 'foo'));
+        $this->fixture->processRegistration(['name' => 'foo']);
 
         self::assertEquals(
             'foo',
@@ -309,7 +309,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         self::assertEquals(
             '',
-            $this->fixture->retrieveDataFromSession(array('key' => 'foo'))
+            $this->fixture->retrieveDataFromSession(['key' => 'foo'])
         );
     }
 
@@ -321,7 +321,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 
         self::assertEquals(
             '12345',
-            $this->fixture->retrieveDataFromSession(array('key' => 'zip'))
+            $this->fixture->retrieveDataFromSession(['key' => 'zip'])
         );
     }
 
@@ -356,7 +356,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function testPopulateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsTitle()
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', array('title' => 'foo')
+            'tx_seminars_payment_methods', ['title' => 'foo']
         );
 
         $this->testingFramework->createRelation(
@@ -432,7 +432,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             2
         );
 
-        $this->fixture->setPage(array('next_page' => 0));
+        $this->fixture->setPage(['next_page' => 0]);
 
         self::assertContains(
             '1',
@@ -450,7 +450,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             'numberOfLastRegistrationPage',
             2
         );
-        $this->fixture->setPage(array('next_page' => 0));
+        $this->fixture->setPage(['next_page' => 0]);
 
         self::assertContains(
             '2',
@@ -469,7 +469,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             2
         );
 
-        $this->fixture->setPage(array('next_page' => 5));
+        $this->fixture->setPage(['next_page' => 5]);
 
         self::assertEquals(
             sprintf($this->fixture->translate('label_step_counter'), 2, 2),
@@ -491,7 +491,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $GLOBALS['LANG']->init('default');
 
         self::assertNotContains(
-            array('caption' => 'Germany', 'value' => 'Germany'),
+            ['caption' => 'Germany', 'value' => 'Germany'],
             $this->fixture->populateListCountries()
         );
 
@@ -504,7 +504,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function populateListCountriesContainsLocalCountryNameForGermany()
     {
         self::assertContains(
-            array('caption' => 'Deutschland', 'value' => 'Deutschland'),
+            ['caption' => 'Deutschland', 'value' => 'Deutschland'],
             $this->fixture->populateListCountries()
         );
     }
@@ -525,7 +525,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
 
         self::assertEquals(
             'Deutschland',
-            $this->fixture->getFeUserData(array('key' => 'country'))
+            $this->fixture->getFeUserData(['key' => 'country'])
         );
     }
 
@@ -539,12 +539,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         }
 
         $this->testingFramework->createAndLoginFrontEndUser(
-            '', array('static_info_country' => 'GBR')
+            '', ['static_info_country' => 'GBR']
         );
 
         self::assertEquals(
             'United Kingdom',
-            $this->fixture->getFeUserData(array('key' => 'country'))
+            $this->fixture->getFeUserData(['key' => 'country'])
         );
     }
 
@@ -554,12 +554,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getFeUserDataWithKeyCountryAndCountrySetReturnsCountry()
     {
         $this->testingFramework->createAndLoginFrontEndUser(
-            '', array('country' => 'Taka-Tuka-Land')
+            '', ['country' => 'Taka-Tuka-Land']
         );
 
         self::assertEquals(
             'Taka-Tuka-Land',
-            $this->fixture->getFeUserData(array('key' => 'country'))
+            $this->fixture->getFeUserData(['key' => 'country'])
         );
     }
 
@@ -580,116 +580,116 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function formFieldsDataProvider()
     {
-        return array(
-            'step_counter' => array(
-                'key' => 'step_counter', 'self-contained' => true
-            ),
-            'price' => array(
-                'key' => 'price', 'self-contained' => true
-            ),
-            'method_of_payment' => array(
-                'key' => 'method_of_payment', 'self-contained' => false
-            ),
-            'account_number' => array(
-                'key' => 'account_number', 'self-contained' => false
-            ),
-            'bank_code' => array(
-                'key' => 'bank_code', 'self-contained' => false
-            ),
-            'bank_name' => array(
-                'key' => 'bank_name', 'self-contained' => false
-            ),
-            'account_owner' => array(
-                'key' => 'account_owner', 'self-contained' => false
-            ),
-            'billing_address' => array(
-                'key' => 'billing_address', 'self-contained' => false
-            ),
-            'company' => array(
-                'key' => 'company', 'self-contained' => true
-            ),
-            'gender' => array(
-                'key' => 'gender', 'self-contained' => true
-            ),
-            'name' => array(
-                'key' => 'name', 'self-contained' => true
-            ),
-            'address' => array(
-                'key' => 'address', 'self-contained' => true
-            ),
-            'zip' => array(
-                'key' => 'zip', 'self-contained' => true
-            ),
-            'city' => array(
-                'key' => 'city', 'self-contained' => true
-            ),
-            'country' => array(
-                'key' => 'country', 'self-contained' => true
-            ),
-            'telephone' => array(
-                'key' => 'telephone', 'self-contained' => true
-            ),
-            'email' => array(
-                'key' => 'email', 'self-contained' => true
-            ),
-            'interests' => array(
-                'key' => 'interests', 'self-contained' => true
-            ),
-            'expectations' => array(
-                'key' => 'expectations', 'self-contained' => true
-            ),
-            'background_knowledge' => array(
-                'key' => 'background_knowledge', 'self-contained' => true
-            ),
-            'accommodation' => array(
-                'key' => 'accommodation', 'self-contained' => true
-            ),
-            'food' => array(
-                'key' => 'food', 'self-contained' => true
-            ),
-            'known_from' => array(
-                'key' => 'known_from', 'self-contained' => true
-            ),
-            'seats' => array(
-                'key' => 'seats', 'self-contained' => true
-            ),
-            'registered_themselves' => array(
-                'key' => 'registered_themselves', 'self-contained' => true
-            ),
-            'attendees_names' => array(
-                'key' => 'attendees_names', 'self-contained' => true
-            ),
-            'kids' => array(
-                'key' => 'kids', 'self-contained' => true
-            ),
-            'lodgings' => array(
-                'key' => 'lodgings', 'self-contained' => false
-            ),
-            'foods' => array(
-                'key' => 'foods', 'self-contained' => false
-            ),
-            'checkboxes' => array(
-                'key' => 'checkboxes', 'self-contained' => false
-            ),
-            'notes' => array(
-                'key' => 'notes', 'self-contained' => true
-            ),
-            'total_price' => array(
-                'key' => 'total_price', 'self-contained' => true
-            ),
-            'feuser_data' => array(
-                'key' => 'feuser_data', 'self-contained' => true
-            ),
-            'registration_data' => array(
-                'key' => 'registration_data', 'self-contained' => true
-            ),
-            'terms' => array(
-                'key' => 'terms', 'self-contained' => true
-            ),
-            'terms_2' => array(
-                'key' => 'terms_2', 'self-contained' => false
-            ),
-        );
+        return [
+            'step_counter' => [
+                'key' => 'step_counter', 'self-contained' => true,
+            ],
+            'price' => [
+                'key' => 'price', 'self-contained' => true,
+            ],
+            'method_of_payment' => [
+                'key' => 'method_of_payment', 'self-contained' => false,
+            ],
+            'account_number' => [
+                'key' => 'account_number', 'self-contained' => false,
+            ],
+            'bank_code' => [
+                'key' => 'bank_code', 'self-contained' => false,
+            ],
+            'bank_name' => [
+                'key' => 'bank_name', 'self-contained' => false,
+            ],
+            'account_owner' => [
+                'key' => 'account_owner', 'self-contained' => false,
+            ],
+            'billing_address' => [
+                'key' => 'billing_address', 'self-contained' => false,
+            ],
+            'company' => [
+                'key' => 'company', 'self-contained' => true,
+            ],
+            'gender' => [
+                'key' => 'gender', 'self-contained' => true,
+            ],
+            'name' => [
+                'key' => 'name', 'self-contained' => true,
+            ],
+            'address' => [
+                'key' => 'address', 'self-contained' => true,
+            ],
+            'zip' => [
+                'key' => 'zip', 'self-contained' => true,
+            ],
+            'city' => [
+                'key' => 'city', 'self-contained' => true,
+            ],
+            'country' => [
+                'key' => 'country', 'self-contained' => true,
+            ],
+            'telephone' => [
+                'key' => 'telephone', 'self-contained' => true,
+            ],
+            'email' => [
+                'key' => 'email', 'self-contained' => true,
+            ],
+            'interests' => [
+                'key' => 'interests', 'self-contained' => true,
+            ],
+            'expectations' => [
+                'key' => 'expectations', 'self-contained' => true,
+            ],
+            'background_knowledge' => [
+                'key' => 'background_knowledge', 'self-contained' => true,
+            ],
+            'accommodation' => [
+                'key' => 'accommodation', 'self-contained' => true,
+            ],
+            'food' => [
+                'key' => 'food', 'self-contained' => true,
+            ],
+            'known_from' => [
+                'key' => 'known_from', 'self-contained' => true,
+            ],
+            'seats' => [
+                'key' => 'seats', 'self-contained' => true,
+            ],
+            'registered_themselves' => [
+                'key' => 'registered_themselves', 'self-contained' => true,
+            ],
+            'attendees_names' => [
+                'key' => 'attendees_names', 'self-contained' => true,
+            ],
+            'kids' => [
+                'key' => 'kids', 'self-contained' => true,
+            ],
+            'lodgings' => [
+                'key' => 'lodgings', 'self-contained' => false,
+            ],
+            'foods' => [
+                'key' => 'foods', 'self-contained' => false,
+            ],
+            'checkboxes' => [
+                'key' => 'checkboxes', 'self-contained' => false,
+            ],
+            'notes' => [
+                'key' => 'notes', 'self-contained' => true,
+            ],
+            'total_price' => [
+                'key' => 'total_price', 'self-contained' => true,
+            ],
+            'feuser_data' => [
+                'key' => 'feuser_data', 'self-contained' => true,
+            ],
+            'registration_data' => [
+                'key' => 'registration_data', 'self-contained' => true,
+            ],
+            'terms' => [
+                'key' => 'terms', 'self-contained' => true,
+            ],
+            'terms_2' => [
+                'key' => 'terms_2', 'self-contained' => false,
+            ],
+        ];
     }
 
     /**
@@ -703,10 +703,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $key
     ) {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array('showRegistrationFields' => ''),
+            ['showRegistrationFields' => ''],
             $GLOBALS['TSFE']->cObj
         );
-        $fixture->setSeminar($this->getMock(Tx_Seminars_OldModel_Event::class, array(), array(), '', false));
+        $fixture->setSeminar($this->getMock(Tx_Seminars_OldModel_Event::class, [], [], '', false));
 
         self::assertFalse(
             $fixture->isFormFieldEnabled($key)
@@ -728,10 +728,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $key, $isSelfContained
     ) {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array('showRegistrationFields' => $key),
+            ['showRegistrationFields' => $key],
             $GLOBALS['TSFE']->cObj
         );
-        $fixture->setSeminar($this->getMock(Tx_Seminars_OldModel_Event::class, array(), array(), '', false));
+        $fixture->setSeminar($this->getMock(Tx_Seminars_OldModel_Event::class, [], [], '', false));
 
         self::assertEquals(
             $isSelfContained,
@@ -745,7 +745,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function isFormFieldEnabledForEnabledRegisteredThemselvesFieldOnlyReturnsFalseForMoreSeats()
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array('showRegistrationFields' => 'registered_themselves'),
+            ['showRegistrationFields' => 'registered_themselves'],
             $GLOBALS['TSFE']->cObj
         );
 
@@ -760,7 +760,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function isFormFieldEnabledForEnabledCompanyFieldReturnsTrueForBillingAddress()
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array('showRegistrationFields' => 'company, billing_address'),
+            ['showRegistrationFields' => 'company, billing_address'],
             $GLOBALS['TSFE']->cObj
         );
 
@@ -779,7 +779,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getAdditionalRegisteredPersonsDataForNoDataReturnsEmptyArray()
     {
         self::assertEquals(
-            array(),
+            [],
             $this->fixture->getAdditionalRegisteredPersonsData()
         );
     }
@@ -792,7 +792,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $this->fixture->setFakedFormValue('structured_attendees_names', '');
 
         self::assertEquals(
-            array(),
+            [],
             $this->fixture->getAdditionalRegisteredPersonsData()
         );
     }
@@ -808,14 +808,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
 
         self::assertEquals(
-            array(
-                array(
+            [
+                [
                     0 => 'John',
                     1 => 'Doe',
                     2 => 'Key account',
                     3 => 'john@example.com',
-                ),
-            ),
+                ],
+            ],
             $this->fixture->getAdditionalRegisteredPersonsData()
         );
     }
@@ -832,20 +832,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
 
         self::assertEquals(
-            array(
-                array(
+            [
+                [
                     0 => 'John',
                     1 => 'Doe',
                     2 => 'Key account',
                     3 => 'john@example.com',
-                ),
-                array(
+                ],
+                [
                     0 => 'Jane',
                     1 => 'Doe',
                     2 => 'Sales',
                     3 => 'jane@example.com',
-                ),
-            ),
+                ],
+            ],
             $this->fixture->getAdditionalRegisteredPersonsData()
         );
     }
@@ -858,7 +858,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $this->fixture->setFakedFormValue('structured_attendees_names', '"Foo"');
 
         self::assertEquals(
-            array(),
+            [],
             $this->fixture->getAdditionalRegisteredPersonsData()
         );
     }
@@ -871,7 +871,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $this->fixture->setFakedFormValue('structured_attendees_names', 'argh');
 
         self::assertEquals(
-            array(),
+            [],
             $this->fixture->getAdditionalRegisteredPersonsData()
         );
     }
@@ -910,15 +910,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getNumberOfEnteredPersonsForSelfRegistrationHiddenReturnsOne()
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'showRegistrationFields' => 'seats',
-                'form.' => array(
-                    'registration.'    => array(
-                        'step1.' => array('seats' => array()),
-                        'step2.' => array(),
-                    )
-                ),
-            ),
+                'form.' => [
+                    'registration.'    => [
+                        'step1.' => ['seats' => []],
+                        'step2.' => [],
+                    ],
+                ],
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setAction('register');
@@ -1024,8 +1024,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
-            array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
-            array(), '', false
+            ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
+            [], '', false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1047,8 +1047,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
-            array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
-            array(), '', false
+            ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
+            [], '', false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1070,8 +1070,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
-            array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
-            array(), '', false
+            ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
+            [], '', false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1093,8 +1093,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
-            array('getNumberOfEnteredPersons', 'isFormFieldEnabled'),
-            array(), '', false
+            ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
+            [], '', false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1167,15 +1167,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function validateNumberOfRegisteredPersonsForAttendeesNamesHiddenAndManySeatsReturnsTrue()
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'showRegistrationFields' => 'seats',
-                'form.' => array(
-                    'registration.'    => array(
-                        'step1.' => array('seats' => array()),
-                        'step2.' => array(),
-                    )
-                ),
-            ),
+                'form.' => [
+                    'registration.'    => [
+                        'step1.' => ['seats' => []],
+                        'step2.' => [],
+                    ],
+                ],
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setAction('register');
@@ -1199,13 +1199,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
-            array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
-            array(), '', false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
+            [], '', false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(self::returnValue(array()));
+            ->will(self::returnValue([]));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
             'createAdditionalAttendeesAsFrontEndUsers', false
@@ -1223,13 +1223,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
-            array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
-            array(), '', false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
+            [], '', false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(false));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(self::returnValue(array()));
+            ->will(self::returnValue([]));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
             'createAdditionalAttendeesAsFrontEndUsers', true
@@ -1247,13 +1247,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
-            array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
-            array(), '', false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
+            [], '', false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(self::returnValue(array()));
+            ->will(self::returnValue([]));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
             'createAdditionalAttendeesAsFrontEndUsers', true
@@ -1271,14 +1271,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
-            array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
-            array(), '', false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
+            [], '', false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
             ->will(self::returnValue(
-                array(array('John', 'Doe', '', 'john@example.com'))
+                [['John', 'Doe', '', 'john@example.com']]
             ));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
@@ -1297,14 +1297,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
-            array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
-            array(), '', false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
+            [], '', false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
             ->will(self::returnValue(
-                array(array('John', 'Doe', '', 'potato salad!'))
+                [['John', 'Doe', '', 'potato salad!']]
             ));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
@@ -1323,14 +1323,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
-            array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
-            array(), '', false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
+            [], '', false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
             ->will(self::returnValue(
-                array(array('John', 'Doe', '', ''))
+                [['John', 'Doe', '', '']]
             ));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
@@ -1349,14 +1349,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
-            array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
-            array(), '', false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
+            [], '', false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
             ->will(self::returnValue(
-                array(array('John', 'Doe', ''))
+                [['John', 'Doe', '']]
             ));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
@@ -1375,17 +1375,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
-            array('getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'),
-            array(), '', false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
+            [], '', false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
             ->will(self::returnValue(
-                array(
-                    array('John', 'Doe', '', 'john@example.com'),
-                    array('Jane', 'Doe', '', 'tomato salad!'),
-                )
+                [
+                    ['John', 'Doe', '', 'john@example.com'],
+                    ['Jane', 'Doe', '', 'tomato salad!'],
+                ]
             ));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
@@ -1407,7 +1407,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getPreselectedPaymentMethodForOnePaymentMethodReturnsItsUid()
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', array('title' => 'foo')
+            'tx_seminars_payment_methods', ['title' => 'foo']
         );
 
         $this->testingFramework->createRelation(
@@ -1488,7 +1488,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getRegistrationDataForDisabledPaymentMethodFieldReturnsEmptyString()
     {
         $selectedPaymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', array('title' => 'payment foo')
+            'tx_seminars_payment_methods', ['title' => 'payment foo']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
@@ -1512,10 +1512,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getRegistrationDataForEnabledPriceFieldReturnsSelectedPriceValue()
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'price',
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setTestMode();
@@ -1523,7 +1523,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            array('price_regular' => 42)
+            ['price_regular' => 42]
         );
         $event = new Tx_Seminars_OldModel_Event($this->seminarUid);
         $fixture->setSeminar($event);
@@ -1541,10 +1541,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getRegistrationDataHtmlspecialcharsInterestsField()
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'interests',
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setTestMode();
@@ -1565,10 +1565,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getRegistrationDataReplacesCarriageReturnInInterestsFieldWithBr()
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'interests',
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setTestMode();
@@ -1589,10 +1589,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getRegistrationDataCanContainAttendeesNames()
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names',
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setTestMode();
@@ -1613,14 +1613,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getRegistrationDataForAttendeesNamesAndThemselvesSelectedContainsUserName()
     {
         $this->testingFramework->createAndLoginFrontEndUser(
-            '', array('name' => 'Jane Doe')
+            '', ['name' => 'Jane Doe']
         );
 
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setTestMode();
@@ -1642,14 +1642,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getRegistrationDataForAttendeesNamesEnabledAndThemselvesNotSelectedNotContainsUserName()
     {
         $this->testingFramework->createAndLoginFrontEndUser(
-            '', array('name' => 'Jane Doe')
+            '', ['name' => 'Jane Doe']
         );
 
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setTestMode();
@@ -1672,15 +1672,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',
-            array('name' => 'Jane Doe', 'title' => 'facility manager')
+            ['name' => 'Jane Doe', 'title' => 'facility manager']
         );
 
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
                 'createAdditionalAttendeesAsFrontEndUsers' => false,
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setTestMode();
@@ -1702,15 +1702,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',
-            array('name' => 'Jane Doe', 'title' => 'facility manager')
+            ['name' => 'Jane Doe', 'title' => 'facility manager']
         );
 
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
                 'createAdditionalAttendeesAsFrontEndUsers' => true,
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setTestMode();
@@ -1732,15 +1732,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',
-            array('name' => 'Jane Doe', 'email' => 'jane@example.com')
+            ['name' => 'Jane Doe', 'email' => 'jane@example.com']
         );
 
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
                 'createAdditionalAttendeesAsFrontEndUsers' => false,
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setTestMode();
@@ -1762,15 +1762,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',
-            array('name' => 'Jane Doe', 'email' => 'jane@example.com')
+            ['name' => 'Jane Doe', 'email' => 'jane@example.com']
         );
 
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
-            array(
+            [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
                 'createAdditionalAttendeesAsFrontEndUsers' => true,
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setTestMode();

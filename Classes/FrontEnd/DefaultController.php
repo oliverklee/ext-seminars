@@ -12,7 +12,6 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -79,7 +78,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      * We cannot use the database table name constants here because default
      * values for member variable don't allow for compound expression.
      */
-    public $orderByList = array(
+    public $orderByList = [
         // The MIN gives us the first category if there are more than one.
         // The clause before the OR gets the events made up of topics (type=1)
         // and concrete dates (type=2).
@@ -165,15 +164,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 			FROM tx_seminars_seminars_target_groups_mm, tx_seminars_target_groups
 			WHERE tx_seminars_seminars_target_groups_mm.uid_local=tx_seminars_seminars.uid
 				AND tx_seminars_seminars_target_groups_mm.uid_foreign=tx_seminars_target_groups.uid)',
-        'status_registration' => 'tx_seminars_attendances.registration_queue'
-    );
+        'status_registration' => 'tx_seminars_attendances.registration_queue',
+    ];
 
     /**
      * hook objects for the list view
      *
      * @var Tx_Seminars_Interface_Hook_EventListView[]
      */
-    private $listViewHooks = array();
+    private $listViewHooks = [];
 
     /**
      * whether the hooks in $this->listViewHooks have been retrieved
@@ -187,7 +186,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      *
      * @var Tx_Seminars_Interface_Hook_EventSingleView[]
      */
-    private $singleViewHooks = array();
+    private $singleViewHooks = [];
 
     /**
      * whether the hooks in $this->singleViewHooks have been retrieved
@@ -268,10 +267,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 
         if (!in_array(
                 $this->whatToDisplay,
-                array(
+                [
                     'list_registrations', 'list_vip_registrations',
                     'countdown', 'category_list',
-                )
+                ]
         )) {
             $this->setFlavor($this->whatToDisplay);
         }
@@ -616,7 +615,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             $result = $this->cObj->getTypoLink(
                 $this->translate('label_listRegistrationsLink'),
                 $targetPageId,
-                array('tx_seminars_pi1[seminar]' => $this->seminar->getUid())
+                ['tx_seminars_pi1[seminar]' => $this->seminar->getUid()]
             );
         }
 
@@ -640,16 +639,16 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     public function getLoginLink($label, $pageId, $eventId = 0)
     {
-        $linkConfiguration = array('parameter' => $pageId);
+        $linkConfiguration = ['parameter' => $pageId];
 
         if ($eventId) {
             $linkConfiguration['additionalParams']
                 = GeneralUtility::implodeArrayForUrl(
                     'tx_seminars_pi1',
-                    array(
+                    [
                         'seminar' => $eventId,
                         'action' => 'register',
-                    ),
+                    ],
                     '',
                     false,
                     true
@@ -664,23 +663,23 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         // the URL due to a bug in the TYPO3 core:
         // http://bugs.typo3.org/view.php?id=3808
         $redirectUrl = preg_replace(
-            array('/\[/', '/\]/'),
-            array('%5B', '%5D'),
+            ['/\[/', '/\]/'],
+            ['%5B', '%5D'],
             $redirectUrl
         );
 
         return $this->cObj->typoLink(
             $label,
-            array(
+            [
                 'parameter' => $this->getConfValueInteger('loginPID'),
                 'additionalParams' => GeneralUtility::implodeArrayForUrl(
                     '',
-                    array(
+                    [
                         rawurlencode('tx_seminars_pi1[uid]') => $eventId,
                         'redirect_url' => $redirectUrl,
-                    )
-                )
-            )
+                    ]
+                ),
+            ]
         );
     }
 
@@ -715,7 +714,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 
         $this->setMarker(
             'backlink',
-            $this->pi_linkTP($this->translate('label_back', 'Back'), array(), true, $this->getConfValueInteger('listPID'))
+            $this->pi_linkTP($this->translate('label_back', 'Back'), [], true, $this->getConfValueInteger('listPID'))
         );
         $result .= $this->getSubpart('BACK_VIEW');
 
@@ -1106,7 +1105,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     {
         if (!in_array(
                 $speakerType,
-                array('speakers', 'partners', 'tutors', 'leaders')
+                ['speakers', 'partners', 'tutors', 'leaders']
         )) {
             throw new InvalidArgumentException(
                 'The speaker type given in the parameter $speakerType is not an allowed type.', 1333293083
@@ -1428,7 +1427,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         }
 
         $owner = $this->seminar->getOwner();
-        $ownerData = array();
+        $ownerData = [];
         // getName always returns a non-empty string for valid records.
         $ownerData[] = htmlspecialchars($owner->getName());
         if ($owner->hasPhoneNumber()) {
@@ -1638,7 +1637,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             }
 
             // Hides unneeded columns from the list.
-            $temporaryHiddenColumns = array('title', 'list_registrations');
+            $temporaryHiddenColumns = ['title', 'list_registrations'];
             $this->hideColumns($temporaryHiddenColumns);
 
             $tableOtherDates = $this->createListTable($seminarBag, 'other_dates');
@@ -1680,14 +1679,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         $result = '';
         $isOkay = true;
         $this->ensureIntegerPiVars(
-            array(
+            [
                 'from_day', 'from_month', 'from_year', 'to_day', 'to_month',
                 'to_year', 'age', 'price_from', 'price_to',
-            )
+            ]
         );
 
         $this->ensureIntegerArrayValues(
-            array('event_type', 'place', 'organizer')
+            ['event_type', 'place', 'organizer']
         );
 
         switch ($whatToDisplay) {
@@ -1828,7 +1827,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         if ($whatToDisplay !== 'my_events') {
             $this->limitForAdditionalParameters($builder);
         }
-        if (!in_array($whatToDisplay, array('my_entered_events', 'my_events', 'topic_list'), true)) {
+        if (!in_array($whatToDisplay, ['my_entered_events', 'my_events', 'topic_list'], true)) {
             $builder->limitToDateAndSingleRecords();
             $this->limitToTimeFrameSetting($builder);
         }
@@ -1938,7 +1937,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     protected function createListHeader()
     {
-        $availableColumns = array(
+        $availableColumns = [
             'image',
             'category',
             'title',
@@ -1968,7 +1967,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             'status',
             'edit',
             'registrations',
-        );
+        ];
 
         foreach ($availableColumns as $column) {
             $this->setMarker('header_' . $column, $this->getFieldHeader($column));
@@ -2014,7 +2013,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             /** @var Tx_Seminars_Model_Event $event */
             $event = $mapper->find($this->getSeminar()->getUid());
 
-            $cssClasses = array();
+            $cssClasses = [];
 
             $cssClasses[] = ($rowCounter % 2) ? 'listrow-odd' : 'listrow-even';
             if ($this->seminar->isCanceled()) {
@@ -2030,31 +2029,31 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             // Retrieves the data for the columns "number of seats", "total
             // price" and "status", but only if we are on the "my_events" list.
             if ($whatToDisplay == 'my_events') {
-                $attendanceData = array(
+                $attendanceData = [
                     'seats' => $this->registration->getSeats(),
-                    'total_price' => $this->registration->getTotalPrice()
-                );
+                    'total_price' => $this->registration->getTotalPrice(),
+                ];
                 $this->setMarker(
                     'status_registration',
                     $this->registration->getStatus()
                 );
             } else {
-                $attendanceData = array(
+                $attendanceData = [
                     'seats' => '',
-                    'total_price' => ''
-                );
+                    'total_price' => '',
+                ];
             }
 
             if ($this->seminar->hasImage()) {
-                $imageConfiguration = array(
+                $imageConfiguration = [
                     'altText' => $this->seminar->getTitle(),
                     'titleText' => $this->seminar->getTitle(),
                     'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->seminar->getImage(),
-                    'file.' => array(
+                    'file.' => [
                         'width' => $this->getConfValueInteger('seminarImageListViewWidth') . 'c',
                         'height' => $this->getConfValueInteger('seminarImageListViewHeight') . 'c',
-                    ),
-                );
+                    ],
+                ];
                 $image = $this->cObj->IMAGE($imageConfiguration);
             } else {
                 $image = '';
@@ -2249,7 +2248,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     private function getOrderByForListView()
     {
-        $orderBy = array();
+        $orderBy = [];
 
         if ($this->getConfValueBoolean(
             'sortListViewByCategory', 's_template_special'
@@ -2292,7 +2291,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         // Can we sort by that field?
         if (isset($this->orderByList[$fieldName]) && $this->getConfValueBoolean('enableSortingLinksInListView')) {
             $result = $this->pi_linkTP_keepPIvars(
-                $label, array('sort' => $fieldName . ':' . ($this->internal['descFlag'] ? 0 : 1))
+                $label, ['sort' => $fieldName . ':' . ($this->internal['descFlag'] ? 0 : 1)]
             );
         } else {
             $result = htmlspecialchars($label);
@@ -2432,7 +2431,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         }
 
         $categoryUid = isset($this->piVars['category']) ? (int)$this->piVars['category'] : 0;
-        $categoryUids = isset($this->piVars['categories']) ? (array)$this->piVars['categories'] : array();
+        $categoryUids = isset($this->piVars['categories']) ? (array)$this->piVars['categories'] : [];
         array_walk($categoryUids, 'intval');
         if ($categoryUid > 0) {
             $categories = (string)$categoryUid;
@@ -2472,7 +2471,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             return '';
         }
 
-        $classes = array();
+        $classes = [];
 
         if ($event->hasDate() && $event->hasStarted()) {
             $classes[] = 'event-begin-date-over';
@@ -2500,7 +2499,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         }
 
         $prefixedClasses = array_map(
-            array($this, 'pi_getClassName'), $classes
+            [$this, 'pi_getClassName'], $classes
         );
 
         return ' ' . implode(' ', $prefixedClasses);
@@ -2520,7 +2519,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         }
 
         /** @var string[] $links */
-        $links = array($this->createEditLink());
+        $links = [$this->createEditLink()];
 
         if ($this->seminar->isPublished()) {
             $links[] = $this->createCopyLink();
@@ -2542,7 +2541,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         return $this->cObj->getTypoLink(
             $this->translate('label_edit'),
             $this->getConfValueInteger('eventEditorPID', 's_fe_editing'),
-            array('tx_seminars_pi1[seminar]' => $this->seminar->getUid())
+            ['tx_seminars_pi1[seminar]' => $this->seminar->getUid()]
         );
     }
 
@@ -2598,11 +2597,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         $aTag = $this->cObj->getTypoLink($this->translate('label_' . $action), (int)$GLOBALS['TSFE']->id);
 
         /** @var string[] $dataAttributes */
-        $dataAttributes = array(
+        $dataAttributes = [
             'method' => 'post',
             'post-tx_seminars_pi1-action' => $action,
-            'post-tx_seminars_pi1-seminar' => $seminarUid
-        );
+            'post-tx_seminars_pi1-seminar' => $seminarUid,
+        ];
         $flattenedDataAttributes = '';
         foreach ($dataAttributes as $key => $value) {
             $flattenedDataAttributes .= ' data-' . $key . '="' . $value . '"';
@@ -2693,7 +2692,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         if ($whatToDisplay != 'my_entered_events'
             && !($whatToDisplay == 'my_vip_events' && $mayManagersEditTheirEvents)
         ) {
-            $this->hideColumns(array('edit'));
+            $this->hideColumns(['edit']);
         }
     }
 
@@ -2712,13 +2711,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     public function hideListRegistrationsColumnIfNecessary($whatToDisplay)
     {
-        $alwaysHideInViews = array(
-            'topic_list', 'other_dates', 'events_next_day'
-        );
+        $alwaysHideInViews = [
+            'topic_list', 'other_dates', 'events_next_day',
+        ];
         if (!$this->isRegistrationEnabled() || !$this->isLoggedIn()
             || in_array($whatToDisplay, $alwaysHideInViews)
         ) {
-            $this->hideColumns(array('list_registrations'));
+            $this->hideColumns(['list_registrations']);
             return;
         }
 
@@ -2738,7 +2737,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         }
 
         if ($hideIt) {
-            $this->hideColumns(array('list_registrations'));
+            $this->hideColumns(['list_registrations']);
         }
     }
 
@@ -2758,7 +2757,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             || ($whatToDisplay == 'my_vip_events')
             || ($whatToDisplay == 'my_entered_events')
         ) {
-            $this->hideColumns(array('registration'));
+            $this->hideColumns(['registration']);
         }
     }
 
@@ -2783,7 +2782,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         if (($whatToDisplay != 'my_vip_events')
             || !$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
         ) {
-            $this->hideColumns(array('registrations'));
+            $this->hideColumns(['registrations']);
         }
     }
 
@@ -2795,7 +2794,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     private function hideColumnsForTheTopicListView()
     {
         $this->hideColumns(
-            array(
+            [
                 'uid',
                 'accreditation_number',
                 'speakers',
@@ -2805,7 +2804,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                 'organizers',
                 'vacancies',
                 'registration',
-            )
+            ]
         );
     }
 
@@ -2823,7 +2822,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     {
         if ($whatToDisplay != 'my_events') {
             $this->hideColumns(
-                array('expiry', 'seats', 'total_price', 'status_registration')
+                ['expiry', 'seats', 'total_price', 'status_registration']
             );
         }
     }
@@ -2854,19 +2853,19 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     {
         return $this->cObj->typoLink(
             $this->translate('label_registrationsAsCsv'),
-            array(
+            [
                 'parameter' => $GLOBALS['TSFE']->id,
                 'additionalParams' => GeneralUtility::implodeArrayForUrl(
                     '',
-                    array(
+                    [
                         'type' => Tx_Seminars_Csv_CsvDownloader::CSV_TYPE_NUMBER,
-                        'tx_seminars_pi2' => array(
+                        'tx_seminars_pi2' => [
                             'table' => 'tx_seminars_attendances',
                             'eventUid' => $this->seminar->getUid(),
-                        ),
-                    )
+                        ],
+                    ]
                 ),
-            )
+            ]
         );
     }
 
@@ -3004,7 +3003,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     protected function toggleEventFieldsOnRegistrationPage()
     {
-        $fieldsToShow = array();
+        $fieldsToShow = [];
         if ($this->hasConfValueString('eventFieldsOnRegistrationPage', 's_template_special')) {
             $fieldsToShow = GeneralUtility::trimExplode(
                 ',', $this->getConfValueString('eventFieldsOnRegistrationPage', 's_template_special'), true
@@ -3012,14 +3011,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         }
 
         // First, we have a list of all fields that are removal candidates.
-        $fieldsToRemove = array(
+        $fieldsToRemove = [
             'uid',
             'title',
             'price_regular',
             'price_special',
             'vacancies',
-            'message'
-        );
+            'message',
+        ];
 
         // Now iterate over the fields to show and delete them from the list
         // of items to remove.
@@ -3098,10 +3097,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         }
 
         return $this->cObj->IMAGE(
-            array(
+            [
                 'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $iconData['icon'],
                 'titleText' => $iconData['title'],
-            )
+            ]
         );
     }
 
@@ -3118,7 +3117,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     {
         if (!in_array(
                 $speakerType,
-                array('speakers', 'partners', 'tutors', 'leaders')
+                ['speakers', 'partners', 'tutors', 'leaders']
         )) {
             throw new InvalidArgumentException(
                 'The given speaker type "' .  $speakerType .
@@ -3156,7 +3155,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                 $organizerTitle = $this->cObj->getTypoLink(
                     htmlspecialchars($organizer->getName()),
                     $organizer->getHomepage(),
-                    array(),
+                    [],
                     $this->getConfValueString('externalLinkTarget')
                 );
             } else {
@@ -3298,7 +3297,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     private function getToDate()
     {
-        $longMonths = array(1, 3, 5, 7, 8, 10, 12);
+        $longMonths = [1, 3, 5, 7, 8, 10, 12];
 
         $month = ($this->piVars['to_month'] > 0)
             ? $this->piVars['to_month']
@@ -3339,7 +3338,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         );
 
         if ($limitToAttendees && !$this->isLoggedIn()) {
-            $this->hideColumns(array('attached_files'));
+            $this->hideColumns(['attached_files']);
         }
     }
 
@@ -3441,7 +3440,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             return;
         }
 
-        $this->hideColumns(array('status'));
+        $this->hideColumns(['status']);
     }
 
     /**
@@ -3490,7 +3489,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     protected function processEventEditorActions()
     {
-        $this->ensureIntegerPiVars(array('seminar'));
+        $this->ensureIntegerPiVars(['seminar']);
         if ($this->piVars['seminar'] <= 0) {
             return;
         }

@@ -77,7 +77,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(array('title' => 'registration for event'));
+        $this->fixture->setData(['title' => 'registration for event']);
 
         self::assertEquals(
             'registration for event',
@@ -115,7 +115,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     {
         $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
-        $this->fixture->setData(array('seminar' => $event));
+        $this->fixture->setData(['seminar' => $event]);
 
         self::assertSame(
             $event,
@@ -130,7 +130,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     {
         $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
-        $this->fixture->setData(array('seminar' => $event));
+        $this->fixture->setData(['seminar' => $event]);
 
         self::assertSame(
             $event,
@@ -177,7 +177,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function isOnRegistrationQueueForRegularRegistrationReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->isOnRegistrationQueue()
@@ -189,7 +189,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function isOnRegistrationQueueForQueueRegistrationReturnsTrue()
     {
-        $this->fixture->setData(array('registration_queue' => true));
+        $this->fixture->setData(['registration_queue' => true]);
 
         self::assertTrue(
             $this->fixture->isOnRegistrationQueue()
@@ -201,7 +201,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function setOnRegistrationQueueTrueSetsRegistrationQueuetoToTrue()
     {
-        $this->fixture->setData(array('registration_queue' => false));
+        $this->fixture->setData(['registration_queue' => false]);
         $this->fixture->setOnRegistrationQueue(true);
 
         self::assertTrue(
@@ -214,7 +214,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function setOnRegistrationQueueFalseSetsRegistrationQueuetoToFalse()
     {
-        $this->fixture->setData(array('registration_queue' => true));
+        $this->fixture->setData(['registration_queue' => true]);
         $this->fixture->setOnRegistrationQueue(false);
 
         self::assertFalse(
@@ -246,7 +246,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     public function getPriceWithNonEmptyPriceReturnsPrice()
     {
         $price = 'Price Regular';
-        $this->fixture->setData(array('price' => $price));
+        $this->fixture->setData(['price' => $price]);
 
         self::assertEquals(
             $price,
@@ -259,7 +259,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getPriceWithoutPriceReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -276,7 +276,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getSeatsWithoutSeatsReturnsZero()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             0,
@@ -289,7 +289,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getSeatsWithNonZeroSeatsReturnsSeats()
     {
-        $this->fixture->setData(array('seats' => 42));
+        $this->fixture->setData(['seats' => 42]);
 
         self::assertEquals(
             42,
@@ -332,7 +332,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function hasRegisteredThemselvesForThirdPartyRegistrationReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->hasRegisteredThemselves()
@@ -344,7 +344,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function hasRegisteredThemselvesForSelfRegistrationReturnsTrue()
     {
-        $this->fixture->setData(array('registered_themselves' => true));
+        $this->fixture->setData(['registered_themselves' => true]);
 
         self::assertTrue(
             $this->fixture->hasRegisteredThemselves()
@@ -372,7 +372,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getTotalPriceWithoutTotalPriceReturnsZero()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             0.00,
@@ -385,7 +385,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getTotalPriceWithTotalPriceReturnsTotalPrice()
     {
-        $this->fixture->setData(array('total_price' => 42.13));
+        $this->fixture->setData(['total_price' => 42.13]);
 
         self::assertEquals(
             42.13,
@@ -428,7 +428,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getAttendeesNamesWithoutAttendeesNamesReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -441,7 +441,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getAttendeesNamesWithAttendeesNamesReturnsAttendeesNames()
     {
-        $this->fixture->setData(array('attendees_names' => 'John Doe'));
+        $this->fixture->setData(['attendees_names' => 'John Doe']);
 
         self::assertEquals(
             'John Doe',
@@ -471,7 +471,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function isPaidForUnpaidRegistrationReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->isPaid()
@@ -483,7 +483,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function isPaidForPaidRegistrationReturnsTrue()
     {
-        $this->fixture->setData(array('datepaid' => $GLOBALS['SIM_EXEC_TIME']));
+        $this->fixture->setData(['datepaid' => $GLOBALS['SIM_EXEC_TIME']]);
 
         self::assertTrue(
             $this->fixture->isPaid()
@@ -499,7 +499,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getPaymentDateAsUnixTimestampWithoutPaymentDateReturnsZero()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             0,
@@ -512,7 +512,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getPaymentDateAsUnixTimestampWithPaymentDateReturnsPaymentDate()
     {
-        $this->fixture->setData(array('datepaid' => 42));
+        $this->fixture->setData(['datepaid' => 42]);
 
         self::assertEquals(
             42,
@@ -587,7 +587,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getAccountNumberWithoutAccountNumberReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -600,7 +600,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getAccountNumberWithAccountNumberReturnsAccountNumber()
     {
-        $this->fixture->setData(array('account_number' => '1234567'));
+        $this->fixture->setData(['account_number' => '1234567']);
 
         self::assertEquals(
             '1234567',
@@ -630,7 +630,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getBankCodeWithoutBankCodeReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -643,7 +643,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getBankCodeWithBankCodeReturnsBankCode()
     {
-        $this->fixture->setData(array('bank_code' => '1234567'));
+        $this->fixture->setData(['bank_code' => '1234567']);
 
         self::assertEquals(
             '1234567',
@@ -673,7 +673,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getBankNameWithoutBankNameReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -686,7 +686,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getBankNameWithBankNameReturnsBankName()
     {
-        $this->fixture->setData(array('bank_name' => 'Cayman Island Bank'));
+        $this->fixture->setData(['bank_name' => 'Cayman Island Bank']);
 
         self::assertEquals(
             'Cayman Island Bank',
@@ -716,7 +716,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getAccountOwnerWithoutAccountOwnerReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -729,7 +729,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getAccountOwnerWithAccountOwnerReturnsAccountOwner()
     {
-        $this->fixture->setData(array('account_owner' => 'John Doe'));
+        $this->fixture->setData(['account_owner' => 'John Doe']);
 
         self::assertEquals(
             'John Doe',
@@ -759,7 +759,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getCompanyWithoutCompanyReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -772,7 +772,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getCompanyWithCompanyReturnsCompany()
     {
-        $this->fixture->setData(array('company' => 'Example Inc.'));
+        $this->fixture->setData(['company' => 'Example Inc.']);
 
         self::assertEquals(
             'Example Inc.',
@@ -802,7 +802,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getNameWithoutNameReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -815,7 +815,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getNameWithNameReturnsName()
     {
-        $this->fixture->setData(array('name' => 'John Doe'));
+        $this->fixture->setData(['name' => 'John Doe']);
 
         self::assertEquals(
             'John Doe',
@@ -845,7 +845,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getGenderWithGenderMaleReturnsGenderMale()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
@@ -859,7 +859,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     public function getGenderWithGenderFemaleReturnsGenderFemale()
     {
         $this->fixture->setData(
-            array('gender' => Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE)
+            ['gender' => Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE]
         );
 
         self::assertEquals(
@@ -874,7 +874,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     public function getGenderWithGenderUnknownReturnsGenderUnknown()
     {
         $this->fixture->setData(
-            array('gender' => Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN)
+            ['gender' => Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN]
         );
 
         self::assertEquals(
@@ -945,7 +945,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getAddressWithoutAddressReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -958,7 +958,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getAddressWithAdressReturnsAddress()
     {
-        $this->fixture->setData(array('address' => 'Main Street 123'));
+        $this->fixture->setData(['address' => 'Main Street 123']);
 
         self::assertEquals(
             'Main Street 123',
@@ -988,7 +988,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getZipWithoutZipReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -1001,7 +1001,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getZipWithZipReturnsZip()
     {
-        $this->fixture->setData(array('zip' => '12345'));
+        $this->fixture->setData(['zip' => '12345']);
 
         self::assertEquals(
             '12345',
@@ -1031,7 +1031,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getCityWithoutCityReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -1044,7 +1044,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getCityWithCityReturnsCity()
     {
-        $this->fixture->setData(array('city' => 'Nowhere Ville'));
+        $this->fixture->setData(['city' => 'Nowhere Ville']);
 
         self::assertEquals(
             'Nowhere Ville',
@@ -1074,7 +1074,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getCountryInitiallyReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -1105,7 +1105,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getPhoneWithoutPhoneReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -1118,7 +1118,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getPhoneWithPhoneReturnsPhone()
     {
-        $this->fixture->setData(array('telephone' => '+49123456789'));
+        $this->fixture->setData(['telephone' => '+49123456789']);
 
         self::assertEquals(
             '+49123456789',
@@ -1148,7 +1148,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getEMailAddressWithoutEMailAddressReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -1161,7 +1161,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getEMailAddressWithEMailAddressReturnsEMailAddress()
     {
-        $this->fixture->setData(array('email' => 'john@doe.com'));
+        $this->fixture->setData(['email' => 'john@doe.com']);
 
         self::assertEquals(
             'john@doe.com',
@@ -1191,7 +1191,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function hasAttendedWithoutAttendeeHasAttendedReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->hasAttended()
@@ -1203,7 +1203,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function hasAttendedWithAttendeeHasAttendedReturnsTrue()
     {
-        $this->fixture->setData(array('been_there' => true));
+        $this->fixture->setData(['been_there' => true]);
 
         self::assertTrue(
             $this->fixture->hasAttended()
@@ -1219,7 +1219,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getInterestsWithoutInterestsReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -1232,7 +1232,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getInterestsWithInterestsReturnsInterests()
     {
-        $this->fixture->setData(array('interests' => 'TYPO3'));
+        $this->fixture->setData(['interests' => 'TYPO3']);
 
         self::assertEquals(
             'TYPO3',
@@ -1262,7 +1262,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getExpectationsWithoutExpectationsReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -1276,7 +1276,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     public function getExpectationsWithExpectationsReturnsExpectations()
     {
         $this->fixture->setData(
-            array('expectations' => 'It\'s going to be nice.')
+            ['expectations' => 'It\'s going to be nice.']
         );
 
         self::assertEquals(
@@ -1307,7 +1307,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getBackgroundKnowledgeWithoutBackgroundKnowledgeReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -1320,7 +1320,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getBackgroundKnowledgeWithBackgroundKnowledgeReturnsBackgroundKnowledge()
     {
-        $this->fixture->setData(array('background_knowledge' => 'Unit Testing'));
+        $this->fixture->setData(['background_knowledge' => 'Unit Testing']);
 
         self::assertEquals(
             'Unit Testing',
@@ -1350,7 +1350,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getAccommodationWithoutAccommodationReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -1363,7 +1363,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getAccommodationWithAccommodationReturnsAccommodation()
     {
-        $this->fixture->setData(array('accommodation' => 'tent'));
+        $this->fixture->setData(['accommodation' => 'tent']);
 
         self::assertEquals(
             'tent',
@@ -1393,7 +1393,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getFoodWithoutFoodReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -1406,7 +1406,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getFoodWithFoodReturnsFood()
     {
-        $this->fixture->setData(array('food' => 'delicious food'));
+        $this->fixture->setData(['food' => 'delicious food']);
 
         self::assertEquals(
             'delicious food',
@@ -1436,7 +1436,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getKnownFromWithoutKnownFromReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -1449,7 +1449,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getKnownFromWithKnownFromReturnsKnownFrom()
     {
-        $this->fixture->setData(array('known_from' => 'Google'));
+        $this->fixture->setData(['known_from' => 'Google']);
 
         self::assertEquals(
             'Google',
@@ -1479,7 +1479,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getNotesWithoutNotesReturnsEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -1492,7 +1492,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getNotesWithNotesReturnsNotes()
     {
-        $this->fixture->setData(array('notes' => 'This is a nice registration.'));
+        $this->fixture->setData(['notes' => 'This is a nice registration.']);
 
         self::assertEquals(
             'This is a nice registration.',
@@ -1522,7 +1522,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getKidsWithoutKidsReturnsZero()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             0,
@@ -1535,7 +1535,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getKidsWithKidsReturnsKids()
     {
-        $this->fixture->setData(array('kids' => 3));
+        $this->fixture->setData(['kids' => 3]);
 
         self::assertEquals(
             3,
@@ -1580,7 +1580,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     {
         $additionalPersons = new Tx_Oelib_List();
         $this->fixture->setData(
-            array('additional_persons' => $additionalPersons)
+            ['additional_persons' => $additionalPersons]
         );
 
         self::assertSame(

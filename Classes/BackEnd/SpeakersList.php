@@ -79,7 +79,6 @@ class Tx_Seminars_BackEnd_SpeakersList extends Tx_Seminars_BackEnd_AbstractList
 
         $tableRows = '';
 
-        /** @var Tx_Seminars_OldModel_Speaker $speaker */
         foreach ($speakerBag as $this->speaker) {
             $this->template->setMarker(
                 'icon', $this->speaker->getRecordIcon()

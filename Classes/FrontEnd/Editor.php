@@ -34,7 +34,7 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
     /**
      * @var array[] the form configuration
      */
-    private $formConfiguration = array();
+    private $formConfiguration = [];
 
     /**
      * @var bool whether the class ist used in test mode
@@ -44,7 +44,7 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
     /**
      * @var array this is used to fake form values for testing
      */
-    private $fakedFormValues = array();
+    private $fakedFormValues = [];
 
     /**
      * Sets the current UID.
@@ -156,6 +156,7 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
 
         /**
          * Configuration instance for plugin data. Necessary for LABEL translation.
+         *
          * @var \tx_rnbase_configurations $pluginConfiguration
          */
         $pluginConfiguration = \tx_rnbase::makeInstance(tx_rnbase_configurations::class);

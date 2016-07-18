@@ -62,7 +62,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TargetGroupTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_target_groups', array('title' => 'Housewives')
+            'tx_seminars_target_groups', ['title' => 'Housewives']
         );
 
         /** @var Tx_Seminars_Model_TargetGroup $model */
@@ -83,7 +83,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TargetGroupTest extends Tx_Phpunit_TestCase
     public function getOwnerWithoutOwnerReturnsNull()
     {
         self::assertNull(
-            $this->fixture->getLoadedTestingModel(array())->getOwner()
+            $this->fixture->getLoadedTestingModel([])->getOwner()
         );
     }
 
@@ -93,12 +93,12 @@ class Tx_Seminars_Tests_Unit_Mapper_TargetGroupTest extends Tx_Phpunit_TestCase
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
         $frontEndUser = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel(array());
+            get(Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
 
         self::assertInstanceOf(
             Tx_Seminars_Model_FrontEndUser::class,
             $this->fixture->getLoadedTestingModel(
-                array('owner' => $frontEndUser->getUid())
+                ['owner' => $frontEndUser->getUid()]
             )->getOwner()
         );
     }

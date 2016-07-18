@@ -126,16 +126,16 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      */
     public function createRelativeUrlForEvent(Tx_Seminars_Model_Event $event)
     {
-        $linkConfiguration = array(
+        $linkConfiguration = [
             'parameter' => $this->getSingleViewPageForEvent($event),
             'additionalParams' => GeneralUtility::implodeArrayForUrl(
                 'tx_seminars_pi1',
-                array('showUid' => $event->getUid()),
+                ['showUid' => $event->getUid()],
                 '',
                 false,
                 true
-            )
-        );
+            ),
+        ];
 
         return $this->getContentObject()->typoLink_URL($linkConfiguration);
     }
@@ -175,7 +175,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
         $frontEnd->initFEuser();
         $frontEnd->determineId();
         $frontEnd->initTemplate();
-        $frontEnd->config = array();
+        $frontEnd->config = [];
 
         $frontEnd->tmpl->getFileName_backPath = PATH_site;
 

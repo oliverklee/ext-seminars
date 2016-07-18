@@ -68,7 +68,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * the related topic record as a reference to the object
      *
      * This will be NULL if we are not a date record.
-
+     *
      * @var Tx_Seminars_OldModel_Event
      */
     private $topic = null;
@@ -125,7 +125,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private function validateTceValues($fieldName, $value)
     {
-        $result = array('status' => true);
+        $result = ['status' => true];
 
         switch ($fieldName) {
             case 'deadline_registration':
@@ -187,13 +187,13 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getUpdateArray(array &$fieldArray)
     {
-        $updateArray = array();
-        $fieldNamesToCheck = array(
+        $updateArray = [];
+        $fieldNamesToCheck = [
             'deadline_registration',
             'deadline_early_bird',
             'price_regular_early',
-            'price_special_early'
-        );
+            'price_special_early',
+        ];
 
         foreach ($fieldNamesToCheck as $currentFieldName) {
             $result = $this->validateTceValues(
@@ -417,13 +417,13 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
                 $name = $plugin->cObj->getTypoLink(
                     $name,
                     $place['homepage'],
-                    array(),
+                    [],
                     $plugin->getConfValueString('externalLinkTarget')
                 );
             }
             $plugin->setMarker('place_item_title', $name);
 
-            $descriptionParts = array();
+            $descriptionParts = [];
             if ($place['address'] != '') {
                 $descriptionParts[] = htmlspecialchars(str_replace(CR, ',', $place['address']));
             }
@@ -485,10 +485,10 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function getPlacesWithCountry()
     {
         if (!$this->hasPlace()) {
-            return array();
+            return [];
         }
 
-        $countries = array();
+        $countries = [];
 
         $countryData = Tx_Oelib_Db::selectMultiple(
             'country',
@@ -526,7 +526,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $countryList = array();
+        $countryList = [];
 
         // Fetches the countries from the corresponding place records, may be
         // an empty array.
@@ -589,7 +589,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getCitiesFromPlaces()
     {
-        $cities = array();
+        $cities = [];
 
         // Fetches the city name from the corresponding place record(s).
         $cityData = Tx_Oelib_Db::selectMultiple(
@@ -653,7 +653,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return $this->translate('message_willBeAnnounced');
         }
 
-        $placeTexts = array();
+        $placeTexts = [];
 
         foreach ($this->getPlacesAsArray() as $place) {
             $placeText = $place['title'];
@@ -661,7 +661,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
                 $placeText .= LF . $place['homepage'];
             }
 
-            $descriptionParts = array();
+            $descriptionParts = [];
             if ($place['address'] != '') {
                 $descriptionParts[] = str_replace(CR, ',', $place['address']);
             }
@@ -728,7 +728,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return $this->translate('message_willBeAnnounced');
         }
 
-        $result = array();
+        $result = [];
 
         $places = Tx_Oelib_Db::selectMultiple(
             'title',
@@ -891,7 +891,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $result = array();
+        $result = [];
 
         /** @var Tx_Seminars_OldModel_Speaker $speaker */
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
@@ -1470,7 +1470,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function getPaymentMethods()
     {
         if (!$this->hasPaymentMethods()) {
-            return array();
+            return [];
         }
 
         $rows = Tx_Oelib_Db::selectMultiple(
@@ -1485,7 +1485,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             'tx_seminars_seminars_payment_methods_mm.sorting'
         );
 
-        $result = array();
+        $result = [];
 
         foreach ($rows as $row) {
             $result[] = $row['title'];
@@ -1925,7 +1925,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return void
      */
-    public function increaseNumberOfAssociatedRegistrationRecords() {
+    public function increaseNumberOfAssociatedRegistrationRecords()
+    {
         $this->setRecordPropertyInteger('registrations', $this->getNumberOfAssociatedRegistrationRecords() + 1);
     }
 
@@ -1954,7 +1955,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $result = array();
+        $result = [];
 
         $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             'tx_seminars_target_groups.title',
@@ -1985,10 +1986,10 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function getTargetGroupsAsArray()
     {
         if (!$this->hasTargetGroups()) {
-            return array();
+            return [];
         }
 
-        $result = array();
+        $result = [];
 
         $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             'tx_seminars_target_groups.title',
@@ -2237,7 +2238,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $result = array();
+        $result = [];
 
         $organizers = $this->getOrganizerBag();
         /** @var Tx_Seminars_OldModel_Organizer $organizer */
@@ -2245,7 +2246,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             $result[] = $plugin->cObj->getTypoLink(
                 htmlspecialchars($organizer->getName()),
                 $organizer->getHomepage(),
-                array(),
+                [],
                 $plugin->getConfValueString('externalLinkTarget')
             );
         }
@@ -2264,7 +2265,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $result = array();
+        $result = [];
 
         $organizers = $this->getOrganizerBag();
         /** @var Tx_Seminars_OldModel_Organizer $organizer */
@@ -2285,10 +2286,10 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function getOrganizersNameAndEmail()
     {
         if (!$this->hasOrganizers()) {
-            return array();
+            return [];
         }
 
-        $result = array();
+        $result = [];
 
         $organizers = $this->getOrganizerBag();
         /** @var Tx_Seminars_OldModel_Organizer $organizer */
@@ -2308,10 +2309,10 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function getOrganizersEmail()
     {
         if (!$this->hasOrganizers()) {
-            return array();
+            return [];
         }
 
-        $result = array();
+        $result = [];
 
         $organizers = $this->getOrganizerBag();
         /** @var Tx_Seminars_OldModel_Organizer $organizer */
@@ -2331,10 +2332,10 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function getOrganizersFooter()
     {
         if (!$this->hasOrganizers()) {
-            return array();
+            return [];
         }
 
-        $result = array();
+        $result = [];
 
         $organizers = $this->getOrganizerBag();
         /** @var Tx_Seminars_OldModel_Organizer $organizer */
@@ -2385,7 +2386,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         if (!$this->hasOrganizingPartners()) {
             return '';
         }
-        $result = array();
+        $result = [];
 
         /** @var Tx_Seminars_Bag_Organizer $organizerBag */
         $organizerBag = GeneralUtility::makeInstance(
@@ -2400,7 +2401,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             $result[] = $plugin->cObj->getTypoLink(
                 $organizer->getName(),
                 $organizer->getHomepage(),
-                array(),
+                [],
                 $plugin->getConfValueString('externalLinkTarget')
             );
         }
@@ -2463,7 +2464,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function dumpSeminarValues($keysList)
     {
         $keys = GeneralUtility::trimExplode(',', $keysList, true);
-        $keysWithLabels = array();
+        $keysWithLabels = [];
 
         $maxLength = 0;
         foreach ($keys as $currentKey) {
@@ -3373,7 +3374,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getLodgings()
     {
-        $result = array();
+        $result = [];
 
         if ($this->hasLodgings()) {
             $result = $this->getMmRecords(
@@ -3405,7 +3406,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getFoods()
     {
-        $result = array();
+        $result = [];
 
         if ($this->hasFoods()) {
             $result = $this->getMmRecords(
@@ -3441,7 +3442,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getCheckboxes()
     {
-        $result = array();
+        $result = [];
 
         if ($this->hasCheckboxes()) {
             $result = $this->getMmRecords(
@@ -3472,7 +3473,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private function getMmRecords($foreignTable, $mmTable, $useTopicRecord)
     {
-        $result = array();
+        $result = [];
 
         $uid = ($useTopicRecord) ?
             $this->getTopicInteger('uid') : $this->getUid();
@@ -3490,10 +3491,10 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
 
         if ($dbResult) {
             while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-                $result[$row['uid']] = array(
+                $result[$row['uid']] = [
                     'caption' => $row['title'],
-                    'value'   => $row['uid']
-                );
+                    'value'   => $row['uid'],
+                ];
             }
         }
 
@@ -3829,56 +3830,56 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getAvailablePrices()
     {
-        $result = array();
+        $result = [];
 
         if ($this->hasEarlyBirdPriceRegular() && $this->earlyBirdApplies()) {
-            $result['regular_early'] = array(
+            $result['regular_early'] = [
                 'value' => 'regular_early',
                 'amount' => $this->getEarlyBirdPriceRegularAmount(),
                 'caption' => $this->translate('label_price_earlybird_regular')
-                    . ': ' . $this->getEarlyBirdPriceRegular()
-            );
+                    . ': ' . $this->getEarlyBirdPriceRegular(),
+            ];
         } else {
-            $result['regular'] = array(
+            $result['regular'] = [
                 'value' => 'regular',
                 'amount' => $this->getPriceRegularAmount(),
                 'caption' => $this->translate('label_price_regular')
-                    . ': ' . $this->getPriceRegular()
-            );
+                    . ': ' . $this->getPriceRegular(),
+            ];
         }
         if ($this->hasPriceRegularBoard()) {
-            $result['regular_board'] = array(
+            $result['regular_board'] = [
                 'value' => 'regular_board',
                 'amount' => $this->getPriceRegularBoardAmount(),
                 'caption' => $this->translate('label_price_board_regular')
-                    . ': ' . $this->getPriceRegularBoard()
-            );
+                    . ': ' . $this->getPriceRegularBoard(),
+            ];
         }
 
         if ($this->hasPriceSpecial()) {
             if ($this->hasEarlyBirdPriceSpecial() && $this->earlyBirdApplies()) {
-                $result['special_early'] = array(
+                $result['special_early'] = [
                     'value' => 'special_early',
                     'amount' => $this->getEarlyBirdPriceSpecialAmount(),
                     'caption' => $this->translate('label_price_earlybird_special')
-                        . ': ' . $this->getEarlyBirdPriceSpecial()
-                );
+                        . ': ' . $this->getEarlyBirdPriceSpecial(),
+                ];
             } else {
-                $result['special'] = array(
+                $result['special'] = [
                     'value' => 'special',
                     'amount' => $this->getPriceSpecialAmount(),
                     'caption' => $this->translate('label_price_special')
-                        . ': ' . $this->getPriceSpecial()
-                );
+                        . ': ' . $this->getPriceSpecial(),
+                ];
             }
         }
         if ($this->hasPriceSpecialBoard()) {
-            $result['special_board'] = array(
+            $result['special_board'] = [
                 'value' => 'special_board',
                     'amount' => $this->getPriceSpecialBoardAmount(),
                 'caption' => $this->translate('label_price_board_special')
-                    . ': ' . $this->getPriceSpecialBoard()
-            );
+                    . ': ' . $this->getPriceSpecialBoard(),
+            ];
         }
 
         // reset the pointer for the result array to the first element
@@ -4144,7 +4145,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getRelatedMmRecordUids($tableName)
     {
-        $result = array();
+        $result = [];
 
         // Fetches all the corresponding records for this event from the
         // selected m:n table.
@@ -4280,7 +4281,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
 
         // Creates an array with all place UIDs which should be related to this
         // event.
-        $placesOfTimeSlots = array();
+        $placesOfTimeSlots = [];
         /** @var Tx_Seminars_OldModel_TimeSlot $timeSlot */
         foreach ($timeSlotBag as $timeSlot) {
             if ($timeSlot->hasPlace()) {
@@ -4327,7 +4328,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getTimeSlotsAsArrayWithMarkers()
     {
-        $result = array();
+        $result = [];
 
         /** @var Tx_Seminars_Bag_TimeSlot $timeSlotBag */
         $timeSlotBag = GeneralUtility::makeInstance(
@@ -4340,15 +4341,15 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
 
         /** @var Tx_Seminars_OldModel_TimeSlot $timeSlot */
         foreach ($timeSlotBag as $timeSlot) {
-            $result[] = array(
+            $result[] = [
                 'uid' => $timeSlot->getUid(),
                 'date' => $timeSlot->getDate(),
                 'time' => $timeSlot->getTime(),
                 'entry_date' => $timeSlot->getEntryDate(),
                 'room' => $timeSlot->getRoom(),
                 'place' => $timeSlot->getPlaceShort(),
-                'speakers' => $timeSlot->getSpeakersShortCommaSeparated()
-            );
+                'speakers' => $timeSlot->getSpeakersShortCommaSeparated(),
+            ];
         }
 
         return $result;
@@ -4389,7 +4390,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function getCategories()
     {
         if (!$this->hasCategories()) {
-            return array();
+            return [];
         }
 
         /** @var Tx_Seminars_BagBuilder_Category $builder */
@@ -4398,13 +4399,13 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $builder->sortByRelationOrder();
         $bag = $builder->build();
 
-        $result = array();
+        $result = [];
         foreach ($bag as $key => $category) {
             $result[$key] =
-                array(
+                [
                     'title' => $category->getTitle(),
                     'icon'  => $category->getIcon(),
-                );
+                ];
         }
 
         return $result;
@@ -4452,13 +4453,13 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function getAttachedFiles(AbstractPlugin $plugin)
     {
         if (!$this->hasAttachedFiles()) {
-            return array();
+            return [];
         }
 
         if ($this->isTopicOkay()) {
             $filesFromTopic = $this->topic->getAttachedFiles($plugin);
         } else {
-            $filesFromTopic = array();
+            $filesFromTopic = [];
         }
 
         $result = $filesFromTopic;
@@ -4471,17 +4472,17 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         );
 
         foreach ($attachedFiles as $attachedFile) {
-            $matches = array();
+            $matches = [];
             preg_match('/\.(\w+)$/', basename($attachedFile), $matches);
 
-            $result[] = array(
+            $result[] = [
                 'name' => $plugin->cObj->typoLink(
                     htmlspecialchars(basename($attachedFile)),
-                    array('parameter' => $uploadFolderUrl . $attachedFile)
+                    ['parameter' => $uploadFolderUrl . $attachedFile]
                 ),
                 'type' => htmlspecialchars((isset($matches[1]) ? $matches[1] : 'none')),
                 'size' => GeneralUtility::formatSize(filesize($uploadFolderPath . $attachedFile)),
-            );
+            ];
         }
 
         return $result;
@@ -4537,21 +4538,21 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $imageConfiguration = array(
+        $imageConfiguration = [
             'altText' => '',
             'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->getImage(),
-            'file.' => array(
+            'file.' => [
                 'width' => $maxImageWidth,
                 'height' => $maxImageHeight,
-            ),
-        );
+            ],
+        ];
         $imageWithTag = $this->cObj->IMAGE($imageConfiguration);
 
-        $imageWidth = array();
+        $imageWidth = [];
         preg_match('/width="([^"]*)"/', $imageWithTag, $imageWidth);
-        $imageHeight = array();
+        $imageHeight = [];
         preg_match('/height="([^"]*)"/', $imageWithTag, $imageHeight);
-        $imageUrl = array();
+        $imageUrl = [];
         preg_match('/src="([^"]*)"/', $imageWithTag, $imageUrl);
 
         return ' style="' .
@@ -4684,7 +4685,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $deadline = $beginDate;
         $speakers = $this->getSpeakerBag();
 
-        /** @var Tx_Seminars_OldModel_Speaker $organizer */
+        /** @var Tx_Seminars_OldModel_Speaker $speaker */
         foreach ($speakers as $speaker) {
             $speakerDeadline = $beginDate - ($speaker->getCancelationPeriodInDays() * Tx_Oelib_Time::SECONDS_PER_DAY);
             $deadline = min($speakerDeadline, $deadline);

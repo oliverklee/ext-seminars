@@ -50,7 +50,7 @@ class Tx_Seminars_OldModel_TimeSlot extends Tx_Seminars_OldModel_AbstractTimeSpa
      */
     public function getSpeakersUids()
     {
-        $result = array();
+        $result = [];
 
         $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             'uid_foreign',
@@ -76,10 +76,10 @@ class Tx_Seminars_OldModel_TimeSlot extends Tx_Seminars_OldModel_AbstractTimeSpa
      */
     public function getSpeakersShortCommaSeparated()
     {
-        $result = array();
+        $result = [];
         $speakerBag = $this->getSpeakerBag();
 
-        /** @var Tx_Seminars_OldModel_Speaker $organizer */
+        /** @var Tx_Seminars_OldModel_Speaker $speaker */
         foreach ($speakerBag as $speaker) {
             $result[] = $speaker->getTitle();
         }
@@ -180,12 +180,12 @@ class Tx_Seminars_OldModel_TimeSlot extends Tx_Seminars_OldModel_AbstractTimeSpa
      */
     public function getUpdateArray()
     {
-        return array(
+        return [
             'title' => html_entity_decode(
                 $this->getDate(),
                 ENT_COMPAT,
                 'utf-8'
-            )
-        );
+            ),
+        ];
     }
 }

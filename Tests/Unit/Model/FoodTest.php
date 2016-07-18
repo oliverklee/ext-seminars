@@ -61,7 +61,7 @@ class Tx_Seminars_Tests_Unit_Model_FoodTest extends Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(array('title' => 'Crunchy crisps'));
+        $this->fixture->setData(['title' => 'Crunchy crisps']);
 
         self::assertEquals(
             'Crunchy crisps',

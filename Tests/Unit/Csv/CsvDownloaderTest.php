@@ -60,20 +60,20 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         $this->pid = $this->testingFramework->createSystemFolder();
         $this->eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->pid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
-            )
+            ]
         );
 
         $configurationRegistry = Tx_Oelib_ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin', new Tx_Oelib_Configuration());
         $this->configuration = new Tx_Oelib_Configuration();
-        $this->configuration->setData(array('charsetForCsv' => 'utf-8'));
+        $this->configuration->setData(['charsetForCsv' => 'utf-8']);
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
         $this->fixture = new Tx_Seminars_Csv_CsvDownloader();
-        $this->fixture->init(array());
+        $this->fixture->init([]);
     }
 
     protected function tearDown()
@@ -164,10 +164,10 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         $subFolderPid = $this->testingFramework->createSystemFolder($this->pid);
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $subFolderPid,
                 'title' => 'another event',
-            )
+            ]
         );
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
@@ -203,10 +203,10 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $secondEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->pid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
-            )
+            ]
         );
         $eventList = $this->fixture->createListOfEvents($this->pid);
 
@@ -229,10 +229,10 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $secondEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->pid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
-            )
+            ]
         );
 
         $output = $this->fixture->createAndOutputListOfEvents($this->pid);
@@ -256,10 +256,10 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $secondEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->pid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
-            )
+            ]
         );
 
         self::assertContains(
@@ -278,10 +278,10 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->pid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
-            )
+            ]
         );
 
         self::assertRegExp(
@@ -297,7 +297,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->eventUid,
-            array('title' => 'bar')
+            ['title' => 'bar']
         );
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
@@ -315,7 +315,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->eventUid,
-            array('description' => 'foo " bar')
+            ['description' => 'foo " bar']
         );
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description');
@@ -333,7 +333,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->eventUid,
-            array('title' => 'foo' . LF . 'bar')
+            ['title' => 'foo' . LF . 'bar']
         );
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
@@ -351,7 +351,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->eventUid,
-            array('title' => 'foo " bar')
+            ['title' => 'foo " bar']
         );
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
@@ -369,7 +369,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->eventUid,
-            array('title' => 'foo ; bar')
+            ['title' => 'foo ; bar']
         );
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
@@ -387,7 +387,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->eventUid,
-            array('description' => 'foo', 'title' => 'bar')
+            ['description' => 'foo', 'title' => 'bar']
         );
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
@@ -474,10 +474,10 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         self::assertContains(
@@ -496,11 +496,11 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'registered_themselves' => 1,
-            )
+            ]
         );
 
         self::assertContains(
@@ -521,11 +521,11 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'company' => 'foo',
-            )
+            ]
         );
 
         self::assertContains(
@@ -544,11 +544,11 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'company' => 'foo bar inc.',
-            )
+            ]
         );
 
         self::assertContains(
@@ -571,11 +571,11 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'company' => 'foo bar inc.',
-            )
+            ]
         );
 
         $result = $this->fixture->createListOfRegistrations($this->eventUid);
@@ -602,10 +602,10 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         $this->fixture->piVars['table'] = 'tx_seminars_attendances';
@@ -627,19 +627,19 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $firstRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
         $secondRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + 1),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
         $registrationsList
             = $this->fixture->createListOfRegistrations($this->eventUid);
@@ -663,10 +663,10 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->pid,
                 'title' => 'Schöne Bären führen',
-            )
+            ]
         );
 
         $this->fixture->piVars['table'] = 'tx_seminars_seminars';
@@ -687,10 +687,10 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->pid,
                 'title' => 'Schöne Bären führen',
-            )
+            ]
         );
 
         $this->fixture->piVars['table'] = 'tx_seminars_seminars';
@@ -714,12 +714,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->pid,
                 'title' => 'Schöne Bären führen',
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         $this->fixture->piVars['table'] = 'tx_seminars_attendances';
@@ -741,12 +741,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->pid,
                 'title' => 'Schöne Bären führen',
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         $this->fixture->piVars['table'] = 'tx_seminars_attendances';
@@ -790,19 +790,19 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $firstRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
         $secondRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + 1),
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         $registrationsList = $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
@@ -824,14 +824,14 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
 
-        $frontEndUserUid = $this->testingFramework->createFrontEndUser('', array('name' => 'foo_user'));
+        $frontEndUserUid = $this->testingFramework->createFrontEndUser('', ['name' => 'foo_user']);
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $frontEndUserUid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -848,14 +848,14 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
 
-        $frontEndUserUid = $this->testingFramework->createFrontEndUser('', array('deleted' => 1));
+        $frontEndUserUid = $this->testingFramework->createFrontEndUser('', ['deleted' => 1]);
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $frontEndUserUid,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -874,11 +874,11 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->getAutoIncrement('fe_users'),
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -897,19 +897,19 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $firstRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => 1,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
         $secondRegistrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => 2,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         self::assertContains(
@@ -929,19 +929,19 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         self::assertRegExp(
@@ -959,12 +959,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
-            )
+            ]
         );
 
         self::assertContains(
@@ -982,12 +982,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -1005,12 +1005,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo ; bar',
-            )
+            ]
         );
 
         self::assertContains(
@@ -1028,12 +1028,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo' . LF . 'bar',
-            )
+            ]
         );
 
         self::assertContains(
@@ -1051,12 +1051,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo " bar',
-            )
+            ]
         );
 
         self::assertContains(
@@ -1074,13 +1074,13 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo',
                 'title' => 'test',
-            )
+            ]
         );
 
         self::assertContains(
@@ -1189,12 +1189,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo',
                 'pid' => $this->pid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -1213,12 +1213,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo',
                 'pid' => $this->pid + 1,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -1238,12 +1238,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'address' => 'foo',
                 'pid' => $subpagePid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -1328,10 +1328,10 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         $this->configuration->setAsString('fieldsFromFeUserForEmailCsv', 'email');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
 
-        $frontEndUserUid = $this->testingFramework->createFrontEndUser('', array('email' => 'foo@bar.com'));
+        $frontEndUserUid = $this->testingFramework->createFrontEndUser('', ['email' => 'foo@bar.com']);
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('seminar' => $this->eventUid, 'user' => $frontEndUserUid)
+            ['seminar' => $this->eventUid, 'user' => $frontEndUserUid]
         );
 
         self::assertNotContains(
@@ -1350,11 +1350,11 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-                'bank_name' => 'foo bank'
-            )
+                'bank_name' => 'foo bank',
+            ]
         );
 
         self::assertNotContains(
@@ -1375,19 +1375,19 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
         $queueUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'bank_name' => 'foo bank',
                 'registration_queue' => 1,
-            )
+            ]
         );
 
         self::assertNotContains(

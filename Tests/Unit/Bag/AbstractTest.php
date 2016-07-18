@@ -47,11 +47,11 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends Tx_Phpunit_TestCase
 
         $this->uidOfFirstRecord = $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('title' => 'test 1')
+            ['title' => 'test 1']
         );
         $this->uidOfSecondRecord = $this->testingFramework->createRecord(
             'tx_seminars_test',
-            array('title' => 'test 2')
+            ['title' => 'test 2']
         );
 
         $this->fixture = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record=1');

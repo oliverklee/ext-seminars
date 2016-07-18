@@ -40,23 +40,23 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends Tx_Phpunit_TestCase
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $fixtureUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            array(
+            [
                 'title' => 'Test organizer',
-                'email' => 'foo@test.com'
-            )
+                'email' => 'foo@test.com',
+            ]
         );
         $this->fixture = new Tx_Seminars_OldModel_Organizer($fixtureUid);
 
         $maximalFixtureUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            array(
+            [
                 'title' => 'Test organizer',
                 'homepage' => 'http://www.test.com/',
                 'email' => 'maximal-foo@test.com',
                 'email_footer' => 'line 1' . LF . 'line 2',
                 'attendances_pid' => 99,
                 'description' => 'foo',
-            )
+            ]
         );
         $this->maximalFixture = new Tx_Seminars_OldModel_Organizer($maximalFixtureUid);
     }

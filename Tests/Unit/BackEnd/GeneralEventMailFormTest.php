@@ -37,14 +37,14 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit
      *
      * @var array
      */
-    private $extConfBackup = array();
+    private $extConfBackup = [];
 
     /**
      * backed-up T3_VAR configuration
      *
      * @var array
      */
-    private $t3VarBackup = array();
+    private $t3VarBackup = [];
 
     /**
      * backup of the BE user's language
@@ -86,7 +86,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
         $this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = array();
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
 
         $this->languageBackup = $GLOBALS['LANG']->lang;
         $GLOBALS['LANG']->lang = 'default';
@@ -107,19 +107,19 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit
 
         $this->organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            array(
+            [
                 'title' => 'Dummy Organizer',
                 'email' => 'foo@example.org',
-            )
+            ]
         );
         $this->eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'organizers' => 1,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
                 'title' => 'Dummy Event',
                 'registrations' => 1,
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -203,24 +203,24 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
                     '',
-                    array('email' => 'foo@example.com', 'name' => 'foo User')
-                )
-            )
+                    ['email' => 'foo@example.com', 'name' => 'foo User']
+                ),
+            ]
         );
 
         $messageBody = '%salutation' . $GLOBALS['LANG']->getLL('confirmMailForm_prefillField_messageBody');
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => $messageBody,
-            )
+            ]
         );
         $this->fixture->render();
 
@@ -237,13 +237,13 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit
     {
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array('email' => 'foo@example.com', 'name' => 'foo User')
+                    '', ['email' => 'foo@example.com', 'name' => 'foo User']
                 ),
-            )
+            ]
         );
 
         /** @var Tx_Seminars_Model_Registration $registration */
@@ -257,12 +257,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][$hookClass] = $hookClass;
 
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'some message body',
-            )
+            ]
         );
         $this->fixture->render();
     }
@@ -274,23 +274,23 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array('email' => 'foo@example.com', 'name' => 'foo User')
+                    '', ['email' => 'foo@example.com', 'name' => 'foo User']
                 ),
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array('email' => 'bar@example.com', 'name' => 'foo User')
+                    '', ['email' => 'bar@example.com', 'name' => 'foo User']
                 ),
-            )
+            ]
         );
 
         $hook = $this->getMock(Tx_Seminars_Interface_Hook_BackEndModule::class);
@@ -301,12 +301,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][$hookClass] = $hookClass;
 
         $this->fixture->setPostData(
-            array(
+            [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'subject' => 'foo',
                 'messageBody' => 'some message body',
-            )
+            ]
         );
         $this->fixture->render();
     }

@@ -45,6 +45,7 @@ Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
 
 Cleanup:
+- [#5740] Autoformat the code
 - [#5454] Convert the language files to XLIFF
 - [#5737] Remove the obsolete parts from the EM upgrade wizard
 - [#5716] Move all includes and locallang loading into the classes

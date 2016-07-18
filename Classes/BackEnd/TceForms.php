@@ -33,7 +33,7 @@ class TceForms
      */
     public function createLanguageSelector(array &$parameters)
     {
-        $parameters['items'] = array(array('', ''));
+        $parameters['items'] = [['', '']];
 
         $table = 'static_languages';
         $titleField = 'lg_name_local';
@@ -43,7 +43,7 @@ class TceForms
         $rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($allFields, $table, '1 = 1' . BackendUtility::deleteClause($table), '', $titleField);
         /** @var string[] $row */
         foreach ($rows as $row) {
-            $parameters['items'][] = array($row[$titleField], $row[$keyField]);
+            $parameters['items'][] = [$row[$titleField], $row[$keyField]];
         }
     }
 
@@ -56,7 +56,7 @@ class TceForms
      */
     public function createCountrySelector(array &$parameters)
     {
-        $parameters['items'] = array(array('', ''));
+        $parameters['items'] = [['', '']];
 
         $table = 'static_countries';
         $titleField = 'cn_short_local';
@@ -66,7 +66,7 @@ class TceForms
         $rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($allFields, $table, '1 = 1' . BackendUtility::deleteClause($table), '', $titleField);
         /** @var string[] $row */
         foreach ($rows as $row) {
-            $parameters['items'][] = array($row[$titleField], $row[$keyField]);
+            $parameters['items'][] = [$row[$titleField], $row[$keyField]];
         }
     }
 
@@ -125,7 +125,7 @@ class TceForms
                 'title' => 'Create new entry',
                 'icon' => 'add.gif',
                 'params' => [
-                    'table'=>'###TABLE###',
+                    'table' => '###TABLE###',
                     'pid' => '###CURRENT_PID###',
                     'setValue' => 'prepend',
                 ],
@@ -141,7 +141,7 @@ class TceForms
                 'title' => 'List entries',
                 'icon' => 'list.gif',
                 'params' => [
-                    'table'=>'###TABLE###',
+                    'table' => '###TABLE###',
                     'pid' => '###CURRENT_PID###',
                 ],
                 'module' => [
@@ -153,7 +153,6 @@ class TceForms
 
         return $wizard;
     }
-
 
     /**
      * Gets the select type.

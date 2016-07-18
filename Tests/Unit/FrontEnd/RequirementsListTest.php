@@ -49,14 +49,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
 
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Test event',
-            )
+            ]
         );
 
         $this->fixture = new Tx_Seminars_FrontEnd_RequirementsList(
-            array('templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'),
+            ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             $GLOBALS['TSFE']->cObj
         );
     }
@@ -92,14 +92,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required & foo',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $this->seminarUid,
@@ -124,14 +124,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
         );
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_foo',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $this->seminarUid,
@@ -152,14 +152,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredEvent1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_foo',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $this->seminarUid,
@@ -167,10 +167,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
         );
         $requiredEvent2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_bar',
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $this->seminarUid,
@@ -209,21 +209,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars', $this->seminarUid,
-            array('object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC)
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredEvent1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_foo',
-            )
+            ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $requiredEvent1,
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $this->seminarUid,
@@ -231,17 +231,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
         );
         $requiredEvent2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_bar',
-            )
+            ]
         );
         $requiredDate2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $requiredEvent2,
-            )
+            ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars', $this->seminarUid,
@@ -249,7 +249,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('seminar' => $requiredDate2, 'user' => $userUid)
+            ['seminar' => $requiredDate2, 'user' => $userUid]
         );
         $this->fixture->setEvent(new Tx_Seminars_OldModel_Event($this->seminarUid));
         $this->fixture->limitToMissingRegistrations();

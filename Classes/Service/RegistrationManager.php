@@ -63,7 +63,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
      *
      * @var array
      */
-    private $hooks = array();
+    private $hooks = [];
 
     /**
      * whether the hooks in $this->hooks have been retrieved
@@ -111,7 +111,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
     public function __destruct()
     {
         unset($this->registration, $this->linkBuilder);
-        $this->hooks = array();
+        $this->hooks = [];
 
         parent::__destruct();
     }
@@ -325,7 +325,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
             $result = $plugin->cObj->getTypoLink(
                 $label,
                 $plugin->getConfValueInteger('registerPID'),
-                array('tx_seminars_pi1[seminar]' => $event->getUid(), 'tx_seminars_pi1[action]' => 'register')
+                ['tx_seminars_pi1[seminar]' => $event->getUid(), 'tx_seminars_pi1[action]' => 'register']
             );
         } else {
             // provides the login link
@@ -348,7 +348,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
         return $plugin->cObj->getTypoLink(
             $plugin->translate('label_onlineUnregistration'),
             $plugin->getConfValueInteger('registerPID'),
-            array('tx_seminars_pi1[registration]' => $registration->getUid(), 'tx_seminars_pi1[action]' => 'unregister')
+            ['tx_seminars_pi1[registration]' => $registration->getUid(), 'tx_seminars_pi1[action]' => 'unregister']
         );
     }
 
@@ -697,7 +697,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
         Tx_Oelib_Db::update(
             'tx_seminars_attendances',
             'uid = ' . $uid,
-            array('hidden' => 1, 'tstamp' => $GLOBALS['SIM_EXEC_TIME'])
+            ['hidden' => 1, 'tstamp' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
         $this->notifyAttendee($this->registration, $plugin, 'confirmationOnUnregistration');
@@ -738,7 +738,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
 
             if ($registration->getSeats() <= $vacancies) {
                 Tx_Oelib_Db::update(
-                    'tx_seminars_attendances', 'uid = ' . $registration->getUid(), array('registration_queue' => 0)
+                    'tx_seminars_attendances', 'uid = ' . $registration->getUid(), ['registration_queue' => 0]
                 );
                 $vacancies -= $registration->getSeats();
 
@@ -965,7 +965,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
     ) {
         foreach ($this->getHooks() as $hook) {
             if ($hook instanceof Tx_Seminars_Interface_Hook_Registration) {
-                /** @var $hook Tx_Seminars_Interface_Hook_Registration */
+                /** @var Tx_Seminars_Interface_Hook_Registration $hook */
                 $hook->modifyOrganizerNotificationEmail($registration, $emailTemplate);
             }
         }
@@ -997,7 +997,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
     {
         foreach ($this->getHooks() as $hook) {
             if ($hook instanceof Tx_Seminars_Interface_Hook_Registration) {
-                /** @var $hook Tx_Seminars_Interface_Hook_Registration */
+                /** @var Tx_Seminars_Interface_Hook_Registration $hook */
                 $hook->modifyAttendeeEmailText($registration, $emailTemplate);
             }
         }
@@ -1368,7 +1368,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
 
         $newline = ($useHtml) ? '<br />' : LF;
 
-        $formattedPlaces = array();
+        $formattedPlaces = [];
         /** @var Tx_Seminars_Model_Place $place */
         foreach ($event->getPlaces() as $place) {
             $formattedPlaces[] = $this->formatPlace($place, $newline);

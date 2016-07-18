@@ -32,7 +32,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     /**
      * @var string[] currently attached files
      */
-    private $attachedFiles = array();
+    private $attachedFiles = [];
 
     /**
      * @var string the prefix used for every subpart in the FE editor
@@ -42,7 +42,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     /**
      * @var string[] the fields required to file a new event.
      */
-    private $requiredFormFields = array();
+    private $requiredFormFields = [];
 
     /**
      * @var string the publication hash for the event to edit/create
@@ -52,7 +52,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     /**
      * @var mixed[]
      */
-    protected $savedFormData = array();
+    protected $savedFormData = [];
 
     /**
      * The constructor.
@@ -101,7 +101,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 true
             );
         } else {
-            $this->attachedFiles = array();
+            $this->attachedFiles = [];
         }
     }
 
@@ -113,9 +113,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     private function declareDataHandler()
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
-            ['declaredobjects']['datahandlers']['DBMM'] = array(
-                'key' => 'dh_dbmm', 'base' => true
-            );
+            ['declaredobjects']['datahandlers']['DBMM'] = [
+                'key' => 'dh_dbmm', 'base' => true,
+            ];
     }
 
     /**
@@ -165,10 +165,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     private function getHtmlWithAttachedFilesList(Tx_Oelib_Template $template)
     {
-        foreach (array(
+        foreach ([
             'label_delete', 'label_really_delete', 'label_save',
             'label_save_and_back',
-        ) as $label) {
+        ] as $label) {
             $template->setMarker($label, $this->translate($label));
         }
 
@@ -343,7 +343,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-            array('relatedRecordType' => 'Places')
+            ['relatedRecordType' => 'Places']
         ) && is_object($form);
 
         /** @var Tx_Seminars_Model_Place $place */
@@ -367,18 +367,18 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 );
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
-                $result[] = array(
+                $result[] = [
                     'caption' => $place->getTitle(),
                     'value' => $place->getUid(),
                     'labelcustom' => 'id="tx_seminars_pi1_seminars_place_label_' . $place->getUid() . '"',
                     'wrapitem' => '|</td><td>' . $editButtonHTML['__compiled'],
-                );
+                ];
             } else {
-                $result[] = array(
+                $result[] = [
                     'caption' => $place->getTitle(),
                     'value' => $place->getUid(),
-                    'wrapitem' => '|</td><td>&nbsp;'
-                );
+                    'wrapitem' => '|</td><td>&nbsp;',
+                ];
             }
         }
 
@@ -396,16 +396,16 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *               and "value" (for the UID)
      */
     public function populateListSpeakers(
-        array $parameters = array(), \tx_mkforms_forms_Base $form = null
+        array $parameters = [], \tx_mkforms_forms_Base $form = null
     ) {
-        $result = array();
+        $result = [];
 
         /** @var Tx_Seminars_Mapper_Speaker $speakerMapper */
         $speakerMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class);
         $speakers = $speakerMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         if (is_object($form)) {
-            $editButtonConfiguration =& $form->_navConf(
+            $editButtonConfiguration = $form->_navConf(
                 $form->aORenderlets['editSpeakerButton']->sXPath
             );
         } else {
@@ -415,7 +415,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-            array('relatedRecordType' => 'Speakers')
+            ['relatedRecordType' => 'Speakers']
         ) && is_object($form);
 
         $type = $parameters['type'];
@@ -439,12 +439,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
             // the new method to list the speakers
             if ($isLister) {
-                $result[] = array(
+                $result[] = [
                     'uid' => $speaker->getUid(),
                     'selected' => GeneralUtility::inList($activeSpeakers, $speaker->getUid()) ? 1 : 0,
                     'name' => $speaker->getName(),
                     'edit' => ($showEditButton && $frontEndUserIsOwner) ? 1 : 0,
-                );
+                ];
                 continue;
             }
             if ($showEditButton && $frontEndUserIsOwner) {
@@ -457,19 +457,19 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 );
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
-                $result[] = array(
+                $result[] = [
                     'caption' => $speaker->getName(),
                     'value' => $speaker->getUid(),
                     'labelcustom' => 'id="tx_seminars_pi1_seminars_' .
                         strtolower($type) . '_label_' . $speaker->getUid() . '"',
                     'wrapitem' => '|</td><td>' . $editButtonHTML['__compiled'],
-                );
+                ];
             } else {
-                $result[] = array(
+                $result[] = [
                     'caption' => $speaker->getName(),
                     'value' => $speaker->getUid(),
-                    'wrapitem' => '|</td><td>&nbsp;'
-                );
+                    'wrapitem' => '|</td><td>&nbsp;',
+                ];
             }
         }
 
@@ -497,7 +497,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $checkboxes = $checkboxMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         if (is_object($form)) {
-            $editButtonConfiguration =& $form->_navConf(
+            $editButtonConfiguration = $form->_navConf(
                 $form->aORenderlets['editCheckboxButton']->sXPath
             );
         }
@@ -505,7 +505,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-            array('relatedRecordType' => 'Checkboxes')
+            ['relatedRecordType' => 'Checkboxes']
         ) && is_object($form);
 
         /** @var Tx_Seminars_Model_Checkbox $checkbox */
@@ -529,18 +529,18 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 );
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
-                $result[] = array(
+                $result[] = [
                     'caption' => $checkbox->getTitle(),
                     'value' => $checkbox->getUid(),
                     'labelcustom' => 'id="tx_seminars_pi1_seminars_checkbox_label_' . $checkbox->getUid() . '"',
                     'wrapitem' => '|</td><td>' . $editButtonHTML['__compiled'],
-                );
+                ];
             } else {
-                $result[] = array(
+                $result[] = [
                     'caption' => $checkbox->getTitle(),
                     'value' => $checkbox->getUid(),
                     'wrapitem' => '|</td><td>&nbsp;',
-                );
+                ];
             }
         }
 
@@ -568,7 +568,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $targetGroups = $targetGroupMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         if (is_object($form)) {
-            $editButtonConfiguration =& $form->_navConf(
+            $editButtonConfiguration = $form->_navConf(
                 $form->aORenderlets['editTargetGroupButton']->sXPath
             );
         }
@@ -576,7 +576,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-            array('relatedRecordType' => 'TargetGroups')
+            ['relatedRecordType' => 'TargetGroups']
         ) && is_object($form);
 
         /** @var Tx_Seminars_Model_TargetGroup $targetGroup */
@@ -601,18 +601,18 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 );
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
-                $result[] = array(
+                $result[] = [
                     'caption' => $targetGroup->getTitle(),
                     'value' => $targetGroup->getUid(),
                     'labelcustom' => 'id="tx_seminars_pi1_seminars_target_group_label_' . $targetGroup->getUid() . '"',
                     'wrapitem' => '|</td><td>' . $editButtonHTML['__compiled'],
-                );
+                ];
             } else {
-                $result[] = array(
+                $result[] = [
                     'caption' => $targetGroup->getTitle(),
                     'value' => $targetGroup->getUid(),
                     'wrapitem' => '|</td><td>&nbsp;',
-                );
+                ];
             }
         }
 
@@ -635,7 +635,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         if ($this->getFormValue('proceed_file_upload')) {
             $additionalParameters = GeneralUtility::implodeArrayForUrl(
                 $this->prefixId,
-                array('seminar' => $this->getObjectUid())
+                ['seminar' => $this->getObjectUid()]
             );
             $pageId = $GLOBALS['TSFE']->id;
         } else {
@@ -645,10 +645,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         }
 
         return GeneralUtility::locationHeaderUrl(
-            $this->cObj->typoLink_URL(array(
+            $this->cObj->typoLink_URL([
                 'parameter' => $pageId,
                 'additionalParams' => $additionalParameters,
-            ))
+            ])
         );
     }
 
@@ -724,10 +724,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     private function unifyDecimalSeparators(array &$formData)
     {
-        $priceFields = array(
+        $priceFields = [
             'price_regular', 'price_regular_early', 'price_regular_board',
             'price_special', 'price_special_early', 'price_special_board',
-        );
+        ];
 
         foreach ($priceFields as $key) {
             if (isset($formData[$key])) {
@@ -775,36 +775,36 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     private function purgeNonSeminarsFields(array &$formData)
     {
-        $fieldsToUnset = array(
-            '' => array('proceed_file_upload', 'delete_attached_files'),
-            'newPlace_' => array(
+        $fieldsToUnset = [
+            '' => ['proceed_file_upload', 'delete_attached_files'],
+            'newPlace_' => [
                 'title', 'address', 'zip', 'city', 'country', 'homepage',
                 'directions', 'notes',
-            ),
-            'editPlace_' => array(
+            ],
+            'editPlace_' => [
                 'title', 'address', 'zip', 'city', 'country', 'homepage',
                 'directions', 'notes', 'uid',
-            ),
-            'newSpeaker_' => array(
+            ],
+            'newSpeaker_' => [
                 'title', 'gender', 'organization', 'homepage',
                 'description', 'skills', 'notes', 'address', 'phone_work',
                 'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period',
-            ),
-            'editSpeaker_' => array(
+            ],
+            'editSpeaker_' => [
                 'title', 'gender', 'organization', 'homepage',
                 'description', 'skills', 'notes', 'address', 'phone_work',
                 'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period',
                 'uid',
-            ),
-            'newCheckbox_' => array('title'),
-            'editCheckbox_' => array('title', 'uid'),
-            'newTargetGroup_' => array(
+            ],
+            'newCheckbox_' => ['title'],
+            'editCheckbox_' => ['title', 'uid'],
+            'newTargetGroup_' => [
                 'title', 'uid', 'minimum_age', 'maximum_age',
-            ),
-            'editTargetGroup_' => array(
+            ],
+            'editTargetGroup_' => [
                 'title', 'uid', 'minimum_age', 'maximum_age',
-            ),
-        );
+            ],
+        ];
 
         foreach ($fieldsToUnset as $prefix => $keys) {
             foreach ($keys as $key) {
@@ -1038,84 +1038,84 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     private function createTemplateStructure()
     {
-        return array(
+        return [
             'subtitle' => false,
-            'title_right' => array(
+            'title_right' => [
                 'accreditation_number' => false,
                 'credit_points' => false,
-            ),
-            'basic_information' => array(
+            ],
+            'basic_information' => [
                 'categories' => false,
                 'event_type' => false,
                 'cancelled' => false,
-            ),
-            'text_blocks' => array(
+            ],
+            'text_blocks' => [
                 'teaser' => false,
                 'description' => false,
                 'additional_information' => false,
-            ),
-            'registration_information' => array(
-                'dates' => array(
-                    'events_dates' => array(
+            ],
+            'registration_information' => [
+                'dates' => [
+                    'events_dates' => [
                         'begin_date' => false,
                         'end_date' => false,
-                    ),
-                    'registration_dates' => array(
+                    ],
+                    'registration_dates' => [
                         'begin_date_registration' => false,
                         'deadline_early_bird' => false,
                         'deadline_registration' => false,
-                    ),
-                ),
-                'attendance_information' => array(
-                    'registration_and_queue' => array(
+                    ],
+                ],
+                'attendance_information' => [
+                    'registration_and_queue' => [
                         'needs_registration' => false,
                         'allows_multiple_registrations' => false,
                         'queue_size' => false,
-                    ),
-                    'attendees_number' => array(
+                    ],
+                    'attendees_number' => [
                         'attendees_min' => false,
                         'attendees_max' => false,
                         'offline_attendees' => false,
-                    ),
-                ),
+                    ],
+                ],
                 'target_groups' => false,
-                'prices' => array(
-                    'regular_prices' => array(
+                'prices' => [
+                    'regular_prices' => [
                         'price_regular' => false,
                         'price_regular_early' => false,
                         'price_regular_board' => false,
                         'payment_methods' => false,
-                    ),
-                    'special_prices' => array(
+                    ],
+                    'special_prices' => [
                         'price_special' => false,
                         'price_special_early' => false,
                         'price_special_board' => false,
-                    ),
-                ),
-            ),
-            'place_information' => array(
-                'place_and_room' => array(
+                    ],
+                ],
+            ],
+            'place_information' => [
+                'place_and_room' => [
                     'place' => false,
                     'room' => false,
-                ),
-                'lodging_and_food' => array(
+                ],
+                'lodging_and_food' => [
                     'lodgings' => false,
                     'foods' => false,
-                ),
-            ),
+                ],
+            ],
             'speakers' => false,
             'leaders' => false,
-            'partner_tutor' => array(
+            'partner_tutor' => [
                 'partners' => false,
                 'tutors' => false,
-            ),
-            'checkbox_options' => array(
+            ],
+            'checkbox_options' => [
                 'checkboxes' => false,
                 'uses_terms_2' => false,
-            ),
+            ],
             'attached_file_box' => false,
             'notes' => false,
-        );
+        ];
     }
 
     /**
@@ -1411,15 +1411,15 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     private function createReviewUrl()
     {
-        $url = $this->cObj->typoLink_URL(array(
+        $url = $this->cObj->typoLink_URL([
             'parameter' => $GLOBALS['TSFE']->id . ',' . Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
             'additionalParams' => GeneralUtility::implodeArrayForUrl(
-                'tx_seminars_publication', array('hash' => $this->publicationHash), '', false, true
+                'tx_seminars_publication', ['hash' => $this->publicationHash], '', false, true
             ),
             'type' => Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
-        ));
+        ]);
 
-        return GeneralUtility::locationHeaderUrl(preg_replace(array('/\\[/', '/\\]/'), array('%5B', '%5D'), $url));
+        return GeneralUtility::locationHeaderUrl(preg_replace(['/\\[/', '/\\]/'], ['%5B', '%5D'], $url));
     }
 
     /**
@@ -1490,7 +1490,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     {
         $formData = $form->oMajixEvent->getParams();
         $validationErrors = self::validatePlace(
-            $form, array(
+            $form, [
                 'title' => $formData['newPlace_title'],
                 'address' => $formData['newPlace_address'],
                 'zip' => $formData['newPlace_zip'],
@@ -1498,14 +1498,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 'country' => $formData['newPlace_country'],
                 'homepage' => $formData['newPlace_homepage'],
                 'directions' => $formData['newPlace_directions'],
-            )
+            ]
         );
         if (!empty($validationErrors)) {
-            return array(
+            return [
                 $form->majixExecJs(
                     'alert("' . implode('\n', $validationErrors) . '");'
                 ),
-            );
+            ];
         }
 
         /** @var Tx_Seminars_Model_Place $place */
@@ -1517,7 +1517,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Place::class);
         $mapper->save($place);
 
-        $editButtonConfiguration =& $form->_navConf(
+        $editButtonConfiguration = $form->_navConf(
             $form->aORenderlets['editPlaceButton']->sXPath
         );
         $editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
@@ -1531,7 +1531,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $editButton->includeScripts();
         $editButtonHTML = $editButton->_render();
 
-        return array(
+        return [
             $form->aORenderlets['newPlaceModalBox']->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.appendPlaceInEditor(' . $place->getUid() . ', "' .
@@ -1541,7 +1541,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 						"value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
 					});'
             ),
-        );
+        ];
     }
 
     /**
@@ -1577,7 +1577,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $validationErrors = self::validatePlace(
             $form,
-            array(
+            [
                 'title' => $formData['editPlace_title'],
                 'address' => $formData['editPlace_address'],
                 'zip' => $formData['editPlace_zip'],
@@ -1585,7 +1585,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 'country' => $formData['editPlace_country'],
                 'homepage' => $formData['editPlace_homepage'],
                 'directions' => $formData['editPlace_directions'],
-            )
+            ]
         );
         if (!empty($validationErrors)) {
             return $form->majixExecJs(
@@ -1598,13 +1598,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $htmlId = 'tx_seminars_pi1_seminars_place_label_' . $place->getUid();
 
-        return array(
+        return [
             $form->aORenderlets['editPlaceModalBox']->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
                     addcslashes($place->getTitle(), '"\\') . '")'
             ),
-        );
+        ];
     }
 
     /**
@@ -1620,11 +1620,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     private static function validatePlace(
         \tx_mkforms_forms_Base $form, array $formData
     ) {
-        $validationErrors = array();
+        $validationErrors = [];
 
-        $keys = array(
-            'title', 'address', 'zip', 'city', 'homepage', 'directions'
-        );
+        $keys = [
+            'title', 'address', 'zip', 'city', 'homepage', 'directions',
+        ];
         foreach ($keys as $key) {
             if ((trim($formData[$key]) == '') && self::isPlaceFieldRequired($key)
             ) {
@@ -1745,7 +1745,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             $countryUid = 0;
         }
 
-        $fields = array(
+        $fields = [
             'uid' => $place->getUid(),
             'title' => $place->getTitle(),
             'address' => $place->getAddress(),
@@ -1755,7 +1755,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             'homepage' => $place->getHomepage(),
             'directions' => $place->getDirections(),
             'notes' => $place->getNotes(),
-        );
+        ];
 
         foreach ($fields as $key => $value) {
             $form->aORenderlets['editPlace_' . $key]->setValue($value);
@@ -1780,10 +1780,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $pageUid = ($ownerPageUid > 0) ? $ownerPageUid : self::getSeminarsConfiguration()->getAsInteger('createAuxiliaryRecordsPID');
 
-        return array(
+        return [
             'owner' => $owner,
             'pid' => $pageUid,
-        );
+        ];
     }
 
     /**
@@ -1800,14 +1800,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     {
         $formData = self::removePathFromWidgetData($formData, $form);
         $validationErrors = self::validateSpeaker(
-            $form, array('title' => $formData['newSpeaker_title'])
+            $form, ['title' => $formData['newSpeaker_title']]
         );
         if (!empty($validationErrors)) {
-            return array(
+            return [
                 $form->majixExecJs(
                     'alert("' . implode('\n', $validationErrors) . '");'
                 ),
-            );
+            ];
         }
 
         /** @var Tx_Seminars_Model_Speaker $speaker */
@@ -1817,7 +1817,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $speaker->setData(array_merge(
             self::createBasicAuxiliaryData(),
-            array('skills' => new Tx_Oelib_List())
+            ['skills' => new Tx_Oelib_List()]
         ));
         self::setSpeakerData($speaker, 'newSpeaker_', $formData);
         $speaker->markAsDirty();
@@ -1866,14 +1866,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         }
 
         $validationErrors = self::validateSpeaker(
-            $form, array('title' => $formData['editSpeaker_title'])
+            $form, ['title' => $formData['editSpeaker_title']]
         );
         if (!empty($validationErrors)) {
-            return array(
+            return [
                 $form->majixExecJs(
                     'alert("' . implode('\n', $validationErrors) . '");'
                 ),
-            );
+            ];
         }
 
         self::setSpeakerData($speaker, 'editSpeaker_', $formData);
@@ -1893,14 +1893,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     protected function repaintSpeakers(\tx_mkforms_forms_Base $form)
     {
-        $speakerTypes = array(
+        $speakerTypes = [
             'speaker',
             'leader',
             'partner',
             'tutor',
-        );
+        ];
 
-        $results = array();
+        $results = [];
         // refresh all speaker listers
         foreach ($speakerTypes as $speakerType) {
             if (
@@ -1926,7 +1926,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     private static function validateSpeaker(
         \tx_mkforms_forms_Base $form, array $formData
     ) {
-        $validationErrors = array();
+        $validationErrors = [];
         if (trim($formData['title']) == '') {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
                 'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyName'
@@ -2030,7 +2030,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             );
         }
 
-        $fields = array(
+        $fields = [
             'uid' => $speaker->getUid(),
             'title' => $speaker->getName(),
             'gender' => $speaker->getGender(),
@@ -2045,13 +2045,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             'fax' => $speaker->getFax(),
             'email' => $speaker->getEMailAddress(),
             'cancelation_period' => $speaker->getCancelationPeriod(),
-        );
+        ];
 
         foreach ($fields as $key => $value) {
             $form->aORenderlets['editSpeakerModalBox__editSpeaker_' . $key]->setValue($value);
         }
 
-        $result = array();
+        $result = [];
 
         $form->oRenderer->_setDisplayLabels(true);
         $result[] = $form->aORenderlets['editSpeakerModalBox']->majixShowBox();
@@ -2082,14 +2082,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     {
         $formData = $form->oMajixEvent->getParams();
         $validationErrors = self::validateCheckbox(
-            $form, array('title' => $formData['newCheckbox_title'])
+            $form, ['title' => $formData['newCheckbox_title']]
         );
         if (!empty($validationErrors)) {
-            return array(
+            return [
                 $form->majixExecJs(
                     'alert("' . implode('\n', $validationErrors) . '");'
                 ),
-            );
+            ];
         }
 
         /** @var Tx_Seminars_Model_Checkbox $checkbox */
@@ -2101,7 +2101,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
         $mapper->save($checkbox);
 
-        $editButtonConfiguration =& $form->_navConf(
+        $editButtonConfiguration = $form->_navConf(
             $form->aORenderlets['editCheckboxButton']->sXPath
         );
         $editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
@@ -2115,7 +2115,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $editButton->includeScripts();
         $editButtonHTML = $editButton->_render();
 
-        return array(
+        return [
             $form->aORenderlets['newCheckboxModalBox']->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.appendCheckboxInEditor(' . $checkbox->getUid() . ', "' .
@@ -2125,7 +2125,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 						"value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
 					});'
             ),
-        );
+        ];
     }
 
     /**
@@ -2161,7 +2161,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $validationErrors = self::validateCheckbox(
             $form,
-            array('title' => $formData['editCheckbox_title'])
+            ['title' => $formData['editCheckbox_title']]
         );
         if (!empty($validationErrors)) {
             return $form->majixExecJs(
@@ -2174,13 +2174,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $htmlId = 'tx_seminars_pi1_seminars_checkbox_label_' . $checkbox->getUid();
 
-        return array(
+        return [
             $form->aORenderlets['editCheckboxModalBox']->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
                     addcslashes($checkbox->getTitle(), '"\\') . '")'
             ),
-        );
+        ];
     }
 
     /**
@@ -2196,7 +2196,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     private static function validateCheckbox(
         \tx_mkforms_forms_Base $form, array $formData
     ) {
-        $validationErrors = array();
+        $validationErrors = [];
         if (trim($formData['title']) == '') {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
                 'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyTitle'
@@ -2255,10 +2255,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             );
         }
 
-        $fields = array(
+        $fields = [
             'uid' => $checkbox->getUid(),
             'title' => $checkbox->getTitle(),
-        );
+        ];
 
         foreach ($fields as $key => $value) {
             $form->aORenderlets['editCheckbox_' . $key]->setValue($value);
@@ -2285,18 +2285,18 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $formData = $form->oMajixEvent->getParams();
         $validationErrors = self::validateTargetGroup(
             $form,
-            array(
+            [
                 'title' => $formData['newTargetGroup_title'],
                 'minimum_age' => $formData['newTargetGroup_minimum_age'],
                 'maximum_age' => $formData['newTargetGroup_maximum_age'],
-            )
+            ]
         );
         if (!empty($validationErrors)) {
-            return array(
+            return [
                 $form->majixExecJs(
                     'alert("' . implode('\n', $validationErrors) . '");'
                 ),
-            );
+            ];
         }
 
         /** @var Tx_Seminars_Model_TargetGroup $targetGroup */
@@ -2308,7 +2308,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
         $mapper->save($targetGroup);
 
-        $editButtonConfiguration =& $form->_navConf(
+        $editButtonConfiguration = $form->_navConf(
             $form->aORenderlets['editTargetGroupButton']->sXPath
         );
         $editButtonConfiguration['name'] = 'editTargetGroupButton_' .
@@ -2323,7 +2323,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $editButton->includeScripts();
         $editButtonHTML = $editButton->_render();
 
-        return array(
+        return [
             $form->aORenderlets['newTargetGroupModalBox']->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.appendTargetGroupInEditor(' . $targetGroup->getUid() . ', "' .
@@ -2333,7 +2333,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 						"value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
 					});'
             ),
-        );
+        ];
     }
 
     /**
@@ -2369,11 +2369,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $validationErrors = self::validateTargetGroup(
             $form,
-            array(
+            [
                 'title' => $formData['editTargetGroup_title'],
                 'minimum_age' => $formData['editTargetGroup_minimum_age'],
                 'maximum_age' => $formData['editTargetGroup_maximum_age'],
-            )
+            ]
         );
         if (!empty($validationErrors)) {
             return $form->majixExecJs(
@@ -2386,13 +2386,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $htmlId = 'tx_seminars_pi1_seminars_target_group_label_' . $targetGroup->getUid();
 
-        return array(
+        return [
             $form->aORenderlets['editTargetGroupModalBox']->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
                     addcslashes($targetGroup->getTitle(), '"\\') . '")'
             ),
-        );
+        ];
     }
 
     /**
@@ -2408,7 +2408,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     private static function validateTargetGroup(
         \tx_mkforms_forms_Base $form, array $formData
     ) {
-        $validationErrors = array();
+        $validationErrors = [];
         if (trim($formData['title']) == '') {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
                 'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyTitle'
@@ -2496,12 +2496,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $maximumAge = ($targetGroup->getMaximumAge() > 0)
             ? $targetGroup->getMaximumAge() : '';
 
-        $fields = array(
+        $fields = [
             'uid' => $targetGroup->getUid(),
             'title' => $targetGroup->getTitle(),
             'minimum_age' => $minimumAge,
             'maximum_age' => $maximumAge,
-        );
+        ];
 
         foreach ($fields as $key => $value) {
             $form->aORenderlets['editTargetGroup_' . $key]->setValue($value);
@@ -2521,17 +2521,17 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     public static function populateListCountries()
     {
-        $result = array();
+        $result = [];
 
         /** @var Tx_Oelib_Mapper_Country $mapper */
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
         $countries = $mapper->findAll('cn_short_local');
         /** @var Tx_Oelib_Model_Country $country */
         foreach ($countries as $country) {
-            $result[] = array(
+            $result[] = [
                 'caption' => $country->getLocalShortName(),
                 'value' => $country->getUid(),
-            );
+            ];
         }
 
         return $result;
@@ -2564,17 +2564,17 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     public static function makeListToFormidableList(Tx_Oelib_List $models)
     {
         if ($models->isEmpty()) {
-            return array();
+            return [];
         }
 
-        $result = array();
+        $result = [];
 
         /** @var Tx_Oelib_Model $model */
         foreach ($models as $model) {
-            $result[] = array(
+            $result[] = [
                 'caption' => $model->getTitle(),
                 'value' => $model->getUid(),
-            );
+            ];
         }
 
         return $result;

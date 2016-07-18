@@ -34,20 +34,20 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
     /**
      * @var string[] list of the valid keys for time-frames
      */
-    private static $validTimeFrames = array(
+    private static $validTimeFrames = [
         'past', 'pastAndCurrent', 'current', 'currentAndUpcoming', 'upcoming',
         'upcomingWithBeginDate', 'deadlineNotOver', 'all', 'today',
-    );
+    ];
 
     /**
      * @var string[][] a list of field names of m:n associations in which we can search, grouped by record type
      */
-    private static $searchFieldList = array(
-        'speakers' => array('title'),
-        'places' => array('title', 'city'),
-        'categories' => array('title'),
-        'target_groups' => array('title'),
-    );
+    private static $searchFieldList = [
+        'speakers' => ['title'],
+        'places' => ['title', 'city'],
+        'categories' => ['title'],
+        'target_groups' => ['title'],
+    ];
 
     /**
      * @var string the character list to trim the search words for
@@ -128,7 +128,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function limitToPlaces(array $placeUids = array())
+    public function limitToPlaces(array $placeUids = [])
     {
         if (empty($placeUids)) {
             unset($this->whereClauseParts['places']);
@@ -305,7 +305,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function limitToEventTypes(array $eventTypeUids = array())
+    public function limitToEventTypes(array $eventTypeUids = [])
     {
         if (empty($eventTypeUids)) {
             unset($this->whereClauseParts['eventTypes']);
@@ -338,7 +338,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function limitToCities(array $cities = array())
+    public function limitToCities(array $cities = [])
     {
         if (empty($cities)) {
             unset($this->whereClauseParts['cities']);
@@ -376,7 +376,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function limitToCountries(array $countries = array())
+    public function limitToCountries(array $countries = [])
     {
         if (empty($countries)) {
             unset($this->whereClauseParts['countries']);
@@ -414,7 +414,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function limitToLanguages(array $languages = array())
+    public function limitToLanguages(array $languages = [])
     {
         if (empty($languages)) {
             unset($this->whereClauseParts['languages']);
@@ -612,7 +612,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
 
         $keywords = preg_split('/[ ,]/', $searchWords);
 
-        $allWhereParts = array();
+        $allWhereParts = [];
 
         foreach ($keywords as $keyword) {
             $safeKeyword = $this->prepareSearchWord($keyword);
@@ -750,7 +750,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
      */
     private function getSearchWherePartForEventTypes($quotedSearchWord)
     {
-        return array(
+        return [
             'EXISTS (' .
                 'SELECT * FROM tx_seminars_event_types, tx_seminars_seminars s1, tx_seminars_seminars s2' .
                 ' WHERE (MATCH (tx_seminars_event_types.title) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)' .
@@ -758,8 +758,8 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
                 ' AND ((s1.uid = s2.topic AND s2.object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ') ' .
                     'OR (s1.uid = s2.uid AND s1.object_type <> ' . Tx_Seminars_Model_Event::TYPE_DATE . '))' .
                 ' AND s2.uid = tx_seminars_seminars.uid)' .
-            ')'
-        );
+            ')',
+        ];
     }
 
     /**
@@ -790,7 +790,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
      */
     private function getSearchWherePartForEventTopics($quotedSearchWord)
     {
-        $where = array();
+        $where = [];
         $where[] = 'MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)';
 
         $matchingUids = Tx_Oelib_Db::selectColumnForMultiple(
@@ -799,15 +799,15 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
             '(' . implode(' OR ', $where) . ')' . Tx_Oelib_Db::enableFields('tx_seminars_seminars')
         );
         if (empty($matchingUids)) {
-            return array();
+            return [];
         }
 
         $inUids = ' IN (' . implode(',', $matchingUids) . ')';
-        return array(
+        return [
             '(object_type = ' . Tx_Seminars_Model_Event::TYPE_COMPLETE . ' AND tx_seminars_seminars.uid' . $inUids . ')',
             '(tx_seminars_seminars.object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
                 'tx_seminars_seminars.topic' . $inUids . ')',
-        );
+        ];
     }
 
     /**
@@ -821,7 +821,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
      */
     private function getSearchWherePartIndependentFromEventRecordType($quotedSearchWord)
     {
-        return array('MATCH (tx_seminars_seminars.accreditation_number) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)');
+        return ['MATCH (tx_seminars_seminars.accreditation_number) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)'];
     }
 
     /**
@@ -866,7 +866,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
         $matchQueryPart = 'MATCH (' .
             $foreignTable . '.' . implode(',' . $foreignTable . '.', self::$searchFieldList[$searchFieldKey]) .
             ') AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)';
-        return array(
+        return [
             'EXISTS ' .
             '(SELECT * FROM ' . 'tx_seminars_seminars s1, ' . $mmTable . ', ' . $foreignTable .
             ' WHERE ((tx_seminars_seminars.object_type = ' .
@@ -876,8 +876,8 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
             ' AND tx_seminars_seminars.uid = s1.uid))' .
             ' AND ' . $mmTable . '.uid_local = s1.uid' .
             ' AND ' . $mmTable . '.uid_foreign = ' . $foreignTable . '.uid' .
-            ' AND ' . $matchQueryPart . ')'
-        );
+            ' AND ' . $matchQueryPart . ')',
+        ];
     }
 
     /**
@@ -909,7 +909,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
             'uid', $foreignTable, $matchQueryPart . Tx_Oelib_Db::enableFields($foreignTable)
         );
         if (empty($foreignUids)) {
-            return array();
+            return [];
         }
 
         $localUids = Tx_Oelib_Db::selectColumnForMultiple(
@@ -918,10 +918,10 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
             'uid_foreign IN (' . implode(',', $foreignUids) . ')'
         );
         if (empty($localUids)) {
-            return array();
+            return [];
         }
 
-        $result = array('tx_seminars_seminars.uid IN (' . implode(',', $localUids) . ')');
+        $result = ['tx_seminars_seminars.uid IN (' . implode(',', $localUids) . ')'];
 
         return $result;
     }

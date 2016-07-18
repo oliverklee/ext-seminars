@@ -83,7 +83,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends Tx_Phpunit_TestCas
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('organizers' => 1)
+            ['organizers' => 1]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
@@ -104,7 +104,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends Tx_Phpunit_TestCas
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('organizers' => 2)
+            ['organizers' => 2]
         );
         $organizerUid1 = $this->testingFramework->createRecord(
             'tx_seminars_organizers'
@@ -136,7 +136,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends Tx_Phpunit_TestCas
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('organizers' => 1)
+            ['organizers' => 1]
         );
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers'
@@ -165,7 +165,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends Tx_Phpunit_TestCas
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('organizers' => 2)
+            ['organizers' => 2]
         );
         $organizerUid1 = $this->testingFramework->createRecord(
             'tx_seminars_organizers'

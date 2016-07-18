@@ -70,7 +70,7 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView
             return '';
         }
 
-        $allLines = array_merge(array($this->createCsvHeading()), $this->createCsvBodyLines());
+        $allLines = array_merge([$this->createCsvHeading()], $this->createCsvBodyLines());
 
         return $this->createCsvSeparatorLine() . implode(self::LINE_SEPARATOR, $allLines) . self::LINE_SEPARATOR;
     }
@@ -82,7 +82,7 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView
      */
     protected function getLocalizedCsvHeadings()
     {
-        $translations = array();
+        $translations = [];
         $translator = $this->getInitializedTranslator();
 
         foreach ($this->getFieldKeys() as $fieldName) {
@@ -104,7 +104,7 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView
         $builder->setBackEndMode();
         $builder->setSourcePages($this->getPageUid(), self::RECURSION_DEPTH);
 
-        $csvLines = array();
+        $csvLines = [];
         /** @var Tx_Seminars_OldModel_Event $event */
         foreach ($builder->build() as $event) {
             $csvLines[] = implode(self::COLUMN_SEPARATOR, $this->createCsvColumnsForEvent($event));
@@ -123,7 +123,7 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView
      */
     protected function createCsvColumnsForEvent(Tx_Seminars_OldModel_Event $event)
     {
-        $csvLines = array();
+        $csvLines = [];
 
         foreach ($this->getFieldKeys() as $key) {
             $csvLines[] = $this->escapeFieldForCsv($event->getEventData($key));

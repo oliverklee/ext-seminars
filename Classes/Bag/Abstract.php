@@ -168,13 +168,13 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
     private function createEnabledFieldsQuery(
         $showHiddenRecords = -1, $ignoreTimingOfRecords = false
     ) {
-        $ignoreColumns = array();
+        $ignoreColumns = [];
 
         if ($ignoreTimingOfRecords) {
-            $ignoreColumns = array(
+            $ignoreColumns = [
                 'starttime' => true,
-                'endtime' => true
-            );
+                'endtime' => true,
+            ];
         }
 
         $allTableNames = GeneralUtility::trimExplode(
@@ -383,7 +383,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
      */
     public function getUids()
     {
-        $uids = array();
+        $uids = [];
 
         /** @var Tx_Seminars_OldModel_Abstract $currentItem */
         foreach ($this as $currentItem) {

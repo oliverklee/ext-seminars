@@ -58,20 +58,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Test event',
-            )
+            ]
         );
 
         $this->fixture = new Tx_Seminars_FrontEnd_CategoryList(
-            array(
+            [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'pages' => $this->systemFolderPid,
                 'pidList' => $this->systemFolderPid,
                 'recursive' => 1,
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
     }
@@ -109,16 +109,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'one & category')
+            ['title' => 'one & category']
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
@@ -135,20 +135,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'first category')
+            ['title' => 'first category']
         );
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'second category')
+            ['title' => 'second category']
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'categories' => 2
-            )
+                'categories' => 2,
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid1
@@ -172,20 +172,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'category B')
+            ['title' => 'category B']
         );
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'category A')
+            ['title' => 'category A']
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'categories' => 2
-            )
+                'categories' => 2,
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid1
@@ -207,16 +207,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'one category')
+            ['title' => 'one category']
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $systemSubFolderUid,
                 'title' => 'my title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
@@ -233,16 +233,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
         $otherSystemFolderUid = $this->testingFramework->createSystemFolder();
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'one category')
+            ['title' => 'one category']
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $otherSystemFolderUid,
                 'title' => 'my title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
@@ -261,16 +261,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
         $otherSystemFolderUid = $this->testingFramework->createSystemFolder();
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'one category')
+            ['title' => 'one category']
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $otherSystemFolderUid,
                 'title' => 'my title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
@@ -286,17 +286,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'one category')
+            ['title' => 'one category']
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'categories' => 1,
-                'cancelled' => 1
-            )
+                'cancelled' => 1,
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
@@ -312,17 +312,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'one category')
+            ['title' => 'one category']
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my_title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'categories' => 1,
-                'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED
-            )
+                'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
@@ -342,17 +342,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
 
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'one category')
+            ['title' => 'one category']
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
@@ -372,17 +372,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
 
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'one category')
+            ['title' => 'one category']
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 2000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] - 1000,
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
@@ -402,16 +402,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
 
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'one category')
+            ['title' => 'one category']
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->systemFolderPid,
                 'title' => 'my title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'categories' => 1
-            )
+                'categories' => 1,
+            ]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
@@ -431,7 +431,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         self::assertEquals(
             '',
-            $this->fixture->createCategoryList(array())
+            $this->fixture->createCategoryList([])
         );
     }
 
@@ -439,12 +439,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'text');
         $singleCategory =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'test',
                     'icon' => '',
-                )
-        );
+                ],
+        ];
 
         self::assertEquals(
             'test',
@@ -456,12 +456,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'text');
         $singleCategory =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'test',
                     'icon' => 'foo.gif',
-                )
-        );
+                ],
+        ];
         $this->testingFramework->createDummyFile('foo.gif');
 
         self::assertNotContains(
@@ -477,12 +477,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'foo');
         $singleCategory =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'test & more',
                     'icon' => '',
-                )
-        );
+                ],
+        ];
 
         self::assertEquals(
             'test &amp; more',
@@ -497,12 +497,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'both');
         $singleCategory =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'test & more',
                     'icon' => '',
-                )
-            );
+                ],
+            ];
 
         self::assertContains(
             'test &amp; more',
@@ -521,12 +521,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'text');
         $singleCategory =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'test & more',
                     'icon' => '',
-                )
-            );
+                ],
+            ];
 
         self::assertSame(
             'test &amp; more',
@@ -541,12 +541,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'icon');
         $singleCategory =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'te & st',
                     'icon' => 'foo.gif',
-                )
-        );
+                ],
+        ];
         $this->testingFramework->createDummyFile('foo.gif');
 
         self::assertRegExp(
@@ -559,12 +559,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'icon');
         $singleCategory =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'test',
                     'icon' => 'foo.gif',
-                )
-        );
+                ],
+        ];
 
         $this->testingFramework->createDummyFile('foo.gif');
 
@@ -581,16 +581,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'icon');
         $multipleCategories =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'test',
                     'icon' => 'foo.gif',
-                ),
-                100 => array(
+                ],
+                100 => [
                     'title' => 'new_test',
                     'icon' => 'foo2.gif',
-                )
-        );
+                ],
+        ];
 
         $this->testingFramework->createDummyFile('foo.gif');
         $this->testingFramework->createDummyFile('foo2.gif');
@@ -605,16 +605,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'text');
         $multipleCategories =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'foo',
                     'icon' => 'foo.gif',
-                ),
-                100 => array(
+                ],
+                100 => [
                     'title' => 'bar',
                     'icon' => 'foo2.gif',
-                )
-        );
+                ],
+        ];
 
         self::assertRegExp(
             '/foo.*bar/',
@@ -628,16 +628,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
         $this->testingFramework->createDummyFile('foo.gif');
         $this->testingFramework->createDummyFile('foo2.gif');
         $multipleCategories =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'foo',
                     'icon' => 'foo.gif',
-                ),
-                100 => array(
+                ],
+                100 => [
                     'title' => 'bar',
                     'icon' => 'foo2.gif',
-                )
-        );
+                ],
+        ];
 
         self::assertNotContains(
             ',',
@@ -649,16 +649,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'icon');
         $multipleCategories =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'foo',
                     'icon' => '',
-                ),
-                100 => array(
+                ],
+                100 => [
                     'title' => 'bar',
                     'icon' => 'foo2.gif',
-                )
-        );
+                ],
+        ];
 
         self::assertRegExp(
             '/foo.*,.*bar/',
@@ -670,16 +670,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'text');
         $multipleCategories =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'foo',
                     'icon' => 'foo.gif',
-                ),
-                100 => array(
+                ],
+                100 => [
                     'title' => 'bar',
                     'icon' => 'foo2.gif',
-                )
-        );
+                ],
+        ];
 
         self::assertRegExp(
             '/foo.*,.*bar/',
@@ -693,16 +693,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
         $this->testingFramework->createDummyFile('foo.gif');
         $this->testingFramework->createDummyFile('foo2.gif');
         $multipleCategories =
-            array(
-                99 => array(
+            [
+                99 => [
                     'title' => 'foo',
                     'icon' => 'foo.gif',
-                ),
-                100 => array(
+                ],
+                100 => [
                     'title' => 'bar',
                     'icon' => 'foo2.gif',
-                )
-        );
+                ],
+        ];
 
         self::assertRegExp(
             '/foo.*,.*bar/',

@@ -64,7 +64,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_speakers', array('title' => 'John Doe')
+            'tx_seminars_speakers', ['title' => 'John Doe']
         );
 
         /** @var Tx_Seminars_Model_Speaker $model */
@@ -154,7 +154,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
     public function getOwnerWithoutOwnerReturnsNull()
     {
         self::assertNull(
-            $this->fixture->getLoadedTestingModel(array())->getOwner()
+            $this->fixture->getLoadedTestingModel([])->getOwner()
         );
     }
 
@@ -164,12 +164,12 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
         $frontEndUser = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel(array());
+            get(Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
 
         self::assertInstanceOf(
             Tx_Seminars_Model_FrontEndUser::class,
             $this->fixture->getLoadedTestingModel(
-                array('owner' => $frontEndUser->getUid())
+                ['owner' => $frontEndUser->getUid()]
             )->getOwner()
         );
     }

@@ -156,7 +156,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends Tx_Phpunit_TestCas
      */
     public function renderWithBeginDateInTwoDaysReturnsTwoDaysLeft()
     {
-        $offset = 2*86400;
+        $offset = 2 * 86400;
 
         self::assertSame(
             sprintf(

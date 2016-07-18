@@ -41,8 +41,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends Tx_Phpunit_TestCas
     private $backEndModule;
 
     /**
-    * @var string the original language of the back-end module
-    */
+     * @var string the original language of the back-end module
+     */
     private $originalLanguage;
 
     protected function setUp()
@@ -65,10 +65,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends Tx_Phpunit_TestCas
 
         $this->backEndModule = new Tx_Seminars_BackEnd_Module();
         $this->backEndModule->id = $this->dummySysFolderPid;
-        $this->backEndModule->setPageData(array(
+        $this->backEndModule->setPageData([
             'uid' => $this->dummySysFolderPid,
             'doktype' => Tx_Seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
-        ));
+        ]);
 
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
@@ -96,10 +96,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends Tx_Phpunit_TestCas
     {
         $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'hidden' => 0,
-            )
+            ]
         );
 
         self::assertContains(
@@ -115,10 +115,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends Tx_Phpunit_TestCas
     {
         $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            array(
+            [
                 'pid' => $this->dummySysFolderPid,
                 'hidden' => 1,
-            )
+            ]
         );
 
         self::assertContains(
@@ -137,10 +137,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends Tx_Phpunit_TestCas
         );
         $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            array(
+            [
                 'title' => 'Speaker in subfolder',
                 'pid' => $subfolderPid,
-            )
+            ]
         );
 
         self::assertContains(
@@ -158,11 +158,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends Tx_Phpunit_TestCas
         $newSpeakerFolder = $this->dummySysFolderPid + 1;
         $backEndGroup = Tx_Oelib_MapperRegistry::get(
             Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
-            array('tx_seminars_auxiliaries_folder' => $newSpeakerFolder)
+            ['tx_seminars_auxiliaries_folder' => $newSpeakerFolder]
         );
         $backEndUser = Tx_Oelib_MapperRegistry::get(
             Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel(
-                array('usergroup' => $backEndGroup->getUid())
+                ['usergroup' => $backEndGroup->getUid()]
         );
         Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
             $backEndUser

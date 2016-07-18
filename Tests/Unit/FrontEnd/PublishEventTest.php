@@ -88,10 +88,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends Tx_Phpunit_TestCa
      */
     public function renderForValidPublicationHashAndVisibleEventReturnsPublishFailedMessage()
     {
-        $this->fixture->init(array());
+        $this->fixture->init([]);
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('hidden' => 0, 'publication_hash' => '123456ABC')
+            ['hidden' => 0, 'publication_hash' => '123456ABC']
         );
 
         $this->fixture->piVars['hash'] = '123456ABC';
@@ -107,10 +107,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends Tx_Phpunit_TestCa
      */
     public function renderForValidPublicationHashAndHiddenEventReturnsPublishSuccessfulMessage()
     {
-        $this->fixture->init(array());
+        $this->fixture->init([]);
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('hidden' => 1, 'publication_hash' => '123456ABC')
+            ['hidden' => 1, 'publication_hash' => '123456ABC']
         );
 
         $this->fixture->piVars['hash'] = '123456ABC';
@@ -126,10 +126,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends Tx_Phpunit_TestCa
      */
     public function renderForValidPublicationHashUnhidesEventWithPublicationHash()
     {
-        $this->fixture->init(array());
+        $this->fixture->init([]);
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('hidden' => 1, 'publication_hash' => '123456ABC')
+            ['hidden' => 1, 'publication_hash' => '123456ABC']
         );
         $this->fixture->piVars['hash'] = '123456ABC';
 
@@ -147,10 +147,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends Tx_Phpunit_TestCa
      */
     public function renderForValidPublicationHashRemovesPublicationHashFromEvent()
     {
-        $this->fixture->init(array());
+        $this->fixture->init([]);
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('hidden' => 1, 'publication_hash' => '123456ABC')
+            ['hidden' => 1, 'publication_hash' => '123456ABC']
         );
         $this->fixture->piVars['hash'] = '123456ABC';
 

@@ -321,11 +321,11 @@ return [
                 'items' => [
                     [
                         \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.including_tax.including',
-                        '0'
+                        '0',
                     ],
                     [
                         \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.including_tax.excluding',
-                        '1'
+                        '1',
                     ],
                 ],
                 'size' => 1,
@@ -484,7 +484,7 @@ return [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBookingInformation, registration_queue, registered_themselves, seats, price, total_price, attendees_names, additional_persons, kids, foods, food, lodgings, accommodation, checkboxes, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelRegistrationComments, interests, expectations, background_knowledge, known_from, notes, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelPaymentInformation, datepaid, currency, including_tax, method_of_payment, account_number, account_owner, bank_code, bank_name, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBillingAddress, company, gender, name, address, zip, city, country, telephone, email'
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBillingAddress, company, gender, name, address, zip, city, country, telephone, email',
         ],
     ],
     'palettes' => [

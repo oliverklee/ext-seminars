@@ -107,7 +107,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
             );
         }
 
-        $allLines = array_merge(array($this->createCsvHeading()), $this->createCsvBodyLines());
+        $allLines = array_merge([$this->createCsvHeading()], $this->createCsvBodyLines());
 
         return $this->createCsvSeparatorLine() . implode(self::LINE_SEPARATOR, $allLines) . self::LINE_SEPARATOR;
     }
@@ -137,7 +137,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
      */
     protected function createLocalizedCsvHeadingsForOneTable(array $fieldNames, $localizationPrefix)
     {
-        $translations = array();
+        $translations = [];
         $translator = $this->getInitializedTranslator();
 
         foreach ($fieldNames as $fieldName) {
@@ -221,7 +221,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
      */
     protected function getRegistrationsCsvList(Tx_Seminars_BagBuilder_Registration $builder)
     {
-        $csvLines = array();
+        $csvLines = [];
         /** @var $bag Tx_Seminars_Bag_Registration */
         $bag = $builder->build();
 
@@ -245,7 +245,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
      */
     protected function createCsvColumnsForRegistration(Tx_Seminars_OldModel_Registration $model)
     {
-        $csvLines = array();
+        $csvLines = [];
 
         foreach ($this->getRegistrationFieldKeys() as $key) {
             $csvLines[] = $this->escapeFieldForCsv($model->getRegistrationData($key));
@@ -264,7 +264,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
      */
     protected function createCsvColumnsForFrontEndUser(Tx_Seminars_OldModel_Registration $model)
     {
-        $csvLines = array();
+        $csvLines = [];
 
         foreach ($this->getFrontEndUserFieldKeys() as $key) {
             $csvLines[] = $this->escapeFieldForCsv($model->getUserData($key));

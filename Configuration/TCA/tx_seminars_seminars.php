@@ -24,7 +24,7 @@ $tca = [
             'default' => 'tx-seminars-event-complete',
             '0' => 'tx-seminars-event-complete',
             '1' => 'tx-seminars-event-topic',
-            '2' => 'tx-seminars-event-date'
+            '2' => 'tx-seminars-event-date',
         ],
         'dividers2tabs' => true,
         'hideAtCopy' => true,

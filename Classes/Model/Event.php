@@ -1107,7 +1107,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getAvailablePrices()
     {
-        $result = array();
+        $result = [];
 
         $earlyBirdApplies = $this->earlyBirdApplies();
 
@@ -1229,7 +1229,8 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      *
      * @return \Tx_Seminars_Model_Organizer|null
      */
-    public function getFirstOrganizer() {
+    public function getFirstOrganizer()
+    {
         return $this->getOrganizers()->first();
     }
 

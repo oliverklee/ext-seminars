@@ -10,7 +10,7 @@
  * writing. "version" and "dependencies" must not be touched!
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
     'title' => 'Seminar Manager',
     'description' => 'This extension allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.',
     'category' => 'plugin',
@@ -34,26 +34,26 @@ $EM_CONF[$_EXTKEY] = array(
     'CGLcompliance_note' => '',
     'version' => '0.10.57',
     '_md5_values_when_last_written' => '',
-    'constraints' => array(
-        'depends' => array(
+    'constraints' => [
+        'depends' => [
             'php' => '5.5.0-7.0.99',
             'typo3' => '6.2.0-7.9.99',
             'static_info_tables' => '6.2.0-',
             'oelib' => '0.9.52-1.9.99',
             'mkforms' => '2.0.0-2.99.99',
-        ),
-        'conflicts' => array(
+        ],
+        'conflicts' => [
             'dbal' => '',
             'sourceopt' => '',
-        ),
-        'suggests' => array(
+        ],
+        'suggests' => [
             'onetimeaccount' => '',
             'sr_feuser_register' => '',
-        ),
-    ),
-    'suggests' => array(
-    ),
+        ],
+    ],
+    'suggests' => [
+    ],
     'autoload' => [
         'classmap' => ['Classes', 'Tests'],
     ],
-);
+];

@@ -54,7 +54,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
      * available without further database queries. It will get filled with data
      * in the constructor.
      *
-     * @var string[]|NULL
+     * @var string[]|null
      */
     private $userData = null;
 
@@ -63,28 +63,28 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
      *
      * @var int[]
      */
-    protected $lodgings = array();
+    protected $lodgings = [];
 
     /**
      * UIDs of food options associated with this record
      *
      * @var int[]
      */
-    protected $foods = array();
+    protected $foods = [];
 
     /**
      * UIDs of option checkboxes associated with this record
      *
      * @var int[]
      */
-    protected $checkboxes = array();
+    protected $checkboxes = [];
 
     /**
      * cached seminar objects with the seminar UIDs as keys and the objects as values
      *
      * @var Tx_Seminars_OldModel_Event[]
      */
-    private static $cachedSeminars = array();
+    private static $cachedSeminars = [];
 
     /**
      * The constructor.
@@ -128,7 +128,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
      */
     public static function purgeCachedSeminars()
     {
-        self::$cachedSeminars = array();
+        self::$cachedSeminars = [];
     }
 
     /**
@@ -146,7 +146,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
     {
         $this->seminar = $event;
 
-        $this->recordData = array();
+        $this->recordData = [];
 
         $this->recordData['seminar'] = $event->getUid();
         $this->recordData['user'] = $userUid;
@@ -205,15 +205,15 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
         $this->recordData['email'] = $registrationData['email'];
 
         $this->lodgings = (isset($registrationData['lodgings']) && is_array($registrationData['lodgings']))
-            ? $registrationData['lodgings'] : array();
+            ? $registrationData['lodgings'] : [];
         $this->recordData['lodgings'] = count($this->lodgings);
 
         $this->foods = (isset($registrationData['foods']) && is_array($registrationData['foods']))
-            ? $registrationData['foods'] : array();
+            ? $registrationData['foods'] : [];
         $this->recordData['foods'] = count($this->foods);
 
         $this->checkboxes = (isset($registrationData['checkboxes']) && is_array($registrationData['checkboxes']))
-            ? $registrationData['checkboxes'] : array();
+            ? $registrationData['checkboxes'] : [];
         $this->recordData['checkboxes'] = count($this->checkboxes);
 
         $this->recordData['interests'] = $registrationData['interests'];
@@ -509,7 +509,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
     public function getUserDataAsHtml($keys, AbstractPlugin $plugin)
     {
         $singleKeys = GeneralUtility::trimExplode(',', $keys, true);
-        $singleValues = array();
+        $singleValues = [];
 
         foreach ($singleKeys as $key) {
             $rawValue = $this->getUserData($key);
@@ -518,7 +518,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
             }
 
             $singleValues[$key] = ($key === 'email')
-                ? $plugin->cObj->mailto_makelinks('mailto:' . $rawValue, array()) : htmlspecialchars($rawValue);
+                ? $plugin->cObj->mailto_makelinks('mailto:' . $rawValue, []) : htmlspecialchars($rawValue);
         }
 
         // And now: Everything separated by a comma and a space!
@@ -802,7 +802,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
     public function dumpUserValues($keysList)
     {
         $keys = GeneralUtility::trimExplode(',', $keysList, true);
-        $labels = array();
+        $labels = [];
         $result = '';
 
         $maximumLabelLength = 0;
@@ -853,7 +853,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
     public function dumpAttendanceValues($keysList)
     {
         $keys = GeneralUtility::trimExplode(',', $keysList, true);
-        $labels = array();
+        $labels = [];
 
         $maximumLabelLength = 0;
         foreach ($keys as $key) {
@@ -896,8 +896,10 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
         /**
          * the keys of the corresponding fields and whether to add a LF after
          * the entry (instead of just a space)
+         *
+         * @var bool[]
          */
-        $billingAddressFields = array(
+        $billingAddressFields = [
             'gender' => false,
             'name' => true,
             'address' => true,
@@ -906,7 +908,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
             'country' => true,
             'telephone' => true,
             'email' => true,
-        );
+        ];
 
         $result = '';
 
@@ -1128,12 +1130,12 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
      */
     protected function fillEmptyDefaultFields()
     {
-        $integerDefaultFieldKeys = array(
-            'kids', 'method_of_payment', 'gender'
-        );
-        $stringDefaultFieldKeys = array(
-            'name', 'zip', 'city', 'country', 'telephone', 'email'
-        );
+        $integerDefaultFieldKeys = [
+            'kids', 'method_of_payment', 'gender',
+        ];
+        $stringDefaultFieldKeys = [
+            'name', 'zip', 'city', 'country', 'telephone', 'email',
+        ];
 
         foreach ($integerDefaultFieldKeys as $key) {
             if (!$this->hasRecordPropertyInteger($key)) {
@@ -1298,13 +1300,13 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
 
         $names = GeneralUtility::trimExplode(LF, $this->getAttendeesNames(), true);
         if ($this->hasRegisteredMySelf()) {
-            $names = array_merge(array($this->getFrontEndUser()->getName()), $names);
+            $names = array_merge([$this->getFrontEndUser()->getName()], $names);
         }
 
         if ($useHtml) {
             $result = '<ol><li>' . implode('</li><li>', $names) . '</li></ol>';
         } else {
-            $enumeratedNames = array();
+            $enumeratedNames = [];
             $attendeeCounter = 1;
             foreach ($names as $name) {
                 $enumeratedNames[] = $attendeeCounter . '. ' . $name;

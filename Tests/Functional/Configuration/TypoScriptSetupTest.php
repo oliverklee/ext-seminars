@@ -14,7 +14,6 @@ namespace OliverKlee\Seminars\Tests\Functional\Configuration;
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -54,7 +53,8 @@ class TypoScriptSetupTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function userFunctionsPointToExistingMethodInExistingClass() {
+    public function userFunctionsPointToExistingMethodInExistingClass()
+    {
         $typoScriptSetup = file_get_contents(
             ExtensionManagementUtility::extPath('seminars') . 'Configuration/TypoScript/setup.txt'
         );

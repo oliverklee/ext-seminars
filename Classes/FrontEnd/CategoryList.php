@@ -111,7 +111,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
         return $this->cObj->getTypoLink(
             $title,
             $this->getConfValueInteger('listPID'),
-            array('tx_seminars_pi1[category]' => $categoryUid)
+            ['tx_seminars_pi1[category]' => $categoryUid]
         );
     }
 
@@ -137,7 +137,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
 
         $categories
             = $this->getConfValueString('categoriesInListView', 's_listView');
-        $allCategoryLinks = array();
+        $allCategoryLinks = [];
         $categorySeparator = ($categories != 'icon') ? ', ' : ' ';
 
         foreach ($categoriesToDisplay as $uid => $value) {
@@ -184,11 +184,11 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
         }
 
         $imageWithoutClass = $this->cObj->IMAGE(
-            array(
+            [
                 'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH .
                     $iconData['icon'],
                 'titleText' => $iconData['title'],
-            )
+            ]
         );
 
         return str_replace(

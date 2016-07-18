@@ -61,7 +61,7 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(array('title' => 'I agree with the T&C.'));
+        $this->fixture->setData(['title' => 'I agree with the T&C.']);
 
         self::assertEquals(
             'I agree with the T&C.',
@@ -78,7 +78,7 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends Tx_Phpunit_TestCase
      */
     public function getDescriptionWithoutDescriptionReturnsAnEmptyString()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertEquals(
             '',
@@ -91,7 +91,7 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends Tx_Phpunit_TestCase
      */
     public function getDescriptionWithDescriptionReturnsDescription()
     {
-        $this->fixture->setData(array('description' => 'I agree with the T&C.'));
+        $this->fixture->setData(['description' => 'I agree with the T&C.']);
 
         self::assertEquals(
             'I agree with the T&C.',
@@ -117,7 +117,7 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends Tx_Phpunit_TestCase
      */
     public function hasDescriptionWithoutDescriptionReturnsFalse()
     {
-        $this->fixture->setData(array());
+        $this->fixture->setData([]);
 
         self::assertFalse(
             $this->fixture->hasDescription()

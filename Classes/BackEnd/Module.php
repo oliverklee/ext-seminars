@@ -26,7 +26,7 @@ class Tx_Seminars_BackEnd_Module extends BaseScriptClass
      *
      * @var string[]
      */
-    private $pageData = array();
+    private $pageData = [];
 
     /**
      * Frees as much memory used by this object as possible.

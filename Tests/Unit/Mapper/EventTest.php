@@ -64,7 +64,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('title' => 'Big event')
+            'tx_seminars_seminars', ['title' => 'Big event']
         );
 
         /** @var Tx_Seminars_Model_Event $model */
@@ -86,7 +86,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getTimeSlots()
+            $this->fixture->getLoadedTestingModel([])->getTimeSlots()
         );
     }
 
@@ -97,10 +97,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $timeSlotUid = $this->testingFramework->createRecord(
-            'tx_seminars_timeslots', array('seminar' => $uid)
+            'tx_seminars_timeslots', ['seminar' => $uid]
         );
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $uid, array('timeslots' => $timeSlotUid)
+            'tx_seminars_seminars', $uid, ['timeslots' => $timeSlotUid]
         );
 
         /** @var Tx_Seminars_Model_Event $model */
@@ -117,10 +117,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $timeSlotUid = $this->testingFramework->createRecord(
-            'tx_seminars_timeslots', array('seminar' => $uid)
+            'tx_seminars_timeslots', ['seminar' => $uid]
         );
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $uid, array('timeslots' => $timeSlotUid)
+            'tx_seminars_seminars', $uid, ['timeslots' => $timeSlotUid]
         );
 
         /** @var Tx_Seminars_Model_Event $model */
@@ -142,7 +142,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getPlaces()
+            $this->fixture->getLoadedTestingModel([])->getPlaces()
         );
     }
 
@@ -194,7 +194,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getLodgings()
+            $this->fixture->getLoadedTestingModel([])->getLodgings()
         );
     }
 
@@ -246,7 +246,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getFoods()
+            $this->fixture->getLoadedTestingModel([])->getFoods()
         );
     }
 
@@ -298,7 +298,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getSpeakers()
+            $this->fixture->getLoadedTestingModel([])->getSpeakers()
         );
     }
 
@@ -352,7 +352,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getPartners()
+            $this->fixture->getLoadedTestingModel([])->getPartners()
         );
     }
 
@@ -406,7 +406,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getTutors()
+            $this->fixture->getLoadedTestingModel([])->getTutors()
         );
     }
 
@@ -460,7 +460,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getLeaders()
+            $this->fixture->getLoadedTestingModel([])->getLeaders()
         );
     }
 
@@ -514,7 +514,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getOrganizers()
+            $this->fixture->getLoadedTestingModel([])->getOrganizers()
         );
     }
 
@@ -524,7 +524,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function getOrganizersWithOneOrganizerReturnsListOfOrganizers()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('organizers' => 1)
+            'tx_seminars_seminars', ['organizers' => 1]
         );
         $organizer = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
             ->getNewGhost();
@@ -543,7 +543,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function getOrganizersWithOneOrganizerReturnsOneOrganizer()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('organizers' => 1)
+            'tx_seminars_seminars', ['organizers' => 1]
         );
         $organizer = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
             ->getNewGhost();
@@ -570,7 +570,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getOrganizingPartners()
+            $this->fixture->getLoadedTestingModel([])->getOrganizingPartners()
         );
     }
 
@@ -621,7 +621,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function getOwnerWithoutOwnerReturnsNull()
     {
         self::assertNull(
-            $this->fixture->getLoadedTestingModel(array())->getOwner()
+            $this->fixture->getLoadedTestingModel([])->getOwner()
         );
     }
 
@@ -631,11 +631,11 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
         $frontEndUser = Tx_Oelib_MapperRegistry::
-            get(Tx_Oelib_Mapper_FrontEndUser::class)->getLoadedTestingModel(array());
+            get(Tx_Oelib_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
 
         self::assertInstanceOf(
             Tx_Oelib_Model_FrontEndUser::class,
-            $this->fixture->getLoadedTestingModel(array('owner_feuser' => $frontEndUser->getUid()))->getOwner()
+            $this->fixture->getLoadedTestingModel(['owner_feuser' => $frontEndUser->getUid()])->getOwner()
         );
     }
 
@@ -650,7 +650,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(array())->getEventManagers()
+            $this->fixture->getLoadedTestingModel([])->getEventManagers()
         );
     }
 
@@ -716,7 +716,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
         $publicationHash = 'blubb';
 
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('publication_hash' => $publicationHash)
+            'tx_seminars_seminars', ['publication_hash' => $publicationHash]
         );
 
         self::assertEquals(
@@ -745,7 +745,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
         $publicationHash = 'blubb';
 
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('publication_hash' => $publicationHash)
+            'tx_seminars_seminars', ['publication_hash' => $publicationHash]
         );
 
         self::assertTrue(
@@ -764,10 +764,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function getRegistrationsWithOneRegistrationReturnsOneRegistration()
     {
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('registrations' => 1)
+            'tx_seminars_seminars', ['registrations' => 1]
         );
         $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', array('seminar' => $eventUid)
+            'tx_seminars_attendances', ['seminar' => $eventUid]
         );
 
         /** @var Tx_Seminars_Model_Event $event */
@@ -842,7 +842,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function findAllByBeginDateNotFindsEventWithBeginDateSmallerThanMinimum()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('begin_date' => 41)
+            'tx_seminars_seminars', ['begin_date' => 41]
         );
 
         self::assertTrue(
@@ -856,7 +856,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function findAllByBeginDateFindsEventWithBeginDateEqualToMinimum()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('begin_date' => 42)
+            'tx_seminars_seminars', ['begin_date' => 42]
         );
 
         self::assertTrue(
@@ -870,7 +870,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function findAllByBeginDateFindsEventWithBeginDateBetweenMinimumAndMaximum()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('begin_date' => 2)
+            'tx_seminars_seminars', ['begin_date' => 2]
         );
 
         self::assertTrue(
@@ -884,7 +884,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function findAllByBeginDateFindsEventWithBeginDateEqualToMaximum()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('begin_date' => 91)
+            'tx_seminars_seminars', ['begin_date' => 91]
         );
 
         self::assertTrue(
@@ -898,7 +898,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function findAllByBeginDateNotFindsEventWithBeginDateGreaterThanMaximum()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('begin_date' => 92)
+            'tx_seminars_seminars', ['begin_date' => 92]
         );
 
         self::assertTrue(
@@ -912,7 +912,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function findAllByBeginDateCanFindEventWithZeroBeginDate()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('begin_date' => 0)
+            'tx_seminars_seminars', ['begin_date' => 0]
         );
 
         self::assertTrue(
@@ -926,10 +926,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function findAllByBeginDateCanFindTwoEvents()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('begin_date' => 42)
+            'tx_seminars_seminars', ['begin_date' => 42]
         );
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('begin_date' => 43)
+            'tx_seminars_seminars', ['begin_date' => 43]
         );
 
         self::assertEquals(
@@ -959,7 +959,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('begin_date' => $GLOBALS['SIM_ACCESS_TIME'] - 1000)
+            ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] - 1000]
         );
 
         $this->fixture->findNextUpcoming();
@@ -972,7 +972,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array('begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000)
+            ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000]
         );
 
         self::assertSame(
@@ -988,11 +988,11 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
-                array('begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 2000)
+                ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 2000]
         );
         $uid = $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
-                array('begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000)
+                ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000]
         );
 
         self::assertSame(

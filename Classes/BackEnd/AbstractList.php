@@ -54,7 +54,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
     /**
      * @var bool[] the access rights to page UIDs
      */
-    protected $accessRights = array();
+    protected $accessRights = [];
 
     /**
      * @var int the depth of the recursion for the back-end lists
@@ -276,7 +276,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
         $langCsv = $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
         $csvUrl = BackendUtility::getModuleUrl(
             self::MODULE_NAME,
-            array('id' => $pageData['uid'], 'csv' => '1', 'tx_seminars_pi2[table]' => $this->tableName)
+            ['id' => $pageData['uid'], 'csv' => '1', 'tx_seminars_pi2[table]' => $this->tableName]
         );
 
         $result = TAB . TAB .

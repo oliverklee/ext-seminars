@@ -35,7 +35,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     /**
      * @var string[] the keys of the search fields which should be displayed in the search form
      */
-    private $displayedSearchFields = array();
+    private $displayedSearchFields = [];
 
     /**
      * @var string the prefix of every subpart of the search widget
@@ -148,9 +148,9 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
             return;
         }
 
-        $options = array(
-            0 => $this->translate('label_selector_pleaseChoose')
-        ) + $options;
+        $options = [
+            0 => $this->translate('label_selector_pleaseChoose'),
+        ] + $options;
     }
 
     /**
@@ -162,7 +162,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
      */
     public static function removeDummyOptionFromFormData(array $formData)
     {
-        $cleanedFormData = array();
+        $cleanedFormData = [];
 
         foreach ($formData as $value) {
             if ($value !== 0) {
@@ -409,7 +409,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 
         $dateArrays = $this->createDateArray();
 
-        foreach (array('from', 'to') as $fromOrTo) {
+        foreach (['from', 'to'] as $fromOrTo) {
             $dropDowns = '';
             foreach ($dateArrays as $dropDownPart => $dateArray) {
                 $dropDowns .= $this->createDropDown(
@@ -481,7 +481,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
      */
     protected function getEventTypeData()
     {
-        $result = array();
+        $result = [];
 
         /** @var Tx_Seminars_OldModel_Event $event */
         foreach ($this->seminarBag as $event) {
@@ -507,7 +507,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
      */
     protected function getLanguageData()
     {
-        $result = array();
+        $result = [];
 
         /** @var Tx_Seminars_OldModel_Event $event */
         foreach ($this->seminarBag as $event) {
@@ -541,10 +541,10 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     protected function getPlaceData()
     {
         if ($this->seminarBag->isEmpty()) {
-            return array();
+            return [];
         }
 
-        $result = array();
+        $result = [];
         $this->collectPlaces();
 
         /** @var Tx_Seminars_Model_Place $place */
@@ -565,10 +565,10 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     protected function getCityData()
     {
         if ($this->seminarBag->isEmpty()) {
-            return array();
+            return [];
         }
 
-        $result = array();
+        $result = [];
         $this->collectPlaces();
 
         /** @var Tx_Seminars_Model_Place $place */
@@ -590,11 +590,11 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     protected function getCountryData()
     {
         if ($this->seminarBag->isEmpty()) {
-            return array();
+            return [];
         }
 
         /** @var string[] $result */
-        $result = array();
+        $result = [];
         $this->collectPlaces();
 
         /** @var Tx_Seminars_Model_Place $place */
@@ -620,11 +620,11 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
      */
     private function createDateArray()
     {
-        $result = array(
-            'day' => array(),
-            'month' => array(),
-            'year' => array(),
-        );
+        $result = [
+            'day' => [],
+            'month' => [],
+            'year' => [],
+        ];
 
         for ($day = 1; $day <= 31; $day++) {
             $result['day'][$day] = $day;
@@ -656,7 +656,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
      */
     private function getOrganizerData()
     {
-        $result = array();
+        $result = [];
 
         /** @var Tx_Seminars_OldModel_Event $event */
         foreach ($this->seminarBag as $event) {
@@ -685,7 +685,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
      */
     private function getCategoryData()
     {
-        $result = array();
+        $result = [];
 
         /** @var Tx_Seminars_OldModel_Event $event */
         foreach ($this->seminarBag as $event) {

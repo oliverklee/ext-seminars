@@ -31,7 +31,7 @@ class Tx_Seminars_ViewHelper_CommaSeparatedTitles
      */
     public function render(Tx_Oelib_List $list)
     {
-        $titles = array();
+        $titles = [];
 
         /** @var Tx_Seminars_Interface_Titled $element */
         foreach ($list as $element) {

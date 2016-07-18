@@ -61,7 +61,6 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements Tx_Seminars
      *
      * @param string $tableName
      *        the name of the table to check the read access for, must not be empty
-     *
      * @param int $pageUid the page to check the access for, must be >= 0
      *
      * @return bool TRUE if the user has access to the given table and page,

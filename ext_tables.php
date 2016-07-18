@@ -26,11 +26,11 @@ if (TYPO3_MODE === 'BE') {
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Seminars');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
-    array(
+    [
         \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tt_content.list_type_pi1',
         $_EXTKEY . '_pi1',
         'EXT:seminars/ext_icon.gif',
-    ),
+    ],
     'list_type'
 );
 

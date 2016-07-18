@@ -60,16 +60,16 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends Tx_Php
         $configurationRegistry = Tx_Oelib_ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin', new Tx_Oelib_Configuration());
         $this->configuration = new Tx_Oelib_Configuration();
-        $this->configuration->setData(array('charsetForCsv' => 'utf-8'));
+        $this->configuration->setData(['charsetForCsv' => 'utf-8']);
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
         $this->pageUid = $this->testingFramework->createSystemFolder();
         $this->eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            array(
+            [
                 'pid' => $this->pageUid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
-            )
+            ]
         );
 
         $this->subject = new Tx_Seminars_Csv_DownloadRegistrationListView();
@@ -105,11 +105,11 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends Tx_Php
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
-            )
+            ]
         );
 
         self::assertContains(
@@ -131,13 +131,13 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends Tx_Php
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array('first_name' => $firstName, 'last_name' => $lastName)
+                    '', ['first_name' => $firstName, 'last_name' => $lastName]
                 ),
-            )
+            ]
         );
 
         self::assertContains(
@@ -159,13 +159,13 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends Tx_Php
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', array('first_name' => $firstName, 'last_name' => $lastName)
+                    '', ['first_name' => $firstName, 'last_name' => $lastName]
                 ),
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -187,13 +187,13 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends Tx_Php
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'known_from' => $knownFrom,
                 'notes' => $notes,
-            )
+            ]
         );
 
         self::assertContains(
@@ -215,13 +215,13 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends Tx_Php
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'known_from' => $knownFrom,
                 'notes' => $notes,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -243,12 +243,12 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends Tx_Php
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'registration_queue' => true,
-            )
+            ]
         );
 
         self::assertNotContains(
@@ -270,12 +270,12 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends Tx_Php
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array(
+            [
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
                 'registration_queue' => true,
-            )
+            ]
         );
 
         self::assertContains(

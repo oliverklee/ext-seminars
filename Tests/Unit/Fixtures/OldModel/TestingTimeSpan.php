@@ -22,11 +22,11 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan extends Tx_
     /** string with the name of the SQL table this class corresponds to */
     public $tableName = 'tx_seminars_unit_testing';
     /** associative array with the values from/for the DB */
-    public $recordData = array(
+    public $recordData = [
         'begin_date' => 0,
         'end_date' => 0,
-        'room' => ''
-    );
+        'room' => '',
+    ];
 
     /**
      * The constructor.

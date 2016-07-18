@@ -103,7 +103,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
     public function main()
     {
         try {
-            $this->init(array());
+            $this->init([]);
 
             switch ($this->piVars['table']) {
                 case 'tx_seminars_seminars':

@@ -33,8 +33,8 @@ class Tx_Seminars_Mapper_Speaker extends Tx_Oelib_DataMapper
     /**
      * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
      */
-    protected $relations = array(
+    protected $relations = [
         'skills' => Tx_Seminars_Mapper_Skill::class,
         'owner' => Tx_Seminars_Mapper_FrontEndUser::class,
-    );
+    ];
 }

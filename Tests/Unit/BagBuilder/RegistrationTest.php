@@ -58,11 +58,11 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('title' => 'Title 2', 'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY))
+            ['title' => 'Title 2', 'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY)]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('title' => 'Title 1', 'crdate' => $GLOBALS['SIM_EXEC_TIME'])
+            ['title' => 'Title 1', 'crdate' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
         $registrationBag = $this->fixture->build();
@@ -88,11 +88,11 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('title' => 'Attendance 1', 'seminar' => $eventUid1)
+            ['title' => 'Attendance 1', 'seminar' => $eventUid1]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('title' => 'Attendance 2', 'seminar' => $eventUid1)
+            ['title' => 'Attendance 2', 'seminar' => $eventUid1]
         );
         $registrationBag = $this->fixture->build();
 
@@ -133,7 +133,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('title' => 'Attendance 1', 'seminar' => $eventUid1)
+            ['title' => 'Attendance 1', 'seminar' => $eventUid1]
         );
         $this->fixture->limitToEvent($eventUid1);
         $registrationBag = $this->fixture->build();
@@ -154,7 +154,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('title' => 'Attendance 2', 'seminar' => $eventUid2)
+            ['title' => 'Attendance 2', 'seminar' => $eventUid2]
         );
         $this->fixture->limitToEvent($eventUid1);
         $registrationBag = $this->fixture->build();
@@ -172,7 +172,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('title' => 'Attendance 2', 'datepaid' => $GLOBALS['SIM_EXEC_TIME'])
+            ['title' => 'Attendance 2', 'datepaid' => $GLOBALS['SIM_EXEC_TIME']]
         );
         $this->fixture->limitToPaid();
         $registrationBag = $this->fixture->build();
@@ -186,7 +186,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('title' => 'Attendance 1', 'datepaid' => 0)
+            ['title' => 'Attendance 1', 'datepaid' => 0]
         );
         $this->fixture->limitToPaid();
         $registrationBag = $this->fixture->build();
@@ -204,7 +204,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('datepaid' => 0)
+            ['datepaid' => 0]
         );
         $this->fixture->limitToUnpaid();
         $registrationBag = $this->fixture->build();
@@ -218,7 +218,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('datepaid' => $GLOBALS['SIM_EXEC_TIME'])
+            ['datepaid' => $GLOBALS['SIM_EXEC_TIME']]
         );
         $this->fixture->limitToUnpaid();
         $registrationBag = $this->fixture->build();
@@ -236,7 +236,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('datepaid' => 0)
+            ['datepaid' => 0]
         );
         $this->fixture->limitToPaid();
         $this->fixture->removePaymentLimitation();
@@ -251,7 +251,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('datepaid' => $GLOBALS['SIM_EXEC_TIME'])
+            ['datepaid' => $GLOBALS['SIM_EXEC_TIME']]
         );
         $this->fixture->limitToUnpaid();
         $this->fixture->removePaymentLimitation();
@@ -270,7 +270,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('registration_queue' => 1)
+            ['registration_queue' => 1]
         );
         $this->fixture->limitToOnQueue();
         $registrationBag = $this->fixture->build();
@@ -284,7 +284,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('registration_queue' => 0)
+            ['registration_queue' => 0]
         );
         $this->fixture->limitToOnQueue();
         $registrationBag = $this->fixture->build();
@@ -302,7 +302,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('registration_queue' => 0)
+            ['registration_queue' => 0]
         );
         $this->fixture->limitToRegular();
         $registrationBag = $this->fixture->build();
@@ -316,7 +316,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('registration_queue' => 1)
+            ['registration_queue' => 1]
         );
         $this->fixture->limitToRegular();
         $registrationBag = $this->fixture->build();
@@ -334,7 +334,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('registration_queue' => 0)
+            ['registration_queue' => 0]
         );
         $this->fixture->limitToOnQueue();
         $this->fixture->removeQueueLimitation();
@@ -349,7 +349,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('registration_queue' => 1)
+            ['registration_queue' => 1]
         );
         $this->fixture->limitToRegular();
         $this->fixture->removeQueueLimitation();
@@ -378,7 +378,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('seats' => 2)
+            ['seats' => 2]
         );
         $this->fixture->limitToSeatsAtMost(2);
         $registrationBag = $this->fixture->build();
@@ -393,7 +393,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('seats' => 1)
+            ['seats' => 1]
         );
         $this->fixture->limitToSeatsAtMost(2);
         $registrationBag = $this->fixture->build();
@@ -408,7 +408,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('seats' => 2)
+            ['seats' => 2]
         );
         $this->fixture->limitToSeatsAtMost(1);
         $registrationBag = $this->fixture->build();
@@ -422,7 +422,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('seats' => 2)
+            ['seats' => 2]
         );
         $this->fixture->limitToSeatsAtMost(1);
         $this->fixture->limitToSeatsAtMost(0);
@@ -448,7 +448,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         );
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('seminar' => $eventUid, 'user' => $feUserUid)
+            ['seminar' => $eventUid, 'user' => $feUserUid]
         );
 
         /** @var Tx_Seminars_Model_FrontEndUser $user */
@@ -472,10 +472,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         );
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('seminar' => $eventUid, 'additional_persons' => 1)
+            ['seminar' => $eventUid, 'additional_persons' => 1]
         );
         $feUserUid = $this->testingFramework->createFrontEndUser(
-            '', array('tx_seminars_registration' => $registrationUid)
+            '', ['tx_seminars_registration' => $registrationUid]
         );
 
         /** @var Tx_Seminars_Model_FrontEndUser $user */
@@ -518,7 +518,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('seminar' => $eventUid, 'user' => $feUserUid2)
+            ['seminar' => $eventUid, 'user' => $feUserUid2]
         );
 
         /** @var Tx_Seminars_Model_FrontEndUser $user */
@@ -542,7 +542,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('seminar' => $eventUid, 'user' => $feUserUid2)
+            ['seminar' => $eventUid, 'user' => $feUserUid2]
         );
 
         /** @var Tx_Seminars_Model_FrontEndUser $user */
@@ -564,16 +564,16 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     public function testSetOrderByEventColumnCanSortAscendingByEventTitle()
     {
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('title' => 'test title 1')
+            'tx_seminars_seminars', ['title' => 'test title 1']
         );
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('title' => 'test title 2')
+            'tx_seminars_seminars', ['title' => 'test title 2']
         );
         $registrationUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', array('seminar' => $eventUid1)
+            'tx_seminars_attendances', ['seminar' => $eventUid1]
         );
         $registrationUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', array('seminar' => $eventUid2)
+            'tx_seminars_attendances', ['seminar' => $eventUid2]
         );
 
         $this->fixture->setOrderByEventColumn(
@@ -594,16 +594,16 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     public function testSetOrderByEventColumnCanSortDescendingByEventTitle()
     {
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('title' => 'test title 1')
+            'tx_seminars_seminars', ['title' => 'test title 1']
         );
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', array('title' => 'test title 2')
+            'tx_seminars_seminars', ['title' => 'test title 2']
         );
         $registrationUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', array('seminar' => $eventUid1)
+            'tx_seminars_attendances', ['seminar' => $eventUid1]
         );
         $registrationUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', array('seminar' => $eventUid2)
+            'tx_seminars_attendances', ['seminar' => $eventUid2]
         );
 
         $this->fixture->setOrderByEventColumn(
@@ -629,7 +629,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('user' => $this->testingFramework->createFrontEndUser())
+            ['user' => $this->testingFramework->createFrontEndUser()]
         );
         $this->fixture->limitToExistingUsers();
         $bag = $this->fixture->build();
@@ -644,11 +644,11 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         $feUserUid = $this->testingFramework->createFrontEndUser();
 
         $this->testingFramework->changeRecord(
-            'fe_users', $feUserUid, array('deleted' => 1)
+            'fe_users', $feUserUid, ['deleted' => 1]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            array('user' => $feUserUid)
+            ['user' => $feUserUid]
         );
         $this->fixture->limitToExistingUsers();
         $bag = $this->fixture->build();

@@ -40,7 +40,7 @@ class Tx_Seminars_Tests_Unit_OldModel_CategoryTest extends Tx_Phpunit_TestCase
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $this->fixtureUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            array('title' => 'Test category')
+            ['title' => 'Test category']
         );
     }
 
@@ -115,10 +115,10 @@ class Tx_Seminars_Tests_Unit_OldModel_CategoryTest extends Tx_Phpunit_TestCase
         $this->fixture = new Tx_Seminars_OldModel_Category(
             $this->testingFramework->createRecord(
                 'tx_seminars_categories',
-                array(
+                [
                     'title' => 'Test category',
                     'icon' => 'foo.gif',
-                )
+                ]
             )
         );
 

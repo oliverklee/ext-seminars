@@ -46,7 +46,7 @@ class Tx_Seminars_FrontEnd_PublishEvent extends Tx_Oelib_TemplateHelper
      */
     public function render()
     {
-        $this->init(array());
+        $this->init([]);
 
         if (!isset($this->piVars['hash']) || ($this->piVars['hash'] == '')) {
             return $this->translate('message_publishingFailed');

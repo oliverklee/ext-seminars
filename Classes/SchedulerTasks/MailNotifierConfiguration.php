@@ -111,7 +111,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
         $pageUid = !empty($submittedData['seminars_configurationPageUid'])
             ? (int)$submittedData['seminars_configurationPageUid'] : 0;
 
-        /** @var MailNotifier$task */
+        /** @var MailNotifier $task */
         $task->setConfigurationPageUid($pageUid);
     }
 }

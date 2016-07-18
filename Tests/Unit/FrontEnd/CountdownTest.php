@@ -53,13 +53,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        $this->mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, array('findNextUpcoming'));
+        $this->mapper = $this->getMock(Tx_Seminars_Mapper_Event::class, ['findNextUpcoming']);
 
         $this->fixture = new Tx_Seminars_FrontEnd_Countdown(
-            array(
+            [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
     }
@@ -120,18 +120,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase
     public function renderCallsRenderMethodOfCountdownViewHelperWithNextUpcomingEventsBeginDateAsUnixTimeStamp()
     {
         $this->fixture->injectEventMapper($this->mapper);
-        $event = $this->mapper->getLoadedTestingModel(array(
+        $event = $this->mapper->getLoadedTestingModel([
             'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
             'pid' => 0,
             'title' => 'Test event',
             'begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000,
-        ));
+        ]);
 
         $this->mapper->expects(self::once())
             ->method('findNextUpcoming')
             ->will(self::returnValue($event));
 
-        $this->viewHelper = $this->getMock(Tx_Seminars_ViewHelper_Countdown::class, array('render'));
+        $this->viewHelper = $this->getMock(Tx_Seminars_ViewHelper_Countdown::class, ['render']);
         $this->viewHelper->expects(self::once())
             ->method('render')
             ->with(self::equalTo($event->getBeginDateAsUnixTimeStamp()));

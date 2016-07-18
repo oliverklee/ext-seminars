@@ -29,9 +29,9 @@ class Tx_Seminars_Mapper_FrontEndUserGroup extends Tx_Oelib_Mapper_FrontEndUserG
     /**
      * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
      */
-    protected $relations = array(
+    protected $relations = [
         'tx_seminars_reviewer' => Tx_Oelib_Mapper_BackEndUser::class,
         'tx_seminars_default_categories' => Tx_Seminars_Mapper_Category::class,
         'tx_seminars_default_organizer' => Tx_Seminars_Mapper_Organizer::class,
-    );
+    ];
 }

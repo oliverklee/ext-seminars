@@ -65,18 +65,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestC
         $this->eventDate = 978303600;
 
         $this->mapper = new Tx_Seminars_Mapper_Event();
-        $event = $this->mapper->getLoadedTestingModel(array(
+        $event = $this->mapper->getLoadedTestingModel([
             'pid' => 0,
             'title' => 'Test event',
             'begin_date' => $this->eventDate,
-        ));
+        ]);
         $this->eventId = $event->getUid();
 
         $this->fixture = new Tx_Seminars_FrontEnd_EventHeadline(
-            array(
+            [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-            ),
+            ],
             $GLOBALS['TSFE']->cObj
         );
         $this->fixture->injectEventMapper($this->mapper);
