@@ -1,5 +1,7 @@
 1.0.1 - not released yet
 
+Bug fixes:
+- Release with the Tests/ folder do keep the autoloader from crashing
 
 1.0.0 - released 2016-07-19
 
