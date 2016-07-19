@@ -1,4 +1,4 @@
-1.0.0 - currently working on
+1.0.0 - released 2016-07-19
 
 Features:
 - [#5706] Use new IconFactory for TYPO3 CMS >= 7.6

@@ -32,14 +32,14 @@ $EM_CONF[$_EXTKEY] = [
     'author_company' => 'oliverklee.de',
     'CGLcompliance' => '',
     'CGLcompliance_note' => '',
-    'version' => '0.10.57',
+    'version' => '1.0.0',
     '_md5_values_when_last_written' => '',
     'constraints' => [
         'depends' => [
             'php' => '5.5.0-7.0.99',
             'typo3' => '6.2.0-7.9.99',
             'static_info_tables' => '6.2.0-',
-            'oelib' => '0.9.52-1.9.99',
+            'oelib' => '1.0.0-1.9.99',
             'mkforms' => '2.0.0-2.99.99',
         ],
         'conflicts' => [
@@ -50,8 +50,6 @@ $EM_CONF[$_EXTKEY] = [
             'onetimeaccount' => '',
             'sr_feuser_register' => '',
         ],
-    ],
-    'suggests' => [
     ],
     'autoload' => [
         'classmap' => ['Classes', 'Tests'],

@@ -1,7 +1,7 @@
 {
   "name": "oliverklee/seminars",
   "type": "typo3-cms-extension",
-  "version": "0.10.57",
+  "version": "1.0.0",
   "description": "This extension allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.",
   "keywords": ["seminars", "workshops", "event", "registration", "education"],
   "homepage": "https://www.oliverklee.de",
@@ -24,7 +24,7 @@
     "php": ">=5.5.0,<8.0",
     "typo3/cms-core": ">=6.2.0,<8.0",
     "sjbr/static-info-tables": ">=6.2.0",
-    "oliverklee/oelib": ">=0.9.52",
+    "oliverklee/oelib": ">=1.0.0",
     "mkforms": "~2.0"
   },
   "require-dev": {
