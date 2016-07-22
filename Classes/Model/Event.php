@@ -11,11 +11,11 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents an event.
- *
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
@@ -69,7 +69,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function isEventDate()
     {
-        return ($this->getAsInteger('object_type') == self::TYPE_DATE);
+        return $this->getAsInteger('object_type') === self::TYPE_DATE && $this->getAsModel('topic') !== null;
     }
 
     /**

@@ -15,7 +15,6 @@
 /**
  * Test case.
  *
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
@@ -112,16 +111,33 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function isEventDateForDateRecordReturnsTrue()
+    public function isEventDateForDateRecordWithTopicReturnsTrue()
     {
-        $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_DATE]
-        );
+        $this->fixture->setData([
+            'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+            'topic' => new \Tx_Seminars_Model_Event(),
+        ]);
 
         self::assertTrue(
             $this->fixture->isEventDate()
         );
     }
+
+    /**
+     * @test
+     */
+    public function isEventDateForDateRecordWithoutTopicReturnsFalse()
+    {
+        $this->fixture->setData([
+            'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+            'topic' => null,
+        ]);
+
+        self::assertFalse(
+            $this->fixture->isEventDate()
+        );
+    }
+
 
     /////////////////////////////////////
     // Tests regarding the record type.

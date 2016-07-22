@@ -1,7 +1,14 @@
-1.0.1 - not released yet
+1.0.2 - not released yet
+
+Bug fixes:
+- [#5746] Fix crash in FE for invalid date record
+
+
+1.0.1 - released 2016-07-19
 
 Bug fixes:
 - Release with the Tests/ folder do keep the autoloader from crashing
+
 
 1.0.0 - released 2016-07-19
 
