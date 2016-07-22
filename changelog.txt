@@ -1,5 +1,8 @@
 2.0.0 - not released yet
 
+Bug fixes:
+- [#5746] Fix crash in FE for invalid date record
+
 
 1.0.0 - released 2016-07-19
 
