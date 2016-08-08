@@ -1,6 +1,7 @@
 1.0.2 - not released yet
 
 Bug fixes:
+- [#5751] Exception in ListView once a Registration exists
 - [#5746] Fix crash in FE for invalid date record
 
 Cleanup:

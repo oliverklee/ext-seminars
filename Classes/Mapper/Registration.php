@@ -15,7 +15,6 @@
 /**
  * This class represents a mapper for registrations.
  *
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Mapper_Registration extends Tx_Oelib_DataMapper
@@ -35,7 +34,7 @@ class Tx_Seminars_Mapper_Registration extends Tx_Oelib_DataMapper
      */
     protected $relations = [
         'seminar' => Tx_Seminars_Mapper_Event::class,
-        'user' => 'tx_seminars_Mapper_FrontEndUser',
+        'user' => Tx_Seminars_Mapper_FrontEndUser::class,
         'currency' => Tx_Oelib_Mapper_Currency::class,
         'method_of_payment' => Tx_Seminars_Mapper_PaymentMethod::class,
         'lodgings' => Tx_Seminars_Mapper_Lodging::class,
