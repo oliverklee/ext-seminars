@@ -3,6 +3,9 @@
 Bug fixes:
 - [#5746] Fix crash in FE for invalid date record
 
+Cleanup:
+- [#5754] Improve unit test getFrontEndUserWithFrontEndUserReturnsFrontEndUserInstance
+
 
 1.0.0 - released 2016-07-19
 

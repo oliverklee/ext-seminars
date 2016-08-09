@@ -115,13 +115,13 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getFrontEndUserWithFrontEndUserReturnsFrontEndUserInstance()
+    public function getFrontEndUserWithFrontEndUserReturnsSameFrontEndUser()
     {
         $frontEndUser = Tx_Oelib_MapperRegistry::
             get(Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
 
-        self::assertInstanceOf(
-            Tx_Seminars_Model_FrontEndUser::class,
+        self::assertSame(
+            $frontEndUser,
             $this->fixture->getLoadedTestingModel(
                 ['user' => $frontEndUser->getUid()]
             )->getFrontEndUser()
