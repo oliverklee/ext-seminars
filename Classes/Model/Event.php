@@ -63,7 +63,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     }
 
     /**
-     * Returns whether this event is an event date.
+     * Returns whether this event is a valid event date (i.e., a date with an associated topic).
      *
      * @return bool TRUE if this event is an event date, FALSE otherwise
      */
@@ -91,8 +91,9 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      *
      * This method may only be called for date records.
      *
-     * @return Tx_Seminars_Model_Event our topic, will be NULL if this event has
-     *                                 no topic
+     * @return Tx_Seminars_Model_Event our topic
+     *
+     * @throws \BadMethodCallException if this event is no (valid) date
      */
     public function getTopic()
     {

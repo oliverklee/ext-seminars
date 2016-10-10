@@ -48,14 +48,16 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
 
     /**
      * @test
+     * @expectedException \BadMethodCallException
      */
-    public function getTopicWithoutTopicReturnsNull()
+    public function getTopicWithoutTopicThrowsException()
     {
-        self::assertNull(
-            $this->fixture->getLoadedTestingModel(
-                ['object_type' => Tx_Seminars_Model_Event::TYPE_DATE]
-            )->getTopic()
+        /** @var \Tx_Seminars_Model_Event $model */
+        $model = $this->fixture->getLoadedTestingModel(
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
         );
+
+        $model->getTopic();
     }
 
     /**
@@ -65,13 +67,14 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
     {
         $topic = $this->fixture->getNewGhost();
 
-        self::assertTrue(
+        self::assertInstanceOf(
+            \Tx_Seminars_Model_Event::class,
             $this->fixture->getLoadedTestingModel(
                 [
                     'topic' => $topic->getUid(),
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 ]
-            )->getTopic() instanceof Tx_Seminars_Model_Event
+            )->getTopic()
         );
     }
 
