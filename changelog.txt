@@ -1,6 +1,7 @@
 2.0.0 - not released yet
 
 Bug fixes:
+- [#5755] Test failure in EventMapper test
 - [#5751] Exception in ListView once a Registration exists
 - [#5746] Fix crash in FE for invalid date record
 
