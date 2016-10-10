@@ -146,7 +146,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function setAction($action)
     {
-        $this->setFormConfiguration($action);
+        $this->initializeAction($action);
     }
 
     /**
@@ -221,11 +221,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      *
      * @return void
      */
-    public function setFormConfiguration($action = 'register')
+    protected function initializeAction($action = 'register')
     {
         switch ($action) {
             case 'unregister':
-                $formConfiguration = $this->conf['form.']['unregistration.'];
+                $formConfiguration = (array) $this->conf['form.']['unregistration.'];
                 break;
             case 'register':
                 // The fall-through is intended.
@@ -240,13 +240,13 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
                 // zero. It is only the second page, that can process the
                 // registration.
                 if (($this->currentPageNumber == 1) || ($this->currentPageNumber == 2)) {
-                    $formConfiguration = $this->conf['form.']['registration.']['step2.'];
+                    $formConfiguration = (array) $this->conf['form.']['registration.']['step2.'];
                 } else {
-                    $formConfiguration = $this->conf['form.']['registration.']['step1.'];
+                    $formConfiguration = (array) $this->conf['form.']['registration.']['step1.'];
                 }
         }
 
-        parent::setFormConfiguration((array) $formConfiguration);
+        $this->setFormConfiguration($formConfiguration);
     }
 
     /**
@@ -261,7 +261,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         // the previous rendering still is necessary for processing the data.
         if ($this->currentPageNumber > 0) {
             $this->discardRenderedForm();
-            $this->setFormConfiguration();
+            $this->initializeAction('register');
             // This will produce a new form to which no data can be provided.
             $rawForm = $this->makeFormCreator()->render();
         }

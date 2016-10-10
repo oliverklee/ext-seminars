@@ -6,6 +6,7 @@ Bug fixes:
 - [#5746] Fix crash in FE for invalid date record
 
 Cleanup:
+- [#5770] Rename RegistrationForm::setFormConfiguration
 - [#5754] Improve unit test getFrontEndUserWithFrontEndUserReturnsFrontEndUserInstance
 
 
