@@ -26,7 +26,7 @@ Am besten führen Sie die Aktualisierung zu einem Zeitpunkt durch, zu
 dem keine neuen Anmeldungen zu erwarten sind, da während der
 Aktualisierung Warnungen auf den Seiten zu sehen sein können.
 
-#. Stellen Sie sicher, dass Sie mindestens PHP 5.5 benutzen.
+#. Stellen Sie sicher, dass Sie PHP 5.5 oder 5.6 benutzen.
 
 #. Stellen Sie sicher, dass Sie mindestens TYPO3 6.2.0 benutzen.
 
