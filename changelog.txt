@@ -5,6 +5,9 @@ Bug fixes:
 - [#5751] Exception in ListView once a Registration exists
 - [#5746] Fix crash in FE for invalid date record
 
+Changes:
+- [#5769] Mark the extension as incompatible with PHP 7
+
 Cleanup:
 - [#5770] Rename RegistrationForm::setFormConfiguration
 - [#5754] Improve unit test getFrontEndUserWithFrontEndUserReturnsFrontEndUserInstance
