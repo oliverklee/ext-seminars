@@ -1,4 +1,4 @@
-1.0.2 - not released yet
+1.0.2 - released 2016-10-10
 
 Bug fixes:
 - [#5757] Fix the version number in the ReST configuration
