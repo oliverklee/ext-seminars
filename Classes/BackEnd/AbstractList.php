@@ -163,7 +163,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
      */
     public function getNewIcon($pid)
     {
-        global $BACK_PATH, $LANG, $BE_USER;
+        global $LANG, $BE_USER;
 
         $result = '';
         $newRecordPid = $this->getNewRecordPid();
@@ -193,13 +193,14 @@ abstract class Tx_Seminars_BackEnd_AbstractList
                 );
             }
             $params .= ']=new';
-            $editOnClick = $this->editNewUrl($params, $BACK_PATH);
+            $editOnClick = BackendUtility::editOnClick($params, '', '');
+
             $langNew = $LANG->getLL('newRecordGeneral');
 
             $result = TAB . TAB .
                 '<div id="typo3-newRecordLink">' . LF .
                 TAB . TAB . TAB .
-                '<a class="btn btn-default" href="' . htmlspecialchars($editOnClick) . '">' . LF .
+                '<a class="btn btn-default" href="#"  onclick="' . htmlspecialchars($editOnClick) . '">' . LF .
                 TAB . TAB . TAB . TAB .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/New.gif"' .
                 // We use an empty alt attribute as we already have a textual
@@ -245,21 +246,6 @@ abstract class Tx_Seminars_BackEnd_AbstractList
         $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
         $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
         $defaultFlashMessageQueue->enqueue($flashMessage);
-    }
-
-    /**
-     * Returns the url for the "create new record" link and the "edit record" link.
-     *
-     * @param string $params the parameters for TCE
-     * @param string $backPath the back path to the /typo3 directory
-     *
-     * @return string the URL to return
-     */
-    protected function editNewUrl($params, $backPath = '')
-    {
-        $returnUrl = 'returnUrl=' . rawurlencode(GeneralUtility::getIndpEnv('REQUEST_URI'));
-
-        return $backPath . 'alt_doc.php?' . $returnUrl . $params;
     }
 
     /**
