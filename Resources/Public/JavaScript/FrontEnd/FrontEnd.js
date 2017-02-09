@@ -182,7 +182,7 @@ TYPO3.seminars.getNumberOfNeededNameFields = function () {
     var myselfSelector = jQuery('#tx_seminars_pi1_registration_editor__registered_themselves');
     var selfSeat;
     if (myselfSelector.length > 0) {
-        selfSeat = parseInt(myselfSelector[0].value);
+        selfSeat = parseInt(myselfSelector.attr('value'));
     } else {
         selfSeat = 1;
     }
