@@ -858,6 +858,9 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
         /** @var $registration Tx_Seminars_Model_Registration */
         $registration = $mapper->find($oldRegistration->getUid());
+
+        $this->addCalendarAttachment($eMailNotification, $registration);
+
         foreach ($this->getHooks() as $hook) {
             if (method_exists($hook, 'modifyThankYouEmail')) {
                 $hook->modifyThankYouEmail($eMailNotification, $registration);
@@ -867,6 +870,57 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
         /** @var Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
         $mailerFactory->getMailer()->send($eMailNotification);
+    }
+
+    /**
+     * Adds an iCalendar attachment with the event's most important data to $email.
+     *
+     * @param \Tx_Oelib_Mail $email
+     * @param \Tx_Seminars_Model_Registration $registration
+     *
+     * @return void
+     */
+    private function addCalendarAttachment(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Registration $registration)
+    {
+        $event = $registration->getEvent();
+
+        /** @var \Tx_Oelib_Attachment $calendarEntry */
+        $calendarEntry = GeneralUtility::makeInstance(\Tx_Oelib_Attachment::class);
+        $calendarEntry->setContentType('text/calendar; charset="utf-8"; component="vevent"; method="publish"');
+        $calendarEntry->setFileName('event.ics');
+        $content = 'BEGIN:VCALENDAR' . CRLF .
+            'VERSION:2.0' . CRLF .
+            'PRODID:TYPO3 CMS' . CRLF .
+            'METHOD:PUBLISH' . CRLF .
+            'BEGIN:VEVENT' . CRLF .
+            'UID:' . uniqid('event/' . $event->getUid() . '/', true). CRLF .
+            'DTSTAMP:' . strftime('%Y%m%dT%H%M%S', $GLOBALS['SIM_EXEC_TIME']). CRLF .
+            'SUMMARY:' . $event->getTitle() . CRLF .
+            'DESCRIPTION:' . $event->getSubtitle() . CRLF .
+            'DTSTART:' . strftime('%Y%m%dT%H%M%S', $event->getBeginDateAsUnixTimeStamp()) . CRLF;
+
+        if ($event->hasEndDate()) {
+            $content .= 'DTEND:' . strftime('%Y%m%dT%H%M%S', $event->getEndDateAsUnixTimeStamp()) . CRLF;
+        }
+        if (!$event->getPlaces()->isEmpty()) {
+            /** @var \Tx_Seminars_Model_Place $firstPlace */
+            $firstPlace = $event->getPlaces()->first();
+            $normalizedPlaceTitle = str_replace(
+                [CRLF, LF],
+                ', ',
+                trim($firstPlace->getTitle() . ', ' . $firstPlace->getAddress())
+            );
+            $content .= 'LOCATION:' . $normalizedPlaceTitle . CRLF;
+        }
+
+        $organizer = $event->getFirstOrganizer();
+        $content .= 'ORGANIZER;CN="' . addcslashes($organizer->getTitle(), '"') .
+            '":mailto:' . $organizer->getEMailAddress() . CRLF;
+        $content .= 'END:VEVENT' . CRLF .
+            'END:VCALENDAR';
+        $calendarEntry->setContent($content);
+
+        $email->addAttachment($calendarEntry);
     }
 
     /**

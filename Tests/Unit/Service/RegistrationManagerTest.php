@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
@@ -140,6 +141,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
             'tx_seminars_seminars',
             [
                 'title' => 'test event',
+                'subtitle' => 'juggling with burning chainsaws',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
                 'attendees_min' => 1,
@@ -303,13 +305,36 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
      *
      * @return string
      */
-    protected function getEmailHtmlPart()
+    private function getEmailHtmlPart()
     {
-        $children = $this->mailer->getFirstSentEmail()->getChildren();
-        /** @var Swift_Mime_MimeEntity $firstChild */
-        $firstChild = $children[0];
+        $htmlMimeParts = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/html');
 
-        return $firstChild->getBody();
+        return $htmlMimeParts[0]->getBody();
+    }
+
+    /**
+     * Returns the attachments of $email that have a content type that contains $contentType.
+     *
+     * Example: a $contentType of "text/calendar" will also find attachments that have 'text/calendar; charset="utf-8"'
+     * as the content type.
+     *
+     * @param MailMessage $email
+     * @param string $contentType
+     *
+     * @return \Swift_Mime_MimeEntity[]
+     */
+    private function filterEmailAttachmentsByTitle(MailMessage $email, $contentType)
+    {
+        $matches = [];
+
+        /** @var \Swift_Mime_MimeEntity $attachment */
+        foreach ($email->getChildren() as $attachment) {
+            if (strpos($attachment->getContentType(), $contentType) !== false) {
+                $matches[] = $attachment;
+            }
+        }
+
+        return $matches;
     }
 
     /*
@@ -2448,7 +2473,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
         self::assertSame(
             [],
-            $this->mailer->getFirstSentEmail()->getChildren()
+            $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/html')
         );
     }
 
@@ -2547,7 +2572,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
         self::assertSame(
             [],
-            $this->mailer->getFirstSentEmail()->getChildren()
+            $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/html')
         );
     }
 
@@ -3383,6 +3408,388 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         self::assertNotContains('_', $string);
         self::assertNotContains('salutation', $string);
         self::assertNotContains('formal', $string);
+    }
+
+    /*
+     * Tests concerning the iCalendar attachment
+     */
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasUtf8CalendarAttachment()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        self::assertContains('text/calendar', $attachment->getContentType());
+        self::assertContains('charset="utf-8"', $attachment->getContentType());
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithWindowsLineEndings()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        self::assertContains(CRLF, $content);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithStartAndEndMarkers()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithPublishMethod()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        self::assertContains('method="publish"', $attachment->getContentType());
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithEvent()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        self::assertContains('component="vevent"', $attachment->getContentType());
+    }
+
+    /**
+     * @return string[][]
+     */
+    public function iCalDataProvider()
+    {
+        return [
+            'calendar begin' => ['BEGIN:VCALENDAR'],
+            'calendar end' => ['END:VCALENDAR'],
+            'publish method' => ['METHOD:PUBLISH'],
+            'event begin' => ['BEGIN:VEVENT'],
+            'event end' => ['END:VEVENT'],
+            'version' => ['VERSION:2.0'],
+            'product ID' => ['PRODID:TYPO3 CMS'],
+        ];
+    }
+
+    /**
+     * @test
+     * @param string $value
+     * @dataProvider iCalDataProvider
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithImportantFields($value)
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        self::assertContains($value, $content);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithEventTitleAsSummary()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        self::assertContains('SUMMARY:' . $this->seminar->getTitle(), $content);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithEventStartDate()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        $formattedDate = strftime('%Y%m%dT%H%M%S', $this->seminar->getBeginDateAsTimestamp());
+        self::assertContains('DTSTART:' . $formattedDate, $content);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForEventWithoutEndDateHasCalendarAttachmentWithoutEndDate()
+    {
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars', $this->seminarUid, ['end_date' => 0]
+        );
+
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        self::assertNotContains('DTEND:', $content);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithEventEndDate()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        $formattedDate = strftime('%Y%m%dT%H%M%S', $this->seminar->getEndDateAsTimestampEvenIfOpenEnded());
+        self::assertContains('DTEND:' . $formattedDate, $content);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithEventSubtitleAsDescription()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        self::assertContains('DESCRIPTION:' . $this->seminar->getSubtitle(), $content);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForEventWithoutPlaceHasCalendarAttachmentWithoutLocation()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        self::assertNotContains('LOCATION:', $content);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithEventLocation()
+    {
+        $siteUid = $this->testingFramework->createRecord(
+            'tx_seminars_sites',
+            ['title' => 'location title', 'address' => 'some address']
+        );
+        $this->testingFramework->createRelation('tx_seminars_seminars_place_mm', $this->seminarUid, $siteUid);
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars', $this->seminarUid, ['place' => 1]
+        );
+
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        self::assertContains('LOCATION:location title, some address', $content);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeReplacesNewlinesInCalendarAttachment()
+    {
+        $siteUid = $this->testingFramework->createRecord(
+            'tx_seminars_sites',
+            ['title' => 'location title', 'address' => 'some address' . CRLF . 'more' . LF . 'even more' . LF]
+        );
+        $this->testingFramework->createRelation('tx_seminars_seminars_place_mm', $this->seminarUid, $siteUid);
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars', $this->seminarUid, ['place' => 1]
+        );
+
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        self::assertContains('LOCATION:location title, some address, more, even more' . CRLF, $content);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithOrganizer()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        self::assertContains('ORGANIZER;CN="test organizer":mailto:mail@example.com', $content);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithUid()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        self::assertContains('UID:', $content);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeHasCalendarAttachmentWithTimestamp()
+    {
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+
+        $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
+        self::assertNotEmpty($attachments);
+        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        $content = $attachment->getBody();
+        $formattedDate = strftime('%Y%m%dT%H%M%S', $GLOBALS['SIM_EXEC_TIME']);
+        self::assertContains('DTSTAMP:' . $formattedDate, $content);
     }
 
     /*
