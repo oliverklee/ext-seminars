@@ -1,6 +1,7 @@
 2.0.0 - not released yet
 
 Bug fixes:
+- [#5776] Cannot switch back to 1 attendee after entering additional names
 - [#5771] "myself" checkbox value in the registration form not used correctly
 - [#5780] Increase the allowed size of event images from 256kB to 2MB
 - [#5757] Fix the version number in the ReST configuration

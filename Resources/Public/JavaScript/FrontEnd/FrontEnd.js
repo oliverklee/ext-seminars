@@ -49,6 +49,11 @@ TYPO3.seminars.markAttachmentAsDeleted = function (listItemId, confirmMessage) {
  * "structured attendees" field.
  */
 TYPO3.seminars.compileNames = function () {
+    var $nameFieldsContainer = jQuery('#tx_seminars_pi1_registration_editor_separate_names');
+    if ($nameFieldsContainer.length === 0) {
+        return;
+    }
+
     var humanReadableField = jQuery('#tx_seminars_pi1_registration_editor__attendees_names')[0];
     var machineReadableField = jQuery('#tx_seminars_pi1_registration_editor__structured_attendees_names')[0];
 
@@ -63,9 +68,6 @@ TYPO3.seminars.compileNames = function () {
     var machineReadableNames = [];
 
     var numberOfLines = firstNames.length;
-    if (numberOfLines === 0) {
-        return;
-    }
 
     for (var i = 0; i < numberOfLines; i++) {
         var firstName = jQuery.trim(firstNames[i].value);
