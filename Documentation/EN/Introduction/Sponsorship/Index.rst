@@ -27,6 +27,8 @@ organizations and persons:
 
 - `Barthauer Software GmbH <http://www.barthauer.de/>`_
 
+- `Bamboozle <http://www.bamboozle.ch/>`_
+
 - `Bucerius Education GmbH <http://www.law-school.de/>`_
 
 - `björn hahnefeld IT <http://www.hahnefeld.de/>`_
