@@ -72,11 +72,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
     /**
      * There are more than one init calls.
-     * Mkforms calls the init for code behinds and oelib inits the class, too.
+     * Mkforms calls the init for code behinds and oelib initializes the class, too.
      *
-     * @param array|\tx_mkforms_forms_IForm $configuration
+     * @param array|\tx_mkforms_forms_IForm|null $configuration
      */
-    public function init($configuration)
+    public function init($configuration = null)
     {
         if (is_array($configuration)) {
             parent::init($configuration);
