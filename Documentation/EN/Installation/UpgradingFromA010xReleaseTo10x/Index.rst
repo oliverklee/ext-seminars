@@ -25,7 +25,7 @@ You should do the upgrade at a time when there are usually no new
 registrations as there might be some configuration check warnings on
 the front end until you have finished the upgrade.
 
-#. Make sure you are using PHP 5.5 or 5.6.
+#. Make sure you are using PHP 5.5, 5.6 or 7.0
 
 #. Make sure you are using TYPO3 6.2.0 or greater.
 

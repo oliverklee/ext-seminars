@@ -21,7 +21,7 @@
     "typo3-ter/seminars": "self.version"
   },
   "require": {
-    "php": ">=5.5.0,<7.0",
+    "php": ">=5.5.0,<7.1",
     "typo3/cms-core": ">=6.2.0,<8.0",
     "sjbr/static-info-tables": ">=6.2.0",
     "oliverklee/oelib": ">=1.0.0",

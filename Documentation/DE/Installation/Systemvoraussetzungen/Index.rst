@@ -18,7 +18,7 @@ Systemvoraussetzungen
 
 **TYPO3:** Sie benötigen TYPO3 CMS 6.2.0 oder höher.
 
-**PHP:** Sie benötigen PHP 5.5 oder 5.6.
+**PHP:** Sie benötigen PHP 5.5, 5.6 oder 7.0
 
 Es wird empfohlen, dass Sie PHP mindestens 128 MB RAM zuweisen.
 
