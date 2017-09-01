@@ -163,7 +163,7 @@ TYPO3.seminars.fixNameFieldsNumber = function () {
         }
     } else if (nameLines.length > neededNameLines) {
         for (var j = nameLines.length; j > neededNameLines; j--) {
-            nameLines[j - 1].remove();
+            $(nameLines[j - 1]).remove();
         }
     }
 };
