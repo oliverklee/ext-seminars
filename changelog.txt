@@ -1,6 +1,7 @@
 1.1.1 - not released yet
 
 Bug fixes:
+- [#5808] Use the correct package name for mkforms in composer.json
 - [#5810] JavaScript error with multi-seat registration in IE
 - [#5809] Allow mkforms 3.x
 - [#5787] FE editor crash with PHP 7
