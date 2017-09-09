@@ -15,7 +15,6 @@
 /**
  * Test case.
  *
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
@@ -2199,32 +2198,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         );
     }
 
-    public function testLimitToEventTypesIgnoresTopicRecords()
+    /**
+     * @test
+     */
+    public function limitToEventTypesFindsDateRecordForTopic()
     {
-        $typeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
-                'event_type' => $typeUid,
-            ]
-        );
-
-        $this->fixture->limitToEventTypes([$typeUid]);
-        $bag = $this->fixture->build();
-
-        self::assertTrue(
-            $bag->isEmpty()
-        );
-    }
-
-    public function testLimitToEventTypesFindsDateRecordForTopic()
-    {
-        $typeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
-        );
+        $typeUid = $this->testingFramework->createRecord('tx_seminars_event_types');
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -2243,14 +2222,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->limitToEventTypes([$typeUid]);
         $bag = $this->fixture->build();
 
-        self::assertSame(
-            1,
-            $bag->count()
-        );
-        self::assertSame(
-            $dateUid,
-            $bag->current()->getUid()
-        );
+        self::assertSame(2, $bag->count());
+        self::assertSame($topicUid . ',' . $dateUid, $bag->getUids());
     }
 
     public function testLimitToEventTypesFindsDateRecordForSingle()
@@ -2346,6 +2319,30 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             2,
             $bag->count()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function limitToEventTypesAndTopicsFindsTopicOfThisType()
+    {
+        $typeUid = $this->testingFramework->createRecord('tx_seminars_event_types');
+        $topicUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'event_type' => $typeUid,
+            ]
+        );
+
+        $this->fixture->limitToEventTypes([$typeUid]);
+        $this->fixture->limitToTopicRecords();
+
+        /** @var Tx_Seminars_Bag_Event $bag */
+        $bag = $this->fixture->build();
+
+        self::assertSame(1, $bag->count());
+        self::assertSame((string)$topicUid, $bag->getUids());
     }
 
     //////////////////////////////

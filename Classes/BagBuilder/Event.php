@@ -15,7 +15,6 @@
 /**
  * This builder class creates customized event bags.
  *
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
@@ -312,21 +311,19 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
             return;
         }
 
-        $safeEventTypeUids = implode(
-            ',', $GLOBALS['TYPO3_DB']->cleanIntArray($eventTypeUids)
-        );
+        $safeEventTypeUids = implode(',', $GLOBALS['TYPO3_DB']->cleanIntArray($eventTypeUids));
 
-        $this->whereClauseParts['eventTypes'] = '(' .
-            '(object_type=' . Tx_Seminars_Model_Event::TYPE_COMPLETE . ' AND ' .
-            'event_type IN(' . $safeEventTypeUids . '))' .
-            ' OR ' .
-            '(object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
-            'EXISTS (SELECT * FROM ' .
-            'tx_seminars_seminars AS topic WHERE ' .
-            'topic.uid = ' .
-            'tx_seminars_seminars.topic AND ' .
-            'topic.event_type IN(' . $safeEventTypeUids . ')' .
-            '))' .
+        $this->whereClauseParts['eventTypes'] = '(
+            (
+                object_type IN(' .
+                    Tx_Seminars_Model_Event::TYPE_COMPLETE . ',' . Tx_Seminars_Model_Event::TYPE_TOPIC .
+                ') AND event_type IN(' . $safeEventTypeUids . ')
+            ) OR (
+                object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ' AND EXISTS (
+                    SELECT * FROM tx_seminars_seminars AS topic
+                    WHERE topic.uid = tx_seminars_seminars.topic AND topic.event_type IN(' . $safeEventTypeUids . ')
+                )
+            )' .
         ')';
     }
 
