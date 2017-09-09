@@ -1,4 +1,4 @@
-1.1.1 - not released yet
+1.1.1 - released 2017-09-09
 
 Bug fixes:
 - [#4593] Topic list limited to event type is empty
