@@ -16,7 +16,7 @@ $EM_CONF[$_EXTKEY] = [
     'category' => 'plugin',
     'shy' => 0,
     'dependencies' => 'static_info_tables,oelib,mkforms',
-    'conflicts' => 'dbal,sourceopt',
+    'conflicts' => 'sourceopt',
     'priority' => '',
     'loadOrder' => '',
     'module' => 'BackEnd',
@@ -32,7 +32,7 @@ $EM_CONF[$_EXTKEY] = [
     'author_company' => 'oliverklee.de',
     'CGLcompliance' => '',
     'CGLcompliance_note' => '',
-    'version' => '1.1.1',
+    'version' => '1.1.2',
     '_md5_values_when_last_written' => '',
     'constraints' => [
         'depends' => [
@@ -43,7 +43,6 @@ $EM_CONF[$_EXTKEY] = [
             'mkforms' => '2.0.0-3.99.99',
         ],
         'conflicts' => [
-            'dbal' => '',
             'sourceopt' => '',
         ],
         'suggests' => [

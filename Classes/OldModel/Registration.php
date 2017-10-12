@@ -91,7 +91,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
      *
      * @param ContentObjectRenderer $contentObjectRenderer content object
      * @param mysqli_result|bool $dbResult
-     *        MySQL result (of SELECT query)/DBAL object. If this parameter is not provided or FALSE,
+     *        MySQL result (of SELECT query) object. If this parameter is not provided or FALSE,
      *        setRegistrationData() needs to be called directly after construction or this object will not be usable.
      */
     public function __construct(ContentObjectRenderer $contentObjectRenderer, $dbResult = false)
