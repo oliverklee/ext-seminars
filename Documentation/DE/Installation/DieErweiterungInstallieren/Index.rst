@@ -20,8 +20,6 @@ Die Erweiterung installieren
 installiert werden, wenn eine der folgenden Erweiterungen installiert
 ist:
 
-- DBAL
-
 - sourceopt
 
 **Benötigte Erweiterungen:** Diese Erweiterung benötigt die folgenden

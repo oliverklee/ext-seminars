@@ -1,3 +1,9 @@
+1.1.2 - released 2017-10-12
+
+Bug fixes:
+- [#5811] Remove the DBAL conflict to allow current TYPO3 CMS updates
+
+
 1.1.1 - released 2017-09-09
 
 Bug fixes:

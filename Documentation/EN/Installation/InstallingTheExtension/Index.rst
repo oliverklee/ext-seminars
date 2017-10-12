@@ -21,8 +21,6 @@ Installing the extension
 **Conflicting extensions:** This extension cannot be installed if you
 have one of the following extensions installed:
 
-- DBAL
-
 - sourceopt
 
 **Required extensions:** This extension requires the following TYPO3
