@@ -1964,6 +1964,24 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     }
 
     /**
+     * @return \Tx_Oelib_List \Tx_Oelib_List<\Tx_Seminars_Model_Registration>
+     */
+    public function getRegistrationsAfterLastDigest()
+    {
+        $newerRegistrations = new \Tx_Oelib_List();
+        $dateOfLastDigest = $this->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp();
+
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        foreach ($this->getRegistrations() as $registration) {
+            if ($registration->getCreationDateAsUnixTimeStamp() > $dateOfLastDigest) {
+                $newerRegistrations->add($registration);
+            }
+        }
+
+        return $newerRegistrations;
+    }
+
+    /**
      * Returns the number of regularly registered seats for this event.
      *
      * This functions counts the number of registered seats from regular
@@ -2053,10 +2071,33 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getAttendeeNames()
     {
+        return $this->extractNamesFromRegistrations($this->getRegistrations());
+    }
+
+    /**
+     * Returns the names of registered attendees (including additional attendees and queue registrations),
+     * but only those that have registered after the last registration digest email.
+     *
+     * @return string[][] all attendee names in a nested array:
+     *         [['firstName' => 'Jane', 'lastName' => 'Doe', 'fullName' => 'Jane Doe']]
+     */
+    public function getAttendeeNamesAfterLastDigest()
+    {
+        return $this->extractNamesFromRegistrations($this->getRegistrationsAfterLastDigest());
+    }
+
+    /**
+     * @param \Tx_Oelib_List $registrations \Tx_Oelib_List<\Tx_Seminars_Model_Registration>
+     *
+     * @return string[][] all attendee names in a nested array:
+     *         [['firstName' => 'Jane', 'lastName' => 'Doe', 'fullName' => 'Jane Doe']]
+     */
+    private function extractNamesFromRegistrations(\Tx_Oelib_List $registrations)
+    {
         $names = [];
 
         /** @var \Tx_Seminars_Model_Registration $registration */
-        foreach ($this->getRegistrations() as $registration) {
+        foreach ($registrations as $registration) {
             if ($registration->hasRegisteredThemselves()) {
                 $names[] = $this->createNamePartsForUser($registration->getFrontEndUser());
             }
@@ -2106,5 +2147,29 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
         );
 
         return $names;
+    }
+
+    /**
+     * @return int the date as UNIX time-stamp, will be 0 if this no digest has been sent yet
+     */
+    public function getDateOfLastRegistrationDigestEmailAsUnixTimeStamp()
+    {
+        return $this->getAsInteger('date_of_last_registration_digest');
+    }
+
+    /**
+     * @param int $date the date as UNIX time-stamp, must be >= 0
+     *
+     * @return void
+     *
+     * @throws InvalidArgumentException
+     */
+    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStamp($date)
+    {
+        if ($date < 0) {
+            throw new InvalidArgumentException('$date must be >= 0, but was: ' . $date, 1508946114880);
+        }
+
+        $this->setAsInteger('date_of_last_registration_digest', $date);
     }
 }

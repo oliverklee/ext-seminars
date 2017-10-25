@@ -15,7 +15,9 @@ namespace OliverKlee\Seminars\SchedulerTasks;
  */
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
+use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Lang\LanguageService;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
@@ -53,6 +55,11 @@ class MailNotifier extends AbstractTask
     protected $mailer = null;
 
     /**
+     * @var RegistrationDigest
+     */
+    protected $registrationDigest = null;
+
+    /**
      * Sets up the dependencies (as we cannot use dependency injection on scheduler tasks).
      *
      * @return void
@@ -67,9 +74,12 @@ class MailNotifier extends AbstractTask
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $this->mailer = $mailerFactory->getMailer();
+        /** @var ObjectManager $objectManager */
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->registrationDigest = $objectManager->get(RegistrationDigest::class);
 
-        $languageService = $this->getLanguageService();
-        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $this->useUserConfiguredLanguage();
+        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
     }
 
     /**
@@ -84,12 +94,21 @@ class MailNotifier extends AbstractTask
         }
 
         $this->constituteDependencies();
+        $this->executeAfterInitialization();
 
+        return true;
+    }
+
+    /**
+     * Executes the single steps.
+     *
+     * @return void
+     */
+    protected function executeAfterInitialization() {
         $this->sendEventTakesPlaceReminders();
         $this->sendCancellationDeadlineReminders();
         $this->automaticallyChangeEventStatuses();
-
-        return true;
+        $this->registrationDigest->execute();
     }
 
     /**
@@ -311,12 +330,7 @@ class MailNotifier extends AbstractTask
      */
     private function customizeMessage($locallangKey, \Tx_Seminars_OldModel_Event $event, $organizerName = '')
     {
-        /** @var \Tx_Seminars_Model_BackEndUser $user */
-        $user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
-        $languageService = $this->getLanguageService();
-        $languageService->lang = $user->getLanguage();
-        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-        $result = $languageService->getLL($locallangKey);
+        $result = $this->getLanguageService()->getLL($locallangKey);
 
         foreach ([
             '%begin_date' => $this->getDate($event->getBeginDateAsTimeStamp()),
@@ -400,6 +414,18 @@ class MailNotifier extends AbstractTask
     protected function getLanguageService()
     {
         return isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
+    }
+
+    /**
+     * Uses the language configured in the current BE user.
+     *
+     * @return void
+     */
+    private function useUserConfiguredLanguage()
+    {
+        /** @var \Tx_Seminars_Model_BackEndUser $user */
+        $user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
+        $this->getLanguageService()->init($user->getLanguage());
     }
 
     /**

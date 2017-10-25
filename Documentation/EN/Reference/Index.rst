@@ -28,5 +28,6 @@ extension: plugin.tx\_seminars and plugin.tx\_seminars\_pi1.
    SetupCommonForFront-endPlug-inAndBack-endModuleInPlugintxSeminars/Index
    SetupForTheSeminarManagerFront-endPlug-inInPlugintxSeminarsPi1/Index
    SetupForTheListView/Index
+   SetupForTheRegistrationDigestEmail
    ConstantsForTheSeminar-managerFront-endPlug-inInPlugintxSeminarsPi1/Index
    Hooks/Index

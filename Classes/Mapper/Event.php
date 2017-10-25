@@ -154,4 +154,27 @@ class Tx_Seminars_Mapper_Event extends Tx_Oelib_DataMapper
 
         return $this->findByWhereClause($whereClause);
     }
+
+    /**
+     * Finds events that have registrations that have been created after when the last registration digest email
+     * has been sent. This will also find events that have registrations, but never got a registration email sent
+     * so far.
+     *
+     * This method will only find complete events and dates, but no topics.
+     *
+     * @return Tx_Oelib_List the Tx_Oelib_List<Tx_Seminars_Model_Event>
+     */
+    public function findForRegistrationDigestEmail()
+    {
+        $whereClause = 'registrations <> 0' .
+            ' AND object_type <> ' . Tx_Seminars_Model_Event::TYPE_TOPIC .
+            ' AND EXISTS (' .
+                'SELECT * FROM tx_seminars_attendances ' .
+                'WHERE tx_seminars_attendances.deleted = 0 ' .
+                ' AND tx_seminars_attendances.seminar = tx_seminars_seminars.uid' .
+                ' AND tx_seminars_attendances.crdate > tx_seminars_seminars.date_of_last_registration_digest' .
+            ')';
+
+        return $this->findByWhereClause($whereClause);
+    }
 }

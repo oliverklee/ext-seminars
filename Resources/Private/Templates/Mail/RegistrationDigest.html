@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:f="https://xsd.helhum.io/ns/typo3/cms-fluid/6.2/ViewHelpers">
+    <body>
+        <f:for each="{events}" as="event">
+            <table>
+                <tr>
+                    <th>
+                        <strong>
+                            {event.title}
+                            <f:if condition="{event.beginDateAsUnixTimeStamp}">
+                                (<f:format.date date="{event.beginDateAsUnixTimeStamp}"
+                                                format="{f:translate(key:'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:dateFormat')}"/>)
+                            </f:if>
+                        </strong>
+                    </th>
+                </tr>
+                <f:for each="{event.attendeeNames}" as="nameParts">
+                    <tr>
+                        <td>
+                            {nameParts.lastName}, {nameParts.firstName}
+                        </td>
+                    </tr>
+                </f:for>
+            </table>
+        </f:for>
+    </body>
+</html>

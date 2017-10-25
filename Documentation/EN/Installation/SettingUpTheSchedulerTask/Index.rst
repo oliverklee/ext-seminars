@@ -70,3 +70,14 @@ CSV file use the following options:
 
 - “ *showAttendancesOnRegistrationQueueInEmailCsv* ” determines whether
   registrations on the waiting list, should also be exported via CSV.
+
+
+** Daily digest of new registrations **
+"""""""""""""""""""""""""""""""""""""""
+
+The Scheduler task also can send a (usually daily) digest of new registration.
+This functionality can be enabled and configured via TypoScript setup in the
+namespace plugin.tx\_seminars.registrationDigestEmail.
+
+The emails will use the language that has been set as default language for the
+Scheduler back-end user.

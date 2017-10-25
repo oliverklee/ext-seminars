@@ -13,9 +13,12 @@ namespace OliverKlee\Seminars\Tests\Unit\SchedulerTasks;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
+use Prophecy\Prophecy\ObjectProphecy;
+use Prophecy\Prophecy\ProphecySubjectInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
@@ -30,7 +33,7 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 class MailNotifierTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject
+     * @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject|\Tx_Phpunit_Interface_AccessibleObject
      */
     protected $subject = null;
 
@@ -79,6 +82,16 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
      */
     private $languageService = null;
 
+    /**
+     * @var RegistrationDigest|ObjectProphecy
+     */
+    private $registrationDigestProphecy = null;
+
+    /**
+     * @var RegistrationDigest|ProphecySubjectInterface
+     */
+    private $registrationDigest = null;
+
     protected function setUp()
     {
         $this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
@@ -124,6 +137,10 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
 
         $this->emailSalutation = $this->getMock(\Tx_Seminars_EmailSalutation::class);
         $this->subject->_set('emailSalutation', $this->emailSalutation);
+
+        $this->registrationDigestProphecy = $this->prophesize(RegistrationDigest::class);
+        $this->registrationDigest = $this->registrationDigestProphecy->reveal();
+        $this->subject->_set('registrationDigest', $this->registrationDigest);
     }
 
     protected function tearDown()
@@ -397,6 +414,30 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
         $subject->expects(self::never())->method('automaticallyChangeEventStatuses');
 
         $subject->execute();
+    }
+
+    /**
+     * @test
+     */
+    public function executeWithPageConfigurationExecutesRegistrationDigest()
+    {
+
+        /** @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject|\Tx_Phpunit_Interface_AccessibleObject $subject */
+        $subject = $this->getAccessibleMock(
+            MailNotifier::class,
+            ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses'],
+            [],
+            '',
+            false
+        );
+
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $subject->setConfigurationPageUid($pageUid);
+        $subject->_set('registrationDigest', $this->registrationDigest);
+
+        $subject->_call('executeAfterInitialization');
+
+        $this->registrationDigestProphecy->execute()->shouldHaveBeenCalled();
     }
 
     /*

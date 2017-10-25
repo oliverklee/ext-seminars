@@ -623,6 +623,14 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>on request</source>
 				<target>auf Anfrage</target>
 			</trans-unit>
+			<trans-unit id="registrationDigestEmail_Subject" xml:space="preserve">
+				<source>New registrations</source>
+				<target>Neue Anmeldungen</target>
+			</trans-unit>
+			<trans-unit id="dateFormat" xml:space="preserve">
+				<source>Y-m-d</source>
+				<target>d.m.Y</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

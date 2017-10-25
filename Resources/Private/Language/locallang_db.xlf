@@ -273,6 +273,9 @@
 			<trans-unit id="tx_seminars_seminars.price_on_request" xml:space="preserve">
 				<source>Price on request:</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.date_of_last_registration_digest" xml:space="preserve">
+				<source>Date of last registration digest email:</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_speakers" xml:space="preserve">
 				<source>Speakers</source>
 			</trans-unit>

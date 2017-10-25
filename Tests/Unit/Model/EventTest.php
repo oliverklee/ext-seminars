@@ -2095,6 +2095,54 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
+    public function getRegistrationsAfterLastDigestReturnsNewerRegistrations()
+    {
+        $this->fixture->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
+
+        $registrations = new Tx_Oelib_List();
+        $registration = new \Tx_Seminars_Model_Registration();
+        $registration->setData(['crdate' => 2]);
+        $registrations->add($registration);
+        $this->fixture->setRegistrations($registrations);
+
+        self::assertContains($registration, $this->fixture->getRegistrationsAfterLastDigest());
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationsAfterLastDigestNotReturnsOlderRegistrations()
+    {
+        $this->fixture->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(2);
+
+        $registrations = new Tx_Oelib_List();
+        $registration = new \Tx_Seminars_Model_Registration();
+        $registration->setData(['crdate' => 1]);
+        $registrations->add($registration);
+        $this->fixture->setRegistrations($registrations);
+
+        self::assertTrue($this->fixture->getRegistrationsAfterLastDigest()->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationsAfterLastDigestNotReturnsRegistrationsExactlyAtDigestDate()
+    {
+        $this->fixture->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
+
+        $registrations = new Tx_Oelib_List();
+        $registration = new \Tx_Seminars_Model_Registration();
+        $registration->setData(['crdate' => 1]);
+        $registrations->add($registration);
+        $this->fixture->setRegistrations($registrations);
+
+        self::assertTrue($this->fixture->getRegistrationsAfterLastDigest()->isEmpty());
+    }
+
+    /**
+     * @test
+     */
     public function hasQueueRegistrationsForNoQueueRegistrationReturnsFalse()
     {
         $event = $this->getMock(
@@ -3029,13 +3077,75 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         );
     }
 
-    /*
-     * Tests concerning "price on request"
+    /**
+     * @test
      */
+    public function getAttendeeNamesAfterLastDigestUsesNewerRegistration()
+    {
+        $firstName = 'Oliver';
+        $lastName = 'Klee';
+
+        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user->setData(['first_name' => $firstName, 'last_name' => $lastName]);
+
+        $registration = new \Tx_Seminars_Model_Registration();
+        $registration->setData(
+            [
+                'user' => $user,
+                'registered_themselves' => true,
+                'additional_persons' => new \Tx_Oelib_List(),
+                'crdate' => 2,
+            ]
+        );
+        $registrations = new \Tx_Oelib_List();
+        $registrations->add($registration);
+
+        $this->fixture->setData(['registrations' => $registrations, 'date_of_last_registration_digest' => 1]);
+
+        self::assertSame(
+            [
+                [
+                    'firstName' => $firstName,
+                    'lastName' => $lastName,
+                    'fullName' => $firstName . ' ' . $lastName,
+                ],
+            ],
+            $this->fixture->getAttendeeNamesAfterLastDigest()
+        );
+    }
 
     /**
      * @test
      */
+    public function getAttendeeNamesAfterLastDigestIgnoresOlderRegistration()
+    {
+        $firstName = 'Oliver';
+        $lastName = 'Klee';
+
+        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user->setData(['first_name' => $firstName, 'last_name' => $lastName]);
+
+        $registration = new \Tx_Seminars_Model_Registration();
+        $registration->setData(
+            [
+                'user' => $user,
+                'registered_themselves' => true,
+                'additional_persons' => new \Tx_Oelib_List(),
+                'crdate' => 1,
+            ]
+        );
+        $registrations = new \Tx_Oelib_List();
+        $registrations->add($registration);
+
+        $this->fixture->setData(['registrations' => $registrations, 'date_of_last_registration_digest' => 2]);
+
+        self::assertSame([], $this->fixture->getAttendeeNamesAfterLastDigest());
+    }
+
+    /*
+     * Tests concerning "price on request"
+     */
+
     public function getPriceOnRequestByDefaultReturnsFalse()
     {
         $this->fixture->setData([]);
@@ -3051,5 +3161,88 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setData(['price_on_request' => true]);
 
         self::assertTrue($this->fixture->getPriceOnRequest());
+    }
+
+    /*
+     * Tests regarding the date of the last registration digest email
+     */
+
+    /**
+     * @test
+     */
+    public function getDateOfLastRegistrationDigestEmailAsUnixTimeStampWithoutDateReturnsZero()
+    {
+        $this->fixture->setData([]);
+
+        self::assertSame(
+            0,
+            $this->fixture->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getDateOfLastRegistrationDigestEmailAsUnixTimeStampWithPositiveDateReturnsIt()
+    {
+        $this->fixture->setData(['date_of_last_registration_digest' => 42]);
+
+        self::assertSame(42, $this->fixture->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp());
+    }
+
+    /**
+     * @test
+     */
+    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStampWithNegativeDateThrowsException()
+    {
+        $this->setExpectedException(\InvalidArgumentException::class);
+
+        $this->fixture->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(-1);
+    }
+
+    /**
+     * @test
+     */
+    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStampWithZeroDateSetsIt()
+    {
+        $this->fixture->setData(['date_of_last_registration_digest' => 42]);
+        $this->fixture->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(0);
+
+        self::assertSame(0, $this->fixture->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp());
+    }
+
+    /**
+     * @test
+     */
+    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStampWithPositiveDateSetsIs()
+    {
+        $this->fixture->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(42);
+
+        self::assertSame(42, $this->fixture->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp());
+    }
+
+    /*
+     * Tests concerning the dates
+     */
+
+    /**
+     * @test
+     */
+    public function getBeginDateAsUnixTimeStampByDefaultReturnsZero()
+    {
+        $this->fixture->setData([]);
+
+        self::assertSame(0, $this->fixture->getBeginDateAsUnixTimeStamp());
+    }
+
+    /**
+     * @test
+     */
+    public function getBeginDateAsUnixTimeStampReturnsBeginDate()
+    {
+        $timeStamp = 455456;
+        $this->fixture->setData(['begin_date' => $timeStamp]);
+
+        self::assertSame($timeStamp, $this->fixture->getBeginDateAsUnixTimeStamp());
     }
 }

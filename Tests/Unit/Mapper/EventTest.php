@@ -1076,4 +1076,255 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
 
         self::assertTrue($result->isEmpty());
     }
+
+    /*
+     * Tests concerning findForRegistrationDigestEmail
+     */
+
+    /**
+     * @test
+     */
+    public function findForRegistrationDigestEmailIgnoresEventWithoutRegistrationsWithoutDigestDate()
+    {
+        $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+        );
+
+        $result = $this->fixture->findForRegistrationDigestEmail();
+
+        self::assertTrue($result->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function findForRegistrationDigestEmailIgnoresEventWithoutRegistrationsWithDigestDateInPast()
+    {
+        $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE, 'date_of_last_registration_digest' => 1]
+        );
+
+        $result = $this->fixture->findForRegistrationDigestEmail();
+
+        self::assertTrue($result->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function findForRegistrationDigestEmailFindsEventWithRegistrationAndWithoutDigestDate()
+    {
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'date_of_last_registration_digest' => 0,
+                'registrations' => 1,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid, 'crdate' => 1]
+        );
+
+        $result = $this->fixture->findForRegistrationDigestEmail();
+
+        self::assertSame(1, $result->count());
+        self::assertSame($eventUid, $result->first()->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findForRegistrationDigestEmailFindsEventWithRegistrationAfterDigestDate()
+    {
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'date_of_last_registration_digest' => 1,
+                'registrations' => 1,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid, 'crdate' => 2]
+        );
+
+        $result = $this->fixture->findForRegistrationDigestEmail();
+
+        self::assertSame(1, $result->count());
+        self::assertSame($eventUid, $result->first()->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findForRegistrationDigestEmailIgnoresEventWithRegistrationOnlyBeforeDigestDate()
+    {
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'date_of_last_registration_digest' => 2,
+                'registrations' => 1,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid, 'crdate' => 1]
+        );
+
+        $result = $this->fixture->findForRegistrationDigestEmail();
+
+        self::assertTrue($result->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function findForRegistrationDigestEmailFindsEventWithRegistrationsBeforeAndAfterDigestDate()
+    {
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'date_of_last_registration_digest' => 2,
+                'registrations' => 2,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid, 'crdate' => 1]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid, 'crdate' => 3]
+        );
+
+        $result = $this->fixture->findForRegistrationDigestEmail();
+
+        self::assertSame(1, $result->count());
+        self::assertSame($eventUid, $result->first()->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findForRegistrationDigestEmailFindsDateWithRegistrationAfterDigestDate()
+    {
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'date_of_last_registration_digest' => 0,
+                'registrations' => 1,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid, 'crdate' => 1]
+        );
+
+        $result = $this->fixture->findForRegistrationDigestEmail();
+
+        self::assertSame(1, $result->count());
+        self::assertSame($eventUid, $result->first()->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findForRegistrationDigestEmailIgnoresTopicWithRegistrationAfterDigestDate()
+    {
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'date_of_last_registration_digest' => 0,
+                'registrations' => 1,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid, 'crdate' => 1]
+        );
+
+        $result = $this->fixture->findForRegistrationDigestEmail();
+
+        self::assertTrue($result->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function findForRegistrationDigestEmailIgnoresHiddenEvent()
+    {
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'date_of_last_registration_digest' => 0,
+                'registrations' => 1,
+                'hidden' => 1,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid, 'crdate' => 1]
+        );
+
+        $result = $this->fixture->findForRegistrationDigestEmail();
+
+        self::assertTrue($result->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function findForRegistrationDigestEmailIgnoresDeletedEvent()
+    {
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'date_of_last_registration_digest' => 0,
+                'registrations' => 1,
+                'deleted' => 1,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid, 'crdate' => 1]
+        );
+
+        $result = $this->fixture->findForRegistrationDigestEmail();
+
+        self::assertTrue($result->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function findForRegistrationDigestEmailIgnoresDeletedRegistration()
+    {
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'date_of_last_registration_digest' => 0,
+                'registrations' => 1,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid, 'crdate' => 1, 'deleted' => 1]
+        );
+
+        $result = $this->fixture->findForRegistrationDigestEmail();
+
+        self::assertTrue($result->isEmpty());
+    }
 }

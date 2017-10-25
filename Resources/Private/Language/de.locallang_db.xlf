@@ -363,6 +363,10 @@
 				<source>Price on request:</source>
 				<target>Preis auf Anfrage::</target>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.date_of_last_registration_digest" xml:space="preserve" approved="yes">
+				<source>Date of last registration digest email:</source>
+				<target>Datum der letzten Anmelde-Zusammenfassungsmail:</target>
+			</trans-unit>
 			<trans-unit id="tx_seminars_speakers" xml:space="preserve" approved="yes">
 				<source>Speakers</source>
 				<target>ReferentInnen</target>

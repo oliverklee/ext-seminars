@@ -76,3 +76,15 @@ bitte die folgenden Optionen:**
 - “ *showAttendancesOnRegistrationQueueInEmailCsv* ” bestimmt, ob
   Registrierungen auf der Warteliste ebenfalls mit exportiert werden
   sollen oder nicht.
+
+
+** Tägliche Zusammenfassung neuer Anmeldungen **
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+Der Scheduler-Task kann auch eine (normalerweise tägliche) Zusammenfassung der
+neuen Anmeldungen verschicken. Diese Funktionalität wird per TypoScript-Setup
+im Namespace plugin.tx\_seminars.registrationDigestEmail konfiguriert und
+aktiviert.
+
+Die Mails werden in der Sprache erstellt, die für den Scheduler-BE-User als
+Default-Sprache eingestellt ist.

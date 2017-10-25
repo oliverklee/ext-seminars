@@ -1,3 +1,9 @@
+1.3.0 - not released yet
+
+Features:
+- [#5813] Scheduler task for sending daily digests of registrations
+
+
 1.2.0 - released 2017-11-02
 
 Features:
