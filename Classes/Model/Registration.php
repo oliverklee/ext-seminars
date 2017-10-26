@@ -22,6 +22,14 @@
 class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Seminars_Interface_Titled
 {
     /**
+     * @return int
+     */
+    public function getCreationDateAsUnixTimeStamp()
+    {
+        return $this->getAsInteger('crdate');
+    }
+
+    /**
      * Returns the title of this registration.
      *
      * @return string the title of this registration, will not be empty

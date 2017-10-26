@@ -113,10 +113,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function isEventDateForDateRecordWithTopicReturnsTrue()
     {
-        $this->fixture->setData([
-            'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-            'topic' => new \Tx_Seminars_Model_Event(),
-        ]);
+        $this->fixture->setData(
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => new \Tx_Seminars_Model_Event(),
+            ]
+        );
 
         self::assertTrue(
             $this->fixture->isEventDate()
@@ -128,10 +130,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function isEventDateForDateRecordWithoutTopicReturnsFalse()
     {
-        $this->fixture->setData([
-            'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-            'topic' => null,
-        ]);
+        $this->fixture->setData(
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => null,
+            ]
+        );
 
         self::assertFalse(
             $this->fixture->isEventDate()
@@ -491,7 +495,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineReturnsUnregistrationDeadline()
+    public function getUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineReturnsUnregistrationDeadline(
+    )
     {
         $this->fixture->setData(['deadline_unregistration' => 42]);
 
@@ -530,7 +535,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function setUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineSetsUnregistrationDeadline()
+    public function setUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineSetsUnregistrationDeadline(
+    )
     {
         $this->fixture->setUnregistrationDeadlineAsUnixTimeStamp(42);
 
@@ -743,9 +749,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getCombinedSingleViewPageForAvailableDetailsPageUidReturnsTheDetailsPageUid()
     {
-        $this->fixture->setData([
-            'details_page' => '5', 'categories' => new Tx_Oelib_List(),
-        ]);
+        $this->fixture->setData(
+            [
+                'details_page' => '5',
+                'categories' => new Tx_Oelib_List(),
+            ]
+        );
 
         self::assertEquals(
             '5',
@@ -758,9 +767,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getCombinedSingleViewPageForAvailableDetailsPageUrlReturnsTheDetailsPageUrl()
     {
-        $this->fixture->setData([
-            'details_page' => 'www.example.com', 'categories' => new Tx_Oelib_List(),
-        ]);
+        $this->fixture->setData(
+            [
+                'details_page' => 'www.example.com',
+                'categories' => new Tx_Oelib_List(),
+            ]
+        );
 
         self::assertEquals(
             'www.example.com',
@@ -775,9 +787,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         $eventType = new Tx_Seminars_Model_EventType();
         $eventType->setData([]);
-        $this->fixture->setData([
-            'event_type' => $eventType, 'categories' => new Tx_Oelib_List(),
-        ]);
+        $this->fixture->setData(
+            [
+                'event_type' => $eventType,
+                'categories' => new Tx_Oelib_List(),
+            ]
+        );
 
         self::assertEquals(
             '',
@@ -792,9 +807,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         $eventType = new Tx_Seminars_Model_EventType();
         $eventType->setData(['single_view_page' => 42]);
-        $this->fixture->setData([
-            'event_type' => $eventType, 'categories' => new Tx_Oelib_List(),
-        ]);
+        $this->fixture->setData(
+            [
+                'event_type' => $eventType,
+                'categories' => new Tx_Oelib_List(),
+            ]
+        );
 
         self::assertEquals(
             '42',
@@ -822,7 +840,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageForAvailableCategoryTypeWithSingleViewPageReturnsSingleViewPageFromCategory()
+    public function getCombinedSingleViewPageForAvailableCategoryTypeWithSingleViewPageReturnsSingleViewPageFromCategory(
+    )
     {
         $category = new Tx_Seminars_Model_Category();
         $category->setData(['single_view_page' => 42]);
@@ -839,7 +858,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageForTwoAvailableCategoriesWithSingleViewPageReturnsSingleViewPageFromFirstCategory()
+    public function getCombinedSingleViewPageForTwoAvailableCategoriesWithSingleViewPageReturnsSingleViewPageFromFirstCategory(
+    )
     {
         $category1 = new Tx_Seminars_Model_Category();
         $category1->setData(['single_view_page' => 42]);
@@ -896,11 +916,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         $eventType = new Tx_Seminars_Model_EventType();
         $eventType->setData(['single_view_page' => 42]);
 
-        $this->fixture->setData([
-            'details_page' => '5',
-            'event_type' => $eventType,
-            'categories' => new Tx_Oelib_List(),
-        ]);
+        $this->fixture->setData(
+            [
+                'details_page' => '5',
+                'event_type' => $eventType,
+                'categories' => new Tx_Oelib_List(),
+            ]
+        );
 
         self::assertEquals(
             '5',
@@ -920,10 +942,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         $categories = new Tx_Oelib_List();
         $categories->add($category);
 
-        $this->fixture->setData([
-            'event_type' => $eventType,
-            'categories' => $categories,
-        ]);
+        $this->fixture->setData(
+            [
+                'event_type' => $eventType,
+                'categories' => $categories,
+            ]
+        );
 
         self::assertEquals(
             '42',
@@ -1723,7 +1747,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getRegistrationBeginAsUnixTimestampForEventWithRegistrationBeginReturnsRegistrationBeginAsUnixTimestamp()
+    public function getRegistrationBeginAsUnixTimestampForEventWithRegistrationBeginReturnsRegistrationBeginAsUnixTimestamp(
+    )
     {
         $this->fixture->setData(['begin_date_registration' => 42]);
 
@@ -1937,9 +1962,9 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         );
     }
 
-    ///////////////////////////////////////
-    // Tests concerning the registrations
-    ///////////////////////////////////////
+    /*
+     * Tests concerning the registrations
+     */
 
     /**
      * @test
@@ -2804,5 +2829,203 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         $result = $this->fixture->getFirstOrganizer();
 
         self::assertSame($firstOrganizer, $result);
+    }
+
+    /*
+     * Tests concerning getAttendeeNames
+     */
+
+    /**
+     * @test
+     */
+    public function getAttendeeNamesForNoRegistrationsReturnsEmptyArray()
+    {
+        $this->fixture->setData(['registrations' => new \Tx_Oelib_List()]);
+
+        self::assertSame([], $this->fixture->getAttendeeNames());
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendeeNamesForRegistrationWithRegisteredThemselvesReturnsThatName()
+    {
+        $firstName = 'Oliver';
+        $lastName = 'Klee';
+
+        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user->setData(['first_name' => $firstName, 'last_name' => $lastName]);
+
+        $registration = new \Tx_Seminars_Model_Registration();
+        $registration->setData(
+            [
+                'user' => $user,
+                'registered_themselves' => true,
+                'additional_persons' => new \Tx_Oelib_List(),
+            ]
+        );
+        $registrations = new \Tx_Oelib_List();
+        $registrations->add($registration);
+
+        $this->fixture->setData(['registrations' => $registrations]);
+
+        self::assertSame(
+            [
+                [
+                    'firstName' => $firstName,
+                    'lastName' => $lastName,
+                    'fullName' => $firstName . ' ' . $lastName,
+                ],
+            ],
+            $this->fixture->getAttendeeNames()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendeeNamesForRegistrationOnlyWithoutRegisteredThemselvesReturnsEmptyArray()
+    {
+        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user->setData([]);
+
+        $registration = new \Tx_Seminars_Model_Registration();
+        $registration->setData(
+            ['user' => $user, 'registered_themselves' => false, 'additional_persons' => new \Tx_Oelib_List()]
+        );
+        $registrations = new \Tx_Oelib_List();
+        $registrations->add($registration);
+
+        $this->fixture->setData(['registrations' => $registrations]);
+
+        self::assertSame([], $this->fixture->getAttendeeNames());
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendeeNamesForRegistrationReturnsAdditionalAttendeeNames()
+    {
+        $firstName = 'Oliver';
+        $lastName = 'Klee';
+
+        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user->setData([]);
+
+        $additionalPerson = new \Tx_Seminars_Model_FrontEndUser();
+        $additionalPerson->setData(['first_name' => $firstName, 'last_name' => $lastName]);
+        $additionalPersons = new \Tx_Oelib_List();
+        $additionalPersons->add($additionalPerson);
+
+        $registration = new \Tx_Seminars_Model_Registration();
+        $registration->setData(
+            ['user' => $user, 'registered_themselves' => false, 'additional_persons' => $additionalPersons]
+        );
+        $registrations = new \Tx_Oelib_List();
+        $registrations->add($registration);
+
+        $this->fixture->setData(['registrations' => $registrations]);
+
+        self::assertSame(
+            [['firstName' => $firstName, 'lastName' => $lastName, 'fullName' => $firstName . ' ' . $lastName]],
+            $this->fixture->getAttendeeNames()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendeeNamesSortsNamesFromRegisteredThemselvesByLastName()
+    {
+        $registrations = new \Tx_Oelib_List();
+
+        $firstName1 = 'Oliver';
+        $lastName1 = 'Klee';
+        $user1 = new \Tx_Seminars_Model_FrontEndUser();
+        $user1->setData(['first_name' => $firstName1, 'last_name' => $lastName1]);
+        $registration1 = new \Tx_Seminars_Model_Registration();
+        $registration1->setData(
+            [
+                'user' => $user1,
+                'registered_themselves' => true,
+                'additional_persons' => new \Tx_Oelib_List(),
+            ]
+        );
+        $registrations->add($registration1);
+
+        $firstName2 = 'Jane';
+        $lastName2 = 'Bar';
+        $user2 = new \Tx_Seminars_Model_FrontEndUser();
+        $user2->setData(['first_name' => $firstName2, 'last_name' => $lastName2]);
+        $registration2 = new \Tx_Seminars_Model_Registration();
+        $registration2->setData(
+            ['user' => $user2, 'registered_themselves' => true, 'additional_persons' => new \Tx_Oelib_List()]
+        );
+        $registrations->add($registration2);
+
+        $this->fixture->setData(['registrations' => $registrations]);
+
+        self::assertSame(
+            [
+                [
+                    'firstName' => $firstName2,
+                    'lastName' => $lastName2,
+                    'fullName' => $firstName2 . ' ' . $lastName2,
+                ],
+                [
+                    'firstName' => $firstName1,
+                    'lastName' => $lastName1,
+                    'fullName' => $firstName1 . ' ' . $lastName1,
+                ],
+            ],
+            $this->fixture->getAttendeeNames()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendeeNamesSortsNamesFromAdditionalAttendeesByLastName()
+    {
+        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user->setData([]);
+        $additionalPersons = new \Tx_Oelib_List();
+
+        $firstName1 = 'Oliver';
+        $lastName1 = 'Klee';
+        $additionalPerson1 = new \Tx_Seminars_Model_FrontEndUser();
+        $additionalPerson1->setData(['first_name' => $firstName1, 'last_name' => $lastName1]);
+        $additionalPersons->add($additionalPerson1);
+
+        $firstName2 = 'Jane';
+        $lastName2 = 'Bar';
+        $additionalPerson2 = new \Tx_Seminars_Model_FrontEndUser();
+        $additionalPerson2->setData(['first_name' => $firstName2, 'last_name' => $lastName2]);
+        $additionalPersons->add($additionalPerson2);
+
+        $registration = new \Tx_Seminars_Model_Registration();
+        $registration->setData(
+            ['user' => $user, 'registered_themselves' => false, 'additional_persons' => $additionalPersons]
+        );
+        $registrations = new \Tx_Oelib_List();
+        $registrations->add($registration);
+
+        $this->fixture->setData(['registrations' => $registrations]);
+
+        self::assertSame(
+            [
+                [
+                    'firstName' => $firstName2,
+                    'lastName' => $lastName2,
+                    'fullName' => $firstName2 . ' ' . $lastName2,
+                ],
+                [
+                    'firstName' => $firstName1,
+                    'lastName' => $lastName1,
+                    'fullName' => $firstName1 . ' ' . $lastName1,
+                ],
+            ],
+            $this->fixture->getAttendeeNames()
+        );
     }
 }

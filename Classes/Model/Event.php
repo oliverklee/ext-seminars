@@ -571,9 +571,9 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
         if ($this->hasDetailsPage()) {
             $result = $this->getDetailsPage();
         } elseif ($this->hasSingleViewPageUidFromEventType()) {
-            $result = (string) $this->getSingleViewPageUidFromEventType();
+            $result = (string)$this->getSingleViewPageUidFromEventType();
         } elseif ($this->hasSingleViewPageUidFromCategories()) {
-            $result = (string) $this->getSingleViewPageUidFromCategories();
+            $result = (string)$this->getSingleViewPageUidFromCategories();
         }
 
         return $result;
@@ -1207,7 +1207,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
         if ($this->isEventDate()) {
             throw new BadMethodCallException(
                 'setPaymentMethods may only be called on single events and ' .
-                    'event topics, but not on event dates.'
+                'event topics, but not on event dates.'
             );
         }
 
@@ -2035,5 +2035,68 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function isFull()
     {
         return !$this->hasVacancies();
+    }
+
+    /**
+     * Returns the names of all registered attendees (including additional attendees and queue registrations).
+     *
+     * @return string[][] all attendee names in a nested array:
+     *         [['firstName' => 'Jane', 'lastName' => 'Doe', 'fullName' => 'Jane Doe']]
+     */
+    public function getAttendeeNames()
+    {
+        $names = [];
+
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        foreach ($this->getRegistrations() as $registration) {
+            if ($registration->hasRegisteredThemselves()) {
+                $names[] = $this->createNamePartsForUser($registration->getFrontEndUser());
+            }
+
+            /** @var \Tx_Seminars_Model_FrontEndUser $person */
+            foreach ($registration->getAdditionalPersons() as $person) {
+                $names[] = $this->createNamePartsForUser($person);
+            }
+        }
+
+        return $this->sortNamesByLastName($names);
+    }
+
+    /**
+     * @param Tx_Seminars_Model_FrontEndUser $user
+     *
+     * @return string[] name parts:
+     *         ['firstName' => 'Jane', 'lastName' => 'Doe', 'fullName' => 'Jane Doe']
+     */
+    private function createNamePartsForUser(\Tx_Seminars_Model_FrontEndUser $user)
+    {
+        return [
+            'firstName' => $user->getFirstName(),
+            'lastName' => $user->getLastName(),
+            'fullName' => $user->getName(),
+        ];
+    }
+
+    /**
+     * @param string[][] $names
+     *
+     * @return string[][]
+     */
+    private function sortNamesByLastName(array $names)
+    {
+        usort(
+            $names,
+            function (array $nameParts1, array $nameParts2) {
+                $first = $nameParts1['lastName'];
+                $second = $nameParts2['lastName'];
+                if ($first === $second) {
+                    return 0;
+                }
+
+                return $first < $second ? -1 : 1;
+            }
+        );
+
+        return $names;
     }
 }
