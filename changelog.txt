@@ -1,3 +1,9 @@
+1.2.0 - not released yet
+
+Cleanup:
+- #5815 Use spaces for indentation of XML and TypoScript
+
+
 1.1.2 - released 2017-10-12
 
 Bug fixes:
