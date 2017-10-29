@@ -19,7 +19,6 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  *
  * This file does not include the locallang file in the BE because objectfromdb already does that.
  *
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
@@ -157,7 +156,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
      */
     public function canRegisterIfLoggedIn(Tx_Seminars_OldModel_Event $event)
     {
-        if (!$event->canSomebodyRegister()) {
+        if ($event->getPriceOnRequest() || !$event->canSomebodyRegister()) {
             return false;
         }
         if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {

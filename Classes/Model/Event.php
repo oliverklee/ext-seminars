@@ -766,6 +766,14 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     }
 
     /**
+     * @return bool
+     */
+    public function getPriceOnRequest()
+    {
+        return $this->isEventDate() ? $this->getTopic()->getPriceOnRequest() : $this->getAsBoolean('price_on_request');
+    }
+
+    /**
      * Returns our regular price.
      *
      * @return float our regular price, will be 0.00 if this event has no regular

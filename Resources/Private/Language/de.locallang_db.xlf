@@ -359,6 +359,10 @@
 				<source>Publication hash:</source>
 				<target>Veröffentlichungscode:</target>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.price_on_request" xml:space="preserve">
+				<source>Price on request:</source>
+				<target>Preis auf Anfrage::</target>
+			</trans-unit>
 			<trans-unit id="tx_seminars_speakers" xml:space="preserve" approved="yes">
 				<source>Speakers</source>
 				<target>ReferentInnen</target>

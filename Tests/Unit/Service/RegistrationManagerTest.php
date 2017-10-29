@@ -635,10 +635,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
     }
 
     /*
-     * Tests for the getRegistrationLink function
+     * Tests concerning getRegistrationLink
      */
 
-    public function testGetRegistrationLinkForLoggedInUserAndSeminarWithVacanciesReturnsLinkToRegistrationPage()
+    /**
+     * @test
+     */
+    public function getRegistrationLinkForLoggedInUserAndSeminarWithVacanciesReturnsLinkToRegistrationPage()
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -649,7 +652,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         );
     }
 
-    public function testGetRegistrationLinkForLoggedInUserAndSeminarWithVacanciesReturnsLinkWithSeminarUid()
+    /**
+     * @test
+     */
+    public function getRegistrationLinkForLoggedInUserAndSeminarWithVacanciesReturnsLinkWithSeminarUid()
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -660,7 +666,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         );
     }
 
-    public function testGetRegistrationLinkForLoggedOutUserAndSeminarWithVacanciesReturnsLoginLink()
+    /**
+     * @test
+     */
+    public function getRegistrationLinkForLoggedOutUserAndSeminarWithVacanciesReturnsLoginLink()
     {
         $this->createFrontEndPages();
 
@@ -701,7 +710,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         );
     }
 
-    public function testGetRegistrationLinkForBeginDateBeforeCurrentDateReturnsEmptyString()
+    /**
+     * @test
+     */
+    public function getRegistrationLinkForBeginDateBeforeCurrentDateReturnsEmptyString()
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -724,7 +736,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         );
     }
 
-    public function testGetRegistrationLinkForAlreadyEndedRegistrationDeadlineReturnsEmptyString()
+    /**
+     * @test
+     */
+    public function getRegistrationLinkForAlreadyEndedRegistrationDeadlineReturnsEmptyString()
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -812,6 +827,18 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         );
     }
 
+    /**
+     * @test
+     */
+    public function getRegistrationLinkForPriceOnRequestReturnsEmptyString()
+    {
+        $this->seminar->setPriceOnRequest(true);
+        $this->createFrontEndPages();
+        $this->createAndLogInFrontEndUser();
+
+        self::assertSame('', $this->fixture->getRegistrationLink($this->pi1, $this->seminar));
+    }
+
     /*
      * Tests concerning canRegisterIfLoggedIn
      */
@@ -824,6 +851,16 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         self::assertTrue(
             $this->fixture->canRegisterIfLoggedIn($this->seminar)
         );
+    }
+
+    /**
+     * @test
+     */
+    public function canRegisterIfLoggedInForPriceOnRequestReturnsFalse()
+    {
+        $this->seminar->setPriceOnRequest(true);
+
+        self::assertFalse($this->fixture->canRegisterIfLoggedIn($this->seminar));
     }
 
     /**

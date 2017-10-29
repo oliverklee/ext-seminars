@@ -455,6 +455,9 @@ you registered for the event &quot;%eventTitle&quot; (%eventDate).
 
 This event now has been confirmed.</source>
 			</trans-unit>
+			<trans-unit id="message_onRequest" xml:space="preserve">
+				<source>on request</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

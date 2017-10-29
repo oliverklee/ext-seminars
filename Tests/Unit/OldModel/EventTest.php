@@ -17,7 +17,6 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 /**
  * Test case.
  *
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
@@ -10314,5 +10313,137 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $subject->increaseNumberOfAssociatedRegistrationRecords();
 
         self::assertSame(3, $subject->getNumberOfAssociatedRegistrationRecords());
+    }
+
+    /*
+     * Tests concerning the price
+     */
+
+    /**
+     * @test
+     */
+    public function getPriceOnRequestByDefaultReturnsFalse()
+    {
+        self::assertFalse($this->fixture->getPriceOnRequest());
+    }
+
+    /**
+     * @test
+     */
+    public function getPriceOnRequestReturnsPriceOnRequest()
+    {
+        $this->fixture->setRecordPropertyInteger('price_on_request', 1);
+
+        self::assertTrue($this->fixture->getPriceOnRequest());
+    }
+
+    /**
+     * @test
+     */
+    public function setPriceOnRequestSetsPriceOnRequest()
+    {
+        $this->fixture->setPriceOnRequest(true);
+
+        self::assertTrue($this->fixture->getPriceOnRequest());
+    }
+
+    /**
+     * @test
+     */
+    public function getPriceOnRequestForEventDateReturnsFalseValueFromTopic()
+    {
+        $topicUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC, 'price_on_request' => false]
+        );
+        $dateUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_DATE, 'topic' => $topicUid]
+        );
+        $date = new Tx_Seminars_OldModel_Event($dateUid);
+
+        self::assertFalse($date->getPriceOnRequest());
+    }
+
+    /**
+     * @test
+     */
+    public function getPriceOnRequestForEventDateReturnsTrueValueFromTopic()
+    {
+        $topicUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC, 'price_on_request' => true]
+        );
+        $dateUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['object_type' => Tx_Seminars_Model_Event::TYPE_DATE, 'topic' => $topicUid]
+        );
+        $date = new Tx_Seminars_OldModel_Event($dateUid);
+
+        self::assertTrue($date->getPriceOnRequest());
+    }
+
+    /**
+     * @test
+     */
+    public function getCurrentPriceRegularForZeroPriceReturnsForFree()
+    {
+        $this->fixture->setRecordPropertyString('price_regular', '0');
+
+        $result = $this->fixture->getCurrentPriceRegular();
+
+        self::assertSame($this->fixture->translate('message_forFree'), $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCurrentPriceRegularForNonZeroPriceReturnsPrice()
+    {
+        $this->fixture->setRecordPropertyString('price_regular', '123.45');
+
+        $result = $this->fixture->getCurrentPriceRegular();
+
+        self::assertSame('123.45', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCurrentPriceRegularForPriceOnRequestReturnsLocalizedString()
+    {
+        $this->fixture->setRecordPropertyInteger('price_on_request', 1);
+        $this->fixture->setRecordPropertyString('price_regular', '123.45');
+
+        $result = $this->fixture->getCurrentPriceRegular();
+
+        self::assertSame($this->fixture->translate('message_onRequest'), $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCurrentPriceSpecialReturnsRegularNonZeroPrice()
+    {
+        $this->fixture->setRecordPropertyString('price_regular', '57');
+        $this->fixture->setRecordPropertyString('price_special', '123.45');
+
+        $result = $this->fixture->getCurrentPriceSpecial();
+
+        self::assertSame('123.45', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCurrentPriceSpecialForPriceOnRequestReturnsLocalizedString()
+    {
+        $this->fixture->setRecordPropertyInteger('price_on_request', 1);
+        $this->fixture->setRecordPropertyString('price_regular', '57');
+        $this->fixture->setRecordPropertyString('price_special', '123.45');
+
+        $result = $this->fixture->getCurrentPriceSpecial();
+
+        self::assertSame($this->fixture->translate('message_onRequest'), $result);
     }
 }

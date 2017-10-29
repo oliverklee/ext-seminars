@@ -18,7 +18,6 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 /**
  * This class represents a seminar (or similar event).
  *
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
@@ -1198,9 +1197,11 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getCurrentPriceRegular()
     {
-        return ($this->earlyBirdApplies())
-            ? $this->getEarlyBirdPriceRegular()
-            : $this->getPriceRegular();
+        if ($this->getPriceOnRequest()) {
+            return $this->translate('message_onRequest');
+        }
+
+        return $this->earlyBirdApplies() ? $this->getEarlyBirdPriceRegular() : $this->getPriceRegular();
     }
 
     /**
@@ -1212,9 +1213,11 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getCurrentPriceSpecial()
     {
-        return ($this->earlyBirdApplies())
-            ? $this->getEarlyBirdPriceSpecial()
-            : $this->getPriceSpecial();
+        if ($this->getPriceOnRequest()) {
+            return $this->translate('message_onRequest');
+        }
+
+        return $this->earlyBirdApplies() ? $this->getEarlyBirdPriceSpecial() : $this->getPriceSpecial();
     }
 
     /**
@@ -1460,6 +1463,24 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function hasPriceSpecialBoard()
     {
         return $this->hasTopicDecimal('price_special_board');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getPriceOnRequest()
+    {
+        return $this->getTopicBoolean('price_on_request');
+    }
+
+    /**
+     * @param bool $priceOnRequest
+     *
+     * @return void
+     */
+    public function setPriceOnRequest($priceOnRequest)
+    {
+        $this->setRecordPropertyBoolean('price_on_request', $priceOnRequest);
     }
 
     /**

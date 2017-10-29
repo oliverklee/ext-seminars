@@ -28,10 +28,23 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      * @var Tx_Seminars_FrontEnd_DefaultController
      */
     private $fixture;
+
     /**
      * @var Tx_Oelib_TestingFramework
      */
     private $testingFramework;
+
+    /**
+     * @var \Tx_Oelib_Translator
+     */
+    private $translator = null;
+
+    /**
+     * backup of the BE user's language
+     *
+     * @var string
+     */
+    private $languageBackup = '';
 
     /**
      * @var int the UID of a seminar to which the fixture relates
@@ -99,11 +112,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $configuration->setAsString('currency', 'EUR');
         Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version)
-            < 7006000
-        ) {
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 7006000) {
             $GLOBALS['TSFE']->config['config']['uniqueLinkVars'] = 1;
         }
+
+        $this->languageBackup = $GLOBALS['LANG']->lang;
+        $GLOBALS['LANG']->lang = 'default';
+        $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        Tx_Oelib_TranslatorRegistry::getInstance()->setLanguageKey('default');
+        $this->translator = Tx_Oelib_TranslatorRegistry::get('seminars');
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
         $this->seminarUid = $this->testingFramework->createRecord(
@@ -172,6 +189,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
         $GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
+        $GLOBALS['LANG']->lang = $this->languageBackup;
     }
 
     ///////////////////////
@@ -9151,7 +9169,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->fixture->setConfigurationValue('what_to_display', 'my_events');
 
-        $registrationUid = $this->createLogInAndRegisterFeUser();
+        $this->createLogInAndRegisterFeUser();
 
         $hookClass = uniqid('myEventsListRowHook');
         $hook = $this->getMock($hookClass);
@@ -9322,5 +9340,37 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             'Chaos & Confusion',
             $this->fixture->createSingleViewLink($event, 'Chaos & Confusion', false)
         );
+    }
+
+    /*
+     * Tests concerning the price in the single view
+     */
+
+    /**
+     * @test
+     */
+    public function singleViewForNoStandardPriceDisplaysForFree()
+    {
+        $this->fixture->setConfigurationValue('what_to_display', 'single_view');
+        $this->fixture->piVars['showUid'] = $this->seminarUid;
+
+        $result = $this->fixture->main('', []);
+
+        self::assertContains($this->translator->translate('message_forFree'), $result);
+    }
+
+    /**
+     * @test
+     */
+    public function singleViewForPriceOnRequestDisplaysOnRequest()
+    {
+        $this->testingFramework->changeRecord('tx_seminars_seminars', $this->seminarUid, ['price_on_request' => 1]);
+
+        $this->fixture->setConfigurationValue('what_to_display', 'single_view');
+        $this->fixture->piVars['showUid'] = $this->seminarUid;
+
+        $result = $this->fixture->main('', []);
+
+        self::assertContains($this->translator->translate('message_onRequest'), $result);
     }
 }

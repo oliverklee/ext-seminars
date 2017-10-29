@@ -3028,4 +3028,28 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
             $this->fixture->getAttendeeNames()
         );
     }
+
+    /*
+     * Tests concerning "price on request"
+     */
+
+    /**
+     * @test
+     */
+    public function getPriceOnRequestByDefaultReturnsFalse()
+    {
+        $this->fixture->setData([]);
+
+        self::assertFalse($this->fixture->getPriceOnRequest());
+    }
+
+    /**
+     * @test
+     */
+    public function getPriceOnRequestReturnsPriceOnRequest()
+    {
+        $this->fixture->setData(['price_on_request' => true]);
+
+        self::assertTrue($this->fixture->getPriceOnRequest());
+    }
 }

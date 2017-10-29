@@ -1142,9 +1142,33 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     private function setSingleViewPriceMarkers()
     {
+        if ($this->seminar->getPriceOnRequest()) {
+            $this->setSingleViewPriceMarkersForOnRequest();
+            return;
+        }
+
         $this->setSingleViewRegularPriceMarkers();
         $this->setSingleViewSpecialPriceMarkers();
         $this->setSingleViewBoardPriceMarkers();
+    }
+
+    /**
+     * Sets the price to "on request" and hides all other price markers
+     *
+     * This method may only be called if the current event is set to "price on request".
+     *
+     * @return void
+     */
+    private function setSingleViewPriceMarkersForOnRequest() {
+        if (!$this->seminar->getPriceOnRequest()) {
+            return;
+        }
+
+        $this->setMarker('price_regular', $this->seminar->getCurrentPriceRegular());
+        $this->hideSubparts(
+            'price_special,price_earlybird_regular,price_earlybird_special,price_board_regular,price_board_special',
+            'field_wrapper'
+        );
     }
 
     /**
@@ -1495,7 +1519,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     private function setRegistrationMarker()
     {
-        if (!$this->isRegistrationEnabled()) {
+        if (!$this->isRegistrationEnabled() || $this->seminar->getPriceOnRequest()) {
             $this->hideSubparts('registration', 'field_wrapper');
             return;
         }
@@ -1503,10 +1527,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         $this->setMarker(
             'registration',
             $this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)
-            ? $this->getRegistrationManager()->getLinkToRegistrationOrLoginPage(
-                $this, $this->seminar)
-            : $this->getRegistrationManager()->canRegisterIfLoggedInMessage(
-                $this->seminar)
+            ? $this->getRegistrationManager()->getLinkToRegistrationOrLoginPage($this, $this->seminar)
+            : $this->getRegistrationManager()->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -3171,30 +3193,19 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     private function setRegistrationLinkMarker($whatToDisplay)
     {
-        if ($whatToDisplay == 'my_events') {
-            $this->setMarker('registration',
-                (($this->seminar->isUnregistrationPossible())
-                    ? $this->getRegistrationManager()->getLinkToUnregistrationPage(
-                        $this,
-                        $this->registration
-                    )
-                    : ''
-                )
+        if ($whatToDisplay === 'my_events') {
+            $this->setMarker(
+                'registration',
+                $this->seminar->isUnregistrationPossible()
+                    ? $this->getRegistrationManager()->getLinkToUnregistrationPage($this, $this->registration) : ''
             );
 
             return;
         }
 
-        $registrationLink
-            = $this->getRegistrationManager()->getRegistrationLink(
-                $this, $this->seminar
-            );
+        $registrationLink = $this->getRegistrationManager()->getRegistrationLink($this, $this->seminar);
 
-        if ($registrationLink == ''
-            && !$this->getRegistrationManager()->registrationHasStarted(
-                $this->seminar
-            )
-        ) {
+        if ($registrationLink === '' && !$this->getRegistrationManager()->registrationHasStarted($this->seminar)) {
             $registrationLink = sprintf(
                 $this->translate('message_registrationOpensOn'),
                 $this->seminar->getRegistrationBegin()

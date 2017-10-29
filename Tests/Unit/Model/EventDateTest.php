@@ -15,7 +15,6 @@
 /**
  * This test case holds all tests specific to event dates.
  *
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
@@ -1702,5 +1701,26 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
         );
 
         $this->fixture->setPaymentMethods(new Tx_Oelib_List());
+    }
+
+    /*
+     * Tests concerning "price on request"
+     */
+
+    /**
+     * @test
+     */
+    public function getPriceOnRequestReturnsPriceOnRequestFromDopic()
+    {
+        $topic = new Tx_Seminars_Model_Event();
+        $topic->setData(['price_on_request' => true]);
+        $this->fixture->setData(
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topic,
+            ]
+        );
+
+        self::assertTrue($this->fixture->getPriceOnRequest());
     }
 }

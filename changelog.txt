@@ -1,6 +1,7 @@
 1.2.0 - not released yet
 
 Features:
+- [#5817] Add a checkbox "price on request"
 - [#5816] Event.getAttendeeNames
 
 Cleanup:

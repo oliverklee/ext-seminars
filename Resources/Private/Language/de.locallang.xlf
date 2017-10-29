@@ -619,6 +619,10 @@ Sie hatten sich für die Veranstaltung &quot;%eventTitle&quot; (%eventDate) ange
 
 Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			</trans-unit>
+			<trans-unit id="message_onRequest" xml:space="preserve">
+				<source>on request</source>
+				<target>auf Anfrage</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

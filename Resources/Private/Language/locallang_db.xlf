@@ -270,6 +270,9 @@
 			<trans-unit id="tx_seminars_seminars.publication_hash" xml:space="preserve">
 				<source>Publication hash:</source>
 			</trans-unit>
+			<trans-unit id="tx_seminars_seminars.price_on_request" xml:space="preserve">
+				<source>Price on request:</source>
+			</trans-unit>
 			<trans-unit id="tx_seminars_speakers" xml:space="preserve">
 				<source>Speakers</source>
 			</trans-unit>
