@@ -1,4 +1,4 @@
-1.2.0 - not released yet
+1.2.0 - released 2017-11-02
 
 Features:
 - [#5817] Add a checkbox "price on request"
