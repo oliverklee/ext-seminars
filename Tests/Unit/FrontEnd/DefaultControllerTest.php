@@ -5721,7 +5721,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     /**
      * @test
      */
-    public function listViewForEventWithVacanciesAndNoDateShowsPreebookNowString()
+    public function listViewForEventWithVacanciesAndNoDateShowsPrebookNowString()
     {
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
@@ -6901,7 +6901,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     /**
      * @test
      */
-    public function singleViewForEventWithVacanciesAndNoDateShowsPreebookNowString()
+    public function singleViewForEventWithVacanciesAndNoDateShowsPrebookNowString()
     {
         $this->fixture->setConfigurationValue('enableRegistration', true);
         $this->testingFramework->changeRecord(
