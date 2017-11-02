@@ -19,7 +19,6 @@ use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 /**
  * Plugin "Seminar Manager".
  *
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
@@ -780,7 +779,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 
         $this->setLanguageMarker();
 
-        $this->setPriceMarkers();
+        $this->setSingleViewPriceMarkers();
         $this->setPaymentMethodsMarker();
 
         $this->setAdditionalInformationMarker();
@@ -1137,100 +1136,81 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     }
 
     /**
-     * Fills in the matching markers for the prices or hides the unused
-     * subparts.
+     * Fills in the matching markers for the prices or hides the unused subparts.
      *
      * @return void
      */
-    private function setPriceMarkers()
+    private function setSingleViewPriceMarkers()
     {
-        // set the regular price (with or without early bird rebate)
-        if ($this->seminar->hasEarlyBirdPrice()
-            && !$this->seminar->isEarlyBirdDeadlineOver()
-        ) {
-            $this->setMarker(
-                'price_earlybird_regular',
-                $this->seminar->getEarlyBirdPriceRegular()
-            );
+        $this->setSingleViewRegularPriceMarkers();
+        $this->setSingleViewSpecialPriceMarkers();
+        $this->setSingleViewBoardPriceMarkers();
+    }
+
+    /**
+     * Set the regular price (with or without early bird rebate).
+     *
+     * @return void
+     */
+    private function setSingleViewRegularPriceMarkers()
+    {
+        if ($this->seminar->hasEarlyBirdPrice() && !$this->seminar->isEarlyBirdDeadlineOver()) {
+            $this->setMarker('price_earlybird_regular', $this->seminar->getEarlyBirdPriceRegular());
             $this->setMarker(
                 'message_earlybird_price_regular',
-                sprintf(
-                    $this->translate('message_earlybird_price'),
-                    $this->seminar->getEarlyBirdDeadline()
-                )
+                sprintf($this->translate('message_earlybird_price'), $this->seminar->getEarlyBirdDeadline())
             );
-            $this->setMarker(
-                'price_regular',
-                $this->seminar->getPriceRegular()
-            );
+            $this->setMarker('price_regular', $this->seminar->getPriceRegular());
         } else {
-            $this->setMarker(
-                'price_regular',
-                $this->seminar->getPriceRegular()
-            );
-            if ($this->getConfValueBoolean(
-                'generalPriceInSingle',
-                's_template_special')
-            ) {
-                $this->setMarker(
-                    'label_price_regular',
-                    $this->translate('label_price_general')
-                );
+            $this->setMarker('price_regular', $this->seminar->getPriceRegular());
+            if ($this->getConfValueBoolean('generalPriceInSingle', 's_template_special')) {
+                $this->setMarker('label_price_regular', $this->translate('label_price_general'));
             }
             $this->hideSubparts('price_earlybird_regular', 'field_wrapper');
         }
+    }
 
-        // set the special price (with or without early bird rebate)
+    /**
+     * Set the special price (with or without early bird rebate).
+     *
+     * @return void
+     */
+    private function setSingleViewSpecialPriceMarkers()
+    {
         if ($this->seminar->hasPriceSpecial()) {
-            if ($this->seminar->hasEarlyBirdPrice()
-                && !$this->seminar->isEarlyBirdDeadlineOver()
-            ) {
-                $this->setMarker(
-                    'price_earlybird_special',
-                    $this->seminar->getEarlyBirdPriceSpecial()
-                );
+            if ($this->seminar->hasEarlyBirdPrice() && !$this->seminar->isEarlyBirdDeadlineOver()) {
+                $this->setMarker('price_earlybird_special', $this->seminar->getEarlyBirdPriceSpecial());
                 $this->setMarker(
                     'message_earlybird_price_special',
-                    sprintf(
-                        $this->translate('message_earlybird_price'),
-                        $this->seminar->getEarlyBirdDeadline()
-                    )
+                    sprintf($this->translate('message_earlybird_price'), $this->seminar->getEarlyBirdDeadline())
                 );
-                $this->setMarker(
-                    'price_special',
-                    $this->seminar->getPriceSpecial()
-                );
+                $this->setMarker('price_special', $this->seminar->getPriceSpecial());
             } else {
-                $this->setMarker(
-                    'price_special',
-                    $this->seminar->getPriceSpecial()
-                );
-                $this->hideSubparts(
-                    'price_earlybird_special',
-                    'field_wrapper'
-                );
+                $this->setMarker('price_special', $this->seminar->getPriceSpecial());
+                $this->hideSubparts('price_earlybird_special', 'field_wrapper');
             }
         } else {
             $this->hideSubparts('price_special', 'field_wrapper');
             $this->hideSubparts('price_earlybird_special', 'field_wrapper');
         }
+    }
 
-        // set the regular price (including full board)
+    /**
+     * Sets the prices with board (regular and special) or hides the corresponding subparts if those prices
+     * are not available.
+     *
+     * @return void
+     */
+    private function setSingleViewBoardPriceMarkers()
+    {
         if ($this->seminar->hasPriceRegularBoard()) {
-            $this->setMarker(
-                'price_board_regular',
-                $this->seminar->getPriceRegularBoard()
-            );
+            $this->setMarker('price_board_regular', $this->seminar->getPriceRegularBoard());
         } else {
             $this->hideSubparts('price_board_regular', 'field_wrapper');
         }
 
-        // set the special price (including full board)
         if ($this->seminar->hasPriceSpecialBoard()) {
-            $this->setMarker(
-                'price_board_special',
-                $this->seminar->getPriceSpecialBoard()
-            );
+            $this->setMarker('price_board_special', $this->seminar->getPriceSpecialBoard());
         } else {
             $this->hideSubparts('price_board_special', 'field_wrapper');
         }

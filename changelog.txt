@@ -4,6 +4,7 @@ Features:
 - [#5816] Event.getAttendeeNames
 
 Cleanup:
+- [#5818] Split up DefaultController.setPriceMarkers
 - [#5815] Use spaces for indentation of XML and TypoScript
 
 
