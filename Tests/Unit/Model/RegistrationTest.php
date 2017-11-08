@@ -42,17 +42,6 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
         $this->testingFramework->cleanUp();
     }
 
-    /**
-     * @test
-     */
-    public function getCreationDateAsUnixTimeStampReturnsCreationDate()
-    {
-        $date = 1509035296;
-        $this->fixture->setData(['crdate' => $date]);
-
-        self::assertSame($date, $this->fixture->getCreationDateAsUnixTimeStamp());
-    }
-
     ///////////////////////////////
     // Tests regarding the title.
     ///////////////////////////////
