@@ -489,6 +489,58 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
+    public function createListOfRegistrationsCanContainOneRegistrationUidOfHiddenEvent()
+    {
+        $this->testingFramework->changeRecord('tx_seminars_seminars', $this->eventUid, ['hidden' => 1]);
+
+        $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
+        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
+
+        $registrationUid = $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            [
+                'seminar' => $this->eventUid,
+                'user' => $this->testingFramework->createFrontEndUser(),
+            ]
+        );
+
+        self::assertContains(
+            (string) $registrationUid,
+            $this->fixture->createListOfRegistrations($this->eventUid)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function createListOfRegistrationsCanContainOneRegistrationUidOfEventWithPastEndTime()
+    {
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $this->eventUid,
+            ['endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000]
+        );
+
+        $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
+        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
+
+        $registrationUid = $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            [
+                'seminar' => $this->eventUid,
+                'user' => $this->testingFramework->createFrontEndUser(),
+            ]
+        );
+
+        self::assertContains(
+            (string) $registrationUid,
+            $this->fixture->createListOfRegistrations($this->eventUid)
+        );
+    }
+
+    /**
+     * @test
+     */
     public function createListOfRegistrationsCanContainLocalizedRegisteredThemselves()
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');

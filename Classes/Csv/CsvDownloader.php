@@ -195,7 +195,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
      */
     public function createListOfRegistrations($eventUid)
     {
-        if (!Tx_Seminars_OldModel_Abstract::recordExists($eventUid, 'tx_seminars_seminars')) {
+        if (!Tx_Seminars_OldModel_Abstract::recordExists($eventUid, 'tx_seminars_seminars', true)) {
             return '';
         }
 
@@ -258,7 +258,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
      *
      * @param int $eventUid UID of the event record for which access should be checked, must be > 0
      *
-     * @return bool TRUE if the list of registrations may be exported as CSV
+     * @return bool true if the list of registrations may be exported as CSV
      */
     protected function canAccessListOfRegistrations($eventUid)
     {
@@ -273,7 +273,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
                 $accessCheck = GeneralUtility::makeInstance('Tx_Seminars_Csv_FrontEndRegistrationAccessCheck');
 
                 /** @var Tx_Seminars_OldModel_Event $event */
-                $event = GeneralUtility::makeInstance(Tx_Seminars_OldModel_Event::class, $eventUid);
+                $event = GeneralUtility::makeInstance(Tx_Seminars_OldModel_Event::class, $eventUid, false, true);
                 $accessCheck->setEvent($event);
 
                 $result = $accessCheck->hasAccess();
@@ -442,7 +442,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
     {
         $result = false;
 
-        if (!Tx_Seminars_OldModel_Abstract::recordExists($eventUid, 'tx_seminars_seminars')) {
+        if (!Tx_Seminars_OldModel_Abstract::recordExists($eventUid, 'tx_seminars_seminars', true)) {
             $this->errorType = self::NOT_FOUND;
         } elseif (!$this->canAccessListOfRegistrations($eventUid)) {
             $this->errorType = self::ACCESS_DENIED;
