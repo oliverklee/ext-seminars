@@ -1,3 +1,9 @@
+1.2.1 - released 2017-11-09
+
+Bug fixes:
+- [#5812] Allow CSV export of registrations for expired or hidden events
+
+
 1.2.0 - released 2017-11-02
 
 Features:
