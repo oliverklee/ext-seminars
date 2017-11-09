@@ -2066,8 +2066,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns the names of all registered attendees (including additional attendees and queue registrations).
      *
-     * @return string[][] all attendee names in a nested array:
-     *         [['firstName' => 'Jane', 'lastName' => 'Doe', 'fullName' => 'Jane Doe']]
+     * @return string[] attendee names: ['Jane Doe', 'John Doe']
      */
     public function getAttendeeNames()
     {
@@ -2078,8 +2077,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      * Returns the names of registered attendees (including additional attendees and queue registrations),
      * but only those that have registered after the last registration digest email.
      *
-     * @return string[][] all attendee names in a nested array:
-     *         [['firstName' => 'Jane', 'lastName' => 'Doe', 'fullName' => 'Jane Doe']]
+     * @return string[] attendee names: ['Jane Doe', 'John Doe']
      */
     public function getAttendeeNamesAfterLastDigest()
     {
@@ -2089,8 +2087,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * @param \Tx_Oelib_List $registrations \Tx_Oelib_List<\Tx_Seminars_Model_Registration>
      *
-     * @return string[][] all attendee names in a nested array:
-     *         [['firstName' => 'Jane', 'lastName' => 'Doe', 'fullName' => 'Jane Doe']]
+     * @return string[] attendee names: ['Jane Doe', 'John Doe']
      */
     private function extractNamesFromRegistrations(\Tx_Oelib_List $registrations)
     {
@@ -2099,52 +2096,27 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
         /** @var \Tx_Seminars_Model_Registration $registration */
         foreach ($registrations as $registration) {
             if ($registration->hasRegisteredThemselves()) {
-                $names[] = $this->createNamePartsForUser($registration->getFrontEndUser());
+                $names[] = $registration->getFrontEndUser()->getName();
             }
 
+            $hasAdditionalPersons = false;
             /** @var \Tx_Seminars_Model_FrontEndUser $person */
             foreach ($registration->getAdditionalPersons() as $person) {
-                $names[] = $this->createNamePartsForUser($person);
+                $names[] = $person->getName();
+                $hasAdditionalPersons = true;
+            }
+
+            if (!$hasAdditionalPersons) {
+                $namesFromRegistration = explode(CRLF, $registration->getAttendeesNames());
+                foreach ($namesFromRegistration as $name) {
+                    $trimmedName = trim($name);
+                    if ($trimmedName !== '') {
+                        $names[] = $trimmedName;
+                    }
+                }
             }
         }
-
-        return $this->sortNamesByLastName($names);
-    }
-
-    /**
-     * @param Tx_Seminars_Model_FrontEndUser $user
-     *
-     * @return string[] name parts:
-     *         ['firstName' => 'Jane', 'lastName' => 'Doe', 'fullName' => 'Jane Doe']
-     */
-    private function createNamePartsForUser(\Tx_Seminars_Model_FrontEndUser $user)
-    {
-        return [
-            'firstName' => $user->getFirstName(),
-            'lastName' => $user->getLastName(),
-            'fullName' => $user->getName(),
-        ];
-    }
-
-    /**
-     * @param string[][] $names
-     *
-     * @return string[][]
-     */
-    private function sortNamesByLastName(array $names)
-    {
-        usort(
-            $names,
-            function (array $nameParts1, array $nameParts2) {
-                $first = $nameParts1['lastName'];
-                $second = $nameParts2['lastName'];
-                if ($first === $second) {
-                    return 0;
-                }
-
-                return $first < $second ? -1 : 1;
-            }
-        );
+        sort($names, SORT_STRING);
 
         return $names;
     }

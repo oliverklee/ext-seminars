@@ -3,6 +3,9 @@
 Features:
 - [#5813] Scheduler task for sending daily digests of registrations
 
+Changes:
+- [#5821] Also use the free-text attendee names in the digest email
+
 
 1.2.0 - released 2017-11-02
 

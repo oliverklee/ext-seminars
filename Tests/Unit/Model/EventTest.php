@@ -2917,16 +2917,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setData(['registrations' => $registrations]);
 
-        self::assertSame(
-            [
-                [
-                    'firstName' => $firstName,
-                    'lastName' => $lastName,
-                    'fullName' => $firstName . ' ' . $lastName,
-                ],
-            ],
-            $this->fixture->getAttendeeNames()
-        );
+        self::assertSame([$firstName . ' ' . $lastName], $this->fixture->getAttendeeNames());
     }
 
     /**
@@ -2952,7 +2943,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesForRegistrationReturnsAdditionalAttendeeNames()
+    public function getAttendeeNamesForRegistrationReturnsAdditionalAttendeeNamesFromAttachedUsers()
     {
         $firstName = 'Oliver';
         $lastName = 'Klee';
@@ -2974,16 +2965,71 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setData(['registrations' => $registrations]);
 
-        self::assertSame(
-            [['firstName' => $firstName, 'lastName' => $lastName, 'fullName' => $firstName . ' ' . $lastName]],
-            $this->fixture->getAttendeeNames()
-        );
+        self::assertSame([$firstName . ' ' . $lastName], $this->fixture->getAttendeeNames());
     }
 
     /**
      * @test
      */
-    public function getAttendeeNamesSortsNamesFromRegisteredThemselvesByLastName()
+    public function getAttendeeNamesForRegistrationForAttachedUsersIgnoresFreeTextNames()
+    {
+        $firstName = 'Oliver';
+        $lastName = 'Klee';
+
+        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user->setData([]);
+
+        $additionalPerson = new \Tx_Seminars_Model_FrontEndUser();
+        $additionalPerson->setData(['first_name' => $firstName, 'last_name' => $lastName]);
+        $additionalPersons = new \Tx_Oelib_List();
+        $additionalPersons->add($additionalPerson);
+
+        $registration = new \Tx_Seminars_Model_Registration();
+        $registration->setData(
+            [
+                'user' => $user,
+                'registered_themselves' => false,
+                'additional_persons' => $additionalPersons,
+                'attendees_names' => 'Jane Doe',
+            ]
+        );
+        $registrations = new \Tx_Oelib_List();
+        $registrations->add($registration);
+
+        $this->fixture->setData(['registrations' => $registrations]);
+
+        self::assertSame([$firstName . ' ' . $lastName], $this->fixture->getAttendeeNames());
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendeeNamesForRegistrationReturnsAdditionalAttendeeNamesFromFreeTextField()
+    {
+        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user->setData([]);
+
+        $registration = new \Tx_Seminars_Model_Registration();
+        $registration->setData(
+            [
+                'user' => $user,
+                'registered_themselves' => false,
+                'additional_persons' => new \Tx_Oelib_List(),
+                'attendees_names' => 'Jane Doe' . CRLF . 'John Doe',
+            ]
+        );
+        $registrations = new \Tx_Oelib_List();
+        $registrations->add($registration);
+
+        $this->fixture->setData(['registrations' => $registrations]);
+
+        self::assertSame(['Jane Doe', 'John Doe'], $this->fixture->getAttendeeNames());
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendeeNamesSortsNamesFromRegisteredThemselvesByFullName()
     {
         $registrations = new \Tx_Oelib_List();
 
@@ -3002,7 +3048,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         $registrations->add($registration1);
 
         $firstName2 = 'Jane';
-        $lastName2 = 'Bar';
+        $lastName2 = 'Wolowitz';
         $user2 = new \Tx_Seminars_Model_FrontEndUser();
         $user2->setData(['first_name' => $firstName2, 'last_name' => $lastName2]);
         $registration2 = new \Tx_Seminars_Model_Registration();
@@ -3015,16 +3061,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
 
         self::assertSame(
             [
-                [
-                    'firstName' => $firstName2,
-                    'lastName' => $lastName2,
-                    'fullName' => $firstName2 . ' ' . $lastName2,
-                ],
-                [
-                    'firstName' => $firstName1,
-                    'lastName' => $lastName1,
-                    'fullName' => $firstName1 . ' ' . $lastName1,
-                ],
+                $firstName2 . ' ' . $lastName2,
+                $firstName1 . ' ' . $lastName1,
             ],
             $this->fixture->getAttendeeNames()
         );
@@ -3033,7 +3071,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesSortsNamesFromAdditionalAttendeesByLastName()
+    public function getAttendeeNamesSortsNamesFromAdditionalAttendeesFromUsersByFullName()
     {
         $user = new \Tx_Seminars_Model_FrontEndUser();
         $user->setData([]);
@@ -3046,7 +3084,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         $additionalPersons->add($additionalPerson1);
 
         $firstName2 = 'Jane';
-        $lastName2 = 'Bar';
+        $lastName2 = 'Wolowitz';
         $additionalPerson2 = new \Tx_Seminars_Model_FrontEndUser();
         $additionalPerson2->setData(['first_name' => $firstName2, 'last_name' => $lastName2]);
         $additionalPersons->add($additionalPerson2);
@@ -3062,19 +3100,36 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
 
         self::assertSame(
             [
-                [
-                    'firstName' => $firstName2,
-                    'lastName' => $lastName2,
-                    'fullName' => $firstName2 . ' ' . $lastName2,
-                ],
-                [
-                    'firstName' => $firstName1,
-                    'lastName' => $lastName1,
-                    'fullName' => $firstName1 . ' ' . $lastName1,
-                ],
+                $firstName2 . ' ' . $lastName2,
+                $firstName1 . ' ' . $lastName1,
             ],
             $this->fixture->getAttendeeNames()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendeeNamesForRegistrationSortAdditionalAttendeeNamesFromFreeTextField()
+    {
+        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user->setData([]);
+
+        $registration = new \Tx_Seminars_Model_Registration();
+        $registration->setData(
+            [
+                'user' => $user,
+                'registered_themselves' => false,
+                'additional_persons' => new \Tx_Oelib_List(),
+                'attendees_names' => 'John Doe' . CRLF . 'Jane Doe',
+            ]
+        );
+        $registrations = new \Tx_Oelib_List();
+        $registrations->add($registration);
+
+        $this->fixture->setData(['registrations' => $registrations]);
+
+        self::assertSame(['Jane Doe', 'John Doe'], $this->fixture->getAttendeeNames());
     }
 
     /**
@@ -3103,13 +3158,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setData(['registrations' => $registrations, 'date_of_last_registration_digest' => 1]);
 
         self::assertSame(
-            [
-                [
-                    'firstName' => $firstName,
-                    'lastName' => $lastName,
-                    'fullName' => $firstName . ' ' . $lastName,
-                ],
-            ],
+            [$firstName . ' ' . $lastName],
             $this->fixture->getAttendeeNamesAfterLastDigest()
         );
     }

@@ -14,10 +14,10 @@
                         </strong>
                     </th>
                 </tr>
-                <f:for each="{event.attendeeNames}" as="nameParts">
+                <f:for each="{event.attendeeNames}" as="name">
                     <tr>
                         <td>
-                            {nameParts.lastName}, {nameParts.firstName}
+                            {name}
                         </td>
                     </tr>
                 </f:for>
