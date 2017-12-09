@@ -127,6 +127,8 @@ organizations and persons:
 
 - `Systemhaus SAR GmbH <http://www.sar.de/>`_
 
+- `T3 Premium <https://www.t3premium.de/>`_
+
 - `takomat Agentur GbR <https://www.takomat-agentur.de/>`_
 
 - thinkhouse GmbH
