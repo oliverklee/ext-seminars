@@ -22,6 +22,4 @@ Development Workflow
    :titlesonly:
    :glob:
 
-   MailinglisteUndWikiFrDieEntwicklung/Index
    DieExtensionAnpassenOderVerndern/Index
-   DieExtensionAusDemGit-repositoryHolen/Index

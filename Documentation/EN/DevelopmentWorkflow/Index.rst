@@ -24,6 +24,5 @@ Development Workflow
 
    TheDevelopersMailingListAndWiki/Index
    ChangingOrCustomizingTheExtension/Index
-   GettingTheExtensionFromGit/Index
    DevelopmentWorkflowAndCodingStyleGuidelines/Index
    ReleaseChecklist/Index
