@@ -1,7 +1,7 @@
 {
     "name": "oliverklee/seminars",
-    "type": "typo3-cms-extension",
     "description": "This extension allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.",
+    "type": "typo3-cms-extension",
     "keywords": [
         "seminars",
         "workshops",
@@ -10,6 +10,7 @@
         "education"
     ],
     "homepage": "https://www.oliverklee.de/typo3-services/typo3-extensions/seminarmanager.html",
+    "license": "GPL-3.0+",
     "authors": [
         {
             "name": "Oliver Klee",
@@ -21,11 +22,6 @@
         "issues": "https://github.com/oliverklee/ext-seminars/issues",
         "source": "https://github.com/oliverklee/ext-seminars"
     },
-    "license": "GPL-3.0+",
-    "replace": {
-        "seminars": "self.version",
-        "typo3-ter/seminars": "self.version"
-    },
     "require": {
         "php": ">=5.5.0,<7.1",
         "typo3/cms-core": ">=6.2.0,<8.0",
@@ -36,9 +32,17 @@
     "require-dev": {
         "phpunit/phpunit": "~4.8.0"
     },
+    "replace": {
+        "seminars": "self.version",
+        "typo3-ter/seminars": "self.version"
+    },
     "autoload": {
         "classmap": [
-            "Classes",
+            "Classes"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
             "Tests"
         ]
     }
