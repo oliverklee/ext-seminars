@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Seminar Manager',
-    'description' => 'This extension allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.',
+    'description' => 'Allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.',
     'category' => 'plugin',
     'shy' => 0,
     'dependencies' => 'static_info_tables,oelib,mkforms',
@@ -51,6 +51,9 @@ $EM_CONF[$_EXTKEY] = [
         ],
     ],
     'autoload' => [
-        'classmap' => ['Classes', 'Tests'],
+        'classmap' => ['Classes'],
+    ],
+    'autoload-dev' => [
+        'classmap' => ['Tests'],
     ],
 ];
