@@ -55,6 +55,8 @@
         }
     ],
     "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
     },
     "scripts": {
     },
