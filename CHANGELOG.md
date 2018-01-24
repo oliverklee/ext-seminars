@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - add TravisCI builds
 
 ### Changed
+- #4 require static_info_tables >= 6.3.7
 - move the extension to GitHub
 
 ### Deprecated
