@@ -3,9 +3,13 @@ sudo: false
 language: php
 
 php:
-- 5.5
-- 5.6
 - 7.0
+
+env:
+- TYPO3_VERSION="^7.6"
+
+matrix:
+  exclude:
 
 cache:
   directories:
@@ -16,14 +20,11 @@ before_install:
 - phpenv config-rm xdebug.ini
 
 install:
-- composer install
+- composer require-typo3-version "$TYPO3_VERSION"
+- git checkout .
+- export TYPO3_PATH_ROOT=$PWD/.Build/public
 
 script:
-- >
-  echo;
-  echo "Validating the composer.json";
-  composer validate --no-check-all --no-check-lock --strict;
-
 - >
   echo;
   echo "Linting all PHP files";
