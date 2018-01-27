@@ -42,6 +42,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16.0",
         "helhum/typo3-console": "^5.7.2",
+        "helmich/typo3-typoscript-lint": "^1.5.0 || ^2.0.1",
         "mikey179/vfsstream": "^1.6.8",
         "nimut/testing-framework": "^4.1.8",
         "oliverklee/phpunit": "^6.5.14",
@@ -82,6 +83,7 @@
         "ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
         "ci:php:sniff": "phpcs Classes Configuration Tests",
         "ci:php:fixer": "php-cs-fixer --config=Configuration/php-cs-fixer.php fix --dry-run -v --show-progress=dots --diff-format=udiff Classes Tests",
+        "ci:ts:lint": "typoscript-lint -c Configuration/TsLint.yml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
         "ci:tests:unit": "phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit",
         "ci:tests:unit-legacy": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
         "ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml {}';",
@@ -95,7 +97,9 @@
         ],
         "ci:static": [
             "@ci:php:lint",
-            "@ci:php:sniff"
+            "@ci:php:sniff",
+            "@ci:php:fixer",
+            "@ci:ts:lint"
         ],
         "ci": [
             "@ci:static",
