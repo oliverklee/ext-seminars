@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- run the unit tests on TravisCI (#12)
 - Add an SVG extension icon (#34)
 
 ### Changed
