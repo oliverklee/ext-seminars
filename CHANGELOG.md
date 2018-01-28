@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 1.4.0
+
+### Added
 - configurable default value for the "register myself" checkbox (#19)
 - Composer script for PHP linting (#7)
 - add TravisCI builds
@@ -16,10 +28,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - require mkforms >= 3.0.0 (#6)
 - require static_info_tables >= 6.3.7 (#4)
 - move the extension to GitHub
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - automatically create the uploads folder on install (#20)
