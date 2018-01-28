@@ -956,8 +956,6 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function hasSpeakersOfType($speakerRelation = 'speakers')
     {
-        $hasSpeakers = false;
-
         switch ($speakerRelation) {
             case 'partners':
                 $hasSpeakers = $this->hasPartners();
@@ -3232,8 +3230,6 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function hasTopicInteger($key)
     {
-        $result = false;
-
         if ($this->isTopicOkay()) {
             $result = $this->topic->hasRecordPropertyInteger($key);
         } else {
@@ -3255,8 +3251,6 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function getTopicInteger($key)
     {
-        $result = 0;
-
         if ($this->isTopicOkay()) {
             $result = $this->topic->getRecordPropertyInteger($key);
         } else {
@@ -3277,8 +3271,6 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private function hasTopicString($key)
     {
-        $result = false;
-
         if ($this->isTopicOkay()) {
             $result = $this->topic->hasRecordPropertyString($key);
         } else {
@@ -3300,8 +3292,6 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function getTopicString($key)
     {
-        $result = '';
-
         if ($this->isTopicOkay()) {
             $result = $this->topic->getRecordPropertyString($key);
         } else {
@@ -3323,8 +3313,6 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private function hasTopicDecimal($key)
     {
-        $result = false;
-
         if ($this->isTopicOkay()) {
             $result = $this->topic->hasRecordPropertyDecimal($key);
         } else {
@@ -3346,8 +3334,6 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function getTopicDecimal($key)
     {
-        $result = '';
-
         if ($this->isTopicOkay()) {
             $result = $this->topic->getRecordPropertyDecimal($key);
         } else {

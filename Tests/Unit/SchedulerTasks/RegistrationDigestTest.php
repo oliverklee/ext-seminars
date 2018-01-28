@@ -137,7 +137,7 @@ class RegistrationDigestTest extends \Tx_Phpunit_TestCase
 
         $emailProphecy->send()->shouldNotHaveBeenCalled();
         /** @var StandaloneView|ObjectProphecy $viewProphecy */
-        $viewProphecy = $this->prophesize(StandaloneView::class);
+        $this->prophesize(StandaloneView::class);
     }
 
     /**

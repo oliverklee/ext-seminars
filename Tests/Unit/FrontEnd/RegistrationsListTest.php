@@ -163,7 +163,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
      */
     public function createFixtureWithListRegistrationsAsWhatToDisplayDoesNotThrowException()
     {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationsList(
+        new Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations', 0, $GLOBALS['TSFE']->cObj
         );
@@ -174,7 +174,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
      */
     public function createFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException()
     {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationsList(
+        new Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_vip_registrations', 0, $GLOBALS['TSFE']->cObj
         );

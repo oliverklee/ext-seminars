@@ -535,8 +535,8 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
             $this->notifyAttendee($this->registration, $plugin, 'confirmationOnRegistrationForQueue');
             $this->notifyOrganizers($this->registration, 'notificationOnRegistrationForQueue');
         } else {
-            $this->notifyAttendee($this->registration, $plugin, 'confirmation');
-            $this->notifyOrganizers($this->registration, 'notification');
+            $this->notifyAttendee($this->registration, $plugin);
+            $this->notifyOrganizers($this->registration);
         }
 
         if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {

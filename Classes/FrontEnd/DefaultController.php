@@ -235,8 +235,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     public function main($unused, array $conf)
     {
-        $result = '';
-
         $this->init($conf);
         $this->pi_initPIflexForm();
 
@@ -3051,12 +3049,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     protected function createEventEditorHtml()
     {
-        $result = '';
         $eventEditor = $this->createEventEditorInstance();
 
         $hasAccessMessage = $eventEditor->hasAccessMessage();
 
-        if (($hasAccessMessage == '')) {
+        if ($hasAccessMessage == '') {
             $result = $eventEditor->render();
         } else {
             $result = $hasAccessMessage;
@@ -3324,9 +3321,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     private function hideFilesColumnIfUserCannotAccessFiles()
     {
-        $limitToAttendees = $this->getConfValueBoolean(
-            'limitFileDownloadToAttendees', 'sDEF'
-        );
+        $limitToAttendees = $this->getConfValueBoolean('limitFileDownloadToAttendees');
 
         if ($limitToAttendees && !$this->isLoggedIn()) {
             $this->hideColumns(['attached_files']);
@@ -3373,9 +3368,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     private function mayUserAccessAttachedFiles()
     {
-        $limitToAttendees = $this->getConfValueBoolean(
-            'limitFileDownloadToAttendees', 'sDEF'
-        );
+        $limitToAttendees = $this->getConfValueBoolean('limitFileDownloadToAttendees');
 
         return !$limitToAttendees
             || ($this->isLoggedIn() && $this->seminar->isUserRegistered($this->getLoggedInFrontEndUserUid()));

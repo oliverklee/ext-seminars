@@ -261,7 +261,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         // the previous rendering still is necessary for processing the data.
         if ($this->currentPageNumber > 0) {
             $this->discardRenderedForm();
-            $this->initializeAction('register');
+            $this->initializeAction();
             // This will produce a new form to which no data can be provided.
             $rawForm = $this->makeFormCreator()->render();
         }
@@ -280,7 +280,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         $this->setMarker('billing_address', $this->getBillingAddress());
         $this->setMarker('registration_data', $this->getAllRegistrationDataForConfirmation());
 
-        return $this->getSubpart('');
+        return $this->getSubpart();
     }
 
     /**
@@ -740,7 +740,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         // On freshly updated sites, the configuration value might not be set
         // yet. To avoid breaking the site, we use the event list in this case.
         if (!$pageId) {
-            $pageId = $this->getConfValueInteger('listPID', 'sDEF');
+            $pageId = $this->getConfValueInteger('listPID');
         }
 
         $linkConfiguration = ['parameter' => $pageId];

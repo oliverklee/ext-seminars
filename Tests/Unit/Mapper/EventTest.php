@@ -925,10 +925,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function findAllByBeginDateCanFindTwoEvents()
     {
-        $uid = $this->testingFramework->createRecord(
+        $this->testingFramework->createRecord(
             'tx_seminars_seminars', ['begin_date' => 42]
         );
-        $uid = $this->testingFramework->createRecord(
+        $this->testingFramework->createRecord(
             'tx_seminars_seminars', ['begin_date' => 43]
         );
 
