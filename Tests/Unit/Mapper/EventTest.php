@@ -1077,6 +1077,33 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
         self::assertTrue($result->isEmpty());
     }
 
+    /**
+     * @test
+     */
+    public function findForAutomaticStatusChangeSortsResultsByStartDateInAscendingOrder()
+    {
+        $laterUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'begin_date' => mktime(10, 0, 0, 1, 20, 2018),
+                'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+                'automatic_confirmation_cancelation' => 1
+            ]
+        );
+        $earlierUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'begin_date' => mktime(10, 0, 0, 1, 15, 2018),
+                'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+                'automatic_confirmation_cancelation' => 1
+            ]
+        );
+
+        $result = $this->fixture->findForAutomaticStatusChange();
+
+        self::assertSame($earlierUid . ',' . $laterUid, $result->getUids());
+    }
+
     /*
      * Tests concerning findForRegistrationDigestEmail
      */
