@@ -150,9 +150,10 @@ class Tx_Seminars_Mapper_Event extends Tx_Oelib_DataMapper
      */
     public function findForAutomaticStatusChange()
     {
-        $whereClause = 'cancelled = ' . Tx_Seminars_Model_Event::STATUS_PLANNED . ' AND automatic_confirmation_cancelation = 1';
+        $whereClause = 'cancelled = ' . Tx_Seminars_Model_Event::STATUS_PLANNED .
+            ' AND automatic_confirmation_cancelation = 1';
 
-        return $this->findByWhereClause($whereClause);
+        return $this->findByWhereClause($whereClause, 'begin_date ASC');
     }
 
     /**

@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - add TravisCI builds
 
 ### Changed
+- event status email should list upcoming events on top (#14)
 - require mkforms >= 3.0.0 (#6)
 - require static_info_tables >= 6.3.7 (#4)
 - move the extension to GitHub
