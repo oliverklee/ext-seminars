@@ -19,6 +19,7 @@ use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecySubjectInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -73,6 +74,10 @@ class RegistrationDigestTest extends \Tx_Phpunit_TestCase
 
     protected function setUp()
     {
+        if (!ExtensionManagementUtility::isLoaded('scheduler')) {
+            self::markTestSkipped('This tests needs the scheduler extension.');
+        }
+
         $GLOBALS['SIM_EXEC_TIME'] = $this->now;
 
         $this->subject = new RegistrationDigest();
