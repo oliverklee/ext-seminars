@@ -639,6 +639,22 @@ override the corresponding value from TS Setup.**
 
 .. container:: table-row
 
+   Property
+         registerThemselvesByDefaultForHiddenCheckbox
+
+   Data type
+         boolean
+
+   Description
+         ob sich der eingeloggte Benutzer per Default im Anmeldeformular auch selbst anmeldet
+         (nur wirksam, wenn die Checkbox im Anmeldeformular ausgeblendet ist)
+
+   Default
+         1
+
+
+.. container:: table-row
+
    Eigenschaft
          numberOfFirstRegistrationPage
 

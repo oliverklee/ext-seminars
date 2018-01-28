@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- configurable default value for the "register myself" checkbox (#19)
 - Composer script for PHP linting (#7)
 - add TravisCI builds
 

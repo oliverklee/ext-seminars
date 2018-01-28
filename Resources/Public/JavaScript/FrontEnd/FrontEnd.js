@@ -186,7 +186,12 @@ TYPO3.seminars.getNumberOfNeededNameFields = function () {
     if (myselfSelector.length > 0) {
         selfSeat = parseInt(myselfSelector.attr('value'));
     } else {
-        selfSeat = 1;
+        var $defaultValue = jQuery('#tx-seminars-pi1-themselves-default');
+        if ($defaultValue.length > 0) {
+            selfSeat = parseInt($defaultValue.data('value'));
+        } else {
+            selfSeat = 1;
+        }
     }
 
     return seats - selfSeat;
