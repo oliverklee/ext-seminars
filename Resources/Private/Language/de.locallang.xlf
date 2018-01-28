@@ -275,6 +275,10 @@
 				<source>h</source>
 				<target>Uhr</target>
 			</trans-unit>
+			<trans-unit id="label_checkboxes" xml:space="preserve">
+				<source>Selected options</source>
+				<target>Gewählte Optionen</target>
+			</trans-unit>
 			<trans-unit id="message_notLoggedIn" xml:space="preserve" approved="yes">
 				<source>Please log in first.</source>
 				<target>Bitte loggen Sie sich zuerst ein.</target>

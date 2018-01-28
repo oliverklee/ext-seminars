@@ -207,6 +207,9 @@
 			<trans-unit id="label_hours" xml:space="preserve">
 				<source>h</source>
 			</trans-unit>
+			<trans-unit id="label_checkboxes" xml:space="preserve">
+				<source>Selected options</source>
+			</trans-unit>
 			<trans-unit id="message_notLoggedIn" xml:space="preserve">
 				<source>Please log in first.</source>
 			</trans-unit>
