@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - add TravisCI builds
 
 ### Changed
+- disable the legacy BE module in TYPO3 8LTS (#15)
 - event status email should list upcoming events on top (#14)
 - require mkforms >= 3.0.0 (#6)
 - require static_info_tables >= 6.3.7 (#4)
