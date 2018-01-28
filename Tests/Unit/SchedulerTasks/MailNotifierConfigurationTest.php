@@ -16,6 +16,7 @@ namespace OliverKlee\Seminars\Tests\Unit\SchedulerTasks;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Lang\LanguageService;
 use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
@@ -65,6 +66,10 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
     protected function setUp()
     {
         $this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
+        if (!ExtensionManagementUtility::isLoaded('scheduler')) {
+            self::markTestSkipped('This tests needs the scheduler extension.');
+        }
+
         $this->languageService = new LanguageService();
         $this->languageService->init('default');
         $GLOBALS['LANG'] = $this->languageService;
@@ -77,7 +82,9 @@ class MailNotifierConfigurationTest extends \Tx_Phpunit_TestCase
 
     protected function tearDown()
     {
-        $this->testingFramework->cleanUp();
+        if ($this->testingFramework !== null) {
+            $this->testingFramework->cleanUp();
+        }
 
         $GLOBALS['LANG'] = $this->languageBackup;
         $this->languageBackup = null;

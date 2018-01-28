@@ -19,6 +19,7 @@ use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecySubjectInterface;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
@@ -95,6 +96,9 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
     protected function setUp()
     {
         $this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
+        if (!ExtensionManagementUtility::isLoaded('scheduler')) {
+            self::markTestSkipped('This tests needs the scheduler extension.');
+        }
 
         $this->languageService = new LanguageService();
         $this->languageService->init('default');
@@ -145,7 +149,9 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
 
     protected function tearDown()
     {
-        $this->testingFramework->cleanUp();
+        if ($this->testingFramework !== null) {
+            $this->testingFramework->cleanUp();
+        }
 
         $GLOBALS['LANG'] = $this->languageBackup;
         $this->languageBackup = null;

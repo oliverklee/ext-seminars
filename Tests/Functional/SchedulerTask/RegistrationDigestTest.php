@@ -16,6 +16,7 @@ namespace OliverKlee\Seminars\Tests\Functional\SchedulerTask;
  */
 
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
@@ -38,13 +39,19 @@ class RegistrationDigestTest extends \Tx_Phpunit_TestCase
 
     protected function setUp()
     {
+        if (!ExtensionManagementUtility::isLoaded('scheduler')) {
+            self::markTestSkipped('This tests needs the scheduler extension.');
+        }
+
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->subject = new RegistrationDigest();
     }
 
     protected function tearDown()
     {
-        $this->testingFramework->cleanUp();
+        if ($this->testingFramework !== null) {
+            $this->testingFramework->cleanUp();
+        }
     }
 
     /**

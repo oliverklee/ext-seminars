@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- skip the Scheduler-related tests if that extension is not installed (#16)
 - fix autoloading when running the tests in the BE module in non-composer mode (#11)
 
 ## 1.3.0
