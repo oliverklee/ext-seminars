@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- automatically create the uploads folder on install (#20)
 - add missing localized label for organizer in notification email (#18)
 - require Scheduler in development mode (#17)
 - skip the Scheduler-related tests if that extension is not installed (#16)
