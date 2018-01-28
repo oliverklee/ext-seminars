@@ -545,7 +545,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
      */
     public function sendEmailToAttendeesUsesFirstOrganizerAsSender()
     {
-        $secondOrganizer = Tx_Oelib_MapperRegistry
+        Tx_Oelib_MapperRegistry
             ::get(Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel([
                 'title' => 'Second Organizer',
                 'email' => 'bar@example.org',
@@ -637,7 +637,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
         );
 
         $organizerFooter = 'organizer footer';
-        $secondOrganizer = Tx_Oelib_MapperRegistry
+        Tx_Oelib_MapperRegistry
             ::get(Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel([
                 'title' => 'Second Organizer',
                 'email' => 'bar@example.org',

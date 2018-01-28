@@ -103,7 +103,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->addAdditionalTableName('tx_seminars_seminars');
 
-        $bag = $this->fixture->build();
+        $this->fixture->build();
     }
 
     ///////////////////////////////////
