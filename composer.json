@@ -33,6 +33,7 @@
         "dmk/mkforms": "^3.0.0"
     },
     "require-dev": {
+        "typo3/cms-scheduler": "^6.2.14 || ^7.6.23",
         "helhum/typo3-composer-setup": "^0.5.1",
         "phpunit/phpunit": "~4.8.0"
     },
