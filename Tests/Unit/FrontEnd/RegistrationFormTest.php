@@ -17,7 +17,6 @@ use TYPO3\CMS\Lang\LanguageService;
 /**
  * Test case.
  *
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Philipp Kitzberger <philipp@cron-it.de>
@@ -876,16 +875,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
     }
 
-    /////////////////////////////////////////////////////////////////////////
-    // Tests concerning the validation of the number of persons to register
-    /////////////////////////////////////////////////////////////////////////
+    /*
+     * Tests concerning the validation of the number of persons to register
+     */
 
     /**
      * @test
      */
     public function getNumberOfEnteredPersonsForEmptyFormDataReturnsZero()
     {
-        self::assertEquals(
+        self::assertSame(
             0,
             $this->fixture->getNumberOfEnteredPersons()
         );
@@ -898,16 +897,26 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $this->fixture->setFakedFormValue('registered_themselves', 0);
 
-        self::assertEquals(
-            0,
-            $this->fixture->getNumberOfEnteredPersons()
-        );
+        self::assertSame(0, $this->fixture->getNumberOfEnteredPersons());
+    }
+
+    /**
+     * @return int[][]
+     */
+    public function registerThemselvesDataProvider()
+    {
+        return [
+            '0' => [0],
+            '1' => [1]
+        ];
     }
 
     /**
      * @test
+     * @param bool $configurationValue
+     * @dataProvider registerThemselvesDataProvider
      */
-    public function getNumberOfEnteredPersonsForSelfRegistrationHiddenReturnsOne()
+    public function getNumberOfEnteredPersonsForFieldHiddenReturnsValueFromConfiguration($configurationValue)
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
             [
@@ -918,16 +927,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
                         'step2.' => [],
                     ],
                 ],
+                'registerThemselvesByDefaultForHiddenCheckbox' => (string)$configurationValue,
             ],
             $GLOBALS['TSFE']->cObj
         );
         $fixture->setAction('register');
         $fixture->setTestMode();
 
-        self::assertEquals(
-            1,
-            $fixture->getNumberOfEnteredPersons()
-        );
+        self::assertSame($configurationValue, $fixture->getNumberOfEnteredPersons());
     }
 
     /**
@@ -937,32 +944,26 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $this->fixture->setFakedFormValue('registered_themselves', 1);
 
-        self::assertEquals(
-            1,
-            $this->fixture->getNumberOfEnteredPersons()
-        );
+        self::assertSame(1, $this->fixture->getNumberOfEnteredPersons());
     }
 
     /**
      * @test
      */
-    public function getNumberOfEnteredPersonsForOneAdditionalPersonReturnsOne()
+    public function getNumberOfEnteredPersonsForOneAdditionalAndNoSelfRegistrationPersonReturnsOne()
     {
         $this->fixture->setFakedFormValue(
             'structured_attendees_names',
             '[["John", "Doe", "Key account", "john@example.com"]]'
         );
 
-        self::assertEquals(
-            1,
-            $this->fixture->getNumberOfEnteredPersons()
-        );
+        self::assertSame(1, $this->fixture->getNumberOfEnteredPersons());
     }
 
     /**
      * @test
      */
-    public function getNumberOfEnteredPersonsForTwoAdditionalPersonsReturnsTwo()
+    public function getNumberOfEnteredPersonsForTwoAdditionalPersonsAndNoSelfRegistrationReturnsTwo()
     {
         $this->fixture->setFakedFormValue(
             'structured_attendees_names',
@@ -970,10 +971,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
                 '["Jane", "Doe", "Sales", "jane@example.com"]]'
         );
 
-        self::assertEquals(
-            2,
-            $this->fixture->getNumberOfEnteredPersons()
-        );
+        self::assertSame(2, $this->fixture->getNumberOfEnteredPersons());
     }
 
     /**
@@ -987,10 +985,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
         $this->fixture->setFakedFormValue('registered_themselves', 1);
 
-        self::assertEquals(
-            2,
-            $this->fixture->getNumberOfEnteredPersons()
-        );
+        self::assertSame(2, $this->fixture->getNumberOfEnteredPersons());
     }
 
     /**

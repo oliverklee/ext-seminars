@@ -279,6 +279,10 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         $this->setMarker('feuser_data', $this->getAllFeUserData());
         $this->setMarker('billing_address', $this->getBillingAddress());
         $this->setMarker('registration_data', $this->getAllRegistrationDataForConfirmation());
+        $this->setMarker(
+            'themselves_default_value',
+            (int)$this->getConfValueString('registerThemselvesByDefaultForHiddenCheckbox')
+        );
 
         return $this->getSubpart();
     }
@@ -1719,7 +1723,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             $formData = (int)$this->getFormValue('registered_themselves');
             $themselves = ($formData > 0) ? 1 : 0;
         } else {
-            $themselves = 1;
+            $themselves = $this->getConfValueInteger('registerThemselvesByDefaultForHiddenCheckbox');
         }
 
         return $themselves + count($this->getAdditionalRegisteredPersonsData());
@@ -1729,8 +1733,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      * Checks whether the number of selected seats matches the number of
      * registered persons (including the FE user themselves as well as the additional attendees).
      *
-     * @return bool
-     *         TRUE if the number of seats matches the number of registered persons, FALSE otherwise
+     * @return bool whether the number of seats matches the number of registered persons
      */
     public function validateNumberOfRegisteredPersons()
     {
@@ -1741,7 +1744,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             return true;
         }
 
-        return (int)$this->getFormValue('seats') == $this->getNumberOfEnteredPersons();
+        return (int)$this->getFormValue('seats') === $this->getNumberOfEnteredPersons();
     }
 
     /**
