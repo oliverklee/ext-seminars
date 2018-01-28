@@ -13,7 +13,8 @@ TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
 
 $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY);
 
-if (TYPO3_MODE === 'BE') {
+if (TYPO3_MODE === 'BE'
+    && \TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) <= 8000000) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModulePath('web_txseminarsM2', $extPath . 'Classes/BackEnd/');
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('web', 'txseminarsM2', '', $extPath . 'Classes/BackEnd/');
 }
