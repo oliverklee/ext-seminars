@@ -62,7 +62,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
-            self::markTestSkipped('This test is for the old BE module only.');
+            self::markTestIncomplete('These tests needs some more tender love and care.');
         }
 
         $this->dummySysFolderUid = $this->testingFramework->createSystemFolder();

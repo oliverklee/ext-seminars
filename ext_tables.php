@@ -11,12 +11,24 @@ TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'EXT:seminars/Resources/Private/Language/locallang_csh_fe_groups.xlf'
 );
 
-$extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('seminars');
-
-if (TYPO3_MODE === 'BE'
-    && \TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) <= 8000000) {
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModulePath('web_txseminarsM2', $extPath . 'Classes/BackEnd/');
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('web', 'txseminarsM2', '', $extPath . 'Classes/BackEnd/');
+if (TYPO3_MODE === 'BE') {
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
+        'web',
+        'seminars',
+        '',
+        '',
+        [
+            'routeTarget'           => \OliverKlee\Seminars\BackEnd\Controller::class . '::mainAction',
+            'access'                => 'user,group',
+            'name'                  => 'web_seminars',
+            'labels' => [
+                'tabs_images' => [
+                    'tab' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.gif',
+                ],
+                'll_ref' => 'LLL:EXT:seminars/Resources/Private/Language/BackEnd/locallang_mod.xlf',
+            ],
+        ]
+    );
 }
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(

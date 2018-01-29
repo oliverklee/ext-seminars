@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Convert the BE module to the new format (#93)
 - Add support for TYPO3 8.7 (#86)
 - Add support for PHP 7.1 and 7.2 (#70)
 
