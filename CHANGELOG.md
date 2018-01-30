@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- require mkforms >= 3.0.14 (#22)
 
 ## 1.4.0
 
