@@ -14,6 +14,11 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+
+## 1.4.1
+
+### Fixed
+- fix the sorting in the daily registration digest (#23)
 - require mkforms >= 3.0.14 (#22)
 
 ## 1.4.0
@@ -25,7 +30,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - disable the legacy BE module in TYPO3 8LTS (#15)
-- event status email should list upcoming events on top (#14)
 - require mkforms >= 3.0.0 (#6)
 - require static_info_tables >= 6.3.7 (#4)
 - move the extension to GitHub
