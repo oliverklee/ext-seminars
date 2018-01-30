@@ -15,7 +15,6 @@
 /**
  * Test case.
  *
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
@@ -1077,33 +1076,6 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
         self::assertTrue($result->isEmpty());
     }
 
-    /**
-     * @test
-     */
-    public function findForAutomaticStatusChangeSortsResultsByStartDateInAscendingOrder()
-    {
-        $laterUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'begin_date' => mktime(10, 0, 0, 1, 20, 2018),
-                'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
-                'automatic_confirmation_cancelation' => 1
-            ]
-        );
-        $earlierUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'begin_date' => mktime(10, 0, 0, 1, 15, 2018),
-                'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
-                'automatic_confirmation_cancelation' => 1
-            ]
-        );
-
-        $result = $this->fixture->findForAutomaticStatusChange();
-
-        self::assertSame($earlierUid . ',' . $laterUid, $result->getUids());
-    }
-
     /*
      * Tests concerning findForRegistrationDigestEmail
      */
@@ -1160,6 +1132,44 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
 
         self::assertSame(1, $result->count());
         self::assertSame($eventUid, $result->first()->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findForRegistrationDigestEmailSortsEventsByBeginDateInAscendingOrder()
+    {
+        $laterEventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'begin_date' => mktime(10, 0, 0, 1, 20, 2018),
+                'date_of_last_registration_digest' => 0,
+                'registrations' => 1,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $laterEventUid, 'crdate' => 1]
+        );
+        $earlierEventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'begin_date' => mktime(10, 0, 0, 1, 15, 2018),
+                'date_of_last_registration_digest' => 0,
+                'registrations' => 1,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $earlierEventUid, 'crdate' => 1]
+        );
+
+        $result = $this->fixture->findForRegistrationDigestEmail();
+
+        self::assertSame(2, $result->count());
+        self::assertSame($earlierEventUid . ',' . $laterEventUid, $result->getUids());
     }
 
     /**
