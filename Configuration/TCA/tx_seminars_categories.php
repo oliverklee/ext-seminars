@@ -33,7 +33,7 @@ return [
                 'type' => 'group',
                 'internal_type' => 'file',
                 'allowed' => 'gif,png,jpeg,jpg',
-                'max_size' => 256,
+                'max_size' => 2048,
                 'uploadfolder' => 'uploads/tx_seminars',
                 'show_thumbs' => 1,
                 'size' => 1,
