@@ -850,7 +850,7 @@ $tca = [
                     'svg,' . 'doc,docx,sxw,odt,' . 'xls,xlsx,sxc,ods,' .
                     'ppt,pptx,sxi,odp,' . 'html,htm,css,js,xml,xsd,' .
                     'zip,rar,gz,tgz,tar,bz2,tbz,tbz2',
-                'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],
+                'max_size' => 4096,
                 'uploadfolder' => 'uploads/tx_seminars/',
                 'size' => '5',
                 'maxitems' => '200',
@@ -926,7 +926,7 @@ $tca = [
                 'type' => 'group',
                 'internal_type' => 'file',
                 'allowed' => 'gif,png,jpeg,jpg',
-                'max_size' => 2000,
+                'max_size' => 4096,
                 'uploadfolder' => 'uploads/tx_seminars',
                 'show_thumbs' => 1,
                 'size' => 1,
