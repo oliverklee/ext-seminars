@@ -176,8 +176,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->injectLinkBuilder($this->linkBuilder);
 
         /** @var $content ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject */
-        $content = $this->getMock(ContentObjectRenderer::class, ['IMAGE']);
-        $content->expects(self::any())->method('IMAGE')->will(self::returnValue('<img src="foo.jpg" alt="bar"/>'));
+        $content = $this->getMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
+            $content->expects(self::any())->method('cObjGetSingle')->will(self::returnValue('<img src="foo.jpg" alt="bar"/>'));
+        } else {
+            $content->expects(self::any())->method('IMAGE')->will(self::returnValue('<img src="foo.jpg" alt="bar"/>'));
+        }
         $this->fixture->cObj = $content;
     }
 
@@ -3219,13 +3223,31 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
 
         /** @var $content ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject */
-        $content = $this->getMock(ContentObjectRenderer::class, ['IMAGE']);
-        $content->expects(self::any())->method('IMAGE')
-            ->with([
-                'file' => 'uploads/tx_seminars/' . $fileName, 'file.' => ['width' => '0c', 'height' => '0c'],
-                'altText' => $topicTitle, 'titleText' => $topicTitle,
-            ])
-            ->will(self::returnValue('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>'));
+        $content = $this->getMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
+            $content->expects(self::any())->method('cObjGetSingle')
+                ->with(
+                    'IMAGE',
+                    [
+                        'file' => 'uploads/tx_seminars/' . $fileName,
+                        'file.' => ['width' => '0c', 'height' => '0c'],
+                        'altText' => $topicTitle,
+                        'titleText' => $topicTitle,
+                    ]
+                )
+                ->will(self::returnValue('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>'));
+        } else {
+            $content->expects(self::any())->method('IMAGE')
+                ->with(
+                    [
+                        'file' => 'uploads/tx_seminars/' . $fileName,
+                        'file.' => ['width' => '0c', 'height' => '0c'],
+                        'altText' => $topicTitle,
+                        'titleText' => $topicTitle,
+                    ]
+                )
+                ->will(self::returnValue('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>'));
+        }
         $this->fixture->cObj = $content;
 
         self::assertRegExp(

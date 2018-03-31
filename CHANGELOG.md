@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Adapt the calls to cObj->IMAGE to TYPO3 8.7 (#28)
 - Increase the maximum file sizes for images (#27)
 
 ## 1.4.1
