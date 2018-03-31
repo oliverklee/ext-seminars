@@ -13,6 +13,7 @@
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
@@ -4553,7 +4554,11 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
                 'height' => $maxImageHeight,
             ],
         ];
-        $imageWithTag = $this->cObj->IMAGE($imageConfiguration);
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
+            $imageWithTag = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
+        } else {
+            $imageWithTag = $this->cObj->IMAGE($imageConfiguration);
+        }
 
         $imageWidth = [];
         preg_match('/width="([^"]*)"/', $imageWithTag, $imageWidth);

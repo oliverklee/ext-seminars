@@ -12,6 +12,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * This class creates a category list.
@@ -183,13 +184,15 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
             return '';
         }
 
-        $imageWithoutClass = $this->cObj->IMAGE(
-            [
-                'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH .
-                    $iconData['icon'],
-                'titleText' => $iconData['title'],
-            ]
-        );
+        $imageConfiguration = [
+            'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $iconData['icon'],
+            'titleText' => $iconData['title'],
+        ];
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
+            $imageWithoutClass = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
+        } else {
+            $imageWithoutClass = $this->cObj->IMAGE($imageConfiguration);
+        }
 
         return str_replace(
             '<img ', '<img class="category_image" ', $imageWithoutClass
