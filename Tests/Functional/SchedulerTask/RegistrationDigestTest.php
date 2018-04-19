@@ -1,5 +1,4 @@
 <?php
-
 namespace OliverKlee\Seminars\Tests\Functional\SchedulerTask;
 
 /*

@@ -116,7 +116,7 @@ class Tx_Seminars_ViewHelper_DateRange
      */
     protected function isSameDay($beginDate, $endDate)
     {
-        return ($this->getAsDateFormatYmd($beginDate) === $this->getAsDateFormatYmd($endDate));
+        return $this->getAsDateFormatYmd($beginDate) === $this->getAsDateFormatYmd($endDate);
     }
 
     /**
@@ -129,7 +129,7 @@ class Tx_Seminars_ViewHelper_DateRange
      */
     protected function isSameMonth($beginDate, $endDate)
     {
-        return ($this->getAsDateFormatM($beginDate) === $this->getAsDateFormatM($endDate));
+        return $this->getAsDateFormatM($beginDate) === $this->getAsDateFormatM($endDate);
     }
 
     /**
@@ -142,7 +142,7 @@ class Tx_Seminars_ViewHelper_DateRange
      */
     protected function isSameYear($beginDate, $endDate)
     {
-        return ($this->getAsDateFormatY($beginDate) === $this->getAsDateFormatY($endDate));
+        return $this->getAsDateFormatY($beginDate) === $this->getAsDateFormatY($endDate);
     }
 
     /**

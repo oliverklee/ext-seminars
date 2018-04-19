@@ -123,15 +123,21 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
      *        If $ignoreTimingOfRecords is TRUE the timing of records is ignored.
      */
     public function __construct(
-        $dbTableName, $queryParameters = '1=1', $additionalTableNames = '',
-        $groupBy = '', $orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
+        $dbTableName,
+        $queryParameters = '1=1',
+        $additionalTableNames = '',
+        $groupBy = '',
+        $orderBy = 'uid',
+        $limit = '',
+        $showHiddenRecords = -1,
         $ignoreTimingOfRecords = false
     ) {
         $this->dbTableName = $dbTableName;
         $this->queryParameters = trim($queryParameters);
         $this->additionalTableNames = !empty($additionalTableNames) ? ', ' . $additionalTableNames : '';
         $this->createEnabledFieldsQuery(
-            $showHiddenRecords, $ignoreTimingOfRecords
+            $showHiddenRecords,
+            $ignoreTimingOfRecords
         );
 
         $this->orderBy = $orderBy;
@@ -166,7 +172,8 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
      * @return void
      */
     private function createEnabledFieldsQuery(
-        $showHiddenRecords = -1, $ignoreTimingOfRecords = false
+        $showHiddenRecords = -1,
+        $ignoreTimingOfRecords = false
     ) {
         $ignoreColumns = [];
 
@@ -188,7 +195,9 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
             $ctrl = $GLOBALS['TCA'][$currentTableName]['ctrl'];
             if (is_array($ctrl)) {
                 $this->enabledFieldsQuery .= Tx_Oelib_Db::enableFields(
-                        $currentTableName, $showHiddenRecords, $ignoreColumns
+                        $currentTableName,
+                    $showHiddenRecords,
+                    $ignoreColumns
                 );
             }
         }
@@ -360,7 +369,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
     public function isEmpty()
     {
         if ($this->hasCount) {
-            return ($this->count == 0);
+            return $this->count == 0;
         }
 
         $this->rewind();

@@ -310,7 +310,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function setAdditionalInformation($additionalInformation)
     {
         $this->setRecordPropertyString(
-            'additional_information', $additionalInformation
+            'additional_information',
+            $additionalInformation
         );
     }
 
@@ -795,7 +796,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string our speakers (or '' if there is an error)
      */
     public function getSpeakersWithDescription(
-        AbstractPlugin $plugin, $speakerRelation = 'speakers'
+        AbstractPlugin $plugin,
+        $speakerRelation = 'speakers'
     ) {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
             return '';
@@ -1320,7 +1322,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function earlyBirdApplies()
     {
-        return ($this->hasEarlyBirdPrice() && !$this->isEarlyBirdDeadlineOver());
+        return $this->hasEarlyBirdPrice() && !$this->isEarlyBirdDeadlineOver();
     }
 
     /**
@@ -1348,9 +1350,9 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $priceSpecialIsOk = !$this->hasPriceSpecial()
             || ($this->hasPriceSpecial() && $this->hasEarlyBirdPriceSpecial());
 
-        return ($this->hasEarlyBirdDeadline()
+        return $this->hasEarlyBirdDeadline()
             && $priceRegularIsOk
-            && $priceSpecialIsOk);
+            && $priceSpecialIsOk;
     }
 
     /**
@@ -1594,8 +1596,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $title = (string) $row['title'];
-        $description = (string) $row['description'];
+        $title = (string)$row['title'];
+        $description = (string)$row['description'];
 
         $result = $title;
         if ($description !== '') {
@@ -1679,7 +1681,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         );
         if ($dbResult !== false) {
             $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-            $languageName = (string) $row['lg_name_local'];
+            $languageName = (string)$row['lg_name_local'];
         }
 
         return $languageName;
@@ -1844,7 +1846,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getAttendancesNotPaid()
     {
-        return ($this->getAttendances() - $this->getAttendancesPaid());
+        return $this->getAttendances() - $this->getAttendancesPaid();
     }
 
     /**
@@ -1888,7 +1890,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         } elseif ($vacancies >= $vacanciesThreshold) {
             $result = $this->translate('message_enough');
         } else {
-            $result = (string) $vacancies;
+            $result = (string)$vacancies;
         }
 
         return $result;
@@ -1913,7 +1915,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function isFull()
     {
         return !$this->hasUnlimitedVacancies()
-            && (($this->getAttendances() >= $this->getAttendancesMax())
+            && (
+                ($this->getAttendances() >= $this->getAttendancesMax())
         );
     }
 
@@ -1925,7 +1928,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function hasEnoughAttendances()
     {
-        return ($this->getAttendances() >= $this->getAttendancesMin());
+        return $this->getAttendances() >= $this->getAttendancesMin();
     }
 
     /**
@@ -2059,9 +2062,9 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return $this->getBeginDateAsTimestamp();
         }
 
-        return ($this->hasEndDate()
+        return $this->hasEndDate()
             ? $this->getEndDateAsTimestamp()
-            : $this->getBeginDateAsTimestamp());
+            : $this->getBeginDateAsTimestamp();
     }
 
     /**
@@ -2494,7 +2497,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             $maxLength = max(
                 $maxLength,
                 $this->charsetConversion->strlen(
-                    $this->renderCharset, $currentLabel
+                    $this->renderCharset,
+                    $currentLabel
                 )
             );
         }
@@ -2535,7 +2539,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
                     if ($this->hasUnlimitedVacancies()) {
                         $value = $this->translate('label_unlimited');
                     } else {
-                        $value = (string) $this->getVacancies();
+                        $value = (string)$this->getVacancies();
                     }
                     break;
                 case 'title':
@@ -2684,8 +2688,11 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      *                 page, FALSE otherwise
      */
     public function canViewRegistrationsList(
-        $whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0,
-        $defaultEventVipsFeGroupID = 0, $accessLevel = 'attendees_and_managers'
+        $whichPlugin,
+        $registrationsListPID = 0,
+        $registrationsVipListPID = 0,
+        $defaultEventVipsFeGroupID = 0,
+        $accessLevel = 'attendees_and_managers'
     ) {
         if (!$this->needsRegistration()) {
             return false;
@@ -2694,13 +2701,17 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         switch ($accessLevel) {
             case 'world':
                 $result = $this->canViewRegistrationsListForWorldAccess(
-                    $whichPlugin, $registrationsListPID, $registrationsVipListPID,
+                    $whichPlugin,
+                    $registrationsListPID,
+                    $registrationsVipListPID,
                     $defaultEventVipsFeGroupID
                 );
                 break;
             case 'login':
                 $result = $this->canViewRegistrationsListForLoginAccess(
-                    $whichPlugin, $registrationsListPID, $registrationsVipListPID,
+                    $whichPlugin,
+                    $registrationsListPID,
+                    $registrationsVipListPID,
                     $defaultEventVipsFeGroupID
                 );
                 break;
@@ -2708,7 +2719,9 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
                 // The fall-through is intended.
             default:
                 $result = $this->canViewRegistrationsListForAttendeesAndManagersAccess(
-                    $whichPlugin, $registrationsListPID, $registrationsVipListPID,
+                    $whichPlugin,
+                    $registrationsListPID,
+                    $registrationsVipListPID,
                     $defaultEventVipsFeGroupID
                 );
                 break;
@@ -2742,7 +2755,9 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      *                 page, FALSE otherwise
      */
     protected function canViewRegistrationsListForAttendeesAndManagersAccess(
-        $whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0,
+        $whichPlugin,
+        $registrationsListPID = 0,
+        $registrationsVipListPID = 0,
         $defaultEventVipsFeGroupID = 0
     ) {
         if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
@@ -2810,7 +2825,10 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      *                 page, FALSE otherwise
      */
     protected function canViewRegistrationsListForLoginAccess(
-        $whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0, $defaultEventVipsFeGroupID = 0
+        $whichPlugin,
+        $registrationsListPID = 0,
+        $registrationsVipListPID = 0,
+        $defaultEventVipsFeGroupID = 0
     ) {
         $loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
         if (!$loginManager->isLoggedIn()) {
@@ -2867,7 +2885,10 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      *                 page, FALSE otherwise
      */
     protected function canViewRegistrationsListForWorldAccess(
-        $whichPlugin, $registrationsListPID = 0, $registrationsVipListPID = 0, $defaultEventVipsFeGroupID = 0
+        $whichPlugin,
+        $registrationsListPID = 0,
+        $registrationsVipListPID = 0,
+        $defaultEventVipsFeGroupID = 0
     ) {
         $loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
         $isLoggedIn = $loginManager->isLoggedIn();
@@ -3000,7 +3021,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isCanceled()
     {
-        return ($this->getStatus() == Tx_Seminars_Model_Event::STATUS_CANCELED);
+        return $this->getStatus() == Tx_Seminars_Model_Event::STATUS_CANCELED;
     }
 
     /**
@@ -3013,8 +3034,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isRegistrationDeadlineOver()
     {
-        return ($GLOBALS['SIM_EXEC_TIME']
-            >= $this->getLatestPossibleRegistrationTime());
+        return $GLOBALS['SIM_EXEC_TIME']
+            >= $this->getLatestPossibleRegistrationTime();
     }
 
     /**
@@ -3026,8 +3047,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isEarlyBirdDeadlineOver()
     {
-        return ($GLOBALS['SIM_EXEC_TIME']
-            >= $this->getLatestPossibleEarlyBirdRegistrationTime());
+        return $GLOBALS['SIM_EXEC_TIME']
+            >= $this->getLatestPossibleEarlyBirdRegistrationTime();
     }
 
     /**
@@ -3037,9 +3058,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function needsRegistration()
     {
-        return (!$this->isEventTopic()
-            && $this->getRecordPropertyBoolean('needs_registration')
-        );
+        return !$this->isEventTopic()
+            && $this->getRecordPropertyBoolean('needs_registration');
     }
 
     /**
@@ -3051,7 +3071,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function hasUnlimitedVacancies()
     {
-        return ($this->needsRegistration() && ($this->getAttendancesMax() == 0));
+        return $this->needsRegistration() && ($this->getAttendancesMax() == 0);
     }
 
     /**
@@ -3159,7 +3179,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         if ($this->hasRecordPropertyInteger('topic')) {
             if (Tx_Seminars_OldModel_Abstract::recordExists(
                 $this->getRecordPropertyInteger('topic'),
-                'tx_seminars_seminars')
+                'tx_seminars_seminars'
+            )
             ) {
                 /** @var Tx_Seminars_OldModel_Event $result */
                 $result = GeneralUtility::makeInstance(
@@ -3178,8 +3199,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isEventDate()
     {
-        return ($this->getRecordPropertyInteger('object_type')
-            == Tx_Seminars_Model_Event::TYPE_DATE);
+        return $this->getRecordPropertyInteger('object_type')
+            == Tx_Seminars_Model_Event::TYPE_DATE;
     }
 
     /**
@@ -3189,8 +3210,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isEventTopic()
     {
-        return ($this->getRecordPropertyInteger('object_type')
-            == Tx_Seminars_Model_Event::TYPE_TOPIC);
+        return $this->getRecordPropertyInteger('object_type')
+            == Tx_Seminars_Model_Event::TYPE_TOPIC;
     }
 
     /**
@@ -3201,7 +3222,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private function isTopicOkay()
     {
-        return ($this->isEventDate() && $this->topic && $this->topic->isOk());
+        return $this->isEventDate() && $this->topic && $this->topic->isOk();
     }
 
     /**
@@ -3215,9 +3236,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     {
         if ($this->isTopicOkay()) {
             return $this->topic->getUid();
-        } else {
-            return $this->getUid();
         }
+        return $this->getUid();
     }
 
     /**
@@ -4135,7 +4155,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function hasAttendancesOnRegistrationQueue()
     {
-        return ($this->getAttendancesOnRegistrationQueue() > 0);
+        return $this->getAttendancesOnRegistrationQueue() > 0;
     }
 
     /**
@@ -4185,7 +4205,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function hasDate()
     {
-        return ($this->hasBeginDate() || $this->hasTimeslots());
+        return $this->hasBeginDate() || $this->hasTimeslots();
     }
 
     /**
@@ -4298,7 +4318,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         }
 
         return $this->createMmRecords(
-            'tx_seminars_seminars_place_mm', $placesOfTimeSlots
+            'tx_seminars_seminars_place_mm',
+            $placesOfTimeSlots
         );
     }
 
@@ -4476,12 +4497,14 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             'uploads/tx_seminars/';
 
         $attachedFiles = GeneralUtility::trimExplode(
-            ',', $this->getRecordPropertyString('attached_files'), true
+            ',',
+            $this->getRecordPropertyString('attached_files'),
+            true
         );
 
         foreach ($attachedFiles as $attachedFile) {
             $matches = [];
-            preg_match('/\.(\w+)$/', basename($attachedFile), $matches);
+            preg_match('/\\.(\\w+)$/', basename($attachedFile), $matches);
 
             $result[] = [
                 'name' => $plugin->cObj->typoLink(
@@ -4637,7 +4660,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isConfirmed()
     {
-        return ($this->getStatus() == Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        return $this->getStatus() == Tx_Seminars_Model_Event::STATUS_CONFIRMED;
     }
 
     /**
@@ -4647,7 +4670,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isPlanned()
     {
-        return ($this->getStatus() == Tx_Seminars_Model_Event::STATUS_PLANNED);
+        return $this->getStatus() == Tx_Seminars_Model_Event::STATUS_PLANNED;
     }
 
     /**
@@ -4686,7 +4709,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     {
         if (!$this->hasBeginDate()) {
             throw new BadMethodCallException(
-                'The event has no begin date. Please call this function only if the event has a begin date.', 1333291877
+                'The event has no begin date. Please call this function only if the event has a begin date.',
+                1333291877
             );
         }
         if (!$this->hasSpeakers()) {
@@ -4714,7 +4738,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function setCancelationDeadlineReminderSentFlag()
     {
         $this->setRecordPropertyBoolean(
-            'cancelation_deadline_reminder_sent', true
+            'cancelation_deadline_reminder_sent',
+            true
         );
     }
 
@@ -4726,7 +4751,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function setEventTakesPlaceReminderSentFlag()
     {
         $this->setRecordPropertyBoolean(
-            'event_takes_place_reminder_sent', true
+            'event_takes_place_reminder_sent',
+            true
         );
     }
 

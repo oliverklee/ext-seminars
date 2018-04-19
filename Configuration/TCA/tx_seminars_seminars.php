@@ -94,8 +94,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_categories_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_categories'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_categories'
+                ),
             ],
         ],
         'requirements' => [
@@ -158,8 +160,10 @@ $tca = [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_event_types'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_event_types'
+                ),
             ],
         ],
         'accreditation_number' => [
@@ -329,8 +333,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_place_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_sites'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_sites'
+                ),
             ],
         ],
         'room' => [
@@ -355,8 +361,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_lodgings_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_lodgings'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_lodgings'
+                ),
             ],
         ],
         'foods' => [
@@ -372,8 +380,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_foods_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_foods'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_foods'
+                ),
             ],
         ],
         'speakers' => [
@@ -389,8 +399,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_speakers_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_speakers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_speakers'
+                ),
             ],
         ],
         'partners' => [
@@ -406,8 +418,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_speakers_mm_partners',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_speakers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_speakers'
+                ),
             ],
         ],
         'tutors' => [
@@ -423,8 +437,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_speakers_mm_tutors',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_speakers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_speakers'
+                ),
             ],
         ],
         'leaders' => [
@@ -440,8 +456,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_speakers_mm_leaders',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_speakers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_speakers'
+                ),
             ],
         ],
         'language' => [
@@ -590,8 +608,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_checkboxes_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_checkboxes'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_checkboxes'
+                ),
             ],
         ],
         'uses_terms_2' => [
@@ -616,8 +636,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_payment_methods_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_payment_methods'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_payment_methods'
+                ),
             ],
         ],
         'organizers' => [
@@ -633,8 +655,10 @@ $tca = [
                 'minitems' => 1,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_organizers_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_organizers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_organizers'
+                ),
             ],
         ],
         'organizing_partners' => [
@@ -650,8 +674,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_organizing_partners_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_organizers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_organizers'
+                ),
             ],
         ],
         'event_takes_place_reminder_sent' => [
@@ -779,8 +805,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_target_groups_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_target_groups'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_target_groups'
+                ),
             ],
         ],
         'skip_collision_check' => [

@@ -64,7 +64,8 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_Tes
     public function frontEndUserGroupCanReturnBackEndUserModel()
     {
         $backEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Oelib_Mapper_BackEndUser::class)->getNewGhost();
+            Tx_Oelib_Mapper_BackEndUser::class
+        )->getNewGhost();
         $frontEndUserGroup = $this->fixture->getLoadedTestingModel(
             ['tx_seminars_reviewer' => $backEndUser->getUid()]
         );
@@ -85,12 +86,16 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_Tes
     public function frontEndUserGroupReturnsListOfCategories()
     {
         $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories', []
+            'tx_seminars_categories',
+            []
         );
         $frontEndUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
 
         $this->testingFramework->createRelationAndUpdateCounter(
-            'fe_groups', $frontEndUserGroupUid, $categoryUid, 'tx_seminars_default_categories'
+            'fe_groups',
+            $frontEndUserGroupUid,
+            $categoryUid,
+            'tx_seminars_default_categories'
         );
 
         /** @var Tx_Seminars_Model_FrontEndUserGroup $model */

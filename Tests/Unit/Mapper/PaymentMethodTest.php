@@ -60,7 +60,8 @@ class Tx_Seminars_Tests_Unit_Mapper_PaymentMethodTest extends Tx_Phpunit_TestCas
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', ['title' => 'Cash']
+            'tx_seminars_payment_methods',
+            ['title' => 'Cash']
         );
 
         /** @var Tx_Seminars_Model_PaymentMethod $model */

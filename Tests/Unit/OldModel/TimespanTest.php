@@ -57,7 +57,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
     public function beginDateIsInitiallyZero()
     {
         self::assertSame(
-            0, $this->subject->getBeginDateAsTimestamp()
+            0,
+            $this->subject->getBeginDateAsTimestamp()
         );
     }
 
@@ -77,7 +78,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
     public function endDateIsInitiallyZero()
     {
         self::assertSame(
-            0, $this->subject->getEndDateAsTimestamp()
+            0,
+            $this->subject->getEndDateAsTimestamp()
         );
     }
 
@@ -97,7 +99,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
     public function endDateForOpenEndedIsInitiallyZero()
     {
         self::assertSame(
-            0, $this->subject->getEndDateAsTimestampEvenIfOpenEnded()
+            0,
+            $this->subject->getEndDateAsTimestampEvenIfOpenEnded()
         );
     }
 
@@ -112,7 +115,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
             $this->subject->hasBeginDate()
         );
         self::assertSame(
-            42, $this->subject->getBeginDateAsTimestamp()
+            42,
+            $this->subject->getBeginDateAsTimestamp()
         );
     }
 
@@ -139,7 +143,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
             $this->subject->hasEndDate()
         );
         self::assertSame(
-            42, $this->subject->getEndDateAsTimestamp()
+            42,
+            $this->subject->getEndDateAsTimestamp()
         );
     }
 
@@ -163,7 +168,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
         $this->subject->setEndDateAndTime(42);
 
         self::assertSame(
-            0, $this->subject->getEndDateAsTimestampEvenIfOpenEnded()
+            0,
+            $this->subject->getEndDateAsTimestampEvenIfOpenEnded()
         );
     }
 
@@ -452,7 +458,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
     public function numberOfPlacesIsInitiallyZero()
     {
         self::assertSame(
-            0, $this->subject->getNumberOfPlaces()
+            0,
+            $this->subject->getNumberOfPlaces()
         );
     }
 
@@ -464,7 +471,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
         $this->subject->setNumberOfPlaces(0);
 
         self::assertSame(
-            0, $this->subject->getNumberOfPlaces()
+            0,
+            $this->subject->getNumberOfPlaces()
         );
     }
 
@@ -476,7 +484,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
         $this->subject->setNumberOfPlaces(42);
 
         self::assertSame(
-            42, $this->subject->getNumberOfPlaces()
+            42,
+            $this->subject->getNumberOfPlaces()
         );
     }
 
@@ -490,7 +499,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
     public function roomIsInitiallyEmpty()
     {
         self::assertSame(
-            '', $this->subject->getRoom()
+            '',
+            $this->subject->getRoom()
         );
     }
 
@@ -502,7 +512,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends Tx_Phpunit_TestCase
         $this->subject->setRoom('foo');
 
         self::assertSame(
-            'foo', $this->subject->getRoom()
+            'foo',
+            $this->subject->getRoom()
         );
     }
 }

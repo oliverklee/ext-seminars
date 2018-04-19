@@ -60,7 +60,8 @@ class Tx_Seminars_Tests_Unit_Mapper_PlaceTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['title' => 'Nice place']
+            'tx_seminars_sites',
+            ['title' => 'Nice place']
         );
 
         /** @var Tx_Seminars_Model_Place $model */

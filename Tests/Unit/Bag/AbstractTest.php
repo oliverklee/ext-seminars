@@ -71,7 +71,8 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends Tx_Phpunit_TestCase
         $bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('1 = 2');
 
         self::assertEquals(
-            '', $bag->getUids()
+            '',
+            $bag->getUids()
         );
     }
 
@@ -80,7 +81,8 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends Tx_Phpunit_TestCase
         $bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
 
         self::assertEquals(
-            (string) $this->uidOfFirstRecord, $bag->getUids()
+            (string)$this->uidOfFirstRecord,
+            $bag->getUids()
         );
     }
 

@@ -78,11 +78,13 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
         $this->fixture = new Tx_Seminars_BackEnd_EventsList($this->backEndModule);
 
         $backEndGroup = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+            Tx_Seminars_Mapper_BackEndUserGroup::class
+        )->getLoadedTestingModel(
             ['tx_seminars_events_folder' => $this->dummySysFolderPid + 1]
         );
         $backEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel(
+            Tx_Seminars_Mapper_BackEndUser::class
+        )->getLoadedTestingModel(
             ['usergroup' => $backEndGroup->getUid()]
         );
         Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
@@ -800,7 +802,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     public function testNewButtonForNoEventStorageSettingInUserGroupsSetsCurrentPageIdAsNewRecordPid()
     {
         $backEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
+            Tx_Seminars_Mapper_BackEndUser::class
+        )->getLoadedTestingModel([]);
         Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
             $backEndUser
         );
@@ -814,7 +817,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     public function testNewButtonForEventStoredOnCurrentPageHasCurrentFolderLabel()
     {
         $backEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
+            Tx_Seminars_Mapper_BackEndUser::class
+        )->getLoadedTestingModel([]);
         Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
             $backEndUser
         );

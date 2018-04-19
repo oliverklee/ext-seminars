@@ -147,7 +147,8 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
 
         if (empty($this->formConfiguration)) {
             throw new BadMethodCallException(
-                'Please define the form configuration to use via $this->setFormConfiguration().', 1333293139
+                'Please define the form configuration to use via $this->setFormConfiguration().',
+                1333293139
             );
         }
 
@@ -164,9 +165,11 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
 
         // Initialize the form from TypoScript data and provide configuration for the plugin.
         $form->initFromTs(
-            $this, $this->formConfiguration,
+            $this,
+            $this->formConfiguration,
             ($this->getObjectUid() > 0) ? $this->getObjectUid() : false,
-            $pluginConfiguration, 'form.'
+            $pluginConfiguration,
+            'form.'
         );
 
         return $form;

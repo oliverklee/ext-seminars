@@ -117,7 +117,8 @@ class Tx_Seminars_OldModel_TimeSlot extends Tx_Seminars_OldModel_AbstractTimeSpa
         $GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
         if (!$dbResultRow) {
             throw new Tx_Oelib_Exception_NotFound(
-                'The related place with the UID ' . $this->getPlace() . ' could not be found in the DB.', 1333291925
+                'The related place with the UID ' . $this->getPlace() . ' could not be found in the DB.',
+                1333291925
             );
         }
 

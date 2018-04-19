@@ -40,8 +40,12 @@ class Tx_Seminars_Bag_Registration extends Tx_Seminars_Bag_Abstract
      *        If $showHiddenRecords is set (0/1), any hidden fields in records are ignored.
      */
     public function __construct(
-        $queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
-        $orderBy = 'uid', $limit = '', $showHiddenRecords = -1
+        $queryParameters = '1=1',
+        $additionalTableNames = '',
+        $groupBy = '',
+        $orderBy = 'uid',
+        $limit = '',
+        $showHiddenRecords = -1
     ) {
         $this->cObj = GeneralUtility::makeInstance(ContentObjectRenderer::class);
 
@@ -68,7 +72,9 @@ class Tx_Seminars_Bag_Registration extends Tx_Seminars_Bag_Abstract
     protected function createItemFromDbResult()
     {
         $this->currentItem = GeneralUtility::makeInstance(
-            Tx_Seminars_OldModel_Registration::class, $this->cObj, $this->dbResult
+            Tx_Seminars_OldModel_Registration::class,
+            $this->cObj,
+            $this->dbResult
         );
         $this->valid();
     }

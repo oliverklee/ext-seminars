@@ -79,7 +79,8 @@ class Tx_Seminars_BackEnd_CancelEventMailForm extends Tx_Seminars_BackEnd_Abstra
      * @return void
      */
     protected function modifyEmailWithHook(
-        Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail
+        Tx_Seminars_Model_Registration $registration,
+        Tx_Oelib_Mail $eMail
     ) {
         foreach ($this->getHooks() as $hook) {
             $hook->modifyCancelEmail($registration, $eMail);

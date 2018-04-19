@@ -87,12 +87,15 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
     private function addSkillRelation(array $skillData)
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_skills', $skillData
+            'tx_seminars_skills',
+            $skillData
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_speakers',
-            $this->fixture->getUid(), $uid, 'skills'
+            $this->fixture->getUid(),
+            $uid,
+            'skills'
         );
 
         $this->fixture = new Tx_Seminars_OldModel_Speaker($this->fixture->getUid());

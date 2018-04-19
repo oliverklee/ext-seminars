@@ -41,8 +41,12 @@ class Tx_Seminars_Bag_Event extends Tx_Seminars_Bag_Abstract
      *        If $ignoreTimingOfRecords is TRUE the timing of records is ignored.
      */
     public function __construct(
-        $queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
-        $orderBy = 'uid', $limit = '', $showHiddenRecords = -1,
+        $queryParameters = '1=1',
+        $additionalTableNames = '',
+        $groupBy = '',
+        $orderBy = 'uid',
+        $limit = '',
+        $showHiddenRecords = -1,
         $ignoreTimingOfRecords = false
     ) {
         parent::__construct(
@@ -70,7 +74,9 @@ class Tx_Seminars_Bag_Event extends Tx_Seminars_Bag_Abstract
     protected function createItemFromDbResult()
     {
         $this->currentItem = GeneralUtility::makeInstance(
-            Tx_Seminars_OldModel_Event::class, 0, $this->dbResult
+            Tx_Seminars_OldModel_Event::class,
+            0,
+            $this->dbResult
         );
         $this->valid();
     }

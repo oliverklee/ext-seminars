@@ -121,7 +121,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         $result = $this->fixture->render();
@@ -151,10 +153,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid1
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid1
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid2
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid2
         );
 
         $output = $this->fixture->render();
@@ -188,10 +194,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid1
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid1
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid2
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid2
         );
 
         $output = $this->fixture->render();
@@ -219,7 +229,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         self::assertContains(
@@ -245,7 +257,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         self::assertNotContains(
@@ -273,7 +287,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         self::assertContains(
@@ -299,7 +315,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         self::assertNotContains(
@@ -325,7 +343,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         self::assertContains(
@@ -337,7 +357,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     public function testRenderCreatesCategoryListOfEventsFromSelectedTimeFrames()
     {
         $this->fixture->setConfigurationValue(
-            'timeframeInList', 'currentAndUpcoming'
+            'timeframeInList',
+            'currentAndUpcoming'
         );
 
         $categoryUid = $this->testingFramework->createRecord(
@@ -355,7 +376,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         self::assertContains(
@@ -367,7 +390,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     public function testRenderIgnoresEventsFromDeselectedTimeFrames()
     {
         $this->fixture->setConfigurationValue(
-            'timeframeInList', 'currentAndUpcoming'
+            'timeframeInList',
+            'currentAndUpcoming'
         );
 
         $categoryUid = $this->testingFramework->createRecord(
@@ -385,7 +409,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         self::assertNotContains(
@@ -397,7 +423,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     public function testRenderCreatesCategoryListContainingLinksToListPageLimitedToCategory()
     {
         $this->fixture->setConfigurationValue(
-            'listPID', $this->testingFramework->createFrontEndPage()
+            'listPID',
+            $this->testingFramework->createFrontEndPage()
         );
 
         $categoryUid = $this->testingFramework->createRecord(
@@ -414,7 +441,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         self::assertContains(

@@ -95,7 +95,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestC
 
     /**
      * @test
-     * @expectedException BadMethodCallException
+     * @expectedException \BadMethodCallException
      * @expectedExceptionMessage The method injectEventMapper() needs to be called first.
      * @expectedExceptionCode 1333614794
      */

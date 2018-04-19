@@ -115,7 +115,7 @@ class Tx_Seminars_Tests_Unit_Csv_EmailRegistrationListViewTest extends Tx_Phpuni
         );
 
         self::assertContains(
-            (string) $registrationUid,
+            (string)$registrationUid,
             $this->subject->render()
         );
     }
@@ -137,7 +137,8 @@ class Tx_Seminars_Tests_Unit_Csv_EmailRegistrationListViewTest extends Tx_Phpuni
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', ['first_name' => $firstName, 'last_name' => $lastName]
+                    '',
+                    ['first_name' => $firstName, 'last_name' => $lastName]
                 ),
             ]
         );
@@ -165,7 +166,8 @@ class Tx_Seminars_Tests_Unit_Csv_EmailRegistrationListViewTest extends Tx_Phpuni
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', ['first_name' => $firstName, 'last_name' => $lastName]
+                    '',
+                    ['first_name' => $firstName, 'last_name' => $lastName]
                 ),
             ]
         );
@@ -254,7 +256,7 @@ class Tx_Seminars_Tests_Unit_Csv_EmailRegistrationListViewTest extends Tx_Phpuni
         );
 
         self::assertNotContains(
-            (string) $registrationUid,
+            (string)$registrationUid,
             $this->subject->render()
         );
     }
@@ -281,7 +283,7 @@ class Tx_Seminars_Tests_Unit_Csv_EmailRegistrationListViewTest extends Tx_Phpuni
         );
 
         self::assertContains(
-            (string) $registrationUid,
+            (string)$registrationUid,
             $this->subject->render()
         );
     }

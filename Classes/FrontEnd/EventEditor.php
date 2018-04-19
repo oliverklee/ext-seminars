@@ -125,7 +125,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     public function render()
     {
-        $this->setFormConfiguration((array) $this->conf['form.']['eventEditor.']);
+        $this->setFormConfiguration((array)$this->conf['form.']['eventEditor.']);
         $this->declareDataHandler();
 
         $this->storeAttachedFiles();
@@ -135,7 +135,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $template->processTemplate(parent::render());
 
         $template->hideSubpartsArray(
-            $this->getHiddenSubparts(), self::SUBPART_PREFIX
+            $this->getHiddenSubparts(),
+            self::SUBPART_PREFIX
         );
 
         $this->setRequiredFieldLabels($template);
@@ -181,7 +182,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             foreach ($this->attachedFiles as $fileName) {
                 $template->setMarker('file_name', $fileName);
                 $template->setMarker(
-                    'single_attached_file_id', 'attached_file_' . $fileNumber
+                    'single_attached_file_id',
+                    'attached_file_' . $fileNumber
                 );
                 $fileNumber++;
                 $attachmentList .= $template->getSubpart('SINGLE_ATTACHED_FILE');
@@ -396,7 +398,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *               and "value" (for the UID)
      */
     public function populateListSpeakers(
-        array $parameters = [], \tx_mkforms_forms_Base $form = null
+        array $parameters = [],
+        \tx_mkforms_forms_Base $form = null
     ) {
         $result = [];
 
@@ -488,7 +491,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *               title) and "value" (for the UID)
      */
     public function populateListCheckboxes(
-        array $items, $unused = null, \tx_mkforms_forms_Base $form = null
+        array $items,
+        $unused = null,
+        \tx_mkforms_forms_Base $form = null
     ) {
         $result = $items;
 
@@ -559,7 +564,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *               title) and "value" (for the UID)
      */
     public function populateListTargetGroups(
-        array $items, $unused = null, \tx_mkforms_forms_Base $form = null
+        array $items,
+        $unused = null,
+        \tx_mkforms_forms_Base $form = null
     ) {
         $result = $items;
 
@@ -640,7 +647,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             $pageId = $GLOBALS['TSFE']->id;
         } else {
             $pageId = $this->getConfValueInteger(
-                'eventSuccessfullySavedPID', 's_fe_editing'
+                'eventSuccessfullySavedPID',
+                's_fe_editing'
             );
         }
 
@@ -753,7 +761,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     private function processAttachments(array &$formData)
     {
         $filesToDelete = GeneralUtility::trimExplode(
-            ',', $formData['delete_attached_files'], true
+            ',',
+            $formData['delete_attached_files'],
+            true
         );
 
         foreach ($filesToDelete as $fileName) {
@@ -943,7 +953,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             $this->purgeUploadedFile($fileToCheck);
         }
 
-        return ($this->validationError == '');
+        return $this->validationError == '';
     }
 
     /**
@@ -956,7 +966,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     private function checkFileType($fileName)
     {
         $allowedExtensions = $this->getConfValueString(
-            'allowedExtensionsForUpload', 's_fe_editing'
+            'allowedExtensionsForUpload',
+            's_fe_editing'
         );
 
         if (!preg_match('/^.+\\.(' . str_replace(',', '|', $allowedExtensions) . ')$/i', $fileName)) {
@@ -1128,7 +1139,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $fieldsToShow = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString(
-                'displayFrontEndEditorFields', 's_fe_editing'),
+                'displayFrontEndEditorFields',
+                's_fe_editing'
+            ),
             true
         );
         $this->removeCategoryIfNecessary($fieldsToShow);
@@ -1169,7 +1182,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $this->requiredFormFields = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString(
-                'requiredFrontEndEditorFields', 's_fe_editing'
+                'requiredFrontEndEditorFields',
+                's_fe_editing'
             )
         );
 
@@ -1234,7 +1248,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             return true;
         }
 
-        return (trim($formData['value']) != '');
+        return trim($formData['value']) != '';
     }
 
     /**
@@ -1297,7 +1311,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             return true;
         }
 
-        return (preg_match('/^[\\d:\-\/ ]+$/', $formData['value']) == 1);
+        return preg_match('/^[\\d:\\-\\/ ]+$/', $formData['value']) == 1;
     }
 
     /**
@@ -1318,7 +1332,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             return true;
         }
 
-        return (preg_match('/^\d+((,|.)\d{1,2})?$/', $formData['value']) == 1);
+        return preg_match('/^\\d+((,|.)\\d{1,2})?$/', $formData['value']) == 1;
     }
 
     /**
@@ -1393,10 +1407,15 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $this->setMarker('title', $event->getTitle(), $markerPrefix);
         $this->setOrDeleteMarkerIfNotEmpty(
-            'date', $beginDate, $markerPrefix, 'wrapper_publish_event'
+            'date',
+            $beginDate,
+            $markerPrefix,
+            'wrapper_publish_event'
         );
         $this->setMarker(
-            'description', $event->getDescription(), $markerPrefix
+            'description',
+            $event->getDescription(),
+            $markerPrefix
         );
 
         $this->setMarker('link', $this->createReviewUrl(), $markerPrefix);
@@ -1414,7 +1433,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $url = $this->cObj->typoLink_URL([
             'parameter' => $GLOBALS['TSFE']->id . ',' . Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
             'additionalParams' => GeneralUtility::implodeArrayForUrl(
-                'tx_seminars_publication', ['hash' => $this->publicationHash], '', false, true
+                'tx_seminars_publication',
+                ['hash' => $this->publicationHash],
+                '',
+                false,
+                true
             ),
             'type' => Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
         ]);
@@ -1471,7 +1494,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $beginDate = ($beginDateAsTimeStamp !== 0)
             ? strftime($this->getConfValueString('dateFormatYMD'), $beginDateAsTimeStamp) : '';
         $this->setOrDeleteMarkerIfNotEmpty(
-            'date', $beginDate, $markerPrefix, 'wrapper_save_event'
+            'date',
+            $beginDate,
+            $markerPrefix,
+            'wrapper_save_event'
         );
 
         return $this->getSubpart('MAIL_SAVE_EVENT');
@@ -1490,7 +1516,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     {
         $formData = $form->oMajixEvent->getParams();
         $validationErrors = self::validatePlace(
-            $form, [
+            $form,
+            [
                 'title' => $formData['newPlace_title'],
                 'address' => $formData['newPlace_address'],
                 'zip' => $formData['newPlace_zip'],
@@ -1503,7 +1530,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         if (!empty($validationErrors)) {
             return [
                 $form->majixExecJs(
-                    'alert("' . implode('\n', $validationErrors) . '");'
+                    'alert("' . implode('\\n', $validationErrors) . '");'
                 ),
             ];
         }
@@ -1589,7 +1616,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         );
         if (!empty($validationErrors)) {
             return $form->majixExecJs(
-                'alert("' . implode('\n', $validationErrors) . '");'
+                'alert("' . implode('\\n', $validationErrors) . '");'
             );
         }
 
@@ -1618,7 +1645,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return string[] the error messages, will be empty if there are no validation errors
      */
     private static function validatePlace(
-        \tx_mkforms_forms_Base $form, array $formData
+        \tx_mkforms_forms_Base $form,
+        array $formData
     ) {
         $validationErrors = [];
 
@@ -1675,7 +1703,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return void
      */
     private static function setPlaceData(
-        Tx_Seminars_Model_Place $place, $prefix, array $formData
+        Tx_Seminars_Model_Place $place,
+        $prefix,
+        array $formData
     ) {
         $countryUid = (int)$formData[$prefix . 'country'];
         if ($countryUid > 0) {
@@ -1800,12 +1830,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     {
         $formData = self::removePathFromWidgetData($formData, $form);
         $validationErrors = self::validateSpeaker(
-            $form, ['title' => $formData['newSpeaker_title']]
+            $form,
+            ['title' => $formData['newSpeaker_title']]
         );
         if (!empty($validationErrors)) {
             return [
                 $form->majixExecJs(
-                    'alert("' . implode('\n', $validationErrors) . '");'
+                    'alert("' . implode('\\n', $validationErrors) . '");'
                 ),
             ];
         }
@@ -1866,12 +1897,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         }
 
         $validationErrors = self::validateSpeaker(
-            $form, ['title' => $formData['editSpeaker_title']]
+            $form,
+            ['title' => $formData['editSpeaker_title']]
         );
         if (!empty($validationErrors)) {
             return [
                 $form->majixExecJs(
-                    'alert("' . implode('\n', $validationErrors) . '");'
+                    'alert("' . implode('\\n', $validationErrors) . '");'
                 ),
             ];
         }
@@ -1924,7 +1956,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return string[] the error messages, will be empty if there are no validation errors
      */
     private static function validateSpeaker(
-        \tx_mkforms_forms_Base $form, array $formData
+        \tx_mkforms_forms_Base $form,
+        array $formData
     ) {
         $validationErrors = [];
         if (trim($formData['title']) == '') {
@@ -1990,9 +2023,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return array calls to be executed on the client
      */
     public static function openEditSpeakerModalBox(
-        array $params, \tx_mkforms_forms_Base $form
+        array $params,
+        \tx_mkforms_forms_Base $form
     ) {
-        $speakerId = empty($params['uid']) ? 0 : (int) $params['uid'];
+        $speakerId = empty($params['uid']) ? 0 : (int)$params['uid'];
         return self::showEditSpeakerModalBox($form, $speakerId);
     }
 
@@ -2005,7 +2039,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return array calls to be executed on the client
      */
     public static function showEditSpeakerModalBox(
-        \tx_mkforms_forms_Base $form, $speakerUid
+        \tx_mkforms_forms_Base $form,
+        $speakerUid
     ) {
         if ($speakerUid <= 0) {
             return $form->majixExecJs('alert("$speakerUid must be >= 0.");');
@@ -2082,12 +2117,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     {
         $formData = $form->oMajixEvent->getParams();
         $validationErrors = self::validateCheckbox(
-            $form, ['title' => $formData['newCheckbox_title']]
+            $form,
+            ['title' => $formData['newCheckbox_title']]
         );
         if (!empty($validationErrors)) {
             return [
                 $form->majixExecJs(
-                    'alert("' . implode('\n', $validationErrors) . '");'
+                    'alert("' . implode('\\n', $validationErrors) . '");'
                 ),
             ];
         }
@@ -2165,7 +2201,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         );
         if (!empty($validationErrors)) {
             return $form->majixExecJs(
-                'alert("' . implode('\n', $validationErrors) . '");'
+                'alert("' . implode('\\n', $validationErrors) . '");'
             );
         }
 
@@ -2194,7 +2230,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return string[] the error messages, will be empty if there are no validation errors
      */
     private static function validateCheckbox(
-        \tx_mkforms_forms_Base $form, array $formData
+        \tx_mkforms_forms_Base $form,
+        array $formData
     ) {
         $validationErrors = [];
         if (trim($formData['title']) == '') {
@@ -2216,7 +2253,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return void
      */
     private static function setCheckboxData(
-        Tx_Seminars_Model_Checkbox $checkbox, $prefix, array $formData
+        Tx_Seminars_Model_Checkbox $checkbox,
+        $prefix,
+        array $formData
     ) {
         $checkbox->setTitle($formData[$prefix . 'title']);
     }
@@ -2230,7 +2269,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return array calls to be executed on the client
      */
     public static function showEditCheckboxModalBox(
-        \tx_mkforms_forms_Base $form, $checkboxUid
+        \tx_mkforms_forms_Base $form,
+        $checkboxUid
     ) {
         if ($checkboxUid <= 0) {
             return $form->majixExecJs('alert("$checkboxUid must be >= 0.");');
@@ -2294,7 +2334,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         if (!empty($validationErrors)) {
             return [
                 $form->majixExecJs(
-                    'alert("' . implode('\n', $validationErrors) . '");'
+                    'alert("' . implode('\\n', $validationErrors) . '");'
                 ),
             ];
         }
@@ -2377,7 +2417,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         );
         if (!empty($validationErrors)) {
             return $form->majixExecJs(
-                'alert("' . implode('\n', $validationErrors) . '");'
+                'alert("' . implode('\\n', $validationErrors) . '");'
             );
         }
 
@@ -2406,7 +2446,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return string[] the error messages, will be empty if there are no validation errors
      */
     private static function validateTargetGroup(
-        \tx_mkforms_forms_Base $form, array $formData
+        \tx_mkforms_forms_Base $form,
+        array $formData
     ) {
         $validationErrors = [];
         if (trim($formData['title']) == '') {
@@ -2414,8 +2455,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyTitle'
             );
         }
-        if (preg_match('/^(\d*)$/', trim($formData['minimum_age']))
-            && preg_match('/^(\d*)$/', trim($formData['maximum_age']))
+        if (preg_match('/^(\\d*)$/', trim($formData['minimum_age']))
+            && preg_match('/^(\\d*)$/', trim($formData['maximum_age']))
         ) {
             $minimumAge = $formData['minimum_age'];
             $maximumAge = $formData['maximum_age'];
@@ -2448,7 +2489,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return void
      */
     private static function setTargetGroupData(
-        Tx_Seminars_Model_TargetGroup $targetGroup, $prefix, array $formData
+        Tx_Seminars_Model_TargetGroup $targetGroup,
+        $prefix,
+        array $formData
     ) {
         $targetGroup->setTitle($formData[$prefix . 'title']);
         $targetGroup->setMinimumAge((int)$formData[$prefix . 'minimum_age']);
@@ -2466,7 +2509,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      * @return array calls to be executed on the client
      */
     public static function showEditTargetGroupModalBox(
-        \tx_mkforms_forms_Base $form, $targetGroupUid
+        \tx_mkforms_forms_Base $form,
+        $targetGroupUid
     ) {
         if ($targetGroupUid <= 0) {
             return $form->majixExecJs('alert("$targetGroupUid must be >= 0.");');

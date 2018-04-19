@@ -321,7 +321,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', ['email' => 'foo@example.com', 'name' => 'foo User']
+                    '',
+                    ['email' => 'foo@example.com', 'name' => 'foo User']
                 ),
             ]
         );
@@ -358,7 +359,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', ['email' => 'foo@example.com', 'name' => 'foo User']
+                    '',
+                    ['email' => 'foo@example.com', 'name' => 'foo User']
                 ),
             ]
         );
@@ -368,7 +370,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends Tx_Phpunit_
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', ['email' => 'bar@example.com', 'name' => 'foo User']
+                    '',
+                    ['email' => 'bar@example.com', 'name' => 'foo User']
                 ),
             ]
         );

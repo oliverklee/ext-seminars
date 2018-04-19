@@ -55,7 +55,8 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Sem
     public function setUnregistrationDeadline($unregistrationDeadline)
     {
         $this->setRecordPropertyInteger(
-            'deadline_unregistration', $unregistrationDeadline
+            'deadline_unregistration',
+            $unregistrationDeadline
         );
     }
 
@@ -69,7 +70,8 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Sem
     public function setAllowRegistrationForEventsWithoutDate($value)
     {
         $this->setConfigurationValue(
-            'allowRegistrationForEventsWithoutDate', $value
+            'allowRegistrationForEventsWithoutDate',
+            $value
         );
     }
 
@@ -119,7 +121,8 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Sem
     public function setShowTimeOfUnregistrationDeadline($value)
     {
         $this->setConfigurationValue(
-            'showTimeOfUnregistrationDeadline', $value
+            'showTimeOfUnregistrationDeadline',
+            $value
         );
     }
 
@@ -134,7 +137,8 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Sem
     public function setGlobalUnregistrationDeadline($days)
     {
         $this->setConfigurationValue(
-            'unregistrationDeadlineDaysBeforeBeginDate', $days
+            'unregistrationDeadlineDaysBeforeBeginDate',
+            $days
         );
     }
 
@@ -242,7 +246,8 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Sem
     public function setNumberOfOrganizingPartners($numberOfOrganizingPartners)
     {
         $this->setRecordPropertyInteger(
-            'organizing_partners', $numberOfOrganizingPartners
+            'organizing_partners',
+            $numberOfOrganizingPartners
         );
     }
 
@@ -564,7 +569,8 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Sem
     public function setNeedsRegistration($needsRegistration)
     {
         $this->setRecordPropertyBoolean(
-            'needs_registration', $needsRegistration
+            'needs_registration',
+            $needsRegistration
         );
     }
 
@@ -578,7 +584,8 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Sem
     public function setRegistrationDeadline($registrationDeadline)
     {
         $this->setRecordPropertyInteger(
-            'deadline_registration', $registrationDeadline
+            'deadline_registration',
+            $registrationDeadline
         );
     }
 
@@ -605,7 +612,8 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Sem
     public function setRegistrationBeginDate($registrationBeginDate)
     {
         $this->setRecordPropertyInteger(
-            'begin_date_registration', $registrationBeginDate
+            'begin_date_registration',
+            $registrationBeginDate
         );
     }
 
@@ -621,7 +629,8 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Sem
     public function setOfflineRegistrationNumber($offlineRegistrations)
     {
         $this->setRecordPropertyInteger(
-            'offline_attendees', $offlineRegistrations
+            'offline_attendees',
+            $offlineRegistrations
         );
     }
 

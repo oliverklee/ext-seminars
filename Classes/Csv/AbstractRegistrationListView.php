@@ -98,12 +98,14 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
     {
         if (!$this->hasPageUid() && !$this->hasEventUid()) {
             throw new BadMethodCallException(
-                'render() must only be called after either a page UID or an event has been set.', 1390320210
+                'render() must only be called after either a page UID or an event has been set.',
+                1390320210
             );
         }
         if ($this->hasPageUid() && $this->hasEventUid()) {
             throw new BadMethodCallException(
-                'render() must only be called after either a page UID or an event has been set, but not both.', 1390329291
+                'render() must only be called after either a page UID or an event has been set, but not both.',
+                1390329291
             );
         }
 
@@ -121,7 +123,8 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
     {
         $fieldsFromFeUser = $this->createLocalizedCsvHeadingsForOneTable($this->getFrontEndUserFieldKeys(), 'LGL');
         $fieldsFromAttendances = $this->createLocalizedCsvHeadingsForOneTable(
-            $this->getRegistrationFieldKeys(), $this->getTableName()
+            $this->getRegistrationFieldKeys(),
+            $this->getTableName()
         );
 
         return array_merge($fieldsFromFeUser, $fieldsFromAttendances);

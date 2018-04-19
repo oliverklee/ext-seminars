@@ -106,7 +106,8 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
         );
 
         $test = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
-            0, $dbResult
+            0,
+            $dbResult
         );
 
         self::assertTrue(
@@ -117,7 +118,8 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     public function testCreateFromDbResultFailsForNull()
     {
         $test = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
-            0, null
+            0,
+            null
         );
 
         self::assertFalse(
@@ -131,7 +133,9 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     public function createFromDbResultFailsForHiddenRecord()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_test', $this->fixtureUid, ['hidden' => 1]
+            'tx_seminars_test',
+            $this->fixtureUid,
+            ['hidden' => 1]
         );
 
         $test = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing($this->fixtureUid);
@@ -147,11 +151,15 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     public function createFromDbResultWithAllowedHiddenRecordsGetsHiddenRecordFromDb()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_test', $this->fixtureUid, ['hidden' => 1]
+            'tx_seminars_test',
+            $this->fixtureUid,
+            ['hidden' => 1]
         );
 
         $test = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
-            $this->fixtureUid, null, true
+            $this->fixtureUid,
+            null,
+            true
         );
 
         self::assertTrue(
@@ -349,7 +357,8 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
         self::assertEquals(
             0,
             $this->fixture->createMmRecords(
-                'tx_seminars_test_test_mm', []
+                'tx_seminars_test_test_mm',
+                []
             )
         );
     }
@@ -361,7 +370,8 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
         self::assertEquals(
             1,
             $this->fixture->createMmRecords(
-                'tx_seminars_test_test_mm', [42]
+                'tx_seminars_test_test_mm',
+                [42]
             )
         );
     }
@@ -373,7 +383,8 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
         self::assertEquals(
             2,
             $this->fixture->createMmRecords(
-                'tx_seminars_test_test_mm', [42, 31]
+                'tx_seminars_test_test_mm',
+                [42, 31]
             )
         );
     }
@@ -382,7 +393,8 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->markTableAsDirty('tx_seminars_test_test_mm');
         $this->fixture->createMmRecords(
-            'tx_seminars_test_test_mm', [42]
+            'tx_seminars_test_test_mm',
+            [42]
         );
 
         self::assertTrue(
@@ -397,7 +409,8 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->markTableAsDirty('tx_seminars_test_test_mm');
         $this->fixture->createMmRecords(
-            'tx_seminars_test_test_mm', [42]
+            'tx_seminars_test_test_mm',
+            [42]
         );
 
         self::assertTrue(
@@ -412,7 +425,8 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->markTableAsDirty('tx_seminars_test_test_mm');
         $this->fixture->createMmRecords(
-            'tx_seminars_test_test_mm', [42, 31]
+            'tx_seminars_test_test_mm',
+            [42, 31]
         );
 
         self::assertTrue(
@@ -434,7 +448,9 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     public function recordExistsForHiddenRecordAndNoHiddenRecordsAllowedReturnsFalse()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_test', $this->fixtureUid, ['hidden' => 1]
+            'tx_seminars_test',
+            $this->fixtureUid,
+            ['hidden' => 1]
         );
 
         self::assertFalse(
@@ -448,7 +464,9 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     public function recordExistsForHiddenRecordAndHiddenRecordsAllowedReturnsTrue()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_test', $this->fixtureUid, ['hidden' => 1]
+            'tx_seminars_test',
+            $this->fixtureUid,
+            ['hidden' => 1]
         );
 
         self::assertTrue(
@@ -466,7 +484,9 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     public function getPageUidCanReturnRecordsPageUid()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_test', $this->fixtureUid, ['pid' => 42]
+            'tx_seminars_test',
+            $this->fixtureUid,
+            ['pid' => 42]
         );
         $fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
             $this->fixtureUid
@@ -484,7 +504,9 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     public function getPageUidForRecordWithPageUidZeroReturnsZero()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_test', $this->fixtureUid, ['pid' => 0]
+            'tx_seminars_test',
+            $this->fixtureUid,
+            ['pid' => 0]
         );
         $fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
             $this->fixtureUid

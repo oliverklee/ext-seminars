@@ -89,7 +89,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends Tx_Phpunit_TestCase
 
     /**
      * @test
-     * @expectedException BadMethodCallException
+     * @expectedException \BadMethodCallException
      * @expectedExceptionMessage The method injectEventMapper() needs to be called first.
      * @expectedExceptionCode 1333617194
      */

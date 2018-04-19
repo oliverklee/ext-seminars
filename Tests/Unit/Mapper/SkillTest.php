@@ -62,7 +62,8 @@ class Tx_Seminars_Tests_Unit_Mapper_SkillTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_skills', ['title' => 'Superhero']
+            'tx_seminars_skills',
+            ['title' => 'Superhero']
         );
 
         /** @var Tx_Seminars_Model_Skill $model */

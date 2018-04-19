@@ -148,7 +148,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
         $bag = $this->fixture->build();
 
@@ -176,7 +178,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         $this->fixture->limitToCategories('');
@@ -206,7 +210,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         $this->fixture->limitToCategories($categoryUid);
@@ -232,7 +238,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         $this->fixture->limitToCategories($categoryUid);
@@ -258,7 +266,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid1,
+            $categoryUid
         );
 
         $eventUid2 = $this->testingFramework->createRecord(
@@ -266,7 +276,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid2, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid2,
+            $categoryUid
         );
 
         $this->fixture->limitToCategories($categoryUid);
@@ -296,7 +308,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         $this->fixture->limitToCategories($categoryUid);
@@ -325,7 +339,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid1
+            'tx_seminars_seminars_categories_mm',
+            $eventUid1,
+            $categoryUid1
         );
 
         $eventUid2 = $this->testingFramework->createRecord(
@@ -336,7 +352,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid2, $categoryUid2
+            'tx_seminars_seminars_categories_mm',
+            $eventUid2,
+            $categoryUid2
         );
 
         $this->fixture->limitToCategories($categoryUid1);
@@ -370,7 +388,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid1
+            'tx_seminars_seminars_categories_mm',
+            $eventUid1,
+            $categoryUid1
         );
 
         $categoryUid2 = $this->testingFramework->createRecord(
@@ -398,7 +418,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $eventUid,
+            $categoryUid
         );
 
         $this->fixture->limitToCategories($categoryUid);
@@ -430,7 +452,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $topicUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $topicUid,
+            $categoryUid
         );
 
         $this->fixture->limitToCategories($categoryUid);
@@ -470,7 +494,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $topicUid, $categoryUid
+            'tx_seminars_seminars_categories_mm',
+            $topicUid,
+            $categoryUid
         );
 
         $this->fixture->limitToCategories($categoryUid);
@@ -495,7 +521,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $topicUid, $categoryUid1
+            'tx_seminars_seminars_categories_mm',
+            $topicUid,
+            $categoryUid1
         );
 
         $dateUid = $this->testingFramework->createRecord(
@@ -509,7 +537,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $dateUid, $categoryUid2
+            'tx_seminars_seminars_categories_mm',
+            $dateUid,
+            $categoryUid2
         );
 
         $this->fixture->limitToCategories($categoryUid2);
@@ -533,7 +563,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid1, $categoryUid1
+            'tx_seminars_seminars_categories_mm',
+            $eventUid1,
+            $categoryUid1
         );
 
         $categoryUid2 = $this->testingFramework->createRecord(
@@ -544,10 +576,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm', $eventUid2, $categoryUid2
+            'tx_seminars_seminars_categories_mm',
+            $eventUid2,
+            $categoryUid2
         );
 
-        $this->fixture->limitToCategories($categoryUid1 . ','  . $categoryUid2);
+        $this->fixture->limitToCategories($categoryUid1 . ',' . $categoryUid2);
         $bag = $this->fixture->build();
 
         self::assertSame(
@@ -564,7 +598,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['place' => 1]
+            'tx_seminars_seminars',
+            ['place' => 1]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
@@ -603,10 +638,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $siteUid1 = $this->testingFramework->createRecord('tx_seminars_sites');
         $siteUid2 = $this->testingFramework->createRecord('tx_seminars_sites');
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['place' => 1]
+            'tx_seminars_seminars',
+            ['place' => 1]
         );
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['place' => 1]
+            'tx_seminars_seminars',
+            ['place' => 1]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_place_mm',
@@ -648,10 +685,13 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $siteUid1 = $this->testingFramework->createRecord('tx_seminars_sites');
         $siteUid2 = $this->testingFramework->createRecord('tx_seminars_sites');
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['place' => 1]
+            'tx_seminars_seminars',
+            ['place' => 1]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_place_mm', $eventUid, $siteUid1
+            'tx_seminars_seminars_place_mm',
+            $eventUid,
+            $siteUid1
         );
         $this->fixture->limitToPlaces([$siteUid2]);
         $bag = $this->fixture->build();
@@ -666,13 +706,18 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $siteUid1 = $this->testingFramework->createRecord('tx_seminars_sites');
         $siteUid2 = $this->testingFramework->createRecord('tx_seminars_sites');
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['place' => 1]
+            'tx_seminars_seminars',
+            ['place' => 1]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_place_mm', $eventUid, $siteUid1
+            'tx_seminars_seminars_place_mm',
+            $eventUid,
+            $siteUid1
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_place_mm', $eventUid, $siteUid2
+            'tx_seminars_seminars_place_mm',
+            $eventUid,
+            $siteUid2
         );
         $this->fixture->limitToPlaces([$siteUid1]);
         $bag = $this->fixture->build();
@@ -3498,7 +3543,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testLimitToFullTextSearchWithTwoCommasAsSearchWordFindsAllEvents()
     {
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['title' => 'avocado paprika event']
+            'tx_seminars_seminars',
+            ['title' => 'avocado paprika event']
         );
         $this->fixture->limitToFullTextSearch(',,');
         $bag = $this->fixture->build();
@@ -3516,7 +3562,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testLimitToFullTextSearchWithTwoSearchWordsSeparatedByTwoSpacesFindsEvents()
     {
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['title' => 'avocado paprika event']
+            'tx_seminars_seminars',
+            ['title' => 'avocado paprika event']
         );
         $this->fixture->limitToFullTextSearch('avocado  paprika');
         $bag = $this->fixture->build();
@@ -3534,7 +3581,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testLimitToFullTextSearchWithTwoCommasSeparatedByTwoSpacesFindsAllEvents()
     {
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['title' => 'avocado paprika event']
+            'tx_seminars_seminars',
+            ['title' => 'avocado paprika event']
         );
         $this->fixture->limitToFullTextSearch(',  ,');
         $bag = $this->fixture->build();
@@ -3552,7 +3600,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testLimitToFullTextSearchWithTooShortSearchWordFindsAllEvents()
     {
         $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['title' => 'avocado paprika event']
+            'tx_seminars_seminars',
+            ['title' => 'avocado paprika event']
         );
         $this->fixture->limitToFullTextSearch('o');
         $bag = $this->fixture->build();
@@ -5077,7 +5126,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testLimitToCancelationDeadlineReminderNotSentFindsEventWithCancelationReminderSentFlagFalse()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['cancelation_deadline_reminder_sent' => 0]
+            'tx_seminars_seminars',
+            ['cancelation_deadline_reminder_sent' => 0]
         );
 
         $this->fixture->limitToCancelationDeadlineReminderNotSent();
@@ -5092,7 +5142,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testLimitToCancelationDeadlineReminderNotSentNotFindsEventWithCancelationReminderSentFlagTrue()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['cancelation_deadline_reminder_sent' => 1]
+            'tx_seminars_seminars',
+            ['cancelation_deadline_reminder_sent' => 1]
         );
 
         $this->fixture->limitToCancelationDeadlineReminderNotSent();
@@ -5111,7 +5162,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testLimitToEventTakesPlaceReminderNotSentFindsEventWithConfirmationInformationSentFlagFalse()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['event_takes_place_reminder_sent' => 0]
+            'tx_seminars_seminars',
+            ['event_takes_place_reminder_sent' => 0]
         );
 
         $this->fixture->limitToEventTakesPlaceReminderNotSent();
@@ -5126,7 +5178,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testLimitToEventTakesPlaceReminderNotSentNotFindsEventWithConfirmationInformationSentFlagTrue()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['event_takes_place_reminder_sent' => 1]
+            'tx_seminars_seminars',
+            ['event_takes_place_reminder_sent' => 1]
         );
 
         $this->fixture->limitToEventTakesPlaceReminderNotSent();
@@ -5392,7 +5445,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToEarliestBeginOrEndDateForEventWithBeginDateEqualToGivenTimestampFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['begin_date' => 42]
+            'tx_seminars_seminars',
+            ['begin_date' => 42]
         );
         $this->fixture->limitToEarliestBeginOrEndDate(42);
         $bag = $this->fixture->build();
@@ -5409,7 +5463,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToEarliestBeginOrEndDateForEventWithGreaterBeginDateThanGivenTimestampFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['begin_date' => 42]
+            'tx_seminars_seminars',
+            ['begin_date' => 42]
         );
         $this->fixture->limitToEarliestBeginOrEndDate(21);
         $bag = $this->fixture->build();
@@ -5426,7 +5481,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToEarliestBeginOrEndDateForEventWithBeginDateLowerThanGivenTimestampDoesNotFindThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['begin_date' => 42]
+            'tx_seminars_seminars',
+            ['begin_date' => 42]
         );
         $this->fixture->limitToEarliestBeginOrEndDate(84);
         $bag = $this->fixture->build();
@@ -5442,7 +5498,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToEarliestBeginOrEndDateForZeroGivenAsTimestampUnsetsFilter()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['begin_date' => 21]
+            'tx_seminars_seminars',
+            ['begin_date' => 21]
         );
 
         $this->fixture->limitToEarliestBeginOrEndDate(42);
@@ -5495,7 +5552,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToLatestBeginOrEndDateForEventBeginDateEqualToGivenTimestampFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['begin_date' => 42]
+            'tx_seminars_seminars',
+            ['begin_date' => 42]
         );
         $this->fixture->limitToLatestBeginOrEndDate(42);
         $bag = $this->fixture->build();
@@ -5512,7 +5570,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToLatestBeginOrEndDateForEventWithBeginDateAfterGivenTimestampDoesNotFindThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['begin_date' => 42]
+            'tx_seminars_seminars',
+            ['begin_date' => 42]
         );
         $this->fixture->limitToLatestBeginOrEndDate(21);
         $bag = $this->fixture->build();
@@ -5528,7 +5587,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToLatestBeginOrEndDateForEventBeginDateBeforeGivenTimestampFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['begin_date' => 42]
+            'tx_seminars_seminars',
+            ['begin_date' => 42]
         );
         $this->fixture->limitToLatestBeginOrEndDate(84);
         $bag = $this->fixture->build();
@@ -5545,7 +5605,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToLatestBeginOrEndDateForEventEndDateEqualToGivenTimestampFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['end_date' => 42]
+            'tx_seminars_seminars',
+            ['end_date' => 42]
         );
         $this->fixture->limitToLatestBeginOrEndDate(42);
         $bag = $this->fixture->build();
@@ -5562,7 +5623,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToLatestBeginOrEndDateForEventWithEndDateAfterGivenTimestampDoesNotFindThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['end_date' => 42]
+            'tx_seminars_seminars',
+            ['end_date' => 42]
         );
         $this->fixture->limitToLatestBeginOrEndDate(21);
         $bag = $this->fixture->build();
@@ -5578,7 +5640,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToLatestBeginOrEndDateForEventEndDateBeforeGivenTimestampFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['end_date' => 42]
+            'tx_seminars_seminars',
+            ['end_date' => 42]
         );
         $this->fixture->limitToLatestBeginOrEndDate(84);
         $bag = $this->fixture->build();
@@ -5616,7 +5679,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function showHiddenRecordsForHiddenEventFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['hidden' => 1]
+            'tx_seminars_seminars',
+            ['hidden' => 1]
         );
 
         $this->fixture->showHiddenRecords();
@@ -5634,7 +5698,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function showHiddenRecordsForVisibleEventFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['hidden' => 0]
+            'tx_seminars_seminars',
+            ['hidden' => 0]
         );
 
         $this->fixture->showHiddenRecords();
@@ -5656,7 +5721,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToEventsWithVacanciesForEventWithNoRegistrationNeededFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['needs_registration' => 0]
+            'tx_seminars_seminars',
+            ['needs_registration' => 0]
         );
 
         $this->fixture->limitToEventsWithVacancies();
@@ -5894,7 +5960,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_organizers'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $organizerUid, 'organizers'
+            'tx_seminars_seminars',
+            $eventUid,
+            $organizerUid,
+            'organizers'
         );
 
         $this->fixture->limitToOrganizers($organizerUid);
@@ -5941,7 +6010,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_organizers'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $organizerUid1, 'organizers'
+            'tx_seminars_seminars',
+            $eventUid,
+            $organizerUid1,
+            'organizers'
         );
 
         $this->fixture->limitToOrganizers($organizerUid2);
@@ -5968,7 +6040,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $organizerUid1, 'organizers'
+            'tx_seminars_seminars',
+            $eventUid,
+            $organizerUid1,
+            'organizers'
         );
 
         $this->fixture->limitToOrganizers($organizerUid1 . ',' . $organizerUid2);
@@ -5996,10 +6071,16 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid1, $organizerUid, 'organizers'
+            'tx_seminars_seminars',
+            $eventUid1,
+            $organizerUid,
+            'organizers'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid2, $organizerUid, 'organizers'
+            'tx_seminars_seminars',
+            $eventUid2,
+            $organizerUid,
+            'organizers'
         );
 
         $this->fixture->limitToOrganizers($organizerUid);
@@ -6025,7 +6106,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $topicUid, $organizerUid, 'organizers'
+            'tx_seminars_seminars',
+            $topicUid,
+            $organizerUid,
+            'organizers'
         );
 
         $dateUid = $this->testingFramework->createRecord(
@@ -6061,7 +6145,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_organizers'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $organizerUid, 'organizers'
+            'tx_seminars_seminars',
+            $eventUid,
+            $organizerUid,
+            'organizers'
         );
 
         $this->fixture->limitToOrganizers('');
@@ -6090,7 +6177,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid,
+            'target_groups'
         );
 
         $this->fixture->limitToAge(6);
@@ -6115,7 +6205,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid,
+            'target_groups'
         );
 
         $this->fixture->limitToAge(15);
@@ -6140,7 +6233,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid,
+            'target_groups'
         );
 
         $this->fixture->limitToAge(15);
@@ -6165,7 +6261,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid,
+            'target_groups'
         );
 
         $this->fixture->limitToAge(15);
@@ -6190,7 +6289,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid,
+            'target_groups'
         );
 
         $this->fixture->limitToAge(51);
@@ -6214,7 +6316,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid,
+            'target_groups'
         );
 
         $this->fixture->limitToAge(15);
@@ -6239,7 +6344,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid,
+            'target_groups'
         );
 
         $this->fixture->limitToAge(4);
@@ -6280,7 +6388,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid,
+            'target_groups'
         );
 
         $this->fixture->limitToAge(15);
@@ -6309,10 +6420,16 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid1, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid1,
+            'target_groups'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid2, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid2,
+            'target_groups'
         );
 
         $this->fixture->limitToAge(21);
@@ -6341,10 +6458,16 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid1, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid1,
+            'target_groups'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid2, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid2,
+            'target_groups'
         );
 
         $this->fixture->limitToAge(6);
@@ -6369,7 +6492,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $targetGroupUid, 'target_groups'
+            'tx_seminars_seminars',
+            $eventUid,
+            $targetGroupUid,
+            'target_groups'
         );
 
         $this->fixture->limitToAge(0);
@@ -6391,7 +6517,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMaximumPriceForEventWithRegularPriceLowerThanMaximumFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_regular' => 42]
+            'tx_seminars_seminars',
+            ['price_regular' => 42]
         );
 
         $this->fixture->limitToMaximumPrice(43);
@@ -6409,7 +6536,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMaximumPriceForEventWithRegularPriceZeroFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_regular' => 0]
+            'tx_seminars_seminars',
+            ['price_regular' => 0]
         );
 
         $this->fixture->limitToMaximumPrice(50);
@@ -6427,7 +6555,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMaximumPriceForEventWithRegularPriceEqualToMaximumFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_regular' => 50]
+            'tx_seminars_seminars',
+            ['price_regular' => 50]
         );
 
         $this->fixture->limitToMaximumPrice(50);
@@ -6445,7 +6574,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMaximumPriceForEventWithRegularPriceHigherThanMaximumDoesNotFindThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_regular' => 51]
+            'tx_seminars_seminars',
+            ['price_regular' => 51]
         );
 
         $this->fixture->limitToMaximumPrice(50);
@@ -7006,7 +7136,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForEventWithRegularPriceLowerThanMinimumDoesNotFindThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_regular' => 14]
+            'tx_seminars_seminars',
+            ['price_regular' => 14]
         );
 
         $this->fixture->limitToMinimumPrice(15);
@@ -7038,7 +7169,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForEventWithRegularPriceEqualToMinimumFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_regular' => 15]
+            'tx_seminars_seminars',
+            ['price_regular' => 15]
         );
 
         $this->fixture->limitToMinimumPrice(15);
@@ -7056,7 +7188,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForEventWithRegularPriceGreaterThanMinimumFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_regular' => 16]
+            'tx_seminars_seminars',
+            ['price_regular' => 16]
         );
 
         $this->fixture->limitToMinimumPrice(15);
@@ -7074,7 +7207,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForEventWithRegularBoardPriceGreaterThanMinimumFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_regular_board' => 16]
+            'tx_seminars_seminars',
+            ['price_regular_board' => 16]
         );
 
         $this->fixture->limitToMinimumPrice(15);
@@ -7092,7 +7226,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForEventWithRegularBoardPriceEqualToMinimumFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_regular_board' => 15]
+            'tx_seminars_seminars',
+            ['price_regular_board' => 15]
         );
 
         $this->fixture->limitToMinimumPrice(15);
@@ -7110,7 +7245,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForEventWithRegularBoardPriceLowerThanMinimumDoesNotFindThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_regular_board' => 14]
+            'tx_seminars_seminars',
+            ['price_regular_board' => 14]
         );
 
         $this->fixture->limitToMinimumPrice(15);
@@ -7127,7 +7263,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForEventWithSpecialBoardPriceGreaterThanMinimumFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_special_board' => 16]
+            'tx_seminars_seminars',
+            ['price_special_board' => 16]
         );
 
         $this->fixture->limitToMinimumPrice(15);
@@ -7145,7 +7282,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForEventWithSpecialBoardPriceEqualToMinimumFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_special_board' => 15]
+            'tx_seminars_seminars',
+            ['price_special_board' => 15]
         );
 
         $this->fixture->limitToMinimumPrice(15);
@@ -7163,7 +7301,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForEventWithSpecialBoardPriceLowerThanMinimumDoesNotFindThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_special_board' => 14]
+            'tx_seminars_seminars',
+            ['price_special_board' => 14]
         );
 
         $this->fixture->limitToMinimumPrice(15);
@@ -7180,7 +7319,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForEventWithSpecialPriceGreaterThanMinimumFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_special' => 16]
+            'tx_seminars_seminars',
+            ['price_special' => 16]
         );
 
         $this->fixture->limitToMinimumPrice(15);
@@ -7198,7 +7338,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForEventWithSpecialPriceEqualToMinimumFindsThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_special' => 15]
+            'tx_seminars_seminars',
+            ['price_special' => 15]
         );
 
         $this->fixture->limitToMinimumPrice(15);
@@ -7216,7 +7357,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForEventWithSpecialPriceLowerThanMinimumDoesNotFindThisEvent()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_special' => 14]
+            'tx_seminars_seminars',
+            ['price_special' => 14]
         );
 
         $this->fixture->limitToMinimumPrice(15);
@@ -7467,7 +7609,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function limitToMinimumPriceForMinimumPriceZeroFindsEventWithRegularPrice()
     {
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['price_regular' => 16]
+            'tx_seminars_seminars',
+            ['price_regular' => 16]
         );
 
         $this->fixture->limitToMinimumPrice(0);

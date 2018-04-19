@@ -56,7 +56,8 @@ class Tx_Seminars_BackEnd_ConfirmEventMailForm extends Tx_Seminars_BackEnd_Abstr
      * @return void
      */
     protected function modifyEmailWithHook(
-        Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail
+        Tx_Seminars_Model_Registration $registration,
+        Tx_Oelib_Mail $eMail
     ) {
         foreach ($this->getHooks() as $hook) {
             $hook->modifyConfirmEmail($registration, $eMail);

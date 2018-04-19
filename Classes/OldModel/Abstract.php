@@ -109,7 +109,9 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
      * @return void
      */
     protected function retrieveRecordAndGetData(
-        $uid, $dbResult = false, $allowHiddenRecords = false
+        $uid,
+        $dbResult = false,
+        $allowHiddenRecords = false
     ) {
         if (!$dbResult) {
             $dbResult = $this->retrieveRecord($uid, $allowHiddenRecords);
@@ -204,7 +206,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
      */
     public function hasRecordPropertyString($key)
     {
-        return ($this->getRecordPropertyString($key) != '');
+        return $this->getRecordPropertyString($key) != '';
     }
 
     /**
@@ -273,7 +275,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
     protected function setRecordPropertyString($key, $value)
     {
         if (!empty($key)) {
-            $this->recordData[$key] = trim((string) $value);
+            $this->recordData[$key] = trim((string)$value);
         }
     }
 
@@ -316,7 +318,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
      */
     private function hasKey($key)
     {
-        return ($this->isOk() && !empty($key) && isset($this->recordData[$key]));
+        return $this->isOk() && !empty($key) && isset($this->recordData[$key]);
     }
 
     /**
@@ -340,7 +342,8 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
         if (!$this->isInDb || !$this->hasUid()) {
             $this->setRecordPropertyInteger('crdate', $now);
             Tx_Oelib_Db::insert(
-                $this->tableName, $this->recordData
+                $this->tableName,
+                $this->recordData
             );
         } else {
             Tx_Oelib_Db::update(
@@ -419,7 +422,8 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
                     'is_dummy_record' => $isDummyRecord,
                 ];
                 Tx_Oelib_Db::insert(
-                    $mmTable, $dataToInsert
+                    $mmTable,
+                    $dataToInsert
                 );
                 $sorting++;
                 $numberOfCreatedMmRecords++;
@@ -562,9 +566,8 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
     {
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
             return $this->createRecordIconForTypo3Version76AndUp();
-        } else {
-            return $this->createRecordIconForTypo3UpTo62();
         }
+        return $this->createRecordIconForTypo3UpTo62();
     }
 
     /**
@@ -575,7 +578,9 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
         /** @var \TYPO3\CMS\Core\Imaging\IconFactory $iconFactory */
         $iconFactory = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconFactory::class);
         return $iconFactory->getIconForRecord(
-            $this->tableName, $this->recordData, \TYPO3\CMS\Core\Imaging\Icon::SIZE_SMALL
+            $this->tableName,
+            $this->recordData,
+            \TYPO3\CMS\Core\Imaging\Icon::SIZE_SMALL
         )->render();
     }
 

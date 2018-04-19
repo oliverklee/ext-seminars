@@ -124,13 +124,14 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      */
     public function setSourcePages($sourcePagePids, $recursionDepth = 0)
     {
-        if (!preg_match('/^([\d+,] *)*\d+$/', $sourcePagePids)) {
+        if (!preg_match('/^([\\d+,] *)*\\d+$/', $sourcePagePids)) {
             unset($this->whereClauseParts['pages']);
             return;
         }
 
         $recursivePidList = Tx_Oelib_Db::createRecursivePageList(
-            $sourcePagePids, $recursionDepth
+            $sourcePagePids,
+            $recursionDepth
         );
 
         $this->whereClauseParts['pages'] = $this->tableName . '.pid IN (' .
@@ -213,7 +214,8 @@ abstract class Tx_Seminars_BagBuilder_Abstract
 
         if (!isset($this->additionalTableNames[$additionalTableName])) {
             throw new InvalidArgumentException(
-                'The given additional table name does not exist in the list of additional table names.', 1333292582
+                'The given additional table name does not exist in the list of additional table names.',
+                1333292582
             );
         }
 

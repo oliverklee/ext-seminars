@@ -59,7 +59,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function isSingleEvent()
     {
-        return ($this->getAsInteger('object_type') == self::TYPE_COMPLETE);
+        return $this->getAsInteger('object_type') == self::TYPE_COMPLETE;
     }
 
     /**
@@ -588,7 +588,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasCombinedSingleViewPage()
     {
-        return ($this->getCombinedSingleViewPage() != '');
+        return $this->getCombinedSingleViewPage() != '';
     }
 
     /**
@@ -618,8 +618,8 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     protected function hasSingleViewPageUidFromEventType()
     {
-        return (($this->getEventType() !== null)
-            && $this->getEventType()->hasSingleViewPageUid());
+        return ($this->getEventType() !== null)
+            && $this->getEventType()->hasSingleViewPageUid();
     }
 
     /**
@@ -657,7 +657,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     protected function hasSingleViewPageUidFromCategories()
     {
-        return ($this->getSingleViewPageUidFromCategories() > 0);
+        return $this->getSingleViewPageUidFromCategories() > 0;
     }
 
     /**
@@ -1072,9 +1072,9 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
         $priceSpecialIsOk = !$this->hasSpecialPrice()
             || ($this->hasSpecialPrice() && $this->hasSpecialEarlyBirdPrice());
 
-        return ($this->hasEarlyBirdDeadline()
+        return $this->hasEarlyBirdDeadline()
             && $priceRegularIsOk
-            && $priceSpecialIsOk);
+            && $priceSpecialIsOk;
     }
 
     /**
@@ -1087,8 +1087,8 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function isEarlyBirdDeadlineOver()
     {
-        return ($GLOBALS['SIM_EXEC_TIME']
-            >= $this->getEarlyBirdDeadlineAsUnixTimeStamp());
+        return $GLOBALS['SIM_EXEC_TIME']
+            >= $this->getEarlyBirdDeadlineAsUnixTimeStamp();
     }
 
     /**
@@ -1445,7 +1445,8 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     {
         if (!in_array($status, [self::STATUS_PLANNED, self::STATUS_CANCELED, self::STATUS_CONFIRMED], true)) {
             throw new \InvalidArgumentException(
-                '$status must be either STATUS_PLANNED, STATUS_CANCELED or STATUS_CONFIRMED.', 1333296722
+                '$status must be either STATUS_PLANNED, STATUS_CANCELED or STATUS_CONFIRMED.',
+                1333296722
             );
         }
 
@@ -2013,7 +2014,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasEnoughRegistrations()
     {
-        return ($this->getRegisteredSeats() >= $this->getMinimumAttendees());
+        return $this->getRegisteredSeats() >= $this->getMinimumAttendees();
     }
 
     /**
@@ -2047,7 +2048,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
             return true;
         }
 
-        return ($this->getVacancies() > 0);
+        return $this->getVacancies() > 0;
     }
 
     /**
