@@ -119,7 +119,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledSearchWidgetContainsSearchingHints()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         self::assertContains(
@@ -134,7 +135,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledSearchWidgetContainsSubmitButton()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         self::assertContains(
@@ -150,7 +152,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledSearchWidgetContainsResetButton()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         self::assertContains(
@@ -166,10 +169,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledShowEmptyEntryInOptionListsContainsEmptyOption()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'event_type'
+            'displaySearchFormFields',
+            'event_type'
         );
         $this->fixture->setConfigurationValue(
-            'showEmptyEntryInOptionLists', true
+            'showEmptyEntryInOptionLists',
+            true
         );
 
         self::assertContains(
@@ -186,7 +191,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForTwoEnabledSearchPartsRendersBothSearchParts()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'event_type,language'
+            'displaySearchFormFields',
+            'event_type,language'
         );
 
         $output = $this->fixture->render();
@@ -262,7 +268,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEventTypeHiddenInConfigurationHidesEventTypeSubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         $this->fixture->render();
@@ -278,15 +285,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledEventTypeCanContainEventTypeOption()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'event_type'
+            'displaySearchFormFields',
+            'event_type'
         );
 
         $eventTypeTitle = 'test event type';
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', ['title' => $eventTypeTitle]
+            'tx_seminars_event_types',
+            ['title' => $eventTypeTitle]
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['event_type' => $eventTypeUid]
+            'tx_seminars_seminars',
+            ['event_type' => $eventTypeUid]
         );
 
         self::assertContains(
@@ -302,15 +312,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledEventTypeHtmlSpecialCharsTheEventTypeTitle()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'event_type'
+            'displaySearchFormFields',
+            'event_type'
         );
 
         $eventTypeTitle = '< Test >';
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', ['title' => $eventTypeTitle]
+            'tx_seminars_event_types',
+            ['title' => $eventTypeTitle]
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['event_type' => $eventTypeUid]
+            'tx_seminars_seminars',
+            ['event_type' => $eventTypeUid]
         );
 
         self::assertContains(
@@ -327,18 +340,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledEventTypePreselectsSelectedValue()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'event_type'
+            'displaySearchFormFields',
+            'event_type'
         );
 
         $eventTypeTitle = 'test event type';
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', ['title' => $eventTypeTitle]
+            'tx_seminars_event_types',
+            ['title' => $eventTypeTitle]
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['event_type' => $eventTypeUid]
+            'tx_seminars_seminars',
+            ['event_type' => $eventTypeUid]
         );
 
-        $this->fixture->piVars['event_type'][] = (string) $eventTypeUid;
+        $this->fixture->piVars['event_type'][] = (string)$eventTypeUid;
 
         self::assertContains(
             $eventTypeUid . '" selected="selected">' . $eventTypeTitle .
@@ -353,27 +369,32 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledEventTypeCanPreselectTwoValues()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'event_type'
+            'displaySearchFormFields',
+            'event_type'
         );
 
         $eventTypeTitle = 'foo';
         $eventTypeTitle2 = 'bar';
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', ['title' => $eventTypeTitle]
+            'tx_seminars_event_types',
+            ['title' => $eventTypeTitle]
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['event_type' => $eventTypeUid]
+            'tx_seminars_seminars',
+            ['event_type' => $eventTypeUid]
         );
 
         $eventTypeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', ['title' => $eventTypeTitle2]
+            'tx_seminars_event_types',
+            ['title' => $eventTypeTitle2]
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['event_type' => $eventTypeUid2]
+            'tx_seminars_seminars',
+            ['event_type' => $eventTypeUid2]
         );
 
-        $this->fixture->piVars['event_type'][] = (string) $eventTypeUid;
-        $this->fixture->piVars['event_type'][] = (string) $eventTypeUid2;
+        $this->fixture->piVars['event_type'][] = (string)$eventTypeUid;
+        $this->fixture->piVars['event_type'][] = (string)$eventTypeUid2;
 
         $output = $this->fixture->render();
 
@@ -395,7 +416,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledEventTypeContainsSelectorForEventTypes()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'event_type'
+            'displaySearchFormFields',
+            'event_type'
         );
 
         self::assertContains(
@@ -455,7 +477,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForLanguageOptionsHiddenInConfigurationHidesLanguageSubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         $this->fixture->render();
@@ -471,7 +494,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForLanguageOptionsHiddenInConfigurationDoesNotShowLanguageOptionsMarker()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         self::assertNotContains(
@@ -486,17 +510,23 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledLanguageOptionsContainsLanguageOption()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'language'
+            'displaySearchFormFields',
+            'language'
         );
 
         $this->instantiateStaticInfo();
 
         $languageIsoCode = 'DE';
         $languageName = $this->staticInfo->getStaticInfoName(
-            'LANGUAGES', $languageIsoCode, '', '', 0
+            'LANGUAGES',
+            $languageIsoCode,
+            '',
+            '',
+            0
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['language' => $languageIsoCode]
+            'tx_seminars_seminars',
+            ['language' => $languageIsoCode]
         );
 
         self::assertContains(
@@ -512,7 +542,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledLanguageOptionsContainsSelectorForLanguages()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'language'
+            'displaySearchFormFields',
+            'language'
         );
 
         self::assertContains(
@@ -528,17 +559,23 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledLanguageOptionsCanPreselectSelectedLanguage()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'language'
+            'displaySearchFormFields',
+            'language'
         );
 
         $this->instantiateStaticInfo();
 
         $languageIsoCode = 'DE';
         $languageName = $this->staticInfo->getStaticInfoName(
-            'LANGUAGES', $languageIsoCode, '', '', 0
+            'LANGUAGES',
+            $languageIsoCode,
+            '',
+            '',
+            0
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['language' => $languageIsoCode]
+            'tx_seminars_seminars',
+            ['language' => $languageIsoCode]
         );
 
         $this->fixture->piVars['language'][] = $languageIsoCode;
@@ -556,24 +593,35 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledLanguageOptionsCanPreselectMultipleLanguages()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'language'
+            'displaySearchFormFields',
+            'language'
         );
         $this->instantiateStaticInfo();
 
         $languageIsoCode = 'DE';
         $languageName = $this->staticInfo->getStaticInfoName(
-            'LANGUAGES', $languageIsoCode, '', '', 0
+            'LANGUAGES',
+            $languageIsoCode,
+            '',
+            '',
+            0
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['language' => $languageIsoCode]
+            'tx_seminars_seminars',
+            ['language' => $languageIsoCode]
         );
 
         $languageIsoCode2 = 'EN';
         $languageName2 = $this->staticInfo->getStaticInfoName(
-            'LANGUAGES', $languageIsoCode2, '', '', 0
+            'LANGUAGES',
+            $languageIsoCode2,
+            '',
+            '',
+            0
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['language' => $languageIsoCode2]
+            'tx_seminars_seminars',
+            ['language' => $languageIsoCode2]
         );
 
         $this->fixture->piVars['language'][] = $languageIsoCode;
@@ -603,7 +651,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForDisabledPlaceOptionsHidesPlaceSubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         $this->fixture->render();
@@ -619,17 +668,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledPlaceOptionsContainsPlaceOptions()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'place'
+            'displaySearchFormFields',
+            'place'
         );
         $placeTitle = 'test place';
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['title' => $placeTitle]
+            'tx_seminars_sites',
+            ['title' => $placeTitle]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $placeUid, 'place'
+            'tx_seminars_seminars',
+            $eventUid,
+            $placeUid,
+            'place'
         );
 
         self::assertContains(
@@ -644,17 +698,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledPlaceOptionsHtmlSpecialCharsThePlaceTitle()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'place'
+            'displaySearchFormFields',
+            'place'
         );
         $placeTitle = '<>';
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['title' => $placeTitle]
+            'tx_seminars_sites',
+            ['title' => $placeTitle]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $placeUid, 'place'
+            'tx_seminars_seminars',
+            $eventUid,
+            $placeUid,
+            'place'
         );
 
         self::assertContains(
@@ -670,7 +729,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledPlaceOptionsContainsSelectorForPlaces()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'place'
+            'displaySearchFormFields',
+            'place'
         );
 
         self::assertContains(
@@ -686,20 +746,25 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledPlaceOptionsCanPreselectPlaceOption()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'place'
+            'displaySearchFormFields',
+            'place'
         );
         $placeTitle = 'test place';
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['title' => $placeTitle]
+            'tx_seminars_sites',
+            ['title' => $placeTitle]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $placeUid, 'place'
+            'tx_seminars_seminars',
+            $eventUid,
+            $placeUid,
+            'place'
         );
 
-        $this->fixture->piVars['place'][] = (string) $placeUid;
+        $this->fixture->piVars['place'][] = (string)$placeUid;
 
         self::assertContains(
             '<option value="' . $placeUid . '" selected="selected">' . $placeTitle . '</option>',
@@ -713,29 +778,38 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledPlaceOptionsCanPreselectMultiplePlaceOptions()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'place'
+            'displaySearchFormFields',
+            'place'
         );
         $placeTitle = 'foo';
         $placeTitle2 = 'bar';
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['title' => $placeTitle]
+            'tx_seminars_sites',
+            ['title' => $placeTitle]
         );
         $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['title' => $placeTitle2]
+            'tx_seminars_sites',
+            ['title' => $placeTitle2]
         );
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $placeUid, 'place'
+            'tx_seminars_seminars',
+            $eventUid,
+            $placeUid,
+            'place'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $placeUid2, 'place'
+            'tx_seminars_seminars',
+            $eventUid,
+            $placeUid2,
+            'place'
         );
 
-        $this->fixture->piVars['place'][] = (string) $placeUid;
-        $this->fixture->piVars['place'][] = (string) $placeUid2;
+        $this->fixture->piVars['place'][] = (string)$placeUid;
+        $this->fixture->piVars['place'][] = (string)$placeUid2;
 
         $output = $this->fixture->render();
 
@@ -761,7 +835,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForDisabledCityOptionsHidesCitySubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'country'
+            'displaySearchFormFields',
+            'country'
         );
 
         $this->fixture->render();
@@ -780,13 +855,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
 
         $cityName = 'test city';
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['city' => $cityName]
+            'tx_seminars_sites',
+            ['city' => $cityName]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $placeUid, 'place'
+            'tx_seminars_seminars',
+            $eventUid,
+            $placeUid,
+            'place'
         );
 
         self::assertContains(
@@ -805,23 +884,31 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $cityName2 = 'bar city';
 
         $placeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['city' => $cityName1]
+            'tx_seminars_sites',
+            ['city' => $cityName1]
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid1, $placeUid1, 'place'
+            'tx_seminars_seminars',
+            $eventUid1,
+            $placeUid1,
+            'place'
         );
 
         $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['city' => $cityName2]
+            'tx_seminars_sites',
+            ['city' => $cityName2]
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid2, $placeUid2, 'place'
+            'tx_seminars_seminars',
+            $eventUid2,
+            $placeUid2,
+            'place'
         );
 
         $output = $this->fixture->render();
@@ -844,13 +931,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $this->fixture->setConfigurationValue('displaySearchFormFields', 'city');
         $cityTitle = 'test city';
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['city' => $cityTitle]
+            'tx_seminars_sites',
+            ['city' => $cityTitle]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $placeUid, 'place'
+            'tx_seminars_seminars',
+            $eventUid,
+            $placeUid,
+            'place'
         );
 
         $this->fixture->piVars['city'][] = $cityTitle;
@@ -872,23 +963,31 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $cityTitle2 = 'foo city';
 
         $placeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['city' => $cityTitle1]
+            'tx_seminars_sites',
+            ['city' => $cityTitle1]
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid1, $placeUid1, 'place'
+            'tx_seminars_seminars',
+            $eventUid1,
+            $placeUid1,
+            'place'
         );
 
         $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['city' => $cityTitle2]
+            'tx_seminars_sites',
+            ['city' => $cityTitle2]
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid2, $placeUid2, 'place'
+            'tx_seminars_seminars',
+            $eventUid2,
+            $placeUid2,
+            'place'
         );
 
         $this->fixture->piVars['city'][] = $cityTitle1;
@@ -918,7 +1017,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForDisabledCountryOptionsHidesCountrySubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         $this->fixture->render();
@@ -934,7 +1034,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForDisabledCountryOptionsDoesNotShowCountryOptionsMarker()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         self::assertNotcontains(
@@ -950,22 +1051,28 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         $this->instantiateStaticInfo();
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'country'
+            'displaySearchFormFields',
+            'country'
         );
 
         $countryIsoCode = 'DE';
         $countryName = $this->staticInfo->getStaticInfoName(
-            'COUNTRIES', $countryIsoCode
+            'COUNTRIES',
+            $countryIsoCode
         );
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['country' => $countryIsoCode]
+            'tx_seminars_sites',
+            ['country' => $countryIsoCode]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $placeUid, 'place'
+            'tx_seminars_seminars',
+            $eventUid,
+            $placeUid,
+            'place'
         );
 
         self::assertContains(
@@ -982,38 +1089,49 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         $this->instantiateStaticInfo();
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'country'
+            'displaySearchFormFields',
+            'country'
         );
 
         $countryIsoCode1 = 'DE';
         $countryName1 = $this->staticInfo->getStaticInfoName(
-            'COUNTRIES', $countryIsoCode1
+            'COUNTRIES',
+            $countryIsoCode1
         );
         $countryIsoCode2 = 'GB';
         $countryName2 = $this->staticInfo->getStaticInfoName(
-            'COUNTRIES', $countryIsoCode2
+            'COUNTRIES',
+            $countryIsoCode2
         );
 
         $placeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['country' => $countryIsoCode1]
+            'tx_seminars_sites',
+            ['country' => $countryIsoCode1]
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid1, $placeUid1, 'place'
+            'tx_seminars_seminars',
+            $eventUid1,
+            $placeUid1,
+            'place'
         );
 
         $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['country' => $countryIsoCode2]
+            'tx_seminars_sites',
+            ['country' => $countryIsoCode2]
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid2, $placeUid2, 'place'
+            'tx_seminars_seminars',
+            $eventUid2,
+            $placeUid2,
+            'place'
         );
 
         $output = $this->fixture->render();
@@ -1037,22 +1155,28 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         $this->instantiateStaticInfo();
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'country'
+            'displaySearchFormFields',
+            'country'
         );
 
         $countryIsoCode = 'DE';
         $countryName = $this->staticInfo->getStaticInfoName(
-            'COUNTRIES', $countryIsoCode
+            'COUNTRIES',
+            $countryIsoCode
         );
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['country' => $countryIsoCode]
+            'tx_seminars_sites',
+            ['country' => $countryIsoCode]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $placeUid, 'place'
+            'tx_seminars_seminars',
+            $eventUid,
+            $placeUid,
+            'place'
         );
 
         $this->fixture->piVars['country'][] = $countryIsoCode;
@@ -1071,38 +1195,49 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         $this->instantiateStaticInfo();
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'country'
+            'displaySearchFormFields',
+            'country'
         );
 
         $countryIsoCode1 = 'DE';
         $countryName1 = $this->staticInfo->getStaticInfoName(
-            'COUNTRIES', $countryIsoCode1
+            'COUNTRIES',
+            $countryIsoCode1
         );
         $countryIsoCode2 = 'GB';
         $countryName2 = $this->staticInfo->getStaticInfoName(
-            'COUNTRIES', $countryIsoCode2
+            'COUNTRIES',
+            $countryIsoCode2
         );
 
         $placeUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['country' => $countryIsoCode1]
+            'tx_seminars_sites',
+            ['country' => $countryIsoCode1]
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid1, $placeUid1, 'place'
+            'tx_seminars_seminars',
+            $eventUid1,
+            $placeUid1,
+            'place'
         );
 
         $placeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_sites', ['country' => $countryIsoCode2]
+            'tx_seminars_sites',
+            ['country' => $countryIsoCode2]
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid2, $placeUid2, 'place'
+            'tx_seminars_seminars',
+            $eventUid2,
+            $placeUid2,
+            'place'
         );
 
         $this->fixture->piVars['country'][] = $countryIsoCode1;
@@ -1132,7 +1267,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForDisabledFullTextSearchHidesFullTextSearchSubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         $this->fixture->render();
@@ -1148,7 +1284,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledFullTextSearchContainsFullTextSearchSubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'full_text_search'
+            'displaySearchFormFields',
+            'full_text_search'
         );
 
         $this->fixture->render();
@@ -1164,7 +1301,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledFullTextSearchCanFillSearchedWordIntoTextbox()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'full_text_search'
+            'displaySearchFormFields',
+            'full_text_search'
         );
 
         $searchWord = 'foo bar';
@@ -1182,7 +1320,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledFullTextSearchHtmlSpecialCharsSearchedWord()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'full_text_search'
+            'displaySearchFormFields',
+            'full_text_search'
         );
 
         $searchWord = '<>';
@@ -1204,7 +1343,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForDisabledDateSearchHidesDateSearchSubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'country'
+            'displaySearchFormFields',
+            'country'
         );
 
         $this->fixture->render();
@@ -1220,7 +1360,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledDateSearchContainsDayFromDropDown()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'date'
+            'displaySearchFormFields',
+            'date'
         );
 
         self::assertContains(
@@ -1235,7 +1376,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledDateSearchContainsMonthFromDropDown()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'date'
+            'displaySearchFormFields',
+            'date'
         );
 
         self::assertContains(
@@ -1250,7 +1392,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledDateSearchContainsYearFromDropDown()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'date'
+            'displaySearchFormFields',
+            'date'
         );
 
         self::assertContains(
@@ -1265,7 +1408,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledDateSearchContainsDayToDropDown()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'date'
+            'displaySearchFormFields',
+            'date'
         );
 
         self::assertContains(
@@ -1280,7 +1424,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledDateSearchContainsMonthToDropDown()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'date'
+            'displaySearchFormFields',
+            'date'
         );
 
         self::assertContains(
@@ -1295,7 +1440,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledDateSearchContainsYearToDropDown()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'date'
+            'displaySearchFormFields',
+            'date'
         );
 
         self::assertContains(
@@ -1310,10 +1456,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledDateSearchAndNumberOfYearsInDateFilterSetToTwoContainsThreeYearsInDropDown()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'date'
+            'displaySearchFormFields',
+            'date'
         );
         $this->fixture->setConfigurationValue(
-            'numberOfYearsInDateFilter', 2
+            'numberOfYearsInDateFilter',
+            2
         );
 
         $output = $this->fixture->render();
@@ -1341,7 +1489,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledDateSearchAddsAnEmptyOptionToTheDropDown()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'date'
+            'displaySearchFormFields',
+            'date'
         );
 
         self::assertContains(
@@ -1356,7 +1505,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForSentToMonthValuePreselectsToMonthValue()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'date'
+            'displaySearchFormFields',
+            'date'
         );
 
         $this->fixture->piVars['to_month'] = 5;
@@ -1373,10 +1523,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForSentFromDatePreselectsFromDateValues()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'date'
+            'displaySearchFormFields',
+            'date'
         );
         $this->fixture->setConfigurationValue(
-            'numberOfYearsInDateFilter', 2
+            'numberOfYearsInDateFilter',
+            2
         );
 
         $thisYear = date('Y', time());
@@ -1407,10 +1559,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForNoSentDatePreselectsNoDateValues()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'date'
+            'displaySearchFormFields',
+            'date'
         );
         $this->fixture->setConfigurationValue(
-            'numberOfYearsInDateFilter', 2
+            'numberOfYearsInDateFilter',
+            2
         );
 
         self::assertNotContains(
@@ -1425,10 +1579,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForBothSentDatesZeroPreselectsNoDateValues()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'date'
+            'displaySearchFormFields',
+            'date'
         );
         $this->fixture->setConfigurationValue(
-            'numberOfYearsInDateFilter', 2
+            'numberOfYearsInDateFilter',
+            2
         );
 
         $this->fixture->piVars['from_day'] = 0;
@@ -1454,11 +1610,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEventTypeLimitedAndEventTypeDisplayedShowsTheLimitedEventType()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'event_type'
+            'displaySearchFormFields',
+            'event_type'
         );
 
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', ['title' => 'foo_type']
+            'tx_seminars_event_types',
+            ['title' => 'foo_type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1466,7 +1624,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $this->fixture->setConfigurationValue(
-            'limitListViewToEventTypes', $eventTypeUid
+            'limitListViewToEventTypes',
+            $eventTypeUid
         );
 
         self::assertContains(
@@ -1481,14 +1640,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEventTypeLimitedAndEventTypeDisplayedHidesEventTypeNotLimited()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'event_type'
+            'displaySearchFormFields',
+            'event_type'
         );
 
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', ['title' => 'foo_type']
+            'tx_seminars_event_types',
+            ['title' => 'foo_type']
         );
         $eventTypeUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_event_types', ['title' => 'bar_type']
+            'tx_seminars_event_types',
+            ['title' => 'bar_type']
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1496,7 +1658,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $this->fixture->setConfigurationValue(
-            'limitListViewToEventTypes', $eventTypeUid
+            'limitListViewToEventTypes',
+            $eventTypeUid
         );
 
         self::assertNotContains(
@@ -1515,11 +1678,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForOrganizersLimitedAndOrganizerDisplayedShowsTheLimitedOrganizers()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'organizer'
+            'displaySearchFormFields',
+            'organizer'
         );
 
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', ['title' => 'Organizer Foo']
+            'tx_seminars_organizers',
+            ['title' => 'Organizer Foo']
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1529,7 +1694,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $this->fixture->setConfigurationValue(
-            'limitListViewToOrganizers', $organizerUid
+            'limitListViewToOrganizers',
+            $organizerUid
         );
 
         self::assertContains(
@@ -1544,11 +1710,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForOrganizerLimitedAndOrganizersDisplayedHidesTheOrganizersWhichAreNotTheLimitedOnes()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'organizer'
+            'displaySearchFormFields',
+            'organizer'
         );
 
         $organizerUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', ['title' => 'Organizer Bar']
+            'tx_seminars_organizers',
+            ['title' => 'Organizer Bar']
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -1562,7 +1730,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         );
 
         $this->fixture->setConfigurationValue(
-            'limitListViewToOrganizers', $organizerUid2
+            'limitListViewToOrganizers',
+            $organizerUid2
         );
 
         self::assertNotContains(
@@ -1633,7 +1802,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForDisabledAgeSearchHidesAgeSearchSubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         $this->fixture->render();
@@ -1649,7 +1819,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledAgeSearchContainsAgeSearchSubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'age'
+            'displaySearchFormFields',
+            'age'
         );
 
         $this->fixture->render();
@@ -1665,14 +1836,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledAgeSearchCanFillSearchedAgeIntoTextbox()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'age'
+            'displaySearchFormFields',
+            'age'
         );
 
         $searchedAge = 15;
         $this->fixture->piVars['age'] = $searchedAge;
 
         self::assertContains(
-            (string) $searchedAge,
+            (string)$searchedAge,
             $this->fixture->render()
         );
     }
@@ -1683,7 +1855,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledAgeSearchAndAgeValueZeroDoesNotShowAgeValueZero()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'age'
+            'displaySearchFormFields',
+            'age'
         );
 
         $searchedAge = 0;
@@ -1701,7 +1874,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledAgeSearchDoesNotIncludeNonIntegerAgeAsValue()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'age'
+            'displaySearchFormFields',
+            'age'
         );
 
         $searchedAge = 'Hallo';
@@ -1723,7 +1897,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForOrganizerHiddenInConfigurationHidesOrganizerSubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         $this->fixture->render();
@@ -1739,18 +1914,23 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledOrganizerContainsOrganizerOption()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'organizer'
+            'displaySearchFormFields',
+            'organizer'
         );
 
         $organizerName = 'test organizer';
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', ['title' => $organizerName]
+            'tx_seminars_organizers',
+            ['title' => $organizerName]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $organizerUid, 'organizers'
+            'tx_seminars_seminars',
+            $eventUid,
+            $organizerUid,
+            'organizers'
         );
 
         self::assertContains(
@@ -1766,18 +1946,23 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledOrganizerHtmlSpecialCharsTheOrganizersName()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'organizer'
+            'displaySearchFormFields',
+            'organizer'
         );
 
         $organizerName = '< Organizer Name >';
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', ['title' => $organizerName]
+            'tx_seminars_organizers',
+            ['title' => $organizerName]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $organizerUid, 'organizers'
+            'tx_seminars_seminars',
+            $eventUid,
+            $organizerUid,
+            'organizers'
         );
 
         self::assertContains(
@@ -1794,21 +1979,26 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledOrganizerPreselectsSelectedValue()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'organizer'
+            'displaySearchFormFields',
+            'organizer'
         );
 
         $organizerName = 'Organizer Name';
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', ['title' => $organizerName]
+            'tx_seminars_organizers',
+            ['title' => $organizerName]
         );
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $organizerUid, 'organizers'
+            'tx_seminars_seminars',
+            $eventUid,
+            $organizerUid,
+            'organizers'
         );
 
-        $this->fixture->piVars['organizer'][] = (string) $organizerUid;
+        $this->fixture->piVars['organizer'][] = (string)$organizerUid;
 
         self::assertContains(
             $organizerUid . '" selected="selected">' . $organizerName .
@@ -1823,29 +2013,38 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledOrganizerCanPreselectTwoValues()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'organizer'
+            'displaySearchFormFields',
+            'organizer'
         );
 
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
         $organizerName1 = 'Organizer 1';
         $organizerUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', ['title' => $organizerName1]
+            'tx_seminars_organizers',
+            ['title' => $organizerName1]
         );
         $organizerName2 = 'Organizer 2';
         $organizerUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', ['title' => $organizerName2]
+            'tx_seminars_organizers',
+            ['title' => $organizerName2]
         );
 
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $organizerUid1, 'organizers'
+            'tx_seminars_seminars',
+            $eventUid,
+            $organizerUid1,
+            'organizers'
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $eventUid, $organizerUid2, 'organizers'
+            'tx_seminars_seminars',
+            $eventUid,
+            $organizerUid2,
+            'organizers'
         );
 
-        $this->fixture->piVars['organizer'][] = (string) $organizerUid1;
-        $this->fixture->piVars['organizer'][] = (string) $organizerUid2;
+        $this->fixture->piVars['organizer'][] = (string)$organizerUid1;
+        $this->fixture->piVars['organizer'][] = (string)$organizerUid2;
 
         $output = $this->fixture->render();
 
@@ -1867,7 +2066,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledOrganizerContainsOrganizersSubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'organizer'
+            'displaySearchFormFields',
+            'organizer'
         );
 
         $this->fixture->render();
@@ -1943,7 +2143,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid, 'categories');
 
-        $this->fixture->piVars['categories'][] = (string) $categoryUid;
+        $this->fixture->piVars['categories'][] = (string)$categoryUid;
 
         self::assertContains(
             $categoryUid . '" selected="selected">' . $categoryName . '</option>',
@@ -2006,7 +2206,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForDisabledPriceSearchHidesPriceSearchSubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'city'
+            'displaySearchFormFields',
+            'city'
         );
 
         $this->fixture->render();
@@ -2022,7 +2223,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledPriceSearchContainsPriceSearchSubpart()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'price'
+            'displaySearchFormFields',
+            'price'
         );
 
         $this->fixture->render();
@@ -2038,14 +2240,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledPriceSearchCanFillSearchedPriceFromIntoTextbox()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'price'
+            'displaySearchFormFields',
+            'price'
         );
 
         $priceFrom = 10;
         $this->fixture->piVars['price_from'] = $priceFrom;
 
         self::assertContains(
-            (string) $priceFrom,
+            (string)$priceFrom,
             $this->fixture->render()
         );
     }
@@ -2056,14 +2259,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledPriceSearchCanFillSearchedPriceToIntoTextbox()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'price'
+            'displaySearchFormFields',
+            'price'
         );
 
         $priceTo = 50;
         $this->fixture->piVars['price_to'] = $priceTo;
 
         self::assertContains(
-            (string) $priceTo,
+            (string)$priceTo,
             $this->fixture->render()
         );
     }
@@ -2074,7 +2278,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledPriceSearchAndPriceFromZeroDoesNotShowZeroForPriceFrom()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'price'
+            'displaySearchFormFields',
+            'price'
         );
 
         $priceFrom = 0;
@@ -2092,7 +2297,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledPriceSearchAndPriceToZeroDoesNotShowZeroForPriceTo()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'price'
+            'displaySearchFormFields',
+            'price'
         );
 
         $priceTo = 0;
@@ -2110,7 +2316,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledPriceSearchDoesNotIncludeNonIntegerPriceFromAsValue()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'price'
+            'displaySearchFormFields',
+            'price'
         );
 
         $priceFrom = 'Hallo';
@@ -2128,7 +2335,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     public function renderForEnabledPriceSearchDoesNotIncludeNonIntegerPriceToAsValue()
     {
         $this->fixture->setConfigurationValue(
-            'displaySearchFormFields', 'price'
+            'displaySearchFormFields',
+            'price'
         );
 
         $priceTo = 'Hallo';

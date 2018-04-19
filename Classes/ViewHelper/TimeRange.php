@@ -91,7 +91,7 @@ class Tx_Seminars_ViewHelper_TimeRange
             return false;
         }
 
-        return ($this->getTimeFromTimestamp($timeSpan->getBeginDateAsUnixTimeStamp()) !== '00:00');
+        return $this->getTimeFromTimestamp($timeSpan->getBeginDateAsUnixTimeStamp()) !== '00:00';
     }
 
     /**
@@ -106,7 +106,7 @@ class Tx_Seminars_ViewHelper_TimeRange
             return false;
         }
 
-        return ($this->getTimeFromTimestamp($timeSpan->getEndDateAsUnixTimeStamp()) !== '00:00');
+        return $this->getTimeFromTimestamp($timeSpan->getEndDateAsUnixTimeStamp()) !== '00:00';
     }
 
     /**

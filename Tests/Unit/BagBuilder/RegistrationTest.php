@@ -475,7 +475,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
             ['seminar' => $eventUid, 'additional_persons' => 1]
         );
         $feUserUid = $this->testingFramework->createFrontEndUser(
-            '', ['tx_seminars_registration' => $registrationUid]
+            '',
+            ['tx_seminars_registration' => $registrationUid]
         );
 
         /** @var Tx_Seminars_Model_FrontEndUser $user */
@@ -564,16 +565,20 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     public function testSetOrderByEventColumnCanSortAscendingByEventTitle()
     {
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['title' => 'test title 1']
+            'tx_seminars_seminars',
+            ['title' => 'test title 1']
         );
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['title' => 'test title 2']
+            'tx_seminars_seminars',
+            ['title' => 'test title 2']
         );
         $registrationUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', ['seminar' => $eventUid1]
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid1]
         );
         $registrationUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', ['seminar' => $eventUid2]
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid2]
         );
 
         $this->fixture->setOrderByEventColumn(
@@ -594,16 +599,20 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     public function testSetOrderByEventColumnCanSortDescendingByEventTitle()
     {
         $eventUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['title' => 'test title 1']
+            'tx_seminars_seminars',
+            ['title' => 'test title 1']
         );
         $eventUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['title' => 'test title 2']
+            'tx_seminars_seminars',
+            ['title' => 'test title 2']
         );
         $registrationUid1 = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', ['seminar' => $eventUid1]
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid1]
         );
         $registrationUid2 = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', ['seminar' => $eventUid2]
+            'tx_seminars_attendances',
+            ['seminar' => $eventUid2]
         );
 
         $this->fixture->setOrderByEventColumn(
@@ -644,7 +653,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         $feUserUid = $this->testingFramework->createFrontEndUser();
 
         $this->testingFramework->changeRecord(
-            'fe_users', $feUserUid, ['deleted' => 1]
+            'fe_users',
+            $feUserUid,
+            ['deleted' => 1]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',

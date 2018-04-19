@@ -13,9 +13,9 @@ namespace OliverKlee\Seminars\SchedulerTasks;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
-use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Lang\LanguageService;
@@ -104,7 +104,8 @@ class MailNotifier extends AbstractTask
      *
      * @return void
      */
-    protected function executeAfterInitialization() {
+    protected function executeAfterInitialization()
+    {
         $this->sendEventTakesPlaceReminders();
         $this->sendCancellationDeadlineReminders();
         $this->automaticallyChangeEventStatuses();
@@ -141,7 +142,8 @@ class MailNotifier extends AbstractTask
     {
         foreach ($this->getEventsToSendEventTakesPlaceReminderFor() as $event) {
             $this->sendRemindersToOrganizers(
-                $event, 'email_eventTakesPlaceReminder'
+                $event,
+                'email_eventTakesPlaceReminder'
             );
             $event->setEventTakesPlaceReminderSentFlag();
             $event->commitToDb();
@@ -158,7 +160,8 @@ class MailNotifier extends AbstractTask
     {
         foreach ($this->getEventsToSendCancellationDeadlineReminderFor() as $event) {
             $this->sendRemindersToOrganizers(
-                $event, 'email_cancelationDeadlineReminder'
+                $event,
+                'email_cancelationDeadlineReminder'
             );
             $event->setCancelationDeadlineReminderSentFlag();
             $event->commitToDb();
@@ -399,7 +402,8 @@ class MailNotifier extends AbstractTask
             } else {
                 throw new \UnexpectedValueException(
                     'Event status for event #' . $event->getUid() . ' was still "planned" after the status change.',
-                    1457982810);
+                    1457982810
+                );
             }
 
             $this->emailService->sendEmailToAttendees($event, $subject, $body);

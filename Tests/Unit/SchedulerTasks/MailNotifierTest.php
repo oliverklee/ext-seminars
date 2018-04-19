@@ -580,7 +580,8 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
 
         self::assertTrue(
             $this->testingFramework->existsRecord(
-                'tx_seminars_seminars', 'event_takes_place_reminder_sent = 1'
+                'tx_seminars_seminars',
+                'event_takes_place_reminder_sent = 1'
             )
         );
     }
@@ -799,10 +800,14 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
             ['title' => 'foo', 'email' => 'foo@example.com']
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid
+            'tx_seminars_seminars_organizers_mm',
+            $eventUid,
+            $organizerUid
         );
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $eventUid, ['organizers' => 2]
+            'tx_seminars_seminars',
+            $eventUid,
+            ['organizers' => 2]
         );
 
         $this->subject->sendCancellationDeadlineReminders();
@@ -1036,7 +1041,8 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
             'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
         ]);
         $this->testingFramework->createRecord(
-            'tx_seminars_attendances', [
+            'tx_seminars_attendances',
+            [
                 'title' => 'test registration',
                 'seminar' => $eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
@@ -1062,7 +1068,8 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
             'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
         ]);
         $this->testingFramework->createRecord(
-            'tx_seminars_attendances', [
+            'tx_seminars_attendances',
+            [
                 'title' => 'test registration',
                 'seminar' => $eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
@@ -1088,7 +1095,8 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
             'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
         ]);
         $this->testingFramework->createRecord(
-            'tx_seminars_attendances', [
+            'tx_seminars_attendances',
+            [
                 'title' => 'test registration',
                 'seminar' => $eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
@@ -1117,7 +1125,8 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
         ]);
 
         $this->testingFramework->createRecord(
-            'tx_seminars_attendances', [
+            'tx_seminars_attendances',
+            [
                 'title' => 'test registration',
                 'seminar' => $eventUid,
                 'user' => $this->testingFramework->createFrontEndUser('', ['email' => 'foo@bar.com']),
@@ -1144,14 +1153,16 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
         ]);
 
         $this->testingFramework->createRecord(
-            'tx_seminars_attendances', [
+            'tx_seminars_attendances',
+            [
                 'title' => 'real registration',
                 'seminar' => $eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_attendances', [
+            'tx_seminars_attendances',
+            [
                 'title' => 'on queue',
                 'seminar' => $eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
@@ -1181,14 +1192,16 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
         ]);
 
         $this->testingFramework->createRecord(
-            'tx_seminars_attendances', [
+            'tx_seminars_attendances',
+            [
                 'title' => 'real registration',
                 'seminar' => $eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
         $this->testingFramework->createRecord(
-            'tx_seminars_attendances', [
+            'tx_seminars_attendances',
+            [
                 'title' => 'on queue',
                 'seminar' => $eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),
@@ -1371,7 +1384,8 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
             'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
         ]);
         $this->testingFramework->createRecord(
-            'tx_seminars_attendances', [
+            'tx_seminars_attendances',
+            [
                 'title' => 'test registration',
                 'seminar' => $eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(),

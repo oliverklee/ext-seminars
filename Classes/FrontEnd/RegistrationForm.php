@@ -129,7 +129,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         parent::__construct($configuration, $contentObjectRenderer);
 
         $formFieldsToShow = GeneralUtility::trimExplode(
-            ',', $this->getConfValueString('showRegistrationFields', 's_template_special'), true
+            ',',
+            $this->getConfValueString('showRegistrationFields', 's_template_special'),
+            true
         );
 
         foreach ($formFieldsToShow as $currentFormField) {
@@ -225,7 +227,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     {
         switch ($action) {
             case 'unregister':
-                $formConfiguration = (array) $this->conf['form.']['unregistration.'];
+                $formConfiguration = (array)$this->conf['form.']['unregistration.'];
                 break;
             case 'register':
                 // The fall-through is intended.
@@ -240,9 +242,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
                 // zero. It is only the second page, that can process the
                 // registration.
                 if (($this->currentPageNumber == 1) || ($this->currentPageNumber == 2)) {
-                    $formConfiguration = (array) $this->conf['form.']['registration.']['step2.'];
+                    $formConfiguration = (array)$this->conf['form.']['registration.']['step2.'];
                 } else {
-                    $formConfiguration = (array) $this->conf['form.']['registration.']['step1.'];
+                    $formConfiguration = (array)$this->conf['form.']['registration.']['step1.'];
                 }
         }
 
@@ -267,7 +269,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         }
 
         // Remove empty label tags that have been created due to a bug in FORMidable.
-        $rawForm = preg_replace('/<label[^>]*><\/label>/', '', $rawForm);
+        $rawForm = preg_replace('/<label[^>]*><\\/label>/', '', $rawForm);
         $this->processTemplate($rawForm);
         $this->setLabels();
         $this->hideUnusedFormFields();
@@ -328,7 +330,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function isLastPage()
     {
-        return ($this->currentPageNumber == 2);
+        return $this->currentPageNumber == 2;
     }
 
     /**
@@ -380,7 +382,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         /** @var  Tx_Oelib_List $userGroups */
         $userGroups = GeneralUtility::makeInstance(Tx_Oelib_List::class);
         $userGroupUids = GeneralUtility::intExplode(
-            ',', $this->getConfValueString('userGroupUidsForAdditionalAttendeesFrontEndUsers', 's_registration'), true
+            ',',
+            $this->getConfValueString('userGroupUidsForAdditionalAttendeesFrontEndUsers', 's_registration'),
+            true
         );
         foreach ($userGroupUids as $uid) {
             /** @var Tx_Seminars_Model_FrontEndUserGroup $userGroup */
@@ -751,14 +755,18 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
 
         if ($sendParameters) {
             $linkConfiguration['additionalParams'] = GeneralUtility::implodeArrayForUrl(
-                'tx_seminars_pi1', ['showUid' => $this->getSeminar()->getUid()], '', false, true
+                'tx_seminars_pi1',
+                ['showUid' => $this->getSeminar()->getUid()],
+                '',
+                false,
+                true
             );
         }
 
         // XXX We need to do this workaround of manually encoding brackets in
         // the URL due to a bug in the TYPO3 core:
         // http://bugs.typo3.org/view.php?id=3808
-        $result = preg_replace(['/\[/', '/\]/'], ['%5B', '%5D'], $this->cObj->typoLink_URL($linkConfiguration));
+        $result = preg_replace(['/\\[/', '/\\]/'], ['%5B', '%5D'], $this->cObj->typoLink_URL($linkConfiguration));
 
         return GeneralUtility::locationHeaderUrl($result);
     }
@@ -851,7 +859,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
 
         foreach ($fieldKeys as $key) {
             $hasLabel = in_array($key, $fieldsWithLabels, true);
-            $fieldValue = isset($userData[$key]) ? htmlspecialchars((string) $userData[$key]) : '';
+            $fieldValue = isset($userData[$key]) ? htmlspecialchars((string)$userData[$key]) : '';
             $wrappedFieldValue = '<span id="tx-seminars-feuser-field-' . $key . '">' . $fieldValue . '</span>';
             if ($fieldValue !== '') {
                 $marker = $hasLabel ? ($this->translate('label_' . $key) . ' ') : '';
@@ -1000,7 +1008,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             default:
         }
 
-        return (string) $currentFormData;
+        return (string)$currentFormData;
     }
 
     /**
@@ -1228,7 +1236,12 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
                 if (!empty($staticInfoCountry)) {
                     $this->initStaticInfo();
                     $result = $this->staticInfo->getStaticInfoName(
-                        'COUNTRIES', $staticInfoCountry, '', '', true);
+                        'COUNTRIES',
+                        $staticInfoCountry,
+                        '',
+                        '',
+                        true
+                    );
                 } else {
                     $result = $this->getDefaultCountry();
                 }

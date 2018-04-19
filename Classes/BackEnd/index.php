@@ -168,7 +168,9 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
             $moduleToken = FormProtectionFactory::get()->generateToken('moduleCall', self::MODULE_NAME);
             $this->content .= $this->doc->getTabMenu(
                 ['M' => self::MODULE_NAME, 'moduleToken' => $moduleToken, 'id' => $this->id],
-                'subModule', $this->subModule, $this->availableSubModules
+                'subModule',
+                $this->subModule,
+                $this->availableSubModules
             );
             $this->content .= $this->doc->spacer(5);
         }
@@ -203,6 +205,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
                     $eventsList = GeneralUtility::makeInstance(Tx_Seminars_BackEnd_EventsList::class, $this);
                     $this->content .= $eventsList->show();
                 }
+                break;
             default:
         }
 
@@ -294,7 +297,8 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
     {
         /** @var Tx_Seminars_BackEnd_GeneralEventMailForm $form */
         $form = GeneralUtility::makeInstance(
-            Tx_Seminars_BackEnd_GeneralEventMailForm::class, (int)GeneralUtility::_GP('eventUid')
+            Tx_Seminars_BackEnd_GeneralEventMailForm::class,
+            (int)GeneralUtility::_GP('eventUid')
         );
         $form->setPostData(GeneralUtility::_POST());
 
@@ -310,7 +314,8 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
     {
         /** @var Tx_Seminars_BackEnd_ConfirmEventMailForm $form */
         $form = GeneralUtility::makeInstance(
-            Tx_Seminars_BackEnd_ConfirmEventMailForm::class, (int)GeneralUtility::_GP('eventUid')
+            Tx_Seminars_BackEnd_ConfirmEventMailForm::class,
+            (int)GeneralUtility::_GP('eventUid')
         );
         $form->setPostData(GeneralUtility::_POST());
 
@@ -326,7 +331,8 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
     {
         /** @var Tx_Seminars_BackEnd_CancelEventMailForm $form */
         $form = GeneralUtility::makeInstance(
-            Tx_Seminars_BackEnd_CancelEventMailForm::class, (int)GeneralUtility::_GP('eventUid')
+            Tx_Seminars_BackEnd_CancelEventMailForm::class,
+            (int)GeneralUtility::_GP('eventUid')
         );
         $form->setPostData(GeneralUtility::_POST());
 

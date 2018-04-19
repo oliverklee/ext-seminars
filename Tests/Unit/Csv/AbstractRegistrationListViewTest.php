@@ -140,7 +140,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
     /**
      * @test
      *
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function setPageUidWithNegativePageUidThrowsException()
     {
@@ -158,7 +158,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
     /**
      * @test
      *
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function setEventUidWithNegativeEventUidThrowsException()
     {
@@ -168,7 +168,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
     /**
      * @test
      *
-     * @expectedException BadMethodCallException
+     * @expectedException \BadMethodCallException
      */
     public function renderForNoPageAndNoEventThrowsException()
     {
@@ -183,7 +183,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
     /**
      * @test
      *
-     * @expectedException BadMethodCallException
+     * @expectedException \BadMethodCallException
      */
     public function renderForPageAndEventThrowsException()
     {
@@ -211,7 +211,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
         );
 
         self::assertContains(
-            (string) $registrationUid,
+            (string)$registrationUid,
             $this->subject->render()
         );
     }
@@ -242,11 +242,11 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
 
         $registrationsList = $this->subject->render();
         self::assertContains(
-            (string) $firstRegistrationUid,
+            (string)$firstRegistrationUid,
             $registrationsList
         );
         self::assertContains(
-            (string) $secondRegistrationUid,
+            (string)$secondRegistrationUid,
             $registrationsList
         );
     }
@@ -292,7 +292,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
         );
 
         self::assertNotContains(
-            (string) $registrationUid,
+            (string)$registrationUid,
             $this->subject->render()
         );
     }
@@ -314,7 +314,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
         );
 
         self::assertNotContains(
-            (string) $registrationUid,
+            (string)$registrationUid,
             $this->subject->render()
         );
     }
@@ -375,7 +375,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
         );
 
         self::assertRegExp(
-            '/\r\n$/',
+            '/\\r\\n$/',
             $this->subject->render()
         );
     }

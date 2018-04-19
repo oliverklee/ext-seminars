@@ -137,7 +137,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends Tx_Phpunit_TestCa
 
         self::assertTrue(
             $this->testingFramework->existsRecord(
-                'tx_seminars_seminars', 'uid = ' . $eventUid . ' AND hidden = 0'
+                'tx_seminars_seminars',
+                'uid = ' . $eventUid . ' AND hidden = 0'
             )
         );
     }
@@ -158,7 +159,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends Tx_Phpunit_TestCa
 
         self::assertTrue(
             $this->testingFramework->existsRecord(
-                'tx_seminars_seminars', 'uid = ' . $eventUid .
+                'tx_seminars_seminars',
+                'uid = ' . $eventUid .
                     ' AND publication_hash = ""'
             )
         );

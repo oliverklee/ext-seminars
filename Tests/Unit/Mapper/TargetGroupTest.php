@@ -62,7 +62,8 @@ class Tx_Seminars_Tests_Unit_Mapper_TargetGroupTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_target_groups', ['title' => 'Housewives']
+            'tx_seminars_target_groups',
+            ['title' => 'Housewives']
         );
 
         /** @var Tx_Seminars_Model_TargetGroup $model */

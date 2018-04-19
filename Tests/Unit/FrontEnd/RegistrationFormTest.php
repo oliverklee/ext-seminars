@@ -62,11 +62,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $configuration->setAsString('currency', 'EUR');
         $configurationRegistry->set('plugin.tx_seminars', $configuration);
         $configurationRegistry->set(
-            'plugin.tx_staticinfotables_pi1', new Tx_Oelib_Configuration()
+            'plugin.tx_staticinfotables_pi1',
+            new Tx_Oelib_Configuration()
         );
 
         $this->seminar = new Tx_Seminars_OldModel_Event($this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['payment_methods' => '1']
+            'tx_seminars_seminars',
+            ['payment_methods' => '1']
         ));
         $this->seminarUid = $this->seminar->getUid();
 
@@ -111,7 +113,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function testGetPageToShowAfterUnregistrationUrlReturnsUrlStartingWithHttp()
     {
         self::assertRegExp(
-            '/^http:\/\/./',
+            '/^http:\\/\\/./',
             $this->fixture->getPageToShowAfterUnregistrationUrl()
         );
     }
@@ -136,7 +138,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function testGetThankYouAfterRegistrationUrlReturnsUrlStartingWithHttp()
     {
         self::assertRegExp(
-            '/^http:\/\/./',
+            '/^http:\\/\\/./',
             $this->fixture->getThankYouAfterRegistrationUrl()
         );
     }
@@ -215,7 +217,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $this->testingFramework->createAndLoginFrontEndUser('', ['name' => 'John Doe']);
 
         self::assertNotRegExp(
-            '/<br *\\/>\s*<br *\\/>/',
+            '/<br *\\/>\\s*<br *\\/>/',
             $this->fixture->getAllFeUserData()
         );
     }
@@ -260,7 +262,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function testSaveDataToSessionCanOverwriteNonEmptyZipWithEmptyZipInUserSession()
     {
         $this->session->setAsString(
-            'tx_seminars_registration_editor_zip', '12345'
+            'tx_seminars_registration_editor_zip',
+            '12345'
         );
         $this->fixture->processRegistration(['zip' => '']);
 
@@ -315,7 +318,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function testRetrieveDataFromSessionWithKeySetInUserSessionReturnsDataForThatKey()
     {
         $this->session->setAsString(
-            'tx_seminars_registration_editor_zip', '12345'
+            'tx_seminars_registration_editor_zip',
+            '12345'
         );
 
         self::assertEquals(
@@ -355,7 +359,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function testPopulateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsTitle()
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', ['title' => 'foo']
+            'tx_seminars_payment_methods',
+            ['title' => 'foo']
         );
 
         $this->testingFramework->createRelation(
@@ -538,7 +543,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         }
 
         $this->testingFramework->createAndLoginFrontEndUser(
-            '', ['static_info_country' => 'GBR']
+            '',
+            ['static_info_country' => 'GBR']
         );
 
         self::assertEquals(
@@ -553,7 +559,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getFeUserDataWithKeyCountryAndCountrySetReturnsCountry()
     {
         $this->testingFramework->createAndLoginFrontEndUser(
-            '', ['country' => 'Taka-Tuka-Land']
+            '',
+            ['country' => 'Taka-Tuka-Land']
         );
 
         self::assertEquals(
@@ -724,7 +731,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      * @dataProvider formFieldsDataProvider
      */
     public function isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields(
-        $key, $isSelfContained
+        $key,
+        $isSelfContained
     ) {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => $key],
@@ -907,12 +915,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         return [
             '0' => [0],
-            '1' => [1]
+            '1' => [1],
         ];
     }
 
     /**
      * @test
+     *
      * @param bool $configurationValue
      * @dataProvider registerThemselvesDataProvider
      */
@@ -1020,7 +1029,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
-            [], '', false
+            [],
+            '',
+            false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1043,7 +1054,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
-            [], '', false
+            [],
+            '',
+            false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1066,7 +1079,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
-            [], '', false
+            [],
+            '',
+            false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1089,7 +1104,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
-            [], '', false
+            [],
+            '',
+            false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1195,7 +1212,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [], '', false
+            [],
+            '',
+            false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1203,7 +1222,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ->will(self::returnValue([]));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
-            'createAdditionalAttendeesAsFrontEndUsers', false
+            'createAdditionalAttendeesAsFrontEndUsers',
+            false
         );
 
         self::assertTrue(
@@ -1219,7 +1239,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [], '', false
+            [],
+            '',
+            false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(false));
@@ -1227,7 +1249,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ->will(self::returnValue([]));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
-            'createAdditionalAttendeesAsFrontEndUsers', true
+            'createAdditionalAttendeesAsFrontEndUsers',
+            true
         );
 
         self::assertTrue(
@@ -1243,7 +1266,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [], '', false
+            [],
+            '',
+            false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1251,7 +1276,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ->will(self::returnValue([]));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
-            'createAdditionalAttendeesAsFrontEndUsers', true
+            'createAdditionalAttendeesAsFrontEndUsers',
+            true
         );
 
         self::assertTrue(
@@ -1267,7 +1293,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [], '', false
+            [],
+            '',
+            false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1277,7 +1305,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
-            'createAdditionalAttendeesAsFrontEndUsers', true
+            'createAdditionalAttendeesAsFrontEndUsers',
+            true
         );
 
         self::assertTrue(
@@ -1293,7 +1322,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [], '', false
+            [],
+            '',
+            false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1303,7 +1334,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
-            'createAdditionalAttendeesAsFrontEndUsers', true
+            'createAdditionalAttendeesAsFrontEndUsers',
+            true
         );
 
         self::assertFalse(
@@ -1319,7 +1351,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [], '', false
+            [],
+            '',
+            false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1329,7 +1363,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
-            'createAdditionalAttendeesAsFrontEndUsers', true
+            'createAdditionalAttendeesAsFrontEndUsers',
+            true
         );
 
         self::assertFalse(
@@ -1345,7 +1380,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [], '', false
+            [],
+            '',
+            false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1355,7 +1392,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
-            'createAdditionalAttendeesAsFrontEndUsers', true
+            'createAdditionalAttendeesAsFrontEndUsers',
+            true
         );
 
         self::assertFalse(
@@ -1371,7 +1409,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [], '', false
+            [],
+            '',
+            false
         );
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
@@ -1384,7 +1424,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ));
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
-            'createAdditionalAttendeesAsFrontEndUsers', true
+            'createAdditionalAttendeesAsFrontEndUsers',
+            true
         );
 
         self::assertFalse(
@@ -1402,7 +1443,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getPreselectedPaymentMethodForOnePaymentMethodReturnsItsUid()
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', ['title' => 'foo']
+            'tx_seminars_payment_methods',
+            ['title' => 'foo']
         );
 
         $this->testingFramework->createRelation(
@@ -1464,7 +1506,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
 
         $this->session->setAsInteger(
-            'tx_seminars_registration_editor_method_of_payment', $selectedPaymentMethodUid
+            'tx_seminars_registration_editor_method_of_payment',
+            $selectedPaymentMethodUid
         );
 
         self::assertEquals(
@@ -1483,7 +1526,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getRegistrationDataForDisabledPaymentMethodFieldReturnsEmptyString()
     {
         $selectedPaymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods', ['title' => 'payment foo']
+            'tx_seminars_payment_methods',
+            ['title' => 'payment foo']
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
@@ -1492,7 +1536,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             'payment_methods'
         );
         $this->fixture->setFakedFormValue(
-            'method_of_payment', $selectedPaymentMethodUid
+            'method_of_payment',
+            $selectedPaymentMethodUid
         );
 
         self::assertEquals(
@@ -1608,7 +1653,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getRegistrationDataForAttendeesNamesAndThemselvesSelectedContainsUserName()
     {
         $this->testingFramework->createAndLoginFrontEndUser(
-            '', ['name' => 'Jane Doe']
+            '',
+            ['name' => 'Jane Doe']
         );
 
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
@@ -1637,7 +1683,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function getRegistrationDataForAttendeesNamesEnabledAndThemselvesNotSelectedNotContainsUserName()
     {
         $this->testingFramework->createAndLoginFrontEndUser(
-            '', ['name' => 'Jane Doe']
+            '',
+            ['name' => 'Jane Doe']
         );
 
         $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(

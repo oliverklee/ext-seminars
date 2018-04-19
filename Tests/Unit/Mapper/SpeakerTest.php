@@ -64,7 +64,8 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_speakers', ['title' => 'John Doe']
+            'tx_seminars_speakers',
+            ['title' => 'John Doe']
         );
 
         /** @var Tx_Seminars_Model_Speaker $model */
@@ -114,7 +115,10 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
         $skill = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Skill::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_speakers', $speakerUid, $skill->getUid(), 'skills'
+            'tx_seminars_speakers',
+            $speakerUid,
+            $skill->getUid(),
+            'skills'
         );
 
         /** @var Tx_Seminars_Model_Speaker $model */
@@ -133,7 +137,10 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
         $skill = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Skill::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_speakers', $speakerUid, $skill->getUid(), 'skills'
+            'tx_seminars_speakers',
+            $speakerUid,
+            $skill->getUid(),
+            'skills'
         );
 
         /** @var Tx_Seminars_Model_Speaker $model */

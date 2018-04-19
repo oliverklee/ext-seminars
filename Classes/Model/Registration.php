@@ -302,7 +302,7 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
      */
     public function isPaid()
     {
-        return ($this->getPaymentDateAsUnixTimestamp() > 0);
+        return $this->getPaymentDateAsUnixTimestamp() > 0;
     }
 
     /**

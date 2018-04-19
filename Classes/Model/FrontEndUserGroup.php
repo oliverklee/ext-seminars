@@ -159,7 +159,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends Tx_Oelib_Model_FrontEndUserGro
      */
     public function hasDefaultOrganizer()
     {
-        return ($this->getDefaultOrganizer()
-            instanceof Tx_Seminars_Model_Organizer);
+        return $this->getDefaultOrganizer()
+            instanceof Tx_Seminars_Model_Organizer;
     }
 }

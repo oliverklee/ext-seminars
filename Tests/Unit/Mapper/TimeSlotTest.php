@@ -62,7 +62,8 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_timeslots', ['title' => '01.02.03 04:05']
+            'tx_seminars_timeslots',
+            ['title' => '01.02.03 04:05']
         );
 
         /** @var Tx_Seminars_Model_TimeSlot $model */
@@ -100,7 +101,10 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
         $speaker = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_timeslots', $timeSlotUid, $speaker->getUid(), 'speakers'
+            'tx_seminars_timeslots',
+            $timeSlotUid,
+            $speaker->getUid(),
+            'speakers'
         );
 
         /** @var Tx_Seminars_Model_TimeSlot $model */
@@ -121,7 +125,10 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
         $speaker = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_timeslots', $timeSlotUid, $speaker->getUid(), 'speakers'
+            'tx_seminars_timeslots',
+            $timeSlotUid,
+            $speaker->getUid(),
+            'speakers'
         );
 
         /** @var Tx_Seminars_Model_TimeSlot $model */
@@ -157,7 +164,8 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
     {
         $place = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Place::class)->getNewGhost();
         $timeSlotUid = $this->testingFramework->createRecord(
-            'tx_seminars_timeslots', ['place' => $place->getUid()]
+            'tx_seminars_timeslots',
+            ['place' => $place->getUid()]
         );
 
         /** @var Tx_Seminars_Model_TimeSlot $model */
@@ -190,7 +198,8 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
     {
         $seminar = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getNewGhost();
         $timeSlotUid = $this->testingFramework->createRecord(
-            'tx_seminars_timeslots', ['seminar' => $seminar->getUid()]
+            'tx_seminars_timeslots',
+            ['seminar' => $seminar->getUid()]
         );
 
         /** @var Tx_Seminars_Model_TimeSlot $model */

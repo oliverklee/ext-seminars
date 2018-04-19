@@ -197,7 +197,8 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
 
         $this->checkCreateAdditionalAttendeesAsFrontEndUsers();
         if ($this->objectToCheck->getConfValueBoolean(
-            'createAdditionalAttendeesAsFrontEndUsers', 's_registration'
+            'createAdditionalAttendeesAsFrontEndUsers',
+            's_registration'
         )) {
             $this->checkSysFolderForAdditionalAttendeeUsersPID();
             $this->checkUserGroupUidsForAdditionalAttendeesFrontEndUsers();
@@ -239,7 +240,8 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
         $this->checkSingleViewImageSizes();
         $this->checkShowOwnerDataInSingleView();
         if ($this->objectToCheck->getConfValueBoolean(
-            'showOwnerDataInSingleView', 's_singleView'
+            'showOwnerDataInSingleView',
+            's_singleView'
         )) {
             $this->checkOwnerPictureMaxWidth();
         }
@@ -322,7 +324,8 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
         $this->checkAllowCsvExportOfRegistrationsInMyVipEventsView();
 
         if ($this->objectToCheck->getConfValueBoolean(
-            'mayManagersEditTheirEvents', 's_listView'
+            'mayManagersEditTheirEvents',
+            's_listView'
         )) {
             $this->checkEventEditorPID();
         }
@@ -1995,14 +1998,19 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
         );
 
         if ($this->objectToCheck->hasConfValueString(
-            'registrationEditorTemplateFile', '', true
+            'registrationEditorTemplateFile',
+            '',
+            true
         )) {
             $rawFileName = $this->objectToCheck->getConfValueString(
-                'registrationEditorTemplateFile', '', true, true
+                'registrationEditorTemplateFile',
+                '',
+                true,
+                true
             );
             if (!is_file($GLOBALS['TSFE']->tmpl->getFileName($rawFileName))) {
                 $message = 'The specified HTML template file <strong>' .
-                    htmlspecialchars($rawFileName) .  '</strong> cannot be read. ' .
+                    htmlspecialchars($rawFileName) . '</strong> cannot be read. ' .
                     $errorMessage . ' ' .
                     'Please either create the file <strong>' . $rawFileName .
                     '</strong> or select an existing file using the TS setup ' .
@@ -2919,7 +2927,8 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             GeneralUtility::trimExplode(
                 ',',
                 $this->objectToCheck->getConfValueString(
-                    'displayFrontEndEditorFields', 's_fe_editing'
+                    'displayFrontEndEditorFields',
+                    's_fe_editing'
                 ),
                 true
             )
@@ -2970,14 +2979,19 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
         );
 
         if ($this->objectToCheck->hasConfValueString(
-            'eventEditorTemplateFile', '', true
+            'eventEditorTemplateFile',
+            '',
+            true
         )) {
             $rawFileName = $this->objectToCheck->getConfValueString(
-                'eventEditorTemplateFile', '', true, true
+                'eventEditorTemplateFile',
+                '',
+                true,
+                true
             );
             if (!is_file($GLOBALS['TSFE']->tmpl->getFileName($rawFileName))) {
                 $message = 'The specified HTML template file <strong>' .
-                    htmlspecialchars($rawFileName) .  '</strong> cannot be read. ' .
+                    htmlspecialchars($rawFileName) . '</strong> cannot be read. ' .
                     $errorMessage . ' ' .
                     'Please either create the file <strong>' . $rawFileName .
                     '</strong> or select an existing file using the TS setup ' .
@@ -3014,7 +3028,8 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     private function checkRegistrationPageNumbers()
     {
         $clicks = $this->objectToCheck->getConfValueInteger(
-            'numberOfClicksForRegistration', 's_registration'
+            'numberOfClicksForRegistration',
+            's_registration'
         );
         $firstPage = $this->objectToCheck->getConfValueInteger(
             'numberOfFirstRegistrationPage'

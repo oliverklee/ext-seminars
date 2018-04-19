@@ -116,7 +116,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $topicUid, $category->getUid(), 'categories'
+            'tx_seminars_seminars',
+            $topicUid,
+            $category->getUid(),
+            'categories'
         );
 
         /** @var Tx_Seminars_Model_Event $model */
@@ -140,7 +143,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $topicUid, $category->getUid(), 'categories'
+            'tx_seminars_seminars',
+            $topicUid,
+            $category->getUid(),
+            'categories'
         );
 
         /** @var Tx_Seminars_Model_Event $model */
@@ -235,7 +241,8 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_payment_methods_mm', $topicUid,
+            'tx_seminars_seminars_payment_methods_mm',
+            $topicUid,
             $paymentMethod->getUid()
         );
 
@@ -263,7 +270,8 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             ]
         );
         $this->testingFramework->createRelation(
-            'tx_seminars_seminars_payment_methods_mm', $topicUid,
+            'tx_seminars_seminars_payment_methods_mm',
+            $topicUid,
             $paymentMethod->getUid()
         );
 
@@ -313,7 +321,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $targetGroup = Tx_Oelib_MapperRegistry::
             get(Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $topicUid, $targetGroup->getUid(), 'target_groups'
+            'tx_seminars_seminars',
+            $topicUid,
+            $targetGroup->getUid(),
+            'target_groups'
         );
 
         /** @var Tx_Seminars_Model_Event $model */
@@ -339,7 +350,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $targetGroup = Tx_Oelib_MapperRegistry::
             get(Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $topicUid, $targetGroup->getUid(), 'target_groups'
+            'tx_seminars_seminars',
+            $topicUid,
+            $targetGroup->getUid(),
+            'target_groups'
         );
 
         /** @var Tx_Seminars_Model_Event $model */
@@ -388,7 +402,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $checkbox = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $topicUid, $checkbox->getUid(), 'checkboxes'
+            'tx_seminars_seminars',
+            $topicUid,
+            $checkbox->getUid(),
+            'checkboxes'
         );
 
         /** @var Tx_Seminars_Model_Event $model */
@@ -412,7 +429,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $checkbox = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $topicUid, $checkbox->getUid(), 'checkboxes'
+            'tx_seminars_seminars',
+            $topicUid,
+            $checkbox->getUid(),
+            'checkboxes'
         );
 
         /** @var Tx_Seminars_Model_Event $model */
@@ -466,7 +486,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         );
         $event = $this->fixture->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $topicUid, $event->getUid(), 'requirements'
+            'tx_seminars_seminars',
+            $topicUid,
+            $event->getUid(),
+            'requirements'
         );
 
         /** @var Tx_Seminars_Model_Event $model */
@@ -494,7 +517,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         );
         $event = $this->fixture->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $topicUid, $event->getUid(), 'requirements'
+            'tx_seminars_seminars',
+            $topicUid,
+            $event->getUid(),
+            'requirements'
         );
 
         /** @var Tx_Seminars_Model_Event $model */
@@ -551,7 +577,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $relatedUid, $topicUid, 'dependencies'
+            'tx_seminars_seminars',
+            $relatedUid,
+            $topicUid,
+            'dependencies'
         );
 
         /** @var Tx_Seminars_Model_Event $model */
@@ -582,7 +611,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             ]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_seminars', $relatedUid, $topicUid, 'dependencies'
+            'tx_seminars_seminars',
+            $relatedUid,
+            $topicUid,
+            'dependencies'
         );
 
         /** @var Tx_Seminars_Model_Event $model */

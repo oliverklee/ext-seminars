@@ -369,7 +369,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
     {
         $hookClassName = uniqid('tx_salutationHook');
         $salutationHookMock = $this->getMock(
-            $hookClassName, ['modifySalutation']
+            $hookClassName,
+            ['modifySalutation']
         );
         $salutationHookMock->expects(self::atLeastOnce())
             ->method('modifySalutation');
@@ -388,7 +389,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
     {
         $hookClassName1 = uniqid('tx_salutationHook1');
         $salutationHookMock1 = $this->getMock(
-            $hookClassName1, ['modifySalutation']
+            $hookClassName1,
+            ['modifySalutation']
         );
         $salutationHookMock1->expects(self::atLeastOnce())
             ->method('modifySalutation');
@@ -398,7 +400,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
 
         $hookClassName2 = uniqid('tx_salutationHook2');
         $salutationHookMock2 = $this->getMock(
-            $hookClassName2, ['modifySalutation']
+            $hookClassName2,
+            ['modifySalutation']
         );
         $salutationHookMock2->expects(self::atLeastOnce())
             ->method('modifySalutation');

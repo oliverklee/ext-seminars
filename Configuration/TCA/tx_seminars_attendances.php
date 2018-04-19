@@ -186,8 +186,10 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_attendances_foods_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_foods'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_foods'
+                ),
             ],
         ],
         'food' => [
@@ -212,8 +214,10 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_attendances_lodgings_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_lodgings'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_lodgings'
+                ),
             ],
         ],
         'accommodation' => [
@@ -238,8 +242,10 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_attendances_checkboxes_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_checkboxes'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_checkboxes'
+                ),
             ],
         ],
         'interests' => [
@@ -345,8 +351,10 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_payment_methods'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_payment_methods'
+                ),
             ],
         ],
         'account_number' => [

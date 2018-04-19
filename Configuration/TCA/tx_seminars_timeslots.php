@@ -81,8 +81,10 @@ return [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_timeslots_speakers_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_speakers'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_speakers'
+                ),
             ],
         ],
         'place' => [
@@ -97,8 +99,10 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_sites'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_sites'
+                ),
             ],
         ],
         'room' => [

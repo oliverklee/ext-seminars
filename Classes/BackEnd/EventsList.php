@@ -77,7 +77,8 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
         $this->createListBody($seminarBag);
 
         $this->template->setMarker(
-            'new_record_button', $this->getNewIcon($pageData['uid'])
+            'new_record_button',
+            $this->getNewIcon($pageData['uid'])
         );
 
         $this->template->setMarker(
@@ -85,7 +86,8 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
             (!$seminarBag->isEmpty() ? $this->getCsvIcon() : '')
         );
         $this->template->setMarker(
-            'label_print_button', $GLOBALS['LANG']->getLL('print')
+            'label_print_button',
+            $GLOBALS['LANG']->getLL('print')
         );
 
         $content .= $this->template->getSubpart('SEMINARS_EVENT_LIST');
@@ -110,13 +112,16 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
             $GLOBALS['LANG']->getLL('eventlist.accreditation_number')
         );
         $this->template->setMarker(
-            'label_title', $GLOBALS['LANG']->getLL('eventlist.title')
+            'label_title',
+            $GLOBALS['LANG']->getLL('eventlist.title')
         );
         $this->template->setMarker(
-            'label_date', $GLOBALS['LANG']->getLL('eventlist.date')
+            'label_date',
+            $GLOBALS['LANG']->getLL('eventlist.date')
         );
         $this->template->setMarker(
-            'label_attendees', $GLOBALS['LANG']->getLL('eventlist.attendees')
+            'label_attendees',
+            $GLOBALS['LANG']->getLL('eventlist.attendees')
         );
         $this->template->setMarker(
             'label_number_of_attendees_on_queue',
@@ -135,10 +140,12 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
             $GLOBALS['LANG']->getLL('eventlist.enough_attendees')
         );
         $this->template->setMarker(
-            'label_is_fully_booked', $GLOBALS['LANG']->getLL('eventlist.is_full')
+            'label_is_fully_booked',
+            $GLOBALS['LANG']->getLL('eventlist.is_full')
         );
         $this->template->setMarker(
-            'label_status', $GLOBALS['LANG']->getLL('eventlist_status')
+            'label_status',
+            $GLOBALS['LANG']->getLL('eventlist_status')
         );
     }
 
@@ -173,7 +180,8 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
                 )
             );
             $this->template->setMarker(
-                'date', ($event->hasDate() ? $event->getDate() : '')
+                'date',
+                ($event->hasDate() ? $event->getDate() : '')
             );
             $this->template->setMarker(
                 'edit_button',
@@ -186,7 +194,9 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
             $this->template->setMarker(
                 'hide_unhide_button',
                 $this->getHideUnhideIcon(
-                    $event->getUid(), $event->getPageUid(), $event->isHidden()
+                    $event->getUid(),
+                    $event->getPageUid(),
+                    $event->isHidden()
                 )
             );
             $this->template->setMarker(
@@ -200,7 +210,8 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
             );
             $this->template->setMarker(
                 'show_registrations',
-                ((!$event->isHidden()
+                (
+                    (!$event->isHidden()
                     && $event->needsRegistration()
                     && $event->hasAttendances())
                     ? $this->createEventRegistrationsLink($event) : ''
@@ -234,7 +245,8 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
                     : '')
             );
             $this->template->setMarker(
-                'status', $this->getStatusIcon($event)
+                'status',
+                $this->getStatusIcon($event)
             );
 
             $this->setEmailButtonMarkers($event);
@@ -449,7 +461,8 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
         $pageData = $this->page->getPageData();
 
         $url = BackendUtility::getModuleUrl(
-            self::MODULE_NAME, ['id' => $pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid()]
+            self::MODULE_NAME,
+            ['id' => $pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid()]
         );
         return '<a class="btn btn-default" href="' . htmlspecialchars($url) . '">' .
             $GLOBALS['LANG']->getLL('label_show_event_registrations') . '</a>';

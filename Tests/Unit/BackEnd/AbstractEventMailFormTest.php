@@ -427,7 +427,9 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', ['email' => 'foo@example.com']),
+                    '',
+                    ['email' => 'foo@example.com']
+                ),
             ]
         );
 
@@ -487,7 +489,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', [
+                    '',
+                    [
                         'email' => 'foo@example.com', 'name' => 'test user',
                     ]
                 ),
@@ -521,7 +524,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', [
+                    '',
+                    [
                         'email' => 'foo@example.com', 'name' => 'test user',
                     ]
                 ),
@@ -557,7 +561,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', ['email' => 'foo@example.com']
+                    '',
+                    ['email' => 'foo@example.com']
                 ),
             ]
         );
@@ -589,7 +594,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', ['email' => 'foo@example.com']
+                    '',
+                    ['email' => 'foo@example.com']
                 ),
             ]
         );
@@ -599,7 +605,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', ['email' => 'foo@example.com']
+                    '',
+                    ['email' => 'foo@example.com']
                 ),
             ]
         );
@@ -631,7 +638,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', ['email' => 'foo@example.com']
+                    '',
+                    ['email' => 'foo@example.com']
                 ),
             ]
         );
@@ -677,7 +685,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
                 'pid' => $this->dummySysFolderUid,
                 'seminar' => $this->eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', ['email' => 'foo@example.com']
+                    '',
+                    ['email' => 'foo@example.com']
                 ),
             ]
         );
@@ -774,7 +783,9 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
         self::assertSame(
             'Location: ' . BackendUtility::getModuleUrl(
                 Tx_Seminars_BackEnd_AbstractEventMailForm::MODULE_NAME,
-                ['id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()], false, true
+                ['id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()],
+                false,
+                true
             ),
             Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
         );
@@ -790,7 +801,9 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function getInitialValueForSubjectAppendsEventTitle()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $this->eventUid, ['title' => 'FooBar']
+            'tx_seminars_seminars',
+            $this->eventUid,
+            ['title' => 'FooBar']
         );
 
         $fixture = new Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm(

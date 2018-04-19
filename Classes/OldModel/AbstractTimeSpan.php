@@ -51,7 +51,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
      */
     public function hasBeginDate()
     {
-        return ($this->getBeginDateAsTimestamp() > 0);
+        return $this->getBeginDateAsTimestamp() > 0;
     }
 
     /**
@@ -81,7 +81,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
      */
     public function hasEndDate()
     {
-        return ($this->getEndDateAsTimestamp() > 0);
+        return $this->getEndDateAsTimestamp() > 0;
     }
 
     /**
@@ -93,9 +93,8 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
      */
     public function hasStarted()
     {
-        return ($this->hasBeginDate()
-                && ($GLOBALS['SIM_EXEC_TIME'] >= $this->getBeginDateAsTimestamp())
-        );
+        return $this->hasBeginDate()
+                && ($GLOBALS['SIM_EXEC_TIME'] >= $this->getBeginDateAsTimestamp());
     }
 
     /**
@@ -140,7 +139,8 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
                             $beginDate
                         ) != strftime(
                             $this->getConfValueString('dateFormatY'),
-                            $endDate)
+                            $endDate
+                        )
                     ) {
                         $result = $beginDateDay;
                     } else {
@@ -150,7 +150,8 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
                                 $beginDate
                             ) != strftime(
                                 $this->getConfValueString('dateFormatM'),
-                                $endDate)
+                                $endDate
+                            )
                         ) {
                             $result = strftime(
                                 $this->getConfValueString('dateFormatMD'),
@@ -226,7 +227,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
     {
         $beginTime = strftime('%H:%M', $this->getBeginDateAsTimestamp());
 
-        return ($this->hasDate() && ($beginTime != '00:00'));
+        return $this->hasDate() && ($beginTime != '00:00');
     }
 
     /**
@@ -239,7 +240,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
     {
         $endTime = strftime('%H:%M', $this->getEndDateAsTimestamp());
 
-        return ($this->hasEndDate() && ($endTime != '00:00'));
+        return $this->hasEndDate() && ($endTime != '00:00');
     }
 
     /**
@@ -282,7 +283,9 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
             } else {
                 $splitBeginDate = getdate($this->getBeginDateAsTimestamp());
                 $result = mktime(
-                    0, 0, 0,
+                    0,
+                    0,
+                    0,
                     $splitBeginDate['mon'],
                     $splitBeginDate['mday'] + 1,
                     $splitBeginDate['year']

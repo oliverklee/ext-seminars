@@ -60,7 +60,8 @@ class Tx_Seminars_Tests_Unit_Mapper_CategoryTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_categories', ['title' => 'Lecture']
+            'tx_seminars_categories',
+            ['title' => 'Lecture']
         );
         /** @var Tx_Seminars_Model_Category $model */
         $model = $this->fixture->find($uid);

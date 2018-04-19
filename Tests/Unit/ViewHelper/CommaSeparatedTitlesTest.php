@@ -65,7 +65,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends Tx_Phpu
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage All elements in $list must implement the interface Tx_Seminars_Interface_Titled.
      * @expectedExceptionCode 1333658899
      */

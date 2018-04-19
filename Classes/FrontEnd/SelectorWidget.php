@@ -103,7 +103,9 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
         $this->displayedSearchFields = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString(
-                'displaySearchFormFields', 's_listView'),
+                'displaySearchFormFields',
+                's_listView'
+            ),
             true
         );
 
@@ -143,7 +145,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     private function addEmptyOptionIfNeeded(array &$options)
     {
         if (!$this->getConfValueBoolean(
-            'showEmptyEntryInOptionLists', 's_template_special'
+            'showEmptyEntryInOptionLists',
+            's_template_special'
         )) {
             return;
         }
@@ -188,7 +191,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     {
         $this->setMarker('options_header', $this->translate('label_' . $name));
         $this->setMarker(
-            'optionbox_name', $this->prefixId . '[' . $name . '][]'
+            'optionbox_name',
+            $this->prefixId . '[' . $name . '][]'
         );
         $this->setMarker('optionbox_id', $this->prefixId . '-' . $name);
 
@@ -199,7 +203,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 
             // Preselects the option if it was selected by the user.
             if (isset($this->piVars[$name])
-                && (in_array((string) $key, $this->piVars[$name], true))
+                && (in_array((string)$key, $this->piVars[$name], true))
             ) {
                 $selected = ' selected="selected"';
             } else {
@@ -388,7 +392,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
         }
 
         $this->setMarker(
-            'searchbox_value', htmlspecialchars($this->piVars['sword'])
+            'searchbox_value',
+            htmlspecialchars($this->piVars['sword'])
         );
     }
 
@@ -413,7 +418,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
             $dropDowns = '';
             foreach ($dateArrays as $dropDownPart => $dateArray) {
                 $dropDowns .= $this->createDropDown(
-                    $dateArray, $fromOrTo . '_' . $dropDownPart
+                    $dateArray,
+                    $fromOrTo . '_' . $dropDownPart
                 );
             }
             $this->setMarker('options_date_' . $fromOrTo, $dropDowns);
@@ -437,7 +443,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
         $age = (int)$this->piVars['age'];
 
         $this->setMarker(
-            'age_value', (($age > 0) ? $age : '')
+            'age_value',
+            (($age > 0) ? $age : '')
         );
     }
 
@@ -460,10 +467,12 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
         $priceTo = (int)$this->piVars['price_to'];
 
         $this->setMarker(
-            'price_from_value', (($priceFrom > 0) ? $priceFrom : '')
+            'price_from_value',
+            (($priceFrom > 0) ? $priceFrom : '')
         );
         $this->setMarker(
-            'price_to_value', (($priceTo > 0) ? $priceTo : '')
+            'price_to_value',
+            (($priceTo > 0) ? $priceTo : '')
         );
     }
 
@@ -636,7 +645,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 
         $currentYear = (int)date('Y');
         $targetYear = $currentYear + $this->getConfValueInteger(
-            'numberOfYearsInDateFilter', 's_listView'
+            'numberOfYearsInDateFilter',
+            's_listView'
         );
 
         for ($year = $currentYear; $year < $targetYear; $year++) {

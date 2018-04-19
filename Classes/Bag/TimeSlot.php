@@ -37,8 +37,11 @@ class Tx_Seminars_Bag_TimeSlot extends Tx_Seminars_Bag_Abstract
      *        LIMIT clause (may be empty), must already be safeguarded against SQL injection
      */
     public function __construct(
-        $queryParameters = '1=1', $additionalTableNames = '', $groupBy = '',
-        $orderBy = 'uid', $limit = ''
+        $queryParameters = '1=1',
+        $additionalTableNames = '',
+        $groupBy = '',
+        $orderBy = 'uid',
+        $limit = ''
     ) {
         parent::__construct(
             'tx_seminars_timeslots',
@@ -64,7 +67,9 @@ class Tx_Seminars_Bag_TimeSlot extends Tx_Seminars_Bag_Abstract
     protected function createItemFromDbResult()
     {
         $this->currentItem = GeneralUtility::makeInstance(
-            Tx_Seminars_OldModel_TimeSlot::class, 0, $this->dbResult
+            Tx_Seminars_OldModel_TimeSlot::class,
+            0,
+            $this->dbResult
         );
         $this->valid();
     }

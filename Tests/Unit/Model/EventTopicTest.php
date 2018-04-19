@@ -1589,7 +1589,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function getAvailablePricesForNoPricesSetAndNoEarlyBirdReturnsZeroRegularPrice()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_Model_Event::class, ['earlyBirdApplies']
+            Tx_Seminars_Model_Event::class,
+            ['earlyBirdApplies']
         );
         $fixture->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
@@ -1607,7 +1608,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function getAvailablePricesForRegularPriceSetAndNoEarlyBirdReturnsRegularPrice()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_Model_Event::class, ['earlyBirdApplies']
+            Tx_Seminars_Model_Event::class,
+            ['earlyBirdApplies']
         );
         $fixture->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
@@ -1625,7 +1627,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function getAvailablePricesForRegularEarlyBirdPriceSetAndEarlyBirdReturnsEarlyBirdPrice()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_Model_Event::class, ['earlyBirdApplies']
+            Tx_Seminars_Model_Event::class,
+            ['earlyBirdApplies']
         );
         $fixture->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(true));
@@ -1648,7 +1651,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function getAvailablePricesForRegularEarlyBirdPriceSetAndNoEarlyBirdReturnsRegularPrice()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_Model_Event::class, ['earlyBirdApplies']
+            Tx_Seminars_Model_Event::class,
+            ['earlyBirdApplies']
         );
         $fixture->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
@@ -1671,7 +1675,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function getAvailablePricesForRegularBoardPriceSetAndNoEarlyBirdReturnsRegularBoardPrice()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_Model_Event::class, ['earlyBirdApplies']
+            Tx_Seminars_Model_Event::class,
+            ['earlyBirdApplies']
         );
         $fixture->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
@@ -1696,7 +1701,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function getAvailablePricesForSpecialBoardPriceSetAndNoEarlyBirdReturnsSpecialBoardPrice()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_Model_Event::class, ['earlyBirdApplies']
+            Tx_Seminars_Model_Event::class,
+            ['earlyBirdApplies']
         );
         $fixture->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
@@ -1721,7 +1727,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function getAvailablePricesForSpecialPriceSetAndNoEarlyBirdReturnsSpecialPrice()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_Model_Event::class, ['earlyBirdApplies']
+            Tx_Seminars_Model_Event::class,
+            ['earlyBirdApplies']
         );
         $fixture->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
@@ -1742,7 +1749,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdReturnsSpecialEarlyBirdPrice()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_Model_Event::class, ['earlyBirdApplies']
+            Tx_Seminars_Model_Event::class,
+            ['earlyBirdApplies']
         );
         $fixture->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(true));
@@ -1768,7 +1776,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function getAvailablePricesForNoSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdNotReturnsSpecialEarlyBirdPrice()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_Model_Event::class, ['earlyBirdApplies']
+            Tx_Seminars_Model_Event::class,
+            ['earlyBirdApplies']
         );
         $fixture->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(true));
@@ -1791,7 +1800,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndNoEarlyBirdReturnsSpecialPrice()
     {
         $fixture = $this->getMock(
-            Tx_Seminars_Model_Event::class, ['earlyBirdApplies']
+            Tx_Seminars_Model_Event::class,
+            ['earlyBirdApplies']
         );
         $fixture->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));

@@ -59,11 +59,13 @@ class Tx_Seminars_BackEnd_OrganizersList extends Tx_Seminars_BackEnd_AbstractLis
         $pageData = $this->page->getPageData();
 
         $this->template->setMarker(
-            'new_record_button', $this->getNewIcon($pageData['uid'])
+            'new_record_button',
+            $this->getNewIcon($pageData['uid'])
         );
 
         $this->template->setMarker(
-            'label_full_name', $GLOBALS['LANG']->getLL('organizerlist.title')
+            'label_full_name',
+            $GLOBALS['LANG']->getLL('organizerlist.title')
         );
 
         /** @var Tx_Seminars_BagBuilder_Organizer $builder */
@@ -78,21 +80,25 @@ class Tx_Seminars_BackEnd_OrganizersList extends Tx_Seminars_BackEnd_AbstractLis
         /** @var Tx_Seminars_OldModel_Organizer $organizerBag */
         foreach ($organizerBag as $this->organizer) {
             $this->template->setMarker(
-                'icon', $this->organizer->getRecordIcon()
+                'icon',
+                $this->organizer->getRecordIcon()
             );
             $this->template->setMarker(
-                'full_name', htmlspecialchars($this->organizer->getTitle())
+                'full_name',
+                htmlspecialchars($this->organizer->getTitle())
             );
             $this->template->setMarker(
                 'edit_button',
                 $this->getEditIcon(
-                    $this->organizer->getUid(), $this->organizer->getPageUid()
+                    $this->organizer->getUid(),
+                    $this->organizer->getPageUid()
                 )
             );
             $this->template->setMarker(
                 'delete_button',
                 $this->getDeleteIcon(
-                    $this->organizer->getUid(), $this->organizer->getPageUid()
+                    $this->organizer->getUid(),
+                    $this->organizer->getPageUid()
                 )
             );
 
@@ -100,7 +106,8 @@ class Tx_Seminars_BackEnd_OrganizersList extends Tx_Seminars_BackEnd_AbstractLis
         }
         $this->template->setSubpart('ORGANIZER_ROW', $tableRows);
         $this->template->setMarker(
-            'label_print_button', $GLOBALS['LANG']->getLL('print')
+            'label_print_button',
+            $GLOBALS['LANG']->getLL('print')
         );
 
         $content .= $this->template->getSubpart('SEMINARS_ORGANIZER_LIST');

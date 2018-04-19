@@ -328,7 +328,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends Tx_Phpuni
         $contentObject = $this->getMock(ContentObjectRenderer::class, ['typoLink_URL']);
         $contentObject->expects(self::once())->method('typoLink_URL')
             ->with([
-                'parameter' => (string) $singleViewPageUid,
+                'parameter' => (string)$singleViewPageUid,
                 'additionalParams' => '&tx_seminars_pi1%5BshowUid%5D=' . $eventUid,
             ]);
 

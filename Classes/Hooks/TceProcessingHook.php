@@ -65,7 +65,11 @@ class Tx_Seminars_Hooks_TceProcessingHook
      * @return void
      */
     public function processDatamap_afterDatabaseOperations(
-        $status, $table, $uid, array &$fieldArray, DataHandler $pObj
+        $status,
+        $table,
+        $uid,
+        array &$fieldArray,
+        DataHandler $pObj
     ) {
         // Translates new UIDs.
         if ($status == 'new') {
@@ -128,7 +132,9 @@ class Tx_Seminars_Hooks_TceProcessingHook
     {
         /** @var Tx_Seminars_OldModel_TimeSlot $timeslot */
         $timeslot = GeneralUtility::makeInstance(
-            Tx_Seminars_OldModel_TimeSlot::class, $uid, false
+            Tx_Seminars_OldModel_TimeSlot::class,
+            $uid,
+            false
         );
 
         if ($timeslot->isOk()) {
@@ -152,7 +158,10 @@ class Tx_Seminars_Hooks_TceProcessingHook
     {
         /** @var Tx_Seminars_OldModel_Event $event */
         $event = GeneralUtility::makeInstance(
-            Tx_Seminars_OldModel_Event::class, $uid, false, true
+            Tx_Seminars_OldModel_Event::class,
+            $uid,
+            false,
+            true
         );
 
         if ($event->isOk()) {

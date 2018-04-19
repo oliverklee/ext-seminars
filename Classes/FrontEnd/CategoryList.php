@@ -46,7 +46,8 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
         try {
             $seminarBagBuilder->setTimeFrame(
                 $this->getConfValueString(
-                    'timeframeInList', 's_template_special'
+                    'timeframeInList',
+                    's_template_special'
                 )
             );
         } catch (Exception $exception) {
@@ -100,7 +101,8 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
      *                empty string if there is an error
      */
     public function createLinkToListViewLimitedByCategory(
-        $categoryUid, $title
+        $categoryUid,
+        $title
     ) {
         if ($categoryUid <= 0) {
             throw new InvalidArgumentException('$categoryUid must be > 0.', 1333293037);
@@ -195,7 +197,9 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
         }
 
         return str_replace(
-            '<img ', '<img class="category_image" ', $imageWithoutClass
+            '<img ',
+            '<img class="category_image" ',
+            $imageWithoutClass
         );
     }
 }

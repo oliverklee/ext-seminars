@@ -61,7 +61,7 @@ class TypoScriptSetupTest extends \Tx_Phpunit_TestCase
 
         /** @var string[] $matches */
         $matches = [];
-        preg_match('/userFunc += +([^\s]+)/', $typoScriptSetup, $matches);
+        preg_match('/userFunc += +([^\\s]+)/', $typoScriptSetup, $matches);
         array_shift($matches);
 
         foreach ($matches as $match) {

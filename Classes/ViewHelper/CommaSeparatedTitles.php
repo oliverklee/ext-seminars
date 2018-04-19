@@ -37,7 +37,8 @@ class Tx_Seminars_ViewHelper_CommaSeparatedTitles
         foreach ($list as $element) {
             if (!$element instanceof Tx_Seminars_Interface_Titled) {
                 throw new InvalidArgumentException(
-                    'All elements in $list must implement the interface Tx_Seminars_Interface_Titled.', 1333658899
+                    'All elements in $list must implement the interface Tx_Seminars_Interface_Titled.',
+                    1333658899
                 );
             }
 

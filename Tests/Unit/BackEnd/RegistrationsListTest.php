@@ -140,7 +140,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function testShowShowsUserName()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', ['name' => 'foo_user']
+            '',
+            ['name' => 'foo_user']
         );
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -164,7 +165,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function testShowWithRegistrationForDeletedUserDoesNotShowUserName()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', ['name' => 'foo_user', 'deleted' => 1]
+            '',
+            ['name' => 'foo_user', 'deleted' => 1]
         );
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -261,7 +263,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function testShowForOneInexistentEventShowsUserName()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', ['name' => 'user_foo']
+            '',
+            ['name' => 'user_foo']
         );
         $seminarUid = $this->testingFramework->getAutoIncrement(
             'tx_seminars_seminars'
@@ -397,7 +400,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function showForEventUidSetShowsRegistrationOfThisEvent()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', ['name' => 'user_foo']
+            '',
+            ['name' => 'user_foo']
         );
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
@@ -427,7 +431,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
             [
                 'seminar' => $eventUid,
                 'user' => $this->testingFramework->createFrontEndUser(
-                    '', ['name' => 'user_foo']
+                    '',
+                    ['name' => 'user_foo']
                 ),
             ]
         );
@@ -448,7 +453,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function showForEventUidAddsEventUidToCsvExportIcon()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', ['name' => 'user_foo']
+            '',
+            ['name' => 'user_foo']
         );
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
@@ -473,7 +479,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function showForEventUidDoesNotAddPidToCsvExportIcon()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', ['name' => 'user_foo']
+            '',
+            ['name' => 'user_foo']
         );
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
@@ -498,7 +505,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function showForNoEventUidDoesNotAddEventUidToCsvExportIcon()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
-            '', ['name' => 'user_foo']
+            '',
+            ['name' => 'user_foo']
         );
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
@@ -523,11 +531,13 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     {
         $newRegistrationFolder = $this->dummySysFolderPid + 1;
         $backEndGroup = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+            Tx_Seminars_Mapper_BackEndUserGroup::class
+        )->getLoadedTestingModel(
             ['tx_seminars_registrations_folder' => $newRegistrationFolder]
         );
         $backEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel(
+            Tx_Seminars_Mapper_BackEndUser::class
+        )->getLoadedTestingModel(
                 ['usergroup' => $backEndGroup->getUid()]
         );
         Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(

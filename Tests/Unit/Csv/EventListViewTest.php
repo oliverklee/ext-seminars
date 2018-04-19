@@ -109,7 +109,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
     /**
      * @test
      *
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function setPageUidWithZeroPageUidThrowsException()
     {
@@ -119,7 +119,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
     /**
      * @test
      *
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function setPageUidWithNegativePageUidThrowsException()
     {
@@ -184,7 +184,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
         self::assertContains(
-            (string) $eventUid,
+            (string)$eventUid,
             $this->subject->render()
         );
     }
@@ -217,17 +217,18 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         $firstEventUid = $this->createEventInFolderAndSetPageUid();
         $secondEventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
+            'tx_seminars_seminars',
+            ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
         );
 
         $eventList = $this->subject->render($this->pageUid);
 
         self::assertContains(
-            (string) $firstEventUid,
+            (string)$firstEventUid,
             $eventList
         );
         self::assertContains(
-            (string) $secondEventUid,
+            (string)$secondEventUid,
             $eventList
         );
     }
@@ -241,7 +242,8 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         $firstEventUid = $this->createEventInFolderAndSetPageUid();
         $secondEventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
+            'tx_seminars_seminars',
+            ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
         );
 
         self::assertContains(
@@ -259,11 +261,12 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         $this->createEventInFolderAndSetPageUid();
         $this->testingFramework->createRecord(
-            'tx_seminars_seminars', ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
+            'tx_seminars_seminars',
+            ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
         );
 
         self::assertRegExp(
-            '/\r\n$/',
+            '/\\r\\n$/',
             $this->subject->render($this->pageUid)
         );
     }

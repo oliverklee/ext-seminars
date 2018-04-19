@@ -62,7 +62,7 @@ class Tx_Seminars_BagBuilder_Category extends Tx_Seminars_BagBuilder_Abstract
             return;
         }
 
-        if (!preg_match('/^(\d+,)*\d+$/', $eventUids)
+        if (!preg_match('/^(\\d+,)*\\d+$/', $eventUids)
             || preg_match('/(^|,)0+(,|$)/', $eventUids)
         ) {
             throw new InvalidArgumentException('$eventUids must be a comma-separated list of positive integers.', 1333292640);

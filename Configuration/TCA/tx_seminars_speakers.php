@@ -112,8 +112,10 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_speakers_skills_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(\OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_skills'),
+                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
+                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
+                    'tx_seminars_skills'
+                ),
             ],
         ],
         'notes' => [

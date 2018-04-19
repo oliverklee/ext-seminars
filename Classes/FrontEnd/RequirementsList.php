@@ -70,7 +70,8 @@ class Tx_Seminars_FrontEnd_RequirementsList extends Tx_Seminars_FrontEnd_Abstrac
     {
         if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             throw new BadMethodCallException(
-                'No FE user is currently logged in. Please call this function only when a FE user is logged in.', 1333293236
+                'No FE user is currently logged in. Please call this function only when a FE user is logged in.',
+                1333293236
             );
         }
         $this->setMarker(
@@ -110,11 +111,13 @@ class Tx_Seminars_FrontEnd_RequirementsList extends Tx_Seminars_FrontEnd_Abstrac
 
             $singleViewUrl = $this->linkBuilder->createRelativeUrlForEvent($event);
             $this->setMarker(
-                'requirement_url', htmlspecialchars($singleViewUrl)
+                'requirement_url',
+                htmlspecialchars($singleViewUrl)
             );
 
             $this->setMarker(
-                'requirement_title', htmlspecialchars($event->getTitle())
+                'requirement_title',
+                htmlspecialchars($event->getTitle())
             );
             $output .= $this->getSubpart('SINGLE_REQUIREMENT');
         }

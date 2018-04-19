@@ -294,7 +294,8 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
         } else {
             if ($event->hasRegistrationQueue()) {
                 $label = sprintf(
-                    $plugin->translate('label_onlineRegistrationOnQueue'), $event->getAttendancesOnRegistrationQueue()
+                    $plugin->translate('label_onlineRegistrationOnQueue'),
+                    $event->getAttendancesOnRegistrationQueue()
                 );
             } else {
                 $label = $plugin->translate('label_onlineRegistration');
@@ -317,7 +318,9 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
      * @return string HTML code with the link
      */
     private function getLinkToStandardRegistrationOrLoginPage(
-        Tx_Oelib_TemplateHelper $plugin, Tx_Seminars_OldModel_Event $event, $label
+        Tx_Oelib_TemplateHelper $plugin,
+        Tx_Seminars_OldModel_Event $event,
+        $label
     ) {
         if (Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             // provides the registration link
@@ -471,7 +474,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
         $numberOfSeatsInt = (int)$numberOfSeats;
 
         // Check whether we have a valid number
-        if ($numberOfSeats == strval($numberOfSeatsInt)) {
+        if ($numberOfSeats == (string)$numberOfSeatsInt) {
             if ($event->hasUnlimitedVacancies()) {
                 $result = true;
             } else {
@@ -575,7 +578,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
         $registration->setRegisteredThemselves($registeredThemselves);
 
         $availablePrices = $event->getAvailablePrices();
-        if (isset($formData['price']) && isset($availablePrices[$formData['price']])) {
+        if (isset($formData['price'], $availablePrices[$formData['price']])) {
             $priceCode = $formData['price'];
         } else {
             reset($availablePrices);
@@ -624,10 +627,11 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
         $company = isset($formData['company']) ? strip_tags($formData['company']) : '';
         $registration->setCompany($company);
 
-        $validGenderMale = (string) Tx_Oelib_Model_FrontEndUser::GENDER_MALE;
-        $validGenderFemale = (string) Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE;
+        $validGenderMale = (string)Tx_Oelib_Model_FrontEndUser::GENDER_MALE;
+        $validGenderFemale = (string)Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE;
         if (isset($formData['gender'])
-            && (($formData['gender'] === $validGenderMale) || ($formData['gender'] === $validGenderFemale)
+            && (
+                ($formData['gender'] === $validGenderMale) || ($formData['gender'] === $validGenderFemale)
             )
         ) {
             $gender = (int)$formData['gender'];
@@ -657,7 +661,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
      */
     private function unifyWhitespace($rawString)
     {
-        return preg_replace('/[\r\n\t ]+/', ' ', $rawString);
+        return preg_replace('/[\\r\\n\\t ]+/', ' ', $rawString);
     }
 
     /**
@@ -678,7 +682,9 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
             Tx_Seminars_OldModel_Registration::class,
             $plugin->cObj,
             Tx_Oelib_Db::select(
-                '*', 'tx_seminars_attendances', 'uid = ' . $uid . Tx_Oelib_Db::enableFields('tx_seminars_attendances')
+                '*',
+                'tx_seminars_attendances',
+                'uid = ' . $uid . Tx_Oelib_Db::enableFields('tx_seminars_attendances')
             )
         );
         if ($this->registration->getUser() !== $this->getLoggedInFrontEndUserUid()) {
@@ -737,7 +743,9 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
 
             if ($registration->getSeats() <= $vacancies) {
                 Tx_Oelib_Db::update(
-                    'tx_seminars_attendances', 'uid = ' . $registration->getUid(), ['registration_queue' => 0]
+                    'tx_seminars_attendances',
+                    'uid = ' . $registration->getUid(),
+                    ['registration_queue' => 0]
                 );
                 $vacancies -= $registration->getSeats();
 
@@ -813,7 +821,9 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
      * @return void
      */
     public function notifyAttendee(
-        Tx_Seminars_OldModel_Registration $oldRegistration, AbstractPlugin $plugin, $helloSubjectPrefix = 'confirmation'
+        Tx_Seminars_OldModel_Registration $oldRegistration,
+        AbstractPlugin $plugin,
+        $helloSubjectPrefix = 'confirmation'
     ) {
         if (!$this->getConfValueBoolean('send' . ucfirst($helloSubjectPrefix))) {
             return;
@@ -892,8 +902,8 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
             'PRODID:TYPO3 CMS' . CRLF .
             'METHOD:PUBLISH' . CRLF .
             'BEGIN:VEVENT' . CRLF .
-            'UID:' . uniqid('event/' . $event->getUid() . '/', true). CRLF .
-            'DTSTAMP:' . strftime('%Y%m%dT%H%M%S', $GLOBALS['SIM_EXEC_TIME']). CRLF .
+            'UID:' . uniqid('event/' . $event->getUid() . '/', true) . CRLF .
+            'DTSTAMP:' . strftime('%Y%m%dT%H%M%S', $GLOBALS['SIM_EXEC_TIME']) . CRLF .
             'SUMMARY:' . $event->getTitle() . CRLF .
             'DESCRIPTION:' . $event->getSubtitle() . CRLF .
             'DTSTART:' . strftime('%Y%m%dT%H%M%S', $event->getBeginDateAsUnixTimeStamp()) . CRLF;
@@ -972,7 +982,8 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
 
         if ($this->hasConfValueString('showSeminarFieldsInNotificationMail')) {
             $this->setMarker(
-                'seminardata', $event->dumpSeminarValues($this->getConfValueString('showSeminarFieldsInNotificationMail'))
+                'seminardata',
+                $event->dumpSeminarValues($this->getConfValueString('showSeminarFieldsInNotificationMail'))
             );
         } else {
             $this->hideSubparts('seminardata', 'field_wrapper');
@@ -980,7 +991,8 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
 
         if ($this->hasConfValueString('showFeUserFieldsInNotificationMail')) {
             $this->setMarker(
-                'feuserdata', $registration->dumpUserValues($this->getConfValueString('showFeUserFieldsInNotificationMail'))
+                'feuserdata',
+                $registration->dumpUserValues($this->getConfValueString('showFeUserFieldsInNotificationMail'))
             );
         } else {
             $this->hideSubparts('feuserdata', 'field_wrapper');
@@ -1014,7 +1026,8 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
      * @return void
      */
     protected function callModifyOrganizerNotificationEmailHooks(
-        Tx_Seminars_OldModel_Registration $registration, Tx_Oelib_Template $emailTemplate
+        Tx_Seminars_OldModel_Registration $registration,
+        Tx_Oelib_Template $emailTemplate
     ) {
         foreach ($this->getHooks() as $hook) {
             if ($hook instanceof Tx_Seminars_Interface_Hook_Registration) {
@@ -1201,7 +1214,10 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
      * @return string the e-mail body for the attendee e-mail, will not be empty
      */
     private function buildEmailContent(
-        Tx_Seminars_OldModel_Registration $registration, AbstractPlugin $plugin, $helloSubjectPrefix, $useHtml = false
+        Tx_Seminars_OldModel_Registration $registration,
+        AbstractPlugin $plugin,
+        $helloSubjectPrefix,
+        $useHtml = false
     ) {
         if ($this->linkBuilder === null) {
             /** @var $linkBuilder Tx_Seminars_Service_SingleViewLinkBuilder */
@@ -1383,7 +1399,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
             return true;
         }
 
-        return ($GLOBALS['SIM_EXEC_TIME'] >= $event->getRegistrationBeginAsUnixTimestamp());
+        return $GLOBALS['SIM_EXEC_TIME'] >= $event->getRegistrationBeginAsUnixTimestamp();
     }
 
     /**
@@ -1440,7 +1456,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
      */
     private function formatPlace(Tx_Seminars_Model_Place $place, $newline)
     {
-        $address = preg_replace('/[\n|\r]+/', ' ', str_replace('<br />', ' ', strip_tags($place->getAddress())));
+        $address = preg_replace('/[\\n|\\r]+/', ' ', str_replace('<br />', ' ', strip_tags($place->getAddress())));
 
         $countryName = ($place->hasCountry()) ? ', ' . $place->getCountry()->getLocalShortName() : '';
         $zipAndCity = trim($place->getZip() . ' ' . $place->getCity());

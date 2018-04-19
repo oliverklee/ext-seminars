@@ -134,7 +134,8 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
         }
 
         $formAction = BackendUtility::getModuleUrl(
-            self::MODULE_NAME, ['id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()]
+            self::MODULE_NAME,
+            ['id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()]
         );
 
         return '<fieldset id="EventMailForm"><form action="' . htmlspecialchars($formAction) . '" method="post">' .
@@ -469,7 +470,8 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      * @return void
      */
     protected function modifyEmailWithHook(
-        Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail
+        Tx_Seminars_Model_Registration $registration,
+        Tx_Oelib_Mail $eMail
     ) {
     }
 
@@ -491,9 +493,12 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     private function redirectToListView()
     {
         $url = BackendUtility::getModuleUrl(
-            self::MODULE_NAME, ['id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()], false, true
+            self::MODULE_NAME,
+            ['id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()],
+            false,
+            true
         );
-        Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' .  $url);
+        Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $url);
     }
 
     /**
@@ -536,7 +541,8 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
                 break;
             default:
                 throw new InvalidArgumentException(
-                    'There is no initial value for the field "' . $fieldName . '" defined.', 1333292199
+                    'There is no initial value for the field "' . $fieldName . '" defined.',
+                    1333292199
                 );
         }
 

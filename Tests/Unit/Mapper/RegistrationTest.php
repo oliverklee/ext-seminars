@@ -61,7 +61,8 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', ['title' => 'registration for event']
+            'tx_seminars_attendances',
+            ['title' => 'registration for event']
         );
 
         /** @var Tx_Seminars_Model_Registration $model */
@@ -182,7 +183,10 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
         $lodging = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Lodging::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_attendances', $uid, $lodging->getUid(), 'lodgings'
+            'tx_seminars_attendances',
+            $uid,
+            $lodging->getUid(),
+            'lodgings'
         );
 
         /** @var Tx_Seminars_Model_Registration $model */
@@ -199,7 +203,10 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
         $lodging = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Lodging::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_attendances', $uid, $lodging->getUid(), 'lodgings'
+            'tx_seminars_attendances',
+            $uid,
+            $lodging->getUid(),
+            'lodgings'
         );
 
         /** @var Tx_Seminars_Model_Registration $model */
@@ -234,7 +241,10 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
         $food = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Food::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_attendances', $uid, $food->getUid(), 'foods'
+            'tx_seminars_attendances',
+            $uid,
+            $food->getUid(),
+            'foods'
         );
 
         /** @var Tx_Seminars_Model_Registration $model */
@@ -251,7 +261,10 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
         $food = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Food::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_attendances', $uid, $food->getUid(), 'foods'
+            'tx_seminars_attendances',
+            $uid,
+            $food->getUid(),
+            'foods'
         );
 
         /** @var Tx_Seminars_Model_Registration $model */
@@ -286,7 +299,10 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
         $checkbox = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_attendances', $uid, $checkbox->getUid(), 'checkboxes'
+            'tx_seminars_attendances',
+            $uid,
+            $checkbox->getUid(),
+            'checkboxes'
         );
 
         /** @var Tx_Seminars_Model_Registration $model */
@@ -306,7 +322,10 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
         $checkbox = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
-            'tx_seminars_attendances', $uid, $checkbox->getUid(), 'checkboxes'
+            'tx_seminars_attendances',
+            $uid,
+            $checkbox->getUid(),
+            'checkboxes'
         );
 
         /** @var Tx_Seminars_Model_Registration $model */
@@ -327,16 +346,18 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     public function relationToAdditionalPersonsReturnsPersonsFromDatabase()
     {
         $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances', ['additional_persons' => 1]
+            'tx_seminars_attendances',
+            ['additional_persons' => 1]
         );
         $personUid = $this->testingFramework->createFrontEndUser(
-            '', ['tx_seminars_registration' => $registrationUid]
+            '',
+            ['tx_seminars_registration' => $registrationUid]
         );
 
         /** @var Tx_Seminars_Model_Registration $model */
         $model = $this->fixture->find($registrationUid);
         self::assertEquals(
-            (string) $personUid,
+            (string)$personUid,
             $model->getAdditionalPersons()->getUids()
         );
     }

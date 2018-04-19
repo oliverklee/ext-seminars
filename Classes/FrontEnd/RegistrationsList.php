@@ -42,13 +42,17 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
      *        the parent cObj, needed for the flexforms
      */
     public function __construct(
-        array $configuration, $whatToDisplay, $seminarUid, ContentObjectRenderer $contentObjectRenderer
+        array $configuration,
+        $whatToDisplay,
+        $seminarUid,
+        ContentObjectRenderer $contentObjectRenderer
     ) {
         if (($whatToDisplay != 'list_registrations')
             && ($whatToDisplay != 'list_vip_registrations')
         ) {
             throw new InvalidArgumentException(
-                'The value "' . $whatToDisplay . '" of the first parameter $whatToDisplay is not valid.', 1333293210
+                'The value "' . $whatToDisplay . '" of the first parameter $whatToDisplay is not valid.',
+                1333293210
             );
         }
 
@@ -105,7 +109,8 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
                 0,
                 0,
                 $this->getConfValueInteger(
-                    'defaultEventVipsFeGroupID', 's_template_special'
+                    'defaultEventVipsFeGroupID',
+                    's_template_special'
                 )
             )) {
                 $isOkay = true;
@@ -133,7 +138,8 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
             $this->setMarker('registrations_list_view_content', '');
         }
 
-        $this->setMarker('backlink',
+        $this->setMarker(
+            'backlink',
             $this->cObj->getTypoLink(
                 $this->translate('label_back'),
                 $this->getConfValueInteger('listPID')
@@ -282,7 +288,8 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
             $tableCells = '';
             foreach ($cellContents as $cellContent) {
                 $this->setMarker(
-                    'registrations_list_cell', htmlspecialchars($cellContent)
+                    'registrations_list_cell',
+                    htmlspecialchars($cellContent)
                 );
                 $tableCells .= $this->getSubpart(
                     'WRAPPER_REGISTRATIONS_LIST_CELL'
@@ -308,7 +315,8 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
         return GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString(
-                'showFeUserFieldsInRegistrationsList', 's_template_special'
+                'showFeUserFieldsInRegistrationsList',
+                's_template_special'
             ),
             true
         );
@@ -325,7 +333,8 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
         return GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString(
-                'showRegistrationFieldsInRegistrationList', 's_template_special'
+                'showRegistrationFieldsInRegistrationList',
+                's_template_special'
             ),
             true
         );

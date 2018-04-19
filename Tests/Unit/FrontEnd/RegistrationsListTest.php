@@ -97,7 +97,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     private function createLogInAndRegisterFrontEndUser()
     {
         $this->feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
-            '', ['name' => 'Tom & Jerry']
+            '',
+            ['name' => 'Tom & Jerry']
         );
         $this->registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -154,7 +155,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
 
         new Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
-            'foo', 0, $GLOBALS['TSFE']->cObj
+            'foo',
+            0,
+            $GLOBALS['TSFE']->cObj
         );
     }
 
@@ -165,7 +168,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     {
         new Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
-            'list_registrations', 0, $GLOBALS['TSFE']->cObj
+            'list_registrations',
+            0,
+            $GLOBALS['TSFE']->cObj
         );
     }
 
@@ -176,7 +181,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     {
         new Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
-            'list_vip_registrations', 0, $GLOBALS['TSFE']->cObj
+            'list_vip_registrations',
+            0,
+            $GLOBALS['TSFE']->cObj
         );
     }
 
@@ -202,7 +209,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
-            'list_registrations', -1, $GLOBALS['TSFE']->cObj
+            'list_registrations',
+            -1,
+            $GLOBALS['TSFE']->cObj
         );
         $fixture->render();
 
@@ -219,7 +228,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     {
         $fixture = new Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
-            'list_registrations', 0, $GLOBALS['TSFE']->cObj
+            'list_registrations',
+            0,
+            $GLOBALS['TSFE']->cObj
         );
         $fixture->render();
 
@@ -276,7 +287,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUid()
     {
         $this->fixture->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList', 'uid'
+            'showFeUserFieldsInRegistrationsList',
+            'uid'
         );
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -292,7 +304,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUid()
     {
         $this->fixture->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList', 'uid'
+            'showFeUserFieldsInRegistrationsList',
+            'uid'
         );
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -308,7 +321,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserName()
     {
         $this->fixture->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList', 'name'
+            'showFeUserFieldsInRegistrationsList',
+            'name'
         );
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -324,7 +338,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserName()
     {
         $this->fixture->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList', 'name'
+            'showFeUserFieldsInRegistrationsList',
+            'name'
         );
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -340,7 +355,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUidAndName()
     {
         $this->fixture->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList', 'uid,name'
+            'showFeUserFieldsInRegistrationsList',
+            'uid,name'
         );
         $this->createLogInAndRegisterFrontEndUser();
         $result = $this->fixture->render();
@@ -361,7 +377,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUidAndName()
     {
         $this->fixture->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList', 'uid,name'
+            'showFeUserFieldsInRegistrationsList',
+            'uid,name'
         );
         $this->createLogInAndRegisterFrontEndUser();
         $this->testingFramework->changeRecord(
@@ -387,7 +404,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUid()
     {
         $this->fixture->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList', 'uid'
+            'showRegistrationFieldsInRegistrationList',
+            'uid'
         );
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -403,7 +421,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUid()
     {
         $this->fixture->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList', 'uid'
+            'showRegistrationFieldsInRegistrationList',
+            'uid'
         );
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -419,7 +438,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationSeats()
     {
         $this->fixture->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList', 'seats'
+            'showRegistrationFieldsInRegistrationList',
+            'seats'
         );
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -435,7 +455,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationSeats()
     {
         $this->fixture->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList', 'seats'
+            'showRegistrationFieldsInRegistrationList',
+            'seats'
         );
         $this->createLogInAndRegisterFrontEndUser();
         $this->testingFramework->changeRecord(
@@ -456,7 +477,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderCanContainTheRegistrationInterests()
     {
         $this->fixture->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList', 'interests'
+            'showRegistrationFieldsInRegistrationList',
+            'interests'
         );
         $this->createLogInAndRegisterFrontEndUser();
         $this->testingFramework->changeRecord(
@@ -477,7 +499,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUidAndSeats()
     {
         $this->fixture->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList', 'uid,seats'
+            'showRegistrationFieldsInRegistrationList',
+            'uid,seats'
         );
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -497,7 +520,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUidAndSeats()
     {
         $this->fixture->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList', 'uid,seats'
+            'showRegistrationFieldsInRegistrationList',
+            'uid,seats'
         );
         $this->createLogInAndRegisterFrontEndUser();
         $this->testingFramework->changeRecord(
@@ -523,7 +547,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     {
         $this->createLogInAndRegisterFrontEndUser();
         $this->fixture->setConfigurationValue(
-            'showFeUserFieldsInRegistrationsList', ''
+            'showFeUserFieldsInRegistrationsList',
+            ''
         );
 
         self::assertNotContains(
@@ -539,7 +564,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     {
         $this->createLogInAndRegisterFrontEndUser();
         $this->fixture->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList', ''
+            'showRegistrationFieldsInRegistrationList',
+            ''
         );
 
         self::assertNotContains(
@@ -554,17 +580,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderWithDeletedUserForRegistrationHidesUsersRegistration()
     {
         $this->fixture->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList', 'uid'
+            'showRegistrationFieldsInRegistrationList',
+            'uid'
         );
 
         $this->createLogInAndRegisterFrontEndUser();
 
         $this->testingFramework->changeRecord(
-            'fe_users', $this->feUserUid, ['deleted' => 1]
+            'fe_users',
+            $this->feUserUid,
+            ['deleted' => 1]
         );
 
         self::assertNotContains(
-            (string) $this->registrationUid,
+            (string)$this->registrationUid,
             $this->fixture->render()
         );
     }
@@ -575,7 +604,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderSeparatesMultipleRegistrationsWithTableRows()
     {
         $this->fixture->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList', 'uid'
+            'showRegistrationFieldsInRegistrationList',
+            'uid'
         );
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -590,7 +620,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
         );
 
         self::assertRegExp(
-            '/' . $this->registrationUid . '<\/td>.*<\/tr>' .
+            '/' . $this->registrationUid . '<\\/td>.*<\\/tr>' .
                 '.*<tr>.*<td>' . $secondRegistration . '/s',
             $this->fixture->render()
         );
@@ -617,7 +647,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderForWaitingListRegistrationsContainsWaitingListLabel()
     {
         $this->fixture->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList', 'uid'
+            'showRegistrationFieldsInRegistrationList',
+            'uid'
         );
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -643,7 +674,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function renderCanContainWaitingListRegistrations()
     {
         $this->fixture->setConfigurationValue(
-            'showRegistrationFieldsInRegistrationList', 'uid'
+            'showRegistrationFieldsInRegistrationList',
+            'uid'
         );
         $this->createLogInAndRegisterFrontEndUser();
 

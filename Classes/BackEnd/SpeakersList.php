@@ -59,14 +59,17 @@ class Tx_Seminars_BackEnd_SpeakersList extends Tx_Seminars_BackEnd_AbstractList
         $pageData = $this->page->getPageData();
 
         $this->template->setMarker(
-            'new_record_button', $this->getNewIcon($pageData['uid'])
+            'new_record_button',
+            $this->getNewIcon($pageData['uid'])
         );
 
         $this->template->setMarker(
-            'label_full_name', $GLOBALS['LANG']->getLL('speakerlist.title')
+            'label_full_name',
+            $GLOBALS['LANG']->getLL('speakerlist.title')
         );
         $this->template->setMarker(
-            'label_skills', $GLOBALS['LANG']->getLL('speakerlist.skills')
+            'label_skills',
+            $GLOBALS['LANG']->getLL('speakerlist.skills')
         );
 
         /** @var Tx_Seminars_BagBuilder_Speaker $builder */
@@ -81,21 +84,25 @@ class Tx_Seminars_BackEnd_SpeakersList extends Tx_Seminars_BackEnd_AbstractList
 
         foreach ($speakerBag as $this->speaker) {
             $this->template->setMarker(
-                'icon', $this->speaker->getRecordIcon()
+                'icon',
+                $this->speaker->getRecordIcon()
             );
             $this->template->setMarker(
-                'full_name', htmlspecialchars($this->speaker->getTitle())
+                'full_name',
+                htmlspecialchars($this->speaker->getTitle())
             );
             $this->template->setMarker(
                 'edit_button',
                 $this->getEditIcon(
-                    $this->speaker->getUid(), $this->speaker->getPageUid()
+                    $this->speaker->getUid(),
+                    $this->speaker->getPageUid()
                 )
             );
             $this->template->setMarker(
                 'delete_button',
                 $this->getDeleteIcon(
-                    $this->speaker->getUid(), $this->speaker->getPageUid()
+                    $this->speaker->getUid(),
+                    $this->speaker->getPageUid()
                 )
             );
             $this->template->setMarker(
@@ -107,7 +114,8 @@ class Tx_Seminars_BackEnd_SpeakersList extends Tx_Seminars_BackEnd_AbstractList
                 )
             );
             $this->template->setMarker(
-                'skills', htmlspecialchars($this->speaker->getSkillsShort())
+                'skills',
+                htmlspecialchars($this->speaker->getSkillsShort())
             );
 
             $tableRows .= $this->template->getSubpart('SPEAKER_ROW');
@@ -115,7 +123,8 @@ class Tx_Seminars_BackEnd_SpeakersList extends Tx_Seminars_BackEnd_AbstractList
 
         $this->template->setSubpart('SPEAKER_ROW', $tableRows);
         $this->template->setMarker(
-            'label_print_button', $GLOBALS['LANG']->getLL('print')
+            'label_print_button',
+            $GLOBALS['LANG']->getLL('print')
         );
         $content .= $this->template->getSubpart('SEMINARS_SPEAKER_LIST');
 

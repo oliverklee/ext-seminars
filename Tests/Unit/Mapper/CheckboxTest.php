@@ -60,7 +60,8 @@ class Tx_Seminars_Tests_Unit_Mapper_CheckboxTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_checkboxes', ['title' => 'I agree with the T&C.']
+            'tx_seminars_checkboxes',
+            ['title' => 'I agree with the T&C.']
         );
         /** @var Tx_Seminars_Model_Checkbox $model */
         $model = $this->fixture->find($uid);

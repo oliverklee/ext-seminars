@@ -60,7 +60,8 @@ class Tx_Seminars_Tests_Unit_Mapper_FoodTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_foods', ['title' => 'Crunchy crisps']
+            'tx_seminars_foods',
+            ['title' => 'Crunchy crisps']
         );
 
         /** @var Tx_Seminars_Model_Food $model */

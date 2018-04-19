@@ -108,7 +108,10 @@ class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
         $registrationTables .= $this->template->getSubpart('REGISTRATION_TABLE');
 
         $this->template->setOrDeleteMarkerIfNotEmpty(
-            'registrations_heading', $registrationsHeading, '', 'wrapper'
+            'registrations_heading',
+            $registrationsHeading,
+            '',
+            'wrapper'
         );
         $this->template->setMarker('new_record_button', $newButton);
         $this->template->setMarker(
@@ -117,7 +120,8 @@ class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
         );
         $this->template->setMarker('complete_table', $registrationTables);
         $this->template->setMarker(
-            'label_print_button', $GLOBALS['LANG']->getLL('print')
+            'label_print_button',
+            $GLOBALS['LANG']->getLL('print')
         );
 
         $content .= $this->template->getSubpart('SEMINARS_REGISTRATION_LIST');
@@ -197,13 +201,15 @@ class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
             $this->template->setMarker(
                 'edit_button',
                 $this->getEditIcon(
-                    $registration->getUid(), $registration->getPageUid()
+                    $registration->getUid(),
+                    $registration->getPageUid()
                 )
             );
             $this->template->setMarker(
                 'delete_button',
                 $this->getDeleteIcon(
-                    $registration->getUid(), $registration->getPageUid()
+                    $registration->getUid(),
+                    $registration->getPageUid()
                 )
             );
 
@@ -216,10 +222,12 @@ class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
         }
 
         $this->template->setMarker(
-            'label_registrations', $GLOBALS['LANG']->getLL($tableLabel)
+            'label_registrations',
+            $GLOBALS['LANG']->getLL($tableLabel)
         );
         $this->template->setMarker(
-            'number_of_registrations', $registrationBag->count()
+            'number_of_registrations',
+            $registrationBag->count()
         );
         $this->template->setMarker(
             'table_header',

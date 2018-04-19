@@ -182,7 +182,7 @@ class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Inte
      */
     public function hasCountry()
     {
-        return ($this->getCountry() instanceof Tx_Oelib_Model_Country);
+        return $this->getCountry() instanceof Tx_Oelib_Model_Country;
     }
 
     /**

@@ -60,7 +60,8 @@ class Tx_Seminars_Tests_Unit_Mapper_OrganizerTest extends Tx_Phpunit_TestCase
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
         $uid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers', ['title' => 'Fabulous organizer']
+            'tx_seminars_organizers',
+            ['title' => 'Fabulous organizer']
         );
 
         /** @var Tx_Seminars_Model_Lodging $model */

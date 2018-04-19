@@ -111,7 +111,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     /**
      * @test
      *
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function createListOfEventsForZeroPidThrowsException()
     {
@@ -121,7 +121,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     /**
      * @test
      *
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function createListOfEventsForNegativePidThrowsException()
     {
@@ -151,7 +151,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
         self::assertContains(
-            (string) $this->eventUid,
+            (string)$this->eventUid,
             $this->fixture->createListOfEvents($this->pid)
         );
     }
@@ -189,7 +189,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         $this->fixture->piVars['pid'] = $this->pid;
 
         self::assertContains(
-            (string) $this->eventUid,
+            (string)$this->eventUid,
             $this->fixture->main()
         );
     }
@@ -211,11 +211,11 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         $eventList = $this->fixture->createListOfEvents($this->pid);
 
         self::assertContains(
-            (string) $this->eventUid,
+            (string)$this->eventUid,
             $eventList
         );
         self::assertContains(
-            (string) $secondEventUid,
+            (string)$secondEventUid,
             $eventList
         );
     }
@@ -238,11 +238,11 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         $output = $this->fixture->createAndOutputListOfEvents($this->pid);
 
         self::assertContains(
-            (string) $this->eventUid,
+            (string)$this->eventUid,
             $output
         );
         self::assertContains(
-            (string) $secondEventUid,
+            (string)$secondEventUid,
             $output
         );
     }
@@ -285,7 +285,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         );
 
         self::assertRegExp(
-            '/\r\n$/',
+            '/\\r\\n$/',
             $this->fixture->createAndOutputListOfEvents($this->pid)
         );
     }
@@ -296,7 +296,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     public function createAndOutputListOfEventsDoesNotWrapRegularValuesWithDoubleQuotes()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $this->eventUid,
+            'tx_seminars_seminars',
+            $this->eventUid,
             ['title' => 'bar']
         );
 
@@ -314,7 +315,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     public function createAndOutputListOfEventsEscapesDoubleQuotes()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $this->eventUid,
+            'tx_seminars_seminars',
+            $this->eventUid,
             ['description' => 'foo " bar']
         );
 
@@ -332,7 +334,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     public function createAndOutputListOfEventsDoesWrapValuesWithLineFeedsInDoubleQuotes()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $this->eventUid,
+            'tx_seminars_seminars',
+            $this->eventUid,
             ['title' => 'foo' . LF . 'bar']
         );
 
@@ -350,7 +353,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     public function createAndOutputListOfEventsDoesWrapValuesWithDoubleQuotesInDoubleQuotes()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $this->eventUid,
+            'tx_seminars_seminars',
+            $this->eventUid,
             ['title' => 'foo " bar']
         );
 
@@ -368,7 +372,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     public function createAndOutputListOfEventsDoesWrapValuesWithSemicolonsInDoubleQuotes()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $this->eventUid,
+            'tx_seminars_seminars',
+            $this->eventUid,
             ['title' => 'foo ; bar']
         );
 
@@ -386,7 +391,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     public function createAndOutputListOfEventsSeparatesValuesWithSemicolons()
     {
         $this->testingFramework->changeRecord(
-            'tx_seminars_seminars', $this->eventUid,
+            'tx_seminars_seminars',
+            $this->eventUid,
             ['description' => 'foo', 'title' => 'bar']
         );
 
@@ -481,7 +487,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         );
 
         self::assertContains(
-            (string) $registrationUid,
+            (string)$registrationUid,
             $this->fixture->createListOfRegistrations($this->eventUid)
         );
     }
@@ -505,7 +511,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         );
 
         self::assertContains(
-            (string) $registrationUid,
+            (string)$registrationUid,
             $this->fixture->createListOfRegistrations($this->eventUid)
         );
     }
@@ -533,7 +539,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         );
 
         self::assertContains(
-            (string) $registrationUid,
+            (string)$registrationUid,
             $this->fixture->createListOfRegistrations($this->eventUid)
         );
     }
@@ -664,7 +670,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         $this->fixture->piVars['eventUid'] = $this->eventUid;
 
         self::assertContains(
-            (string) $registrationUid,
+            (string)$registrationUid,
             $this->fixture->main()
         );
     }
@@ -697,11 +703,11 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
             = $this->fixture->createListOfRegistrations($this->eventUid);
 
         self::assertContains(
-            (string) $firstRegistrationUid,
+            (string)$firstRegistrationUid,
             $registrationsList
         );
         self::assertContains(
-            (string) $secondRegistrationUid,
+            (string)$secondRegistrationUid,
             $registrationsList
         );
     }
@@ -859,11 +865,11 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $registrationsList = $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
         self::assertContains(
-            (string) $firstRegistrationUid,
+            (string)$firstRegistrationUid,
             $registrationsList
         );
         self::assertContains(
-            (string) $secondRegistrationUid,
+            (string)$secondRegistrationUid,
             $registrationsList
         );
     }
@@ -911,7 +917,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         );
 
         self::assertNotContains(
-            (string) $registrationUid,
+            (string)$registrationUid,
             $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
@@ -934,7 +940,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         );
 
         self::assertNotContains(
-            (string) $registrationUid,
+            (string)$registrationUid,
             $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
@@ -997,7 +1003,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         );
 
         self::assertRegExp(
-            '/\r\n$/',
+            '/\\r\\n$/',
             $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
@@ -1443,7 +1449,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         );
 
         self::assertNotContains(
-            (string) $queueUid,
+            (string)$queueUid,
             $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
         );
     }

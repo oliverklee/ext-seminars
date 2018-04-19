@@ -330,7 +330,9 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
         }
 
         $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            '*', 'fe_users', 'uid = ' . $uid . Tx_Oelib_Db::enableFields('fe_users')
+            '*',
+            'fe_users',
+            'uid = ' . $uid . Tx_Oelib_Db::enableFields('fe_users')
         );
         if ($dbResult === false) {
             throw new Tx_Oelib_Exception_Database();
@@ -432,7 +434,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
                 break;
         }
 
-        $carriageReturnRemoved = str_replace(CR, LF, (string) $result);
+        $carriageReturnRemoved = str_replace(CR, LF, (string)$result);
 
         return trim(preg_replace('/\\x0a{2,}/', LF, $carriageReturnRemoved));
     }
@@ -478,7 +480,8 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
                 // The fallthrough is intended.
             case 'tstamp':
                 $result = strftime(
-                    $this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat'), $rawData
+                    $this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat'),
+                    $rawData
                 );
                 break;
             case 'date_of_birth':
@@ -491,7 +494,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
                 $result = $rawData;
         }
 
-        return trim((string) $result);
+        return trim((string)$result);
     }
 
     /**
@@ -620,7 +623,8 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
                 $this->seminar = self::$cachedSeminars[$seminarUid];
             } else {
                 $this->seminar = GeneralUtility::makeInstance(
-                    Tx_Seminars_OldModel_Event::class, $seminarUid
+                    Tx_Seminars_OldModel_Event::class,
+                    $seminarUid
                 );
                 self::$cachedSeminars[$seminarUid] = $this->seminar;
             }

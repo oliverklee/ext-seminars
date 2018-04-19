@@ -68,7 +68,7 @@ class DefaultControllerTest extends \Tx_Phpunit_TestCase
         $configuration = $GLOBALS['TYPO3_CONF_VARS']['FE']['defaultTypoScript_setup.']['defaultContentRendering'];
 
         $matches = [];
-        preg_match('/plugin\.tx_seminars_pi1\.userFunc = ([^\s]+)/', $configuration, $matches);
+        preg_match('/plugin\\.tx_seminars_pi1\\.userFunc = ([^\\s]+)/', $configuration, $matches);
         $className = $this->extractClassNameFromUserFunction($matches[1]);
         $methodName = $this->extractMethodNameFromUserFunction($matches[1]);
 

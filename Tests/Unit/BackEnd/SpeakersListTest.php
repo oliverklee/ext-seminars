@@ -157,11 +157,13 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends Tx_Phpunit_TestCas
     {
         $newSpeakerFolder = $this->dummySysFolderPid + 1;
         $backEndGroup = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+            Tx_Seminars_Mapper_BackEndUserGroup::class
+        )->getLoadedTestingModel(
             ['tx_seminars_auxiliaries_folder' => $newSpeakerFolder]
         );
         $backEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel(
+            Tx_Seminars_Mapper_BackEndUser::class
+        )->getLoadedTestingModel(
                 ['usergroup' => $backEndGroup->getUid()]
         );
         Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(

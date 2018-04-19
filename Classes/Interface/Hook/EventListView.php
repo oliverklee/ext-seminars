@@ -45,6 +45,7 @@ interface Tx_Seminars_Interface_Hook_EventListView
      * @return void
      */
     public function modifyMyEventsListRow(
-        Tx_Seminars_Model_Registration $registration, Tx_Oelib_Template $template
+        Tx_Seminars_Model_Registration $registration,
+        Tx_Oelib_Template $template
     );
 }

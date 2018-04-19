@@ -213,7 +213,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
         if ($event->hasCombinedSingleViewPage()) {
             $result = $event->getCombinedSingleViewPage();
         } elseif ($this->configurationHasSingleViewPage()) {
-            $result = (string) $this->getSingleViewPageFromConfiguration();
+            $result = (string)$this->getSingleViewPageFromConfiguration();
         } else {
             $result = '';
         }
@@ -230,7 +230,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      */
     protected function configurationHasSingleViewPage()
     {
-        return ($this->getSingleViewPageFromConfiguration() > 0);
+        return $this->getSingleViewPageFromConfiguration() > 0;
     }
 
     /**
