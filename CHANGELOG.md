@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## 1.4.1
 
 ### Fixed
+- Require typo3/minimal for installing TYPO3 (#38)
 - fix the sorting in the daily registration digest (#23)
 - require mkforms >= 3.0.14 (#22)
 

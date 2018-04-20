@@ -20,9 +20,14 @@ before_install:
 - phpenv config-rm xdebug.ini
 
 install:
-- composer require-typo3-version "$TYPO3_VERSION"
-- git checkout .
-- export TYPO3_PATH_ROOT=$PWD/.Build/public
+- >
+  composer require typo3/minimal=$TYPO3_VERSION;
+- >
+  echo;
+  echo "Restoring the composer.json";
+  git checkout .;
+- >
+  export TYPO3_PATH_ROOT=$PWD/.Build/public;
 
 script:
 - >
