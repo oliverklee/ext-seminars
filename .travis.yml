@@ -22,6 +22,10 @@ before_install:
 install:
 - >
   composer require typo3/minimal=$TYPO3_VERSION;
+  if [ "$TYPO3_VERSION" == "^8.7" ]; then
+    composer require pagemachine/typo3-composer-legacy-cli;
+  fi;
+  composer show;
 - >
   echo;
   echo "Restoring the composer.json";
