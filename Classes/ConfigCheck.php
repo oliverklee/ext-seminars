@@ -1,16 +1,4 @@
 <?php
-/*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
- *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
- */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -18,7 +6,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * The correct functioning of this class does not rely on any HTML templates or
  * language files so it works even under the worst of circumstances.
- *
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
