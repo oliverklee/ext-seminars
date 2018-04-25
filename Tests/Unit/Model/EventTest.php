@@ -209,6 +209,44 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         );
     }
 
+    /*
+     * Tests regarding the time zone.
+     */
+
+    /**
+     * @test
+     */
+    public function getTimeZoneInitiallyReturnsEmptyString()
+    {
+        $this->fixture->setData([]);
+
+        static::assertSame('', $this->fixture->getTimeZone());
+    }
+
+    /**
+     * @test
+     */
+    public function getTimeZoneReturnsTimeZone()
+    {
+        $value = 'Europe/Berlin';
+        $this->fixture->setData(['time_zone' => $value]);
+
+        static::assertSame($value, $this->fixture->getTimeZone());
+    }
+
+    /**
+     * @test
+     */
+    public function setTimeZoneSetsTimeZone()
+    {
+        $this->fixture->setData([]);
+
+        $value = 'Europe/Berlin';
+        $this->fixture->setTimeZone($value);
+
+        static::assertSame($value, $this->fixture->getTimeZone());
+    }
+
     //////////////////////////////////////////////
     // Tests regarding the accreditation number.
     //////////////////////////////////////////////

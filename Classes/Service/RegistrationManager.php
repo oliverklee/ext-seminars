@@ -881,6 +881,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
     private function addCalendarAttachment(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Registration $registration)
     {
         $event = $registration->getEvent();
+        $timeZone = $event->getTimeZone() ?: $this->getConfValueString('defaultTimeZone');
 
         /** @var \Tx_Oelib_Attachment $calendarEntry */
         $calendarEntry = GeneralUtility::makeInstance(\Tx_Oelib_Attachment::class);
@@ -895,10 +896,10 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
             'DTSTAMP:' . strftime('%Y%m%dT%H%M%S', $GLOBALS['SIM_EXEC_TIME']) . CRLF .
             'SUMMARY:' . $event->getTitle() . CRLF .
             'DESCRIPTION:' . $event->getSubtitle() . CRLF .
-            'DTSTART:' . strftime('%Y%m%dT%H%M%S', $event->getBeginDateAsUnixTimeStamp()) . CRLF;
+            'DTSTART' . $this->formatDateForWithZone($event->getBeginDateAsUnixTimeStamp(), $timeZone) . CRLF;
 
         if ($event->hasEndDate()) {
-            $content .= 'DTEND:' . strftime('%Y%m%dT%H%M%S', $event->getEndDateAsUnixTimeStamp()) . CRLF;
+            $content .= 'DTEND' . $this->formatDateForWithZone($event->getEndDateAsUnixTimeStamp(), $timeZone) . CRLF;
         }
         if (!$event->getPlaces()->isEmpty()) {
             /** @var \Tx_Seminars_Model_Place $firstPlace */
@@ -919,6 +920,17 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
         $calendarEntry->setContent($content);
 
         $email->addAttachment($calendarEntry);
+    }
+
+    /**
+     * @param int $dateAsUnixTimeStamp
+     * @param string $timeZone
+     *
+     * @return string
+     */
+    private function formatDateForWithZone($dateAsUnixTimeStamp, $timeZone)
+    {
+        return ';TZID=/' . $timeZone . ':' . strftime('%Y%m%dT%H%M%S', $dateAsUnixTimeStamp);
     }
 
     /**

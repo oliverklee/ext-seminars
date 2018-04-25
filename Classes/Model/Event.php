@@ -262,6 +262,24 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     }
 
     /**
+     * @return string
+     */
+    public function getTimeZone()
+    {
+        return $this->getAsString('time_zone');
+    }
+
+    /**
+     * @param string $timeZone
+     *
+     * @return void
+     */
+    public function setTimeZone($timeZone)
+    {
+        $this->setAsString('time_zone', $timeZone);
+    }
+
+    /**
      * Returns our accreditation number.
      *
      * @return string our accreditation number, will be empty if this event has
