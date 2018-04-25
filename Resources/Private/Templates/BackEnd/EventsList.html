@@ -6,90 +6,90 @@
 </head>
 <body>
 <!-- ###SEMINARS_EVENT_LIST### -->
-	###CSV_EVENT_EXPORT_BUTTON###
-	###NEW_RECORD_BUTTON###
-	<table cellpadding="0" cellspacing="0" class="typo3-dblist">
-		<thead>
-			<tr class="t3-row-header">
-				<td>&nbsp;</td>
-				<td>###LABEL_ACCREDITATION_NUMBER###</td>
-				<td>###LABEL_TITLE###</td>
-				<td>###LABEL_DATE###</td>
-				<td>&nbsp;</td>
-				<td>###LABEL_ATTENDEES###</td>
-				<td>###LABEL_NUMBER_OF_ATTENDEES_ON_QUEUE###</td>
-				<td>###LABEL_MINIMUM_NUMBER_OF_ATTENDEES###</td>
-				<td>###LABEL_MAXIMUM_NUMBER_OF_ATTENDEES###</td>
-				<td>###LABEL_HAS_ENOUGH_ATTENDEES###</td>
-				<td>###LABEL_IS_FULLY_BOOKED###</td>
-				<td>###LABEL_STATUS###</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-			</tr>
-		</thead>
-		<tbody>
-			<!-- ###EVENT_ROW### -->
-			<tr>
-				<td>
-					###ICON###
-				</td>
-				<td>
-					###ACCREDITATION_NUMBER###
-				</td>
-				<td>
-					###TITLE###
-				</td>
-				<td class="datecol">
-					###DATE###
-				</td>
-				<td>
-					###EDIT_BUTTON###
-					###DELETE_BUTTON###
-					###HIDE_UNHIDE_BUTTON###
-				</td>
-				<td class="attendees">
-					###CSV_REGISTRATION_EXPORT_BUTTON###&nbsp;###SHOW_REGISTRATIONS###&nbsp;###NUMBER_OF_ATTENDEES###
-				</td>
-				<td class="queue">
-					###NUMBER_OF_ATTENDEES_ON_QUEUE###
-				</td>
-				<td class="attendees_min">
-					###MINIMUM_NUMBER_OF_ATTENDEES###
-				</td>
-				<td class="attendees_max">
-					###MAXIMUM_NUMBER_OF_ATTENDEES###
-				</td>
-				<td class="enough_attendees">
-					###HAS_ENOUGH_ATTENDEES###
-				</td>
-				<td class="is_full">
-					###IS_FULLY_BOOKED###
-				</td>
-				<td class="status">
-					###STATUS###
-				</td>
-				<td class="email_button">
-					<!-- ###EMAIL_BUTTON### -->
-						<form action="###EMAIL_BUTTON_URL###" method="post"><p><button><p>###LABEL_EMAIL_BUTTON###</p></button><input type="hidden" name="eventUid" value="###UID###" /><input type="hidden" name="action" value="sendEmail" /></p></form>
-					<!-- ###EMAIL_BUTTON### -->
-				</td>
-				<td class="cancel_button">
-					<!-- ###CANCEL_BUTTON### -->
-						<form action="###CANCEL_BUTTON_URL###" method="post"><p><button><p>###LABEL_CANCEL_BUTTON###</p></button><input type="hidden" name="eventUid" value="###UID###" /><input type="hidden" name="action" value="cancelEvent" /></p></form>
-					<!-- ###CANCEL_BUTTON### -->
-				</td>
-				<td class="confirm_button">
-					<!-- ###CONFIRM_BUTTON### -->
-						<form action="###CONFIRM_BUTTON_URL###" method="post"><p><button><p>###LABEL_CONFIRM_BUTTON###</p></button><input type="hidden" name="eventUid" value="###UID###" /><input type="hidden" name="action" value="confirmEvent" /></p></form>
-					<!-- ###CONFIRM_BUTTON### -->
-				</td>
-			</tr>
-			<!-- ###EVENT_ROW### -->
-		</tbody>
-	</table>
+    ###CSV_EVENT_EXPORT_BUTTON###
+    ###NEW_RECORD_BUTTON###
+    <table cellpadding="0" cellspacing="0" class="typo3-dblist">
+        <thead>
+            <tr class="t3-row-header">
+                <td>&nbsp;</td>
+                <td>###LABEL_ACCREDITATION_NUMBER###</td>
+                <td>###LABEL_TITLE###</td>
+                <td>###LABEL_DATE###</td>
+                <td>&nbsp;</td>
+                <td>###LABEL_ATTENDEES###</td>
+                <td>###LABEL_NUMBER_OF_ATTENDEES_ON_QUEUE###</td>
+                <td>###LABEL_MINIMUM_NUMBER_OF_ATTENDEES###</td>
+                <td>###LABEL_MAXIMUM_NUMBER_OF_ATTENDEES###</td>
+                <td>###LABEL_HAS_ENOUGH_ATTENDEES###</td>
+                <td>###LABEL_IS_FULLY_BOOKED###</td>
+                <td>###LABEL_STATUS###</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- ###EVENT_ROW### -->
+            <tr>
+                <td>
+                    ###ICON###
+                </td>
+                <td>
+                    ###ACCREDITATION_NUMBER###
+                </td>
+                <td>
+                    ###TITLE###
+                </td>
+                <td class="datecol">
+                    ###DATE###
+                </td>
+                <td>
+                    ###EDIT_BUTTON###
+                    ###DELETE_BUTTON###
+                    ###HIDE_UNHIDE_BUTTON###
+                </td>
+                <td class="attendees">
+                    ###CSV_REGISTRATION_EXPORT_BUTTON###&nbsp;###SHOW_REGISTRATIONS###&nbsp;###NUMBER_OF_ATTENDEES###
+                </td>
+                <td class="queue">
+                    ###NUMBER_OF_ATTENDEES_ON_QUEUE###
+                </td>
+                <td class="attendees_min">
+                    ###MINIMUM_NUMBER_OF_ATTENDEES###
+                </td>
+                <td class="attendees_max">
+                    ###MAXIMUM_NUMBER_OF_ATTENDEES###
+                </td>
+                <td class="enough_attendees">
+                    ###HAS_ENOUGH_ATTENDEES###
+                </td>
+                <td class="is_full">
+                    ###IS_FULLY_BOOKED###
+                </td>
+                <td class="status">
+                    ###STATUS###
+                </td>
+                <td class="email_button">
+                    <!-- ###EMAIL_BUTTON### -->
+                        <form action="###EMAIL_BUTTON_URL###" method="post"><p><button><p>###LABEL_EMAIL_BUTTON###</p></button><input type="hidden" name="eventUid" value="###UID###" /><input type="hidden" name="action" value="sendEmail" /></p></form>
+                    <!-- ###EMAIL_BUTTON### -->
+                </td>
+                <td class="cancel_button">
+                    <!-- ###CANCEL_BUTTON### -->
+                        <form action="###CANCEL_BUTTON_URL###" method="post"><p><button><p>###LABEL_CANCEL_BUTTON###</p></button><input type="hidden" name="eventUid" value="###UID###" /><input type="hidden" name="action" value="cancelEvent" /></p></form>
+                    <!-- ###CANCEL_BUTTON### -->
+                </td>
+                <td class="confirm_button">
+                    <!-- ###CONFIRM_BUTTON### -->
+                        <form action="###CONFIRM_BUTTON_URL###" method="post"><p><button><p>###LABEL_CONFIRM_BUTTON###</p></button><input type="hidden" name="eventUid" value="###UID###" /><input type="hidden" name="action" value="confirmEvent" /></p></form>
+                    <!-- ###CONFIRM_BUTTON### -->
+                </td>
+            </tr>
+            <!-- ###EVENT_ROW### -->
+        </tbody>
+    </table>
 
-	<p id="print-button"><button onclick="window.print(); return false;"><p>###LABEL_PRINT_BUTTON###</p></button></p>
+    <p id="print-button"><button onclick="window.print(); return false;"><p>###LABEL_PRINT_BUTTON###</p></button></p>
 <!-- ###SEMINARS_EVENT_LIST### -->
 </body>
 </html>

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="dk" datatype="plaintext" original="messages" date="2016-07-18T21:20:49Z" product-name="seminars">
-		<header/>
-		<body>
-			<trans-unit id="message_403" xml:space="preserve" approved="yes">
-				<source>Error 403. Sorry, you don't have access to this data.</source>
-				<target>Fejl kode 403: Beklager, du har ikke adgang til disse data.</target>
-			</trans-unit>
-			<trans-unit id="message_404" xml:space="preserve" approved="yes">
-				<source>Error 404. The requested page does not exist. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-				<target>Fejlkode 404: Den forespurgte side eksisterer ikke. Hvis du kom til den side via et link fra dette domæne må du meget gerne underrette webmasteren. Tak!</target>
-			</trans-unit>
-			<trans-unit id="message_404_registrations" xml:space="preserve" approved="yes">
-				<source>Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-				<target>Fejlkode 404. Der er ikke noget arrangement med dette nummer. Hvis du kom til den side via et link fra dette domæne må du meget gerne underrette webmasteren. Tak!</target>
-			</trans-unit>
-		</body>
-	</file>
+    <file source-language="en" target-language="dk" datatype="plaintext" original="messages" date="2016-07-18T21:20:49Z" product-name="seminars">
+        <header/>
+        <body>
+            <trans-unit id="message_403" xml:space="preserve" approved="yes">
+                <source>Error 403. Sorry, you don't have access to this data.</source>
+                <target>Fejl kode 403: Beklager, du har ikke adgang til disse data.</target>
+            </trans-unit>
+            <trans-unit id="message_404" xml:space="preserve" approved="yes">
+                <source>Error 404. The requested page does not exist. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+                <target>Fejlkode 404: Den forespurgte side eksisterer ikke. Hvis du kom til den side via et link fra dette domæne må du meget gerne underrette webmasteren. Tak!</target>
+            </trans-unit>
+            <trans-unit id="message_404_registrations" xml:space="preserve" approved="yes">
+                <source>Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+                <target>Fejlkode 404. Der er ikke noget arrangement med dette nummer. Hvis du kom til den side via et link fra dette domæne må du meget gerne underrette webmasteren. Tak!</target>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>

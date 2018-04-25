@@ -14,7 +14,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_Tes
     private $fixture;
 
     /**
-     * @var Tx_Oelib_TestingFramework the testing framework	 *
+     * @var Tx_Oelib_TestingFramework the testing framework
      */
     private $testingFramework;
 

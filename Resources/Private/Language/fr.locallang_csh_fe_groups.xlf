@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2016-07-18T21:20:39Z" product-name="seminars">
-		<header/>
-		<body>
-			<trans-unit id="tx_seminars_default_categories.description" xml:space="preserve" approved="yes">
-				<source>If a user with default categories creates events in the FE, all those events automatically will have these categories, and the category selector will not be visible.</source>
-				<target>Si un utilisateur avec les catégories par défaut crée des événements, tous ces événements seront assignés à ces catégories, et le sélecteur de catégories ne sera pas affiché.</target>
-			</trans-unit>
-			<trans-unit id="tx_seminars_default_categories.details" xml:space="preserve" approved="yes">
-				<source>If a user with default categories creates events in the FE, all those events automatically will have these categories, and the category selector will not be visible.</source>
-				<target>Si un utilisateur avec les catégories par défaut crée des événements depuis le front end, tous ces événements seront assignés à ces catégories, et le sélecteur de catégories ne sera pas affiché.</target>
-			</trans-unit>
-		</body>
-	</file>
+    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2016-07-18T21:20:39Z" product-name="seminars">
+        <header/>
+        <body>
+            <trans-unit id="tx_seminars_default_categories.description" xml:space="preserve" approved="yes">
+                <source>If a user with default categories creates events in the FE, all those events automatically will have these categories, and the category selector will not be visible.</source>
+                <target>Si un utilisateur avec les catégories par défaut crée des événements, tous ces événements seront assignés à ces catégories, et le sélecteur de catégories ne sera pas affiché.</target>
+            </trans-unit>
+            <trans-unit id="tx_seminars_default_categories.details" xml:space="preserve" approved="yes">
+                <source>If a user with default categories creates events in the FE, all those events automatically will have these categories, and the category selector will not be visible.</source>
+                <target>Si un utilisateur avec les catégories par défaut crée des événements depuis le front end, tous ces événements seront assignés à ces catégories, et le sélecteur de catégories ne sera pas affiché.</target>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>
