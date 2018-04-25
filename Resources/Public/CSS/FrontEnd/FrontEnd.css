@@ -1,252 +1,256 @@
 .tx-seminars-pi1-clear {
-	clear: both;
-	width: 1px;
-	height: 1px;
+    clear: both;
+    width: 1px;
+    height: 1px;
 }
 
 /***** FE EDITOR *****/
 .tx-seminars-pi1-event-editor fieldset {
-	width: 100%;
-	max-height: 100%;
-	border: 1px solid #ccc;
-	padding: 10px;
-	color: #666;
-	margin-bottom: 20px;
+    width: 100%;
+    max-height: 100%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #666;
+    margin-bottom: 20px;
 }
 
 .tx-seminars-pi1-event-editor dt.required,
 .tx-seminars-pi1-event-editor dd.required {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 /*WRAPPING COLUMNS*/
 .tx-seminars-pi1-event-editor .columnlight {
-	display: table;
-	position: relative;
-	background: #f0f0f0;
-	height:100%;
-	width: 100%;
+    display: table;
+    position: relative;
+    background: #f0f0f0;
+    height: 100%;
+    width: 100%;
 }
 
 .tx-seminars-pi1-event-editor .columnlight .columnleft,
 .tx-seminars-pi1-event-editor .columnlight .columnright {
-	display: table;
-	width: 47%;
-	float: left;
-	padding: 10px 0 0;
+    display: table;
+    width: 47%;
+    float: left;
+    padding: 10px 0 0;
 }
 
 .tx-seminars-pi1-event-editor .columnlight .columnleft {
-	padding-right: 2%;
+    padding-right: 2%;
 }
 
 .tx-seminars-pi1-event-editor .columndark {
-	display: table;
-	position: relative;
-	background: #e4e4e4;
-	height:100%;
-	width: 100%;
+    display: table;
+    position: relative;
+    background: #e4e4e4;
+    height: 100%;
+    width: 100%;
 }
 
 .tx-seminars-pi1-event-editor .columndark .columnleft,
 .tx-seminars-pi1-event-editor .columndark .columnright {
-	display: table;
-	width: 47%;
-	float: left;
-	padding: 10px 0 0;
+    display: table;
+    width: 47%;
+    float: left;
+    padding: 10px 0 0;
 }
 
 .tx-seminars-pi1-event-editor .shortInput dt,
 .tx-seminars-pi1-event-editor .shortInput dd,
 .tx-seminars-pi1-event-editor .shortInput input {
-	width: 50%;
+    width: 50%;
 }
 
 .tx-seminars-pi1-event-editor .columndark .columnleft {
-	padding-right: 2%;
+    padding-right: 2%;
 }
 
 .tx-seminars-pi1-event-editor .single_column dt {
-	width: 19.2%;
+    width: 19.2%;
 }
 
 .tx-seminars-pi1-event-editor .single_column {
-	padding-top: 10px;
+    padding-top: 10px;
 }
 
 .tx-seminars-pi1-event-editor .attendees dt,
 .tx-seminars-pi1-event-editor .price dt {
-	width: 45%;
+    width: 45%;
 }
+
 .tx-seminars-pi1-event-editor .attendees dd,
 .tx-seminars-pi1-event-editor .price dd {
-	width: 55%;
+    width: 55%;
 }
+
 .tx-seminars-pi1-event-editor .attendees dd input,
 .tx-seminars-pi1-event-editor .price dd input {
-	width: 17%;
+    width: 17%;
 }
+
 .tx-seminars-pi1-event-editor .attached-files ul {
-	list-style: none;
+    list-style: none;
 }
+
 .tx-seminars-pi1-event-editor .attached-files ul li {
-	padding: 5px 0;
-	position: relative;
+    padding: 5px 0;
+    position: relative;
 }
+
 .tx-seminars-pi1-event-editor .deleted {
-	text-decoration: line-through;
-	color: gray;
+    text-decoration: line-through;
+    color: gray;
 }
 
 .tx-seminars-pi1-event-editor .date dd input {
-	width: 35%;
+    width: 35%;
 }
 
 .tx-seminars-pi1-event-editor .attached-files dd {
-	width: 79%;
+    width: 79%;
 }
 
 #uploaded-files {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 .tx-seminars-pi1-event-editor .attached-files dt {
-	width: 20%;
-	position: relative;
+    width: 20%;
+    position: relative;
 }
 
 .tx-seminars-pi1-event-editor .attached-files dd input {
-	width: 200px;
+    width: 200px;
 }
 
 .tx-seminars-pi1-event-editor .uploaded-files dd {
-	width: 79%;
+    width: 79%;
 }
 
 /*DESCRIPTION FIELDS*/
 .tx-seminars-pi1-event-editor .column-dark {
-	display: table;
-	background: #e4e4e4;
-	width: 100%;
-	clear: both;
-	padding: 10px 0 0;
+    display: table;
+    background: #e4e4e4;
+    width: 100%;
+    clear: both;
+    padding: 10px 0 0;
 }
 
 .tx-seminars-pi1-event-editor .column-light {
-	display: table;
-	background: #f0f0f0;
-	width: 100%;
-	clear: both;
-	padding: 10px 0 0;
+    display: table;
+    background: #f0f0f0;
+    width: 100%;
+    clear: both;
+    padding: 10px 0 0;
 }
 
 .tx-seminars-pi1-event-editor .teaser textarea,
 .tx-seminars-pi1-event-editor .additional_information textarea
-.tx-seminars-pi1-event-editor .notes textarea
-{
-	height: 80px;
+.tx-seminars-pi1-event-editor .notes textarea {
+    height: 80px;
 }
 
 .tx-seminars-pi1-event-editor .description textarea {
-	height: 160px;
+    height: 160px;
 }
 
 .tx-seminars-pi1-event-editor textarea {
-	width: 160%;
+    width: 160%;
 }
 
 /*DIVIDER*/
 .tx-seminars-pi1-event-editor .divider {
-	display: block;
-	background: #fff;
-	height: 10px;
-	clear: both;
+    display: block;
+    background: #fff;
+    height: 10px;
+    clear: both;
 }
 
 /*DD DL DT*/
 .tx-seminars-pi1-event-editor dl {
-	display: table;
-	margin: 0 0 10px 10px;
-	padding: 0;
-	clear: both;
-	width: 100%;
+    display: table;
+    margin: 0 0 10px 10px;
+    padding: 0;
+    clear: both;
+    width: 100%;
 }
 
 .tx-seminars-pi1-event-editor dt {
-	width: 40%;
-	margin: 0;
-	padding: 0;
-	float: left;
-	height: 100%;
+    width: 40%;
+    margin: 0;
+    padding: 0;
+    float: left;
+    height: 100%;
 }
 
 .tx-seminars-pi1-event-editor dd {
-	width: 60%;
-	float: left;
-	margin: 0;
-	padding: 0;
-	font-size: 0.8em;
-	height: 100%;
+    width: 60%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    font-size: 0.8em;
+    height: 100%;
 }
 
 .tx-seminars-pi1-event-editor dd input {
-	width: 90%;
+    width: 90%;
 }
 
 .tx-seminars-pi1-event-editor dd.checkboxes input.tx-seminars-pi1-event-editor-checkbox,
 .tx-seminars-pi1-event-editor span.checkbox input {
-	width: 10%;
+    width: 10%;
 }
 
 .tx-seminars-pi1-event-editor table.checkboxTable {
-	width: 100%;
+    width: 100%;
 }
 
 .tx-seminars-pi1-event-editor table.checkboxTable td {
-	vertical-align: top;
+    vertical-align: top;
 }
 
 .tx-seminars-pi1-event-editor .checkboxFields .columnleft dt,
 #speakerCheckboxFields .columnright dt {
-	width: 25%;
+    width: 25%;
 }
 
 .tx-seminars-pi1-event-editor .checkboxFields .columnleft dd,
 #speakerCheckboxFields .columnright dd {
-	width: 74%;
+    width: 74%;
 }
 
 #tx_seminars_pi1_seminars_target_groups,
 #tx_seminars_pi1_seminars_checkboxes {
-	width: 50%;
+    width: 50%;
 }
 
 /*SUBMIT BUTTOM*/
 .tx-seminars-pi1-event-editor #submit {
-	margin: 0 0 10px;
+    margin: 0 0 10px;
 }
 
 .tx-seminars-pi1-event-editor #tx_seminars_pi1_seminars_btnsubmit,
 .tx-seminars-pi1-event-editor #tx_seminars_pi1_seminars_attached_submit_and_stay,
 .tx-seminars-pi1-event-editor #tx_seminars_pi1_seminars_submit_and_stay,
 .tx-seminars-pi1-event-editor dt input {
-	margin-right: 50px;
-	width:  200px;
-	cursor: pointer;
-	float: right;
+    margin-right: 50px;
+    width: 200px;
+    cursor: pointer;
+    float: right;
 }
 
 .tx-seminars-pi1-event-editor .checkboxes {
-	margin: 0 0 10px;
-	line-height: 20px;
-	position: relative;
+    margin: 0 0 10px;
+    line-height: 20px;
+    position: relative;
 }
 
 input#tx_seminars_pi1_seminars_editTargetGroup_minimum_age,
 input#tx_seminars_pi1_seminars_editTargetGroup_maximum_age,
 input#tx_seminars_pi1_seminars_newTargetGroup_minimum_age,
 input#tx_seminars_pi1_seminars_newTargetGroup_maximum_age {
-	width: 3em;
+    width: 3em;
 }
 
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newSpeakerButton,
@@ -256,90 +260,89 @@ input#tx_seminars_pi1_seminars_newTargetGroup_maximum_age {
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newTargetGroupButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newPlaceButton,
 .tx-seminars-pi1-event-editor input#tx_seminars_pi1_seminars_newCheckboxButton {
-	width: auto;
+    width: auto;
 }
 
 .tx-seminars-pi1-event-editor .tx-seminars-pi1-event-editor-edit-button {
-	width: auto;
+    width: auto;
 }
 
 #tx_ameosformidable_modalboxbox label {
-	font-size: .85em;
-	margin: .6em 0 0;
-	display: block;
+    font-size: .85em;
+    margin: .6em 0 0;
+    display: block;
 }
 
 #tx_ameosformidable_modalboxbox .formidable-checkboxes label {
-	display: inline;
+    display: inline;
 }
 
 #tx_ameosformidable_modalboxbox .formidable-checkboxes label#tx_seminars_pi1_seminars_newSpeaker_skills_label,
 #tx_ameosformidable_modalboxbox .formidable-checkboxes label#tx_seminars_pi1_seminars_editSpeaker_skills_label {
-	display: block;
+    display: block;
 }
 
 #tx_ameosformidable_modalboxbox .modalbox-column1 {
-	float: left;
-	width: 400px;
+    float: left;
+    width: 400px;
 }
 
 #tx_ameosformidable_modalboxbox .modalbox-column2 {
-	float: left;
-	width: 300px;
+    float: left;
+    width: 300px;
 }
 
 #tx_ameosformidable_modalboxbox .modalbox-buttons {
-	clear: both;
-	margin-top: 1em;
-	float: left;
+    clear: both;
+    margin-top: 1em;
+    float: left;
 }
 
 .tx-seminars-pi1-error {
-	color: #f00;
-	background-color: inherit;
-	font-weight: bold;
+    color: #f00;
+    background-color: inherit;
+    font-weight: bold;
 }
 
 .tx-seminars-pi1-hidden {
-	display: none;
-	visibility: hidden;
+    display: none;
+    visibility: hidden;
 }
 
 .tx-seminars-pi1-listrow table {
-	background-color: #fff;
-	color: #000;
+    background-color: #fff;
+    color: #000;
 }
 
 .tx-seminars-pi1-listrow th,
 .tx-seminars-pi1-listrow td {
-	margin: 0;
-	border-spacing: 0;
-	vertical-align: top;
+    margin: 0;
+    border-spacing: 0;
+    vertical-align: top;
 }
 
 .tx-seminars-pi1-listrow td {
-	padding: .2em .5em;
+    padding: .2em .5em;
 }
 
 .tx-seminars-pi1-listrow th {
-	font-weight: bold;
-	text-align: center;
+    font-weight: bold;
+    text-align: center;
 }
 
 .tx-seminars-pi1-listrow th a {
-	display: block;
-	padding: .2em .5em;
+    display: block;
+    padding: .2em .5em;
 }
 
 .tx-seminars-pi1-listrow img.category_image {
-	margin: 0 2px;
-	border: none;
+    margin: 0 2px;
+    border: none;
 }
 
 .tx-seminars-pi1-listrow table ul {
-	list-style: none;
+    list-style: none;
 }
-
 
 th.tx-seminars-pi1-expiry,
 th.tx-seminars-pi1-seats,
@@ -349,15 +352,15 @@ th.tx-seminars-pi1-attached-files,
 th.tx-seminars-pi1-status,
 th.tx-seminars-pi1-edit,
 th.tx-seminars-pi1-list-registrations {
-	padding: .2em .5em;
+    padding: .2em .5em;
 }
 
 th.tx-seminars-pi1-title {
-	text-align: left;
+    text-align: left;
 }
 
 .tx-seminars-pi1-title a {
-	display: block;
+    display: block;
 }
 
 .tx-seminars-pi1-date,
@@ -365,234 +368,234 @@ td.tx-seminars-pi1-expiry,
 .tx-seminars-pi1-vacancies,
 .tx-seminars-pi1-price,
 .tx-seminars-pi1-uid {
-	text-align: right;
+    text-align: right;
 }
 
 .tx-seminars-pi1-date {
-	white-space: nowrap;
+    white-space: nowrap;
 }
 
 .tx-seminars-pi1-seats {
-	text-align: center;
+    text-align: center;
 }
 
 .tx-seminars-pi1-listrow .listrow-odd,
 .tx-seminars-pi1-listrow th {
-	background-color: #f0f0f0;
-	color: inherit;
+    background-color: #f0f0f0;
+    color: inherit;
 }
 
 .tx-seminars-pi1-listrow tr {
-	background-color: #fff;
-	color: inherit;
+    background-color: #fff;
+    color: inherit;
 }
 
 .tx-seminars-pi1-listrow tr:hover {
-	background-color: #e0e0e0;
-	color: inherit;
+    background-color: #e0e0e0;
+    color: inherit;
 }
 
 .tx-seminars-pi1-vacancies-available .tx-seminars-pi1-square {
-	background-color: #00a500;
-	color: inherit;
+    background-color: #00a500;
+    color: inherit;
 }
 
 .tx-seminars-pi1-vacancies-2 .tx-seminars-pi1-square,
 .tx-seminars-pi1-vacancies-1 .tx-seminars-pi1-square {
-	background-color: #ffff3c;
-	color: inherit;
+    background-color: #ffff3c;
+    color: inherit;
 }
 
 .tx-seminars-pi1-vacancies-0 .tx-seminars-pi1-square,
 .tx-seminars-pi1-canceled .tx-seminars-pi1-square {
-	background-color: #c30000;
-	color: inherit;
+    background-color: #c30000;
+    color: inherit;
 }
 
 .tx-seminars-pi1-registration-deadline-over .tx-seminars-pi1-square {
-	background-color: transparent;
-	color: inherit;
+    background-color: transparent;
+    color: inherit;
 }
 
 .tx-seminars-pi1-canceled td {
-	text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 .tx-seminars-pi1-canceled td.tx-seminars-pi1-vacancies {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 div.tx-seminars-pi1-selectorwidget {
-	border: 1px solid #ccc;
+    border: 1px solid #ccc;
 }
 
 .tx-seminars-pi1-selectorwidget p {
-	clear: left;
+    clear: left;
 }
 
 .tx-seminars-pi1-selectorwidget .tx-seminars-pi1-optionbox {
-	float: left;
-	padding-bottom: .5em;
+    float: left;
+    padding-bottom: .5em;
 }
 
 .tx-seminars-pi1-selectorwidget .tx-seminars-pi1-optionbox select {
-	width: 100%;
+    width: 100%;
 }
 
 #tx-seminars-pi1-optionbox-1, #tx-seminars-pi1-optionbox-2,
 #tx-seminars-pi1-optionbox-3, #tx-seminars-pi1-optionbox-4,
 #tx-seminars-pi1-optionbox-5 {
-	width: 20%;
+    width: 20%;
 }
 
 #tx_seminars_pi1_price_from, #tx_seminars_pi1_price_to {
-	width: 6em;
+    width: 6em;
 }
 
 table.tx-seminars-pi1-timeslots {
-	background-color: #fff;
-	color: #000;
-	border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
 }
 
 table.tx-seminars-pi1-timeslots th {
-	background-color: #f0f0f0;
-	color: inherit;
-	text-align: left;
-	padding: 5px;
+    background-color: #f0f0f0;
+    color: inherit;
+    text-align: left;
+    padding: 5px;
 }
 
 table.tx-seminars-pi1-timeslots td {
-	padding: 5px;
+    padding: 5px;
 }
 
 #tx-seminars-pi1-registration-form fieldset {
-	margin: 0 0 1em;
+    margin: 0 0 1em;
 }
 
 #tx-seminars-pi1-registration-form dl {
-	margin: 0;
+    margin: 0;
 }
 
 #tx-seminars-pi1-registration-form dt {
-	width: 11em;
-	margin: 0 .5em .5em 0;
-	clear: both;
-	float: left;
+    width: 11em;
+    margin: 0 .5em .5em 0;
+    clear: both;
+    float: left;
 }
 
 #tx-seminars-pi1-registration-form dd {
-	margin: 0 0 .5em 12em;
+    margin: 0 0 .5em 12em;
 }
 
 #tx-seminars-pi1-registration-form dd select,
 #tx-seminars-pi1-registration-form .tx-seminars-pi1-registration-zip {
-	margin: 0 .5em 0 0;
+    margin: 0 .5em 0 0;
 }
 
 #tx-seminars-pi1-registration-payment {
-	position: relative;
-	height: 8em;
+    position: relative;
+    height: 8em;
 }
 
 #tx-seminars-pi1-registration-form .tx-seminars-pi1-registration-method-of-payment dd {
-	margin-right: 25em;
+    margin-right: 25em;
 }
 
 #tx-seminars-pi1-registration-form .tx-seminars-pi1-registration-method-of-payment dd input {
-	border: none;
+    border: none;
 }
 
 #tx-seminars-pi1-registration-banking-data {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 24.5em;
-	margin: 0;
-	padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24.5em;
+    margin: 0;
+    padding: 0;
 }
 
 #tx-seminars-pi1-registration-form input,
 #tx-seminars-pi1-registration-form textarea,
 #tx-seminars-pi1-registration-form
-	.tx-seminars-pi1-registration-country select {
-	width: 20em;
+.tx-seminars-pi1-registration-country select {
+    width: 20em;
 }
 
 #tx-seminars-pi1-registration-form textarea {
-	height: 6em;
+    height: 6em;
 }
 
 #tx-seminars-pi1-registration-form #tx-seminars-pi1-registration-banking-data input {
-	width: 14em;
+    width: 14em;
 }
 
 #tx-seminars-pi1-registration-form
-	.tx-seminars-pi1-checkbox input {
-	width: auto;
+.tx-seminars-pi1-checkbox input {
+    width: auto;
 }
 
 #tx-seminars-pi1-registration-form .tx-seminars-pi1-registration-gender select {
-	width: 5em;
+    width: 5em;
 }
 
 #tx-seminars-pi1-registration-form .tx-seminars-pi1-registration-name input {
-	width: 14em;
+    width: 14em;
 }
 
 #tx-seminars-pi1-registration-form .tx-seminars-pi1-registration-zip input {
-	width: 4em;
+    width: 4em;
 }
 
 #tx-seminars-pi1-registration-form .tx-seminars-pi1-registration-city input {
-	width: 14em;
+    width: 14em;
 }
 
 #tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 #tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names fieldset {
-	margin: 0 0 .5em;
-	padding: 0;
+    margin: 0 0 .5em;
+    padding: 0;
 }
 
 #tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names p {
-	margin: 0;
-	padding: .5em;
+    margin: 0;
+    padding: .5em;
 }
 
 #tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names label {
-	width: 8em;
-	display: inline-table;
+    width: 8em;
+    display: inline-table;
 }
 
 #tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
-	input.tx_seminars_pi1_registration_editor_first_name,
+input.tx_seminars_pi1_registration_editor_first_name,
 #tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
-	input.tx_seminars_pi1_registration_editor_position {
-		width: 12em;
-		margin-right: 2em;
+input.tx_seminars_pi1_registration_editor_position {
+    width: 12em;
+    margin-right: 2em;
 }
 
 #tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
-	input.tx_seminars_pi1_registration_editor_last_name,
+input.tx_seminars_pi1_registration_editor_last_name,
 #tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
-	input.tx_seminars_pi1_registration_editor_attendee_email {
-	width: 16em;
+input.tx_seminars_pi1_registration_editor_attendee_email {
+    width: 16em;
 }
 
 #tx-seminars-pi1-registration-form .tx-seminars-pi1-submit {
-	margin: .5em 0;
-	float: right;
+    margin: .5em 0;
+    float: right;
 }
 
 #tx-seminars-pi1-registration-form .tx-seminars-pi1-submit input {
-	width: auto;
+    width: auto;
 }
 
 #tx-seminars-pi1-unregistration-form .tx-seminars-pi1-submit {
-	margin: .5em 0;
+    margin: .5em 0;
 }

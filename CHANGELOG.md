@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add an SVG extension icon (#34)
 
 ### Changed
+- Always use spaces for indentation (#43)
 - Require oelib >= 1.4.0 (#42)
 
 ### Deprecated
