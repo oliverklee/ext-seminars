@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the incorrect TYPO3 Core license headers (#41)
 
 ### Fixed
+- Get the BE module tests to run on CLI (#47)
 - Make the unit tests not depend on the current time of day (#46)
 - Update the RTE configuration (#45)
 - Provide time zone information in the iCal files (#44)

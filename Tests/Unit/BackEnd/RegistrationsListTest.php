@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\Seminars\Tests\Unit\BackeEnd\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 
 /**
@@ -9,6 +10,8 @@ use TYPO3\CMS\Backend\Template\DocumentTemplate;
  */
 class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_TestCase
 {
+    use BackEndTestsTrait;
+
     /**
      * @var Tx_Seminars_BackEnd_RegistrationsList
      */
@@ -28,23 +31,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
      */
     private $backEndModule;
 
-    /**
-     * @var string a backup of the current BE user's language
-     */
-    private $backEndLanguageBackup;
-
     protected function setUp()
     {
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        $this->unifyTestingEnvironment();
 
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
-
-        $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
-        $this->backEndLanguageBackup = $GLOBALS['LANG']->lang;
-        $GLOBALS['LANG']->lang = 'default';
-
-        // Loads the locallang file for properly working localization in the tests.
-        $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
 
         $this->backEndModule = new Tx_Seminars_BackEnd_Module();
         $this->backEndModule->id = $this->dummySysFolderPid;
@@ -56,7 +47,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
         $document->backPath = $GLOBALS['BACK_PATH'];
-        $document->docType = 'xhtml_strict';
 
         $this->fixture = new Tx_Seminars_BackEnd_RegistrationsList(
             $this->backEndModule
@@ -65,10 +55,9 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
 
     protected function tearDown()
     {
-        $GLOBALS['LANG']->lang = $this->backEndLanguageBackup;
-
         $this->testingFramework->cleanUp();
         Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
+        $this->restoreOriginalEnvironment();
     }
 
     ////////////////////////////////////////////////

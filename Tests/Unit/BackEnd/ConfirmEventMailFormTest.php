@@ -1,6 +1,6 @@
 <?php
 
-use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use OliverKlee\Seminars\Tests\Unit\BackeEnd\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -11,6 +11,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase
 {
+    use BackEndTestsTrait;
+
     /**
      * @var Tx_Seminars_BackEnd_ConfirmEventMailForm
      */
@@ -19,27 +21,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
      * @var Tx_Oelib_TestingFramework
      */
     private $testingFramework;
-
-    /**
-     * backed-up extension configuration of the TYPO3 configuration variables
-     *
-     * @var array
-     */
-    private $extConfBackup = [];
-
-    /**
-     * backed-up T3_VAR configuration
-     *
-     * @var array
-     */
-    private $t3VarBackup = [];
-
-    /**
-     * backup of the BE user's language
-     *
-     * @var string
-     */
-    private $languageBackup;
 
     /**
      * UID of a dummy system folder
@@ -69,20 +50,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
 
     protected function setUp()
     {
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        $this->unifyTestingEnvironment();
 
         $configuration = new Tx_Oelib_Configuration();
         Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
-
-        $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
-        $this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
-
-        $this->languageBackup = $GLOBALS['LANG']->lang;
-        $GLOBALS['LANG']->lang = 'default';
-
-        // Loads the locallang file for properly working localization in the tests.
-        $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
 
         Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
         /** @var Tx_Oelib_MailerFactory $mailerFactory */
@@ -125,42 +96,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
 
     protected function tearDown()
     {
-        $GLOBALS['LANG']->lang = $this->languageBackup;
-
         $this->testingFramework->cleanUp();
-
-        $this->flushAllFlashMessages();
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
-        $GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
-    }
-
-    /**
-     * Returns the rendered flash messages.
-     *
-     * @return string
-     */
-    protected function getRenderedFlashMessages()
-    {
-        /** @var FlashMessageService $flashMessageService */
-        $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
-        $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
-        $renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
-
-        return $renderedFlashMessages;
-    }
-
-    /**
-     * Flushes all flash messages from the queue.
-     *
-     * @return void
-     */
-    protected function flushAllFlashMessages()
-    {
-        /** @var FlashMessageService $flashMessageService */
-        $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
-        $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
-        $defaultFlashMessageQueue->getAllMessagesAndFlush();
+        $this->restoreOriginalEnvironment();
     }
 
     ///////////////////////////////////////////////
@@ -247,6 +184,9 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
      */
     public function setEventStatusCreatesFlashMessage()
     {
+        $this->mockBackEndUser->expects(self::atLeastOnce())->method('setAndSaveSessionData')
+            ->with(self::anything(), self::anything());
+
         $this->fixture->setPostData(
             [
                 'action' => 'confirmEvent',
@@ -256,11 +196,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
             ]
         );
         $this->fixture->render();
-
-        self::assertContains(
-            $GLOBALS['LANG']->getLL('message_eventConfirmed'),
-            $this->getRenderedFlashMessages()
-        );
     }
 
     /////////////////////////////////
