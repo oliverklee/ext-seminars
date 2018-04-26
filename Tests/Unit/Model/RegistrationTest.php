@@ -20,6 +20,8 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
 
     protected function setUp()
     {
+        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $this->fixture = new Tx_Seminars_Model_Registration();
     }

@@ -32,6 +32,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
 
     protected function setUp()
     {
+        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+
         Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
 
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');

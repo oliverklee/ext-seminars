@@ -30,6 +30,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
 
     protected function setUp()
     {
+        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $this->subject = new Tx_Seminars_EmailSalutation();
         $configuration = new Tx_Oelib_Configuration();

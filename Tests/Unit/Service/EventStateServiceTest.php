@@ -38,6 +38,10 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
 
     protected function setUp()
     {
+        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        $this->past = $GLOBALS['SIM_EXEC_TIME'] - 1;
+        $this->future = $GLOBALS['SIM_EXEC_TIME'] + 1;
+
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         \Tx_Oelib_MapperRegistry::denyDatabaseAccess();
@@ -47,9 +51,6 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $this->eventMapper);
 
         $this->subject = new EventStatusService();
-
-        $this->past = $GLOBALS['SIM_EXEC_TIME'] - 1;
-        $this->future = $GLOBALS['SIM_EXEC_TIME'] + 1;
     }
 
     protected function tearDown()

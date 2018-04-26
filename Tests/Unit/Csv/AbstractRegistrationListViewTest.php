@@ -49,6 +49,8 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
 
     protected function setUp()
     {
+        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+
         $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
         $GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_general.xlf');
 

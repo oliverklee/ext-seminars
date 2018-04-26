@@ -29,12 +29,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
 
     protected function setUp()
     {
+        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        $this->future = $GLOBALS['SIM_EXEC_TIME'] + 50;
+        $this->past = $GLOBALS['SIM_EXEC_TIME'] - 50;
+
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
         $this->fixture = new Tx_Seminars_BagBuilder_Event();
         $this->fixture->setTestMode();
-        $this->future = $GLOBALS['EXEC_TIME'] + 50;
-        $this->past = $GLOBALS['EXEC_TIME'] - 50;
     }
 
     protected function tearDown()

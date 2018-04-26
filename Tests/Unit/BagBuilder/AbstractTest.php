@@ -17,11 +17,13 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
      */
     private $testingFramework;
 
-    /** PID of a dummy system folder */
+    /** @var int PID of a dummy system folder */
     private $dummySysFolderPid = 0;
 
     protected function setUp()
     {
+        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
         $this->fixture = new Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing();

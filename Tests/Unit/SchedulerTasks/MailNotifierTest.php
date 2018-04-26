@@ -83,6 +83,8 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
 
     protected function setUp()
     {
+        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+
         $this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
         if (!ExtensionManagementUtility::isLoaded('scheduler')) {
             self::markTestSkipped('This tests needs the scheduler extension.');

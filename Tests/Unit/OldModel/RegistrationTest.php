@@ -35,6 +35,8 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
 
     protected function setUp()
     {
+        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+
         Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration::purgeCachedSeminars();
 
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');

@@ -23,6 +23,8 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
 
     protected function setUp()
     {
+        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $systemFolderUid = $this->testingFramework->createSystemFolder();
         $this->testingFramework->createTemplate(
