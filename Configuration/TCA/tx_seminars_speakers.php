@@ -98,6 +98,7 @@ $tca = [
                 'cols' => '30',
                 'rows' => '5',
             ],
+            'defaultExtras' => 'richtext[]',
         ],
         'skills' => [
             'exclude' => 1,
@@ -210,7 +211,7 @@ $tca = [
         ],
     ],
     'types' => [
-        '0' => ['showitem' => 'hidden, title, gender;;;;2-2-2, organization;;;;3-3-3, homepage, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css],skills, notes, address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period, owner'],
+        '0' => ['showitem' => 'hidden, title, gender;;;;2-2-2, organization;;;;3-3-3, homepage, description, skills, notes, address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period, owner'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],

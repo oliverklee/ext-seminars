@@ -101,6 +101,7 @@ return [
                 'cols' => '30',
                 'rows' => '5',
             ],
+            'defaultExtras' => 'richtext[]',
         ],
         'notes' => [
             'exclude' => 1,
@@ -125,7 +126,7 @@ return [
         ],
     ],
     'types' => [
-        '0' => ['showitem' => 'title;;;;2-2-2, address;;;;3-3-3, zip, city, country, homepage;;;;3-3-3, directions;;;richtext[paste|bold|italic|formatblock|class|left|center|right|orderedlist|unorderedlist|outdent|indent|link|image]:rte_transform[mode=ts_css], notes, owner'],
+        '0' => ['showitem' => 'title;;;;2-2-2, address;;;;3-3-3, zip, city, country, homepage;;;;3-3-3, directions, notes, owner'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],

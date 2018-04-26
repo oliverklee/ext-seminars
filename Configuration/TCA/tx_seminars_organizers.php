@@ -36,6 +36,7 @@ return [
                 'cols' => '30',
                 'rows' => '5',
             ],
+            'defaultExtras' => 'richtext[]',
         ],
         'homepage' => [
             'exclude' => 1,
@@ -96,7 +97,7 @@ return [
         ],
     ],
     'types' => [
-        '0' => ['showitem' => 'title;;;;2-2-2, description;;;richtext[paste|bold|italic|orderedlist|unorderedlist|link]:rte_transform[mode=ts_css], homepage;;;;3-3-3, email, email_footer, attendances_pid'],
+        '0' => ['showitem' => 'title;;;;2-2-2, description, homepage;;;;3-3-3, email, email_footer, attendances_pid'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
