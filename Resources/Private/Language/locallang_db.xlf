@@ -159,6 +159,9 @@
             <trans-unit id="tx_seminars_seminars.end_date" xml:space="preserve">
                 <source>End time and date:</source>
             </trans-unit>
+            <trans-unit id="tx_seminars_seminars.time_zone" xml:space="preserve">
+                <source>Time zone:</source>
+            </trans-unit>
             <trans-unit id="tx_seminars_seminars.timeslots" xml:space="preserve">
                 <source>Time slots</source>
             </trans-unit>
