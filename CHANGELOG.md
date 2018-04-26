@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the incorrect TYPO3 Core license headers (#41)
 
 ### Fixed
+- Update the RTE configuration (#45)
 - Provide time zone information in the iCal files (#44)
 - Provide cli_dispatch.phpsh for 8.7 on Travis (#40)
 - Adapt the calls to cObj->IMAGE to TYPO3 8.7 (#28)
