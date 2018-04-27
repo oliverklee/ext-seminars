@@ -48,6 +48,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
     protected function setUp()
     {
+        // Make sure that the test results do not depend on the machine's PHP time zone.
+        date_default_timezone_set('UTC');
+
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
         $this->now = $GLOBALS['SIM_EXEC_TIME'];
         $this->beginDate = ($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
@@ -2133,10 +2136,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setUnregistrationDeadline(1893488400);
         $this->fixture->setShowTimeOfUnregistrationDeadline(1);
 
-        self::assertSame(
-            '01.01.2030 10:00',
-            $this->fixture->getUnregistrationDeadline()
-        );
+        self::assertSame('01.01.2030 09:00', $this->fixture->getUnregistrationDeadline());
     }
 
     /**
@@ -8041,10 +8041,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setUnregistrationDeadline(1893488400);
         $this->fixture->setShowTimeOfUnregistrationDeadline(1);
 
-        self::assertSame(
-            '01.01.2030 10:00',
-            $this->fixture->getEventData('deadline_unregistration')
-        );
+        self::assertSame('01.01.2030 09:00', $this->fixture->getEventData('deadline_unregistration'));
     }
 
     /**
