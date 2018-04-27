@@ -1,10 +1,12 @@
 <?php
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * This is the base class for lists in the back end.
@@ -75,6 +77,24 @@ abstract class Tx_Seminars_BackEnd_AbstractList
     }
 
     /**
+     * @return LanguageService
+     */
+    protected function getLanguageService()
+    {
+        return $GLOBALS['LANG'];
+    }
+
+    /**
+     * Returns the logged-in back-end user.
+     *
+     * @return BackendUserAuthentication
+     */
+    protected function getBackEndUser()
+    {
+        return $GLOBALS['BE_USER'];
+    }
+
+    /**
      * Generates an edit record icon which is linked to the edit view of
      * a record.
      *
@@ -90,7 +110,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
         }
 
         $params = '&edit[' . $this->tableName . '][' . $uid . ']=edit';
-        $langEdit = htmlspecialchars($GLOBALS['LANG']->getLL('edit'));
+        $langEdit = htmlspecialchars($this->getLanguageService()->getLL('edit'));
         $icon = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Edit.gif' .
             '" alt="' . $langEdit . '" class="icon" />';
 
@@ -112,11 +132,11 @@ abstract class Tx_Seminars_BackEnd_AbstractList
      */
     public function getDeleteIcon($uid, $pageUid)
     {
-        global $LANG, $BE_USER;
-
         $result = '';
 
-        if ($BE_USER->check('tables_modify', $this->tableName)
+        $languageService = $this->getLanguageService();
+
+        if ($this->getBackEndUser()->check('tables_modify', $this->tableName)
             && $this->doesUserHaveAccess($pageUid)
         ) {
             $params = '&cmd[' . $this->tableName . '][' . $uid . '][delete]=1';
@@ -124,15 +144,15 @@ abstract class Tx_Seminars_BackEnd_AbstractList
             $referenceWarning = BackendUtility::referenceCount(
                 $this->tableName,
                 $uid,
-                ' ' . $LANG->getLL('referencesWarning')
+                ' ' . $languageService->getLL('referencesWarning')
             );
 
             $confirmation = htmlspecialchars(
                 'if (confirm(' . GeneralUtility::quoteJSvalue(
-                    $LANG->getLL('deleteWarning') . $referenceWarning
+                    $languageService->getLL('deleteWarning') . $referenceWarning
             ) . ')) {return true;} else {return false;}'
             );
-            $langDelete = $LANG->getLL('delete', 1);
+            $langDelete = $languageService->getLL('delete', 1);
             $result = '<a class="btn btn-default" href="' .
                 htmlspecialchars($this->page->doc->issueCommand($params)) .
                 '" onclick="' . $confirmation . '">' .
@@ -153,14 +173,14 @@ abstract class Tx_Seminars_BackEnd_AbstractList
      */
     public function getNewIcon($pid)
     {
-        global $LANG, $BE_USER;
-
         $result = '';
+        $languageService = $this->getLanguageService();
+
         $newRecordPid = $this->getNewRecordPid();
         $pid = ($newRecordPid > 0) ? $newRecordPid : $pid;
         $pageData = $this->page->getPageData();
 
-        if ($BE_USER->check('tables_modify', $this->tableName)
+        if ($this->getBackEndUser()->check('tables_modify', $this->tableName)
             && $this->doesUserHaveAccess($pid)
             && ($pageData['doktype'] == self::SYSFOLDER_TYPE)
         ) {
@@ -169,7 +189,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
             if ($pageData['uid'] == $pid) {
                 $params .= $pageData['uid'];
                 $storageLabel = sprintf(
-                    $LANG->getLL('label_create_record_in_current_folder'),
+                    $languageService->getLL('label_create_record_in_current_folder'),
                     $pageData['title'],
                     $pageData['uid']
                 );
@@ -177,7 +197,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
                 $storagePageData = BackendUtility::readPageAccess($pid, '');
                 $params .= $pid;
                 $storageLabel = sprintf(
-                    $LANG->getLL('label_create_record_in_foreign_folder'),
+                    $languageService->getLL('label_create_record_in_foreign_folder'),
                     $storagePageData['title'],
                     $pid
                 );
@@ -185,7 +205,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
             $params .= ']=new';
             $editOnClick = BackendUtility::editOnClick($params, '', '');
 
-            $langNew = $LANG->getLL('newRecordGeneral');
+            $langNew = $languageService->getLL('newRecordGeneral');
 
             $result = TAB . TAB .
                 '<div id="typo3-newRecordLink">' . LF .
@@ -249,7 +269,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
     protected function getCsvIcon()
     {
         $pageData = $this->page->getPageData();
-        $langCsv = $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
+        $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
         $csvUrl = BackendUtility::getModuleUrl(
             self::MODULE_NAME,
             ['id' => $pageData['uid'], 'csv' => '1', 'tx_seminars_pi2[table]' => $this->tableName]
@@ -296,11 +316,11 @@ abstract class Tx_Seminars_BackEnd_AbstractList
             if ($hidden) {
                 $params = '&data[' . $this->tableName . '][' . $uid . '][hidden]=0';
                 $icon = 'Unhide.gif';
-                $langHide = $GLOBALS['LANG']->getLL('unHide');
+                $langHide = $this->getLanguageService()->getLL('unHide');
             } else {
                 $params = '&data[' . $this->tableName . '][' . $uid . '][hidden]=1';
                 $icon = 'Hide.gif';
-                $langHide = $GLOBALS['LANG']->getLL('hide');
+                $langHide = $this->getLanguageService()->getLL('hide');
             }
 
             $result = '<a class="btn btn-default" href="' .

@@ -10,6 +10,13 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 abstract class Tx_Seminars_FrontEnd_AbstractView extends Tx_Oelib_TemplateHelper implements Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
+     * the relative path to the uploaded files
+     *
+     * @var string
+     */
+    const UPLOAD_PATH = 'uploads/tx_seminars/';
+
+    /**
      * @var string same as plugin name
      */
     public $prefixId = 'tx_seminars_pi1';
@@ -27,11 +34,9 @@ abstract class Tx_Seminars_FrontEnd_AbstractView extends Tx_Oelib_TemplateHelper
     public $extKey = 'seminars';
 
     /**
-     * the relative path to the uploaded files
-     *
      * @var string
      */
-    const UPLOAD_PATH = 'uploads/tx_seminars/';
+    protected $whatToDisplay = '';
 
     /**
      * The constructor. Initializes the TypoScript configuration, initializes

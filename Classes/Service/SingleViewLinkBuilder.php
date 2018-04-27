@@ -165,8 +165,6 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
         $frontEnd->initTemplate();
         $frontEnd->config = [];
 
-        $frontEnd->tmpl->getFileName_backPath = PATH_site;
-
         $frontEnd->newCObj();
 
         $GLOBALS['TSFE'] = $frontEnd;

@@ -56,11 +56,10 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
      */
     public function main()
     {
-        global $LANG, $BACK_PATH, $BE_USER;
+        $languageService = $this->getLanguageService();
+        $backEndUser = $this->getBackEndUser();
 
         $this->doc = GeneralUtility::makeInstance(DocumentTemplate::class);
-        $this->doc->backPath = $BACK_PATH;
-        $this->doc->docType = 'xhtml_strict';
 
         $this->doc->getPageRenderer()->addCssFile(
             '../typo3conf/ext/seminars/Resources/Public/CSS/BackEnd/BackEnd.css',
@@ -78,15 +77,15 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
         );
 
         // draw the header
-        $this->content = $this->doc->startPage($LANG->getLL('title'));
-        $this->content .= $this->doc->header($LANG->getLL('title'));
+        $this->content = $this->doc->startPage($languageService->getLL('title'));
+        $this->content .= $this->doc->header($languageService->getLL('title'));
         $this->content .= $this->doc->spacer(5);
 
         if ($this->id <= 0) {
             /** @var FlashMessage $message */
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
-                $GLOBALS['LANG']->getLL('message_noPageTypeSelected'),
+                $this->getLanguageService()->getLL('message_noPageTypeSelected'),
                 '',
                 FlashMessage::INFO
             );
@@ -97,7 +96,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
         }
 
         $pageAccess = BackendUtility::readPageAccess($this->id, $this->perms_clause);
-        if (!is_array($pageAccess) && !$BE_USER->user['admin']) {
+        if (!is_array($pageAccess) && !$backEndUser->user['admin']) {
             echo $this->content . $this->getRenderedFlashMessages() . $this->doc->endPage();
             return;
         }
@@ -106,7 +105,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
             /** @var FlashMessage $message */
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
-                $GLOBALS['LANG']->getLL('message_noStaticTemplateFound'),
+                $this->getLanguageService()->getLL('message_noStaticTemplateFound'),
                 '',
                 FlashMessage::WARNING
             );
@@ -123,20 +122,20 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
 
         // only show the tabs if the back-end user has access to the
         // corresponding tables
-        if ($BE_USER->check('tables_select', 'tx_seminars_seminars')) {
-            $this->availableSubModules[1] = $LANG->getLL('subModuleTitle_events');
+        if ($backEndUser->check('tables_select', 'tx_seminars_seminars')) {
+            $this->availableSubModules[1] = $languageService->getLL('subModuleTitle_events');
         }
 
-        if ($BE_USER->check('tables_select', 'tx_seminars_attendances')) {
-            $this->availableSubModules[2] = $LANG->getLL('subModuleTitle_registrations');
+        if ($backEndUser->check('tables_select', 'tx_seminars_attendances')) {
+            $this->availableSubModules[2] = $languageService->getLL('subModuleTitle_registrations');
         }
 
-        if ($BE_USER->check('tables_select', 'tx_seminars_speakers')) {
-            $this->availableSubModules[3] = $LANG->getLL('subModuleTitle_speakers');
+        if ($backEndUser->check('tables_select', 'tx_seminars_speakers')) {
+            $this->availableSubModules[3] = $languageService->getLL('subModuleTitle_speakers');
         }
 
-        if ($BE_USER->check('tables_select', 'tx_seminars_organizers')) {
-            $this->availableSubModules[4] = $LANG->getLL('subModuleTitle_organizers');
+        if ($backEndUser->check('tables_select', 'tx_seminars_organizers')) {
+            $this->availableSubModules[4] = $languageService->getLL('subModuleTitle_organizers');
         }
 
         // Read the selected sub module (from the tab menu) and make it available within this class.
@@ -343,11 +342,14 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
 $GLOBALS['BE_USER']->modAccess($GLOBALS['MCONF'], true);
 
 if (GeneralUtility::_GET('csv') !== '1') {
-    $GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_common.xlf');
-    $GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_show_rechis.xlf');
-    $GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_mod_web_list.xlf');
-    $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
-    $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/Csv/locallang.xlf');
+    /** @var \TYPO3\CMS\Lang\LanguageService $languageService */
+    $languageService = $GLOBALS['LANG'];
+
+    $languageService->includeLLFile('EXT:lang/locallang_common.xlf');
+    $languageService->includeLLFile('EXT:lang/locallang_show_rechis.xlf');
+    $languageService->includeLLFile('EXT:lang/locallang_mod_web_list.xlf');
+    $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
+    $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/Csv/locallang.xlf');
 
     /** @var Tx_Seminars_Module2 $SOBE */
     $SOBE = GeneralUtility::makeInstance(Tx_Seminars_Module2::class);

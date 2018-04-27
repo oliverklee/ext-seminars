@@ -927,9 +927,9 @@ plugin.tx_seminars_pi1 {
                         runat = ajax
                         cache = false
                         userobj.php (
-                            $this->oRenderer->_setDisplayLabels(true);
+                            $this->getRenderer()->_setDisplayLabels(true);
                             $result = $this->aORenderlets['newPlaceModalBox']->majixShowFreshBox();
-                            $this->oRenderer->_setDisplayLabels(false);
+                            $this->getRenderer()->_setDisplayLabels(false);
                             return $result;
                         )
                     }
@@ -1277,9 +1277,9 @@ plugin.tx_seminars_pi1 {
                     onclick {
                         runat = ajax
                         userobj.php (
-                            $this->oRenderer->_setDisplayLabels(true);
+                            $this->getRenderer()->_setDisplayLabels(true);
                             $result = $this->aORenderlets['newSpeakerModalBox']->majixShowFreshBox();
-                            $this->oRenderer->_setDisplayLabels(false);
+                            $this->getRenderer()->_setDisplayLabels(false);
                             return $result;
                         )
                     }
@@ -1864,9 +1864,9 @@ plugin.tx_seminars_pi1 {
                         runat = ajax
                         cache = false
                         userobj.php (
-                            $this->oRenderer->_setDisplayLabels(true);
+                            $this->getRenderer()->_setDisplayLabels(true);
                             $result = $this->aORenderlets['newCheckboxModalBox']->majixShowFreshBox();
-                            $this->oRenderer->_setDisplayLabels(false);
+                            $this->getRenderer()->_setDisplayLabels(false);
                             return $result;
                         )
                     }
@@ -2141,9 +2141,9 @@ plugin.tx_seminars_pi1 {
                     onclick {
                         runat = ajax
                         userobj.php (
-                            $this->oRenderer->_setDisplayLabels(true);
+                            $this->getRenderer()->_setDisplayLabels(true);
                             $result = $this->aORenderlets['newTargetGroupModalBox']->majixShowFreshBox();
-                            $this->oRenderer->_setDisplayLabels(false);
+                            $this->getRenderer()->_setDisplayLabels(false);
                             return $result;
                         )
                     }

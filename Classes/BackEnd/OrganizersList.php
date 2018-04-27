@@ -53,7 +53,7 @@ class Tx_Seminars_BackEnd_OrganizersList extends Tx_Seminars_BackEnd_AbstractLis
 
         $this->template->setMarker(
             'label_full_name',
-            $GLOBALS['LANG']->getLL('organizerlist.title')
+            $this->getLanguageService()->getLL('organizerlist.title')
         );
 
         /** @var Tx_Seminars_BagBuilder_Organizer $builder */
@@ -93,10 +93,7 @@ class Tx_Seminars_BackEnd_OrganizersList extends Tx_Seminars_BackEnd_AbstractLis
             $tableRows .= $this->template->getSubpart('ORGANIZER_ROW');
         }
         $this->template->setSubpart('ORGANIZER_ROW', $tableRows);
-        $this->template->setMarker(
-            'label_print_button',
-            $GLOBALS['LANG']->getLL('print')
-        );
+        $this->template->setMarker('label_print_button', $this->getLanguageService()->getLL('print'));
 
         $content .= $this->template->getSubpart('SEMINARS_ORGANIZER_LIST');
 

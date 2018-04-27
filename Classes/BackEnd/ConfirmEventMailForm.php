@@ -31,7 +31,7 @@ class Tx_Seminars_BackEnd_ConfirmEventMailForm extends Tx_Seminars_BackEnd_Abstr
      */
     protected function getSubmitButtonLabel()
     {
-        return $GLOBALS['LANG']->getLL('confirmMailForm_sendButton');
+        return $this->getLanguageService()->getLL('confirmMailForm_sendButton');
     }
 
     /**
@@ -68,7 +68,7 @@ class Tx_Seminars_BackEnd_ConfirmEventMailForm extends Tx_Seminars_BackEnd_Abstr
         /** @var FlashMessage $message */
         $message = GeneralUtility::makeInstance(
             FlashMessage::class,
-            $GLOBALS['LANG']->getLL('message_eventConfirmed'),
+            $this->getLanguageService()->getLL('message_eventConfirmed'),
             '',
             FlashMessage::OK,
             true

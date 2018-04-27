@@ -74,11 +74,10 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @param int $beginDate
      * @param int $endDate
-     * @param string $dash
      *
      * @return string the abbreviated date range
      */
-    protected function getAsAbbreviatedDateRange($beginDate, $endDate, $dash = '&#8211;')
+    protected function getAsAbbreviatedDateRange($beginDate, $endDate)
     {
         // Are the years different? Then include the complete begin date.
         if (!$this->isSameYear($beginDate, $endDate)) {

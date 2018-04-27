@@ -1,6 +1,7 @@
 <?php
 
 use TYPO3\CMS\Backend\Module\BaseScriptClass;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
 /**
  * This class is the base class for a back-end module.
@@ -22,6 +23,16 @@ class Tx_Seminars_BackEnd_Module extends BaseScriptClass
     public function __destruct()
     {
         unset($this->doc, $this->extObj, $this->pageData);
+    }
+
+    /**
+     * Returns the logged-in back-end user.
+     *
+     * @return BackendUserAuthentication
+     */
+    protected function getBackEndUser()
+    {
+        return $GLOBALS['BE_USER'];
     }
 
     /**

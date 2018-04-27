@@ -201,6 +201,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     protected $showUid = 0;
 
     /**
+     * @var string
+     */
+    protected $whatToDisplay = '';
+
+    /**
      * Frees as much memory that has been used by this object as possible.
      */
     public function __destruct()
@@ -2762,7 +2767,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                 $hideIt = !$this->hasConfValueInteger('registrationsVipListPID');
                 break;
             default:
-                break;
+                $hideIt = false;
         }
 
         if ($hideIt) {

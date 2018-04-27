@@ -254,12 +254,12 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
      * Before you can call this function, you should make sure that the link makes sense (ie. the seminar still has vacancies, the
      * user has not registered for this seminar etc.).
      *
-     * @param Tx_Oelib_TemplateHelper $plugin an object for a live page
+     * @param \Tx_Oelib_TemplateHelper $plugin
      * @param Tx_Seminars_OldModel_Event $event a seminar for which we'll check if it is possible to register
      *
      * @return string HTML code with the link
      */
-    public function getLinkToRegistrationOrLoginPage(Tx_Oelib_TemplateHelper $plugin, Tx_Seminars_OldModel_Event $event)
+    public function getLinkToRegistrationOrLoginPage(\Tx_Oelib_TemplateHelper $plugin, Tx_Seminars_OldModel_Event $event)
     {
         return $this->getLinkToStandardRegistrationOrLoginPage($plugin, $event, $this->getRegistrationLabel($plugin, $event));
     }
@@ -267,12 +267,12 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
     /**
      * Creates the label for the registration link.
      *
-     * @param Tx_Oelib_TemplateHelper $plugin an object for a live page
+     * @param \Tx_Oelib_TemplateHelper $plugin
      * @param Tx_Seminars_OldModel_Event $event a seminar to which the registration should relate
      *
      * @return string label for the registration link, will not be empty
      */
-    private function getRegistrationLabel(tx_oelib_templatehelper $plugin, Tx_Seminars_OldModel_Event $event)
+    private function getRegistrationLabel(Tx_Oelib_TemplateHelper $plugin, Tx_Seminars_OldModel_Event $event)
     {
         if ($event->hasVacancies()) {
             if ($event->hasDate()) {
@@ -300,14 +300,14 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
      * This function only creates the link to the standard registration or login
      * page; it should not be used if the seminar has a separate details page.
      *
-     * @param Tx_Oelib_TemplateHelper $plugin an object for a live page
+     * @param \Tx_Seminars_FrontEnd_DefaultController $plugin
      * @param Tx_Seminars_OldModel_Event $event a seminar for which we'll check if it is possible to register
      * @param string $label label for the link, will not be empty
      *
      * @return string HTML code with the link
      */
     private function getLinkToStandardRegistrationOrLoginPage(
-        Tx_Oelib_TemplateHelper $plugin,
+        \Tx_Seminars_FrontEnd_DefaultController $plugin,
         Tx_Seminars_OldModel_Event $event,
         $label
     ) {
@@ -329,12 +329,12 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
     /**
      * Creates an HTML link to the unregistration page (if a user is logged in).
      *
-     * @param AbstractPlugin $plugin an object for a live page
+     * @param \Tx_Oelib_TemplateHelper $plugin
      * @param Tx_Seminars_OldModel_Registration $registration a registration from which we'll get the UID for our GET parameters
      *
      * @return string HTML code with the link
      */
-    public function getLinkToUnregistrationPage(AbstractPlugin $plugin, Tx_Seminars_OldModel_Registration $registration)
+    public function getLinkToUnregistrationPage(\Tx_Oelib_TemplateHelper $plugin, Tx_Seminars_OldModel_Registration $registration)
     {
         return $plugin->cObj->getTypoLink(
             $plugin->translate('label_onlineUnregistration'),
@@ -516,12 +516,11 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
     /**
      * Sends the e-mails for a new registration.
      *
-     * @param Tx_Seminars_OldModel_Registration $registration
      * @param AbstractPlugin $plugin
      *
      * @return void
      */
-    public function sendEmailsForNewRegistration(Tx_Seminars_OldModel_Registration $registration, AbstractPlugin $plugin)
+    public function sendEmailsForNewRegistration(AbstractPlugin $plugin)
     {
         if ($this->registration->isOnRegistrationQueue()) {
             $this->notifyAttendee($this->registration, $plugin, 'confirmationOnRegistrationForQueue');

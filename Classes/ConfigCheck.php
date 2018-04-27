@@ -249,7 +249,9 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
 
         $this->checkPages();
         $this->checkRecursive();
-        $this->checkListView(array_keys($this->objectToCheck->orderByList));
+        /** @var \Tx_Seminars_FrontEnd_DefaultController $objectToCheck */
+        $objectToCheck = $this->objectToCheck;
+        $this->checkListView(array_keys($objectToCheck->orderByList));
 
         // This is checked for the list view as well because an invalid value
         // might cause the list view to be displayed instead of the single view.

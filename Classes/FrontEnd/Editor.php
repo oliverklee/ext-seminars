@@ -174,7 +174,11 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
      */
     public function getFormValue($key)
     {
-        $dataSource = $this->isTestMode ? $this->fakedFormValues : $this->getFormCreator()->oDataHandler->__aFormData;
+        if ($this->isTestMode) {
+            $dataSource = $this->fakedFormValues;
+        } else {
+            $dataSource = $this->getFormCreator()->getDataHandler()->getFormData();
+        }
 
         return isset($dataSource[$key]) ? $dataSource[$key] : '';
     }

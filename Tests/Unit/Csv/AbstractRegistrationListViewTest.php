@@ -161,6 +161,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderForNoPageAndNoEventThrowsException()
     {
+        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
 
         self::assertSame(
@@ -176,6 +177,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderForPageAndEventThrowsException()
     {
+        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
         $subject->setEventUid($this->eventUid);
         $subject->setPageUid($this->pageUid);
