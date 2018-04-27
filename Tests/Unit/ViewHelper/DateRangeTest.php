@@ -28,9 +28,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends Tx_Phpunit_TestCas
     private $translator;
 
     /**
-     * @var int some random date (2001-01-01 00:00:00)
+     * @var int some random date (2001-01-01 00:00:00 UTC)
      */
-    const BEGIN_DATE = 978303600;
+    const BEGIN_DATE = 978307200;
 
     /**
      * @var string
@@ -43,6 +43,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends Tx_Phpunit_TestCas
 
     protected function setUp()
     {
+        // Make sure that the test results do not depend on the machine's PHP time zone.
+        date_default_timezone_set('UTC');
+
         $this->testingFramework    = new Tx_Oelib_TestingFramework('tx_seminars');
 
         $this->configuration = new Tx_Oelib_Configuration();

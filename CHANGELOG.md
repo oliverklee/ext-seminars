@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the incorrect TYPO3 Core license headers (#41)
 
 ### Fixed
+- Make the tests independent of the local time zone (#51)
 - Make the tests independent of oelib dev fixture class (#50)
 - Use real GIF files in the unit tests (#49)
 - Get the CSV export tests to run on CLI (#48)
