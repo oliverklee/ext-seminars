@@ -1,6 +1,6 @@
 <?php
 
-use OliverKlee\Seminars\Tests\Unit\BackeEnd\Support\Traits\BackEndTestsTrait;
+use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -52,10 +52,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends Tx_Phpunit
     {
         $this->unifyTestingEnvironment();
 
-        $configuration = new Tx_Oelib_Configuration();
-        Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
-
-        Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
         /** @var Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
         $mailerFactory->enableTestMode();

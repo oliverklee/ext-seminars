@@ -1,6 +1,6 @@
 <?php
 
-use OliverKlee\Seminars\Tests\Unit\BackeEnd\Support\Traits\BackEndTestsTrait;
+use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 
 /**

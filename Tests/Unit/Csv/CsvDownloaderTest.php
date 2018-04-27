@@ -1,5 +1,7 @@
 <?php
 
+use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
+
 /**
  * Test case.
  *
@@ -8,6 +10,8 @@
  */
 class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 {
+    use BackEndTestsTrait;
+
     /**
      * @var Tx_Seminars_Csv_CsvDownloader
      */
@@ -32,19 +36,10 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
      */
     protected $eventUid = 0;
 
-    /**
-     * @var Tx_Oelib_Configuration
-     */
-    protected $configuration = null;
-
     protected function setUp()
     {
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        $this->unifyTestingEnvironment();
 
-        $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
-        $GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_general.xlf');
-
-        Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
         $this->pid = $this->testingFramework->createSystemFolder();
@@ -56,11 +51,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
             ]
         );
 
-        $configurationRegistry = Tx_Oelib_ConfigurationRegistry::getInstance();
-        $configurationRegistry->set('plugin', new Tx_Oelib_Configuration());
-        $this->configuration = new Tx_Oelib_Configuration();
         $this->configuration->setData(['charsetForCsv' => 'utf-8']);
-        $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
         $this->fixture = new Tx_Seminars_Csv_CsvDownloader();
         $this->fixture->init([]);
@@ -69,8 +60,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     protected function tearDown()
     {
         $this->testingFramework->cleanUp();
-
-        Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        $this->restoreOriginalEnvironment();
     }
 
     /*
@@ -821,11 +812,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
             $this->testingFramework->getAutoIncrement('tx_seminars_attendances')
         );
 
-        self::assertContains(
-            '404',
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()
-                ->getLastAddedHeader()
-        );
+        self::assertContains('404', $this->headerProxy->getLastAddedHeader());
     }
 
     /**
@@ -1309,11 +1296,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
             $this->testingFramework->getAutoIncrement('tx_seminars_seminars')
         );
 
-        self::assertContains(
-            '404',
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()
-                ->getLastAddedHeader()
-        );
+        self::assertContains('404', $this->headerProxy->getLastAddedHeader());
     }
 
     /**
@@ -1324,11 +1307,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         $this->fixture->setTypo3Mode('FE');
         $this->fixture->createAndOutputListOfRegistrations();
 
-        self::assertContains(
-            '403',
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()
-                ->getLastAddedHeader()
-        );
+        self::assertContains('403', $this->headerProxy->getLastAddedHeader());
     }
 
     /**
@@ -1338,12 +1317,9 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
 
-        self::assertTrue(
-            in_array(
-                'Content-type: text/csv; header=present; charset=utf-8',
-                Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()
-                    ->getAllAddedHeaders()
-            )
+        self::assertContains(
+            'Content-type: text/csv; header=present; charset=utf-8',
+            $this->headerProxy->getAllAddedHeaders()
         );
     }
 
@@ -1355,12 +1331,9 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
         $this->fixture->piVars['pid'] = $this->pid;
         $this->fixture->createAndOutputListOfRegistrations();
 
-        self::assertTrue(
-            in_array(
-                'Content-type: text/csv; header=present; charset=utf-8',
-                Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()
-                    ->getAllAddedHeaders()
-            )
+        self::assertContains(
+            'Content-type: text/csv; header=present; charset=utf-8',
+            $this->headerProxy->getAllAddedHeaders()
         );
     }
 
