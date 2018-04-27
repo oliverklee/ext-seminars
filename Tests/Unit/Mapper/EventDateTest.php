@@ -54,15 +54,15 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
     {
         $topic = $this->fixture->getNewGhost();
 
-        self::assertInstanceOf(
-            \Tx_Seminars_Model_Event::class,
-            $this->fixture->getLoadedTestingModel(
-                [
-                    'topic' => $topic->getUid(),
-                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
-                ]
-            )->getTopic()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            [
+                'topic' => $topic->getUid(),
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+            ]
         );
+
+        self::assertInstanceOf(\Tx_Seminars_Model_Event::class, $testingModel->getTopic());
     }
 
     //////////////////////////////////////
@@ -76,15 +76,15 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(
-                [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                    'topic' => $topicUid,
-                ]
-            )->getCategories()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            ]
         );
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getCategories());
     }
 
     /**
@@ -153,17 +153,16 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function getEventTypeForEventDateWithoutEventTypeReturnsNull()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
-
-        self::assertNull(
-            $this->fixture->getLoadedTestingModel(
-                [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                    'topic' => $topic,
-                ]
-            )->getEventType()
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topic,
+            ]
         );
+
+        self::assertNull($testingModel->getEventType());
     }
 
     /**
@@ -171,20 +170,18 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function getEventTypeForEventDateWithEventTypeReturnsEventTypeInstance()
     {
-        $eventType = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_EventType::class)
-            ->getLoadedTestingModel([]);
+        $eventType = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_EventType::class)->getLoadedTestingModel([]);
         $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
             ->getLoadedTestingModel(['event_type' => $eventType->getUid()]);
-
-        self::assertInstanceOf(
-            Tx_Seminars_Model_EventType::class,
-            $this->fixture->getLoadedTestingModel(
-                [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                    'topic' => $topic->getUid(),
-                ]
-            )->getEventType()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topic->getUid(),
+            ]
         );
+
+        self::assertInstanceOf(\Tx_Seminars_Model_EventType::class, $testingModel->getEventType());
     }
 
     /////////////////////////////////////////
@@ -197,16 +194,15 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
     public function getPaymentMethodsForEventDateReturnsListInstance()
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(
-                [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                    'topic' => $topicUid,
-                ]
-            )->getPaymentMethods()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            ]
         );
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getPaymentMethods());
     }
 
     /**
@@ -280,16 +276,15 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
     public function getTargetGroupsForEventDateReturnsListInstance()
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(
-                [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                    'topic' => $topicUid,
-                ]
-            )->getTargetGroups()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            ]
         );
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getTargetGroups());
     }
 
     /**
@@ -361,16 +356,15 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
     public function getCheckboxesForEventDateReturnsListInstance()
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(
-                [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                    'topic' => $topicUid,
-                ]
-            )->getCheckboxes()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            ]
         );
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getCheckboxes());
     }
 
     /**
@@ -443,16 +437,15 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(
-                [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                    'topic' => $topicUid,
-                ]
-            )->getRequirements()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            ]
         );
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getRequirements());
     }
 
     /**
@@ -531,16 +524,15 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(
-                [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
-                    'topic' => $topicUid,
-                ]
-            )->getDependencies()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            [
+                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUid,
+            ]
         );
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getDependencies());
     }
 
     /**

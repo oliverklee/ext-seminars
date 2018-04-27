@@ -20,17 +20,6 @@ class Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder exten
     }
 
     /**
-     * Creates a content object.
-     *
-     * @return ContentObjectRenderer
-     *         a created content object (will always be the same instance)
-     */
-    public function createContentObject()
-    {
-        return parent::createContentObject();
-    }
-
-    /**
      * Gets the single view page UID/URL from $event (if any single view page is set for
      * the event) or from the configuration.
      *

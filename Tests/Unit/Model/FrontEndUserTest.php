@@ -13,6 +13,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends Tx_Phpunit_TestCase
      */
     private $fixture;
 
+    /**
+     * @var \Tx_Oelib_TestingFramework
+     */
+    private $testingFramework = null;
+
     protected function setUp()
     {
         $this->fixture = new Tx_Seminars_Model_FrontEndUser();
@@ -931,6 +936,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends Tx_Phpunit_TestCase
      */
     public function hasDefaultOrganizersForEmptyDefaultOrganizersReturnsFalse()
     {
+        /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_Model_FrontEndUser::class,
             ['getDefaultOrganizers']
@@ -953,6 +959,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends Tx_Phpunit_TestCase
         $organizers = new Tx_Oelib_List();
         $organizers->add($organizer);
 
+        /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_Model_FrontEndUser::class,
             ['getDefaultOrganizers']

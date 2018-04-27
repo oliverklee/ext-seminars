@@ -50,16 +50,6 @@ class Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm extends Tx_Se
     }
 
     /**
-     * Gets the content of the message body for the e-mail.
-     *
-     * @return string the content for the message body, will not be empty
-     */
-    protected function getMessageBodyFormContent()
-    {
-        return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
-    }
-
-    /**
      * Sets an error message.
      *
      * @param string $fieldName

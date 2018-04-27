@@ -43,9 +43,12 @@ class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends Tx_Phpunit_TestCase
             'This function may only be called for date records.'
         );
 
-        $this->fixture->getLoadedTestingModel(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
-        )->getTopic();
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
+        );
+
+        $testingModel->getTopic();
     }
 
     //////////////////////////////////////
@@ -57,12 +60,12 @@ class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends Tx_Phpunit_TestCase
      */
     public function getCategoriesForSingleEventReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(
-                ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
-            )->getCategories()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getCategories());
     }
 
     /**
@@ -123,11 +126,12 @@ class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends Tx_Phpunit_TestCase
      */
     public function getEventTypeForSingleEventWithoutEventTypeReturnsNull()
     {
-        self::assertNull(
-            $this->fixture->getLoadedTestingModel(
-                ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
-            )->getEventType()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
+
+        self::assertNull($testingModel->getEventType());
     }
 
     /**
@@ -137,16 +141,15 @@ class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $eventType = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_EventType::class)
             ->getLoadedTestingModel([]);
-
-        self::assertInstanceOf(
-            Tx_Seminars_Model_EventType::class,
-            $this->fixture->getLoadedTestingModel(
-                [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
-                    'event_type' => $eventType->getUid(),
-                ]
-            )->getEventType()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            [
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'event_type' => $eventType->getUid(),
+            ]
         );
+
+        self::assertInstanceOf(\Tx_Seminars_Model_EventType::class, $testingModel->getEventType());
     }
 
     /////////////////////////////////////////
@@ -158,12 +161,12 @@ class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends Tx_Phpunit_TestCase
      */
     public function getPaymentMethodsForSingleEventReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(
-                ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
-            )->getPaymentMethods()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getPaymentMethods());
     }
 
     /**
@@ -228,12 +231,12 @@ class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends Tx_Phpunit_TestCase
      */
     public function getTargetGroupsForSingleEventReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(
-                ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
-            )->getTargetGroups()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getTargetGroups());
     }
 
     /**
@@ -292,12 +295,12 @@ class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends Tx_Phpunit_TestCase
      */
     public function getTargetGroupsForEventTopicReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(
-                ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
-            )->getTargetGroups()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getTargetGroups());
     }
 
     /**
@@ -360,12 +363,12 @@ class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends Tx_Phpunit_TestCase
      */
     public function getCheckboxesForSingleEventReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel(
-                ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
-            )->getCheckboxes()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getCheckboxes());
     }
 
     /**
@@ -426,11 +429,12 @@ class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends Tx_Phpunit_TestCase
      */
     public function getRequirementsForSingleReturnsEmptyList()
     {
-        self::assertTrue(
-            $this->fixture->getLoadedTestingModel(
-                ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
-            )->getRequirements()->isEmpty()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
+
+        self::assertTrue($testingModel->getRequirements()->isEmpty());
     }
 
     ///////////////////////////////////////
@@ -442,10 +446,11 @@ class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends Tx_Phpunit_TestCase
      */
     public function getDependenciesForSingleEventReturnsEmptyList()
     {
-        self::assertTrue(
-            $this->fixture->getLoadedTestingModel(
-                ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
-            )->getDependencies()->isEmpty()
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
+
+        self::assertTrue($testingModel->getDependencies()->isEmpty());
     }
 }

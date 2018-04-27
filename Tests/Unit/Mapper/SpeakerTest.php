@@ -147,9 +147,10 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
      */
     public function getOwnerWithoutOwnerReturnsNull()
     {
-        self::assertNull(
-            $this->fixture->getLoadedTestingModel([])->getOwner()
-        );
+        /** @var \Tx_Seminars_Model_Speaker $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertNull($testingModel->getOwner());
     }
 
     /**
@@ -157,14 +158,13 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
      */
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
-        $frontEndUser = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
-
-        self::assertInstanceOf(
-            Tx_Seminars_Model_FrontEndUser::class,
-            $this->fixture->getLoadedTestingModel(
-                ['owner' => $frontEndUser->getUid()]
-            )->getOwner()
+        $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
+            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Speaker $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(
+            ['owner' => $frontEndUser->getUid()]
         );
+
+        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $testingModel->getOwner());
     }
 }

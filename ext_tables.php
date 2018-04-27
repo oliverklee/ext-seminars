@@ -11,7 +11,7 @@ TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'EXT:seminars/Resources/Private/Language/locallang_csh_fe_groups.xlf'
 );
 
-$extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY);
+$extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('seminars');
 
 if (TYPO3_MODE === 'BE'
     && \TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) <= 8000000) {
@@ -20,16 +20,16 @@ if (TYPO3_MODE === 'BE'
 }
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    $_EXTKEY . '_pi1',
+    'seminars_pi1',
     'FILE:EXT:seminars/Configuration/FlexForms/flexforms_pi1.xml'
 );
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Seminars');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('seminars', 'Configuration/TypoScript', 'Seminars');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
     [
         \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tt_content.list_type_pi1',
-        $_EXTKEY . '_pi1',
+        'seminars_pi1',
         'EXT:seminars/ext_icon.gif',
     ],
     'list_type'
@@ -37,5 +37,5 @@ if (TYPO3_MODE === 'BE'
 
 if (TYPO3_MODE === 'BE') {
     $TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses'][Tx_Seminars_FrontEnd_WizardIcon::class]
-        = TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/FrontEnd/WizardIcon.php';
+        = TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('seminars') . 'Classes/FrontEnd/WizardIcon.php';
 }

@@ -50,7 +50,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
 
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
-        $document->backPath = $GLOBALS['BACK_PATH'];
 
         $this->fixture = new Tx_Seminars_BackEnd_EventsList($this->backEndModule);
 
@@ -809,9 +808,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
 
     public function testNewButtonForEventStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
     {
-        $newEventFolder = Tx_Oelib_BackEndLoginManager::getInstance()->
-            getLoggedInUser(Tx_Seminars_Mapper_BackEndUser::class)
-                ->getEventFolderFromGroup();
+        /** @var \Tx_Seminars_Model_BackEndUser $loggedInUser */
+        $loggedInUser = \Tx_Oelib_BackEndLoginManager::getInstance()
+            ->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
+        $newEventFolder = $loggedInUser->getEventFolderFromGroup();
 
         self::assertContains(
             'edit[tx_seminars_seminars][' . $newEventFolder . ']=new',
@@ -819,11 +819,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
         );
     }
 
-    public function testNewButtonForEventStoredInPageDetermindedByGroupHasForeignFolderLabel()
+    public function testNewButtonForEventStoredInPageDeterminedByGroupHasForeignFolderLabel()
     {
-        $newEventFolder = Tx_Oelib_BackEndLoginManager::getInstance()->
-            getLoggedInUser(Tx_Seminars_Mapper_BackEndUser::class)
-                ->getEventFolderFromGroup();
+        /** @var \Tx_Seminars_Model_BackEndUser $loggedInUser */
+        $loggedInUser = \Tx_Oelib_BackEndLoginManager::getInstance()
+            ->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
+        $newEventFolder = $loggedInUser->getEventFolderFromGroup();
 
         self::assertContains(
             sprintf(
