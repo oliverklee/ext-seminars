@@ -243,7 +243,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends Tx_Phpuni
     public function getSingleViewPageFromConfigurationForPluginSetReturnsPageUidFromPluginConfiguration()
     {
         $plugin = $this->getMock(
-            'Tx_Oelib_TemplateHelper',
+            \Tx_Oelib_TemplateHelper::class,
             ['hasConfValueInteger', 'getConfValueInteger']
         );
         $plugin->expects(self::any())->method('hasConfValueInteger')

@@ -71,7 +71,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
             ]
         );
 
-        $this->subject = $this->getMockForAbstractClass('Tx_Seminars_Csv_AbstractRegistrationListView');
+        $this->subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
         $this->subject->expects(self::any())->method('shouldAlsoContainRegistrationsOnQueue')->will(self::returnValue(true));
 
         $testCase = $this;
@@ -161,7 +161,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderForNoPageAndNoEventThrowsException()
     {
-        $subject = $this->getMockForAbstractClass('Tx_Seminars_Csv_AbstractRegistrationListView');
+        $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
 
         self::assertSame(
             '',
@@ -176,7 +176,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
      */
     public function renderForPageAndEventThrowsException()
     {
-        $subject = $this->getMockForAbstractClass('Tx_Seminars_Csv_AbstractRegistrationListView');
+        $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
         $subject->setEventUid($this->eventUid);
         $subject->setPageUid($this->pageUid);
 

@@ -126,7 +126,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends Tx_Phpunit_TestCase
     {
         $placeUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $this->setExpectedException(
-            'Tx_Oelib_Exception_NotFound',
+            \Tx_Oelib_Exception_NotFound::class,
             'The related place with the UID ' . $placeUid . ' could not be found in the DB.'
         );
 
@@ -143,7 +143,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends Tx_Phpunit_TestCase
             ['deleted' => 1]
         );
         $this->setExpectedException(
-            'Tx_Oelib_Exception_NotFound',
+            \Tx_Oelib_Exception_NotFound::class,
             'The related place with the UID ' . $placeUid . ' could not be found in the DB.'
         );
 

@@ -67,7 +67,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
             if (isset($GLOBALS['LANG'])) {
                 $this->translator = $GLOBALS['LANG'];
             } else {
-                $this->translator = GeneralUtility::makeInstance('language');
+                $this->translator = GeneralUtility::makeInstance(LanguageService::class);
                 if (isset($GLOBALS['BE_USER'])) {
                     $this->translator->init($GLOBALS['BE_USER']->uc['lang']);
                 } else {
