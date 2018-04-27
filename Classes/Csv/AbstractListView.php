@@ -54,14 +54,6 @@ abstract class Tx_Seminars_Csv_AbstractListView
     }
 
     /**
-     * The destructor.
-     */
-    public function __destruct()
-    {
-        unset($this->configuration, $this->translator);
-    }
-
-    /**
      * Loads the language data and returns the corresponding translator instance.
      *
      * @return LanguageService

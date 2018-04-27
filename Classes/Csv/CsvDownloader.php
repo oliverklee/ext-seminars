@@ -74,16 +74,6 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
     }
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->configuration);
-
-        parent::__destruct();
-    }
-
-    /**
      * Creates a CSV export.
      *
      * @return string HTML for the plugin, might be empty

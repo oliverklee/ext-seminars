@@ -40,16 +40,6 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     private $places = null;
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->seminarBag, $this->places, $this->staticInfo);
-
-        parent::__destruct();
-    }
-
-    /**
      * Returns the selector widget if it is not hidden.
      *
      * The selector widget will automatically be hidden, if no search option is

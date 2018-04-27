@@ -34,16 +34,6 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
     protected $accessCheck = null;
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->seminar, $this->accessCheck);
-
-        parent::__destruct();
-    }
-
-    /**
      * Generates and prints out an event list.
      *
      * @return string the HTML source code of the event list

@@ -26,16 +26,6 @@ class Tx_Seminars_BackEnd_OrganizersList extends Tx_Seminars_BackEnd_AbstractLis
     protected $templateFile = 'EXT:seminars/Resources/Private/Templates/BackEnd/OrganizersList.html';
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->organizer);
-
-        parent::__destruct();
-    }
-
-    /**
      * Generates and prints out a organizers list.
      *
      * @return string the HTML source code to display

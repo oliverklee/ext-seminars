@@ -95,16 +95,6 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     }
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->oldEvent, $this->event);
-        $this->hooks = [];
-        $this->hooksHaveBeenRetrieved = false;
-    }
-
-    /**
      * @return LanguageService
      */
     protected function getLanguageService()

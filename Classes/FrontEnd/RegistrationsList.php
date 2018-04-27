@@ -52,16 +52,6 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
     }
 
     /**
-     * The destructor.
-     */
-    public function __destruct()
-    {
-        unset($this->seminar);
-
-        parent::__destruct();
-    }
-
-    /**
      * Creates a seminar in $this->seminar.
      *
      * @param int $seminarUid an event UID, invalid UIDs will be handled later

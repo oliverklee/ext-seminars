@@ -18,14 +18,6 @@ class Tx_Seminars_BackEnd_Module extends BaseScriptClass
     private $pageData = [];
 
     /**
-     * Frees as much memory used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->doc, $this->extObj, $this->pageData);
-    }
-
-    /**
      * Returns the logged-in back-end user.
      *
      * @return BackendUserAuthentication

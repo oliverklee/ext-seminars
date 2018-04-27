@@ -23,14 +23,6 @@ class Tx_Seminars_EmailSalutation
     }
 
     /**
-     * The destructor. Frees as much memory as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->translator);
-    }
-
-    /**
      * Creates the salutation for the given user.
      *
      * The salutation is localized and gender-specific and contains the name of

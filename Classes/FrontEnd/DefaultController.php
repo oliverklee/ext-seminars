@@ -206,20 +206,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     protected $whatToDisplay = '';
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset(
-            $this->configurationService, $this->seminar, $this->registration, $this->feuser,
-            $this->listViewHooks, $this->singleViewHooks, $this->feuser, $this->linkBuilder
-        );
-        $this->listViewHooksHaveBeenRetrieved = false;
-        $this->singleViewHooksHaveBeenRetrieved = false;
-        parent::__destruct();
-    }
-
-    /**
      * Displays the seminar manager HTML.
      *
      * @param string $unused (unused)

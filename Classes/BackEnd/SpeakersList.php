@@ -26,16 +26,6 @@ class Tx_Seminars_BackEnd_SpeakersList extends Tx_Seminars_BackEnd_AbstractList
     protected $templateFile = 'EXT:seminars/Resources/Private/Templates/BackEnd/SpeakersList.html';
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->speaker);
-
-        parent::__destruct();
-    }
-
-    /**
      * Generates and prints out a speakers list.
      *
      * @return string the HTML source code to display

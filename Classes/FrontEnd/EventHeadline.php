@@ -16,16 +16,6 @@ class Tx_Seminars_FrontEnd_EventHeadline extends Tx_Seminars_FrontEnd_AbstractVi
     protected $mapper = null;
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->mapper);
-
-        parent::__destruct();
-    }
-
-    /**
      * Injects an Event Mapper for this View.
      *
      * @param Tx_Seminars_Mapper_Event $mapper

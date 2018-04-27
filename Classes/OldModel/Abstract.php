@@ -75,15 +75,6 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
     }
 
     /**
-     * The destructor.
-     */
-    public function __destruct()
-    {
-        unset($this->charsetConversion);
-        parent::__destruct();
-    }
-
-    /**
      * Retrieves this record's data from the DB (if it has not been retrieved
      * yet) and gets the record data from the DB result.
      *
