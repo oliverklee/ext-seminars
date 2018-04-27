@@ -57,14 +57,6 @@ abstract class Tx_Seminars_FrontEnd_AbstractView extends Tx_Oelib_TemplateHelper
     }
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        parent::__destruct();
-    }
-
-    /**
      * Eliminates the renderlet path info from the given form data.
      *
      * @param mixed[] $formData submitted renderlet data

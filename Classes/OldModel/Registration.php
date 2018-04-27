@@ -99,15 +99,6 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
     }
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->seminar);
-        parent::__destruct();
-    }
-
-    /**
      * Purges our cached seminars array.
      *
      * This function is intended for testing purposes only.

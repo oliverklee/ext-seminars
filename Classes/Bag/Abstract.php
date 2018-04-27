@@ -136,20 +136,6 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
     }
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        $databaseConnection = Tx_Oelib_Db::getDatabaseConnection();
-        if (($this->dbResult !== false) && ($databaseConnection !== null)) {
-            $databaseConnection->sql_free_result($this->dbResult);
-            $this->dbResult = false;
-        }
-
-        $this->currentItem = null;
-    }
-
-    /**
      * For the main DB table and the additional tables, writes the corresponding
      * concatenated output from Tx_Oelib_Db::enableFields into
      * $this->enabledFieldsQuery.

@@ -69,14 +69,6 @@ abstract class Tx_Seminars_BackEnd_AbstractList
     }
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->page, $this->template);
-    }
-
-    /**
      * @return LanguageService
      */
     protected function getLanguageService()

@@ -29,15 +29,6 @@ class Tx_Seminars_FrontEnd_RequirementsList extends Tx_Seminars_FrontEnd_Abstrac
     private $linkBuilder = null;
 
     /**
-     * The destructor.
-     */
-    public function __destruct()
-    {
-        unset($this->linkBuilder, $this->event);
-        parent::__destruct();
-    }
-
-    /**
      * Sets the event to which this view relates.
      *
      * @param Tx_Seminars_OldModel_Event $event the event to build the requirements list for

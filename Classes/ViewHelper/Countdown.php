@@ -21,14 +21,6 @@ class Tx_Seminars_ViewHelper_Countdown
     }
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->translator);
-    }
-
-    /**
      * Returns a localized string representing an amount of seconds in words.
      * For example:
      * 150000 seconds -> "1 day"

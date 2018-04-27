@@ -94,17 +94,6 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
     }
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->registration, $this->linkBuilder);
-        $this->hooks = [];
-
-        parent::__destruct();
-    }
-
-    /**
      * Returns the instance of this class.
      *
      * @return Tx_Seminars_Service_RegistrationManager the current Singleton instance

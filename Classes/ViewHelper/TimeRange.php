@@ -27,14 +27,6 @@ class Tx_Seminars_ViewHelper_TimeRange
     }
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->configuration, $this->translator);
-    }
-
-    /**
      * Gets the time.
      * Returns a localized string "will be announced" if there's no time set (i.e. both begin time and end time are 00:00).
      * Returns only the begin time if begin time and end time are the same.

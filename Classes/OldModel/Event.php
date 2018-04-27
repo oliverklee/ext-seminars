@@ -91,15 +91,6 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->topic);
-        parent::__destruct();
-    }
-
-    /**
      * Checks certain fields to contain plausible values. Example: The registration
      * deadline must not be later than the event's starting time.
      *

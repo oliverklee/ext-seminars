@@ -21,50 +21,6 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     private $plugin = null;
 
     /**
-     * whether this class has created a fake front end which needs to get
-     * cleaned up again
-     *
-     * @var bool
-     */
-    private $hasFakeFrontEnd = false;
-
-    /**
-     * The destructor.
-     */
-    public function __destruct()
-    {
-        unset($this->plugin);
-
-        if ($this->hasFakeFrontEnd) {
-            $this->discardFakeFrontEnd();
-        }
-    }
-
-    /**
-     * Discards the fake front end.
-     *
-     * This function nulls out $GLOBALS['TSFE'] and $GLOBALS['TT']. In addition,
-     * any logged-in front-end user will be logged out.
-     *
-     * @return void
-     */
-    protected function discardFakeFrontEnd()
-    {
-        unset(
-            $GLOBALS['TSFE']->tmpl, $GLOBALS['TSFE']->sys_page,
-            $GLOBALS['TSFE']->fe_user, $GLOBALS['TSFE']->TYPO3_CONF_VARS,
-            $GLOBALS['TSFE']->config, $GLOBALS['TSFE']->TCAcachedExtras,
-            $GLOBALS['TSFE']->imagesOnPage, $GLOBALS['TSFE']->cObj,
-            $GLOBALS['TSFE']->csConvObj, $GLOBALS['TSFE']->pagesection_lockObj,
-            $GLOBALS['TSFE']->pages_lockObj
-        );
-        $GLOBALS['TSFE'] = null;
-        $GLOBALS['TT'] = null;
-
-        $this->hasFakeFrontEnd = false;
-    }
-
-    /**
      * Sets the plugin used accessing to the flexforms plugin settings.
      *
      * @param AbstractPlugin $plugin a seminars plugin instance
@@ -168,8 +124,6 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
         $frontEnd->newCObj();
 
         $GLOBALS['TSFE'] = $frontEnd;
-
-        $this->hasFakeFrontEnd = true;
     }
 
     /**

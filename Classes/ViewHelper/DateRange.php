@@ -27,14 +27,6 @@ class Tx_Seminars_ViewHelper_DateRange
     }
 
     /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->configuration, $this->translator);
-    }
-
-    /**
      * Gets the date.
      * Returns a localized string "will be announced" if there's no date set.
      *
