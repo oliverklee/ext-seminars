@@ -11,6 +11,11 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCase
 {
     /**
+     * @var string
+     */
+    const BLANK_GIF = 'R0lGODlhAQABAJH/AP///wAAAMDAwAAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==';
+
+    /**
      * @var Tx_Seminars_FrontEnd_CategoryList
      */
     private $fixture;
@@ -481,7 +486,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
                     'icon' => 'foo.gif',
                 ],
         ];
-        $this->testingFramework->createDummyFile('foo.gif');
+        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
 
         self::assertNotContains(
             'foo.gif',
@@ -566,7 +571,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
                     'icon' => 'foo.gif',
                 ],
         ];
-        $this->testingFramework->createDummyFile('foo.gif');
+        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
 
         self::assertRegExp(
             '/<img[^>]+title="te &amp; st"/',
@@ -585,7 +590,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
                 ],
         ];
 
-        $this->testingFramework->createDummyFile('foo.gif');
+        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
 
         self::assertNotRegExp(
             '/<img[^>]*>.*test/',
@@ -611,8 +616,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
                 ],
         ];
 
-        $this->testingFramework->createDummyFile('foo.gif');
-        $this->testingFramework->createDummyFile('foo2.gif');
+        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
+        $this->testingFramework->createDummyFile('foo2.gif', base64_decode(self::BLANK_GIF, true));
 
         self::assertRegExp(
             '/<img[^>]+title="test"[^>]*>.*<img[^>]+title="new_test"[^>]*>/',
@@ -644,8 +649,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     public function testCreateCategoryListWithConfigurationValueSetToIconDoesNotUseCommasAsSeparators()
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'icon');
-        $this->testingFramework->createDummyFile('foo.gif');
-        $this->testingFramework->createDummyFile('foo2.gif');
+        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
+        $this->testingFramework->createDummyFile('foo2.gif', base64_decode(self::BLANK_GIF, true));
         $multipleCategories =
             [
                 99 => [
@@ -709,8 +714,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     public function testCreateCategoryListWithConfigurationValueSetToBothUsesCommasAsSeparators()
     {
         $this->fixture->setConfigurationValue('categoriesInListView', 'both');
-        $this->testingFramework->createDummyFile('foo.gif');
-        $this->testingFramework->createDummyFile('foo2.gif');
+        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
+        $this->testingFramework->createDummyFile('foo2.gif', base64_decode(self::BLANK_GIF, true));
         $multipleCategories =
             [
                 99 => [

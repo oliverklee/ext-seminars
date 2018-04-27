@@ -13,6 +13,11 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_TestCase
 {
     /**
+     * @var string
+     */
+    const BLANK_GIF = 'R0lGODlhAQABAJH/AP///wAAAMDAwAAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==';
+
+    /**
      * @var Tx_Seminars_FrontEnd_DefaultController
      */
     private $fixture;
@@ -1217,7 +1222,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             160
         );
 
-        $this->testingFramework->createDummyFile('test_foo.gif');
+        $this->testingFramework->createDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -1227,7 +1232,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $seminarWithImage = $this->fixture->main('', []);
 
-        $this->testingFramework->deleteDummyFile('test_foo.gif');
+        $this->testingFramework->deleteDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
 
         self::assertContains(
             'style="background-image:',
@@ -1252,7 +1257,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             160
         );
 
-        $this->testingFramework->createDummyFile('test_foo.gif');
+        $this->testingFramework->createDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -1262,7 +1267,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $seminarWithImage = $this->fixture->main('', []);
 
-        $this->testingFramework->deleteDummyFile('test_foo.gif');
+        $this->testingFramework->deleteDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
 
         self::assertNotContains(
             'style="background-image:',
@@ -2504,7 +2509,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
     public function testSingleViewShowsCategoryIcon()
     {
-        $this->testingFramework->createDummyFile('foo_test.gif');
+        $this->testingFramework->createDummyFile('foo_test.gif', base64_decode(self::BLANK_GIF, true));
         $this->addCategoryRelation(
             [
                 'title' => 'category 1',
@@ -2517,7 +2522,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $singleCategoryWithIcon = $this->fixture->main('', []);
 
-        $this->testingFramework->deleteDummyFile('foo_test.gif');
+        $this->testingFramework->deleteDummyFile('foo_test.gif', base64_decode(self::BLANK_GIF, true));
 
         self::assertContains(
             'category 1 <img src="',
@@ -2527,8 +2532,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
     public function testSingleViewShowsMultipleCategoriesWithIcons()
     {
-        $this->testingFramework->createDummyFile('foo_test.gif');
-        $this->testingFramework->createDummyFile('foo_test2.gif');
+        $this->testingFramework->createDummyFile('foo_test.gif', base64_decode(self::BLANK_GIF, true));
+        $this->testingFramework->createDummyFile('foo_test2.gif', base64_decode(self::BLANK_GIF, true));
         $this->addCategoryRelation(
             [
                 'title' => 'category 1',
@@ -2547,7 +2552,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $multipleCategoriesWithIcons = $this->fixture->main('', []);
 
-        $this->testingFramework->deleteDummyFile('foo_test.gif');
+        $this->testingFramework->deleteDummyFile('foo_test.gif', base64_decode(self::BLANK_GIF, true));
 
         self::assertContains(
             'category 1 <img src="',
@@ -3257,7 +3262,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
     public function testListViewDisplaysSeminarImage()
     {
-        $this->testingFramework->createDummyFile('test_foo.gif');
+        $this->testingFramework->createDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -3265,7 +3270,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             ['image' => 'test_foo.gif']
         );
         $listViewWithImage = $this->fixture->main('', []);
-        $this->testingFramework->deleteDummyFile('test_foo.gif');
+        $this->testingFramework->deleteDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
 
         self::assertContains(
             '<img src="',
