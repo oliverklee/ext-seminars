@@ -1,5 +1,5 @@
 <?php
-namespace OliverKlee\Seminars\Tests\Unit\BackeEnd\Support\Traits;
+namespace OliverKlee\Seminars\Tests\Unit\Support\Traits;
 
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
@@ -39,8 +39,19 @@ trait BackEndTestsTrait
     private $mockBackEndUser = null;
 
     /**
+     * @var \Tx_Oelib_Configuration
+     */
+    private $configuration = null;
+
+    /**
+     * @var \Tx_Oelib_HeaderCollector
+     */
+    private $headerProxy = null;
+
+    /**
      * Replaces the current BE user with a mocked user, sets "default" as the current BE language, clears the
-     * seminars extension settings, disables the automatic configuration check, and sets a fixed SIM_EXEC_TIME.
+     * seminars extension settings, disables the automatic configuration check, sets the header proxy to test mode,
+     * and sets a fixed SIM_EXEC_TIME.
      *
      * If you use this method, make sure to call restoreOriginalEnvironment() in tearDown().
      *
@@ -53,6 +64,10 @@ trait BackEndTestsTrait
         $this->unifyBackEndLanguage();
         $this->unifyExtensionSettings();
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        $this->setUpExtensionConfiguration();
+        $headerProxyFactory = \Tx_Oelib_HeaderProxyFactory::getInstance();
+        $headerProxyFactory->enableTestMode();
+        $this->headerProxy = $headerProxyFactory->getHeaderProxy();
     }
 
     /**
@@ -80,17 +95,34 @@ trait BackEndTestsTrait
     private function unifyBackEndLanguage()
     {
         $this->languageBackup = $GLOBALS['LANG']->lang;
-        $this->getLanguageService()->lang = 'default';
 
-        // Loads the locallang file for properly working localization in the tests.
-        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
+        $languageService = $this->getLanguageService();
+        $languageService->lang = 'default';
+
+        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
+        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
+        $languageService->includeLLFile('EXT:lang/locallang_general.xlf');
     }
 
+    /**
+     * @return void
+     */
     private function unifyExtensionSettings()
     {
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
         $this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
+    }
+
+    /**
+     * @return void
+     */
+    private function setUpExtensionConfiguration()
+    {
+        $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
+        $configurationRegistry->set('plugin', new \Tx_Oelib_Configuration());
+        $this->configuration = new \Tx_Oelib_Configuration();
+        $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
     }
 
     /**
