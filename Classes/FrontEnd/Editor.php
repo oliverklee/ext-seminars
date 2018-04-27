@@ -146,9 +146,9 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
         /**
          * Configuration instance for plugin data. Necessary for LABEL translation.
          *
-         * @var \tx_rnbase_configurations $pluginConfiguration
+         * @var \Tx_Rnbase_Configuration_Processor $pluginConfiguration
          */
-        $pluginConfiguration = \tx_rnbase::makeInstance(tx_rnbase_configurations::class);
+        $pluginConfiguration = \tx_rnbase::makeInstance(\Tx_Rnbase_Configuration_Processor::class);
         $pluginConfiguration->init($this->conf, $this->cObj, 'mkforms', 'mkforms');
 
         // Initialize the form from TypoScript data and provide configuration for the plugin.
