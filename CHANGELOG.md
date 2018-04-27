@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the incorrect TYPO3 Core license headers (#41)
 
 ### Fixed
+- Always use ::class (#53)
 - Update use of deprecated rn_base configuration class (#52)
 - Make the tests independent of the local time zone (#51)
 - Make the tests independent of oelib dev fixture class (#50)

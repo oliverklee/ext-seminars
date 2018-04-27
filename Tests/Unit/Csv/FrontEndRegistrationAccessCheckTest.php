@@ -46,7 +46,7 @@ class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends Tx_
     public function subjectImplementsAccessCheck()
     {
         self::assertInstanceOf(
-            'Tx_Seminars_Interface_CsvAccessCheck',
+            \Tx_Seminars_Interface_CsvAccessCheck::class,
             $this->subject
         );
     }

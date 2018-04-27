@@ -316,7 +316,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
     protected function getAccessCheck()
     {
         if ($this->accessCheck === null) {
-            $this->accessCheck = GeneralUtility::makeInstance('Tx_Seminars_Csv_BackEndRegistrationAccessCheck');
+            $this->accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_BackEndRegistrationAccessCheck::class);
         }
 
         return $this->accessCheck;
