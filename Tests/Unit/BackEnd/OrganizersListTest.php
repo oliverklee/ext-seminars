@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\Seminars\Tests\Unit\BackeEnd\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 
 /**
@@ -9,6 +10,8 @@ use TYPO3\CMS\Backend\Template\DocumentTemplate;
  */
 class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends Tx_Phpunit_TestCase
 {
+    use BackEndTestsTrait;
+
     /**
      * @var Tx_Seminars_BackEnd_OrganizersList
      */
@@ -28,28 +31,13 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends Tx_Phpunit_TestC
      */
     private $backEndModule;
 
-    /**
-     * @var string the original language of the back-end module
-     */
-    private $originalLanguage;
-
     protected function setUp()
     {
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        $this->unifyTestingEnvironment();
 
-        // Sets the localization to the default language so that all tests can
-        // run even if the BE user has its interface set to another language.
-        $this->originalLanguage = $GLOBALS['LANG']->lang;
-        $GLOBALS['LANG']->lang = 'default';
+        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-        // Loads the locallang file for properly working localization in the tests.
-        $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
-
-        $this->testingFramework
-            = new Tx_Oelib_TestingFramework('tx_seminars');
-
-        $this->dummySysFolderPid
-            = $this->testingFramework->createSystemFolder();
+        $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 
         $this->backEndModule = new Tx_Seminars_BackEnd_Module();
         $this->backEndModule->id = $this->dummySysFolderPid;
@@ -61,7 +49,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends Tx_Phpunit_TestC
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
         $document->backPath = $GLOBALS['BACK_PATH'];
-        $document->docType = 'xhtml_strict';
 
         $this->fixture = new Tx_Seminars_BackEnd_OrganizersList(
             $this->backEndModule
@@ -70,11 +57,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends Tx_Phpunit_TestC
 
     protected function tearDown()
     {
-        // Resets the language of the interface to the value it had before
-        // we set it to "default" for testing.
-        $GLOBALS['LANG']->lang = $this->originalLanguage;
-
         $this->testingFramework->cleanUp();
+        $this->restoreOriginalEnvironment();
     }
 
     /**

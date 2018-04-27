@@ -14,7 +14,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ModuleTest extends Tx_Phpunit_TestCase
 
     protected function setUp()
     {
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
 
         $this->fixture = new Tx_Seminars_BackEnd_Module();
     }

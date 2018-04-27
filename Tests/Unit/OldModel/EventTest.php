@@ -56,7 +56,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
-
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [

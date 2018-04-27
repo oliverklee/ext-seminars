@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\Seminars\Tests\Unit\BackeEnd\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 
 /**
@@ -11,6 +12,8 @@ use TYPO3\CMS\Backend\Template\DocumentTemplate;
  */
 class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
 {
+    use BackEndTestsTrait;
+
     /**
      * @var Tx_Seminars_BackEnd_EventsList
      */
@@ -30,24 +33,9 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
      */
     protected $backEndModule = null;
 
-    /**
-     * @var string the original language of the back-end module
-     */
-    protected $originalLanguage = '';
-
     protected function setUp()
     {
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
-
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
-
-        // Sets the localization to the default language so that all tests can
-        // run even if the BE user has its interface set to another language.
-        $this->originalLanguage = $GLOBALS['LANG']->lang;
-        $GLOBALS['LANG']->lang = 'default';
-
-        // Loads the locallang file for properly working localization in the tests.
-        $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
+        $this->unifyTestingEnvironment();
 
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
 
@@ -63,7 +51,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
         $document->backPath = $GLOBALS['BACK_PATH'];
-        $document->docType = 'xhtml_strict';
 
         $this->fixture = new Tx_Seminars_BackEnd_EventsList($this->backEndModule);
 
@@ -82,11 +69,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
 
     protected function tearDown()
     {
-        // Resets the language of the interface to the value it had before
-        // we set it to "default" for testing.
-        $GLOBALS['LANG']->lang = $this->originalLanguage;
-
         $this->testingFramework->cleanUp();
+        $this->restoreOriginalEnvironment();
     }
 
     /////////////////////////////////////////
