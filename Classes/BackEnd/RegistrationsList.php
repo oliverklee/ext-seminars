@@ -149,6 +149,8 @@ class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
                 $builder->limitToRegular();
                 $tableLabel = 'registrationlist.label_regularRegistrations';
                 break;
+            default:
+                $tableLabel = '';
         }
         if ($this->eventUid > 0) {
             $builder->limitToEvent($this->eventUid);

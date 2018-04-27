@@ -68,9 +68,10 @@ class Tx_Seminars_Tests_Unit_Mapper_CheckboxTest extends Tx_Phpunit_TestCase
      */
     public function getOwnerWithoutOwnerReturnsNull()
     {
-        self::assertNull(
-            $this->fixture->getLoadedTestingModel([])->getOwner()
-        );
+        /** @var Tx_Seminars_Model_Checkbox $model */
+        $model = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertNull($model->getOwner());
     }
 
     /**
@@ -78,14 +79,11 @@ class Tx_Seminars_Tests_Unit_Mapper_CheckboxTest extends Tx_Phpunit_TestCase
      */
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
-        $frontEndUser = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
+        $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
+            ->getLoadedTestingModel([]);
+        /** @var Tx_Seminars_Model_Checkbox $model */
+        $model = $this->fixture->getLoadedTestingModel(['owner' => $frontEndUser->getUid()]);
 
-        self::assertInstanceOf(
-            Tx_Seminars_Model_FrontEndUser::class,
-            $this->fixture->getLoadedTestingModel(
-                ['owner' => $frontEndUser->getUid()]
-            )->getOwner()
-        );
+        self::assertInstanceOf(Tx_Seminars_Model_FrontEndUser::class, $model->getOwner());
     }
 }

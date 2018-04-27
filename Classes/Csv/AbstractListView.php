@@ -41,6 +41,11 @@ abstract class Tx_Seminars_Csv_AbstractListView
     protected $tableName = '';
 
     /**
+     * @var \Tx_Oelib_Configuration
+     */
+    protected $configuration = null;
+
+    /**
      * The constructor.
      */
     public function __construct()

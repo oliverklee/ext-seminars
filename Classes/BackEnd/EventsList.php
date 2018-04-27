@@ -75,7 +75,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
         );
         $this->template->setMarker(
             'label_print_button',
-            $GLOBALS['LANG']->getLL('print')
+            $this->getLanguageService()->getLL('print')
         );
 
         $content .= $this->template->getSubpart('SEMINARS_EVENT_LIST');
@@ -95,45 +95,47 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
      */
     private function createTableHeading()
     {
+        $languageService = $this->getLanguageService();
+
         $this->template->setMarker(
             'label_accreditation_number',
-            $GLOBALS['LANG']->getLL('eventlist.accreditation_number')
+            $languageService->getLL('eventlist.accreditation_number')
         );
         $this->template->setMarker(
             'label_title',
-            $GLOBALS['LANG']->getLL('eventlist.title')
+            $languageService->getLL('eventlist.title')
         );
         $this->template->setMarker(
             'label_date',
-            $GLOBALS['LANG']->getLL('eventlist.date')
+            $languageService->getLL('eventlist.date')
         );
         $this->template->setMarker(
             'label_attendees',
-            $GLOBALS['LANG']->getLL('eventlist.attendees')
+            $languageService->getLL('eventlist.attendees')
         );
         $this->template->setMarker(
             'label_number_of_attendees_on_queue',
-            $GLOBALS['LANG']->getLL('eventlist.attendeesOnRegistrationQueue')
+            $languageService->getLL('eventlist.attendeesOnRegistrationQueue')
         );
         $this->template->setMarker(
             'label_minimum_number_of_attendees',
-            $GLOBALS['LANG']->getLL('eventlist.attendees_min')
+            $languageService->getLL('eventlist.attendees_min')
         );
         $this->template->setMarker(
             'label_maximum_number_of_attendees',
-            $GLOBALS['LANG']->getLL('eventlist.attendees_max')
+            $languageService->getLL('eventlist.attendees_max')
         );
         $this->template->setMarker(
             'label_has_enough_attendees',
-            $GLOBALS['LANG']->getLL('eventlist.enough_attendees')
+            $languageService->getLL('eventlist.enough_attendees')
         );
         $this->template->setMarker(
             'label_is_fully_booked',
-            $GLOBALS['LANG']->getLL('eventlist.is_full')
+            $languageService->getLL('eventlist.is_full')
         );
         $this->template->setMarker(
             'label_status',
-            $GLOBALS['LANG']->getLL('eventlist_status')
+            $languageService->getLL('eventlist_status')
         );
     }
 
@@ -221,15 +223,13 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
             $this->template->setMarker(
                 'has_enough_attendees',
                 ($event->needsRegistration()
-                    ? (!$event->hasEnoughAttendances()
-                        ? $GLOBALS['LANG']->getLL('no') : $GLOBALS['LANG']->getLL('yes'))
+                    ? (!$event->hasEnoughAttendances() ? $this->getLanguageService()->getLL('no') : $GLOBALS['LANG']->getLL('yes'))
                     : '')
             );
             $this->template->setMarker(
                 'is_fully_booked',
                 ($event->needsRegistration()
-                    ? (!$event->isFull()
-                        ? $GLOBALS['LANG']->getLL('no') : $GLOBALS['LANG']->getLL('yes'))
+                    ? (!$event->isFull() ? $this->getLanguageService()->getLL('no') : $GLOBALS['LANG']->getLL('yes'))
                     : '')
             );
             $this->template->setMarker(
@@ -268,8 +268,11 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
         } elseif ($event->isCanceled()) {
             $icon = 'Canceled.png';
             $labelKey = 'eventlist_status_canceled';
+        } else {
+            $icon = '';
+            $labelKey = '';
         }
-        $label = $GLOBALS['LANG']->getLL($labelKey);
+        $label = $this->getLanguageService()->getLL($labelKey);
 
         return '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/' . $icon .
             '" title="' . $label . '" alt="' . $label . '"/>';
@@ -290,7 +293,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
         }
 
         $pageData = $this->page->getPageData();
-        $langCsv = $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
+        $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
 
         $imageTag = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Csv.gif" title="' .
             $langCsv . '" alt="' . $langCsv . '" class="icon" />';
@@ -347,7 +350,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
         $this->template->setMarker('email_button_url', htmlspecialchars($buttonUrl));
         $this->template->setMarker(
             'label_email_button',
-            $GLOBALS['LANG']->getLL('eventlist_button_email')
+            $this->getLanguageService()->getLL('eventlist_button_email')
         );
     }
 
@@ -379,7 +382,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
             $this->template->setMarker('cancel_button_url', htmlspecialchars($buttonUrl));
             $this->template->setMarker(
                 'label_cancel_button',
-                $GLOBALS['LANG']->getLL('eventlist_button_cancel')
+                $this->getLanguageService()->getLL('eventlist_button_cancel')
             );
         } else {
             $this->template->hideSubpartsArray(['CANCEL_BUTTON']);
@@ -414,7 +417,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
             $this->template->setMarker('confirm_button_url', htmlspecialchars($buttonUrl));
             $this->template->setMarker(
                 'label_confirm_button',
-                $GLOBALS['LANG']->getLL('eventlist_button_confirm')
+                $this->getLanguageService()->getLL('eventlist_button_confirm')
             );
         } else {
             $this->template->hideSubpartsArray(['CONFIRM_BUTTON']);
@@ -453,6 +456,6 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
             ['id' => $pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid()]
         );
         return '<a class="btn btn-default" href="' . htmlspecialchars($url) . '">' .
-            $GLOBALS['LANG']->getLL('label_show_event_registrations') . '</a>';
+            $this->getLanguageService()->getLL('label_show_event_registrations') . '</a>';
     }
 }

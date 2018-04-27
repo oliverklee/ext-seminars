@@ -4,6 +4,7 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * This is the base class for e-mail forms in the back end.
@@ -104,6 +105,24 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     }
 
     /**
+     * @return LanguageService
+     */
+    protected function getLanguageService()
+    {
+        return $GLOBALS['LANG'];
+    }
+
+    /**
+     * Returns the logged-in back-end user.
+     *
+     * @return BackendUserAuthentication
+     */
+    protected function getBackEndUser()
+    {
+        return $GLOBALS['BE_USER'];
+    }
+
+    /**
      * Returns the HTML needed to show the form. If the current user has not
      * the necessary permissions, an empty string is returned.
      *
@@ -164,7 +183,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
             $this->markAsIncomplete();
             $this->setErrorMessage(
                 'subject',
-                $GLOBALS['LANG']->getLL('eventMailForm_error_subjectMustNotBeEmpty')
+                $this->getLanguageService()->getLL('eventMailForm_error_subjectMustNotBeEmpty')
             );
         }
 
@@ -172,7 +191,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
             $this->markAsIncomplete();
             $this->setErrorMessage(
                 'messageBody',
-                $GLOBALS['LANG']->getLL('eventMailForm_error_messageBodyMustNotBeEmpty')
+                $this->getLanguageService()->getLL('eventMailForm_error_messageBodyMustNotBeEmpty')
             );
         }
 
@@ -218,7 +237,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
             ? 'class="error" ' : '';
 
         return '<p><label for="subject">' .
-            $GLOBALS['LANG']->getLL('eventMailForm_subject') . '</label>' .
+            $this->getLanguageService()->getLL('eventMailForm_subject') . '</label>' .
             '<input type="text" id="subject" name="subject" value="' .
             htmlspecialchars($this->fillFormElement('subject'), ENT_QUOTES, 'utf-8') . '" ' .
             $classMarker . '/>' . $this->getErrorMessage('subject') . '</p>';
@@ -237,7 +256,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
         $classMarker = ($this->hasErrorMessage('messageBody')) ? ', error' : '';
 
         return '<p><label for="messageBody">' .
-            $GLOBALS['LANG']->getLL('eventMailForm_message') . '</label>' .
+            $this->getLanguageService()->getLL('eventMailForm_message') . '</label>' .
             '<textarea cols="50" rows="20" class="eventMailForm_message' .
             $classMarker . '" id="messageBody" name="messageBody">' .
             htmlspecialchars($messageBody) . '</textarea>' .
@@ -252,7 +271,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     protected function createBackButton()
     {
         return '<p><input type="button" value="' .
-            $GLOBALS['LANG']->getLL('eventMailForm_backButton') .
+            $this->getLanguageService()->getLL('eventMailForm_backButton') .
             '" class="backButton" onclick="window.location=window.location" />' .
             '</p>';
     }
@@ -424,7 +443,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
             /** @var FlashMessage $message */
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
-                $GLOBALS['LANG']->getLL('message_emailToAttendeesSent'),
+                $this->getLanguageService()->getLL('message_emailToAttendeesSent'),
                 '',
                 FlashMessage::OK,
                 true
@@ -552,8 +571,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      */
     private function appendTitleAndDate($prefix)
     {
-        return $GLOBALS['LANG']->getLL($prefix . 'subject') . ' ' .
-            $this->getOldEvent()->getTitleAndDate();
+        return $this->getLanguageService()->getLL($prefix . 'subject') . ' ' . $this->getOldEvent()->getTitleAndDate();
     }
 
     /**
@@ -578,13 +596,9 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
             '"%s"',
             $this->getOldEvent()
         );
-        $introduction = sprintf(
-            $GLOBALS['LANG']->getLL($prefix . 'introduction'),
-            $eventDetails
-        );
+        $introduction = sprintf($this->getLanguageService()->getLL($prefix . 'introduction'), $eventDetails);
 
-        return '%salutation' . LF . LF .
-            $introduction . LF . $GLOBALS['LANG']->getLL($prefix . 'messageBody');
+        return '%salutation' . LF . LF . $introduction . LF . $this->getLanguageService()->getLL($prefix . 'messageBody');
     }
 
     /**

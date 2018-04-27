@@ -343,8 +343,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             $this->createAdditionalAttendees($newRegistration);
         }
 
-        $oldRegistration = $registrationManager->getRegistration();
-        $registrationManager->sendEmailsForNewRegistration($oldRegistration, $this);
+        $registrationManager->sendEmailsForNewRegistration($this);
     }
 
     /**
@@ -1677,7 +1676,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function processUnregistration()
     {
-        if ($this->getFormCreator()->aORenderlets['button_cancel']->hasThrown('click')) {
+        /** @var \formidable_mainrenderlet $cancelButtonRenderlet */
+        $cancelButtonRenderlet = $this->getFormCreator()->aORenderlets['button_cancel'];
+        if ($cancelButtonRenderlet->hasThrown('click')) {
             $redirectUrl = GeneralUtility::locationHeaderUrl($this->pi_getPageLink($this->getConfValueInteger('myEventsPID')));
             Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location:' . $redirectUrl);
             exit;

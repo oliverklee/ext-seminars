@@ -48,7 +48,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends Tx_Phpunit_TestC
 
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
-        $document->backPath = $GLOBALS['BACK_PATH'];
 
         $this->fixture = new Tx_Seminars_BackEnd_OrganizersList(
             $this->backEndModule

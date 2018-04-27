@@ -82,10 +82,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     private function storeAttachedFiles()
     {
         if (!$this->isTestMode()) {
+            $dataHandler = $this->getFormCreator()->getDataHandler();
             $this->attachedFiles = GeneralUtility::trimExplode(
                 ',',
-                $this->getFormCreator()->oDataHandler
-                    ->__aStoredData['attached_files'],
+                $dataHandler->__aStoredData['attached_files'],
                 true
             );
         } else {
@@ -161,8 +161,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             $template->setMarker($label, $this->translate($label));
         }
 
-        $originalAttachmentList = $this->getFormCreator()->oDataHandler->oForm
-            ->aORenderlets['attached_files']->mForcedValue;
+        /** @var \tx_ameosformidable $form */
+        $form = $this->getFormCreator()->getDataHandler()->oForm;
+        /** @var \formidable_mainrenderlet $renderlet */
+        $renderlet = $form->aORenderlets['attached_files'];
+        $originalAttachmentList = $renderlet->mForcedValue;
 
         if (!empty($this->attachedFiles)) {
             $attachmentList = '';
@@ -323,10 +326,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $places = $placeMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
         if ($form !== null) {
-            $editButtonConfiguration = $form->_navConf(
-                $form->aORenderlets['editPlaceButton']->sXPath
-            );
+            /** @var \formidable_mainrenderlet $renderlet */
+            $renderlet = $form->aORenderlets['editPlaceButton'];
+            $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         } else {
+            $renderlet = null;
             $editButtonConfiguration = [];
         }
 
@@ -334,7 +338,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
             ['relatedRecordType' => 'Places']
-        ) && is_object($form);
+        ) && $form !== null;
 
         /** @var Tx_Seminars_Model_Place $place */
         foreach ($places as $place) {
@@ -349,12 +353,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             if ($showEditButton && $frontEndUserIsOwner) {
                 $editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
-					return Tx_Seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
-					';
-                $editButton = $form->_makeRenderlet(
-                    $editButtonConfiguration,
-                    $form->aORenderlets['editPlaceButton']->sXPath
-                );
+                    return Tx_Seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
+                ';
+                $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
                 $result[] = [
@@ -395,11 +396,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $speakerMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class);
         $speakers = $speakerMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
-        if (is_object($form)) {
-            $editButtonConfiguration = $form->_navConf(
-                $form->aORenderlets['editSpeakerButton']->sXPath
-            );
+        if ($form !== null) {
+            /** @var \formidable_mainrenderlet $renderlet */
+            $renderlet = $form->aORenderlets['editSpeakerButton'];
+            $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         } else {
+            $renderlet = null;
             $editButtonConfiguration = [];
         }
 
@@ -407,7 +409,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
             ['relatedRecordType' => 'Speakers']
-        ) && is_object($form);
+        ) && $form !== null;
 
         $type = $parameters['type'];
         if (!empty($parameters['lister'])) {
@@ -442,10 +444,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 $editButtonConfiguration['name'] = 'edit' . $type . 'Button_' . $speaker->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
                     return Tx_Seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');';
-                $editButton = $form->_makeRenderlet(
-                    $editButtonConfiguration,
-                    $form->aORenderlets['editSpeakerButton']->sXPath
-                );
+                $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
                 $result[] = [
@@ -489,17 +488,20 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $checkboxMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
         $checkboxes = $checkboxMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
-        if (is_object($form)) {
-            $editButtonConfiguration = $form->_navConf(
-                $form->aORenderlets['editCheckboxButton']->sXPath
-            );
+        if ($form !== null) {
+            /** @var \formidable_mainrenderlet $renderlet */
+            $renderlet = $form->aORenderlets['editCheckboxButton'];
+            $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
+        } else {
+            $renderlet = null;
+            $editButtonConfiguration = [];
         }
 
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
             ['relatedRecordType' => 'Checkboxes']
-        ) && is_object($form);
+        ) && $form !== null;
 
         /** @var Tx_Seminars_Model_Checkbox $checkbox */
         foreach ($checkboxes as $checkbox) {
@@ -514,12 +516,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
             if ($showEditButton && $frontEndUserIsOwner) {
                 $editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
-					return Tx_Seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
-					';
-                $editButton = $form->_makeRenderlet(
-                    $editButtonConfiguration,
-                    $form->aORenderlets['editCheckboxButton']->sXPath
-                );
+                    return Tx_Seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
+                ';
+                $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
                 $result[] = [
@@ -562,17 +561,20 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $targetGroupMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
         $targetGroups = $targetGroupMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
-        if (is_object($form)) {
-            $editButtonConfiguration = $form->_navConf(
-                $form->aORenderlets['editTargetGroupButton']->sXPath
-            );
+        if ($form !== null) {
+            /** @var \formidable_mainrenderlet $renderlet */
+            $renderlet = $form->aORenderlets['editTargetGroupButton'];
+            $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
+        } else {
+            $renderlet = null;
+            $editButtonConfiguration = [];
         }
 
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
             ['relatedRecordType' => 'TargetGroups']
-        ) && is_object($form);
+        ) && $form !== null;
 
         /** @var Tx_Seminars_Model_TargetGroup $targetGroup */
         foreach ($targetGroups as $targetGroup) {
@@ -588,12 +590,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 $editButtonConfiguration['name'] = 'editTargetGroupButton_' .
                     $targetGroup->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
-					return Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
-					';
-                $editButton = $form->_makeRenderlet(
-                    $editButtonConfiguration,
-                    $form->aORenderlets['editTargetGroupButton']->sXPath
-                );
+                    return Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
+                ';
+                $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
                 $result[] = [
@@ -934,7 +933,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         // If there is a validation error, the upload has to be done again.
         if (($this->validationError == '')
-            && ($this->isTestMode() || $this->getFormCreator()->oDataHandler->_allIsValid())
+            && ($this->isTestMode() || $this->getFormCreator()->getValidationTool()->isAllValid())
         ) {
             array_push($this->attachedFiles, $fileToCheck);
         } else {
@@ -974,11 +973,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     private function checkFileSize($fileName)
     {
         $maximumFileSize = $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'];
-        /** @var BasicFileUtility $fileUtility */
-        $fileUtility = GeneralUtility::makeInstance(BasicFileUtility::class);
-        $fileInformation = $fileUtility->getTotalFileInfo(PATH_site . 'uploads/tx_seminars/' . $fileName);
 
-        if ($fileInformation['size'] > ($maximumFileSize * 1024)) {
+        $fileSize = filesize($fileName);
+
+        if ($fileSize > ($maximumFileSize * 1024)) {
             $this->validationError = $this->translate('message_file_too_large') . ' ' . $maximumFileSize . 'kB.';
         }
     }
@@ -1502,7 +1500,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     public static function createNewPlace(\tx_mkforms_forms_Base $form)
     {
-        $formData = $form->oMajixEvent->getParams();
+        /** @var \formidableajax $ajax */
+        $ajax = $form->getMajix();
+        $formData = $ajax->getParams();
         $validationErrors = self::validatePlace(
             $form,
             [
@@ -1532,29 +1532,28 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Place::class);
         $mapper->save($place);
 
-        $editButtonConfiguration = $form->_navConf(
-            $form->aORenderlets['editPlaceButton']->sXPath
-        );
+        /** @var \formidable_mainrenderlet $renderlet */
+        $renderlet = $form->aORenderlets['editPlaceButton'];
+        $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         $editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
         $editButtonConfiguration['onclick']['userobj']['php'] = '
-			return Tx_Seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
-			';
-        $editButton = $form->_makeRenderlet(
-            $editButtonConfiguration,
-            $form->aORenderlets['editPlaceButton']->sXPath
-        );
+            return Tx_Seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
+        ';
+        $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
         $editButton->includeScripts();
         $editButtonHTML = $editButton->_render();
 
+        /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
+        $modalBox = $form->aORenderlets['newPlaceModalBox'];
         return [
-            $form->aORenderlets['newPlaceModalBox']->majixCloseBox(),
+            $modalBox->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.appendPlaceInEditor(' . $place->getUid() . ', "' .
                     addcslashes($place->getTitle(), '"\\') . '", {
-						"name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
-						"id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
-						"value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
-					});'
+                        "name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
+                        "id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
+                        "value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
+                    });'
             ),
         ];
     }
@@ -1570,7 +1569,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     public static function updatePlace(\tx_mkforms_forms_Base $form)
     {
-        $formData = $form->oMajixEvent->getParams();
+        /** @var \formidableajax $ajax */
+        $ajax = $form->getMajix();
+        $formData = $ajax->getParams();
         $frontEndUser = self::getLoggedInUser();
         /** @var Tx_Seminars_Mapper_Place $placeMapper */
         $placeMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Place::class);
@@ -1613,8 +1614,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $htmlId = 'tx_seminars_pi1_seminars_place_label_' . $place->getUid();
 
+        /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
+        $modalBox = $form->aORenderlets['editPlaceModalBox'];
         return [
-            $form->aORenderlets['editPlaceModalBox']->majixCloseBox(),
+            $modalBox->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
                     addcslashes($place->getTitle(), '"\\') . '")'
@@ -1776,12 +1779,16 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         ];
 
         foreach ($fields as $key => $value) {
-            $form->aORenderlets['editPlace_' . $key]->setValue($value);
+            /** @var \formidable_mainrenderlet $renderlet */
+            $renderlet = $form->aORenderlets['editPlace_' . $key];
+            $renderlet->setValue($value);
         }
 
-        $form->oRenderer->_setDisplayLabels(true);
-        $result = $form->aORenderlets['editPlaceModalBox']->majixShowBox();
-        $form->oRenderer->_setDisplayLabels(false);
+        $form->getRenderer()->_setDisplayLabels(true);
+        /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
+        $modalBox = $form->aORenderlets['editPlaceModalBox'];
+        $result = $modalBox->majixShowBox();
+        $form->getRenderer()->_setDisplayLabels(false);
 
         return $result;
     }
@@ -1847,7 +1854,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         // refresh all speaker listers
         $results = $this->repaintSpeakers($form);
         // close box
-        $results[] = $form->aORenderlets['newSpeakerModalBox']->majixCloseBox();
+        /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
+        $modalBox = $form->aORenderlets['newSpeakerModalBox'];
+        $results[] = $modalBox->majixCloseBox();
 
         return $results;
     }
@@ -1900,8 +1909,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $speakerMapper->save($speaker);
 
         $results = $this->repaintSpeakers($form);
-        // close edit box
-        $results[] = $form->aORenderlets['editSpeakerModalBox']->majixCloseBox();
+        /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
+        $modalBox = $form->aORenderlets['editSpeakerModalBox'];
+        $results[] = $modalBox->majixCloseBox();
 
         return $results;
     }
@@ -1923,9 +1933,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $results = [];
         // refresh all speaker listers
         foreach ($speakerTypes as $speakerType) {
+            $widget = $form->getWidget($speakerType . 's');
             if (
-                is_object($widget = $form->getWidget($speakerType . 's'))
-                && $widget instanceof tx_mkforms_widgets_lister_Main
+                $widget !== null && ($widget instanceof \tx_mkforms_widgets_lister_Main)
             ) {
                 $results[] = $widget->repaintFirst();
             }
@@ -2071,22 +2081,27 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         ];
 
         foreach ($fields as $key => $value) {
-            $form->aORenderlets['editSpeakerModalBox__editSpeaker_' . $key]->setValue($value);
+            /** @var \formidable_mainrenderlet $renderlet */
+            $renderlet = $form->aORenderlets['editSpeakerModalBox__editSpeaker_' . $key];
+            $renderlet->setValue($value);
         }
 
         $result = [];
 
-        $form->oRenderer->_setDisplayLabels(true);
-        $result[] = $form->aORenderlets['editSpeakerModalBox']->majixShowBox();
-        $form->oRenderer->_setDisplayLabels(false);
+        $form->getRenderer()->_setDisplayLabels(true);
+        /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
+        $modalBox = $form->aORenderlets['editSpeakerModalBox'];
+        $result[] = $modalBox->majixShowBox();
+        $form->getRenderer()->_setDisplayLabels(false);
 
-        $result[] = $form->aORenderlets['editSpeakerModalBox__editSpeaker_skills']->majixCheckNone();
+        /** @var \tx_mkforms_widgets_checkbox_Main $checkboxRenderlet */
+        $checkboxRenderlet = $form->aORenderlets['editSpeakerModalBox__editSpeaker_skills'];
+        $result[] = $checkboxRenderlet->majixCheckNone();
 
         $skills = $speaker->getSkills();
         /** @var Tx_Seminars_Model_Skill $skill */
         foreach ($skills as $skill) {
-            $result[] = $form->aORenderlets['editSpeakerModalBox__editSpeaker_skills']
-                ->majixCheckItem($skill->getUid());
+            $result[] = $checkboxRenderlet->majixCheckItem($skill->getUid());
         }
 
         return $result;
@@ -2103,7 +2118,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     public static function createNewCheckbox(\tx_mkforms_forms_Base $form)
     {
-        $formData = $form->oMajixEvent->getParams();
+        /** @var \formidableajax $ajax */
+        $ajax = $form->getMajix();
+        $formData = $ajax->getParams();
         $validationErrors = self::validateCheckbox(
             $form,
             ['title' => $formData['newCheckbox_title']]
@@ -2125,29 +2142,29 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
         $mapper->save($checkbox);
 
-        $editButtonConfiguration = $form->_navConf(
-            $form->aORenderlets['editCheckboxButton']->sXPath
-        );
+        /** @var \formidable_mainrenderlet $renderlet */
+        $renderlet = $form->aORenderlets['editCheckboxButton'];
+        $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         $editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
         $editButtonConfiguration['onclick']['userobj']['php'] = '
-			return Tx_Seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
-			';
-        $editButton = $form->_makeRenderlet(
-            $editButtonConfiguration,
-            $form->aORenderlets['editCheckboxButton']->sXPath
-        );
+            return Tx_Seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
+        ';
+        $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
         $editButton->includeScripts();
         $editButtonHTML = $editButton->_render();
 
+        /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
+        $modalBox = $form->aORenderlets['newCheckboxModalBox'];
+
         return [
-            $form->aORenderlets['newCheckboxModalBox']->majixCloseBox(),
+            $modalBox->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.appendCheckboxInEditor(' . $checkbox->getUid() . ', "' .
                     addcslashes($checkbox->getTitle(), '"\\') . '", {
-						"name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
-						"id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
-						"value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
-					});'
+                        "name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
+                        "id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
+                        "value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
+                    });'
             ),
         ];
     }
@@ -2163,7 +2180,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     public static function updateCheckbox(\tx_mkforms_forms_Base $form)
     {
-        $formData = $form->oMajixEvent->getParams();
+        /** @var \formidableajax $ajax */
+        $ajax = $form->getMajix();
+        $formData = $ajax->getParams();
         $frontEndUser = self::getLoggedInUser();
         /** @var Tx_Seminars_Mapper_Checkbox $checkboxMapper */
         $checkboxMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class);
@@ -2198,8 +2217,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $htmlId = 'tx_seminars_pi1_seminars_checkbox_label_' . $checkbox->getUid();
 
+        /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
+        $modalBox = $form->aORenderlets['editCheckboxModalBox'];
+
         return [
-            $form->aORenderlets['editCheckboxModalBox']->majixCloseBox(),
+            $modalBox->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
                     addcslashes($checkbox->getTitle(), '"\\') . '")'
@@ -2289,12 +2311,16 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         ];
 
         foreach ($fields as $key => $value) {
-            $form->aORenderlets['editCheckbox_' . $key]->setValue($value);
+            /** @var \formidable_mainrenderlet $renderlet */
+            $renderlet = $form->aORenderlets['editCheckbox_' . $key];
+            $renderlet->setValue($value);
         }
 
-        $form->oRenderer->_setDisplayLabels(true);
-        $result = $form->aORenderlets['editCheckboxModalBox']->majixShowBox();
-        $form->oRenderer->_setDisplayLabels(false);
+        $form->getRenderer()->_setDisplayLabels(true);
+        /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
+        $modalBox = $form->aORenderlets['editCheckboxModalBox'];
+        $result = $modalBox->majixShowBox();
+        $form->getRenderer()->_setDisplayLabels(false);
 
         return $result;
     }
@@ -2310,7 +2336,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     public static function createNewTargetGroup(\tx_mkforms_forms_Base $form)
     {
-        $formData = $form->oMajixEvent->getParams();
+        /** @var \formidableajax $ajax */
+        $ajax = $form->getMajix();
+        $formData = $ajax->getParams();
         $validationErrors = self::validateTargetGroup(
             $form,
             [
@@ -2336,30 +2364,30 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
         $mapper->save($targetGroup);
 
-        $editButtonConfiguration = $form->_navConf(
-            $form->aORenderlets['editTargetGroupButton']->sXPath
-        );
+        /** @var \formidable_mainrenderlet $renderlet */
+        $renderlet = $form->aORenderlets['editTargetGroupButton'];
+        $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         $editButtonConfiguration['name'] = 'editTargetGroupButton_' .
             $targetGroup->getUid();
         $editButtonConfiguration['onclick']['userobj']['php'] = '
-			return Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
-			';
-        $editButton = $form->_makeRenderlet(
-            $editButtonConfiguration,
-            $form->aORenderlets['editTargetGroupButton']->sXPath
-        );
+            return Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
+        ';
+        $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
         $editButton->includeScripts();
         $editButtonHTML = $editButton->_render();
 
+        /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
+        $modalBox = $form->aORenderlets['newTargetGroupModalBox'];
+
         return [
-            $form->aORenderlets['newTargetGroupModalBox']->majixCloseBox(),
+            $modalBox->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.appendTargetGroupInEditor(' . $targetGroup->getUid() . ', "' .
                     addcslashes($targetGroup->getTitle(), '"\\') . '", {
-						"name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
-						"id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
-						"value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
-					});'
+                        "name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
+                        "id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
+                        "value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
+                    });'
             ),
         ];
     }
@@ -2375,7 +2403,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     public static function updateTargetGroup(\tx_mkforms_forms_Base $form)
     {
-        $formData = $form->oMajixEvent->getParams();
+        /** @var \formidableajax $ajax */
+        $ajax = $form->getMajix();
+        $formData = $ajax->getParams();
         $frontEndUser = self::getLoggedInUser();
         /** @var Tx_Seminars_Mapper_TargetGroup $targetGroupMapper */
         $targetGroupMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_TargetGroup::class);
@@ -2414,8 +2444,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $htmlId = 'tx_seminars_pi1_seminars_target_group_label_' . $targetGroup->getUid();
 
+        /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
+        $modalBox = $form->aORenderlets['editTargetGroupModalBox'];
+
         return [
-            $form->aORenderlets['editTargetGroupModalBox']->majixCloseBox(),
+            $modalBox->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
                     addcslashes($targetGroup->getTitle(), '"\\') . '")'
@@ -2536,12 +2569,17 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         ];
 
         foreach ($fields as $key => $value) {
-            $form->aORenderlets['editTargetGroup_' . $key]->setValue($value);
+            /** @var \formidable_mainrenderlet $renderlet */
+            $renderlet = $form->aORenderlets['editTargetGroup_' . $key];
+            $renderlet->setValue($value);
         }
 
-        $form->oRenderer->_setDisplayLabels(true);
-        $result = $form->aORenderlets['editTargetGroupModalBox']->majixShowBox();
-        $form->oRenderer->_setDisplayLabels(false);
+        $form->getRenderer()->_setDisplayLabels(true);
+
+        /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
+        $modalBox = $form->aORenderlets['editTargetGroupModalBoxBox'];
+        $result = $modalBox->majixShowBox();
+        $form->getRenderer()->_setDisplayLabels(false);
 
         return $result;
     }
@@ -2601,7 +2639,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
 
         $result = [];
 
-        /** @var Tx_Oelib_Model $model */
+        /** @var \Tx_Oelib_Model|\Tx_Seminars_Interface_Titled $model */
         foreach ($models as $model) {
             $result[] = [
                 'caption' => $model->getTitle(),

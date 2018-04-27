@@ -11,6 +11,11 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class Tx_Seminars_Bag_Registration extends Tx_Seminars_Bag_Abstract
 {
     /**
+     * @var ContentObjectRenderer
+     */
+    protected $cObj = null;
+
+    /**
      * The constructor. Creates a bag that contains test records and allows to iterate over them.
      *
      * @param string $queryParameters

@@ -28,7 +28,7 @@ class Tx_Seminars_BackEnd_GeneralEventMailForm extends Tx_Seminars_BackEnd_Abstr
      */
     protected function getSubmitButtonLabel()
     {
-        return $GLOBALS['LANG']->getLL('generalMailForm_sendButton');
+        return $this->getLanguageService()->getLL('generalMailForm_sendButton');
     }
 
     /**

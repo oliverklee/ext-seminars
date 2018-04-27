@@ -31,7 +31,7 @@ class Tx_Seminars_BackEnd_CancelEventMailForm extends Tx_Seminars_BackEnd_Abstra
      */
     protected function getSubmitButtonLabel()
     {
-        return $GLOBALS['LANG']->getLL('cancelMailForm_sendButton');
+        return $this->getLanguageService()->getLL('cancelMailForm_sendButton');
     }
 
     /**
@@ -49,7 +49,7 @@ class Tx_Seminars_BackEnd_CancelEventMailForm extends Tx_Seminars_BackEnd_Abstra
         /** @var FlashMessage $message */
         $message = GeneralUtility::makeInstance(
             FlashMessage::class,
-            $GLOBALS['LANG']->getLL('message_eventCanceled'),
+            $this->getLanguageService()->getLL('message_eventCanceled'),
             '',
             FlashMessage::OK,
             true

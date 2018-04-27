@@ -775,8 +775,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * As speakers can be related to this event as speakers, partners, tutors or
      * leaders, the type relation can be specified. The default is "speakers".
      *
-     * @param AbstractPlugin $plugin
-     *        the live pibase object
+     * @param \Tx_Oelib_TemplateHelper $plugin the live pibase object
      * @param string $speakerRelation
      *        the relation in which the speakers stand to this event:
      *        "speakers" (default), "partners", "tutors" or "leaders"
@@ -784,7 +783,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string our speakers (or '' if there is an error)
      */
     public function getSpeakersWithDescription(
-        AbstractPlugin $plugin,
+        \Tx_Oelib_TemplateHelper $plugin,
         $speakerRelation = 'speakers'
     ) {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
@@ -2239,11 +2238,11 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * Gets our organizers (as HTML code with hyperlinks to their homepage, if
      * they have any).
      *
-     * @param AbstractPlugin $plugin an object for a live page
+     * @param \Tx_Oelib_TemplateHelper $plugin
      *
      * @return string the hyperlinked names of our organizers
      */
-    public function getOrganizers(AbstractPlugin $plugin)
+    public function getOrganizers(\Tx_Oelib_TemplateHelper $plugin)
     {
         if (!$this->hasOrganizers()) {
             return '';
@@ -2388,11 +2387,11 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * Returns an empty string if this event has no organizing partners or
      * something went wrong with the database query.
      *
-     * @param AbstractPlugin $plugin an object for a live page
+     * @param \Tx_Oelib_TemplateHelper $plugin
      *
      * @return string the hyperlinked names of our organizing partners, or an empty string
      */
-    public function getOrganizingPartners(AbstractPlugin $plugin)
+    public function getOrganizingPartners(\Tx_Oelib_TemplateHelper $plugin)
     {
         if (!$this->hasOrganizingPartners()) {
             return '';
@@ -4417,6 +4416,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $bag = $builder->build();
 
         $result = [];
+        /** @var \Tx_Seminars_OldModel_Category $category */
         foreach ($bag as $key => $category) {
             $result[$key] =
                 [
