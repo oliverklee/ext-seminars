@@ -1980,8 +1980,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
     {
         /** @var Tx_Seminars_Mapper_Skill $skillMapper */
         $skillMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Skill::class);
-        /** @var Tx_Oelib_List $skills */
-        $skills = GeneralUtility::makeInstance(Tx_Oelib_List::class);
+        $skills = new \Tx_Oelib_List();
 
         if (is_array($formData[$prefix . 'skills'])) {
             foreach ($formData[$prefix . 'skills'] as $rawUid) {
