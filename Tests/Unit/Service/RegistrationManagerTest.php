@@ -534,7 +534,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
      *
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=4504
      */
-    public function testGetLinkToRegistrationOrLoginPageWithLoggedInUserAndSeparateDetailsPageCreatesLinkToRegistrationPage()
+    public function getLinkToRegistrationOrLoginPageWithLoggedInUserAndSeparateDetailsPageCreatesLinkToRegistrationPage()
     {
         $this->createFrontEndPages();
 

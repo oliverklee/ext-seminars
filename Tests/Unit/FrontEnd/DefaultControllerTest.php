@@ -688,8 +688,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     {
         $this->fixture->createSeminar($this->seminarUid);
 
-        self::assertTrue(
-            $this->fixture->getSeminar() instanceof Tx_Seminars_OldModel_Event
+        self::assertInstanceOf(
+            Tx_Seminars_OldModel_Event::class,
+            $this->fixture->getSeminar()
         );
     }
 
@@ -702,17 +703,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             )
         );
 
-        self::assertTrue(
+        self::assertInstanceOf(
+            Tx_Seminars_OldModel_Registration::class,
             $this->fixture->getRegistration()
-                instanceof Tx_Seminars_OldModel_Registration
         );
     }
 
     public function testGetRegistrationManagerReturnsRegistrationManager()
     {
-        self::assertTrue(
+        self::assertInstanceOf(
+            Tx_Seminars_Service_RegistrationManager::class,
             $this->fixture->getRegistrationManager()
-                instanceof Tx_Seminars_Service_RegistrationManager
         );
     }
 
@@ -1911,7 +1912,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      *
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=4483
      */
-    public function testSingleViewDisplaysTimeslotTimesWithDash()
+    public function singleViewDisplaysTimeSlotTimesWithDash()
     {
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $timeSlotUid = $this->testingFramework->createRecord(
@@ -1938,7 +1939,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     /**
      * @test
      */
-    public function testSingleViewCanContainOneHtmlspecialcharedTimeSlotRoom()
+    public function singleViewCanContainOneHtmlspecialcharedTimeSlotRoom()
     {
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $timeSlotUid = $this->testingFramework->createRecord(
@@ -2433,7 +2434,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     /**
      * @test
      */
-    public function testSingleViewContainsHtmlspecialcharedEventTypeTitleAndColonIfEventHasEventType()
+    public function singleViewContainsHtmlspecialcharedEventTypeTitleAndColonIfEventHasEventType()
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -6826,8 +6827,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->piVars['place'] = ['foo'];
         $this->fixture->main('', []);
 
-        self::assertTrue(
-            empty($this->fixture->piVars['place'])
+        self::assertEmpty(
+            $this->fixture->piVars['place']
         );
     }
 
@@ -6836,8 +6837,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->piVars['organizer'] = ['foo'];
         $this->fixture->main('', []);
 
-        self::assertTrue(
-            empty($this->fixture->piVars['organizer'])
+        self::assertEmpty(
+            $this->fixture->piVars['organizer']
         );
     }
 
@@ -6846,8 +6847,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->piVars['event_type'] = ['foo'];
         $this->fixture->main('', []);
 
-        self::assertTrue(
-            empty($this->fixture->piVars['event_type'])
+        self::assertEmpty(
+            $this->fixture->piVars['event_type']
         );
     }
 

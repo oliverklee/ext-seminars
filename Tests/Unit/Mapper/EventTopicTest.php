@@ -259,8 +259,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTopicTest extends Tx_Phpunit_TestCase
 
         /** @var Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
-        self::assertTrue(
-            $model->getTargetGroups()->first() instanceof Tx_Seminars_Model_TargetGroup
+        self::assertInstanceOf(
+            Tx_Seminars_Model_TargetGroup::class,
+            $model->getTargetGroups()->first()
         );
     }
 
@@ -392,8 +393,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTopicTest extends Tx_Phpunit_TestCase
 
         /** @var Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
-        self::assertTrue(
-            $model->getRequirements()->first() instanceof Tx_Seminars_Model_Event
+        self::assertInstanceOf(
+            Tx_Seminars_Model_Event::class,
+            $model->getRequirements()->first()
         );
     }
 
@@ -461,8 +463,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTopicTest extends Tx_Phpunit_TestCase
 
         /** @var Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($relatedUid);
-        self::assertTrue(
-            $model->getDependencies()->first() instanceof Tx_Seminars_Model_Event
+        self::assertInstanceOf(
+            Tx_Seminars_Model_Event::class,
+            $model->getDependencies()->first()
         );
     }
 

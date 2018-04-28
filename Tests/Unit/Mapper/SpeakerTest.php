@@ -40,8 +40,9 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
-        self::assertTrue(
-            $this->fixture->find($uid) instanceof Tx_Seminars_Model_Speaker
+        self::assertInstanceOf(
+            Tx_Seminars_Model_Speaker::class,
+            $this->fixture->find($uid)
         );
     }
 

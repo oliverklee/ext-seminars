@@ -661,11 +661,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             'tx_seminars_categories'
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $categoryUid],
-                $this->fixture->populateListCategories([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $categoryUid],
+            $this->fixture->populateListCategories([])
         );
     }
 
@@ -680,11 +678,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['pid' => 23]
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $categoryUid],
-                $this->fixture->populateListCategories([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $categoryUid],
+            $this->fixture->populateListCategories([])
         );
     }
 
@@ -702,11 +698,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             'tx_seminars_event_types'
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $eventTypeUid],
-                $this->fixture->populateListEventTypes([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $eventTypeUid],
+            $this->fixture->populateListEventTypes([])
         );
     }
 
@@ -721,11 +715,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['pid' => 87]
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $eventTypeUid],
-                $this->fixture->populateListEventTypes([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $eventTypeUid],
+            $this->fixture->populateListEventTypes([])
         );
     }
 
@@ -743,11 +735,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             'tx_seminars_lodgings'
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $lodgingUid],
-                $this->fixture->populateListLodgings([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $lodgingUid],
+            $this->fixture->populateListLodgings([])
         );
     }
 
@@ -762,11 +752,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['pid' => 11]
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $lodgingUid],
-                $this->fixture->populateListLodgings([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $lodgingUid],
+            $this->fixture->populateListLodgings([])
         );
     }
 
@@ -784,11 +772,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             'tx_seminars_foods'
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $foodUid],
-                $this->fixture->populateListFoods([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $foodUid],
+            $this->fixture->populateListFoods([])
         );
     }
 
@@ -803,11 +789,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['pid' => 22]
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $foodUid],
-                $this->fixture->populateListFoods([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $foodUid],
+            $this->fixture->populateListFoods([])
         );
     }
 
@@ -825,11 +809,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             'tx_seminars_payment_methods'
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $paymentMethodUid],
-                $this->fixture->populateListPaymentMethods([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $paymentMethodUid],
+            $this->fixture->populateListPaymentMethods([])
         );
     }
 
@@ -844,11 +826,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['pid' => 52]
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $paymentMethodUid],
-                $this->fixture->populateListPaymentMethods([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $paymentMethodUid],
+            $this->fixture->populateListPaymentMethods([])
         );
     }
 
@@ -866,11 +846,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             'tx_seminars_organizers'
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $organizerUid],
-                $this->fixture->populateListOrganizers([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $organizerUid],
+            $this->fixture->populateListOrganizers([])
         );
     }
 
@@ -885,11 +863,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['pid' => 12]
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $organizerUid],
-                $this->fixture->populateListOrganizers([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $organizerUid],
+            $this->fixture->populateListOrganizers([])
         );
     }
 
@@ -908,11 +884,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         $this->testingFramework
             ->createAndLoginFrontEndUser($frontEndUserGroupUid);
 
-        self::assertTrue(
-            in_array(
-                ['caption' => '', 'value' => $organizerUid],
-                $this->fixture->populateListOrganizers([])
-            )
+        self::assertContains(
+            ['caption' => '', 'value' => $organizerUid],
+            $this->fixture->populateListOrganizers([])
         );
     }
 
@@ -938,11 +912,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         $this->testingFramework
             ->createAndLoginFrontEndUser($frontEndUserGroupUid);
 
-        self::assertFalse(
-            in_array(
-                ['caption' => '', 'value' => $organizerUidFromDatabase],
-                $this->fixture->populateListOrganizers([])
-            )
+        self::assertNotContains(
+            ['caption' => '', 'value' => $organizerUidFromDatabase],
+            $this->fixture->populateListOrganizers([])
         );
     }
 
@@ -960,14 +932,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             'tx_seminars_sites'
         );
 
-        self::assertTrue(
-            in_array(
-                [
-                    'caption' => '', 'value' => $placeUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListPlaces([])
-            )
+        self::assertContains(
+            [
+                'caption' => '',
+                'value' => $placeUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListPlaces([])
         );
     }
 
@@ -982,14 +953,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['owner' => $frontEndUserUid]
         );
 
-        self::assertTrue(
-            in_array(
-                [
-                    'caption' => '', 'value' => $placeUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListPlaces([])
-            )
+        self::assertContains(
+            [
+                'caption' => '',
+                'value' => $placeUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListPlaces([])
         );
     }
 
@@ -1004,14 +974,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['owner' => $frontEndUserUid + 1]
         );
 
-        self::assertFalse(
-            in_array(
-                [
-                    'caption' => '', 'value' => $placeUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListPlaces([])
-            )
+        self::assertNotContains(
+            [
+                'caption' => '',
+                'value' => $placeUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListPlaces([])
         );
     }
 
@@ -1026,14 +995,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['pid' => 55]
         );
 
-        self::assertTrue(
-            in_array(
-                [
-                    'caption' => '', 'value' => $placeUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListPlaces([])
-            )
+        self::assertContains(
+            [
+                'caption' => '',
+                'value' => $placeUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListPlaces([])
         );
     }
 
@@ -1051,14 +1019,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             'tx_seminars_checkboxes'
         );
 
-        self::assertTrue(
-            in_array(
-                [
-                    'caption' => '', 'value' => $checkboxUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListCheckboxes([])
-            )
+        self::assertContains(
+            [
+                'caption' => '',
+                'value' => $checkboxUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListCheckboxes([])
         );
     }
 
@@ -1073,14 +1040,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['owner' => $frontEndUserUid]
         );
 
-        self::assertTrue(
-            in_array(
-                [
-                    'caption' => '', 'value' => $checkboxUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListCheckboxes([])
-            )
+        self::assertContains(
+            [
+                'caption' => '',
+                'value' => $checkboxUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListCheckboxes([])
         );
     }
 
@@ -1095,14 +1061,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['owner' => $frontEndUserUid + 1]
         );
 
-        self::assertFalse(
-            in_array(
-                [
-                    'caption' => '', 'value' => $checkboxUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListCheckboxes([])
-            )
+        self::assertNotContains(
+            [
+                'caption' => '',
+                'value' => $checkboxUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListCheckboxes([])
         );
     }
 
@@ -1117,14 +1082,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['pid' => 12]
         );
 
-        self::assertTrue(
-            in_array(
-                [
-                    'caption' => '', 'value' => $checkboxUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListCheckboxes([])
-            )
+        self::assertContains(
+            [
+                'caption' => '',
+                'value' => $checkboxUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListCheckboxes([])
         );
     }
 
@@ -1142,14 +1106,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             'tx_seminars_target_groups'
         );
 
-        self::assertTrue(
-            in_array(
-                [
-                    'caption' => '', 'value' => $targetGroupUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListTargetGroups([])
-            )
+        self::assertContains(
+            [
+                'caption' => '',
+                'value' => $targetGroupUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListTargetGroups([])
         );
     }
 
@@ -1164,14 +1127,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['owner' => $frontEndUserUid]
         );
 
-        self::assertTrue(
-            in_array(
-                [
-                    'caption' => '', 'value' => $targetGroupUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListTargetGroups([])
-            )
+        self::assertContains(
+            [
+                'caption' => '',
+                'value' => $targetGroupUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListTargetGroups([])
         );
     }
 
@@ -1186,14 +1148,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['owner' => $frontEndUserUid + 1]
         );
 
-        self::assertFalse(
-            in_array(
-                [
-                    'caption' => '', 'value' => $targetGroupUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListTargetGroups([])
-            )
+        self::assertNotContains(
+            [
+                'caption' => '',
+                'value' => $targetGroupUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListTargetGroups([])
         );
     }
 
@@ -1208,14 +1169,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['pid' => 42]
         );
 
-        self::assertTrue(
-            in_array(
-                [
-                    'caption' => '', 'value' => $targetGroupUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListTargetGroups([])
-            )
+        self::assertContains(
+            [
+                'caption' => '',
+                'value' => $targetGroupUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListTargetGroups([])
         );
     }
 
@@ -1233,14 +1193,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             'tx_seminars_speakers'
         );
 
-        self::assertTrue(
-            in_array(
-                [
-                    'caption' => '', 'value' => $speakerUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListSpeakers([])
-            )
+        self::assertContains(
+            [
+                'caption' => '',
+                'value' => $speakerUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListSpeakers([])
         );
     }
 
@@ -1255,14 +1214,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['owner' => $frontEndUserUid]
         );
 
-        self::assertTrue(
-            in_array(
-                [
-                    'caption' => '', 'value' => $speakerUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListSpeakers([])
-            )
+        self::assertContains(
+            [
+                'caption' => '',
+                'value' => $speakerUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListSpeakers([])
         );
     }
 
@@ -1277,14 +1235,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['owner' => $frontEndUserUid + 1]
         );
 
-        self::assertFalse(
-            in_array(
-                [
-                    'caption' => '', 'value' => $speakerUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListSpeakers([])
-            )
+        self::assertNotContains(
+            [
+                'caption' => '',
+                'value' => $speakerUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListSpeakers([])
         );
     }
 
@@ -1299,14 +1256,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['pid' => 25]
         );
 
-        self::assertTrue(
-            in_array(
-                [
-                    'caption' => '', 'value' => $speakerUid,
-                    'wrapitem' => '|</td><td>&nbsp;',
-                ],
-                $this->fixture->populateListSpeakers([])
-            )
+        self::assertContains(
+            [
+                'caption' => '',
+                'value' => $speakerUid,
+                'wrapitem' => '|</td><td>&nbsp;',
+            ],
+            $this->fixture->populateListSpeakers([])
         );
     }
 
@@ -2842,11 +2798,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function populateListCountriesContainsGermany()
     {
-        self::assertTrue(
-            in_array(
-                ['caption' => 'Deutschland', 'value' => 54],
-                Tx_Seminars_FrontEnd_EventEditor::populateListCountries()
-            )
+        self::assertContains(
+            ['caption' => 'Deutschland', 'value' => 54],
+            Tx_Seminars_FrontEnd_EventEditor::populateListCountries()
         );
     }
 
@@ -2884,11 +2838,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['title' => 'Juggling']
         );
 
-        self::assertTrue(
-            in_array(
-                ['caption' => 'Juggling', 'value' => $uid],
-                Tx_Seminars_FrontEnd_EventEditor::populateListSkills()
-            )
+        self::assertContains(
+            ['caption' => 'Juggling', 'value' => $uid],
+            Tx_Seminars_FrontEnd_EventEditor::populateListSkills()
         );
     }
 
@@ -2921,11 +2873,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         $list = new Tx_Oelib_List();
         $list->add($targetGroup);
 
-        self::assertTrue(
-            in_array(
-                ['caption' => 'foo', 'value' => $targetGroup->getUid()],
-                Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList($list)
-            )
+        self::assertContains(
+            ['caption' => 'foo', 'value' => $targetGroup->getUid()],
+            Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList($list)
         );
     }
 
@@ -2945,9 +2895,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         $list->add($targetGroup1);
         $list->add($targetGroup2);
 
-        self::assertEquals(
+        self::assertCount(
             2,
-            count(Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList($list))
+            Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList($list)
         );
     }
 
