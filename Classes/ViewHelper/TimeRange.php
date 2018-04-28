@@ -22,8 +22,8 @@ class Tx_Seminars_ViewHelper_TimeRange
      */
     public function __construct()
     {
-        $this->configuration = Tx_Oelib_ConfigurationRegistry::getInstance()->get('plugin.tx_seminars');
-        $this->translator = Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars');
+        $this->configuration = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
+        $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
     }
 
     /**

@@ -415,7 +415,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
                 /** @var Tx_Seminars_Model_Registration $registration */
                 $registration = $registrationMapper->find($oldRegistration->getUid());
                 $user = $registration->getFrontEndUser();
-                if (($user === null) || !$user->hasEMailAddress()) {
+                if (($user === null) || !$user->hasEmailAddress()) {
                     continue;
                 }
                 /** @var Tx_Oelib_Mail $eMail */
@@ -611,8 +611,8 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
             $salutation->getSalutation($user),
             $this->getPostData('messageBody')
         );
-        $messageFooter = $organizer->hasEmailFooter()
-            ? LF . '-- ' . LF . $organizer->getEmailFooter() : '';
+        $messageFooter = $organizer->hasEMailFooter()
+            ? LF . '-- ' . LF . $organizer->getEMailFooter() : '';
 
         return $messageText . $messageFooter;
     }

@@ -816,7 +816,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
             return;
         }
 
-        if (!$oldRegistration->getFrontEndUser()->hasEMailAddress()) {
+        if (!$oldRegistration->getFrontEndUser()->hasEmailAddress()) {
             return;
         }
 
@@ -832,7 +832,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
 
         $mailFormat = Tx_Oelib_ConfigurationProxy::getInstance('seminars')->getAsInteger('eMailFormatForAttendees');
         if (($mailFormat == self::SEND_HTML_MAIL)
-            || (($mailFormat == self::SEND_USER_MAIL) && $oldRegistration->getFrontEndUser()->wantsHtmlEMail())
+            || (($mailFormat == self::SEND_USER_MAIL) && $oldRegistration->getFrontEndUser()->wantsHtmlEmail())
         ) {
             $eMailNotification->setCssFile($this->getConfValueString('cssFileForAttendeeMail'));
             $eMailNotification->setHTMLMessage($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix, true));

@@ -1412,7 +1412,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
     public function testUserFulfillsRequirementsForEventWithoutRequirementsReturnsTrue()
     {
-        $this->testingFramework->createAndLogInFrontEndUser();
+        $this->testingFramework->createAndLoginFrontEndUser();
 
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1450,7 +1450,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
             'tx_seminars_attendances',
             [
                 'seminar' => $requiredDateUid,
-                'user' => $this->testingFramework->createAndLogInFrontEndUser(),
+                'user' => $this->testingFramework->createAndLoginFrontEndUser(),
             ]
         );
 
@@ -1482,7 +1482,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
     public function testUserFulfillsRequirementsForEventWithOneUnfulfilledRequirementReturnsFalse()
     {
-        $this->testingFramework->createAndLogInFrontEndUser();
+        $this->testingFramework->createAndLoginFrontEndUser();
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1534,7 +1534,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
     public function testGetMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsOneItem()
     {
-        $this->testingFramework->createAndLogInFrontEndUser();
+        $this->testingFramework->createAndLoginFrontEndUser();
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1578,7 +1578,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
     public function testGetMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsRequiredTopic()
     {
-        $this->testingFramework->createAndLogInFrontEndUser();
+        $this->testingFramework->createAndLoginFrontEndUser();
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1622,7 +1622,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
     public function testGetMissingRequiredTopicsForTopicWithOneTwoNotFulfilledRequirementReturnsTwoItems()
     {
-        $this->testingFramework->createAndLogInFrontEndUser();
+        $this->testingFramework->createAndLoginFrontEndUser();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1685,7 +1685,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
     public function testGetMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledReturnsUnfulfilledTopic()
     {
-        $userUid = $this->testingFramework->createAndLogInFrontEndUser();
+        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1745,7 +1745,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
     public function testGetMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledDoesNotReturnFulfilledTopic()
     {
-        $userUid = $this->testingFramework->createAndLogInFrontEndUser();
+        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -3992,7 +3992,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $this->fixture->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_informal'),
+            \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_informal'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -4021,7 +4021,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $this->fixture->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_2'),
+            \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_formal_2'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -4050,7 +4050,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $this->fixture->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_0'),
+            \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_formal_0'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -4079,7 +4079,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $this->fixture->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_1'),
+            \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_formal_1'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -5964,7 +5964,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
      */
     public function createRegistrationCallsSeminarRegistrationCreatedHook()
     {
-        $this->createAndLoginFrontEndUser();
+        $this->createAndLogInFrontEndUser();
 
         $hookClass = uniqid('tx_registrationHook');
         $hook = $this->getMock($hookClass, ['seminarRegistrationCreated']);

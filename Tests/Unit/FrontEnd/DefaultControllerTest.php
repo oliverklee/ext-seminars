@@ -2828,7 +2828,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
-        self::assertRegexp(
+        self::assertRegExp(
             '#<a href="http://www.orgabar.com".*>foo &amp; bar</a>#',
             $this->fixture->main('', [])
         );
@@ -6895,7 +6895,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
-        self::assertNotRegexp(
+        self::assertNotRegExp(
             '/(<p>|<br \\/>)\\s*<br \\/>\\s*(<br \\/>|<\\/p>)/m',
             $this->fixture->main('', [])
         );

@@ -19,7 +19,7 @@ class Tx_Seminars_EmailSalutation
      */
     public function __construct()
     {
-        $this->translator = Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars');
+        $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
     }
 
     /**

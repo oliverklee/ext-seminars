@@ -324,7 +324,7 @@ class MailNotifier extends AbstractTask
         $result = $this->getLanguageService()->getLL($locallangKey);
 
         foreach ([
-            '%begin_date' => $this->getDate($event->getBeginDateAsTimeStamp()),
+            '%begin_date' => $this->getDate($event->getBeginDateAsTimestamp()),
             '%days' => $this->getDaysBeforeBeginDate(),
             '%event' => $event->getTitle(),
             '%organizer' => $organizerName,
