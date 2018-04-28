@@ -28,7 +28,7 @@ if (TYPO3_MODE === 'BE'
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
     [
-        \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tt_content.list_type_pi1',
+        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tt_content.list_type_pi1',
         'seminars_pi1',
         'EXT:seminars/ext_icon.gif',
     ],

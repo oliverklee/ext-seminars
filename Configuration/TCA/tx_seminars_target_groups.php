@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 return [
     'ctrl' => [
-        'title' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_target_groups',
+        'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups',
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -19,44 +19,44 @@ return [
     'columns' => [
         'title' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_target_groups.title',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.title',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'required,trim',
             ],
         ],
         'minimum_age' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_target_groups.minimum_age',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.minimum_age',
             'config' => [
                 'type' => 'input',
-                'size' => '3',
+                'size' => 3,
                 'eval' => 'int',
                 'checkbox' => '0',
                 'range' => [
-                    'lower' => '0',
-                    'upper' => '199',
+                    'lower' => 0,
+                    'upper' => 199,
                 ],
             ],
         ],
         'maximum_age' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_target_groups.maximum_age',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.maximum_age',
             'config' => [
                 'type' => 'input',
-                'size' => '3',
+                'size' => 3,
                 'eval' => 'int',
                 'checkbox' => '0',
                 'range' => [
-                    'lower' => '0',
-                    'upper' => '199',
+                    'lower' => 0,
+                    'upper' => 199,
                 ],
             ],
         ],
         'owner' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'owner_feuser',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:owner_feuser',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -68,7 +68,7 @@ return [
         ],
     ],
     'types' => [
-        '0' => ['showitem' => 'title;;;;2-2-2, minimum_age, maximum_age, owner'],
+        '0' => ['showitem' => 'title, minimum_age, maximum_age, owner'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],

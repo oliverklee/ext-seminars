@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 return [
     'ctrl' => [
-        'title' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances',
+        'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances',
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -25,7 +25,7 @@ return [
     'columns' => [
         'title' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.title',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.title',
             'config' => [
                 'type' => 'input',
                 'readOnly' => 1,
@@ -33,14 +33,14 @@ return [
         ],
         'uid' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.uid',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.uid',
             'config' => [
                 'type' => 'none',
             ],
         ],
         'seminar' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.seminar',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.seminar',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -52,7 +52,7 @@ return [
         ],
         'user' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.user',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.user',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -64,7 +64,7 @@ return [
         ],
         'been_there' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.been_there',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.been_there',
             'config' => [
                 'type' => 'check',
             ],
@@ -79,30 +79,30 @@ return [
         ],
         'registration_queue' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.registration_queue',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.registration_queue',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'seats' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.seats',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.seats',
             'config' => [
                 'type' => 'input',
-                'size' => '3',
-                'max' => '3',
+                'size' => 3,
+                'max' => 3,
                 'eval' => 'int',
                 'checkbox' => '0',
                 'range' => [
-                    'upper' => '999',
-                    'lower' => '0',
+                    'upper' => 999,
+                    'lower' => 0,
                 ],
                 'default' => '1',
             ],
         ],
         'registered_themselves' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.registered_themselves',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.registered_themselves',
             'config' => [
                 'type' => 'check',
                 'default' => '1',
@@ -110,20 +110,20 @@ return [
         ],
         'price' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.price',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.price',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'trim',
             ],
         ],
         'total_price' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.total_price',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.total_price',
             'config' => [
                 'type' => 'input',
-                'size' => '10',
-                'max' => '10',
+                'size' => 10,
+                'max' => 10,
                 'eval' => 'double2',
                 'checkbox' => '0.00',
                 'range' => [
@@ -135,16 +135,16 @@ return [
         ],
         'attendees_names' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.attendees_names',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.attendees_names',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
         ],
         'additional_persons' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.additional_persons',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.additional_persons',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'fe_users',
@@ -159,25 +159,26 @@ return [
         ],
         'kids' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.kids',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.kids',
             'config' => [
                 'type' => 'input',
-                'size' => '3',
-                'max' => '3',
+                'size' => 3,
+                'max' => 3,
                 'eval' => 'int',
                 'checkbox' => '0',
                 'range' => [
-                    'upper' => '999',
-                    'lower' => '0',
+                    'upper' => 999,
+                    'lower' => 0,
                 ],
                 'default' => '0',
             ],
         ],
         'foods' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.foods',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.foods',
             'config' => [
                 'type' => \OliverKlee\Seminars\BackEnd\TceForms::getSelectType(),
+                'renderType' => 'selectMultipleSideBySide',
                 'internal_type' => 'db',
                 'allowed' => 'tx_seminars_foods',
                 'foreign_table' => 'tx_seminars_foods',
@@ -194,18 +195,19 @@ return [
         ],
         'food' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.food',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.food',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
         ],
         'lodgings' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.lodgings',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.lodgings',
             'config' => [
                 'type' => \OliverKlee\Seminars\BackEnd\TceForms::getSelectType(),
+                'renderType' => 'selectMultipleSideBySide',
                 'internal_type' => 'db',
                 'allowed' => 'tx_seminars_lodgings',
                 'foreign_table' => 'tx_seminars_lodgings',
@@ -222,18 +224,19 @@ return [
         ],
         'accommodation' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.accommodation',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.accommodation',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
         ],
         'checkboxes' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.checkboxes',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.checkboxes',
             'config' => [
                 'type' => \OliverKlee\Seminars\BackEnd\TceForms::getSelectType(),
+                'renderType' => 'selectMultipleSideBySide',
                 'internal_type' => 'db',
                 'allowed' => 'tx_seminars_checkboxes',
                 'foreign_table' => 'tx_seminars_checkboxes',
@@ -250,56 +253,56 @@ return [
         ],
         'interests' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.interests',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.interests',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
         ],
         'expectations' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.expectations',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.expectations',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
         ],
         'background_knowledge' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.background_knowledge',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.background_knowledge',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
         ],
         'known_from' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.known_from',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.known_from',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
         ],
         'notes' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.notes',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.notes',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
         ],
         'datepaid' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.datepaid',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.datepaid',
             'config' => [
                 'type' => 'input',
-                'size' => '8',
-                'max' => '20',
+                'size' => 8,
+                'max' => 20,
                 'eval' => 'date',
                 'checkbox' => '0',
                 'default' => '0',
@@ -307,9 +310,10 @@ return [
         ],
         'currency' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.currency',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.currency',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'internal_type' => 'db',
                 'allowed' => 'static_currencies',
                 'foreign_table' => 'static_currencies',
@@ -320,17 +324,18 @@ return [
         ],
         'including_tax' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.including_tax',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.including_tax',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'default' => '0',
                 'items' => [
                     [
-                        \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.including_tax.including',
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.including_tax.including',
                         '0',
                     ],
                     [
-                        \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.including_tax.excluding',
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.including_tax.excluding',
                         '1',
                     ],
                 ],
@@ -341,9 +346,10 @@ return [
         ],
         'method_of_payment' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.method_of_payment',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.method_of_payment',
             'config' => [
                 'type' => \OliverKlee\Seminars\BackEnd\TceForms::getSelectType(),
+                'renderType' => 'selectSingle',
                 'internal_type' => 'db',
                 'allowed' => 'tx_seminars_payment_methods',
                 'foreign_table' => 'tx_seminars_payment_methods',
@@ -359,57 +365,58 @@ return [
         ],
         'account_number' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.account_number',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.account_number',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'trim',
             ],
         ],
         'account_owner' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.account_owner',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.account_owner',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'trim',
             ],
         ],
         'bank_code' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.bank_code',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.bank_code',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'trim',
             ],
         ],
         'bank_name' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.bank_name',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.bank_name',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'trim',
             ],
         ],
         'company' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.company',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.company',
             'config' => [
                 'type' => 'text',
-                'cols' => '20',
-                'rows' => '3',
+                'cols' => 20,
+                'rows' => 3,
             ],
         ],
         'gender' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.gender',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.gender',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => [
-                    [\OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.gender.I.0', '0'],
-                    [\OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.gender.I.1', '1'],
+                    ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.gender.I.0', '0'],
+                    ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.gender.I.1', '1'],
                 ],
                 'size' => 1,
                 'maxitems' => 1,
@@ -417,70 +424,70 @@ return [
         ],
         'name' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.name',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.name',
             'config' => [
                 'type' => 'input',
-                'size' => '40',
-                'max' => '80',
+                'size' => 40,
+                'max' => 80,
                 'eval' => 'trim',
             ],
         ],
         'address' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.address',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.address',
             'config' => [
                 'type' => 'text',
-                'cols' => '20',
-                'rows' => '3',
+                'cols' => 20,
+                'rows' => 3,
             ],
         ],
         'zip' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.zip',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.zip',
             'config' => [
                 'type' => 'input',
-                'size' => '8',
-                'max' => '10',
+                'size' => 8,
+                'max' => 10,
                 'eval' => 'trim',
             ],
         ],
         'city' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.city',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.city',
             'config' => [
                 'type' => 'input',
-                'size' => '20',
-                'max' => '50',
+                'size' => 20,
+                'max' => 50,
                 'eval' => 'trim',
             ],
         ],
         'country' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.country',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.country',
             'config' => [
                 'type' => 'input',
-                'size' => '16',
-                'max' => '40',
+                'size' => 16,
+                'max' => 40,
                 'eval' => 'trim',
             ],
         ],
         'telephone' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.telephone',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.telephone',
             'config' => [
                 'type' => 'input',
-                'size' => '20',
-                'max' => '20',
+                'size' => 20,
+                'max' => 20,
                 'eval' => 'trim',
             ],
         ],
         'email' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_attendances.email',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.email',
             'config' => [
                 'type' => 'input',
-                'size' => '20',
-                'max' => '80',
+                'size' => 20,
+                'max' => 80,
                 'eval' => 'trim',
             ],
         ],
@@ -488,7 +495,7 @@ return [
     'types' => [
         '0' => [
             'showitem' => '' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelOverview, title, uid, seminar, user;;;;1-1-1, been_there, hidden;;;;1-1-1, ' .
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelOverview, title, uid, seminar, user, been_there, hidden, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelBookingInformation, registration_queue, registered_themselves, seats, price, total_price, attendees_names, additional_persons, kids, foods, food, lodgings, accommodation, checkboxes, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelRegistrationComments, interests, expectations, background_knowledge, known_from, notes, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.divLabelPaymentInformation, datepaid, currency, including_tax, method_of_payment, account_number, account_owner, bank_code, bank_name, ' .

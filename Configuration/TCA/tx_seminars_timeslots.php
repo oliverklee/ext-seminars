@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 return [
     'ctrl' => [
-        'title' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_timeslots',
+        'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots',
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -20,25 +20,25 @@ return [
         'seminar' => [
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
             ],
         ],
         'title' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_timeslots.title',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.title',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'trim',
             ],
         ],
         'begin_date' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_timeslots.begin_date',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.begin_date',
             'config' => [
                 'type' => 'input',
-                'size' => '12',
-                'max' => '20',
+                'size' => 12,
+                'max' => 20,
                 'eval' => 'datetime, required',
                 'checkbox' => '0',
                 'default' => '0',
@@ -46,11 +46,11 @@ return [
         ],
         'end_date' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_timeslots.end_date',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.end_date',
             'config' => [
                 'type' => 'input',
-                'size' => '12',
-                'max' => '20',
+                'size' => 12,
+                'max' => 20,
                 'eval' => 'datetime',
                 'checkbox' => '0',
                 'default' => '0',
@@ -58,11 +58,11 @@ return [
         ],
         'entry_date' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_timeslots.entry_date',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.entry_date',
             'config' => [
                 'type' => 'input',
-                'size' => '12',
-                'max' => '20',
+                'size' => 12,
+                'max' => 20,
                 'eval' => 'datetime',
                 'checkbox' => '0',
                 'default' => '0',
@@ -70,9 +70,10 @@ return [
         ],
         'speakers' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_timeslots.speakers',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.speakers',
             'config' => [
                 'type' => \OliverKlee\Seminars\BackEnd\TceForms::getSelectType(),
+                'renderType' => 'selectMultipleSideBySide',
                 'internal_type' => 'db',
                 'allowed' => 'tx_seminars_speakers',
                 'foreign_table' => 'tx_seminars_speakers',
@@ -89,9 +90,10 @@ return [
         ],
         'place' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_timeslots.place',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.place',
             'config' => [
                 'type' => \OliverKlee\Seminars\BackEnd\TceForms::getSelectType(),
+                'renderType' => 'selectSingle',
                 'internal_type' => 'db',
                 'allowed' => 'tx_seminars_sites',
                 'foreign_table' => 'tx_seminars_sites',
@@ -107,11 +109,11 @@ return [
         ],
         'room' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_timeslots.room',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.room',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
         ],
     ],

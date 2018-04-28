@@ -24,44 +24,44 @@ defined('TYPO3_MODE') or die('Access denied.');
     [
         'tx_seminars_publish_events' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'fe_groups.tx_seminars_publish_events',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events',
             'config' => [
                 'type' => 'radio',
                 'default' => '0',
                 'items' => [
-                    [\OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'fe_groups.tx_seminars_publish_events.I.0', '0'],
-                    [\OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'fe_groups.tx_seminars_publish_events.I.1', '1'],
-                    [\OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'fe_groups.tx_seminars_publish_events.I.2', '2'],
+                    ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events.I.0', '0'],
+                    ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events.I.1', '1'],
+                    ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events.I.2', '2'],
                 ],
             ],
         ],
         'tx_seminars_events_pid' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'fe_groups.tx_seminars_events_pid',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_events_pid',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'pages',
-                'size' => '1',
-                'minitems' => '0',
-                'maxitems' => '1',
+                'size' => 1,
+                'minitems' => 0,
+                'maxitems' => 1,
             ],
         ],
         'tx_seminars_auxiliary_records_pid' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'fe_groups.tx_seminars_auxiliary_records_pid',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_auxiliary_records_pid',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'pages',
                 'size' => '1',
-                'minitems' => '0',
-                'maxitems' => '1',
+                'minitems' => 0,
+                'maxitems' => 1,
             ],
         ],
         'tx_seminars_reviewer' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'fe_groups.tx_seminars_reviewer',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_reviewer',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -73,9 +73,10 @@ defined('TYPO3_MODE') or die('Access denied.');
         ],
         'tx_seminars_default_categories' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'fe_groups.tx_seminars_default_categories',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_default_categories',
             'config' => [
                 'type' => \OliverKlee\Seminars\BackEnd\TceForms::getSelectType(),
+                'renderType' => 'selectMultipleSideBySide',
                 'internal_type' => 'db',
                 'allowed' => 'tx_seminars_categories',
                 'foreign_table' => 'tx_seminars_categories',
@@ -87,7 +88,7 @@ defined('TYPO3_MODE') or die('Access denied.');
                     'list' => [
                         'type' => 'popup',
                         'title' => 'List entries',
-                        'icon' => 'list.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_list.gif',
                         'params' => [
                             'table' => 'tx_seminars_categories',
                             'pid' => '###CURRENT_PID###',
@@ -102,9 +103,10 @@ defined('TYPO3_MODE') or die('Access denied.');
         ],
         'tx_seminars_default_organizer' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'fe_groups.tx_seminars_default_organizer',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_default_organizer',
             'config' => [
                 'type' => \OliverKlee\Seminars\BackEnd\TceForms::getSelectType(),
+                'renderType' => 'selectSingle',
                 'internal_type' => 'db',
                 'allowed' => 'tx_seminars_organizers',
                 'foreign_table' => 'tx_seminars_organizers',
@@ -119,7 +121,7 @@ defined('TYPO3_MODE') or die('Access denied.');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'fe_groups',
     '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tab_event_management,' .
-    'tx_seminars_publish_events;;;;1-1-1,tx_seminars_events_pid,' .
+    'tx_seminars_publish_events,tx_seminars_events_pid,' .
     'tx_seminars_auxiliary_records_pid,tx_seminars_reviewer,' .
     'tx_seminars_default_categories, tx_seminars_default_organizer'
 );
@@ -129,37 +131,37 @@ defined('TYPO3_MODE') or die('Access denied.');
     [
         'tx_seminars_events_folder' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'be_groups.tx_seminars_events_folder',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:be_groups.tx_seminars_events_folder',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'pages',
-                'size' => '1',
-                'minitems' => '0',
-                'maxitems' => '1',
+                'size' => 1,
+                'minitems' => 0,
+                'maxitems' => 1,
             ],
         ],
         'tx_seminars_registrations_folder' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'be_groups.tx_seminars_registrations_folder',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:be_groups.tx_seminars_registrations_folder',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'pages',
-                'size' => '1',
-                'minitems' => '0',
-                'maxitems' => '1',
+                'size' => 1,
+                'minitems' => 0,
+                'maxitems' => 1,
             ],
         ],
         'tx_seminars_auxiliaries_folder' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'be_groups.tx_seminars_auxiliaries_folder',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:be_groups.tx_seminars_auxiliaries_folder',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'pages',
-                'size' => '1',
-                'minitems' => '0',
+                'size' => 1,
+                'minitems' => 0,
                 'maxitems' => '1',
             ],
         ],
@@ -168,7 +170,7 @@ defined('TYPO3_MODE') or die('Access denied.');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
     'be_groups',
-    '--div--;' . \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'be_groups.tab_event_management,' .
+    '--div--;' . 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:be_groups.tab_event_management,' .
     'tx_seminars_events_folder,tx_seminars_registrations_folder,' .
     'tx_seminars_auxiliaries_folder,'
 );

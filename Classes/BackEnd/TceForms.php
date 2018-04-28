@@ -79,16 +79,6 @@ class TceForms
     }
 
     /**
-     * Returns the path to the DB local lang file.
-     *
-     * @return string
-     */
-    public static function getPathToDbLL()
-    {
-        return 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:';
-    }
-
-    /**
      * Gets the wizard configuration.
      *
      * @return mixed[]
@@ -105,13 +95,13 @@ class TceForms
                     'name' => 'wizard_edit',
                 ],
                 'popup_onlyOpenIfSelected' => 1,
-                'icon' => 'edit2.gif',
+                'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
                 'JSopenParams' => 'height=480,width=640,status=0,menubar=0,scrollbars=1',
             ],
             'add' => [
                 'type' => 'script',
                 'title' => 'Create new entry',
-                'icon' => 'add.gif',
+                'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
                 'params' => [
                     'table' => '###TABLE###',
                     'pid' => '###CURRENT_PID###',
@@ -127,7 +117,7 @@ class TceForms
             $wizard['list'] = [
                 'type' => 'popup',
                 'title' => 'List entries',
-                'icon' => 'list.gif',
+                'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_list.gif',
                 'params' => [
                     'table' => '###TABLE###',
                     'pid' => '###CURRENT_PID###',
