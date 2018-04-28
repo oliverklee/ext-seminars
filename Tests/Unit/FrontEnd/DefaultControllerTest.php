@@ -376,7 +376,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      *
      * The page ID isn't checked for existence. So any page ID can be used.
      *
-     * @return ContentObjectRenderer a mock content object
+     * @return ContentObjectRenderer|\PHPUnit_Framework_MockObject_MockObject a mock content object
      */
     private function createContentMock()
     {
@@ -1236,7 +1236,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $seminarWithImage = $this->fixture->main('', []);
 
-        $this->testingFramework->deleteDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
+        $this->testingFramework->deleteDummyFile('test_foo.gif');
 
         self::assertContains(
             'style="background-image:',
@@ -1271,7 +1271,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $seminarWithImage = $this->fixture->main('', []);
 
-        $this->testingFramework->deleteDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
+        $this->testingFramework->deleteDummyFile('test_foo.gif');
 
         self::assertNotContains(
             'style="background-image:',
@@ -2526,7 +2526,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $singleCategoryWithIcon = $this->fixture->main('', []);
 
-        $this->testingFramework->deleteDummyFile('foo_test.gif', base64_decode(self::BLANK_GIF, true));
+        $this->testingFramework->deleteDummyFile('foo_test.gif');
 
         self::assertContains(
             'category 1 <img src="',
@@ -2556,7 +2556,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $multipleCategoriesWithIcons = $this->fixture->main('', []);
 
-        $this->testingFramework->deleteDummyFile('foo_test.gif', base64_decode(self::BLANK_GIF, true));
+        $this->testingFramework->deleteDummyFile('foo_test.gif');
 
         self::assertContains(
             'category 1 <img src="',
@@ -3276,7 +3276,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             ['image' => 'test_foo.gif']
         );
         $listViewWithImage = $this->fixture->main('', []);
-        $this->testingFramework->deleteDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
+        $this->testingFramework->deleteDummyFile('test_foo.gif');
 
         self::assertContains(
             '<img src="',

@@ -155,7 +155,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
                 htmlspecialchars(
                     GeneralUtility::fixed_lgd_cs(
                         $event->getRealTitle(),
-                        $GLOBALS['BE_USER']->uc['titleLen']
+                        $this->getBackEndUser()->uc['titleLen']
                     )
                 )
             );
@@ -210,18 +210,19 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
                 'maximum_number_of_attendees',
                 ($event->needsRegistration() ? $event->getAttendancesMax() : '')
             );
-            $this->template->setMarker(
-                'has_enough_attendees',
-                ($event->needsRegistration()
-                    ? (!$event->hasEnoughAttendances() ? $this->getLanguageService()->getLL('no') : $GLOBALS['LANG']->getLL('yes'))
-                    : '')
-            );
-            $this->template->setMarker(
-                'is_fully_booked',
-                ($event->needsRegistration()
-                    ? (!$event->isFull() ? $this->getLanguageService()->getLL('no') : $GLOBALS['LANG']->getLL('yes'))
-                    : '')
-            );
+            if ($event->needsRegistration()) {
+                $this->template->setMarker(
+                    'has_enough_attendees',
+                    $event->hasEnoughAttendances() ? $this->getLanguageService()->getLL('yes') : $this->getLanguageService()->getLL('no')
+                );
+                $this->template->setMarker(
+                    'is_fully_booked',
+                    $event->isFull() ? $this->getLanguageService()->getLL('yes') : $this->getLanguageService()->getLL('no')
+                );
+            } else {
+                $this->template->setMarker('has_enough_attendees', '');
+                $this->template->setMarker('is_fully_booked', '');
+            }
             $this->template->setMarker(
                 'status',
                 $this->getStatusIcon($event)

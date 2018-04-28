@@ -101,7 +101,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
     public static function getInstance()
     {
         if (self::$instance === null) {
-            self::$instance = GeneralUtility::makeInstance(Tx_Seminars_Service_RegistrationManager::class);
+            self::$instance = GeneralUtility::makeInstance(__CLASS__);
         }
 
         return self::$instance;
@@ -1424,7 +1424,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
             return;
         }
 
-        $newline = ($useHtml) ? '<br />' : LF;
+        $newline = $useHtml ? '<br />' : LF;
 
         $formattedPlaces = [];
         /** @var Tx_Seminars_Model_Place $place */
@@ -1447,7 +1447,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
     {
         $address = preg_replace('/[\\n|\\r]+/', ' ', str_replace('<br />', ' ', strip_tags($place->getAddress())));
 
-        $countryName = ($place->hasCountry()) ? ', ' . $place->getCountry()->getLocalShortName() : '';
+        $countryName = $place->hasCountry() ? ', ' . $place->getCountry()->getLocalShortName() : '';
         $zipAndCity = trim($place->getZip() . ' ' . $place->getCity());
 
         return $place->getTitle() . $newline . $address . $newline . $zipAndCity . $countryName;

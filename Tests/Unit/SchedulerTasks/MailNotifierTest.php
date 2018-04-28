@@ -468,8 +468,7 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
         $this->languageService->lang = $user->getLanguage();
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $subject = $this->languageService->getLL('email_eventTakesPlaceReminderSubject');
-        $subject = str_replace('%event', '', $subject);
-        $subject = str_replace('%days', 2, $subject);
+        $subject = str_replace(['%event', '%days'], ['', 2], $subject);
 
         $this->createSeminarWithOrganizer([
             'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
@@ -494,8 +493,7 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
         $this->languageService->lang = $user->getLanguage();
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $message = $this->languageService->getLL('email_eventTakesPlaceReminder');
-        $message = str_replace('%event', '', $message);
-        $message = str_replace('%organizer', 'Mr. Test', $message);
+        $message = str_replace(['%event', '%organizer'], ['', 'Mr. Test'], $message);
 
         $this->createSeminarWithOrganizer([
             'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
@@ -737,8 +735,7 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
         $this->languageService->lang = $user->getLanguage();
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $message = $this->languageService->getLL('email_cancelationDeadlineReminder');
-        $message = str_replace('%event', '', $message);
-        $message = str_replace('%organizer', 'Mr. Test', $message);
+        $message = str_replace(['%event', '%organizer'], ['', 'Mr. Test'], $message);
 
         $this->addSpeaker($this->createSeminarWithOrganizer([
             'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,

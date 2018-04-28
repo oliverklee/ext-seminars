@@ -152,10 +152,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
      */
     public function getRecordPropertyString($key)
     {
-        $result = $this->hasKey($key)
-            ? trim($this->recordData[$key]) : '';
-
-        return $result;
+        return $this->hasKey($key) ? trim($this->recordData[$key]) : '';
     }
 
     /**

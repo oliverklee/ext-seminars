@@ -556,7 +556,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function hasCities()
     {
-        return $this->hasPlace() && (count($this->getCitiesFromPlaces() > 0));
+        return $this->hasPlace() && count($this->getCitiesFromPlaces()) > 0;
     }
 
     /**
@@ -1130,7 +1130,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             $result = $this->formatPrice($this->getPriceRegularAmount());
         } else {
             $result =
-                ($this->getConfValueBoolean('showToBeAnnouncedForEmptyPrice'))
+                $this->getConfValueBoolean('showToBeAnnouncedForEmptyPrice')
                 ? $this->translate('message_willBeAnnounced')
                 : $this->translate('message_forFree');
         }
@@ -1893,9 +1893,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function isFull()
     {
         return !$this->hasUnlimitedVacancies()
-            && (
-                ($this->getAttendances() >= $this->getAttendancesMax())
-        );
+            && ($this->getAttendances() >= $this->getAttendancesMax());
     }
 
     /**
@@ -2527,12 +2525,12 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
                     $value = $this->getAttendances();
                     break;
                 case 'enough_attendees':
-                    $value = ($this->hasEnoughAttendances())
+                    $value = $this->hasEnoughAttendances()
                         ? $this->translate('label_yes')
                         : $this->translate('label_no');
                     break;
                 case 'is_full':
-                    $value = ($this->isFull())
+                    $value = $this->isFull()
                         ? $this->translate('label_yes')
                         : $this->translate('label_no');
                     break;
@@ -2593,7 +2591,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isUserRegisteredMessage($feUserUid)
     {
-        return ($this->isUserRegistered($feUserUid))
+        return $this->isUserRegistered($feUserUid)
             ? $this->translate('message_alreadyRegistered') : '';
     }
 
@@ -3154,18 +3152,10 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $result = null;
 
         // Check whether this event has an topic set.
-        if ($this->hasRecordPropertyInteger('topic')) {
-            if (Tx_Seminars_OldModel_Abstract::recordExists(
-                $this->getRecordPropertyInteger('topic'),
-                'tx_seminars_seminars'
-            )
-            ) {
-                /** @var Tx_Seminars_OldModel_Event $result */
-                $result = GeneralUtility::makeInstance(
-                    Tx_Seminars_OldModel_Event::class,
-                    $this->getRecordPropertyInteger('topic')
-                );
-            }
+        if ($this->hasRecordPropertyInteger('topic')
+            && \Tx_Seminars_OldModel_Abstract::recordExists($this->getRecordPropertyInteger('topic'), 'tx_seminars_seminars')) {
+            /** @var \Tx_Seminars_OldModel_Event $result */
+            $result = GeneralUtility::makeInstance(__CLASS__, $this->getRecordPropertyInteger('topic'));
         }
         return $result;
     }
@@ -3177,8 +3167,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isEventDate()
     {
-        return $this->getRecordPropertyInteger('object_type')
-            == Tx_Seminars_Model_Event::TYPE_DATE;
+        return $this->getRecordPropertyInteger('object_type') === \Tx_Seminars_Model_Event::TYPE_DATE;
     }
 
     /**
@@ -3355,7 +3344,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function getTopicBoolean($key)
     {
-        return ($this->isTopicOkay())
+        return $this->isTopicOkay()
             ? $this->topic->getRecordPropertyBoolean($key)
             : $this->getRecordPropertyBoolean($key);
     }
@@ -3481,7 +3470,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     {
         $result = [];
 
-        $uid = ($useTopicRecord) ?
+        $uid = $useTopicRecord ?
             $this->getTopicInteger('uid') : $this->getUid();
 
         $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -3773,17 +3762,17 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
                 $result = $this->getVacancies();
                 break;
             case 'enough_attendees':
-                $result = ($this->hasEnoughAttendances())
+                $result = $this->hasEnoughAttendances()
                     ? $this->translate('label_yes')
                     : $this->translate('label_no');
                 break;
             case 'is_full':
-                $result = ($this->isFull())
+                $result = $this->isFull()
                     ? $this->translate('label_yes')
                     : $this->translate('label_no');
                 break;
             case 'cancelled':
-                $result = ($this->isCanceled())
+                $result = $this->isCanceled()
                     ? $this->translate('label_yes')
                     : $this->translate('label_no');
                 break;
@@ -4219,7 +4208,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         );
 
         if ($dbResult) {
-            if ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+            $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+            if ($row !== false) {
                 $result = $row['begin_date'];
             }
         }
@@ -4252,7 +4242,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         );
 
         if ($dbResult) {
-            if ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+            $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
+            if ($row !== false) {
                 $result = $row['end_date'];
             }
         }
@@ -4819,8 +4810,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function getPlaces()
     {
         if (!$this->hasPlace()) {
-            $list = new \Tx_Oelib_List();
-            return $list;
+            return new \Tx_Oelib_List();
         }
 
         $places = Tx_Oelib_Db::selectMultiple(

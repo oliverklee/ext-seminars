@@ -356,8 +356,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
     /**
      * Gets the currently logged in back-end user.
      *
-     * @return Tx_Seminars_Model_BackEndUser the currently logged in back-end
-     *                                       user
+     * @return Tx_Seminars_Model_BackEndUser the currently logged in back-end user
      */
     protected function getLoggedInUser()
     {

@@ -62,7 +62,9 @@ class Tx_Seminars_ViewHelper_TimeRange
      * Checks whether there's a time set (begin time !== 00:00).
      * If there's no date/time set, the result will be FALSE.
      *
-     * @return bool TRUE if we have a begin time, FALSE otherwise
+     * @param Tx_Seminars_Model_AbstractTimeSpan $timeSpan
+     *
+     * @return bool
      */
     protected function hasTime(Tx_Seminars_Model_AbstractTimeSpan $timeSpan)
     {
@@ -77,7 +79,9 @@ class Tx_Seminars_ViewHelper_TimeRange
      * Checks whether there's an end time set (end time !== 00:00).
      * If there's no end date/time set, the result will be FALSE.
      *
-     * @return bool TRUE if we have an end time, FALSE otherwise
+     * @param Tx_Seminars_Model_AbstractTimeSpan $timeSpan
+     *
+     * @return bool
      */
     protected function hasEndTime(Tx_Seminars_Model_AbstractTimeSpan $timeSpan)
     {

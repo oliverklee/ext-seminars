@@ -55,7 +55,7 @@ class Tx_Seminars_BackEnd_OrganizersList extends Tx_Seminars_BackEnd_AbstractLis
 
         $tableRows = '';
 
-        /** @var Tx_Seminars_OldModel_Organizer $organizerBag */
+        /** @var \Tx_Seminars_Bag_Organizer $organizerBag */
         foreach ($organizerBag as $this->organizer) {
             $this->template->setMarker(
                 'icon',

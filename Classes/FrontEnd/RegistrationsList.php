@@ -148,7 +148,13 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
         $builder->limitToRegular();
 
         $regularRegistrations = $builder->build();
-        if (!$regularRegistrations->isEmpty()) {
+        if ($regularRegistrations->isEmpty()) {
+            $this->setMarker(
+                'message_no_registrations',
+                $this->translate('message_noRegistrations')
+            );
+            $content = $this->getSubpart('WRAPPER_REGISTRATIONS_LIST_MESSAGE');
+        } else {
             $this->setSubpart(
                 'registrations_list_table_head',
                 $this->createTableHeader(),
@@ -172,18 +178,12 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
                     'WRAPPER_REGISTRATIONS_LIST_WAITING_LIST'
                 );
             }
-        } else {
-            $this->setMarker(
-                'message_no_registrations',
-                $this->translate('message_noRegistrations')
-            );
-            $content = $this->getSubpart('WRAPPER_REGISTRATIONS_LIST_MESSAGE');
         }
 
         $this->setMarker('registrations_list_view_content', $content);
 
         // Lets warnings from the registration bag bubble up to us.
-        $this->setErrorMessage($regularRegistrations->checkConfiguration(true));
+        $this->setErrorMessage($regularRegistrations->checkConfiguration());
 
         unset($regularRegistrations, $builder);
     }

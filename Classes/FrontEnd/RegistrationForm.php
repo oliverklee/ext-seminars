@@ -170,13 +170,13 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     /**
      * Returns the event for this registration form.
      *
-     * @return Tx_Seminars_Model_Event
+     * @return \Tx_Seminars_Model_Event
      */
     public function getEvent()
     {
         /** @var $eventMapper Tx_Seminars_Mapper_Event */
         $eventMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
-        /** @var Tx_Seminars_Model_Event $event */
+        /** @var \Tx_Seminars_Model_Event $event */
         $event = $eventMapper->find($this->getSeminar()->getUid());
 
         return $event;
@@ -724,7 +724,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      * Creates a URL for redirection. This is a utility function for
      * getThankYouAfterRegistrationUrl() and getPageToShowAfterUnregistration().
      *
-     * @param string $pageId the page UID
+     * @param int $pageId the page UID
      * @param bool $sendParameters TRUE if GET parameters should be added to the URL, otherwise FALSE
      *
      * @return string complete URL of the FE page with a message
@@ -1087,7 +1087,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     private function getSelectedPaymentMethod()
     {
         $result = '';
-        $availablePaymentMethods = $this->populateListPaymentMethods([]);
+        $availablePaymentMethods = $this->populateListPaymentMethods();
 
         foreach ($availablePaymentMethods as $paymentMethod) {
             if ($paymentMethod['value'] == $this->getFormValue('method_of_payment')) {
@@ -1219,7 +1219,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             // If the country is empty, try the static info country instead.
             if (empty($result) && ($key == 'country')) {
                 $staticInfoCountry = $feUserData['static_info_country'];
-                if (!empty($staticInfoCountry)) {
+                if (empty($staticInfoCountry)) {
+                    $result = $this->getDefaultCountry();
+                } else {
                     $this->initStaticInfo();
                     $result = $this->staticInfo->getStaticInfoName(
                         'COUNTRIES',
@@ -1228,8 +1230,6 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
                         '',
                         true
                     );
-                } else {
-                    $result = $this->getDefaultCountry();
                 }
             }
         }
@@ -1397,7 +1397,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     /**
      * Provides data items for the prices for this event.
      *
-     * @return array[] available prices as an array with the keys "caption" (for the title) and "value" (for the uid)
+     * @return string[][] available prices as an array with the keys "caption" (for the title) and "value" (for the uid)
      */
     public function populatePrices()
     {
@@ -1435,7 +1435,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function getPreselectedPaymentMethod()
     {
-        $availablePaymentMethods = $this->populateListPaymentMethods([]);
+        $availablePaymentMethods = $this->populateListPaymentMethods();
         if (count($availablePaymentMethods) === 1) {
             return $availablePaymentMethods[0]['value'];
         }

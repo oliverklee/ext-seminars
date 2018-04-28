@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the incorrect TYPO3 Core license headers (#41)
 
 ### Fixed
+- Fix more PhpStorm code inspection warnings (#62)
 - Update and clean up the TCA (#61)
 - Fix method name casing and static call code warnings (#58)
 - Fix more "undefined" code inspection warnings (#56)

@@ -1471,7 +1471,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInPastReturnsTrue()
     {
         $this->fixture->setData(
-            ['deadline_early_bird' => ($GLOBALS['SIM_EXEC_TIME'] - 1)]
+            ['deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] - 1]
         );
 
         self::assertTrue(
@@ -1499,7 +1499,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInFutureReturnsFalse()
     {
         $this->fixture->setData(
-            ['deadline_early_bird' => ($GLOBALS['SIM_EXEC_TIME'] + 1)]
+            ['deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 1]
         );
 
         self::assertFalse(

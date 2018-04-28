@@ -146,7 +146,7 @@
 }
 
 .tx-seminars-pi1-event-editor .teaser textarea,
-.tx-seminars-pi1-event-editor .additional_information textarea
+.tx-seminars-pi1-event-editor .additional_information textarea,
 .tx-seminars-pi1-event-editor .notes textarea {
     height: 80px;
 }
@@ -517,8 +517,7 @@ table.tx-seminars-pi1-timeslots td {
 
 #tx-seminars-pi1-registration-form input,
 #tx-seminars-pi1-registration-form textarea,
-#tx-seminars-pi1-registration-form
-.tx-seminars-pi1-registration-country select {
+#tx-seminars-pi1-registration-form .tx-seminars-pi1-registration-country select {
     width: 20em;
 }
 
@@ -530,7 +529,7 @@ table.tx-seminars-pi1-timeslots td {
     width: 14em;
 }
 
-#tx-seminars-pi1-registration-form
+#tx-seminars-pi1-registration-form,
 .tx-seminars-pi1-checkbox input {
     width: auto;
 }
@@ -572,18 +571,14 @@ table.tx-seminars-pi1-timeslots td {
     display: inline-table;
 }
 
-#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
-input.tx_seminars_pi1_registration_editor_first_name,
-#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
-input.tx_seminars_pi1_registration_editor_position {
+#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names input.tx_seminars_pi1_registration_editor_first_name,
+#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names input.tx_seminars_pi1_registration_editor_position {
     width: 12em;
     margin-right: 2em;
 }
 
-#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
-input.tx_seminars_pi1_registration_editor_last_name,
-#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names
-input.tx_seminars_pi1_registration_editor_attendee_email {
+#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names input.tx_seminars_pi1_registration_editor_last_name,
+#tx-seminars-pi1-registration-form #tx_seminars_pi1_registration_editor_separate_names input.tx_seminars_pi1_registration_editor_attendee_email {
     width: 16em;
 }
 

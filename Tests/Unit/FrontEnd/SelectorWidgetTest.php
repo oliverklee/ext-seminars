@@ -424,7 +424,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_SelectorWidget::class,
             [
-                'initialize', 'hasSearchField', 'getEventTypeData',
+                'hasSearchField', 'getEventTypeData',
                 'getLanguageData', 'getPlaceData', 'getCityData',
                 'getCountryData',
             ],

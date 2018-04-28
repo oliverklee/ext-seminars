@@ -90,7 +90,7 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
         $eventFolder = $this->fixture->getEventFolderFromGroup();
 
         self::assertTrue(
-            (($eventFolder == 23) || ($eventFolder == 42))
+            ($eventFolder == 23) || ($eventFolder == 42)
         );
     }
 
@@ -167,7 +167,7 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
         $eventFolder = $this->fixture->getRegistrationFolderFromGroup();
 
         self::assertTrue(
-            (($eventFolder == 23) || ($eventFolder == 42))
+            ($eventFolder == 23) || ($eventFolder == 42)
         );
     }
 
@@ -244,7 +244,7 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
         $eventFolder = $this->fixture->getAuxiliaryRecordsFolder();
 
         self::assertTrue(
-            (($eventFolder == 23) || ($eventFolder == 42))
+            ($eventFolder == 23) || ($eventFolder == 42)
         );
     }
 }

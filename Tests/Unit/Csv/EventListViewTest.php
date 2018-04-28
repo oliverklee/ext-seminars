@@ -193,7 +193,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             'another event',
-            $this->subject->render($this->pageUid)
+            $this->subject->render()
         );
     }
 
@@ -210,7 +210,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
             ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
         );
 
-        $eventList = $this->subject->render($this->pageUid);
+        $eventList = $this->subject->render();
 
         self::assertContains(
             (string)$firstEventUid,
@@ -237,7 +237,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             $this->localizeAndRemoveColon('tx_seminars_seminars.uid') . CRLF . $firstEventUid . CRLF . $secondEventUid . CRLF,
-            $this->subject->render($this->pageUid)
+            $this->subject->render()
         );
     }
 
@@ -256,7 +256,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         self::assertRegExp(
             '/\\r\\n$/',
-            $this->subject->render($this->pageUid)
+            $this->subject->render()
         );
     }
 
@@ -271,7 +271,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         self::assertNotContains(
             '"bar"',
-            $this->subject->render($this->pageUid)
+            $this->subject->render()
         );
     }
 
@@ -286,7 +286,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             'foo "" bar',
-            $this->subject->render($this->pageUid)
+            $this->subject->render()
         );
     }
 
@@ -301,7 +301,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             '"foo' . LF . 'bar"',
-            $this->subject->render($this->pageUid)
+            $this->subject->render()
         );
     }
 
@@ -316,7 +316,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             '"foo "" bar"',
-            $this->subject->render($this->pageUid)
+            $this->subject->render()
         );
     }
 
@@ -331,7 +331,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             '"foo ; bar"',
-            $this->subject->render($this->pageUid)
+            $this->subject->render()
         );
     }
 
@@ -346,7 +346,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             'foo;bar',
-            $this->subject->render($this->pageUid)
+            $this->subject->render()
         );
     }
 
@@ -358,7 +358,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
         $this->createEventInFolderAndSetPageUid();
 
-        $eventList = $this->subject->render($this->pageUid);
+        $eventList = $this->subject->render();
         $description = $this->localizeAndRemoveColon('tx_seminars_seminars.description');
 
         self::assertContains(
@@ -382,7 +382,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends Tx_Phpunit_TestCase
         self::assertContains(
             $this->localizeAndRemoveColon('tx_seminars_seminars.description') .
             ';' . $this->localizeAndRemoveColon('tx_seminars_seminars.title'),
-            $this->subject->render($this->pageUid)
+            $this->subject->render()
         );
     }
 }

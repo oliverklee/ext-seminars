@@ -224,9 +224,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
         /** @var FlashMessageService $flashMessageService */
         $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
         $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
-        $renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
-
-        return $renderedFlashMessages;
+        return $defaultFlashMessageQueue->renderFlashMessages();
     }
 
     /**

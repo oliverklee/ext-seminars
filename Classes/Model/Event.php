@@ -97,7 +97,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getTitle()
     {
-        return ($this->isEventDate()) ? $this->getTopic()->getTitle() : $this->getRawTitle();
+        return $this->isEventDate() ? $this->getTopic()->getTitle() : $this->getRawTitle();
     }
 
     /**
@@ -121,7 +121,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getSubtitle()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getSubtitle()
             : $this->getAsString('subtitle');
     }
@@ -149,7 +149,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasSubtitle()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasSubtitle()
             : $this->hasString('subtitle');
     }
@@ -161,7 +161,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getCategories()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getCategories()
             : $this->getAsList('categories');
     }
@@ -173,7 +173,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getTeaser()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getTeaser()
             : $this->getAsString('teaser');
     }
@@ -201,7 +201,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasTeaser()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasTeaser()
             : $this->hasString('teaser');
     }
@@ -213,7 +213,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getDescription()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getDescription()
             : $this->getAsString('description');
     }
@@ -241,7 +241,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasDescription()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasDescription()
             : $this->hasString('description');
     }
@@ -254,7 +254,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getEventType()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getEventType()
             : $this->getAsModel('event_type');
     }
@@ -319,7 +319,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getCreditPoints()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getCreditPoints()
             : $this->getAsInteger('credit_points');
     }
@@ -351,7 +351,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasCreditPoints()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasCreditPoints()
             : $this->hasInteger('credit_points');
     }
@@ -785,7 +785,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getRegularPrice()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getRegularPrice()
             : $this->getAsFloat('price_regular');
     }
@@ -817,7 +817,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasRegularPrice()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasRegularPrice()
             : $this->hasFloat('price_regular');
     }
@@ -830,7 +830,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getRegularEarlyBirdPrice()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getRegularEarlyBirdPrice()
             : $this->getAsFloat('price_regular_early');
     }
@@ -863,7 +863,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasRegularEarlyBirdPrice()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasRegularEarlyBirdPrice()
             : $this->hasFloat('price_regular_early');
     }
@@ -876,7 +876,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getRegularBoardPrice()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getRegularBoardPrice()
             : $this->getAsFloat('price_regular_board');
     }
@@ -909,7 +909,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasRegularBoardPrice()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasRegularBoardPrice()
             : $this->hasFloat('price_regular_board');
     }
@@ -922,7 +922,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getSpecialPrice()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getSpecialPrice()
             : $this->getAsFloat('price_special');
     }
@@ -954,7 +954,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasSpecialPrice()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasSpecialPrice()
             : $this->hasFloat('price_special');
     }
@@ -967,7 +967,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getSpecialEarlyBirdPrice()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getSpecialEarlyBirdPrice()
             : $this->getAsFloat('price_special_early');
     }
@@ -1000,7 +1000,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasSpecialEarlyBirdPrice()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasSpecialEarlyBirdPrice()
             : $this->hasFloat('price_special_early');
     }
@@ -1013,7 +1013,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getSpecialBoardPrice()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getSpecialBoardPrice()
             : $this->getAsFloat('price_special_board');
     }
@@ -1046,7 +1046,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasSpecialBoardPrice()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasSpecialBoardPrice()
             : $this->hasFloat('price_special_board');
     }
@@ -1156,7 +1156,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getAdditionalInformation()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getAdditionalInformation()
             : $this->getAsString('additional_information');
     }
@@ -1185,7 +1185,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasAdditionalInformation()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasAdditionalInformation()
             : $this->hasString('additional_information');
     }
@@ -1198,7 +1198,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getPaymentMethods()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getPaymentMethods()
             : $this->getAsList('payment_methods');
     }
@@ -1298,7 +1298,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function allowsMultipleRegistrations()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->allowsMultipleRegistrations()
             : $this->getAsBoolean('allows_multiple_registrations');
     }
@@ -1409,7 +1409,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getTargetGroups()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getTargetGroups()
             : $this->getAsList('target_groups');
     }
@@ -1540,7 +1540,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getCheckboxes()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getCheckboxes()
             : $this->getAsList('checkboxes');
     }
@@ -1553,7 +1553,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function usesTerms2()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->usesTerms2()
             : $this->getAsBoolean('use_terms_2');
     }
@@ -1565,7 +1565,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getNotes()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getNotes()
             : $this->getAsString('notes');
     }
@@ -1593,7 +1593,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasNotes()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasNotes()
             : $this->hasString('notes');
     }
@@ -1643,7 +1643,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getImage()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getImage()
             : $this->getAsString('image');
     }
@@ -1671,7 +1671,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function hasImage()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->hasImage()
             : $this->hasString('image');
     }
@@ -1684,7 +1684,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getRequirements()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getRequirements()
             : $this->getAsList('requirements');
     }
@@ -1697,7 +1697,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getDependencies()
     {
-        return ($this->isEventDate())
+        return $this->isEventDate()
             ? $this->getTopic()->getDependencies()
             : $this->getAsList('dependencies');
     }

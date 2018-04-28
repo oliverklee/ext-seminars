@@ -223,7 +223,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      */
     protected function createSubjectFormElement()
     {
-        $classMarker = ($this->hasErrorMessage('subject'))
+        $classMarker = $this->hasErrorMessage('subject')
             ? 'class="error" ' : '';
 
         return '<p><label for="subject">' .
@@ -243,7 +243,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     protected function createMessageBodyFormElement()
     {
         $messageBody = $this->fillFormElement('messageBody');
-        $classMarker = ($this->hasErrorMessage('messageBody')) ? ', error' : '';
+        $classMarker = $this->hasErrorMessage('messageBody') ? ', error' : '';
 
         return '<p><label for="messageBody">' .
             $this->getLanguageService()->getLL('eventMailForm_message') . '</label>' .

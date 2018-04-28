@@ -19,13 +19,13 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
      */
     public function getBeginDate()
     {
-        if (!$this->hasBeginDate()) {
-            $result = $this->translate('message_willBeAnnounced');
-        } else {
+        if ($this->hasBeginDate()) {
             $result = strftime(
                 $this->getConfValueString('dateFormatYMD'),
                 $this->getBeginDateAsTimestamp()
             );
+        } else {
+            $result = $this->translate('message_willBeAnnounced');
         }
 
         return $result;
@@ -49,13 +49,13 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
      */
     public function getEndDate()
     {
-        if (!$this->hasEndDate()) {
-            $result = $this->translate('message_willBeAnnounced');
-        } else {
+        if ($this->hasEndDate()) {
             $result = strftime(
                 $this->getConfValueString('dateFormatYMD'),
                 $this->getEndDateAsTimestamp()
             );
+        } else {
+            $result = $this->translate('message_willBeAnnounced');
         }
 
         return $result;
@@ -97,9 +97,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
      */
     public function getDate($dash = '&#8211;')
     {
-        if (!$this->hasDate()) {
-            $result = $this->translate('message_willBeAnnounced');
-        } else {
+        if ($this->hasDate()) {
             $beginDate = $this->getBeginDateAsTimestamp();
             $endDate = $this->getEndDateAsTimestamp();
 
@@ -154,6 +152,8 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
                 }
                 $result .= $dash . $endDateDay;
             }
+        } else {
+            $result = $this->translate('message_willBeAnnounced');
         }
 
         return $result;
@@ -265,9 +265,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
         $result = 0;
 
         if ($this->hasBeginDate()) {
-            if (!$this->isOpenEnded()) {
-                $result = $this->getEndDateAsTimestamp();
-            } else {
+            if ($this->isOpenEnded()) {
                 $splitBeginDate = getdate($this->getBeginDateAsTimestamp());
                 $result = mktime(
                     0,
@@ -277,6 +275,8 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
                     $splitBeginDate['mday'] + 1,
                     $splitBeginDate['year']
                 );
+            } else {
+                $result = $this->getEndDateAsTimestamp();
             }
         }
 
