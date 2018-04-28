@@ -138,7 +138,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     public function createFixtureWithInvalidWhatToDisplayThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The value "foo" of the first parameter $whatToDisplay is not valid.'
         );
 

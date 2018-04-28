@@ -544,7 +544,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends Tx_Phpunit_TestCase
     public function setRegularEarlyBirdPriceForEventTopicWithNegativeRegularEarlyBirdPriceThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $price must be >= 0.00.'
         );
 

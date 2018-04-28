@@ -39,7 +39,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends Tx_Phpunit_TestCase
     public function getTopicForSingleRecordThrowsException()
     {
         $this->setExpectedException(
-            'BadMethodCallException',
+            \BadMethodCallException::class,
             'This function may only be called for date records.'
         );
 

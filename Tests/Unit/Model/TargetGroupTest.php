@@ -23,7 +23,7 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends Tx_Phpunit_TestCase
     public function setTitleWithEmptyTitleThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $title must not be empty.'
         );
 

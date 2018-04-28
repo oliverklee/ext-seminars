@@ -27,7 +27,7 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends Tx_Phpunit_TestCase
     public function setNameWithEmptyNameThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $name must not be empty.'
         );
 

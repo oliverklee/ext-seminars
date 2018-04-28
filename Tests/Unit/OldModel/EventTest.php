@@ -3528,7 +3528,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function setEventTypeThrowsExceptionForNegativeArgument()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             '$eventType must be >= 0.'
         );
 
@@ -4459,7 +4459,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function getOrganizerBagWithoutOrganizersThrowsException()
     {
         $this->setExpectedException(
-            'BadMethodCallException',
+            \BadMethodCallException::class,
             'There are no organizers related to this event.'
         );
 
@@ -7959,7 +7959,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setBeginDate(0);
 
         $this->setExpectedException(
-            'BadMethodCallException',
+            \BadMethodCallException::class,
             'The event has no begin date. Please call this function only if the event has a begin date.'
         );
 
