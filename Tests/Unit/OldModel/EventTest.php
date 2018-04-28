@@ -3831,9 +3831,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $categories = $this->fixture->getCategories();
 
-        self::assertSame(
+        self::assertCount(
             2,
-            count($categories)
+            $categories
         );
         self::assertSame(
             'Test 1',

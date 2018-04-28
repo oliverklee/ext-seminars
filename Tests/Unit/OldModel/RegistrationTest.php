@@ -677,8 +677,9 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
      */
     public function getSeminarObjectReturnsSeminarInstance()
     {
-        self::assertTrue(
-            $this->fixture->getSeminarObject() instanceof Tx_Seminars_OldModel_Event
+        self::assertInstanceOf(
+            Tx_Seminars_OldModel_Event::class,
+            $this->fixture->getSeminarObject()
         );
     }
 
@@ -698,8 +699,9 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
 
         $fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($this->registrationUid);
 
-        self::assertTrue(
-            $fixture->getSeminarObject() instanceof Tx_Seminars_OldModel_Event
+        self::assertInstanceOf(
+            Tx_Seminars_OldModel_Event::class,
+            $fixture->getSeminarObject()
         );
     }
 
@@ -825,8 +827,9 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
         $pid = $this->testingFramework->createSystemFolder();
         $this->fixture->setUserData(['pid' => $pid]);
 
-        self::assertTrue(
-            is_string($this->fixture->getUserData('pid'))
+        self::assertInternalType(
+            'string',
+            $this->fixture->getUserData('pid')
         );
         self::assertSame(
             (string)$pid,
@@ -992,8 +995,9 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
         $pid = $this->testingFramework->createSystemFolder();
         $this->fixture->setUserData(['pid' => $pid]);
 
-        self::assertTrue(
-            is_string($this->fixture->getUserData('pid'))
+        self::assertInternalType(
+            'string',
+            $this->fixture->getUserData('pid')
         );
 
         self::assertContains(
@@ -1152,8 +1156,9 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
             []
         );
 
-        self::assertTrue(
-            is_array($this->fixture->getFoodsData())
+        self::assertInternalType(
+            'array',
+            $this->fixture->getFoodsData()
         );
     }
 
@@ -1190,8 +1195,9 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
             ['foods' => '']
         );
 
-        self::assertTrue(
-            is_array($this->fixture->getFoodsData())
+        self::assertInternalType(
+            'array',
+            $this->fixture->getFoodsData()
         );
     }
 
@@ -1208,8 +1214,9 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
             []
         );
 
-        self::assertTrue(
-            is_array($this->fixture->getLodgingsData())
+        self::assertInternalType(
+            'array',
+            $this->fixture->getLodgingsData()
         );
     }
 
@@ -1246,8 +1253,9 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
             ['lodgings' => '']
         );
 
-        self::assertTrue(
-            is_array($this->fixture->getLodgingsData())
+        self::assertInternalType(
+            'array',
+            $this->fixture->getLodgingsData()
         );
     }
 
@@ -1264,8 +1272,9 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
             []
         );
 
-        self::assertTrue(
-            is_array($this->fixture->getCheckboxesData())
+        self::assertInternalType(
+            'array',
+            $this->fixture->getCheckboxesData()
         );
     }
 
@@ -1302,8 +1311,9 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
             ['checkboxes' => '']
         );
 
-        self::assertTrue(
-            is_array($this->fixture->getCheckboxesData())
+        self::assertInternalType(
+            'array',
+            $this->fixture->getCheckboxesData()
         );
     }
 

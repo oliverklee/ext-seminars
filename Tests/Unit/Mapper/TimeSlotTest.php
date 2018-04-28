@@ -38,8 +38,9 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
      */
     public function findWithUidReturnsTimeSlotInstance()
     {
-        self::assertTrue(
-            $this->fixture->find(1) instanceof Tx_Seminars_Model_TimeSlot
+        self::assertInstanceOf(
+            Tx_Seminars_Model_TimeSlot::class,
+            $this->fixture->find(1)
         );
     }
 
@@ -96,8 +97,9 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
 
         /** @var Tx_Seminars_Model_TimeSlot $model */
         $model = $this->fixture->find($timeSlotUid);
-        self::assertTrue(
-            $model->getSpeakers()->first() instanceof Tx_Seminars_Model_Speaker
+        self::assertInstanceOf(
+            Tx_Seminars_Model_Speaker::class,
+            $model->getSpeakers()->first()
         );
     }
 
@@ -191,8 +193,9 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
 
         /** @var Tx_Seminars_Model_TimeSlot $model */
         $model = $this->fixture->find($timeSlotUid);
-        self::assertTrue(
-            $model->getSeminar() instanceof Tx_Seminars_Model_Event
+        self::assertInstanceOf(
+            Tx_Seminars_Model_Event::class,
+            $model->getSeminar()
         );
     }
 }

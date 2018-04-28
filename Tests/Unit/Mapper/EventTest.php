@@ -40,8 +40,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function findWithUidReturnsEventInstance()
     {
-        self::assertTrue(
-            $this->fixture->find(1) instanceof Tx_Seminars_Model_Event
+        self::assertInstanceOf(
+            Tx_Seminars_Model_Event::class,
+            $this->fixture->find(1)
         );
     }
 
@@ -96,8 +97,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
 
         /** @var Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
-        self::assertTrue(
-            $model->getTimeSlots()->first() instanceof Tx_Seminars_Model_TimeSlot
+        self::assertInstanceOf(
+            Tx_Seminars_Model_TimeSlot::class,
+            $model->getTimeSlots()->first()
         );
     }
 
@@ -331,8 +333,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
 
         /** @var Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
-        self::assertTrue(
-            $model->getSpeakers()->first() instanceof Tx_Seminars_Model_Speaker
+        self::assertInstanceOf(
+            Tx_Seminars_Model_Speaker::class,
+            $model->getSpeakers()->first()
         );
     }
 
@@ -391,8 +394,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
 
         /** @var Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
-        self::assertTrue(
-            $model->getPartners()->first() instanceof Tx_Seminars_Model_Speaker
+        self::assertInstanceOf(
+            Tx_Seminars_Model_Speaker::class,
+            $model->getPartners()->first()
         );
     }
 
@@ -451,8 +455,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
 
         /** @var Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
-        self::assertTrue(
-            $model->getTutors()->first() instanceof Tx_Seminars_Model_Speaker
+        self::assertInstanceOf(
+            Tx_Seminars_Model_Speaker::class,
+            $model->getTutors()->first()
         );
     }
 
@@ -511,8 +516,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
 
         /** @var Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
-        self::assertTrue(
-            $model->getLeaders()->first() instanceof Tx_Seminars_Model_Speaker
+        self::assertInstanceOf(
+            Tx_Seminars_Model_Speaker::class,
+            $model->getLeaders()->first()
         );
     }
 
@@ -805,9 +811,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
             ['publication_hash' => $publicationHash]
         );
 
-        self::assertTrue(
+        self::assertInstanceOf(
+            Tx_Seminars_Model_Event::class,
             $this->fixture->findByPublicationHash($publicationHash)
-                instanceof Tx_Seminars_Model_Event
         );
     }
 

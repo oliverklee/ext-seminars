@@ -456,11 +456,13 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         );
 
         $matchingUids = explode(',', $bag->getUids());
-        self::assertTrue(
-            in_array($topicUid, $matchingUids)
+        self::assertContains(
+            $topicUid,
+            $matchingUids
         );
-        self::assertTrue(
-            in_array($dateUid, $matchingUids)
+        self::assertContains(
+            $dateUid,
+            $matchingUids
         );
     }
 

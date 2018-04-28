@@ -69,8 +69,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         $this->instantiateStaticInfo();
 
-        self::assertTrue(
-            $this->staticInfo instanceof PiBaseApi
+        self::assertInstanceOf(
+            PiBaseApi::class,
+            $this->staticInfo
         );
     }
 

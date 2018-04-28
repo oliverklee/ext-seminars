@@ -55,8 +55,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $bag = $this->fixture->build();
 
-        self::assertTrue(
-            is_object($bag)
+        self::assertInternalType(
+            'object',
+            $bag
         );
     }
 
@@ -644,11 +645,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->addAdditionalTableName('tx_seminars_seminars');
 
-        self::assertTrue(
-            in_array(
-                'tx_seminars_seminars',
-                $this->fixture->getAdditionalTableNames()
-            )
+        self::assertContains(
+            'tx_seminars_seminars',
+            $this->fixture->getAdditionalTableNames()
         );
     }
 
@@ -682,11 +681,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
         $this->fixture->addAdditionalTableName('tx_seminars_seminars');
         $this->fixture->removeAdditionalTableName('tx_seminars_seminars');
 
-        self::assertFalse(
-            in_array(
-                'tx_seminars_seminars',
-                $this->fixture->getAdditionalTableNames()
-            )
+        self::assertNotContains(
+            'tx_seminars_seminars',
+            $this->fixture->getAdditionalTableNames()
         );
     }
 

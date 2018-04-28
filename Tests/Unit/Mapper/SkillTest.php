@@ -38,8 +38,9 @@ class Tx_Seminars_Tests_Unit_Mapper_SkillTest extends Tx_Phpunit_TestCase
      */
     public function findWithUidReturnsSkillInstance()
     {
-        self::assertTrue(
-            $this->fixture->find(1) instanceof Tx_Seminars_Model_Skill
+        self::assertInstanceOf(
+            Tx_Seminars_Model_Skill::class,
+            $this->fixture->find(1)
         );
     }
 

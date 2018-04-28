@@ -38,8 +38,9 @@ class Tx_Seminars_Tests_Unit_Mapper_TargetGroupTest extends Tx_Phpunit_TestCase
      */
     public function findWithUidReturnsTargetGroupInstance()
     {
-        self::assertTrue(
-            $this->fixture->find(1) instanceof Tx_Seminars_Model_TargetGroup
+        self::assertInstanceOf(
+            Tx_Seminars_Model_TargetGroup::class,
+            $this->fixture->find(1)
         );
     }
 

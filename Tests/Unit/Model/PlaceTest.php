@@ -264,8 +264,9 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends Tx_Phpunit_TestCase
         $country = $mapper->find(54);
         $this->fixture->setData(['country' => $country->getIsoAlpha2Code()]);
 
-        self::assertTrue(
-            $this->fixture->getCountry() instanceof Tx_Oelib_Model_Country
+        self::assertInstanceOf(
+            Tx_Oelib_Model_Country::class,
+            $this->fixture->getCountry()
         );
     }
 

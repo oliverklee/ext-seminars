@@ -339,9 +339,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             'payment_methods'
         );
 
-        self::assertEquals(
+        self::assertCount(
             1,
-            count($this->fixture->populateListPaymentMethods())
+            $this->fixture->populateListPaymentMethods()
         );
     }
 
@@ -404,9 +404,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             'payment_methods'
         );
 
-        self::assertEquals(
+        self::assertCount(
             2,
-            count($this->fixture->populateListPaymentMethods())
+            $this->fixture->populateListPaymentMethods()
         );
     }
 
