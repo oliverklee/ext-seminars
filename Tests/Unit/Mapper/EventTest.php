@@ -756,7 +756,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
     public function findByPublicationHashForEmptyPublicationHashGivenThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The given publication hash was empty.'
         );
 

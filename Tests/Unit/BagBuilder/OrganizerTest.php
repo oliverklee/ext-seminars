@@ -46,7 +46,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends Tx_Phpunit_TestCas
     public function testLimitToEventWithNegativeEventUidThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $eventUid must be > 0.'
         );
 
@@ -56,7 +56,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends Tx_Phpunit_TestCas
     public function testLimitToEventWithZeroEventUidThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $eventUid must be > 0.'
         );
 

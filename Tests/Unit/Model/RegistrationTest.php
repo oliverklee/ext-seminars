@@ -41,7 +41,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     public function setTitleWithEmptyTitleThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $title must not be empty.'
         );
 
@@ -305,7 +305,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     public function setSeatsWithNegativeSeatsThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $seats must be >= 0.'
         );
 
@@ -388,7 +388,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     public function setTotalPriceForNegativePriceThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $price must be >= 0.'
         );
 
@@ -528,7 +528,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     public function setPaymentDateAsUnixTimestampWithNegativeTimestampThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $timestamp must be >= 0.'
         );
 
@@ -878,7 +878,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     public function setGenderWithUnsupportedGenderThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $gender must be one of the following: Tx_Oelib_Model_FrontEndUser::GENDER_MALE, ' .
                 'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN'
         );
@@ -1538,7 +1538,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends Tx_Phpunit_TestCase
     public function setKidsWithNegativeKidsThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $kids must be >= 0.'
         );
 

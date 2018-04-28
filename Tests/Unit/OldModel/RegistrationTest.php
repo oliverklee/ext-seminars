@@ -773,7 +773,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
     public function setUserDataThrowsExceptionForEmptyUserData()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             '$userData must not be empty.'
         );
 
@@ -1364,7 +1364,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
     public function setSeatsWithNegativeSeatsThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $seats must be >= 0.'
         );
 
@@ -1490,7 +1490,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
     public function setNumberOfKidsWithNegativeNumberOfKidsThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $numberOfKids must be >= 0.'
         );
 
@@ -1668,7 +1668,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends Tx_Phpunit_TestCa
     public function setMethodOfPaymentUidWithNegativeUidThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $uid must be >= 0.'
         );
 

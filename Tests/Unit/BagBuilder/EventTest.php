@@ -825,7 +825,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testSetTimeFrameFailsWithEmptyKey()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The time-frame key  is not valid.'
         );
         $this->fixture->setTimeFrame('');
@@ -834,7 +834,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testSetTimeFrameFailsWithInvalidKey()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The time-frame key foo is not valid.'
         );
         $this->fixture->setTimeFrame('foo');
@@ -3007,7 +3007,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testLimitToOwnerWithNegativeFeUserUidThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $feUserUid must be >= 0.'
         );
 
@@ -3163,7 +3163,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testLimitToEventManagerWithNegativeFeUserUidThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $feUserUid must be >= 0.'
         );
 
@@ -3302,7 +3302,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testLimitToEventsNextDayWithEventWithEmptyEndDateThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The event object given in the first parameter $event must ' .
                 'have an end date set.'
         );
@@ -3386,7 +3386,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     public function testLimitToOtherDatesForTopicWithSingleEventRecordThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The first parameter $event must be either a date or a topic record.'
         );
 

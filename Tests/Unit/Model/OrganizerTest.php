@@ -27,7 +27,7 @@ class Tx_Seminars_Tests_Unit_Model_OrganizerTest extends Tx_Phpunit_TestCase
     public function setNameWithEmptyNameThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $name must not be empty.'
         );
 
@@ -150,7 +150,7 @@ class Tx_Seminars_Tests_Unit_Model_OrganizerTest extends Tx_Phpunit_TestCase
     public function setEMailAddressWithEmptyEMailAddressThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $eMailAddress must not be empty.'
         );
 
@@ -311,7 +311,7 @@ class Tx_Seminars_Tests_Unit_Model_OrganizerTest extends Tx_Phpunit_TestCase
      */
     public function setAttendancesPIDWithNegativeAttendancesPIDThrowsException()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->setExpectedException(\InvalidArgumentException::class);
 
         $this->fixture->setAttendancesPID(-1);
     }

@@ -350,7 +350,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function setRegistrationDeadlineAsUnixTimeStampWithNegativeRegistrationDeadlineThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $registrationDeadline must be >= 0.'
         );
 
@@ -443,7 +443,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function setEarlyBirdDeadlineAsUnixTimeStampWithNegativeEarlyBirdDeadlineThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $earlyBirdDeadline must be >= 0.'
         );
 
@@ -536,7 +536,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function setUnregistrationDeadlineAsUnixTimeStampWithNegativeUnregistrationDeadlineThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $unregistrationDeadline must be >= 0.'
         );
 
@@ -628,7 +628,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function setExpiryAsUnixTimeStampWithNegativeExpiryThrowsException()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->setExpectedException(\InvalidArgumentException::class);
 
         $this->fixture->setExpiryAsUnixTimeStamp(-1);
     }
@@ -1174,7 +1174,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function setMinimumAttendeesWithNegativeMinimumAttendeesThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $minimumAttendees must be >= 0.'
         );
 
@@ -1267,7 +1267,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function setMaximumAttendeesWithNegativeMaximumAttendeesThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $maximumAttendees must be >= 0.'
         );
 

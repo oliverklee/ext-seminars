@@ -778,7 +778,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     public function getInitialValueForFooThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'There is no initial value for the field "foo" defined.'
         );
 

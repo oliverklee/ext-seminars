@@ -23,7 +23,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
     public function setTitleWithEmptyTitleThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $title must not be empty.'
         );
 
@@ -92,7 +92,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
     public function setBeginDateAsUnixTimeStampWithNegativeTimeStampThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $beginDate must be >= 0.'
         );
 
@@ -185,7 +185,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends Tx_Phpunit_TestC
     public function setEndDateAsUnixTimeStampWithNegativeTimeStampThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $endDate must be >= 0.'
         );
 

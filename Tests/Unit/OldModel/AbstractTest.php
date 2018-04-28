@@ -323,7 +323,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     public function testCreateMmRecordsForEmptyTableNameThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             '$mmTable must not be empty.'
         );
 
@@ -333,7 +333,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     public function testCreateMmRecordsOnObjectWithoutUidThrowsException()
     {
         $this->setExpectedException(
-            'BadMethodCallException',
+            \BadMethodCallException::class,
             'createMmRecords may only be called on objects that have a UID.'
         );
 

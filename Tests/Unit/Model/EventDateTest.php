@@ -1675,7 +1675,7 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
     public function setPaymentMethodsThrowsException()
     {
         $this->setExpectedException(
-            'BadMethodCallException',
+            \BadMethodCallException::class,
             'setPaymentMethods may only be called on single events and event ' .
                 'topics, but not on event dates.'
         );

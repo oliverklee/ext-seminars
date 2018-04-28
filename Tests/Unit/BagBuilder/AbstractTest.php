@@ -44,7 +44,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     public function testBuilderThrowsExceptionForEmptyTableName()
     {
         $this->setExpectedException(
-            'RuntimeException',
+            \RuntimeException::class,
             'The attribute $this->tableName must not be empty.'
         );
 
@@ -633,7 +633,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     public function testAddAdditionalTableNameWithEmptyTableNameThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $additionalTableName must not be empty.'
         );
 
@@ -659,7 +659,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     public function testRemoveAdditionalTableNameWithEmptyTableNameThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The parameter $additionalTableName must not be empty.'
         );
 
@@ -669,7 +669,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     public function testRemoveAdditionalTableNameWithNotSetTableNameThrowsException()
     {
         $this->setExpectedException(
-            'InvalidArgumentException',
+            \InvalidArgumentException::class,
             'The given additional table name does not exist in the list ' .
                 'of additional table names.'
         );
