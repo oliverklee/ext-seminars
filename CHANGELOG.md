@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 1.5.0
+
+### Added
 - run the unit tests on TravisCI (#12)
 - Add an SVG extension icon (#34)
 
@@ -15,8 +27,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Use new instead of makeInstance for Tx_Oelib_List (#57)
 - Always use spaces for indentation (#43)
 - Require oelib >= 1.4.0 (#42)
-
-### Deprecated
 
 ### Removed
 - Drop most of the destructors (#55)
