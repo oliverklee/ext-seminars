@@ -25,7 +25,7 @@
         "source": "https://github.com/oliverklee/ext-seminars"
     },
     "require": {
-        "php": "^5.5.0 || ~7.0.0",
+        "php": "^5.6.0 || ~7.0.0",
         "typo3/cms-core": "^6.2.14 || ^7.6.23",
         "typo3/cms-frontend": "^6.2.14 || ^7.6.23",
         "sjbr/static-info-tables": "^6.3.7",
