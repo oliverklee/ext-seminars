@@ -1085,7 +1085,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     {
         $language = '';
         if ($this->hasLanguage()) {
-            $language = $this->getLanguageNameFromISOCode(
+            $language = $this->getLanguageNameFromIsoCode(
                 $this->getRecordPropertyString('language')
             );
         }

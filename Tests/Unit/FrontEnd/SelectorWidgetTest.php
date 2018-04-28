@@ -1026,7 +1026,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
             'city'
         );
 
-        self::assertNotcontains(
+        self::assertNotContains(
             '###OPTIONS_COUNTRY###',
             $this->fixture->render()
         );

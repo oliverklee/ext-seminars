@@ -3912,7 +3912,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             ]
         );
 
-        $timeSlotsWithMarkers = $this->fixture->getTimeslotsAsArrayWithMarkers();
+        $timeSlotsWithMarkers = $this->fixture->getTimeSlotsAsArrayWithMarkers();
         self::assertSame(
             $timeSlotsWithMarkers[0]['room'],
             'Room2'
@@ -8337,7 +8337,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function dumpSeminarValuesForTitleGivenReturnsTitleWithLineFeedAtEndOfLine()
     {
-        self::assertRegexp(
+        self::assertRegExp(
             '/\\n$/',
             $this->fixture->dumpSeminarValues('title')
         );
@@ -8350,7 +8350,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setDescription('foo bar');
 
-        self::assertRegexp(
+        self::assertRegExp(
             '/.*' . $this->fixture->getTitle() . '.*\\n.*' .
                 $this->fixture->getRecordPropertyString('description') . '/',
             $this->fixture->dumpSeminarValues('title,description')

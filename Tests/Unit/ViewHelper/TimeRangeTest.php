@@ -56,7 +56,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends Tx_Phpunit_TestCas
 
         Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
-        $this->translator = Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars');
+        $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
         $this->translatedHours = ' ' . $this->translator->translate('label_hours');
 
         $this->subject = new Tx_Seminars_ViewHelper_TimeRange();

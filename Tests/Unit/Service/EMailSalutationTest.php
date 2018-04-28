@@ -138,7 +138,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
         $user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_MALE);
 
         self::assertContains(
-            Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_hello_formal_0'),
+            \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_formal_0'),
             $this->subject->getSalutation($user)
         );
     }
@@ -153,7 +153,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
         $user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_MALE);
 
         self::assertContains(
-            Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_0') .
+            \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_salutation_title_0') .
                 ' ' . $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
         );
@@ -169,7 +169,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
         $user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE);
 
         self::assertContains(
-            Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')
+            \Tx_Oelib_TranslatorRegistry::get('seminars')
                 ->translate('email_hello_formal_1'),
             $this->subject->getSalutation($user)
         );
@@ -185,7 +185,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
         $user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE);
 
         self::assertContains(
-            Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')->translate('email_salutation_title_1') .
+            \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_salutation_title_1') .
                 ' ' . $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
         );
@@ -201,7 +201,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
         );
 
         self::assertContains(
-            Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')
+            \Tx_Oelib_TranslatorRegistry::get('seminars')
                 ->translate('email_hello_formal_99'),
             $this->subject->getSalutation($user)
         );
@@ -217,7 +217,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
         );
 
         self::assertContains(
-            Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')
+            \Tx_Oelib_TranslatorRegistry::get('seminars')
                 ->translate('email_salutation_title_99') . ' ' .
                 $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
@@ -234,7 +234,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
             ->setAsString('salutation', 'informal');
 
         self::assertContains(
-            Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars')
+            \Tx_Oelib_TranslatorRegistry::get('seminars')
                     ->translate('email_hello_informal'),
             $this->subject->getSalutation($user)
         );
@@ -507,7 +507,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
         );
 
         $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, ['timeFormat' => $timeFormat]);
-        $translator = Tx_Oelib_TranslatorRegistry::getInstance()->get('seminars');
+        $translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
         $timeInsert = strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']) . ' ' .
             $translator->translate('email_timeTo') . ' ' .
             strftime($timeFormat, $endDate);

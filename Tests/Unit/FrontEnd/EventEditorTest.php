@@ -1675,7 +1675,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ]
         );
 
-        $this->testingFramework->createAndLogInFrontEndUser(
+        $this->testingFramework->createAndLoginFrontEndUser(
             $userGroup->getUid()
         );
 
@@ -1711,7 +1711,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ]
         );
 
-        $this->testingFramework->createAndLogInFrontEndUser(
+        $this->testingFramework->createAndLoginFrontEndUser(
             $userGroup->getUid()
         );
 
@@ -1744,7 +1744,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ]
         );
 
-        $this->testingFramework->createAndLogInFrontEndUser(
+        $this->testingFramework->createAndLoginFrontEndUser(
             $userGroup->getUid()
         );
 
@@ -1966,7 +1966,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function validateCheckboxesForNonRequiredFieldAndEmptyValueReturnsTrue()
     {
-        $this->testingFramework->createAndLogInFrontEndUser();
+        $this->testingFramework->createAndLoginFrontEndUser();
         self::assertTrue(
             $this->fixture->validateCheckboxes(
                 ['elementName' => 'categories', 'value' => '']
@@ -1979,7 +1979,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function validateCheckboxesForRequiredFieldAndValueNotArrayReturnsFalse()
     {
-        $this->testingFramework->createAndLogInFrontEndUser();
+        $this->testingFramework->createAndLoginFrontEndUser();
         $fixture = $this->getFixtureWithRequiredField('categories');
 
         self::assertFalse(
@@ -1994,7 +1994,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function validateCheckboxesForRequiredFieldAndValueEmptyArrayReturnsFalse()
     {
-        $this->testingFramework->createAndLogInFrontEndUser();
+        $this->testingFramework->createAndLoginFrontEndUser();
         $fixture = $this->getFixtureWithRequiredField('categories');
 
         self::assertFalse(
@@ -2009,7 +2009,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function validateCheckboxesForRequiredFieldAndValueNonEmptyArrayReturnsTrue()
     {
-        $this->testingFramework->createAndLogInFrontEndUser();
+        $this->testingFramework->createAndLoginFrontEndUser();
         $fixture = $this->getFixtureWithRequiredField('categories');
 
         self::assertTrue(
@@ -2037,7 +2037,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
             ['tx_seminars_default_categories' => $categories]
         );
 
-        $this->testingFramework->createAndLogInFrontEndUser(
+        $this->testingFramework->createAndLoginFrontEndUser(
             $userGroup->getUid()
         );
 
@@ -2055,7 +2055,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function validateCheckboxesForUserWithoutDefaultCategoriesAndCategoriesRequiredAndEmptyReturnsFalse()
     {
-        $this->testingFramework->createAndLogInFrontEndUser();
+        $this->testingFramework->createAndLoginFrontEndUser();
         $fixture = $this->getFixtureWithRequiredField('categories');
 
         self::assertFalse(

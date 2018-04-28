@@ -1429,8 +1429,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         if ($owner->hasPhoneNumber()) {
             $ownerData[] = htmlspecialchars($owner->getPhoneNumber());
         }
-        if ($owner->hasEMailAddress()) {
-            $ownerData[] = htmlspecialchars($owner->getEMailAddress());
+        if ($owner->hasEmailAddress()) {
+            $ownerData[] = htmlspecialchars($owner->getEmailAddress());
         }
         $this->setSubpart(
             'OWNER_DATA',
