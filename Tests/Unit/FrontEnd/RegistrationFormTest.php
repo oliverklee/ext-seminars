@@ -1015,6 +1015,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateNumberOfRegisteredPersonsForOnePersonAndOneSeatReturnsTrue()
     {
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
@@ -1040,6 +1041,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateNumberOfRegisteredPersonsForOnePersonAndTwoSeatsReturnsFalse()
     {
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
@@ -1065,6 +1067,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateNumberOfRegisteredPersonsForTwoPersonsAndOneSeatReturnsFalse()
     {
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
@@ -1090,6 +1093,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateNumberOfRegisteredPersonsForTwoPersonsAndTwoSeatsReturnsTrue()
     {
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
@@ -1198,6 +1202,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateAdditionalPersonsEMailAddressesForDisabledFrontEndUserCreationReturnsTrue()
     {
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
@@ -1225,6 +1230,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateAdditionalPersonsEMailAddressesForDisabledFormFieldReturnsTrue()
     {
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
@@ -1252,6 +1258,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateAdditionalPersonsEMailAddressesForNoPersonsReturnsTrue()
     {
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
@@ -1279,6 +1286,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateAdditionalPersonsEMailAddressesForOneValidEMailAddressReturnsTrue()
     {
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
@@ -1308,6 +1316,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateAdditionalPersonsEMailAddressesForOneInvalidEMailAddressReturnsFalse()
     {
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
@@ -1337,6 +1346,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateAdditionalPersonsEMailAddressesForOneEmptyAddressReturnsFalse()
     {
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
@@ -1366,6 +1376,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateAdditionalPersonsEMailAddressesForOneMissingAddressReturnsFalse()
     {
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
@@ -1395,6 +1406,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateAdditionalPersonsEMailAddressesForOneValidAndOneInvalidEMailAddressReturnsFalse()
     {
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],

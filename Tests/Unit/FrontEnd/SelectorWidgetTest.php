@@ -419,6 +419,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
      */
     public function itemsInSearchBoxAreSortedAlphabetically()
     {
+        /** @var \Tx_Seminars_FrontEnd_SelectorWidget|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_SelectorWidget::class,
             [

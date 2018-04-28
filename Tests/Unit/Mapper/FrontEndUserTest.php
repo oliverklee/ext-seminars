@@ -12,6 +12,11 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends Tx_Phpunit_TestCase
      */
     private $fixture;
 
+    /**
+     * @var \Tx_Oelib_TestingFramework
+     */
+    private $testingFramework = null;
+
     protected function setUp()
     {
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
@@ -50,6 +55,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends Tx_Phpunit_TestCase
         $registration = Tx_Oelib_MapperRegistry
             ::get(Tx_Seminars_Mapper_Registration::class)->getNewGhost();
 
+        /** @var \Tx_Seminars_Model_FrontEndUser $model */
         $model = $this->fixture->getLoadedTestingModel(
             ['tx_seminars_registration' => $registration->getUid()]
         );

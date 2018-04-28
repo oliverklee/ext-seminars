@@ -8216,6 +8216,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             'directions' => '',
         ];
 
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
         $fixture->expects(self::any())->method('getPlacesAsArray')->will(self::returnValue([$place]));
         $fixture->expects(self::any())->method('hasPlace')->will(self::returnValue(true));
@@ -8248,6 +8249,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             'directions' => '',
         ];
 
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
         $fixture->expects(self::any())->method('getPlacesAsArray')->will(self::returnValue([$place1, $place2]));
         $fixture->expects(self::any())->method('hasPlace')->will(self::returnValue(true));
@@ -8270,6 +8272,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             'city' => 'Bonn',
         ];
 
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
         $fixture->expects(self::any())->method('getPlacesAsArray')->will(self::returnValue([$place]));
         $fixture->expects(self::any())->method('hasPlace')->will(self::returnValue(true));
@@ -8292,6 +8295,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             'city' => 'Bonn',
         ];
 
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
         $fixture->expects(self::any())->method('getPlacesAsArray')->will(self::returnValue([$place]));
         $fixture->expects(self::any())->method('hasPlace')->will(self::returnValue(true));
@@ -9262,6 +9266,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $registrationsListPID,
         $registrationsVipListPID
     ) {
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip'],
@@ -9315,6 +9320,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $registrationsListPID,
         $registrationsVipListPID
     ) {
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip'],
@@ -9400,6 +9406,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $isVip,
         $allowCsvExportForVips
     ) {
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserVip'],
@@ -9607,6 +9614,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $registrationsListPID,
         $registrationsVipListPID
     ) {
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip'],
@@ -9819,6 +9827,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $registrationsListPID,
         $registrationsVipListPID
     ) {
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip'],
@@ -10212,6 +10221,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $hasPriceRegularBoard,
         $hasPriceSpecialBoard
     ) {
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_OldModel_Event::class,
             [

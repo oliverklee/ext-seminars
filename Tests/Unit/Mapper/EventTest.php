@@ -72,10 +72,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getTimeSlotsReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel([])->getTimeSlots()
-        );
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getTimeSlots());
     }
 
     /**
@@ -134,10 +134,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getPlacesReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel([])->getPlaces()
-        );
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getPlaces());
     }
 
     /**
@@ -192,10 +192,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getLodgingsReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel([])->getLodgings()
-        );
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getLodgings());
     }
 
     /**
@@ -250,10 +250,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getFoodsReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel([])->getFoods()
-        );
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getFoods());
     }
 
     /**
@@ -308,10 +308,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getSpeakersReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel([])->getSpeakers()
-        );
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getSpeakers());
     }
 
     /**
@@ -368,10 +368,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getPartnersReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel([])->getPartners()
-        );
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getPartners());
     }
 
     /**
@@ -428,10 +428,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getTutorsReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel([])->getTutors()
-        );
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getTutors());
     }
 
     /**
@@ -488,10 +488,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getLeadersReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel([])->getLeaders()
-        );
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getLeaders());
     }
 
     /**
@@ -548,10 +548,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getOrganizersReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel([])->getOrganizers()
-        );
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getOrganizers());
     }
 
     /**
@@ -610,10 +610,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getOrganizingPartnersReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel([])->getOrganizingPartners()
-        );
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getOrganizingPartners());
     }
 
     /**
@@ -668,9 +668,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getOwnerWithoutOwnerReturnsNull()
     {
-        self::assertNull(
-            $this->fixture->getLoadedTestingModel([])->getOwner()
-        );
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertNull($testingModel->getOwner());
     }
 
     /**
@@ -678,13 +679,13 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
-        $frontEndUser = Tx_Oelib_MapperRegistry::
-            get(Tx_Oelib_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
+        /** @var \Tx_Oelib_Model_FrontEndUser $frontEndUser */
+        $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_FrontEndUser::class)
+            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel(['owner_feuser' => $frontEndUser->getUid()]);
 
-        self::assertInstanceOf(
-            Tx_Oelib_Model_FrontEndUser::class,
-            $this->fixture->getLoadedTestingModel(['owner_feuser' => $frontEndUser->getUid()])->getOwner()
-        );
+        self::assertInstanceOf(\Tx_Oelib_Model_FrontEndUser::class, $testingModel->getOwner());
     }
 
     ////////////////////////////////////////
@@ -696,10 +697,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends Tx_Phpunit_TestCase
      */
     public function getEventManagersReturnsListInstance()
     {
-        self::assertInstanceOf(
-            Tx_Oelib_List::class,
-            $this->fixture->getLoadedTestingModel([])->getEventManagers()
-        );
+        /** @var \Tx_Seminars_Model_Event $testingModel */
+        $testingModel = $this->fixture->getLoadedTestingModel([]);
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getEventManagers());
     }
 
     /**

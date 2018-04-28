@@ -165,10 +165,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         );
         $this->fixture->limitToPaid();
         $registrationBag = $this->fixture->build();
+        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        $currentModel = $registrationBag->current();
 
-        self::assertTrue(
-            $registrationBag->current()->isPaid()
-        );
+        self::assertTrue($currentModel->isPaid());
     }
 
     public function testLimitToPaidIgnoresUnpaidRegistration()
@@ -197,10 +197,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         );
         $this->fixture->limitToUnpaid();
         $registrationBag = $this->fixture->build();
+        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        $currentModel = $registrationBag->current();
 
-        self::assertFalse(
-            $registrationBag->current()->isPaid()
-        );
+        self::assertFalse($currentModel->isPaid());
     }
 
     public function testLimitToUnpaidIgnoresPaidRegistration()
@@ -230,10 +230,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         $this->fixture->limitToPaid();
         $this->fixture->removePaymentLimitation();
         $registrationBag = $this->fixture->build();
+        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        $currentModel = $registrationBag->current();
 
-        self::assertFalse(
-            $registrationBag->current()->isPaid()
-        );
+        self::assertFalse($currentModel->isPaid());
     }
 
     public function testRemovePaymentLimitationRemovesUnpaidLimit()
@@ -245,10 +245,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         $this->fixture->limitToUnpaid();
         $this->fixture->removePaymentLimitation();
         $registrationBag = $this->fixture->build();
+        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        $currentModel = $registrationBag->current();
 
-        self::assertTrue(
-            $registrationBag->current()->isPaid()
-        );
+        self::assertTrue($currentModel->isPaid());
     }
 
     ///////////////////////////////
@@ -263,10 +263,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         );
         $this->fixture->limitToOnQueue();
         $registrationBag = $this->fixture->build();
+        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        $currentModel = $registrationBag->current();
 
-        self::assertTrue(
-            $registrationBag->current()->isOnRegistrationQueue()
-        );
+        self::assertTrue($currentModel->isOnRegistrationQueue());
     }
 
     public function testLimitToOnQueueIgnoresRegularRegistration()
@@ -295,10 +295,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         );
         $this->fixture->limitToRegular();
         $registrationBag = $this->fixture->build();
+        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        $currentModel = $registrationBag->current();
 
-        self::assertFalse(
-            $registrationBag->current()->isOnRegistrationQueue()
-        );
+        self::assertFalse($currentModel->isOnRegistrationQueue());
     }
 
     public function testLimitToRegularIgnoresRegistrationOnQueue()
@@ -328,10 +328,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         $this->fixture->limitToOnQueue();
         $this->fixture->removeQueueLimitation();
         $registrationBag = $this->fixture->build();
+        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        $currentModel = $registrationBag->current();
 
-        self::assertFalse(
-            $registrationBag->current()->isOnRegistrationQueue()
-        );
+        self::assertFalse($currentModel->isOnRegistrationQueue());
     }
 
     public function testRemoveQueueLimitationRemovesRegularLimit()
@@ -343,10 +343,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         $this->fixture->limitToRegular();
         $this->fixture->removeQueueLimitation();
         $registrationBag = $this->fixture->build();
+        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        $currentModel = $registrationBag->current();
 
-        self::assertTrue(
-            $registrationBag->current()->isOnRegistrationQueue()
-        );
+        self::assertTrue($currentModel->isOnRegistrationQueue());
     }
 
     ///////////////////////////////////
@@ -371,11 +371,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         );
         $this->fixture->limitToSeatsAtMost(2);
         $registrationBag = $this->fixture->build();
+        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        $currentModel = $registrationBag->current();
 
-        self::assertEquals(
-            2,
-            $registrationBag->current()->getSeats()
-        );
+        self::assertEquals(2, $currentModel->getSeats());
     }
 
     public function testLimitToSeatsAtMostFindsRegistrationWithLessSeats()
@@ -386,11 +385,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         );
         $this->fixture->limitToSeatsAtMost(2);
         $registrationBag = $this->fixture->build();
+        /** @var \Tx_Seminars_OldModel_Registration $currentModel */
+        $currentModel = $registrationBag->current();
 
-        self::assertEquals(
-            1,
-            $registrationBag->current()->getSeats()
-        );
+        self::assertEquals(1, $currentModel->getSeats());
     }
 
     public function testLimitToSeatsAtMostIgnoresRegistrationWithMoreSeats()

@@ -113,8 +113,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setSubtitleForEventDateSetsSubtitle()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -216,8 +216,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setTeaserForEventDateSetsTeaser()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -321,8 +321,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setDescriptionForEventDateSetsDescription()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -426,8 +426,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setCreditPointsForEventDateWithZeroCreditPointsSetsCreditPoints()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -447,8 +447,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setCreditPointsForEventDateWithPositiveCreditPointsSetsCreditPoints()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -550,8 +550,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setRegularPriceForEventDateWithZeroRegularPriceSetsRegularPrice()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -571,8 +571,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setRegularPriceForEventDateWithPositiveRegularPriceSetsRegularPrice()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -674,8 +674,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setRegularEarlyBirdPriceForEventDateWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -695,8 +695,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setRegularEarlyBirdPriceForEventDateWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -798,8 +798,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setRegularBoardPriceForEventDateWithZeroRegularBoardPriceSetsRegularBoardPrice()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -819,8 +819,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setRegularBoardPriceForEventDateWithPositiveRegularBoardPriceSetsRegularBoardPrice()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -922,8 +922,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setSpecialPriceForEventDateWithZeroSpecialPriceSetsSpecialPrice()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -943,8 +943,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setSpecialPriceForEventDateWithPositiveSpecialPriceSetsSpecialPrice()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1046,8 +1046,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setSpecialEarlyBirdPriceForEventDateWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1067,8 +1067,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setSpecialEarlyBirdPriceForEventDateWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1170,8 +1170,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setSpecialBoardPriceForEventDateWithZeroSpecialBoardPriceSetsSpecialBoardPrice()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1191,8 +1191,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setSpecialBoardPriceForEventDateWithPositiveSpecialBoardPriceSetsSpecialBoardPrice()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1296,8 +1296,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setAdditionalInformationForEventDateSetsAdditionalInformation()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1487,18 +1487,18 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setNotesForEventDateSetsNotes()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
-        $this->fixture->setNotes('Don\'t forget this.');
+        $this->fixture->setNotes("Don't forget this.");
 
         self::assertEquals(
-            'Don\'t forget this.',
+            "Don't forget this.",
             $topic->getNotes()
         );
     }
@@ -1590,8 +1590,8 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function setImageForEventDateSetsImage()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel([]);
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->fixture->setData(
             [
                 'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,

@@ -725,6 +725,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function singleViewFlavorWithUidCreatesSingleView()
     {
+        /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $controller */
         $controller = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
             [
@@ -745,6 +746,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function singleViewFlavorWithUidFromShowSingleEventConfigurationCreatesSingleView()
     {
+        /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $controller */
         $controller = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
             [
@@ -765,6 +767,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function singleViewFlavorWithoutUidCreatesSingleView()
     {
+        /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $controller */
         $controller = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
             [
@@ -2993,6 +2996,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function eventListFlavorWithoutUidCreatesListView()
     {
+        /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $controller */
         $controller = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
             [
@@ -3013,6 +3017,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function eventListFlavorWithUidCreatesListView()
     {
+        /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $controller */
         $controller = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
             [
@@ -8068,6 +8073,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function mayCurrentUserEditCurrentEventForLoggedInUserAsOwnerIsTrue()
     {
         $className = $this->createAccessibleProxyClass();
+        /** @var \Tx_Seminars_FrontEnd_DefaultController $fixture */
         $fixture = new $className();
         $fixture->cObj = $this->createContentMock();
         $fixture->conf = [];
@@ -8089,6 +8095,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function mayCurrentUserEditCurrentEventForLoggedInUserAsVipAndVipEditorAccessIsTrue()
     {
         $className = $this->createAccessibleProxyClass();
+        /** @var \Tx_Seminars_FrontEnd_DefaultController $fixture */
         $fixture = new $className();
         $fixture->cObj = $this->createContentMock();
         $fixture->conf = ['mayManagersEditTheirEvents' => true];
@@ -8110,6 +8117,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function mayCurrentUserEditCurrentEventForLoggedInUserAsVipAndNoVipEditorAccessIsFalse()
     {
         $className = $this->createAccessibleProxyClass();
+        /** @var \Tx_Seminars_FrontEnd_DefaultController $fixture */
         $fixture = new $className();
         $fixture->cObj = $this->createContentMock();
         $fixture->conf = ['mayManagersEditTheirEvents' => false];
@@ -8131,6 +8139,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function mayCurrentUserEditCurrentEventForLoggedInUserNeitherVipNorOwnerIsFalse()
     {
         $className = $this->createAccessibleProxyClass();
+        /** @var \Tx_Seminars_FrontEnd_DefaultController $fixture */
         $fixture = new $className();
         $fixture->cObj = $this->createContentMock();
         $fixture->conf = [
@@ -9096,6 +9105,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function initListViewForDefaultListLimitsListByAdditionalParameters()
     {
+        /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
             ['limitForAdditionalParameters']
@@ -9110,6 +9120,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function initListViewForTopicListLimitsListByAdditionalParameters()
     {
+        /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
             ['limitForAdditionalParameters']
@@ -9124,6 +9135,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
      */
     public function initListViewForMyEventsListNotLimitsListByAdditionalParameters()
     {
+        /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
             ['limitForAdditionalParameters']
@@ -9261,6 +9273,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $listPid,
         $vipListPid
     ) {
+        /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
             ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns']
@@ -9301,6 +9314,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $listPid,
         $vipListPid
     ) {
+        /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
             ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns']
@@ -9337,6 +9351,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $listPid,
         $vipListPid
     ) {
+        /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_FrontEnd_DefaultController::class,
             ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns']

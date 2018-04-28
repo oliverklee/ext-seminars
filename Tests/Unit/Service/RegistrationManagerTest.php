@@ -4697,6 +4697,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
      */
     public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice()
     {
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_Service_RegistrationManager::class,
             ['getUnregistrationNotice']
@@ -4732,6 +4733,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
             false
         );
 
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_Service_RegistrationManager::class,
             ['getUnregistrationNotice']
@@ -4764,6 +4766,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
             true
         );
 
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_Service_RegistrationManager::class,
             ['getUnregistrationNotice']
@@ -4796,6 +4799,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
      */
     public function notifyAttendeeForRegistrationOnQueueMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_Service_RegistrationManager::class,
             ['getUnregistrationNotice']
@@ -4837,6 +4841,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
      */
     public function notifyAttendeeForQueueUpdateMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_Service_RegistrationManager::class,
             ['getUnregistrationNotice']
@@ -5821,6 +5826,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
         $plugin = new Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_Service_RegistrationManager::class,
             [
@@ -5857,6 +5863,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
         $plugin = new Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_Service_RegistrationManager::class,
             [
@@ -5884,6 +5891,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
         $plugin = new Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_Service_RegistrationManager::class,
             [
@@ -5925,6 +5933,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
         $plugin = new Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_Service_RegistrationManager::class,
             [
@@ -5969,6 +5978,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
         $plugin = new Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             Tx_Seminars_Service_RegistrationManager::class,
             [

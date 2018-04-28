@@ -47,30 +47,30 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
     = \Tx_Seminars_Hooks_TceProcessingHook::class;
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43(
-    $_EXTKEY,
+    'seminars',
     'Classes/FrontEnd/DefaultController.php',
     '_pi1',
     'list_type',
     0
 );
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript($_EXTKEY, 'setup', '
-	plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN($_EXTKEY) . '_pi1.userFunc = Tx_Seminars_FrontEnd_DefaultController->main
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript('seminars', 'setup', '
+    plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN('seminars') . '_pi1.userFunc = Tx_Seminars_FrontEnd_DefaultController->main
 ', 43);
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript(
-    $_EXTKEY,
+    'seminars',
     'setup',
     '
-	tt_content.shortcut.20.conf.tx_seminars_seminars = < plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN($_EXTKEY) . '_pi1
-	tt_content.shortcut.20.conf.tx_seminars_seminars.CMD = singleView
+    tt_content.shortcut.20.conf.tx_seminars_seminars = < plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN('seminars') . '_pi1
+    tt_content.shortcut.20.conf.tx_seminars_seminars.CMD = singleView
 ',
     43
 );
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][\OliverKlee\Seminars\SchedulerTasks\MailNotifier::class] = [
-    'extension' => $_EXTKEY,
-    'title' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xlf:schedulerTasks.mailNotifier.name',
-    'description' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang.xlf:schedulerTasks.mailNotifier.description',
+    'extension' => 'seminars',
+    'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.mailNotifier.name',
+    'description' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.mailNotifier.description',
     'additionalFields' => \OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration::class,
 ];
 
