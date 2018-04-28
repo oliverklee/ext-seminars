@@ -52,10 +52,8 @@ table {
 }
 
 .clearUpDownButton {
-    padding: 0;
-    margin: 0;
-    padding-left: 12px;
-    margin-left: 4px;
+    padding: 0 0 0 12px;
+    margin: 0 0 0 4px;
 }
 
 /*
@@ -155,6 +153,4 @@ td.cancel_button button p {
 #print-button {
     margin-top: 32px;
     float: right;
-}
-
 }

@@ -1,5 +1,6 @@
 <?php
 // DO NOT REMOVE OR CHANGE THESE 3 LINES:
+/** @var string */
 define('TYPO3_MOD_PATH', '../typo3conf/ext/seminars/Classes/BackEnd/');
 $MCONF['name'] = 'web_txseminarsM2';
 $MCONF['script'] = '_DISPATCH';

@@ -80,15 +80,15 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     private function storeAttachedFiles()
     {
-        if (!$this->isTestMode()) {
+        if ($this->isTestMode()) {
+            $this->attachedFiles = [];
+        } else {
             $dataHandler = $this->getFormCreator()->getDataHandler();
             $this->attachedFiles = GeneralUtility::trimExplode(
                 ',',
                 $dataHandler->__aStoredData['attached_files'],
                 true
             );
-        } else {
-            $this->attachedFiles = [];
         }
     }
 
@@ -166,7 +166,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $renderlet = $form->aORenderlets['attached_files'];
         $originalAttachmentList = $renderlet->mForcedValue;
 
-        if (!empty($this->attachedFiles)) {
+        if (empty($this->attachedFiles)) {
+            $template->hideSubparts('attached_files');
+        } else {
             $attachmentList = '';
             $fileNumber = 1;
             foreach ($this->attachedFiles as $fileName) {
@@ -179,8 +181,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
                 $attachmentList .= $template->getSubpart('SINGLE_ATTACHED_FILE');
             }
             $template->setSubpart('single_attached_file', $attachmentList);
-        } else {
-            $template->hideSubparts('attached_files');
         }
 
         $result = $template->getSubpart();
@@ -411,12 +411,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         ) && $form !== null;
 
         $type = $parameters['type'];
-        if (!empty($parameters['lister'])) {
-            $isLister = true;
-            $activeSpeakers = $form->getDataHandler()->getStoredData(strtolower($type) . 's');
-        } else {
+        if (empty($parameters['lister'])) {
             $isLister = false;
             $activeSpeakers = '';
+        } else {
+            $isLister = true;
+            $activeSpeakers = $form->getDataHandler()->getStoredData(strtolower($type) . 's');
         }
 
         /** @var Tx_Seminars_Model_Speaker $speaker */
@@ -771,6 +771,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      */
     private function purgeNonSeminarsFields(array &$formData)
     {
+        /** @var string[][] $fieldsToUnset */
         $fieldsToUnset = [
             '' => ['proceed_file_upload', 'delete_attached_files'],
             'newPlace_' => [
@@ -854,14 +855,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         $hideEditedObject = !$isNew && ($publishSetting === Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED);
         $hideNewObject = $isNew && ($publishSetting > Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 
-        if (!$isNew) {
+        if ($isNew) {
+            $eventIsHidden = false;
+        } else {
             /** @var Tx_Seminars_Mapper_Event $mapper */
             $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
             /** @var Tx_Seminars_Model_Event $event */
             $event = $mapper->find($eventUid);
             $eventIsHidden = $event->isHidden();
-        } else {
-            $eventIsHidden = false;
         }
 
         if (($hideEditedObject || $hideNewObject) && !$eventIsHidden) {
@@ -934,7 +935,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
         if (($this->validationError == '')
             && ($this->isTestMode() || $this->getFormCreator()->getValidationTool()->isAllValid())
         ) {
-            array_push($this->attachedFiles, $fileToCheck);
+            $this->attachedFiles[] = $fileToCheck;
         } else {
             $this->purgeUploadedFile($fileToCheck);
         }
@@ -986,8 +987,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends Tx_Seminars_FrontEnd_Editor
      *
      * @param string $fileName file name, must match an uploaded file, must not be empty
      *
-     * @return string comma-separated list with the still attached files,
-     *                will be empty if the last attachment was removed
+     * @return void
      */
     private function purgeUploadedFile($fileName)
     {

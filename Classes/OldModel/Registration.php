@@ -136,7 +136,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
             $seats = 1;
         }
         $this->recordData['seats'] = $seats;
-        $this->recordData['registered_themselves'] = ($registrationData['registered_themselves']) ? 1 : 0;
+        $this->recordData['registered_themselves'] = $registrationData['registered_themselves'] ? 1 : 0;
 
         $availablePrices = $event->getAvailablePrices();
         // If no (available) price is selected, use the first price by default.
@@ -473,7 +473,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
                 $result = $rawData;
         }
 
-        return trim((string)$result);
+        return trim($result);
     }
 
     /**

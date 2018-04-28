@@ -422,10 +422,10 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
 
         if (!Tx_Seminars_OldModel_Abstract::recordExists($eventUid, 'tx_seminars_seminars', true)) {
             $this->errorType = self::NOT_FOUND;
-        } elseif (!$this->canAccessListOfRegistrations($eventUid)) {
-            $this->errorType = self::ACCESS_DENIED;
-        } else {
+        } elseif ($this->canAccessListOfRegistrations($eventUid)) {
             $result = true;
+        } else {
+            $this->errorType = self::ACCESS_DENIED;
         }
 
         return $result;

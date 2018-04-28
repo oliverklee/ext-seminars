@@ -26,7 +26,7 @@ class Tx_Seminars_Mapper_Registration extends Tx_Oelib_DataMapper
         'currency' => Tx_Oelib_Mapper_Currency::class,
         'method_of_payment' => Tx_Seminars_Mapper_PaymentMethod::class,
         'lodgings' => Tx_Seminars_Mapper_Lodging::class,
-        'foods' => Tx_seminars_Mapper_Food::class,
+        'foods' => Tx_Seminars_Mapper_Food::class,
         'checkboxes' => Tx_Seminars_Mapper_Checkbox::class,
         'additional_persons' => Tx_Seminars_Mapper_FrontEndUser::class,
     ];

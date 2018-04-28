@@ -243,12 +243,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
         $title = 'Test record (with a unique title)';
         self::assertEquals(
             0,
-            $this->testingFramework->countRecords(
-                'tx_seminars_test',
-                'title = "' . $title . '"',
-                'Please make sure that no test record with the title "' .
-                    $title . '" exists in the DB.'
-            )
+            $this->testingFramework->countRecords('tx_seminars_test', 'title = "' . $title . '"')
         );
 
         $virginFixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);

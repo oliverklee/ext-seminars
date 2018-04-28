@@ -648,7 +648,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function testPopulateListCategoriesDoesNotCrash()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $this->fixture->populateListCategories([]);
+        $this->fixture->populateListCategories();
     }
 
     /**
@@ -663,7 +663,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $categoryUid],
-            $this->fixture->populateListCategories([])
+            $this->fixture->populateListCategories()
         );
     }
 
@@ -680,7 +680,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $categoryUid],
-            $this->fixture->populateListCategories([])
+            $this->fixture->populateListCategories()
         );
     }
 
@@ -700,7 +700,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $eventTypeUid],
-            $this->fixture->populateListEventTypes([])
+            $this->fixture->populateListEventTypes()
         );
     }
 
@@ -717,7 +717,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $eventTypeUid],
-            $this->fixture->populateListEventTypes([])
+            $this->fixture->populateListEventTypes()
         );
     }
 
@@ -737,7 +737,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $lodgingUid],
-            $this->fixture->populateListLodgings([])
+            $this->fixture->populateListLodgings()
         );
     }
 
@@ -754,7 +754,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $lodgingUid],
-            $this->fixture->populateListLodgings([])
+            $this->fixture->populateListLodgings()
         );
     }
 
@@ -774,7 +774,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $foodUid],
-            $this->fixture->populateListFoods([])
+            $this->fixture->populateListFoods()
         );
     }
 
@@ -791,7 +791,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $foodUid],
-            $this->fixture->populateListFoods([])
+            $this->fixture->populateListFoods()
         );
     }
 
@@ -811,7 +811,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $paymentMethodUid],
-            $this->fixture->populateListPaymentMethods([])
+            $this->fixture->populateListPaymentMethods()
         );
     }
 
@@ -828,7 +828,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $paymentMethodUid],
-            $this->fixture->populateListPaymentMethods([])
+            $this->fixture->populateListPaymentMethods()
         );
     }
 
@@ -848,7 +848,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $organizerUid],
-            $this->fixture->populateListOrganizers([])
+            $this->fixture->populateListOrganizers()
         );
     }
 
@@ -865,7 +865,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $organizerUid],
-            $this->fixture->populateListOrganizers([])
+            $this->fixture->populateListOrganizers()
         );
     }
 
@@ -886,7 +886,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => '', 'value' => $organizerUid],
-            $this->fixture->populateListOrganizers([])
+            $this->fixture->populateListOrganizers()
         );
     }
 
@@ -914,7 +914,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertNotContains(
             ['caption' => '', 'value' => $organizerUidFromDatabase],
-            $this->fixture->populateListOrganizers([])
+            $this->fixture->populateListOrganizers()
         );
     }
 

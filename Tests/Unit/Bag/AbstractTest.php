@@ -213,31 +213,9 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends Tx_Phpunit_TestCase
         );
     }
 
-    public function testIsEmptyForEmptyBagAfterIteratingReturnsTrue()
-    {
-        $bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('1 = 2');
-        /** @var Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing $item */
-        foreach ($bag as $item);
-
-        self::assertTrue(
-            $bag->isEmpty()
-        );
-    }
-
     public function testIsEmptyForBagWithOneElementReturnsFalse()
     {
         $bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
-
-        self::assertFalse(
-            $bag->isEmpty()
-        );
-    }
-
-    public function testIsEmptyForBagWithOneElementAfterIteratingReturnsFalse()
-    {
-        $bag = new Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
-        /** @var Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing $item */
-        foreach ($bag as $item);
 
         self::assertFalse(
             $bag->isEmpty()

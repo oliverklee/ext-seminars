@@ -53,7 +53,7 @@ class Tx_Seminars_ViewHelper_DateRange
         }
 
         if ($this->configuration->getAsBoolean('abbreviateDateRanges')) {
-            $formattedBeginDate = $this->getAsAbbreviatedDateRange($beginDate, $endDate, $dash);
+            $formattedBeginDate = $this->getAsAbbreviatedDateRange($beginDate, $endDate);
         } else {
             $formattedBeginDate = $this->getAsDateFormatYmd($beginDate);
         }

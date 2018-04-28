@@ -44,7 +44,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @var int
      */
-    protected $placeRelationSorting = 1;
+    private $placeRelationSorting = 1;
 
     protected function setUp()
     {
@@ -2549,7 +2549,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlineSetInEventReturnsThisDeadline()
     {
-        $this->fixture->setBeginDate(($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK));
+        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->fixture->setUnregistrationDeadline($this->now);
         $this->fixture->setGlobalUnregistrationDeadline(0);
 
@@ -2594,7 +2594,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlinesSetInEventAndConfigurationReturnsEventsDeadline()
     {
-        $this->fixture->setBeginDate(($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK));
+        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->fixture->setUnregistrationDeadline($this->now);
         $this->fixture->setGlobalUnregistrationDeadline(1);
 
@@ -2716,9 +2716,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(1);
         $this->fixture->setUnregistrationDeadline(
-            ($this->now + (6 * Tx_Oelib_Time::SECONDS_PER_DAY))
+            $this->now + (6 * Tx_Oelib_Time::SECONDS_PER_DAY)
         );
-        $this->fixture->setBeginDate(($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK));
+        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 
         self::assertTrue(
             $this->fixture->isUnregistrationPossible()
@@ -2737,9 +2737,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(1);
         $this->fixture->setUnregistrationDeadline(
-            ($this->now + (6 * Tx_Oelib_Time::SECONDS_PER_DAY))
+            $this->now + (6 * Tx_Oelib_Time::SECONDS_PER_DAY)
         );
-        $this->fixture->setBeginDate(($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK));
+        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 
         self::assertFalse(
             $this->fixture->isUnregistrationPossible()
@@ -2760,9 +2760,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(1);
         $this->fixture->setUnregistrationDeadline(
-            ($this->now + (6 * Tx_Oelib_Time::SECONDS_PER_DAY))
+            $this->now + (6 * Tx_Oelib_Time::SECONDS_PER_DAY)
         );
-        $this->fixture->setBeginDate(($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK));
+        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
 
         self::assertTrue(
             $this->fixture->isUnregistrationPossible()

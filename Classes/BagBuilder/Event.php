@@ -630,10 +630,10 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
             }
         }
 
-        if (!empty($allWhereParts)) {
-            $this->whereClauseParts['search'] = implode(' AND ', $allWhereParts);
-        } else {
+        if (empty($allWhereParts)) {
             unset($this->whereClauseParts['search']);
+        } else {
+            $this->whereClauseParts['search'] = implode(' AND ', $allWhereParts);
         }
     }
 
@@ -916,9 +916,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
             return [];
         }
 
-        $result = ['tx_seminars_seminars.uid IN (' . implode(',', $localUids) . ')'];
-
-        return $result;
+        return ['tx_seminars_seminars.uid IN (' . implode(',', $localUids) . ')'];
     }
 
     /**

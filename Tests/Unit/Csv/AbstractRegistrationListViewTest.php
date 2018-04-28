@@ -226,7 +226,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
             'tx_seminars_attendances',
             [
                 'seminar' => $this->eventUid,
-                'crdate' => ($GLOBALS['SIM_EXEC_TIME'] + 1),
+                'crdate' => $GLOBALS['SIM_EXEC_TIME'] + 1,
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );

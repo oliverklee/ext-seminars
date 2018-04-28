@@ -180,7 +180,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 
             // Preselects the option if it was selected by the user.
             if (isset($this->piVars[$name])
-                && (in_array((string)$key, $this->piVars[$name], true))
+                && in_array((string)$key, $this->piVars[$name], true)
             ) {
                 $selected = ' selected="selected"';
             } else {
@@ -500,7 +500,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
             if ($event->hasLanguage()) {
                 // Reads the language from the event record.
                 $languageIsoCode = $event->getLanguage();
-                if ((!empty($languageIsoCode))
+                if (!empty($languageIsoCode)
                     && !isset($result[$languageIsoCode])) {
                     $languageName = $this->staticInfo->getStaticInfoName(
                         'LANGUAGES',
@@ -559,7 +559,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
 
         /** @var Tx_Seminars_Model_Place $place */
         foreach ($this->places as $place) {
-            $result[$place->getCity()] = $place->getCity();
+            $city = $place->getCity();
+            $result[$city] = $city;
         }
 
         return $result;

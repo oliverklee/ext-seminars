@@ -3051,7 +3051,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['owner_feuser' => ($feUserUid + 1)]
+            ['owner_feuser' => $feUserUid + 1]
         );
         $this->fixture->limitToOwner($feUserUid);
         $bag = $this->fixture->build();
@@ -3234,13 +3234,13 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => (Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60)]
+            ['begin_date' => Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60]
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => (2 * Tx_Oelib_Time::SECONDS_PER_DAY),
-                'end_date' => (60 * 60 + 2 * Tx_Oelib_Time::SECONDS_PER_DAY),
+                'begin_date' => 2 * Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => 60 * 60 + 2 * Tx_Oelib_Time::SECONDS_PER_DAY,
                 ]
         );
         $event = new Tx_Seminars_OldModel_Event($eventUid1);
@@ -3261,13 +3261,13 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => (Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60)]
+            ['begin_date' => Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'begin_date' => 0,
-                'end_date' => (60 * 60),
+                'end_date' => 60 * 60,
                 ]
         );
         $event = new Tx_Seminars_OldModel_Event($eventUid);
@@ -3283,13 +3283,13 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => (Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60)]
+            ['begin_date' => Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => (3 * Tx_Oelib_Time::SECONDS_PER_DAY),
-                'end_date' => (60 * 60 + 3 * Tx_Oelib_Time::SECONDS_PER_DAY),
+                'begin_date' => 3 * Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => 60 * 60 + 3 * Tx_Oelib_Time::SECONDS_PER_DAY,
                 ]
         );
         $event = new Tx_Seminars_OldModel_Event($eventUid);

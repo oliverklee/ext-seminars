@@ -86,7 +86,7 @@ if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(
     $iconRegistry->registerIcon(
         'tx-seminars-canceled',
         $iconProviderClass,
-        ['source' => 'EXT:seminars/Resources/Public/Icons/Canceled.gif']
+        ['source' => 'EXT:seminars/Resources/Public/Icons/Canceled.png']
     );
 
     $iconRegistry->registerIcon(

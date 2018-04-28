@@ -124,7 +124,7 @@ TYPO3.seminars.restoreSeparateNameFields = function () {
     var positions = separateNamesElement.find('.tx_seminars_pi1_registration_editor_position');
     var eMailAddresses = separateNamesElement.find('.tx_seminars_pi1_registration_editor_attendee_email');
 
-    if (firstNames.length != lastNames.length) {
+    if (firstNames.length !== lastNames.length) {
         return;
     }
 

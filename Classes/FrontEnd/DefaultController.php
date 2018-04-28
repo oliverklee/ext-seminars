@@ -1596,7 +1596,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         }
 
         // Lets warnings from the seminar and the seminar bag bubble up to us.
-        $this->setErrorMessage($seminarBag->checkConfiguration(true));
+        $this->setErrorMessage($seminarBag->checkConfiguration());
 
         // Let's also check the list view configuration..
         $this->checkConfiguration(true, 'seminar_list');
@@ -1647,7 +1647,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         }
 
         // Lets warnings from the seminar and the seminar bag bubble up to us.
-        $this->setErrorMessage($seminarBag->checkConfiguration(true));
+        $this->setErrorMessage($seminarBag->checkConfiguration());
 
         // Let's also check the list view configuration..
         $this->checkConfiguration(true, 'seminar_list');
@@ -1759,9 +1759,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             }
 
             // Lets warnings from the seminar and the seminar bag bubble up to us.
-            $this->setErrorMessage(
-                $seminarOrRegistrationBag->checkConfiguration(true)
-            );
+            $this->setErrorMessage($seminarOrRegistrationBag->checkConfiguration());
         }
 
         return $result;
@@ -1782,7 +1780,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     public function initListView($whatToDisplay = '')
     {
-        if (strstr($this->cObj->currentRecord, 'tt_content')) {
+        if (strpos($this->cObj->currentRecord, 'tt_content') !== false) {
             $this->conf['pidList'] = $this->getConfValueString('pages');
             $this->conf['recursive'] = $this->getConfValueInteger('recursive');
         }
@@ -2092,7 +2090,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                 $this->createSingleViewLink($event, $this->seminar->getTitle())
             );
             $this->setMarker('subtitle', htmlspecialchars($this->seminar->getSubtitle()));
-            $this->setMarker('uid', $this->seminar->getUid($this));
+            $this->setMarker('uid', $this->seminar->getUid());
             $this->setMarker('event_type', htmlspecialchars($this->seminar->getEventType()));
             $this->setMarker('accreditation_number', htmlspecialchars($this->seminar->getAccreditationNumber()));
             $this->setMarker(
@@ -2421,7 +2419,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         }
 
         if (isset($this->piVars['event_type'])
-            && (is_array($this->piVars['event_type']))
+            && is_array($this->piVars['event_type'])
         ) {
             $builder->limitToEventTypes(
                 Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
@@ -2449,10 +2447,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         array_walk($categoryUids, 'intval');
         if ($categoryUid > 0) {
             $categories = (string)$categoryUid;
-        } elseif (!empty($categoryUids)) {
-            $categories = implode(',', $categoryUids);
-        } else {
+        } elseif (empty($categoryUids)) {
             $categories = $this->getConfValueString('limitListViewToCategories', 's_listView');
+        } else {
+            $categories = implode(',', $categoryUids);
         }
         $builder->limitToCategories($categories);
 
@@ -2735,7 +2733,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             'topic_list', 'other_dates', 'events_next_day',
         ];
         if (!$this->isRegistrationEnabled() || !$this->isLoggedIn()
-            || in_array($whatToDisplay, $alwaysHideInViews)
+            || in_array($whatToDisplay, $alwaysHideInViews, true)
         ) {
             $this->hideColumns(['list_registrations']);
             return;
@@ -2912,9 +2910,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             // Lets warnings from the seminar bubble up to us.
             $this->setErrorMessage($this->seminar->checkConfiguration(true));
 
-            if (!$this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)) {
-                $errorMessage = $this->getRegistrationManager()->canRegisterIfLoggedInMessage($this->seminar);
-            } else {
+            if ($this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)) {
                 if ($this->isLoggedIn()) {
                     $isOkay = true;
                 } else {
@@ -2924,6 +2920,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                         $this->seminar->getUid()
                     );
                 }
+            } else {
+                $errorMessage = $this->getRegistrationManager()->canRegisterIfLoggedInMessage($this->seminar);
             }
         } elseif ($this->createRegistration((int)$this->piVars['registration'])) {
             if ($this->createSeminar($this->registration->getSeminar())) {
@@ -2977,7 +2975,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     protected function createRegistrationHeading($errorMessage)
     {
         $this->setMarker('registration', $this->translate('label_registration'));
-        $this->setMarker('title', ($this->seminar) ? htmlspecialchars($this->seminar->getTitle()) : '');
+        $this->setMarker('title', $this->seminar ? htmlspecialchars($this->seminar->getTitle()) : '');
 
         if ($this->seminar && $this->seminar->hasDate()) {
             $this->setMarker('date', $this->seminar->getDate());
@@ -2985,7 +2983,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             $this->hideSubparts('date', 'registration_wrapper');
         }
 
-        $this->setMarker('uid', ($this->seminar) ? $this->seminar->getUid() : '');
+        $this->setMarker('uid', $this->seminar ? $this->seminar->getUid() : '');
 
         if (empty($errorMessage)) {
             $this->hideSubparts('error', 'wrapper');
@@ -3047,8 +3045,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         // Now iterate over the fields to show and delete them from the list
         // of items to remove.
         foreach ($fieldsToShow as $currentField) {
-            $key = array_search($currentField, $fieldsToRemove);
-            // $key will be FALSE if the item has not been found.
+            $key = array_search($currentField, $fieldsToRemove, true);
+            // $key will be false if the item has not been found.
             // Zero, on the other hand, is a valid key.
             if ($key !== false) {
                 unset($fieldsToRemove[$key]);
@@ -3317,23 +3315,23 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         $longMonths = [1, 3, 5, 7, 8, 10, 12];
 
         $month = ($this->piVars['to_month'] > 0)
-            ? $this->piVars['to_month']
+            ? (int)$this->piVars['to_month']
             : 12;
         $year = ($this->piVars['to_year'] > 0)
-            ? $this->piVars['to_year']
+            ? (int)$this->piVars['to_year']
             : (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
 
-        $day = $this->piVars['to_day'];
+        $day = (int)$this->piVars['to_day'];
 
-        if ($month == 2) {
+        if ($month === 2) {
             // the last day of february can be 29 or 28, depending on the year
             // so we use a behaviour of mktime which gives us the timestamp for
             // the last day of february when asking for the 0 day of march
-            if (($day > 28) || ($day == 0)) {
+            if (($day > 28) || ($day === 0)) {
                 $day = 0;
                 $month++;
             }
-        } elseif (in_array($month, $longMonths)) {
+        } elseif (in_array($month, $longMonths, true)) {
             $day = ($day > 0) ? $day : 31;
         } else {
             $day = ($day > 0) ? $day : 30;
@@ -3463,7 +3461,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     private function setVisibilityStatusMarker()
     {
-        $visibilityMarker = ($this->seminar->isHidden())
+        $visibilityMarker = $this->seminar->isHidden()
             ? 'pending'
             : 'published';
 
