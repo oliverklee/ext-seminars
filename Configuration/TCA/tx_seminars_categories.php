@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 return [
     'ctrl' => [
-        'title' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_categories',
+        'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_categories',
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -19,16 +19,16 @@ return [
     'columns' => [
         'title' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_categories.title',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_categories.title',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'required,trim',
             ],
         ],
         'icon' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_categories.icon',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_categories.icon',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'file',
@@ -43,7 +43,7 @@ return [
         ],
         'single_view_page' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_categories.single_view_page',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_categories.single_view_page',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -55,7 +55,7 @@ return [
         ],
     ],
     'types' => [
-        '0' => ['showitem' => 'title, icon;;;;2-2-2, single_view_page'],
+        '0' => ['showitem' => 'title, icon, single_view_page'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],

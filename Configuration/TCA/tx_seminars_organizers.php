@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 return [
     'ctrl' => [
-        'title' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_organizers',
+        'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_organizers',
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -21,30 +21,30 @@ return [
     'columns' => [
         'title' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_organizers.title',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_organizers.title',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'required,trim',
             ],
         ],
         'description' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_organizers.description',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_organizers.description',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
             'defaultExtras' => 'richtext[]',
         ],
         'homepage' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_organizers.homepage',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_organizers.homepage',
             'config' => [
                 'type' => 'input',
-                'size' => '15',
-                'max' => '255',
+                'size' => 15,
+                'max' => 255,
                 'checkbox' => '',
                 'eval' => 'trim',
                 'wizards' => [
@@ -52,9 +52,9 @@ return [
                     'link' => [
                         'type' => 'popup',
                         'title' => 'Link',
-                        'icon' => 'link_popup.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
                         'module' => [
-                            'name' => 'wizard_element_browser',
+                            'name' => 'wizard_link',
                             'urlParameters' => [
                                 'mode' => 'wizard',
                             ],
@@ -66,38 +66,38 @@ return [
         ],
         'email' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_organizers.email',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_organizers.email',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'required,trim,nospace',
             ],
         ],
         'email_footer' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_organizers.email_footer',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_organizers.email_footer',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
         ],
         'attendances_pid' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_organizers.attendances_pid',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_organizers.attendances_pid',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'pages',
-                'size' => '1',
-                'maxitems' => '1',
-                'minitems' => '0',
+                'size' => 1,
+                'maxitems' => 1,
+                'minitems' => 0,
                 'show_thumbs' => '1',
             ],
         ],
     ],
     'types' => [
-        '0' => ['showitem' => 'title;;;;2-2-2, description, homepage;;;;3-3-3, email, email_footer, attendances_pid'],
+        '0' => ['showitem' => 'title, description, homepage, email, email_footer, attendances_pid'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],

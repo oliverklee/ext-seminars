@@ -5,7 +5,7 @@ defined('TYPO3_MODE') or die();
 
 $tca = [
     'ctrl' => [
-        'title' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers',
+        'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers',
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -32,23 +32,23 @@ $tca = [
         ],
         'title' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.title',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.title',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'required,trim',
             ],
         ],
         'gender' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.gender',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender',
             'config' => [
                 'type' => 'radio',
                 'default' => '0',
                 'items' => [
                     ['', '0'],
-                    [\OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.gender_male', '1'],
-                    [\OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.gender_female', '2'],
+                    ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male', '1'],
+                    ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female', '2'],
                 ],
                 'size' => 1,
                 'minitems' => 1,
@@ -57,20 +57,20 @@ $tca = [
         ],
         'organization' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.organization',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.organization',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'trim',
             ],
         ],
         'homepage' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.homepage',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.homepage',
             'config' => [
                 'type' => 'input',
-                'size' => '15',
-                'max' => '255',
+                'size' => 15,
+                'max' => 255,
                 'checkbox' => '',
                 'eval' => 'trim',
                 'wizards' => [
@@ -78,9 +78,9 @@ $tca = [
                     'link' => [
                         'type' => 'popup',
                         'title' => 'Link',
-                        'icon' => 'link_popup.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
                         'module' => [
-                            'name' => 'wizard_element_browser',
+                            'name' => 'wizard_link',
                             'urlParameters' => [
                                 'mode' => 'wizard',
                             ],
@@ -92,19 +92,20 @@ $tca = [
         ],
         'description' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.description',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.description',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
             'defaultExtras' => 'richtext[]',
         ],
         'skills' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.skills',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.skills',
             'config' => [
                 'type' => \OliverKlee\Seminars\BackEnd\TceForms::getSelectType(),
+                'renderType' => 'selectMultipleSideBySide',
                 'internal_type' => 'db',
                 'allowed' => 'tx_seminars_skills',
                 'foreign_table' => 'tx_seminars_skills',
@@ -121,85 +122,85 @@ $tca = [
         ],
         'notes' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.notes',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.notes',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
         ],
         'address' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.address',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.address',
             'config' => [
                 'type' => 'text',
-                'cols' => '30',
-                'rows' => '5',
+                'cols' => 30,
+                'rows' => 5,
             ],
         ],
         'phone_work' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.phone_work',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_work',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'trim',
             ],
         ],
         'phone_home' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.phone_home',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_home',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'trim',
             ],
         ],
         'phone_mobile' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.phone_mobile',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_mobile',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'trim',
             ],
         ],
         'fax' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.fax',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.fax',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'trim',
             ],
         ],
         'email' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.email',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.email',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'trim,nospace',
             ],
         ],
         'cancelation_period' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_speakers.cancelation_period',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.cancelation_period',
             'config' => [
                 'type' => 'input',
-                'size' => '3',
-                'max' => '3',
+                'size' => 3,
+                'max' => 3,
                 'eval' => 'num',
                 'checkbox' => '0',
                 'range' => [
-                    'upper' => '999',
-                    'lower' => '0',
+                    'upper' => 999,
+                    'lower' => 0,
                 ],
             ],
         ],
         'owner' => [
             'exclude' => 1,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'owner_feuser',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:owner_feuser',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -211,7 +212,7 @@ $tca = [
         ],
     ],
     'types' => [
-        '0' => ['showitem' => 'hidden, title, gender;;;;2-2-2, organization;;;;3-3-3, homepage, description, skills, notes, address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period, owner'],
+        '0' => ['showitem' => 'hidden, title, gender, organization, homepage, description, skills, notes, address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period, owner'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],

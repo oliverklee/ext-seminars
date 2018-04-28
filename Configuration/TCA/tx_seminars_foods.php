@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 return [
     'ctrl' => [
-        'title' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_foods',
+        'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_foods',
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -19,16 +19,16 @@ return [
     'columns' => [
         'title' => [
             'exclude' => 0,
-            'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_foods.title',
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_foods.title',
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
                 'eval' => 'required,trim',
             ],
         ],
     ],
     'types' => [
-        '0' => ['showitem' => 'title;;;;2-2-2'],
+        '0' => ['showitem' => 'title'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],

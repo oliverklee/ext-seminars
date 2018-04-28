@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 return [
     'ctrl' => [
-        'title' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_test',
+        'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_test',
         'readOnly' => 1,
         'adminOnly' => 1,
         'rootLevel' => 1,
@@ -39,8 +39,8 @@ return [
                 'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
                 'config' => [
                     'type' => 'none',
-                    'size' => '8',
-                    'max' => '20',
+                    'size' => 8,
+                    'max' => 20,
                     'eval' => 'date',
                     'default' => '0',
                     'checkbox' => '0',
@@ -51,8 +51,8 @@ return [
                 'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
                 'config' => [
                     'type' => 'none',
-                    'size' => '8',
-                    'max' => '20',
+                    'size' => 8,
+                    'max' => 20,
                     'eval' => 'date',
                     'checkbox' => '0',
                     'default' => '0',
@@ -64,15 +64,15 @@ return [
             ],
             'title' => [
                 'exclude' => 0,
-                'label' => \OliverKlee\Seminars\BackEnd\TceForms::getPathToDbLL() . 'tx_seminars_test.title',
+                'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_test.title',
                 'config' => [
                     'type' => 'none',
-                    'size' => '30',
+                    'size' => 30,
                 ],
             ],
         ],
         'types' => [
-            '0' => ['showitem' => 'title;;;;2-2-2'],
+            '0' => ['showitem' => 'title'],
         ],
         'palettes' => [
             '1' => ['showitem' => 'starttime, endtime'],
