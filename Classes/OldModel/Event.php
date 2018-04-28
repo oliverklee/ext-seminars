@@ -4819,8 +4819,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function getPlaces()
     {
         if (!$this->hasPlace()) {
-            /** @var Tx_Oelib_List $list */
-            $list = GeneralUtility::makeInstance(Tx_Oelib_List::class);
+            $list = new \Tx_Oelib_List();
             return $list;
         }
 

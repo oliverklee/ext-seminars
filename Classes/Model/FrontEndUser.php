@@ -1,7 +1,5 @@
 <?php
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 /**
  * This class represents a front-end user.
  *
@@ -132,8 +130,7 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
      */
     public function getDefaultCategoriesFromGroup()
     {
-        /** @var Tx_Oelib_List $categories */
-        $categories = GeneralUtility::makeInstance(Tx_Oelib_List::class);
+        $categories = new \Tx_Oelib_List();
 
         /** @var Tx_Seminars_Model_FrontEndUserGroup $group */
         foreach ($this->getUserGroups() as $group) {
@@ -165,8 +162,7 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
      */
     public function getDefaultOrganizers()
     {
-        /** @var Tx_Oelib_List $organizers */
-        $organizers = GeneralUtility::makeInstance(Tx_Oelib_List::class);
+        $organizers = new \Tx_Oelib_List();
 
         /** @var Tx_Seminars_Model_FrontEndUserGroup $group */
         foreach ($this->getUserGroups() as $group) {
