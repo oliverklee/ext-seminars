@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add an SVG extension icon (#34)
 
 ### Changed
+- Require static_info_tables >= 6.4.0 (#68)
 - Use more semantic PHPUnit methods (#60)
 - Always use ::class for setExpectedException (#59)
 - Use new instead of makeInstance for Tx_Oelib_List (#57)
