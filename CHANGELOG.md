@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Update to PHPUnit 5.3 (#66)
 
 ### Deprecated
 
