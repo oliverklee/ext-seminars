@@ -36,8 +36,8 @@
         "typo3/cms-scheduler": "^6.2.14 || ^7.6.23",
         "helhum/typo3-console": "^4.6.1",
 
-        "oliverklee/phpunit": "^4.8.37",
-        "phpunit/phpunit": "^4.8.0"
+        "oliverklee/phpunit": "^5.3.0",
+        "phpunit/phpunit": "^5.3.0"
     },
     "replace": {
         "seminars": "self.version",
