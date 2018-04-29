@@ -78,62 +78,60 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][\OliverKlee\Semi
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['seminars']
     = 'OliverKlee\\Seminars\\RealUrl\\Configuration->addConfiguration';
 
-if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
-    /** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
-    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-    $iconProviderClass = \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class;
+/** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
+$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+$iconProviderClass = \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class;
 
-    $iconRegistry->registerIcon(
-        'tx-seminars-canceled',
-        $iconProviderClass,
-        ['source' => 'EXT:seminars/Resources/Public/Icons/Canceled.png']
-    );
+$iconRegistry->registerIcon(
+    'tx-seminars-canceled',
+    $iconProviderClass,
+    ['source' => 'EXT:seminars/Resources/Public/Icons/Canceled.png']
+);
 
-    $iconRegistry->registerIcon(
-        'tx-seminars-category',
-        $iconProviderClass,
-        ['source' => 'EXT:seminars/Resources/Public/Icons/Category.gif']
-    );
+$iconRegistry->registerIcon(
+    'tx-seminars-category',
+    $iconProviderClass,
+    ['source' => 'EXT:seminars/Resources/Public/Icons/Category.gif']
+);
 
-    $iconRegistry->registerIcon(
-        'tx-seminars-registration',
-        $iconProviderClass,
-        ['source' => 'EXT:seminars/Resources/Public/Icons/Registration.gif']
-    );
+$iconRegistry->registerIcon(
+    'tx-seminars-registration',
+    $iconProviderClass,
+    ['source' => 'EXT:seminars/Resources/Public/Icons/Registration.gif']
+);
 
-    $iconRegistry->registerIcon(
-        'tx-seminars-event-complete',
-        $iconProviderClass,
-        ['source' => 'EXT:seminars/Resources/Public/Icons/EventComplete.gif']
-    );
+$iconRegistry->registerIcon(
+    'tx-seminars-event-complete',
+    $iconProviderClass,
+    ['source' => 'EXT:seminars/Resources/Public/Icons/EventComplete.gif']
+);
 
-    $iconRegistry->registerIcon(
-        'tx-seminars-event-topic',
-        $iconProviderClass,
-        ['source' => 'EXT:seminars/Resources/Public/Icons/EventTopic.gif']
-    );
+$iconRegistry->registerIcon(
+    'tx-seminars-event-topic',
+    $iconProviderClass,
+    ['source' => 'EXT:seminars/Resources/Public/Icons/EventTopic.gif']
+);
 
-    $iconRegistry->registerIcon(
-        'tx-seminars-event-date',
-        $iconProviderClass,
-        ['source' => 'EXT:seminars/Resources/Public/Icons/EventDate.gif']
-    );
+$iconRegistry->registerIcon(
+    'tx-seminars-event-date',
+    $iconProviderClass,
+    ['source' => 'EXT:seminars/Resources/Public/Icons/EventDate.gif']
+);
 
-    $iconRegistry->registerIcon(
-        'tcarecords-tx_seminars_speakers-default',
-        $iconProviderClass,
-        ['source' => 'EXT:seminars/Resources/Public/Icons/Speaker.gif']
-    );
+$iconRegistry->registerIcon(
+    'tcarecords-tx_seminars_speakers-default',
+    $iconProviderClass,
+    ['source' => 'EXT:seminars/Resources/Public/Icons/Speaker.gif']
+);
 
-    $iconRegistry->registerIcon(
-        'tcarecords-tx_seminars_organizers-default',
-        $iconProviderClass,
-        ['source' => 'EXT:seminars/Resources/Public/Icons/Organizer.gif']
-    );
+$iconRegistry->registerIcon(
+    'tcarecords-tx_seminars_organizers-default',
+    $iconProviderClass,
+    ['source' => 'EXT:seminars/Resources/Public/Icons/Organizer.gif']
+);
 
-    $iconRegistry->registerIcon(
-        'tcarecords-tx_seminars_registrations-default',
-        $iconProviderClass,
-        ['source' => 'EXT:seminars/Resources/Public/Icons/Registration.gif']
-    );
-}
+$iconRegistry->registerIcon(
+    'tcarecords-tx_seminars_registrations-default',
+    $iconProviderClass,
+    ['source' => 'EXT:seminars/Resources/Public/Icons/Registration.gif']
+);

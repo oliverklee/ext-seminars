@@ -2,7 +2,6 @@
 
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
@@ -113,11 +112,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new Tx_Oelib_Configuration());
         $configurationRegistry->set('config', new Tx_Oelib_Configuration());
         $configurationRegistry->set('page.config', new Tx_Oelib_Configuration());
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version)
-            < 7006000
-        ) {
-            $GLOBALS['TSFE']->config['config']['uniqueLinkVars'] = 1;
-        }
 
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',

@@ -1,7 +1,5 @@
 <?php
 
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
-
 /**
  * Test case.
  *
@@ -43,12 +41,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
 
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
-
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version)
-            < 7006000
-        ) {
-            $GLOBALS['TSFE']->config['config']['uniqueLinkVars'] = 1;
-        }
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
         $this->seminarUid = $this->testingFramework->createRecord(

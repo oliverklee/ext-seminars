@@ -1,7 +1,6 @@
 <?php
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
@@ -42,12 +41,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         $this->configuration = new Tx_Oelib_Configuration();
         $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
-
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version)
-            < 7006000
-        ) {
-            $GLOBALS['TSFE']->config['config']['uniqueLinkVars'] = 1;
-        }
 
         $this->fixture = new Tx_Seminars_FrontEnd_EventEditor(
             [

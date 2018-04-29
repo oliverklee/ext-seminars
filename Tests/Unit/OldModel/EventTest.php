@@ -1,7 +1,6 @@
 <?php
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
@@ -88,14 +87,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->cleanUp();
 
         Tx_Seminars_Service_RegistrationManager::purgeInstance();
-    }
-
-    /**
-     * @return bool
-     */
-    private function isTypo376OrHigher()
-    {
-        return VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000;
     }
 
     /*
@@ -5366,30 +5357,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function usesCorrectIconForHiddenSingleEventForTypo362()
+    public function usesCorrectIconForHiddenSingleEvent()
     {
-        if ($this->isTypo376OrHigher()) {
-            self::markTestSkipped('This test is for TYPO3 CMS version 6.2 only.');
-        }
-
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
-        $this->fixture->setHidden(true);
-
-        self::assertContains(
-            'EventComplete__h.',
-            $this->fixture->getRecordIcon()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function usesCorrectIconForHiddenSingleEventForTypo376()
-    {
-        if (!$this->isTypo376OrHigher()) {
-            self::markTestSkipped('This test is for TYPO3 CMS version >= 7.6 only.');
-        }
-
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
         $this->fixture->setHidden(true);
 
@@ -5402,30 +5371,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function usesCorrectIconForHiddenTopicForTypo362()
+    public function usesCorrectIconForHiddenTopic()
     {
-        if ($this->isTypo376OrHigher()) {
-            self::markTestSkipped('This test is for TYPO3 CMS version 6.2 only.');
-        }
-
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
-        $this->fixture->setHidden(true);
-
-        self::assertContains(
-            'EventTopic__h.',
-            $this->fixture->getRecordIcon()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function usesCorrectIconForHiddenTopicForTypo376()
-    {
-        if (!$this->isTypo376OrHigher()) {
-            self::markTestSkipped('This test is for TYPO3 CMS version >= 7.6 only.');
-        }
-
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
         $this->fixture->setHidden(true);
 
@@ -5438,30 +5385,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function usesCorrectIconForHiddenDateForTypo362()
+    public function usesCorrectIconForHiddenDate()
     {
-        if ($this->isTypo376OrHigher()) {
-            self::markTestSkipped('This test is for TYPO3 CMS version 6.2 only.');
-        }
-
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
-        $this->fixture->setHidden(true);
-
-        self::assertContains(
-            'EventDate__h.',
-            $this->fixture->getRecordIcon()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function usesCorrectIconForHiddenDateForTypo376()
-    {
-        if (!$this->isTypo376OrHigher()) {
-            self::markTestSkipped('This test is for TYPO3 CMS version >= 7.6 only.');
-        }
-
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
         $this->fixture->setHidden(true);
 
@@ -5516,30 +5441,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function usesCorrectIconForExpiredSingleEventForTypo362()
+    public function usesCorrectIconForExpiredSingleEvent()
     {
-        if ($this->isTypo376OrHigher()) {
-            self::markTestSkipped('This test is for TYPO3 CMS version 6.2 only.');
-        }
-
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
-        $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
-
-        self::assertContains(
-            'EventComplete__t.',
-            $this->fixture->getRecordIcon()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function usesCorrectIconForExpiredSingleEventForTypo376()
-    {
-        if (!$this->isTypo376OrHigher()) {
-            self::markTestSkipped('This test is for TYPO3 CMS version >= 7.6 only.');
-        }
-
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
         $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
@@ -5552,30 +5455,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function usesCorrectIconForExpiredTimedTopicForTypo362()
+    public function usesCorrectIconForExpiredTimedTopic()
     {
-        if ($this->isTypo376OrHigher()) {
-            self::markTestSkipped('This test is for TYPO3 CMS version 6.2 only.');
-        }
-
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
-        $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
-
-        self::assertContains(
-            'EventTopic__t.',
-            $this->fixture->getRecordIcon()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function usesCorrectIconForExpiredTimedTopicForTypo376()
-    {
-        if (!$this->isTypo376OrHigher()) {
-            self::markTestSkipped('This test is for TYPO3 CMS version >= 7.6 only.');
-        }
-
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
         $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
@@ -5588,30 +5469,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function usesCorrectIconForExpiredTimedDateForTypo362()
+    public function usesCorrectIconForExpiredTimedDate()
     {
-        if ($this->isTypo376OrHigher()) {
-            self::markTestSkipped('This test is for TYPO3 CMS version 6.2 only.');
-        }
-
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
-        $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
-
-        self::assertContains(
-            'EventDate__t.',
-            $this->fixture->getRecordIcon()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function usesCorrectIconForExpiredTimedDateForTypo376()
-    {
-        if (!$this->isTypo376OrHigher()) {
-            self::markTestSkipped('This test is for TYPO3 CMS version >= 7.6 only.');
-        }
-
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
         $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
