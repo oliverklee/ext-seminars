@@ -1,9 +1,7 @@
 <?php
 
-use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * This class represents an object that is created from a DB record or can be written to a DB record.
@@ -540,17 +538,6 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
      */
     public function getRecordIcon()
     {
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
-            return $this->createRecordIconForTypo3Version76AndUp();
-        }
-        return $this->createRecordIconForTypo3UpTo62();
-    }
-
-    /**
-     * @return string
-     */
-    protected function createRecordIconForTypo3Version76AndUp()
-    {
         /** @var \TYPO3\CMS\Core\Imaging\IconFactory $iconFactory */
         $iconFactory = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconFactory::class);
         return $iconFactory->getIconForRecord(
@@ -558,37 +545,6 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
             $this->recordData,
             \TYPO3\CMS\Core\Imaging\Icon::SIZE_SMALL
         )->render();
-    }
-
-    /**
-     * @return string
-     */
-    protected function createRecordIconForTypo3UpTo62()
-    {
-        $iconProperties = [];
-        $tableConfiguration = $GLOBALS['TCA'][$this->tableName]['ctrl'];
-        $hiddenColumn = $tableConfiguration['enablecolumns']['disabled'];
-        $startTimeColumn = $tableConfiguration['enablecolumns']['starttime'];
-        $endTimeColumn = $tableConfiguration['enablecolumns']['endtime'];
-        // Checks if there are enable columns configured in TCA and sends them
-        // as parameter to IconUtility::getIcon().
-        if ($this->getRecordPropertyBoolean($hiddenColumn)) {
-            $iconProperties[$hiddenColumn] = $this->getRecordPropertyInteger($hiddenColumn);
-        }
-        if ($this->hasRecordPropertyInteger($startTimeColumn)) {
-            $iconProperties[$startTimeColumn] = $this->getRecordPropertyInteger($startTimeColumn);
-        }
-        if ($this->hasRecordPropertyInteger($endTimeColumn)) {
-            $iconProperties[$endTimeColumn] = $this->getRecordPropertyInteger($endTimeColumn);
-        }
-        if (isset($tableConfiguration['typeicon_column'])) {
-            $typeIconColumn = $tableConfiguration['typeicon_column'];
-            $iconProperties[$typeIconColumn] = $this->getRecordPropertyInteger($typeIconColumn);
-        }
-        $imageUrl = $GLOBALS['BACK_PATH'] . IconUtility::getIcon($this->tableName, $iconProperties);
-        $uid = $this->getUid();
-
-        return '<img src="' . htmlspecialchars($imageUrl) . '" title="id=' . $uid . '" alt="' . $uid . '" />';
     }
 
     /**

@@ -1,7 +1,6 @@
 <?php
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -107,10 +106,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $configuration->setAsString('currency', 'EUR');
         Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 7006000) {
-            $GLOBALS['TSFE']->config['config']['uniqueLinkVars'] = 1;
-        }
-
         $this->languageBackup = $GLOBALS['LANG']->lang;
         $GLOBALS['LANG']->lang = 'default';
         $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
@@ -174,11 +169,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         /** @var $content ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject */
         $content = $this->getMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
-            $content->expects(self::any())->method('cObjGetSingle')->will(self::returnValue('<img src="foo.jpg" alt="bar"/>'));
-        } else {
-            $content->expects(self::any())->method('IMAGE')->will(self::returnValue('<img src="foo.jpg" alt="bar"/>'));
-        }
+        $content->expects(self::any())->method('cObjGetSingle')->will(self::returnValue('<img src="foo.jpg" alt="bar"/>'));
         $this->fixture->cObj = $content;
     }
 
@@ -3329,30 +3320,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         /** @var $content ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject */
         $content = $this->getMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
-            $content->expects(self::any())->method('cObjGetSingle')
-                ->with(
-                    'IMAGE',
-                    [
-                        'file' => 'uploads/tx_seminars/' . $fileName,
-                        'file.' => ['width' => '0c', 'height' => '0c'],
-                        'altText' => $topicTitle,
-                        'titleText' => $topicTitle,
-                    ]
-                )
-                ->will(self::returnValue('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>'));
-        } else {
-            $content->expects(self::any())->method('IMAGE')
-                ->with(
-                    [
-                        'file' => 'uploads/tx_seminars/' . $fileName,
-                        'file.' => ['width' => '0c', 'height' => '0c'],
-                        'altText' => $topicTitle,
-                        'titleText' => $topicTitle,
-                    ]
-                )
-                ->will(self::returnValue('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>'));
-        }
+        $content->expects(self::any())->method('cObjGetSingle')
+            ->with(
+                'IMAGE',
+                [
+                    'file' => 'uploads/tx_seminars/' . $fileName,
+                    'file.' => ['width' => '0c', 'height' => '0c'],
+                    'altText' => $topicTitle,
+                    'titleText' => $topicTitle,
+                ]
+            )
+            ->will(self::returnValue('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>'));
         $this->fixture->cObj = $content;
 
         self::assertRegExp(

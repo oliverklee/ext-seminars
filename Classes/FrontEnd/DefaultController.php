@@ -2,7 +2,6 @@
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 /**
@@ -2054,11 +2053,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                         'height' => $this->getConfValueInteger('seminarImageListViewHeight') . 'c',
                     ],
                 ];
-                if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
-                    $image = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
-                } else {
-                    $image = $this->cObj->IMAGE($imageConfiguration);
-                }
+                $image = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
             } else {
                 $image = '';
             }
@@ -3121,11 +3116,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $iconData['icon'],
             'titleText' => $iconData['title'],
         ];
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
-            $result = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
-        } else {
-            $result = $this->cObj->IMAGE($imageConfiguration);
-        }
+        $result = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
 
         return $result;
     }

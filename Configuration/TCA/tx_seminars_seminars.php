@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_seminars_seminars');
 
-$tca = [
+return [
     'ctrl' => [
         'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars',
         'label' => 'title',
@@ -1062,15 +1062,3 @@ $tca = [
         '1' => ['showitem' => 'starttime, endtime'],
     ],
 ];
-
-if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 7006000) {
-    $iconsPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/';
-    $tca['ctrl']['iconfile']  = $iconsPath . 'EventComplete.gif';
-    $tca['ctrl']['typeicons'] = [
-        '0' => $iconsPath . 'EventComplete.gif',
-        '1' => $iconsPath . 'EventTopic.gif',
-        '2' => $iconsPath . 'EventDate.gif',
-    ];
-}
-
-return $tca;

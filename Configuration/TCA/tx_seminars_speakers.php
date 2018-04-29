@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_seminars_speakers');
 
-$tca = [
+return [
     'ctrl' => [
         'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers',
         'label' => 'title',
@@ -218,9 +218,3 @@ $tca = [
         '1' => ['showitem' => ''],
     ],
 ];
-
-if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 7006000) {
-    $tca['ctrl']['iconfile']  = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/Speaker.gif';
-}
-
-return $tca;

@@ -1,7 +1,6 @@
 <?php
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * This class creates a category list.
@@ -178,11 +177,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
             'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $iconData['icon'],
             'titleText' => $iconData['title'],
         ];
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7006000) {
-            $imageWithoutClass = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
-        } else {
-            $imageWithoutClass = $this->cObj->IMAGE($imageConfiguration);
-        }
+        $imageWithoutClass = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
 
         return str_replace(
             '<img ',
