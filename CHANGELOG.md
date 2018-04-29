@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add support for PHP 7.1 and 7.2 (#70)
 
 ### Changed
 - Update to PHPUnit 5.3 (#66)
