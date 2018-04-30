@@ -105,7 +105,7 @@ abstract class AbstractList
         $params = '&edit[' . $this->tableName . '][' . $uid . ']=edit';
         $langEdit = htmlspecialchars($this->getLanguageService()->getLL('edit'));
         $icon = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
-            'Resources/Public/Icons/Edit.gif' . '" alt="' . $langEdit . '" class="icon" />';
+            'Resources/Public/Icons/Edit.gif" alt="' . $langEdit . '" class="icon" />';
 
         $editOnClick = BackendUtility::editOnClick($params);
         $result = '<a class="btn btn-default" href="#" onclick="' . htmlspecialchars($editOnClick)
@@ -364,9 +364,7 @@ abstract class AbstractList
      */
     protected function getLoggedInUser()
     {
-        return \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(
-            \Tx_Seminars_Mapper_BackEndUser::class
-        );
+        return \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
     }
 
     /**
