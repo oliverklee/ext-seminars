@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 - Adapt the unit tests for hooks and icons to TYPO3 8.7 (#84)
+- Make the file link tests on Travis CI more robust (#87)
 - Fix TCA deprecations in TYPO3 8.7 (#83)
 - Use typesafe comparisons in the BE module (#82)
 - Replace the deprecated flash message handling (#81)
