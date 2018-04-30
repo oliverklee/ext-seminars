@@ -61,14 +61,15 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
 
         $this->doc = GeneralUtility::makeInstance(DocumentTemplate::class);
 
-        $this->doc->getPageRenderer()->addCssFile(
+        $pageRenderer = $this->getPageRenderer();
+        $pageRenderer->addCssFile(
             '../typo3conf/ext/seminars/Resources/Public/CSS/BackEnd/BackEnd.css',
             'stylesheet',
             'all',
             '',
             false
         );
-        $this->doc->getPageRenderer()->addCssFile(
+        $pageRenderer->addCssFile(
             '../typo3conf/ext/seminars/Resources/Public/CSS/BackEnd/Print.css',
             'stylesheet',
             'print',
@@ -79,7 +80,6 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
         // draw the header
         $this->content = $this->doc->startPage($languageService->getLL('title'));
         $this->content .= $this->doc->header($languageService->getLL('title'));
-        $this->content .= $this->doc->spacer(5);
 
         if ($this->id <= 0) {
             /** @var FlashMessage $message */
@@ -159,7 +159,6 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
                 $this->subModule,
                 $this->availableSubModules
             );
-            $this->content .= $this->doc->spacer(5);
         }
 
         // Select which sub module to display.
