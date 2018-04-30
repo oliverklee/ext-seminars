@@ -28,7 +28,13 @@ class TceForms
         $keyField = 'lg_iso_2';
         $allFields = $keyField . ', ' . $titleField;
 
-        $rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($allFields, $table, '1 = 1' . BackendUtility::deleteClause($table), '', $titleField);
+        $rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
+            $allFields,
+            $table,
+            '1 = 1' . BackendUtility::deleteClause($table),
+            '',
+            $titleField
+        );
         /** @var string[] $row */
         foreach ($rows as $row) {
             $parameters['items'][] = [$row[$titleField], $row[$keyField]];
@@ -51,7 +57,13 @@ class TceForms
         $keyField = 'cn_iso_2';
         $allFields = $keyField . ', ' . $titleField;
 
-        $rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($allFields, $table, '1 = 1' . BackendUtility::deleteClause($table), '', $titleField);
+        $rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
+            $allFields,
+            $table,
+            '1 = 1' . BackendUtility::deleteClause($table),
+            '',
+            $titleField
+        );
         /** @var string[] $row */
         foreach ($rows as $row) {
             $parameters['items'][] = [$row[$titleField], $row[$keyField]];

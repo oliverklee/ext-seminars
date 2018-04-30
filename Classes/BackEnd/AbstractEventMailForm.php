@@ -224,8 +224,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      */
     protected function createSubjectFormElement()
     {
-        $classMarker = $this->hasErrorMessage('subject')
-            ? 'class="error" ' : '';
+        $classMarker = $this->hasErrorMessage('subject') ? 'class="error" ' : '';
 
         return '<p><label for="subject">' .
             $this->getLanguageService()->getLL('eventMailForm_subject') . '</label>' .

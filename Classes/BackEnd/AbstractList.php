@@ -103,8 +103,8 @@ abstract class Tx_Seminars_BackEnd_AbstractList
 
         $params = '&edit[' . $this->tableName . '][' . $uid . ']=edit';
         $langEdit = htmlspecialchars($this->getLanguageService()->getLL('edit'));
-        $icon = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Edit.gif' .
-            '" alt="' . $langEdit . '" class="icon" />';
+        $icon = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
+            'Resources/Public/Icons/Edit.gif' . '" alt="' . $langEdit . '" class="icon" />';
 
         $editOnClick = BackendUtility::editOnClick($params);
         $result = '<a class="btn btn-default" href="#" onclick="' . htmlspecialchars($editOnClick)
@@ -142,14 +142,15 @@ abstract class Tx_Seminars_BackEnd_AbstractList
             $confirmation = htmlspecialchars(
                 'if (confirm(' . GeneralUtility::quoteJSvalue(
                     $languageService->getLL('deleteWarning') . $referenceWarning
-            ) . ')) {return true;} else {return false;}'
+                ) . ')) {return true;} else {return false;}'
             );
             $langDelete = $languageService->getLL('delete', 1);
             $result = '<a class="btn btn-default" href="' .
                 htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($params)) .
                 '" onclick="' . $confirmation . '">' .
-                '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Garbage.gif' .
-                '" title="' . $langDelete . '" alt="' . $langDelete . '" class="deleteicon" />' .
+                '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
+                'Resources/Public/Icons/Garbage.gif" title="' . $langDelete . '" alt="' . $langDelete .
+                '" class="deleteicon" />' .
                 '</a>';
         }
 
@@ -204,7 +205,8 @@ abstract class Tx_Seminars_BackEnd_AbstractList
                 TAB . TAB . TAB .
                 '<a class="btn btn-default" href="#"  onclick="' . htmlspecialchars($editOnClick) . '">' . LF .
                 TAB . TAB . TAB . TAB .
-                '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/New.gif"' .
+                '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
+                'Resources/Public/Icons/New.gif"' .
                 // We use an empty alt attribute as we already have a textual
                 // representation directly next to the icon.
                 ' title="' . $langNew . '" alt="" />' . LF .
@@ -273,7 +275,8 @@ abstract class Tx_Seminars_BackEnd_AbstractList
             '<a class="btn btn-default" href="' . htmlspecialchars($csvUrl) .
             $this->getAdditionalCsvParameters() . '">' . LF .
             TAB . TAB . TAB . TAB .
-            '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Csv.gif" title="' .
+            '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
+            'Resources/Public/Icons/Csv.gif" title="' .
             $langCsv . '" alt="" class="icon" />' .
             // We use an empty alt attribute as we already have a textual
             // representation directly next to the icon.
@@ -317,8 +320,8 @@ abstract class Tx_Seminars_BackEnd_AbstractList
 
             $result = '<a class="btn btn-default" href="' .
                 htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($params)) . '">' .
-                '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/' . $icon .
-                '" title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
+                '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/' .
+                $icon . '" title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
                 '</a>';
         }
 

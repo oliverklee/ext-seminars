@@ -286,8 +286,8 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
         $pageData = $this->page->getPageData();
         $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
 
-        $imageTag = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Csv.gif" title="' .
-            $langCsv . '" alt="' . $langCsv . '" class="icon" />';
+        $imageTag = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
+            'Resources/Public/Icons/Csv.gif" title="' . $langCsv . '" alt="' . $langCsv . '" class="icon" />';
 
         $csvUrl = BackendUtility::getModuleUrl(
             self::MODULE_NAME,
