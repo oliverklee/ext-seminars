@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_seminars_speakers');
 
-return [
+$tca = [
     'ctrl' => [
         'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers',
         'label' => 'title',
@@ -69,6 +69,7 @@ return [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.homepage',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputLink',
                 'size' => 15,
                 'max' => 255,
                 'checkbox' => '',
@@ -78,7 +79,7 @@ return [
                     'link' => [
                         'type' => 'popup',
                         'title' => 'Link',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+                        'icon' => 'actions-wizard-link',
                         'module' => [
                             'name' => 'wizard_link',
                             'urlParameters' => [
@@ -97,8 +98,8 @@ return [
                 'type' => 'text',
                 'cols' => 30,
                 'rows' => 5,
+                'enableRichtext' => true,
             ],
-            'defaultExtras' => 'richtext[]',
         ],
         'skills' => [
             'exclude' => 1,
@@ -218,3 +219,9 @@ return [
         '1' => ['showitem' => ''],
     ],
 ];
+
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 8006000) {
+    $tca['columns']['description']['defaultExtras'] = 'richtext[]';
+}
+
+return $tca;

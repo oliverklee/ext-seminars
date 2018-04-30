@@ -1,7 +1,7 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-return [
+$tca = [
     'ctrl' => [
         'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites',
         'label' => 'title',
@@ -73,6 +73,7 @@ return [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.homepage',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputLink',
                 'size' => 15,
                 'max' => 255,
                 'checkbox' => '',
@@ -82,7 +83,7 @@ return [
                     'link' => [
                         'type' => 'popup',
                         'title' => 'Link',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+                        'icon' => 'actions-wizard-link',
                         'module' => [
                             'name' => 'wizard_link',
                             'urlParameters' => [
@@ -99,10 +100,10 @@ return [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.directions',
             'config' => [
                 'type' => 'text',
+                'enableRichtext' => true,
                 'cols' => 30,
                 'rows' => 5,
             ],
-            'defaultExtras' => 'richtext[]',
         ],
         'notes' => [
             'exclude' => 1,
@@ -133,3 +134,9 @@ return [
         '1' => ['showitem' => ''],
     ],
 ];
+
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 8006000) {
+    $tca['columns']['directions']['defaultExtras'] = 'richtext[]';
+}
+
+return $tca;

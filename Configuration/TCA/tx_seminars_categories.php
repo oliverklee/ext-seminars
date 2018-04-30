@@ -35,7 +35,6 @@ return [
                 'allowed' => 'gif,png,jpeg,jpg',
                 'max_size' => 2048,
                 'uploadfolder' => 'uploads/tx_seminars',
-                'show_thumbs' => 1,
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,

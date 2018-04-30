@@ -88,7 +88,7 @@ defined('TYPO3_MODE') or die('Access denied.');
                     'list' => [
                         'type' => 'popup',
                         'title' => 'List entries',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_list.gif',
+                        'icon' => 'actions-system-list-open',
                         'params' => [
                             'table' => 'tx_seminars_categories',
                             'pid' => '###CURRENT_PID###',
