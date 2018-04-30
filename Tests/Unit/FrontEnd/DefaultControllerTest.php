@@ -71,13 +71,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     private $extConfBackup = [];
 
     /**
-     * backed-up T3_VAR configuration
-     *
-     * @var array
-     */
-    private $t3VarBackup = [];
-
-    /**
      * @var Tx_Seminars_Service_SingleViewLinkBuilder
      */
     private $linkBuilder = null;
@@ -94,7 +87,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
-        $this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
 
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
@@ -180,7 +172,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         Tx_Seminars_Service_RegistrationManager::purgeInstance();
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
-        $GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
         $GLOBALS['LANG']->lang = $this->languageBackup;
     }
 
@@ -1280,14 +1271,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_Model_Event $event */
         $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
         $hook = $this->getMock(Tx_Seminars_Interface_Hook_EventSingleView::class);
-        $hook->expects(self::once())->method('modifyEventSingleView')
-            ->with($event, self::anything());
+        $hook->expects(self::once())->method('modifyEventSingleView')->with($event, self::anything());
         // We don't test for the second parameter (the template instance here)
         // because we cannot access it from the outside.
 
         $hookClass = get_class($hook);
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         $this->fixture->main('', []);
@@ -2015,7 +2005,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     /**
      * @test
      */
-    public function timeSlotHookForEventWithoutTimeslotsNotGetsCalled()
+    public function timeSlotHookForEventWithoutTimeSlotsNotGetsCalled()
     {
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
 
@@ -2023,8 +2013,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $hook->expects(self::never())->method('modifyTimeSlotListRow');
 
         $hookClass = get_class($hook);
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         $this->fixture->main('', []);
@@ -2033,7 +2023,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     /**
      * @test
      */
-    public function timeSlotHookForEventWithOneTimeslotGetsCalledOnceWithTimeSlot()
+    public function timeSlotHookForEventWithOneTimeSlotGetsCalledOnceWithTimeSlot()
     {
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $timeSlotUid = $this->testingFramework->createRecord(
@@ -2052,14 +2042,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         /** @var Tx_Seminars_Model_TimeSlot $timeSlot */
         $timeSlot = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_TimeSlot::class)->find($timeSlotUid);
         $hook = $this->getMock(Tx_Seminars_Interface_Hook_EventSingleView::class);
-        $hook->expects(self::once())->method('modifyTimeSlotListRow')
-            ->with($timeSlot, self::anything());
+        $hook->expects(self::once())->method('modifyTimeSlotListRow')->with($timeSlot, self::anything());
         // We don't test for the second parameter (the template instance here)
         // because we cannot access it from the outside.
 
         $hookClass = get_class($hook);
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         $this->fixture->main('', []);
@@ -2068,7 +2057,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     /**
      * @test
      */
-    public function timeSlotHookForEventWithTwoTimeslotGetsCalledTwice()
+    public function timeSlotHookForEventWithTwoTimeSlotGetsCalledTwice()
     {
         $this->fixture->setConfigurationValue('what_to_display', 'single_view');
         $timeSlotUid1 = $this->testingFramework->createRecord(
@@ -2095,8 +2084,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $hook->expects(self::exactly(2))->method('modifyTimeSlotListRow');
 
         $hookClass = get_class($hook);
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         $this->fixture->main('', []);
@@ -9369,8 +9358,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         // because we cannot access it from the outside.
 
         $hookClass = get_class($hook);
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->main('', []);
     }
@@ -9385,8 +9374,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $hookClass = uniqid('myEventsListRowHook');
         $hook = $this->getMock($hookClass);
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->main('', []);
     }
@@ -9408,8 +9397,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         // because we cannot access it from the outside.
 
         $hookClass = get_class($hook);
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->main('', []);
     }
@@ -9430,8 +9419,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         // because we cannot access it from the outside.
 
         $hookClass = get_class($hook);
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->main('', []);
     }
@@ -9445,8 +9434,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $hook->expects(self::never())->method('modifyMyEventsListRow');
 
         $hookClass = get_class($hook);
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->main('', []);
     }
@@ -9465,8 +9454,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $hookClass = uniqid('myEventsListRowHook');
         $hook = $this->getMock($hookClass);
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->main('', []);
     }
