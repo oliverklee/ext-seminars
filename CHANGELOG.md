@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for PHP 5.5 (#64)
 
 ### Fixed
+- Update the content element wizard for TYPO3 8.7 (#72)
 - Make the PHPUnit test runner configurable (#71)
 
 ## 1.5.0

@@ -34,8 +34,3 @@ if (TYPO3_MODE === 'BE'
     ],
     'list_type'
 );
-
-if (TYPO3_MODE === 'BE') {
-    $TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses'][Tx_Seminars_FrontEnd_WizardIcon::class]
-        = TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('seminars') . 'Classes/FrontEnd/WizardIcon.php';
-}

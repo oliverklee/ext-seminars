@@ -1,0 +1,13 @@
+mod.wizards.newContentElement.wizardItems.plugins {
+    elements {
+        seminars {
+            iconIdentifier = ext-seminars-wizard-icon
+            title = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:pi1_title
+            description = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:pi1_description
+            tt_content_defValues {
+                CType = list
+                list_type = seminars_pi1
+            }
+        }
+    }
+}
