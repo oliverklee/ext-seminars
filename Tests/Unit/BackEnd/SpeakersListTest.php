@@ -2,6 +2,7 @@
 
 use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
@@ -36,6 +37,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends Tx_Phpunit_TestCas
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
+            self::markTestSkipped('This test is for the old BE module only.');
+        }
 
         $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 
