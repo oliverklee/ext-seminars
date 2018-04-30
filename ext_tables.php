@@ -31,6 +31,5 @@ if (TYPO3_MODE === 'BE'
         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tt_content.list_type_pi1',
         'seminars_pi1',
         'EXT:seminars/ext_icon.gif',
-    ],
-    'list_type'
+    ]
 );

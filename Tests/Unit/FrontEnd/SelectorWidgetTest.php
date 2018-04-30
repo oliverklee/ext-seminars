@@ -1442,7 +1442,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     /**
      * @test
      */
-    public function renderForEnabledDateSearchAndNumberOfYearsInDateFilterSetToTwoContainsThreeYearsInDropDown()
+    public function renderForEnabledDateSearchAndNumberOfYearsInDateFilterSetToTwoContainsTwoYearsInDropDown()
     {
         $this->fixture->setConfigurationValue(
             'displaySearchFormFields',
@@ -1461,13 +1461,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
             $output
         );
         self::assertContains(
-            '<option value="' . $currentYear + 1 . '">' .
-                $currentYear + 1 . '</option>',
-            $output
-        );
-        self::assertContains(
-            '<option value="' . $currentYear + 2 . '">' .
-                $currentYear + 2 . '</option>',
+            '<option value="' . ($currentYear + 1) . '">' . ($currentYear + 1) . '</option>',
             $output
         );
     }
@@ -1520,7 +1514,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
             2
         );
 
-        $thisYear = date('Y', time());
+        $thisYear = date('Y');
         $this->fixture->piVars['from_day'] = 2;
         $this->fixture->piVars['from_month'] = 5;
         $this->fixture->piVars['from_year'] = $thisYear;

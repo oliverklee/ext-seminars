@@ -845,7 +845,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends Tx_Phpunit_TestCase
      */
     public function setRegistrationWithNullIsAllowed()
     {
-        $this->fixture->setRegistration(null);
+        $this->fixture->setRegistration();
 
         self::assertNull(
             $this->fixture->getRegistration()

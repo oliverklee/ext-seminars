@@ -60,7 +60,7 @@ class Tx_Seminars_BackEnd_SpeakersList extends Tx_Seminars_BackEnd_AbstractList
 
         $tableRows = '';
 
-        /** @var \Tx_Seminars_Bag_Speaker $organizerBag */
+        /** @var \Tx_Seminars_Bag_Speaker $speakerBag */
         foreach ($speakerBag as $this->speaker) {
             $this->template->setMarker(
                 'icon',

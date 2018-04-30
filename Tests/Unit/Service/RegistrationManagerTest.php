@@ -2299,7 +2299,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
         $registration = $this->createRegistration();
 
-        $hook = $this->getMock(Tx_Seminars_Interface_Hook_Registration::class, []);
+        $hook = $this->getMock(Tx_Seminars_Interface_Hook_Registration::class);
         $hookClass = get_class($hook);
         $hook->expects(self::once())->method('modifyAttendeeEmailText')->with($registration, self::anything());
 
@@ -2323,7 +2323,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
 
         $registration = $this->createRegistration();
 
-        $hook = $this->getMock(Tx_Seminars_Interface_Hook_Registration::class, []);
+        $hook = $this->getMock(Tx_Seminars_Interface_Hook_Registration::class);
         $hookClass = get_class($hook);
         $hook->expects(self::exactly(2))->method('modifyAttendeeEmailText')->with($registration, self::anything());
 

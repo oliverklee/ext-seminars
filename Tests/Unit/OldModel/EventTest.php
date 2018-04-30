@@ -447,7 +447,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function addPlaceRelationReturnsUid()
     {
-        $uid = $this->addPlaceRelation([]);
+        $uid = $this->addPlaceRelation();
 
         self::assertTrue(
             $uid > 0
@@ -460,8 +460,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function addPlaceRelationCreatesNewUids()
     {
         self::assertNotSame(
-            $this->addPlaceRelation([]),
-            $this->addPlaceRelation([])
+            $this->addPlaceRelation(),
+            $this->addPlaceRelation()
         );
     }
 
@@ -475,13 +475,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $this->fixture->getNumberOfPlaces()
         );
 
-        $this->addPlaceRelation([]);
+        $this->addPlaceRelation();
         self::assertSame(
             1,
             $this->fixture->getNumberOfPlaces()
         );
 
-        $this->addPlaceRelation([]);
+        $this->addPlaceRelation();
         self::assertSame(
             2,
             $this->fixture->getNumberOfPlaces()
@@ -501,7 +501,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             )
         );
 
-        $this->addPlaceRelation([]);
+        $this->addPlaceRelation();
         self::assertSame(
             1,
             $this->testingFramework->countRecords(
@@ -510,7 +510,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             )
         );
 
-        $this->addPlaceRelation([]);
+        $this->addPlaceRelation();
         self::assertSame(
             2,
             $this->testingFramework->countRecords(
@@ -525,7 +525,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function addCategoryRelationReturnsUid()
     {
-        $uid = $this->addCategoryRelation([]);
+        $uid = $this->addCategoryRelation();
 
         self::assertTrue(
             $uid > 0
@@ -538,8 +538,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function addCategoryRelationCreatesNewUids()
     {
         self::assertNotSame(
-            $this->addCategoryRelation([]),
-            $this->addCategoryRelation([])
+            $this->addCategoryRelation(),
+            $this->addCategoryRelation()
         );
     }
 
@@ -553,13 +553,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $this->fixture->getNumberOfCategories()
         );
 
-        $this->addCategoryRelation([]);
+        $this->addCategoryRelation();
         self::assertSame(
             1,
             $this->fixture->getNumberOfCategories()
         );
 
-        $this->addCategoryRelation([]);
+        $this->addCategoryRelation();
         self::assertSame(
             2,
             $this->fixture->getNumberOfCategories()
@@ -579,7 +579,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             )
         );
 
-        $this->addCategoryRelation([]);
+        $this->addCategoryRelation();
         self::assertSame(
             1,
             $this->testingFramework->countRecords(
@@ -588,7 +588,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             )
         );
 
-        $this->addCategoryRelation([]);
+        $this->addCategoryRelation();
         self::assertSame(
             2,
             $this->testingFramework->countRecords(
@@ -619,7 +619,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function addTargetGroupRelationReturnsUid()
     {
         self::assertTrue(
-            $this->addTargetGroupRelation([]) > 0
+            $this->addTargetGroupRelation() > 0
         );
     }
 
@@ -629,8 +629,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function addTargetGroupRelationCreatesNewUids()
     {
         self::assertNotSame(
-            $this->addTargetGroupRelation([]),
-            $this->addTargetGroupRelation([])
+            $this->addTargetGroupRelation(),
+            $this->addTargetGroupRelation()
         );
     }
 
@@ -644,13 +644,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $this->fixture->getNumberOfTargetGroups()
         );
 
-        $this->addTargetGroupRelation([]);
+        $this->addTargetGroupRelation();
         self::assertSame(
             1,
             $this->fixture->getNumberOfTargetGroups()
         );
 
-        $this->addTargetGroupRelation([]);
+        $this->addTargetGroupRelation();
         self::assertSame(
             2,
             $this->fixture->getNumberOfTargetGroups()
@@ -671,7 +671,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         );
 
-        $this->addTargetGroupRelation([]);
+        $this->addTargetGroupRelation();
         self::assertSame(
             1,
             $this->testingFramework->countRecords(
@@ -680,7 +680,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             )
         );
 
-        $this->addTargetGroupRelation([]);
+        $this->addTargetGroupRelation();
         self::assertSame(
             2,
             $this->testingFramework->countRecords(
@@ -695,7 +695,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function addPaymentMethodRelationReturnsUid()
     {
-        $uid = $this->addPaymentMethodRelation([]);
+        $uid = $this->addPaymentMethodRelation();
 
         self::assertTrue(
             $uid > 0
@@ -708,8 +708,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function addPaymentMethodRelationCreatesNewUids()
     {
         self::assertNotSame(
-            $this->addPaymentMethodRelation([]),
-            $this->addPaymentMethodRelation([])
+            $this->addPaymentMethodRelation(),
+            $this->addPaymentMethodRelation()
         );
     }
 
@@ -723,13 +723,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $this->fixture->getNumberOfPaymentMethods()
         );
 
-        $this->addPaymentMethodRelation([]);
+        $this->addPaymentMethodRelation();
         self::assertSame(
             1,
             $this->fixture->getNumberOfPaymentMethods()
         );
 
-        $this->addPaymentMethodRelation([]);
+        $this->addPaymentMethodRelation();
         self::assertSame(
             2,
             $this->fixture->getNumberOfPaymentMethods()
@@ -741,7 +741,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function addOrganizingPartnerRelationReturnsUid()
     {
-        $uid = $this->addOrganizingPartnerRelation([]);
+        $uid = $this->addOrganizingPartnerRelation();
 
         self::assertTrue(
             $uid > 0
@@ -754,8 +754,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function addOrganizingPartnerRelationCreatesNewUids()
     {
         self::assertNotSame(
-            $this->addOrganizingPartnerRelation([]),
-            $this->addOrganizingPartnerRelation([])
+            $this->addOrganizingPartnerRelation(),
+            $this->addOrganizingPartnerRelation()
         );
     }
 
@@ -773,7 +773,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         );
 
-        $this->addOrganizingPartnerRelation([]);
+        $this->addOrganizingPartnerRelation();
         self::assertSame(
             1,
             $this->testingFramework->countRecords(
@@ -782,7 +782,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             )
         );
 
-        $this->addOrganizingPartnerRelation([]);
+        $this->addOrganizingPartnerRelation();
         self::assertSame(
             2,
             $this->testingFramework->countRecords(
@@ -797,7 +797,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function addOrganizerRelationReturnsUid()
     {
-        $uid = $this->addOrganizerRelation([]);
+        $uid = $this->addOrganizerRelation();
 
         self::assertTrue(
             $uid > 0
@@ -810,8 +810,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function addOrganizerRelationCreatesNewUids()
     {
         self::assertNotSame(
-            $this->addOrganizerRelation([]),
-            $this->addOrganizerRelation([])
+            $this->addOrganizerRelation(),
+            $this->addOrganizerRelation()
         );
     }
 
@@ -825,13 +825,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $this->fixture->getNumberOfOrganizers()
         );
 
-        $this->addOrganizerRelation([]);
+        $this->addOrganizerRelation();
         self::assertSame(
             1,
             $this->fixture->getNumberOfOrganizers()
         );
 
-        $this->addOrganizerRelation([]);
+        $this->addOrganizerRelation();
         self::assertSame(
             2,
             $this->fixture->getNumberOfOrganizers()
@@ -3125,7 +3125,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function hasTargetGroups()
     {
-        $this->addTargetGroupRelation([]);
+        $this->addTargetGroupRelation();
 
         self::assertTrue(
             $this->fixture->hasTargetGroups()
@@ -3235,7 +3235,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canHaveOnePaymentMethod()
     {
-        $this->addPaymentMethodRelation([]);
+        $this->addPaymentMethodRelation();
 
         self::assertTrue(
             $this->fixture->hasPaymentMethods()
@@ -3463,7 +3463,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getSinglePaymentMethodPlainWithNonExistentPaymentMethodUidReturnsAnEmptyString()
     {
-        $uid = $this->addPaymentMethodRelation([]);
+        $uid = $this->addPaymentMethodRelation();
 
         self::assertSame(
             '',
@@ -3501,7 +3501,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getSinglePaymentMethodShortWithNonExistentPaymentMethodUidReturnsAnEmptyString()
     {
-        $uid = $this->addPaymentMethodRelation([]);
+        $uid = $this->addPaymentMethodRelation();
 
         self::assertSame(
             '',
@@ -3719,7 +3719,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canHaveOneOrganizingPartner()
     {
-        $this->addOrganizingPartnerRelation([]);
+        $this->addOrganizingPartnerRelation();
 
         self::assertTrue(
             $this->fixture->hasOrganizingPartners()
@@ -3742,7 +3742,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getNumberOfOrganizingPartnersWithSingleOrganizingPartnerReturnsOne()
     {
-        $this->addOrganizingPartnerRelation([]);
+        $this->addOrganizingPartnerRelation();
         self::assertSame(
             1,
             $this->fixture->getNumberOfOrganizingPartners()
@@ -3754,8 +3754,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getNumberOfOrganizingPartnersWithMultipleOrganizingPartnersReturnsTwo()
     {
-        $this->addOrganizingPartnerRelation([]);
-        $this->addOrganizingPartnerRelation([]);
+        $this->addOrganizingPartnerRelation();
+        $this->addOrganizingPartnerRelation();
         self::assertSame(
             2,
             $this->fixture->getNumberOfOrganizingPartners()
@@ -3953,7 +3953,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canHaveOneOrganizer()
     {
-        $this->addOrganizerRelation([]);
+        $this->addOrganizerRelation();
 
         self::assertTrue(
             $this->fixture->hasOrganizers()
@@ -3976,7 +3976,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getNumberOfOrganizersWithSingleOrganizerReturnsOne()
     {
-        $this->addOrganizerRelation([]);
+        $this->addOrganizerRelation();
         self::assertSame(
             1,
             $this->fixture->getNumberOfOrganizers()
@@ -3988,8 +3988,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getNumberOfOrganizersWithMultipleOrganizersReturnsTwo()
     {
-        $this->addOrganizerRelation([]);
-        $this->addOrganizerRelation([]);
+        $this->addOrganizerRelation();
+        $this->addOrganizerRelation();
         self::assertSame(
             2,
             $this->fixture->getNumberOfOrganizers()
@@ -4378,7 +4378,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getFirstOrganizerForOneOrganizerReturnsThatOrganizer()
     {
-        $organizerUid = $this->addOrganizerRelation([]);
+        $organizerUid = $this->addOrganizerRelation();
 
         self::assertSame(
             $organizerUid,
@@ -4391,8 +4391,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getFirstOrganizerForTwoOrganizerReturnsFirstOrganizer()
     {
-        $firstOrganizerUid = $this->addOrganizerRelation([]);
-        $this->addOrganizerRelation([]);
+        $firstOrganizerUid = $this->addOrganizerRelation();
+        $this->addOrganizerRelation();
 
         self::assertSame(
             $firstOrganizerUid,
@@ -4621,7 +4621,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function hasSpeakersOfTypeIsInitiallyFalse()
     {
         self::assertFalse(
-            $this->fixture->hasSpeakersOfType('speakers')
+            $this->fixture->hasSpeakersOfType()
         );
         self::assertFalse(
             $this->fixture->hasSpeakersOfType('partners')
@@ -4641,7 +4641,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $this->addSpeakerRelation([]);
         self::assertTrue(
-            $this->fixture->hasSpeakersOfType('speakers')
+            $this->fixture->hasSpeakersOfType()
         );
 
         $this->addPartnerRelation([]);
@@ -4755,7 +4755,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         self::assertSame(
             '',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4768,7 +4768,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             'test speaker',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4781,7 +4781,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             'test organization',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4794,7 +4794,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             'test homepage',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4812,7 +4812,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertRegExp(
             '/test organization.*test homepage/',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4825,7 +4825,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             'test description',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4842,7 +4842,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         );
         self::assertRegExp(
             '/foo.*bar/s',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4860,7 +4860,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertRegExp(
             '/test homepage.*test description/s',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4874,11 +4874,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             'test speaker 1',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
         self::assertContains(
             'test speaker 2',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4896,11 +4896,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             'test organization 1',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
         self::assertContains(
             'test organization 2',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4914,7 +4914,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertNotContains(
             'test partner',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4967,7 +4967,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertContains(
             'foo' . LF . 'bar',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4981,7 +4981,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertNotContains(
             'foo' . CRLF . 'bar',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -4999,7 +4999,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertNotRegExp(
             '/foo' . CRLF . 'bar/',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -5017,7 +5017,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertRegExp(
             '/foo' . LF . 'bar/',
-            $this->fixture->getSpeakersWithDescriptionRaw('speakers')
+            $this->fixture->getSpeakersWithDescriptionRaw()
         );
     }
 
@@ -5034,7 +5034,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertSame(
             '',
-            $this->fixture->getSpeakersShort($this->pi1, 'speakers')
+            $this->fixture->getSpeakersShort($this->pi1)
         );
         self::assertSame(
             '',
@@ -5061,7 +5061,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->addSpeakerRelation($speaker);
         self::assertSame(
             $speaker['title'],
-            $this->fixture->getSpeakersShort($this->pi1, 'speakers')
+            $this->fixture->getSpeakersShort($this->pi1)
         );
 
         $this->addPartnerRelation($speaker);
@@ -5096,7 +5096,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->createPi1();
         self::assertSame(
             $firstSpeaker['title'] . ', ' . $secondSpeaker['title'],
-            $this->fixture->getSpeakersShort($this->pi1, 'speakers')
+            $this->fixture->getSpeakersShort($this->pi1)
         );
 
         $this->addPartnerRelation($firstSpeaker);
@@ -5135,7 +5135,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertRegExp(
             '/href="http:\\/\\/www.foo.com".*>test speaker/',
-            $this->fixture->getSpeakersShort($this->pi1, 'speakers')
+            $this->fixture->getSpeakersShort($this->pi1)
         );
     }
 
@@ -5152,7 +5152,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->createPi1();
 
         $shortSpeakerOutput
-            = $this->fixture->getSpeakersShort($this->pi1, 'speakers');
+            = $this->fixture->getSpeakersShort($this->pi1);
 
         self::assertContains(
             'test speaker',
@@ -9204,9 +9204,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $fixture->canViewRegistrationsList(
                 $whichPlugin,
                 $registrationsListPID,
-                $registrationsVipListPID,
-                0,
-                'attendees_and_managers'
+                $registrationsVipListPID
             )
         );
     }
@@ -9750,7 +9748,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertSame(
             $fixture->translate('message_notLoggedIn'),
-            $fixture->canViewRegistrationsListMessage('list_registrations', 'attendees_and_managers')
+            $fixture->canViewRegistrationsListMessage('list_registrations')
         );
     }
 
@@ -9910,7 +9908,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertSame(
             '',
-            $fixture->canViewRegistrationsListMessage('list_registrations', 'attendees_and_managers')
+            $fixture->canViewRegistrationsListMessage('list_registrations')
         );
     }
 
@@ -9935,7 +9933,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         self::assertSame(
             $fixture->translate('message_accessDenied'),
-            $fixture->canViewRegistrationsListMessage('list_registrations', 'attendees_and_managers')
+            $fixture->canViewRegistrationsListMessage('list_registrations')
         );
     }
 

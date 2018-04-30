@@ -114,9 +114,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
             if (($beginDateDay == $endDateDay) || !$this->hasEndDate()) {
                 $result = $beginDateDay;
             } else {
-                if (!$this->getConfValueBoolean('abbreviateDateRanges')) {
-                    $result = $beginDateDay;
-                } else {
+                if ($this->getConfValueBoolean('abbreviateDateRanges')) {
                     // Are the years different? Then includes the complete begin
                     // date.
                     if (strftime(
@@ -149,6 +147,8 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldMode
                             );
                         }
                     }
+                } else {
+                    $result = $beginDateDay;
                 }
                 $result .= $dash . $endDateDay;
             }
