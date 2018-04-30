@@ -12,7 +12,7 @@ env:
   - DATABASE_USER=travis DATABASE_HOST=localhost DATABASE_PORT=3306 DATABASE_NAME=typo3 DATABASE_PASSWORD=''
   - TYPO3_PATH_ROOT=$PWD/.Build/public
   matrix:
-  - TYPO3_VERSION="^7.6"
+  - TYPO3_VERSION="^7.6" RUN_TESTS_COMMAND=".Build/public/typo3/cli_dispatch.phpsh phpunit"
 
 matrix:
   exclude:
@@ -28,9 +28,6 @@ before_install:
 install:
 - >
   composer require typo3/minimal=$TYPO3_VERSION;
-  if [ "$TYPO3_VERSION" == "^8.7" ]; then
-    composer require pagemachine/typo3-composer-legacy-cli;
-  fi;
   composer show;
 - >
   .Build/vendor/bin/typo3cms install:setup --non-interactive --site-setup-type="site"
