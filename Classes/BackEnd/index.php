@@ -238,7 +238,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
             return false;
         }
 
-        return GeneralUtility::_POST('action') == 'sendEmail';
+        return GeneralUtility::_POST('action') === 'sendEmail';
     }
 
     /**
@@ -253,7 +253,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
             return false;
         }
 
-        return GeneralUtility::_POST('action') == 'confirmEvent';
+        return GeneralUtility::_POST('action') === 'confirmEvent';
     }
 
     /**
@@ -269,7 +269,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
             return false;
         }
 
-        return GeneralUtility::_POST('action') == 'cancelEvent';
+        return GeneralUtility::_POST('action') === 'cancelEvent';
     }
 
     /**

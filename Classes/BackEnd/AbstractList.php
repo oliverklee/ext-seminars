@@ -175,11 +175,11 @@ abstract class Tx_Seminars_BackEnd_AbstractList
 
         if ($this->getBackEndUser()->check('tables_modify', $this->tableName)
             && $this->doesUserHaveAccess($pid)
-            && ($pageData['doktype'] == self::SYSFOLDER_TYPE)
+            && ((int)$pageData['doktype'] === self::SYSFOLDER_TYPE)
         ) {
             $params = '&edit[' . $this->tableName . '][';
 
-            if ($pageData['uid'] == $pid) {
+            if ((int)$pageData['uid'] === $pid) {
                 $params .= $pageData['uid'];
                 $storageLabel = sprintf(
                     $languageService->getLL('label_create_record_in_current_folder'),

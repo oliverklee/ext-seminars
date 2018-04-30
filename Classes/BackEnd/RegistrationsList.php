@@ -206,9 +206,8 @@ class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
             $tableRows .= $this->template->getSubpart('REGISTRATION_TABLE_ROW');
         }
 
-        if ($this->configCheckWarnings == '') {
-            $this->configCheckWarnings =
-                $registrationBag->checkConfiguration();
+        if ($this->configCheckWarnings === '') {
+            $this->configCheckWarnings = $registrationBag->checkConfiguration();
         }
 
         $this->template->setMarker(
