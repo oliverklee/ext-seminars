@@ -19,113 +19,125 @@ Sponsorship
 Development of this extension has been funded by the following
 organizations and persons:
 
-- `A.BE.ZET GmbH <http://www.abezet.de/>`_
+- `4viewture UG <https://www.4viewture.eu/>`_
+
+- `A3PLUS GmbH <https://www.a3plus.de/>`_
 
 - `AltaMediNet GmbH <http://www.altamedinet.de/>`_
 
-- `AnD-Institut <http://www.and.at/>`_
+- `AmedickSommer Neue Medien GmbH <http://www.amedick-sommer.de/>`_
 
-- `Barthauer Software GmbH <http://www.barthauer.de/>`_
+- `AnD-Institut <https://www.and.at/>`_
 
-- `Bamboozle <http://www.bamboozle.ch/>`_
+- `ASTERIOS Design e.U. <https://www.multimedia-agentur.at>`_
 
-- `Bucerius Education GmbH <http://www.law-school.de/>`_
+- `Barthauer Software GmbH <https://www.barthauer.de/>`_
 
-- `björn hahnefeld IT <http://www.hahnefeld.de/>`_
+- `Bamboozle <https://www.bamboozle.ch/>`_
+
+- `Bucerius Education GmbH <https://www.law-school.de/>`_
+
+- `björn hahnefeld IT <https://www.hahnefeld.de/>`_
 
 - Career Service Bonn (CaSeBo)
 
 - CITRUS - Agentur für E-Marketing und Neue Medien
 
-- `ComLog (R) Werbung <http://www.comlog.de/>`_
+- `ComLog Werbung <https://www.comlog.de/>`_
 
-- CMS:Agenten
+- `IT:Agenten GmbH <https://it-agenten.com/>`_
 
-- `Data Quest AG <http://www.dataquest.ch/>`_
+- `Data Quest AG <https://www.dataquest.ch/>`_
 
-- `Designwerkstatt Dana Brösdorf <http://www.designwerkstatt.net/>`_
+- `Designwerkstatt Dana Brösdorf <https://www.designwerkstatt.net/>`_
 
 - `die medienagenten oHG <http://www.medienagenten.de/>`_
 
-- `dkd Internet Service GmbH <http://www.dkd.de/>`_
+- `dkd Internet Service GmbH <https://www.dkd.de/>`_
 
-- `docnet: Doctoral Network at the University of St. Gallen <http://www.docnet-hsg.ch/>`_
+- `docnet: Doctoral Network at the University of St. Gallen <https://wp.docnet-hsg.ch/>`_
 
-- `edv-rose <http://www.edv-rose.de/>`_
+- edv-rose
 
-- `F7-Softwareentwicklung Joachim Nielsen <http://www.f7.de/>`_
+- `elementare teilchen GmbH <https://www.elementare-teilchen.de/>`_
 
-- `f.com GmbH + Co. KG <http://www.f-com.de/>`_
+- `eventnetzwerke <https://www.eventnetzwerke.de/>`_
 
-- `Geonet GmbH <http://geonet.eu/>`_
+- `F7 Media GmbH <https://www.f7.de/>`_
 
-- `.hausformat <http://www.hausformat.ch/>`_
+- f.com GmbH + Co. KG
+
+- `Geonet GmbH <https://geonet.eu/>`_
+
+- `.hausformat <https://www.hausformat.ch/>`_
 
 - `Hochschule für angewandte Wissenschaften Würzburg-Schweinfurt
-  <http://www.fhws.de/>`_
+  <https://www.fhws.de/>`_
 
-- `infoklick.ch <http://www.infoklick.ch/>`_
+- `infoklick.ch <https://www.infoklick.ch/>`_
 
 - `Jugendbildungsstätte Windberg, 94336 Windberg (Bay. Wald), Seminarhaus, Fortbildungen, Tagungshaus, Seminare
   <http://www.jugendbildungsstaette-windberg.de/>`_
 
 - `Kienast Datenverarbeitung <http://www.kienastdv.de/>`_
 
-- `Klare Köpfe <http://www.klarekoepfe.de/>`_
+- `Klare Köpfe <http://klarekoepfe.de/>`_
 
-- `Kompetenzzentrum IT <http://www.kompetenzzentrum-it.de/>`_ am
+- Kompetenzzentrum IT am
   Staatlichen Schulamt für den Landkreis Offenbach und die Stadt
   Offenbach am Main
 
-- `lucidlogic <http://www.lucidlogic.de/>`_
+- Leo Führinger
 
-- `maddesigns - Sven Wolfermann <http://www.maddesigns.de/>`_
+- lucidlogic
+
+- `maddesigns - Sven Wolfermann <http://maddesigns.de/>`_
 
 - Max Weickl
 
 - `medien+bildung.com gGmbH <http://medienundbildung.com/>`_
 
-- `mentronic . Digitale Kommunikation <http://www.mentronic.com/>`_
+- `mentronic . Digitale Kommunikation <https://www.mentronic.com/>`_
 
 - Michael Bakonyi – Neue Medien
 
 - `MK Office Monika Kaderabek <http://www.mk-office.ch/>`_
 
-- `m\|r\|o\|net <http://www.mronet.at/>`_
+- `m\|r\|o\|net <https://www.mronet.at/>`_
 
 - `netboot internet solutions <http://www.netboot.ch/>`_
 
-- `net/bureau new media services GbR <http://www.netbureau.de/>`_
+- `net/bureau new media services GmbH & Co. KG <https://www.netbureau.de/>`_
 
-- `NetzWerkPlan GmbH <http://www.netzwerkplan.de/>`_
+- `NetzWerkPlan GmbH <https://netzwerkplan.de/>`_
 
-- `North Coast Church <http://www.northcoastchurch.com/>`_
+- `North Coast Church <https://www.northcoastchurch.com/>`_
 
 - `nulabor <http://www.nulabor.de/>`_
 
+- `platzhirsche.net / SeminarPool GmbH <https://www.platzhirsche.net/>`_
+
 - Ralf Thierfelder
 
-- `randombit EDV-Dienstleistungen <http://www.randombit.de/>`_
+- `randombit EDV-Dienstleistungen <http://randombit.de/>`_
 
 - Reiner Schmidt
 
-- `Rob De Vries <http://www.rob-ot.be/>`_
+- Rob De Vries
 
-- `Sankt Michaelsbund Mediendienste <http://www.st-michaelsbund.de/>`_
+- `Sankt Michaelsbund Mediendienste <https://www.st-michaelsbund.de/>`_
 
-- `Scheltwort IT-Services KG <http://www.scheltwort-its.de/>`_
-
-- `SeminarPool GmbH <http://www.seminarpool.de/>`_
+- Scheltwort IT-Services KG
 
 - `sitegeist media solutions GmbH <https://sitegeist.de/>`_
 
-- `SIVA creative media <http://www.siva-creative.net/>`_
+- `SIVA creative media <https://www.siva-creative.net/>`_
 
-- `Ski-Club Au e.V. <http://www.ski-club-au.de/>`_
+- `Ski-Club Au e.V. <https://www.ski-club-au.de/>`_
 
 - SONNENDEQ - Form + eFunktion
 
-- `Systemhaus SAR GmbH <http://www.sar.de/>`_
+- `Systemhaus SAR GmbH <https://www.sar.de/>`_
 
 - `T3 Premium <https://www.t3premium.de/>`_
 
@@ -143,5 +155,7 @@ organizations and persons:
 - `Weinsberger Forum <http://www.weinsberger-forum.de/>`_
 
 - `WIKAFI <http://wikafi.be/>`_
+
+- `xmental <https://www.xmental.de/>`_
 
 - `ZfDB OHG <http://www.zfdb-verlag.de/>`_
