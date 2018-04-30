@@ -47,6 +47,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the incorrect TYPO3 Core license headers (#41)
 
 ### Fixed
+- Use typesafe comparisons in the BE module (#82)
 - Replace the deprecated flash message handling (#81)
 - Replace deprecated BE methods (#80)
 - Fix more PhpStorm code inspection warnings (#62)

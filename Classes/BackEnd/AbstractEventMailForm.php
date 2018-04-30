@@ -155,7 +155,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      */
     protected function isSubmitted()
     {
-        return $this->getPostData('isSubmitted') == '1';
+        return $this->getPostData('isSubmitted') === '1';
     }
 
     /**
@@ -170,7 +170,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      */
     private function validateFormData()
     {
-        if ($this->getPostData('subject') == '') {
+        if ($this->getPostData('subject') === '') {
             $this->markAsIncomplete();
             $this->setErrorMessage(
                 'subject',
@@ -178,7 +178,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
             );
         }
 
-        if ($this->getPostData('messageBody') == '') {
+        if ($this->getPostData('messageBody') === '') {
             $this->markAsIncomplete();
             $this->setErrorMessage(
                 'messageBody',
@@ -357,7 +357,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
             return '';
         }
 
-        return $this->postData[$key];
+        return (string)$this->postData[$key];
     }
 
     /**
@@ -371,7 +371,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      */
     protected function hasPostData($key)
     {
-        if ($key == '') {
+        if ($key === '') {
             throw new InvalidArgumentException('$key must not be empty.', 1333292184);
         }
 

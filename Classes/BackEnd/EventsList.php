@@ -362,7 +362,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
         $this->template->unhideSubpartsArray(['CANCEL_BUTTON']);
         $pageData = $this->page->getPageData();
 
-        if (($event->getRecordType() != Tx_Seminars_Model_Event::TYPE_TOPIC)
+        if (($event->getRecordType() !== Tx_Seminars_Model_Event::TYPE_TOPIC)
             && !$event->isHidden() && !$event->isCanceled()
             && !$event->hasStarted()
             && $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
@@ -397,7 +397,7 @@ class Tx_Seminars_BackEnd_EventsList extends Tx_Seminars_BackEnd_AbstractList
         $this->template->unhideSubpartsArray(['CONFIRM_BUTTON']);
         $pageData = $this->page->getPageData();
 
-        if (($event->getRecordType() != Tx_Seminars_Model_Event::TYPE_TOPIC)
+        if (($event->getRecordType() !== Tx_Seminars_Model_Event::TYPE_TOPIC)
             && !$event->isHidden() && !$event->isConfirmed()
             && !$event->hasStarted()
             && $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
