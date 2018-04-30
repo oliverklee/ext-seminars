@@ -1,4 +1,5 @@
 <?php
+namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -10,7 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Mario Rimann <mario@screenteam.com>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_BackEnd_CancelEventMailForm extends \Tx_Seminars_BackEnd_AbstractEventMailForm
+class CancelEventMailForm extends AbstractEventMailForm
 {
     /**
      * @var string the action of this form

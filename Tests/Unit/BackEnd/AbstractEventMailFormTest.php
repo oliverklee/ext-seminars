@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
 use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -730,7 +731,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
 
         self::assertSame(
             'Location: ' . BackendUtility::getModuleUrl(
-                \Tx_Seminars_BackEnd_AbstractEventMailForm::MODULE_NAME,
+                AbstractEventMailForm::MODULE_NAME,
                 ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()],
                 false,
                 true

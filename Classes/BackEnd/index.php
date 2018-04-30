@@ -1,5 +1,13 @@
 <?php
 
+use OliverKlee\Seminars\BackEnd\CancelEventMailForm;
+use OliverKlee\Seminars\BackEnd\ConfirmEventMailForm;
+use OliverKlee\Seminars\BackEnd\EventsList;
+use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
+use OliverKlee\Seminars\BackEnd\Module;
+use OliverKlee\Seminars\BackEnd\OrganizersList;
+use OliverKlee\Seminars\BackEnd\RegistrationsList;
+use OliverKlee\Seminars\BackEnd\SpeakersList;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
@@ -14,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Module2 extends \Tx_Seminars_BackEnd_Module
+class Tx_Seminars_Module2 extends Module
 {
     /**
      * @var string
@@ -165,18 +173,18 @@ class Tx_Seminars_Module2 extends \Tx_Seminars_BackEnd_Module
         // If no sub module is specified, an empty page will be displayed.
         switch ($this->subModule) {
             case 2:
-                /** @var \Tx_Seminars_BackEnd_RegistrationsList $registrationsList */
-                $registrationsList = GeneralUtility::makeInstance(\Tx_Seminars_BackEnd_RegistrationsList::class, $this);
+                /** @var RegistrationsList $registrationsList */
+                $registrationsList = GeneralUtility::makeInstance(RegistrationsList::class, $this);
                 $this->content .= $registrationsList->show();
                 break;
             case 3:
-                /** @var \Tx_Seminars_BackEnd_SpeakersList $speakersList */
-                $speakersList = GeneralUtility::makeInstance(\Tx_Seminars_BackEnd_SpeakersList::class, $this);
+                /** @var SpeakersList $speakersList */
+                $speakersList = GeneralUtility::makeInstance(SpeakersList::class, $this);
                 $this->content .= $speakersList->show();
                 break;
             case 4:
-                /** @var \Tx_Seminars_BackEnd_OrganizersList $organizersList */
-                $organizersList = GeneralUtility::makeInstance(\Tx_Seminars_BackEnd_OrganizersList::class, $this);
+                /** @var OrganizersList $organizersList */
+                $organizersList = GeneralUtility::makeInstance(OrganizersList::class, $this);
                 $this->content .= $organizersList->show();
                 break;
             case 1:
@@ -187,8 +195,8 @@ class Tx_Seminars_Module2 extends \Tx_Seminars_BackEnd_Module
                 } elseif ($this->isCancelEventFormRequested()) {
                     $this->content .= $this->getCancelEventMailForm();
                 } else {
-                    /** @var \Tx_Seminars_BackEnd_EventsList $eventsList */
-                    $eventsList = GeneralUtility::makeInstance(\Tx_Seminars_BackEnd_EventsList::class, $this);
+                    /** @var EventsList $eventsList */
+                    $eventsList = GeneralUtility::makeInstance(EventsList::class, $this);
                     $this->content .= $eventsList->show();
                 }
                 break;
@@ -279,9 +287,9 @@ class Tx_Seminars_Module2 extends \Tx_Seminars_BackEnd_Module
      */
     private function getGeneralMailForm()
     {
-        /** @var \Tx_Seminars_BackEnd_GeneralEventMailForm $form */
+        /** @var GeneralEventMailForm $form */
         $form = GeneralUtility::makeInstance(
-            \Tx_Seminars_BackEnd_GeneralEventMailForm::class,
+            GeneralEventMailForm::class,
             (int)GeneralUtility::_GP('eventUid')
         );
         $form->setPostData(GeneralUtility::_POST());
@@ -296,9 +304,9 @@ class Tx_Seminars_Module2 extends \Tx_Seminars_BackEnd_Module
      */
     private function getConfirmEventMailForm()
     {
-        /** @var \Tx_Seminars_BackEnd_ConfirmEventMailForm $form */
+        /** @var ConfirmEventMailForm $form */
         $form = GeneralUtility::makeInstance(
-            \Tx_Seminars_BackEnd_ConfirmEventMailForm::class,
+            ConfirmEventMailForm::class,
             (int)GeneralUtility::_GP('eventUid')
         );
         $form->setPostData(GeneralUtility::_POST());
@@ -313,9 +321,9 @@ class Tx_Seminars_Module2 extends \Tx_Seminars_BackEnd_Module
      */
     private function getCancelEventMailForm()
     {
-        /** @var \Tx_Seminars_BackEnd_CancelEventMailForm $form */
+        /** @var CancelEventMailForm $form */
         $form = GeneralUtility::makeInstance(
-            \Tx_Seminars_BackEnd_CancelEventMailForm::class,
+            CancelEventMailForm::class,
             (int)GeneralUtility::_GP('eventUid')
         );
         $form->setPostData(GeneralUtility::_POST());

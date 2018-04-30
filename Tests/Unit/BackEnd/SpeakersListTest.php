@@ -1,5 +1,8 @@
 <?php
 
+use OliverKlee\Seminars\BackEnd\AbstractList;
+use OliverKlee\Seminars\BackEnd\Module;
+use OliverKlee\Seminars\BackEnd\SpeakersList;
 use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
@@ -14,7 +17,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends \Tx_Phpunit_TestCa
     use BackEndTestsTrait;
 
     /**
-     * @var \Tx_Seminars_BackEnd_SpeakersList
+     * @var SpeakersList
      */
     private $fixture;
     /**
@@ -28,7 +31,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends \Tx_Phpunit_TestCa
     private $dummySysFolderPid = 0;
 
     /**
-     * @var \Tx_Seminars_BackEnd_Module a dummy BE module
+     * @var Module a dummy BE module
      */
     private $backEndModule;
 
@@ -44,19 +47,17 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends \Tx_Phpunit_TestCa
 
         $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 
-        $this->backEndModule = new \Tx_Seminars_BackEnd_Module();
+        $this->backEndModule = new Module();
         $this->backEndModule->id = $this->dummySysFolderPid;
         $this->backEndModule->setPageData([
             'uid' => $this->dummySysFolderPid,
-            'doktype' => \Tx_Seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
+            'doktype' => AbstractList::SYSFOLDER_TYPE,
         ]);
 
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
 
-        $this->fixture = new \Tx_Seminars_BackEnd_SpeakersList(
-            $this->backEndModule
-        );
+        $this->fixture = new SpeakersList($this->backEndModule);
     }
 
     protected function tearDown()

@@ -1,11 +1,12 @@
 <?php
+namespace OliverKlee\Seminars\BackEnd;
 
 /**
  * This class represents an e-mail form that does not change the event's status.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_BackEnd_GeneralEventMailForm extends \Tx_Seminars_BackEnd_AbstractEventMailForm
+class GeneralEventMailForm extends AbstractEventMailForm
 {
     /**
      * the action of this form

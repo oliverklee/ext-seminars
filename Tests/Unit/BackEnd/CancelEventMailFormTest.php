@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\Seminars\BackEnd\CancelEventMailForm;
 use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
@@ -15,7 +16,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends \Tx_Phpunit
     use BackEndTestsTrait;
 
     /**
-     * @var \Tx_Seminars_BackEnd_CancelEventMailForm
+     * @var CancelEventMailForm
      */
     private $fixture;
 
@@ -93,7 +94,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_CancelEventMailFormTest extends \Tx_Phpunit
             'organizers'
         );
 
-        $this->fixture = new \Tx_Seminars_BackEnd_CancelEventMailForm($this->eventUid);
+        $this->fixture = new CancelEventMailForm($this->eventUid);
     }
 
     protected function tearDown()

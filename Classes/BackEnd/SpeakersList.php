@@ -1,4 +1,5 @@
 <?php
+namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -8,7 +9,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_BackEnd_SpeakersList extends \Tx_Seminars_BackEnd_AbstractList
+class SpeakersList extends AbstractList
 {
     /**
      * @var string the name of the table we're working on

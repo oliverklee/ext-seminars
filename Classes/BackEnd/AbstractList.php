@@ -1,4 +1,5 @@
 <?php
+namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -14,7 +15,7 @@ use TYPO3\CMS\Lang\LanguageService;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-abstract class Tx_Seminars_BackEnd_AbstractList
+abstract class AbstractList
 {
     /**
      * @var string
@@ -27,7 +28,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
     protected $tableName = '';
 
     /**
-     * @var \Tx_Seminars_BackEnd_Module the back-end module
+     * @var Module the back-end module
      */
     protected $page = null;
 
@@ -59,9 +60,9 @@ abstract class Tx_Seminars_BackEnd_AbstractList
     /**
      * The constructor. Sets the table name and the back-end page object.
      *
-     * @param \Tx_Seminars_BackEnd_Module $module the current back-end module
+     * @param Module $module the current back-end module
      */
-    public function __construct(\Tx_Seminars_BackEnd_Module $module)
+    public function __construct(Module $module)
     {
         $this->page = $module;
 
