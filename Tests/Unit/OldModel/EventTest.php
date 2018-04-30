@@ -1,6 +1,7 @@
 <?php
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
@@ -5446,10 +5447,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
         $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        self::assertContains(
-            'overlay-scheduled.svg',
-            $this->fixture->getRecordIcon()
-        );
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
+            self::assertContains('overlay-endtime.svg', $this->fixture->getRecordIcon());
+        } else {
+            self::assertContains('overlay-scheduled.svg', $this->fixture->getRecordIcon());
+        }
     }
 
     /**
@@ -5460,10 +5462,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
         $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        self::assertContains(
-            'overlay-scheduled.svg',
-            $this->fixture->getRecordIcon()
-        );
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
+            self::assertContains('overlay-endtime.svg', $this->fixture->getRecordIcon());
+        } else {
+            self::assertContains('overlay-scheduled.svg', $this->fixture->getRecordIcon());
+        }
     }
 
     /**
@@ -5474,10 +5477,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
         $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        self::assertContains(
-            'overlay-scheduled.svg',
-            $this->fixture->getRecordIcon()
-        );
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
+            self::assertContains('overlay-endtime.svg', $this->fixture->getRecordIcon());
+        } else {
+            self::assertContains('overlay-scheduled.svg', $this->fixture->getRecordIcon());
+        }
     }
 
     /*

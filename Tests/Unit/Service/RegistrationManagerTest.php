@@ -68,13 +68,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
     protected $extConfBackup = [];
 
     /**
-     * backed-up T3_VAR configuration
-     *
-     * @var array
-     */
-    protected $t3VarBackup = [];
-
-    /**
      * @var Tx_Seminars_Service_SingleViewLinkBuilder
      */
     protected $linkBuilder = null;
@@ -94,7 +87,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
-        $this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
 
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
@@ -162,7 +154,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         Tx_Seminars_Service_RegistrationManager::purgeInstance();
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
-        $GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
     }
 
     /*
@@ -1033,9 +1024,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hook = $this->getMock($hookClass, ['canRegisterForSeminar']);
         $hook->expects(self::once())->method('canRegisterForSeminar')->with($this->seminar, $user);
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
-            [$hookClass] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->canRegisterIfLoggedIn($this->seminar);
     }
@@ -1052,8 +1042,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hook = $this->getMock($hookClass, ['canRegisterForSeminar']);
         $hook->expects(self::never())->method('canRegisterForSeminar');
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->canRegisterIfLoggedIn($this->seminar);
     }
@@ -1069,8 +1059,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hook = $this->getMock($hookClass, ['canRegisterForSeminar']);
         $hook->expects(self::once())->method('canRegisterForSeminar')->will(self::returnValue(true));
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         self::assertTrue(
             $this->fixture->canRegisterIfLoggedIn($this->seminar)
@@ -1088,8 +1078,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hook = $this->getMock($hookClass, ['canRegisterForSeminar']);
         $hook->expects(self::once())->method('canRegisterForSeminar')->will(self::returnValue(false));
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         self::assertFalse(
             $this->fixture->canRegisterIfLoggedIn($this->seminar)
@@ -1305,9 +1295,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hook = $this->getMock($hookClass, ['canRegisterForSeminarMessage']);
         $hook->expects(self::once())->method('canRegisterForSeminarMessage')->with($this->seminar, $user);
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
-            [$hookClass] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->canRegisterIfLoggedInMessage($this->seminar);
     }
@@ -1324,8 +1313,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hook = $this->getMock($hookClass, ['canRegisterForSeminarMessage']);
         $hook->expects(self::never())->method('canRegisterForSeminarMessage');
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->canRegisterIfLoggedInMessage($this->seminar);
     }
@@ -1341,8 +1330,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hook = $this->getMock($hookClass, ['canRegisterForSeminarMessage']);
         $hook->expects(self::once())->method('canRegisterForSeminarMessage')->will(self::returnValue('Hello world!'));
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         self::assertSame(
             'Hello world!',
@@ -1360,14 +1349,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hookClass1 = uniqid('tx_registrationHook');
         $hook1 = $this->getMock($hookClass1, ['canRegisterForSeminarMessage']);
         $hook1->expects(self::any())->method('canRegisterForSeminarMessage')->will(self::returnValue('message 1'));
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass1] = $hook1;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass1] = $hookClass1;
+        GeneralUtility::addInstance($hookClass1, $hook1);
 
         $hookClass2 = uniqid('tx_registrationHook');
         $hook2 = $this->getMock($hookClass2, ['canRegisterForSeminarMessage']);
         $hook2->expects(self::any())->method('canRegisterForSeminarMessage')->will(self::returnValue('message 2'));
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass2] = $hook2;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass2] = $hookClass2;
+        GeneralUtility::addInstance($hookClass2, $hook2);
 
         self::assertSame(
             'message 1',
@@ -1385,14 +1374,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hookClass1 = uniqid('tx_registrationHook');
         $hook1 = $this->getMock($hookClass1, ['canRegisterForSeminarMessage']);
         $hook1->expects(self::any())->method('canRegisterForSeminarMessage')->will(self::returnValue(''));
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass1] = $hook1;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass1] = $hookClass1;
+        GeneralUtility::addInstance($hookClass1, $hook1);
 
         $hookClass2 = uniqid('tx_registrationHook');
         $hook2 = $this->getMock($hookClass2, ['canRegisterForSeminarMessage']);
         $hook2->expects(self::any())->method('canRegisterForSeminarMessage')->will(self::returnValue('message 2'));
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass2] = $hook2;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass2] = $hookClass2;
+        GeneralUtility::addInstance($hookClass2, $hook2);
 
         self::assertSame(
             'message 2',
@@ -1841,9 +1830,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         // instance does not exist yet at this point.
         $hook->expects(self::once())->method('seminarRegistrationRemoved');
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
-            [$hookClass] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $seminarUid = $this->seminarUid;
@@ -1905,9 +1893,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         // instance does not exist yet at this point.
         $hook->expects(self::once())->method('seminarRegistrationMovedFromQueue');
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
-            [$hookClass] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $seminarUid = $this->seminarUid;
@@ -2258,8 +2245,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hook = $this->getMock($hookClass, ['modifyThankYouEmail']);
         $hook->expects(self::once())->method('modifyThankYouEmail');
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->setConfigurationValue('sendConfirmation', true);
         $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
@@ -2278,8 +2265,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hook = $this->getMock($hookClass, ['modifyThankYouEmail']);
         $hook->expects(self::never())->method('modifyThankYouEmail');
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->setConfigurationValue('sendConfirmation', false);
         $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
@@ -2303,8 +2290,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hookClass = get_class($hook);
         $hook->expects(self::once())->method('modifyAttendeeEmailText')->with($registration, self::anything());
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->setConfigurationValue('sendConfirmation', true);
         $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
@@ -2327,8 +2314,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hookClass = get_class($hook);
         $hook->expects(self::exactly(2))->method('modifyAttendeeEmailText')->with($registration, self::anything());
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->setConfigurationValue('sendConfirmation', true);
         $pi1 = new Tx_Seminars_FrontEnd_DefaultController();
@@ -5064,8 +5051,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hookClassName = get_class($hook);
         $hook->expects(self::once())->method('modifyOrganizerNotificationEmail')->with($registration, self::anything());
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClassName] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
+        GeneralUtility::addInstance($hookClassName, $hook);
 
         $this->fixture->notifyOrganizers($registration);
     }
@@ -5088,8 +5075,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         $hook->expects(self::once())->method('modifyOrganizerNotificationEmail')
             ->with(self::anything(), self::isInstanceOf(Tx_Oelib_Template::class));
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClassName] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
+        GeneralUtility::addInstance($hookClassName, $hook);
 
         $this->fixture->notifyOrganizers($registration);
     }
@@ -5966,9 +5953,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends Tx_Phpunit_
         // instance does not exist yet at this point.
         $hook->expects(self::once())->method('seminarRegistrationCreated');
 
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration']
-            [$hookClass] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $plugin = new Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;

@@ -21,7 +21,11 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for PHP 5.5 (#64)
 
 ### Fixed
-- Fix TCA deprecations in TYPO3 8.7 (#82)
+- Adapt the unit tests for hooks and icons to TYPO3 8.7 (#84)
+- Fix TCA deprecations in TYPO3 8.7 (#83)
+- Use typesafe comparisons in the BE module (#82)
+- Replace the deprecated flash message handling (#81)
+- Replace deprecated BE methods (#80)
 - Fix more code inspection warnings (#78)
 - Replace usage of the deprecated issueCommand method (#77)
 - Drop usage of the deprecated extRelPath method (#76)
@@ -48,9 +52,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the incorrect TYPO3 Core license headers (#41)
 
 ### Fixed
-- Use typesafe comparisons in the BE module (#82)
-- Replace the deprecated flash message handling (#81)
-- Replace deprecated BE methods (#80)
 - Fix more PhpStorm code inspection warnings (#62)
 - Update and clean up the TCA (#61)
 - Fix method name casing and static call code warnings (#58)
