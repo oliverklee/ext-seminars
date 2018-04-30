@@ -1,7 +1,6 @@
 <?php
 
-use OliverKlee\Seminars\BackEnd\Module;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use OliverKlee\Seminars\Tests\Unit\BackEnd\Fixtures\DummyModule;
 
 /**
  * Test case.
@@ -11,19 +10,15 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 class Tx_Seminars_Tests_Unit_BackEnd_ModuleTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Module
+     * @var DummyModule
      */
     private $fixture;
 
     protected function setUp()
     {
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
-            self::markTestSkipped('This test is for the old BE module only.');
-        }
-
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
 
-        $this->fixture = new Module();
+        $this->fixture = new DummyModule();
     }
 
     ////////////////////////////////////////////////

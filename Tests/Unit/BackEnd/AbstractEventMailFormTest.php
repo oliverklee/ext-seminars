@@ -4,7 +4,6 @@ use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
 use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
@@ -61,10 +60,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
         $this->mailer = $mailerFactory->getMailer();
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
-
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
-            self::markTestSkipped('This test is for the old BE module only.');
-        }
 
         $this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
         \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);

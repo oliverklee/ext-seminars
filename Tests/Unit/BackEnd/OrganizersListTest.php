@@ -1,11 +1,10 @@
 <?php
 
 use OliverKlee\Seminars\BackEnd\AbstractList;
-use OliverKlee\Seminars\BackEnd\Module;
 use OliverKlee\Seminars\BackEnd\OrganizersList;
+use OliverKlee\Seminars\Tests\Unit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
@@ -31,7 +30,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends \Tx_Phpunit_Test
     private $dummySysFolderPid = 0;
 
     /**
-     * @var Module a dummy BE module
+     * @var DummyModule
      */
     private $backEndModule;
 
@@ -41,13 +40,9 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends \Tx_Phpunit_Test
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
-            self::markTestSkipped('This test is for the old BE module only.');
-        }
-
         $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 
-        $this->backEndModule = new Module();
+        $this->backEndModule = new DummyModule();
         $this->backEndModule->id = $this->dummySysFolderPid;
         $this->backEndModule->setPageData([
             'uid' => $this->dummySysFolderPid,

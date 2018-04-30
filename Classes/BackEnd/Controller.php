@@ -1,13 +1,8 @@
 <?php
+namespace OliverKlee\Seminars\BackEnd;
 
-use OliverKlee\Seminars\BackEnd\CancelEventMailForm;
-use OliverKlee\Seminars\BackEnd\ConfirmEventMailForm;
-use OliverKlee\Seminars\BackEnd\EventsList;
-use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
-use OliverKlee\Seminars\BackEnd\Module;
-use OliverKlee\Seminars\BackEnd\OrganizersList;
-use OliverKlee\Seminars\BackEnd\RegistrationsList;
-use OliverKlee\Seminars\BackEnd\SpeakersList;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
@@ -22,37 +17,30 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Module2 extends Module
+class Controller extends AbstractModule
 {
     /**
-     * @var string
-     */
-    const MODULE_NAME = 'web_txseminarsM2';
-
-    /**
-     * available sub modules
+     * Main module action
      *
-     * @var string[]
-     */
-    protected $availableSubModules = [];
-
-    /**
-     * the ID of the currently selected sub module
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
      *
-     * @var int
+     * @return ResponseInterface
      */
-    protected $subModule = 0;
-
-    /**
-     * Initializes some variables and also starts the initialization of the parent class.
-     *
-     * @return void
-     */
-    public function init()
+    public function mainAction(ServerRequestInterface $request, ResponseInterface $response)
     {
-        parent::init();
-
-        $this->id = (int)$this->id;
+        $GLOBALS['SOBE'] = $this;
+        $this->init();
+        if (GeneralUtility::_GET('csv') !== '1') {
+            $this->init();
+            $this->main();
+        } else {
+            /** @var \Tx_Seminars_Csv_CsvDownloader $csvExporter */
+            $csvExporter = GeneralUtility::makeInstance(\Tx_Seminars_Csv_CsvDownloader::class);
+            $content = $csvExporter->main();
+        }
+        $response->getBody()->write($content);
+        return $response;
     }
 
     /**
@@ -64,9 +52,6 @@ class Tx_Seminars_Module2 extends Module
      */
     public function main()
     {
-        $languageService = $this->getLanguageService();
-        $backEndUser = $this->getBackendUser();
-
         $this->doc = GeneralUtility::makeInstance(DocumentTemplate::class);
 
         $pageRenderer = $this->getPageRenderer();
@@ -86,14 +71,14 @@ class Tx_Seminars_Module2 extends Module
         );
 
         // draw the header
-        $this->content = $this->doc->startPage($languageService->getLL('title'));
-        $this->content .= $this->doc->header($languageService->getLL('title'));
+        $this->content = $this->doc->startPage($this->getLanguageService()->getLL('title'));
+        $this->content .= $this->doc->header($this->getLanguageService()->getLL('title'));
 
         if ($this->id <= 0) {
             /** @var FlashMessage $message */
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
-                $this->getLanguageService()->getLL('message_noPageTypeSelected'),
+                $GLOBALS['LANG']->getLL('message_noPageTypeSelected'),
                 '',
                 FlashMessage::INFO
             );
@@ -104,7 +89,7 @@ class Tx_Seminars_Module2 extends Module
         }
 
         $pageAccess = BackendUtility::readPageAccess($this->id, $this->perms_clause);
-        if (!is_array($pageAccess) && !$backEndUser->user['admin']) {
+        if (!is_array($pageAccess) && !$this->getBackendUser()->user['admin']) {
             echo $this->content . $this->getRenderedFlashMessages() . $this->doc->endPage();
             return;
         }
@@ -113,7 +98,7 @@ class Tx_Seminars_Module2 extends Module
             /** @var FlashMessage $message */
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
-                $this->getLanguageService()->getLL('message_noStaticTemplateFound'),
+                $GLOBALS['LANG']->getLL('message_noStaticTemplateFound'),
                 '',
                 FlashMessage::WARNING
             );
@@ -130,20 +115,20 @@ class Tx_Seminars_Module2 extends Module
 
         // only show the tabs if the back-end user has access to the
         // corresponding tables
-        if ($backEndUser->check('tables_select', 'tx_seminars_seminars')) {
-            $this->availableSubModules[1] = $languageService->getLL('subModuleTitle_events');
+        if ($this->getBackendUser()->check('tables_select', 'tx_seminars_seminars')) {
+            $this->availableSubModules[1] = $this->getLanguageService()->getLL('subModuleTitle_events');
         }
 
-        if ($backEndUser->check('tables_select', 'tx_seminars_attendances')) {
-            $this->availableSubModules[2] = $languageService->getLL('subModuleTitle_registrations');
+        if ($this->getBackendUser()->check('tables_select', 'tx_seminars_attendances')) {
+            $this->availableSubModules[2] = $this->getLanguageService()->getLL('subModuleTitle_registrations');
         }
 
-        if ($backEndUser->check('tables_select', 'tx_seminars_speakers')) {
-            $this->availableSubModules[3] = $languageService->getLL('subModuleTitle_speakers');
+        if ($this->getBackendUser()->check('tables_select', 'tx_seminars_speakers')) {
+            $this->availableSubModules[3] = $this->getLanguageService()->getLL('subModuleTitle_speakers');
         }
 
-        if ($backEndUser->check('tables_select', 'tx_seminars_organizers')) {
-            $this->availableSubModules[4] = $languageService->getLL('subModuleTitle_organizers');
+        if ($this->getBackendUser()->check('tables_select', 'tx_seminars_organizers')) {
+            $this->availableSubModules[4] = $this->getLanguageService()->getLL('subModuleTitle_organizers');
         }
 
         // Read the selected sub module (from the tab menu) and make it available within this class.
@@ -199,11 +184,21 @@ class Tx_Seminars_Module2 extends Module
                     $eventsList = GeneralUtility::makeInstance(EventsList::class, $this);
                     $this->content .= $eventsList->show();
                 }
-                break;
+                // no break
             default:
         }
 
         echo $this->content . $this->doc->endPage();
+    }
+
+    /**
+     * Returns the content.
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 
     /**
@@ -242,11 +237,19 @@ class Tx_Seminars_Module2 extends Module
      */
     private function isGeneralEmailFormRequested()
     {
-        if ((int)GeneralUtility::_POST('eventUid') <= 0) {
+        if ($this->getEventUid() <= 0) {
             return false;
         }
 
         return GeneralUtility::_POST('action') === 'sendEmail';
+    }
+
+    /**
+     * @return int
+     */
+    private function getEventUid()
+    {
+        return (int)GeneralUtility::_POST('eventUid');
     }
 
     /**
@@ -257,7 +260,7 @@ class Tx_Seminars_Module2 extends Module
      */
     private function isConfirmEventFormRequested()
     {
-        if ((int)GeneralUtility::_POST('eventUid') <= 0) {
+        if ($this->getEventUid() <= 0) {
             return false;
         }
 
@@ -273,7 +276,7 @@ class Tx_Seminars_Module2 extends Module
      */
     private function isCancelEventFormRequested()
     {
-        if ((int)GeneralUtility::_POST('eventUid') <= 0) {
+        if ($this->getEventUid() <= 0) {
             return false;
         }
 
@@ -288,10 +291,7 @@ class Tx_Seminars_Module2 extends Module
     private function getGeneralMailForm()
     {
         /** @var GeneralEventMailForm $form */
-        $form = GeneralUtility::makeInstance(
-            GeneralEventMailForm::class,
-            (int)GeneralUtility::_GP('eventUid')
-        );
+        $form = GeneralUtility::makeInstance(GeneralEventMailForm::class, $this->getEventUid());
         $form->setPostData(GeneralUtility::_POST());
 
         return $form->render();
@@ -305,10 +305,7 @@ class Tx_Seminars_Module2 extends Module
     private function getConfirmEventMailForm()
     {
         /** @var ConfirmEventMailForm $form */
-        $form = GeneralUtility::makeInstance(
-            ConfirmEventMailForm::class,
-            (int)GeneralUtility::_GP('eventUid')
-        );
+        $form = GeneralUtility::makeInstance(ConfirmEventMailForm::class, $this->getEventUid());
         $form->setPostData(GeneralUtility::_POST());
 
         return $form->render();
@@ -322,10 +319,7 @@ class Tx_Seminars_Module2 extends Module
     private function getCancelEventMailForm()
     {
         /** @var CancelEventMailForm $form */
-        $form = GeneralUtility::makeInstance(
-            CancelEventMailForm::class,
-            (int)GeneralUtility::_GP('eventUid')
-        );
+        $form = GeneralUtility::makeInstance(CancelEventMailForm::class, $this->getEventUid());
         $form->setPostData(GeneralUtility::_POST());
 
         return $form->render();
@@ -341,28 +335,4 @@ class Tx_Seminars_Module2 extends Module
     {
         return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsBoolean('isStaticTemplateLoaded');
     }
-}
-
-// This checks permissions and exits if the users has no permission for entry.
-$GLOBALS['BE_USER']->modAccess($GLOBALS['MCONF'], true);
-
-if (GeneralUtility::_GET('csv') !== '1') {
-    /** @var \TYPO3\CMS\Lang\LanguageService $languageService */
-    $languageService = $GLOBALS['LANG'];
-
-    $languageService->includeLLFile('EXT:lang/locallang_common.xlf');
-    $languageService->includeLLFile('EXT:lang/locallang_show_rechis.xlf');
-    $languageService->includeLLFile('EXT:lang/locallang_mod_web_list.xlf');
-    $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
-    $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/Csv/locallang.xlf');
-
-    /** @var \Tx_Seminars_Module2 $SOBE */
-    $SOBE = GeneralUtility::makeInstance(\Tx_Seminars_Module2::class);
-    $SOBE->init();
-
-    $SOBE->main();
-} else {
-    /** @var \Tx_Seminars_Csv_CsvDownloader $csvExporter */
-    $csvExporter = GeneralUtility::makeInstance(\Tx_Seminars_Csv_CsvDownloader::class);
-    echo $csvExporter->main();
 }

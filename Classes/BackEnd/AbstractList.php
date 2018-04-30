@@ -20,7 +20,7 @@ abstract class AbstractList
     /**
      * @var string
      */
-    const MODULE_NAME = 'web_txseminarsM2';
+    const MODULE_NAME = 'web_seminars';
 
     /**
      * @var string the name of the table we're working on
@@ -28,7 +28,7 @@ abstract class AbstractList
     protected $tableName = '';
 
     /**
-     * @var Module the back-end module
+     * @var AbstractModule
      */
     protected $page = null;
 
@@ -60,9 +60,9 @@ abstract class AbstractList
     /**
      * The constructor. Sets the table name and the back-end page object.
      *
-     * @param Module $module the current back-end module
+     * @param AbstractModule $module the current back-end module
      */
-    public function __construct(Module $module)
+    public function __construct(AbstractModule $module)
     {
         $this->page = $module;
 
