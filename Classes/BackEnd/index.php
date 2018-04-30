@@ -57,7 +57,7 @@ class Tx_Seminars_Module2 extends Tx_Seminars_BackEnd_Module
     public function main()
     {
         $languageService = $this->getLanguageService();
-        $backEndUser = $this->getBackEndUser();
+        $backEndUser = $this->getBackendUser();
 
         $this->doc = GeneralUtility::makeInstance(DocumentTemplate::class);
 

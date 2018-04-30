@@ -287,37 +287,26 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     }
 
     /**
-     * Returns all error messages set via setErrorMessage for the given field
-     * name.
+     * Returns all error messages set via setErrorMessage for the given field name.
      *
      * @param string $fieldName
      *        the field name for which the error message should be returned,
      *        must not be empty
      *
-     * @return string the error message for the field, will be empty if there's no error message for this field
+     * @return string HTML with error message for the field, will be empty if there's no error message for this field
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function getErrorMessage($fieldName)
     {
-        if ($fieldName == '') {
-            throw new InvalidArgumentException('$fieldName must not be empty.', 1333292174);
+        if ($fieldName === '') {
+            throw new \InvalidArgumentException('$fieldName must not be empty.', 1333292174);
+        }
+        if (!$this->hasErrorMessage($fieldName)) {
+            return '';
         }
 
-        $result = '';
-
-        if ($this->hasErrorMessage($fieldName)) {
-            /** @var FlashMessage $message */
-            $message = GeneralUtility::makeInstance(
-                FlashMessage::class,
-                $this->errorMessages[$fieldName],
-                '',
-                FlashMessage::WARNING
-            );
-            $result = $message->render();
-        }
-
-        return $result;
+        return '<p>' . htmlspecialchars($this->errorMessages[$fieldName]) . '</p>';
     }
 
     /**
