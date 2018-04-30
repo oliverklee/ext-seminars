@@ -1,4 +1,5 @@
 <?php
+namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -13,7 +14,7 @@ use TYPO3\CMS\Lang\LanguageService;
  * @author Mario Rimann <mario@screenteam.com>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
+abstract class AbstractEventMailForm
 {
     /**
      * @var string

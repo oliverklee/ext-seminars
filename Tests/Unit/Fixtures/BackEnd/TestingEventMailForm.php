@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
+
 /**
  * This class represents a testing implementation of the AbstractEventMailForm class.
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm extends \Tx_Seminars_BackEnd_AbstractEventMailForm
+class Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm extends AbstractEventMailForm
 {
     /**
      * the prefix for all locallang keys for prefilling the form, must not be empty

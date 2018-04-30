@@ -1,4 +1,5 @@
 <?php
+namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -8,7 +9,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_BackEnd_RegistrationsList extends \Tx_Seminars_BackEnd_AbstractList
+class RegistrationsList extends AbstractList
 {
     /**
      * @var string the name of the table we're working on
@@ -129,8 +130,8 @@ class Tx_Seminars_BackEnd_RegistrationsList extends \Tx_Seminars_BackEnd_Abstrac
      * @param int $registrationsToShow
      *        the switch to decide which registrations should be shown, must
      *        be either
-     *        \Tx_Seminars_BackEnd_RegistrationsList::REGISTRATIONS_ON_QUEUE or
-     *        \Tx_Seminars_BackEnd_RegistrationsList::REGULAR_REGISTRATIONS
+     *        RegistrationsList::REGISTRATIONS_ON_QUEUE or
+     *        RegistrationsList::REGULAR_REGISTRATIONS
      *
      * @return bool TRUE if the generated list is not empty, FALSE otherwise
      */

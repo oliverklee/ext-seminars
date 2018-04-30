@@ -1,4 +1,5 @@
 <?php
+namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -11,7 +12,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_BackEnd_EventsList extends \Tx_Seminars_BackEnd_AbstractList
+class EventsList extends AbstractList
 {
     /**
      * @var string the name of the table we're working on

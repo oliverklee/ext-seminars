@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
 use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
@@ -14,7 +15,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
     use BackEndTestsTrait;
 
     /**
-     * @var \Tx_Seminars_BackEnd_GeneralEventMailForm
+     * @var GeneralEventMailForm
      */
     private $fixture;
 
@@ -90,7 +91,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
             'organizers'
         );
 
-        $this->fixture = new \Tx_Seminars_BackEnd_GeneralEventMailForm($this->eventUid);
+        $this->fixture = new GeneralEventMailForm($this->eventUid);
     }
 
     protected function tearDown()

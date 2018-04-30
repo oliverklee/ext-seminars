@@ -1,4 +1,5 @@
 <?php
+namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Backend\Module\BaseScriptClass;
 
@@ -7,7 +8,7 @@ use TYPO3\CMS\Backend\Module\BaseScriptClass;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_BackEnd_Module extends BaseScriptClass
+class Module extends BaseScriptClass
 {
     /**
      * data of the current BE page
