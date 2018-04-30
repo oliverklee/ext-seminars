@@ -13,6 +13,7 @@ env:
   - TYPO3_PATH_ROOT=$PWD/.Build/public
   matrix:
   - TYPO3_VERSION="^7.6" RUN_TESTS_COMMAND=".Build/public/typo3/cli_dispatch.phpsh phpunit"
+  - TYPO3_VERSION="^8.7" RUN_TESTS_COMMAND=".Build/vendor/bin/typo3 phpunit:run"
 
 matrix:
   exclude:
