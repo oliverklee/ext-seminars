@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the class alias map (#73)
 - Require TYPO3 7.6 and drop support for TYPO3 6.2 (#67)
 - Drop support for PHP 5.5 (#64)
 
