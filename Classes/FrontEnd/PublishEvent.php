@@ -7,7 +7,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_FrontEnd_PublishEvent extends Tx_Oelib_TemplateHelper
+class Tx_Seminars_FrontEnd_PublishEvent extends \Tx_Oelib_TemplateHelper
 {
     /**
      * @var int
@@ -40,9 +40,9 @@ class Tx_Seminars_FrontEnd_PublishEvent extends Tx_Oelib_TemplateHelper
             return $this->translate('message_publishingFailed');
         }
 
-        /** @var Tx_Seminars_Mapper_Event $eventMapper */
-        $eventMapper = GeneralUtility::makeInstance(Tx_Seminars_Mapper_Event::class);
-        /** @var Tx_Seminars_Model_Event $event */
+        /** @var \Tx_Seminars_Mapper_Event $eventMapper */
+        $eventMapper = GeneralUtility::makeInstance(\Tx_Seminars_Mapper_Event::class);
+        /** @var \Tx_Seminars_Model_Event $event */
         $event = $eventMapper->findByPublicationHash($this->piVars['hash']);
 
         if (($event !== null) && $event->isHidden()) {

@@ -10,7 +10,7 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpunit_TestCase
 {
     use BackEndTestsTrait;
 
@@ -20,7 +20,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     private $fixture;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
@@ -46,7 +46,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     private $eventUid;
 
     /**
-     * @var Tx_Oelib_EmailCollector
+     * @var \Tx_Oelib_EmailCollector
      */
     protected $mailer = null;
 
@@ -54,19 +54,19 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
     {
         $this->unifyTestingEnvironment();
 
-        /** @var Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
+        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $mailerFactory->enableTestMode();
         $this->mailer = $mailerFactory->getMailer();
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
             self::markTestSkipped('This test is for the old BE module only.');
         }
 
         $this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
-        Tx_Oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
+        \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
 
         $this->organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -116,7 +116,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             'There is no event with this UID.'
         );
 
-        new Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm(
+        new \Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm(
             $this->testingFramework->getAutoIncrement('tx_seminars_seminars')
         );
     }
@@ -130,7 +130,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
      */
     public function formActionContainsCurrentPage()
     {
-        Tx_Oelib_PageFinder::getInstance()->setPageUid(42);
+        \Tx_Oelib_PageFinder::getInstance()->setPageUid(42);
 
         self::assertContains(
             '&amp;id=42',
@@ -500,7 +500,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
      */
     public function sendEmailToAttendeesUsesFirstOrganizerAsSender()
     {
-        Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel(
+        \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel(
                 [
                 'title' => 'Second Organizer',
                 'email' => 'bar@example.org',
@@ -597,7 +597,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
         );
 
         $organizerFooter = 'organizer footer';
-        Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel(
+        \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel(
                 [
                 'title' => 'Second Organizer',
                 'email' => 'bar@example.org',
@@ -730,8 +730,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
 
         self::assertSame(
             'Location: ' . BackendUtility::getModuleUrl(
-                Tx_Seminars_BackEnd_AbstractEventMailForm::MODULE_NAME,
-                ['id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()],
+                \Tx_Seminars_BackEnd_AbstractEventMailForm::MODULE_NAME,
+                ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()],
                 false,
                 true
             ),
@@ -754,7 +754,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends Tx_Phpuni
             ['title' => 'FooBar']
         );
 
-        $fixture = new Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm(
+        $fixture = new \Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm(
             $this->eventUid
         );
 

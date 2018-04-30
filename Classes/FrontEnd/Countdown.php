@@ -8,26 +8,26 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Mario Rimann <typo3-coding@rimann.org>
  */
-class Tx_Seminars_FrontEnd_Countdown extends Tx_Seminars_FrontEnd_AbstractView
+class Tx_Seminars_FrontEnd_Countdown extends \Tx_Seminars_FrontEnd_AbstractView
 {
     /**
-     * @var Tx_Seminars_Mapper_Event
+     * @var \Tx_Seminars_Mapper_Event
      */
     protected $mapper = null;
 
     /**
-     * @var Tx_Seminars_ViewHelper_Countdown
+     * @var \Tx_Seminars_ViewHelper_Countdown
      */
     protected $viewHelper = null;
 
     /**
      * Injects an Event Mapper for this View.
      *
-     * @param Tx_Seminars_Mapper_Event $mapper
+     * @param \Tx_Seminars_Mapper_Event $mapper
      *
      * @return void
      */
-    public function injectEventMapper(Tx_Seminars_Mapper_Event $mapper)
+    public function injectEventMapper(\Tx_Seminars_Mapper_Event $mapper)
     {
         $this->mapper = $mapper;
     }
@@ -35,11 +35,11 @@ class Tx_Seminars_FrontEnd_Countdown extends Tx_Seminars_FrontEnd_AbstractView
     /**
      * Injects an Countdown View Helper.
      *
-     * @param Tx_Seminars_ViewHelper_Countdown $viewHelper
+     * @param \Tx_Seminars_ViewHelper_Countdown $viewHelper
      *
      * @return void
      */
-    public function injectCountDownViewHelper(Tx_Seminars_ViewHelper_Countdown $viewHelper)
+    public function injectCountDownViewHelper(\Tx_Seminars_ViewHelper_Countdown $viewHelper)
     {
         $this->viewHelper = $viewHelper;
     }
@@ -52,22 +52,22 @@ class Tx_Seminars_FrontEnd_Countdown extends Tx_Seminars_FrontEnd_AbstractView
     public function render()
     {
         if ($this->mapper === null) {
-            throw new BadMethodCallException('The method injectEventMapper() needs to be called first.', 1333617194);
+            throw new \BadMethodCallException('The method injectEventMapper() needs to be called first.', 1333617194);
         }
         if ($this->viewHelper === null) {
-            /** @var Tx_Seminars_ViewHelper_Countdown $viewHelper */
-            $viewHelper = GeneralUtility::makeInstance(Tx_Seminars_ViewHelper_Countdown::class);
+            /** @var \Tx_Seminars_ViewHelper_Countdown $viewHelper */
+            $viewHelper = GeneralUtility::makeInstance(\Tx_Seminars_ViewHelper_Countdown::class);
             $this->injectCountDownViewHelper($viewHelper);
         }
 
         $this->setErrorMessage($this->checkConfiguration(true));
 
         try {
-            /** @var Tx_Seminars_Model_Event $event */
+            /** @var \Tx_Seminars_Model_Event $event */
             $event = $this->mapper->findNextUpcoming();
 
             $message = $this->viewHelper->render($event->getBeginDateAsUnixTimeStamp());
-        } catch (Tx_Oelib_Exception_NotFound $exception) {
+        } catch (\Tx_Oelib_Exception_NotFound $exception) {
             $message = $this->translate('message_countdown_noEventFound');
         }
 

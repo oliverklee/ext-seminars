@@ -5,21 +5,21 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot
+     * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot
      */
     private $fixture = null;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework = null;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -33,7 +33,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot($fixtureUid);
+        $this->fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot($fixtureUid);
     }
 
     protected function tearDown()

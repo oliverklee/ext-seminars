@@ -6,12 +6,12 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_BagBuilder_Category extends Tx_Seminars_BagBuilder_Abstract
+class Tx_Seminars_BagBuilder_Category extends \Tx_Seminars_BagBuilder_Abstract
 {
     /**
      * @var string class name of the bag class that will be built
      */
-    protected $bagClassName = Tx_Seminars_Bag_Category::class;
+    protected $bagClassName = \Tx_Seminars_Bag_Category::class;
 
     /**
      * @var string the table name of the bag to build
@@ -52,7 +52,7 @@ class Tx_Seminars_BagBuilder_Category extends Tx_Seminars_BagBuilder_Abstract
         if (!preg_match('/^(\\d+,)*\\d+$/', $eventUids)
             || preg_match('/(^|,)0+(,|$)/', $eventUids)
         ) {
-            throw new InvalidArgumentException('$eventUids must be a comma-separated list of positive integers.', 1333292640);
+            throw new \InvalidArgumentException('$eventUids must be a comma-separated list of positive integers.', 1333292640);
         }
 
         $this->whereClauseParts['event'] = 'EXISTS (' .
@@ -77,7 +77,7 @@ class Tx_Seminars_BagBuilder_Category extends Tx_Seminars_BagBuilder_Abstract
     public function sortByRelationOrder()
     {
         if ($this->eventUids == '') {
-            throw new BadMethodCallException(
+            throw new \BadMethodCallException(
                 'The event UIDs were empty. This means limitToEvents has not been called. LimitToEvents has to be called ' .
                     'before calling this function.',
                 1333292662

@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add support for PHP 7.1 and 7.2 (#70)
 
 ### Changed
+- Always use a leading slash for fully-qualified class names (#88)
 - Skip the tests for the old BE module in TYPO3 >= 8.7 (#75)
 - Also allow oelib 3.x (#72)
 - Require oelib >= 2.0.0 (#69)

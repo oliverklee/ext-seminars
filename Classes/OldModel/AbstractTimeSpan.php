@@ -6,10 +6,10 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends Tx_Seminars_OldModel_Abstract
+abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldModel_Abstract
 {
     /** @var string same as class name */
-    public $prefixId = Tx_Seminars_OldModel_AbstractTimeSpan::class;
+    public $prefixId = \Tx_Seminars_OldModel_AbstractTimeSpan::class;
 
     /**
      * Gets the begin date.

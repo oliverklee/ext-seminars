@@ -6,14 +6,14 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_BagBuilder_Registration
+     * @var \Tx_Seminars_BagBuilder_Registration
      */
     private $fixture;
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
@@ -21,9 +21,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new Tx_Seminars_BagBuilder_Registration();
+        $this->fixture = new \Tx_Seminars_BagBuilder_Registration();
         $this->fixture->setTestMode();
     }
 
@@ -31,7 +31,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->cleanUp();
 
-        Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
     ///////////////////////////////////////////
@@ -40,14 +40,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
 
     public function testBagBuilderBuildsARegistrationBag()
     {
-        self::assertInstanceOf(Tx_Seminars_Bag_Registration::class, $this->fixture->build());
+        self::assertInstanceOf(\Tx_Seminars_Bag_Registration::class, $this->fixture->build());
     }
 
     public function testBuildReturnsBagWhichIsSortedAscendingByCrDate()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['title' => 'Title 2', 'crdate' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY]
+            ['title' => 'Title 2', 'crdate' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -438,8 +438,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
             ['seminar' => $eventUid, 'user' => $feUserUid]
         );
 
-        /** @var Tx_Seminars_Model_FrontEndUser $user */
-        $user = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
+        /** @var \Tx_Seminars_Model_FrontEndUser $user */
+        $user = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
         $this->fixture->limitToAttendee($user);
         $bag = $this->fixture->build();
 
@@ -466,8 +466,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
             ['tx_seminars_registration' => $registrationUid]
         );
 
-        /** @var Tx_Seminars_Model_FrontEndUser $user */
-        $user = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
+        /** @var \Tx_Seminars_Model_FrontEndUser $user */
+        $user = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
         $this->fixture->limitToAttendee($user);
         $bag = $this->fixture->build();
 
@@ -485,8 +485,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        /** @var Tx_Seminars_Model_FrontEndUser $user */
-        $user = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
+        /** @var \Tx_Seminars_Model_FrontEndUser $user */
+        $user = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
         $this->fixture->limitToAttendee($user);
         $bag = $this->fixture->build();
 
@@ -509,8 +509,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
             ['seminar' => $eventUid, 'user' => $feUserUid2]
         );
 
-        /** @var Tx_Seminars_Model_FrontEndUser $user */
-        $user = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
+        /** @var \Tx_Seminars_Model_FrontEndUser $user */
+        $user = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
         $this->fixture->limitToAttendee($user);
         $bag = $this->fixture->build();
 
@@ -533,8 +533,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
             ['seminar' => $eventUid, 'user' => $feUserUid2]
         );
 
-        /** @var Tx_Seminars_Model_FrontEndUser $user */
-        $user = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
+        /** @var \Tx_Seminars_Model_FrontEndUser $user */
+        $user = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
         $this->fixture->limitToAttendee($user);
         $this->fixture->limitToAttendee();
         $bag = $this->fixture->build();

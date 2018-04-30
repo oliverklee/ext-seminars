@@ -5,16 +5,16 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Model_Event
+     * @var \Tx_Seminars_Model_Event
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->fixture = new Tx_Seminars_Model_Event();
+        $this->fixture = new \Tx_Seminars_Model_Event();
     }
 
     //////////////////////////////////
@@ -27,7 +27,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function getSubtitleForSingleEventWithoutSubtitleReturnsAnEmptyString()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
@@ -43,7 +43,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'subtitle' => 'sub title',
             ]
         );
@@ -60,7 +60,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setSubtitleForSingleEventSetsSubtitle()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setSubtitle('sub title');
 
@@ -76,7 +76,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasSubtitleForSingleEventWithoutSubtitleReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
@@ -90,7 +90,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasSubtitleForSingleEventWithSubtitleReturnsTrue()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->fixture->setSubtitle('sub title');
 
@@ -109,7 +109,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function getTeaserForSingleEventWithoutTeaserReturnsAnEmptyString()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
@@ -126,7 +126,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
         $this->fixture->setData(
             [
                 'teaser' => 'wow, this is teasing',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
 
@@ -142,7 +142,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setTeaserForSingleEventSetsTeaser()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setTeaser('wow, this is teasing');
 
@@ -158,7 +158,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasTeaserForSingleEventWithoutTeaserReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -173,7 +173,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'teaser' => 'wow, this is teasing',
             ]
         );
@@ -193,7 +193,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function getDescriptionForSingleEventWithoutDescriptionReturnsAnEmptyString()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
@@ -209,7 +209,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'description' => 'this is a great event.',
             ]
         );
@@ -226,7 +226,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setDescriptionForSingleEventSetsDescription()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setDescription('this is a great event.');
 
@@ -242,7 +242,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasDescriptionForSingleEventWithoutDescriptionReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -257,7 +257,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'description' => 'this is a great event.',
             ]
         );
@@ -277,7 +277,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function getCreditPointsForSingleEventWithoutCreditPointsReturnsZero()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
@@ -293,7 +293,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'credit_points' => 42,
             ]
         );
@@ -324,7 +324,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setCreditPointsForSingleEventWithZeroCreditPointsSetsCreditPoints()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setCreditPoints(0);
 
@@ -340,7 +340,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setCreditPointsForSingleEventWithPositiveCreditPointsSetsCreditPoints()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setCreditPoints(42);
 
@@ -356,7 +356,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasCreditPointsForSingleEventWithoutCreditPointsReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -371,7 +371,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'credit_points' => 42,
             ]
         );
@@ -392,7 +392,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'price_regular' => 0.00,
             ]
         );
@@ -410,7 +410,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'price_regular' => 42.42,
             ]
         );
@@ -440,7 +440,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setRegularPriceForSingleEventWithZeroRegularPriceSetsRegularPrice()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setRegularPrice(0.00);
 
@@ -456,7 +456,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setRegularPriceForSingleEventWithPositiveRegularPriceSetsRegularPrice()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setRegularPrice(42.42);
 
@@ -472,7 +472,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasRegularPriceForSingleEventWithoutRegularPriceReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -487,7 +487,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'price_regular' => 42.42,
             ]
         );
@@ -507,7 +507,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function getRegularEarlyBirdPriceForSingleEventWithoutRegularEarlyBirdPriceReturnsZero()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
@@ -523,7 +523,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'price_regular_early' => 42.42,
             ]
         );
@@ -553,7 +553,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setRegularEarlyBirdPriceForSingleEventWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setRegularEarlyBirdPrice(0.00);
 
@@ -569,7 +569,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setRegularEarlyBirdPriceForSingleEventWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setRegularEarlyBirdPrice(42.42);
 
@@ -585,7 +585,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasRegularEarlyBirdPriceForSingleEventWithoutRegularEarlyBirdPriceReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -600,7 +600,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'price_regular_early' => 42.42,
             ]
         );
@@ -620,7 +620,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function getRegularBoardPriceForSingleEventWithoutRegularBoardPriceReturnsZero()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
@@ -636,7 +636,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'price_regular_board' => 42.42,
             ]
         );
@@ -666,7 +666,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setRegularBoardPriceForSingleEventWithZeroRegularBoardPriceSetsRegularBoardPrice()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setRegularBoardPrice(0.00);
 
@@ -682,7 +682,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setRegularBoardPriceForSingleEventWithPositiveRegularBoardPriceSetsRegularBoardPrice()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setRegularBoardPrice(42.42);
 
@@ -698,7 +698,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasRegularBoardPriceForSingleEventWithoutRegularBoardPriceReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -713,7 +713,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'price_regular_board' => 42.42,
             ]
         );
@@ -733,7 +733,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function getSpecialPriceForSingleEventWithoutSpecialPriceReturnsZero()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
@@ -749,7 +749,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'price_special' => 42.42,
             ]
         );
@@ -779,7 +779,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setSpecialPriceForSingleEventWithZeroSpecialPriceSetsSpecialPrice()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setSpecialPrice(0.00);
 
@@ -795,7 +795,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setSpecialPriceForSingleEventWithPositiveSpecialPriceSetsSpecialPrice()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setSpecialPrice(42.42);
 
@@ -811,7 +811,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasSpecialPriceForSingleEventWithoutSpecialPriceReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -825,7 +825,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasSpecialPriceForSingleEventWithSpecialPriceReturnsTrue()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setSpecialPrice(42.42);
 
@@ -844,7 +844,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function getSpecialEarlyBirdPriceForSingleEventWithoutSpecialEarlyBirdPriceReturnsZero()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
@@ -860,7 +860,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'price_special_early' => 42.42,
             ]
         );
@@ -890,7 +890,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setSpecialEarlyBirdPriceForSingleEventWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setSpecialEarlyBirdPrice(0.00);
 
@@ -906,7 +906,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setSpecialEarlyBirdPriceForSingleEventWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setSpecialEarlyBirdPrice(42.42);
 
@@ -922,7 +922,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasSpecialEarlyBirdPriceForSingleEventWithoutSpecialEarlyBirdPriceReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -937,7 +937,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'price_special_early' => 42.42,
             ]
         );
@@ -957,7 +957,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function getSpecialBoardPriceForSingleEventWithoutSpecialBoardPriceReturnsZero()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
@@ -973,7 +973,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'price_special_board' => 42.42,
             ]
         );
@@ -1003,7 +1003,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setSpecialBoardPriceForSingleEventWithZeroSpecialBoardPriceSetsSpecialBoardPrice()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setSpecialBoardPrice(0.00);
 
@@ -1019,7 +1019,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setSpecialBoardPriceForSingleEventWithPositiveSpecialBoardPriceSetsSpecialBoardPrice()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setSpecialBoardPrice(42.42);
 
@@ -1035,7 +1035,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasSpecialBoardPriceForSingleEventWithoutSpecialBoardPriceReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -1049,7 +1049,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasSpecialBoardPriceForSingleEventWithSpecialBoardPriceReturnsTrue()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setSpecialBoardPrice(42.42);
 
@@ -1068,7 +1068,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function getAdditionalInformationForSingleEventWithoutAdditionalInformationReturnsEmptyString()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
@@ -1084,7 +1084,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'additional_information' => 'this is good to know',
             ]
         );
@@ -1101,7 +1101,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setAdditionalInformationForSingleEventSetsAdditionalInformation()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setAdditionalInformation('this is good to know');
 
@@ -1117,7 +1117,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasAdditionalInformationForSingleEventWithoutAdditionalInformationReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -1132,7 +1132,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'additional_information' => 'this is good to know',
             ]
         );
@@ -1152,7 +1152,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function allowsMultipleRegistrationForSingleEventWithUnsetAllowsMultipleRegistrationReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -1167,7 +1167,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'allows_multiple_registrations' => true,
             ]
         );
@@ -1187,7 +1187,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function usesTerms2ForSingleEventWithUnsetUseTerms2ReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -1202,7 +1202,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'use_terms_2' => true,
             ]
         );
@@ -1222,7 +1222,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function getNotesForSingleEventWithoutNotesReturnsEmptyString()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
@@ -1238,7 +1238,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'notes' => 'Don\'t forget this.',
             ]
         );
@@ -1255,7 +1255,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setNotesForSingleEventSetsNotes()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setNotes('Don\'t forget this.');
 
@@ -1271,7 +1271,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasNotesForSingleEventWithoutNotesReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -1286,7 +1286,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'notes' => 'Don\'t forget this.',
             ]
         );
@@ -1306,7 +1306,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function getImageForSingleEventWithoutImageReturnsEmptyString()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
@@ -1322,7 +1322,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'image' => 'file.jpg',
             ]
         );
@@ -1339,7 +1339,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function setImageForSingleEventSetsImage()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->setImage('file.jpg');
 
@@ -1355,7 +1355,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     public function hasImageForSingleEventWithoutImageReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -1370,7 +1370,7 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'image' => 'file.jpg',
             ]
         );

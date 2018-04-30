@@ -7,7 +7,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Bag_Event extends Tx_Seminars_Bag_Abstract
+class Tx_Seminars_Bag_Event extends \Tx_Seminars_Bag_Abstract
 {
     /**
      * The constructor. Creates a bag that contains test records and allows to iterate over them.
@@ -62,7 +62,7 @@ class Tx_Seminars_Bag_Event extends Tx_Seminars_Bag_Abstract
     protected function createItemFromDbResult()
     {
         $this->currentItem = GeneralUtility::makeInstance(
-            Tx_Seminars_OldModel_Event::class,
+            \Tx_Seminars_OldModel_Event::class,
             0,
             $this->dbResult
         );

@@ -5,7 +5,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Mapper_TimeSlot extends Tx_Oelib_DataMapper
+class Tx_Seminars_Mapper_TimeSlot extends \Tx_Oelib_DataMapper
 {
     /**
      * @var string the name of the database table for this mapper
@@ -15,14 +15,14 @@ class Tx_Seminars_Mapper_TimeSlot extends Tx_Oelib_DataMapper
     /**
      * @var string the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = Tx_Seminars_Model_TimeSlot::class;
+    protected $modelClassName = \Tx_Seminars_Model_TimeSlot::class;
 
     /**
      * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
-        'speakers' => Tx_Seminars_Mapper_Speaker::class,
-        'place' => Tx_Seminars_Mapper_Place::class,
-        'seminar' => Tx_Seminars_Mapper_Event::class,
+        'speakers' => \Tx_Seminars_Mapper_Speaker::class,
+        'place' => \Tx_Seminars_Mapper_Place::class,
+        'seminar' => \Tx_Seminars_Mapper_Event::class,
     ];
 }

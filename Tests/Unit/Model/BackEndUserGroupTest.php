@@ -5,16 +5,16 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_BackEndUserGroupTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_BackEndUserGroupTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Model_BackEndUserGroup
+     * @var \Tx_Seminars_Model_BackEndUserGroup
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->fixture = new Tx_Seminars_Model_BackEndUserGroup();
+        $this->fixture = new \Tx_Seminars_Model_BackEndUserGroup();
     }
 
     ////////////////////////////////

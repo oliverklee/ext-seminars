@@ -8,7 +8,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_BackEnd_OrganizersList extends Tx_Seminars_BackEnd_AbstractList
+class Tx_Seminars_BackEnd_OrganizersList extends \Tx_Seminars_BackEnd_AbstractList
 {
     /**
      * @var string the name of the table we're working on
@@ -16,7 +16,7 @@ class Tx_Seminars_BackEnd_OrganizersList extends Tx_Seminars_BackEnd_AbstractLis
     protected $tableName = 'tx_seminars_organizers';
 
     /**
-     * @var Tx_Seminars_OldModel_Organizer the organizer which we want to list
+     * @var \Tx_Seminars_OldModel_Organizer the organizer which we want to list
      */
     private $organizer = null;
 
@@ -46,8 +46,8 @@ class Tx_Seminars_BackEnd_OrganizersList extends Tx_Seminars_BackEnd_AbstractLis
             $this->getLanguageService()->getLL('organizerlist.title')
         );
 
-        /** @var Tx_Seminars_BagBuilder_Organizer $builder */
-        $builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Organizer::class);
+        /** @var \Tx_Seminars_BagBuilder_Organizer $builder */
+        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Organizer::class);
 
         $builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
 

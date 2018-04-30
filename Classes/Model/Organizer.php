@@ -5,7 +5,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Model_Organizer extends Tx_Oelib_Model implements Tx_Oelib_Interface_MailRole, Tx_Seminars_Interface_Titled
+class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_Interface_MailRole, \Tx_Seminars_Interface_Titled
 {
     /**
      * Returns our name.
@@ -27,7 +27,7 @@ class Tx_Seminars_Model_Organizer extends Tx_Oelib_Model implements Tx_Oelib_Int
     public function setName($name)
     {
         if ($name == '') {
-            throw new InvalidArgumentException('The parameter $name must not be empty.', 1333296852);
+            throw new \InvalidArgumentException('The parameter $name must not be empty.', 1333296852);
         }
 
         $this->setAsString('title', $name);
@@ -85,7 +85,7 @@ class Tx_Seminars_Model_Organizer extends Tx_Oelib_Model implements Tx_Oelib_Int
     public function setEMailAddress($eMailAddress)
     {
         if ($eMailAddress == '') {
-            throw new InvalidArgumentException('The parameter $eMailAddress must not be empty.', 1333296861);
+            throw new \InvalidArgumentException('The parameter $eMailAddress must not be empty.', 1333296861);
         }
 
         $this->setAsString('email', $eMailAddress);
@@ -143,7 +143,7 @@ class Tx_Seminars_Model_Organizer extends Tx_Oelib_Model implements Tx_Oelib_Int
     public function setAttendancesPID($attendancesPID)
     {
         if ($attendancesPID < 0) {
-            throw new InvalidArgumentException('The parameter $attendancesPID must not be < 0.', 1333296869);
+            throw new \InvalidArgumentException('The parameter $attendancesPID must not be < 0.', 1333296869);
         }
 
         $this->setAsInteger('attendances_pid', $attendancesPID);

@@ -5,23 +5,23 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_FrontEnd_Editor
+     * @var \Tx_Seminars_FrontEnd_Editor
      */
     private $fixture;
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        $this->fixture = new Tx_Seminars_FrontEnd_Editor([], $GLOBALS['TSFE']->cObj);
+        $this->fixture = new \Tx_Seminars_FrontEnd_Editor([], $GLOBALS['TSFE']->cObj);
         $this->fixture->setTestMode();
     }
 
@@ -29,7 +29,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->cleanUp();
 
-        Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
     //////////////////////////////
@@ -45,7 +45,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends Tx_Phpunit_TestCase
 
     public function testIsTestModeReturnsFalseForTestModeDisabled()
     {
-        $fixture = new Tx_Seminars_FrontEnd_Editor([], $GLOBALS['TSFE']->cObj);
+        $fixture = new \Tx_Seminars_FrontEnd_Editor([], $GLOBALS['TSFE']->cObj);
 
         self::assertFalse(
             $fixture->isTestMode()

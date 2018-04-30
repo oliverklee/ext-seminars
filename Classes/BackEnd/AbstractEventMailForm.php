@@ -21,12 +21,12 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     const MODULE_NAME = 'web_txseminarsM2';
 
     /**
-     * @var Tx_Seminars_OldModel_Event the event which this e-mail form refers to
+     * @var \Tx_Seminars_OldModel_Event the event which this e-mail form refers to
      */
     private $oldEvent = null;
 
     /**
-     * @var Tx_Seminars_Model_Event the event which this e-mail form refers to
+     * @var \Tx_Seminars_Model_Event the event which this e-mail form refers to
      */
     private $event = null;
 
@@ -75,23 +75,23 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      *
      * @param int $eventUid UID of an event, must be > 0
      *
-     * @throws InvalidArgumentException
-     * @throws Tx_Oelib_Exception_NotFound if event could not be instantiated
+     * @throws \InvalidArgumentException
+     * @throws \Tx_Oelib_Exception_NotFound if event could not be instantiated
      */
     public function __construct($eventUid)
     {
         if ($eventUid <= 0) {
-            throw new InvalidArgumentException('$eventUid must be > 0.');
+            throw new \InvalidArgumentException('$eventUid must be > 0.');
         }
 
-        $this->oldEvent = GeneralUtility::makeInstance(Tx_Seminars_OldModel_Event::class, $eventUid);
+        $this->oldEvent = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $eventUid);
 
         if (!$this->oldEvent->isOk()) {
-            throw new Tx_Oelib_Exception_NotFound('There is no event with this UID.', 1333292164);
+            throw new \Tx_Oelib_Exception_NotFound('There is no event with this UID.', 1333292164);
         }
 
-        /** @var Tx_Seminars_Mapper_Event $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
+        /** @var \Tx_Seminars_Mapper_Event $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $this->event = $mapper->find($eventUid);
     }
 
@@ -134,7 +134,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
 
         $formAction = BackendUtility::getModuleUrl(
             self::MODULE_NAME,
-            ['id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()]
+            ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()]
         );
 
         return '<fieldset id="EventMailForm"><form action="' . htmlspecialchars($formAction) . '" method="post">' .
@@ -269,7 +269,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     /**
      * Returns the event object.
      *
-     * @return Tx_Seminars_OldModel_Event the event object
+     * @return \Tx_Seminars_OldModel_Event the event object
      */
     protected function getOldEvent()
     {
@@ -279,7 +279,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     /**
      * Returns the event this e-mail form refers to.
      *
-     * @return Tx_Seminars_Model_Event the event
+     * @return \Tx_Seminars_Model_Event the event
      */
     protected function getEvent()
     {
@@ -367,12 +367,12 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      *
      * @return bool TRUE if the stored POST data contains an entry, FALSE otherwise
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function hasPostData($key)
     {
         if ($key === '') {
-            throw new InvalidArgumentException('$key must not be empty.', 1333292184);
+            throw new \InvalidArgumentException('$key must not be empty.', 1333292184);
         }
 
         return isset($this->postData[$key]);
@@ -387,28 +387,28 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     {
         $organizer = $this->getEvent()->getFirstOrganizer();
 
-        /** @var Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
-        $registrationBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
+        /** @var \Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
+        $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
         $registrationBagBuilder->limitToEvent($this->getEvent()->getUid());
         $registrations = $registrationBagBuilder->build();
 
         if (!$registrations->isEmpty()) {
-            /** @var Tx_Oelib_MailerFactory $mailerFactory */
-            $mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
+            /** @var \Tx_Oelib_MailerFactory $mailerFactory */
+            $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
             $mailer = $mailerFactory->getMailer();
 
-            /** @var Tx_Seminars_Mapper_Registration $registrationMapper */
-            $registrationMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
-            /** @var Tx_Seminars_OldModel_Registration $oldRegistration */
+            /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
+            $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+            /** @var \Tx_Seminars_OldModel_Registration $oldRegistration */
             foreach ($registrations as $oldRegistration) {
-                /** @var Tx_Seminars_Model_Registration $registration */
+                /** @var \Tx_Seminars_Model_Registration $registration */
                 $registration = $registrationMapper->find($oldRegistration->getUid());
                 $user = $registration->getFrontEndUser();
                 if (($user === null) || !$user->hasEmailAddress()) {
                     continue;
                 }
-                /** @var Tx_Oelib_Mail $eMail */
-                $eMail = GeneralUtility::makeInstance(Tx_Oelib_Mail::class);
+                /** @var \Tx_Oelib_Mail $eMail */
+                $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
                 $eMail->setSender($organizer);
                 $eMail->setSubject($this->getPostData('subject'));
                 $eMail->addRecipient($registration->getFrontEndUser());
@@ -449,16 +449,16 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     /**
      * Calls all registered hooks for modifying the e-mail.
      *
-     * @param Tx_Seminars_Model_Registration $registration
+     * @param \Tx_Seminars_Model_Registration $registration
      *        the registration to which the e-mail refers
-     * @param Tx_Oelib_Mail $eMail
+     * @param \Tx_Oelib_Mail $eMail
      *        the e-mail to be sent
      *
      * @return void
      */
     protected function modifyEmailWithHook(
-        Tx_Seminars_Model_Registration $registration,
-        Tx_Oelib_Mail $eMail
+        \Tx_Seminars_Model_Registration $registration,
+        \Tx_Oelib_Mail $eMail
     ) {
     }
 
@@ -481,11 +481,11 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     {
         $url = BackendUtility::getModuleUrl(
             self::MODULE_NAME,
-            ['id' => Tx_Oelib_PageFinder::getInstance()->getPageUid()],
+            ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()],
             false,
             true
         );
-        Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $url);
+        \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $url);
     }
 
     /**
@@ -515,7 +515,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      *
      * @return string the initial value of the field, will be empty if no initial value is defined
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function getInitialValue($fieldName)
     {
@@ -527,7 +527,7 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
                 $result = $this->getMessageBodyFormContent();
                 break;
             default:
-                throw new InvalidArgumentException(
+                throw new \InvalidArgumentException(
                     'There is no initial value for the field "' . $fieldName . '" defined.',
                     1333292199
                 );
@@ -569,8 +569,8 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
      */
     protected function localizeSalutationPlaceholder($prefix)
     {
-        /** @var Tx_Seminars_EmailSalutation $salutation */
-        $salutation = GeneralUtility::makeInstance(Tx_Seminars_EmailSalutation::class);
+        /** @var \Tx_Seminars_EmailSalutation $salutation */
+        $salutation = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
         $eventDetails = $salutation->createIntroduction(
             '"%s"',
             $this->getOldEvent()
@@ -583,18 +583,18 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     /**
      * Creates the message body for the e-mail.
      *
-     * @param Tx_Seminars_Model_FrontEndUser $user the recipient of the e-mail
-     * @param Tx_Seminars_Model_Organizer $organizer
+     * @param \Tx_Seminars_Model_FrontEndUser $user the recipient of the e-mail
+     * @param \Tx_Seminars_Model_Organizer $organizer
      *        the organizer which is selected as sender
      *
      * @return string the message with the salutation replaced by the user's
      *                name, will be empty if no message has been set in the POST
      *                data
      */
-    private function createMessageBody(Tx_Seminars_Model_FrontEndUser $user, Tx_Seminars_Model_Organizer $organizer)
+    private function createMessageBody(\Tx_Seminars_Model_FrontEndUser $user, \Tx_Seminars_Model_Organizer $organizer)
     {
-        /** @var Tx_Seminars_EmailSalutation $salutation */
-        $salutation = GeneralUtility::makeInstance(Tx_Seminars_EmailSalutation::class);
+        /** @var \Tx_Seminars_EmailSalutation $salutation */
+        $salutation = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
         $messageText = str_replace(
             '%salutation',
             $salutation->getSalutation($user),
@@ -652,12 +652,12 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
     /**
      * Gets the hooks.
      *
-     * @return Tx_Seminars_Interface_Hook_BackEndModule[]
+     * @return \Tx_Seminars_Interface_Hook_BackEndModule[]
      *         the hook objects, will be empty if no hooks have been set
      *
      * @throws \UnexpectedValueException
      *          if there are registered hook classes that do not implement the
-     *          Tx_Seminars_Interface_Hook_BackEndModule interface
+     *          \Tx_Seminars_Interface_Hook_BackEndModule interface
      */
     protected function getHooks()
     {
@@ -666,10 +666,10 @@ abstract class Tx_Seminars_BackEnd_AbstractEventMailForm
             if (is_array($hookClasses)) {
                 foreach ($hookClasses as $hookClass) {
                     $hookInstance = GeneralUtility::getUserObj($hookClass);
-                    if (!($hookInstance instanceof Tx_Seminars_Interface_Hook_BackEndModule)) {
+                    if (!($hookInstance instanceof \Tx_Seminars_Interface_Hook_BackEndModule)) {
                         throw new \UnexpectedValueException(
                             'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .
-                                'but does not implement the Tx_Seminars_Interface_Hook_BackEndModule interface.',
+                                'but does not implement the \\Tx_Seminars_Interface_Hook_BackEndModule interface.',
                                 1301928334
                         );
                     }

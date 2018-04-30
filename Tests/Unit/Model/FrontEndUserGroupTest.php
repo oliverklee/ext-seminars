@@ -7,16 +7,16 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Model_FrontEndUserGroup the object to test
+     * @var \Tx_Seminars_Model_FrontEndUserGroup the object to test
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->fixture = new Tx_Seminars_Model_FrontEndUserGroup();
+        $this->fixture = new \Tx_Seminars_Model_FrontEndUserGroup();
     }
 
     ///////////////////////////////////////
@@ -31,7 +31,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
         $this->fixture->setData([]);
 
         self::assertEquals(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
             $this->fixture->getPublishSetting()
         );
     }
@@ -44,7 +44,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
         $this->fixture->setData(['tx_seminars_publish_events' => 0]);
 
         self::assertEquals(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
             $this->fixture->getPublishSetting()
         );
     }
@@ -57,7 +57,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
         $this->fixture->setData(['tx_seminars_publish_events' => 1]);
 
         self::assertEquals(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
             $this->fixture->getPublishSetting()
         );
     }
@@ -70,7 +70,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
         $this->fixture->setData(['tx_seminars_publish_events' => 2]);
 
         self::assertEquals(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
             $this->fixture->getPublishSetting()
         );
     }
@@ -154,7 +154,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function hasReviewerForGroupWithReviewerReturnsTrue()
     {
-        $backEndUser = new Tx_Oelib_Model_BackEndUser();
+        $backEndUser = new \Tx_Oelib_Model_BackEndUser();
 
         $this->fixture->setData(['tx_seminars_reviewer' => $backEndUser]);
 
@@ -180,7 +180,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getReviewerForGroupWithReviewerReturnsReviewer()
     {
-        $backEndUser = new Tx_Oelib_Model_BackEndUser();
+        $backEndUser = new \Tx_Oelib_Model_BackEndUser();
 
         $this->fixture->setData(['tx_seminars_reviewer' => $backEndUser]);
 
@@ -253,9 +253,9 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getDefaultCategoriesForNoCategoriesReturnsAList()
     {
-        $this->fixture->setData(['tx_seminars_default_categories' => new Tx_Oelib_List()]);
+        $this->fixture->setData(['tx_seminars_default_categories' => new \Tx_Oelib_List()]);
 
-        self::assertInstanceOf(Tx_Oelib_List::class, $this->fixture->getDefaultCategories());
+        self::assertInstanceOf(\Tx_Oelib_List::class, $this->fixture->getDefaultCategories());
     }
 
     /**
@@ -263,8 +263,8 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getDefaultCategoriesForOneAssignedCategoryReturnsThisCategoryInList()
     {
-        $list = new Tx_Oelib_List();
-        $category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+        $list = new \Tx_Oelib_List();
+        $category = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
 
         $list->add($category);
@@ -285,7 +285,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function hasDefaultCategoriesForNoAssignedCategoriesReturnsFalse()
     {
-        $this->fixture->setData(['tx_seminars_default_categories' => new Tx_Oelib_List()]);
+        $this->fixture->setData(['tx_seminars_default_categories' => new \Tx_Oelib_List()]);
 
         self::assertFalse(
             $this->fixture->hasDefaultCategories()
@@ -297,9 +297,9 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function hasDefaultCategoriesForOneAssignedCategoryReturnsTrue()
     {
-        $list = new Tx_Oelib_List();
+        $list = new \Tx_Oelib_List();
         $list->add(
-            Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+            \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
                 ->getNewGhost()
         );
 
@@ -319,7 +319,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function getDefaultOrganizerForSetOrganizerReturnsIt()
     {
-        $organizer = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
+        $organizer = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
             ->getNewGhost();
         $this->fixture->setData(['tx_seminars_default_organizer' => $organizer]);
 
@@ -334,7 +334,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends Tx_Phpunit_Test
      */
     public function hasDefaultOrganizerForSetOrganizerReturnsTrue()
     {
-        $organizer = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
+        $organizer = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
             ->getNewGhost();
         $this->fixture->setData(['tx_seminars_default_organizer' => $organizer]);
 

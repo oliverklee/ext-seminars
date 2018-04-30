@@ -119,9 +119,9 @@ class Tx_Seminars_Hooks_TceProcessingHook
      */
     private function processSingleTimeSlot($uid)
     {
-        /** @var Tx_Seminars_OldModel_TimeSlot $timeslot */
+        /** @var \Tx_Seminars_OldModel_TimeSlot $timeslot */
         $timeslot = GeneralUtility::makeInstance(
-            Tx_Seminars_OldModel_TimeSlot::class,
+            \Tx_Seminars_OldModel_TimeSlot::class,
             $uid,
             false
         );
@@ -145,9 +145,9 @@ class Tx_Seminars_Hooks_TceProcessingHook
      */
     private function processSingleEvent($uid, array $fieldArray)
     {
-        /** @var Tx_Seminars_OldModel_Event $event */
+        /** @var \Tx_Seminars_OldModel_Event $event */
         $event = GeneralUtility::makeInstance(
-            Tx_Seminars_OldModel_Event::class,
+            \Tx_Seminars_OldModel_Event::class,
             $uid,
             false,
             true

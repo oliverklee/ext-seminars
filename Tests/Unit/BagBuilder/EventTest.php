@@ -6,14 +6,14 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_BagBuilder_Event
+     * @var \Tx_Seminars_BagBuilder_Event
      */
     private $fixture = null;
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework = null;
 
@@ -33,9 +33,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->future = $GLOBALS['SIM_EXEC_TIME'] + 50;
         $this->past = $GLOBALS['SIM_EXEC_TIME'] - 50;
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new Tx_Seminars_BagBuilder_Event();
+        $this->fixture = new \Tx_Seminars_BagBuilder_Event();
         $this->fixture->setTestMode();
     }
 
@@ -43,7 +43,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->cleanUp();
 
-        Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
     /*
@@ -54,7 +54,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $bag = $this->fixture->build();
 
-        self::assertInstanceOf(Tx_Seminars_Bag_Abstract::class, $bag);
+        self::assertInstanceOf(\Tx_Seminars_Bag_Abstract::class, $bag);
     }
 
     /**
@@ -127,12 +127,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -157,12 +157,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -189,12 +189,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -222,7 +222,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -253,7 +253,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
 
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -263,7 +263,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
 
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -287,12 +287,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -323,7 +323,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -336,7 +336,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
 
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -367,12 +367,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -402,7 +402,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -429,12 +429,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -473,12 +473,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -507,7 +507,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -521,7 +521,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -552,7 +552,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         );
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -565,7 +565,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_categories_mm',
@@ -757,7 +757,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
         );
 
         $this->fixture->ignoreCanceledEvents();
@@ -853,8 +853,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -872,7 +872,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -891,8 +891,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -909,8 +909,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -927,7 +927,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -969,8 +969,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -988,7 +988,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -1007,8 +1007,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1026,8 +1026,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1044,7 +1044,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -1086,8 +1086,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1104,7 +1104,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -1122,8 +1122,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1141,8 +1141,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1159,7 +1159,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -1201,8 +1201,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1219,7 +1219,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -1237,8 +1237,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1256,8 +1256,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1275,7 +1275,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -1319,8 +1319,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1337,7 +1337,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -1355,8 +1355,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1373,8 +1373,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1392,7 +1392,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -1436,8 +1436,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1454,7 +1454,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -1472,8 +1472,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1490,8 +1490,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1509,7 +1509,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -1553,8 +1553,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
                 'deadline_registration' => 0,
             ]
         );
@@ -1572,7 +1572,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
                 'deadline_registration' => 0,
             ]
@@ -1591,8 +1591,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
                 'deadline_registration' => 0,
             ]
         );
@@ -1610,8 +1610,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'deadline_registration' => 0,
             ]
         );
@@ -1630,9 +1630,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 2 * Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1650,9 +1650,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1669,7 +1669,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
                 'end_date' => 0,
                 'deadline_registration' => 0,
             ]
@@ -1740,7 +1740,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -1762,7 +1762,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1783,7 +1783,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'],
             ]
         );
@@ -1805,8 +1805,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1827,8 +1827,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1848,8 +1848,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1893,8 +1893,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1912,7 +1912,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -1931,8 +1931,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1950,8 +1950,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1969,7 +1969,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -2010,7 +2010,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         $typeUid = $this->testingFramework->createRecord(
@@ -2019,7 +2019,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
@@ -2035,7 +2035,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         $typeUid = $this->testingFramework->createRecord(
@@ -2044,7 +2044,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
@@ -2062,7 +2062,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         $typeUid = $this->testingFramework->createRecord(
@@ -2071,7 +2071,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
@@ -2094,7 +2094,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
@@ -2116,14 +2116,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
@@ -2141,7 +2141,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         $typeUid = $this->testingFramework->createRecord(
@@ -2150,7 +2150,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
@@ -2176,7 +2176,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid1,
             ]
         );
@@ -2187,7 +2187,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid2,
             ]
         );
@@ -2209,7 +2209,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         $typeUid1 = $this->testingFramework->createRecord(
@@ -2218,7 +2218,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid1,
             ]
         );
@@ -2244,14 +2244,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'event_type' => $typeUid,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -2271,14 +2271,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -2300,7 +2300,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid1,
             ]
         );
@@ -2311,7 +2311,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'event_type' => $typeUid2,
             ]
@@ -2333,7 +2333,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid1,
             ]
         );
@@ -2344,7 +2344,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'event_type' => $typeUid2,
             ]
         );
@@ -2367,7 +2367,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'event_type' => $typeUid,
             ]
         );
@@ -2375,7 +2375,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->limitToEventTypes([$typeUid]);
         $this->fixture->limitToTopicRecords();
 
-        /** @var Tx_Seminars_Bag_Event $bag */
+        /** @var \Tx_Seminars_Bag_Event $bag */
         $bag = $this->fixture->build();
 
         self::assertSame(1, $bag->count());
@@ -2927,7 +2927,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->fixture->limitToTopicRecords();
         $bag = $this->fixture->build();
@@ -2942,7 +2942,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->limitToTopicRecords();
         $bag = $this->fixture->build();
@@ -2956,7 +2956,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_DATE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
         );
         $this->fixture->limitToTopicRecords();
         $bag = $this->fixture->build();
@@ -2974,7 +2974,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->limitToTopicRecords();
         $this->fixture->removeLimitToTopicRecords();
@@ -2990,7 +2990,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_DATE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
         );
         $this->fixture->limitToTopicRecords();
         $this->fixture->removeLimitToTopicRecords();
@@ -3102,7 +3102,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_DATE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
         );
         $this->fixture->limitToDateAndSingleRecords();
         $bag = $this->fixture->build();
@@ -3117,7 +3117,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $this->fixture->limitToDateAndSingleRecords();
         $bag = $this->fixture->build();
@@ -3132,7 +3132,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->fixture->limitToDateAndSingleRecords();
         $bag = $this->fixture->build();
@@ -3146,7 +3146,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->fixture->limitToDateAndSingleRecords();
         $this->fixture->removeLimitToDateAndSingleRecords();
@@ -3234,16 +3234,16 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60]
+            ['begin_date' => \Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => \Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60]
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => 2 * Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => 60 * 60 + 2 * Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => 2 * \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => 60 * 60 + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY,
                 ]
         );
-        $event = new Tx_Seminars_OldModel_Event($eventUid1);
+        $event = new \Tx_Seminars_OldModel_Event($eventUid1);
         $this->fixture->limitToEventsNextDay($event);
         $bag = $this->fixture->build();
 
@@ -3261,7 +3261,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60]
+            ['begin_date' => \Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => \Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3270,7 +3270,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
                 'end_date' => 60 * 60,
                 ]
         );
-        $event = new Tx_Seminars_OldModel_Event($eventUid);
+        $event = new \Tx_Seminars_OldModel_Event($eventUid);
         $this->fixture->limitToEventsNextDay($event);
         $bag = $this->fixture->build();
 
@@ -3283,16 +3283,16 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60]
+            ['begin_date' => \Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => \Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => 3 * Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => 60 * 60 + 3 * Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => 3 * \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => 60 * 60 + 3 * \Tx_Oelib_Time::SECONDS_PER_DAY,
                 ]
         );
-        $event = new Tx_Seminars_OldModel_Event($eventUid);
+        $event = new \Tx_Seminars_OldModel_Event($eventUid);
         $this->fixture->limitToEventsNextDay($event);
         $bag = $this->fixture->build();
 
@@ -3313,7 +3313,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
         $this->fixture->limitToEventsNextDay(
-            new Tx_Seminars_OldModel_Event($eventUid)
+            new \Tx_Seminars_OldModel_Event($eventUid)
         );
     }
 
@@ -3325,23 +3325,23 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
         $dateUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
-        $date = new Tx_Seminars_OldModel_Event($dateUid1);
+        $date = new \Tx_Seminars_OldModel_Event($dateUid1);
         $this->fixture->limitToOtherDatesForTopic($date);
         $bag = $this->fixture->build();
 
@@ -3359,23 +3359,23 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
-        $topic = new Tx_Seminars_OldModel_Event($topicUid);
+        $topic = new \Tx_Seminars_OldModel_Event($topicUid);
         $this->fixture->limitToOtherDatesForTopic($topic);
         $bag = $this->fixture->build();
 
@@ -3394,9 +3394,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
 
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
-        $event = new Tx_Seminars_OldModel_Event($eventUid);
+        $event = new \Tx_Seminars_OldModel_Event($eventUid);
         $this->fixture->limitToOtherDatesForTopic($event);
     }
 
@@ -3404,27 +3404,27 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $topicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid1,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid2,
             ]
         );
-        $date = new Tx_Seminars_OldModel_Event($dateUid1);
+        $date = new \Tx_Seminars_OldModel_Event($dateUid1);
         $this->fixture->limitToOtherDatesForTopic($date);
         $bag = $this->fixture->build();
 
@@ -3437,23 +3437,23 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'topic' => $topicUid,
             ]
         );
-        $date = new Tx_Seminars_OldModel_Event($dateUid);
+        $date = new \Tx_Seminars_OldModel_Event($dateUid);
         $this->fixture->limitToOtherDatesForTopic($date);
         $bag = $this->fixture->build();
 
@@ -3466,27 +3466,27 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $topicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $dateUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid1,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid2,
             ]
         );
-        $date = new Tx_Seminars_OldModel_Event($dateUid1);
+        $date = new \Tx_Seminars_OldModel_Event($dateUid1);
         $this->fixture->limitToOtherDatesForTopic($date);
         $this->fixture->removeLimitToOtherDatesForTopic();
         $bag = $this->fixture->build();
@@ -3501,23 +3501,23 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'topic' => $topicUid,
             ]
         );
-        $date = new Tx_Seminars_OldModel_Event($dateUid);
+        $date = new \Tx_Seminars_OldModel_Event($dateUid);
         $this->fixture->limitToOtherDatesForTopic($date);
         $this->fixture->removeLimitToOtherDatesForTopic();
         $bag = $this->fixture->build();
@@ -3614,7 +3614,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'accreditation_number' => 'avocado paprika event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -3636,7 +3636,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'accreditation_number' => 'paprika event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -3756,7 +3756,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'speakers' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -3787,7 +3787,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'speakers' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -3813,7 +3813,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -3844,7 +3844,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -3870,7 +3870,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -3901,7 +3901,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -3927,7 +3927,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'event_type' => $eventTypeUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -3953,7 +3953,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'event_type' => $eventTypeUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -3974,7 +3974,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'categories' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4005,7 +4005,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'categories' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4072,7 +4072,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'target_groups' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4106,7 +4106,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'target_groups' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4132,14 +4132,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'title' => 'avocado paprika event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -4162,14 +4162,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'title' => 'paprika event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -4187,14 +4187,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'subtitle' => 'avocado paprika event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -4217,14 +4217,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'subtitle' => 'paprika event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -4242,14 +4242,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'description' => 'avocado paprika event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -4272,14 +4272,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'description' => 'paprika event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -4301,7 +4301,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'categories' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4313,7 +4313,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -4340,7 +4340,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'categories' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4352,7 +4352,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -4374,14 +4374,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'event_type' => $eventTypeUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -4408,14 +4408,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'event_type' => $eventTypeUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -4437,7 +4437,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'accreditation_number' => 'avocado paprika event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -4459,7 +4459,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'accreditation_number' => 'paprika event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->fixture->limitToFullTextSearch('avocado');
@@ -4480,7 +4480,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'speakers' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4511,7 +4511,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'speakers' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4537,7 +4537,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4568,7 +4568,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4594,7 +4594,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4625,7 +4625,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'place' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
         $this->testingFramework->createRelation(
@@ -4845,7 +4845,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         $this->fixture->limitToTopicsWithoutRegistrationByUser(
@@ -4867,12 +4867,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -4896,12 +4896,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -4921,12 +4921,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -4957,12 +4957,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'expiry' => 0,
             ]
@@ -4985,12 +4985,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'expiry' => $this->future,
             ]
@@ -5013,12 +5013,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'expiry' => $this->past,
             ]
@@ -5042,12 +5042,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -5076,12 +5076,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $requiredTopicUid,
             ]
         );
@@ -5090,7 +5090,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'requirements' => 1,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRelation(
@@ -5191,10 +5191,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED]
         );
 
-        $this->fixture->limitToStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
         $bag = $this->fixture->build();
 
         self::assertSame(
@@ -5207,10 +5207,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED]
         );
 
-        $this->fixture->limitToStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
         $bag = $this->fixture->build();
 
         self::assertSame(
@@ -5223,10 +5223,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
         );
 
-        $this->fixture->limitToStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
         $bag = $this->fixture->build();
 
         self::assertSame(
@@ -5239,10 +5239,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
         );
 
-        $this->fixture->limitToStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
         $bag = $this->fixture->build();
 
         self::assertSame(
@@ -5255,10 +5255,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED]
         );
 
-        $this->fixture->limitToStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
         $bag = $this->fixture->build();
 
         self::assertSame(
@@ -5271,10 +5271,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED]
         );
 
-        $this->fixture->limitToStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
         $bag = $this->fixture->build();
 
         self::assertSame(
@@ -5287,10 +5287,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED]
         );
 
-        $this->fixture->limitToStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
         $bag = $this->fixture->build();
 
         self::assertSame(
@@ -5303,10 +5303,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
         );
 
-        $this->fixture->limitToStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
         $bag = $this->fixture->build();
 
         self::assertSame(
@@ -5319,10 +5319,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED]
         );
 
-        $this->fixture->limitToStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
         $bag = $this->fixture->build();
 
         self::assertSame(
@@ -5339,7 +5339,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY]
+            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY]
         );
 
         $this->fixture->limitToDaysBeforeBeginDate(2);
@@ -5355,7 +5355,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY]
+            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY]
         );
 
         $this->fixture->limitToDaysBeforeBeginDate(3);
@@ -5371,7 +5371,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (2 * Tx_Oelib_Time::SECONDS_PER_DAY)]
+            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (2 * \Tx_Oelib_Time::SECONDS_PER_DAY)]
         );
 
         $this->fixture->limitToDaysBeforeBeginDate(1);
@@ -5387,7 +5387,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] - (2 * Tx_Oelib_Time::SECONDS_PER_DAY)]
+            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] - (2 * \Tx_Oelib_Time::SECONDS_PER_DAY)]
         );
 
         $this->fixture->limitToDaysBeforeBeginDate(1);
@@ -6091,7 +6091,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers'
@@ -6107,7 +6107,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -6755,14 +6755,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'price_regular' => 49,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
 
@@ -6788,14 +6788,14 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'price_regular' => 51,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'topic' => $topicUid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
 

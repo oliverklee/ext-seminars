@@ -6,20 +6,20 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Csv_AbstractRegistrationListView
+     * @var \Tx_Seminars_Csv_AbstractRegistrationListView
      */
     protected $subject = null;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     protected $testingFramework = null;
 
     /**
-     * @var Tx_Oelib_Configuration
+     * @var \Tx_Oelib_Configuration
      */
     protected $configuration = null;
 
@@ -54,11 +54,11 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends Tx_Php
         $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
         $GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_general.xlf');
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $configurationRegistry = Tx_Oelib_ConfigurationRegistry::getInstance();
-        $configurationRegistry->set('plugin', new Tx_Oelib_Configuration());
-        $this->configuration = new Tx_Oelib_Configuration();
+        $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
+        $configurationRegistry->set('plugin', new \Tx_Oelib_Configuration());
+        $this->configuration = new \Tx_Oelib_Configuration();
         $this->configuration->setData(['charsetForCsv' => 'utf-8']);
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 

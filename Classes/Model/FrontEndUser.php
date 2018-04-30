@@ -6,7 +6,7 @@
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
+class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
 {
     /**
      * Returns the publish setting for the user groups the user is assigned to.
@@ -18,20 +18,20 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
      * will be returned.
      *
      * @return int one of the class constants
-     *                 Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
-     *                 Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW or
-     *                 Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+     *                 \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+     *                 \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW or
+     *                 \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
      */
     public function getPublishSetting()
     {
         $userGroups = $this->getUserGroups();
         if ($userGroups->isEmpty()) {
-            return Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
+            return \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
         }
 
-        $result = Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
+        $result = \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
 
-        /** @var Tx_Seminars_Model_FrontEndUserGroup $userGroup */
+        /** @var \Tx_Seminars_Model_FrontEndUserGroup $userGroup */
         foreach ($userGroups as $userGroup) {
             $groupPermissions = $userGroup->getPublishSetting();
 
@@ -58,7 +58,7 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
 
         $auxiliaryRecordsPid = 0;
 
-        /** @var Tx_Seminars_Model_FrontEndUserGroup $userGroup */
+        /** @var \Tx_Seminars_Model_FrontEndUserGroup $userGroup */
         foreach ($this->getUserGroups() as $userGroup) {
             if ($userGroup->hasAuxiliaryRecordsPid()) {
                 $auxiliaryRecordsPid = $userGroup->getAuxiliaryRecordsPid();
@@ -74,7 +74,7 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
      *
      * Will return the first reviewer found.
      *
-     * @return Tx_Seminars_Model_BackEndUser the reviewer set in the user's group,
+     * @return \Tx_Seminars_Model_BackEndUser the reviewer set in the user's group,
      *                                    will be NULL if no reviewer has been
      *                                    set or the user has no groups
      */
@@ -82,7 +82,7 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
     {
         $result = null;
 
-        /** @var Tx_Seminars_Model_FrontEndUserGroup $userGroup */
+        /** @var \Tx_Seminars_Model_FrontEndUserGroup $userGroup */
         foreach ($this->getUserGroups() as $userGroup) {
             if ($userGroup->hasReviewer()) {
                 $result = $userGroup->getReviewer();
@@ -110,7 +110,7 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
 
         $eventRecordPid = 0;
 
-        /** @var Tx_Seminars_Model_FrontEndUserGroup $userGroup */
+        /** @var \Tx_Seminars_Model_FrontEndUserGroup $userGroup */
         foreach ($this->getUserGroups() as $userGroup) {
             if ($userGroup->hasEventRecordPid()) {
                 $eventRecordPid = $userGroup->getEventRecordPid();
@@ -124,7 +124,7 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
     /**
      * Returns all default categories assigned to this user's groups.
      *
-     * @return Tx_Oelib_List the categories assigned to this user's groups, will
+     * @return \Tx_Oelib_List the categories assigned to this user's groups, will
      *                       be empty if no default categories have been assigned
      *                       to any of the user's groups
      */
@@ -132,7 +132,7 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
     {
         $categories = new \Tx_Oelib_List();
 
-        /** @var Tx_Seminars_Model_FrontEndUserGroup $group */
+        /** @var \Tx_Seminars_Model_FrontEndUserGroup $group */
         foreach ($this->getUserGroups() as $group) {
             if ($group->hasDefaultCategories()) {
                 $categories->append($group->getDefaultCategories());
@@ -156,7 +156,7 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
     /**
      * Returns all default organizers assigned to this user's groups.
      *
-     * @return Tx_Oelib_List the organizers assigned to this user's groups, will
+     * @return \Tx_Oelib_List the organizers assigned to this user's groups, will
      *                       be empty if no default organizers have been assigned
      *                       to any of the user's groups
      */
@@ -164,7 +164,7 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
     {
         $organizers = new \Tx_Oelib_List();
 
-        /** @var Tx_Seminars_Model_FrontEndUserGroup $group */
+        /** @var \Tx_Seminars_Model_FrontEndUserGroup $group */
         foreach ($this->getUserGroups() as $group) {
             if ($group->hasDefaultOrganizer()) {
                 $organizers->add($group->getDefaultOrganizer());
@@ -189,7 +189,7 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
      * Gets the registration record for which this user is related to as
      * "additional registered person".
      *
-     * @return Tx_Seminars_Model_Registration the associated registration,
+     * @return \Tx_Seminars_Model_Registration the associated registration,
      *                                        might be NULL
      */
     public function getRegistration()
@@ -201,12 +201,12 @@ class Tx_Seminars_Model_FrontEndUser extends Tx_Oelib_Model_FrontEndUser
      * sets the registration record for which this user is related to as
      * "additional registered person".
      *
-     * @param Tx_Seminars_Model_Registration $registration
+     * @param \Tx_Seminars_Model_Registration $registration
      *        the associated registration, may be NULL
      *
      * @return void
      */
-    public function setRegistration(Tx_Seminars_Model_Registration $registration = null)
+    public function setRegistration(\Tx_Seminars_Model_Registration $registration = null)
     {
         $this->set('tx_seminars_registration', $registration);
     }

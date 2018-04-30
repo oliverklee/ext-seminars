@@ -9,15 +9,15 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent
+     * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent
      */
     protected $fixture = null;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     protected $testingFramework = null;
 
@@ -37,7 +37,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     protected $now = 0;
 
     /**
-     * @var Tx_Seminars_FrontEnd_DefaultController
+     * @var \Tx_Seminars_FrontEnd_DefaultController
      */
     protected $pi1 = null;
 
@@ -53,11 +53,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
         $this->now = $GLOBALS['SIM_EXEC_TIME'];
-        $this->beginDate = ($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
-        $this->unregistrationDeadline = ($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->beginDate = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->unregistrationDeadline = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
 
         $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -72,7 +72,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $uid,
             [
                 'dateFormatYMD' => '%d.%m.%Y',
@@ -87,7 +87,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->cleanUp();
 
-        Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
     /*
@@ -105,7 +105,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createFakeFrontEnd();
 
-        $this->pi1 = new Tx_Seminars_FrontEnd_DefaultController();
+        $this->pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $this->pi1->init(
             [
                 'isStaticTemplateLoaded' => 1,
@@ -440,7 +440,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->createPi1();
 
-        self::assertInstanceOf(Tx_Seminars_FrontEnd_DefaultController::class, $this->pi1);
+        self::assertInstanceOf(\Tx_Seminars_FrontEnd_DefaultController::class, $this->pi1);
     }
 
     /**
@@ -1123,11 +1123,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'a test topic',
             ]
         );
-        $topic = new Tx_Seminars_OldModel_Event($topicRecordUid);
+        $topic = new \Tx_Seminars_OldModel_Event($topicRecordUid);
 
         self::assertSame(
             'a test topic',
@@ -1143,19 +1143,19 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'a test topic',
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicRecordUid,
                 'title' => 'a test date',
             ]
         );
-        $date = new Tx_Seminars_OldModel_Event($dateRecordUid);
+        $date = new \Tx_Seminars_OldModel_Event($dateRecordUid);
 
         self::assertSame(
             'a test topic',
@@ -1290,7 +1290,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         // Activates the configuration switch "canRegisterForEventsWithoutDate".
         $this->fixture->setAllowRegistrationForEventsWithoutDate(1);
 
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertFalse(
             $this->fixture->canSomebodyRegister()
@@ -1528,7 +1528,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canSomebodyRegisterMessageForCancelledEventReturnsSeminarCancelledMessage()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertSame(
             $this->fixture->translate('message_seminarCancelled'),
@@ -1768,13 +1768,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicRecordUid,
                 'language' => 'it',
             ]
         );
 
-        $seminar = new Tx_Seminars_OldModel_Event($dateRecordUid);
+        $seminar = new \Tx_Seminars_OldModel_Event($dateRecordUid);
 
         self::assertSame(
             'Italiano',
@@ -1801,13 +1801,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $singleRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'topic' => $topicRecordUid,
                 'language' => 'it',
             ]
         );
 
-        $seminar = new Tx_Seminars_OldModel_Event($singleRecordUid);
+        $seminar = new \Tx_Seminars_OldModel_Event($singleRecordUid);
 
         self::assertSame(
             'Italiano',
@@ -2181,7 +2181,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(0);
         $this->fixture->setUnregistrationDeadline(0);
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->fixture->setAttendancesMax(10);
 
         self::assertFalse(
@@ -2215,7 +2215,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(1);
         $this->fixture->setUnregistrationDeadline(0);
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->fixture->setAttendancesMax(10);
 
         self::assertTrue(
@@ -2232,7 +2232,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(5);
         $this->fixture->setUnregistrationDeadline(0);
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_DAY);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_DAY);
         $this->fixture->setAttendancesMax(10);
 
         self::assertFalse(
@@ -2266,9 +2266,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(0);
         $this->fixture->setUnregistrationDeadline(
-            $this->now + Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
         );
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->fixture->setAttendancesMax(10);
 
         self::assertTrue(
@@ -2285,9 +2285,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(0);
         $this->fixture->setUnregistrationDeadline(
-            $this->now - Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now - \Tx_Oelib_Time::SECONDS_PER_DAY
         );
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->fixture->setAttendancesMax(10);
 
         self::assertFalse(
@@ -2304,7 +2304,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(0);
         $this->fixture->setUnregistrationDeadline(
-            $this->now + Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
         );
         $this->fixture->setBeginDate(0);
         $this->fixture->setAttendancesMax(10);
@@ -2323,7 +2323,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(0);
         $this->fixture->setUnregistrationDeadline(
-            $this->now - Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now - \Tx_Oelib_Time::SECONDS_PER_DAY
         );
         $this->fixture->setBeginDate(0);
         $this->fixture->setAttendancesMax(10);
@@ -2342,9 +2342,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(1);
         $this->fixture->setUnregistrationDeadline(
-            $this->now + Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
         );
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->fixture->setAttendancesMax(10);
 
         self::assertTrue(
@@ -2362,9 +2362,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setGlobalUnregistrationDeadline(2);
         $this->fixture->setAttendancesMax(10);
         $this->fixture->setUnregistrationDeadline(
-            $this->now - Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now - \Tx_Oelib_Time::SECONDS_PER_DAY
         );
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_DAY);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_DAY);
 
         self::assertFalse(
             $this->fixture->isUnregistrationPossible()
@@ -2380,7 +2380,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(1);
         $this->fixture->setUnregistrationDeadline(
-            $this->now + Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
         );
         $this->fixture->setBeginDate(0);
         $this->fixture->setAttendancesMax(10);
@@ -2401,7 +2401,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setBeginDate(0);
         $this->fixture->setAttendancesMax(10);
         $this->fixture->setUnregistrationDeadline(
-            $this->now - Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now - \Tx_Oelib_Time::SECONDS_PER_DAY
         );
 
         self::assertFalse(
@@ -2417,9 +2417,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setAllowUnregistrationWithEmptyWaitingList(true);
 
         $this->fixture->setGlobalUnregistrationDeadline(1);
-        $this->fixture->setBeginDate($this->now + 2 * Tx_Oelib_Time::SECONDS_PER_DAY);
+        $this->fixture->setBeginDate($this->now + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY);
         $this->fixture->setUnregistrationDeadline(
-            $this->now - Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now - \Tx_Oelib_Time::SECONDS_PER_DAY
         );
         $this->fixture->setAttendancesMax(10);
 
@@ -2438,9 +2438,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setAttendancesMax(10);
         $this->fixture->setGlobalUnregistrationDeadline(1);
         $this->fixture->setUnregistrationDeadline(
-            $this->now + Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
         );
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
 
         self::assertTrue(
             $this->fixture->isUnregistrationPossible()
@@ -2457,9 +2457,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setNeedsRegistration(false);
         $this->fixture->setGlobalUnregistrationDeadline(1);
         $this->fixture->setUnregistrationDeadline(
-            $this->now + Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
         );
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
 
         self::assertFalse(
             $this->fixture->isUnregistrationPossible()
@@ -2476,9 +2476,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setAttendancesMax(10);
         $this->fixture->setGlobalUnregistrationDeadline(1);
         $this->fixture->setUnregistrationDeadline(
-            $this->now + Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
         );
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->fixture->setRegistrationQueue(true);
         $this->fixture->setNumberOfAttendancesOnQueue(0);
 
@@ -2541,7 +2541,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlineSetInEventReturnsThisDeadline()
     {
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->fixture->setUnregistrationDeadline($this->now);
         $this->fixture->setGlobalUnregistrationDeadline(0);
 
@@ -2556,7 +2556,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getUnregistrationDeadlineFromModelAndConfigurationForNoUnregistrationDeadlineSetInEventAndNoDeadlineConfigurationSetReturnsZero()
     {
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->fixture->setUnregistrationDeadline(0);
         $this->fixture->setGlobalUnregistrationDeadline(0);
 
@@ -2571,12 +2571,12 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getUnregistrationDeadlineFromModelAndConfigurationForNoUnregistrationDeadlineSetInEventAndDeadlineConfigurationSetReturnsCalculatedDeadline()
     {
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->fixture->setUnregistrationDeadline(0);
         $this->fixture->setGlobalUnregistrationDeadline(1);
 
         self::assertSame(
-            $this->now + Tx_Oelib_Time::SECONDS_PER_WEEK - Tx_Oelib_Time::SECONDS_PER_DAY,
+            $this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK - \Tx_Oelib_Time::SECONDS_PER_DAY,
             $this->fixture->getUnregistrationDeadlineFromModelAndConfiguration()
         );
     }
@@ -2586,7 +2586,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlinesSetInEventAndConfigurationReturnsEventsDeadline()
     {
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->fixture->setUnregistrationDeadline($this->now);
         $this->fixture->setGlobalUnregistrationDeadline(1);
 
@@ -2708,9 +2708,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(1);
         $this->fixture->setUnregistrationDeadline(
-            $this->now + (6 * Tx_Oelib_Time::SECONDS_PER_DAY)
+            $this->now + (6 * \Tx_Oelib_Time::SECONDS_PER_DAY)
         );
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
 
         self::assertTrue(
             $this->fixture->isUnregistrationPossible()
@@ -2729,9 +2729,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(1);
         $this->fixture->setUnregistrationDeadline(
-            $this->now + (6 * Tx_Oelib_Time::SECONDS_PER_DAY)
+            $this->now + (6 * \Tx_Oelib_Time::SECONDS_PER_DAY)
         );
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
 
         self::assertFalse(
             $this->fixture->isUnregistrationPossible()
@@ -2752,9 +2752,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
 
         $this->fixture->setGlobalUnregistrationDeadline(1);
         $this->fixture->setUnregistrationDeadline(
-            $this->now + (6 * Tx_Oelib_Time::SECONDS_PER_DAY)
+            $this->now + (6 * \Tx_Oelib_Time::SECONDS_PER_DAY)
         );
-        $this->fixture->setBeginDate($this->now + Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->fixture->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
 
         self::assertTrue(
             $this->fixture->isUnregistrationPossible()
@@ -3604,7 +3604,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'event_type' => $this->testingFramework->createRecord(
                     'tx_seminars_event_types',
                     ['title' => 'foo type']
@@ -3614,11 +3614,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicRecordUid,
             ]
         );
-        $seminar = new Tx_Seminars_OldModel_Event($dateRecordUid);
+        $seminar = new \Tx_Seminars_OldModel_Event($dateRecordUid);
 
         self::assertSame(
             'foo type',
@@ -3634,14 +3634,14 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'event_type' => $this->testingFramework->createRecord(
                     'tx_seminars_event_types',
                     ['title' => 'foo type']
                 ),
             ]
         );
-        $seminar = new Tx_Seminars_OldModel_Event($topicRecordUid);
+        $seminar = new \Tx_Seminars_OldModel_Event($topicRecordUid);
 
         self::assertSame(
             'foo type',
@@ -3658,19 +3658,19 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'event_type' => 99999,
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicRecordUid,
                 'event_type' => 199999,
             ]
         );
-        $seminar = new Tx_Seminars_OldModel_Event($dateRecordUid);
+        $seminar = new \Tx_Seminars_OldModel_Event($dateRecordUid);
 
         self::assertSame(
             99999,
@@ -3937,11 +3937,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'organizers' => 'foo',
             ]
         );
-        $fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
+        $fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
         $hasOrganizers = $fixture->hasOrganizers();
 
         self::assertFalse(
@@ -4465,7 +4465,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $this->addOrganizerRelation();
 
-        self::assertInstanceOf(Tx_Seminars_Bag_Organizer::class, $this->fixture->getOrganizerBag());
+        self::assertInstanceOf(\Tx_Seminars_Bag_Organizer::class, $this->fixture->getOrganizerBag());
     }
 
     /*
@@ -5321,7 +5321,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function usesCorrectIconForSingleEvent()
     {
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
+        $this->fixture->setRecordType(\Tx_Seminars_Model_Event::TYPE_COMPLETE);
 
         self::assertContains(
             'EventComplete.',
@@ -5334,7 +5334,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function usesCorrectIconForTopic()
     {
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
+        $this->fixture->setRecordType(\Tx_Seminars_Model_Event::TYPE_TOPIC);
 
         self::assertContains(
             'EventTopic.',
@@ -5347,7 +5347,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function usesCorrectIconForDateRecord()
     {
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
+        $this->fixture->setRecordType(\Tx_Seminars_Model_Event::TYPE_DATE);
 
         self::assertContains(
             'EventDate.',
@@ -5360,7 +5360,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function usesCorrectIconForHiddenSingleEvent()
     {
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
+        $this->fixture->setRecordType(\Tx_Seminars_Model_Event::TYPE_COMPLETE);
         $this->fixture->setHidden(true);
 
         self::assertContains(
@@ -5374,7 +5374,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function usesCorrectIconForHiddenTopic()
     {
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
+        $this->fixture->setRecordType(\Tx_Seminars_Model_Event::TYPE_TOPIC);
         $this->fixture->setHidden(true);
 
         self::assertContains(
@@ -5388,7 +5388,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function usesCorrectIconForHiddenDate()
     {
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
+        $this->fixture->setRecordType(\Tx_Seminars_Model_Event::TYPE_DATE);
         $this->fixture->setHidden(true);
 
         self::assertContains(
@@ -5402,7 +5402,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function usesCorrectIconForVisibleTimedSingleEvent()
     {
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
+        $this->fixture->setRecordType(\Tx_Seminars_Model_Event::TYPE_COMPLETE);
         $this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         self::assertContains(
@@ -5416,7 +5416,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function usesCorrectIconForVisibleTimedTopic()
     {
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
+        $this->fixture->setRecordType(\Tx_Seminars_Model_Event::TYPE_TOPIC);
         $this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         self::assertContains(
@@ -5430,7 +5430,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function usesCorrectIconForVisibleTimedDate()
     {
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
+        $this->fixture->setRecordType(\Tx_Seminars_Model_Event::TYPE_DATE);
         $this->fixture->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         self::assertContains(
@@ -5444,7 +5444,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function usesCorrectIconForExpiredSingleEvent()
     {
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_COMPLETE);
+        $this->fixture->setRecordType(\Tx_Seminars_Model_Event::TYPE_COMPLETE);
         $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
@@ -5459,7 +5459,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function usesCorrectIconForExpiredTimedTopic()
     {
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_TOPIC);
+        $this->fixture->setRecordType(\Tx_Seminars_Model_Event::TYPE_TOPIC);
         $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
@@ -5474,7 +5474,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function usesCorrectIconForExpiredTimedDate()
     {
-        $this->fixture->setRecordType(Tx_Seminars_Model_Event::TYPE_DATE);
+        $this->fixture->setRecordType(\Tx_Seminars_Model_Event::TYPE_DATE);
         $this->fixture->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
@@ -5511,7 +5511,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
                 'details_page' => $detailsPageUid,
             ]
         );
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
+        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
 
         self::assertTrue(
             $event->hasSeparateDetailsPage()
@@ -5530,7 +5530,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
                 'details_page' => 'www.test.com',
             ]
         );
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
+        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
 
         self::assertTrue(
             $event->hasSeparateDetailsPage()
@@ -5565,7 +5565,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
                 'details_page' => $detailsPageUid,
             ]
         );
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
+        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
 
         self::assertSame(
             (string)$detailsPageUid,
@@ -5586,7 +5586,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
                 'details_page' => $externalUrl,
             ]
         );
-        $event = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
+        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
 
         self::assertSame(
             $externalUrl,
@@ -5949,7 +5949,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getPlacesForEventWithNoPlacesReturnsEmptyList()
     {
-        self::assertInstanceOf(Tx_Oelib_List::class, $this->fixture->getPlaces());
+        self::assertInstanceOf(\Tx_Oelib_List::class, $this->fixture->getPlaces());
     }
 
     /**
@@ -5959,7 +5959,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $this->addPlaceRelation();
 
-        self::assertInstanceOf(Tx_Seminars_Model_Place::class, $this->fixture->getPlaces()->first());
+        self::assertInstanceOf(\Tx_Seminars_Model_Place::class, $this->fixture->getPlaces()->first());
     }
 
     /**
@@ -6021,19 +6021,19 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'attached_files' => 'test.file',
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'attached_files' => '',
                 'topic' => $topicRecordUid,
             ]
         );
-        $eventDate = new Tx_Seminars_OldModel_Event($dateRecordUid);
+        $eventDate = new \Tx_Seminars_OldModel_Event($dateRecordUid);
 
         self::assertTrue(
             $eventDate->hasAttachedFiles()
@@ -6048,19 +6048,19 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'attached_files' => '',
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'attached_files' => '',
                 'topic' => $topicRecordUid,
             ]
         );
-        $eventDate = new Tx_Seminars_OldModel_Event($dateRecordUid);
+        $eventDate = new \Tx_Seminars_OldModel_Event($dateRecordUid);
 
         self::assertFalse(
             $eventDate->hasAttachedFiles()
@@ -6117,19 +6117,19 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'attached_files' => '',
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'attached_files' => $dummyFileName,
                 'topic' => $topicRecordUid,
             ]
         );
-        $eventDate = new Tx_Seminars_OldModel_Event($dateRecordUid);
+        $eventDate = new \Tx_Seminars_OldModel_Event($dateRecordUid);
 
         $attachedFiles = $eventDate->getAttachedFiles($this->pi1);
 
@@ -6152,19 +6152,19 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'attached_files' => $dummyFileName,
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'attached_files' => '',
                 'topic' => $topicRecordUid,
             ]
         );
-        $eventDate = new Tx_Seminars_OldModel_Event($dateRecordUid);
+        $eventDate = new \Tx_Seminars_OldModel_Event($dateRecordUid);
 
         $attachedFiles = $eventDate->getAttachedFiles($this->pi1);
 
@@ -6187,7 +6187,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'attached_files' => $topicDummyFileName,
             ]
         );
@@ -6198,12 +6198,12 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'attached_files' => $dateDummyFileName,
                 'topic' => $topicRecordUid,
             ]
         );
-        $eventDate = new Tx_Seminars_OldModel_Event($dateRecordUid);
+        $eventDate = new \Tx_Seminars_OldModel_Event($dateRecordUid);
 
         $attachedFiles = $eventDate->getAttachedFiles($this->pi1);
 
@@ -6407,7 +6407,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->fixture->setOwnerUid($ownerUid);
 
-        self::assertInstanceOf(Tx_Oelib_Model_FrontEndUser::class, $this->fixture->getOwner());
+        self::assertInstanceOf(\Tx_Oelib_Model_FrontEndUser::class, $this->fixture->getOwner());
     }
 
     /**
@@ -6475,7 +6475,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
         $this->fixture->setAttendancesMax(5);
         $this->fixture->setNumberOfAttendances(0);
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertSame(
             '',
@@ -6832,7 +6832,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function getLanguageKeySuffixForTypeForMaleSpeakerReturnsMaleMarkerPart()
     {
         $this->addLeaderRelation(
-            ['gender' => Tx_Seminars_OldModel_Speaker::GENDER_MALE]
+            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
         );
 
         self::assertContains(
@@ -6847,7 +6847,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function getLanguageKeySuffixForTypeForFemaleSpeakerReturnsFemaleMarkerPart()
     {
         $this->addLeaderRelation(
-            ['gender' => Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
+            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
         );
 
         self::assertContains(
@@ -6862,7 +6862,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function getLanguageKeySuffixForTypeForSingleSpeakerWithoutGenderReturnsUnknownMarkerPart()
     {
         $this->addLeaderRelation(
-            ['gender' => Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN]
+            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN]
         );
 
         self::assertContains(
@@ -6904,10 +6904,10 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function getLanguageKeySuffixForTypeForMultipleMaleSpeakerReturnsMultipleAndMaleMarkerPart()
     {
         $this->addSpeakerRelation(
-            ['gender' => Tx_Seminars_OldModel_Speaker::GENDER_MALE]
+            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
         );
         $this->addSpeakerRelation(
-            ['gender' => Tx_Seminars_OldModel_Speaker::GENDER_MALE]
+            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
         );
 
         self::assertContains(
@@ -6922,10 +6922,10 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function getLanguageKeySuffixForTypeForMultipleFemaleSpeakerReturnsMultipleAndFemaleMarkerPart()
     {
         $this->addSpeakerRelation(
-            ['gender' => Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
+            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
         );
         $this->addSpeakerRelation(
-            ['gender' => Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
+            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
         );
 
         self::assertContains(
@@ -6940,10 +6940,10 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function getLanguageKeySuffixForTypeForMultipleSpeakersWithMixedGendersReturnsSpeakerType()
     {
         $this->addSpeakerRelation(
-            ['gender' => Tx_Seminars_OldModel_Speaker::GENDER_MALE]
+            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
         );
         $this->addSpeakerRelation(
-            ['gender' => Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
+            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
         );
 
         self::assertContains(
@@ -6958,10 +6958,10 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function getLanguageKeySuffixForTypeForOneSpeakerWithoutGenderAndOneWithGenderReturnsSpeakerType()
     {
         $this->addLeaderRelation(
-            ['gender' => Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN]
+            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN]
         );
         $this->addLeaderRelation(
-            ['gender' => Tx_Seminars_OldModel_Speaker::GENDER_MALE]
+            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
         );
 
         self::assertContains(
@@ -6976,7 +6976,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function getLanguageKeySuffixForTypeForSingleMaleTutorReturnsCorrespondingMarkerPart()
     {
         $this->addTutorRelation(
-            ['gender' => Tx_Seminars_OldModel_Speaker::GENDER_MALE]
+            ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
         );
 
         self::assertSame(
@@ -6994,11 +6994,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function hasRequirementsForTopicWithoutRequirementsReturnsFalse()
     {
-        $topic = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                    'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                     'requirements' => 0,
                 ]
             )
@@ -7017,15 +7017,15 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'requirements' => 0,
             ]
         );
-        $date = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -7043,11 +7043,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -7055,7 +7055,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $requiredTopicUid,
             'requirements'
         );
-        $topic = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
+        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
 
         self::assertTrue(
             $topic->hasRequirements()
@@ -7069,11 +7069,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -7081,11 +7081,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $requiredTopicUid,
             'requirements'
         );
-        $date = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -7103,11 +7103,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -7117,7 +7117,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         );
         $requiredTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -7125,7 +7125,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $requiredTopicUid2,
             'requirements'
         );
-        $topic = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
+        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
 
         self::assertTrue(
             $topic->hasRequirements()
@@ -7141,11 +7141,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function hasDependenciesForTopicWithoutDependenciesReturnsFalse()
     {
-        $topic = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                    'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                     'dependencies' => 0,
                 ]
             )
@@ -7164,15 +7164,15 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'dependencies' => 0,
             ]
         );
-        $date = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -7191,14 +7191,14 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'dependencies' => 1,
             ]
         );
         $dependentTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -7207,7 +7207,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $dependentTopicUid,
             $topicUid
         );
-        $topic = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
+        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
 
         self::assertTrue(
             $topic->hasDependencies()
@@ -7222,14 +7222,14 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'dependencies' => 1,
             ]
         );
         $dependentTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -7238,11 +7238,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $dependentTopicUid,
             $topicUid
         );
-        $date = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -7261,14 +7261,14 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'dependencies' => 2,
             ]
         );
         $dependentTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -7280,7 +7280,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $dependentTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -7289,7 +7289,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $dependentTopicUid2,
             $topicUid
         );
-        $topic = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
+        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
 
         $result = $topic->hasDependencies();
 
@@ -7307,7 +7307,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getRequirementsReturnsSeminarBag()
     {
-        self::assertInstanceOf(Tx_Seminars_Bag_Event::class, $this->fixture->getRequirements());
+        self::assertInstanceOf(\Tx_Seminars_Bag_Event::class, $this->fixture->getRequirements());
     }
 
     /**
@@ -7327,11 +7327,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -7339,7 +7339,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $requiredTopicUid,
             'requirements'
         );
-        $topic = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
+        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
 
         $result = $topic->getRequirements();
 
@@ -7360,11 +7360,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -7372,11 +7372,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $requiredTopicUid,
             'requirements'
         );
-        $date = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -7401,11 +7401,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -7415,7 +7415,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         );
         $requiredTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -7423,7 +7423,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $requiredTopicUid2,
             'requirements'
         );
-        $topic = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
+        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
         $requirements = $topic->getRequirements();
 
         self::assertSame(
@@ -7441,7 +7441,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function getDependenciesReturnsSeminarBag()
     {
-        self::assertInstanceOf(Tx_Seminars_Bag_Event::class, $this->fixture->getDependencies());
+        self::assertInstanceOf(\Tx_Seminars_Bag_Event::class, $this->fixture->getDependencies());
     }
 
     /**
@@ -7462,14 +7462,14 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'dependencies' => 1,
             ]
         );
         $dependentTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -7478,7 +7478,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $dependentTopicUid,
             $topicUid
         );
-        $topic = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
+        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
 
         $result = $topic->getDependencies();
 
@@ -7500,14 +7500,14 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'dependencies' => 1,
             ]
         );
         $dependentTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -7516,11 +7516,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $dependentTopicUid,
             $topicUid
         );
-        $date = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
-                    'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                    'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                     'topic' => $topicUid,
                 ]
             )
@@ -7546,14 +7546,14 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'dependencies' => 2,
             ]
         );
         $dependentTopicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -7565,7 +7565,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $dependentTopicUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'requirements' => 1,
             ]
         );
@@ -7574,7 +7574,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             $dependentTopicUid2,
             $topicUid
         );
-        $topic = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
+        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
         $dependencies = $topic->getDependencies();
 
         self::assertSame(
@@ -7592,7 +7592,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function isConfirmedForStatusPlannedReturnsFalse()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
         self::assertFalse(
             $this->fixture->isConfirmed()
@@ -7604,7 +7604,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function isConfirmedForStatusConfirmedReturnsTrue()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
         self::assertTrue(
             $this->fixture->isConfirmed()
@@ -7616,7 +7616,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function isConfirmedForStatusCanceledReturnsFalse()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertFalse(
             $this->fixture->isConfirmed()
@@ -7632,7 +7632,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function isCanceledForPlannedEventReturnsFalse()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
         self::assertFalse(
             $this->fixture->isCanceled()
@@ -7644,7 +7644,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function isCanceledForCanceledEventReturnsTrue()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertTrue(
             $this->fixture->isCanceled()
@@ -7656,7 +7656,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function isCanceledForConfirmedEventReturnsFalse()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
         self::assertFalse(
             $this->fixture->isCanceled()
@@ -7672,7 +7672,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function isPlannedForStatusPlannedReturnsTrue()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
         self::assertTrue(
             $this->fixture->isPlanned()
@@ -7684,7 +7684,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function isPlannedForStatusConfirmedReturnsFalse()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
         self::assertFalse(
             $this->fixture->isPlanned()
@@ -7696,7 +7696,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function isPlannedForStatusCanceledReturnsFalse()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertFalse(
             $this->fixture->isPlanned()
@@ -7794,7 +7794,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->addSpeakerRelation(['cancelation_period' => 1]);
 
         self::assertSame(
-            $GLOBALS['SIM_EXEC_TIME'] - Tx_Oelib_Time::SECONDS_PER_DAY,
+            $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
             $this->fixture->getCancelationDeadline()
         );
     }
@@ -7809,7 +7809,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $this->addSpeakerRelation(['cancelation_period' => 42]);
 
         self::assertSame(
-            $GLOBALS['SIM_EXEC_TIME'] - (42 * Tx_Oelib_Time::SECONDS_PER_DAY),
+            $GLOBALS['SIM_EXEC_TIME'] - (42 * \Tx_Oelib_Time::SECONDS_PER_DAY),
             $this->fixture->getCancelationDeadline()
         );
     }
@@ -8043,7 +8043,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     public function getEventDataForEventWithDateUsesHyphenAsDateSeparator()
     {
         $this->fixture->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
-        $this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + Tx_Oelib_Time::SECONDS_PER_DAY);
+        $this->fixture->setEndDate($GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY);
 
         self::assertContains(
             '-',
@@ -8080,7 +8080,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         ];
 
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
+        $fixture = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
         $fixture->expects(self::any())->method('getPlacesAsArray')->will(self::returnValue([$place]));
         $fixture->expects(self::any())->method('hasPlace')->will(self::returnValue(true));
 
@@ -8113,7 +8113,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         ];
 
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
+        $fixture = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
         $fixture->expects(self::any())->method('getPlacesAsArray')->will(self::returnValue([$place1, $place2]));
         $fixture->expects(self::any())->method('hasPlace')->will(self::returnValue(true));
 
@@ -8136,7 +8136,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         ];
 
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
+        $fixture = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
         $fixture->expects(self::any())->method('getPlacesAsArray')->will(self::returnValue([$place]));
         $fixture->expects(self::any())->method('hasPlace')->will(self::returnValue(true));
 
@@ -8159,7 +8159,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         ];
 
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
+        $fixture = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
         $fixture->expects(self::any())->method('getPlacesAsArray')->will(self::returnValue([$place]));
         $fixture->expects(self::any())->method('hasPlace')->will(self::returnValue(true));
 
@@ -8482,7 +8482,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
                 'end_date' => 0,
             ]
         );
-        $fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid, []);
+        $fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid, []);
 
         self::assertSame(
             0,
@@ -8505,7 +8505,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
                 'end_date' => 0,
             ]
         );
-        $fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid, []);
+        $fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid, []);
 
         self::assertSame(
             $this->now,
@@ -8528,7 +8528,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
                 'end_date' => 0,
             ]
         );
-        $fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid, []);
+        $fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid, []);
 
         self::assertSame(
             $this->now,
@@ -8551,7 +8551,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
                 'end_date' => $this->now + 1000,
             ]
         );
-        $fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $uid,
             ['allowRegistrationForStartedEvents' => 1]
         );
@@ -8577,7 +8577,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
                 'end_date' => $this->now + 1000,
             ]
         );
-        $fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $uid,
             ['allowRegistrationForStartedEvents' => 1]
         );
@@ -8603,7 +8603,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
                 'end_date' => 0,
             ]
         );
-        $fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
             $uid,
             ['allowRegistrationForStartedEvents' => 1]
         );
@@ -8782,19 +8782,19 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'credit_points' => 42,
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicRecordUid,
             ]
         );
 
-        $date = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($dateRecordUid);
+        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($dateRecordUid);
 
         self::assertSame(
             42,
@@ -8850,19 +8850,19 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'credit_points' => 0,
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicRecordUid,
             ]
         );
 
-        $date = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($dateRecordUid);
+        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($dateRecordUid);
 
         self::assertFalse(
             $date->hasTopicInteger('credit_points')
@@ -8877,19 +8877,19 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
         $topicRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'credit_points' => 1,
             ]
         );
         $dateRecordUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicRecordUid,
             ]
         );
 
-        $date = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($dateRecordUid);
+        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($dateRecordUid);
 
         self::assertTrue(
             $date->hasTopicInteger('credit_points')
@@ -9131,7 +9131,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_OldModel_Event::class,
+            \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip'],
             [],
             '',
@@ -9185,7 +9185,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_OldModel_Event::class,
+            \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip'],
             [],
             '',
@@ -9269,7 +9269,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_OldModel_Event::class,
+            \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserVip'],
             [],
             '',
@@ -9477,7 +9477,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_OldModel_Event::class,
+            \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip'],
             [],
             '',
@@ -9690,7 +9690,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_OldModel_Event::class,
+            \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip'],
             [],
             '',
@@ -9729,8 +9729,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canViewRegistrationsListMessageWithoutNeededRegistrationReturnsNoRegistrationMessage()
     {
-        /** @var Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
+        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
+        $fixture = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
         $fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(false));
         $fixture->init();
 
@@ -9745,8 +9745,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canViewRegistrationsListMessageForListAndNoLoginAndAttendeesAccessReturnsPleaseLoginMessage()
     {
-        /** @var Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
+        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
+        $fixture = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
         $fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
         $fixture->init();
 
@@ -9761,8 +9761,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canViewRegistrationsListMessageForListAndNoLoginAndLoginAccessReturnsPleaseLoginMessage()
     {
-        /** @var Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
+        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
+        $fixture = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
         $fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
         $fixture->init();
 
@@ -9777,8 +9777,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canViewRegistrationsListMessageForListAndNoLoginAndWorldAccessReturnsEmptyString()
     {
-        /** @var Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
+        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
+        $fixture = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
         $fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
         $fixture->init();
 
@@ -9813,8 +9813,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage($accessLevel)
     {
-        /** @var Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
+        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
+        $fixture = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
         $fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
         $fixture->init();
 
@@ -9831,8 +9831,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canViewRegistrationsListMessageForVipListAndWorldAccessAndNoLoginReturnsEmptyString()
     {
-        /** @var Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
+        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
+        $fixture = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
         $fixture->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
         $fixture->init();
 
@@ -9872,9 +9872,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canViewRegistrationsListMessageWithLoginRoutesParameters($whichPlugin, $accessLevel)
     {
-        /** @var Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
+        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_OldModel_Event::class,
+            \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'canViewRegistrationsList'],
             [],
             '',
@@ -9896,9 +9896,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canViewRegistrationsListMessageWithLoginAndAccessGrantedReturnsEmptyString()
     {
-        /** @var Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
+        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_OldModel_Event::class,
+            \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'canViewRegistrationsList'],
             [],
             '',
@@ -9921,9 +9921,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
      */
     public function canViewRegistrationsListMessageWithLoginAndAccessDeniedReturnsAccessDeniedMessage()
     {
-        /** @var Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
+        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_OldModel_Event::class,
+            \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'canViewRegistrationsList'],
             [],
             '',
@@ -10084,7 +10084,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_OldModel_Event::class,
+            \Tx_Seminars_OldModel_Event::class,
             [
                 'hasPriceRegular', 'hasPriceSpecial', 'earlyBirdApplies',
                 'hasEarlyBirdPriceRegular', 'hasEarlyBirdPriceSpecial',
@@ -10139,7 +10139,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['organizers_notified_about_minimum_reached' => 1]
         );
-        $subject = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
+        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
 
         self::assertTrue(
             $subject->haveOrganizersBeenNotifiedAboutEnoughAttendees()
@@ -10181,7 +10181,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['mute_notification_emails' => 1]
         );
-        $subject = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
+        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
 
         self::assertTrue(
             $subject->shouldMuteNotificationEmails()
@@ -10223,7 +10223,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['automatic_confirmation_cancelation' => 1]
         );
-        $subject = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
+        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
 
         self::assertTrue(
             $subject->shouldAutomaticallyConfirmOrCancel()
@@ -10252,7 +10252,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['registrations' => $numberOfRegistrations]
         );
-        $subject = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
+        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
 
         self::assertSame($numberOfRegistrations, $subject->getNumberOfAssociatedRegistrationRecords());
     }
@@ -10276,7 +10276,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['registrations' => 2]
         );
-        $subject = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
+        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
 
         $subject->increaseNumberOfAssociatedRegistrationRecords();
 
@@ -10322,13 +10322,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC, 'price_on_request' => false]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC, 'price_on_request' => false]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_DATE, 'topic' => $topicUid]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE, 'topic' => $topicUid]
         );
-        $date = new Tx_Seminars_OldModel_Event($dateUid);
+        $date = new \Tx_Seminars_OldModel_Event($dateUid);
 
         self::assertFalse($date->getPriceOnRequest());
     }
@@ -10340,13 +10340,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC, 'price_on_request' => true]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC, 'price_on_request' => true]
         );
         $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_DATE, 'topic' => $topicUid]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE, 'topic' => $topicUid]
         );
-        $date = new Tx_Seminars_OldModel_Event($dateUid);
+        $date = new \Tx_Seminars_OldModel_Event($dateUid);
 
         self::assertTrue($date->getPriceOnRequest());
     }

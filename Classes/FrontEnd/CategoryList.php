@@ -8,7 +8,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractView
+class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractView
 {
     /**
      * Creates a HTML list of categories.
@@ -22,8 +22,8 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
      */
     public function render()
     {
-        /** @var Tx_Seminars_BagBuilder_Event $seminarBagBuilder */
-        $seminarBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
+        /** @var \Tx_Seminars_BagBuilder_Event $seminarBagBuilder */
+        $seminarBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
         $seminarBagBuilder->setSourcePages(
             $this->getConfValueString('pages'),
             $this->getConfValueInteger('recursive')
@@ -37,7 +37,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
                     's_template_special'
                 )
             );
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             // Ignores the exception because the user will be warned of the
             // problem by the configuration check.
         }
@@ -45,8 +45,8 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
         $bag = $seminarBagBuilder->build();
         $eventUids = $bag->getUids();
 
-        /** @var Tx_Seminars_BagBuilder_Category $categoryBagBuilder */
-        $categoryBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Category::class);
+        /** @var \Tx_Seminars_BagBuilder_Category $categoryBagBuilder */
+        $categoryBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Category::class);
         $categoryBagBuilder->limitToEvents($eventUids);
         $categoryBag = $categoryBagBuilder->build();
 
@@ -54,7 +54,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
         if (($eventUids != '') && !$categoryBag->isEmpty()) {
             $allCategories = '';
 
-            /** @var Tx_Seminars_OldModel_Category $category */
+            /** @var \Tx_Seminars_OldModel_Category $category */
             foreach ($categoryBag as $category) {
                 $link = $this->createLinkToListViewLimitedByCategory(
                     $category->getUid(),
@@ -92,10 +92,10 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
         $title
     ) {
         if ($categoryUid <= 0) {
-            throw new InvalidArgumentException('$categoryUid must be > 0.', 1333293037);
+            throw new \InvalidArgumentException('$categoryUid must be > 0.', 1333293037);
         }
         if ($title == '') {
-            throw new InvalidArgumentException('$title must not be empty.', 1333293044);
+            throw new \InvalidArgumentException('$title must not be empty.', 1333293044);
         }
 
         return $this->cObj->getTypoLink(
@@ -174,7 +174,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends Tx_Seminars_FrontEnd_AbstractVie
         }
 
         $imageConfiguration = [
-            'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $iconData['icon'],
+            'file' => \Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $iconData['icon'],
             'titleText' => $iconData['title'],
         ];
         $imageWithoutClass = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);

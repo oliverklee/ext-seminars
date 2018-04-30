@@ -549,7 +549,7 @@ plugin.tx_seminars_pi1 {
                 renderer = renderer:TEMPLATE
                 renderer.template {
                     path.userobj.php (
-                        return Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('eventEditorTemplateFile');
+                        return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('eventEditorTemplateFile');
                     )
                     subpart = ###seminars_FORM###
                     errortag = errors
@@ -2392,7 +2392,7 @@ plugin.tx_seminars_pi1 {
                     renderer = renderer:TEMPLATE
                     renderer.template {
                         path.userobj.php (
-                            return Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
+                            return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
                         )
                         subpart = ###REGISTRATION_EDITOR_STEP_1###
                         errortag = errors
@@ -3159,7 +3159,7 @@ plugin.tx_seminars_pi1 {
                     renderer = renderer:TEMPLATE
                     renderer.template {
                         path.userobj.php (
-                            return Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
+                            return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
                         )
                         subpart = ###REGISTRATION_EDITOR_STEP_2###
                         errortag = errors
@@ -3769,7 +3769,7 @@ plugin.tx_seminars_pi1 {
                 renderer = renderer:TEMPLATE
                 renderer.template {
                     path.userobj.php (
-                            return Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
+                            return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
                     )
                     subpart = ###REGISTRATION_EDITOR_UNREGISTRATION###
                     errortag = errors
@@ -3834,7 +3834,7 @@ tx_seminars_pi2 {
 
     10 = USER
     10 {
-        userFunc = Tx_Seminars_Csv_CsvDownloader->main
+        userFunc = \Tx_Seminars_Csv_CsvDownloader->main
 
         # pro forma salutation mode for the FE; has no effect whatsoever
         salutation = formal
@@ -3859,7 +3859,7 @@ tx_seminars_publication {
 
     10 = USER
     10 {
-        userFunc = Tx_Seminars_FrontEnd_PublishEvent->render
+        userFunc = \Tx_Seminars_FrontEnd_PublishEvent->render
         xhtml_cleaning = all
     }
 }

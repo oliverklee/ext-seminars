@@ -8,25 +8,25 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_FrontEnd_EventEditor
+     * @var \Tx_Seminars_FrontEnd_EventEditor
      */
     protected $fixture = null;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     protected $testingFramework = null;
 
     /**
-     * @var Tx_Oelib_EmailCollector
+     * @var \Tx_Oelib_EmailCollector
      */
     protected $mailer = null;
 
     /**
-     * @var Tx_Oelib_Configuration
+     * @var \Tx_Oelib_Configuration
      */
     private $configuration = null;
 
@@ -34,15 +34,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
-        Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
+        \Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
-        $this->configuration = new Tx_Oelib_Configuration();
+        $this->configuration = new \Tx_Oelib_Configuration();
         $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
-        Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
+        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
 
-        $this->fixture = new Tx_Seminars_FrontEnd_EventEditor(
+        $this->fixture = new \Tx_Seminars_FrontEnd_EventEditor(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'form.' => ['eventEditor.' => []],
@@ -51,8 +51,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         );
         $this->fixture->setTestMode();
 
-        /** @var Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
+        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $mailerFactory->enableTestMode();
         $this->mailer = $mailerFactory->getMailer();
     }
@@ -61,8 +61,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     {
         $this->testingFramework->cleanUp();
 
-        Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        Tx_Oelib_ConfigurationProxy::purgeInstances();
+        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        \Tx_Oelib_ConfigurationProxy::purgeInstances();
     }
 
     /*
@@ -125,8 +125,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      *
      * @param int $publishSetting
      *        the publish settings for the user, must be one of the following:
-     *        Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY, Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW, or
-     *        Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+     *        \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY, \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW, or
+     *        \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
      *
      * @return int user UID
      */
@@ -138,7 +138,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
     /**
      * Creates a front-end user which has a group with the publish setting
-     * Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED and a reviewer.
+     * \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED and a reviewer.
      *
      * @return int user UID
      */
@@ -147,7 +147,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         $backendUserUid = $this->testingFramework->createBackEndUser(['email' => 'foo@bar.com', 'realName' => 'Mr. Foo']);
         $userGroupUid = $this->testingFramework->createFrontEndUserGroup(
             [
-                'tx_seminars_publish_events' => Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+                'tx_seminars_publish_events' => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
                 'tx_seminars_reviewer' => $backendUserUid,
             ]
         );
@@ -185,12 +185,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      * @param string $requiredField
      *        the field which should be required, may be empty
      *
-     * @return Tx_Seminars_FrontEnd_EventEditor event editor fixture with the given
+     * @return \Tx_Seminars_FrontEnd_EventEditor event editor fixture with the given
      *         field as required field, will not be NULL.
      */
     private function getFixtureWithRequiredField($requiredField)
     {
-        $result = new Tx_Seminars_FrontEnd_EventEditor(
+        $result = new \Tx_Seminars_FrontEnd_EventEditor(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'form.' => ['eventEditor.' => []],
@@ -867,10 +867,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function populateListOrganizersShowsDefaultOrganizerFromUserGroup()
     {
-        $organizerUid = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Organizer::class)
+        $organizerUid = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
             ->getLoadedTestingModel([])->getUid();
-        $frontEndUserGroupUid = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_FrontEndUserGroup::class)->getLoadedTestingModel(
+        $frontEndUserGroupUid = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getLoadedTestingModel(
                 ['tx_seminars_default_organizer' => $organizerUid]
             )->getUid();
 
@@ -888,8 +888,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function populateListOrganizersForDefaultOrganizerInUserGroupNotIncludesOtherOrganizer()
     {
-        $organizerMapper = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_Organizer::class
+        $organizerMapper = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_Organizer::class
         );
         $organizerUidFromDatabase = $this->testingFramework->createRecord(
             'tx_seminars_organizers'
@@ -898,8 +898,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         $organizerMapper->find($organizerUidFromDatabase);
 
         $organizerUid = $organizerMapper->getLoadedTestingModel([])->getUid();
-        $frontEndUserGroupUid = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_FrontEndUserGroup::class)->getLoadedTestingModel(
+        $frontEndUserGroupUid = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getLoadedTestingModel(
                 ['tx_seminars_default_organizer' => $organizerUid]
             )->getUid();
         $this->testingFramework
@@ -1269,7 +1269,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function modifyDataToInsertForPublishSettingPublishImmediatelyDoesNotHideCreatedEvent()
     {
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
 
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
@@ -1284,12 +1284,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function modifyDataToInsertForPublishSettingPublishImmediatelyDoesNotHideEditedEvent()
     {
-        $event = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_Event::class
+        $event = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_Event::class
         )->getLoadedTestingModel([]);
         $this->fixture->setObjectUid($event->getUid());
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
 
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
@@ -1305,7 +1305,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function modifyDataToInsertForPublishSettingHideNewHidesCreatedEvent()
     {
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
         );
 
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
@@ -1322,7 +1322,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function modifyDataToInsertForPublishSettingHideEditedHidesCreatedEvent()
     {
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
         );
 
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
@@ -1338,12 +1338,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function modifyDataToInsertForPublishSettingHideEditedHidesEditedEvent()
     {
-        $event = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_Event::class
+        $event = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_Event::class
         )->getLoadedTestingModel([]);
         $this->fixture->setObjectUid($event->getUid());
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
         );
 
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
@@ -1359,12 +1359,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function modifyDataToInsertForPublishSettingHideNewDoesNotHideEditedEvent()
     {
-        $event = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_Event::class
+        $event = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_Event::class
         )->getLoadedTestingModel([]);
         $this->fixture->setObjectUid($event->getUid());
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
         );
 
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
@@ -1380,7 +1380,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function modifyDataToInsertForEventHiddenOnEditingAddsPublicationHashToEvent()
     {
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
         );
 
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
@@ -1397,7 +1397,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function modifyDataToInsertForEventHiddenOnCreationAddsPublicationHashToEvent()
     {
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
         );
 
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
@@ -1413,12 +1413,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function modifyDataToInsertForEventNotHiddenOnEditingDoesNotAddPublicationHashToEvent()
     {
-        $event = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_Event::class
+        $event = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_Event::class
         )->getLoadedTestingModel([]);
         $this->fixture->setObjectUid($event->getUid());
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
         );
 
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
@@ -1434,7 +1434,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function modifyDataToInsertForEventNotHiddenOnCreationDoesNotAddPublicationHashToEvent()
     {
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
 
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
@@ -1449,14 +1449,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function modifyDataToInsertForHiddenEventDoesNotAddPublicationHashToEvent()
     {
-        $event = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_Event::class
+        $event = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_Event::class
         )->getLoadedTestingModel(
             ['hidden' => 1]
         );
         $this->fixture->setObjectUid($event->getUid());
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
         );
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
 
@@ -1471,7 +1471,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function modifyDataToInsertAddsTimestampToFormData()
     {
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
 
@@ -1486,7 +1486,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function modifyDataToInsertSetsTimestampToCurrentExecutionTime()
     {
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
 
@@ -1502,7 +1502,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function modifyDataToInsertAddsCreationDateToFormData()
     {
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
 
@@ -1517,7 +1517,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function modifyDataToInsertsetsCreationDateToCurrentExecutionTime()
     {
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
 
@@ -1532,7 +1532,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function modifyDataToInsertsetsOwnerFeUserToCurrentlyLoggedInUser()
     {
-        $userUid = $this->createAndLoginUserWithPublishSetting(Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
+        $userUid = $this->createAndLoginUserWithPublishSetting(\Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
 
         self::assertSame(
@@ -1547,7 +1547,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function modifyDataToInsertForNoUserGroupSpecificEventPidSetsPidFromTsSetupAsEventPid()
     {
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
         $this->fixture->setConfigurationValue('createEventsPID', 42);
 
@@ -1566,14 +1566,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     {
         $this->fixture->setConfigurationValue('createEventsPID', 42);
 
-        $userGroup = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_FrontEndUserGroup::class
+        $userGroup = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_FrontEndUserGroup::class
         )->getLoadedTestingModel(
                 ['tx_seminars_events_pid' => 21]
         );
 
-        $user = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_FrontEndUser::class
+        $user = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_FrontEndUser::class
         )->getLoadedTestingModel(
                 ['usergroup' => $userGroup->getUid()]
         );
@@ -1593,7 +1593,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function modifyDataToInsertForNewEventAndUserWithoutDefaultCategoriesDoesNotAddAnyCategories()
     {
         $this->createAndLoginUserWithPublishSetting(
-            Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
+            \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
 
         $modifiedFormData = $this->fixture->modifyDataToInsert([]);
@@ -1608,19 +1608,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function modifyDataToInsertForNewEventAndUserWithOneDefaultCategoryAddsThisCategory()
     {
-        $categories = new Tx_Oelib_List();
-        $category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+        $categories = new \Tx_Oelib_List();
+        $category = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
         $categories->add($category);
 
-        $userGroup = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_FrontEndUserGroup::class
+        $userGroup = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_FrontEndUserGroup::class
         )->getNewGhost();
         $userGroup->setData(
             [
                 'tx_seminars_default_categories' => $categories,
                 'tx_seminars_publish_events'
-                    => Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+                    => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
             ]
         );
 
@@ -1641,22 +1641,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function modifyDataToInsertForNewEventAndUserWithTwoDefaultCategoriesAddsTheseCategories()
     {
-        $categoryMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class);
+        $categoryMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class);
         $category1 = $categoryMapper->getNewGhost();
         $category2 = $categoryMapper->getNewGhost();
 
-        $categories = new Tx_Oelib_List();
+        $categories = new \Tx_Oelib_List();
         $categories->add($category1);
         $categories->add($category2);
 
-        $userGroup = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_FrontEndUserGroup::class
+        $userGroup = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_FrontEndUserGroup::class
         )->getNewGhost();
         $userGroup->setData(
             [
                 'tx_seminars_default_categories' => $categories,
                 'tx_seminars_publish_events'
-                    => Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+                    => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
             ]
         );
 
@@ -1677,19 +1677,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function modifyDataToInsertForEditedEventAndUserWithOneDefaultCategoryDoesNotAddTheUsersCategory()
     {
-        $categories = new Tx_Oelib_List();
-        $category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+        $categories = new \Tx_Oelib_List();
+        $category = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
         $categories->add($category);
 
-        $userGroup = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_FrontEndUserGroup::class
+        $userGroup = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_FrontEndUserGroup::class
         )->getNewGhost();
         $userGroup->setData(
             [
                 'tx_seminars_default_categories' => $categories,
                 'tx_seminars_publish_events'
-                    => Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+                    => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
             ]
         );
 
@@ -1698,8 +1698,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
         );
 
         $this->fixture->setObjectUid(
-            Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_Event::class
+            \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_Event::class
         )->getLoadedTestingModel(
                 []
             )->getUid()
@@ -1973,14 +1973,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function validateCheckboxesForUserWithDefaultCategoriesAndCategoriesRequiredAndEmptyReturnsTrue()
     {
-        $categories = new Tx_Oelib_List();
+        $categories = new \Tx_Oelib_List();
         $categories->add(
-            Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+            \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
                 ->getNewGhost()
         );
 
-        $userGroup = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_FrontEndUserGroup::class
+        $userGroup = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_FrontEndUserGroup::class
         )->getNewGhost();
         $userGroup->setData(
             ['tx_seminars_default_categories' => $categories]
@@ -2558,7 +2558,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     public function sendAdditionalNotificationEmailToReviewerWithoutReviewerAndFeatureEnabledNotSendsEmail()
     {
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
-        $this->createAndLoginUserWithPublishSetting(Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
+        $this->createAndLoginUserWithPublishSetting(\Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 
         $this->fixture->sendAdditionalNotificationEmailToReviewer();
 
@@ -2793,7 +2793,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     {
         self::assertContains(
             ['caption' => 'Deutschland', 'value' => 54],
-            Tx_Seminars_FrontEnd_EventEditor::populateListCountries()
+            \Tx_Seminars_FrontEnd_EventEditor::populateListCountries()
         );
     }
 
@@ -2802,7 +2802,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function populateListCountriesSortsResultsByLocalCountryName()
     {
-        $countries = Tx_Seminars_FrontEnd_EventEditor::populateListCountries();
+        $countries = \Tx_Seminars_FrontEnd_EventEditor::populateListCountries();
         $positionGermany = array_search(
             ['caption' => 'Deutschland', 'value' => 54],
             $countries
@@ -2833,7 +2833,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
 
         self::assertContains(
             ['caption' => 'Juggling', 'value' => $uid],
-            Tx_Seminars_FrontEnd_EventEditor::populateListSkills()
+            \Tx_Seminars_FrontEnd_EventEditor::populateListSkills()
         );
     }
 
@@ -2848,7 +2848,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
     {
         self::assertEquals(
             [],
-            Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList(new Tx_Oelib_List())
+            \Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList(new \Tx_Oelib_List())
         );
     }
 
@@ -2857,18 +2857,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function makeListToFormidableListForListWithOneElementReturnsModelDataInArray()
     {
-        $targetGroup = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_TargetGroup::class
+        $targetGroup = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_TargetGroup::class
         )->getLoadedTestingModel(
                 ['title' => 'foo']
         );
 
-        $list = new Tx_Oelib_List();
+        $list = new \Tx_Oelib_List();
         $list->add($targetGroup);
 
         self::assertContains(
             ['caption' => 'foo', 'value' => $targetGroup->getUid()],
-            Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList($list)
+            \Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList($list)
         );
     }
 
@@ -2877,20 +2877,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
      */
     public function makeListToFormidableListForListWithTwoElementsReturnsArrayWithTwoModels()
     {
-        $targetGroup1 = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_TargetGroup::class
+        $targetGroup1 = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_TargetGroup::class
         )->getLoadedTestingModel([]);
-        $targetGroup2 = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_TargetGroup::class
+        $targetGroup2 = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_TargetGroup::class
         )->getLoadedTestingModel([]);
 
-        $list = new Tx_Oelib_List();
+        $list = new \Tx_Oelib_List();
         $list->add($targetGroup1);
         $list->add($targetGroup2);
 
         self::assertCount(
             2,
-            Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList($list)
+            \Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList($list)
         );
     }
 

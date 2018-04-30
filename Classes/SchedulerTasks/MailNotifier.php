@@ -269,7 +269,7 @@ class MailNotifier extends AbstractTask
      * Returns a seminar bag builder already limited to upcoming events with a
      * begin date and status $status.
      *
-     * @param int $status status to limit the builder to, must be either Tx_Seminars_Model_Event::STATUS_PLANNED or ::CONFIRMED
+     * @param int $status status to limit the builder to, must be either \Tx_Seminars_Model_Event::STATUS_PLANNED or ::CONFIRMED
      *
      * @return \Tx_Seminars_BagBuilder_Event builder for the seminar bag
      */

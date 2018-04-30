@@ -8,7 +8,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_AbstractList
+class Tx_Seminars_BackEnd_RegistrationsList extends \Tx_Seminars_BackEnd_AbstractList
 {
     /**
      * @var string the name of the table we're working on
@@ -71,11 +71,11 @@ class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
         );
 
         $eventUid = (int)GeneralUtility::_GP('eventUid');
-        /** @var Tx_Seminars_Mapper_Event $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
+        /** @var \Tx_Seminars_Mapper_Event $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         if (($eventUid > 0) && $mapper->existsModel($eventUid)) {
             $this->eventUid = $eventUid;
-            /** @var Tx_Seminars_Model_Event $event */
+            /** @var \Tx_Seminars_Model_Event $event */
             $event = $mapper->find($eventUid);
             $registrationsHeading = sprintf(
                 $GLOBALS['LANG']->getLL('registrationlist.label_registrationsHeading'),
@@ -129,15 +129,15 @@ class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
      * @param int $registrationsToShow
      *        the switch to decide which registrations should be shown, must
      *        be either
-     *        Tx_Seminars_BackEnd_RegistrationsList::REGISTRATIONS_ON_QUEUE or
-     *        Tx_Seminars_BackEnd_RegistrationsList::REGULAR_REGISTRATIONS
+     *        \Tx_Seminars_BackEnd_RegistrationsList::REGISTRATIONS_ON_QUEUE or
+     *        \Tx_Seminars_BackEnd_RegistrationsList::REGULAR_REGISTRATIONS
      *
      * @return bool TRUE if the generated list is not empty, FALSE otherwise
      */
     private function setRegistrationTableMarkers($registrationsToShow)
     {
-        /** @var Tx_Seminars_BagBuilder_Registration $builder */
-        $builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
+        /** @var \Tx_Seminars_BagBuilder_Registration $builder */
+        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
         $pageData = $this->page->getPageData();
 
         switch ($registrationsToShow) {
@@ -163,11 +163,11 @@ class Tx_Seminars_BackEnd_RegistrationsList extends Tx_Seminars_BackEnd_Abstract
 
         $tableRows = '';
 
-        /** @var Tx_Seminars_OldModel_Registration $registration */
+        /** @var \Tx_Seminars_OldModel_Registration $registration */
         foreach ($registrationBag as $registration) {
             try {
                 $userName = htmlspecialchars($registration->getUserName());
-            } catch (Tx_Oelib_Exception_NotFound $exception) {
+            } catch (\Tx_Oelib_Exception_NotFound $exception) {
                 $userName = $GLOBALS['LANG']->getLL('registrationlist.deleted');
             }
             $event = $registration->getSeminarObject();

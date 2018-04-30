@@ -13,7 +13,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
+class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
 {
     /**
      * @var string the name of the SQL table this class corresponds to
@@ -25,10 +25,10 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
      *
      * @var string
      */
-    public $prefixId = Tx_Seminars_OldModel_Registration::class;
+    public $prefixId = \Tx_Seminars_OldModel_Registration::class;
 
     /**
-     * @var Tx_Seminars_OldModel_Event the event to which this registration relates
+     * @var \Tx_Seminars_OldModel_Event the event to which this registration relates
      */
     private $seminar = null;
 
@@ -70,7 +70,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
     /**
      * cached seminar objects with the seminar UIDs as keys and the objects as values
      *
-     * @var Tx_Seminars_OldModel_Event[]
+     * @var \Tx_Seminars_OldModel_Event[]
      */
     private static $cachedSeminars = [];
 
@@ -115,13 +115,13 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
      *
      * This function must be called directly after construction or this object will not be usable.
      *
-     * @param Tx_Seminars_OldModel_Event $event the seminar object (that's the seminar we would like to register for)
+     * @param \Tx_Seminars_OldModel_Event $event the seminar object (that's the seminar we would like to register for)
      * @param int $userUid UID of the FE user who wants to sign up
      * @param array $registrationData associative array with the registration data the user has just entered, may be empty
      *
      * @return void
      */
-    public function setRegistrationData(Tx_Seminars_OldModel_Event $event, $userUid, array $registrationData)
+    public function setRegistrationData(\Tx_Seminars_OldModel_Event $event, $userUid, array $registrationData)
     {
         $this->seminar = $event;
 
@@ -155,12 +155,12 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
         // selected, there actually is anything to pay and only one payment
         // method is provided.
         if (!$methodOfPayment && ($this->recordData['total_price'] > 0.00) && ($event->getNumberOfPaymentMethods() == 1)) {
-            $rows = Tx_Oelib_Db::selectMultiple(
+            $rows = \Tx_Oelib_Db::selectMultiple(
                 'uid',
                 'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
                 'tx_seminars_payment_methods.uid = tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
                     'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' . $event->getTopicUid() .
-                    Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
+                    \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
                 '',
                 'tx_seminars_seminars_payment_methods_mm.sorting'
             );
@@ -253,12 +253,12 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setSeats($seats)
     {
         if ($seats < 0) {
-            throw new InvalidArgumentException('The parameter $seats must be >= 0.', 1333291732);
+            throw new \InvalidArgumentException('The parameter $seats must be >= 0.', 1333291732);
         }
 
         $this->setRecordPropertyInteger('seats', $seats);
@@ -297,8 +297,8 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
      *
      * @return void
      *
-     * @throws Tx_Oelib_Exception_Database
-     * @throws Tx_Oelib_Exception_NotFound
+     * @throws \Tx_Oelib_Exception_Database
+     * @throws \Tx_Oelib_Exception_NotFound
      */
     private function retrieveUserData()
     {
@@ -311,14 +311,14 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
         $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             '*',
             'fe_users',
-            'uid = ' . $uid . Tx_Oelib_Db::enableFields('fe_users')
+            'uid = ' . $uid . \Tx_Oelib_Db::enableFields('fe_users')
         );
         if ($dbResult === false) {
-            throw new Tx_Oelib_Exception_Database();
+            throw new \Tx_Oelib_Exception_Database();
         }
         $userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
         if ($userData === false) {
-            throw new Tx_Oelib_Exception_NotFound('The FE user with the UID ' . $uid . ' could not be retrieved.', 1390065114);
+            throw new \Tx_Oelib_Exception_NotFound('The FE user with the UID ' . $uid . ' could not be retrieved.', 1390065114);
         }
 
         $this->setUserData($userData);
@@ -331,12 +331,12 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function setUserData(array $userData)
     {
         if (empty($userData)) {
-            throw new InvalidArgumentException('$userData must not be empty.', 1333291766);
+            throw new \InvalidArgumentException('$userData must not be empty.', 1333291766);
         }
 
         $this->userData = $userData;
@@ -541,12 +541,12 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
     /**
      * Returns the front-end user of the registration.
      *
-     * @return Tx_Seminars_Model_FrontEndUser the front-end user of the registration
+     * @return \Tx_Seminars_Model_FrontEndUser the front-end user of the registration
      */
     public function getFrontEndUser()
     {
-        /** @var Tx_Seminars_Mapper_FrontEndUser $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
+        /** @var \Tx_Seminars_Mapper_FrontEndUser $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
         return $mapper->find($this->getUser());
     }
 
@@ -561,8 +561,8 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
             return false;
         }
 
-        /** @var Tx_Seminars_Mapper_FrontEndUser $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
+        /** @var \Tx_Seminars_Mapper_FrontEndUser $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
 
         return $mapper->existsModel($this->getUser());
     }
@@ -592,7 +592,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
     /**
      * Gets the seminar to which this registration belongs.
      *
-     * @return Tx_Seminars_OldModel_Event the seminar to which this registration belongs
+     * @return \Tx_Seminars_OldModel_Event the seminar to which this registration belongs
      */
     public function getSeminarObject()
     {
@@ -602,7 +602,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
                 $this->seminar = self::$cachedSeminars[$seminarUid];
             } else {
                 $this->seminar = GeneralUtility::makeInstance(
-                    Tx_Seminars_OldModel_Event::class,
+                    \Tx_Seminars_OldModel_Event::class,
                     $seminarUid
                 );
                 self::$cachedSeminars[$seminarUid] = $this->seminar;
@@ -1056,7 +1056,7 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
         $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             'title, sorting',
             $foreignTable . ', ' . $mmTable,
-            'uid_local = ' . $this->getUid() . ' AND uid_foreign = uid' . Tx_Oelib_Db::enableFields($foreignTable),
+            'uid_local = ' . $this->getUid() . ' AND uid_foreign = uid' . \Tx_Oelib_Db::enableFields($foreignTable),
             '',
             'sorting'
         );
@@ -1204,12 +1204,12 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setNumberOfKids($numberOfKids)
     {
         if ($numberOfKids < 0) {
-            throw new InvalidArgumentException('The parameter $numberOfKids must be >= 0.', 1333291776);
+            throw new \InvalidArgumentException('The parameter $numberOfKids must be >= 0.', 1333291776);
         }
 
         $this->setRecordPropertyInteger('kids', $numberOfKids);
@@ -1242,12 +1242,12 @@ class Tx_Seminars_OldModel_Registration extends Tx_Seminars_OldModel_Abstract
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setMethodOfPaymentUid($uid)
     {
         if ($uid < 0) {
-            throw new InvalidArgumentException('The parameter $uid must be >= 0.', 1333291786);
+            throw new \InvalidArgumentException('The parameter $uid must be >= 0.', 1333291786);
         }
 
         $this->setRecordPropertyInteger('method_of_payment', $uid);

@@ -6,20 +6,20 @@
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_FrontEnd_EventHeadline
+     * @var \Tx_Seminars_FrontEnd_EventHeadline
      */
     private $fixture;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var Tx_Seminars_Mapper_Event
+     * @var \Tx_Seminars_Mapper_Event
      */
     private $mapper;
 
@@ -35,23 +35,23 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestC
 
     protected function setUp()
     {
-        $pluginConfiguration = new Tx_Oelib_Configuration();
+        $pluginConfiguration = new \Tx_Oelib_Configuration();
         $pluginConfiguration->setAsString('dateFormatYMD', '%d.%m.%Y');
-        $configurationRegistry = Tx_Oelib_ConfigurationRegistry::getInstance();
+        $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin.tx_seminars', $pluginConfiguration);
-        $configurationRegistry->set('config', new Tx_Oelib_Configuration());
-        $configurationRegistry->set('page.config', new Tx_Oelib_Configuration());
-        $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new Tx_Oelib_Configuration());
+        $configurationRegistry->set('config', new \Tx_Oelib_Configuration());
+        $configurationRegistry->set('page.config', new \Tx_Oelib_Configuration());
+        $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new \Tx_Oelib_Configuration());
 
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
 
-        $this->testingFramework    = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework    = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
         // just picked some random date (2001-01-01 00:00:00)
         $this->eventDate = 978303600;
 
-        $this->mapper = new Tx_Seminars_Mapper_Event();
+        $this->mapper = new \Tx_Seminars_Mapper_Event();
         $event = $this->mapper->getLoadedTestingModel([
             'pid' => 0,
             'title' => 'Test event',
@@ -59,7 +59,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestC
         ]);
         $this->eventId = $event->getUid();
 
-        $this->fixture = new Tx_Seminars_FrontEnd_EventHeadline(
+        $this->fixture = new \Tx_Seminars_FrontEnd_EventHeadline(
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
@@ -73,7 +73,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestC
     {
         $this->testingFramework->cleanUp();
 
-        Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
     //////////////////////////////////
@@ -110,7 +110,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestC
      */
     public function renderWithUidOfExistingEventReturnsHtmlSpecialCharedTitleOfSelectedEvent()
     {
-        /** @var Tx_Seminars_Model_Event $event */
+        /** @var \Tx_Seminars_Model_Event $event */
         $event = $this->mapper->find($this->eventId);
         $event->setTitle('<test>Test event</test>');
         $this->fixture->piVars['uid'] = $this->eventId;
@@ -127,9 +127,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends Tx_Phpunit_TestC
     public function renderWithUidOfExistingEventReturnsDateOfSelectedEvent()
     {
         $dateFormat = '%d.%m.%Y';
-        $configuration = new Tx_Oelib_Configuration();
+        $configuration = new \Tx_Oelib_Configuration();
         $configuration->setAsString('dateFormatYMD', $dateFormat);
-        Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_seminars', $configuration);
+        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_seminars', $configuration);
 
         $this->fixture->piVars['uid'] = $this->eventId;
 

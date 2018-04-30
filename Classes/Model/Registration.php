@@ -6,7 +6,7 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Seminars_Interface_Titled
+class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Seminars_Interface_Titled
 {
     /**
      * Returns the title of this registration.
@@ -25,12 +25,12 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setTitle($title)
     {
         if ($title === '') {
-            throw new InvalidArgumentException('The parameter $title must not be empty.', 1333296917);
+            throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296917);
         }
 
         $this->setAsString('title', $title);
@@ -39,7 +39,7 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
     /**
      * Returns the front-end user of this registration.
      *
-     * @return Tx_Seminars_Model_FrontEndUser the front-end user of this registration
+     * @return \Tx_Seminars_Model_FrontEndUser the front-end user of this registration
      */
     public function getFrontEndUser()
     {
@@ -49,11 +49,11 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
     /**
      * Sets the front-end user of this registration.
      *
-     * @param Tx_Oelib_Model_FrontEndUser $user the front-end user to set for this registration
+     * @param \Tx_Oelib_Model_FrontEndUser $user the front-end user to set for this registration
      *
      * @return void
      */
-    public function setFrontEndUser(Tx_Oelib_Model_FrontEndUser $user)
+    public function setFrontEndUser(\Tx_Oelib_Model_FrontEndUser $user)
     {
         $this->set('user', $user);
     }
@@ -61,7 +61,7 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
     /**
      * Returns the event of this registration.
      *
-     * @return Tx_Seminars_Model_Event the event of this registration
+     * @return \Tx_Seminars_Model_Event the event of this registration
      */
     public function getEvent()
     {
@@ -73,7 +73,7 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
      *
      * This is an alias for getEvent necessary for the relation to the event.
      *
-     * @return Tx_Seminars_Model_Event the event of this registration
+     * @return \Tx_Seminars_Model_Event the event of this registration
      *
      * @see getEvent
      */
@@ -85,11 +85,11 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
     /**
      * Sets the event of this registration.
      *
-     * @param Tx_Seminars_Model_Event $event the event to set for this registration
+     * @param \Tx_Seminars_Model_Event $event the event to set for this registration
      *
      * @return void
      */
-    public function setEvent(Tx_Seminars_Model_Event $event)
+    public function setEvent(\Tx_Seminars_Model_Event $event)
     {
         $this->set('seminar', $event);
     }
@@ -99,13 +99,13 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
      *
      * This is an alias for setEvent necessary for the relation to the event.
      *
-     * @param Tx_Seminars_Model_Event $event the event to set for this registration
+     * @param \Tx_Seminars_Model_Event $event the event to set for this registration
      *
      * @see setEvent
      *
      * @return void
      */
-    public function setSeminar(Tx_Seminars_Model_Event $event)
+    public function setSeminar(\Tx_Seminars_Model_Event $event)
     {
         $this->setEvent($event);
     }
@@ -175,12 +175,12 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setSeats($seats)
     {
         if ($seats < 0) {
-            throw new InvalidArgumentException('The parameter $seats must be >= 0.', 1333296926);
+            throw new \InvalidArgumentException('The parameter $seats must be >= 0.', 1333296926);
         }
 
         $this->setAsInteger('seats', $seats);
@@ -225,12 +225,12 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setTotalPrice($price)
     {
         if ($price < 0) {
-            throw new InvalidArgumentException('The parameter $price must be >= 0.', 1333296931);
+            throw new \InvalidArgumentException('The parameter $price must be >= 0.', 1333296931);
         }
 
         $this->setAsFloat('total_price', $price);
@@ -263,7 +263,7 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
     /**
      * Gets the additional persons (FE users) attached to this registration.
      *
-     * @return Tx_Oelib_List additional persons, will be empty if there are none
+     * @return \Tx_Oelib_List additional persons, will be empty if there are none
      */
     public function getAdditionalPersons()
     {
@@ -273,11 +273,11 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
     /**
      * Sets the additional persons attached to this registration.
      *
-     * @param Tx_Oelib_List $persons the additional persons (FE users), may be empty
+     * @param \Tx_Oelib_List $persons the additional persons (FE users), may be empty
      *
      * @return void
      */
-    public function setAdditionalPersons(Tx_Oelib_List $persons)
+    public function setAdditionalPersons(\Tx_Oelib_List $persons)
     {
         $this->set('additional_persons', $persons);
     }
@@ -309,12 +309,12 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setPaymentDateAsUnixTimestamp($timestamp)
     {
         if ($timestamp < 0) {
-            throw new InvalidArgumentException('The parameter $timestamp must be >= 0.', 1333296945);
+            throw new \InvalidArgumentException('The parameter $timestamp must be >= 0.', 1333296945);
         }
 
         $this->setAsInteger('datepaid', $timestamp);
@@ -323,7 +323,7 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
     /**
      * Returns the payment method of this registration.
      *
-     * @return Tx_Seminars_Model_PaymentMethod the payment method of this registration
+     * @return \Tx_Seminars_Model_PaymentMethod the payment method of this registration
      */
     public function getPaymentMethod()
     {
@@ -333,12 +333,12 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
     /**
      * Sets the payment method of this registration.
      *
-     * @param Tx_Seminars_Model_PaymentMethod|null $paymentMethod
+     * @param \Tx_Seminars_Model_PaymentMethod|null $paymentMethod
      *        the payment method of this registration to set, use NULL to set no payment method
      *
      * @return void
      */
-    public function setPaymentMethod(Tx_Seminars_Model_PaymentMethod $paymentMethod = null)
+    public function setPaymentMethod(\Tx_Seminars_Model_PaymentMethod $paymentMethod = null)
     {
         $this->set('method_of_payment', $paymentMethod);
     }
@@ -480,9 +480,9 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
      *
      * @return int the gender of this registration, will be one of the
      *                 following:
-     *                 - Tx_Oelib_Model_FrontEndUser::GENDER_MALE
-     *                 - Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE
-     *                 - Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
+     *                 - \Tx_Oelib_Model_FrontEndUser::GENDER_MALE
+     *                 - \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE
+     *                 - \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
      */
     public function getGender()
     {
@@ -494,26 +494,26 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
      *
      * @param int $gender
      *        the gender of this registration, must be one of the following:
-     *        - Tx_Oelib_Model_FrontEndUser::GENDER_MALE
-     *        - Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE
-     *        - Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
+     *        - \Tx_Oelib_Model_FrontEndUser::GENDER_MALE
+     *        - \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE
+     *        - \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setGender($gender)
     {
         $allowedGenders = [
-            Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
-            Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
-            Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+            \Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
+            \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
+            \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
         ];
 
         if (!in_array($gender, $allowedGenders, true)) {
-            throw new InvalidArgumentException(
-                'The parameter $gender must be one of the following: Tx_Oelib_Model_FrontEndUser::GENDER_MALE, ' .
-                    'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN',
+            throw new \InvalidArgumentException(
+                'The parameter $gender must be one of the following: \\Tx_Oelib_Model_FrontEndUser::GENDER_MALE, ' .
+                    'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, \\Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN',
                 1333296957
             );
         }
@@ -754,7 +754,7 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
     /**
      * Returns the lodgings of this registration.
      *
-     * @return Tx_Oelib_List the lodgings of this registration
+     * @return \Tx_Oelib_List the lodgings of this registration
      */
     public function getLodgings()
     {
@@ -786,7 +786,7 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
     /**
      * Returns the foods of this registration.
      *
-     * @return Tx_Oelib_List the foods of this registration
+     * @return \Tx_Oelib_List the foods of this registration
      */
     public function getFoods()
     {
@@ -855,12 +855,12 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setKids($kids)
     {
         if ($kids < 0) {
-            throw new InvalidArgumentException('The parameter $kids must be >= 0.', 1333296998);
+            throw new \InvalidArgumentException('The parameter $kids must be >= 0.', 1333296998);
         }
 
         $this->setAsString('kids', $kids);
@@ -869,7 +869,7 @@ class Tx_Seminars_Model_Registration extends Tx_Oelib_Model implements Tx_Semina
     /**
      * Returns the checkboxes of this registration.
      *
-     * @return Tx_Oelib_List the checkboxes of this registration
+     * @return \Tx_Oelib_List the checkboxes of this registration
      */
     public function getCheckboxes()
     {

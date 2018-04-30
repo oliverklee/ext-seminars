@@ -10,20 +10,20 @@ use TYPO3\CMS\Lang\LanguageService;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Philipp Kitzberger <philipp@cron-it.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_FrontEnd_RegistrationForm
+     * @var \Tx_Seminars_FrontEnd_RegistrationForm
      */
     protected $fixture = null;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     protected $testingFramework = null;
 
     /**
-     * @var Tx_Oelib_FakeSession a fake session
+     * @var \Tx_Oelib_FakeSession a fake session
      */
     protected $session = null;
 
@@ -33,35 +33,35 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     protected $seminarUid = 0;
 
     /**
-     * @var Tx_Seminars_OldModel_Event
+     * @var \Tx_Seminars_OldModel_Event
      */
     protected $seminar = null;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $frontEndPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->createFakeFrontEnd($frontEndPageUid);
 
-        $this->session = new Tx_Oelib_FakeSession();
-        Tx_Oelib_Session::setInstance(Tx_Oelib_Session::TYPE_USER, $this->session);
+        $this->session = new \Tx_Oelib_FakeSession();
+        \Tx_Oelib_Session::setInstance(\Tx_Oelib_Session::TYPE_USER, $this->session);
 
-        $configurationRegistry = Tx_Oelib_ConfigurationRegistry::getInstance();
-        $configuration = new Tx_Oelib_Configuration();
+        $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
+        $configuration = new \Tx_Oelib_Configuration();
         $configuration->setAsString('currency', 'EUR');
         $configurationRegistry->set('plugin.tx_seminars', $configuration);
         $configurationRegistry->set(
             'plugin.tx_staticinfotables_pi1',
-            new Tx_Oelib_Configuration()
+            new \Tx_Oelib_Configuration()
         );
 
-        $this->seminar = new Tx_Seminars_OldModel_Event($this->testingFramework->createRecord(
+        $this->seminar = new \Tx_Seminars_OldModel_Event($this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['payment_methods' => '1']
         ));
         $this->seminarUid = $this->seminar->getUid();
 
-        $this->fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $this->fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'pageToShowAfterUnregistrationPID' => $frontEndPageUid,
                 'sendParametersToThankYouAfterRegistrationPageUrl' => 1,
@@ -92,7 +92,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $this->testingFramework->cleanUp();
 
-        Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
     ////////////////////////////////////////////////////////////////
@@ -513,7 +513,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        Tx_Oelib_ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->
+        \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->
             setAsString('countryCode', 'DEU');
 
         self::assertEquals(
@@ -697,11 +697,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField(
         $key
     ) {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => ''],
             $GLOBALS['TSFE']->cObj
         );
-        $fixture->setSeminar($this->getMock(Tx_Seminars_OldModel_Event::class, [], [], '', false));
+        $fixture->setSeminar($this->getMock(\Tx_Seminars_OldModel_Event::class, [], [], '', false));
 
         self::assertFalse(
             $fixture->isFormFieldEnabled($key)
@@ -723,11 +723,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $key,
         $isSelfContained
     ) {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => $key],
             $GLOBALS['TSFE']->cObj
         );
-        $fixture->setSeminar($this->getMock(Tx_Seminars_OldModel_Event::class, [], [], '', false));
+        $fixture->setSeminar($this->getMock(\Tx_Seminars_OldModel_Event::class, [], [], '', false));
 
         self::assertEquals(
             $isSelfContained,
@@ -740,7 +740,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function isFormFieldEnabledForEnabledRegisteredThemselvesFieldOnlyReturnsFalseForMoreSeats()
     {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => 'registered_themselves'],
             $GLOBALS['TSFE']->cObj
         );
@@ -755,7 +755,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function isFormFieldEnabledForEnabledCompanyFieldReturnsTrueForBillingAddress()
     {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => 'company, billing_address'],
             $GLOBALS['TSFE']->cObj
         );
@@ -916,7 +916,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function getNumberOfEnteredPersonsForFieldHiddenReturnsValueFromConfiguration($configurationValue)
     {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'showRegistrationFields' => 'seats',
                 'form.' => [
@@ -1017,7 +1017,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_RegistrationForm::class,
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
             [],
             '',
@@ -1043,7 +1043,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_RegistrationForm::class,
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
             [],
             '',
@@ -1069,7 +1069,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_RegistrationForm::class,
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
             [],
             '',
@@ -1095,7 +1095,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_RegistrationForm::class,
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
             [],
             '',
@@ -1171,7 +1171,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function validateNumberOfRegisteredPersonsForAttendeesNamesHiddenAndManySeatsReturnsTrue()
     {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'showRegistrationFields' => 'seats',
                 'form.' => [
@@ -1204,7 +1204,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_RegistrationForm::class,
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
             [],
             '',
@@ -1232,7 +1232,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_RegistrationForm::class,
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
             [],
             '',
@@ -1260,7 +1260,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_RegistrationForm::class,
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
             [],
             '',
@@ -1288,7 +1288,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_RegistrationForm::class,
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
             [],
             '',
@@ -1318,7 +1318,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_RegistrationForm::class,
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
             [],
             '',
@@ -1348,7 +1348,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_RegistrationForm::class,
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
             [],
             '',
@@ -1378,7 +1378,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_RegistrationForm::class,
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
             [],
             '',
@@ -1408,7 +1408,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_RegistrationForm::class,
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
             [],
             '',
@@ -1552,7 +1552,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function getRegistrationDataForEnabledPriceFieldReturnsSelectedPriceValue()
     {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'price',
@@ -1566,7 +1566,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             $this->seminarUid,
             ['price_regular' => 42]
         );
-        $event = new Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $fixture->setSeminar($event);
         $fixture->setFakedFormValue('price', 42);
 
@@ -1581,7 +1581,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function getRegistrationDataHtmlspecialcharsInterestsField()
     {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'interests',
@@ -1590,7 +1590,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
         $fixture->setTestMode();
 
-        $event = new Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $fixture->setSeminar($event);
         $fixture->setFakedFormValue('interests', 'A, B & C');
 
@@ -1605,7 +1605,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function getRegistrationDataReplacesCarriageReturnInInterestsFieldWithBr()
     {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'interests',
@@ -1614,7 +1614,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
         $fixture->setTestMode();
 
-        $event = new Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $fixture->setSeminar($event);
         $fixture->setFakedFormValue('interests', 'Love' . CR . 'Peace');
 
@@ -1629,7 +1629,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
      */
     public function getRegistrationDataCanContainAttendeesNames()
     {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names',
@@ -1638,7 +1638,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
         $fixture->setTestMode();
 
-        $event = new Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $fixture->setSeminar($event);
         $fixture->setFakedFormValue('attendees_names', 'John Doe');
 
@@ -1658,7 +1658,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ['name' => 'Jane Doe']
         );
 
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1667,7 +1667,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
         $fixture->setTestMode();
 
-        $event = new Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $fixture->setSeminar($event);
         $fixture->setFakedFormValue('attendees_names', 'John Doe');
         $fixture->setFakedFormValue('registered_themselves', '1');
@@ -1688,7 +1688,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ['name' => 'Jane Doe']
         );
 
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1697,7 +1697,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
         $fixture->setTestMode();
 
-        $event = new Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $fixture->setSeminar($event);
         $fixture->setFakedFormValue('attendees_names', 'John Doe');
         $fixture->setFakedFormValue('registered_themselves', '');
@@ -1718,7 +1718,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ['name' => 'Jane Doe', 'title' => 'facility manager']
         );
 
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1728,7 +1728,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
         $fixture->setTestMode();
 
-        $event = new Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $fixture->setSeminar($event);
         $fixture->setFakedFormValue('registered_themselves', '1');
 
@@ -1748,7 +1748,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ['name' => 'Jane Doe', 'title' => 'facility manager']
         );
 
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1758,7 +1758,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
         $fixture->setTestMode();
 
-        $event = new Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $fixture->setSeminar($event);
         $fixture->setFakedFormValue('registered_themselves', '1');
 
@@ -1778,7 +1778,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ['name' => 'Jane Doe', 'email' => 'jane@example.com']
         );
 
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1788,7 +1788,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
         $fixture->setTestMode();
 
-        $event = new Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $fixture->setSeminar($event);
         $fixture->setFakedFormValue('registered_themselves', '1');
 
@@ -1808,7 +1808,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
             ['name' => 'Jane Doe', 'email' => 'jane@example.com']
         );
 
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
@@ -1818,7 +1818,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         );
         $fixture->setTestMode();
 
-        $event = new Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $fixture->setSeminar($event);
         $fixture->setFakedFormValue('registered_themselves', '1');
 
@@ -1850,7 +1850,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
     {
         $event = $this->fixture->getEvent();
         self::assertInstanceOf(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             $event
         );
 
@@ -1973,7 +1973,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends Tx_Phpunit_Te
         $event->setMaximumAttendees(11);
         self::assertSame(11, $event->getVacancies());
 
-        $subject = new Tx_Seminars_FrontEnd_RegistrationForm(
+        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['maximumBookableSeats' => 3],
             $GLOBALS['TSFE']->cObj
         );

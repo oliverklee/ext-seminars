@@ -5,10 +5,10 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_FrontEnd_RequirementsList
+     * @var \Tx_Seminars_FrontEnd_RequirementsList
      */
     protected $fixture = null;
 
@@ -18,7 +18,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
     protected $seminarUid = 0;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     protected $testingFramework = null;
 
@@ -29,7 +29,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
 
     protected function setUp()
     {
-        $this->testingFramework    = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework    = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
@@ -42,7 +42,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
             ]
         );
 
-        $this->fixture = new Tx_Seminars_FrontEnd_RequirementsList(
+        $this->fixture = new \Tx_Seminars_FrontEnd_RequirementsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             $GLOBALS['TSFE']->cObj
         );
@@ -52,7 +52,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
     {
         $this->testingFramework->cleanUp();
 
-        Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
     /*
@@ -80,12 +80,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required & foo',
             ]
         );
@@ -95,7 +95,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
             $requiredEvent,
             'requirements'
         );
-        $this->fixture->setEvent(new Tx_Seminars_OldModel_Event($this->seminarUid));
+        $this->fixture->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
 
         self::assertContains(
             'required &amp; foo',
@@ -115,12 +115,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredEvent = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_foo',
             ]
         );
@@ -130,7 +130,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
             $requiredEvent,
             'requirements'
         );
-        $this->fixture->setEvent(new Tx_Seminars_OldModel_Event($this->seminarUid));
+        $this->fixture->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
 
         self::assertRegExp(
             '/<a href=.*' . $requiredEvent . '.*>required_foo<\\/a>/',
@@ -146,12 +146,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredEvent1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_foo',
             ]
         );
@@ -164,7 +164,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
         $requiredEvent2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_bar',
             ]
         );
@@ -174,7 +174,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
             $requiredEvent2,
             'requirements'
         );
-        $this->fixture->setEvent(new Tx_Seminars_OldModel_Event($this->seminarUid));
+        $this->fixture->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
 
         self::assertRegExp(
             '/required_foo.*required_bar/s',
@@ -208,19 +208,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $requiredEvent1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_foo',
             ]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $requiredEvent1,
             ]
         );
@@ -233,14 +233,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
         $requiredEvent2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'title' => 'required_bar',
             ]
         );
         $requiredDate2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $requiredEvent2,
             ]
         );
@@ -254,7 +254,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends Tx_Phpunit_Te
             'tx_seminars_attendances',
             ['seminar' => $requiredDate2, 'user' => $userUid]
         );
-        $this->fixture->setEvent(new Tx_Seminars_OldModel_Event($this->seminarUid));
+        $this->fixture->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
         $this->fixture->limitToMissingRegistrations();
 
         self::assertNotContains(

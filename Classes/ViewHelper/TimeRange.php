@@ -8,12 +8,12 @@
 class Tx_Seminars_ViewHelper_TimeRange
 {
     /**
-     * @var Tx_Oelib_Configuration
+     * @var \Tx_Oelib_Configuration
      */
     protected $configuration = null;
 
     /**
-     * @var Tx_Oelib_Translator
+     * @var \Tx_Oelib_Translator
      */
     protected $translator = null;
 
@@ -31,12 +31,12 @@ class Tx_Seminars_ViewHelper_TimeRange
      * Returns a localized string "will be announced" if there's no time set (i.e. both begin time and end time are 00:00).
      * Returns only the begin time if begin time and end time are the same.
      *
-     * @param Tx_Seminars_Model_AbstractTimeSpan $timeSpan the timespan to get the date for
+     * @param \Tx_Seminars_Model_AbstractTimeSpan $timeSpan the timespan to get the date for
      * @param string $dash the character or HTML entity used to separate begin time and end time
      *
      * @return string the time
      */
-    public function render(Tx_Seminars_Model_AbstractTimeSpan $timeSpan, $dash = '&#8211;')
+    public function render(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan, $dash = '&#8211;')
     {
         if (!$this->hasTime($timeSpan)) {
             return $this->translator->translate('message_willBeAnnounced');
@@ -62,11 +62,11 @@ class Tx_Seminars_ViewHelper_TimeRange
      * Checks whether there's a time set (begin time !== 00:00).
      * If there's no date/time set, the result will be FALSE.
      *
-     * @param Tx_Seminars_Model_AbstractTimeSpan $timeSpan
+     * @param \Tx_Seminars_Model_AbstractTimeSpan $timeSpan
      *
      * @return bool
      */
-    protected function hasTime(Tx_Seminars_Model_AbstractTimeSpan $timeSpan)
+    protected function hasTime(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan)
     {
         if (!$timeSpan->hasBeginDate()) {
             return false;
@@ -79,11 +79,11 @@ class Tx_Seminars_ViewHelper_TimeRange
      * Checks whether there's an end time set (end time !== 00:00).
      * If there's no end date/time set, the result will be FALSE.
      *
-     * @param Tx_Seminars_Model_AbstractTimeSpan $timeSpan
+     * @param \Tx_Seminars_Model_AbstractTimeSpan $timeSpan
      *
      * @return bool
      */
-    protected function hasEndTime(Tx_Seminars_Model_AbstractTimeSpan $timeSpan)
+    protected function hasEndTime(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan)
     {
         if (!$timeSpan->hasEndDate()) {
             return false;

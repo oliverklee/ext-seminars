@@ -10,7 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
+class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
 {
     /**
      * @var int
@@ -45,7 +45,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
     public $extKey = 'seminars';
 
     /**
-     * @var Tx_Oelib_Configuration
+     * @var \Tx_Oelib_Configuration
      */
     protected $configuration = null;
 
@@ -70,7 +70,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
             $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         }
 
-        $this->configuration = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
+        $this->configuration = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
     }
 
     /**
@@ -98,8 +98,8 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
             if ('utf-8' !== $resultCharset) {
                 $result = $this->getCharsetConversion()->conv($result, 'utf-8', $resultCharset);
             }
-        } catch (Exception $exception) {
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 500 Internal Server Error');
+        } catch (\Exception $exception) {
+            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 500 Internal Server Error');
             $result = $exception->getMessage() . LF . LF . $exception->getTraceAsString() . LF . LF;
         }
 
@@ -111,7 +111,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
      *
      * @return CharsetConverter a charset conversion instance
      *
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     protected function getCharsetConversion()
     {
@@ -120,7 +120,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
         } elseif (isset($GLOBALS['LANG'])) {
             $instance = $GLOBALS['LANG']->csConvObj;
         } else {
-            throw new RuntimeException('There was neither a front end nor a back end detected.', 1333292438);
+            throw new \RuntimeException('There was neither a front end nor a back end detected.', 1333292438);
         }
 
         return $instance;
@@ -139,7 +139,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
      */
     public function createAndOutputListOfRegistrations($eventUid = 0)
     {
-        /** @var Tx_Seminars_Csv_EmailRegistrationListView $listView */
+        /** @var \Tx_Seminars_Csv_EmailRegistrationListView $listView */
         $listView = GeneralUtility::makeInstance(\Tx_Seminars_Csv_DownloadRegistrationListView::class);
 
         $pageUid = (int)$this->piVars['pid'];
@@ -177,7 +177,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
             return '';
         }
 
-        /** @var Tx_Seminars_Csv_EmailRegistrationListView $listView */
+        /** @var \Tx_Seminars_Csv_EmailRegistrationListView $listView */
         $listView = GeneralUtility::makeInstance(\Tx_Seminars_Csv_DownloadRegistrationListView::class);
         $listView->setEventUid($eventUid);
 
@@ -220,7 +220,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
      */
     public function createListOfEvents($pageUid)
     {
-        /** @var Tx_Seminars_Csv_EventListView $eventListView */
+        /** @var \Tx_Seminars_Csv_EventListView $eventListView */
         $eventListView = GeneralUtility::makeInstance(\Tx_Seminars_Csv_EventListView::class);
         $eventListView->setPageUid($pageUid);
 
@@ -242,16 +242,16 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
     {
         switch ($this->getTypo3Mode()) {
             case 'BE':
-                /** @var Tx_Seminars_Csv_BackEndRegistrationAccessCheck $accessCheck */
+                /** @var \Tx_Seminars_Csv_BackEndRegistrationAccessCheck $accessCheck */
                 $accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_BackEndRegistrationAccessCheck::class);
                 $result = $accessCheck->hasAccess();
                 break;
             case 'FE':
-                /** @var Tx_Seminars_Csv_FrontEndRegistrationAccessCheck $accessCheck */
+                /** @var \Tx_Seminars_Csv_FrontEndRegistrationAccessCheck $accessCheck */
                 $accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_FrontEndRegistrationAccessCheck::class);
 
-                /** @var Tx_Seminars_OldModel_Event $event */
-                $event = GeneralUtility::makeInstance(Tx_Seminars_OldModel_Event::class, $eventUid, false, true);
+                /** @var \Tx_Seminars_OldModel_Event $event */
+                $event = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $eventUid, false, true);
                 $accessCheck->setEvent($event);
 
                 $result = $accessCheck->hasAccess();
@@ -272,7 +272,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
      */
     protected function canAccessListOfEvents($pageUid)
     {
-        /** @var Tx_Seminars_Csv_BackEndEventAccessCheck $accessCheck */
+        /** @var \Tx_Seminars_Csv_BackEndEventAccessCheck $accessCheck */
         $accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_BackEndEventAccessCheck::class);
         $accessCheck->setPageUid($pageUid);
 
@@ -310,10 +310,10 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
      */
     private function setPageTypeAndDisposition($csvFileName)
     {
-        Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+        \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
             'Content-type: text/csv; header=present; charset=' . $this->configuration->getAsString('charsetForCsv')
         );
-        Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+        \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
             'Content-disposition: attachment; filename=' . $csvFileName
         );
     }
@@ -326,21 +326,21 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
      *
      * @return string the error message belonging to the error code, will not be empty
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     private function addErrorHeaderAndReturnMessage($errorCode)
     {
         switch ($errorCode) {
             case self::ACCESS_DENIED:
-                Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
+                \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
                 $result = $this->translate('message_403');
                 break;
             case self::NOT_FOUND:
-                Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+                \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
                 $result = $this->translate('message_404');
                 break;
             default:
-                throw new InvalidArgumentException('"' . $errorCode . '" is no legal error code.', 1333292523);
+                throw new \InvalidArgumentException('"' . $errorCode . '" is no legal error code.', 1333292523);
         }
 
         return $result;
@@ -359,7 +359,7 @@ class Tx_Seminars_Csv_CsvDownloader extends Tx_Oelib_TemplateHelper
     {
         switch ($this->getTypo3Mode()) {
             case 'BE':
-                /** @var Tx_Seminars_Csv_BackEndRegistrationAccessCheck $accessCheck */
+                /** @var \Tx_Seminars_Csv_BackEndRegistrationAccessCheck $accessCheck */
                 $accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_BackEndRegistrationAccessCheck::class);
                 $accessCheck->setPageUid($pageUid);
                 $result = $accessCheck->hasAccess();

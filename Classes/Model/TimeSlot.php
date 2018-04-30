@@ -5,7 +5,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Model_TimeSlot extends Tx_Seminars_Model_AbstractTimeSpan
+class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
 {
     /**
      * Returns our entry date as UNIX time-stamp.
@@ -28,7 +28,7 @@ class Tx_Seminars_Model_TimeSlot extends Tx_Seminars_Model_AbstractTimeSpan
     public function setEntryDateAsUnixTimeStamp($entryDate)
     {
         if ($entryDate < 0) {
-            throw new InvalidArgumentException('The parameter $entryDate must be >= 0.', 1333297074);
+            throw new \InvalidArgumentException('The parameter $entryDate must be >= 0.', 1333297074);
         }
 
         $this->setAsInteger('entry_date', $entryDate);
@@ -47,7 +47,7 @@ class Tx_Seminars_Model_TimeSlot extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our place.
      *
-     * @return Tx_Seminars_Model_Place|null our place, will be null if this time-slot has no place
+     * @return \Tx_Seminars_Model_Place|null our place, will be null if this time-slot has no place
      */
     public function getPlace()
     {
@@ -57,7 +57,7 @@ class Tx_Seminars_Model_TimeSlot extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns the seminar/event this time-slot belongs to.
      *
-     * @return Tx_Seminars_Model_Event
+     * @return \Tx_Seminars_Model_Event
      */
     public function getSeminar()
     {
@@ -67,11 +67,11 @@ class Tx_Seminars_Model_TimeSlot extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Sets the seminar/event this time-slot belongs to.
      *
-     * @param Tx_Seminars_Model_Event $seminar
+     * @param \Tx_Seminars_Model_Event $seminar
      *
      * @return void
      */
-    public function setSeminar(Tx_Seminars_Model_Event $seminar)
+    public function setSeminar(\Tx_Seminars_Model_Event $seminar)
     {
         $this->set('seminar', $seminar);
     }

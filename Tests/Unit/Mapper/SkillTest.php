@@ -5,23 +5,23 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_SkillTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_SkillTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var Tx_Seminars_Mapper_Skill
+     * @var \Tx_Seminars_Mapper_Skill
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new Tx_Seminars_Mapper_Skill();
+        $this->fixture = new \Tx_Seminars_Mapper_Skill();
     }
 
     protected function tearDown()
@@ -39,7 +39,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SkillTest extends Tx_Phpunit_TestCase
     public function findWithUidReturnsSkillInstance()
     {
         self::assertInstanceOf(
-            Tx_Seminars_Model_Skill::class,
+            \Tx_Seminars_Model_Skill::class,
             $this->fixture->find(1)
         );
     }
@@ -54,7 +54,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SkillTest extends Tx_Phpunit_TestCase
             ['title' => 'Superhero']
         );
 
-        /** @var Tx_Seminars_Model_Skill $model */
+        /** @var \Tx_Seminars_Model_Skill $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             'Superhero',

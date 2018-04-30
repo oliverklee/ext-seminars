@@ -8,10 +8,10 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Csv_BackEndRegistrationAccessCheck
+     * @var \Tx_Seminars_Csv_BackEndRegistrationAccessCheck
      */
     protected $subject = null;
 
@@ -26,7 +26,7 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends Tx_P
     protected $backEndUserBackup = null;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     protected $testingFramework = null;
 
@@ -36,14 +36,14 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends Tx_P
         $this->backEndUser = $this->getMock(BackendUserAuthentication::class);
         $GLOBALS['BE_USER'] = $this->backEndUser;
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->subject = new Tx_Seminars_Csv_BackEndRegistrationAccessCheck();
+        $this->subject = new \Tx_Seminars_Csv_BackEndRegistrationAccessCheck();
     }
 
     protected function tearDown()
     {
-        Tx_Oelib_BackEndLoginManager::purgeInstance();
+        \Tx_Oelib_BackEndLoginManager::purgeInstance();
 
         $this->testingFramework->cleanUp();
         $GLOBALS['BE_USER'] = $this->backEndUserBackup;

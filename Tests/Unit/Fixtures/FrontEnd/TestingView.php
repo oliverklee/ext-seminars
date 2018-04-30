@@ -5,7 +5,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView extends Tx_Seminars_FrontEnd_AbstractView
+class Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView extends \Tx_Seminars_FrontEnd_AbstractView
 {
     /**
      * Renders the view and returns its content.

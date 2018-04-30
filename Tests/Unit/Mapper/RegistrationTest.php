@@ -6,23 +6,23 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var Tx_Seminars_Mapper_Registration
+     * @var \Tx_Seminars_Mapper_Registration
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new Tx_Seminars_Mapper_Registration();
+        $this->fixture = new \Tx_Seminars_Mapper_Registration();
     }
 
     protected function tearDown()
@@ -39,7 +39,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function findWithUidReturnsRegistrationInstance()
     {
-        self::assertInstanceOf(Tx_Seminars_Model_Registration::class, $this->fixture->find(1));
+        self::assertInstanceOf(\Tx_Seminars_Model_Registration::class, $this->fixture->find(1));
     }
 
     /**
@@ -52,7 +52,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
             ['title' => 'registration for event']
         );
 
-        /** @var Tx_Seminars_Model_Registration $model */
+        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             'registration for event',
@@ -69,7 +69,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getEventWithEventReturnsEventInstance()
     {
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
+        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(['seminar' => $event->getUid()]);
@@ -82,7 +82,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getSeminarWithEventReturnsEventInstance()
     {
-        $event = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
+        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(['seminar' => $event->getUid()]);
@@ -99,8 +99,8 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getFrontEndUserWithFrontEndUserReturnsSameFrontEndUser()
     {
-        $frontEndUser = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
+        $frontEndUser = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(['user' => $frontEndUser->getUid()]);
 
@@ -127,8 +127,8 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
      */
     public function getPaymentMethodWithPaymentMethodReturnsPaymentMethodInstance()
     {
-        $paymentMethod = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(['method_of_payment' => $paymentMethod->getUid()]);
 
@@ -156,7 +156,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     public function getLodgingsWithOneLodgingReturnsListOfLodgings()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $lodging = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Lodging::class)
+        $lodging = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -165,9 +165,9 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
             'lodgings'
         );
 
-        /** @var Tx_Seminars_Model_Registration $model */
+        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->fixture->find($uid);
-        self::assertInstanceOf(Tx_Seminars_Model_Lodging::class, $model->getLodgings()->first());
+        self::assertInstanceOf(\Tx_Seminars_Model_Lodging::class, $model->getLodgings()->first());
     }
 
     /**
@@ -176,7 +176,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     public function getLodgingsWithOneLodgingReturnsOneLodging()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $lodging = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Lodging::class)
+        $lodging = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -185,7 +185,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
             'lodgings'
         );
 
-        /** @var Tx_Seminars_Model_Registration $model */
+        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             $lodging->getUid(),
@@ -214,7 +214,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     public function getFoodsWithOneFoodReturnsListOfFoods()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $food = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Food::class)
+        $food = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -223,9 +223,9 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
             'foods'
         );
 
-        /** @var Tx_Seminars_Model_Registration $model */
+        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->fixture->find($uid);
-        self::assertInstanceOf(Tx_Seminars_Model_Food::class, $model->getFoods()->first());
+        self::assertInstanceOf(\Tx_Seminars_Model_Food::class, $model->getFoods()->first());
     }
 
     /**
@@ -234,7 +234,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     public function getFoodsWithOneFoodReturnsOneFood()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $food = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Food::class)
+        $food = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -243,7 +243,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
             'foods'
         );
 
-        /** @var Tx_Seminars_Model_Registration $model */
+        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             $food->getUid(),
@@ -272,7 +272,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     public function getCheckboxesWithOneCheckboxReturnsListOfCheckboxes()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $checkbox = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
+        $checkbox = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -281,7 +281,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
             'checkboxes'
         );
 
-        /** @var Tx_Seminars_Model_Registration $model */
+        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             $checkbox->getUid(),
@@ -295,7 +295,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
     public function getCheckboxesWithOneCheckboxReturnsOneCheckbox()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $checkbox = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
+        $checkbox = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -304,7 +304,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
             'checkboxes'
         );
 
-        /** @var Tx_Seminars_Model_Registration $model */
+        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             $checkbox->getUid(),
@@ -330,7 +330,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends Tx_Phpunit_TestCase
             ['tx_seminars_registration' => $registrationUid]
         );
 
-        /** @var Tx_Seminars_Model_Registration $model */
+        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->fixture->find($registrationUid);
         self::assertEquals(
             (string)$personUid,

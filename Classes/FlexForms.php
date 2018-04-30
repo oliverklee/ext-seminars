@@ -55,7 +55,7 @@ class Tx_Seminars_FlexForms
     private function getColumnsOfTable($tableName)
     {
         if ($tableName == '') {
-            throw new InvalidArgumentException('The first parameter $tableName must not be empty.', 1333291708);
+            throw new \InvalidArgumentException('The first parameter $tableName must not be empty.', 1333291708);
         }
 
         $columns = $GLOBALS['TYPO3_DB']->admin_get_fields($tableName);

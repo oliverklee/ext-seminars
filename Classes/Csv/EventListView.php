@@ -7,7 +7,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView
+class Tx_Seminars_Csv_EventListView extends \Tx_Seminars_Csv_AbstractListView
 {
     /**
      * @var string
@@ -15,7 +15,7 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView
     protected $tableName = 'tx_seminars_seminars';
 
     /**
-     * @var Tx_Oelib_Configuration
+     * @var \Tx_Oelib_Configuration
      */
     protected $configuration = null;
 
@@ -26,12 +26,12 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setPageUid($pageUid)
     {
         if ($pageUid <= 0) {
-            throw new InvalidArgumentException('$pageUid must be > 0, but actually is: ' . $pageUid, 1390329634);
+            throw new \InvalidArgumentException('$pageUid must be > 0, but actually is: ' . $pageUid, 1390329634);
         }
 
         $this->pageUid = $pageUid;
@@ -87,13 +87,13 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView
      */
     protected function createCsvBodyLines()
     {
-        /** @var $builder Tx_Seminars_BagBuilder_Event */
-        $builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
+        /** @var $builder \Tx_Seminars_BagBuilder_Event */
+        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
         $builder->setBackEndMode();
         $builder->setSourcePages($this->getPageUid(), self::RECURSION_DEPTH);
 
         $csvLines = [];
-        /** @var Tx_Seminars_OldModel_Event $event */
+        /** @var \Tx_Seminars_OldModel_Event $event */
         foreach ($builder->build() as $event) {
             $csvLines[] = implode(self::COLUMN_SEPARATOR, $this->createCsvColumnsForEvent($event));
         }
@@ -105,11 +105,11 @@ class Tx_Seminars_Csv_EventListView extends Tx_Seminars_Csv_AbstractListView
      * Retrieves data from an object and returns that data as an array of values. The individual values are already wrapped in
      * double quotes, with the contents having all quotes escaped.
      *
-     * @param Tx_Seminars_OldModel_Event $event object that will deliver the data
+     * @param \Tx_Seminars_OldModel_Event $event object that will deliver the data
      *
      * @return string[] the data for the keys provided in $keys (may be empty)
      */
-    protected function createCsvColumnsForEvent(Tx_Seminars_OldModel_Event $event)
+    protected function createCsvColumnsForEvent(\Tx_Seminars_OldModel_Event $event)
     {
         $csvLines = [];
 

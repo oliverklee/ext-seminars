@@ -5,7 +5,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_OldModel_Organizer extends Tx_Seminars_OldModel_Abstract implements Tx_Oelib_Interface_MailRole
+class Tx_Seminars_OldModel_Organizer extends \Tx_Seminars_OldModel_Abstract implements \Tx_Oelib_Interface_MailRole
 {
     /**
      * @var string the name of the SQL table this class corresponds to

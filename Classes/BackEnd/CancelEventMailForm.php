@@ -10,7 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Mario Rimann <mario@screenteam.com>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_BackEnd_CancelEventMailForm extends Tx_Seminars_BackEnd_AbstractEventMailForm
+class Tx_Seminars_BackEnd_CancelEventMailForm extends \Tx_Seminars_BackEnd_AbstractEventMailForm
 {
     /**
      * @var string the action of this form
@@ -60,16 +60,16 @@ class Tx_Seminars_BackEnd_CancelEventMailForm extends Tx_Seminars_BackEnd_Abstra
     /**
      * Calls all registered hooks for modifying the e-mail.
      *
-     * @param Tx_Seminars_Model_Registration $registration
+     * @param \Tx_Seminars_Model_Registration $registration
      *        the registration to which the e-mail refers
-     * @param Tx_Oelib_Mail $eMail
+     * @param \Tx_Oelib_Mail $eMail
      *        the e-mail to be sent
      *
      * @return void
      */
     protected function modifyEmailWithHook(
-        Tx_Seminars_Model_Registration $registration,
-        Tx_Oelib_Mail $eMail
+        \Tx_Seminars_Model_Registration $registration,
+        \Tx_Oelib_Mail $eMail
     ) {
         foreach ($this->getHooks() as $hook) {
             $hook->modifyCancelEmail($registration, $eMail);

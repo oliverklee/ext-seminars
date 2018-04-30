@@ -5,23 +5,23 @@
  *
  * @author 2009 Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_FrontEnd_PublishEvent
+     * @var \Tx_Seminars_FrontEnd_PublishEvent
      */
     private $fixture;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
-        $this->fixture = new Tx_Seminars_FrontEnd_PublishEvent();
+        $this->fixture = new \Tx_Seminars_FrontEnd_PublishEvent();
     }
 
     protected function tearDown()

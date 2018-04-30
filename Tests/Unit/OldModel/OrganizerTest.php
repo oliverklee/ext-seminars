@@ -5,28 +5,28 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_OldModel_Organizer
+     * @var \Tx_Seminars_OldModel_Organizer
      */
     private $fixture;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     /**
      * a maximal filled organizer
      *
-     * @var Tx_Seminars_OldModel_Organizer
+     * @var \Tx_Seminars_OldModel_Organizer
      */
     private $maximalFixture;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $fixtureUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
             [
@@ -34,7 +34,7 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends Tx_Phpunit_TestCase
                 'email' => 'foo@test.com',
             ]
         );
-        $this->fixture = new Tx_Seminars_OldModel_Organizer($fixtureUid);
+        $this->fixture = new \Tx_Seminars_OldModel_Organizer($fixtureUid);
 
         $maximalFixtureUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -47,7 +47,7 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends Tx_Phpunit_TestCase
                 'description' => 'foo',
             ]
         );
-        $this->maximalFixture = new Tx_Seminars_OldModel_Organizer($maximalFixtureUid);
+        $this->maximalFixture = new \Tx_Seminars_OldModel_Organizer($maximalFixtureUid);
     }
 
     protected function tearDown()

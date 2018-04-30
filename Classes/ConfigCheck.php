@@ -10,10 +10,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
+class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
 {
     /**
-     * Checks the configuration for: Tx_Seminars_Service_RegistrationManager/.
+     * Checks the configuration for: \Tx_Seminars_Service_RegistrationManager/.
      *
      * @return void
      */
@@ -26,7 +26,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_OldModel_Event/.
+     * Checks the configuration for: \Tx_Seminars_OldModel_Event/.
      *
      * @return void
      */
@@ -49,7 +49,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_OldModel_Registration/.
+     * Checks the configuration for: \Tx_Seminars_OldModel_Registration/.
      *
      * @return void
      */
@@ -73,7 +73,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_OldModel_Speaker/.
+     * Checks the configuration for: \Tx_Seminars_OldModel_Speaker/.
      *
      * @return void
      */
@@ -83,7 +83,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_OldModel_Organizer/.
+     * Checks the configuration for: \Tx_Seminars_OldModel_Organizer/.
      *
      * @return void
      */
@@ -93,7 +93,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_OldModel_TimeSlot/.
+     * Checks the configuration for: \Tx_Seminars_OldModel_TimeSlot/.
      *
      * @return void
      */
@@ -113,7 +113,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_OldModel_Category/.
+     * Checks the configuration for: \Tx_Seminars_OldModel_Category/.
      *
      * @return void
      */
@@ -123,7 +123,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_FrontEnd_RegistrationsList/.
+     * Checks the configuration for: \Tx_Seminars_FrontEnd_RegistrationsList/.
      *
      * @return void
      */
@@ -146,7 +146,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/seminar_registration.
+     * Checks the configuration for: \Tx_Seminars_FrontEnd_DefaultController/seminar_registration.
      *
      * @return void
      */
@@ -200,7 +200,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/single_view.
+     * Checks the configuration for: \Tx_Seminars_FrontEnd_DefaultController/single_view.
      *
      * @return void
      */
@@ -237,7 +237,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/seminar_list.
+     * Checks the configuration for: \Tx_Seminars_FrontEnd_DefaultController/seminar_list.
      *
      * @return void
      */
@@ -289,7 +289,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_FrontEnd_Countdown.
+     * Checks the configuration for: \Tx_Seminars_FrontEnd_Countdown.
      *
      * @return void
      */
@@ -300,7 +300,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/my_vip_events.
+     * Checks the configuration for: \Tx_Seminars_FrontEnd_DefaultController/my_vip_events.
      *
      * @return void
      */
@@ -321,7 +321,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/topic_list.
+     * Checks the configuration for: \Tx_Seminars_FrontEnd_DefaultController/topic_list.
      *
      * @return void
      */
@@ -331,7 +331,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/my_events.
+     * Checks the configuration for: \Tx_Seminars_FrontEnd_DefaultController/my_events.
      *
      * @return void
      */
@@ -377,7 +377,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_FrontEnd_CategoryList.
+     * Checks the configuration for: \Tx_Seminars_FrontEnd_CategoryList.
      *
      * @return void
      */
@@ -393,7 +393,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
     }
 
     /**
-     * Checks the configuration for: Tx_Seminars_FrontEnd_DefaultController/favorites_list
+     * Checks the configuration for: \Tx_Seminars_FrontEnd_DefaultController/favorites_list
      *
      * @return void
      */
@@ -3056,7 +3056,7 @@ class Tx_Seminars_ConfigCheck extends Tx_Oelib_ConfigCheck
             'The specified currency setting is either empty or not a valid ' .
                 'ISO 4217 alpha 3 code. Please correct the value of <strong>' .
                 $this->getTSSetupPath() . 'currency</strong>.',
-            Tx_Oelib_Db::selectColumnForMultiple('cu_iso_3', 'static_currencies')
+            \Tx_Oelib_Db::selectColumnForMultiple('cu_iso_3', 'static_currencies')
         );
     }
 

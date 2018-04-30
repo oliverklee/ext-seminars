@@ -6,16 +6,16 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Model_Event
+     * @var \Tx_Seminars_Model_Event
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->fixture = new Tx_Seminars_Model_Event();
+        $this->fixture = new \Tx_Seminars_Model_Event();
     }
 
     /////////////////////////////////////
@@ -28,7 +28,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function isSingleEventForSingleRecordReturnsTrue()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertTrue(
@@ -42,7 +42,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function isSingleEventForTopicRecordReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
@@ -56,7 +56,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function isSingleEventForDateRecordReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_DATE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
         );
 
         self::assertFalse(
@@ -74,7 +74,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function isEventDateForSingleRecordReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertFalse(
@@ -88,7 +88,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function isEventDateForTopicRecordReturnsFalse()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
@@ -103,7 +103,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => new \Tx_Seminars_Model_Event(),
             ]
         );
@@ -120,7 +120,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => null,
             ]
         );
@@ -140,11 +140,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function getRecordTypeWithRecordTypeCompleteReturnsRecordTypeComplete()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
 
         self::assertEquals(
-            Tx_Seminars_Model_Event::TYPE_COMPLETE,
+            \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             $this->fixture->getRecordType()
         );
     }
@@ -155,11 +155,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function getRecordTypeWithRecordTypeDateReturnsRecordTypeDate()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_DATE]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
         );
 
         self::assertEquals(
-            Tx_Seminars_Model_Event::TYPE_DATE,
+            \Tx_Seminars_Model_Event::TYPE_DATE,
             $this->fixture->getRecordType()
         );
     }
@@ -170,11 +170,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function getRecordTypeWithRecordTypeTopicReturnsRecordTypeTopic()
     {
         $this->fixture->setData(
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
-            Tx_Seminars_Model_Event::TYPE_TOPIC,
+            \Tx_Seminars_Model_Event::TYPE_TOPIC,
             $this->fixture->getRecordType()
         );
     }
@@ -759,7 +759,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getCombinedSingleViewPageInitiallyReturnsEmptyString()
     {
-        $this->fixture->setData(['categories' => new Tx_Oelib_List()]);
+        $this->fixture->setData(['categories' => new \Tx_Oelib_List()]);
 
         self::assertEquals(
             '',
@@ -775,7 +775,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setData(
             [
                 'details_page' => '5',
-                'categories' => new Tx_Oelib_List(),
+                'categories' => new \Tx_Oelib_List(),
             ]
         );
 
@@ -793,7 +793,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setData(
             [
                 'details_page' => 'www.example.com',
-                'categories' => new Tx_Oelib_List(),
+                'categories' => new \Tx_Oelib_List(),
             ]
         );
 
@@ -808,12 +808,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getCombinedSingleViewPageForAvailableEventTypeWithoutSingleViewPageReturnsEmptyString()
     {
-        $eventType = new Tx_Seminars_Model_EventType();
+        $eventType = new \Tx_Seminars_Model_EventType();
         $eventType->setData([]);
         $this->fixture->setData(
             [
                 'event_type' => $eventType,
-                'categories' => new Tx_Oelib_List(),
+                'categories' => new \Tx_Oelib_List(),
             ]
         );
 
@@ -828,12 +828,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getCombinedSingleViewPageForAvailableEventTypeWithSingleViewPageReturnsSingleViewPageFromEventType()
     {
-        $eventType = new Tx_Seminars_Model_EventType();
+        $eventType = new \Tx_Seminars_Model_EventType();
         $eventType->setData(['single_view_page' => 42]);
         $this->fixture->setData(
             [
                 'event_type' => $eventType,
-                'categories' => new Tx_Oelib_List(),
+                'categories' => new \Tx_Oelib_List(),
             ]
         );
 
@@ -848,9 +848,9 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getCombinedSingleViewPageForAvailableCategoryWithoutSingleViewPageReturnsEmptyString()
     {
-        $category = new Tx_Seminars_Model_Category();
+        $category = new \Tx_Seminars_Model_Category();
         $category->setData([]);
-        $categories = new Tx_Oelib_List();
+        $categories = new \Tx_Oelib_List();
         $categories->add($category);
         $this->fixture->setData(['categories' => $categories]);
 
@@ -865,9 +865,9 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getCombinedSingleViewPageForAvailableCategoryTypeWithSingleViewPageReturnsSingleViewPageFromCategory(
     ) {
-        $category = new Tx_Seminars_Model_Category();
+        $category = new \Tx_Seminars_Model_Category();
         $category->setData(['single_view_page' => 42]);
-        $categories = new Tx_Oelib_List();
+        $categories = new \Tx_Oelib_List();
         $categories->add($category);
         $this->fixture->setData(['categories' => $categories]);
 
@@ -882,11 +882,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getCombinedSingleViewPageForTwoAvailableCategoriesWithSingleViewPageReturnsSingleViewPageFromFirstCategory(
     ) {
-        $category1 = new Tx_Seminars_Model_Category();
+        $category1 = new \Tx_Seminars_Model_Category();
         $category1->setData(['single_view_page' => 42]);
-        $category2 = new Tx_Seminars_Model_Category();
+        $category2 = new \Tx_Seminars_Model_Category();
         $category2->setData(['single_view_page' => 12]);
-        $categories = new Tx_Oelib_List();
+        $categories = new \Tx_Oelib_List();
         $categories->add($category1);
         $categories->add($category2);
         $this->fixture->setData(['categories' => $categories]);
@@ -904,7 +904,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getCombinedSingleViewPage']
         );
         $fixture->expects(self::atLeastOnce())
@@ -922,7 +922,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getCombinedSingleViewPage']
         );
         $fixture->expects(self::atLeastOnce())
@@ -938,14 +938,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getCombinedSingleViewPageUsesDetailsPageInsteadOfEventTypeIfBothAreAvailable()
     {
-        $eventType = new Tx_Seminars_Model_EventType();
+        $eventType = new \Tx_Seminars_Model_EventType();
         $eventType->setData(['single_view_page' => 42]);
 
         $this->fixture->setData(
             [
                 'details_page' => '5',
                 'event_type' => $eventType,
-                'categories' => new Tx_Oelib_List(),
+                'categories' => new \Tx_Oelib_List(),
             ]
         );
 
@@ -960,11 +960,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getCombinedSingleViewPageUsesEventTypeInsteadOfCategoriesIfBothAreAvailable()
     {
-        $eventType = new Tx_Seminars_Model_EventType();
+        $eventType = new \Tx_Seminars_Model_EventType();
         $eventType->setData(['single_view_page' => 42]);
-        $category = new Tx_Seminars_Model_Category();
+        $category = new \Tx_Seminars_Model_Category();
         $category->setData(['single_view_page' => 91]);
-        $categories = new Tx_Oelib_List();
+        $categories = new \Tx_Oelib_List();
         $categories->add($category);
 
         $this->fixture->setData(
@@ -1003,8 +1003,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData(['language' => 'DE']);
 
-        /** @var Tx_Oelib_Mapper_Language $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
+        /** @var \Tx_Oelib_Mapper_Language $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Language::class);
         self::assertSame(
             $mapper->findByIsoAlpha2Code('DE'),
             $this->fixture->getLanguage()
@@ -1016,8 +1016,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function setLanguageSetsLanguage()
     {
-        /** @var Tx_Oelib_Mapper_Language $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
+        /** @var \Tx_Oelib_Mapper_Language $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Language::class);
         $language = $mapper->findByIsoAlpha2Code('DE');
         $this->fixture->setLanguage($language);
 
@@ -1044,8 +1044,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function hasLanguageWithLanguageReturnsTrue()
     {
-        /** @var Tx_Oelib_Mapper_Language $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
+        /** @var \Tx_Oelib_Mapper_Language $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Language::class);
         $language = $mapper->findByIsoAlpha2Code('DE');
         $this->fixture->setLanguage($language);
 
@@ -1392,7 +1392,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
         $this->fixture->setData([]);
 
         self::assertEquals(
-            Tx_Seminars_Model_Event::STATUS_PLANNED,
+            \Tx_Seminars_Model_Event::STATUS_PLANNED,
             $this->fixture->getStatus()
         );
     }
@@ -1403,11 +1403,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function getStatusWithStatusPlannedReturnsStatusPlanned()
     {
         $this->fixture->setData(
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED]
         );
 
         self::assertEquals(
-            Tx_Seminars_Model_Event::STATUS_PLANNED,
+            \Tx_Seminars_Model_Event::STATUS_PLANNED,
             $this->fixture->getStatus()
         );
     }
@@ -1418,11 +1418,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function getStatusWithStatusCanceledReturnStatusCanceled()
     {
         $this->fixture->setData(
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED]
         );
 
         self::assertEquals(
-            Tx_Seminars_Model_Event::STATUS_CANCELED,
+            \Tx_Seminars_Model_Event::STATUS_CANCELED,
             $this->fixture->getStatus()
         );
     }
@@ -1433,11 +1433,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     public function getStatusWithStatusConfirmedReturnsStatusConfirmed()
     {
         $this->fixture->setData(
-            ['cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED]
+            ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
         );
 
         self::assertEquals(
-            Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+            \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
             $this->fixture->getStatus()
         );
     }
@@ -1456,10 +1456,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function setStatusWithStatusPlannedSetsStatus()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
         self::assertEquals(
-            Tx_Seminars_Model_Event::STATUS_PLANNED,
+            \Tx_Seminars_Model_Event::STATUS_PLANNED,
             $this->fixture->getStatus()
         );
     }
@@ -1469,10 +1469,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function setStatusWithStatusCanceledSetsStatus()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertEquals(
-            Tx_Seminars_Model_Event::STATUS_CANCELED,
+            \Tx_Seminars_Model_Event::STATUS_CANCELED,
             $this->fixture->getStatus()
         );
     }
@@ -1482,10 +1482,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function setStatusWithStatusConfirmedSetsStatus()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
         self::assertEquals(
-            Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+            \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
             $this->fixture->getStatus()
         );
     }
@@ -1495,7 +1495,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function isPlannedForPlannedStatusReturnsTrue()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
         self::assertTrue($this->fixture->isPlanned());
     }
@@ -1505,7 +1505,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function isPlannedForCanceledStatusReturnsFalse()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertFalse($this->fixture->isPlanned());
     }
@@ -1515,7 +1515,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function isPlannedForConfirmedStatusReturnsFalse()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
         self::assertFalse($this->fixture->isPlanned());
     }
@@ -1525,7 +1525,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function isCanceledForPlannedStatusReturnsFalse()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
         self::assertFalse($this->fixture->isCanceled());
     }
@@ -1535,7 +1535,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function isCanceledForCanceledStatusReturnsTrue()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertTrue($this->fixture->isCanceled());
     }
@@ -1545,7 +1545,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function isCanceledForConfirmedStatusReturnsFalse()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
         self::assertFalse($this->fixture->isCanceled());
     }
@@ -1555,7 +1555,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function isConfirmedForPlannedStatusReturnsFalse()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
         self::assertFalse($this->fixture->isConfirmed());
     }
@@ -1565,7 +1565,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function isConfirmedForCanceledStatusReturnsFalse()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertFalse($this->fixture->isConfirmed());
     }
@@ -1575,7 +1575,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function isConfirmedForConfirmedStatusReturnsTrue()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
         self::assertTrue($this->fixture->isConfirmed());
     }
@@ -1585,7 +1585,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function cancelCanMakePlannedEventCanceled()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
         $this->fixture->cancel();
 
@@ -1597,7 +1597,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function cancelCanMakeConfirmedEventCanceled()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
         $this->fixture->cancel();
 
@@ -1609,7 +1609,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function cancelForCanceledEventNotThrowsException()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         $this->fixture->cancel();
     }
@@ -1619,7 +1619,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function confirmCanMakePlannedEventConfirmed()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
         $this->fixture->confirm();
 
@@ -1631,7 +1631,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function confirmCanMakeCanceledEventConfirmed()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         $this->fixture->confirm();
 
@@ -1643,7 +1643,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function confirmForConfirmedEventNotThrowsException()
     {
-        $this->fixture->setStatus(Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
         $this->fixture->confirm();
     }
@@ -1995,7 +1995,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getRegistrationsReturnsRegistrations()
     {
-        $registrations = new Tx_Oelib_List();
+        $registrations = new \Tx_Oelib_List();
 
         $this->fixture->setData(['registrations' => $registrations]);
 
@@ -2010,7 +2010,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function setRegistrationsSetsRegistrations()
     {
-        $registrations = new Tx_Oelib_List();
+        $registrations = new \Tx_Oelib_List();
 
         $this->fixture->setRegistrations($registrations);
 
@@ -2025,9 +2025,9 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getRegularRegistrationsReturnsRegularRegistrations()
     {
-        $registrations = new Tx_Oelib_List();
-        $registration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
+        $registrations = new \Tx_Oelib_List();
+        $registration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['registration_queue' => 0]
             );
         $registrations->add($registration);
@@ -2044,9 +2044,9 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getRegularRegistrationsNotReturnsQueueRegistrations()
     {
-        $registrations = new Tx_Oelib_List();
-        $registration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
+        $registrations = new \Tx_Oelib_List();
+        $registration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['registration_queue' => 1]
             );
         $registrations->add($registration);
@@ -2062,9 +2062,9 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getQueueRegistrationsReturnsQueueRegistrations()
     {
-        $registrations = new Tx_Oelib_List();
-        $registration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
+        $registrations = new \Tx_Oelib_List();
+        $registration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['registration_queue' => 1]
             );
         $registrations->add($registration);
@@ -2081,9 +2081,9 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getQueueRegistrationsNotReturnsRegularRegistrations()
     {
-        $registrations = new Tx_Oelib_List();
-        $registration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
+        $registrations = new \Tx_Oelib_List();
+        $registration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['registration_queue' => 0]
             );
         $registrations->add($registration);
@@ -2099,15 +2099,15 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function hasQueueRegistrationsForOneQueueRegistrationReturnsTrue()
     {
-        $registrations = new Tx_Oelib_List();
-        $registration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
+        $registrations = new \Tx_Oelib_List();
+        $registration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['registration_queue' => 1]
             );
         $registrations->add($registration);
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getQueueRegistrations']
         );
         $event->expects(self::any())->method('getQueueRegistrations')
@@ -2125,7 +2125,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
 
-        $registrations = new Tx_Oelib_List();
+        $registrations = new \Tx_Oelib_List();
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData(['crdate' => 2]);
         $registrations->add($registration);
@@ -2141,7 +2141,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(2);
 
-        $registrations = new Tx_Oelib_List();
+        $registrations = new \Tx_Oelib_List();
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData(['crdate' => 1]);
         $registrations->add($registration);
@@ -2157,7 +2157,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
 
-        $registrations = new Tx_Oelib_List();
+        $registrations = new \Tx_Oelib_List();
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData(['crdate' => 1]);
         $registrations->add($registration);
@@ -2173,11 +2173,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getQueueRegistrations']
         );
         $event->expects(self::any())->method('getQueueRegistrations')
-            ->will(self::returnValue(new Tx_Oelib_List()));
+            ->will(self::returnValue(new \Tx_Oelib_List()));
 
         self::assertFalse(
             $event->hasQueueRegistrations()
@@ -2223,12 +2223,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations']
         );
         $event->setData([]);
         $event->expects(self::any())->method('getRegularRegistrations')
-            ->will(self::returnValue(new Tx_Oelib_List()));
+            ->will(self::returnValue(new \Tx_Oelib_List()));
 
         self::assertEquals(
             0,
@@ -2241,15 +2241,15 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getRegisteredSeatsCountsSingleSeatRegularRegistrations()
     {
-        $registrations = new Tx_Oelib_List();
-        $registration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
+        $registrations = new \Tx_Oelib_List();
+        $registration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['seats' => 1]
             );
         $registrations->add($registration);
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations']
         );
         $event->setData([]);
@@ -2267,15 +2267,15 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getRegisteredSeatsCountsMultiSeatRegularRegistrations()
     {
-        $registrations = new Tx_Oelib_List();
-        $registration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
+        $registrations = new \Tx_Oelib_List();
+        $registration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['seats' => 2]
             );
         $registrations->add($registration);
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations']
         );
         $event->setData([]);
@@ -2293,22 +2293,22 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getRegisteredSeatsNotCountsQueueRegistrations()
     {
-        $queueRegistrations = new Tx_Oelib_List();
-        $registration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
+        $queueRegistrations = new \Tx_Oelib_List();
+        $registration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['seats' => 1]
             );
         $queueRegistrations->add($registration);
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations', 'getQueueRegistrations']
         );
         $event->setData([]);
         $event->expects(self::any())->method('getQueueRegistrations')
             ->will(self::returnValue($queueRegistrations));
         $event->expects(self::any())->method('getRegularRegistrations')
-            ->will(self::returnValue(new Tx_Oelib_List()));
+            ->will(self::returnValue(new \Tx_Oelib_List()));
 
         self::assertEquals(
             0,
@@ -2323,12 +2323,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations']
         );
         $event->setData(['offline_attendees' => 2]);
         $event->expects(self::any())->method('getRegularRegistrations')
-            ->will(self::returnValue(new Tx_Oelib_List()));
+            ->will(self::returnValue(new \Tx_Oelib_List()));
 
         self::assertEquals(
             2,
@@ -2347,7 +2347,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_min' => 0]);
@@ -2366,7 +2366,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_min' => 2]);
@@ -2385,7 +2385,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_min' => 2]);
@@ -2404,7 +2404,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_min' => 1]);
@@ -2427,7 +2427,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
@@ -2447,7 +2447,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
@@ -2467,7 +2467,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 1]);
@@ -2487,7 +2487,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 0]);
@@ -2511,7 +2511,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
@@ -2530,7 +2530,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
@@ -2549,7 +2549,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 1]);
@@ -2568,7 +2568,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 0]);
@@ -2591,7 +2591,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
@@ -2610,7 +2610,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
@@ -2629,7 +2629,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 1]);
@@ -2648,7 +2648,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 0]);
@@ -2667,7 +2667,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 0]);
@@ -2688,10 +2688,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function attachRegistrationAddsRegistration()
     {
-        $this->fixture->setRegistrations(new Tx_Oelib_List());
+        $this->fixture->setRegistrations(new \Tx_Oelib_List());
 
-        $registration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)
+        $registration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel([]);
         $this->fixture->attachRegistration($registration);
 
@@ -2705,14 +2705,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function attachRegistrationNotRemovesExistingRegistration()
     {
-        $registrations = new Tx_Oelib_List();
-        $oldRegistration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)->getNewGhost();
+        $registrations = new \Tx_Oelib_List();
+        $oldRegistration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)->getNewGhost();
         $registrations->add($oldRegistration);
         $this->fixture->setRegistrations($registrations);
 
-        $newRegistration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)
+        $newRegistration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel([]);
         $this->fixture->attachRegistration($newRegistration);
 
@@ -2726,11 +2726,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function attachRegistrationSetsEventForRegistration()
     {
-        $this->fixture->setRegistrations(new Tx_Oelib_List());
+        $this->fixture->setRegistrations(new \Tx_Oelib_List());
 
         /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)
+        $registration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel([]);
         $this->fixture->attachRegistration($registration);
 
@@ -2749,7 +2749,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
      */
     public function getPaymentMethodsReturnsPaymentMethods()
     {
-        $paymentMethods = new Tx_Oelib_List();
+        $paymentMethods = new \Tx_Oelib_List();
         $this->fixture->setData(
             ['payment_methods' => $paymentMethods]
         );
@@ -2767,7 +2767,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends Tx_Phpunit_TestCase
     {
         $this->fixture->setData([]);
 
-        $paymentMethods = new Tx_Oelib_List();
+        $paymentMethods = new \Tx_Oelib_List();
         $this->fixture->setPaymentMethods($paymentMethods);
 
         self::assertSame(

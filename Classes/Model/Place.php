@@ -6,7 +6,7 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Interface_Titled
+class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_Interface_Titled
 {
     /**
      * Returns our title.
@@ -28,7 +28,7 @@ class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Inte
     public function setTitle($title)
     {
         if ($title == '') {
-            throw new InvalidArgumentException('The parameter $title must not be empty.', 1333296894);
+            throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296894);
         }
 
         $this->setAsString('title', $title);
@@ -118,16 +118,16 @@ class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Inte
     public function setCity($city)
     {
         if ($city == '') {
-            throw new InvalidArgumentException('The parameter $city must not be empty.', 1333296904);
+            throw new \InvalidArgumentException('The parameter $city must not be empty.', 1333296904);
         }
 
         $this->setAsString('city', $city);
     }
 
     /**
-     * Returns the country of this place as Tx_Oelib_Model_Country.
+     * Returns the country of this place as \Tx_Oelib_Model_Country.
      *
-     * @return Tx_Oelib_Model_Country the country of this place
+     * @return \Tx_Oelib_Model_Country the country of this place
      */
     public function getCountry()
     {
@@ -137,10 +137,10 @@ class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Inte
         }
 
         try {
-            /** @var Tx_Oelib_Mapper_Country $mapper */
-            $mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Country::class);
+            /** @var \Tx_Oelib_Mapper_Country $mapper */
+            $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
             $country = $mapper->findByIsoAlpha2Code($countryCode);
-        } catch (Tx_Oelib_Exception_NotFound $exception) {
+        } catch (\Tx_Oelib_Exception_NotFound $exception) {
             $country = null;
         }
 
@@ -150,12 +150,12 @@ class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Inte
     /**
      * Sets the country of this place.
      *
-     * @param Tx_Oelib_Model_Country $country
+     * @param \Tx_Oelib_Model_Country $country
      *        the country to set for this place, can be NULL for "no country"
      *
      * @return void
      */
-    public function setCountry(Tx_Oelib_Model_Country $country = null)
+    public function setCountry(\Tx_Oelib_Model_Country $country = null)
     {
         $countryCode = ($country !== null) ? $country->getIsoAlpha2Code() : '';
 
@@ -169,7 +169,7 @@ class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Inte
      */
     public function hasCountry()
     {
-        return $this->getCountry() instanceof Tx_Oelib_Model_Country;
+        return $this->getCountry() instanceof \Tx_Oelib_Model_Country;
     }
 
     /**
@@ -239,7 +239,7 @@ class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Inte
     /**
      * Returns our owner.
      *
-     * @return Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
+     * @return \Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
      *                                     if this model has no owner
      */
     public function getOwner()
@@ -250,11 +250,11 @@ class Tx_Seminars_Model_Place extends Tx_Oelib_Model implements Tx_Seminars_Inte
     /**
      * Sets our owner.
      *
-     * @param Tx_Seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
+     * @param \Tx_Seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
      *
      * @return void
      */
-    public function setOwner(Tx_Seminars_Model_FrontEndUser $frontEndUser)
+    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser)
     {
         $this->set('owner', $frontEndUser);
     }

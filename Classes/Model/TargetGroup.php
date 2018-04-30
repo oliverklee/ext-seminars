@@ -5,7 +5,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Model_TargetGroup extends Tx_Oelib_Model implements Tx_Seminars_Interface_Titled
+class Tx_Seminars_Model_TargetGroup extends \Tx_Oelib_Model implements \Tx_Seminars_Interface_Titled
 {
     /**
      * Returns our title.
@@ -27,7 +27,7 @@ class Tx_Seminars_Model_TargetGroup extends Tx_Oelib_Model implements Tx_Seminar
     public function setTitle($title)
     {
         if ($title == '') {
-            throw new InvalidArgumentException('The parameter $title must not be empty.', 1333297060);
+            throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333297060);
         }
 
         $this->setAsString('title', $title);
@@ -36,7 +36,7 @@ class Tx_Seminars_Model_TargetGroup extends Tx_Oelib_Model implements Tx_Seminar
     /**
      * Returns our owner.
      *
-     * @return Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
+     * @return \Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
      *                                     if this model has no owner
      */
     public function getOwner()
@@ -47,11 +47,11 @@ class Tx_Seminars_Model_TargetGroup extends Tx_Oelib_Model implements Tx_Seminar
     /**
      * Sets our owner.
      *
-     * @param Tx_Seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
+     * @param \Tx_Seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
      *
      * @return void
      */
-    public function setOwner(Tx_Seminars_Model_FrontEndUser $frontEndUser)
+    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser)
     {
         $this->set('owner', $frontEndUser);
     }

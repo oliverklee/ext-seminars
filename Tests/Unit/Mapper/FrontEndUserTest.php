@@ -5,10 +5,10 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Mapper_FrontEndUser the object to test
+     * @var \Tx_Seminars_Mapper_FrontEndUser the object to test
      */
     private $fixture;
 
@@ -19,10 +19,10 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends Tx_Phpunit_TestCase
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_FrontEndUser::class
+        $this->fixture = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_FrontEndUser::class
         );
     }
 
@@ -40,7 +40,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends Tx_Phpunit_TestCase
      */
     public function mapperForGhostReturnsSeminarsFrontEndUserInstance()
     {
-        self::assertInstanceOf(Tx_Seminars_Model_FrontEndUser::class, $this->fixture->getNewGhost());
+        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $this->fixture->getNewGhost());
     }
 
     ///////////////////////////////////
@@ -52,8 +52,8 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends Tx_Phpunit_TestCase
      */
     public function relationToRegistrationIsReadFromRegistrationMapper()
     {
-        $registration = Tx_Oelib_MapperRegistry
-            ::get(Tx_Seminars_Mapper_Registration::class)->getNewGhost();
+        $registration = \Tx_Oelib_MapperRegistry
+            ::get(\Tx_Seminars_Mapper_Registration::class)->getNewGhost();
 
         /** @var \Tx_Seminars_Model_FrontEndUser $model */
         $model = $this->fixture->getLoadedTestingModel(

@@ -5,23 +5,23 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var Tx_Seminars_Mapper_Speaker
+     * @var \Tx_Seminars_Mapper_Speaker
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new Tx_Seminars_Mapper_Speaker();
+        $this->fixture = new \Tx_Seminars_Mapper_Speaker();
     }
 
     protected function tearDown()
@@ -41,7 +41,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
         $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
         self::assertInstanceOf(
-            Tx_Seminars_Model_Speaker::class,
+            \Tx_Seminars_Model_Speaker::class,
             $this->fixture->find($uid)
         );
     }
@@ -56,7 +56,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
             ['title' => 'John Doe']
         );
 
-        /** @var Tx_Seminars_Model_Speaker $model */
+        /** @var \Tx_Seminars_Model_Speaker $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             'John Doe',
@@ -75,9 +75,9 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
-        /** @var Tx_Seminars_Model_Speaker $model */
+        /** @var \Tx_Seminars_Model_Speaker $model */
         $model = $this->fixture->find($uid);
-        self::assertInstanceOf(Tx_Oelib_List::class, $model->getSkills());
+        self::assertInstanceOf(\Tx_Oelib_List::class, $model->getSkills());
     }
 
     /**
@@ -87,7 +87,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
-        /** @var Tx_Seminars_Model_Speaker $model */
+        /** @var \Tx_Seminars_Model_Speaker $model */
         $model = $this->fixture->find($uid);
         self::assertTrue(
             $model->getSkills()->isEmpty()
@@ -100,7 +100,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
     public function getSkillsWithOneSkillReturnsNonEmptyList()
     {
         $speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
-        $skill = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Skill::class)
+        $skill = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_speakers',
@@ -109,7 +109,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
             'skills'
         );
 
-        /** @var Tx_Seminars_Model_Speaker $model */
+        /** @var \Tx_Seminars_Model_Speaker $model */
         $model = $this->fixture->find($speakerUid);
         self::assertFalse(
             $model->getSkills()->isEmpty()
@@ -122,7 +122,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
     public function getSkillsWithOneSkillReturnsOneSkill()
     {
         $speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
-        $skill = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Skill::class)
+        $skill = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_speakers',
@@ -131,7 +131,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends Tx_Phpunit_TestCase
             'skills'
         );
 
-        /** @var Tx_Seminars_Model_Speaker $model */
+        /** @var \Tx_Seminars_Model_Speaker $model */
         $model = $this->fixture->find($speakerUid);
         self::assertEquals(
             $skill->getUid(),
