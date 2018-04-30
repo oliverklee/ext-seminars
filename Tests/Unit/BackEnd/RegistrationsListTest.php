@@ -2,6 +2,7 @@
 
 use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
@@ -36,6 +37,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
+            self::markTestSkipped('This test is for the old BE module only.');
+        }
 
         $this->backEndModule = new Tx_Seminars_BackEnd_Module();
         $this->backEndModule->id = $this->dummySysFolderPid;
