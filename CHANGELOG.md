@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 2.0.0
+
+### Added
 - Convert the BE module to the new format (#93)
 - Add support for TYPO3 8.7 (#86)
 - Add support for PHP 7.1 and 7.2 (#70)
@@ -18,8 +30,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Require oelib >= 2.0.0 (#69)
 - Require static_info_tables >= 6.4.0 (#68)
 - Update to PHPUnit 5.3 (#66)
-
-### Deprecated
 
 ### Removed
 - Drop the class alias map (#73)
