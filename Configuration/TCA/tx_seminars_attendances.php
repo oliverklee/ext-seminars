@@ -13,9 +13,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        // We cannot use the EXT:seminars syntax as this would break getIcon::getIcon (which gets called in
-        // OldModel/Abstract::getRecordIcon where the icons for the BE module are created).
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/Registration.gif',
+        'iconfile' => 'EXT:seminars/Resources/Public/Icons/Registration.gif',
         'dividers2tabs' => true,
         'searchFields' => 'title',
     ],
