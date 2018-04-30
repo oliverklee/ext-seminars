@@ -22,7 +22,6 @@ Installation
    :titlesonly:
    :glob:
 
-   SystemRequirements/Index
    InstallingTheExtension/Index
    RegardingFlexformsAndTsSetup/Index
    GetAFront-endUserLogin(anyPossiblyRegistration)Running/Index
@@ -36,5 +35,3 @@ Installation
    SettingUpTheFront-endRegistrationLists/Index
    SettingUpTheSchedulerTask/Index
    TestingTheConfiguration/Index
-   UpgradingFromA010xReleaseTo10x/Index
-   GettingAnOlderVersionOfTheSeminarManager/Index

@@ -22,7 +22,6 @@ Installation
    :titlesonly:
    :glob:
 
-   Systemvoraussetzungen/Index
    DieErweiterungInstallieren/Index
    HinweiseZuFlexformsUndTs-setup/Index
    KonfigurationEinesFrontend-benutzer-logins(egalWelcheLogin-erweiterung)/Index
@@ -36,5 +35,3 @@ Installation
    SettingUpTheFront-endRegistrationLists/Index
    BenutzungDesSchedulerTasks/Index
    TestingTheConfiguration/Index
-   VonSeminars010xAuf10xAktualisieren/Index
-   EineLtereVersionDesSeminarmanagersInstallieren/Index
