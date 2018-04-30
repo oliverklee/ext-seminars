@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for PHP 5.5 (#64)
 
 ### Fixed
+- Make the PHPUnit test runner configurable (#71)
 
 ## 1.5.0
 
